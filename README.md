@@ -2,9 +2,9 @@
 <img align="center" src="https://github.com/Greedeks/Utility-GTweak/blob/748761fc917ddadfb319e52e238cfa3e2615b9b0/GTweak_Intro.png">
 
 ### RU
-Небольшая утилита для настройки Windows под ваши нужды.
+<h2> Небольшая утилита для настройки Windows под ваши нужды.
 
-<h1> Небольшой список возможностей:
+## Небольшой список возможностей
 - Активация Windows
 - Отключение защитника Windows
 - Отключение ненужных служб
@@ -15,9 +15,9 @@
 - Отключение рекламы
 
 ### EN
-A small utility to customize Windows to your needs.
+<h2> A small utility to customize Windows to your needs.
 
-<h1> A small list of features:
+## A small list of features
 - Windows Activation
 - Disabling Windows Defender
 - Disabling unnecessary services
