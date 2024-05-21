@@ -4,25 +4,25 @@
 ### RU
 Небольшая утилита для настройки Windows под ваши нужды.
 
-Небольшой список возможностей:
--Активация Windows
--Отключение защитника Windows
--Отключение ненужных служб
--Кастомизации интерфейса
--Измение схемы электропитания
--Удаление UWP приложений
--Удаление OneDrive
--Отключение рекламы
+<h1> Небольшой список возможностей:
+- Активация Windows
+- Отключение защитника Windows
+- Отключение ненужных служб
+- Кастомизации интерфейса
+- Измение схемы электропитания
+- Удаление UWP приложений
+- Удаление OneDrive
+- Отключение рекламы
 
 ### EN
 A small utility to customize Windows to your needs.
 
-A small list of features:
--Windows Activation
--Disabling Windows Defender
--Disabling unnecessary services
--Interface customization
--Changing the power supply circuit
--Removing UWP Apps
--Deleting OneDrive
--Disabling Ads
+<h1> A small list of features:
+- Windows Activation
+- Disabling Windows Defender
+- Disabling unnecessary services
+- Interface customization
+- Changing the power supply circuit
+- Removing UWP Apps
+- Deleting OneDrive
+- Disabling Ads
