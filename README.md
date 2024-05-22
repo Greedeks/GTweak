@@ -1,9 +1,6 @@
-<h1 align="center"> GTweak (<a href="https://github.com/Greedeks/Utility-GTweak/releases/tag/4.74.0">v4.74.0</a>) </h1>
-
+<h1 align="center"> GTweak (<a href="https://github.com/Greedeks/Utility-GTweak/releases/latest">v4.75.0</a>) </h1>
 
 <img align="center" src="https://github.com/Greedeks/Utility-GTweak/blob/748761fc917ddadfb319e52e238cfa3e2615b9b0/GTweak_Intro.png">
-
-
 
 ### RU
 <h2> Небольшая утилита для настройки Windows под ваши нужды.
