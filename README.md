@@ -2,8 +2,8 @@
 
 ![Logo](https://github.com/Greedeks/-GTweak-/blob/main/ImageEN/System.png)
 ##
-<a href="https://github.com/Greedeks/Utility-GTweak/releases/latest">![Latest Release](https://img.shields.io/github/v/release/Greedeks/Utility-GTweak?style=for-the-badge&color=%23D21E61)</a>
-[![Github All Releases](https://img.shields.io/github/downloads/Greedeks/Utility-GTweak/total.svg?style=for-the-badge&color=%231EB1D2)]()
+[![Latest Release](https://img.shields.io/github/v/release/Greedeks/Utility-GTweak?style=for-the-badge&color=%23D21E61)](https://github.com/Greedeks/Utility-GTweak/releases/latest")
+[![Github All Releases](https://img.shields.io/github/downloads/Greedeks/Utility-GTweak/total.svg?style=for-the-badge&color=%231EB1D2)](https://github.com/Greedeks/Utility-GTweak/releases/latest")
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg?style=for-the-badge&color=green)](https://github.com/Greedeks/-GTweak-/blob/main/LICENSE)
 
 
