@@ -1,18 +1,18 @@
 <h1 align="center"> GTweak </h1>
 
-![Logo](https://github.com/Greedeks/-GTweak-/blob/main/ImageEN/System.png)
+![Logo](https://github.com/Greedeks/GTweak/blob/27c2065bafaab34bcdc755d9c79d0c594f6e379d/ImageEN/System.png)
 ##
-[![Latest Release](https://img.shields.io/github/v/release/Greedeks/Utility-GTweak?style=for-the-badge&color=%23D21E61)](https://github.com/Greedeks/Utility-GTweak/releases/latest)
-[![Github All Releases](https://img.shields.io/github/downloads/Greedeks/Utility-GTweak/total.svg?style=for-the-badge&color=%231EB1D2)](https://github.com/Greedeks/Utility-GTweak/releases/latest)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg?style=for-the-badge&color=green)](https://github.com/Greedeks/-GTweak-/blob/main/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=%23D21E61)](https://github.com/Greedeks/GTweak/releases/latest)
+[![Github All Releases](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)](https://github.com/Greedeks/GTweak/releases/latest)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg?style=for-the-badge&color=green)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 
 
 ### EN
 <details>
   <summary>Utility Images</summary>
-  <img src="ttps://github.com/Greedeks/-GTweak-/blob/main/ImageEN/Apps.png"/>
-  <img src="https://github.com/Greedeks/-GTweak-/blob/main/ImageEN/Interface.png"/>
-  <img src="https://github.com/Greedeks/-GTweak-/blob/main/ImageEN/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/PageApp.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/System.png"/>
 </details>
 
  A small utility to customize Windows to your needs.
@@ -31,9 +31,9 @@
 ### RU
 <details>
   <summary>Изображения утилиты</summary>
-  <img src="ttps://github.com/Greedeks/-GTweak-/blob/main/ImageRU/Apps.png"/>
-  <img src="https://github.com/Greedeks/-GTweak-/blob/main/ImageRU/Interface.png"/>
-  <img src="https://github.com/Greedeks/-GTweak-/blob/main/ImageRU/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/PageApp.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/System.png"/>
 </details>
 
 Небольшая утилита для настройки Windows под ваши нужды.
@@ -50,5 +50,5 @@
 
 ##
 
-[![Greedeks - Utility-GTweak](https://img.shields.io/static/v1?label=Greedeks&message=Utility-GTweak&color=white&logo=github)](https://github.com/Greedeks/Utility-GTweak "Go to GitHub repo") 
+[![Greedeks - GTweak](https://img.shields.io/static/v1?label=Greedeks&message=GTweak&color=white&logo=github)](https://github.com/Greedeks/GTweak "Go to GitHub repo") 
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=Greedeks.Utility-GTweak)
