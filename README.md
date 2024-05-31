@@ -27,7 +27,7 @@
 - Deleting OneDrive
 - Disabling Ads
 
-<b><i>You will have to stop the antivirus before using it</i>
+<b><i>You will have to stop the antivirus before using it</i></b>
 
 ### RU
 <details>
@@ -49,7 +49,7 @@
 - Удаление OneDrive
 - Отключение рекламы
 
-<b><i>Перед использованием придется остановить  антивирус</i>
+<b><i>Перед использованием придется остановить  антивирус</i></b>
 
 ##
 
