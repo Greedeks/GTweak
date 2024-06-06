@@ -21,11 +21,12 @@
 - Windows Activation
 - Disabling Windows Defender
 - Disabling unnecessary services
+- Disabling Windows Updates
+- Disabling Ads
+- Deleting OneDrive and disabling Cortana
 - Interface customization
 - Changing the power supply circuit
 - Removing UWP Apps
-- Deleting OneDrive
-- Disabling Ads
 
 <b><i>You will have to stop the antivirus before using it</i></b>
 
@@ -43,11 +44,12 @@
 - Активация Windows
 - Отключение защитника Windows
 - Отключение ненужных служб
+- Отключение обновлений Windows
+- Отключение рекламы
+- Удаление OneDrive и отключение Cortana
 - Кастомизации интерфейса
 - Измение схемы электропитания
 - Удаление UWP приложений
-- Удаление OneDrive
-- Отключение рекламы
 
 <b><i>Перед использованием придется остановить  антивирус</i></b>
 
