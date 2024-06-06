@@ -23,7 +23,7 @@
 - Disabling unnecessary services
 - Disabling Windows Updates
 - Disabling Ads
-- Deleting OneDrive and disabling Cortana
+- Deleting OneDrive, Cortana
 - Interface customization
 - Changing the power supply circuit
 - Removing UWP Apps
@@ -46,7 +46,7 @@
 - Отключение ненужных служб
 - Отключение обновлений Windows
 - Отключение рекламы
-- Удаление OneDrive и отключение Cortana
+- Удаление OneDrive, Cortana
 - Кастомизации интерфейса
 - Измение схемы электропитания
 - Удаление UWP приложений
