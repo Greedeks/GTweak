@@ -9,7 +9,7 @@
 
 ### EN
 <details>
-  <summary>Utility Images</summary>
+  <summary>Utility Images :flower_playing_cards: </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/PageApp.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/Interface.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/System.png"/>
@@ -17,7 +17,7 @@
 
  A small utility to customize Windows to your needs.
 
-## A small list of features
+## A small list of features :wrench:
 - Windows Activation
 - Disabling Windows Defender
 - Disabling unnecessary services
@@ -28,11 +28,11 @@
 - Changing the power supply circuit
 - Removing UWP Apps
 
-<b><i>You will have to stop the antivirus before using it</i></b>
+:warning:<b><i>You will have to stop the antivirus before using it</i></b>:warning:
 
 ### RU
 <details>
-  <summary>Изображения утилиты</summary>
+  <summary>Изображения утилиты :flower_playing_cards:</summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/PageApp.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/Interface.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/System.png"/>
@@ -40,7 +40,7 @@
 
 Небольшая утилита для настройки Windows под ваши нужды.
 
-## Небольшой список возможностей
+## Небольшой список возможностей :wrench:
 - Активация Windows
 - Отключение защитника Windows
 - Отключение ненужных служб
@@ -51,7 +51,7 @@
 - Измение схемы электропитания
 - Удаление UWP приложений
 
-<b><i>Перед использованием придется остановить  антивирус</i></b>
+:warning:<b><i>Перед использованием придется остановить  антивирус</i></b> :warning:
 
 ##
 
