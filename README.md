@@ -5,7 +5,8 @@
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=%23D21E61)](https://github.com/Greedeks/GTweak/releases/latest)
 [![Github All Releases](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)](https://github.com/Greedeks/GTweak/releases/latest)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg?style=for-the-badge&color=green)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
-
+[![Author - Greedeks](https://img.shields.io/static/v1?label=Author&message=Greedeks&color=white&logo=github&style=for-the-badge)](https://github.com/Greedeks/) 
+![Visitors](https://kounter.kerolloz.dev/badge/Views?style=for-the-badge&color=red)
 
 ### EN
 <details>
@@ -55,5 +56,4 @@
 
 ##
 
-[![Greedeks - GTweak](https://img.shields.io/static/v1?label=Greedeks&message=GTweak&color=white&logo=github)](https://github.com/Greedeks/GTweak "Go to GitHub repo") 
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=Greedeks.Utility-GTweak)
+
