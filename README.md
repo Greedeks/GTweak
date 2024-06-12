@@ -1,4 +1,4 @@
-<h1 align="center"> GTweak  <img width="32" height="32" src="https://github.com/Greedeks/GTweak/assets/82948926/62527a34-0a06-4bd1-8515-c23a33c73bf2"> </h1>
+<h1 align="center"> GTweak  <img width="32" height="32" src="https://github.com/Greedeks/GTweak/assets/82948926/62527a34-0a06-4bd1-8515-c23a33c73bf2"/> </h1>
 
 ![Logo](https://github.com/Greedeks/GTweak/blob/2727b3b204a57a38b24a1bd4641cad2d382a3aec/Intro.gif)
 
@@ -62,6 +62,9 @@
 	Перед использованием придется остановить антивирус
 
 ## Contact
+<img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
+
+
 [![github](https://img.shields.io/badge/Github-gray?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Greedeks)
 [![telegram](https://img.shields.io/badge/Telegram-1DA1F2?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Greedeks)
 [![steam](https://img.shields.io/badge/STEAM-042430?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/greedeks/)
