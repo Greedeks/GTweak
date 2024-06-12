@@ -17,7 +17,6 @@
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/System.png"/>
 </details>
 
-
 ## A small list of features :wrench:
 	- Windows Activation
  	- Disabling Windows Defender
@@ -34,9 +33,8 @@
  
 ## Usage
 	You will have to stop the antivirus before using it
-
-
-###  
+ 
+<br><b/>
 
 ## Информация на Русском Языке
 <details>
