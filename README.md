@@ -6,7 +6,7 @@
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=%23D21E61)](https://github.com/Greedeks/GTweak/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)](https://github.com/Greedeks/GTweak/releases/latest)
 ![Visitors](https://kounter.kerolloz.dev/badge/Views?style=for-the-badge&color=red)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg?style=for-the-badge&color=green)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&color=green)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 ![C#](https://img.shields.io/badge/Language-7800A3.svg?style=for-the-badge&logo=csharp&logoColor=white)
 
 ## Information and Usage guide
