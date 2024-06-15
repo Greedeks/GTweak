@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows 11/10]
  - OS Family: [e.g. Home, Pro, Core...]
- - Version [e.g. 22]
+ - Version GTWeak [e.g. 4.79]
 
 **Additional context**
 Add any other context about the problem here.
