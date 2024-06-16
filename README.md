@@ -12,9 +12,12 @@
 ## Information and Usage guide
 <details>
   <summary>Screenshots :flower_playing_cards: </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/PageApp.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/Confidentiality.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/Services.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageEN/More.png"/>
 </details>
 
 ## A small list of features :wrench:
@@ -39,9 +42,12 @@
 ## Информация на Русском Языке
 <details>
   <summary>Изображения :flower_playing_cards:</summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/PageApp.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/Confidentiality.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/Services.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/ImageRU/More.png"/>
 </details>
 
 ## Небольшой список возможностей :wrench:
