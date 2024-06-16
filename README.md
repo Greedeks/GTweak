@@ -1,6 +1,6 @@
 <h1 align="center"> GTweak  <img width="32" height="32" src="https://github.com/Greedeks/GTweak/assets/82948926/62527a34-0a06-4bd1-8515-c23a33c73bf2"/> </h1>
 
-![Logo](https://github.com/Greedeks/GTweak/blob/2727b3b204a57a38b24a1bd4641cad2d382a3aec/Intro.gif)
+![Logo](https://github.com/Greedeks/GTweak/blob/32112f02686afbd7335fd3a9dca653e617e510ee/Intro.gif)
 
 ## 
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=%23D21E61)](https://github.com/Greedeks/GTweak/releases/latest)
