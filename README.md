@@ -25,6 +25,7 @@
  	- Disabling Windows Defender
 	- Disabling unnecessary services
 	- Disabling Windows Updates
+   	- Disabling Spyware and Telemetry
 	- Disabling Ads
 	- Deleting OneDrive, Cortana
 	- Interface customization
@@ -55,6 +56,7 @@
  	- Отключение защитника Windows
 	- Отключение ненужных служб
 	- Отключение обновлений Windows
+   	- Отключение шпионов и телеметрии
 	- Отключение рекламы
 	- Удаление OneDrive, Cortana
 	- Кастомизации интерфейса
