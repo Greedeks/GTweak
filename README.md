@@ -28,9 +28,10 @@
    	- Disabling Spyware and Telemetry
 	- Disabling Ads
 	- Deleting OneDrive, Cortana
+ 	- Deleting UWP Apps
 	- Interface customization
 	- Changing the power supply circuit
-	- Removing UWP Apps
+	- Сonfiguration analysis and monitoring
 
 ## System Requirements
 	USE ONLY FOR WINDOWS 10/11
@@ -59,9 +60,10 @@
    	- Отключение шпионов и телеметрии
 	- Отключение рекламы
 	- Удаление OneDrive, Cortana
+ 	- Удаление UWP приложений
 	- Кастомизации интерфейса
 	- Измение схемы электропитания
-	- Удаление UWP приложений
+	- Анализа конфигурации и мониторинг
 
 ## Системные Требования
 	ПРЕДНАЗНАЧЕНА ТОЛЬКО ДЛЯ WINDOWS 10/11
