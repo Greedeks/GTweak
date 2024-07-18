@@ -1,7 +1,6 @@
-<h1 align="center"> GTweak  <img width="32" height="32" src="https://github.com/Greedeks/GTweak/assets/82948926/62527a34-0a06-4bd1-8515-c23a33c73bf2"/> </h1>
+<h1 align="center"> GTweak <img width="32" height="32" src="https://github.com/Greedeks/GTweak/assets/82948926/62527a34-0a06-4bd1-8515-c23a33c73bf2"/> </h1>
 
-![Logo](https://github.com/Greedeks/GTweak/blob/94b5a98419af561d54889d020f6a36b39779c41f/Intro.gif)
-
+![Logo](https://github.com/Greedeks/GTweak/blob/main/Intro.gif)
 ## 
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=%23D21E61)](https://github.com/Greedeks/GTweak/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)](https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe)
@@ -21,24 +20,27 @@
 </details>
 
 ## A small list of features :wrench:
-	- Windows Activation
- 	- Disabling Windows Defender
-	- Disabling unnecessary services
-	- Disabling Windows Updates
-   	- Disabling Spyware and Telemetry
-	- Disabling Ads
-	- Deleting OneDrive, Cortana
- 	- Deleting UWP Apps
-	- Interface customization
-	- Changing the power supply circuit
-	- Сonfiguration analysis and monitoring
-
+```c#
+- Windows Activation
+- Disabling Windows Defender
+- Disabling unnecessary services
+- Disabling Windows Updates
+- Disabling Spyware and Telemetry
+- Disabling Ads
+- Deleting OneDrive, Cortana
+- Deleting UWP Apps
+- Interface customization
+- Changing the power supply circuit
+- Сonfiguration analysis and monitoring
+```
 ## System Requirements
-	USE ONLY FOR WINDOWS 10/11
- 
+```c#
+USE ONLY FOR WINDOWS 10/11
+ ```
 ## Usage
-	You will have to stop the antivirus before using it
- 
+```
+You will have to stop the antivirus before using it
+ ```
 <br/>
 
 ## Информация на Русском Языке
@@ -53,23 +55,27 @@
 </details>
 
 ## Небольшой список возможностей :wrench:
-	- Активация Windows
- 	- Отключение защитника Windows
-	- Отключение ненужных служб
-	- Отключение обновлений Windows
-   	- Отключение шпионов и телеметрии
-	- Отключение рекламы
-	- Удаление OneDrive, Cortana
- 	- Удаление UWP приложений
-	- Кастомизации интерфейса
-	- Измение схемы электропитания
-	- Анализ конфигурации и мониторинг
-
+```c#
+- Активация Windows
+- Отключение защитника Windows
+- Отключение ненужных служб
+- Отключение обновлений Windows
+- Отключение шпионов и телеметрии
+- Отключение рекламы
+- Удаление OneDrive, Cortana
+- Удаление UWP приложений
+- Кастомизации интерфейса
+- Измение схемы электропитания
+- Анализ конфигурации и мониторинг
+```
 ## Системные Требования
-	ПРЕДНАЗНАЧЕНА ТОЛЬКО ДЛЯ WINDOWS 10/11
-
+```c#
+ПРЕДНАЗНАЧЕНА ТОЛЬКО ДЛЯ WINDOWS 10/11
+```
 ## Использования
-	Перед использованием придется остановить антивирус
+```
+Перед использованием придется остановить антивирус
+```
 
 ## Contact
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
