@@ -77,6 +77,15 @@ You will have to stop the antivirus before using it
 Перед использованием придется остановить антивирус
 ```
 
+## NuGet Packages
+- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler/)
+- [Costura](https://github.com/Fody/Costura)
+- [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/13.0.2-beta1)
+
+## Reference
+- FirewallAPI
+
 ## Contact
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
