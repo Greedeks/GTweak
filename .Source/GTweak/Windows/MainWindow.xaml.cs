@@ -73,16 +73,15 @@ namespace GTweak
         private void ButtonExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton != MouseButtonState.Pressed) return;
+
             switch (SystemTweaks.isTweakWorkingAntivirus)
             {
                 case false:
                     this.Close();
                     break;
                 case true:
-                {
                     new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("windefclose_notification"));
                     break;
-                }
             }
         }
 
