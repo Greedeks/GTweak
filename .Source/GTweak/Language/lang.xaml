@@ -1,0 +1,391 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="defaultDescription">Hover your mouse over any tweak to get its description</v:String>
+    <v:String x:Key="defaultDescriptionApp">Hover your mouse over the icon of any application to see its name</v:String>
+
+    <!--#region Load Window -->
+    <v:String x:Key="title_win_load">GTweak - Notification</v:String>
+    <v:String x:Key="title0_load">Loading</v:String>
+    <v:String x:Key="title1_load">Loading.</v:String>
+    <v:String x:Key="title2_load">Loading..</v:String>
+    <v:String x:Key="title3_load">Loading...</v:String>
+    <v:String x:Key="text0_load">Uploading a profile</v:String>
+    <v:String x:Key="text1_load">Checking the data</v:String>
+    <v:String x:Key="text2_load">Viewing the registry</v:String>
+    <v:String x:Key="text3_load">Application Analysis</v:String>
+    <v:String x:Key="text4_load">Viewing the configuration</v:String>
+    <v:String x:Key="text5_load">Checking the connection</v:String>
+    <v:String x:Key="text6_load">Initialization</v:String>
+    <!--#endregion-->
+
+    <!--#region Message Window -->
+    <v:String x:Key="text0_message">The creation of copies of the program is</v:String>
+    <v:String x:Key="text1_message">prohibited,</v:String>
+    <v:String x:Key="text2_message">in order to prevent errors and unforeseen situations, scenarios.</v:String>
+    <v:String x:Key="button_message">Accept (05)</v:String>
+    <v:String x:Key="text0_nosupport_message">The utility does not support your Windows. No further launch is</v:String>
+    <v:String x:Key="text1_nosupport_message">possible,</v:String>
+    <v:String x:Key="text2_nosupport_message">GTweak will be closed to prevent critical errors.</v:String>
+    <!--#endregion-->
+
+    <!--#region Notification Window -->
+    <v:String x:Key="title0_notification">Attention</v:String>
+    <v:String x:Key="title1_notification">Information</v:String>
+    <v:String x:Key="logout_notification">An exit is required, click on this text to produce it</v:String>
+    <v:String x:Key="restart_notification">A reboot is required, click on this text to perform it</v:String>
+    <v:String x:Key="onedrive_notification">The OneDrive recovery process has started, it will take some time</v:String>
+    <v:String x:Key="appsdelete_notification">The application removal process has started, it will take some time</v:String>
+    <v:String x:Key="viewlicense_notification">To start - activate Windows. Not all tweaks can be applied</v:String>
+    <v:String x:Key="createpoint_notification">It will take some time to create a recovery point</v:String>
+    <v:String x:Key="notsuccessfulpoint_notification">Something went wrong, it was not possible to create a restore point</v:String>
+    <v:String x:Key="successpoint_notification">The recovery point has been successfully created</v:String>
+    <v:String x:Key="readypoint_notification">The necessary point for recovery has already been created</v:String>
+    <v:String x:Key="notsuccessfulrecovery_notification">Something went wrong, recovery could not be started</v:String>
+    <v:String x:Key="readyactivate_notification">Your operating system does not need to be activated</v:String>
+    <v:String x:Key="activatewin_notification">The Windows activation process has started, it will take some time</v:String>
+    <v:String x:Key="successactivate_notification">Activation was successful, a reboot is recommended</v:String>
+    <v:String x:Key="notsuccessactivate_notification">Something went wrong, unfortunately it was not possible to activate the system</v:String>
+    <v:String x:Key="windefender_notification">The process will take some time, please wait a bit</v:String>
+    <v:String x:Key="warningwindef_notification">You will not be able to turn Windows Defender on and off at the same time</v:String>
+    <v:String x:Key="windefclose_notification">Wait for the end of the operation with Windows Defender</v:String>
+    <v:String x:Key="firewalloff_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
+    <v:String x:Key="clearingcache_notification">The system file cache has been cleared</v:String>
+    <v:String x:Key="import_warning_notification">This file is not suitable for import</v:String>
+    <v:String x:Key="clear_ram_notification">Short-term memory and temporary files have been cleared</v:String>
+    <v:String x:Key="disable_recovery_notification">System recovery is disabled, recovery points are unavailable</v:String>
+    <v:String x:Key="warndisable_recovery_notification">You have already disabled the recovery system</v:String>
+    <!--#endregion-->
+
+    <!--#region Main Window -->
+    <v:String x:Key="btn1_main">Confidentiality</v:String>
+    <v:String x:Key="btn2_main">Interface</v:String>
+    <v:String x:Key="btn3_main">Applications</v:String>
+    <v:String x:Key="btn4_main">Services</v:String>
+    <v:String x:Key="btn5_main">System</v:String>
+    <v:String x:Key="btn6_main">System information</v:String>
+    <v:String x:Key="btn7_main">More</v:String>
+    <v:String x:Key="title_settings_main">Settings</v:String>
+    <v:String x:Key="btgl_notifications_main">Show notifications</v:String>
+    <v:String x:Key="btgl_sound_main">Notification sound</v:String>
+    <v:String x:Key="slider_volume_main">Notification volume:</v:String>
+    <v:String x:Key="btgl_toast_main">Pin on top of all windows</v:String>
+    <v:String x:Key="cmbox_lang_main">Interface language:</v:String>
+    <v:String x:Key="cmbox_eng_main">English</v:String>
+    <v:String x:Key="cmbox_ru_main">Russian</v:String>
+    <v:String x:Key="text_saveconfig">My tweaks:</v:String>
+    <v:String x:Key="btn_import">Import</v:String>
+    <v:String x:Key="btn_export">Export</v:String>
+    <v:String x:Key="text_selfremove">Delete from the device:</v:String>
+    <v:String x:Key="btn_selfremove">Delete</v:String>
+    <!--#endregion-->
+
+    <!--#region Import Window -->
+    <v:String x:Key="title_win_import">Your tweaks are applied</v:String>
+    <v:String x:Key="wait_win_import">It takes some time</v:String>
+    <v:String x:Key="warning_win_import">It is not necessary to close the window forcibly</v:String>
+    <!--#endregion-->
+    
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_confidentiality">Advertising identifier and targeted advertising</v:String>
+    <v:String x:Key="tgl2_confidentiality">All types of syncing your data</v:String>
+    <v:String x:Key="tgl3_confidentiality">Windows Telemetry Tracking</v:String>
+    <v:String x:Key="tgl4_confidentiality">Collecting data through scheduler events</v:String>
+    <v:String x:Key="tgl5_confidentiality">Collecting data about installed applications</v:String>
+    <v:String x:Key="tgl6_confidentiality">Collecting application usage statistics</v:String>
+    <v:String x:Key="tgl7_confidentiality">Collecting and sending handwriting data</v:String>
+    <v:String x:Key="tgl8_confidentiality">Collecting hardware configuration data</v:String>
+    <v:String x:Key="tgl9_confidentiality">Network access to the spy domain</v:String>
+    <v:String x:Key="tgl10_confidentiality">Determining the user's location</v:String>
+    <v:String x:Key="tgl11_confidentiality">Checking requests through Feedback</v:String>
+    <v:String x:Key="tgl12_confidentiality">Hidden background updates of speech synthesis</v:String>
+    <v:String x:Key="tgl13_confidentiality">Hidden monitoring of your system</v:String>
+    <v:String x:Key="tgl14_confidentiality">Remote experiments on your PC</v:String>
+    <v:String x:Key="tgl15_confidentiality">Spyware modules for collecting and sending data</v:String>
+    <v:String x:Key="tgl16_confidentiality">«Logging» Windows Events</v:String>
+    <v:String x:Key="tgl17_confidentiality">NVIDIA Telemetry Tracking</v:String>
+    <v:String x:Key="tgl18_confidentiality">Keeping a record of user behavior</v:String>
+
+    <v:String x:Key="TglButton1_description_confidentiality">Windows creates a unique advertising identifier for each user to track your actions. Which is used by application developers and Windows itself for their own purposes, including to offer you specific ads in applications.</v:String>
+    <v:String x:Key="TglButton2_description_confidentiality">Even using a local account, Windows always tries to synchronize your data with Microsoft servers. In particular, the following: themes, passwords, Windows settings, browser settings, language bar settings, simplified access settings, additional settings.</v:String>
+    <v:String x:Key="TglButton3_description_confidentiality">Telemetry (diagnostic data) is data that Windows automatically collects to send to Microsoft servers, or in short, "What? Where?  Why and when do you use it?". Microsoft claims that the data is depersonalized and helps the company develop Windows. Even if you are not concerned about the fact of collecting information, then another problem may arise - excessive load on the processor, which in turn slows down the system.</v:String>
+    <v:String x:Key="TglButton4_description_confidentiality">In the «Task Scheduler» there are services that, after their work, collect data about their work and send it to the Microsoft server.</v:String>
+    <v:String x:Key="TglButton5_description_confidentiality">Microsoft collects data about your software. This information is used by Microsoft to diagnose compatibility issues, but you will not help Microsoft improve compatibility in new versions of Windows because this information is used only for selfish purposes for Microsoft. Disabling this feature prevents potentially sensitive information from being sent.</v:String>
+    <v:String x:Key="TglButton6_description_confidentiality">Microsoft does not have enough of a list of your applications, it also studies the success of your work in these applications: how often do you use these or other applications, how much time do you spend working in this or that application.</v:String>
+    <v:String x:Key="TglButton7_description_confidentiality">After introducing such an option as handwriting in Windows, Microsoft once decided that it was possible to improve handwriting technology in its operating system by learning from those who uses this very Windows. That is, even if you don't use handwriting, Microsoft will still know about it by default.</v:String>
+    <v:String x:Key="TglButton8_description_confidentiality">The Software Quality Improvement Program (CEIP) is a separate feature that collects information about the configuration of your hardware and how you use the software and services. The program also periodically downloads a file to collect information about problems that you may have with Windows. The program is voluntary and you do not have to send your data to Microsoft, violating your privacy.</v:String>
+    <v:String x:Key="TglButton9_description_confidentiality">Microsoft collects user information and sends it to its servers. This tweak will add spyware domain names to the hosts and Firewall file.</v:String>
+    <v:String x:Key="TglButton10_description_confidentiality">Microsoft Windows receives your location and uses this information for advertising purposes.</v:String>
+    <v:String x:Key="TglButton11_description_confidentiality">Even if you do not use «Feedback», Microsoft still registers the frequency of your calls to official support.</v:String>
+    <v:String x:Key="TglButton12_description_confidentiality">Microsoft Windows can recognize voice with a special speech recognition and speech synthesis module. Even if you don't use Cortana or Windows Accessibility Features, your operating system is always checking for updates to its voice recognition engine by default.</v:String>
+    <v:String x:Key="TglButton13_description_confidentiality">A function that has access to any user data. It exchanges some information with Microsoft servers and does not affect the operation of the operating system or applications in any way. It does not help the user in any way, which makes it useless.</v:String>
+    <v:String x:Key="TglButton14_description_confidentiality">Microsoft regularly conducts experiments with Windows users to determine whether a feature is widely used, whether changing a feature makes it more useful. But in turn, this is a violation of confidentiality.</v:String>
+    <v:String x:Key="TglButton15_description_confidentiality">Two services Diag Truck and dmwappushservice are keyloggers. It turns out that they collect literally all user actions, including what the user types from the keyboard and meticulously transferring to Microsoft servers without the user's own request.</v:String>
+    <v:String x:Key="TglButton16_description_confidentiality">And what happens if the network is unavailable, and all the good that the spies collect needs to be sent... There is a data backup for this case. And I decided to backup Windows to the «Windows Event Log».</v:String>
+    <v:String x:Key="TglButton17_description_confidentiality">The service that is responsible for collecting and transmitting data about the system and its use, or a function that is not related to the operation of the video driver, is useless. Why and what kind of information NVIDIA collects is known only to itself. But the fact that this does not bring anything useful to the end user is quite obvious.</v:String>
+    <v:String x:Key="TglButton18_description_confidentiality">User activity tracking tools know no limit. Windows has another service – UAR, designed to perform step-by-step logging of your actions on the computer, including: taking screenshots, typing, running programs, accessing a webcam on a locked screen and much more.</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="tgl1_interface">Standard color cursor selection</v:String>
+    <v:String x:Key="tgl2_interface">Standard color of the tooltip</v:String>
+    <v:String x:Key="tgl3_interface">Standard size of the system buttons</v:String>
+    <v:String x:Key="tgl4_interface">Standard cursor flicker frequency</v:String>
+    <v:String x:Key="tgl5_interface">Standard Scrollbar Size</v:String>
+    <v:String x:Key="tgl6_interface">The transparency effect of the taskbar</v:String>
+    <v:String x:Key="tgl7_interface">Dark Taskbar theme</v:String>
+    <v:String x:Key="tgl8_interface">Dark theme of applications and explorer</v:String>
+    <v:String x:Key="tgl9_interface">Delay when calling the context menu</v:String>
+    <v:String x:Key="tgl10_interface">Delay in the appearance of previews on the taskbar</v:String>
+    <v:String x:Key="tgl11_interface">Arrows for shortcuts to files, folders, or programs</v:String>
+    <v:String x:Key="tgl12_interface">Prefix «Label for...»/ postfix «– Label»</v:String>
+    <v:String x:Key="tgl13_interface">The «This computer» icon on the Desktop</v:String>
+    <v:String x:Key="tgl14_interface">The «Trash» icon on the Desktop</v:String>
+    <v:String x:Key="tgl15_interface">Taskbar Alignment (Windows 11)</v:String>
+    <v:String x:Key="tgl16_interface">Icons on the taskbar (Windows 11)</v:String>
+    <v:String x:Key="tgl17_interface">New stripped-down context menu (Windows 11)</v:String>
+    <v:String x:Key="tgl18_interface">Show tips and suggestions (Windows 11)</v:String>
+    <v:String x:Key="tgl19_interface">Show personalized ads</v:String>
+    <v:String x:Key="tgl20_interface">Restore previous folder windows when logging in</v:String>
+    <v:String x:Key="tgl21_interface">Notifications with Windows tips and suggestions</v:String>
+    <v:String x:Key="tgl22_interface">Folders located in «This computer»</v:String>
+    <v:String x:Key="tgl23_interface">«3D Objects» in the explorer</v:String>
+    <v:String x:Key="tgl24_interface">Compression of wallpaper format .JPEG of the desktop</v:String>
+    <v:String x:Key="tgl25_interface">Tooltips for desktop elements</v:String>
+    <v:String x:Key="tgl26_interface">The search query with «Bing» integration in the Start menu</v:String>
+    <v:String x:Key="tgl27_interface">The «Control Panel» icon on the Desktop</v:String>
+    <v:String x:Key="tgl28_interface">Open «Quick Access» instead of «This computer»</v:String>
+
+    <v:String x:Key="textcolor_interface">This is an example of a new color.</v:String>
+
+    <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «The color of wet asphalt».</v:String>
+    <v:String x:Key="TglButton2_description_interface">Will change the color of the popup hint from yellow to light blue «Sky blue».</v:String>
+    <v:String x:Key="TglButton3_description_interface">Tweak will reduce the size of the Collapse, Expand buttons, Close the windows by 20%. The buttons will become neater not only for the Explorer, but also for all windows, including images, browsers and other programs.</v:String>
+    <v:String x:Key="TglButton4_description_interface">Will accelerate the cursor flicker frequency, default value: 530. This tweak will change the value to 250.</v:String>
+    <v:String x:Key="TglButton5_description_interface">Tweak will make Scrollbar in windows, including browsers and programs, thinner by 17%.</v:String>
+    <v:String x:Key="TglButton6_description_interface">Tweak will disable/enable the transparency effect. Translucent windows and surfaces.</v:String>
+    <v:String x:Key="TglButton7_description_interface">Changes the taskbar theme to light or dark. Attention, the screen may blink.</v:String>
+    <v:String x:Key="TglButton8_description_interface">The tweak will change the explorer theme to light or dark, including browsers and other programs that support the device theme. Attention the screen may blink.</v:String>
+    <v:String x:Key="TglButton9_description_interface">By default, additional context menu items appear with a delay of 400 ms. If you want it to be faster, you can reduce this delay to 20 ms.</v:String>
+    <v:String x:Key="TglButton10_description_interface">By default, the Taskbar preview shows previews of running applications for too long. To make previews appear faster, apply this tweak.</v:String>
+    <v:String x:Key="TglButton11_description_interface">Tweak will remove arrows from labels by replacing the arrow file.</v:String>
+    <v:String x:Key="TglButton12_description_interface">Removing the too intuitive prefix-postfix for labels.</v:String>
+    <v:String x:Key="TglButton13_description_interface">The Computer icon, unlike the computer shortcut, is better because it has the necessary properties of the context menu and is free of unnecessary ones.</v:String>
+    <v:String x:Key="TglButton14_description_interface">If you do not need the Trash icon on the desktop and you do not want to waste time looking for a shutdown, then you can use tweaks.</v:String>
+    <v:String x:Key="TglButton15_description_interface">Choose where you want the icons on the taskbar to be displayed, on the cent or on the left</v:String>
+    <v:String x:Key="TglButton16_description_interface">No time to search? The tweak will remove icons from the taskbar: Copilot, Search, Task Submission, Chat.</v:String>
+    <v:String x:Key="TglButton17_description_interface">This tweak will return you to the usual classic context menu for the desktop and «Explorer». Attention the screen may blink.</v:String>
+    <v:String x:Key="TglButton18_description_interface">Windows 11 sometimes shows hints on how to use a particular feature, for example, the new «Start menu» or «Quick Settings». They are useful if you are seeing Windows 11 for the first time, as it is useless junk.</v:String>
+    <v:String x:Key="TglButton19_description_interface">By default, Windows uses the collected information to target ads, i.e. to display ads that match your interests. And literally, this advertisement is located wherever free space is available for display. If you don't want Windows to display personalized ads in all Store apps, Explorer, Options, and the Start menu, then you can disable this junk.</v:String>
+    <v:String x:Key="TglButton20_description_interface">By default, Windows does not save the positions of windows, as well as their state when turned off. This tweak will allow you to remember the type of open folders in order to restore them after Logging out, Rebooting and Shutting down.</v:String>
+    <v:String x:Key="TglButton21_description_interface">The tweak allows you to disable all Windows notifications with tips and suggestions, as well as disable Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is an unexpectedly appearing window with an offer to urgently complete device configuration and log in to your Microsoft account.</v:String>
+    <v:String x:Key="TglButton22_description_interface">Tweak will hide folders from «This computer»: Desktop, Videos, Documents, Downloads, Images, Music.</v:String>
+    <v:String x:Key="TglButton23_description_interface">Removes the 3D Objects item from the Explorer Overview in the left menu list (from the Explorer list tree).</v:String>
+    <v:String x:Key="TglButton24_description_interface">By default, when you set a jpeg image as your desktop wallpaper, Windows automatically reduces its quality to 85%. This tweak will set the jpeg wallpaper quality to 100%.</v:String>
+    <v:String x:Key="TglButton25_description_interface">Tweak will disable tooltips for desktop elements when hovering the mouse cursor.</v:String>
+    <v:String x:Key="TglButton26_description_interface">By default, Windows sends everything you search for in the «Start menu» to its servers to provide you with Bing search results. If you don't need Bing integration in the «Start menu», you can apply a tweak to disable web search.</v:String>
+    <v:String x:Key="TglButton27_description_interface">If you need a control panel icon, not a shortcut and you don't have time to search in the personalization menu, then you can use tweaks.</v:String>
+    <v:String x:Key="TglButton28_description_interface">By default, when you open Explorer, the first tab will be «Quick Access». And to open any disk, you need to make unnecessary movements. This tweak will make «This computer» open when opened, rather than «Quick Access». On older versions of Windows 10, it is possible to completely hide the «Quick Access» tab.</v:String>
+    <!--#endregion-->
+
+    <!--#region Applications Page -->
+    <v:String x:Key="text0_applications">Applications are deleted</v:String>
+    <v:String x:Key="text1_applications">without the possibility</v:String>
+    <v:String x:Key="text2_applications">of recovery except OneDrive. Click on the</v:String>
+    <v:String x:Key="text3_applications">gray</v:String>
+    <v:String x:Key="text4_applications">icon</v:String>
+    <v:String x:Key="btntext_applications">Delete all</v:String>
+    <v:String x:Key="App1_applications">Microsoft Store</v:String>
+    <v:String x:Key="App2_applications">Microsoft Xbox</v:String>
+    <v:String x:Key="App3_applications">Microsoft Office OneNote</v:String>
+    <v:String x:Key="App4_applications">Microsoft Office Hub</v:String>
+    <v:String x:Key="App5_applications">Microsoft Solitaire Collection</v:String>
+    <v:String x:Key="App6_applications">Mixed Reality</v:String>
+    <v:String x:Key="App7_applications">Bing Weather</v:String>
+    <v:String x:Key="App8_applications">Microsoft 3D Viewer</v:String>
+    <v:String x:Key="App9_applications">Microsoft SkypeApp</v:String>
+    <v:String x:Key="App10_applications">OneDrive</v:String>
+    <v:String x:Key="App11_applications">Cortana</v:String>
+    <v:String x:Key="App12_applications">Microsoft Teams</v:String>
+    <v:String x:Key="App13_applications">Music Groove</v:String>
+    <v:String x:Key="App14_applications">Zune Video</v:String>
+    <v:String x:Key="App15_applications">Sound Recorder</v:String>
+    <v:String x:Key="App16_applications">Feedback Hub</v:String>
+    <v:String x:Key="App17_applications">Mail</v:String>
+    <v:String x:Key="App18_applications">Widgets</v:String>
+    <v:String x:Key="App19_applications">Windows Photos</v:String>
+    <v:String x:Key="App20_applications">Screen Sketch</v:String>
+    <v:String x:Key="App21_applications">Clipchamp - video editor</v:String>
+    <v:String x:Key="App22_applications">Get Started</v:String>
+    <v:String x:Key="App23_applications">Get Help</v:String>
+    <v:String x:Key="App24_applications">Microsoft Sticky Notes</v:String>
+    <v:String x:Key="App25_applications">Windows Maps</v:String>
+    <v:String x:Key="App26_applications">Windows Camera</v:String>
+    <v:String x:Key="App27_applications">Paint / Paint3D</v:String>
+    <v:String x:Key="App28_applications">Power Automate</v:String>
+    <v:String x:Key="App29_applications">People</v:String>
+    <v:String x:Key="App30_applications">Bing News</v:String>
+    <v:String x:Key="App31_applications">Microsoft To Do</v:String>
+    <v:String x:Key="App32_applications">Windows Alarms</v:String>
+    <v:String x:Key="App33_applications">Your Phone</v:String>
+    <v:String x:Key="App34_applications">Microsoft Outlook</v:String>
+    <v:String x:Key="App35_applications">Bing Sports</v:String>
+    <v:String x:Key="App36_applications">Bing Finance</v:String>
+    <v:String x:Key="App37_applications">Yandex Music</v:String>
+    <v:String x:Key="App38_applications">Netflix</v:String>
+    <v:String x:Key="App39_applications">Quick Assist</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_services">Services related to Windows Search</v:String>
+    <v:String x:Key="tgl2_services">Services related to Xbox</v:String>
+    <v:String x:Key="tgl3_services">Services related to the operation of USB modems and routers</v:String>
+    <v:String x:Key="tgl4_services">Services related to Windows Store</v:String>
+    <v:String x:Key="tgl5_services">Performance Counter Services</v:String>
+    <v:String x:Key="tgl6_services">Windows Biometric Service</v:String>
+    <v:String x:Key="tgl7_services">Services related to Bluetooth</v:String>
+    <v:String x:Key="tgl8_services">Services related to printer</v:String>
+    <v:String x:Key="tgl9_services">Service related to the operation of the scanner</v:String>
+    <v:String x:Key="tgl10_services">Services related to fax</v:String>
+    <v:String x:Key="tgl11_services">Services connected in tablet/smartphone mode</v:String>
+    <v:String x:Key="tgl12_services">Services related to the operation of additional monitors</v:String>
+    <v:String x:Key="tgl13_services">Virtual Desktop Services, Your Phone</v:String>
+    <v:String x:Key="tgl14_services">Services related to the operation of the local network</v:String>
+    <v:String x:Key="tgl15_services">Services related to Windows Update</v:String>
+    <v:String x:Key="tgl16_services">Services related to VPN clients</v:String>
+    <v:String x:Key="tgl17_services">Services related to the operation of Windows Media</v:String>
+    <v:String x:Key="tgl18_services">Services related to Remote Desktop</v:String>
+    <v:String x:Key="tgl19_services">Services that collect errors and event logs</v:String>
+    <v:String x:Key="tgl20_services">WebDAV Remote File Management Service</v:String>
+    <v:String x:Key="tgl21_services">Services related to the operation of a Smart card</v:String>
+    <v:String x:Key="tgl22_services">Services related to the operation of Windows Kiosk</v:String>
+    <v:String x:Key="tgl23_services">Services related to file encryption</v:String>
+    <v:String x:Key="tgl24_services">Service related to Windows localization</v:String>
+    <v:String x:Key="tgl25_services">Services related to background security checks</v:String>
+    <v:String x:Key="tgl26_services">Services related to background diagnostics</v:String>
+    <v:String x:Key="tgl27_services">Services related to corporate tools</v:String>
+    <v:String x:Key="tgl28_services">Service related to the operation of Hyper-V</v:String>
+
+    <v:String x:Key="TglButton1_description_services">Disable if you don't use file history and content indexing.</v:String>
+    <v:String x:Key="TglButton2_description_services">Disable if you don't use Xbox and Microsoft gamepads.</v:String>
+    <v:String x:Key="TglButton3_description_services">Disable if you are connected to the Internet via cable or Wi-Fi.</v:String>
+    <v:String x:Key="TglButton4_description_services">Disable if you are not using the Windows Store and its UWP apps.</v:String>
+    <v:String x:Key="TglButton5_description_services">Disable if you do not want services to analyze the performance of your system.</v:String>
+    <v:String x:Key="TglButton6_description_services">Disable if you do not use authorization using Windows Hello, fingerprint or face recognition.</v:String>
+    <v:String x:Key="TglButton7_description_services">Disable if you do not use Bluetooth and devices whose work is connected to Bluetooth."</v:String>
+    <v:String x:Key="TglButton8_description_services">Disable if you don't have a printer.</v:String>
+    <v:String x:Key="TglButton9_description_services">Disable if you don't have a scanner.</v:String>
+    <v:String x:Key="TglButton10_description_services">Disable if you don't have a fax machine.</v:String>
+    <v:String x:Key="TglButton11_description_services">Disable if you have a landline computer, laptop or netbook."</v:String>
+    <v:String x:Key="TglButton12_description_services">Disable if you have only one monitor and you do not plan to connect additional ones.</v:String>
+    <v:String x:Key="TglButton13_description_services">Disable if you do not use all these applications: Virtual Desktops, Your Phone and Night Lights.</v:String>
+    <v:String x:Key="TglButton14_description_services">Disable if you do not use or plan to use a local network.</v:String>
+    <v:String x:Key="TglButton15_description_services">Disable if you do not plan to update Windows. Please note that the service affects downloading and updating apps from the Windows Store.</v:String>
+    <v:String x:Key="TglButton16_description_services">Disable if you are not using VPN clients. May affect the operation of the Xbox.</v:String>
+    <v:String x:Key="TglButton17_description_services">Disable it if you do not need file synchronization and access to them on a local network for Windows Media Player. These services are not critical, you can continue to use the player.</v:String>
+    <v:String x:Key="TglButton18_description_services">Disable if you do not use a remote desktop and do not use a server connection to them.</v:String>
+    <v:String x:Key="TglButton19_description_services">Disable if you do not want the services to load your PC while they are handling errors.</v:String>
+    <v:String x:Key="TglButton20_description_services">Disable if you do not remotely manage files via Sharing or using WebDAV.</v:String>
+    <v:String x:Key="TglButton21_description_services">Disable if you are not using smart cards. A smart card is one of the varieties of electronic identifiers or plastic with a chip. The appearance is a «Bank card». For everyday use of Windows, the service is not needed and you will never need it.</v:String>
+    <v:String x:Key="TglButton22_description_services">Disable if you do not use a Windows Kiosk or do not know what it is.</v:String>
+    <v:String x:Key="TglButton23_description_services">Disable if you do not use BitLocker disk encryption and EFS file or folder encryption.</v:String>
+    <v:String x:Key="TglButton24_description_services">Disable if you have configured all the languages that you will use and do not plan to add new ones.</v:String>
+    <v:String x:Key="TglButton25_description_services">Disable if you do not use Windows Defender and all additional Windows security.</v:String>
+    <v:String x:Key="TglButton26_description_services">Disable it if you do not need Windows to load the system with its useless diagnostics in the background.</v:String>
+    <v:String x:Key="TglButton27_description_services">Disable if you do not use remote management of corporate applications and you do not have a remote server that your PC communicates with.</v:String>
+    <v:String x:Key="TglButton28_description_services">Disable if you are not using the built-in virtualization system. It does not affect the work of VirtualBox and its like in any way.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_system">The speed of the mouse cursor</v:String>
+    <v:String x:Key="slider2_system">Keyboard repeat delay</v:String>
+    <v:String x:Key="slider3_system">Keyboard repetition rate</v:String>
+    <v:String x:Key="text_system">Enter the text to check the keyboard settings</v:String>
+    <v:String x:Key="tgl1_system">Increased accuracy of the pointer installation</v:String>
+    <v:String x:Key="tgl2_system">Key sticking and input filtering</v:String>
+    <v:String x:Key="tgl3_system">Waiting time before turning off the lock screen</v:String>
+    <v:String x:Key="tgl4_system">«Hibernation» and «Fast Startup» technology</v:String>
+    <v:String x:Key="tgl5_system">The shutdown warning window</v:String>
+    <v:String x:Key="tgl6_system">Auto-update of applications via the Microsoft Store</v:String>
+    <v:String x:Key="tgl7_system">Delay the appearance of sound - Realtek Sound driver</v:String>
+    <v:String x:Key="tgl8_system">Windows Defender, Antimalware, SmartScreen and VBS</v:String>
+    <v:String x:Key="tgl9_system">UAC (User Account Control)</v:String>
+    <v:String x:Key="tgl10_system">Security notifications from the Notification Center</v:String>
+    <v:String x:Key="tgl11_system">Warnings when running any exe</v:String>
+    <v:String x:Key="tgl12_system">Diagnostics of your PC's RAM</v:String>
+    <v:String x:Key="tgl13_system">Teredo, ISATAP and IPv6 protocols</v:String>
+    <v:String x:Key="tgl14_system">The standard size of the file system cache</v:String>
+    <v:String x:Key="tgl15_system">Slowing down Windows startup and program startup</v:String>
+    <v:String x:Key="tgl16_system">Usage history for the Quick Access Toolbar</v:String>
+    <v:String x:Key="tgl17_system">Autorun removable media</v:String>
+    <v:String x:Key="tgl18_system">Use a conventional power supply circuit</v:String>
+    <v:String x:Key="tgl19_system">Bluetooth and device function</v:String>
+    <v:String x:Key="tgl20_system">Windows Defender Firewall</v:String>
+
+    <v:String x:Key="TextSlider1_description_system">Changes the speed of the mouse pointer, saving you time to search for mouse parameters.</v:String>
+    <v:String x:Key="TextSlider2_description_system">Will change the delay before starting to repeat the entered character, the recommended value is 0.</v:String>
+    <v:String x:Key="TextSlider3_description_system">Changes the repetition rate of the entered character, the recommended value is 31.</v:String>
+    <v:String x:Key="TglButton1_description_system">By default, mouse acceleration accelerates mouse movement. It is recommended to turn it off, since with acceleration turned on, uniform movement and directional accuracy want to be better.</v:String>
+    <v:String x:Key="TglButton2_description_system">If you do not want a window to appear every now and then when performing tasks, telling you to enable key sticking or input filtering, and after answering «No» it appears again after a while, then disable this function. In addition, input filtering affects the speed of keyboard repetition and skipping repeated keys.</v:String>
+    <v:String x:Key="TglButton3_description_system">By default, Windows displays the lock screen for 1 minute, after which the screen goes out and it is independent of whether you are running on battery or mains. This tweak will remove these restrictions.</v:String>
+    <v:String x:Key="TglButton4_description_system">Theoretically, a fast startup takes less time than exiting hibernation, but in practice it may not be noticeable. If you don't use either fast loading or hibernation functions, then you can also disable them. This way, you can free up additional space on your hard disk.</v:String>
+    <v:String x:Key="TglButton5_description_system">Tweak allows you to disable the system message informing you that when you turn off or restart the computer, open programs will be terminated forcibly.</v:String>
+    <v:String x:Key="TglButton6_description_system">If you prefer to update your apps from the Microsoft Store yourself, you need to turn off the automatic update feature. Thus, the load on the network will drop.</v:String>
+    <v:String x:Key="TglButton7_description_system">Some versions of Realtek High Definition Audio drivers have an unpleasant sign of incorrect operation, and there is a sound delay, this tweak will fix it. It is NOT RECOMMENDED to use a tweak if you are not sure that the sound turns on after a few seconds or do not know which driver you have.</v:String>
+    <v:String x:Key="TglButton8_description_system">This tweak will disable and stop Windows Defender, SmartScreen, disproportionately heavy loads on the Antimalware processor and Virtualization-Based Security (VBS). It is possible to display «Enabled» when Windows Defender is turned off.</v:String>
+    <v:String x:Key="TglButton9_description_system">The tweak will completely disable UAС (User Account Control), get rid of shield icons, security notifications and other things. UAC is not a full-fledged protection program.</v:String>
+    <v:String x:Key="TglButton10_description_system">When you disable something related to security or protection, you constantly receive notifications about it. This tweak will disable security notifications from the Notification Center.</v:String>
+    <v:String x:Key="TglButton11_description_system">Windows security alert when you run exe, msi, bat, cmd or other executable files downloaded over the Internet. Confirming the launch of such files can get boring pretty quickly every time, this tweak will disable this warning.</v:String>
+    <v:String x:Key="TglButton12_description_system">The tweak disables the diagnostics of your computer's RAM, thereby improving the overall performance of the system.</v:String>
+    <v:String x:Key="TglButton13_description_system">This tweak disables the Teredo, ISATAP and IPv6 protocols that are unnecessary for most. It is not recommended to use this tweak on a work computer (in organizations).</v:String>
+    <v:String x:Key="TglButton14_description_system">This tweak includes support for a large file system cache. Increasing the size of the file system cache generally improves computer performance, but this in turn reduces the physical memory space available for applications and services.</v:String>
+    <v:String x:Key="TglButton15_description_system">By default, Windows has a built-in mechanism to slow down startup programs. This solution works quite well on older computers with HDD, but on modern PCs with SSD unnecessarily slows down the system startup with programs.</v:String>
+    <v:String x:Key="TglButton16_description_system">Tweak will disable the usage history for files and folders for the quick access toolbar.</v:String>
+    <v:String x:Key="TglButton17_description_system">The tweak will disable autorun for removable media that Windows Explorer instantly tries to open when connected to a computer.</v:String>
+    <v:String x:Key="TglButton18_description_system">Will add a slightly modified «Maximum Performance» power supply circuit, or if available, simply switch to the existing power supply circuit.</v:String>
+    <v:String x:Key="TglButton19_description_system">If you don't need Bluetooth and you don't want to use Bluetooth devices. Then disable it, it will also remove the icon from the taskbar.</v:String>
+    <v:String x:Key="TglButton20_description_system">The firewall allows you to allow or deny programs access to the Internet, as well as control traffic. Which makes it useful, if you intentionally want to and know what you're doing, then turn it off. And it is not recommended to do this.</v:String>
+    <!--#endregion-->
+
+    <!--#region Information System Page -->
+    <v:String x:Key="title_win_systemInformation">The operating system:</v:String>
+    <v:String x:Key="runprocces_systemInformation">Number of running processes:</v:String>
+    <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
+    <v:String x:Key="title_motherbr_systemInformation">The motherboard:</v:String>
+    <v:String x:Key="title_cpu_systemInformation">Processor:</v:String>
+    <v:String x:Key="title_gpu_systemInformation">Graphics card:</v:String>
+    <v:String x:Key="title_ram_systemInformation">RAM memory:</v:String>
+    <v:String x:Key="title_disk_systemInformation">Disk devices:</v:String>
+    <v:String x:Key="title_sound_systemInformation">Sound devices:</v:String>
+    <v:String x:Key="title_netadapter_systemInformation">Network adapters:</v:String>
+    <v:String x:Key="title_ip_systemInformation">IP address:</v:String>
+    <v:String x:Key="limited_systemInformation">Network access is limited</v:String>
+    <v:String x:Key="connection_systemInformation">There is no internet connection</v:String>
+    <v:String x:Key="text_copy_systemInformatin">Copied</v:String>
+    <v:String x:Key="driver_not_installed_systemInformatin">You don't have a driver installed</v:String>
+    <!--#endregion-->
+
+    <!--#region More Page -->
+    <v:String x:Key="text0_more">It is strongly</v:String>
+    <v:String x:Key="text1_more">recommended</v:String>
+    <v:String x:Key="text2_more">to create a restore point before using the utility</v:String>
+    <v:String x:Key="title_licens_more">Windows Activation</v:String>
+    <v:String x:Key="text_licens_more">This method is not 100% working and legal. Buying a key would be the best solution.</v:String>
+    <v:String x:Key="btntext_licens_more">Activate</v:String>
+    <v:String x:Key="title_createpoint_more">Save the system</v:String>
+    <v:String x:Key="text_createpoint_more">It will create a Windows system restore point, even if it is disabled.</v:String>
+    <v:String x:Key="btntext_createpoint_more">Save</v:String>
+    <v:String x:Key="title_recovery_more">Restore the system</v:String>
+    <v:String x:Key="text_recovery_more">Start the recovery process even when system restore is disabled.</v:String>
+    <v:String x:Key="btntext_recovery_more">Recover</v:String>
+    <v:String x:Key="textpoint_more">A point created with a GTweak</v:String>
+    <v:String x:Key="title_clear_more">Clearing the memory</v:String>
+    <v:String x:Key="text_clear_more">Clears the system file cache, which increases the size of available RAM.</v:String>
+    <v:String x:Key="btntext_clear_more">Clear</v:String>
+    <v:String x:Key="title_disablepoint_more">Disable protection</v:String>
+    <v:String x:Key="text_disablepoint_more">Disables the system restore point, but note that previously created ones are deleted.</v:String>
+    <v:String x:Key="btntext_disablepoint_more">Disable</v:String>
+    <!--#endregion-->
+    
+</ResourceDictionary>

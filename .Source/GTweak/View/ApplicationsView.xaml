@@ -1,0 +1,183 @@
+﻿<UserControl x:Class="GTweak.View.ApplicationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTweak.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="1100"
+             Style="{StaticResource LaunchPage}" Loaded="Page_Loaded" KeyDown="Page_KeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="139*"/>
+            <RowDefinition Height="45*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <TextBlock  Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="#BFBFBF" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0">
+                   <Run Text="{DynamicResource text0_applications}"/>
+                   <Run Text="{DynamicResource text1_applications}" Foreground="{StaticResource Color_Accent}"/>
+                   <Run Text="{DynamicResource text2_applications}"/>
+                   <Run Text="{DynamicResource text3_applications}" Foreground="{StaticResource Color_Inactive}"/>
+                   <Run Text="{DynamicResource text4_applications}"/>
+                </TextBlock>
+            </StackPanel>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" Margin="0,-20,0,0">
+                <StackPanel x:Name="App1" Orientation="Horizontal" Width="95" Height="95" Margin="92,50,884,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="MicrosoftStore" Style="{StaticResource Apps}" Source="{StaticResource A_DI_MicrosoftStore}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App2" Orientation="Horizontal" Width="95" Height="95" Margin="92,145,884,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Xbox" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Xbox}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App3" Orientation="Horizontal" Width="95" Height="95" Margin="92,236,884,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="OneNote" Style="{StaticResource Apps}" Source="{StaticResource A_DI_OneNote}" Margin="0,-10,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App34" Orientation="Horizontal" Width="95" Height="95" Margin="92,335,884,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Outlook" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Outlook}" Margin="0,-25,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+
+                <StackPanel x:Name="App4" Orientation="Horizontal" Width="95" Height="95" Margin="172,98,804,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="MicrosoftOfficeHub" Style="{StaticResource Apps}" Source="{StaticResource A_DI_MicrosoftOfficeHub}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App5" Orientation="Horizontal" Width="95" Height="95" Margin="172,192,804,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="MicrosoftSolitaireCollection" Style="{StaticResource Apps}" Source="{StaticResource A_DI_MicrosoftSolitaireCollection}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App6" Orientation="Horizontal" Width="95" Height="95" Margin="172,288,804,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="MixedReality" Style="{StaticResource Apps}" Source="{StaticResource A_DI_MixedReality}" Margin="0,-10,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App7" Orientation="Horizontal" Width="95" Height="95" Margin="252,50,724,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="BingWeather" Style="{StaticResource Apps}" Source="{StaticResource A_DI_BingWeather}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App8" Orientation="Horizontal" Width="95" Height="95" Margin="252,145,724,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Microsoft3D" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Microsoft3D}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App9" Orientation="Horizontal" Width="95" Height="95" Margin="252,240,724,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="SkypeApp" Style="{StaticResource Apps}" Source="{StaticResource A_DI_SkypeApp}" Margin="0,-10,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App35" Orientation="Horizontal" Width="95" Height="95" Margin="252,335,724,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="BingSports" Style="{StaticResource Apps}" Source="{StaticResource A_DI_BingSports}" Margin="0,-25,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+
+                <StackPanel x:Name="App10" Orientation="Horizontal" Width="95" Height="95" Margin="332,98,644,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="OneDrive" Style="{StaticResource Apps}" Source="{StaticResource A_DI_OneDrive}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App11" Orientation="Horizontal" Width="95" Height="95" Margin="332,192,644,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Cortana" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Cortana}" Margin="0,-5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App12" Orientation="Horizontal" Width="95" Height="95" Margin="332,288,644,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="MicrosoftTeams" Style="{StaticResource Apps}" Source="{StaticResource A_DI_MicrosoftTeams}" Margin="0,-11,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App13" Orientation="Horizontal" Width="95" Height="95" Margin="412,50,564,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Music" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Music}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App14" Orientation="Horizontal" Width="95" Height="95" Margin="412,145,564,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Video" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Video}" Margin="0,1,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App15" Orientation="Horizontal" Width="95" Height="95" Margin="412,240,564,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="SoundRecorder" Style="{StaticResource Apps}" Source="{StaticResource A_DI_SoundRecorder}" Margin="0,-11,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App36" Orientation="Horizontal" Width="95" Height="95" Margin="412,335,564,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="BingFinance" Style="{StaticResource Apps}" Source="{StaticResource A_DI_BingFinance}" Margin="0,-25,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App16" Orientation="Horizontal" Width="95" Height="95" Margin="492,98,484,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="FeedbackHub" Style="{StaticResource Apps}" Source="{StaticResource A_DI_FeedbackHub}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App17" Orientation="Horizontal" Width="95" Height="95" Margin="492,192,484,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Mail" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Mail}" Margin="0,1,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App18" Orientation="Horizontal" Width="95" Height="95" Margin="492,288,484,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Widgets" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Widgets}" Margin="0,-15,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App19" Orientation="Horizontal" Width="95" Height="96" Margin="572,50,404,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Photos" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Photos}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App20" Orientation="Horizontal" Width="95" Height="95" Margin="572,145,404,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="ScreenSketch" Style="{StaticResource Apps}" Source="{StaticResource A_DI_ScreenSketch}" Margin="0,-5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App21" Orientation="Horizontal" Width="95" Height="95" Margin="572,240,404,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="ClipChamp" Style="{StaticResource Apps}" Source="{StaticResource A_DI_ClipChamp}" Margin="0,-15,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App37" Orientation="Horizontal" Width="95" Height="95" Margin="572,335,404,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="YandexMusic" Style="{StaticResource Apps}" Source="{StaticResource A_DI_YandexMusic}" Margin="0,-25,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App22" Orientation="Horizontal" Width="95" Height="96" Margin="652,98,324,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="GetStarted" Style="{StaticResource Apps}" Source="{StaticResource A_DI_GetStarted}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App23" Orientation="Horizontal" Width="95" Height="96" Margin="652,192,324,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="GetHelp" Style="{StaticResource Apps}" Source="{StaticResource A_DI_GetHelp}" Margin="0,1,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App24" Orientation="Horizontal" Width="95" Height="95" Margin="652,288,324,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="MicrosoftStickyNotes" Style="{StaticResource Apps}" Source="{StaticResource A_DI_MicrosoftStickyNotes}" Margin="0,-10,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App25" Orientation="Horizontal" Width="95" Height="96" Margin="732,50,244,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Maps" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Maps}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App26" Orientation="Horizontal" Width="95" Height="96" Margin="732,145,244,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Camera" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Camera}" Margin="0,1,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App27" Orientation="Horizontal" Width="95" Height="95" Margin="732,240,244,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Paint3D" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Paint3D}" Margin="0,-15,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App38" Orientation="Horizontal" Width="95" Height="95" Margin="732,335,244,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Netflix" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Netflix}" Margin="0,-25,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App28" Orientation="Horizontal" Width="95" Height="96" Margin="812,98,164,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="PowerAutomateDesktop" Style="{StaticResource Apps}" Source="{StaticResource A_DI_PowerAutomateDesktop}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App29" Orientation="Horizontal" Width="95" Height="96" Margin="812,192,164,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="People" Style="{StaticResource Apps}" Source="{StaticResource A_DI_People}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App30" Orientation="Horizontal" Width="95" Height="95" Margin="812,288,164,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="BingNews" Style="{StaticResource Apps}" Source="{StaticResource A_DI_BingNews}" Margin="0,-10,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+
+                <StackPanel x:Name="App31"  Orientation="Horizontal" Width="95" Height="96" Margin="892,50,84,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Todos" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Todos}" Margin="0,5,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App32" Orientation="Horizontal" Width="95" Height="96" Margin="892,145,84,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Alarms" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Alarms}" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+                <StackPanel x:Name="App33" Orientation="Horizontal" Width="95" Height="95" Margin="892,240,84,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="Phone" Style="{StaticResource Apps}" Source="{StaticResource A_DI_Phone}" Margin="0,-10,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown" Cursor=""/>
+                </StackPanel>
+                <StackPanel x:Name="App39" Orientation="Horizontal" Width="95" Height="95" Margin="892,335,84,0" VerticalAlignment="Top" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="QuickAssist" Style="{StaticResource Apps}" Source="{StaticResource A_DI_QuickAssist}" Margin="0,-25,0,0" PreviewMouseDown="ClickApp_PreviewMouseDown"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="95*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Button Grid.Column="0" x:Name="BtnDelete" Content="{DynamicResource btntext_applications}" Style="{StaticResource BtnDefault}"  FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="30" Margin="0,-10,0,0" PreviewMouseDown="BtnDelete_PreviewMouseDown"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Rectangle Fill="{StaticResource Color_Accent}" Width="900" Height="1" RadiusX="15" RadiusY="15" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescriptionApp}" Cursor="Arrow"/>
+            </Grid>
+
+        </Grid>
+
+ 
+    
+
+    </Grid>
+</UserControl>

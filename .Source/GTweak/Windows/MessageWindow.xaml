@@ -1,0 +1,54 @@
+﻿<Window x:Class="GTweak.Windows.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GTweak.Windows"
+        mc:Ignorable="d"
+        Title="GTweak" WindowStyle="None"
+        Height="180" Width="350" MinHeight="180" MinWidth="350" MaxHeight="200" MaxWidth="350"
+        Background="Transparent"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
+        ShowInTaskbar="False"  IsTabStop="False">
+    <Grid>
+        <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
+            <Border.BorderBrush>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid Margin="0" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="84*"/>
+                    <RowDefinition Height="59*"/>
+                </Grid.RowDefinitions>
+
+                <Grid x:Name="TitleBar" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True" MouseDown="TitleBar_MouseDown">
+                    <Border Background="{StaticResource Color_Background_Dark}" CornerRadius="9,9,0,0">
+                        <TextBlock FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="17px" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <TextBlock Foreground="#BFBFBF" Height="auto" Width="330" FontFamily="{StaticResource Jura}" FontSize="15px"  TextWrapping="Wrap"
+                           HorizontalAlignment="Center" TextAlignment="Left" FontStretch="Medium" Margin="5,16,0,0">
+                                <Run x:Name="TextRun0" Text="{DynamicResource text0_message}"/>
+                                <Run x:Name="TextRun1" Text="{DynamicResource text1_message}" Foreground="{StaticResource Color_Accent}"/>
+                                <Run x:Name="TextRun2" Text="{DynamicResource text2_message}"/>
+                    </TextBlock>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Button x:Name="BtnAccept" Content="{DynamicResource button_message}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="140" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnAccept_PreviewMouseDown"/>
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

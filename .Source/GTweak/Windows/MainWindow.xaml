@@ -1,0 +1,263 @@
+﻿<Window x:Class="GTweak.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GTweak"
+        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+        xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
+        xmlns:nav="clr-namespace:GTweak.Utilities.Helpers"
+        xmlns:uс="clr-namespace:GTweak.Assets.UserControl"
+        mc:Ignorable="d"
+        Title="GTweak" 
+        Height="630" Width="1100"  
+        MaxHeight="630" MaxWidth="1100" MinHeight="630" MinWidth="1100" 
+        Background="Transparent" ResizeMode="CanMinimize" 
+        WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        SnapsToDevicePixels="True" UseLayoutRounding="True"
+        Closing="Window_Closing" Loaded="Window_Loaded" WindowChrome.IsHitTestVisibleInChrome="False">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
+        <Border.BorderBrush>
+            <LinearGradientBrush>
+                <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid Margin="0" Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="64*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitleBar" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True" MouseDown="TitleBar_MouseDown">
+                <Border Background="{StaticResource Color_Background_Dark}" CornerRadius="7,7,0,0">
+                    <TextBlock FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="18" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border  BorderBrush="{StaticResource Color_Accent}" BorderThickness="1" CornerRadius="50.5" Width="29" Height="29" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Border CornerRadius="50">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
+                            </Border.Effect>
+                            <Border.Background>
+                                <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
+                            </Border.Background>
+                        </Border>
+                    </Border>
+
+                    <TextBlock x:Name="ProfileName" Width="Auto" Text="{Binding DisplayProfileName}" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{DynamicResource Color_Accent}" HorizontalAlignment="Right" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False" Margin="10,0,0,0">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Right">
+
+                    <Button x:Name="ButtonSettings" Style="{StaticResource TitleButtons}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" PreviewMouseDown="ButtonSettings_PreviewMouseDown">
+                        <Image x:Name="ImageSettings" Width="18" Height="18" RenderTransformOrigin="0.5, 0.5">
+                            <Image.RenderTransform>
+                                <RotateTransform x:Name="noFreeze" Angle="0"/>
+                            </Image.RenderTransform>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource DI_BtnSettings_In}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ButtonSettings}" Value="true">
+                                            <Setter Property="Source" Value="{StaticResource DI_BtnSettings}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+
+                    <Button x:Name="ButtonMinimized" Style="{StaticResource TitleButtons}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,5,0" PreviewMouseDown="ButtonMinimized_PreviewMouseDown">
+                        <Image Height="2" Width="3" Grid.Column="3" Margin="-12,3,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="5" ScaleY="-8"/>
+                                    <SkewTransform AngleX="1"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="0"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource DI_BtnMinimized_In}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ButtonMinimized}" Value="true">
+                                            <Setter Property="Source" Value="{StaticResource DI_BtnMinimized}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+
+                    <Button x:Name="ButtonExit" Style="{StaticResource TitleButtons}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" PreviewMouseDown="ButtonExit_PreviewMouseDown">
+                        <Image Width="12">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource DI_BtnExit_In}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ButtonExit}" Value="true">
+                                            <Setter Property="Source" Value="{StaticResource DI_BtnExit}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+
+
+            <Grid x:Name="BodyContent" Grid.Row="1">
+
+                <ContentControl x:Name="Pages" Content="{Binding CurrentView}" IsTabStop="False" QueryCursor="SettingsMenu_QueryCursor"/>
+
+                <StackPanel x:Name="SettingsMenu" Orientation="Horizontal" HorizontalAlignment="Right" Background="{StaticResource Color_Background_Dark}" VirtualizingStackPanel.IsVirtualizing="True" Width="0" Opacity="0.97" Panel.ZIndex="1">
+                    <Grid Width="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70*"/>
+                            <RowDefinition Height="481*"/>
+                            <RowDefinition Height="45*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <TextBlock FontFamily="{StaticResource Jura}" Text="{DynamicResource title_settings_main}" Foreground="{StaticResource Color_Accent}" FontSize="20" Margin="0,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                                </TextBlock.Effect>
+                            </TextBlock>
+
+                            <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Vertical">
+
+                                <uс:ToggleButton  x:Name="BtnNotification" DynamicText="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
+
+                                <uс:ToggleButton  x:Name="BtnSoundNtn" DynamicText="{DynamicResource btgl_sound_main}"  VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnSoundNtn_ChangedState"/>
+
+                                <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,20,0,0">
+                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource slider_volume_main}"/>
+                                    <Slider x:Name="SliderVolume" Style="{StaticResource Horizontal_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="7,13,0,0"  Width="140" ValueChanged="SliderVolume_ValueChanged"/>
+                                </StackPanel>
+
+                                <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" DynamicText="{DynamicResource btgl_toast_main}" Margin="40,20,0,0" ChangedState="BtnTopMost_ChangedState"/>
+
+                                <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,20,0,0">
+                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,0,0,0" Text="{DynamicResource cmbox_lang_main}"/>
+                                    <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="170" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
+                                        <TextBlock Text="{DynamicResource cmbox_eng_main}"/>
+                                        <TextBlock Text="{DynamicResource cmbox_ru_main}"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom" Margin="0,20,0,0"/>
+
+                                <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
+                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource text_saveconfig}"/>
+                                    <Button x:Name="BtnExport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnExport_PreviewMouseDown">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{DynamicResource btn_export}" Margin="0,2,0,0"/>
+                                            <Image Source="{StaticResource DI_Export}" Margin="5,0,0,0" Width="20" Height="20"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="BtnImport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnImport_PreviewMouseDown">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{DynamicResource btn_import}" Margin="0,2,0,0"/>
+                                            <Image Source="{StaticResource DI_Import}" Margin="5,0,0,0" Width="20" Height="20"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
+                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource text_selfremove}"/>
+                                    <Button x:Name="BtnDelete" Content="{DynamicResource btn_selfremove}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="107" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnDelete_PreviewMouseDown"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300*"/>
+                                <ColumnDefinition Width="100*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image x:Uid="git" Source="{StaticResource DI_Git}" Width="31" Margin="20,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                    <Image x:Uid="tg" Source="{StaticResource DI_Telegram}" Width="26" Margin="5,5,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                    <Image x:Uid="steam" Source="{StaticResource DI_Steam}" Width="30" Margin="1,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBlock x:Name="TweakVersion" Style="{StaticResource Text_In}" FontSize="12px" Foreground="{StaticResource Color_Inactive}" Text="{Binding DisplayTweakVersion}"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="NavigationBar" Grid.Row="2">
+                <Border Background="{StaticResource Color_Background_Dark}" CornerRadius="0,0,7,7">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160*"/>
+                            <ColumnDefinition Width="160*"/>
+                            <ColumnDefinition Width="160*"/>
+                            <ColumnDefinition Width="160*"/>
+                            <ColumnDefinition Width="160*"/>
+                            <ColumnDefinition Width="170*"/>
+                            <ColumnDefinition Width="120*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <nav:ButtonNavigation Grid.Column="0" Style="{StaticResource BtnNavigation}" x:Name="BtnConfidentiality" Content="{DynamicResource btn1_main}" Command="{Binding ConfidentialityCommand}">
+                            <nav:ButtonNavigation.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,0,0,7"/>
+                                </Style>
+                            </nav:ButtonNavigation.Resources>
+                        </nav:ButtonNavigation>
+
+                        <nav:ButtonNavigation Grid.Column="1" Style="{StaticResource BtnNavigation}" x:Name="BtnInterface" Content="{DynamicResource btn2_main}" Command="{Binding InterfaceCommand}"/>
+
+                        <nav:ButtonNavigation Grid.Column="2" Style="{StaticResource BtnNavigation}" x:Name="BtnApplication" Content="{DynamicResource btn3_main}" Command="{Binding ApplicationsCommand}"/>
+
+                        <nav:ButtonNavigation Grid.Column="3" Style="{StaticResource BtnNavigation}" x:Name="BtnServices" Content="{DynamicResource btn4_main}" Command="{Binding ServicesCommand}"/>
+
+                        <nav:ButtonNavigation Grid.Column="4" Style="{StaticResource BtnNavigation}" x:Name="BtnSystem" Content="{DynamicResource btn5_main}" Command="{Binding SystemCommand}"/>
+
+                        <nav:ButtonNavigation Grid.Column="5" Style="{StaticResource BtnNavigation}" x:Name="BtnSystemInfo" Content="{DynamicResource btn6_main}" Command="{Binding InformationSystemCommand}"/>
+
+                        <nav:ButtonNavigation Grid.Column="6" Style="{StaticResource BtnNavigation}" x:Name="BtnMore" Content="{DynamicResource btn7_main}" Command="{Binding MoreCommand}" IsChecked="True">
+                            <nav:ButtonNavigation.Resources>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,0,7,0"/>
+                                </Style>
+                            </nav:ButtonNavigation.Resources>
+                        </nav:ButtonNavigation>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

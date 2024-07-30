@@ -1,0 +1,391 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="defaultDescription">Наведите указатель мыши на любой твик, чтобы получить его описание</v:String>
+    <v:String x:Key="defaultDescriptionApp">Наведите указатель мыши на любую иконку приложения, чтобы получить его название</v:String>
+    
+    <!--#region Load Window -->
+    <v:String x:Key="title_win_load">GTweak - Уведомление</v:String>
+    <v:String x:Key="title0_load">Загрузка</v:String>
+    <v:String x:Key="title1_load">Загрузка.</v:String>
+    <v:String x:Key="title2_load">Загрузка..</v:String>
+    <v:String x:Key="title3_load">Загрузка...</v:String>
+    <v:String x:Key="text0_load">Загрузка профиля</v:String>
+    <v:String x:Key="text1_load">Проверка данных</v:String>
+    <v:String x:Key="text2_load">Просмотр реестра</v:String>
+    <v:String x:Key="text3_load">Анализ приложений</v:String>
+    <v:String x:Key="text4_load">Просмотр конфигурации</v:String>
+    <v:String x:Key="text5_load">Проверка соединения</v:String>
+    <v:String x:Key="text6_load">Инициализация</v:String>
+    <!--#endregion-->
+
+    <!--#region Message Window -->
+    <v:String x:Key="text0_message">Создание копий программы</v:String>
+    <v:String x:Key="text1_message">запрещено,</v:String>
+    <v:String x:Key="text2_message">для предотвращения ошибок и не непредвиденных ситуаций, сценариев.</v:String>
+    <v:String x:Key="button_message">Понятно (05)</v:String>
+    <v:String x:Key="text0_nosupport_message">Утилита не поддерживает вашу Windows. Дальнейший запуск</v:String>
+    <v:String x:Key="text1_nosupport_message">невозможен,</v:String>
+    <v:String x:Key="text2_nosupport_message">для предотвращения критических ошибок.</v:String>
+    <!--#endregion-->
+
+    <!--#region Notification Window -->
+    <v:String x:Key="title0_notification">Внимание</v:String>
+    <v:String x:Key="title1_notification">Информация</v:String>
+    <v:String x:Key="logout_notification">Требуется выход, нажмите на данный текст, чтобы произвести его</v:String>
+    <v:String x:Key="restart_notification">Требуется перезагрузка, нажмите на данный текст, чтобы произвести её</v:String>
+    <v:String x:Key="onedrive_notification">Процесс восстановления OneDrive начался, это займет некоторое время</v:String>
+    <v:String x:Key="appsdelete_notification">Процесс удаления приложений начался, это займет некоторое время</v:String>
+    <v:String x:Key="viewlicense_notification">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>
+    <v:String x:Key="createpoint_notification">Cоздания точки восстановления займет некоторое время</v:String>
+    <v:String x:Key="notsuccessfulpoint_notification">Что-то пошло не так, не удалось создать точку восстановления</v:String>
+    <v:String x:Key="successpoint_notification">Точка восстановления успешно создана</v:String>
+    <v:String x:Key="readypoint_notification">Необходимая точка для восстановления уже создана</v:String>
+    <v:String x:Key="notsuccessfulrecovery_notification">Что-то пошло не так, не удалось запустить восстановления</v:String>
+    <v:String x:Key="readyactivate_notification">Ваша операционная система не нуждается в активации</v:String>
+    <v:String x:Key="activatewin_notification">Процесс активации Windows начался, это займет некоторое время</v:String>
+    <v:String x:Key="successactivate_notification">Активация прошла успешно, рекомендуется перезагрузка</v:String>
+    <v:String x:Key="notsuccessactivate_notification">Что-то пошло не так, к сожалению активировать систему не удалось</v:String>
+    <v:String x:Key="windefender_notification">Процесс займет некоторое время, пожалуйста подождите немного</v:String>
+    <v:String x:Key="warningwindef_notification">Одновременно включать и выключать Защитник Windows не получится</v:String>
+    <v:String x:Key="windefclose_notification">Дождитесь окончание операции с Защитником Windows</v:String>
+    <v:String x:Key="firewalloff_notification">У вас отключен брандмауэр, включите и примените твик снова</v:String>
+    <v:String x:Key="clearingcache_notification">Произведена очистка системного кэша файлов</v:String>
+    <v:String x:Key="import_warning_notification">Данный файл не подходит для импорта</v:String>
+    <v:String x:Key="clear_ram_notification">Очистка кратковременной памяти и временных файлов произведена</v:String>
+    <v:String x:Key="disable_recovery_notification">Восстановление системы отключено, точки восстановления недоступны</v:String>
+    <v:String x:Key="warndisable_recovery_notification">У вас уже отключена система восстановления</v:String>
+    <!--#endregion-->
+
+    <!--#region Main Window -->
+    <v:String x:Key="btn1_main">Конфиденциальность</v:String>
+    <v:String x:Key="btn2_main">Интерфейс</v:String>
+    <v:String x:Key="btn3_main">Приложения</v:String>
+    <v:String x:Key="btn4_main">Службы</v:String>
+    <v:String x:Key="btn5_main">Система</v:String>
+    <v:String x:Key="btn6_main">Системная информация</v:String>
+    <v:String x:Key="btn7_main">Прочее</v:String>
+    <v:String x:Key="title_settings_main">Настройки</v:String>
+    <v:String x:Key="btgl_notifications_main">Показывать уведомления</v:String>
+    <v:String x:Key="btgl_sound_main">Звук уведомление</v:String>
+    <v:String x:Key="slider_volume_main">Громкость уведомление:</v:String>
+    <v:String x:Key="btgl_toast_main">Закрепить поверх всех окон</v:String>
+    <v:String x:Key="cmbox_lang_main">Язык интерфейса:</v:String>
+    <v:String x:Key="cmbox_eng_main">Английский</v:String>
+    <v:String x:Key="cmbox_ru_main">Русский</v:String>
+    <v:String x:Key="text_saveconfig">Мои твики:</v:String>
+    <v:String x:Key="btn_import">Импорт</v:String>
+    <v:String x:Key="btn_export">Экспорт</v:String>
+    <v:String x:Key="text_selfremove">Удалить с устройства:</v:String>
+    <v:String x:Key="btn_selfremove">Удалить</v:String>
+    <!--#endregion-->
+
+    <!--#region Import Window -->
+    <v:String x:Key="title_win_import">Применяются ваши твики</v:String>
+    <v:String x:Key="wait_win_import">Это занимает некоторое время</v:String>
+    <v:String x:Key="warning_win_import">Не стоит закрывать окно насильно</v:String>
+    <!--#endregion-->
+
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_confidentiality">Рекламный идентификатор и таргетированная реклама</v:String>
+    <v:String x:Key="tgl2_confidentiality">Все типы синхронизация ваших данных</v:String>
+    <v:String x:Key="tgl3_confidentiality">Отслеживание телеметрии Windows</v:String>
+    <v:String x:Key="tgl4_confidentiality">Сбор данных через события планировщика</v:String>
+    <v:String x:Key="tgl5_confidentiality">Сбор данных об установленных приложениях</v:String>
+    <v:String x:Key="tgl6_confidentiality">Сбор статистики использования приложений</v:String>
+    <v:String x:Key="tgl7_confidentiality">Сбор и отправка данных рукописного ввода</v:String>
+    <v:String x:Key="tgl8_confidentiality">Сбор данных о конфигурации оборудования</v:String>
+    <v:String x:Key="tgl9_confidentiality">Сетевой доступ к шпионским доменом</v:String>
+    <v:String x:Key="tgl10_confidentiality">Определения местоположения пользователя</v:String>
+    <v:String x:Key="tgl11_confidentiality">Проверка обращений через Обратную связь</v:String>
+    <v:String x:Key="tgl12_confidentiality">Скрытое фоновое обновления синтеза речи</v:String>
+    <v:String x:Key="tgl13_confidentiality">Скрытый мониторинг вашей системы</v:String>
+    <v:String x:Key="tgl14_confidentiality">Удалённые эксперименты над вашим ПК</v:String>
+    <v:String x:Key="tgl15_confidentiality">Шпионские модули по сборе и отправке данных</v:String>
+    <v:String x:Key="tgl16_confidentiality">«Журналирования» Событий Windows</v:String>
+    <v:String x:Key="tgl17_confidentiality">Отслеживание телеметрии NVIDIA</v:String>
+    <v:String x:Key="tgl18_confidentiality">Ведения записи поведения пользователя</v:String>
+    
+    <v:String x:Key="TglButton1_description_confidentiality">Каждому пользователю система Windows создаёт уникальный идентификатор рекламы для отслеживания ваших действий. Который используется разработчиками приложений и самой Windows, для их собственных целей, в том числе, чтобы предлагать вам конкретную рекламу в приложениях.</v:String>
+    <v:String x:Key="TglButton2_description_confidentiality">Используя даже локальную учетную запись, Windows всегда пытается синхронизировать ваши данные с серверами Microsoft. В частности, следующее: темы, пароли, настройки Windows, настройки браузера, настройки языковой панели, настройки упрощённого доступа, дополнительные настройки.</v:String>
+    <v:String x:Key="TglButton3_description_confidentiality">Телеметрия (диагностические данные)  – это данные, которые Windows автоматически собирает для отправки на серверы Microsoft или же в кратком понятии "Что? Где?  Зачем и когда вы используете?". Компания Microsoft заявляет, что данные обезличены и помогают компании разрабатывать Windows. Даже если вас не беспокоит сам факт сбора информации, то может возникнуть другая проблема - чрезмерная нагрузка на процессор, что в свою очередь тормозит работу системы.</v:String>
+    <v:String x:Key="TglButton4_description_confidentiality">В «Планировщике заданий» находятся службы которые после своей работы собирают данные о своей работе и отправляют на сервер Microsoft.</v:String>
+    <v:String x:Key="TglButton5_description_confidentiality">Microsoft собирает данные о вашем программном обеспечении. Эта информация используется Microsoft для диагностики проблем совместимости, но вы не поможете Microsoft улучшить совместимость в новых версиях Windows ибо это информация используется только в корыстных целях для Microsoft. Отключение этой возможности предотвратить отправку потенциально конфиденциальной информации.</v:String>
+    <v:String x:Key="TglButton6_description_confidentiality">Microsoft не достаточно списка ваших приложений, она изучает ещё и успешность вашей работы в этих приложениях: как часто вы пользуетесь теми или иными приложениями, сколько вы тратите времени на работу в том или ином приложении.</v:String>
+    <v:String x:Key="TglButton7_description_confidentiality">После внедрения в Windows такой опции, как рукописный ввод, Microsoft однажды решила, что можно улучшать технологию рукописного ввода в своей операционной системе, обучаясь на тех, кто пользуется этой самой Windows. То есть, даже если вы не используете рукописный ввод, Microsoft по умолчанию всё равно узнаёт об этом.</v:String>
+    <v:String x:Key="TglButton8_description_confidentiality">Программа улучшения качества программного обеспечения (CEIP) — это отдельная функция, которая собирает информацию о конфигурации вашего оборудования и о том, как вы используете программное обеспечение и службы. Программа также периодически загружает файл для сбора информации о проблемах, которые могут возникнуть у вас с Windows. Программа добровольная и вам не обязательно отправлять свои данные в Microsoft, нарушая свою конфиденциальность.</v:String>
+    <v:String x:Key="TglButton9_description_confidentiality">Microsoft собирает информацию о пользователе и отправляет на свои сервера. Данный твик допишет в файл hosts и Firewall шпионские доменные имена.</v:String>
+    <v:String x:Key="TglButton10_description_confidentiality">Microsoft Windows получает ваше местоположение и использует данную информацию в рекламных целях.</v:String>
+    <v:String x:Key="TglButton11_description_confidentiality">Даже если вы не используете «Обратную связь», Microsoft всё равно регистрирует частоту ваших обращений в официальную поддержку.</v:String>
+    <v:String x:Key="TglButton12_description_confidentiality">Microsoft Windows умеет распознавать голос специальным модулем распознавания речи и синтеза речи. Даже если вы не используете Cortana или «Специальные возможности» Windows, ваша операционная система по умолчанию всегда занимается проверкой обновления своего движка распознавания голоса.</v:String>
+    <v:String x:Key="TglButton13_description_confidentiality">Функция которая имеет доступ к любым пользовательским данным. Она обменивается какой-то информацией с серверами Microsoft и никак не влияет на работу операционной системы, приложений. Никак не помогает пользователю, что делает её бесполезной.</v:String>
+    <v:String x:Key="TglButton14_description_confidentiality">Microsoft регулярно проводит эксперименты с пользователями Windows, чтобы определить, является ли функция широко используемой, делает ли изменение функции более полезной. Но в свою очередь это нарушение конфиденциальности.</v:String>
+    <v:String x:Key="TglButton15_description_confidentiality">Две службы Diag Truck и dmwappushservice - кейлоггеры. Оказывается они собирают буквально все действия пользователя, включая то что пользователь набирает с клавиатуры  и скурпулезно  передавая на сервера Microsoft без спроса самого пользователя.</v:String>
+    <v:String x:Key="TglButton16_description_confidentiality">А что будет, если сеть недоступна, а всё то добро, которое собирают шпионы, нужно отправить... Есть на этот случай бэкап данных. И бэкапить Windows решила в «Журнал событий Windows».</v:String>
+    <v:String x:Key="TglButton17_description_confidentiality">Служба которая отвечает за сбор и передачу данных о системе и её использованию  или же функция не относящиеся к работе видеодрайвера бесполезна. Зачем и какая именно информация собирается NVIDIA, известно только её самой. Но то, что это не несёт ничего полезного для конечного пользователя, совершенно очевидно.</v:String>
+    <v:String x:Key="TglButton18_description_confidentiality">Инструменты отслеживания действий пользователя не знают предела. Windows имеет ещё один сервис – UAR, призванный выполнять пошаговое протоколирование ваших действий за компьютером, среди которых: снятие скриншотов, набор текста, запуск программ, доступ к веб-камере на заблокированном экране и многое другое.</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="tgl1_interface">Стандартный цвет выделение курсором</v:String>
+    <v:String x:Key="tgl2_interface">Стандартный цвет всплывающей подсказки</v:String>
+    <v:String x:Key="tgl3_interface">Стандартный размер системных кнопак</v:String>
+    <v:String x:Key="tgl4_interface">Стандартная частота мерцания курсора</v:String>
+    <v:String x:Key="tgl5_interface">Стандартный размер Scrollbar</v:String>
+    <v:String x:Key="tgl6_interface">Эффект прозрачности панели задач</v:String>
+    <v:String x:Key="tgl7_interface">Тёмная тема панели задач</v:String>
+    <v:String x:Key="tgl8_interface">Тёмная тема приложений и проводника</v:String>
+    <v:String x:Key="tgl9_interface">Задержка при вызове контекстного меню</v:String>
+    <v:String x:Key="tgl10_interface">Задержка появления превью на панели задач</v:String>
+    <v:String x:Key="tgl11_interface">Стрелки ярлыков файлов, папок или программ</v:String>
+    <v:String x:Key="tgl12_interface">Префикс «Ярлык для...»/ постфикс «– Ярлык»</v:String>
+    <v:String x:Key="tgl13_interface">Значок «Этот компьютер» на Рабочем столе</v:String>
+    <v:String x:Key="tgl14_interface">Значок «Корзина» на Рабочем столе</v:String>
+    <v:String x:Key="tgl15_interface">Выравнивание панели задач (Windows 11)</v:String>
+    <v:String x:Key="tgl16_interface">Значки на панели задач (Windows 11)</v:String>
+    <v:String x:Key="tgl17_interface">Новое урезанное контекстное меню (Windows 11)</v:String>
+    <v:String x:Key="tgl18_interface">Показывать советы и предложения (Windows 11)</v:String>
+    <v:String x:Key="tgl19_interface">Показывать персонализированную рекламу</v:String>
+    <v:String x:Key="tgl20_interface">Восстанавливать прежние окна папок при входе</v:String>
+    <v:String x:Key="tgl21_interface">Уведомления с советами и предложениями Windows</v:String>
+    <v:String x:Key="tgl22_interface">Папки находящиеся в «Этот компьютер»</v:String>
+    <v:String x:Key="tgl23_interface">«Объёмные объекты» в проводнике</v:String>
+    <v:String x:Key="tgl24_interface">Сжатие обоев формата .JPEG рабочего стола</v:String>
+    <v:String x:Key="tgl25_interface">Всплывающие подсказки для элементов рабочего стола</v:String>
+    <v:String x:Key="tgl26_interface">Поисковый запрос с итреграцией «Bing» в меню пуск</v:String>
+    <v:String x:Key="tgl27_interface">Значок «Панель управления» на Рабочем столе</v:String>
+    <v:String x:Key="tgl28_interface">Открывать «Быстрый доступ» вместо «Этот компьютер»</v:String>
+
+    <v:String x:Key="textcolor_interface">Это пример нового цвета.</v:String>
+
+    <v:String x:Key="TglButton1_description_interface">Изменят цвет выделение курсором с синего на серый «Цвет мокрого асфальта».</v:String>
+    <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки с жёлтого на светло голубой «Небесная лазурь».</v:String>
+    <v:String x:Key="TglButton3_description_interface">Твик уменьшит размер кнопок Свернуть, Развернуть, Закрыть в окнах на 20%. Кнопки станут аккуратнее не только у Проводника, но и у всех окон, включая изображения, браузеры и прочие программы.</v:String>
+    <v:String x:Key="TglButton4_description_interface">Ускорит частоту мерцания курсора, по умолчанию значение: 530. Данный твик изменит значение на 250.</v:String>
+    <v:String x:Key="TglButton5_description_interface">Твик сделает Scrollbar в окнах, включая браузеры и программы, тоньше на 17%.</v:String>
+    <v:String x:Key="TglButton6_description_interface">Твик отключит/включит эффект прозрачности. Полупрозрачные окна и поверхности.</v:String>
+    <v:String x:Key="TglButton7_description_interface">Изменяет тему панели задач на светлую или тёмную. Внимание может моргать экран.</v:String>
+    <v:String x:Key="TglButton8_description_interface">Твик поменяет тему проводника на светлую или тёмную, включая браузеры и прочие программы поддерживающие тему устройства. Внимание может моргать экран.</v:String>
+    <v:String x:Key="TglButton9_description_interface">По умолчанию, дополнительные пункты контекстного меню появляются с задержкой 400 мс. Если вы хотите быстрее, можно эту задежку сократить до 20 мс.</v:String>
+    <v:String x:Key="TglButton10_description_interface">По умолчанию, предпросмотр на Панели задач показывает превью запущенных приложений слишком долго. Чтобы превьюшки показывались быстрее, примените данный твик.</v:String>
+    <v:String x:Key="TglButton11_description_interface">Твик позволит убрать стрелки с ярлыков с помощью подмены файла стрелки.</v:String>
+    <v:String x:Key="TglButton12_description_interface">Удаление слишком интуитивного префикса-постфикса для ярлыков.</v:String>
+    <v:String x:Key="TglButton13_description_interface">Значок Компьютера, в отличие от ярлыка Компьютера, лучше тем, что он имеет нужные свойства контекстного меню и избавлен от лишних.</v:String>
+    <v:String x:Key="TglButton14_description_interface">Если вам не нужен значок Корзины на рабочем столе и вы не хотите тратить время на поиски отключение, то можете воспользоваться твикам.</v:String>
+    <v:String x:Key="TglButton15_description_interface">Выберите где вам нужно, чтобы отображались значки на панели задач, по центу или слева</v:String>
+    <v:String x:Key="TglButton16_description_interface">Нет времени на поиски? Твик уберет значки с панели задач: Copilot, Поиск, Предаставление задач, Чат.</v:String>
+    <v:String x:Key="TglButton17_description_interface">Данный твик вернет вам привычное классическое контекстное меню для рабочего стола и «Проводника». Внимание может моргать экран.</v:String>
+    <v:String x:Key="TglButton18_description_interface">Windows 11 иногда показывает подсказки о том, как использовать ту или иную функцию, например, новое меню «Пуск» или «Быстрые настройки». Они полезны, если вы впервые видите Windows 11, а так это бесполезный хлам.</v:String>
+    <v:String x:Key="TglButton19_description_interface">По умолчанию Windows использует собранную информацию для таргетинга рекламы, т. е. для показа рекламы, соответствующей вашим интересам. И буквально эта реклама размещена везде, где доступно свободное пространство для показа. Если вы не хотите, чтобы Windows отображала персонализированную рекламу во всех приложениях Магазина, Проводнике, Параметрах и меню Пуск, то вы можете отключить этот хлам.</v:String>
+    <v:String x:Key="TglButton20_description_interface">По умолчанию, Windows не сохраняет позиции окон, как и их состояние при Выключении. Этот твик позволит запомнить вид открытых папок, чтобы восстановить их после Выхода, Перезагрузки и Выключения.</v:String>
+    <v:String x:Key="TglButton21_description_interface">Твик позволяет отключить все уведомления Windows с советами и предложениями, а так же отключить Second Chance Out of Box Experience (SCOOBE) для пользователей Windows 11. SCOOBE - неожиданно появляющееся окно с предложением срочно завершить настройку устройства и войти в учётную запись Microsoft.</v:String>
+    <v:String x:Key="TglButton22_description_interface">Твик скроет из «Этот компьютер» папки: Рабочий стол, Видео, Документы, Загрузки, Изображения, Музыка.</v:String>
+    <v:String x:Key="TglButton23_description_interface">Уберёт из Обзора Проводника в левом списке меню (из дерева списка проводника) пункт 3D Objects (Объёмные объекты).</v:String>
+    <v:String x:Key="TglButton24_description_interface">По умолчанию, при установке jpeg изображения в качестве обоев рабочего стола, Windows автоматически уменьшает его качество до 85%. Данный твик выставит качество обоев jpeg на 100%.</v:String>
+    <v:String x:Key="TglButton25_description_interface">Твик отключит всплывающие подсказки для элементов рабочего стола при наведении курсора мыши.</v:String>
+    <v:String x:Key="TglButton26_description_interface">По умолчанию Windows отправляет все, что вы ищете в меню «Пуск», на свои серверы, чтобы предоставить вам результаты поиска в Bing. Если вам не нужна интеграция с Bing в меню «Пуск», вы можете применить  твик, чтобы отключить веб-поиск.</v:String>
+    <v:String x:Key="TglButton27_description_interface">Если вам необходим значок панели управления, а не ярлык и у вас нет время на поиски в меню персонализации, то можете воспользоваться твикам.</v:String>
+    <v:String x:Key="TglButton28_description_interface">По умолчанию, когда вы открываете проводник, первая вкладка будет «Быстрый доступ». И чтобы открыть какой-либо диск, нужно сделать лишние движения. Данный твик сделает, чтобы при открытии открывался «Этот компьютер», а не «Быстрый доступ». На старых версиях Windows 10, возможно полное скрытие вкладки «Быстрый доступ».</v:String>
+    <!--#endregion-->
+
+    <!--#region Applications Page -->
+    <v:String x:Key="text0_applications">Приложения удаляются</v:String>
+    <v:String x:Key="text1_applications">без возможности</v:String>
+    <v:String x:Key="text2_applications">на восстановления, кроме OneDrive. Нажмите на</v:String>
+    <v:String x:Key="text3_applications">серую</v:String>
+    <v:String x:Key="text4_applications">иконку</v:String>
+    <v:String x:Key="btntext_applications">Удалить всё</v:String>
+    <v:String x:Key="App1_applications">Microsoft Store</v:String>
+    <v:String x:Key="App2_applications">Microsoft Xbox</v:String>
+    <v:String x:Key="App3_applications">Microsoft Office OneNote</v:String>
+    <v:String x:Key="App4_applications">Microsoft Office Hub</v:String>
+    <v:String x:Key="App5_applications">Microsoft Solitaire Collection</v:String>
+    <v:String x:Key="App6_applications">Mixed Reality</v:String>
+    <v:String x:Key="App7_applications">Погода</v:String>
+    <v:String x:Key="App8_applications">Средство 3D-просмотра</v:String>
+    <v:String x:Key="App9_applications">Microsoft SkypeApp</v:String>
+    <v:String x:Key="App10_applications">OneDrive</v:String>
+    <v:String x:Key="App11_applications">Cortana</v:String>
+    <v:String x:Key="App12_applications">Microsoft Teams</v:String>
+    <v:String x:Key="App13_applications">Музыка Groove</v:String>
+    <v:String x:Key="App14_applications">Фильмы / ТВ</v:String>
+    <v:String x:Key="App15_applications">Запись голоса</v:String>
+    <v:String x:Key="App16_applications">Центр отзывов</v:String>
+    <v:String x:Key="App17_applications">Почта и Календарь</v:String>
+    <v:String x:Key="App18_applications">Виджеты</v:String>
+    <v:String x:Key="App19_applications">Фотографии (Майкрософт)</v:String>
+    <v:String x:Key="App20_applications">Screen Sketch</v:String>
+    <v:String x:Key="App21_applications">Clipchamp - редактор видео</v:String>
+    <v:String x:Key="App22_applications">Советы Майкрософт</v:String>
+    <v:String x:Key="App23_applications">Техническая поддержка</v:String>
+    <v:String x:Key="App24_applications">Microsoft Sticky Notes</v:String>
+    <v:String x:Key="App25_applications">Карты</v:String>
+    <v:String x:Key="App26_applications">Камера</v:String>
+    <v:String x:Key="App27_applications">Paint / Paint3D</v:String>
+    <v:String x:Key="App28_applications">Power Automate</v:String>
+    <v:String x:Key="App29_applications">Люди</v:String>
+    <v:String x:Key="App30_applications">Bing News</v:String>
+    <v:String x:Key="App31_applications">Microsoft To Do</v:String>
+    <v:String x:Key="App32_applications">Будильники и часы Windows</v:String>
+    <v:String x:Key="App33_applications">Связь с телефоном</v:String>
+    <v:String x:Key="App34_applications">Microsoft Outlook</v:String>
+    <v:String x:Key="App35_applications">Спорт</v:String>
+    <v:String x:Key="App36_applications">Финансы</v:String>
+    <v:String x:Key="App37_applications">Яндекс Музыка</v:String>
+    <v:String x:Key="App38_applications">Netflix</v:String>
+    <v:String x:Key="App39_applications">Быстрая поддержка</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_services">Службы связанные с работой Windows Search</v:String>
+    <v:String x:Key="tgl2_services">Службы связанные с работой Xbox</v:String>
+    <v:String x:Key="tgl3_services">Службы связанные с работой USB-модемов и роутеров</v:String>
+    <v:String x:Key="tgl4_services">Службы связанные с Магазином Windows</v:String>
+    <v:String x:Key="tgl5_services">Службы счётчиков производительности</v:String>
+    <v:String x:Key="tgl6_services">Биометрическая служба Windows</v:String>
+    <v:String x:Key="tgl7_services">Службы связанные с работой Bluetooth</v:String>
+    <v:String x:Key="tgl8_services">Службы связанные с работой принтера</v:String>
+    <v:String x:Key="tgl9_services">Служба связанная с работой сканера</v:String>
+    <v:String x:Key="tgl10_services">Службы связанные с работай факса</v:String>
+    <v:String x:Key="tgl11_services">Службы связанные в режиме планшета/смартфона</v:String>
+    <v:String x:Key="tgl12_services">Службы связанные с работой дополнительных мониторов</v:String>
+    <v:String x:Key="tgl13_services">Службы Виртуальные рабочие столы, Ваш телефон</v:String>
+    <v:String x:Key="tgl14_services">Службы связанные с работой локальной сети</v:String>
+    <v:String x:Key="tgl15_services">Службы связанные с обновлением Windows</v:String>
+    <v:String x:Key="tgl16_services">Службы связанные с VPN-клиентами</v:String>
+    <v:String x:Key="tgl17_services">Службы связанные с работой Windows Media</v:String>
+    <v:String x:Key="tgl18_services">Службы связанные с работой удаленных рабочих столов</v:String>
+    <v:String x:Key="tgl19_services">Службы собирающие ошибки и журналы событий</v:String>
+    <v:String x:Key="tgl20_services">Служба удалённого управления файлами WebDAV</v:String>
+    <v:String x:Key="tgl21_services">Службы связанные с работой Смарт-карты</v:String>
+    <v:String x:Key="tgl22_services">Службы связанные с работой Windows Киоск</v:String>
+    <v:String x:Key="tgl23_services">Службы связанные с шифрованием файлов</v:String>
+    <v:String x:Key="tgl24_services">Служба связанная с локализацией Windows</v:String>
+    <v:String x:Key="tgl25_services">Службы связанные с фоновой проверкой безопасности</v:String>
+    <v:String x:Key="tgl26_services">Службы связанные с фоновой диагностикой</v:String>
+    <v:String x:Key="tgl27_services">Службы связанные с кооперативными инструментами</v:String>
+    <v:String x:Key="tgl28_services">Служба связанная с работой Hyper-V</v:String>
+
+    <v:String x:Key="TglButton1_description_services">Отключайте если вы не используете историю файлов и индексирование контента.</v:String>
+    <v:String x:Key="TglButton2_description_services">Отключайте если вы не используете Xbox и геймпады Microsoft.</v:String>
+    <v:String x:Key="TglButton3_description_services">Отключайте если вы подключены к интернету через кабель или Wi-Fi.</v:String>
+    <v:String x:Key="TglButton4_description_services">Отключайте если вы не используете Магазин Windows и его UWP приложения.</v:String>
+    <v:String x:Key="TglButton5_description_services">Отключайте если вы не хотите, чтобы службы анализировали производительность вашей системы.</v:String>
+    <v:String x:Key="TglButton6_description_services">Отключайте если вы не используете авторизацию с помощью Windows Hello, по отпечатку пальца или распзования лица.</v:String>
+    <v:String x:Key="TglButton7_description_services">Отключайте если вы не используете Bluetooth и устройства чья работа связана с Bluetooth.</v:String>
+    <v:String x:Key="TglButton8_description_services">Отключайте если у вас нет принтера.</v:String>
+    <v:String x:Key="TglButton9_description_services">Отключайте если у вас нет сканера.</v:String>
+    <v:String x:Key="TglButton10_description_services">Отключайте если у вас нет факса.</v:String>
+    <v:String x:Key="TglButton11_description_services">Отключайте если у вас стационарный компьютер, ноутбук или нетбук.</v:String>
+    <v:String x:Key="TglButton12_description_services">Отключайте если у вас только один монитор и вы не планируете подключать дополнительные.</v:String>
+    <v:String x:Key="TglButton13_description_services">Отключайте если вы не используете все эти приложения: Виртуальные рабочие столы, Ваш телефон и Ночной свет.</v:String>
+    <v:String x:Key="TglButton14_description_services">Отключайте если вы не используете и не планируете использовать локальную сеть.</v:String>
+    <v:String x:Key="TglButton15_description_services">Отключайте если вы не планируете обновлять Windows. Обратите внимание, что служба влияет на скачивание и обновление приложений из Магазина Windows.</v:String>
+    <v:String x:Key="TglButton16_description_services">Отключайте если вы не используете VPN-клиенты. Может повлиять на работу Xbox.</v:String>
+    <v:String x:Key="TglButton17_description_services">Отключайте если вам не нужна синхронизация файлов и доступ к ним в локальной сети для Проигрывателя Windows Media. Эти службы не является критически важными, вы и дальше сможете использовать проигрыватель.</v:String>
+    <v:String x:Key="TglButton18_description_services">Отключайте если вы не пользуетесь удалённым рабочим столом и не используете серверное подключение к ним.</v:String>
+    <v:String x:Key="TglButton19_description_services">Отключайте если вы не хотите чтобы службы нагружали ваш ПК, пока они занимаются обработкой ошибок.</v:String>
+    <v:String x:Key="TglButton20_description_services">Отключайте если вы не управляете удаленно файлами через Общий доступ или с помощью WebDAV.</v:String>
+    <v:String x:Key="TglButton21_description_services">Отключайте если вы не используете смарт-карты. Смарт-карта представляет собой одну из разновидностей электронных идентификаторов или же пластик с микросхемой. Внешний вид - «Банковская карта». Для повседневного использования Windows, служба не нужна и никогда вам не понадобится.</v:String>
+    <v:String x:Key="TglButton22_description_services">Отключайте если вы не используете Windows Киоск или не знаете что это.</v:String>
+    <v:String x:Key="TglButton23_description_services">Отключайте если вы не используете шифрования дисков BitLocker и шифрования файлов или папок EFS.</v:String>
+    <v:String x:Key="TglButton24_description_services">Отключайте если вы настроили все языки, которые будете использовать и не планируете добавлять новые.</v:String>
+    <v:String x:Key="TglButton25_description_services">Отключайте если вы не используете Защитник Windows и всю дополнительные безопасность Windows.</v:String>
+    <v:String x:Key="TglButton26_description_services">Отключайте если вы вам не нужно, чтобы Windows нагружала систему своей бесполезной диагностикой в фоновом режиме.</v:String>
+    <v:String x:Key="TglButton27_description_services">Отключайте если вы не используете удалённое управления корпоративными приложениями и у вас нет удаленного сервера с которым ваш ПК связывается.</v:String>
+    <v:String x:Key="TglButton28_description_services">Отключайте если вы не используете встроенную систему виртуализации. На работу VirtualBox и ему подобных, никак не влияет.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_system">Скорость курсора мыши</v:String>
+    <v:String x:Key="slider2_system">Задержка повтора клавиатуры</v:String>
+    <v:String x:Key="slider3_system">Скорость повторения клавиатуры</v:String>
+    <v:String x:Key="text_system">Введите текст для проверки параметров клавиатуры</v:String>
+    <v:String x:Key="tgl1_system">Повышенная точность установки указателя</v:String>
+    <v:String x:Key="tgl2_system">Залипание клавиш и фильтрацию ввода</v:String>
+    <v:String x:Key="tgl3_system">Время ожидания до отключения экрана блокировки</v:String>
+    <v:String x:Key="tgl4_system">Технология «Гибернация» и «Быстрый запуск»</v:String>
+    <v:String x:Key="tgl5_system">Окно предупреждения при завершении работы</v:String>
+    <v:String x:Key="tgl6_system">Автообновление приложений через Microsoft Store</v:String>
+    <v:String x:Key="tgl7_system">Задержка появление звука - Realtek Sound driver</v:String>
+    <v:String x:Key="tgl8_system">Защитник Windows, Antimalware, SmartScreen и VBS</v:String>
+    <v:String x:Key="tgl9_system">UAC (Контроль учётных записей)</v:String>
+    <v:String x:Key="tgl10_system">Уведомления о безопасности от Центра уведомлений</v:String>
+    <v:String x:Key="tgl11_system">Предупреждения при запуске любых exe</v:String>
+    <v:String x:Key="tgl12_system">Диагностика оперативной памяти вашего ПК</v:String>
+    <v:String x:Key="tgl13_system">Протоколы Teredo, ISATAP и IPv6</v:String>
+    <v:String x:Key="tgl14_system">Стандартный размер кэша файловой системы</v:String>
+    <v:String x:Key="tgl15_system">Замедления запуска Windows и запуска программ</v:String>
+    <v:String x:Key="tgl16_system">История использования для панели быстрого доступа</v:String>
+    <v:String x:Key="tgl17_system">Автозапуск съёмных носителей</v:String>
+    <v:String x:Key="tgl18_system">Использовать обычную схему электропитания</v:String>
+    <v:String x:Key="tgl19_system">Функция Bluetooth и устройства</v:String>
+    <v:String x:Key="tgl20_system">Брандмауэр Защитника Windows</v:String>
+
+    <v:String x:Key="TextSlider1_description_system">Изменяет скорость движения указателя мыши, экономя ваше время для поисков параметров мыши.</v:String>
+    <v:String x:Key="TextSlider2_description_system">Изменят задержку перед началом повтора вводимого символа, рекомендованное значение - 0.</v:String>
+    <v:String x:Key="TextSlider3_description_system">Изменяет скорость повтора вводимого символа, рекомендованное значение - 31.</v:String>
+    <v:String x:Key="TglButton1_description_system">По умолчанию акселерация мыши придает ускорение движения мыши. Рекомендуется её отключать, так как с включенной акселерацией, равномерное движение и точность направления желает быть лучше.</v:String>
+    <v:String x:Key="TglButton2_description_system">Если вы не желаете чтобы, при выполнении задач у вас то и дело появляется окно, сообщающее предлагающее включить залипание клавиш или фильтрацию ввода, а после ответа «Нет» через некоторое время появляется вновь, то отключайте данную функциию. В дополнении фильтрация ввода влият на скорость повтора клавиатуры и пропуска повторяющихся клавиш.</v:String>
+    <v:String x:Key="TglButton3_description_system">По умолчанию Windows отображает экран блокировки на 1 минуту, после чего гаснет экран и это внезависимости работаете вы от батареи или от сети. Данный твик снимет это ограничения.</v:String>
+    <v:String x:Key="TglButton4_description_system">Теоретически быстрый запуск занимает меньше времени, чем выход из гибернации, но на практике это может быть незаметно. Если вы не пользуетесь ни быстрой загрузкой ни функциями гибернации, то вы также можете их отключить. Тем самым, можно высвободить дополнительное место на жестком диске.</v:String>
+    <v:String x:Key="TglButton5_description_system">Твик позволяет отключить системное сообщение, информирующее, что при выключении или перезагрузке компьютера открытые программы будут завершены принудительно.</v:String>
+    <v:String x:Key="TglButton6_description_system">Если вы предпочитаете обновлять свои приложения из Microsoft Store самостоятельно, вам необходимо выключить функцию автоматического обновления. Тем самым нагрузка на сеть упадет.</v:String>
+    <v:String x:Key="TglButton7_description_system">Некоторые версии драйверов Realtek High Definition Audio имеют неприятный признак некорректной работы, а имменно задержка звука, данный твик это исправит. НЕ РЕКОМЕНДУЕТСЯ использовать твик, если вы не уверенны, что звук включается через несколько секунд или не знаете какой у вас драйвер.</v:String>
+    <v:String x:Key="TglButton8_description_system">Данный твик отключит и остановит Защитника Windows, SmartScreen, несоразмерно большие нагрузки на процессор Antimalware и безопасность на основе виртуализации - Virtualization-Based Security (VBS). Возможно отображение «Включено» при выключенном Защитнике Windows.</v:String>
+    <v:String x:Key="TglButton9_description_system">Твик позволит полностью отключить UAC (Контроль учётных записей), избавить от значков щита, уведомлений безопасности и прочего. UAC не является полноценной программой для защиты.</v:String>
+    <v:String x:Key="TglButton10_description_system">Когда вы отключаете что-нибудь, связанное с безопасностью или защитой, вы постоянно получаете об этом уведомления. Данный твик отключит уведомления о безопасности от Центра уведомлений.</v:String>
+    <v:String x:Key="TglButton11_description_system">Предупреждением системы безопасности Windows, когда запускаете exe, msi, bat, cmd или другие исполняемые файлы скачанные через интернет. Каждый раз подтверждать запуск таких файлов может довольно быстро надоесть, данный твик отключит это предупреждение.</v:String>
+    <v:String x:Key="TglButton12_description_system">Твик отключает диагностику оперативной памяти вашего компьютера, тем самым повысит общую производительность системы.</v:String>
+    <v:String x:Key="TglButton13_description_system">Этот твик отключает ненужные для большинства протоколы Teredo, ISATAP и IPv6. Не рекомендуется использовать этот твик на рабочем компьютере (в организациях).</v:String>
+    <v:String x:Key="TglButton14_description_system">Данный твик включает поддержку большого кэша файловой системы. Увеличение размера кэша файловой системы в общем случае улучшает производительность компьютера, но это, в свою очередь, уменьшает физическое пространство памяти, доступное для приложений и служб.</v:String>
+    <v:String x:Key="TglButton15_description_system">По умолчанию, Windows имеет встроенный механизм замедления запуска программ автозагрузки. Такое решение работает довольно хорошо на старых компьютерах с HDD, но на современных ПК с SSD излишне замедляет запуск системы с программами.</v:String>
+    <v:String x:Key="TglButton16_description_system">Твик отключит историю использования для файлов и папок для панели быстрого доступа.</v:String>
+    <v:String x:Key="TglButton17_description_system">Твик отключит автозапуск для съёмных носителей, которые Проводник Windows мгновенно пытается открыть при подключении к компьютеру.</v:String>
+    <v:String x:Key="TglButton18_description_system">Добавит слегка измененную схему электропитания «Максимальная Производительность», или в случае её наличия, просто переключит на имеющуюся схему электропитания.</v:String>
+    <v:String x:Key="TglButton19_description_system">Если вам не нужен Bluetooth и вы не хотите использовать устройства по Bluetooth. То отключайте его, так же уберет иконку с панели задач.</v:String>
+    <v:String x:Key="TglButton20_description_system">Брандмауэр позволяет вам разрешить или запретить программам выход в интернет, а так же контролировать трафик. Что делает его полезным, если вы намерено хотетите и знаете что делаете, то отключайте. А так не рекомендовано этого делать.</v:String>
+    <!--#endregion-->
+
+    <!--#region Information System Page -->
+    <v:String x:Key="title_win_systemInformation">Операционная система:</v:String>
+    <v:String x:Key="runprocces_systemInformation">Кол-во запущенных процессов:</v:String>
+    <v:String x:Key="title_bios_systemInformation">БИОС:</v:String>
+    <v:String x:Key="title_motherbr_systemInformation">Материнская плата:</v:String>
+    <v:String x:Key="title_cpu_systemInformation">Процессор:</v:String>
+    <v:String x:Key="title_gpu_systemInformation">Видеокарта:</v:String>
+    <v:String x:Key="title_ram_systemInformation">Оперативная память:</v:String>
+    <v:String x:Key="title_disk_systemInformation">Дисковые устройства:</v:String>
+    <v:String x:Key="title_sound_systemInformation">Звуковые устройства:</v:String>
+    <v:String x:Key="title_netadapter_systemInformation">Сетевые адаптеры:</v:String>
+    <v:String x:Key="title_ip_systemInformation">IP-адрес:</v:String>
+    <v:String x:Key="limited_systemInformation">Доступ к сети ограничен</v:String>
+    <v:String x:Key="connection_systemInformation">Отсутствует подключения к интернету</v:String>
+    <v:String x:Key="text_copy_systemInformatin">Скопировано</v:String>
+    <v:String x:Key="driver_not_installed_systemInformatin">У вас не установлен драйвер</v:String>
+    <!--#endregion-->
+
+    <!--#region More Page -->
+    <v:String x:Key="text0_more">Настоятельно</v:String>
+    <v:String x:Key="text1_more">рекомендовано</v:String>
+    <v:String x:Key="text2_more">создать точку восстановления перед использованием утилиты</v:String>
+    <v:String x:Key="title_licens_more">Активация Windows</v:String>
+    <v:String x:Key="text_licens_more">Данный способ не является 100% рабочим и легальным. Покупка ключа будет лучшим решением.</v:String>
+    <v:String x:Key="btntext_licens_more">Активировать</v:String>
+    <v:String x:Key="title_createpoint_more">Сохранить систему</v:String>
+    <v:String x:Key="text_createpoint_more">Создаст точку восстановления системы Windows, даже в случае её отключения.</v:String>
+    <v:String x:Key="btntext_createpoint_more">Сохранить</v:String>
+    <v:String x:Key="title_recovery_more">Восстановить систему</v:String>
+    <v:String x:Key="text_recovery_more">Запустит процесс восстановления, даже когда восстановление системы отключено.</v:String>
+    <v:String x:Key="btntext_recovery_more">Восстановить</v:String>
+    <v:String x:Key="textpoint_more">Точка созданная с помощью GTweak</v:String>
+    <v:String x:Key="title_clear_more">Очистка памяти</v:String>
+    <v:String x:Key="text_clear_more">Очищает системный файловый кэш, чем увеличивает размер доступной памяти.</v:String>
+    <v:String x:Key="btntext_clear_more">Очистить</v:String>
+    <v:String x:Key="title_disablepoint_more">Отключить защиту</v:String>
+    <v:String x:Key="text_disablepoint_more">Отключает точку восстановления системы, но учтите что ранее созданные удаляются.</v:String>
+    <v:String x:Key="btntext_disablepoint_more">Отключить</v:String>
+    <!--#endregion-->
+    
+</ResourceDictionary>

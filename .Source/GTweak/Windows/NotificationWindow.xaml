@@ -1,0 +1,101 @@
+﻿<Window x:Class="GTweak.Windows.NotificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GTweak.Windows"
+        mc:Ignorable="d"
+        Title="{DynamicResource title_win_load}" 
+        Height="125" Width="375" MaxHeight="125" MaxWidth="375" MinHeight="125" MinWidth="375"
+        Background="Transparent" WindowStyle="None" 
+        ShowInTaskbar="False"  IsTabStop="False"
+        SnapsToDevicePixels="True" UseLayoutRounding="True"
+        AllowsTransparency="True" WindowStartupLocation="Manual" ResizeMode="CanMinimize" 
+        Topmost="True" Closing="Window_Closing" Loaded="Window_Loaded">
+    
+    <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
+        <Border.BorderBrush>
+            <LinearGradientBrush>
+                <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28*"/>
+                <RowDefinition Height="93*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="324*"/>
+                    <ColumnDefinition Width="49*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <TextBlock FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="15" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="19,0,0,0">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button x:Name="BtnExit" Style="{StaticResource TitleButtons}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" Cursor="Hand" PreviewMouseDown="BtnExit_PreviewMouseDown">
+                        <Image Width="12">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource DI_BtnExit_In}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=BtnExit}" Value="true">
+                                            <Setter Property="Source" Value="{StaticResource DI_BtnExit}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="93*"/>
+                    <ColumnDefinition Width="263*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Image x:Name="ImageBody" Source="/GTweak.ico" Width="55" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0"/>
+                </Grid>
+
+                <Grid Grid.Column="1" Margin="0,10,0,0" PreviewMouseDown="ActionSelection_PreviewMouseDown">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="68*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock x:Name="TitleSet" Text="Title" Foreground="White" Height="auto" FontFamily="{StaticResource Jura}" FontSize="15"  TextWrapping="Wrap"
+                           HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium" Margin="0,5,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Opacity="0.2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <TextBlock x:Name="TextSet" Text="Text" Foreground="#BFBFBF" Height="auto" FontFamily="{StaticResource Jura}" FontSize="14"  TextWrapping="Wrap"
+                           HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium" MaxWidth="265" Margin="0,0,0,3">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Opacity="0.2"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Border>
+
+</Window>

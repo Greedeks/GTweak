@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTweak", ".Source\GTweak\GTweak.csproj", "{3BC8844E-999F-470E-9217-C8C55C767F89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BC8844E-999F-470E-9217-C8C55C767F89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC8844E-999F-470E-9217-C8C55C767F89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC8844E-999F-470E-9217-C8C55C767F89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC8844E-999F-470E-9217-C8C55C767F89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37EA7A55-F1DA-4C36-A4EE-A3A45F50CF61}
+	EndGlobalSection
+EndGlobal

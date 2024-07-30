@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:15;stroke-miterlimit:10;}
+	.st1{fill:none;}
+	.st2{fill:none;stroke:#1D1D1B;stroke-width:15;stroke-miterlimit:10;}
+</style>
+<polygon class="st0" points="133,469.1 379,469.1 502,256 379,42.9 133,42.9 10,256 "/>
+<path class="st1" d="M312.8,259.9c0-31.2-25.6-56.8-56.8-56.8s-56.8,25.6-56.8,56.8c0,28.4,28.4,51.1,28.4,79.5v5.7h56.8v-5.7
+	C284.4,311,312.8,288.3,312.8,259.9z"/>
+<g>
+	<path class="st2" d="M311,355H201c0,7.7,0,22,0,22c0,30.8,24.2,55,55,55s55-24.2,55-55C311,376.9,311,362.6,311,355z"/>
+	<path class="st2" d="M365.9,190c0-60.5-49.5-109.9-109.9-109.9S146.1,129.6,146.1,190c0,55,55,99,55,153.9v11H311v-11
+		C311,289,365.9,245,365.9,190z"/>
+</g>
+</svg>

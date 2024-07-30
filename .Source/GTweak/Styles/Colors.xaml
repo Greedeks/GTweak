@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="Color_Background" Color="#1E1E1E"/>
+    <SolidColorBrush x:Key="Color_Background_Dark" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="Color_Accent" Color="#54FF9F"/>
+    <SolidColorBrush x:Key="Color_Inactive" Color="#808080"/>
+    <SolidColorBrush x:Key="Color_Over" Color="#6AECA3"/>
+    <SolidColorBrush x:Key="Color_ButtonOver" Color="#93E9BE"/>
+    <SolidColorBrush x:Key="Color_Border" Color="#00D65E"/>
+    <SolidColorBrush x:Key="Color_ToggleButtonBackground" Color="#737373"/>
+
+    <Color x:Key="Color_Shadow">#1AFF7E</Color>
+    <Color x:Key="Color_Border_Gradient_1">#54FF9F</Color>
+    <Color x:Key="Color_Border_Gradient_2">#1AFF7E</Color>
+    
+</ResourceDictionary>

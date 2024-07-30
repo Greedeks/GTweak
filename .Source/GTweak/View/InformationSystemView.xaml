@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="GTweak.View.InformationSystemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTweak.View"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
+             xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
+             d:DesignHeight="550" d:DesignWidth="1100"
+             Style="{StaticResource LaunchPage}" Unloaded="Page_Unloaded" Loaded="Page_Loaded" MouseMove="Page_MouseMove" KeyDown="Page_KeyDown">
+    <UserControl.DataContext>
+        <vm:InformationSystemVM />
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Popup x:Name="PopupCopy" AllowsTransparency="True">
+            <Border x:Name="CopyTextToastBody" Opacity="0" Background="{StaticResource Color_Background_Dark}" BorderThickness="1" CornerRadius="2" BorderBrush="{DynamicResource Color_Accent}" Width="Auto" Height="35" HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="1">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{DynamicResource text_copy_systemInformatin}" Foreground="{DynamicResource Color_Accent}" FontFamily="{StaticResource Jura}" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Popup>
+        
+        <Grid Grid.Row="0">
+
+            <Grid HorizontalAlignment="Left" Margin="50,20,0,0">
+                <Ellipse Height="90" Width="90" Stroke="#4D4D4D" StrokeThickness="5.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.4"/>
+
+                <xrpb:RadialProgressBar x:Name="CPULoad" Value="0" Maximum="100" Width="100" Height="100" Foreground="{StaticResource Color_Accent}" ArcWidth="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <xrpb:RadialProgressBar.Effect>
+                        <DropShadowEffect BlurRadius="40" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
+                    </xrpb:RadialProgressBar.Effect>
+                </xrpb:RadialProgressBar>
+
+                <TextBlock Foreground="#BFBFBF" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,30,0,0">
+                <Run Text="{Binding ElementName=CPULoad, Path=Value, Mode=OneWay,StringFormat=N0}"/><Run Text="%"/>
+                </TextBlock>
+                <TextBlock Text="CPU" Foreground="#BFBFBF" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,50,0,0"/>
+            </Grid>
+
+            <Grid HorizontalAlignment="Center" Margin="0,20,0,0">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource Text}" FontSize="15pt" Width="Auto" Height="65">
+                            <Run Foreground="{StaticResource Color_Accent}" Text="{DynamicResource title_win_systemInformation}"/>
+                            <Run Foreground="#ffffff" Text="{Binding DisplayWindowsName}" PreviewMouseDown="Run_PreviewMouseDown" Cursor="Hand"/>
+                        </TextBlock>
+                        <Image x:Name="ImageWindows" Source="{StaticResource DI_LogoWin}" Height="80" Width="80" HorizontalAlignment="Right" Margin="30,0,0,0"/>
+                    </StackPanel>
+                    <TextBlock  x:Name="ViewCountProcess" HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" MaxWidth="300" Foreground="{StaticResource Color_Inactive}">
+                        <Run Text="{DynamicResource runprocces_systemInformation}"/>
+                        <Run Text="{Binding DisplayCountProcess}"/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid HorizontalAlignment="Right" Margin="0,20,50,0">
+                <Ellipse Height="90" Width="90" Stroke="#4D4D4D" StrokeThickness="5.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.4"/>
+
+                <xrpb:RadialProgressBar x:Name="RAMLoad" Value="0" Maximum="100" Width="100" Height="100" Foreground="{StaticResource Color_Accent}" ArcWidth="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <xrpb:RadialProgressBar.Effect>
+                        <DropShadowEffect BlurRadius="40" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
+                    </xrpb:RadialProgressBar.Effect>
+                </xrpb:RadialProgressBar>
+
+                <TextBlock Foreground="#BFBFBF" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,30,0,0">
+                <Run Text="{Binding ElementName=RAMLoad, Path=Value, Mode=OneWay,StringFormat=N0}"/><Run Text="%"/>
+                </TextBlock>
+                <TextBlock Text="RAM" Foreground="#BFBFBF" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,50,0,0"/>
+            </Grid>
+        </Grid>
+
+        <ScrollViewer Grid.Row="2" Style="{StaticResource ScrollPage}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="auto"/>
+                            <RowDefinition  Height="auto"/>
+                            <RowDefinition  Height="auto"/>
+                            <RowDefinition  Height="auto"/>
+                            <RowDefinition  Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_bios_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayBiosName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                        </Grid>
+
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_motherbr_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayMotherBrName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_cpu_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayCpuName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_gpu_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayGpuName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+
+
+                    <Grid Grid.Row="4">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_ram_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayRamName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="auto"/>
+                        <RowDefinition  Height="auto"/>
+                        <RowDefinition  Height="auto"/>
+                        <RowDefinition  Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_disk_systemInformation}" x:Name="test" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayDiskName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_sound_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplaySoundName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_netadapter_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayNetAdapterName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <StackPanel Orientation="Vertical" Margin="50,20,0,0">
+                            <TextBlock Text="{DynamicResource title_ip_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{Binding DisplayIpAddress}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                    
+            </Grid>
+            </ScrollViewer>
+            
+    </Grid>
+
+</UserControl>
