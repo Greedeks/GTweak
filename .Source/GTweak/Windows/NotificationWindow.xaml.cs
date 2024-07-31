@@ -63,7 +63,7 @@ namespace GTweak.Windows
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_ContentRendered(object sender, EventArgs e)
         {
             Parallel.Invoke(() =>
             {
@@ -74,7 +74,10 @@ namespace GTweak.Windows
                     _mediaPlayer.Play();
                 }
             });
+        }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             switch (ActionChoice)
             {
                 case "logout":

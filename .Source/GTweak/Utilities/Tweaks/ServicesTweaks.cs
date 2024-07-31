@@ -1,13 +1,17 @@
 ﻿using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
+using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : Firewall
     {
+        private readonly static string filesPathUpdate = Settings.PathSystemDisk + "Windows\\System32\\Tasks\\Microsoft\\Windows";
+
         internal void ViewServices(ServicesView servicesV)
         {
             if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch", "Start", null) == null ||
@@ -613,26 +617,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallTime", 3, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallDay", 0, RegistryValueKind.DWord);
 
-                        Process.Start(new ProcessStartInfo()
-                        {
-                            Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\SoftwareDistribution\Download & 
-                            rd /s /q " + Settings.PathSystemDisk + @"\Windows\System32\catroot2",
-                            WindowStyle = ProcessWindowStyle.Hidden,
-                            CreateNoWindow = true,
-                            FileName = "cmd.exe"
-                        });
-
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" && " +
-                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
+                        Parallel.Invoke(()=> ChangeAccessUpdateFolder(isChoose));
                     }
                     else
                     {
@@ -644,17 +629,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
 
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" && " +
-                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
+                        Parallel.Invoke(() => ChangeAccessUpdateFolder(isChoose));
                     }
                     break;
                 case "TglButton16":
@@ -840,6 +815,61 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
             }
+        }
+
+        private static void ChangeAccessUpdateFolder(bool isDenyAccess)
+        {
+            void ChangeStateTask()
+            {
+                string valueState = isDenyAccess ? "/disable" : "/enable";
+
+                TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" && " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
+            }
+
+            Parallel.Invoke(async () => {
+                if (isDenyAccess)
+                {
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\SoftwareDistribution\Download & 
+                            rd /s /q " + Settings.PathSystemDisk + @"\Windows\System32\catroot2",
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        CreateNoWindow = true,
+                        FileName = "cmd.exe"
+                    });
+
+                    ChangeStateTask();
+
+                    await Task.Delay(1000);
+
+                    if (Directory.Exists(filesPathUpdate + "\\UpdateOrchestrator"))
+                        Directory.Move(filesPathUpdate + "\\UpdateOrchestrator", filesPathUpdate + "\\(GTweak UpdateOrchestrator)");
+                    if (Directory.Exists(filesPathUpdate + "\\WindowsUpdate"))
+                            Directory.Move(filesPathUpdate + "\\WindowsUpdate", filesPathUpdate + "\\(GTweak WindowsUpdate)");
+                }
+                else
+                {
+
+                    if (Directory.Exists(filesPathUpdate + "\\(GTweak UpdateOrchestrator)"))
+                        Directory.Move(filesPathUpdate + "\\(GTweak UpdateOrchestrator)", filesPathUpdate + "\\UpdateOrchestrator");
+                    if (Directory.Exists(filesPathUpdate + "\\(GTweak WindowsUpdate)"))
+                        Directory.Move(filesPathUpdate + "\\(GTweak WindowsUpdate)", filesPathUpdate + "\\WindowsUpdate");
+
+                    await Task.Delay(500);
+
+                    ChangeStateTask();
+                }
+            });
         }
     }
 }

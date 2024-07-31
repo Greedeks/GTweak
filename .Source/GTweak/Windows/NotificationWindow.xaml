@@ -11,7 +11,7 @@
         ShowInTaskbar="False"  IsTabStop="False"
         SnapsToDevicePixels="True" UseLayoutRounding="True"
         AllowsTransparency="True" WindowStartupLocation="Manual" ResizeMode="CanMinimize" 
-        Topmost="True" Closing="Window_Closing" Loaded="Window_Loaded">
+        Topmost="True" Closing="Window_Closing" Loaded="Window_Loaded" ContentRendered="Window_ContentRendered">
     
     <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
         <Border.BorderBrush>
