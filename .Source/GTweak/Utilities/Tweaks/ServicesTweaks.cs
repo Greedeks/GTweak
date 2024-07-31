@@ -2,9 +2,7 @@
 using GTweak.View;
 using Microsoft.Win32;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
-using System;
+using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -607,8 +605,13 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WaaSMedicSvc", "Start", 4, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DoSvc", "Start", 4, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", 4, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "AllowMUUpdateService", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "AUOptions", 2, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "AutomaticMaintenanceEnabled", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "NoAutoRebootWithLoggedOnUsers", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallTime", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallDay", 0, RegistryValueKind.DWord);
 
                         Process.Start(new ProcessStartInfo()
                         {
@@ -618,6 +621,18 @@ namespace GTweak.Utilities.Tweaks
                             CreateNoWindow = true,
                             FileName = "cmd.exe"
                         });
+
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" && " +
+                            "schtasks /change /disable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
                     }
                     else
                     {
@@ -628,6 +643,18 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DoSvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
+
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" && " +
+                            "schtasks /change /enable /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
                     }
                     break;
                 case "TglButton16":
@@ -813,6 +840,56 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
             }
+        }
+
+        private static void EnablingTasks(string[] _tasklist)
+        {
+            Parallel.Invoke(() =>
+            {
+                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                foreach (string taskname in _tasklist)
+                {
+                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
+                    if (_task != null)
+                    {
+                        if (!_task.Enabled)
+                        {
+                            _task.Definition.Settings.Enabled = true;
+                            try
+                            {
+                                _task.RegisterChanges();
+                            }
+                            catch { }
+                        }
+
+                    }
+                }
+            });
+        }
+
+        private static void DisablingTasks(string[] _tasklist)
+        {
+            Parallel.Invoke(() =>
+            {
+                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                foreach (string taskname in _tasklist)
+                {
+                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
+                    if (_task != null)
+                    {
+                        if (_task.Enabled)
+                        {
+                            _task.Definition.Settings.Enabled = false;
+                            try
+                            {
+                                _task.RegisterChanges();
+                            }
+                            catch { }
+                        }
+
+                    }
+                }
+            });
         }
     }
 }
