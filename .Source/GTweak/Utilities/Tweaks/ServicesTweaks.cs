@@ -1,7 +1,7 @@
 ﻿using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
-using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : Firewall
     {
-        private readonly static string filesPathUpdate = Settings.PathSystemDisk + "Windows\\System32\\Tasks\\Microsoft\\Windows";
+        private static readonly string filesPathUpdate = Settings.PathSystemDisk + "Windows\\System32\\Tasks\\Microsoft\\Windows";
 
         internal void ViewServices(ServicesView servicesV)
         {
@@ -616,8 +616,6 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "NoAutoRebootWithLoggedOnUsers", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallTime", 3, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallDay", 0, RegistryValueKind.DWord);
-
-                        Parallel.Invoke(()=> ChangeAccessUpdateFolder(isChoose));
                     }
                     else
                     {
@@ -628,9 +626,10 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DoSvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
-
-                        Parallel.Invoke(() => ChangeAccessUpdateFolder(isChoose));
                     }
+                    BackgroundWorker backgroundWorker = new BackgroundWorker();
+                    backgroundWorker.DoWork += (s, e) => { ChangeAccessUpdateFolder(isChoose); };
+                    backgroundWorker.RunWorkerAsync();
                     break;
                 case "TglButton16":
                     if (isChoose)
@@ -817,7 +816,7 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        private static void ChangeAccessUpdateFolder(bool isDenyAccess)
+        private async static void ChangeAccessUpdateFolder(bool isDenyAccess)
         {
             void ChangeStateTask()
             {
@@ -836,40 +835,38 @@ namespace GTweak.Utilities.Tweaks
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
             }
 
-            Parallel.Invoke(async () => {
-                if (isDenyAccess)
+            if (isDenyAccess)
+            {
+                Process.Start(new ProcessStartInfo()
                 {
-                    Process.Start(new ProcessStartInfo()
-                    {
-                        Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\SoftwareDistribution\Download & 
+                    Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\SoftwareDistribution\Download & 
                             rd /s /q " + Settings.PathSystemDisk + @"\Windows\System32\catroot2",
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        CreateNoWindow = true,
-                        FileName = "cmd.exe"
-                    });
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
+                    FileName = "cmd.exe"
+                });
 
-                    ChangeStateTask();
+                ChangeStateTask();
 
-                    await Task.Delay(1000);
+                await Task.Delay(1000);
 
-                    if (Directory.Exists(filesPathUpdate + "\\UpdateOrchestrator"))
-                        Directory.Move(filesPathUpdate + "\\UpdateOrchestrator", filesPathUpdate + "\\(GTweak UpdateOrchestrator)");
-                    if (Directory.Exists(filesPathUpdate + "\\WindowsUpdate"))
-                            Directory.Move(filesPathUpdate + "\\WindowsUpdate", filesPathUpdate + "\\(GTweak WindowsUpdate)");
-                }
-                else
-                {
+                if (Directory.Exists(filesPathUpdate + "\\UpdateOrchestrator"))
+                    Directory.Move(filesPathUpdate + "\\UpdateOrchestrator", filesPathUpdate + "\\(GTweak UpdateOrchestrator)");
+                if (Directory.Exists(filesPathUpdate + "\\WindowsUpdate"))
+                    Directory.Move(filesPathUpdate + "\\WindowsUpdate", filesPathUpdate + "\\(GTweak WindowsUpdate)");
+            }
+            else
+            {
 
-                    if (Directory.Exists(filesPathUpdate + "\\(GTweak UpdateOrchestrator)"))
-                        Directory.Move(filesPathUpdate + "\\(GTweak UpdateOrchestrator)", filesPathUpdate + "\\UpdateOrchestrator");
-                    if (Directory.Exists(filesPathUpdate + "\\(GTweak WindowsUpdate)"))
-                        Directory.Move(filesPathUpdate + "\\(GTweak WindowsUpdate)", filesPathUpdate + "\\WindowsUpdate");
+                if (Directory.Exists(filesPathUpdate + "\\(GTweak UpdateOrchestrator)"))
+                    Directory.Move(filesPathUpdate + "\\(GTweak UpdateOrchestrator)", filesPathUpdate + "\\UpdateOrchestrator");
+                if (Directory.Exists(filesPathUpdate + "\\(GTweak WindowsUpdate)"))
+                    Directory.Move(filesPathUpdate + "\\(GTweak WindowsUpdate)", filesPathUpdate + "\\WindowsUpdate");
 
-                    await Task.Delay(500);
+                await Task.Delay(500);
 
-                    ChangeStateTask();
-                }
-            });
+                ChangeStateTask();
+            }
         }
     }
 }
