@@ -841,55 +841,5 @@ namespace GTweak.Utilities.Tweaks
                     break;
             }
         }
-
-        private static void EnablingTasks(string[] _tasklist)
-        {
-            Parallel.Invoke(() =>
-            {
-                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in _tasklist)
-                {
-                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
-                    if (_task != null)
-                    {
-                        if (!_task.Enabled)
-                        {
-                            _task.Definition.Settings.Enabled = true;
-                            try
-                            {
-                                _task.RegisterChanges();
-                            }
-                            catch { }
-                        }
-
-                    }
-                }
-            });
-        }
-
-        private static void DisablingTasks(string[] _tasklist)
-        {
-            Parallel.Invoke(() =>
-            {
-                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in _tasklist)
-                {
-                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
-                    if (_task != null)
-                    {
-                        if (_task.Enabled)
-                        {
-                            _task.Definition.Settings.Enabled = false;
-                            try
-                            {
-                                _task.RegisterChanges();
-                            }
-                            catch { }
-                        }
-
-                    }
-                }
-            });
-        }
     }
 }
