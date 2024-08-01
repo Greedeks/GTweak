@@ -698,6 +698,9 @@ namespace GTweak.Utilities.Tweaks
                                 {
                                     _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
                                     _powercfg.Start();
+
+                                    _powercfg.StartInfo.Arguments = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE";
+                                    _powercfg.Start();
                                 }
                             }
                         }
@@ -732,6 +735,9 @@ namespace GTweak.Utilities.Tweaks
 
                             _powercfg.StartInfo.Arguments = $"/setactive {_guid}";
                             _powercfg.Start();
+
+                            _powercfg.StartInfo.Arguments = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE";
+                            _powercfg.Start();
                         }
                     }
                 }
@@ -755,14 +761,6 @@ namespace GTweak.Utilities.Tweaks
                 }
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-            finally
-            {
-                using (_powercfg)
-                {
-                    _powercfg.StartInfo.Arguments = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE";
-                    _powercfg.Start();
-                }
-            }
 
         }
     }
