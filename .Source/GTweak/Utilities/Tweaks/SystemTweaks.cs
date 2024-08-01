@@ -125,7 +125,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
 
             if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter", "EnabledV9", null) == null ||
@@ -310,7 +310,7 @@ namespace GTweak.Utilities.Tweaks
 
                     isNetshState = getStateNetsh.Contains("default");
                 }
-                catch { }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             });
         }
 
@@ -433,7 +433,7 @@ namespace GTweak.Utilities.Tweaks
                                 keychange?.SetValue("PerformanceIdleTime", _dataTime, RegistryValueKind.Binary);
                             }
                         }
-                    } catch { }
+                    } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     break;
                 case "TglButton8":
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -754,7 +754,15 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            finally
+            {
+                using (_powercfg)
+                {
+                    _powercfg.StartInfo.Arguments = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE";
+                    _powercfg.Start();
+                }
+            }
 
         }
     }

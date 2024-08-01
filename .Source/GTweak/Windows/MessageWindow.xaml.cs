@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -28,7 +29,7 @@ namespace GTweak.Windows
                     time = time.Add(TimeSpan.FromSeconds(-1));
                 }, Application.Current.Dispatcher);
 
-            } catch { }
+            } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             timer?.Start();
 
             if (isViolationSystem)

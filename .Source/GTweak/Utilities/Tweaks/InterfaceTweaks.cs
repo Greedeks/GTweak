@@ -312,7 +312,7 @@ namespace GTweak.Utilities.Tweaks
                         process.Start();
                     }
                 }
-                catch { }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 finally
                 {
                     Process[] explorer = Process.GetProcessesByName("explorer");
@@ -446,7 +446,7 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
                         }
                     }
-                    catch { };
+                    catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); };
                     break;
                 case "TglButton12":
                     if (isChoose)

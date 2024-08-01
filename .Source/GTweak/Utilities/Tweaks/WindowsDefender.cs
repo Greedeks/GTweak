@@ -299,15 +299,12 @@ namespace GTweak.Utilities.Tweaks
                 "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 4 /f");
         }
 
-        private void KillProcess(string Processname)
+        private void KillProcess(string getName)
         {
-            foreach (Process proc in Process.GetProcessesByName(Processname))
+            foreach (Process _process in Process.GetProcessesByName(getName))
             {
-                try
-                {
-                    proc.Kill();
-                }
-                catch { }
+                try { _process.Kill();}
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }
 
@@ -330,7 +327,7 @@ namespace GTweak.Utilities.Tweaks
 
                 return comandoAEjecutar.StandardOutput.ReadToEnd();
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
             return null;
         }
@@ -350,7 +347,7 @@ namespace GTweak.Utilities.Tweaks
             foreach (FileInfo file in dir.GetFiles())
             {
                 try { file.Delete(); }
-                catch { }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
 
             foreach (DirectoryInfo subDir in dir.GetDirectories())
@@ -375,7 +372,7 @@ namespace GTweak.Utilities.Tweaks
             foreach (var defenderServ in defenderConfigDefault)
             {
                 try { Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\" + defenderServ.Key, true)?.SetValue("Start", 4, RegistryValueKind.DWord); }
-                catch { }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }
 
@@ -384,7 +381,7 @@ namespace GTweak.Utilities.Tweaks
             foreach (var defenderServ in defenderConfigDefault)
             {
                 try { Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\" + defenderServ.Key, true)?.SetValue("Start", defenderConfigDefault.Values, RegistryValueKind.DWord); }
-                catch { }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using NetFwTypeLib;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -32,8 +33,8 @@ namespace GTweak.Utilities.Tweaks
                 }
                 else
                 {
-                    try { RulesUpdateIN(isChoose); } catch { }
-                    try { RulesUpdateOUT(isChoose); } catch { }
+                    try { RulesUpdateIN(isChoose); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    try { RulesUpdateOUT(isChoose); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
             } 
             catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
@@ -168,7 +169,7 @@ namespace GTweak.Utilities.Tweaks
                     RulesHosts(isCheck);
                 else
                 {
-                    try { RulesHosts(isCheck); } catch { }
+                    try { RulesHosts(isCheck); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
             }
             catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }

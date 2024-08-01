@@ -1,6 +1,8 @@
 ﻿using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
+using System.Diagnostics;
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Threading;
@@ -336,7 +338,7 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry");
                             RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", 1, RegistryValueKind.DWord);
                         }
-                        catch { };
+                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     }
                     break;
                 case "TglButton7":
@@ -364,7 +366,8 @@ namespace GTweak.Utilities.Tweaks
                     {
                         BlockSpyDomain(isChoose);
 
-                        try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); } catch { }
+                        try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); } 
+                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
                         File.Move(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)");
 
@@ -386,7 +389,7 @@ namespace GTweak.Utilities.Tweaks
                             File.Copy(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)", Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", true);
                             File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)");
                         }
-                        catch { }
+                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     }
                     break;
                 case "TglButton10":

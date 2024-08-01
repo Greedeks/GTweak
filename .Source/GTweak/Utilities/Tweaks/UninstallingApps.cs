@@ -159,7 +159,7 @@ namespace GTweak.Utilities.Tweaks
                 else if (_appName == "OneDrive")
                     DeletedOneDrive();
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
         internal static void DeletedApp_All()
@@ -193,7 +193,7 @@ namespace GTweak.Utilities.Tweaks
                 CortanaTweak(true);
                 DeletedOneDrive();
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
 

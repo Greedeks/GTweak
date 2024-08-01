@@ -137,7 +137,8 @@ namespace GTweak.Utilities
 
                     foreach (KeyValuePair<string,string> addSystem in СonfigSettings.configSystem)
                         settingsFileINI.WriteConfig("System Tweaks", addSystem.Key, addSystem.Value);
-                } catch { }
+                }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }
 
@@ -179,7 +180,7 @@ namespace GTweak.Utilities
                     FileName = "cmd.exe"
                 });
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
     }
 }

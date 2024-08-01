@@ -160,7 +160,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
             }
-            catch { }
+            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
         private static bool SetIncreasePrivilege(string privilegeName)

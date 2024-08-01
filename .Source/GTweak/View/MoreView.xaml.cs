@@ -1,6 +1,8 @@
 ﻿using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
+using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -80,7 +82,7 @@ namespace GTweak.View
                 BackgroundWorker backgroundWorker = new BackgroundWorker();
                 backgroundWorker.DoWork += (_s, _e) =>
                 {
-                    try { RecoveryPoint.DisablePoint(); } catch { }
+                    try { RecoveryPoint.DisablePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 };
                 backgroundWorker.RunWorkerCompleted += (_s, _e) =>
                 {
