@@ -53,12 +53,12 @@ namespace GTweak.View
                     if (_appName != "YandexMusic")
                     {
                         UninstallingApps.RemovalProcess[_appName] = true;
-                        Parallel.Invoke(() => UninstallingApps.DeletedApp(_appName));
+                        UninstallingApps.DeletedApp(_appName);
                     }
                     else
                     {
                         UninstallingApps.RemovalProcess["Yandex.Music"] = true;
-                        Parallel.Invoke(() => UninstallingApps.DeletedApp("Yandex.Music"));
+                        UninstallingApps.DeletedApp("Yandex.Music");
                     }
                 };
                 backgroundWorker.RunWorkerCompleted += async (s, _) =>
@@ -80,7 +80,7 @@ namespace GTweak.View
                 new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
 
                 BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += (s, _) => Parallel.Invoke(UninstallingApps.ResetOneDrive);
+                backgroundWorker.DoWork += (s, _) => UninstallingApps.ResetOneDrive();
                 backgroundWorker.RunWorkerCompleted += async (s, _) =>
                 {
                     await Task.Delay(15000);
