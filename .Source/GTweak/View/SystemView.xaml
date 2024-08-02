@@ -48,6 +48,7 @@
                         <uc:ToggleButton x:Name="TglButton6" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl6_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton7" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl7_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton19" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl19_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton21" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl21_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                     </StackPanel>
                 </Grid>
 
@@ -65,6 +66,7 @@
                         <uc:ToggleButton x:Name="TglButton17" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl17_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton18" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl18_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton20" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl20_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton22" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl22_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                     </StackPanel>
                 </Grid>
             </Grid>

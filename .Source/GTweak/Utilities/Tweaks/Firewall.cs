@@ -1,5 +1,6 @@
 ﻿using NetFwTypeLib;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,6 +10,12 @@ namespace GTweak.Utilities.Tweaks
     internal abstract class Firewall
     {
         private static readonly string nameRules = @"GTweak - Windows Update blocking";
+        private static readonly SortedList<string, string> programPaths = new SortedList<string, string>
+        {
+            ["MoUso_New"] = @"Windows\UUS\amd64\MoUsoCoreWorker.exe",
+            ["MoUso_Old"] = @"Windows\System32\MoUsoCoreWorker.exe",
+            ["Uso"] = @"Windows\System32\usoclient.exe",
+        };
         private static bool CheckRulesWindows(string nameRule)
         {
             bool isCheck = true;
@@ -28,24 +35,24 @@ namespace GTweak.Utilities.Tweaks
                 if (CheckRulesWindows(nameRules) && isChoose)
                 {
                     Parallel.Invoke(
-                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules); },
-                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules," (Old Way)")); },
-                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules," (Update Orchestrator)")); },
-                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules); },
-                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules, " (Old Way)")); },
-                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules, " (Update Orchestrator)")); });
+                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules); },
+                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules," (Old Way)")); },
+                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules," (Update Orchestrator)")); },
+                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @programPaths["MoUso_New"], nameRules); },
+                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)")); },
+                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)")); });
                 }
                 else
                 {
                     try { 
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules);
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules, " (Old Way)"));
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules, " (Update Orchestrator)"));
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
                     } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     try { 
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules);
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules, " (Old Way)"));
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules, " (Update Orchestrator)"));
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
                     } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
             } 

@@ -322,6 +322,8 @@
     <v:String x:Key="tgl18_system">Use a conventional power supply circuit</v:String>
     <v:String x:Key="tgl19_system">Bluetooth and device function</v:String>
     <v:String x:Key="tgl20_system">Windows Defender Firewall</v:String>
+    <v:String x:Key="tgl21_system">Windows feature «Game Mode»</v:String>
+    <v:String x:Key="tgl22_system">Xbox feature «Game Bar»</v:String>
 
     <v:String x:Key="TextSlider1_description_system">Changes the speed of the mouse pointer, saving you time to search for mouse parameters.</v:String>
     <v:String x:Key="TextSlider2_description_system">Will change the delay before starting to repeat the entered character, the recommended value is 0.</v:String>
@@ -346,6 +348,8 @@
     <v:String x:Key="TglButton18_description_system">Will add a slightly modified «Maximum Performance» power supply circuit, or if available, simply switch to the existing power supply circuit.</v:String>
     <v:String x:Key="TglButton19_description_system">If you don't need Bluetooth and you don't want to use Bluetooth devices. Then disable it, it will also remove the icon from the taskbar.</v:String>
     <v:String x:Key="TglButton20_description_system">The firewall allows you to allow or deny programs access to the Internet, as well as control traffic. Which makes it useful, if you intentionally want to and know what you're doing, then turn it off. And it is not recommended to do this.</v:String>
+    <v:String x:Key="TglButton21_description_system">The game mode does not have much effect on powerful systems. However, if you have a lot of processes running in the background, then the mode ensures that background processes will not affect the operation of the game.</v:String>
+    <v:String x:Key="TglButton22_description_system">A function for recording your games. By and large, it uses up the resources of your system. There are many better alternatives, and in addition, which do not open spontaneously.</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->

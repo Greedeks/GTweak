@@ -243,22 +243,44 @@ namespace GTweak.Utilities.Tweaks
             else
                 systemV.TglButton17.StateNA = false;
 
+
             if (!Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "Description", string.Empty).ToString().Contains("-18") && 
                 !Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
                 systemV.TglButton18.StateNA = true;
             else
                 systemV.TglButton18.StateNA = false;
 
+
             if (isBluetoothStatus)
                 systemV.TglButton19.StateNA = true;
             else
                 systemV.TglButton19.StateNA = false;
+
 
             if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpssvc", "Start", null).ToString() != "4")
                 systemV.TglButton20.StateNA = true;
             else
                 systemV.TglButton20.StateNA = false;
 
+
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AutoGameModeEnabled", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AutoGameModeEnabled", null).ToString() != "0" ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AllowAutoGameMode", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AllowAutoGameMode", null).ToString() != "0")
+                systemV.TglButton21.StateNA = true;
+            else
+                systemV.TglButton21.StateNA = false;
+
+
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", null).ToString() != "0" ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", null).ToString() != "0" ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\System\GameConfigStore", "GameDVR_Enabled", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\System\GameConfigStore", "GameDVR_Enabled", null).ToString() != "0")
+                systemV.TglButton22.StateNA = true;
+            else
+                systemV.TglButton22.StateNA = false;
         }
 
         internal void ViewBluetoothStatus()
@@ -595,6 +617,32 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "2", RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "EnableFirewall", "0", RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "EnableFirewall", "0", RegistryValueKind.DWord);
+                    }
+                    break;
+                case "TglButton21":
+                    if (isChoose)
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AllowAutoGameMode", 0, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AllowAutoGameMode", 1, RegistryValueKind.DWord);
+                    }
+                    break;
+                case "TglButton22":
+                    if (isChoose)
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"System\GameConfigStore", "GameDVR_Enabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", 0, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"System\GameConfigStore", "GameDVR_Enabled", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", 1, RegistryValueKind.DWord);
                     }
                     break;
             }
