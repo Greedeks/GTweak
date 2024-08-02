@@ -243,8 +243,8 @@ namespace GTweak.Utilities.Tweaks
             else
                 systemV.TglButton17.StateNA = false;
 
-            if (!Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "Description", null).ToString().Contains("-18") && 
-                !Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "FriendlyName", null).ToString().Contains("-19"))
+            if (!Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "Description", string.Empty).ToString().Contains("-18") && 
+                !Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
                 systemV.TglButton18.StateNA = true;
             else
                 systemV.TglButton18.StateNA = false;
@@ -669,7 +669,7 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        private static void SetPowercfg(bool isChoose)
+        private async static void SetPowercfg(bool isChoose)
         {
             Process _powercfg = new Process()
             {
@@ -679,7 +679,10 @@ namespace GTweak.Utilities.Tweaks
                         WindowStyle = ProcessWindowStyle.Hidden
                     },
             };
-            string _serchScheme = default;
+
+            string _serchScheme = default, 
+                unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
+                inputPath = Settings.PathTempFiles + @"\UltimatePerformance.pow";
 
             try
             {
@@ -699,7 +702,7 @@ namespace GTweak.Utilities.Tweaks
                                     _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
                                     _powercfg.Start();
 
-                                    _powercfg.StartInfo.Arguments = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE";
+                                    _powercfg.StartInfo.Arguments = unlockFrequency;
                                     _powercfg.Start();
                                 }
                             }
@@ -726,17 +729,15 @@ namespace GTweak.Utilities.Tweaks
 
                         using (_powercfg)
                         {
-                            string inputPath = Settings.PathTempFiles + @"\UltimatePerformance.pow";
-
                             _powercfg.StartInfo.Arguments = $"-import \"{inputPath}\" {_guid}";
                             _powercfg.Start();
 
-                            Thread.Sleep(3);
+                            await Task.Delay(5);
 
                             _powercfg.StartInfo.Arguments = $"/setactive {_guid}";
                             _powercfg.Start();
 
-                            _powercfg.StartInfo.Arguments = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE";
+                            _powercfg.StartInfo.Arguments = unlockFrequency;
                             _powercfg.Start();
                         }
                     }

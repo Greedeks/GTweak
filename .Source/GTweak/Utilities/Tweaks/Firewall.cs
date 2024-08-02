@@ -8,13 +8,14 @@ namespace GTweak.Utilities.Tweaks
 {
     internal abstract class Firewall
     {
-        private static bool CheckRulesWindowsUpdate()
+        private static readonly string nameRules = @"GTweak - Windows Update blocking";
+        private static bool CheckRulesWindows(string nameRule)
         {
             bool isCheck = true;
             INetFwPolicy2 firewallRuleCheck = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
             foreach (INetFwRule rule in firewallRuleCheck.Rules)
             {
-                if (rule.Name == "GTweak - Windows Update blocking")
+                if (rule.Name == nameRule)
                     isCheck = false;
             }
             return isCheck;
@@ -22,142 +23,82 @@ namespace GTweak.Utilities.Tweaks
 
         protected static void BlockWindowsUpdate(bool isChoose)
         {
-            App.ViewLang();
             try
             {
-                if (CheckRulesWindowsUpdate() && isChoose)
+                if (CheckRulesWindows(nameRules) && isChoose)
                 {
                     Parallel.Invoke(
-                        () => { RulesUpdateIN(isChoose); },
-                        () => { RulesUpdateOUT(isChoose); });
+                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules); },
+                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules," (Old Way)")); },
+                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules," (Update Orchestrator)")); },
+                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules); },
+                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules, " (Old Way)")); },
+                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules, " (Update Orchestrator)")); });
                 }
                 else
                 {
-                    try { RulesUpdateIN(isChoose); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-                    try { RulesUpdateOUT(isChoose); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    try { 
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules);
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules, " (Old Way)"));
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules, " (Update Orchestrator)"));
+                    } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    try { 
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe", nameRules);
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe", string.Concat(nameRules, " (Old Way)"));
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @"Windows\System32\usoclient.exe", string.Concat(nameRules, " (Update Orchestrator)"));
+                    } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
             } 
-            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch 
+            {
+                App.ViewLang();
+                new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); 
+            }
         }
 
-        private static void RulesUpdateIN(in bool isChoose)
+        private static void RulesUpdateIN(in bool isChoose, in string pathProgram, in string nameRule)
         {
             INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
 
-            firewallRule.ApplicationName = Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe";
+            firewallRule.ApplicationName = pathProgram;
             firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
             firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN;
             firewallRule.Description = "Windows update blocking";
             firewallRule.Enabled = true;
             firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = $"GTweak - Windows Update blocking";
+            firewallRule.Name = nameRule;
 
             if (isChoose)
             {
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking");
+                firewallPolicy.Rules.Remove(nameRule);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking");
-
-            firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
-            firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
-
-            firewallRule.ApplicationName = Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe";
-            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN;
-            firewallRule.Description = "Windows update blocking";
-            firewallRule.Enabled = true;
-            firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = $"GTweak - Windows Update blocking (Old Way)";
-
-            if (isChoose)
-            {
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Old Way)");
-                firewallPolicy.Rules.Add(firewallRule);
-            }
-            else
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Old Way)");
-
-            firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
-            firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
-
-            firewallRule.ApplicationName = Settings.PathSystemDisk + @"Windows\System32\usoclient.exe";
-            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN;
-            firewallRule.Description = "Windows update blocking";
-            firewallRule.Enabled = true;
-            firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = $"GTweak - Windows Update blocking (Update Orchestrator)";
-
-            if (isChoose)
-            {
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Update Orchestrator)");
-                firewallPolicy.Rules.Add(firewallRule);
-            }
-            else
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Update Orchestrator)");
+                firewallPolicy.Rules.Remove(nameRule);
         }
 
-        private static void RulesUpdateOUT(in bool isChoose)
+        private static void RulesUpdateOUT(in bool isChoose, in string pathProgram, in string nameRule)
         {
             INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
 
-            firewallRule.ApplicationName = Settings.PathSystemDisk + @"Windows\UUS\amd64\MoUsoCoreWorker.exe";
+            firewallRule.ApplicationName = pathProgram;
             firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
             firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
             firewallRule.Description = "Windows update blocking";
             firewallRule.Enabled = true;
             firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = $"GTweak - Windows Update blocking";
+            firewallRule.Name = nameRule;
 
             if (isChoose)
             {
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking");
+                firewallPolicy.Rules.Remove(nameRule);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking");
+                firewallPolicy.Rules.Remove(nameRule);
 
-            firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
-            firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
-
-            firewallRule.ApplicationName = Settings.PathSystemDisk + @"Windows\System32\MoUsoCoreWorker.exe";
-            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
-            firewallRule.Description = "Windows update blocking";
-            firewallRule.Enabled = true;
-            firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = $"GTweak - Windows Update blocking (Old Way)";
-
-            if (isChoose)
-            {
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Old Way)");
-                firewallPolicy.Rules.Add(firewallRule);
-            }
-            else
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Old Way)");
-
-            firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
-            firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
-
-            firewallRule.ApplicationName = Settings.PathSystemDisk + @"Windows\System32\usoclient.exe";
-            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
-            firewallRule.Description = "Windows update blocking";
-            firewallRule.Enabled = true;
-            firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = $"GTweak - Windows Update blocking (Update Orchestrator)";
-
-            if (isChoose)
-            {
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Update Orchestrator)");
-                firewallPolicy.Rules.Add(firewallRule);
-            }
-            else
-                firewallPolicy.Rules.Remove($"GTweak - Windows Update blocking (Update Orchestrator)");
         }
 
         protected static void BlockSpyDomain(in bool isCheck)
@@ -165,7 +106,7 @@ namespace GTweak.Utilities.Tweaks
             App.ViewLang();
             try
             {
-                if (CheckRulesWindowsUpdate() && isCheck)
+                if (CheckRulesWindows(@"GTweak - Spy domain names") && isCheck)
                     RulesHosts(isCheck);
                 else
                 {
@@ -202,15 +143,15 @@ namespace GTweak.Utilities.Tweaks
             firewallRule.Description = "Spy domain names";
             firewallRule.Enabled = true;
             firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = $"GTweak - Spy domain names";
+            firewallRule.Name = @"GTweak - Spy domain names";
 
             if (isChoose)
             {
-                firewallPolicy.Rules.Remove($"GTweak - Spy domain names");
+                firewallPolicy.Rules.Remove(@"GTweak - Spy domain names");
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
-                firewallPolicy.Rules.Remove($"GTweak - Spy domain names");
+                firewallPolicy.Rules.Remove(@"GTweak - Spy domain names");
         }
     }
 }
