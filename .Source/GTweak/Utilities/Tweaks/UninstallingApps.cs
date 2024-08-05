@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingApps
     {
+        private static bool isLocalAccount = false;
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         internal static Dictionary<string, bool> RemovalProcess = new Dictionary<string, bool>
         {
@@ -262,9 +264,15 @@ namespace GTweak.Utilities.Tweaks
                 process.Dispose();
             }
 
+            string _arguments = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive""";
+
+            if (isLocalAccount)
+                _arguments += @" & rd /s /q %userprofile%\OneDrive";
+
+            MessageBox.Show(_arguments);
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive""",
+                Arguments = _arguments,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
@@ -288,6 +296,33 @@ namespace GTweak.Utilities.Tweaks
 
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+        }
+
+        internal void CheckingForLocalAccount()
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = @"powershell.exe",
+                Arguments = @"Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object Name,PrincipalSource | ft -hide",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
+
+            process.Start();
+
+            string result = process.StandardOutput.ReadToEnd();
+
+            process.Close();
+            process.Dispose();
+
+            if (result.Contains("MicrosoftAccount"))
+                isLocalAccount = false;
+            else
+                isLocalAccount = true;
         }
     }
 }
