@@ -416,36 +416,36 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton4":
                     if (isChoose)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\VacSvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\spectrum /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SharedRealitySvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\perceptionsimulation /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MixedRealityOpenXRSvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MapsBroker /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\EntAppSvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\embeddedmode /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wlidsvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WEPHOSTSVC /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\StorSvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\ClipSVC /t REG_DWORD /v Start /d 4 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\VacSvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\spectrum /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SharedRealitySvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\perceptionsimulation /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MixedRealityOpenXRSvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MapsBroker /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\EntAppSvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\embeddedmode /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wlidsvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WEPHOSTSVC /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\StorSvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\ClipSVC /t REG_DWORD /v Start /d 4 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\InstallService /t REG_DWORD /v Start /d 4 /f");
                     }
                     else
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\VacSvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\spectrum /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SharedRealitySvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\perceptionsimulation /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MixedRealityOpenXRSvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MapsBroker /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\EntAppSvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\embeddedmode /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wlidsvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WEPHOSTSVC /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\StorSvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\ClipSVC /t REG_DWORD /v Start /d 3 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\VacSvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\spectrum /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SharedRealitySvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\perceptionsimulation /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MixedRealityOpenXRSvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MapsBroker /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\EntAppSvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\embeddedmode /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wlidsvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WEPHOSTSVC /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\StorSvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\ClipSVC /t REG_DWORD /v Start /d 3 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\InstallService /t REG_DWORD /v Start /d 3 /f");
                     }
                     break;
@@ -744,46 +744,46 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton25":
                     if (isChoose)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WarpJITSvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v Start /d 4 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WarpJITSvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v Start /d 4 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v DelayedAutoStart /d 1 /f");
                     }
                     else
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WarpJITSvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v Start /d 2 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WarpJITSvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v Start /d 2 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v DelayedAutoStart /d 0 /f");
                     }
                     break;
                 case "TglButton26":
                     if (isChoose)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiSystemHost /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\TroubleshootingSvc /t REG_DWORD /v Start /d 4 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiSystemHost /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\TroubleshootingSvc /t REG_DWORD /v Start /d 4 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DPS /t REG_DWORD /v Start /d 4 /f");
                     }
                     else
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiSystemHost /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\TroubleshootingSvc /t REG_DWORD /v Start /d 3 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiSystemHost /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\TroubleshootingSvc /t REG_DWORD /v Start /d 3 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DPS /t REG_DWORD /v Start /d 2 /f");
                     }
                     break;
                 case "TglButton27":
                     if (isChoose)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\workfolderssvc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\dot3svc /t REG_DWORD /v Start /d 4 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DevQueryBroker /t REG_DWORD /v Start /d 4 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\workfolderssvc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\dot3svc /t REG_DWORD /v Start /d 4 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DevQueryBroker /t REG_DWORD /v Start /d 4 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\AppMgmt /t REG_DWORD /v Start /d 4 /f");
                     }
                     else
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\workfolderssvc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\dot3svc /t REG_DWORD /v Start /d 3 /f && " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DevQueryBroker /t REG_DWORD /v Start /d 3 /f && " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\workfolderssvc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\dot3svc /t REG_DWORD /v Start /d 3 /f & " +
+                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DevQueryBroker /t REG_DWORD /v Start /d 3 /f & " +
                             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\AppMgmt /t REG_DWORD /v Start /d 3 /f");
                     }
                     break;
@@ -822,16 +822,16 @@ namespace GTweak.Utilities.Tweaks
             {
                 string valueState = isDenyAccess ? "/disable" : "/enable";
 
-                TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" && " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" && " +
+                TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" & " +
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" & " +
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
             }
 
