@@ -248,7 +248,7 @@ namespace GTweak.Utilities.Tweaks
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                 process.EnableRaisingEvents = true;
                 process.StartInfo.FileName = "cmd.exe";
-                process.StartInfo.Arguments = @"/c taskkill /f /im OneDrive.exe && %systemroot%\System32\OneDriveSetup.exe /uninstall & %systemroot%\SysWOW64\OneDriveSetup.exe /uninstall";
+                process.StartInfo.Arguments = @"/c taskkill /f /im OneDrive.exe & %systemroot%\System32\OneDriveSetup.exe /uninstall & %systemroot%\SysWOW64\OneDriveSetup.exe /uninstall";
                 process.Start();
 
                 process.WaitForExit();
