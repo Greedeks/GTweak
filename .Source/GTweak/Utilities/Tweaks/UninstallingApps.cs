@@ -4,15 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingApps
     {
-        private static bool isLocalAccount = false;
+        internal static string UserAppsList { get => listApps; set => listApps = value; }
+        private static string listApps = string.Empty;
+
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
-        internal static Dictionary<string, bool> RemovalProcess = new Dictionary<string, bool>
+        private static bool isLocalAccount = false;
+
+        internal static Dictionary<string, bool> isAppDeletedList = new Dictionary<string, bool>
         {
             ["MicrosoftStore"] = false,
             ["Todos"] = false,
@@ -55,9 +58,7 @@ namespace GTweak.Utilities.Tweaks
             ["QuickAssist"] = false
 
         };
-        internal static string ListApps {  get => _listApps; }
-        private static string _listApps = string.Empty;
-        internal static readonly SortedList<string, List<string>> AppScipt = new SortedList<string, List<string>>
+        internal static readonly SortedList<string, List<string>> listAppsScipt = new SortedList<string, List<string>>
         {
             ["MicrosoftStore"] = new List<string>(1) { "Microsoft.WindowsStore" },
             ["Todos"] = new List<string>(1) { "Microsoft.Todos" },
@@ -115,17 +116,17 @@ namespace GTweak.Utilities.Tweaks
 
             process.Start();
 
-            _listApps = process.StandardOutput.ReadToEnd();
+            UserAppsList = process.StandardOutput.ReadToEnd();
 
             process.Close();
             process.Dispose();
         }
 
-        internal static void DeletedApp(in string _appName)
+        internal static void DeletedApp(in string appName)
         {
             try
             {
-                if (_appName != "OneDrive")
+                if (appName != "OneDrive")
                 {
                     Process process = new Process();
                     process.StartInfo.UseShellExecute = false;
@@ -134,12 +135,12 @@ namespace GTweak.Utilities.Tweaks
                     process.EnableRaisingEvents = true;
                     process.StartInfo.FileName = "powershell.exe";
 
-                    process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + _appName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                    process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                     process.Start();
 
-                    foreach (var _appDelete in AppScipt[_appName])
+                    foreach (var appDelete in listAppsScipt[appName])
                     {
-                        process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + _appDelete + " -AllUsers | Remove-AppxPackage");
+                        process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
                         process.Start();
                     }
 
@@ -147,7 +148,7 @@ namespace GTweak.Utilities.Tweaks
 
                     process.Dispose();
 
-                    switch (_appName)
+                    switch (appName)
                     {
                         case "Widgets":
                             WidgetsTweak(true);
@@ -158,7 +159,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
 
-                else if (_appName == "OneDrive")
+                else if (appName == "OneDrive")
                     DeletedOneDrive();
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
@@ -175,7 +176,7 @@ namespace GTweak.Utilities.Tweaks
                 process.EnableRaisingEvents = true;
                 process.StartInfo.FileName = "powershell.exe";
 
-                foreach (var appNm in AppScipt)
+                foreach (var appNm in listAppsScipt)
                 {
                     process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appNm + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                     process.Start();
@@ -264,15 +265,14 @@ namespace GTweak.Utilities.Tweaks
                 process.Dispose();
             }
 
-            string _arguments = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive""";
+            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive""";
 
             if (isLocalAccount)
-                _arguments += @" & rd /s /q %userprofile%\OneDrive";
+                argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";
 
-            MessageBox.Show(_arguments);
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = _arguments,
+                Arguments = argumentsFolders,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
@@ -281,7 +281,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void ResetOneDrive()
         {
-            RemovalProcess["OneDrive"] = true;
+            isAppDeletedList["OneDrive"] = true;
 
             using (Process process = new Process())
             {
