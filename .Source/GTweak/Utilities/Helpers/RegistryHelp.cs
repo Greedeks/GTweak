@@ -4,9 +4,9 @@ using System;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal struct RegistryHelp
+    internal readonly struct RegistryHelp
     {
-        internal static void DeleteFolderTree(in RegistryKey _registrykey, in string _subkey)
+        internal static  void DeleteFolderTree(in RegistryKey _registrykey, in string _subkey)
         {
             if (_registrykey.OpenSubKey(_subkey) != null)
                 try { _registrykey.DeleteSubKeyTree(_subkey); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }

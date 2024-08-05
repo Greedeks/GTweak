@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GTweak.Utilities
 {
-    internal struct Settings
+    internal readonly struct Settings
     {
         internal static string PathConfig = string.Empty;
         internal static string PathSound => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\GTweak\Sound.mp3";
@@ -101,44 +103,51 @@ namespace GTweak.Utilities
 
         internal static void SaveFileConfig()
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            if (СonfigSettings.configConfidentiality.Count == 0 && СonfigSettings.configInterface.Count == 0
+                && СonfigSettings.configServices.Count == 0 && СonfigSettings.configSystem.Count == 0)
+                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["export_warning_notification"]);
+
+            else
             {
-                FileName = "Config GTweak",
-                Filter = "(*.INI)|*.INI",
-                RestoreDirectory = true
-            };
-
-            Nullable<bool> isResult = saveFileDialog.ShowDialog();
-
-            if (isResult == true)
-            {
-                string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                string filename = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
-
-                try
+                SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    PathConfig = path + @"\" + filename + ".ini";
+                    FileName = "Config GTweak",
+                    Filter = "(*.INI)|*.INI",
+                    RestoreDirectory = true
+                };
 
-                    if (File.Exists(PathConfig))
-                        File.Delete(PathConfig);
+                Nullable<bool> isResult = saveFileDialog.ShowDialog();
 
-                    СonfigSettings settingsFileINI = new СonfigSettings(PathConfig);
-                    settingsFileINI.WriteConfig("GTweak", "Author", "Greedeks");
-                    settingsFileINI.WriteConfig("GTweak", "Release", "v4");
+                if (isResult == true)
+                {
+                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
+                    string filename = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
 
-                    foreach (KeyValuePair<string, string> addConfidentiality in СonfigSettings.configConfidentiality)
-                        settingsFileINI.WriteConfig("Confidentiality Tweaks", addConfidentiality.Key, addConfidentiality.Value);
+                    try
+                    {
+                        PathConfig = path + @"\" + filename + ".ini";
 
-                    foreach (KeyValuePair<string, string> addInterface in СonfigSettings.configInterface)
-                        settingsFileINI.WriteConfig("Interface Tweaks", addInterface.Key, addInterface.Value);
+                        if (File.Exists(PathConfig))
+                            File.Delete(PathConfig);
 
-                    foreach (KeyValuePair<string, string> addServices in СonfigSettings.configServices)
-                        settingsFileINI.WriteConfig("Services Tweaks", addServices.Key, addServices.Value);
+                        СonfigSettings settingsFileINI = new СonfigSettings(PathConfig);
+                        settingsFileINI.WriteConfig("GTweak", "Author", "Greedeks");
+                        settingsFileINI.WriteConfig("GTweak", "Release", "v4");
 
-                    foreach (KeyValuePair<string,string> addSystem in СonfigSettings.configSystem)
-                        settingsFileINI.WriteConfig("System Tweaks", addSystem.Key, addSystem.Value);
+                        foreach (KeyValuePair<string, string> addConfidentiality in СonfigSettings.configConfidentiality)
+                            settingsFileINI.WriteConfig("Confidentiality Tweaks", addConfidentiality.Key, addConfidentiality.Value);
+
+                        foreach (KeyValuePair<string, string> addInterface in СonfigSettings.configInterface)
+                            settingsFileINI.WriteConfig("Interface Tweaks", addInterface.Key, addInterface.Value);
+
+                        foreach (KeyValuePair<string, string> addServices in СonfigSettings.configServices)
+                            settingsFileINI.WriteConfig("Services Tweaks", addServices.Key, addServices.Value);
+
+                        foreach (KeyValuePair<string, string> addSystem in СonfigSettings.configSystem)
+                            settingsFileINI.WriteConfig("System Tweaks", addSystem.Key, addSystem.Value);
+                    }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }
 
@@ -156,9 +165,14 @@ namespace GTweak.Utilities
                 СonfigSettings settingsFileINI = new СonfigSettings(PathConfig);
 
                 if (settingsFileINI.ReadConfig("GTweak", "Author").Contains("Greedeks") && settingsFileINI.ReadConfig("GTweak", "Release").Contains("v4"))
-                    new ImportWindow().ShowDialog();
+                {
+                    if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
+                        new ImportWindow().ShowDialog();
+                    else
+                        new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_empty_notification"]);
+                }
                 else
-                    new ViewNotification().Show("", (string)System.Windows.Application.Current.Resources["title1_notification"], (string)System.Windows.Application.Current.Resources["import_warning_notification"]);
+                    new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_warning_notification"]);
             }
         }
 
@@ -170,7 +184,7 @@ namespace GTweak.Utilities
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
-                System.Windows.Application.Current.Shutdown();
+                Application.Current.Shutdown();
                 Process.Start(new ProcessStartInfo()
                 {
                     Arguments = "/C choice /C Y /N /D Y /T 3 & Del \"" + (new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath)).Name + "\" & " +

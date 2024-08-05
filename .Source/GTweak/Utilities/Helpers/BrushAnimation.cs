@@ -6,7 +6,7 @@ using System.Windows.Media.Animation;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal class BrushAnimation : AnimationTimeline
+    internal sealed class BrushAnimation : AnimationTimeline
     {
         protected override Freezable CreateInstanceCore()
         {

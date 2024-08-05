@@ -5,7 +5,7 @@ using System.Windows.Media.Animation;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal struct WorkWithText
+    internal readonly struct WorkWithText
     {
         internal static void TypeWriteAnimation(string textToAnimate, TextBlock _textBlock, TimeSpan _timeSpan)
         {

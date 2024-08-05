@@ -7,10 +7,10 @@ namespace GTweak.Utilities
 {
     internal sealed class СonfigSettings
     {
-        internal static Dictionary<string, string> configConfidentiality = new Dictionary<string, string>(18);
-        internal static Dictionary<string, string> configInterface = new Dictionary<string, string>(28);
-        internal static Dictionary<string, string> configServices = new Dictionary<string, string>(28);
-        internal static Dictionary<string, string> configSystem = new Dictionary<string, string>(23);
+        internal static Dictionary<string, string> configConfidentiality = new Dictionary<string, string>();
+        internal static Dictionary<string, string> configInterface = new Dictionary<string, string>();
+        internal static Dictionary<string, string> configServices = new Dictionary<string, string>();
+        internal static Dictionary<string, string> configSystem = new Dictionary<string, string>();
         private readonly string pathToConfig; 
 
         [DllImport("kernel32")]

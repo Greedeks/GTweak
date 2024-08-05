@@ -53,6 +53,8 @@
     <v:String x:Key="firewalloff_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
     <v:String x:Key="clearingcache_notification">The system file cache has been cleared</v:String>
     <v:String x:Key="import_warning_notification">This file is not suitable for import</v:String>
+    <v:String x:Key="import_empty_notification">This file is empty, the application of tweaks is not possible</v:String>
+    <v:String x:Key="export_warning_notification">It doesn't make sense, the file will be empty. First, apply at least one tweak</v:String>
     <v:String x:Key="clear_ram_notification">Short-term memory and temporary files have been cleared</v:String>
     <v:String x:Key="disable_recovery_notification">System recovery is disabled, recovery points are unavailable</v:String>
     <v:String x:Key="warndisable_recovery_notification">You have already disabled the recovery system</v:String>
