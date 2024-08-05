@@ -262,9 +262,13 @@ namespace GTweak.Utilities.Tweaks
                 process.Dispose();
             }
 
-            Directory.Delete(Environment.ExpandEnvironmentVariables(@"%userprofile%\OneDrive"), true);
-            Directory.Delete(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive"), true);
-            Directory.Delete(Environment.ExpandEnvironmentVariables(@"%allusersprofile%\Microsoft OneDrive"), true);
+            Process.Start(new ProcessStartInfo()
+            {
+                Arguments = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive""",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true,
+                FileName = "cmd.exe"
+            });
         }
 
         internal static void ResetOneDrive()
@@ -284,10 +288,6 @@ namespace GTweak.Utilities.Tweaks
 
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-
-            Directory.CreateDirectory(Environment.ExpandEnvironmentVariables(@"%userprofile%\OneDrive"));
-            Directory.CreateDirectory(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive"));
-            Directory.CreateDirectory(Environment.ExpandEnvironmentVariables(@"%allusersprofile%\Microsoft OneDrive"));
         }
     }
 }
