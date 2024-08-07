@@ -243,7 +243,7 @@ namespace GTweak.Utilities
                     Task<IPAddress> _task = Task.Run(() => {
                         return !string.IsNullOrEmpty(Dns.GetHostEntry("google.com").AddressList[0].ToString())
                             ? Dns.GetHostEntry("google.com").AddressList[0]
-                            : Dns.GetHostEntry("baidu.com.com").AddressList[0];
+                            : Dns.GetHostEntry("baidu.com").AddressList[0];
                     });
                     if (!_task.Wait(timeout))
                         return false;
