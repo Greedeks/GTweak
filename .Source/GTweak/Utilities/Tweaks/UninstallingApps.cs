@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -303,7 +304,7 @@ namespace GTweak.Utilities.Tweaks
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = @"powershell.exe",
-                Arguments = @"Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object Name,PrincipalSource | ft -hide",
+                Arguments = @"Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object PrincipalSource | ft -hide",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -314,15 +315,10 @@ namespace GTweak.Utilities.Tweaks
 
             process.Start();
 
-            string result = process.StandardOutput.ReadToEnd();
+            isLocalAccount = !process.StandardOutput.ReadToEnd().Contains("MicrosoftAccount");
 
             process.Close();
             process.Dispose();
-
-            if (result.Contains("MicrosoftAccount"))
-                isLocalAccount = false;
-            else
-                isLocalAccount = true;
         }
     }
 }
