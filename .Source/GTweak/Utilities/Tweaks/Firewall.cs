@@ -34,26 +34,36 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (CheckRulesWindows(nameRules) && isChoose)
                 {
-                    Parallel.Invoke(
-                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules); },
-                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules," (Old Way)")); },
-                        () => { RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules," (Update Orchestrator)")); },
-                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @programPaths["MoUso_New"], nameRules); },
-                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)")); },
-                        () => { RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)")); });
+                    Parallel.Invoke(() => { 
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
+                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules," (Update Orchestrator)")); 
+                    },
+                    () => {
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @programPaths["MoUso_New"], nameRules); 
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)")); 
+                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)")); 
+                    });
                 }
                 else
                 {
-                    try { 
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
-                    } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-                    try { 
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
-                    } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    Parallel.Invoke(() =>
+                    {
+                        try
+                        {
+                            RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
+                            RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
+                            RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
+                        }
+                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                        try
+                        {
+                            RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
+                            RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
+                            RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
+                        }
+                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    });
                 }
             } 
             catch 

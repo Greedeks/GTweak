@@ -4,14 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingApps
     {
-        internal static string UserAppsList { get => listApps; set => listApps = value; }
-        private static string listApps = string.Empty;
+        internal static string UserAppsList { get; set; } = string.Empty;
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
@@ -129,25 +127,27 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (appName != "OneDrive")
                 {
-                    Process process = new Process();
-                    process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.CreateNoWindow = true;
-                    process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                    process.EnableRaisingEvents = true;
-                    process.StartInfo.FileName = "powershell.exe";
-
-                    process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
-                    process.Start();
-
-                    foreach (var appDelete in listAppsScipt[appName])
+                    using (Process process = new Process())
                     {
-                        process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                        process.EnableRaisingEvents = true;
+                        process.StartInfo.FileName = "powershell.exe";
+
+                        process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
+
+                        foreach (var appDelete in listAppsScipt[appName])
+                        {
+                            process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
+                            process.Start();
+                        }
+
+                        process.WaitForExit();
+
+                        process.Dispose();
                     }
-
-                    process.WaitForExit();
-
-                    process.Dispose();
 
                     switch (appName)
                     {
@@ -170,28 +170,30 @@ namespace GTweak.Utilities.Tweaks
         {
             try
             {
-                Process process = new Process();
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                process.EnableRaisingEvents = true;
-                process.StartInfo.FileName = "powershell.exe";
-
-                foreach (var appNm in listAppsScipt)
+                using (Process process = new Process())
                 {
-                    process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appNm + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
-                    process.Start();
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.CreateNoWindow = true;
+                    process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                    process.EnableRaisingEvents = true;
+                    process.StartInfo.FileName = "powershell.exe";
 
-                    foreach (string appDelete in appNm.Value)
+                    foreach (var appNm in listAppsScipt)
                     {
-                        process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
+                        process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appNm + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
-                    }
-                }
 
-                process.WaitForExit();
-         
-                process.Dispose();
+                        foreach (string appDelete in appNm.Value)
+                        {
+                            process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
+                            process.Start();
+                        }
+                    }
+
+                    process.WaitForExit();
+
+                    process.Dispose();
+                }
 
                 WidgetsTweak(true);
                 CortanaTweak(true);
