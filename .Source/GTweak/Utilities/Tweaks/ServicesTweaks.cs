@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -835,38 +836,53 @@ namespace GTweak.Utilities.Tweaks
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
             }
 
-            if (isDenyAccess)
+            try
             {
-                Process.Start(new ProcessStartInfo()
+                if (isDenyAccess)
                 {
-                    Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\SoftwareDistribution\Download & 
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\SoftwareDistribution\Download & 
                             rd /s /q " + Settings.PathSystemDisk + @"\Windows\System32\catroot2",
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    CreateNoWindow = true,
-                    FileName = "cmd.exe"
-                });
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        CreateNoWindow = true,
+                        FileName = "cmd.exe"
+                    });
 
-                ChangeStateTask();
+                    ChangeStateTask();
 
-                await Task.Delay(1000);
+                    await Task.Delay(1000);
 
-                if (Directory.Exists(filesPathUpdate + "\\UpdateOrchestrator"))
-                    Directory.Move(filesPathUpdate + "\\UpdateOrchestrator", filesPathUpdate + "\\(GTweak UpdateOrchestrator)");
-                if (Directory.Exists(filesPathUpdate + "\\WindowsUpdate"))
-                    Directory.Move(filesPathUpdate + "\\WindowsUpdate", filesPathUpdate + "\\(GTweak WindowsUpdate)");
-            }
-            else
-            {
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        Arguments = @"/c rd /s /q " + filesPathUpdate + "/(GTweak UpdateOrchestrator) & " +
+                        "rd /s /q " + filesPathUpdate + "/(GTweak WindowsUpdate)",
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        CreateNoWindow = true,
+                        FileName = "cmd.exe"
+                    });
 
-                if (Directory.Exists(filesPathUpdate + "\\(GTweak UpdateOrchestrator)"))
-                    Directory.Move(filesPathUpdate + "\\(GTweak UpdateOrchestrator)", filesPathUpdate + "\\UpdateOrchestrator");
-                if (Directory.Exists(filesPathUpdate + "\\(GTweak WindowsUpdate)"))
-                    Directory.Move(filesPathUpdate + "\\(GTweak WindowsUpdate)", filesPathUpdate + "\\WindowsUpdate");
 
-                await Task.Delay(500);
+                    await Task.Delay(200);
 
-                ChangeStateTask();
-            }
+                    if (Directory.Exists(filesPathUpdate + "\\UpdateOrchestrator"))
+                        Directory.Move(filesPathUpdate + "\\UpdateOrchestrator", filesPathUpdate + "\\(GTweak UpdateOrchestrator)");
+                    if (Directory.Exists(filesPathUpdate + "\\WindowsUpdate"))
+                        Directory.Move(filesPathUpdate + "\\WindowsUpdate", filesPathUpdate + "\\(GTweak WindowsUpdate)");
+                }
+                else
+                {
+
+                    if (Directory.Exists(filesPathUpdate + "\\(GTweak UpdateOrchestrator)"))
+                        Directory.Move(filesPathUpdate + "\\(GTweak UpdateOrchestrator)", filesPathUpdate + "\\UpdateOrchestrator");
+                    if (Directory.Exists(filesPathUpdate + "\\(GTweak WindowsUpdate)"))
+                        Directory.Move(filesPathUpdate + "\\(GTweak WindowsUpdate)", filesPathUpdate + "\\WindowsUpdate");
+
+                    await Task.Delay(500);
+
+                    ChangeStateTask();
+                }
+            } catch (Exception ex) { Debug.WriteLine(ex); }
         }
     }
 }
