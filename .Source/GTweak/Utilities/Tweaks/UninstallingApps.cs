@@ -268,7 +268,7 @@ namespace GTweak.Utilities.Tweaks
                 process.Dispose();
             }
 
-            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive""";
+            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + Settings.PathSystemDisk +@"\OneDriveTemp";
 
             if (isLocalAccount)
                 argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
@@ -186,7 +187,8 @@ namespace GTweak.Utilities.Tweaks
         {
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\Temp & rd /s /q " + Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\Temp",
+                Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\Temp & rd /s /q %localappdata%\Temp & 
+                del /a /q ""%localappdata%\IconCache.db"" & del /a /f /q ""%localappdata%\Microsoft\Windows\Explorer\iconcache*""",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
