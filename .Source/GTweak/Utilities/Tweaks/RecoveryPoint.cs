@@ -98,9 +98,14 @@ namespace GTweak.Utilities.Tweaks
 
         internal static bool IsSystemRestoreDisabled()
         {
-            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "RPSessionInterval", null).ToString() == "0")
-                return true;
-            else return false;
+            try
+            {
+                return Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "RPSessionInterval", string.Empty).ToString() switch
+                {
+                    "0" => true,
+                    _ => false
+                };
+            } catch { return false; }
         }
 
         internal static void DisablePoint()

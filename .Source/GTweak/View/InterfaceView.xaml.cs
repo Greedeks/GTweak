@@ -22,7 +22,7 @@ namespace GTweak.View
             if (!SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
             {
                 TglButton15.IsEnabled = false; TglButton16.IsEnabled = false;
-                TglButton17.IsEnabled = false; TglButton18.IsEnabled = false;
+                TglButton17.IsEnabled = false; TglButton18.IsEnabled = false; TglButton19.IsEnabled = false;
             }
 
             if (WindowsLicense.statusLicense != 1)
@@ -84,11 +84,11 @@ namespace GTweak.View
                 case "TglButton10":
                 case "TglButton11":
                 case "TglButton12":
-                case "TglButton25":
                 case "TglButton26":
+                case "TglButton27":
                     new ViewNotification().Show("logout");
                     break;
-                case "TglButton21":
+                case "TglButton22":
                     new ViewNotification().Show("restart");
                     break;
             }
