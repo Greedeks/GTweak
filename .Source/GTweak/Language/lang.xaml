@@ -157,7 +157,7 @@
     <v:String x:Key="tgl25_interface">Compression of wallpaper format .JPEG of the desktop</v:String>
     <v:String x:Key="tgl26_interface">Tooltips for desktop elements</v:String>
     <v:String x:Key="tgl27_interface">The search query with «Bing» integration in the Start menu</v:String>
-    <v:String x:Key="tgl28_interface">Open «Quick Access» instead of «This computer»</v:String>
+    <v:String x:Key="tgl28_interface">Open «Quick Access» instead of «This PC»</v:String>
 
     <v:String x:Key="textcolor_interface">This is an example of a new color.</v:String>
 
@@ -188,7 +188,7 @@
     <v:String x:Key="TglButton25_description_interface">By default, when you set a jpeg image as your desktop wallpaper, Windows automatically reduces its quality to 85%. This tweak will set the jpeg wallpaper quality to 100%.</v:String>
     <v:String x:Key="TglButton26_description_interface">Tweak will disable tooltips for desktop elements when hovering the mouse cursor.</v:String>
     <v:String x:Key="TglButton27_description_interface">By default, Windows sends everything you search for in the «Start» menu to its servers to provide you with Bing search results. If you don't need Bing integration in the «Start» menu, you can apply a tweak to disable web search.</v:String>
-    <v:String x:Key="TglButton28_description_interface">By default, when you open Explorer, the first tab will be «Quick Access». And to open any disk, you need to make unnecessary movements. This tweak will make «This computer» open when opened, rather than «Quick Access».</v:String>
+    <v:String x:Key="TglButton28_description_interface">By default, when you open Explorer, the first tab will be «Quick Access». And to open any disk, you need to make unnecessary movements. This tweak will make «This PC» open when opened, rather than «Quick Access».</v:String>
     <!--#endregion-->
 
     <!--#region Applications Page -->

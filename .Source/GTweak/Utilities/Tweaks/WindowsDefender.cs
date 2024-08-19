@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -12,6 +13,13 @@ namespace GTweak.Utilities.Tweaks
     {
         internal void Enable()
         {
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\Software\Policies\Microsoft\Windows Defender\Real-Time Protection", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\Software\Policies\Microsoft\Windows Defender\SpyNet", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+
             TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /v EnableWebContentEvaluation /f & " +
                 "reg delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /v SmartScreenEnabled /f & " +
                 "reg delete HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter /v EnabledV9 /f & " +
@@ -31,7 +39,9 @@ namespace GTweak.Utilities.Tweaks
                 "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /t REG_DWORD /v SubmitSamplesConsent /d 0 /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /t REG_DWORD /v TamperProtection /d 1 /f & " +
                 "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SecurityHealthService /t REG_DWORD /v Start /d 2 /f &" +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 2 /f");
+                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 2 /f & " +
+                "reg delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled /f & " +
+                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 3 /f");
 
             EnableServices();
 
@@ -103,7 +113,7 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost", "PreventOverride");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth", @"%windir%\system32\SecurityHealthSystray.exe", RegistryValueKind.String);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth", @"%windir%\system32\SecurityHealthSystray.exe", RegistryValueKind.ExpandString);
 
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\WinDefend -Name Start -Value 0x00000002");
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableBehaviorMonitoring -Value 0x00000000");
@@ -114,14 +124,21 @@ namespace GTweak.Utilities.Tweaks
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableScriptScanning -Value 0x00000000");
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableScriptScanning -Value 0x00000000");
 
-            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run", "SecurityHealth", new byte[] { 0002, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00 }, RegistryValueKind.Binary);
-
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run", "SecurityHealth", new byte[] { 0002, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00 }, RegistryValueKind.Binary);
+            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "Windows Defender", "\"%ProgramFiles%\\Windows Defender\\MSASCui.exe\"-runkey", RegistryValueKind.String);
             RunProcess(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\Windows Defender\MpCmdRun.exe", "-SignatureUpdate");
 
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "Start", "2", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "2", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "1", RegistryValueKind.DWord);
+            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled");
+
             CloseDefenderSettings();
+
+            RunPowerShellCommand(@"Get-AppXpackage Microsoft.WindowsDefender | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register ""$($_.InstallLocation)\AppXManifest.xml""}");
         }
 
-        internal void Disable()
+        internal async void Disable()
         {
             KillProcess("smartscreen");
 
@@ -190,6 +207,8 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine", "DisableGradualRelease", 1, RegistryValueKind.DWord);
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection");
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\Software\Policies\Microsoft\Windows Defender\Real-Time Protection", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection", "DisableIOAVProtection", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection", "DisableOnAccessProtection", 1, RegistryValueKind.DWord);
@@ -218,6 +237,7 @@ namespace GTweak.Utilities.Tweaks
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows Defender\Features -Name TamperProtection -Value 0x00000000");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\SpyNet");
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\Software\Policies\Microsoft\Windows Defender\SpyNet", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\SpyNet", "DisableBlockAtFirstSeen", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\SpyNet", "SpynetReporting", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\SpyNet", "SubmitSamplesConsent", 2, RegistryValueKind.DWord);
@@ -259,7 +279,9 @@ namespace GTweak.Utilities.Tweaks
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableScriptScanning -Value 0x00000001");
 
 
-            Registry.SetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run", "SecurityHealth", new byte[] { 0099, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99 }, RegistryValueKind.Binary);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run", "SecurityHealth", new byte[] { 0099, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99 }, RegistryValueKind.Binary);
+            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "Windows Defender");
+            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth");
 
             CloseDefenderSettings();
 
@@ -278,25 +300,40 @@ namespace GTweak.Utilities.Tweaks
             RunPowerShellCommand("Stop-Service -Name WinDefend; Set-Service -Name WinDefend -StartupType Disabled");
 
             TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c taskkill /f /im MsMpEng.exe & reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /t REG_DWORD /v EnableWebContentEvaluation /d 0 /f & " +
-                "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /t REG_SZ /v SmartScreenEnabled /d \"off\" /f & " +
-                "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter /t REG_DWORD /v EnabledV9 /d 0 /f & " +
-                "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /t REG_DWORD /v EnableSmartScreen /d 0 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /t REG_DWORD /v DisableAntiSpyware /d 1 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /t REG_DWORD /v DisableAntiVirus /d 1 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableBehaviorMonitoring /d 1 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableOnAccessProtection /d 1 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableScanOnRealtimeEnable /d 1 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableIOAVProtection /d 1 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableRealtimeMonitoring /d 1 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /t REG_DWORD /v SpyNetReporting /d 0 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /t REG_DWORD /v SubmitSamplesConsent /d 2 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /t REG_DWORD /v TamperProtection /d 0 /f & " +
-                "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT /t REG_DWORD /v DontOfferThroughWUA /d 1 /f & " +
-                "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT /t REG_DWORD /v DontReportInfectionInformation /d 1 /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SecurityHealthService /t REG_DWORD /v Start /d 4 /f &" +
-                "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_SZ /v ConfigureAppInstallControl /d \"Anywhere\" /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_DWORD /v ConfigureAppInstallControlEnabled /d 0 /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 4 /f");
+            "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /t REG_SZ /v SmartScreenEnabled /d \"off\" /f & " +
+            "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter /t REG_DWORD /v EnabledV9 /d 0 /f & " +
+            "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /t REG_DWORD /v EnableSmartScreen /d 0 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /t REG_DWORD /v DisableAntiSpyware /d 1 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /t REG_DWORD /v DisableAntiVirus /d 1 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableBehaviorMonitoring /d 1 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableOnAccessProtection /d 1 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableScanOnRealtimeEnable /d 1 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableIOAVProtection /d 1 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection\" /t REG_DWORD /v DisableRealtimeMonitoring /d 1 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /t REG_DWORD /v SpyNetReporting /d 0 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /t REG_DWORD /v SubmitSamplesConsent /d 2 /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /t REG_DWORD /v TamperProtection /d 0 /f & " +
+            "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT /t REG_DWORD /v DontOfferThroughWUA /d 1 /f & " +
+            "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT /t REG_DWORD /v DontReportInfectionInformation /d 1 /f & " +
+            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SecurityHealthService /t REG_DWORD /v Start /d 4 /f &" +
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_SZ /v ConfigureAppInstallControl /d \"Anywhere\" /f & " +
+            "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_DWORD /v ConfigureAppInstallControlEnabled /d 0 /f & " +
+            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 4 /f & " +
+            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled / d 3 /f & " +
+            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 4 /f");
+
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+
+            await Task.Delay(1000);
+
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled", "3", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "4", RegistryValueKind.DWord);
         }
 
         private void KillProcess(string getName)

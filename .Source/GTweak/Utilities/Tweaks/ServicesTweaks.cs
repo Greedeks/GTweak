@@ -738,47 +738,60 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton25":
                     if (isChoose)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WarpJITSvc /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v DelayedAutoStart /d 1 /f");
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "DelayedAutoStart", 1, RegistryValueKind.DWord);
                     }
                     else
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WarpJITSvc /t REG_DWORD /v Start /d 3 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v Start /d 2 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wscsvc /t REG_DWORD /v DelayedAutoStart /d 0 /f");
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "Start", 2, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "DelayedAutoStart", 0, RegistryValueKind.DWord);
+
                     }
                     break;
                 case "TglButton26":
                     if (isChoose)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiSystemHost /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\TroubleshootingSvc /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DPS /t REG_DWORD /v Start /d 4 /f");
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdiServiceHost", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\DPS", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdiServiceHost", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DPS", "Start", 4, RegistryValueKind.DWord);
                     }
                     else
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiSystemHost /t REG_DWORD /v Start /d 3 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdiServiceHost /t REG_DWORD /v Start /d 3 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\TroubleshootingSvc /t REG_DWORD /v Start /d 3 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DPS /t REG_DWORD /v Start /d 2 /f");
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdiServiceHost", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\DPS", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdiServiceHost", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DPS", "Start", 2, RegistryValueKind.DWord);
                     }
                     break;
                 case "TglButton27":
                     if (isChoose)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\workfolderssvc /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\dot3svc /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DevQueryBroker /t REG_DWORD /v Start /d 4 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\AppMgmt /t REG_DWORD /v Start /d 4 /f");
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\workfolderssvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\dot3svc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\DevQueryBroker", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\AppMgmt", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\workfolderssvc", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dot3svc", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DevQueryBroker", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\AppMgmt", "Start", 4, RegistryValueKind.DWord);
                     }
                     else
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\workfolderssvc /t REG_DWORD /v Start /d 3 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\dot3svc /t REG_DWORD /v Start /d 3 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\DevQueryBroker /t REG_DWORD /v Start /d 3 /f & " +
-                            "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\AppMgmt /t REG_DWORD /v Start /d 3 /f");
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\workfolderssvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\dot3svc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\DevQueryBroker", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\AppMgmt", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\workfolderssvc", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dot3svc", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DevQueryBroker", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\AppMgmt", "Start", 3, RegistryValueKind.DWord);
                     }
                     break;
                 case "TglButton28":

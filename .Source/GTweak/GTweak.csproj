@@ -247,6 +247,7 @@
     <Compile Include="Utilities\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />
     <Compile Include="Utilities\Settings.cs" />
+    <Compile Include="Utilities\TakingOwnership.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
     <Compile Include="Utilities\СonfigSettings.cs" />
     <Compile Include="Utilities\ViewNotification.cs" />
