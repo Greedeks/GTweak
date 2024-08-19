@@ -295,11 +295,22 @@ namespace GTweak.Utilities.Tweaks
             else
                 interfaceV.TglButton27.StateNA = false;
 
-            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", null) == null ||
+            if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
+            {
+                if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", string.Empty).ToString() != "1")
-                interfaceV.TglButton28.StateNA = true;
-            else
-                interfaceV.TglButton28.StateNA = false;
+                    interfaceV.TglButton28.StateNA = true;
+                else
+                    interfaceV.TglButton28.StateNA = false;
+            }
+            else if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
+            {
+                if (Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", string.Empty).ToString() != "1")
+                    interfaceV.TglButton28.StateNA = true;
+                else
+                    interfaceV.TglButton28.StateNA = false;
+            }
         }
 
         private static void RestartExplorer(Process launchExplorer)
@@ -629,19 +640,23 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton24":
-                    string _path = Environment.ExpandEnvironmentVariables(@"%userprofile%\3D Objects");
                     if (isChoose)
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
-                        Directory.Delete(_path, true);
                     }
                     else
                     {
                         RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
                         RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
-                        Directory.CreateDirectory(_path);
                     }
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        Arguments = isChoose ? @"/c rd /s /q ""%userprofile%\3D Objects""" : @"/c mkdir ""%userprofile%\3D Objects""",
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        CreateNoWindow = true,
+                        FileName = "cmd.exe"
+                    });
                     break;
                 case "TglButton25":
                     if (isChoose)
@@ -663,9 +678,19 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton28":
                     if (isChoose)
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", 1, RegistryValueKind.DWord);
+                    {
+                        if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", 1, RegistryValueKind.DWord);
+                        else if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", 1, RegistryValueKind.DWord);
+                    }
                     else
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode");
+                    {
+                        if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode");
+                        else if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo");
+                    }
                     break;
 
             }
