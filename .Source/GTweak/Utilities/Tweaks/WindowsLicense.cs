@@ -65,7 +65,13 @@ namespace GTweak.Utilities.Tweaks
             {
                 waitingWindow.Show();
 
-                cmdProcess.StartInfo.Arguments = $"/c slmgr.vbs //b " + "/ipk " + keyWindow;
+                if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
+                {
+                    cmdProcess.StartInfo.Arguments = $"/c assoc .vbs=VBSFile";
+                    cmdProcess.Start();
+                }
+
+                cmdProcess.StartInfo.Arguments = $"/c slmgr.vbs //b /ipk {keyWindow}";
                 cmdProcess.Start();
 
                 await Task.Delay(4000);
