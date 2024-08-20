@@ -342,6 +342,9 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseInterface(string tweak, bool isChoose)
         {
+            СonfigSettings.configInterface.Remove(tweak);
+            СonfigSettings.configInterface.Add(tweak, Convert.ToString(isChoose));
+
             switch (tweak)
             {
                 case "TglButton1":

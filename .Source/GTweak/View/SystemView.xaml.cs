@@ -53,8 +53,6 @@ namespace GTweak.View
         {
             Slider slider = (Slider)sender;
             SystemTweaks.UseSystemSliders(slider.Name, (uint)slider.Value);
-            СonfigSettings.configSystem.Remove(slider.Name);
-            СonfigSettings.configSystem.Add(slider.Name, Convert.ToString((uint)slider.Value));
         }
 
         private async void TglButton_ChangedState(object sender, EventArgs e)
@@ -63,9 +61,8 @@ namespace GTweak.View
             if (toggleButton.Name != "TglButton8")
             {
                 Parallel.Invoke(() => SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State));
-                СonfigSettings.configSystem.Remove(toggleButton.Name);
-                СonfigSettings.configSystem.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
 
+                await Task.Delay(200);
                 switch (toggleButton.Name)
                 {
                     case "TglButton7":
@@ -82,6 +79,7 @@ namespace GTweak.View
                         new ViewNotification().Show("logout");
                         break;
                 }
+
                 await Task.Delay(350);
                 Parallel.Invoke(() => new SystemTweaks().ViewSystem(this));
             }

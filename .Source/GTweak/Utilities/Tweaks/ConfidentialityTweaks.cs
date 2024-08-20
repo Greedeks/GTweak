@@ -255,6 +255,9 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseСonfidentiality(string tweak, bool isChoose)
         {
+            СonfigSettings.configConfidentiality.Remove(tweak);
+            СonfigSettings.configConfidentiality.Add(tweak, Convert.ToString(isChoose));
+
             switch (tweak)
             {
                 case "TglButton1":

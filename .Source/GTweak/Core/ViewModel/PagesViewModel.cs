@@ -1,11 +1,42 @@
 ﻿using GTweak.Utilities;
 using GTweak.Core.Model;
 using System.Windows;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {
     internal class ConfidentialityVM : ViewModelBase { }
-    internal class InterfaceVM : ViewModelBase { }
+    internal class InterfaceVM : ViewModelBase
+    {
+        private readonly MainModel.InterfaceModel _model;
+        public bool SetBlockForWin10
+        {
+            get => _model.BlockForWin10;
+            set { _model.BlockForWin10 = value; OnPropertyChanged(); }
+        }
+
+        public bool SetBlockWithoutLicense
+        {
+            get => _model.BlockWithoutLicense;
+            set { _model.BlockWithoutLicense = value; OnPropertyChanged(); }
+        }
+
+        public InterfaceVM()
+        {
+            _model = new MainModel.InterfaceModel();
+
+            SetBlockForWin10 = SystemData.СomputerСonfiguration.clientWinVersion.Contains("11");
+
+            SetBlockWithoutLicense = WindowsLicense.statusLicense == 1;
+
+            if (WindowsLicense.statusLicense != 1)
+            {
+                App.ViewLang();
+                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["viewlicense_notification"]);
+            }
+        }
+    }
+
     internal class ApplicationsVM : ViewModelBase { }
     internal class ServicesVM : ViewModelBase { }
     internal class SystemVM : ViewModelBase { }

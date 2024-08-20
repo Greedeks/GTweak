@@ -41,9 +41,8 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality(toggleButton.Name, toggleButton.State));
-            СonfigSettings.configConfidentiality.Remove(toggleButton.Name);
-            СonfigSettings.configConfidentiality.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
 
+            await Task.Delay(200);
             switch (toggleButton.Name)
             {
                 case "TglButton8":
@@ -51,6 +50,7 @@ namespace GTweak.View
                     new ViewNotification().Show("restart");
                     break;
             }
+
             await Task.Delay(350);
             Parallel.Invoke(() => new ConfidentialityTweaks().ViewСonfidentiality(this));
         }

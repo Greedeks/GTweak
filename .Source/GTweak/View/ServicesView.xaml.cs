@@ -40,10 +40,10 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             Parallel.Invoke(() => ServicesTweaks.UseServices(toggleButton.Name, toggleButton.State));
-            СonfigSettings.configServices.Remove(toggleButton.Name);
-            СonfigSettings.configServices.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
-            await Task.Delay(100);
+
+            await Task.Delay(200);
             new ViewNotification().Show("restart");
+
             await Task.Delay(350);
             Parallel.Invoke(() => new ServicesTweaks().ViewServices(this));
         }

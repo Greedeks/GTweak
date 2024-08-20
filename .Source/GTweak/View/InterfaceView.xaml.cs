@@ -21,15 +21,15 @@ namespace GTweak.View
 
             if (!SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
             {
-                TglButton15.IsEnabled = false; TglButton16.IsEnabled = false;
-                TglButton17.IsEnabled = false; TglButton18.IsEnabled = false; TglButton19.IsEnabled = false;
+                TglButton15.IsEnabled = TglButton16.IsEnabled = TglButton17.IsEnabled = 
+                    TglButton18.IsEnabled = TglButton19.IsEnabled = false;
             }
 
             if (WindowsLicense.statusLicense != 1)
             {
                 new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("viewlicense_notification"));
-                TglButton3.IsEnabled = false; TglButton4.IsEnabled = false; TglButton5.IsEnabled = false;
-                TglButton6.IsEnabled = false; TglButton7.IsEnabled = false; TglButton8.IsEnabled = false;
+                TglButton3.IsEnabled = TglButton4.IsEnabled = TglButton5.IsEnabled =
+                    TglButton6.IsEnabled = TglButton7.IsEnabled = TglButton8.IsEnabled = false;
             }
         }
 
@@ -71,9 +71,8 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             Parallel.Invoke(() => InterfaceTweaks.UseInterface(toggleButton.Name, toggleButton.State));
-            СonfigSettings.configInterface.Remove(toggleButton.Name);
-            СonfigSettings.configInterface.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
 
+            await Task.Delay(200);
             switch (toggleButton.Name)
             {
                 case "TglButton1":

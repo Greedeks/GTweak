@@ -6,8 +6,13 @@
              xmlns:local="clr-namespace:GTweak.View"
              xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
              mc:Ignorable="d" 
+             xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
              d:DesignHeight="550" d:DesignWidth="1100"
              Style="{StaticResource LaunchPage}" Loaded="Page_Loaded" KeyDown="Page_KeyDown">
+    <UserControl.DataContext>
+        <vm:InterfaceVM />
+    </UserControl.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="139*"/>
@@ -29,9 +34,9 @@
                         <uc:ToggleButton x:Name="TglButton3" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl3_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton4" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl4_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton5" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl5_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton6" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl6_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton7" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl7_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton8" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl8_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton6" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl6_interface}" IsEnabled="{Binding SetBlockWithoutLicense}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton7" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl7_interface}" IsEnabled="{Binding SetBlockWithoutLicense}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton8" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl8_interface}" IsEnabled="{Binding SetBlockWithoutLicense}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton9" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl9_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton10" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl10_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton11" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl11_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
@@ -45,11 +50,11 @@
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Width="Auto" Height="Auto">
 
-                        <uc:ToggleButton x:Name="TglButton15" Height="25" Width="Auto" Margin="20,15,0,0" DynamicText="{DynamicResource tgl15_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton16" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl16_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton17" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl17_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton18" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl18_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton19" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl19_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton15" Height="25" Width="Auto" Margin="20,15,0,0" DynamicText="{DynamicResource tgl15_interface}" IsEnabled="{Binding SetBlockForWin10}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton16" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl16_interface}" IsEnabled="{Binding SetBlockForWin10}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton17" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl17_interface}" IsEnabled="{Binding SetBlockForWin10}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton18" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl18_interface}" IsEnabled="{Binding SetBlockForWin10}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton19" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl19_interface}" IsEnabled="{Binding SetBlockForWin10}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton20" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl20_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton21" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl21_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton22" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl22_interface}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>

@@ -4,6 +4,12 @@ namespace GTweak.Core.Model
 {
     internal sealed class MainModel
     {
+        internal sealed class InterfaceModel
+        {
+            internal bool BlockForWin10 { get; set; } = true;
+            internal bool BlockWithoutLicense { get; set; } = true;
+        }
+
         internal sealed class InformationSystemModel
         {
             internal string WindowsName { get; set; }
