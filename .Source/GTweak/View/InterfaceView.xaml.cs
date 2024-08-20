@@ -18,19 +18,6 @@ namespace GTweak.View
             InitializeComponent();
 
             App.LanguageChanged += (s, e) => { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
-
-            if (!SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
-            {
-                TglButton15.IsEnabled = TglButton16.IsEnabled = TglButton17.IsEnabled = 
-                    TglButton18.IsEnabled = TglButton19.IsEnabled = false;
-            }
-
-            if (WindowsLicense.statusLicense != 1)
-            {
-                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("viewlicense_notification"));
-                TglButton3.IsEnabled = TglButton4.IsEnabled = TglButton5.IsEnabled =
-                    TglButton6.IsEnabled = TglButton7.IsEnabled = TglButton8.IsEnabled = false;
-            }
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
