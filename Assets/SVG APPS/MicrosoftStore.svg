@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+	 viewBox="0 0 95 95" style="enable-background:new 0 0 95 95;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:15;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;}
+	.st0{fill:none;stroke:#000000;stroke-width:2.7832;stroke-miterlimit:1.8555;}
+	.st1{fill:none;stroke:#000000;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 </style>
-<polygon class="st0" points="133,469.1 379,469.1 502,256 379,42.9 133,42.9 10,256 "/>
-<g id="Microsoft_Store">
-	<g id="_Group_">
-		<polygon id="_Path_" class="st1" points="109.7,187.6 341.7,139.8 369,153.5 396.3,153.5 396.3,399.1 341.7,412.7 109.7,371.8 		
-			"/>
-		<polygon id="_Path_2" class="st1" points="164.3,235.3 273.5,214.9 273.5,337.7 164.3,317.2 		"/>
-		<line id="_Path_3" class="st1" x1="164.3" y1="276.3" x2="273.5" y2="276.3"/>
-		<line id="_Path_4" class="st1" x1="212.1" y1="233.1" x2="212.1" y2="323.2"/>
-		<path id="_Path_5" class="st1" d="M273.5,153.9L273.5,153.9c0-30.1-24.4-54.6-54.6-54.6s-54.6,24.4-54.6,54.6v22.5"/>
-		<path id="_Path_6" class="st1" d="M297.5,149c-10.3-28.3-41.6-43-69.9-32.7c-21.4,7.8-35.8,28-36,50.8v3.5"/>
-	</g>
+<g id="surface1_1_">
+	<path class="st0" d="M24.7,87h45.6l22.8-39.5L70.3,8H24.7L1.9,47.5L24.7,87z"/>
+	<path class="st1" d="M20.4,34.8l43-8.9l5.1,2.5h5.1v45.6l-10.1,2.5l-43-7.6V34.8z"/>
+	<path class="st1" d="M30.5,43.7l20.3-3.8v22.8l-20.3-3.8V43.7z"/>
+	<path class="st1" d="M30.5,51.3h20.3"/>
+	<path class="st1" d="M39.4,43.2V60"/>
+	<path class="st1" d="M50.8,28.6c0-5.6-4.5-10.1-10.1-10.1c-5.6,0-10.1,4.5-10.1,10.1v4.2"/>
+	<path class="st1" d="M55.2,27.6c-1.9-5.3-7.7-8-13-6.1c-4,1.4-6.6,5.2-6.7,9.4v0.7"/>
 </g>
 </svg>

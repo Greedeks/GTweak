@@ -1,20 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:15;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#000000;stroke-width:13;stroke-miterlimit:10;}
-</style>
-<polygon class="st0" points="133,469.1 379,469.1 502,256 379,42.9 133,42.9 10,256 "/>
-<g id="layer1">
-	<path id="rect1420" class="st1" d="M287.2,122.1h85.7c10.1,0,18.3,7.4,18.3,16.5v43.6c0,9.1-8.2,16.5-18.3,16.5h-85.7
-		c-10.1,0-18.3-7.4-18.3-16.5v-43.6C268.8,129.5,277,122.1,287.2,122.1z"/>
-	<path id="rect1420-5-1" class="st1" d="M137.5,121.3h88.3c9.4,0,17.1,6.7,17.1,14.9v136.4c0,8.2-7.6,14.9-17.1,14.9h-88.3
-		c-9.4,0-17.1-6.7-17.1-14.9V136.2C120.5,128,128.1,121.3,137.5,121.3z"/>
-	<path id="rect1420-7" class="st1" d="M140.1,314.2h85.7c10.1,0,18.3,7.4,18.3,16.5v43.6c0,9.1-8.2,16.5-18.3,16.5h-85.7
-		c-10.1,0-18.3-7.4-18.3-16.5v-43.6C121.7,321.6,130,314.2,140.1,314.2z"/>
-	<path id="rect1420-5-1-0" class="st1" d="M286.2,223.8h88.3c9.4,0,17.1,6.7,17.1,14.9v136.4c0,8.2-7.6,14.9-17.1,14.9h-88.3
-		c-9.4,0-17.1-6.7-17.1-14.9V238.7C269.1,230.5,276.8,223.8,286.2,223.8z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="95px" height="95px" viewBox="0 0 95 95" version="1.1">
+<g id="surface1">
+<path style="fill:none;stroke-width:15;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 133.010526 469.094737 L 378.989474 469.094737 L 502 256 L 378.989474 42.905263 L 133.010526 42.905263 L 10 256 Z M 133.010526 469.094737 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:13;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 287.2 122.105263 L 372.905263 122.105263 C 382.989474 122.105263 391.2 129.494737 391.2 138.610526 L 391.2 182.189474 C 391.2 191.305263 382.989474 198.694737 372.905263 198.694737 L 287.2 198.694737 C 277.094737 198.694737 268.905263 191.305263 268.905263 182.189474 L 268.905263 138.610526 C 268.8 129.494737 277.010526 122.105263 287.2 122.105263 Z M 287.2 122.105263 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:13;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 137.494737 121.305263 L 225.810526 121.305263 C 235.2 121.305263 242.905263 128 242.905263 136.189474 L 242.905263 272.610526 C 242.905263 280.8 235.305263 287.494737 225.810526 287.494737 L 137.494737 287.494737 C 128.105263 287.494737 120.4 280.8 120.4 272.610526 L 120.4 136.189474 C 120.505263 128 128.105263 121.305263 137.494737 121.305263 Z M 137.494737 121.305263 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:13;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 140.105263 314.189474 L 225.810526 314.189474 C 235.894737 314.189474 244.105263 321.6 244.105263 330.694737 L 244.105263 374.294737 C 244.105263 383.410526 235.894737 390.8 225.810526 390.8 L 140.105263 390.8 C 130 390.8 121.810526 383.410526 121.810526 374.294737 L 121.810526 330.694737 C 121.705263 321.6 130 314.189474 140.105263 314.189474 Z M 140.105263 314.189474 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:13;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 286.189474 223.789474 L 374.505263 223.789474 C 383.894737 223.789474 391.6 230.505263 391.6 238.694737 L 391.6 375.094737 C 391.6 383.305263 384 390 374.505263 390 L 286.189474 390 C 276.8 390 269.094737 383.305263 269.094737 375.094737 L 269.094737 238.694737 C 269.094737 230.505263 276.8 223.789474 286.189474 223.789474 Z M 286.189474 223.789474 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
 </g>
 </svg>

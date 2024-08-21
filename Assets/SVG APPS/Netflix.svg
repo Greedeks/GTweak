@@ -1,23 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:15;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#1F212B;stroke-width:8;stroke-miterlimit:20;}
-	.st2{fill:none;stroke:#1F212B;stroke-width:8;stroke-linecap:round;stroke-miterlimit:20;}
-</style>
-<g>
-	<polygon class="st0" points="133,469.1 379,469.1 502,256 379,42.9 133,42.9 10,256 	"/>
-	<g>
-		<polygon class="st1" points="151,65.6 288.5,435.5 360,442.5 222.5,66.4 		"/>
-		<path class="st1" d="M288.5,247.4c-0.8-2.3,0-181.1,0-181.1l71.5,0.8l1.8,379.2"/>
-		<polyline class="st1" points="220.9,252.1 220.9,434.7 150.2,441.7 151,65.6 		"/>
-		<line class="st2" x1="172.2" y1="421" x2="172.2" y2="305.5"/>
-		<line class="st2" x1="339.5" y1="313.2" x2="339.5" y2="166.6"/>
-		<line class="st2" x1="171.7" y1="284.8" x2="171.7" y2="253.7"/>
-		<line class="st2" x1="339.5" y1="145.9" x2="339.5" y2="87.9"/>
-		<line class="st2" x1="171.7" y1="234" x2="171.7" y2="174.4"/>
-	</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="95px" height="95px" viewBox="0 0 95 95" version="1.1">
+<g id="surface1">
+<path style="fill:none;stroke-width:15;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 133.010526 469.094737 L 378.989474 469.094737 L 502 256 L 378.989474 42.905263 L 133.010526 42.905263 L 10 256 Z M 133.010526 469.094737 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 150.989474 65.6 L 288.505263 435.494737 L 360 442.505263 L 222.505263 66.4 Z M 150.989474 65.6 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 288.505263 247.410526 C 287.705263 245.094737 288.505263 66.294737 288.505263 66.294737 L 360 67.094737 L 361.810526 446.294737 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 220.905263 252.105263 L 220.905263 434.694737 L 150.189474 441.705263 L 150.989474 65.6 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 172.189474 421.010526 L 172.189474 305.494737 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 339.494737 313.2 L 339.494737 166.610526 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 171.705263 284.8 L 171.705263 253.705263 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 339.494737 145.894737 L 339.494737 87.894737 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
+<path style="fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:miter;stroke:rgb(12.156863%,12.941176%,16.862745%);stroke-opacity:1;stroke-miterlimit:20;" d="M 171.705263 234 L 171.705263 174.4 " transform="matrix(0.185547,0,0,0.185547,0,0)"/>
 </g>
 </svg>

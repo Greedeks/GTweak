@@ -69,7 +69,7 @@ namespace GTweak.Utilities.Tweaks
             ["MicrosoftSolitaireCollection"] = new List<string>(1) { "Microsoft.MicrosoftSolitaireCollection" },
             ["MixedReality"] = new List<string>(1) { "Microsoft.MixedReality.Portal" },
             ["Xbox"] = new List<string>(7) { "Microsoft.XboxApp", "Microsoft.GamingApp", "Microsoft.XboxGamingOverlay", "Microsoft.XboxGameOverlay", "Microsoft.XboxIdentityProvider", "Microsoft.Xbox.TCUI", "Microsoft.XboxSpeechToTextOverlay" },
-            ["Paint3D"] = new List<string>(3) { "Microsoft.Paint", "Microsoft.MSPaint" },
+            ["Paint3D"] = new List<string>(1) { "Microsoft.MSPaint" },
             ["OneNote"] = new List<string>(1) { "Microsoft.Office.OneNote" },
             ["People"] = new List<string>(1) { "Microsoft.People" },
             ["MicrosoftStickyNotes"] = new List<string>(1) { "Microsoft.MicrosoftStickyNotes" },

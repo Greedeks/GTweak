@@ -126,11 +126,11 @@ namespace GTweak.View
 
         private void Apps_MouseEnter(object sender, MouseEventArgs e)
         {
-            StackPanel stackPanel = (StackPanel)sender;
+            Image imageApp = (Image)sender;
 
-            if (TextDescription.Text != (string)FindResource(stackPanel.Name + "_applications"))
+            if (TextDescription.Text != (string)FindResource(imageApp.Name + "_applications"))
             {
-                string _descriptionApps = (string)FindResource(stackPanel.Name + "_applications");
+                string _descriptionApps = (string)FindResource(imageApp.Name + "_applications");
                 WorkWithText.TypeWriteAnimation(_descriptionApps, TextDescription, TimeSpan.FromMilliseconds(250));
             }
         }
@@ -164,7 +164,7 @@ namespace GTweak.View
             MicrosoftOfficeHub.Source = !UninstallingApps.isAppDeletedList["MicrosoftOfficeHub"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MicrosoftOfficeHub") || UninstallingApps.UserAppsList.Contains("Microsoft.OutlookForWindows") ? (DrawingImage)FindResource("A_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DA_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DI_Sandtime");
             MicrosoftSolitaireCollection.Source = !UninstallingApps.isAppDeletedList["MicrosoftSolitaireCollection"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MicrosoftSolitaireCollection") ? (DrawingImage)FindResource("A_DI_MicrosoftSolitaireCollection") : (DrawingImage)FindResource("DA_DI_MicrosoftSolitaireCollection") : (DrawingImage)FindResource("DI_Sandtime"); MixedReality.Source = !UninstallingApps.isAppDeletedList["MixedReality"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MixedReality.Portal") ? (DrawingImage)FindResource("A_DI_MixedReality") : (DrawingImage)FindResource("DA_DI_MixedReality") : (DrawingImage)FindResource("DI_Sandtime");
             Xbox.Source = !UninstallingApps.isAppDeletedList["Xbox"] ? UninstallingApps.UserAppsList.Contains("Microsoft.XboxApp") || UninstallingApps.UserAppsList.Contains("Microsoft.GamingApp") || UninstallingApps.UserAppsList.Contains("Microsoft.XboxGamingOverlay") ||
-               UninstallingApps.UserAppsList.Contains("Microsoft.XboxGameOverlay") || UninstallingApps.UserAppsList.Contains("Microsoft.XboxIdentityProvider") || UninstallingApps.UserAppsList.Contains("Microsoft.Xbox.TCUI") || 
+               UninstallingApps.UserAppsList.Contains("Microsoft.XboxGameOverlay") || UninstallingApps.UserAppsList.Contains("Microsoft.XboxIdentityProvider") || UninstallingApps.UserAppsList.Contains("Microsoft.Xbox.TCUI") ||
                UninstallingApps.UserAppsList.Contains("Microsoft.XboxSpeechToTextOverlay") ? (DrawingImage)FindResource("A_DI_Xbox") : (DrawingImage)FindResource("DA_DI_Xbox") : (DrawingImage)FindResource("DI_Sandtime");
             Paint3D.Source = !UninstallingApps.isAppDeletedList["Paint3D"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MSPaint") || UninstallingApps.UserAppsList.Contains("Microsoft.Paint") ? (DrawingImage)FindResource("A_DI_Paint3D") : (DrawingImage)FindResource("DA_DI_Paint3D") : (DrawingImage)FindResource("DI_Sandtime");
             OneNote.Source = !UninstallingApps.isAppDeletedList["OneNote"] ? UninstallingApps.UserAppsList.Contains("Microsoft.Office.OneNote") ? (DrawingImage)FindResource("A_DI_OneNote") : (DrawingImage)FindResource("DA_DI_OneNote") : (DrawingImage)FindResource("DI_Sandtime");
