@@ -25,7 +25,7 @@ namespace GTweak.Utilities
                 {
                     NotificationWindow notificationWindow = new NotificationWindow();
 
-                    Parallel.Invoke(() =>
+                    Parallel.Invoke(async() =>
                     {
                         if (notificationWindow.IsLoaded || isAlreadyLaunch)
                             return;
@@ -38,7 +38,7 @@ namespace GTweak.Utilities
                             TextNotice = content,
                             ActionChoice = action,
                         };
-
+                        await Task.Delay(200);
                         notificationWindow.Show();
                         notificationWindow.Closed += (s, e) => { isAlreadyLaunch = false; };
 

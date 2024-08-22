@@ -18,6 +18,12 @@ namespace GTweak.View
             InitializeComponent();
 
             App.LanguageChanged += (s, e) => { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+
+            if (WindowsLicense.statusLicense != 1)
+            {
+                App.ViewLang();
+                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["viewlicense_notification"]);
+            }
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
@@ -48,7 +54,7 @@ namespace GTweak.View
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
         {
-            if(TextViewColor.Visibility==Visibility.Visible)
+            if (TextViewColor.Visibility==Visibility.Visible)
                 TextViewColor.Visibility=Visibility.Hidden;
             if (TextDescription.Text != (string)FindResource("defaultDescription"))
                 WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
@@ -59,7 +65,6 @@ namespace GTweak.View
             ToggleButton toggleButton = (ToggleButton)sender;
             Parallel.Invoke(() => InterfaceTweaks.UseInterface(toggleButton.Name, toggleButton.State));
 
-            await Task.Delay(200);
             switch (toggleButton.Name)
             {
                 case "TglButton1":

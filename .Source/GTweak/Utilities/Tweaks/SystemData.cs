@@ -125,7 +125,7 @@ namespace GTweak.Utilities
 
         internal sealed class СomputerСonfiguration
         {
-            internal static string clientWinVersion = default;
+            internal static string clientWinVersion = string.Empty;
             internal static bool isNoInternetConnection = false, isInternetLimited = false;
             private static string _type = string.Empty;
             private static readonly EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };

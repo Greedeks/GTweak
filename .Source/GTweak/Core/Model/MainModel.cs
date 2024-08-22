@@ -6,8 +6,8 @@ namespace GTweak.Core.Model
     {
         internal sealed class InterfaceModel
         {
-            internal bool BlockForWin10 { get; set; } = true;
-            internal bool BlockWithoutLicense { get; set; } = true;
+            internal bool IsBlockWin10 { get; set; }
+            internal bool IsBlockLicense { get; set; }
         }
 
         internal sealed class InformationSystemModel

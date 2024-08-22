@@ -42,7 +42,6 @@ namespace GTweak.View
             ToggleButton toggleButton = (ToggleButton)sender;
             Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality(toggleButton.Name, toggleButton.State));
 
-            await Task.Delay(200);
             switch (toggleButton.Name)
             {
                 case "TglButton8":

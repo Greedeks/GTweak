@@ -1,7 +1,7 @@
-﻿using GTweak.Utilities;
-using GTweak.Core.Model;
-using System.Windows;
+﻿using GTweak.Core.Model;
+using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
+using System.Windows;
 
 namespace GTweak.Core.ViewModel
 {
@@ -9,31 +9,23 @@ namespace GTweak.Core.ViewModel
     internal class InterfaceVM : ViewModelBase
     {
         private readonly MainModel.InterfaceModel _model;
-        public bool SetBlockForWin10
+        public bool IsBlockForWin10
         {
-            get => _model.BlockForWin10;
-            set { _model.BlockForWin10 = value; OnPropertyChanged(); }
+            get => _model.IsBlockWin10;
+            set { _model.IsBlockWin10 = value; OnPropertyChanged(); }
         }
 
-        public bool SetBlockWithoutLicense
+        public bool IsBlockWithoutLicense
         {
-            get => _model.BlockWithoutLicense;
-            set { _model.BlockWithoutLicense = value; OnPropertyChanged(); }
+            get => _model.IsBlockLicense;
+            set { _model.IsBlockLicense = value; OnPropertyChanged(); }
         }
 
         public InterfaceVM()
         {
             _model = new MainModel.InterfaceModel();
-
-            SetBlockForWin10 = SystemData.СomputerСonfiguration.clientWinVersion.Contains("11");
-
-            SetBlockWithoutLicense = WindowsLicense.statusLicense == 1;
-
-            if (WindowsLicense.statusLicense != 1)
-            {
-                App.ViewLang();
-                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["viewlicense_notification"]);
-            }
+            IsBlockForWin10 = SystemData.СomputerСonfiguration.clientWinVersion.Contains("11");
+            IsBlockWithoutLicense = WindowsLicense.statusLicense == 1;
         }
     }
 
