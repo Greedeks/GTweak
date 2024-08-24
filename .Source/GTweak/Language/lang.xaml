@@ -145,10 +145,10 @@
     <v:String x:Key="tgl13_interface">The «This computer» icon on the Desktop</v:String>
     <v:String x:Key="tgl14_interface">The «Trash» icon on the Desktop</v:String>
     <v:String x:Key="tgl15_interface">Taskbar Alignment (Windows 11)</v:String>
-    <v:String x:Key="tgl16_interface">Icons on the taskbar (Windows 11)</v:String>
+    <v:String x:Key="tgl16_interface">Standard layout of the «Start» menu (Windows 11)</v:String>
     <v:String x:Key="tgl17_interface">New stripped-down context menu (Windows 11)</v:String>
     <v:String x:Key="tgl18_interface">Show tips and suggestions (Windows 11)</v:String>
-    <v:String x:Key="tgl19_interface">Standard layout of the «Start» menu (Windows 11)</v:String>
+    <v:String x:Key="tgl19_interface">Icons and buttons on the taskbar</v:String>
     <v:String x:Key="tgl20_interface">Show personalized ads</v:String>
     <v:String x:Key="tgl21_interface">Restore previous folder windows when logging in</v:String>
     <v:String x:Key="tgl22_interface">Notifications with Windows tips and suggestions</v:String>
@@ -176,10 +176,10 @@
     <v:String x:Key="TglButton13_description_interface">The Computer icon, unlike the computer shortcut, is better because it has the necessary properties of the context menu and is free of unnecessary ones.</v:String>
     <v:String x:Key="TglButton14_description_interface">If you do not need the Trash icon on the desktop and you do not want to waste time looking for a shutdown, then you can use tweaks.</v:String>
     <v:String x:Key="TglButton15_description_interface">Choose where you want the icons on the taskbar to be displayed, on the cent or on the left</v:String>
-    <v:String x:Key="TglButton16_description_interface">No time to search? The tweak will remove icons from the taskbar: Copilot, Search, Task Submission, Chat.</v:String>
+    <v:String x:Key="TglButton16_description_interface">Modifies the layout of the «Start» menu, increasing more available space for pinning applications.</v:String>
     <v:String x:Key="TglButton17_description_interface">This tweak will return you to the usual classic context menu for the desktop and «Explorer». Attention the screen may blink.</v:String>
     <v:String x:Key="TglButton18_description_interface">Windows 11 sometimes shows hints on how to use a particular feature, for example, the new «Start» menu or «Quick Settings». They are useful if you are seeing Windows 11 for the first time, as it is useless junk.</v:String>
-    <v:String x:Key="TglButton19_description_interface">Modifies the layout of the «Start» menu, increasing more available space for pinning applications.</v:String>
+    <v:String x:Key="TglButton19_description_interface">No time to search? The tweak will remove icons from the taskbar: Copilot, Search, Task View, Chat. In addition, it will remove and hide for Windows 10 users: News and Interests, Cortana.  Attention the screen may blink.</v:String>
     <v:String x:Key="TglButton20_description_interface">By default, Windows uses the collected information to target ads, i.e. to display ads that match your interests. And literally, this advertisement is located wherever free space is available for display. If you don't want Windows to display personalized ads in all Store apps, Explorer, Options, and the Start menu, then you can disable this junk.</v:String>
     <v:String x:Key="TglButton21_description_interface">By default, Windows does not save the positions of windows, as well as their state when turned off. This tweak will allow you to remember the type of open folders in order to restore them after Logging out, Rebooting and Shutting down.</v:String>
     <v:String x:Key="TglButton22_description_interface">The tweak allows you to disable all Windows notifications with tips and suggestions, as well as disable Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is an unexpectedly appearing window with an offer to urgently complete device configuration and log in to your Microsoft account.</v:String>

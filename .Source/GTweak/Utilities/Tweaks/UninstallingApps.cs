@@ -98,6 +98,16 @@ namespace GTweak.Utilities.Tweaks
             ["Outlook"] = new List<string>(1) { "Microsoft.OutlookForWindows" },
             ["QuickAssist"] = new List<string>(1) { "MicrosoftCorporationII.QuickAssist" }
         };
+        private static readonly SortedList<string, string> alternativeName = new SortedList<string, string>
+        {
+            ["MicrosoftSolitaireCollection"] = "solitaire",
+            ["MicrosoftOfficeHub"] = "officehub",
+            ["FeedbackHub"] = "feedback",
+            ["Mail"] = "communicationsapps",
+            ["ClipChamp"] = "Clipchamp Video Editor",
+            ["Music"] = "zunemusic",
+            ["Video"] = "zunevideo"
+        };
 
         internal void ViewInstalledApp()
         {
@@ -144,8 +154,10 @@ namespace GTweak.Utilities.Tweaks
                             process.Start();
                         }
 
-                        process.WaitForExit();
+                        if (!string.IsNullOrEmpty(alternativeName[appName]))
+                            process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + !string.IsNullOrEmpty(alternativeName[appName]) + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
 
+                        process.WaitForExit();
                         process.Dispose();
                     }
 
@@ -186,6 +198,12 @@ namespace GTweak.Utilities.Tweaks
                         foreach (string appDelete in appNm.Value)
                         {
                             process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
+                            process.Start();
+                        }
+
+                        foreach (string altName in alternativeName.Values)
+                        {
+                            process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + altName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                             process.Start();
                         }
                     }
