@@ -46,6 +46,7 @@ namespace GTweak.Windows
                 From = 0,
                 To = 0.5,
                 SpeedRatio = 2,
+                EasingFunction = new QuadraticEase(),
                 Duration = TimeSpan.FromSeconds(0.35)
             };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);

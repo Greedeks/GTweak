@@ -63,21 +63,15 @@ namespace GTweak.Windows
             }
         }
 
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            Parallel.Invoke(() =>
-            {
-                if (Settings.IsSoundNotification)
-                {
-                    _mediaPlayer.Open(new Uri(Settings.PathSound));
-                    _mediaPlayer.Volume = Settings.VolumeNotification / 100.0f;
-                    _mediaPlayer.Play();
-                }
-            });
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (Settings.IsSoundNotification)
+            {
+                _mediaPlayer.Open(new Uri(Settings.PathSound));
+                _mediaPlayer.Volume = Settings.VolumeNotification / 100.0f;
+                _mediaPlayer.Play();
+            }
+
             switch (ActionChoice)
             {
                 case "logout":
@@ -103,12 +97,14 @@ namespace GTweak.Windows
 
             EasingDoubleKeyFrame fromFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right)
             {
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0))
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
+                EasingFunction = new QuadraticEase()
             };
 
             EasingDoubleKeyFrame toFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10)
             {
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(120))
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
+                EasingFunction = new QuadraticEase()
             };
 
             doubleAnimKeyFrames.KeyFrames.Add(fromFrame);
@@ -119,6 +115,7 @@ namespace GTweak.Windows
                 From = 0,
                 To = 1,
                 SpeedRatio = 3,
+                EasingFunction = new QuadraticEase(),
                 Duration = TimeSpan.FromSeconds(0.8)
             };
 

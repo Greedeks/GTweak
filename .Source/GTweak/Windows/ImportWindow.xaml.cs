@@ -34,12 +34,12 @@ namespace GTweak.Windows
         {
             if (_valueProgress == 100)
             {
-                if(restartNeed>0)
+                if (restartNeed>0)
                     new ViewNotification().Show("restart");
                 else if (restartNeed == 0 && logoutNeed > 0)
                     new ViewNotification().Show("logout");
                 App.UpdateImport();
-                this.Close();
+                Close();
             }
         }
 
@@ -90,11 +90,11 @@ namespace GTweak.Windows
                                 case 10:
                                 case 11:
                                 case 12:
-                                case 25:
                                 case 26:
+                                case 27:
                                     logoutNeed++;
                                     break;
-                                case 21:
+                                case 22:
                                     restartNeed++;
                                     break;
                             }
@@ -111,9 +111,10 @@ namespace GTweak.Windows
                         {
                             await Task.Delay(700);
                             Parallel.Invoke(() => ServicesTweaks.UseServices("TglButton" + number, Convert.ToBoolean(value)));
-                            restartNeed++;
                         }
                     }
+
+                    restartNeed++;
                 }
 
                 if (i == 80)
