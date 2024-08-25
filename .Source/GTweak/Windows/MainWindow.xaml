@@ -210,10 +210,10 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Grid Grid.Column="0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image x:Uid="git" Source="{StaticResource DI_Git}" Width="31" Margin="20,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
-                                        <Image x:Uid="tg" Source="{StaticResource DI_Telegram}" Width="26" Margin="5,5,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
-                                        <Image x:Uid="steam" Source="{StaticResource DI_Steam}" Width="30" Margin="1,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                                        <Image x:Uid="git" Source="{StaticResource DI_Git}" Style="{StaticResource Apps}" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                        <Image x:Uid="tg" Source="{StaticResource DI_Telegram}" Style="{StaticResource Apps}" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                        <Image x:Uid="steam" Source="{StaticResource DI_Steam}" Style="{StaticResource Apps}" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Column="1">

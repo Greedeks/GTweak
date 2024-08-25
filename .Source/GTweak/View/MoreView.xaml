@@ -38,7 +38,13 @@
                     <Grid Grid.Column="0">
                         <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
                             <StackPanel Orientation="Vertical" >
-                                <Image Source="{StaticResource DI_LicenseWindows}" Height="60" Width="60" Margin="0,15,0,0"/>
+                                <Image Height="60" Width="60" Margin="0,15,0,0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Source" Value="{StaticResource DI_LicenseWindows}"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                                 <TextBlock Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_licens_more}"/>
                                 <TextBlock Style="{StaticResource Text}" Foreground="#BFBFBF" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_licens_more}"/>
                                 <Button x:Name="BtnWinLicense" Content="{DynamicResource btntext_licens_more}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnWinLicense_PreviewMouseDown"/>
@@ -49,7 +55,13 @@
                     <Grid Grid.Column="1">
                         <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
                             <StackPanel Orientation="Vertical" >
-                                <Image Source="{StaticResource DI_BackupSystem}" Height="60" Width="60" Margin="0,15,0,0"/>
+                                <Image Height="60" Width="60" Margin="0,15,0,0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Source" Value="{StaticResource DI_BackupSystem}"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                                 <TextBlock Style="{StaticResource Text}" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_createpoint_more}"/>
                                 <TextBlock Style="{StaticResource Text}" Foreground="#BFBFBF" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_createpoint_more}"/>
                                 <Button x:Name="BtnRestorePoint" Content="{DynamicResource btntext_createpoint_more}" FontSize="10pt" VerticalAlignment="Bottom" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnRestorePoint_PreviewMouseDown"/>
@@ -60,7 +72,13 @@
                     <Grid Grid.Column="2">
                         <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
                             <StackPanel Orientation="Vertical" >
-                                <Image Source="{StaticResource DI_RecoverySystem}" Height="60" Width="60" Margin="0,15,0,0"/>
+                                <Image Height="60" Width="60" Margin="0,15,0,0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Source" Value="{StaticResource DI_RecoverySystem}"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                                 <TextBlock Style="{StaticResource Text}" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_recovery_more}"/>
                                 <TextBlock Style="{StaticResource Text}" Foreground="#BFBFBF" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_recovery_more}"/>
                                 <Button x:Name="BtnRecoveyLaunch" Content="{DynamicResource btntext_recovery_more}" FontSize="10pt" VerticalAlignment="Bottom" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnRecoveyLaunch_PreviewMouseDown"/>
@@ -78,7 +96,13 @@
                     <Grid Grid.Column="0" Margin="180,0,0,0">
                         <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
                             <StackPanel Orientation="Vertical" >
-                                <Image Source="{StaticResource DI_Trash}" Height="55" Width="55" Margin="0,15,0,0"/>
+                                <Image Height="60" Width="60" Stretch="Uniform" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Source" Value="{StaticResource DI_Trash}"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                                 <TextBlock Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_clear_more}"/>
                                 <TextBlock Style="{StaticResource Text}" Foreground="#BFBFBF" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_clear_more}"/>
                                 <Button x:Name="BtnClear" Content="{DynamicResource btntext_clear_more}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnClear_PreviewMouseDown"/>
@@ -89,7 +113,13 @@
                     <Grid Grid.Column="1" Margin="0,0,180,0">
                         <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
                             <StackPanel Orientation="Vertical" >
-                                <Image Source="{StaticResource DI_DisableRecovery}" Height="60" Width="60" Margin="0,15,0,0"/>
+                                <Image Height="60" Width="60" Stretch="Uniform" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Image.Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Source" Value="{StaticResource DI_DisableRecovery}"/>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
                                 <TextBlock Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_disablepoint_more}"/>
                                 <TextBlock Style="{StaticResource Text}" Foreground="#BFBFBF" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_disablepoint_more}"/>
                                 <Button x:Name="BtnDisableRecovery" Content="{DynamicResource btntext_disablepoint_more}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnDisableRecovery_PreviewMouseDown"/>
