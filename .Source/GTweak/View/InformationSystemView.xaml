@@ -28,15 +28,21 @@
                 </StackPanel>
             </Border>
         </Popup>
-        
+
         <Grid Grid.Row="0">
 
             <Grid HorizontalAlignment="Left" Margin="50,20,0,0">
                 <Ellipse Height="90" Width="90" Stroke="#4D4D4D" StrokeThickness="5.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.4"/>
 
-                <xrpb:RadialProgressBar x:Name="CPULoad" Value="0" Maximum="100" Width="100" Height="100" Foreground="{StaticResource Color_Accent}" ArcWidth="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <xrpb:RadialProgressBar x:Name="CPULoad" Value="0" Maximum="100" Width="100" Height="100" ArcWidth="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <xrpb:RadialProgressBar.Foreground>
+                        <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
+                            <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>
+                            <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0.4"/>
+                        </LinearGradientBrush>
+                    </xrpb:RadialProgressBar.Foreground>
                     <xrpb:RadialProgressBar.Effect>
-                        <DropShadowEffect BlurRadius="40" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
+                        <DropShadowEffect BlurRadius="30" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
                     </xrpb:RadialProgressBar.Effect>
                 </xrpb:RadialProgressBar>
 
@@ -64,9 +70,15 @@
             <Grid HorizontalAlignment="Right" Margin="0,20,50,0">
                 <Ellipse Height="90" Width="90" Stroke="#4D4D4D" StrokeThickness="5.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.4"/>
 
-                <xrpb:RadialProgressBar x:Name="RAMLoad" Value="0" Maximum="100" Width="100" Height="100" Foreground="{StaticResource Color_Accent}" ArcWidth="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <xrpb:RadialProgressBar x:Name="RAMLoad" Value="0" Maximum="100" Width="100" Height="100" ArcWidth="5" VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Arrow">
+                    <xrpb:RadialProgressBar.Foreground>
+                        <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
+                            <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>
+                            <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0.4"/>
+                        </LinearGradientBrush>
+                    </xrpb:RadialProgressBar.Foreground>
                     <xrpb:RadialProgressBar.Effect>
-                        <DropShadowEffect BlurRadius="40" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
+                        <DropShadowEffect BlurRadius="30" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
                     </xrpb:RadialProgressBar.Effect>
                 </xrpb:RadialProgressBar>
 
@@ -78,27 +90,27 @@
         </Grid>
 
         <ScrollViewer Grid.Row="2" Style="{StaticResource ScrollPage}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition  Height="auto"/>
-                            <RowDefinition  Height="auto"/>
-                            <RowDefinition  Height="auto"/>
-                            <RowDefinition  Height="auto"/>
-                            <RowDefinition  Height="auto"/>
-                        </Grid.RowDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="auto"/>
+                        <RowDefinition  Height="auto"/>
+                        <RowDefinition  Height="auto"/>
+                        <RowDefinition  Height="auto"/>
+                        <RowDefinition  Height="auto"/>
+                    </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0">
+                    <Grid Grid.Row="0">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
                             <TextBlock Text="{DynamicResource title_bios_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
                             <TextBlock Text="{Binding DisplayBiosName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
-                        </Grid>
+                    </Grid>
 
                     <Grid Grid.Row="1">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
@@ -166,10 +178,10 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                    
+
             </Grid>
-            </ScrollViewer>
-            
+        </ScrollViewer>
+
     </Grid>
 
 </UserControl>
