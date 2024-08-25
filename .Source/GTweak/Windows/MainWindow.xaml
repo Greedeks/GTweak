@@ -130,7 +130,7 @@
 
                 <ContentControl x:Name="Pages" Content="{Binding CurrentView}" IsTabStop="False" QueryCursor="SettingsMenu_QueryCursor"/>
 
-                <Grid x:Name="SettingsMenu" Width="400" HorizontalAlignment="Right" Opacity="0.97" Panel.ZIndex="1">
+                <Grid x:Name="SettingsMenu" Width="0" HorizontalAlignment="Right" Opacity="0.97" Panel.ZIndex="1">
 
                     <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="1" Height="550" Background="{StaticResource Color_Background_Dark}" CornerRadius="10 0 0 10">
                         <Border.Effect>
