@@ -130,90 +130,99 @@
 
                 <ContentControl x:Name="Pages" Content="{Binding CurrentView}" IsTabStop="False" QueryCursor="SettingsMenu_QueryCursor"/>
 
-                <StackPanel x:Name="SettingsMenu" Orientation="Horizontal" HorizontalAlignment="Right" Background="{StaticResource Color_Background_Dark}" VirtualizingStackPanel.IsVirtualizing="True" Width="0" Opacity="0.97" Panel.ZIndex="1">
-                    <Grid Width="400">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="70*"/>
-                            <RowDefinition Height="481*"/>
-                            <RowDefinition Height="45*"/>
-                        </Grid.RowDefinitions>
+                <Grid x:Name="SettingsMenu" Width="400" HorizontalAlignment="Right" Opacity="0.97" Panel.ZIndex="1">
 
-                        <Grid Grid.Row="0">
-                            <TextBlock FontFamily="{StaticResource Jura}" Text="{DynamicResource title_settings_main}" Foreground="{StaticResource Color_Accent}" FontSize="20" Margin="0,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <TextBlock.Effect>
-                                    <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
-                                </TextBlock.Effect>
-                            </TextBlock>
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="1" Height="550" Background="{StaticResource Color_Background_Dark}" CornerRadius="10 0 0 10">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                        </Border.Effect>
+                    </Border>
 
-                            <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom"/>
-                        </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="{StaticResource Color_Background_Dark}" VirtualizingStackPanel.IsVirtualizing="True">
+                        <Grid Width="399">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="70*"/>
+                                <RowDefinition Height="481*"/>
+                                <RowDefinition Height="45*"/>
+                            </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="1">
-                            <StackPanel Orientation="Vertical">
+                            <Grid Grid.Row="0">
+                                <TextBlock FontFamily="{StaticResource Jura}" Text="{DynamicResource title_settings_main}" Foreground="{StaticResource Color_Accent}" FontSize="20" Margin="0,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                                    </TextBlock.Effect>
+                                </TextBlock>
 
-                                <uс:ToggleButton  x:Name="BtnNotification" DynamicText="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
+                                <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10 10 0 0"/>
+                            </Grid>
 
-                                <uс:ToggleButton  x:Name="BtnSoundNtn" DynamicText="{DynamicResource btgl_sound_main}"  VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnSoundNtn_ChangedState"/>
+                            <Grid Grid.Row="1">
+                                <StackPanel Orientation="Vertical">
 
-                                <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,20,0,0">
-                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource slider_volume_main}"/>
-                                    <Slider x:Name="SliderVolume" Style="{StaticResource Horizontal_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="7,13,0,0"  Width="140" ValueChanged="SliderVolume_ValueChanged"/>
-                                </StackPanel>
+                                    <uс:ToggleButton  x:Name="BtnNotification" DynamicText="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
 
-                                <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" DynamicText="{DynamicResource btgl_toast_main}" Margin="40,20,0,0" ChangedState="BtnTopMost_ChangedState"/>
+                                    <uс:ToggleButton  x:Name="BtnSoundNtn" DynamicText="{DynamicResource btgl_sound_main}"  VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnSoundNtn_ChangedState"/>
 
-                                <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,20,0,0">
-                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,0,0,0" Text="{DynamicResource cmbox_lang_main}"/>
-                                    <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="170" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
-                                        <TextBlock Text="{DynamicResource cmbox_eng_main}"/>
-                                        <TextBlock Text="{DynamicResource cmbox_ru_main}"/>
-                                    </ComboBox>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,20,0,0">
+                                        <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource slider_volume_main}"/>
+                                        <Slider x:Name="SliderVolume" Style="{StaticResource Horizontal_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="7,13,0,0"  Width="140" ValueChanged="SliderVolume_ValueChanged"/>
+                                    </StackPanel>
 
-                                <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom" Margin="0,20,0,0"/>
+                                    <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" DynamicText="{DynamicResource btgl_toast_main}" Margin="40,20,0,0" ChangedState="BtnTopMost_ChangedState"/>
 
-                                <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
-                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource text_saveconfig}"/>
-                                    <Button x:Name="BtnExport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnExport_PreviewMouseDown">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{DynamicResource btn_export}" Margin="0,2,0,0"/>
-                                            <Image Source="{StaticResource DI_Export}" Margin="5,0,0,0" Width="20" Height="20"/>
-                                        </StackPanel>
-                                    </Button>
-                                    <Button x:Name="BtnImport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnImport_PreviewMouseDown">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{DynamicResource btn_import}" Margin="0,2,0,0"/>
-                                            <Image Source="{StaticResource DI_Import}" Margin="5,0,0,0" Width="20" Height="20"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
-                                    <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource text_selfremove}"/>
-                                    <Button x:Name="BtnDelete" Content="{DynamicResource btn_selfremove}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="107" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnDelete_PreviewMouseDown"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
+                                    <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,20,0,0">
+                                        <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,0,0,0" Text="{DynamicResource cmbox_lang_main}"/>
+                                        <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="170" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
+                                            <TextBlock Text="{DynamicResource cmbox_eng_main}"/>
+                                            <TextBlock Text="{DynamicResource cmbox_ru_main}"/>
+                                        </ComboBox>
+                                    </StackPanel>
 
-                        <Grid Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="300*"/>
-                                <ColumnDefinition Width="100*"/>
-                            </Grid.ColumnDefinitions>
+                                    <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom" Margin="0,20,0,0" CornerRadius="10 10 0 0"/>
 
-                            <Grid Grid.Column="0">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image x:Uid="git" Source="{StaticResource DI_Git}" Width="31" Margin="20,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
-                                    <Image x:Uid="tg" Source="{StaticResource DI_Telegram}" Width="26" Margin="5,5,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
-                                    <Image x:Uid="steam" Source="{StaticResource DI_Steam}" Width="30" Margin="1,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                    <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
+                                        <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource text_saveconfig}"/>
+                                        <Button x:Name="BtnExport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnExport_PreviewMouseDown">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{DynamicResource btn_export}" Margin="0,2,0,0"/>
+                                                <Image Source="{StaticResource DI_Export}" Margin="5,0,0,0" Width="20" Height="20"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button x:Name="BtnImport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnImport_PreviewMouseDown">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{DynamicResource btn_import}" Margin="0,2,0,0"/>
+                                                <Image Source="{StaticResource DI_Import}" Margin="5,0,0,0" Width="20" Height="20"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
+                                        <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,4,0,0" Text="{DynamicResource text_selfremove}"/>
+                                        <Button x:Name="BtnDelete" Content="{DynamicResource btn_selfremove}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="107" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnDelete_PreviewMouseDown"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
-                            <Grid Grid.Column="1">
-                                <TextBlock x:Name="TweakVersion" Style="{StaticResource Text_In}" FontSize="12px" Foreground="{StaticResource Color_Inactive}" Text="{Binding DisplayTweakVersion}"/>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="300*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image x:Uid="git" Source="{StaticResource DI_Git}" Width="31" Margin="20,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                        <Image x:Uid="tg" Source="{StaticResource DI_Telegram}" Width="26" Margin="5,5,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                        <Image x:Uid="steam" Source="{StaticResource DI_Steam}" Width="30" Margin="1,0,0,0" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <TextBlock x:Name="TweakVersion" Style="{StaticResource Text_In}" FontSize="12px" Foreground="{StaticResource Color_Inactive}" Text="{Binding DisplayTweakVersion}"/>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
             </Grid>
 
             <Grid x:Name="NavigationBar" Grid.Row="2">
