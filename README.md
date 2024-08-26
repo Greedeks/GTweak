@@ -1,6 +1,6 @@
 <h1 align="center"> <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Jura&weight=600&size=40&duration=1000&pause=3000&color=16BD72&multiline=true&width=160&lines=GTweak" alt="Typing SVG" /></a> <img width="32" height="32" src="https://github.com/Greedeks/GTweak/assets/82948926/62527a34-0a06-4bd1-8515-c23a33c73bf2"/> </h1>
 
-![Logo](https://github.com/Greedeks/GTweak/blob/main/Images/Preview.gif)
+![Logo](https://github.com/Greedeks/GTweak/blob/main/Github/Preview.gif)
 ## 
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=16BD72)](https://github.com/Greedeks/GTweak/releases/latest)
 ![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)
@@ -16,12 +16,12 @@
 ## Information and Usage guide
 <details>
   <summary>Screenshots :flower_playing_cards: </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/EN/Confidentiality.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/EN/Interface.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/EN/Applications.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/EN/Services.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/EN/System.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/EN/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/More.png"/>
 </details>
 
 ## A small list of features :wrench:
@@ -51,12 +51,12 @@ You will have to stop the antivirus before using it
 ## Информация на Русском Языке
 <details>
   <summary>Изображения :flower_playing_cards:</summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/RU/Confidentiality.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/RU/Interface.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/RU/Applications.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/RU/Services.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/RU/System.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Images/RU/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/More.png"/>
 </details>
 
 ## Небольшой список возможностей :wrench:
