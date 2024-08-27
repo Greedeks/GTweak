@@ -20,7 +20,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
-                        <Border Background="Transparent" BorderBrush="{StaticResource Color_Accent}" BorderThickness="1" CornerRadius="3"/>
+                        <Border x:Name="border" Background="{StaticResource Color_Background_Dark}" BorderBrush="{StaticResource Color_Accent}" BorderThickness="0,0,0,1" CornerRadius="5"/>
                         <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
                         <Label Margin="5,0,0,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
                                Visibility="Collapsed" Foreground="#BFBFBF" FontFamily="{StaticResource Jura}"/>
@@ -34,12 +34,15 @@
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderBrush" Value="#d1dbe4" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="False">
                             <Setter Property="Text" Value=""/>
+                            <Setter Property="BorderBrush" Value="#d1dbe4" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
                             <Setter Property="Text" Value=""/>
+                            <Setter Property="BorderBrush" Value="#d1dbe4" TargetName="border"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

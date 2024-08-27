@@ -11,7 +11,7 @@ namespace GTweak.Windows
 
     public partial class ImportWindow : Window
     {
-        private byte restartNeed = 0, logoutNeed = 0;
+        private bool isRestartNeed = false, isLogoutNeed = false;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         public ImportWindow()
         {
@@ -34,9 +34,9 @@ namespace GTweak.Windows
         {
             if (_valueProgress == 100)
             {
-                if (restartNeed>0)
+                if (isRestartNeed)
                     new ViewNotification().Show("restart");
-                else if (restartNeed == 0 && logoutNeed > 0)
+                else if (!isRestartNeed && isLogoutNeed)
                     new ViewNotification().Show("logout");
                 App.UpdateImport();
                 Close();
@@ -63,7 +63,7 @@ namespace GTweak.Windows
                             {
                                 case 8:
                                 case 15:
-                                    restartNeed++;
+                                    isRestartNeed = true;
                                     break;
                             }
                         }
@@ -92,10 +92,10 @@ namespace GTweak.Windows
                                 case 12:
                                 case 26:
                                 case 27:
-                                    logoutNeed++;
+                                    isLogoutNeed = true;
                                     break;
                                 case 22:
-                                    restartNeed++;
+                                    isRestartNeed = true;
                                     break;
                             }
                         }
@@ -111,10 +111,9 @@ namespace GTweak.Windows
                         {
                             await Task.Delay(700);
                             Parallel.Invoke(() => ServicesTweaks.UseServices("TglButton" + number, Convert.ToBoolean(value)));
+                            isRestartNeed = true;
                         }
                     }
-
-                    restartNeed++;
                 }
 
                 if (i == 80)
@@ -154,10 +153,10 @@ namespace GTweak.Windows
                                     case 14:
                                     case 15:
                                     case 20:
-                                        restartNeed++;
+                                        isRestartNeed = true;
                                         break;
                                     case 2:
-                                        logoutNeed++;
+                                        isLogoutNeed = true;
                                         break;
                                 }
                             }
