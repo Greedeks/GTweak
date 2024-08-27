@@ -157,7 +157,7 @@ namespace GTweak.Utilities
             {
                 Filter = "(*.INI)|*.INI"
             };
-            Nullable<bool> isResult = openFileDialog.ShowDialog();
+            bool? isResult = openFileDialog.ShowDialog();
 
             if (isResult == true)
             {

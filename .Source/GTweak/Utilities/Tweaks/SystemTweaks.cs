@@ -320,9 +320,6 @@ namespace GTweak.Utilities.Tweaks
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint _pvParam, uint _fWinIni);
         internal static void UseSystemSliders(string tweak, uint value)
         {
-            СonfigSettings.configSystem.Remove(tweak);
-            СonfigSettings.configSystem.Add(tweak, Convert.ToString(value));
-
             switch (tweak)
             {
                 case "Slider1":

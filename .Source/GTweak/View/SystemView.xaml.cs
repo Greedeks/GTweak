@@ -49,6 +49,13 @@ namespace GTweak.View
                 WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }
 
+        private void Sliders_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Slider slider = (Slider)sender;
+            СonfigSettings.configSystem.Remove(slider.Name);
+            СonfigSettings.configSystem.Add(slider.Name, Convert.ToString(slider.Value));
+        }
+
         private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider slider = (Slider)sender;

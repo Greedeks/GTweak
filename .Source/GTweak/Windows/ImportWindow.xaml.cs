@@ -50,7 +50,7 @@ namespace GTweak.Windows
                 _token.ThrowIfCancellationRequested();
                 СonfigSettings configSettings = new СonfigSettings(Settings.PathConfig);
 
-                if (i == 2)
+                if (i == 2 && configSettings.IsThereSection("Confidentiality Tweaks"))
                 {
                     for (byte number = 1; number <= 18; number++)
                     {
@@ -70,7 +70,7 @@ namespace GTweak.Windows
                     }
                 }
 
-                if (i == 30)
+                if (i == 30 && configSettings.IsThereSection("Interface Tweaks"))
                 {
                     for (byte number = 1; number <= 28; number++)
                     {
@@ -102,7 +102,7 @@ namespace GTweak.Windows
                     }
                 }
 
-                if (i == 50)
+                if (i == 50 && configSettings.IsThereSection("Services Tweaks"))
                 {
                     for (byte number = 1; number <= 28; number++)
                     {
@@ -116,7 +116,7 @@ namespace GTweak.Windows
                     }
                 }
 
-                if (i == 80)
+                if (i == 80 && configSettings.IsThereSection("System Tweaks"))
                 {
                     for (byte number = 1; number <= 3; number++)
                     {
