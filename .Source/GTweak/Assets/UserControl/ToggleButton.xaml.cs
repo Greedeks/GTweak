@@ -16,7 +16,7 @@ namespace GTweak.Assets.UserControl
         /// </summary>
         internal event EventHandler ChangedState;
 
-        private readonly Thickness _leftSide = new Thickness(-37, 0, 0, 0), _rightSide = new Thickness(0, 0, -40, 0);
+        private readonly Thickness _leftSide = new Thickness(5, 0, 0, 0), _rightSide = new Thickness(45, 0, 0, 0);
         private readonly LinearGradientBrush brushOffColor = new LinearGradientBrush(), brushOnColor = new LinearGradientBrush();
         private bool _state = false;
 

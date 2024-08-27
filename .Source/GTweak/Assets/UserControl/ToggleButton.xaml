@@ -5,13 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.Assets.UserControl"
              mc:Ignorable="d" 
-             d:Height="177" d:Width="288" SnapsToDevicePixels="True" UseLayoutRounding="True">
+             d:Height="auto" d:Width="auto" SnapsToDevicePixels="True" UseLayoutRounding="True">
     <Grid Width="Auto">
         <StackPanel Orientation="Horizontal">
             <Viewbox Margin="0" KeyboardNavigation.IsTabStop="False" MouseLeftButtonDown="Toggle_MouseLeftButtonDown">
                 <Grid Height="60" VerticalAlignment="Center" Width="Auto">
                     <Rectangle x:Name="Back" Fill="{StaticResource Color_ToggleButtonBackground}" Cursor="Hand" HorizontalAlignment="Left" Height="56.5" VerticalAlignment="Top" Width="96.5" Margin="2,2,0,0" RadiusY="29" RadiusX="29" KeyboardNavigation.IsTabStop="False" />
-                    <Ellipse x:Name="Dot" Fill="White" Cursor="Hand" HorizontalAlignment="Center" Height="50" VerticalAlignment="Center" Width="50" StrokeThickness="1"  KeyboardNavigation.IsTabStop="False">
+                    <Ellipse x:Name="Dot" Fill="White" Cursor="Hand" HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" Width="50" StrokeThickness="1"  KeyboardNavigation.IsTabStop="False" RenderTransformOrigin="1.31,0.51" Margin="5,0,0,0">
                         <Ellipse.Effect>
                             <DropShadowEffect ShadowDepth="1" Opacity="0.5"/>
                         </Ellipse.Effect>
@@ -21,7 +21,7 @@
                     </Ellipse>
                 </Grid>
             </Viewbox>
-            <TextBlock x:Name="ToggleText" Text="Текст"  Margin="10,2,0,0" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource Text_In}"/>
+            <TextBlock x:Name="ToggleText" Text="TextTglButton"  Margin="10,2,0,0" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource Text_In}"/>
         </StackPanel>
     </Grid>
 </UserControl>
