@@ -2,6 +2,7 @@
 using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace GTweak.Core.ViewModel
 {
@@ -103,6 +104,19 @@ namespace GTweak.Core.ViewModel
             set { _model.CountProcess = value; OnPropertyChanged(); }
         }
 
+        public int SetBlurValue
+        {
+            get => _model.BlurValue;
+            set { _model.BlurValue = value; OnPropertyChanged(); }
+        }
+
+        public DrawingImage DisplayImageHidden
+        {
+            get => _model.ImageHidden;
+            set { _model.ImageHidden = value; OnPropertyChanged(); }
+        }
+
+
         public InformationSystemVM()
         {
             _model = new MainModel.InformationSystemModel();
@@ -132,6 +146,17 @@ namespace GTweak.Core.ViewModel
 
             DisplayIpAddress = SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"];
             DisplayCountProcess = new SystemData.MonitoringSystem().CountProcess.ToString();
+
+            if (Settings.IsHiddenIpAddress & !SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited)
+            {
+                SetBlurValue = 15;
+                DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Show"];
+            }
+            else
+            {
+                SetBlurValue = 0;
+                DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Hide"];
+            }
         }
     }
 }

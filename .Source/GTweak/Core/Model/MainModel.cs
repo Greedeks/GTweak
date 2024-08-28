@@ -23,6 +23,8 @@ namespace GTweak.Core.Model
             internal string NetAdapterName { get; set; }
             internal string IpAddress { get; set; }
             internal string CountProcess { get; set; }
+            internal int BlurValue { get; set; }
+            internal DrawingImage ImageHidden { get; set; }
         }
 
         internal sealed class MainWindowModel

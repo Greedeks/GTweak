@@ -6,7 +6,7 @@
     <SolidColorBrush x:Key="Color_Accent" Color="#54FF9F"/>
     <SolidColorBrush x:Key="Color_Inactive" Color="#808080"/>
     <SolidColorBrush x:Key="Color_Over" Color="#6AECA3"/>
-    <SolidColorBrush x:Key="Color_ButtonOver" Color="#93E9BE"/>
+    <SolidColorBrush x:Key="Color_ButtonOver" Color="#60f0a8"/>
     <SolidColorBrush x:Key="Color_Border" Color="#00D65E"/>
     <SolidColorBrush x:Key="Color_ToggleButtonBackground" Color="#737373"/>
 

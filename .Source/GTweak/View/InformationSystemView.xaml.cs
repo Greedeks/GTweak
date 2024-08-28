@@ -10,6 +10,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Threading;
 
 namespace GTweak.View
@@ -54,7 +55,8 @@ namespace GTweak.View
                         DataContext = new InformationSystemVM();
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).Start();
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).IsBackground = true;
-                        Application.Current.Dispatcher.Invoke(ProgressBarAnim); 
+                        Application.Current.Dispatcher.Invoke(ProgressBarAnim);
+                        ImageHidden.Visibility = !SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited ? Visibility.Visible : Visibility.Collapsed;
                     };
                 }
                 else if (time.TotalSeconds % 5 == 0)
@@ -70,7 +72,7 @@ namespace GTweak.View
 
             timer.Start();
         }
-
+       
         private void AnimationPopup(bool _reverse)
         {
             PopupCopy.IsOpen = true;
@@ -86,6 +88,24 @@ namespace GTweak.View
             doubleAnim.Completed += (s, _) => { if (_reverse) PopupCopy.IsOpen = false; };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, doubleAnim);
+        }
+        private void ImageHidden_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DoubleAnimation doubleAnim = new DoubleAnimation()
+                {
+                    From = Settings.IsHiddenIpAddress ? 15: 0,
+                    To = Settings.IsHiddenIpAddress ? 0 : 15,
+                    EasingFunction = new QuadraticEase(),
+                    Duration = TimeSpan.FromSeconds(0.3)
+                };
+                Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
+
+                Settings.ChangingParameters(!Settings.IsHiddenIpAddress, "HiddenIP");
+                DataContext = new InformationSystemVM();
+            }
         }
 
         private async void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -112,6 +132,7 @@ namespace GTweak.View
                 {
                     From = CPULoad.Value,
                     To = SystemData.MonitoringSystem.CpuUsage,
+                    EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
                 Timeline.SetDesiredFrameRate(doubleAnim, 400);
@@ -122,6 +143,7 @@ namespace GTweak.View
                 {
                     From = RAMLoad.Value,
                     To = new SystemData.MonitoringSystem().RamUsage,
+                    EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
                 Timeline.SetDesiredFrameRate(doubleAnim, 400);
@@ -161,6 +183,7 @@ namespace GTweak.View
         {
             Application.Current.Dispatcher.Invoke(() => { CPULoad.Value = SystemData.MonitoringSystem.CpuUsage; });
             Application.Current.Dispatcher.Invoke(() => { RAMLoad.Value = new SystemData.MonitoringSystem().RamUsage; });
+            ImageHidden.Visibility = !SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void Page_KeyDown(object sender, KeyEventArgs e)

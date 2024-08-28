@@ -110,17 +110,11 @@ namespace GTweak.Utilities
 
         internal sealed class ClientInternetProtocol
         {
-            [JsonProperty("ip")]
+            [JsonProperty("query")]
             internal string Ip { get; set; }
 
-            [JsonProperty("country")]
-            internal string Country { get; set; }
-
-            [JsonProperty("query")]
-            internal string Ip_Reserve { get; set; }
-
             [JsonProperty("countryCode")]
-            internal string Country_Reserve { get; set; }
+            internal string Country { get; set; }
         }
 
         internal sealed class СomputerСonfiguration
@@ -263,10 +257,7 @@ namespace GTweak.Utilities
                         try
                         {
                             HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5.0) };
-                            clientInternetProtocol = JsonConvert.DeserializeObject<ClientInternetProtocol>(client.GetStringAsync("https://ipinfo.io/json").Result);
-
-                            if (string.IsNullOrEmpty(clientInternetProtocol.Ip) || string.IsNullOrEmpty(clientInternetProtocol.Country))
-                                clientInternetProtocol = JsonConvert.DeserializeObject<ClientInternetProtocol>(client.GetStringAsync("http://ip-api.com/json/?fields=61439").Result);
+                            clientInternetProtocol = JsonConvert.DeserializeObject<ClientInternetProtocol>(client.GetStringAsync("http://ip-api.com/json/?fields=61439").Result);
                         }
                         catch
                         {
@@ -279,14 +270,10 @@ namespace GTweak.Utilities
                             if (isInternetLimited)
                                 isInternetLimited = false;
 
+                    
                             if (!string.IsNullOrEmpty(clientInternetProtocol.Ip) || !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
-                               СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
-                               isNoInternetConnection = false && isNoInternetConnection;
-                            }
-                            else if (!string.IsNullOrEmpty(clientInternetProtocol.Ip_Reserve) || !string.IsNullOrEmpty(clientInternetProtocol.Country_Reserve))
-                            {
-                                СonfigurationData["IpAddress"] = clientInternetProtocol.Ip_Reserve + " (" + clientInternetProtocol.Country_Reserve + ")";
+                                СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
                                 isNoInternetConnection = false && isNoInternetConnection;
                             }
                             else

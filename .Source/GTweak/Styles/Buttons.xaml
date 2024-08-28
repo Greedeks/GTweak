@@ -55,7 +55,6 @@
         </Style.Triggers>
     </Style>
 
-
     <Style TargetType="{x:Type Button}" x:Key="BtnDefault">
         <Setter Property="Foreground" Value="{StaticResource Color_Background_Dark}"/>
         <Setter Property="Background" Value="{StaticResource Color_Accent}"/>
@@ -78,6 +77,37 @@
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <ScaleTransform x:Name="ImageScale" ScaleX="1" ScaleY="1"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path = IsMouseOver}" Value="true">
+                                            <DataTrigger.Setters>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <BlurEffect Radius="5"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger.Setters>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
@@ -106,6 +136,5 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-
 
 </ResourceDictionary>

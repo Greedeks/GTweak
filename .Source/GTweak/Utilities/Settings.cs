@@ -27,12 +27,14 @@ namespace GTweak.Utilities
         private static string _language_ = string.Empty;
         private static bool _isTopMost = false;
         internal static int PID = 0;
+        internal static bool _isHiddenIpAddress = false;
 
         internal static bool IsViewNotification { get => _isViewNotification; set => _isViewNotification = value; }
         internal static bool IsSoundNotification { get => _isSoundNotification; set => _isSoundNotification = value; }
         internal static byte VolumeNotification { get => _volumeNotification; set => _volumeNotification = value; }
         internal static bool IsTopMost { get => _isTopMost; set => _isTopMost = value; }
         internal static string Language { get => _language_; set => _language_ = value; }
+        internal static bool IsHiddenIpAddress { get => _isHiddenIpAddress; set => _isHiddenIpAddress = value; }
 
         internal readonly void RunAnalysis()
         {
@@ -44,13 +46,14 @@ namespace GTweak.Utilities
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\GTweak");
             if (registryKey == null || registryKey.GetValue("Notification", null) == null || registryKey.GetValue("Sound", null) == null || registryKey.GetValue("Volume", null) == null ||
-            registryKey.GetValue("TopMost", null) == null || registryKey.GetValue("Language", null) == null)
+            registryKey.GetValue("TopMost", null) == null || registryKey.GetValue("Language", null) == null || registryKey.GetValue("HiddenIP", null) == null)
             {
                 registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
                 registryKey?.SetValue("Notification", IsViewNotification, RegistryValueKind.String);
                 registryKey?.SetValue("Sound", IsSoundNotification, RegistryValueKind.String);
                 registryKey?.SetValue("Volume", VolumeNotification, RegistryValueKind.String);
                 registryKey?.SetValue("TopMost", IsTopMost, RegistryValueKind.String);
+                registryKey?.SetValue("HiddenIP", IsHiddenIpAddress, RegistryValueKind.String);
                 if (string.IsNullOrEmpty(Language))
                 {
                     if (System.Text.RegularExpressions.Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", System.Text.RegularExpressions.RegexOptions.Multiline).ToString().Contains("ru"))
@@ -68,6 +71,7 @@ namespace GTweak.Utilities
                 IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
                 VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "100");
                 IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");
+                IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
                 Language = registryKey?.GetValue("Language").ToString();
             }
             registryKey.Close();
@@ -95,8 +99,12 @@ namespace GTweak.Utilities
                         break;
                 case "Language":
                     Language = registryKey?.GetValue("Language").ToString();
-                break;
-            }
+                        break;
+                case "HiddenIP":
+                        IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
+                    break;
+
+                }
                 registryKey.Close();
             });
         }

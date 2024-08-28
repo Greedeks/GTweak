@@ -71,7 +71,7 @@
     <v:String x:Key="title_settings_main">Settings</v:String>
     <v:String x:Key="btgl_notifications_main">Show notifications</v:String>
     <v:String x:Key="btgl_sound_main">Notification sound</v:String>
-    <v:String x:Key="slider_volume_main">Notification volume:</v:String>
+    <v:String x:Key="slider_volume_main">Notifications volume:</v:String>
     <v:String x:Key="btgl_toast_main">Pin on top of all windows</v:String>
     <v:String x:Key="cmbox_lang_main">Interface language:</v:String>
     <v:String x:Key="cmbox_eng_main">English</v:String>

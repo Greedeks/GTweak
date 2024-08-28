@@ -71,7 +71,7 @@
     <v:String x:Key="title_settings_main">Настройки</v:String>
     <v:String x:Key="btgl_notifications_main">Показывать уведомления</v:String>
     <v:String x:Key="btgl_sound_main">Звук уведомление</v:String>
-    <v:String x:Key="slider_volume_main">Громкость уведомление:</v:String>
+    <v:String x:Key="slider_volume_main">Громкость уведомлений:</v:String>
     <v:String x:Key="btgl_toast_main">Закрепить поверх всех окон</v:String>
     <v:String x:Key="cmbox_lang_main">Язык интерфейса:</v:String>
     <v:String x:Key="cmbox_eng_main">Английский</v:String>
