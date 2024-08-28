@@ -149,7 +149,7 @@ namespace GTweak.Core.ViewModel
 
             if (Settings.IsHiddenIpAddress & !SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited)
             {
-                SetBlurValue = 15;
+                SetBlurValue = 20;
                 DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Show"];
             }
             else

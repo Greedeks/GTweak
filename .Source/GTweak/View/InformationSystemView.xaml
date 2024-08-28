@@ -177,7 +177,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock x:Name="IpAddress" Text="{Binding DisplayIpAddress}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand">
                                     <TextBlock.Effect>
-                                        <BlurEffect  Radius="{Binding SetBlurValue}"/>
+                                        <BlurEffect  Radius="{Binding SetBlurValue}" RenderingBias="Performance"/>
                                     </TextBlock.Effect>
                                 </TextBlock>
                                 <Image x:Name="ImageHidden" Source="{Binding DisplayImageHidden}" Style="{StaticResource Apps}" Height="20" Width="20" Margin="10,0,0,0" PreviewMouseDown="ImageHidden_PreviewMouseDown"/>

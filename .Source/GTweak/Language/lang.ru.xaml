@@ -54,7 +54,7 @@
     <v:String x:Key="clearingcache_notification">Произведена очистка системного кэша файлов</v:String>
     <v:String x:Key="import_warning_notification">Данный файл не подходит для импорта</v:String>
     <v:String x:Key="import_empty_notification">Этот файл пуст, применение твиков невозможно</v:String>
-    <v:String x:Key="export_warning_notification">Это не имеет смысла, файл будет пустым. Сначала примените хотя бы один твик</v:String>
+    <v:String x:Key="export_warning_notification">Это не имеет смысла, сначала примените хотя бы один твик</v:String>
     <v:String x:Key="clear_ram_notification">Очистка кратковременной памяти и временных файлов произведена</v:String>
     <v:String x:Key="disable_recovery_notification">Восстановление системы отключено, точки восстановления недоступны</v:String>
     <v:String x:Key="warndisable_recovery_notification">У вас уже отключена система восстановления</v:String>

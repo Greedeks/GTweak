@@ -89,22 +89,25 @@ namespace GTweak.View
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, doubleAnim);
         }
+
         private void ImageHidden_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                DoubleAnimation doubleAnim = new DoubleAnimation()
-                {
-                    From = Settings.IsHiddenIpAddress ? 15: 0,
-                    To = Settings.IsHiddenIpAddress ? 0 : 15,
-                    EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(0.3)
-                };
-                Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
+                Parallel.Invoke(() => {
+                    DoubleAnimation doubleAnim = new DoubleAnimation()
+                    {
+                        From = Settings.IsHiddenIpAddress ? 20 : 0,
+                        To = Settings.IsHiddenIpAddress ? 0 : 20,
+                        EasingFunction = new QuadraticEase(),
+                        Duration = TimeSpan.FromSeconds(0.2)
+                    };
+                    Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                    IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
 
-                Settings.ChangingParameters(!Settings.IsHiddenIpAddress, "HiddenIP");
-                DataContext = new InformationSystemVM();
+                    Settings.ChangingParameters(!Settings.IsHiddenIpAddress, "HiddenIP");
+                    DataContext = new InformationSystemVM();
+                });
             }
         }
 
