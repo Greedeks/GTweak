@@ -9,13 +9,21 @@ namespace GTweak.Utilities.Tweaks
 {
     internal abstract class Firewall
     {
-        private static readonly string nameRules = @"GTweak - Windows Update blocking";
+        private static readonly SortedList<string, string> nameRules = new SortedList<string, string>
+        {
+            ["Update"] = @"GTweak - Windows Update blocking",
+            ["Domain"] = @"GTweak - Spy domain names",
+            ["WDefender"] = @"GTweak - Windows Defender blocking"
+        };
+
         private static readonly SortedList<string, string> programPaths = new SortedList<string, string>
         {
             ["MoUso_New"] = @"Windows\UUS\amd64\MoUsoCoreWorker.exe",
             ["MoUso_Old"] = @"Windows\System32\MoUsoCoreWorker.exe",
             ["Uso"] = @"Windows\System32\usoclient.exe",
+            ["WD"] = @"Program Files\Windows Defender\MpCmdRun.exe",
         };
+
         private static bool CheckRulesWindows(string nameRule)
         {
             bool isCheck = true;
@@ -28,21 +36,22 @@ namespace GTweak.Utilities.Tweaks
             return isCheck;
         }
 
+
         protected static void BlockWindowsUpdate(bool isChoose)
         {
             try
             {
-                if (CheckRulesWindows(nameRules) && isChoose)
+                if (CheckRulesWindows(nameRules["Update"]) && isChoose)
                 {
                     Parallel.Invoke(() => { 
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
-                        RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules," (Update Orchestrator)")); 
+                        AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules["Update"]);
+                        AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
+                        AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)")); 
                     },
                     () => {
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + @programPaths["MoUso_New"], nameRules); 
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)")); 
-                        RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)")); 
+                        AddRulesOUT(isChoose, Settings.PathSystemDisk + @programPaths["MoUso_New"], nameRules["Update"]); 
+                        AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)")); 
+                        AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)")); 
                     });
                 }
                 else
@@ -51,16 +60,16 @@ namespace GTweak.Utilities.Tweaks
                     {
                         try
                         {
-                            RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
-                            RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
-                            RulesUpdateIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
+                            AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules["Update"]);
+                            AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
+                            AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                         try
                         {
-                            RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules);
-                            RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules, " (Old Way)"));
-                            RulesUpdateOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules, " (Update Orchestrator)"));
+                            AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules["Update"]);
+                            AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
+                            AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     });
@@ -73,7 +82,7 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        private static void RulesUpdateIN(in bool isChoose, in string pathProgram, in string nameRule)
+        private static void AddRulesIN(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
         {
             INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
@@ -81,7 +90,7 @@ namespace GTweak.Utilities.Tweaks
             firewallRule.ApplicationName = pathProgram;
             firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
             firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN;
-            firewallRule.Description = "Windows update blocking";
+            firewallRule.Description = description;
             firewallRule.Enabled = true;
             firewallRule.InterfaceTypes = "All";
             firewallRule.Name = nameRule;
@@ -95,7 +104,7 @@ namespace GTweak.Utilities.Tweaks
                 firewallPolicy.Rules.Remove(nameRule);
         }
 
-        private static void RulesUpdateOUT(in bool isChoose, in string pathProgram, in string nameRule)
+        private static void AddRulesOUT(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
         {
             INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
@@ -103,7 +112,7 @@ namespace GTweak.Utilities.Tweaks
             firewallRule.ApplicationName = pathProgram;
             firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
             firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
-            firewallRule.Description = "Windows update blocking";
+            firewallRule.Description = description;
             firewallRule.Enabled = true;
             firewallRule.InterfaceTypes = "All";
             firewallRule.Name = nameRule;
@@ -118,19 +127,23 @@ namespace GTweak.Utilities.Tweaks
 
         }
 
-        protected static void BlockSpyDomain(in bool isCheck)
+        protected static void BlockSpyDomain(in bool isChoose)
         {
             App.ViewLang();
             try
             {
-                if (CheckRulesWindows(@"GTweak - Spy domain names") && isCheck)
-                    RulesHosts(isCheck);
+                if (CheckRulesWindows(nameRules["Domain"]) && isChoose)
+                    RulesHosts(isChoose);
                 else
                 {
-                    try { RulesHosts(isCheck); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    try { RulesHosts(isChoose); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
             }
-            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch
+            {
+                App.ViewLang();
+                new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]);
+            }
         }
 
         private static void RulesHosts(in bool isChoose)
@@ -160,15 +173,40 @@ namespace GTweak.Utilities.Tweaks
             firewallRule.Description = "Spy domain names";
             firewallRule.Enabled = true;
             firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = @"GTweak - Spy domain names";
+            firewallRule.Name = nameRules["Domain"];
 
             if (isChoose)
             {
-                firewallPolicy.Rules.Remove(@"GTweak - Spy domain names");
+                firewallPolicy.Rules.Remove(nameRules["Domain"]);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
-                firewallPolicy.Rules.Remove(@"GTweak - Spy domain names");
+                firewallPolicy.Rules.Remove(nameRules["Domain"]);
+        }
+
+        protected static void BlockWDefender(bool isChoose)
+        {
+            App.ViewLang();
+            try
+            {
+                if (CheckRulesWindows(nameRules["WDefender"]) && isChoose)
+                {
+                    Parallel.Invoke(() => { AddRulesOUT(isChoose, Settings.PathSystemDisk + @programPaths["WD"], nameRules["WDefender"], "blocking Windows Defender database updates"); });
+                }
+                else
+                {
+                    Parallel.Invoke(() =>
+                    {
+                        try { AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["WD"], nameRules["WDefender"], "blocking Windows Defender database updates"); }
+                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    });
+                }
+            }
+            catch
+            {
+                App.ViewLang();
+                new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]);
+            }
         }
     }
 }

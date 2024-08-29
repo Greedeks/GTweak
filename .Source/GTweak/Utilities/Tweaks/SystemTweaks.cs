@@ -24,7 +24,7 @@ namespace GTweak.Utilities.Tweaks
         internal const uint SPI_SETMOUSE = 0x0004;
     };
 
-    internal sealed class SystemTweaks
+    internal sealed class SystemTweaks: Firewall
     {
         private static readonly string[] schedulerTasks = new string[2] {
                 @"Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
@@ -451,6 +451,7 @@ namespace GTweak.Utilities.Tweaks
                     };
                     backgroundWorker.RunWorkerCompleted += (s, e) => { isTweakWorkingAntivirus = false; new ViewNotification().Show("restart"); };
                     backgroundWorker.RunWorkerAsync();
+                    BlockWDefender(isChoose);
                     break;
                 case "TglButton9":
                     if (isChoose)
