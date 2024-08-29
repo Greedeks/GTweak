@@ -364,8 +364,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseServices(string tweak, bool isChoose)
         {
-            СonfigSettings.configServices.Remove(tweak);
-            СonfigSettings.configServices.Add(tweak, Convert.ToString(isChoose));
+            INIManager.configServices.Remove(tweak);
+            INIManager.configServices.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {

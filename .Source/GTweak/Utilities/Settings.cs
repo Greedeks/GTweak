@@ -111,8 +111,8 @@ namespace GTweak.Utilities
 
         internal static void SaveFileConfig()
         {
-            if (СonfigSettings.configConfidentiality.Count == 0 && СonfigSettings.configInterface.Count == 0
-                && СonfigSettings.configServices.Count == 0 && СonfigSettings.configSystem.Count == 0)
+            if (INIManager.configConfidentiality.Count == 0 && INIManager.configInterface.Count == 0
+                && INIManager.configServices.Count == 0 && INIManager.configSystem.Count == 0)
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["export_warning_notification"]);
 
             else
@@ -138,20 +138,20 @@ namespace GTweak.Utilities
                         if (File.Exists(PathConfig))
                             File.Delete(PathConfig);
 
-                        СonfigSettings settingsFileINI = new СonfigSettings(PathConfig);
+                        INIManager settingsFileINI = new INIManager(PathConfig);
                         settingsFileINI.WriteConfig("GTweak", "Author", "Greedeks");
                         settingsFileINI.WriteConfig("GTweak", "Release", "v4");
 
-                        foreach (KeyValuePair<string, string> addConfidentiality in СonfigSettings.configConfidentiality)
+                        foreach (KeyValuePair<string, string> addConfidentiality in INIManager.configConfidentiality)
                             settingsFileINI.WriteConfig("Confidentiality Tweaks", addConfidentiality.Key, addConfidentiality.Value);
 
-                        foreach (KeyValuePair<string, string> addInterface in СonfigSettings.configInterface)
+                        foreach (KeyValuePair<string, string> addInterface in INIManager.configInterface)
                             settingsFileINI.WriteConfig("Interface Tweaks", addInterface.Key, addInterface.Value);
 
-                        foreach (KeyValuePair<string, string> addServices in СonfigSettings.configServices)
+                        foreach (KeyValuePair<string, string> addServices in INIManager.configServices)
                             settingsFileINI.WriteConfig("Services Tweaks", addServices.Key, addServices.Value);
 
-                        foreach (KeyValuePair<string, string> addSystem in СonfigSettings.configSystem)
+                        foreach (KeyValuePair<string, string> addSystem in INIManager.configSystem)
                             settingsFileINI.WriteConfig("System Tweaks", addSystem.Key, addSystem.Value);
                     }
                     catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
@@ -170,7 +170,7 @@ namespace GTweak.Utilities
             if (isResult == true)
             {
                 PathConfig = openFileDialog.FileName;
-                СonfigSettings settingsFileINI = new СonfigSettings(PathConfig);
+                INIManager settingsFileINI = new INIManager(PathConfig);
 
                 if (settingsFileINI.ReadConfig("GTweak", "Author").Contains("Greedeks") && settingsFileINI.ReadConfig("GTweak", "Release").Contains("v4"))
                 {

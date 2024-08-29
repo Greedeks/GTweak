@@ -255,8 +255,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseСonfidentiality(string tweak, bool isChoose)
         {
-            СonfigSettings.configConfidentiality.Remove(tweak);
-            СonfigSettings.configConfidentiality.Add(tweak, Convert.ToString(isChoose));
+            INIManager.configConfidentiality.Remove(tweak);
+            INIManager.configConfidentiality.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {

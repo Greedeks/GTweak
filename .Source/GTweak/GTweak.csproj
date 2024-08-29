@@ -247,11 +247,11 @@
     <Compile Include="Utilities\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />
     <Compile Include="Utilities\Settings.cs" />
-    <Compile Include="Utilities\TakingOwnership.cs" />
+    <Compile Include="Utilities\Helpers\TakingOwnership.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
-    <Compile Include="Utilities\СonfigSettings.cs" />
+    <Compile Include="Utilities\Helpers\INIManager.cs" />
     <Compile Include="Utilities\ViewNotification.cs" />
-    <Compile Include="Utilities\TrustedInstaller.cs" />
+    <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\Firewall.cs" />
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />

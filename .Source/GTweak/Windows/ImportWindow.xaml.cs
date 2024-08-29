@@ -1,6 +1,9 @@
 ﻿using GTweak.Utilities;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,131 +48,135 @@ namespace GTweak.Windows
 
         private async Task SortByPageDate(CancellationToken _token, IProgress<int> _progress)
         {
+            List<string> tempSection = new List<string>(), tempKeys = new List<string>();
+   
+            INIManager iniManager = new INIManager(Settings.PathConfig);
+
             for (int i = 1; i <= 100; i++)
             {
                 _token.ThrowIfCancellationRequested();
-                СonfigSettings configSettings = new СonfigSettings(Settings.PathConfig);
 
-                if (i == 2 & configSettings.IsThereSection("Confidentiality Tweaks"))
+                if (i == 2 & iniManager.IsThereSection("Confidentiality Tweaks"))
                 {
-                    for (byte number = 1; number <= 18; number++)
+                    tempSection.Clear(); tempKeys.Clear();
+
+                    tempSection = iniManager.GetSection("Confidentiality Tweaks");
+                    tempKeys = iniManager.GetKeys("Confidentiality Tweaks");
+
+                    var acceptanceList = tempSection.Zip(tempKeys, (t, v) => new { Tweak = t, Value = v });
+
+                    foreach (var set in acceptanceList)
                     {
-                        string value = configSettings.ReadConfig("Confidentiality Tweaks", "TglButton" + number);
-                        if (!string.IsNullOrEmpty(value))
+                        await Task.Delay(700);
+                        Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality(set.Tweak, Convert.ToBoolean(set.Value)));
+
+                        switch (set.Tweak)
                         {
-                            await Task.Delay(700);
-                            Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality("TglButton" + number, Convert.ToBoolean(value)));
-                            switch (number)
-                            {
-                                case 8:
-                                case 15:
-                                    isRestartNeed = true;
-                                    break;
-                            }
+                            case "TglButton8":
+                            case "TglButton15":
+                                isRestartNeed = true;
+                                break;
                         }
                     }
                 }
 
-                if (i == 30 & configSettings.IsThereSection("Interface Tweaks"))
+                if (i == 30 & iniManager.IsThereSection("Interface Tweaks"))
                 {
-                    for (byte number = 1; number <= 28; number++)
-                    {
-                        string value = configSettings.ReadConfig("Interface Tweaks", "TglButton" + number);
-                        if (!string.IsNullOrEmpty(value))
-                        {
-                            await Task.Delay(700);
-                            Parallel.Invoke(() => InterfaceTweaks.UseInterface("TglButton" + number, Convert.ToBoolean(value)));
+                    tempSection.Clear(); tempKeys.Clear();
 
-                            switch (number)
+                    tempSection = iniManager.GetSection("Interface Tweaks");
+                    tempKeys = iniManager.GetKeys("Interface Tweaks");
+
+                    var acceptanceList = tempSection.Zip(tempKeys, (t, v) => new { Tweak = t, Value = v });
+
+                    foreach (var set in acceptanceList)
+                    {
+                        await Task.Delay(700);
+                        Parallel.Invoke(() => InterfaceTweaks.UseInterface(set.Tweak, Convert.ToBoolean(set.Value)));
+
+                        switch (set.Tweak)
+                        {
+                            case "TglButton1":
+                            case "TglButton2":
+                            case "TglButton3":
+                            case "TglButton4":
+                            case "TglButton5":
+                            case "TglButton10":
+                            case "TglButton11":
+                            case "TglButton12":
+                            case "TglButton26":
+                            case "TglButton27":
+                                isLogoutNeed = true;
+                                break;
+                            case "TglButton22":
+                                isRestartNeed = true;
+                                break;
+                        }
+                    }
+                }
+
+                if (i == 50 & iniManager.IsThereSection("Services Tweaks"))
+                {
+                    tempSection.Clear(); tempKeys.Clear();
+
+                    tempSection = iniManager.GetSection("Services Tweaks");
+                    tempKeys = iniManager.GetKeys("Services Tweaks");
+
+                    var acceptanceList = tempSection.Zip(tempKeys, (t, v) => new { Tweak = t, Value = v });
+
+                    foreach (var set in acceptanceList)
+                    {
+                        await Task.Delay(700);
+                        Parallel.Invoke(() => ServicesTweaks.UseServices(set.Tweak, Convert.ToBoolean(set.Value)));
+                        isRestartNeed = true;
+                    }
+                }
+
+                if (i == 80 & iniManager.IsThereSection("System Tweaks"))
+                {
+                    tempSection.Clear(); tempKeys.Clear();
+
+                    tempSection = iniManager.GetSection("System Tweaks");
+                    tempKeys = iniManager.GetKeys("System Tweaks");
+
+                    var acceptanceList = tempSection.Zip(tempKeys, (t, v) => new { Tweak = t, Value = v });
+
+                    foreach (var set in acceptanceList)
+                    {
+                        await Task.Delay(700);
+
+                        if (set.Tweak != "TglButton8")
+                        {
+                            if (set.Tweak.Contains("TglButton"))
+                                Parallel.Invoke(() => SystemTweaks.UseSystem(set.Tweak, Convert.ToBoolean(set.Value)));
+                            else
+                                SystemTweaks.UseSystemSliders(set.Tweak, Convert.ToUInt32(set.Value));
+
+                            switch (set.Tweak)
                             {
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 26:
-                                case 27:
+                                case "TglButton7":
+                                case "TglButton9":
+                                case "TglButton10":
+                                case "TglButton12":
+                                case "TglButton13":
+                                case "TglButton14":
+                                case "TglButton15":
+                                case "TglButton20":
+                                    isRestartNeed = true;
+                                    break;
+                                case "TglButton2":
                                     isLogoutNeed = true;
                                     break;
-                                case 22:
-                                    isRestartNeed = true;
-                                    break;
                             }
                         }
-                    }
-                }
-
-                if (i == 50 & configSettings.IsThereSection("Services Tweaks"))
-                {
-                    for (byte number = 1; number <= 28; number++)
-                    {
-                        string value = configSettings.ReadConfig("Services Tweaks", "TglButton" + number);
-                        if (!string.IsNullOrEmpty(value))
+                        else
                         {
-                            await Task.Delay(700);
-                            Parallel.Invoke(() => ServicesTweaks.UseServices("TglButton" + number, Convert.ToBoolean(value)));
-                            isRestartNeed = true;
-                        }
-                    }
-                }
-
-                if (i == 80 & configSettings.IsThereSection("System Tweaks"))
-                {
-                    for (byte number = 1; number <= 3; number++)
-                    {
-                        string value = configSettings.ReadConfig("System Tweaks", "Slider" + number);
-
-                        if (!string.IsNullOrEmpty(value))
-                        {
-                            await Task.Delay(700);
-                            SystemTweaks.UseSystemSliders("Slider" + number, Convert.ToUInt32(value));
-                        }
-
-                    }
-                    for (byte number = 1; number <= 23; number++)
-                    {
-                        string value = configSettings.ReadConfig("System Tweaks", "TglButton" + number);
-
-                        if (!string.IsNullOrEmpty(value))
-                        {
-                            await Task.Delay(700);
-
-                            if ("TglButton" + number != "TglButton8")
+                            if (!SystemTweaks.isTweakWorkingAntivirus)
                             {
-                                Parallel.Invoke(() => SystemTweaks.UseSystem("TglButton" + number, Convert.ToBoolean(value)));
-                                new ViewNotification().Show("restart");
-
-                                switch (number)
-                                {
-                                    case 7:
-                                    case 8:
-                                    case 9:
-                                    case 10:
-                                    case 12:
-                                    case 13:
-                                    case 14:
-                                    case 15:
-                                    case 20:
-                                        isRestartNeed = true;
-                                        break;
-                                    case 2:
-                                        isLogoutNeed = true;
-                                        break;
-                                }
+                                SystemTweaks.isTweakWorkingAntivirus = true;
+                                SystemTweaks.UseSystem(set.Tweak, Convert.ToBoolean(set.Value));
+                                await Task.Delay(20000);
                             }
-                            else
-                            {
-                                if (!SystemTweaks.isTweakWorkingAntivirus)
-                                {
-                                    SystemTweaks.isTweakWorkingAntivirus = true;
-                                    SystemTweaks.UseSystem("TglButton" + number, Convert.ToBoolean(value));
-                                    await Task.Delay(20000);
-                                }
-                            }
-
                         }
                     }
                 }

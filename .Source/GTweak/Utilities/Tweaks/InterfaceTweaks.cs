@@ -1,8 +1,6 @@
-﻿using GTweak.Core.ViewModel;
-using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -362,8 +360,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseInterface(string tweak, bool isChoose)
         {
-            СonfigSettings.configInterface.Remove(tweak);
-            СonfigSettings.configInterface.Add(tweak, Convert.ToString(isChoose));
+            INIManager.configInterface.Remove(tweak);
+            INIManager.configInterface.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {

@@ -342,8 +342,8 @@ namespace GTweak.Utilities.Tweaks
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
         internal static void UseSystem(string tweak, bool isChoose)
         {
-            СonfigSettings.configSystem.Remove(tweak);
-            СonfigSettings.configSystem.Add(tweak, Convert.ToString(isChoose));
+            INIManager.configSystem.Remove(tweak);
+            INIManager.configSystem.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {
