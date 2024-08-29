@@ -18,10 +18,10 @@ namespace GTweak.Utilities.Tweaks
 
         private static readonly SortedList<string, string> programPaths = new SortedList<string, string>
         {
-            ["MoUso_New"] = @"Windows\UUS\amd64\MoUsoCoreWorker.exe",
-            ["MoUso_Old"] = @"Windows\System32\MoUsoCoreWorker.exe",
-            ["Uso"] = @"Windows\System32\usoclient.exe",
-            ["WD"] = @"Program Files\Windows Defender\MpCmdRun.exe",
+            ["MoUso_New"] = string.Concat(Settings.PathSystemDisk,@"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
+            ["MoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
+            ["Uso"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\usoclient.exe"),
+            ["WD"] = string.Concat(Settings.PathSystemDisk, @"Program Files\Windows Defender\MpCmdRun.exe"),
         };
 
         private static bool CheckRulesWindows(string nameRule)
@@ -44,14 +44,14 @@ namespace GTweak.Utilities.Tweaks
                 if (CheckRulesWindows(nameRules["Update"]) && isChoose)
                 {
                     Parallel.Invoke(() => { 
-                        AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules["Update"]);
-                        AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
-                        AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)")); 
+                        AddRulesIN(isChoose, programPaths["MoUso_New"], nameRules["Update"]);
+                        AddRulesIN(isChoose, programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
+                        AddRulesIN(isChoose, programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)")); 
                     },
                     () => {
-                        AddRulesOUT(isChoose, Settings.PathSystemDisk + @programPaths["MoUso_New"], nameRules["Update"]); 
-                        AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)")); 
-                        AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)")); 
+                        AddRulesOUT(isChoose, programPaths["MoUso_New"], nameRules["Update"]); 
+                        AddRulesOUT(isChoose, programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)")); 
+                        AddRulesOUT(isChoose, programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)")); 
                     });
                 }
                 else
@@ -60,16 +60,16 @@ namespace GTweak.Utilities.Tweaks
                     {
                         try
                         {
-                            AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules["Update"]);
-                            AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
-                            AddRulesIN(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)"));
+                            AddRulesIN(isChoose, programPaths["MoUso_New"], nameRules["Update"]);
+                            AddRulesIN(isChoose, programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
+                            AddRulesIN(isChoose, programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                         try
                         {
-                            AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_New"], nameRules["Update"]);
-                            AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
-                            AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)"));
+                            AddRulesOUT(isChoose, programPaths["MoUso_New"], nameRules["Update"]);
+                            AddRulesOUT(isChoose, programPaths["MoUso_Old"], string.Concat(nameRules["Update"], " (Old Way)"));
+                            AddRulesOUT(isChoose, programPaths["Uso"], string.Concat(nameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     });
@@ -191,13 +191,13 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (CheckRulesWindows(nameRules["WDefender"]) && isChoose)
                 {
-                    Parallel.Invoke(() => { AddRulesOUT(isChoose, Settings.PathSystemDisk + @programPaths["WD"], nameRules["WDefender"], "blocking Windows Defender database updates"); });
+                    Parallel.Invoke(() => { AddRulesOUT(isChoose, programPaths["WD"], nameRules["WDefender"], "blocking Windows Defender database updates"); });
                 }
                 else
                 {
                     Parallel.Invoke(() =>
                     {
-                        try { AddRulesOUT(isChoose, Settings.PathSystemDisk + programPaths["WD"], nameRules["WDefender"], "blocking Windows Defender database updates"); }
+                        try { AddRulesOUT(isChoose, programPaths["WD"], nameRules["WDefender"], "blocking Windows Defender database updates"); }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     });
                 }
