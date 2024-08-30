@@ -147,12 +147,6 @@ namespace GTweak.View
             WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(300));
         }
 
-        private void Page_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.System && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)))
-                e.Handled = true;
-        }
-
         private void UpdateViewStateApps()
         {
             MicrosoftStore.Source = !UninstallingApps.isAppDeletedList["MicrosoftStore"] ? UninstallingApps.UserAppsList.Contains("Microsoft.WindowsStore") ? (DrawingImage)FindResource("A_DI_MicrosoftStore") : (DrawingImage)FindResource("DA_DI_MicrosoftStore") : (DrawingImage)FindResource("DI_Sandtime");

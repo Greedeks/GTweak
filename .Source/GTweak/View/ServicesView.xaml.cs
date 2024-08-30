@@ -52,11 +52,5 @@ namespace GTweak.View
             WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
             Parallel.Invoke(() => new ServicesTweaks().ViewServices(this));
         }
-
-        private void Page_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.System && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)))
-                e.Handled = true;
-        }
     }
 }

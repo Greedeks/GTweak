@@ -94,11 +94,5 @@ namespace GTweak.View
             else
                 new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("warndisable_recovery_notification"));
         }
-
-        private void Page_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.System && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt)))
-                e.Handled = true;
-        }
     }
 }

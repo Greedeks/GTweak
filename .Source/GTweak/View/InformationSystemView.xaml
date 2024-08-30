@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
              xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
              d:DesignHeight="550" d:DesignWidth="1100"
-             Style="{StaticResource LaunchPage}" Unloaded="Page_Unloaded" Loaded="Page_Loaded" MouseMove="Page_MouseMove" KeyDown="Page_KeyDown">
+             Style="{StaticResource LaunchPage}" Unloaded="Page_Unloaded" Loaded="Page_Loaded" MouseMove="Page_MouseMove">
     <UserControl.DataContext>
         <vm:InformationSystemVM />
     </UserControl.DataContext>

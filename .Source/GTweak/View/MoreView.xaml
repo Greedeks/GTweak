@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GTweak.View"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="1100"
-             Style="{StaticResource LaunchPage}" KeyDown="Page_KeyDown">
+             Style="{StaticResource LaunchPage}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

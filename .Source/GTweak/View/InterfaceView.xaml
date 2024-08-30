@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
              d:DesignHeight="550" d:DesignWidth="1100"
-             Style="{StaticResource LaunchPage}" Loaded="Page_Loaded" KeyDown="Page_KeyDown">
+             Style="{StaticResource LaunchPage}" Loaded="Page_Loaded">
     <UserControl.DataContext>
         <vm:InterfaceVM/>
     </UserControl.DataContext>
