@@ -41,22 +41,8 @@ namespace GTweak.Utilities.Helpers
 
 
         [DllImport("kernel32.dll")]
-        private static extern int GetPrivateProfileSection(string section, byte[] lpszReturnBuffer, int size, string filePath);
-        internal List<string> GetKeys(string section)
-        {
-            byte[] buffer = new byte[2048];
-            GetPrivateProfileSection(section, buffer, 2048, pathToConfig);
-            string[] tmp = Encoding.ASCII.GetString(buffer).Trim('\0').Split('\0');
-
-            List<string> result = new List<string>();
-
-            foreach (string entry in tmp)
-                result.Add(entry.Remove(0, entry.IndexOf("=", StringComparison.InvariantCulture)).Substring(1));
-
-            return result;
-        }
-
-        internal List<string> GetSection(string section)
+        private static extern int GetPrivateProfileSection(string section, byte[] retVal, int size, string filePath);
+        internal List<string> GetKeysOrValue(string section, bool isGetKey = true)
         {
             byte[] buffer = new byte[2048];
             GetPrivateProfileSection(section, buffer, 2048, pathToConfig);
@@ -64,8 +50,18 @@ namespace GTweak.Utilities.Helpers
 
             List<string> result = new List<string>();
 
-            foreach (string entry in temp)
-                result.Add(entry.Substring(0, entry.IndexOf("=")));
+            foreach (string data in temp)
+            {
+                switch (isGetKey)
+                {
+                    case true:
+                        result.Add(data.Substring(0, data.IndexOf("=")));
+                        break;
+                    case false:
+                        result.Add(data.Remove(0, data.IndexOf("=", StringComparison.InvariantCulture)).Substring(1));
+                        break;
+                }
+            }
 
             return result;
         }
