@@ -270,8 +270,7 @@ namespace GTweak.Utilities
                             if (isInternetLimited)
                                 isInternetLimited = false;
 
-                    
-                            if (!string.IsNullOrEmpty(clientInternetProtocol.Ip) || !string.IsNullOrEmpty(clientInternetProtocol.Country))
+                            if (IPAddress.TryParse(clientInternetProtocol.Ip, out IPAddress ip) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
                                 СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
                                 isNoInternetConnection = false && isNoInternetConnection;
@@ -279,7 +278,7 @@ namespace GTweak.Utilities
                             else
                             {
                                 App.ViewLang();
-                                СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_systemInformation"];
+                                СonfigurationData["IpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
                                 isNoInternetConnection = true;
                             }
                         }

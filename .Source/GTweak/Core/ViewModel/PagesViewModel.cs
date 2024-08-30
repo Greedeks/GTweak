@@ -155,7 +155,10 @@ namespace GTweak.Core.ViewModel
             else
             {
                 SetBlurValue = 0;
-                DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Hide"];
+                if (!SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited)
+                    DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Hide"];
+                else
+                    DisplayImageHidden = default;
             }
         }
     }

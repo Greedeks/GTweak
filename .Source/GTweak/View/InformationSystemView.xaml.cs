@@ -56,7 +56,6 @@ namespace GTweak.View
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).Start();
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).IsBackground = true;
                         Application.Current.Dispatcher.Invoke(ProgressBarAnim);
-                        ImageHidden.Visibility = !SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited ? Visibility.Visible : Visibility.Collapsed;
                     };
                 }
                 else if (time.TotalSeconds % 5 == 0)
@@ -186,7 +185,6 @@ namespace GTweak.View
         {
             Application.Current.Dispatcher.Invoke(() => { CPULoad.Value = SystemData.MonitoringSystem.CpuUsage; });
             Application.Current.Dispatcher.Invoke(() => { RAMLoad.Value = new SystemData.MonitoringSystem().RamUsage; });
-            ImageHidden.Visibility = !SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
