@@ -591,17 +591,18 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton20":
                     if (isChoose)
-                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "4", RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "EnableFirewall", "1", RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "EnableFirewall", "1", RegistryValueKind.DWord);
-                    }
                     else
-                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "2", RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "EnableFirewall", "0", RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "EnableFirewall", "0", RegistryValueKind.DWord);
-                    }
+
+                    string value = isChoose ? "off" : "on";
+                    Process.Start(new ProcessStartInfo()
+                    {
+                        Arguments = $"/c netsh advfirewall set allprofiles state {value}",
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        CreateNoWindow = true,
+                        FileName = "cmd.exe"
+                    });
                     break;
                 case "TglButton21":
                     if (isChoose)

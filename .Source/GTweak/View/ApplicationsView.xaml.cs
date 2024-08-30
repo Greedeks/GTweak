@@ -31,7 +31,7 @@ namespace GTweak.View
                 else if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += (s, e) => { Parallel.Invoke(new UninstallingApps().ViewInstalledApp); };
+                    backgroundWorker.DoWork += (s, e) => { new UninstallingApps().ViewInstalledApp(); };
                     backgroundWorker.RunWorkerAsync();
                 }
 
