@@ -120,7 +120,7 @@ namespace GTweak.Utilities
         internal sealed class СomputerСonfiguration
         {
             internal static string clientWinVersion = string.Empty;
-            internal static bool isNoInternetConnection = false, isInternetLimited = false;
+            internal static bool isConnectionLose = false, isConnectionBlock = false, isInternetLimited = false;
             private static string _type = string.Empty;
             private static readonly EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
 
@@ -269,25 +269,27 @@ namespace GTweak.Utilities
                         {
                             if (isInternetLimited)
                                 isInternetLimited = false;
+                            if (isConnectionBlock)
+                                isConnectionBlock = false;
 
                             if (IPAddress.TryParse(clientInternetProtocol.Ip, out IPAddress ip) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
                                 СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
-                                isNoInternetConnection = false && isNoInternetConnection;
+                                isConnectionLose = false && isConnectionLose;
                             }
                             else
                             {
                                 App.ViewLang();
-                                СonfigurationData["IpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
-                                isNoInternetConnection = true;
+                                СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
+                                isConnectionBlock = true;
                             }
                         }
                     }
                     else
                     {
                         App.ViewLang();
-                        СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_systemInformation"];
-                        isNoInternetConnection = true;
+                        СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
+                        isConnectionLose = true;
                     }
                 });
             }

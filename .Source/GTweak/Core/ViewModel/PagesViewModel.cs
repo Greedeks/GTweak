@@ -107,7 +107,7 @@ namespace GTweak.Core.ViewModel
         public int SetBlurValue
         {
             get => _model.BlurValue;
-            set { _model.BlurValue = value; OnPropertyChanged(); }
+            set { _model.BlurValue = value; OnPropertyChanged("SetBlurValue"); }
         }
 
         public DrawingImage DisplayImageHidden
@@ -147,7 +147,7 @@ namespace GTweak.Core.ViewModel
             DisplayIpAddress = SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"];
             DisplayCountProcess = new SystemData.MonitoringSystem().CountProcess.ToString();
 
-            if (Settings.IsHiddenIpAddress & !SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited)
+            if (Settings.IsHiddenIpAddress & !SystemData.СomputerСonfiguration.isConnectionLose & !SystemData.СomputerСonfiguration.isInternetLimited & !SystemData.СomputerСonfiguration.isConnectionBlock)
             {
                 SetBlurValue = 20;
                 DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Show"];
@@ -155,10 +155,7 @@ namespace GTweak.Core.ViewModel
             else
             {
                 SetBlurValue = 0;
-                if (!SystemData.СomputerСonfiguration.isNoInternetConnection & !SystemData.СomputerСonfiguration.isInternetLimited)
-                    DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Hide"];
-                else
-                    DisplayImageHidden = default;
+                DisplayImageHidden = !SystemData.СomputerСonfiguration.isConnectionLose & !SystemData.СomputerСonfiguration.isInternetLimited & !SystemData.СomputerСonfiguration.isConnectionBlock ? (DrawingImage)Application.Current.Resources["DI_Hide"] : default;
             }
         }
     }

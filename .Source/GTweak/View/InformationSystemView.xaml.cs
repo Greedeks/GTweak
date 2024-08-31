@@ -26,14 +26,22 @@ namespace GTweak.View
 
             App.LanguageChanged += (s, e) => 
             {
-                if (SystemData.СomputerСonfiguration.isNoInternetConnection)
+                if (!SystemData.СomputerСonfiguration.isConnectionLose)
                 {
-                    SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_systemInformation");
-                    DataContext = new InformationSystemVM();
+                    if (SystemData.СomputerСonfiguration.isInternetLimited)
+                    {
+                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("limited_systemInformation");
+                        DataContext = new InformationSystemVM();
+                    }
+                    else if (SystemData.СomputerСonfiguration.isConnectionBlock)
+                    {
+                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_block_systemInformation");
+                        DataContext = new InformationSystemVM();
+                    }
                 }
-                else if (SystemData.СomputerСonfiguration.isInternetLimited)
+                else
                 {
-                    SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("limited_systemInformation");
+                    SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_lose_systemInformation");
                     DataContext = new InformationSystemVM();
                 }
             };
@@ -52,10 +60,10 @@ namespace GTweak.View
                     };
                     backgroundWorker.RunWorkerCompleted += (s, e) => 
                     {
-                        DataContext = new InformationSystemVM();
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).Start();
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).IsBackground = true;
                         Application.Current.Dispatcher.Invoke(ProgressBarAnim);
+                        DataContext = new InformationSystemVM();
                     };
                 }
                 else if (time.TotalSeconds % 5 == 0)
