@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,25 +17,23 @@ namespace GTweak
             InitializeComponent();
         }
 
-        internal static CultureInfo Language
+        internal static string Language
         {
-            get => System.Threading.Thread.CurrentThread.CurrentUICulture;
             set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                value ??= Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline).ToString();
 
-                ResourceDictionary dictionary = new ResourceDictionary();
-
-                string getSystemLanguage = Regex.Replace(value.Name, @"-.+$", "",RegexOptions.Multiline);
-
-                dictionary.Source = getSystemLanguage switch
+                ResourceDictionary dictionary = new ResourceDictionary
                 {
-                    "ru" => new Uri($"Language/lang.ru.xaml", UriKind.Relative),
-                    _ => new Uri("Language/lang.xaml", UriKind.Relative),
+                    Source = value switch
+                    {
+                        "ru" => new Uri($"Language/lang.ru.xaml", UriKind.Relative),
+                        _ => new Uri("Language/lang.xaml", UriKind.Relative),
+                    }
                 };
 
-                ResourceDictionary oldDictionary = (from d in Current.Resources.MergedDictionaries
-                where d.Source != null && d.Source.OriginalString.StartsWith("Language/lang.") select d).First();
+                ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
+                where dict.Source != null && dict.Source.OriginalString.StartsWith("Language/lang.") select dict).First();
                 if (oldDictionary != null)
                 {
                     int ind = Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
@@ -49,7 +48,8 @@ namespace GTweak
 
         internal static void UpdateImport()=> ImportTweaksUpdate?.Invoke(null, EventArgs.Empty);
 
-        internal static void ViewLang() => Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() == "en" ? CultureInfo.GetCultureInfo("en-US") : CultureInfo.GetCultureInfo("ru-RU");
+        internal static void ViewLang() => Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline).ToString();
+        
      
 
     }

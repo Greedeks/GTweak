@@ -3,7 +3,6 @@ using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -143,16 +142,17 @@ namespace GTweak
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (LanguageSelectionMenu.SelectedIndex == 0)
+            switch (LanguageSelectionMenu.SelectedIndex)
             {
-                Settings.ChangingParameters("en", "Language");
-                App.Language = CultureInfo.GetCultureInfo("en-US");
+                case 0:
+                    Settings.ChangingParameters("en", "Language");
+                    App.Language = "en";
+                    break;
+                default:
+                    Settings.ChangingParameters("ru", "Language");
+                    App.Language = "ru";
+                    break;
             }
-            else
-            {
-                Settings.ChangingParameters("ru", "Language");
-                App.Language = CultureInfo.GetCultureInfo("ru-RU");
-            }     
         }
 
         private void BtnExport_PreviewMouseDown(object sender, MouseButtonEventArgs e)
