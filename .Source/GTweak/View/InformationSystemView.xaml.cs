@@ -64,6 +64,14 @@ namespace GTweak.View
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).IsBackground = true;
                         Application.Current.Dispatcher.Invoke(ProgressBarAnim);
                         DataContext = new InformationSystemVM();
+
+                        if (Settings.IsHiddenIpAddress & ImageHidden.Source == default)
+                        {
+                            DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
+                            doubleAnim.Completed += (s, _) => { Parallel.Invoke(() => { Settings.ChangingParameters(false, "HiddenIP"); }); };
+                            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
+                        }
                     };
                 }
                 else if (time.TotalSeconds % 5 == 0)
@@ -76,14 +84,12 @@ namespace GTweak.View
 
                 time = time.Add(TimeSpan.FromSeconds(+1));
             }, Application.Current.Dispatcher);
-
             timer.Start();
         }
        
         private void AnimationPopup(bool _reverse)
         {
             PopupCopy.IsOpen = true;
-
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {
                 From = !_reverse ? 0 : 0.9,
@@ -101,20 +107,18 @@ namespace GTweak.View
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                Parallel.Invoke(() => {
-                    DoubleAnimation doubleAnim = new DoubleAnimation()
-                    {
-                        From = Settings.IsHiddenIpAddress ? 20 : 0,
-                        To = Settings.IsHiddenIpAddress ? 0 : 20,
-                        EasingFunction = new QuadraticEase(),
-                        Duration = TimeSpan.FromSeconds(0.2)
-                    };
-                    Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                    IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
+                DoubleAnimation doubleAnim = new DoubleAnimation()
+                {
+                    From = Settings.IsHiddenIpAddress ? 20 : 0,
+                    To = Settings.IsHiddenIpAddress ? 0 : 20,
+                    EasingFunction = new QuadraticEase(),
+                    Duration = TimeSpan.FromSeconds(0.2)
+                };
+                Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
 
-                    Settings.ChangingParameters(!Settings.IsHiddenIpAddress, "HiddenIP");
-                    DataContext = new InformationSystemVM();
-                });
+                Parallel.Invoke(() => { Settings.ChangingParameters(!Settings.IsHiddenIpAddress, "HiddenIP"); });
+                DataContext = new InformationSystemVM();
             }
         }
 

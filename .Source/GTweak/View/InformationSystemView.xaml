@@ -152,7 +152,7 @@
 
                     <Grid Grid.Row="0">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
-                            <TextBlock Text="{DynamicResource title_disk_systemInformation}" x:Name="test" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Text="{DynamicResource title_disk_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
                             <TextBlock Text="{Binding DisplayDiskName}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="#ffffff" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextBlock_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
                     </Grid>
