@@ -342,8 +342,8 @@ namespace GTweak.Utilities.Tweaks
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
         internal static void UseSystem(string tweak, bool isChoose)
         {
-            INIManager.configSystem.Remove(tweak);
-            INIManager.configSystem.Add(tweak, Convert.ToString(isChoose));
+            INIManager.userTweaksSystem.Remove(tweak);
+            INIManager.userTweaksSystem.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {
@@ -442,14 +442,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton8":
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += (s, e) => 
+                    backgroundWorker.DoWork += delegate
                     {
                         if (isChoose)
                             new WindowsDefender().Disable();
                         else
                             new WindowsDefender().Enable();
                     };
-                    backgroundWorker.RunWorkerCompleted += (s, e) => { isTweakWorkingAntivirus = false; new ViewNotification().Show("restart"); };
+                    backgroundWorker.RunWorkerCompleted += delegate { isTweakWorkingAntivirus = false; new ViewNotification().Show("restart"); };
                     backgroundWorker.RunWorkerAsync();
                     BlockWDefender(isChoose);
                     break;

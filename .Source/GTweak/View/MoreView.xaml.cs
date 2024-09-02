@@ -27,13 +27,13 @@ namespace GTweak.View
                     await Task.Delay(100);
 
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += (_s, _e) =>
+                    backgroundWorker.DoWork += delegate
                     {
                         try { RecoveryPoint.Create((string)FindResource("textpoint_more")); }
                         catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulpoint_notification")); }
                         finally { new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification")); };
                     };
-                    backgroundWorker.RunWorkerCompleted += (_s, _e) =>
+                    backgroundWorker.RunWorkerCompleted += delegate
                     {
                         new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification"));
                         backgroundWorker.Dispose();
@@ -80,11 +80,11 @@ namespace GTweak.View
             if (!RecoveryPoint.IsSystemRestoreDisabled())
             {
                 BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += (_s, _e) =>
+                backgroundWorker.DoWork += delegate
                 {
                     try { RecoveryPoint.DisablePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 };
-                backgroundWorker.RunWorkerCompleted += (_s, _e) =>
+                backgroundWorker.RunWorkerCompleted += delegate
                 {
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("disable_recovery_notification"));
                     backgroundWorker.Dispose();

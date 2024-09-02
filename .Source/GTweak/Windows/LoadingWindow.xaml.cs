@@ -27,7 +27,7 @@ namespace GTweak.Windows
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.DoWork += BackgroundWorker_DoWorkAsync;
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
-            backgroundWorker.RunWorkerCompleted += async (s, _) =>
+            backgroundWorker.RunWorkerCompleted += async delegate
             {
                 backgroundWorker.Dispose();
                 WorkWithText.TypeWriteAnimation((string)FindResource("text6_load"), TextLoad, TimeSpan.FromMilliseconds(300));
@@ -47,7 +47,7 @@ namespace GTweak.Windows
             }
 
             Parallel.Invoke(
-                () => { Settings.PID = TrustedInstaller.StartTrustedInstallerService(); },
+                delegate { Settings.PID = TrustedInstaller.StartTrustedInstallerService(); },
                 new Settings().RunAnalysis,
                 new WindowsLicense().LicenseStatus,
                 new SystemData.СomputerСonfiguration().GetСonfigurationComputer,

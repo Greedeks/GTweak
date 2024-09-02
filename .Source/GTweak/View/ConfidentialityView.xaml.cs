@@ -16,7 +16,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += (s, e) => { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
@@ -57,7 +57,7 @@ namespace GTweak.View
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
-            Parallel.Invoke(()=> new ConfidentialityTweaks().ViewСonfidentiality(this));
+            Parallel.Invoke(() => new ConfidentialityTweaks().ViewСonfidentiality(this));
         }
     }
 }

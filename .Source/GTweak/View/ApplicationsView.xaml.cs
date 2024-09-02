@@ -22,7 +22,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += (s, e) => { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(0)); };
 
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -31,7 +31,7 @@ namespace GTweak.View
                 else if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += (s, e) => { new UninstallingApps().ViewInstalledApp(); };
+                    backgroundWorker.DoWork += delegate { new UninstallingApps().ViewInstalledApp(); };
                     backgroundWorker.RunWorkerAsync();
                 }
 
@@ -49,7 +49,7 @@ namespace GTweak.View
                 appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
 
                 BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += (s, _) =>
+                backgroundWorker.DoWork += delegate
                 {
                     if (applicationName != "YandexMusic")
                     {
@@ -62,7 +62,7 @@ namespace GTweak.View
                         UninstallingApps.DeletedApp("Yandex.Music");
                     }
                 };
-                backgroundWorker.RunWorkerCompleted += async (s, _) =>
+                backgroundWorker.RunWorkerCompleted += async delegate
                 {
                     await Task.Delay(25000);
                     if (applicationName != "YandexMusic")
@@ -81,8 +81,8 @@ namespace GTweak.View
                 new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
 
                 BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += (s, _) => UninstallingApps.ResetOneDrive();
-                backgroundWorker.RunWorkerCompleted += async (s, _) =>
+                backgroundWorker.DoWork += delegate { UninstallingApps.ResetOneDrive(); };
+                backgroundWorker.RunWorkerCompleted += async delegate
                 {
                     await Task.Delay(15000);
                     UninstallingApps.isAppDeletedList[appImage.Name] = false;
@@ -107,9 +107,9 @@ namespace GTweak.View
                 backgroundWorker.DoWork += (s, _) =>
                 {
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("appsdelete_notification"));
-                    Parallel.Invoke(UninstallingApps.DeletedApp_All);
+                    Parallel.Invoke(UninstallingApps.DeletedAllApps);
                 };
-                backgroundWorker.RunWorkerCompleted += async (s, _) =>
+                backgroundWorker.RunWorkerCompleted += async delegate
                 {
                     await Task.Delay(60000);
                     foreach (string key in UninstallingApps.isAppDeletedList.Keys.ToList())

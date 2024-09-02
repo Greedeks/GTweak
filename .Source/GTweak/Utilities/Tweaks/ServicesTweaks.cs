@@ -364,8 +364,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseServices(string tweak, bool isChoose)
         {
-            INIManager.configServices.Remove(tweak);
-            INIManager.configServices.Add(tweak, Convert.ToString(isChoose));
+            INIManager.userTweaksServices.Remove(tweak);
+            INIManager.userTweaksServices.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {
@@ -440,7 +440,7 @@ namespace GTweak.Utilities.Tweaks
 
                     using (BackgroundWorker backgroundWorker = new BackgroundWorker())
                     {
-                        backgroundWorker.DoWork += (s, e) => { StoreServices(isChoose); };
+                        backgroundWorker.DoWork += delegate { StoreServices(isChoose); };
                         backgroundWorker.RunWorkerAsync();
                     }
                     break;

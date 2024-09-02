@@ -15,7 +15,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += (s, e) => { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)

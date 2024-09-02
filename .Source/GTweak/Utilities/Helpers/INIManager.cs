@@ -16,18 +16,27 @@ namespace GTweak.Utilities.Helpers
         private static extern int GetPrivateProfileSection(string section, StringBuilder retVal, int size, string filePath);
 
         private readonly string pathToConfig;
-        internal static Dictionary<string, string> configConfidentiality = new Dictionary<string, string>(), 
-            configInterface = new Dictionary<string, string>(),
-            configServices = new Dictionary<string, string>(),
-            configSystem = new Dictionary<string, string>();
+        internal static Dictionary<string, string> 
+            userTweaksConfidentiality = new Dictionary<string, string>(), 
+            userTweaksInterface = new Dictionary<string, string>(),
+            userTweaksServices = new Dictionary<string, string>(),
+            userTweaksSystem = new Dictionary<string, string>();
 
         internal INIManager(string iniPath) => pathToConfig = new FileInfo(iniPath).FullName.ToString();
 
-        internal string ReadConfig(string section, string key)
+        internal string Read(string section, string key)
         {
             StringBuilder retValue = new StringBuilder(255);
             GetPrivateProfileString(section, key, "", retValue, 255, pathToConfig);
             return retValue.ToString();
+        }
+
+        internal void Write(string section, string key, string value) => WritePrivateProfileString(section, key, value, pathToConfig);
+
+        internal void WriteAll(string section, Dictionary<string, string> userTweaks)
+        {
+            foreach (KeyValuePair<string, string> addKeyValue in userTweaks)
+                WritePrivateProfileString(section, addKeyValue.Key, addKeyValue.Value, pathToConfig);
         }
 
         internal bool IsThereSection(string section)
@@ -36,9 +45,6 @@ namespace GTweak.Utilities.Helpers
             GetPrivateProfileSection(section, retValue, 255, pathToConfig);
             return !string.IsNullOrEmpty(retValue.ToString());
         }
-
-        internal void WriteConfig(string section, string key, string value) => WritePrivateProfileString(section, key, value, pathToConfig);
-
 
         [DllImport("kernel32.dll")]
         private static extern int GetPrivateProfileSection(string section, byte[] retVal, int size, string filePath);

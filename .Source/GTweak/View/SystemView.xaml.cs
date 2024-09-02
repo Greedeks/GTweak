@@ -16,7 +16,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += (s, e) => { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
@@ -52,8 +52,8 @@ namespace GTweak.View
         private void Sliders_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             Slider slider = (Slider)sender;
-            INIManager.configSystem.Remove(slider.Name);
-            INIManager.configSystem.Add(slider.Name, Convert.ToString(slider.Value));
+            INIManager.userTweaksSystem.Remove(slider.Name);
+            INIManager.userTweaksSystem.Add(slider.Name, Convert.ToString(slider.Value));
         }
 
         private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -94,8 +94,8 @@ namespace GTweak.View
                 if (!SystemTweaks.isTweakWorkingAntivirus)
                 {
                     SystemTweaks.isTweakWorkingAntivirus = true;
-                    INIManager.configSystem.Remove(toggleButton.Name);
-                    INIManager.configSystem.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
+                    INIManager.userTweaksSystem.Remove(toggleButton.Name);
+                    INIManager.userTweaksSystem.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
                     SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State);
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("windefender_notification"));
                 }

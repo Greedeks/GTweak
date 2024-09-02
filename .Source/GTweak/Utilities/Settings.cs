@@ -2,7 +2,6 @@
 using GTweak.Windows;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -103,7 +102,6 @@ namespace GTweak.Utilities
                 case "HiddenIP":
                         IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
                     break;
-
                 }
                 registryKey.Close();
             });
@@ -111,8 +109,8 @@ namespace GTweak.Utilities
 
         internal static void SaveFileConfig()
         {
-            if (INIManager.configConfidentiality.Count == 0 && INIManager.configInterface.Count == 0
-                && INIManager.configServices.Count == 0 && INIManager.configSystem.Count == 0)
+            if (INIManager.userTweaksConfidentiality.Count == 0 && INIManager.userTweaksInterface.Count == 0
+                && INIManager.userTweaksServices.Count == 0 && INIManager.userTweaksSystem.Count == 0)
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["export_warning_notification"]);
 
             else
@@ -139,20 +137,12 @@ namespace GTweak.Utilities
                             File.Delete(PathConfig);
 
                         INIManager settingsFileINI = new INIManager(PathConfig);
-                        settingsFileINI.WriteConfig("GTweak", "Author", "Greedeks");
-                        settingsFileINI.WriteConfig("GTweak", "Release", "v4");
-
-                        foreach (KeyValuePair<string, string> addConfidentiality in INIManager.configConfidentiality)
-                            settingsFileINI.WriteConfig("Confidentiality Tweaks", addConfidentiality.Key, addConfidentiality.Value);
-
-                        foreach (KeyValuePair<string, string> addInterface in INIManager.configInterface)
-                            settingsFileINI.WriteConfig("Interface Tweaks", addInterface.Key, addInterface.Value);
-
-                        foreach (KeyValuePair<string, string> addServices in INIManager.configServices)
-                            settingsFileINI.WriteConfig("Services Tweaks", addServices.Key, addServices.Value);
-
-                        foreach (KeyValuePair<string, string> addSystem in INIManager.configSystem)
-                            settingsFileINI.WriteConfig("System Tweaks", addSystem.Key, addSystem.Value);
+                        settingsFileINI.Write("GTweak", "Author", "Greedeks");
+                        settingsFileINI.Write("GTweak", "Release", "v4");
+                        settingsFileINI.WriteAll("Confidentiality Tweaks", INIManager.userTweaksConfidentiality);
+                        settingsFileINI.WriteAll("Interface Tweaks", INIManager.userTweaksInterface);
+                        settingsFileINI.WriteAll("Services Tweaks", INIManager.userTweaksServices);
+                        settingsFileINI.WriteAll("System Tweaks", INIManager.userTweaksSystem);
                     }
                     catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
@@ -172,7 +162,7 @@ namespace GTweak.Utilities
                 PathConfig = openFileDialog.FileName;
                 INIManager settingsFileINI = new INIManager(PathConfig);
 
-                if (settingsFileINI.ReadConfig("GTweak", "Author").Contains("Greedeks") && settingsFileINI.ReadConfig("GTweak", "Release").Contains("v4"))
+                if (settingsFileINI.Read("GTweak", "Author").Contains("Greedeks") && settingsFileINI.Read("GTweak", "Release").Contains("v4"))
                 {
                     if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
                         new ImportWindow().ShowDialog();

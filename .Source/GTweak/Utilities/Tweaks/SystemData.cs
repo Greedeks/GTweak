@@ -140,13 +140,13 @@ namespace GTweak.Utilities
 
             internal void GetСonfigurationComputer()
             {
-                Parallel.Invoke(() =>
+                Parallel.Invoke(delegate
                 {
                     foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, Version from Win32_OperatingSystem", optionsObj).Get())
                         СonfigurationData["Windows"] = $"{Convert.ToString(managementObj["Caption"]).Substring(Convert.ToString(managementObj["Caption"]).IndexOf('W'))}, {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]}\n";
                     СonfigurationData["Windows"] = $"\n{СonfigurationData["Windows"].TrimEnd('\n')}";
                 },
-                () =>
+                delegate
                 {
                     foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SerialNumber from Win32_BIOS", optionsObj).Get()) 
                     {
@@ -158,26 +158,26 @@ namespace GTweak.Utilities
                             СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ?  (string)managementObj["Description"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Description"] + "\n";
                     }
                     СonfigurationData["BIOS"] = СonfigurationData["BIOS"].TrimEnd('\n');
-                }, 
-                () =>
+                },
+                delegate
                 {
                     foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", optionsObj).Get())
                         СonfigurationData["MotherBr"] = (string)managementObj["Manufacturer"] + (string)managementObj["Product"] + ", V" + (string)managementObj["Version"] + "\n";
                     СonfigurationData["MotherBr"] = СonfigurationData["MotherBr"].TrimEnd('\n');
                 },
-                () =>
+                delegate
                 {
                     foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor", optionsObj).Get())
                         СonfigurationData["CPU"] = (string)managementObj["Name"] + "\n";
                     СonfigurationData["CPU"] = СonfigurationData["CPU"].TrimEnd('\n');
                 },
-                () =>
+                delegate
                 {
                     foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", optionsObj).Get())
                         СonfigurationData["GPU"] += ((string)managementObj["Name"] + ", " + Convert.ToString(((uint)managementObj["AdapterRAM"] / 1024000000)) + " GB\n");
                     СonfigurationData["GPU"] = СonfigurationData["GPU"].TrimEnd('\n');
-                }, 
-                () =>
+                },
+                delegate
                 {
                     foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select  Manufacturer, Capacity, ConfiguredClockSpeed from Win32_PhysicalMemory", optionsObj).Get())
                         СonfigurationData["RAM"] += (string)managementObj["Manufacturer"] + ", " + Convert.ToString((ulong)managementObj["Capacity"] / 1024000000) + " GB, " + Convert.ToString((uint)managementObj["ConfiguredClockSpeed"]) + "MHz\n";
@@ -189,8 +189,7 @@ namespace GTweak.Utilities
 
             internal static void UpdatingDeviceData()
             {
-                Parallel.Invoke(
-                () =>
+                Parallel.Invoke(delegate
                 {
                     СonfigurationData["Disk"] = string.Empty;
                     foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName,MediaType,Size,BusType from MSFT_PhysicalDisk", optionsObj).Get())
@@ -206,9 +205,9 @@ namespace GTweak.Utilities
                         СonfigurationData["Disk"] += Convert.ToString((ulong)managementObj["Size"] / 1024000000) + " GB " + "[" + (string)managementObj["FriendlyName"] + "] " + _type + "\n";
                     }
                     СonfigurationData["Disk"] = СonfigurationData["Disk"].TrimEnd('\n');
-                },
-               () =>
-               {
+                }, 
+                delegate
+                {
                    СonfigurationData["Sound"] = string.Empty;
                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice", optionsObj).Get())
                    {
@@ -221,7 +220,7 @@ namespace GTweak.Utilities
                    }
                    СonfigurationData["Sound"] = СonfigurationData["Sound"].TrimEnd('\n');
                },
-               () =>
+               delegate
                {
                    СonfigurationData["NetAdapter"] = string.Empty;
                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", optionsObj).Get())

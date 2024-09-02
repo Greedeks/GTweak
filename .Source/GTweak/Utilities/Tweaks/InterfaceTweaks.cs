@@ -360,8 +360,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseInterface(string tweak, bool isChoose)
         {
-            INIManager.configInterface.Remove(tweak);
-            INIManager.configInterface.Add(tweak, Convert.ToString(isChoose));
+            INIManager.userTweaksInterface.Remove(tweak);
+            INIManager.userTweaksInterface.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {
