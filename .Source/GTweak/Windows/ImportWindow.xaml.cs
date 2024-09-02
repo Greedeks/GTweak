@@ -12,8 +12,8 @@ using System.Windows.Input;
 namespace GTweak.Windows
 {
     public partial class ImportWindow : Window
-    { 
-        private class SectionName
+    {
+        internal class SectionName
         {
             internal const string Confidentiality = "Confidentiality Tweaks";
             internal const string Interface = "Interface Tweaks";
@@ -36,13 +36,13 @@ namespace GTweak.Windows
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Progress<int> _progress = new Progress<int>(ReportProgress);
-            try { await SortByPageDate(_cancellationTokenSource.Token, _progress); } catch { }
+            Progress<int> progress = new Progress<int>(ReportProgress);
+            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch { }
         }
 
-        private void ReportProgress(int _valueProgress)
+        private void ReportProgress(int valueProgress)
         {
-            if (_valueProgress == 100)
+            if (valueProgress == 100)
             {
                 if (isRestartNeed)
                     new ViewNotification().Show("restart");
@@ -74,7 +74,7 @@ namespace GTweak.Windows
 
                     foreach (var set in acceptanceList)
                     {
-                        await Task.Delay(700);
+                        await Task.Delay(700, _token);
                         Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality(set.Tweak, Convert.ToBoolean(set.Value)));
 
                         switch (set.Tweak)
@@ -98,7 +98,7 @@ namespace GTweak.Windows
 
                     foreach (var set in acceptanceList)
                     {
-                        await Task.Delay(700);
+                        await Task.Delay(700, _token);
                         Parallel.Invoke(() => InterfaceTweaks.UseInterface(set.Tweak, Convert.ToBoolean(set.Value)));
 
                         switch (set.Tweak)
@@ -133,7 +133,7 @@ namespace GTweak.Windows
 
                     foreach (var set in acceptanceList)
                     {
-                        await Task.Delay(700);
+                        await Task.Delay(700, _token);
                         Parallel.Invoke(() => ServicesTweaks.UseServices(set.Tweak, Convert.ToBoolean(set.Value)));
                         isRestartNeed = true;
                     }
@@ -150,7 +150,7 @@ namespace GTweak.Windows
 
                     foreach (var set in acceptanceList)
                     {
-                        await Task.Delay(700);
+                        await Task.Delay(700, _token);
 
                         if (set.Tweak != "TglButton8")
                         {
@@ -182,13 +182,13 @@ namespace GTweak.Windows
                             {
                                 SystemTweaks.isTweakWorkingAntivirus = true;
                                 SystemTweaks.UseSystem(set.Tweak, Convert.ToBoolean(set.Value));
-                                await Task.Delay(20000);
+                                await Task.Delay(20000, _token);
                             }
                         }
                     }
                 }
 
-                await Task.Delay(1);
+                await Task.Delay(1, _token);
 
                 _progress.Report(i);
             }

@@ -12,7 +12,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ConfidentialityTweaks : Firewall
     {
-        private static readonly string[] schedulerTasks = {
+        private static readonly string[] SchedulerTasks = {
                 @"Microsoft\Windows\Maintenance\WinSAT",
                 @"Microsoft\Windows\Autochk\Proxy",
                 @"Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
@@ -26,12 +26,12 @@ namespace GTweak.Utilities.Tweaks
                 @"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver",
                 @"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"};
 
-        private static readonly string[] nvidiaTasks = {
+        private static readonly string[] NvidiaTasks = {
                 @"NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
                 @"NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
                 @"NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" };
 
-        private static readonly string[] telemetryTasks = {
+        private static readonly string[] TelemetryTasks = {
                 @"Microsoft\Office\Office ClickToRun Service Monitor",
                 @"Microsoft\Office\OfficeTelemetry\AgentFallBack2016",
                 @"Microsoft\Office\OfficeTelemetry\OfficeTelemetryAgentLogOn2016",
@@ -41,7 +41,7 @@ namespace GTweak.Utilities.Tweaks
                 @"Microsoft\Office\OfficeTelemetryAgentLogOn",
                 @"Microsoft\Office\Office 15 Subscription Heartbeat" };
 
-        private static readonly string[] hostsRules = {
+        private static readonly string[] HostsRules = {
                 @"0.0.0.0 hk2sch130021829.wns.windows.com",
                 @"0.0.0.0 v10-win.vortex.data.microsoft.com.akadns.net",
                 @"0.0.0.0 watson.live.com",
@@ -84,7 +84,7 @@ namespace GTweak.Utilities.Tweaks
                 confidentialityV.TglButton3.StateNA = false;
 
 
-            if (ViewTaskState(schedulerTasks) > 0)
+            if (ViewTaskState(SchedulerTasks) > 0)
                 confidentialityV.TglButton4.StateNA = true;
             else
                 confidentialityV.TglButton4.StateNA = false;
@@ -128,7 +128,7 @@ namespace GTweak.Utilities.Tweaks
                 confidentialityV.TglButton8.StateNA = false;
 
 
-            if (ViewHosts(hostsRules) < 4)
+            if (ViewHosts(HostsRules) < 4)
                 confidentialityV.TglButton9.StateNA = true;
             else
                 confidentialityV.TglButton9.StateNA = false;
@@ -195,7 +195,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", null) == null ||
                     Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", string.Empty).ToString() != "4" ||
-                    ViewTaskState(nvidiaTasks) > 0)
+                    ViewTaskState(NvidiaTasks) > 0)
                     confidentialityV.TglButton17.StateNA = true;
                 else
                     confidentialityV.TglButton17.StateNA = false;
@@ -213,41 +213,41 @@ namespace GTweak.Utilities.Tweaks
 
         }
 
-        private byte ViewTaskState(string[] _tasklist)
+        private byte ViewTaskState(string[] tasklist)
         {
-            byte _countTaskRun = 0;
+            byte countTaskRun = 0;
             using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
             {
-                foreach (string taskname in _tasklist)
+                foreach (string taskname in tasklist)
                 {
-                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
-                    if (_task != null)
+                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                    if (task != null)
                     {
-                        if (_task.Enabled)
-                            _countTaskRun++;
+                        if (task.Enabled)
+                            countTaskRun++;
                     }
                 }
             }
-            return _countTaskRun;
+            return countTaskRun;
         }
 
-        internal byte ViewHosts(string[] _hostslist)
+        internal byte ViewHosts(string[] hostslist)
         {
             try
             {
-                byte _count = 0;
+                byte count = 0;
                 StreamReader streamReader = new StreamReader(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts");
-                string _hosts = streamReader.ReadToEnd();
+                string hosts = streamReader.ReadToEnd();
 
-                foreach (string hostsrules in _hostslist)
+                foreach (string hostsrules in hostslist)
                 {
-                    if (_hosts.Contains(hostsrules))
-                        _count++;
+                    if (hosts.Contains(hostsrules))
+                        count++;
                 }
 
                 streamReader.Close();
                 streamReader.Dispose();
-                return _count;
+                return count;
             }
             catch { return 0; }
         }
@@ -255,8 +255,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseСonfidentiality(string tweak, bool isChoose)
         {
-            INIManager.userTweaksConfidentiality.Remove(tweak);
-            INIManager.userTweaksConfidentiality.Add(tweak, Convert.ToString(isChoose));
+            INIManager.UserTweaksConfidentiality.Remove(tweak);
+            INIManager.UserTweaksConfidentiality.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {
@@ -297,25 +297,25 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", 0, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
-                        DisablingTasks(telemetryTasks);
+                        DisablingTasks(TelemetryTasks);
                     }
                     else
                     {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", 1, RegistryValueKind.DWord);
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
-                        EnablingTasks(telemetryTasks);
+                        EnablingTasks(TelemetryTasks);
                     }
                     break;
                 case "TglButton4":
                     if (isChoose)
                     {
-                        new Thread(() => DisablingTasks(schedulerTasks)).Start();
-                        new Thread(() => DisablingTasks(schedulerTasks)).IsBackground = true;
+                        new Thread(() => DisablingTasks(SchedulerTasks)).Start();
+                        new Thread(() => DisablingTasks(SchedulerTasks)).IsBackground = true;
                     }
                     else
                     {
-                        new Thread(() => EnablingTasks(schedulerTasks)).Start();
-                        new Thread(() => EnablingTasks(schedulerTasks)).IsBackground = true;
+                        new Thread(() => EnablingTasks(SchedulerTasks)).Start();
+                        new Thread(() => EnablingTasks(SchedulerTasks)).IsBackground = true;
                     }
                     break;
                 case "TglButton5":
@@ -367,7 +367,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton9":
                     if (isChoose)
                     {
-                        BlockSpyDomain(isChoose);
+                        BlockSpyDomain(true);
 
                         try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); } 
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
@@ -388,7 +388,7 @@ namespace GTweak.Utilities.Tweaks
                     {
                         try
                         {
-                            BlockSpyDomain(isChoose);
+                            BlockSpyDomain(false);
                             File.Copy(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)", Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", true);
                             File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)");
                         }
@@ -469,12 +469,12 @@ namespace GTweak.Utilities.Tweaks
                     if (isChoose)
                     {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", 4, RegistryValueKind.DWord);
-                        DisablingTasks(nvidiaTasks);
+                        DisablingTasks(NvidiaTasks);
                     }
                     else
                     {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", 2, RegistryValueKind.DWord);
-                        EnablingTasks(nvidiaTasks);
+                        EnablingTasks(NvidiaTasks);
                     }
                     break;
                 case "TglButton18":
@@ -493,20 +493,20 @@ namespace GTweak.Utilities.Tweaks
         }
 
 
-        private static void EnablingTasks(string[] _tasklist)
+        private static void EnablingTasks(string[] tasklist)
         {
             Parallel.Invoke(() =>
             {
                 Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in _tasklist)
+                foreach (string taskname in tasklist)
                 {
-                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
-                    if (_task != null)
+                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                    if (task != null)
                     {
-                        if (!_task.Enabled)
+                        if (!task.Enabled)
                         {
-                            _task.Definition.Settings.Enabled = true;
-                            _task.RegisterChanges();
+                            task.Definition.Settings.Enabled = true;
+                            task.RegisterChanges();
                         }
 
                     }
@@ -514,20 +514,20 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        private static void DisablingTasks(string[] _tasklist)
+        private static void DisablingTasks(string[] tasklist)
         {
             Parallel.Invoke(() =>
             {
                 Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in _tasklist)
+                foreach (string taskname in tasklist)
                 {
-                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
-                    if (_task != null)
+                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                    if (task != null)
                     {
-                        if (_task.Enabled)
+                        if (task.Enabled)
                         {
-                            _task.Definition.Settings.Enabled = false;
-                            _task.RegisterChanges();
+                            task.Definition.Settings.Enabled = false;
+                            task.RegisterChanges();
                         }
 
                     }

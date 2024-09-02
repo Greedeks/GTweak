@@ -196,13 +196,13 @@ namespace GTweak.Utilities.Tweaks
         internal static void StartMemoryCleanup()
         {
             BackgroundWorker backgroundWorker = new BackgroundWorker();
-            backgroundWorker.DoWork += (s, e) =>
+            backgroundWorker.DoWork += delegate
             {
                 Parallel.Invoke(() => { ClearFileSystemCache(true); },
                  EmptyWorkingSetFunction,
                  ClearTempSystemCache);
             };
-            backgroundWorker.RunWorkerCompleted += (s, e) =>
+            backgroundWorker.RunWorkerCompleted += delegate
             {
                 new Thread(() => backgroundWorker.Dispose()).Start();
                 new Thread(() => backgroundWorker.Dispose()).IsBackground = true;

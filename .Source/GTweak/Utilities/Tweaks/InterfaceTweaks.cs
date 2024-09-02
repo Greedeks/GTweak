@@ -360,8 +360,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void UseInterface(string tweak, bool isChoose)
         {
-            INIManager.userTweaksInterface.Remove(tweak);
-            INIManager.userTweaksInterface.Add(tweak, Convert.ToString(isChoose));
+            INIManager.UserTweaksInterface.Remove(tweak);
+            INIManager.UserTweaksInterface.Add(tweak, Convert.ToString(isChoose));
 
             switch (tweak)
             {
@@ -456,8 +456,8 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseHoverTime", "400", RegistryValueKind.String);
                     break;
                 case "TglButton11":
-                    Environment.SpecialFolder _folderWindows = Environment.SpecialFolder.Windows;
-                    string _pathToWinF = Environment.GetFolderPath(_folderWindows);
+                    Environment.SpecialFolder folderWindows = Environment.SpecialFolder.Windows;
+                    string pathToWinF = Environment.GetFolderPath(folderWindows);
                     try
                     {
                         if (isChoose)
@@ -470,13 +470,13 @@ namespace GTweak.Utilities.Tweaks
                                 gz.CopyTo(ms);
                                 _iconByte = ms.ToArray();
                             }
-                            File.WriteAllBytes(_pathToWinF + @"\Blank.ico", _iconByte);
+                            File.WriteAllBytes(pathToWinF + @"\Blank.ico", _iconByte);
 
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
                         }
                         else
                         {
-                            File.Delete(_pathToWinF + @"\Blank.ico");
+                            File.Delete(pathToWinF + @"\Blank.ico");
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
                         }
                     }

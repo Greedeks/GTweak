@@ -17,10 +17,10 @@ namespace GTweak.Utilities.Helpers
 
         private readonly string pathToConfig;
         internal static Dictionary<string, string> 
-            userTweaksConfidentiality = new Dictionary<string, string>(), 
-            userTweaksInterface = new Dictionary<string, string>(),
-            userTweaksServices = new Dictionary<string, string>(),
-            userTweaksSystem = new Dictionary<string, string>();
+            UserTweaksConfidentiality = new Dictionary<string, string>(), 
+            UserTweaksInterface = new Dictionary<string, string>(),
+            UserTweaksServices = new Dictionary<string, string>(),
+            UserTweaksSystem = new Dictionary<string, string>();
 
         internal INIManager(string iniPath) => pathToConfig = new FileInfo(iniPath).FullName.ToString();
 
@@ -61,7 +61,7 @@ namespace GTweak.Utilities.Helpers
                 switch (isGetKey)
                 {
                     case true:
-                        result.Add(data.Substring(0, data.IndexOf("=")));
+                        result.Add(data.Substring(0, data.IndexOf("=", StringComparison.InvariantCulture)));
                         break;
                     case false:
                         result.Add(data.Remove(0, data.IndexOf("=", StringComparison.InvariantCulture)).Substring(1));

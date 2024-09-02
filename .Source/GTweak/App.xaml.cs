@@ -20,7 +20,7 @@ namespace GTweak
         {
             set
             {
-                value ??= Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline).ToString();
+                value ??= Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
@@ -47,7 +47,7 @@ namespace GTweak
 
         internal static void UpdateImport()=> ImportTweaksUpdate?.Invoke(null, EventArgs.Empty);
 
-        internal static void ViewLang() => Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline).ToString();
+        internal static void ViewLang() => Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
         
      
 

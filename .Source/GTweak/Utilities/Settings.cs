@@ -55,10 +55,10 @@ namespace GTweak.Utilities
                 registryKey?.SetValue("HiddenIP", IsHiddenIpAddress, RegistryValueKind.String);
                 if (string.IsNullOrEmpty(Language))
                 {
-                    if (System.Text.RegularExpressions.Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", System.Text.RegularExpressions.RegexOptions.Multiline).ToString().Contains("ru"))
-                        registryKey?.SetValue("Language", "ru", RegistryValueKind.String);
-                    else
-                        registryKey?.SetValue("Language", "en", RegistryValueKind.String);
+                    registryKey?.SetValue("Language", System.Text.RegularExpressions.Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "",
+                        System.Text.RegularExpressions.RegexOptions.Multiline).Contains("ru")
+                            ? "ru"
+                            : "en", RegistryValueKind.String);
                 }
                 else
                     registryKey?.SetValue("Language", Language, RegistryValueKind.String);
@@ -73,7 +73,7 @@ namespace GTweak.Utilities
                 IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
                 Language = registryKey?.GetValue("Language").ToString();
             }
-            registryKey.Close();
+            registryKey?.Close();
         }
 
         internal static void ChangingParameters<T>(T value, string selection)
@@ -100,17 +100,17 @@ namespace GTweak.Utilities
                     Language = registryKey?.GetValue("Language").ToString();
                         break;
                 case "HiddenIP":
-                        IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
-                    break;
+                    IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
+                        break;
                 }
-                registryKey.Close();
+                registryKey?.Close();
             });
         }
 
         internal static void SaveFileConfig()
         {
-            if (INIManager.userTweaksConfidentiality.Count == 0 && INIManager.userTweaksInterface.Count == 0
-                && INIManager.userTweaksServices.Count == 0 && INIManager.userTweaksSystem.Count == 0)
+            if (INIManager.UserTweaksConfidentiality.Count == 0 && INIManager.UserTweaksInterface.Count == 0
+                && INIManager.UserTweaksServices.Count == 0 && INIManager.UserTweaksSystem.Count == 0)
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["export_warning_notification"]);
 
             else
@@ -122,30 +122,25 @@ namespace GTweak.Utilities
                     RestoreDirectory = true
                 };
 
-                Nullable<bool> isResult = saveFileDialog.ShowDialog();
+                bool? isResult = saveFileDialog.ShowDialog();
 
-                if (isResult == true)
+                if (isResult != true) return;
+                try
                 {
-                    string path = Path.GetDirectoryName(saveFileDialog.FileName);
-                    string filename = Path.GetFileNameWithoutExtension(saveFileDialog.FileName);
+                    PathConfig = Path.GetDirectoryName(saveFileDialog.FileName) + @"\" + Path.GetFileNameWithoutExtension(saveFileDialog.FileName) + ".ini";
 
-                    try
-                    {
-                        PathConfig = path + @"\" + filename + ".ini";
+                    if (File.Exists(PathConfig))
+                        File.Delete(PathConfig);
 
-                        if (File.Exists(PathConfig))
-                            File.Delete(PathConfig);
-
-                        INIManager settingsFileINI = new INIManager(PathConfig);
-                        settingsFileINI.Write("GTweak", "Author", "Greedeks");
-                        settingsFileINI.Write("GTweak", "Release", "v4");
-                        settingsFileINI.WriteAll("Confidentiality Tweaks", INIManager.userTweaksConfidentiality);
-                        settingsFileINI.WriteAll("Interface Tweaks", INIManager.userTweaksInterface);
-                        settingsFileINI.WriteAll("Services Tweaks", INIManager.userTweaksServices);
-                        settingsFileINI.WriteAll("System Tweaks", INIManager.userTweaksSystem);
-                    }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    INIManager iniManager = new INIManager(PathConfig);
+                    iniManager.Write("GTweak", "Author", "Greedeks");
+                    iniManager.Write("GTweak", "Release", "v4");
+                    iniManager.WriteAll("Confidentiality Tweaks", INIManager.UserTweaksConfidentiality);
+                    iniManager.WriteAll("Interface Tweaks", INIManager.UserTweaksInterface);
+                    iniManager.WriteAll("Services Tweaks", INIManager.UserTweaksServices);
+                    iniManager.WriteAll("System Tweaks", INIManager.UserTweaksSystem);
                 }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }
 
@@ -155,14 +150,15 @@ namespace GTweak.Utilities
             {
                 Filter = "(*.INI)|*.INI"
             };
+
             bool? isResult = openFileDialog.ShowDialog();
 
             if (isResult == true)
             {
                 PathConfig = openFileDialog.FileName;
-                INIManager settingsFileINI = new INIManager(PathConfig);
+                INIManager iniManager = new INIManager(PathConfig);
 
-                if (settingsFileINI.Read("GTweak", "Author").Contains("Greedeks") && settingsFileINI.Read("GTweak", "Release").Contains("v4"))
+                if (iniManager.Read("GTweak", "Author").Contains("Greedeks") && iniManager.Read("GTweak", "Release").Contains("v4"))
                 {
                     if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
                         new ImportWindow().ShowDialog();

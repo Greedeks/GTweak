@@ -6,6 +6,7 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Utilities
 {
@@ -26,8 +27,8 @@ namespace GTweak.Utilities
                     if (mutex.WaitOne(0, false))
                         new MessageWindow().ShowDialog();
                 }
-                string _processName = Process.GetCurrentProcess().ProcessName;
-                Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == _processName);
+                string processName = Process.GetCurrentProcess().ProcessName;
+                Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == processName);
                 if (process != null)
                 {
                     IntPtr handle = process.MainWindowHandle;
@@ -49,11 +50,9 @@ namespace GTweak.Utilities
                     SystemData.СomputerСonfiguration.clientWinVersion = Convert.ToString(managementObj["Caption"]);;
             });
 
-            if (!SystemData.СomputerСonfiguration.clientWinVersion.Contains("11") && !SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
-            {
-                MessageWindow messageWindow = new MessageWindow(true);
-                messageWindow.ShowDialog();
-            }
+            if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11") || SystemData.СomputerСonfiguration.clientWinVersion.Contains("10")) return;
+            MessageWindow messageWindow = new MessageWindow(true);
+            messageWindow.ShowDialog();
         }
     }
 }

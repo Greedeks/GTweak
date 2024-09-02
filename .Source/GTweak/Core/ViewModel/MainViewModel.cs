@@ -1,5 +1,5 @@
 ﻿using GTweak.Core.Model;
-using GTweak.Utilities;
+using GTweak.Utilities.Tweaks;
 using System;
 using System.Reflection;
 using System.Windows;
@@ -46,13 +46,13 @@ namespace GTweak.Core.ViewModel
         public ICommand MoreCommand { get; set; }
 
 
-        private void Confidentiality(object _obj) => CurrentView = new ConfidentialityVM();
-        private void Interface(object _obj) => CurrentView = new InterfaceVM();
-        private void Apps(object _obj) => CurrentView = new ApplicationsVM();
-        private void Services(object _obj) => CurrentView = new ServicesVM();
-        private void System(object _obj) => CurrentView = new SystemVM();
-        private void InformationSystem(object _obj) => CurrentView = new InformationSystemVM();
-        private void More(object _obj) => CurrentView = new MoreVM();
+        private void Confidentiality(object obj) => CurrentView = new ConfidentialityVM();
+        private void Interface(object obj) => CurrentView = new InterfaceVM();
+        private void Apps(object obj) => CurrentView = new ApplicationsVM();
+        private void Services(object obj) => CurrentView = new ServicesVM();
+        private void System(object obj) => CurrentView = new SystemVM();
+        private void InformationSystem(object obj) => CurrentView = new InformationSystemVM();
+        private void More(object obj) => CurrentView = new MoreVM();
 
         public MainViewModel()
         {

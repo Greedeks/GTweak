@@ -52,8 +52,8 @@ namespace GTweak.View
         private void Sliders_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             Slider slider = (Slider)sender;
-            INIManager.userTweaksSystem.Remove(slider.Name);
-            INIManager.userTweaksSystem.Add(slider.Name, Convert.ToString(slider.Value));
+            INIManager.UserTweaksSystem.Remove(slider.Name);
+            INIManager.UserTweaksSystem.Add(slider.Name, Convert.ToString(slider.Value));
         }
 
         private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -94,8 +94,8 @@ namespace GTweak.View
                 if (!SystemTweaks.isTweakWorkingAntivirus)
                 {
                     SystemTweaks.isTweakWorkingAntivirus = true;
-                    INIManager.userTweaksSystem.Remove(toggleButton.Name);
-                    INIManager.userTweaksSystem.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
+                    INIManager.UserTweaksSystem.Remove(toggleButton.Name);
+                    INIManager.UserTweaksSystem.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
                     SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State);
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("windefender_notification"));
                 }

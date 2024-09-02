@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
@@ -78,8 +79,8 @@ namespace GTweak.View
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.RunWorkerAsync();
-                    backgroundWorker.DoWork += (s, e) => { SystemData.СomputerСonfiguration.GetUserIP(); };
-                    backgroundWorker.RunWorkerCompleted += (s, e) => DataContext = new InformationSystemVM();
+                    backgroundWorker.DoWork += delegate { SystemData.СomputerСonfiguration.GetUserIP(); };
+                    backgroundWorker.RunWorkerCompleted += delegate { DataContext = new InformationSystemVM(); };
                 }
 
                 time = time.Add(TimeSpan.FromSeconds(+1));
@@ -184,10 +185,10 @@ namespace GTweak.View
 
         private void Page_MouseMove(object sender, MouseEventArgs e)
         {
-            Point _currentPos = this.PointToScreen(Mouse.GetPosition(this));
+            Point currentPos = this.PointToScreen(Mouse.GetPosition(this));
             PopupCopy.Placement = PlacementMode.Absolute;
-            PopupCopy.HorizontalOffset = _currentPos.X + 10;
-            PopupCopy.VerticalOffset = _currentPos.Y - 30;
+            PopupCopy.HorizontalOffset = currentPos.X + 10;
+            PopupCopy.VerticalOffset = currentPos.Y - 30;
 
         }
 

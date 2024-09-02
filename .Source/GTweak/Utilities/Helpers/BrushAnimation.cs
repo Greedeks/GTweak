@@ -41,18 +41,18 @@ namespace GTweak.Utilities.Helpers
         public override object GetCurrentValue(object defaultOriginValue,
         object defaultDestinationValue, AnimationClock animationClock)
         {
-            Brush _fromVal = ((Brush)GetValue(FromProperty)).CloneCurrentValue();
-            Brush _toVal = ((Brush)GetValue(ToProperty)).CloneCurrentValue();
+            Brush fromVal = ((Brush)GetValue(FromProperty)).CloneCurrentValue();
+            Brush toVal = ((Brush)GetValue(ToProperty)).CloneCurrentValue();
 
             switch (animationClock.CurrentProgress)
             {
                 case 0.0:
-                    return _fromVal;
+                    return fromVal;
                 case 1.0:
-                    return _toVal;
+                    return toVal;
             }
 
-            _toVal.Opacity = Convert.ToDouble(animationClock.CurrentProgress);
+            toVal.Opacity = Convert.ToDouble(animationClock.CurrentProgress);
 
 
             Border border0 = new Border();
@@ -61,15 +61,15 @@ namespace GTweak.Utilities.Helpers
             border0.Width = 1.0;
             border0.Height = 1.0;
 
-            border0.Background = _fromVal;
-            border1.Background = _toVal;
+            border0.Background = fromVal;
+            border1.Background = toVal;
 
             border0.Visibility = Visibility.Visible;
             border1.Visibility = Visibility.Visible;
             border0.Child = border1;
 
-            Brush VB = new VisualBrush(border0);
-            return VB;
+            Brush vb = new VisualBrush(border0);
+            return vb;
 
         }
     }

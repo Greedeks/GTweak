@@ -7,38 +7,36 @@ namespace GTweak.Utilities.Helpers
 {
     internal readonly struct WorkWithText
     {
-        internal static void TypeWriteAnimation(string textToAnimate, TextBlock _textBlock, TimeSpan _timeSpan)
+        internal static void TypeWriteAnimation(string textToAnimate, TextBlock textBlock, TimeSpan timeSpan)
         {
-            if (_textBlock.FindName(_textBlock.Name) is TextBlock)
+            if (!(textBlock.FindName(textBlock.Name) is TextBlock)) return;
+            Storyboard storyBoard = new Storyboard()
             {
-                Storyboard storyBoard = new Storyboard()
-                {
-                    FillBehavior = FillBehavior.HoldEnd
-                };
+                FillBehavior = FillBehavior.HoldEnd
+            };
 
-                StringAnimationUsingKeyFrames stringAnimationUsingKeyFrames = new StringAnimationUsingKeyFrames()
-                {
-                    Duration = new Duration(_timeSpan)
-                };
+            StringAnimationUsingKeyFrames stringAnimationUsingKeyFrames = new StringAnimationUsingKeyFrames()
+            {
+                Duration = new Duration(timeSpan)
+            };
 
-                string _temp = string.Empty;
-                foreach (char _char in textToAnimate)
+            string temp = string.Empty;
+            foreach (char data in textToAnimate)
+            {
+                DiscreteStringKeyFrame discreteStringKeyFrame = new DiscreteStringKeyFrame
                 {
-                    DiscreteStringKeyFrame discreteStringKeyFrame = new DiscreteStringKeyFrame
-                    {
-                        KeyTime = KeyTime.Paced
-                    };
-                    _temp += _char;
-                    discreteStringKeyFrame.Value = _temp;
-                    stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
-                }
-                
-                Storyboard.SetTargetName(stringAnimationUsingKeyFrames, _textBlock.Name);
-                Storyboard.SetTargetProperty(stringAnimationUsingKeyFrames, new PropertyPath(TextBlock.TextProperty));
-                storyBoard.Children.Add(stringAnimationUsingKeyFrames);
-                _textBlock.BeginStoryboard(storyBoard);
-                storyBoard.Remove(_textBlock);
+                    KeyTime = KeyTime.Paced
+                };
+                temp += data;
+                discreteStringKeyFrame.Value = temp;
+                stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
             }
+                
+            Storyboard.SetTargetName(stringAnimationUsingKeyFrames, textBlock.Name);
+            Storyboard.SetTargetProperty(stringAnimationUsingKeyFrames, new PropertyPath(TextBlock.TextProperty));
+            storyBoard.Children.Add(stringAnimationUsingKeyFrames);
+            textBlock.BeginStoryboard(storyBoard);
+            storyBoard.Remove(textBlock);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using Microsoft.Win32;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Management;
@@ -12,8 +10,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 
-namespace GTweak.Utilities
+namespace GTweak.Utilities.Tweaks
 {
     internal sealed class SystemData
     {
@@ -23,12 +23,12 @@ namespace GTweak.Utilities
             {
                 try
                 {
-                    RegistryKey _regKey = default, _ourKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users", true);
+                    RegistryKey regKey = default, ourKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users", true);
 
-                    foreach (string keyname in _ourKey.GetSubKeyNames())
-                        _regKey = _ourKey.OpenSubKey(keyname);
+                    foreach (string keyname in ourKey!.GetSubKeyNames())
+                        regKey = ourKey!.OpenSubKey(keyname);
 
-                    return new BitmapImage(new Uri(_regKey?.GetValue("Image1080").ToString() ?? string.Empty));
+                    return new BitmapImage(new Uri(regKey?.GetValue("Image1080").ToString() ?? string.Empty));
                 }
                 catch { return null; }
             }
@@ -233,12 +233,12 @@ namespace GTweak.Utilities
             {
                 try {
                     TimeSpan timeout = TimeSpan.FromSeconds(5.0);
-                    Task<IPAddress> _task = Task.Run(() => {
+                    Task<IPAddress> task = Task.Run(() => {
                         return !string.IsNullOrEmpty(Dns.GetHostEntry("google.com").AddressList[0].ToString())
                             ? Dns.GetHostEntry("google.com").AddressList[0]
                             : Dns.GetHostEntry("baidu.com").AddressList[0];
                     });
-                    if (!_task.Wait(timeout))
+                    if (!task.Wait(timeout))
                         return false;
                     return true;
                 }
@@ -271,24 +271,24 @@ namespace GTweak.Utilities
                             if (isConnectionBlock)
                                 isConnectionBlock = false;
 
-                            if (IPAddress.TryParse(clientInternetProtocol.Ip, out IPAddress ip) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
+                            if (IPAddress.TryParse(clientInternetProtocol.Ip, out _) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
+                                isConnectionLose = false;
                                 СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
-                                isConnectionLose = false && isConnectionLose;
                             }
                             else
                             {
                                 App.ViewLang();
-                                СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
                                 isConnectionBlock = true;
+                                СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
                             }
                         }
                     }
                     else
                     {
                         App.ViewLang();
-                        СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                         isConnectionLose = true;
+                        СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                     }
                 });
             }

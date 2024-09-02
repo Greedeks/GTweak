@@ -14,7 +14,7 @@ namespace GTweak.Utilities.Tweaks
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
 
-        internal static Dictionary<string, bool> isAppDeletedList = new Dictionary<string, bool>
+        internal static Dictionary<string, bool> IsAppDeletedList = new Dictionary<string, bool>
         {
             ["MicrosoftStore"] = false,
             ["Todos"] = false,
@@ -57,7 +57,7 @@ namespace GTweak.Utilities.Tweaks
             ["QuickAssist"] = false
 
         };
-        internal static readonly SortedList<string, List<string>> listAppsScipt = new SortedList<string, List<string>>
+        internal static readonly SortedList<string, List<string>> ListAppsScipt = new SortedList<string, List<string>>
         {
             ["MicrosoftStore"] = new List<string>(1) { "Microsoft.WindowsStore" },
             ["Todos"] = new List<string>(1) { "Microsoft.Todos" },
@@ -98,7 +98,7 @@ namespace GTweak.Utilities.Tweaks
             ["Outlook"] = new List<string>(1) { "Microsoft.OutlookForWindows" },
             ["QuickAssist"] = new List<string>(1) { "MicrosoftCorporationII.QuickAssist" }
         };
-        private static readonly SortedList<string, string> alternativeName = new SortedList<string, string>
+        private static readonly SortedList<string, string> AlternativeName = new SortedList<string, string>
         {
             ["MicrosoftSolitaireCollection"] = "solitaire",
             ["MicrosoftOfficeHub"] = "officehub",
@@ -148,14 +148,14 @@ namespace GTweak.Utilities.Tweaks
                         process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
 
-                        foreach (var appDelete in listAppsScipt[appName])
+                        foreach (var appDelete in ListAppsScipt[appName])
                         {
                             process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
                             process.Start();
                         }
 
-                        if (!string.IsNullOrEmpty(alternativeName[appName]))
-                            process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + !string.IsNullOrEmpty(alternativeName[appName]) + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                        if (!string.IsNullOrEmpty(AlternativeName[appName]))
+                            process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + !string.IsNullOrEmpty(AlternativeName[appName]) + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
 
                         process.WaitForExit();
                         process.Dispose();
@@ -190,7 +190,7 @@ namespace GTweak.Utilities.Tweaks
                     process.EnableRaisingEvents = true;
                     process.StartInfo.FileName = "powershell.exe";
 
-                    foreach (var appNm in listAppsScipt)
+                    foreach (var appNm in ListAppsScipt)
                     {
                         process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appNm + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
@@ -201,7 +201,7 @@ namespace GTweak.Utilities.Tweaks
                             process.Start();
                         }
 
-                        foreach (string altName in alternativeName.Values)
+                        foreach (string altName in AlternativeName.Values)
                         {
                             process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + altName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                             process.Start();
@@ -276,7 +276,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void ResetOneDrive()
         {
-            isAppDeletedList["OneDrive"] = true;
+            IsAppDeletedList["OneDrive"] = true;
 
             using (Process process = new Process())
             {

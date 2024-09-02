@@ -30,15 +30,15 @@ namespace GTweak.Utilities.Tweaks
         {
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore");
 
-            Microsoft.Win32.TaskScheduler.TaskService _taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-            Microsoft.Win32.TaskScheduler.Task _task = _taskService.GetTask(@"Microsoft\Windows\SystemRestore\SR");
+            Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+            Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(@"Microsoft\Windows\SystemRestore\SR");
 
-            if (_task != null)
+            if (task != null)
             {
-                if (_task.Enabled)
+                if (task.Enabled)
                 {
-                    _task.Definition.Settings.Enabled = true;
-                    _task.RegisterChanges();
+                    task.Definition.Settings.Enabled = true;
+                    task.RegisterChanges();
                 }
             }
 
@@ -110,15 +110,15 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void DisablePoint()
         {
-            Microsoft.Win32.TaskScheduler.TaskService _taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-            Microsoft.Win32.TaskScheduler.Task _task = _taskService.GetTask(@"Microsoft\Windows\SystemRestore\SR");
+            Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+            Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(@"Microsoft\Windows\SystemRestore\SR");
 
-            if (_task != null)
+            if (task != null)
             {
-                if (_task.Enabled)
+                if (task.Enabled)
                 {
-                    _task.Definition.Settings.Enabled = false;
-                    _task.RegisterChanges();
+                    task.Definition.Settings.Enabled = false;
+                    task.RegisterChanges();
                 }
             }
 
@@ -139,14 +139,14 @@ namespace GTweak.Utilities.Tweaks
             DisableSR(Settings.PathSystemDisk + @"\\");
         }
 
-        private static string StartPowerShell(string _arguments)
+        private static string StartPowerShell(string arguments)
         {
             Parallel.Invoke(() =>
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = @"powershell.exe",
-                    Arguments = _arguments,
+                    Arguments = arguments,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,

@@ -6,48 +6,48 @@ namespace GTweak.Utilities.Helpers
 {
     internal readonly struct RegistryHelp
     {
-        internal static  void DeleteFolderTree(in RegistryKey _registrykey, in string _subkey)
+        internal static  void DeleteFolderTree(in RegistryKey registrykey, in string subkey)
         {
-            if (_registrykey.OpenSubKey(_subkey) != null)
-                try { _registrykey.DeleteSubKeyTree(_subkey); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            if (registrykey.OpenSubKey(subkey) == null) return;
+            try { registrykey.DeleteSubKeyTree(subkey); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
-        internal static void DeleteValue(in RegistryKey _registrykey, in string _subkey, in string _value)
+        internal static void DeleteValue(in RegistryKey registrykey, in string subkey, in string value)
         {
-            if (_registrykey.OpenSubKey(_subkey) != null && _registrykey.OpenSubKey(_subkey)?.GetValue(_value, null) != null)
-                try { _registrykey.OpenSubKey(_subkey, true)?.DeleteValue(_value); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            if (registrykey.OpenSubKey(subkey) == null || registrykey.OpenSubKey(subkey)?.GetValue(value, null) == null) return;
+            try { registrykey.OpenSubKey(subkey, true)?.DeleteValue(value); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
         
-        internal static void Write<T>(in RegistryKey _registrykey, in string _key, in string _name, in T _data, in RegistryValueKind _kind)
+        internal static void Write<T>(in RegistryKey registrykey, in string key, in string name, in T data, in RegistryValueKind kind)
         {
-            try { _registrykey.CreateSubKey(_key, true)?.SetValue(_name, _data, _kind); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            try { registrykey.CreateSubKey(key, true)?.SetValue(name, data, kind); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
 
-        internal static void CreateFolder(in RegistryKey _registrykey, in string _subkey)
+        internal static void CreateFolder(in RegistryKey registrykey, in string subkey)
         {
-            try { _registrykey.CreateSubKey(_subkey); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            try { registrykey.CreateSubKey(subkey); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
-        internal static void DeleteRegristyTree(in RegistryKey _registrykey, in string _key)
+        internal static void DeleteRegristyTree(in RegistryKey registrykey, in string key)
         {
             try
             {
-                RegistryKey _registryFolder = _registrykey.OpenSubKey(_key, true);
+                RegistryKey registryFolder = registrykey.OpenSubKey(key, true);
 
-                if (_registryFolder != null)
+                if (registryFolder != null)
                 {
-                    foreach (string value in _registryFolder.GetValueNames())
+                    foreach (string value in registryFolder.GetValueNames())
                     {
                         try
                         {
-                            _registryFolder.DeleteValue(value);
+                            registryFolder.DeleteValue(value);
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     }
                 }
 
-                Registry.LocalMachine.DeleteSubKeyTree(_key, false);
+                Registry.LocalMachine.DeleteSubKeyTree(key, false);
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }

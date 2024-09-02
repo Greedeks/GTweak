@@ -349,35 +349,39 @@ namespace GTweak.Utilities.Tweaks
 
         private void KillProcess(string getName)
         {
-            foreach (Process _process in Process.GetProcessesByName(getName))
+            foreach (Process process in Process.GetProcessesByName(getName))
             {
-                try { _process.Kill();}
+                try { process.Kill();}
                 catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }
 
-        private string RunPowerShellCommand(string command) => RunProcess(Path.Combine(Environment.SystemDirectory, @"WindowsPowerShell\v1.0\powershell.exe"), "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -EncodedCommand \"" + Convert.ToBase64String(Encoding.Unicode.GetBytes(command)) + "\"");
+        private void RunPowerShellCommand(string command)
+        {
+            RunProcess(Path.Combine(Environment.SystemDirectory, @"WindowsPowerShell\v1.0\powershell.exe"),
+                "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -EncodedCommand \"" +
+                Convert.ToBase64String(Encoding.Unicode.GetBytes(command)) + "\"");
+        }
 
         private void RunCmdCommand(string command) => RunProcess(Path.Combine(Environment.SystemDirectory, "Cmd.exe"), "/d /q /c " + command);
 
-        private string RunProcess(string _path, string _arguments)
+        private void RunProcess(string path, string arguments)
         {
             try
             {
                 Process comandoAEjecutar = new Process();
-                comandoAEjecutar.StartInfo.FileName = _path;
-                comandoAEjecutar.StartInfo.Arguments = _arguments;
+                comandoAEjecutar.StartInfo.FileName = path;
+                comandoAEjecutar.StartInfo.Arguments = arguments;
                 comandoAEjecutar.StartInfo.UseShellExecute = false;
                 comandoAEjecutar.StartInfo.RedirectStandardOutput = true;
                 comandoAEjecutar.StartInfo.RedirectStandardError = true;
                 comandoAEjecutar.StartInfo.CreateNoWindow = true;
                 comandoAEjecutar.Start();
 
-                return comandoAEjecutar.StandardOutput.ReadToEnd();
+                comandoAEjecutar.StandardOutput.ReadToEnd();
+                return;
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-
-            return null;
         }
 
         private void EnableTask(string path) => SetTask(path, "/Enable");
