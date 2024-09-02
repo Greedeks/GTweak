@@ -9,11 +9,23 @@
             </Grid.ColumnDefinitions>
             <Border
               x:Name="Border" 
+              Grid.Column="0" 
               Grid.ColumnSpan="2"
               CornerRadius="2"
               Background="{StaticResource Color_Background_Dark}"
               BorderBrush="{StaticResource Color_Accent}"
               BorderThickness="1" />
+            <Path 
+              x:Name="Arrow"
+              Margin="0 0 4 0"
+              Grid.Column="1"     
+              Fill="White"
+              Width="10" Height="6"
+              Stretch="Fill"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Data="M7 10l5 5 5-5z">
+            </Path>
         </Grid>
     </ControlTemplate>
 
@@ -67,7 +79,6 @@
                         AllowsTransparency="True" 
                         Focusable="False"
                         PopupAnimation="Slide">
-
                             <Grid Name="DropDown"
                           SnapsToDevicePixels="True"                
                           MinWidth="{TemplateBinding ActualWidth}"

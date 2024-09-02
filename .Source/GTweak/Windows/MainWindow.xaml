@@ -171,8 +171,8 @@
                                     <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" DynamicText="{DynamicResource btgl_toast_main}" Margin="40,20,0,0" ChangedState="BtnTopMost_ChangedState"/>
 
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,20,0,0">
-                                        <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Margin="0,0,0,0" Text="{DynamicResource cmbox_lang_main}"/>
-                                        <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="170" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
+                                        <TextBlock Style="{StaticResource Text_In}" Foreground="#ffffff" Text="{DynamicResource cmbox_lang_main}"/>
+                                        <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
                                             <TextBlock Text="{DynamicResource cmbox_eng_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_ru_main}"/>
                                         </ComboBox>
