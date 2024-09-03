@@ -6,8 +6,7 @@
 ![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)
 ![Stars](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&color=16BD72)
 ![Size](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&color=%231EB1D2)
-![Commit](https://img.shields.io/github/last-commit/greedeks/gtweak?style=for-the-badge&color=16BD72)
-[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&color=%231EB1D2)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&color=16BD72)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 ##
 
 ## Download the latest version
