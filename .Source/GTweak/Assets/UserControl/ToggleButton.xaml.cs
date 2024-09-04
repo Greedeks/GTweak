@@ -98,7 +98,7 @@ namespace GTweak.Assets.UserControl
                 };
                 Timeline.SetDesiredFrameRate(brushanimation, 400);
                 Back.BeginAnimation(Shape.FillProperty, brushanimation);
-                ToggleText.Style = (Style)Application.Current.Resources["Text"];
+                ToggleText.Style = (Style)FindResource("Text");
             }
 
             else if (!isState && Dot.Margin != _leftSide)
@@ -127,7 +127,7 @@ namespace GTweak.Assets.UserControl
                 };
                 Timeline.SetDesiredFrameRate(brushanimation, 400);
                 Back.BeginAnimation(Shape.FillProperty, brushanimation);
-                ToggleText.Style = (Style)Application.Current.Resources["Text_In"];
+                ToggleText.Style = (Style)FindResource("Text_In");
             }
         }
     }

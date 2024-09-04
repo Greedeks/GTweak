@@ -23,7 +23,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border SnapsToDevicePixels="True" Background="{DynamicResource Color_Accent}"  BorderThickness="1" BorderBrush="{DynamicResource Color_Border_Slider}" Height="5" CornerRadius="1,0,0,1"/>
+                    <Border SnapsToDevicePixels="True" Background="{DynamicResource Color_Accent}"  BorderThickness="1" BorderBrush="{DynamicResource Color_Border}" Height="5" CornerRadius="1,0,0,1"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
