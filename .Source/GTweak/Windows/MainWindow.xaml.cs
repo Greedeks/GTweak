@@ -22,10 +22,14 @@ namespace GTweak
             BtnTopMost.State = Topmost = Settings.IsTopMost;
             SliderVolume.Value = Settings.VolumeNotification;
             LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;
-            ThemeSelectionMenu.SelectedIndex = Settings.Theme == "Dark" ? 0 : 1;
-
-            App.ImportTweaksUpdate += (s, e) => { BtnMore.IsChecked = true; };
-            App.ThemeChanged += (s, e) => { BtnMore.IsChecked = true; };
+            ThemeSelectionMenu.SelectedIndex = Settings.Theme switch
+            {
+                "Dark" => 0,
+                "Light" => 1,
+                _ => 2,
+            };
+            App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
+            App.ThemeChanged += delegate { Settings.SelfRestart(); };
         }
 
         #region Button Title/Animation Window
@@ -165,9 +169,13 @@ namespace GTweak
                     Settings.ChangingParameters("Dark", "Theme");
                     App.Theme = "Dark";
                     break;
-                default:
+                case 1:
                     Settings.ChangingParameters("Light", "Theme");
                     App.Theme = "Light";
+                    break;
+                default:
+                    Settings.ChangingParameters("System", "Theme");
+                    App.Theme = "System";
                     break;
             }
         }

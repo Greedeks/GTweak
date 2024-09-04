@@ -18,8 +18,6 @@ namespace GTweak.Windows
         {
             InitializeComponent();
 
-            App.ViewingSettings();
-
             try
             {
                 timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
@@ -34,9 +32,9 @@ namespace GTweak.Windows
 
             if (isViolationSystem)
             {
-                TextRun0.Text = (string)Application.Current.Resources["text0_nosupport_message"];
-                TextRun1.Text = (string)Application.Current.Resources["text1_nosupport_message"];
-                TextRun2.Text = (string)Application.Current.Resources["text2_nosupport_message"];
+                TextRun0.Text = (string)FindResource("text0_nosupport_message");
+                TextRun1.Text = (string)FindResource("text1_nosupport_message");
+                TextRun2.Text = (string)FindResource("text2_nosupport_message");
             }
         }
 

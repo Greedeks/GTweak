@@ -20,10 +20,7 @@ namespace GTweak.View
             App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
 
             if (WindowsLicense.statusLicense != 1)
-            {
-                App.ViewingSettings();
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["viewlicense_notification"]);
-            }
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)

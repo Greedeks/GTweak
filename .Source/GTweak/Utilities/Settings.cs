@@ -188,7 +188,7 @@ namespace GTweak.Utilities
                 Application.Current.Shutdown();
                 Process.Start(new ProcessStartInfo()
                 {
-                    Arguments = "/C choice /C Y /N /D Y /T 3 & Del \"" + (new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath)).Name + "\" & " +
+                    Arguments = "/c choice /c y /n /d y /t 3 & del \"" + (new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath)).Name + "\" & " +
                     "rd /s /q " + PathTempFiles + @"& rd /s /q "+Environment.SystemDirectory+ @"\config\systemprofile\AppData\Local\GTweak",
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,
@@ -196,6 +196,18 @@ namespace GTweak.Utilities
                 });
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+        }
+
+        internal static void SelfRestart()
+        {
+            Process.Start(new ProcessStartInfo()
+            {
+                Arguments = "/c choice /c y /n /d y /t 1 & start \"\" \"" + Assembly.GetEntryAssembly().Location + "\"",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true,
+                FileName = "cmd.exe"
+            });
+            Process.GetCurrentProcess().Kill();
         }
     }
 }

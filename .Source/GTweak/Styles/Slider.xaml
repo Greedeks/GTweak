@@ -9,7 +9,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border BorderThickness="1" BorderBrush="{DynamicResource Color_Background_Slider}" Background="{DynamicResource Color_Background_Slider}" Height="5" CornerRadius="0,1,1,0"/>
+                    <Border BorderThickness="1" BorderBrush="{StaticResource Color_Background_Slider}" Background="{StaticResource Color_Background_Slider}" Height="5" CornerRadius="0,1,1,0"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -23,7 +23,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border SnapsToDevicePixels="True" Background="{DynamicResource Color_Accent}"  BorderThickness="1" BorderBrush="{DynamicResource Color_Border}" Height="5" CornerRadius="1,0,0,1"/>
+                    <Border SnapsToDevicePixels="True" Background="{StaticResource Color_Accent}"  BorderThickness="1" BorderBrush="{StaticResource Color_Border}" Height="5" CornerRadius="1,0,0,1"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -38,10 +38,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border x:Name="Switch" Height="12" Width="12" Background="{DynamicResource Color_Border}" CornerRadius="2" BorderBrush="{DynamicResource Color_Accent}" BorderThickness="1"></Border>
+                    <Border x:Name="Switch" Height="12" Width="12" Background="{StaticResource Color_Border}" CornerRadius="2" BorderBrush="{StaticResource Color_Accent}" BorderThickness="1"></Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Switch" Property="Background" Value="{DynamicResource Color_Accent}"></Setter>
+                            <Setter TargetName="Switch" Property="Background" Value="{StaticResource Color_Accent}"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -68,7 +68,7 @@
                 </Track.IncreaseRepeatButton>
             </Track>
             <TextBlock FocusVisualStyle="{x:Null}" Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}" 
-                       FontFamily="{StaticResource Jura}" FontSize="14px" FontWeight="Medium" Grid.Row="2" Margin="0,-5,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource Color_Highlighted}">
+                       FontFamily="{StaticResource Jura}" FontSize="14px" FontWeight="Medium" Grid.Row="2" Margin="0,-5,0,0" HorizontalAlignment="Center" Foreground="{StaticResource Color_Highlighted}">
             </TextBlock>
         </Grid>
     </ControlTemplate>

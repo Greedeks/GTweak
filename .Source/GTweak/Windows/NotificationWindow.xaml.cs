@@ -29,8 +29,6 @@ namespace GTweak.Windows
 
             ImageBody.Source ??= new BitmapImage(new Uri(Settings.PathIcon));
 
-            App.ViewingSettings();
-
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 if (time == TimeSpan.Zero) { timer.Stop(); this.Close(); }

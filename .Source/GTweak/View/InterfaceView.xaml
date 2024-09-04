@@ -76,7 +76,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Rectangle Fill="{DynamicResource Color_Accent}" Width="900" Height="1" RadiusX="15" RadiusY="15" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <Rectangle Fill="{StaticResource Color_Accent}" Width="900" Height="1" RadiusX="15" RadiusY="15" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                 <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescription}"/>
                 <TextBlock x:Name="TextViewColor" Style="{StaticResource Description}" Text="{DynamicResource textcolor_interface}" VerticalAlignment="Top" Foreground="#505050" Visibility="Hidden" Margin="0,28,0,0"/>
             </Grid>

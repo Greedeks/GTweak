@@ -19,6 +19,12 @@ namespace GTweak
 
         internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(null, EventArgs.Empty);
 
+        internal static void ViewingSettings()
+        {
+            Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
+            Theme = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Theme")?.ToString() ?? "Dark";
+        }
+
         internal static string Language
         {
             set
@@ -35,7 +41,8 @@ namespace GTweak
                 };
 
                 ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
-                where dict.Source != null && dict.Source.OriginalString.StartsWith("Language/Lang.") select dict).First();
+                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith("Language/Lang.") 
+                                                    select dict).First();
                 if (oldDictionary != null)
                 {
                     int ind = Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
@@ -46,12 +53,6 @@ namespace GTweak
 
                 LanguageChanged?.Invoke(null, EventArgs.Empty);
             }
-        }
-
-        internal static void ViewingSettings()
-        {
-            Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
-            Theme = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Theme")?.ToString() ?? "Dark";
         }
 
         internal static string Theme
@@ -65,7 +66,8 @@ namespace GTweak
                     Source = value switch
                     {
                         "Light" => new Uri($"Styles/Theme/Colors.Light.xaml", UriKind.Relative),
-                        _ => new Uri("Styles/Theme/Colors.xaml", UriKind.Relative),
+                        "Dark" => new Uri($"Styles/Theme/Colors.xaml", UriKind.Relative),
+                        _ => Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize")?.GetValue("AppsUseLightTheme")?.ToString()! == "0" ? new Uri("Styles/Theme/Colors.xaml", UriKind.Relative) : new Uri($"Styles/Theme/Colors.Light.xaml", UriKind.Relative),
                     }
                 };
 

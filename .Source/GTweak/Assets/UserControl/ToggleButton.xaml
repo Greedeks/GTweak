@@ -13,8 +13,8 @@
                     <Rectangle x:Name="Back" Cursor="Hand" HorizontalAlignment="Left" Height="56.5" VerticalAlignment="Top" Width="96.5" Margin="2,2,0,0" RadiusY="29" RadiusX="29" KeyboardNavigation.IsTabStop="False" >
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="{DynamicResource Color_ToggleButton_OFF_1}" Offset="1"/>
-                                <GradientStop Color="{DynamicResource Color_ToggleButton_OFF_2}" Offset="1"/>
+                                <GradientStop Color="{StaticResource Color_ToggleButton_OFF_1}" Offset="1"/>
+                                <GradientStop Color="{StaticResource Color_ToggleButton_OFF_2}" Offset="1"/>
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>

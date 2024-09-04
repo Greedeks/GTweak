@@ -23,7 +23,7 @@
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">
 
-            <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{DynamicResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
+            <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
                 <TextBlock.Triggers>
                     <EventTrigger RoutedEvent="TextBlock.Loaded">
                         <BeginStoryboard>
@@ -39,10 +39,10 @@
                 </TextBlock.Triggers>
             </TextBlock>
 
-            <Border  BorderBrush="{DynamicResource Color_Accent}" BorderThickness="1.2" CornerRadius="50" Width="75" Height="75" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,26,0,0">
+            <Border  BorderBrush="{StaticResource Color_Accent}" BorderThickness="1.2" CornerRadius="50" Width="75" Height="75" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,26,0,0">
                 <Border CornerRadius="50">
                     <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{DynamicResource Color_Shadow}" />
+                        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
                     </Border.Effect>
                     <Border.Background>
                         <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
@@ -54,7 +54,7 @@
 
             <ProgressBar Width="100" Height="5" Margin="0,20,0,0" IsIndeterminate="True" Style="{StaticResource ProgressBarStyle}"/>
 
-            <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{DynamicResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,20,0,0"/>
+            <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,20,0,0"/>
 
         </StackPanel>
 

@@ -75,11 +75,7 @@ namespace GTweak.Utilities.Tweaks
                     });
                 }
             } 
-            catch 
-            {
-                App.ViewingSettings();
-                new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); 
-            }
+            catch  { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
         private static void AddRulesIn(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
@@ -129,7 +125,6 @@ namespace GTweak.Utilities.Tweaks
 
         protected static void BlockSpyDomain(in bool isChoose)
         {
-            App.ViewingSettings();
             try
             {
                 if (CheckRulesWindows(NameRules["Domain"]) && isChoose)
@@ -139,11 +134,7 @@ namespace GTweak.Utilities.Tweaks
                     try { RulesHosts(isChoose); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                 }
             }
-            catch
-            {
-                App.ViewingSettings();
-                new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]);
-            }
+            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
         private static void RulesHosts(in bool isChoose)
@@ -186,7 +177,6 @@ namespace GTweak.Utilities.Tweaks
 
         protected static void BlockWDefender(bool isChoose)
         {
-            App.ViewingSettings();
             try
             {
                 if (CheckRulesWindows(NameRules["WDefender"]) && isChoose)
@@ -202,11 +192,7 @@ namespace GTweak.Utilities.Tweaks
                     });
                 }
             }
-            catch
-            {
-                App.ViewingSettings();
-                new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]);
-            }
+            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
         }
     }
 }
