@@ -82,7 +82,7 @@
                     </xrpb:RadialProgressBar.Effect>
                 </xrpb:RadialProgressBar>
 
-                <TextBlock Foreground="#BFBFBF" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,30,0,0">
+                <TextBlock Foreground="{DynamicResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,30,0,0">
                 <Run Text="{Binding ElementName=RAMLoad, Path=Value, Mode=OneWay,StringFormat=N0}"/><Run Text="%"/>
                 </TextBlock>
                 <TextBlock Text="RAM" Foreground="{DynamicResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,50,0,0"/>

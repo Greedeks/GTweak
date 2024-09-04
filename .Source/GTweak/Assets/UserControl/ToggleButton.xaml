@@ -28,7 +28,7 @@
                     </Ellipse>
                 </Grid>
             </Viewbox>
-            <TextBlock x:Name="ToggleText" Text="TextTglButton"  Margin="10,2,0,0" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource Text_In}"/>
+            <TextBlock x:Name="ToggleText" Text="TextTglButton" Margin="10,2,0,0" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource Text_In}"/>
         </StackPanel>
     </Grid>
 </UserControl>
