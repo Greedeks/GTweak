@@ -23,7 +23,7 @@
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">
 
-            <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{DynamicResource Color_Inactive}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
+            <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{DynamicResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
                 <TextBlock.Triggers>
                     <EventTrigger RoutedEvent="TextBlock.Loaded">
                         <BeginStoryboard>
