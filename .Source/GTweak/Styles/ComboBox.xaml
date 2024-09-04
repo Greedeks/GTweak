@@ -12,14 +12,14 @@
               Grid.Column="0" 
               Grid.ColumnSpan="2"
               CornerRadius="2"
-              Background="{StaticResource Color_Background_Dark}"
-              BorderBrush="{StaticResource Color_Accent}"
+              Background="{DynamicResource Color_Background_Dark}"
+              BorderBrush="{DynamicResource Color_Accent}"
               BorderThickness="1" />
             <Path 
               x:Name="Arrow"
               Margin="0 0 4 0"
               Grid.Column="1"     
-              Fill="White"
+              Fill="{DynamicResource Color_Highlighted}"
               Width="10" Height="6"
               Stretch="Fill"
               HorizontalAlignment="Center"
@@ -42,7 +42,7 @@
         <Setter Property="MinWidth" Value="120"/>
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Highlighted}"/>
         <Setter Property="FontSize" Value="14px"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
@@ -85,10 +85,10 @@
                           MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 <Border 
                             x:Name="DropDownBorder"
-                            Background="{StaticResource Color_Background_Dark}"
+                            Background="{DynamicResource Color_Background_Dark}"
                             CornerRadius="2"
                             BorderThickness="1"
-                            BorderBrush="{StaticResource Color_Accent}"/>
+                            BorderBrush="{DynamicResource Color_Accent}"/>
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
@@ -100,7 +100,7 @@
                             <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource Color_Background_Dark}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource Color_Background_Dark}"/>
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
@@ -124,7 +124,7 @@
 
     <Style x:Key="{x:Type ComboBoxItem}" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Highlighted}"/>
         <Setter Property="FontSize" Value="14px"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -136,7 +136,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="#303030"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Color_ComboBoxOver}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

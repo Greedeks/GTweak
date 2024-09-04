@@ -46,13 +46,13 @@ namespace GTweak.Assets.UserControl
         {
             InitializeComponent();
 
-            brushOnColor.GradientStops.Add(new GradientStop(Color.FromArgb(255, 84, 255, 159), 0.2));
-            brushOnColor.GradientStops.Add(new GradientStop(Color.FromArgb(255, 36, 255, 132), 0.9));
+            brushOnColor.GradientStops.Add(new GradientStop((Color)FindResource("Color_ToggleButton_ON_1"), 0.2));
+            brushOnColor.GradientStops.Add(new GradientStop((Color)FindResource("Color_ToggleButton_ON_2"), 0.9));
             brushOnColor.StartPoint = new Point(0, 0);
             brushOnColor.EndPoint = new Point(0, 1);
 
-            brushOffColor.GradientStops.Add(new GradientStop(Color.FromArgb(255, 80, 80, 80), 1.0));
-            brushOffColor.GradientStops.Add(new GradientStop(Color.FromArgb(255, 105, 105, 105), 1.0));
+            brushOffColor.GradientStops.Add(new GradientStop((Color)FindResource("Color_ToggleButton_OFF_1"), 1.0));
+            brushOffColor.GradientStops.Add(new GradientStop((Color)FindResource("Color_ToggleButton_OFF_2"), 1.0));
 
             AnimationToggle(_state, true);
         }

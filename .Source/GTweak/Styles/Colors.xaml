@@ -3,15 +3,29 @@
 
     <SolidColorBrush x:Key="Color_Background" Color="#1E1E1E"/>
     <SolidColorBrush x:Key="Color_Background_Dark" Color="#1A1A1A"/>
+    
     <SolidColorBrush x:Key="Color_Accent" Color="#54FF9F"/>
     <SolidColorBrush x:Key="Color_Inactive" Color="#808080"/>
+    <SolidColorBrush x:Key="Color_Highlighted" Color="#FFFFFF"/>
+
     <SolidColorBrush x:Key="Color_Over" Color="#6AECA3"/>
     <SolidColorBrush x:Key="Color_ButtonOver" Color="#60f0a8"/>
+    <SolidColorBrush x:Key="Color_ButtonOver_Navigation" Color="#212121"/>
     <SolidColorBrush x:Key="Color_Border" Color="#00D65E"/>
-    <SolidColorBrush x:Key="Color_ToggleButtonBackground" Color="#737373"/>
 
+    <SolidColorBrush x:Key="Color_ComboBoxOver" Color="#303030"/>
+    <SolidColorBrush x:Key="Color_Background_ScrollBar" Color="#181818"/>
+    <SolidColorBrush x:Key="Color_Background_Slider" Color="#262626"/>
+    <SolidColorBrush x:Key="Color_Border_Slider" Color="#00AD4C"/>
+    <SolidColorBrush x:Key="Color_TetBlock_Inactivity" Color="#BFBFBF"/>
+    <SolidColorBrush x:Key="Color_TetBox_Border" Color="#D1DBE4"/>
+    
     <Color x:Key="Color_Shadow">#1AFF7E</Color>
     <Color x:Key="Color_Border_Gradient_1">#54FF9F</Color>
     <Color x:Key="Color_Border_Gradient_2">#1AFF7E</Color>
-    
+    <Color x:Key="Color_ToggleButton_OFF_1">#505050</Color>
+    <Color x:Key="Color_ToggleButton_OFF_2">#696969</Color>
+    <Color x:Key="Color_ToggleButton_ON_1">#54FF9F</Color>
+    <Color x:Key="Color_ToggleButton_ON_2">#24FF84</Color>
+
 </ResourceDictionary>

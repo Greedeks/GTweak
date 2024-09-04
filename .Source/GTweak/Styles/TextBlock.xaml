@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TextBlock}" x:Key="Text_In">
-        <Setter Property="Foreground" Value="#BFBFBF"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_TetBlock_Inactivity}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="16px"/>
@@ -16,13 +16,13 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="#ffffff"/>
+                <Setter Property="Foreground" Value="{DynamicResource Color_Highlighted}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="Text">
-        <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Accent}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="16px"/>
@@ -36,13 +36,13 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource Color_Over}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Color_Over}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="Description">
-        <Setter Property="Foreground" Value="#E8E8E8"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Highlighted}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="16"/>

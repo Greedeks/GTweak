@@ -22,8 +22,8 @@
     </Style>
     
     <Style TargetType="RadioButton" x:Key="BtnNavigation">
-        <Setter Property="Background" Value="{StaticResource Color_Background_Dark}"/>
-        <Setter Property="Foreground" Value="{StaticResource Color_Inactive}"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Background_Dark}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Inactive}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -32,7 +32,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="Indicator" Background="{TemplateBinding Background}" BorderBrush="{StaticResource Color_Accent}" BorderThickness="0">
+                    <Border x:Name="Indicator" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource Color_Accent}" BorderThickness="0">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -45,19 +45,19 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#212121"/>
-                <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
+                <Setter Property="Background" Value="{DynamicResource Color_ButtonOver_Navigation}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Color_Accent}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_Background_Dark}"/>
-                <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
+                <Setter Property="Background" Value="{DynamicResource Color_Background_Dark}"/>
+                <Setter Property="Foreground" Value="{DynamicResource Color_Accent}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="{x:Type Button}" x:Key="BtnDefault">
-        <Setter Property="Foreground" Value="{StaticResource Color_Background_Dark}"/>
-        <Setter Property="Background" Value="{StaticResource Color_Accent}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Background_Dark}"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Accent}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="13.5px"/>
@@ -112,7 +112,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_ButtonOver}"/>
+                <Setter Property="Background" Value="{DynamicResource Color_ButtonOver}"/>
             </Trigger>
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <EventTrigger.Actions>
