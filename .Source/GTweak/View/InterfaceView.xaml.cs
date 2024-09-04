@@ -21,7 +21,7 @@ namespace GTweak.View
 
             if (WindowsLicense.statusLicense != 1)
             {
-                App.ViewLang();
+                App.ViewingSettings();
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["viewlicense_notification"]);
             }
         }

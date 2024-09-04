@@ -14,9 +14,10 @@ namespace GTweak.Windows
     {
         public LoadingWindow()
         {
+            App.ViewingSettings();
+
             InitializeComponent();
 
-            App.ViewLang();
             BlockRunTweaker.CheckingApplicationCopies();
             BlockRunTweaker.CheckingSystemRequirements();
         }

@@ -72,7 +72,8 @@ namespace GTweak.Core.ViewModel
 
             CurrentView = new MoreVM();
 
-            App.ImportTweaksUpdate += (s, e) => { CurrentView = new MoreVM(); };
+            App.ImportTweaksUpdate += delegate { CurrentView = new MoreVM(); };
+            App.ThemeChanged += delegate { CurrentView = new MoreVM(); };
         }
     }
 }

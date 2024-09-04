@@ -29,7 +29,7 @@ namespace GTweak.Windows
 
             ImageBody.Source ??= new BitmapImage(new Uri(Settings.PathIcon));
 
-            App.ViewLang();
+            App.ViewingSettings();
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {

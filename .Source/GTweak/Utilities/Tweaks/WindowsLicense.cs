@@ -92,7 +92,7 @@ namespace GTweak.Utilities.Tweaks
 
                 waitingWindow.Close();
 
-                App.ViewLang();
+                App.ViewingSettings();
 
                 if (statusLicense == 1)
                     new ViewNotification().Show("restart", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["successactivate_notification"]);

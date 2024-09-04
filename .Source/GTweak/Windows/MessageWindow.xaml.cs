@@ -18,7 +18,7 @@ namespace GTweak.Windows
         {
             InitializeComponent();
 
-            App.ViewLang();
+            App.ViewingSettings();
 
             try
             {

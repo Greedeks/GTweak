@@ -77,7 +77,7 @@ namespace GTweak.Utilities.Tweaks
             } 
             catch 
             {
-                App.ViewLang();
+                App.ViewingSettings();
                 new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); 
             }
         }
@@ -129,7 +129,7 @@ namespace GTweak.Utilities.Tweaks
 
         protected static void BlockSpyDomain(in bool isChoose)
         {
-            App.ViewLang();
+            App.ViewingSettings();
             try
             {
                 if (CheckRulesWindows(NameRules["Domain"]) && isChoose)
@@ -141,7 +141,7 @@ namespace GTweak.Utilities.Tweaks
             }
             catch
             {
-                App.ViewLang();
+                App.ViewingSettings();
                 new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]);
             }
         }
@@ -186,7 +186,7 @@ namespace GTweak.Utilities.Tweaks
 
         protected static void BlockWDefender(bool isChoose)
         {
-            App.ViewLang();
+            App.ViewingSettings();
             try
             {
                 if (CheckRulesWindows(NameRules["WDefender"]) && isChoose)
@@ -204,7 +204,7 @@ namespace GTweak.Utilities.Tweaks
             }
             catch
             {
-                App.ViewLang();
+                App.ViewingSettings();
                 new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]);
             }
         }

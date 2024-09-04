@@ -260,7 +260,7 @@ namespace GTweak.Utilities.Tweaks
                         }
                         catch
                         {
-                            App.ViewLang();
+                            App.ViewingSettings();
                             СonfigurationData["IpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
                             isInternetLimited = true;
                         }
@@ -278,7 +278,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                             else
                             {
-                                App.ViewLang();
+                                App.ViewingSettings();
                                 isConnectionBlock = true;
                                 СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
                             }
@@ -286,7 +286,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else
                     {
-                        App.ViewLang();
+                        App.ViewingSettings();
                         isConnectionLose = true;
                         СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                     }
