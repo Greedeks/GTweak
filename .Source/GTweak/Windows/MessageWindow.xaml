@@ -10,11 +10,11 @@
         Background="Transparent"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
         ShowInTaskbar="False"  IsTabStop="False">
     <Grid>
-        <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
+        <Border Background="{DynamicResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
             <Border.BorderBrush>
                 <LinearGradientBrush>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+                    <GradientStop Color="{DynamicResource Color_Border_Gradient_1}" Offset="0"/>
+                    <GradientStop Color="{DynamicResource Color_Border_Gradient_2}" Offset="1"/>
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
@@ -26,20 +26,20 @@
                 </Grid.RowDefinitions>
 
                 <Grid x:Name="TitleBar" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True" MouseDown="TitleBar_MouseDown">
-                    <Border Background="{StaticResource Color_Background_Dark}" CornerRadius="9,9,0,0">
-                        <TextBlock FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="17px" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0">
+                    <Border Background="{DynamicResource Color_Background_Dark}" CornerRadius="9,9,0,0">
+                        <TextBlock FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{DynamicResource Color_Accent}" FontSize="17px" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0">
                             <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                                <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{DynamicResource Color_Shadow}" />
                             </TextBlock.Effect>
                         </TextBlock>
                     </Border>
                 </Grid>
 
                 <Grid Grid.Row="1">
-                    <TextBlock Foreground="#BFBFBF" Height="auto" Width="330" FontFamily="{StaticResource Jura}" FontSize="15px"  TextWrapping="Wrap"
+                    <TextBlock Foreground="{DynamicResource Color_TetBlock_Inactivity}" Height="auto" Width="330" FontFamily="{StaticResource Jura}" FontSize="15px"  TextWrapping="Wrap"
                            HorizontalAlignment="Center" TextAlignment="Left" FontStretch="Medium" Margin="5,16,0,0">
                                 <Run x:Name="TextRun0" Text="{DynamicResource text0_message}"/>
-                                <Run x:Name="TextRun1" Text="{DynamicResource text1_message}" Foreground="{StaticResource Color_Accent}"/>
+                                <Run x:Name="TextRun1" Text="{DynamicResource text1_message}" Foreground="{DynamicResource Color_Accent}"/>
                                 <Run x:Name="TextRun2" Text="{DynamicResource text2_message}"/>
                     </TextBlock>
                 </Grid>
