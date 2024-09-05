@@ -7,9 +7,12 @@
         mc:Ignorable="d"
         xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
         Title="GTweak" WindowStyle="None"
-        Height="200" Width="200"
+        Height="180" Width="180"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
         IsTabStop="False" Opacity="0.98" Topmost="True" ShowInTaskbar="False" Loaded="Window_Loaded">
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Opacity="0.7" Color="#000000"/>
+    </Window.Effect>
     <Grid>
         <Ellipse Height="140" Width="140" Fill="{StaticResource Color_Background_Dark}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Ellipse Height="160" Width="160" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
