@@ -24,7 +24,7 @@ namespace GTweak.Windows
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.15));
-            doubleAnim.Completed += (s, _) => 
+            doubleAnim.Completed += delegate
             {
                 ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
                 disablingWinKeys.objKeyboardProcess = new DisablingWinKeys.LowLevelKeyboardProc(disablingWinKeys.CaptureKey);

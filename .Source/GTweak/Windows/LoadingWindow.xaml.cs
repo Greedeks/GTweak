@@ -86,7 +86,7 @@ namespace GTweak.Windows
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += (s, _) => this.Close();
+            doubleAnim.Completed += delegate { this.Close(); };
             this.BeginAnimation(OpacityProperty, doubleAnim);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
+using GTweak.Windows;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -29,7 +30,7 @@ namespace GTweak
                 _ => 2,
             };
             App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
-            App.ThemeChanged += delegate { Settings.SelfRestart(); };
+            App.ThemeChanged += delegate { new RebootWindow().ShowDialog(); };
         }
 
         #region Button Title/Animation Window
@@ -107,7 +108,7 @@ namespace GTweak
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += (s, _) => { this.Close(); };
+            doubleAnim.Completed += delegate { this.Close(); };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             BeginAnimation(OpacityProperty, doubleAnim);
         }

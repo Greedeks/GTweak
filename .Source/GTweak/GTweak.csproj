@@ -275,6 +275,9 @@
     <Compile Include="Windows\NotificationWindow.xaml.cs">
       <DependentUpon>NotificationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\RebootWindow.xaml.cs">
+      <DependentUpon>RebootWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WaitingWindow.xaml.cs">
       <DependentUpon>WaitingWindow.xaml</DependentUpon>
     </Compile>
@@ -437,6 +440,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\NotificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RebootWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

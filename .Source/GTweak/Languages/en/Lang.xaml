@@ -92,7 +92,11 @@
     <v:String x:Key="wait_win_import">It takes some time</v:String>
     <v:String x:Key="warning_win_import">It is not necessary to close the window forcibly</v:String>
     <!--#endregion-->
-    
+
+    <!--#region Reboot Window -->
+    <v:String x:Key="title_reboot">Attention GTweak reboot</v:String>
+    <!--#endregion-->
+
     <!--#region Confidentiality Page -->
     <v:String x:Key="tgl1_confidentiality">Advertising identifier and targeted advertising</v:String>
     <v:String x:Key="tgl2_confidentiality">All types of syncing your data</v:String>

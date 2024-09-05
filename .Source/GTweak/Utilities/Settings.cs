@@ -198,7 +198,7 @@ namespace GTweak.Utilities
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
-        internal static void SelfRestart()
+        internal static void SelfReboot()
         {
             Process.Start(new ProcessStartInfo()
             {

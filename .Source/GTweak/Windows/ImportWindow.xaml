@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
         Height="180" Width="450" MinHeight="180" MinWidth="450" MaxHeight="200" MaxWidth="350"
-        Background="Transparent"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
-        ShowInTaskbar="False"  IsTabStop="False" Loaded="Window_Loaded">
+        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
+        ShowInTaskbar="False" IsTabStop="False" Loaded="Window_Loaded">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>

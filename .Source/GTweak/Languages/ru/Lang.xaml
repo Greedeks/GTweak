@@ -93,6 +93,10 @@
     <v:String x:Key="warning_win_import">Не стоит закрывать окно насильно</v:String>
     <!--#endregion-->
 
+    <!--#region Reboot Window -->
+    <v:String x:Key="title_reboot">Внимание перезагрузка GTweak</v:String>
+    <!--#endregion-->
+
     <!--#region Confidentiality Page -->
     <v:String x:Key="tgl1_confidentiality">Рекламный идентификатор и таргетированная реклама</v:String>
     <v:String x:Key="tgl2_confidentiality">Все типы синхронизация ваших данных</v:String>
