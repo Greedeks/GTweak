@@ -153,7 +153,7 @@
                                     </TextBlock.Effect>
                                 </TextBlock>
 
-                                <Border Background="{DynamicResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10 10 0 0"/>
+                                <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10 10 0 0"/>
                             </Grid>
 
                             <Grid Grid.Row="1">
@@ -187,7 +187,7 @@
                                         </ComboBox>
                                     </StackPanel>
 
-                                    <Border Background="{DynamicResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom" Margin="0,20,0,0" CornerRadius="10 10 0 0"/>
+                                    <Border Background="{DynamicResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom" Margin="0,10,0,0" CornerRadius="10 10 0 0"/>
 
                                     <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource text_saveconfig}"/>

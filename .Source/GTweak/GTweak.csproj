@@ -278,11 +278,11 @@
     <Compile Include="Windows\WaitingWindow.xaml.cs">
       <DependentUpon>WaitingWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Assets\DrawingImage\AppsDeleted.xaml">
+    <Page Include="Assets\DrawingImages\Deleted\Applications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\DrawingImage\AppsInstalled.xaml">
+    <Page Include="Assets\DrawingImages\Installed\Applications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -290,7 +290,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\DrawingImage\Other.xaml">
+    <Page Include="Assets\DrawingImages\Other.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,11 +298,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Language\Lang.RU.xaml">
+    <Page Include="Languages\ru\Lang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Language\Lang.xaml">
+    <Page Include="Languages\en\Lang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -342,11 +342,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Styles\Theme\Colors.Light.xaml">
+    <Page Include="Styles\Themes\Light\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\Theme\Colors.xaml">
+    <Page Include="Styles\Themes\Dark\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

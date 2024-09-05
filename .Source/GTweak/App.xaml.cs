@@ -12,12 +12,13 @@ namespace GTweak
         internal static event EventHandler LanguageChanged;
         internal static event EventHandler ThemeChanged;
         internal static event EventHandler ImportTweaksUpdate;
+
         public App()
         {
             InitializeComponent();
         }
 
-        internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(null, EventArgs.Empty);
+        internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(default, EventArgs.Empty);
 
         internal static void ViewingSettings()
         {
@@ -35,13 +36,13 @@ namespace GTweak
                 {
                     Source = value switch
                     {
-                        "ru" => new Uri($"Language/Lang.RU.xaml", UriKind.Relative),
-                        _ => new Uri("Language/Lang.xaml", UriKind.Relative),
+                        "ru" => new Uri($"Languages/ru/Lang.xaml", UriKind.Relative),
+                        _ => new Uri("Languages/en/Lang.xaml", UriKind.Relative),
                     }
                 };
 
                 ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
-                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith("Language/Lang.") 
+                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith($"Languages/")
                                                     select dict).First();
                 if (oldDictionary != null)
                 {
@@ -49,9 +50,9 @@ namespace GTweak
                     Current.Resources.MergedDictionaries.Remove(oldDictionary);
                     Current.Resources.MergedDictionaries.Insert(ind, dictionary);
                 }
-                else {Current.Resources.MergedDictionaries.Add(dictionary); }
+                else { Current.Resources.MergedDictionaries.Add(dictionary); }
 
-                LanguageChanged?.Invoke(null, EventArgs.Empty);
+                LanguageChanged?.Invoke(default, EventArgs.Empty);
             }
         }
 
@@ -65,14 +66,14 @@ namespace GTweak
                 {
                     Source = value switch
                     {
-                        "Light" => new Uri($"Styles/Theme/Colors.Light.xaml", UriKind.Relative),
-                        "Dark" => new Uri($"Styles/Theme/Colors.xaml", UriKind.Relative),
-                        _ => Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize")?.GetValue("AppsUseLightTheme")?.ToString()! == "0" ? new Uri("Styles/Theme/Colors.xaml", UriKind.Relative) : new Uri($"Styles/Theme/Colors.Light.xaml", UriKind.Relative),
+                        "Light" => new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
+                        "Dark" => new Uri($"Styles/Themes/Dark/Colors.xaml", UriKind.Relative),
+                        _ => Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize")?.GetValue("AppsUseLightTheme")?.ToString()! == "0" ? new Uri("Styles/Themes/Dark/Colors.xaml", UriKind.Relative) : new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
                     }
                 };
 
                 ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
-                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith("Styles/Theme/Colors.")
+                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith("Styles/Themes/")
                                                     select dict).First();
                 if (oldDictionary != null)
                 {
@@ -82,7 +83,7 @@ namespace GTweak
                 }
                 else { Current.Resources.MergedDictionaries.Add(dictionary); }
 
-                ThemeChanged?.Invoke(null, EventArgs.Empty);
+                ThemeChanged?.Invoke(default, EventArgs.Empty);
             }
         }
     }
