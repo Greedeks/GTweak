@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GTweak.Windows"
-        xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
         mc:Ignorable="d"
+        xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
         Title="GTweak" WindowStyle="None"
         Height="200" Width="200"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
@@ -14,7 +14,7 @@
         <Ellipse Height="140" Width="140" Fill="{StaticResource Color_Background_Dark}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Ellipse Height="160" Width="160" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         
-            <xrpb:RadialProgressBar x:Name="RestartProgress" Value="10" Maximum="100" Width="170" Height="170" ArcWidth="6" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <xrpb:RadialProgressBar x:Name="RestartProgress" Value="0" Maximum="100" Width="170" Height="170" ArcWidth="6" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <xrpb:RadialProgressBar.Foreground>
                     <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
                         <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>
