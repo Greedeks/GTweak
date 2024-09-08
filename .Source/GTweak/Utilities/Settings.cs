@@ -23,7 +23,7 @@ namespace GTweak.Utilities
         private static bool _isViewNotification = true;
         private static bool _isSoundNotification = true;
         private static byte _volumeNotification = 100;
-        private static string _language = string.Empty;
+        private static string _language = App.GettingSystemLanguage;
         private static string _theme = "Dark";
         private static bool _isTopMost = false;
         internal static int PID = 0;
@@ -45,81 +45,69 @@ namespace GTweak.Utilities
 
         private readonly void СheckingParameters()
         {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey(@"Software\GTweak");
+            RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
             if (registryKey == null || registryKey.GetValue("Notification", null) == null || registryKey.GetValue("Sound", null) == null || registryKey.GetValue("Volume", null) == null ||
             registryKey.GetValue("TopMost", null) == null || registryKey.GetValue("Language", null) == null || registryKey.GetValue("HiddenIP", null) == null || registryKey.GetValue("Theme", null) == null)
             {
-                registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
                 registryKey?.SetValue("Notification", IsViewNotification, RegistryValueKind.String);
                 registryKey?.SetValue("Sound", IsSoundNotification, RegistryValueKind.String);
                 registryKey?.SetValue("Volume", VolumeNotification, RegistryValueKind.String);
                 registryKey?.SetValue("TopMost", IsTopMost, RegistryValueKind.String);
                 registryKey?.SetValue("HiddenIP", IsHiddenIpAddress, RegistryValueKind.String);
                 registryKey?.SetValue("Theme", Theme, RegistryValueKind.String);
-                if (string.IsNullOrEmpty(Language))
-                {
-                    registryKey?.SetValue("Language", System.Text.RegularExpressions.Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "",
-                        System.Text.RegularExpressions.RegexOptions.Multiline).Contains("ru")
-                            ? "ru"
-                            : "en", RegistryValueKind.String);
-                }
-                else
-                    registryKey?.SetValue("Language", Language, RegistryValueKind.String);
+                registryKey?.SetValue("Language", App.GettingSystemLanguage, RegistryValueKind.String);
             }
             else
             {
-                registryKey = Registry.CurrentUser.OpenSubKey(@"Software\GTweak");
                 IsViewNotification = bool.Parse(registryKey?.GetValue("Notification").ToString() ?? "True");
                 IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
                 VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "100");
                 IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");
                 IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
-                Language = registryKey?.GetValue("Language").ToString();
+                Language = registryKey?.GetValue("Language").ToString() ?? App.GettingSystemLanguage;
                 Theme = registryKey?.GetValue("Theme").ToString() ?? "Dark";
             }
             registryKey?.Close();
         }
 
-        internal static void ChangingParameters<T>(T value, string selection)
+        internal static void ChangingParameters<T>(T value, string selection) => Parallel.Invoke(delegate
         {
-            Parallel.Invoke(() => {
-                RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
-                registryKey?.SetValue(selection, value.ToString(), RegistryValueKind.String);
+            RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
+            registryKey?.SetValue(selection, value.ToString(), RegistryValueKind.String);
 
             switch (selection)
             {
                 case "Notification":
                     IsViewNotification = bool.Parse(registryKey?.GetValue("Notification").ToString() ?? "True");
-                        break;
+                    break;
                 case "Sound":
                     IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
-                        break;
+                    break;
                 case "Volume":
                     VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "100");
-                        break;
+                    break;
                 case "TopMost":
                     IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");
-                        break;
+                    break;
                 case "Language":
-                    Language = registryKey?.GetValue("Language").ToString();
-                        break;
+                    Language = registryKey?.GetValue("Language").ToString() ?? App.GettingSystemLanguage;
+                    break;
                 case "Theme":
                     Theme = registryKey?.GetValue("Theme").ToString() ?? "Dark";
-                        break;
-                    case "HiddenIP":
+                    break;
+                case "HiddenIP":
                     IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
-                        break;
-                }
-                registryKey?.Close();
-            });
-        }
+                    break;
+            }
+
+            registryKey?.Close();
+        });
+        
 
         internal static void SaveFileConfig()
         {
-            if (INIManager.UserTweaksConfidentiality.Count == 0 && INIManager.UserTweaksInterface.Count == 0
-                && INIManager.UserTweaksServices.Count == 0 && INIManager.UserTweaksSystem.Count == 0)
+            if (INIManager.UserTweaksConfidentiality.Count == 0 && INIManager.UserTweaksInterface.Count == 0 && INIManager.UserTweaksServices.Count == 0 && INIManager.UserTweaksSystem.Count == 0)
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["export_warning_notification"]);
-
             else
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -132,6 +120,7 @@ namespace GTweak.Utilities
                 bool? isResult = saveFileDialog.ShowDialog();
 
                 if (isResult != true) return;
+
                 try
                 {
                     PathConfig = Path.GetDirectoryName(saveFileDialog.FileName) + @"\" + Path.GetFileNameWithoutExtension(saveFileDialog.FileName) + ".ini";
@@ -160,21 +149,20 @@ namespace GTweak.Utilities
 
             bool? isResult = openFileDialog.ShowDialog();
 
-            if (isResult == true)
-            {
-                PathConfig = openFileDialog.FileName;
-                INIManager iniManager = new INIManager(PathConfig);
+            if (isResult != true) return;
 
-                if (iniManager.Read("GTweak", "Author").Contains("Greedeks") && iniManager.Read("GTweak", "Release").Contains("v4"))
-                {
-                    if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
-                        new ImportWindow().ShowDialog();
-                    else
-                        new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_empty_notification"]);
-                }
+            PathConfig = openFileDialog.FileName;
+            INIManager iniManager = new INIManager(PathConfig);
+
+            if (iniManager.Read("GTweak", "Author").Contains("Greedeks") && iniManager.Read("GTweak", "Release").Contains("v4"))
+            {
+                if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
+                    new ImportWindow().ShowDialog();
                 else
-                    new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_warning_notification"]);
+                    new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_empty_notification"]);
             }
+            else
+                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_warning_notification"]);
         }
 
         internal static void SelfRemoval()

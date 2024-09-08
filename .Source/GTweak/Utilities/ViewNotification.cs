@@ -38,7 +38,7 @@ namespace GTweak.Utilities
                             TextNotice = content,
                             ActionChoice = action,
                         };
-                        await Task.Delay(200);
+                        await Task.Delay(100);
                         notificationWindow.Show();
                         notificationWindow.Closed += (s, e) => { isAlreadyLaunch = false; };
 

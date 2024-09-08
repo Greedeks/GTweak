@@ -13,6 +13,8 @@ namespace GTweak
         internal static event EventHandler ThemeChanged;
         internal static event EventHandler ImportTweaksUpdate;
 
+        internal static string GettingSystemLanguage => Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
+
         public App()
         {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace GTweak
 
         internal static void ViewingSettings()
         {
-            Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
+            Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? GettingSystemLanguage;
             Theme = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Theme")?.ToString() ?? "Dark";
         }
 
@@ -30,14 +32,15 @@ namespace GTweak
         {
             set
             {
-                value ??= Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
+                value ??= GettingSystemLanguage;
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
                     Source = value switch
                     {
-                        "ru" => new Uri($"Languages/ru/Lang.xaml", UriKind.Relative),
-                        _ => new Uri("Languages/en/Lang.xaml", UriKind.Relative),
+                        "ru" => new Uri("Languages/ru/Lang.xaml", UriKind.Relative),
+                        "en" => new Uri("Languages/en/Lang.xaml", UriKind.Relative),
+                        _ => GettingSystemLanguage.Contains("ru") ? new Uri("Languages/ru/Lang.xaml", UriKind.Relative) : new Uri("Languages/en/Lang.xaml", UriKind.Relative)
                     }
                 };
 
