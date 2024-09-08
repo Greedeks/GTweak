@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -43,14 +44,12 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (CheckRulesWindows(NameRules["Update"]) && isChoose)
                 {
-                    Parallel.Invoke(() => { 
-                        AddRulesIn(isChoose, ProgramPaths["MoUso_New"], NameRules["Update"]);
-                        AddRulesIn(isChoose, ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"], " (Old Way)"));
+                    Parallel.Invoke(() => {
+                        AddRulesIn(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"]));
                         AddRulesIn(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)")); 
                     },
                     () => {
-                        AddRulesOut(isChoose, ProgramPaths["MoUso_New"], NameRules["Update"]); 
-                        AddRulesOut(isChoose, ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"], " (Old Way)")); 
+                        AddRulesOut(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"])); 
                         AddRulesOut(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)")); 
                     });
                 }
@@ -60,15 +59,13 @@ namespace GTweak.Utilities.Tweaks
                     {
                         try
                         {
-                            AddRulesIn(isChoose, ProgramPaths["MoUso_New"], NameRules["Update"]);
-                            AddRulesIn(isChoose, ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"], " (Old Way)"));
+                            AddRulesIn(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"]));
                             AddRulesIn(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                         try
                         {
-                            AddRulesOut(isChoose, ProgramPaths["MoUso_New"], NameRules["Update"]);
-                            AddRulesOut(isChoose, ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"], " (Old Way)"));
+                            AddRulesIn(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], string.Concat(NameRules["Update"]));
                             AddRulesOut(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
