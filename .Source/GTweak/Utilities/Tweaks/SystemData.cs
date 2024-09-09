@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Management;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -232,11 +234,17 @@ namespace GTweak.Utilities.Tweaks
             internal static bool IsCheckInternetConnection()
             {
                 try {
+                    string dns = CultureInfo.InstalledUICulture switch
+                    {
+                        { Name: string name } when name.StartsWith("fa") => "aparat.com",
+                        { Name: string name } when name.StartsWith("zh") => "baidu.com",
+                        { Name: string name } when name.StartsWith("ru") => "yandex.ru",
+                        _ =>  "google.com",
+                    };
+                    
                     TimeSpan timeout = TimeSpan.FromSeconds(5.0);
                     Task<IPAddress> task = Task.Run(() => {
-                        return !string.IsNullOrEmpty(Dns.GetHostEntry("google.com").AddressList[0].ToString())
-                            ? Dns.GetHostEntry("google.com").AddressList[0]
-                            : Dns.GetHostEntry("baidu.com").AddressList[0];
+                        return Dns.GetHostEntry(dns).AddressList[0];
                     });
                     if (!task.Wait(timeout))
                         return false;
