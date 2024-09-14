@@ -10,7 +10,7 @@
 ##
 
 ## Download the latest version
-<a href="https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"><img src="https://github.com/user-attachments/assets/36da2fd5-f126-43ab-a929-e6604c3cd31d" width="260" height="68" alt="Download the latest version"></a>
+<a href="https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"><img src="https://github.com/user-attachments/assets/18747dd1-6a1b-4033-be7a-373a9683d10d" width="260" height="68" alt="Download the latest version"></a>
 ##
 
 ## Information and Usage guide
