@@ -5,6 +5,8 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
@@ -828,6 +830,14 @@ namespace GTweak.Utilities.Tweaks
 
         private async static void ChangeAccessUpdateFolder(bool isDenyAccess)
         {
+            void SetFullAccess(string path)
+            {
+                FileSecurity security = File.GetAccessControl(path);
+                security.SetOwner(WindowsIdentity.GetCurrent().User);
+                security.SetAccessRule(new FileSystemAccessRule(WindowsIdentity.GetCurrent().User, FileSystemRights.FullControl, AccessControlType.Allow));
+                File.SetAccessControl(path, security);
+            }
+
             void ChangeStateTask()
             {
                 string valueState = isDenyAccess ? "/disable" : "/enable";
@@ -849,16 +859,19 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (isDenyAccess)
                 {
+                    SetFullAccess(Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download");
+                    SetFullAccess(Settings.PathSystemDisk + @"Windows\System32\catroot2");
+
                     Process.Start(new ProcessStartInfo()
                     {
-                        Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\SoftwareDistribution\Download & 
-                            rd /s /q " + Settings.PathSystemDisk + @"\Windows\System32\catroot2",
+                        Arguments = @" /c rd /s /q " + Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download & 
+                            rd /s /q " + Settings.PathSystemDisk + @"Windows\System32\catroot2",
                         WindowStyle = ProcessWindowStyle.Hidden,
                         CreateNoWindow = true,
                         FileName = "cmd.exe"
                     });
 
-                    ChangeStateTask();
+                   ChangeStateTask();
 
                     await Task.Delay(1000);
 
