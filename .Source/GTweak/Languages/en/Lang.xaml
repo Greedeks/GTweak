@@ -250,7 +250,7 @@
     <!--#region Services Page -->
     <v:String x:Key="tgl1_services">Services related to Windows Search</v:String>
     <v:String x:Key="tgl2_services">Services related to Xbox</v:String>
-    <v:String x:Key="tgl3_services">Services related to the operation of USB modems and routers</v:String>
+    <v:String x:Key="tgl3_services">Services related to the operation of USB modems</v:String>
     <v:String x:Key="tgl4_services">Services related to Windows Store</v:String>
     <v:String x:Key="tgl5_services">Performance Counter Services</v:String>
     <v:String x:Key="tgl6_services">Windows Biometric Service</v:String>
