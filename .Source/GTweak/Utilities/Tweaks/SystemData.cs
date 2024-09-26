@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -6,14 +8,11 @@ using System.Management;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
-using System.Security.Policy;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
-using Newtonsoft.Json;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -255,7 +254,7 @@ namespace GTweak.Utilities.Tweaks
 
             internal static void GetUserIP()
             {
-                Parallel.Invoke(() =>
+                Parallel.Invoke(delegate
                 {
                     if (IsCheckInternetConnection())
                     {
