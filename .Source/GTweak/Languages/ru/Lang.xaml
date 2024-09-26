@@ -170,7 +170,7 @@
     <v:String x:Key="textcolor_interface">Это пример нового цвета.</v:String>
 
     <v:String x:Key="TglButton1_description_interface">Изменят цвет выделение курсором с синего на серый «Цвет мокрого асфальта».</v:String>
-    <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки с жёлтого на светло голубой «Небесная лазурь».</v:String>
+    <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки в некоторых программах с жёлтого на светло голубой «Небесная лазурь».</v:String>
     <v:String x:Key="TglButton3_description_interface">Твик уменьшит размер кнопок Свернуть, Развернуть, Закрыть в окнах на 20%. Кнопки станут аккуратнее не только у Проводника, но и у всех окон, включая изображения, браузеры и прочие программы.</v:String>
     <v:String x:Key="TglButton4_description_interface">Ускорит частоту мерцания курсора, по умолчанию значение: 530. Данный твик изменит значение на 250.</v:String>
     <v:String x:Key="TglButton5_description_interface">Твик сделает Scrollbar в окнах, включая браузеры и программы, тоньше на 17%.</v:String>

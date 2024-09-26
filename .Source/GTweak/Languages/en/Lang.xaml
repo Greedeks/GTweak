@@ -170,7 +170,7 @@
     <v:String x:Key="textcolor_interface">This is an example of a new color.</v:String>
 
     <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «The color of wet asphalt».</v:String>
-    <v:String x:Key="TglButton2_description_interface">Will change the color of the popup hint from yellow to light blue «Sky blue».</v:String>
+    <v:String x:Key="TglButton2_description_interface">Will change the color of the tooltip in some programs from yellow to light blue «Sky blue».</v:String>
     <v:String x:Key="TglButton3_description_interface">Tweak will reduce the size of the Collapse, Expand buttons, Close the windows by 20%. The buttons will become neater not only for the Explorer, but also for all windows, including images, browsers and other programs.</v:String>
     <v:String x:Key="TglButton4_description_interface">Will accelerate the cursor flicker frequency, default value: 530. This tweak will change the value to 250.</v:String>
     <v:String x:Key="TglButton5_description_interface">Tweak will make Scrollbar in windows, including browsers and programs, thinner by 17%.</v:String>
@@ -181,7 +181,7 @@
     <v:String x:Key="TglButton10_description_interface">By default, the Taskbar preview shows previews of running applications for too long. To make previews appear faster, apply this tweak.</v:String>
     <v:String x:Key="TglButton11_description_interface">Tweak will remove arrows from labels by replacing the arrow file.</v:String>
     <v:String x:Key="TglButton12_description_interface">Removing the too intuitive prefix-postfix for labels.</v:String>
-    <v:String x:Key="TglButton13_description_interface">The sPC icon, unlike the PC shortcut, is better because it has the necessary properties of the context menu and is free of unnecessary ones.</v:String>
+    <v:String x:Key="TglButton13_description_interface">The PC icon, unlike the PC shortcut, is better because it has the necessary properties of the context menu and is free of unnecessary ones.</v:String>
     <v:String x:Key="TglButton14_description_interface">If you do not need the Trash icon on the desktop and you do not want to waste time looking for a shutdown, then you can use tweaks.</v:String>
     <v:String x:Key="TglButton15_description_interface">Choose where you want the icons on the taskbar to be displayed, on the cent or on the left</v:String>
     <v:String x:Key="TglButton16_description_interface">Modifies the layout of the «Start» menu, increasing more available space for pinning applications.</v:String>
