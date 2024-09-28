@@ -70,7 +70,6 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void EmptyWorkingSetFunction()
         {
-
             string ProcessName = string.Empty;
             Process[] allProcesses = Process.GetProcesses();
             List<string> successProcesses = new List<string>();
@@ -95,18 +94,12 @@ namespace GTweak.Utilities.Tweaks
                         successProcesses.Add(ProcessName);
                     }
                 }
-                catch (Exception ex)
-                {
-                    failProcesses.Add(ProcessName + ": " + ex.Message);
-                }
+                catch (Exception ex) { failProcesses.Add(ProcessName + ": " + ex.Message); }
             }
 
         }
 
-        internal static bool Is64BitMode()
-        {
-            return Marshal.SizeOf(typeof(IntPtr)) == 8;
-        }
+        internal static bool Is64BitMode() => Marshal.SizeOf(typeof(IntPtr)) == 8;
 
         internal static void ClearFileSystemCache(bool ClearStandbyCache)
         {
@@ -185,7 +178,7 @@ namespace GTweak.Utilities.Tweaks
         {
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"\Windows\Temp & rd /s /q %localappdata%\Temp & 
+                Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"Windows\Temp & rd /s /q %localappdata%\Temp & 
                 del /a /q ""%localappdata%\IconCache.db"" & del /a /f /q ""%localappdata%\Microsoft\Windows\Explorer\iconcache*""",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,

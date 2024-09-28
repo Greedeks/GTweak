@@ -45,9 +45,6 @@ namespace GTweak.Utilities
             return CallNextHookEx(ptrHook, nCode, wp, lp);
         }
 
-        private bool HasAltModifier(int flags)
-        {
-            return (flags & 0x20) == 0x20;
-        }
+        private bool HasAltModifier(int flags) => (flags & 0x20) == 0x20;
     }
 }

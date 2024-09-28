@@ -25,7 +25,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += (s, e) => 
+            App.LanguageChanged += delegate 
             {
                 if (!SystemData.СomputerСonfiguration.isConnectionLose)
                 {
@@ -53,13 +53,13 @@ namespace GTweak.View
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.RunWorkerAsync();
-                    backgroundWorker.DoWork += (s, e) => 
+                    backgroundWorker.DoWork += delegate
                     { 
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
                         new Thread(() => new SystemData.MonitoringSystem().GetCpuUsage()).Start();
                         new Thread(() => new SystemData.MonitoringSystem().GetCpuUsage()).IsBackground = true;
                     };
-                    backgroundWorker.RunWorkerCompleted += (s, e) => 
+                    backgroundWorker.RunWorkerCompleted += delegate
                     {
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).Start();
                         new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).IsBackground = true;

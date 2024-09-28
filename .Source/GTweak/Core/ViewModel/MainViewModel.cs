@@ -1,5 +1,4 @@
-﻿using GTweak.Core.Model;
-using GTweak.Utilities.Tweaks;
+﻿using GTweak.Utilities.Tweaks;
 using System;
 using System.Reflection;
 using System.Windows;
@@ -10,7 +9,7 @@ namespace GTweak.Core.ViewModel
 {
     internal class MainViewModel : ViewModelBase
     {
-        private readonly MainModel.MainWindowModel _model;
+        private readonly MainWindowModel model;
         private object _currentView;
 
         public object CurrentView
@@ -21,20 +20,20 @@ namespace GTweak.Core.ViewModel
 
         public ImageSource DisplayProfileAvatar
         {
-            get => _model.ProfileAvatar;
-            set { _model.ProfileAvatar = value; OnPropertyChanged(); }
+            get => model.ProfileAvatar;
+            set { model.ProfileAvatar = value; OnPropertyChanged(); }
         }
 
         public string DisplayProfileName
         {
-            get => _model.ProfileName;
-            set { _model.ProfileName = value; OnPropertyChanged(); }
+            get => model.ProfileName;
+            set { model.ProfileName = value; OnPropertyChanged(); }
         }
 
         public string DisplayTweakVersion
         {
-            get => _model.TweakVersion;
-            set { _model.TweakVersion = value; OnPropertyChanged(); }
+            get => model.TweakVersion;
+            set { model.TweakVersion = value; OnPropertyChanged(); }
         }
 
         public ICommand ConfidentialityCommand { get; set; }
@@ -56,7 +55,7 @@ namespace GTweak.Core.ViewModel
 
         public MainViewModel()
         {
-            _model = new MainModel.MainWindowModel();
+            model = new MainWindowModel();
 
             DisplayProfileAvatar = SystemData.ProfileData.GetProfileImage() ?? Application.Current.Resources["DI_AvatarProfile"] as DrawingImage;
             DisplayProfileName = SystemData.ProfileData.GetProfileName();

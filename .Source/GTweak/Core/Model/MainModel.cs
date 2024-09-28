@@ -2,7 +2,7 @@
 
 namespace GTweak.Core.Model
 {
-    internal sealed class MainModel
+    internal class MainModel
     {
         internal sealed class InterfaceModel
         {
