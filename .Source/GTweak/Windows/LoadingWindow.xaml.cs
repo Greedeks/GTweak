@@ -31,7 +31,7 @@ namespace GTweak.Windows
             backgroundWorker.RunWorkerCompleted += async delegate
             {
                 backgroundWorker.Dispose();
-                WorkWithText.TypeWriteAnimation((string)FindResource("text6_load"), TextLoad, TimeSpan.FromMilliseconds(300));
+                new TypewriterAnimation((string)FindResource("text6_load"), TextLoad, TimeSpan.FromMilliseconds(300));
                 await Task.Delay(310);
                 this.Close();
                 new MainWindow().Show();
@@ -64,19 +64,19 @@ namespace GTweak.Windows
             switch (e.ProgressPercentage)
             {
                 case 5:
-                    WorkWithText.TypeWriteAnimation((string)FindResource("text1_load"), TextLoad, TimeSpan.FromMilliseconds(200));
+                    new TypewriterAnimation((string)FindResource("text1_load"), TextLoad, TimeSpan.FromMilliseconds(200));
                     break;
                 case 30:
-                    WorkWithText.TypeWriteAnimation((string)FindResource("text2_load"), TextLoad, TimeSpan.FromMilliseconds(200));
+                    new TypewriterAnimation((string)FindResource("text2_load"), TextLoad, TimeSpan.FromMilliseconds(200));
                     break;
                 case 55:
-                    WorkWithText.TypeWriteAnimation((string)FindResource("text3_load"), TextLoad, TimeSpan.FromMilliseconds(200));
+                    new TypewriterAnimation((string)FindResource("text3_load"), TextLoad, TimeSpan.FromMilliseconds(200));
                     break;
                 case 75:
-                    WorkWithText.TypeWriteAnimation((string)FindResource("text4_load"), TextLoad, TimeSpan.FromMilliseconds(200));
+                    new TypewriterAnimation((string)FindResource("text4_load"), TextLoad, TimeSpan.FromMilliseconds(200));
                     break;
                 case 95:
-                    WorkWithText.TypeWriteAnimation((string)FindResource("text5_load"), TextLoad, TimeSpan.FromMilliseconds(200));
+                    new TypewriterAnimation((string)FindResource("text5_load"), TextLoad, TimeSpan.FromMilliseconds(200));
                     break;
             }
         }

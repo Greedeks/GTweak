@@ -17,7 +17,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
 
             if (WindowsLicense.statusLicense != 1)
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["viewlicense_notification"]);
@@ -31,19 +31,19 @@ namespace GTweak.View
             {
                 string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_interface");
                 TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                WorkWithText.TypeWriteAnimation(_descriptionTweak, TextDescription, time);
+                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
 
                 if (toggleButton.Name == "TglButton1")
                 {
                     TextViewColor.Foreground = new SolidColorBrush(Color.FromArgb(255, 80, 80, 80));
                     TextViewColor.Visibility = Visibility.Visible;
-                    WorkWithText.TypeWriteAnimation((string)FindResource("textcolor_interface"), TextViewColor, TimeSpan.FromMilliseconds(350));
+                    new TypewriterAnimation((string)FindResource("textcolor_interface"), TextViewColor, TimeSpan.FromMilliseconds(350));
                 }
                 else if (toggleButton.Name == "TglButton2")
                 {
                     TextViewColor.Foreground = new SolidColorBrush(Color.FromArgb(255, 240, 255, 255));
                     TextViewColor.Visibility = Visibility.Visible;
-                    WorkWithText.TypeWriteAnimation((string)FindResource("textcolor_interface"), TextViewColor, TimeSpan.FromMilliseconds(350));
+                    new TypewriterAnimation((string)FindResource("textcolor_interface"), TextViewColor, TimeSpan.FromMilliseconds(350));
                 }
 
             }
@@ -54,7 +54,7 @@ namespace GTweak.View
             if (TextViewColor.Visibility==Visibility.Visible)
                 TextViewColor.Visibility=Visibility.Hidden;
             if (TextDescription.Text != (string)FindResource("defaultDescription"))
-                WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
+                new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }
 
         private async void TglButton_ChangedState(object sender, EventArgs e)
@@ -87,7 +87,7 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
+            new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
             Parallel.Invoke(() => new InterfaceTweaks().ViewInterface(this));
         }
     }

@@ -261,7 +261,7 @@
     <Compile Include="Utilities\Tweaks\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />
     <Compile Include="Utilities\Tweaks\RecoveryPoint.cs" />
-    <Compile Include="Utilities\Helpers\WorkWithText.cs" />
+    <Compile Include="Utilities\Helpers\TypewriterAnimation.cs" />
     <Compile Include="Core\ViewModel\PagesViewModel.cs" />
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>

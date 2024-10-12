@@ -16,7 +16,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
@@ -27,7 +27,7 @@ namespace GTweak.View
             {
                 string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_system");
                 TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                WorkWithText.TypeWriteAnimation(_descriptionTweak, TextDescription, time);
+                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
             }
         }
 
@@ -39,14 +39,14 @@ namespace GTweak.View
             {
                 string _descriptionTweak = (string)FindResource(stackPanel.Name + "_description_system");
                 TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                WorkWithText.TypeWriteAnimation(_descriptionTweak, TextDescription, time);
+                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
             }
         }
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
         {
             if (TextDescription.Text != (string)FindResource("defaultDescription"))
-                WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
+                new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }
 
         private void Sliders_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -109,7 +109,7 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
+            new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
             Parallel.Invoke(() => new SystemTweaks().ViewSystem(this));
         }
     }

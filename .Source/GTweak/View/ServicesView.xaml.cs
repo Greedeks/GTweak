@@ -15,7 +15,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
@@ -26,14 +26,14 @@ namespace GTweak.View
             {
                 string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_services");
                 TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                WorkWithText.TypeWriteAnimation(_descriptionTweak, TextDescription, time);
+                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
             }
         }
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
         {
             if (TextDescription.Text != (string)FindResource("defaultDescription"))
-                WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
+                new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }
 
         private async void TglButton_ChangedState(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
+            new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
             Parallel.Invoke(() => new ServicesTweaks().ViewServices(this));
         }
     }

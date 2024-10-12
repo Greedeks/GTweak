@@ -22,7 +22,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate { WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(0)); };
 
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -131,20 +131,20 @@ namespace GTweak.View
             if (TextDescription.Text != (string)FindResource(imageApp.Name + "_applications"))
             {
                 string _descriptionApps = (string)FindResource(imageApp.Name + "_applications");
-                WorkWithText.TypeWriteAnimation(_descriptionApps, TextDescription, TimeSpan.FromMilliseconds(250));
+                new TypewriterAnimation(_descriptionApps, TextDescription, TimeSpan.FromMilliseconds(250));
             }
         }
 
         private void Apps_MouseLeave(object sender, MouseEventArgs e)
         {
             if (TextDescription.Text != (string)FindResource("defaultDescriptionApp"))
-                WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(250));
+                new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(250));
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Parallel.Invoke(UpdateViewStateApps);
-            WorkWithText.TypeWriteAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(300));
+            new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(300));
         }
 
         private void UpdateViewStateApps()
