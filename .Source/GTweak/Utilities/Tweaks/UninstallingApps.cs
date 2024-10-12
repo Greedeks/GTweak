@@ -155,7 +155,7 @@ namespace GTweak.Utilities.Tweaks
                         }
 
                         if (!string.IsNullOrEmpty(AlternativeName[appName]))
-                            process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + !string.IsNullOrEmpty(AlternativeName[appName]) + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                            process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + AlternativeName[appName] + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
 
                         process.WaitForExit();
                         process.Dispose();

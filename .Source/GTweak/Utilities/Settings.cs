@@ -3,7 +3,6 @@ using GTweak.Windows;
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -117,9 +116,9 @@ namespace GTweak.Utilities
                     RestoreDirectory = true
                 };
 
-                bool? isResult = saveFileDialog.ShowDialog();
+                bool? isResultNormal = saveFileDialog.ShowDialog();
 
-                if (isResult != true) return;
+                if (isResultNormal != true) return;
 
                 try
                 {
@@ -147,9 +146,9 @@ namespace GTweak.Utilities
                 Filter = "(*.INI)|*.INI"
             };
 
-            bool? isResult = openFileDialog.ShowDialog();
+            bool? isResultNormal = openFileDialog.ShowDialog();
 
-            if (isResult != true) return;
+            if (isResultNormal != true) return;
 
             PathConfig = openFileDialog.FileName;
             INIManager iniManager = new INIManager(PathConfig);
