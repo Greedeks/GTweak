@@ -21,7 +21,7 @@ namespace GTweak.Utilities
 
         private static bool _isViewNotification = true;
         private static bool _isSoundNotification = true;
-        private static byte _volumeNotification = 100;
+        private static byte _volumeNotification = 50;
         private static string _language = App.GettingSystemLanguage;
         private static string _theme = "Dark";
         private static bool _isTopMost = false;
@@ -60,7 +60,7 @@ namespace GTweak.Utilities
             {
                 IsViewNotification = bool.Parse(registryKey?.GetValue("Notification").ToString() ?? "True");
                 IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
-                VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "100");
+                VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "50");
                 IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");
                 IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
                 Language = registryKey?.GetValue("Language").ToString() ?? App.GettingSystemLanguage;
@@ -83,7 +83,7 @@ namespace GTweak.Utilities
                     IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
                     break;
                 case "Volume":
-                    VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "100");
+                    VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "50");
                     break;
                 case "TopMost":
                     IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");

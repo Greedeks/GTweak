@@ -41,7 +41,7 @@
                     </TextBlock>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button x:Name="BtnExit" Style="{StaticResource TitleButtons}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" Cursor="Hand" PreviewMouseDown="BtnExit_PreviewMouseDown">
+                    <Button x:Name="BtnExit" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" Cursor="Hand" PreviewMouseDown="BtnExit_PreviewMouseDown">
                         <Image Width="12">
                             <Image.Style>
                                 <Style TargetType="{x:Type Image}">
@@ -54,6 +54,26 @@
                                 </Style>
                             </Image.Style>
                         </Image>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitleButtons}">
+                                <Style.Triggers>
+                                    <Trigger Property="Visibility" Value="Visible">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform X="0" Y="0"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard Timeline.DesiredFrameRate="400">
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="0" To="0" Duration="0"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                 </Grid>
             </Grid>

@@ -38,7 +38,7 @@
 
             <Grid x:Name="TitleBar" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True" MouseDown="TitleBar_MouseDown">
                 <Border Background="{StaticResource Color_Background_Dark}" CornerRadius="7,7,0,0">
-                    <TextBlock FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="18" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock x:Name="UtilityTitle"  FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="18" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock.Effect>
                             <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
                         </TextBlock.Effect>
@@ -84,7 +84,7 @@
                         </Image>
                     </Button>
 
-                    <Button x:Name="ButtonMinimized" Style="{StaticResource TitleButtons}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,5,0" PreviewMouseDown="ButtonMinimized_PreviewMouseDown">
+                    <Button x:Name="ButtonMinimized" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,5,0" PreviewMouseDown="ButtonMinimized_PreviewMouseDown">
                         <Image Height="2" Width="3" Grid.Column="3" Margin="-12,3,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Image.RenderTransform>
                                 <TransformGroup>
@@ -105,6 +105,30 @@
                                 </Style>
                             </Image.Style>
                         </Image>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitleButtons}">
+                                <Style.Triggers>
+                                    <Trigger Property="Visibility" Value="Visible">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform X="0" Y="-10"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard Timeline.DesiredFrameRate="400">
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="-10" To="0" Duration="0:0:1.2" DecelerationRatio="0.6">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <ElasticEase/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
 
                     <Button x:Name="ButtonExit" Style="{StaticResource TitleButtons}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" PreviewMouseDown="ButtonExit_PreviewMouseDown">

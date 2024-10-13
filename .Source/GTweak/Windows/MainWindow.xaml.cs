@@ -1,4 +1,5 @@
 ﻿using GTweak.Utilities;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using GTweak.Windows;
 using System;
@@ -124,6 +125,7 @@ namespace GTweak
             };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             BeginAnimation(OpacityProperty, doubleAnim);
+            new TypewriterAnimation(UtilityTitle.Text, UtilityTitle, TimeSpan.FromSeconds(0.4));
         }
         #endregion
 

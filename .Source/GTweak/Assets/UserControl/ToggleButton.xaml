@@ -18,7 +18,13 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Ellipse x:Name="Dot" Fill="White" Cursor="Hand" HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" Width="50" StrokeThickness="1"  KeyboardNavigation.IsTabStop="False" RenderTransformOrigin="1.31,0.51" Margin="5,0,0,0">
+                    <Ellipse x:Name="Dot" Cursor="Hand" HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" Width="50" StrokeThickness="1"  KeyboardNavigation.IsTabStop="False" RenderTransformOrigin="1.31,0.51" Margin="5,0,0,0">
+                        <Ellipse.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFE8E8E8" Offset="0.131"/>
+                                <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Ellipse.Fill>
                         <Ellipse.Effect>
                             <DropShadowEffect ShadowDepth="1" Opacity="0.5"/>
                         </Ellipse.Effect>

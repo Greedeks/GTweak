@@ -11,7 +11,7 @@
               x:Name="Border" 
               Grid.Column="0" 
               Grid.ColumnSpan="2"
-              CornerRadius="2"
+              CornerRadius="3"
               Background="{StaticResource Color_Background_Dark}"
               BorderBrush="{StaticResource Color_Accent}"
               BorderThickness="1" />
@@ -60,7 +60,7 @@
                         <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
                         ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                         ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                        Margin="3,3,23,3"
+                        Margin="5,3,23,3"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Left" />
                         <TextBox x:Name="PART_EditableTextBox"
@@ -68,7 +68,7 @@
                         Template="{StaticResource ComboBoxTextBox}" 
                         HorizontalAlignment="Left" 
                         VerticalAlignment="Center" 
-                        Margin="3,3,23,3"
+                        Margin="5,3,23,3"
                         Focusable="True" 
                         Visibility="Hidden"
                         IsReadOnly="{TemplateBinding IsReadOnly}"/>
@@ -86,7 +86,7 @@
                                 <Border 
                             x:Name="DropDownBorder"
                             Background="{StaticResource Color_Background_Dark}"
-                            CornerRadius="2"
+                            CornerRadius="3"
                             BorderThickness="1"
                             BorderBrush="{StaticResource Color_Accent}"/>
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
