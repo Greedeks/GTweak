@@ -38,8 +38,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border x:Name="Switch" Height="14" Width="14" Background="{StaticResource Color_Background_Dark}" CornerRadius="10" BorderBrush="{StaticResource Color_Border}" BorderThickness="1">
-                        <Ellipse x:Name="BodySwitch" Height="10" Width="10" Fill="{StaticResource Color_Border}"/>
+                    <Border x:Name="Switch" Height="14" Width="14" Background="{StaticResource Color_Border}" CornerRadius="10" BorderBrush="{StaticResource Color_Background_Dark}" BorderThickness="1">
+                        <Ellipse x:Name="BodySwitch" Height="10" Width="10" Fill="Transparent"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
