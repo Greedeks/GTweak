@@ -158,7 +158,7 @@
 
                     <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="1" Height="550" Background="{StaticResource Color_Background_Dark}" CornerRadius="10 0 0 10">
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="-90" Color="#000000" />
                         </Border.Effect>
                     </Border>
 
@@ -244,9 +244,27 @@
 
                                 <Grid Grid.Column="0">
                                     <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                                        <Image x:Uid="git" Source="{StaticResource DI_Git}" Style="{StaticResource Apps}" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
-                                        <Image x:Uid="tg" Source="{StaticResource DI_Telegram}" Style="{StaticResource Apps}" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
-                                        <Image x:Uid="steam" Source="{StaticResource DI_Steam}" Style="{StaticResource Apps}" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand"/>
+                                        <Image x:Uid="git" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand">
+                                            <Image.Style>
+                                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                                    <Setter Property="Source" Value="{StaticResource DI_Git}"/>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                        <Image x:Uid="tg" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand">
+                                            <Image.Style>
+                                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                                    <Setter Property="Source" Value="{StaticResource DI_Telegram}"/>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                        <Image x:Uid="steam" Width="31" Height="auto" PreviewMouseDown="BtnContats_PreviewMouseDown" Cursor="Hand">
+                                            <Image.Style>
+                                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                                    <Setter Property="Source" Value="{StaticResource DI_Steam}"/>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
                                     </StackPanel>
                                 </Grid>
                                 <Grid Grid.Column="1">
@@ -258,7 +276,7 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="NavigationBar" Grid.Row="2">
+            <Grid x:Name="Sidebar" Grid.Row="2">
                 <Border Background="{DynamicResource Color_Background_Dark}" CornerRadius="0,0,7,7">
                     <Grid>
                         <Grid.ColumnDefinitions>

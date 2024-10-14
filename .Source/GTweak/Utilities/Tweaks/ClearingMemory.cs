@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using XamlRadialProgressBar;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -174,16 +175,48 @@ namespace GTweak.Utilities.Tweaks
             return num != 0;
         }
 
-        private static void ClearTempSystemCache()
+        private static async void ClearTempSystemCache()
         {
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"Windows\Temp & rd /s /q %localappdata%\Temp & 
-                del /a /q ""%localappdata%\IconCache.db"" & del /a /f /q ""%localappdata%\Microsoft\Windows\Explorer\iconcache*""",
+                Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"Windows\Temp & rd /s /q %localappdata%\Temp",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
             });
+
+            foreach (Process process in Process.GetProcesses())
+            {
+                try
+                {
+                    if (string.Compare(process.MainModule?.FileName, $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        process.Kill();
+                        Process.Start(new ProcessStartInfo()
+                        {
+                            Arguments = @"/c attrib -h -r -s IconCache.db & del /a /q ""%localappdata%\IconCache.db"" & del /a /f /q ""%localappdata%\Microsoft\Windows\Explorer\iconcache*""",
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                            CreateNoWindow = true,
+                            FileName = "cmd.exe"
+                        });
+                        await Task.Delay(100);
+                        process.Start();
+                    }
+                }
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                finally
+                {
+                    Process[] explorer = Process.GetProcessesByName("explorer");
+                    if (explorer.Length == 0)
+                    {
+                        using Process launchExplorer = new Process();
+                        launchExplorer.StartInfo.FileName = $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}";
+                        launchExplorer.StartInfo.UseShellExecute = true;
+                        launchExplorer.Start();
+                    }
+
+                }
+            }
         }
 
         internal static void StartMemoryCleanup()

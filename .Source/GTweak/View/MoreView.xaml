@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="GTweak.View.MoreView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.View"
+             xmlns:UserControl="clr-namespace:GTweak.Assets.UserControl" x:Class="GTweak.View.MoreView"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="1100"
              Style="{StaticResource LaunchPage}">
@@ -14,11 +15,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock  Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0">
-                   <Run Text="{DynamicResource text0_more}"/>
-                   <Run Text="{DynamicResource text1_more}" Foreground="{StaticResource Color_Accent}"/>
-                   <Run Text="{DynamicResource text2_more}"/>
-            </TextBlock>
+            <TextBlock  Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0"><Run Text="{DynamicResource text0_more}"/><Run Text=" "/><Run Text="{DynamicResource text1_more}" Foreground="{StaticResource Color_Accent}"/><Run Text=" "/><Run Text="{DynamicResource text2_more}"/></TextBlock>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0,20,0,0">
@@ -34,56 +31,17 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Grid Grid.Column="0">
-                        <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
-                            <StackPanel Orientation="Vertical" >
-                                <Image Height="60" Width="60" Margin="0,15,0,0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Setter Property="Source" Value="{StaticResource DI_LicenseWindows}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <TextBlock Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_licens_more}"/>
-                                <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_licens_more}"/>
-                                <Button x:Name="BtnWinLicense" Content="{DynamicResource btntext_licens_more}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnWinLicense_PreviewMouseDown"/>
-                            </StackPanel>
-                        </Border>
+                        <UserControl:Card ImageSource="{StaticResource DI_LicenseWindows}" Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btntext_licens_more}" ClickButton="BtnLicenseWindows_ClickButton"/>
                     </Grid>
 
                     <Grid Grid.Column="1">
-                        <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
-                            <StackPanel Orientation="Vertical" >
-                                <Image Height="60" Width="60" Margin="0,15,0,0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Setter Property="Source" Value="{StaticResource DI_BackupSystem}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <TextBlock Style="{StaticResource Text}" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_createpoint_more}"/>
-                                <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_createpoint_more}"/>
-                                <Button x:Name="BtnRestorePoint" Content="{DynamicResource btntext_createpoint_more}" FontSize="10pt" VerticalAlignment="Bottom" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnRestorePoint_PreviewMouseDown"/>
-                            </StackPanel>
-                        </Border>
+                        <UserControl:Card ImageSource="{StaticResource DI_BackupSystem}" Title="{DynamicResource title_createpoint_more}" Description="{DynamicResource text_createpoint_more}" BtnContent="{DynamicResource btntext_createpoint_more}" ClickButton="BtnRestorePoint_ClickButton"/>
                     </Grid>
 
                     <Grid Grid.Column="2">
-                        <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
-                            <StackPanel Orientation="Vertical" >
-                                <Image Height="60" Width="60" Margin="0,15,0,0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Setter Property="Source" Value="{StaticResource DI_RecoverySystem}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <TextBlock Style="{StaticResource Text}" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_recovery_more}"/>
-                                <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_recovery_more}"/>
-                                <Button x:Name="BtnRecoveyLaunch" Content="{DynamicResource btntext_recovery_more}" FontSize="10pt" VerticalAlignment="Bottom" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnRecoveyLaunch_PreviewMouseDown"/>
-                            </StackPanel>
-                        </Border>
+                        <UserControl:Card x:Name="CardRecoveyLaunch" ImageSource="{StaticResource DI_RecoverySystem}" Title="{DynamicResource title_recovery_more}" Description="{DynamicResource text_recovery_more}" BtnContent="{DynamicResource btntext_recovery_more}" ClickButton="BtnRecoveyLaunch_ClickButton"/>
                     </Grid>
                 </Grid>
 
@@ -94,42 +52,14 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0" Margin="180,0,0,0">
-                        <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
-                            <StackPanel Orientation="Vertical" >
-                                <Image Height="60" Width="60" Stretch="Uniform" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Setter Property="Source" Value="{StaticResource DI_Trash}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <TextBlock Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_clear_more}"/>
-                                <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_clear_more}"/>
-                                <Button x:Name="BtnClear" Content="{DynamicResource btntext_clear_more}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnClear_PreviewMouseDown"/>
-                            </StackPanel>
-                        </Border>
+                        <UserControl:Card ImageSource="{StaticResource DI_Trash}" Title="{DynamicResource title_clear_more}" Description="{DynamicResource text_clear_more}" BtnContent="{DynamicResource btntext_clear_more}" ClickButton="BtnClear_ClickButton"/>
                     </Grid>
 
                     <Grid Grid.Column="1" Margin="0,0,180,0">
-                        <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
-                            <StackPanel Orientation="Vertical" >
-                                <Image Height="60" Width="60" Stretch="Uniform" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}">
-                                            <Setter Property="Source" Value="{StaticResource DI_DisableRecovery}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <TextBlock Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource title_disablepoint_more}"/>
-                                <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="{DynamicResource text_disablepoint_more}"/>
-                                <Button x:Name="BtnDisableRecovery" Content="{DynamicResource btntext_disablepoint_more}" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="BtnDisableRecovery_PreviewMouseDown"/>
-                            </StackPanel>
-                        </Border>
+                        <UserControl:Card ImageSource="{StaticResource DI_DisableRecovery}" Title="{DynamicResource title_disablepoint_more}" Description="{DynamicResource text_disablepoint_more}" BtnContent="{DynamicResource btntext_disablepoint_more}" ClickButton="BtnDisableRecovery_ClickButton"/>
                     </Grid>
                 </Grid>
-
             </Grid>
         </Grid>
     </Grid>
-
 </UserControl>

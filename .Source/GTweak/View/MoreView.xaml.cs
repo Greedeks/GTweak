@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace GTweak.View
 {
@@ -16,66 +15,54 @@ namespace GTweak.View
             InitializeComponent();
         }
 
-        private async void BtnRestorePoint_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (WindowsLicense.statusLicense == 1)
+                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("readyactivate_notification"));
+
+            else if (WindowsLicense.statusLicense != 1)
             {
-                if (RecoveryPoint.IsAlreadyPoint() == false)
+                new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("activatewin_notification"));
+                WindowsLicense.StartActivation();
+            }
+        }
+
+        private async void BtnRestorePoint_ClickButton(object sender, EventArgs e)
+        {
+            if (RecoveryPoint.IsAlreadyPoint() == false)
+            {
+                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("createpoint_notification"));
+
+                await Task.Delay(100);
+
+                BackgroundWorker backgroundWorker = new BackgroundWorker();
+                backgroundWorker.DoWork += delegate
                 {
-                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("createpoint_notification"));
-
-                    await Task.Delay(100);
-
-                    BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += delegate
-                    {
-                        try { RecoveryPoint.Create((string)FindResource("textpoint_more")); }
-                        catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulpoint_notification")); }
-                        finally { new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification")); };
-                    };
-                    backgroundWorker.RunWorkerCompleted += delegate
-                    {
-                        new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification"));
-                        backgroundWorker.Dispose();
-                    };
-                    backgroundWorker.RunWorkerAsync();
-                }
-                else
-                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("readypoint_notification"));
-            }
-        }
-
-        private void BtnRecoveyLaunch_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                try { RecoveryPoint.Run(); }
-                catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulrecovery_notification")); }
-            }
-        }
-
-        private void BtnWinLicense_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                if (WindowsLicense.statusLicense == 1)
-                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("readyactivate_notification"));
-
-                else if (WindowsLicense.statusLicense != 1)
+                    try { RecoveryPoint.Create((string)FindResource("textpoint_more")); }
+                    catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulpoint_notification")); }
+                    finally { new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification")); };
+                };
+                backgroundWorker.RunWorkerCompleted += delegate
                 {
-                    new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("activatewin_notification"));
-                    WindowsLicense.StartActivation();
-                }
+                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification"));
+                    backgroundWorker.Dispose();
+                };
+                backgroundWorker.RunWorkerAsync();
             }
+            else
+                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("readypoint_notification"));
         }
 
-        private void BtnClear_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                ClearingMemory.StartMemoryCleanup();
+            try { RecoveryPoint.Run(); }
+            catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulrecovery_notification")); }
         }
 
-        private void BtnDisableRecovery_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnClear_ClickButton(object sender, EventArgs e) => ClearingMemory.StartMemoryCleanup();
+
+
+        private void BtnDisableRecovery_ClickButton(object sender, EventArgs e)
         {
             if (!RecoveryPoint.IsSystemRestoreDisabled())
             {

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="GTweak.Assets.UserControl.Card"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTweak.Assets.UserControl"
+             mc:Ignorable="d" 
+            d:Height="auto" d:Width="auto" SnapsToDevicePixels="True" UseLayoutRounding="True">
+    <Grid Width="Auto">
+        <Border CornerRadius="10" Height="230" Width="230" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Color_Background_Dark}" Margin="0,-30,0,0">
+            <StackPanel Orientation="Vertical" >
+                <Grid Width="Auto" Height="Auto" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image x:Name="CardImage" Height="60" Width="60" Stretch="Uniform"/>
+                </Grid>
+                <TextBlock x:Name="CardTitle" Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Title"/>
+                <TextBlock x:Name="CardText" Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="Text"/>
+                <Button x:Name="CardButton" Content="Content" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="CardButton_PreviewMouseDown"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
