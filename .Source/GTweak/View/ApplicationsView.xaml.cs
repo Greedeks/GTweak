@@ -39,7 +39,7 @@ namespace GTweak.View
             }, Application.Current.Dispatcher);
         }
 
-        private void ClickApp_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private async void ClickApp_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Image appImage = (Image)sender;
             applicationName = appImage.Name;
@@ -48,8 +48,8 @@ namespace GTweak.View
             {
                 appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
 
-                BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += delegate
+                BackgroundQueue backgroundQueue = new BackgroundQueue();
+                await backgroundQueue.QueueTask(delegate
                 {
                     if (applicationName != "YandexMusic")
                     {
@@ -61,18 +61,16 @@ namespace GTweak.View
                         UninstallingApps.IsAppDeletedList["Yandex.Music"] = true;
                         UninstallingApps.DeletedApp("Yandex.Music");
                     }
-                };
-                backgroundWorker.RunWorkerCompleted += async delegate
+                });
+                if (backgroundQueue.IsQueueCompleted())
                 {
-                    await Task.Delay(25000);
+                   await Task.Delay(15000);
                     if (applicationName != "YandexMusic")
                         UninstallingApps.IsAppDeletedList[appImage.Name] = false;
                     else
                         UninstallingApps.IsAppDeletedList["Yandex.Music"] = false;
                     UpdateViewStateApps();
-                    backgroundWorker.Dispose();
-                };
-                backgroundWorker.RunWorkerAsync();
+                }
             }
 
             if (e.LeftButton == MouseButtonState.Pressed && appImage.Source == (DrawingImage)FindResource("DA_DI_" + appImage.Name) && applicationName == "OneDrive")
@@ -80,16 +78,18 @@ namespace GTweak.View
                 appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
                 new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
 
-                BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += delegate { UninstallingApps.ResetOneDrive(); };
-                backgroundWorker.RunWorkerCompleted += async delegate
+                BackgroundQueue backgroundQueue = new BackgroundQueue();
+                await backgroundQueue.QueueTask(delegate
                 {
-                    await Task.Delay(15000);
+                    UninstallingApps.ResetOneDrive();
+                });
+                if (backgroundQueue.IsQueueCompleted())
+                {
+                    await Task.Delay(6000);
                     UninstallingApps.IsAppDeletedList[appImage.Name] = false;
                     UpdateViewStateApps();
-                    backgroundWorker.Dispose();
-                };
-                backgroundWorker.RunWorkerAsync();
+                    UpdateViewStateApps();
+                }
             }
         }
 
