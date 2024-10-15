@@ -7,7 +7,6 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using XamlRadialProgressBar;
 
 namespace GTweak.Utilities.Tweaks
 {

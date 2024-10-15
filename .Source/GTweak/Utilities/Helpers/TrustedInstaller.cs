@@ -63,7 +63,7 @@ namespace GTweak.Utilities.Helpers
 
         const int PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
         const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
-        const uint CREATE_NO_WINDOW = 0x08000000;
+        const uint CREATE_NO_WINDOW = 0x00000010;
 
         [StructLayout(LayoutKind.Sequential)]
         struct SECURITY_ATTRIBUTES
@@ -199,9 +199,8 @@ namespace GTweak.Utilities.Helpers
                 throw new Win32Exception("OpenService failed: " + Marshal.GetLastWin32Error());
             }
 
-            uint bytesNeeded;
             SERVICE_STATUS_PROCESS statusBuffer = new SERVICE_STATUS_PROCESS();
-            while (QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, ref statusBuffer, (uint)Marshal.SizeOf(statusBuffer), out bytesNeeded))
+            while (QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, ref statusBuffer, (uint)Marshal.SizeOf(statusBuffer), out _))
             {
                 if (statusBuffer.dwCurrentState == (uint)ServiceControllerStatus.Stopped)
                 {
@@ -233,12 +232,8 @@ namespace GTweak.Utilities.Helpers
         {
 
             ImpersonateSystem();
-
-            var pInfo = new PROCESS_INFORMATION();
+            _ = new PROCESS_INFORMATION();
             var siEx = new STARTUPINFOEX();
-
-            IntPtr lpValueProc = IntPtr.Zero;
-            IntPtr hSourceProcessHandle = IntPtr.Zero;
             var lpSize = IntPtr.Zero;
 
             InitializeProcThreadAttributeList(IntPtr.Zero, 1, 0, ref lpSize);
@@ -247,7 +242,7 @@ namespace GTweak.Utilities.Helpers
 
             IntPtr parentHandle = OpenProcess(ProcessAccessFlags.CreateProcess | ProcessAccessFlags.DuplicateHandle, false, parentProcessId);
 
-            lpValueProc = Marshal.AllocHGlobal(IntPtr.Size);
+            IntPtr lpValueProc = Marshal.AllocHGlobal(IntPtr.Size);
             Marshal.WriteIntPtr(lpValueProc, parentHandle);
 
             UpdateProcThreadAttribute(siEx.lpAttributeList, 0, (IntPtr)PROC_THREAD_ATTRIBUTE_PARENT_PROCESS, lpValueProc, (IntPtr)IntPtr.Size, IntPtr.Zero, IntPtr.Zero);
@@ -256,10 +251,8 @@ namespace GTweak.Utilities.Helpers
             var ts = new SECURITY_ATTRIBUTES();
             ps.nLength = Marshal.SizeOf(ps);
             ts.nLength = Marshal.SizeOf(ts);
-
-            bool ret = CreateProcess(null, binaryPath, ref ps, ref ts, true, EXTENDED_STARTUPINFO_PRESENT | CREATE_NO_WINDOW, IntPtr.Zero, null, ref siEx, out pInfo);
-
-            string stringPid = pInfo.dwProcessId.ToString();
+            _ = CreateProcess(null, binaryPath, ref ps, ref ts, true, EXTENDED_STARTUPINFO_PRESENT | CREATE_NO_WINDOW, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo);
+            _ = pInfo.dwProcessId.ToString();
 
         }
     }

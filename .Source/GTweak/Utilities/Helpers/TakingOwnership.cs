@@ -5,14 +5,14 @@ namespace GTweak.Utilities.Helpers
 {
     internal class TakingOwnership
     {
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct SID_IDENTIFIER_AUTHORITY
         {
-            [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 6, ArraySubType = UnmanagedType.I1)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6, ArraySubType = UnmanagedType.I1)]
             public byte[] Value;
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct TRUSTEE
         {
             public System.IntPtr pMultipleTrustee;
@@ -22,7 +22,7 @@ namespace GTweak.Utilities.Helpers
             public IntPtr ptstrName;
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct EXPLICIT_ACCESS
         {
             public ACCESS_MASK grfAccessPermissions;
@@ -31,22 +31,22 @@ namespace GTweak.Utilities.Helpers
             public TRUSTEE Trustee;
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct TOKEN_PRIVILEGES
         {
             public uint PrivilegeCount;
-            [MarshalAsAttribute(UnmanagedType.ByValArray, SizeConst = 1, ArraySubType = UnmanagedType.Struct)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1, ArraySubType = UnmanagedType.Struct)]
             public LUID_AND_ATTRIBUTES[] Privileges;
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct LUID_AND_ATTRIBUTES
         {
             public LUID Luid;
             public uint Attributes;
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         private struct LUID
         {
             public uint LowPart;
@@ -104,21 +104,21 @@ namespace GTweak.Utilities.Helpers
         private static SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY =
             new SID_IDENTIFIER_AUTHORITY() { Value = new byte[] { 0, 0, 0, 0, 0, 5 } };
 
-        private const UInt32 TOKEN_ADJUST_PRIVILEGES = 0x0020;
+        private const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
         private const int NO_INHERITANCE = 0x0;
         private const int SECURITY_BUILTIN_DOMAIN_RID = 0x00000020;
         private const int DOMAIN_ALIAS_RID_ADMINS = 0x00000220;
         private const int TOKEN_QUERY = 8;
         private const int SE_PRIVILEGE_ENABLED = 2;
 
-        [DllImportAttribute("advapi32.dll", EntryPoint = "OpenProcessToken")]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        private static extern bool OpenProcessToken([InAttribute] IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
+        [DllImport("advapi32.dll", EntryPoint = "OpenProcessToken")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool OpenProcessToken([In] IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
 
-        [DllImportAttribute("advapi32.dll", EntryPoint = "AllocateAndInitializeSid")]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
+        [DllImport("advapi32.dll", EntryPoint = "AllocateAndInitializeSid")]
+        [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool AllocateAndInitializeSid(
-            [InAttribute] ref SID_IDENTIFIER_AUTHORITY pIdentifierAuthority,
+            [In] ref SID_IDENTIFIER_AUTHORITY pIdentifierAuthority,
             byte nSubAuthorityCount,
             uint nSubAuthority0,
             uint nSubAuthority1,
@@ -130,27 +130,27 @@ namespace GTweak.Utilities.Helpers
             uint nSubAuthority7,
             ref IntPtr pSid);
 
-        [DllImportAttribute("kernel32.dll", EntryPoint = "CloseHandle")]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        private static extern bool CloseHandle([InAttribute] IntPtr hObject);
+        [DllImport("kernel32.dll", EntryPoint = "CloseHandle")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool CloseHandle([In] IntPtr hObject);
 
-        [DllImportAttribute("kernel32.dll", EntryPoint = "GetCurrentProcess")]
+        [DllImport("kernel32.dll", EntryPoint = "GetCurrentProcess")]
         private static extern IntPtr GetCurrentProcess();
 
-        [DllImportAttribute("advapi32.dll", EntryPoint = "FreeSid")]
-        private static extern IntPtr FreeSid([InAttribute] IntPtr pSid);
+        [DllImport("advapi32.dll", EntryPoint = "FreeSid")]
+        private static extern IntPtr FreeSid([In] IntPtr pSid);
 
-        [DllImportAttribute("kernel32.dll", EntryPoint = "LocalFree")]
+        [DllImport("kernel32.dll", EntryPoint = "LocalFree")]
         private static extern IntPtr LocalFree(IntPtr hMem);
 
-        [DllImportAttribute("advapi32.dll", EntryPoint = "LookupPrivilegeValueA")]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        private static extern bool LookupPrivilegeValueA([InAttribute] [MarshalAsAttribute(UnmanagedType.LPStr)] string lpSystemName, [InAttribute] [MarshalAsAttribute(UnmanagedType.LPStr)] string lpName, [OutAttribute] out LUID lpLuid);
+        [DllImport("advapi32.dll", EntryPoint = "LookupPrivilegeValueA")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool LookupPrivilegeValueA([In] [MarshalAs(UnmanagedType.LPStr)] string lpSystemName, [In] [MarshalAs(UnmanagedType.LPStr)] string lpName, [Out] out LUID lpLuid);
 
-        [DllImportAttribute("advapi32.dll", EntryPoint = "AdjustTokenPrivileges")]
-        [return: MarshalAsAttribute(UnmanagedType.Bool)]
-        private static extern bool AdjustTokenPrivileges([InAttribute()] IntPtr TokenHandle, [MarshalAsAttribute(UnmanagedType.Bool)] bool DisableAllPrivileges,
-            [InAttribute()]
+        [DllImport("advapi32.dll", EntryPoint = "AdjustTokenPrivileges")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool AdjustTokenPrivileges([In()] IntPtr TokenHandle, [MarshalAs(UnmanagedType.Bool)] bool DisableAllPrivileges,
+            [In()]
             ref TOKEN_PRIVILEGES NewState,
             uint BufferLength,
             IntPtr PreviousState,
@@ -166,7 +166,7 @@ namespace GTweak.Utilities.Helpers
             IntPtr pDacl,
             IntPtr pSacl);
 
-        [DllImport("Advapi32.dll", EntryPoint = "SetEntriesInAclA",
+        [DllImport("advapi32.dll", EntryPoint = "SetEntriesInAclA",
          CallingConvention = CallingConvention.Winapi,
          SetLastError = true, CharSet = CharSet.Ansi)]
         private static extern int SetEntriesInAcl(
