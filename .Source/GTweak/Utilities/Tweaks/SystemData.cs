@@ -4,9 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Management;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -98,7 +101,8 @@ namespace GTweak.Utilities.Tweaks
 
             internal readonly void GetCpuUsage()
             {
-                Parallel.Invoke(async () => { 
+                Parallel.Invoke(async () =>
+                {
                     PerformanceCounter cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
                     cpuCounter.NextValue();
                     await Task.Delay(1000);
@@ -149,14 +153,14 @@ namespace GTweak.Utilities.Tweaks
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SerialNumber from Win32_BIOS", optionsObj).Get()) 
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SerialNumber from Win32_BIOS", optionsObj).Get())
                     {
                         if (!string.IsNullOrEmpty((string)managementObj["Name"]))
                             СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ? (string)managementObj["Name"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Name"] + "\n";
                         else if (!string.IsNullOrEmpty((string)managementObj["Caption"]))
-                            СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ?  (string)managementObj["Caption"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Caption"] + "\n";
+                            СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ? (string)managementObj["Caption"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Caption"] + "\n";
                         else if (!string.IsNullOrEmpty((string)managementObj["Description"]))
-                            СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ?  (string)managementObj["Description"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Description"] + "\n";
+                            СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ? (string)managementObj["Description"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Description"] + "\n";
                     }
                     СonfigurationData["BIOS"] = СonfigurationData["BIOS"].TrimEnd('\n');
                 },
@@ -206,21 +210,21 @@ namespace GTweak.Utilities.Tweaks
                         СonfigurationData["Disk"] += Convert.ToString((ulong)managementObj["Size"] / 1024000000) + " GB " + "[" + (string)managementObj["FriendlyName"] + "] " + _type + "\n";
                     }
                     СonfigurationData["Disk"] = СonfigurationData["Disk"].TrimEnd('\n');
-                }, 
+                },
                 delegate
                 {
-                   СonfigurationData["Sound"] = string.Empty;
-                   foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice", optionsObj).Get())
-                   {
-                       if (!string.IsNullOrEmpty((string)managementObj["Name"]))
-                           СonfigurationData["Sound"] += (string)managementObj["Name"] + "\n";
-                       else if (!string.IsNullOrEmpty((string)managementObj["Caption"]))
-                           СonfigurationData["Sound"] += (string)managementObj["Caption"] + "\n";
-                       else if (!string.IsNullOrEmpty((string)managementObj["Description"]))
-                           СonfigurationData["Sound"] += (string)managementObj["Description"] + "\n";
-                   }
-                   СonfigurationData["Sound"] = СonfigurationData["Sound"].TrimEnd('\n');
-               },
+                    СonfigurationData["Sound"] = string.Empty;
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice", optionsObj).Get())
+                    {
+                        if (!string.IsNullOrEmpty((string)managementObj["Name"]))
+                            СonfigurationData["Sound"] += (string)managementObj["Name"] + "\n";
+                        else if (!string.IsNullOrEmpty((string)managementObj["Caption"]))
+                            СonfigurationData["Sound"] += (string)managementObj["Caption"] + "\n";
+                        else if (!string.IsNullOrEmpty((string)managementObj["Description"]))
+                            СonfigurationData["Sound"] += (string)managementObj["Description"] + "\n";
+                    }
+                    СonfigurationData["Sound"] = СonfigurationData["Sound"].TrimEnd('\n');
+                },
                delegate
                {
                    СonfigurationData["NetAdapter"] = string.Empty;
@@ -232,17 +236,19 @@ namespace GTweak.Utilities.Tweaks
 
             internal static bool IsCheckInternetConnection()
             {
-                try {
+                try
+                {
                     string dns = CultureInfo.InstalledUICulture switch
                     {
                         { Name: string name } when name.StartsWith("fa") => "aparat.com",
                         { Name: string name } when name.StartsWith("zh") => "baidu.com",
                         { Name: string name } when name.StartsWith("ru") => "yandex.ru",
-                        _ =>  "google.com",
+                        _ => "google.com",
                     };
-                    
+
                     TimeSpan timeout = TimeSpan.FromSeconds(5.0);
-                    Task<IPAddress> task = Task.Run(() => {
+                    Task<IPAddress> task = Task.Run(() =>
+                    {
                         return Dns.GetHostEntry(dns).AddressList[0];
                     });
                     if (!task.Wait(timeout))
@@ -270,7 +276,7 @@ namespace GTweak.Utilities.Tweaks
                             СonfigurationData["IpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
                             isInternetLimited = true;
                         }
-                        finally 
+                        finally
                         {
                             if (isInternetLimited)
                                 isInternetLimited = false;
@@ -296,8 +302,38 @@ namespace GTweak.Utilities.Tweaks
                     }
                 });
             }
+        }
 
+        internal sealed class UtilityСonfiguration
+        {
+            internal sealed class GitVersionUtility
+            {
+                [JsonProperty("tag_name")]
+                internal string СurrentVersion { get; set; }
+            }
 
+            internal static bool IsNeedUpdate()
+            {
+                if (СomputerСonfiguration.IsCheckInternetConnection())
+                {
+                    if (!(WebRequest.Create("https://api.github.com/repos/greedeks/gtweak/releases/latest") is HttpWebRequest webRequest))
+                        return false;
+
+                    webRequest.ContentType = "application/json";
+                    webRequest.UserAgent = "Nothing";
+
+                    using Stream stream = webRequest.GetResponse().GetResponseStream();
+                    using StreamReader sreader = new StreamReader(stream);
+                    string DataAsJson = sreader.ReadToEnd();
+                    GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
+                    if ((Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim() != gitVersionUtility.СurrentVersion)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
         }
     }
 }

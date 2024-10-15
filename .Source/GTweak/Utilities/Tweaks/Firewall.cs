@@ -19,7 +19,7 @@ namespace GTweak.Utilities.Tweaks
 
         private static readonly SortedList<string, string> ProgramPaths = new SortedList<string, string>
         {
-            ["MoUso_New"] = string.Concat(Settings.PathSystemDisk,@"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
+            ["MoUso_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
             ["MoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
             ["Uso"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\usoclient.exe"),
             ["WD"] = string.Concat(Settings.PathSystemDisk, @"Program Files\Windows Defender\MpCmdRun.exe"),
@@ -44,13 +44,15 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (CheckRulesWindows(NameRules["Update"]) && isChoose)
                 {
-                    Parallel.Invoke(() => {
+                    Parallel.Invoke(() =>
+                    {
                         AddRulesIn(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], NameRules["Update"]);
-                        AddRulesIn(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)")); 
+                        AddRulesIn(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                     },
-                    () => {
-                        AddRulesOut(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], NameRules["Update"]); 
-                        AddRulesOut(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)")); 
+                    () =>
+                    {
+                        AddRulesOut(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], NameRules["Update"]);
+                        AddRulesOut(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                     });
                 }
                 else
@@ -71,8 +73,8 @@ namespace GTweak.Utilities.Tweaks
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     });
                 }
-            } 
-            catch  { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+            }
+            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
         private static void AddRulesIn(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")

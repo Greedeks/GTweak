@@ -104,7 +104,7 @@ namespace GTweak.View
                     new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("warningwindef_notification"));
                 }
             }
-        
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

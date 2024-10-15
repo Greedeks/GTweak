@@ -105,7 +105,8 @@ namespace GTweak.Utilities.Tweaks
                     "0" => true,
                     _ => false
                 };
-            } catch { return false; }
+            }
+            catch { return false; }
         }
 
         internal static void DisablePoint()

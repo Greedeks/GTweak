@@ -64,7 +64,7 @@ namespace GTweak.View
                 });
                 if (backgroundQueue.IsQueueCompleted())
                 {
-                   await Task.Delay(15000);
+                    await Task.Delay(15000);
                     if (applicationName != "YandexMusic")
                         UninstallingApps.IsAppDeletedList[appImage.Name] = false;
                     else

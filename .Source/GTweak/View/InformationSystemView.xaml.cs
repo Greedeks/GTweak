@@ -1,5 +1,6 @@
 ﻿using GTweak.Core.ViewModel;
 using GTweak.Utilities;
+using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -12,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
-using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
@@ -25,7 +25,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate 
+            App.LanguageChanged += delegate
             {
                 if (!SystemData.СomputerСonfiguration.isConnectionLose)
                 {
@@ -54,7 +54,7 @@ namespace GTweak.View
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.RunWorkerAsync();
                     backgroundWorker.DoWork += delegate
-                    { 
+                    {
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
                         new Thread(() => new SystemData.MonitoringSystem().GetCpuUsage()).Start();
                         new Thread(() => new SystemData.MonitoringSystem().GetCpuUsage()).IsBackground = true;
@@ -87,7 +87,7 @@ namespace GTweak.View
             }, Application.Current.Dispatcher);
             timer.Start();
         }
-       
+
         private void AnimationPopup(bool _reverse)
         {
             PopupCopy.IsOpen = true;
@@ -142,7 +142,8 @@ namespace GTweak.View
 
         private void ProgressBarAnim()
         {
-            Parallel.Invoke(() =>  {
+            Parallel.Invoke(() =>
+            {
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
                     From = CPULoad.Value,

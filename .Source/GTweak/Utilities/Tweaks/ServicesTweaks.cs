@@ -871,7 +871,7 @@ namespace GTweak.Utilities.Tweaks
                         FileName = "cmd.exe"
                     });
 
-                   ChangeStateTask();
+                    ChangeStateTask();
 
                     await Task.Delay(1000);
 
@@ -904,7 +904,8 @@ namespace GTweak.Utilities.Tweaks
 
                     ChangeStateTask();
                 }
-            } catch (Exception ex) { Debug.WriteLine(ex); }
+            }
+            catch (Exception ex) { Debug.WriteLine(ex); }
         }
     }
 }

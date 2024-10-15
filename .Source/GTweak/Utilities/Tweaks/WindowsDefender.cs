@@ -88,7 +88,7 @@ namespace GTweak.Utilities.Tweaks
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
-       
+
 
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center");
             RegistryHelp.DeleteRegristyTree(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge");
@@ -140,7 +140,7 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.Write(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\EPP", "", "{09A47860-11B0-4DA5-AFA5-26D86198A780}", RegistryValueKind.String);
             RegistryHelp.Write(Registry.ClassesRoot, @"Directory\shellex\ContextMenuHandlers\EPP", "", "{09A47860-11B0-4DA5-AFA5-26D86198A780}", RegistryValueKind.String);
             RegistryHelp.Write(Registry.ClassesRoot, @"Drive\shellex\ContextMenuHandlers\EPP", "", "{09A47860-11B0-4DA5-AFA5-26D86198A780}", RegistryValueKind.String);
-            RegistryHelp.Write(Registry.ClassesRoot, @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32", "", Settings.PathSystemDisk+ @"Program Files\Windows Defender\shellext.dll", RegistryValueKind.String);
+            RegistryHelp.Write(Registry.ClassesRoot, @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32", "", Settings.PathSystemDisk + @"Program Files\Windows Defender\shellext.dll", RegistryValueKind.String);
             RegistryHelp.Write(Registry.ClassesRoot, @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32", "ThreadingModel", "Apartment", RegistryValueKind.String);
         }
 
@@ -351,7 +351,7 @@ namespace GTweak.Utilities.Tweaks
         {
             foreach (Process process in Process.GetProcessesByName(getName))
             {
-                try { process.Kill();}
+                try { process.Kill(); }
                 catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }

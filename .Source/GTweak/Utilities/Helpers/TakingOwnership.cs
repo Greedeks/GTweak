@@ -145,7 +145,7 @@ namespace GTweak.Utilities.Helpers
 
         [DllImport("advapi32.dll", EntryPoint = "LookupPrivilegeValueA")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool LookupPrivilegeValueA([In] [MarshalAs(UnmanagedType.LPStr)] string lpSystemName, [In] [MarshalAs(UnmanagedType.LPStr)] string lpName, [Out] out LUID lpLuid);
+        private static extern bool LookupPrivilegeValueA([In][MarshalAs(UnmanagedType.LPStr)] string lpSystemName, [In][MarshalAs(UnmanagedType.LPStr)] string lpName, [Out] out LUID lpLuid);
 
         [DllImport("advapi32.dll", EntryPoint = "AdjustTokenPrivileges")]
         [return: MarshalAs(UnmanagedType.Bool)]

@@ -22,16 +22,19 @@ namespace GTweak.Utilities
         private static bool _isViewNotification = true;
         private static bool _isSoundNotification = true;
         private static byte _volumeNotification = 50;
+        private static bool _isTopMost = false;
+        private static bool _isСheckingUpdate = true;
         private static string _language = App.GettingSystemLanguage;
         private static string _theme = "Dark";
-        private static bool _isTopMost = false;
-        internal static int PID = 0;
         internal static bool _isHiddenIpAddress = false;
+
+        internal static int PID = 0;
 
         internal static bool IsViewNotification { get => _isViewNotification; set => _isViewNotification = value; }
         internal static bool IsSoundNotification { get => _isSoundNotification; set => _isSoundNotification = value; }
         internal static byte VolumeNotification { get => _volumeNotification; set => _volumeNotification = value; }
         internal static bool IsTopMost { get => _isTopMost; set => _isTopMost = value; }
+        internal static bool IsСheckingUpdate { get => _isСheckingUpdate; set => _isСheckingUpdate = value; }
         internal static string Language { get => _language; set => _language = value; }
         internal static string Theme { get => _theme; set => _theme = value; }
         internal static bool IsHiddenIpAddress { get => _isHiddenIpAddress; set => _isHiddenIpAddress = value; }
@@ -45,13 +48,14 @@ namespace GTweak.Utilities
         private readonly void СheckingParameters()
         {
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
-            if (registryKey == null || registryKey.GetValue("Notification", null) == null || registryKey.GetValue("Sound", null) == null || registryKey.GetValue("Volume", null) == null ||
-            registryKey.GetValue("TopMost", null) == null || registryKey.GetValue("Language", null) == null || registryKey.GetValue("HiddenIP", null) == null || registryKey.GetValue("Theme", null) == null)
+            if (registryKey == null || registryKey.GetValue("Notification", null) == null || registryKey.GetValue("Sound", null) == null || registryKey.GetValue("Volume", null) == null || registryKey.GetValue("TopMost", null) == null || 
+            registryKey.GetValue("Update", null) == null || registryKey.GetValue("Language", null) == null || registryKey.GetValue("HiddenIP", null) == null || registryKey.GetValue("Theme", null) == null)
             {
                 registryKey?.SetValue("Notification", IsViewNotification, RegistryValueKind.String);
                 registryKey?.SetValue("Sound", IsSoundNotification, RegistryValueKind.String);
                 registryKey?.SetValue("Volume", VolumeNotification, RegistryValueKind.String);
                 registryKey?.SetValue("TopMost", IsTopMost, RegistryValueKind.String);
+                registryKey?.SetValue("Update", IsСheckingUpdate, RegistryValueKind.String);
                 registryKey?.SetValue("HiddenIP", IsHiddenIpAddress, RegistryValueKind.String);
                 registryKey?.SetValue("Theme", Theme, RegistryValueKind.String);
                 registryKey?.SetValue("Language", App.GettingSystemLanguage, RegistryValueKind.String);
@@ -62,6 +66,7 @@ namespace GTweak.Utilities
                 IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
                 VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "50");
                 IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");
+                IsСheckingUpdate = bool.Parse(registryKey?.GetValue("Update").ToString() ?? "True");
                 IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
                 Language = registryKey?.GetValue("Language").ToString() ?? App.GettingSystemLanguage;
                 Theme = registryKey?.GetValue("Theme").ToString() ?? "Dark";
@@ -88,6 +93,9 @@ namespace GTweak.Utilities
                 case "TopMost":
                     IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");
                     break;
+                case "Update":
+                    IsСheckingUpdate = bool.Parse(registryKey?.GetValue("Update").ToString() ?? "True");
+                    break;
                 case "Language":
                     Language = registryKey?.GetValue("Language").ToString() ?? App.GettingSystemLanguage;
                     break;
@@ -101,7 +109,7 @@ namespace GTweak.Utilities
 
             registryKey?.Close();
         });
-        
+
 
         internal static void SaveFileConfig()
         {
@@ -176,7 +184,7 @@ namespace GTweak.Utilities
                 Process.Start(new ProcessStartInfo()
                 {
                     Arguments = "/c choice /c y /n /d y /t 3 & del \"" + (new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath)).Name + "\" & " +
-                    "rd /s /q " + PathTempFiles + @"& rd /s /q "+Environment.SystemDirectory+ @"\config\systemprofile\AppData\Local\GTweak",
+                    "rd /s /q " + PathTempFiles + @"& rd /s /q " + Environment.SystemDirectory + @"\config\systemprofile\AppData\Local\GTweak",
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,
                     FileName = "cmd.exe"

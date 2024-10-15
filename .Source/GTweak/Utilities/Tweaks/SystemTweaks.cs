@@ -24,7 +24,7 @@ namespace GTweak.Utilities.Tweaks
         internal const uint SPI_SETMOUSE = 0x0004;
     };
 
-    internal sealed class SystemTweaks: Firewall
+    internal sealed class SystemTweaks : Firewall
     {
         private static readonly string[] schedulerTasks = new string[2] {
                 @"Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
@@ -128,20 +128,20 @@ namespace GTweak.Utilities.Tweaks
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
 
-                    systemV.TglButton8.StateNA = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", string.Empty).ToString() != "4" ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", string.Empty).ToString() != "0" ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", string.Empty).ToString() != "0" ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", string.Empty).ToString() != "1" ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", string.Empty).ToString() != "1" ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableRealtimeMonitoring", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableRealtimeMonitoring", string.Empty).ToString() != "1"; ;
- 
-            
+            systemV.TglButton8.StateNA = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", null) == null ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", string.Empty).ToString() != "4" ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", null) == null ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", string.Empty).ToString() != "0" ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", null) == null ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", string.Empty).ToString() != "0" ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", null) == null ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", string.Empty).ToString() != "1" ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", null) == null ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", string.Empty).ToString() != "1" ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableRealtimeMonitoring", null) == null ||
+        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableRealtimeMonitoring", string.Empty).ToString() != "1"; ;
+
+
 
             if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", string.Empty).ToString() != "0" ||
@@ -224,7 +224,7 @@ namespace GTweak.Utilities.Tweaks
                 systemV.TglButton17.StateNA = false;
 
 
-            if (!Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "Description", string.Empty).ToString().Contains("-18") && 
+            if (!Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "Description", string.Empty).ToString().Contains("-18") &&
                 !Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
                 systemV.TglButton18.StateNA = true;
             else
@@ -269,7 +269,8 @@ namespace GTweak.Utilities.Tweaks
             {
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT DeviceId FROM Win32_PnPEntity WHERE service='BthLEEnum'");
                 isBluetoothStatus = searcher.Get().Count > 0;
-            } catch { isBluetoothStatus = false; }
+            }
+            catch { isBluetoothStatus = false; }
         }
 
         internal void ViewTaskState()
@@ -438,7 +439,8 @@ namespace GTweak.Utilities.Tweaks
                                 keychange?.SetValue("PerformanceIdleTime", _dataTime, RegistryValueKind.Binary);
                             }
                         }
-                    } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     break;
                 case "TglButton8":
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -713,7 +715,7 @@ namespace GTweak.Utilities.Tweaks
                     },
             };
 
-            string _serchScheme = default, 
+            string _serchScheme = default,
                 unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
                 inputPath = Settings.PathTempFiles + @"\UltimatePerformance.pow";
 

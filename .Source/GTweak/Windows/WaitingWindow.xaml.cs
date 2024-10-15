@@ -10,7 +10,7 @@ namespace GTweak.Windows
     /// <summary>
     /// Darkened screen 
     /// </summary>
- 
+
     public partial class WaitingWindow : Window
     {
         private readonly DisablingWinKeys disablingWinKeys = new DisablingWinKeys();
@@ -29,7 +29,7 @@ namespace GTweak.Windows
                 ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
                 disablingWinKeys.objKeyboardProcess = new DisablingWinKeys.LowLevelKeyboardProc(disablingWinKeys.CaptureKey);
                 disablingWinKeys.ptrHook = DisablingWinKeys.SetWindowsHookEx(13, disablingWinKeys.objKeyboardProcess, DisablingWinKeys.GetModuleHandle(objCurrentModule.ModuleName), 1);
-                this.Close(); 
+                this.Close();
             };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             BeginAnimation(OpacityProperty, doubleAnim);

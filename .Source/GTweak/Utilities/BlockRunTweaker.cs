@@ -1,4 +1,5 @@
-﻿using GTweak.Windows;
+﻿using GTweak.Utilities.Tweaks;
+using GTweak.Windows;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -6,7 +7,6 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Utilities
 {
@@ -47,7 +47,7 @@ namespace GTweak.Utilities
             Parallel.Invoke(() =>
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption from Win32_OperatingSystem", optionsObj).Get())
-                    SystemData.СomputerСonfiguration.clientWinVersion = Convert.ToString(managementObj["Caption"]);;
+                    SystemData.СomputerСonfiguration.clientWinVersion = Convert.ToString(managementObj["Caption"]); ;
             });
 
             if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11") || SystemData.СomputerСonfiguration.clientWinVersion.Contains("10")) return;

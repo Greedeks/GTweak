@@ -25,7 +25,7 @@ namespace GTweak.Utilities
                 {
                     NotificationWindow notificationWindow = new NotificationWindow();
 
-                    Parallel.Invoke(async() =>
+                    Parallel.Invoke(async () =>
                     {
                         if (notificationWindow.IsLoaded || isAlreadyLaunch)
                             return;

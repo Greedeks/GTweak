@@ -45,7 +45,7 @@ namespace GTweak.Utilities.Tweaks
 
             if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "CursorBlinkRate", null) == null ||
                 Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "CursorBlinkRate", string.Empty).ToString() != "250")
-                interfaceV.TglButton4.StateNA = true;   
+                interfaceV.TglButton4.StateNA = true;
             else
                 interfaceV.TglButton4.StateNA = false;
 
@@ -252,11 +252,11 @@ namespace GTweak.Utilities.Tweaks
 
             if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
             {
-                if (Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", null) == null || 
-                    Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", string.Empty).ToString() != "0" || 
-                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", null) == null || 
-                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", string.Empty).ToString() != "0" || 
-                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", null) == null || 
+                if (Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", null) == null ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", string.Empty).ToString() != "0" ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", null) == null ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", string.Empty).ToString() != "0" ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", null) == null ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", string.Empty).ToString() != "0")
                     interfaceV.TglButton22.StateNA = true;
                 else
@@ -353,7 +353,7 @@ namespace GTweak.Utilities.Tweaks
                         launchExplorer.StartInfo.UseShellExecute = true;
                         launchExplorer.Start();
                     }
-                       
+
                 }
             }
         }
@@ -490,7 +490,7 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton13":
                     if (isChoose)
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"); 
+                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}");
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", 0, RegistryValueKind.DWord);
                     break;
@@ -606,10 +606,10 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_AccountNotifications", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_IrisRecommendations", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenOverlayEnabled", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenEnabled", 0, RegistryValueKind.DWord); 
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenEnabled", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338387Enabled", 0, RegistryValueKind.DWord);
                         }
-                    
+
                     }
                     else
                     {
@@ -648,7 +648,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton22":
                     if (isChoose)
                     {
-                        if(SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
+                        if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter", 1, RegistryValueKind.DWord);
                         if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11"))
                         {

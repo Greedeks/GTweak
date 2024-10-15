@@ -14,7 +14,7 @@ using System.Windows.Media.Animation;
 namespace GTweak
 {
     public partial class MainWindow
-    {   
+    {
         public MainWindow()
         {
             InitializeComponent();
@@ -22,6 +22,7 @@ namespace GTweak
             BtnNotification.State = Settings.IsViewNotification;
             BtnSoundNtn.State = Settings.IsSoundNotification;
             BtnTopMost.State = Topmost = Settings.IsTopMost;
+            BtnUpdate.State = Settings.IsСheckingUpdate;
             SliderVolume.Value = Settings.VolumeNotification;
             LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;
             ThemeSelectionMenu.SelectedIndex = Settings.Theme switch
@@ -37,7 +38,8 @@ namespace GTweak
         #region Button Title/Animation Window
         private void SettingsMenuAnimation()
         {
-            Parallel.Invoke(() => {
+            Parallel.Invoke(() =>
+            {
                 Storyboard storyboard = new Storyboard();
                 DoubleAnimation rotateAnimation = new DoubleAnimation()
                 {
@@ -134,6 +136,8 @@ namespace GTweak
 
         private void BtnSoundNtn_ChangedState(object sender, EventArgs e) => Parallel.Invoke(() => { Settings.ChangingParameters(!BtnSoundNtn.State, "Sound"); });
 
+        private void BtnUpdate_ChangedState(object sender, EventArgs e) => Parallel.Invoke(() => { Settings.ChangingParameters(!BtnUpdate.State, "Update"); });
+
         private void BtnTopMost_ChangedState(object sender, EventArgs e)
         {
             Parallel.Invoke(() =>
@@ -143,10 +147,10 @@ namespace GTweak
             });
         }
 
-        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) 
+        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
-            Parallel.Invoke(() => { Settings.ChangingParameters(SliderVolume.Value, "Volume"); }); 
+            Parallel.Invoke(() => { Settings.ChangingParameters(SliderVolume.Value, "Volume"); });
         }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -206,7 +210,7 @@ namespace GTweak
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Image btnConcat = (Image)sender;
-                switch(btnConcat.Uid)
+                switch (btnConcat.Uid)
                 {
                     case "git":
                         Process.Start("https://github.com/Greedeks");
@@ -219,7 +223,7 @@ namespace GTweak
                         break;
                 }
             }
-           
+
         }
         #endregion
     }

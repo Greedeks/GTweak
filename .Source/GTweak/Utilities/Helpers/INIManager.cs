@@ -16,8 +16,8 @@ namespace GTweak.Utilities.Helpers
         private static extern int GetPrivateProfileSection(string section, StringBuilder retVal, int size, string filePath);
 
         private readonly string pathToConfig;
-        internal static Dictionary<string, string> 
-            UserTweaksConfidentiality = new Dictionary<string, string>(), 
+        internal static Dictionary<string, string>
+            UserTweaksConfidentiality = new Dictionary<string, string>(),
             UserTweaksInterface = new Dictionary<string, string>(),
             UserTweaksServices = new Dictionary<string, string>(),
             UserTweaksSystem = new Dictionary<string, string>();

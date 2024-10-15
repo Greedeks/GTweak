@@ -1,8 +1,8 @@
 ﻿using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
-using System.Diagnostics;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Threading;
@@ -369,7 +369,7 @@ namespace GTweak.Utilities.Tweaks
                     {
                         BlockSpyDomain(true);
 
-                        try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); } 
+                        try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
                         File.Move(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)");

@@ -14,7 +14,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal void LicenseStatus()
         {
-            Parallel.Invoke(() => {
+            Parallel.Invoke(() =>
+            {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1").Get())
                     statusLicense = (uint)managementObj["LicenseStatus"];
             });

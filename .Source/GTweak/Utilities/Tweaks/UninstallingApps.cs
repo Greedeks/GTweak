@@ -24,7 +24,7 @@ namespace GTweak.Utilities.Tweaks
             ["GetHelp"] = false,
             ["MicrosoftOfficeHub"] = false,
             ["MicrosoftSolitaireCollection"] = false,
-            ["MixedReality"] = false,       
+            ["MixedReality"] = false,
             ["Xbox"] = false,
             ["Paint3D"] = false,
             ["OneNote"] = false,
@@ -65,7 +65,7 @@ namespace GTweak.Utilities.Tweaks
             ["Microsoft3D"] = new List<string>(1) { "Microsoft.Microsoft3DViewer" },
             ["Music"] = new List<string>(1) { "Microsoft.ZuneMusic" },
             ["GetHelp"] = new List<string>(1) { "Microsoft.GetHelp" },
-            ["MicrosoftOfficeHub"] = new List<string>(1) { "Microsoft.MicrosoftOfficeHub"},
+            ["MicrosoftOfficeHub"] = new List<string>(1) { "Microsoft.MicrosoftOfficeHub" },
             ["MicrosoftSolitaireCollection"] = new List<string>(1) { "Microsoft.MicrosoftSolitaireCollection" },
             ["MixedReality"] = new List<string>(1) { "Microsoft.MixedReality.Portal" },
             ["Xbox"] = new List<string>(7) { "Microsoft.XboxApp", "Microsoft.GamingApp", "Microsoft.XboxGamingOverlay", "Microsoft.XboxGameOverlay", "Microsoft.XboxIdentityProvider", "Microsoft.Xbox.TCUI", "Microsoft.XboxSpeechToTextOverlay" },
@@ -260,7 +260,7 @@ namespace GTweak.Utilities.Tweaks
                 process.Dispose();
             }
 
-            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + Settings.PathSystemDisk +@"\OneDriveTemp";
+            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + Settings.PathSystemDisk + @"\OneDriveTemp";
 
             if (isLocalAccount)
                 argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";

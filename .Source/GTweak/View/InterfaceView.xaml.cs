@@ -51,8 +51,8 @@ namespace GTweak.View
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (TextViewColor.Visibility==Visibility.Visible)
-                TextViewColor.Visibility=Visibility.Hidden;
+            if (TextViewColor.Visibility == Visibility.Visible)
+                TextViewColor.Visibility = Visibility.Hidden;
             if (TextDescription.Text != (string)FindResource("defaultDescription"))
                 new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }

@@ -23,7 +23,7 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
 
-            if (TextDescription.Text != (string)FindResource(toggleButton.Name+ "_description_confidentiality"))
+            if (TextDescription.Text != (string)FindResource(toggleButton.Name + "_description_confidentiality"))
             {
                 string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_confidentiality");
                 TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
