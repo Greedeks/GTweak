@@ -63,7 +63,7 @@ namespace GTweak.Utilities.Helpers
 
         const int PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
         const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
-        const uint CREATE_NO_WINDOW = 0x00000010;
+        const uint CREATE_NO_WINDOW = 0x08000000;
 
         [StructLayout(LayoutKind.Sequential)]
         struct SECURITY_ATTRIBUTES
