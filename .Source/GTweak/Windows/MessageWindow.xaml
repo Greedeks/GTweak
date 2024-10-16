@@ -36,7 +36,7 @@
                 </Grid>
 
                 <Grid Grid.Row="1">
-                    <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="330" FontFamily="{StaticResource Jura}" FontSize="15px"  TextWrapping="Wrap"
+                    <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="330" FontFamily="{StaticResource Jura}" FontSize="15px" TextWrapping="Wrap"
                            HorizontalAlignment="Center" TextAlignment="Left" FontStretch="Medium" Margin="5,16,0,0">
                                 <Run x:Name="TextRun0" Text="{DynamicResource text0_message}"/>
                                 <Run x:Name="TextRun1" Text="{DynamicResource text1_message}" Foreground="{StaticResource Color_Accent}"/>

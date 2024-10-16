@@ -58,6 +58,7 @@
     <v:String x:Key="clear_ram_notification">Очистка кратковременной памяти и временных файлов произведена</v:String>
     <v:String x:Key="disable_recovery_notification">Восстановление системы отключено, точки восстановления недоступны</v:String>
     <v:String x:Key="warndisable_recovery_notification">У вас уже отключена система восстановления</v:String>
+    <v:String x:Key="warn_update_notification">Во время обновления программы произошла ошибка, повторите попытку позже</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -96,6 +97,15 @@
 
     <!--#region Reboot Window -->
     <v:String x:Key="title_reboot">Внимание перезагрузка GTweak</v:String>
+    <!--#endregion-->
+
+    <!--#region Update Window -->
+    <v:String x:Key="text_update">Вам доступна новая версия программы. Вы хотите загрузить и обновить ее?</v:String>
+    <v:String x:Key="log_update">Список изменений</v:String>
+    <v:String x:Key="btn_now_update">Обновиться</v:String>
+    <v:String x:Key="btn_later_update">Позже</v:String>
+    <v:String x:Key="download_update">Скачивания обновления</v:String>
+    <v:String x:Key="connection_update">Подключение к серверу</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->

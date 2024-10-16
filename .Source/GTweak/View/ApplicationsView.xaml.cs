@@ -104,7 +104,7 @@ namespace GTweak.View
                 }
 
                 BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += (s, _) =>
+                backgroundWorker.DoWork += delegate
                 {
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("appsdelete_notification"));
                     Parallel.Invoke(UninstallingApps.DeletedAllApps);

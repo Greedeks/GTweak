@@ -125,6 +125,14 @@ namespace GTweak
                 Duration = TimeSpan.FromSeconds(0.3),
                 EasingFunction = new QuadraticEase()
             };
+            doubleAnim.Completed += async delegate
+            {
+                if (SystemData.UtilityСonfiguration.IsNeedUpdate && Settings.IsСheckingUpdate)
+                {
+                    await Task.Delay(1000);
+                    new UpdateWindow().ShowDialog();
+                }
+            };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             BeginAnimation(OpacityProperty, doubleAnim);
             new TypewriterAnimation(UtilityTitle.Text, UtilityTitle, TimeSpan.FromSeconds(0.4));

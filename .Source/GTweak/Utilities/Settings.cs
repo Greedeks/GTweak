@@ -48,7 +48,7 @@ namespace GTweak.Utilities
         private readonly void СheckingParameters()
         {
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
-            if (registryKey == null || registryKey.GetValue("Notification", null) == null || registryKey.GetValue("Sound", null) == null || registryKey.GetValue("Volume", null) == null || registryKey.GetValue("TopMost", null) == null || 
+            if (registryKey == null || registryKey.GetValue("Notification", null) == null || registryKey.GetValue("Sound", null) == null || registryKey.GetValue("Volume", null) == null || registryKey.GetValue("TopMost", null) == null ||
             registryKey.GetValue("Update", null) == null || registryKey.GetValue("Language", null) == null || registryKey.GetValue("HiddenIP", null) == null || registryKey.GetValue("Theme", null) == null)
             {
                 registryKey?.SetValue("Notification", IsViewNotification, RegistryValueKind.String);

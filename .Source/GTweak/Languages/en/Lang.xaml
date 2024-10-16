@@ -58,6 +58,7 @@
     <v:String x:Key="clear_ram_notification">Short-term memory and temporary files have been cleared</v:String>
     <v:String x:Key="disable_recovery_notification">System recovery is disabled, recovery points are unavailable</v:String>
     <v:String x:Key="warndisable_recovery_notification">You have already disabled the recovery system</v:String>
+    <v:String x:Key="warn_update_notification">An error occurred during the program update, please try again later</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -96,6 +97,15 @@
 
     <!--#region Reboot Window -->
     <v:String x:Key="title_reboot">Attention GTweak reboot</v:String>
+    <!--#endregion-->
+
+    <!--#region Update Window -->
+    <v:String x:Key="text_update">A new version of the program is available. Do you want to download and update it?</v:String>
+    <v:String x:Key="log_update">Сhangelog</v:String>
+    <v:String x:Key="btn_now_update">Update</v:String>
+    <v:String x:Key="btn_later_update">Later</v:String>
+    <v:String x:Key="download_update">Downloading the update</v:String>
+    <v:String x:Key="connection_update">Connecting to the server</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->

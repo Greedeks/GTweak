@@ -306,34 +306,34 @@ namespace GTweak.Utilities.Tweaks
 
         internal sealed class UtilityСonfiguration
         {
+            internal static bool IsNeedUpdate = false;
+
             internal sealed class GitVersionUtility
             {
                 [JsonProperty("tag_name")]
                 internal string СurrentVersion { get; set; }
             }
 
-            internal static bool IsNeedUpdate()
+            internal void CheckingUpdate()
             {
-                if (СomputerСonfiguration.IsCheckInternetConnection())
-                {
-                    if (!(WebRequest.Create("https://api.github.com/repos/greedeks/gtweak/releases/latest") is HttpWebRequest webRequest))
-                        return false;
+                if (!Settings.IsСheckingUpdate)
+                    return;
 
-                    webRequest.ContentType = "application/json";
-                    webRequest.UserAgent = "Nothing";
+                if (!(WebRequest.Create("https://api.github.com/repos/greedeks/gtweak/releases/latest") is HttpWebRequest webRequest))
+                    return;
 
-                    using Stream stream = webRequest.GetResponse().GetResponseStream();
-                    using StreamReader sreader = new StreamReader(stream);
-                    string DataAsJson = sreader.ReadToEnd();
-                    GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
-                    if ((Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim() != gitVersionUtility.СurrentVersion)
-                        return true;
-                    else
-                        return false;
-                }
-                else
-                    return false;
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+
+                using Stream stream = webRequest.GetResponse().GetResponseStream();
+                using StreamReader sreader = new StreamReader(stream);
+                string DataAsJson = sreader.ReadToEnd();
+                GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
+
+                if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim() != gitVersionUtility.СurrentVersion)
+                    IsNeedUpdate = true;
             }
+
         }
     }
 }
