@@ -217,13 +217,13 @@
 
                                     <StackPanel Orientation="Horizontal" Margin="40,15,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource text_saveconfig}"/>
-                                        <Button x:Name="BtnExport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnExport_PreviewMouseDown">
+                                        <Button x:Name="BtnExport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="106" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnExport_PreviewMouseDown">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{DynamicResource btn_export}" Margin="0,2,0,0"/>
                                                 <Image Source="{DynamicResource DI_Export}" Margin="5,0,0,0" Width="20" Height="20"/>
                                             </StackPanel>
                                         </Button>
-                                        <Button x:Name="BtnImport" FontSize="10pt" Style="{StaticResource BtnDefault}" Width="96" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnImport_PreviewMouseDown">
+                                        <Button x:Name="BtnImport" FontSize="10pt" Style="{StaticResource BtnDefaultM}" Width="106" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnImport_PreviewMouseDown">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{DynamicResource btn_import}" Margin="0,2,0,0"/>
                                                 <Image Source="{DynamicResource DI_Import}" Margin="5,0,0,0" Width="20" Height="20"/>

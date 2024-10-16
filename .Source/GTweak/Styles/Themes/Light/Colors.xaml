@@ -9,8 +9,10 @@
     <SolidColorBrush x:Key="Color_Highlighted" Color="#111111"/>
 
     <SolidColorBrush x:Key="Color_Over" Color="#4CA874"/>
+    <SolidColorBrush x:Key="Color_MButton" Color="#d6d6d6"/>
     <SolidColorBrush x:Key="Color_ButtonOver" Color="#45AB77"/>
     <SolidColorBrush x:Key="Color_ButtonOver_Navigation" Color="#E1E1E1"/>
+    <SolidColorBrush x:Key="Color_MButtonOver" Color="#d8d8d8"/>
     <SolidColorBrush x:Key="Color_Border" Color="#009843"/>
 
     <SolidColorBrush x:Key="Color_ComboBoxOver" Color="#E1E1E1"/>
