@@ -75,7 +75,7 @@
 
                         <Grid Grid.Row="1">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button x:Name="BtnLater" Content="{DynamicResource btn_later_update}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnLater_PreviewMouseDown"/>
+                                <Button x:Name="BtnLater" Content="{DynamicResource btn_later_update}" Style="{StaticResource BtnDefaultM}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnLater_PreviewMouseDown"/>
                                 <Button x:Name="BtnUpdate" Content="{DynamicResource btn_now_update}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="110" Height="30" Margin="20,0,0,0" Cursor="Hand" PreviewMouseDown="BtnUpdate_PreviewMouseDown"/>
                             </StackPanel>
                         </Grid>

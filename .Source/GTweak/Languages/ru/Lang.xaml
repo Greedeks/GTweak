@@ -103,7 +103,7 @@
     <v:String x:Key="title_update">Найдено обновление</v:String>
     <v:String x:Key="text_update">Вам доступна новая версия программы. Обновите ее для получения новых функций и исправления ошибок.</v:String>
     <v:String x:Key="log_update">Список изменений</v:String>
-    <v:String x:Key="btn_now_update">Обновиться</v:String>
+    <v:String x:Key="btn_now_update">Обновить</v:String>
     <v:String x:Key="btn_later_update">Позже</v:String>
     <v:String x:Key="download_update">Скачивания обновления</v:String>
     <v:String x:Key="connection_update">Подключение к серверу</v:String>
