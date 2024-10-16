@@ -8,7 +8,7 @@
         Title="GTweak" WindowStyle="None"
         Height="180" Width="350" MinHeight="180" MinWidth="350" MaxHeight="200" MaxWidth="350"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
-        IsTabStop="False" Loaded="Window_Loaded" Closing="Window_Closing">
+        IsTabStop="False" ShowInTaskbar="False" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
             <Border.BorderBrush>
@@ -26,7 +26,7 @@
 
                 <Grid x:Name="TitleBar" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True" MouseDown="TitleBar_MouseDown">
                     <Border Background="{StaticResource Color_Background_Dark}" CornerRadius="9,9,0,0">
-                        <TextBlock FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="17px" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0">
+                        <TextBlock x:Name="TitleUpdate" FontFamily="{StaticResource Jura}" Text="{DynamicResource title_update}" Foreground="{StaticResource Color_Accent}" FontSize="17px" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0">
                             <TextBlock.Effect>
                                 <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
                             </TextBlock.Effect>
@@ -46,22 +46,29 @@
                             </StackPanel>
                             <ProgressBar x:Name="ProgressDownload" Value="0" Width="250" Height="10" Margin="0,10,0,0" Style="{StaticResource ProgressBarStyle}"/>
                             <TextBlock x:Name="SizeByte"  Text="{DynamicResource connection_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" Margin="0,5,0,0" FontSize="14px" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap"/>
+                            <Image Width="30" Height="auto" Margin="0,10,0,0">
+                                <Image.Style>
+                                    <Style TargetType="{x:Type Image}">
+                                        <Setter Property="Source" Value="{StaticResource DI_Download}"/>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
                         </StackPanel>
                     </Grid>
 
                     <Grid x:Name="QuestionUpdate"  Visibility="Visible">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="46*"/>
-                            <RowDefinition Height="27*"/>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="23*"/>
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0" Margin="0,0,0,8">
                             <StackPanel Orientation="Vertical">
-                                <StackPanel  Margin="0,15,0,0" HorizontalAlignment="Center">
-                                    <TextBlock Text="{DynamicResource text_update}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="325" FontFamily="{StaticResource Jura}" FontSize="15px" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap"/>
+                                <StackPanel  Margin="0,10,0,0" HorizontalAlignment="Center">
+                                    <TextBlock Margin="0,5,0,0" Text="{DynamicResource text_update}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="340" FontFamily="{StaticResource Jura}" FontSize="15px" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
-                                    <TextBlock x:Name="ViewChangelog"  Text="{DynamicResource log_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" TextDecorations="Underline" Cursor="Hand" PreviewMouseDown="ViewChangelog_PreviewMouseDown"/>
+                                <StackPanel Orientation="Vertical" Margin="0,5,0,0">
+                                    <TextBlock x:Name="ViewChangelog"  Text="{DynamicResource log_update}" Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" TextDecorations="Underline" Cursor="Hand" PreviewMouseDown="ViewChangelog_PreviewMouseDown"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
@@ -73,7 +80,7 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    
+
                 </Grid>
             </Grid>
         </Border>
