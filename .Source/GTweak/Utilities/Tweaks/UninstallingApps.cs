@@ -51,8 +51,8 @@ namespace GTweak.Utilities.Tweaks
             ["OneDrive"] = false,
             ["BingSports"] = false,
             ["BingFinance"] = false,
-            ["Yandex.Music"] = false,
-            ["Netflix"] = false,
+            ["MicrosoftFamily"] = false,
+            ["BingSearch"] = false,
             ["Outlook"] = false,
             ["QuickAssist"] = false
 
@@ -93,8 +93,8 @@ namespace GTweak.Utilities.Tweaks
             ["GetStarted"] = new List<string>(1) { "Microsoft.Getstarted" },
             ["BingSports"] = new List<string>(1) { "Microsoft.BingSports" },
             ["BingFinance"] = new List<string>(1) { "Microsoft.BingFinance" },
-            ["Yandex.Music"] = new List<string>(1) { "A025C540.Yandex.Music" },
-            ["Netflix"] = new List<string>(1) { "Netflix" },
+            ["MicrosoftFamily"] = new List<string>(1) { "MicrosoftCorporationII.MicrosoftFamily" },
+            ["BingSearch"] = new List<string>(1) { "Microsoft.BingSearch" },
             ["Outlook"] = new List<string>(1) { "Microsoft.OutlookForWindows" },
             ["QuickAssist"] = new List<string>(1) { "MicrosoftCorporationII.QuickAssist" }
         };

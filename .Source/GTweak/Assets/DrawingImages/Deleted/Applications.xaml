@@ -796,90 +796,69 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <DrawingImage x:Key="DA_DI_Netflix">
+    <DrawingImage x:Key="DA_DI_BingSearch">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V95 H95 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M95,95z M0,0z M24.7,87L70.3,87 93.1,47.5 70.3,8 24.7,8 1.9,47.5 24.7,87z">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="{DynamicResource Color_Inactive}" Thickness="2.7832" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
                 <DrawingGroup Opacity="1">
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M133.010526,469.094737L378.989474,469.094737 502,256 378.989474,42.905263 133.010526,42.905263 10,256z M133.010526,469.094737">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="15" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M150.989474,65.6L288.505263,435.494737 360,442.505263 222.505263,66.4z M150.989474,65.6">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M288.505263,247.410526C287.705263,245.094737,288.505263,66.294737,288.505263,66.294737L360,67.094737 361.810526,446.294737">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M220.905263,252.105263L220.905263,434.694737 150.189474,441.705263 150.989474,65.6">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M172.189474,421.010526L172.189474,305.494737">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M339.494737,313.2L339.494737,166.610526">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M171.705263,284.8L171.705263,253.705263">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M339.494737,145.894737L339.494737,87.894737">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M171.705263,234L171.705263,174.4">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="10" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M39.5,69.1L43.6,66.4 43.6,28.4C43.6,25.9,42.4,23.6,40.4,22.2L31.6,16.8C30.1,15.7,28,16.8,28,18.7L28,62.3C28,62.6 28,63.1 28.1,63.5 28.5,68.8 34.6,72.1 39.5,69.1z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M62,55.5L43.2,66.7 43.2,66.7 39.5,69C34.6,71.9 28.5,68.7 28,63.2 28.5,72 36.4,79 45.3,79 48.3,79 51.2,78.2 53.8,76.6 53.8,76.6 66.5,68.7 67.5,67.7">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M64.7,42.5L52.5,36.7C50.6,35.8,48.6,37.6,49.4,39.6L52.1,48.6C52.9,50.5,54.4,52,56.2,52.8L62.2,55.4C67.8,57.8 71.9,61.6 67.5,67.8 76.7,61.6 75.8,48 64.7,42.5z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
                 </DrawingGroup>
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <DrawingImage x:Key="DA_DI_YandexMusic">
+    <DrawingImage x:Key="DA_DI_MicrosoftFamily">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V95 H95 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M95,95z M0,0z M24.7,87L70.3,87 93.1,47.5 70.3,8 24.7,8 1.9,47.5 24.7,87z">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="{DynamicResource Color_Inactive}" Thickness="2.7832" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
                 <DrawingGroup Opacity="1">
-                    <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
-                        <GeometryDrawing Geometry="F1 M95,95z M0,0z M133.010526,469.094737L378.989474,469.094737 502,256 378.989474,42.905263 133.010526,42.905263 10,256z M133.010526,469.094737">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="15" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                    <GeometryDrawing Brush="{DynamicResource Color_Inactive}" Geometry="F1 M95,95z M0,0z M44.699219,15.863281C44.660156,15.863281 44.640625,15.863281 44.625,15.863281 28.480469,17.3125 15.808594,30.914062 15.808594,47.445312 15.808594,64.941406 30.019531,79.15625 47.519531,79.15625 65.015625,79.15625 79.226562,64.941406 79.226562,47.445312 79.226562,43.640625 78.5625,39.984375 77.316406,36.589844 77.058594,35.867188 76.257812,35.515625 75.554688,35.773438 75.40625,35.828125 75.277344,35.902344 75.164062,35.996094L68.171875,41.5625C67.761719,41.898438 67.578125,42.433594 67.6875,42.9375 68.003906,44.382812 68.171875,45.886719 68.171875,47.425781 68.171875,58.875 58.929688,68.09375 47.5,68.09375 36.070312,68.09375 26.828125,58.855469 26.828125,47.425781 26.828125,36.867188 34.714844,28.183594 44.921875,26.921875 45.605469,26.828125 46.125,26.253906 46.125,25.550781L46.125,17.238281C46.125,16.476562 45.515625,15.863281 44.753906,15.863281 44.734375,15.863281 44.71875,15.863281 44.699219,15.863281z M52.992188,16.253906C52.25,16.273438,51.636719,16.882812,51.636719,17.625L51.636719,35.828125C50.339844,35.367188 48.964844,35.03125 47.5,35.03125 40.671875,35.03125 35.085938,40.597656 35.085938,47.445312 35.085938,54.292969 40.652344,59.859375 47.5,59.859375 54.347656,59.859375 59.914062,54.292969 59.914062,47.445312L59.914062,31.042969C61.621094,32.339844 63.195312,33.789062 64.421875,35.53125 64.867188,36.164062 65.71875,36.292969 66.351562,35.867188 66.5,35.753906 66.628906,35.625 66.722656,35.476562L71.398438,28.09375C71.734375,27.574219 71.675781,26.90625 71.269531,26.441406 66.667969,21.246094 60.394531,17.570312 53.289062,16.273438 53.179688,16.253906 53.085938,16.234375 52.992188,16.253906z M43.363281,18.890625L43.363281,24.457031C32.414062,26.421875 24.066406,35.921875 24.066406,47.425781 24.066406,60.359375 34.566406,70.859375 47.5,70.859375 60.433594,70.859375 70.933594,60.359375 70.933594,47.425781 70.933594,45.996094 70.730469,44.605469 70.46875,43.234375L75.203125,39.429688C75.945312,41.988281 76.425781,44.644531 76.425781,47.425781 76.425781,63.421875 63.476562,76.371094 47.480469,76.371094 31.488281,76.371094 18.535156,63.421875 18.535156,47.425781 18.554688,32.84375 29.351562,20.910156 43.363281,18.890625z M54.382812,19.425781C59.839844,20.761719,64.699219,23.621094,68.449219,27.570312L65.351562,32.46875C63.585938,30.394531 61.582031,28.519531 59.207031,27.144531 58.558594,26.757812 57.703125,26.976562 57.316406,27.648438 57.1875,27.851562 57.128906,28.09375 57.128906,28.332031L57.128906,47.445312C57.128906,52.789062 52.824219,57.09375 47.480469,57.09375 42.136719,57.09375 37.832031,52.789062 37.832031,47.445312 37.832031,42.101562 42.136719,37.796875 47.480469,37.796875 49.246094,37.796875 50.878906,38.277344 52.304688,39.09375 52.957031,39.484375 53.808594,39.261719 54.199219,38.59375 54.328125,38.390625 54.382812,38.148438 54.382812,37.90625z M54.382812,19.425781" />
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M37.3,22.5C26.1,22.5 17.1,31.6 17.1,42.7 17.1,49.2 20.2,55 24.9,58.7L24.9,58.7C23.3,56.8 22.4,54.3 22.4,51.6 22.4,45.4 27.5,40.3 33.7,40.3L38.5,40.3C43.4,40.3 47.4,36.3 47.4,31.4 47.4,26.5 43.4,22.5 38.5,22.5L37.3,22.5 37.3,22.5z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M57.7,22.5C68.9,22.5 77.9,31.6 77.9,42.7 77.9,49.2 74.8,55 70.1,58.7L70.1,58.7C71.7,56.8 72.6,54.3 72.6,51.6 72.6,45.4 67.5,40.3 61.3,40.3L56.5,40.3C51.6,40.3 47.6,36.3 47.6,31.4 47.6,26.5 51.6,22.5 56.5,22.5L57.7,22.5 57.7,22.5z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M25,58.7L43.2,76.9C45.6,79.3,49.5,79.3,51.9,76.9L70,58.7">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M27.6,61.3C33.2,66.9,42.3,66.9,47.9,61.3L56,53.2C58.8,50.4,60.3,46.7,60.3,42.8L60.3,40.3">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M95,95z M0,0z M48.2,61L40.4,53.2C37.6,50.4,36.1,46.7,36.1,42.8L36.1,40.3">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="{DynamicResource Color_Inactive}" Thickness="3" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
                 </DrawingGroup>
             </DrawingGroup>
         </DrawingImage.Drawing>

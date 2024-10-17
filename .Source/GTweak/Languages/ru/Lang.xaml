@@ -254,8 +254,8 @@
     <v:String x:Key="Outlook_applications">Microsoft Outlook</v:String>
     <v:String x:Key="BingSports_applications">Bing Sports</v:String>
     <v:String x:Key="BingFinance_applications">Bing Finance</v:String>
-    <v:String x:Key="YandexMusic_applications">Яндекс Музыка</v:String>
-    <v:String x:Key="Netflix_applications">Netflix</v:String>
+    <v:String x:Key="MicrosoftFamily_applications">Семейная безопасность</v:String>
+    <v:String x:Key="BingSearch_applications">Поиск в Интернете из Bing</v:String>
     <v:String x:Key="QuickAssist_applications">Быстрая поддержка</v:String>
     <!--#endregion-->
 

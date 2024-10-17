@@ -219,10 +219,10 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="YandexMusic" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="MicrosoftFamily" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_YandexMusic}"/>
+                                <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftFamily}"/>
                             </Style>
                         </Image.Style>
                     </Image>
@@ -276,10 +276,10 @@
                             </Style>
                         </Image.Style>
                     </Image>
-                    <Image x:Name="Netflix" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                    <Image x:Name="BingSearch" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Netflix}"/>
+                                <Setter Property="Source" Value="{StaticResource A_DI_BingSearch}"/>
                             </Style>
                         </Image.Style>
                     </Image>

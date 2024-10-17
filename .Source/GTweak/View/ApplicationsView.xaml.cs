@@ -51,24 +51,13 @@ namespace GTweak.View
                 BackgroundQueue backgroundQueue = new BackgroundQueue();
                 await backgroundQueue.QueueTask(delegate
                 {
-                    if (applicationName != "YandexMusic")
-                    {
-                        UninstallingApps.IsAppDeletedList[applicationName] = true;
-                        UninstallingApps.DeletedApp(applicationName);
-                    }
-                    else
-                    {
-                        UninstallingApps.IsAppDeletedList["Yandex.Music"] = true;
-                        UninstallingApps.DeletedApp("Yandex.Music");
-                    }
+                    UninstallingApps.IsAppDeletedList[applicationName] = true;
+                    UninstallingApps.DeletedApp(applicationName);
                 });
                 if (backgroundQueue.IsQueueCompleted())
                 {
                     await Task.Delay(15000);
-                    if (applicationName != "YandexMusic")
-                        UninstallingApps.IsAppDeletedList[appImage.Name] = false;
-                    else
-                        UninstallingApps.IsAppDeletedList["Yandex.Music"] = false;
+                    UninstallingApps.IsAppDeletedList[appImage.Name] = false;
                     UpdateViewStateApps();
                 }
             }
@@ -185,8 +174,8 @@ namespace GTweak.View
             OneDrive.Source = !UninstallingApps.IsAppDeletedList["OneDrive"] ? UninstallingApps.IsOneDriveInstalled ? (DrawingImage)FindResource("A_DI_OneDrive") : (DrawingImage)FindResource("DA_DI_OneDrive") : (DrawingImage)FindResource("DI_Sandtime");
             BingSports.Source = !UninstallingApps.IsAppDeletedList["BingSports"] ? UninstallingApps.UserAppsList.Contains("Microsoft.BingSports") ? (DrawingImage)FindResource("A_DI_BingSports") : (DrawingImage)FindResource("DA_DI_BingSports") : (DrawingImage)FindResource("DI_Sandtime");
             BingFinance.Source = !UninstallingApps.IsAppDeletedList["BingFinance"] ? UninstallingApps.UserAppsList.Contains("Microsoft.BingFinance") ? (DrawingImage)FindResource("A_DI_BingFinance") : (DrawingImage)FindResource("DA_DI_BingFinance") : (DrawingImage)FindResource("DI_Sandtime");
-            YandexMusic.Source = !UninstallingApps.IsAppDeletedList["Yandex.Music"] ? UninstallingApps.UserAppsList.Contains("Yandex.Music") ? (DrawingImage)FindResource("A_DI_YandexMusic") : (DrawingImage)FindResource("DA_DI_YandexMusic") : (DrawingImage)FindResource("DI_Sandtime");
-            Netflix.Source = !UninstallingApps.IsAppDeletedList["Netflix"] ? UninstallingApps.UserAppsList.Contains("Netflix") ? (DrawingImage)FindResource("A_DI_Netflix") : (DrawingImage)FindResource("DA_DI_Netflix") : (DrawingImage)FindResource("DI_Sandtime");
+            MicrosoftFamily.Source = !UninstallingApps.IsAppDeletedList["MicrosoftFamily"] ? UninstallingApps.UserAppsList.Contains("MicrosoftFamily") ? (DrawingImage)FindResource("A_DI_MicrosoftFamily") : (DrawingImage)FindResource("DA_DI_MicrosoftFamily") : (DrawingImage)FindResource("DI_Sandtime");
+            BingSearch.Source = !UninstallingApps.IsAppDeletedList["BingSearch"] ? UninstallingApps.UserAppsList.Contains("BingSearch") ? (DrawingImage)FindResource("A_DI_BingSearch") : (DrawingImage)FindResource("DA_DI_BingSearch") : (DrawingImage)FindResource("DI_Sandtime");
             Outlook.Source = !UninstallingApps.IsAppDeletedList["Outlook"] ? UninstallingApps.UserAppsList.Contains("Microsoft.OutlookForWindows") ? (DrawingImage)FindResource("A_DI_Outlook") : (DrawingImage)FindResource("DA_DI_Outlook") : (DrawingImage)FindResource("DI_Sandtime");
             QuickAssist.Source = !UninstallingApps.IsAppDeletedList["QuickAssist"] ? UninstallingApps.UserAppsList.Contains("MicrosoftCorporationII.QuickAssist") ? (DrawingImage)FindResource("A_DI_QuickAssist") : (DrawingImage)FindResource("DA_DI_QuickAssist") : (DrawingImage)FindResource("DI_Sandtime");
         }
