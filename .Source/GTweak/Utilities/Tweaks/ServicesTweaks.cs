@@ -2,6 +2,7 @@
 using GTweak.View;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -13,7 +14,14 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : Firewall
     {
-        private static readonly string filesPathUpdate = Settings.PathSystemDisk + "Windows\\System32\\Tasks\\Microsoft\\Windows";
+        private static readonly SortedList<string, string> WinUpdatePaths = new SortedList<string, string>
+        {
+            ["MoUso_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
+            ["MoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
+            ["UpdateFolder"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\Tasks\Microsoft\Windows"),
+            ["RenMoUso_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\BlockUpdate-GTweak.exe"),
+            ["RenMoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\BlockUpdate-GTweak.exe")
+        };
 
         internal void ViewServices(ServicesView servicesV)
         {
@@ -209,11 +217,11 @@ namespace GTweak.Utilities.Tweaks
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc", "Start", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc", "Start", string.Empty).ToString() != "4" ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", string.Empty).ToString() != "4")
+                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", string.Empty).ToString() != "4" ||
+                !File.Exists(WinUpdatePaths["RenMoUso_New"]) & !File.Exists(WinUpdatePaths["RenMoUso_Old"]))
                 servicesV.TglButton15.StateNA = true;
             else
                 servicesV.TglButton15.StateNA = false;
-
 
             if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", string.Empty).ToString() != "4" ||
@@ -598,6 +606,16 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton15":
                     BlockWindowsUpdate(isChoose);
+
+                    string renameMoUsoNew = isChoose ? "rename " + WinUpdatePaths["MoUso_New"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_New"] + " MoUsoCoreWorker.exe";
+                    string renameMoUsoOld = isChoose ? "rename " + WinUpdatePaths["MoUso_Old"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_Old"] + " MoUsoCoreWorker.exe";
+
+                    using (BackgroundWorker backgroundWorker = new BackgroundWorker())
+                    {
+                        backgroundWorker.DoWork += delegate { TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c {renameMoUsoNew} & {renameMoUsoOld}"); };
+                        backgroundWorker.RunWorkerAsync();
+                    }
+
                     if (isChoose)
                     {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wisvc", "Start", 4, RegistryValueKind.DWord);
@@ -626,7 +644,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     using (BackgroundWorker backgroundWorker = new BackgroundWorker())
                     {
-                        backgroundWorker.DoWork += (s, e) => { ChangeAccessUpdateFolder(isChoose); };
+                        backgroundWorker.DoWork += delegate { ChangeAccessUpdateFolders(isChoose); };
                         backgroundWorker.RunWorkerAsync();
                     }
                     break;
@@ -828,7 +846,7 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        private async static void ChangeAccessUpdateFolder(bool isDenyAccess)
+        private async static void ChangeAccessUpdateFolders(bool isDenyAccess)
         {
             void SetFullAccess(string path)
             {
@@ -852,7 +870,7 @@ namespace GTweak.Utilities.Tweaks
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" & " +
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" & " +
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\" ");
+                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\"");
             }
 
             try
@@ -873,12 +891,13 @@ namespace GTweak.Utilities.Tweaks
 
                     ChangeStateTask();
 
+
                     await Task.Delay(1000);
 
                     Process.Start(new ProcessStartInfo()
                     {
-                        Arguments = @"/c rd /s /q " + filesPathUpdate + "/(GTweak UpdateOrchestrator) & " +
-                        "rd /s /q " + filesPathUpdate + "/(GTweak WindowsUpdate)",
+                        Arguments = @"/c rd /s /q " + WinUpdatePaths["UpdateFolder"] + "/(GTweak UpdateOrchestrator) & " +
+                        "rd /s /q " + WinUpdatePaths["UpdateFolder"] + "/(GTweak WindowsUpdate)",
                         WindowStyle = ProcessWindowStyle.Hidden,
                         CreateNoWindow = true,
                         FileName = "cmd.exe"
@@ -887,18 +906,18 @@ namespace GTweak.Utilities.Tweaks
 
                     await Task.Delay(200);
 
-                    if (Directory.Exists(filesPathUpdate + "\\UpdateOrchestrator"))
-                        Directory.Move(filesPathUpdate + "\\UpdateOrchestrator", filesPathUpdate + "\\(GTweak UpdateOrchestrator)");
-                    if (Directory.Exists(filesPathUpdate + "\\WindowsUpdate"))
-                        Directory.Move(filesPathUpdate + "\\WindowsUpdate", filesPathUpdate + "\\(GTweak WindowsUpdate)");
+                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\UpdateOrchestrator"))
+                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\UpdateOrchestrator", WinUpdatePaths["UpdateFolder"] + "\\(GTweak UpdateOrchestrator)");
+                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\WindowsUpdate"))
+                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\WindowsUpdate", WinUpdatePaths["UpdateFolder"] + "\\(GTweak WindowsUpdate)");
                 }
                 else
                 {
 
-                    if (Directory.Exists(filesPathUpdate + "\\(GTweak UpdateOrchestrator)"))
-                        Directory.Move(filesPathUpdate + "\\(GTweak UpdateOrchestrator)", filesPathUpdate + "\\UpdateOrchestrator");
-                    if (Directory.Exists(filesPathUpdate + "\\(GTweak WindowsUpdate)"))
-                        Directory.Move(filesPathUpdate + "\\(GTweak WindowsUpdate)", filesPathUpdate + "\\WindowsUpdate");
+                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\(GTweak UpdateOrchestrator)"))
+                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\(GTweak UpdateOrchestrator)", WinUpdatePaths["UpdateFolder"] + "\\UpdateOrchestrator");
+                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\(GTweak WindowsUpdate)"))
+                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\(GTweak WindowsUpdate)", WinUpdatePaths["UpdateFolder"] + "\\WindowsUpdate");
 
                     await Task.Delay(500);
 
