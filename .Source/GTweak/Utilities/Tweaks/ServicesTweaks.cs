@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
-using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -846,7 +845,7 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        private async static void ChangeAccessUpdateFolders(bool isDenyAccess)
+        private static void ChangeAccessUpdateFolders(bool isDenyAccess)
         {
             void SetFullAccess(string path)
             {
@@ -856,10 +855,8 @@ namespace GTweak.Utilities.Tweaks
                 File.SetAccessControl(path, security);
             }
 
-            void ChangeStateTask()
+            void ChangeStateTask(string valueState = "/disable")
             {
-                string valueState = isDenyAccess ? "/disable" : "/enable";
-
                 TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" & " +
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" & " +
                 "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" & " +
@@ -875,7 +872,9 @@ namespace GTweak.Utilities.Tweaks
 
             try
             {
-                if (isDenyAccess)
+                if (!isDenyAccess)
+                    ChangeStateTask("/enable");
+                else
                 {
                     SetFullAccess(Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download");
                     SetFullAccess(Settings.PathSystemDisk + @"Windows\System32\catroot2");
@@ -888,38 +887,6 @@ namespace GTweak.Utilities.Tweaks
                         CreateNoWindow = true,
                         FileName = "cmd.exe"
                     });
-
-                    ChangeStateTask();
-
-
-                    await Task.Delay(1000);
-
-                    Process.Start(new ProcessStartInfo()
-                    {
-                        Arguments = @"/c rd /s /q " + WinUpdatePaths["UpdateFolder"] + "/(GTweak UpdateOrchestrator) & " +
-                        "rd /s /q " + WinUpdatePaths["UpdateFolder"] + "/(GTweak WindowsUpdate)",
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        CreateNoWindow = true,
-                        FileName = "cmd.exe"
-                    });
-
-
-                    await Task.Delay(200);
-
-                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\UpdateOrchestrator"))
-                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\UpdateOrchestrator", WinUpdatePaths["UpdateFolder"] + "\\(GTweak UpdateOrchestrator)");
-                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\WindowsUpdate"))
-                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\WindowsUpdate", WinUpdatePaths["UpdateFolder"] + "\\(GTweak WindowsUpdate)");
-                }
-                else
-                {
-
-                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\(GTweak UpdateOrchestrator)"))
-                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\(GTweak UpdateOrchestrator)", WinUpdatePaths["UpdateFolder"] + "\\UpdateOrchestrator");
-                    if (Directory.Exists(WinUpdatePaths["UpdateFolder"] + "\\(GTweak WindowsUpdate)"))
-                        Directory.Move(WinUpdatePaths["UpdateFolder"] + "\\(GTweak WindowsUpdate)", WinUpdatePaths["UpdateFolder"] + "\\WindowsUpdate");
-
-                    await Task.Delay(500);
 
                     ChangeStateTask();
                 }

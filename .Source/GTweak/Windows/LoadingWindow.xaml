@@ -15,7 +15,12 @@
     </Window.DataContext>
     
     <Grid>
-        <Image Source="{StaticResource DI_Splash}">
+        <Image>
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Source" Value="{StaticResource DI_Splash}"/>
+                </Style>
+            </Image.Style>
             <Image.Effect>
                 <DropShadowEffect BlurRadius="5" ShadowDepth="0" Opacity="0.7" Color="#000000" />
             </Image.Effect>
@@ -50,12 +55,8 @@
                 </Border>
             </Border>
 
-            
-
             <ProgressBar Width="100" Height="5" Margin="0,20,0,0" IsIndeterminate="True" Style="{StaticResource ProgressBarStyle}"/>
-
             <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,20,0,0"/>
-
         </StackPanel>
 
     </Grid>

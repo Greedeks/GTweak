@@ -95,13 +95,13 @@ namespace GTweak.Windows
             EasingDoubleKeyFrame fromFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right)
             {
                 KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
-                EasingFunction = new QuadraticEase()
+                EasingFunction = new PowerEase()
             };
 
             EasingDoubleKeyFrame toFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10)
             {
                 KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = new QuadraticEase()
+                EasingFunction = new PowerEase()
             };
 
             doubleAnimKeyFrames.KeyFrames.Add(fromFrame);

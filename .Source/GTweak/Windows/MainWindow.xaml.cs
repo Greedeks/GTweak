@@ -31,6 +31,7 @@ namespace GTweak
                 "Light" => 1,
                 _ => 2,
             };
+
             App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
             App.ThemeChanged += delegate { new RebootWindow().ShowDialog(); };
         }
