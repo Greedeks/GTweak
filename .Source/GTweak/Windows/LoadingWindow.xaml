@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:GTweak.Windows" 
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="300" Width="300"
+        Height="260" Width="260"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
         IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered" Closing="Window_Closing">
     <Window.DataContext>
@@ -15,13 +15,13 @@
     </Window.DataContext>
 
     <Grid>
-        <Path Stroke="{StaticResource Color_Background}" StrokeThickness="6" Opacity="0.5" Margin="149,152,-152,-152">
+        <Path Stroke="{StaticResource Color_Background}" StrokeThickness="6" Margin="130,130,-130,-130" Opacity="0.5">
             <Path.Data>
                 <EllipseGeometry RadiusX="120" RadiusY="120"/>
             </Path.Data>
         </Path>
 
-        <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="6" Margin="149,152,-152,-152">
+        <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="6" Margin="130,130,-130,-130">
             <Path.Effect>
                 <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
             </Path.Effect>
