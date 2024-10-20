@@ -155,18 +155,6 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
-    <DrawingImage x:Key="DI_Splash">
-        <DrawingImage.Drawing>
-            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
-                <GeometryDrawing Brush="{DynamicResource Color_Background}" Geometry="F1 M512,512z M0,0z M141.1,467.1L371.1,467.1C377.3,467.1,383,463.8,386,458.5L501,259.3C504.1,254,504.1,247.4,501,242L386,42.9C382.9,37.6,377.2,34.3,371.1,34.3L141.1,34.3C134.9,34.3,129.2,37.6,126.2,42.9L11.2,242.1C8.1,247.4,8.1,254,11.2,259.3L126.1,458.5C129.2,463.8,134.9,467.1,141.1,467.1z">
-                    <GeometryDrawing.Pen>
-                        <Pen Brush="{DynamicResource Color_Accent}" Thickness="1.2" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
-                    </GeometryDrawing.Pen>
-                </GeometryDrawing>
-            </DrawingGroup>
-        </DrawingImage.Drawing>
-    </DrawingImage>
-
     <DrawingImage x:Key="DI_Sandtime">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V95 H95 V0 H0 Z">

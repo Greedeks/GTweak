@@ -7,25 +7,50 @@
         xmlns:local="clr-namespace:GTweak.Windows" 
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="250" Width="250"
+        Height="300" Width="300"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
         IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered" Closing="Window_Closing">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-    
-    <Grid>
-        <Image>
-            <Image.Style>
-                <Style TargetType="Image">
-                    <Setter Property="Source" Value="{StaticResource DI_Splash}"/>
-                </Style>
-            </Image.Style>
-            <Image.Effect>
-                <DropShadowEffect BlurRadius="5" ShadowDepth="0" Opacity="0.7" Color="#000000" />
-            </Image.Effect>
-        </Image>
 
+    <Grid>
+        <Path Stroke="{StaticResource Color_Background}" StrokeThickness="6" Opacity="0.5" Margin="149,152,-152,-152">
+            <Path.Data>
+                <EllipseGeometry RadiusX="120" RadiusY="120"/>
+            </Path.Data>
+        </Path>
+
+        <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="6" Margin="149,152,-152,-152">
+            <Path.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
+            </Path.Effect>
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="0,-120">
+                        <ArcSegment Point="102,-62.88" Size="120,120"
+                            IsLargeArc="False" SweepDirection="Clockwise"/>
+                    </PathFigure>
+                    <PathGeometry.Transform>
+                        <RotateTransform/>
+                    </PathGeometry.Transform>
+                </PathGeometry>
+            </Path.Data>
+            <Path.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard Timeline.DesiredFrameRate="400">
+                            <DoubleAnimation Storyboard.TargetProperty="Data.Transform.Angle" To="360" Duration="0:0:4" SpeedRatio="3" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Path.Triggers>
+        </Path>
+
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Ellipse Height="220" Width="220" Fill="{StaticResource Color_Background}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.95"/>
+       
+        
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">
 
             <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
@@ -44,20 +69,18 @@
                 </TextBlock.Triggers>
             </TextBlock>
 
-            <Border  BorderBrush="{StaticResource Color_Accent}" BorderThickness="1.2" CornerRadius="50" Width="75" Height="75" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,26,0,0">
-                <Border CornerRadius="50">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
-                    </Border.Effect>
-                    <Border.Background>
-                        <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
-                    </Border.Background>
+                <Border  BorderBrush="{StaticResource Color_Accent}" BorderThickness="1.2" CornerRadius="50" Width="75" Height="75" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,26,0,0">
+                    <Border CornerRadius="50">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
+                        </Border.Effect>
+                        <Border.Background>
+                            <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
+                        </Border.Background>
+                    </Border>
                 </Border>
-            </Border>
-
-            <ProgressBar Width="100" Height="5" Margin="0,20,0,0" IsIndeterminate="True" Style="{StaticResource ProgressBarStyle}"/>
-            <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,20,0,0"/>
+                <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,20,0,0"/>
         </StackPanel>
-
+        </Grid>
     </Grid>
 </Window>
