@@ -20,7 +20,7 @@
 
             <Grid Margin="0" Background="Transparent">
 
-                <Grid x:Name="QuestionUpdate" Visibility="Hidden">
+                <Grid x:Name="QuestionUpdate" Visibility="Visible">
                     <Grid Margin="0" Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="31*"/>
@@ -92,7 +92,7 @@
                     
                 </Grid>
                 
-                <Grid x:Name="DownloadUpdate" Visibility="Visible">
+                <Grid x:Name="DownloadUpdate" Visibility="Hidden">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Height="140" Margin="20,20,0,0">
                         <StackPanel Orientation="Horizontal">
                             <Image Width="25">

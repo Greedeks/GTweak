@@ -49,25 +49,24 @@
 
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
             <Ellipse Height="200" Width="200" Fill="{StaticResource Color_Background}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-       
-        
-        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0">
 
-            <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <StringAnimationUsingKeyFrames  Storyboard.TargetName="TextTittle" Storyboard.TargetProperty="(TextBlock.Text)" Duration="0:0:0:8" SpeedRatio="10" FillBehavior="HoldEnd" RepeatBehavior="Forever">
-                                    <DiscreteStringKeyFrame Value="{DynamicResource title1_load}" KeyTime="0:0:0:1"/>
-                                    <DiscreteStringKeyFrame Value="{DynamicResource title2_load}" KeyTime="0:0:0:2" />
-                                    <DiscreteStringKeyFrame Value="{DynamicResource title3_load}" KeyTime="0:0:0:3" />
-                                </StringAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0">
+
+                <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="TextBlock.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <StringAnimationUsingKeyFrames  Storyboard.TargetName="TextTittle" Storyboard.TargetProperty="(TextBlock.Text)" Duration="0:0:0:8" SpeedRatio="10" FillBehavior="HoldEnd" RepeatBehavior="Forever">
+                                        <DiscreteStringKeyFrame Value="{DynamicResource title1_load}" KeyTime="0:0:0:1"/>
+                                        <DiscreteStringKeyFrame Value="{DynamicResource title2_load}" KeyTime="0:0:0:2" />
+                                        <DiscreteStringKeyFrame Value="{DynamicResource title3_load}" KeyTime="0:0:0:3" />
+                                    </StringAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
 
                 <Border  BorderBrush="{StaticResource Color_Accent}" BorderThickness="1.2" CornerRadius="50" Width="75" Height="75" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
                     <Border CornerRadius="50">
@@ -79,8 +78,8 @@
                         </Border.Background>
                     </Border>
                 </Border>
-                <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,19,0,0"/>
-        </StackPanel>
+                <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,14,0,0"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

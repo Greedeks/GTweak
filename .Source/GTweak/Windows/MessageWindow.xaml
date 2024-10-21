@@ -31,7 +31,7 @@
                             </Image>
                             <TextBlock Text="{DynamicResource title_message}" Margin="10,0,0,0"  Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="20px" HorizontalAlignment="Left" TextAlignment="Center"/>
                         </StackPanel>
-                        <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="340" FontFamily="{StaticResource Jura}" FontSize="15px" TextWrapping="Wrap"
+                        <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="340" FontFamily="{StaticResource Jura}" FontSize="14px" TextWrapping="Wrap"
                            HorizontalAlignment="Center" TextAlignment="Left" FontStretch="Medium" Margin="0,10,0,0">
                                 <Run Text="{DynamicResource text0_message}"/>
                                 <Run Text="{DynamicResource text1_message}" Foreground="{StaticResource Color_Accent}"/>
@@ -60,8 +60,9 @@
                     </StackPanel>
                 </Grid>
                 
-                <Grid Grid.Row="2" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Margin="0,0,20,20">
-                    <Button x:Name="BtnAccept" Content="{DynamicResource button_message}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnAccept_PreviewMouseDown"/>
+                <Grid Grid.Row="2" VerticalAlignment="Bottom"  Margin="0,0,20,20">
+                    <TextBlock Text="{DynamicResource noty_message}" Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" MaxWidth="350" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="20,5,0,0"/>
+                    <Button x:Name="BtnAccept" Content="{DynamicResource button_message}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnAccept_PreviewMouseDown"/>
                 </Grid>
             </Grid>
         </Border>
