@@ -90,9 +90,9 @@
     <!--#endregion-->
 
     <!--#region Import Window -->
-    <v:String x:Key="title_win_import">Применяются ваши твики</v:String>
-    <v:String x:Key="wait_win_import">Это занимает некоторое время</v:String>
-    <v:String x:Key="warning_win_import">Не стоит закрывать окно насильно</v:String>
+    <v:String x:Key="title_win_import">Импорт твиков</v:String>
+    <v:String x:Key="wait_win_import">Это занимает некоторое время...</v:String>
+    <v:String x:Key="warning_win_import">Принудительно закрывать окно нет необходимости</v:String>
     <!--#endregion-->
 
     <!--#region Reboot Window -->
