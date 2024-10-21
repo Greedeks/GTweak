@@ -33,7 +33,7 @@ namespace GTweak
             };
 
             App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
-            App.ThemeChanged += delegate { new RebootWindow().ShowDialog(); };
+            App.ThemeChanged += delegate { this.Close(); new RebootWindow().ShowDialog(); };
         }
 
         #region Button Title/Animation Window
