@@ -21,10 +21,12 @@
     <!--#endregion-->
 
     <!--#region Message Window -->
+    <v:String x:Key="title_message">Упс..</v:String>
     <v:String x:Key="text0_message">Создание копий программы</v:String>
     <v:String x:Key="text1_message">запрещено,</v:String>
     <v:String x:Key="text2_message">для предотвращения ошибок и не непредвиденных ситуаций, сценариев.</v:String>
     <v:String x:Key="button_message">Понятно (05)</v:String>
+    <v:String x:Key="title_nosupport_message">Не поддерживается</v:String>
     <v:String x:Key="text0_nosupport_message">Утилита не поддерживает вашу Windows. Дальнейший запуск</v:String>
     <v:String x:Key="text1_nosupport_message">невозможен,</v:String>
     <v:String x:Key="text2_nosupport_message">для предотвращения критических ошибок.</v:String>

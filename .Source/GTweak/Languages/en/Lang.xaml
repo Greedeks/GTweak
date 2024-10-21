@@ -21,10 +21,12 @@
     <!--#endregion-->
 
     <!--#region Message Window -->
+    <v:String x:Key="title_message">Oops..</v:String>
     <v:String x:Key="text0_message">The creation of copies of the program is</v:String>
     <v:String x:Key="text1_message">prohibited,</v:String>
     <v:String x:Key="text2_message">in order to prevent errors and unforeseen situations, scenarios.</v:String>
     <v:String x:Key="button_message">Accept (05)</v:String>
+    <v:String x:Key="title_nosupport_message">Not supported</v:String>
     <v:String x:Key="text0_nosupport_message">The utility does not support your Windows. No further launch is</v:String>
     <v:String x:Key="text1_nosupport_message">possible,</v:String>
     <v:String x:Key="text2_nosupport_message">GTweak will be closed to prevent critical errors.</v:String>
