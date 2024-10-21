@@ -307,6 +307,7 @@ namespace GTweak.Utilities.Tweaks
         internal sealed class UtilityСonfiguration
         {
             internal static bool IsNeedUpdate = false;
+            internal static string DownloadVersion = string.Empty;
 
             internal sealed class GitVersionUtility
             {
@@ -331,7 +332,10 @@ namespace GTweak.Utilities.Tweaks
                 GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
 
                 if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim() != gitVersionUtility.СurrentVersion)
+                {
                     IsNeedUpdate = true;
+                    DownloadVersion = gitVersionUtility.СurrentVersion;
+                }
             }
 
         }

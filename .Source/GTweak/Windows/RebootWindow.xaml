@@ -12,9 +12,9 @@
         IsTabStop="False" Opacity="0.98" Topmost="True" ShowInTaskbar="False" Loaded="Window_Loaded">
     <Grid>
         <Ellipse Height="140" Width="140" Fill="{StaticResource Color_Background_Dark}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Ellipse Height="160" Width="160" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Ellipse Height="154" Width="154" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5"/>
         
-            <xrpb:RadialProgressBar x:Name="RestartProgress" Value="20" Maximum="100" Width="170" Height="170" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <xrpb:RadialProgressBar x:Name="RestartProgress" Value="20" Maximum="100" Width="165" Height="165" ArcWidth="5.5" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <xrpb:RadialProgressBar.Foreground>
                     <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
                         <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>

@@ -1,8 +1,8 @@
 ﻿using GTweak.Utilities;
-using GTweak.Utilities.Helpers;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows;
@@ -18,6 +18,8 @@ namespace GTweak.Windows
         public UpdateWindow()
         {
             InitializeComponent();
+            CurrentVerison.Text = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
+            DownloadVersion.Text =  NewVerison.Text = Utilities.Tweaks.SystemData.UtilityСonfiguration.DownloadVersion;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -36,8 +38,6 @@ namespace GTweak.Windows
                 EasingFunction = new QuadraticEase()
             };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
-            BeginAnimation(OpacityProperty, doubleAnim);
-            new TypewriterAnimation(ViewChangelog.Text, ViewChangelog, TimeSpan.FromSeconds(0.3));
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -50,16 +50,16 @@ namespace GTweak.Windows
             BeginAnimation(OpacityProperty, doubleAnim);
         }
 
-        private void ViewChangelog_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                Process.Start("https://github.com/Greedeks/GTweak/releases/latest");
-        }
-
-        private void BtnLater_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.Close();
+        }
+
+        private void BtnLog_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                Process.Start("https://github.com/Greedeks/GTweak/releases/latest");
         }
 
         private void BtnUpdate_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -68,7 +68,6 @@ namespace GTweak.Windows
             {
                 QuestionUpdate.Visibility = Visibility.Hidden;
                 DownloadUpdate.Visibility = Visibility.Visible;
-                TitleUpdate.Text = "GTweak";
 
                 try
                 {

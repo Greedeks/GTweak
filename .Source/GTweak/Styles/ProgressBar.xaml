@@ -24,14 +24,14 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="PART_Track" CornerRadius="2" BorderThickness="1">
+                        <Border x:Name="PART_Track" CornerRadius="4" BorderThickness="1" Background="{StaticResource Color_Background_RadialProgressBar}">
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="{StaticResource Color_Border_Gradient_1}" />
+                                <SolidColorBrush Color="Transparent" />
                             </Border.BorderBrush>
                         </Border>
-                        <Border x:Name="PART_Indicator" CornerRadius="1" BorderThickness="1" HorizontalAlignment="Left" Background="{TemplateBinding Foreground}">
+                        <Border x:Name="PART_Indicator" CornerRadius="4" BorderThickness="1" HorizontalAlignment="Left" Background="{TemplateBinding Foreground}">
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="{StaticResource Color_Border_Gradient_1}"/>
+                                <SolidColorBrush Color="Transparent"/>
                             </Border.BorderBrush>
                             <Grid ClipToBounds="True" x:Name="Animation">
                                 <Rectangle x:Name="PART_GlowRect" Width="60" HorizontalAlignment="Left"  Fill="{StaticResource Color_Accent}" Margin="-100,0,0,0"/>
