@@ -496,19 +496,21 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton12":
-                    if (isChoose)
+                    Thread _thread = new Thread(() =>
                     {
-                        counTaskWorking = 0;
-                        new Thread(() => DisablingTasks()).Start();
-                        new Thread(() => DisablingTasks()).IsBackground = true;
-
-                    }
-                    else
-                    {
-                        counTaskWorking = 2;
-                        new Thread(() => EnablingTasks()).Start();
-                        new Thread(() => EnablingTasks()).IsBackground = true;
-                    }
+                        if (isChoose)
+                        {
+                            counTaskWorking = 0;
+                            DisablingTasks();
+                        }
+                        else
+                        {
+                            counTaskWorking = 2;
+                            EnablingTasks();
+                        }
+                    })
+                    { IsBackground = true };
+                    _thread.Start();
                     break;
                 case "TglButton13":
                     string argumentsNetsh = string.Empty;
@@ -572,22 +574,17 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton18":
-                    {
-                        new Thread(() => SetPowercfg(isChoose)).Start();
-                        new Thread(() => SetPowercfg(isChoose)).IsBackground = true;
-                    }
+                    SetPowercfg(isChoose);
                     break;
                 case "TglButton19":
                     if (isChoose)
                     {
-                        new Thread(() => BluetoothStatusSet()).Start();
-                        new Thread(() => BluetoothStatusSet()).IsBackground = true;
+                        BluetoothStatusSet();
                         isBluetoothStatus = false;
                     }
                     else
                     {
-                        new Thread(() => BluetoothStatusSet("'on'")).Start();
-                        new Thread(() => BluetoothStatusSet("'on'")).IsBackground = true;
+                        BluetoothStatusSet("'on'");
                         isBluetoothStatus = true;
                     }
                     break;
@@ -635,12 +632,14 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        private static void BluetoothStatusSet(in string status = "'off'")
+        private static void BluetoothStatusSet(string status = "'off'")
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            Thread _thread = new Thread(() =>
             {
-                FileName = @"powershell.exe",
-                Arguments = @"Add-Type -AssemblyName System.Runtime.WindowsRuntime
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = @"powershell.exe",
+                    Arguments = @"Add-Type -AssemblyName System.Runtime.WindowsRuntime
                     $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
                     Function Await($WinRtTask, $ResultType) {
                         $asTask = $asTaskGeneric.MakeGenericMethod($ResultType)
@@ -655,12 +654,15 @@ namespace GTweak.Utilities.Tweaks
                     $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
                     [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
                     Await ($bluetooth.SetStateAsync(" + status + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null",
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-            using Process process = new Process() { StartInfo = startInfo };
-            process.Start();
-            process.Close();
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+                using Process process = new Process() { StartInfo = startInfo };
+                process.Start();
+                process.Close();
+            })
+            { IsBackground = true };
+            _thread.Start();
         }
 
         private static void EnablingTasks()
@@ -678,7 +680,6 @@ namespace GTweak.Utilities.Tweaks
                             _task.Definition.Settings.Enabled = true;
                             _task.RegisterChanges();
                         }
-
                     }
                 }
             });
@@ -704,100 +705,104 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        private async static void SetPowercfg(bool isChoose)
+        private static void SetPowercfg(bool isChoose)
         {
-            Process _powercfg = new Process()
+            Thread _thread = new Thread(async () =>
             {
-                StartInfo = {
+                Process _powercfg = new Process()
+                {
+                    StartInfo = {
                         FileName = "powercfg",
                         CreateNoWindow = true,
                         WindowStyle = ProcessWindowStyle.Hidden
                     },
-            };
+                };
 
-            string _serchScheme = default,
-                unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
-                inputPath = Settings.PathTempFiles + @"\UltimatePerformance.pow";
+                string _serchScheme = default,
+                    unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
+                    inputPath = Settings.PathTempFiles + @"\UltimatePerformance.pow";
 
-            try
-            {
-                if (isChoose)
+                try
                 {
-                    Parallel.Invoke(() =>
+                    if (isChoose)
                     {
-                        foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE IsActive=false").Get())
+                        Parallel.Invoke(() =>
                         {
-                            _serchScheme = Convert.ToString(managementObj["InstanceID"]);
-                            _serchScheme = Regex.Match(_serchScheme, @"\{([^)]*)\}").Groups[1].Value;
-                            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + _serchScheme + "", "Description", string.Empty).ToString().Contains("-18") &&
-                            Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + _serchScheme + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
+                            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE IsActive=false").Get())
                             {
-                                using (_powercfg)
+                                _serchScheme = Convert.ToString(managementObj["InstanceID"]);
+                                _serchScheme = Regex.Match(_serchScheme, @"\{([^)]*)\}").Groups[1].Value;
+                                if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + _serchScheme + "", "Description", string.Empty).ToString().Contains("-18") &&
+                                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + _serchScheme + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
                                 {
-                                    _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
-                                    _powercfg.Start();
+                                    using (_powercfg)
+                                    {
+                                        _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
+                                        _powercfg.Start();
 
-                                    _powercfg.StartInfo.Arguments = unlockFrequency;
-                                    _powercfg.Start();
+                                        _powercfg.StartInfo.Arguments = unlockFrequency;
+                                        _powercfg.Start();
+                                    }
                                 }
                             }
-                        }
 
-                    });
+                        });
 
-                    if (string.IsNullOrEmpty(_serchScheme))
-                    {
-                        byte[] _byte = default;
-                        using (MemoryStream fileOut = new MemoryStream(Properties.Resources.Ultimate_Performance_pow))
-                        using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        using (MemoryStream ms = new MemoryStream())
+                        if (string.IsNullOrEmpty(_serchScheme))
                         {
-                            gz.CopyTo(ms);
-                            _byte = ms.ToArray();
+                            byte[] _byte = default;
+                            using (MemoryStream fileOut = new MemoryStream(Properties.Resources.Ultimate_Performance_pow))
+                            using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                gz.CopyTo(ms);
+                                _byte = ms.ToArray();
+                            }
+
+                            Directory.CreateDirectory(Settings.PathTempFiles);
+                            File.WriteAllBytes(Settings.PathTempFiles + @"\UltimatePerformance.pow", _byte);
+
+
+                            string _guid = Guid.NewGuid().ToString("D");
+
+                            using (_powercfg)
+                            {
+                                _powercfg.StartInfo.Arguments = $"-import \"{inputPath}\" {_guid}";
+                                _powercfg.Start();
+
+                                await Task.Delay(5);
+
+                                _powercfg.StartInfo.Arguments = $"/setactive {_guid}";
+                                _powercfg.Start();
+
+                                _powercfg.StartInfo.Arguments = unlockFrequency;
+                                _powercfg.Start();
+                            }
                         }
+                    }
+                    else
+                    {
+                        string _activePowerScheme = @"Microsoft:PowerPlan\\{" + Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes").GetValue("ActivePowerScheme").ToString() + "}";
 
-                        Directory.CreateDirectory(Settings.PathTempFiles);
-                        File.WriteAllBytes(Settings.PathTempFiles + @"\UltimatePerformance.pow", _byte);
+                        Parallel.Invoke(() =>
+                        {
+                            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + _activePowerScheme + "'").Get())
+                                _serchScheme = Convert.ToString(managementObj["InstanceID"]);
+                        });
 
-
-                        string _guid = Guid.NewGuid().ToString("D");
+                        _serchScheme = Regex.Match(_serchScheme, @"\{([^)]*)\}").Groups[1].Value;
 
                         using (_powercfg)
                         {
-                            _powercfg.StartInfo.Arguments = $"-import \"{inputPath}\" {_guid}";
-                            _powercfg.Start();
-
-                            await Task.Delay(5);
-
-                            _powercfg.StartInfo.Arguments = $"/setactive {_guid}";
-                            _powercfg.Start();
-
-                            _powercfg.StartInfo.Arguments = unlockFrequency;
+                            _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
                             _powercfg.Start();
                         }
                     }
                 }
-                else
-                {
-                    string _activePowerScheme = @"Microsoft:PowerPlan\\{" + Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes").GetValue("ActivePowerScheme").ToString() + "}";
-
-                    Parallel.Invoke(() =>
-                    {
-                        foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + _activePowerScheme + "'").Get())
-                            _serchScheme = Convert.ToString(managementObj["InstanceID"]);
-                    });
-
-                    _serchScheme = Regex.Match(_serchScheme, @"\{([^)]*)\}").Groups[1].Value;
-
-                    using (_powercfg)
-                    {
-                        _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
-                        _powercfg.Start();
-                    }
-                }
-            }
-            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-
+                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            })
+            { IsBackground = true };
+            _thread.Start();
         }
     }
 }

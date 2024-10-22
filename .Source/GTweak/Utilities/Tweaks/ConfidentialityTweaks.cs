@@ -47,6 +47,8 @@ namespace GTweak.Utilities.Tweaks
                 @"0.0.0.0 watson.live.com",
                 @"0.0.0.0 api.cortana.ai" };
 
+        private static Thread _thread = default;
+
         internal void ViewСonfidentiality(ConfidentialityView confidentialityV)
         {
             if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", null) == null ||
@@ -307,16 +309,14 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton4":
-                    if (isChoose)
+                    _thread = new Thread(() =>
                     {
-                        new Thread(() => DisablingTasks(SchedulerTasks)).Start();
-                        new Thread(() => DisablingTasks(SchedulerTasks)).IsBackground = true;
-                    }
-                    else
-                    {
-                        new Thread(() => EnablingTasks(SchedulerTasks)).Start();
-                        new Thread(() => EnablingTasks(SchedulerTasks)).IsBackground = true;
-                    }
+                        if (isChoose)
+                            DisablingTasks(SchedulerTasks);
+                        else
+                            EnablingTasks(SchedulerTasks);
+                    }) { IsBackground = true };
+                    _thread.Start();
                     break;
                 case "TglButton5":
                     if (isChoose)
@@ -454,16 +454,14 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton16":
-                    if (isChoose)
+                    static void LoggingServices(string valueState)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d 4 /f");
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", 4, RegistryValueKind.DWord);
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {valueState} /f");
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", int.Parse(valueState), RegistryValueKind.DWord);
                     }
-                    else
-                    {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d 3 /f");
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", 3, RegistryValueKind.DWord);
-                    }
+
+                    _thread = new Thread(() => LoggingServices(isChoose ? "4" : "3")) { IsBackground = true };
+                    _thread.Start();
                     break;
                 case "TglButton17":
                     if (isChoose)

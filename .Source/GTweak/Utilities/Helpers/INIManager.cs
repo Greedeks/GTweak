@@ -8,9 +8,9 @@ namespace GTweak.Utilities.Helpers
 {
     internal sealed class INIManager
     {
-        [DllImport("kernel32")]
+        [DllImport("kernel32.dll")]
         private static extern long WritePrivateProfileString(string section, string key, string value, string filePath);
-        [DllImport("kernel32")]
+        [DllImport("kernel32.dll")]
         private static extern int GetPrivateProfileString(string section, string key, string _default, StringBuilder retVal, int size, string filePath);
         [DllImport("kernel32.dll")]
         private static extern int GetPrivateProfileSection(string section, StringBuilder retVal, int size, string filePath);

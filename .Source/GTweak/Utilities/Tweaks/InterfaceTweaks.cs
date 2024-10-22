@@ -333,29 +333,33 @@ namespace GTweak.Utilities.Tweaks
 
         private static void RestartExplorer(Process launchExplorer)
         {
-            foreach (Process process in Process.GetProcesses())
+            Thread _thread = new Thread(() =>
             {
-                try
+                foreach (Process process in Process.GetProcesses())
                 {
-                    if (string.Compare(process.MainModule?.FileName, $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
+                    try
                     {
-                        process.Kill();
-                        process.Start();
+                        if (string.Compare(process.MainModule?.FileName, $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
+                        {
+                            process.Kill();
+                            process.Start();
+                        }
                     }
-                }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-                finally
-                {
-                    Process[] explorer = Process.GetProcessesByName("explorer");
-                    if (explorer.Length == 0)
+                    catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    finally
                     {
-                        launchExplorer.StartInfo.FileName = $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}";
-                        launchExplorer.StartInfo.UseShellExecute = true;
-                        launchExplorer.Start();
-                    }
+                        Process[] explorer = Process.GetProcessesByName("explorer");
+                        if (explorer.Length == 0)
+                        {
+                            launchExplorer.StartInfo.FileName = $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}";
+                            launchExplorer.StartInfo.UseShellExecute = true;
+                            launchExplorer.Start();
+                        }
 
+                    }
                 }
-            }
+            }) { IsBackground = true };
+            _thread.Start();
         }
 
         internal static void UseInterface(string tweak, bool isChoose)
@@ -432,16 +436,16 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", 1, RegistryValueKind.DWord);
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", 0, RegistryValueKind.DWord);
-                    new Thread(() => RestartExplorer(new Process())).Start();
-                    new Thread(() => RestartExplorer(new Process())).IsBackground = true;
+
+                    RestartExplorer(new Process());
                     break;
                 case "TglButton8":
                     if (isChoose)
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", 1, RegistryValueKind.DWord);
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", 0, RegistryValueKind.DWord);
-                    new Thread(() => RestartExplorer(new Process())).Start();
-                    new Thread(() => RestartExplorer(new Process())).IsBackground = true;
+
+                    RestartExplorer(new Process());
                     break;
                 case "TglButton9":
                     if (isChoose)
@@ -518,8 +522,7 @@ namespace GTweak.Utilities.Tweaks
                     else
                         RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}");
 
-                    new Thread(() => RestartExplorer(new Process())).Start();
-                    new Thread(() => RestartExplorer(new Process())).IsBackground = true;
+                    RestartExplorer(new Process());
                     break;
                 case "TglButton18":
                     if (isChoose)
@@ -553,8 +556,7 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests", "value", "0", RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Feeds", "ShellFeedsTaskbarViewMode", 2, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCortanaButton", 0, RegistryValueKind.DWord);
-                            new Thread(() => RestartExplorer(new Process())).Start();
-                            new Thread(() => RestartExplorer(new Process())).IsBackground = true;
+                            RestartExplorer(new Process());
                         }
                     }
                     else
@@ -576,8 +578,7 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests");
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Feeds", "ShellFeedsTaskbarViewMode", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCortanaButton", 1, RegistryValueKind.DWord);
-                            new Thread(() => RestartExplorer(new Process())).Start();
-                            new Thread(() => RestartExplorer(new Process())).IsBackground = true;
+                            RestartExplorer(new Process());
                         }
                     }
                     break;

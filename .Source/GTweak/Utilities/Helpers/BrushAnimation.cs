@@ -8,10 +8,8 @@ namespace GTweak.Utilities.Helpers
 {
     internal sealed class BrushAnimation : AnimationTimeline
     {
-        protected override Freezable CreateInstanceCore()
-        {
-            return new BrushAnimation();
-        }
+        protected override Freezable CreateInstanceCore() => new BrushAnimation();
+
 
         public override Type TargetPropertyType => typeof(Brush);
 
@@ -55,20 +53,20 @@ namespace GTweak.Utilities.Helpers
             toVal.Opacity = Convert.ToDouble(animationClock.CurrentProgress);
 
 
-            Border border0 = new Border();
-            Border border1 = new Border();
+            Border borderFrom = new Border();
+            Border borderTo = new Border();
 
-            border0.Width = 1.0;
-            border0.Height = 1.0;
+            borderFrom.Width = 1.0;
+            borderFrom.Height = 1.0;
 
-            border0.Background = fromVal;
-            border1.Background = toVal;
+            borderFrom.Background = fromVal;
+            borderTo.Background = toVal;
 
-            border0.Visibility = Visibility.Visible;
-            border1.Visibility = Visibility.Visible;
-            border0.Child = border1;
+            borderFrom.Visibility = Visibility.Visible;
+            borderTo.Visibility = Visibility.Visible;
+            borderFrom.Child = borderTo;
 
-            Brush vb = new VisualBrush(border0);
+            Brush vb = new VisualBrush(borderFrom);
             return vb;
 
         }

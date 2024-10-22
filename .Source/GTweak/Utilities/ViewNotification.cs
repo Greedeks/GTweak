@@ -16,17 +16,17 @@ namespace GTweak.Utilities
         {
             if (Settings.IsViewNotification)
             {
-                new Thread(() => new Settings().RunAnalysis()).Start();
-                new Thread(() => new Settings().RunAnalysis()).IsBackground = true;
+                Thread _thread = new Thread(() => new Settings().RunAnalysis()) { IsBackground = true };
+                _thread.Start();
 
                 await Task.Delay(300);
 
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current.Dispatcher.Invoke(delegate
                 {
-                    NotificationWindow notificationWindow = new NotificationWindow();
-
-                    Parallel.Invoke(async () =>
+                    Parallel.Invoke(async delegate
                     {
+                        NotificationWindow notificationWindow = new NotificationWindow();
+
                         if (notificationWindow.IsLoaded || isAlreadyLaunch)
                             return;
 
@@ -40,8 +40,7 @@ namespace GTweak.Utilities
                         };
                         await Task.Delay(100);
                         notificationWindow.Show();
-                        notificationWindow.Closed += (s, e) => { isAlreadyLaunch = false; };
-
+                        notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
                     });
                 });
             }
@@ -49,7 +48,7 @@ namespace GTweak.Utilities
 
         internal void CheckingTempFile()
         {
-            if (File.Exists(Settings.PathIcon) == false)
+            if (!File.Exists(Settings.PathIcon))
             {
                 byte[] _iconByte = default;
                 using (MemoryStream fileOut = new MemoryStream(Resources.GTweak))
@@ -63,7 +62,7 @@ namespace GTweak.Utilities
                 File.WriteAllBytes(Settings.PathIcon, _iconByte);
             }
 
-            if (File.Exists(Settings.PathSound) == false)
+            if (!File.Exists(Settings.PathSound))
             {
                 byte[] _soundbyte = default;
                 using (MemoryStream fileOut = new MemoryStream(Resources.Sound))

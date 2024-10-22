@@ -23,7 +23,6 @@ namespace GTweak.Utilities.Helpers
             try { registrykey.CreateSubKey(key, true)?.SetValue(name, data, kind); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
-
         internal static void CreateFolder(in RegistryKey registrykey, in string subkey)
         {
             try { registrykey.CreateSubKey(subkey); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
@@ -39,11 +38,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     foreach (string value in registryFolder.GetValueNames())
                     {
-                        try
-                        {
-                            registryFolder.DeleteValue(value);
-                        }
-                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                        try { registryFolder.DeleteValue(value); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     }
                 }
 

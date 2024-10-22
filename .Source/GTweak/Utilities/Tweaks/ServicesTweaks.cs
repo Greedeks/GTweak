@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Threading;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -427,10 +428,8 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton4":
-                    static void StoreServices(bool isChoose)
+                    static void StoreServices (string value)
                     {
-                        string value = isChoose ? "4" : "3";
-
                         TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d {value} /f & " +
                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\VacSvc /t REG_DWORD /v Start /d {value} /f & " +
                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\spectrum /t REG_DWORD /v Start /d {value} /f & " +
@@ -447,11 +446,8 @@ namespace GTweak.Utilities.Tweaks
                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\InstallService /t REG_DWORD /v Start /d {value} /f");
                     }
 
-                    using (BackgroundWorker backgroundWorker = new BackgroundWorker())
-                    {
-                        backgroundWorker.DoWork += delegate { StoreServices(isChoose); };
-                        backgroundWorker.RunWorkerAsync();
-                    }
+                    Thread _thread = new Thread(() => StoreServices(isChoose ? "4" : "3")) { IsBackground = true };
+                    _thread.Start();
                     break;
                 case "TglButton5":
                     if (isChoose)
@@ -641,11 +637,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
                     }
-                    using (BackgroundWorker backgroundWorker = new BackgroundWorker())
-                    {
-                        backgroundWorker.DoWork += delegate { ChangeAccessUpdateFolders(isChoose); };
-                        backgroundWorker.RunWorkerAsync();
-                    }
+                    ChangeAccessUpdateFolders(isChoose);
                     break;
                 case "TglButton16":
                     if (isChoose)
@@ -847,51 +839,56 @@ namespace GTweak.Utilities.Tweaks
 
         private static void ChangeAccessUpdateFolders(bool isDenyAccess)
         {
-            void SetFullAccess(string path)
+            Thread _thread = new Thread(() =>
             {
-                FileSecurity security = File.GetAccessControl(path);
-                security.SetOwner(WindowsIdentity.GetCurrent().User);
-                security.SetAccessRule(new FileSystemAccessRule(WindowsIdentity.GetCurrent().User, FileSystemRights.FullControl, AccessControlType.Allow));
-                File.SetAccessControl(path, security);
-            }
-
-            void ChangeStateTask(string valueState = "/disable")
-            {
-                TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" & " +
-                "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\"");
-            }
-
-            try
-            {
-                if (!isDenyAccess)
-                    ChangeStateTask("/enable");
-                else
+                void SetFullAccess(string path)
                 {
-                    SetFullAccess(Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download");
-                    SetFullAccess(Settings.PathSystemDisk + @"Windows\System32\catroot2");
-
-                    Process.Start(new ProcessStartInfo()
-                    {
-                        Arguments = @" /c rd /s /q " + Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download & 
-                            rd /s /q " + Settings.PathSystemDisk + @"Windows\System32\catroot2",
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        CreateNoWindow = true,
-                        FileName = "cmd.exe"
-                    });
-
-                    ChangeStateTask();
+                    FileSecurity security = File.GetAccessControl(path);
+                    security.SetOwner(WindowsIdentity.GetCurrent().User);
+                    security.SetAccessRule(new FileSystemAccessRule(WindowsIdentity.GetCurrent().User, FileSystemRights.FullControl, AccessControlType.Allow));
+                    File.SetAccessControl(path, security);
                 }
-            }
-            catch (Exception ex) { Debug.WriteLine(ex); }
+
+                void ChangeStateTask(string valueState = "/disable")
+                {
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" & " +
+                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\"");
+                }
+
+                try
+                {
+                    if (!isDenyAccess)
+                        ChangeStateTask("/enable");
+                    else
+                    {
+                        SetFullAccess(Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download");
+                        SetFullAccess(Settings.PathSystemDisk + @"Windows\System32\catroot2");
+
+                        Process.Start(new ProcessStartInfo()
+                        {
+                            Arguments = @" /c rd /s /q " + Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download & 
+                            rd /s /q " + Settings.PathSystemDisk + @"Windows\System32\catroot2",
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                            CreateNoWindow = true,
+                            FileName = "cmd.exe"
+                        });
+
+                        ChangeStateTask();
+                    }
+                }
+                catch (Exception ex) { Debug.WriteLine(ex); }
+            })
+            { IsBackground = true };
+            _thread.Start();
         }
     }
 }

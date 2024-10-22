@@ -229,8 +229,8 @@ namespace GTweak.Utilities.Tweaks
             };
             backgroundWorker.RunWorkerCompleted += delegate
             {
-                new Thread(() => backgroundWorker.Dispose()).Start();
-                new Thread(() => backgroundWorker.Dispose()).IsBackground = true;
+                Thread _thread = new Thread(() => backgroundWorker.Dispose()) { IsBackground = true };
+                _thread.Start();
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["clear_ram_notification"]);
             };
             backgroundWorker.RunWorkerAsync();

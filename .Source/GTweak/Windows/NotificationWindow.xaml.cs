@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace GTweak.Windows
@@ -27,7 +26,7 @@ namespace GTweak.Windows
         {
             InitializeComponent();
 
-            ImageBody.Source ??= new BitmapImage(new Uri(Settings.PathIcon));
+            ImageBody.Source ??= (ImageSource)new ImageSourceConverter().ConvertFromString(Settings.PathIcon);
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -36,6 +35,8 @@ namespace GTweak.Windows
             }, Application.Current.Dispatcher);
 
             timer.Start();
+
+            _mediaPlayer.Open(new Uri(Settings.PathSound));
         }
 
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -64,7 +65,6 @@ namespace GTweak.Windows
         {
             if (Settings.IsSoundNotification)
             {
-                _mediaPlayer.Open(new Uri(Settings.PathSound));
                 _mediaPlayer.Volume = Settings.VolumeNotification / 100.0f;
                 _mediaPlayer.Play();
             }
@@ -130,7 +130,7 @@ namespace GTweak.Windows
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnimation = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
-            doubleAnimation.Completed += delegate { Close(); };
+            doubleAnimation.Completed += delegate { _mediaPlayer.Close(); Close(); };
             Timeline.SetDesiredFrameRate(doubleAnimation, 400);
             BeginAnimation(OpacityProperty, doubleAnimation);
         }
