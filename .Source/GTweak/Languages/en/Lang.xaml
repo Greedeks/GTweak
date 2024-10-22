@@ -6,7 +6,6 @@
     <v:String x:Key="defaultDescriptionApp">Hover your mouse over the icon of any application to see its name</v:String>
 
     <!--#region Load Window -->
-    <v:String x:Key="title_win_load">GTweak - Notification</v:String>
     <v:String x:Key="title0_load">Loading</v:String>
     <v:String x:Key="title1_load">Loading.</v:String>
     <v:String x:Key="title2_load">Loading..</v:String>
@@ -34,6 +33,7 @@
     <!--#endregion-->
 
     <!--#region Notification Window -->
+    <v:String x:Key="title_win_notification">Notification</v:String>
     <v:String x:Key="title0_notification">Attention</v:String>
     <v:String x:Key="title1_notification">Information</v:String>
     <v:String x:Key="logout_notification">An exit is required, click on this text to produce it</v:String>
@@ -103,6 +103,7 @@
     <!--#endregion-->
 
     <!--#region Update Window -->
+    <v:String x:Key="title_win_update">Update</v:String>
     <v:String x:Key="title_update">An update was found</v:String>
     <v:String x:Key="text_update">A new version of the program is available to you. Update for new features and bug fixes.</v:String>
     <v:String x:Key="btn_now_update">Update</v:String>

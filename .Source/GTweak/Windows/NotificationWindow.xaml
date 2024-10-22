@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
-        Title="{DynamicResource title_win_load}" 
+        Title="{DynamicResource title_win_notification}" 
         Height="125" Width="375" MaxHeight="125" MaxWidth="375" MinHeight="125" MinWidth="375"
         Background="Transparent" WindowStyle="None" 
         ShowInTaskbar="False"  IsTabStop="False"

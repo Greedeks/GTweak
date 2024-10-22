@@ -6,7 +6,6 @@
     <v:String x:Key="defaultDescriptionApp">Наведите указатель мыши на любую иконку приложения, чтобы получить его название</v:String>
     
     <!--#region Load Window -->
-    <v:String x:Key="title_win_load">GTweak - Уведомление</v:String>
     <v:String x:Key="title0_load">Загрузка</v:String>
     <v:String x:Key="title1_load">Загрузка.</v:String>
     <v:String x:Key="title2_load">Загрузка..</v:String>
@@ -34,6 +33,7 @@
     <!--#endregion-->
 
     <!--#region Notification Window -->
+    <v:String x:Key="title_win_notification">Уведомление</v:String>
     <v:String x:Key="title0_notification">Внимание</v:String>
     <v:String x:Key="title1_notification">Информация</v:String>
     <v:String x:Key="logout_notification">Требуется выход, нажмите на данный текст, чтобы произвести его</v:String>
@@ -103,6 +103,7 @@
     <!--#endregion-->
 
     <!--#region Update Window -->
+    <v:String x:Key="title_win_update">Обновление</v:String>
     <v:String x:Key="title_update">Найдено обновление</v:String>
     <v:String x:Key="text_update">Вам доступна новая версия программы. Обновите ее для получения новых функций и исправления ошибок.</v:String>
     <v:String x:Key="btn_now_update">Обновить</v:String>
