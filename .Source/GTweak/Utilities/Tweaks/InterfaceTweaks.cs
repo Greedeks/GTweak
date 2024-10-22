@@ -358,7 +358,8 @@ namespace GTweak.Utilities.Tweaks
 
                     }
                 }
-            }) { IsBackground = true };
+            })
+            { IsBackground = true };
             _thread.Start();
         }
 

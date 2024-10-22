@@ -13,7 +13,7 @@ namespace GTweak.Windows
 {
     public partial class ImportWindow : Window
     {
-        internal class SectionName
+        private struct SectionName
         {
             internal const string Confidentiality = "Confidentiality Tweaks";
             internal const string Interface = "Interface Tweaks";

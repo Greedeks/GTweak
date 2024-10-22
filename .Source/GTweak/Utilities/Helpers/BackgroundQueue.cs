@@ -8,7 +8,7 @@ namespace GTweak.Utilities.Helpers
     {
         private Task previousTask = Task.FromResult(true);
         private readonly object key = new object();
-        public Task QueueTask(Action action)
+        internal Task QueueTask(Action action)
         {
             lock (key)
             {
@@ -20,7 +20,7 @@ namespace GTweak.Utilities.Helpers
             }
         }
 
-        public Task<T> QueueTask<T>(Func<T> work)
+        internal Task<T> QueueTask<T>(Func<T> work)
         {
             lock (key)
             {
@@ -32,6 +32,6 @@ namespace GTweak.Utilities.Helpers
                 return task;
             }
         }
-        public bool IsQueueCompleted() => previousTask.IsCompleted;
+        internal bool IsQueueCompleted() => previousTask.IsCompleted;
     }
 }

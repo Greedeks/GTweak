@@ -10,7 +10,6 @@ namespace GTweak.Utilities.Helpers
     {
         protected override Freezable CreateInstanceCore() => new BrushAnimation();
 
-
         public override Type TargetPropertyType => typeof(Brush);
 
         static BrushAnimation()
@@ -51,7 +50,6 @@ namespace GTweak.Utilities.Helpers
             }
 
             toVal.Opacity = Convert.ToDouble(animationClock.CurrentProgress);
-
 
             Border borderFrom = new Border();
             Border borderTo = new Border();

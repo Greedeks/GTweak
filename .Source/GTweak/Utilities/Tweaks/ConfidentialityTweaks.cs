@@ -315,7 +315,8 @@ namespace GTweak.Utilities.Tweaks
                             DisablingTasks(SchedulerTasks);
                         else
                             EnablingTasks(SchedulerTasks);
-                    }) { IsBackground = true };
+                    })
+                    { IsBackground = true };
                     _thread.Start();
                     break;
                 case "TglButton5":
