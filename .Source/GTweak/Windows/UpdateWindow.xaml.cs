@@ -19,7 +19,7 @@ namespace GTweak.Windows
         {
             InitializeComponent();
             CurrentVerison.Text = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
-            DownloadVersion.Text =  NewVerison.Text = Utilities.Tweaks.SystemData.UtilityСonfiguration.DownloadVersion;
+            DownloadVersion.Text = NewVerison.Text = Utilities.Tweaks.SystemData.UtilityСonfiguration.DownloadVersion;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
