@@ -9,7 +9,7 @@
         Height="160" Width="390" MinHeight="160" MinWidth="390" MaxHeight="160" MaxWidth="390"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
         ShowInTaskbar="False" IsTabStop="False" Loaded="Window_Loaded">
-    <Grid>
+    <Grid MouseDown="TitleBar_MouseDown">
         <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
             <Border.BorderBrush>
                 <LinearGradientBrush>
