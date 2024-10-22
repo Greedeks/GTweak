@@ -66,7 +66,7 @@
                     </Grid>
                     
                     <Grid Grid.Row="1">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,5,0,0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Width="25">
                                     <Image.Style>
