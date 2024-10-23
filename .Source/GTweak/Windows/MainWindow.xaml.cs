@@ -130,7 +130,7 @@ namespace GTweak
             {
                 if (SystemData.UtilityСonfiguration.IsNeedUpdate && Settings.IsСheckingUpdate)
                 {
-                    await Task.Delay(1000);
+                    await Task.Delay(500);
                     new UpdateWindow().ShowDialog();
                 }
             };
