@@ -51,8 +51,7 @@ namespace GTweak.Utilities
             });
 
             if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("11") || SystemData.СomputerСonfiguration.clientWinVersion.Contains("10")) return;
-            MessageWindow messageWindow = new MessageWindow(true);
-            messageWindow.ShowDialog();
+            new MessageWindow(true).ShowDialog();
         }
     }
 }

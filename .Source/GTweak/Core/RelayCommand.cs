@@ -18,7 +18,7 @@ namespace GTweak.Core
             execute = _execute;
             canExecute = _canExecute;
         }
-        public bool CanExecute(object _parameter) => canExecute == null || canExecute(_parameter);
-        public void Execute(object _parameter) => execute(_parameter);
+        public bool CanExecute(object parameter) => canExecute == null || canExecute(parameter);
+        public void Execute(object parameter) => execute(parameter);
     }
 }

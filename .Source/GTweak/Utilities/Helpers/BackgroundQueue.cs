@@ -20,11 +20,11 @@ namespace GTweak.Utilities.Helpers
             }
         }
 
-        internal Task<T> QueueTask<T>(Func<T> work)
+        internal Task<T> QueueTask<T>(Func<T> func)
         {
             lock (key)
             {
-                var task = previousTask.ContinueWith(t => work()
+                var task = previousTask.ContinueWith(t => func()
                     , CancellationToken.None
                     , TaskContinuationOptions.None
                     , TaskScheduler.Default);

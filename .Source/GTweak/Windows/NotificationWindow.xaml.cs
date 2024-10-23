@@ -130,7 +130,7 @@ namespace GTweak.Windows
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnimation = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
-            doubleAnimation.Completed += delegate { _mediaPlayer.Close(); Close(); };
+            doubleAnimation.Completed += delegate { Close(); };
             Timeline.SetDesiredFrameRate(doubleAnimation, 400);
             BeginAnimation(OpacityProperty, doubleAnimation);
         }

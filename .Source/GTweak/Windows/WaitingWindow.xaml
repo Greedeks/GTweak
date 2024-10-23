@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GTweak.Windows"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Title="GTweak"
         Height="Auto" Width="Auto" ShowInTaskbar="False" WindowState="Maximized" WindowStyle="None" AllowsTransparency="True" Opacity="0.5" 
         Background="#000000" Topmost="True" Loaded="Window_Loaded" Closing="Window_Closing" IsEnabled="False" IsTabStop="False" IsHitTestVisible="False" ResizeMode="NoResize">
 </Window>

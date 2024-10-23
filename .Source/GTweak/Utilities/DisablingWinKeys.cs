@@ -10,11 +10,11 @@ namespace GTweak.Utilities
         [StructLayout(LayoutKind.Sequential)]
         private struct KBDLLHOOKSTRUCT
         {
-            public Keys key;
-            public int scanCode;
-            public int flags;
-            public int time;
-            public IntPtr extra;
+            internal Keys key;
+            internal int scanCode;
+            internal int flags;
+            internal int time;
+            internal IntPtr extra;
         }
         internal delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]

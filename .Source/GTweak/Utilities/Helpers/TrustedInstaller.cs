@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Security.Principal;
 using System.ServiceProcess;
 
 namespace GTweak.Utilities.Helpers
@@ -10,38 +9,38 @@ namespace GTweak.Utilities.Helpers
     internal sealed class TrustedInstaller
     {
         [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool CloseHandle(IntPtr hObject);
+        private static extern bool CloseHandle(IntPtr hObject);
 
         [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
-        internal static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall, ref TokPrivLuid newst, int len, IntPtr prev, IntPtr relen);
+        private static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall, ref TokPrivLuid newst, int len, IntPtr prev, IntPtr relen);
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
+        private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        static extern bool ImpersonateLoggedOnUser(IntPtr hToken);
+        private static extern bool ImpersonateLoggedOnUser(IntPtr hToken);
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        static extern IntPtr OpenSCManager(string lpMachineName, string lpDatabaseName, uint dwDesiredAccess);
+        private static extern IntPtr OpenSCManager(string lpMachineName, string lpDatabaseName, uint dwDesiredAccess);
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        static extern IntPtr OpenService(IntPtr hSCManager, string lpServiceName, uint dwDesiredAccess);
+        private static extern IntPtr OpenService(IntPtr hSCManager, string lpServiceName, uint dwDesiredAccess);
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        static extern bool QueryServiceStatusEx(IntPtr hService, int InfoLevel, ref SERVICE_STATUS_PROCESS lpBuffer, uint cbBufSize, out uint pcbBytesNeeded);
+        private static extern bool QueryServiceStatusEx(IntPtr hService, int InfoLevel, ref SERVICE_STATUS_PROCESS lpBuffer, uint cbBufSize, out uint pcbBytesNeeded);
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        static extern bool StartService(IntPtr hService, uint dwNumServiceArgs, IntPtr lpServiceArgVectors);
+        private static extern bool StartService(IntPtr hService, uint dwNumServiceArgs, IntPtr lpServiceArgVectors);
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        static extern bool CloseServiceHandle(IntPtr hSCObject);
+        private static extern bool CloseServiceHandle(IntPtr hSCObject);
 
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool CreateProcess(string lpApplicationName, string lpCommandLine, ref SECURITY_ATTRIBUTES lpProcessAttributes, ref SECURITY_ATTRIBUTES lpThreadAttributes, bool bInheritHandles, uint dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory, [In] ref STARTUPINFOEX lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
+        private static extern bool CreateProcess(string lpApplicationName, string lpCommandLine, ref SECURITY_ATTRIBUTES lpProcessAttributes, ref SECURITY_ATTRIBUTES lpThreadAttributes, bool bInheritHandles, uint dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory, [In] ref STARTUPINFOEX lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
+        private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -66,76 +65,76 @@ namespace GTweak.Utilities.Helpers
         const uint CREATE_NO_WINDOW = 0x08000000;
 
         [StructLayout(LayoutKind.Sequential)]
-        struct SECURITY_ATTRIBUTES
+        private struct SECURITY_ATTRIBUTES
         {
-            public int nLength;
-            public IntPtr lpSecurityDescriptor;
-            public bool bInheritHandle;
+            internal int nLength;
+            internal IntPtr lpSecurityDescriptor;
+            internal bool bInheritHandle;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct SERVICE_STATUS_PROCESS
+        private struct SERVICE_STATUS_PROCESS
         {
-            public uint dwServiceType;
-            public uint dwCurrentState;
-            public uint dwControlsAccepted;
-            public uint dwWin32ExitCode;
-            public uint dwServiceSpecificExitCode;
-            public uint dwCheckPoint;
-            public uint dwWaitHint;
-            public uint dwProcessId;
-            public uint dwServiceFlags;
+            internal uint dwServiceType;
+            internal uint dwCurrentState;
+            internal uint dwControlsAccepted;
+            internal uint dwWin32ExitCode;
+            internal uint dwServiceSpecificExitCode;
+            internal uint dwCheckPoint;
+            internal uint dwWaitHint;
+            internal uint dwProcessId;
+            internal uint dwServiceFlags;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct STARTUPINFO
+        private struct STARTUPINFO
         {
-            public int cb;
-            public string lpReserved;
-            public string lpDesktop;
-            public string lpTitle;
-            public uint dwX;
-            public uint dwY;
-            public uint dwXSize;
-            public uint dwYSize;
-            public uint dwXCountChars;
-            public uint dwYCountChars;
-            public uint dwFillAttribute;
-            public uint dwFlags;
-            public short wShowWindow;
-            public short cbReserved2;
-            public IntPtr lpReserved2;
-            public IntPtr hStdInput;
-            public IntPtr hStdOutput;
-            public IntPtr hStdError;
+            internal int cb;
+            internal string lpReserved;
+            internal string lpDesktop;
+            internal string lpTitle;
+            internal uint dwX;
+            internal uint dwY;
+            internal uint dwXSize;
+            internal uint dwYSize;
+            internal uint dwXCountChars;
+            internal uint dwYCountChars;
+            internal uint dwFillAttribute;
+            internal uint dwFlags;
+            internal short wShowWindow;
+            internal short cbReserved2;
+            internal IntPtr lpReserved2;
+            internal IntPtr hStdInput;
+            internal IntPtr hStdOutput;
+            internal IntPtr hStdError;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct PROCESS_INFORMATION
+        private struct PROCESS_INFORMATION
         {
-            public IntPtr hProcess;
-            public IntPtr hThread;
-            public uint dwProcessId;
-            public uint dwThreadId;
+            internal IntPtr hProcess;
+            internal IntPtr hThread;
+            internal uint dwProcessId;
+            internal uint dwThreadId;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct TokPrivLuid
+        private struct TokPrivLuid
         {
-            public int Count;
-            public long Luid;
-            public int Attr;
+            internal int Count;
+            internal long Luid;
+            internal int Attr;
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        struct STARTUPINFOEX
+        private struct STARTUPINFOEX
         {
-            public STARTUPINFO StartupInfo;
-            public IntPtr lpAttributeList;
+            internal STARTUPINFO StartupInfo;
+            internal IntPtr lpAttributeList;
         }
 
         [Flags]
-        public enum ProcessAccessFlags : uint
+        private enum ProcessAccessFlags : uint
         {
             All = 0x001F0FFF,
             Terminate = 0x00000001,
@@ -152,13 +151,7 @@ namespace GTweak.Utilities.Helpers
             Synchronize = 0x00100000
         }
 
-        public static bool CheckIfAdmin()
-        {
-            WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal currentPrincipal = new WindowsPrincipal(currentIdentity);
-            return currentPrincipal.IsInRole(WindowsBuiltInRole.Administrator);
-        }
-        public static bool ImpersonateSystem()
+        private static bool ImpersonateSystem()
         {
             Process[] processlist = Process.GetProcesses();
             IntPtr tokenHandle = IntPtr.Zero;
@@ -184,7 +177,7 @@ namespace GTweak.Utilities.Helpers
             CloseHandle(tokenHandle);
             return false;
         }
-        public static int StartTrustedInstallerService()
+        internal static int StartTrustedInstallerService()
         {
             IntPtr hSCManager = OpenSCManager(null, ServicesActiveDatabase, SC_MANAGER_CONNECT | SC_MANAGER_ENUMERATE_SERVICE | SC_MANAGER_QUERY_LOCK_STATUS);
             if (hSCManager == IntPtr.Zero)
@@ -228,7 +221,7 @@ namespace GTweak.Utilities.Helpers
             CloseServiceHandle(hSCManager);
             throw new Win32Exception("QueryServiceStatusEx failed: " + Marshal.GetLastWin32Error());
         }
-        public static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath)
+        internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath)
         {
 
             ImpersonateSystem();

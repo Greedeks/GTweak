@@ -3,6 +3,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,11 +37,11 @@ namespace GTweak.Windows
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Progress<int> progress = new Progress<int>(ReportProgress);
-            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch { }
+            Progress<byte> progress = new Progress<byte>(ReportProgress);
+            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
 
-        private void ReportProgress(int valueProgress)
+        private void ReportProgress(byte valueProgress)
         {
             if (valueProgress == 100)
             {
@@ -53,13 +54,13 @@ namespace GTweak.Windows
             }
         }
 
-        private async Task SortByPageDate(CancellationToken _token, IProgress<int> _progress)
+        private async Task SortByPageDate(CancellationToken _token, IProgress<byte> _progress)
         {
             List<string> tempKeys = new List<string>(), tempValues = new List<string>();
 
             INIManager iniManager = new INIManager(Settings.PathConfig);
 
-            for (int i = 1; i <= 100; i++)
+            for (byte i = 1; i <= 100; i++)
             {
                 _token.ThrowIfCancellationRequested();
 
