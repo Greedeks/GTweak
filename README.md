@@ -1,4 +1,4 @@
-<h1 align="center"> <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Jura&weight=600&size=40&duration=1000&pause=3000&color=16BD72&multiline=true&width=160&lines=GTweak" alt="Typing SVG" /></a> <img width="32" height="32" src="https://github.com/Greedeks/GTweak/assets/82948926/62527a34-0a06-4bd1-8515-c23a33c73bf2"/> </h1>
+<h1 align="center"> <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Jura&weight=600&size=40&duration=1000&pause=3000&color=16BD72&multiline=true&width=160&lines=GTweak" alt="Typing SVG" /></a> <img width="36" height="36" src="https://github.com/user-attachments/assets/9aae3d24-a33b-4396-8c31-1201b0843ece"/> </h1>
 
 ![Logo](https://github.com/Greedeks/GTweak/blob/main/Github/PreviewGit.gif)
 ## 
