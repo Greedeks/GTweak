@@ -96,6 +96,7 @@
     <v:String x:Key="title_win_import">Импорт твиков</v:String>
     <v:String x:Key="wait_win_import">Это занимает некоторое время...</v:String>
     <v:String x:Key="warning_win_import">Принудительно закрывать окно нет необходимости</v:String>
+    <v:String x:Key="file_import">Файл</v:String>
     <!--#endregion-->
 
     <!--#region Reboot Window -->

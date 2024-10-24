@@ -24,9 +24,11 @@ namespace GTweak.Windows
 
         private bool isRestartNeed = false, isLogoutNeed = false;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        public ImportWindow()
+
+        public ImportWindow(in string importedFile)
         {
             InitializeComponent();
+            ImportedFile.Text = importedFile;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)

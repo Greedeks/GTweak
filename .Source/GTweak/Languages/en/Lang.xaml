@@ -96,6 +96,7 @@
     <v:String x:Key="title_win_import">Importing tweaks</v:String>
     <v:String x:Key="wait_win_import">It takes some time...</v:String>
     <v:String x:Key="warning_win_import">It is not necessary to close the window forcibly</v:String>
+    <v:String x:Key="file_import">File</v:String>
     <!--#endregion-->
 
     <!--#region Reboot Window -->

@@ -164,7 +164,7 @@ namespace GTweak.Utilities
             if (iniManager.Read("GTweak", "Author").Contains("Greedeks") && iniManager.Read("GTweak", "Release").Contains("v4"))
             {
                 if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
-                    new ImportWindow().ShowDialog();
+                    new ImportWindow(openFileDialog.SafeFileName).ShowDialog();
                 else
                     new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_empty_notification"]);
             }
