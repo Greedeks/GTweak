@@ -56,7 +56,7 @@ namespace GTweak.View
                 });
                 if (backgroundQueue.IsQueueCompleted())
                 {
-                    await Task.Delay(15000);
+                    await Task.Delay(35000);
                     UninstallingApps.IsAppDeletedList[appImage.Name] = false;
                     UpdateViewStateApps();
                 }
@@ -100,7 +100,7 @@ namespace GTweak.View
                 };
                 backgroundWorker.RunWorkerCompleted += async delegate
                 {
-                    await Task.Delay(60000);
+                    await Task.Delay(80000);
                     foreach (string key in UninstallingApps.IsAppDeletedList.Keys.ToList())
                     {
                         UninstallingApps.IsAppDeletedList[key] = false;
@@ -149,7 +149,7 @@ namespace GTweak.View
             Xbox.Source = !UninstallingApps.IsAppDeletedList["Xbox"] ? UninstallingApps.UserAppsList.Contains("Microsoft.XboxApp") || UninstallingApps.UserAppsList.Contains("Microsoft.GamingApp") || UninstallingApps.UserAppsList.Contains("Microsoft.XboxGamingOverlay") ||
                UninstallingApps.UserAppsList.Contains("Microsoft.XboxGameOverlay") || UninstallingApps.UserAppsList.Contains("Microsoft.XboxIdentityProvider") || UninstallingApps.UserAppsList.Contains("Microsoft.Xbox.TCUI") ||
                UninstallingApps.UserAppsList.Contains("Microsoft.XboxSpeechToTextOverlay") ? (DrawingImage)FindResource("A_DI_Xbox") : (DrawingImage)FindResource("DA_DI_Xbox") : (DrawingImage)FindResource("DI_Sandtime");
-            Paint3D.Source = !UninstallingApps.IsAppDeletedList["Paint3D"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MSPaint") || UninstallingApps.UserAppsList.Contains("Microsoft.Paint") ? (DrawingImage)FindResource("A_DI_Paint3D") : (DrawingImage)FindResource("DA_DI_Paint3D") : (DrawingImage)FindResource("DI_Sandtime");
+            Paint3D.Source = !UninstallingApps.IsAppDeletedList["Paint3D"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MSPaint") ? (DrawingImage)FindResource("A_DI_Paint3D") : (DrawingImage)FindResource("DA_DI_Paint3D") : (DrawingImage)FindResource("DI_Sandtime");
             OneNote.Source = !UninstallingApps.IsAppDeletedList["OneNote"] ? UninstallingApps.UserAppsList.Contains("Microsoft.Office.OneNote") ? (DrawingImage)FindResource("A_DI_OneNote") : (DrawingImage)FindResource("DA_DI_OneNote") : (DrawingImage)FindResource("DI_Sandtime");
             People.Source = !UninstallingApps.IsAppDeletedList["People"] ? UninstallingApps.UserAppsList.Contains("Microsoft.People") ? (DrawingImage)FindResource("A_DI_People") : (DrawingImage)FindResource("DA_DI_People") : (DrawingImage)FindResource("DI_Sandtime");
             MicrosoftStickyNotes.Source = !UninstallingApps.IsAppDeletedList["MicrosoftStickyNotes"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MicrosoftStickyNotes") ? (DrawingImage)FindResource("A_DI_MicrosoftStickyNotes") : (DrawingImage)FindResource("DA_DI_MicrosoftStickyNotes") : (DrawingImage)FindResource("DI_Sandtime");
@@ -166,7 +166,7 @@ namespace GTweak.View
             Video.Source = !UninstallingApps.IsAppDeletedList["Video"] ? UninstallingApps.UserAppsList.Contains("Microsoft.ZuneVideo") ? (DrawingImage)FindResource("A_DI_Video") : (DrawingImage)FindResource("DA_DI_Video") : (DrawingImage)FindResource("DI_Sandtime");
             BingNews.Source = !UninstallingApps.IsAppDeletedList["BingNews"] ? UninstallingApps.UserAppsList.Contains("Microsoft.BingNews") ? (DrawingImage)FindResource("A_DI_BingNews") : (DrawingImage)FindResource("DA_DI_BingNews") : (DrawingImage)FindResource("DI_Sandtime");
             Mail.Source = !UninstallingApps.IsAppDeletedList["Mail"] ? UninstallingApps.UserAppsList.Contains("microsoft.windowscommunicationsapps") ? (DrawingImage)FindResource("A_DI_Mail") : (DrawingImage)FindResource("DA_DI_Mail") : (DrawingImage)FindResource("DI_Sandtime");
-            MicrosoftTeams.Source = !UninstallingApps.IsAppDeletedList["MicrosoftTeams"] ? UninstallingApps.UserAppsList.Contains("MicrosoftTeams") ? (DrawingImage)FindResource("A_DI_MicrosoftTeams") : (DrawingImage)FindResource("DA_DI_MicrosoftTeams") : (DrawingImage)FindResource("DI_Sandtime");
+            MicrosoftTeams.Source = !UninstallingApps.IsAppDeletedList["MicrosoftTeams"] ? UninstallingApps.UserAppsList.Contains("MicrosoftTeams") || UninstallingApps.UserAppsList.Contains("MSTeams") ? (DrawingImage)FindResource("A_DI_MicrosoftTeams") : (DrawingImage)FindResource("DA_DI_MicrosoftTeams") : (DrawingImage)FindResource("DI_Sandtime");
             PowerAutomateDesktop.Source = !UninstallingApps.IsAppDeletedList["PowerAutomateDesktop"] ? UninstallingApps.UserAppsList.Contains("Microsoft.PowerAutomateDesktop") ? (DrawingImage)FindResource("A_DI_PowerAutomateDesktop") : (DrawingImage)FindResource("DA_DI_PowerAutomateDesktop") : (DrawingImage)FindResource("DI_Sandtime");
             Cortana.Source = !UninstallingApps.IsAppDeletedList["Cortana"] ? UninstallingApps.UserAppsList.Contains("Microsoft.549981C3F5F10") ? (DrawingImage)FindResource("A_DI_Cortana") : (DrawingImage)FindResource("DA_DI_Cortana") : (DrawingImage)FindResource("DI_Sandtime");
             ClipChamp.Source = !UninstallingApps.IsAppDeletedList["ClipChamp"] ? UninstallingApps.UserAppsList.Contains("Clipchamp.Clipchamp") ? (DrawingImage)FindResource("A_DI_ClipChamp") : (DrawingImage)FindResource("DA_DI_ClipChamp") : (DrawingImage)FindResource("DI_Sandtime");

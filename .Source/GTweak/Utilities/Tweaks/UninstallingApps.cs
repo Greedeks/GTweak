@@ -86,7 +86,7 @@ namespace GTweak.Utilities.Tweaks
             ["Video"] = new List<string>(1) { "Microsoft.ZuneVideo" },
             ["BingNews"] = new List<string>(1) { "Microsoft.BingNews" },
             ["Mail"] = new List<string>(1) { "microsoft.windowscommunicationsapps" },
-            ["MicrosoftTeams"] = new List<string>(1) { "MicrosoftTeams" },
+            ["MicrosoftTeams"] = new List<string>(2) { "MicrosoftTeams", "MSTeams" },
             ["PowerAutomateDesktop"] = new List<string>(1) { "Microsoft.PowerAutomateDesktop" },
             ["Cortana"] = new List<string>(1) { "Microsoft.549981C3F5F10" },
             ["ClipChamp"] = new List<string>(1) { "Clipchamp.Clipchamp" },

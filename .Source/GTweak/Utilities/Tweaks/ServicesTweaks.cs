@@ -753,33 +753,41 @@ namespace GTweak.Utilities.Tweaks
                     if (isChoose)
                     {
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"SYSTEM\CurrentControlSet\Services\WarpJITSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "Start", 4, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "DelayedAutoStart", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WarpJITSvc", "Start", 4, RegistryValueKind.DWord);
                     }
                     else
                     {
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess(@"SYSTEM\CurrentControlSet\Services\WarpJITSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wscsvc", "DelayedAutoStart", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WarpJITSvc", "Start", 3, RegistryValueKind.DWord);
 
                     }
                     break;
                 case "TglButton26":
                     if (isChoose)
                     {
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdiSystemHost", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdiServiceHost", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\DPS", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdiServiceHost", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdiSystemHost", "Start", 4, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", "Start", 4, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DPS", "Start", 4, RegistryValueKind.DWord);
                     }
                     else
                     {
+                        TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdiSystemHost", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdiServiceHost", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\DPS", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdiServiceHost", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdiSystemHost", "Start", 3, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", "Start", 3, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DPS", "Start", 2, RegistryValueKind.DWord);
                     }
