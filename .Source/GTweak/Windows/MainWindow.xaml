@@ -46,18 +46,25 @@
                 </Border>
 
                 <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Border  BorderBrush="{StaticResource Color_Accent}" BorderThickness="1" CornerRadius="50.5" Width="29" Height="29" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Border CornerRadius="50">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
-                            </Border.Effect>
-                            <Border.Background>
-                                <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
-                            </Border.Background>
+                    <Grid>
+                        <Border  BorderBrush="{StaticResource Color_Accent}" CornerRadius="50" Width="29" Height="29" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Border CornerRadius="50">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
+                                </Border.Effect>
+                                <Border.Background>
+                                    <ImageBrush ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
+                                </Border.Background>
+                            </Border>
                         </Border>
-                    </Border>
+                        <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="0.5"  Stretch="Uniform">
+                            <Path.Data>
+                                <EllipseGeometry RadiusX="5" RadiusY="5"/>
+                            </Path.Data>
+                        </Path>
+                    </Grid>
 
-                    <TextBlock x:Name="ProfileName" Width="Auto" Text="{Binding DisplayProfileName}" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Color_Accent}" HorizontalAlignment="Right" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False" Margin="10,0,0,0">
+                    <TextBlock Width="Auto" Text="{Binding DisplayProfileName}" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Color_Accent}" HorizontalAlignment="Right" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False" Margin="10,0,0,0">
                         <TextBlock.Effect>
                             <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
                         </TextBlock.Effect>
