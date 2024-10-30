@@ -3,7 +3,6 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,74 +43,34 @@ namespace GTweak.View
             Image appImage = (Image)sender;
             applicationName = appImage.Name;
 
-            if (e.LeftButton == MouseButtonState.Pressed && appImage.Source == (DrawingImage)FindResource("A_DI_" + appImage.Name))
+            switch (e.LeftButton)
             {
-                appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
-
-                BackgroundQueue backgroundQueue = new BackgroundQueue();
-                await backgroundQueue.QueueTask(delegate
-                {
-                    UninstallingApps.IsAppDeletedList[applicationName] = true;
-                    UninstallingApps.DeletedApp(applicationName);
-                });
-                if (backgroundQueue.IsQueueCompleted())
-                {
-                    await Task.Delay(35000);
-                    UninstallingApps.IsAppDeletedList[appImage.Name] = false;
-                    UpdateViewStateApps();
-                }
-            }
-
-            if (e.LeftButton == MouseButtonState.Pressed && appImage.Source == (DrawingImage)FindResource("DA_DI_" + appImage.Name) && applicationName == "OneDrive")
-            {
-                appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
-                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
-
-                BackgroundQueue backgroundQueue = new BackgroundQueue();
-                await backgroundQueue.QueueTask(delegate
-                {
-                    UninstallingApps.ResetOneDrive();
-                });
-                if (backgroundQueue.IsQueueCompleted())
-                {
-                    await Task.Delay(6000);
-                    UninstallingApps.IsAppDeletedList[appImage.Name] = false;
-                    UpdateViewStateApps();
-                    UpdateViewStateApps();
-                }
-            }
-        }
-
-        private void BtnDelete_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                foreach (string key in UninstallingApps.IsAppDeletedList.Keys.ToList())
-                {
-                    UninstallingApps.IsAppDeletedList[key] = true;
-                    UpdateViewStateApps();
-                }
-
-                BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += delegate
-                {
-                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("appsdelete_notification"));
-                    Parallel.Invoke(UninstallingApps.DeletedAllApps);
-                };
-                backgroundWorker.RunWorkerCompleted += async delegate
-                {
-                    await Task.Delay(80000);
-                    foreach (string key in UninstallingApps.IsAppDeletedList.Keys.ToList())
+                case MouseButtonState.Pressed when appImage.Source == (DrawingImage)FindResource("A_DI_" + appImage.Name):
                     {
-                        UninstallingApps.IsAppDeletedList[key] = false;
-                        UpdateViewStateApps();
+                        appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
+
+                        BackgroundQueue backgroundQueue = new BackgroundQueue();
+                        await backgroundQueue.QueueTask(delegate { UninstallingApps.DeletedApp(applicationName); });
+
+                        if (backgroundQueue.IsQueueCompleted())
+                            UpdateViewStateApps();
+                        break;
                     }
-                    backgroundWorker.Dispose();
-                };
-                backgroundWorker.RunWorkerAsync();
+
+                case MouseButtonState.Pressed when appImage.Source == (DrawingImage)FindResource("DA_DI_" + appImage.Name) && applicationName == "OneDrive":
+                    {
+                        appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
+                        new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
+
+                        BackgroundQueue backgroundQueue = new BackgroundQueue();
+                        await backgroundQueue.QueueTask(delegate { UninstallingApps.ResetOneDrive(); });
+
+                        if (backgroundQueue.IsQueueCompleted())
+                            UpdateViewStateApps();
+                        break;
+                    }
             }
         }
-
 
         private void Apps_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -144,7 +103,7 @@ namespace GTweak.View
             Microsoft3D.Source = !UninstallingApps.IsAppDeletedList["Microsoft3D"] ? UninstallingApps.UserAppsList.Contains("Microsoft.Microsoft3DViewer") ? (DrawingImage)FindResource("A_DI_Microsoft3D") : (DrawingImage)FindResource("DA_DI_Microsoft3D") : (DrawingImage)FindResource("DI_Sandtime");
             Music.Source = !UninstallingApps.IsAppDeletedList["Music"] ? UninstallingApps.UserAppsList.Contains("Microsoft.ZuneMusic") ? (DrawingImage)FindResource("A_DI_Music") : (DrawingImage)FindResource("DA_DI_Music") : (DrawingImage)FindResource("DI_Sandtime");
             GetHelp.Source = !UninstallingApps.IsAppDeletedList["GetHelp"] ? UninstallingApps.UserAppsList.Contains("Microsoft.GetHelp") ? (DrawingImage)FindResource("A_DI_GetHelp") : (DrawingImage)FindResource("DA_DI_GetHelp") : (DrawingImage)FindResource("DI_Sandtime");
-            MicrosoftOfficeHub.Source = !UninstallingApps.IsAppDeletedList["MicrosoftOfficeHub"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MicrosoftOfficeHub") || UninstallingApps.UserAppsList.Contains("Microsoft.OutlookForWindows") ? (DrawingImage)FindResource("A_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DA_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DI_Sandtime");
+            MicrosoftOfficeHub.Source = !UninstallingApps.IsAppDeletedList["MicrosoftOfficeHub"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MicrosoftOfficeHub") ? (DrawingImage)FindResource("A_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DA_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DI_Sandtime");
             MicrosoftSolitaireCollection.Source = !UninstallingApps.IsAppDeletedList["MicrosoftSolitaireCollection"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MicrosoftSolitaireCollection") ? (DrawingImage)FindResource("A_DI_MicrosoftSolitaireCollection") : (DrawingImage)FindResource("DA_DI_MicrosoftSolitaireCollection") : (DrawingImage)FindResource("DI_Sandtime"); MixedReality.Source = !UninstallingApps.IsAppDeletedList["MixedReality"] ? UninstallingApps.UserAppsList.Contains("Microsoft.MixedReality.Portal") ? (DrawingImage)FindResource("A_DI_MixedReality") : (DrawingImage)FindResource("DA_DI_MixedReality") : (DrawingImage)FindResource("DI_Sandtime");
             Xbox.Source = !UninstallingApps.IsAppDeletedList["Xbox"] ? UninstallingApps.UserAppsList.Contains("Microsoft.XboxApp") || UninstallingApps.UserAppsList.Contains("Microsoft.GamingApp") || UninstallingApps.UserAppsList.Contains("Microsoft.XboxGamingOverlay") ||
                UninstallingApps.UserAppsList.Contains("Microsoft.XboxGameOverlay") || UninstallingApps.UserAppsList.Contains("Microsoft.XboxIdentityProvider") || UninstallingApps.UserAppsList.Contains("Microsoft.Xbox.TCUI") ||
@@ -178,6 +137,8 @@ namespace GTweak.View
             BingSearch.Source = !UninstallingApps.IsAppDeletedList["BingSearch"] ? UninstallingApps.UserAppsList.Contains("BingSearch") ? (DrawingImage)FindResource("A_DI_BingSearch") : (DrawingImage)FindResource("DA_DI_BingSearch") : (DrawingImage)FindResource("DI_Sandtime");
             Outlook.Source = !UninstallingApps.IsAppDeletedList["Outlook"] ? UninstallingApps.UserAppsList.Contains("Microsoft.OutlookForWindows") ? (DrawingImage)FindResource("A_DI_Outlook") : (DrawingImage)FindResource("DA_DI_Outlook") : (DrawingImage)FindResource("DI_Sandtime");
             QuickAssist.Source = !UninstallingApps.IsAppDeletedList["QuickAssist"] ? UninstallingApps.UserAppsList.Contains("MicrosoftCorporationII.QuickAssist") ? (DrawingImage)FindResource("A_DI_QuickAssist") : (DrawingImage)FindResource("DA_DI_QuickAssist") : (DrawingImage)FindResource("DI_Sandtime");
+            DevHome.Source = !UninstallingApps.IsAppDeletedList["DevHome"] ? UninstallingApps.UserAppsList.Contains("DevHome") ? (DrawingImage)FindResource("A_DI_DevHome") : (DrawingImage)FindResource("DA_DI_DevHome") : (DrawingImage)FindResource("DI_Sandtime");
+            WindowsTerminal.Source = !UninstallingApps.IsAppDeletedList["WindowsTerminal"] ? UninstallingApps.UserAppsList.Contains("WindowsTerminal") ? (DrawingImage)FindResource("A_DI_WindowsTerminal") : (DrawingImage)FindResource("DA_DI_WindowsTerminal") : (DrawingImage)FindResource("DI_Sandtime");
         }
     }
 }

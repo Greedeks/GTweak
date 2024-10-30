@@ -262,6 +262,8 @@
     <v:String x:Key="MicrosoftFamily_applications">Microsoft Family Safety</v:String>
     <v:String x:Key="BingSearch_applications">Bing Search</v:String>
     <v:String x:Key="QuickAssist_applications">Quick Assist</v:String>
+    <v:String x:Key="DevHome_applications">Dev Home</v:String>
+    <v:String x:Key="WindowsTerminal_applications">Terminal</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
