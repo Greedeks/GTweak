@@ -10,7 +10,7 @@ namespace GTweak.Utilities.Tweaks
     internal sealed class WindowsLicense
     {
         internal static uint statusLicense = 0;
-        private static bool IsVersionWindows(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(SystemData.СomputerСonfiguration.clientWinVersion).Count == words;
+        private static bool IsVersionWindows(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(SystemData.СomputerСonfiguration.WindowsClientVersion).Count == words;
 
         internal void LicenseStatus()
         {
@@ -66,7 +66,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 waitingWindow.Show();
 
-                if (SystemData.СomputerСonfiguration.clientWinVersion.Contains("10"))
+                if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("10"))
                 {
                     cmdProcess.StartInfo.Arguments = $"/c assoc .vbs=VBSFile";
                     cmdProcess.Start();

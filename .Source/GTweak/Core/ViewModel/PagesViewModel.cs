@@ -30,7 +30,7 @@ namespace GTweak.Core.ViewModel
         public InterfaceVM()
         {
             model = new InterfaceModel();
-            IsBlockForWin10 = SystemData.СomputerСonfiguration.clientWinVersion.Contains("11");
+            IsBlockForWin10 = SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11");
             IsBlockWithoutLicense = WindowsLicense.statusLicense == 1;
         }
     }
@@ -146,7 +146,7 @@ namespace GTweak.Core.ViewModel
             DisplayIpAddress = SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"];
             DisplayCountProcess = new SystemData.MonitoringSystem().CountProcess.ToString();
 
-            if (Settings.IsHiddenIpAddress & !SystemData.СomputerСonfiguration.isConnectionLose & !SystemData.СomputerСonfiguration.isInternetLimited & !SystemData.СomputerСonfiguration.isConnectionBlock)
+            if (Settings.IsHiddenIpAddress & !SystemData.СomputerСonfiguration.IsConnectionLose & !SystemData.СomputerСonfiguration.IsInternetLimited & !SystemData.СomputerСonfiguration.IsConnectionBlock)
             {
                 SetBlurValue = 20;
                 DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Show"];
@@ -154,7 +154,7 @@ namespace GTweak.Core.ViewModel
             else
             {
                 SetBlurValue = 0;
-                DisplayImageHidden = !SystemData.СomputerСonfiguration.isConnectionLose & !SystemData.СomputerСonfiguration.isInternetLimited & !SystemData.СomputerСonfiguration.isConnectionBlock ? (DrawingImage)Application.Current.Resources["DI_Hide"] : default;
+                DisplayImageHidden = !SystemData.СomputerСonfiguration.IsConnectionLose & !SystemData.СomputerСonfiguration.IsInternetLimited & !SystemData.СomputerСonfiguration.IsConnectionBlock ? (DrawingImage)Application.Current.Resources["DI_Hide"] : default;
             }
         }
     }

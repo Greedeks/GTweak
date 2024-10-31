@@ -424,11 +424,13 @@ namespace GTweak.Utilities.Tweaks
         {
             foreach (var defenderServ in defenderConfigDefault)
             {
-                try { 
+                try
+                {
                     if (isChoose)
                         Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\" + defenderServ.Key, true)?.SetValue("Start", 4, RegistryValueKind.DWord);
                     else
-                        Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\" + defenderServ.Key, true)?.SetValue("Start", defenderConfigDefault.Values, RegistryValueKind.DWord); }
+                        Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\" + defenderServ.Key, true)?.SetValue("Start", defenderConfigDefault.Values, RegistryValueKind.DWord);
+                }
                 catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
             }
         }

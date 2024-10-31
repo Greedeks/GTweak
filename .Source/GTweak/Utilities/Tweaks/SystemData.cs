@@ -124,8 +124,11 @@ namespace GTweak.Utilities.Tweaks
 
         internal sealed class СomputerСonfiguration
         {
-            internal static string clientWinVersion = string.Empty;
-            internal static bool isConnectionLose = false, isConnectionBlock = false, isInternetLimited = false;
+            internal static string WindowsClientVersion { get; set; } = string.Empty;
+            internal static bool IsConnectionLose { get; set; } = false;
+            internal static bool IsConnectionBlock { get; set; } = false;
+            internal static bool IsInternetLimited { get; set; } = false;
+
             private static string _type = string.Empty;
             private static readonly EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
 
@@ -274,30 +277,30 @@ namespace GTweak.Utilities.Tweaks
                         catch
                         {
                             СonfigurationData["IpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
-                            isInternetLimited = true;
+                            IsInternetLimited = true;
                         }
                         finally
                         {
-                            if (isInternetLimited)
-                                isInternetLimited = false;
-                            if (isConnectionBlock)
-                                isConnectionBlock = false;
+                            if (IsInternetLimited)
+                                IsInternetLimited = false;
+                            if (IsConnectionBlock)
+                                IsConnectionBlock = false;
 
                             if (IPAddress.TryParse(clientInternetProtocol.Ip, out _) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
-                                isConnectionLose = false;
+                                IsConnectionLose = false;
                                 СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
                             }
                             else
                             {
-                                isConnectionBlock = true;
+                                IsConnectionBlock = true;
                                 СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
                             }
                         }
                     }
                     else
                     {
-                        isConnectionLose = true;
+                        IsConnectionLose = true;
                         СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                     }
                 });
@@ -306,8 +309,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal sealed class UtilityСonfiguration
         {
-            internal static bool IsNeedUpdate = false;
-            internal static string DownloadVersion = string.Empty;
+            internal static bool IsNeedUpdate { get; set; } = false;
+            internal static string DownloadVersion { get; set; } = string.Empty;
 
             internal sealed class GitVersionUtility
             {

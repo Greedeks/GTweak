@@ -27,14 +27,14 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                if (!SystemData.СomputerСonfiguration.isConnectionLose)
+                if (!SystemData.СomputerСonfiguration.IsConnectionLose)
                 {
-                    if (SystemData.СomputerСonfiguration.isInternetLimited)
+                    if (SystemData.СomputerСonfiguration.IsInternetLimited)
                     {
                         SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("limited_systemInformation");
                         DataContext = new InformationSystemVM();
                     }
-                    else if (SystemData.СomputerСonfiguration.isConnectionBlock)
+                    else if (SystemData.СomputerСonfiguration.IsConnectionBlock)
                     {
                         SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_block_systemInformation");
                         DataContext = new InformationSystemVM();

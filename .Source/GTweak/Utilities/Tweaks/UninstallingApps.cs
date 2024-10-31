@@ -15,7 +15,7 @@ namespace GTweak.Utilities.Tweaks
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
 
-        internal static Dictionary<string, bool> IsAppDeletedList = new Dictionary<string, bool>
+        internal static Dictionary<string, bool> IsAppUnavailable = new Dictionary<string, bool>
         {
             ["MicrosoftStore"] = false,
             ["Todos"] = false,
@@ -114,8 +114,14 @@ namespace GTweak.Utilities.Tweaks
             ["Video"] = "zunevideo"
         };
 
+
         internal void ViewInstalledApp()
         {
+
+
+
+
+
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = @"powershell.exe",
@@ -137,11 +143,11 @@ namespace GTweak.Utilities.Tweaks
         }
 
 
-        internal async static void DeletedApp(string appName)
+        internal async static void DeletingPackage(string packageName)
         {
-            if (appName != "OneDrive")
+            if (packageName != "OneDrive")
             {
-                IsAppDeletedList[appName] = true;
+                IsAppUnavailable[packageName] = true;
 
                 using (Process process = new Process())
                 {
@@ -150,31 +156,31 @@ namespace GTweak.Utilities.Tweaks
                     process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                     process.EnableRaisingEvents = true;
                     process.StartInfo.FileName = "powershell.exe";
-                    process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + appName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                    process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + packageName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                     process.Start();
 
-                    foreach (var appDelete in ListAppsScipt[appName])
+                    foreach (var appDelete in ListAppsScipt[packageName])
                     {
                         process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
                         process.Start();
                     }
 
-                    if (AlternativeName.ContainsKey(appName))
+                    if (AlternativeName.ContainsKey(packageName))
                     {
-                        process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + AlternativeName[appName] + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                        process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + AlternativeName[packageName] + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
-                        UserAppsList = UserAppsList.Replace(AlternativeName[appName], "");
+                        UserAppsList = UserAppsList.Replace(AlternativeName[packageName], "");
                     }
 
                     process.WaitForExit(1000);
-               
-                    UserAppsList = UserAppsList.Replace(appName, string.Empty);
-             
+
+                    UserAppsList = UserAppsList.Replace(packageName, string.Empty);
+
                     await Task.Delay(8000);
-                    IsAppDeletedList[appName] = false;
+                    IsAppUnavailable[packageName] = false;
                 }
 
-                switch (appName)
+                switch (packageName)
                 {
                     case "Widgets":
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
@@ -196,13 +202,13 @@ namespace GTweak.Utilities.Tweaks
                 }
             }
 
-            else if (appName == "OneDrive")
+            else if (packageName == "OneDrive")
                 DeletedOneDrive();
         }
-   
+
         internal async static void DeletedOneDrive()
         {
-            IsAppDeletedList["OneDrive"] = true;
+            IsAppUnavailable["OneDrive"] = true;
 
             using (Process process = new Process())
             {
@@ -222,7 +228,7 @@ namespace GTweak.Utilities.Tweaks
                 }
 
                 await Task.Delay(8000);
-                IsAppDeletedList["OneDrive"] = false;
+                IsAppUnavailable["OneDrive"] = false;
             }
 
             string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + Settings.PathSystemDisk + @"\OneDriveTemp";
@@ -241,7 +247,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void ResetOneDrive()
         {
-            IsAppDeletedList["OneDrive"] = true;
+            IsAppUnavailable["OneDrive"] = true;
 
             using (Process process = new Process())
             {
@@ -256,7 +262,7 @@ namespace GTweak.Utilities.Tweaks
                 process.WaitForExit(8000);
 
                 if (!process.HasExited)
-                    IsAppDeletedList["OneDrive"] = false;
+                    IsAppUnavailable["OneDrive"] = false;
             }
 
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
