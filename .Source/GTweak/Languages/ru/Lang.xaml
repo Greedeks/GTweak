@@ -396,7 +396,7 @@
     <v:String x:Key="limited_systemInformation">Доступ к сети ограничен</v:String>
     <v:String x:Key="connection_block_systemInformation">Подключение без доступа к сети</v:String>
     <v:String x:Key="connection_lose_systemInformation">Отсутствует подключения к интернету</v:String>
-    <v:String x:Key="text_copy_systemInformatin">Скопировано</v:String>
+    <v:String x:Key="text_copy_systemInformatin">Скопировано!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">У вас не установлен драйвер</v:String>
     <!--#endregion-->
 

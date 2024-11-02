@@ -56,13 +56,14 @@ namespace GTweak.View
                     backgroundWorker.DoWork += delegate
                     {
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
-                        new Thread(() => new SystemData.MonitoringSystem().GetCpuUsage()).Start();
-                        new Thread(() => new SystemData.MonitoringSystem().GetCpuUsage()).IsBackground = true;
+                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage();})
+                        { IsBackground = true };
+                        _thread.Start();
                     };
                     backgroundWorker.RunWorkerCompleted += delegate
                     {
-                        new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).Start();
-                        new Thread(() => new SystemData.MonitoringSystem().CountProcess.ToString()).IsBackground = true;
+                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
+                        { IsBackground = true };
                         Application.Current.Dispatcher.Invoke(ProgressBarAnim);
                         DataContext = new InformationSystemVM();
 
@@ -88,20 +89,32 @@ namespace GTweak.View
             timer.Start();
         }
 
-        private void AnimationPopup(bool _reverse)
+        private void AnimationPopup()
         {
             PopupCopy.IsOpen = true;
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {
-                From = !_reverse ? 0 : 0.9,
-                To = !_reverse ? 0.9 : 0,
-                SpeedRatio = 10,
+                From = 0,
+                To = 0.9,
+                SpeedRatio = 9,
+                AutoReverse = true,
+                Duration = TimeSpan.FromSeconds(3),
                 EasingFunction = new QuadraticEase(),
-                Duration = TimeSpan.FromSeconds(2)
             };
-            doubleAnim.Completed += (s, _) => { if (_reverse) PopupCopy.IsOpen = false; };
+            doubleAnim.Completed += (s, _) => { PopupCopy.IsOpen = false; };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, doubleAnim);
+
+            doubleAnim = new DoubleAnimation()
+            {
+                From = -20,
+                To = -50,
+                SpeedRatio = 8,
+                Duration = TimeSpan.FromSeconds(3),
+                EasingFunction = new PowerEase(),
+            };
+            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, doubleAnim);
         }
 
         private void ImageHidden_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -123,20 +136,24 @@ namespace GTweak.View
             }
         }
 
-        private async void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void TextComputerData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount >= 2)
             {
-                TextBlock textBlock = (TextBlock)sender;
                 Clipboard.Clear();
-                Clipboard.SetData(DataFormats.UnicodeText, textBlock.Text.Replace('\n', ' '));
+                if (sender.GetType().Name == "TextBlock")
+                {
+                    TextBlock textBlock = (TextBlock)sender;
+                    Clipboard.SetData(DataFormats.UnicodeText, textBlock.Text.Replace('\n', ' '));
+                }
+                else if (sender.GetType().Name == "Run")
+                {
+                    Run runtext = (Run)sender;
+                    Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
+                }
 
                 if (!PopupCopy.IsOpen)
-                {
-                    AnimationPopup(false);
-                    await Task.Delay(400);
-                    AnimationPopup(true);
-                }
+                    AnimationPopup();
             }
         }
 
@@ -167,36 +184,15 @@ namespace GTweak.View
             });
         }
 
-        private async void Run_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount >= 2)
-            {
-                Run runtext = (Run)sender;
-                Clipboard.Clear();
-                Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
-
-                if (!PopupCopy.IsOpen)
-                {
-                    AnimationPopup(false);
-                    await Task.Delay(400);
-                    AnimationPopup(true);
-                }
-            }
-        }
-
-        private void Page_MouseMove(object sender, MouseEventArgs e)
-        {
-            Point currentPos = this.PointToScreen(Mouse.GetPosition(this));
-            PopupCopy.Placement = PlacementMode.Absolute;
-            PopupCopy.HorizontalOffset = currentPos.X + 10;
-            PopupCopy.VerticalOffset = currentPos.Y - 30;
-
-        }
-
         private void Page_Unloaded(object sender, RoutedEventArgs e) => timer.Stop();
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); })
+            { IsBackground = true };
+            
+             _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
+            { IsBackground = true };
             Application.Current.Dispatcher.Invoke(() => { CPULoad.Value = SystemData.MonitoringSystem.CpuUsage; });
             Application.Current.Dispatcher.Invoke(() => { RAMLoad.Value = new SystemData.MonitoringSystem().RamUsage; });
         }

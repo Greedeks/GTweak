@@ -125,9 +125,9 @@ namespace GTweak.Utilities.Tweaks
         internal sealed class СomputerСonfiguration
         {
             internal static string WindowsClientVersion { get; set; } = string.Empty;
-            internal static bool IsConnectionLose { get; set; } = false;
-            internal static bool IsConnectionBlock { get; set; } = false;
-            internal static bool IsInternetLimited { get; set; } = false;
+            internal static bool IsConnectionLose { get; private set; } = false;
+            internal static bool IsConnectionBlock { get; private set; } = false;
+            internal static bool IsInternetLimited { get; private set; } = false;
 
             private static string _type = string.Empty;
             private static readonly EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
@@ -329,8 +329,7 @@ namespace GTweak.Utilities.Tweaks
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";
 
-                using Stream stream = webRequest.GetResponse().GetResponseStream();
-                using StreamReader sreader = new StreamReader(stream);
+                using StreamReader sreader = new StreamReader(webRequest.GetResponse().GetResponseStream());
                 string DataAsJson = sreader.ReadToEnd();
                 GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
 

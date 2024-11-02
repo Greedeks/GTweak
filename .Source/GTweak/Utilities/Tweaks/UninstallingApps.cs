@@ -10,7 +10,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingApps
     {
-        internal static string UserAppsList { get; set; } = string.Empty;
+        internal static string UserAppsList { get; private set; } = string.Empty;
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
@@ -111,17 +111,12 @@ namespace GTweak.Utilities.Tweaks
             ["Mail"] = "communicationsapps",
             ["ClipChamp"] = "Clipchamp Video Editor",
             ["Music"] = "zunemusic",
-            ["Video"] = "zunevideo"
+            ["Video"] = "zunevideo",
+            ["Widgets"] = "Windows.Client.WebExperience"
         };
-
 
         internal void ViewInstalledApp()
         {
-
-
-
-
-
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = @"powershell.exe",
@@ -145,7 +140,10 @@ namespace GTweak.Utilities.Tweaks
 
         internal async static void DeletingPackage(string packageName)
         {
-            if (packageName != "OneDrive")
+            if (packageName == "OneDrive")
+                DeletedOneDrive();
+
+            else
             {
                 IsAppUnavailable[packageName] = true;
 
@@ -159,9 +157,9 @@ namespace GTweak.Utilities.Tweaks
                     process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + packageName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                     process.Start();
 
-                    foreach (var appDelete in ListAppsScipt[packageName])
+                    foreach (string getPackage in ListAppsScipt[packageName])
                     {
-                        process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + appDelete + " -AllUsers | Remove-AppxPackage");
+                        process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + getPackage + " -AllUsers | Remove-AppxPackage");
                         process.Start();
                     }
 
@@ -201,9 +199,6 @@ namespace GTweak.Utilities.Tweaks
                         break;
                 }
             }
-
-            else if (packageName == "OneDrive")
-                DeletedOneDrive();
         }
 
         internal async static void DeletedOneDrive()

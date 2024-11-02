@@ -10,8 +10,8 @@ using System.Windows;
 [assembly: AssemblyCopyright("Copyright © Greedeks 2024")]
 [assembly: AssemblyTrademark("Greedeks")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyInformationalVersion("Build: 4.91.9")]
-[assembly: AssemblyFileVersion("4.91.9")]
+[assembly: AssemblyInformationalVersion("Build: 4.100.0")]
+[assembly: AssemblyFileVersion("4.100.0")]
 
 [assembly: ComVisible(false)]
 
