@@ -19,10 +19,10 @@ namespace GTweak
         {
             InitializeComponent();
 
-            BtnNotification.State = Settings.IsViewNotification;
-            BtnSoundNtn.State = Settings.IsSoundNotification;
-            BtnTopMost.State = Topmost = Settings.IsTopMost;
-            BtnUpdate.State = Settings.IsСheckingUpdate;
+            BtnNotification.StateNA = Settings.IsViewNotification;
+            BtnSoundNtn.StateNA = Settings.IsSoundNotification;
+            BtnTopMost.StateNA = Topmost = Settings.IsTopMost;
+            BtnUpdate.StateNA = Settings.IsСheckingUpdate;
             SliderVolume.Value = Settings.VolumeNotification;
             LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;
             ThemeSelectionMenu.SelectedIndex = Settings.Theme switch
@@ -149,7 +149,7 @@ namespace GTweak
 
         private void BtnTopMost_ChangedState(object sender, EventArgs e)
         {
-            Parallel.Invoke(() =>
+            Parallel.Invoke(delegate
             {
                 Settings.ChangingParameters(!BtnTopMost.State, "TopMost");
                 Topmost = Settings.IsTopMost;
