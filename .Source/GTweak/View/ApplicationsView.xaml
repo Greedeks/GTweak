@@ -25,8 +25,8 @@
                 </TextBlock>
             </StackPanel>
 
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" Height="Auto" Margin="0,-10,0,0">
-                <StackPanel Orientation="Vertical" Margin="12,185,962,0" VerticalAlignment="Top">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="1100" Height="Auto" Margin="0,-10,0,0">
+                <StackPanel Orientation="Vertical" Margin="8,185,968,0" VerticalAlignment="Top">
                     <Image x:Name="DevHome" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -37,7 +37,7 @@
                 </StackPanel>
                 
                 
-                <StackPanel Orientation="Vertical" Margin="92,50,884,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="88,50,888,0" VerticalAlignment="Top">
                     <Image x:Name="MicrosoftStore" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -69,7 +69,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="172,95,804,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="168,95,808,0" VerticalAlignment="Top">
                     <Image x:Name="MicrosoftOfficeHub" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -94,7 +94,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="252,50,724,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="248,50,728,0" VerticalAlignment="Top">
                     <Image x:Name="BingWeather" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -126,7 +126,7 @@
                 </StackPanel>
 
 
-                <StackPanel Orientation="Vertical" Margin="332,95,644,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="328,95,648,0" VerticalAlignment="Top">
                     <Image x:Name="OneDrive" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -151,7 +151,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="412,50,564,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="408,50,568,0" VerticalAlignment="Top">
                     <Image x:Name="Music" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -183,7 +183,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="492,95,484,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="488,95,488,0" VerticalAlignment="Top">
                     <Image x:Name="FeedbackHub" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -208,7 +208,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="572,50,404,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="568,50,408,0" VerticalAlignment="Top">
                     <Image x:Name="Photos" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -240,7 +240,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="652,95,324,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="648,95,328,0" VerticalAlignment="Top">
                     <Image x:Name="GetStarted" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -265,7 +265,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="732,50,244,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="728,50,248,0" VerticalAlignment="Top">
                     <Image x:Name="Maps" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -297,7 +297,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="812,95,164,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="808,95,168,0" VerticalAlignment="Top">
                     <Image x:Name="PowerAutomateDesktop" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -322,7 +322,7 @@
                 </StackPanel>
 
                 
-                <StackPanel Orientation="Vertical" Margin="892,50,84,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="888,50,88,0" VerticalAlignment="Top">
                     <Image x:Name="Todos" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -353,7 +353,7 @@
                     </Image>
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="973,185,3,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="968,185,8,0" VerticalAlignment="Top">
                     <Image x:Name="WindowsTerminal" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">

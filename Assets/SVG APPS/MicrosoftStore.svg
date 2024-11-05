@@ -1,18 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 95 95" style="enable-background:new 0 0 95 95;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:2.7832;stroke-miterlimit:1.8555;}
-	.st1{fill:none;stroke:#000000;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-</style>
-<g id="surface1_1_">
-	<path class="st0" d="M24.7,87h45.6l22.8-39.5L70.3,8H24.7L1.9,47.5L24.7,87z"/>
-	<path class="st1" d="M20.4,34.8l43-8.9l5.1,2.5h5.1v45.6l-10.1,2.5l-43-7.6V34.8z"/>
-	<path class="st1" d="M30.5,43.7l20.3-3.8v22.8l-20.3-3.8V43.7z"/>
-	<path class="st1" d="M30.5,51.3h20.3"/>
-	<path class="st1" d="M39.4,43.2V60"/>
-	<path class="st1" d="M50.8,28.6c0-5.6-4.5-10.1-10.1-10.1c-5.6,0-10.1,4.5-10.1,10.1v4.2"/>
-	<path class="st1" d="M55.2,27.6c-1.9-5.3-7.7-8-13-6.1c-4,1.4-6.6,5.2-6.7,9.4v0.7"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="95px" height="95px" viewBox="0 0 95 95" version="1.1">
+<g id="surface1">
+<path style="fill:none;stroke-width:2.7832;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:1.8555;" d="M 24.699219 87 L 70.300781 87 L 93.101562 47.5 L 70.300781 8 L 24.699219 8 L 1.898438 47.5 Z M 24.699219 87 "/>
+<path style="fill:none;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 20.398438 34.800781 L 63.398438 25.898438 L 68.5 28.398438 L 73.601562 28.398438 L 73.601562 74 L 63.5 76.5 L 20.5 68.898438 L 20.5 34.800781 Z M 20.398438 34.800781 "/>
+<path style="fill:none;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 30.5 43.699219 L 50.800781 39.898438 L 50.800781 62.699219 L 30.5 58.898438 Z M 30.5 43.699219 "/>
+<path style="fill:none;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 30.5 51.300781 L 50.800781 51.300781 "/>
+<path style="fill:none;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 39.398438 43.199219 L 39.398438 60 "/>
+<path style="fill:none;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 50.800781 28.601562 C 50.800781 23 46.300781 18.5 40.699219 18.5 C 35.101562 18.5 30.601562 23 30.601562 28.601562 L 30.601562 32.800781 "/>
+<path style="fill:none;stroke-width:2.2266;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 55.199219 27.601562 C 53.300781 22.300781 47.5 19.601562 42.199219 21.5 C 38.199219 22.898438 35.601562 26.699219 35.5 30.898438 L 35.5 31.601562 "/>
 </g>
 </svg>
