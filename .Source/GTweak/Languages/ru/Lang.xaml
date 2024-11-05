@@ -262,7 +262,7 @@
     <v:String x:Key="MicrosoftFamily_applications">Семейная безопасность</v:String>
     <v:String x:Key="BingSearch_applications">Поиск в Интернете из Bing</v:String>
     <v:String x:Key="QuickAssist_applications">Быстрая поддержка</v:String>
-    <v:String x:Key="DevHome_applications">Домашняя среда разработки</v:String>
+    <v:String x:Key="DevHome_applications">Dev Home</v:String>
     <v:String x:Key="WindowsTerminal_applications">Терминал</v:String>
     <!--#endregion-->
 
