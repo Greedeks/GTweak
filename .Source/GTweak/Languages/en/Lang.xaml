@@ -310,7 +310,7 @@
     <v:String x:Key="TglButton12_description_services">Disable if you have only one monitor and you do not plan to connect additional ones.</v:String>
     <v:String x:Key="TglButton13_description_services">Disable if you do not use all these applications: Virtual Desktops, Your Phone and Night Lights.</v:String>
     <v:String x:Key="TglButton14_description_services">Disable if you do not use or plan to use a local network.</v:String>
-    <v:String x:Key="TglButton15_description_services">Disable if you do not plan to update Windows. Please note that the service affects downloading and updating apps from the Windows Store.</v:String>
+    <v:String x:Key="TglButton15_description_services">Disable it if you do not plan to update Windows. The file responsible for Windows updates will also be changed. And even if the services are enabled, the Update Center will not work. Please note that the tweak affects downloading and updating apps from the Windows Store.</v:String>
     <v:String x:Key="TglButton16_description_services">Disable if you are not using VPN clients. May affect the operation of the Xbox.</v:String>
     <v:String x:Key="TglButton17_description_services">Disable it if you do not need file synchronization and access to them on a local network for Windows Media Player. These services are not critical, you can continue to use the player.</v:String>
     <v:String x:Key="TglButton18_description_services">Disable if you do not use a remote desktop and do not use a server connection to them.</v:String>
