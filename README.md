@@ -1,6 +1,6 @@
 <h1 align="center"> <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Jura&weight=600&size=40&duration=1000&pause=3000&color=16BD72&multiline=true&width=160&lines=GTweak" alt="Typing SVG" /></a> <img width="36" height="36" src="https://github.com/user-attachments/assets/9aae3d24-a33b-4396-8c31-1201b0843ece"/> </h1>
 
-![Logo](https://github.com/Greedeks/GTweak/blob/main/Github/PreviewGit.gif)
+![Logo](https://github.com/Greedeks/GTweak/blob/main/Github/Preview.gif)
 ## 
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=16BD72)](https://github.com/Greedeks/GTweak/releases/latest)
 ![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)
