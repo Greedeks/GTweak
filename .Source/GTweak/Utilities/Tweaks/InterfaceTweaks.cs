@@ -333,7 +333,7 @@ namespace GTweak.Utilities.Tweaks
 
         private static void RestartExplorer(Process launchExplorer)
         {
-            Thread _thread = new Thread(() =>
+            Thread _thread = new Thread(async () =>
             {
                 foreach (Process process in Process.GetProcesses())
                 {
@@ -352,7 +352,6 @@ namespace GTweak.Utilities.Tweaks
                         if (explorer.Length == 0)
                         {
                             launchExplorer.StartInfo.FileName = $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}";
-                            launchExplorer.StartInfo.UseShellExecute = true;
                             launchExplorer.Start();
                         }
 
