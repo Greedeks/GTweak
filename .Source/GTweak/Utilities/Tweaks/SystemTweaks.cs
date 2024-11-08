@@ -750,18 +750,7 @@ namespace GTweak.Utilities.Tweaks
 
                         if (string.IsNullOrEmpty(_serchScheme))
                         {
-                            byte[] _byte = default;
-                            using (MemoryStream fileOut = new MemoryStream(Properties.Resources.Ultimate_Performance_pow))
-                            using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                            using (MemoryStream ms = new MemoryStream())
-                            {
-                                gz.CopyTo(ms);
-                                _byte = ms.ToArray();
-                            }
-
-                            Directory.CreateDirectory(Settings.PathTempFiles);
-                            File.WriteAllBytes(Settings.PathTempFiles + @"\UltimatePerformance.pow", _byte);
-
+                            new UnarchiveManager(Settings.PathTempFiles + @"\UltimatePerformance.pow", Properties.Resources.Ultimate_Performance_pow);
 
                             string _guid = Guid.NewGuid().ToString("D");
 

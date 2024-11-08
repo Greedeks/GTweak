@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Properties;
+using GTweak.Utilities.Helpers;
 using GTweak.Windows;
 using Microsoft.Win32;
 using System;
@@ -41,8 +42,16 @@ namespace GTweak.Utilities
 
         internal readonly void RunAnalysis()
         {
-            new ViewNotification().CheckingTempFile();
             СheckingParameters();
+
+            if (!Directory.Exists(PathTempFiles))
+                Directory.CreateDirectory(PathTempFiles);
+
+            if (!File.Exists(PathIcon))
+                new UnarchiveManager(PathIcon, Resources.GTweak);
+
+            if (!File.Exists(PathSound))
+                new UnarchiveManager(PathSound, Resources.Sound);
         }
 
         private readonly void СheckingParameters()

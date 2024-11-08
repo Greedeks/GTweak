@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Properties;
+using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
 using System;
@@ -370,20 +371,10 @@ namespace GTweak.Utilities.Tweaks
                     {
                         BlockSpyDomain(true);
 
-                        try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); }
-                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                        try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
                         File.Move(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)");
-
-                        byte[] _byte = default;
-                        using (MemoryStream fileOut = new MemoryStream(Properties.Resources.hosts))
-                        using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            gz.CopyTo(ms);
-                            _byte = ms.ToArray();
-                        }
-                        File.WriteAllBytes(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", _byte);
+                        new UnarchiveManager(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", Resources.hosts);
                     }
                     else
                     {

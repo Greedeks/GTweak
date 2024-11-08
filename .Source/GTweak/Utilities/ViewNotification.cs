@@ -1,7 +1,4 @@
-﻿using GTweak.Properties;
-using GTweak.Windows;
-using System.IO;
-using System.IO.Compression;
+﻿using GTweak.Windows;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,39 +41,6 @@ namespace GTweak.Utilities
                     });
                 });
             }
-        }
-
-        internal void CheckingTempFile()
-        {
-            if (!File.Exists(Settings.PathIcon))
-            {
-                byte[] _iconByte = default;
-                using (MemoryStream fileOut = new MemoryStream(Resources.GTweak))
-                using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    gz.CopyTo(ms);
-                    _iconByte = ms.ToArray();
-                }
-                Directory.CreateDirectory(Settings.PathTempFiles);
-                File.WriteAllBytes(Settings.PathIcon, _iconByte);
-            }
-
-            if (!File.Exists(Settings.PathSound))
-            {
-                byte[] _soundbyte = default;
-                using (MemoryStream fileOut = new MemoryStream(Resources.Sound))
-                using (GZipStream gz = new GZipStream(fileOut, CompressionMode.Decompress))
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    gz.CopyTo(ms);
-                    _soundbyte = ms.ToArray();
-                }
-
-                Directory.CreateDirectory(Settings.PathTempFiles);
-                File.WriteAllBytes(Settings.PathSound, _soundbyte);
-            }
-
         }
     }
 }
