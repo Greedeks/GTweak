@@ -56,7 +56,7 @@ namespace GTweak.View
                     backgroundWorker.DoWork += delegate
                     {
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
-                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage();})
+                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); })
                         { IsBackground = true };
                         _thread.Start();
                     };
@@ -190,8 +190,8 @@ namespace GTweak.View
         {
             Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); })
             { IsBackground = true };
-            
-             _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
+
+            _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
             { IsBackground = true };
             Application.Current.Dispatcher.Invoke(() => { CPULoad.Value = SystemData.MonitoringSystem.CpuUsage; });
             Application.Current.Dispatcher.Invoke(() => { RAMLoad.Value = new SystemData.MonitoringSystem().RamUsage; });

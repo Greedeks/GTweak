@@ -15,6 +15,12 @@ namespace GTweak.Utilities.Helpers
                 gz.CopyTo(ms);
                 fileSize = ms.ToArray();
             }
+
+            string folderDir = path.Remove(path.LastIndexOf(@"\"));
+
+            if (!Directory.Exists(folderDir))
+                Directory.CreateDirectory(folderDir);
+
             File.WriteAllBytes(path, fileSize);
         }
     }

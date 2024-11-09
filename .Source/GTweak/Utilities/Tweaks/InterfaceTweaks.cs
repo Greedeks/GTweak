@@ -4,7 +4,6 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
 using System.Threading;
 
@@ -333,13 +332,13 @@ namespace GTweak.Utilities.Tweaks
 
         private static void RestartExplorer(Process launchExplorer)
         {
-            Thread _thread = new Thread(async () =>
+            Thread _thread = new Thread(() =>
             {
                 foreach (Process process in Process.GetProcesses())
                 {
                     try
                     {
-                        if (string.Compare(process.MainModule?.FileName, $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(process.MainModule?.FileName, $@"{Environment.GetEnvironmentVariable("WINDIR")}\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             process.Kill();
                             process.Start();
@@ -351,7 +350,7 @@ namespace GTweak.Utilities.Tweaks
                         Process[] explorer = Process.GetProcessesByName("explorer");
                         if (explorer.Length == 0)
                         {
-                            launchExplorer.StartInfo.FileName = $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}";
+                            launchExplorer.StartInfo.FileName = $@"{Environment.GetEnvironmentVariable("WINDIR")}\{"explorer.exe"}";
                             launchExplorer.Start();
                         }
 

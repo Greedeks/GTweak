@@ -16,7 +16,7 @@ namespace GTweak.Assets.UserControl
         /// </summary>
         internal event EventHandler ChangedState;
 
-        private readonly Thickness _leftSide = new Thickness(5, 0, 0, 0), _rightSide = new Thickness(45, 0, 0, 0);
+        private readonly Thickness _leftSide = new Thickness(6, 0, 0, 0), _rightSide = new Thickness(45, 0, 0, 0);
         private readonly LinearGradientBrush brushOffColor = new LinearGradientBrush(), brushOnColor = new LinearGradientBrush();
         private bool _state = false;
 
@@ -94,7 +94,7 @@ namespace GTweak.Assets.UserControl
                     From = brushOffColor,
                     To = brushOnColor,
                     SpeedRatio = 1,
-                    Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromSeconds(0.1)
+                    Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(100)
                 };
                 Timeline.SetDesiredFrameRate(brushanimation, 400);
                 Back.BeginAnimation(Shape.FillProperty, brushanimation);
@@ -123,7 +123,7 @@ namespace GTweak.Assets.UserControl
                     From = brushOnColor,
                     To = brushOffColor,
                     SpeedRatio = 1,
-                    Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromSeconds(0.1)
+                    Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(100)
                 };
                 Timeline.SetDesiredFrameRate(brushanimation, 400);
                 Back.BeginAnimation(Shape.FillProperty, brushanimation);

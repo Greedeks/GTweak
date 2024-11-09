@@ -219,12 +219,12 @@ namespace GTweak.Utilities.Tweaks
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc", "Start", string.Empty).ToString() != "4" ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", string.Empty).ToString() != "4")
-                {
-                   if (!File.Exists(WinUpdatePaths["RenMoUso_New"]) & !File.Exists(WinUpdatePaths["RenMoUso_Old"]))
-                       servicesV.TglButton15.StateNA = true;
-                   else
-                       servicesV.TglButton15.StateNA = false;
-                }
+            {
+                if (!File.Exists(WinUpdatePaths["RenMoUso_New"]) & !File.Exists(WinUpdatePaths["RenMoUso_Old"]))
+                    servicesV.TglButton15.StateNA = true;
+                else
+                    servicesV.TglButton15.StateNA = false;
+            }
             else
                 servicesV.TglButton15.StateNA = false;
 

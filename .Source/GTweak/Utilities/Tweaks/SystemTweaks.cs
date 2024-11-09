@@ -4,8 +4,6 @@ using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.IO.Compression;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;

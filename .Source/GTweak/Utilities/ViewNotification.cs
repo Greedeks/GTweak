@@ -1,7 +1,6 @@
 ﻿using GTweak.Windows;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace GTweak.Utilities
 {
@@ -13,32 +12,29 @@ namespace GTweak.Utilities
         {
             if (Settings.IsViewNotification)
             {
-                Thread _thread = new Thread(() => new Settings().RunAnalysis()) { IsBackground = true };
+                Thread _thread = new Thread(() => new Settings().CheckingTempFiles()) { IsBackground = true };
                 _thread.Start();
 
                 await Task.Delay(300);
 
-                Application.Current.Dispatcher.Invoke(delegate
+                Parallel.Invoke(async delegate
                 {
-                    Parallel.Invoke(async delegate
+                    NotificationWindow notificationWindow = new NotificationWindow();
+
+                    if (notificationWindow.IsLoaded || isAlreadyLaunch)
+                        return;
+
+                    isAlreadyLaunch = true;
+
+                    notificationWindow = new NotificationWindow
                     {
-                        NotificationWindow notificationWindow = new NotificationWindow();
-
-                        if (notificationWindow.IsLoaded || isAlreadyLaunch)
-                            return;
-
-                        isAlreadyLaunch = true;
-
-                        notificationWindow = new NotificationWindow
-                        {
-                            TitleNotice = tittle,
-                            TextNotice = content,
-                            ActionChoice = action,
-                        };
-                        await Task.Delay(100);
-                        notificationWindow.Show();
-                        notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
-                    });
+                        TitleNotice = tittle,
+                        TextNotice = content,
+                        ActionChoice = action,
+                    };
+                    await Task.Delay(100);
+                    notificationWindow.Show();
+                    notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
                 });
             }
         }

@@ -49,7 +49,8 @@ namespace GTweak.Windows
 
             Parallel.Invoke(
                 delegate { Settings.PID = TrustedInstaller.StartTrustedInstallerService(); },
-                new Settings().RunAnalysis,
+                new Settings().СheckingParameters,
+                new Settings().CheckingTempFiles,
                 new WindowsLicense().LicenseStatus,
                 new SystemData.СomputerСonfiguration().GetСonfigurationComputer,
                 new SystemData.UtilityСonfiguration().CheckingUpdate,
