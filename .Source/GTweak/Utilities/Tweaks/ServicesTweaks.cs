@@ -20,7 +20,11 @@ namespace GTweak.Utilities.Tweaks
             ["MoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
             ["UpdateFolder"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\Tasks\Microsoft\Windows"),
             ["RenMoUso_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\BlockUpdate-GTweak.exe"),
-            ["RenMoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\BlockUpdate-GTweak.exe")
+            ["RenMoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\BlockUpdate-GTweak.exe"),
+            ["Core_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\wuaucltcore.exe"),
+            ["Core_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\wuaucltcore.exe"),
+            ["RenCore_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\BlockUpdateCore-GTweak.exe"),
+            ["RenCore_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\BlockUpdateCore-GTweak.exe"),
         };
 
         internal void ViewServices(ServicesView servicesV)
@@ -220,7 +224,7 @@ namespace GTweak.Utilities.Tweaks
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", string.Empty).ToString() != "4")
             {
-                if (!File.Exists(WinUpdatePaths["RenMoUso_New"]) & !File.Exists(WinUpdatePaths["RenMoUso_Old"]))
+                if (!File.Exists(WinUpdatePaths["RenMoUso_New"]) & !File.Exists(WinUpdatePaths["RenMoUso_Old"]) & !File.Exists(WinUpdatePaths["RenCore_Old"]) & !File.Exists(WinUpdatePaths["RenCore_New"]))
                     servicesV.TglButton15.StateNA = true;
                 else
                     servicesV.TglButton15.StateNA = false;
@@ -607,12 +611,15 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton15":
                     BlockWindowsUpdate(isChoose);
 
-                    string renameMoUsoNew = isChoose ? "rename " + WinUpdatePaths["MoUso_New"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_New"] + " MoUsoCoreWorker.exe";
-                    string renameMoUsoOld = isChoose ? "rename " + WinUpdatePaths["MoUso_Old"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_Old"] + " MoUsoCoreWorker.exe";
-
                     using (BackgroundWorker backgroundWorker = new BackgroundWorker())
                     {
-                        backgroundWorker.DoWork += delegate { TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c {renameMoUsoNew} & {renameMoUsoOld}"); };
+                        backgroundWorker.DoWork += delegate 
+                        { 
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c {(isChoose ? "rename " + WinUpdatePaths["MoUso_New"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_New"] + " MoUsoCoreWorker.exe")} & " +
+                            $"{(isChoose ? "rename " + WinUpdatePaths["MoUso_Old"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_Old"] + " MoUsoCoreWorker.exe")} & " +
+                            $"{(isChoose ? "rename " + WinUpdatePaths["Core_New"] + " BlockUpdateCore-GTweak.exe" : "rename " + WinUpdatePaths["RenCore_New"] + " wuaucltcore.exe")} & " +
+                            $"{(isChoose ? "rename " + WinUpdatePaths["Core_Old"] + " BlockUpdateCore-GTweak.exe" : "rename " + WinUpdatePaths["RenCore_Old"] + " wuaucltcore.exe")}"); 
+                        };
                         backgroundWorker.RunWorkerAsync();
                     }
 
