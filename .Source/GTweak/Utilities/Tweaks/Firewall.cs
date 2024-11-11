@@ -17,7 +17,7 @@ namespace GTweak.Utilities.Tweaks
             ["WDefender"] = @"GTweak - Windows Defender blocking"
         };
 
-        private static readonly SortedList<string, string> ProgramPaths = new SortedList<string, string>
+        private static readonly SortedList<string, string> PathsForPrograms = new SortedList<string, string>
         {
             ["MoUso_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
             ["MoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
@@ -46,13 +46,13 @@ namespace GTweak.Utilities.Tweaks
                 {
                     Parallel.Invoke(() =>
                     {
-                        AddRulesIn(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], NameRules["Update"]);
-                        AddRulesIn(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
+                        AddRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
+                        AddRulesIn(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                     },
                     () =>
                     {
-                        AddRulesOut(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], NameRules["Update"]);
-                        AddRulesOut(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
+                        AddRulesOut(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
+                        AddRulesOut(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                     });
                 }
                 else
@@ -61,14 +61,14 @@ namespace GTweak.Utilities.Tweaks
                     {
                         try
                         {
-                            AddRulesIn(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], NameRules["Update"]);
-                            AddRulesIn(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
+                            AddRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
+                            AddRulesIn(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                         try
                         {
-                            AddRulesIn(isChoose, File.Exists(ProgramPaths["MoUso_New"]) ? ProgramPaths["MoUso_New"] : ProgramPaths["MoUso_Old"], NameRules["Update"]);
-                            AddRulesOut(isChoose, ProgramPaths["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
+                            AddRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
+                            AddRulesOut(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     });
@@ -180,13 +180,13 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (CheckRulesWindows(NameRules["WDefender"]) && isChoose)
                 {
-                    Parallel.Invoke(() => { AddRulesOut(isChoose, ProgramPaths["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); });
+                    Parallel.Invoke(() => { AddRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); });
                 }
                 else
                 {
                     Parallel.Invoke(() =>
                     {
-                        try { AddRulesOut(isChoose, ProgramPaths["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); }
+                        try { AddRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     });
                 }
