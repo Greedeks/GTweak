@@ -14,17 +14,24 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : Firewall
     {
-        private static readonly SortedList<string, string> WinUpdatePaths = new SortedList<string, string>
+        private static readonly SortedList<string, string> pathUpdatePrograms = new SortedList<string, string>
         {
-            ["MoUso_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
-            ["MoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
-            ["UpdateFolder"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\Tasks\Microsoft\Windows"),
-            ["RenMoUso_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\BlockUpdate-GTweak.exe"),
-            ["RenMoUso_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\BlockUpdate-GTweak.exe"),
-            ["Core_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\wuaucltcore.exe"),
-            ["Core_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\wuaucltcore.exe"),
-            ["RenCore_New"] = string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\BlockUpdateCore-GTweak.exe"),
-            ["RenCore_Old"] = string.Concat(Settings.PathSystemDisk, @"Windows\System32\BlockUpdateCore-GTweak.exe"),
+            ["Worker"] = string.Concat(Settings.PathSystemDisk+@"Windows\UUS\amd64\", "MoUsoCoreWorker.exe"),
+            ["Core"] = string.Concat(Settings.PathSystemDisk + @"Windows\UUS\amd64\", "wuaucltcore.exe"),
+            ["Agent"] = string.Concat(Settings.PathSystemDisk + @"Windows\UUS\amd64\", "WaaSMedicAgent.exe"),
+            ["Re_Worker"] = string.Concat(Settings.PathSystemDisk + @"Windows\UUS\amd64\", "BlockUpdate-GTweak.exe"),
+            ["Re_Core"] = string.Concat(Settings.PathSystemDisk + @"Windows\UUS\amd64\", "BlockUpdateCore-GTweak.exe"),
+            ["Re_Agent"] = string.Concat(Settings.PathSystemDisk + @"Windows\UUS\amd64\", "BlockUpdateAgent-GTweak.exe"),
+        };
+
+        private static readonly SortedList<string, string> OldPathUpdatePrograms = new SortedList<string, string>
+        {
+            ["Worker"] = string.Concat(Settings.PathSystemDisk + @"Windows\System32\", "MoUsoCoreWorker.exe"),
+            ["Core"] = string.Concat(Settings.PathSystemDisk + @"Windows\System32\", "wuaucltcore.exe"),
+            ["Agent"] = string.Concat(Settings.PathSystemDisk + @"Windows\System32\", "WaaSMedicAgent.exe"),
+            ["Re_Worker"] = string.Concat(Settings.PathSystemDisk + @"Windows\System32\", "BlockUpdate-GTweak.exe"),
+            ["Re_Core"] = string.Concat(Settings.PathSystemDisk + @"Windows\System32\", "BlockUpdateCore-GTweak.exe"),
+            ["Re_Agent"] = string.Concat(Settings.PathSystemDisk + @"Windows\System32\", "BlockUpdateAgent-GTweak.exe"),
         };
 
         internal void ViewServices(ServicesView servicesV)
@@ -224,7 +231,8 @@ namespace GTweak.Utilities.Tweaks
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", string.Empty).ToString() != "4")
             {
-                if (!File.Exists(WinUpdatePaths["RenMoUso_New"]) & !File.Exists(WinUpdatePaths["RenMoUso_Old"]) & !File.Exists(WinUpdatePaths["RenCore_Old"]) & !File.Exists(WinUpdatePaths["RenCore_New"]))
+                if (!File.Exists(pathUpdatePrograms["Re_Worker"]) & !File.Exists(pathUpdatePrograms["Re_Core"]) & !File.Exists(pathUpdatePrograms["Re_Agent"]) &
+                    !File.Exists(OldPathUpdatePrograms["Re_Worker"]) & !File.Exists(OldPathUpdatePrograms["Re_Core"]) & !File.Exists(OldPathUpdatePrograms["Re_Agent"]))
                     servicesV.TglButton15.StateNA = true;
                 else
                     servicesV.TglButton15.StateNA = false;
@@ -614,11 +622,13 @@ namespace GTweak.Utilities.Tweaks
                     using (BackgroundWorker backgroundWorker = new BackgroundWorker())
                     {
                         backgroundWorker.DoWork += delegate 
-                        { 
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c {(isChoose ? "rename " + WinUpdatePaths["MoUso_New"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_New"] + " MoUsoCoreWorker.exe")} & " +
-                            $"{(isChoose ? "rename " + WinUpdatePaths["MoUso_Old"] + " BlockUpdate-GTweak.exe" : "rename " + WinUpdatePaths["RenMoUso_Old"] + " MoUsoCoreWorker.exe")} & " +
-                            $"{(isChoose ? "rename " + WinUpdatePaths["Core_New"] + " BlockUpdateCore-GTweak.exe" : "rename " + WinUpdatePaths["RenCore_New"] + " wuaucltcore.exe")} & " +
-                            $"{(isChoose ? "rename " + WinUpdatePaths["Core_Old"] + " BlockUpdateCore-GTweak.exe" : "rename " + WinUpdatePaths["RenCore_Old"] + " wuaucltcore.exe")}"); 
+                        {
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c {(isChoose ? "rename " + pathUpdatePrograms["Worker"] + " BlockUpdate-GTweak.exe" : "rename " + pathUpdatePrograms["Re_Worker"] + " MoUsoCoreWorker.exe")} & " +
+                            $"{(isChoose ? "rename " + pathUpdatePrograms["Agent"] + " BlockUpdateAgent-GTweak.exe" : "rename " + pathUpdatePrograms["Re_Agent"] + " WaaSMedicAgent.exe")} & " +
+                            $"{(isChoose ? "rename " + pathUpdatePrograms["Core"] + " BlockUpdateCore-GTweak.exe" : "rename " + pathUpdatePrograms["Re_Core"] + " wuaucltcore.exe")} & " +
+                            $"{(isChoose ? "rename " + OldPathUpdatePrograms["Worker"] + " BlockUpdate-GTweak.exe" : "rename " + OldPathUpdatePrograms["Re_Worker"] + " MoUsoCoreWorker.exe")} & " +
+                            $"{(isChoose ? "rename " + OldPathUpdatePrograms["Agent"] + " BlockUpdateAgent-GTweak.exe" : "rename " + OldPathUpdatePrograms["Re_Agent"] + " WaaSMedicAgent.exe")} & " +
+                            $"{(isChoose ? "rename " + OldPathUpdatePrograms["Core"] + " BlockUpdateCore-GTweak.exe" : "rename " + OldPathUpdatePrograms["Re_Core"] + " wuaucltcore.exe")} "); 
                         };
                         backgroundWorker.RunWorkerAsync();
                     }

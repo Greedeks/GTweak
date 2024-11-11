@@ -86,7 +86,7 @@ namespace GTweak.View
                         break;
                 }
 
-                await Task.Delay(350);
+                await Task.Delay(500);
                 Parallel.Invoke(() => new SystemTweaks().ViewSystem(this));
             }
             else

@@ -43,7 +43,7 @@ namespace GTweak.View
 
             new ViewNotification().Show("restart");
 
-            await Task.Delay(350);
+            await Task.Delay(500);
             Parallel.Invoke(() => new ServicesTweaks().ViewServices(this));
         }
 
