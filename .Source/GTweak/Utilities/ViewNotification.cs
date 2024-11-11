@@ -1,6 +1,7 @@
 ﻿using GTweak.Windows;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GTweak.Utilities
 {
@@ -17,24 +18,27 @@ namespace GTweak.Utilities
 
                 await Task.Delay(300);
 
-                Parallel.Invoke(async delegate
+                Application.Current.Dispatcher.Invoke(delegate
                 {
-                    NotificationWindow notificationWindow = new NotificationWindow();
-
-                    if (notificationWindow.IsLoaded || isAlreadyLaunch)
-                        return;
-
-                    isAlreadyLaunch = true;
-
-                    notificationWindow = new NotificationWindow
+                    Parallel.Invoke(async delegate
                     {
-                        TitleNotice = tittle,
-                        TextNotice = content,
-                        ActionChoice = action,
-                    };
-                    await Task.Delay(100);
-                    notificationWindow.Show();
-                    notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
+                        NotificationWindow notificationWindow = new NotificationWindow();
+
+                        if (notificationWindow.IsLoaded || isAlreadyLaunch)
+                            return;
+
+                        isAlreadyLaunch = true;
+
+                        notificationWindow = new NotificationWindow
+                        {
+                            TitleNotice = tittle,
+                            TextNotice = content,
+                            ActionChoice = action,
+                        };
+                        await Task.Delay(100);
+                        notificationWindow.Show();
+                        notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
+                    });
                 });
             }
         }
