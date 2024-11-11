@@ -35,8 +35,6 @@ namespace GTweak.Windows
             }, Application.Current.Dispatcher);
 
             timer.Start();
-
-            _mediaPlayer.Open(new Uri(Settings.PathSound));
         }
 
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -65,6 +63,7 @@ namespace GTweak.Windows
         {
             if (Settings.IsSoundNotification)
             {
+                _mediaPlayer.Open(new Uri(Settings.PathSound));
                 _mediaPlayer.Volume = Settings.VolumeNotification / 100.0f;
                 _mediaPlayer.Play();
             }

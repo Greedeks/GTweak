@@ -101,7 +101,7 @@ namespace GTweak.View
                 Duration = TimeSpan.FromSeconds(3),
                 EasingFunction = new QuadraticEase(),
             };
-            doubleAnim.Completed += (s, _) => { PopupCopy.IsOpen = false; };
+            doubleAnim.Completed += delegate { PopupCopy.IsOpen = false; };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, doubleAnim);
 
@@ -110,8 +110,8 @@ namespace GTweak.View
                 From = -20,
                 To = -50,
                 SpeedRatio = 8,
+                EasingFunction = new QuadraticEase(),
                 Duration = TimeSpan.FromSeconds(3),
-                EasingFunction = new PowerEase(),
             };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, doubleAnim);
@@ -165,7 +165,7 @@ namespace GTweak.View
                 {
                     From = CPULoad.Value,
                     To = SystemData.MonitoringSystem.CpuUsage,
-                    EasingFunction = new QuadraticEase(),
+                    EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
                 Timeline.SetDesiredFrameRate(doubleAnim, 400);
@@ -176,7 +176,7 @@ namespace GTweak.View
                 {
                     From = RAMLoad.Value,
                     To = new SystemData.MonitoringSystem().RamUsage,
-                    EasingFunction = new QuadraticEase(),
+                    EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
                 Timeline.SetDesiredFrameRate(doubleAnim, 400);
