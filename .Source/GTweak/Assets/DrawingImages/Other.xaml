@@ -162,7 +162,7 @@
                     <DrawingGroup Transform="0.185547,0,0,0.185547,0,0">
                         <GeometryDrawing Geometry="F1 M95,95z M0,0z M133.010526,469.094737L378.989474,469.094737 502,256 378.989474,42.905263 133.010526,42.905263 10,256z M133.010526,469.094737">
                             <GeometryDrawing.Pen>
-                                <Pen Brush="{DynamicResource Color_Inactive}" Thickness="15" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                                <Pen Brush="{DynamicResource Color_DeletedTime}" Thickness="15" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
                             </GeometryDrawing.Pen>
                         </GeometryDrawing>
                     </DrawingGroup>

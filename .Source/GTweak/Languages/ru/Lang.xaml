@@ -171,7 +171,7 @@
     <v:String x:Key="tgl14_interface">Значок «Корзина» на Рабочем столе</v:String>
     <v:String x:Key="tgl15_interface">Выравнивание панели задач (Windows 11)</v:String>
     <v:String x:Key="tgl16_interface">Стандартный макет меню «Пуск» (Windows 11)</v:String>
-    <v:String x:Key="tgl17_interface">Новое урезанное контекстное меню (Windows 11)</v:String>
+    <v:String x:Key="tgl17_interface">Урезанное контекстное меню (Windows 11)</v:String>
     <v:String x:Key="tgl18_interface">Показывать советы и предложения (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">Значки и кнопки на панели задач</v:String>
     <v:String x:Key="tgl20_interface">Показывать персонализированную рекламу</v:String>

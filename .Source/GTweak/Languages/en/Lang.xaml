@@ -171,7 +171,7 @@
     <v:String x:Key="tgl14_interface">The «Trash» icon on the Desktop</v:String>
     <v:String x:Key="tgl15_interface">Taskbar Alignment (Windows 11)</v:String>
     <v:String x:Key="tgl16_interface">Standard layout of the «Start» menu (Windows 11)</v:String>
-    <v:String x:Key="tgl17_interface">New stripped-down context menu (Windows 11)</v:String>
+    <v:String x:Key="tgl17_interface">Stripped-down context menu (Windows 11)</v:String>
     <v:String x:Key="tgl18_interface">Show tips and suggestions (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">Icons and buttons on the taskbar</v:String>
     <v:String x:Key="tgl20_interface">Show personalized ads</v:String>
