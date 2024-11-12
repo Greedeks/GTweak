@@ -1,3 +1,5 @@
+<#@ template hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -8,8 +10,8 @@ using System.Windows;
 [assembly: AssemblyCopyright("Copyright © Greedeks 2024")]
 [assembly: AssemblyTrademark("Greedeks")]
 [assembly: AssemblyInformationalVersion("Build: 5.0.0")]
-[assembly: AssemblyVersion("5.0.27.572")]
-[assembly: AssemblyFileVersion("5.0.27.572")]
+[assembly: AssemblyVersion("5.<#= GenerateVersion() #>")]
+[assembly: AssemblyFileVersion("5.<#= GenerateVersion() #>")]
 
 [assembly: ComVisible(false)]
 
@@ -17,3 +19,11 @@ using System.Windows;
     ResourceDictionaryLocation.None,
     ResourceDictionaryLocation.SourceAssembly
 )]
+<#+
+        private string GenerateVersion()
+        {
+            int major = (int)(DateTime.UtcNow - new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)).TotalSeconds / 1000;
+            int revision = (int)(DateTime.UtcNow - DateTime.Now.Date).TotalSeconds % 1000;
+            return $"{0}.{major}.{revision}";
+        }
+#>

@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows;
@@ -18,7 +17,7 @@ namespace GTweak.Windows
         public UpdateWindow()
         {
             InitializeComponent();
-            CurrentVerison.Text = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
+            CurrentVerison.Text = Settings.currentRelease;
             DownloadVersion.Text = NewVerison.Text = Utilities.Tweaks.SystemData.UtilityСonfiguration.DownloadVersion;
         }
 

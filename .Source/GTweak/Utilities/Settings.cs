@@ -29,6 +29,7 @@ namespace GTweak.Utilities
         internal static bool _isHiddenIpAddress = false;
 
         internal static int PID = 0;
+        internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
 
         internal static bool IsViewNotification { get => _isViewNotification; set => _isViewNotification = value; }
         internal static bool IsSoundNotification { get => _isSoundNotification; set => _isSoundNotification = value; }
@@ -140,7 +141,7 @@ namespace GTweak.Utilities
 
                     INIManager iniManager = new INIManager(PathConfig);
                     iniManager.Write("GTweak", "Author", "Greedeks");
-                    iniManager.Write("GTweak", "Release", "v4");
+                    iniManager.Write("GTweak", "Release", currentRelease);
                     iniManager.WriteAll("Confidentiality Tweaks", INIManager.UserTweaksConfidentiality);
                     iniManager.WriteAll("Interface Tweaks", INIManager.UserTweaksInterface);
                     iniManager.WriteAll("Services Tweaks", INIManager.UserTweaksServices);
@@ -164,7 +165,7 @@ namespace GTweak.Utilities
             PathConfig = openFileDialog.FileName;
             INIManager iniManager = new INIManager(PathConfig);
 
-            if (iniManager.Read("GTweak", "Author").Contains("Greedeks") && iniManager.Read("GTweak", "Release").Contains("v4"))
+            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("Release"))
             {
                 if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
                     new ImportWindow(openFileDialog.SafeFileName).ShowDialog();
