@@ -23,7 +23,7 @@
     <SolidColorBrush x:Key="Color_TetBox_Border" Color="#D1DBE4"/>
     <SolidColorBrush x:Key="Color_Background_RadialProgressBar" Color="#4D4D4D"/>
     <SolidColorBrush x:Key="Color_DeletedPackage" Color="#1D5938"/>
-    <SolidColorBrush x:Key="Color_DeletedTime" Color="#FCE397"/>
+    <SolidColorBrush x:Key="Color_DeletedTime" Color="#1FAEE9"/>
 
     <Color x:Key="Color_Shadow">#1AFF7E</Color>
     <Color x:Key="Color_Border_Gradient_1">#54FF9F</Color>
