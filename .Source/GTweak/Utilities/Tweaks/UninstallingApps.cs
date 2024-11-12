@@ -10,7 +10,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingApps
     {
-        internal static string UserAppsList { get; private set; } = string.Empty;
+        internal static string UserPackages { get; private set; } = string.Empty;
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
@@ -115,7 +115,7 @@ namespace GTweak.Utilities.Tweaks
             ["Widgets"] = "Windows.Client.WebExperience"
         };
 
-        internal void ViewInstalledApp()
+        internal void ViewInstalledPackages()
         {
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
@@ -131,7 +131,7 @@ namespace GTweak.Utilities.Tweaks
 
             process.Start();
 
-            UserAppsList = process.StandardOutput.ReadToEnd();
+            UserPackages = process.StandardOutput.ReadToEnd();
 
             process.Close();
             process.Dispose();
@@ -167,12 +167,12 @@ namespace GTweak.Utilities.Tweaks
                     {
                         process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + AlternativeName[packageName] + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
-                        UserAppsList = UserAppsList.Replace(AlternativeName[packageName], "");
+                        UserPackages = UserPackages.Replace(AlternativeName[packageName], "");
                     }
 
                     process.WaitForExit(1000);
 
-                    UserAppsList = UserAppsList.Replace(packageName, string.Empty);
+                    UserPackages = UserPackages.Replace(packageName, string.Empty);
 
                     await Task.Delay(8000);
                     IsAppUnavailable[packageName] = false;
@@ -226,7 +226,8 @@ namespace GTweak.Utilities.Tweaks
                 IsAppUnavailable["OneDrive"] = false;
             }
 
-            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + Settings.PathSystemDisk + @"\OneDriveTemp";
+            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
+            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + Settings.PathSystemDisk + @"\OneDriveTemp";
 
             if (isLocalAccount)
                 argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";

@@ -54,7 +54,7 @@ namespace GTweak.Windows
                 new WindowsLicense().LicenseStatus,
                 new SystemData.СomputerСonfiguration().GetСonfigurationComputer,
                 new SystemData.UtilityСonfiguration().CheckingUpdate,
-                new UninstallingApps().ViewInstalledApp,
+                new UninstallingApps().ViewInstalledPackages,
                 new UninstallingApps().CheckingForLocalAccount,
                 new SystemTweaks().ViewNetshState,
                 new SystemTweaks().ViewTaskState,

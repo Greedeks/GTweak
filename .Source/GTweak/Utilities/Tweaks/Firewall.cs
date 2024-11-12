@@ -1,7 +1,6 @@
 ﻿using NetFwTypeLib;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -37,47 +36,30 @@ namespace GTweak.Utilities.Tweaks
             return isCheck;
         }
 
-
         protected static void BlockWindowsUpdate(bool isChoose)
         {
             try
             {
-                if (CheckRulesWindows(NameRules["Update"]) && isChoose)
+                Parallel.Invoke(() =>
                 {
-                    Parallel.Invoke(() =>
-                    {
-                        AddRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
-                        AddRulesIn(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
-                    },
-                    () =>
-                    {
-                        AddRulesOut(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
-                        AddRulesOut(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
-                    });
-                }
-                else
+                    ChangeRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
+                    ChangeRulesIn(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
+                });
+            }
+            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+           
+            try
+            {
+                Parallel.Invoke(() =>
                 {
-                    Parallel.Invoke(() =>
-                    {
-                        try
-                        {
-                            AddRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
-                            AddRulesIn(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
-                        }
-                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-                        try
-                        {
-                            AddRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
-                            AddRulesOut(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
-                        }
-                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-                    });
-                }
+                    ChangeRulesOut(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
+                    ChangeRulesOut(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
+                });
             }
             catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
-        private static void AddRulesIn(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
+        private static void ChangeRulesIn(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
         {
             INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
@@ -92,14 +74,15 @@ namespace GTweak.Utilities.Tweaks
 
             if (isChoose)
             {
-                firewallPolicy.Rules.Remove(nameRule);
+                if (CheckRulesWindows(nameRule))
+                    firewallPolicy.Rules.Remove(nameRule);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
                 firewallPolicy.Rules.Remove(nameRule);
         }
 
-        private static void AddRulesOut(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
+        private static void ChangeRulesOut(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
         {
             INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
@@ -114,25 +97,17 @@ namespace GTweak.Utilities.Tweaks
 
             if (isChoose)
             {
-                firewallPolicy.Rules.Remove(nameRule);
+                if (CheckRulesWindows(nameRule))
+                    firewallPolicy.Rules.Remove(nameRule);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
                 firewallPolicy.Rules.Remove(nameRule);
-
         }
 
         protected static void BlockSpyDomain(in bool isChoose)
         {
-            try
-            {
-                if (CheckRulesWindows(NameRules["Domain"]) && isChoose)
-                    RulesHosts(isChoose);
-                else
-                {
-                    try { RulesHosts(isChoose); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-                }
-            }
+            try { RulesHosts(isChoose); }
             catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
@@ -167,7 +142,8 @@ namespace GTweak.Utilities.Tweaks
 
             if (isChoose)
             {
-                firewallPolicy.Rules.Remove(NameRules["Domain"]);
+                if (CheckRulesWindows(NameRules["Domain"]))
+                    firewallPolicy.Rules.Remove(NameRules["Domain"]);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
@@ -176,21 +152,7 @@ namespace GTweak.Utilities.Tweaks
 
         protected static void BlockWDefender(bool isChoose)
         {
-            try
-            {
-                if (CheckRulesWindows(NameRules["WDefender"]) && isChoose)
-                {
-                    Parallel.Invoke(() => { AddRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); });
-                }
-                else
-                {
-                    Parallel.Invoke(() =>
-                    {
-                        try { AddRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); }
-                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-                    });
-                }
-            }
+            try { Parallel.Invoke(() => { ChangeRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); }); }
             catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
         }
     }
