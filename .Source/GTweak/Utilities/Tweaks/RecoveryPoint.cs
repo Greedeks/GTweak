@@ -17,7 +17,7 @@ namespace GTweak.Utilities.Tweaks
         private static readonly ManagementClass RestorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
         private static ManagementBaseObject InParams;
         private static bool isWorkingCreatePoint = false;
-        private static string resultRead = default;
+        private static string resultRead = string.Empty;
 
         internal static bool IsAlreadyPoint()
         {
