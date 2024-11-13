@@ -47,7 +47,7 @@ namespace GTweak
                     From = 0.0,
                     To = 360,
                     SpeedRatio = 3,
-                    EasingFunction = new PowerEase(),
+                    EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(2)
                 };
                 DoubleAnimation animation = new DoubleAnimation()
@@ -55,7 +55,7 @@ namespace GTweak
                     From = SettingsMenu.Width != 400 ? 0 : 400,
                     To = SettingsMenu.Width != 400 ? 400 : 0,
                     SpeedRatio = 6,
-                    EasingFunction = new PowerEase(),
+                    EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(2)
                 };
                 Timeline.SetDesiredFrameRate(animation, 400);

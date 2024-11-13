@@ -77,6 +77,7 @@ namespace GTweak.View
                     new ViewNotification().Show("logout");
                     break;
                 case "TglButton22":
+                case "TglButton20":
                     new ViewNotification().Show("restart");
                     break;
             }

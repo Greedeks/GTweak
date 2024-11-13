@@ -119,6 +119,7 @@ namespace GTweak.Windows
                                 isLogoutNeed = true;
                                 break;
                             case "TglButton22":
+                            case "TglButton20":
                                 isRestartNeed = true;
                                 break;
                         }

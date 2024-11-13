@@ -164,6 +164,38 @@ namespace GTweak.Utilities.Tweaks
 
             if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11"))
             {
+                if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", null) == null ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", string.Empty).ToString() != "1")
+                    interfaceV.TglButton19.StateNA = false;
+                else
+                    interfaceV.TglButton19.StateNA = true;
+            }
+
+
+            if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11"))
+            {
+                if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "DefaultBrowserSettingsCampaignEnabled", null) == null ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "DefaultBrowserSettingsCampaignEnabled", string.Empty).ToString() != "0" ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", null) == null ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", string.Empty).ToString() != "0" ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", null) == null ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", string.Empty).ToString() != "0" ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", null) == null ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", string.Empty).ToString() != "1" ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", null) == null ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", string.Empty).ToString() != "1" ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", null) == null ||
+                    Registry.GetValue(@"HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", string.Empty).ToString() != "1" ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", null) == null ||
+                    Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", string.Empty).ToString() != "1")
+                    interfaceV.TglButton20.StateNA = true;
+                else
+                    interfaceV.TglButton20.StateNA = false;
+            }
+
+
+            if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11"))
+            {
                 if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", null) == null ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", string.Empty).ToString() != "0" ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", null) == null ||
@@ -174,9 +206,9 @@ namespace GTweak.Utilities.Tweaks
                     Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", string.Empty).ToString() != "0" ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", null) == null ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", string.Empty).ToString() != "0")
-                    interfaceV.TglButton19.StateNA = true;
+                    interfaceV.TglButton21.StateNA = true;
                 else
-                    interfaceV.TglButton19.StateNA = false;
+                    interfaceV.TglButton21.StateNA = false;
             }
             else if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("10"))
             {
@@ -186,9 +218,9 @@ namespace GTweak.Utilities.Tweaks
                     Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", string.Empty).ToString() != "0" ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", null) == null ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", string.Empty).ToString() != "0")
-                    interfaceV.TglButton19.StateNA = true;
+                    interfaceV.TglButton21.StateNA = true;
                 else
-                    interfaceV.TglButton19.StateNA = false;
+                    interfaceV.TglButton21.StateNA = false;
             }
 
 
@@ -214,9 +246,9 @@ namespace GTweak.Utilities.Tweaks
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353694Enabled", string.Empty).ToString() != "0" ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338387Enabled", null) == null ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338387Enabled", string.Empty).ToString() != "0")
-                    interfaceV.TglButton20.StateNA = true;
+                    interfaceV.TglButton22.StateNA = true;
                 else
-                    interfaceV.TglButton20.StateNA = false;
+                    interfaceV.TglButton22.StateNA = false;
             }
             else if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("10"))
             {
@@ -236,17 +268,17 @@ namespace GTweak.Utilities.Tweaks
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338393Enabled", string.Empty).ToString() != "0" ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", null) == null ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", string.Empty).ToString() != "0")
-                    interfaceV.TglButton20.StateNA = true;
+                    interfaceV.TglButton22.StateNA = true;
                 else
-                    interfaceV.TglButton20.StateNA = false;
+                    interfaceV.TglButton22.StateNA = false;
             }
 
 
             if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", null) != null &&
                 Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", string.Empty).ToString() == "1")
-                interfaceV.TglButton21.StateNA = true;
+                interfaceV.TglButton23.StateNA = true;
             else
-                interfaceV.TglButton21.StateNA = false;
+                interfaceV.TglButton23.StateNA = false;
 
 
             if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11"))
@@ -257,9 +289,9 @@ namespace GTweak.Utilities.Tweaks
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", string.Empty).ToString() != "0" ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", null) == null ||
                     Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", string.Empty).ToString() != "0")
-                    interfaceV.TglButton22.StateNA = true;
+                    interfaceV.TglButton24.StateNA = true;
                 else
-                    interfaceV.TglButton22.StateNA = false;
+                    interfaceV.TglButton24.StateNA = false;
             }
             else if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("10"))
             {
@@ -267,9 +299,9 @@ namespace GTweak.Utilities.Tweaks
                      Registry.GetValue(@"HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\\Explorer", "DisableNotificationCenter", string.Empty).ToString() != "1" ||
                      Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\\PushNotifications", "ToastEnabled", null) == null ||
                      Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\\PushNotifications", "ToastEnabled", string.Empty).ToString() != "0")
-                    interfaceV.TglButton22.StateNA = true;
+                    interfaceV.TglButton24.StateNA = true;
                 else
-                    interfaceV.TglButton22.StateNA = false;
+                    interfaceV.TglButton24.StateNA = false;
             }
 
 
@@ -279,54 +311,54 @@ namespace GTweak.Utilities.Tweaks
                 Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}") != null ||
                 Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}") != null ||
                 Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}") != null)
-                interfaceV.TglButton23.StateNA = true;
-            else
-                interfaceV.TglButton23.StateNA = false;
-
-
-            if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}") != null ||
-                Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}") != null)
-                interfaceV.TglButton24.StateNA = true;
-            else
-                interfaceV.TglButton24.StateNA = false;
-
-
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "JPEGImportQuality", null) == null ||
-                Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "JPEGImportQuality", string.Empty).ToString() != "100")
                 interfaceV.TglButton25.StateNA = true;
             else
                 interfaceV.TglButton25.StateNA = false;
 
 
-            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", null) == null ||
-                Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", string.Empty).ToString() != "0")
+            if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}") != null ||
+                Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}") != null)
                 interfaceV.TglButton26.StateNA = true;
             else
                 interfaceV.TglButton26.StateNA = false;
 
 
-            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", null) == null ||
-                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", string.Empty).ToString() != "1")
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "JPEGImportQuality", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "JPEGImportQuality", string.Empty).ToString() != "100")
                 interfaceV.TglButton27.StateNA = true;
             else
                 interfaceV.TglButton27.StateNA = false;
+
+
+            if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", null) == null ||
+                Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", string.Empty).ToString() != "0")
+                interfaceV.TglButton28.StateNA = true;
+            else
+                interfaceV.TglButton28.StateNA = false;
+
+
+            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", null) == null ||
+                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", string.Empty).ToString() != "1")
+                interfaceV.TglButton29.StateNA = true;
+            else
+                interfaceV.TglButton29.StateNA = false;
 
 
             if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11"))
             {
                 if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", null) == null ||
                 Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", string.Empty).ToString() != "1")
-                    interfaceV.TglButton28.StateNA = true;
+                    interfaceV.TglButton30.StateNA = true;
                 else
-                    interfaceV.TglButton28.StateNA = false;
+                    interfaceV.TglButton30.StateNA = false;
             }
             else if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("10"))
             {
                 if (Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", null) == null ||
                 Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", string.Empty).ToString() != "1")
-                    interfaceV.TglButton28.StateNA = true;
+                    interfaceV.TglButton30.StateNA = true;
                 else
-                    interfaceV.TglButton28.StateNA = false;
+                    interfaceV.TglButton30.StateNA = false;
             }
         }
 
@@ -527,6 +559,34 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton19":
                     if (isChoose)
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", 0, RegistryValueKind.DWord);
+                    else
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", 1, RegistryValueKind.DWord);
+                    break;
+                case "TglButton20":
+                    if (isChoose)
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "DefaultBrowserSettingsCampaignEnabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", 1, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "DefaultBrowserSettingsCampaignEnabled");
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled");
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled");
+                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot");
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot");
+                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis");
+                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis");
+                    }
+                    break;
+                case "TglButton21":
+                    if (isChoose)
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", 0, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", 0, RegistryValueKind.DWord);
@@ -573,7 +633,7 @@ namespace GTweak.Utilities.Tweaks
                         }
                     }
                     break;
-                case "TglButton20":
+                case "TglButton22":
                     if (isChoose)
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", 0, RegistryValueKind.DWord);
@@ -631,13 +691,13 @@ namespace GTweak.Utilities.Tweaks
                         }
                     }
                     break;
-                case "TglButton21":
+                case "TglButton23":
                     if (isChoose)
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers");
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", 1, RegistryValueKind.DWord);
                     break;
-                case "TglButton22":
+                case "TglButton24":
                     if (isChoose)
                     {
                         if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("10"))
@@ -661,7 +721,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", 1, RegistryValueKind.DWord);
                     }
                     break;
-                case "TglButton23":
+                case "TglButton25":
                     if (isChoose)
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}");
@@ -682,7 +742,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}");
                     }
                     break;
-                case "TglButton24":
+                case "TglButton26":
                     if (isChoose)
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
@@ -701,25 +761,25 @@ namespace GTweak.Utilities.Tweaks
                         FileName = "cmd.exe"
                     });
                     break;
-                case "TglButton25":
+                case "TglButton27":
                     if (isChoose)
                         RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "JPEGImportQuality", 100, RegistryValueKind.DWord);
                     else
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Control Panel\Desktop", "JPEGImportQuality");
                     break;
-                case "TglButton26":
+                case "TglButton28":
                     if (isChoose)
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", 0, RegistryValueKind.DWord);
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", 1, RegistryValueKind.DWord);
                     break;
-                case "TglButton27":
+                case "TglButton29":
                     if (isChoose)
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", 1, RegistryValueKind.DWord);
                     else
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer");
                     break;
-                case "TglButton28":
+                case "TglButton30":
                     if (isChoose)
                     {
                         if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11"))

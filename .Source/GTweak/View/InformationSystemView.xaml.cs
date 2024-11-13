@@ -98,8 +98,8 @@ namespace GTweak.View
                 To = 0.9,
                 SpeedRatio = 9,
                 AutoReverse = true,
-                Duration = TimeSpan.FromSeconds(3),
                 EasingFunction = new QuadraticEase(),
+                Duration = TimeSpan.FromSeconds(3),
             };
             doubleAnim.Completed += delegate { PopupCopy.IsOpen = false; };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
