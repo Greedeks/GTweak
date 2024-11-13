@@ -491,17 +491,16 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseHoverTime", "400", RegistryValueKind.String);
                     break;
                 case "TglButton11":
-                    string pathToWinFolder = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\Blank.ico";
                     try
                     {
                         if (isChoose)
                         {
-                            new UnarchiveManager(pathToWinFolder, Properties.Resources.Blank);
+                            new UnarchiveManager($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico", Properties.Resources.Blank);
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
                         }
                         else
                         {
-                            File.Delete(pathToWinFolder);
+                            File.Delete($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico");
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
                         }
                     }

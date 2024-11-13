@@ -22,25 +22,19 @@ namespace GTweak.View
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
+            string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_system");
 
-            if (TextDescription.Text != (string)FindResource(toggleButton.Name + "_description_system"))
-            {
-                string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_system");
-                TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
-            }
+            if (TextDescription.Text != _descriptionTweak)
+                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
         }
 
         private void TweakSlider_MouseEnter(object sender, MouseEventArgs e)
         {
             StackPanel stackPanel = (StackPanel)sender;
+            string _descriptionTweak = (string)FindResource(stackPanel.Name + "_description_system");
 
             if (TextDescription.Text != (string)FindResource(stackPanel.Name + "_description_system"))
-            {
-                string _descriptionTweak = (string)FindResource(stackPanel.Name + "_description_system");
-                TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
-            }
+                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
         }
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
@@ -100,11 +94,8 @@ namespace GTweak.View
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("windefender_notification"));
                 }
                 else if (SystemTweaks.isTweakWorkingAntivirus)
-                {
                     new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("warningwindef_notification"));
-                }
             }
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

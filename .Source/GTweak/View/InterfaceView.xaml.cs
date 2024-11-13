@@ -3,6 +3,7 @@ using GTweak.Utilities;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,12 +27,11 @@ namespace GTweak.View
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
+            string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_interface");
 
-            if (TextDescription.Text != (string)FindResource(toggleButton.Name + "_description_interface"))
+            if (TextDescription.Text != _descriptionTweak)
             {
-                string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_interface");
-                TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
+                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
 
                 if (toggleButton.Name == "TglButton1")
                 {

@@ -22,13 +22,10 @@ namespace GTweak.View
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
+            string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_confidentiality");
 
-            if (TextDescription.Text != (string)FindResource(toggleButton.Name + "_description_confidentiality"))
-            {
-                string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_confidentiality");
-                TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
-            }
+            if (TextDescription.Text != _descriptionTweak)
+                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
         }
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
@@ -40,6 +37,7 @@ namespace GTweak.View
         private async void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
+
             Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality(toggleButton.Name, toggleButton.State));
 
             switch (toggleButton.Name)

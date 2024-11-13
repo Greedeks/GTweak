@@ -21,13 +21,10 @@ namespace GTweak.View
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
+            string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_services");
 
-            if (TextDescription.Text != (string)FindResource(toggleButton.Name + "_description_services"))
-            {
-                string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_services");
-                TimeSpan time = _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-                new TypewriterAnimation(_descriptionTweak, TextDescription, time);
-            }
+            if (TextDescription.Text != _descriptionTweak)
+                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
         }
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
