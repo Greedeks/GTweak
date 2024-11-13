@@ -63,7 +63,7 @@ namespace GTweak.View
                         new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { UninstallingApps.ResetOneDrive(); });
+                        await backgroundQueue.QueueTask(delegate { UninstallingApps.ResetOneDriveAsync(); });
 
                         if (backgroundQueue.IsQueueCompleted())
                             UpdateViewStateApps();

@@ -241,7 +241,7 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        internal static void ResetOneDrive()
+        internal async static void ResetOneDriveAsync()
         {
             IsAppUnavailable["OneDrive"] = true;
 
@@ -255,10 +255,13 @@ namespace GTweak.Utilities.Tweaks
                 process.StartInfo.Arguments = @"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe";
                 process.Start();
 
-                process.WaitForExit(8000);
+                process.WaitForExit(7000);
 
                 if (!process.HasExited)
+                {
+                    await Task.Delay(500);
                     IsAppUnavailable["OneDrive"] = false;
+                }
             }
 
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
