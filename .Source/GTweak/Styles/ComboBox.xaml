@@ -44,6 +44,8 @@
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="Foreground" Value="{StaticResource Color_Highlighted}"/>
         <Setter Property="FontSize" Value="14px"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">
             <Setter.Value>

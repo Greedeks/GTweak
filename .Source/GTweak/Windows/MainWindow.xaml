@@ -192,18 +192,17 @@
 
                                     <uс:ToggleButton  x:Name="BtnNotification" DynamicText="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
 
-                                    <uс:ToggleButton  x:Name="BtnSoundNtn" DynamicText="{DynamicResource btgl_sound_main}"  VerticalAlignment="Top" Height="25" Margin="40,15,0,0" ChangedState="BtnSoundNtn_ChangedState"/>
-
-                                    <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,15,0,0">
-                                        <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource slider_volume_main}"/>
-                                        <Slider x:Name="SliderVolume" Style="{StaticResource Horizontal_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="7,13,0,0"  Width="140" ValueChanged="SliderVolume_ValueChanged"/>
-                                    </StackPanel>
-
                                     <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" DynamicText="{DynamicResource btgl_toast_main}" Margin="40,15,0,0" ChangedState="BtnTopMost_ChangedState"/>
 
-                                    <uс:ToggleButton  x:Name="BtnUpdate" DynamicText="{DynamicResource btgl_update_main}"  VerticalAlignment="Top" Height="25" Margin="40,15,0,0" ChangedState="BtnUpdate_ChangedState"/>
+                                    <uс:ToggleButton x:Name="BtnUpdate" DynamicText="{DynamicResource btgl_update_main}"  VerticalAlignment="Top" Height="25" Margin="40,15,0,0" ChangedState="BtnUpdate_ChangedState"/>
 
-                                    <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,15,0,0">
+                                    <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
+                                        <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource slider_volume_main}"/>
+                                        <ToggleButton x:Name="BtnSoundNtn" Width="20" Height="20" Margin="10,1,0,0" Style="{StaticResource ToggleSound}" PreviewMouseDown="BtnSoundNtn_PreviewMouseDown"/>
+                                        <Slider x:Name="SliderVolume" Style="{StaticResource HorizontalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="10,4,0,0"  Width="187" ValueChanged="SliderVolume_ValueChanged" Height="10"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Text="{DynamicResource cmbox_lang_main}"/>
                                         <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
                                             <TextBlock Text="{DynamicResource cmbox_eng_main}"/>
@@ -224,7 +223,7 @@
 
                                     <StackPanel Orientation="Horizontal" Margin="40,15,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource text_saveconfig}"/>
-                                        <Button x:Name="BtnExport" Style="{StaticResource BtnDefault}" Width="106" Height="26" Margin="11,0,0,0" Cursor="Hand" PreviewMouseDown="BtnExport_PreviewMouseDown">
+                                        <Button x:Name="BtnExport" Style="{StaticResource BtnDefault}" Width="106" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnExport_PreviewMouseDown">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{DynamicResource btn_export}" Margin="0,2,0,0"/>
                                                 <Image Margin="5,0,0,0" Width="20" Height="20">
@@ -250,7 +249,7 @@
                                         </Button>
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal" Margin="40,15,0,0">
+                                    <StackPanel Orientation="Horizontal" Margin="40,20,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource text_selfremove}"/>
                                         <Button x:Name="BtnDelete" Content="{DynamicResource btn_selfremove}" Style="{StaticResource BtnDefault}" Width="107" Height="26" Margin="10,0,0,0" Cursor="Hand" PreviewMouseDown="BtnDelete_PreviewMouseDown"/>
                                     </StackPanel>

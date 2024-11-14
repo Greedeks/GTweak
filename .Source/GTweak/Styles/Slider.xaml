@@ -67,13 +67,43 @@
                     <RepeatButton Style="{StaticResource SliderRepeatButton_In}" Command="Slider.IncreaseLarge" />
                 </Track.IncreaseRepeatButton>
             </Track>
-            <TextBlock FocusVisualStyle="{x:Null}" Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}" 
-                       FontFamily="{StaticResource Jura}" FontSize="14px" FontWeight="Medium" Grid.Row="2" Margin="0,-5,0,0" HorizontalAlignment="Center" Foreground="{StaticResource Color_Highlighted}">
+            <TextBlock Grid.Row="2" FocusVisualStyle="{x:Null}" Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}" 
+                       FontFamily="{StaticResource Jura}" FontSize="14px" FontWeight="Medium" Margin="0,-5,0,0" HorizontalAlignment="Center" Foreground="{StaticResource Color_Highlighted}">
             </TextBlock>
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="Horizontal_Slider" TargetType="Slider">
+    <ControlTemplate x:Key="SliderPercent"  TargetType="Slider">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Track Grid.Column="0" Grid.Row="1" x:Name="PART_Track" Cursor="Hand">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}"  Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource SliderThumb}"  />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{StaticResource SliderRepeatButton_In}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <TextBlock Grid.Column="1"  Margin="10,-3,0,0" FocusVisualStyle="{x:Null}" FontFamily="{StaticResource Jura}" FontSize="14px" FontWeight="Medium" HorizontalAlignment="Left" Foreground="{StaticResource Color_Highlighted}">
+                    <Run Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}"/><Run Text="%"/>
+                </TextBlock>
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="VerticalText_Slider" TargetType="Slider">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -84,6 +114,21 @@
                 <Setter Property="MinHeight" Value="21" />
                 <Setter Property="MinWidth" Value="104" />
                 <Setter Property="Template" Value="{StaticResource Slider}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="HorizontalText_Slider" TargetType="Slider">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="MinHeight" Value="15" />
+                <Setter Property="MinWidth" Value="104" />
+                <Setter Property="Template" Value="{StaticResource SliderPercent}" />
             </Trigger>
         </Style.Triggers>
     </Style>

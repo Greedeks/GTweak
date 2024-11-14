@@ -20,9 +20,9 @@ namespace GTweak
             InitializeComponent();
 
             BtnNotification.StateNA = Settings.IsViewNotification;
-            BtnSoundNtn.StateNA = Settings.IsSoundNotification;
             BtnTopMost.StateNA = Topmost = Settings.IsTopMost;
             BtnUpdate.StateNA = Settings.IsСheckingUpdate;
+            BtnSoundNtn.IsChecked = Settings.IsSoundNotification;
             SliderVolume.Value = Settings.VolumeNotification;
             LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;
             ThemeSelectionMenu.SelectedIndex = Settings.Theme switch
@@ -143,8 +143,6 @@ namespace GTweak
         #region Settings Menu
         private void BtnNotification_ChangedState(object sender, EventArgs e) => Parallel.Invoke(() => { Settings.ChangingParameters(!BtnNotification.State, "Notification"); });
 
-        private void BtnSoundNtn_ChangedState(object sender, EventArgs e) => Parallel.Invoke(() => { Settings.ChangingParameters(!BtnSoundNtn.State, "Sound"); });
-
         private void BtnUpdate_ChangedState(object sender, EventArgs e) => Parallel.Invoke(() => { Settings.ChangingParameters(!BtnUpdate.State, "Update"); });
 
         private void BtnTopMost_ChangedState(object sender, EventArgs e)
@@ -160,6 +158,12 @@ namespace GTweak
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
             Parallel.Invoke(() => { Settings.ChangingParameters(SliderVolume.Value, "Volume"); });
+        }
+
+        private void BtnSoundNtn_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                Parallel.Invoke(() => { Settings.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound"); });
         }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)

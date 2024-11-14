@@ -239,4 +239,38 @@
         </Style.Triggers>
     </Style>
 
+    <ControlTemplate x:Key="Sound_Enable" TargetType="ToggleButton">
+        <Image>
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="{StaticResource DI_BtnSoundOn}"/>
+                </Style>
+            </Image.Style>
+        </Image>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Sound_Disabled" TargetType="ToggleButton">
+        <Image>
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="{StaticResource DI_BtnSoundOff}"/>
+                </Style>
+            </Image.Style>
+        </Image>
+    </ControlTemplate>
+
+    <Style TargetType="ToggleButton" x:Key="ToggleSound">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Template" Value="{StaticResource Sound_Enable}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Template" Value="{StaticResource Sound_Disabled}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>
