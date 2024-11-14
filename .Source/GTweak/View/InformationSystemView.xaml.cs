@@ -27,24 +27,19 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                if (!SystemData.СomputerСonfiguration.IsConnectionLose)
+                switch (SystemData.СomputerСonfiguration.ConnectionStatus)
                 {
-                    if (SystemData.СomputerСonfiguration.IsInternetLimited)
-                    {
-                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("limited_systemInformation");
-                        DataContext = new InformationSystemVM();
-                    }
-                    else if (SystemData.СomputerСonfiguration.IsConnectionBlock)
-                    {
+                    case 1:
+                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_lose_systemInformation");
+                        break;
+                    case 2:
                         SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_block_systemInformation");
-                        DataContext = new InformationSystemVM();
-                    }
+                        break;
+                    case 3:
+                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("limited_systemInformation");
+                        break;
                 }
-                else
-                {
-                    SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_lose_systemInformation");
-                    DataContext = new InformationSystemVM();
-                }
+                DataContext = new InformationSystemVM();
             };
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate

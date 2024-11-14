@@ -20,8 +20,8 @@ namespace GTweak
             InitializeComponent();
 
             BtnNotification.StateNA = Settings.IsViewNotification;
-            BtnTopMost.StateNA = Topmost = Settings.IsTopMost;
             BtnUpdate.StateNA = Settings.IsСheckingUpdate;
+            BtnTopMost.StateNA = Topmost = Settings.IsTopMost;
             BtnSoundNtn.IsChecked = Settings.IsSoundNotification;
             SliderVolume.Value = Settings.VolumeNotification;
             LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;

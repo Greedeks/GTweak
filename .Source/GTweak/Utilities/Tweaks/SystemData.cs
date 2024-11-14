@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -125,9 +126,15 @@ namespace GTweak.Utilities.Tweaks
         internal sealed class СomputerСonfiguration
         {
             internal static string WindowsClientVersion { get; set; } = string.Empty;
-            internal static bool IsConnectionLose { get; private set; } = false;
-            internal static bool IsConnectionBlock { get; private set; } = false;
-            internal static bool IsInternetLimited { get; private set; } = false;
+
+            /// <summary>
+            /// No connection problems - [0];
+            /// Connection lose - [1];
+            /// Conection block - [2];
+            /// Connection limited - [3].
+            /// </summary>
+            internal static byte ConnectionStatus = 0;
+
 
             private static string _type = string.Empty;
             private static readonly EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
@@ -277,30 +284,33 @@ namespace GTweak.Utilities.Tweaks
                         catch
                         {
                             СonfigurationData["IpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
-                            IsInternetLimited = true;
+                            ConnectionStatus = 3;
                         }
                         finally
                         {
-                            if (IsInternetLimited)
-                                IsInternetLimited = false;
-                            if (IsConnectionBlock)
-                                IsConnectionBlock = false;
+                            switch (ConnectionStatus)
+                            {
+                                case 2:
+                                case 3:
+                                    ConnectionStatus = 0;
+                                    break;
+                            }
 
                             if (IPAddress.TryParse(clientInternetProtocol.Ip, out _) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
-                                IsConnectionLose = false;
+                                ConnectionStatus = 0;
                                 СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
                             }
                             else
                             {
-                                IsConnectionBlock = true;
+                                ConnectionStatus = 2;
                                 СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
                             }
                         }
                     }
                     else
                     {
-                        IsConnectionLose = true;
+                        ConnectionStatus = 1;
                         СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                     }
                 });

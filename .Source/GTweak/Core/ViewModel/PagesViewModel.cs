@@ -146,7 +146,7 @@ namespace GTweak.Core.ViewModel
             DisplayIpAddress = SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"];
             DisplayCountProcess = new SystemData.MonitoringSystem().CountProcess.ToString();
 
-            if (Settings.IsHiddenIpAddress & !SystemData.СomputerСonfiguration.IsConnectionLose & !SystemData.СomputerСonfiguration.IsInternetLimited & !SystemData.СomputerСonfiguration.IsConnectionBlock)
+            if (Settings.IsHiddenIpAddress & SystemData.СomputerСonfiguration.ConnectionStatus == 0)
             {
                 SetBlurValue = 20;
                 DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Show"];
@@ -154,7 +154,7 @@ namespace GTweak.Core.ViewModel
             else
             {
                 SetBlurValue = 0;
-                DisplayImageHidden = !SystemData.СomputerСonfiguration.IsConnectionLose & !SystemData.СomputerСonfiguration.IsInternetLimited & !SystemData.СomputerСonfiguration.IsConnectionBlock ? (DrawingImage)Application.Current.Resources["DI_Hide"] : default;
+                DisplayImageHidden = SystemData.СomputerСonfiguration.ConnectionStatus == 0 ? (DrawingImage)Application.Current.Resources["DI_Hide"] : default;
             }
         }
     }
