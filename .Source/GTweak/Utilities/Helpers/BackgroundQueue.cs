@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal class BackgroundQueue
+    internal sealed class BackgroundQueue
     {
         private Task previousTask = Task.FromResult(true);
         private readonly object key = new object();

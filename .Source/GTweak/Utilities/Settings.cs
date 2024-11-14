@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace GTweak.Utilities
 {
-    internal readonly struct Settings
+    internal sealed class Settings
     {
         internal static string PathConfig = string.Empty;
         internal static string PathSound => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\GTweak\Sound.mp3";
@@ -40,7 +40,7 @@ namespace GTweak.Utilities
         internal static string Theme { get => _theme; set => _theme = value; }
         internal static bool IsHiddenIpAddress { get => _isHiddenIpAddress; set => _isHiddenIpAddress = value; }
 
-        internal readonly void CheckingTempFiles()
+        internal void CheckingTempFiles()
         {
             if (!File.Exists(PathIcon))
                 new UnarchiveManager(PathIcon, Properties.Resources.GTweak);
@@ -49,7 +49,7 @@ namespace GTweak.Utilities
                 new UnarchiveManager(PathSound, Properties.Resources.Sound);
         }
 
-        internal readonly void СheckingParameters()
+        internal void СheckingParameters()
         {
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
             if (registryKey == null || registryKey.GetValue("Notification", null) == null || registryKey.GetValue("Sound", null) == null || registryKey.GetValue("Volume", null) == null || registryKey.GetValue("TopMost", null) == null ||

@@ -3,7 +3,6 @@ using GTweak.Utilities;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal abstract class Firewall
+    internal class Firewall
     {
         private static readonly SortedList<string, string> NameRules = new SortedList<string, string>
         {
@@ -47,7 +47,7 @@ namespace GTweak.Utilities.Tweaks
                 });
             }
             catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
-           
+
             try
             {
                 Parallel.Invoke(() =>

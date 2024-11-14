@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal class TakingOwnership
+    internal sealed class TakingOwnership
     {
         [StructLayout(LayoutKind.Sequential)]
         private struct SID_IDENTIFIER_AUTHORITY
