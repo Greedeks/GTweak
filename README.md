@@ -12,9 +12,7 @@
 
 <br/>
 
-<br/>
-
-<img src="https://github.com/user-attachments/assets/696681fb-e1a4-40fc-a1eb-90a7f61cdede" width="260" height="68" alt="Download the latest version"><br/><br/>
+<img src="https://github.com/user-attachments/assets/696681fb-e1a4-40fc-a1eb-90a7f61cdede" width="260" height="68" alt="Download the latest version"><br/>
 
 <!-- language --> 
  <h1>
@@ -22,6 +20,7 @@
    <img width="32 height="32 src="https://github.com/user-attachments/assets/dc6b0130-d81f-4b10-939e-cfe1fa65f2ba"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">Русский</a> 
  </h1>
 </div>
+
 <h2> Key features of the tweaker🔩</h2>
 
 ```c#

@@ -12,9 +12,7 @@
 
 <br/>
 
-<br/>
-
-<img src="https://github.com/user-attachments/assets/696681fb-e1a4-40fc-a1eb-90a7f61cdede" width="260" height="68" alt="Download the latest version"><br/><br/>
+<img src="https://github.com/user-attachments/assets/696681fb-e1a4-40fc-a1eb-90a7f61cdede" width="260" height="68" alt="Download the latest version"><br/>
 
 <!-- language --> 
  <h1>
