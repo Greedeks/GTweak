@@ -21,29 +21,31 @@
  </h1>
 </div>
 
-<!-- information en --> 
-<h1> Information in English </h1>
+<!-- information ru --> 
+<h1> Информация на Русском Языке </h1>
 
-<h2> Key features of the tweaker🔩</h2>
+<!-- information ru --> 
+
+<h2> Ключевые возможности твикера🔩</h2>
 
 ```c#
-- Windows activation
-- Disabling Windows Defender, SmartScreen, Anti malware, VBS, UAC 
-- Disabling Windows updates and clearing the downloaded cache
-- Disabling unused and unnecessary services 
-- Disabling spyware, keyloggers and telemetry Windows, NVIDIA
-- Blocking of spyware ip and domain names
-- Disabling Windows ads and banners, SCOOBE
-- Deleting the OneDrive app and folders, Cortana, Widgets
-- Removing pre-installed Windows 10/11 apps
-- Fixing the power supply of the Realtek High Definition Audio driver
-- Changing the Windows theme and applications, customizing the interface
-- Changing Windows parameters, power supply circuits
-- View the configuration and monitor the system
+- Активация Windows
+- Отключение Защитника Windows, SmartScreen, Antimalware, VBS, UAC 
+- Отключение обновлений Windows и очистка загруженного кэша
+- Отключение неиспользуемых и ненужных служб 
+- Отключение шпионов, кейлоггеров и телеметрии Windows, NVIDIA
+- Блокирование шпионских ip и доменных имен
+- Отключение рекламы и баннеров Windows, SCOOBE
+- Удаление приложения OneDrive и папок, Cortana, Widgets
+- Удаление предустановленных приложений Windows 10/11
+- Исправление электропитания драйвера Realtek High Definition Audio
+- Изменение темы и приложений Windows, кастомизация интерфейса
+- Измение параметров Windows, схемы электропитания
+- Просмотр конфигурации и мониторинг системы
 ```
 
 <details>
-  <summary> <h2>Screenshots 📷</h2></summary>
+  <summary> <h2>Скриншоты 📷</h2></summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Confidentiality.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Interface.png"/>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Applications.png"/>
@@ -52,15 +54,16 @@
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/More.png"/>
 </details>
 
-<h2> System Requirements</h2>
+<h2> Системные Требования</h2>
 
 ```c#
-USE ONLY FOR WINDOWS 10/11
+ПРЕДНАЗНАЧЕНА ТОЛЬКО ДЛЯ WINDOWS 10/11
 ```
 </br>
 
 > [!WARNING]  
-> You will have to stop the antivirus before using it
+> Перед использованием придется остановить антивирус
+
 </br>
 
 ## NuGet Packages
@@ -74,7 +77,7 @@ USE ONLY FOR WINDOWS 10/11
 
 </br>
 
-## Contact
+## Связь со мной
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
 [![github](https://img.shields.io/badge/Github-gray?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Greedeks)
