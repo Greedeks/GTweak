@@ -16,8 +16,8 @@
 
 <!-- language --> 
  <h1>
-<img width="32 height="32" src="https://github.com/user-attachments/assets/3c13dbd0-ad57-4eca-8e11-49c973376172"/> <a href="https://github.com/Greedeks/GTweak/README.md">English</a> |  
-   <img width="32 height="32 src="https://github.com/user-attachments/assets/dc6b0130-d81f-4b10-939e-cfe1fa65f2ba"/> <a href="https://github.com/Greedeks/GTweak/README-ru.md">Русский</a> 
+<img width="32 height="32" src="https://github.com/user-attachments/assets/3c13dbd0-ad57-4eca-8e11-49c973376172"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">English</a> |  
+   <img width="32 height="32 src="https://github.com/user-attachments/assets/dc6b0130-d81f-4b10-939e-cfe1fa65f2ba"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">Русский</a> 
  </h1>
 </div>
 
