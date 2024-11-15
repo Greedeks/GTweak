@@ -1,13 +1,15 @@
 <div align="center">
 <img  src="https://github.com/user-attachments/assets/e63d303a-2d07-4882-8a68-cb43ebbbe7df"/><br/><br/> 
 
+<img src="https://github.com/Greedeks/GTweak/blob/main/Github/Preview.gif"/>
+<br/><br/>
+
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=16BD72)](https://github.com/Greedeks/GTweak/releases/latest)
 ![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)
 ![Stars](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&color=16BD72)
 ![Size](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&color=%231EB1D2)
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&color=16BD72)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 
-<img src="https://github.com/Greedeks/GTweak/blob/main/Github/Preview.gif"/>
 <br/>
 
 <br/>
@@ -20,7 +22,6 @@
    <img width="32 height="32 src="https://github.com/user-attachments/assets/dc6b0130-d81f-4b10-939e-cfe1fa65f2ba"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">Русский</a> 
  </h1>
 </div>
-
 <h2> Key features of the tweaker🔩</h2>
 
 ```c#
