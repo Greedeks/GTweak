@@ -41,40 +41,6 @@
         </Style.Triggers>
     </Style>
     
-    <Style TargetType="RadioButton" x:Key="BtnNavigation">
-        <Setter Property="Background" Value="{StaticResource Color_Background_Dark}"/>
-        <Setter Property="Foreground" Value="{StaticResource Color_Inactive}"/>
-        <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="Indicator" Background="{TemplateBinding Background}" BorderBrush="{StaticResource Color_Accent}" BorderThickness="0">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="BorderThickness" TargetName="Indicator" Value="0 1.2 0 0" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_ButtonOver_Navigation}"/>
-                <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
-            </Trigger>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_Background_Dark}"/>
-                <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <Style TargetType="{x:Type Button}" x:Key="BtnDefault">
         <Setter Property="Foreground" Value="{StaticResource Color_Background_Dark}"/>
         <Setter Property="Background" Value="{StaticResource Color_Accent}"/>
@@ -232,66 +198,6 @@
                         <Storyboard Timeline.DesiredFrameRate="400">
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <ControlTemplate x:Key="Sound_Enable" TargetType="ToggleButton">
-        <Image>
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="{StaticResource DI_BtnSoundOn}"/>
-                </Style>
-            </Image.Style>
-        </Image>
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="Sound_Disabled" TargetType="ToggleButton">
-        <Image>
-            <Image.Style>
-                <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="{StaticResource DI_BtnSoundOff}"/>
-                </Style>
-            </Image.Style>
-        </Image>
-    </ControlTemplate>
-
-    <Style TargetType="ToggleButton" x:Key="ToggleSound">
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <ScaleTransform x:Name="ImageScale" ScaleX="1" ScaleY="1" />
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Template" Value="{StaticResource Sound_Enable}" />
-            </Trigger>
-            <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Template" Value="{StaticResource Sound_Disabled}" />
-            </Trigger>
-            <EventTrigger RoutedEvent="Button.MouseEnter">
-            <EventTrigger.Actions>
-                <BeginStoryboard>
-                    <Storyboard Timeline.DesiredFrameRate="400">
-                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.07" Duration="0:0:1.0" SpeedRatio="10"/>
-                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.07" Duration="0:0:1.0" SpeedRatio="10"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger.Actions>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="Button.MouseLeave">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="400">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.07" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.07" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>

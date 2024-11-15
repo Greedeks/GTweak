@@ -51,8 +51,7 @@ namespace GTweak.View
                     backgroundWorker.DoWork += delegate
                     {
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
-                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); })
-                        { IsBackground = true };
+                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); }) { IsBackground = true };
                         _thread.Start();
                     };
                     backgroundWorker.RunWorkerCompleted += delegate
@@ -60,12 +59,11 @@ namespace GTweak.View
                         Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
                         { IsBackground = true };
                         Application.Current.Dispatcher.Invoke(ProgressBarAnim);
-                        DataContext = new InformationSystemVM();
 
-                        if (Settings.IsHiddenIpAddress & ImageHidden.Source == default)
+                        if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
                         {
                             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
-                            doubleAnim.Completed += (s, _) => { Parallel.Invoke(() => { Settings.ChangingParameters(false, "HiddenIP"); }); };
+                            doubleAnim.Completed += delegate { Parallel.Invoke(() => { Settings.ChangingParameters(false, "HiddenIP"); }); };
                             Timeline.SetDesiredFrameRate(doubleAnim, 400);
                             IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                         }
@@ -112,22 +110,21 @@ namespace GTweak.View
             PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, doubleAnim);
         }
 
-        private void ImageHidden_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnHiddenIP_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
+                Parallel.Invoke(() => { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
+
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
-                    From = Settings.IsHiddenIpAddress ? 20 : 0,
-                    To = Settings.IsHiddenIpAddress ? 0 : 20,
+                    From = BtnHiddenIP.IsChecked.Value ? 20 : 0,
+                    To = BtnHiddenIP.IsChecked.Value ? 0 : 20,
                     EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
                 Timeline.SetDesiredFrameRate(doubleAnim, 400);
                 IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
-
-                Parallel.Invoke(() => { Settings.ChangingParameters(!Settings.IsHiddenIpAddress, "HiddenIP"); });
-                DataContext = new InformationSystemVM();
             }
         }
 

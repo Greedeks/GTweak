@@ -9,7 +9,6 @@ namespace GTweak.Core.ViewModel
 {
     internal class MainViewModel : ViewModelBase
     {
-        private readonly MainWindowModel model;
         private object _currentView;
 
         public object CurrentView
@@ -18,23 +17,11 @@ namespace GTweak.Core.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ImageSource DisplayProfileAvatar
-        {
-            get => model.ProfileAvatar;
-            set { model.ProfileAvatar = value; OnPropertyChanged(); }
-        }
+        public ImageSource DisplayProfileAvatar => SystemData.ProfileData.GetProfileImage() ?? Application.Current.Resources["DI_AvatarProfile"] as DrawingImage;
 
-        public string DisplayProfileName
-        {
-            get => model.ProfileName;
-            set { model.ProfileName = value; OnPropertyChanged(); }
-        }
+        public string DisplayProfileName => SystemData.ProfileData.GetProfileName();
 
-        public string DisplayTweakVersion
-        {
-            get => model.TweakVersion;
-            set { model.TweakVersion = value; OnPropertyChanged(); }
-        }
+        public string DisplayTweakVersion => (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 
         public ICommand ConfidentialityCommand { get; set; }
         public ICommand InterfaceCommand { get; set; }
@@ -55,12 +42,6 @@ namespace GTweak.Core.ViewModel
 
         public MainViewModel()
         {
-            model = new MainWindowModel();
-
-            DisplayProfileAvatar = SystemData.ProfileData.GetProfileImage() ?? Application.Current.Resources["DI_AvatarProfile"] as DrawingImage;
-            DisplayProfileName = SystemData.ProfileData.GetProfileName();
-            DisplayTweakVersion = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-
             ConfidentialityCommand = new RelayCommand(Confidentiality);
             InterfaceCommand = new RelayCommand(Interface);
             ApplicationsCommand = new RelayCommand(Apps);

@@ -1,7 +1,6 @@
 ﻿using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
 using System.Windows;
-using System.Windows.Media;
 
 namespace GTweak.Core.ViewModel
 {
@@ -14,30 +13,14 @@ namespace GTweak.Core.ViewModel
 
     internal class InterfaceVM : ViewModelBase
     {
-        private readonly InterfaceModel model;
-        public bool IsBlockForWin10
-        {
-            get => model.IsBlockWin10;
-            set { model.IsBlockWin10 = value; OnPropertyChanged(); }
-        }
-
-        public bool IsBlockWithoutLicense
-        {
-            get => model.IsBlockLicense;
-            set { model.IsBlockLicense = value; OnPropertyChanged(); }
-        }
-
-        public InterfaceVM()
-        {
-            model = new InterfaceModel();
-            IsBlockForWin10 = SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11");
-            IsBlockWithoutLicense = WindowsLicense.statusLicense == 1;
-        }
+        public bool IsBlockForWin10 => SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11");
+        public bool IsBlockWithoutLicense => WindowsLicense.statusLicense == 1;
     }
 
     internal class InformationSystemVM : ViewModelBase
     {
         private readonly InformationSystemModel model;
+
         public string DisplayWindowsName
         {
             get => model.WindowsName;
@@ -110,16 +93,22 @@ namespace GTweak.Core.ViewModel
             set { model.BlurValue = value; OnPropertyChanged("SetBlurValue"); }
         }
 
-        public DrawingImage DisplayImageHidden
+        public Visibility SetVisibility
         {
-            get => model.ImageHidden;
-            set { model.ImageHidden = value; OnPropertyChanged(); }
+            get => model.IpVisibility;
+            set { model.IpVisibility = value; OnPropertyChanged(); }
         }
+
+        public bool StateButton
+        {
+            get => Settings.IsHiddenIpAddress;
+            set { Settings.IsHiddenIpAddress = value; OnPropertyChanged(); }
+        }
+
 
         public InformationSystemVM()
         {
             model = new InformationSystemModel();
-
             DisplayWindowsName = SystemData.СomputerСonfiguration.СonfigurationData["Windows"];
             DisplayBiosName = SystemData.СomputerСonfiguration.СonfigurationData["BIOS"];
             DisplayMotherBrName = SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"];
@@ -149,12 +138,12 @@ namespace GTweak.Core.ViewModel
             if (Settings.IsHiddenIpAddress & SystemData.СomputerСonfiguration.ConnectionStatus == 0)
             {
                 SetBlurValue = 20;
-                DisplayImageHidden = (DrawingImage)Application.Current.Resources["DI_Show"];
+                SetVisibility = Visibility.Visible;
             }
             else
             {
                 SetBlurValue = 0;
-                DisplayImageHidden = SystemData.СomputerСonfiguration.ConnectionStatus == 0 ? (DrawingImage)Application.Current.Resources["DI_Hide"] : default;
+                SetVisibility = SystemData.СomputerСonfiguration.ConnectionStatus == 0 ? Visibility.Visible : Visibility.Hidden;
             }
         }
     }

@@ -1,15 +1,9 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
 
 namespace GTweak.Core.Model
 {
     internal class MainModel
     {
-        internal sealed class InterfaceModel
-        {
-            internal bool IsBlockWin10 { get; set; }
-            internal bool IsBlockLicense { get; set; }
-        }
-
         internal sealed class InformationSystemModel
         {
             internal string WindowsName { get; set; }
@@ -24,14 +18,7 @@ namespace GTweak.Core.Model
             internal string IpAddress { get; set; }
             internal string CountProcess { get; set; }
             internal int BlurValue { get; set; }
-            internal DrawingImage ImageHidden { get; set; }
-        }
-
-        internal sealed class MainWindowModel
-        {
-            internal ImageSource ProfileAvatar { get; set; }
-            internal string ProfileName { get; set; }
-            internal string TweakVersion { get; set; }
+            internal Visibility IpVisibility { get; set; }
         }
     }
 }

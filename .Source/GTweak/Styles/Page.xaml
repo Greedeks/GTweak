@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="LaunchPage"
-        TargetType="{x:Type UserControl}">
+    <Style x:Key="LaunchPage" TargetType="{x:Type UserControl}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -22,8 +21,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="ScrollPage"
-        TargetType="{x:Type ScrollViewer}">
+    <Style x:Key="ScrollPage" TargetType="{x:Type ScrollViewer}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="IsTabStop" Value="False"/>

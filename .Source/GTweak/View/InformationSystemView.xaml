@@ -180,7 +180,7 @@
                                         <BlurEffect Radius="{Binding SetBlurValue}"/>
                                     </TextBlock.Effect>
                                 </TextBlock>
-                                <Image x:Name="ImageHidden" Source="{Binding DisplayImageHidden}" Style="{StaticResource Apps}" Height="20" Width="20" Margin="10,0,0,0" PreviewMouseDown="ImageHidden_PreviewMouseDown"/>
+                                <ToggleButton x:Name="BtnHiddenIP" Width="20" Height="20" Margin="10,0,0,0" Style="{StaticResource TglButtonIP}" IsChecked="{Binding StateButton}" Visibility="{Binding SetVisibility}" PreviewMouseDown="BtnHiddenIP_PreviewMouseDown"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
