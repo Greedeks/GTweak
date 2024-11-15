@@ -21,9 +21,6 @@
  </h1>
 </div>
 
-<!-- information en --> 
-<h1> Information in English </h1>
-
 <h2> Key features of the tweaker🔩</h2>
 
 ```c#
