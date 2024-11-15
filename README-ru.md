@@ -43,12 +43,12 @@
 
 <details>
   <summary> <h2>Скриншоты 📷</h2></summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Confidentiality.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Interface.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Applications.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Services.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/System.png"/>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/More.png"/>
 </details>
 
 <h2> Системные Требования</h2>
