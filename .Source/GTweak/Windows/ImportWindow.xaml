@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
@@ -34,39 +35,8 @@
                     <TextBlock Text="{DynamicResource warning_win_import}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" MaxWidth="350" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,10,0,0"/>
                     <Border Margin="0,20,0,0" CornerRadius="5" Background="{StaticResource Color_Background_RadialProgressBar}" Height="30" Width="350" HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
-                            <Grid Height="25" Width="25" HorizontalAlignment="Left" Margin="10,3,0,2">
-                                <Path Stroke="{StaticResource Color_Background_Dark}" StrokeThickness="2" Opacity="0.5" Margin="12,12,-12,-12">
-                                    <Path.Data>
-                                        <EllipseGeometry RadiusX="12.5" RadiusY="12.5"/>
-                                    </Path.Data>
-                                </Path>
-                                <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="2" Margin="12,12,-12,-12">
-                                    <Path.Effect>
-                                        <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
-                                    </Path.Effect>
-                                    <Path.Data>
-                                        <PathGeometry>
-                                            <PathFigure StartPoint="0,-12.5">
-                                                <ArcSegment Point="10.6,-6.55" Size="12.5,12.5"
-                                            IsLargeArc="False" SweepDirection="Clockwise"/>
-                                            </PathFigure>
-                                            <PathGeometry.Transform>
-                                                <RotateTransform/>
-                                            </PathGeometry.Transform>
-                                        </PathGeometry>
-                                    </Path.Data>
-                                    <Path.Triggers>
-                                        <EventTrigger RoutedEvent="Loaded">
-                                            <BeginStoryboard>
-                                                <Storyboard Timeline.DesiredFrameRate="400">
-                                                    <DoubleAnimation Storyboard.TargetProperty="Data.Transform.Angle" To="360" Duration="0:0:4" SpeedRatio="3" RepeatBehavior="Forever"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Path.Triggers>
-                                </Path>
-                            </Grid>
-                            <TextBlock Text="{DynamicResource wait_win_import}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,5,0,0"/>
+                            <uc:ProggressRing ChangeBackground="{StaticResource Color_Background_Dark}" ChangeStrokeThickness="10" Width="25" Margin="10,0,0,0" />
+                                <TextBlock Text="{DynamicResource wait_win_import}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,5,0,0"/>
                         </StackPanel>
                     </Border>
                     <TextBlock Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" MaxWidth="350" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0">

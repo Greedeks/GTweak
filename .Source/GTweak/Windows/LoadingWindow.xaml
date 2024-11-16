@@ -4,90 +4,60 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
+        xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
         xmlns:local="clr-namespace:GTweak.Windows" 
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="240" Width="240"
+        Height="260" Width="260"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
         IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered" Closing="Window_Closing">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
 
-    <Grid>
-        <Path Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="6" Margin="120,120,-120,-120" Opacity="0.5">
-            <Path.Data>
-                <EllipseGeometry RadiusX="105" RadiusY="105"/>
-            </Path.Data>
-        </Path>
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <uc:ProggressRing ChangeStrokeThickness="3" Width="210" Margin="0,0,-0.5,0" />
+        
+        <Ellipse Height="200" Width="200" Fill="{StaticResource Color_Background}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="6" Margin="120,120,-120,-120">
-            <Path.Effect>
-                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
-            </Path.Effect>
-            <Path.Data>
-                <PathGeometry>
-                    <PathFigure StartPoint="0,-105">
-                        <ArcSegment Point="89.25,-55.02" Size="105,105"
-                            IsLargeArc="False" SweepDirection="Clockwise"/>
-                    </PathFigure>
-                    <PathGeometry.Transform>
-                        <RotateTransform/>
-                    </PathGeometry.Transform>
-                </PathGeometry>
-            </Path.Data>
-            <Path.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
-                    <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="400">
-                            <DoubleAnimation Storyboard.TargetProperty="Data.Transform.Angle" To="360" Duration="0:0:4" SpeedRatio="3" RepeatBehavior="Forever"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Path.Triggers>
-        </Path>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">
 
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Ellipse Height="200" Width="200" Fill="{StaticResource Color_Background}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <StringAnimationUsingKeyFrames  Storyboard.TargetName="TextTittle" Storyboard.TargetProperty="(TextBlock.Text)" Duration="0:0:0:8" SpeedRatio="10" FillBehavior="HoldEnd" RepeatBehavior="Forever">
+                                    <DiscreteStringKeyFrame Value="{DynamicResource title1_load}" KeyTime="0:0:0:1"/>
+                                    <DiscreteStringKeyFrame Value="{DynamicResource title2_load}" KeyTime="0:0:0:2" />
+                                    <DiscreteStringKeyFrame Value="{DynamicResource title3_load}" KeyTime="0:0:0:3" />
+                                </StringAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
 
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0">
-
-                <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
-                    <TextBlock.Triggers>
-                        <EventTrigger RoutedEvent="TextBlock.Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <StringAnimationUsingKeyFrames  Storyboard.TargetName="TextTittle" Storyboard.TargetProperty="(TextBlock.Text)" Duration="0:0:0:8" SpeedRatio="10" FillBehavior="HoldEnd" RepeatBehavior="Forever">
-                                        <DiscreteStringKeyFrame Value="{DynamicResource title1_load}" KeyTime="0:0:0:1"/>
-                                        <DiscreteStringKeyFrame Value="{DynamicResource title2_load}" KeyTime="0:0:0:2" />
-                                        <DiscreteStringKeyFrame Value="{DynamicResource title3_load}" KeyTime="0:0:0:3" />
-                                    </StringAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </TextBlock.Triggers>
-                </TextBlock>
-                
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00,20,0,0">
-                    <Border BorderBrush="{StaticResource Color_Accent}" CornerRadius="50" Width="75" Height="75" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Border CornerRadius="50">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
-                            </Border.Effect>
-                            <Border.Background>
-                                <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
-                            </Border.Background>
-                        </Border>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00,20,0,0">
+                <Border BorderBrush="{StaticResource Color_Accent}" CornerRadius="50" Width="75" Height="75" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border CornerRadius="50">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
+                        </Border.Effect>
+                        <Border.Background>
+                            <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
+                        </Border.Background>
                     </Border>
-                    <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="1"  Stretch="Uniform">
-                        <Path.Data>
-                            <EllipseGeometry RadiusX="5" RadiusY="5"/>
-                        </Path.Data>
-                    </Path>
-                </Grid>
-                
-                <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,14,0,0"/>
-            </StackPanel>
-        </Grid>
+                </Border>
+                <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="1"  Stretch="Uniform">
+                    <Path.Data>
+                        <EllipseGeometry RadiusX="5" RadiusY="5"/>
+                    </Path.Data>
+                </Path>
+            </Grid>
+
+            <TextBlock x:Name="TextLoad" Text="{DynamicResource text0_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,14,0,0"/>
+        </StackPanel>
     </Grid>
+
 </Window>
