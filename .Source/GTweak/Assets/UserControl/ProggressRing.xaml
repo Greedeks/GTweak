@@ -15,7 +15,7 @@
             </Path>
             <Path x:Name="Main" Stroke="{StaticResource Color_Accent}" StrokeThickness="6">
                 <Path.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.6" Color="{StaticResource Color_Shadow}" />
                 </Path.Effect>
                 <Path.Data>
                     <PathGeometry>
