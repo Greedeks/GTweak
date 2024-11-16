@@ -51,7 +51,8 @@
 
 <h2> System Requirements</h2>
 
-```c#
+```c++
+.NET Framework 4.8
 USE ONLY FOR WINDOWS 10/11
 ```
 </br>
