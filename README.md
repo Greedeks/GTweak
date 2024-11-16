@@ -21,7 +21,7 @@
  </h1>
 </div>
 
-<h2> Key features of the tweaker🔩</h2>
+<h2> A wide range of functions, including: 🔩</h2>
 
 ```c#
 - Windows activation
