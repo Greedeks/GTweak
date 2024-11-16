@@ -30,13 +30,13 @@ namespace GTweak.View
                 switch (SystemData.СomputerСonfiguration.ConnectionStatus)
                 {
                     case 1:
-                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_lose_systemInformation");
+                        SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_lose_systemInformation");
                         break;
                     case 2:
-                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("connection_block_systemInformation");
+                        SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_block_systemInformation");
                         break;
                     case 3:
-                        SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"] = (string)FindResource("limited_systemInformation");
+                        SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
                         break;
                 }
                 DataContext = new InformationSystemVM();

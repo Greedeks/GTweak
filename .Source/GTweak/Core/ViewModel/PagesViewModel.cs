@@ -21,70 +21,70 @@ namespace GTweak.Core.ViewModel
     {
         private readonly InformationSystemModel model;
 
-        public string DisplayWindowsName
+        public string DisplayWindows
         {
-            get => model.WindowsName;
-            set { model.WindowsName = value; OnPropertyChanged(); }
+            get => model.WindowsDescriptions;
+            set { model.WindowsDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplayBiosName
+        public string DisplayBios
         {
-            get => model.BIOSName;
-            set { model.BIOSName = value; OnPropertyChanged(); }
+            get => model.BiosDescriptions;
+            set { model.BiosDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplayMotherBrName
+        public string DisplayMotherBr
         {
-            get => model.MotherBrName;
-            set { model.MotherBrName = value; OnPropertyChanged(); }
+            get => model.MotherBrDescriptions;
+            set { model.MotherBrDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplayCpuName
+        public string DisplayCpu
         {
-            get => model.CPUName;
-            set { model.CPUName = value; OnPropertyChanged(); }
+            get => model.CpuDescriptions;
+            set { model.CpuDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplayGpuName
+        public string DisplayGpu
         {
-            get => model.GPUName;
-            set { model.GPUName = value; OnPropertyChanged(); }
+            get => model.GpuDescriptions;
+            set { model.GpuDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplayRamName
+        public string DisplayRam
         {
-            get => model.RAMName;
-            set { model.RAMName = value; OnPropertyChanged(); }
+            get => model.RamDescriptions;
+            set { model.RamDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplayDiskName
+        public string DisplayStorage
         {
-            get => model.DiskName;
-            set { model.DiskName = value; OnPropertyChanged(); }
+            get => model.StorageDescriptions;
+            set { model.StorageDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplaySoundName
+        public string DisplayAudio
         {
-            get => model.SoundName;
-            set { model.SoundName = value; OnPropertyChanged(); }
+            get => model.AudioDescriptions;
+            set { model.AudioDescriptions = value; OnPropertyChanged(); }
         }
 
-        public string DisplayNetAdapterName
+        public string DisplayNetwork
         {
-            get => model.NetAdapterName;
-            set { model.NetAdapterName = value; OnPropertyChanged(); }
+            get => model.NetworkDescriptions;
+            set { model.NetworkDescriptions = value; OnPropertyChanged(); }
         }
 
         public string DisplayIpAddress
         {
-            get => model.IpAddress;
-            set { model.IpAddress = value; OnPropertyChanged(); }
+            get => model.UserIpAddress;
+            set { model.UserIpAddress = value; OnPropertyChanged(); }
         }
 
-        public string DisplayCountProcess
+        public string DisplayNumberProcesses
         {
-            get => model.CountProcess;
-            set { model.CountProcess = value; OnPropertyChanged(); }
+            get => model.NumberProcesses;
+            set { model.NumberProcesses = value; OnPropertyChanged(); }
         }
 
         public int SetBlurValue
@@ -105,35 +105,23 @@ namespace GTweak.Core.ViewModel
             set { Settings.IsHiddenIpAddress = value; OnPropertyChanged(); }
         }
 
-
         public InformationSystemVM()
         {
             model = new InformationSystemModel();
-            DisplayWindowsName = SystemData.СomputerСonfiguration.СonfigurationData["Windows"];
-            DisplayBiosName = SystemData.СomputerСonfiguration.СonfigurationData["BIOS"];
-            DisplayMotherBrName = SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"];
-            DisplayCpuName = SystemData.СomputerСonfiguration.СonfigurationData["CPU"];
 
-            if (!string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["GPU"]))
-                DisplayGpuName = SystemData.СomputerСonfiguration.СonfigurationData["GPU"];
-            else
-                DisplayGpuName = (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
+            DisplayWindows = SystemData.СomputerСonfiguration.СonfigurationData["Windows"];
+            DisplayNumberProcesses = new SystemData.MonitoringSystem().CountProcess.ToString();
 
-            DisplayRamName = SystemData.СomputerСonfiguration.СonfigurationData["RAM"];
-            DisplayDiskName = SystemData.СomputerСonfiguration.СonfigurationData["Disk"];
+            DisplayBios = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["BIOS"]) ? SystemData.СomputerСonfiguration.СonfigurationData["BIOS"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
+            DisplayMotherBr = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"]) ? SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
+            DisplayCpu = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["CPU"]) ? SystemData.СomputerСonfiguration.СonfigurationData["CPU"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
+            DisplayGpu = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["GPU"]) ? SystemData.СomputerСonfiguration.СonfigurationData["GPU"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
+            DisplayRam = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["RAM"]) ? SystemData.СomputerСonfiguration.СonfigurationData["RAM"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
+            DisplayStorage = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["Storage"]) ? SystemData.СomputerСonfiguration.СonfigurationData["Storage"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
+            DisplayAudio = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["Audio"]) ? SystemData.СomputerСonfiguration.СonfigurationData["Audio"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
+            DisplayNetwork = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"]) ? SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
 
-            if (!string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["Sound"]))
-                DisplaySoundName = SystemData.СomputerСonfiguration.СonfigurationData["Sound"];
-            else
-                DisplaySoundName = (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
-
-            if (!string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"]))
-                DisplayNetAdapterName = SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"];
-            else
-                DisplayNetAdapterName = (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
-
-            DisplayIpAddress = SystemData.СomputerСonfiguration.СonfigurationData["IpAddress"];
-            DisplayCountProcess = new SystemData.MonitoringSystem().CountProcess.ToString();
+            DisplayIpAddress = SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"];
 
             if (Settings.IsHiddenIpAddress & SystemData.СomputerСonfiguration.ConnectionStatus == 0)
             {

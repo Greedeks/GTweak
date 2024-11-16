@@ -140,16 +140,16 @@ namespace GTweak.Utilities.Tweaks
 
             internal static readonly Dictionary<string, string> СonfigurationData = new Dictionary<string, string>()
             {
-                {"Windows",    string.Empty },
-                {"BIOS",       string.Empty },
-                {"MotherBr",   string.Empty },
-                {"CPU",        string.Empty },
-                {"GPU",        string.Empty },
-                {"RAM",        string.Empty },
-                {"Disk",       string.Empty },
-                {"Sound",      string.Empty },
-                {"NetAdapter", string.Empty },
-                {"IpAddress",  string.Empty }
+                {"Windows",        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty).ToString() },
+                {"BIOS",           string.Empty },
+                {"MotherBr",       string.Empty },
+                {"CPU",            string.Empty },
+                {"GPU",            string.Empty },
+                {"RAM",            string.Empty },
+                {"Storage",        string.Empty },
+                {"Audio",          string.Empty },
+                {"NetAdapter",     string.Empty },
+                {"UserIpAddress",  (string)Application.Current.Resources["connection_lose_systemInformation"] }
             };
 
             internal void GetСonfigurationComputer()
@@ -205,7 +205,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 Parallel.Invoke(delegate
                 {
-                    СonfigurationData["Disk"] = string.Empty;
+                    СonfigurationData["Storage"] = string.Empty;
                     foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName,MediaType,Size,BusType from MSFT_PhysicalDisk", optionsObj).Get())
                     {
                         _type = (ushort)(managementObj["MediaType"]) switch
@@ -216,23 +216,23 @@ namespace GTweak.Utilities.Tweaks
                             _ => "(Unspecified)",
                         };
                         if (_type == "(Unspecified)" && ((ushort)(managementObj["BusType"])) == 7) _type = "(Media-Type)";
-                        СonfigurationData["Disk"] += Convert.ToString((ulong)managementObj["Size"] / 1024000000) + " GB " + "[" + (string)managementObj["FriendlyName"] + "] " + _type + "\n";
+                        СonfigurationData["Storage"] += Convert.ToString((ulong)managementObj["Size"] / 1024000000) + " GB " + "[" + (string)managementObj["FriendlyName"] + "] " + _type + "\n";
                     }
-                    СonfigurationData["Disk"] = СonfigurationData["Disk"].TrimEnd('\n');
+                    СonfigurationData["Storage"] = СonfigurationData["Storage"].TrimEnd('\n');
                 },
                 delegate
                 {
-                    СonfigurationData["Sound"] = string.Empty;
+                    СonfigurationData["Audio"] = string.Empty;
                     foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice", optionsObj).Get())
                     {
                         if (!string.IsNullOrEmpty((string)managementObj["Name"]))
-                            СonfigurationData["Sound"] += (string)managementObj["Name"] + "\n";
+                            СonfigurationData["Audio"] += (string)managementObj["Name"] + "\n";
                         else if (!string.IsNullOrEmpty((string)managementObj["Caption"]))
-                            СonfigurationData["Sound"] += (string)managementObj["Caption"] + "\n";
+                            СonfigurationData["Audio"] += (string)managementObj["Caption"] + "\n";
                         else if (!string.IsNullOrEmpty((string)managementObj["Description"]))
-                            СonfigurationData["Sound"] += (string)managementObj["Description"] + "\n";
+                            СonfigurationData["Audio"] += (string)managementObj["Description"] + "\n";
                     }
-                    СonfigurationData["Sound"] = СonfigurationData["Sound"].TrimEnd('\n');
+                    СonfigurationData["Audio"] = СonfigurationData["Audio"].TrimEnd('\n');
                 },
                delegate
                {
@@ -282,7 +282,7 @@ namespace GTweak.Utilities.Tweaks
                         }
                         catch
                         {
-                            СonfigurationData["IpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
+                            СonfigurationData["UserIpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
                             ConnectionStatus = 3;
                         }
                         finally
@@ -298,19 +298,19 @@ namespace GTweak.Utilities.Tweaks
                             if (IPAddress.TryParse(clientInternetProtocol.Ip, out _) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
                                 ConnectionStatus = 0;
-                                СonfigurationData["IpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
+                                СonfigurationData["UserIpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
                             }
                             else
                             {
                                 ConnectionStatus = 2;
-                                СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
+                                СonfigurationData["UserIpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
                             }
                         }
                     }
                     else
                     {
                         ConnectionStatus = 1;
-                        СonfigurationData["IpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
+                        СonfigurationData["UserIpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                     }
                 });
             }
