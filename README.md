@@ -25,7 +25,7 @@
 
 ```c#
 - Windows activation
-- Disabling Windows Defender, SmartScreen, Anti malware, VBS, UAC 
+- Disabling Windows Defender, SmartScreen, Antimalware, VBS, UAC 
 - Disabling Windows updates and clearing the downloaded cache
 - Disabling unused and unnecessary services 
 - Disabling spyware, keyloggers and telemetry Windows, NVIDIA
