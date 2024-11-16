@@ -59,7 +59,13 @@
                             <Run Foreground="{StaticResource Color_Accent}" Text="{DynamicResource title_win_systemInformation}"/>
                             <Run Foreground="{StaticResource Color_Highlighted}" Text="{Binding DisplayWindows}" PreviewMouseDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
                         </TextBlock>
-                        <Image x:Name="ImageWindows" Source="{StaticResource DI_LogoWin}" Height="80" Width="80" HorizontalAlignment="Right" Margin="30,0,0,0"/>
+                        <Image x:Name="ImageWindows" Height="80" Width="80" HorizontalAlignment="Right" Margin="30,0,0,0">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource DI_LogoWin}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
                     </StackPanel>
                     <TextBlock  x:Name="ViewCountProcess" HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" MaxWidth="300" Foreground="{StaticResource Color_Inactive}">
                         <Run Text="{DynamicResource runprocces_systemInformation}"/>
@@ -67,6 +73,7 @@
                     </TextBlock>
                 </StackPanel>
             </Grid>
+            
             <Grid HorizontalAlignment="Right" Margin="0,20,50,0">
                 <Ellipse Height="90" Width="90" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
 
