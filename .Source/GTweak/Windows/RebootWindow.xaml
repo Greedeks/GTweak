@@ -22,7 +22,7 @@
                     </LinearGradientBrush>
                 </xrpb:RadialProgressBar.Foreground>
                 <xrpb:RadialProgressBar.Effect>
-                    <DropShadowEffect BlurRadius="30" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}"/>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}"/>
                 </xrpb:RadialProgressBar.Effect>
             </xrpb:RadialProgressBar>
 

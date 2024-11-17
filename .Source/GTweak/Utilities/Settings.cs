@@ -30,6 +30,8 @@ namespace GTweak.Utilities
 
         internal static int PID = 0;
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
+        internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
+        internal static readonly string currentLocation = Assembly.GetExecutingAssembly().Location;
 
         internal static bool IsViewNotification { get => _isViewNotification; set => _isViewNotification = value; }
         internal static bool IsSoundNotification { get => _isSoundNotification; set => _isSoundNotification = value; }
@@ -184,11 +186,10 @@ namespace GTweak.Utilities
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
-                Application.Current.Shutdown();
                 Process.Start(new ProcessStartInfo()
                 {
-                    Arguments = "/c choice /c y /n /d y /t 3 & del \"" + (new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath)).Name + "\" & " +
-                    "rd /s /q " + PathTempFiles + @"& rd /s /q " + Environment.SystemDirectory + @"\config\systemprofile\AppData\Local\GTweak",
+                    Arguments = $"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 3 & del \"" + new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name + "\" & " +
+                    "rd /s /q " + PathTempFiles + " & rd /s /q " + Environment.SystemDirectory + @"\config\systemprofile\AppData\Local\GTweak",
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,
                     FileName = "cmd.exe"
@@ -201,12 +202,11 @@ namespace GTweak.Utilities
         {
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = "/c choice /c y /n /d y /t 1 & start \"\" \"" + Assembly.GetEntryAssembly().Location + "\"",
+                Arguments = $"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"" + currentLocation + "\"",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
             });
-            Process.GetCurrentProcess().Kill();
         }
     }
 }
