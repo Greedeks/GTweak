@@ -20,23 +20,32 @@ namespace GTweak.Utilities
 
         internal static void CheckingApplicationCopies()
         {
+            Process.Start(new ProcessStartInfo()
+            {
+                Arguments = @"/c timeout /t 10 && del %userprofile%\AppData\Local\CrashDumps\*"+AppDomain.CurrentDomain.FriendlyName+"*",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true,
+                FileName = "cmd.exe"
+            });
+
             if (!mutex.WaitOne(150, false))
             {
                 using (Mutex mutex = new Mutex(false, @"Global\" + "GTweak"))
                 {
-                    if (mutex.WaitOne(0, false))
+                    if (mutex.WaitOne(150, false))
                         new MessageWindow().ShowDialog();
+                    else
+                        mutex?.ReleaseMutex();
                 }
-                string processName = Process.GetCurrentProcess().ProcessName;
-                Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == processName);
+                Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == Process.GetCurrentProcess().ProcessName);
                 if (process != null)
                 {
                     IntPtr handle = process.MainWindowHandle;
                     _ShowWindow(handle, 1);
                     _SetForegroundWindow(handle);
                 }
-                process?.Close();
                 process?.Dispose();
+                mutex?.ReleaseMutex();
             }
         }
 
