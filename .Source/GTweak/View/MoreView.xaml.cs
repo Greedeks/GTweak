@@ -17,10 +17,9 @@ namespace GTweak.View
 
         private void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
-            if (WindowsLicense.statusLicense == 1)
+            if (WindowsLicense.IsWindowsActivated)
                 new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("readyactivate_notification"));
-
-            else if (WindowsLicense.statusLicense != 1)
+            else
             {
                 new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("activatewin_notification"));
                 WindowsLicense.StartActivation();

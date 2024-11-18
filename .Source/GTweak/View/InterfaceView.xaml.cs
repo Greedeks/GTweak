@@ -19,7 +19,7 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
 
-            if (WindowsLicense.statusLicense != 1)
+            if (!WindowsLicense.IsWindowsActivated)
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["viewlicense_notification"]);
         }
 

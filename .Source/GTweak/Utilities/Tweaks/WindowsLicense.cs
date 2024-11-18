@@ -9,7 +9,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class WindowsLicense
     {
-        internal static uint statusLicense = 0;
+        internal static bool IsWindowsActivated = false;
         private static bool IsVersionWindows(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(SystemData.СomputerСonfiguration.WindowsClientVersion).Count == words;
 
         internal void LicenseStatus()
@@ -17,7 +17,7 @@ namespace GTweak.Utilities.Tweaks
             Parallel.Invoke(() =>
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1").Get())
-                    statusLicense = (uint)managementObj["LicenseStatus"];
+                    IsWindowsActivated = (uint)managementObj["LicenseStatus"] == 1;
             });
         }
 
@@ -94,9 +94,9 @@ namespace GTweak.Utilities.Tweaks
 
                 waitingWindow.Close();
 
-                if (statusLicense == 1)
+                if (IsWindowsActivated)
                     new ViewNotification().Show("restart", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["successactivate_notification"]);
-                else if (statusLicense != 1)
+                else
                     new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["notsuccessactivate_notification"]);
             }
 
