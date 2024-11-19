@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="{DynamicResource title_win_update}" WindowStyle="None"
-        Height="180" Width="400" MinHeight="180" MinWidth="400" MaxHeight="180" MaxWidth="350"
+        Height="180" Width="400" MinHeight="180" MinWidth="400" MaxHeight="180" MaxWidth="350" SnapsToDevicePixels="True" UseLayoutRounding="True"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         IsTabStop="False" Topmost="True" ShowInTaskbar="True" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid MouseDown="TitleBar_MouseDown">

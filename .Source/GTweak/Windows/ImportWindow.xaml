@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="160" Width="390" MinHeight="160" MinWidth="390" MaxHeight="160" MaxWidth="390"
+        Height="160" Width="390" MinHeight="160" MinWidth="390" MaxHeight="160" MaxWidth="390" SnapsToDevicePixels="True" UseLayoutRounding="True"
         Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
         ShowInTaskbar="False" IsTabStop="False" Loaded="Window_Loaded">
     

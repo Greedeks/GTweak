@@ -178,7 +178,7 @@ namespace GTweak.Utilities.Tweaks
         {
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = @"/c rd /s /q " + Settings.PathSystemDisk + @"Windows\Temp & rd /s /q %localappdata%\Temp",
+                Arguments = @$"/c rd /s /q {UsePath.SystemDisk}Windows\Temp & rd /s /q %localappdata%\Temp",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"

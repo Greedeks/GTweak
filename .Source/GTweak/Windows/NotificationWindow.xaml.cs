@@ -26,7 +26,7 @@ namespace GTweak.Windows
         {
             InitializeComponent();
 
-            ImageBody.Source ??= (ImageSource)new ImageSourceConverter().ConvertFromString(Settings.PathIcon);
+            ImageBody.Source ??= (ImageSource)new ImageSourceConverter().ConvertFromString(UsePath.Icon);
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -61,9 +61,9 @@ namespace GTweak.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Settings.IsSoundNotification)
+            if (Settings.IsPlayingSound)
             {
-                _mediaPlayer.Open(new Uri(Settings.PathSound));
+                _mediaPlayer.Open(new Uri(UsePath.Sound));
                 _mediaPlayer.Volume = Settings.VolumeNotification / 100.0f;
                 _mediaPlayer.Play();
             }

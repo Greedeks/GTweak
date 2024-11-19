@@ -137,7 +137,7 @@ namespace GTweak.Utilities.Tweaks
             foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", optionsObj).Get())
                 SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
 
-            DisableSR(Settings.PathSystemDisk + @"\\");
+            DisableSR(UsePath.SystemDisk + @"\\");
         }
 
         private static string StartPowerShell(string arguments)

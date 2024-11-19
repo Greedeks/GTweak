@@ -22,7 +22,7 @@ namespace GTweak
             BtnNotification.StateNA = Settings.IsViewNotification;
             BtnUpdate.StateNA = Settings.IsСheckingUpdate;
             BtnTopMost.StateNA = Topmost = Settings.IsTopMost;
-            BtnSoundNtn.IsChecked = Settings.IsSoundNotification;
+            BtnSoundNtn.IsChecked = Settings.IsPlayingSound;
             SliderVolume.Value = Settings.VolumeNotification;
             LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;
             ThemeSelectionMenu.SelectedIndex = Settings.Theme switch

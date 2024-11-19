@@ -60,7 +60,7 @@ namespace GTweak.Windows
         {
             List<string> tempKeys = new List<string>(), tempValues = new List<string>();
 
-            INIManager iniManager = new INIManager(Settings.PathConfig);
+            INIManager iniManager = new INIManager(UsePath.Config);
 
             for (byte i = 1; i <= 100; i++)
             {

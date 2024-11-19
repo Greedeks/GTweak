@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="170" Width="370" MinHeight="170" MinWidth="370" MaxHeight="170" MaxWidth="370"
+        Height="170" Width="370" MinHeight="170" MinWidth="370" MaxHeight="170" MaxWidth="370" SnapsToDevicePixels="True" UseLayoutRounding="True"
         Background="Transparent"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
         ShowInTaskbar="False"  IsTabStop="False">
     <Grid MouseDown="TitleBar_MouseDown">

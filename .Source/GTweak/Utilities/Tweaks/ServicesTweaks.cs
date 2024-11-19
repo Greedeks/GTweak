@@ -28,10 +28,10 @@ namespace GTweak.Utilities.Tweaks
 
         private static string PathsWinUUP(string program, bool isOldWay = false)
         {
-            string path = isOldWay ? string.Concat(Settings.PathSystemDisk, @"Windows\System32\") : string.Concat(Settings.PathSystemDisk, @"Windows\UUS\amd64\");
+            string path = isOldWay ? string.Concat(UsePath.SystemDisk, @"Windows\System32\") : string.Concat(UsePath.SystemDisk, @"Windows\UUS\amd64\");
 
             if (program == "Uso" || program == "Re_Uso")
-                return string.Concat(string.Concat(Settings.PathSystemDisk, @"Windows\System32\"), ProgramsUUP[program]);
+                return string.Concat(string.Concat(UsePath.SystemDisk, @"Windows\System32\"), ProgramsUUP[program]);
             else
                 return string.Concat(path, ProgramsUUP[program]);
         }
@@ -903,13 +903,13 @@ namespace GTweak.Utilities.Tweaks
                         ChangeStateTask("/enable");
                     else
                     {
-                        SetFullAccess(Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download");
-                        SetFullAccess(Settings.PathSystemDisk + @"Windows\System32\catroot2");
+                        SetFullAccess(UsePath.SystemDisk + @"Windows\SoftwareDistribution\Download");
+                        SetFullAccess(UsePath.SystemDisk + @"Windows\System32\catroot2");
 
                         Process.Start(new ProcessStartInfo()
                         {
-                            Arguments = @" /c rd /s /q " + Settings.PathSystemDisk + @"Windows\SoftwareDistribution\Download & 
-                            rd /s /q " + Settings.PathSystemDisk + @"Windows\System32\catroot2",
+                            Arguments = @" /c rd /s /q " + UsePath.SystemDisk + @"Windows\SoftwareDistribution\Download & 
+                            rd /s /q " + UsePath.SystemDisk + @"Windows\System32\catroot2",
                             WindowStyle = ProcessWindowStyle.Hidden,
                             CreateNoWindow = true,
                             FileName = "cmd.exe"

@@ -238,7 +238,7 @@ namespace GTweak.Utilities.Tweaks
             try
             {
                 byte count = 0;
-                StreamReader streamReader = new StreamReader(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts");
+                StreamReader streamReader = new StreamReader(UsePath.Hosts);
                 string hosts = streamReader.ReadToEnd();
 
                 foreach (string hostsrules in hostslist)
@@ -370,18 +370,18 @@ namespace GTweak.Utilities.Tweaks
                     {
                         BlockSpyDomain(true);
 
-                        try { File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)"); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                        try { File.Delete(UsePath.Hosts + @" (Default GTweak)"); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
-                        File.Move(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)");
-                        new UnarchiveManager(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", Resources.hosts);
+                        File.Move(UsePath.Hosts, UsePath.Hosts + " (Default GTweak)");
+                        new UnarchiveManager(UsePath.Hosts, Resources.hosts);
                     }
                     else
                     {
                         try
                         {
                             BlockSpyDomain(false);
-                            File.Copy(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)", Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts", true);
-                            File.Delete(Settings.PathSystemDisk + @"\Windows\System32\drivers\etc\hosts (Default GTweak)");
+                            File.Copy(UsePath.Hosts + @" (Default GTweak)", UsePath.Hosts, true);
+                            File.Delete(UsePath.Hosts + @" (Default GTweak)");
                         }
                         catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
                     }

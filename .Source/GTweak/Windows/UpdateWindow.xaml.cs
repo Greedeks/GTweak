@@ -3,7 +3,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -12,8 +11,6 @@ namespace GTweak.Windows
 {
     public partial class UpdateWindow : Window
     {
-        private static readonly string nameOfUser = AppDomain.CurrentDomain.FriendlyName;
-        private static readonly string pathOfUser = Assembly.GetExecutingAssembly().Location;
         public UpdateWindow()
         {
             InitializeComponent();
@@ -80,13 +77,13 @@ namespace GTweak.Windows
                     {
                         Process.Start(new ProcessStartInfo()
                         {
-                            Arguments = $"/c taskkill /f /im \"{nameOfUser}\" && timeout /t 1 && del \"{pathOfUser}\" && ren nGTweak.exe \"{nameOfUser}\" &&  \"{pathOfUser}\"",
+                            Arguments = $"/c taskkill /f /im \"{Settings.currentName}\" && timeout /t 1 && del \"{Settings.currentLocation}\" && ren Git-GTweak.exe \"{Settings.currentName}\" &&  \"{Settings.currentLocation}\"",
                             WindowStyle = ProcessWindowStyle.Hidden,
                             CreateNoWindow = true,
                             FileName = "cmd.exe"
                         });
                     };
-                    webClient.DownloadFileAsync(new Uri("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"), "nGTweak.exe");
+                    webClient.DownloadFileAsync(new Uri("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"), "Git-GTweak.exe");
                 }
                 catch
                 {

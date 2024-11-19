@@ -227,7 +227,7 @@ namespace GTweak.Utilities.Tweaks
             }
 
             string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
-            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + Settings.PathSystemDisk + @"\OneDriveTemp";
+            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + UsePath.SystemDisk + @"\OneDriveTemp";
 
             if (isLocalAccount)
                 argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";

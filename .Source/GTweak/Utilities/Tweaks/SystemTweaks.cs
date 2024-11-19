@@ -716,9 +716,9 @@ namespace GTweak.Utilities.Tweaks
                     },
                 };
 
-                string _serchScheme = default,
+                string serchScheme = default,
                     unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
-                    inputPath = Settings.PathTempFiles + @"\UltimatePerformance.pow";
+                    pathTempFile = UsePath.FileLocation + @"\UltimatePerformance.pow";
 
                 try
                 {
@@ -728,14 +728,14 @@ namespace GTweak.Utilities.Tweaks
                         {
                             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE IsActive=false").Get())
                             {
-                                _serchScheme = Convert.ToString(managementObj["InstanceID"]);
-                                _serchScheme = Regex.Match(_serchScheme, @"\{([^)]*)\}").Groups[1].Value;
-                                if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + _serchScheme + "", "Description", string.Empty).ToString().Contains("-18") &&
-                                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + _serchScheme + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
+                                serchScheme = Convert.ToString(managementObj["InstanceID"]);
+                                serchScheme = Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value;
+                                if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "Description", string.Empty).ToString().Contains("-18") &&
+                                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
                                 {
                                     using (_powercfg)
                                     {
-                                        _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
+                                        _powercfg.StartInfo.Arguments = $"/setactive {serchScheme}";
                                         _powercfg.Start();
 
                                         _powercfg.StartInfo.Arguments = unlockFrequency;
@@ -746,15 +746,15 @@ namespace GTweak.Utilities.Tweaks
 
                         });
 
-                        if (string.IsNullOrEmpty(_serchScheme))
+                        if (string.IsNullOrEmpty(serchScheme))
                         {
-                            new UnarchiveManager(Settings.PathTempFiles + @"\UltimatePerformance.pow", Properties.Resources.Ultimate_Performance_pow);
+                            new UnarchiveManager(pathTempFile, Properties.Resources.Ultimate_Performance_pow);
 
                             string _guid = Guid.NewGuid().ToString("D");
 
                             using (_powercfg)
                             {
-                                _powercfg.StartInfo.Arguments = $"-import \"{inputPath}\" {_guid}";
+                                _powercfg.StartInfo.Arguments = $@"-import ""{pathTempFile}"" {_guid}";
                                 _powercfg.Start();
 
                                 await Task.Delay(5);
@@ -765,6 +765,14 @@ namespace GTweak.Utilities.Tweaks
                                 _powercfg.StartInfo.Arguments = unlockFrequency;
                                 _powercfg.Start();
                             }
+
+                            Process.Start(new ProcessStartInfo()
+                            {
+                                Arguments = $"/c timeout /t 10 && del {pathTempFile}",
+                                WindowStyle = ProcessWindowStyle.Hidden,
+                                CreateNoWindow = true,
+                                FileName = "cmd.exe"
+                            });
                         }
                     }
                     else
@@ -774,14 +782,14 @@ namespace GTweak.Utilities.Tweaks
                         Parallel.Invoke(() =>
                         {
                             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + _activePowerScheme + "'").Get())
-                                _serchScheme = Convert.ToString(managementObj["InstanceID"]);
+                                serchScheme = Convert.ToString(managementObj["InstanceID"]);
                         });
 
-                        _serchScheme = Regex.Match(_serchScheme, @"\{([^)]*)\}").Groups[1].Value;
+                        serchScheme = Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value;
 
                         using (_powercfg)
                         {
-                            _powercfg.StartInfo.Arguments = $"/setactive {_serchScheme}";
+                            _powercfg.StartInfo.Arguments = $"/setactive {serchScheme}";
                             _powercfg.Start();
                         }
                     }

@@ -6,21 +6,27 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace GTweak.Utilities
 {
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct UsePath
+    {
+        internal static string Config = string.Empty;
+        internal static string FileLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"GTweak");
+        internal static string Sound => Path.Combine(FileLocation + @"\resource\notify.mp3");
+        internal static string Icon => Path.Combine(FileLocation + @"\resource\GTweak.ico");
+        internal static string SystemDisk => Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
+        internal static string Hosts => Path.Combine(Environment.SystemDirectory, @"drivers\etc\hosts");
+    }
+
     internal sealed class Settings
     {
-        internal static string PathConfig = string.Empty;
-        internal static string PathSound => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\GTweak\Sound.mp3";
-        internal static string PathIcon => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\GTweak\GTweak.ico";
-        internal static string PathTempFiles => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)) + @"\GTweak";
-        internal static string PathSystemDisk => Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
-
         private static bool _isViewNotification = true;
-        private static bool _isSoundNotification = true;
+        private static bool _isPlayingSound = true;
         private static byte _volumeNotification = 50;
         private static bool _isTopMost = false;
         private static bool _isСheckingUpdate = true;
@@ -34,7 +40,7 @@ namespace GTweak.Utilities
         internal static readonly string currentLocation = Assembly.GetExecutingAssembly().Location;
 
         internal static bool IsViewNotification { get => _isViewNotification; set => _isViewNotification = value; }
-        internal static bool IsSoundNotification { get => _isSoundNotification; set => _isSoundNotification = value; }
+        internal static bool IsPlayingSound { get => _isPlayingSound; set => _isPlayingSound = value; }
         internal static byte VolumeNotification { get => _volumeNotification; set => _volumeNotification = value; }
         internal static bool IsTopMost { get => _isTopMost; set => _isTopMost = value; }
         internal static bool IsСheckingUpdate { get => _isСheckingUpdate; set => _isСheckingUpdate = value; }
@@ -44,11 +50,11 @@ namespace GTweak.Utilities
 
         internal void CheckingTempFiles()
         {
-            if (!File.Exists(PathIcon))
-                new UnarchiveManager(PathIcon, Properties.Resources.GTweak);
+            if (!File.Exists(UsePath.Icon))
+                new UnarchiveManager(UsePath.Icon, Properties.Resources.GTweak);
 
-            if (!File.Exists(PathSound))
-                new UnarchiveManager(PathSound, Properties.Resources.Sound);
+            if (!File.Exists(UsePath.Sound))
+                new UnarchiveManager(UsePath.Sound, Properties.Resources.Sound);
         }
 
         internal void СheckingParameters()
@@ -58,7 +64,7 @@ namespace GTweak.Utilities
             registryKey.GetValue("Update", null) == null || registryKey.GetValue("Language", null) == null || registryKey.GetValue("HiddenIP", null) == null || registryKey.GetValue("Theme", null) == null)
             {
                 registryKey?.SetValue("Notification", IsViewNotification, RegistryValueKind.String);
-                registryKey?.SetValue("Sound", IsSoundNotification, RegistryValueKind.String);
+                registryKey?.SetValue("Sound", IsPlayingSound, RegistryValueKind.String);
                 registryKey?.SetValue("Volume", VolumeNotification, RegistryValueKind.String);
                 registryKey?.SetValue("TopMost", IsTopMost, RegistryValueKind.String);
                 registryKey?.SetValue("Update", IsСheckingUpdate, RegistryValueKind.String);
@@ -69,7 +75,7 @@ namespace GTweak.Utilities
             else
             {
                 IsViewNotification = bool.Parse(registryKey?.GetValue("Notification").ToString() ?? "True");
-                IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
+                IsPlayingSound = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
                 VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "50");
                 IsTopMost = bool.Parse(registryKey?.GetValue("TopMost").ToString() ?? "False");
                 IsСheckingUpdate = bool.Parse(registryKey?.GetValue("Update").ToString() ?? "True");
@@ -91,7 +97,7 @@ namespace GTweak.Utilities
                     IsViewNotification = bool.Parse(registryKey?.GetValue("Notification").ToString() ?? "True");
                     break;
                 case "Sound":
-                    IsSoundNotification = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
+                    IsPlayingSound = bool.Parse(registryKey?.GetValue("Sound").ToString() ?? "True");
                     break;
                 case "Volume":
                     VolumeNotification = byte.Parse(registryKey?.GetValue("Volume").ToString() ?? "50");
@@ -116,7 +122,6 @@ namespace GTweak.Utilities
             registryKey?.Close();
         });
 
-
         internal static void SaveFileConfig()
         {
             if (INIManager.UserTweaksConfidentiality.Count == 0 && INIManager.UserTweaksInterface.Count == 0 && INIManager.UserTweaksServices.Count == 0 && INIManager.UserTweaksSystem.Count == 0)
@@ -136,12 +141,12 @@ namespace GTweak.Utilities
 
                 try
                 {
-                    PathConfig = Path.GetDirectoryName(saveFileDialog.FileName) + @"\" + Path.GetFileNameWithoutExtension(saveFileDialog.FileName) + ".ini";
+                    UsePath.Config = Path.GetDirectoryName(saveFileDialog.FileName) + @"\" + Path.GetFileNameWithoutExtension(saveFileDialog.FileName) + ".ini";
 
-                    if (File.Exists(PathConfig))
-                        File.Delete(PathConfig);
+                    if (File.Exists(UsePath.Config))
+                        File.Delete(UsePath.Config);
 
-                    INIManager iniManager = new INIManager(PathConfig);
+                    INIManager iniManager = new INIManager(UsePath.Config);
                     iniManager.Write("GTweak", "Author", "Greedeks");
                     iniManager.Write("GTweak", "Release", currentRelease);
                     iniManager.WriteAll("Confidentiality Tweaks", INIManager.UserTweaksConfidentiality);
@@ -164,12 +169,12 @@ namespace GTweak.Utilities
 
             if (isResultNormal != true) return;
 
-            PathConfig = openFileDialog.FileName;
-            INIManager iniManager = new INIManager(PathConfig);
+            UsePath.Config = openFileDialog.FileName;
+            INIManager iniManager = new INIManager(UsePath.Config);
 
             if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("Release"))
             {
-                if (File.ReadLines(PathConfig).Any(line => line.Contains("TglButton")) || File.ReadLines(PathConfig).Any(line => line.Contains("Slider")))
+                if (File.ReadLines(UsePath.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(UsePath.Config).Any(line => line.Contains("Slider")))
                     new ImportWindow(openFileDialog.SafeFileName).ShowDialog();
                 else
                     new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_empty_notification"]);
@@ -188,8 +193,8 @@ namespace GTweak.Utilities
 
                 Process.Start(new ProcessStartInfo()
                 {
-                    Arguments = $"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 3 & del \"" + new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name + "\" & " +
-                    "rd /s /q " + PathTempFiles + " & rd /s /q " + Environment.SystemDirectory + @"\config\systemprofile\AppData\Local\GTweak",
+                    Arguments = $"/c taskkill /f /im {currentName} & choice /c y /n /d y /t 3 & del {new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name } & " +
+                    @$"rd /s /q {UsePath.FileLocation} & rd /s /q {Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak",
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,
                     FileName = "cmd.exe"
@@ -202,7 +207,7 @@ namespace GTweak.Utilities
         {
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = $"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"" + currentLocation + "\"",
+                Arguments = $"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"{currentLocation}\"",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
