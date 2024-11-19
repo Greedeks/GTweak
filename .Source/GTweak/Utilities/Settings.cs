@@ -193,7 +193,7 @@ namespace GTweak.Utilities
 
                 Process.Start(new ProcessStartInfo()
                 {
-                    Arguments = $"/c taskkill /f /im {currentName} & choice /c y /n /d y /t 3 & del {new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name } & " +
+                    Arguments = $"/c taskkill /f /im {currentName} & choice /c y /n /d y /t 3 & del {new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name} & " +
                     @$"rd /s /q {UsePath.FileLocation} & rd /s /q {Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak",
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,

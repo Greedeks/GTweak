@@ -5,11 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Management;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -342,7 +340,8 @@ namespace GTweak.Utilities.Tweaks
                 string DataAsJson = sreader.ReadToEnd();
                 GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
 
-                if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim() != gitVersionUtility.СurrentVersion)
+
+                if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(Settings.currentRelease) > 0)
                 {
                     IsNeedUpdate = true;
                     DownloadVersion = gitVersionUtility.СurrentVersion;
