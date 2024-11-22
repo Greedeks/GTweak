@@ -77,11 +77,10 @@ namespace GTweak.View
         {
             Image imageApp = (Image)sender;
 
-            if (TextDescription.Text != (string)FindResource(imageApp.Name + "_applications"))
-            {
-                string _descriptionApps = (string)FindResource(imageApp.Name + "_applications");
+            string _descriptionApps = (string)FindResource(imageApp.Name + "_applications");
+
+            if (TextDescription.Text != _descriptionApps)
                 new TypewriterAnimation(_descriptionApps, TextDescription, TimeSpan.FromMilliseconds(250));
-            }
         }
 
         private void Apps_MouseLeave(object sender, MouseEventArgs e)
@@ -105,9 +104,8 @@ namespace GTweak.View
 
             return !isOneDrive
                 ? !UninstallingPakages.IsAppUnavailable[packageName] ? isContains(partName) ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime")
-                : (ImageSource)(!UninstallingPakages.IsAppUnavailable[packageName] ? UninstallingPakages.IsOneDriveInstalled ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime"));
+                : !UninstallingPakages.IsAppUnavailable[packageName] ? UninstallingPakages.IsOneDriveInstalled ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime");
         }
-
 
         private void UpdateViewStatePakages()
         {
