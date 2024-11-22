@@ -270,7 +270,7 @@
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />
     <Compile Include="Utilities\Tweaks\ServicesTweaks.cs" />
     <Compile Include="Utilities\Tweaks\SystemTweaks.cs" />
-    <Compile Include="Utilities\Tweaks\UninstallingApps.cs" />
+    <Compile Include="Utilities\Tweaks\UninstallingPakages.cs" />
     <Compile Include="Utilities\Tweaks\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />
     <Compile Include="Utilities\Tweaks\RecoveryPoint.cs" />

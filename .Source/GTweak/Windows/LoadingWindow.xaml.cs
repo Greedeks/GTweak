@@ -54,8 +54,8 @@ namespace GTweak.Windows
                 new WindowsLicense().LicenseStatus,
                 new SystemData.СomputerСonfiguration().GetСonfigurationComputer,
                 new SystemData.UtilityСonfiguration().CheckingUpdate,
-                new UninstallingApps().ViewInstalledPackages,
-                new UninstallingApps().CheckingForLocalAccount,
+                new UninstallingPakages().ViewInstalledPackages,
+                new UninstallingPakages().CheckingForLocalAccount,
                 new SystemTweaks().ViewNetshState,
                 new SystemTweaks().ViewTaskState,
                 new SystemTweaks().ViewBluetoothStatus);

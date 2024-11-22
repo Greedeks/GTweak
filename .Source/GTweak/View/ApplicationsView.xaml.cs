@@ -3,6 +3,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,11 +27,11 @@ namespace GTweak.View
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 if (time.TotalSeconds % 2 == 0)
-                    UpdateViewStateApps();
+                    UpdateViewStatePakages();
                 else if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += delegate { new UninstallingApps().ViewInstalledPackages(); };
+                    backgroundWorker.DoWork += delegate { new UninstallingPakages().ViewInstalledPackages(); };
                     backgroundWorker.RunWorkerAsync();
                 }
 
@@ -50,10 +51,10 @@ namespace GTweak.View
                         appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { UninstallingApps.DeletingPackage(applicationName); });
+                        await backgroundQueue.QueueTask(delegate { UninstallingPakages.DeletingPackage(applicationName); });
 
                         if (backgroundQueue.IsQueueCompleted())
-                            UpdateViewStateApps();
+                            UpdateViewStatePakages();
                         break;
                     }
 
@@ -63,10 +64,10 @@ namespace GTweak.View
                         new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { UninstallingApps.ResetOneDriveAsync(); });
+                        await backgroundQueue.QueueTask(delegate { UninstallingPakages.ResetOneDriveAsync(); });
 
                         if (backgroundQueue.IsQueueCompleted())
-                            UpdateViewStateApps();
+                            UpdateViewStatePakages();
                         break;
                     }
             }
@@ -91,54 +92,66 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Parallel.Invoke(UpdateViewStateApps);
+            Parallel.Invoke(UpdateViewStatePakages);
             new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(300));
         }
 
-        private void UpdateViewStateApps()
+        private ImageSource AvailabilityInstalledPackage(string packageName, string partName, bool isOneDrive = false)
         {
-            MicrosoftStore.Source = !UninstallingApps.IsAppUnavailable["MicrosoftStore"] ? UninstallingApps.UserPackages.Contains("Microsoft.WindowsStore") ? (DrawingImage)FindResource("A_DI_MicrosoftStore") : (DrawingImage)FindResource("DA_DI_MicrosoftStore") : (DrawingImage)FindResource("DI_Sandtime");
-            Todos.Source = !UninstallingApps.IsAppUnavailable["Todos"] ? UninstallingApps.UserPackages.Contains("Microsoft.Todos") ? (DrawingImage)FindResource("A_DI_Todos") : (DrawingImage)FindResource("DA_DI_Todos") : (DrawingImage)FindResource("DI_Sandtime");
-            BingWeather.Source = !UninstallingApps.IsAppUnavailable["BingWeather"] ? UninstallingApps.UserPackages.Contains("Microsoft.BingWeather") ? (DrawingImage)FindResource("A_DI_BingWeather") : (DrawingImage)FindResource("DA_DI_BingWeather") : (DrawingImage)FindResource("DI_Sandtime");
-            Microsoft3D.Source = !UninstallingApps.IsAppUnavailable["Microsoft3D"] ? UninstallingApps.UserPackages.Contains("Microsoft.Microsoft3DViewer") ? (DrawingImage)FindResource("A_DI_Microsoft3D") : (DrawingImage)FindResource("DA_DI_Microsoft3D") : (DrawingImage)FindResource("DI_Sandtime");
-            Music.Source = !UninstallingApps.IsAppUnavailable["Music"] ? UninstallingApps.UserPackages.Contains("Microsoft.ZuneMusic") ? (DrawingImage)FindResource("A_DI_Music") : (DrawingImage)FindResource("DA_DI_Music") : (DrawingImage)FindResource("DI_Sandtime");
-            GetHelp.Source = !UninstallingApps.IsAppUnavailable["GetHelp"] ? UninstallingApps.UserPackages.Contains("Microsoft.GetHelp") ? (DrawingImage)FindResource("A_DI_GetHelp") : (DrawingImage)FindResource("DA_DI_GetHelp") : (DrawingImage)FindResource("DI_Sandtime");
-            MicrosoftOfficeHub.Source = !UninstallingApps.IsAppUnavailable["MicrosoftOfficeHub"] ? UninstallingApps.UserPackages.Contains("Microsoft.MicrosoftOfficeHub") ? (DrawingImage)FindResource("A_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DA_DI_MicrosoftOfficeHub") : (DrawingImage)FindResource("DI_Sandtime");
-            MicrosoftSolitaireCollection.Source = !UninstallingApps.IsAppUnavailable["MicrosoftSolitaireCollection"] ? UninstallingApps.UserPackages.Contains("Microsoft.MicrosoftSolitaireCollection") ? (DrawingImage)FindResource("A_DI_MicrosoftSolitaireCollection") : (DrawingImage)FindResource("DA_DI_MicrosoftSolitaireCollection") : (DrawingImage)FindResource("DI_Sandtime"); MixedReality.Source = !UninstallingApps.IsAppUnavailable["MixedReality"] ? UninstallingApps.UserPackages.Contains("Microsoft.MixedReality.Portal") ? (DrawingImage)FindResource("A_DI_MixedReality") : (DrawingImage)FindResource("DA_DI_MixedReality") : (DrawingImage)FindResource("DI_Sandtime");
-            Xbox.Source = !UninstallingApps.IsAppUnavailable["Xbox"] ? UninstallingApps.UserPackages.Contains("Microsoft.XboxApp") || UninstallingApps.UserPackages.Contains("Microsoft.GamingApp") || UninstallingApps.UserPackages.Contains("Microsoft.XboxGamingOverlay") ||
-               UninstallingApps.UserPackages.Contains("Microsoft.XboxGameOverlay") || UninstallingApps.UserPackages.Contains("Microsoft.XboxIdentityProvider") || UninstallingApps.UserPackages.Contains("Microsoft.Xbox.TCUI") ||
-               UninstallingApps.UserPackages.Contains("Microsoft.XboxSpeechToTextOverlay") ? (DrawingImage)FindResource("A_DI_Xbox") : (DrawingImage)FindResource("DA_DI_Xbox") : (DrawingImage)FindResource("DI_Sandtime");
-            Paint3D.Source = !UninstallingApps.IsAppUnavailable["Paint3D"] ? UninstallingApps.UserPackages.Contains("Microsoft.MSPaint") ? (DrawingImage)FindResource("A_DI_Paint3D") : (DrawingImage)FindResource("DA_DI_Paint3D") : (DrawingImage)FindResource("DI_Sandtime");
-            OneNote.Source = !UninstallingApps.IsAppUnavailable["OneNote"] ? UninstallingApps.UserPackages.Contains("Microsoft.Office.OneNote") ? (DrawingImage)FindResource("A_DI_OneNote") : (DrawingImage)FindResource("DA_DI_OneNote") : (DrawingImage)FindResource("DI_Sandtime");
-            People.Source = !UninstallingApps.IsAppUnavailable["People"] ? UninstallingApps.UserPackages.Contains("Microsoft.People") ? (DrawingImage)FindResource("A_DI_People") : (DrawingImage)FindResource("DA_DI_People") : (DrawingImage)FindResource("DI_Sandtime");
-            MicrosoftStickyNotes.Source = !UninstallingApps.IsAppUnavailable["MicrosoftStickyNotes"] ? UninstallingApps.UserPackages.Contains("Microsoft.MicrosoftStickyNotes") ? (DrawingImage)FindResource("A_DI_MicrosoftStickyNotes") : (DrawingImage)FindResource("DA_DI_MicrosoftStickyNotes") : (DrawingImage)FindResource("DI_Sandtime");
-            Widgets.Source = !UninstallingApps.IsAppUnavailable["Widgets"] ? UninstallingApps.UserPackages.Contains("MicrosoftWindows.Client.WebExperience") ? (DrawingImage)FindResource("A_DI_Widgets") : (DrawingImage)FindResource("DA_DI_Widgets") : (DrawingImage)FindResource("DI_Sandtime");
-            ScreenSketch.Source = !UninstallingApps.IsAppUnavailable["ScreenSketch"] ? UninstallingApps.UserPackages.Contains("Microsoft.ScreenSketch") ? (DrawingImage)FindResource("A_DI_ScreenSketch") : (DrawingImage)FindResource("DA_DI_ScreenSketch") : (DrawingImage)FindResource("DI_Sandtime");
-            Phone.Source = !UninstallingApps.IsAppUnavailable["Phone"] ? UninstallingApps.UserPackages.Contains("Microsoft.YourPhone") ? (DrawingImage)FindResource("A_DI_Phone") : (DrawingImage)FindResource("DA_DI_Phone") : (DrawingImage)FindResource("DI_Sandtime");
-            Photos.Source = !UninstallingApps.IsAppUnavailable["Photos"] ? UninstallingApps.UserPackages.Contains("Microsoft.Windows.Photos") ? (DrawingImage)FindResource("A_DI_Photos") : (DrawingImage)FindResource("DA_DI_Photos") : (DrawingImage)FindResource("DI_Sandtime");
-            FeedbackHub.Source = !UninstallingApps.IsAppUnavailable["FeedbackHub"] ? UninstallingApps.UserPackages.Contains("Microsoft.WindowsFeedbackHub") ? (DrawingImage)FindResource("A_DI_FeedbackHub") : (DrawingImage)FindResource("DA_DI_FeedbackHub") : (DrawingImage)FindResource("DI_Sandtime");
-            SoundRecorder.Source = !UninstallingApps.IsAppUnavailable["SoundRecorder"] ? UninstallingApps.UserPackages.Contains("Microsoft.WindowsSoundRecorder") ? (DrawingImage)FindResource("A_DI_SoundRecorder") : (DrawingImage)FindResource("DA_DI_SoundRecorder") : (DrawingImage)FindResource("DI_Sandtime");
-            Alarms.Source = !UninstallingApps.IsAppUnavailable["Alarms"] ? UninstallingApps.UserPackages.Contains("Microsoft.WindowsAlarms") ? (DrawingImage)FindResource("A_DI_Alarms") : (DrawingImage)FindResource("DA_DI_Alarms") : (DrawingImage)FindResource("DI_Sandtime");
-            SkypeApp.Source = !UninstallingApps.IsAppUnavailable["SkypeApp"] ? UninstallingApps.UserPackages.Contains("Microsoft.SkypeApp") ? (DrawingImage)FindResource("A_DI_SkypeApp") : (DrawingImage)FindResource("DA_DI_SkypeApp") : (DrawingImage)FindResource("DI_Sandtime");
-            Maps.Source = !UninstallingApps.IsAppUnavailable["Maps"] ? UninstallingApps.UserPackages.Contains("Microsoft.WindowsMaps") ? (DrawingImage)FindResource("A_DI_Maps") : (DrawingImage)FindResource("DA_DI_Maps") : (DrawingImage)FindResource("DI_Sandtime");
-            Camera.Source = !UninstallingApps.IsAppUnavailable["Camera"] ? UninstallingApps.UserPackages.Contains("Microsoft.WindowsCamera") ? (DrawingImage)FindResource("A_DI_Camera") : (DrawingImage)FindResource("DA_DI_Camera") : (DrawingImage)FindResource("DI_Sandtime");
-            Video.Source = !UninstallingApps.IsAppUnavailable["Video"] ? UninstallingApps.UserPackages.Contains("Microsoft.ZuneVideo") ? (DrawingImage)FindResource("A_DI_Video") : (DrawingImage)FindResource("DA_DI_Video") : (DrawingImage)FindResource("DI_Sandtime");
-            BingNews.Source = !UninstallingApps.IsAppUnavailable["BingNews"] ? UninstallingApps.UserPackages.Contains("Microsoft.BingNews") ? (DrawingImage)FindResource("A_DI_BingNews") : (DrawingImage)FindResource("DA_DI_BingNews") : (DrawingImage)FindResource("DI_Sandtime");
-            Mail.Source = !UninstallingApps.IsAppUnavailable["Mail"] ? UninstallingApps.UserPackages.Contains("microsoft.windowscommunicationsapps") ? (DrawingImage)FindResource("A_DI_Mail") : (DrawingImage)FindResource("DA_DI_Mail") : (DrawingImage)FindResource("DI_Sandtime");
-            MicrosoftTeams.Source = !UninstallingApps.IsAppUnavailable["MicrosoftTeams"] ? UninstallingApps.UserPackages.Contains("MicrosoftTeams") || UninstallingApps.UserPackages.Contains("MSTeams") ? (DrawingImage)FindResource("A_DI_MicrosoftTeams") : (DrawingImage)FindResource("DA_DI_MicrosoftTeams") : (DrawingImage)FindResource("DI_Sandtime");
-            PowerAutomateDesktop.Source = !UninstallingApps.IsAppUnavailable["PowerAutomateDesktop"] ? UninstallingApps.UserPackages.Contains("Microsoft.PowerAutomateDesktop") ? (DrawingImage)FindResource("A_DI_PowerAutomateDesktop") : (DrawingImage)FindResource("DA_DI_PowerAutomateDesktop") : (DrawingImage)FindResource("DI_Sandtime");
-            Cortana.Source = !UninstallingApps.IsAppUnavailable["Cortana"] ? UninstallingApps.UserPackages.Contains("Microsoft.549981C3F5F10") ? (DrawingImage)FindResource("A_DI_Cortana") : (DrawingImage)FindResource("DA_DI_Cortana") : (DrawingImage)FindResource("DI_Sandtime");
-            ClipChamp.Source = !UninstallingApps.IsAppUnavailable["ClipChamp"] ? UninstallingApps.UserPackages.Contains("Clipchamp.Clipchamp") ? (DrawingImage)FindResource("A_DI_ClipChamp") : (DrawingImage)FindResource("DA_DI_ClipChamp") : (DrawingImage)FindResource("DI_Sandtime");
-            GetStarted.Source = !UninstallingApps.IsAppUnavailable["GetStarted"] ? UninstallingApps.UserPackages.Contains("Microsoft.Getstarted") ? (DrawingImage)FindResource("A_DI_GetStarted") : (DrawingImage)FindResource("DA_DI_GetStarted") : (DrawingImage)FindResource("DI_Sandtime");
-            OneDrive.Source = !UninstallingApps.IsAppUnavailable["OneDrive"] ? UninstallingApps.IsOneDriveInstalled ? (DrawingImage)FindResource("A_DI_OneDrive") : (DrawingImage)FindResource("DA_DI_OneDrive") : (DrawingImage)FindResource("DI_Sandtime");
-            BingSports.Source = !UninstallingApps.IsAppUnavailable["BingSports"] ? UninstallingApps.UserPackages.Contains("Microsoft.BingSports") ? (DrawingImage)FindResource("A_DI_BingSports") : (DrawingImage)FindResource("DA_DI_BingSports") : (DrawingImage)FindResource("DI_Sandtime");
-            BingFinance.Source = !UninstallingApps.IsAppUnavailable["BingFinance"] ? UninstallingApps.UserPackages.Contains("Microsoft.BingFinance") ? (DrawingImage)FindResource("A_DI_BingFinance") : (DrawingImage)FindResource("DA_DI_BingFinance") : (DrawingImage)FindResource("DI_Sandtime");
-            MicrosoftFamily.Source = !UninstallingApps.IsAppUnavailable["MicrosoftFamily"] ? UninstallingApps.UserPackages.Contains("MicrosoftFamily") ? (DrawingImage)FindResource("A_DI_MicrosoftFamily") : (DrawingImage)FindResource("DA_DI_MicrosoftFamily") : (DrawingImage)FindResource("DI_Sandtime");
-            BingSearch.Source = !UninstallingApps.IsAppUnavailable["BingSearch"] ? UninstallingApps.UserPackages.Contains("BingSearch") ? (DrawingImage)FindResource("A_DI_BingSearch") : (DrawingImage)FindResource("DA_DI_BingSearch") : (DrawingImage)FindResource("DI_Sandtime");
-            Outlook.Source = !UninstallingApps.IsAppUnavailable["Outlook"] ? UninstallingApps.UserPackages.Contains("Microsoft.OutlookForWindows") ? (DrawingImage)FindResource("A_DI_Outlook") : (DrawingImage)FindResource("DA_DI_Outlook") : (DrawingImage)FindResource("DI_Sandtime");
-            QuickAssist.Source = !UninstallingApps.IsAppUnavailable["QuickAssist"] ? UninstallingApps.UserPackages.Contains("MicrosoftCorporationII.QuickAssist") ? (DrawingImage)FindResource("A_DI_QuickAssist") : (DrawingImage)FindResource("DA_DI_QuickAssist") : (DrawingImage)FindResource("DI_Sandtime");
-            DevHome.Source = !UninstallingApps.IsAppUnavailable["DevHome"] ? UninstallingApps.UserPackages.Contains("DevHome") ? (DrawingImage)FindResource("A_DI_DevHome") : (DrawingImage)FindResource("DA_DI_DevHome") : (DrawingImage)FindResource("DI_Sandtime");
-            WindowsTerminal.Source = !UninstallingApps.IsAppUnavailable["WindowsTerminal"] ? UninstallingApps.UserPackages.Contains("WindowsTerminal") ? (DrawingImage)FindResource("A_DI_WindowsTerminal") : (DrawingImage)FindResource("DA_DI_WindowsTerminal") : (DrawingImage)FindResource("DI_Sandtime");
+            static bool isContains(string pattern)
+            {
+                return new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace).IsMatch(UninstallingPakages.UserPackages);
+            }
+
+            return !isOneDrive
+                ? !UninstallingPakages.IsAppUnavailable[packageName] ? isContains(partName) ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime")
+                : (ImageSource)(!UninstallingPakages.IsAppUnavailable[packageName] ? UninstallingPakages.IsOneDriveInstalled ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime"));
+        }
+
+
+        private void UpdateViewStatePakages()
+        {
+            MicrosoftStore.Source = AvailabilityInstalledPackage("MicrosoftStore", "Microsoft.WindowsStore");
+            Todos.Source = AvailabilityInstalledPackage("Todos", "Microsoft.Todos");
+            BingWeather.Source = AvailabilityInstalledPackage("BingWeather", "Microsoft.BingWeather");
+            Microsoft3D.Source = AvailabilityInstalledPackage("Microsoft3D", "Microsoft.Microsoft3DViewer");
+            Music.Source = AvailabilityInstalledPackage("Music", "Microsoft.ZuneMusic");
+            GetHelp.Source = AvailabilityInstalledPackage("GetHelp", "Microsoft.GetHelp");
+            MicrosoftOfficeHub.Source = AvailabilityInstalledPackage("MicrosoftOfficeHub", "Microsoft.MicrosoftOfficeHub");
+            MicrosoftSolitaireCollection.Source = AvailabilityInstalledPackage("MicrosoftSolitaireCollection", "Microsoft.MicrosoftSolitaireCollection");
+            MixedReality.Source = AvailabilityInstalledPackage("MixedReality", "Microsoft.MixedReality.Portal");
+            Xbox.Source = AvailabilityInstalledPackage("Xbox", "Microsoft.XboxApp|Microsoft.GamingApp|Microsoft.XboxGamingOverlay|Microsoft.XboxGameOverlay|Microsoft.XboxIdentityProvider|Microsoft.Xbox.TCUI|Microsoft.XboxSpeechToTextOverlay");
+            Paint3D.Source = AvailabilityInstalledPackage("Paint3D", "Microsoft.MSPaint");
+            OneNote.Source = AvailabilityInstalledPackage("OneNote", "Microsoft.Office.OneNote");
+            People.Source = AvailabilityInstalledPackage("People", "Microsoft.People");
+            MicrosoftStickyNotes.Source = AvailabilityInstalledPackage("MicrosoftStickyNotes", "Microsoft.MicrosoftStickyNotes");
+            Widgets.Source = AvailabilityInstalledPackage("Widgets", "MicrosoftWindows.Client.WebExperience");
+            ScreenSketch.Source = AvailabilityInstalledPackage("ScreenSketch", "Microsoft.ScreenSketch");
+            Phone.Source = AvailabilityInstalledPackage("Phone", "Microsoft.YourPhone");
+            Photos.Source = AvailabilityInstalledPackage("Photos", "Microsoft.Windows.Photos");
+            FeedbackHub.Source = AvailabilityInstalledPackage("FeedbackHub", "Microsoft.WindowsFeedbackHub");
+            SoundRecorder.Source = AvailabilityInstalledPackage("SoundRecorder", "Microsoft.WindowsSoundRecorder");
+            Alarms.Source = AvailabilityInstalledPackage("Alarms", "Microsoft.WindowsAlarms");
+            SkypeApp.Source = AvailabilityInstalledPackage("SkypeApp", "Microsoft.SkypeApp");
+            Maps.Source = AvailabilityInstalledPackage("Maps", "Microsoft.WindowsMaps");
+            Camera.Source = AvailabilityInstalledPackage("Camera", "Microsoft.WindowsCamera");
+            Video.Source = AvailabilityInstalledPackage("Video", "Microsoft.ZuneVideo");
+            BingNews.Source = AvailabilityInstalledPackage("BingNews", "Microsoft.BingNews");
+            Mail.Source = AvailabilityInstalledPackage("Mail", "microsoft.windowscommunicationsapps");
+            MicrosoftTeams.Source = AvailabilityInstalledPackage("MicrosoftTeams", "MicrosoftTeams|MSTeams");
+            PowerAutomateDesktop.Source = AvailabilityInstalledPackage("PowerAutomateDesktop", "Microsoft.PowerAutomateDesktop");
+            Cortana.Source = AvailabilityInstalledPackage("Cortana", "Microsoft.549981C3F5F10");
+            ClipChamp.Source = AvailabilityInstalledPackage("ClipChamp", "Clipchamp.Clipchamp");
+            GetStarted.Source = AvailabilityInstalledPackage("GetStarted", "Microsoft.Getstarted");
+            OneDrive.Source = AvailabilityInstalledPackage("OneDrive", "OneDrive", true);
+            BingSports.Source = AvailabilityInstalledPackage("BingSports", "Microsoft.BingSports");
+            BingFinance.Source = AvailabilityInstalledPackage("BingFinance", "Microsoft.BingFinance");
+            MicrosoftFamily.Source = AvailabilityInstalledPackage("MicrosoftFamily", "MicrosoftFamily");
+            BingSearch.Source = AvailabilityInstalledPackage("BingSearch", "BingSearch");
+            Outlook.Source = AvailabilityInstalledPackage("Outlook", "Microsoft.OutlookForWindows");
+            QuickAssist.Source = AvailabilityInstalledPackage("QuickAssist", "MicrosoftCorporationII.QuickAssist");
+            DevHome.Source = AvailabilityInstalledPackage("DevHome", "DevHome");
+            WindowsTerminal.Source = AvailabilityInstalledPackage("WindowsTerminal", "WindowsTerminal");
         }
     }
 }

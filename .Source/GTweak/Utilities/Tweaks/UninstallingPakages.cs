@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal sealed class UninstallingApps
+    internal sealed class UninstallingPakages
     {
         internal static string UserPackages { get; private set; } = string.Empty;
 
