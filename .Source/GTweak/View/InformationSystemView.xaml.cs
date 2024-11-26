@@ -1,5 +1,4 @@
-﻿using GTweak.Assets.UserControl;
-using GTweak.Core.ViewModel;
+﻿using GTweak.Core.ViewModel;
 using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
 using System;
