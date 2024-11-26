@@ -130,7 +130,7 @@ namespace GTweak.Utilities.Tweaks
             /// Conection block - [2];
             /// Connection limited - [3].
             /// </summary>
-            internal static byte ConnectionStatus = 0;
+            internal static byte ConnectionStatus = 1;
 
 
             private static string _type = string.Empty;
@@ -285,14 +285,6 @@ namespace GTweak.Utilities.Tweaks
                         }
                         finally
                         {
-                            switch (ConnectionStatus)
-                            {
-                                case 2:
-                                case 3:
-                                    ConnectionStatus = 0;
-                                    break;
-                            }
-
                             if (IPAddress.TryParse(clientInternetProtocol.Ip, out _) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
                                 ConnectionStatus = 0;

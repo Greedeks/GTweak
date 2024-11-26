@@ -57,7 +57,7 @@ namespace GTweak.Assets.UserControl
             AnimationToggle(_state, true);
         }
 
-        private void Toggle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Toggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (sender.GetType().Name != "TextBlock")
             {

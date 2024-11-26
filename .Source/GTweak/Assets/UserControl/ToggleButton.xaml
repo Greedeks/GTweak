@@ -8,7 +8,7 @@
              d:Height="auto" d:Width="auto" SnapsToDevicePixels="True" UseLayoutRounding="True">
     <Grid Width="Auto">
         <StackPanel Orientation="Horizontal">
-            <Viewbox Margin="0" KeyboardNavigation.IsTabStop="False" MouseLeftButtonDown="Toggle_MouseLeftButtonDown">
+            <Viewbox Margin="0" KeyboardNavigation.IsTabStop="False" MouseLeftButtonUp="Toggle_MouseLeftButtonUp">
                 <Grid Height="60" VerticalAlignment="Center" Width="Auto" Cursor="Hand">
                     <Rectangle x:Name="Back" Cursor="Hand" HorizontalAlignment="Left" Height="56.5" VerticalAlignment="Top" Width="96.5" Margin="2,2,0,0" RadiusY="29" RadiusX="29" KeyboardNavigation.IsTabStop="False" >
                         <Rectangle.Fill>

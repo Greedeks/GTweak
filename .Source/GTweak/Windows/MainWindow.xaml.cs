@@ -68,22 +68,22 @@ namespace GTweak
             });
         }
 
-        private void ButtonSettings_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed && (SettingsMenu.Width == 0 || SettingsMenu.Width == 400))
-                SettingsMenuAnimation();
-        }
-
         private void SettingsMenu_QueryCursor(object sender, QueryCursorEventArgs e)
         {
             if (SettingsMenu.Width == 400)
                 SettingsMenuAnimation();
         }
 
-        private void ButtonExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void ButtonSettings_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton != MouseButtonState.Pressed) return;
+            if (SettingsMenu.Width == 0 || SettingsMenu.Width == 400)
+                SettingsMenuAnimation();
+        }
 
+        private void ButtonMinimized_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => this.WindowState = WindowState.Minimized;
+
+        private void ButtonExit_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
             switch (SystemTweaks.isTweakWorkingAntivirus)
             {
                 case false:
@@ -93,12 +93,6 @@ namespace GTweak
                     new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("windefclose_notification"));
                     break;
             }
-        }
-
-        private void ButtonMinimized_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                this.WindowState = WindowState.Minimized;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -160,10 +154,9 @@ namespace GTweak
             Parallel.Invoke(() => { Settings.ChangingParameters(SliderVolume.Value, "Volume"); });
         }
 
-        private void BtnSoundNtn_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                Parallel.Invoke(() => { Settings.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound"); });
+            Parallel.Invoke(() => { Settings.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound"); });
         }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -200,43 +193,27 @@ namespace GTweak
             }
         }
 
-        private void BtnExport_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                Parallel.Invoke(Settings.SaveFileConfig);
-        }
+        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(Settings.SaveFileConfig);
 
-        private void BtnImport_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                Parallel.Invoke(Settings.OpenFileConfig);
-        }
+        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(Settings.OpenFileConfig);
 
-        private void BtnDelete_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                Settings.SelfRemoval();
-        }
+        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Settings.SelfRemoval();
 
-        private void BtnContats_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnContats_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            Image btnConcat = (Image)sender;
+            switch (btnConcat.Uid)
             {
-                Image btnConcat = (Image)sender;
-                switch (btnConcat.Uid)
-                {
-                    case "git":
-                        Process.Start("https://github.com/Greedeks");
-                        break;
-                    case "tg":
-                        Process.Start("https://t.me/Greedeks");
-                        break;
-                    case "steam":
-                        Process.Start("https://steamcommunity.com/id/greedeks/");
-                        break;
-                }
+                case "git":
+                    Process.Start("https://github.com/Greedeks");
+                    break;
+                case "tg":
+                    Process.Start("https://t.me/Greedeks");
+                    break;
+                case "steam":
+                    Process.Start("https://steamcommunity.com/id/greedeks/");
+                    break;
             }
-
         }
         #endregion
     }

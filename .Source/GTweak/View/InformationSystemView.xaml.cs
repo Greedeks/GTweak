@@ -110,22 +110,19 @@ namespace GTweak.View
             PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, doubleAnim);
         }
 
-        private void BtnHiddenIP_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnHiddenIP_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                Parallel.Invoke(() => { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
+            Parallel.Invoke(() => { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
 
-                DoubleAnimation doubleAnim = new DoubleAnimation()
-                {
-                    From = BtnHiddenIP.IsChecked.Value ? 20 : 0,
-                    To = BtnHiddenIP.IsChecked.Value ? 0 : 20,
-                    EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(0.2)
-                };
-                Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
-            }
+            DoubleAnimation doubleAnim = new DoubleAnimation()
+            {
+                From = BtnHiddenIP.IsChecked.Value ? 20 : 0,
+                To = BtnHiddenIP.IsChecked.Value ? 0 : 20,
+                EasingFunction = new QuadraticEase(),
+                Duration = TimeSpan.FromSeconds(0.2)
+            };
+            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
         }
 
         private void TextComputerData_PreviewMouseDown(object sender, MouseButtonEventArgs e)

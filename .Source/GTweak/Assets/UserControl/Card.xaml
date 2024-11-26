@@ -14,7 +14,7 @@
                 </Grid>
                 <TextBlock x:Name="CardTitle" Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Title"/>
                 <TextBlock x:Name="CardText" Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="Text"/>
-                <Button x:Name="CardButton" Content="Content" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseDown="CardButton_PreviewMouseDown"/>
+                <Button x:Name="CardButton" Content="Content" Style="{StaticResource BtnDefault}" Width="150" Height="30" Margin="0,10,0,0" Cursor="Hand" PreviewMouseLeftButtonUp="CardButton_PreviewMouseLeftButtonUp"/>
             </StackPanel>
         </Border>
     </Grid>

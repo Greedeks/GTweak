@@ -29,12 +29,6 @@ namespace GTweak.Assets.UserControl
             InitializeComponent();
         }
 
-        private void CardButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed && ClickButton != null)
-            {
-                ClickButton(this, EventArgs.Empty);
-            }
-        }
+        private void CardButton_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => ClickButton?.Invoke(this, EventArgs.Empty);
     }
 }

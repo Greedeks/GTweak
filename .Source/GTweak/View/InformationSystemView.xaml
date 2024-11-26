@@ -187,7 +187,7 @@
                                         <BlurEffect Radius="{Binding SetBlurValue}"/>
                                     </TextBlock.Effect>
                                 </TextBlock>
-                                <ToggleButton x:Name="BtnHiddenIP" Width="20" Height="20" Margin="10,0,0,0" Style="{StaticResource TglButtonIP}" IsChecked="{Binding StateButton}" Visibility="{Binding SetVisibility}" PreviewMouseDown="BtnHiddenIP_PreviewMouseDown"/>
+                                <ToggleButton x:Name="BtnHiddenIP" Width="20" Height="20" Margin="10,0,0,0" Style="{StaticResource TglButtonIP}" IsChecked="{Binding StateButton}" Visibility="{Binding SetVisibility}" PreviewMouseLeftButtonDown="BtnHiddenIP_PreviewMouseLeftButtonDown"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
