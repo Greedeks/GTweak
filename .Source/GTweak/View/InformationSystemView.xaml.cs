@@ -137,9 +137,12 @@ namespace GTweak.View
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, doubleAnim);
         }
+        #endregion
 
-        private void AnimationBlurIP()
+        private void BtnHiddenIP_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            Parallel.Invoke(delegate { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
+
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {
                 From = BtnHiddenIP.IsChecked.Value ? 20 : 0,
@@ -150,11 +153,6 @@ namespace GTweak.View
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
         }
-        #endregion
-
-        private void BtnHiddenIP_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => Parallel.Invoke(delegate { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
-        private void BtnHiddenIP_Unchecked(object sender, RoutedEventArgs e) => AnimationBlurIP();
-        private void BtnHiddenIP_Checked(object sender, RoutedEventArgs e) => AnimationBlurIP();
 
         private void TextComputerData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
