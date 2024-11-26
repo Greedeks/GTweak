@@ -1,4 +1,5 @@
-﻿using GTweak.Core.ViewModel;
+﻿using GTweak.Assets.UserControl;
+using GTweak.Core.ViewModel;
 using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
 using System;
@@ -58,7 +59,7 @@ namespace GTweak.View
                     {
                         Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
                         { IsBackground = true };
-                        Application.Current.Dispatcher.Invoke(ProgressBarAnim);
+                        Application.Current.Dispatcher.Invoke(AnimationProgressBars);
 
                         if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
                         {
@@ -80,6 +81,34 @@ namespace GTweak.View
                 time = time.Add(TimeSpan.FromSeconds(+1));
             }, Application.Current.Dispatcher);
             timer.Start();
+        }
+
+        #region Animations
+        private void AnimationProgressBars()
+        {
+            Parallel.Invoke(() =>
+            {
+                DoubleAnimation doubleAnim = new DoubleAnimation()
+                {
+                    From = CPULoad.Value,
+                    To = SystemData.MonitoringSystem.CpuUsage,
+                    EasingFunction = new PowerEase(),
+                    Duration = TimeSpan.FromSeconds(0.2)
+                };
+                Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                CPULoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
+
+
+                doubleAnim = new DoubleAnimation()
+                {
+                    From = RAMLoad.Value,
+                    To = new SystemData.MonitoringSystem().RamUsage,
+                    EasingFunction = new PowerEase(),
+                    Duration = TimeSpan.FromSeconds(0.2)
+                };
+                Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
+            });
         }
 
         private void AnimationPopup()
@@ -110,10 +139,8 @@ namespace GTweak.View
             PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, doubleAnim);
         }
 
-        private void BtnHiddenIP_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void AnimationBlurIP()
         {
-            Parallel.Invoke(() => { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
-
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {
                 From = BtnHiddenIP.IsChecked.Value ? 20 : 0,
@@ -124,6 +151,11 @@ namespace GTweak.View
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
         }
+        #endregion
+
+        private void BtnHiddenIP_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => Parallel.Invoke(delegate { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
+        private void BtnHiddenIP_Unchecked(object sender, RoutedEventArgs e) => AnimationBlurIP();
+        private void BtnHiddenIP_Checked(object sender, RoutedEventArgs e) => AnimationBlurIP();
 
         private void TextComputerData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -144,33 +176,6 @@ namespace GTweak.View
                 if (!PopupCopy.IsOpen)
                     AnimationPopup();
             }
-        }
-
-        private void ProgressBarAnim()
-        {
-            Parallel.Invoke(() =>
-            {
-                DoubleAnimation doubleAnim = new DoubleAnimation()
-                {
-                    From = CPULoad.Value,
-                    To = SystemData.MonitoringSystem.CpuUsage,
-                    EasingFunction = new PowerEase(),
-                    Duration = TimeSpan.FromSeconds(0.2)
-                };
-                Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                CPULoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
-
-
-                doubleAnim = new DoubleAnimation()
-                {
-                    From = RAMLoad.Value,
-                    To = new SystemData.MonitoringSystem().RamUsage,
-                    EasingFunction = new PowerEase(),
-                    Duration = TimeSpan.FromSeconds(0.2)
-                };
-                Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
-            });
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e) => timer.Stop();
