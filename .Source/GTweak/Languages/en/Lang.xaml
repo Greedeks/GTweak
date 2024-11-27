@@ -173,7 +173,7 @@
     <v:String x:Key="tgl17_interface">Stripped-down context menu (Windows 11)</v:String>
     <v:String x:Key="tgl18_interface">Show tips and suggestions (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">Use Compact Explorer mode (Windows 11)</v:String>
-    <v:String x:Key="tgl20_interface">The «Copilot» and «Recall» function (Windows 11)</v:String>
+    <v:String x:Key="tgl20_interface">«Copilot» and «Recall» Assistants (Windows 11)</v:String>
     <v:String x:Key="tgl21_interface">Icons and buttons on the taskbar</v:String>
     <v:String x:Key="tgl22_interface">Show personalized ads</v:String>
     <v:String x:Key="tgl23_interface">Restore previous folder windows when logging in</v:String>

@@ -173,7 +173,7 @@
     <v:String x:Key="tgl17_interface">Урезанное контекстное меню (Windows 11)</v:String>
     <v:String x:Key="tgl18_interface">Показывать советы и предложения (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">Компактный режим элементов проводника (Windows 11)</v:String>
-    <v:String x:Key="tgl20_interface">Функция «Copilot» и «Recall» (Windows 11)</v:String>
+    <v:String x:Key="tgl20_interface">Помощники «Copilot» и «Recall» (Windows 11)</v:String>
     <v:String x:Key="tgl21_interface">Значки и кнопки на панели задач</v:String>
     <v:String x:Key="tgl22_interface">Показывать персонализированную рекламу</v:String>
     <v:String x:Key="tgl23_interface">Восстанавливать прежние окна папок при входе</v:String>
