@@ -144,12 +144,12 @@ namespace GTweak.View
             OneDrive.Source = AvailabilityInstalledPackage("OneDrive", "OneDrive", true);
             BingSports.Source = AvailabilityInstalledPackage("BingSports", "Microsoft.BingSports");
             BingFinance.Source = AvailabilityInstalledPackage("BingFinance", "Microsoft.BingFinance");
-            MicrosoftFamily.Source = AvailabilityInstalledPackage("MicrosoftFamily", "MicrosoftFamily");
-            BingSearch.Source = AvailabilityInstalledPackage("BingSearch", "BingSearch");
+            MicrosoftFamily.Source = AvailabilityInstalledPackage("MicrosoftFamily", "MicrosoftCorporationII.MicrosoftFamily");
+            BingSearch.Source = AvailabilityInstalledPackage("BingSearch", "Microsoft.BingSearch");
             Outlook.Source = AvailabilityInstalledPackage("Outlook", "Microsoft.OutlookForWindows");
             QuickAssist.Source = AvailabilityInstalledPackage("QuickAssist", "MicrosoftCorporationII.QuickAssist");
-            DevHome.Source = AvailabilityInstalledPackage("DevHome", "DevHome");
-            WindowsTerminal.Source = AvailabilityInstalledPackage("WindowsTerminal", "WindowsTerminal");
+            DevHome.Source = AvailabilityInstalledPackage("DevHome", "Microsoft.Windows.DevHome");
+            WindowsTerminal.Source = AvailabilityInstalledPackage("WindowsTerminal", "Microsoft.WindowsTerminal");
         }
     }
 }
