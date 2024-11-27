@@ -41,15 +41,33 @@
 - Просмотр конфигурации и мониторинг системы
 ```
 
+
+<h2> Скриншоты 📷</h2>
 <details>
-  <summary> <h2>Скриншоты 📷</h2></summary>
+  <summary> Конфиденциальность </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Confidentiality.png"/>
+</details>
+<details>
+  <summary> Интерфейс </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Interface.png"/>
+</details>
+<details>
+  <summary> Приложения </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Applications.png"/>
+</details>
+<details>
+  <summary> Службы </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/Services.png"/>
+</details>
+<details>
+  <summary> Система </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/System.png"/>
+</details>
+<details>
+  <summary> Прочее </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/ru/More.png"/>
 </details>
+
 
 <h2> Системные Требования</h2>
 

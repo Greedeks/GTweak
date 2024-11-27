@@ -39,15 +39,32 @@
 - View the configuration and monitor the system
 ```
 
+<h2> Screenshots 📷</h2>
 <details>
-  <summary> <h2>Screenshots 📷</h2></summary>
+  <summary> Confidentiality </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Confidentiality.png"/>
+</details>
+<details>
+  <summary> Interface </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Interface.png"/>
+</details>
+<details>
+  <summary> Applications </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Applications.png"/>
+</details>
+<details>
+  <summary> Services </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/Services.png"/>
+</details>
+<details>
+  <summary> System </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/System.png"/>
+</details>
+<details>
+  <summary> More </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/Github/en/More.png"/>
 </details>
+
 
 <h2> System Requirements</h2>
 
