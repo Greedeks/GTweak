@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,12 +41,6 @@ namespace GTweak.Utilities.Tweaks
                 @"Microsoft\Office\OfficeTelemetryAgentFallBack",
                 @"Microsoft\Office\OfficeTelemetryAgentLogOn",
                 @"Microsoft\Office\Office 15 Subscription Heartbeat" };
-
-        private static readonly string[] HostsRules = {
-                @"0.0.0.0 hk2sch130021829.wns.windows.com",
-                @"0.0.0.0 v10-win.vortex.data.microsoft.com.akadns.net",
-                @"0.0.0.0 watson.live.com",
-                @"0.0.0.0 api.cortana.ai" };
 
         private static Thread _thread = default;
 
@@ -86,7 +81,7 @@ namespace GTweak.Utilities.Tweaks
                 confidentialityV.TglButton3.StateNA = false;
 
 
-            if (ViewTaskState(SchedulerTasks) > 0)
+            if (IsTaskEnabled(SchedulerTasks))
                 confidentialityV.TglButton4.StateNA = true;
             else
                 confidentialityV.TglButton4.StateNA = false;
@@ -130,7 +125,7 @@ namespace GTweak.Utilities.Tweaks
                 confidentialityV.TglButton8.StateNA = false;
 
 
-            if (ViewHosts(HostsRules) < 4)
+            if (IsDefaultHosts())
                 confidentialityV.TglButton9.StateNA = true;
             else
                 confidentialityV.TglButton9.StateNA = false;
@@ -197,7 +192,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", null) == null ||
                     Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", string.Empty).ToString() != "4" ||
-                    ViewTaskState(NvidiaTasks) > 0)
+                    IsTaskEnabled(NvidiaTasks))
                     confidentialityV.TglButton17.StateNA = true;
                 else
                     confidentialityV.TglButton17.StateNA = false;
@@ -215,45 +210,45 @@ namespace GTweak.Utilities.Tweaks
 
         }
 
-        private byte ViewTaskState(string[] tasklist)
+        private bool IsTaskEnabled(string[] tasklist)
         {
-            byte countTaskRun = 0;
+            byte numberRunningTask = 0;
             using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
             {
-                foreach (string taskname in tasklist)
-                {
-                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
-                    if (task != null)
-                    {
-                        if (task.Enabled)
-                            countTaskRun++;
-                    }
-                }
+                numberRunningTask += (byte)(from string taskname in tasklist
+                                 let task = taskService.GetTask(taskname)
+                                 where task != null
+                                 where task.Enabled
+                                 select taskname).Count();
             }
-            return countTaskRun;
+            return numberRunningTask > 0;
         }
 
-        internal byte ViewHosts(string[] hostslist)
+        internal bool IsDefaultHosts()
         {
             try
             {
-                byte count = 0;
-                StreamReader streamReader = new StreamReader(UsePath.Hosts);
-                string hosts = streamReader.ReadToEnd();
+                byte numberHostsRules = 0;
 
-                foreach (string hostsrules in hostslist)
+                using (StreamReader streamReader = new StreamReader(UsePath.Hosts))
                 {
-                    if (hosts.Contains(hostsrules))
-                        count++;
+                    string hosts = streamReader.ReadToEnd();
+                    numberHostsRules += (byte)(new string[] {
+                        @"0.0.0.0 hk2sch130021829.wns.windows.com",
+                        @"0.0.0.0 v10-win.vortex.data.microsoft.com.akadns.net",
+                        @"0.0.0.0 watson.live.com",
+                        @"0.0.0.0 cds843.lon.llnw.net",
+                        @"0.0.0.0 db6sch102091602.wns.windows.com",
+                        @"0.0.0.0 telemetry.microsoft.com",
+                        @"0.0.0.0 bn3sch020010635.wns.windows.com",
+                        @"0.0.0.0 api.cortana.ai"
+                    }).Where(hostsrules => hosts.Contains(hostsrules)).Count();
+                    streamReader.Close();
                 }
-
-                streamReader.Close();
-                streamReader.Dispose();
-                return count;
+                return numberHostsRules == 0;
             }
-            catch { return 0; }
+            catch { return false; }
         }
-
 
         internal static void UseСonfidentiality(string tweak, bool isChoose)
         {
@@ -486,10 +481,10 @@ namespace GTweak.Utilities.Tweaks
         {
             Parallel.Invoke(() =>
             {
-                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
                 foreach (string taskname in tasklist)
                 {
-                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                    using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
                     if (task != null)
                     {
                         if (!task.Enabled)
@@ -507,10 +502,10 @@ namespace GTweak.Utilities.Tweaks
         {
             Parallel.Invoke(() =>
             {
-                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
                 foreach (string taskname in tasklist)
                 {
-                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                    using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
                     if (task != null)
                     {
                         if (task.Enabled)

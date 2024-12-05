@@ -73,7 +73,7 @@ namespace GTweak.View
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.RunWorkerAsync();
-                    backgroundWorker.DoWork += delegate { SystemData.СomputerСonfiguration.GetUserIP(); };
+                    backgroundWorker.DoWork += delegate { SystemData.СomputerСonfiguration.GettingUserIP(); };
                     backgroundWorker.RunWorkerCompleted += delegate { DataContext = new InformationSystemVM(); };
                 }
 

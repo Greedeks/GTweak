@@ -234,7 +234,7 @@
     <v:String x:Key="MixedReality_applications">Mixed Reality</v:String>
     <v:String x:Key="BingWeather_applications">Bing Weather</v:String>
     <v:String x:Key="Microsoft3D_applications">Microsoft 3D Viewer</v:String>
-    <v:String x:Key="SkypeApp_applications">Microsoft SkypeApp</v:String>
+    <v:String x:Key="SkypeApp_applications">Microsoft Skype</v:String>
     <v:String x:Key="OneDrive_applications">OneDrive</v:String>
     <v:String x:Key="Cortana_applications">Cortana</v:String>
     <v:String x:Key="MicrosoftTeams_applications">Microsoft Teams</v:String>

@@ -111,15 +111,6 @@ namespace GTweak.Utilities.Tweaks
             internal readonly int GetRamUsage() => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
         }
 
-        internal sealed class ClientInternetProtocol
-        {
-            [JsonProperty("query")]
-            internal string Ip { get; set; }
-
-            [JsonProperty("countryCode")]
-            internal string Country { get; set; }
-        }
-
         internal sealed class СomputerСonfiguration
         {
             internal static string WindowsClientVersion { get; set; } = string.Empty;
@@ -131,10 +122,6 @@ namespace GTweak.Utilities.Tweaks
             /// Connection limited - [3].
             /// </summary>
             internal static byte ConnectionStatus = 1;
-
-
-            private static string _type = string.Empty;
-            private static readonly EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
 
             internal static readonly Dictionary<string, string> СonfigurationData = new Dictionary<string, string>()
             {
@@ -154,13 +141,13 @@ namespace GTweak.Utilities.Tweaks
             {
                 Parallel.Invoke(delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, Version from Win32_OperatingSystem", optionsObj).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["Windows"] = $"{Convert.ToString(managementObj["Caption"]).Substring(Convert.ToString(managementObj["Caption"]).IndexOf('W'))}, {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]}\n";
                     СonfigurationData["Windows"] = $"\n{СonfigurationData["Windows"].TrimEnd('\n')}";
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SerialNumber from Win32_BIOS", optionsObj).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SerialNumber from Win32_BIOS",  new EnumerationOptions { ReturnImmediately = true }).Get())
                     {
                         if (!string.IsNullOrEmpty((string)managementObj["Name"]))
                             СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ? (string)managementObj["Name"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Name"] + "\n";
@@ -173,55 +160,55 @@ namespace GTweak.Utilities.Tweaks
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", optionsObj).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard",  new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["MotherBr"] = (string)managementObj["Manufacturer"] + (string)managementObj["Product"] + ", V" + (string)managementObj["Version"] + "\n";
                     СonfigurationData["MotherBr"] = СonfigurationData["MotherBr"].TrimEnd('\n');
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor", optionsObj).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor",  new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["CPU"] = (string)managementObj["Name"] + "\n";
                     СonfigurationData["CPU"] = СonfigurationData["CPU"].TrimEnd('\n');
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", optionsObj).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController",  new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["GPU"] += ((string)managementObj["Name"] + ", " + Convert.ToString(((uint)managementObj["AdapterRAM"] / 1024000000)) + " GB\n");
                     СonfigurationData["GPU"] = СonfigurationData["GPU"].TrimEnd('\n');
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select  Manufacturer, Capacity, ConfiguredClockSpeed from Win32_PhysicalMemory", optionsObj).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select  Manufacturer, Capacity, ConfiguredClockSpeed from Win32_PhysicalMemory",  new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["RAM"] += (string)managementObj["Manufacturer"] + ", " + Convert.ToString((ulong)managementObj["Capacity"] / 1024000000) + " GB, " + Convert.ToString((uint)managementObj["ConfiguredClockSpeed"]) + "MHz\n";
                     СonfigurationData["RAM"] = СonfigurationData["RAM"].TrimEnd('\n');
                 },
                 UpdatingDeviceData,
-                GetUserIP);
+                GettingUserIP);
             }
 
             internal static void UpdatingDeviceData()
             {
                 Parallel.Invoke(delegate
                 {
-                    СonfigurationData["Storage"] = string.Empty;
-                    foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName,MediaType,Size,BusType from MSFT_PhysicalDisk", optionsObj).Get())
+                    string storageType = СonfigurationData["Storage"] = string.Empty;
+                    foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName,MediaType,Size,BusType from MSFT_PhysicalDisk",  new EnumerationOptions { ReturnImmediately = true }).Get())
                     {
-                        _type = (ushort)(managementObj["MediaType"]) switch
+                        storageType = (ushort)(managementObj["MediaType"]) switch
                         {
                             3 => "(HDD)",
                             4 => "(SSD)",
                             5 => "(SCM)",
                             _ => "(Unspecified)",
                         };
-                        if (_type == "(Unspecified)" && ((ushort)(managementObj["BusType"])) == 7) _type = "(Media-Type)";
-                        СonfigurationData["Storage"] += Convert.ToString((ulong)managementObj["Size"] / 1024000000) + " GB " + "[" + (string)managementObj["FriendlyName"] + "] " + _type + "\n";
+                        if (storageType == "(Unspecified)" && ((ushort)(managementObj["BusType"])) == 7) storageType = "(Media-Type)";
+                        СonfigurationData["Storage"] += Convert.ToString((ulong)managementObj["Size"] / 1024000000) + " GB " + "[" + (string)managementObj["FriendlyName"] + "] " + storageType + "\n";
                     }
                     СonfigurationData["Storage"] = СonfigurationData["Storage"].TrimEnd('\n');
                 },
                 delegate
                 {
                     СonfigurationData["Audio"] = string.Empty;
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice", optionsObj).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice",  new EnumerationOptions { ReturnImmediately = true }).Get())
                     {
                         if (!string.IsNullOrEmpty((string)managementObj["Name"]))
                             СonfigurationData["Audio"] += (string)managementObj["Name"] + "\n";
@@ -235,13 +222,22 @@ namespace GTweak.Utilities.Tweaks
                delegate
                {
                    СonfigurationData["NetAdapter"] = string.Empty;
-                   foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", optionsObj).Get())
+                   foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7",  new EnumerationOptions { ReturnImmediately = true }).Get())
                        СonfigurationData["NetAdapter"] += (string)managementObj["Name"] + "\n";
                    СonfigurationData["NetAdapter"] = СonfigurationData["NetAdapter"].TrimEnd('\n');
                });
             }
 
-            internal static bool IsCheckInternetConnection()
+            internal sealed class ClientInternetProtocol
+            {
+                [JsonProperty("query")]
+                internal string Ip { get; set; }
+
+                [JsonProperty("countryCode")]
+                internal string Country { get; set; }
+            }
+
+            internal static bool IsNetworkAvailable()
             {
                 try
                 {
@@ -254,22 +250,23 @@ namespace GTweak.Utilities.Tweaks
                     };
 
                     TimeSpan timeout = TimeSpan.FromSeconds(5.0);
-                    Task<IPAddress> task = Task.Run(() =>
+                    using Task<IPAddress> task = Task.Run(() =>
                     {
                         return Dns.GetHostEntry(dns).AddressList[0];
                     });
                     if (!task.Wait(timeout))
                         return false;
+
                     return true;
                 }
                 catch { return false; }
             }
 
-            internal static void GetUserIP()
+            internal static void GettingUserIP()
             {
                 Parallel.Invoke(delegate
                 {
-                    if (IsCheckInternetConnection())
+                    if (IsNetworkAvailable())
                     {
                         ClientInternetProtocol clientInternetProtocol = new ClientInternetProtocol();
 
@@ -339,7 +336,6 @@ namespace GTweak.Utilities.Tweaks
                     DownloadVersion = gitVersionUtility.СurrentVersion;
                 }
             }
-
         }
     }
 }

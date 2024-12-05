@@ -13,7 +13,7 @@ using System.Windows;
 namespace GTweak.Utilities
 {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct UsePath
+    internal readonly struct UsePath
     {
         internal static string Config = string.Empty;
         internal static string FileLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"GTweak");

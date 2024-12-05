@@ -51,11 +51,9 @@ namespace GTweak.Utilities
 
         internal static void CheckingSystemRequirements()
         {
-            EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
-
             Parallel.Invoke(() =>
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption from Win32_OperatingSystem", optionsObj).Get())
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
                     SystemData.СomputerСonfiguration.WindowsClientVersion = Convert.ToString(managementObj["Caption"]); ;
             });
 
