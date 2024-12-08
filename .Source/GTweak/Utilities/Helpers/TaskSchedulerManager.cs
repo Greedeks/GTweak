@@ -34,7 +34,6 @@ namespace GTweak.Utilities.Helpers
                             task.Definition.Settings.Enabled = true;
                             task.RegisterChanges();
                         }
-
                     }
                 }
             });
@@ -55,7 +54,6 @@ namespace GTweak.Utilities.Helpers
                             task.Definition.Settings.Enabled = false;
                             task.RegisterChanges();
                         }
-
                     }
                 }
             });
