@@ -1,7 +1,6 @@
 ﻿using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -13,12 +12,14 @@ namespace GTweak.Utilities.Tweaks
     {
         internal void Enable()
         {
-            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\Software\Policies\Microsoft\Windows Defender\Real-Time Protection", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\Software\Policies\Microsoft\Windows Defender\SpyNet", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
             TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
             TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
             TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
             TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\Sense", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
             TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /v EnableWebContentEvaluation /f & " +
                 "reg delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /v SmartScreenEnabled /f & " +
@@ -43,15 +44,12 @@ namespace GTweak.Utilities.Tweaks
                 "reg delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled /f & " +
                 "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 3 /f");
 
-            StateServices(false);
-
             RunCmdCommand("sc start WinDefend");
             RunPowerShellCommand("Start-Service -Name WinDefend; Set-Service -Name WinDefend -StartupType Automatic");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "SmartScreenEnabled", "On", RegistryValueKind.String);
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System");
-
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender");
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Policy Manager");
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine");
@@ -74,22 +72,16 @@ namespace GTweak.Utilities.Tweaks
             RunPowerShellCommand("Set-MpPreference -DisableScriptScanning $false");
             RunPowerShellCommand("Set-MpPreference -SubmitSamplesConsent 1");
             RunPowerShellCommand("Set-MpPreference -MAPSReporting 2");
-
             RunPowerShellCommand("Set-MpPreference -PUAProtection 1");
             RunPowerShellCommand("Set-MpPreference -PUAProtection Enabled");
-
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows Defender\Features -Name TamperProtection -Value 0x00000001");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
-
-
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center");
             RegistryHelp.DeleteRegristyTree(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge");
 
@@ -100,18 +92,13 @@ namespace GTweak.Utilities.Tweaks
             EnableTask("Microsoft\\Windows\\Windows Defender\\Windows Defender Verification");
 
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter");
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config", "VulnerableDriverBlocklistEnable", 1, RegistryValueKind.DWord);
-
             RegistryHelp.DeleteRegristyTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WTDS");
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity", "Enabled", 1, RegistryValueKind.DWord);
-
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost", "EnableWebContentEvaluation");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost", "PreventOverride");
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth", @"%windir%\system32\SecurityHealthSystray.exe", RegistryValueKind.ExpandString);
 
@@ -129,9 +116,14 @@ namespace GTweak.Utilities.Tweaks
             RunProcess(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\Windows Defender\MpCmdRun.exe", "-SignatureUpdate");
 
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "Start", "2", RegistryValueKind.DWord);
+            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "2", RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "1", RegistryValueKind.DWord);
-            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled");
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "3", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Sense", "Start", "3", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdFilter", "Start", "0", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdBoot", "Start", "0", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisDrv", "Start", "3", RegistryValueKind.DWord);
 
             CloseDefenderSettings();
 
@@ -186,36 +178,27 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender", "AllowFastServiceStartup", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender", "PUAProtection", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender", "DisableLocalAdminMerge", 0, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "DisableNotifications", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile", "DisableNotifications", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "DisableNotifications", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center");
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "DisableEnhancedNotifications", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "DisableNotifications", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Features");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender\Features", "DeviceControlEnabled", 0, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine");
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine", "MpEnablePus", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine", "DisableGradualRelease", 1, RegistryValueKind.DWord);
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection");
             TakingOwnership.GrantAdministratorsAccess(@"MACHINE\Software\Policies\Microsoft\Windows Defender\Real-Time Protection", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection", "DisableIOAVProtection", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Real-Time Protection", "DisableOnAccessProtection", 1, RegistryValueKind.DWord);
@@ -229,13 +212,10 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\UX Configuration", "Notification_Suppress", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\UX Configuration", "SuppressRebootNotification", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\UX Configuration", "UILockdown", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health", "UILockdown", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family optionsObj");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family optionsObj", "UILockdown", 1, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Reportin");
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Reportin", "DisableEnhancedNotifications", 1, RegistryValueKind.DWord);
 
@@ -248,24 +228,18 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\SpyNet", "DisableBlockAtFirstSeen", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\SpyNet", "SpynetReporting", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\SpyNet", "SubmitSamplesConsent", 2, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config", "EnabledV9", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config", "VulnerableDriverBlocklistEnable", 0, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity", "Enabled", 0, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WTDS\Components");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WTDS\Components", "ServiceEnabled", "0", RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter", "EnabledV9", "0", RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost");
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost", "EnableWebContentEvaluation", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost", "PreventOverride", 0, RegistryValueKind.DWord);
-
             RegistryHelp.CreateFolder(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge");
             RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge", "EnabledV9", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge", "PreventOverride", 0, RegistryValueKind.DWord);
@@ -301,7 +275,26 @@ namespace GTweak.Utilities.Tweaks
                 if (Directory.Exists(defenderScansPath)) DeleteDir(defenderScansPath);
             }
 
-            StateServices(true);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\Sense", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdFilter", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+
+            await Task.Delay(1000);
+
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled", "3", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Sense", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdFilter", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdBoot", "Start", "4", RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisDrv", "Start", "4", RegistryValueKind.DWord);
 
             RunCmdCommand("sc config WinDefend start= disabled");
             RunPowerShellCommand("Stop-Service -Name WinDefend; Set-Service -Name WinDefend -StartupType Disabled");
@@ -328,19 +321,6 @@ namespace GTweak.Utilities.Tweaks
             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 4 /f & " +
             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled / d 3 /f & " +
             "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 4 /f");
-
-            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-            TakingOwnership.GrantAdministratorsAccess(@"MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-
-            await Task.Delay(1000);
-
-            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "Start", "4", RegistryValueKind.DWord);
-            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled", "3", RegistryValueKind.DWord);
-            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "4", RegistryValueKind.DWord);
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0", RegistryValueKind.DWord);
-            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "4", RegistryValueKind.DWord);
 
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Directory\shellex\ContextMenuHandlers\EPP");
@@ -409,32 +389,6 @@ namespace GTweak.Utilities.Tweaks
                 catch { DeleteDir(subDir.FullName); }
             }
         }
-
-        private readonly SortedList<string, int> defenderConfigDefault = new SortedList<string, int>()
-        {
-            {"WinDefend", 2},
-            {"Sense",     3},
-            {"WdFilter",  0},
-            {"WdNisDrv",  3},
-            {"WdNisSvc",  3},
-            {"WdBoot",    0},
-        };
-
-        private void StateServices(bool isChoose)
-        {
-            foreach (var defenderServ in defenderConfigDefault)
-            {
-                try
-                {
-                    if (isChoose)
-                        Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\" + defenderServ.Key, true)?.SetValue("Start", 4, RegistryValueKind.DWord);
-                    else
-                        Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Services\" + defenderServ.Key, true)?.SetValue("Start", defenderConfigDefault.Values, RegistryValueKind.DWord);
-                }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-            }
-        }
-
     }
 }
 
