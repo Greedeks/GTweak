@@ -1,10 +1,10 @@
-﻿using System;
+﻿using GTweak.Utilities.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -198,7 +198,7 @@ namespace GTweak.Utilities.Tweaks
                             CreateNoWindow = true,
                             FileName = "cmd.exe"
                         });
-                        await Task.Delay(100);
+                        await Task.Delay(200);
                         process.Start();
                     }
                 }
@@ -218,22 +218,16 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        internal static void StartMemoryCleanup()
+        internal async void StartMemoryCleanup()
         {
-            BackgroundWorker backgroundWorker = new BackgroundWorker();
-            backgroundWorker.DoWork += delegate
+            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            await backgroundQueue.QueueTask(delegate { ClearFileSystemCache(true); EmptyWorkingSetFunction(); ClearTempSystemCache(); });
+
+            if (backgroundQueue.IsQueueCompleted)
             {
-                Parallel.Invoke(() => { ClearFileSystemCache(true); },
-                 EmptyWorkingSetFunction,
-                 ClearTempSystemCache);
-            };
-            backgroundWorker.RunWorkerCompleted += delegate
-            {
-                Thread _thread = new Thread(() => backgroundWorker.Dispose()) { IsBackground = true };
-                _thread.Start();
+                await Task.Delay(1000);
                 new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["clear_ram_notification"]);
-            };
-            backgroundWorker.RunWorkerAsync();
+            }
         }
     }
 }

@@ -57,7 +57,6 @@ namespace GTweak.Windows
                 new UninstallingPakages().ViewInstalledPackages,
                 new UninstallingPakages().CheckingForLocalAccount,
                 new SystemTweaks().ViewNetshState,
-                new SystemTweaks().ViewTaskState,
                 new SystemTweaks().ViewBluetoothStatus);
         }
 

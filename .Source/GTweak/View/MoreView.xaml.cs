@@ -34,7 +34,7 @@ namespace GTweak.View
 
                 await Task.Delay(100);
 
-                BackgroundWorker backgroundWorker = new BackgroundWorker();
+                using BackgroundWorker backgroundWorker = new BackgroundWorker();
                 backgroundWorker.DoWork += delegate
                 {
                     try { RecoveryPoint.Create((string)FindResource("textpoint_more")); }
@@ -44,7 +44,6 @@ namespace GTweak.View
                 backgroundWorker.RunWorkerCompleted += delegate
                 {
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification"));
-                    backgroundWorker.Dispose();
                 };
                 backgroundWorker.RunWorkerAsync();
             }
@@ -58,14 +57,13 @@ namespace GTweak.View
             catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulrecovery_notification")); }
         }
 
-        private void BtnClear_ClickButton(object sender, EventArgs e) => ClearingMemory.StartMemoryCleanup();
-
+        private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
 
         private void BtnDisableRecovery_ClickButton(object sender, EventArgs e)
         {
             if (!RecoveryPoint.IsSystemRestoreDisabled())
             {
-                BackgroundWorker backgroundWorker = new BackgroundWorker();
+                using BackgroundWorker backgroundWorker = new BackgroundWorker();
                 backgroundWorker.DoWork += delegate
                 {
                     try { RecoveryPoint.DisablePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
@@ -73,7 +71,6 @@ namespace GTweak.View
                 backgroundWorker.RunWorkerCompleted += delegate
                 {
                     new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("disable_recovery_notification"));
-                    backgroundWorker.Dispose();
                 };
                 backgroundWorker.RunWorkerAsync();
             }

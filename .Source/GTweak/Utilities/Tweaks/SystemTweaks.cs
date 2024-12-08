@@ -28,15 +28,8 @@ namespace GTweak.Utilities.Tweaks
                 @"Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
                 @"Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"};
 
-        private static readonly string[] netshValue = new string[4] {
-                @"netsh interface teredo",
-                @"netsh int ipv6 isatap",
-                @"netsh interface isatap",
-                @"netsh int ipv6 6to4" };
-
         internal static bool isTweakWorkingAntivirus = false;
         private static bool isNetshState = false, isBluetoothStatus = false;
-        private static byte counTaskWorking = 0;
         private readonly string activeGuid = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty).ToString();
 
         internal void ViewSystem(SystemView systemV)
@@ -176,7 +169,7 @@ namespace GTweak.Utilities.Tweaks
                 systemV.TglButton11.StateNA = false;
 
 
-            if (counTaskWorking > 0)
+            if (IsTaskEnabled(schedulerTasks))
                 systemV.TglButton12.StateNA = true;
             else
                 systemV.TglButton12.StateNA = false;
@@ -263,55 +256,35 @@ namespace GTweak.Utilities.Tweaks
 
         internal void ViewBluetoothStatus()
         {
-            try
-            {
-                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT DeviceId FROM Win32_PnPEntity WHERE service='BthLEEnum'");
-                isBluetoothStatus = searcher.Get().Count > 0;
-            }
+            try { isBluetoothStatus = new ManagementObjectSearcher("SELECT DeviceId FROM Win32_PnPEntity WHERE service='BthLEEnum'").Get().Count > 0; }
             catch { isBluetoothStatus = false; }
-        }
-
-        internal void ViewTaskState()
-        {
-            using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-            foreach (string taskname in schedulerTasks)
-            {
-                Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
-                if (_task != null)
-                {
-                    if (_task.Enabled)
-                        counTaskWorking++;
-                }
-            }
         }
 
         internal void ViewNetshState()
         {
             Parallel.Invoke(() =>
             {
-                try
+                string getStateNetsh = default;
+
+                ProcessStartInfo startInfo = new ProcessStartInfo
                 {
-                    string getStateNetsh = default;
+                    FileName = @"cmd.exe",
+                    Arguments = $"/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
 
-                    Process cmdProcess = new Process();
-                    cmdProcess.StartInfo.UseShellExecute = false;
-                    cmdProcess.StartInfo.RedirectStandardOutput = true;
-                    cmdProcess.StartInfo.CreateNoWindow = true;
-                    cmdProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    cmdProcess.StartInfo.FileName = "cmd.exe";
-                    cmdProcess.StartInfo.Arguments = $"/c chcp 65001 & {netshValue[0]} show state & {netshValue[1]} show state & {netshValue[2]} show state & {netshValue[3]} show state";
-                    cmdProcess.Start();
+                using Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
 
-                    Parallel.Invoke(
-                    () => { cmdProcess.StandardOutput.ReadLine(); },
-                    () => { getStateNetsh = cmdProcess.StandardOutput.ReadToEnd(); });
+                process.Start();
 
-                    cmdProcess.Close();
-                    cmdProcess.Dispose();
+                getStateNetsh = process.StandardOutput.ReadToEnd();
 
-                    isNetshState = getStateNetsh.Contains("default");
-                }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                process.Close();
+
+                isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
             });
         }
 
@@ -497,44 +470,38 @@ namespace GTweak.Utilities.Tweaks
                     Thread _thread = new Thread(() =>
                     {
                         if (isChoose)
-                        {
-                            counTaskWorking = 0;
-                            DisablingTasks();
-                        }
+                            DisablingTasks(schedulerTasks);
                         else
-                        {
-                            counTaskWorking = 2;
-                            EnablingTasks();
-                        }
+                            EnablingTasks(schedulerTasks);
                     })
                     { IsBackground = true };
                     _thread.Start();
                     break;
                 case "TglButton13":
-                    string argumentsNetsh = string.Empty;
+                    string argStateNetsh = string.Empty, argStateNetshSecond = string.Empty;
 
                     if (isChoose)
                     {
                         isNetshState = false;
-                        argumentsNetsh = @"disabled";
+                        argStateNetsh = argStateNetshSecond = @"disabled";
                     }
                     else
                     {
                         isNetshState = true;
-                        argumentsNetsh = @"default";
+                        argStateNetshSecond = @"enabled";
+                        argStateNetsh = @"default";
                     }
 
                     Parallel.Invoke(() =>
                     {
-                        Process cmdProcess = new Process();
-                        cmdProcess.StartInfo.UseShellExecute = false;
-                        cmdProcess.StartInfo.CreateNoWindow = true;
-                        cmdProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                        cmdProcess.StartInfo.FileName = "cmd.exe";
-                        cmdProcess.StartInfo.Arguments = string.Format(@"/c netsh interface teredo set state {0} & netsh interface ipv6 6to4 set state state={0} undoonstop={0} & netsh interface ipv6 isatap set state state={0} & netsh interface IPV6 set privacy state={0} & netsh interface IPV6 set global randomizeidentifier={0} & netsh interface isatap set state {0}", argumentsNetsh);
-                        cmdProcess.Start();
-                        cmdProcess.Close();
-                        cmdProcess.Dispose();
+                        Process.Start(new ProcessStartInfo()
+                        {
+                            WindowStyle = ProcessWindowStyle.Hidden,
+                            CreateNoWindow = true,
+                            UseShellExecute = false,
+                            FileName = "cmd.exe",
+                            Arguments = $"/c netsh int teredo set state {argStateNetsh} & netsh int ipv6 6to4 set state state = {argStateNetsh} undoonstop = {argStateNetsh} & netsh int ipv6 isatap set state state = {argStateNetsh} & netsh int ipv6 set privacy state = {argStateNetshSecond} & netsh int ipv6 set global randomizeidentifier = {argStateNetshSecond} & netsh int isatap set state {argStateNetsh}"
+                        });
                     });
                     break;
                 case "TglButton14":
@@ -663,45 +630,6 @@ namespace GTweak.Utilities.Tweaks
             _thread.Start();
         }
 
-        private static void EnablingTasks()
-        {
-            Parallel.Invoke(() =>
-            {
-                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in schedulerTasks)
-                {
-                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(taskname);
-                    if (_task != null)
-                    {
-                        if (!_task.Enabled)
-                        {
-                            _task.Definition.Settings.Enabled = true;
-                            _task.RegisterChanges();
-                        }
-                    }
-                }
-            });
-        }
-
-        private static void DisablingTasks()
-        {
-            Parallel.Invoke(() =>
-            {
-                Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string _taskname in schedulerTasks)
-                {
-                    Microsoft.Win32.TaskScheduler.Task _task = taskService.GetTask(_taskname);
-                    if (_task != null)
-                    {
-                        if (_task.Enabled)
-                        {
-                            _task.Definition.Settings.Enabled = false;
-                            _task.RegisterChanges();
-                        }
-                    }
-                }
-            });
-        }
 
         private static void SetPowercfg(bool isChoose)
         {

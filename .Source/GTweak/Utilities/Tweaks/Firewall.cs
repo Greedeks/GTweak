@@ -1,4 +1,5 @@
-﻿using NetFwTypeLib;
+﻿using GTweak.Utilities.Helpers;
+using NetFwTypeLib;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal class Firewall
+    internal class Firewall : TaskSchedulerManager
     {
         private static readonly SortedList<string, string> NameRules = new SortedList<string, string>
         {

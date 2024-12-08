@@ -256,6 +256,7 @@
     <Compile Include="Core\Model\MainModel.cs" />
     <Compile Include="Utilities\BlockRunTweaker.cs" />
     <Compile Include="Utilities\DisablingWinKeys.cs" />
+    <Compile Include="Utilities\Helpers\TaskSchedulerManager.cs" />
     <Compile Include="Utilities\Helpers\UnarchiveManager.cs" />
     <Compile Include="Utilities\Helpers\BackgroundQueue.cs" />
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />

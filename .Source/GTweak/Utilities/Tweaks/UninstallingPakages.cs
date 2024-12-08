@@ -127,14 +127,13 @@ namespace GTweak.Utilities.Tweaks
                 CreateNoWindow = true
             };
 
-            Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
+            using Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
 
             process.Start();
 
             UserPackages = process.StandardOutput.ReadToEnd();
 
             process.Close();
-            process.Dispose();
         }
 
 

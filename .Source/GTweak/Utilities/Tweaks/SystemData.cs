@@ -147,7 +147,7 @@ namespace GTweak.Utilities.Tweaks
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SerialNumber from Win32_BIOS",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
                     {
                         if (!string.IsNullOrEmpty((string)managementObj["Name"]))
                             СonfigurationData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ? (string)managementObj["Name"] + ", S/N-" + (string)managementObj["SerialNumber"] + "\n" : (string)managementObj["Name"] + "\n";
@@ -160,25 +160,25 @@ namespace GTweak.Utilities.Tweaks
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["MotherBr"] = (string)managementObj["Manufacturer"] + (string)managementObj["Product"] + ", V" + (string)managementObj["Version"] + "\n";
                     СonfigurationData["MotherBr"] = СonfigurationData["MotherBr"].TrimEnd('\n');
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["CPU"] = (string)managementObj["Name"] + "\n";
                     СonfigurationData["CPU"] = СonfigurationData["CPU"].TrimEnd('\n');
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["GPU"] += ((string)managementObj["Name"] + ", " + Convert.ToString(((uint)managementObj["AdapterRAM"] / 1024000000)) + " GB\n");
                     СonfigurationData["GPU"] = СonfigurationData["GPU"].TrimEnd('\n');
                 },
                 delegate
                 {
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select  Manufacturer, Capacity, ConfiguredClockSpeed from Win32_PhysicalMemory",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select  Manufacturer, Capacity, ConfiguredClockSpeed from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
                         СonfigurationData["RAM"] += (string)managementObj["Manufacturer"] + ", " + Convert.ToString((ulong)managementObj["Capacity"] / 1024000000) + " GB, " + Convert.ToString((uint)managementObj["ConfiguredClockSpeed"]) + "MHz\n";
                     СonfigurationData["RAM"] = СonfigurationData["RAM"].TrimEnd('\n');
                 },
@@ -191,7 +191,7 @@ namespace GTweak.Utilities.Tweaks
                 Parallel.Invoke(delegate
                 {
                     string storageType = СonfigurationData["Storage"] = string.Empty;
-                    foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName,MediaType,Size,BusType from MSFT_PhysicalDisk",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName,MediaType,Size,BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
                     {
                         storageType = (ushort)(managementObj["MediaType"]) switch
                         {
@@ -208,7 +208,7 @@ namespace GTweak.Utilities.Tweaks
                 delegate
                 {
                     СonfigurationData["Audio"] = string.Empty;
-                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                    foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name,Caption,Description from Win32_SoundDevice", new EnumerationOptions { ReturnImmediately = true }).Get())
                     {
                         if (!string.IsNullOrEmpty((string)managementObj["Name"]))
                             СonfigurationData["Audio"] += (string)managementObj["Name"] + "\n";
@@ -222,7 +222,7 @@ namespace GTweak.Utilities.Tweaks
                delegate
                {
                    СonfigurationData["NetAdapter"] = string.Empty;
-                   foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7",  new EnumerationOptions { ReturnImmediately = true }).Get())
+                   foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
                        СonfigurationData["NetAdapter"] += (string)managementObj["Name"] + "\n";
                    СonfigurationData["NetAdapter"] = СonfigurationData["NetAdapter"].TrimEnd('\n');
                });
