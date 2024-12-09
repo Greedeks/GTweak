@@ -30,7 +30,6 @@ namespace GTweak.Windows
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += async delegate
             {
-                backgroundWorker.Dispose();
                 new TypewriterAnimation((string)FindResource("text6_load"), TextLoad, TimeSpan.FromMilliseconds(300));
                 await Task.Delay(310);
                 this.Close();

@@ -1,8 +1,8 @@
 ﻿using GTweak.Core.ViewModel;
 using GTweak.Utilities;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
-using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,22 +42,20 @@ namespace GTweak.View
                 DataContext = new DataSystemVM();
             };
 
-            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, async delegate
             {
                 if (time.TotalSeconds % 2 == 0)
                 {
-                    BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.RunWorkerAsync();
-                    backgroundWorker.DoWork += delegate
+                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    await backgroundQueue.QueueTask(delegate
                     {
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
                         Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); }) { IsBackground = true };
                         _thread.Start();
-                    };
-                    backgroundWorker.RunWorkerCompleted += delegate
+                    });
+                    backgroundQueue.QueueCompleted(delegate
                     {
-                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
-                        { IsBackground = true };
+                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); }) { IsBackground = true };
                         Application.Current.Dispatcher.Invoke(AnimationProgressBars);
 
                         if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
@@ -67,14 +65,13 @@ namespace GTweak.View
                             Timeline.SetDesiredFrameRate(doubleAnim, 400);
                             IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                         }
-                    };
+                    });
                 }
                 else if (time.TotalSeconds % 5 == 0)
                 {
-                    BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.RunWorkerAsync();
-                    backgroundWorker.DoWork += delegate { SystemData.СomputerСonfiguration.GettingUserIP(); };
-                    backgroundWorker.RunWorkerCompleted += delegate { DataContext = new DataSystemVM(); };
+                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    await backgroundQueue.QueueTask(delegate { SystemData.СomputerСonfiguration.GettingUserIP(); });
+                    backgroundQueue.QueueCompleted(delegate { DataContext = new DataSystemVM(); });
                 }
 
                 time = time.Add(TimeSpan.FromSeconds(+1));
@@ -85,7 +82,7 @@ namespace GTweak.View
         #region Animations
         private void AnimationProgressBars()
         {
-            Parallel.Invoke(() =>
+            Parallel.Invoke(delegate
             {
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
@@ -179,13 +176,11 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); })
-            { IsBackground = true };
+            Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); }) { IsBackground = true };
 
-            _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); })
-            { IsBackground = true };
-            Application.Current.Dispatcher.Invoke(() => { CPULoad.Value = SystemData.MonitoringSystem.CpuUsage; });
-            Application.Current.Dispatcher.Invoke(() => { RAMLoad.Value = new SystemData.MonitoringSystem().RamUsage; });
+            RAMLoad.Value = new SystemData.MonitoringSystem().RamUsage;
+            CPULoad.Value = SystemData.MonitoringSystem.CpuUsage;
+
         }
     }
 }

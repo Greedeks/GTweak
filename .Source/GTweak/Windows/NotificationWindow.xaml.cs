@@ -55,7 +55,6 @@ namespace GTweak.Windows
                     case "restart":
                         Process.Start("shutdown", "/r /t 0");
                         break;
-
                 }
             }
         }
@@ -116,13 +115,11 @@ namespace GTweak.Windows
                 Duration = TimeSpan.FromSeconds(0.8)
             };
 
+            Left = primaryMonitorArea.Right - Width - 10;
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 400);
             BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
             BeginAnimation(OpacityProperty, doubleAnim);
-
-
-            Left = primaryMonitorArea.Right - Width - 10;
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

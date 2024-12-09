@@ -32,6 +32,12 @@ namespace GTweak.Utilities.Helpers
                 return task;
             }
         }
-        internal bool IsQueueCompleted => previousTask.IsCompleted;
+
+        internal void QueueCompleted(Action action)
+        {
+            if (previousTask.IsCompleted)
+                action();
+        }
     }
 }
+

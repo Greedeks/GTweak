@@ -52,9 +52,7 @@ namespace GTweak.View
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { UninstallingPakages.DeletingPackage(applicationName); });
-
-                        if (backgroundQueue.IsQueueCompleted)
-                            UpdateViewStatePakages();
+                        backgroundQueue.QueueCompleted(UpdateViewStatePakages);
                         break;
                     }
 
@@ -65,9 +63,7 @@ namespace GTweak.View
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { UninstallingPakages.ResetOneDriveAsync(); });
-
-                        if (backgroundQueue.IsQueueCompleted)
-                            UpdateViewStatePakages();
+                        backgroundQueue.QueueCompleted(UpdateViewStatePakages);
                         break;
                     }
             }
