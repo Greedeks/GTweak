@@ -245,6 +245,8 @@
     <Compile Include="Assets\UserControl\ProggressRing.xaml.cs">
       <DependentUpon>ProggressRing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\ViewModel\DataSystemVM.cs" />
+    <Compile Include="Core\ViewModel\InterfaceVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,7 +255,7 @@
     <Compile Include="Assets\UserControl\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\Model\MainModel.cs" />
+    <Compile Include="Core\Model\DataSystemModel.cs" />
     <Compile Include="Utilities\BlockRunTweaker.cs" />
     <Compile Include="Utilities\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\TaskSchedulerManager.cs" />
@@ -276,7 +278,7 @@
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />
     <Compile Include="Utilities\Tweaks\RecoveryPoint.cs" />
     <Compile Include="Utilities\Helpers\TypewriterAnimation.cs" />
-    <Compile Include="Core\ViewModel\PagesViewModel.cs" />
+    <Compile Include="Core\ViewModel\OtherContextVM.cs" />
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
     </Compile>
@@ -326,11 +328,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Languages\ru\Lang.xaml">
+    <Page Include="Languages\ru\Localize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Languages\en\Lang.xaml">
+    <Page Include="Languages\en\Localize.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -390,7 +392,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ApplicationsView.xaml">
+    <Page Include="View\PakagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -398,7 +400,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\InformationSystemView.xaml">
+    <Page Include="View\DataSystemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -443,14 +445,14 @@
     <Compile Include="Utilities\Tweaks\SystemData.cs" />
     <Compile Include="Core\ViewModelBase.cs" />
     <Compile Include="Core\ViewModel\MainViewModel.cs" />
-    <Compile Include="View\ApplicationsView.xaml.cs">
-      <DependentUpon>ApplicationsView.xaml</DependentUpon>
+    <Compile Include="View\PakagesView.xaml.cs">
+      <DependentUpon>PakagesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ConfidentialityView.xaml.cs">
       <DependentUpon>ConfidentialityView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\InformationSystemView.xaml.cs">
-      <DependentUpon>InformationSystemView.xaml</DependentUpon>
+    <Compile Include="View\DataSystemView.xaml.cs">
+      <DependentUpon>DataSystemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InterfaceView.xaml.cs">
       <DependentUpon>InterfaceView.xaml</DependentUpon>

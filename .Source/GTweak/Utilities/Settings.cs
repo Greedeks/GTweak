@@ -125,7 +125,7 @@ namespace GTweak.Utilities
         internal static void SaveFileConfig()
         {
             if (INIManager.UserTweaksConfidentiality.Count == 0 && INIManager.UserTweaksInterface.Count == 0 && INIManager.UserTweaksServices.Count == 0 && INIManager.UserTweaksSystem.Count == 0)
-                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["export_warning_notification"]);
+                new ViewNotification().Show("", "info", (string)Application.Current.Resources["export_warning_notification"]);
             else
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -177,10 +177,10 @@ namespace GTweak.Utilities
                 if (File.ReadLines(UsePath.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(UsePath.Config).Any(line => line.Contains("Slider")))
                     new ImportWindow(openFileDialog.SafeFileName).ShowDialog();
                 else
-                    new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_empty_notification"]);
+                    new ViewNotification().Show("", "info", (string)Application.Current.Resources["import_empty_notification"]);
             }
             else
-                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["import_warning_notification"]);
+                new ViewNotification().Show("", "info", (string)Application.Current.Resources["import_warning_notification"]);
         }
 
         internal static void SelfRemoval()

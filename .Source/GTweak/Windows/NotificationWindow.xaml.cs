@@ -17,10 +17,10 @@ namespace GTweak.Windows
         private TimeSpan time = TimeSpan.FromSeconds(3);
         private readonly MediaPlayer _mediaPlayer = new MediaPlayer();
 
-        private string _action = string.Empty;
+        private string clickAction = string.Empty;
         internal string TitleNotice { set => TitleSet.Text = value; get => TitleSet.Text; }
         internal string TextNotice { set => TextSet.Text = value; get => TextSet.Text; }
-        internal string ActionChoice { set => _action = value; get => _action; }
+        internal string ActionNotice { set => clickAction = value; get => clickAction; }
 
         public NotificationWindow()
         {
@@ -47,7 +47,7 @@ namespace GTweak.Windows
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                switch (ActionChoice)
+                switch (ActionNotice)
                 {
                     case "logout":
                         Process.Start("logoff");
@@ -55,6 +55,7 @@ namespace GTweak.Windows
                     case "restart":
                         Process.Start("shutdown", "/r /t 0");
                         break;
+
                 }
             }
         }
@@ -68,19 +69,19 @@ namespace GTweak.Windows
                 _mediaPlayer.Play();
             }
 
-            switch (ActionChoice)
+            switch (ActionNotice)
             {
                 case "logout":
                     if (TitleNotice == string.Empty || TextNotice == string.Empty)
                     {
-                        TitleNotice = (string)FindResource("title0_notification");
+                        TitleNotice = (string)FindResource("title_warn_notification");
                         TextNotice = (string)FindResource("logout_notification");
                     }
                     break;
                 case "restart":
                     if (TitleNotice == string.Empty || TextNotice == string.Empty)
                     {
-                        TitleNotice = (string)FindResource("title0_notification");
+                        TitleNotice = (string)FindResource("title_warn_notification");
                         TextNotice = (string)FindResource("restart_notification");
                     }
                     break;

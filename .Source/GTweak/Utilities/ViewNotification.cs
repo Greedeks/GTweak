@@ -16,7 +16,7 @@ namespace GTweak.Utilities
                 Thread _thread = new Thread(() => new Settings().CheckingTempFiles()) { IsBackground = true };
                 _thread.Start();
 
-                await Task.Delay(300);
+                await Task.Delay(200);
 
                 Application.Current.Dispatcher.Invoke(delegate
                 {
@@ -31,9 +31,14 @@ namespace GTweak.Utilities
 
                         notificationWindow = new NotificationWindow
                         {
-                            TitleNotice = tittle,
+                            TitleNotice = tittle switch
+                            {
+                                "warn" => (string)Application.Current.Resources["title_warn_notification"],
+                                "info" => (string)Application.Current.Resources["title_info_notification"],
+                                _ => string.Empty,
+                            },
                             TextNotice = content,
-                            ActionChoice = action,
+                            ActionNotice = action,
                         };
                         await Task.Delay(100);
                         notificationWindow.Show();

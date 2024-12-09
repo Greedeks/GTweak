@@ -91,10 +91,10 @@ namespace GTweak.View
                     INIManager.UserTweaksSystem.Remove(toggleButton.Name);
                     INIManager.UserTweaksSystem.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
                     SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State);
-                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("windefender_notification"));
+                    new ViewNotification().Show("", "info", (string)FindResource("windefender_notification"));
                 }
                 else if (SystemTweaks.isTweakWorkingAntivirus)
-                    new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("warningwindef_notification"));
+                    new ViewNotification().Show("", "warn", (string)FindResource("warningwindef_notification"));
             }
         }
 

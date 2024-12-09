@@ -18,10 +18,10 @@ namespace GTweak.View
         private void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
             if (WindowsLicense.IsWindowsActivated)
-                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("readyactivate_notification"));
+                new ViewNotification().Show("", "info", (string)FindResource("readyactivate_notification"));
             else
             {
-                new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("activatewin_notification"));
+                new ViewNotification().Show("", "warn", (string)FindResource("activatewin_notification"));
                 WindowsLicense.StartActivation();
             }
         }
@@ -30,7 +30,7 @@ namespace GTweak.View
         {
             if (RecoveryPoint.IsAlreadyPoint() == false)
             {
-                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("createpoint_notification"));
+                new ViewNotification().Show("", "info", (string)FindResource("createpoint_notification"));
 
                 await Task.Delay(100);
 
@@ -38,23 +38,23 @@ namespace GTweak.View
                 backgroundWorker.DoWork += delegate
                 {
                     try { RecoveryPoint.Create((string)FindResource("textpoint_more")); }
-                    catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulpoint_notification")); }
-                    finally { new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification")); };
+                    catch { new ViewNotification().Show("", "warn", (string)FindResource("notsuccessfulpoint_notification")); }
+                    finally { new ViewNotification().Show("", "info", (string)FindResource("successpoint_notification")); };
                 };
                 backgroundWorker.RunWorkerCompleted += delegate
                 {
-                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("successpoint_notification"));
+                    new ViewNotification().Show("", "info", (string)FindResource("successpoint_notification"));
                 };
                 backgroundWorker.RunWorkerAsync();
             }
             else
-                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("readypoint_notification"));
+                new ViewNotification().Show("", "info", (string)FindResource("readypoint_notification"));
         }
 
         private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e)
         {
             try { RecoveryPoint.Run(); }
-            catch { new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("notsuccessfulrecovery_notification")); }
+            catch { new ViewNotification().Show("", "warn", (string)FindResource("notsuccessfulrecovery_notification")); }
         }
 
         private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
@@ -70,12 +70,12 @@ namespace GTweak.View
                 };
                 backgroundWorker.RunWorkerCompleted += delegate
                 {
-                    new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("disable_recovery_notification"));
+                    new ViewNotification().Show("", "info", (string)FindResource("disable_recovery_notification"));
                 };
                 backgroundWorker.RunWorkerAsync();
             }
             else
-                new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("warndisable_recovery_notification"));
+                new ViewNotification().Show("", "info", (string)FindResource("warndisable_recovery_notification"));
         }
     }
 }

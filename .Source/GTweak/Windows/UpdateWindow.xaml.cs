@@ -88,7 +88,7 @@ namespace GTweak.Windows
                 catch
                 {
                     this.Close();
-                    new ViewNotification().Show("", (string)FindResource("title0_notification"), (string)FindResource("warn_update_notification"));
+                    new ViewNotification().Show("", "warn", (string)FindResource("warn_update_notification"));
                 }
             }
         }

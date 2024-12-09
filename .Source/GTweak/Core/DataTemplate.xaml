@@ -11,8 +11,8 @@
         <view:InterfaceView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ApplicationsVM}">
-        <view:ApplicationsView />
+    <DataTemplate DataType="{x:Type vm:PakagesVM}">
+        <view:PakagesView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:ServicesVM}">
@@ -23,8 +23,8 @@
         <view:SystemView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:InformationSystemVM}">
-        <view:InformationSystemView />
+    <DataTemplate DataType="{x:Type vm:DataSystemVM}">
+        <view:DataSystemView />
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:MoreVM}">

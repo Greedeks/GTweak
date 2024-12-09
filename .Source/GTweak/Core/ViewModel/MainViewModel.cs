@@ -25,29 +25,28 @@ namespace GTweak.Core.ViewModel
 
         public ICommand ConfidentialityCommand { get; set; }
         public ICommand InterfaceCommand { get; set; }
-        public ICommand ApplicationsCommand { get; set; }
+        public ICommand PakagesCommand { get; set; }
         public ICommand ServicesCommand { get; set; }
         public ICommand SystemCommand { get; set; }
-        public ICommand InformationSystemCommand { get; set; }
+        public ICommand DataSystemCommand { get; set; }
         public ICommand MoreCommand { get; set; }
-
 
         private void Confidentiality(object obj) => CurrentView = new ConfidentialityVM();
         private void Interface(object obj) => CurrentView = new InterfaceVM();
-        private void Apps(object obj) => CurrentView = new ApplicationsVM();
+        private void Pakages(object obj) => CurrentView = new PakagesVM();
         private void Services(object obj) => CurrentView = new ServicesVM();
         private void System(object obj) => CurrentView = new SystemVM();
-        private void InformationSystem(object obj) => CurrentView = new InformationSystemVM();
+        private void DataSystem(object obj) => CurrentView = new DataSystemVM();
         private void More(object obj) => CurrentView = new MoreVM();
 
         public MainViewModel()
         {
             ConfidentialityCommand = new RelayCommand(Confidentiality);
             InterfaceCommand = new RelayCommand(Interface);
-            ApplicationsCommand = new RelayCommand(Apps);
+            PakagesCommand = new RelayCommand(Pakages);
             ServicesCommand = new RelayCommand(Services);
             SystemCommand = new RelayCommand(System);
-            InformationSystemCommand = new RelayCommand(InformationSystem);
+            DataSystemCommand = new RelayCommand(DataSystem);
             MoreCommand = new RelayCommand(More);
 
             CurrentView = new MoreVM();

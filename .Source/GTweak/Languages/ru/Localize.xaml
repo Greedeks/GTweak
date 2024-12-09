@@ -34,8 +34,8 @@
 
     <!--#region Notification Window -->
     <v:String x:Key="title_win_notification">Уведомление</v:String>
-    <v:String x:Key="title0_notification">Внимание</v:String>
-    <v:String x:Key="title1_notification">Информация</v:String>
+    <v:String x:Key="title_warn_notification">Внимание</v:String>
+    <v:String x:Key="title_info_notification">Информация</v:String>
     <v:String x:Key="logout_notification">Требуется выход, нажмите на данный текст, чтобы произвести его</v:String>
     <v:String x:Key="restart_notification">Требуется перезагрузка, нажмите на данный текст, чтобы произвести её</v:String>
     <v:String x:Key="onedrive_notification">Процесс восстановления OneDrive начался, это займет некоторое время</v:String>

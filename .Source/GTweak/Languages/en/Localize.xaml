@@ -34,8 +34,8 @@
 
     <!--#region Notification Window -->
     <v:String x:Key="title_win_notification">Notification</v:String>
-    <v:String x:Key="title0_notification">Attention</v:String>
-    <v:String x:Key="title1_notification">Information</v:String>
+    <v:String x:Key="title_warn_notification">Attention</v:String>
+    <v:String x:Key="title_info_notification">Information</v:String>
     <v:String x:Key="logout_notification">An exit is required, click on this text to produce it</v:String>
     <v:String x:Key="restart_notification">A reboot is required, click on this text to perform it</v:String>
     <v:String x:Key="onedrive_notification">The OneDrive recovery process has started, it will take some time</v:String>

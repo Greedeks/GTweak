@@ -319,13 +319,13 @@
 
                         <nav:ButtonNavigation Grid.Column="1" Style="{StaticResource BtnNavigation}" x:Name="BtnInterface" Content="{DynamicResource btn2_main}" Command="{Binding InterfaceCommand}"/>
 
-                        <nav:ButtonNavigation Grid.Column="2" Style="{StaticResource BtnNavigation}" x:Name="BtnApplication" Content="{DynamicResource btn3_main}" Command="{Binding ApplicationsCommand}"/>
+                        <nav:ButtonNavigation Grid.Column="2" Style="{StaticResource BtnNavigation}" x:Name="BtnApplication" Content="{DynamicResource btn3_main}" Command="{Binding PakagesCommand}"/>
 
                         <nav:ButtonNavigation Grid.Column="3" Style="{StaticResource BtnNavigation}" x:Name="BtnServices" Content="{DynamicResource btn4_main}" Command="{Binding ServicesCommand}"/>
 
                         <nav:ButtonNavigation Grid.Column="4" Style="{StaticResource BtnNavigation}" x:Name="BtnSystem" Content="{DynamicResource btn5_main}" Command="{Binding SystemCommand}"/>
 
-                        <nav:ButtonNavigation Grid.Column="5" Style="{StaticResource BtnNavigation}" x:Name="BtnSystemInfo" Content="{DynamicResource btn6_main}" Command="{Binding InformationSystemCommand}"/>
+                        <nav:ButtonNavigation Grid.Column="5" Style="{StaticResource BtnNavigation}" x:Name="BtnSystemInfo" Content="{DynamicResource btn6_main}" Command="{Binding DataSystemCommand}"/>
 
                         <nav:ButtonNavigation Grid.Column="6" Style="{StaticResource BtnNavigation}" x:Name="BtnMore" Content="{DynamicResource btn7_main}" Command="{Binding MoreCommand}" IsChecked="True">
                             <nav:ButtonNavigation.Resources>

@@ -47,7 +47,7 @@ namespace GTweak.Utilities.Tweaks
                     ChangeRulesIn(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                 });
             }
-            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
 
             try
             {
@@ -57,7 +57,7 @@ namespace GTweak.Utilities.Tweaks
                     ChangeRulesOut(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
                 });
             }
-            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
         private static void ChangeRulesIn(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
@@ -109,7 +109,7 @@ namespace GTweak.Utilities.Tweaks
         protected static void BlockSpyDomain(in bool isChoose)
         {
             try { RulesHosts(isChoose); }
-            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
         private static void RulesHosts(in bool isChoose)
@@ -154,7 +154,7 @@ namespace GTweak.Utilities.Tweaks
         protected static void BlockWDefender(bool isChoose)
         {
             try { Parallel.Invoke(() => { ChangeRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); }); }
-            catch { new ViewNotification().Show("", (string)Application.Current.Resources["title0_notification"], (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
         }
     }
 }

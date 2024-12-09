@@ -16,12 +16,12 @@ using System.Windows.Threading;
 
 namespace GTweak.View
 {
-    public partial class InformationSystemView : UserControl
+    public partial class DataSystemView : UserControl
     {
         private readonly DispatcherTimer timer = default;
         private TimeSpan time = TimeSpan.FromSeconds(0);
 
-        public InformationSystemView()
+        public DataSystemView()
         {
             InitializeComponent();
 
@@ -39,7 +39,7 @@ namespace GTweak.View
                         SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
                         break;
                 }
-                DataContext = new InformationSystemVM();
+                DataContext = new DataSystemVM();
             };
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
@@ -74,7 +74,7 @@ namespace GTweak.View
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.RunWorkerAsync();
                     backgroundWorker.DoWork += delegate { SystemData.СomputerСonfiguration.GettingUserIP(); };
-                    backgroundWorker.RunWorkerCompleted += delegate { DataContext = new InformationSystemVM(); };
+                    backgroundWorker.RunWorkerCompleted += delegate { DataContext = new DataSystemVM(); };
                 }
 
                 time = time.Add(TimeSpan.FromSeconds(+1));

@@ -38,9 +38,9 @@ namespace GTweak
                 {
                     Source = value switch
                     {
-                        "ru" => new Uri("Languages/ru/Lang.xaml", UriKind.Relative),
-                        "en" => new Uri("Languages/en/Lang.xaml", UriKind.Relative),
-                        _ => GettingSystemLanguage.Contains("ru") ? new Uri("Languages/ru/Lang.xaml", UriKind.Relative) : new Uri("Languages/en/Lang.xaml", UriKind.Relative)
+                        "ru" => new Uri("Languages/ru/Localize.xaml", UriKind.Relative),
+                        "en" => new Uri("Languages/en/Localize.xaml", UriKind.Relative),
+                        _ => GettingSystemLanguage.Contains("ru") ? new Uri("Languages/ru/Localize.xaml", UriKind.Relative) : new Uri("Languages/en/Localize.xaml", UriKind.Relative)
                     }
                 };
 

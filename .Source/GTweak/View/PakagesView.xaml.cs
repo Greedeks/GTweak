@@ -13,12 +13,12 @@ using System.Windows.Threading;
 
 namespace GTweak.View
 {
-    public partial class ApplicationsView : UserControl
+    public partial class PakagesView : UserControl
     {
         private TimeSpan time = TimeSpan.FromSeconds(0);
         private string applicationName = string.Empty;
 
-        public ApplicationsView()
+        public PakagesView()
         {
             InitializeComponent();
 
@@ -61,7 +61,7 @@ namespace GTweak.View
                 case MouseButtonState.Pressed when appImage.Source == (DrawingImage)FindResource("DA_DI_" + applicationName) && applicationName == "OneDrive":
                     {
                         appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
-                        new ViewNotification().Show("", (string)FindResource("title1_notification"), (string)FindResource("onedrive_notification"));
+                        new ViewNotification().Show("", "info", (string)FindResource("onedrive_notification"));
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { UninstallingPakages.ResetOneDriveAsync(); });

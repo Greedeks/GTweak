@@ -226,7 +226,7 @@ namespace GTweak.Utilities.Tweaks
             if (backgroundQueue.IsQueueCompleted)
             {
                 await Task.Delay(1000);
-                new ViewNotification().Show("", (string)Application.Current.Resources["title1_notification"], (string)Application.Current.Resources["clear_ram_notification"]);
+                new ViewNotification().Show("", "info", (string)Application.Current.Resources["clear_ram_notification"]);
             }
         }
     }

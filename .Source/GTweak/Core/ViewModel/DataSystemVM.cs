@@ -1,25 +1,13 @@
-﻿using GTweak.Utilities;
+﻿using GTweak.Core.Model;
+using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
 using System.Windows;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class ConfidentialityVM : ViewModelBase { }
-    internal class ApplicationsVM : ViewModelBase { }
-    internal class ServicesVM : ViewModelBase { }
-    internal class SystemVM : ViewModelBase { }
-    internal class MoreVM : ViewModelBase { }
-
-
-    internal class InterfaceVM : ViewModelBase
+    internal class DataSystemVM : ViewModelBase
     {
-        public bool IsBlockForWin10 => SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11");
-        public bool IsBlockWithoutLicense => WindowsLicense.IsWindowsActivated;
-    }
-
-    internal class InformationSystemVM : ViewModelBase
-    {
-        private readonly InformationSystemModel model;
+        private readonly DataSystemModel model;
 
         public string DisplayWindows
         {
@@ -105,9 +93,9 @@ namespace GTweak.Core.ViewModel
             set { Settings.IsHiddenIpAddress = value; OnPropertyChanged(); }
         }
 
-        public InformationSystemVM()
+        public DataSystemVM()
         {
-            model = new InformationSystemModel();
+            model = new DataSystemModel();
 
             DisplayWindows = SystemData.СomputerСonfiguration.СonfigurationData["Windows"];
             DisplayNumberProcesses = new SystemData.MonitoringSystem().CountProcess.ToString();

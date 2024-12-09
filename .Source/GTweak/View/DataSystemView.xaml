@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GTweak.View.InformationSystemView"
+﻿<UserControl x:Class="GTweak.View.DataSystemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +10,7 @@
              d:DesignHeight="550" d:DesignWidth="1100"
              Style="{StaticResource LaunchPage}" Unloaded="Page_Unloaded" Loaded="Page_Loaded">
     <UserControl.DataContext>
-        <vm:InformationSystemVM />
+        <vm:DataSystemVM />
     </UserControl.DataContext>
 
     <Grid>
