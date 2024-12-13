@@ -50,12 +50,11 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(delegate
                     {
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
-                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); }) { IsBackground = true };
+                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetProcessorUsage(); }) { IsBackground = true };
                         _thread.Start();
                     });
                     backgroundQueue.QueueCompleted(delegate
                     {
-                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().CountProcess.ToString(); }) { IsBackground = true };
                         Application.Current.Dispatcher.Invoke(AnimationProgressBars);
 
                         if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
@@ -87,7 +86,7 @@ namespace GTweak.View
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
                     From = CPULoad.Value,
-                    To = SystemData.MonitoringSystem.CpuUsage,
+                    To = SystemData.MonitoringSystem.PercentageProcessorUsage,
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
@@ -98,7 +97,7 @@ namespace GTweak.View
                 doubleAnim = new DoubleAnimation()
                 {
                     From = RAMLoad.Value,
-                    To = new SystemData.MonitoringSystem().RamUsage,
+                    To = new SystemData.MonitoringSystem().GetMemoryUsage(),
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
@@ -176,11 +175,11 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetCpuUsage(); }) { IsBackground = true };
-
-            RAMLoad.Value = new SystemData.MonitoringSystem().RamUsage;
-            CPULoad.Value = SystemData.MonitoringSystem.CpuUsage;
-
+            Parallel.Invoke(delegate
+            {
+                CPULoad.Value = SystemData.MonitoringSystem.PercentageProcessorUsage;
+                RAMLoad.Value = new SystemData.MonitoringSystem().GetMemoryUsage();
+            });
         }
     }
 }

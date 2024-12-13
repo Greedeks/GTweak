@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Management;
 using System.Net;
 using System.Net.Http;
@@ -19,7 +18,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class SystemData
     {
-        internal struct ProfileData
+        internal sealed class ProfileData
         {
             internal static ImageSource GetProfileImage()
             {
@@ -45,8 +44,10 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        internal struct MonitoringSystem
+        internal class MonitoringSystem
         {
+            internal static int PercentageProcessorUsage = 1;
+
             [StructLayout(LayoutKind.Sequential)]
             private struct PerformanceInformation
             {
@@ -65,11 +66,6 @@ namespace GTweak.Utilities.Tweaks
                 internal int ProcessCount;
                 internal int ThreadCount;
             }
-
-            internal readonly int CountProcess => GetCountProcess();
-            internal static int CpuUsage = 1;
-            internal readonly int RamUsage => GetRamUsage();
-
 
             [DllImport("psapi.dll", SetLastError = true)]
             [return: MarshalAs(UnmanagedType.Bool)]
@@ -91,29 +87,29 @@ namespace GTweak.Utilities.Tweaks
                     return -1;
             }
 
-            internal readonly int GetCountProcess()
+            internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
+
+            internal async void GetProcessorUsage()
             {
-                Process[] countProcess = Process.GetProcesses();
-                return countProcess.Length;
+                PerformanceCounter cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
+                cpuCounter.NextValue();
+                await Task.Delay(1000);
+                PercentageProcessorUsage = (int)cpuCounter.NextValue();
             }
 
-            internal readonly void GetCpuUsage()
-            {
-                Parallel.Invoke(async () =>
-                {
-                    PerformanceCounter cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
-                    cpuCounter.NextValue();
-                    await Task.Delay(1000);
-                    CpuUsage = (int)cpuCounter.NextValue();
-                });
-            }
-
-            internal readonly int GetRamUsage() => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
+            internal int GetMemoryUsage() => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
         }
 
-        internal sealed class СomputerСonfiguration
+        internal class СomputerСonfiguration
         {
-            internal static string WindowsClientVersion { get; set; } = string.Empty;
+            internal sealed class ClientInternetProtocol
+            {
+                [JsonProperty("query")]
+                internal string Ip { get; set; }
+
+                [JsonProperty("countryCode")]
+                internal string Country { get; set; }
+            }
 
             /// <summary>
             /// No connection problems - [0];
@@ -122,6 +118,8 @@ namespace GTweak.Utilities.Tweaks
             /// Connection limited - [3].
             /// </summary>
             internal static byte ConnectionStatus = 1;
+
+            internal static string WindowsClientVersion { get; set; } = string.Empty;
 
             internal static readonly Dictionary<string, string> СonfigurationData = new Dictionary<string, string>()
             {
@@ -137,7 +135,7 @@ namespace GTweak.Utilities.Tweaks
                 {"UserIpAddress",  (string)Application.Current.Resources["connection_lose_systemInformation"] }
             };
 
-            internal void GetСonfigurationComputer()
+            internal void GetConfiguration()
             {
                 Parallel.Invoke(delegate
                 {
@@ -228,14 +226,6 @@ namespace GTweak.Utilities.Tweaks
                });
             }
 
-            internal sealed class ClientInternetProtocol
-            {
-                [JsonProperty("query")]
-                internal string Ip { get; set; }
-
-                [JsonProperty("countryCode")]
-                internal string Country { get; set; }
-            }
 
             internal static bool IsNetworkAvailable()
             {
@@ -300,41 +290,6 @@ namespace GTweak.Utilities.Tweaks
                         СonfigurationData["UserIpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                     }
                 });
-            }
-        }
-
-        internal sealed class UtilityСonfiguration
-        {
-            internal static bool IsNeedUpdate { get; set; } = false;
-            internal static string DownloadVersion { get; set; } = string.Empty;
-
-            internal sealed class GitVersionUtility
-            {
-                [JsonProperty("tag_name")]
-                internal string СurrentVersion { get; set; }
-            }
-
-            internal void CheckingUpdate()
-            {
-                if (!Settings.IsСheckingUpdate)
-                    return;
-
-                if (!(WebRequest.Create("https://api.github.com/repos/greedeks/gtweak/releases/latest") is HttpWebRequest webRequest))
-                    return;
-
-                webRequest.ContentType = "application/json";
-                webRequest.UserAgent = "Nothing";
-
-                using StreamReader sreader = new StreamReader(webRequest.GetResponse().GetResponseStream());
-                string DataAsJson = sreader.ReadToEnd();
-                GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
-
-
-                if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(Settings.currentRelease) > 0)
-                {
-                    IsNeedUpdate = true;
-                    DownloadVersion = gitVersionUtility.СurrentVersion;
-                }
             }
         }
     }

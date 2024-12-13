@@ -122,7 +122,7 @@ namespace GTweak
             };
             doubleAnim.Completed += async delegate
             {
-                if (SystemData.UtilityСonfiguration.IsNeedUpdate && Settings.IsСheckingUpdate)
+                if (UpdatingUtility.IsNeedUpdate && Settings.IsСheckingUpdate)
                 {
                     await Task.Delay(500);
                     new UpdateWindow().ShowDialog();

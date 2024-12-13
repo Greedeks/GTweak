@@ -78,7 +78,7 @@ namespace GTweak.Core.ViewModel
         public int SetBlurValue
         {
             get => model.BlurValue;
-            set { model.BlurValue = value; OnPropertyChanged("SetBlurValue"); }
+            set { model.BlurValue = value; OnPropertyChanged(); }
         }
 
         public Visibility SetVisibility
@@ -98,7 +98,7 @@ namespace GTweak.Core.ViewModel
             model = new DataSystemModel();
 
             DisplayWindows = SystemData.СomputerСonfiguration.СonfigurationData["Windows"];
-            DisplayNumberProcesses = new SystemData.MonitoringSystem().CountProcess.ToString();
+            DisplayNumberProcesses = new SystemData.MonitoringSystem().GetNumberRunningProcesses;
 
             DisplayBios = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["BIOS"]) ? SystemData.СomputerСonfiguration.СonfigurationData["BIOS"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
             DisplayMotherBr = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"]) ? SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
