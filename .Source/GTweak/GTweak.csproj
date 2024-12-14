@@ -266,7 +266,7 @@
     <Compile Include="Utilities\Helpers\TakingOwnership.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
     <Compile Include="Utilities\Helpers\INIManager.cs" />
-    <Compile Include="Utilities\UpdatingUtility.cs" />
+    <Compile Include="Utilities\SearchUpdates.cs" />
     <Compile Include="Utilities\ViewNotification.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />

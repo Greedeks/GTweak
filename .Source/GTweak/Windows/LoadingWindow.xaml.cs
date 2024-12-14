@@ -52,7 +52,7 @@ namespace GTweak.Windows
                 new Settings().CheckingTempFiles,
                 new WindowsLicense().LicenseStatus,
                 new SystemData.СomputerСonfiguration().GetConfiguration,
-                new UpdatingUtility().CheckingUpdate,
+                new SearchUpdates().StartСhecking,
                 new UninstallingPakages().ViewInstalledPackages,
                 new UninstallingPakages().CheckingForLocalAccount,
                 new SystemTweaks().ViewNetshState,

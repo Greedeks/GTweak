@@ -15,7 +15,7 @@ namespace GTweak.Windows
         {
             InitializeComponent();
             CurrentVerison.Text = Settings.currentRelease;
-            DownloadVersion.Text = NewVerison.Text = UpdatingUtility.DownloadVersion;
+            DownloadVersion.Text = NewVerison.Text = SearchUpdates.DownloadVersion;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)

@@ -4,7 +4,7 @@ using System.Net;
 
 namespace GTweak.Utilities
 {
-    internal class UpdatingUtility
+    internal sealed class SearchUpdates
     {
         internal class GitVersionUtility
         {
@@ -15,7 +15,7 @@ namespace GTweak.Utilities
         internal static bool IsNeedUpdate { get; set; } = false;
         internal static string DownloadVersion { get; set; } = string.Empty;
 
-        internal void CheckingUpdate()
+        internal void StartСhecking()
         {
             if (!Settings.IsСheckingUpdate)
                 return;

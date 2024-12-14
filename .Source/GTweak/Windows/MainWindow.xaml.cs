@@ -5,6 +5,7 @@ using GTweak.Windows;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -122,7 +123,7 @@ namespace GTweak
             };
             doubleAnim.Completed += async delegate
             {
-                if (UpdatingUtility.IsNeedUpdate && Settings.IsСheckingUpdate)
+                if (SearchUpdates.IsNeedUpdate && Settings.IsСheckingUpdate)
                 {
                     await Task.Delay(500);
                     new UpdateWindow().ShowDialog();
@@ -202,18 +203,12 @@ namespace GTweak
         private void BtnContats_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Image btnConcat = (Image)sender;
-            switch (btnConcat.Uid)
+            Process.Start(btnConcat.Uid switch
             {
-                case "git":
-                    Process.Start("https://github.com/Greedeks");
-                    break;
-                case "tg":
-                    Process.Start("https://t.me/Greedeks");
-                    break;
-                case "steam":
-                    Process.Start("https://steamcommunity.com/id/greedeks/");
-                    break;
-            }
+                "git" => "https://github.com/Greedeks",
+                "tg" => "https://t.me/Greedeks",
+                _ => "https://steamcommunity.com/id/greedeks/",
+            });
         }
         #endregion
     }
