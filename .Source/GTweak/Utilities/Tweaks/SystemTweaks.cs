@@ -382,32 +382,29 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload");
                     break;
                 case "TglButton7":
-                    byte[] _dataTime;
-                    byte[] _dataState;
+                    byte[] dataTime, dataState;
 
                     if (isChoose)
                     {
-                        _dataTime = new byte[] { 0xFF, 0xFF, 0xFF, 0xFF };
-                        _dataState = Encoding.Unicode.GetBytes("\0\0");
+                        dataTime = new byte[] { 0xFF, 0xFF, 0xFF, 0xFF };
+                        dataState = Encoding.Unicode.GetBytes("\0\0");
                     }
                     else
                     {
-                        _dataTime = new byte[] { 0x0a, 0x00, 0x00, 0x00 };
-                        _dataState = new byte[] { 0x03, 0x00, 0x00, 0x00 };
+                        dataTime = new byte[] { 0x0a, 0x00, 0x00, 0x00 };
+                        dataState = new byte[] { 0x03, 0x00, 0x00, 0x00 };
                     }
                     try
                     {
                         RegistryKey registrykey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}", true);
-
-                        foreach (string Keyname in registrykey.GetSubKeyNames())
+                        foreach (string KeyName in registrykey.GetSubKeyNames())
                         {
-                            RegistryKey keyView = registrykey?.OpenSubKey(Keyname);
+                            RegistryKey keyView = registrykey?.OpenSubKey(KeyName);
                             if (keyView?.GetValue("DriverDesc")?.ToString() == "Realtek High Definition Audio")
                             {
-                                RegistryKey keychange = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}\" + Keyname + @"\PowerSettings", true);
-                                keychange?.SetValue("ConservationIdleTime", _dataTime, RegistryValueKind.Binary);
-                                keychange?.SetValue("IdlePowerState", _dataState, RegistryValueKind.Binary);
-                                keychange?.SetValue("PerformanceIdleTime", _dataTime, RegistryValueKind.Binary);
+                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "ConservationIdleTime", dataTime, RegistryValueKind.Binary);
+                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "IdlePowerState", dataState, RegistryValueKind.Binary);
+                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "PerformanceIdleTime", dataTime, RegistryValueKind.Binary);
                             }
                         }
                     }
@@ -696,7 +693,7 @@ namespace GTweak.Utilities.Tweaks
 
                             Process.Start(new ProcessStartInfo()
                             {
-                                Arguments = $"/c timeout /t 10 && del {pathTempFile}",
+                                Arguments = $"/c timeout /t 10 && rd /s /q {UsePath.FileLocation}",
                                 WindowStyle = ProcessWindowStyle.Hidden,
                                 CreateNoWindow = true,
                                 FileName = "cmd.exe"
@@ -705,19 +702,17 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else
                     {
-                        string _activePowerScheme = @"Microsoft:PowerPlan\\{" + Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes").GetValue("ActivePowerScheme").ToString() + "}";
+                        string activeScheme = @"Microsoft:PowerPlan\\{" + Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes").GetValue("ActivePowerScheme").ToString() + "}";
 
                         Parallel.Invoke(() =>
                         {
-                            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + _activePowerScheme + "'").Get())
+                            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + activeScheme + "'").Get())
                                 serchScheme = Convert.ToString(managementObj["InstanceID"]);
                         });
 
-                        serchScheme = Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value;
-
                         using (_powercfg)
                         {
-                            _powercfg.StartInfo.Arguments = $"/setactive {serchScheme}";
+                            _powercfg.StartInfo.Arguments = $"/setactive {Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value}";
                             _powercfg.Start();
                         }
                     }
