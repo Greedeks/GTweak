@@ -95,9 +95,9 @@ namespace GTweak.Utilities.Tweaks
                 waitingWindow.Close();
 
                 if (IsWindowsActivated)
-                    new ViewNotification().Show("restart", "warn", (string)Application.Current.Resources["successactivate_notification"]);
+                    new ViewNotification(300).Show("restart", "warn", (string)Application.Current.Resources["successactivate_notification"]);
                 else
-                    new ViewNotification().Show("", "warn", (string)Application.Current.Resources["notsuccessactivate_notification"]);
+                    new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessactivate_notification"]);
             }
 
         }

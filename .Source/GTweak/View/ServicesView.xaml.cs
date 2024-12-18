@@ -33,15 +33,14 @@ namespace GTweak.View
                 new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }
 
-        private async void TglButton_ChangedState(object sender, EventArgs e)
+        private void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             Parallel.Invoke(() => ServicesTweaks.UseServices(toggleButton.Name, toggleButton.State));
 
-            new ViewNotification().Show("restart");
+            new ViewNotification(300).Show("restart");
 
-            await Task.Delay(500);
-            Parallel.Invoke(() => new ServicesTweaks().ViewServices(this));
+            Parallel.Invoke(async delegate { await Task.Delay(500); new ServicesTweaks().ViewServices(this); });
         }
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)

@@ -620,6 +620,7 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton15":
                     BlockWindowsUpdate(isChoose);
+                    ChangeAccessUpdateFolders(isChoose);
 
                     using (BackgroundWorker backgroundWorker = new BackgroundWorker())
                     {
@@ -662,7 +663,6 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
                     }
-                    ChangeAccessUpdateFolders(isChoose);
                     break;
                 case "TglButton16":
                     if (isChoose)

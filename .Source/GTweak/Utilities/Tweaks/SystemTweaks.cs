@@ -419,7 +419,7 @@ namespace GTweak.Utilities.Tweaks
                         else
                             new WindowsDefender().Enable();
                     };
-                    backgroundWorker.RunWorkerCompleted += delegate { isTweakWorkingAntivirus = false; new ViewNotification().Show("restart"); };
+                    backgroundWorker.RunWorkerCompleted += delegate { isTweakWorkingAntivirus = false; new ViewNotification(300).Show("restart"); };
                     backgroundWorker.RunWorkerAsync();
                     BlockWDefender(isChoose);
                     break;

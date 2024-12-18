@@ -30,7 +30,6 @@ namespace GTweak.Utilities
             string DataAsJson = sreader.ReadToEnd();
             GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
 
-
             if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(Settings.currentRelease) > 0)
             {
                 IsNeedUpdate = true;

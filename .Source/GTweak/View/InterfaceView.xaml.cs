@@ -56,7 +56,7 @@ namespace GTweak.View
                 new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }
 
-        private async void TglButton_ChangedState(object sender, EventArgs e)
+        private void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             Parallel.Invoke(() => InterfaceTweaks.UseInterface(toggleButton.Name, toggleButton.State));
@@ -73,16 +73,15 @@ namespace GTweak.View
                 case "TglButton12":
                 case "TglButton26":
                 case "TglButton27":
-                    new ViewNotification().Show("logout");
+                    new ViewNotification(300).Show("logout");
                     break;
                 case "TglButton22":
                 case "TglButton20":
-                    new ViewNotification().Show("restart");
+                    new ViewNotification(300).Show("restart");
                     break;
             }
 
-            await Task.Delay(500);
-            Parallel.Invoke(() => new InterfaceTweaks().ViewInterface(this));
+            Parallel.Invoke(async delegate { await Task.Delay(500); new InterfaceTweaks().ViewInterface(this); });
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

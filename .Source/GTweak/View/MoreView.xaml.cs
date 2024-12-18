@@ -39,11 +39,11 @@ namespace GTweak.View
                 {
                     try { RecoveryPoint.Create((string)FindResource("textpoint_more")); }
                     catch { new ViewNotification().Show("", "warn", (string)FindResource("notsuccessfulpoint_notification")); }
-                    finally { new ViewNotification().Show("", "info", (string)FindResource("successpoint_notification")); };
+                    finally { new ViewNotification(300).Show("", "info", (string)FindResource("successpoint_notification")); };
                 };
                 backgroundWorker.RunWorkerCompleted += delegate
                 {
-                    new ViewNotification().Show("", "info", (string)FindResource("successpoint_notification"));
+                    new ViewNotification(300).Show("", "info", (string)FindResource("successpoint_notification"));
                 };
                 backgroundWorker.RunWorkerAsync();
             }
@@ -70,7 +70,7 @@ namespace GTweak.View
                 };
                 backgroundWorker.RunWorkerCompleted += delegate
                 {
-                    new ViewNotification().Show("", "info", (string)FindResource("disable_recovery_notification"));
+                    new ViewNotification(300).Show("", "info", (string)FindResource("disable_recovery_notification"));
                 };
                 backgroundWorker.RunWorkerAsync();
             }

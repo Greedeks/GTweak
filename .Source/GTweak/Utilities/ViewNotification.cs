@@ -7,6 +7,9 @@ namespace GTweak.Utilities
     internal sealed class ViewNotification
     {
         private static bool isAlreadyLaunch = false;
+        private readonly int msec = default;
+
+        internal ViewNotification(int delay = 100) => msec = delay;
 
         internal void Show(string action, string tittle = "", string content = "")
         {
@@ -34,7 +37,7 @@ namespace GTweak.Utilities
                             TextNotice = content,
                             ActionNotice = action,
                         };
-                        await Task.Delay(200);
+                        await Task.Delay(msec);
                         notificationWindow.Show();
                         notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
                     });
