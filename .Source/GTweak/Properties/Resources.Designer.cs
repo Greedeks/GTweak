@@ -73,16 +73,6 @@ namespace GTweak.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static byte[] GTweak {
-            get {
-                object obj = ResourceManager.GetObject("GTweak", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
         internal static byte[] hosts {
             get {
                 object obj = ResourceManager.GetObject("hosts", resourceCulture);
@@ -91,12 +81,11 @@ namespace GTweak.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
+        ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
         /// </summary>
-        internal static byte[] Sound {
+        internal static System.IO.UnmanagedMemoryStream Sound {
             get {
-                object obj = ResourceManager.GetObject("Sound", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("Sound", resourceCulture);
             }
         }
         

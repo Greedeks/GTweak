@@ -5,7 +5,6 @@ using GTweak.Windows;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +23,8 @@ namespace GTweak
             BtnUpdate.StateNA = Settings.IsСheckingUpdate;
             BtnTopMost.StateNA = Topmost = Settings.IsTopMost;
             BtnSoundNtn.IsChecked = Settings.IsPlayingSound;
-            SliderVolume.Value = Settings.VolumeNotification;
+            Settings.WinmmMethods.waveOutGetVolume(IntPtr.Zero, out uint CurrentVolume);
+            SliderVolume.Value = (ushort)(CurrentVolume & 0x0000ffff) / (ushort.MaxValue / 100);
             LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;
             ThemeSelectionMenu.SelectedIndex = Settings.Theme switch
             {
@@ -152,7 +152,7 @@ namespace GTweak
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
-            Parallel.Invoke(() => { Settings.ChangingParameters(SliderVolume.Value, "Volume"); });
+            Settings.WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) << 16));
         }
 
         private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

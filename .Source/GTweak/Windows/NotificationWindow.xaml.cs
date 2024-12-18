@@ -2,10 +2,10 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
@@ -15,7 +15,6 @@ namespace GTweak.Windows
     {
         private readonly DispatcherTimer timer;
         private TimeSpan time = TimeSpan.FromSeconds(3);
-        private readonly MediaPlayer _mediaPlayer = new MediaPlayer();
 
         private string clickAction = string.Empty;
         internal string TitleNotice { set => TitleSet.Text = value; get => TitleSet.Text; }
@@ -25,8 +24,6 @@ namespace GTweak.Windows
         public NotificationWindow()
         {
             InitializeComponent();
-
-            ImageBody.Source ??= (ImageSource)new ImageSourceConverter().ConvertFromString(UsePath.Icon);
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -63,9 +60,8 @@ namespace GTweak.Windows
         {
             if (Settings.IsPlayingSound)
             {
-                _mediaPlayer.Open(new Uri(UsePath.Sound));
-                _mediaPlayer.Volume = Settings.VolumeNotification / 100.0f;
-                _mediaPlayer.Play();
+                using SoundPlayer notificationSound = new SoundPlayer(Properties.Resources.Sound);
+                notificationSound.Play();
             }
 
             switch (ActionNotice)

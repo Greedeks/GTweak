@@ -256,6 +256,11 @@
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Model\DataSystemModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\BlockRunTweaker.cs" />
     <Compile Include="Utilities\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\TaskSchedulerManager.cs" />
@@ -493,11 +498,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -509,9 +509,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Resources\Blank.gz" />
-    <None Include="Resources\GTweak.gz" />
     <None Include="Resources\hosts.gz" />
-    <None Include="Resources\Sound.gz" />
     <None Include="Resources\Ultimate Performance.pow.gz" />
     <Resource Include="Assets\Font\Jura-Medium.ttf" />
     <None Include="app.manifest" />
@@ -554,6 +552,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Sound.wav" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
