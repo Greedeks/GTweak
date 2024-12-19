@@ -26,15 +26,15 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                switch (SystemData.СomputerСonfiguration.ConnectionStatus)
+                switch (SystemData.СomputerСonfiguration.CurrentConnection)
                 {
-                    case 1:
+                    case SystemData.СomputerСonfiguration.ConnectionStatus.Lose:
                         SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_lose_systemInformation");
                         break;
-                    case 2:
+                    case SystemData.СomputerСonfiguration.ConnectionStatus.Block:
                         SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_block_systemInformation");
                         break;
-                    case 3:
+                    case SystemData.СomputerСonfiguration.ConnectionStatus.Limited:
                         SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
                         break;
                 }
@@ -75,7 +75,7 @@ namespace GTweak.View
         #region Animations
         private void AnimationProgressBars()
         {
-            Parallel.Invoke(delegate
+            Dispatcher.Invoke(() =>
             {
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
@@ -102,30 +102,34 @@ namespace GTweak.View
 
         private void AnimationPopup()
         {
-            PopupCopy.IsOpen = true;
-            DoubleAnimation doubleAnim = new DoubleAnimation()
+            Dispatcher.Invoke(() =>
             {
-                From = 0,
-                To = 0.9,
-                SpeedRatio = 9,
-                AutoReverse = true,
-                EasingFunction = new QuadraticEase(),
-                Duration = TimeSpan.FromSeconds(3),
-            };
-            doubleAnim.Completed += delegate { PopupCopy.IsOpen = false; };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
-            CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, doubleAnim);
+                PopupCopy.IsOpen = true;
 
-            doubleAnim = new DoubleAnimation()
-            {
-                From = -20,
-                To = -50,
-                SpeedRatio = 8,
-                EasingFunction = new QuadraticEase(),
-                Duration = TimeSpan.FromSeconds(3),
-            };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
-            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, doubleAnim);
+                DoubleAnimation opacityAnim = new DoubleAnimation()
+                {
+                    From = 0,
+                    To = 0.9,
+                    SpeedRatio = 9,
+                    AutoReverse = true,
+                    EasingFunction = new QuadraticEase(),
+                    Duration = TimeSpan.FromSeconds(3)
+                };
+                opacityAnim.Completed += delegate { PopupCopy.IsOpen = false; };
+                Timeline.SetDesiredFrameRate(opacityAnim, 400);
+                CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, opacityAnim);
+
+                DoubleAnimation offsetAnim = new DoubleAnimation()
+                {
+                    From = -20,
+                    To = -50,
+                    SpeedRatio = 8,
+                    EasingFunction = new QuadraticEase(),
+                    Duration = TimeSpan.FromSeconds(3)
+                };
+                Timeline.SetDesiredFrameRate(offsetAnim, 400);
+                PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, offsetAnim);
+            });
         }
         #endregion
 
@@ -169,11 +173,8 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Parallel.Invoke(delegate
-            {
-                CPULoad.Value = SystemData.MonitoringSystem.PercentageProcessorUsage;
-                RAMLoad.Value = new SystemData.MonitoringSystem().GetMemoryUsage();
-            });
+            CPULoad.Value = SystemData.MonitoringSystem.PercentageProcessorUsage;
+            RAMLoad.Value = new SystemData.MonitoringSystem().GetMemoryUsage();
         }
     }
 }

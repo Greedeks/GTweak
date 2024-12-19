@@ -122,21 +122,21 @@
                     <Grid Grid.Row="1">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
                             <TextBlock Text="{DynamicResource title_motherbr_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
-                            <TextBlock Text="{Binding [MotherBr].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Text="{Binding [Motherboard].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
                     </Grid>
 
                     <Grid Grid.Row="2">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
                             <TextBlock Text="{DynamicResource title_cpu_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
-                            <TextBlock Text="{Binding [Cpu].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Text="{Binding [Processor].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
                     </Grid>
 
                     <Grid Grid.Row="3">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
                             <TextBlock Text="{DynamicResource title_gpu_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
-                            <TextBlock Text="{Binding [Gpu].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Text="{Binding [Graphics].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
                     </Grid>
 
@@ -144,7 +144,7 @@
                     <Grid Grid.Row="4">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
                             <TextBlock Text="{DynamicResource title_ram_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
-                            <TextBlock Text="{Binding [Ram].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Text="{Binding [Memory].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -182,7 +182,7 @@
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
                             <TextBlock Text="{DynamicResource title_ip_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Name="IpAddress" Text="{Binding [Ip].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand">
+                                <TextBlock x:Name="IpAddress" Text="{Binding [IpAddress].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand">
                                     <TextBlock.Effect>
                                         <BlurEffect Radius="{Binding SetBlurValue}"/>
                                     </TextBlock.Effect>

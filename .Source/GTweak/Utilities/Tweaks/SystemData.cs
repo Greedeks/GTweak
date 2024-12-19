@@ -113,14 +113,15 @@ namespace GTweak.Utilities.Tweaks
                 [JsonProperty("countryCode")]
                 internal string Country { get; set; }
             }
+            internal enum ConnectionStatus
+            {
+                Available,
+                Lose,
+                Block,
+                Limited,
+            }
 
-            /// <summary>
-            /// No connection problems - [0];
-            /// Connection lose - [1];
-            /// Conection block - [2];
-            /// Connection limited - [3].
-            /// </summary>
-            internal static byte ConnectionStatus = 1;
+            internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
             internal static string WindowsClientVersion { get; set; } = string.Empty;
 
@@ -270,25 +271,25 @@ namespace GTweak.Utilities.Tweaks
                         catch
                         {
                             СonfigurationData["UserIpAddress"] = (string)Application.Current.Resources["limited_systemInformation"];
-                            ConnectionStatus = 3;
+                            CurrentConnection = ConnectionStatus.Limited;
                         }
                         finally
                         {
                             if (IPAddress.TryParse(clientInternetProtocol.Ip, out _) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
                             {
-                                ConnectionStatus = 0;
+                                CurrentConnection = ConnectionStatus.Available;
                                 СonfigurationData["UserIpAddress"] = clientInternetProtocol.Ip + " (" + clientInternetProtocol.Country + ")";
                             }
                             else
                             {
-                                ConnectionStatus = 2;
+                                CurrentConnection = ConnectionStatus.Block;
                                 СonfigurationData["UserIpAddress"] = (string)Application.Current.Resources["connection_block_systemInformation"];
                             }
                         }
                     }
                     else
                     {
-                        ConnectionStatus = 1;
+                        CurrentConnection = ConnectionStatus.Lose;
                         СonfigurationData["UserIpAddress"] = (string)Application.Current.Resources["connection_lose_systemInformation"];
                     }
                 });
