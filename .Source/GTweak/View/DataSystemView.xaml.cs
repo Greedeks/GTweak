@@ -3,7 +3,6 @@ using GTweak.Utilities;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,30 +46,25 @@ namespace GTweak.View
                 if (time.TotalSeconds % 2 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate
+                    await backgroundQueue.QueueTask(async delegate
                     {
                         Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
-                        Thread _thread = new Thread(() => { new SystemData.MonitoringSystem().GetProcessorUsage(); }) { IsBackground = true };
-                        _thread.Start();
+                        await SystemData.MonitoringSystem.GetProcessorUsage();
                     });
-                    backgroundQueue.QueueCompleted(delegate
+                    Application.Current.Dispatcher.Invoke(AnimationProgressBars);
+                    if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
                     {
-                        Application.Current.Dispatcher.Invoke(AnimationProgressBars);
-
-                        if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
-                        {
-                            DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
-                            doubleAnim.Completed += delegate { Parallel.Invoke(() => { Settings.ChangingParameters(false, "HiddenIP"); }); };
-                            Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
-                        }
-                    });
+                        DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
+                        doubleAnim.Completed += delegate { Parallel.Invoke(() => { Settings.ChangingParameters(false, "HiddenIP"); }); };
+                        Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                        IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
+                    }
                 }
                 else if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(delegate { SystemData.СomputerСonfiguration.GettingUserIP(); });
-                    backgroundQueue.QueueCompleted(delegate { DataContext = new DataSystemVM(); });
+                    DataContext = new DataSystemVM();
                 }
 
                 time = time.Add(TimeSpan.FromSeconds(+1));

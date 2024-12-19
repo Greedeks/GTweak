@@ -28,23 +28,14 @@ namespace GTweak.View
 
         private async void BtnRestorePoint_ClickButton(object sender, EventArgs e)
         {
-            if (RecoveryPoint.IsAlreadyPoint() == false)
+            if (await RecoveryPoint.IsAlreadyPointAsync() == false)
             {
                 new ViewNotification().Show("", "info", (string)FindResource("createpoint_notification"));
 
                 await Task.Delay(100);
 
                 using BackgroundWorker backgroundWorker = new BackgroundWorker();
-                backgroundWorker.DoWork += delegate
-                {
-                    try { RecoveryPoint.Create((string)FindResource("textpoint_more")); }
-                    catch { new ViewNotification().Show("", "warn", (string)FindResource("notsuccessfulpoint_notification")); }
-                    finally { new ViewNotification(300).Show("", "info", (string)FindResource("successpoint_notification")); };
-                };
-                backgroundWorker.RunWorkerCompleted += delegate
-                {
-                    new ViewNotification(300).Show("", "info", (string)FindResource("successpoint_notification"));
-                };
+                backgroundWorker.DoWork += delegate { RecoveryPoint.Create((string)FindResource("textpoint_more")); };
                 backgroundWorker.RunWorkerAsync();
             }
             else

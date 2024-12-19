@@ -39,9 +39,10 @@ namespace GTweak
         #region Button Title/Animation Window
         private void SettingsMenuAnimation()
         {
-            Parallel.Invoke(() =>
+            Dispatcher.Invoke(() =>
             {
                 Storyboard storyboard = new Storyboard();
+
                 DoubleAnimation rotateAnimation = new DoubleAnimation()
                 {
                     From = 0.0,
@@ -50,7 +51,8 @@ namespace GTweak
                     EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(2)
                 };
-                DoubleAnimation animation = new DoubleAnimation()
+
+                DoubleAnimation widthAnimation = new DoubleAnimation()
                 {
                     From = SettingsMenu.Width != 400 ? 0 : 400,
                     To = SettingsMenu.Width != 400 ? 400 : 0,
@@ -58,13 +60,16 @@ namespace GTweak
                     EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(2)
                 };
-                Timeline.SetDesiredFrameRate(animation, 400);
+
                 Timeline.SetDesiredFrameRate(rotateAnimation, 400);
+                Timeline.SetDesiredFrameRate(widthAnimation, 400);
+
                 Storyboard.SetTarget(rotateAnimation, ImageSettings);
                 Storyboard.SetTargetProperty(rotateAnimation, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
+
                 storyboard.Children.Add(rotateAnimation);
                 storyboard.Begin();
-                SettingsMenu.BeginAnimation(WidthProperty, animation);
+                SettingsMenu.BeginAnimation(WidthProperty, widthAnimation);
             });
         }
 

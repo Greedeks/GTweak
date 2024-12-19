@@ -83,7 +83,9 @@ namespace GTweak.Windows
             }
 
             Rect primaryMonitorArea = SystemParameters.WorkArea;
+
             Top = primaryMonitorArea.Bottom - Height - 10;
+            Left = primaryMonitorArea.Right - Width - 10;
 
             DoubleAnimationUsingKeyFrames doubleAnimKeyFrames = new DoubleAnimationUsingKeyFrames();
 
@@ -111,9 +113,9 @@ namespace GTweak.Windows
                 Duration = TimeSpan.FromSeconds(0.8)
             };
 
-            Left = primaryMonitorArea.Right - Width - 10;
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 400);
+
             BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
             BeginAnimation(OpacityProperty, doubleAnim);
         }

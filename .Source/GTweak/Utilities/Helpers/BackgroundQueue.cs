@@ -33,10 +33,16 @@ namespace GTweak.Utilities.Helpers
             }
         }
 
-        internal void QueueCompleted(Action action)
+        internal Task QueueCompleted(Action action)
         {
-            if (previousTask.IsCompleted)
-                action();
+            lock (key)
+            {
+                previousTask = previousTask.ContinueWith(t => action(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default);
+                return previousTask;
+            }
         }
     }
 }

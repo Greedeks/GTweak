@@ -222,11 +222,7 @@ namespace GTweak.Utilities.Tweaks
         {
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate { ClearFileSystemCache(true); EmptyWorkingSetFunction(); ClearTempSystemCache(); });
-            backgroundQueue.QueueCompleted(async delegate
-            {
-                await Task.Delay(1000);
-                new ViewNotification().Show("", "info", (string)Application.Current.Resources["clear_ram_notification"]);
-            });
+            new ViewNotification(500).Show("", "info", (string)Application.Current.Resources["clear_ram_notification"]);
         }
     }
 }

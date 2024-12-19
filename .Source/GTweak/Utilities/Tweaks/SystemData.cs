@@ -87,17 +87,20 @@ namespace GTweak.Utilities.Tweaks
                     return -1;
             }
 
+            internal int GetMemoryUsage() => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
+
             internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
 
-            internal async void GetProcessorUsage()
+            internal static async Task GetProcessorUsage()
             {
-                PerformanceCounter cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
-                cpuCounter.NextValue();
-                await Task.Delay(1000);
-                PercentageProcessorUsage = (int)cpuCounter.NextValue();
+                await Task.Run(async () =>
+                {
+                    using PerformanceCounter cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
+                    cpuCounter.NextValue();
+                    await Task.Delay(1000);
+                    PercentageProcessorUsage = (int)cpuCounter.NextValue();
+                });
             }
-
-            internal int GetMemoryUsage() => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
         }
 
         internal class СomputerСonfiguration
@@ -225,7 +228,6 @@ namespace GTweak.Utilities.Tweaks
                    СonfigurationData["NetAdapter"] = СonfigurationData["NetAdapter"].TrimEnd('\n');
                });
             }
-
 
             internal static bool IsNetworkAvailable()
             {

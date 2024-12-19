@@ -10,12 +10,30 @@ namespace GTweak.Utilities.Helpers
         internal TypewriterAnimation(string textToAnimate, TextBlock textBlock, TimeSpan timeSpan)
         {
             if (!(textBlock.FindName(textBlock.Name) is TextBlock)) return;
-            Storyboard storyBoard = new Storyboard()
+
+            Storyboard storyBoard = new Storyboard
             {
                 FillBehavior = FillBehavior.HoldEnd
             };
 
-            StringAnimationUsingKeyFrames stringAnimationUsingKeyFrames = new StringAnimationUsingKeyFrames()
+            StringAnimationUsingKeyFrames stringAnimation = StringAnimation(textToAnimate, timeSpan);
+
+            Storyboard.SetTargetName(stringAnimation, textBlock.Name);
+            Storyboard.SetTargetProperty(stringAnimation, new PropertyPath(TextBlock.TextProperty));
+            storyBoard.Children.Add(stringAnimation);
+
+            DoubleAnimation opacityAnimation = OpacityAnimation(timeSpan);
+            Storyboard.SetTargetName(opacityAnimation, textBlock.Name);
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
+            storyBoard.Children.Add(opacityAnimation);
+
+            textBlock.BeginStoryboard(storyBoard);
+            storyBoard.Remove(textBlock);
+        }
+
+        private StringAnimationUsingKeyFrames StringAnimation(string textToAnimate, TimeSpan timeSpan)
+        {
+            StringAnimationUsingKeyFrames stringAnimation = new StringAnimationUsingKeyFrames
             {
                 Duration = new Duration(timeSpan)
             };
@@ -23,21 +41,22 @@ namespace GTweak.Utilities.Helpers
             string temp = string.Empty;
             foreach (char data in textToAnimate)
             {
-                DiscreteStringKeyFrame discreteStringKeyFrame = new DiscreteStringKeyFrame
-                {
-                    KeyTime = KeyTime.Paced
-                };
                 temp += data;
-                discreteStringKeyFrame.Value = temp;
-                stringAnimationUsingKeyFrames.KeyFrames.Add(discreteStringKeyFrame);
+                DiscreteStringKeyFrame keyFrame = new DiscreteStringKeyFrame
+                {
+                    KeyTime = KeyTime.Paced,
+                    Value = temp
+                };
+                stringAnimation.KeyFrames.Add(keyFrame);
             }
 
-            Timeline.SetDesiredFrameRate(stringAnimationUsingKeyFrames, 400);
-            Storyboard.SetTargetName(stringAnimationUsingKeyFrames, textBlock.Name);
-            Storyboard.SetTargetProperty(stringAnimationUsingKeyFrames, new PropertyPath(TextBlock.TextProperty));
-            storyBoard.Children.Add(stringAnimationUsingKeyFrames);
+            Timeline.SetDesiredFrameRate(stringAnimation, 400);
+            return stringAnimation;
+        }
 
-            DoubleAnimation doubleAnim = new DoubleAnimation()
+        private DoubleAnimation OpacityAnimation(TimeSpan timeSpan)
+        {
+            DoubleAnimation opacityAnimation = new DoubleAnimation
             {
                 From = 0,
                 To = 1,
@@ -45,13 +64,8 @@ namespace GTweak.Utilities.Helpers
                 EasingFunction = new QuadraticEase()
             };
 
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
-            Storyboard.SetTargetName(doubleAnim, textBlock.Name);
-            Storyboard.SetTargetProperty(doubleAnim, new PropertyPath(UIElement.OpacityProperty));
-            storyBoard.Children.Add(doubleAnim);
-
-            textBlock.BeginStoryboard(storyBoard);
-            storyBoard.Remove(textBlock);
+            Timeline.SetDesiredFrameRate(opacityAnimation, 400);
+            return opacityAnimation;
         }
     }
 }

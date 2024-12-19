@@ -1,79 +1,24 @@
 ﻿using GTweak.Core.Model;
 using GTweak.Utilities;
 using GTweak.Utilities.Tweaks;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
+
 
 namespace GTweak.Core.ViewModel
 {
     internal class DataSystemVM : ViewModelBase
     {
         private readonly DataSystemModel model;
+        private ObservableCollection<DataSystemModel> collection;
 
-        public string DisplayWindows
+        public ObservableCollection<DataSystemModel> DisplayData
         {
-            get => model.WindowsDescriptions;
-            set { model.WindowsDescriptions = value; OnPropertyChanged(); }
+            get => collection;
+            set { collection = value; OnPropertyChanged(); }
         }
-
-        public string DisplayBios
-        {
-            get => model.BiosDescriptions;
-            set { model.BiosDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayMotherBr
-        {
-            get => model.MotherBrDescriptions;
-            set { model.MotherBrDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayCpu
-        {
-            get => model.CpuDescriptions;
-            set { model.CpuDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayGpu
-        {
-            get => model.GpuDescriptions;
-            set { model.GpuDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayRam
-        {
-            get => model.RamDescriptions;
-            set { model.RamDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayStorage
-        {
-            get => model.StorageDescriptions;
-            set { model.StorageDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayAudio
-        {
-            get => model.AudioDescriptions;
-            set { model.AudioDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayNetwork
-        {
-            get => model.NetworkDescriptions;
-            set { model.NetworkDescriptions = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayIpAddress
-        {
-            get => model.UserIpAddress;
-            set { model.UserIpAddress = value; OnPropertyChanged(); }
-        }
-
-        public string DisplayNumberProcesses
-        {
-            get => model.NumberProcesses;
-            set { model.NumberProcesses = value; OnPropertyChanged(); }
-        }
+        public DataSystemModel this[string name] => DisplayData.FirstOrDefault(d => d.ItemName == name);
 
         public int SetBlurValue
         {
@@ -97,19 +42,20 @@ namespace GTweak.Core.ViewModel
         {
             model = new DataSystemModel();
 
-            DisplayWindows = SystemData.СomputerСonfiguration.СonfigurationData["Windows"];
-            DisplayNumberProcesses = new SystemData.MonitoringSystem().GetNumberRunningProcesses;
-
-            DisplayBios = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["BIOS"]) ? SystemData.СomputerСonfiguration.СonfigurationData["BIOS"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
-            DisplayMotherBr = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"]) ? SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
-            DisplayCpu = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["CPU"]) ? SystemData.СomputerСonfiguration.СonfigurationData["CPU"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
-            DisplayGpu = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["GPU"]) ? SystemData.СomputerСonfiguration.СonfigurationData["GPU"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
-            DisplayRam = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["RAM"]) ? SystemData.СomputerСonfiguration.СonfigurationData["RAM"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
-            DisplayStorage = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["Storage"]) ? SystemData.СomputerСonfiguration.СonfigurationData["Storage"] : (string)Application.Current.Resources["no_device_information_systemInformatin"];
-            DisplayAudio = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["Audio"]) ? SystemData.СomputerСonfiguration.СonfigurationData["Audio"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
-            DisplayNetwork = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"]) ? SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"];
-
-            DisplayIpAddress = SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"];
+            DisplayData = new ObservableCollection<DataSystemModel>
+            {
+                 new DataSystemModel { ItemName = "Windows", Data = SystemData.СomputerСonfiguration.СonfigurationData["Windows"] },
+                 new DataSystemModel { ItemName = "Processes", Data = new SystemData.MonitoringSystem().GetNumberRunningProcesses },
+                 new DataSystemModel { ItemName = "Bios", Data = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["BIOS"]) ? SystemData.СomputerСonfiguration.СonfigurationData["BIOS"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
+                 new DataSystemModel { ItemName = "MotherBr", Data =  !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"]) ? SystemData.СomputerСonfiguration.СonfigurationData["MotherBr"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
+                 new DataSystemModel { ItemName = "Cpu", Data = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["CPU"]) ? SystemData.СomputerСonfiguration.СonfigurationData["CPU"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
+                 new DataSystemModel { ItemName = "Gpu", Data = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["GPU"]) ? SystemData.СomputerСonfiguration.СonfigurationData["GPU"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"] },
+                 new DataSystemModel { ItemName = "Ram", Data = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["RAM"]) ? SystemData.СomputerСonfiguration.СonfigurationData["RAM"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
+                 new DataSystemModel { ItemName = "Storage", Data =  !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["Storage"]) ? SystemData.СomputerСonfiguration.СonfigurationData["Storage"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
+                 new DataSystemModel { ItemName = "Audio", Data = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["Audio"]) ? SystemData.СomputerСonfiguration.СonfigurationData["Audio"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"] },
+                 new DataSystemModel { ItemName = "Network", Data = !string.IsNullOrEmpty(SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"]) ? SystemData.СomputerСonfiguration.СonfigurationData["NetAdapter"] : (string)Application.Current.Resources["driver_not_installed_systemInformatin"] },
+                 new DataSystemModel { ItemName = "Ip", Data = SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] }
+            };
 
             if (Settings.IsHiddenIpAddress & SystemData.СomputerСonfiguration.ConnectionStatus == 0)
             {

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -17,12 +18,12 @@ namespace GTweak.Utilities.Tweaks
         private static readonly ManagementClass RestorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
         private static ManagementBaseObject InParams;
         private static bool isWorkingCreatePoint = false;
-        private static string resultRead = string.Empty;
+        private static string output = string.Empty;
 
-        internal static bool IsAlreadyPoint()
+        internal static async Task<bool> IsAlreadyPointAsync()
         {
-            StartPowerShell(@"Get-ComputerRestorePoint | Where-Object {$_.Description -ne 'Точка созданная с помощью GTweak' -and $_.Description -ne 'A point created with a GTweak'} | Select-Object EventType | ft -hide");
-            return resultRead.Contains("100");
+            await StartPowerShellAsync(@"Get-ComputerRestorePoint | Where-Object {$_.Description -ne 'Точка созданная с помощью GTweak' -and $_.Description -ne 'A point created with a GTweak'} | Select-Object EventType | ft -hide");
+            return output.Contains("100");
         }
 
 
@@ -65,22 +66,31 @@ namespace GTweak.Utilities.Tweaks
 
             isWorkingCreatePoint = true;
 
-            EnablePoint();
+            try
+            {
+                EnablePoint();
 
-            if (StartPowerShell(@"Get-ComputerRestorePoint | Where-Object {$_.Description -eq 'Точка созданная с помощью GTweak' -or $_.Description -eq 'A point created with a GTweak'} | Select-Object SequenceNumber | ft -hide") != string.Empty)
-                SRRemoveRestorePoint(Convert.ToInt32(resultRead.Trim()));
+                await StartPowerShellAsync(@"Get-ComputerRestorePoint | Where-Object {$_.Description -eq 'Точка созданная с помощью GTweak' -or $_.Description -eq 'A point created with a GTweak'} | Select-Object SequenceNumber | ft -hide");
 
-            InParams = RestorePoint.GetMethodParameters("CreateRestorePoint");
-            InParams["Description"] = description;
-            InParams["EventType"] = 100;
-            InParams["RestorePointType"] = 12;
-            RestorePoint.InvokeMethod("CreateRestorePoint", InParams, null);
+                if (!string.IsNullOrEmpty(output))
+                    SRRemoveRestorePoint(Convert.ToInt32(output.Trim()));
 
-            await Task.Delay(200);
+                InParams = RestorePoint.GetMethodParameters("CreateRestorePoint");
+                InParams["Description"] = description;
+                InParams["EventType"] = 100;
+                InParams["RestorePointType"] = 12;
+                RestorePoint.InvokeMethod("CreateRestorePoint", InParams, null);
 
-            RestorePoint.Dispose();
+                await Task.Delay(200);
 
-            isWorkingCreatePoint = false;
+                RestorePoint.Dispose();
+
+                isWorkingCreatePoint = false;
+
+                new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["successpoint_notification"]);
+            }
+            catch { new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]); }
+
         }
 
         internal static void Run()
@@ -140,31 +150,29 @@ namespace GTweak.Utilities.Tweaks
             DisableSR(UsePath.SystemDisk + @"\\");
         }
 
-        private static string StartPowerShell(string arguments)
+        private static async Task<string> StartPowerShellAsync(string arguments)
         {
-            Parallel.Invoke(() =>
+            var startInfo = new ProcessStartInfo
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = @"powershell.exe",
-                    Arguments = arguments,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
+                FileName = "powershell.exe",
+                Arguments = arguments,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
 
-                Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
+            using Process process = new Process { StartInfo = startInfo };
 
-                process.Start();
+            process.Start();
 
-                resultRead = process.StandardOutput.ReadToEnd();
+            Task<string> outputTask = process.StandardOutput.ReadToEndAsync();
 
-                process.Close();
-                process.Dispose();
-            });
+            await Task.WhenAll(outputTask);
 
-            return resultRead;
+            output = await outputTask;
+
+            return output;
         }
     }
 }

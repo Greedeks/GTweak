@@ -48,22 +48,31 @@ namespace GTweak.View
             {
                 case MouseButtonState.Pressed when appImage.Source == (DrawingImage)FindResource("A_DI_" + applicationName):
                     {
-                        appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
+                        UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
+                        UpdateViewStatePakages();
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { UninstallingPakages.DeletingPackage(applicationName); });
-                        backgroundQueue.QueueCompleted(UpdateViewStatePakages);
+
+                        await Task.Delay(2000);
+                        UpdateViewStatePakages();
+                        UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
                         break;
                     }
 
                 case MouseButtonState.Pressed when appImage.Source == (DrawingImage)FindResource("DA_DI_" + applicationName) && applicationName == "OneDrive":
                     {
-                        appImage.Source = (DrawingImage)FindResource("DI_Sandtime");
                         new ViewNotification().Show("", "info", (string)FindResource("onedrive_notification"));
 
+                        UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
+                        UpdateViewStatePakages();
+
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { UninstallingPakages.ResetOneDriveAsync(); });
-                        backgroundQueue.QueueCompleted(UpdateViewStatePakages);
+                        await backgroundQueue.QueueTask(delegate { UninstallingPakages.ResetOneDrive(); });
+
+                        await Task.Delay(2000);
+                        UpdateViewStatePakages();
+                        UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
                         break;
                     }
             }

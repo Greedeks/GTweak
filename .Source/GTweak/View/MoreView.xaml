@@ -33,7 +33,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <UserControl:Card ImageSource="{StaticResource DI_LicenseWindows}" Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btntext_licens_more}" ClickButton="BtnLicenseWindows_ClickButton"/>
+                        <UserControl:Card ImageSource ="{StaticResource DI_LicenseWindows}" Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btntext_licens_more}" ClickButton="BtnLicenseWindows_ClickButton"/>
                     </Grid>
 
                     <Grid Grid.Column="1">

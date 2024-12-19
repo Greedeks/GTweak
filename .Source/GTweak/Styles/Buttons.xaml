@@ -23,7 +23,7 @@
             <Trigger Property="Visibility" Value="Visible">
                 <Setter Property="RenderTransform">
                     <Setter.Value>
-                        <TranslateTransform X="0" Y="10"/>
+                        <TranslateTransform X="0" Y="0"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -40,7 +40,7 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="{x:Type Button}" x:Key="BtnDefault">
         <Setter Property="Foreground" Value="{StaticResource Color_Background_Dark}"/>
         <Setter Property="Background" Value="{StaticResource Color_Accent}"/>

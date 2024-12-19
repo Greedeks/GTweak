@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -137,15 +136,13 @@ namespace GTweak.Utilities.Tweaks
         }
 
 
-        internal async static void DeletingPackage(string packageName)
+        internal static void DeletingPackage(string packageName)
         {
             if (packageName == "OneDrive")
                 DeletedOneDrive();
 
             else
             {
-                IsAppUnavailable[packageName] = true;
-
                 using (Process process = new Process())
                 {
                     process.StartInfo.UseShellExecute = false;
@@ -172,9 +169,6 @@ namespace GTweak.Utilities.Tweaks
                     process.WaitForExit(1000);
 
                     UserPackages = UserPackages.Replace(packageName, string.Empty);
-
-                    await Task.Delay(8000);
-                    IsAppUnavailable[packageName] = false;
                 }
 
                 switch (packageName)
@@ -200,9 +194,9 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        internal async static void DeletedOneDrive()
+        internal static void DeletedOneDrive()
         {
-            IsAppUnavailable["OneDrive"] = true;
+
 
             using (Process process = new Process())
             {
@@ -221,8 +215,6 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                 }
 
-                await Task.Delay(8000);
-                IsAppUnavailable["OneDrive"] = false;
             }
 
             string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
@@ -240,10 +232,8 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        internal async static void ResetOneDriveAsync()
+        internal static void ResetOneDrive()
         {
-            IsAppUnavailable["OneDrive"] = true;
-
             using (Process process = new Process())
             {
                 process.StartInfo.UseShellExecute = false;
@@ -253,14 +243,7 @@ namespace GTweak.Utilities.Tweaks
                 process.StartInfo.FileName = "cmd.exe";
                 process.StartInfo.Arguments = @"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe";
                 process.Start();
-
-                process.WaitForExit(7000);
-
-                if (!process.HasExited)
-                {
-                    await Task.Delay(500);
-                    IsAppUnavailable["OneDrive"] = false;
-                }
+                process.WaitForExit(1000);
             }
 
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");

@@ -12,7 +12,7 @@
         Title="GTweak" 
         Height="630" Width="1100"  
         MaxHeight="630" MaxWidth="1100" MinHeight="630" MinWidth="1100" 
-        Background="Transparent" ResizeMode="CanMinimize" 
+        Background="Transparent"
         WindowStyle="None" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True" UseLayoutRounding="True"
