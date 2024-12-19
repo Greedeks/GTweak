@@ -50,7 +50,7 @@ namespace GTweak.Windows
                 delegate { Settings.PID = TrustedInstaller.StartTrustedInstallerService(); },
                 new Settings().СheckingParameters,
                 new WindowsLicense().LicenseStatus,
-                new SystemData.СomputerСonfiguration().GetConfiguration,
+                new SystemСonfiguration().GetConfiguration,
                 new SearchUpdates().StartСhecking,
                 new UninstallingPakages().ViewInstalledPackages,
                 new UninstallingPakages().CheckingForLocalAccount,

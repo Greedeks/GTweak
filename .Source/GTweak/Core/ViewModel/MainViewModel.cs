@@ -17,9 +17,9 @@ namespace GTweak.Core.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ImageSource DisplayProfileAvatar => SystemData.ProfileData.GetProfileImage() ?? Application.Current.Resources["DI_AvatarProfile"] as DrawingImage;
+        public ImageSource DisplayProfileAvatar => SystemСonfiguration.GetProfileImage() ?? Application.Current.Resources["DI_AvatarProfile"] as DrawingImage;
 
-        public string DisplayProfileName => SystemData.ProfileData.GetProfileName();
+        public string DisplayProfileName => SystemСonfiguration.GetProfileName();
 
         public string DisplayTweakVersion => (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 

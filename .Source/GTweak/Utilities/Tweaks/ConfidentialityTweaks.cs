@@ -187,7 +187,7 @@ namespace GTweak.Utilities.Tweaks
                 confidentialityV.TglButton16.StateNA = false;
 
 
-            if (SystemData.СomputerСonfiguration.СonfigurationData["GPU"].ToLower().Contains("nvidia"))
+            if (SystemСonfiguration.СonfigurationData["GPU"].ToLower().Contains("nvidia"))
             {
                 if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", null) == null ||
                     Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", string.Empty).ToString() != "4" ||

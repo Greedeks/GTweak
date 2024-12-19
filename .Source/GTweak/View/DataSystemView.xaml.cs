@@ -26,16 +26,16 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                switch (SystemData.СomputerСonfiguration.CurrentConnection)
+                switch (SystemСonfiguration.CurrentConnection)
                 {
-                    case SystemData.СomputerСonfiguration.ConnectionStatus.Lose:
-                        SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_lose_systemInformation");
+                    case SystemСonfiguration.ConnectionStatus.Lose:
+                        SystemСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_lose_systemInformation");
                         break;
-                    case SystemData.СomputerСonfiguration.ConnectionStatus.Block:
-                        SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_block_systemInformation");
+                    case SystemСonfiguration.ConnectionStatus.Block:
+                        SystemСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_block_systemInformation");
                         break;
-                    case SystemData.СomputerСonfiguration.ConnectionStatus.Limited:
-                        SystemData.СomputerСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
+                    case SystemСonfiguration.ConnectionStatus.Limited:
+                        SystemСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
                         break;
                 }
                 DataContext = new DataSystemVM();
@@ -48,8 +48,8 @@ namespace GTweak.View
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate
                     {
-                        Parallel.Invoke(SystemData.СomputerСonfiguration.UpdatingDeviceData);
-                        await SystemData.MonitoringSystem.GetProcessorUsage();
+                        Parallel.Invoke(SystemСonfiguration.GetUpdatingDevices);
+                        await MonitoringSystem.GetProcessorUsage();
                     });
                     Application.Current.Dispatcher.Invoke(AnimationProgressBars);
                     if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
@@ -63,7 +63,7 @@ namespace GTweak.View
                 else if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate { SystemData.СomputerСonfiguration.GettingUserIP(); });
+                    await backgroundQueue.QueueTask(delegate { SystemСonfiguration.GetUserIpAddress(); });
                     DataContext = new DataSystemVM();
                 }
 
@@ -80,7 +80,7 @@ namespace GTweak.View
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
                     From = CPULoad.Value,
-                    To = SystemData.MonitoringSystem.PercentageProcessorUsage,
+                    To = MonitoringSystem.PercentageProcessorUsage,
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
@@ -91,7 +91,7 @@ namespace GTweak.View
                 doubleAnim = new DoubleAnimation()
                 {
                     From = RAMLoad.Value,
-                    To = new SystemData.MonitoringSystem().GetMemoryUsage(),
+                    To = new MonitoringSystem().GetMemoryUsage(),
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
@@ -173,8 +173,8 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            CPULoad.Value = SystemData.MonitoringSystem.PercentageProcessorUsage;
-            RAMLoad.Value = new SystemData.MonitoringSystem().GetMemoryUsage();
+            CPULoad.Value = MonitoringSystem.PercentageProcessorUsage;
+            RAMLoad.Value = new MonitoringSystem().GetMemoryUsage();
         }
     }
 }

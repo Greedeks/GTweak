@@ -54,10 +54,10 @@ namespace GTweak.Utilities
             Parallel.Invoke(() =>
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
-                    SystemData.СomputerСonfiguration.WindowsClientVersion = Convert.ToString(managementObj["Caption"]); ;
+                    SystemСonfiguration.WindowsClientVersion = Convert.ToString(managementObj["Caption"]); ;
             });
 
-            if (SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("11") || SystemData.СomputerСonfiguration.WindowsClientVersion.Contains("10")) return;
+            if (SystemСonfiguration.WindowsClientVersion.Contains("11") || SystemСonfiguration.WindowsClientVersion.Contains("10")) return;
             new MessageWindow(true).ShowDialog();
         }
     }
