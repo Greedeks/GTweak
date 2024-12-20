@@ -34,7 +34,7 @@
             <Grid HorizontalAlignment="Left" Margin="50,20,0,0">
                 <Ellipse Height="90" Width="90" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
 
-                <xrpb:RadialProgressBar x:Name="CPULoad" Value="1" Maximum="100" Width="100" Height="100" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <xrpb:RadialProgressBar x:Name="CPULoad" Value="0" Maximum="100" Width="100" Height="100" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <xrpb:RadialProgressBar.Foreground>
                         <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
                             <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>

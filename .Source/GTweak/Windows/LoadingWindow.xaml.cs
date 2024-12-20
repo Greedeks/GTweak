@@ -38,7 +38,7 @@ namespace GTweak.Windows
             backgroundWorker.RunWorkerAsync();
         }
 
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private async void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             for (byte i = 0; i <= 100; i++)
             {
@@ -56,6 +56,8 @@ namespace GTweak.Windows
                 new UninstallingPakages().CheckingForLocalAccount,
                 new SystemTweaks().ViewNetshState,
                 new SystemTweaks().ViewBluetoothStatus);
+
+            await MonitoringSystem.GetTotalProcessorUsage();
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

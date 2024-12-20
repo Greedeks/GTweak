@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
 
-        internal static int GetProcessorUsage { get; private set; }
+        internal static int GetProcessorUsage = default;
 
         internal static async Task<int> GetTotalProcessorUsage()
         {

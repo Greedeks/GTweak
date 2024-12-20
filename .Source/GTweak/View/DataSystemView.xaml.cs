@@ -72,6 +72,7 @@ namespace GTweak.View
             timer.Start();
 
             RAMLoad.Value = new MonitoringSystem().GetMemoryUsage();
+            CPULoad.Value = MonitoringSystem.GetProcessorUsage;
         }
 
         #region Animations
