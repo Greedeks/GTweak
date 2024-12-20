@@ -44,7 +44,6 @@
     <v:String x:Key="createpoint_notification">Cоздания точки восстановления займет некоторое время</v:String>
     <v:String x:Key="notsuccessfulpoint_notification">Что-то пошло не так, не удалось создать точку восстановления</v:String>
     <v:String x:Key="successpoint_notification">Точка восстановления успешно создана</v:String>
-    <v:String x:Key="readypoint_notification">Необходимая точка для восстановления уже создана</v:String>
     <v:String x:Key="notsuccessfulrecovery_notification">Что-то пошло не так, не удалось запустить восстановления</v:String>
     <v:String x:Key="readyactivate_notification">Ваша операционная система не нуждается в активации</v:String>
     <v:String x:Key="activatewin_notification">Процесс активации Windows начался, это займет некоторое время</v:String>

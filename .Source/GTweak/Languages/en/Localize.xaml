@@ -44,7 +44,6 @@
     <v:String x:Key="createpoint_notification">It will take some time to create a recovery point</v:String>
     <v:String x:Key="notsuccessfulpoint_notification">Something went wrong, it was not possible to create a restore point</v:String>
     <v:String x:Key="successpoint_notification">The recovery point has been successfully created</v:String>
-    <v:String x:Key="readypoint_notification">The necessary point for recovery has already been created</v:String>
     <v:String x:Key="notsuccessfulrecovery_notification">Something went wrong, recovery could not be started</v:String>
     <v:String x:Key="readyactivate_notification">Your operating system does not need to be activated</v:String>
     <v:String x:Key="activatewin_notification">The Windows activation process has started, it will take some time</v:String>

@@ -16,16 +16,9 @@ namespace GTweak.Utilities.Tweaks
         [DllImport("srclient.dll")]
         private static extern int SRRemoveRestorePoint(int index);
         private static readonly ManagementClass RestorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
-        private static ManagementBaseObject InParams;
+        private static ManagementBaseObject InParams, OutParams;
         private static bool isWorkingCreatePoint = false;
         private static string output = string.Empty;
-
-        internal static async Task<bool> IsAlreadyPointAsync()
-        {
-            await StartPowerShellAsync(@"Get-ComputerRestorePoint | Where-Object {$_.Description -ne 'Точка созданная с помощью GTweak' -and $_.Description -ne 'A point created with a GTweak'} | Select-Object EventType | ft -hide");
-            return output.Contains("100");
-        }
-
 
         private static void EnablePoint()
         {
@@ -65,12 +58,13 @@ namespace GTweak.Utilities.Tweaks
             if (isWorkingCreatePoint) return;
 
             isWorkingCreatePoint = true;
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency", 0, RegistryValueKind.DWord);
 
             try
             {
                 EnablePoint();
 
-                await StartPowerShellAsync(@"Get-ComputerRestorePoint | Where-Object {$_.Description -eq 'Точка созданная с помощью GTweak' -or $_.Description -eq 'A point created with a GTweak'} | Select-Object SequenceNumber | ft -hide");
+                await StartPowerShellAsync(@"Get-ComputerRestorePoint | Where-Object {$_.Description -like '*GTweak*'} | Select-Object SequenceNumber | ft -hide");
 
                 if (!string.IsNullOrEmpty(output))
                     SRRemoveRestorePoint(Convert.ToInt32(output.Trim()));
@@ -79,18 +73,17 @@ namespace GTweak.Utilities.Tweaks
                 InParams["Description"] = description;
                 InParams["EventType"] = 100;
                 InParams["RestorePointType"] = 12;
-                RestorePoint.InvokeMethod("CreateRestorePoint", InParams, null);
+                OutParams = RestorePoint.InvokeMethod("CreateRestorePoint", InParams, null);
 
-                await Task.Delay(200);
-
-                RestorePoint.Dispose();
+                if ((uint)OutParams["ReturnValue"] == 0)
+                    new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["successpoint_notification"]);
+                else
+                    new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]);
 
                 isWorkingCreatePoint = false;
-
-                new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["successpoint_notification"]);
+                RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
             }
             catch { new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]); }
-
         }
 
         internal static void Run()
