@@ -72,7 +72,7 @@ namespace GTweak.Utilities.Tweaks
            { "Storage", string.Empty },
            { "Audio", string.Empty },
            { "NetAdapter", string.Empty },
-           
+
            { "UserIpAddress", Application.Current.Resources["connection_lose_systemInformation"].ToString() }
         };
 
