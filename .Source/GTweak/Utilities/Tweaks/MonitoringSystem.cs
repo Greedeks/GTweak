@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -7,8 +8,6 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class MonitoringSystem
     {
-        internal static int PercentageProcessorUsage = 1;
-
         [StructLayout(LayoutKind.Sequential)]
         private struct PerformanceInformation
         {
@@ -52,14 +51,17 @@ namespace GTweak.Utilities.Tweaks
 
         internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
 
-        internal static async Task GetProcessorUsage()
+        internal static int GetProcessorUsage { get; private set; }
+
+        internal static async Task<int> GetTotalProcessorUsage()
         {
-            await Task.Run(async () =>
+            return await Task.Run(async () =>
             {
                 using PerformanceCounter cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
                 cpuCounter.NextValue();
                 await Task.Delay(1000);
-                PercentageProcessorUsage = (int)cpuCounter.NextValue();
+                GetProcessorUsage = (int)cpuCounter.NextValue();
+                return GetProcessorUsage;
             });
         }
     }

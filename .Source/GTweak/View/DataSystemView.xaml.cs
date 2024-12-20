@@ -26,16 +26,16 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                switch (SystemСonfiguration.CurrentConnection)
+                switch (SystemDiagnostics.CurrentConnection)
                 {
-                    case SystemСonfiguration.ConnectionStatus.Lose:
-                        SystemСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_lose_systemInformation");
+                    case SystemDiagnostics.ConnectionStatus.Lose:
+                        SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_lose_systemInformation");
                         break;
-                    case SystemСonfiguration.ConnectionStatus.Block:
-                        SystemСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_block_systemInformation");
+                    case SystemDiagnostics.ConnectionStatus.Block:
+                        SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_block_systemInformation");
                         break;
-                    case SystemСonfiguration.ConnectionStatus.Limited:
-                        SystemСonfiguration.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
+                    case SystemDiagnostics.ConnectionStatus.Limited:
+                        SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
                         break;
                 }
                 DataContext = new DataSystemVM();
@@ -48,8 +48,8 @@ namespace GTweak.View
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate
                     {
-                        Parallel.Invoke(SystemСonfiguration.GetUpdatingDevices);
-                        await MonitoringSystem.GetProcessorUsage();
+                        Parallel.Invoke(SystemDiagnostics.GetUpdatingDevices);
+                        await MonitoringSystem.GetTotalProcessorUsage();
                     });
                     Application.Current.Dispatcher.Invoke(AnimationProgressBars);
                     if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
@@ -63,13 +63,15 @@ namespace GTweak.View
                 else if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate { SystemСonfiguration.GetUserIpAddress(); });
+                    await backgroundQueue.QueueTask(delegate { SystemDiagnostics.GetUserIpAddress(); });
                     DataContext = new DataSystemVM();
                 }
 
                 time = time.Add(TimeSpan.FromSeconds(+1));
             }, Application.Current.Dispatcher);
             timer.Start();
+
+            RAMLoad.Value = new MonitoringSystem().GetMemoryUsage();
         }
 
         #region Animations
@@ -80,7 +82,7 @@ namespace GTweak.View
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
                     From = CPULoad.Value,
-                    To = MonitoringSystem.PercentageProcessorUsage,
+                    To = MonitoringSystem.GetProcessorUsage,
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
@@ -170,11 +172,5 @@ namespace GTweak.View
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e) => timer.Stop();
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            CPULoad.Value = MonitoringSystem.PercentageProcessorUsage;
-            RAMLoad.Value = new MonitoringSystem().GetMemoryUsage();
-        }
     }
 }

@@ -273,7 +273,7 @@
     <Compile Include="Utilities\Helpers\INIManager.cs" />
     <Compile Include="Utilities\SearchUpdates.cs" />
     <Compile Include="Utilities\Tweaks\MonitoringSystem.cs" />
-    <Compile Include="Utilities\Tweaks\SystemСonfiguration.cs" />
+    <Compile Include="Utilities\Tweaks\SystemDiagnostics.cs" />
     <Compile Include="Utilities\ViewNotification.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />

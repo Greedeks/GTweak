@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal sealed class SystemСonfiguration
+    internal sealed class SystemDiagnostics
     {
         internal static ImageSource GetProfileImage()
         {
@@ -76,7 +76,7 @@ namespace GTweak.Utilities.Tweaks
            { "UserIpAddress", Application.Current.Resources["connection_lose_systemInformation"].ToString() }
         };
 
-        internal void GetConfiguration()
+        internal void GetHardwareData()
         {
             Parallel.Invoke(delegate
             {
@@ -167,7 +167,7 @@ namespace GTweak.Utilities.Tweaks
            });
         }
 
-        internal static bool IsNetworkAvailable()
+        private static bool IsNetworkAvailable()
         {
             try
             {

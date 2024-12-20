@@ -12,8 +12,8 @@ namespace GTweak.Utilities
             internal string СurrentVersion { get; set; }
         }
 
-        internal static bool IsNeedUpdate { get; set; } = false;
-        internal static string DownloadVersion { get; set; } = string.Empty;
+        internal static bool IsNeedUpdate { get; private set; } = false;
+        internal static string DownloadVersion { get; private set; } = string.Empty;
 
         internal void StartСhecking()
         {
