@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Tweaks;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {

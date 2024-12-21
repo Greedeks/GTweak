@@ -1,7 +1,7 @@
 ﻿using GTweak.Core.ViewModel;
-using GTweak.Utilities;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Tweaks;
 using System;
 using System.Threading.Tasks;
 using System.Windows;

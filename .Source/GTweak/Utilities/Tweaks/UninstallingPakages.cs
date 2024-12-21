@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;

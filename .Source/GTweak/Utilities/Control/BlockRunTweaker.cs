@@ -1,4 +1,4 @@
-﻿using GTweak.Utilities.Tweaks;
+﻿using GTweak.Utilities.Configuration;
 using GTweak.Windows;
 using System;
 using System.Diagnostics;
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities
+namespace GTweak.Utilities.Control
 {
     internal sealed class BlockRunTweaker
     {

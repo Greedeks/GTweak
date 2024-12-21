@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace GTweak.Utilities
+namespace GTweak.Utilities.Control
 {
     [StructLayout(LayoutKind.Sequential)]
     internal readonly struct UsePath

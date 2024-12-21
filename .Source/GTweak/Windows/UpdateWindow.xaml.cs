@@ -1,4 +1,4 @@
-﻿using GTweak.Utilities;
+﻿using GTweak.Utilities.Control;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;

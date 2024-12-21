@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using NetFwTypeLib;
 using System;
 using System.Collections.Generic;

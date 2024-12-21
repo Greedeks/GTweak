@@ -83,10 +83,8 @@
     <v:String x:Key="cmbox_dark_main">Тёмная</v:String>
     <v:String x:Key="cmbox_light_main">Светлая</v:String>
     <v:String x:Key="cmbox_system_main">Системная</v:String>
-    <v:String x:Key="text_saveconfig">Мои твики:</v:String>
     <v:String x:Key="btn_import">Импорт</v:String>
     <v:String x:Key="btn_export">Экспорт</v:String>
-    <v:String x:Key="text_selfremove">Удалить с устройства:</v:String>
     <v:String x:Key="btn_selfremove">Удалить</v:String>
     <!--#endregion-->
 
@@ -418,7 +416,7 @@
     <v:String x:Key="btntext_recovery_more">Восстановить</v:String>
     <v:String x:Key="textpoint_more">Точка созданная с помощью GTweak</v:String>
     <v:String x:Key="title_clear_more">Очистка памяти</v:String>
-    <v:String x:Key="text_clear_more">Очищает системный файловый кэш, чем увеличивает размер доступной памяти.</v:String>
+    <v:String x:Key="text_clear_more">Очищает кэш системных файлов в памяти компьютера временные файлы и кэш эскизов.</v:String>
     <v:String x:Key="btntext_clear_more">Очистить</v:String>
     <v:String x:Key="title_disablepoint_more">Отключить защиту</v:String>
     <v:String x:Key="text_disablepoint_more">Отключает точку восстановления системы, но учтите что ранее созданные удаляются.</v:String>

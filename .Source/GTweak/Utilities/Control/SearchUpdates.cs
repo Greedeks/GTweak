@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 
-namespace GTweak.Utilities
+namespace GTweak.Utilities.Control
 {
     internal sealed class SearchUpdates
     {

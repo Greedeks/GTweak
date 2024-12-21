@@ -83,10 +83,8 @@
     <v:String x:Key="cmbox_dark_main">Dark</v:String>
     <v:String x:Key="cmbox_light_main">Light</v:String>
     <v:String x:Key="cmbox_system_main">System</v:String>
-    <v:String x:Key="text_saveconfig">My tweaks:</v:String>
     <v:String x:Key="btn_import">Import</v:String>
     <v:String x:Key="btn_export">Export</v:String>
-    <v:String x:Key="text_selfremove">Delete from the device:</v:String>
     <v:String x:Key="btn_selfremove">Delete</v:String>
     <!--#endregion-->
 
@@ -418,7 +416,7 @@
     <v:String x:Key="btntext_recovery_more">Recover</v:String>
     <v:String x:Key="textpoint_more">A point created with a GTweak</v:String>
     <v:String x:Key="title_clear_more">Clearing the memory</v:String>
-    <v:String x:Key="text_clear_more">Clears the system file cache, which increases the size of available RAM.</v:String>
+    <v:String x:Key="text_clear_more">Clears the cache of system files in computer memory, temporary files and icon cache.</v:String>
     <v:String x:Key="btntext_clear_more">Clear</v:String>
     <v:String x:Key="title_disablepoint_more">Disable protection</v:String>
     <v:String x:Key="text_disablepoint_more">Disables the system restore point, but note that previously created ones are deleted.</v:String>

@@ -1,4 +1,6 @@
 ﻿using GTweak.Properties;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
@@ -427,7 +429,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton16":
                     static void LoggingServices(string valueState)
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {valueState} /f");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(Control.Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {valueState} /f");
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", int.Parse(valueState), RegistryValueKind.DWord);
                     }
 

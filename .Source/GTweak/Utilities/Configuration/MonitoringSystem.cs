@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Tweaks
+namespace GTweak.Utilities.Configuration
 {
     internal sealed class MonitoringSystem
     {

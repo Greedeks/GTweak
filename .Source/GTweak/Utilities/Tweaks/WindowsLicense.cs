@@ -1,4 +1,6 @@
-﻿using GTweak.Windows;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Control;
+using GTweak.Windows;
 using System.Diagnostics;
 using System.Management;
 using System.Text.RegularExpressions;

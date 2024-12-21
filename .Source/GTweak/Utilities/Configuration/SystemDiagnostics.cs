@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace GTweak.Utilities.Tweaks
+namespace GTweak.Utilities.Configuration
 {
     internal sealed class SystemDiagnostics
     {
