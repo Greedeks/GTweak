@@ -248,7 +248,7 @@
                                         </Button>
                                         <Button x:Name="BtnDelete" Style="{StaticResource BtnDefault}" Width="100" Height="55" Margin="10,0,0,0" Cursor="Hand" PreviewMouseLeftButtonUp="BtnDelete_PreviewMouseLeftButtonUp">
                                             <StackPanel Orientation="Vertical">
-                                                <Image Width="26" Height="26">
+                                                <Image Width="24" Height="24">
                                                     <Image.Style>
                                                         <Style TargetType="{x:Type Image}">
                                                             <Setter Property="Source" Value="{StaticResource DI_SelfRemove}"/>
