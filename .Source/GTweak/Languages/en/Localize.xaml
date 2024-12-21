@@ -186,9 +186,9 @@
 
     <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «The color of wet asphalt».</v:String>
     <v:String x:Key="TglButton2_description_interface">Will change the color of the tooltip in some programs from yellow to light blue «Azure».</v:String>
-    <v:String x:Key="TglButton3_description_interface">Tweak will reduce the size of the Collapse, Expand buttons, Close the windows by 20%. The buttons will become neater not only for the Explorer, but also for all windows, including images, browsers and other programs.</v:String>
+    <v:String x:Key="TglButton3_description_interface">The tweak will reduce the size of the Сollapse, Expand and close Buttons, making them less bulky. Resizes all windows, including Explorer, Windows Photos, browsers, and other programs you know.</v:String>
     <v:String x:Key="TglButton4_description_interface">Will accelerate the cursor flicker frequency, default value: 530. This tweak will change the value to 250.</v:String>
-    <v:String x:Key="TglButton5_description_interface">Tweak will make Scrollbar in windows, including browsers and programs, thinner by 17%.</v:String>
+    <v:String x:Key="TglButton5_description_interface">The tweak will make the Scrollbar thickness thinner in windows, including browsers and programs.</v:String>
     <v:String x:Key="TglButton6_description_interface">Tweak will disable/enable the transparency effect. Translucent windows and surfaces.</v:String>
     <v:String x:Key="TglButton7_description_interface">Changes the taskbar theme to light or dark. Attention, the screen may blink.</v:String>
     <v:String x:Key="TglButton8_description_interface">The tweak will change the explorer theme to light or dark, including browsers and other programs that support the device theme. Attention the screen may blink.</v:String>
@@ -373,9 +373,9 @@
     <v:String x:Key="TglButton14_description_system">This tweak includes support for a large file system cache. Increasing the size of the file system cache generally improves computer performance, but this in turn reduces the physical memory space available for applications and services.</v:String>
     <v:String x:Key="TglButton15_description_system">By default, Windows has a built-in mechanism to slow down startup programs. This solution works quite well on older computers with HDD, but on modern PCs with SSD unnecessarily slows down the system startup with programs.</v:String>
     <v:String x:Key="TglButton16_description_system">Tweak will disable the usage history for files and folders for the quick access toolbar.</v:String>
-    <v:String x:Key="TglButton17_description_system">The tweak will disable autorun for removable media that Windows Explorer instantly tries to open when connected to a computer.</v:String>
-    <v:String x:Key="TglButton18_description_system">Will add a slightly modified «Ultimate Performance» power supply circuit, or if available, simply switch to the existing power supply circuit.</v:String>
-    <v:String x:Key="TglButton19_description_system">If you don't need Bluetooth and you don't want to use Bluetooth devices. Then disable it, it will also remove the icon from the taskbar.</v:String>
+    <v:String x:Key="TglButton17_description_system">The tweak disables autorun for various removable media types connected to your computer that Explorer is trying to open. Thus, a program unknown to you will not open automatically on a medium that you are not sure of its reliability.</v:String>
+    <v:String x:Key="TglButton18_description_system">Adds the «Ultimate Performance» power supply circuit, or if available, simply switches to the existing power supply circuit. In addition, it unlocks the setting of the maximum processor frequency in the processor power management settings.</v:String>
+    <v:String x:Key="TglButton19_description_system">If you don't need Bluetooth and you don't want to use your devices via Bluetooth, then turn it off, and it will also remove the tray icon.</v:String>
     <v:String x:Key="TglButton20_description_system">The firewall allows you to allow or deny programs access to the Internet, as well as control traffic. Which makes it useful, if you intentionally want to and know what you're doing, then turn it off. And it is not recommended to do this.</v:String>
     <v:String x:Key="TglButton21_description_system">The game mode does not have much effect on powerful systems. However, if you have a lot of processes running in the background, then the mode ensures that background processes will not affect the operation of the game.</v:String>
     <v:String x:Key="TglButton22_description_system">A function for recording your games. By and large, it uses up the resources of your system. There are many better alternatives, and in addition, which do not open spontaneously.</v:String>
