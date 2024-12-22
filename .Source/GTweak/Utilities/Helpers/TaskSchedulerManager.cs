@@ -5,7 +5,7 @@ namespace GTweak.Utilities.Helpers
 {
     internal class TaskSchedulerManager
     {
-        internal bool IsTaskEnabled(string[] tasklist)
+        internal bool IsTaskEnabled(in string[] tasklist)
         {
             byte numberRunningTask = 0;
             using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())

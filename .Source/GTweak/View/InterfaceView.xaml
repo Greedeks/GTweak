@@ -77,9 +77,61 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Rectangle Fill="{StaticResource Color_Accent}" Width="900" Height="1" RadiusX="15" RadiusY="15" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <Border Background="{StaticResource Color_Accent}" Height="1" Width="900"  VerticalAlignment="Top" HorizontalAlignment="Center" CornerRadius="15"/>
                 <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescription}"/>
                 <TextBlock x:Name="TextViewColor" Style="{StaticResource Description}" Text="{DynamicResource textcolor_interface}" VerticalAlignment="Top" Foreground="#505050" Visibility="Hidden" Margin="0,28,0,0"/>
+                <StackPanel x:Name="PreviewFlick" Orientation="Horizontal" VerticalAlignment="Top"  Margin="0,28,0,0" HorizontalAlignment="Center" Visibility="Hidden">
+                    <StackPanel.Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Style.Triggers>
+                                <Trigger Property="Visibility" Value="Visible">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Border Background="{StaticResource Color_Highlighted}" Height="20" Width="1.2" Margin="0,0,10,0">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <Trigger Property="Visibility" Value="Visible">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard Timeline.DesiredFrameRate="400">
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" RepeatBehavior="Forever" AutoReverse="True" Duration="0:0:0.530" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                    <TextBlock Style="{StaticResource Description}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Text="{DynamicResource previewflick_interface}"/>
+                    <Border Background="{StaticResource Color_Highlighted}" Height="20" Width="1.2" Margin="10,0,0,0">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <Trigger Property="Visibility" Value="Visible">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" RepeatBehavior="Forever" AutoReverse="True" Duration="0:0:0.200"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </StackPanel>
             </Grid>
 
         </Grid>

@@ -58,17 +58,7 @@ namespace GTweak.Utilities.Helpers
             List<string> result = new List<string>();
 
             foreach (string data in temp)
-            {
-                switch (isGetKey)
-                {
-                    case true:
-                        result.Add(data.Substring(0, data.IndexOf("=", StringComparison.InvariantCulture)));
-                        break;
-                    case false:
-                        result.Add(data.Remove(0, data.IndexOf("=", StringComparison.InvariantCulture)).Substring(1));
-                        break;
-                }
-            }
+                result.Add(isGetKey ? data.Substring(0, data.IndexOf("=", StringComparison.InvariantCulture)) : data.Remove(0, data.IndexOf("=", StringComparison.InvariantCulture)).Substring(1));
 
             return result;
         }

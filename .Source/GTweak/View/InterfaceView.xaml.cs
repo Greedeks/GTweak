@@ -44,6 +44,8 @@ namespace GTweak.View
                     TextViewColor.Visibility = Visibility.Visible;
                     new TypewriterAnimation((string)FindResource("textcolor_interface"), TextViewColor, TimeSpan.FromMilliseconds(350));
                 }
+                else if (toggleButton.Name == "TglButton4")
+                    PreviewFlick.Visibility = Visibility.Visible;
 
             }
         }
@@ -52,6 +54,8 @@ namespace GTweak.View
         {
             if (TextViewColor.Visibility == Visibility.Visible)
                 TextViewColor.Visibility = Visibility.Hidden;
+            else if (PreviewFlick.Visibility == Visibility.Visible)
+                PreviewFlick.Visibility = Visibility.Hidden;
             if (TextDescription.Text != (string)FindResource("defaultDescription"))
                 new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
         }

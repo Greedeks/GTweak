@@ -183,16 +183,17 @@
     <v:String x:Key="tgl30_interface">Open «Quick Access» instead of «This PC»</v:String>
 
     <v:String x:Key="textcolor_interface">This is an example of a new color.</v:String>
+    <v:String x:Key="previewflick_interface">For a comparison</v:String>
 
     <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «The color of wet asphalt».</v:String>
     <v:String x:Key="TglButton2_description_interface">Will change the color of the tooltip in some programs from yellow to light blue «Azure».</v:String>
     <v:String x:Key="TglButton3_description_interface">The tweak will reduce the size of the Сollapse, Expand and close Buttons, making them less bulky. Resizes all windows, including Explorer, Windows Photos, browsers, and other programs you know.</v:String>
-    <v:String x:Key="TglButton4_description_interface">Will accelerate the cursor flicker frequency, default value: 530. This tweak will change the value to 250.</v:String>
+    <v:String x:Key="TglButton4_description_interface">The tweak accelerates the flicker frequency of the text cursor. By default, it is every 530 milliseconds.</v:String>
     <v:String x:Key="TglButton5_description_interface">The tweak will make the Scrollbar thickness thinner in windows, including browsers and programs.</v:String>
-    <v:String x:Key="TglButton6_description_interface">Tweak will disable/enable the transparency effect. Translucent windows and surfaces.</v:String>
+    <v:String x:Key="TglButton6_description_interface">Tweak will disable or enable the transparency effect. Translucent windows and surfaces.</v:String>
     <v:String x:Key="TglButton7_description_interface">Changes the taskbar theme to light or dark. Attention, the screen may blink.</v:String>
     <v:String x:Key="TglButton8_description_interface">The tweak will change the explorer theme to light or dark, including browsers and other programs that support the device theme. Attention the screen may blink.</v:String>
-    <v:String x:Key="TglButton9_description_interface">By default, additional context menu items appear with a delay of 400 ms. If you want it to be faster, you can reduce this delay to 20 ms.</v:String>
+    <v:String x:Key="TglButton9_description_interface">By default, additional context menu items appear with a delay of 400 milliseconds. If you want to go faster, you can reduce this delay.</v:String>
     <v:String x:Key="TglButton10_description_interface">By default, the Taskbar preview shows previews of running applications for too long. To make previews appear faster, apply this tweak.</v:String>
     <v:String x:Key="TglButton11_description_interface">Tweak will remove arrows from labels by replacing the arrow file.</v:String>
     <v:String x:Key="TglButton12_description_interface">Removing the too intuitive prefix-postfix for labels.</v:String>

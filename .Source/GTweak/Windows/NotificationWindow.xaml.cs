@@ -42,17 +42,21 @@ namespace GTweak.Windows
 
         private void ActionSelection_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && !string.IsNullOrEmpty(ActionNotice))
             {
-                switch (ActionNotice)
+                string arguments = ActionNotice switch
                 {
-                    case "logout":
-                        Process.Start("logoff");
-                        break;
-                    case "restart":
-                        Process.Start("shutdown", "/r /t 0");
-                        break;
-                }
+                    "logout" => @"/c logoff",
+                    _ => @"/c shutdown /r /t 0",
+                };
+
+                Process.Start(new ProcessStartInfo()
+                {
+                    Arguments = arguments,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
+                    FileName = "cmd.exe"
+                });
             }
         }
 

@@ -5,7 +5,7 @@ namespace GTweak.Utilities.Helpers
 {
     internal sealed class UnarchiveManager
     {
-        internal UnarchiveManager(string path, byte[] resource)
+        internal UnarchiveManager(in string path, in byte[] resource)
         {
             byte[] fileSize = default;
             using (MemoryStream fileOut = new MemoryStream(resource))

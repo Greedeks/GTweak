@@ -7,7 +7,7 @@ namespace GTweak.Utilities.Helpers
 {
     internal sealed class TypewriterAnimation
     {
-        internal TypewriterAnimation(string textToAnimate, TextBlock textBlock, TimeSpan timeSpan)
+        internal TypewriterAnimation(in string textToAnimate, in TextBlock textBlock, in TimeSpan timeSpan)
         {
             if (!(textBlock.FindName(textBlock.Name) is TextBlock)) return;
 
@@ -31,7 +31,7 @@ namespace GTweak.Utilities.Helpers
             storyBoard.Remove(textBlock);
         }
 
-        private StringAnimationUsingKeyFrames StringAnimation(string textToAnimate, TimeSpan timeSpan)
+        private StringAnimationUsingKeyFrames StringAnimation(in string textToAnimate, in TimeSpan timeSpan)
         {
             StringAnimationUsingKeyFrames stringAnimation = new StringAnimationUsingKeyFrames
             {
@@ -54,7 +54,7 @@ namespace GTweak.Utilities.Helpers
             return stringAnimation;
         }
 
-        private DoubleAnimation OpacityAnimation(TimeSpan timeSpan)
+        private DoubleAnimation OpacityAnimation(in TimeSpan timeSpan)
         {
             DoubleAnimation opacityAnimation = new DoubleAnimation
             {

@@ -183,16 +183,17 @@
     <v:String x:Key="tgl30_interface">Открывать «Быстрый доступ» вместо «Этот компьютер»</v:String>
 
     <v:String x:Key="textcolor_interface">Это пример нового цвета.</v:String>
+    <v:String x:Key="previewflick_interface">В качестве сравнения</v:String>
 
     <v:String x:Key="TglButton1_description_interface">Изменят цвет выделение курсором с синего на серый «Цвет мокрого асфальта».</v:String>
     <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки в некоторых программах с жёлтого на светло голубой «Небесная лазурь».</v:String>
     <v:String x:Key="TglButton3_description_interface">Твик уменьшит размер кнопок Свернуть, Развернуть, Закрыть делая их менее громоздкими. Изменяет размер для всех окон, включая Проводник, фотографии, браузеры и другие известные вам программы.</v:String>
-    <v:String x:Key="TglButton4_description_interface">Ускорит частоту мерцания курсора, по умолчанию значение: 530. Данный твик изменит значение на 250.</v:String>
+    <v:String x:Key="TglButton4_description_interface">Твик ускоряет частоту мерцания текстового курсора. По умолчанию она составляет каждые 530 миллисекунд.</v:String>
     <v:String x:Key="TglButton5_description_interface">Твик сделает тоньше толщину Scrollbar в окнах, включая браузеры и программы.</v:String>
-    <v:String x:Key="TglButton6_description_interface">Твик отключит/включит эффект прозрачности. Полупрозрачные окна и поверхности.</v:String>
+    <v:String x:Key="TglButton6_description_interface">Твик отключит или включит эффект прозрачности. Полупрозрачные окна и поверхности.</v:String>
     <v:String x:Key="TglButton7_description_interface">Изменяет тему панели задач на светлую или тёмную. Внимание может моргать экран.</v:String>
     <v:String x:Key="TglButton8_description_interface">Твик поменяет тему проводника на светлую или тёмную, включая браузеры и прочие программы поддерживающие тему устройства. Внимание может моргать экран.</v:String>
-    <v:String x:Key="TglButton9_description_interface">По умолчанию, дополнительные пункты контекстного меню появляются с задержкой 400 мс. Если вы хотите быстрее, можно эту задежку сократить до 20 мс.</v:String>
+    <v:String x:Key="TglButton9_description_interface">По умолчанию, дополнительные пункты контекстного меню появляются с задержкой 400 миллисекунд. Если вы хотите быстрее, можно эту задержку сократить.</v:String>
     <v:String x:Key="TglButton10_description_interface">По умолчанию, предпросмотр на Панели задач показывает превью запущенных приложений слишком долго. Чтобы превьюшки показывались быстрее, примените данный твик.</v:String>
     <v:String x:Key="TglButton11_description_interface">Твик позволит убрать стрелки с ярлыков с помощью подмены файла стрелки.</v:String>
     <v:String x:Key="TglButton12_description_interface">Удаление слишком интуитивного префикса-постфикса для ярлыков.</v:String>

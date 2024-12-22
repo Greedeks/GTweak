@@ -44,7 +44,7 @@ namespace GTweak.Utilities.Tweaks
 
 
             if (Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "CursorBlinkRate", null) == null ||
-                Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "CursorBlinkRate", string.Empty).ToString() != "250")
+                Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "CursorBlinkRate", string.Empty).ToString() == "530")
                 interfaceV.TglButton4.StateNA = true;
             else
                 interfaceV.TglButton4.StateNA = false;
@@ -442,7 +442,7 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton4":
                     if (isChoose)
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "CursorBlinkRate", "250", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "CursorBlinkRate", "200", RegistryValueKind.String);
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "CursorBlinkRate", "530", RegistryValueKind.String);
                     break;

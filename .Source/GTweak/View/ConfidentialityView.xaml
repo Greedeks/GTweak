@@ -62,7 +62,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Rectangle Fill="{StaticResource Color_Accent}" Width="900" Height="1" RadiusX="15" RadiusY="15" Margin="2" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <Border Background="{StaticResource Color_Accent}" Height="1" Width="900"  VerticalAlignment="Top" HorizontalAlignment="Center" CornerRadius="15"/>
                 <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescription}"/>
             </Grid>
 
