@@ -86,42 +86,45 @@ namespace GTweak.Windows
                     break;
             }
 
-            Rect primaryMonitorArea = SystemParameters.WorkArea;
-
-            Top = primaryMonitorArea.Bottom - Height - 10;
-            Left = primaryMonitorArea.Right - Width - 10;
-
-            DoubleAnimationUsingKeyFrames doubleAnimKeyFrames = new DoubleAnimationUsingKeyFrames();
-
-            EasingDoubleKeyFrame fromFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right)
+            Dispatcher.Invoke(() =>
             {
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
-                EasingFunction = new QuadraticEase()
-            };
+                Rect primaryMonitorArea = SystemParameters.WorkArea;
 
-            EasingDoubleKeyFrame toFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10)
-            {
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = new QuadraticEase()
-            };
+                Top = primaryMonitorArea.Bottom - Height - 10;
+                Left = primaryMonitorArea.Right - Width - 10;
 
-            doubleAnimKeyFrames.KeyFrames.Add(fromFrame);
-            doubleAnimKeyFrames.KeyFrames.Add(toFrame);
+                DoubleAnimationUsingKeyFrames doubleAnimKeyFrames = new DoubleAnimationUsingKeyFrames();
 
-            DoubleAnimation doubleAnim = new DoubleAnimation()
-            {
-                From = 0,
-                To = 1,
-                SpeedRatio = 3,
-                EasingFunction = new QuadraticEase(),
-                Duration = TimeSpan.FromSeconds(0.8)
-            };
+                EasingDoubleKeyFrame fromFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right)
+                {
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
+                    EasingFunction = new QuadraticEase()
+                };
 
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
-            Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 400);
+                EasingDoubleKeyFrame toFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10)
+                {
+                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
+                    EasingFunction = new QuadraticEase()
+                };
 
-            BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
-            BeginAnimation(OpacityProperty, doubleAnim);
+                doubleAnimKeyFrames.KeyFrames.Add(fromFrame);
+                doubleAnimKeyFrames.KeyFrames.Add(toFrame);
+
+                DoubleAnimation doubleAnim = new DoubleAnimation()
+                {
+                    From = 0,
+                    To = 1,
+                    SpeedRatio = 3,
+                    EasingFunction = new QuadraticEase(),
+                    Duration = TimeSpan.FromSeconds(0.8)
+                };
+
+                Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 400);
+
+                BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
+                BeginAnimation(OpacityProperty, doubleAnim);
+            });
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

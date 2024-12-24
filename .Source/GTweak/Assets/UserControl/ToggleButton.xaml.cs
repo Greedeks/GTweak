@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities.Helpers;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -70,65 +71,67 @@ namespace GTweak.Assets.UserControl
 
         private void AnimationToggle(bool isState, bool isSkipAnimation = false)
         {
-            ThicknessAnimationUsingKeyFrames thicknessAnimKeyFrames = new ThicknessAnimationUsingKeyFrames();
+            Dispatcher.Invoke(() => {
+                ThicknessAnimationUsingKeyFrames thicknessAnimKeyFrames = new ThicknessAnimationUsingKeyFrames();
 
-            if (isState && Dot.Margin != _rightSide)
-            {
-                EasingThicknessKeyFrame fromFrame = new EasingThicknessKeyFrame(_leftSide)
+                if (isState && Dot.Margin != _rightSide)
                 {
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0))
-                };
+                    EasingThicknessKeyFrame fromFrame = new EasingThicknessKeyFrame(_leftSide)
+                    {
+                        KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0))
+                    };
 
-                EasingThicknessKeyFrame toFrame = new EasingThicknessKeyFrame(_rightSide)
+                    EasingThicknessKeyFrame toFrame = new EasingThicknessKeyFrame(_rightSide)
+                    {
+                        KeyTime = isSkipAnimation ? KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)) : KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(150))
+                    };
+
+                    thicknessAnimKeyFrames.KeyFrames.Add(fromFrame);
+                    thicknessAnimKeyFrames.KeyFrames.Add(toFrame);
+                    Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 400);
+                    Dot.BeginAnimation(MarginProperty, thicknessAnimKeyFrames);
+
+                    BrushAnimation brushanimation = new BrushAnimation()
+                    {
+                        From = brushOffColor,
+                        To = brushOnColor,
+                        SpeedRatio = 1,
+                        Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(150)
+                    };
+                    Timeline.SetDesiredFrameRate(brushanimation, 400);
+                    Back.BeginAnimation(Shape.FillProperty, brushanimation);
+                    ToggleText.Style = (Style)FindResource("Text");
+                }
+
+                else if (!isState && Dot.Margin != _leftSide)
                 {
-                    KeyTime = isSkipAnimation ? KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)) : KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(100))
-                };
+                    EasingThicknessKeyFrame fromFrame = new EasingThicknessKeyFrame(_rightSide)
+                    {
+                        KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0))
+                    };
 
-                thicknessAnimKeyFrames.KeyFrames.Add(fromFrame);
-                thicknessAnimKeyFrames.KeyFrames.Add(toFrame);
-                Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 400);
-                Dot.BeginAnimation(MarginProperty, thicknessAnimKeyFrames);
+                    EasingThicknessKeyFrame toFrame = new EasingThicknessKeyFrame(_leftSide)
+                    {
+                        KeyTime = isSkipAnimation ? KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)) : KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(150))
+                    };
 
-                BrushAnimation brushanimation = new BrushAnimation()
-                {
-                    From = brushOffColor,
-                    To = brushOnColor,
-                    SpeedRatio = 1,
-                    Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(100)
-                };
-                Timeline.SetDesiredFrameRate(brushanimation, 400);
-                Back.BeginAnimation(Shape.FillProperty, brushanimation);
-                ToggleText.Style = (Style)FindResource("Text");
-            }
+                    thicknessAnimKeyFrames.KeyFrames.Add(fromFrame);
+                    thicknessAnimKeyFrames.KeyFrames.Add(toFrame);
+                    Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 400);
+                    Dot.BeginAnimation(MarginProperty, thicknessAnimKeyFrames);
 
-            else if (!isState && Dot.Margin != _leftSide)
-            {
-                EasingThicknessKeyFrame fromFrame = new EasingThicknessKeyFrame(_rightSide)
-                {
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0))
-                };
-
-                EasingThicknessKeyFrame toFrame = new EasingThicknessKeyFrame(_leftSide)
-                {
-                    KeyTime = isSkipAnimation ? KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)) : KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(100))
-                };
-
-                thicknessAnimKeyFrames.KeyFrames.Add(fromFrame);
-                thicknessAnimKeyFrames.KeyFrames.Add(toFrame);
-                Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 400);
-                Dot.BeginAnimation(MarginProperty, thicknessAnimKeyFrames);
-
-                BrushAnimation brushanimation = new BrushAnimation()
-                {
-                    From = brushOnColor,
-                    To = brushOffColor,
-                    SpeedRatio = 1,
-                    Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(100)
-                };
-                Timeline.SetDesiredFrameRate(brushanimation, 400);
-                Back.BeginAnimation(Shape.FillProperty, brushanimation);
-                ToggleText.Style = (Style)FindResource("Text_In");
-            }
+                    BrushAnimation brushanimation = new BrushAnimation()
+                    {
+                        From = brushOnColor,
+                        To = brushOffColor,
+                        SpeedRatio = 1,
+                        Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(150)
+                    };
+                    Timeline.SetDesiredFrameRate(brushanimation, 400);
+                    Back.BeginAnimation(Shape.FillProperty, brushanimation);
+                    ToggleText.Style = (Style)FindResource("Text_In");
+                }
+            });
         }
     }
 }
