@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace GTweak.Utilities.Helpers
 {
@@ -13,12 +12,14 @@ namespace GTweak.Utilities.Helpers
             Task.Run(delegate
             {
                 if (registrykey.OpenSubKey(subkey) == null || registrykey.OpenSubKey(subkey)?.GetValue(value, null) == null) return;
-                try { 
+                try
+                {
                     if (isTakingOwner)
                         TakingOwnership.GrantAdministratorsAccess($@"MACHINE\{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
-                    registrykey.OpenSubKey(subkey, true)?.DeleteValue(value); 
-                } catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                    registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
+                }
+                catch (Exception ex) { Debug.WriteLine(ex.Message); }
             });
         }
 
@@ -26,12 +27,13 @@ namespace GTweak.Utilities.Helpers
         {
             Task.Run(delegate
             {
-                try {
+                try
+                {
                     if (isTakingOwner)
                         TakingOwnership.GrantAdministratorsAccess($@"MACHINE\{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
-                    registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind); 
-                } 
+                    registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
+                }
                 catch (Exception ex) { Debug.WriteLine(ex.Message); }
             });
         }
@@ -40,9 +42,10 @@ namespace GTweak.Utilities.Helpers
         {
             Task.Run(() =>
             {
-                try { 
-                    registrykey.CreateSubKey(subkey); 
-                } 
+                try
+                {
+                    registrykey.CreateSubKey(subkey);
+                }
                 catch (Exception ex) { Debug.WriteLine(ex.Message); }
             });
         }

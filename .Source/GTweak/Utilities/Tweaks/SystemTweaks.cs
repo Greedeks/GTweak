@@ -9,7 +9,6 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
@@ -86,7 +85,7 @@ namespace GTweak.Utilities.Tweaks
                 }
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); };
-            
+
             systemV.TglButton8.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0") ||
