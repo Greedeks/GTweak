@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal readonly struct RegistryHelp
+    internal sealed class RegistryHelp
     {
         internal static void DeleteFolderTree(in RegistryKey registrykey, in string subkey)
         {
@@ -46,5 +46,27 @@ namespace GTweak.Utilities.Helpers
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
         }
+
+        internal static bool CheckExists(in RegistryKey registrykey, in string key, in bool isNegation = true)
+        {
+            bool result = registrykey.OpenSubKey(key) != null;
+            return isNegation ? result : !result;
+        }
+
+        internal static bool CheckValue(in string key, in string valueName, in string expectedValue, in bool isNegation = true)
+        {
+            string value = Registry.GetValue(key, valueName, null)?.ToString();
+            bool result = value != null && value == expectedValue;
+            return isNegation ? !result : result;
+        }
+
+        internal static bool CheckValueBytes(in string key, in string valueName, in string expectedValue)
+        {
+            if (!(Registry.GetValue(key, valueName, null) is byte[]))
+                return true;
+
+            return string.Concat((byte[])Registry.GetValue(key, valueName, null) ?? Array.Empty<byte>()) != expectedValue;
+        }
+
     }
 }

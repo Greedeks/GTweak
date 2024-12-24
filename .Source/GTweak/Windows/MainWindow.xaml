@@ -163,11 +163,7 @@
 
                 <Grid x:Name="SettingsMenu" Width="0" HorizontalAlignment="Right" Opacity="0.97" Panel.ZIndex="1">
 
-                    <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="1" Height="550" Background="{StaticResource Color_Background_Dark}" CornerRadius="10 0 0 10">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="10" ShadowDepth="1" Direction="-90" Color="#000000" />
-                        </Border.Effect>
-                    </Border>
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="1" Height="550" Background="{StaticResource Color_Background_Dark}" CornerRadius="10 0 0 10"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="{StaticResource Color_Background_Dark}" VirtualizingStackPanel.IsVirtualizing="True">
                         <Grid Width="399">
