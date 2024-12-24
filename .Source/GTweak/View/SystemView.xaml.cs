@@ -61,7 +61,7 @@ namespace GTweak.View
             ToggleButton toggleButton = (ToggleButton)sender;
             if (toggleButton.Name != "TglButton8")
             {
-                Parallel.Invoke(() => SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State));
+                SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State);
 
                 switch (toggleButton.Name)
                 {
@@ -80,7 +80,7 @@ namespace GTweak.View
                         break;
                 }
 
-                Parallel.Invoke(async delegate { await Task.Delay(500); new SystemTweaks().ViewSystem(this); });
+                Parallel.Invoke(async delegate { await Task.Delay(1000); new SystemTweaks().ViewSystem(this); });
             }
             else
             {

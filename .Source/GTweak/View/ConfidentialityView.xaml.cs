@@ -38,7 +38,7 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
 
-            Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality(toggleButton.Name, toggleButton.State));
+            ConfidentialityTweaks.UseСonfidentiality(toggleButton.Name, toggleButton.State);
 
             switch (toggleButton.Name)
             {
@@ -48,7 +48,7 @@ namespace GTweak.View
                     break;
             }
 
-            Parallel.Invoke(async delegate { await Task.Delay(500); new ConfidentialityTweaks().ViewСonfidentiality(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); new ConfidentialityTweaks().ViewСonfidentiality(this); });
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

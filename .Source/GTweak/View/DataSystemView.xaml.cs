@@ -138,7 +138,7 @@ namespace GTweak.View
 
         private void BtnHiddenIP_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Parallel.Invoke(delegate { Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP"); });
+            Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP");
 
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {

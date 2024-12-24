@@ -85,7 +85,7 @@ namespace GTweak.Utilities.Control
             registryKey?.Close();
         }
 
-        internal static void ChangingParameters<T>(T value, string selection) => Parallel.Invoke(delegate
+        internal static void ChangingParameters<T>(T value, string selection) => Task.Run(delegate
         {
             RegistryKey registryKey = Registry.CurrentUser.CreateSubKey(@"Software\GTweak");
             registryKey?.SetValue(selection, value.ToString(), RegistryValueKind.String);

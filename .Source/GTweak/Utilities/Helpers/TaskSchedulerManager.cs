@@ -21,7 +21,7 @@ namespace GTweak.Utilities.Helpers
 
         internal static void EnablingTasks(string[] tasklist)
         {
-            Parallel.Invoke(() =>
+            Task.Run(delegate
             {
                 using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
                 foreach (string taskname in tasklist)
@@ -41,7 +41,7 @@ namespace GTweak.Utilities.Helpers
 
         internal static void DisablingTasks(string[] tasklist)
         {
-            Parallel.Invoke(() =>
+            Task.Run(delegate
             {
                 using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
                 foreach (string taskname in tasklist)

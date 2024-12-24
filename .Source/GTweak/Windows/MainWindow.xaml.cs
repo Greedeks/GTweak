@@ -140,17 +140,14 @@ namespace GTweak
         #endregion
 
         #region Settings Menu
-        private void BtnNotification_ChangedState(object sender, EventArgs e) => Parallel.Invoke(() => { Settings.ChangingParameters(!BtnNotification.State, "Notification"); });
+        private void BtnNotification_ChangedState(object sender, EventArgs e) => Settings.ChangingParameters(!BtnNotification.State, "Notification");
 
-        private void BtnUpdate_ChangedState(object sender, EventArgs e) => Parallel.Invoke(() => { Settings.ChangingParameters(!BtnUpdate.State, "Update"); });
+        private void BtnUpdate_ChangedState(object sender, EventArgs e) => Settings.ChangingParameters(!BtnUpdate.State, "Update");
 
         private void BtnTopMost_ChangedState(object sender, EventArgs e)
         {
-            Parallel.Invoke(delegate
-            {
-                Settings.ChangingParameters(!BtnTopMost.State, "TopMost");
-                Topmost = Settings.IsTopMost;
-            });
+            Settings.ChangingParameters(!BtnTopMost.State, "TopMost");
+            Topmost = !BtnTopMost.State;
         }
 
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -161,7 +158,7 @@ namespace GTweak
 
         private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Parallel.Invoke(() => { Settings.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound"); });
+            Settings.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound");
         }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)

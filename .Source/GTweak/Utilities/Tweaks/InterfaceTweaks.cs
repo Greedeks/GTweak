@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -165,7 +165,7 @@ namespace GTweak.Utilities.Tweaks
 
         private static void RestartExplorer(Process launchExplorer)
         {
-            Thread _thread = new Thread(() =>
+            Task.Run(delegate
             {
                 foreach (Process process in Process.GetProcesses())
                 {
@@ -190,9 +190,7 @@ namespace GTweak.Utilities.Tweaks
 
                     }
                 }
-            })
-            { IsBackground = true };
-            _thread.Start();
+            });
         }
 
         internal static void UseInterface(string tweak, bool isChoose)
@@ -295,16 +293,19 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton11":
                     try
                     {
-                        if (isChoose)
+                        Task.Run(delegate
                         {
-                            new UnarchiveManager($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico", Properties.Resources.Blank);
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
-                        }
-                        else
-                        {
-                            File.Delete($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico");
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
-                        }
+                            if (isChoose)
+                            {
+                                new UnarchiveManager($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico", Properties.Resources.Blank);
+                                RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
+                            }
+                            else
+                            {
+                                File.Delete($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico");
+                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
+                            }
+                        });
                     }
                     catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); };
                     break;

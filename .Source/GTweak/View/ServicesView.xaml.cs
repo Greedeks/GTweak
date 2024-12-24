@@ -36,11 +36,11 @@ namespace GTweak.View
         private void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
-            Parallel.Invoke(() => ServicesTweaks.UseServices(toggleButton.Name, toggleButton.State));
+            ServicesTweaks.UseServices(toggleButton.Name, toggleButton.State);
 
             new ViewNotification(300).Show("restart");
 
-            Parallel.Invoke(async delegate { await Task.Delay(500); new ServicesTweaks().ViewServices(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); new ServicesTweaks().ViewServices(this); });
         }
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)

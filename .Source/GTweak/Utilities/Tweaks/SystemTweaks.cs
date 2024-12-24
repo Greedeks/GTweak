@@ -156,7 +156,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal void ViewNetshState()
         {
-            Parallel.Invoke(() =>
+            Task.Run(delegate
             {
                 string getStateNetsh = default;
 
@@ -358,15 +358,10 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton12":
-                    Thread _thread = new Thread(() =>
-                    {
-                        if (isChoose)
-                            DisablingTasks(schedulerTasks);
-                        else
-                            EnablingTasks(schedulerTasks);
-                    })
-                    { IsBackground = true };
-                    _thread.Start();
+                    if (isChoose)
+                        DisablingTasks(schedulerTasks);
+                    else
+                        EnablingTasks(schedulerTasks);
                     break;
                 case "TglButton13":
                     string argStateNetsh = string.Empty, argStateNetshSecond = string.Empty;
@@ -383,7 +378,7 @@ namespace GTweak.Utilities.Tweaks
                         argStateNetsh = @"default";
                     }
 
-                    Parallel.Invoke(() =>
+                    Task.Run(() =>
                     {
                         Process.Start(new ProcessStartInfo()
                         {
@@ -490,7 +485,7 @@ namespace GTweak.Utilities.Tweaks
 
         private static void BluetoothStatusSet(string status = "'off'")
         {
-            Thread _thread = new Thread(() =>
+            Task.Run(() =>
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
@@ -516,15 +511,13 @@ namespace GTweak.Utilities.Tweaks
                 using Process process = new Process() { StartInfo = startInfo };
                 process.Start();
                 process.Close();
-            })
-            { IsBackground = true };
-            _thread.Start();
+            });
         }
 
 
         private static void SetPowercfg(bool isChoose)
         {
-            Thread _thread = new Thread(async () =>
+            Task.Run(async () =>
             {
                 Process _powercfg = new Process()
                 {
@@ -612,9 +605,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
                 catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
-            })
-            { IsBackground = true };
-            _thread.Start();
+            });
         }
     }
 }

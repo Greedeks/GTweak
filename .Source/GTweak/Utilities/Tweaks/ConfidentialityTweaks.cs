@@ -8,7 +8,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -42,8 +42,6 @@ namespace GTweak.Utilities.Tweaks
                 @"Microsoft\Office\OfficeTelemetryAgentFallBack",
                 @"Microsoft\Office\OfficeTelemetryAgentLogOn",
                 @"Microsoft\Office\Office 15 Subscription Heartbeat" };
-
-        private static Thread _thread = default;
 
         internal void ViewСonfidentiality(ConfidentialityView confidentialityV)
         {
@@ -198,15 +196,10 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton4":
-                    _thread = new Thread(() =>
-                    {
-                        if (isChoose)
-                            DisablingTasks(SchedulerTasks);
-                        else
-                            EnablingTasks(SchedulerTasks);
-                    })
-                    { IsBackground = true };
-                    _thread.Start();
+                    if (isChoose)
+                        DisablingTasks(SchedulerTasks);
+                    else
+                        EnablingTasks(SchedulerTasks);
                     break;
                 case "TglButton5":
                     if (isChoose)
@@ -257,22 +250,28 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton9":
                     if (isChoose)
                     {
-                        BlockSpyDomain(true);
+                        Task.Run(delegate
+                        {
+                            BlockSpyDomain(true);
 
-                        try { File.Delete(UsePath.Hosts + @" (Default GTweak)"); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                            try { File.Delete(UsePath.Hosts + @" (Default GTweak)"); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
 
-                        File.Move(UsePath.Hosts, UsePath.Hosts + " (Default GTweak)");
-                        new UnarchiveManager(UsePath.Hosts, Resources.hosts);
+                            File.Move(UsePath.Hosts, UsePath.Hosts + " (Default GTweak)");
+                            new UnarchiveManager(UsePath.Hosts, Resources.hosts);
+                        });
                     }
                     else
                     {
-                        try
+                        Task.Run(delegate
                         {
-                            BlockSpyDomain(false);
-                            File.Copy(UsePath.Hosts + @" (Default GTweak)", UsePath.Hosts, true);
-                            File.Delete(UsePath.Hosts + @" (Default GTweak)");
-                        }
-                        catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                            try
+                            {
+                                BlockSpyDomain(false);
+                                File.Copy(UsePath.Hosts + @" (Default GTweak)", UsePath.Hosts, true);
+                                File.Delete(UsePath.Hosts + @" (Default GTweak)");
+                            }
+                            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                        });
                     }
                     break;
                 case "TglButton10":
@@ -334,14 +333,9 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton16":
-                    static void LoggingServices(string valueState)
-                    {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Control.Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {valueState} /f");
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", int.Parse(valueState), RegistryValueKind.DWord);
-                    }
-
-                    _thread = new Thread(() => LoggingServices(isChoose ? "4" : "3")) { IsBackground = true };
-                    _thread.Start();
+                    string valueState = isChoose ? "4" : "3";
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(Control.Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {valueState} /f");
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", int.Parse(valueState), RegistryValueKind.DWord, true);
                     break;
                 case "TglButton17":
                     if (isChoose)
