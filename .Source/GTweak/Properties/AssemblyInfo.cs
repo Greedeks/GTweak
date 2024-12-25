@@ -7,9 +7,9 @@ using System.Windows;
 [assembly: AssemblyProduct("GTweak")]
 [assembly: AssemblyCopyright("Copyright © Greedeks 2024")]
 [assembly: AssemblyTrademark("Greedeks")]
-[assembly: AssemblyInformationalVersion("Build: 5.0.5")]
-[assembly: AssemblyVersion("5.0.52.843")]
-[assembly: AssemblyFileVersion("5.0.52.843")]
+[assembly: AssemblyInformationalVersion("Build: 5.0.6")]
+[assembly: AssemblyVersion("5.0.68.812")]
+[assembly: AssemblyFileVersion("5.0.68.812")]
 
 [assembly: ComVisible(false)]
 

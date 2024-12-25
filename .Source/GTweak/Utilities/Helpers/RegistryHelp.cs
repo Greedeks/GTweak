@@ -9,13 +9,16 @@ namespace GTweak.Utilities.Helpers
     {
         internal static void DeleteValue(RegistryKey registrykey, string subkey, string value, bool isTakingOwner = false)
         {
-            Task.Run(delegate
+            Task.Run(async delegate
             {
                 if (registrykey.OpenSubKey(subkey) == null || registrykey.OpenSubKey(subkey)?.GetValue(value, null) == null) return;
                 try
                 {
                     if (isTakingOwner)
+                    {
                         TakingOwnership.GrantAdministratorsAccess($@"MACHINE\{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        await Task.Delay(200);
+                    }
 
                     registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
                 }
@@ -25,12 +28,15 @@ namespace GTweak.Utilities.Helpers
 
         internal static void Write<T>(RegistryKey registrykey, string subkey, string name, T data, RegistryValueKind kind, bool isTakingOwner = false)
         {
-            Task.Run(delegate
+            Task.Run(async delegate
             {
                 try
                 {
                     if (isTakingOwner)
+                    {
                         TakingOwnership.GrantAdministratorsAccess($@"MACHINE\{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        await Task.Delay(200);
+                    }
 
                     registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
                 }

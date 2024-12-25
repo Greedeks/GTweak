@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using GTweak.Utilities.Control;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
@@ -19,7 +20,7 @@ namespace GTweak.Utilities.Helpers
             return numberRunningTask > 0;
         }
 
-        internal static void EnablingTasks(string[] tasklist)
+        internal static void SetTaskState(string[] tasklist, bool state)
         {
             Task.Run(delegate
             {
@@ -29,9 +30,9 @@ namespace GTweak.Utilities.Helpers
                     using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
                     if (task != null)
                     {
-                        if (!task.Enabled)
+                        if (task.Enabled != state)
                         {
-                            task.Definition.Settings.Enabled = true;
+                            task.Definition.Settings.Enabled = state;
                             task.RegisterChanges();
                         }
                     }
@@ -39,23 +40,17 @@ namespace GTweak.Utilities.Helpers
             });
         }
 
-        internal static void DisablingTasks(string[] tasklist)
+        internal static void SetTaskStateOwner(string[] tasklist, bool state)
         {
             Task.Run(delegate
             {
-                using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in tasklist)
-                {
-                    using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
-                    if (task != null)
-                    {
-                        if (task.Enabled)
-                        {
-                            task.Definition.Settings.Enabled = false;
-                            task.RegisterChanges();
-                        }
-                    }
-                }
+                string command = "cmd.exe /c ";
+                foreach (string task in tasklist)
+                    command += $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ";
+
+                command = command.TrimEnd(' ', '&');
+
+                TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, command);
             });
         }
     }

@@ -3,6 +3,7 @@ using GTweak.Utilities.Helpers;
 using NetFwTypeLib;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -155,7 +156,7 @@ namespace GTweak.Utilities.Tweaks
         protected static void BlockWDefender(bool isChoose)
         {
             try { Parallel.Invoke(() => { ChangeRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); }); }
-            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch (Exception ex) { Debug.Write(ex.Message); };
         }
     }
 }

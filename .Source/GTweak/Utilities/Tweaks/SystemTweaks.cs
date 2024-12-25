@@ -87,7 +87,6 @@ namespace GTweak.Utilities.Tweaks
             catch (Exception ex) { Debug.WriteLine(ex.Message); };
 
             systemV.TglButton8.StateNA =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", "1") ||
@@ -295,10 +294,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton12":
-                    if (isChoose)
-                        DisablingTasks(schedulerTasks);
-                    else
-                        EnablingTasks(schedulerTasks);
+                    SetTaskState(schedulerTasks, !isChoose);
                     break;
                 case "TglButton13":
                     string argStateNetsh = string.Empty, argStateNetshSecond = string.Empty;

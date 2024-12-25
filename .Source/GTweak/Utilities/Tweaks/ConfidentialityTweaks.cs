@@ -182,22 +182,16 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton3":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", isChoose ? 0 : 1, RegistryValueKind.DWord);
+
                     if (isChoose)
-                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
-                        DisablingTasks(TelemetryTasks);
-                    }
                     else
-                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
-                        EnablingTasks(TelemetryTasks);
-                    }
+
+                    SetTaskState(TelemetryTasks, !isChoose);
                     break;
                 case "TglButton4":
-                    if (isChoose)
-                        DisablingTasks(SchedulerTasks);
-                    else
-                        EnablingTasks(SchedulerTasks);
+                    SetTaskState(SchedulerTasks, !isChoose);
                     break;
                 case "TglButton5":
                     if (isChoose)
@@ -313,17 +307,12 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton16":
-                    string valueState = isChoose ? "4" : "3";
-                    TrustedInstaller.CreateProcessAsTrustedInstaller(Control.Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {valueState} /f");
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", int.Parse(valueState), RegistryValueKind.DWord, true);
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(Control.Settings.PID, $@"cmd.exe /c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(isChoose ? "4" : "3")} /f");
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord, true);
                     break;
                 case "TglButton17":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", isChoose ? 4 : 2, RegistryValueKind.DWord);
-
-                    if (isChoose)
-                        DisablingTasks(NvidiaTasks);
-                    else
-                        EnablingTasks(NvidiaTasks);
+                    SetTaskState(NvidiaTasks, !isChoose);
                     break;
                 case "TglButton18":
                     if (isChoose)

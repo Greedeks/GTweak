@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.ServiceProcess;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
@@ -416,49 +417,41 @@ namespace GTweak.Utilities.Tweaks
         {
             Task.Run(delegate
             {
-                void SetFullAccess(string path)
-                {
-                    FileSecurity security = File.GetAccessControl(path);
-                    security.SetOwner(WindowsIdentity.GetCurrent().User);
-                    security.SetAccessRule(new FileSystemAccessRule(WindowsIdentity.GetCurrent().User, FileSystemRights.FullControl, AccessControlType.Allow));
-                    File.SetAccessControl(path, security);
-                }
+                string cachePath = Path.Combine(UsePath.SystemDisk, @"Windows\SoftwareDistribution\Download");
 
-                void ChangeStateTask(string valueState = "/disable")
-                {
-                    TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Report policies\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Scan Static Task\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Schedule Work\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\Start Oobe Expedite Work\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScanAfterUpdate\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\StartOobeAppsScan_LicenseAccepted\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\USO_UxBroker\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\UpdateOrchestrator\\UUS Failover Task\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Refresh Group Policy Cache\" & " +
-                    "schtasks /change " + valueState + " /tn \"\\Microsoft\\Windows\\WindowsUpdate\\Scheduled Start\"");
-                }
+                string[] WinUpdateTasks = new string[] {
+                         @"Microsoft\Windows\UpdateOrchestrator\Report policies",
+                         @"Microsoft\Windows\UpdateOrchestrator\Schedule Scan",
+                         @"Microsoft\Windows\UpdateOrchestrator\Schedule Scan Static Task",
+                         @"Microsoft\Windows\UpdateOrchestrator\Schedule Work",
+                         @"Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work",
+                         @"Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfterUpdate",
+                         @"Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScan_LicenseAccepted",
+                         @"Microsoft\Windows\UpdateOrchestrator\USO_UxBroker",
+                         @"Microsoft\Windows\UpdateOrchestrator\UUS Failover Task",
+                         @"Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
+                         @"Microsoft\Windows\WindowsUpdate\Scheduled Start"};
 
                 try
                 {
-                    if (!isDenyAccess)
-                        ChangeStateTask("/enable");
-                    else
+                    if (isDenyAccess)
                     {
-                        SetFullAccess(UsePath.SystemDisk + @"Windows\SoftwareDistribution\Download");
-                        SetFullAccess(UsePath.SystemDisk + @"Windows\System32\catroot2");
-
-                        Process.Start(new ProcessStartInfo()
+                        using (ServiceController updateService = new ServiceController("wuauserv"))
                         {
-                            Arguments = @" /c rd /s /q " + UsePath.SystemDisk + @"Windows\SoftwareDistribution\Download & 
-                            rd /s /q " + UsePath.SystemDisk + @"Windows\System32\catroot2",
-                            WindowStyle = ProcessWindowStyle.Hidden,
-                            CreateNoWindow = true,
-                            FileName = "cmd.exe"
-                        });
+                            if (updateService.Status == ServiceControllerStatus.Running)
+                            {
+                                updateService.Stop();
+                                updateService.WaitForStatus(ServiceControllerStatus.Stopped);
+                            }
 
-                        ChangeStateTask();
+                            if (Directory.Exists(cachePath))
+                                Directory.Delete(cachePath, true);
+                        }
+
+                        SetTaskStateOwner(WinUpdateTasks, false);
                     }
+                    else
+                        SetTaskStateOwner(WinUpdateTasks, true);
                 }
                 catch (Exception ex) { Debug.WriteLine(ex); }
             });
