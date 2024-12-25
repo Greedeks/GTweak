@@ -237,7 +237,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton6":
                     if (isChoose)
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload", 2, RegistryValueKind.DWord);
-                    else                                                   
+                    else
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload");
                     break;
                 case "TglButton7":
