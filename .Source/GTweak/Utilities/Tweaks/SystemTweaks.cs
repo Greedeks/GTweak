@@ -207,60 +207,26 @@ namespace GTweak.Utilities.Tweaks
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
         internal static void UseSystem(string tweak, bool isChoose)
         {
-            INIManager.UserTweaksSystem.Remove(tweak);
-            INIManager.UserTweaksSystem.Add(tweak, Convert.ToString(isChoose));
+            INIManager.TempWrite(INIManager.TempTweaksSys, tweak, isChoose);
 
             switch (tweak)
             {
                 case "TglButton1":
-
-                    uint[] _accelerate = new uint[3];
-
-                    if (isChoose)
-                    {
-                        SystemParametersInfo(UIAction.SPI_SETMOUSE, 0, _accelerate, 2);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseSpeed", 0, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold1", 0, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold2", 0, RegistryValueKind.String);
-                    }
-                    else
-                    {
-                        _accelerate = new uint[3] { 1, 6, 10 };
-                        SystemParametersInfo(UIAction.SPI_SETMOUSE, 0, _accelerate, 2);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseSpeed", 1, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold1", 6, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold2", 10, RegistryValueKind.String);
-                    }
+                    SystemParametersInfo(UIAction.SPI_SETMOUSE, 0, isChoose ? new uint[3] : new uint[3] { 1, 6, 10 }, 2);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseSpeed", isChoose ? "0" : "1", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold1", isChoose ? "0" : "6", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold2", isChoose ? "0" : "10", RegistryValueKind.String);
                     break;
                 case "TglButton2":
-                    if (isChoose)
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Accessibility\StickyKeys", "Flags", "26", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Accessibility\Keyboard Response", "Flags", "26", RegistryValueKind.String);
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Accessibility\StickyKeys", "Flags", "507", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Accessibility\Keyboard Response", "Flags", "58", RegistryValueKind.String);
-                    }
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Accessibility\StickyKeys", "Flags", isChoose ? "26" : "507", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Accessibility\Keyboard Response", "Flags", isChoose ? "26" : "58", RegistryValueKind.String);
                     break;
                 case "TglButton3":
-                    if (isChoose)
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7", "Attributes", 2, RegistryValueKind.DWord);
-                    else
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7", "Attributes", 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7", "Attributes", isChoose ? 2 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton4":
-                    if (isChoose)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HibernateEnabled", 0, RegistryValueKind.DWord);
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HibernateEnabled", 1, RegistryValueKind.DWord);
-                    }
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HibernateEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton5":
                     if (isChoose)
@@ -271,22 +237,10 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton6":
                     if (isChoose)
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload", 2, RegistryValueKind.DWord);
-                    else
+                    else                                                   
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload");
                     break;
                 case "TglButton7":
-                    byte[] dataTime, dataState;
-
-                    if (isChoose)
-                    {
-                        dataTime = new byte[] { 0xFF, 0xFF, 0xFF, 0xFF };
-                        dataState = Encoding.Unicode.GetBytes("\0\0");
-                    }
-                    else
-                    {
-                        dataTime = new byte[] { 0x0a, 0x00, 0x00, 0x00 };
-                        dataState = new byte[] { 0x03, 0x00, 0x00, 0x00 };
-                    }
                     try
                     {
                         RegistryKey registrykey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}", true);
@@ -295,13 +249,13 @@ namespace GTweak.Utilities.Tweaks
                             RegistryKey keyView = registrykey?.OpenSubKey(KeyName);
                             if (keyView?.GetValue("DriverDesc")?.ToString() == "Realtek High Definition Audio")
                             {
-                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "ConservationIdleTime", dataTime, RegistryValueKind.Binary);
-                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "IdlePowerState", dataState, RegistryValueKind.Binary);
-                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "PerformanceIdleTime", dataTime, RegistryValueKind.Binary);
+                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "ConservationIdleTime", isChoose ? new byte[] { 0xFF, 0xFF, 0xFF, 0xFF } : new byte[] { 0x0a, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "IdlePowerState", isChoose ? Encoding.Unicode.GetBytes("\0\0") : new byte[] { 0x03, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "PerformanceIdleTime", isChoose ? new byte[] { 0xFF, 0xFF, 0xFF, 0xFF } : new byte[] { 0x0a, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
                             }
                         }
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
                     break;
                 case "TglButton8":
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
@@ -317,32 +271,16 @@ namespace GTweak.Utilities.Tweaks
                     BlockWDefender(isChoose);
                     break;
                 case "TglButton9":
-                    if (isChoose)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableInstallerDetection", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableSecureUIAPaths", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableVirtualization", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "FilterAdministratorToken", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", 0, RegistryValueKind.DWord);
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", 5, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableInstallerDetection", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableSecureUIAPaths", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableVirtualization", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "FilterAdministratorToken", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", 1, RegistryValueKind.DWord);
-                    }
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", isChoose ? 0 : 5, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableInstallerDetection", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableSecureUIAPaths", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableVirtualization", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "FilterAdministratorToken", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton10":
-                    if (isChoose)
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", 0, RegistryValueKind.DWord);
-                    else
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton11":
                     if (isChoose)
@@ -390,10 +328,7 @@ namespace GTweak.Utilities.Tweaks
                     });
                     break;
                 case "TglButton14":
-                    if (isChoose)
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", 1, RegistryValueKind.DWord);
-                    else
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", isChoose ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton15":
                     if (isChoose)
@@ -418,10 +353,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton17":
-                    if (isChoose)
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", 1, RegistryValueKind.DWord);
-                    else
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", isChoose ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton18":
                     SetPowercfg(isChoose);
@@ -439,45 +371,23 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton20":
-                    if (isChoose)
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "4", RegistryValueKind.DWord);
-                    else
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "2", RegistryValueKind.DWord);
-
-                    string value = isChoose ? "off" : "on";
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isChoose ? 4 : 2, RegistryValueKind.DWord);
                     Process.Start(new ProcessStartInfo()
                     {
-                        Arguments = $"/c netsh advfirewall set allprofiles state {value}",
+                        Arguments = $"/c netsh advfirewall set allprofiles state {(isChoose ? "off" : "on")}",
                         WindowStyle = ProcessWindowStyle.Hidden,
                         CreateNoWindow = true,
                         FileName = "cmd.exe"
                     });
                     break;
                 case "TglButton21":
-                    if (isChoose)
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AllowAutoGameMode", 0, RegistryValueKind.DWord);
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AllowAutoGameMode", 1, RegistryValueKind.DWord);
-                    }
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AllowAutoGameMode", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton22":
-                    if (isChoose)
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"System\GameConfigStore", "GameDVR_Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", 0, RegistryValueKind.DWord);
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"System\GameConfigStore", "GameDVR_Enabled", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", 1, RegistryValueKind.DWord);
-                    }
+                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"System\GameConfigStore", "GameDVR_Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     break;
             }
         }
@@ -535,27 +445,23 @@ namespace GTweak.Utilities.Tweaks
                 {
                     if (isChoose)
                     {
-                        Parallel.Invoke(() =>
+                        foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE IsActive=false").Get())
                         {
-                            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE IsActive=false").Get())
+                            serchScheme = Convert.ToString(managementObj["InstanceID"]);
+                            serchScheme = Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value;
+                            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "Description", string.Empty).ToString().Contains("-18") &&
+                            Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
                             {
-                                serchScheme = Convert.ToString(managementObj["InstanceID"]);
-                                serchScheme = Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value;
-                                if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "Description", string.Empty).ToString().Contains("-18") &&
-                                Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
+                                using (_powercfg)
                                 {
-                                    using (_powercfg)
-                                    {
-                                        _powercfg.StartInfo.Arguments = $"/setactive {serchScheme}";
-                                        _powercfg.Start();
+                                    _powercfg.StartInfo.Arguments = $"/setactive {serchScheme}";
+                                    _powercfg.Start();
 
-                                        _powercfg.StartInfo.Arguments = unlockFrequency;
-                                        _powercfg.Start();
-                                    }
+                                    _powercfg.StartInfo.Arguments = unlockFrequency;
+                                    _powercfg.Start();
                                 }
                             }
-
-                        });
+                        }
 
                         if (string.IsNullOrEmpty(serchScheme))
                         {
@@ -590,11 +496,8 @@ namespace GTweak.Utilities.Tweaks
                     {
                         string activeScheme = @"Microsoft:PowerPlan\\{" + Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes").GetValue("ActivePowerScheme").ToString() + "}";
 
-                        Parallel.Invoke(() =>
-                        {
-                            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + activeScheme + "'").Get())
-                                serchScheme = Convert.ToString(managementObj["InstanceID"]);
-                        });
+                        foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + activeScheme + "'").Get())
+                            serchScheme = Convert.ToString(managementObj["InstanceID"]);
 
                         using (_powercfg)
                         {
@@ -603,7 +506,7 @@ namespace GTweak.Utilities.Tweaks
                         }
                     }
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                catch (Exception ex) { Debug.WriteLine(ex.Message); }
             });
         }
     }

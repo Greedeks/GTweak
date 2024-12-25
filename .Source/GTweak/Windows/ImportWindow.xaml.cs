@@ -14,14 +14,6 @@ namespace GTweak.Windows
 {
     public partial class ImportWindow : Window
     {
-        private struct SectionName
-        {
-            internal const string Confidentiality = "Confidentiality Tweaks";
-            internal const string Interface = "Interface Tweaks";
-            internal const string Services = "Services Tweaks";
-            internal const string System = "System Tweaks";
-        }
-
         private bool isRestartNeed = false, isLogoutNeed = false;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
@@ -40,7 +32,7 @@ namespace GTweak.Windows
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Progress<byte> progress = new Progress<byte>(ReportProgress);
-            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
 
         private void ReportProgress(byte valueProgress)
@@ -66,12 +58,12 @@ namespace GTweak.Windows
             {
                 _token.ThrowIfCancellationRequested();
 
-                if (i == 2 & iniManager.IsThereSection(SectionName.Confidentiality))
+                if (i == 2 & iniManager.IsThereSection(INIManager.SectionConf))
                 {
                     tempKeys.Clear(); tempValues.Clear();
 
-                    tempKeys = iniManager.GetKeysOrValue(SectionName.Confidentiality);
-                    tempValues = iniManager.GetKeysOrValue(SectionName.Confidentiality, false);
+                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionConf);
+                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionConf, false);
 
                     var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
 
@@ -90,12 +82,12 @@ namespace GTweak.Windows
                     }
                 }
 
-                if (i == 30 & iniManager.IsThereSection(SectionName.Interface))
+                if (i == 30 & iniManager.IsThereSection(INIManager.SectionIntf))
                 {
                     tempKeys.Clear(); tempValues.Clear();
 
-                    tempKeys = iniManager.GetKeysOrValue(SectionName.Interface);
-                    tempValues = iniManager.GetKeysOrValue(SectionName.Interface, false);
+                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionIntf);
+                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionIntf, false);
 
                     var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
 
@@ -126,12 +118,12 @@ namespace GTweak.Windows
                     }
                 }
 
-                if (i == 50 & iniManager.IsThereSection(SectionName.Services))
+                if (i == 50 & iniManager.IsThereSection(INIManager.SectionSvc))
                 {
                     tempKeys.Clear(); tempValues.Clear();
 
-                    tempKeys = iniManager.GetKeysOrValue(SectionName.Services);
-                    tempValues = iniManager.GetKeysOrValue(SectionName.Services, false);
+                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionSvc);
+                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionSvc, false);
 
                     var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
 
@@ -143,12 +135,12 @@ namespace GTweak.Windows
                     }
                 }
 
-                if (i == 80 & iniManager.IsThereSection(SectionName.System))
+                if (i == 80 & iniManager.IsThereSection(INIManager.SectionSys))
                 {
                     tempKeys.Clear(); tempValues.Clear();
 
-                    tempKeys = iniManager.GetKeysOrValue(SectionName.System);
-                    tempValues = iniManager.GetKeysOrValue(SectionName.System, false);
+                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionSys);
+                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionSys, false);
 
                     var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
 

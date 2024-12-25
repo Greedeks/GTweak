@@ -18,10 +18,15 @@ namespace GTweak.Utilities.Helpers
         private readonly string pathToConfig;
 
         internal static Dictionary<string, string>
-            UserTweaksConfidentiality = new Dictionary<string, string>(),
-            UserTweaksInterface = new Dictionary<string, string>(),
-            UserTweaksServices = new Dictionary<string, string>(),
-            UserTweaksSystem = new Dictionary<string, string>();
+            TempTweaksConf = new Dictionary<string, string>(),
+            TempTweaksIntf = new Dictionary<string, string>(),
+            TempTweaksSvc = new Dictionary<string, string>(),
+            TempTweaksSys = new Dictionary<string, string>();
+
+        internal const string SectionConf = "Confidentiality Tweaks";
+        internal const string SectionIntf = "Interface Tweaks";
+        internal const string SectionSvc = "Services Tweaks";
+        internal const string SectionSys = "System Tweaks";
 
         internal INIManager(string iniPath) => pathToConfig = new FileInfo(iniPath).FullName.ToString();
 
@@ -34,10 +39,20 @@ namespace GTweak.Utilities.Helpers
 
         internal void Write(string section, string key, string value) => WritePrivateProfileString(section, key, value, pathToConfig);
 
-        internal void WriteAll(string section, Dictionary<string, string> userTweaks)
+        internal void WriteAll(string section, Dictionary<string, string> selectedDictionary)
         {
-            foreach (KeyValuePair<string, string> addKeyValue in userTweaks)
+            if (selectedDictionary.Count == 0) return;
+
+            foreach (KeyValuePair<string, string> addKeyValue in selectedDictionary)
                 WritePrivateProfileString(section, addKeyValue.Key, addKeyValue.Value, pathToConfig);
+        }
+
+        internal static void TempWrite(Dictionary<string, string> selectedDictionary, string tweak, bool state)
+        {
+            if (selectedDictionary.ContainsKey(tweak))
+                selectedDictionary.Remove(tweak);
+
+            selectedDictionary.Add(tweak, Convert.ToString(state));
         }
 
         internal bool IsThereSection(string section)

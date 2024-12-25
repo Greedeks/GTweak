@@ -47,7 +47,7 @@ namespace GTweak.View
                 BackgroundQueue backgroundQueue = new BackgroundQueue();
                 await backgroundQueue.QueueTask(delegate
                 {
-                    try { RecoveryPoint.DisablePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                    try { RecoveryPoint.DisablePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
                 });
 
                 new ViewNotification(300).Show("", "info", (string)FindResource("disable_recovery_notification"));

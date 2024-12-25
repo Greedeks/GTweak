@@ -120,7 +120,7 @@ namespace GTweak.Utilities.Control
 
         internal static void SaveFileConfig()
         {
-            if (INIManager.UserTweaksConfidentiality.Count == 0 && INIManager.UserTweaksInterface.Count == 0 && INIManager.UserTweaksServices.Count == 0 && INIManager.UserTweaksSystem.Count == 0)
+            if (INIManager.TempTweaksConf.Count == 0 && INIManager.TempTweaksIntf.Count == 0 && INIManager.TempTweaksSvc.Count == 0 && INIManager.TempTweaksSys.Count == 0)
                 new ViewNotification().Show("", "info", (string)Application.Current.Resources["export_warning_notification"]);
             else
             {
@@ -145,12 +145,12 @@ namespace GTweak.Utilities.Control
                     INIManager iniManager = new INIManager(UsePath.Config);
                     iniManager.Write("GTweak", "Author", "Greedeks");
                     iniManager.Write("GTweak", "Release", currentRelease);
-                    iniManager.WriteAll("Confidentiality Tweaks", INIManager.UserTweaksConfidentiality);
-                    iniManager.WriteAll("Interface Tweaks", INIManager.UserTweaksInterface);
-                    iniManager.WriteAll("Services Tweaks", INIManager.UserTweaksServices);
-                    iniManager.WriteAll("System Tweaks", INIManager.UserTweaksSystem);
+                    iniManager.WriteAll(INIManager.SectionConf, INIManager.TempTweaksConf);
+                    iniManager.WriteAll(INIManager.SectionIntf, INIManager.TempTweaksIntf);
+                    iniManager.WriteAll(INIManager.SectionSvc, INIManager.TempTweaksSvc);
+                    iniManager.WriteAll(INIManager.SectionSys, INIManager.TempTweaksSys);
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                catch (Exception ex) { Debug.WriteLine(ex.Message); }
             }
         }
 
@@ -196,7 +196,7 @@ namespace GTweak.Utilities.Control
                     FileName = "cmd.exe"
                 });
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
 
         internal static void SelfReboot()

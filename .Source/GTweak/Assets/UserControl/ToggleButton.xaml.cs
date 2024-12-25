@@ -1,6 +1,5 @@
 ﻿using GTweak.Utilities.Helpers;
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -71,7 +70,8 @@ namespace GTweak.Assets.UserControl
 
         private void AnimationToggle(bool isState, bool isSkipAnimation = false)
         {
-            Dispatcher.Invoke(() => {
+            Dispatcher.Invoke(() =>
+            {
                 ThicknessAnimationUsingKeyFrames thicknessAnimKeyFrames = new ThicknessAnimationUsingKeyFrames();
 
                 if (isState && Dot.Margin != _rightSide)

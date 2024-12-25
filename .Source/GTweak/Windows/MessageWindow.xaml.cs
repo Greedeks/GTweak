@@ -28,7 +28,7 @@ namespace GTweak.Windows
                 }, Application.Current.Dispatcher);
 
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
             timer?.Start();
 
             if (isViolationSystem)

@@ -153,7 +153,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
 
         private static bool SetIncreasePrivilege(string privilegeName)
@@ -203,7 +203,7 @@ namespace GTweak.Utilities.Tweaks
                         process.Start();
                     }
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                catch (Exception ex) { Debug.WriteLine(ex.Message); }
                 finally
                 {
                     Process[] explorer = Process.GetProcessesByName("explorer");

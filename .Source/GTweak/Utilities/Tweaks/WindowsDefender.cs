@@ -314,7 +314,7 @@ namespace GTweak.Utilities.Tweaks
             foreach (Process process in Process.GetProcessesByName(getName))
             {
                 try { process.Kill(); }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                catch (Exception ex) { Debug.WriteLine(ex.Message); }
             }
         }
 
@@ -343,7 +343,7 @@ namespace GTweak.Utilities.Tweaks
                 comandoAEjecutar.StandardOutput.ReadToEnd();
                 return;
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
 
         private void EnableTask(string path) => SetTask(path, "/Enable");
@@ -361,7 +361,7 @@ namespace GTweak.Utilities.Tweaks
             foreach (FileInfo file in dir.GetFiles())
             {
                 try { file.Delete(); }
-                catch (Exception ex) { Debug.WriteLine(ex.Message.ToString()); }
+                catch (Exception ex) { Debug.WriteLine(ex.Message); }
             }
 
             foreach (DirectoryInfo subDir in dir.GetDirectories())
