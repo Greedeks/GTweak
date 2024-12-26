@@ -163,10 +163,15 @@
 
                 <Grid x:Name="SettingsMenu" Width="0" HorizontalAlignment="Right" Opacity="0.97" Panel.ZIndex="1">
 
-                    <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="1" Height="550" Background="{StaticResource Color_Background_Dark}" CornerRadius="10 0 0 10"/>
-
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="{StaticResource Color_Background_Dark}" VirtualizingStackPanel.IsVirtualizing="True">
-                        <Grid Width="399">
+                        <StackPanel.OpacityMask>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="Transparent" Offset="0.0"/>
+                                <GradientStop Color="Black" Offset="0.03"/>
+                                <GradientStop Color="Black" Offset="1.0"/>
+                            </LinearGradientBrush>
+                        </StackPanel.OpacityMask>
+                        <Grid Width="400">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="52*"/>
                                 <RowDefinition Height="462*"/>
