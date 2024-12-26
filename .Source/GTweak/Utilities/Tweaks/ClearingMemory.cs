@@ -210,9 +210,10 @@ namespace GTweak.Utilities.Tweaks
                     if (explorer.Length == 0)
                     {
                         using Process launchExplorer = new Process();
-                        launchExplorer.StartInfo.FileName = $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}";
+                        launchExplorer.StartInfo.FileName = $@"{Environment.GetEnvironmentVariable("WINDIR")}\explorer.exe";
+                        launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
                         launchExplorer.StartInfo.UseShellExecute = true;
-                        launchExplorer.Start();
+                        launchExplorer.Start(); ;
                     }
 
                 }

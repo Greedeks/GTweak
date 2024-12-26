@@ -225,31 +225,33 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient");
                     break;
                 case "TglButton9":
-                    if (isChoose)
+                    Task.Run(delegate
                     {
-                        Task.Run(delegate
+                        string backupFile = UsePath.Hosts + @" (Default GTweak)";
+                        try
                         {
-                            BlockSpyDomain(true);
-
-                            try { File.Delete(UsePath.Hosts + @" (Default GTweak)"); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-
-                            File.Move(UsePath.Hosts, UsePath.Hosts + " (Default GTweak)");
-                            new UnarchiveManager(UsePath.Hosts, Resources.hosts);
-                        });
-                    }
-                    else
-                    {
-                        Task.Run(delegate
-                        {
-                            try
+                            if (isChoose)
                             {
-                                BlockSpyDomain(false);
-                                File.Copy(UsePath.Hosts + @" (Default GTweak)", UsePath.Hosts, true);
-                                File.Delete(UsePath.Hosts + @" (Default GTweak)");
+                                if (File.Exists(backupFile))
+                                    File.Delete(backupFile);
+
+                                File.Move(UsePath.Hosts, backupFile);
+                                new UnarchiveManager(UsePath.Hosts, Resources.hosts);
                             }
-                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
-                        });
-                    }
+                            else
+                            {
+                                File.Copy(backupFile, UsePath.Hosts, true);
+
+                                if (File.Exists(backupFile))
+                                    File.Delete(backupFile);
+                            }
+
+                        }
+                        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+
+                        BlockSpyDomain(isChoose);
+
+                    });
                     break;
                 case "TglButton10":
                     if (isChoose)
