@@ -70,7 +70,7 @@ namespace GTweak.Windows
                     foreach (var set in acceptanceList)
                     {
                         await Task.Delay(700, _token);
-                        Parallel.Invoke(() => ConfidentialityTweaks.UseСonfidentiality(set.Tweak, Convert.ToBoolean(set.Value)));
+                        ConfidentialityTweaks.UseСonfidentiality(set.Tweak, Convert.ToBoolean(set.Value));
 
                         switch (set.Tweak)
                         {
@@ -94,7 +94,7 @@ namespace GTweak.Windows
                     foreach (var set in acceptanceList)
                     {
                         await Task.Delay(700, _token);
-                        Parallel.Invoke(() => InterfaceTweaks.UseInterface(set.Tweak, Convert.ToBoolean(set.Value)));
+                        InterfaceTweaks.UseInterface(set.Tweak, Convert.ToBoolean(set.Value));
 
                         switch (set.Tweak)
                         {
@@ -130,7 +130,7 @@ namespace GTweak.Windows
                     foreach (var set in acceptanceList)
                     {
                         await Task.Delay(700, _token);
-                        Parallel.Invoke(() => ServicesTweaks.UseServices(set.Tweak, Convert.ToBoolean(set.Value)));
+                        ServicesTweaks.UseServices(set.Tweak, Convert.ToBoolean(set.Value));
                         isRestartNeed = true;
                     }
                 }
@@ -151,7 +151,7 @@ namespace GTweak.Windows
                         if (set.Tweak != "TglButton8")
                         {
                             if (set.Tweak.Contains("TglButton"))
-                                Parallel.Invoke(() => SystemTweaks.UseSystem(set.Tweak, Convert.ToBoolean(set.Value)));
+                                SystemTweaks.UseSystem(set.Tweak, Convert.ToBoolean(set.Value));
                             else
                                 SystemTweaks.UseSystemSliders(set.Tweak, Convert.ToUInt32(set.Value));
 

@@ -7,6 +7,10 @@ namespace GTweak.Utilities.Configuration
 {
     internal sealed class MonitoringSystem
     {
+        internal int GetMemoryUsage => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
+        internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
+        internal static int GetProcessorUsage = default;
+
         [StructLayout(LayoutKind.Sequential)]
         private struct PerformanceInformation
         {
@@ -30,7 +34,7 @@ namespace GTweak.Utilities.Configuration
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetPerformanceInfo([Out] out PerformanceInformation PerformanceInformation, [In] int Size);
 
-        private static long GetPhysicalAvailableMemory()
+        private long GetPhysicalAvailableMemory()
         {
             if (GetPerformanceInfo(out PerformanceInformation _performanceInformation, Marshal.SizeOf(new PerformanceInformation())))
                 return Convert.ToInt64((_performanceInformation.PhysicalAvailable.ToInt64() * _performanceInformation.PageSize.ToInt64() / 1048576));
@@ -38,7 +42,7 @@ namespace GTweak.Utilities.Configuration
                 return -1;
         }
 
-        private static long GetTotalMemory()
+        private long GetTotalMemory()
         {
             if (GetPerformanceInfo(out PerformanceInformation _performanceInformation, Marshal.SizeOf(new PerformanceInformation())))
                 return Convert.ToInt64((_performanceInformation.PhysicalTotal.ToInt64() * _performanceInformation.PageSize.ToInt64() / 1048576));
@@ -46,13 +50,7 @@ namespace GTweak.Utilities.Configuration
                 return -1;
         }
 
-        internal int GetMemoryUsage() => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
-
-        internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
-
-        internal static int GetProcessorUsage = default;
-
-        internal static async Task<int> GetTotalProcessorUsage()
+        internal async Task<int> GetTotalProcessorUsage()
         {
             return await Task.Run(async () =>
             {

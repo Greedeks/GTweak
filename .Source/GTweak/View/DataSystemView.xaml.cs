@@ -4,7 +4,6 @@ using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -32,11 +31,9 @@ namespace GTweak.View
                     { SystemDiagnostics.ConnectionStatus.Lose, "connection_lose_systemInformation" },
                     { SystemDiagnostics.ConnectionStatus.Block, "connection_block_systemInformation" },
                     { SystemDiagnostics.ConnectionStatus.Limited, "limited_systemInformation" }
-                }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey))
-                {
-                    SystemDiagnostics.HardwareData["UserIpAddress"] = (string)FindResource(resourceKey);
-                    DataContext = new DataSystemVM();
-                }
+                }.TryGetValue(SystemDiagnostics.CurrentConnection,
+                              out string resourceKey)) { SystemDiagnostics.HardwareData["UserIpAddress"] = (string)FindResource(resourceKey); }
+                DataContext = new DataSystemVM();
             };
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, async delegate
@@ -46,8 +43,8 @@ namespace GTweak.View
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate
                     {
-                        Parallel.Invoke(SystemDiagnostics.GetUpdatingDevices);
-                        await MonitoringSystem.GetTotalProcessorUsage();
+                        new SystemDiagnostics().GetUpdatingDevices();
+                        await new MonitoringSystem().GetTotalProcessorUsage();
                     });
                     Application.Current.Dispatcher.Invoke(AnimationProgressBars);
                     if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
@@ -61,7 +58,7 @@ namespace GTweak.View
                 else if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate { SystemDiagnostics.GetUserIpAddress(); });
+                    await backgroundQueue.QueueTask(delegate { new SystemDiagnostics().GetUserIpAddress(); });
                     DataContext = new DataSystemVM();
                 }
 
@@ -69,7 +66,7 @@ namespace GTweak.View
             }, Application.Current.Dispatcher);
             timer.Start();
 
-            RAMLoad.Value = new MonitoringSystem().GetMemoryUsage();
+            RAMLoad.Value = new MonitoringSystem().GetMemoryUsage;
             CPULoad.Value = MonitoringSystem.GetProcessorUsage;
         }
 
@@ -92,7 +89,7 @@ namespace GTweak.View
                 doubleAnim = new DoubleAnimation()
                 {
                     From = RAMLoad.Value,
-                    To = new MonitoringSystem().GetMemoryUsage(),
+                    To = new MonitoringSystem().GetMemoryUsage,
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };

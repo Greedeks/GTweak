@@ -58,7 +58,7 @@ namespace GTweak.Windows
                 new SystemTweaks().ViewNetshState,
                 new SystemTweaks().ViewBluetoothStatus);
 
-            await MonitoringSystem.GetTotalProcessorUsage();
+            await new MonitoringSystem().GetTotalProcessorUsage();
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

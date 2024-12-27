@@ -87,8 +87,6 @@ namespace GTweak.View
                 if (!SystemTweaks.isTweakWorkingAntivirus)
                 {
                     SystemTweaks.isTweakWorkingAntivirus = true;
-                    INIManager.TempTweaksSys.Remove(toggleButton.Name);
-                    INIManager.TempTweaksSys.Add(toggleButton.Name, Convert.ToString(toggleButton.State));
                     SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State);
                     new ViewNotification().Show("", "info", (string)FindResource("windefender_notification"));
                 }

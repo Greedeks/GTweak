@@ -54,7 +54,7 @@ namespace GTweak.Utilities.Configuration
            { "UserIpAddress", Application.Current.Resources["connection_lose_systemInformation"].ToString() }
         };
 
-        internal static ImageSource GetProfileImage()
+        internal ImageSource GetProfileImage()
         {
             try
             {
@@ -68,7 +68,7 @@ namespace GTweak.Utilities.Configuration
             catch { return null; }
         }
 
-        internal static string GetProfileName()
+        internal string GetProfileName()
         {
             string nameProfile = string.Empty;
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLower()}'").Get())
@@ -91,7 +91,7 @@ namespace GTweak.Utilities.Configuration
             );
         }
 
-        internal static void GetUpdatingDevices()
+        internal void GetUpdatingDevices()
         {
             Parallel.Invoke(
                 GetStorageDevices,
@@ -164,7 +164,7 @@ namespace GTweak.Utilities.Configuration
         }
 
 
-        private static void GetAudioDevices()
+        private void GetAudioDevices()
         {
             static (bool, string) IsUsbAudioDevice(string deviceID)
             {
@@ -205,7 +205,7 @@ namespace GTweak.Utilities.Configuration
             HardwareData["Audio"] = HardwareData["Audio"].TrimEnd('\n');
         }
 
-        private static void GetNetworkAdapters()
+        private void GetNetworkAdapters()
         {
             HardwareData["NetAdapter"] = string.Empty;
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
@@ -213,7 +213,7 @@ namespace GTweak.Utilities.Configuration
             HardwareData["NetAdapter"] = HardwareData["NetAdapter"].TrimEnd('\n');
         }
 
-        private static bool IsNetworkAvailable()
+        private bool IsNetworkAvailable()
         {
             try
             {
@@ -238,7 +238,7 @@ namespace GTweak.Utilities.Configuration
             catch { return false; }
         }
 
-        internal static async void GetUserIpAddress()
+        internal async void GetUserIpAddress()
         {
             await Task.Run(async () =>
             {
