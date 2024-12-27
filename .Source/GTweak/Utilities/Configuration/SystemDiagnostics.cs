@@ -163,11 +163,45 @@ namespace GTweak.Utilities.Configuration
             HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
         }
 
+
         private static void GetAudioDevices()
         {
+            static (bool, string) IsUsbAudioDevice(string deviceID)
+            {
+                using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render"))
+                {
+                    if (regKey != null)
+                    {
+                        foreach (string subKeyName in regKey.GetSubKeyNames())
+                        {
+                            using RegistryKey subKey = regKey.OpenSubKey(subKeyName + @"\Properties");
+                            if (subKey != null)
+                            {
+                                if (subKey.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},24")?.ToString() == "USB" && subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},2")?.ToString()?.Contains(deviceID) == true)
+                                {
+                                    string value = subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},6")?.ToString();
+                                    return (true, value);
+                                }
+                            }
+                        }
+                    }
+                }
+                return (false, string.Empty);
+            }
+
             HardwareData["Audio"] = string.Empty;
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description from Win32_SoundDevice", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["Audio"] += $"{new[] { "Name", "Caption", "Description" }.Select(prop => (string)managementObj[prop]).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "SELECT DeviceID, Name, Caption, Description FROM Win32_SoundDevice", new EnumerationOptions { ReturnImmediately = true }))
+            {
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
+
+                    if (isUsbDevice && !string.IsNullOrEmpty(data))
+                        HardwareData["Audio"] += $"{data}\n";
+                    else
+                        HardwareData["Audio"] += $"{new[] { "Name", "Caption", "Description" }.Select(prop => (string)managementObj[prop]).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
+                }
+            }
             HardwareData["Audio"] = HardwareData["Audio"].TrimEnd('\n');
         }
 

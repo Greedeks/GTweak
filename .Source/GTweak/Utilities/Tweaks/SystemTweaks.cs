@@ -64,6 +64,7 @@ namespace GTweak.Utilities.Tweaks
 
             try
             {
+
                 using RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}", true);
 
                 if (registryKey == null)
@@ -72,15 +73,19 @@ namespace GTweak.Utilities.Tweaks
                 foreach (string keyname in registryKey.GetSubKeyNames())
                 {
                     using RegistryKey key = registryKey.OpenSubKey(keyname, true);
-                    if (key?.GetValue("DriverDesc")?.ToString() == "Realtek High Definition Audio")
+                    if (key == null) continue;
+
+                    if (key.GetValue("DriverDesc")?.ToString() == "Realtek High Definition Audio")
                     {
-                        using RegistryKey powerSettingsKey = key.OpenSubKey(@"PowerSettings", true);
+                        using RegistryKey powerSettingsKey = key.OpenSubKey("PowerSettings", true);
 
                         byte[] conservationIdleTime = powerSettingsKey.GetValue("ConservationIdleTime") as byte[];
                         byte[] idlePowerState = powerSettingsKey.GetValue("IdlePowerState") as byte[];
                         byte[] performanceIdleTime = powerSettingsKey.GetValue("PerformanceIdleTime") as byte[];
 
                         systemV.TglButton7.StateNA = conservationIdleTime?[0].ToString() != "255" || idlePowerState?[0].ToString() != "0" || performanceIdleTime?[0].ToString() != "255";
+
+
                     }
                 }
             }
