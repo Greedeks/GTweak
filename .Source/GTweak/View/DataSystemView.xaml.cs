@@ -34,7 +34,7 @@ namespace GTweak.View
                     { SystemDiagnostics.ConnectionStatus.Limited, "limited_systemInformation" }
                 }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey))
                 {
-                    SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource(resourceKey);
+                    SystemDiagnostics.HardwareData["UserIpAddress"] = (string)FindResource(resourceKey);
                     DataContext = new DataSystemVM();
                 }
             };

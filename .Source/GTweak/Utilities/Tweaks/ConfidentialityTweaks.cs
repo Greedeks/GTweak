@@ -108,7 +108,7 @@ namespace GTweak.Utilities.Tweaks
             confidentialityV.TglButton16.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
 
-            confidentialityV.TglButton17.StateNA = SystemDiagnostics.СonfigurationData["GPU"].ToLower().Contains("nvidia")
+            confidentialityV.TglButton17.StateNA = SystemDiagnostics.HardwareData["GPU"].ToLower().Contains("nvidia")
                 && (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(NvidiaTasks));
 
             confidentialityV.TglButton18.StateNA =
