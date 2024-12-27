@@ -1,13 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.IO;
 using System.Net;
 
 namespace GTweak.Utilities.Control
 {
-    internal sealed class SearchUpdates
+    internal sealed class QueryUpdates
     {
-        internal class GitVersionUtility
+        internal class GitMetadata
         {
             [JsonProperty("tag_name")]
             internal string СurrentVersion { get; set; }
@@ -16,9 +15,9 @@ namespace GTweak.Utilities.Control
         internal static bool IsNeedUpdate { get; private set; } = false;
         internal static string DownloadVersion { get; private set; } = string.Empty;
 
-        internal void StartСhecking()
+        internal void RunSearch()
         {
-            if (!Settings.IsСheckingUpdate)
+            if (!SettingsRepository.IsСheckingUpdate)
                 return;
 
             try
@@ -32,9 +31,9 @@ namespace GTweak.Utilities.Control
                 using (StreamReader sreader = new StreamReader(response.GetResponseStream()))
                 {
                     string DataAsJson = sreader.ReadToEnd();
-                    GitVersionUtility gitVersionUtility = JsonConvert.DeserializeObject<GitVersionUtility>(DataAsJson);
+                    GitMetadata gitVersionUtility = JsonConvert.DeserializeObject<GitMetadata>(DataAsJson);
 
-                    if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(Settings.currentRelease) > 0)
+                    if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsRepository.currentRelease) > 0)
                     {
                         IsNeedUpdate = true;
                         DownloadVersion = gitVersionUtility.СurrentVersion;

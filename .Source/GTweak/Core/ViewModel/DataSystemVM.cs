@@ -34,8 +34,8 @@ namespace GTweak.Core.ViewModel
 
         public bool StateButton
         {
-            get => Settings.IsHiddenIpAddress;
-            set { Settings.IsHiddenIpAddress = value; OnPropertyChanged(); }
+            get => SettingsRepository.IsHiddenIpAddress;
+            set { SettingsRepository.IsHiddenIpAddress = value; OnPropertyChanged(); }
         }
 
         public DataSystemVM()
@@ -57,15 +57,15 @@ namespace GTweak.Core.ViewModel
                  new DataSystemModel { Name = "IpAddress", Data = SystemDiagnostics.СonfigurationData["UserIpAddress"] }
             };
 
-            if (Settings.IsHiddenIpAddress & SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available)
+            if (SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available)
             {
-                SetBlurValue = 20;
+                SetBlurValue = SettingsRepository.IsHiddenIpAddress ? 20 : 0;
                 SetVisibility = Visibility.Visible;
             }
             else
             {
                 SetBlurValue = 0;
-                SetVisibility = SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available ? Visibility.Visible : Visibility.Hidden;
+                SetVisibility = Visibility.Hidden;
             }
         }
     }

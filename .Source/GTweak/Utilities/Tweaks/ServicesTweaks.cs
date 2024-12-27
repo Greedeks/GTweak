@@ -227,7 +227,7 @@ namespace GTweak.Utilities.Tweaks
                     Task.Run(delegate
                     {
                         string value = isChoose ? "4" : "3";
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d {value} /f & " +
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d {value} /f & " +
                              $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\VacSvc /t REG_DWORD /v Start /d {value} /f & " +
                              $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\spectrum /t REG_DWORD /v Start /d {value} /f & " +
                              $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SharedRealitySvc /t REG_DWORD /v Start /d {value} /f & " +
@@ -308,7 +308,7 @@ namespace GTweak.Utilities.Tweaks
                     {
                         backgroundWorker.DoWork += delegate
                         {
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, $"cmd.exe /c {(isChoose ? "rename " + PathsWinUUP("Worker") + " " + ProgramsUUP["Re_Worker"] : "rename " + PathsWinUUP("Re_Worker") + " " + ProgramsUUP["Worker"])} & " +
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c {(isChoose ? "rename " + PathsWinUUP("Worker") + " " + ProgramsUUP["Re_Worker"] : "rename " + PathsWinUUP("Re_Worker") + " " + ProgramsUUP["Worker"])} & " +
                                 $"{(isChoose ? "rename " + PathsWinUUP("Core") + " " + ProgramsUUP["Re_Core"] : "rename " + PathsWinUUP("Re_Core") + " " + ProgramsUUP["Core"])} & " +
                                 $"{(isChoose ? "rename " + PathsWinUUP("Agent") + " " + ProgramsUUP["Re_Agent"] : "rename " + PathsWinUUP("Re_Agent") + " " + ProgramsUUP["Agent"])} & " +
                                 $"{(isChoose ? "rename " + PathsWinUUP("Uso") + " " + ProgramsUUP["Re_Uso"] : "rename " + PathsWinUUP("Re_Uso") + " " + ProgramsUUP["Uso"])} & " +

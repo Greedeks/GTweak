@@ -14,8 +14,8 @@ namespace GTweak.Windows
         public UpdateWindow()
         {
             InitializeComponent();
-            CurrentVerison.Text = Settings.currentRelease;
-            DownloadVersion.Text = NewVerison.Text = SearchUpdates.DownloadVersion;
+            CurrentVerison.Text = SettingsRepository.currentRelease;
+            DownloadVersion.Text = NewVerison.Text = QueryUpdates.DownloadVersion;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -77,7 +77,7 @@ namespace GTweak.Windows
                     {
                         Process.Start(new ProcessStartInfo()
                         {
-                            Arguments = $"/c taskkill /f /im \"{Settings.currentName}\" && timeout /t 1 && del \"{Settings.currentLocation}\" && ren Git-GTweak.exe \"{Settings.currentName}\" &&  \"{Settings.currentLocation}\"",
+                            Arguments = $"/c taskkill /f /im \"{SettingsRepository.currentName}\" && timeout /t 1 && del \"{SettingsRepository.currentLocation}\" && ren Git-GTweak.exe \"{SettingsRepository.currentName}\" &&  \"{SettingsRepository.currentLocation}\"",
                             WindowStyle = ProcessWindowStyle.Hidden,
                             CreateNoWindow = true,
                             FileName = "cmd.exe"

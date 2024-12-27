@@ -15,6 +15,7 @@ namespace GTweak.Utilities.Tweaks
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
 
+        #region Lists packages
         internal static Dictionary<string, bool> IsAppUnavailable = new Dictionary<string, bool>
         {
             ["MicrosoftStore"] = false,
@@ -114,6 +115,7 @@ namespace GTweak.Utilities.Tweaks
             ["Video"] = "zunevideo",
             ["Widgets"] = "Windows.Client.WebExperience"
         };
+        #endregion
 
         internal void ViewInstalledPackages()
         {
@@ -197,8 +199,6 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void DeletedOneDrive()
         {
-
-
             using (Process process = new Process())
             {
                 process.StartInfo.UseShellExecute = false;

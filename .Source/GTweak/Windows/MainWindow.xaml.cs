@@ -19,13 +19,13 @@ namespace GTweak
         {
             InitializeComponent();
 
-            BtnNotification.StateNA = Settings.IsViewNotification;
-            BtnUpdate.StateNA = Settings.IsСheckingUpdate;
-            BtnTopMost.StateNA = Topmost = Settings.IsTopMost;
-            BtnSoundNtn.IsChecked = Settings.IsPlayingSound;
-            SliderVolume.Value = (ushort)(Settings.currentVolume & 0x0000ffff) / (ushort.MaxValue / 100);
-            LanguageSelectionMenu.SelectedIndex = Settings.Language == "en" ? 0 : 1;
-            ThemeSelectionMenu.SelectedIndex = Settings.Theme switch
+            BtnNotification.StateNA = SettingsRepository.IsViewNotification;
+            BtnUpdate.StateNA = SettingsRepository.IsСheckingUpdate;
+            BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
+            BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
+            SliderVolume.Value = (ushort)(SettingsRepository.currentVolume & 0x0000ffff) / (ushort.MaxValue / 100);
+            LanguageSelectionMenu.SelectedIndex = SettingsRepository.Language == "en" ? 0 : 1;
+            ThemeSelectionMenu.SelectedIndex = SettingsRepository.Theme switch
             {
                 "Dark" => 0,
                 "Light" => 1,
@@ -127,7 +127,7 @@ namespace GTweak
             };
             doubleAnim.Completed += async delegate
             {
-                if (SearchUpdates.IsNeedUpdate && Settings.IsСheckingUpdate)
+                if (QueryUpdates.IsNeedUpdate && SettingsRepository.IsСheckingUpdate)
                 {
                     await Task.Delay(500);
                     new UpdateWindow().ShowDialog();
@@ -140,25 +140,25 @@ namespace GTweak
         #endregion
 
         #region Settings Menu
-        private void BtnNotification_ChangedState(object sender, EventArgs e) => Settings.ChangingParameters(!BtnNotification.State, "Notification");
+        private void BtnNotification_ChangedState(object sender, EventArgs e) => SettingsRepository.ChangingParameters(!BtnNotification.State, "Notification");
 
-        private void BtnUpdate_ChangedState(object sender, EventArgs e) => Settings.ChangingParameters(!BtnUpdate.State, "Update");
+        private void BtnUpdate_ChangedState(object sender, EventArgs e) => SettingsRepository.ChangingParameters(!BtnUpdate.State, "Update");
 
         private void BtnTopMost_ChangedState(object sender, EventArgs e)
         {
-            Settings.ChangingParameters(!BtnTopMost.State, "TopMost");
+            SettingsRepository.ChangingParameters(!BtnTopMost.State, "TopMost");
             Topmost = !BtnTopMost.State;
         }
 
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
-            Settings.WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) << 16));
+            SettingsRepository.WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) << 16));
         }
 
         private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Settings.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound");
+            SettingsRepository.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound");
         }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -166,11 +166,11 @@ namespace GTweak
             switch (LanguageSelectionMenu.SelectedIndex)
             {
                 case 0:
-                    Settings.ChangingParameters("en", "Language");
+                    SettingsRepository.ChangingParameters("en", "Language");
                     App.Language = "en";
                     break;
                 default:
-                    Settings.ChangingParameters("ru", "Language");
+                    SettingsRepository.ChangingParameters("ru", "Language");
                     App.Language = "ru";
                     break;
             }
@@ -181,25 +181,25 @@ namespace GTweak
             switch (ThemeSelectionMenu.SelectedIndex)
             {
                 case 0:
-                    Settings.ChangingParameters("Dark", "Theme");
+                    SettingsRepository.ChangingParameters("Dark", "Theme");
                     App.Theme = "Dark";
                     break;
                 case 1:
-                    Settings.ChangingParameters("Light", "Theme");
+                    SettingsRepository.ChangingParameters("Light", "Theme");
                     App.Theme = "Light";
                     break;
                 default:
-                    Settings.ChangingParameters("System", "Theme");
+                    SettingsRepository.ChangingParameters("System", "Theme");
                     App.Theme = "System";
                     break;
             }
         }
 
-        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(Settings.SaveFileConfig);
+        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(SettingsRepository.SaveFileConfig);
 
-        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(Settings.OpenFileConfig);
+        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(SettingsRepository.OpenFileConfig);
 
-        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Settings.SelfRemoval();
+        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.SelfRemoval();
 
         private void BtnContats_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

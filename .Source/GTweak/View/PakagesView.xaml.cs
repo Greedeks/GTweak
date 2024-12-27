@@ -96,7 +96,7 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Parallel.Invoke(UpdateViewStatePakages);
+            UpdateViewStatePakages();
             new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(300));
         }
 

@@ -13,7 +13,7 @@ namespace GTweak.Utilities.Control
 
         internal void Show(string action, string tittle = "", string content = "")
         {
-            if (Settings.IsViewNotification)
+            if (SettingsRepository.IsViewNotification)
             {
                 Application.Current.Dispatcher.Invoke(delegate
                 {

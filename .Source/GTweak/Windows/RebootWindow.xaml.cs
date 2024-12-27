@@ -23,7 +23,7 @@ namespace GTweak.Windows
                 Duration = TimeSpan.FromSeconds(1.5)
             };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
-            doubleAnim.Completed += delegate { Settings.SelfReboot(); };
+            doubleAnim.Completed += delegate { SettingsRepository.SelfReboot(); };
             RestartProgress.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
         }
     }

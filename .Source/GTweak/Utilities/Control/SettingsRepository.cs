@@ -21,7 +21,7 @@ namespace GTweak.Utilities.Control
         internal static string Hosts => Path.Combine(Environment.SystemDirectory, @"drivers\etc\hosts");
     }
 
-    internal sealed class Settings
+    internal sealed class SettingsRepository
     {
         internal sealed class WinmmMethods
         {
@@ -68,7 +68,7 @@ namespace GTweak.Utilities.Control
                 registryKey?.SetValue("HiddenIP", IsHiddenIpAddress, RegistryValueKind.String);
                 registryKey?.SetValue("Theme", Theme, RegistryValueKind.String);
                 registryKey?.SetValue("Language", App.GettingSystemLanguage, RegistryValueKind.String);
-                WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)((ushort.MaxValue / 100) * defaultVolume) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * defaultVolume) << 16));
+                WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * defaultVolume) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * defaultVolume) << 16));
             }
             else
             {
@@ -80,7 +80,6 @@ namespace GTweak.Utilities.Control
                 Language = registryKey?.GetValue("Language").ToString() ?? App.GettingSystemLanguage;
                 Theme = registryKey?.GetValue("Theme").ToString() ?? "Dark";
                 WinmmMethods.waveOutGetVolume(IntPtr.Zero, out currentVolume);
-
             }
             registryKey?.Close();
         }

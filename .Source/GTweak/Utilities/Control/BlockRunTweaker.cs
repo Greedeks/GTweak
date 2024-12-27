@@ -22,7 +22,7 @@ namespace GTweak.Utilities.Control
         {
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = @$"/c timeout /t 10 && del %userprofile%\AppData\Local\CrashDumps\*{Settings.currentName}*",
+                Arguments = @$"/c timeout /t 10 && del %userprofile%\AppData\Local\CrashDumps\*{SettingsRepository.currentName}*",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"

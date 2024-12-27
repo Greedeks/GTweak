@@ -3,6 +3,7 @@ using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,19 +27,16 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                switch (SystemDiagnostics.CurrentConnection)
+                if (new Dictionary<SystemDiagnostics.ConnectionStatus, string>
                 {
-                    case SystemDiagnostics.ConnectionStatus.Lose:
-                        SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_lose_systemInformation");
-                        break;
-                    case SystemDiagnostics.ConnectionStatus.Block:
-                        SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource("connection_block_systemInformation");
-                        break;
-                    case SystemDiagnostics.ConnectionStatus.Limited:
-                        SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource("limited_systemInformation");
-                        break;
+                    { SystemDiagnostics.ConnectionStatus.Lose, "connection_lose_systemInformation" },
+                    { SystemDiagnostics.ConnectionStatus.Block, "connection_block_systemInformation" },
+                    { SystemDiagnostics.ConnectionStatus.Limited, "limited_systemInformation" }
+                }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey))
+                {
+                    SystemDiagnostics.СonfigurationData["UserIpAddress"] = (string)FindResource(resourceKey);
+                    DataContext = new DataSystemVM();
                 }
-                DataContext = new DataSystemVM();
             };
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, async delegate
@@ -55,7 +53,7 @@ namespace GTweak.View
                     if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
                     {
                         DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
-                        doubleAnim.Completed += delegate { Parallel.Invoke(() => { Settings.ChangingParameters(false, "HiddenIP"); }); };
+                        doubleAnim.Completed += delegate { SettingsRepository.ChangingParameters(false, "HiddenIP"); };
                         Timeline.SetDesiredFrameRate(doubleAnim, 400);
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                     }
@@ -138,7 +136,7 @@ namespace GTweak.View
 
         private void BtnHiddenIP_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Settings.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP");
+            SettingsRepository.ChangingParameters(!BtnHiddenIP.IsChecked.Value, "HiddenIP");
 
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {

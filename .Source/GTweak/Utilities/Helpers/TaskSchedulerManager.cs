@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Helpers
 
                 command = command.TrimEnd(' ', '&');
 
-                TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, command);
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, command);
             });
         }
     }

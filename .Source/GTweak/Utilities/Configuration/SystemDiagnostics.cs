@@ -39,7 +39,7 @@ namespace GTweak.Utilities.Configuration
             return nameProfile != string.Empty ? nameProfile : Environment.UserName.ToLower();
         }
 
-        internal sealed class ClientInternetProtocol
+        internal sealed class IPMetadata
         {
             [JsonProperty("query")]
             internal string Ip { get; set; }
@@ -194,16 +194,16 @@ namespace GTweak.Utilities.Configuration
 
         internal static void GetUserIpAddress()
         {
-            Parallel.Invoke(delegate
+            Task.Run(delegate
             {
                 if (IsNetworkAvailable())
                 {
-                    ClientInternetProtocol clientInternetProtocol = new ClientInternetProtocol();
+                    IPMetadata ipMetadata = new IPMetadata();
 
                     try
                     {
                         HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5.0) };
-                        clientInternetProtocol = JsonConvert.DeserializeObject<ClientInternetProtocol>(client.GetStringAsync("http://ip-api.com/json/?fields=61439").Result);
+                        ipMetadata = JsonConvert.DeserializeObject<IPMetadata>(client.GetStringAsync("http://ip-api.com/json/?fields=61439").Result);
                     }
                     catch
                     {
@@ -212,10 +212,10 @@ namespace GTweak.Utilities.Configuration
                     }
                     finally
                     {
-                        if (IPAddress.TryParse(clientInternetProtocol.Ip, out _) && !string.IsNullOrEmpty(clientInternetProtocol.Ip) && !string.IsNullOrEmpty(clientInternetProtocol.Country))
+                        if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrEmpty(ipMetadata.Ip) && !string.IsNullOrEmpty(ipMetadata.Country))
                         {
                             CurrentConnection = ConnectionStatus.Available;
-                            СonfigurationData["UserIpAddress"] = $"{clientInternetProtocol.Ip} ({clientInternetProtocol.Country})";
+                            СonfigurationData["UserIpAddress"] = $"{ipMetadata.Ip} ({ipMetadata.Country})";
                         }
                         else
                         {

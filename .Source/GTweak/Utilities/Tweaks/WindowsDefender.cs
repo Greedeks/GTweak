@@ -13,7 +13,7 @@ namespace GTweak.Utilities.Tweaks
     {
         internal void Enable()
         {
-            TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /v EnableWebContentEvaluation /f & " +
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /v EnableWebContentEvaluation /f & " +
                 "reg delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /v SmartScreenEnabled /f & " +
                 "reg delete HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter /v EnabledV9 /f & " +
                 "reg delete HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /v EnableSmartScreen /f & " +
@@ -267,7 +267,7 @@ namespace GTweak.Utilities.Tweaks
 
             await Task.Delay(1000);
 
-            TrustedInstaller.CreateProcessAsTrustedInstaller(Settings.PID, "cmd.exe /c taskkill /f /im MsMpEng.exe & reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /t REG_DWORD /v EnableWebContentEvaluation /d 0 /f & " +
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c taskkill /f /im MsMpEng.exe & reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /t REG_DWORD /v EnableWebContentEvaluation /d 0 /f & " +
                 "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /t REG_SZ /v SmartScreenEnabled /d \"off\" /f & " +
                 "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter /t REG_DWORD /v EnabledV9 /d 0 /f & " +
                 "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\System /t REG_DWORD /v EnableSmartScreen /d 0 /f & " +
