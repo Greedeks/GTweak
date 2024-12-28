@@ -18,8 +18,8 @@
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard Timeline.DesiredFrameRate="400">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.07" Duration="0:0:1.0" SpeedRatio="10"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.07" Duration="0:0:1.0" SpeedRatio="10"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.07" Duration="0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.07" Duration="0:0:0.1"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -28,8 +28,8 @@
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard Timeline.DesiredFrameRate="400">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.07" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.07" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.07" To="1" Duration="0:0:0.1"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.07" To="1" Duration="0:0:0.1"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
