@@ -26,12 +26,11 @@ namespace GTweak.View
 
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                if (time.TotalSeconds % 2 == 0)
-                    UpdateViewStatePakages();
-                else if (time.TotalSeconds % 5 == 0)
+                if (time.TotalSeconds % 4 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.DoWork += delegate { new UninstallingPakages().ViewInstalledPackages(); };
+                    backgroundWorker.RunWorkerCompleted += delegate { UpdateViewStatePakages(); };
                     backgroundWorker.RunWorkerAsync();
                 }
 
@@ -104,7 +103,7 @@ namespace GTweak.View
         {
             static bool isContains(string pattern)
             {
-                return new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace).IsMatch(UninstallingPakages.UserPackages);
+                return new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace).IsMatch(UninstallingPakages.InstalledPackages);
             }
 
             return !isOneDrive

@@ -65,7 +65,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 EnablePoint();
 
-                await StartPowerShellAsync(@"Get-ComputerRestorePoint | Where-Object {$_.Description -like '*GTweak*'} | Select-Object SequenceNumber | ft -hide");
+                await StartPowerShellAsync(@"Get-ComputerRestorePoint | Where-Object {$_.Description -like '*GTweak*'} | Select-Object -ExpandProperty SequenceNumber");
 
                 if (!string.IsNullOrEmpty(output))
                     SRRemoveRestorePoint(Convert.ToInt32(output.Trim()));

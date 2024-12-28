@@ -10,10 +10,11 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingPakages
     {
-        internal static string UserPackages { get; private set; } = string.Empty;
+        internal static string InstalledPackages { get; private set; }
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
+        private static readonly string pathPackage = $@"{UsePath.SystemDisk}Program Files\WindowsApps";
 
         #region Lists packages
         internal static Dictionary<string, bool> IsAppUnavailable = new Dictionary<string, bool>
@@ -59,9 +60,9 @@ namespace GTweak.Utilities.Tweaks
             ["QuickAssist"] = false,
             ["DevHome"] = false,
             ["WindowsTerminal"] = false
-
         };
-        internal static readonly SortedList<string, List<string>> ListAppsScipt = new SortedList<string, List<string>>
+
+        private static readonly SortedList<string, List<string>> PackageScripts = new SortedList<string, List<string>>
         {
             ["MicrosoftStore"] = new List<string>(1) { "Microsoft.WindowsStore" },
             ["Todos"] = new List<string>(1) { "Microsoft.Todos" },
@@ -104,7 +105,8 @@ namespace GTweak.Utilities.Tweaks
             ["DevHome"] = new List<string>(1) { "Microsoft.Windows.DevHome" },
             ["WindowsTerminal"] = new List<string>(1) { "Microsoft.WindowsTerminal" },
         };
-        private static readonly SortedList<string, string> AlternativeName = new SortedList<string, string>
+
+        private static readonly SortedList<string, string> PackageAliases = new SortedList<string, string>
         {
             ["MicrosoftSolitaireCollection"] = "solitaire",
             ["MicrosoftOfficeHub"] = "officehub",
@@ -119,25 +121,31 @@ namespace GTweak.Utilities.Tweaks
 
         internal void ViewInstalledPackages()
         {
+            List<string> packages = new List<string>();
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
-                FileName = @"powershell.exe",
-                Arguments = @"Get-AppxPackage | select Name | ft -hide",
+                FileName = "powershell.exe",
+                Arguments = "Get-AppxPackage | Select-Object -ExpandProperty Name",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
                 CreateNoWindow = true
             };
 
-            using Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
+            using Process process = new Process { StartInfo = startInfo };
 
             process.Start();
 
-            UserPackages = process.StandardOutput.ReadToEnd();
+            string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
 
-            process.Close();
+            if (process.ExitCode == 0)
+            {
+                string[] packageNames = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                packages.AddRange(packageNames);
+                InstalledPackages = string.Join(Environment.NewLine, packages);
+            }
         }
-
 
         internal static void DeletingPackage(string packageName)
         {
@@ -153,25 +161,23 @@ namespace GTweak.Utilities.Tweaks
                     process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                     process.EnableRaisingEvents = true;
                     process.StartInfo.FileName = "powershell.exe";
-                    process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + packageName + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                    process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                     process.Start();
 
-                    foreach (string getPackage in ListAppsScipt[packageName])
+                    foreach (string getPackage in PackageScripts[packageName])
                     {
-                        process.StartInfo.Arguments = string.Format("Get-AppxPackage -Name " + getPackage + " -AllUsers | Remove-AppxPackage");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getPackage}*"") do rd /s /q ""%i""");
+                        process.StartInfo.Arguments = $"Get-AppxPackage -Name {getPackage} -AllUsers | Remove-AppxPackage";
                         process.Start();
                     }
 
-                    if (AlternativeName.ContainsKey(packageName))
+                    if (PackageAliases.ContainsKey(packageName))
                     {
-                        process.StartInfo.Arguments = "Get-AppxProvisionedPackage -online | where-object {$_.PackageName -like '*" + AlternativeName[packageName] + "*'} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                        process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{PackageAliases[packageName]}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
-                        UserPackages = UserPackages.Replace(AlternativeName[packageName], "");
                     }
 
                     process.WaitForExit(1000);
-
-                    UserPackages = UserPackages.Replace(packageName, string.Empty);
                 }
 
                 switch (packageName)
@@ -215,11 +221,10 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                 }
-
             }
 
-            string argumentsFolders = @"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
-            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q " + UsePath.SystemDisk + @"\OneDriveTemp";
+            string argumentsFolders = $@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
+            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {UsePath.SystemDisk}\OneDriveTemp";
 
             if (isLocalAccount)
                 argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";
@@ -256,7 +261,7 @@ namespace GTweak.Utilities.Tweaks
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = @"powershell.exe",
-                Arguments = @"Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object PrincipalSource | ft -hide",
+                Arguments = @"Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
