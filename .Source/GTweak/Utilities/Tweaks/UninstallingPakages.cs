@@ -121,7 +121,6 @@ namespace GTweak.Utilities.Tweaks
 
         internal void ViewInstalledPackages()
         {
-            List<string> packages = new List<string>();
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = "powershell.exe",
@@ -133,18 +132,14 @@ namespace GTweak.Utilities.Tweaks
             };
 
             using Process process = new Process { StartInfo = startInfo };
-
             process.Start();
 
             string output = process.StandardOutput.ReadToEnd();
+
             process.WaitForExit();
 
             if (process.ExitCode == 0)
-            {
-                string[] packageNames = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                packages.AddRange(packageNames);
-                InstalledPackages = string.Join(Environment.NewLine, packages);
-            }
+                InstalledPackages = string.Join(Environment.NewLine, output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));
         }
 
         internal static void DeletingPackage(string packageName)
