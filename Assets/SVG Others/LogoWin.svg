@@ -1,19 +1,9 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000"
- preserveAspectRatio="xMidYMid meet">
-
-<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M0 3870 l0 -1210 1225 0 1225 0 0 1210 0 1210 -1225 0 -1225 0 0
--1210z"/>
-<path d="M2670 3870 l0 -1210 1225 0 1225 0 0 1210 0 1210 -1225 0 -1225 0 0
--1210z"/>
-<path d="M0 1250 l0 -1210 1225 0 1225 0 0 1210 0 1210 -1225 0 -1225 0 0
--1210z"/>
-<path d="M2670 1250 l0 -1210 1225 0 1225 0 0 1210 0 1210 -1225 0 -1225 0 0
--1210z"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80px" height="80px" viewBox="0 0 80 80" version="1.1">
+<g id="surface1">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 0 19.53125 L 0 38.4375 L 38.28125 38.4375 L 38.28125 0.625 L 0 0.625 Z M 0 19.53125 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 41.71875 19.53125 L 41.71875 38.4375 L 80 38.4375 L 80 0.625 L 41.71875 0.625 Z M 41.71875 19.53125 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 0 60.46875 L 0 79.375 L 38.28125 79.375 L 38.28125 41.5625 L 0 41.5625 Z M 0 60.46875 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(0%,0%,0%);fill-opacity:1;" d="M 41.71875 60.46875 L 41.71875 79.375 L 80 79.375 L 80 41.5625 L 41.71875 41.5625 Z M 41.71875 60.46875 "/>
 </g>
 </svg>

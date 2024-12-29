@@ -31,10 +31,10 @@
 
         <Grid Grid.Row="0">
 
-            <Grid HorizontalAlignment="Left" Margin="50,20,0,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
+            <Grid HorizontalAlignment="Left" Margin="50,10,0,0" Width="110" Height="110">
+                <Ellipse Height="95" Width="95" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
 
-                <xrpb:RadialProgressBar x:Name="CPULoad" Value="0" Maximum="100" Width="100" Height="100" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <xrpb:RadialProgressBar x:Name="CPULoad" Value="0" Maximum="100" Width="106" Height="104" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <xrpb:RadialProgressBar.Foreground>
                         <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
                             <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>
@@ -46,10 +46,10 @@
                     </xrpb:RadialProgressBar.Effect>
                 </xrpb:RadialProgressBar>
 
-                <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,30,0,0">
+                <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,35,0,0">
                 <Run Text="{Binding ElementName=CPULoad, Path=Value, Mode=OneWay,StringFormat=N0}"/><Run Text="%"/>
                 </TextBlock>
-                <TextBlock Text="CPU" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,50,0,0"/>
+                <TextBlock Text="CPU" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,55,0,0"/>
             </Grid>
 
             <Grid HorizontalAlignment="Center" Margin="0,20,0,0">
@@ -73,11 +73,11 @@
                     </TextBlock>
                 </StackPanel>
             </Grid>
-            
-            <Grid HorizontalAlignment="Right" Margin="0,20,50,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
 
-                <xrpb:RadialProgressBar x:Name="RAMLoad" Value="0" Maximum="100" Width="100" Height="100" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Arrow">
+            <Grid HorizontalAlignment="Right" Margin="0,10,50,0" Width="110" Height="110">
+                <Ellipse Height="95" Width="95" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
+
+                <xrpb:RadialProgressBar x:Name="RAMLoad" Value="0" Maximum="100" Width="106" Height="104" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center" Cursor="Arrow">
                     <xrpb:RadialProgressBar.Foreground>
                         <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
                             <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>
@@ -89,10 +89,10 @@
                     </xrpb:RadialProgressBar.Effect>
                 </xrpb:RadialProgressBar>
 
-                <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,30,0,0">
+                <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,35,0,0">
                 <Run Text="{Binding ElementName=RAMLoad, Path=Value, Mode=OneWay,StringFormat=N0}"/><Run Text="%"/>
                 </TextBlock>
-                <TextBlock Text="RAM" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,50,0,0"/>
+                <TextBlock Text="RAM" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,55,0,0"/>
             </Grid>
         </Grid>
 
