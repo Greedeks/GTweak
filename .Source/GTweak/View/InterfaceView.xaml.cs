@@ -17,8 +17,6 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
-
             if (!WindowsLicense.IsWindowsActivated)
                 new ViewNotification().Show("", "info", (string)Application.Current.Resources["viewlicense_notification"]);
         }
@@ -26,11 +24,11 @@ namespace GTweak.View
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
-            string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_interface");
+            string descriptionTweak = (string)FindResource(toggleButton.Name + "_description_interface");
 
-            if (TextDescription.Text != _descriptionTweak)
+            if (CommentTweak.Text != descriptionTweak)
             {
-                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
+                CommentTweak.Text = descriptionTweak;
 
                 if (toggleButton.Name == "TglButton1")
                 {
@@ -56,8 +54,8 @@ namespace GTweak.View
                 TextViewColor.Visibility = Visibility.Hidden;
             else if (PreviewFlick.Visibility == Visibility.Visible)
                 PreviewFlick.Visibility = Visibility.Hidden;
-            if (TextDescription.Text != (string)FindResource("defaultDescription"))
-                new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
+            if (CommentTweak.Text != (string)FindResource("defaultDescription"))
+                CommentTweak.Text = (string)FindResource("defaultDescription");
         }
 
         private void TglButton_ChangedState(object sender, EventArgs e)
@@ -88,10 +86,7 @@ namespace GTweak.View
             Parallel.Invoke(async delegate { await Task.Delay(1000); new InterfaceTweaks().ViewInterface(this); });
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
-            Parallel.Invoke(() => new InterfaceTweaks().ViewInterface(this));
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new InterfaceTweaks().ViewInterface(this));
+
     }
 }

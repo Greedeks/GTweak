@@ -3,7 +3,7 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
     <v:String x:Key="defaultDescription">Наведите указатель мыши на любой твик, чтобы получить его описание</v:String>
-    <v:String x:Key="defaultDescriptionApp">Наведите указатель мыши на любую иконку приложения, чтобы получить его название</v:String>
+    <v:String x:Key="defaultDescriptionApp">Наведите указатель мыши на значок любого приложения, чтобы получить его название</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title0_load">Загрузка</v:String>

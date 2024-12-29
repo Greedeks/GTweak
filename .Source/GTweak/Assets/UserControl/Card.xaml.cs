@@ -19,10 +19,10 @@ namespace GTweak.Assets.UserControl
         internal DynamicResourceExtension BtnContent { set => CardButton.SetResourceReference(ContentProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey)); }
 
         internal static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("DescriptionBlock", typeof(string), typeof(TextBlock), new PropertyMetadata("", (s, e) => ((TextBlock)s).Text = (string)e.NewValue));
+            DependencyProperty.Register("DescriptionBlock", typeof(string), typeof(Card), new PropertyMetadata(string.Empty));
 
         internal new static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("BtnContent", typeof(string), typeof(Button), new PropertyMetadata("", (s, e) => ((Button)s).Content = (string)e.NewValue));
+            DependencyProperty.Register("BtnContent", typeof(string), typeof(Button), new PropertyMetadata(string.Empty, (s, e) => ((Button)s).Content = (string)e.NewValue));
 
         internal static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(Card), new PropertyMetadata(default(ImageSource)));

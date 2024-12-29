@@ -15,32 +15,30 @@ namespace GTweak.View
         public SystemView()
         {
             InitializeComponent();
-
-            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(0)); };
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
-            string _descriptionTweak = (string)FindResource(toggleButton.Name + "_description_system");
+            string descriptionTweak = (string)FindResource(toggleButton.Name + "_description_system");
 
-            if (TextDescription.Text != _descriptionTweak)
-                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
+            if (CommentTweak.Text != descriptionTweak)
+                CommentTweak.Text = descriptionTweak;
         }
 
         private void TweakSlider_MouseEnter(object sender, MouseEventArgs e)
         {
             StackPanel stackPanel = (StackPanel)sender;
-            string _descriptionTweak = (string)FindResource(stackPanel.Name + "_description_system");
+            string descriptionTweak = (string)FindResource(stackPanel.Name + "_description_system");
 
-            if (TextDescription.Text != (string)FindResource(stackPanel.Name + "_description_system"))
-                new TypewriterAnimation(_descriptionTweak, TextDescription, _descriptionTweak.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
+            if (CommentTweak.Text != descriptionTweak)
+                CommentTweak.Text = descriptionTweak;
         }
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (TextDescription.Text != (string)FindResource("defaultDescription"))
-                new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(250));
+            if (CommentTweak.Text != (string)FindResource("defaultDescription"))
+                CommentTweak.Text = (string)FindResource("defaultDescription");
         }
 
         private void Sliders_PreviewMouseUp(object sender, MouseButtonEventArgs e)
@@ -95,10 +93,6 @@ namespace GTweak.View
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            new TypewriterAnimation((string)FindResource("defaultDescription"), TextDescription, TimeSpan.FromMilliseconds(300));
-            Parallel.Invoke(() => new SystemTweaks().ViewSystem(this));
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new SystemTweaks().ViewSystem(this));
     }
 }

@@ -33,7 +33,7 @@
                         <uc:ToggleButton x:Name="TglButton7" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl7_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton8" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl8_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton9" Height="25" Width="Auto" Margin="20,20,0,0" DynamicText="{DynamicResource tgl9_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        
+
                     </StackPanel>
                 </Grid>
 
@@ -55,6 +55,7 @@
             </Grid>
         </ScrollViewer>
 
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40*"/>
@@ -62,12 +63,8 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Border Background="{StaticResource Color_Accent}" Height="1" Width="900"  VerticalAlignment="Top" HorizontalAlignment="Center" CornerRadius="15"/>
-                <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescription}"/>
+                <uc:Comment x:Name="CommentTweak" DefaultText="{DynamicResource defaultDescription}"/>
             </Grid>
-
         </Grid>
-
     </Grid>
-    
 </UserControl>

@@ -21,7 +21,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid Grid.Column="0">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Width="Auto" Height="Auto">
                         <uc:ToggleButton x:Name="TglButton1" Height="25" Width="Auto" Margin="20,15,0,0" DynamicText="{DynamicResource tgl1_services}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
@@ -62,6 +62,7 @@
             </Grid>
         </ScrollViewer>
 
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40*"/>
@@ -69,11 +70,8 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Border Background="{StaticResource Color_Accent}" Height="1" Width="900"  VerticalAlignment="Top" HorizontalAlignment="Center" CornerRadius="15"/>
-                <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescription}"/>
+                <uc:Comment x:Name="CommentTweak" DefaultText="{DynamicResource defaultDescription}"/>
             </Grid>
-
         </Grid>
-
     </Grid>
 </UserControl>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
              xmlns:local="clr-namespace:GTweak.View"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="1100"
@@ -373,14 +374,8 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Border Background="{StaticResource Color_Accent}" Height="1" Width="900"  VerticalAlignment="Top" HorizontalAlignment="Center" CornerRadius="15"/>
-                <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescriptionApp}" Cursor="Arrow"/>
+                <uc:Comment x:Name="CommentApp" DefaultText="{DynamicResource defaultDescriptionApp}"/>
             </Grid>
-
         </Grid>
-
- 
-    
-
     </Grid>
 </UserControl>

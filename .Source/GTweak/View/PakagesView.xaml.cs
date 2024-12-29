@@ -22,8 +22,6 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(0)); };
-
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 if (time.TotalSeconds % 4 == 0)
@@ -81,23 +79,20 @@ namespace GTweak.View
         {
             Image imageApp = (Image)sender;
 
-            string _descriptionApps = (string)FindResource(imageApp.Name + "_applications");
+            string descriptionApp = (string)FindResource(imageApp.Name + "_applications");
 
-            if (TextDescription.Text != _descriptionApps)
-                new TypewriterAnimation(_descriptionApps, TextDescription, TimeSpan.FromMilliseconds(250));
+            if (CommentApp.Text != descriptionApp)
+                CommentApp.Text = descriptionApp;
         }
 
         private void Apps_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (TextDescription.Text != (string)FindResource("defaultDescriptionApp"))
-                new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(250));
+            if (CommentApp.Text != (string)FindResource("defaultDescriptionApp"))
+                CommentApp.Text = (string)FindResource("defaultDescriptionApp");
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            UpdateViewStatePakages();
-            new TypewriterAnimation((string)FindResource("defaultDescriptionApp"), TextDescription, TimeSpan.FromMilliseconds(300));
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) => UpdateViewStatePakages();
+
 
         private ImageSource AvailabilityInstalledPackage(string packageName, string partName, bool isOneDrive = false)
         {

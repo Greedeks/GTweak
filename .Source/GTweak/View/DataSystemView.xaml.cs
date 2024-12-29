@@ -151,15 +151,21 @@ namespace GTweak.View
             if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount >= 2)
             {
                 Clipboard.Clear();
-                if (sender.GetType().Name == "TextBlock")
+                switch (sender.GetType().Name)
                 {
-                    TextBlock textBlock = (TextBlock)sender;
-                    Clipboard.SetData(DataFormats.UnicodeText, textBlock.Text.Replace('\n', ' '));
-                }
-                else if (sender.GetType().Name == "Run")
-                {
-                    Run runtext = (Run)sender;
-                    Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
+                    case "TextBlock":
+                        {
+                            TextBlock textBlock = (TextBlock)sender;
+                            Clipboard.SetData(DataFormats.UnicodeText, textBlock.Text.Replace('\n', ' '));
+                            break;
+                        }
+
+                    case "Run":
+                        {
+                            Run runtext = (Run)sender;
+                            Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
+                            break;
+                        }
                 }
 
                 if (!PopupCopy.IsOpen)

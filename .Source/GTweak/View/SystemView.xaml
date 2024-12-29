@@ -79,10 +79,8 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="1">
-                <Border Background="{StaticResource Color_Accent}" Height="1" Width="900"  VerticalAlignment="Top" HorizontalAlignment="Center" CornerRadius="15"/>
-                <TextBlock x:Name="TextDescription" Style="{StaticResource Description}" Text="{DynamicResource defaultDescription}"/>
+                <uc:Comment x:Name="CommentTweak" DefaultText="{DynamicResource defaultDescription}"/>
             </Grid>
         </Grid>
-
     </Grid>
 </UserControl>
