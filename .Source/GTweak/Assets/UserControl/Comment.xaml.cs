@@ -15,7 +15,8 @@ namespace GTweak.Assets.UserControl
         internal string Text
         {
             get { return FunctionDescription.Text; }
-            set { new TypewriterAnimation(value, FunctionDescription, value.Length < 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550)); }
+            set { new TypewriterAnimation(value, FunctionDescription, 
+                value.Length <= 50 ? TimeSpan.FromMilliseconds(200) : value.Length <= 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550)); }
         }
 
         public static readonly DependencyProperty DefaultTextProperty =
@@ -25,7 +26,7 @@ namespace GTweak.Assets.UserControl
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate { new TypewriterAnimation((string)FindResource("defaultDescription"), FunctionDescription, TimeSpan.FromMilliseconds(0)); };
+            App.LanguageChanged += delegate { new TypewriterAnimation(DefaultText, FunctionDescription, TimeSpan.FromMilliseconds(0)); };
         }
 
         private void Comment_Loaded(object sender, RoutedEventArgs e) => new TypewriterAnimation(DefaultText, FunctionDescription, TimeSpan.FromMilliseconds(300));
