@@ -47,18 +47,18 @@ namespace GTweak
                 {
                     From = 0.0,
                     To = 360,
-                    SpeedRatio = 3,
                     EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(2)
+                    SpeedRatio = 2.0,
+                    Duration = TimeSpan.FromSeconds(1)
                 };
 
                 DoubleAnimation widthAnimation = new DoubleAnimation()
                 {
                     From = SettingsMenu.Width != 400 ? 0 : 400,
                     To = SettingsMenu.Width != 400 ? 400 : 0,
-                    SpeedRatio = 6,
                     EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(2)
+                    SpeedRatio = 2.0,
+                    Duration = TimeSpan.FromSeconds(1)
                 };
 
                 Timeline.SetDesiredFrameRate(rotateAnimation, 400);
@@ -150,16 +150,14 @@ namespace GTweak
             Topmost = !BtnTopMost.State;
         }
 
+        private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound");
+
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
             SettingsRepository.WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) << 16));
         }
 
-        private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            SettingsRepository.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound");
-        }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

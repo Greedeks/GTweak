@@ -15,8 +15,11 @@ namespace GTweak.Assets.UserControl
         internal string Text
         {
             get { return FunctionDescription.Text; }
-            set { new TypewriterAnimation(value, FunctionDescription, 
-                value.Length <= 50 ? TimeSpan.FromMilliseconds(200) : value.Length <= 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550)); }
+            set
+            {
+                new TypewriterAnimation(value, FunctionDescription,
+                value.Length <= 50 ? TimeSpan.FromMilliseconds(200) : value.Length <= 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
+            }
         }
 
         public static readonly DependencyProperty DefaultTextProperty =
