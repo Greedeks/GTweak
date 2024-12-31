@@ -74,9 +74,9 @@ namespace GTweak.Utilities.Helpers
 
             foreach (string data in temp)
             {
-                int equalsIndex = data.IndexOf("=", StringComparison.InvariantCulture); if (equalsIndex > 0)
+                int equalsIndex = data.IndexOf("=", StringComparison.InvariantCulture);
+                if (equalsIndex > 0)
                     result.Add(isGetKey ? data.Substring(0, equalsIndex) : data.Substring(equalsIndex + 1));
-                
             }
             return result;
         }

@@ -7,6 +7,18 @@ namespace GTweak.Utilities.Helpers
 {
     internal sealed class RegistryHelp
     {
+        private static string GeneralRegistry(RegistryKey registrykey)
+        {
+            return registrykey.Name switch
+            {
+                "HKEY_LOCAL_MACHINE" => $@"MACHINE\",
+                "HKEY_CLASSES_ROOT" => $@"CLASSES_ROOT\",
+                "HKEY_CURRENT_USER" => $@"CURRENT_USER\",
+                "HKEY_USERS" => $@"USERS\",
+                _ => $@"CURRENT_CONFIG\",
+            };
+        }
+
         internal static void DeleteValue(RegistryKey registrykey, string subkey, string value, bool isTakingOwner = false)
         {
             Task.Run(async delegate
@@ -16,7 +28,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     if (isTakingOwner)
                     {
-                        TakingOwnership.GrantAdministratorsAccess($@"MACHINE\{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         await Task.Delay(200);
                     }
 
@@ -34,7 +46,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     if (isTakingOwner)
                     {
-                        TakingOwnership.GrantAdministratorsAccess($@"MACHINE\{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        TakingOwnership.GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         await Task.Delay(200);
                     }
 
@@ -98,6 +110,5 @@ namespace GTweak.Utilities.Helpers
 
             return string.Concat((byte[])Registry.GetValue(subkey, valueName, null) ?? Array.Empty<byte>()) != expectedValue;
         }
-
     }
 }

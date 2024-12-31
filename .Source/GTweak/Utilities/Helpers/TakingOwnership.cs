@@ -15,7 +15,7 @@ namespace GTweak.Utilities.Helpers
         [StructLayout(LayoutKind.Sequential)]
         private struct TRUSTEE
         {
-            public System.IntPtr pMultipleTrustee;
+            public IntPtr pMultipleTrustee;
             public MULTIPLE_TRUSTEE_OPERATION MultipleTrusteeOperation;
             public TRUSTEE_FORM TrusteeForm;
             public TRUSTEE_TYPE TrusteeType;
