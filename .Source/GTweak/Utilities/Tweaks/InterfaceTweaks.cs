@@ -167,11 +167,12 @@ namespace GTweak.Utilities.Tweaks
         {
             Task.Run(delegate
             {
+
                 foreach (Process process in Process.GetProcesses())
                 {
                     try
                     {
-                        if (string.Compare(process.MainModule?.FileName, $@"{Environment.GetEnvironmentVariable("WINDIR")}\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(process.MainModule?.FileName, $@"{Environment.GetEnvironmentVariable("WINDIR")}\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0 && Process.GetProcessesByName("explorer").Length != 0)
                         {
                             process.Kill();
                             process.Start();
@@ -180,8 +181,7 @@ namespace GTweak.Utilities.Tweaks
                     catch (Exception ex) { Debug.WriteLine(ex.Message); }
                     finally
                     {
-                        Process[] explorer = Process.GetProcessesByName("explorer");
-                        if (explorer.Length == 0)
+                        if (Process.GetProcessesByName("explorer").Length == 0)
                         {
                             launchExplorer.StartInfo.FileName = $@"{Environment.GetEnvironmentVariable("WINDIR")}\explorer.exe";
                             launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
