@@ -93,7 +93,13 @@ namespace GTweak.Windows
 
                     foreach (var set in acceptanceList)
                     {
-                        await Task.Delay(700, _token);
+                        await Task.Delay(set.Tweak switch
+                        {
+                            "TglButton7" => 2000,
+                            "TglButton8" => 2000,
+                            "TglButton17" => 2000,
+                            _ => 700,
+                        }, _token);
                         InterfaceTweaks.UseInterface(set.Tweak, Convert.ToBoolean(set.Value));
 
                         switch (set.Tweak)

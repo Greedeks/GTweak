@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal sealed class RegistryHelp
+    internal sealed class RegistryHelp : TakingOwnership
     {
         private static string GeneralRegistry(RegistryKey registrykey)
         {
@@ -28,7 +28,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     if (isTakingOwner)
                     {
-                        TakingOwnership.GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         await Task.Delay(200);
                     }
 
@@ -46,7 +46,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     if (isTakingOwner)
                     {
-                        TakingOwnership.GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", TakingOwnership.SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                         await Task.Delay(200);
                     }
 

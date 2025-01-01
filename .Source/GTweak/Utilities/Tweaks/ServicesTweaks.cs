@@ -442,8 +442,8 @@ namespace GTweak.Utilities.Tweaks
                                 updateService.WaitForStatus(ServiceControllerStatus.Stopped);
                             }
 
-                            if (Directory.Exists(cachePath))
-                                Directory.Delete(cachePath, true);
+                            TakingOwnership.GrantAdministratorsAccess(cachePath, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
+                            Directory.Delete(cachePath, true);
                         }
 
                         SetTaskStateOwner(WinUpdateTasks, false);
