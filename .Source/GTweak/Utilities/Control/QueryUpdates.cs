@@ -27,17 +27,15 @@ namespace GTweak.Utilities.Control
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";
 
-                using (HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse())
-                using (StreamReader sreader = new StreamReader(response.GetResponseStream()))
-                {
-                    string DataAsJson = sreader.ReadToEnd();
-                    GitMetadata gitVersionUtility = JsonConvert.DeserializeObject<GitMetadata>(DataAsJson);
+                using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+                using StreamReader sreader = new StreamReader(response.GetResponseStream());
+                string DataAsJson = sreader.ReadToEnd();
+                GitMetadata gitVersionUtility = JsonConvert.DeserializeObject<GitMetadata>(DataAsJson);
 
-                    if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsRepository.currentRelease) > 0)
-                    {
-                        IsNeedUpdate = true;
-                        DownloadVersion = gitVersionUtility.СurrentVersion;
-                    }
+                if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsRepository.currentRelease) > 0)
+                {
+                    IsNeedUpdate = true;
+                    DownloadVersion = gitVersionUtility.СurrentVersion;
                 }
             }
             catch

@@ -9,7 +9,7 @@ using System.Windows;
 [assembly: AssemblyProduct("GTweak")]
 [assembly: AssemblyCopyright("© 2024-<#= DateTime.Now.Year #> Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
-[assembly: AssemblyInformationalVersion("Build: 5.0.7")]
+[assembly: AssemblyInformationalVersion("Build: 5.0.8")]
 [assembly: AssemblyVersion("5.<#= GenerateVersion() #>")]
 [assembly: AssemblyFileVersion("5.<#= GenerateVersion() #>")]
 
