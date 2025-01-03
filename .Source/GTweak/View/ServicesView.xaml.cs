@@ -17,8 +17,7 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            ToggleButton toggleButton = (ToggleButton)sender;
-            string descriptionTweak = (string)FindResource(toggleButton.Name + "_description_services");
+            string descriptionTweak = (string)FindResource(((ToggleButton)sender).Name + "_description_services");
 
             if (CommentTweak.Text != descriptionTweak)
                 CommentTweak.Text = descriptionTweak;
@@ -32,14 +31,13 @@ namespace GTweak.View
 
         private void TglButton_ChangedState(object sender, EventArgs e)
         {
-            ToggleButton toggleButton = (ToggleButton)sender;
-            ServicesTweaks.UseServices(toggleButton.Name, toggleButton.State);
+            ServicesTweaks.ApplyTweaks(((ToggleButton)sender).Name, ((ToggleButton)sender).State);
 
             new ViewNotification(300).Show("restart");
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); new ServicesTweaks().ViewServices(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); new ServicesTweaks().AnalyzeAndUpdate(this); });
         }
 
-        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e) => Parallel.Invoke(() => new ServicesTweaks().ViewServices(this));
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e) => Parallel.Invoke(() => new ServicesTweaks().AnalyzeAndUpdate(this));
     }
 }

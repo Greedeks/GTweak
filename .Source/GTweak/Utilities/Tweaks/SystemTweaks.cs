@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -32,7 +33,7 @@ namespace GTweak.Utilities.Tweaks
         private static bool isNetshState = false, isBluetoothStatus = false;
         private readonly string activeGuid = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty).ToString();
 
-        internal void ViewSystem(SystemView systemV)
+        internal void AnalyzeAndUpdate(SystemView systemV)
         {
             systemV.Slider1.Value = Convert.ToDouble(Registry.GetValue(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseSensitivity", "10").ToString());
 
@@ -183,8 +184,10 @@ namespace GTweak.Utilities.Tweaks
 
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint _pvParam, uint _fWinIni);
-        internal static void UseSystemSliders(string tweak, uint value)
+        internal static void ApplyTweaksSlider(string tweak, uint value)
         {
+            INIManager.TempWrite(INIManager.TempTweaksSys, tweak, value);
+
             switch (tweak)
             {
                 case "Slider1":
@@ -205,7 +208,7 @@ namespace GTweak.Utilities.Tweaks
 
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
-        internal static void UseSystem(string tweak, bool isChoose)
+        internal static void ApplyTweaks(string tweak, bool isChoose)
         {
             INIManager.TempWrite(INIManager.TempTweaksSys, tweak, isChoose);
 

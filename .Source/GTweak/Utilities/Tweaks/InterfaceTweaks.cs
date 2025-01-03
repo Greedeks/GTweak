@@ -12,7 +12,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class InterfaceTweaks
     {
-        internal void ViewInterface(InterfaceView interfaceV)
+        internal void AnalyzeAndUpdate(InterfaceView interfaceV)
         {
             interfaceV.TglButton1.StateNA =
                  RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "Hilight", "80 80 80") ||
@@ -193,7 +193,7 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        internal static void UseInterface(string tweak, bool isChoose)
+        internal static void ApplyTweaks(string tweak, bool isChoose)
         {
             INIManager.TempWrite(INIManager.TempTweaksIntf, tweak, isChoose);
 

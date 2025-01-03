@@ -36,7 +36,7 @@ namespace GTweak.Utilities.Tweaks
                 return string.Concat(path, ProgramsUUP[program]);
         }
 
-        internal void ViewServices(ServicesView servicesV)
+        internal void AnalyzeAndUpdate(ServicesView servicesV)
         {
             servicesV.TglButton1.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch", "Start", "4") ||
@@ -199,7 +199,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmicvss", "Start", "4");
         }
 
-        internal static void UseServices(string tweak, bool isChoose)
+        internal static void ApplyTweaks(string tweak, bool isChoose)
         {
             INIManager.TempWrite(INIManager.TempTweaksSvc, tweak, isChoose);
 

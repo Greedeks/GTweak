@@ -41,7 +41,7 @@
                     </Grid>
 
                     <Grid Grid.Column="2">
-                        <UserControl:Card x:Name="CardRecoveyLaunch" ImageSource="{StaticResource DI_RecoverySystem}" Title="{DynamicResource title_recovery_more}" Description="{DynamicResource text_recovery_more}" BtnContent="{DynamicResource btntext_recovery_more}" ClickButton="BtnRecoveyLaunch_ClickButton"/>
+                        <UserControl:Card ImageSource="{StaticResource DI_RecoverySystem}" Title="{DynamicResource title_recovery_more}" Description="{DynamicResource text_recovery_more}" BtnContent="{DynamicResource btntext_recovery_more}" ClickButton="BtnRecoveyLaunch_ClickButton"/>
                     </Grid>
                 </Grid>
 
@@ -49,14 +49,19 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0" Margin="180,0,0,0">
+                    <Grid Grid.Column="0">
                         <UserControl:Card ImageSource="{StaticResource DI_Trash}" Title="{DynamicResource title_clear_more}" Description="{DynamicResource text_clear_more}" BtnContent="{DynamicResource btntext_clear_more}" ClickButton="BtnClear_ClickButton"/>
                     </Grid>
 
-                    <Grid Grid.Column="1" Margin="0,0,180,0">
-                        <UserControl:Card ImageSource="{StaticResource DI_DisableRecovery}" Title="{DynamicResource title_disablepoint_more}" Description="{DynamicResource text_disablepoint_more}" BtnContent="{DynamicResource btntext_disablepoint_more}" ClickButton="BtnDisableRecovery_ClickButton"/>
+                    <Grid Grid.Column="1">
+                        <UserControl:Card ImageSource="{StaticResource DI_Defrag}" Title="{DynamicResource title_defrag_more}" Description="{DynamicResource text_defrag_more}" BtnContent="{DynamicResource btntext_disable_more}" ClickButton="BtnDisableDefrag_ClickButton"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <UserControl:Card ImageSource="{StaticResource DI_DisableRecovery}" Title="{DynamicResource title_disablepoint_more}" Description="{DynamicResource text_disablepoint_more}" BtnContent="{DynamicResource btntext_disable_more}" ClickButton="BtnDisableRecovery_ClickButton"/>
                     </Grid>
                 </Grid>
             </Grid>

@@ -280,6 +280,7 @@
     <Compile Include="Utilities\Control\ViewNotification.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
+    <Compile Include="Utilities\Tweaks\Defragmentation.cs" />
     <Compile Include="Utilities\Tweaks\Firewall.cs" />
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />
     <Compile Include="Utilities\Tweaks\ServicesTweaks.cs" />

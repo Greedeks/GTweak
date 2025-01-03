@@ -61,6 +61,9 @@
     <v:String x:Key="disable_recovery_notification">Восстановление системы отключено, точки восстановления недоступны</v:String>
     <v:String x:Key="warndisable_recovery_notification">У вас уже отключена система восстановления</v:String>
     <v:String x:Key="warn_update_notification">Во время обновления программы произошла ошибка, повторите попытку позже</v:String>
+    <v:String x:Key="warn_defrag_notification">У вас уже отключена дефрагментация диска</v:String>
+    <v:String x:Key="error_defrag_notification">Что то-то пошло не так, не удалось отключить дефрагментацию</v:String>
+    <v:String x:Key="success_defrag_notification">Дефрагментация вашего диска успешно отключена</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -421,7 +424,9 @@
     <v:String x:Key="btntext_clear_more">Очистить</v:String>
     <v:String x:Key="title_disablepoint_more">Отключить защиту</v:String>
     <v:String x:Key="text_disablepoint_more">Отключает точку восстановления системы, но учтите что ранее созданные удаляются.</v:String>
-    <v:String x:Key="btntext_disablepoint_more">Отключить</v:String>
+    <v:String x:Key="btntext_disable_more">Отключить</v:String>
+    <v:String x:Key="title_defrag_more">Дефрагментация</v:String>
+    <v:String x:Key="text_defrag_more">Отключает дефрагментацию, продлевая срок службы вашего SSD, избавляя его от лишних записи.</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

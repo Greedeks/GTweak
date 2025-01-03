@@ -19,8 +19,7 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            ToggleButton toggleButton = (ToggleButton)sender;
-            string descriptionTweak = (string)FindResource(toggleButton.Name + "_description_system");
+            string descriptionTweak = (string)FindResource(((ToggleButton)sender).Name + "_description_system");
 
             if (CommentTweak.Text != descriptionTweak)
                 CommentTweak.Text = descriptionTweak;
@@ -28,8 +27,7 @@ namespace GTweak.View
 
         private void TweakSlider_MouseEnter(object sender, MouseEventArgs e)
         {
-            StackPanel stackPanel = (StackPanel)sender;
-            string descriptionTweak = (string)FindResource(stackPanel.Name + "_description_system");
+            string descriptionTweak = (string)FindResource(((StackPanel)sender).Name + "_description_system");
 
             if (CommentTweak.Text != descriptionTweak)
                 CommentTweak.Text = descriptionTweak;
@@ -41,25 +39,14 @@ namespace GTweak.View
                 CommentTweak.Text = (string)FindResource("defaultDescription");
         }
 
-        private void Sliders_PreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Slider slider = (Slider)sender;
-            INIManager.TempTweaksSys.Remove(slider.Name);
-            INIManager.TempTweaksSys.Add(slider.Name, Convert.ToString(slider.Value));
-        }
-
-        private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            Slider slider = (Slider)sender;
-            SystemTweaks.UseSystemSliders(slider.Name, (uint)slider.Value);
-        }
+        private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => SystemTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
         private void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             if (toggleButton.Name != "TglButton8")
             {
-                SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State);
+                SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
                 switch (toggleButton.Name)
                 {
@@ -78,14 +65,14 @@ namespace GTweak.View
                         break;
                 }
 
-                Parallel.Invoke(async delegate { await Task.Delay(1000); new SystemTweaks().ViewSystem(this); });
+                Parallel.Invoke(async delegate { await Task.Delay(1000); new SystemTweaks().AnalyzeAndUpdate(this); });
             }
             else
             {
                 if (!SystemTweaks.isTweakWorkingAntivirus)
                 {
                     SystemTweaks.isTweakWorkingAntivirus = true;
-                    SystemTweaks.UseSystem(toggleButton.Name, toggleButton.State);
+                    SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
                     new ViewNotification().Show("", "info", (string)FindResource("windefender_notification"));
                 }
                 else if (SystemTweaks.isTweakWorkingAntivirus)
@@ -93,6 +80,6 @@ namespace GTweak.View
             }
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new SystemTweaks().ViewSystem(this));
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new SystemTweaks().AnalyzeAndUpdate(this));
     }
 }

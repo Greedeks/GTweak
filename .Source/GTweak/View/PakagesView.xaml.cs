@@ -36,6 +36,20 @@ namespace GTweak.View
             }, Application.Current.Dispatcher);
         }
 
+        private void Apps_MouseEnter(object sender, MouseEventArgs e)
+        {
+            string descriptionApp = (string)FindResource(((Image)sender).Name + "_applications");
+
+            if (CommentApp.Text != descriptionApp)
+                CommentApp.Text = descriptionApp;
+        }
+
+        private void Apps_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (CommentApp.Text != (string)FindResource("defaultDescriptionApp"))
+                CommentApp.Text = (string)FindResource("defaultDescriptionApp");
+        }
+
         private async void ClickApp_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Image appImage = (Image)sender;
@@ -73,22 +87,6 @@ namespace GTweak.View
                         break;
                     }
             }
-        }
-
-        private void Apps_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Image imageApp = (Image)sender;
-
-            string descriptionApp = (string)FindResource(imageApp.Name + "_applications");
-
-            if (CommentApp.Text != descriptionApp)
-                CommentApp.Text = descriptionApp;
-        }
-
-        private void Apps_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (CommentApp.Text != (string)FindResource("defaultDescriptionApp"))
-                CommentApp.Text = (string)FindResource("defaultDescriptionApp");
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => UpdateViewStatePakages();

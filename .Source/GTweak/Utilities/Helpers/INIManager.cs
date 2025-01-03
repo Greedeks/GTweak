@@ -47,12 +47,12 @@ namespace GTweak.Utilities.Helpers
                 WritePrivateProfileString(section, addKeyValue.Key, addKeyValue.Value, pathToConfig);
         }
 
-        internal static void TempWrite(Dictionary<string, string> selectedDictionary, string tweak, bool state)
+        internal static void TempWrite<T>(Dictionary<string, string> selectedDictionary, string tweak, T value)
         {
             if (selectedDictionary.ContainsKey(tweak))
                 selectedDictionary.Remove(tweak);
 
-            selectedDictionary.Add(tweak, Convert.ToString(state));
+            selectedDictionary.Add(tweak, value.ToString());
         }
 
         internal bool IsThereSection(string section)

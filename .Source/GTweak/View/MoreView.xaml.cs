@@ -40,6 +40,8 @@ namespace GTweak.View
 
         private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
 
+        private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => new Defragmentation().Disable();
+
         private async void BtnDisableRecovery_ClickButton(object sender, EventArgs e)
         {
             if (!RecoveryPoint.IsSystemRestoreDisabled())

@@ -18,8 +18,7 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            ToggleButton toggleButton = (ToggleButton)sender;
-            string descriptionTweak = (string)FindResource(toggleButton.Name + "_description_confidentiality");
+            string descriptionTweak = (string)FindResource(((ToggleButton)sender).Name + "_description_confidentiality");
 
             if (CommentTweak.Text != descriptionTweak)
                 CommentTweak.Text = descriptionTweak;
@@ -35,7 +34,7 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
 
-            ConfidentialityTweaks.UseСonfidentiality(toggleButton.Name, toggleButton.State);
+            ConfidentialityTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
             switch (toggleButton.Name)
             {
@@ -45,10 +44,10 @@ namespace GTweak.View
                     break;
             }
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); new ConfidentialityTweaks().ViewСonfidentiality(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); new ConfidentialityTweaks().AnalyzeAndUpdate(this); });
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new ConfidentialityTweaks().ViewСonfidentiality(this));
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new ConfidentialityTweaks().AnalyzeAndUpdate(this));
 
     }
 }

@@ -43,7 +43,7 @@ namespace GTweak.Utilities.Tweaks
                 @"Microsoft\Office\OfficeTelemetryAgentLogOn",
                 @"Microsoft\Office\Office 15 Subscription Heartbeat" };
 
-        internal void ViewСonfidentiality(ConfidentialityView confidentialityV)
+        internal void AnalyzeAndUpdate(ConfidentialityView confidentialityV)
         {
             confidentialityV.TglButton1.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
@@ -142,7 +142,7 @@ namespace GTweak.Utilities.Tweaks
             catch { return false; }
         }
 
-        internal static void UseСonfidentiality(string tweak, bool isChoose)
+        internal static void ApplyTweaks(string tweak, bool isChoose)
         {
             INIManager.TempWrite(INIManager.TempTweaksConf, tweak, isChoose);
 

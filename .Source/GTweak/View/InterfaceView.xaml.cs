@@ -61,7 +61,7 @@ namespace GTweak.View
         private void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
-            InterfaceTweaks.UseInterface(toggleButton.Name, toggleButton.State);
+            InterfaceTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
             switch (toggleButton.Name)
             {
@@ -83,10 +83,10 @@ namespace GTweak.View
                     break;
             }
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); new InterfaceTweaks().ViewInterface(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); new InterfaceTweaks().AnalyzeAndUpdate(this); });
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new InterfaceTweaks().ViewInterface(this));
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new InterfaceTweaks().AnalyzeAndUpdate(this));
 
     }
 }

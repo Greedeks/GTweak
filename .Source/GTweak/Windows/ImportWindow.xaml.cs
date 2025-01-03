@@ -70,7 +70,7 @@ namespace GTweak.Windows
                     foreach (var set in acceptanceList)
                     {
                         await Task.Delay(700, _token);
-                        ConfidentialityTweaks.UseСonfidentiality(set.Tweak, Convert.ToBoolean(set.Value));
+                        ConfidentialityTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
                         switch (set.Tweak)
                         {
@@ -100,7 +100,7 @@ namespace GTweak.Windows
                             "TglButton17" => 2000,
                             _ => 700,
                         }, _token);
-                        InterfaceTweaks.UseInterface(set.Tweak, Convert.ToBoolean(set.Value));
+                        InterfaceTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
                         switch (set.Tweak)
                         {
@@ -136,7 +136,7 @@ namespace GTweak.Windows
                     foreach (var set in acceptanceList)
                     {
                         await Task.Delay(700, _token);
-                        ServicesTweaks.UseServices(set.Tweak, Convert.ToBoolean(set.Value));
+                        ServicesTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
                         isRestartNeed = true;
                     }
                 }
@@ -157,9 +157,9 @@ namespace GTweak.Windows
                         if (set.Tweak != "TglButton8")
                         {
                             if (set.Tweak.Contains("TglButton"))
-                                SystemTweaks.UseSystem(set.Tweak, Convert.ToBoolean(set.Value));
+                                SystemTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
                             else
-                                SystemTweaks.UseSystemSliders(set.Tweak, Convert.ToUInt32(set.Value));
+                                SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
 
                             switch (set.Tweak)
                             {
@@ -183,7 +183,7 @@ namespace GTweak.Windows
                             if (!SystemTweaks.isTweakWorkingAntivirus)
                             {
                                 SystemTweaks.isTweakWorkingAntivirus = true;
-                                SystemTweaks.UseSystem(set.Tweak, Convert.ToBoolean(set.Value));
+                                SystemTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
                                 await Task.Delay(20000, _token);
                             }
                         }

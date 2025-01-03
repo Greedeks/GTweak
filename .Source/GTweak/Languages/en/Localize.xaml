@@ -61,6 +61,9 @@
     <v:String x:Key="disable_recovery_notification">System recovery is disabled, recovery points are unavailable</v:String>
     <v:String x:Key="warndisable_recovery_notification">You have already disabled the recovery system</v:String>
     <v:String x:Key="warn_update_notification">An error occurred during the program update, please try again later</v:String>
+    <v:String x:Key="warn_defrag_notification">You have already disabled disk defragmentation</v:String>
+    <v:String x:Key="error_defrag_notification">Something went wrong, defragmentation could not be disabled.</v:String>
+    <v:String x:Key="success_defrag_notification">Defragmentation has been successfully disabled for your drive</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -421,7 +424,9 @@
     <v:String x:Key="btntext_clear_more">Clear</v:String>
     <v:String x:Key="title_disablepoint_more">Disable protection</v:String>
     <v:String x:Key="text_disablepoint_more">Disables the system restore point, but note that previously created ones are deleted.</v:String>
-    <v:String x:Key="btntext_disablepoint_more">Disable</v:String>
+    <v:String x:Key="btntext_disable_more">Disable</v:String>
+    <v:String x:Key="title_defrag_more">Defragmentation</v:String>
+    <v:String x:Key="text_defrag_more">Disables defragmentation, extending the life of your SSD, saving it from unnecessary writes.</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>
