@@ -10,10 +10,10 @@ using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal class SystemMaintenance : TaskSchedulerManager
+    internal sealed class SystemMaintenance : TaskSchedulerManager
     {
         [DllImport("srclient.dll")]
-        public static extern int DisableSR([MarshalAs(UnmanagedType.LPWStr)] string Drive);
+        private static extern int DisableSR([MarshalAs(UnmanagedType.LPWStr)] string Drive);
         [DllImport("srclient.dll")]
         private static extern int SRRemoveRestorePoint(int index);
         private static readonly ManagementClass RestorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
@@ -78,36 +78,45 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void StartRecovery()
         {
-            EnableRecovery();
-
-            Process.Start(new ProcessStartInfo()
+            try
             {
-                Arguments = "/c rstrui.exe",
-                FileName = "cmd.exe",
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden
-            });
+                EnableRecovery();
+
+                Process.Start(new ProcessStartInfo()
+                {
+                    Arguments = "/c rstrui.exe",
+                    FileName = "cmd.exe",
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                });
+            }
+            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["notsuccessfulrecovery_notification"]); }
         }
 
         internal static void DisableRestorePoint()
         {
-            SetTaskState(RestoreTask, false);
-
-            Process.Start(new ProcessStartInfo()
+            if (IsSystemRestoreDisabled)
             {
-                Arguments = "/c sc config wbengine start= disabled && " +
-                    "reg delete \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\SPP\\Clients\" /v \"{09F7EDC5 - 294E-4180 - AF6A - FB0E6A0E9513}\" /f &&" +
-                    "sc config swprv start= disabled && sc config vds start= disabled && sc config VSS start= disabled",
-                FileName = "cmd.exe",
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden
-            });
+                SetTaskState(RestoreTask, false);
 
-            EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
-            foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", optionsObj).Get())
-                SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
+                Process.Start(new ProcessStartInfo()
+                {
+                    Arguments = "/c sc config wbengine start= disabled && " +
+                        "reg delete \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\SPP\\Clients\" /v \"{09F7EDC5 - 294E-4180 - AF6A - FB0E6A0E9513}\" /f &&" +
+                        "sc config swprv start= disabled && sc config vds start= disabled && sc config VSS start= disabled",
+                    FileName = "cmd.exe",
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                });
 
-            DisableSR(UsePath.SystemDisk + @"\\");
+                EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
+                foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", optionsObj).Get())
+                    SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
+
+                DisableSR(UsePath.SystemDisk + @"\\");
+            }
+            else
+                new ViewNotification().Show("", "info", (string)Application.Current.Resources["warndisable_recovery_notification"]);
         }
 
         private static void EnableRecovery()

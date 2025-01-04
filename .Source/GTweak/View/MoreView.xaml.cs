@@ -32,11 +32,7 @@ namespace GTweak.View
             await backgroundQueue.QueueTask(delegate { SystemMaintenance.CreateRestorePoint((string)FindResource("textpoint_more")); });
         }
 
-        private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e)
-        {
-            try { SystemMaintenance.StartRecovery(); }
-            catch { new ViewNotification().Show("", "warn", (string)FindResource("notsuccessfulrecovery_notification")); }
-        }
+        private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e) => SystemMaintenance.StartRecovery(); 
 
         private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
 
@@ -44,18 +40,12 @@ namespace GTweak.View
 
         private async void BtnDisableRecovery_ClickButton(object sender, EventArgs e)
         {
-            if (SystemMaintenance.IsSystemRestoreDisabled)
+            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            await backgroundQueue.QueueTask(delegate
             {
-                BackgroundQueue backgroundQueue = new BackgroundQueue();
-                await backgroundQueue.QueueTask(delegate
-                {
-                    try { SystemMaintenance.DisableRestorePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-                });
-
-                new ViewNotification(300).Show("", "info", (string)FindResource("disable_recovery_notification"));
-            }
-            else
-                new ViewNotification().Show("", "info", (string)FindResource("warndisable_recovery_notification"));
+                try { SystemMaintenance.DisableRestorePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            });
+            await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", (string)FindResource("disable_recovery_notification")); });
         }
     }
 }
