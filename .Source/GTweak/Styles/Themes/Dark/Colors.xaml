@@ -27,8 +27,8 @@
     <Color x:Key="Color_Shadow">#1AFF7E</Color>
     <Color x:Key="Color_Border_Gradient_1">#54FF9F</Color>
     <Color x:Key="Color_Border_Gradient_2">#1AFF7E</Color>
-    <Color x:Key="Color_ToggleButton_OFF_1">#505050</Color>
-    <Color x:Key="Color_ToggleButton_OFF_2">#696969</Color>
+    <Color x:Key="Color_ToggleButton_OFF_1">#464646</Color>
+    <Color x:Key="Color_ToggleButton_OFF_2">#5C5C5C</Color>
     <Color x:Key="Color_ToggleButton_ON_1">#54FF9F</Color>
     <Color x:Key="Color_ToggleButton_ON_2">#24FF84</Color>
 
