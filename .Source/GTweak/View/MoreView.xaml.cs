@@ -29,10 +29,10 @@ namespace GTweak.View
         {
             new ViewNotification().Show("", "info", (string)FindResource("createpoint_notification"));
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { SystemMaintenance.CreateRestorePoint((string)FindResource("textpoint_more")); });
+            await backgroundQueue.QueueTask(delegate { SystemMaintenance.CreateRestorePoint(); });
         }
 
-        private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e) => SystemMaintenance.StartRecovery(); 
+        private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e) => SystemMaintenance.StartRecovery();
 
         private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
 

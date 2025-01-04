@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Management;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
@@ -19,7 +18,6 @@ namespace GTweak.Utilities.Tweaks
         private static readonly ManagementClass RestorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
         private static ManagementBaseObject InParams, OutParams;
         private static bool isWorkingCreatePoint = false;
-        private static string output = string.Empty;
         private static readonly string[] RestoreTask = { @"Microsoft\Windows\SystemRestore\SR" };
         private readonly string[] DefragTask = { @"Microsoft\Windows\Defrag\ScheduledDefrag" };
 
@@ -43,24 +41,25 @@ namespace GTweak.Utilities.Tweaks
                 new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["warn_defrag_notification"]);
         }
 
-        internal static async void CreateRestorePoint(string description)
+        internal static void CreateRestorePoint()
         {
             if (isWorkingCreatePoint) return;
 
-            isWorkingCreatePoint = true;
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency", 0, RegistryValueKind.DWord);
-
             try
             {
+                isWorkingCreatePoint = true;
+                RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency", 0, RegistryValueKind.DWord);
+
                 EnableRecovery();
 
-                await StartPowerShell(@"Get-ComputerRestorePoint | Where-Object {$_.Description -like '*GTweak*'} | Select-Object -ExpandProperty SequenceNumber");
-
-                if (!string.IsNullOrEmpty(output))
-                    SRRemoveRestorePoint(Convert.ToInt32(output.Trim()));
+                foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT Description, SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
+                {
+                    if (managementObj["Description"].ToString().Contains("GTweak"))
+                        SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]));
+                }
 
                 InParams = RestorePoint.GetMethodParameters("CreateRestorePoint");
-                InParams["Description"] = description;
+                InParams["Description"] = (string)Application.Current.Resources["textpoint_more"];
                 InParams["EventType"] = 100;
                 InParams["RestorePointType"] = 12;
                 OutParams = RestorePoint.InvokeMethod("CreateRestorePoint", InParams, null);
@@ -73,7 +72,11 @@ namespace GTweak.Utilities.Tweaks
                 isWorkingCreatePoint = false;
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
             }
-            catch { new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]); }
+            catch
+            {
+                isWorkingCreatePoint = false;
+                new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]);
+            }
         }
 
         internal static void StartRecovery()
@@ -101,16 +104,15 @@ namespace GTweak.Utilities.Tweaks
 
                 Process.Start(new ProcessStartInfo()
                 {
-                    Arguments = "/c sc config wbengine start= disabled && " +
-                        "reg delete \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\SPP\\Clients\" /v \"{09F7EDC5 - 294E-4180 - AF6A - FB0E6A0E9513}\" /f &&" +
-                        "sc config swprv start= disabled && sc config vds start= disabled && sc config VSS start= disabled",
+                    Arguments = "/c sc config wbengine start= disabled && sc config swprv start= disabled && sc config vds start= disabled && sc config VSS start= disabled",
                     FileName = "cmd.exe",
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden
                 });
 
-                EnumerationOptions optionsObj = new EnumerationOptions { ReturnImmediately = true };
-                foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", optionsObj).Get())
+                RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SPP\Clients", "{09F7EDC5-294E-4180-AF6A-FB0E6A0E9513}");
+
+                foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
                     SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
 
                 DisableSR(UsePath.SystemDisk + @"\\");
@@ -127,9 +129,7 @@ namespace GTweak.Utilities.Tweaks
 
             Process.Start(new ProcessStartInfo()
             {
-                Arguments = "/c sc config wbengine start= demand && " +
-                    "reg add \"HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\SPP\\Clients\" /v \"{09F7EDC5 - 294E-4180 - AF6A - FB0E6A0E9513}\" /t REG_MULTI_SZ /d \"1\" /f &&" +
-                    "sc config swprv start= demand && sc config vds start= demand && sc config VSS start= demand",
+                Arguments = "/c sc config wbengine start= demand && sc config swprv start= demand && sc config vds start= demand && sc config VSS start= demand",
                 FileName = "cmd.exe",
                 CreateNoWindow = true,
                 WindowStyle = ProcessWindowStyle.Hidden
@@ -139,31 +139,6 @@ namespace GTweak.Utilities.Tweaks
             InParams["WaitTillEnabled"] = true;
             InParams["Drive"] = System.IO.Path.GetPathRoot(Environment.SystemDirectory);
             RestorePoint.InvokeMethod("Enable", InParams, null);
-        }
-
-        private static async Task<string> StartPowerShell(string arguments)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "powershell.exe",
-                Arguments = arguments,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            using Process process = new Process { StartInfo = startInfo };
-
-            process.Start();
-
-            Task<string> outputTask = process.StandardOutput.ReadToEndAsync();
-
-            await Task.WhenAll(outputTask);
-
-            output = await outputTask;
-
-            return output;
         }
     }
 }
