@@ -32,7 +32,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1") || IsTaskEnabled(telemetryTasks);
 
-            confidentialityV.TglButton4.StateNA = IsTaskEnabled(schedulerTasks);
+            confidentialityV.TglButton4.StateNA = IsTaskEnabled(dataCollectTasks);
 
             confidentialityV.TglButton5.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1");
@@ -162,7 +162,7 @@ namespace GTweak.Utilities.Tweaks
                     SetTaskState(!isChoose, telemetryTasks);
                     break;
                 case "TglButton4":
-                    SetTaskState(!isChoose, schedulerTasks);
+                    SetTaskState(!isChoose, dataCollectTasks);
                     break;
                 case "TglButton5":
                     if (isChoose)

@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+﻿using GTweak.Utilities.Helpers;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -24,8 +24,8 @@ namespace GTweak
 
         internal static void ViewingSettings()
         {
-            Language = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Language")?.ToString() ?? GettingSystemLanguage;
-            Theme = Registry.CurrentUser.OpenSubKey(@"Software\GTweak")?.GetValue("Theme")?.ToString() ?? "Dark";
+            Language = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Language", GettingSystemLanguage);
+            Theme = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Theme", "Dark");
         }
 
         internal static string Language
@@ -71,7 +71,7 @@ namespace GTweak
                     {
                         "Light" => new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
                         "Dark" => new Uri($"Styles/Themes/Dark/Colors.xaml", UriKind.Relative),
-                        _ => Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize")?.GetValue("AppsUseLightTheme")?.ToString()! == "0" ? new Uri("Styles/Themes/Dark/Colors.xaml", UriKind.Relative) : new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
+                        _ => RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", string.Empty) == "0" ? new Uri("Styles/Themes/Dark/Colors.xaml", UriKind.Relative) : new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
                     }
                 };
 

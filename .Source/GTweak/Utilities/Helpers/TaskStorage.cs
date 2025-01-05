@@ -2,7 +2,7 @@
 {
     internal class TaskStorage
     {
-        internal static readonly string[] schedulerTasks = {
+        internal static readonly string[] dataCollectTasks = {
         @"Microsoft\Windows\Maintenance\WinSAT",
         @"Microsoft\Windows\Autochk\Proxy",
         @"Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
@@ -14,7 +14,7 @@
         @"Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask",
         @"Microsoft\Windows\Customer Experience Improvement Program\UsbCeip",
         @"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver",
-        @"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"};
+        @"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" };
 
         internal static readonly string[] nvidiaTasks = {
         @"NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
@@ -33,7 +33,7 @@
 
         internal static readonly string[] memoryDiagTasks =  {
         @"Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
-        @"Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"};
+        @"Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
 
         internal static readonly string restoreTask = @"Microsoft\Windows\SystemRestore\SR";
         internal static readonly string defragTask = @"Microsoft\Windows\Defrag\ScheduledDefrag";

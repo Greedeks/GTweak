@@ -47,7 +47,6 @@ namespace GTweak.Utilities.Helpers
                 string command = "cmd.exe /c ";
                 foreach (string task in tasklist)
                     command += $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ";
-
                 command = command.TrimEnd(' ', '&');
 
                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, command);

@@ -33,10 +33,10 @@ namespace GTweak.Utilities.Tweaks
 
                     new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["success_defrag_notification"]);
                 }
-                catch { new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["error_defrag_notification"]); }
+                catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["error_defrag_notification"]); }
             }
             else
-                new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["warn_defrag_notification"]);
+                new ViewNotification().Show("", "info", (string)Application.Current.Resources["warn_defrag_notification"]);
         }
 
         internal static void CreateRestorePoint()
@@ -73,7 +73,7 @@ namespace GTweak.Utilities.Tweaks
             catch
             {
                 isWorkingCreatePoint = false;
-                new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]);
+                new ViewNotification().Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]);
             }
         }
 
