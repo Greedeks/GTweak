@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal class TaskSchedulerManager
+    internal class TaskSchedulerManager : TaskStorage
     {
-        internal bool IsTaskEnabled(in string[] tasklist)
+        internal static bool IsTaskEnabled(params string[] tasklist)
         {
             byte numberRunningTask = 0;
             using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
@@ -20,7 +20,7 @@ namespace GTweak.Utilities.Helpers
             return numberRunningTask > 0;
         }
 
-        internal static void SetTaskState(string[] tasklist, bool state)
+        internal static void SetTaskState(bool state, params string[] tasklist)
         {
             Task.Run(delegate
             {
@@ -40,7 +40,7 @@ namespace GTweak.Utilities.Helpers
             });
         }
 
-        internal static void SetTaskStateOwner(string[] tasklist, bool state)
+        internal static void SetTaskStateOwner(bool state, params string[] tasklist)
         {
             Task.Run(delegate
             {

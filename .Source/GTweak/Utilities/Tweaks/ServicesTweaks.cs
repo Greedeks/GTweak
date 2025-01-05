@@ -446,10 +446,10 @@ namespace GTweak.Utilities.Tweaks
                             Directory.Delete(cachePath, true);
                         }
 
-                        SetTaskStateOwner(WinUpdateTasks, false);
+                        SetTaskStateOwner(false, WinUpdateTasks);
                     }
                     else
-                        SetTaskStateOwner(WinUpdateTasks, true);
+                        SetTaskStateOwner(true, WinUpdateTasks);
                 }
                 catch (Exception ex) { Debug.WriteLine(ex); }
             });

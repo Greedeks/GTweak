@@ -285,6 +285,7 @@
     <Compile Include="Utilities\Tweaks\ServicesTweaks.cs" />
     <Compile Include="Utilities\Tweaks\SystemMaintenance.cs" />
     <Compile Include="Utilities\Tweaks\SystemTweaks.cs" />
+    <Compile Include="Utilities\Helpers\TaskStorage.cs" />
     <Compile Include="Utilities\Tweaks\UninstallingPakages.cs" />
     <Compile Include="Utilities\Tweaks\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />

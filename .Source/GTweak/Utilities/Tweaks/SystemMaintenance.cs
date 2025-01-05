@@ -18,18 +18,16 @@ namespace GTweak.Utilities.Tweaks
         private static readonly ManagementClass RestorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
         private static ManagementBaseObject InParams, OutParams;
         private static bool isWorkingCreatePoint = false;
-        private static readonly string[] RestoreTask = { @"Microsoft\Windows\SystemRestore\SR" };
-        private readonly string[] DefragTask = { @"Microsoft\Windows\Defrag\ScheduledDefrag" };
 
         internal static bool IsSystemRestoreDisabled => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "RPSessionInterval", "0");
 
-        internal void DisableDefrag()
+        internal static void DisableDefrag()
         {
-            if (IsTaskEnabled(DefragTask))
+            if (IsTaskEnabled(defragTask))
             {
                 try
                 {
-                    SetTaskStateOwner(DefragTask, false);
+                    SetTaskStateOwner(false, defragTask);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 4, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "N", RegistryValueKind.String);
 
@@ -100,7 +98,7 @@ namespace GTweak.Utilities.Tweaks
         {
             if (IsSystemRestoreDisabled)
             {
-                SetTaskState(RestoreTask, false);
+                SetTaskState(false, restoreTask);
 
                 Process.Start(new ProcessStartInfo()
                 {
@@ -125,7 +123,7 @@ namespace GTweak.Utilities.Tweaks
         {
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore");
 
-            SetTaskState(RestoreTask, true);
+            SetTaskState(true, restoreTask);
 
             Process.Start(new ProcessStartInfo()
             {

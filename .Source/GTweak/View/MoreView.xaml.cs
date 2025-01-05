@@ -36,7 +36,7 @@ namespace GTweak.View
 
         private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
 
-        private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => new SystemMaintenance().DisableDefrag();
+        private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.DisableDefrag();
 
         private async void BtnDisableRecovery_ClickButton(object sender, EventArgs e)
         {

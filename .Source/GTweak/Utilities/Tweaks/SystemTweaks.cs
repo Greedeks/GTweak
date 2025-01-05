@@ -24,10 +24,6 @@ namespace GTweak.Utilities.Tweaks
 
     internal sealed class SystemTweaks : Firewall
     {
-        private static readonly string[] schedulerTasks = new string[2] {
-                @"Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
-                @"Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic"};
-
         internal static bool isTweakWorkingAntivirus = false;
         private static bool isNetshState = false, isBluetoothStatus = false;
         private readonly string activeGuid = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty).ToString();
@@ -110,7 +106,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Security", "DisableSecuritySettingsCheck", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3", "1806", "0");
 
-            systemV.TglButton12.StateNA = IsTaskEnabled(schedulerTasks);
+            systemV.TglButton12.StateNA = IsTaskEnabled(memoryDiagTasks);
 
             systemV.TglButton13.StateNA = isNetshState;
 
@@ -297,7 +293,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton12":
-                    SetTaskState(schedulerTasks, !isChoose);
+                    SetTaskState(!isChoose, memoryDiagTasks);
                     break;
                 case "TglButton13":
                     string argStateNetsh = string.Empty, argStateNetshSecond = string.Empty;

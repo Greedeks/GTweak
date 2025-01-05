@@ -14,35 +14,6 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ConfidentialityTweaks : Firewall
     {
-        private static readonly string[] SchedulerTasks = {
-                @"Microsoft\Windows\Maintenance\WinSAT",
-                @"Microsoft\Windows\Autochk\Proxy",
-                @"Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
-                @"Microsoft\Windows\Application Experience\ProgramDataUpdater",
-                @"Microsoft\Windows\Application Experience\StartupAppTask",
-                @"Microsoft\Windows\PI\Sqm-Tasks",
-                @"Microsoft\Windows\NetTrace\GatherNetworkInfo",
-                @"Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
-                @"Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask",
-                @"Microsoft\Windows\Customer Experience Improvement Program\UsbCeip",
-                @"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver",
-                @"Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"};
-
-        private static readonly string[] NvidiaTasks = {
-                @"NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
-                @"NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
-                @"NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" };
-
-        private static readonly string[] TelemetryTasks = {
-                @"Microsoft\Office\Office ClickToRun Service Monitor",
-                @"Microsoft\Office\OfficeTelemetry\AgentFallBack2016",
-                @"Microsoft\Office\OfficeTelemetry\OfficeTelemetryAgentLogOn2016",
-                @"Microsoft\Office\OfficeTelemetryAgentFallBack2016",
-                @"Microsoft\Office\OfficeTelemetryAgentLogOn2016",
-                @"Microsoft\Office\OfficeTelemetryAgentFallBack",
-                @"Microsoft\Office\OfficeTelemetryAgentLogOn",
-                @"Microsoft\Office\Office 15 Subscription Heartbeat" };
-
         internal void AnalyzeAndUpdate(ConfidentialityView confidentialityV)
         {
             confidentialityV.TglButton1.StateNA =
@@ -59,9 +30,9 @@ namespace GTweak.Utilities.Tweaks
 
             confidentialityV.TglButton3.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1");
+                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1") || IsTaskEnabled(telemetryTasks);
 
-            confidentialityV.TglButton4.StateNA = IsTaskEnabled(SchedulerTasks);
+            confidentialityV.TglButton4.StateNA = IsTaskEnabled(schedulerTasks);
 
             confidentialityV.TglButton5.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1");
@@ -109,7 +80,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
 
             confidentialityV.TglButton17.StateNA = SystemDiagnostics.HardwareData["GPU"].ToLower().Contains("nvidia")
-                && (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(NvidiaTasks));
+                && (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks));
 
             confidentialityV.TglButton18.StateNA =
                   RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
@@ -188,10 +159,10 @@ namespace GTweak.Utilities.Tweaks
                     else
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
 
-                    SetTaskState(TelemetryTasks, !isChoose);
+                    SetTaskState(!isChoose, telemetryTasks);
                     break;
                 case "TglButton4":
-                    SetTaskState(SchedulerTasks, !isChoose);
+                    SetTaskState(!isChoose, schedulerTasks);
                     break;
                 case "TglButton5":
                     if (isChoose)
@@ -314,7 +285,7 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton17":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", isChoose ? 4 : 2, RegistryValueKind.DWord);
-                    SetTaskState(NvidiaTasks, !isChoose);
+                    SetTaskState(!isChoose, nvidiaTasks);
                     break;
                 case "TglButton18":
                     if (isChoose)
