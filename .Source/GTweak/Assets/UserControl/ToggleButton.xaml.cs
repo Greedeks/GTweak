@@ -19,7 +19,6 @@ namespace GTweak.Assets.UserControl
         private readonly Thickness _leftSide = new Thickness(6, 0, 0, 0), _rightSide = new Thickness(45, 0, 0, 0);
         private readonly LinearGradientBrush brushOffColor = new LinearGradientBrush(), brushOnColor = new LinearGradientBrush();
         private bool _state = false;
-
         /// <summary>
         /// Changes the state of a Toggle Button with animation
         /// </summary>
@@ -29,18 +28,31 @@ namespace GTweak.Assets.UserControl
         /// </summary>
         internal bool StateNA { get => _state; set { _state = value; AnimationToggle(_state, true); } }
         /// <summary>
-        /// Only a dimanimetic text binding
+        /// Changes the text for ToggleButton. Accepts: Dynamic and Static Resource, just a string.
         /// </summary>
-        internal DynamicResourceExtension DynamicText { set => ToggleText.SetResourceReference(TextBlock.TextProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey)); }
-
-        internal string СhangeText
+        internal object TextResource
         {
             get => (string)GetValue(TextProperty);
-            set => SetValue(TextProperty, value);
+            set
+            {
+                switch (value)
+                {
+                    case DynamicResourceExtension dynamicResource:
+                        ToggleText.SetResourceReference(TextBlock.TextProperty, new DynamicResourceExtensionConverter().ConvertToString(dynamicResource.ResourceKey));
+                        break;
+                    case StaticResourceExtension staticResource:
+                        ToggleText.SetResourceReference(TextBlock.TextProperty, staticResource.ResourceKey);
+                        break;
+                    case string text:
+                        ToggleText.Text = text;
+                        break;
+                }
+            }
         }
 
-        internal static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(СhangeText), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => ((ToggleButton)s).ToggleText.Text = (string)e.NewValue));
+        private static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => ((ToggleButton)s).ToggleText.Text = (string)e.NewValue));
+
 
         public ToggleButton()
         {
@@ -59,13 +71,11 @@ namespace GTweak.Assets.UserControl
 
         private void Toggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (sender.GetType().Name != "TextBlock")
+            if (sender.GetType() != typeof(TextBlock))
             {
                 ChangedState?.Invoke(this, EventArgs.Empty);
                 State = !_state;
             }
-            else
-                ChangedState?.Invoke(this, EventArgs.Empty);
         }
 
         private void AnimationToggle(bool isState, bool isSkipAnimation = false)

@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
@@ -156,10 +157,24 @@ namespace GTweak.View
                     case "TextBlock":
                         {
                             TextBlock textBlock = (TextBlock)sender;
-                            Clipboard.SetData(DataFormats.UnicodeText, textBlock.Text.Replace('\n', ' '));
+                            double cumulativeHeight = 0;
+                            string SelectedLine = string.Empty;
+
+                            foreach (string line in textBlock.Text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                FormattedText formattedText = new FormattedText(line, System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(textBlock.FontFamily,
+                                    textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, textBlock.Foreground, VisualTreeHelper.GetDpi(textBlock).PixelsPerDip);
+                                cumulativeHeight += formattedText.Height;
+
+                                if (cumulativeHeight >= e.GetPosition(textBlock).Y)
+                                {
+                                    SelectedLine = line;
+                                    break;
+                                }
+                            }
+                            Clipboard.SetData(DataFormats.UnicodeText, SelectedLine);
                             break;
                         }
-
                     case "Run":
                         {
                             Run runtext = (Run)sender;

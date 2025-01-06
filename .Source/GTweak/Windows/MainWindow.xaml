@@ -191,11 +191,11 @@
                             <Grid Grid.Row="1">
                                 <StackPanel Orientation="Vertical">
 
-                                    <uс:ToggleButton  x:Name="BtnNotification" DynamicText="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
+                                    <uс:ToggleButton  x:Name="BtnNotification" TextResource="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
 
-                                    <uс:ToggleButton x:Name="BtnUpdate" DynamicText="{DynamicResource btgl_update_main}"  VerticalAlignment="Top" Height="25" Margin="40,15,0,0" ChangedState="BtnUpdate_ChangedState"/>
+                                    <uс:ToggleButton x:Name="BtnUpdate" TextResource="{DynamicResource btgl_update_main}"  VerticalAlignment="Top" Height="25" Margin="40,15,0,0" ChangedState="BtnUpdate_ChangedState"/>
 
-                                    <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" DynamicText="{DynamicResource btgl_toast_main}" Margin="40,15,0,0" ChangedState="BtnTopMost_ChangedState"/>
+                                    <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" TextResource="{DynamicResource btgl_toast_main}" Margin="40,15,0,0" ChangedState="BtnTopMost_ChangedState"/>
 
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource slider_volume_main}"/>
