@@ -23,7 +23,8 @@ namespace GTweak
             BtnUpdate.StateNA = SettingsRepository.IsСheckingUpdate;
             BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
             BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
-            SliderVolume.Value = (ushort)(SettingsRepository.currentVolume & 0x0000ffff) / (ushort.MaxValue / 100);
+            SettingsRepository.WinmmMethods.waveOutGetVolume(IntPtr.Zero, out uint currentVolume);
+            SliderVolume.Value = (ushort)(currentVolume & 0x0000ffff) / (ushort.MaxValue / 100);
             LanguageSelectionMenu.SelectedIndex = SettingsRepository.Language == "en" ? 0 : 1;
             ThemeSelectionMenu.SelectedIndex = SettingsRepository.Theme switch
             {

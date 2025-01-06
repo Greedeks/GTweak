@@ -26,10 +26,10 @@ namespace GTweak.Utilities.Control
         internal sealed class WinmmMethods
         {
             [DllImport("winmm.dll")]
-            public static extern int waveOutGetVolume(IntPtr hwo, out uint dwVolume);
+            internal static extern int waveOutGetVolume(IntPtr hwo, out uint dwVolume);
 
             [DllImport("winmm.dll")]
-            public static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
+            internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
         }
 
         private static bool _isViewNotification = true;
@@ -40,8 +40,6 @@ namespace GTweak.Utilities.Control
         private static string _theme = "Dark";
         internal static bool _isHiddenIpAddress = false;
 
-        private const uint defaultVolume = 50;
-        internal static uint currentVolume = 0;
         internal static int PID = 0;
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
@@ -68,7 +66,7 @@ namespace GTweak.Utilities.Control
                 registryKey?.SetValue("HiddenIP", IsHiddenIpAddress, RegistryValueKind.String);
                 registryKey?.SetValue("Theme", Theme, RegistryValueKind.String);
                 registryKey?.SetValue("Language", App.GettingSystemLanguage, RegistryValueKind.String);
-                WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * defaultVolume) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * defaultVolume) << 16));
+                WinmmMethods.waveOutSetVolume(IntPtr.Zero, 0x80008000);
             }
             else
             {
@@ -79,7 +77,6 @@ namespace GTweak.Utilities.Control
                 IsHiddenIpAddress = bool.Parse(registryKey?.GetValue("HiddenIP").ToString() ?? "False");
                 Language = registryKey?.GetValue("Language").ToString() ?? App.GettingSystemLanguage;
                 Theme = registryKey?.GetValue("Theme").ToString() ?? "Dark";
-                WinmmMethods.waveOutGetVolume(IntPtr.Zero, out currentVolume);
             }
             registryKey?.Close();
         }
