@@ -105,8 +105,7 @@ namespace GTweak.Utilities.Tweaks
                         @"0.0.0.0 telemetry.microsoft.com",
                         @"0.0.0.0 bn3sch020010635.wns.windows.com",
                         @"0.0.0.0 api.cortana.ai"
-                    }).Where(hostsrules => hosts.Contains(hostsrules)).Count();
-                    streamReader.Close();
+                    }).Where(rule => hosts.Contains(rule)).Count();
                 }
                 return numberHostsRules == 0;
             }

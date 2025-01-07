@@ -111,7 +111,7 @@ namespace GTweak.Utilities.Helpers
             return string.Concat((byte[])Registry.GetValue(subkey, valueName, null) ?? Array.Empty<byte>()) != expectedValue;
         }
 
-        internal static T GetValue<T>(string subKey, string valueName, T defaultValue)
+        internal static T GetValue<T>(in string subKey, in string valueName, in T defaultValue)
         {
             try
             {

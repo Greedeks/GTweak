@@ -23,8 +23,7 @@ namespace GTweak
             BtnUpdate.StateNA = SettingsRepository.IsСheckingUpdate;
             BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
             BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
-            SettingsRepository.WinmmMethods.waveOutGetVolume(IntPtr.Zero, out uint currentVolume);
-            SliderVolume.Value = (ushort)(currentVolume & 0x0000ffff) / (ushort.MaxValue / 100);
+            SliderVolume.Value = SettingsRepository.Volume;
             LanguageSelectionMenu.SelectedIndex = SettingsRepository.Language == "en" ? 0 : 1;
             ThemeSelectionMenu.SelectedIndex = SettingsRepository.Theme switch
             {
@@ -156,9 +155,9 @@ namespace GTweak
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
-            SettingsRepository.WinmmMethods.waveOutSetVolume(IntPtr.Zero, ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)((ushort.MaxValue / 100) * SliderVolume.Value) << 16));
+            SettingsRepository.ChangingParameters(SliderVolume.Value, "Volume");
+            SettingsRepository.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) << 16));
         }
-
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
