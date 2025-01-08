@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace GTweak.Utilities.Control
@@ -32,6 +31,18 @@ namespace GTweak.Utilities.Control
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
         internal static readonly string currentLocation = Assembly.GetExecutingAssembly().Location;
+
+        private static readonly Dictionary<string, Action> parameterUpdates = new Dictionary<string, Action>
+        {
+            { "Notification", () => IsViewNotification = RegistryHelp.GetValue(UsePath.RegLocation, "Notification", IsViewNotification) },
+            { "Update", () => IsСheckingUpdate = RegistryHelp.GetValue(UsePath.RegLocation, "Update", IsСheckingUpdate) },
+            { "TopMost", () => IsTopMost = RegistryHelp.GetValue(UsePath.RegLocation, "TopMost", IsTopMost) },
+            { "Sound", () => IsPlayingSound = RegistryHelp.GetValue(UsePath.RegLocation, "Sound", IsPlayingSound) },
+            { "Volume", () => Volume = RegistryHelp.GetValue(UsePath.RegLocation, "Volume", Volume) },
+            { "Language", () => Language = RegistryHelp.GetValue(UsePath.RegLocation, "Language", Language) },
+            { "Theme", () => Theme = RegistryHelp.GetValue(UsePath.RegLocation, "Theme", Theme) },
+            { "HiddenIP", () => IsHiddenIpAddress = RegistryHelp.GetValue(UsePath.RegLocation, "HiddenIP", IsHiddenIpAddress) }
+        };
 
         internal static readonly Dictionary<string, object> defaultRegValues = new Dictionary<string, object>
         {
@@ -71,54 +82,19 @@ namespace GTweak.Utilities.Control
             {
                 foreach (var subkey in defaultRegValues)
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey.Key, subkey.Value, RegistryValueKind.String);
-
-                waveOutSetVolume(IntPtr.Zero, 0x80008000);
             }
             else
             {
-                IsViewNotification = RegistryHelp.GetValue(UsePath.RegLocation, "Notification", IsViewNotification);
-                IsСheckingUpdate = RegistryHelp.GetValue(UsePath.RegLocation, "Update", IsСheckingUpdate);
-                IsTopMost = RegistryHelp.GetValue(UsePath.RegLocation, "TopMost", IsTopMost);
-                IsPlayingSound = RegistryHelp.GetValue(UsePath.RegLocation, "Sound", IsPlayingSound);
-                Volume = RegistryHelp.GetValue(UsePath.RegLocation, "Volume", Volume);
-                Language = RegistryHelp.GetValue(UsePath.RegLocation, "Language", Language);
-                Theme = RegistryHelp.GetValue(UsePath.RegLocation, "Theme", Theme);
-                IsHiddenIpAddress = RegistryHelp.GetValue(UsePath.RegLocation, "HiddenIP", IsHiddenIpAddress);
+                foreach (Action executeUpdate in parameterUpdates.Values)
+                    executeUpdate();
             }
         }
 
-        internal static void ChangingParameters<T>(T value, string subkey) => Task.Run(delegate
+        internal static void ChangingParameters<T>(T value, string subkey)
         {
-            Registry.CurrentUser.CreateSubKey(@"Software\GTweak")?.SetValue(subkey, value.ToString(), RegistryValueKind.String);
-
-            switch (subkey)
-            {
-                case "Notification":
-                    IsViewNotification = RegistryHelp.GetValue(UsePath.RegLocation, "Notification", IsViewNotification);
-                    break;
-                case "Update":
-                    IsСheckingUpdate = RegistryHelp.GetValue(UsePath.RegLocation, "Update", IsСheckingUpdate);
-                    break;
-                case "TopMost":
-                    IsTopMost = RegistryHelp.GetValue(UsePath.RegLocation, "TopMost", IsTopMost);
-                    break;
-                case "Sound":
-                    IsPlayingSound = RegistryHelp.GetValue(UsePath.RegLocation, "Sound", IsPlayingSound);
-                    break;
-                case "Volume":
-                    Volume = RegistryHelp.GetValue(UsePath.RegLocation, "Volume", Volume);
-                    break;
-                case "Language":
-                    Language = RegistryHelp.GetValue(UsePath.RegLocation, "Language", Language);
-                    break;
-                case "Theme":
-                    Theme = RegistryHelp.GetValue(UsePath.RegLocation, "Theme", Theme);
-                    break;
-                case "HiddenIP":
-                    IsHiddenIpAddress = RegistryHelp.GetValue(UsePath.RegLocation, "HiddenIP", IsHiddenIpAddress);
-                    break;
-            }
-        });
+            RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey, value.ToString(), RegistryValueKind.String);
+            parameterUpdates[subkey]();
+        }
 
         internal static void SaveFileConfig()
         {
