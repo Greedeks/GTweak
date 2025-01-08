@@ -11,36 +11,29 @@ namespace GTweak.Utilities.Control
 
         internal ViewNotification(int delay = 100) => msec = delay;
 
-        internal void Show(string action, string tittle = "", string content = "")
+        internal async void Show(string action, string tittle = "", string content = "")
         {
-            if (SettingsRepository.IsViewNotification)
+            if (SettingsRepository.IsViewNotification && !isAlreadyLaunch)
             {
-                Application.Current.Dispatcher.Invoke(delegate
+                await Application.Current.Dispatcher.InvokeAsync(async delegate
                 {
-                    Parallel.Invoke(async delegate
+                    isAlreadyLaunch = true;
+
+                    NotificationWindow notificationWindow = new NotificationWindow
                     {
-                        NotificationWindow notificationWindow = new NotificationWindow();
-
-                        if (notificationWindow.IsLoaded || isAlreadyLaunch)
-                            return;
-
-                        isAlreadyLaunch = true;
-
-                        notificationWindow = new NotificationWindow
+                        TitleNotice = tittle switch
                         {
-                            TitleNotice = tittle switch
-                            {
-                                "warn" => (string)Application.Current.Resources["title_warn_notification"],
-                                "info" => (string)Application.Current.Resources["title_info_notification"],
-                                _ => string.Empty,
-                            },
-                            TextNotice = content,
-                            ActionNotice = action,
-                        };
-                        await Task.Delay(msec);
-                        notificationWindow.Show();
-                        notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
-                    });
+                            "warn" => (string)Application.Current.Resources["title_warn_notification"],
+                            "info" => (string)Application.Current.Resources["title_info_notification"],
+                            _ => string.Empty,
+                        },
+                        TextNotice = content,
+                        ActionNotice = action,
+                    };
+
+                    await Task.Delay(msec);
+                    notificationWindow.Show();
+                    notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
                 });
             }
         }

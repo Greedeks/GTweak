@@ -44,15 +44,13 @@ namespace GTweak.Windows
         {
             if (e.LeftButton == MouseButtonState.Pressed && !string.IsNullOrEmpty(ActionNotice))
             {
-                string arguments = ActionNotice switch
-                {
-                    "logout" => @"/c logoff",
-                    _ => @"/c shutdown /r /t 0",
-                };
-
                 Process.Start(new ProcessStartInfo()
                 {
-                    Arguments = arguments,
+                    Arguments = ActionNotice switch
+                    {
+                        "logout" => @"/c logoff",
+                        _ => @"/c shutdown /r /t 0",
+                    },
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,
                     FileName = "cmd.exe"
@@ -114,9 +112,8 @@ namespace GTweak.Windows
                 {
                     From = 0,
                     To = 1,
-                    SpeedRatio = 3,
                     EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(0.8)
+                    Duration = TimeSpan.FromSeconds(0.25)
                 };
 
                 Timeline.SetDesiredFrameRate(doubleAnim, 400);

@@ -90,9 +90,15 @@ namespace GTweak.Utilities.Helpers
             });
         }
 
-        internal static bool CheckExists(in RegistryKey registrykey, in string subkey, in bool isNegation = true)
+        internal static bool KeyExists(in RegistryKey registrykey, in string subkey, in bool isNegation = true)
         {
             bool result = registrykey.OpenSubKey(subkey) != null;
+            return isNegation ? result : !result;
+        }
+
+        internal static bool ValueExists(string subKey, string valueName, in bool isNegation = true)
+        {
+            bool result = Registry.GetValue(subKey, valueName, null) == null;
             return isNegation ? result : !result;
         }
 

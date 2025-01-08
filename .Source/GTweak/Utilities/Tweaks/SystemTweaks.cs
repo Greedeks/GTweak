@@ -125,8 +125,8 @@ namespace GTweak.Utilities.Tweaks
             systemV.TglButton17.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", "1");
 
-            systemV.TglButton18.StateNA = !Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "Description", string.Empty).ToString().Contains("-18") &&
-                                          !Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + activeGuid + "", "FriendlyName", string.Empty).ToString().Contains("-19");
+            systemV.TglButton18.StateNA = !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{activeGuid}", "Description", string.Empty).Contains("-18") &&
+                                          !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{activeGuid}", "FriendlyName", string.Empty).Contains("-19");
 
             systemV.TglButton19.StateNA = isBluetoothStatus;
 
@@ -354,16 +354,8 @@ namespace GTweak.Utilities.Tweaks
                     SetPowercfg(isChoose);
                     break;
                 case "TglButton19":
-                    if (isChoose)
-                    {
-                        BluetoothStatusSet();
-                        isBluetoothStatus = false;
-                    }
-                    else
-                    {
-                        BluetoothStatusSet("'on'");
-                        isBluetoothStatus = true;
-                    }
+                    BluetoothStatusSet(isChoose ? "'off'" : "'on'");
+                    isBluetoothStatus = !isChoose;
                     break;
                 case "TglButton20":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isChoose ? 4 : 2, RegistryValueKind.DWord);
@@ -387,13 +379,12 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        private static void BluetoothStatusSet(string status = "'off'")
+        private static void BluetoothStatusSet(string status)
         {
             Task.Run(() =>
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo
+                Process.Start(new ProcessStartInfo()
                 {
-                    FileName = @"powershell.exe",
                     Arguments = @"Add-Type -AssemblyName System.Runtime.WindowsRuntime
                     $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
                     Function Await($WinRtTask, $ResultType) {
@@ -409,12 +400,10 @@ namespace GTweak.Utilities.Tweaks
                     $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
                     [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
                     Await ($bluetooth.SetStateAsync(" + status + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null",
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-                using Process process = new Process() { StartInfo = startInfo };
-                process.Start();
-                process.Close();
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
+                    FileName = "powershell.exe"
+                });
             });
         }
 
@@ -434,7 +423,7 @@ namespace GTweak.Utilities.Tweaks
 
                 string serchScheme = default,
                     unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
-                    pathTempFile = UsePath.FileLocation + @"\UltimatePerformance.pow";
+                    pathTempFile = StoragePaths.FolderLocation + @"\UltimatePerformance.pow";
 
                 try
                 {
@@ -444,8 +433,9 @@ namespace GTweak.Utilities.Tweaks
                         {
                             serchScheme = Convert.ToString(managementObj["InstanceID"]);
                             serchScheme = Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value;
-                            if (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "Description", string.Empty).ToString().Contains("-18") &&
-                            Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\" + serchScheme + "", "FriendlyName", string.Empty).ToString().Contains("-19"))
+
+                            if (RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{serchScheme}", "Description", string.Empty).Contains("-18") &&
+                            RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{serchScheme}", "FriendlyName", string.Empty).Contains("-19"))
                             {
                                 using (_powercfg)
                                 {
@@ -480,7 +470,7 @@ namespace GTweak.Utilities.Tweaks
 
                             Process.Start(new ProcessStartInfo()
                             {
-                                Arguments = $"/c timeout /t 10 && rd /s /q {UsePath.FileLocation}",
+                                Arguments = $"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}",
                                 WindowStyle = ProcessWindowStyle.Hidden,
                                 CreateNoWindow = true,
                                 FileName = "cmd.exe"
@@ -489,7 +479,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else
                     {
-                        string activeScheme = @"Microsoft:PowerPlan\\{" + Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes").GetValue("ActivePowerScheme").ToString() + "}";
+                        string activeScheme = @"Microsoft:PowerPlan\\{" + RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{serchScheme}", "ActivePowerScheme", string.Empty) + "}";
 
                         foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + activeScheme + "'").Get())
                             serchScheme = Convert.ToString(managementObj["InstanceID"]);

@@ -73,8 +73,8 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", "0");
 
             confidentialityV.TglButton15.StateNA =
-                     RegistryHelp.CheckExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
-                     RegistryHelp.CheckExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice");
+                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
+                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice");
 
             confidentialityV.TglButton16.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
@@ -93,7 +93,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 byte numberHostsRules = 0;
 
-                using (StreamReader streamReader = new StreamReader(UsePath.Hosts))
+                using (StreamReader streamReader = new StreamReader(StoragePaths.HostsFile))
                 {
                     string hosts = streamReader.ReadToEnd();
                     numberHostsRules += (byte)(new string[] {
@@ -197,7 +197,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton9":
                     Task.Run(delegate
                     {
-                        string backupFile = UsePath.Hosts + @" (Default GTweak)";
+                        string backupFile = StoragePaths.HostsFile + @" (Default GTweak)";
                         try
                         {
                             if (isChoose)
@@ -205,12 +205,12 @@ namespace GTweak.Utilities.Tweaks
                                 if (File.Exists(backupFile))
                                     File.Delete(backupFile);
 
-                                File.Move(UsePath.Hosts, backupFile);
-                                new UnarchiveManager(UsePath.Hosts, Resources.hosts);
+                                File.Move(StoragePaths.HostsFile, backupFile);
+                                new UnarchiveManager(StoragePaths.HostsFile, Resources.hosts);
                             }
                             else
                             {
-                                File.Copy(backupFile, UsePath.Hosts, true);
+                                File.Copy(backupFile, StoragePaths.HostsFile, true);
 
                                 if (File.Exists(backupFile))
                                     File.Delete(backupFile);

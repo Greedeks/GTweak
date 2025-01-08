@@ -28,10 +28,10 @@ namespace GTweak.Utilities.Tweaks
 
         private static string PathsWinUUP(string program, bool isOldWay = false)
         {
-            string path = isOldWay ? string.Concat(UsePath.SystemDisk, @"Windows\System32\") : string.Concat(UsePath.SystemDisk, @"Windows\UUS\amd64\");
+            string path = isOldWay ? string.Concat(StoragePaths.SystemDisk, @"Windows\System32\") : string.Concat(StoragePaths.SystemDisk, @"Windows\UUS\amd64\");
 
             if (program == "Uso" || program == "Re_Uso")
-                return string.Concat(string.Concat(UsePath.SystemDisk, @"Windows\System32\"), ProgramsUUP[program]);
+                return string.Concat(string.Concat(StoragePaths.SystemDisk, @"Windows\System32\"), ProgramsUUP[program]);
             else
                 return string.Concat(path, ProgramsUUP[program]);
         }
@@ -415,7 +415,7 @@ namespace GTweak.Utilities.Tweaks
         {
             Task.Run(delegate
             {
-                string cachePath = Path.Combine(UsePath.SystemDisk, @"Windows\SoftwareDistribution\Download");
+                string cachePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\SoftwareDistribution\Download");
 
                 string[] WinUpdateTasks = new string[] {
                          @"Microsoft\Windows\UpdateOrchestrator\Report policies",

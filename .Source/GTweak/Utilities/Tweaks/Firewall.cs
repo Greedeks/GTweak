@@ -21,10 +21,10 @@ namespace GTweak.Utilities.Tweaks
 
         private static readonly SortedList<string, string> PathsForPrograms = new SortedList<string, string>
         {
-            ["MoUso_New"] = string.Concat(UsePath.SystemDisk, @"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
-            ["MoUso_Old"] = string.Concat(UsePath.SystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
-            ["Uso"] = string.Concat(UsePath.SystemDisk, @"Windows\System32\usoclient.exe"),
-            ["WD"] = string.Concat(UsePath.SystemDisk, @"Program Files\Windows Defender\MpCmdRun.exe"),
+            ["MoUso_New"] = string.Concat(StoragePaths.SystemDisk, @"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
+            ["MoUso_Old"] = string.Concat(StoragePaths.SystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
+            ["Uso"] = string.Concat(StoragePaths.SystemDisk, @"Windows\System32\usoclient.exe"),
+            ["WD"] = string.Concat(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MpCmdRun.exe"),
         };
 
         private static bool CheckRulesWindows(string nameRule)

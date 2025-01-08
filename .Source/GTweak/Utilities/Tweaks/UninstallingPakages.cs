@@ -14,7 +14,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
-        private static readonly string pathPackage = $@"{UsePath.SystemDisk}Program Files\WindowsApps";
+        private static readonly string pathPackage = $@"{StoragePaths.SystemDisk}Program Files\WindowsApps";
 
         #region Lists packages
         internal static Dictionary<string, bool> IsAppUnavailable = new Dictionary<string, bool>
@@ -219,7 +219,7 @@ namespace GTweak.Utilities.Tweaks
             }
 
             string argumentsFolders = $@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
-            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {UsePath.SystemDisk}\OneDriveTemp";
+            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {StoragePaths.SystemDisk}\OneDriveTemp";
 
             if (isLocalAccount)
                 argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";

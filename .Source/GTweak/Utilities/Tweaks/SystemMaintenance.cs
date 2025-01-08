@@ -113,7 +113,7 @@ namespace GTweak.Utilities.Tweaks
                 foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
                     SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
 
-                DisableSR(UsePath.SystemDisk + @"\\");
+                DisableSR(StoragePaths.SystemDisk + @"\\");
             }
             else
                 new ViewNotification().Show("", "info", (string)Application.Current.Resources["warndisable_recovery_notification"]);
