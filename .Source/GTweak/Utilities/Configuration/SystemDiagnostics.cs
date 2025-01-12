@@ -222,6 +222,7 @@ namespace GTweak.Utilities.Configuration
                     { Name: string name } when name.StartsWith("fa") => "aparat.com",
                     { Name: string name } when name.StartsWith("zh") => "baidu.com",
                     { Name: string name } when name.StartsWith("ru") => "yandex.ru",
+                    { Name: string name } when name.StartsWith("ko") => "naver.com",
                     _ => "google.com",
                 };
 
