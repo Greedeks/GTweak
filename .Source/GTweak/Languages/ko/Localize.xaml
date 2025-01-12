@@ -227,7 +227,6 @@
     <v:String x:Key="text2_applications">삭제됩니다</v:String>
     <v:String x:Key="text3_applications">회색</v:String>
     <v:String x:Key="text4_applications">아이콘을 클릭합니다</v:String>
-    <v:String x:Key="btntext_applications">모두 삭제</v:String>
     <v:String x:Key="MicrosoftStore_applications">Microsoft 스토어</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>

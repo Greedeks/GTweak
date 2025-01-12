@@ -227,7 +227,6 @@
     <v:String x:Key="text2_applications">of recovery except OneDrive. Click on the</v:String>
     <v:String x:Key="text3_applications">gray</v:String>
     <v:String x:Key="text4_applications">icon</v:String>
-    <v:String x:Key="btntext_applications">Delete all</v:String>
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>
