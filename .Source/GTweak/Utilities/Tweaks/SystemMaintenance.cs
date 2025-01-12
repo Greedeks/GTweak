@@ -2,7 +2,6 @@
 using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -82,14 +81,7 @@ namespace GTweak.Utilities.Tweaks
             try
             {
                 EnableRecovery();
-
-                Process.Start(new ProcessStartInfo()
-                {
-                    Arguments = "/c rstrui.exe",
-                    FileName = "cmd.exe",
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden
-                });
+                CommandExecutor.RunCommand("/c rstrui.exe");
             }
             catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["notsuccessfulrecovery_notification"]); }
         }
@@ -100,13 +92,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 SetTaskState(false, restoreTask);
 
-                Process.Start(new ProcessStartInfo()
-                {
-                    Arguments = "/c sc config wbengine start= disabled && sc config swprv start= disabled && sc config vds start= disabled && sc config VSS start= disabled",
-                    FileName = "cmd.exe",
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden
-                });
+                CommandExecutor.RunCommand("/c sc config wbengine start= disabled && sc config swprv start= disabled && sc config vds start= disabled && sc config VSS start= disabled");
 
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SPP\Clients", "{09F7EDC5-294E-4180-AF6A-FB0E6A0E9513}");
 
@@ -125,13 +111,7 @@ namespace GTweak.Utilities.Tweaks
 
             SetTaskState(true, restoreTask);
 
-            Process.Start(new ProcessStartInfo()
-            {
-                Arguments = "/c sc config wbengine start= demand && sc config swprv start= demand && sc config vds start= demand && sc config VSS start= demand",
-                FileName = "cmd.exe",
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden
-            });
+            CommandExecutor.RunCommand("/c sc config wbengine start= demand && sc config swprv start= demand && sc config vds start= demand && sc config VSS start= demand");
 
             InParams = RestorePoint.GetMethodParameters("Enable");
             InParams["WaitTillEnabled"] = true;

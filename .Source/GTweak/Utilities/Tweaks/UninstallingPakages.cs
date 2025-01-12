@@ -119,28 +119,7 @@ namespace GTweak.Utilities.Tweaks
         };
         #endregion
 
-        internal void ViewInstalledPackages()
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = "powershell.exe",
-                Arguments = "Get-AppxPackage | Select-Object -ExpandProperty Name",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            using Process process = new Process { StartInfo = startInfo };
-            process.Start();
-
-            string output = process.StandardOutput.ReadToEnd();
-
-            process.WaitForExit();
-
-            if (process.ExitCode == 0)
-                InstalledPackages = string.Join(Environment.NewLine, output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));
-        }
+        internal async void ViewInstalledPackages() => InstalledPackages = await CommandExecutor.GetCommandOutput("Get-AppxPackage | Select-Object -ExpandProperty Name");
 
         internal static void DeletingPackage(string packageName)
         {
@@ -228,13 +207,7 @@ namespace GTweak.Utilities.Tweaks
             if (isLocalAccount)
                 argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";
 
-            Process.Start(new ProcessStartInfo()
-            {
-                Arguments = argumentsFolders,
-                WindowStyle = ProcessWindowStyle.Hidden,
-                CreateNoWindow = true,
-                FileName = "cmd.exe"
-            });
+            CommandExecutor.RunCommand(argumentsFolders);
         }
 
         internal static void ResetOneDrive()
@@ -255,26 +228,10 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
         }
 
-        internal void CheckingForLocalAccount()
+        internal async void CheckingForLocalAccount()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = @"powershell.exe",
-                Arguments = @"Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
-
-            process.Start();
-
-            isLocalAccount = !process.StandardOutput.ReadToEnd().Contains("MicrosoftAccount");
-
-            process.Close();
-            process.Dispose();
+            string output = await CommandExecutor.GetCommandOutput("Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource");
+            isLocalAccount = !output.Contains("MicrosoftAccount");
         }
     }
 }

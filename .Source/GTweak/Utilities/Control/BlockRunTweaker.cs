@@ -1,4 +1,5 @@
 ﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
 using GTweak.Windows;
 using System;
 using System.Diagnostics;
@@ -20,13 +21,7 @@ namespace GTweak.Utilities.Control
 
         internal static void CheckingApplicationCopies()
         {
-            Process.Start(new ProcessStartInfo()
-            {
-                Arguments = @$"/c timeout /t 10 && del %userprofile%\AppData\Local\CrashDumps\*{SettingsRepository.currentName}*",
-                WindowStyle = ProcessWindowStyle.Hidden,
-                CreateNoWindow = true,
-                FileName = "cmd.exe"
-            });
+            CommandExecutor.RunCommand(@$"/c timeout /t 10 && del %userprofile%\AppData\Local\CrashDumps\*{SettingsRepository.currentName}*");
 
             if (!mutex.WaitOne(150, false))
             {

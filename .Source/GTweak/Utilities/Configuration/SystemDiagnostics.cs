@@ -190,7 +190,7 @@ namespace GTweak.Utilities.Configuration
             }
 
             HardwareData["Audio"] = string.Empty;
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "SELECT DeviceID, Name, Caption, Description FROM Win32_SoundDevice", new EnumerationOptions { ReturnImmediately = true }))
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
             {
                 foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {

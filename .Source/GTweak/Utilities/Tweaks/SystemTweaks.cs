@@ -145,36 +145,14 @@ namespace GTweak.Utilities.Tweaks
 
         internal void ViewBluetoothStatus()
         {
-            try { isBluetoothStatus = new ManagementObjectSearcher("SELECT DeviceId FROM Win32_PnPEntity WHERE service='BthLEEnum'").Get().Count > 0; }
+            try { isBluetoothStatus = new ManagementObjectSearcher("select DeviceId from Win32_PnPEntity where service='BthLEEnum'").Get().Count > 0; }
             catch { isBluetoothStatus = false; }
         }
 
-        internal void ViewNetshState()
+        internal async void ViewNetshState()
         {
-            Task.Run(delegate
-            {
-                string getStateNetsh = default;
-
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = @"cmd.exe",
-                    Arguments = $"/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using Process process = new Process() { StartInfo = startInfo, EnableRaisingEvents = true };
-
-                process.Start();
-
-                getStateNetsh = process.StandardOutput.ReadToEnd();
-
-                process.Close();
-
-                isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
-            });
+            string getStateNetsh = await CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false);
+            isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
         }
 
         [DllImport("user32.dll")]
@@ -310,17 +288,7 @@ namespace GTweak.Utilities.Tweaks
                         argStateNetsh = @"default";
                     }
 
-                    Task.Run(() =>
-                    {
-                        Process.Start(new ProcessStartInfo()
-                        {
-                            WindowStyle = ProcessWindowStyle.Hidden,
-                            CreateNoWindow = true,
-                            UseShellExecute = false,
-                            FileName = "cmd.exe",
-                            Arguments = $"/c netsh int teredo set state {argStateNetsh} & netsh int ipv6 6to4 set state state = {argStateNetsh} undoonstop = {argStateNetsh} & netsh int ipv6 isatap set state state = {argStateNetsh} & netsh int ipv6 set privacy state = {argStateNetshSecond} & netsh int ipv6 set global randomizeidentifier = {argStateNetshSecond} & netsh int isatap set state {argStateNetsh}"
-                        });
-                    });
+                    CommandExecutor.RunCommand($"/c netsh int teredo set state {argStateNetsh} & netsh int ipv6 6to4 set state state = {argStateNetsh} undoonstop = {argStateNetsh} & netsh int ipv6 isatap set state state = {argStateNetsh} & netsh int ipv6 set privacy state = {argStateNetshSecond} & netsh int ipv6 set global randomizeidentifier = {argStateNetshSecond} & netsh int isatap set state {argStateNetsh}");
                     break;
                 case "TglButton14":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", isChoose ? 1 : 0, RegistryValueKind.DWord);
@@ -359,13 +327,7 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton20":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isChoose ? 4 : 2, RegistryValueKind.DWord);
-                    Process.Start(new ProcessStartInfo()
-                    {
-                        Arguments = $"/c netsh advfirewall set allprofiles state {(isChoose ? "off" : "on")}",
-                        WindowStyle = ProcessWindowStyle.Hidden,
-                        CreateNoWindow = true,
-                        FileName = "cmd.exe"
-                    });
+                    CommandExecutor.RunCommand($"/c netsh advfirewall set allprofiles state {(isChoose ? "off" : "on")}");
                     break;
                 case "TglButton21":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
@@ -381,11 +343,7 @@ namespace GTweak.Utilities.Tweaks
 
         private static void BluetoothStatusSet(string status)
         {
-            Task.Run(() =>
-            {
-                Process.Start(new ProcessStartInfo()
-                {
-                    Arguments = @"Add-Type -AssemblyName System.Runtime.WindowsRuntime
+            CommandExecutor.RunCommand(@"Add-Type -AssemblyName System.Runtime.WindowsRuntime
                     $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
                     Function Await($WinRtTask, $ResultType) {
                         $asTask = $asTaskGeneric.MakeGenericMethod($ResultType)
@@ -399,12 +357,7 @@ namespace GTweak.Utilities.Tweaks
                     $radios = Await ([Windows.Devices.Radios.Radio]::GetRadiosAsync()) ([System.Collections.Generic.IReadOnlyList[Windows.Devices.Radios.Radio]])
                     $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
                     [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-                    Await ($bluetooth.SetStateAsync(" + status + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null",
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    CreateNoWindow = true,
-                    FileName = "powershell.exe"
-                });
-            });
+                    Await ($bluetooth.SetStateAsync(" + status + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null", true);
         }
 
 
@@ -468,13 +421,7 @@ namespace GTweak.Utilities.Tweaks
                                 _powercfg.Start();
                             }
 
-                            Process.Start(new ProcessStartInfo()
-                            {
-                                Arguments = $"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}",
-                                WindowStyle = ProcessWindowStyle.Hidden,
-                                CreateNoWindow = true,
-                                FileName = "cmd.exe"
-                            });
+                            CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}");
                         }
                     }
                     else

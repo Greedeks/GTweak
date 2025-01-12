@@ -177,13 +177,7 @@ namespace GTweak.Utilities.Tweaks
 
         private static async void ClearTempSystemCache()
         {
-            Process.Start(new ProcessStartInfo()
-            {
-                Arguments = @$"/c rd /s /q {StoragePaths.SystemDisk}Windows\Temp & rd /s /q %localappdata%\Temp",
-                WindowStyle = ProcessWindowStyle.Hidden,
-                CreateNoWindow = true,
-                FileName = "cmd.exe"
-            });
+            CommandExecutor.RunCommand(@$"/c rd /s /q {StoragePaths.SystemDisk}Windows\Temp & rd /s /q %localappdata%\Temp");
 
             foreach (Process process in Process.GetProcesses())
             {
@@ -192,14 +186,10 @@ namespace GTweak.Utilities.Tweaks
                     if (string.Compare(process.MainModule?.FileName, $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         process.Kill();
-                        Process.Start(new ProcessStartInfo()
-                        {
-                            Arguments = @"/c attrib -h -r -s IconCache.db & del /a /q ""%localappdata%\IconCache.db"" & del /a /f /q ""%localappdata%\Microsoft\Windows\Explorer\iconcache*""",
-                            WindowStyle = ProcessWindowStyle.Hidden,
-                            CreateNoWindow = true,
-                            FileName = "cmd.exe"
-                        });
+
+                        CommandExecutor.RunCommand(@"/c attrib -h -r -s IconCache.db & del /a /q ""%localappdata%\IconCache.db"" & del /a /f /q ""%localappdata%\Microsoft\Windows\Explorer\iconcache*""");
                         await Task.Delay(200);
+
                         process.Start();
                     }
                 }

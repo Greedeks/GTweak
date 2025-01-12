@@ -266,6 +266,7 @@
     </Compile>
     <Compile Include="Utilities\Control\BlockRunTweaker.cs" />
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
+    <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
     <Compile Include="Utilities\Helpers\TaskSchedulerManager.cs" />
     <Compile Include="Utilities\Helpers\UnarchiveManager.cs" />
     <Compile Include="Utilities\Helpers\BackgroundQueue.cs" />

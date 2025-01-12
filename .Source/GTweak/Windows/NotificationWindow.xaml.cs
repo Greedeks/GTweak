@@ -1,7 +1,7 @@
 ﻿using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Media;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,16 +44,10 @@ namespace GTweak.Windows
         {
             if (e.LeftButton == MouseButtonState.Pressed && !string.IsNullOrEmpty(ActionNotice))
             {
-                Process.Start(new ProcessStartInfo()
+                CommandExecutor.RunCommand(ActionNotice switch
                 {
-                    Arguments = ActionNotice switch
-                    {
-                        "logout" => @"/c logoff",
-                        _ => @"/c shutdown /r /t 0",
-                    },
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    CreateNoWindow = true,
-                    FileName = "cmd.exe"
+                    "logout" => @"/c logoff",
+                    _ => @"/c shutdown /r /t 0",
                 });
             }
         }

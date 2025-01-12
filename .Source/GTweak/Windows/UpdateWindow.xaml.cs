@@ -1,4 +1,5 @@
 ﻿using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -75,13 +76,7 @@ namespace GTweak.Windows
                     };
                     webClient.DownloadFileCompleted += delegate
                     {
-                        Process.Start(new ProcessStartInfo()
-                        {
-                            Arguments = $"/c taskkill /f /im \"{SettingsRepository.currentName}\" && timeout /t 1 && del \"{SettingsRepository.currentLocation}\" && ren Git-GTweak.exe \"{SettingsRepository.currentName}\" &&  \"{SettingsRepository.currentLocation}\"",
-                            WindowStyle = ProcessWindowStyle.Hidden,
-                            CreateNoWindow = true,
-                            FileName = "cmd.exe"
-                        });
+                        CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsRepository.currentName}\" && timeout /t 1 && del \"{SettingsRepository.currentLocation}\" && ren Git-GTweak.exe \"{SettingsRepository.currentName}\" &&  \"{SettingsRepository.currentLocation}\"");
                     };
                     webClient.DownloadFileAsync(new Uri("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"), "Git-GTweak.exe");
                 }

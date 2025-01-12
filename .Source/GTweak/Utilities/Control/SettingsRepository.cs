@@ -165,27 +165,14 @@ namespace GTweak.Utilities.Control
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
-                Process.Start(new ProcessStartInfo()
-                {
-                    Arguments = $"/c taskkill /f /im {currentName} & choice /c y /n /d y /t 3 & del {new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name} & " +
-                    @$"rd /s /q {StoragePaths.FolderLocation} & rd /s /q {Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak",
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    CreateNoWindow = true,
-                    FileName = "cmd.exe"
-                });
+
+                CommandExecutor.RunCommand($"/c taskkill /f /im {currentName} & choice /c y /n /d y /t 3 & del {new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name} & " +
+                    @$"rd /s /q {StoragePaths.FolderLocation} & rd /s /q {Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak");
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
 
-        internal static void SelfReboot()
-        {
-            Process.Start(new ProcessStartInfo()
-            {
-                Arguments = $"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"{currentLocation}\"",
-                WindowStyle = ProcessWindowStyle.Hidden,
-                CreateNoWindow = true,
-                FileName = "cmd.exe"
-            });
-        }
+        internal static void SelfReboot() => CommandExecutor.RunCommand($"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"{currentLocation}\"");
+
     }
 }
