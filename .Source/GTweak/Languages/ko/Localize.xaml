@@ -7,7 +7,7 @@
 
     <!--#region Load Window -->
     <v:String x:Key="title0_load">로드 중</v:String>
-    <v:String x:Key="title1_load">로드 중입니다.</v:String>
+    <v:String x:Key="title1_load">로드 중.</v:String>
     <v:String x:Key="title2_load">로드 중..</v:String>
     <v:String x:Key="title3_load">로드 중...</v:String>
     <v:String x:Key="text0_load">프로필 업로드 중</v:String>
@@ -288,7 +288,7 @@
     <v:String x:Key="tgl14_services">로컬 네트워크 운영 관련 서비스</v:String>
     <v:String x:Key="tgl15_services">Windows 업데이트 관련 서비스</v:String>
     <v:String x:Key="tgl16_services">VPN 클라이언트 관련 서비스</v:String>
-    <v:String x:Key="tgl17_services">SWindows Media 운영 관련 서비스</v:String>
+    <v:String x:Key="tgl17_services">Windows Media 운영 관련 서비스</v:String>
     <v:String x:Key="tgl18_services">원격 데스크톱 관련 서비스</v:String>
     <v:String x:Key="tgl19_services">오류 및 이벤트 로그 수집 서비스</v:String>
     <v:String x:Key="tgl20_services">WebDAV 원격 파일 관리 서비스</v:String>

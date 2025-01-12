@@ -208,6 +208,7 @@
                                         <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
                                             <TextBlock Text="{DynamicResource cmbox_eng_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_ru_main}"/>
+                                            <TextBlock Text="{DynamicResource cmbox_ko_main}"/>
                                         </ComboBox>
                                     </StackPanel>
 

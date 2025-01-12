@@ -82,6 +82,7 @@
     <v:String x:Key="cmbox_lang_main">Interface language:</v:String>
     <v:String x:Key="cmbox_eng_main">English</v:String>
     <v:String x:Key="cmbox_ru_main">Russian</v:String>
+    <v:String x:Key="cmbox_ko_main">Korean</v:String>
     <v:String x:Key="cmbox_theme_main">Interface theme:</v:String>
     <v:String x:Key="cmbox_dark_main">Dark</v:String>
     <v:String x:Key="cmbox_light_main">Light</v:String>

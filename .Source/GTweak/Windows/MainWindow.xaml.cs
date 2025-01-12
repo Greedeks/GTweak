@@ -24,7 +24,12 @@ namespace GTweak
             BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
             BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
             SliderVolume.Value = SettingsRepository.Volume;
-            LanguageSelectionMenu.SelectedIndex = SettingsRepository.Language == "en" ? 0 : 1;
+            LanguageSelectionMenu.SelectedIndex = SettingsRepository.Language switch
+            {
+                "en" => 0,
+                "ru" => 1,
+                _ => 2,
+            };
             ThemeSelectionMenu.SelectedIndex = SettingsRepository.Theme switch
             {
                 "Dark" => 0,
@@ -167,9 +172,13 @@ namespace GTweak
                     SettingsRepository.ChangingParameters("en", "Language");
                     App.Language = "en";
                     break;
-                default:
+                case 1:
                     SettingsRepository.ChangingParameters("ru", "Language");
                     App.Language = "ru";
+                    break;
+                default:
+                    SettingsRepository.ChangingParameters("ko", "Language");
+                    App.Language = "ko";
                     break;
             }
         }
