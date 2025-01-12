@@ -37,7 +37,7 @@ namespace GTweak.Utilities.Helpers
                         }
                     }
                 }
-            });
+            }).Wait();
         }
 
         internal static void SetTaskStateOwner(bool state, params string[] tasklist)
@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Helpers
                 command = command.TrimEnd(' ', '&');
 
                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, command);
-            });
+            }).Wait();
         }
     }
 }
