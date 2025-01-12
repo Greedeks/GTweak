@@ -92,7 +92,7 @@ namespace GTweak.Utilities.Control
 
         internal static void ChangingParameters<T>(T value, string subkey)
         {
-            RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey, value.ToString(), RegistryValueKind.String);
+            Registry.CurrentUser.CreateSubKey(@"Software\GTweak")?.SetValue(subkey, value.ToString(), RegistryValueKind.String);
             parameterUpdates[subkey]();
         }
 
