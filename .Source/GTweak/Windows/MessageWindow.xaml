@@ -6,17 +6,22 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="170" Width="370" MinHeight="170" MinWidth="370" MaxHeight="170" MaxWidth="370" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        Background="Transparent"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
-        ShowInTaskbar="False"  IsTabStop="False">
+        Height="170" Width="370" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="Transparent"  AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False"  IsTabStop="False">
+    <Window.Clip>
+        <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,370,170"/>
+    </Window.Clip>
+
     <Grid MouseDown="TitleBar_MouseDown">
-        <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
-            <Border.BorderBrush>
-                <LinearGradientBrush>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
+        <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
+            <Rectangle Width="auto" Height="auto" RadiusX="7" RadiusY="7" StrokeThickness="0.4" Panel.ZIndex="1">
+                <Rectangle.Stroke>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Stroke>
+            </Rectangle>
 
             <Grid Margin="0" Background="Transparent">
                 <Grid x:Name="CreateWarn" Visibility="Visible">
@@ -65,6 +70,6 @@
                     <Button x:Name="BtnAccept" Content="{DynamicResource button_message}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnAccept_PreviewMouseDown"/>
                 </Grid>
             </Grid>
-        </Border>
+        </Grid>
     </Grid>
 </Window>

@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
-        Title="GTweak" WindowStyle="None"
-        Height="180" Width="180"
-        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
+        Title="GTweak" WindowStyle="None" Height="180" Width="180" ResizeMode="NoResize"
+        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" UseLayoutRounding="True"
         IsTabStop="False" Opacity="0.98" Topmost="True" ShowInTaskbar="False" Loaded="Window_Loaded">
     <Grid>
         <Ellipse Height="140" Width="140" Fill="{StaticResource Color_Background_Dark}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>

@@ -6,17 +6,23 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="{DynamicResource title_win_update}" WindowStyle="None"
-        Height="180" Width="400" MinHeight="180" MinWidth="400" MaxHeight="180" MaxWidth="350" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        Height="180" Width="400" SnapsToDevicePixels="True" UseLayoutRounding="True"
+        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         IsTabStop="False" Topmost="True" ShowInTaskbar="True" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Clip>
+        <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,400,180"/>
+    </Window.Clip>
+
     <Grid MouseDown="TitleBar_MouseDown">
-        <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
-            <Border.BorderBrush>
-                <LinearGradientBrush>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
+        <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
+            <Rectangle Width="auto" Height="auto" RadiusX="7" RadiusY="7" StrokeThickness="0.4" Panel.ZIndex="1">
+                <Rectangle.Stroke>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Stroke>
+            </Rectangle>
 
             <Grid Margin="0" Background="Transparent">
 
@@ -122,6 +128,6 @@
                 
             </Grid>
             
-        </Border>
+        </Grid>
     </Grid>
 </Window>

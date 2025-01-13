@@ -7,18 +7,23 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="160" Width="390" MinHeight="160" MinWidth="390" MaxHeight="160" MaxWidth="390" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True" ResizeMode="CanMinimize"
+        Height="160" Width="390" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True"
+        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True"
         ShowInTaskbar="False" IsTabStop="False" Loaded="Window_Loaded">
-    
+    <Window.Clip>
+        <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,390,160"/>
+    </Window.Clip>
+
     <Grid MouseDown="TitleBar_MouseDown">
-        <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
-            <Border.BorderBrush>
-                <LinearGradientBrush>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
+        <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
+            <Rectangle Width="auto" Height="auto" RadiusX="7" RadiusY="7" StrokeThickness="0.4" Panel.ZIndex="1">
+                <Rectangle.Stroke>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Stroke>
+            </Rectangle>
 
             <Grid Margin="0" Background="Transparent">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Height="140" Margin="20,20,0,0">
@@ -36,7 +41,7 @@
                     <Border Margin="0,20,0,0" CornerRadius="5" Background="{StaticResource Color_Background_RadialProgressBar}" Height="30" Width="350" HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
                             <uc:ProggressRing ChangeBackground="{StaticResource Color_Background_Dark}" ChangeStrokeThickness="10" Width="25" Margin="10,0,0,0" />
-                                <TextBlock Text="{DynamicResource wait_win_import}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,5,0,0"/>
+                            <TextBlock Text="{DynamicResource wait_win_import}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,5,0,0"/>
                         </StackPanel>
                     </Border>
                     <TextBlock Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" MaxWidth="350" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0">
@@ -45,7 +50,6 @@
                     </TextBlock>
                 </StackPanel>
             </Grid>
-
-        </Border>
+        </Grid>
     </Grid>
 </Window>

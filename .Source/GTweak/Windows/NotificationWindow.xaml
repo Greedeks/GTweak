@@ -6,21 +6,24 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="{DynamicResource title_win_notification}" 
-        Height="125" Width="375" MaxHeight="125" MaxWidth="375" MinHeight="125" MinWidth="375"
-        Background="Transparent" WindowStyle="None" 
-        ShowInTaskbar="False"  IsTabStop="False"
-        SnapsToDevicePixels="True" UseLayoutRounding="True"
-        AllowsTransparency="True" WindowStartupLocation="Manual" ResizeMode="CanMinimize" 
+        Height="125" Width="375" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True"
+        Background="Transparent" WindowStyle="None" ShowInTaskbar="False"  IsTabStop="False"
+        AllowsTransparency="True" WindowStartupLocation="Manual" 
         Topmost="True" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.Clip>
+        <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,375,125"/>
+    </Window.Clip>
 
-    <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
-        <Border.BorderBrush>
-            <LinearGradientBrush>
-                <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
-                <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-
+    <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
+        <Rectangle Width="auto" Height="auto" RadiusX="7" RadiusY="7" StrokeThickness="0.4" Panel.ZIndex="1">
+            <Rectangle.Stroke>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="28*"/>
@@ -107,11 +110,9 @@
                             </TextBlock.Effect>
                         </TextBlock>
                     </Grid>
-
                 </Grid>
             </Grid>
-
         </Grid>
-    </Border>
+    </Grid>
 
 </Window>

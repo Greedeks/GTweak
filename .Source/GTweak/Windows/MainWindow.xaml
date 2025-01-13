@@ -10,25 +10,26 @@
         xmlns:uс="clr-namespace:GTweak.Assets.UserControl"
         mc:Ignorable="d"
         Title="GTweak" 
-        Height="630" Width="1100"  
-        MaxHeight="630" MaxWidth="1100" MinHeight="630" MinWidth="1100" 
-        Background="Transparent"
-        WindowStyle="None" AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen"
-        SnapsToDevicePixels="True" UseLayoutRounding="True"
+        Height="630" Width="1100" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
+        AllowsTransparency="True" WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" UseLayoutRounding="True"
         Closing="Window_Closing" Loaded="Window_Loaded" WindowChrome.IsHitTestVisibleInChrome="False">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
+    <Window.Clip>
+        <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,1100,630"/>
+    </Window.Clip>
 
-    <Border Background="{StaticResource Color_Background}" BorderThickness="1" CornerRadius="7" Opacity="0.98">
-        <Border.BorderBrush>
-            <LinearGradientBrush>
-                <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
-                <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
-            </LinearGradientBrush>
-        </Border.BorderBrush>
-
+    <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
+        <Rectangle Width="auto" Height="auto" RadiusX="7" RadiusY="7" StrokeThickness="0.4" Panel.ZIndex="1">
+            <Rectangle.Stroke>
+                <LinearGradientBrush>
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+        
         <Grid Margin="0" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
@@ -36,14 +37,12 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="TitleBar" Grid.Row="0" SnapsToDevicePixels="True" UseLayoutRounding="True" MouseDown="TitleBar_MouseDown">
-                <Border Background="{StaticResource Color_Background_Dark}" CornerRadius="7,7,0,0">
-                    <TextBlock x:Name="UtilityTitle"  FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="18" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <TextBlock.Effect>
-                            <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
-                        </TextBlock.Effect>
-                    </TextBlock>
-                </Border>
+            <Grid x:Name="TitleBar" Grid.Row="0" Background="{StaticResource Color_Background_Dark}" SnapsToDevicePixels="True" UseLayoutRounding="True" MouseDown="TitleBar_MouseDown">
+                <TextBlock x:Name="UtilityTitle"  FontFamily="{StaticResource Jura}" Text="GTweak" Foreground="{StaticResource Color_Accent}" FontSize="18" Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                    </TextBlock.Effect>
+                </TextBlock>
 
                 <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid>
@@ -156,13 +155,10 @@
                 </StackPanel>
             </Grid>
 
-
             <Grid x:Name="BodyContent" Grid.Row="1">
-
                 <ContentControl x:Name="Pages" Content="{Binding CurrentView}" IsTabStop="False" QueryCursor="SettingsMenu_QueryCursor"/>
 
                 <Grid x:Name="SettingsMenu" Width="0" HorizontalAlignment="Right" Opacity="0.97" Panel.ZIndex="1">
-
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="{StaticResource Color_Background_Dark}" VirtualizingStackPanel.IsVirtualizing="True">
                         <StackPanel.OpacityMask>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -184,7 +180,6 @@
                                         <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
                                     </TextBlock.Effect>
                                 </TextBlock>
-
                                 <Border Background="{StaticResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10 10 0 0"/>
                             </Grid>
 
@@ -319,35 +314,17 @@
                             <ColumnDefinition Width="120*"/>
                         </Grid.ColumnDefinitions>
 
-                        <nav:ButtonNavigation Grid.Column="0" Style="{StaticResource BtnNavigation}" x:Name="BtnConfidentiality" Content="{DynamicResource btn1_main}" Command="{Binding ConfidentialityCommand}">
-                            <nav:ButtonNavigation.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="0,0,0,7"/>
-                                </Style>
-                            </nav:ButtonNavigation.Resources>
-                        </nav:ButtonNavigation>
-
+                        <nav:ButtonNavigation Grid.Column="0" Style="{StaticResource BtnNavigation}" x:Name="BtnConfidentiality" Content="{DynamicResource btn1_main}" Command="{Binding ConfidentialityCommand}"/>
                         <nav:ButtonNavigation Grid.Column="1" Style="{StaticResource BtnNavigation}" x:Name="BtnInterface" Content="{DynamicResource btn2_main}" Command="{Binding InterfaceCommand}"/>
-
                         <nav:ButtonNavigation Grid.Column="2" Style="{StaticResource BtnNavigation}" x:Name="BtnApplication" Content="{DynamicResource btn3_main}" Command="{Binding PakagesCommand}"/>
-
                         <nav:ButtonNavigation Grid.Column="3" Style="{StaticResource BtnNavigation}" x:Name="BtnServices" Content="{DynamicResource btn4_main}" Command="{Binding ServicesCommand}"/>
-
                         <nav:ButtonNavigation Grid.Column="4" Style="{StaticResource BtnNavigation}" x:Name="BtnSystem" Content="{DynamicResource btn5_main}" Command="{Binding SystemCommand}"/>
-
                         <nav:ButtonNavigation Grid.Column="5" Style="{StaticResource BtnNavigation}" x:Name="BtnSystemInfo" Content="{DynamicResource btn6_main}" Command="{Binding DataSystemCommand}"/>
-
-                        <nav:ButtonNavigation Grid.Column="6" Style="{StaticResource BtnNavigation}" x:Name="BtnMore" Content="{DynamicResource btn7_main}" Command="{Binding MoreCommand}" IsChecked="True">
-                            <nav:ButtonNavigation.Resources>
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter Property="CornerRadius" Value="0,0,7,0"/>
-                                </Style>
-                            </nav:ButtonNavigation.Resources>
-                        </nav:ButtonNavigation>
+                        <nav:ButtonNavigation Grid.Column="6" Style="{StaticResource BtnNavigation}" x:Name="BtnMore" Content="{DynamicResource btn7_main}" Command="{Binding MoreCommand}" IsChecked="True"/>
                     </Grid>
                 </Border>
             </Grid>
         </Grid>
-    </Border>
+    </Grid>
 
 </Window>
