@@ -17,8 +17,8 @@
 <!-- language --> 
  <h1>
 <img width="32 height="32" src="https://github.com/user-attachments/assets/3c13dbd0-ad57-4eca-8e11-49c973376172"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">English</a> |  
-<img width="32 height="32" src="https://github.com/user-attachments/assets/3c13dbd0-ad57-4eca-8e11-49c973376172"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">Korean</a> |  
-   <img width="32 height="32 src="https://github.com/user-attachments/assets/dc6b0130-d81f-4b10-939e-cfe1fa65f2ba"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">Русский</a> 
+   <img width="32 height="32 src="https://github.com/user-attachments/assets/a5b56bef-469f-41d9-ba88-ff8d7cd2c2f1"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">Korean</a> |  
+   <img width="32 height="32 src="https://github.com/user-attachments/assets/f836a025-3430-4cdd-9860-0378b7815463"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">Русский</a> 
  </h1>
 </div>
 
@@ -75,7 +75,7 @@ Windows 10/11에만 사용
 ```
 </br>
 
-> [!경고]  
+> [!WARNING]
 > 사용하기 전에 바이러스 백신을 중지해야 합니다
 </br>
 
