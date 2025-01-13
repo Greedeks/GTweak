@@ -21,14 +21,7 @@
     </Window.Clip>
 
     <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
-        <Rectangle Width="auto" Height="auto" RadiusX="7" RadiusY="7" StrokeThickness="0.4" Panel.ZIndex="1">
-            <Rectangle.Stroke>
-                <LinearGradientBrush>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Stroke>
-        </Rectangle>
+        <Rectangle Style="{StaticResource BordersRectangle}" d:Visibility="Collapsed"/>
         
         <Grid Margin="0" Background="Transparent">
             <Grid.RowDefinitions>

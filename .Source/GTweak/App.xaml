@@ -14,17 +14,18 @@
                 <ResourceDictionary Source="Assets/DrawingImages/Installed/Applications.xaml" />
                 <ResourceDictionary Source="Assets/DrawingImages/Other.xaml" />
                 <ResourceDictionary Source="Styles/Themes/Dark/Colors.xaml" />
-                <ResourceDictionary Source="Styles/Buttons.xaml" />
-                <ResourceDictionary Source="Styles/RadioButtons.xaml" />
-                <ResourceDictionary Source="Styles/ToggleButtons.xaml" />
-                <ResourceDictionary Source="Styles/ScrollBar.xaml" />
-                <ResourceDictionary Source="Styles/Slider.xaml" />
-                <ResourceDictionary Source="Styles/TextBlock.xaml" />
-                <ResourceDictionary Source="Styles/Page.xaml" />
-                <ResourceDictionary Source="Styles/ProgressBar.xaml" />
-                <ResourceDictionary Source="Styles/Images.xaml" />
-                <ResourceDictionary Source="Styles/TextBox.xaml" />
-                <ResourceDictionary Source="Styles/ComboBox.xaml" />
+                <ResourceDictionary Source="Styles/Buttons/Buttons.xaml" />
+                <ResourceDictionary Source="Styles/Buttons/RadioButtons.xaml" />
+                <ResourceDictionary Source="Styles/Buttons/ToggleButtons.xaml" />
+                <ResourceDictionary Source="Styles/Display/ScrollBar.xaml" />
+                <ResourceDictionary Source="Styles/Display/TextBlock.xaml" />
+                <ResourceDictionary Source="Styles/Display/ProgressBar.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/Slider.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/TextBox.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/ComboBox.xaml" />
+                <ResourceDictionary Source="Styles/Media/Page.xaml" />
+                <ResourceDictionary Source="Styles/Media/Images.xaml" />
+                <ResourceDictionary Source="Styles/Media/Rectangle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
