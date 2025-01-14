@@ -23,9 +23,9 @@
                 <ResourceDictionary Source="Styles/Inputs/Slider.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/TextBox.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/ComboBox.xaml" />
-                <ResourceDictionary Source="Styles/Media/Page.xaml" />
-                <ResourceDictionary Source="Styles/Media/Images.xaml" />
-                <ResourceDictionary Source="Styles/Media/Rectangle.xaml" />
+                <ResourceDictionary Source="Styles/Page.xaml" />
+                <ResourceDictionary Source="Styles/Images.xaml" />
+                <ResourceDictionary Source="Styles/Rectangle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -46,6 +46,7 @@ namespace GTweak.Core.ViewModel
             {
                  new DataSystemModel { Name = "Windows", Data = SystemDiagnostics.HardwareData["Windows"] },
                  new DataSystemModel { Name = "Processes", Data =  new MonitoringSystem().GetNumberRunningProcesses },
+                 new DataSystemModel { Name = "Firmware", Data = SystemDiagnostics.Firmware },
                  new DataSystemModel { Name = "Bios", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData["BIOS"]) ? SystemDiagnostics.HardwareData["BIOS"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
                  new DataSystemModel { Name = "Motherboard", Data =  !string.IsNullOrEmpty(SystemDiagnostics.HardwareData["MotherBr"]) ? SystemDiagnostics.HardwareData["MotherBr"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
                  new DataSystemModel { Name = "Processor", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData["CPU"]) ? SystemDiagnostics.HardwareData["CPU"] : (string)Application.Current.Resources["no_device_information_systemInformatin"] },

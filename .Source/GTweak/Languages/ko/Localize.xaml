@@ -388,7 +388,8 @@
     <!--#region Information System Page -->
     <v:String x:Key="title_win_systemInformation">운영 체제:</v:String>
     <v:String x:Key="runprocces_systemInformation">실행 중인 프로세스 번호:</v:String>
-    <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
+    <v:String x:Key="title_firmware_b_systemInformation">BIOS:</v:String>
+    <v:String x:Key="title_firmware_u_systemInformation">UEFI:</v:String>
     <v:String x:Key="title_motherbr_systemInformation">머더보드:</v:String>
     <v:String x:Key="title_cpu_systemInformation">프로세스:</v:String>
     <v:String x:Key="title_gpu_systemInformation">그래픽:</v:String>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using GTweak.Utilities.Helpers;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+
 
 namespace GTweak.Utilities.Configuration
 {
@@ -37,6 +39,7 @@ namespace GTweak.Utilities.Configuration
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
         internal static string WindowsClientVersion { get; set; } = string.Empty;
+        internal static string Firmware { get; set; } = Application.Current.Resources["title_firmware_b_systemInformation"].ToString();
 
         internal static readonly Dictionary<string, string> HardwareData = new Dictionary<string, string>()
         {
@@ -107,8 +110,11 @@ namespace GTweak.Utilities.Configuration
             HardwareData["Windows"] = $"\n{HardwareData["Windows"].TrimEnd('\n')}";
         }
 
-        private void GetBiosInfo()
+        private async void GetBiosInfo()
         {
+            string output = await CommandExecutor.GetCommandOutput("bcdedit");
+            Firmware = Application.Current.Resources[output.Contains(@"\EFI") ? "title_firmware_u_systemInformation" : "title_firmware_b_systemInformation"].ToString();
+
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => (string)managementObj[prop]).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
