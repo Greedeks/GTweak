@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Collections.Generic;
@@ -72,13 +73,8 @@ namespace GTweak.Windows
                         await Task.Delay(700, _token);
                         ConfidentialityTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
-                        switch (set.Tweak)
-                        {
-                            case "TglButton8":
-                            case "TglButton15":
-                                isRestartNeed = true;
-                                break;
-                        }
+                        isRestartNeed = NotifActionsStorage.GetConfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotifActionsStorage.GetConfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                     }
                 }
 
@@ -102,25 +98,8 @@ namespace GTweak.Windows
                         }, _token);
                         InterfaceTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
-                        switch (set.Tweak)
-                        {
-                            case "TglButton1":
-                            case "TglButton2":
-                            case "TglButton3":
-                            case "TglButton4":
-                            case "TglButton5":
-                            case "TglButton10":
-                            case "TglButton11":
-                            case "TglButton12":
-                            case "TglButton26":
-                            case "TglButton27":
-                                isLogoutNeed = true;
-                                break;
-                            case "TglButton22":
-                            case "TglButton20":
-                                isRestartNeed = true;
-                                break;
-                        }
+                        isRestartNeed = NotifActionsStorage.GetIntfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotifActionsStorage.GetIntfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                     }
                 }
 
@@ -161,22 +140,8 @@ namespace GTweak.Windows
                             else
                                 SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
 
-                            switch (set.Tweak)
-                            {
-                                case "TglButton7":
-                                case "TglButton9":
-                                case "TglButton10":
-                                case "TglButton12":
-                                case "TglButton13":
-                                case "TglButton14":
-                                case "TglButton15":
-                                case "TglButton20":
-                                    isRestartNeed = true;
-                                    break;
-                                case "TglButton2":
-                                    isLogoutNeed = true;
-                                    break;
-                            }
+                            isRestartNeed = NotifActionsStorage.GetSysActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                            isLogoutNeed = NotifActionsStorage.GetSysActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                         }
                         else
                         {

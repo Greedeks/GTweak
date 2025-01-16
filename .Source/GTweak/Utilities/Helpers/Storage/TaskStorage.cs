@@ -1,4 +1,4 @@
-﻿namespace GTweak.Utilities.Helpers
+﻿namespace GTweak.Utilities.Helpers.Storage
 {
     internal class TaskStorage
     {

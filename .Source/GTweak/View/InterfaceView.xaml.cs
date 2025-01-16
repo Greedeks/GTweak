@@ -1,6 +1,7 @@
 ﻿using GTweak.Assets.UserControl;
 using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Threading.Tasks;
@@ -63,25 +64,8 @@ namespace GTweak.View
             ToggleButton toggleButton = (ToggleButton)sender;
             InterfaceTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-            switch (toggleButton.Name)
-            {
-                case "TglButton1":
-                case "TglButton2":
-                case "TglButton3":
-                case "TglButton4":
-                case "TglButton5":
-                case "TglButton10":
-                case "TglButton11":
-                case "TglButton12":
-                case "TglButton26":
-                case "TglButton27":
-                    new ViewNotification(300).Show("logout");
-                    break;
-                case "TglButton22":
-                case "TglButton20":
-                    new ViewNotification(300).Show("restart");
-                    break;
-            }
+            if (NotifActionsStorage.GetIntfActions.TryGetValue(toggleButton.Name, out string action))
+                new ViewNotification(300).Show(action);
 
             Parallel.Invoke(async delegate { await Task.Delay(1000); new InterfaceTweaks().AnalyzeAndUpdate(this); });
         }

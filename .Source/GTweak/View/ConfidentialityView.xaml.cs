@@ -1,5 +1,6 @@
 ﻿using GTweak.Assets.UserControl;
 using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Threading.Tasks;
@@ -36,13 +37,8 @@ namespace GTweak.View
 
             ConfidentialityTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-            switch (toggleButton.Name)
-            {
-                case "TglButton8":
-                case "TglButton15":
-                    new ViewNotification(300).Show("restart");
-                    break;
-            }
+            if (NotifActionsStorage.GetConfActions.TryGetValue(toggleButton.Name, out string action))
+                new ViewNotification(300).Show(action);
 
             Parallel.Invoke(async delegate { await Task.Delay(1000); new ConfidentialityTweaks().AnalyzeAndUpdate(this); });
         }
