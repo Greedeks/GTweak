@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Root;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -130,31 +131,29 @@ namespace GTweak.Utilities.Tweaks
             {
                 try
                 {
-                    using (Process process = new Process())
+                    using Process process = new Process();
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.CreateNoWindow = true;
+                    process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                    process.EnableRaisingEvents = true;
+                    process.StartInfo.FileName = "powershell.exe";
+                    process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                    process.Start();
+
+                    foreach (string getPackage in PackageScripts[packageName])
                     {
-                        process.StartInfo.UseShellExecute = false;
-                        process.StartInfo.CreateNoWindow = true;
-                        process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                        process.EnableRaisingEvents = true;
-                        process.StartInfo.FileName = "powershell.exe";
-                        process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getPackage}*"") do rd /s /q ""%i""");
+                        process.StartInfo.Arguments = $"Get-AppxPackage -Name {getPackage} -AllUsers | Remove-AppxPackage";
                         process.Start();
-
-                        foreach (string getPackage in PackageScripts[packageName])
-                        {
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getPackage}*"") do rd /s /q ""%i""");
-                            process.StartInfo.Arguments = $"Get-AppxPackage -Name {getPackage} -AllUsers | Remove-AppxPackage";
-                            process.Start();
-                        }
-
-                        if (PackageAliases.ContainsKey(packageName))
-                        {
-                            process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{PackageAliases[packageName]}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
-                            process.Start();
-                        }
-
-                        process.WaitForExit(1000);
                     }
+
+                    if (PackageAliases.ContainsKey(packageName))
+                    {
+                        process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{PackageAliases[packageName]}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                        process.Start();
+                    }
+
+                    process.WaitForExit(1000);
                 }
                 catch (Exception ex) { Debug.WriteLine(ex); };
 

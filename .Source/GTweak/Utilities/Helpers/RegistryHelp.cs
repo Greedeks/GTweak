@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using GTweak.Utilities.Helpers.Root;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;

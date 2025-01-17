@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace GTweak.Utilities.Helpers
+namespace GTweak.Utilities.Helpers.Root
 {
     internal sealed class DisablingWinKeys
     {

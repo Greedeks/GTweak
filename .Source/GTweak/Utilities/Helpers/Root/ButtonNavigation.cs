@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace GTweak.Utilities.Helpers
+namespace GTweak.Utilities.Helpers.Root
 {
     internal sealed class ButtonNavigation : RadioButton
     {

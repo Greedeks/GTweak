@@ -265,14 +265,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Control\BlockRunTweaker.cs" />
-    <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
-    <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
+    <Compile Include="Utilities\Helpers\Root\DisablingWinKeys.cs" />
+    <Compile Include="Utilities\Helpers\Root\CommandExecutor.cs" />
     <Compile Include="Utilities\Helpers\TaskSchedulerManager.cs" />
     <Compile Include="Utilities\Helpers\UnarchiveManager.cs" />
     <Compile Include="Utilities\Helpers\BackgroundQueue.cs" />
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />
     <Compile Include="Utilities\Control\SettingsRepository.cs" />
-    <Compile Include="Utilities\Helpers\TakingOwnership.cs" />
+    <Compile Include="Utilities\Helpers\Root\TakingOwnership.cs" />
     <Compile Include="Utilities\Helpers\Storage\NotifActionsStorage.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
     <Compile Include="Utilities\Helpers\INIManager.cs" />
@@ -280,7 +280,7 @@
     <Compile Include="Utilities\Configuration\MonitoringSystem.cs" />
     <Compile Include="Utilities\Configuration\SystemDiagnostics.cs" />
     <Compile Include="Utilities\Control\ViewNotification.cs" />
-    <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
+    <Compile Include="Utilities\Helpers\Root\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\Firewall.cs" />
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />
@@ -291,7 +291,7 @@
     <Compile Include="Utilities\Tweaks\UninstallingPakages.cs" />
     <Compile Include="Utilities\Tweaks\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />
-    <Compile Include="Utilities\Helpers\TypewriterAnimation.cs" />
+    <Compile Include="Utilities\Helpers\Animation\TypewriterAnimation.cs" />
     <Compile Include="Core\ViewModel\OtherContextVM.cs" />
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
@@ -465,8 +465,8 @@
     <Compile Include="Assets\UserControl\ToggleButton.xaml.cs">
       <DependentUpon>ToggleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Helpers\BrushAnimation.cs" />
-    <Compile Include="Utilities\Helpers\ButtonNavigation.cs" />
+    <Compile Include="Utilities\Helpers\Animation\BrushAnimation.cs" />
+    <Compile Include="Utilities\Helpers\Root\ButtonNavigation.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\ViewModelBase.cs" />
     <Compile Include="Core\ViewModel\MainViewModel.cs" />
