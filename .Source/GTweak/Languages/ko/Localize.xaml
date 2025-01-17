@@ -239,8 +239,8 @@
     <v:String x:Key="OneDrive_applications">OneDrive</v:String>
     <v:String x:Key="Cortana_applications">Cortana</v:String>
     <v:String x:Key="MicrosoftTeams_applications">Microsoft Teams</v:String>
-    <v:String x:Key="Music_applications">Music Groove</v:String>
-    <v:String x:Key="Video_applications">Zune Video</v:String>
+    <v:String x:Key="Music_applications">Windows Media Player</v:String>
+    <v:String x:Key="Video_applications">Movies &amp; TV</v:String>
     <v:String x:Key="SoundRecorder_applications">사운드 녹음기</v:String>
     <v:String x:Key="FeedbackHub_applications">피드백 허브</v:String>
     <v:String x:Key="Mail_applications">메일</v:String>
@@ -260,7 +260,7 @@
     <v:String x:Key="Todos_applications">Microsoft 할 일</v:String>
     <v:String x:Key="Alarms_applications">Windows 알람</v:String>
     <v:String x:Key="Phone_applications">휴대폰과 연결</v:String>
-    <v:String x:Key="Outlook_applications">Microsoft Outlook</v:String>
+    <v:String x:Key="Outlook_applications">Outlook for Windows</v:String>
     <v:String x:Key="BingSports_applications">Bing 스포츠</v:String>
     <v:String x:Key="BingFinance_applications">Bing Finance</v:String>
     <v:String x:Key="MicrosoftFamily_applications">Microsoft 가족 보호</v:String>
@@ -268,6 +268,8 @@
     <v:String x:Key="QuickAssist_applications">빠른 지원</v:String>
     <v:String x:Key="DevHome_applications">Dev Home</v:String>
     <v:String x:Key="WindowsTerminal_applications">Terminal</v:String>
+    <v:String x:Key="LinkedIn_applications">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_applications">Web Media Extensions</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->

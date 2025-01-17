@@ -239,8 +239,8 @@
     <v:String x:Key="OneDrive_applications">OneDrive</v:String>
     <v:String x:Key="Cortana_applications">Cortana</v:String>
     <v:String x:Key="MicrosoftTeams_applications">Microsoft Teams</v:String>
-    <v:String x:Key="Music_applications">Music Groove</v:String>
-    <v:String x:Key="Video_applications">Zune Video</v:String>
+    <v:String x:Key="Music_applications">Windows Media Player</v:String>
+    <v:String x:Key="Video_applications">Movies &amp; TV</v:String>
     <v:String x:Key="SoundRecorder_applications">Sound Recorder</v:String>
     <v:String x:Key="FeedbackHub_applications">Feedback Hub</v:String>
     <v:String x:Key="Mail_applications">Mail</v:String>
@@ -258,9 +258,9 @@
     <v:String x:Key="People_applications">People</v:String>
     <v:String x:Key="BingNews_applications">Bing News</v:String>
     <v:String x:Key="Todos_applications">Microsoft To Do</v:String>
-    <v:String x:Key="Alarms_applications">Windows Alarms</v:String>
+    <v:String x:Key="Alarms_applications">Windows Clock</v:String>
     <v:String x:Key="Phone_applications">Your Phone</v:String>
-    <v:String x:Key="Outlook_applications">Microsoft Outlook</v:String>
+    <v:String x:Key="Outlook_applications">Outlook for Windows</v:String>
     <v:String x:Key="BingSports_applications">Bing Sports</v:String>
     <v:String x:Key="BingFinance_applications">Bing Finance</v:String>
     <v:String x:Key="MicrosoftFamily_applications">Microsoft Family Safety</v:String>
@@ -268,6 +268,8 @@
     <v:String x:Key="QuickAssist_applications">Quick Assist</v:String>
     <v:String x:Key="DevHome_applications">Dev Home</v:String>
     <v:String x:Key="WindowsTerminal_applications">Terminal</v:String>
+    <v:String x:Key="LinkedIn_applications">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_applications">Web Media Extensions</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->

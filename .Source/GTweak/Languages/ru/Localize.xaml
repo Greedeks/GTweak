@@ -239,28 +239,28 @@
     <v:String x:Key="OneDrive_applications">OneDrive</v:String>
     <v:String x:Key="Cortana_applications">Cortana</v:String>
     <v:String x:Key="MicrosoftTeams_applications">Microsoft Teams</v:String>
-    <v:String x:Key="Music_applications">Музыка Groove</v:String>
-    <v:String x:Key="Video_applications">Фильмы / ТВ</v:String>
+    <v:String x:Key="Music_applications">Медиаплеер Windows</v:String>
+    <v:String x:Key="Video_applications">Кино и ТВ</v:String>
     <v:String x:Key="SoundRecorder_applications">Запись голоса</v:String>
     <v:String x:Key="FeedbackHub_applications">Центр отзывов</v:String>
     <v:String x:Key="Mail_applications">Почта и Календарь</v:String>
     <v:String x:Key="Widgets_applications">Виджеты</v:String>
     <v:String x:Key="Photos_applications">Фотографии</v:String>
-    <v:String x:Key="ScreenSketch_applications">Screen Sketch</v:String>
+    <v:String x:Key="ScreenSketch_applications">Ножницы</v:String>
     <v:String x:Key="ClipChamp_applications">Clipchamp - видеоредактор</v:String>
     <v:String x:Key="GetStarted_applications">Get Started</v:String>
     <v:String x:Key="GetHelp_applications">Get Help</v:String>
     <v:String x:Key="MicrosoftStickyNotes_applications">Microsoft Sticky Notes</v:String>
-    <v:String x:Key="Maps_applications">Windows Maps</v:String>
-    <v:String x:Key="Camera_applications">Windows Camera</v:String>
+    <v:String x:Key="Maps_applications">Карты Windows</v:String>
+    <v:String x:Key="Camera_applications">Камера Windows</v:String>
     <v:String x:Key="Paint3D_applications">Paint3D</v:String>
     <v:String x:Key="PowerAutomateDesktop_applications">Power Automate</v:String>
     <v:String x:Key="People_applications">People</v:String>
     <v:String x:Key="BingNews_applications">Bing News</v:String>
     <v:String x:Key="Todos_applications">Microsoft To Do</v:String>
-    <v:String x:Key="Alarms_applications">Windows Alarms</v:String>
+    <v:String x:Key="Alarms_applications">Будильники и часы Windows</v:String>
     <v:String x:Key="Phone_applications">Your Phone</v:String>
-    <v:String x:Key="Outlook_applications">Microsoft Outlook</v:String>
+    <v:String x:Key="Outlook_applications">Outlook для Windows</v:String>
     <v:String x:Key="BingSports_applications">Bing Sports</v:String>
     <v:String x:Key="BingFinance_applications">Bing Finance</v:String>
     <v:String x:Key="MicrosoftFamily_applications">Семейная безопасность</v:String>
@@ -268,6 +268,8 @@
     <v:String x:Key="QuickAssist_applications">Быстрая поддержка</v:String>
     <v:String x:Key="DevHome_applications">Dev Home</v:String>
     <v:String x:Key="WindowsTerminal_applications">Терминал</v:String>
+    <v:String x:Key="LinkedIn_applications">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_applications">Расширения для интернет-мультимедиа</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->

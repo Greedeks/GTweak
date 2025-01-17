@@ -60,7 +60,9 @@ namespace GTweak.Utilities.Tweaks
             ["Outlook"] = false,
             ["QuickAssist"] = false,
             ["DevHome"] = false,
-            ["WindowsTerminal"] = false
+            ["WindowsTerminal"] = false,
+            ["LinkedIn"] = false,
+            ["WebMediaExtensions"] = false
         };
 
         private static readonly SortedList<string, List<string>> PackageScripts = new SortedList<string, List<string>>
@@ -105,6 +107,8 @@ namespace GTweak.Utilities.Tweaks
             ["QuickAssist"] = new List<string>(1) { "MicrosoftCorporationII.QuickAssist" },
             ["DevHome"] = new List<string>(1) { "Microsoft.Windows.DevHome" },
             ["WindowsTerminal"] = new List<string>(1) { "Microsoft.WindowsTerminal" },
+            ["LinkedIn"] = new List<string>(1) { "Microsoft.LinkedIn" },
+            ["WebMediaExtensions"] = new List<string>(1) { "Microsoft.WebMediaExtensions" },
         };
 
         private static readonly SortedList<string, string> PackageAliases = new SortedList<string, string>
@@ -116,7 +120,8 @@ namespace GTweak.Utilities.Tweaks
             ["ClipChamp"] = "Clipchamp Video Editor",
             ["Music"] = "zunemusic",
             ["Video"] = "zunevideo",
-            ["Widgets"] = "Windows.Client.WebExperience"
+            ["Widgets"] = "Windows.Client.WebExperience",
+            ["LinkedIn"] = "LinkedInforWindows"
         };
         #endregion
 
