@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 
-namespace GTweak.Utilities.Helpers.Root
+namespace GTweak.Utilities.Helpers
 {
     internal sealed class TrustedInstaller
     {

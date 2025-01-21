@@ -23,6 +23,8 @@ namespace GTweak.Utilities.Helpers
             TempTweaksSvc = new Dictionary<string, string>(),
             TempTweaksSys = new Dictionary<string, string>();
 
+        internal static bool IsAllTempDictionaryEmpty => TempTweaksConf.Count == 0 && TempTweaksIntf.Count == 0 && TempTweaksSvc.Count == 0 && TempTweaksSys.Count == 0;
+
         internal const string SectionConf = "Confidentiality Tweaks";
         internal const string SectionIntf = "Interface Tweaks";
         internal const string SectionSvc = "Services Tweaks";

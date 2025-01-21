@@ -1,4 +1,4 @@
-﻿using GTweak.Utilities.Helpers.Root;
+﻿using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;

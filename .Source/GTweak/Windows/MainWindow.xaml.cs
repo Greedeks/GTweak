@@ -202,16 +202,15 @@ namespace GTweak
             }
         }
 
-        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(SettingsRepository.SaveFileConfig);
+        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.SaveFileConfig();
 
-        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Parallel.Invoke(SettingsRepository.OpenFileConfig);
+        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.OpenFileConfig();
 
         private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.SelfRemoval();
 
         private void BtnContats_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Image btnConcat = (Image)sender;
-            Process.Start(btnConcat.Uid switch
+            Process.Start(((Image)sender).Uid switch
             {
                 "git" => "https://github.com/Greedeks",
                 "tg" => "https://t.me/Greedeks",

@@ -1,5 +1,4 @@
 ﻿using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Root;
 using GTweak.Windows;
 using Microsoft.Win32;
 using System;
@@ -99,7 +98,7 @@ namespace GTweak.Utilities.Control
 
         internal static void SaveFileConfig()
         {
-            if (INIManager.TempTweaksConf.Count == 0 && INIManager.TempTweaksIntf.Count == 0 && INIManager.TempTweaksSvc.Count == 0 && INIManager.TempTweaksSys.Count == 0)
+            if (INIManager.IsAllTempDictionaryEmpty)
                 new ViewNotification().Show("", "info", (string)Application.Current.Resources["export_warning_notification"]);
             else
             {
@@ -173,6 +172,5 @@ namespace GTweak.Utilities.Control
         }
 
         internal static void SelfReboot() => CommandExecutor.RunCommand($"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"{currentLocation}\"");
-
     }
 }

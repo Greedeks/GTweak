@@ -1,5 +1,4 @@
 ﻿using GTweak.Utilities.Control;
-using GTweak.Utilities.Helpers.Root;
 using GTweak.Utilities.Helpers.Storage;
 using System.Linq;
 using System.Threading.Tasks;

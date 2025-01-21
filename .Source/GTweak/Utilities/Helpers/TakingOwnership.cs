@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace GTweak.Utilities.Helpers.Root
+namespace GTweak.Utilities.Helpers
 {
     internal class TakingOwnership
     {

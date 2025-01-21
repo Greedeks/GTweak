@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Helpers.Root
+namespace GTweak.Utilities.Helpers
 {
     internal sealed class CommandExecutor
     {

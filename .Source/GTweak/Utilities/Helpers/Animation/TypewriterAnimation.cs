@@ -9,7 +9,8 @@ namespace GTweak.Utilities.Helpers.Animation
     {
         internal TypewriterAnimation(in string textToAnimate, in TextBlock textBlock, in TimeSpan timeSpan)
         {
-            if (!(textBlock.FindName(textBlock.Name) is TextBlock)) return;
+            if (!(textBlock.FindName(textBlock.Name) is TextBlock))
+                return;
 
             Storyboard storyBoard = new Storyboard
             {

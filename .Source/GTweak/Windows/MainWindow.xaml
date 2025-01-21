@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:GTweak"
         xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
         xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
-        xmlns:nav="clr-namespace:GTweak.Utilities.Helpers.Root"
-        xmlns:uс="clr-namespace:GTweak.Assets.UserControl"
+        xmlns:uс="clr-namespace:GTweak.Assets.UserControl" 
+        xmlns:nav="clr-namespace:GTweak.Core" 
         mc:Ignorable="d"
         Title="GTweak" 
         Height="630" Width="1100" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
@@ -314,6 +314,7 @@
                         <nav:ButtonNavigation Grid.Column="4" Style="{StaticResource BtnNavigation}" x:Name="BtnSystem" Content="{DynamicResource btn5_main}" Command="{Binding SystemCommand}"/>
                         <nav:ButtonNavigation Grid.Column="5" Style="{StaticResource BtnNavigation}" x:Name="BtnSystemInfo" Content="{DynamicResource btn6_main}" Command="{Binding DataSystemCommand}"/>
                         <nav:ButtonNavigation Grid.Column="6" Style="{StaticResource BtnNavigation}" x:Name="BtnMore" Content="{DynamicResource btn7_main}" Command="{Binding MoreCommand}" IsChecked="True"/>
+                        
                     </Grid>
                 </Border>
             </Grid>
