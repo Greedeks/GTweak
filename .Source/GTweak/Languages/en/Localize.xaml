@@ -406,7 +406,6 @@
     <v:String x:Key="text_copy_systemInformatin">Copied!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">You don't have a driver installed</v:String>
     <v:String x:Key="no_device_information_systemInformatin">No device information was found</v:String>
-    <v:String x:Key="no_device_information_systemInformatin">No device information was found</v:String>
     <!--#endregion-->
 
     <!--#region More Page -->

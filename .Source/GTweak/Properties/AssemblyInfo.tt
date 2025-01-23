@@ -9,7 +9,7 @@ using System.Windows;
 [assembly: AssemblyProduct("GTweak")]
 [assembly: AssemblyCopyright("© 2024-<#= DateTime.Now.Year #> Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
-[assembly: AssemblyInformationalVersion("Build: 5.0.9")]
+[assembly: AssemblyInformationalVersion("Build: 5.1.0")]
 [assembly: AssemblyVersion("5.<#= GenerateVersion() #>")]
 [assembly: AssemblyFileVersion("5.<#= GenerateVersion() #>")]
 
@@ -24,6 +24,6 @@ using System.Windows;
         {
             int major = (int)(DateTime.UtcNow - new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)).TotalSeconds / 1000;
             int revision = (int)(DateTime.UtcNow - DateTime.Now.Date).TotalSeconds % 1000;
-            return $"{0}.{major}.{revision}";
+            return $"{1}.{major}.{revision}";
         }
 #>
