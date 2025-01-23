@@ -126,28 +126,32 @@ namespace GTweak.Utilities.Configuration
         private void GetMotherboardInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["MotherBr"] = (string)managementObj["Manufacturer"] + (string)managementObj["Product"] + ", V" + (string)managementObj["Version"] + "\n";
+                HardwareData["MotherBr"] = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}, V{(string)managementObj["Version"]}\n";
             HardwareData["MotherBr"] = HardwareData["MotherBr"].TrimEnd('\n');
         }
 
         private void GetProcessorInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["CPU"] = (string)managementObj["Name"] + "\n";
+                HardwareData["CPU"] = $"{(string)managementObj["Name"]}\n";
             HardwareData["CPU"] = HardwareData["CPU"].TrimEnd('\n');
         }
 
         private void GeVideoInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["GPU"] += (string)managementObj["Name"] + ", " + Convert.ToString(((uint)managementObj["AdapterRAM"] / 1024000000)) + " GB\n";
+                HardwareData["GPU"] += $"{(string)managementObj["Name"]}, {Convert.ToString((uint)managementObj["AdapterRAM"] / 1024000000)} GB\n";
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
         }
 
         private void GetMemoryInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["RAM"] += (string)managementObj["Manufacturer"] + ", " + Convert.ToString((ulong)managementObj["Capacity"] / 1024000000) + " GB, " + Convert.ToString((uint)managementObj["ConfiguredClockSpeed"]) + "MHz\n";
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
+            {
+                string data = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
+                data = string.IsNullOrEmpty(data) ? data : $", {data} MHz";
+                HardwareData["RAM"] += $"{(string)managementObj["Manufacturer"]}, {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB {data}\n";
+            }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
 
@@ -156,16 +160,23 @@ namespace GTweak.Utilities.Configuration
             HardwareData["Storage"] = string.Empty;
             foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string storageType = (ushort)managementObj["MediaType"] switch
+                ushort mediaType = managementObj["MediaType"] != null ? (ushort)managementObj["MediaType"] : (ushort)0;
+                string storageType = mediaType switch
                 {
                     3 => "(HDD)",
                     4 => "(SSD)",
                     5 => "(SCM)",
-                    _ => "(Unspecified)",
+                    _ => "(Unspecified)"
                 };
+
                 if (storageType == "(Unspecified)" && ((ushort)(managementObj["BusType"])) == 7) storageType = "(Media-Type)";
-                HardwareData["Storage"] += Convert.ToString((ulong)managementObj["Size"] / 1024000000) + " GB " + "[" + (string)managementObj["FriendlyName"] + "] " + storageType + "\n";
+
+                ulong getSizeGB = (ulong)managementObj["Size"] / 1024000000;
+                string size = getSizeGB >= 1024? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
+
+                HardwareData["Storage"] += $"{size} [{(string)managementObj["FriendlyName"]}] {storageType}\n";
             }
+
             HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
         }
 
@@ -215,7 +226,7 @@ namespace GTweak.Utilities.Configuration
         {
             HardwareData["NetAdapter"] = string.Empty;
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["NetAdapter"] += (string)managementObj["Name"] + "\n";
+                HardwareData["NetAdapter"] += $"{(string)managementObj["Name"]}\n";
             HardwareData["NetAdapter"] = HardwareData["NetAdapter"].TrimEnd('\n');
         }
 
