@@ -172,14 +172,13 @@ namespace GTweak.Utilities.Configuration
                 if (storageType == "(Unspecified)" && ((ushort)(managementObj["BusType"])) == 7) storageType = "(Media-Type)";
 
                 ulong getSizeGB = (ulong)managementObj["Size"] / 1024000000;
-                string size = getSizeGB >= 1024? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
+                string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
 
                 HardwareData["Storage"] += $"{size} [{(string)managementObj["FriendlyName"]}] {storageType}\n";
             }
 
             HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
         }
-
 
         private void GetAudioDevices()
         {
