@@ -390,8 +390,8 @@
     <!--#region Information System Page -->
     <v:String x:Key="title_win_systemInformation">Operating system:</v:String>
     <v:String x:Key="runprocces_systemInformation">Number of running processes:</v:String>
-    <v:String x:Key="title_firmware_b_systemInformation">BIOS:</v:String>
-    <v:String x:Key="title_firmware_u_systemInformation">UEFI:</v:String>
+    <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
+    <v:String x:Key="title_mode_systemInformation">Mode:</v:String>
     <v:String x:Key="title_motherbr_systemInformation">Motherboard:</v:String>
     <v:String x:Key="title_cpu_systemInformation">Processor:</v:String>
     <v:String x:Key="title_gpu_systemInformation">Graphics:</v:String>
@@ -405,6 +405,7 @@
     <v:String x:Key="connection_lose_systemInformation">There is no internet connection</v:String>
     <v:String x:Key="text_copy_systemInformatin">Copied!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">You don't have a driver installed</v:String>
+    <v:String x:Key="no_device_information_systemInformatin">No device information was found</v:String>
     <v:String x:Key="no_device_information_systemInformatin">No device information was found</v:String>
     <!--#endregion-->
 

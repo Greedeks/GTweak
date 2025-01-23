@@ -39,13 +39,13 @@ namespace GTweak.Utilities.Configuration
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
         internal static string WindowsClientVersion { get; set; } = string.Empty;
-        internal static string Firmware { get; set; } = Application.Current.Resources["title_firmware_b_systemInformation"].ToString();
 
         internal static readonly Dictionary<string, string> HardwareData = new Dictionary<string, string>()
         {
            { "Windows", Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString() ?? string.Empty },
 
            { "BIOS", string.Empty },
+           { "Mode", string.Empty },
            { "MotherBr", string.Empty },
            { "CPU", string.Empty },
            { "GPU", string.Empty },
@@ -113,7 +113,7 @@ namespace GTweak.Utilities.Configuration
         private async void GetBiosInfo()
         {
             string output = await CommandExecutor.GetCommandOutput("bcdedit");
-            Firmware = Application.Current.Resources[output.Contains(@"\EFI") ? "title_firmware_u_systemInformation" : "title_firmware_b_systemInformation"].ToString();
+            HardwareData["Mode"] = output.Contains(@"efi") ? "UEFI" : "Legacy BIOS";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {

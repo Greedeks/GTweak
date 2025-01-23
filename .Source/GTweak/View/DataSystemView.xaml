@@ -114,8 +114,12 @@
 
                     <Grid Grid.Row="0">
                         <StackPanel Orientation="Vertical" Margin="50,20,0,0">
-                            <TextBlock Text="{Binding [Firmware].Data}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
-                            <TextBlock Text="{Binding [Bios].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Text="{DynamicResource title_bios_systemInformation}" Style="{StaticResource Text}" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                            <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="15,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto">
+                             <Run Text="{Binding [Bios].Data}" PreviewMouseDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                             <Run Text="{DynamicResource title_mode_systemInformation}" Foreground="{StaticResource Color_Accent}"/>
+                             <Run Text="{Binding [Mode].Data}" PreviewMouseDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                            </TextBlock>
                         </StackPanel>
                     </Grid>
 
