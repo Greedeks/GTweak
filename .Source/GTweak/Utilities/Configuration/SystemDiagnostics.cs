@@ -149,8 +149,7 @@ namespace GTweak.Utilities.Configuration
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
-                data = string.IsNullOrEmpty(data) ? data : $", {data} MHz";
-                HardwareData["RAM"] += $"{(string)managementObj["Manufacturer"]}, {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB {data}\n";
+                HardwareData["RAM"] += $"{(string)managementObj["Manufacturer"]}, {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB{(string.IsNullOrEmpty(data) ? "" : $", {data} MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
