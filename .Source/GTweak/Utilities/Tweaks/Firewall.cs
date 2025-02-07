@@ -21,8 +21,8 @@ namespace GTweak.Utilities.Tweaks
 
         private static readonly SortedList<string, string> PathsForPrograms = new SortedList<string, string>
         {
-            ["MoUso_New"] = string.Concat(StoragePaths.SystemDisk, @"Windows\UUS\amd64\MoUsoCoreWorker.exe"),
-            ["MoUso_Old"] = string.Concat(StoragePaths.SystemDisk, @"Windows\System32\MoUsoCoreWorker.exe"),
+            ["MoUso"] = File.Exists($@"{StoragePaths.SystemDisk}Windows\UUS\amd64\MoUsoCoreWorker.exe")
+            ? $@"{StoragePaths.SystemDisk}Windows\UUS\amd64\MoUsoCoreWorker.exe" : $@"{StoragePaths.SystemDisk}Windows\System32\MoUsoCoreWorker.exe",
             ["Uso"] = string.Concat(StoragePaths.SystemDisk, @"Windows\System32\usoclient.exe"),
             ["WD"] = string.Concat(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MpCmdRun.exe"),
         };
@@ -43,65 +43,39 @@ namespace GTweak.Utilities.Tweaks
         {
             try
             {
-                Parallel.Invoke(() =>
+                Parallel.ForEach(new[]
                 {
-                    ChangeRulesIn(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
-                    ChangeRulesIn(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
-                });
-            }
-            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
-
-            try
-            {
-                Parallel.Invoke(() =>
+                    (PathsForPrograms["MoUso"], NameRules["Update"]),
+                    (PathsForPrograms["Uso"], $"{NameRules["Update"]} (Update Orchestrator)")
+                },
+                executableFiles =>
                 {
-                    ChangeRulesOut(isChoose, File.Exists(PathsForPrograms["MoUso_New"]) ? PathsForPrograms["MoUso_New"] : PathsForPrograms["MoUso_Old"], NameRules["Update"]);
-                    ChangeRulesOut(isChoose, PathsForPrograms["Uso"], string.Concat(NameRules["Update"], " (Update Orchestrator)"));
+                    ChangeRules(isChoose, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN);
+                    ChangeRules(isChoose, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
                 });
             }
             catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
         }
 
-        private static void ChangeRulesIn(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
-        {
-            INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
-            INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
 
-            firewallRule.ApplicationName = pathProgram;
-            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN;
-            firewallRule.Description = description;
-            firewallRule.Enabled = true;
-            firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = nameRule;
+        private static void ChangeRules(bool isChoose, string pathProgram, string nameRule, NET_FW_RULE_DIRECTION_ direction, string description = "Windows update blocking")
+        {
+            INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
 
             if (isChoose)
             {
                 if (CheckRulesWindows(nameRule))
                     firewallPolicy.Rules.Remove(nameRule);
-                firewallPolicy.Rules.Add(firewallRule);
-            }
-            else
-                firewallPolicy.Rules.Remove(nameRule);
-        }
 
-        private static void ChangeRulesOut(in bool isChoose, in string pathProgram, in string nameRule, in string description = "Windows update blocking")
-        {
-            INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
-            INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
+                INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
+                firewallRule.ApplicationName = pathProgram;
+                firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
+                firewallRule.Direction = direction;
+                firewallRule.Description = description;
+                firewallRule.Enabled = true;
+                firewallRule.InterfaceTypes = "All";
+                firewallRule.Name = nameRule;
 
-            firewallRule.ApplicationName = pathProgram;
-            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
-            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
-            firewallRule.Description = description;
-            firewallRule.Enabled = true;
-            firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = nameRule;
-
-            if (isChoose)
-            {
-                if (CheckRulesWindows(nameRule))
-                    firewallPolicy.Rules.Remove(nameRule);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
@@ -155,7 +129,7 @@ namespace GTweak.Utilities.Tweaks
 
         protected static void BlockWDefender(bool isChoose)
         {
-            try { Parallel.Invoke(() => { ChangeRulesOut(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], "blocking Windows Defender database updates"); }); }
+            try { Parallel.Invoke(() => { ChangeRules(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
             catch (Exception ex) { Debug.Write(ex.Message); };
         }
     }

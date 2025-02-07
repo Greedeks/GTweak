@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Control;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using System;
 using System.ComponentModel;

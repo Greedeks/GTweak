@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using GTweak.Utilities.Control;
+using Newtonsoft.Json;
 using System.IO;
 using System.Net;
 
-namespace GTweak.Utilities.Control
+namespace GTweak.Utilities.Configuration
 {
     internal sealed class QueryUpdates
     {
@@ -26,6 +27,7 @@ namespace GTweak.Utilities.Control
 
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";
+                webRequest.Timeout = 5000;
 
                 using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
                 using StreamReader sreader = new StreamReader(response.GetResponseStream());
