@@ -15,6 +15,7 @@ namespace GTweak.View
 {
     public partial class PakagesView : UserControl
     {
+        private readonly DispatcherTimer timer;
         private TimeSpan time = TimeSpan.FromSeconds(0);
         private string applicationName = string.Empty;
 
@@ -22,7 +23,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 if (time.TotalSeconds % 4 == 0)
                 {
@@ -34,6 +35,8 @@ namespace GTweak.View
 
                 time = time.Add(TimeSpan.FromSeconds(+1));
             }, Application.Current.Dispatcher);
+
+            timer.Start();
         }
 
         private void Apps_MouseEnter(object sender, MouseEventArgs e)
@@ -59,31 +62,59 @@ namespace GTweak.View
             {
                 case MouseButtonState.Pressed when appImage.Source == (DrawingImage)FindResource("A_DI_" + applicationName):
                     {
-                        UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
-                        UpdateViewStatePakages();
+                        timer.Stop();
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { UninstallingPakages.DeletingPackage(applicationName); });
 
-                        await Task.Delay(8000);
-                        UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
-                        UpdateViewStatePakages();
+                        await backgroundQueue.QueueTask(async delegate
+                        {
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
+                                UpdateViewStatePakages();
+                            });
+
+                            await UninstallingPakages.DeletingPackage(applicationName);
+
+                            await Task.Delay(3000);
+
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
+                                UpdateViewStatePakages();
+                            });
+                        });
+
+                        timer.Start();
                         break;
                     }
 
                 case MouseButtonState.Pressed when appImage.Source == (DrawingImage)FindResource("DA_DI_" + applicationName) && applicationName == "OneDrive":
                     {
+                        timer.Stop();
+
                         new ViewNotification().Show("", "info", (string)FindResource("onedrive_notification"));
 
-                        UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
-                        UpdateViewStatePakages();
-
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { UninstallingPakages.ResetOneDrive(); });
+                        await backgroundQueue.QueueTask(async delegate
+                        {
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
+                                UpdateViewStatePakages();
+                            });
 
-                        await Task.Delay(6000);
-                        UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
-                        UpdateViewStatePakages();
+                            await UninstallingPakages.ResetOneDrive();
+
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
+                                UpdateViewStatePakages();
+                            });
+                        });
+
+                        timer.Start();
                         break;
                     }
             }

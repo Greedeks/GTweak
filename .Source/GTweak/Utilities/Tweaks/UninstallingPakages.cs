@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -126,109 +127,127 @@ namespace GTweak.Utilities.Tweaks
 
         internal async void ViewInstalledPackages() => InstalledPackages = await CommandExecutor.GetCommandOutput("Get-AppxPackage | Select-Object -ExpandProperty Name");
 
-        internal static void DeletingPackage(string packageName)
+        internal static Task DeletingPackage(string packageName)
         {
             if (packageName == "OneDrive")
-                DeletedOneDrive();
-
+                return DeletedOneDrive();
             else
             {
-                try
+                return Task.Run(() =>
                 {
-                    using Process process = new Process();
-                    process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.CreateNoWindow = true;
-                    process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                    process.EnableRaisingEvents = true;
-                    process.StartInfo.FileName = "powershell.exe";
-                    process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
-                    process.Start();
-
-                    foreach (string getPackage in PackageScripts[packageName])
+                    try
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getPackage}*"") do rd /s /q ""%i""");
-                        process.StartInfo.Arguments = $"Get-AppxPackage -Name {getPackage} -AllUsers | Remove-AppxPackage";
+                        using Process process = new Process();
+                        process.StartInfo.UseShellExecute = false;
+                        process.StartInfo.CreateNoWindow = true;
+                        process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                        process.EnableRaisingEvents = true;
+                        process.StartInfo.FileName = "powershell.exe";
+                        process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
-                    }
+                        process.WaitForExit();
 
-                    if (PackageAliases.ContainsKey(packageName))
+                        foreach (string getPackage in PackageScripts[packageName])
+                        {
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getPackage}*"") do rd /s /q ""%i""");
+                            process.StartInfo.Arguments = $"Get-AppxPackage -Name {getPackage} -AllUsers | Remove-AppxPackage";
+                            process.Start();
+                            process.WaitForExit();
+                        }
+
+                        if (PackageAliases.ContainsKey(packageName))
+                        {
+                            process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{PackageAliases[packageName]}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                            process.Start();
+                            process.WaitForExit();
+                        }
+                    }
+                    catch (Exception ex) { Debug.WriteLine(ex); };
+
+                    switch (packageName)
                     {
-                        process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{PackageAliases[packageName]}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
-                        process.Start();
+                        case "Widgets":
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
+                            break;
+                        case "Cortana":
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Speech_OneCore\Preferences", "ModelDownloadAllowed", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCloudSearch", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCortana", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowSearchToUseLocation", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DisableWebSearch", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitInkCollection", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitTextCollection", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization\TrainedDataStore", "HarvestContacts", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Personalization\Settings", "AcceptedPrivacyPolicy", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Windows Search", "CortanaConsent", 0, RegistryValueKind.DWord);
+                            break;
                     }
-
-                    process.WaitForExit(1000);
-                }
-                catch (Exception ex) { Debug.WriteLine(ex); };
-
-                switch (packageName)
-                {
-                    case "Widgets":
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
-                        break;
-                    case "Cortana":
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Speech_OneCore\Preferences", "ModelDownloadAllowed", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCloudSearch", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCortana", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowSearchToUseLocation", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DisableWebSearch", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitInkCollection", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitTextCollection", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization\TrainedDataStore", "HarvestContacts", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Personalization\Settings", "AcceptedPrivacyPolicy", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Windows Search", "CortanaConsent", 0, RegistryValueKind.DWord);
-                        break;
-                }
+                });
             }
         }
 
-        internal static void DeletedOneDrive()
+        internal static Task DeletedOneDrive()
         {
-            using (Process process = new Process())
+            return Task.Run(() =>
             {
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                process.EnableRaisingEvents = true;
-                process.StartInfo.FileName = "cmd.exe";
-                process.StartInfo.Arguments = @"/c taskkill /f /im OneDrive.exe & %systemroot%\System32\OneDriveSetup.exe /uninstall & %systemroot%\SysWOW64\OneDriveSetup.exe /uninstall";
-                process.Start();
-                process.WaitForExit(1000);
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = @"/c taskkill /f /im OneDrive.exe & %systemroot%\System32\OneDriveSetup.exe /uninstall & %systemroot%\SysWOW64\OneDriveSetup.exe /uninstall",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
 
-                while (!process.HasExited && process.Responding)
+                using Process process = new Process { StartInfo = startInfo };
+
+                process.Start();
+                process.WaitForExit();
+
+                if (process.ExitCode == 0)
                 {
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+
+                    string argumentsFolders = $@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
+                        & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {StoragePaths.SystemDisk}\OneDriveTemp";
+
+                    if (isLocalAccount)
+                        argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";
+
+                    CommandExecutor.RunCommand(argumentsFolders);
                 }
-            }
-
-            string argumentsFolders = $@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive
-            & rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {StoragePaths.SystemDisk}\OneDriveTemp";
-
-            if (isLocalAccount)
-                argumentsFolders += @" & rd /s /q %userprofile%\OneDrive";
-
-            CommandExecutor.RunCommand(argumentsFolders);
+            });
         }
 
-        internal static void ResetOneDrive()
+        internal static Task ResetOneDrive()
         {
-            using (Process process = new Process())
+            return Task.Run(() =>
             {
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                process.EnableRaisingEvents = true;
-                process.StartInfo.FileName = "cmd.exe";
-                process.StartInfo.Arguments = @"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe";
-                process.Start();
-                process.WaitForExit(1000);
-            }
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = @"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
 
-            RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-            RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+                using Process process = new Process { StartInfo = startInfo };
+
+                process.Start();
+                process.WaitForExit();
+
+                if (process.ExitCode == 0)
+                {
+                    RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+                    RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+                }
+            });
         }
 
         internal async void CheckingForLocalAccount()
