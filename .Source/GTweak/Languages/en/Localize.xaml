@@ -283,7 +283,7 @@
     <v:String x:Key="tgl8_services">Services related to printer</v:String>
     <v:String x:Key="tgl9_services">Service related to the operation of the scanner</v:String>
     <v:String x:Key="tgl10_services">Services related to fax</v:String>
-    <v:String x:Key="tgl11_services">Services connected in tablet/smartphone mode</v:String>
+    <v:String x:Key="tgl11_services">Services related to using tablet/smartphone mode</v:String>
     <v:String x:Key="tgl12_services">Services related to the operation of additional monitors</v:String>
     <v:String x:Key="tgl13_services">Virtual Desktop Services, Your Phone</v:String>
     <v:String x:Key="tgl14_services">Services related to the operation of the local network</v:String>
@@ -312,7 +312,7 @@
     <v:String x:Key="TglButton8_description_services">Disable if you don't have a printer.</v:String>
     <v:String x:Key="TglButton9_description_services">Disable if you don't have a scanner.</v:String>
     <v:String x:Key="TglButton10_description_services">Disable if you don't have a fax machine.</v:String>
-    <v:String x:Key="TglButton11_description_services">Disable if you have a landline computer, laptop or netbook."</v:String>
+    <v:String x:Key="TglButton11_description_services">Disable if you have a landline computer, laptop or netbook.</v:String>
     <v:String x:Key="TglButton12_description_services">Disable if you have only one monitor and you do not plan to connect additional ones.</v:String>
     <v:String x:Key="TglButton13_description_services">Disable if you do not use all these applications: Virtual Desktops, Your Phone and Night Lights.</v:String>
     <v:String x:Key="TglButton14_description_services">Disable if you do not use or plan to use a local network.</v:String>

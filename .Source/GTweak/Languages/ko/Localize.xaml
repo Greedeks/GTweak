@@ -283,7 +283,7 @@
     <v:String x:Key="tgl8_services">프린터 관련 서비스</v:String>
     <v:String x:Key="tgl9_services">스캐너 작동 관련 서비스</v:String>
     <v:String x:Key="tgl10_services">팩스 관련 서비스</v:String>
-    <v:String x:Key="tgl11_services">태블릿/스마트폰 모드에서 연결된 서비스</v:String>
+    <v:String x:Key="tgl11_services">태블릿/스마트폰 모드 사용 관련 서비스</v:String>
     <v:String x:Key="tgl12_services">추가 모니터 운영 관련 서비스</v:String>
     <v:String x:Key="tgl13_services">가상 데스크톱 서비스, 휴대폰</v:String>
     <v:String x:Key="tgl14_services">로컬 네트워크 운영 관련 서비스</v:String>
@@ -312,7 +312,7 @@
     <v:String x:Key="TglButton8_description_services">프린터가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton9_description_services">스캐너가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton10_description_services">팩스기가 없는 경우 비활성화합니다.</v:String>
-    <v:String x:Key="TglButton11_description_services">유선 컴퓨터, 노트북 또는 넷북을 사용하는 경우 비활성화합니다.”</v:String>
+    <v:String x:Key="TglButton11_description_services">유선 컴퓨터, 노트북 또는 넷북을 사용하는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton12_description_services">모니터가 하나뿐이고 추가 모니터를 연결할 계획이 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton13_description_services">이러한 응용 프로그램을 모두 사용하지 않는다면 비활성화하세요: 가상 데스크톱, 휴대폰 및 야간 조명.</v:String>
     <v:String x:Key="TglButton14_description_services">로컬 네트워크를 사용하지 않거나 사용할 계획이 없는 경우 비활성화합니다.</v:String>
