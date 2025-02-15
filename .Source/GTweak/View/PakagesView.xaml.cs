@@ -181,6 +181,7 @@ namespace GTweak.View
             LinkedIn.Source = AvailabilityInstalledPackage("LinkedIn", "Microsoft.LinkedIn");
             WebMediaExtensions.Source = AvailabilityInstalledPackage("WebMediaExtensions", "Microsoft.WebMediaExtensions");
             OneConnect.Source = AvailabilityInstalledPackage("OneConnect", "Microsoft.OneConnect");
+            Edge.Source = AvailabilityInstalledPackage("Edge", "Microsoft.MicrosoftEdge.Stable");
         }
     }
 }

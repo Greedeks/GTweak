@@ -37,5 +37,10 @@
 
         internal static readonly string restoreTask = @"Microsoft\Windows\SystemRestore\SR";
         internal static readonly string defragTask = @"Microsoft\Windows\Defrag\ScheduledDefrag";
+
+        internal static readonly string[] edgeTasks = {
+        @"\MicrosoftEdgeUpdateTaskMachineCore",
+        @"\MicrosoftEdgeUpdateTaskMachineUA",
+        @"\MicrosoftEdgeUpdateTaskUser*" };
     }
 }

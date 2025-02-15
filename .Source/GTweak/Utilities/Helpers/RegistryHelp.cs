@@ -71,12 +71,18 @@ namespace GTweak.Utilities.Helpers
             }).Wait();
         }
 
-        internal static void DeleteFolderTree(RegistryKey registrykey, string subkey)
+        internal static void DeleteFolderTree(RegistryKey registrykey, string subkey, bool isTakingOwner = false)
         {
-            Task.Run(delegate
+            Task.Run(async delegate
             {
                 try
                 {
+                    if (isTakingOwner)
+                    {
+                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                        await Task.Delay(200);
+                    }
+
                     RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
 
                     if (registryFolder != null)

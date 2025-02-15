@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal sealed class UninstallingPakages
+    internal sealed class UninstallingPakages : TaskSchedulerManager
     {
         internal static string InstalledPackages { get; private set; }
 
@@ -111,7 +111,8 @@ namespace GTweak.Utilities.Tweaks
             ["WindowsTerminal"] = new List<string>(1) { "Microsoft.WindowsTerminal" },
             ["LinkedIn"] = new List<string>(1) { "Microsoft.LinkedIn" },
             ["WebMediaExtensions"] = new List<string>(1) { "Microsoft.WebMediaExtensions" },
-            ["OneConnect"] = new List<string>(1) { "Microsoft.OneConnect" }
+            ["OneConnect"] = new List<string>(1) { "Microsoft.OneConnect" },
+            ["Edge"] = new List<string>(2) { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*" }
         };
 
         private static readonly SortedList<string, string> PackageAliases = new SortedList<string, string>
@@ -124,7 +125,8 @@ namespace GTweak.Utilities.Tweaks
             ["Music"] = "zunemusic",
             ["Video"] = "zunevideo",
             ["Widgets"] = "Windows.Client.WebExperience",
-            ["LinkedIn"] = "LinkedInforWindows"
+            ["LinkedIn"] = "LinkedInforWindows",
+            ["Edge"] = "MicrosoftEdge"
         };
         #endregion
 
@@ -185,6 +187,23 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization\TrainedDataStore", "HarvestContacts", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Personalization\Settings", "AcceptedPrivacyPolicy", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Windows Search", "CortanaConsent", 0, RegistryValueKind.DWord);
+                            break;
+                        case "Edge":
+                            SetTaskState(false, edgeTasks);
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""{StoragePaths.SystemDisk}\ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del ""%f""");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""%UserProfile%"" %f in (*edge*) do @if exist ""%f"" del /f /q ""%f""");
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}", true);
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %d in (""{StoragePaths.SystemDisk}\Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /f ""delims="" %i in ('dir /b /s ""{StoragePaths.SystemDisk}\Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))");
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdatem", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Edge", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView", true);
                             break;
                     }
                 });
