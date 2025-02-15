@@ -39,8 +39,8 @@
         internal static readonly string defragTask = @"Microsoft\Windows\Defrag\ScheduledDefrag";
 
         internal static readonly string[] edgeTasks = {
-        @"\MicrosoftEdgeUpdateTaskMachineCore",
-        @"\MicrosoftEdgeUpdateTaskMachineUA",
-        @"\MicrosoftEdgeUpdateTaskUser*" };
+        @"MicrosoftEdgeUpdateTaskMachineUA{EA17DF76-AE5F-45F8-8867-FE5E0DD06656}",
+        @"MicrosoftEdgeUpdateTaskMachineCore{11EED34D-1A62-4BB7-9A2E-0D83ED6A609F}",
+        @"MicrosoftEdgeUpdateTaskUser*" };
     }
 }
