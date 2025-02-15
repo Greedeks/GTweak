@@ -32,7 +32,7 @@
 - 스파이웨어, 키로거 및 원격 측정 Windows, NVIDIA 비활성화
 - 스파이웨어 IP 및 도메인 이름 차단
 - Windows 광고 및 배너 비활성화, SCOOBE
-- OneDrive 앱 및 폴더, Cortana, 위젯 삭제
+- OneDrive, Microsoft Edge 및 해당 애플리케이션 폴더, Cortana, 위젯 삭제
 - 미리 설치된 Windows 10/11 앱 제거
 - Realtek 고화질 오디오 드라이버의 전원 공급 장치 수정
 - Windows 테마 및 애플리케이션 변경, 인터페이스 사용자 지정

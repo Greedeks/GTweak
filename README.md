@@ -32,7 +32,7 @@
 - Disabling spyware, keyloggers and telemetry Windows, NVIDIA
 - Blocking of spyware ip and domain names
 - Disabling Windows ads and banners, SCOOBE
-- Deleting the OneDrive app and folders, Cortana, Widgets
+- Deleting OneDrive, Microsoft Edge and folders of these applications, Cortana, widgets
 - Removing pre-installed Windows 10/11 apps
 - Fixing the power supply of the Realtek High Definition Audio driver
 - Changing the Windows theme and applications, customizing the interface
