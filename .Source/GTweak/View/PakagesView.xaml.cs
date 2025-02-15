@@ -180,6 +180,7 @@ namespace GTweak.View
             WindowsTerminal.Source = AvailabilityInstalledPackage("WindowsTerminal", "Microsoft.WindowsTerminal");
             LinkedIn.Source = AvailabilityInstalledPackage("LinkedIn", "Microsoft.LinkedIn");
             WebMediaExtensions.Source = AvailabilityInstalledPackage("WebMediaExtensions", "Microsoft.WebMediaExtensions");
+            OneConnect.Source = AvailabilityInstalledPackage("OneConnect", "Microsoft.OneConnect");
         }
     }
 }

@@ -270,6 +270,8 @@
     <v:String x:Key="WindowsTerminal_applications">Терминал</v:String>
     <v:String x:Key="LinkedIn_applications">LinkedIn</v:String>
     <v:String x:Key="WebMediaExtensions_applications">Расширения для интернет-мультимедиа</v:String>
+    <v:String x:Key="OneConnect_applications">Тарифные планы</v:String>
+    <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->

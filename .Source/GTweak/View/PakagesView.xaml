@@ -27,7 +27,14 @@
             </StackPanel>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="1100" Height="Auto" Margin="0,-10,0,0">
-                <StackPanel Orientation="Vertical" Margin="8,185,968,0" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" Margin="8,95,968,0" VerticalAlignment="Top">
+                    <Image x:Name="OneConnect" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                <Setter Property="Source" Value="{StaticResource A_DI_OneConnect}"/>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                     <Image x:Name="LinkedIn" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
@@ -373,6 +380,13 @@
                         <Image.Style>
                             <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
                                 <Setter Property="Source" Value="{StaticResource A_DI_WebMediaExtensions}"/>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <Image x:Name="Edge" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                <Setter Property="Source" Value="{StaticResource A_DI_Edge}"/>
                             </Style>
                         </Image.Style>
                     </Image>

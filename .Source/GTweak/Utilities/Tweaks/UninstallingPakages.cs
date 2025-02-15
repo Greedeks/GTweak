@@ -62,7 +62,9 @@ namespace GTweak.Utilities.Tweaks
             ["DevHome"] = false,
             ["WindowsTerminal"] = false,
             ["LinkedIn"] = false,
-            ["WebMediaExtensions"] = false
+            ["WebMediaExtensions"] = false,
+            ["OneConnect"] = false,
+            ["Edge"] = false
         };
 
         private static readonly SortedList<string, List<string>> PackageScripts = new SortedList<string, List<string>>
@@ -109,6 +111,7 @@ namespace GTweak.Utilities.Tweaks
             ["WindowsTerminal"] = new List<string>(1) { "Microsoft.WindowsTerminal" },
             ["LinkedIn"] = new List<string>(1) { "Microsoft.LinkedIn" },
             ["WebMediaExtensions"] = new List<string>(1) { "Microsoft.WebMediaExtensions" },
+            ["OneConnect"] = new List<string>(1) { "Microsoft.OneConnect" }
         };
 
         private static readonly SortedList<string, string> PackageAliases = new SortedList<string, string>
