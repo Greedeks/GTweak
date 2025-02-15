@@ -53,5 +53,20 @@ namespace GTweak.Utilities.Helpers
                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, command);
             }).Wait();
         }
+
+
+        internal static void DeletingTask(params string[] tasklist)
+        {
+            Task.Run(delegate
+            {
+                using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                foreach (string taskname in tasklist)
+                {
+                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                    if (task != null)
+                        taskService.RootFolder.DeleteTask(taskname);
+                }
+            }).Wait();
+        }
     }
 }
