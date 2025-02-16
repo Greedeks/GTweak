@@ -53,7 +53,7 @@ namespace GTweak.Utilities.Control
             { "Volume", 50 },
             { "Language", App.GettingSystemLanguage },
             { "Theme", "Dark" },
-            { "HiddenIP", false }
+            { "HiddenIP", true }
         };
 
         internal static bool IsViewNotification { get => (bool)defaultRegValues["Notification"]; set => defaultRegValues["Notification"] = value; }
