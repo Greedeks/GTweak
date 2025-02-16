@@ -146,10 +146,20 @@ namespace GTweak.Utilities.Configuration
 
         private void GetMemoryInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string data = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
-                HardwareData["RAM"] += $"{(string)managementObj["Manufacturer"]}, {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB{(string.IsNullOrEmpty(data) ? "" : $", {data} MHz")}\n";
+                string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
+                string manufacturer = (string)managementObj["Manufacturer"];
+                string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
+                {
+                    24 => "DDR3,",
+                    26 => "DDR4,",
+                    29 => "LPDDR3,",
+                    30 => "LPDDR4,",
+                    31 => "DDR5,",
+                    _ => string.Empty
+                };
+               HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? memoryType : string.Concat(manufacturer, ","))} {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", { speedData}MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
