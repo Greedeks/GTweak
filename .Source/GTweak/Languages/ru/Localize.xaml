@@ -159,7 +159,7 @@
     <v:String x:Key="tgl2_interface">Стандартный цвет всплывающей подсказки</v:String>
     <v:String x:Key="tgl3_interface">Стандартный размер системных кнопок</v:String>
     <v:String x:Key="tgl4_interface">Стандартная частота мерцания курсора</v:String>
-    <v:String x:Key="tgl5_interface">Стандартный размер скролл-бара</v:String>
+    <v:String x:Key="tgl5_interface">Стандартный размер полосы прокрутки</v:String>
     <v:String x:Key="tgl6_interface">Эффект прозрачности панели задач</v:String>
     <v:String x:Key="tgl7_interface">Тёмная тема панели задач</v:String>
     <v:String x:Key="tgl8_interface">Тёмная тема приложений и проводника</v:String>
@@ -193,7 +193,7 @@
     <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки в некоторых программах с жёлтого на светло голубой «Небесная лазурь».</v:String>
     <v:String x:Key="TglButton3_description_interface">Твик уменьшит размер кнопок Свернуть, Развернуть, Закрыть делая их менее громоздкими. Изменяет размер для всех окон, включая Проводник, фотографии, браузеры и другие известные вам программы.</v:String>
     <v:String x:Key="TglButton4_description_interface">Твик ускоряет частоту мерцания текстового курсора. По умолчанию она составляет каждые 530 миллисекунд.</v:String>
-    <v:String x:Key="TglButton5_description_interface">Твик сделает тоньше толщину полосы прокрутки в окнах, включая браузеры и программы. За исключением современных интерфейсов приложений.</v:String>
+    <v:String x:Key="TglButton5_description_interface">Твик сделает тоньше толщину полосы прокрутки (scrollbar) в окнах, включая браузеры и программы. За исключением современных интерфейсов приложений.</v:String>
     <v:String x:Key="TglButton6_description_interface">Твик отключит или включит эффект прозрачности. Полупрозрачные окна и поверхности.</v:String>
     <v:String x:Key="TglButton7_description_interface">Изменяет тему панели задач на светлую или тёмную. Внимание может моргать экран.</v:String>
     <v:String x:Key="TglButton8_description_interface">Твик поменяет тему проводника на светлую или тёмную, включая браузеры и прочие программы поддерживающие тему устройства. Внимание может моргать экран.</v:String>
