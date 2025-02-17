@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
+using GTweak.Windows;
 using System;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -27,9 +28,12 @@ namespace GTweak.View
 
         private async void BtnRestorePoint_ClickButton(object sender, EventArgs e)
         {
+            WaitingWindow waitingWindow = new WaitingWindow();
+            waitingWindow.Show();
             new ViewNotification().Show("", "info", (string)FindResource("createpoint_notification"));
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate { SystemMaintenance.CreateRestorePoint(); });
+            waitingWindow.Close();
         }
 
         private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e) => SystemMaintenance.StartRecovery();
