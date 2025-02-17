@@ -227,20 +227,20 @@ namespace GTweak.Utilities.Tweaks
                     Task.Run(delegate
                     {
                         string value = isChoose ? "4" : "3";
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WalletService /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\VacSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\spectrum /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SharedRealitySvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\perceptionsimulation /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MixedRealityOpenXRSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\MapsBroker /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\EntAppSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\embeddedmode /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\wlidsvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WEPHOSTSVC /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\StorSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\ClipSVC /t REG_DWORD /v Start /d {value} /f & " +
-                             $"reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\InstallService /t REG_DWORD /v Start /d {value} /f");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c reg add HKLM\SYSTEM\CurrentControlSet\Services\WalletService /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\VacSvc /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\spectrum /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\SharedRealitySvc /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\perceptionsimulation /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\MixedRealityOpenXRSvc /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\MapsBroker /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\EntAppSvc /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\embeddedmode /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\wlidsvc /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\WEPHOSTSVC /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\StorSvc /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\ClipSVC /t REG_DWORD /v Start /d {value} /f & " +
+                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\InstallService /t REG_DWORD /v Start /d {value} /f");
                     });
                     break;
                 case "TglButton5":
@@ -415,20 +415,7 @@ namespace GTweak.Utilities.Tweaks
         {
             Task.Run(delegate
             {
-                string cachePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\SoftwareDistribution\Download");
-
-                string[] WinUpdateTasks = new string[] {
-                         @"Microsoft\Windows\UpdateOrchestrator\Report policies",
-                         @"Microsoft\Windows\UpdateOrchestrator\Schedule Scan",
-                         @"Microsoft\Windows\UpdateOrchestrator\Schedule Scan Static Task",
-                         @"Microsoft\Windows\UpdateOrchestrator\Schedule Work",
-                         @"Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work",
-                         @"Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfterUpdate",
-                         @"Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScan_LicenseAccepted",
-                         @"Microsoft\Windows\UpdateOrchestrator\USO_UxBroker",
-                         @"Microsoft\Windows\UpdateOrchestrator\UUS Failover Task",
-                         @"Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
-                         @"Microsoft\Windows\WindowsUpdate\Scheduled Start"};
+                string cachePath = $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\Download";
 
                 try
                 {
@@ -443,13 +430,23 @@ namespace GTweak.Utilities.Tweaks
                             }
 
                             TakingOwnership.GrantAdministratorsAccess(cachePath, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
-                            Directory.Delete(cachePath, true);
+
+                            string[] files = Directory.GetFiles(cachePath);
+                            foreach (string file in files)
+                            {
+                                File.SetAttributes(file, FileAttributes.Normal);
+                                File.Delete(file);
+                            }
+
+                            string[] directories = Directory.GetDirectories(cachePath);
+                            foreach (string path in directories)
+                                Directory.Delete(path, true);
                         }
 
-                        SetTaskStateOwner(false, WinUpdateTasks);
+                        SetTaskStateOwner(false, winUpdatesTasks);
                     }
                     else
-                        SetTaskStateOwner(true, WinUpdateTasks);
+                        SetTaskStateOwner(true, winUpdatesTasks);
                 }
                 catch (Exception ex) { Debug.WriteLine(ex); }
             });

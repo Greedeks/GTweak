@@ -202,7 +202,8 @@ namespace GTweak.Utilities.Configuration
                             using RegistryKey subKey = regKey.OpenSubKey(subKeyName + @"\Properties");
                             if (subKey != null)
                             {
-                                if (subKey.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},24")?.ToString() == "USB" && subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},2")?.ToString()?.Contains(deviceID) == true)
+                                if ((subKey.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},24")?.ToString().ToLowerInvariant() == "usb" || subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},6")?.ToString().ToLowerInvariant().Contains("usb") == true ||
+                                subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},8")?.ToString().ToLowerInvariant().Contains("usb") == true) && subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},2")?.ToString()?.Contains(deviceID) == true)
                                 {
                                     string value = subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},6")?.ToString();
                                     return (true, value);

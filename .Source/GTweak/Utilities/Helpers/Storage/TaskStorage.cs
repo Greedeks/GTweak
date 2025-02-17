@@ -31,6 +31,19 @@
         @"Microsoft\Office\OfficeTelemetryAgentLogOn",
         @"Microsoft\Office\Office 15 Subscription Heartbeat" };
 
+        internal static readonly string[] winUpdatesTasks = {
+        @"Microsoft\Windows\UpdateOrchestrator\Report policies",
+        @"Microsoft\Windows\UpdateOrchestrator\Schedule Scan",
+        @"Microsoft\Windows\UpdateOrchestrator\Schedule Scan Static Task",
+        @"Microsoft\Windows\UpdateOrchestrator\Schedule Work",
+        @"Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work",
+        @"Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfterUpdate",
+        @"Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScan_LicenseAccepted",
+        @"Microsoft\Windows\UpdateOrchestrator\USO_UxBroker",
+        @"Microsoft\Windows\UpdateOrchestrator\UUS Failover Task",
+        @"Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
+        @"Microsoft\Windows\WindowsUpdate\Scheduled Start"};
+
         internal static readonly string[] memoryDiagTasks =  {
         @"Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
         @"Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
