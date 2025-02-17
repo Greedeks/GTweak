@@ -159,7 +159,7 @@ namespace GTweak.Utilities.Configuration
                     31 => "DDR5,",
                     _ => string.Empty
                 };
-               HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? memoryType : string.Concat(manufacturer, ","))} {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", { speedData}MHz")}\n";
+                HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? memoryType : string.Concat(manufacturer, ","))} {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }

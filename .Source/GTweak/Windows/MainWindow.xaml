@@ -65,6 +65,52 @@
 
                 <StackPanel Orientation="Horizontal" Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Right">
 
+                    <Button x:Name="ButtonHelp" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,5,0" PreviewMouseLeftButtonUp="ButtonHelp_PreviewMouseLeftButtonUp">
+                        <Image Width="18">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <SkewTransform AngleX="1"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform X="0"/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="{StaticResource DI_BtnHelp_In}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsMouseOver, ElementName=ButtonHelp}" Value="true">
+                                            <Setter Property="Source" Value="{StaticResource DI_BtnHelp}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitleButtons}">
+                                <Style.Triggers>
+                                    <Trigger Property="Visibility" Value="Visible">
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <TranslateTransform X="0" Y="-10"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard Timeline.DesiredFrameRate="400">
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="-10" To="0" Duration="0:0:1.2" DecelerationRatio="0.6">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <ElasticEase/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                   
                     <Button x:Name="ButtonSettings" Style="{StaticResource TitleButtons}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" PreviewMouseLeftButtonUp="ButtonSettings_PreviewMouseLeftButtonUp">
                         <Image x:Name="ImageSettings" Width="18" Height="18" RenderTransformOrigin="0.5, 0.5">
                             <Image.RenderTransform>
