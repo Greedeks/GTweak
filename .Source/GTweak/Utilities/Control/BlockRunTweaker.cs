@@ -8,39 +8,39 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GTweak.Utilities.Control
 {
     internal sealed class BlockRunTweaker
     {
         [DllImport("user32.dll")]
-        private static extern bool _ShowWindow(IntPtr handle, int cmdShow);
+        private static extern bool ShowWindow(IntPtr handle, int cmdShow);
         [DllImport("user32.dll")]
-        private static extern int _SetForegroundWindow(IntPtr handle);
+        private static extern int SetForegroundWindow(IntPtr handle);
         private static readonly Mutex mutex = new Mutex(false, "GTweak");
 
         internal static void CheckingApplicationCopies()
         {
-            CommandExecutor.RunCommand(@$"/c timeout /t 10 && del %userprofile%\AppData\Local\CrashDumps\*{SettingsRepository.currentName}*");
-
             if (!mutex.WaitOne(150, false))
             {
                 using (Mutex mutex = new Mutex(false, @"Global\" + "GTweak"))
                 {
                     if (mutex.WaitOne(150, false))
-                        new MessageWindow().ShowDialog();
+                        Application.Current.Dispatcher.Invoke(() => { new MessageWindow().ShowDialog(); });
                     else
-                        mutex?.ReleaseMutex();
+                        Environment.Exit(0);
                 }
-                Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == Process.GetCurrentProcess().ProcessName);
-                if (process != null)
+                using (Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == Process.GetCurrentProcess().ProcessName))
                 {
-                    IntPtr handle = process.MainWindowHandle;
-                    _ShowWindow(handle, 1);
-                    _SetForegroundWindow(handle);
+                    if (process != null)
+                    {
+                        IntPtr handle = process.MainWindowHandle;
+                        ShowWindow(handle, 1);
+                        SetForegroundWindow(handle);
+                    }
                 }
-                process?.Dispose();
-                mutex?.ReleaseMutex();
+                Environment.Exit(0);
             }
         }
 
