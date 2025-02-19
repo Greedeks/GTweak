@@ -149,7 +149,7 @@ namespace GTweak.View
 
         private void TextComputerData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount >= 2)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Clipboard.Clear();
                 switch (sender.GetType().Name)

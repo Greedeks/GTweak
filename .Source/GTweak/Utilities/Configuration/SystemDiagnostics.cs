@@ -113,7 +113,7 @@ namespace GTweak.Utilities.Configuration
         private async void GetBiosInfo()
         {
             string output = await CommandExecutor.GetCommandOutput("bcdedit");
-            HardwareData["Mode"] = output.Contains(@"efi") ? "UEFI" : "Legacy BIOS";
+            HardwareData["Mode"] = output.ToLowerInvariant().Contains(@"efi") ? "UEFI" : "Legacy BIOS";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
@@ -144,8 +144,60 @@ namespace GTweak.Utilities.Configuration
 
         private void GeVideoInfo()
         {
+            static (int, bool) GetMemorySize(string name)
+            {
+                using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}");
+                if (baseKey != null)
+                {
+                    foreach (string subKeyName in baseKey.GetSubKeyNames())
+                    {
+                        using RegistryKey regKey = baseKey.OpenSubKey(subKeyName);
+                        if (regKey != null)
+                        {
+                            string adapterString = regKey.GetValue("HardwareInformation.AdapterString") as string;
+                            string driverDesc = regKey.GetValue("DriverDesc") as string;
+                            string chipType = regKey.GetValue("HardwareInformation.ChipType") as string;
+
+                            if ((!string.IsNullOrEmpty(adapterString) && adapterString.Contains(name)) || (!string.IsNullOrEmpty(driverDesc) && driverDesc.Contains(name)) || (!string.IsNullOrEmpty(chipType) && chipType.Contains(name)))
+                            {
+                                object memorySizeValue = regKey.GetValue("HardwareInformation.qwMemorySize") ?? regKey.GetValue("HardwareInformation.MemorySize");
+                                if (memorySizeValue != null)
+                                {
+                                    ulong memorySize = 0;
+
+                                    if (memorySizeValue is byte[] byteArray)
+                                    {
+                                        byte[] filledArray = new byte[8];
+                                        Array.Copy(byteArray, filledArray, Math.Min(byteArray.Length, filledArray.Length));
+                                        memorySize = BitConverter.ToUInt64(filledArray, 0);
+                                    }
+                                    else
+                                    {
+                                        memorySize = memorySizeValue switch
+                                        {
+                                            int intValue => unchecked((uint)intValue),
+                                            uint uintValue => uintValue,
+                                            long longValue => unchecked((ulong)longValue),
+                                            ulong ulongValue => ulongValue,
+                                            _ => 0
+                                        };
+                                    }
+                                    return ((int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)), true);
+                                }
+                            }
+                        }
+                    }
+                }
+                return (0, false);
+            }
+
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["GPU"] += $"{(string)managementObj["Name"]}, {(int)Math.Round((uint)managementObj["AdapterRAM"] / 1024.0 / 1024.0 / 1024.0)} GB\n";
+            {
+                string data = (string)managementObj["Name"];
+                int dataMemory = (int)Math.Round((uint)managementObj["AdapterRAM"] / (1024.0 * 1024.0 * 1024.0));
+                (int dataMemoryReg, bool isFound) = GetMemorySize(data);
+                HardwareData["GPU"] += $"{data}, {(isFound ? dataMemoryReg : dataMemory)} GB\n";
+            }
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
         }
 
@@ -157,14 +209,15 @@ namespace GTweak.Utilities.Configuration
                 string manufacturer = (string)managementObj["Manufacturer"];
                 string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
                 {
-                    24 => "DDR3,",
-                    26 => "DDR4,",
-                    29 => "LPDDR3,",
-                    30 => "LPDDR4,",
-                    31 => "DDR5,",
+                    24 => "DDR3",
+                    26 => "DDR4",
+                    29 => "LPDDR3",
+                    30 => "LPDDR4",
+                    34 => "DDR5",
+                    35 => "LPDDR5",
                     _ => string.Empty
                 };
-                HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? memoryType : string.Concat(manufacturer, ","))} {(int)Math.Round((ulong)managementObj["Capacity"] / 1024.0 / 1024.0 / 1024.0)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{(int)Math.Round((ulong)managementObj["Capacity"] / 1024.0 / 1024.0 / 1024.0)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
