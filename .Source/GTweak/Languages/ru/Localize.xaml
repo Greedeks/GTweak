@@ -41,7 +41,7 @@
     <v:String x:Key="onedrive_notification">Процесс восстановления OneDrive начался, это займет некоторое время</v:String>
     <v:String x:Key="appsdelete_notification">Процесс удаления приложений начался, это займет некоторое время</v:String>
     <v:String x:Key="viewlicense_notification">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>
-    <v:String x:Key="createpoint_notification">Cоздания точки восстановления займет некоторое время</v:String>
+    <v:String x:Key="createpoint_notification">Cоздание точки восстановления займет некоторое время</v:String>
     <v:String x:Key="notsuccessfulpoint_notification">Что-то пошло не так, не удалось создать точку восстановления</v:String>
     <v:String x:Key="successpoint_notification">Точка восстановления успешно создана</v:String>
     <v:String x:Key="notsuccessfulrecovery_notification">Что-то пошло не так, не удалось запустить восстановления</v:String>

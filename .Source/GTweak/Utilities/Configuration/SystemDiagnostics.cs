@@ -118,7 +118,8 @@ namespace GTweak.Utilities.Configuration
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => (string)managementObj[prop]).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                HardwareData["BIOS"] += !string.IsNullOrEmpty((string)managementObj["SerialNumber"]) ? $"{data}, S/N-{(string)managementObj["SerialNumber"]}\n" : $"{data}\n";
+                string dataSN = (string)managementObj["SerialNumber"];
+                HardwareData["BIOS"] += !string.IsNullOrEmpty(dataSN) && !dataSN.Contains(" ") ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
             }
             HardwareData["BIOS"] = HardwareData["BIOS"].TrimEnd('\n');
         }
@@ -126,7 +127,11 @@ namespace GTweak.Utilities.Configuration
         private void GetMotherboardInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["MotherBr"] = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}, V{(string)managementObj["Version"]}\n";
+            {
+                string data = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}";
+                string dataVersion = (string)managementObj["Version"];
+                HardwareData["MotherBr"] += !string.IsNullOrEmpty(dataVersion) && !dataVersion.Contains(" ") ? $"{data}, V{dataVersion}\n" : $"{data}\n";
+            }  
             HardwareData["MotherBr"] = HardwareData["MotherBr"].TrimEnd('\n');
         }
 
@@ -140,7 +145,7 @@ namespace GTweak.Utilities.Configuration
         private void GeVideoInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["GPU"] += $"{(string)managementObj["Name"]}, {Convert.ToString((uint)managementObj["AdapterRAM"] / 1024000000)} GB\n";
+                HardwareData["GPU"] += $"{(string)managementObj["Name"]}, {(int)Math.Round((uint)managementObj["AdapterRAM"] / 1024.0 / 1024.0 / 1024.0)} GB\n";
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
         }
 
@@ -159,7 +164,7 @@ namespace GTweak.Utilities.Configuration
                     31 => "DDR5,",
                     _ => string.Empty
                 };
-                HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? memoryType : string.Concat(manufacturer, ","))} {Convert.ToString((ulong)managementObj["Capacity"] / 1024000000)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? memoryType : string.Concat(manufacturer, ","))} {(int)Math.Round((ulong)managementObj["Capacity"] / 1024.0 / 1024.0 / 1024.0)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
@@ -180,7 +185,7 @@ namespace GTweak.Utilities.Configuration
 
                 if (storageType == "(Unspecified)" && ((ushort)(managementObj["BusType"])) == 7) storageType = "(Media-Type)";
 
-                ulong getSizeGB = (ulong)managementObj["Size"] / 1024000000;
+                ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
                 string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
 
                 HardwareData["Storage"] += $"{size} [{(string)managementObj["FriendlyName"]}] {storageType}\n";
