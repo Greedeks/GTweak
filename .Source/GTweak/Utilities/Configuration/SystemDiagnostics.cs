@@ -131,7 +131,7 @@ namespace GTweak.Utilities.Configuration
                 string data = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}";
                 string dataVersion = (string)managementObj["Version"];
                 HardwareData["MotherBr"] += !string.IsNullOrEmpty(dataVersion) && !dataVersion.Contains(" ") ? $"{data}, V{dataVersion}\n" : $"{data}\n";
-            }  
+            }
             HardwareData["MotherBr"] = HardwareData["MotherBr"].TrimEnd('\n');
         }
 
