@@ -203,6 +203,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton4":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power", "HibernateEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    CommandExecutor.RunCommand(@$"/c powercfg.exe -h {(isChoose ? "off" : "on")}");
                     break;
                 case "TglButton5":
                     if (isChoose)
