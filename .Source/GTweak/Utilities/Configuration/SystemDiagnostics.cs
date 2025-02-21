@@ -307,15 +307,18 @@ namespace GTweak.Utilities.Configuration
                     { Name: string name } when name.StartsWith("zh") => "baidu.com",
                     { Name: string name } when name.StartsWith("ru") => "yandex.ru",
                     { Name: string name } when name.StartsWith("ko") => "naver.com",
-                    _ => "google.com",
+                    _ => "google.com"
                 };
 
                 TimeSpan timeout = TimeSpan.FromSeconds(5.0);
+
                 using Task<IPAddress> task = Task.Run(() =>
                 {
-                    return Dns.GetHostEntry(dns).AddressList[0];
+                    try { return Dns.GetHostEntry(dns).AddressList[0]; }
+                    catch { return null; }
                 });
-                if (!task.Wait(timeout))
+
+                if (!task.Wait(timeout) || task.Result == null)
                     return false;
 
                 return true;
