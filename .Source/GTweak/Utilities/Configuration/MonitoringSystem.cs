@@ -11,6 +11,13 @@ namespace GTweak.Utilities.Configuration
         internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
         internal static int GetProcessorUsage = default;
 
+        [DllImport("psapi.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GetPerformanceInfo([Out] out PerformanceInformation PerformanceInformation, [In] int Size);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool GetSystemTimes(out SystemTime lpIdleTime, out SystemTime lpKernelTime, out SystemTime lpUserTime);
+
         [StructLayout(LayoutKind.Sequential)]
         private struct PerformanceInformation
         {
@@ -30,9 +37,12 @@ namespace GTweak.Utilities.Configuration
             internal int ThreadCount;
         }
 
-        [DllImport("psapi.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GetPerformanceInfo([Out] out PerformanceInformation PerformanceInformation, [In] int Size);
+        [StructLayout(LayoutKind.Sequential)]
+        private struct SystemTime
+        {
+            public uint dwLowDateTime;
+            public uint dwHighDateTime;
+        }
 
         private long GetPhysicalAvailableMemory()
         {
@@ -52,14 +62,34 @@ namespace GTweak.Utilities.Configuration
 
         internal async Task<int> GetTotalProcessorUsage()
         {
-            return await Task.Run(async () =>
+            try
             {
-                using PerformanceCounter cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total", true);
-                cpuCounter.NextValue();
-                await Task.Delay(1000);
-                GetProcessorUsage = (int)cpuCounter.NextValue();
+                static ulong ConvertTimeToTicks(SystemTime systemTime) => ((ulong)systemTime.dwHighDateTime << 32) | systemTime.dwLowDateTime;
+
+                if (!GetSystemTimes(out SystemTime idleTime, out SystemTime kernelTime, out SystemTime userTime))
+                    return 0;
+
+                ulong idleTicks = ConvertTimeToTicks(idleTime);
+                ulong totalTicks = ConvertTimeToTicks(kernelTime) + ConvertTimeToTicks(userTime);
+
+                await Task.Delay(500);
+
+                if (!GetSystemTimes(out idleTime, out kernelTime, out userTime))
+                    return 0;
+
+                ulong newIdleTicks = ConvertTimeToTicks(idleTime);
+                ulong newTotalTicks = ConvertTimeToTicks(kernelTime) + ConvertTimeToTicks(userTime);
+
+                ulong totalTicksDiff = newTotalTicks - totalTicks;
+
+                GetProcessorUsage = (int)(100.0 * (totalTicksDiff - (newIdleTicks - idleTicks)) / totalTicksDiff);
                 return GetProcessorUsage;
-            });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return 0;
+            }
         }
     }
 }
