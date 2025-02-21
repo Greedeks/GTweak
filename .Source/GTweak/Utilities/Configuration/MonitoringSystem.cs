@@ -7,35 +7,9 @@ namespace GTweak.Utilities.Configuration
 {
     internal sealed class MonitoringSystem
     {
-        internal int GetMemoryUsage => (int)Math.Truncate(100 - ((decimal)GetPhysicalAvailableMemory() / GetTotalMemory() * 100) + (decimal)0.5);
+        internal int GetMemoryUsage => GetPhysicalAvailableMemory();
         internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
         internal static int GetProcessorUsage = default;
-
-        [DllImport("psapi.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GetPerformanceInfo([Out] out PerformanceInformation PerformanceInformation, [In] int Size);
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool GetSystemTimes(out SystemTime lpIdleTime, out SystemTime lpKernelTime, out SystemTime lpUserTime);
-
-        [StructLayout(LayoutKind.Sequential)]
-        private struct PerformanceInformation
-        {
-            internal int Size;
-            internal IntPtr CommitTotal;
-            internal IntPtr CommitLimit;
-            internal IntPtr CommitPeak;
-            internal IntPtr PhysicalTotal;
-            internal IntPtr PhysicalAvailable;
-            internal IntPtr SystemCache;
-            internal IntPtr KernelTotal;
-            internal IntPtr KernelPaged;
-            internal IntPtr KernelNonPaged;
-            internal IntPtr PageSize;
-            internal int HandlesCount;
-            internal int ProcessCount;
-            internal int ThreadCount;
-        }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SystemTime
@@ -44,20 +18,51 @@ namespace GTweak.Utilities.Configuration
             public uint dwHighDateTime;
         }
 
-        private long GetPhysicalAvailableMemory()
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        private class MemoryStatus
         {
-            if (GetPerformanceInfo(out PerformanceInformation _performanceInformation, Marshal.SizeOf(new PerformanceInformation())))
-                return Convert.ToInt64((_performanceInformation.PhysicalAvailable.ToInt64() * _performanceInformation.PageSize.ToInt64() / 1048576));
-            else
-                return -1;
+            public uint dwLength;
+            public uint dwMemoryLoad;
+            public ulong ullTotalPhys;
+            public ulong ullAvailPhys;
+            public ulong ullTotalPageFile;
+            public ulong ullAvailPageFile;
+            public ulong ullTotalVirtual;
+            public ulong ullAvailVirtual;
+            public ulong ullAvailExtendedVirtual;
+            public MemoryStatus() => dwLength = (uint)Marshal.SizeOf(typeof(MemoryStatus));
+
         }
 
-        private long GetTotalMemory()
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern bool GlobalMemoryStatusEx([In, Out] MemoryStatus lpBuffer);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool GetSystemTimes(out SystemTime lpIdleTime, out SystemTime lpKernelTime, out SystemTime lpUserTime);
+
+        private static int GetTotalMemory()
         {
-            if (GetPerformanceInfo(out PerformanceInformation _performanceInformation, Marshal.SizeOf(new PerformanceInformation())))
-                return Convert.ToInt64((_performanceInformation.PhysicalTotal.ToInt64() * _performanceInformation.PageSize.ToInt64() / 1048576));
+            MemoryStatus memStatus = new MemoryStatus();
+            if (GlobalMemoryStatusEx(memStatus))
+                return (int)(memStatus.ullTotalPhys / 1048576);
             else
-                return -1;
+                return 0;
+        }
+
+        private static int GetAvailableMemory()
+        {
+            MemoryStatus memStatus = new MemoryStatus();
+            if (GlobalMemoryStatusEx(memStatus))
+                return (int)(memStatus.ullAvailPhys / 1048576);
+            else
+                return 0;
+        }
+
+        private static int GetPhysicalAvailableMemory()
+        {
+            int totalMemory = GetTotalMemory();
+            int availableMemory = GetAvailableMemory();
+            return (int)((float)(totalMemory - availableMemory) / totalMemory * 100);
         }
 
         internal async Task<int> GetTotalProcessorUsage()
