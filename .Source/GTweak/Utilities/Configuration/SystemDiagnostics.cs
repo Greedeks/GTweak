@@ -236,7 +236,7 @@ namespace GTweak.Utilities.Configuration
                     _ => "(Unspecified)"
                 };
 
-                if (storageType == "(Unspecified)" && ((ushort)(managementObj["BusType"])) == 7) storageType = "(Media-Type)";
+                if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7) storageType = "(Media-Type)";
 
                 ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
                 string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
@@ -307,6 +307,17 @@ namespace GTweak.Utilities.Configuration
                     { Name: string name } when name.StartsWith("zh") => "baidu.com",
                     { Name: string name } when name.StartsWith("ru") => "yandex.ru",
                     { Name: string name } when name.StartsWith("ko") => "naver.com",
+                    { Name: string name } when name.StartsWith("tm") => "turkmenportal.com",
+                    { Name: string name } when name.StartsWith("vn") => "coccoc.com",
+                    { Name: string name } when name.StartsWith("cu") => "ecured.cu",
+                    { Name: string name } when name.StartsWith("kp") => "naenara.com.kp",
+                    { Name: string name } when name.StartsWith("sy") => "duckduckgo.com",
+                    { Name: string name } when name.StartsWith("jp") => "yahoo.co.jp",
+                    { Name: string name } when name.StartsWith("de") => "t-online.de",
+                    { Name: string name } when name.StartsWith("fr") => "orange.fr",
+                    { Name: string name } when name.StartsWith("es") => "terra.es",
+                    { Name: string name } when name.StartsWith("it") => "libero.it",
+                    { Name: string name } when name.StartsWith("tr") || name.StartsWith("in") => "bing.com",
                     _ => "google.com"
                 };
 
