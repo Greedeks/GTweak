@@ -144,7 +144,7 @@ namespace GTweak.Utilities.Configuration
 
         private void GeVideoInfo()
         {
-            static (int, bool) GetMemorySize(string name)
+            static (bool, int) GetMemorySize(string name)
             {
                 using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}");
                 if (baseKey != null)
@@ -182,20 +182,20 @@ namespace GTweak.Utilities.Configuration
                                             _ => 0
                                         };
                                     }
-                                    return ((int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)), true);
+                                    return (true, (int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)));
                                 }
                             }
                         }
                     }
                 }
-                return (0, false);
+                return (false, 0);
             }
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = (string)managementObj["Name"];
                 int dataMemory = (int)Math.Round((uint)managementObj["AdapterRAM"] / (1024.0 * 1024.0 * 1024.0));
-                (int dataMemoryReg, bool isFound) = GetMemorySize(data);
+                (bool isFound, int dataMemoryReg) = GetMemorySize(data);
                 HardwareData["GPU"] += $"{data}, {(isFound ? dataMemoryReg : dataMemory)} GB\n";
             }
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
@@ -236,14 +236,14 @@ namespace GTweak.Utilities.Configuration
                     _ => "(Unspecified)"
                 };
 
-                if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7) storageType = "(Media-Type)";
+                if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7) 
+                    storageType = "(Media-Type)";
 
                 ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
                 string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
 
                 HardwareData["Storage"] += $"{size} [{(string)managementObj["FriendlyName"]}] {storageType}\n";
             }
-
             HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
         }
 
@@ -262,10 +262,7 @@ namespace GTweak.Utilities.Configuration
                             {
                                 if ((subKey.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},24")?.ToString().ToLowerInvariant() == "usb" || subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},6")?.ToString().ToLowerInvariant().Contains("usb") == true ||
                                 subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},8")?.ToString().ToLowerInvariant().Contains("usb") == true) && subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},2")?.ToString()?.Contains(deviceID) == true)
-                                {
-                                    string value = subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},6")?.ToString();
-                                    return (true, value);
-                                }
+                                    return (true, subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},6")?.ToString());
                             }
                         }
                     }

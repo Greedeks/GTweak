@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="170" Width="370" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="Transparent"  AllowsTransparency="True" 
-        WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False"  IsTabStop="False">
+        Height="170" Width="370" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="Transparent" AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False" IsTabStop="False">
     <Window.Clip>
         <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,370,170"/>
     </Window.Clip>

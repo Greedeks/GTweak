@@ -43,7 +43,7 @@ namespace GTweak
         }
 
         #region Button Title/Animation Window
-        private void ButtonHelp_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Process.Start(new ProcessStartInfo("https://github.com/Greedeks/GTweak/issues/new?assignees=Greedeks&labels=bug,help%20wanted&body=My%20System: " + SystemDiagnostics.HardwareData["Windows"]) { UseShellExecute = true });
+        private void ButtonHelp_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Process.Start(new ProcessStartInfo($"https://github.com/Greedeks/GTweak/issues/new?assignees=Greedeks&labels=bug,help%20wanted&body=**OS: {SystemDiagnostics.HardwareData["Windows"]}**") { UseShellExecute = true });
 
         private void SettingsMenuAnimation()
         {
