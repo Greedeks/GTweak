@@ -113,13 +113,13 @@ namespace GTweak.Utilities.Configuration
         private async void GetBiosInfo()
         {
             string output = await CommandExecutor.GetCommandOutput("bcdedit");
-            HardwareData["Mode"] = output.ToLowerInvariant().Contains(@"efi") ? "UEFI" : "Legacy BIOS";
+            HardwareData["Mode"] = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => (string)managementObj[prop]).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                 string dataSN = (string)managementObj["SerialNumber"];
-                HardwareData["BIOS"] += !string.IsNullOrEmpty(dataSN) && !dataSN.Contains(" ") ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
+                HardwareData["BIOS"] += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
             }
             HardwareData["BIOS"] = HardwareData["BIOS"].TrimEnd('\n');
         }
@@ -130,7 +130,7 @@ namespace GTweak.Utilities.Configuration
             {
                 string data = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}";
                 string dataVersion = (string)managementObj["Version"];
-                HardwareData["MotherBr"] += !string.IsNullOrEmpty(dataVersion) && !dataVersion.Contains(" ") ? $"{data}, V{dataVersion}\n" : $"{data}\n";
+                HardwareData["MotherBr"] += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
             }
             HardwareData["MotherBr"] = HardwareData["MotherBr"].TrimEnd('\n');
         }
@@ -217,7 +217,7 @@ namespace GTweak.Utilities.Configuration
                     35 => "LPDDR5",
                     _ => string.Empty
                 };
-                HardwareData["RAM"] += $"{(manufacturer == "Unknown" || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{(int)Math.Round((ulong)managementObj["Capacity"] / 1024.0 / 1024.0 / 1024.0)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                HardwareData["RAM"] += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{(int)Math.Round((ulong)managementObj["Capacity"] / 1024.0 / 1024.0 / 1024.0)} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
@@ -236,7 +236,7 @@ namespace GTweak.Utilities.Configuration
                     _ => "(Unspecified)"
                 };
 
-                if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7) 
+                if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
                     storageType = "(Media-Type)";
 
                 ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
@@ -280,7 +280,7 @@ namespace GTweak.Utilities.Configuration
                     if (isUsbDevice && !string.IsNullOrEmpty(data))
                         HardwareData["Audio"] += $"{data}\n";
                     else
-                        HardwareData["Audio"] += $"{new[] { "Name", "Caption", "Description" }.Select(prop => (string)managementObj[prop]).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
+                        HardwareData["Audio"] += $"{new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
                 }
             }
             HardwareData["Audio"] = HardwareData["Audio"].TrimEnd('\n');
@@ -289,8 +289,8 @@ namespace GTweak.Utilities.Configuration
         private void GetNetworkAdapters()
         {
             HardwareData["NetAdapter"] = string.Empty;
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["NetAdapter"] += $"{(string)managementObj["Name"]}\n";
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
+                HardwareData["NetAdapter"] += $"{new[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
             HardwareData["NetAdapter"] = HardwareData["NetAdapter"].TrimEnd('\n');
         }
 
