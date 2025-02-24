@@ -95,6 +95,24 @@ USE ONLY FOR WINDOWS 10/11
 
 </br>
 
+### How to Translate a Program 📝
+To translate the program into your language, download the file [Localize.xaml (EN)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml). Translate it and place it in a folder named according to your language code. Then, submit a **Pull Request**.
+
+Or choose a more suitable language for you at the path:
+<div>
+    <pre>
+📂 .Source
+└── 📁 GTweak
+    └── 📁 Languages
+        ├── 📁 en
+        ├── 📁 ru
+        └── 📁 ...
+    </pre>
+</div>
+
+
+</br>
+
 ## Contact
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
