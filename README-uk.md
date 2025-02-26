@@ -23,64 +23,64 @@
  </h1>
 </div>
 
-<!-- information ru --> 
+<!-- information uk --> 
 
-<h2> Широкий спектр функций, включая: 🔩</h2>
+<h2> Широкий спектр функцій включає: 🔩</h2>
 
 ```c#
-- Активация Windows
-- Отключение Защитника Windows, SmartScreen, Antimalware, VBS, UAC 
-- Отключение обновлений Windows и очистка загруженного кэша
-- Отключение неиспользуемых и ненужных служб 
-- Отключение шпионов, кейлоггеров и телеметрии Windows, NVIDIA
-- Блокирование шпионских ip и доменных имен
-- Отключение рекламы и баннеров Windows, SCOOBE
-- Удаление OneDrive, Microsoft Edge и папок этих приложений, Cortana, виджетов
-- Удаление предустановленных приложений Windows 10/11
-- Исправление электропитания драйвера Realtek High Definition Audio
-- Изменение темы и приложений Windows, кастомизация интерфейса
-- Измение параметров Windows, схемы электропитания
-- Просмотр конфигурации и мониторинг системы
+- Активацію Windows
+- Вимкнення Захисника Windows, SmartScreen, Antimalware, VBS, UAC 
+- Вимкнення оновлення Windows та очищення завантаженого кэшу
+- Вимкнення невикористовуваних та непотрібних служб 
+- Вимкнення шпигунів, кейлогерів та телеметрії Windows, NVIDIA
+- Блокування шпигунських ip та доменних імен
+- Вимкнення реклами та банерів Windows, SCOOBE
+- Видалення OneDrive, Microsoft Edge та папок цих додатків, Cortana, віджетів
+- Видалення вбудованих додатків Windows 10/11
+- Виправлення електроживлення драйвера Realtek High Definition Audio
+- Зміна теми Windows та її додатків, тонке налаштування інтерфейсу
+- Зміна параметрів Windows, схеми електроживлення
+- Перегляд конфігурації та моніторинг системи
 ```
 
 
-<h2> Скриншоты 📷</h2>
+<h2> Скриншоти 📷</h2>
 <details>
-  <summary> Конфиденциальность </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Confidentiality.png"/>
+  <summary> Конфіденційність </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Confidentiality.png"/>
 </details>
 <details>
-  <summary> Интерфейс </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Interface.png"/>
+  <summary> Інтерфейс </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Interface.png"/>
 </details>
 <details>
-  <summary> Приложения </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Applications.png"/>
+  <summary> Додатки </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Applications.png"/>
 </details>
 <details>
-  <summary> Службы </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Services.png"/>
+  <summary> Служби </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Services.png"/>
 </details>
 <details>
   <summary> Система </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/System.png"/>
 </details>
 <details>
-  <summary> Прочее </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/More.png"/>
+  <summary> Інше </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/More.png"/>
 </details>
 
 
-<h2> Системные Требования</h2>
+<h2> Системні вимоги</h2>
 
 ```c++
 .NET Framework 4.8
-ПРЕДНАЗНАЧЕНА ТОЛЬКО ДЛЯ WINDOWS 10/11
+ПРИЗНАЧЕНО ЛИШЕ ДЛЯ WINDOWS 10/11
 ```
 </br>
 
 > [!WARNING]  
-> Перед использованием придется остановить антивирус
+> Перед використанням доведеться зупинити антивірус
 
 </br>
 
@@ -95,13 +95,13 @@
 
 </br>
 
-## Перевод ❤️ 
+## Переклад ❤️ 
 - Корейский - [@VenusGirl](https://github.com/VenusGirl)
-- Украинский - [@Kopejkin](https://github.com/Kopejkin)
+- Українська - [@Kopejkin](https://github.com/Kopejkin)
 
 </br>
 
-## Связь со мной
+## Контакти
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
 [![github](https://img.shields.io/badge/Github-gray?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Greedeks)

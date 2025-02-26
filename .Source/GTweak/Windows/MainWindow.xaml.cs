@@ -29,7 +29,8 @@ namespace GTweak
             {
                 "en" => 0,
                 "ko" => 1,
-                _ => 2,
+                "ru" => 2,
+                _ => 3,
             };
             ThemeSelectionMenu.SelectedIndex = SettingsRepository.Theme switch
             {
@@ -179,9 +180,13 @@ namespace GTweak
                     SettingsRepository.ChangingParameters("ko", "Language");
                     App.Language = "ko";
                     break;
-                default:
+                case 2:
                     SettingsRepository.ChangingParameters("ru", "Language");
                     App.Language = "ru";
+                    break;
+                default:
+                    SettingsRepository.ChangingParameters("uk", "Language");
+                    App.Language = "uk";
                     break;
             }
         }
