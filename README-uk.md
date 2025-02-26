@@ -96,7 +96,7 @@
 </br>
 
 ## Переклад ❤️ 
-- Корейский - [@VenusGirl](https://github.com/VenusGirl)
+- Корейська - [@VenusGirl](https://github.com/VenusGirl)
 - Українська - [@Kopejkin](https://github.com/Kopejkin)
 
 </br>
