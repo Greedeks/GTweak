@@ -65,6 +65,9 @@ namespace GTweak.Utilities.Control
         internal static string Theme { get => (string)defaultRegValues["Theme"]; set => defaultRegValues["Theme"] = value; }
         internal static bool IsHiddenIpAddress { get => (bool)defaultRegValues["HiddenIP"]; set => defaultRegValues["HiddenIP"] = value; }
 
+        internal static string[] AvailableLangs = { "en", "ko", "ru", "uk" };
+        internal static string[] AvailableThemes = { "Dark", "Light", "System" };
+
         internal void СheckingParameters()
         {
             bool isRegistryEmpty = false;

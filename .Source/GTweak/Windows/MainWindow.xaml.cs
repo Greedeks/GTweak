@@ -6,6 +6,7 @@ using GTweak.Windows;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,22 +26,17 @@ namespace GTweak
             BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
             BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
             SliderVolume.Value = SettingsRepository.Volume;
-            LanguageSelectionMenu.SelectedIndex = SettingsRepository.Language switch
-            {
-                "en" => 0,
-                "ko" => 1,
-                "ru" => 2,
-                _ => 3,
-            };
-            ThemeSelectionMenu.SelectedIndex = SettingsRepository.Theme switch
-            {
-                "Dark" => 0,
-                "Light" => 1,
-                _ => 2,
-            };
+            LanguageSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Language, SettingsRepository.AvailableLangs);
+            ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Theme, SettingsRepository.AvailableThemes);
 
             App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
             App.ThemeChanged += delegate { this.Close(); new RebootWindow().ShowDialog(); };
+        }
+
+        private int GetSelectedIndex(string value, params string[] listing)
+        {
+            int index = Array.IndexOf(listing, value);
+            return index >= 0 ? index : listing.Length;
         }
 
         #region Button Title/Animation Window
@@ -170,44 +166,16 @@ namespace GTweak
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (LanguageSelectionMenu.SelectedIndex)
-            {
-                case 0:
-                    SettingsRepository.ChangingParameters("en", "Language");
-                    App.Language = "en";
-                    break;
-                case 1:
-                    SettingsRepository.ChangingParameters("ko", "Language");
-                    App.Language = "ko";
-                    break;
-                case 2:
-                    SettingsRepository.ChangingParameters("ru", "Language");
-                    App.Language = "ru";
-                    break;
-                default:
-                    SettingsRepository.ChangingParameters("uk", "Language");
-                    App.Language = "uk";
-                    break;
-            }
+            string selectedLang = SettingsRepository.AvailableLangs.ElementAtOrDefault(LanguageSelectionMenu.SelectedIndex) ?? SettingsRepository.AvailableLangs.Last();
+            SettingsRepository.ChangingParameters(selectedLang, "Language");
+            App.Language = selectedLang;
         }
 
         private void ThemeSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (ThemeSelectionMenu.SelectedIndex)
-            {
-                case 0:
-                    SettingsRepository.ChangingParameters("Dark", "Theme");
-                    App.Theme = "Dark";
-                    break;
-                case 1:
-                    SettingsRepository.ChangingParameters("Light", "Theme");
-                    App.Theme = "Light";
-                    break;
-                default:
-                    SettingsRepository.ChangingParameters("System", "Theme");
-                    App.Theme = "System";
-                    break;
-            }
+            string selectedTheme = SettingsRepository.AvailableThemes.ElementAtOrDefault(ThemeSelectionMenu.SelectedIndex) ?? SettingsRepository.AvailableThemes.Last();
+            SettingsRepository.ChangingParameters(selectedTheme, "Theme");
+            App.Theme = selectedTheme;
         }
 
         private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.SaveFileConfig();
