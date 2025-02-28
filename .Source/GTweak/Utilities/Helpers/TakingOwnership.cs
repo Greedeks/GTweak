@@ -86,6 +86,9 @@ namespace GTweak.Utilities.Helpers
         private enum ACCESS_MASK : uint
         {
             GENERIC_ALL = 0x10000000,
+            GENERIC_READ = 0x80000000,
+            GENERIC_WRITE = 0x40000000,
+            GENERIC_EXECUTE = 0x20000000
         }
 
         [Flags]
@@ -97,7 +100,8 @@ namespace GTweak.Utilities.Helpers
 
         private enum ACCESS_MODE
         {
-            SET_ACCESS
+            SET_ACCESS,
+            DENY_ACCESS
         }
 
         private const string SE_TAKE_OWNERSHIP_NAME = "SeTakeOwnershipPrivilege";
@@ -108,6 +112,9 @@ namespace GTweak.Utilities.Helpers
         private const int NO_INHERITANCE = 0x0;
         private const int SECURITY_BUILTIN_DOMAIN_RID = 0x00000020;
         private const int DOMAIN_ALIAS_RID_ADMINS = 0x00000220;
+        private const int DOMAIN_ALIAS_RID_USERS = 0x00000221;
+        private const int DOMAIN_ALIAS_RID_TRUSTED_INSTALLER = 0x00000222;
+        private const int DOMAIN_ALIAS_RID_WD = 0x00000223;
         private const int TOKEN_QUERY = 8;
         private const int SE_PRIVILEGE_ENABLED = 2;
 
@@ -180,13 +187,36 @@ namespace GTweak.Utilities.Helpers
             SID_IDENTIFIER_AUTHORITY sidNTAuthority = SECURITY_NT_AUTHORITY;
 
             IntPtr sidAdmin = IntPtr.Zero;
+            IntPtr sidUsers = IntPtr.Zero;
+            IntPtr sidTrustedInstaller = IntPtr.Zero;
+            IntPtr sidWD = IntPtr.Zero;
+
             AllocateAndInitializeSid(ref sidNTAuthority, 2,
                                      SECURITY_BUILTIN_DOMAIN_RID,
                                      DOMAIN_ALIAS_RID_ADMINS,
                                      0, 0, 0, 0, 0, 0,
                                      ref sidAdmin);
 
-            EXPLICIT_ACCESS[] explicitAccesss = new EXPLICIT_ACCESS[1];
+            AllocateAndInitializeSid(ref sidNTAuthority, 2,
+                                     SECURITY_BUILTIN_DOMAIN_RID,
+                                     DOMAIN_ALIAS_RID_USERS,
+                                     0, 0, 0, 0, 0, 0,
+                                     ref sidUsers);
+
+            AllocateAndInitializeSid(ref sidNTAuthority, 2,
+                                     SECURITY_BUILTIN_DOMAIN_RID,
+                                     DOMAIN_ALIAS_RID_TRUSTED_INSTALLER,
+                                     0, 0, 0, 0, 0, 0,
+                                     ref sidTrustedInstaller);
+
+            AllocateAndInitializeSid(ref sidNTAuthority, 2,
+                                     SECURITY_BUILTIN_DOMAIN_RID,
+                                     DOMAIN_ALIAS_RID_WD,
+                                     0, 0, 0, 0, 0, 0,
+                                     ref sidWD);
+
+            EXPLICIT_ACCESS[] explicitAccesss = new EXPLICIT_ACCESS[4];
+
             explicitAccesss[0].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
             explicitAccesss[0].grfAccessMode = ACCESS_MODE.SET_ACCESS;
             explicitAccesss[0].grfInheritance = NO_INHERITANCE;
@@ -194,8 +224,29 @@ namespace GTweak.Utilities.Helpers
             explicitAccesss[0].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
             explicitAccesss[0].Trustee.ptstrName = sidAdmin;
 
+            explicitAccesss[1].grfAccessPermissions = ACCESS_MASK.GENERIC_READ | ACCESS_MASK.GENERIC_WRITE;
+            explicitAccesss[1].grfAccessMode = ACCESS_MODE.SET_ACCESS;
+            explicitAccesss[1].grfInheritance = NO_INHERITANCE;
+            explicitAccesss[1].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
+            explicitAccesss[1].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
+            explicitAccesss[1].Trustee.ptstrName = sidUsers;
+
+            explicitAccesss[2].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
+            explicitAccesss[2].grfAccessMode = ACCESS_MODE.DENY_ACCESS;
+            explicitAccesss[2].grfInheritance = NO_INHERITANCE;
+            explicitAccesss[2].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
+            explicitAccesss[2].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
+            explicitAccesss[2].Trustee.ptstrName = sidTrustedInstaller;
+
+            explicitAccesss[3].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
+            explicitAccesss[3].grfAccessMode = ACCESS_MODE.DENY_ACCESS;
+            explicitAccesss[3].grfInheritance = NO_INHERITANCE;
+            explicitAccesss[3].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
+            explicitAccesss[3].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
+            explicitAccesss[3].Trustee.ptstrName = sidWD;
+
             IntPtr acl = IntPtr.Zero;
-            SetEntriesInAcl(1, ref explicitAccesss[0], (IntPtr)0, ref acl);
+            SetEntriesInAcl(4, ref explicitAccesss[0], (IntPtr)0, ref acl);
 
             static void setPrivilege(string privilege, bool allow)
             {
@@ -228,8 +279,6 @@ namespace GTweak.Utilities.Helpers
                 IntPtr.Zero,
                 IntPtr.Zero);
 
-            setPrivilege(SE_TAKE_OWNERSHIP_NAME, false);
-
             SetNamedSecurityInfo(
                 name,
                 type,
@@ -238,9 +287,13 @@ namespace GTweak.Utilities.Helpers
                 acl,
                 IntPtr.Zero);
 
+            setPrivilege(SE_TAKE_OWNERSHIP_NAME, false);
+
             FreeSid(sidAdmin);
+            FreeSid(sidUsers);
+            FreeSid(sidTrustedInstaller);
+            FreeSid(sidWD);
             LocalFree(acl);
         }
     }
 }
-
