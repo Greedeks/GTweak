@@ -41,7 +41,8 @@ namespace GTweak.Utilities.Tweaks
                 "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SecurityHealthService /t REG_DWORD /v Start /d 2 /f &" +
                 "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 2 /f & " +
                 "reg delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 3 /f");
+                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 3 /f & " +
+                "taskkill /f /im smartscreen.exe & rename " + string.Concat(StoragePaths.SystemDisk, @"Windows\System32\BlockSS.exe") + " smartscreen.exe");
 
             RunCmdCommand("sc start WinDefend");
             RunPowerShellCommand("Start-Service -Name WinDefend; Set-Service -Name WinDefend -StartupType Automatic");
@@ -141,6 +142,7 @@ namespace GTweak.Utilities.Tweaks
         internal async void Disable()
         {
             KillProcess("smartscreen");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c taskkill /f /im smartscreen.exe & rename " + string.Concat(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe") + " BlockSS.exe");
             KillProcess("MsMpEng");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");
