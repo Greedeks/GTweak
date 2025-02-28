@@ -373,7 +373,7 @@
     <v:String x:Key="TglButton5_description_system">조정을 사용하면 컴퓨터를 끄거나 다시 시작할 때 열려 있는 프로그램이 강제로 종료된다는 시스템 메시지를 표시하지 않도록 설정할 수 있습니다.</v:String>
     <v:String x:Key="TglButton6_description_system">Microsoft 스토어에서 앱을 직접 업데이트하려는 경우 자동 업데이트 기능을 해제해야 합니다. 따라서 네트워크의 부하가 줄어듭니다.</v:String>
     <v:String x:Key="TglButton7_description_system">일부 버전의 Realtek 고해상도 오디오 드라이버에는 잘못된 작동의 불쾌한 징후가 있으며 사운드 지연이 있는 경우 이 조정을 통해 문제를 해결할 수 있습니다. 몇 초 후에 사운드가 켜지는지 확실하지 않거나 어떤 드라이버가 있는지 모르는 경우 조정을 사용하지 않는 것이 좋습니다.</v:String>
-    <v:String x:Key="TglButton8_description_system">이 조정은 Windows Defender, 스마트 스크린, 맬웨어 방지 프로세서 및 가상화 기반 보안 (VBS)에 불균형적으로 과중한 부하를 주는 기능을 비활성화 및 중지합니다. Windows Defender가 꺼져 있으면 «사용»이 표시될 수 있습니다.</v:String>
+    <v:String x:Key="TglButton8_description_system">이 조정은 Windows Defender, 스마트 스크린, 맬웨어 방지 프로세서 및 가상화 기반 보안 (VBS)에 불균형적으로 과중한 부하를 주는 기능을 비활성화 및 중지합니다.</v:String>
     <v:String x:Key="TglButton9_description_system">이 조정은 UAC (사용자 계정 컨트롤)를 완전히 비활성화하고 방패 아이콘, 보안 알림 및 기타 항목을 제거합니다. UAC는 본격적인 보호 프로그램이 아닙니다.</v:String>
     <v:String x:Key="TglButton10_description_system">보안 또는 보호와 관련된 기능을 비활성화하면 이에 대한 알림을 지속적으로 받게 됩니다. 이 조정은 알림 센터에서 보안 알림을 비활성화합니다.</v:String>
     <v:String x:Key="TglButton11_description_system">인터넷을 통해 다운로드한 exe, msi, bat, cmd 또는 기타 실행 파일을 실행할 때 Windows 보안 경고가 표시됩니다. 이러한 파일의 실행을 매번 확인하는 것은 꽤 지루할 수 있는데, 이 조정을 통해 이 경고를 비활성화할 수 있습니다.</v:String>

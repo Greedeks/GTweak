@@ -142,7 +142,7 @@ namespace GTweak.Utilities.Tweaks
         internal async void Disable()
         {
             KillProcess("smartscreen");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c taskkill /f /im smartscreen.exe & rename " + string.Concat(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe") + " BlockSS.exe");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rename {string.Concat(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe")} BlockSS.exe");
             KillProcess("MsMpEng");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");

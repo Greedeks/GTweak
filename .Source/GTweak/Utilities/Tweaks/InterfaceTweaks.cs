@@ -255,7 +255,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                         });
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message); };
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
                     break;
                 case "TglButton12":
                     if (isChoose)

@@ -167,7 +167,7 @@ namespace GTweak.Utilities.Tweaks
                             process.WaitForExit();
                         }
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex); };
+                    catch (Exception ex) { Debug.WriteLine(ex); }
 
                     switch (packageName)
                     {
@@ -199,7 +199,8 @@ namespace GTweak.Utilities.Tweaks
                                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %d in (""{StoragePaths.SystemDisk}Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""");
                                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /f ""delims="" %i in ('dir /b /s ""{StoragePaths.SystemDisk}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))");
                             }
-                            catch (Exception ex) { Debug.WriteLine(ex); };
+                            catch (Exception ex) { Debug.WriteLine(ex); }
+                            ;
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeAutoLaunch_03AF54719E0271FA0A92D5F15CBA10EA");
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdatem", true);

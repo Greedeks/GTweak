@@ -130,7 +130,7 @@ namespace GTweak.Utilities.Tweaks
         protected static void BlockWDefender(bool isChoose)
         {
             try { Parallel.Invoke(() => { ChangeRules(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
-            catch (Exception ex) { Debug.Write(ex.Message); };
+            catch (Exception ex) { Debug.Write(ex.Message); }
         }
     }
 }
