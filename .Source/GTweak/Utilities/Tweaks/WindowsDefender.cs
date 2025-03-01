@@ -41,9 +41,12 @@ namespace GTweak.Utilities.Tweaks
                 "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SecurityHealthService /t REG_DWORD /v Start /d 2 /f &" +
                 "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 2 /f & " +
                 "reg delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 3 /f & " +
-                "\"taskkill /f /im smartscreen.exe & rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\BlockSS.exe") + "\" smartscreen.exe\" & " +
-                "\"taskkill /f /im smartscreen.exe & rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\BlockAntimalware.exe") + "\" MsMpEng.exe\"");
+                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 3 /f");
+
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\BlockSS.exe") + "\" smartscreen.exe\"");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\BlockAntimalware.exe") + "\" MsMpEng.exe\"");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalware.exe\" ren \"%D\\BlockAntimalware.exe\" MsMpEng.exe");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalwareCore.exe\" ren \"%D\\BlockAntimalwareCore.exe\" MpDefenderCoreService.exe");
 
             RunCmdCommand("sc start WinDefend");
             RunPowerShellCommand("Start-Service -Name WinDefend; Set-Service -Name WinDefend -StartupType Automatic");
@@ -143,10 +146,8 @@ namespace GTweak.Utilities.Tweaks
         internal async void Disable()
         {
             KillProcess("smartscreen");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe") + "\" BlockSS.exe\"");
             KillProcess("MsMpEng");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MsMpEng.exe") + "\" BlockAntimalware.exe\"");
-
+          
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "SmartScreenEnabled", "Off", RegistryValueKind.String);
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System");
@@ -335,6 +336,14 @@ namespace GTweak.Utilities.Tweaks
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Directory\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Drive\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32");
+
+            KillProcess("smartscreen");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe") + "\" BlockSS.exe\"");
+            KillProcess("MsMpEng");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MsMpEng.exe") + "\" BlockAntimalware.exe\"");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");
+            KillProcess("MpDefenderCoreService");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MpDefenderCoreService.exe\" ren \"%D\\MpDefenderCoreService.exe\" BlockAntimalwareCore.exe");
         }
 
         private void KillProcess(string getName)
