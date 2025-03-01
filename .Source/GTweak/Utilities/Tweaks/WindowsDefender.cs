@@ -45,6 +45,7 @@ namespace GTweak.Utilities.Tweaks
 
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\BlockSS.exe") + "\" smartscreen.exe\"");
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\BlockAntimalware.exe") + "\" MsMpEng.exe\"");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\BlockAntimalwareCore.exe") + "\" MpDefenderCoreService.exe\"");
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalware.exe\" ren \"%D\\BlockAntimalware.exe\" MsMpEng.exe");
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalwareCore.exe\" ren \"%D\\BlockAntimalwareCore.exe\" MpDefenderCoreService.exe");
 
@@ -343,6 +344,7 @@ namespace GTweak.Utilities.Tweaks
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MsMpEng.exe") + "\" BlockAntimalware.exe\"");
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");
             KillProcess("MpDefenderCoreService");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MpDefenderCoreService.exe") + "\" BlockAntimalwareCore.exe\"");
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MpDefenderCoreService.exe\" ren \"%D\\MpDefenderCoreService.exe\" BlockAntimalwareCore.exe");
         }
 
