@@ -27,6 +27,9 @@ namespace GTweak.Utilities.Control
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
+        internal static string[] AvailableLangs = { "en", "ko", "ru", "uk" };
+        internal static string[] AvailableThemes = { "Dark", "Light", "System" };
+
         internal static int PID = 0;
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
@@ -65,14 +68,11 @@ namespace GTweak.Utilities.Control
         internal static string Theme { get => (string)defaultRegValues["Theme"]; set => defaultRegValues["Theme"] = value; }
         internal static bool IsHiddenIpAddress { get => (bool)defaultRegValues["HiddenIP"]; set => defaultRegValues["HiddenIP"] = value; }
 
-        internal static string[] AvailableLangs = { "en", "ko", "ru", "uk" };
-        internal static string[] AvailableThemes = { "Dark", "Light", "System" };
-
         internal void СheckingParameters()
         {
             bool isRegistryEmpty = false;
 
-            foreach (var key in defaultRegValues.Keys)
+            foreach (string key in defaultRegValues.Keys)
             {
                 if (RegistryHelp.ValueExists(StoragePaths.RegistryLocation, key))
                 {

@@ -375,7 +375,7 @@ namespace GTweak.Utilities.Tweaks
                     },
                 };
 
-                string serchScheme = default,
+                string searchScheme = default,
                     unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
                     pathTempFile = StoragePaths.FolderLocation + @"\UltimatePerformance.pow";
 
@@ -385,15 +385,15 @@ namespace GTweak.Utilities.Tweaks
                     {
                         foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE IsActive=false").Get())
                         {
-                            serchScheme = Convert.ToString(managementObj["InstanceID"]);
-                            serchScheme = Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value;
+                            searchScheme = Convert.ToString(managementObj["InstanceID"]);
+                            searchScheme = Regex.Match(searchScheme, @"\{([^)]*)\}").Groups[1].Value;
 
-                            if (RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{serchScheme}", "Description", string.Empty).Contains("-18") &&
-                            RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{serchScheme}", "FriendlyName", string.Empty).Contains("-19"))
+                            if (RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "Description", string.Empty).Contains("-18") &&
+                            RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "FriendlyName", string.Empty).Contains("-19"))
                             {
                                 using (_powercfg)
                                 {
-                                    _powercfg.StartInfo.Arguments = $"/setactive {serchScheme}";
+                                    _powercfg.StartInfo.Arguments = $"/setactive {searchScheme}";
                                     _powercfg.Start();
 
                                     _powercfg.StartInfo.Arguments = unlockFrequency;
@@ -402,7 +402,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                         }
 
-                        if (string.IsNullOrEmpty(serchScheme))
+                        if (string.IsNullOrEmpty(searchScheme))
                         {
                             new UnarchiveManager(pathTempFile, Properties.Resources.Ultimate_Performance_pow);
 
@@ -427,15 +427,32 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else
                     {
-                        string activeScheme = @"Microsoft:PowerPlan\\{" + RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{serchScheme}", "ActivePowerScheme", string.Empty) + "}";
+                        string activeScheme = @"Microsoft:PowerPlan\\{" + RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "ActivePowerScheme", string.Empty) + "}";
+                        string selectedScheme = string.Empty, backupScheme = string.Empty;
 
                         foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE InstanceID !='" + activeScheme + "'").Get())
-                            serchScheme = Convert.ToString(managementObj["InstanceID"]);
-
-                        using (_powercfg)
                         {
-                            _powercfg.StartInfo.Arguments = $"/setactive {Regex.Match(serchScheme, @"\{([^)]*)\}").Groups[1].Value}";
-                            _powercfg.Start();
+                            searchScheme = Regex.Match(Convert.ToString(managementObj["InstanceID"]), @"\{([^)]*)\}").Groups[1].Value;
+
+                            if (!RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "Description", string.Empty).Contains("-10") &&
+                            !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "FriendlyName", string.Empty).Contains("-11"))
+                            {
+                                selectedScheme = searchScheme;
+                                break;
+                            }
+
+                            backupScheme ??= searchScheme;
+                        }
+
+                        selectedScheme ??= backupScheme;
+
+                        if (!string.IsNullOrEmpty(selectedScheme))
+                        {
+                            using (_powercfg)
+                            {
+                                _powercfg.StartInfo.Arguments = $"/setactive {selectedScheme}";
+                                _powercfg.Start();
+                            }
                         }
                     }
                 }
