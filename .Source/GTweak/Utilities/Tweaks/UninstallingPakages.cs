@@ -15,118 +15,56 @@ namespace GTweak.Utilities.Tweaks
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
-        private static readonly string pathPackage = $@"{StoragePaths.SystemDisk}Program Files\WindowsApps";
+        private static readonly string pathPackage = Path.Combine(StoragePaths.SystemDisk, "Program Files", "WindowsApps");
 
         #region Lists packages
-        internal static Dictionary<string, bool> IsAppUnavailable = new Dictionary<string, bool>
+        internal static readonly Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
         {
-            ["MicrosoftStore"] = false,
-            ["Todos"] = false,
-            ["BingWeather"] = false,
-            ["Microsoft3D"] = false,
-            ["Music"] = false,
-            ["GetHelp"] = false,
-            ["MicrosoftOfficeHub"] = false,
-            ["MicrosoftSolitaireCollection"] = false,
-            ["MixedReality"] = false,
-            ["Xbox"] = false,
-            ["Paint3D"] = false,
-            ["OneNote"] = false,
-            ["People"] = false,
-            ["MicrosoftStickyNotes"] = false,
-            ["Widgets"] = false,
-            ["ScreenSketch"] = false,
-            ["Phone"] = false,
-            ["Photos"] = false,
-            ["FeedbackHub"] = false,
-            ["SoundRecorder"] = false,
-            ["Alarms"] = false,
-            ["SkypeApp"] = false,
-            ["Maps"] = false,
-            ["Camera"] = false,
-            ["Video"] = false,
-            ["BingNews"] = false,
-            ["Mail"] = false,
-            ["MicrosoftTeams"] = false,
-            ["PowerAutomateDesktop"] = false,
-            ["Cortana"] = false,
-            ["ClipChamp"] = false,
-            ["GetStarted"] = false,
-            ["OneDrive"] = false,
-            ["BingSports"] = false,
-            ["BingFinance"] = false,
-            ["MicrosoftFamily"] = false,
-            ["BingSearch"] = false,
-            ["Outlook"] = false,
-            ["QuickAssist"] = false,
-            ["DevHome"] = false,
-            ["WindowsTerminal"] = false,
-            ["LinkedIn"] = false,
-            ["WebMediaExtensions"] = false,
-            ["OneConnect"] = false,
-            ["Edge"] = false
-        };
-
-        private static readonly SortedList<string, List<string>> PackageScripts = new SortedList<string, List<string>>
-        {
-            ["MicrosoftStore"] = new List<string>(1) { "Microsoft.WindowsStore" },
-            ["Todos"] = new List<string>(1) { "Microsoft.Todos" },
-            ["BingWeather"] = new List<string>(1) { "Microsoft.BingWeather" },
-            ["Microsoft3D"] = new List<string>(1) { "Microsoft.Microsoft3DViewer" },
-            ["Music"] = new List<string>(1) { "Microsoft.ZuneMusic" },
-            ["GetHelp"] = new List<string>(1) { "Microsoft.GetHelp" },
-            ["MicrosoftOfficeHub"] = new List<string>(1) { "Microsoft.MicrosoftOfficeHub" },
-            ["MicrosoftSolitaireCollection"] = new List<string>(1) { "Microsoft.MicrosoftSolitaireCollection" },
-            ["MixedReality"] = new List<string>(1) { "Microsoft.MixedReality.Portal" },
-            ["Xbox"] = new List<string>(7) { "Microsoft.XboxApp", "Microsoft.GamingApp", "Microsoft.XboxGamingOverlay", "Microsoft.XboxGameOverlay", "Microsoft.XboxIdentityProvider", "Microsoft.Xbox.TCUI", "Microsoft.XboxSpeechToTextOverlay" },
-            ["Paint3D"] = new List<string>(1) { "Microsoft.MSPaint" },
-            ["OneNote"] = new List<string>(1) { "Microsoft.Office.OneNote" },
-            ["People"] = new List<string>(1) { "Microsoft.People" },
-            ["MicrosoftStickyNotes"] = new List<string>(1) { "Microsoft.MicrosoftStickyNotes" },
-            ["Widgets"] = new List<string>(1) { "MicrosoftWindows.Client.WebExperience" },
-            ["ScreenSketch"] = new List<string>(1) { "Microsoft.ScreenSketch" },
-            ["Phone"] = new List<string>(1) { "Microsoft.YourPhone" },
-            ["Photos"] = new List<string>(1) { "Microsoft.Windows.Photos" },
-            ["FeedbackHub"] = new List<string>(1) { "Microsoft.WindowsFeedbackHub" },
-            ["SoundRecorder"] = new List<string>(1) { "Microsoft.WindowsSoundRecorder" },
-            ["Alarms"] = new List<string>(1) { "Microsoft.WindowsAlarms" },
-            ["SkypeApp"] = new List<string>(1) { "Microsoft.SkypeApp" },
-            ["Maps"] = new List<string>(1) { "Microsoft.WindowsMaps" },
-            ["Camera"] = new List<string>(1) { "Microsoft.WindowsCamera" },
-            ["Video"] = new List<string>(1) { "Microsoft.ZuneVideo" },
-            ["BingNews"] = new List<string>(1) { "Microsoft.BingNews" },
-            ["Mail"] = new List<string>(1) { "microsoft.windowscommunicationsapps" },
-            ["MicrosoftTeams"] = new List<string>(2) { "MicrosoftTeams", "MSTeams" },
-            ["PowerAutomateDesktop"] = new List<string>(1) { "Microsoft.PowerAutomateDesktop" },
-            ["Cortana"] = new List<string>(1) { "Microsoft.549981C3F5F10" },
-            ["ClipChamp"] = new List<string>(1) { "Clipchamp.Clipchamp" },
-            ["GetStarted"] = new List<string>(1) { "Microsoft.Getstarted" },
-            ["BingSports"] = new List<string>(1) { "Microsoft.BingSports" },
-            ["BingFinance"] = new List<string>(1) { "Microsoft.BingFinance" },
-            ["MicrosoftFamily"] = new List<string>(1) { "MicrosoftCorporationII.MicrosoftFamily" },
-            ["BingSearch"] = new List<string>(1) { "Microsoft.BingSearch" },
-            ["Outlook"] = new List<string>(1) { "Microsoft.OutlookForWindows" },
-            ["QuickAssist"] = new List<string>(1) { "MicrosoftCorporationII.QuickAssist" },
-            ["DevHome"] = new List<string>(1) { "Microsoft.Windows.DevHome" },
-            ["WindowsTerminal"] = new List<string>(1) { "Microsoft.WindowsTerminal" },
-            ["LinkedIn"] = new List<string>(1) { "Microsoft.LinkedIn" },
-            ["WebMediaExtensions"] = new List<string>(1) { "Microsoft.WebMediaExtensions" },
-            ["OneConnect"] = new List<string>(1) { "Microsoft.OneConnect" },
-            ["Edge"] = new List<string>(2) { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*" }
-        };
-
-        private static readonly SortedList<string, string> PackageAliases = new SortedList<string, string>
-        {
-            ["MicrosoftSolitaireCollection"] = "solitaire",
-            ["MicrosoftOfficeHub"] = "officehub",
-            ["FeedbackHub"] = "feedback",
-            ["Mail"] = "communicationsapps",
-            ["ClipChamp"] = "Clipchamp Video Editor",
-            ["Music"] = "zunemusic",
-            ["Video"] = "zunevideo",
-            ["Widgets"] = "Windows.Client.WebExperience",
-            ["LinkedIn"] = "LinkedInforWindows",
-            ["Edge"] = "MicrosoftEdge"
+            ["MicrosoftStore"] = (null, false, new List<string> { "Microsoft.WindowsStore" }),
+            ["Todos"] = (null, false, new List<string> { "Microsoft.Todos" }),
+            ["BingWeather"] = (null, false, new List<string> { "Microsoft.BingWeather" }),
+            ["Microsoft3D"] = (null, false, new List<string> { "Microsoft.Microsoft3DViewer" }),
+            ["Music"] = ("zunemusic", false, new List<string> { "Microsoft.ZuneMusic" }),
+            ["GetHelp"] = (null, false, new List<string> { "Microsoft.GetHelp" }),
+            ["MicrosoftOfficeHub"] = ("officehub", false, new List<string> { "Microsoft.MicrosoftOfficeHub" }),
+            ["MicrosoftSolitaireCollection"] = ("solitaire", false, new List<string> { "Microsoft.MicrosoftSolitaireCollection" }),
+            ["MixedReality"] = (null, false, new List<string> { "Microsoft.MixedReality.Portal" }),
+            ["Xbox"] = (null, false, new List<string> { "Microsoft.XboxApp", "Microsoft.GamingApp", "Microsoft.XboxGamingOverlay", "Microsoft.XboxGameOverlay", "Microsoft.XboxIdentityProvider", "Microsoft.Xbox.TCUI", "Microsoft.XboxSpeechToTextOverlay" }),
+            ["Paint3D"] = (null, false, new List<string> { "Microsoft.MSPaint" }),
+            ["OneNote"] = (null, false, new List<string> { "Microsoft.Office.OneNote" }),
+            ["People"] = (null, false, new List<string> { "Microsoft.People" }),
+            ["MicrosoftStickyNotes"] = (null, false, new List<string> { "Microsoft.MicrosoftStickyNotes" }),
+            ["Widgets"] = ("Windows.Client.WebExperience", false, new List<string> { "MicrosoftWindows.Client.WebExperience" }),
+            ["ScreenSketch"] = (null, false, new List<string> { "Microsoft.ScreenSketch" }),
+            ["Phone"] = (null, false, new List<string> { "Microsoft.YourPhone" }),
+            ["Photos"] = (null, false, new List<string> { "Microsoft.Windows.Photos" }),
+            ["FeedbackHub"] = ("feedback", false, new List<string> { "Microsoft.WindowsFeedbackHub" }),
+            ["SoundRecorder"] = (null, false, new List<string> { "Microsoft.WindowsSoundRecorder" }),
+            ["Alarms"] = (null, false, new List<string> { "Microsoft.WindowsAlarms" }),
+            ["SkypeApp"] = (null, false, new List<string> { "Microsoft.SkypeApp" }),
+            ["Maps"] = (null, false, new List<string> { "Microsoft.WindowsMaps" }),
+            ["Camera"] = (null, false, new List<string> { "Microsoft.WindowsCamera" }),
+            ["Video"] = ("zunevideo", false, new List<string> { "Microsoft.ZuneVideo" }),
+            ["BingNews"] = (null, false, new List<string> { "Microsoft.BingNews" }),
+            ["Mail"] = ("communicationsapps", false, new List<string> { "microsoft.windowscommunicationsapps" }),
+            ["MicrosoftTeams"] = (null, false, new List<string> { "MicrosoftTeams", "MSTeams" }),
+            ["PowerAutomateDesktop"] = (null, false, new List<string> { "Microsoft.PowerAutomateDesktop" }),
+            ["Cortana"] = (null, false, new List<string> { "Microsoft.549981C3F5F10" }),
+            ["ClipChamp"] = ("Clipchamp Video Editor", false, new List<string> { "Clipchamp.Clipchamp" }),
+            ["GetStarted"] = (null, false, new List<string> { "Microsoft.Getstarted" }),
+            ["BingSports"] = (null, false, new List<string> { "Microsoft.BingSports" }),
+            ["BingFinance"] = (null, false, new List<string> { "Microsoft.BingFinance" }),
+            ["MicrosoftFamily"] = (null, false, new List<string> { "MicrosoftCorporationII.MicrosoftFamily" }),
+            ["BingSearch"] = (null, false, new List<string> { "Microsoft.BingSearch" }),
+            ["Outlook"] = (null, false, new List<string> { "Microsoft.OutlookForWindows" }),
+            ["QuickAssist"] = (null, false, new List<string> { "MicrosoftCorporationII.QuickAssist" }),
+            ["DevHome"] = (null, false, new List<string> { "Microsoft.Windows.DevHome" }),
+            ["WindowsTerminal"] = (null, false, new List<string> { "Microsoft.WindowsTerminal" }),
+            ["LinkedIn"] = ("LinkedInforWindows", false, new List<string> { "Microsoft.LinkedIn" }),
+            ["WebMediaExtensions"] = (null, false, new List<string> { "Microsoft.WebMediaExtensions" }),
+            ["OneConnect"] = (null, false, new List<string> { "Microsoft.OneConnect" }),
+            ["Edge"] = ("MicrosoftEdge", false, new List<string> { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*" }),
+            ["OneDrive"] = (null, false, null)
         };
         #endregion
 
@@ -142,27 +80,35 @@ namespace GTweak.Utilities.Tweaks
                 {
                     try
                     {
-                        using Process process = new Process();
-                        process.StartInfo.UseShellExecute = false;
-                        process.StartInfo.CreateNoWindow = true;
-                        process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-                        process.EnableRaisingEvents = true;
-                        process.StartInfo.FileName = "powershell.exe";
+                        var (Alias, IsUnavailable, Scripts) = PackagesDetails[packageName];
+
+                        using Process process = new Process
+                        {
+                            StartInfo =
+                            {
+                                UseShellExecute = false,
+                                CreateNoWindow = true,
+                                WindowStyle = ProcessWindowStyle.Minimized,
+                                FileName = "powershell.exe"
+                            },
+                            EnableRaisingEvents = true
+                        };
+
                         process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                         process.Start();
                         process.WaitForExit();
 
-                        foreach (string getPackage in PackageScripts[packageName])
+                        foreach (string getScript in Scripts)
                         {
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getPackage}*"") do rd /s /q ""%i""");
-                            process.StartInfo.Arguments = $"Get-AppxPackage -Name {getPackage} -AllUsers | Remove-AppxPackage";
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getScript}*"") do rd /s /q ""%i""");
+                            process.StartInfo.Arguments = $"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage";
                             process.Start();
                             process.WaitForExit();
                         }
 
-                        if (PackageAliases.ContainsKey(packageName))
+                        if (!string.IsNullOrEmpty(Alias))
                         {
-                            process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{PackageAliases[packageName]}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                            process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{Alias}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
                             process.Start();
                             process.WaitForExit();
                         }

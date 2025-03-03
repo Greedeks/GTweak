@@ -71,7 +71,7 @@ namespace GTweak.View
                         {
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
+                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, true, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
                                 UpdateViewStatePakages();
                             });
 
@@ -81,7 +81,7 @@ namespace GTweak.View
 
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
+                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, false, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
                                 UpdateViewStatePakages();
                             });
                         });
@@ -101,7 +101,7 @@ namespace GTweak.View
                         {
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                UninstallingPakages.IsAppUnavailable[appImage.Name] = true;
+                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, true, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
                                 UpdateViewStatePakages();
                             });
 
@@ -109,7 +109,7 @@ namespace GTweak.View
 
                             await Dispatcher.InvokeAsync(() =>
                             {
-                                UninstallingPakages.IsAppUnavailable[appImage.Name] = false;
+                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, false, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
                                 UpdateViewStatePakages();
                             });
                         });
@@ -122,17 +122,13 @@ namespace GTweak.View
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => UpdateViewStatePakages();
 
-
         private ImageSource AvailabilityInstalledPackage(string packageName, string partName, bool isOneDrive = false)
         {
-            static bool isContains(string pattern)
-            {
-                return new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace).IsMatch(UninstallingPakages.InstalledPackages);
-            }
+            static bool isContains(string pattern) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace).IsMatch(UninstallingPakages.InstalledPackages);
 
             return !isOneDrive
-                ? !UninstallingPakages.IsAppUnavailable[packageName] ? isContains(partName) ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime")
-                : !UninstallingPakages.IsAppUnavailable[packageName] ? UninstallingPakages.IsOneDriveInstalled ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime");
+                ? !UninstallingPakages.PackagesDetails[packageName].IsUnavailable ? isContains(partName) ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime")
+                : !UninstallingPakages.PackagesDetails[packageName].IsUnavailable ? UninstallingPakages.IsOneDriveInstalled ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime");
         }
 
         private void UpdateViewStatePakages()

@@ -148,7 +148,7 @@ namespace GTweak.Utilities.Tweaks
         {
             KillProcess("smartscreen");
             KillProcess("MsMpEng");
-          
+
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "SmartScreenEnabled", "Off", RegistryValueKind.String);
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System");

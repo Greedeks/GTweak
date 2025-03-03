@@ -7,33 +7,29 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.ServiceProcess;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : Firewall
     {
-        private static readonly SortedList<string, string> ProgramsUUP = new SortedList<string, string>
+        private static readonly Dictionary<string, (string Default, string Blocked)> UpdateFilesWin = new Dictionary<string, (string Default, string Blocked)>()
         {
-            ["Uso"] = "usoclient.exe",
-            ["Worker"] = "MoUsoCoreWorker.exe",
-            ["Core"] = "wuaucltcore.exe",
-            ["Agent"] = "WaaSMedicAgent.exe",
-            ["Re_Uso"] = "BlockUOrchestrator-GTweak.exe",
-            ["Re_Worker"] = "BlockUpdate-GTweak.exe",
-            ["Re_Core"] = "BlockUpdateCore-GTweak.exe",
-            ["Re_Agent"] = "BlockUpdateAgent-GTweak.exe"
+            { "Uso", ("usoclient.exe", "BlockUOrchestrator-GTweak.exe") },
+            { "Worker", ("MoUsoCoreWorker.exe", "BlockUpdate-GTweak.exe") },
+            { "Core", ("wuaucltcore.exe", "BlockUpdateCore-GTweak.exe") },
+            { "Agent", ("WaaSMedicAgent.exe", "BlockUpdateAgent-GTweak.exe") }
         };
 
-        private static string PathsWinUUP(string program, bool isOldWay = false)
+        private static string FilesPathUpdate(string program, bool isOldWay = false)
         {
-            string path = isOldWay ? string.Concat(StoragePaths.SystemDisk, @"Windows\System32\") : string.Concat(StoragePaths.SystemDisk, @"Windows\UUS\amd64\");
+            string selectedPath = isOldWay || Regex.IsMatch(program, "usoclient|BlockUOrchestrator", RegexOptions.IgnoreCase)
+            ? Path.Combine(StoragePaths.SystemDisk, "Windows", "System32") : Path.Combine(StoragePaths.SystemDisk, "Windows", "UUS", "amd64");
 
-            if (program == "Uso" || program == "Re_Uso")
-                return string.Concat(string.Concat(StoragePaths.SystemDisk, @"Windows\System32\"), ProgramsUUP[program]);
-            else
-                return string.Concat(path, ProgramsUUP[program]);
+            return Path.Combine(selectedPath, program);
         }
 
         internal void AnalyzeAndUpdate(ServicesView servicesV)
@@ -122,14 +118,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation", "Start", "4");
 
-            servicesV.TglButton15.StateNA = !File.Exists(PathsWinUUP("Re_Worker")) & !File.Exists(PathsWinUUP("Re_Core")) & !File.Exists(PathsWinUUP("Re_Agent")) &
-                !File.Exists(PathsWinUUP("Re_Worker", true)) & !File.Exists(PathsWinUUP("Re_Core", true)) & !File.Exists(PathsWinUUP("Re_Agent", true))
-                && (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wisvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DmEnrollmentSvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wuauserv", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DoSvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", "4"));
+            servicesV.TglButton15.StateNA = UpdateFilesWin.All(key => File.Exists(FilesPathUpdate(key.Value.Default)) || File.Exists(FilesPathUpdate(key.Value.Default, true)));
 
             servicesV.TglButton16.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", "4") ||
@@ -308,13 +297,11 @@ namespace GTweak.Utilities.Tweaks
                     {
                         backgroundWorker.DoWork += delegate
                         {
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c {(isChoose ? "rename " + PathsWinUUP("Worker") + " " + ProgramsUUP["Re_Worker"] : "rename " + PathsWinUUP("Re_Worker") + " " + ProgramsUUP["Worker"])} & " +
-                                $"{(isChoose ? "rename " + PathsWinUUP("Core") + " " + ProgramsUUP["Re_Core"] : "rename " + PathsWinUUP("Re_Core") + " " + ProgramsUUP["Core"])} & " +
-                                $"{(isChoose ? "rename " + PathsWinUUP("Agent") + " " + ProgramsUUP["Re_Agent"] : "rename " + PathsWinUUP("Re_Agent") + " " + ProgramsUUP["Agent"])} & " +
-                                $"{(isChoose ? "rename " + PathsWinUUP("Uso") + " " + ProgramsUUP["Re_Uso"] : "rename " + PathsWinUUP("Re_Uso") + " " + ProgramsUUP["Uso"])} & " +
-                                $"{(isChoose ? "rename " + PathsWinUUP("Worker", true) + " " + ProgramsUUP["Re_Worker"] : "rename " + PathsWinUUP("Re_Worker", true) + " " + ProgramsUUP["Worker"])} & " +
-                                $"{(isChoose ? "rename " + PathsWinUUP("Core", true) + " " + ProgramsUUP["Re_Core"] : "rename " + PathsWinUUP("Re_Core", true) + " " + ProgramsUUP["Core"])} & " +
-                                $"{(isChoose ? "rename " + PathsWinUUP("Agent", true) + " " + ProgramsUUP["Re_Agent"] : "rename " + PathsWinUUP("Re_Agent", true) + " " + ProgramsUUP["Agent"])} ");
+                            string argurment = default;
+                            foreach (var key in UpdateFilesWin)
+                                argurment += isChoose ? $"rename {FilesPathUpdate(key.Value.Default)} {key.Value.Blocked} & " : $"rename {FilesPathUpdate(key.Value.Blocked)} {key.Value.Default} & ";
+
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c {argurment.Substring(0, argurment.Length - 3)}");
                         };
                         backgroundWorker.RunWorkerAsync();
                     }
