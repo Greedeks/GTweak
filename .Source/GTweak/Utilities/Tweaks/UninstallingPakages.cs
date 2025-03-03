@@ -17,7 +17,6 @@ namespace GTweak.Utilities.Tweaks
         private static bool isLocalAccount = false;
         private static readonly string pathPackage = Path.Combine(StoragePaths.SystemDisk, "Program Files", "WindowsApps");
 
-        #region Lists packages
         internal static readonly Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
         {
             ["MicrosoftStore"] = (null, false, new List<string> { "Microsoft.WindowsStore" }),
@@ -66,7 +65,6 @@ namespace GTweak.Utilities.Tweaks
             ["Edge"] = ("MicrosoftEdge", false, new List<string> { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*" }),
             ["OneDrive"] = (null, false, null)
         };
-        #endregion
 
         internal async void ViewInstalledPackages() => InstalledPackages = await CommandExecutor.GetCommandOutput("Get-AppxPackage | Select-Object -ExpandProperty Name");
 
