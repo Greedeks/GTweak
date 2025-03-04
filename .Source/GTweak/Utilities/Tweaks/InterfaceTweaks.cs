@@ -224,12 +224,10 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton7":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", isChoose ? 1 : 0, RegistryValueKind.DWord);
-
                     RestartExplorer(new Process());
                     break;
                 case "TglButton8":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", isChoose ? 1 : 0, RegistryValueKind.DWord);
-
                     RestartExplorer(new Process());
                     break;
                 case "TglButton9":
@@ -445,6 +443,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", 1, RegistryValueKind.DWord);
                     else
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer");
+                    RestartExplorer(new Process());
                     break;
                 case "TglButton30":
                     if (isChoose)

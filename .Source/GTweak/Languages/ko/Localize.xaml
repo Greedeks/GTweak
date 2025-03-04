@@ -218,7 +218,7 @@
     <v:String x:Key="TglButton26_description_interface">왼쪽 메뉴 목록의 탐색기 개요에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서).</v:String>
     <v:String x:Key="TglButton27_description_interface">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
     <v:String x:Key="TglButton28_description_interface">조정은 마우스 커서를 마우스오버할 때 바탕화면 요소의 도구 설명을 비활성화합니다.</v:String>
-    <v:String x:Key="TglButton29_description_interface">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다.</v:String>
+    <v:String x:Key="TglButton29_description_interface">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton30_description_interface">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
     <!--#endregion-->
 

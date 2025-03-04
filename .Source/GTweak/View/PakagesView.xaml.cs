@@ -147,9 +147,9 @@ namespace GTweak.View
             OneNote.Source = AvailabilityInstalledPackage("OneNote", "Microsoft.Office.OneNote");
             People.Source = AvailabilityInstalledPackage("People", "Microsoft.People");
             MicrosoftStickyNotes.Source = AvailabilityInstalledPackage("MicrosoftStickyNotes", "Microsoft.MicrosoftStickyNotes");
-            Widgets.Source = AvailabilityInstalledPackage("Widgets", "MicrosoftWindows.Client.WebExperience");
+            Widgets.Source = AvailabilityInstalledPackage("Widgets", "MicrosoftWindows.Client.WebExperience|Microsoft.WidgetsPlatformRuntime");
             ScreenSketch.Source = AvailabilityInstalledPackage("ScreenSketch", "Microsoft.ScreenSketch");
-            Phone.Source = AvailabilityInstalledPackage("Phone", "Microsoft.YourPhone");
+            Phone.Source = AvailabilityInstalledPackage("Phone", "Microsoft.YourPhone|MicrosoftWindows.CrossDevice");
             Photos.Source = AvailabilityInstalledPackage("Photos", "Microsoft.Windows.Photos");
             FeedbackHub.Source = AvailabilityInstalledPackage("FeedbackHub", "Microsoft.WindowsFeedbackHub");
             SoundRecorder.Source = AvailabilityInstalledPackage("SoundRecorder", "Microsoft.WindowsSoundRecorder");

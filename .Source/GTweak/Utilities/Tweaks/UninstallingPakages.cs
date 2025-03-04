@@ -33,9 +33,9 @@ namespace GTweak.Utilities.Tweaks
             ["OneNote"] = (null, false, new List<string> { "Microsoft.Office.OneNote" }),
             ["People"] = (null, false, new List<string> { "Microsoft.People" }),
             ["MicrosoftStickyNotes"] = (null, false, new List<string> { "Microsoft.MicrosoftStickyNotes" }),
-            ["Widgets"] = ("Windows.Client.WebExperience", false, new List<string> { "MicrosoftWindows.Client.WebExperience" }),
+            ["Widgets"] = ("Windows.Client.WebExperience", false, new List<string> { "MicrosoftWindows.Client.WebExperience", "Microsoft.WidgetsPlatformRuntime" }),
             ["ScreenSketch"] = (null, false, new List<string> { "Microsoft.ScreenSketch" }),
-            ["Phone"] = (null, false, new List<string> { "Microsoft.YourPhone" }),
+            ["Phone"] = (null, false, new List<string> { "Microsoft.YourPhone", "MicrosoftWindows.CrossDevice" }),
             ["Photos"] = (null, false, new List<string> { "Microsoft.Windows.Photos" }),
             ["FeedbackHub"] = ("feedback", false, new List<string> { "Microsoft.WindowsFeedbackHub" }),
             ["SoundRecorder"] = (null, false, new List<string> { "Microsoft.WindowsSoundRecorder" }),
@@ -133,14 +133,62 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Windows Search", "CortanaConsent", 0, RegistryValueKind.DWord);
                             break;
                         case "Edge":
+                            string script = $@"
+                            $region = (Get-ItemProperty -Path 'Registry::HKEY_USERS\.DEFAULT\Control Panel\International\Geo').Name
+                            $policyFile = '{StoragePaths.SystemDisk}Windows\System32\IntegratedServicesRegionPolicySet.json'
+
+                            if (Test-Path $policyFile) {{
+                                $json = Get-Content -Path $policyFile -Raw | ConvertFrom-Json
+                            
+                                if (-not $json.Policies) {{
+                                    exit 1
+                                }}
+                            
+                                $policy = $json.Policies | Where-Object {{ $_.'$comment' -eq 'Edge is uninstallable.' }}
+                            
+                                if ($policy) {{
+                                    if ($policy.defaultState -ne 'enabled') {{
+                                        $policy.defaultState = 'enabled'
+                                    }}
+                            
+                                    if ($policy.conditions.region.enabled -notcontains $region) {{
+                                        $policy.conditions.region.enabled += $region
+                                        $policy.conditions.region.enabled = $policy.conditions.region.enabled | Sort-Object -Unique
+                            
+                                        $json | ConvertTo-Json -Depth 10 | Set-Content -Path $policyFile -Encoding UTF8
+                                    }}
+                                }}
+                            }} else {{
+                                exit 1
+                            }}";
+
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} {script}");
+
+                            foreach (Process process in Process.GetProcessesByName("msedge"))
+                                process.Kill();
+
+                            try
+                            {
+                                Process.Start(new ProcessStartInfo
+                                {
+                                    FileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge", "Application", "msedge.exe"),
+                                    Arguments = "--uninstall --force-uninstall --system-level --verbose-logging",
+                                    UseShellExecute = true,
+                                    WindowStyle = ProcessWindowStyle.Hidden
+                                })?.WaitForExit();
+                            }
+                            catch (Exception ex) { Debug.WriteLine(ex); }
+
                             DeletingTask(edgeTasks);
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /с rmdir /s /q %LocalAppData%\Microsoft\Edge");
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""{StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del ""%f""");
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""{StoragePaths.SystemDisk}Users"" %f in (*Edge*) do @if exist ""%f"" del /f /q ""%f""");
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}", true);
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %d in (""{StoragePaths.SystemDisk}Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""");
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /f ""delims="" %i in ('dir /b /s ""{StoragePaths.SystemDisk}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))");
+
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeAutoLaunch_03AF54719E0271FA0A92D5F15CBA10EA");
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdatem", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
@@ -151,6 +199,31 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Classes\MSEdgeHTM", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
+
+                            foreach (var path in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeWebView") })
+                            {
+                                TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
+                                CommandExecutor.RunCommand($@"/c rmdir /s /q ""{path}""");
+                            }
+
+                            try
+                            {
+                                using RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications");
+                                foreach (string subKey in key?.GetSubKeyNames() ?? Array.Empty<string>())
+                                {
+                                    using RegistryKey subKeyEntry = key.OpenSubKey(subKey);
+                                    string path = subKeyEntry?.GetValue("Path") as string;
+                                    if (!string.IsNullOrEmpty(path) && path.Contains("MicrosoftEdgeDevToolsClient"))
+                                    {
+                                        path = path.Replace(@"\AppxManifest.xml", "").Trim();
+                                        TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
+                                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c rmdir /s /q ""{path}""");
+                                        key.DeleteSubKey(subKey);
+                                        return;
+                                    }
+                                }
+                            }
+                            catch (Exception ex) { Debug.WriteLine(ex); }
                             break;
                     }
                 });
