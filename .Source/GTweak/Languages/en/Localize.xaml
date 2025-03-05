@@ -346,7 +346,7 @@
     <v:String x:Key="tgl4_system">«Hibernation» and «Fast Startup» technology</v:String>
     <v:String x:Key="tgl5_system">The shutdown warning window</v:String>
     <v:String x:Key="tgl6_system">Auto-update of applications via the Microsoft Store</v:String>
-    <v:String x:Key="tgl7_system">Delay the appearance of sound - Realtek Sound driver</v:String>
+    <v:String x:Key="tgl7_system">Delay the appearance of sound - Realtek Sound Driver</v:String>
     <v:String x:Key="tgl8_system">Windows Defender, Antimalware, SmartScreen and VBS</v:String>
     <v:String x:Key="tgl9_system">UAC (User Account Control)</v:String>
     <v:String x:Key="tgl10_system">Security notifications from the Notification Center</v:String>

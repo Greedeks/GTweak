@@ -346,7 +346,7 @@
     <v:String x:Key="tgl4_system">Технологія «Гібернація» та «Швидкий запуск»</v:String>
     <v:String x:Key="tgl5_system">Вікно попередження під час завершення роботи</v:String>
     <v:String x:Key="tgl6_system">Автооновлення додатків через магазин Microsoft Store</v:String>
-    <v:String x:Key="tgl7_system">Затримка відтворення звуку - Realtek Sound driver</v:String>
+    <v:String x:Key="tgl7_system">Затримка відтворення звуку - Realtek Sound Driver</v:String>
     <v:String x:Key="tgl8_system">Захисник Windows, Antimalware, SmartScreen та VBS</v:String>
     <v:String x:Key="tgl9_system">UAC (контроль облікових записів)</v:String>
     <v:String x:Key="tgl10_system">Сповіщення про безпеку від Центру сповіщень</v:String>

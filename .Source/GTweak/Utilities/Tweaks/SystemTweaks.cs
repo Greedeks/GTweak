@@ -60,26 +60,30 @@ namespace GTweak.Utilities.Tweaks
 
             try
             {
-                using RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}", true);
+                using RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}");
+                if (regKey == null)
+                    return;
 
-                if (regKey == null) return;
-
-                foreach (string keyname in regKey.GetSubKeyNames())
+                foreach (var subKeyName in regKey.GetSubKeyNames())
                 {
-                    using RegistryKey subkey = regKey.OpenSubKey(keyname, true);
-                    if (subkey == null) continue;
-
-                    if (subkey.GetValue("DriverDesc")?.ToString() == "Realtek High Definition Audio")
+                    using RegistryKey subKey = regKey.OpenSubKey(subKeyName);
+                    if (subKey != null)
                     {
-                        using RegistryKey powerKey = subkey.OpenSubKey("PowerSettings", true);
+                        if (subKey.GetValue("DriverDesc") is string driverDesc && driverDesc.Equals("Realtek High Definition Audio", StringComparison.OrdinalIgnoreCase))
+                        {
+                            using RegistryKey powerSettingsKey = subKey.OpenSubKey("PowerSettings");
+                            if (powerSettingsKey == null)
+                                return;
 
-                        byte[] conservationIdleTime = powerKey.GetValue("ConservationIdleTime") as byte[];
-                        byte[] idlePowerState = powerKey.GetValue("IdlePowerState") as byte[];
-                        byte[] performanceIdleTime = powerKey.GetValue("PerformanceIdleTime") as byte[];
-
-                        systemV.TglButton7.StateNA = conservationIdleTime?[0].ToString() != "255" || idlePowerState?[0].ToString() != "0" || performanceIdleTime?[0].ToString() != "255";
+                            if (!(powerSettingsKey.GetValue("ConservationIdleTime") is byte[] conservationIdleTime) || !(powerSettingsKey.GetValue("IdlePowerState") is byte[] idlePowerState) || !(powerSettingsKey.GetValue("PerformanceIdleTime") is byte[] performanceIdleTime))
+                                systemV.TglButton7.StateNA = true;
+                            else
+                                systemV.TglButton7.StateNA = conservationIdleTime?[0].ToString() != "255" || idlePowerState?[0].ToString() != "0" || performanceIdleTime?[0].ToString() != "255";
+                            return;
+                        }
                     }
                 }
+
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
@@ -219,15 +223,22 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton7":
                     try
                     {
-                        RegistryKey registrykey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}", true);
-                        foreach (string KeyName in registrykey.GetSubKeyNames())
+                        using RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}");
+                        if (regKey == null)
+                            return;
+
+                        foreach (var subKeyName in regKey.GetSubKeyNames())
                         {
-                            RegistryKey keyView = registrykey?.OpenSubKey(KeyName);
-                            if (keyView?.GetValue("DriverDesc")?.ToString() == "Realtek High Definition Audio")
+                            using RegistryKey subKey = regKey.OpenSubKey(subKeyName);
+                            if (subKey != null)
                             {
-                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "ConservationIdleTime", isChoose ? new byte[] { 0xFF, 0xFF, 0xFF, 0xFF } : new byte[] { 0x0a, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
-                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "IdlePowerState", isChoose ? Encoding.Unicode.GetBytes("\0\0") : new byte[] { 0x03, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
-                                RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\Class\{{4d36e96c-e325-11ce-bfc1-08002be10318}}\{KeyName}\PowerSettings", "PerformanceIdleTime", isChoose ? new byte[] { 0xFF, 0xFF, 0xFF, 0xFF } : new byte[] { 0x0a, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                                if (subKey.GetValue("DriverDesc") is string driverDesc && driverDesc.Equals("Realtek High Definition Audio", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    RegistryHelp.Write(Registry.LocalMachine, $@"{@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}"}\{subKeyName}\PowerSettings", "ConservationIdleTime", isChoose ? new byte[] { 0xFF, 0xFF, 0xFF, 0xFF } : new byte[] { 0x0a, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                                    RegistryHelp.Write(Registry.LocalMachine, $@"{@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}"}\{subKeyName}\PowerSettings", "IdlePowerState", isChoose ? Encoding.Unicode.GetBytes("\0\0") : new byte[] { 0x03, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                                    RegistryHelp.Write(Registry.LocalMachine, $@"{@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}"}\{subKeyName}\PowerSettings", "PerformanceIdleTime", isChoose ? new byte[] { 0xFF, 0xFF, 0xFF, 0xFF } : new byte[] { 0x0a, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                                    return;
+                                }
                             }
                         }
                     }
