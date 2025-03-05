@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
@@ -169,13 +170,18 @@ namespace GTweak.Utilities.Tweaks
 
                             try
                             {
-                                Process.Start(new ProcessStartInfo
+                                string setupPath = Path.Combine(Directory.GetDirectories(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge", "Application")).FirstOrDefault(), "Installer", "setup.exe");
+
+                                if (File.Exists(setupPath))
                                 {
-                                    FileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge", "Application", "msedge.exe"),
-                                    Arguments = "--uninstall --force-uninstall --system-level --verbose-logging",
-                                    UseShellExecute = true,
-                                    WindowStyle = ProcessWindowStyle.Hidden
-                                })?.WaitForExit();
+                                    Process.Start(new ProcessStartInfo
+                                    {
+                                        FileName = setupPath,
+                                        Arguments = "--uninstall --force-uninstall --system-level --verbose-logging",
+                                        UseShellExecute = true,
+                                        WindowStyle = ProcessWindowStyle.Hidden
+                                    })?.WaitForExit();
+                                }
                             }
                             catch (Exception ex) { Debug.WriteLine(ex); }
 
@@ -200,7 +206,7 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Classes\MSEdgeHTM", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
 
-                            foreach (var path in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeWebView") })
+                            foreach (var path in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeWebView"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Temp") })
                             {
                                 TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                 CommandExecutor.RunCommand($@"/c rmdir /s /q ""{path}""");
