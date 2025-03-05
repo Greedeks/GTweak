@@ -19,7 +19,7 @@ namespace GTweak.View
             InitializeComponent();
 
             if (!WindowsLicense.IsWindowsActivated)
-                new ViewNotification().Show("", "info", (string)Application.Current.Resources["viewlicense_notification"]);
+                new ViewNotification().Show("", "info", "viewlicense_notification");
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)

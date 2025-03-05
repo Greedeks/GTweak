@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -54,7 +53,7 @@ namespace GTweak.Utilities.Tweaks
                     ChangeRules(isChoose, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
                 });
             }
-            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch { new ViewNotification().Show("", "warn", "firewalloff_notification"); }
         }
 
 
@@ -85,7 +84,7 @@ namespace GTweak.Utilities.Tweaks
         protected static void BlockSpyDomain(in bool isChoose)
         {
             try { RulesHosts(isChoose); }
-            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["firewalloff_notification"]); }
+            catch { new ViewNotification().Show("", "warn", "firewalloff_notification"); }
         }
 
         private static void RulesHosts(in bool isChoose)

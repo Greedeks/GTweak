@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Management;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -91,9 +90,9 @@ namespace GTweak.Utilities.Tweaks
                 waitingWindow.Close();
 
                 if (IsWindowsActivated)
-                    new ViewNotification(300).Show("restart", "warn", (string)Application.Current.Resources["successactivate_notification"]);
+                    new ViewNotification(300).Show("restart", "warn", "successactivate_notification");
                 else
-                    new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessactivate_notification"]);
+                    new ViewNotification(300).Show("", "warn", "notsuccessactivate_notification");
             }
 
         }

@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Windows;
 
 namespace GTweak.Utilities.Control
 {
@@ -102,7 +101,7 @@ namespace GTweak.Utilities.Control
         internal static void SaveFileConfig()
         {
             if (INIManager.IsAllTempDictionaryEmpty)
-                new ViewNotification().Show("", "info", (string)Application.Current.Resources["export_warning_notification"]);
+                new ViewNotification().Show("", "info", "export_warning_notification");
             else
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -154,10 +153,10 @@ namespace GTweak.Utilities.Control
                 if (File.ReadLines(StoragePaths.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(StoragePaths.Config).Any(line => line.Contains("Slider")))
                     new ImportWindow(openFileDialog.SafeFileName).ShowDialog();
                 else
-                    new ViewNotification().Show("", "info", (string)Application.Current.Resources["import_empty_notification"]);
+                    new ViewNotification().Show("", "info", "import_empty_notification");
             }
             else
-                new ViewNotification().Show("", "info", (string)Application.Current.Resources["import_warning_notification"]);
+                new ViewNotification().Show("", "info", "import_warning_notification");
         }
 
         internal static void SelfRemoval()

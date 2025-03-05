@@ -30,12 +30,12 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 4, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "N", RegistryValueKind.String);
 
-                    new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["success_defrag_notification"]);
+                    new ViewNotification(300).Show("", "info", "success_defrag_notification");
                 }
-                catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["error_defrag_notification"]); }
+                catch { new ViewNotification().Show("", "warn", "error_defrag_notification"); }
             }
             else
-                new ViewNotification().Show("", "info", (string)Application.Current.Resources["warn_defrag_notification"]);
+                new ViewNotification().Show("", "info", "warn_defrag_notification");
         }
 
         internal static void CreateRestorePoint()
@@ -62,9 +62,9 @@ namespace GTweak.Utilities.Tweaks
                 OutParams = RestorePoint.InvokeMethod("CreateRestorePoint", InParams, null);
 
                 if ((uint)OutParams["ReturnValue"] == 0)
-                    new ViewNotification(300).Show("", "info", (string)Application.Current.Resources["successpoint_notification"]);
+                    new ViewNotification(300).Show("", "info", "successpoint_notification");
                 else
-                    new ViewNotification(300).Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]);
+                    new ViewNotification(300).Show("", "warn", "notsuccessfulpoint_notification");
 
                 isWorkingCreatePoint = false;
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
@@ -72,7 +72,7 @@ namespace GTweak.Utilities.Tweaks
             catch
             {
                 isWorkingCreatePoint = false;
-                new ViewNotification().Show("", "warn", (string)Application.Current.Resources["notsuccessfulpoint_notification"]);
+                new ViewNotification().Show("", "warn", "notsuccessfulpoint_notification");
             }
         }
 
@@ -83,7 +83,7 @@ namespace GTweak.Utilities.Tweaks
                 EnableRecovery();
                 CommandExecutor.RunCommand("/c rstrui.exe");
             }
-            catch { new ViewNotification().Show("", "warn", (string)Application.Current.Resources["notsuccessfulrecovery_notification"]); }
+            catch { new ViewNotification().Show("", "warn", "notsuccessfulrecovery_notification"); }
         }
 
         internal static void DisableRestorePoint()
@@ -102,7 +102,7 @@ namespace GTweak.Utilities.Tweaks
                 DisableSR(StoragePaths.SystemDisk + @"\\");
             }
             else
-                new ViewNotification().Show("", "info", (string)Application.Current.Resources["warndisable_recovery_notification"]);
+                new ViewNotification().Show("", "info", "warndisable_recovery_notification");
         }
 
         private static void EnableRecovery()

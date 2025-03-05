@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -214,7 +213,7 @@ namespace GTweak.Utilities.Tweaks
         {
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate { ClearFileSystemCache(true); EmptyWorkingSetFunction(); ClearTempSystemCache(); });
-            new ViewNotification(500).Show("", "info", (string)Application.Current.Resources["clear_ram_notification"]);
+            new ViewNotification(500).Show("", "info", "clear_ram_notification");
         }
     }
 }

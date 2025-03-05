@@ -27,7 +27,7 @@ namespace GTweak.Utilities.Control
                             "info" => (string)Application.Current.Resources["title_info_notification"],
                             _ => string.Empty,
                         },
-                        TextNotice = content,
+                        TextNotice = (string)Application.Current.Resources[content],
                         ActionNotice = action,
                     };
 

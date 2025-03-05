@@ -18,10 +18,10 @@ namespace GTweak.View
         private void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
             if (WindowsLicense.IsWindowsActivated)
-                new ViewNotification().Show("", "info", (string)FindResource("readyactivate_notification"));
+                new ViewNotification().Show("", "info", "readyactivate_notification");
             else
             {
-                new ViewNotification().Show("", "warn", (string)FindResource("activatewin_notification"));
+                new ViewNotification().Show("", "warn", "activatewin_notification");
                 WindowsLicense.StartActivation();
             }
         }
@@ -30,7 +30,7 @@ namespace GTweak.View
         {
             WaitingWindow waitingWindow = new WaitingWindow();
             waitingWindow.Show();
-            new ViewNotification().Show("", "info", (string)FindResource("createpoint_notification"));
+            new ViewNotification().Show("", "info", "createpoint_notification");
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate { SystemMaintenance.CreateRestorePoint(); });
             waitingWindow.Close();
@@ -49,7 +49,7 @@ namespace GTweak.View
             {
                 try { SystemMaintenance.DisableRestorePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
             });
-            await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", (string)FindResource("disable_recovery_notification")); });
+            await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "disable_recovery_notification"); });
         }
     }
 }

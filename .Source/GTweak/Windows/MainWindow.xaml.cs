@@ -100,7 +100,7 @@ namespace GTweak
                     this.Close();
                     break;
                 case true:
-                    new ViewNotification().Show("", "warn", (string)FindResource("windefclose_notification"));
+                    new ViewNotification().Show("", "warn", "windefclose_notification");
                     break;
             }
         }

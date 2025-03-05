@@ -94,7 +94,7 @@ namespace GTweak.View
                     {
                         timer.Stop();
 
-                        new ViewNotification().Show("", "info", (string)FindResource("onedrive_notification"));
+                        new ViewNotification().Show("", "info", "onedrive_notification");
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(async delegate
