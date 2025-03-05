@@ -134,7 +134,7 @@ namespace GTweak.Utilities.Tweaks
                             break;
                         case "Edge":
                             string script = $@"
-                            $region = 'TE'
+                            $region = (Get-ItemProperty -Path 'Registry::HKEY_USERS\.DEFAULT\Control Panel\International\Geo').Name
                             $policyFile = '{StoragePaths.SystemDisk}Windows\System32\IntegratedServicesRegionPolicySet.json'
 
                             if (Test-Path $policyFile) {{
