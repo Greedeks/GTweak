@@ -79,6 +79,7 @@ namespace GTweak.Utilities.Tweaks
                     try
                     {
                         var (Alias, IsUnavailable, Scripts) = PackagesDetails[packageName];
+                        string argument = "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command";
 
                         using Process process = new Process
                         {
@@ -92,22 +93,21 @@ namespace GTweak.Utilities.Tweaks
                             EnableRaisingEvents = true
                         };
 
-                        process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
+                        process.StartInfo.Arguments = $"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"";
                         process.Start();
                         process.WaitForExit();
 
                         foreach (string getScript in Scripts)
                         {
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getScript}*"") do rd /s /q ""%i""");
-                            process.StartInfo.Arguments = $"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage";
+                            process.StartInfo.Arguments = $"{argument} \"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage\"";
                             process.Start();
                             process.WaitForExit();
                         }
 
                         if (!string.IsNullOrEmpty(Alias))
                         {
-                            process.StartInfo.Arguments = $"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{Alias}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose";
-                            process.Start();
+                            process.StartInfo.Arguments = $"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{Alias}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"";
                             process.WaitForExit();
                         }
                     }
@@ -134,7 +134,7 @@ namespace GTweak.Utilities.Tweaks
                             break;
                         case "Edge":
                             string script = $@"
-                            $region = (Get-ItemProperty -Path 'Registry::HKEY_USERS\.DEFAULT\Control Panel\International\Geo').Name
+                            $region = 'TE'
                             $policyFile = '{StoragePaths.SystemDisk}Windows\System32\IntegratedServicesRegionPolicySet.json'
 
                             if (Test-Path $policyFile) {{
@@ -162,7 +162,7 @@ namespace GTweak.Utilities.Tweaks
                                 exit 1
                             }}";
 
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} {script}");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"");
 
                             foreach (Process process in Process.GetProcessesByName("msedge"))
                                 process.Kill();

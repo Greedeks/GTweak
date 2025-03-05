@@ -13,7 +13,7 @@ namespace GTweak.Utilities.Helpers
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
-                    Arguments = arguments,
+                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -45,7 +45,7 @@ namespace GTweak.Utilities.Helpers
                 Process.Start(new ProcessStartInfo()
                 {
                     FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
-                    Arguments = arguments,
+                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,
                 });
