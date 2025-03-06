@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -174,9 +175,14 @@ namespace GTweak.Utilities.Tweaks
             return num != 0;
         }
 
-        private static async void ClearTempSystemCache()
+        private async static void ClearTempSystemCache()
         {
-            CommandExecutor.RunCommand(@$"/c rd /s /q {StoragePaths.SystemDisk}Windows\Temp & rd /s /q %localappdata%\Temp");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @$"cmd.exe /c rd /s /q {StoragePaths.SystemDisk}Windows\Temp & " +
+                @$"rd /s /q %localappdata%\Temp & rd /s /q {StoragePaths.SystemDisk}Windows\ff*.tmp & rd /s /q {StoragePaths.SystemDisk}Windows\History\* & " +
+                $@"rd /s /q {StoragePaths.SystemDisk}Windows\CbsTemp\* & rd /s /q {StoragePaths.SystemDisk}Windows\System32\SleepStudy\* & " +
+                $@"rd /s /q {StoragePaths.SystemDisk}Users\%USERNAME%\AppData\Local\Microsoft\Windows\INetCache\IE\* & rd /s /q {StoragePaths.SystemDisk}Windows\Downloaded Program Files\* & " +
+                $@"del /f /q {StoragePaths.SystemDisk}Windows\setupapi.log & rd /s /q {StoragePaths.SystemDisk}Windows\Panther\* & " +
+                $@"del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.app.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.dev.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.offline.log");
 
             foreach (Process process in Process.GetProcesses())
             {
@@ -186,7 +192,13 @@ namespace GTweak.Utilities.Tweaks
                     {
                         process.Kill();
 
-                        CommandExecutor.RunCommand(@"/c attrib -h -r -s IconCache.db & del /a /q ""%localappdata%\IconCache.db"" & del /a /f /q ""%localappdata%\Microsoft\Windows\Explorer\iconcache*""");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
+                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +
+                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_exif.db & " +
+                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_idx.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_sr.db & " +
+                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_wide.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_96.db & " +
+                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_256.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_1024.db");
+
                         await Task.Delay(200);
 
                         process.Start();
