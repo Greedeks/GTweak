@@ -1,28 +1,42 @@
 <div align="center">
 <img  src="https://github.com/user-attachments/assets/e63d303a-2d07-4882-8a68-cb43ebbbe7df"/><br/><br/> 
 
-<img src="https://github.com/Greedeks/GTweak/blob/main/.github/Preview.gif"/>
-<br/><br/>
+<img src="https://github.com/Greedeks/GTweak/blob/main/.github/Preview.gif"/><br/>
 
+<div align="center" style="margin: 20px 0; text-align: center;">
+ 
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=16BD72)](https://github.com/Greedeks/GTweak/releases/latest)
 ![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=%231EB1D2)
 ![Stars](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&color=16BD72)
 ![Size](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&color=%231EB1D2)
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&color=16BD72)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 
-<br/>
-
-<a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/0c2f2947-6d63-46b3-9933-8e72a8b45ed3" width="260" height="68" alt="Download the latest version"></a><br/>
-
-<!-- language --> 
- <h1>
-<img width="32 height="32" src="https://github.com/user-attachments/assets/3c13dbd0-ad57-4eca-8e11-49c973376172"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">English</a> |  
-   <img width="32 height="32 src="https://github.com/user-attachments/assets/a5b56bef-469f-41d9-ba88-ff8d7cd2c2f1"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">한국어</a> |  
-   <img width="32 height="32 src="https://github.com/user-attachments/assets/f836a025-3430-4cdd-9860-0378b7815463"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">Русский</a> |  
-   <img width="32 height="32 src="https://github.com/user-attachments/assets/a0b08c5b-96f5-4cca-b38c-7c758d5f0909"/> <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">Українська</a> 
- </h1>
 </div>
 
+<br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/0c2f2947-6d63-46b3-9933-8e72a8b45ed3" width="260" height="68" alt="Download the latest version"></a><br/><br/>
+
+<!-- language --> 
+<div align="center">
+  <h1>🌍 Available Languages:</h1>
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://hatscripts.github.io/circle-flags/flags/us.svg" width="40">
+  </a>
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
+    <img src="https://hatscripts.github.io/circle-flags/flags/kr.svg" width="40">
+  </a>
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
+    <img src="https://hatscripts.github.io/circle-flags/flags/ru.svg" width="40">
+  </a>
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
+    <img src="https://hatscripts.github.io/circle-flags/flags/ua.svg" width="40">
+  </a>
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README-tr.md">
+    <img src="https://hatscripts.github.io/circle-flags/flags/tr.svg" width="40">
+  </a>
+</div>
+</div><br/>
+
+---
 <h2> A wide range of functions, including: 🔩</h2>
 
 ```c#
