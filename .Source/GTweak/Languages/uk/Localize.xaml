@@ -424,7 +424,7 @@
     <v:String x:Key="title_recovery_more">Відновлення системи</v:String>
     <v:String x:Key="text_recovery_more">Запуск процесу відновлення навіть тоді, коли відновлення системи вимкнено.</v:String>
     <v:String x:Key="btntext_recovery_more">Відновити</v:String>
-    <v:String x:Key="textpoint_more">Точка, створена за допомогою GTWeak</v:String>
+    <v:String x:Key="textpoint_more">Точка, створена за допомогою GTweak</v:String>
     <v:String x:Key="title_clear_more">Очищення пам'яті</v:String>
     <v:String x:Key="text_clear_more">Очищення кешу системних файлів у пам'яті комп'ютера, тимчасових файлів та кешу ескізів.</v:String>
     <v:String x:Key="btntext_clear_more">Очистити</v:String>
