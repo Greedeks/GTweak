@@ -165,25 +165,29 @@ namespace GTweak.Utilities.Tweaks
 
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"");
 
-                            foreach (Process process in Process.GetProcessesByName("msedge"))
-                                process.Kill();
-
-                            try
+                            foreach (var package in new[] { new { ProcessName = "msedge", AppName = "Edge", Arguments = "--uninstall --msedge --channel=stable --system-level --verbose-logging" },
+                                new { ProcessName = "msedgewebview2", AppName = "EdgeWebView", Arguments = "--uninstall --msedgewebview --system-level --verbose-logging" }})
                             {
-                                string setupPath = Path.Combine(Directory.GetDirectories(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge", "Application")).FirstOrDefault(), "Installer", "setup.exe");
+                                foreach (var process in Process.GetProcessesByName(package.ProcessName))
+                                    process.Kill();
 
-                                if (File.Exists(setupPath))
+                                try
                                 {
-                                    Process.Start(new ProcessStartInfo
+                                    string setupPath = Path.Combine(Directory.GetDirectories(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", package.AppName, "Application")).FirstOrDefault(), "Installer", "setup.exe");
+
+                                    if (File.Exists(setupPath))
                                     {
-                                        FileName = setupPath,
-                                        Arguments = "--uninstall --force-uninstall --system-level --verbose-logging",
-                                        UseShellExecute = true,
-                                        WindowStyle = ProcessWindowStyle.Hidden
-                                    })?.WaitForExit();
+                                        Process.Start(new ProcessStartInfo
+                                        {
+                                            FileName = setupPath,
+                                            Arguments = package.Arguments,
+                                            UseShellExecute = true,
+                                            WindowStyle = ProcessWindowStyle.Hidden
+                                        })?.WaitForExit();
+                                    }
                                 }
+                                catch (Exception ex) { Debug.WriteLine(ex); }
                             }
-                            catch (Exception ex) { Debug.WriteLine(ex); }
 
                             DeletingTask(edgeTasks);
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /с rmdir /s /q %LocalAppData%\Microsoft\Edge");
@@ -206,7 +210,8 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Classes\MSEdgeHTM", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
 
-                            foreach (var path in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeWebView"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Temp") })
+                            foreach (var path in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeCore"), 
+                                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeUpdate"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Temp") })
                             {
                                 TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                 CommandExecutor.RunCommand($@"/c rmdir /s /q ""{path}""");
@@ -219,7 +224,7 @@ namespace GTweak.Utilities.Tweaks
                                 {
                                     using RegistryKey subKeyEntry = key.OpenSubKey(subKey);
                                     string path = subKeyEntry?.GetValue("Path") as string;
-                                    if (!string.IsNullOrEmpty(path) && path.Contains("MicrosoftEdgeDevToolsClient"))
+                                    if (!string.IsNullOrEmpty(path) && path.Contains("Edge"))
                                     {
                                         path = path.Replace(@"\AppxManifest.xml", "").Trim();
                                         TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
