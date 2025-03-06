@@ -1,8 +1,7 @@
 <div align="center">
-<img  src="https://github.com/user-attachments/assets/ada62635-5392-45ff-94b1-40c76532141f"/><br/><br/> 
-
-<img src="https://github.com/Greedeks/GTweak/blob/main/.github/Preview.gif"/><br/>
-
+<img src="https://github.com/user-attachments/assets/370e1249-4c40-420b-85b1-2978e47f0060"/><br/>
+<img src="https://github.com/Greedeks/GTweak/blob/main/.github/Preview.gif"/><br/><br/>
+ 
 <div align="center" style="margin: 20px 0; text-align: center;">
  
 [![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=179962)](https://github.com/Greedeks/GTweak/releases/latest)
