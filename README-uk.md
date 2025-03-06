@@ -30,9 +30,6 @@
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
     <img src="https://hatscripts.github.io/circle-flags/flags/ua.svg" width="40">
   </a>
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-tr.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/tr.svg" width="40">
-  </a>
 </div>
 </div><br/>
 
