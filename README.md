@@ -31,7 +31,7 @@
     <img src="https://hatscripts.github.io/circle-flags/flags/ua.svg" width="40">
   </a>
 </div>
-</div><br/>
+</div>
 
 ---
 <h2> A wide range of functions, including: 🔩</h2>

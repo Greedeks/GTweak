@@ -31,7 +31,7 @@
     <img src="https://hatscripts.github.io/circle-flags/flags/ua.svg" width="40">
   </a>
 </div>
-</div><br/>
+</div>
 
 ---
 <h2> 다음과 같은 다양한 기능을 제공합니다: 🔩</h2>
