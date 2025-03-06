@@ -12,7 +12,7 @@
 
 <br/>
 
-<a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/44dc4624-b88c-418d-9f6f-6fa04c2199c0" width="260" height="68" alt="Download the latest version"></a><br/>
+<a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/0c2f2947-6d63-46b3-9933-8e72a8b45ed3" width="260" height="68" alt="Download the latest version"></a><br/>
 
 <!-- language --> 
  <h1>
