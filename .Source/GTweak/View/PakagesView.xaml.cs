@@ -3,6 +3,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,7 +26,7 @@ namespace GTweak.View
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                if (time.TotalSeconds % 4 == 0)
+                if (time.TotalSeconds % 6 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.DoWork += delegate { new UninstallingPakages().ViewInstalledPackages(); };
@@ -69,21 +70,25 @@ namespace GTweak.View
 
                         await backgroundQueue.QueueTask(async delegate
                         {
-                            await Dispatcher.InvokeAsync(() =>
+                            try
                             {
-                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, true, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
-                                UpdateViewStatePakages();
-                            });
+                                await Dispatcher.InvokeAsync(() =>
+                                {
+                                    UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, true, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
+                                    UpdateViewStatePakages();
+                                });
 
-                            await UninstallingPakages.DeletingPackage(applicationName);
+                                await UninstallingPakages.DeletingPackage(applicationName);
 
-                            await Task.Delay(3000);
+                                await Task.Delay(3000);
 
-                            await Dispatcher.InvokeAsync(() =>
-                            {
-                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, false, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
-                                UpdateViewStatePakages();
-                            });
+                                await Dispatcher.InvokeAsync(() =>
+                                {
+                                    UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, false, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
+                                    UpdateViewStatePakages();
+                                });
+                            }
+                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
                         });
 
                         timer.Start();
@@ -99,19 +104,23 @@ namespace GTweak.View
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(async delegate
                         {
-                            await Dispatcher.InvokeAsync(() =>
+                            try
                             {
-                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, true, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
-                                UpdateViewStatePakages();
-                            });
+                                await Dispatcher.InvokeAsync(() =>
+                                {
+                                    UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, true, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
+                                    UpdateViewStatePakages();
+                                });
 
-                            await UninstallingPakages.ResetOneDrive();
+                                await UninstallingPakages.ResetOneDrive();
 
-                            await Dispatcher.InvokeAsync(() =>
-                            {
-                                UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, false, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
-                                UpdateViewStatePakages();
-                            });
+                                await Dispatcher.InvokeAsync(() =>
+                                {
+                                    UninstallingPakages.PackagesDetails[appImage.Name] = (UninstallingPakages.PackagesDetails[appImage.Name].Alias, false, UninstallingPakages.PackagesDetails[appImage.Name].Scripts);
+                                    UpdateViewStatePakages();
+                                });
+                            }
+                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
                         });
 
                         timer.Start();

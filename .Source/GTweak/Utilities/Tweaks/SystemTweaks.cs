@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -87,7 +88,7 @@ namespace GTweak.Utilities.Tweaks
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
-            systemV.TglButton8.StateNA = RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0") ||
+            systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe")) ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", "1") ||
