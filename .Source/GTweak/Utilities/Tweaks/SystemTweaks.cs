@@ -75,7 +75,7 @@ namespace GTweak.Utilities.Tweaks
                                 if (powerSettingsKey != null)
                                 {
                                     if (!(powerSettingsKey.GetValue("ConservationIdleTime") is byte[] conservationIdleTime) || !(powerSettingsKey.GetValue("IdlePowerState") is byte[] idlePowerState) || !(powerSettingsKey.GetValue("PerformanceIdleTime") is byte[] performanceIdleTime))
-                                        systemV.TglButton7.StateNA = true;
+                                        systemV.TglButton7.StateNA = false;
                                     else
                                         systemV.TglButton7.StateNA = conservationIdleTime?[0].ToString() != "255" || idlePowerState?[0].ToString() != "0" || performanceIdleTime?[0].ToString() != "255";
                                 }
@@ -84,7 +84,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
             }
-            catch { systemV.TglButton7.StateNA = true; }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
             systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe")) ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", "0") ||

@@ -80,7 +80,7 @@ namespace GTweak.Utilities.Configuration
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLower()}'").Get())
                 nameProfile = (string)managementObj["FullName"];
 
-            return nameProfile != string.Empty ? nameProfile : Environment.UserName.ToLower();
+            return !string.IsNullOrWhiteSpace(nameProfile) ? nameProfile : Environment.UserName.ToLower();
         }
 
         internal void GetHardwareData()
