@@ -76,7 +76,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 waitingWindow.Show();
 
-                if (SystemDiagnostics.WindowsClientVersion.Contains("10"))
+                if (SystemDiagnostics.IsWindowsVersion[10])
                     await RunCommand("/c assoc .vbs=VBSFile", 500);
 
                 await RunCommand($"/c slmgr.vbs //b /ipk {keyWindow}", 4000);

@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Windows;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
@@ -48,10 +49,17 @@ namespace GTweak.Utilities.Control
             Parallel.Invoke(() =>
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
-                    SystemDiagnostics.WindowsClientVersion = Convert.ToString(managementObj["Caption"]); ;
+                { 
+                    SystemDiagnostics.WindowsClientVersion = Convert.ToString(managementObj["Caption"]);
+                    SystemDiagnostics.IsWindowsVersion = new Dictionary<byte, bool>()
+                    {
+                        { 11, SystemDiagnostics.WindowsClientVersion.Contains("11") },
+                        { 10, SystemDiagnostics.WindowsClientVersion.Contains("10") }
+                    };
+                }
             });
 
-            if (SystemDiagnostics.WindowsClientVersion.Contains("11") || SystemDiagnostics.WindowsClientVersion.Contains("10")) return;
+            if (SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) return;
             new MessageWindow(true).ShowDialog();
         }
     }

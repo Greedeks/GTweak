@@ -62,24 +62,24 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", "1");
 
             interfaceV.TglButton15.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", "0");
+                SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", "0");
 
             interfaceV.TglButton16.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", "1");
+                SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", "1");
 
             interfaceV.TglButton17.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") && RegistryHelp.KeyExists(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", false);
+                SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.KeyExists(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", false);
 
             interfaceV.TglButton18.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") &&
+                SystemDiagnostics.IsWindowsVersion[11] &&
                (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", "0") ||
                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement", "ScoobeSystemSettingEnabled", "0"));
 
             interfaceV.TglButton19.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", "1", false);
+                SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", "1", false);
 
             interfaceV.TglButton20.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") &&
+                SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "DefaultBrowserSettingsCampaignEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", "0") ||
@@ -89,20 +89,20 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", "1"));
 
             interfaceV.TglButton21.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") &&
+                SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCopilotButton", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", "0")) ||
 
-                SystemDiagnostics.WindowsClientVersion.Contains("10") &&
+                SystemDiagnostics.IsWindowsVersion[10] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCortanaButton", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", "0"));
 
             interfaceV.TglButton22.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") &&
+                SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSyncProviderNotifications", "0") ||
@@ -114,7 +114,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353694Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338387Enabled", "0")) ||
 
-                SystemDiagnostics.WindowsClientVersion.Contains("10") &&
+                SystemDiagnostics.IsWindowsVersion[10] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SilentInstalledAppsEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SystemPaneSuggestionsEnabled", "0") ||
@@ -128,12 +128,12 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", "0", false);
 
             interfaceV.TglButton24.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") &&
+                SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", "0")) ||
 
-                SystemDiagnostics.WindowsClientVersion.Contains("10") &&
+                SystemDiagnostics.IsWindowsVersion[10] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\\Explorer", "DisableNotificationCenter", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\\PushNotifications", "ToastEnabled", "0"));
 
@@ -159,8 +159,8 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", "1");
 
             interfaceV.TglButton30.StateNA =
-                SystemDiagnostics.WindowsClientVersion.Contains("11") && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", "1") ||
-                SystemDiagnostics.WindowsClientVersion.Contains("10") && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", "1");
+                SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", "1") ||
+                SystemDiagnostics.IsWindowsVersion[10] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", "1");
         }
 
         private static void RestartExplorer(Process launchExplorer)
@@ -317,7 +317,7 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", isChoose ? 0 : 1, RegistryValueKind.DWord);
 
-                    if (SystemDiagnostics.WindowsClientVersion.Contains("11"))
+                    if (SystemDiagnostics.IsWindowsVersion[11])
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCopilotButton", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", isChoose ? 0 : 1, RegistryValueKind.DWord);
@@ -325,7 +325,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RestartExplorer(new Process());
                     }
-                    else if (SystemDiagnostics.WindowsClientVersion.Contains("10"))
+                    else if (SystemDiagnostics.IsWindowsVersion[10])
                     {
                         if (isChoose)
                         {
@@ -349,7 +349,7 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353696Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353694Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
 
-                    if (SystemDiagnostics.WindowsClientVersion.Contains("10"))
+                    if (SystemDiagnostics.IsWindowsVersion[10])
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SilentInstalledAppsEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SystemPaneSuggestionsEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
@@ -360,7 +360,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338393Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                     }
 
-                    if (SystemDiagnostics.WindowsClientVersion.Contains("11"))
+                    if (SystemDiagnostics.IsWindowsVersion[11])
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSyncProviderNotifications", isChoose ? 0 : 1, RegistryValueKind.DWord);
@@ -380,7 +380,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton24":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
 
-                    if (SystemDiagnostics.WindowsClientVersion.Contains("10"))
+                    if (SystemDiagnostics.IsWindowsVersion[10])
                     {
                         if (isChoose)
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter", 1, RegistryValueKind.DWord);
@@ -388,7 +388,7 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter");
                     }
 
-                    if (SystemDiagnostics.WindowsClientVersion.Contains("11"))
+                    if (SystemDiagnostics.IsWindowsVersion[11])
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
@@ -448,16 +448,16 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton30":
                     if (isChoose)
                     {
-                        if (SystemDiagnostics.WindowsClientVersion.Contains("11"))
+                        if (SystemDiagnostics.IsWindowsVersion[11])
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", 1, RegistryValueKind.DWord);
-                        else if (SystemDiagnostics.WindowsClientVersion.Contains("10"))
+                        else if (SystemDiagnostics.IsWindowsVersion[10])
                             RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", 1, RegistryValueKind.DWord);
                     }
                     else
                     {
-                        if (SystemDiagnostics.WindowsClientVersion.Contains("11"))
+                        if (SystemDiagnostics.IsWindowsVersion[11])
                             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode");
-                        else if (SystemDiagnostics.WindowsClientVersion.Contains("10"))
+                        else if (SystemDiagnostics.IsWindowsVersion[10])
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo");
                     }
                     break;

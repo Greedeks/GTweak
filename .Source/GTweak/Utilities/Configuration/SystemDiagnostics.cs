@@ -40,6 +40,8 @@ namespace GTweak.Utilities.Configuration
 
         internal static string WindowsClientVersion { get; set; } = string.Empty;
 
+        internal static Dictionary<byte, bool> IsWindowsVersion = default;
+
         internal static readonly Dictionary<string, string> HardwareData = new Dictionary<string, string>()
         {
            { "Windows", Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString() ?? string.Empty },
@@ -144,7 +146,7 @@ namespace GTweak.Utilities.Configuration
 
         private void GeVideoInfo()
         {
-            static (bool, int) GetMemorySize(string name)
+            static (bool, int, string) GetMemorySize(string name)
             {
                 using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}");
                 if (baseKey != null)
@@ -156,9 +158,8 @@ namespace GTweak.Utilities.Configuration
                         {
                             string adapterString = regKey.GetValue("HardwareInformation.AdapterString") as string;
                             string driverDesc = regKey.GetValue("DriverDesc") as string;
-                            string chipType = regKey.GetValue("HardwareInformation.ChipType") as string;
 
-                            if ((!string.IsNullOrEmpty(adapterString) && adapterString.Contains(name)) || (!string.IsNullOrEmpty(driverDesc) && driverDesc.Contains(name)) || (!string.IsNullOrEmpty(chipType) && chipType.Contains(name)))
+                            if (name == null || (!string.IsNullOrEmpty(adapterString) && adapterString.Contains(name)) || (!string.IsNullOrEmpty(driverDesc) && driverDesc.Contains(name)))
                             {
                                 object memorySizeValue = regKey.GetValue("HardwareInformation.qwMemorySize") ?? regKey.GetValue("HardwareInformation.MemorySize");
                                 if (memorySizeValue != null)
@@ -182,24 +183,25 @@ namespace GTweak.Utilities.Configuration
                                             _ => 0
                                         };
                                     }
-                                    return (true, (int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)));
+                                    return (true, (int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)), driverDesc);
                                 }
                             }
                         }
                     }
                 }
-                return (false, 0);
+                return (false, 0, string.Empty);
             }
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string data = (string)managementObj["Name"];
+                string data = managementObj["Name"] as string;
+                (bool isFound, int dataMemoryReg, string driverDesc) = GetMemorySize(data);
                 int dataMemory = (int)Math.Round((uint)managementObj["AdapterRAM"] / (1024.0 * 1024.0 * 1024.0));
-                (bool isFound, int dataMemoryReg) = GetMemorySize(data);
-                HardwareData["GPU"] += $"{data}, {(isFound ? dataMemoryReg : dataMemory)} GB\n";
+                HardwareData["GPU"] += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound ? dataMemoryReg : dataMemory)} GB\n";
             }
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
         }
+
 
         private void GetMemoryInfo()
         {
@@ -225,26 +227,58 @@ namespace GTweak.Utilities.Configuration
         private static void GetStorageDevices()
         {
             HardwareData["Storage"] = string.Empty;
-            foreach (var managementObj in new ManagementObjectSearcher(@"\\.\root\microsoft\windows\storage", "select FriendlyName, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
+            try
             {
-                ushort mediaType = managementObj["MediaType"] != null ? (ushort)managementObj["MediaType"] : (ushort)0;
-                string storageType = mediaType switch
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
-                    3 => "(HDD)",
-                    4 => "(SSD)",
-                    5 => "(SCM)",
-                    _ => "(Unspecified)"
-                };
+                    string data = new[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                    ushort mediaType = managementObj["MediaType"] != null ? (ushort)managementObj["MediaType"] : (ushort)0;
+                    string storageType = mediaType switch
+                    {
+                        3 => "(HDD)",
+                        4 => "(SSD)",
+                        5 => "(SCM)",
+                        _ => "(Unspecified)"
+                    };
 
-                if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
-                    storageType = "(Media-Type)";
+                    if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
+                        storageType = "(Media-Type)";
 
-                ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
-                string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
+                    ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
+                    string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
 
-                HardwareData["Storage"] += $"{size} [{(string)managementObj["FriendlyName"]}] {storageType}\n";
+                    HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
+                }
             }
-            HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
+            catch
+            {
+
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Model, Caption, Size, MediaType, InterfaceType from Win32_DiskDrive", new EnumerationOptions { ReturnImmediately = true }).Get())
+                {
+                    string data = new[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                    string mediaType = managementObj["MediaType"] as string ?? string.Empty;
+                    string storageType = mediaType switch
+                    {
+                        "Removable Media" => "(HDD)",
+                        "Fixed hard disk media" => "(SSD)",
+                        "Unknown" => "(SCM)",
+                        _ => "(Unspecified)"
+                    };
+
+                    string interfaceType = managementObj["InterfaceType"] as string ?? string.Empty;
+                    if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || string.Equals(interfaceType, "USB", StringComparison.OrdinalIgnoreCase)))
+                        storageType = "(Media-Type)";
+
+                    ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
+                    string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
+
+                    HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
+                }
+            }
+            finally
+            {
+                HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
+            }
         }
 
         private void GetAudioDevices()
