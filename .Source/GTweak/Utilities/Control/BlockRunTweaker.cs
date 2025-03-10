@@ -49,7 +49,7 @@ namespace GTweak.Utilities.Control
             Parallel.Invoke(() =>
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
-                { 
+                {
                     SystemDiagnostics.WindowsClientVersion = Convert.ToString(managementObj["Caption"]);
                     SystemDiagnostics.IsWindowsVersion = new Dictionary<byte, bool>()
                     {

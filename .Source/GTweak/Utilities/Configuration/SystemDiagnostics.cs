@@ -8,6 +8,7 @@ using System.Linq;
 using System.Management;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -158,8 +159,13 @@ namespace GTweak.Utilities.Configuration
                         {
                             string adapterString = regKey.GetValue("HardwareInformation.AdapterString") as string;
                             string driverDesc = regKey.GetValue("DriverDesc") as string;
+                            object chipTypeValue = regKey.GetValue("HardwareInformation.ChipType");
+                            string chipType = chipTypeValue as string ?? (chipTypeValue is byte[] chipTypeBytes ? Encoding.UTF8.GetString(chipTypeBytes) : string.Empty);
 
-                            if (name == null || (!string.IsNullOrEmpty(adapterString) && adapterString.Contains(name)) || (!string.IsNullOrEmpty(driverDesc) && driverDesc.Contains(name)))
+
+                            if ((!string.IsNullOrEmpty(adapterString) && adapterString.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                (!string.IsNullOrEmpty(driverDesc) && driverDesc.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                (!string.IsNullOrEmpty(chipType) && chipType.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0))
                             {
                                 object memorySizeValue = regKey.GetValue("HardwareInformation.qwMemorySize") ?? regKey.GetValue("HardwareInformation.MemorySize");
                                 if (memorySizeValue != null)
@@ -183,7 +189,8 @@ namespace GTweak.Utilities.Configuration
                                             _ => 0
                                         };
                                     }
-                                    return (true, (int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)), driverDesc);
+
+                                    return (true, (int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)), !string.IsNullOrEmpty(driverDesc) ? driverDesc : chipType);
                                 }
                             }
                         }
@@ -294,8 +301,13 @@ namespace GTweak.Utilities.Configuration
                             using RegistryKey subKey = regKey.OpenSubKey(subKeyName + @"\Properties");
                             if (subKey != null)
                             {
-                                if ((subKey.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},24")?.ToString().ToLowerInvariant() == "usb" || subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},6")?.ToString().ToLowerInvariant().Contains("usb") == true ||
-                                subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},8")?.ToString().ToLowerInvariant().Contains("usb") == true) && subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},2")?.ToString()?.Contains(deviceID) == true)
+                                string value24 = subKey.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},24")?.ToString();
+                                string value6 = subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},6")?.ToString();
+                                string value8 = subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},8")?.ToString();
+                                string value2 = subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},2")?.ToString();
+
+                                if (((value24 != null && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0) || (value6 != null && value6.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                    (value8 != null && value8.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)) && value2 != null && value2.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0)
                                     return (true, subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},6")?.ToString());
                             }
                         }
