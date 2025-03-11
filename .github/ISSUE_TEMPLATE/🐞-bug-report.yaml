@@ -1,0 +1,51 @@
+name: "🐞 Bug Report"
+description: "Description of the error or the problem with the utility"
+title: "[BUG] <Brief description of the issue>"
+labels: 
+  - bug
+  - help wanted
+  - wontfix
+assignees: 
+  - Greedeks
+
+body:
+  - type: textarea
+    id: problem_description
+    attributes:
+      label: "🚨 Problem Description"
+      description: "Describe the nature of your problem. Or the conditions of its occurrence."
+      placeholder: "Explain the issue in detail..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os_version
+    attributes:
+      label: "💻 OS Version"
+      description: "Select your Windows version"
+      options:
+        - "Windows 10"
+        - "Windows 11"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: publishing_house_os
+    attributes:
+      label: "⚙️ Publishing House OS"
+      description: "Select your OS edition"
+      options:
+        - "Home"
+        - "Pro"
+        - "Enterprise"
+        - "Education"
+        - "LTSC"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots_logs
+    attributes:
+      label: "📸 Screenshots / 📄 Logs"
+      description: "Attach screenshots or error logs if possible."
+      placeholder: "Drag and drop images or paste logs here..."
