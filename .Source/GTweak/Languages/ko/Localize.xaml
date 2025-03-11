@@ -391,7 +391,7 @@
     <v:String x:Key="TglButton21_description_system">게임 모드는 강력한 시스템에는 큰 영향을 미치지 않습니다. 하지만 백그라운드에서 프로세스가 많이 실행되는 경우 백그라운드 프로세스가 게임 작동에 영향을 미치지 않도록 보장합니다.</v:String>
     <v:String x:Key="TglButton22_description_system">게임을 녹화하는 기능입니다. 전반적으로 시스템의 리소스를 소모합니다. 더 나은 대안이 많이 있으며, 또한 자발적으로 열리지 않습니다.</v:String>
     <v:String x:Key="TglButton23_description_system">Some applications allow you to manage background activity, which determines what they can do when they are in the background and not actively used. In general, disabling background applications will help reduce network load, as well as CPU load and power consumption, which is useful for laptops because it prolongs battery life.</v:String>
-    <v:String x:Key="TglButton24_description_system">Reserved storage is designed to provide a predictable allocation of free space that will be allocated for use by updates, applications, temporary files, and the system cache. Disabling this feature can free up about ≈ 7 GB. However, if you have enough free space, it is not recommended to do this.</v:String>
+    <v:String x:Key="TglButton24_description_system">Reserved storage is designed to provide a predictable allocation of free space that will be used by updates, applications, temporary files, and the system cache. Disabling it can free up a significant amount of space. However, if you have enough free space, it is not recommended to do this, you will not receive any additional benefits.</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->
