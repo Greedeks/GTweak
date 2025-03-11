@@ -37,7 +37,8 @@ namespace GTweak.Utilities.Helpers.Storage
             new { Button = "TglButton13", Action = "restart" },
             new { Button = "TglButton14", Action = "restart" },
             new { Button = "TglButton15", Action = "restart" },
-            new { Button = "TglButton20", Action = "restart" }
+            new { Button = "TglButton20", Action = "restart" },
+            new { Button = "TglButton23", Action = "restart" }
         }.ToDictionary(x => x.Button, x => x.Action);
     }
 }
