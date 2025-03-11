@@ -362,7 +362,7 @@
     <v:String x:Key="tgl20_system">Брандмауер Захисника Windows</v:String>
     <v:String x:Key="tgl21_system">Функція Windows «Ігровий режим»</v:String>
     <v:String x:Key="tgl22_system">Функція Xbox «Ігрова панель»</v:String>
-    <v:String x:Key="tgl23_system">Фонова активність додатків у Windows</v:String>
+    <v:String x:Key="tgl23_system">Програми працюють у фоновому режимі</v:String>
     <v:String x:Key="tgl24_system">Зарезервоване сховище в Windows</v:String>
 
     <v:String x:Key="TextSlider1_description_system">Дозволяє змінити швидкість переміщення вказівника миші, заощаджуючи ваш час на пошук відповідних параметрів.</v:String>

@@ -362,7 +362,7 @@
     <v:String x:Key="tgl20_system">Windows Defender 방화벽</v:String>
     <v:String x:Key="tgl21_system">Windows 기능 «게임 모드»</v:String>
     <v:String x:Key="tgl22_system">Xbox 기능 «Game Bar»</v:String>
-    <v:String x:Key="tgl23_system">Background application activity in Windows</v:String>
+    <v:String x:Key="tgl23_system">Applications run in the background</v:String>
     <v:String x:Key="tgl24_system">Reserved storage in Windows</v:String>
 
     <v:String x:Key="TextSlider1_description_system">마우스 포인터의 속도를 변경하여 마우스 매개변수를 검색하는 시간을 절약할 수 있습니다.</v:String>

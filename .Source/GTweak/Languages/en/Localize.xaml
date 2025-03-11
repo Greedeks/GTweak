@@ -362,7 +362,7 @@
     <v:String x:Key="tgl20_system">Windows Defender Firewall</v:String>
     <v:String x:Key="tgl21_system">Windows feature «Game Mode»</v:String>
     <v:String x:Key="tgl22_system">Xbox feature «Game Bar»</v:String>
-    <v:String x:Key="tgl23_system">Background application activity in Windows</v:String>
+    <v:String x:Key="tgl23_system">Applications run in the background</v:String>
     <v:String x:Key="tgl24_system">Reserved storage in Windows</v:String>
 
     <v:String x:Key="TextSlider1_description_system">Changes the speed of the mouse pointer, saving you time to search for mouse parameters.</v:String>
