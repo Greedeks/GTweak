@@ -1,0 +1,18 @@
+name: "❓ Questions and Answers"
+description: "Frequently Asked Questions"
+title: "[Question] <Question Title>"
+labels: 
+  - documentation
+  - question
+assignees: 
+  - Greedeks
+
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "❓ Your Question"
+      description: "Ask your question here. Provide as much detail as possible to get a clear and helpful answer."
+      placeholder: "Write your question..."
+    validations:
+      required: true
