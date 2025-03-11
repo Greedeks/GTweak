@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -147,7 +148,11 @@ namespace GTweak.Utilities.Tweaks
 
         internal void ViewBluetoothStatus()
         {
-            try { isBluetoothStatus = new ManagementObjectSearcher("select DeviceId from Win32_PnPEntity where service='BthLEEnum'").Get().Count > 0; }
+            try
+            {
+                using var managementObj = new ManagementObjectSearcher("SELECT DeviceID FROM Win32_PnPEntity WHERE Service='BthLEEnum'").Get();
+                isBluetoothStatus = managementObj.Cast<ManagementObject>().Any();
+            }
             catch { isBluetoothStatus = false; }
         }
 

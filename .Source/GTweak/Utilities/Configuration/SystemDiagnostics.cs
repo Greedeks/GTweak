@@ -68,7 +68,6 @@ namespace GTweak.Utilities.Configuration
 
                 foreach (string keyname in ourKey!.GetSubKeyNames())
                     regKey = ourKey!.OpenSubKey(keyname);
-
                 return new BitmapImage(new Uri(regKey?.GetValue("Image1080").ToString() ?? string.Empty));
             }
             catch { return null; }
@@ -77,8 +76,9 @@ namespace GTweak.Utilities.Configuration
         internal string GetProfileName()
         {
             string nameProfile = string.Empty;
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLower()}'").Get())
-                nameProfile = (string)managementObj["FullName"];
+
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLower()}'", new EnumerationOptions { ReturnImmediately = true }).Get())
+                nameProfile = managementObj["FullName"] as string;
 
             return !string.IsNullOrWhiteSpace(nameProfile) ? nameProfile : Environment.UserName.ToLower();
         }
