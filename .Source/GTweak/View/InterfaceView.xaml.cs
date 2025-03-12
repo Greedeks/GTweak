@@ -1,9 +1,11 @@
 ﻿using GTweak.Assets.UserControl;
 using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -63,6 +65,9 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             InterfaceTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+
+            if (ExplorerManager.GetIntfStorage.TryGetValue(toggleButton.Name, out bool needRestart))
+                ExplorerManager.Restart(new Process());
 
             if (NotifActionsStorage.GetIntfActions.TryGetValue(toggleButton.Name, out string action))
                 new ViewNotification(300).Show(action);

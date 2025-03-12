@@ -15,7 +15,7 @@ namespace GTweak.Windows
 {
     public partial class ImportWindow : Window
     {
-        private bool isRestartNeed = false, isLogoutNeed = false;
+        private bool isRestartNeed = false, isLogoutNeed = false, isExpRestartNeed = false;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public ImportWindow(in string importedFile)
@@ -40,6 +40,9 @@ namespace GTweak.Windows
         {
             if (valueProgress == 100)
             {
+                if (isExpRestartNeed)
+                    ExplorerManager.Restart(new Process());
+
                 if (isRestartNeed)
                     new ViewNotification().Show("restart");
                 else if (!isRestartNeed && isLogoutNeed)
@@ -89,17 +92,12 @@ namespace GTweak.Windows
 
                     foreach (var set in acceptanceList)
                     {
-                        await Task.Delay(set.Tweak switch
-                        {
-                            "TglButton7" => 2000,
-                            "TglButton8" => 2000,
-                            "TglButton17" => 2000,
-                            _ => 700,
-                        }, _token);
+                        await Task.Delay(700, _token);
                         InterfaceTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
                         isRestartNeed = NotifActionsStorage.GetIntfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
                         isLogoutNeed = NotifActionsStorage.GetIntfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                        isExpRestartNeed = ExplorerManager.GetIntfStorage.Any(get => get.Key == set.Tweak && get.Value == true);
                     }
                 }
 

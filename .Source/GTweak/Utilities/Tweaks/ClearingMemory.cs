@@ -174,7 +174,7 @@ namespace GTweak.Utilities.Tweaks
             return num != 0;
         }
 
-        private async static void ClearTempSystemCache()
+        private static void ClearTempSystemCache()
         {
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @$"cmd.exe /c rd /s /q {StoragePaths.SystemDisk}Windows\Temp & " +
                 @$"rd /s /q %localappdata%\Temp & rd /s /q {StoragePaths.SystemDisk}Windows\ff*.tmp & rd /s /q {StoragePaths.SystemDisk}Windows\History\* & " +
@@ -183,41 +183,17 @@ namespace GTweak.Utilities.Tweaks
                 $@"del /f /q {StoragePaths.SystemDisk}Windows\setupapi.log & rd /s /q {StoragePaths.SystemDisk}Windows\Panther\* & " +
                 $@"del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.app.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.dev.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.offline.log");
 
-            foreach (Process process in Process.GetProcesses())
+            ExplorerManager.Restart(new Process(), async () =>
             {
-                try
-                {
-                    if (string.Compare(process.MainModule?.FileName, $"{Environment.GetEnvironmentVariable("WINDIR")}\\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        process.Kill();
-
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_exif.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_idx.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_sr.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_wide.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_96.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_256.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_1024.db");
 
-                        await Task.Delay(200);
-
-                        process.Start();
-                    }
-                }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
-                finally
-                {
-                    Process[] explorer = Process.GetProcessesByName("explorer");
-                    if (explorer.Length == 0)
-                    {
-                        using Process launchExplorer = new Process();
-                        launchExplorer.StartInfo.FileName = $@"{Environment.GetEnvironmentVariable("WINDIR")}\explorer.exe";
-                        launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
-                        launchExplorer.StartInfo.UseShellExecute = true;
-                        launchExplorer.Start(); ;
-                    }
-
-                }
-            }
+                await Task.Delay(200);
+            });
         }
 
         internal async void StartMemoryCleanup()

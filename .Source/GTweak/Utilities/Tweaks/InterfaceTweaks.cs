@@ -163,36 +163,6 @@ namespace GTweak.Utilities.Tweaks
                 SystemDiagnostics.IsWindowsVersion[10] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", "1");
         }
 
-        private static void RestartExplorer(Process launchExplorer)
-        {
-            Task.Run(delegate
-            {
-
-                foreach (Process process in Process.GetProcesses())
-                {
-                    try
-                    {
-                        if (string.Compare(process.MainModule?.FileName, $@"{Environment.GetEnvironmentVariable("WINDIR")}\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0 && Process.GetProcessesByName("explorer").Length != 0)
-                        {
-                            process.Kill();
-                            process.Start();
-                        }
-                    }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
-                    finally
-                    {
-                        if (Process.GetProcessesByName("explorer").Length == 0)
-                        {
-                            launchExplorer.StartInfo.FileName = $@"{Environment.GetEnvironmentVariable("WINDIR")}\explorer.exe";
-                            launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
-                            launchExplorer.StartInfo.UseShellExecute = true;
-                            launchExplorer.Start();
-                        }
-                    }
-                }
-            });
-        }
-
         internal static void ApplyTweaks(string tweak, bool isChoose)
         {
             INIManager.TempWrite(INIManager.TempTweaksIntf, tweak, isChoose);
@@ -224,11 +194,9 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton7":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", isChoose ? 1 : 0, RegistryValueKind.DWord);
-                    RestartExplorer(new Process());
                     break;
                 case "TglButton8":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", isChoose ? 1 : 0, RegistryValueKind.DWord);
-                    RestartExplorer(new Process());
                     break;
                 case "TglButton9":
                     RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "MenuShowDelay", isChoose ? "20" : "400", RegistryValueKind.String);
@@ -281,8 +249,6 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", "", "", RegistryValueKind.String);
                     else
                         RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}");
-
-                    RestartExplorer(new Process());
                     break;
                 case "TglButton18":
                     RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
@@ -323,7 +289,6 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RestartExplorer(new Process());
                     }
                     else if (SystemDiagnostics.IsWindowsVersion[10])
                     {
@@ -341,7 +306,6 @@ namespace GTweak.Utilities.Tweaks
                         }
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Feeds", "ShellFeedsTaskbarViewMode", isChoose ? 2 : 0, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCortanaButton", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RestartExplorer(new Process());
                     }
                     break;
                 case "TglButton22":
@@ -443,7 +407,6 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", 1, RegistryValueKind.DWord);
                     else
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer");
-                    RestartExplorer(new Process());
                     break;
                 case "TglButton30":
                     if (isChoose)
