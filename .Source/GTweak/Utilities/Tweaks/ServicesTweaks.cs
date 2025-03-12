@@ -402,13 +402,12 @@ namespace GTweak.Utilities.Tweaks
         {
             Task.Run(delegate
             {
-                string cachePath = $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\Download";
-
                 try
                 {
                     if (isDenyAccess)
                     {
                         using (ServiceController updateService = new ServiceController("wuauserv"))
+                        using (ServiceController cryptSvc = new ServiceController("CryptSvc"))
                         {
                             if (updateService.Status == ServiceControllerStatus.Running)
                             {
@@ -416,21 +415,32 @@ namespace GTweak.Utilities.Tweaks
                                 updateService.WaitForStatus(ServiceControllerStatus.Stopped);
                             }
 
-                            TakingOwnership.GrantAdministratorsAccess(cachePath, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
-
-                            string[] files = Directory.GetFiles(cachePath);
-                            foreach (string file in files)
+                            if (cryptSvc.Status == ServiceControllerStatus.Running)
                             {
-                                File.SetAttributes(file, FileAttributes.Normal);
-                                File.Delete(file);
+                                cryptSvc.Stop();
+                                cryptSvc.WaitForStatus(ServiceControllerStatus.Stopped);
                             }
+                        }
 
-                            string[] directories = Directory.GetDirectories(cachePath);
-                            foreach (string path in directories)
-                                Directory.Delete(path, true);
+                        foreach (string path in new[] { $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\Download", $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\DataStore",
+                            $@"{StoragePaths.SystemDisk}Windows\System32\catroot2", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
+                        {
+                            TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
+
+                            if (Directory.Exists(path))
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c del /f /s /q \"{path}\\*.*\"");
                         }
 
                         SetTaskStateOwner(false, winUpdatesTasks);
+
+                        using (ServiceController cryptSvc = new ServiceController("CryptSvc"))
+                        {
+                            if (cryptSvc.Status == ServiceControllerStatus.Stopped)
+                            {
+                                cryptSvc.Start();
+                                cryptSvc.WaitForStatus(ServiceControllerStatus.Running);
+                            }
+                        }
                     }
                     else
                         SetTaskStateOwner(true, winUpdatesTasks);
