@@ -176,17 +176,19 @@
     <v:String x:Key="tgl18_interface">팁 및 제안 표시 (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">컴팩트 탐색기 모드 사용 (Windows 11)</v:String>
     <v:String x:Key="tgl20_interface">«Copilot» 및 «Recall» 도우미 (Windows 11)</v:String>
-    <v:String x:Key="tgl21_interface">작업 표시줄의 아이콘 및 버튼</v:String>
-    <v:String x:Key="tgl22_interface">개인 맞춤형 광고 표시</v:String>
-    <v:String x:Key="tgl23_interface">로그인 시 이전 폴더 창 복원</v:String>
-    <v:String x:Key="tgl24_interface">Windows 팁 및 제안이 포함된 알림</v:String>
-    <v:String x:Key="tgl25_interface">«내 PC»에 위치한 폴더</v:String>
-    <v:String x:Key="tgl26_interface">탐색기의 «3D 개체»</v:String>
-    <v:String x:Key="tgl27_interface">바탕 화면의 배경 화면 형식 .JPEG 압축</v:String>
-    <v:String x:Key="tgl28_interface">데스크톱 요소의 도구 설명</v:String>
-    <v:String x:Key="tgl29_interface">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
-    <v:String x:Key="tgl30_interface">«내 PC» 대신 «빠른 액세스» 열기</v:String>
-
+    <v:String x:Key="tgl21_interface">«End task» via RMB on the application (Windows 11)</v:String>
+    <v:String x:Key="tgl22_interface">작업 표시줄의 아이콘 및 버튼</v:String>
+    <v:String x:Key="tgl23_interface">개인 맞춤형 광고 표시</v:String>
+    <v:String x:Key="tgl24_interface">로그인 시 이전 폴더 창 복원</v:String>
+    <v:String x:Key="tgl25_interface">Windows 팁 및 제안이 포함된 알림</v:String>
+    <v:String x:Key="tgl26_interface">«내 PC»에 위치한 폴더</v:String>
+    <v:String x:Key="tgl27_interface">탐색기의 «3D 개체»</v:String>
+    <v:String x:Key="tgl28_interface">바탕 화면의 배경 화면 형식 .JPEG 압축</v:String>
+    <v:String x:Key="tgl29_interface">데스크톱 요소의 도구 설명</v:String>
+    <v:String x:Key="tgl30_interface">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
+   <v:String x:Key="tgl31_interface">«내 PC» 대신 «빠른 액세스» 열기</v:String>
+    <v:String x:Key="tgl32_interface">Displaying file extensions in explorer</v:String>
+    
     <v:String x:Key="textcolor_interface">이것은 새로운 색상의 예입니다.</v:String>
     <v:String x:Key="previewflick_interface">비교를 위해</v:String>
 
@@ -210,16 +212,18 @@
     <v:String x:Key="TglButton18_description_interface">Windows 11에서는 새로운 «시작» 메뉴나 «빠른 설정»과 같은 특정 기능을 사용하는 방법에 대한 힌트를 표시하는 경우가 있습니다. 이러한 힌트는 Windows 11을 처음 사용하는 경우 유용합니다.</v:String>
     <v:String x:Key="TglButton19_description_interface">기본적으로 Windows는 탐색기에서 항목 사이에 패딩을 추가합니다. 이는 터치 스크린을 위해 설계된 새로운 기능입니다. 이 조정은 파일 탐색기의 클래식 레이아웃을 복원하여 요소 사이의 들여쓰기를 제거하고 설정을 검색하는 데 시간을 절약합니다.</v:String>
     <v:String x:Key="TglButton20_description_interface">이 조정은 작업 표시줄, «시작» 메뉴 및 Microsoft Edge에서 Copilot을 제거 및 비활성화합니다. 또한 Recall도 비활성화됩니다. 그러나 Windows 버전에 처음에 인공 지능을 갖춘 이러한 비서가 없었다면 조정을 사용할 필요가 없습니다.</v:String>
-    <v:String x:Key="TglButton21_description_interface">검색할 시간이 없으신가요? 작업 표시줄에서 아이콘이 제거됩니다: Copilot, 검색, 작업 제출, 채팅 아이콘이 제거됩니다. 그리고 최대화 버튼 위로 마우스를 가져갔을 때 스냅 레이아웃이 표시되지 않도록 설정합니다. Windows 10 사용자의 경우 작업 표시줄도 제거 및 숨겨집니다: 뉴스 및 관심사, Cortana. 화면이 깜박일 수 있으니 주의하세요.</v:String>
-    <v:String x:Key="TglButton22_description_interface">기본적으로 Windows는 수집된 정보를 사용하여 광고를 타겟팅, 즉 사용자의 관심사와 일치하는 광고를 표시합니다. 그리고 말 그대로 이 광고는 표시할 수 있는 여유 공간이 있는 곳이면 어디든 배치됩니다. 모든 스토어 앱, 탐색기, 옵션 및 시작 메뉴에 개인 맞춤 광고를 표시하지 않으려면 이 정크를 비활성화하면 됩니다.</v:String>
-    <v:String x:Key="TglButton23_description_interface">기본적으로 Windows는 창이 꺼져 있을 때의 위치와 상태를 저장하지 않습니다. 이 수정을 통해 로그아웃, 재부팅 및 종료 후에 열린 폴더 유형을 기억하여 복원할 수 있습니다.</v:String>
-    <v:String x:Key="TglButton24_description_interface">이 조정을 통해 팁과 제안이 포함된 모든 Windows 알림을 비활성화할 수 있을 뿐만 아니라 Windows 11 사용자를 위한 두 번째 기회 즉시 사용 환경 (SCOOBE)을 비활성화할 수 있습니다. SCOOBE는 장치 구성을 긴급하게 완료하고 Microsoft 계정에 로그인하라는 제안과 함께 예기치 않게 표시되는 창입니다.</v:String>
-    <v:String x:Key="TglButton25_description_interface">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕화면, 동영상, 문서, 다운로드, 이미지, 음악.</v:String>
-    <v:String x:Key="TglButton26_description_interface">왼쪽 메뉴 목록의 탐색기 개요에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서).</v:String>
-    <v:String x:Key="TglButton27_description_interface">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
-    <v:String x:Key="TglButton28_description_interface">조정은 마우스 커서를 마우스오버할 때 바탕화면 요소의 도구 설명을 비활성화합니다.</v:String>
-    <v:String x:Key="TglButton29_description_interface">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
-    <v:String x:Key="TglButton30_description_interface">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
+    <v:String x:Key="TglButton21_description_interface">This tweak will allow you to add the «End task» option to the context menu when you right-click on the application on the taskbar. This speeds up the completion of processes without having to open the task Manager. Attention the screen may blink.</v:String>
+    <v:String x:Key="TglButton22_description_interface">검색할 시간이 없으신가요? 작업 표시줄에서 아이콘이 제거됩니다: Copilot, 검색, 작업 제출, 채팅 아이콘이 제거됩니다. 그리고 최대화 버튼 위로 마우스를 가져갔을 때 스냅 레이아웃이 표시되지 않도록 설정합니다. Windows 10 사용자의 경우 작업 표시줄도 제거 및 숨겨집니다: 뉴스 및 관심사, Cortana. 화면이 깜박일 수 있으니 주의하세요.</v:String>
+    <v:String x:Key="TglButton23_description_interface">기본적으로 Windows는 수집된 정보를 사용하여 광고를 타겟팅, 즉 사용자의 관심사와 일치하는 광고를 표시합니다. 그리고 말 그대로 이 광고는 표시할 수 있는 여유 공간이 있는 곳이면 어디든 배치됩니다. 모든 스토어 앱, 탐색기, 옵션 및 시작 메뉴에 개인 맞춤 광고를 표시하지 않으려면 이 정크를 비활성화하면 됩니다.</v:String>
+    <v:String x:Key="TglButton24_description_interface">기본적으로 Windows는 창이 꺼져 있을 때의 위치와 상태를 저장하지 않습니다. 이 수정을 통해 로그아웃, 재부팅 및 종료 후에 열린 폴더 유형을 기억하여 복원할 수 있습니다.</v:String>
+    <v:String x:Key="TglButton25_description_interface">이 조정을 통해 팁과 제안이 포함된 모든 Windows 알림을 비활성화할 수 있을 뿐만 아니라 Windows 11 사용자를 위한 두 번째 기회 즉시 사용 환경 (SCOOBE)을 비활성화할 수 있습니다. SCOOBE는 장치 구성을 긴급하게 완료하고 Microsoft 계정에 로그인하라는 제안과 함께 예기치 않게 표시되는 창입니다.</v:String>
+    <v:String x:Key="TglButton26_description_interface">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕화면, 동영상, 문서, 다운로드, 이미지, 음악.</v:String>
+    <v:String x:Key="TglButton27_description_interface">왼쪽 메뉴 목록의 탐색기 개요에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서).</v:String>
+    <v:String x:Key="TglButton28_description_interface">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
+    <v:String x:Key="TglButton29_description_interface">조정은 마우스 커서를 마우스오버할 때 바탕화면 요소의 도구 설명을 비활성화합니다.</v:String>
+    <v:String x:Key="TglButton30_description_interface">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
+    <v:String x:Key="TglButton31_description_interface">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
+    <v:String x:Key="TglButton32_description_interface">By default, Windows hides file extensions, which makes the File Explorer view less cluttered. If needed, you can enable the display of file extensions using this tweak, saving you the time spent searching. Attention the screen may blink.</v:String>
     <!--#endregion-->
 
     <!--#region Applications Page -->

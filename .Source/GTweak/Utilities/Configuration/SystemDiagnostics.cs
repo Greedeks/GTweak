@@ -40,6 +40,7 @@ namespace GTweak.Utilities.Configuration
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
         internal static string WindowsClientVersion { get; set; } = string.Empty;
+        internal static string WindowsBuildVersion { get; set; } = string.Empty;
 
         internal static Dictionary<byte, bool> IsWindowsVersion = default;
 

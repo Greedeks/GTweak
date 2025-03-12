@@ -48,14 +48,15 @@ namespace GTweak.Utilities.Control
         {
             Parallel.Invoke(() =>
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, BuildNumber from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     SystemDiagnostics.WindowsClientVersion = Convert.ToString(managementObj["Caption"]);
+                    SystemDiagnostics.WindowsBuildVersion = Convert.ToString(managementObj["BuildNumber"]);
                     SystemDiagnostics.IsWindowsVersion = new Dictionary<byte, bool>()
                     {
                         { 11, SystemDiagnostics.WindowsClientVersion.Contains("11") },
                         { 10, SystemDiagnostics.WindowsClientVersion.Contains("10") }
-                    };
+                    }; ;
                 }
             });
 

@@ -44,7 +44,9 @@ namespace GTweak.Utilities.Helpers
             new { Button = "TglButton8", NeedRestart = true },
             new { Button = "TglButton17", NeedRestart = true },
             new { Button = "TglButton21", NeedRestart = true },
-            new { Button = "TglButton29", NeedRestart = true },
+            new { Button = "TglButton22", NeedRestart = true },
+            new { Button = "TglButton30", NeedRestart = true },
+            new { Button = "TglButton32", NeedRestart = true },
         }.ToDictionary(x => x.Button, x => x.NeedRestart);
     }
 }

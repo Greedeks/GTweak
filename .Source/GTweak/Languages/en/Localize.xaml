@@ -176,17 +176,19 @@
     <v:String x:Key="tgl18_interface">Show tips and suggestions (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">Use Compact Explorer mode (Windows 11)</v:String>
     <v:String x:Key="tgl20_interface">«Copilot» and «Recall» Assistants (Windows 11)</v:String>
-    <v:String x:Key="tgl21_interface">Icons and buttons on the taskbar</v:String>
-    <v:String x:Key="tgl22_interface">Show personalized ads</v:String>
-    <v:String x:Key="tgl23_interface">Restore previous folder windows when logging in</v:String>
-    <v:String x:Key="tgl24_interface">Notifications with Windows tips and suggestions</v:String>
-    <v:String x:Key="tgl25_interface">Folders located in «This PC»</v:String>
-    <v:String x:Key="tgl26_interface">«3D Objects» in the explorer</v:String>
-    <v:String x:Key="tgl27_interface">Compression of wallpaper format .JPEG of the desktop</v:String>
-    <v:String x:Key="tgl28_interface">Tooltips for desktop elements</v:String>
-    <v:String x:Key="tgl29_interface">The search query with «Bing» integration in the Start menu</v:String>
-    <v:String x:Key="tgl30_interface">Open «Quick Access» instead of «This PC»</v:String>
-
+    <v:String x:Key="tgl21_interface">«End task» via RMB on the application (Windows 11)</v:String>
+    <v:String x:Key="tgl22_interface">Icons and buttons on the taskbar</v:String>
+    <v:String x:Key="tgl23_interface">Show personalized ads</v:String>
+    <v:String x:Key="tgl24_interface">Restore previous folder windows when logging in</v:String>
+    <v:String x:Key="tgl25_interface">Notifications with Windows tips and suggestions</v:String>
+    <v:String x:Key="tgl26_interface">Folders located in «This PC»</v:String>
+    <v:String x:Key="tgl27_interface">«3D Objects» in the explorer</v:String>
+    <v:String x:Key="tgl28_interface">Compression of wallpaper format .JPEG of the desktop</v:String>
+    <v:String x:Key="tgl29_interface">Tooltips for desktop elements</v:String>
+    <v:String x:Key="tgl30_interface">The search query with «Bing» integration in the Start menu</v:String>
+    <v:String x:Key="tgl31_interface">Open «Quick Access» instead of «This PC»</v:String>
+    <v:String x:Key="tgl32_interface">Displaying file extensions in explorer</v:String>
+    
     <v:String x:Key="textcolor_interface">This is an example of a new color.</v:String>
     <v:String x:Key="previewflick_interface">For a comparison</v:String>
 
@@ -210,17 +212,19 @@
     <v:String x:Key="TglButton18_description_interface">Windows 11 sometimes shows hints on how to use a particular feature, for example, the new «Start» menu or «Quick Settings». They are useful if you are seeing Windows 11 for the first time, as it is useless junk.</v:String>
     <v:String x:Key="TglButton19_description_interface">By default, Windows adds padding between items in Explorer. This is a new feature designed for touch screens. This tweak will restore the classic layout of the file explorer, removing the indentation between the elements and saving you from searching for settings.</v:String>
     <v:String x:Key="TglButton20_description_interface">The tweak will remove and disable Copilot on the taskbar, in the «Start» menu and in Microsoft Edge. And it will also disable Recall. But if your Windows edition did not initially have these assistants with artificial intelligence, then there is no point in using a tweak.</v:String>
-    <v:String x:Key="TglButton21_description_interface">No time to search? The tweak will remove the icons from the taskbar: Copilot, Search, Task Submission, Chat. And disable showing snap layouts when hovering over a maximize button. For Windows 10 users, it will also remove and hide: News and Interests, Cortana. Attention the screen may blink.</v:String>
-    <v:String x:Key="TglButton22_description_interface">By default, Windows uses the collected information to target ads, i.e. to display ads that match your interests. And literally, this advertisement is located wherever free space is available for display. If you don't want Windows to display personalized ads in all Store apps, Explorer, Options, and the Start menu, then you can disable this junk.</v:String>
-    <v:String x:Key="TglButton23_description_interface">By default, Windows does not save the positions of windows, as well as their state when turned off. This tweak will allow you to remember the type of open folders in order to restore them after Logging out, Rebooting and Shutting down.</v:String>
-    <v:String x:Key="TglButton24_description_interface">The tweak allows you to disable all Windows notifications with tips and suggestions, as well as disable Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is an unexpectedly appearing window with an offer to urgently complete device configuration and log in to your Microsoft account.</v:String>
-    <v:String x:Key="TglButton25_description_interface">Tweak will hide folders from «This PC»: Desktop, Videos, Documents, Downloads, Images, Music.</v:String>
-    <v:String x:Key="TglButton26_description_interface">Removes the 3D Objects item from the Explorer Overview in the left menu list (from the Explorer list tree).</v:String>
-    <v:String x:Key="TglButton27_description_interface">By default, when you set a jpeg image as your desktop wallpaper, Windows automatically reduces its quality to 85%. This tweak will set the jpeg wallpaper quality to 100%.</v:String>
-    <v:String x:Key="TglButton28_description_interface">Tweak will disable tooltips for desktop elements when hovering the mouse cursor.</v:String>
-    <v:String x:Key="TglButton29_description_interface">By default, Windows sends everything you search for in the «Start» menu to its servers to provide you with Bing search results. If you don't need Bing integration in the «Start» menu, you can apply a tweak to disable web search. Attention the screen may blink.</v:String>
-    <v:String x:Key="TglButton30_description_interface">By default, when you open Explorer, the first tab will be «Quick Access». And to open any disk, you need to make unnecessary movements. This tweak will make «This PC» open when opened, rather than «Quick Access».</v:String>
-    <!--#endregion-->
+    <v:String x:Key="TglButton21_description_interface">This tweak will allow you to add the «End task» option to the context menu when you right-click on the application on the taskbar. This speeds up the completion of processes without having to open the task Manager. Attention the screen may blink.</v:String>
+    <v:String x:Key="TglButton22_description_interface">No time to search? The tweak will remove the icons from the taskbar: Copilot, Search, Task Submission, Chat. And disable showing snap layouts when hovering over a maximize button. For Windows 10 users, it will also remove and hide: News and Interests, Cortana. Attention the screen may blink.</v:String>
+    <v:String x:Key="TglButton23_description_interface">By default, Windows uses the collected information to target ads, i.e. to display ads that match your interests. And literally, this advertisement is located wherever free space is available for display. If you don't want Windows to display personalized ads in all Store apps, Explorer, Options, and the Start menu, then you can disable this junk.</v:String>
+    <v:String x:Key="TglButton24_description_interface">By default, Windows does not save the positions of windows, as well as their state when turned off. This tweak will allow you to remember the type of open folders in order to restore them after Logging out, Rebooting and Shutting down.</v:String>
+    <v:String x:Key="TglButton25_description_interface">The tweak allows you to disable all Windows notifications with tips and suggestions, as well as disable Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is an unexpectedly appearing window with an offer to urgently complete device configuration and log in to your Microsoft account.</v:String>
+    <v:String x:Key="TglButton26_description_interface">Tweak will hide folders from «This PC»: Desktop, Videos, Documents, Downloads, Images, Music.</v:String>
+    <v:String x:Key="TglButton27_description_interface">Removes the 3D Objects item from the Explorer Overview in the left menu list (from the Explorer list tree).</v:String>
+    <v:String x:Key="TglButton28_description_interface">By default, when you set a jpeg image as your desktop wallpaper, Windows automatically reduces its quality to 85%. This tweak will set the jpeg wallpaper quality to 100%.</v:String>
+    <v:String x:Key="TglButton29_description_interface">Tweak will disable tooltips for desktop elements when hovering the mouse cursor.</v:String>
+    <v:String x:Key="TglButton30_description_interface">By default, Windows sends everything you search for in the «Start» menu to its servers to provide you with Bing search results. If you don't need Bing integration in the «Start» menu, you can apply a tweak to disable web search. Attention the screen may blink.</v:String>
+    <v:String x:Key="TglButton31_description_interface">By default, when you open Explorer, the first tab will be «Quick Access». And to open any disk, you need to make unnecessary movements. This tweak will make «This PC» open when opened, rather than «Quick Access».</v:String>
+    <v:String x:Key="TglButton32_description_interface">By default, Windows hides file extensions, which makes the File Explorer view less cluttered. If needed, you can enable the display of file extensions using this tweak, saving you the time spent searching. Attention the screen may blink.</v:String>
+     <!--#endregion-->
 
     <!--#region Applications Page -->
     <v:String x:Key="text0_applications">Applications are deleted</v:String>

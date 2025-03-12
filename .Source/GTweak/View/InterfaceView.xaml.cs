@@ -1,4 +1,5 @@
 ﻿using GTweak.Assets.UserControl;
+using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Animation;
@@ -22,6 +23,9 @@ namespace GTweak.View
 
             if (!WindowsLicense.IsWindowsActivated)
                 new ViewNotification().Show("", "info", "viewlicense_notification");
+
+            if (SystemDiagnostics.WindowsBuildVersion.CompareTo("22621.2361") < 0)
+                TglButton21.IsEnabled = false;
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
