@@ -8,8 +8,8 @@
         xmlns:local="clr-namespace:GTweak.Windows" 
         mc:Ignorable="d"
         Title="GTweak" WindowStyle="None"
-        Height="260" Width="260"
-        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
+        Height="260" Width="260" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
         IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered" Closing="Window_Closing">
     <Window.DataContext>
         <vm:MainViewModel/>

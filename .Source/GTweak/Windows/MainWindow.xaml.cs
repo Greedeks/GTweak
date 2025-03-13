@@ -1,8 +1,10 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Tweaks;
 using GTweak.Windows;
+using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;

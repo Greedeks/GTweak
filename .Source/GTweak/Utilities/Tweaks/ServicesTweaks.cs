@@ -251,6 +251,36 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\PrintNotify", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\McpManagementService", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Spooler", "DelayedAutoStart", isChoose ? 1 : 0, RegistryValueKind.DWord);
+                    try
+                    {
+                        using RegistryKey baseKey = Registry.ClassesRoot.OpenSubKey("SystemFileAssociations", true);
+                        if (baseKey != null)
+                        {
+                            foreach (string subkey in baseKey.GetSubKeyNames())
+                            {
+                                try
+                                {
+                                    using RegistryKey assocKey = baseKey.OpenSubKey(subkey, true);
+                                    if (assocKey != null)
+                                    {
+                                        using RegistryKey shellKey = assocKey.OpenSubKey("Shell", true);
+                                        if (shellKey != null)
+                                        {
+                                            if (shellKey.GetSubKeyNames().Any(k => k.Equals("print", StringComparison.OrdinalIgnoreCase)))
+                                            {
+                                                if (isChoose)
+                                                    RegistryHelp.Write(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\print", "ProgrammaticAccessOnly", string.Empty, RegistryValueKind.String);
+                                                else
+                                                    RegistryHelp.DeleteValue(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\print", "ProgrammaticAccessOnly");
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                            }
+                        }
+                    }
+                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
                     break;
                 case "TglButton9":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WiaRpc", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord);

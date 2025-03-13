@@ -133,6 +133,47 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Personalization\Settings", "AcceptedPrivacyPolicy", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Windows Search", "CortanaConsent", 0, RegistryValueKind.DWord);
                             break;
+                        case "Phone":
+                            if (RegistryHelp.KeyExists(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\ModernSharing", false))
+                            {
+                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\SendTo");
+                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\ModernShare");
+                            }
+                            else
+                            {
+                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo");
+                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing");
+                            }
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c reg delete ""HKEY_CLASSES_ROOT\CLSID\{{7AD84985-87B4-4a16-BE58-8B72A5B390F7}}"" /f & reg delete ""HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{{7AD84985-87B4-4a16-BE58-8B72A5B390F7}}"" /f");
+                            break;
+                        case "Paint3D":
+                            try
+                            {
+                                using RegistryKey baseKey = Registry.ClassesRoot.OpenSubKey("SystemFileAssociations", true);
+                                if (baseKey != null)
+                                {
+                                    foreach (string subkey in baseKey.GetSubKeyNames())
+                                    {
+                                        try
+                                        {
+                                            using RegistryKey assocKey = baseKey.OpenSubKey(subkey, true);
+                                            if (assocKey != null)
+                                            {
+                                                using RegistryKey shellKey = assocKey.OpenSubKey("Shell", true);
+                                                if (shellKey != null)
+                                                {
+                                                    if (shellKey.GetSubKeyNames().Any(k => k.Equals("3D Print", StringComparison.OrdinalIgnoreCase)))
+                                                        RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\3D Print");
+                                                }
+                                            }
+                                        }
+                                        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                                    }
+                                    baseKey.Close();
+                                }
+                            }
+                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                            break;
                         case "Edge":
                             string script = $@"
                             $region = (Get-ItemProperty -Path 'Registry::HKEY_USERS\.DEFAULT\Control Panel\International\Geo').Name

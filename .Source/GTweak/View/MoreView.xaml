@@ -5,9 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.View"
              xmlns:UserControl="clr-namespace:GTweak.Assets.UserControl"
-             mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="1100"
-             Style="{StaticResource LaunchPage}">
+             mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="1100" Style="{StaticResource LaunchPage}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -15,7 +13,11 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock  Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0"><Run Text="{DynamicResource text0_more}"/><Run Text=" "/><Run Text="{DynamicResource text1_more}" Foreground="{StaticResource Color_Accent}"/><Run Text=" "/><Run Text="{DynamicResource text2_more}"/></TextBlock>
+            <TextBlock x:Name="test"  Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0">
+                <Run Text="{DynamicResource text0_more}"/>
+                <Run Text="{DynamicResource text1_more}" Foreground="{StaticResource Color_Accent}"/>
+                <Run Text="{DynamicResource text2_more}"/>
+            </TextBlock>
         </Grid>
 
         <UniformGrid Grid.Row="1" Columns="1">

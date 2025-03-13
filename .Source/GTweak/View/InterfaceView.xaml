@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.View"
              xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
-             mc:Ignorable="d" 
-             xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
-             d:DesignHeight="550" d:DesignWidth="1100"
+              xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
+             mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="1100"
              Style="{StaticResource LaunchPage}" Loaded="Page_Loaded">
     <UserControl.DataContext>
         <vm:InterfaceVM/>

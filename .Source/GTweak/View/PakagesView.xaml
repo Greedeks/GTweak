@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
              xmlns:local="clr-namespace:GTweak.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="1100"
+             mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="1100"
              Style="{StaticResource LaunchPage}" Loaded="Page_Loaded">
     <Grid>
         <Grid.RowDefinitions>
