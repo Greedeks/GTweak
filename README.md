@@ -82,6 +82,7 @@
 ```c++
 .NET Framework 4.8
 USE ONLY FOR WINDOWS 10/11
+Minimum screen resolution: 1280×720 (HD)
 ```
 </br>
 
