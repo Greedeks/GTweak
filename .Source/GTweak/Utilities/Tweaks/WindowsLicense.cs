@@ -34,7 +34,7 @@ namespace GTweak.Utilities.Tweaks
             Parallel.Invoke(() =>
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1").Get())
-                    IsWindowsActivated = false;
+                    IsWindowsActivated = (uint)managementObj["LicenseStatus"] == 1;
             });
         }
 
@@ -87,7 +87,12 @@ namespace GTweak.Utilities.Tweaks
                 {
                     Metadata file = JsonConvert.DeserializeObject<List<Metadata>>(File.ReadAllText(Path.Combine(StoragePaths.FolderLocation, "Tickets.json")))?.FirstOrDefault(f => f.Filename.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
                     XDocument xmlDoc = XDocument.Parse(file.Content);
-                    xmlDoc.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", file.Filename));
+
+                    string filePath = Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", file.Filename);
+                    if (File.Exists(filePath))
+                        File.Delete(filePath);
+
+                    xmlDoc.Save(filePath);
 
                 }
                 catch (Exception ex) { Debug.WriteLine(ex.Message); }
