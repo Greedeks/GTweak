@@ -20,7 +20,7 @@ namespace GTweak.Utilities.Configuration
 {
     internal sealed class SystemDiagnostics
     {
-        internal sealed class IPMetadata
+        private sealed class IPMetadata
         {
             [JsonProperty("query")]
             internal string Ip { get; set; }

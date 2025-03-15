@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -19,7 +18,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class WindowsLicense : WinKeyStorage
     {
-        class Metadata
+        private sealed class Metadata
         {
             public string Filename { get; set; }
             public string Content { get; set; }
@@ -79,33 +78,24 @@ namespace GTweak.Utilities.Tweaks
 
                 await RunCommand($"/c slmgr.vbs //b /ipk {keyWindow}", 4000);
 
-                if (!Directory.Exists(StoragePaths.FolderLocation))
-                    Directory.CreateDirectory(StoragePaths.FolderLocation);
-                File.WriteAllText(Path.Combine(StoragePaths.FolderLocation, "Tickets.json"), Encoding.UTF8.GetString(Properties.Resources.Tickets));
+                new UnarchiveManager(StoragePaths.FolderLocation + @"\Tickets.json", Properties.Resources.Tickets);
 
                 try
                 {
                     Metadata file = JsonConvert.DeserializeObject<List<Metadata>>(File.ReadAllText(Path.Combine(StoragePaths.FolderLocation, "Tickets.json")))?.FirstOrDefault(f => f.Filename.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
                     XDocument xmlDoc = XDocument.Parse(file.Content);
-
-                    string filePath = Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", file.Filename);
-                    if (File.Exists(filePath))
-                        File.Delete(filePath);
-
-                    xmlDoc.Save(filePath);
-
+                    xmlDoc.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", file.Filename));
                 }
                 catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
                 await Task.Delay(3000);
                 CommandExecutor.RunCommand("clipup -v -o", true);
                 await RunCommand("/c slmgr.vbs //b /ato", 3500);
+                CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}");
 
                 new WindowsLicense().LicenseStatus();
 
                 await Task.Delay(2000);
-
-                CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}");
 
                 if (IsWindowsActivated)
                 {
@@ -126,9 +116,6 @@ namespace GTweak.Utilities.Tweaks
 
                     using (cmdProcess)
                     {
-                        if (SystemDiagnostics.IsWindowsVersion[10])
-                            await RunCommand("/c assoc .vbs=VBSFile", 500);
-
                         await RunCommand($"/c slmgr.vbs //b /ipk {keyWindow}", 4000);
                         await RunCommand(kmsArguments, 7000);
                         await RunCommand("/c slmgr.vbs //b /ato", 3500);

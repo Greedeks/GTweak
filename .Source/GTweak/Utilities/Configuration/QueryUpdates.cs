@@ -7,7 +7,7 @@ namespace GTweak.Utilities.Configuration
 {
     internal sealed class QueryUpdates
     {
-        internal class GitMetadata
+        private sealed class GitMetadata
         {
             [JsonProperty("tag_name")]
             internal string СurrentVersion { get; set; }
