@@ -73,6 +73,16 @@ namespace GTweak.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] gatherosstatemodified {
+            get {
+                object obj = ResourceManager.GetObject("gatherosstatemodified", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] hosts {
             get {
                 object obj = ResourceManager.GetObject("hosts", resourceCulture);

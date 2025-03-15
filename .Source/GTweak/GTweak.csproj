@@ -534,6 +534,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Resources\Blank.gz" />
+    <None Include="Resources\gatherosstatemodified.gz" />
     <None Include="Resources\hosts.gz" />
     <None Include="Resources\Tickets.gz" />
     <None Include="Resources\Ultimate Performance.pow.gz" />
