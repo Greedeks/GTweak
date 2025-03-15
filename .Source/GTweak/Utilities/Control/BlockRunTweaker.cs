@@ -48,7 +48,7 @@ namespace GTweak.Utilities.Control
         {
             Parallel.Invoke(() =>
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, BuildNumber from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, Version, BuildNumber from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     SystemDiagnostics.WindowsClientVersion = Convert.ToString(managementObj["Caption"]);
                     SystemDiagnostics.WindowsBuildVersion = Convert.ToString(managementObj["BuildNumber"]);

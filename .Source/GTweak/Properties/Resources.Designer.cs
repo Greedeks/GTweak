@@ -92,6 +92,16 @@ namespace GTweak.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] Tickets {
+            get {
+                object obj = ResourceManager.GetObject("Tickets", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] Ultimate_Performance_pow {
             get {
                 object obj = ResourceManager.GetObject("Ultimate_Performance_pow", resourceCulture);
