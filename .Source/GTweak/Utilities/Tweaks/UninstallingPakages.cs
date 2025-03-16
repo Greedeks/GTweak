@@ -87,7 +87,7 @@ namespace GTweak.Utilities.Tweaks
                 return DeletedOneDrive();
             else
             {
-                return Task.Run(() =>
+                return Task.Run(async () =>
                 {
                     try
                     {
@@ -218,14 +218,11 @@ namespace GTweak.Utilities.Tweaks
 
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"");
 
-                            foreach (var package in new[] { new { ProcessName = "msedge", AppName = "Edge", Arguments = "--uninstall --msedge --channel=stable --system-level --verbose-logging" },
-                                new { ProcessName = "msedgewebview2", AppName = "EdgeWebView", Arguments = "--uninstall --msedgewebview --system-level --verbose-logging" }})
+                            foreach (var package in new[] { new { AppName = "Edge", Arguments = "--uninstall --msedge --channel=stable --system-level --verbose-logging" }, new { AppName = "EdgeWebView", Arguments = "--uninstall --msedgewebview --system-level --verbose-logging" } })
                             {
-                                foreach (var process in Process.GetProcessesByName(package.ProcessName))
-                                    process.Kill();
-
                                 try
                                 {
+                                    CommandExecutor.RunCommand("taskkill /F /IM msedge.exe /IM edgeupdate.exe /IM msedgewebview2.exe /IM MicrosoftEdgeUpdate.exe /IM msedgewebviewhost.exe /IM msedgeuserbroker.exe /T");
                                     string setupPath = Path.Combine(Directory.GetDirectories(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", package.AppName, "Application")).FirstOrDefault(), "Installer", "setup.exe");
 
                                     if (File.Exists(setupPath))
@@ -265,11 +262,12 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
                             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AppID\MicrosoftEdgeUpdate.exe", true);
 
-                            foreach (var path in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeCore"),
-                                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeUpdate"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "EdgeWebView"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Temp")})
+                            foreach (string folder in new string[] { "Edge", "EdgeCore", "EdgeUpdate", "EdgeWebView", "Temp" })
                             {
+                                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
                                 TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                                CommandExecutor.RunCommand($@"/c rmdir /s /q ""{path}""");
+                                await Task.Delay(1000);
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c rmdir /s /q ""{path}""");
                             }
 
                             try
