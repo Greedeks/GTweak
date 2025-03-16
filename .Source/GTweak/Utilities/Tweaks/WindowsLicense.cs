@@ -98,7 +98,7 @@ namespace GTweak.Utilities.Tweaks
 
                 await Task.Delay(1000);
                 await RunCommand("/c slmgr.vbs //b /ato", 3500);
-                CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}");
+
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", originalGeo, RegistryValueKind.String);
 
                 new WindowsLicense().LicenseStatus();
