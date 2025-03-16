@@ -536,7 +536,6 @@
     <None Include="packages.config" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\hosts.gz" />
-    <None Include="Resources\Tickets.gz" />
     <None Include="Resources\Ultimate Performance.pow.gz" />
     <Resource Include="Assets\Font\Jura-Medium.ttf" />
     <None Include="app.manifest" />
@@ -579,6 +578,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Tickets.xml" />
     <None Include="Resources\Sound.wav" />
   </ItemGroup>
   <ItemGroup>

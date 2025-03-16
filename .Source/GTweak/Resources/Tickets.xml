@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tickets>
+	<Ticket>
+		<product>KMS</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsARwBWAEwASwBFAHgAcAA9ADIAMAAzADgALQAwADEALQAxADkAVAAwADMAOgAxADQAOgAwADcAWgA7AEQAbwB3AG4AbABlAHYAZQBsAEcAZQBuAHUAaQBuAGUAUwB0AGEAdABlAD0AMQA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">C52iGEoH+1VqzI6kEAqOhUyrWuEObnivzaVjyef8WqItVYd/xGDTZZ3bkxAI9hTpobPFNJyJx6a3uriXq3HVd7mlXfSUK9ydeoUdG4eqMeLwkxeb6jQWJzLOz41rFVSMtBL0e+ycCATebTaXS4uvFYaDHDdPw2lKY8ADj3MLgsA=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>	
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.4.X19-99683_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgA0AC4AWAAxADkALQA5ADkANgA4ADMAXwA4AHcAZQBrAHkAYgAzAGQAOABiAGIAdwBlADsAUABLAGUAeQBJAEkARAA9ADQANgA1ADEANAA1ADIAMQA3ADEAMwAxADMAMQA0ADMAMAA0ADIANgA0ADMAMwA5ADQAOAAxADEAMQA3ADgANgAyADIANgA2ADIANAAyADAAMwAzADQANQA3ADIANgAwADMAMQAxADgAMQA5ADYANgA0ADcAMwA1ADIAOAAwADsAAAA=;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">HGNKjkKcKQHO6n8srMUrDh/MElffBZarLqCMD9rWtgFKf3YzYOLDPEMGhuO/auNMKCeiU7ebFbQALS/MyZ7TvidMQ2dvzXeXXKzPBjfwQx549WJUU7qAQ9Txg9cR9SAT8b12Pry2iBk+nZWD9VtHK3kOnEYkvp5WTCTsrSi6Re4=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.27.X19-98746_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAyADcALgBYADEAOQAtADkAOAA3ADQANgBfADgAdwBlAGsAeQBiADMAZAA4AGIAYgB3AGUAOwBQAEsAZQB5AEkASQBEAD0ANAA2ADUAMQA0ADUAMgAxADcAMQAzADEAMwAxADQAMwAwADQAMgA2ADQAMwAzADkANAA4ADEAMQAxADcAOAA2ADIAMgA2ADYAMgA0ADIAMAAzADMANAA1ADcAMgA2ADAAMwAxADEAOAAxADkANgA2ADQANwAzADUAMgA4ADAAOwAAAA==;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">NHn2n0N1UfVf00CfaI5LCDMDsKdVAWpD/HAfUrcTAKsw9d2Sks4h5MhyH/WUx+B6dFi8ol7D3AHorR8y9dqVS1Bd2FdZNJl/tTR1PGwYn6KL88NS19aHmFNdX8s4438vaa+Ty8Qk8EDcwm/wscC8lQmi3/RgUKYdyGFvpbGSVlk=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.48.X19-98841_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgA0ADgALgBYADEAOQAtADkAOAA4ADQAMQBfADgAdwBlAGsAeQBiADMAZAA4AGIAYgB3AGUAOwBQAEsAZQB5AEkASQBEAD0ANAA2ADUAMQA0ADUAMgAxADcAMQAzADEAMwAxADQAMwAwADQAMgA2ADQAMwAzADkANAA4ADEAMQAxADcAOAA2ADIAMgA2ADYAMgA0ADIAMAAzADMANAA1ADcAMgA2ADAAMwAxADEAOAAxADkANgA2ADQANwAzADUAMgA4ADAAOwAAAA==;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">Yl/jNfxJ1SnaIZCIZ4m6Pf3ySNoQXifNeqfltNaNctx+onwiivOx7qcSn8dFtURzgMzSOFnsRQzb5IrvuqHoxWWl1S3JIQn56FvKsvSx7aFXIX3+2Q98G1amPV/WEQ0uHA5d7Ya6An+g0Z0zRP7evGoomTs4YuweaWiZQjQzSpA=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.49.X19-98859_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgA0ADkALgBYADEAOQAtADkAOAA4ADUAOQBfADgAdwBlAGsAeQBiADMAZAA4AGIAYgB3AGUAOwBQAEsAZQB5AEkASQBEAD0ANAA2ADUAMQA0ADUAMgAxADcAMQAzADEAMwAxADQAMwAwADQAMgA2ADQAMwAzADkANAA4ADEAMQAxADcAOAA2ADIAMgA2ADYAMgA0ADIAMAAzADMANAA1ADcAMgA2ADAAMwAxADEAOAAxADkANgA2ADQANwAzADUAMgA4ADAAOwAAAA==;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">Ge0mRQbW8ALk7T09V+1k1yg66qoS0lhkgPIROOIOgxKmWPAvsiLAYPKDqM4+neFCA/qf1dHFmdh0VUrwFBPYsK251UeWuElj4bZFVISL6gUt1eZwbGfv5eurQ0i+qZiFv+CcQOEFsd5DD4Up6xPLLQS3nAXODL5rSrn2sHRoCVY=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.98.X19-98877_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgA5ADgALgBYADEAOQAtADkAOAA4ADcANwBfADgAdwBlAGsAeQBiADMAZAA4AGIAYgB3AGUAOwBQAEsAZQB5AEkASQBEAD0ANAA2ADUAMQA0ADUAMgAxADcAMQAzADEAMwAxADQAMwAwADQAMgA2ADQAMwAzADkANAA4ADEAMQAxADcAOAA2ADIAMgA2ADYAMgA0ADIAMAAzADMANAA1ADcAMgA2ADAAMwAxADEAOAAxADkANgA2ADQANwAzADUAMgA4ADAAOwAAAA==;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">vel4ytVtnE8FhvN87Cflz9sbh5QwHD1YGOeej9QP7hF3vlBR4EX2/S/09gRneeXVbQnjDOCd2KFMKRUWHLM7ZhFBk8AtlG+kvUawPZ+CIrwrD3mhi7NMv8UX/xkLK3HnBupMEuEwsMJgCUD8Pn6om1mEiQebHBAqu4cT7GN9Y0g=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.99.X19-99652_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgA5ADkALgBYADEAOQAtADkAOQA2ADUAMgBfADgAdwBlAGsAeQBiADMAZAA4AGIAYgB3AGUAOwBQAEsAZQB5AEkASQBEAD0ANAA2ADUAMQA0ADUAMgAxADcAMQAzADEAMwAxADQAMwAwADQAMgA2ADQAMwAzADkANAA4ADEAMQAxADcAOAA2ADIAMgA2ADYAMgA0ADIAMAAzADMANAA1ADcAMgA2ADAAMwAxADEAOAAxADkANgA2ADQANwAzADUAMgA4ADAAOwAAAA==;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">Nv17eUTrr1TmUX6frlI7V69VR6yWb7alppCFJPcdjfI+xX4/Cf2np3zm7jmC+zxFb9nELUs477/ydw2KCCXFfM53bKpBQZKHE5+MdGJGxebOCcOtJ3hrkDJtwlVxTQmUgk5xnlmpk8PHg82M2uM5B7UsGLxGKK4d3hi0voSyKeI=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.100.X19-99661_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADAAMAAuAFgAMQA5AC0AOQA5ADYANgAxAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">FV2Eao/R5v8sGrfQeOjQ4daokVlNOlqRCDZXuaC45bQd5PsNU3t1b4AwWeYM8TAwbHauzr4tPG0UlsUqUikCZHy0poROx35bBBMBym6Zbm9wDBVyi7nCzBtwS86eOonQ3cU6WfZxhZRze0POdR33G3QTNPrnVIM2gf6nZJYqDOA=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.101.X19-98868_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADAAMQAuAFgAMQA5AC0AOQA4ADgANgA4AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">GH/jwFxIcdQhNxJIlFka8c1H48PF0y7TgJwaryAUzqSKXynONLw7MVciDJFVXTkCjbXSdxLSWpPIC50/xyy1rAf8aC7WuN/9cRNAvtFPC1IVAJaMeq1vf4mCqRrrxJQP6ZEcuAeHFzLe/LLovGWCd8rrs6BbBwJXCvAqXImvycQ=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.119.X19-99606_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADEAOQAuAFgAMQA5AC0AOQA5ADYAMAA2AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">hci78IRWDLBtdbnAIKLDgV9whYgtHc1uYyp9y6FszE9wZBD5Nc8CUD2pI2s2RRd3M04C4O7M3tisB3Ov/XVjpAbxlX3MWfUR5w4MH0AphbuQX0p5MuHEDYyfqlRgBBRzOKePF06qfYvPQMuEfDpKCKFwNojQxBV8O0Arf5zmrIw=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.121.X19-98886_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIAMQAuAFgAMQA5AC0AOQA4ADgAOAA2AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">x9tPFDZmjZMf29zFeHV5SHbXj8Wd8YAcCn/0hbpLcId4D7OWqkQKXxXHIegRlwcWjtII0sZ6WYB0HQV2KH3LvYRnWKpJ5SxeOgdzBIJ6fhegYGGyiXsBv9sEb3/zidPU6ZK9LugVGAcRZ6HQOiXyOw+Yf5H35iM+2oDZXSpjvJw=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.122.X19-98892_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIAMgAuAFgAMQA5AC0AOQA4ADgAOQAyAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">jkL4YZkmBCJtvL1fT30ZPBcjmzshBSxjwrE0Q00AZ1hYnhrH+npzo1MPCT6ZRHw19ZLTz7wzyBb0qqcBVbtEjZW0Xs2MYLxgriyoONkhnPE6KSUJBw7C0enFVLHEqnVu/nkaOFfockN3bc+Eouw6W2lmHjklPHc9c6Clo04jul0=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.125.X19-99617_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANQAuAFgAMQA5AC0AOQA5ADYAMQA3AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">Fe9CDClilrAmwwT7Yhfx67GafWRQEpwyj8R+a4eaTqbpPcAt7d1hv1rx8Sa9AzopEGxIrb7IhiPoDZs0XaT1HN0/olJJ/MnD73CfBP4sdQdLTsSJE3dKMWYTQHpnjqRaS/pNBYRr8l9Mv8yfcP8uS2MjIQ1cRTqRmC7WMpShyCg=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.125.X21-05035_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANQAuAFgAMgAxAC0AMAA1ADAAMwA1AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">ntcKmazIvLpZOryft28gWBHu1nHSbR+Gp143f/BiVe+BD2UjHBZfSR1q405xmQZsygz6VRK6+zm8FPR++71pkmArgCLhodCQJ5I4m7rAJNw/YX99pILphi1yCRcvHsOTGa825GUVXgf530tHT6hr0HQ1lGeGgG1hPekpqqBbTlg=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.125.X21-83233_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANQAuAFgAMgAxAC0AOAAzADIAMwAzAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">EpB6qOCo8pRgO5kL4vxEHck2J1vxyd9OqvxUenDnYO9AkcGWat/D74ZcFg5SFlIya1U8l5zv+tsvZ4wAvQ1IaFW1PwOKJLOaGgejqZ41TIMdFGGw+G+s1RHsEnrWr3UOakTodby1aIMUMoqf3NdaM5aWFo8fOmqWC5/LnCoighs=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.125.X22-66075_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANQAuAFgAMgAyAC0ANgA2ADAANwA1AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">GCqWmJOsTVun9z4QkE9n2XqBvt3ZWSPl9QmIh9Q2mXMG/QVt2IE7S+ES/NWlyTSNjLVySr1D2sGjxgEzy9kLwn7VENQVJ736h1iOdMj/3rdqLMSpTa813+nPSQgKpqJ3uMuvIvRP0FdB7Y4qt8qf9kNKK25A1QknioD/6YubL/4=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.125.X23-50331_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANQAuAFgAMgAzAC0ANQAwADMAMwAxAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">OPGhsyx+Ctw7w/KLMRNrY+fNBmKPjUG0R9RqkWk4e8ez+ExSJxSLLex5WhO5QSNgXLmEra+cCsN6C638aLjIdH2/L7D+8z/C6EDgRvbHMmidHg1lX3/O8lv0JudHkGtHJYewjorn/xXGY++vOCTQdZNk6qzEgmYSvPehKfdg8js=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.126.X19-98770_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANgAuAFgAMQA5AC0AOQA4ADcANwAwAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">kbXfe0z9Vi1S0yfxMWzI5+UtWsJKzxs7wLGUDLjrckFDn1bDQb4MvvuCK1w+Qrq33lemiGpNDspa+ehXiYEeSPFcCvUBpoMlGBFfzurNCHWiv3o1k3jBoawJr/VoDoVZfxhkps0fVoubf9oy6C6AgrkZ7PjCaS58edMcaUWvYYg=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.126.X21-04921_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANgAuAFgAMgAxAC0AMAA0ADkAMgAxAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">zLPNvcl1iqOefy0VLg+WZgNtRNhuGpn8+BFKjMqjaNOSKiuDcR6GNDS5FF1Aqk6/e6shJ+ohKzuwrnmYq3iNQ3I2MBlYjM5kuNfKs8Vl9dCjSpQr//GBGps6HtF2xrG/2g/yhtYC7FbtGDIE16uOeNKFcVg+XMb0qHE/5Etyfd8=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.126.X21-83264_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANgAuAFgAMgAxAC0AOAAzADIANgA0AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">Fl7tjifybEI9hArxMVFKqIqmI6mrCZy4EtJyVjpo2eSfeMTBli55+E0i2AaPfE2FJknUig7HuiNC1Pu2IWZcj5ShVFQEKPY6K//RucX8oPQfh0zK5r1aNJNvV4gMlqvOyGD8sXttLBZv8wg1w/++cNk/z38DE2shiDf7LYnK4w0=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.126.X22-66108_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANgAuAFgAMgAyAC0ANgA2ADEAMAA4AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">w/HFPDNCz4EogszDYZ8xUJh8aylfpgh6gzm9k8JSteprY5UumLc5n6KUwiSE3/5NaiI9gZ3xmTJq+g1OSPsdGwhuA+8LA2pQhA+wU8VO/ZaYxe1T4WF6oip/c0n6xA1sx/mWYNwd/WBDJpslTw5NRNLc5wWh0FV5RtxCaXE07lM=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.126.X23-50304_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADIANgAuAFgAMgAzAC0ANQAwADMAMAA0AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">h6V6Q4DL/hlvcD3GyVxrVfP1BEL4a5TdyNCMlbq/OZnky/HowuRAcHMpN59fwqLS98+7WEDooWCrxriXcATwo0fwOGs/fEfP/Pa5SKP+Xnng1eoPm1PkjuZaqA8p2dPQv32wJ0u3QW7VMQM9BzzpyqtNAsqNS/wl7vfN7tyLbDo=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.139.X23-37869_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADMAOQAuAFgAMgAzAC0AMwA3ADgANgA5AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">PVW0XnRJnsWYjTqxb6StCi2tge/uUwegjdiFaFUiZpwdJ620RK+MIAsSq5S+egXXzIWNntoy2fB6BO8F1wBFmxP/mm/3rn5C33jtF5QrbNqY7X9HMbqSiC7zhs4v4u2Xa4oZQx8JQkwr8Q2c/NgHrOJKKRASsSckhunxZ+WVEuM=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.161.X21-43626_8wekyb3d8bbwe"</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADYAMQAuAFgAMgAxAC0ANAAzADYAMgA2AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">MaVqTkRrGnOqYizl15whCOKWzx01+BZTVAalvEuHXM+WV55jnIfhWmd/u1GqCd5OplqXdU959zmipK2Iwgu2nw/g91nW//sQiN/cUcvg1Lxo6pC3gAo1AjTpHmGIIf9XlZMYlD+Vl6gXsi/Auwh3yrSSFh5s7gOczZoDTqQwHXA=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.162.X21-43644_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADYAMgAuAFgAMgAxAC0ANAAzADYANAA0AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">JVGQowLiCcPtGY9ndbBDV+rTu/q5ljmQTwQWZgBIQsrAeQjLD8jLEk/qse7riZ7tMT6PKFVNXeWqF7PhLAmACbE8O3Lvp65XMd/Oml9Daynj5/4n7unsffFHIHH8TGyO5j7xb4dkFNqC5TX3P8/1gQEkTIdZEOTQQXFu0L2SP5c=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.164.X21-04955_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADYANAAuAFgAMgAxAC0AMAA0ADkANQA1AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">CEDgxI8f/fxMBiwmeXw5Of55DG32sbGALzHihXkdbYTDaE3pY37oAA4zwGHALzAFN/t254QImGPYR6hATgl+Cp804f7serJqiLeXY965Zy67I4CKIMBm49lzHLFJeDnVTjDB0wVyN29pvgO3+HLhZ22KYCpkRHFFMy2OKxS68Yc=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.165.X21-04956_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADYANQAuAFgAMgAxAC0AMAA0ADkANQA2AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">r35zp9OfxKSBcTxKWon3zFtbOiCufAPo6xRGY5DJqCRFKdB0jgZalNQitvjmaZ/Rlez2vjRJnEart4LrvyW4d9rrukAjR3+c3UkeTKwoD3qBl9AdRJbXCa2BdsoXJs1WVS4w4LuVzpB/SZDuggZt0F2DlMB427F5aflook/n1pY=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.175.X21-41295_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADcANQAuAFgAMgAxAC0ANAAxADIAOQA1AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">rVpetYUmiRB48YJfCvJHiaZapJ0bO8gQDRoql+rq5IobiSRu//efV1VXqVpBkwILQRKgKIVONSTUF5y2TSxlDLbDSPKp7UHfbz17g6vRKLwOameYEz0ZcK3NTbApN/cMljHvvF/mBag1+sHjWu+eoFzk8H89k9nw8LMeVOPJRDc=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.178.X21-32983_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADcAOAAuAFgAMgAxAC0AMwAyADkAOAAzAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">Xzme9hDZR6H0Yx0deURVdE6LiTOkVqWng5W/OTbkxRc0rq+mSYpo/f/yqhtwYlrkBPWx16Yok5Bvcb34vbKHvEAtxfYp4te20uexLzVOtBcoeEozARv4W/6MhYfl+llZtR5efsktj4N4/G4sVbuGvZ9nzNfQO9TwV6NGgGEj2Ec=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.179.X21-32987_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADcAOQAuAFgAMgAxAC0AMwAyADkAOAA3AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">QGRDZOU/VZhYLOSdp2xDnFs8HInNZctcQlWCIrORVnxTQr55IJwN4vK3PJHjkfRLQ/bgUrcEIhyFbANqZFUq8yD1YNubb2bjNORgI/m8u85O9V7nDGtxzO/viEBSWyEHnrzLKKWYqkRQKbbSW3ungaZR0Ti5O2mAUI4HzAFej50=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.188.X21-99378_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADgAOAAuAFgAMgAxAC0AOQA5ADMANwA4AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">djy0od0uuKd2rrIl+V1/2+MeRltNgW7FEeTNQsPMkVSL75NBphgoso4uS0JPv2D7Y1iEEvmVq6G842Kyt52QOwXgFWmP/IQ6Sq1dr+fHK/4Et7bEPrrGBEZoCfWqk0kdcZRPBij2KN6qCRWhrk1hX2g+U40smx/EYCLGh9HCi24=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.191.X21-99682_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADkAMQAuAFgAMgAxAC0AOQA5ADYAOAAyAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">qHs/PzfhYWdtSys2edzcz4h+Qs8aDqb8BIiQ/mJ/+0uyoJh1fitbRCIgiFh2WAGZXjdgB8hZeheNwHibd8ChXaXg4u+0XlOdFlaDTgTXblji8fjETzDBk9aGkeMCvyVXRuUYhTSdp83IqGHz7XuLwN2p/6AUArx9JZCoLGV8j3w=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.191.X23-12617_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAxADkAMQAuAFgAMgAzAC0AMQAyADYAMQA3AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">J/fpIRynsVQXbp4qZNKp6RvOgZ/P2klILUKQguMlcwrBZybwNkHg/kM5LNOF/aDzEktbPnLnX40GEvKkYT6/qP4cMhn/SOY0/hYOkIdR34ilzNlVNq5xP7CMjCjaUYJe+6ydHPK6FpOuEoWOYYP5BZENKNGyBy4w4shkMAw19mA=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.202.X22-53884_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAyADAAMgAuAFgAMgAyAC0ANQAzADgAOAA0AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">kyoNx2s93U6OUSklB1xn+GXcwCJO1QTEtACYnChi8aXSoxGQ6H2xHfUdHVCwUA1OR0UeNcRrMmOzZBOEUBtdoGWSYPg9AMjvxlxq9JOzYAH+G6lT0UbCWgMSGGrqdcIfmshyEak3aUmsZK6l+uIAFCCZZ/HbbCRkkHC5rWKstMI=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.203.X22-53847_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAyADAAMwAuAFgAMgAyAC0ANQAzADgANAA3AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">gD6HnT4jP4rcNu9u83gvDiQq1xs7QSujcDbo60Di5iSVa9/ihZ7nlhnA0eDEZfnoDXriRiPPqc09T6AhSnFxLYitAkOuPJqL5UMobIrab9dwTKlowqFolxoHhLOO4V92Hsvn/9JLy7rEzoiAWHhX/0cpMr3FCzVYPeUW1OyLT1A=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.205.X23-15042_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAyADAANQAuAFgAMgAzAC0AMQA1ADAANAAyAF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">blZopkUuayCTgZKH4bOFiisH9GTAHG5/js6UX/qcMWWc3sWNxKSX1OLp1k3h8Xx1cFuvfG/fNAw/I83ssEtPY+A0Gx1JF4QpRqsGOqJ5ruQ2tGW56CJcCVHkB+i46nJAD759gYmy3pEYMQbmpWbhLx3MJ6kvwxKfU+0VCio8k50=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+	<Ticket>
+		<product>Microsoft.Windows.206.X23-62084_8wekyb3d8bbwe</product>
+		<content>
+			<![CDATA[
+			<?xml version="1.0" encoding="utf-8"?><genuineAuthorization xmlns="http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0"><version>1.0</version><genuineProperties origin="sppclient"><properties>OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsAUABmAG4APQBNAGkAYwByAG8AcwBvAGYAdAAuAFcAaQBuAGQAbwB3AHMALgAyADAANgAuAFgAMgAzAC0ANgAyADAAOAA0AF8AOAB3AGUAawB5AGIAMwBkADgAYgBiAHcAZQA7AFAASwBlAHkASQBJAEQAPQA0ADYANQAxADQANQAyADEANwAxADMAMQAzADEANAAzADAANAAyADYANAAzADMAOQA0ADgAMQAxADEANwA4ADYAMgAyADYANgAyADQAMgAwADMAMwA0ADUANwAyADYAMAAzADEAMQA4ADEAOQA2ADYANAA3ADMANQAyADgAMAA7AAAA;TimeStampClient=2022-10-11T12:00:00Z</properties><signatures><signature name="clientLockboxKey" method="rsa-sha256">habUJ0hhAG0P8iIKaRQ74/wZQHyAdFlwHmrejNjOSRG08JeqilJlTM6V8G9UERLJ92/uMDVHIVOPXfN8Zdh8JuYO8oflPnqymIRmff/pU+Gpb871jV2JDA4Cft5gmn+ictKoN4VoSfEZRR+R5hzF2FsoCExDNNw6gLdjtiX94uA=</signature></signatures></genuineProperties></genuineAuthorization>
+			]]>
+		</content>
+	</Ticket>
+</Tickets>

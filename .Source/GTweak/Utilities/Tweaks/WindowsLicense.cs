@@ -4,9 +4,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Storage;
 using GTweak.Windows;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -79,8 +77,6 @@ namespace GTweak.Utilities.Tweaks
 
                 await RunCommand($"/c slmgr.vbs //b /ipk {keyWindow}", 4000);
 
-                new UnarchiveManager(StoragePaths.FolderLocation + @"\Tickets.json", Properties.Resources.Tickets);
-
                 CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
                 string originalGeo = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", string.Empty);
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", "US", RegistryValueKind.String);
@@ -90,12 +86,11 @@ namespace GTweak.Utilities.Tweaks
 
                 try
                 {
-                    string jsonPath = Path.Combine(StoragePaths.FolderLocation, "Tickets.json");
-                    string jsonContent = File.Exists(jsonPath) ? File.ReadAllText(jsonPath) : "[]";
-                    List<Metadata> metadataList = JsonConvert.DeserializeObject<List<Metadata>>(jsonContent) ?? new List<Metadata>();
-                    Metadata file = metadataList.FirstOrDefault(f => f.Filename.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0) ?? metadataList.FirstOrDefault(f => f.Filename.Equals("KMS.xml", StringComparison.OrdinalIgnoreCase));
-                    XDocument xmlDoc = XDocument.Parse(file.Content);
-                    xmlDoc.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
+                    XDocument xmlDoc = XDocument.Parse(Properties.Resources.Tickets);
+                    XElement foundTicket = xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
+                    foundTicket ??= xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value == "KMS");
+                    XDocument genuineXml = XDocument.Parse(foundTicket.Element("content")?.Value.Trim());
+                    genuineXml.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
                     await Task.Delay(3000);
                     CommandExecutor.RunCommand("clipup -v -o", true);
                 }
