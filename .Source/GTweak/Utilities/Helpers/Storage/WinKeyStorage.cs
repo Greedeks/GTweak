@@ -6,17 +6,24 @@ namespace GTweak.Utilities.Helpers.Storage
     {
         internal static readonly Dictionary<(string pattern, byte words), string> keysKMS = new Dictionary<(string pattern, byte words), string>
         {
-            { ("Home|Single|Language", 3), @"7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH" },
             { ("Home", 1), @"TX9XD-98N7V-6WMQ6-BX7FG-H8Q99" },
+            { ("Home|N", 2), @"4CPRK-NM3K3-X6XXQ-RXX86-WXCHW" },
+            { ("Home|Single|Language", 3), @"7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH" },
             { ("Education", 1), @"NW6C2-QMPVW-D7KKK-3GKT6-VCFB2" },
-            { ("Enterprise|LSTB", 2), @"7YMNV-PG77F-K66KT-KG9VQ-TCQGB" },
-            { ("Enterprise|N|LTSC", 3), @"92NFX-8DJQP-P6BBQ-THF9C-7CG2H" },
+            { ("Education|N", 2), @"WH4N-8QGBV-H22JP-CT43Q-MDWWJ" },
+            { ("Enterprise", 1), @"NPPR9-FWDCX-D2C8J-H872K-2YT43" },
             { ("Enterprise|N", 2), @"DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4" },
             { ("Enterprise|G", 2), @"YYVX9-NTFWV-6MDM3-9PT4T-4M68B" },
-            { ("Enterprise", 1), @"ND4DX-39KJY-FYWQ9-X6XKT-VCFCF" },
-            { ("Core|Single|Language", 3), @"BT79Q-G7N6G-PGBYW-4YWX6-6F4BT" },
+            { ("Enterprise|LSTB", 2), @"7YMNV-PG77F-K66KT-KG9VQ-TCQGB" },
+            { ("Enterprise|LTSC", 2), @"M7XTQ-FN8P6-TTKYV-9D4CC-J462D" },
+            { ("Enterprise|N|G", 3), @"44RPN-FTY23-9VTTB-MP9BX-T84FV" },
+            { ("Enterprise|N|LTSC", 3), @"92NFX-8DJQP-P6BBQ-THF9C-7CG2H" },
             { ("Core", 1), @"KTNPV-KTRK4-3RRR8-39X6W-W44T3" },
-            { ("Pro", 1), @"W269N-WFGWX-YVC9B-4J6C9-T83GX" }
+            { ("Core|Single|Language", 3), @"BT79Q-G7N6G-PGBYW-4YWX6-6F4BT" },
+            { ("Pro", 1), @"W269N-WFGWX-YVC9B-4J6C9-T83GX" },
+            { ("Pro|N", 2), @"MH37W-N47XK-V7XM9-C7227-GCQG9" },
+            { ("Pro|for|Workstations", 3), @"N9FNHH-K3HBT-3W4TD-6383H-6XYWF" },
+            { ("Pro|N|for|Workstations", 4), @"9FNHH-K3HBT-3W4TD-6383H-6XYWF" },
         };
 
         internal static readonly Dictionary<(string pattern, byte words), string> keysHWID = new Dictionary<(string pattern, byte words), string>

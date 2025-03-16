@@ -81,39 +81,30 @@ namespace GTweak.Utilities.Tweaks
 
                 new UnarchiveManager(StoragePaths.FolderLocation + @"\Tickets.json", Properties.Resources.Tickets);
 
+                CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
+                string originalGeo = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", string.Empty);
+                RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", "US", RegistryValueKind.String);
+                foreach (string service in new string[] { "ClipSVC", "wlidsvc", "sppsvc", "KeyIso", "LicenseManager", "Winmgmt" })
+                    CommandExecutor.RunCommand($"sc config {service} start= auto && sc start {service}");
+                await Task.Delay(3000);
+
                 try
                 {
                     string jsonPath = Path.Combine(StoragePaths.FolderLocation, "Tickets.json");
                     string jsonContent = File.Exists(jsonPath) ? File.ReadAllText(jsonPath) : "[]";
                     List<Metadata> metadataList = JsonConvert.DeserializeObject<List<Metadata>>(jsonContent) ?? new List<Metadata>();
-                    Metadata file = metadataList.FirstOrDefault(f => f.Filename.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
-
-                    if (file != null)
-                    {
-                        XDocument xmlDoc = XDocument.Parse(file.Content);
-                        xmlDoc.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", file.Filename));
-                        await Task.Delay(3000);
-                        CommandExecutor.RunCommand("clipup -v -o", true);
-                    }
-                    else
-                    {
-                        string path = Path.Combine(StoragePaths.FolderLocation, "gatherosstatemodified.exe");
-                        new UnarchiveManager(path, Properties.Resources.gatherosstatemodified);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers", path, "~ RUNASADMIN WINXPSP3", RegistryValueKind.String);
-                        DateTime userTime = DateTime.Now;
-                        CommandExecutor.RunCommand($"Set-Date -Date '{new DateTime(2022, 10, 11, 12, 0, 0):yyyy-MM-dd HH:mm:ss}'", true);
-                        await Task.Delay(2000);
-                        CommandExecutor.RunCommand($@"{path} /c Pfn={RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty)};PKeyIID=465145217131314304264339481117862266242033457260311819664735280", true);
-                        await Task.Delay(1000);
-                        CommandExecutor.RunCommand($"Set-Date -Date '{userTime:yyyy-MM-dd HH:mm:ss}'", true);
-                        CommandExecutor.RunCommand($"clipup -v -o -altto {StoragePaths.FolderLocation}", true);
-                    }
+                    Metadata file = metadataList.FirstOrDefault(f => f.Filename.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0) ?? metadataList.FirstOrDefault(f => f.Filename.Equals("KMS.xml", StringComparison.OrdinalIgnoreCase));
+                    XDocument xmlDoc = XDocument.Parse(file.Content);
+                    xmlDoc.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
+                    await Task.Delay(3000);
+                    CommandExecutor.RunCommand("clipup -v -o", true);
                 }
                 catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
                 await Task.Delay(1000);
                 await RunCommand("/c slmgr.vbs //b /ato", 3500);
                 CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}");
+                RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", originalGeo, RegistryValueKind.String);
 
                 new WindowsLicense().LicenseStatus();
 

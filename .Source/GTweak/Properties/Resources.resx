@@ -121,9 +121,6 @@
   <data name="Blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Blank.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="gatherosstatemodified" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gatherosstatemodified.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="hosts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hosts.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

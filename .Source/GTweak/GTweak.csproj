@@ -531,10 +531,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Resources\Blank.gz" />
-    <None Include="Resources\gatherosstatemodified.gz" />
     <None Include="Resources\hosts.gz" />
     <None Include="Resources\Tickets.gz" />
     <None Include="Resources\Ultimate Performance.pow.gz" />
