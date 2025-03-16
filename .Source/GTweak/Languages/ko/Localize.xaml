@@ -64,6 +64,7 @@
     <v:String x:Key="warn_defrag_notification">디스크 조각 모음을 이미 비활성화했습니다</v:String>
     <v:String x:Key="error_defrag_notification">문제가 발생하여 조각 모음을 비활성화할 수 없습니다.</v:String>
     <v:String x:Key="success_defrag_notification">드라이브에 대해 조각 모음이 성공적으로 비활성화되었습니다</v:String>
+    <v:String x:Key="networklicense_notification">An internet connection is required for activation</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->

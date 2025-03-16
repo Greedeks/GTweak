@@ -64,6 +64,7 @@
     <v:String x:Key="warn_defrag_notification">У вас вже вимкнено дефрагментацію дисків</v:String>
     <v:String x:Key="error_defrag_notification">Щось не так, не вдалося вимкнути дефрагментацію</v:String>
     <v:String x:Key="success_defrag_notification">Дефрагментацію ваших дисків успішно вимкнено</v:String>
+    <v:String x:Key="networklicense_notification">Для активації потрібне підключення до Інтернету</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->

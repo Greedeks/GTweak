@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Control;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using GTweak.Windows;
@@ -13,6 +14,7 @@ namespace GTweak.View
         public MoreView()
         {
             InitializeComponent();
+            WindowsLicense.IsWindowsActivated = false;
         }
 
         private void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
@@ -21,8 +23,13 @@ namespace GTweak.View
                 new ViewNotification().Show("", "info", "readyactivate_notification");
             else
             {
-                new ViewNotification().Show("", "warn", "activatewin_notification");
-                WindowsLicense.StartActivation();
+                if (SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available || SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Block) 
+                {
+                    new ViewNotification().Show("", "warn", "activatewin_notification");
+                    WindowsLicense.StartActivation();
+                }
+                else
+                    new ViewNotification().Show("", "warn", "networklicense_notification");
             }
         }
 
