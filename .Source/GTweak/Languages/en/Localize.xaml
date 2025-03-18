@@ -425,7 +425,7 @@
     <v:String x:Key="text1_more">recommended</v:String>
     <v:String x:Key="text2_more">to create a restore point before using the utility</v:String>
     <v:String x:Key="title_licens_more">Windows Activation</v:String>
-    <v:String x:Key="text_licens_more">This method is not 100% working and legal. Buying a key would be the best solution.</v:String>
+    <v:String x:Key="text_licens_more">The HWID method or backup KMS is applied: it may not work if there is no key for your Windows edition.</v:String>
     <v:String x:Key="btntext_licens_more">Activate</v:String>
     <v:String x:Key="title_createpoint_more">Save the system</v:String>
     <v:String x:Key="text_createpoint_more">It will create a Windows system restore point, even if it is disabled.</v:String>

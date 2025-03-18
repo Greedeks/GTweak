@@ -425,7 +425,7 @@
     <v:String x:Key="text1_more">복원 지점</v:String>
     <v:String x:Key="text2_more">을 생성하는 것이 좋습니다</v:String>
     <v:String x:Key="title_licens_more">Windows 정품 인증</v:String>
-    <v:String x:Key="text_licens_more">이 방법은 100% 효과가 있고 합법적인 방법은 아닙니다. 키를 구입하는 것이 가장 좋은 해결책입니다.</v:String>
+    <v:String x:Key="text_licens_more">HWID 또는 백업 KMS 방법이 적용됩니다: Windows 에디션에 키가 없으면 작동하지 않을 수 있습니다.</v:String>
     <v:String x:Key="btntext_licens_more">활성화</v:String>
     <v:String x:Key="title_createpoint_more">시스템 저장</v:String>
     <v:String x:Key="text_createpoint_more">비활성화되어 있어도 Windows 시스템 복원 지점을 생성합니다.</v:String>

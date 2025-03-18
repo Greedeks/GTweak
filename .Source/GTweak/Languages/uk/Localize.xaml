@@ -425,7 +425,7 @@
     <v:String x:Key="text1_more">рекомендовано</v:String>
     <v:String x:Key="text2_more">створити точку відновлення перед використанням утиліти</v:String>
     <v:String x:Key="title_licens_more">Активація Windows</v:String>
-    <v:String x:Key="text_licens_more">Цей метод не є на 100% робочим та законними. Найкращим рішенням буде купівля ключа.</v:String>
+    <v:String x:Key="text_licens_more">Застосовується метод HWID або резервний KMS: він може не працювати, якщо відсутній ключ для вашої Windows.</v:String>
     <v:String x:Key="btntext_licens_more">Активувати</v:String>
     <v:String x:Key="title_createpoint_more">Резервування системи</v:String>
     <v:String x:Key="text_createpoint_more">Створення точки відновлення Windows, навіть у разі вимкнення їх створення.</v:String>

@@ -17,12 +17,6 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class WindowsLicense : WinKeyStorage
     {
-        private sealed class Metadata
-        {
-            public string Filename { get; set; }
-            public string Content { get; set; }
-        }
-
         internal static bool IsWindowsActivated = false;
 
         private static bool IsVersionWindows(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(SystemDiagnostics.WindowsClientVersion).Count == words;
@@ -40,16 +34,7 @@ namespace GTweak.Utilities.Tweaks
         {
             WaitingWindow waitingWindow = new WaitingWindow();
 
-            string keyWindow = string.Empty, kmsArguments = string.Empty;
-
-            foreach (var key in keysHWID)
-            {
-                if (IsVersionWindows(key.Key.pattern, key.Key.words))
-                {
-                    keyWindow = key.Value;
-                    break;
-                }
-            }
+            string keyWindow = keysHWID.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
 
             Process cmdProcess = new Process()
             {
@@ -112,20 +97,12 @@ namespace GTweak.Utilities.Tweaks
                 }
                 else
                 {
-                    foreach (var key in keysKMS)
-                    {
-                        if (IsVersionWindows(key.Key.pattern, key.Key.words))
-                        {
-                            keyWindow = key.Value;
-                            kmsArguments = key.Key.pattern == "Pro" ? @"/c slmgr.vbs //b /skms kms.digiboy.ir" : @"/c slmgr.vbs //b /skms kms.xspace.in";
-                            break;
-                        }
-                    }
+                    keyWindow = keysKMS.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
 
                     using (cmdProcess)
                     {
                         await RunCommand($"/c slmgr.vbs //b /ipk {keyWindow}", 4000);
-                        await RunCommand(kmsArguments, 7000);
+                        await RunCommand("/c slmgr.vbs //b /skms kms.digiboy.ir", 7000);
                         await RunCommand("/c slmgr.vbs //b /ato", 3500);
 
                         new WindowsLicense().LicenseStatus();
