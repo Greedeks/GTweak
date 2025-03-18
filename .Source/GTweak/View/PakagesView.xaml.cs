@@ -86,6 +86,9 @@ namespace GTweak.View
                                 {
                                     UninstallingPakages.HandleAvailabilityStatus(packageName, false);
                                     UpdateViewStatePakages();
+
+                                    if (ExplorerManager.GetAppsStorage.TryGetValue(packageName, out bool needRestart))
+                                        ExplorerManager.Restart(new Process());
                                 });
                             }
                             catch (Exception ex) { Debug.WriteLine(ex.Message); }

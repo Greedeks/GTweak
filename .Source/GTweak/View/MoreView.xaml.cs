@@ -23,10 +23,7 @@ namespace GTweak.View
             else
             {
                 if (SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available || SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Block)
-                {
-                    new ViewNotification().Show("", "warn", "activatewin_notification");
                     WindowsLicense.StartActivation();
-                }
                 else
                     new ViewNotification().Show("", "warn", "networklicense_notification");
             }

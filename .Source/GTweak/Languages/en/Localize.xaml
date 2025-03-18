@@ -65,6 +65,7 @@
     <v:String x:Key="error_defrag_notification">Something went wrong, defragmentation could not be disabled.</v:String>
     <v:String x:Key="success_defrag_notification">Defragmentation has been successfully disabled for your drive</v:String>
     <v:String x:Key="networklicense_notification">An internet connection is required for activation</v:String>
+    <v:String x:Key="keynotfound_notification">The key for your Windows edition is missing; activation canceled</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->

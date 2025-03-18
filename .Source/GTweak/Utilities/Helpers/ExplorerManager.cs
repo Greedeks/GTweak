@@ -48,5 +48,11 @@ namespace GTweak.Utilities.Helpers
             new { Button = "TglButton30", NeedRestart = true },
             new { Button = "TglButton32", NeedRestart = true },
         }.ToDictionary(x => x.Button, x => x.NeedRestart);
+
+        internal static readonly Dictionary<string, bool> GetAppsStorage = new[]
+{
+            new { Package = "Widgets", NeedRestart = true },
+            new { Package = "Edge", NeedRestart = true }
+        }.ToDictionary(x => x.Package, x => x.NeedRestart);
     }
 }

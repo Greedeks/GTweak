@@ -65,6 +65,7 @@
     <v:String x:Key="error_defrag_notification">Щось не так, не вдалося вимкнути дефрагментацію</v:String>
     <v:String x:Key="success_defrag_notification">Дефрагментацію ваших дисків успішно вимкнено</v:String>
     <v:String x:Key="networklicense_notification">Для активації потрібне підключення до Інтернету</v:String>
+    <v:String x:Key="keynotfound_notification">Ключ для вашої редакції Windows відсутній, активація скасована</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->

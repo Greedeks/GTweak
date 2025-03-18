@@ -32,9 +32,16 @@ namespace GTweak.Utilities.Tweaks
 
         internal static async void StartActivation()
         {
-            WaitingWindow waitingWindow = new WaitingWindow();
+            string keyWinHWID = keysHWID.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
+            string keyWinKMS = keysKMS.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
 
-            string keyWindow = keysHWID.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
+            if (string.IsNullOrEmpty(keyWinHWID) && string.IsNullOrEmpty(keyWinKMS))
+            {
+                new ViewNotification(300).Show("", "warn", "keynotfound_notification");
+                return;
+            }
+
+            new ViewNotification().Show("", "warn", "activatewin_notification");
 
             Process cmdProcess = new Process()
             {
@@ -53,6 +60,8 @@ namespace GTweak.Utilities.Tweaks
                 await Task.Delay(delay);
             }
 
+            WaitingWindow waitingWindow = new WaitingWindow();
+
             using (cmdProcess)
             {
                 waitingWindow.Show();
@@ -60,7 +69,7 @@ namespace GTweak.Utilities.Tweaks
                 if (SystemDiagnostics.IsWindowsVersion[10])
                     await RunCommand("/c assoc .vbs=VBSFile", 500);
 
-                await RunCommand($"/c slmgr.vbs //b /ipk {keyWindow}", 4000);
+                await RunCommand($"/c slmgr.vbs //b /ipk {keyWinHWID}", 4000);
 
                 CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
                 string originalGeo = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", string.Empty);
@@ -97,11 +106,9 @@ namespace GTweak.Utilities.Tweaks
                 }
                 else
                 {
-                    keyWindow = keysKMS.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
-
                     using (cmdProcess)
                     {
-                        await RunCommand($"/c slmgr.vbs //b /ipk {keyWindow}", 4000);
+                        await RunCommand($"/c slmgr.vbs //b /ipk {keysKMS}", 4000);
                         await RunCommand("/c slmgr.vbs //b /skms kms.digiboy.ir", 7000);
                         await RunCommand("/c slmgr.vbs //b /ato", 3500);
 
@@ -111,10 +118,7 @@ namespace GTweak.Utilities.Tweaks
 
                         waitingWindow.Close();
 
-                        if (IsWindowsActivated)
-                            new ViewNotification(300).Show("restart", "warn", "successactivate_notification");
-                        else
-                            new ViewNotification(300).Show("", "warn", "notsuccessactivate_notification");
+                        new ViewNotification(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "successactivate_notification" : "notsuccessactivate_notification");
                     }
                 }
             }
