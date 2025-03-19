@@ -16,14 +16,14 @@ namespace GTweak.View
             InitializeComponent();
         }
 
-        private void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
+        private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
             if (WindowsLicense.IsWindowsActivated)
                 new ViewNotification().Show("", "info", "readyactivate_notification");
             else
             {
                 if (SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available || SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Block)
-                    WindowsLicense.StartActivation();
+                    await WindowsLicense.StartActivation();
                 else
                     new ViewNotification().Show("", "warn", "networklicense_notification");
             }

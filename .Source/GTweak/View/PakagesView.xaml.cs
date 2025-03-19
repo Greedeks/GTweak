@@ -63,21 +63,16 @@ namespace GTweak.View
             {
                 case MouseButtonState.Pressed when Equals(pakageImage.Source, FindResource("A_DI_" + packageName)):
                     {
+                        UninstallingPakages.HandleAvailabilityStatus(packageName, true);
+                        UpdateViewStatePakages();
+
                         timer.Stop();
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { UninstallingPakages.DeletingPackage(packageName); });
-
                         await backgroundQueue.QueueTask(async delegate
                         {
                             try
                             {
-                                await Dispatcher.InvokeAsync(() =>
-                                {
-                                    UninstallingPakages.HandleAvailabilityStatus(packageName, true);
-                                    UpdateViewStatePakages();
-                                });
-
                                 await UninstallingPakages.DeletingPackage(packageName);
 
                                 await Task.Delay(3000);
@@ -100,6 +95,9 @@ namespace GTweak.View
 
                 case MouseButtonState.Pressed when Equals(pakageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
                     {
+                        UninstallingPakages.HandleAvailabilityStatus(packageName, true);
+                        UpdateViewStatePakages();
+
                         timer.Stop();
 
                         new ViewNotification().Show("", "info", "onedrive_notification");
@@ -109,12 +107,6 @@ namespace GTweak.View
                         {
                             try
                             {
-                                await Dispatcher.InvokeAsync(() =>
-                                {
-                                    UninstallingPakages.HandleAvailabilityStatus(packageName, true);
-                                    UpdateViewStatePakages();
-                                });
-
                                 await UninstallingPakages.ResetOneDrive();
 
                                 await Dispatcher.InvokeAsync(() =>

@@ -31,6 +31,8 @@ namespace GTweak.Utilities.Helpers
         internal IntPtr ptrHook;
         internal LowLevelKeyboardProc objKeyboardProcess;
 
+        internal DisablingWinKeys() => objKeyboardProcess = CaptureKey;
+
         internal IntPtr CaptureKey(int nCode, IntPtr wp, IntPtr lp)
         {
             if (nCode >= 0)

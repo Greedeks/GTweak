@@ -30,7 +30,7 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        internal static async void StartActivation()
+        internal static async Task StartActivation()
         {
             string keyWinHWID = keysHWID.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
             string keyWinKMS = keysKMS.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
@@ -43,55 +43,50 @@ namespace GTweak.Utilities.Tweaks
 
             new ViewNotification().Show("", "warn", "activatewin_notification");
 
-            Process cmdProcess = new Process()
+            static async Task RunCommandAsync(string arguments, int delay)
             {
-                StartInfo = new ProcessStartInfo
+                using Process cmdProcess = new Process
                 {
-                    FileName = "cmd.exe",
-                    CreateNoWindow = true,
-                    WindowStyle = ProcessWindowStyle.Hidden
-                }
-            };
-
-            async Task RunCommand(string arguments, int delay)
-            {
-                cmdProcess.StartInfo.Arguments = arguments;
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "cmd.exe",
+                        Arguments = arguments,
+                        CreateNoWindow = true,
+                        WindowStyle = ProcessWindowStyle.Hidden
+                    }
+                };
                 cmdProcess.Start();
                 await Task.Delay(delay);
             }
 
             WaitingWindow waitingWindow = new WaitingWindow();
+            waitingWindow.Show();
 
-            using (cmdProcess)
+            try
             {
-                waitingWindow.Show();
-
                 if (SystemDiagnostics.IsWindowsVersion[10])
-                    await RunCommand("/c assoc .vbs=VBSFile", 500);
+                    await RunCommandAsync("/c assoc .vbs=VBSFile", 500);
 
-                await RunCommand($"/c slmgr.vbs //b /ipk {keyWinHWID}", 4000);
+                await RunCommandAsync($"/c slmgr.vbs //b /ipk {keyWinHWID}", 4000);
 
-                CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
+                CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml");
                 string originalGeo = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", string.Empty);
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", "US", RegistryValueKind.String);
                 foreach (string service in new string[] { "ClipSVC", "wlidsvc", "sppsvc", "KeyIso", "LicenseManager", "Winmgmt" })
                     CommandExecutor.RunCommand($"sc config {service} start= auto && sc start {service}");
+
                 await Task.Delay(3000);
 
-                try
-                {
-                    XDocument xmlDoc = XDocument.Parse(Properties.Resources.Tickets);
-                    XElement foundTicket = xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
-                    foundTicket ??= xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value == "KMS");
-                    XDocument genuineXml = XDocument.Parse(foundTicket.Element("content")?.Value.Trim());
-                    genuineXml.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
-                    await Task.Delay(3000);
-                    CommandExecutor.RunCommand("clipup -v -o", true);
-                }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                XDocument xmlDoc = XDocument.Parse(Properties.Resources.Tickets);
+                XElement foundTicket = xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
+                foundTicket ??= xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value == "KMS");
+                XDocument genuineXml = XDocument.Parse(foundTicket.Element("content")?.Value.Trim());
+                genuineXml.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
+                await Task.Delay(3000);
+                CommandExecutor.RunCommand("clipup -v -o", true);
 
                 await Task.Delay(1000);
-                await RunCommand("/c slmgr.vbs //b /ato", 3500);
+                await RunCommandAsync("/c slmgr.vbs //b /ato", 3500);
 
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", originalGeo, RegistryValueKind.String);
 
@@ -106,21 +101,23 @@ namespace GTweak.Utilities.Tweaks
                 }
                 else
                 {
-                    using (cmdProcess)
-                    {
-                        await RunCommand($"/c slmgr.vbs //b /ipk {keysKMS}", 4000);
-                        await RunCommand("/c slmgr.vbs //b /skms kms.digiboy.ir", 7000);
-                        await RunCommand("/c slmgr.vbs //b /ato", 3500);
+                    await RunCommandAsync($"/c slmgr.vbs //b /ipk {keysKMS}", 4000);
+                    await RunCommandAsync("/c slmgr.vbs //b /skms kms.digiboy.ir", 7000);
+                    await RunCommandAsync("/c slmgr.vbs //b /ato", 3500);
 
-                        new WindowsLicense().LicenseStatus();
+                    new WindowsLicense().LicenseStatus();
 
-                        await Task.Delay(2000);
+                    await Task.Delay(2000);
 
-                        waitingWindow.Close();
+                    waitingWindow.Close();
 
-                        new ViewNotification(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "successactivate_notification" : "notsuccessactivate_notification");
-                    }
+                    new ViewNotification(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "successactivate_notification" : "notsuccessactivate_notification");
                 }
+            }
+            catch
+            {
+                waitingWindow.Close();
+                new ViewNotification(300).Show("", "warn", "notsuccessactivate_notification");
             }
         }
     }
