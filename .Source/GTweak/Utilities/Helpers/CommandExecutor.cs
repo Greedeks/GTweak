@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
 {
-    internal sealed class CommandExecutor
+    internal static class CommandExecutor
     {
         internal static async Task<string> GetCommandOutput(string arguments, bool isPowerShell = true)
         {
@@ -26,7 +26,7 @@ namespace GTweak.Utilities.Helpers
                 string output = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();
 
-                process.WaitForExit();
+                process.WaitForExitAsync();
 
                 if (process.ExitCode == 0)
                     return string.Join(Environment.NewLine, output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));
@@ -50,6 +50,17 @@ namespace GTweak.Utilities.Helpers
                     CreateNoWindow = true,
                 });
             });
+        }
+
+        internal static Task WaitForExitAsync(this Process process)
+        {
+            if (process.HasExited)
+                return Task.CompletedTask;
+
+            var tcs = new TaskCompletionSource<object>();
+            process.EnableRaisingEvents = true;
+            process.Exited += (sender, args) => tcs.TrySetResult(null);
+            return tcs.Task;
         }
     }
 }

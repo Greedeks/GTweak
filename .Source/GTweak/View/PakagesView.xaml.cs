@@ -18,7 +18,6 @@ namespace GTweak.View
     {
         private readonly DispatcherTimer timer;
         private TimeSpan time = TimeSpan.FromSeconds(0);
-        private string packageName = string.Empty;
 
         public PakagesView()
         {
@@ -56,28 +55,29 @@ namespace GTweak.View
 
         private async void ClickApp_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Image pakageImage = (Image)sender;
-            packageName = pakageImage.Name;
+            Image packageImage = (Image)sender;
+            string packageName = packageImage.Name;
 
             switch (e.LeftButton)
             {
-                case MouseButtonState.Pressed when Equals(pakageImage.Source, FindResource("A_DI_" + packageName)):
+                case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("A_DI_" + packageName)):
                     {
-                        UninstallingPakages.HandleAvailabilityStatus(packageName, true);
-                        UpdateViewStatePakages();
-
-                        timer.Stop();
-
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(async delegate
                         {
                             try
                             {
+                                Dispatcher.Invoke(() =>
+                                {
+                                    UninstallingPakages.HandleAvailabilityStatus(packageName, true);
+                                    UpdateViewStatePakages();
+                                });
+
                                 await UninstallingPakages.DeletingPackage(packageName);
 
                                 await Task.Delay(3000);
 
-                                await Dispatcher.InvokeAsync(() =>
+                                Dispatcher.Invoke(() =>
                                 {
                                     UninstallingPakages.HandleAvailabilityStatus(packageName, false);
                                     UpdateViewStatePakages();
@@ -88,18 +88,11 @@ namespace GTweak.View
                             }
                             catch (Exception ex) { Debug.WriteLine(ex.Message); }
                         });
-
-                        timer.Start();
                         break;
                     }
 
-                case MouseButtonState.Pressed when Equals(pakageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
+                case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
                     {
-                        UninstallingPakages.HandleAvailabilityStatus(packageName, true);
-                        UpdateViewStatePakages();
-
-                        timer.Stop();
-
                         new ViewNotification().Show("", "info", "onedrive_notification");
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
@@ -107,9 +100,17 @@ namespace GTweak.View
                         {
                             try
                             {
+                                Dispatcher.Invoke(() =>
+                                {
+                                    UninstallingPakages.HandleAvailabilityStatus(packageName, true);
+                                    UpdateViewStatePakages();
+                                });
+
                                 await UninstallingPakages.ResetOneDrive();
 
-                                await Dispatcher.InvokeAsync(() =>
+                                await Task.Delay(3000);
+
+                                Dispatcher.Invoke(() =>
                                 {
                                     UninstallingPakages.HandleAvailabilityStatus(packageName, false);
                                     UpdateViewStatePakages();
@@ -117,8 +118,6 @@ namespace GTweak.View
                             }
                             catch (Exception ex) { Debug.WriteLine(ex.Message); }
                         });
-
-                        timer.Start();
                         break;
                     }
             }

@@ -91,38 +91,36 @@ namespace GTweak.Utilities.Tweaks
                 {
                     try
                     {
+                        static async Task RunPowerShell(string arguments)
+                        {
+                            ProcessStartInfo startInfo = new ProcessStartInfo
+                            {
+                                FileName = "powershell.exe",
+                                Arguments = arguments,
+                                UseShellExecute = false,
+                                CreateNoWindow = true,
+                                RedirectStandardOutput = true,
+                                RedirectStandardError = true
+                            };
+
+                            using var process = new Process { StartInfo = startInfo };
+                            process.Start();
+                            await process.WaitForExitAsync();
+                        }
+
                         var (Alias, IsUnavailable, Scripts) = PackagesDetails[packageName];
                         string argument = "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command";
 
-                        using Process process = new Process
-                        {
-                            StartInfo =
-                            {
-                                UseShellExecute = false,
-                                CreateNoWindow = true,
-                                WindowStyle = ProcessWindowStyle.Minimized,
-                                FileName = "powershell.exe"
-                            },
-                            EnableRaisingEvents = true
-                        };
-
-                        process.StartInfo.Arguments = $"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"";
-                        process.Start();
-                        process.WaitForExit();
+                        await RunPowerShell($"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"");
 
                         foreach (string getScript in Scripts)
                         {
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getScript}*"") do rd /s /q ""%i""");
-                            process.StartInfo.Arguments = $"{argument} \"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage\"";
-                            process.Start();
-                            process.WaitForExit();
+                            await RunPowerShell($"{argument} \"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage\"");
                         }
 
                         if (!string.IsNullOrEmpty(Alias))
-                        {
-                            process.StartInfo.Arguments = $"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{Alias}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"";
-                            process.WaitForExit();
-                        }
+                            await RunPowerShell($"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{Alias}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"");
                     }
                     catch (Exception ex) { Debug.WriteLine(ex); }
 
@@ -297,7 +295,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal static Task DeletedOneDrive()
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
@@ -312,7 +310,7 @@ namespace GTweak.Utilities.Tweaks
                 using Process process = new Process { StartInfo = startInfo };
 
                 process.Start();
-                process.WaitForExit();
+                await process.WaitForExitAsync();
 
                 if (process.ExitCode == 0)
                 {
@@ -327,7 +325,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal static Task ResetOneDrive()
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
@@ -342,7 +340,7 @@ namespace GTweak.Utilities.Tweaks
                 using Process process = new Process { StartInfo = startInfo };
 
                 process.Start();
-                process.WaitForExit();
+                await process.WaitForExitAsync();
 
                 if (process.ExitCode == 0)
                 {
