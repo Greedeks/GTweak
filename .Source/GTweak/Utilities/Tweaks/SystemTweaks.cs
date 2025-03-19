@@ -87,11 +87,14 @@ namespace GTweak.Utilities.Tweaks
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
-            systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe")) ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableRealtimeMonitoring", "1");
+            if (!isTweakWorkingAntivirus)
+            {
+                systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe")) ||
+                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", "0") ||
+                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", "1") ||
+                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", "1") ||
+                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableRealtimeMonitoring", "1");
+            }
 
             systemV.TglButton9.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", "0") ||
