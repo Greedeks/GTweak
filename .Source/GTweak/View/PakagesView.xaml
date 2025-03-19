@@ -8,400 +8,416 @@
              mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="1100"
              Style="{StaticResource LaunchPage}" Loaded="Page_Loaded">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="139*"/>
-            <RowDefinition Height="45*"/>
-        </Grid.RowDefinitions>
+        <Grid x:Name="Overlay" Panel.ZIndex="1" Visibility="Collapsed">
+            <Grid Background="{StaticResource Color_Background_Dark}" Opacity="0.9"/>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Width="auto" Margin="0,0,0,100">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Width="25">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource DI_Warning}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock Text="{DynamicResource title_over_applications}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="20px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    <TextBlock Margin="0,10,0,0" Text="{DynamicResource text_over_applications}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="583" FontFamily="{StaticResource Jura}" FontSize="16px" TextAlignment="Justify" FontStretch="Medium" TextWrapping="Wrap"/>
 
-        <Grid Grid.Row="0">
+                    <TextBlock Margin="0,20,0,0" Text="{DynamicResource question_over_applications}" Foreground="{StaticResource Color_Accent}" Height="auto" Width="512" FontFamily="{StaticResource Jura}" FontSize="16px" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap"/>
+                    <Grid Margin="0,20,0,0" HorizontalAlignment="Center" Width="345">
+                        <Button x:Name="BtnDelete" Content="{DynamicResource btn_delete_applications}" Style="{StaticResource BtnDefaultM}" FontSize="15px" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
+                        <Button x:Name="BtnCancel" Content="{DynamicResource btn_сancel_applications}" Style="{StaticResource BtnDefault}" FontSize="15px" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="139*"/>
+                <RowDefinition Height="45*"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <TextBlock  Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0">
+            <Grid Grid.Row="0">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <TextBlock  Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0">
                    <Run Text="{DynamicResource text0_applications}"/>
                    <Run Text="{DynamicResource text1_applications}" Foreground="{StaticResource Color_Accent}"/>
                    <Run Text="{DynamicResource text2_applications}"/>
                    <Run Text="{DynamicResource text3_applications}" Foreground="{StaticResource Color_Inactive}"/>
                    <Run Text="{DynamicResource text4_applications}"/>
-                </TextBlock>
-            </StackPanel>
-
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="1100" Height="Auto" Margin="0,-10,0,0">
-                <StackPanel Orientation="Vertical" Margin="8,95,968,0" VerticalAlignment="Top">
-                    <Image x:Name="OneConnect" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_OneConnect}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="LinkedIn" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_LinkedIn}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="DevHome" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_DevHome}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
-                
-                
-                <StackPanel Orientation="Vertical" Margin="88,50,888,0" VerticalAlignment="Top">
-                    <Image x:Name="MicrosoftStore" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftStore}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Xbox" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Xbox}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="OneNote" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                         <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_OneNote}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Outlook" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Outlook}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
+                    </TextBlock>
                 </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="168,95,808,0" VerticalAlignment="Top">
-                    <Image x:Name="MicrosoftOfficeHub" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftOfficeHub}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="MicrosoftSolitaireCollection" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftSolitaireCollection}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="MixedReality" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_MixedReality}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="1100" Height="Auto" Margin="0,-10,0,0">
+                    <StackPanel Orientation="Vertical" Margin="8,95,968,0" VerticalAlignment="Top">
+                        <Image x:Name="OneConnect" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_OneConnect}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="LinkedIn" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_LinkedIn}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="DevHome" PreviewMouseDown="ClickApp_PreviewMouseDown"  MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_DevHome}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="248,50,728,0" VerticalAlignment="Top">
-                    <Image x:Name="BingWeather" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_BingWeather}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Microsoft3D" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Microsoft3D}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="SkypeApp" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_SkypeApp}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="BingSports" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_BingSports}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="88,50,888,0" VerticalAlignment="Top">
+                        <Image x:Name="MicrosoftStore" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftStore}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Xbox" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Xbox}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="OneNote" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_OneNote}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Outlook" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Outlook}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
+                    <StackPanel Orientation="Vertical" Margin="168,95,808,0" VerticalAlignment="Top">
+                        <Image x:Name="MicrosoftOfficeHub" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftOfficeHub}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="MicrosoftSolitaireCollection" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftSolitaireCollection}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="MixedReality" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_MixedReality}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="328,95,648,0" VerticalAlignment="Top">
-                    <Image x:Name="OneDrive" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_OneDrive}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Cortana" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Cortana}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="MicrosoftTeams" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftTeams}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="248,50,728,0" VerticalAlignment="Top">
+                        <Image x:Name="BingWeather" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_BingWeather}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Microsoft3D" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Microsoft3D}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="SkypeApp" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_SkypeApp}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="BingSports" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_BingSports}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="408,50,568,0" VerticalAlignment="Top">
-                    <Image x:Name="Music" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Music}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Video" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Video}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="SoundRecorder" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_SoundRecorder}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="BingFinance" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_BingFinance}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="328,95,648,0" VerticalAlignment="Top">
+                        <Image x:Name="OneDrive" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_OneDrive}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Cortana" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Cortana}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="MicrosoftTeams" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftTeams}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="488,95,488,0" VerticalAlignment="Top">
-                    <Image x:Name="FeedbackHub" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_FeedbackHub}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Mail" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Mail}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Widgets" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Widgets}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="408,50,568,0" VerticalAlignment="Top">
+                        <Image x:Name="Music" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Music}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Video" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Video}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="SoundRecorder" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_SoundRecorder}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="BingFinance" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_BingFinance}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="568,50,408,0" VerticalAlignment="Top">
-                    <Image x:Name="Photos" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Photos}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="ScreenSketch" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_ScreenSketch}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="ClipChamp" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_ClipChamp}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="MicrosoftFamily" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftFamily}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="488,95,488,0" VerticalAlignment="Top">
+                        <Image x:Name="FeedbackHub" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_FeedbackHub}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Mail" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Mail}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Widgets" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Widgets}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="648,95,328,0" VerticalAlignment="Top">
-                    <Image x:Name="GetStarted" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_GetStarted}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="GetHelp" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_GetHelp}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="MicrosoftStickyNotes" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftStickyNotes}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="568,50,408,0" VerticalAlignment="Top">
+                        <Image x:Name="Photos" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Photos}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="ScreenSketch" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_ScreenSketch}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="ClipChamp" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_ClipChamp}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="MicrosoftFamily" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftFamily}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="728,50,248,0" VerticalAlignment="Top">
-                    <Image x:Name="Maps" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Maps}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Camera" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Camera}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Paint3D" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Paint3D}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="BingSearch" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_BingSearch}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="648,95,328,0" VerticalAlignment="Top">
+                        <Image x:Name="GetStarted" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_GetStarted}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="GetHelp" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_GetHelp}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="MicrosoftStickyNotes" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_MicrosoftStickyNotes}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="808,95,168,0" VerticalAlignment="Top">
-                    <Image x:Name="PowerAutomateDesktop" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_PowerAutomateDesktop}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="People" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_People}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="BingNews" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_BingNews}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="728,50,248,0" VerticalAlignment="Top">
+                        <Image x:Name="Maps" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Maps}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Camera" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Camera}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Paint3D" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Paint3D}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="BingSearch" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_BingSearch}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                
-                <StackPanel Orientation="Vertical" Margin="888,50,88,0" VerticalAlignment="Top">
-                    <Image x:Name="Todos" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Todos}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Alarms" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Alarms}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Phone" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Phone}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="QuickAssist" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_QuickAssist}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="808,95,168,0" VerticalAlignment="Top">
+                        <Image x:Name="PowerAutomateDesktop" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_PowerAutomateDesktop}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="People" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_People}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="BingNews" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_BingNews}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="968,95,8,0" VerticalAlignment="Top">
-                    <Image x:Name="WindowsTerminal" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_WindowsTerminal}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="WebMediaExtensions" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_WebMediaExtensions}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                    <Image x:Name="Edge" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
-                        <Image.Style>
-                            <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
-                                <Setter Property="Source" Value="{StaticResource A_DI_Edge}"/>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="888,50,88,0" VerticalAlignment="Top">
+                        <Image x:Name="Todos" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Todos}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Alarms" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Alarms}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Phone" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Phone}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="QuickAssist" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_QuickAssist}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="968,95,8,0" VerticalAlignment="Top">
+                        <Image x:Name="WindowsTerminal" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_WindowsTerminal}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="WebMediaExtensions" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_WebMediaExtensions}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <Image x:Name="Edge" PreviewMouseDown="ClickApp_PreviewMouseDown" MouseEnter="Apps_MouseEnter" MouseLeave="Apps_MouseLeave">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
+                                    <Setter Property="Source" Value="{StaticResource A_DI_Edge}"/>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </StackPanel>
+                </Grid>
+
             </Grid>
 
-        </Grid>
-
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40*"/>
-                <RowDefinition Height="95*"/>
-            </Grid.RowDefinitions>
-
             <Grid Grid.Row="1">
-                <uc:Comment x:Name="CommentApp" DefaultText="{DynamicResource defaultDescriptionApp}"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="95*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1">
+                    <uc:Comment x:Name="CommentApp" DefaultText="{DynamicResource defaultDescriptionApp}"/>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

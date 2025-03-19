@@ -279,6 +279,12 @@
     <v:String x:Key="WebMediaExtensions_applications">Розширення для інтернету-мультимедіа</v:String>
     <v:String x:Key="OneConnect_applications">Тарифні плани</v:String>
     <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
+
+    <v:String x:Key="title_over_applications">Підтвердження видалення</v:String>
+    <v:String x:Key="text_over_applications">Ви збираєтеся видалити браузер Microsoft Edge. При цьому також буде видалено компонент EdgeWebView, який відповідає за відображення веб-сторінок у певних програмах, таких як пакет Microsoft Office та інші. Перш ніж продовжити, переконайтеся, що цей компонент вам не потрібен.</v:String>
+    <v:String x:Key="question_over_applications">Чи хотіли б ви продовжити видалення разом з EdgeWebView?</v:String>
+    <v:String x:Key="btn_сancel_applications">Скасувати</v:String>
+    <v:String x:Key="btn_delete_applications">Видалити</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->

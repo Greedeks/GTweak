@@ -81,7 +81,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal async void ViewInstalledPackages() => InstalledPackages = await CommandExecutor.GetCommandOutput("Get-AppxPackage | Select-Object -ExpandProperty Name");
 
-        internal static Task DeletingPackage(string packageName)
+        internal static Task DeletingPackage(string packageName, bool removeWebViewFlag = false)
         {
             if (packageName == "OneDrive")
                 return DeletedOneDrive();
@@ -220,11 +220,15 @@ namespace GTweak.Utilities.Tweaks
                             {
                                 try
                                 {
-                                    CommandExecutor.RunCommand("taskkill /F /IM msedge.exe /IM edgeupdate.exe /IM msedgewebview2.exe /IM MicrosoftEdgeUpdate.exe /IM msedgewebviewhost.exe /IM msedgeuserbroker.exe /T");
+
+                                    CommandExecutor.RunCommand("taskkill /f /im msedge.exe /im edgeupdate.exe /im msedgewebview2.exe /im MicrosoftEdgeUpdate.exe /im msedgewebviewhost.exe /im msedgeuserbroker.exe /t");
                                     string setupPath = Path.Combine(Directory.GetDirectories(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", package.AppName, "Application")).FirstOrDefault(), "Installer", "setup.exe");
 
                                     if (File.Exists(setupPath))
                                     {
+                                        if (!removeWebViewFlag && package.AppName == "EdgeWebView")
+                                            continue;
+
                                         Process.Start(new ProcessStartInfo
                                         {
                                             FileName = setupPath,
@@ -256,13 +260,22 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Edge", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update", true);
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Classes\MSEdgeHTM", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
                             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AppID\MicrosoftEdgeUpdate.exe", true);
 
-                            foreach (string folder in new string[] { "Edge", "EdgeCore", "EdgeUpdate", "EdgeWebView", "Temp" })
+                            if (removeWebViewFlag)
                             {
+                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeWebView", true);
+                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\EdgeWebView", true);
+                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView", true);
+                            }
+
+                            foreach (string folder in new string[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
+                            {
+                                if (!removeWebViewFlag && folder == "EdgeWebView")
+                                    continue;
+
                                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
                                 TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                 await Task.Delay(1000);
@@ -276,8 +289,11 @@ namespace GTweak.Utilities.Tweaks
                                 {
                                     using RegistryKey subKeyEntry = key.OpenSubKey(subKey);
                                     string path = subKeyEntry?.GetValue("Path") as string;
-                                    if (!string.IsNullOrEmpty(path) && path.Contains("Edge"))
+                                    if (!string.IsNullOrEmpty(path) && path.Equals("Edge"))
                                     {
+                                        if (!removeWebViewFlag && path.Contains("WebView"))
+                                            continue;
+
                                         path = path.Replace(@"\AppxManifest.xml", "").Trim();
                                         TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                         TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c rmdir /s /q ""{path}""");

@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace GTweak.View
@@ -18,6 +19,7 @@ namespace GTweak.View
     {
         private readonly DispatcherTimer timer;
         private TimeSpan time = TimeSpan.FromSeconds(0);
+        private bool isWebViewRemoval = false;
 
         public PakagesView()
         {
@@ -62,8 +64,38 @@ namespace GTweak.View
             {
                 case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("A_DI_" + packageName)):
                     {
+                        if (packageName.Equals("Edge"))
+                        {
+                            Overlay.Visibility = Visibility.Visible;
+
+                            OverlayAnimation(0, 1, 0.3);
+
+                            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+                            void DeleteHandler(object sender, RoutedEventArgs args)
+                            {
+                                tcs.TrySetResult(true);
+                                BtnDelete.PreviewMouseLeftButtonUp -= DeleteHandler;
+                                BtnCancel.PreviewMouseLeftButtonUp -= CancelHandler;
+                            }
+
+                            void CancelHandler(object sender, RoutedEventArgs args)
+                            {
+                                tcs.TrySetResult(false);
+                                BtnDelete.PreviewMouseLeftButtonUp -= DeleteHandler;
+                                BtnCancel.PreviewMouseLeftButtonUp -= CancelHandler;
+                            }
+
+                            BtnDelete.PreviewMouseLeftButtonUp += DeleteHandler;
+                            BtnCancel.PreviewMouseLeftButtonUp += CancelHandler;
+
+                            isWebViewRemoval = await tcs.Task;
+
+                            OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
+                        }
+
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(async delegate
+                        await backgroundQueue.QueueTask(async () =>
                         {
                             try
                             {
@@ -73,7 +105,7 @@ namespace GTweak.View
                                     UpdateViewStatePakages();
                                 });
 
-                                await UninstallingPakages.DeletingPackage(packageName);
+                                await UninstallingPakages.DeletingPackage(packageName, isWebViewRemoval);
 
                                 await Task.Delay(3000);
 
@@ -96,7 +128,7 @@ namespace GTweak.View
                         new ViewNotification().Show("", "info", "onedrive_notification");
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(async delegate
+                        await backgroundQueue.QueueTask(async () =>
                         {
                             try
                             {
@@ -181,6 +213,21 @@ namespace GTweak.View
             WebMediaExtensions.Source = AvailabilityInstalledPackage("WebMediaExtensions", "Microsoft.WebMediaExtensions");
             OneConnect.Source = AvailabilityInstalledPackage("OneConnect", "Microsoft.OneConnect");
             Edge.Source = AvailabilityInstalledPackage("Edge", "Microsoft.MicrosoftEdge.Stable");
+        }
+
+
+        private void OverlayAnimation(double from, double to, double duration, EventHandler onComplete = null)
+        {
+            DoubleAnimation doubleAnim = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = TimeSpan.FromSeconds(duration),
+                EasingFunction = new QuadraticEase()
+            };
+            if (onComplete != null) { doubleAnim.Completed += onComplete; }
+            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Overlay.BeginAnimation(OpacityProperty, doubleAnim);
         }
     }
 }

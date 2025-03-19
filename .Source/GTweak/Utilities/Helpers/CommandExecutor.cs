@@ -57,7 +57,7 @@ namespace GTweak.Utilities.Helpers
             if (process.HasExited)
                 return Task.CompletedTask;
 
-            var tcs = new TaskCompletionSource<object>();
+            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
             process.EnableRaisingEvents = true;
             process.Exited += (sender, args) => tcs.TrySetResult(null);
             return tcs.Task;
