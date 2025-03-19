@@ -69,7 +69,7 @@ namespace GTweak.Utilities.Tweaks
 
                 await RunCommandAsync($"/c slmgr.vbs //b /ipk {keyWinHWID}", 4000);
 
-                CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml");
+                CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
                 string originalGeo = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", string.Empty);
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", "US", RegistryValueKind.String);
                 foreach (string service in new string[] { "ClipSVC", "wlidsvc", "sppsvc", "KeyIso", "LicenseManager", "Winmgmt" })
