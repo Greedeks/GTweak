@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.ServiceProcess;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
