@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.ServiceProcess;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
@@ -216,32 +217,30 @@ namespace GTweak.Utilities.Tweaks
 
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"");
 
+                            foreach (string process in new string[] { "msedge.exe", "edgeupdate.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe" })
+                                CommandExecutor.RunCommand($"/c taskkill /f /im {process} /t");
                             foreach (var package in new[] { new { AppName = "Edge", Arguments = "--uninstall --msedge --channel=stable --system-level --verbose-logging" }, new { AppName = "EdgeWebView", Arguments = "--uninstall --msedgewebview --system-level --verbose-logging" } })
                             {
                                 try
                                 {
-
-                                    CommandExecutor.RunCommand("taskkill /f /im msedge.exe /im edgeupdate.exe /im msedgewebview2.exe /im MicrosoftEdgeUpdate.exe /im msedgewebviewhost.exe /im msedgeuserbroker.exe /t");
                                     string setupPath = Path.Combine(Directory.GetDirectories(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", package.AppName, "Application")).FirstOrDefault(), "Installer", "setup.exe");
 
-                                    if (File.Exists(setupPath))
-                                    {
-                                        if (!removeWebViewFlag && package.AppName == "EdgeWebView")
-                                            continue;
+                                    if (!removeWebViewFlag && package.AppName == "EdgeWebView")
+                                        continue;
 
-                                        Process.Start(new ProcessStartInfo
-                                        {
-                                            FileName = setupPath,
-                                            Arguments = package.Arguments,
-                                            UseShellExecute = true,
-                                            WindowStyle = ProcessWindowStyle.Hidden
-                                        })?.WaitForExit();
-                                    }
+                                    Process.Start(new ProcessStartInfo
+                                    {
+                                        FileName = setupPath,
+                                        Arguments = package.Arguments,
+                                        UseShellExecute = true,
+                                        WindowStyle = ProcessWindowStyle.Hidden
+                                    })?.WaitForExitAsync();
+
                                 }
                                 catch (Exception ex) { Debug.WriteLine(ex); }
                             }
-
                             DeletingTask(edgeTasks);
+
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /с rmdir /s /q %LocalAppData%\Microsoft\Edge");
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""");
@@ -277,6 +276,7 @@ namespace GTweak.Utilities.Tweaks
                                     continue;
 
                                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
+
                                 TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                 await Task.Delay(1000);
                                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c rmdir /s /q ""{path}""");
