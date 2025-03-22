@@ -458,7 +458,7 @@ namespace GTweak.Utilities.Tweaks
                             TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
 
                             if (Directory.Exists(path))
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c del /f /s /q \"{path}\\*.*\"");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"Remove-Item -Path '{path}' -Recurse -Force\"");
                         }
 
                         SetTaskStateOwner(false, winUpdatesTasks);

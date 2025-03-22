@@ -35,8 +35,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { @"SOFTWARE\Microsoft\Security Center", Registry.LocalMachine },
         };
 
-        internal static readonly string jsonFilePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config", "backup_GTweak.json");
-        internal static readonly string aclFilePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config", "backup_GTweak.acl");
+        internal static readonly string jsonFilePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config", "WD_Backup_GTweak.json");
+        internal static readonly string aclFilePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config", "WD_Backup_GTweak.acl");
 
         internal static void ExportRights()
         {
@@ -107,9 +107,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                         key.SetAccessControl(security);
                     }
                 }
-
-                File.Delete(jsonFilePath);
-                File.Delete(aclFilePath);
             }
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
