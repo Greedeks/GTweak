@@ -284,6 +284,7 @@
     <Compile Include="Utilities\Control\ViewNotification.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
+    <Compile Include="Utilities\Tweaks\DefenderManager\BackupRights.cs" />
     <Compile Include="Utilities\Tweaks\Firewall.cs" />
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />
     <Compile Include="Utilities\Tweaks\ServicesTweaks.cs" />
@@ -291,7 +292,7 @@
     <Compile Include="Utilities\Tweaks\SystemTweaks.cs" />
     <Compile Include="Utilities\Helpers\Storage\TaskStorage.cs" />
     <Compile Include="Utilities\Tweaks\UninstallingPakages.cs" />
-    <Compile Include="Utilities\Tweaks\WindowsDefender.cs" />
+    <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />
     <Compile Include="Utilities\Helpers\Animation\TypewriterAnimation.cs" />
     <Compile Include="Core\ViewModel\OtherContextVM.cs" />

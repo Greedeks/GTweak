@@ -1,9 +1,9 @@
 ﻿using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Tweaks.DefenderManager;
 using GTweak.View;
 using Microsoft.Win32;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -88,13 +88,7 @@ namespace GTweak.Utilities.Tweaks
             catch (Exception ex) { Debug.WriteLine(ex.Message); }
 
             if (!isTweakWorkingAntivirus)
-            {
-                systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe")) ||
-                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", "0") ||
-                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", "1") ||
-                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableBehaviorMonitoring", "1") ||
-                    RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection", "DisableRealtimeMonitoring", "1");
-            }
+                systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe"));
 
             systemV.TglButton9.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", "0") ||
@@ -261,16 +255,7 @@ namespace GTweak.Utilities.Tweaks
                     catch (Exception ex) { Debug.WriteLine(ex.Message); }
                     break;
                 case "TglButton8":
-                    BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += delegate
-                    {
-                        if (isChoose)
-                            new WindowsDefender().Disable();
-                        else
-                            new WindowsDefender().Enable();
-                    };
-                    backgroundWorker.RunWorkerCompleted += delegate { isTweakWorkingAntivirus = false; new ViewNotification(300).Show("restart"); };
-                    backgroundWorker.RunWorkerAsync();
+                    new WindowsDefender().SetState(isChoose);
                     BlockWDefender(isChoose);
                     break;
                 case "TglButton9":
@@ -301,8 +286,7 @@ namespace GTweak.Utilities.Tweaks
                     SetTaskState(!isChoose, memoryDiagTasks);
                     break;
                 case "TglButton13":
-                    string argStateNetsh = string.Empty, argStateNetshSecond = string.Empty;
-
+                    string argStateNetshSecond, argStateNetsh;
                     if (isChoose)
                     {
                         isNetshState = false;

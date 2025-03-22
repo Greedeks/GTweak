@@ -75,19 +75,19 @@ namespace GTweak.View
                             void DeleteHandler(object sender, RoutedEventArgs args)
                             {
                                 tcs.TrySetResult(true);
-                                BtnDelete.PreviewMouseLeftButtonUp -= DeleteHandler;
-                                BtnCancel.PreviewMouseLeftButtonUp -= CancelHandler;
+                                BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
+                                BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
                             }
 
                             void CancelHandler(object sender, RoutedEventArgs args)
                             {
                                 tcs.TrySetResult(false);
-                                BtnDelete.PreviewMouseLeftButtonUp -= DeleteHandler;
-                                BtnCancel.PreviewMouseLeftButtonUp -= CancelHandler;
+                                BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
+                                BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
                             }
 
-                            BtnDelete.PreviewMouseLeftButtonUp += DeleteHandler;
-                            BtnCancel.PreviewMouseLeftButtonUp += CancelHandler;
+                            BtnDelete.PreviewMouseLeftButtonDown += DeleteHandler;
+                            BtnCancel.PreviewMouseLeftButtonDown += CancelHandler;
 
                             isWebViewRemoval = await tcs.Task;
 
