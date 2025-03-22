@@ -35,7 +35,7 @@
 <h2> 다음과 같은 다양한 기능을 제공합니다: 🔩</h2>
 
 ```c#
-- Windows 인증
+- Windows 인증 (HWID, KMS)
 - Windows Defender, SmartScreen, Antimalware, VBS, UAC 비활성화
 - Windows 업데이트 비활성화 및 다운로드한 캐시 지우기
 - 사용하지 않거나 불필요한 서비스 비활성화

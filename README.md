@@ -35,7 +35,7 @@
 <h2> A wide range of functions, including: 🔩</h2>
 
 ```c#
-- Windows activation
+- Windows activation (HWID, KMS)
 - Disabling Windows Defender, SmartScreen, Antimalware, VBS, UAC 
 - Disabling Windows updates and clearing the downloaded cache
 - Disabling unused and unnecessary services 
