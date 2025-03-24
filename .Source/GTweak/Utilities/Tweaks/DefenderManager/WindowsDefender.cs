@@ -12,14 +12,22 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class WindowsDefender : BackupRights
     {
-        internal async void SetState(bool isState)
+        internal void ImportSetState(bool isDisable)
+        {
+            if (isDisable)
+                Disable();
+            else
+                Enable();
+        }
+
+        internal async void SetState(bool isDisable)
         {
             WaitingWindow waitingWindow = new WaitingWindow();
             waitingWindow.Show();
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate
             {
-                if (isState)
+                if (isDisable)
                     Disable();
                 else
                     Enable();

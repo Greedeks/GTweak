@@ -2,6 +2,7 @@
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
+using GTweak.Utilities.Tweaks.DefenderManager;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -133,22 +134,18 @@ namespace GTweak.Windows
 
                         if (set.Tweak != "TglButton8")
                         {
-                            if (set.Tweak.Contains("TglButton"))
+                            if (set.Tweak.StartsWith("TglButton") && set.Tweak != "TglButton8")
                                 SystemTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
+                            else if (set.Tweak == "TglButton8")
+                            {
+                                new WindowsDefender().ImportSetState(Convert.ToBoolean(set.Value));
+                                await Task.Delay(20000, _token);
+                            }
                             else
                                 SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
 
                             isRestartNeed = NotifActionsStorage.GetSysActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
                             isLogoutNeed = NotifActionsStorage.GetSysActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
-                        }
-                        else
-                        {
-                            if (!SystemTweaks.isTweakWorkingAntivirus)
-                            {
-                                SystemTweaks.isTweakWorkingAntivirus = true;
-                                SystemTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
-                                await Task.Delay(20000, _token);
-                            }
                         }
                     }
                 }
