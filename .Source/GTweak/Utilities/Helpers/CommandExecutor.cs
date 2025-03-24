@@ -14,6 +14,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
                     Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
+                    Verb = "runas",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -46,6 +47,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
                     Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
+                    Verb = "runas",
                     WindowStyle = ProcessWindowStyle.Hidden,
                     CreateNoWindow = true,
                 });

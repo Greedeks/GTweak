@@ -12,8 +12,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class BackupRights : TaskSchedulerManager
     {
-        private static readonly string jsonFilePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config", "WD_Backup_GTweak.json");
-        private static readonly string aclFilePath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config", "WD_Backup_GTweak.acl");
+        private static readonly string folderBackupPath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config\WDBackup_GTweak");
+        private static readonly string jsonFilePath = Path.Combine(folderBackupPath, "BackupData.json");
+        private static readonly string aclFilePath = Path.Combine(folderBackupPath, "BackupRights.acl");
 
         private static readonly Dictionary<string, RegistryKey> StorageRegPaths = new Dictionary<string, RegistryKey>
         {
@@ -36,47 +37,49 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { @"SOFTWARE\Policies\Microsoft\Microsoft Antimalware", Registry.LocalMachine },
             { @"SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Security Center", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MsMpEng.exe", Registry.LocalMachine },
+            { @"Software\Microsoft\Edge", Registry.CurrentUser },
         };
-
 
         internal static void ExportRights()
         {
-            try
+            if (Directory.Exists(folderBackupPath) == false)
             {
-                if (File.Exists(jsonFilePath) && File.Exists(aclFilePath))
+                try
                 {
-                    File.Delete(jsonFilePath);
-                    File.Delete(aclFilePath);
+                    Directory.CreateDirectory(folderBackupPath);
+
+                    var allValues = new Dictionary<string, Dictionary<string, object>>();
+                    var aclDataDict = new Dictionary<string, string>();
+
+                    foreach (var entry in StorageRegPaths)
+                    {
+                        string path = entry.Key;
+                        RegistryKey baseKey = entry.Value;
+
+                        using RegistryKey key = baseKey.OpenSubKey(path, false);
+                        if (key == null)
+                            continue;
+
+                        var values = new Dictionary<string, object>();
+                        foreach (string valueName in key.GetValueNames())
+                            values[valueName] = key.GetValue(valueName);
+
+                        allValues[path] = values;
+
+                        RegistrySecurity security = key.GetAccessControl();
+                        string aclData = security.GetSecurityDescriptorSddlForm(AccessControlSections.All);
+                        aclDataDict[path] = aclData;
+                    }
+
+                    File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(allValues, Formatting.Indented));
+                    File.WriteAllText(aclFilePath, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
                 }
-
-                var allValues = new Dictionary<string, Dictionary<string, object>>();
-                var aclDataDict = new Dictionary<string, string>();
-
-                foreach (var entry in StorageRegPaths)
-                {
-                    string path = entry.Key;
-                    RegistryKey baseKey = entry.Value;
-
-                    using RegistryKey key = baseKey.OpenSubKey(path, false);
-                    if (key == null)
-                        continue;
-
-                    var values = new Dictionary<string, object>();
-                    foreach (string valueName in key.GetValueNames())
-                        values[valueName] = key.GetValue(valueName);
-
-                    allValues[path] = values;
-
-                    RegistrySecurity security = key.GetAccessControl();
-                    string aclData = security.GetSecurityDescriptorSddlForm(AccessControlSections.All);
-                    aclDataDict[path] = aclData;
-                }
-
-                File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(allValues, Formatting.Indented));
-                File.WriteAllText(aclFilePath, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
+                catch (Exception ex) { Debug.WriteLine(ex.Message); }
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
+
 
         internal static void ImportRights()
         {
