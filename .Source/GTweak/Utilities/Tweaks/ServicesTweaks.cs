@@ -5,7 +5,6 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.ServiceProcess;
@@ -276,11 +275,11 @@ namespace GTweak.Utilities.Tweaks
                                         }
                                     }
                                 }
-                                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             }
                         }
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     break;
                 case "TglButton9":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WiaRpc", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord);
@@ -475,7 +474,7 @@ namespace GTweak.Utilities.Tweaks
                     else
                         SetTaskStateOwner(true, winUpdatesTasks);
                 }
-                catch (Exception ex) { Debug.WriteLine(ex); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });
         }
     }

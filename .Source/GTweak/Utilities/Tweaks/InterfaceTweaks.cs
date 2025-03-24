@@ -1,9 +1,9 @@
 ﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Control;
 using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -227,7 +227,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                         });
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     break;
                 case "TglButton12":
                     if (isChoose)

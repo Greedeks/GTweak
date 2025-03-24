@@ -118,7 +118,7 @@ namespace GTweak.View
                                         ExplorerManager.Restart(new Process());
                                 });
                             }
-                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         });
                         break;
                     }
@@ -148,7 +148,7 @@ namespace GTweak.View
                                     UpdateViewStatePakages();
                                 });
                             }
-                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         });
                         break;
                     }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using GTweak.Utilities.Control;
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -28,7 +28,7 @@ namespace GTweak.Windows
                 }, Application.Current.Dispatcher);
 
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             timer?.Start();
 
             if (isViolationSystem)

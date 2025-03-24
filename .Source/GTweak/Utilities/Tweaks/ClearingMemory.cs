@@ -152,7 +152,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private static bool SetIncreasePrivilege(string privilegeName)

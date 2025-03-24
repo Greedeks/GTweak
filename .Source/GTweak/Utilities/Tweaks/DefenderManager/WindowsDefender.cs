@@ -391,7 +391,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 foreach (Process process in Process.GetProcessesByName(getName))
                 {
                     try { process.Kill(); await Task.Delay(1000); }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
             }
         }
@@ -421,7 +421,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 comandoAEjecutar.StandardOutput.ReadToEnd();
                 return;
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
     }
 }

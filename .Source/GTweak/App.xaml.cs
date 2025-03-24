@@ -1,9 +1,11 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace GTweak
 {
@@ -18,6 +20,23 @@ namespace GTweak
         public App()
         {
             InitializeComponent();
+
+            this.DispatcherUnhandledException += OnDispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+        }
+
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            ErrorLogging.LogWritingFile(e.Exception);
+            e.Handled = true;
+            Environment.Exit(0);
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception ex)
+                ErrorLogging.LogWritingFile(ex);
+            Environment.Exit(0);
         }
 
         internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(default, EventArgs.Empty);

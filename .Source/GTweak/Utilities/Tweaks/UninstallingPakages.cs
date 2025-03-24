@@ -122,7 +122,7 @@ namespace GTweak.Utilities.Tweaks
                         if (!string.IsNullOrEmpty(Alias))
                             await RunPowerShell($"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{Alias}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"");
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
                     switch (packageName)
                     {
@@ -177,12 +177,12 @@ namespace GTweak.Utilities.Tweaks
                                                 }
                                             }
                                         }
-                                        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                                     }
                                     baseKey.Close();
                                 }
                             }
-                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             break;
                         case "Edge":
                             string script = $@"
@@ -236,7 +236,7 @@ namespace GTweak.Utilities.Tweaks
                                     })?.WaitForExitAsync();
 
                                 }
-                                catch (Exception ex) { Debug.WriteLine(ex); }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             }
                             DeletingTask(edgeTasks);
 
@@ -303,7 +303,7 @@ namespace GTweak.Utilities.Tweaks
                                     }
                                 }
                             }
-                            catch (Exception ex) { Debug.WriteLine(ex); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             break;
                     }
                 });

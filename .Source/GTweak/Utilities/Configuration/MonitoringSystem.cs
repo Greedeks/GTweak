@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTweak.Utilities.Control;
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -92,7 +93,7 @@ namespace GTweak.Utilities.Configuration
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                ErrorLogging.LogDebug(ex);
                 return 0;
             }
         }

@@ -85,7 +85,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                 }
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
             if (!isTweakWorkingAntivirus)
                 systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe"));
@@ -252,7 +252,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                         }
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     break;
                 case "TglButton8":
                     new WindowsDefender().SetState(isChoose);
@@ -495,7 +495,7 @@ namespace GTweak.Utilities.Tweaks
                         }
                     }
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });
         }
     }

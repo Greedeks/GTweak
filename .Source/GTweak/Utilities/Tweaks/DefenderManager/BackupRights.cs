@@ -4,7 +4,6 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 
@@ -76,7 +75,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                     File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(allValues, Formatting.Indented));
                     File.WriteAllText(aclFilePath, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
         }
 
@@ -114,7 +113,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                         }
                     }
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
         }
     }

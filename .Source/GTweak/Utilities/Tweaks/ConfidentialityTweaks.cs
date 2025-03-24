@@ -5,7 +5,6 @@ using GTweak.Utilities.Helpers;
 using GTweak.View;
 using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -217,7 +216,7 @@ namespace GTweak.Utilities.Tweaks
                             }
 
                         }
-                        catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
                         BlockSpyDomain(isChoose);
 

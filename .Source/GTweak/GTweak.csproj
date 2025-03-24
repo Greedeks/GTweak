@@ -265,6 +265,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Control\BlockRunTweaker.cs" />
+    <Compile Include="Utilities\Control\ErrorLogging.cs" />
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
     <Compile Include="Utilities\Helpers\ExplorerManager.cs" />

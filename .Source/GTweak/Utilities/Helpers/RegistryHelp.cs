@@ -1,6 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using GTweak.Utilities.Control;
+using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
@@ -34,7 +34,7 @@ namespace GTweak.Utilities.Helpers
 
                     registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }).Wait();
         }
 
@@ -54,7 +54,7 @@ namespace GTweak.Utilities.Helpers
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    ErrorLogging.LogDebug(ex);
                 }
             }).Wait();
         }
@@ -67,7 +67,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     registrykey.CreateSubKey(subkey);
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }).Wait();
         }
 
@@ -90,12 +90,12 @@ namespace GTweak.Utilities.Helpers
                         foreach (string value in registryFolder.GetValueNames())
                         {
                             try { registryFolder.DeleteValue(value); }
-                            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         }
                     }
                     registrykey.DeleteSubKeyTree(subkey, false);
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }).Wait();
         }
 

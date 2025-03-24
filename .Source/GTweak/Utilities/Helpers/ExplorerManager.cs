@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTweak.Utilities.Control;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace GTweak.Utilities.Helpers
                             process.Start();
                         }
                     }
-                    catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     finally
                     {
                         if (Process.GetProcessesByName("explorer").Length == 0)

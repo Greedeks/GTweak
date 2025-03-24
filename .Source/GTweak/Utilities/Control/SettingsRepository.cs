@@ -3,7 +3,6 @@ using GTweak.Windows;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -130,7 +129,7 @@ namespace GTweak.Utilities.Control
                     iniManager.WriteAll(INIManager.SectionSvc, INIManager.TempTweaksSvc);
                     iniManager.WriteAll(INIManager.SectionSys, INIManager.TempTweaksSys);
                 }
-                catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
         }
 
@@ -170,7 +169,7 @@ namespace GTweak.Utilities.Control
                 CommandExecutor.RunCommand($"/c taskkill /f /im {currentName} & choice /c y /n /d y /t 3 & del {new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name} & " +
                     @$"rd /s /q {StoragePaths.FolderLocation} & rd /s /q {Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak");
             }
-            catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         internal static void SelfReboot() => CommandExecutor.RunCommand($"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"{currentLocation}\"");

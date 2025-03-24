@@ -4,7 +4,6 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using GTweak.Windows;
 using System;
-using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace GTweak.View
@@ -50,7 +49,7 @@ namespace GTweak.View
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate
             {
-                try { SystemMaintenance.DisableRestorePoint(); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
+                try { SystemMaintenance.DisableRestorePoint(); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });
             await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "disable_recovery_notification"); });
         }

@@ -34,7 +34,7 @@ namespace GTweak.Windows
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Progress<byte> progress = new Progress<byte>(ReportProgress);
-            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private void ReportProgress(byte valueProgress)
