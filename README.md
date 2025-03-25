@@ -80,9 +80,9 @@
 <h2> System Requirements</h2>
 
 ```c++
-.NET Framework 4.8
-USE ONLY FOR WINDOWS 10/11
+Windows support: since 10 (build 1903)
 Minimum screen resolution: 1280×720 (HD)
+.NET Framework 4.8
 ```
 </br>
 
