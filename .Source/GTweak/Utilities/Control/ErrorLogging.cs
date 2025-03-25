@@ -10,7 +10,7 @@ namespace GTweak.Utilities.Control
     {
         private static readonly string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GTweak_Error.log");
 
-        internal static void LogWritingFile(Exception ex) => Task.Run(() => LogToFile(ex));
+        internal static void LogWritingFile(Exception ex) => Task.Run(() => LogToFile(ex)).Wait();
 
         internal static void LogDebug(Exception ex) => Debug.WriteLine($"Debug: {ex.Message}\nStack Trace: {ex.StackTrace}");
 

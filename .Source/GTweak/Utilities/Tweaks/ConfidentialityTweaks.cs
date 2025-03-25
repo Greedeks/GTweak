@@ -90,23 +90,8 @@ namespace GTweak.Utilities.Tweaks
         {
             try
             {
-                byte numberHostsRules = 0;
-
-                using (StreamReader streamReader = new StreamReader(StoragePaths.HostsFile))
-                {
-                    string hosts = streamReader.ReadToEnd();
-                    numberHostsRules += (byte)(new string[] {
-                        @"0.0.0.0 hk2sch130021829.wns.windows.com",
-                        @"0.0.0.0 v10-win.vortex.data.microsoft.com.akadns.net",
-                        @"0.0.0.0 watson.live.com",
-                        @"0.0.0.0 cds843.lon.llnw.net",
-                        @"0.0.0.0 db6sch102091602.wns.windows.com",
-                        @"0.0.0.0 telemetry.microsoft.com",
-                        @"0.0.0.0 bn3sch020010635.wns.windows.com",
-                        @"0.0.0.0 api.cortana.ai"
-                    }).Where(rule => hosts.Contains(rule)).Count();
-                }
-                return numberHostsRules == 0;
+                int numberRows = File.ReadAllText(StoragePaths.HostsFile).Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Count(line => line.StartsWith("0.0.0.0"));
+                return numberRows < 673;
             }
             catch { return false; }
         }
@@ -194,6 +179,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient");
                     break;
                 case "TglButton9":
+                    BlockSpyDomain(isChoose);
                     Task.Run(delegate
                     {
                         string backupFile = StoragePaths.HostsFile + @" (Default GTweak)";
@@ -213,14 +199,12 @@ namespace GTweak.Utilities.Tweaks
 
                                 if (File.Exists(backupFile))
                                     File.Delete(backupFile);
+                                else
+                                    File.WriteAllText(StoragePaths.HostsFile, string.Empty);
                             }
-
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-
-                        BlockSpyDomain(isChoose);
-
-                    });
+                    }).Wait();
                     break;
                 case "TglButton10":
                     if (isChoose)

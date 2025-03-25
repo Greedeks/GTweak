@@ -333,7 +333,21 @@ namespace GTweak.Utilities.Tweaks
                     SetPowercfg(isChoose);
                     break;
                 case "TglButton19":
-                    BluetoothStatusSet(isChoose ? "'off'" : "'on'");
+                    CommandExecutor.RunCommand(@"Add-Type -AssemblyName System.Runtime.WindowsRuntime
+                    $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
+                    Function Await($WinRtTask, $ResultType) {
+                        $asTask = $asTaskGeneric.MakeGenericMethod($ResultType)
+                        $netTask = $asTask.Invoke($null, @($WinRtTask))
+                        $netTask.Wait(-1) | Out-Null
+                        $netTask.Result
+                    }
+                    [Windows.Devices.Radios.Radio,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
+                    [Windows.Devices.Radios.RadioAccessStatus,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
+                    Await ([Windows.Devices.Radios.Radio]::RequestAccessAsync()) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null
+                    $radios = Await ([Windows.Devices.Radios.Radio]::GetRadiosAsync()) ([System.Collections.Generic.IReadOnlyList[Windows.Devices.Radios.Radio]])
+                    $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
+                    [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
+                    Await ($bluetooth.SetStateAsync(" + (isChoose ? "'off'" : "'on'") + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null", true);
                     isBluetoothStatus = !isChoose;
                     break;
                 case "TglButton20":
@@ -380,26 +394,6 @@ namespace GTweak.Utilities.Tweaks
                     break;
             }
         }
-
-        private static void BluetoothStatusSet(string status)
-        {
-            CommandExecutor.RunCommand(@"Add-Type -AssemblyName System.Runtime.WindowsRuntime
-                    $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
-                    Function Await($WinRtTask, $ResultType) {
-                        $asTask = $asTaskGeneric.MakeGenericMethod($ResultType)
-                        $netTask = $asTask.Invoke($null, @($WinRtTask))
-                        $netTask.Wait(-1) | Out-Null
-                        $netTask.Result
-                    }
-                    [Windows.Devices.Radios.Radio,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-                    [Windows.Devices.Radios.RadioAccessStatus,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-                    Await ([Windows.Devices.Radios.Radio]::RequestAccessAsync()) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null
-                    $radios = Await ([Windows.Devices.Radios.Radio]::GetRadiosAsync()) ([System.Collections.Generic.IReadOnlyList[Windows.Devices.Radios.Radio]])
-                    $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
-                    [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-                    Await ($bluetooth.SetStateAsync(" + status + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null", true);
-        }
-
 
         private static void SetPowercfg(bool isChoose)
         {
