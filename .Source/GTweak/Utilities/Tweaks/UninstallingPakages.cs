@@ -12,14 +12,15 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingPakages : TaskSchedulerManager
     {
-        internal static string InstalledPackages { get; private set; }
+        internal static HashSet<string> InstalledPackages = new HashSet<string>();
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
         private static readonly string pathPackage = Path.Combine(StoragePaths.SystemDisk, "Program Files", "WindowsApps");
 
-        private static readonly Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
+        internal static readonly Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
         {
+            ["OneDrive"] = (null, false, null),
             ["MicrosoftStore"] = (null, false, new List<string> { "Microsoft.WindowsStore" }),
             ["Todos"] = ("TodoList", false, new List<string> { "Microsoft.Todos", "Microsoft.ToDo" }),
             ["BingWeather"] = ("MSWeather", false, new List<string> { "Microsoft.BingWeather" }),
@@ -64,7 +65,6 @@ namespace GTweak.Utilities.Tweaks
             ["WebMediaExtensions"] = (null, false, new List<string> { "Microsoft.WebMediaExtensions" }),
             ["OneConnect"] = ("MobilePlans", false, new List<string> { "Microsoft.OneConnect" }),
             ["Edge"] = ("MicrosoftEdge", false, new List<string> { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*" }),
-            ["OneDrive"] = (null, false, null)
         };
 
         internal static bool HandleAvailabilityStatus(string key, bool? isUnavailable = null)
@@ -79,7 +79,11 @@ namespace GTweak.Utilities.Tweaks
             return false;
         }
 
-        internal async void ViewInstalledPackages() => InstalledPackages = await CommandExecutor.GetCommandOutput("Get-AppxPackage | Select-Object -ExpandProperty Name");
+        internal void LoadInstalledPackages()
+        {
+            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
+            InstalledPackages = key != null ? new HashSet<string>(key.GetSubKeyNames(), StringComparer.OrdinalIgnoreCase) : new HashSet<string>();
+        }
 
         internal static Task DeletingPackage(string packageName, bool removeWebViewFlag = false)
         {

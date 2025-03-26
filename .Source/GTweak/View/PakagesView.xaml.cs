@@ -2,8 +2,10 @@
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,10 +29,10 @@ namespace GTweak.View
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                if (time.TotalSeconds % 6 == 0)
+                if (time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += delegate { new UninstallingPakages().ViewInstalledPackages(); };
+                    backgroundWorker.DoWork += delegate { new UninstallingPakages().LoadInstalledPackages(); };
                     backgroundWorker.RunWorkerCompleted += delegate { UpdateViewStatePakages(); };
                     backgroundWorker.RunWorkerAsync();
                 }
@@ -60,44 +62,44 @@ namespace GTweak.View
             Image packageImage = (Image)sender;
             string packageName = packageImage.Name;
 
-            switch (e.LeftButton)
+            try
             {
-                case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("A_DI_" + packageName)):
-                    {
-                        if (packageName.Equals("Edge"))
+                switch (e.LeftButton)
+                {
+                    case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("A_DI_" + packageName)):
                         {
-                            Overlay.Visibility = Visibility.Visible;
-
-                            OverlayAnimation(0, 1, 0.3);
-
-                            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-
-                            void DeleteHandler(object sender, RoutedEventArgs args)
+                            if (packageName.Equals("Edge"))
                             {
-                                tcs.TrySetResult(true);
-                                BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
-                                BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
+                                Overlay.Visibility = Visibility.Visible;
+
+                                OverlayAnimation(0, 1, 0.3);
+
+                                TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+                                void DeleteHandler(object sender, RoutedEventArgs args)
+                                {
+                                    tcs.TrySetResult(true);
+                                    BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
+                                    BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
+                                }
+
+                                void CancelHandler(object sender, RoutedEventArgs args)
+                                {
+                                    tcs.TrySetResult(false);
+                                    BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
+                                    BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
+                                }
+
+                                BtnDelete.PreviewMouseLeftButtonDown += DeleteHandler;
+                                BtnCancel.PreviewMouseLeftButtonDown += CancelHandler;
+
+                                isWebViewRemoval = await tcs.Task;
+
+                                OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
                             }
 
-                            void CancelHandler(object sender, RoutedEventArgs args)
-                            {
-                                tcs.TrySetResult(false);
-                                BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
-                                BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
-                            }
-
-                            BtnDelete.PreviewMouseLeftButtonDown += DeleteHandler;
-                            BtnCancel.PreviewMouseLeftButtonDown += CancelHandler;
-
-                            isWebViewRemoval = await tcs.Task;
-
-                            OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
-                        }
-
-                        BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(async () =>
-                        {
-                            try
+                            BackgroundQueue backgroundQueue = new BackgroundQueue();
+                            await backgroundQueue.QueueTask(async () =>
                             {
                                 Dispatcher.Invoke(() =>
                                 {
@@ -117,21 +119,19 @@ namespace GTweak.View
                                     if (ExplorerManager.GetAppsStorage.TryGetValue(packageName, out bool needRestart))
                                         ExplorerManager.Restart(new Process());
                                 });
-                            }
-                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                        });
-                        break;
-                    }
 
-                case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
-                    {
-                        new ViewNotification().Show("", "info", "onedrive_notification");
+                            });
+                            break;
+                        }
 
-                        BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(async () =>
+                    case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
                         {
-                            try
+                            new ViewNotification().Show("", "info", "onedrive_notification");
+
+                            BackgroundQueue backgroundQueue = new BackgroundQueue();
+                            await backgroundQueue.QueueTask(async () =>
                             {
+
                                 Dispatcher.Invoke(() =>
                                 {
                                     UninstallingPakages.HandleAvailabilityStatus(packageName, true);
@@ -147,72 +147,87 @@ namespace GTweak.View
                                     UninstallingPakages.HandleAvailabilityStatus(packageName, false);
                                     UpdateViewStatePakages();
                                 });
-                            }
-                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                        });
-                        break;
-                    }
+                            });
+                            break;
+                        }
+                }
             }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => UpdateViewStatePakages();
 
-        private ImageSource AvailabilityInstalledPackage(string packageName, string partName, bool isOneDrive = false)
+        private ImageSource AvailabilityInstalledPackage(string packageName, bool isOneDrive = false)
         {
-            static bool isContains(string pattern) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace).IsMatch(UninstallingPakages.InstalledPackages);
+            if (!UninstallingPakages.PackagesDetails.TryGetValue(packageName, out var details) || details.Scripts == null)
+            {
+                if (isOneDrive)
+                    return !UninstallingPakages.HandleAvailabilityStatus(packageName) ? UninstallingPakages.IsOneDriveInstalled ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime");
+                return (DrawingImage)FindResource("DI_Sandtime");
+            }
 
-            return !isOneDrive
-                ? !UninstallingPakages.HandleAvailabilityStatus(packageName) ? isContains(partName) ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime")
-                : !UninstallingPakages.HandleAvailabilityStatus(packageName) ? UninstallingPakages.IsOneDriveInstalled ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime");
+            bool isContains = details.Scripts.Any(pattern => UninstallingPakages.InstalledPackages.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+
+            return !UninstallingPakages.HandleAvailabilityStatus(packageName) ? isContains ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime");
         }
 
         private void UpdateViewStatePakages()
         {
-            MicrosoftStore.Source = AvailabilityInstalledPackage("MicrosoftStore", "Microsoft.WindowsStore");
-            Todos.Source = AvailabilityInstalledPackage("Todos", "Microsoft.Todos");
-            BingWeather.Source = AvailabilityInstalledPackage("BingWeather", "Microsoft.BingWeather");
-            Microsoft3D.Source = AvailabilityInstalledPackage("Microsoft3D", "Microsoft.Microsoft3DViewer");
-            Music.Source = AvailabilityInstalledPackage("Music", "Microsoft.ZuneMusic");
-            GetHelp.Source = AvailabilityInstalledPackage("GetHelp", "Microsoft.GetHelp");
-            MicrosoftOfficeHub.Source = AvailabilityInstalledPackage("MicrosoftOfficeHub", "Microsoft.MicrosoftOfficeHub");
-            MicrosoftSolitaireCollection.Source = AvailabilityInstalledPackage("MicrosoftSolitaireCollection", "Microsoft.MicrosoftSolitaireCollection");
-            MixedReality.Source = AvailabilityInstalledPackage("MixedReality", "Microsoft.MixedReality.Portal");
-            Xbox.Source = AvailabilityInstalledPackage("Xbox", "Microsoft.XboxApp|Microsoft.GamingApp|Microsoft.XboxGamingOverlay|Microsoft.XboxGameOverlay|Microsoft.XboxIdentityProvider|Microsoft.Xbox.TCUI|Microsoft.XboxSpeechToTextOverlay");
-            Paint3D.Source = AvailabilityInstalledPackage("Paint3D", "Microsoft.MSPaint");
-            OneNote.Source = AvailabilityInstalledPackage("OneNote", "Microsoft.Office.OneNote");
-            People.Source = AvailabilityInstalledPackage("People", "Microsoft.People");
-            MicrosoftStickyNotes.Source = AvailabilityInstalledPackage("MicrosoftStickyNotes", "Microsoft.MicrosoftStickyNotes");
-            Widgets.Source = AvailabilityInstalledPackage("Widgets", "MicrosoftWindows.Client.WebExperience|Microsoft.WidgetsPlatformRuntime");
-            ScreenSketch.Source = AvailabilityInstalledPackage("ScreenSketch", "Microsoft.ScreenSketch");
-            Phone.Source = AvailabilityInstalledPackage("Phone", "Microsoft.YourPhone|MicrosoftWindows.CrossDevice");
-            Photos.Source = AvailabilityInstalledPackage("Photos", "Microsoft.Windows.Photos");
-            FeedbackHub.Source = AvailabilityInstalledPackage("FeedbackHub", "Microsoft.WindowsFeedbackHub");
-            SoundRecorder.Source = AvailabilityInstalledPackage("SoundRecorder", "Microsoft.WindowsSoundRecorder");
-            Alarms.Source = AvailabilityInstalledPackage("Alarms", "Microsoft.WindowsAlarms");
-            SkypeApp.Source = AvailabilityInstalledPackage("SkypeApp", "Microsoft.SkypeApp");
-            Maps.Source = AvailabilityInstalledPackage("Maps", "Microsoft.WindowsMaps");
-            Camera.Source = AvailabilityInstalledPackage("Camera", "Microsoft.WindowsCamera");
-            Video.Source = AvailabilityInstalledPackage("Video", "Microsoft.ZuneVideo");
-            BingNews.Source = AvailabilityInstalledPackage("BingNews", "Microsoft.BingNews");
-            Mail.Source = AvailabilityInstalledPackage("Mail", "microsoft.windowscommunicationsapps");
-            MicrosoftTeams.Source = AvailabilityInstalledPackage("MicrosoftTeams", "MicrosoftTeams|MSTeams");
-            PowerAutomateDesktop.Source = AvailabilityInstalledPackage("PowerAutomateDesktop", "Microsoft.PowerAutomateDesktop");
-            Cortana.Source = AvailabilityInstalledPackage("Cortana", "Microsoft.549981C3F5F10");
-            ClipChamp.Source = AvailabilityInstalledPackage("ClipChamp", "Clipchamp.Clipchamp");
-            GetStarted.Source = AvailabilityInstalledPackage("GetStarted", "Microsoft.Getstarted");
-            OneDrive.Source = AvailabilityInstalledPackage("OneDrive", "OneDrive", true);
-            BingSports.Source = AvailabilityInstalledPackage("BingSports", "Microsoft.BingSports");
-            BingFinance.Source = AvailabilityInstalledPackage("BingFinance", "Microsoft.BingFinance");
-            MicrosoftFamily.Source = AvailabilityInstalledPackage("MicrosoftFamily", "MicrosoftCorporationII.MicrosoftFamily");
-            BingSearch.Source = AvailabilityInstalledPackage("BingSearch", "Microsoft.BingSearch");
-            Outlook.Source = AvailabilityInstalledPackage("Outlook", "Microsoft.OutlookForWindows");
-            QuickAssist.Source = AvailabilityInstalledPackage("QuickAssist", "MicrosoftCorporationII.QuickAssist");
-            DevHome.Source = AvailabilityInstalledPackage("DevHome", "Microsoft.Windows.DevHome");
-            WindowsTerminal.Source = AvailabilityInstalledPackage("WindowsTerminal", "Microsoft.WindowsTerminal");
-            LinkedIn.Source = AvailabilityInstalledPackage("LinkedIn", "Microsoft.LinkedIn");
-            WebMediaExtensions.Source = AvailabilityInstalledPackage("WebMediaExtensions", "Microsoft.WebMediaExtensions");
-            OneConnect.Source = AvailabilityInstalledPackage("OneConnect", "Microsoft.OneConnect");
-            Edge.Source = AvailabilityInstalledPackage("Edge", "Microsoft.MicrosoftEdge.Stable");
+            Dictionary<Image, string> packages = new Dictionary<Image, string>
+            {
+                { MicrosoftStore, "MicrosoftStore" },
+                { Todos, "Todos" },
+                { BingWeather, "BingWeather" },
+                { OneDrive, "OneDrive" },
+                { Mail, "Mail" },
+                { Edge, "Edge" },
+                { Cortana, "Cortana" },
+                { Microsoft3D, "Microsoft3D" },
+                { Music, "Music" },
+                { GetHelp, "GetHelp" },
+                { MicrosoftOfficeHub, "MicrosoftOfficeHub" },
+                { MicrosoftSolitaireCollection, "MicrosoftSolitaireCollection" },
+                { MixedReality, "MixedReality" },
+                { Xbox, "Xbox" },
+                { Paint3D, "Paint3D" },
+                { OneNote, "OneNote" },
+                { People, "People" },
+                { MicrosoftStickyNotes, "MicrosoftStickyNotes" },
+                { Widgets, "Widgets" },
+                { ScreenSketch, "ScreenSketch" },
+                { Phone, "Phone" },
+                { Photos, "Photos" },
+                { FeedbackHub, "FeedbackHub" },
+                { SoundRecorder, "SoundRecorder" },
+                { Alarms, "Alarms" },
+                { SkypeApp, "SkypeApp" },
+                { Maps, "Maps" },
+                { Camera, "Camera" },
+                { Video, "Video" },
+                { BingNews, "BingNews" },
+                { MicrosoftTeams, "MicrosoftTeams" },
+                { PowerAutomateDesktop, "PowerAutomateDesktop" },
+                { ClipChamp, "ClipChamp" },
+                { GetStarted, "GetStarted" },
+                { BingSports, "BingSports" },
+                { BingFinance, "BingFinance" },
+                { MicrosoftFamily, "MicrosoftFamily" },
+                { BingSearch, "BingSearch" },
+                { Outlook, "Outlook" },
+                { QuickAssist, "QuickAssist" },
+                { DevHome, "DevHome" },
+                { WindowsTerminal, "WindowsTerminal" },
+                { LinkedIn, "LinkedIn" },
+                { WebMediaExtensions, "WebMediaExtensions" },
+                { OneConnect, "OneConnect" }
+            };
+
+            foreach (var package in packages)
+            {
+                Image image = package.Key;
+                string packageName = package.Value;
+                image.Source = AvailabilityInstalledPackage(packageName, packageName == "OneDrive");
+            }
         }
 
 
