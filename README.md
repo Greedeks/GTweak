@@ -79,10 +79,12 @@
 
 <h2> System Requirements</h2>
 
+> ⚠ The utility is designed exclusively for official Windows images downloaded from trusted sources. If you have installed a trimmed/modified version of Windows, you are solely responsible for its functionality.
+
 ```c++
 Windows support: since 10 (build 18362.116)
 Minimum screen resolution: 1280×720 (HD)
-.NET Framework 4.8
+Installed platform: .NET Framework 4.8
 ```
 </br>
 
