@@ -146,6 +146,10 @@ namespace GTweak.Utilities.Configuration
             HardwareData["CPU"] = HardwareData["CPU"].TrimEnd('\n');
         }
 
+        /// <summary>
+        /// The maximum video card memory that can be obtained via WMI is 4 GB. Therefore, the memory size is obtained from the registry. 
+        /// For discrete video cards or older models, the parameters will have the REG_BINARY type, and for integrated ones, REG_SZ.
+        /// </summary>
         private void GeVideoInfo()
         {
             static (bool, int, string) GetMemorySize(string name)
@@ -210,7 +214,6 @@ namespace GTweak.Utilities.Configuration
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
         }
 
-
         private void GetMemoryInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
@@ -232,10 +235,23 @@ namespace GTweak.Utilities.Configuration
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
 
+        /// <summary>
+        /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
+        /// </summary>
         private static void GetStorageDevices()
         {
             HardwareData["Storage"] = string.Empty;
+            bool isMsftWorking = false;
+
             try
+            {
+                using var managementObj = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
+                var results = managementObj.Get();
+                isMsftWorking = results != null && results.Count > 0;
+            }
+            catch { isMsftWorking = false; }
+
+            if (isMsftWorking)
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
@@ -252,15 +268,13 @@ namespace GTweak.Utilities.Configuration
                     if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
                         storageType = "(Media-Type)";
 
-                    ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
-                    string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
+                    string size = SizeCalculationHelper((ulong)managementObj["Size"]);
 
                     HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
                 }
             }
-            catch
+            else
             {
-
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Model, Caption, Size, MediaType, InterfaceType from Win32_DiskDrive", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     string data = new[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
@@ -277,18 +291,25 @@ namespace GTweak.Utilities.Configuration
                     if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || string.Equals(interfaceType, "USB", StringComparison.OrdinalIgnoreCase)))
                         storageType = "(Media-Type)";
 
-                    ulong getSizeGB = (ulong)managementObj["Size"] / (1024 * 1024 * 1024);
-                    string size = getSizeGB >= 1024 ? $"{Math.Round(getSizeGB / 1024.0, 2):G} TB" : $"{getSizeGB} GB";
+                    string size = SizeCalculationHelper((ulong)managementObj["Size"]);
 
                     HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
                 }
             }
-            finally
+
+            static string SizeCalculationHelper(ulong sizeInBytes)
             {
-                HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
+                double sizeGB = sizeInBytes / (1024 * 1024 * 1024);
+                return sizeGB >= 1024 ? $"{Math.Round(sizeGB / 1024.0, 2):G} TB" : $"{sizeGB} GB";
             }
+
+            HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
         }
 
+        /// <summary>
+        /// Handling the retrieval of device names for USB devices: In WMI, most connected devices are often named "USB Audio Device." 
+        /// Therefore, for such devices, the name lookup is performed through the registry.
+        /// </summary>
         private void GetAudioDevices()
         {
             static (bool, string) IsUsbAudioDevice(string deviceID)

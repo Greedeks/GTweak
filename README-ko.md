@@ -80,7 +80,7 @@
 <h2> 시스템 요구 사항</h2>
 
 ```c++
-Windows 지원: Windows 10 (build 1903)부터
+Windows 지원: Windows 10 (build 18362.116)부터
 최소 화면 해상도: 1280×720 (HD)
 .NET Framework 4.8
 ```

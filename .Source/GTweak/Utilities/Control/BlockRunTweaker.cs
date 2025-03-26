@@ -60,7 +60,7 @@ namespace GTweak.Utilities.Control
                 }
             });
 
-            if (SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) return;
+            if ((SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) && SystemDiagnostics.WindowsBuildVersion.CompareTo("18362.116") > 0) return;
             new MessageWindow(true).ShowDialog();
         }
     }
