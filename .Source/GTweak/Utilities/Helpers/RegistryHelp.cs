@@ -133,15 +133,22 @@ namespace GTweak.Utilities.Helpers
             catch { return defaultValue; }
         }
 
-        internal static HashSet<string> GetSubKeyNames(RegistryKey baseKey, string subKeyPath)
+        internal static T GetSubKeyNames<T>(RegistryKey baseKey, string subKeyPath) where T : ICollection<string>, new()
         {
             try
             {
                 using RegistryKey key = baseKey.OpenSubKey(subKeyPath);
-                return key != null ? new HashSet<string>(key.GetSubKeyNames(), StringComparer.OrdinalIgnoreCase): new HashSet<string>();
-            }
-            catch { return new HashSet<string>(); }
-        }
+                if (key == null) return new T();
 
+                T result = new T();
+                foreach (var name in key.GetSubKeyNames())
+                    result.Add(name);
+                return result;
+            }
+            catch
+            {
+                return new T();
+            }
+        }
     }
 }
