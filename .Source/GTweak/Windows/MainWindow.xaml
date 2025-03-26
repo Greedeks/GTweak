@@ -10,7 +10,7 @@
         xmlns:nav="clr-namespace:GTweak.Core" 
         mc:Ignorable="d"
         Title="GTweak" 
-        Height="630" Width="1100" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
+        Height="630" Width="1100" MinHeight="630" MinWidth="1100" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True" WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" UseLayoutRounding="True"
         Closing="Window_Closing" Loaded="Window_Loaded" WindowChrome.IsHitTestVisibleInChrome="False">
     <Window.DataContext>
