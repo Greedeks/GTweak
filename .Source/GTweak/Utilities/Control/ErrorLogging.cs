@@ -21,6 +21,12 @@ namespace GTweak.Utilities.Control
                 using var stream = new FileStream(logFilePath, FileMode.Create, FileAccess.Write, FileShare.Read);
                 using var writer = new StreamWriter(stream, new UTF8Encoding(false));
                 await writer.WriteLineAsync($"[{DateTime.Now}] Error: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = logFilePath,
+                    UseShellExecute = true
+                });
             }
             catch (Exception fileEx)
             {
