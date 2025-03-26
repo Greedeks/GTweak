@@ -12,7 +12,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingPakages : TaskSchedulerManager
     {
-        internal static HashSet<string> InstalledPackages = new HashSet<string>();
+        internal static HashSet<string> InstalledPackages = RegistryHelp.GetSubKeyNames(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
 
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
         private static bool isLocalAccount = false;
@@ -79,11 +79,7 @@ namespace GTweak.Utilities.Tweaks
             return false;
         }
 
-        internal void LoadInstalledPackages()
-        {
-            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
-            InstalledPackages = key != null ? new HashSet<string>(key.GetSubKeyNames(), StringComparer.OrdinalIgnoreCase) : new HashSet<string>();
-        }
+        internal void LoadInstalledPackages() => InstalledPackages = RegistryHelp.GetSubKeyNames(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
 
         internal static Task DeletingPackage(string packageName, bool removeWebViewFlag = false)
         {

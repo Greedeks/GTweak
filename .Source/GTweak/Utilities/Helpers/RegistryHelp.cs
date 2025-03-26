@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Control;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
@@ -128,14 +129,19 @@ namespace GTweak.Utilities.Helpers
 
         internal static T GetValue<T>(in string subKey, in string valueName, in T defaultValue)
         {
+            try { return (T)Convert.ChangeType(Registry.GetValue(subKey, valueName, defaultValue), typeof(T)); }
+            catch { return defaultValue; }
+        }
+
+        internal static HashSet<string> GetSubKeyNames(RegistryKey baseKey, string subKeyPath)
+        {
             try
             {
-                return (T)Convert.ChangeType(Registry.GetValue(subKey, valueName, defaultValue), typeof(T));
+                using RegistryKey key = baseKey.OpenSubKey(subKeyPath);
+                return key != null ? new HashSet<string>(key.GetSubKeyNames(), StringComparer.OrdinalIgnoreCase): new HashSet<string>();
             }
-            catch
-            {
-                return defaultValue;
-            }
+            catch { return new HashSet<string>(); }
         }
+
     }
 }
