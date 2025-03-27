@@ -166,8 +166,8 @@ namespace GTweak.Utilities.Control
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
-                CommandExecutor.RunCommand($"/c taskkill /f /im {currentName} & choice /c y /n /d y /t 3 & del {new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name} & " +
-                    @$"rd /s /q {StoragePaths.FolderLocation} & rd /s /q {Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak");
+                CommandExecutor.RunCommand($"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 3 & del \"{new FileInfo(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath).Name}\" & " +
+                    @$"rd /s /q ""{StoragePaths.FolderLocation}"" & rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""");
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }

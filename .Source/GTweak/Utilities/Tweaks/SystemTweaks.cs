@@ -455,7 +455,7 @@ namespace GTweak.Utilities.Tweaks
                                 _powercfg.Start();
                             }
 
-                            CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q {StoragePaths.FolderLocation}");
+                            CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q \"{StoragePaths.FolderLocation}\"");
                         }
                     }
                     else

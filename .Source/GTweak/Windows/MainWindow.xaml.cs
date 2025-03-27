@@ -26,17 +26,17 @@ namespace GTweak
             BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
             BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
             SliderVolume.Value = SettingsRepository.Volume;
-            LanguageSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Language, SettingsRepository.AvailableLangs);
-            ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Theme, SettingsRepository.AvailableThemes);
+            LanguageSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Language, "en", SettingsRepository.AvailableLangs);
+            ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Theme, "Dark", SettingsRepository.AvailableThemes);
 
             App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
             App.ThemeChanged += delegate { this.Close(); new RebootWindow().ShowDialog(); };
         }
 
-        private int GetSelectedIndex(string value, params string[] listing)
+        private int GetSelectedIndex(string value, string defaultValue, params string[] listing)
         {
             int index = Array.IndexOf(listing, value);
-            return index >= 0 ? index : listing.Length;
+            return index >= 0 ? index : Array.IndexOf(listing, defaultValue);
         }
 
         #region Button Title/Animation Window
