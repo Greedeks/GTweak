@@ -93,12 +93,12 @@ namespace GTweak.Utilities.Configuration
                 GetProcessorInfo,
                 GeVideoInfo,
                 GetMemoryInfo,
-                GetUpdatingDevices,
+                UpdatingDevicesData,
                 GetUserIpAddress
             );
         }
 
-        internal void GetUpdatingDevices()
+        internal void UpdatingDevicesData()
         {
             Parallel.Invoke(
                 GetStorageDevices,
@@ -306,51 +306,19 @@ namespace GTweak.Utilities.Configuration
             HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
         }
 
-        /// <summary>
-        /// Handling the retrieval of device names for USB devices: In WMI, most connected devices are often named "USB Audio Device." 
-        /// Therefore, for such devices, the name lookup is performed through the registry.
-        /// </summary>
         private void GetAudioDevices()
         {
-            static (bool, string) IsUsbAudioDevice(string deviceID)
-            {
-                using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render"))
+            HardwareData["Audio"] = string.Empty;
+            using (ManagementObjectSearcher soundDeviceSearcher = new ManagementObjectSearcher(@"root\cimv2", "select PNPDeviceID from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
+                foreach (ManagementObject soundDeviceObj in soundDeviceSearcher.Get().Cast<ManagementObject>())
                 {
-                    if (regKey != null)
+                    if (!string.IsNullOrEmpty(soundDeviceObj["PNPDeviceID"]?.ToString()))
                     {
-                        foreach (string subKeyName in regKey.GetSubKeyNames())
-                        {
-                            using RegistryKey subKey = regKey.OpenSubKey(subKeyName + @"\Properties");
-                            if (subKey != null)
-                            {
-                                string value24 = subKey.GetValue("{a45c254e-df1c-4efd-8020-67d146a850e0},24")?.ToString();
-                                string value6 = subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},6")?.ToString();
-                                string value8 = subKey.GetValue("{a8b865dd-2e3d-4094-ad97-e593a70c75d6},8")?.ToString();
-                                string value2 = subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},2")?.ToString();
-
-                                if (((value24 != null && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0) || (value6 != null && value6.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                    (value8 != null && value8.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)) && value2 != null && value2.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0)
-                                    return (true, subKey.GetValue("{b3f8fa53-0004-438e-9003-51a46e139bfc},6")?.ToString());
-                            }
-                        }
+                        using ManagementObjectSearcher pnpEntitySearcher = new ManagementObjectSearcher(@"root\cimv2", $"SELECT Caption, Name FROM Win32_PnPEntity WHERE PNPDeviceID = '{soundDeviceObj["PNPDeviceID"]?.ToString().Replace("\\", "\\\\")}'", new EnumerationOptions { ReturnImmediately = true });
+                        foreach (ManagementObject pnpEntityObj in pnpEntitySearcher.Get().Cast<ManagementObject>())
+                            HardwareData["Audio"] += $"{new[] { "Caption", "Name" }.Select(prop => pnpEntityObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
                     }
                 }
-                return (false, string.Empty);
-            }
-
-            HardwareData["Audio"] = string.Empty;
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
-            {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
-                {
-                    (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
-
-                    if (isUsbDevice && !string.IsNullOrEmpty(data))
-                        HardwareData["Audio"] += $"{data}\n";
-                    else
-                        HardwareData["Audio"] += $"{new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
-                }
-            }
             HardwareData["Audio"] = HardwareData["Audio"].TrimEnd('\n');
         }
 
@@ -362,27 +330,27 @@ namespace GTweak.Utilities.Configuration
             HardwareData["NetAdapter"] = HardwareData["NetAdapter"].TrimEnd('\n');
         }
 
-        private bool IsNetworkAvailable()
+        internal bool IsNetworkAvailable()
         {
             try
             {
-                string dns = CultureInfo.InstalledUICulture switch
+                string dns = CultureInfo.InstalledUICulture.Name switch
                 {
-                    { Name: string name } when name.StartsWith("fa") => "aparat.com",
-                    { Name: string name } when name.StartsWith("zh") => "baidu.com",
-                    { Name: string name } when name.StartsWith("ru") => "yandex.ru",
-                    { Name: string name } when name.StartsWith("ko") => "naver.com",
-                    { Name: string name } when name.StartsWith("tm") => "turkmenportal.com",
-                    { Name: string name } when name.StartsWith("vn") => "coccoc.com",
-                    { Name: string name } when name.StartsWith("cu") => "ecured.cu",
-                    { Name: string name } when name.StartsWith("kp") => "naenara.com.kp",
-                    { Name: string name } when name.StartsWith("sy") => "duckduckgo.com",
-                    { Name: string name } when name.StartsWith("jp") => "yahoo.co.jp",
-                    { Name: string name } when name.StartsWith("de") => "t-online.de",
-                    { Name: string name } when name.StartsWith("fr") => "orange.fr",
-                    { Name: string name } when name.StartsWith("es") => "terra.es",
-                    { Name: string name } when name.StartsWith("it") => "libero.it",
-                    { Name: string name } when name.StartsWith("tr") || name.StartsWith("in") => "bing.com",
+                    string name when name.StartsWith("fa") => "aparat.com",
+                    string name when name.StartsWith("zh") => "baidu.com",
+                    string name when name.StartsWith("ru") => "yandex.ru",
+                    string name when name.StartsWith("ko") => "naver.com",
+                    string name when name.StartsWith("tm") => "turkmenportal.com",
+                    string name when name.StartsWith("vn") => "coccoc.com",
+                    string name when name.StartsWith("cu") => "ecured.cu",
+                    string name when name.StartsWith("kp") => "naenara.com.kp",
+                    string name when name.StartsWith("sy") => "duckduckgo.com",
+                    string name when name.StartsWith("jp") => "yahoo.co.jp",
+                    string name when name.StartsWith("de") => "t-online.de",
+                    string name when name.StartsWith("fr") => "orange.fr",
+                    string name when name.StartsWith("es") => "terra.es",
+                    string name when name.StartsWith("it") => "libero.it",
+                    string name when name.StartsWith("tr") || name.StartsWith("in") => "bing.com",
                     _ => "google.com"
                 };
 

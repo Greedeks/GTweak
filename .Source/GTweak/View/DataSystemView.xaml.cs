@@ -43,7 +43,7 @@ namespace GTweak.View
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate
                     {
-                        new SystemDiagnostics().GetUpdatingDevices();
+                        new SystemDiagnostics().UpdatingDevicesData();
                         await new MonitoringSystem().GetTotalProcessorUsage();
                     });
                     Application.Current.Dispatcher.Invoke(AnimationProgressBars);

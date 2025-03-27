@@ -21,7 +21,7 @@ namespace GTweak.View
                 new ViewNotification().Show("", "info", "readyactivate_notification");
             else
             {
-                if (SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available || SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Block)
+                if (new SystemDiagnostics().IsNetworkAvailable())
                     await WindowsLicense.StartActivation();
                 else
                     new ViewNotification().Show("", "warn", "networklicense_notification");
