@@ -4,7 +4,6 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Tweaks;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -65,7 +64,7 @@ namespace GTweak.Windows
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            int index = new List<int> { 5, 30, 55, 75, 95 }.IndexOf(e.ProgressPercentage);
+            int index = Array.IndexOf(new int[] { 5, 30, 55, 75, 95 }, e.ProgressPercentage);
             if (index >= 0)
                 new TypewriterAnimation((string)FindResource($"text{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
         }
