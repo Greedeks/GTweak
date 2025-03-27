@@ -306,19 +306,55 @@ namespace GTweak.Utilities.Configuration
             HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
         }
 
+        /// <summary>
+        /// Handling the retrieval of device names for USB devices: In WMI, most connected devices are often named "USB Audio Device." 
+        /// Therefore, for such devices, the name lookup is performed through the registry. 
+        /// The search for an identifier in Win32_PnPEntity is slow, although it is more convenient. However, it is inferior in speed.
+        /// </summary>
         private void GetAudioDevices()
         {
-            HardwareData["Audio"] = string.Empty;
-            using (ManagementObjectSearcher soundDeviceSearcher = new ManagementObjectSearcher(@"root\cimv2", "select PNPDeviceID from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
-                foreach (ManagementObject soundDeviceObj in soundDeviceSearcher.Get().Cast<ManagementObject>())
+            static (bool, string) IsUsbAudioDevice(string deviceID)
+            {
+                const string basePath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render";
+                using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey(basePath))
                 {
-                    if (!string.IsNullOrEmpty(soundDeviceObj["PNPDeviceID"]?.ToString()))
+                    if (regKey != null)
                     {
-                        using ManagementObjectSearcher pnpEntitySearcher = new ManagementObjectSearcher(@"root\cimv2", $"SELECT Caption, Name FROM Win32_PnPEntity WHERE PNPDeviceID = '{soundDeviceObj["PNPDeviceID"]?.ToString().Replace("\\", "\\\\")}'", new EnumerationOptions { ReturnImmediately = true });
-                        foreach (ManagementObject pnpEntityObj in pnpEntitySearcher.Get().Cast<ManagementObject>())
-                            HardwareData["Audio"] += $"{new[] { "Caption", "Name" }.Select(prop => pnpEntityObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
+                        foreach (string subKeyName in regKey.GetSubKeyNames())
+                        {
+                            string propsPath = $@"HKEY_LOCAL_MACHINE\{basePath}\{subKeyName}\Properties";
+                            using RegistryKey subKey = regKey.OpenSubKey(subKeyName + @"\Properties");
+                            if (subKey != null)
+                            {
+                                string value24 = RegistryHelp.GetValue(propsPath, "{a45c254e-df1c-4efd-8020-67d146a850e0},24", string.Empty);
+                                string value8 = RegistryHelp.GetValue(propsPath, "{a8b865dd-2e3d-4094-ad97-e593a70c75d6},8", string.Empty);
+                                string value5 = RegistryHelp.GetValue(propsPath, "{a8b865dd-2e3d-4094-ad97-e593a70c75d6},5", string.Empty);
+                                string value6 = RegistryHelp.GetValue(propsPath, "{a8b865dd-2e3d-4094-ad97-e593a70c75d6},6", string.Empty);
+                                string valueID = RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},2", string.Empty);
+
+                                if (!string.IsNullOrEmpty(valueID) && valueID.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0 && ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
+                                    return (true, RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},6", string.Empty));
+                            }
+                        }
                     }
                 }
+                return (false, string.Empty);
+            }
+
+            HardwareData["Audio"] = string.Empty;
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
+            {
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
+
+                    if (isUsbDevice && !string.IsNullOrEmpty(data))
+                        HardwareData["Audio"] += $"{data}\n";
+                    else
+                        HardwareData["Audio"] += $"{new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
+                }
+            }
             HardwareData["Audio"] = HardwareData["Audio"].TrimEnd('\n');
         }
 
