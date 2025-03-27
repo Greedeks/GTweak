@@ -4,6 +4,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Tweaks;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -64,25 +65,11 @@ namespace GTweak.Windows
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            switch (e.ProgressPercentage)
-            {
-                case 5:
-                    new TypewriterAnimation((string)FindResource("text1_load"), TextLoad, TimeSpan.FromMilliseconds(200));
-                    break;
-                case 30:
-                    new TypewriterAnimation((string)FindResource("text2_load"), TextLoad, TimeSpan.FromMilliseconds(200));
-                    break;
-                case 55:
-                    new TypewriterAnimation((string)FindResource("text3_load"), TextLoad, TimeSpan.FromMilliseconds(200));
-                    break;
-                case 75:
-                    new TypewriterAnimation((string)FindResource("text4_load"), TextLoad, TimeSpan.FromMilliseconds(200));
-                    break;
-                case 95:
-                    new TypewriterAnimation((string)FindResource("text5_load"), TextLoad, TimeSpan.FromMilliseconds(200));
-                    break;
-            }
+            int index = new List<int> { 5, 30, 55, 75, 95 }.IndexOf(e.ProgressPercentage);
+            if (index >= 0)
+                new TypewriterAnimation((string)FindResource($"text{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
         }
+
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
