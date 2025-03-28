@@ -1,10 +1,8 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Windows;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,21 +44,9 @@ namespace GTweak.Utilities.Control
 
         internal static void CheckingSystemRequirements()
         {
-            Parallel.Invoke(() =>
-            {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, Version, BuildNumber from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
-                {
-                    SystemDiagnostics.WindowsClientVersion = Convert.ToString(managementObj["Caption"]);
-                    SystemDiagnostics.WindowsBuildVersion = Convert.ToString(managementObj["BuildNumber"]);
-                    SystemDiagnostics.IsWindowsVersion = new Dictionary<byte, bool>()
-                    {
-                        { 11, SystemDiagnostics.WindowsClientVersion.Contains("11") },
-                        { 10, SystemDiagnostics.WindowsClientVersion.Contains("10") }
-                    }; ;
-                }
-            });
+            Task.Run(delegate { new SystemDiagnostics().GetOperatingSystemInfo(); }).Wait();
 
-            if ((SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) && SystemDiagnostics.WindowsBuildVersion.CompareTo("18362.116") > 0) return;
+            if ((SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) && SystemDiagnostics.WindowsBuildVersion.CompareTo("18362.116") >= 0) return;
             new MessageWindow(true).ShowDialog();
         }
     }

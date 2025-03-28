@@ -87,7 +87,6 @@ namespace GTweak.Utilities.Configuration
         internal void GetHardwareData()
         {
             Parallel.Invoke(
-                GetOperatingSystemInfo,
                 GetBiosInfo,
                 GetMotherboardInfo,
                 GetProcessorInfo,
@@ -107,13 +106,26 @@ namespace GTweak.Utilities.Configuration
             );
         }
 
-        private void GetOperatingSystemInfo()
+        internal void GetOperatingSystemInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["Windows"] = $"{Convert.ToString(managementObj["Caption"]).Substring(Convert.ToString(managementObj["Caption"]).IndexOf('W'))}, {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]}\n";
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
+            {
+                WindowsClientVersion = Convert.ToString(managementObj["Caption"]);
+                WindowsBuildVersion = Convert.ToString(managementObj["BuildNumber"]);
+                HardwareData["Windows"] = $"{WindowsClientVersion.Substring(WindowsClientVersion.IndexOf('W'))}, {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]}\n";
+                IsWindowsVersion = new Dictionary<byte, bool>()
+                {
+                    { 11, WindowsClientVersion.Contains("11") },
+                    { 10, WindowsClientVersion.Contains("10") }
+                };
+            }
             HardwareData["Windows"] = $"\n{HardwareData["Windows"].TrimEnd('\n')}";
         }
 
+        /// <summary>
+        /// If the manufacturer did not provide a serial number and the obtained value is "Default string", 
+        /// then the serial number will not be displayed, similar to the situation with the motherboard.
+        /// </summary>
         private async void GetBiosInfo()
         {
             string output = await CommandExecutor.GetCommandOutput("bcdedit");
@@ -214,6 +226,10 @@ namespace GTweak.Utilities.Configuration
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
         }
 
+        /// <summary>
+        /// The Win32_PhysicalMemory class has a limitation in retrieving the memory name and speed. In these cases, the values will be "Unknown" and "0". 
+        /// Under these circumstances, the memory type will be displayed instead of the name, and the speed will not be shown.
+        /// </summary>
         private void GetMemoryInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
