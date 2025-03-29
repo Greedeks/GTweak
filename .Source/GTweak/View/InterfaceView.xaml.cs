@@ -70,10 +70,10 @@ namespace GTweak.View
             ToggleButton toggleButton = (ToggleButton)sender;
             InterfaceTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-            if (ExplorerManager.GetIntfStorage.TryGetValue(toggleButton.Name, out bool needRestart))
+            if (ExplorerManager.InterfBtnMapping.TryGetValue(toggleButton.Name, out bool needRestart))
                 ExplorerManager.Restart(new Process());
 
-            if (NotifActionsStorage.GetIntfActions.TryGetValue(toggleButton.Name, out string action))
+            if (NotifActionsStorage.IntfNotifActions.TryGetValue(toggleButton.Name, out string action))
                 new ViewNotification(300).Show(action);
 
             Parallel.Invoke(async delegate { await Task.Delay(1000); new InterfaceTweaks().AnalyzeAndUpdate(this); });

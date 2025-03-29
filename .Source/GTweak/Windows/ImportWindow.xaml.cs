@@ -77,8 +77,8 @@ namespace GTweak.Windows
                         await Task.Delay(700, _token);
                         ConfidentialityTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
-                        isRestartNeed = NotifActionsStorage.GetConfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotifActionsStorage.GetConfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                        isRestartNeed = NotifActionsStorage.ConfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotifActionsStorage.ConfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                     }
                 }
 
@@ -96,9 +96,9 @@ namespace GTweak.Windows
                         await Task.Delay(700, _token);
                         InterfaceTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
-                        isRestartNeed = NotifActionsStorage.GetIntfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotifActionsStorage.GetIntfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
-                        isExpRestartNeed = ExplorerManager.GetIntfStorage.Any(get => get.Key == set.Tweak && get.Value == true);
+                        isRestartNeed = NotifActionsStorage.IntfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotifActionsStorage.IntfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                        isExpRestartNeed = ExplorerManager.InterfBtnMapping.Any(get => get.Key == set.Tweak && get.Value == true);
                     }
                 }
 
@@ -144,8 +144,8 @@ namespace GTweak.Windows
                             else
                                 SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
 
-                            isRestartNeed = NotifActionsStorage.GetSysActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                            isLogoutNeed = NotifActionsStorage.GetSysActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                            isRestartNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                            isLogoutNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                         }
                     }
                 }

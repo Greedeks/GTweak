@@ -48,7 +48,7 @@ namespace GTweak.View
             {
                 SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-                if (NotifActionsStorage.GetSysActions.TryGetValue(toggleButton.Name, out string action))
+                if (NotifActionsStorage.SysNotifActions.TryGetValue(toggleButton.Name, out string action))
                     new ViewNotification(300).Show(action);
 
                 Parallel.Invoke(async delegate { await Task.Delay(1000); new SystemTweaks().AnalyzeAndUpdate(this); });

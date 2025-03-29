@@ -37,7 +37,7 @@ namespace GTweak.View
 
             ConfidentialityTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-            if (NotifActionsStorage.GetConfActions.TryGetValue(toggleButton.Name, out string action))
+            if (NotifActionsStorage.ConfNotifActions.TryGetValue(toggleButton.Name, out string action))
                 new ViewNotification(300).Show(action);
 
             Parallel.Invoke(async delegate { await Task.Delay(1000); new ConfidentialityTweaks().AnalyzeAndUpdate(this); });

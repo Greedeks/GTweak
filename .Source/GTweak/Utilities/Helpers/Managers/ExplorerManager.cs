@@ -9,6 +9,23 @@ namespace GTweak.Utilities.Helpers.Managers
 {
     internal class ExplorerManager
     {
+       internal static readonly Dictionary<string, bool> InterfBtnMapping = new[]
+       {
+            new { Button = "TglButton7", NeedRestart = true },
+            new { Button = "TglButton8", NeedRestart = true },
+            new { Button = "TglButton17", NeedRestart = true },
+            new { Button = "TglButton21", NeedRestart = true },
+            new { Button = "TglButton22", NeedRestart = true },
+            new { Button = "TglButton30", NeedRestart = true },
+            new { Button = "TglButton32", NeedRestart = true },
+        }.ToDictionary(x => x.Button, x => x.NeedRestart);
+
+        internal static readonly Dictionary<string, bool> AppImgMapping = new[]
+{
+            new { Package = "Widgets", NeedRestart = true },
+            new { Package = "Edge", NeedRestart = true }
+        }.ToDictionary(x => x.Package, x => x.NeedRestart);
+
         internal static void Restart(Process launchExplorer, Action action = null)
         {
             Task.Run(delegate
@@ -38,22 +55,5 @@ namespace GTweak.Utilities.Helpers.Managers
                 }
             });
         }
-
-        internal static readonly Dictionary<string, bool> GetIntfStorage = new[]
-        {
-            new { Button = "TglButton7", NeedRestart = true },
-            new { Button = "TglButton8", NeedRestart = true },
-            new { Button = "TglButton17", NeedRestart = true },
-            new { Button = "TglButton21", NeedRestart = true },
-            new { Button = "TglButton22", NeedRestart = true },
-            new { Button = "TglButton30", NeedRestart = true },
-            new { Button = "TglButton32", NeedRestart = true },
-        }.ToDictionary(x => x.Button, x => x.NeedRestart);
-
-        internal static readonly Dictionary<string, bool> GetAppsStorage = new[]
-{
-            new { Package = "Widgets", NeedRestart = true },
-            new { Package = "Edge", NeedRestart = true }
-        }.ToDictionary(x => x.Package, x => x.NeedRestart);
     }
 }
