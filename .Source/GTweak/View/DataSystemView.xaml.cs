@@ -1,6 +1,6 @@
 ﻿using GTweak.Core.ViewModel;
 using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Control;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using System;
 using System.Collections.Generic;

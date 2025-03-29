@@ -1,5 +1,6 @@
-﻿using GTweak.Utilities.Control;
+﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Tweaks.DefenderManager;
 using GTweak.View;
 using Microsoft.Win32;

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace GTweak.Utilities.Control
+namespace GTweak.Utilities.Controls
 {
     internal sealed class ViewNotification
     {

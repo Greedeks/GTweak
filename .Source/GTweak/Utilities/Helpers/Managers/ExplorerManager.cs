@@ -1,11 +1,11 @@
-﻿using GTweak.Utilities.Control;
+﻿using GTweak.Utilities.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Helpers
+namespace GTweak.Utilities.Helpers.Managers
 {
     internal class ExplorerManager
     {

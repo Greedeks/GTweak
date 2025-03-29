@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.Compression;
 
-namespace GTweak.Utilities.Helpers
+namespace GTweak.Utilities.Helpers.Managers
 {
     internal sealed class UnarchiveManager
     {

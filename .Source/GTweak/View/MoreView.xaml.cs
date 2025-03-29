@@ -1,5 +1,5 @@
 ﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Control;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using GTweak.Windows;

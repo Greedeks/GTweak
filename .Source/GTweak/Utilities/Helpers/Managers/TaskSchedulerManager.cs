@@ -1,9 +1,9 @@
-﻿using GTweak.Utilities.Control;
+﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers.Storage;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Helpers
+namespace GTweak.Utilities.Helpers.Managers
 {
     internal class TaskSchedulerManager : TaskStorage
     {

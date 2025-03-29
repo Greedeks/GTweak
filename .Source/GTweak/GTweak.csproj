@@ -264,24 +264,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Control\BlockRunTweaker.cs" />
-    <Compile Include="Utilities\Control\ErrorLogging.cs" />
+    <Compile Include="Utilities\Controls\BlockRunTweaker.cs" />
+    <Compile Include="Utilities\Controls\ErrorLogging.cs" />
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
-    <Compile Include="Utilities\Helpers\ExplorerManager.cs" />
+    <Compile Include="Utilities\Helpers\Managers\ExplorerManager.cs" />
     <Compile Include="Utilities\Helpers\Storage\WinKeyStorage.cs" />
-    <Compile Include="Utilities\Helpers\TaskSchedulerManager.cs" />
-    <Compile Include="Utilities\Helpers\UnarchiveManager.cs" />
+    <Compile Include="Utilities\Helpers\Managers\TaskSchedulerManager.cs" />
+    <Compile Include="Utilities\Helpers\Managers\UnarchiveManager.cs" />
     <Compile Include="Utilities\Helpers\BackgroundQueue.cs" />
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />
-    <Compile Include="Utilities\Control\SettingsRepository.cs" />
+    <Compile Include="Utilities\Controls\SettingsRepository.cs" />
     <Compile Include="Utilities\Helpers\TakingOwnership.cs" />
     <Compile Include="Utilities\Helpers\Storage\NotifActionsStorage.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
-    <Compile Include="Utilities\Helpers\INIManager.cs" />
+    <Compile Include="Utilities\Helpers\Managers\INIManager.cs" />
     <Compile Include="Utilities\Configuration\MonitoringSystem.cs" />
     <Compile Include="Utilities\Configuration\SystemDiagnostics.cs" />
-    <Compile Include="Utilities\Control\ViewNotification.cs" />
+    <Compile Include="Utilities\Controls\ViewNotification.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\BackupRights.cs" />

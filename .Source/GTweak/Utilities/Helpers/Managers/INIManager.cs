@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace GTweak.Utilities.Helpers
+namespace GTweak.Utilities.Helpers.Managers
 {
     internal sealed class INIManager
     {

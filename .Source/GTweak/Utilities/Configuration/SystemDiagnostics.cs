@@ -1,4 +1,4 @@
-﻿using GTweak.Utilities.Control;
+﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using Newtonsoft.Json;

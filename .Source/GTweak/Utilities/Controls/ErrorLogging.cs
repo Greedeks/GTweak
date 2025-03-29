@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Control
+namespace GTweak.Utilities.Controls
 {
     internal class ErrorLogging
     {

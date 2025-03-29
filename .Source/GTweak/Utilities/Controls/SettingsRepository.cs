@@ -1,4 +1,5 @@
 ﻿using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Managers;
 using GTweak.Windows;
 using Microsoft.Win32;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace GTweak.Utilities.Control
+namespace GTweak.Utilities.Controls
 {
     [StructLayout(LayoutKind.Sequential)]
     internal readonly struct StoragePaths

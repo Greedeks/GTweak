@@ -1,4 +1,4 @@
-﻿using GTweak.Utilities.Control;
+﻿using GTweak.Utilities.Controls;
 using System;
 using System.Windows;
 using System.Windows.Controls;

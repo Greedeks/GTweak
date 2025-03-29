@@ -1,6 +1,6 @@
 ﻿using GTweak.Core.Model;
 using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Control;
+using GTweak.Utilities.Controls;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
