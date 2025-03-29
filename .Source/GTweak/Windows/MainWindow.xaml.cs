@@ -22,7 +22,7 @@ namespace GTweak
             InitializeComponent();
 
             BtnNotification.StateNA = SettingsRepository.IsViewNotification;
-            BtnUpdate.StateNA = SettingsRepository.IsСheckingUpdate;
+            BtnUpdate.StateNA = SettingsRepository.IsUpdateCheckRequired;
             BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
             BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
             SliderVolume.Value = SettingsRepository.Volume;
@@ -132,7 +132,7 @@ namespace GTweak
             };
             doubleAnim.Completed += async delegate
             {
-                if (QueryUpdates.IsNeedUpdate && SettingsRepository.IsСheckingUpdate)
+                if (SystemDiagnostics.IsNeedUpdate && SettingsRepository.IsUpdateCheckRequired)
                 {
                     await Task.Delay(500);
                     new UpdateWindow().ShowDialog();

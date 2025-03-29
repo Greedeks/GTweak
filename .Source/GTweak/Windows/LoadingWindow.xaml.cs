@@ -53,7 +53,7 @@ namespace GTweak.Windows
                 new SettingsRepository().СheckingParameters,
                 new WindowsLicense().LicenseStatus,
                 new SystemDiagnostics().GetHardwareData,
-                new QueryUpdates().RunSearch,
+                new SystemDiagnostics().ValidateVersionUpdates,
                 new UninstallingPakages().LoadInstalledPackages,
                 new UninstallingPakages().CheckingForLocalAccount,
                 new SystemTweaks().ViewNetshState,

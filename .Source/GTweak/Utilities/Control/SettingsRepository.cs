@@ -36,7 +36,7 @@ namespace GTweak.Utilities.Control
         private static readonly Dictionary<string, Action> parameterUpdates = new Dictionary<string, Action>
         {
             { "Notification", () => IsViewNotification = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Notification", IsViewNotification) },
-            { "Update", () => IsСheckingUpdate = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Update", IsСheckingUpdate) },
+            { "Update", () => IsUpdateCheckRequired = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Update", IsUpdateCheckRequired) },
             { "TopMost", () => IsTopMost = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "TopMost", IsTopMost) },
             { "Sound", () => IsPlayingSound = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Sound", IsPlayingSound) },
             { "Volume", () => Volume = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Volume", Volume) },
@@ -58,7 +58,7 @@ namespace GTweak.Utilities.Control
         };
 
         internal static bool IsViewNotification { get => (bool)defaultRegValues["Notification"]; set => defaultRegValues["Notification"] = value; }
-        internal static bool IsСheckingUpdate { get => (bool)defaultRegValues["Update"]; set => defaultRegValues["Update"] = value; }
+        internal static bool IsUpdateCheckRequired { get => (bool)defaultRegValues["Update"]; set => defaultRegValues["Update"] = value; }
         internal static bool IsTopMost { get => (bool)defaultRegValues["TopMost"]; set => defaultRegValues["TopMost"] = value; }
         internal static bool IsPlayingSound { get => (bool)defaultRegValues["Sound"]; set => defaultRegValues["Sound"] = value; }
         internal static int Volume { get => (int)defaultRegValues["Volume"]; set => defaultRegValues["Volume"] = value; }

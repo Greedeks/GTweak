@@ -279,7 +279,6 @@
     <Compile Include="Utilities\Helpers\Storage\NotifActionsStorage.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
     <Compile Include="Utilities\Helpers\INIManager.cs" />
-    <Compile Include="Utilities\Configuration\QueryUpdates.cs" />
     <Compile Include="Utilities\Configuration\MonitoringSystem.cs" />
     <Compile Include="Utilities\Configuration\SystemDiagnostics.cs" />
     <Compile Include="Utilities\Control\ViewNotification.cs" />

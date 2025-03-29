@@ -1,9 +1,11 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Control;
+using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net;
@@ -20,6 +22,12 @@ namespace GTweak.Utilities.Configuration
 {
     internal sealed class SystemDiagnostics
     {
+        private sealed class GitMetadata
+        {
+            [JsonProperty("tag_name")]
+            internal string СurrentVersion { get; set; }
+        }
+
         private sealed class IPMetadata
         {
             [JsonProperty("query")]
@@ -39,6 +47,8 @@ namespace GTweak.Utilities.Configuration
 
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
+        internal static bool IsNeedUpdate { get; private set; } = false;
+        internal static string DownloadVersion { get; private set; } = string.Empty;
         internal static string WindowsClientVersion { get; set; } = string.Empty;
         internal static string WindowsBuildVersion { get; set; } = string.Empty;
 
@@ -455,6 +465,33 @@ namespace GTweak.Utilities.Configuration
                     { ConnectionStatus.Limited, "limited_systemInformation" }
                 }.TryGetValue(CurrentConnection, out string resourceKey)) { HardwareData["UserIpAddress"] = (string)Application.Current.Resources[resourceKey]; }
             });
+        }
+
+        internal void ValidateVersionUpdates()
+        {
+            if (!SettingsRepository.IsUpdateCheckRequired || !IsNetworkAvailable())
+                return;
+
+            try
+            {
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/greedeks/gtweak/releases/latest");
+
+                webRequest.ContentType = "application/json";
+                webRequest.UserAgent = "Nothing";
+                webRequest.Timeout = 5000;
+
+                using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+                using StreamReader sreader = new StreamReader(response.GetResponseStream());
+                string DataAsJson = sreader.ReadToEnd();
+                GitMetadata gitVersionUtility = JsonConvert.DeserializeObject<GitMetadata>(DataAsJson);
+
+                if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsRepository.currentRelease) > 0)
+                {
+                    IsNeedUpdate = true;
+                    DownloadVersion = gitVersionUtility.СurrentVersion;
+                }
+            }
+            catch { IsNeedUpdate = false; }
         }
     }
 }

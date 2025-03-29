@@ -145,10 +145,7 @@ namespace GTweak.Utilities.Helpers
                     result.Add(name);
                 return result;
             }
-            catch
-            {
-                return new T();
-            }
+            catch { return new T(); }
         }
     }
 }
