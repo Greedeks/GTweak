@@ -3,6 +3,7 @@ using GTweak.Utilities.Helpers;
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Threading;
@@ -27,7 +28,7 @@ namespace GTweak
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            ErrorLogging.LogWritingFile(e.Exception);
+            LogError(e.Exception);
             e.Handled = true;
             Environment.Exit(0);
         }
@@ -35,9 +36,11 @@ namespace GTweak
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is Exception ex)
-                ErrorLogging.LogWritingFile(ex);
+                LogError(ex);
             Environment.Exit(0);
         }
+
+        private void LogError(Exception ex, [CallerMemberName] string memberName = "") => ErrorLogging.LogWritingFile(ex, memberName);
 
         internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(default, EventArgs.Empty);
 

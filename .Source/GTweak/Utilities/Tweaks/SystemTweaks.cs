@@ -409,9 +409,7 @@ namespace GTweak.Utilities.Tweaks
                     },
                 };
 
-                string searchScheme = default,
-                    unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE",
-                    pathTempFile = StoragePaths.FolderLocation + @"\UltimatePerformance.pow";
+                string searchScheme = default, unlockFrequency = @"-attributes SUB_PROCESSOR 75b0ae3f-bce0-45a7-8c89-c9611c25e100 -ATTRIB_HIDE";
 
                 try
                 {
@@ -438,13 +436,13 @@ namespace GTweak.Utilities.Tweaks
 
                         if (string.IsNullOrEmpty(searchScheme))
                         {
-                            new UnarchiveManager(pathTempFile, Properties.Resources.Ultimate_Performance_pow);
+                            new UnarchiveManager(StoragePaths.PowFile, Properties.Resources.Ultimate_Performance_pow);
 
                             string _guid = Guid.NewGuid().ToString("D");
 
                             using (_powercfg)
                             {
-                                _powercfg.StartInfo.Arguments = $@"-import ""{pathTempFile}"" {_guid}";
+                                _powercfg.StartInfo.Arguments = $@"-import ""{StoragePaths.PowFile}"" {_guid}";
                                 _powercfg.Start();
 
                                 await Task.Delay(5);

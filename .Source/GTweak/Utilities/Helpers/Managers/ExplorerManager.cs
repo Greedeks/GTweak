@@ -9,8 +9,8 @@ namespace GTweak.Utilities.Helpers.Managers
 {
     internal class ExplorerManager
     {
-       internal static readonly Dictionary<string, bool> InterfBtnMapping = new[]
-       {
+        internal static readonly Dictionary<string, bool> InterfBtnMapping = new[]
+        {
             new { Button = "TglButton7", NeedRestart = true },
             new { Button = "TglButton8", NeedRestart = true },
             new { Button = "TglButton17", NeedRestart = true },

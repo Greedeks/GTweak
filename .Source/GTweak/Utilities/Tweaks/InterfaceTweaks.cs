@@ -218,12 +218,12 @@ namespace GTweak.Utilities.Tweaks
                         {
                             if (isChoose)
                             {
-                                new UnarchiveManager($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico", Properties.Resources.Blank);
+                                new UnarchiveManager(StoragePaths.IconBlank, Properties.Resources.Blank);
                                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
                             }
                             else
                             {
-                                File.Delete($@"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\Blank.ico");
+                                File.Delete(StoragePaths.IconBlank);
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
                             }
                         });

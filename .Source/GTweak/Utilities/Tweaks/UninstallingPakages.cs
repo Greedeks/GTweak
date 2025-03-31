@@ -114,7 +114,7 @@ namespace GTweak.Utilities.Tweaks
 
                         await RunPowerShell($"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"");
 
-                        foreach (string getScript in Scripts)
+                        foreach (string getScript in Scripts ?? Enumerable.Empty<string>())
                         {
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getScript}*"") do rd /s /q ""%i""");
                             await RunPowerShell($"{argument} \"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage\"");
