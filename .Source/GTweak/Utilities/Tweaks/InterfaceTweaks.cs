@@ -295,6 +295,7 @@ namespace GTweak.Utilities.Tweaks
 
                     if (SystemDiagnostics.IsWindowsVersion[11])
                     {
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Copilot*.lnk""");
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCopilotButton", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", isChoose ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", isChoose ? 0 : 1, RegistryValueKind.DWord);

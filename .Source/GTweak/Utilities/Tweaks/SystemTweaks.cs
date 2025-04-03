@@ -3,6 +3,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Tweaks.DefenderManager;
 using GTweak.View;
+using GTweak.Windows;
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
@@ -196,7 +197,7 @@ namespace GTweak.Utilities.Tweaks
 
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
-        internal static void ApplyTweaks(string tweak, bool isChoose)
+        internal static async void ApplyTweaks(string tweak, bool isChoose)
         {
             INIManager.TempWrite(INIManager.TempTweaksSys, tweak, isChoose);
 
@@ -256,7 +257,20 @@ namespace GTweak.Utilities.Tweaks
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     break;
                 case "TglButton8":
-                    new WindowsDefender().SetState(isChoose);
+                    {
+                        WaitingWindow waitingWindow = new WaitingWindow();
+                        waitingWindow.Show();
+                        BackgroundQueue backgroundQueue = new BackgroundQueue();
+                        await backgroundQueue.QueueTask(delegate
+                        {
+                            if (isChoose)
+                                WindowsDefender.Deactivate();
+                            else
+                                WindowsDefender.ActivateAsync();
+                        });
+                        await backgroundQueue.QueueTask(delegate { isTweakWorkingAntivirus = false; new ViewNotification(300).Show("restart"); });
+                        waitingWindow.Close();
+                    }
                     BlockWDefender(isChoose);
                     break;
                 case "TglButton9":

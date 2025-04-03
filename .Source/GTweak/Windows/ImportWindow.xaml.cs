@@ -1,4 +1,5 @@
 ﻿using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
@@ -132,21 +133,24 @@ namespace GTweak.Windows
                     {
                         await Task.Delay(700, _token);
 
-                        if (set.Tweak != "TglButton8")
+                        if (set.Tweak.StartsWith("TglButton") && set.Tweak != "TglButton8")
+                            SystemTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
+                        else if (set.Tweak == "TglButton8")
                         {
-                            if (set.Tweak.StartsWith("TglButton") && set.Tweak != "TglButton8")
-                                SystemTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
-                            else if (set.Tweak == "TglButton8")
+                            BackgroundQueue backgroundQueue = new BackgroundQueue();
+                            await backgroundQueue.QueueTask(delegate
                             {
-                                new WindowsDefender().ImportSetState(Convert.ToBoolean(set.Value));
-                                await Task.Delay(20000, _token);
-                            }
-                            else
-                                SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
-
-                            isRestartNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                            isLogoutNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                                if (Convert.ToBoolean(set.Value))
+                                    WindowsDefender.Deactivate();
+                                else
+                                    WindowsDefender.ActivateAsync();
+                            });
                         }
+                        else
+                            SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
+
+                        isRestartNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                     }
                 }
 

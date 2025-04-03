@@ -18,11 +18,8 @@ namespace GTweak.Utilities.Controls
         internal static string FolderLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"GTweak");
         internal static string SystemDisk => Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         internal static string HostsFile => Path.Combine(Environment.SystemDirectory, @"drivers\etc\hosts");
-
         internal static string PowFile => Path.Combine(FolderLocation, "UltimatePerformance.pow");
-
         internal static string IconBlank => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Blank.ico");
-
         internal static string RegistryLocation => @"HKEY_CURRENT_USER\Software\GTweak";
     }
 

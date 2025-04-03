@@ -45,8 +45,8 @@
         @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" };
 
         internal static readonly string[] memoryDiagTasks =  {
-        @"Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
-        @"Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
+        @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
+        @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
 
         internal static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
         internal static readonly string defragTask = @"\Microsoft\Windows\Defrag\ScheduledDefrag";

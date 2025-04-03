@@ -1,42 +1,17 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Windows;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class WindowsDefender : BackupRights
     {
-        internal void ImportSetState(bool isDisable)
-        {
-            if (isDisable)
-                Disable();
-            else
-                Enable();
-        }
-
-        internal async void SetState(bool isDisable)
-        {
-            WaitingWindow waitingWindow = new WaitingWindow();
-            waitingWindow.Show();
-            BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate
-            {
-                if (isDisable)
-                    Disable();
-                else
-                    Enable();
-            });
-            await backgroundQueue.QueueTask(delegate { SystemTweaks.isTweakWorkingAntivirus = false; new ViewNotification(300).Show("restart"); });
-            waitingWindow.Close();
-        }
-
-        private void Enable()
+        internal static void ActivateAsync()
         {
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /v EnableWebContentEvaluation /f & " +
                 "reg delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /v SmartScreenEnabled /f & " +
@@ -63,23 +38,12 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /t REG_DWORD /v SpyNetReporting /d 1 /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /t REG_DWORD /v SubmitSamplesConsent /d 0 /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /t REG_DWORD /v TamperProtection /d 1 /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SecurityHealthService /t REG_DWORD /v Start /d 2 /f &" +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 2 /f & " +
                 "reg delete HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 3 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_DWORD /v CFGOptions /d 1 /f & " +
+                "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpDefenderCoreService.exe\" /f & " +
+                "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\SgrmBroker.exe\" /f & " +
+                "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /f & " +
                 "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /v Debugger /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /t REG_DWORD /v CFGOptions /d 1 /f & " +
-                "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /v Debugger /f");
-
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\BlockSS.exe") + "\" smartscreen.exe\"");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\BlockAntimalware.exe") + "\" MsMpEng.exe\"");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\BlockAntimalwareCore.exe") + "\" MpDefenderCoreService.exe\"");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalware.exe\" ren \"%D\\BlockAntimalware.exe\" MsMpEng.exe");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalwareCore.exe\" ren \"%D\\BlockAntimalwareCore.exe\" MpDefenderCoreService.exe");
-
-            RunCmdCommand("sc start WinDefend");
-            RunPowerShellCommand("Start-Service -Name WinDefend; Set-Service -Name WinDefend -StartupType Automatic");
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_DWORD /v CFGOptions /d 1 /f");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "SmartScreenEnabled", "On", RegistryValueKind.String);
@@ -116,20 +80,15 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RunPowerShellCommand("Set-MpPreference -PUAProtection Enabled");
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows Defender\Features -Name TamperProtection -Value 0x00000001");
 
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center");
             RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge");
 
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter");
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config", "VulnerableDriverBlocklistEnable", 1, RegistryValueKind.DWord);
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WTDS");
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity", "Enabled", 1, RegistryValueKind.DWord);
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost", "EnableWebContentEvaluation");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\AppHost", "PreventOverride");
@@ -151,19 +110,39 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "Start", "2", RegistryValueKind.DWord, true);
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "2", RegistryValueKind.DWord, true);
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "1", RegistryValueKind.DWord, true);
-            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Sense", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SgrmAgent", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SgrmBroker", "Start", "3", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdFilter", "Start", "0", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdBoot", "Start", "0", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisDrv", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "3", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MDCoreSvc", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MsSecCore", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MsSecFlt", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MsSecWfp", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefsvc", "Start", "3", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc", "Start", "3", RegistryValueKind.DWord, true);
 
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MsMpEng.exe", "CFGOptions", 1, RegistryValueKind.DWord);
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe", "CFGOptions", 1, RegistryValueKind.DWord);
+            foreach (var (filePath, originalFileName) in new (string filePath, string originalFileName)[]
+            {
+              (Path.Combine(StoragePaths.SystemDisk, "Windows", "System32", "BlockSS.exe"), "smartscreen.exe"),
+              (Path.Combine(StoragePaths.SystemDisk, "Program Files", "Windows Defender", "BlockAntimalware.exe"), "MsMpEng.exe"),
+              (Path.Combine(StoragePaths.SystemDisk, "Program Files", "Windows Defender", "BlockAntimalwareCore.exe"), "MpDefenderCoreService.exe")
+            })
+            {
+                string newFilePath = Path.Combine(Path.GetDirectoryName(filePath), originalFileName);
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rename \"{filePath}\" {originalFileName}");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{newFilePath}\" /reset");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c takeown /f \"{newFilePath}\" /a");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{newFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
+            }
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalware.exe\" ren \"%D\\BlockAntimalware.exe\" MsMpEng.exe");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalwareCore.exe\" ren \"%D\\BlockAntimalwareCore.exe\" MpDefenderCoreService.exe");
 
+            ManageServices(false);
             SetTaskState(true, WinDefenderTasks);
-            KillProcess(new string[] { "SecurityHealthService", "SecurityHealthService" });
             RunPowerShellCommand(@"Get-AppXpackage Microsoft.WindowsDefender | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register ""$($_.InstallLocation)\AppXManifest.xml""}");
 
             RegistryHelp.Write(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\EPP", "", "{09A47860-11B0-4DA5-AFA5-26D86198A780}", RegistryValueKind.String);
@@ -175,16 +154,31 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             ImportRights();
         }
 
-        internal async void Disable()
+        internal static void Deactivate()
         {
-            KillProcess(new string[] { "smartscreen", "MpDefenderCoreService", "MsMpEng" });
-
             ExportRights();
 
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");
+            KillProcess(new[] { "smartscreen", "MpDefenderCoreService", "MsMpEng", "SecurityHealthService", "SecurityHealthSystray", "wuauserv", "SearchUI", "RuntimeBroker", "msedge", "ssoncom", "usocoreworker" });
+
+            foreach (var (filePath, newFileName) in new (string filePath, string newFileName)[]
+            {
+                (Path.Combine(StoragePaths.SystemDisk, "Windows", "System32", "smartscreen.exe"), "BlockSS.exe"),
+                (Path.Combine(StoragePaths.SystemDisk, "Program Files", "Windows Defender", "MsMpEng.exe"), "BlockAntimalware.exe"),
+                (Path.Combine(StoragePaths.SystemDisk, "Program Files", "Windows Defender", "MpDefenderCoreService.exe"), "BlockAntimalwareCore.exe")
+            })
+            {
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"сmd.exe /c takeown /f \"{filePath}\"");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{filePath}\" /grant %username%:F");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rename \"{filePath}\" {newFileName}");
+            }
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MpDefenderCoreService.exe\" ren \"%D\\MpDefenderCoreService.exe\" BlockAntimalwareCore.exe");
+
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "SmartScreenEnabled", "Off", RegistryValueKind.String);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System", "EnableSmartScreen", 0, RegistryValueKind.DWord);
+
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /t REG_SZ /v SmartScreenEnabled /d \"off\" /f");
 
             RunPowerShellCommand("Set-MpPreference -DisableIOAVProtection $true");
             RunPowerShellCommand("Set-MpPreference -DisableRealtimeMonitoring $true");
@@ -202,11 +196,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RunPowerShellCommand("Set-MpPreference -ModerateThreatDefaultAction 6");
             RunPowerShellCommand("Set-MpPreference -LowThreatDefaultAction 6");
             RunPowerShellCommand("Set-MpPreference -SevereThreatDefaultAction 6");
-
             RunPowerShellCommand("Set-MpPreference -PUAProtection 0");
             RunPowerShellCommand("Set-MpPreference -PUAProtection Disabled");
 
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender");
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender", "DisableAntiSpyware", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender", "DisableAntiVirus", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender", "ServiceKeepAlive", 0, RegistryValueKind.DWord);
@@ -219,22 +211,14 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender", "DisableLocalAdminMerge", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender", "PUAProtection", 0, RegistryValueKind.DWord);
 
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "DisableNotifications", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile", "DisableNotifications", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile");
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "DisableNotifications", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center");
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "DisableEnhancedNotifications", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "DisableNotifications", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "DisallowExploitProtectionOverride", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection", "UILockdown", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Features");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender\Features", "DeviceControlEnabled", 0, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine");
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine", "MpEnablePus", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\MpEngine", "DisableGradualRelease", 1, RegistryValueKind.DWord);
 
@@ -278,11 +262,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\UX Configuration", "Notification_Suppress", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\UX Configuration", "SuppressRebootNotification", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\UX Configuration", "UILockdown", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health", "UILockdown", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family optionsObj");
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family optionsObj", "UILockdown", 1, RegistryValueKind.DWord);
-            RegistryHelp.CreateFolder(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Reportin");
             RegistryHelp.Write(Registry.LocalMachine, @"Software\Policies\Microsoft\Windows Defender\Reportin", "DisableEnhancedNotifications", 1, RegistryValueKind.DWord);
 
             RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows Defender\Features -Name TamperProtection -Value 0x00000000");
@@ -303,21 +284,11 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             SetTaskState(false, WinDefenderTasks);
 
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\WinDefend -Name Start -Value 0x00000004");
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableBehaviorMonitoring -Value 0x00000001");
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableIOAVProtection -Value 0x00000001");
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableOnAccessProtection -Value 0x00000001");
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableRealtimeMonitoring -Value 0x00000001");
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableScanOnRealtimeEnable -Value 0x00000001");
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableScriptScanning -Value 0x00000001");
-            RunPowerShellCommand(@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection' -Name DisableScriptScanning -Value 0x00000001");
-
-
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run", "SecurityHealth", new byte[] { 0099, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99 }, RegistryValueKind.Binary);
             RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "Windows Defender");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth");
 
-            KillProcess(new string[] { "SecurityHealthService", "SecurityHealthService" });
+            KillProcess(new string[] { "SecurityHealthService", "SecurityHealthSystray" });
 
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c taskkill /f /im MsMpEng.exe & reg add HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /t REG_DWORD /v EnableWebContentEvaluation /d 0 /f & " +
                 "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /t REG_SZ /v SmartScreenEnabled /d \"off\" /f & " +
@@ -342,70 +313,116 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\" / t REG_DWORD /v PUAProtection /d 0 /f & " +
                 "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT /t REG_DWORD /v DontOfferThroughWUA /d 1 /f & " +
                 "reg add HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT /t REG_DWORD /v DontReportInfectionInformation /d 1 /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\SecurityHealthService /t REG_DWORD /v Start /d 4 /f &" +
                 "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_SZ /v ConfigureAppInstallControl /d \"Anywhere\" /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_DWORD /v ConfigureAppInstallControlEnabled /d 0 /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v Start  /d 4 /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled / d 3 /f & " +
-                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WdNisSvc /t REG_DWORD /v Start  /d 4 /f & " +
+                "reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\WinDefend /t REG_DWORD /v AutorunsDisabled /d 3 /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_SZ /v Debugger /d \"\" /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_SZ /v Debugger /d \"S:\\none.exe\" /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\SgrmBroker.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\SgrmBroker.exe\" /t REG_SZ /v Debugger /d \"S:\\none.exe\" /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpDefenderCoreService.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpDefenderCoreService.exe\" /t REG_SZ /v Debugger /d \"S:\\none.exe\" /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
-                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /t REG_SZ /v Debugger /d \"\" /f");
-
-            RunCmdCommand("sc config WinDefend start= disabled");
-            RunPowerShellCommand("Stop-Service -Name WinDefend; Set-Service -Name WinDefend -StartupType Disabled");
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /t REG_SZ /v Debugger /d \"S:\\none.exe\" /f");
 
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WinDefend", "AutorunsDisabled", "3", RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Features", "TamperProtection", "0", RegistryValueKind.DWord, true);
-            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Sense", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SgrmAgent", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SgrmBroker", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdFilter", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdBoot", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisDrv", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdNisSvc", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MDCoreSvc", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MsSecCore", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MsSecFlt", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MsSecWfp", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefsvc", "Start", "4", RegistryValueKind.DWord, true);
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc", "Start", "4", RegistryValueKind.DWord, true);
 
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Directory\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Drive\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32");
 
-            KillProcess(new string[] { "smartscreen", "MpDefenderCoreService", "MsMpEng", "SecurityHealthService", "SecurityHealthService", "wuauserv", "SearchUI", "RuntimeBroker" });
+            ManageServices(true);
 
-            await Task.Delay(5000);
-
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe") + "\" BlockSS.exe\"");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MsMpEng.exe") + "\" BlockAntimalware.exe\"");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c \"rename \"" + Path.Combine(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MpDefenderCoreService.exe") + "\" BlockAntimalwareCore.exe\"");
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c for /d %D in (\"{Path.Combine(StoragePaths.SystemDisk, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MpDefenderCoreService.exe\" ren \"%D\\MpDefenderCoreService.exe\" BlockAntimalwareCore.exe");
+            foreach (var directory in new[]
+            {
+                Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows Defender", "Scans", "History"),
+                Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows Defender", "Scans", "Cache"),
+                Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows Defender", "Support")
+            })
+            {
+                TakingOwnership.GrantAdministratorsAccess(directory, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c del /q \"{directory}\\*.*\"");
+            }
         }
 
-        private async void KillProcess(params string[] nameList)
+        private static void ManageServices(bool isDisable)
+        {
+            Dictionary<string, (int onValue, int offValue)> services = new Dictionary<string, (int onValue, int offValue)>
+            {
+                { "WinDefend", (2, 4) },
+                { "SecurityHealthService", (2, 4) },
+                { "Sense", (3, 4) },
+                { "SgrmAgent", (3, 4) },
+                { "SgrmBroker", (3, 4) },
+                { "WdBoot", (0, 4) },
+                { "WdFilter", (0, 4) },
+                { "WdNisDrv", (3, 4) },
+                { "WdNisSvc", (3, 4) },
+                { "MDCoreSvc", (3, 4) },
+                { "MsSecCore", (3, 4) },
+                { "MsSecFlt", (3, 4) },
+                { "MsSecWfp", (3, 4) },
+                { "webthreatdefsvc", (3, 4) },
+                { "webthreatdefusersvc", (3, 4) },
+                { "wscsvc", (3, 4) }
+            };
+
+            foreach (var service in services)
+            {
+                if (isDisable)
+                    RunPowerShellCommand($"Stop-Service -Name {service.Key}; Set-Service -Name {service.Key} -StartupType Disabled");
+                else
+                    RunPowerShellCommand($"Start-Service -Name {service.Key}; Set-Service -Name {service.Key} -StartupType Automatic");
+                RunCmdCommand($"sc config {service.Key} start= {(isDisable ? "disabled" : "auto")}");
+                RunPowerShellCommand($@"Set-ExecutionPolicy UnRestricted; Set-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\{service} -Name Start -Value 0x0000000{(isDisable ? service.Value.offValue : service.Value.onValue)}");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c reg add HKLM\\SYSTEM\\CurrentControlSet\\Services\\{service} /t REG_DWORD /v Start /d {(isDisable ? service.Value.offValue : service.Value.onValue)} /f");
+            }
+        }
+
+        private static void KillProcess(params string[] nameList)
         {
             TakingOwnership.GrantDebugPrivilege();
             foreach (string getName in nameList)
             {
                 foreach (Process process in Process.GetProcessesByName(getName))
                 {
-                    try { process.Kill(); await Task.Delay(1000); }
+                    try
+                    {
+                        process.Kill();
+                        process.WaitForExit(1000);
+                    }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
             }
         }
 
-        private void RunPowerShellCommand(string command)
+        private static void RunPowerShellCommand(string command)
         {
             RunProcess(Path.Combine(Environment.SystemDirectory, @"WindowsPowerShell\v1.0\powershell.exe"),
                 "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -EncodedCommand \"" +
                 Convert.ToBase64String(Encoding.Unicode.GetBytes(command)) + "\"");
         }
 
-        private void RunCmdCommand(string command) => RunProcess(Path.Combine(Environment.SystemDirectory, "cmd.exe"), "/d /q /c " + command);
+        private static void RunCmdCommand(string command) => RunProcess(Path.Combine(Environment.SystemDirectory, "cmd.exe"), "/d /q /c " + command);
 
-        private void RunProcess(string path, string arguments)
+        private static void RunProcess(string path, string arguments)
         {
             try
             {
