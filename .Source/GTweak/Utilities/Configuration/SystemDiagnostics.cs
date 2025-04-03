@@ -244,23 +244,20 @@ namespace GTweak.Utilities.Configuration
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                int capacity = (int)Math.Round((ulong)managementObj["Capacity"] / (1024.0 * 1024.0 * 1024.0));
-                if (capacity > 0)
+                string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
+                string manufacturer = (string)managementObj["Manufacturer"];
+                double capacity = (ulong)managementObj["Capacity"] / (1024.0 * 1024.0);
+                string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
                 {
-                    string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
-                    string manufacturer = (string)managementObj["Manufacturer"];
-                    string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
-                    {
-                        24 => "DDR3",
-                        26 => "DDR4",
-                        29 => "LPDDR3",
-                        30 => "LPDDR4",
-                        34 => "DDR5",
-                        35 => "LPDDR5",
-                        _ => string.Empty
-                    };
-                    HardwareData["RAM"] += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{capacity} GB{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
-                }
+                    24 => "DDR3",
+                    26 => "DDR4",
+                    29 => "LPDDR3",
+                    30 => "LPDDR4",
+                    34 => "DDR5",
+                    35 => "LPDDR5",
+                    _ => string.Empty
+                };
+                HardwareData["RAM"] += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{(capacity >= 1024 ? $"{Math.Round(capacity / 1024.0)} GB" : $"{Math.Round(capacity)} MB")}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
