@@ -11,7 +11,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class WindowsDefender : BackupRights
     {
-        internal static void ActivateAsync()
+        internal static void Activate()
         {
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, "cmd.exe /c reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /v EnableWebContentEvaluation /f & " +
                 "reg delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /v SmartScreenEnabled /f & " +

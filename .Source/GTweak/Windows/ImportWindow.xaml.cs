@@ -143,7 +143,7 @@ namespace GTweak.Windows
                                 if (Convert.ToBoolean(set.Value))
                                     WindowsDefender.Deactivate();
                                 else
-                                    WindowsDefender.ActivateAsync();
+                                    WindowsDefender.Activate();
                             });
                         }
                         else
