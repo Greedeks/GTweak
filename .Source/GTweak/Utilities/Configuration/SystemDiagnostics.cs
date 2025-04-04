@@ -276,6 +276,7 @@ namespace GTweak.Utilities.Configuration
             }
             catch { isMsftWorking = false; }
 
+            isMsftWorking = false;
             if (isMsftWorking)
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
@@ -311,12 +312,10 @@ namespace GTweak.Utilities.Configuration
                     };
 
                     string interfaceType = managementObj["InterfaceType"] as string ?? string.Empty;
-                    if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || string.Equals(interfaceType, "USB", StringComparison.OrdinalIgnoreCase)))
+                    if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
                         storageType = "(Media-Type)";
 
-                    string size = SizeCalculationHelper((ulong)managementObj["Size"]);
-
-                    HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
+                    HardwareData["Storage"] += $"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}\n";
                 }
             }
 
