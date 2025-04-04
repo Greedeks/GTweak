@@ -2,6 +2,7 @@
 using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -311,12 +312,10 @@ namespace GTweak.Utilities.Configuration
                     };
 
                     string interfaceType = managementObj["InterfaceType"] as string ?? string.Empty;
-                    if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || string.Equals(interfaceType, "USB", StringComparison.OrdinalIgnoreCase)))
+                    if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
                         storageType = "(Media-Type)";
 
-                    string size = SizeCalculationHelper((ulong)managementObj["Size"]);
-
-                    HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
+                    HardwareData["Storage"] += $"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}\n";
                 }
             }
 
