@@ -174,7 +174,7 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GeVideoInfo()
         {
-            static (bool, int, string) GetMemorySize(string name)
+            static (bool, string, string) GetMemorySize(string name)
             {
                 using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}");
                 if (baseKey != null)
@@ -217,21 +217,20 @@ namespace GTweak.Utilities.Configuration
                                         };
                                     }
 
-                                    return (true, (int)Math.Round(memorySize / (1024.0 * 1024.0 * 1024.0)), !string.IsNullOrEmpty(driverDesc) ? driverDesc : chipType);
+                                    return (true, SizeCalculationHelper(memorySize), !string.IsNullOrEmpty(driverDesc) ? driverDesc : chipType);
                                 }
                             }
                         }
                     }
                 }
-                return (false, 0, string.Empty);
+                return (false, string.Empty, string.Empty);
             }
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = managementObj["Name"] as string;
-                (bool isFound, int dataMemoryReg, string driverDesc) = GetMemorySize(data);
-                int dataMemory = (int)Math.Round((uint)managementObj["AdapterRAM"] / (1024.0 * 1024.0 * 1024.0));
-                HardwareData["GPU"] += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound ? dataMemoryReg : dataMemory)} GB\n";
+                (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
+                HardwareData["GPU"] += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound ? dataMemoryReg : SizeCalculationHelper((uint)managementObj["AdapterRAM"]))}\n";
             }
             HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
         }
@@ -246,7 +245,6 @@ namespace GTweak.Utilities.Configuration
             {
                 string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
                 string manufacturer = (string)managementObj["Manufacturer"];
-                double capacity = (ulong)managementObj["Capacity"] / (1024.0 * 1024.0);
                 string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
                 {
                     24 => "DDR3",
@@ -257,7 +255,7 @@ namespace GTweak.Utilities.Configuration
                     35 => "LPDDR5",
                     _ => string.Empty
                 };
-                HardwareData["RAM"] += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{(capacity >= 1024 ? $"{Math.Round(capacity / 1024.0)} GB" : $"{Math.Round(capacity)} MB")}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                HardwareData["RAM"] += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
         }
@@ -295,9 +293,7 @@ namespace GTweak.Utilities.Configuration
                     if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
                         storageType = "(Media-Type)";
 
-                    string size = SizeCalculationHelper((ulong)managementObj["Size"]);
-
-                    HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
+                    HardwareData["Storage"] += $"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}\n";
                 }
             }
             else
@@ -322,12 +318,6 @@ namespace GTweak.Utilities.Configuration
 
                     HardwareData["Storage"] += $"{size} [{data}] {storageType}\n";
                 }
-            }
-
-            static string SizeCalculationHelper(ulong sizeInBytes)
-            {
-                double sizeGB = sizeInBytes / (1024 * 1024 * 1024);
-                return sizeGB >= 1024 ? $"{Math.Round(sizeGB / 1024.0, 2):G} TB" : $"{sizeGB} GB";
             }
 
             HardwareData["Storage"] = HardwareData["Storage"].TrimEnd('\n');
@@ -383,6 +373,18 @@ namespace GTweak.Utilities.Configuration
                 }
             }
             HardwareData["Audio"] = HardwareData["Audio"].TrimEnd('\n');
+        }
+
+        private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible
+        {
+            double totalSize = Convert.ToDouble(sizeInBytes) / (1024.0 * 1024.0);
+
+            if (totalSize < 1024)
+                return $"{Math.Round(totalSize)} MB";
+            else if (totalSize < 1024 * 1024)
+                return $"{Math.Round(totalSize / 1024.0)} GB";
+            else
+                return $"{Math.Round(totalSize / 1024.0, 2):G} TB";
         }
 
         private void GetNetworkAdapters()
