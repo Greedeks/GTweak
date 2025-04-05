@@ -9,7 +9,7 @@ using System.Windows;
 [assembly: AssemblyProduct("GTweak")]
 [assembly: AssemblyCopyright("© 2024-<#= DateTime.Now.Year #> Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
-[assembly: AssemblyInformationalVersion("Build: 5.1.9")]
+[assembly: AssemblyInformationalVersion("<#= buildVersion #>")]
 [assembly: AssemblyVersion("5.<#= GenerateVersion() #>")]
 [assembly: AssemblyFileVersion("5.<#= GenerateVersion() #>")]
 
@@ -20,10 +20,13 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly
 )]
 <#+
+        private const string buildVersion = "Build: 5.2.0";
+
         private string GenerateVersion()
         {
-            int major = (int)(DateTime.UtcNow - new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)).TotalSeconds / 1000;
+            string subversion = buildVersion.Replace("Build: ", "").Trim().Split('.') switch { { Length: > 1 } parts => parts[1], _ => "0" };
+            int path = (int)(DateTime.UtcNow - new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)).TotalSeconds / 1000;
             int revision = (int)(DateTime.UtcNow - DateTime.Now.Date).TotalSeconds % 1000;
-            return $"{1}.{major}.{revision}";
+            return $"{subversion}.{path}.{revision}";
         }
 #>
