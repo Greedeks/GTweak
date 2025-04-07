@@ -40,7 +40,7 @@ namespace GTweak.Windows
             backgroundWorker.RunWorkerAsync();
         }
 
-        private async void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             for (byte i = 0; i <= 100; i++)
             {
@@ -48,18 +48,29 @@ namespace GTweak.Windows
                 Thread.Sleep(17);
             }
 
-            Parallel.Invoke(
-                delegate { SettingsRepository.PID = TrustedInstaller.StartTrustedInstallerService(); },
-                new SettingsRepository().СheckingParameters,
-                new WindowsLicense().LicenseStatus,
-                new SystemDiagnostics().GetHardwareData,
-                new SystemDiagnostics().ValidateVersionUpdates,
-                new UninstallingPakages().LoadInstalledPackages,
-                new UninstallingPakages().CheckingForLocalAccount,
-                new SystemTweaks().ViewNetshState,
-                new SystemTweaks().ViewBluetoothStatus);
 
-            await new MonitoringSystem().GetTotalProcessorUsage();
+            static void ExecuteWithLogging(Action action, string methodName)
+            {
+                try { action(); }
+                catch (Exception ex) { ErrorLogging.LogWritingFile(ex, methodName); }
+            }
+
+
+            Parallel.Invoke(
+                () => ExecuteWithLogging(() => SettingsRepository.PID = TrustedInstaller.StartTrustedInstallerService(), nameof(SettingsRepository.PID)),
+                () => ExecuteWithLogging(new SettingsRepository().СheckingParameters, nameof(SettingsRepository.СheckingParameters)),
+                () => ExecuteWithLogging(new WindowsLicense().LicenseStatus, nameof(WindowsLicense.LicenseStatus)),
+                () => ExecuteWithLogging(new SystemDiagnostics().GetHardwareData, nameof(SystemDiagnostics.GetHardwareData)),
+                () => ExecuteWithLogging(new SystemDiagnostics().ValidateVersionUpdates, nameof(SystemDiagnostics.ValidateVersionUpdates)),
+                () => ExecuteWithLogging(new UninstallingPakages().LoadInstalledPackages, nameof(UninstallingPakages.LoadInstalledPackages)),
+                () => ExecuteWithLogging(new UninstallingPakages().CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount)),
+                () => ExecuteWithLogging(new SystemTweaks().ViewNetshState, nameof(SystemTweaks.ViewNetshState)),
+                () => ExecuteWithLogging(new SystemTweaks().ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus))
+            );
+
+
+            MonitoringSystem monitoringSystem = new MonitoringSystem();
+            ExecuteWithLogging(async () => await monitoringSystem.GetTotalProcessorUsage(), nameof(monitoringSystem.GetTotalProcessorUsage));
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

@@ -15,7 +15,7 @@ namespace GTweak.Utilities.Controls
 
         internal static void LogDebug(Exception ex, [CallerMemberName] string memberName = "") => Debug.WriteLine($"Debug: {ex.Message}\nStack Trace: {ex.StackTrace}\nMember: {memberName}\n");
 
-        internal static async Task LogToFile(Exception ex, string memberName)
+        private static async Task LogToFile(Exception ex, string memberName)
         {
             try
             {

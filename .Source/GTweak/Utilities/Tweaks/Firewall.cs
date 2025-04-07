@@ -3,7 +3,6 @@ using GTweak.Utilities.Helpers.Managers;
 using NetFwTypeLib;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -129,7 +128,7 @@ namespace GTweak.Utilities.Tweaks
         protected static void BlockWDefender(bool isChoose)
         {
             try { Parallel.Invoke(() => { ChangeRules(isChoose, _сollectExecutablePaths["WD"], _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
-            catch (Exception ex) { Debug.Write(ex.Message); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
     }
 }

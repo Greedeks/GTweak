@@ -1,6 +1,6 @@
 name: "🐞 Bug Report"
 description: "Description of the error or the problem with the utility"
-title: "[BUG] <Brief description of the issue>"
+title: "[BUG] Title"
 labels: 
   - bug
   - help wanted

@@ -1,6 +1,6 @@
 name: "❓ Questions and Answers"
 description: "Frequently Asked Questions"
-title: "[Question] <Question Title>"
+title: "[Question] Title"
 labels: 
   - documentation
   - question

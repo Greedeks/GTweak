@@ -177,6 +177,7 @@ namespace GTweak.Utilities.Helpers
             CloseHandle(tokenHandle);
             return false;
         }
+
         internal static int StartTrustedInstallerService()
         {
             IntPtr hSCManager = OpenSCManager(null, ServicesActiveDatabase, SC_MANAGER_CONNECT | SC_MANAGER_ENUMERATE_SERVICE | SC_MANAGER_QUERY_LOCK_STATUS);
@@ -221,6 +222,7 @@ namespace GTweak.Utilities.Helpers
             CloseServiceHandle(hSCManager);
             throw new Win32Exception("QueryServiceStatusEx failed: " + Marshal.GetLastWin32Error());
         }
+
         internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath)
         {
 
