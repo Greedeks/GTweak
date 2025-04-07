@@ -36,7 +36,7 @@ namespace GTweak.Utilities.Controls
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
         internal static readonly string currentLocation = Assembly.GetExecutingAssembly().Location;
 
-        private static readonly Dictionary<string, Action> parameterUpdates = new Dictionary<string, Action>
+        private static readonly Dictionary<string, Action> _settingsRefreshActions = new Dictionary<string, Action>
         {
             { "Notification", () => IsViewNotification = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Notification", IsViewNotification) },
             { "Update", () => IsUpdateCheckRequired = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Update", IsUpdateCheckRequired) },
@@ -89,7 +89,7 @@ namespace GTweak.Utilities.Controls
             }
             else
             {
-                foreach (Action executeUpdate in parameterUpdates.Values)
+                foreach (Action executeUpdate in _settingsRefreshActions.Values)
                     executeUpdate();
             }
         }
@@ -97,7 +97,7 @@ namespace GTweak.Utilities.Controls
         internal static void ChangingParameters<T>(T value, string subkey)
         {
             RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey, value.ToString(), RegistryValueKind.String);
-            parameterUpdates[subkey]();
+            _settingsRefreshActions[subkey]();
         }
 
         internal static void SaveFileConfig()

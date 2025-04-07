@@ -16,11 +16,11 @@ namespace GTweak.Utilities.Controls
         private static extern bool ShowWindow(IntPtr handle, int cmdShow);
         [DllImport("user32.dll")]
         private static extern int SetForegroundWindow(IntPtr handle);
-        private static readonly Mutex mutex = new Mutex(false, "GTweak");
+        private static readonly Mutex _mutex = new Mutex(false, "GTweak");
 
         internal static void CheckingApplicationCopies()
         {
-            if (!mutex.WaitOne(150, false))
+            if (!_mutex.WaitOne(150, false))
             {
                 using (Mutex mutex = new Mutex(false, @"Global\" + "GTweak"))
                 {

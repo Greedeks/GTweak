@@ -29,8 +29,8 @@ namespace GTweak.Utilities.Tweaks
     internal sealed class SystemTweaks : Firewall
     {
         internal static bool isTweakWorkingAntivirus = false;
-        private static bool isNetshState = false, isBluetoothStatus = false;
-        private readonly string activeGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);
+        private static bool _isNetshState = false, _isBluetoothStatus = false;
+        private readonly string _activeGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);
 
         internal void AnalyzeAndUpdate(SystemView systemV)
         {
@@ -110,7 +110,7 @@ namespace GTweak.Utilities.Tweaks
 
             systemV.TglButton12.StateNA = IsTaskEnabled(memoryDiagTasks);
 
-            systemV.TglButton13.StateNA = isNetshState;
+            systemV.TglButton13.StateNA = _isNetshState;
 
             systemV.TglButton14.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", "1");
@@ -127,10 +127,10 @@ namespace GTweak.Utilities.Tweaks
             systemV.TglButton17.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", "1");
 
-            systemV.TglButton18.StateNA = !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{activeGuid}", "Description", string.Empty).Contains("-18") &&
-                                          !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{activeGuid}", "FriendlyName", string.Empty).Contains("-19");
+            systemV.TglButton18.StateNA = !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_activeGuid}", "Description", string.Empty).Contains("-18") &&
+                                          !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_activeGuid}", "FriendlyName", string.Empty).Contains("-19");
 
-            systemV.TglButton19.StateNA = isBluetoothStatus;
+            systemV.TglButton19.StateNA = _isBluetoothStatus;
 
             systemV.TglButton20.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "4");
@@ -160,15 +160,15 @@ namespace GTweak.Utilities.Tweaks
             try
             {
                 using var managementObj = new ManagementObjectSearcher("SELECT DeviceID FROM Win32_PnPEntity WHERE Service='BthLEEnum'").Get();
-                isBluetoothStatus = managementObj.Cast<ManagementObject>().Any();
+                _isBluetoothStatus = managementObj.Cast<ManagementObject>().Any();
             }
-            catch { isBluetoothStatus = false; }
+            catch { _isBluetoothStatus = false; }
         }
 
         internal async void ViewNetshState()
         {
             string getStateNetsh = await CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false);
-            isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
+            _isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
         }
 
         [DllImport("user32.dll")]
@@ -304,12 +304,12 @@ namespace GTweak.Utilities.Tweaks
                     string argStateNetshSecond, argStateNetsh;
                     if (isChoose)
                     {
-                        isNetshState = false;
+                        _isNetshState = false;
                         argStateNetsh = argStateNetshSecond = @"disabled";
                     }
                     else
                     {
-                        isNetshState = true;
+                        _isNetshState = true;
                         argStateNetshSecond = @"enabled";
                         argStateNetsh = @"default";
                     }
@@ -363,7 +363,7 @@ namespace GTweak.Utilities.Tweaks
                     $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
                     [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
                     Await ($bluetooth.SetStateAsync(" + (isChoose ? "'off'" : "'on'") + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null", true);
-                    isBluetoothStatus = !isChoose;
+                    _isBluetoothStatus = !isChoose;
                     break;
                 case "TglButton20":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isChoose ? 4 : 2, RegistryValueKind.DWord);

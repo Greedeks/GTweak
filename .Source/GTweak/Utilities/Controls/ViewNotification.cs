@@ -6,18 +6,18 @@ namespace GTweak.Utilities.Controls
 {
     internal sealed class ViewNotification
     {
-        private static bool isAlreadyLaunch = false;
-        private readonly int msec = default;
+        private static bool _isAlreadyLaunch = false;
+        private readonly int _msec = default;
 
-        internal ViewNotification(int delay = 100) => msec = delay;
+        internal ViewNotification(int delay = 100) => _msec = delay;
 
         internal async void Show(string action, string tittle = "", string content = "")
         {
-            if (SettingsRepository.IsViewNotification && !isAlreadyLaunch)
+            if (SettingsRepository.IsViewNotification && !_isAlreadyLaunch)
             {
                 await Application.Current.Dispatcher.InvokeAsync(async delegate
                 {
-                    isAlreadyLaunch = true;
+                    _isAlreadyLaunch = true;
 
                     NotificationWindow notificationWindow = new NotificationWindow
                     {
@@ -31,9 +31,9 @@ namespace GTweak.Utilities.Controls
                         ActionNotice = action,
                     };
 
-                    await Task.Delay(msec);
+                    await Task.Delay(_msec);
                     notificationWindow.Show();
-                    notificationWindow.Closed += delegate { isAlreadyLaunch = false; };
+                    notificationWindow.Closed += delegate { _isAlreadyLaunch = false; };
                 });
             }
         }

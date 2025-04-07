@@ -11,14 +11,14 @@ namespace GTweak.Utilities.Tweaks
 {
     internal class Firewall : TaskSchedulerManager
     {
-        private static readonly SortedList<string, string> NameRules = new SortedList<string, string>
+        private static readonly SortedList<string, string> _nameRules = new SortedList<string, string>
         {
             ["Update"] = @"GTweak - Windows Update blocking",
             ["Domain"] = @"GTweak - Spy domain names",
             ["WDefender"] = @"GTweak - Windows Defender blocking"
         };
 
-        private static readonly SortedList<string, string> PathsForPrograms = new SortedList<string, string>
+        private static readonly SortedList<string, string> _сollectExecutablePaths = new SortedList<string, string>
         {
             ["MoUso"] = File.Exists($@"{StoragePaths.SystemDisk}Windows\UUS\amd64\MoUsoCoreWorker.exe")
             ? $@"{StoragePaths.SystemDisk}Windows\UUS\amd64\MoUsoCoreWorker.exe" : $@"{StoragePaths.SystemDisk}Windows\System32\MoUsoCoreWorker.exe",
@@ -44,8 +44,8 @@ namespace GTweak.Utilities.Tweaks
             {
                 Parallel.ForEach(new[]
                 {
-                    (PathsForPrograms["MoUso"], NameRules["Update"]),
-                    (PathsForPrograms["Uso"], $"{NameRules["Update"]} (Update Orchestrator)")
+                    (_сollectExecutablePaths["MoUso"], _nameRules["Update"]),
+                    (_сollectExecutablePaths["Uso"], $"{_nameRules["Update"]} (Update Orchestrator)")
                 },
                 executableFiles =>
                 {
@@ -114,21 +114,21 @@ namespace GTweak.Utilities.Tweaks
             firewallRule.Description = "Spy domain names";
             firewallRule.Enabled = true;
             firewallRule.InterfaceTypes = "All";
-            firewallRule.Name = NameRules["Domain"];
+            firewallRule.Name = _nameRules["Domain"];
 
             if (isChoose)
             {
-                if (CheckRulesWindows(NameRules["Domain"]))
-                    firewallPolicy.Rules.Remove(NameRules["Domain"]);
+                if (CheckRulesWindows(_nameRules["Domain"]))
+                    firewallPolicy.Rules.Remove(_nameRules["Domain"]);
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
-                firewallPolicy.Rules.Remove(NameRules["Domain"]);
+                firewallPolicy.Rules.Remove(_nameRules["Domain"]);
         }
 
         protected static void BlockWDefender(bool isChoose)
         {
-            try { Parallel.Invoke(() => { ChangeRules(isChoose, PathsForPrograms["WD"], NameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
+            try { Parallel.Invoke(() => { ChangeRules(isChoose, _сollectExecutablePaths["WD"], _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
             catch (Exception ex) { Debug.Write(ex.Message); }
         }
     }

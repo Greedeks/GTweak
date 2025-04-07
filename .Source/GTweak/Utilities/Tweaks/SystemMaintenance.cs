@@ -15,9 +15,9 @@ namespace GTweak.Utilities.Tweaks
         private static extern int DisableSR([MarshalAs(UnmanagedType.LPWStr)] string Drive);
         [DllImport("srclient.dll")]
         private static extern int SRRemoveRestorePoint(int index);
-        private static readonly ManagementClass RestorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
-        private static ManagementBaseObject InParams, OutParams;
-        private static bool isWorkingCreatePoint = false;
+        private static readonly ManagementClass _restorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
+        private static ManagementBaseObject _inParams, _outParams;
+        private static bool _isWorkingCreatePoint = false;
 
         internal static bool IsSystemRestoreDisabled => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "RPSessionInterval", "0");
 
@@ -41,11 +41,11 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void CreateRestorePoint()
         {
-            if (isWorkingCreatePoint) return;
+            if (_isWorkingCreatePoint) return;
 
             try
             {
-                isWorkingCreatePoint = true;
+                _isWorkingCreatePoint = true;
                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency", 0, RegistryValueKind.DWord);
 
                 EnableRecovery();
@@ -56,23 +56,23 @@ namespace GTweak.Utilities.Tweaks
                         SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]));
                 }
 
-                InParams = RestorePoint.GetMethodParameters("CreateRestorePoint");
-                InParams["Description"] = (string)Application.Current.Resources["textpoint_more"];
-                InParams["EventType"] = 100;
-                InParams["RestorePointType"] = 12;
-                OutParams = RestorePoint.InvokeMethod("CreateRestorePoint", InParams, null);
+                _inParams = _restorePoint.GetMethodParameters("CreateRestorePoint");
+                _inParams["Description"] = (string)Application.Current.Resources["textpoint_more"];
+                _inParams["EventType"] = 100;
+                _inParams["RestorePointType"] = 12;
+                _outParams = _restorePoint.InvokeMethod("CreateRestorePoint", _inParams, null);
 
-                if ((uint)OutParams["ReturnValue"] == 0)
+                if ((uint)_outParams["ReturnValue"] == 0)
                     new ViewNotification(300).Show("", "info", "successpoint_notification");
                 else
                     new ViewNotification(300).Show("", "warn", "notsuccessfulpoint_notification");
 
-                isWorkingCreatePoint = false;
+                _isWorkingCreatePoint = false;
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
             }
             catch
             {
-                isWorkingCreatePoint = false;
+                _isWorkingCreatePoint = false;
                 new ViewNotification().Show("", "warn", "notsuccessfulpoint_notification");
             }
         }
@@ -114,10 +114,10 @@ namespace GTweak.Utilities.Tweaks
 
             CommandExecutor.RunCommand("/c sc config wbengine start= demand && sc config swprv start= demand && sc config vds start= demand && sc config VSS start= demand");
 
-            InParams = RestorePoint.GetMethodParameters("Enable");
-            InParams["WaitTillEnabled"] = true;
-            InParams["Drive"] = System.IO.Path.GetPathRoot(Environment.SystemDirectory);
-            RestorePoint.InvokeMethod("Enable", InParams, null);
+            _inParams = _restorePoint.GetMethodParameters("Enable");
+            _inParams["WaitTillEnabled"] = true;
+            _inParams["Drive"] = System.IO.Path.GetPathRoot(Environment.SystemDirectory);
+            _restorePoint.InvokeMethod("Enable", _inParams, null);
         }
     }
 }

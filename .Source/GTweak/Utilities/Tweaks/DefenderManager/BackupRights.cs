@@ -11,11 +11,11 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class BackupRights : TaskSchedulerManager
     {
-        private static readonly string folderBackupPath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config\WDBackup_GTweak");
-        private static readonly string jsonFilePath = Path.Combine(folderBackupPath, "BackupData.json");
-        private static readonly string aclFilePath = Path.Combine(folderBackupPath, "BackupRights.acl");
+        private static readonly string _folderBackupPath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config\WDBackup_GTweak");
+        private static readonly string _jsonFilePath = Path.Combine(_folderBackupPath, "BackupData.json");
+        private static readonly string _aclFilePath = Path.Combine(_folderBackupPath, "BackupRights.acl");
 
-        private static readonly Dictionary<string, RegistryKey> StorageRegPaths = new Dictionary<string, RegistryKey>
+        private static readonly Dictionary<string, RegistryKey> _storageRegPaths = new Dictionary<string, RegistryKey>
         {
             { @"SYSTEM\CurrentControlSet\Services\WinDefend", Registry.LocalMachine },
             { @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", Registry.LocalMachine },
@@ -51,16 +51,16 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         internal static void ExportRights()
         {
-            if (Directory.Exists(folderBackupPath) == false)
+            if (Directory.Exists(_folderBackupPath) == false)
             {
                 try
                 {
-                    Directory.CreateDirectory(folderBackupPath);
+                    Directory.CreateDirectory(_folderBackupPath);
 
                     var allValues = new Dictionary<string, Dictionary<string, object>>();
                     var aclDataDict = new Dictionary<string, string>();
 
-                    foreach (var entry in StorageRegPaths)
+                    foreach (var entry in _storageRegPaths)
                     {
                         string path = entry.Key;
                         RegistryKey baseKey = entry.Value;
@@ -80,8 +80,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                         aclDataDict[path] = aclData;
                     }
 
-                    File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(allValues, Formatting.Indented));
-                    File.WriteAllText(aclFilePath, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
+                    File.WriteAllText(_jsonFilePath, JsonConvert.SerializeObject(allValues, Formatting.Indented));
+                    File.WriteAllText(_aclFilePath, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
@@ -90,14 +90,14 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         internal static void ImportRights()
         {
-            if (File.Exists(jsonFilePath) && File.Exists(aclFilePath))
+            if (File.Exists(_jsonFilePath) && File.Exists(_aclFilePath))
             {
                 try
                 {
-                    var allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(File.ReadAllText(jsonFilePath));
-                    var aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(aclFilePath));
+                    var allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(File.ReadAllText(_jsonFilePath));
+                    var aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(_aclFilePath));
 
-                    foreach (var entry in StorageRegPaths)
+                    foreach (var entry in _storageRegPaths)
                     {
                         string path = entry.Key;
                         RegistryKey baseKey = entry.Value;

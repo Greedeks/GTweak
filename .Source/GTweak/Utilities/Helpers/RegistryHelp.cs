@@ -64,10 +64,7 @@ namespace GTweak.Utilities.Helpers
         {
             Task.Run(delegate
             {
-                try
-                {
-                    registrykey.CreateSubKey(subkey);
-                }
+                try { registrykey.CreateSubKey(subkey); }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }).Wait();
         }

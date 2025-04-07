@@ -20,17 +20,17 @@ namespace GTweak.View
 {
     public partial class PakagesView : UserControl
     {
-        private readonly DispatcherTimer timer;
-        private TimeSpan time = TimeSpan.FromSeconds(0);
-        private bool isWebViewRemoval = false;
+        private readonly DispatcherTimer _timer;
+        private TimeSpan _time = TimeSpan.FromSeconds(0);
+        private bool _isWebViewRemoval = false;
 
         public PakagesView()
         {
             InitializeComponent();
 
-            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                if (time.TotalSeconds % 5 == 0)
+                if (_time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.DoWork += delegate { new UninstallingPakages().LoadInstalledPackages(); };
@@ -38,10 +38,10 @@ namespace GTweak.View
                     backgroundWorker.RunWorkerAsync();
                 }
 
-                time = time.Add(TimeSpan.FromSeconds(+1));
+                _time = _time.Add(TimeSpan.FromSeconds(+1));
             }, Application.Current.Dispatcher);
 
-            timer.Start();
+            _timer.Start();
         }
 
         private void Apps_MouseEnter(object sender, MouseEventArgs e)
@@ -94,7 +94,7 @@ namespace GTweak.View
                                 BtnDelete.PreviewMouseLeftButtonDown += DeleteHandler;
                                 BtnCancel.PreviewMouseLeftButtonDown += CancelHandler;
 
-                                isWebViewRemoval = await tcs.Task;
+                                _isWebViewRemoval = await tcs.Task;
 
                                 OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
                             }
@@ -108,7 +108,7 @@ namespace GTweak.View
                                     UpdateViewStatePakages();
                                 });
 
-                                await UninstallingPakages.DeletingPackage(packageName, isWebViewRemoval);
+                                await UninstallingPakages.DeletingPackage(packageName, _isWebViewRemoval);
 
                                 await Task.Delay(3000);
 

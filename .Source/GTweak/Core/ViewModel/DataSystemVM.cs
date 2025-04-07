@@ -9,27 +9,27 @@ namespace GTweak.Core.ViewModel
 {
     internal class DataSystemVM : ViewModelBase
     {
-        private readonly DataSystemModel model;
-        private ObservableCollection<DataSystemModel> collection;
+        private readonly DataSystemModel _model;
+        private ObservableCollection<DataSystemModel> _collection;
 
         public ObservableCollection<DataSystemModel> DisplayData
         {
-            get => collection;
-            set { collection = value; OnPropertyChanged(); }
+            get => _collection;
+            set { _collection = value; OnPropertyChanged(); }
         }
 
         public DataSystemModel this[string name] => DisplayData.FirstOrDefault(d => d.Name == name);
 
         public int SetBlurValue
         {
-            get => model.BlurValue;
-            set { model.BlurValue = value; OnPropertyChanged(); }
+            get => _model.BlurValue;
+            set { _model.BlurValue = value; OnPropertyChanged(); }
         }
 
         public Visibility SetVisibility
         {
-            get => model.IpVisibility;
-            set { model.IpVisibility = value; OnPropertyChanged(); }
+            get => _model.IpVisibility;
+            set { _model.IpVisibility = value; OnPropertyChanged(); }
         }
 
         public bool StateButton
@@ -40,7 +40,7 @@ namespace GTweak.Core.ViewModel
 
         public DataSystemVM()
         {
-            model = new DataSystemModel();
+            _model = new DataSystemModel();
 
             DisplayData = new ObservableCollection<DataSystemModel>
             {

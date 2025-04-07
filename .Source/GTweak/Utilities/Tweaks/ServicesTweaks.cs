@@ -16,7 +16,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : Firewall
     {
-        private static readonly Dictionary<string, (string Default, string Blocked)> UpdateFilesWin = new Dictionary<string, (string Default, string Blocked)>()
+        private static readonly Dictionary<string, (string Default, string Blocked)> _updateFilesWin = new Dictionary<string, (string Default, string Blocked)>()
         {
             { "Uso", ("usoclient.exe", "BlockUOrchestrator-GTweak.exe") },
             { "Worker", ("MoUsoCoreWorker.exe", "BlockUpdate-GTweak.exe") },
@@ -118,7 +118,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation", "Start", "4");
 
-            servicesV.TglButton15.StateNA = UpdateFilesWin.All(key => File.Exists(FilesPathUpdate(key.Value.Default)) || File.Exists(FilesPathUpdate(key.Value.Default, true)));
+            servicesV.TglButton15.StateNA = _updateFilesWin.All(key => File.Exists(FilesPathUpdate(key.Value.Default)) || File.Exists(FilesPathUpdate(key.Value.Default, true)));
 
             servicesV.TglButton16.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", "4") ||
@@ -328,7 +328,7 @@ namespace GTweak.Utilities.Tweaks
                         backgroundWorker.DoWork += delegate
                         {
                             string argurment = default;
-                            foreach (var key in UpdateFilesWin)
+                            foreach (var key in _updateFilesWin)
                                 argurment += isChoose ? $"rename {FilesPathUpdate(key.Value.Default)} {key.Value.Blocked} & " : $"rename {FilesPathUpdate(key.Value.Blocked)} {key.Value.Default} & ";
 
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c {argurment.Substring(0, argurment.Length - 3)}");

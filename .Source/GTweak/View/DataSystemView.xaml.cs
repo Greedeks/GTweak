@@ -18,8 +18,8 @@ namespace GTweak.View
 {
     public partial class DataSystemView : UserControl
     {
-        private readonly DispatcherTimer timer = default;
-        private TimeSpan time = TimeSpan.FromSeconds(0);
+        private readonly DispatcherTimer _timer = default;
+        private TimeSpan _time = TimeSpan.FromSeconds(0);
 
         public DataSystemView()
         {
@@ -36,9 +36,9 @@ namespace GTweak.View
                 DataContext = new DataSystemVM();
             };
 
-            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, async delegate
+            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, async delegate
             {
-                if (time.TotalSeconds % 2 == 0)
+                if (_time.TotalSeconds % 2 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate
@@ -55,16 +55,16 @@ namespace GTweak.View
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                     }
                 }
-                else if (time.TotalSeconds % 5 == 0)
+                else if (_time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(delegate { new SystemDiagnostics().GetUserIpAddress(); });
                     DataContext = new DataSystemVM();
                 }
 
-                time = time.Add(TimeSpan.FromSeconds(+1));
+                _time = _time.Add(TimeSpan.FromSeconds(+1));
             }, Application.Current.Dispatcher);
-            timer.Start();
+            _timer.Start();
 
             RAMLoad.Value = new MonitoringSystem().GetMemoryUsage;
             CPULoad.Value = MonitoringSystem.GetProcessorUsage;
@@ -187,6 +187,6 @@ namespace GTweak.View
             }
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e) => timer.Stop();
+        private void Page_Unloaded(object sender, RoutedEventArgs e) => _timer.Stop();
     }
 }

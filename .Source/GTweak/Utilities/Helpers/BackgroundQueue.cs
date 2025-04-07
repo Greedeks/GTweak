@@ -6,42 +6,42 @@ namespace GTweak.Utilities.Helpers
 {
     internal sealed class BackgroundQueue
     {
-        private Task previousTask = Task.FromResult(true);
-        private readonly object key = new object();
+        private Task _previousTask = Task.FromResult(true);
+        private readonly object _key = new object();
         internal Task QueueTask(Action action)
         {
-            lock (key)
+            lock (_key)
             {
-                previousTask = previousTask.ContinueWith(t => action()
+                _previousTask = _previousTask.ContinueWith(t => action()
                     , CancellationToken.None
                     , TaskContinuationOptions.None
                     , TaskScheduler.Default);
-                return previousTask;
+                return _previousTask;
             }
         }
 
         internal Task<T> QueueTask<T>(Func<T> func)
         {
-            lock (key)
+            lock (_key)
             {
-                var task = previousTask.ContinueWith(t => func()
+                var task = _previousTask.ContinueWith(t => func()
                     , CancellationToken.None
                     , TaskContinuationOptions.None
                     , TaskScheduler.Default);
-                previousTask = task;
+                _previousTask = task;
                 return task;
             }
         }
 
         internal Task QueueCompleted(Action action)
         {
-            lock (key)
+            lock (_key)
             {
-                previousTask = previousTask.ContinueWith(t => action(),
+                _previousTask = _previousTask.ContinueWith(t => action(),
                     CancellationToken.None,
                     TaskContinuationOptions.None,
                     TaskScheduler.Default);
-                return previousTask;
+                return _previousTask;
             }
         }
     }

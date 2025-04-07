@@ -14,8 +14,8 @@ namespace GTweak.Utilities.Tweaks
     internal sealed class UninstallingPakages : TaskSchedulerManager
     {
         internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
-        private static bool isLocalAccount = false;
-        private static readonly string pathPackage = Path.Combine(StoragePaths.SystemDisk, "Program Files", "WindowsApps");
+        private static bool _isLocalAccount = false;
+        private static readonly string _pathPackage = Path.Combine(StoragePaths.SystemDisk, "Program Files", "WindowsApps");
 
         internal static HashSet<string> InstalledPackages = new HashSet<string>();
         internal static readonly Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
@@ -115,7 +115,7 @@ namespace GTweak.Utilities.Tweaks
 
                         foreach (string getScript in Scripts ?? Enumerable.Empty<string>())
                         {
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{pathPackage}\*{getScript}*"") do rd /s /q ""%i""");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{_pathPackage}\*{getScript}*"") do rd /s /q ""%i""");
                             await RunPowerShell($"{argument} \"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage\"");
                         }
 
@@ -335,7 +335,7 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
 
                     CommandExecutor.RunCommand($@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive & 
-                    rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {StoragePaths.SystemDisk}OneDriveTemp{(isLocalAccount ? @" & rd /s /q %userprofile%\OneDrive" : "")}");
+                    rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {StoragePaths.SystemDisk}OneDriveTemp{(_isLocalAccount ? @" & rd /s /q %userprofile%\OneDrive" : "")}");
                 }
             });
         }
@@ -370,7 +370,7 @@ namespace GTweak.Utilities.Tweaks
         internal async void CheckingForLocalAccount()
         {
             string output = await CommandExecutor.GetCommandOutput("Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource");
-            isLocalAccount = !output.Contains("MicrosoftAccount");
+            _isLocalAccount = !output.Contains("MicrosoftAccount");
         }
     }
 }
