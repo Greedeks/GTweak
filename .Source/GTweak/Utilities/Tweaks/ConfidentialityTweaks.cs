@@ -74,7 +74,8 @@ namespace GTweak.Utilities.Tweaks
 
             confidentialityV.TglButton15.StateNA =
                      RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
-                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice");
+                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice") ||
+                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc");
 
             confidentialityV.TglButton16.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
@@ -255,11 +256,72 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack");
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice");
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc");
                     }
                     else
                     {
-                        RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack");
-                        RegistryHelp.CreateFolder(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice");
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "DependOnService", new string[] { "RpcSs" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "Description", @"@%SystemRoot%\system32\diagtrack.dll,-3002", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "DisplayName", @"@%SystemRoot%\system32\diagtrack.dll,-3001", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "ErrorControl", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "ImagePath", @"%SystemRoot%\System32\svchost.exe -k utcsvc -p", RegistryValueKind.ExpandString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "ObjectName", "LocalSystem", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "RequiredPrivileges", new string[] { "SeChangeNotifyPrivilege", "SeCreateGlobalPrivilege", "SeAssignPrimaryTokenPrivilege", "SeImpersonatePrivilege", "SeSystemProfilePrivilege", "SeTcbPrivilege", "SeDebugPrivilege", "SeSecurityPrivilege" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "ServiceSidType", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "Start", 2, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack", "Type", 16, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack\Parameters", "ServiceDll", @"%SystemRoot%\system32\diagtrack.dll", RegistryValueKind.ExpandString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
+
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "DelayedAutoStart", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "DependOnService", new string[] { "rpcss" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "Description", @"@%SystemRoot%\system32\dmwappushsvc.dll,-201", RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "DisplayName", @"@%SystemRoot%\system32\dmwappushsvc.dll,-200", RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "ErrorControl", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,04,00,00,00,14,00,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,00,00,00,00,10,27,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "ImagePath", @"%SystemRoot%\system32\svchost.exe -k netsvcs -p", RegistryValueKind.ExpandString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "ObjectName", "LocalSystem", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "ServiceSidType", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "Type", 20, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice", "StateFlags", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\Parameters", "IdleTimeout(sec)", 120, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\Parameters", "ServiceDll", @"%SystemRoot%\system32\dmwappushsvc.dll", RegistryValueKind.ExpandString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\0", "Action", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\0", "Data0", Array.ConvertAll("37,00,39,00,35,00,42,00,36,00,42,00,46,00,39,00,2d,00,39,00,37,00,42,00,36,00,2d,00,34,00,46,00,38,00,39,00,2d,00,42,00,44,00,38,00,44,00,2d,00,32,00,46,00,34,00,32,00,42,00,42,00,42,00,45,00,39,00,39,00,36,00,45,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\0", "DataType0", 2, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\0", "GUID", Array.ConvertAll("67,d1,90,bc,70,94,39,41,a9,ba,be,0b,bb,f5,b7,4d".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\0", "Type", 6, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\1", "Action", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\1", "Data0", Array.ConvertAll("75,90,bc,a3,28,00,92,13".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\1", "DataType0", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\1", "GUID", Array.ConvertAll("16,28,7a,2d,5e,0c,fc,45,9c,e7,57,0e,5e,cd,e9,c9".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\TriggerInfo\1", "Type", 32, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice\Security", "Security", Array.ConvertAll("01,00,04,80,b0,00,00,00,bc,00,00,00,00,00,00,00,14,00,00,00,02,00,9c,00,07,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,06,00,00,00,00,00,14,00,ff,01,0f,00,01,01,00,00,00,00,00,05,12,00,00,00,00,00,18,00,ff,01,0f,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00,00,00,18,00,14,00,00,00,01,02,00,00,00,00,00,0f,02,00,00,00,01,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,0b,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "DependOnService", new string[] { "RpcSs" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "Description", @"@%systemroot%\system32\DiagSvc.dll,-101", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "DisplayName", @"@%systemroot%\system32\DiagSvc.dll,-100", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "ErrorControl", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "ImagePath", @"%SystemRoot%\System32\svchost.exe -k diagnostics", RegistryValueKind.ExpandString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "ObjectName", "LocalSystem", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "RequiredPrivileges", new string[] { "SeTcbPrivilege", "nSeTakeOwnershipPrivilege", "nSeDebugPrivilege", "nSeBackupPrivilege", "nSeImpersonatePrivilege", "nSeLoadDriverPrivilege", "nSeRestorePrivilege", "nSeManageVolumePrivilege" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "ServiceSidType", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "Start", 3, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc", "Type", 32, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\Parameters", "ServiceDll", @"%systemroot%\system32\DiagSvc.dll", RegistryValueKind.ExpandString);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\TriggerInfo\0", "Action", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\TriggerInfo\0", "Data0", Array.ConvertAll("46,00,44,00,44,00,34,00,35,00,39,00,32,00,34,00,2d,00,37,00,38,00,34,00,41,00,2d,00,34,00,39,00,39,00,43,00,2d,00,41,00,45,00,45,00,39,00,2d,00,30,00,38,00,31,00,33,00,38,00,35,00,30,00,43,00,45,00,31,00,38,00,32,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\TriggerInfo\0", "DataType0", 2, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\TriggerInfo\0", "GUID", Array.ConvertAll("67,d1,90,bc,70,94,39,41,a9,ba,be,0b,bb,f5,b7,4d".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc\TriggerInfo\0", "Type", 6, RegistryValueKind.DWord);
                     }
                     break;
                 case "TglButton16":
