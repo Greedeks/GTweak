@@ -43,7 +43,7 @@ namespace GTweak.Windows
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += delegate { this.Close(); };
+            doubleAnim.Completed += delegate { Close(); };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             BeginAnimation(OpacityProperty, doubleAnim);
         }
@@ -51,7 +51,7 @@ namespace GTweak.Windows
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-                this.Close();
+                Close();
         }
 
         private void BtnLog_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -83,7 +83,7 @@ namespace GTweak.Windows
                 }
                 catch
                 {
-                    this.Close();
+                    Close();
                     new ViewNotification().Show("", "warn", "warn_update_notification");
                 }
             }

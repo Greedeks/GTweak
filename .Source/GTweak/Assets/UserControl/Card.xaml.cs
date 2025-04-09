@@ -21,7 +21,7 @@ namespace GTweak.Assets.UserControl
         internal static readonly DependencyProperty TextProperty =
             DependencyProperty.Register("DescriptionBlock", typeof(string), typeof(Card), new PropertyMetadata(string.Empty));
 
-        internal new static readonly DependencyProperty ContentProperty =
+        internal static new readonly DependencyProperty ContentProperty =
             DependencyProperty.Register("BtnContent", typeof(string), typeof(Button), new PropertyMetadata(string.Empty, (s, e) => ((Button)s).Content = (string)e.NewValue));
 
         internal static readonly DependencyProperty ImageSourceProperty =

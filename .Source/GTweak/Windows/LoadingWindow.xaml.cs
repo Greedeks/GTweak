@@ -34,7 +34,7 @@ namespace GTweak.Windows
             {
                 new TypewriterAnimation((string)FindResource("text6_load"), TextLoad, TimeSpan.FromMilliseconds(300));
                 await Task.Delay(310);
-                this.Close();
+                Close();
                 new MainWindow().Show();
             };
             backgroundWorker.RunWorkerAsync();
@@ -86,8 +86,8 @@ namespace GTweak.Windows
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += delegate { this.Close(); };
-            this.BeginAnimation(OpacityProperty, doubleAnim);
+            doubleAnim.Completed += delegate { Close(); };
+            BeginAnimation(OpacityProperty, doubleAnim);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace GTweak.Utilities.Controls
         internal static string HostsFile => Path.Combine(Environment.SystemDirectory, @"drivers\etc\hosts");
         internal static string PowFile => Path.Combine(FolderLocation, "UltimatePerformance.pow");
         internal static string IconBlank => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Blank.ico");
+        internal static string LogFile => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GTweak_Error.log");
         internal static string RegistryLocation => @"HKEY_CURRENT_USER\Software\GTweak";
     }
 
@@ -48,7 +49,7 @@ namespace GTweak.Utilities.Controls
             { "HiddenIP", () => IsHiddenIpAddress = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "HiddenIP", IsHiddenIpAddress) }
         };
 
-        internal static readonly Dictionary<string, object> defaultRegValues = new Dictionary<string, object>
+        internal static readonly Dictionary<string, object> registryDefaults = new Dictionary<string, object>
         {
             { "Notification", true },
             { "Update", true },
@@ -60,20 +61,20 @@ namespace GTweak.Utilities.Controls
             { "HiddenIP", true }
         };
 
-        internal static bool IsViewNotification { get => (bool)defaultRegValues["Notification"]; set => defaultRegValues["Notification"] = value; }
-        internal static bool IsUpdateCheckRequired { get => (bool)defaultRegValues["Update"]; set => defaultRegValues["Update"] = value; }
-        internal static bool IsTopMost { get => (bool)defaultRegValues["TopMost"]; set => defaultRegValues["TopMost"] = value; }
-        internal static bool IsPlayingSound { get => (bool)defaultRegValues["Sound"]; set => defaultRegValues["Sound"] = value; }
-        internal static int Volume { get => (int)defaultRegValues["Volume"]; set => defaultRegValues["Volume"] = value; }
-        internal static string Language { get => (string)defaultRegValues["Language"]; set => defaultRegValues["Language"] = value; }
-        internal static string Theme { get => (string)defaultRegValues["Theme"]; set => defaultRegValues["Theme"] = value; }
-        internal static bool IsHiddenIpAddress { get => (bool)defaultRegValues["HiddenIP"]; set => defaultRegValues["HiddenIP"] = value; }
+        internal static bool IsViewNotification { get => (bool)registryDefaults["Notification"]; set => registryDefaults["Notification"] = value; }
+        internal static bool IsUpdateCheckRequired { get => (bool)registryDefaults["Update"]; set => registryDefaults["Update"] = value; }
+        internal static bool IsTopMost { get => (bool)registryDefaults["TopMost"]; set => registryDefaults["TopMost"] = value; }
+        internal static bool IsPlayingSound { get => (bool)registryDefaults["Sound"]; set => registryDefaults["Sound"] = value; }
+        internal static int Volume { get => (int)registryDefaults["Volume"]; set => registryDefaults["Volume"] = value; }
+        internal static string Language { get => (string)registryDefaults["Language"]; set => registryDefaults["Language"] = value; }
+        internal static string Theme { get => (string)registryDefaults["Theme"]; set => registryDefaults["Theme"] = value; }
+        internal static bool IsHiddenIpAddress { get => (bool)registryDefaults["HiddenIP"]; set => registryDefaults["HiddenIP"] = value; }
 
         internal void СheckingParameters()
         {
             bool isRegistryEmpty = false;
 
-            foreach (string key in defaultRegValues.Keys)
+            foreach (string key in registryDefaults.Keys)
             {
                 if (RegistryHelp.ValueExists(StoragePaths.RegistryLocation, key))
                 {
@@ -84,7 +85,7 @@ namespace GTweak.Utilities.Controls
 
             if (isRegistryEmpty)
             {
-                foreach (var subkey in defaultRegValues)
+                foreach (var subkey in registryDefaults)
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey.Key, subkey.Value, RegistryValueKind.String);
             }
             else

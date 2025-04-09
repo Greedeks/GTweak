@@ -30,7 +30,7 @@ namespace GTweak
             ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Theme, "Dark", SettingsRepository.AvailableThemes);
 
             App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
-            App.ThemeChanged += delegate { this.Close(); new RebootWindow().ShowDialog(); };
+            App.ThemeChanged += delegate { Close(); new RebootWindow().ShowDialog(); };
         }
 
         private int GetSelectedIndex(string value, string defaultValue, params string[] listing)
@@ -90,14 +90,14 @@ namespace GTweak
                 SettingsMenuAnimation();
         }
 
-        private void ButtonMinimized_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => this.WindowState = WindowState.Minimized;
+        private void ButtonMinimized_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => WindowState = WindowState.Minimized;
 
         private void ButtonExit_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             switch (SystemTweaks.isTweakWorkingAntivirus)
             {
                 case false:
-                    this.Close();
+                    Close();
                     break;
                 case true:
                     new ViewNotification().Show("", "warn", "windefclose_notification");
@@ -116,7 +116,7 @@ namespace GTweak
             Closing -= Window_Closing;
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += delegate { this.Close(); };
+            doubleAnim.Completed += delegate { Close(); };
             Timeline.SetDesiredFrameRate(doubleAnim, 400);
             BeginAnimation(OpacityProperty, doubleAnim);
         }

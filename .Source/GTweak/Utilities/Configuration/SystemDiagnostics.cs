@@ -408,7 +408,9 @@ namespace GTweak.Utilities.Configuration
                     string name when name.StartsWith("fa") => "aparat.com",
                     string name when name.StartsWith("zh") => "baidu.com",
                     string name when name.StartsWith("ru") => "yandex.ru",
+                    string name when name.StartsWith("kk") => "yandex.kz",
                     string name when name.StartsWith("ko") => "naver.com",
+                    string name when name.StartsWith("cs") => "seznam.cz",
                     string name when name.StartsWith("tm") => "turkmenportal.com",
                     string name when name.StartsWith("vn") => "coccoc.com",
                     string name when name.StartsWith("cu") => "ecured.cu",
@@ -419,7 +421,7 @@ namespace GTweak.Utilities.Configuration
                     string name when name.StartsWith("fr") => "orange.fr",
                     string name when name.StartsWith("es") => "terra.es",
                     string name when name.StartsWith("it") => "libero.it",
-                    string name when name.StartsWith("tr") || name.StartsWith("in") => "bing.com",
+                    string name when name.StartsWith("tr") || name.StartsWith("in") || name.StartsWith("ar") => "bing.com",
                     _ => "google.com"
                 };
 

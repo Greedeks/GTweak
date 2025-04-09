@@ -27,7 +27,7 @@ namespace GTweak.Windows
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                if (time == TimeSpan.Zero) { timer.Stop(); this.Close(); }
+                if (time == TimeSpan.Zero) { timer.Stop(); Close(); }
                 time = time.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
 
@@ -37,7 +37,7 @@ namespace GTweak.Windows
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
-                this.Close();
+                Close();
         }
 
         private void ActionSelection_PreviewMouseDown(object sender, MouseButtonEventArgs e)

@@ -22,7 +22,7 @@ namespace GTweak
         {
             InitializeComponent();
 
-            this.DispatcherUnhandledException += OnDispatcherUnhandledException;
+            DispatcherUnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         }
 

@@ -50,19 +50,19 @@ namespace GTweak.Utilities.Helpers
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool InitializeProcThreadAttributeList(IntPtr lpAttributeList, int dwAttributeCount, int dwFlags, ref IntPtr lpSize);
 
-        const uint MAXIMUM_ALLOWED = 0x02000000;
+        private const uint MAXIMUM_ALLOWED = 0x02000000;
 
-        const uint SC_MANAGER_CONNECT = 0x0001;
-        const uint SC_MANAGER_ENUMERATE_SERVICE = 0x0004;
-        const uint SC_MANAGER_QUERY_LOCK_STATUS = 0x0010;
-        const uint SERVICE_QUERY_STATUS = 0x0004;
-        const uint SERVICE_START = 0x0010;
-        const int SC_STATUS_PROCESS_INFO = 0;
-        const string ServicesActiveDatabase = "ServicesActive";
+        private const uint SC_MANAGER_CONNECT = 0x0001;
+        private const uint SC_MANAGER_ENUMERATE_SERVICE = 0x0004;
+        private const uint SC_MANAGER_QUERY_LOCK_STATUS = 0x0010;
+        private const uint SERVICE_QUERY_STATUS = 0x0004;
+        private const uint SERVICE_START = 0x0010;
+        private const int SC_STATUS_PROCESS_INFO = 0;
+        private const string ServicesActiveDatabase = "ServicesActive";
 
-        const int PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
-        const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
-        const uint CREATE_NO_WINDOW = 0x08000000;
+        private const int PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
+        private const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
+        private const uint CREATE_NO_WINDOW = 0x08000000;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SECURITY_ATTRIBUTES
