@@ -151,7 +151,7 @@
     <v:String x:Key="TglButton12_description_confidentiality">Microsoft Windows는 특수 음성 인식 및 음성 합성 모듈로 음성을 인식할 수 있습니다. Cortana 또는 Windows 접근성 기능을 사용하지 않더라도 운영 체제는 기본적으로 음성 인식 엔진의 업데이트를 항상 확인합니다.</v:String>
     <v:String x:Key="TglButton13_description_confidentiality">모든 사용자 데이터에 액세스할 수 있는 기능입니다. Microsoft 서버와 일부 정보를 교환하며 운영 체제 또는 애플리케이션의 작동에 어떤 영향도 미치지 않습니다. 어떤 식으로든 사용자에게 도움이 되지 않으므로 쓸모가 없습니다.</v:String>
     <v:String x:Key="TglButton14_description_confidentiality">Microsoft는 Windows 사용자를 대상으로 정기적으로 실험을 수행하여 기능이 널리 사용되는지, 기능을 변경하면 더 유용해지는지 여부를 확인합니다. 하지만 이는 기밀을 침해하는 행위입니다.</v:String>
-    <v:String x:Key="TglButton15_description_confidentiality">DiagTruck, dmwappushservice 및 diagsvc 서비스 – 키로거. 사용자가 키보드에서 입력하는 내용을 포함하여 말 그대로 모든 사용자 작업을 수집하고 사용자 자신의 요청 없이 Microsoft 서버로 꼼꼼하게 전송하는 것으로 밝혀졌습니다.</v:String>
+    <v:String x:Key="TglButton15_description_confidentiality">DiagTrack, dmwappushservice 및 diagsvc 서비스는 키로거로 작동하여 사용자 활동, 키 입력 등을 모두 기록하고 사용자 동의 없이 이 데이터를 Microsoft 서버로 전송합니다. UWF (Unified Write Filter)를 사용할 때 시스템의 안정적인 동작은 dmwappushservice 서비스에 의존합니다. 그러나 그것이 무엇인지 잘 모르거나 대체 도구가 있다면, 이러한 키로거를 제거하는 것이 좋습니다.</v:String>
     <v:String x:Key="TglButton16_description_confidentiality">시스템 진단 정보를 수집하고 처리하여 컴퓨터의 리소스를 낭비하는 이벤트 로그입니다. 이 서비스는 좋은 것을 제공하지 않으므로 비활성화하는 것이 좋으므로 기밀 정보 전송을 방지할 수 있습니다.</v:String>
     <v:String x:Key="TglButton17_description_confidentiality">시스템 및 사용에 대한 데이터 수집 및 전송을 담당하는 서비스 또는 비디오 드라이버의 작동과 관련이 없는 기능은 쓸모가 없습니다. NVIDIA가 수집하는 이유와 정보의 종류는 자체적으로만 알려져 있습니다. 그러나 이것이 최종 사용자에게 유용한 것이 없다는 사실은 분명합니다.</v:String>
     <v:String x:Key="TglButton18_description_confidentiality">사용자 활동 추적 도구에는 한계가 없습니다. Windows에는 스크린샷 찍기, 타이핑, 프로그램 실행, 잠긴 화면에서 웹캠 액세스 등 컴퓨터에서 수행하는 작업을 단계별로 기록하도록 설계된 또 다른 서비스인 UAR이 있습니다.</v:String>
