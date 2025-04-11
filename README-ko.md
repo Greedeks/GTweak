@@ -15,7 +15,7 @@
 
 <!-- language --> 
 <div align="center">
-  <h1>🌍 Available Languages:</h1>
+  <h1>🌍 사용 가능한 언어:</h1>
 
   <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
     <img src="https://cdn-icons-png.flaticon.com/64/16021/16021822.png" alt="US Flag" width="40">
