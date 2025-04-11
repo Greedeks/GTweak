@@ -15,39 +15,51 @@
 
 <!-- language --> 
 <div align="center">
-  <h1>🌍 사용 가능한 언어:</h1>
+  <h1>🌍 Available Languages:</h1>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/us.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/16021/16021822.png" alt="US Flag" width="40">
   </a>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/kr.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598694.png" alt="Korean Flag" width="40">
   </a>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/ru.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598800.png" alt="Russian Flag" width="40">
   </a>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/ua.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/7561/7561914.png" alt="Ukrainian Flag" width="40">
   </a>
 </div>
+
 </div>
 
 ---
 <h2> 다음과 같은 다양한 기능을 제공합니다: 🔩</h2>
 
 ```c#
-- Windows 인증 (HWID, KMS)
-- Windows Defender, SmartScreen, Antimalware, VBS, UAC 비활성화
-- Windows 업데이트 비활성화 및 다운로드한 캐시 지우기
-- 사용하지 않거나 불필요한 서비스 비활성화
-- 스파이웨어, 키로거 및 원격 측정 Windows, NVIDIA 비활성화
-- 스파이웨어 IP 및 도메인 이름 차단
-- Windows 광고 및 배너 비활성화, SCOOBE
-- OneDrive, Microsoft Edge 및 해당 애플리케이션 폴더, Cortana, 위젯 삭제
-- 미리 설치된 Windows 10/11 앱 제거
-- Realtek 고화질 오디오 드라이버의 전원 공급 장치 수정
-- Windows 테마 및 애플리케이션 변경, 인터페이스 사용자 지정
-- Windows 매개변수 변경, 전원 공급 회로
-- 구성 보기 및 시스템 모니터링
+- HWID 및 KMS 방식을 사용한 Windows 활성화;
+- Windows Defender, SmartScreen, Antimalware, VBS, UAC 비활성화;
+- Windows 업데이트 비활성화 및 임시 업데이트 파일 삭제;
+- 사용하지 않는 불필요한 서비스 비활성화;
+- 키로거 및 Windows, NVIDIA의 텔레메트리 비활성화;
+- 사용자 데이터 수집과 관련된 서비스 및 이벤트 비활성화;
+- Windows 작업 스케줄러의 작업 비활성화;
+- 불필요한 네트워크 프로토콜인 Teredo, ISATAP 및 IPv6 비활성화;
+- 내장된 Windows 진단 도구와 조각 모음 비활성화;
+- SCOOBE를 포함한 Windows의 광고 및 시스템 배너 비활성화;
+- Windows의 시스템 알림, 추천 및 제안 비활성화;
+- 데이터를 수집하는 Microsoft의 숨은 도메인 차단;
+- 모든 관련 데이터, 폴더 및 불필요한 파일을 정리하며 OneDrive와 Microsoft Edge 제거;
+- Windows 10/11의 기본 탑재 앱 제거;
+- AI 어시스턴트인 Cortana, Copilot, Recall 제거 및 비활성화;
+- 인터페이스 사용자 설정: 테마, 창 설정, 아이콘 변경;
+- 키보드와 마우스 설정 구성: 키 필터링, 고정 키 및 가속화 비활성화;
+- Windows 설정 구성 및 전원 계획 변경;
+- 음향 지연 문제를 해결하기 위한 Realtek High Definition Audio 드라이버의 전원 설정 조정;
+- 구성 확인 및 시스템 구성 요소 모니터링.
 ```
 
 <h2> 스크린샷 📷</h2>

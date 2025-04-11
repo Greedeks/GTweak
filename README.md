@@ -16,38 +16,50 @@
 <!-- language --> 
 <div align="center">
   <h1>🌍 Available Languages:</h1>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/us.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/16021/16021822.png" alt="US Flag" width="40">
   </a>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/kr.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598694.png" alt="Korean Flag" width="40">
   </a>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/ru.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598800.png" alt="Russian Flag" width="40">
   </a>
+
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
-    <img src="https://hatscripts.github.io/circle-flags/flags/ua.svg" width="40">
+    <img src="https://cdn-icons-png.flaticon.com/64/7561/7561914.png" alt="Ukrainian Flag" width="40">
   </a>
 </div>
+
 </div>
 
 ---
 <h2> A wide range of functions, including: 🔩</h2>
 
 ```c#
-- Windows activation (HWID, KMS)
-- Disabling Windows Defender, SmartScreen, Antimalware, VBS, UAC 
-- Disabling Windows updates and clearing the downloaded cache
-- Disabling unused and unnecessary services 
-- Disabling spyware, keyloggers and telemetry Windows, NVIDIA
-- Blocking of spyware ip and domain names
-- Disabling Windows ads and banners, SCOOBE
-- Deleting OneDrive, Microsoft Edge and folders of these applications, Cortana, widgets
-- Removing pre-installed Windows 10/11 apps
-- Fixing the power supply of the Realtek High Definition Audio driver
-- Changing the Windows theme and applications, customizing the interface
-- Changing Windows parameters, power supply circuits
-- View the configuration and monitor the system
+- Activating Windows using HWID and KMS methods;
+- Disabling Windows Defender, SmartScreen, Antimalware, VBS, and UAC;
+- Disabling Windows updates and removing temporary update files;
+- Disabling unused and unnecessary services;
+- Disabling keyloggers and telemetry for Windows and NVIDIA;
+- Disabling services and events related to the collection of user data;
+- Disabling tasks in the Windows Task Scheduler;
+- Disabling unnecessary network protocols: Teredo, ISATAP, and IPv6;
+- Disabling built-in Windows diagnostic tools and defragmentation;
+- Disabling ads and system banners in Windows, including SCOOBE;
+- Disabling system notifications, recommendations, and suggestions in Windows;
+- Blocking Microsoft's shadow domains that collect data;
+- Uninstalling OneDrive and Microsoft Edge along with clearing all associated data, folders, and unnecessary files;
+- Removing standard pre-installed apps in Windows 10/11;
+- Removing and disabling AI assistants: Cortana, Copilot, and Recall;
+- Customizing the interface: changing themes, window settings, and icons;
+- Configuring keyboard and mouse settings: disabling key filtering, sticky keys, and acceleration;
+- Adjusting Windows settings and modifying the power plan;
+- Adjusting power settings for Realtek High Definition Audio drivers to fix sound delay;
+- Viewing the configuration and monitoring system components.
 ```
 
 <h2> Screenshots 📷</h2>
