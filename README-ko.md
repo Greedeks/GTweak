@@ -39,7 +39,7 @@
 ---
 <h2> 다음과 같은 다양한 기능을 제공합니다: 🔩</h2>
 
-```c#
+```java
 - HWID 및 KMS 방식을 사용한 Windows 활성화;
 - Windows Defender, SmartScreen, Antimalware, VBS, UAC 비활성화;
 - Windows 업데이트 비활성화 및 임시 업데이트 파일 삭제;

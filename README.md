@@ -39,7 +39,7 @@
 ---
 <h2> A wide range of functions, including: 🔩</h2>
 
-```c#
+```java
 - Activating Windows using HWID and KMS methods;
 - Disabling Windows Defender, SmartScreen, Antimalware, VBS, and UAC;
 - Disabling Windows updates and removing temporary update files;
@@ -52,7 +52,7 @@
 - Disabling ads and system banners in Windows, including SCOOBE;
 - Disabling system notifications, recommendations, and suggestions in Windows;
 - Blocking Microsoft's shadow domains that collect data;
-- Uninstalling OneDrive and Microsoft Edge along with clearing all associated data, folders, and unnecessary files;
+- Uninstalling OneDrive and Microsoft Edge along with clearing all associated data, folders;
 - Removing standard pre-installed apps in Windows 10/11;
 - Removing and disabling AI assistants: Cortana, Copilot, and Recall;
 - Customizing the interface: changing themes, window settings, and icons;
