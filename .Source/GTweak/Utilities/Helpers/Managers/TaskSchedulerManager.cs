@@ -38,7 +38,7 @@ namespace GTweak.Utilities.Helpers.Managers
                         }
                     }
                 }
-            }).Wait();
+            });
         }
 
         internal static void SetTaskStateOwner(bool state, params string[] tasklist)
@@ -51,7 +51,7 @@ namespace GTweak.Utilities.Helpers.Managers
                 command = command.TrimEnd(' ', '&');
 
                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, command);
-            }).Wait();
+            });
         }
 
 
@@ -66,7 +66,7 @@ namespace GTweak.Utilities.Helpers.Managers
                     if (task != null)
                         taskService.RootFolder.DeleteTask(taskname);
                 }
-            }).Wait();
+            });
         }
     }
 }

@@ -23,19 +23,40 @@ namespace GTweak.Core.ViewModel
         public int SetBlurValue
         {
             get => _model.BlurValue;
-            set { _model.BlurValue = value; OnPropertyChanged(); }
+            set
+            {
+                if (_model.BlurValue != value)
+                {
+                    _model.BlurValue = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public Visibility SetVisibility
         {
             get => _model.IpVisibility;
-            set { _model.IpVisibility = value; OnPropertyChanged(); }
+            set
+            {
+                if (_model.IpVisibility != value)
+                {
+                    _model.IpVisibility = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public bool StateButton
         {
             get => SettingsRepository.IsHiddenIpAddress;
-            set { SettingsRepository.IsHiddenIpAddress = value; OnPropertyChanged(); }
+            set
+            {
+                if (SettingsRepository.IsHiddenIpAddress != value)
+                {
+                    SettingsRepository.IsHiddenIpAddress = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public DataSystemVM()
@@ -58,16 +79,8 @@ namespace GTweak.Core.ViewModel
                  new DataSystemModel { Name = "IpAddress", Data = SystemDiagnostics.HardwareData["UserIpAddress"] }
             };
 
-            if (SystemDiagnostics.CurrentConnection == SystemDiagnostics.ConnectionStatus.Available)
-            {
-                SetBlurValue = SettingsRepository.IsHiddenIpAddress ? 20 : 0;
-                SetVisibility = Visibility.Visible;
-            }
-            else
-            {
-                SetBlurValue = 0;
-                SetVisibility = Visibility.Hidden;
-            }
+            SetBlurValue = (SystemDiagnostics.isIPAddressFormatValid && SettingsRepository.IsHiddenIpAddress) ? 20 : 0;
+            SetVisibility = SystemDiagnostics.isIPAddressFormatValid ? Visibility.Visible : Visibility.Hidden;
         }
     }
 }

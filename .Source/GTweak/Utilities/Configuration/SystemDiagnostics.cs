@@ -73,6 +73,9 @@ namespace GTweak.Utilities.Configuration
            { "UserIpAddress", Application.Current.Resources["connection_lose_systemInformation"].ToString() }
         };
 
+        internal static bool isIPAddressFormatValid = false;
+
+
         internal ImageSource GetProfileImage()
         {
             try
@@ -441,9 +444,9 @@ namespace GTweak.Utilities.Configuration
             catch { return false; }
         }
 
-        internal async void GetUserIpAddress()
+        internal void GetUserIpAddress()
         {
-            await Task.Run(async () =>
+            Task.Run(async () =>
             {
                 if (IsNetworkAvailable())
                 {
@@ -453,11 +456,10 @@ namespace GTweak.Utilities.Configuration
                         string response = await client.GetStringAsync("http://ip-api.com/json/?fields=61439");
                         IPMetadata ipMetadata = JsonConvert.DeserializeObject<IPMetadata>(response);
 
-                        if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrEmpty(ipMetadata.Ip) && !string.IsNullOrEmpty(ipMetadata.Country))
+                        if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrEmpty(ipMetadata?.Ip) && !string.IsNullOrEmpty(ipMetadata?.Country))
                         {
                             CurrentConnection = ConnectionStatus.Available;
                             HardwareData["UserIpAddress"] = $"{ipMetadata.Ip} ({ipMetadata.Country})";
-                            return;
                         }
                         else
                             CurrentConnection = ConnectionStatus.Block;
@@ -473,6 +475,8 @@ namespace GTweak.Utilities.Configuration
                     { ConnectionStatus.Block, "connection_block_systemInformation" },
                     { ConnectionStatus.Limited, "limited_systemInformation" }
                 }.TryGetValue(CurrentConnection, out string resourceKey)) { HardwareData["UserIpAddress"] = (string)Application.Current.Resources[resourceKey]; }
+
+                isIPAddressFormatValid = HardwareData["UserIpAddress"].Any(char.IsDigit);
             });
         }
 

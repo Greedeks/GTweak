@@ -47,19 +47,20 @@ namespace GTweak.View
                         await new MonitoringSystem().GetTotalProcessorUsage();
                     });
                     Application.Current.Dispatcher.Invoke(AnimationProgressBars);
-                    if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden)
-                    {
-                        DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
-                        doubleAnim.Completed += delegate { SettingsRepository.ChangingParameters(false, "HiddenIP"); };
-                        Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                        IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
-                    }
                 }
                 else if (_time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(delegate { new SystemDiagnostics().GetUserIpAddress(); });
                     DataContext = new DataSystemVM();
+                }
+
+                if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
+                {
+                    DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
+                    doubleAnim.Completed += delegate { SettingsRepository.ChangingParameters(false, "HiddenIP"); };
+                    Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                    IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                 }
 
                 _time = _time.Add(TimeSpan.FromSeconds(+1));

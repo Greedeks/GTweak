@@ -206,7 +206,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                    }).Wait();
+                    });
                     break;
                 case "TglButton10":
                     if (isChoose)
