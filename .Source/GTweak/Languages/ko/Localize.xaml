@@ -126,7 +126,7 @@
     <v:String x:Key="tgl6_confidentiality">응용 프로그램 사용 통계 수집</v:String>
     <v:String x:Key="tgl7_confidentiality">필기 데이터 수집 및 전송</v:String>
     <v:String x:Key="tgl8_confidentiality">하드웨어 구성 데이터 수집</v:String>
-    <v:String x:Key="tgl9_confidentiality">스파이 도메인에 대한 네트워크 액세스</v:String>
+    <v:String x:Key="tgl9_confidentiality">Microsoft의 스파이 도메인에 대한 네트워크 액세스</v:String>
     <v:String x:Key="tgl10_confidentiality">사용자 위치 확인</v:String>
     <v:String x:Key="tgl11_confidentiality">피드백을 통한 요청 확인</v:String>
     <v:String x:Key="tgl12_confidentiality">음성 합성의 숨겨진 백그라운드 업데이트</v:String>
@@ -392,7 +392,7 @@
     <v:String x:Key="TglButton10_description_system">보안 또는 보호와 관련된 기능을 비활성화하면 이에 대한 알림을 지속적으로 받게 됩니다. 이 조정은 알림 센터에서 보안 알림을 비활성화합니다.</v:String>
     <v:String x:Key="TglButton11_description_system">인터넷을 통해 다운로드한 exe, msi, bat, cmd 또는 기타 실행 파일을 실행할 때 Windows 보안 경고가 표시됩니다. 이러한 파일의 실행을 매번 확인하는 것은 꽤 지루할 수 있는데, 이 조정을 통해 이 경고를 비활성화할 수 있습니다.</v:String>
     <v:String x:Key="TglButton12_description_system">이 조정은 컴퓨터의 RAM 진단을 비활성화하여 시스템의 전반적인 성능을 개선합니다.</v:String>
-    <v:String x:Key="TglButton13_description_system">이 조정은 대부분의 경우 불필요한 Teredo, ISATAP 및 IPv6 프로토콜을 비활성화합니다. 업무용 컴퓨터 (조직 내)에서는 이 조정을 사용하지 않는 것이 좋습니다.</v:String>
+    <v:String x:Key="TglButton13_description_system">이 트윅은 Teredo, ISATAP 및 IPv6 프로토콜을 비활성화하며, 이는 일반적으로 대부분의 사용자에게 필요하지 않습니다. 그러나 업무용 또는 기업용 기기에서 사용하면 네트워크 문제나 일부 서비스의 비정상적인 작동을 초래할 수 있으므로 권장되지 않습니다.</v:String>
     <v:String x:Key="TglButton14_description_system">이 조정에는 대용량 파일 시스템 캐시에 대한 지원이 포함됩니다. 파일 시스템 캐시 크기를 늘리면 일반적으로 컴퓨터 성능이 향상되지만 애플리케이션과 서비스에 사용할 수 있는 물리적 메모리 공간이 줄어듭니다.</v:String>
     <v:String x:Key="TglButton15_description_system">기본적으로 Windows에는 시작 프로그램 속도를 늦추는 메커니즘이 내장되어 있습니다. 이 솔루션은 HDD가 장착된 구형 컴퓨터에서는 잘 작동하지만 SSD가 장착된 최신 PC에서는 프로그램 시작 속도가 불필요하게 느려집니다.</v:String>
     <v:String x:Key="TglButton16_description_system">조정을 통해 빠른 액세스 도구 모음의 파일 및 폴더에 대한 사용 기록을 비활성화할 수 있습니다.</v:String>

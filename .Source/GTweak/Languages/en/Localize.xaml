@@ -126,7 +126,7 @@
     <v:String x:Key="tgl6_confidentiality">Collecting application usage statistics</v:String>
     <v:String x:Key="tgl7_confidentiality">Collecting and sending handwriting data</v:String>
     <v:String x:Key="tgl8_confidentiality">Collecting hardware configuration data</v:String>
-    <v:String x:Key="tgl9_confidentiality">Network access to the spy domain</v:String>
+    <v:String x:Key="tgl9_confidentiality">Network access to spy Microsoft domains</v:String>
     <v:String x:Key="tgl10_confidentiality">Determining the user's location</v:String>
     <v:String x:Key="tgl11_confidentiality">Checking requests through Feedback</v:String>
     <v:String x:Key="tgl12_confidentiality">Hidden background updates of speech synthesis</v:String>
@@ -392,7 +392,7 @@
     <v:String x:Key="TglButton10_description_system">When you disable something related to security or protection, you constantly receive notifications about it. This tweak will disable security notifications from the Notification Center.</v:String>
     <v:String x:Key="TglButton11_description_system">Windows security alert when you run exe, msi, bat, cmd or other executable files downloaded over the Internet. Confirming the launch of such files can get boring pretty quickly every time, this tweak will disable this warning.</v:String>
     <v:String x:Key="TglButton12_description_system">The tweak disables the diagnostics of your computer's RAM, thereby improving the overall performance of the system.</v:String>
-    <v:String x:Key="TglButton13_description_system">This tweak disables the Teredo, ISATAP and IPv6 protocols that are unnecessary for most. It is not recommended to use this tweak on a work computer (in organizations).</v:String>
+    <v:String x:Key="TglButton13_description_system">This tweak disables the Teredo, ISATAP, and IPv6 protocols, which, as a rule, are not required by the majority of users. However, it is not advisable to apply it on work or corporate devices: this may lead to network problems or improper functioning of some services.</v:String>
     <v:String x:Key="TglButton14_description_system">This tweak includes support for a large file system cache. Increasing the size of the file system cache generally improves computer performance, but this in turn reduces the physical memory space available for applications and services.</v:String>
     <v:String x:Key="TglButton15_description_system">By default, Windows has a built-in mechanism to slow down startup programs. This solution works quite well on older computers with HDD, but on modern PCs with SSD unnecessarily slows down the system startup with programs.</v:String>
     <v:String x:Key="TglButton16_description_system">Tweak will disable the usage history for files and folders for the quick access toolbar.</v:String>
