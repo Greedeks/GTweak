@@ -37,6 +37,23 @@ namespace GTweak.Utilities.Configuration
             internal string Country { get; set; }
         }
 
+        internal struct HardwareData
+        {
+            internal static string OperatingSystem { get; set; } = string.Empty;
+            internal static string OSVersion { get; set; } = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString() ?? string.Empty;
+            internal static string OSBuild { get; set; } = string.Empty;
+            internal static string Bios { get; set; } = string.Empty;
+            internal static string BiosMode { get; set; } = string.Empty;
+            internal static string Motherboard { get; set; } = string.Empty;
+            internal static string Processor { get; set; } = string.Empty;
+            internal static string Graphics { get; set; } = string.Empty;
+            internal static string Memory { get; set; } = string.Empty;
+            internal static string Storage { get; set; } = string.Empty;
+            internal static string AudioDevice { get; set; } = string.Empty;
+            internal static string NetworkAdapter { get; set; } = string.Empty;
+            internal static string UserIPAddress { get; set; } = Application.Current.Resources["connection_lose_systemInformation"].ToString();
+        }
+
         internal enum ConnectionStatus
         {
             Available,
@@ -49,29 +66,10 @@ namespace GTweak.Utilities.Configuration
 
         internal static bool IsNeedUpdate { get; private set; } = false;
         internal static string DownloadVersion { get; private set; } = string.Empty;
-        internal static string WindowsClientVersion { get; set; } = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString() ?? string.Empty;
-        internal static string WindowsBuildVersion { get; set; } = string.Empty;
 
         internal static Dictionary<byte, bool> IsWindowsVersion = default;
 
-        private static (string Storage, string Audio, string NetAdapter) _tempData = (Storage: string.Empty, Audio: string.Empty, NetAdapter: string.Empty);
-
-        internal static Dictionary<string, string> HardwareData = new Dictionary<string, string>()
-        {
-           { "Windows", WindowsClientVersion },
-
-           { "BIOS", string.Empty },
-           { "Mode", string.Empty },
-           { "MotherBr", string.Empty },
-           { "CPU", string.Empty },
-           { "GPU", string.Empty },
-           { "RAM", string.Empty },
-           { "Storage", string.Empty },
-           { "Audio", string.Empty },
-           { "NetAdapter", string.Empty },
-
-           { "UserIpAddress", Application.Current.Resources["connection_lose_systemInformation"].ToString() }
-        };
+        private static (string Storage, string Audio, string NetAdapter) _tempData = (string.Empty, string.Empty, string.Empty);
 
         internal static bool isIPAddressFormatValid = false;
 
@@ -114,31 +112,33 @@ namespace GTweak.Utilities.Configuration
 
         internal void UpdatingDevicesData()
         {
+            _tempData = (string.Empty, string.Empty, string.Empty);
+
             Parallel.Invoke(
                 GetStorageDevices,
                 GetAudioDevices,
                 GetNetworkAdapters
             );
 
-            HardwareData["Storage"] = _tempData.Storage;
-            HardwareData["Audio"] = _tempData.Audio;
-            HardwareData["NetAdapter"] = _tempData.NetAdapter;
+            HardwareData.Storage = _tempData.Storage;
+            HardwareData.AudioDevice = _tempData.Audio;
+            HardwareData.NetworkAdapter = _tempData.NetAdapter;
         }
 
         internal void GetOperatingSystemInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                WindowsClientVersion = Convert.ToString(managementObj["Caption"]);
-                WindowsBuildVersion = Convert.ToString(managementObj["BuildNumber"]);
-                HardwareData["Windows"] = $"{WindowsClientVersion.Substring(WindowsClientVersion.IndexOf('W'))}, {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]}\n";
+                HardwareData.OSVersion = Convert.ToString(managementObj["Caption"]);
+                HardwareData.OSBuild = Convert.ToString(managementObj["BuildNumber"]);
+                HardwareData.OperatingSystem = $"{HardwareData.OSVersion.Substring(HardwareData.OSVersion.IndexOf('W'))}, {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]}\n";
                 IsWindowsVersion = new Dictionary<byte, bool>()
                 {
-                    { 11, WindowsClientVersion.Contains("11") },
-                    { 10, WindowsClientVersion.Contains("10") }
+                    { 11, HardwareData.OSVersion.Contains("11") },
+                    { 10, HardwareData.OSVersion.Contains("10") }
                 };
             }
-            HardwareData["Windows"] = $"\n{HardwareData["Windows"].TrimEnd('\n')}";
+            HardwareData.OperatingSystem = $"\n{HardwareData.OperatingSystem.TrimEnd('\n')}";
         }
 
         /// <summary>
@@ -148,15 +148,15 @@ namespace GTweak.Utilities.Configuration
         private async void GetBiosInfo()
         {
             string output = await CommandExecutor.GetCommandOutput("bcdedit");
-            HardwareData["Mode"] = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
+            HardwareData.BiosMode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                 string dataSN = (string)managementObj["SerialNumber"];
-                HardwareData["BIOS"] += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
+                HardwareData.Bios += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
             }
-            HardwareData["BIOS"] = HardwareData["BIOS"].TrimEnd('\n');
+            HardwareData.Bios = HardwareData.Bios.TrimEnd('\n');
         }
 
         private void GetMotherboardInfo()
@@ -165,16 +165,16 @@ namespace GTweak.Utilities.Configuration
             {
                 string data = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}";
                 string dataVersion = (string)managementObj["Version"];
-                HardwareData["MotherBr"] += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
+                HardwareData.Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
             }
-            HardwareData["MotherBr"] = HardwareData["MotherBr"].TrimEnd('\n');
+            HardwareData.Motherboard = HardwareData.Motherboard.TrimEnd('\n');
         }
 
         private void GetProcessorInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
-                HardwareData["CPU"] = $"{(string)managementObj["Name"]}\n";
-            HardwareData["CPU"] = HardwareData["CPU"].TrimEnd('\n');
+                HardwareData.Processor = $"{(string)managementObj["Name"]}\n";
+            HardwareData.Processor = HardwareData.Processor.TrimEnd('\n');
         }
 
         /// <summary>
@@ -239,9 +239,9 @@ namespace GTweak.Utilities.Configuration
             {
                 string data = managementObj["Name"] as string;
                 (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
-                HardwareData["GPU"] += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound ? dataMemoryReg : SizeCalculationHelper((uint)managementObj["AdapterRAM"]))}\n";
+                HardwareData.Graphics += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound ? dataMemoryReg : SizeCalculationHelper((uint)managementObj["AdapterRAM"]))}\n";
             }
-            HardwareData["GPU"] = HardwareData["GPU"].TrimEnd('\n');
+            HardwareData.Graphics = HardwareData.Graphics.TrimEnd('\n');
         }
 
         /// <summary>
@@ -264,9 +264,9 @@ namespace GTweak.Utilities.Configuration
                     35 => "LPDDR5",
                     _ => string.Empty
                 };
-                HardwareData["RAM"] += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                HardwareData.Memory += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
-            HardwareData["RAM"] = HardwareData["RAM"].TrimEnd('\n');
+            HardwareData.Memory = HardwareData.Memory.TrimEnd('\n');
         }
 
         /// <summary>
@@ -274,7 +274,6 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private static void GetStorageDevices()
         {
-            _tempData.Storage = string.Empty;
             bool isMsftWorking = false;
 
             try
@@ -366,7 +365,6 @@ namespace GTweak.Utilities.Configuration
                 return (false, string.Empty);
             }
 
-            _tempData.Audio = string.Empty;
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
             {
                 foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
@@ -396,7 +394,6 @@ namespace GTweak.Utilities.Configuration
 
         private void GetNetworkAdapters()
         {
-            _tempData.NetAdapter = string.Empty;
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
                 _tempData.NetAdapter += $"{new[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
             _tempData.NetAdapter = _tempData.NetAdapter.TrimEnd('\n');
@@ -459,7 +456,7 @@ namespace GTweak.Utilities.Configuration
                         if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrEmpty(ipMetadata?.Ip) && !string.IsNullOrEmpty(ipMetadata?.Country))
                         {
                             CurrentConnection = ConnectionStatus.Available;
-                            HardwareData["UserIpAddress"] = $"{ipMetadata.Ip} ({ipMetadata.Country})";
+                            HardwareData.UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
                         }
                         else
                             CurrentConnection = ConnectionStatus.Block;
@@ -474,9 +471,9 @@ namespace GTweak.Utilities.Configuration
                     { ConnectionStatus.Lose, "connection_lose_systemInformation" },
                     { ConnectionStatus.Block, "connection_block_systemInformation" },
                     { ConnectionStatus.Limited, "limited_systemInformation" }
-                }.TryGetValue(CurrentConnection, out string resourceKey)) { HardwareData["UserIpAddress"] = (string)Application.Current.Resources[resourceKey]; }
+                }.TryGetValue(CurrentConnection, out string resourceKey)) { HardwareData.UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
 
-                isIPAddressFormatValid = HardwareData["UserIpAddress"].Any(char.IsDigit);
+                isIPAddressFormatValid = HardwareData.UserIPAddress.Any(char.IsDigit);
             });
         }
 

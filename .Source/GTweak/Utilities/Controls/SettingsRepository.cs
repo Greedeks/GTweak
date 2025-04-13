@@ -11,7 +11,6 @@ using System.Runtime.InteropServices;
 
 namespace GTweak.Utilities.Controls
 {
-    [StructLayout(LayoutKind.Sequential)]
     internal struct StoragePaths
     {
         internal static string Config = string.Empty;

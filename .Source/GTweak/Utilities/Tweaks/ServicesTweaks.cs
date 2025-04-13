@@ -5,7 +5,6 @@ using GTweak.View;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.ServiceProcess;
@@ -321,20 +320,8 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton15":
                     BlockWindowsUpdate(isChoose);
-                    ChangeAccessUpdateFolders(isChoose);
-
-                    using (BackgroundWorker backgroundWorker = new BackgroundWorker())
-                    {
-                        backgroundWorker.DoWork += delegate
-                        {
-                            string argurment = default;
-                            foreach (var key in _updateFilesWin)
-                                argurment += isChoose ? $"rename {FilesPathUpdate(key.Value.Default)} {key.Value.Blocked} & " : $"rename {FilesPathUpdate(key.Value.Blocked)} {key.Value.Default} & ";
-
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c {argurment.Substring(0, argurment.Length - 3)}");
-                        };
-                        backgroundWorker.RunWorkerAsync();
-                    }
+                    string[] arguments = _updateFilesWin.Select(key => isChoose ? $"rename \"{FilesPathUpdate(key.Value.Default)}\" \"{key.Value.Blocked}\"" : $"rename \"{FilesPathUpdate(key.Value.Blocked)}\" \"{key.Value.Default}\"").ToArray();
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c {string.Join(" & ", arguments)}");
 
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wisvc", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DmEnrollmentSvc", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord);
@@ -355,6 +342,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
+                    ChangeAccessUpdateFolders(isChoose);
                     break;
                 case "TglButton16":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", isChoose ? 4 : 3, RegistryValueKind.DWord);
