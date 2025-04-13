@@ -395,7 +395,7 @@
     <v:String x:Key="TglButton13_description_system">이 트윅은 Teredo, ISATAP 및 IPv6 프로토콜을 비활성화하며, 이는 일반적으로 대부분의 사용자에게 필요하지 않습니다. 그러나 업무용 또는 기업용 기기에서 사용하면 네트워크 문제나 일부 서비스의 비정상적인 작동을 초래할 수 있으므로 권장되지 않습니다.</v:String>
     <v:String x:Key="TglButton14_description_system">이 조정에는 대용량 파일 시스템 캐시에 대한 지원이 포함됩니다. 파일 시스템 캐시 크기를 늘리면 일반적으로 컴퓨터 성능이 향상되지만 애플리케이션과 서비스에 사용할 수 있는 물리적 메모리 공간이 줄어듭니다.</v:String>
     <v:String x:Key="TglButton15_description_system">기본적으로 Windows에는 시작 프로그램 속도를 늦추는 메커니즘이 내장되어 있습니다. 이 솔루션은 HDD가 장착된 구형 컴퓨터에서는 잘 작동하지만 SSD가 장착된 최신 PC에서는 프로그램 시작 속도가 불필요하게 느려집니다.</v:String>
-    <v:String x:Key="TglButton16_description_system">조정을 통해 빠른 액세스 도구 모음의 파일 및 폴더에 대한 사용 기록을 비활성화할 수 있습니다.</v:String>
+    <v:String x:Key="TglButton16_description_system">이 트윅은 빠른 실행 패널에 표시되는 파일과 폴더의 사용 기록 기록을 비활성화합니다. 즉, 시스템은 더 이상 최근에 활성화된 항목들을 자동으로 저장하고 표시하지 않습니다.</v:String>
     <v:String x:Key="TglButton17_description_system">이 조정은 탐색기에서 열려고 하는 컴퓨터에 연결된 다양한 이동식 미디어 유형에 대한 자동 실행을 비활성화합니다. 따라서 사용자가 모르는 프로그램은 안정성이 확실하지 않은 미디어에서 자동으로 열리지 않습니다.</v:String>
     <v:String x:Key="TglButton18_description_system">«궁극의 성능» 전원 공급 회로를 추가하거나 사용 가능한 경우 기존 전원 공급 회로로 간단히 전환합니다. 또한 프로세서 전원 관리 설정에서 최대 프로세서 주파수 설정을 잠금 해제합니다.</v:String>
     <v:String x:Key="TglButton19_description_system">블루투스가 필요 없고 블루투스를 통해 기기를 사용하고 싶지 않다면 전원을 끄면 트레이 아이콘도 제거됩니다.</v:String>
