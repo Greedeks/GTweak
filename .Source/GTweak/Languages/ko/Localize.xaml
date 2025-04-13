@@ -369,7 +369,7 @@
     <v:String x:Key="tgl15_system">Windows 시작 및 프로그램 시작 속도 늦추기</v:String>
     <v:String x:Key="tgl16_system">빠른 액세스 도구 모음의 사용 기록</v:String>
     <v:String x:Key="tgl17_system">이동식 미디어 자동 실행</v:String>
-    <v:String x:Key="tgl18_system">기존 전원 공급 장치 회로 사용</v:String>
+    <v:String x:Key="tgl18_system">기본 전원 계획 사용</v:String>
     <v:String x:Key="tgl19_system">블루투스 및 장치 기능</v:String>
     <v:String x:Key="tgl20_system">Windows Defender 방화벽</v:String>
     <v:String x:Key="tgl21_system">Windows 기능 «게임 모드»</v:String>

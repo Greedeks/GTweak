@@ -369,7 +369,7 @@
     <v:String x:Key="tgl15_system">Уповільнення запуску Windows та програм</v:String>
     <v:String x:Key="tgl16_system">Історія використання для панелі швидкого доступу</v:String>
     <v:String x:Key="tgl17_system">Автозапуск знімних носіїв</v:String>
-    <v:String x:Key="tgl18_system">Використовувати збалансовану схему живлення</v:String>
+    <v:String x:Key="tgl18_system">Використовувати стандартну схему живлення</v:String>
     <v:String x:Key="tgl19_system">Функція Bluetooth та пристрої</v:String>
     <v:String x:Key="tgl20_system">Брандмауер Захисника Windows</v:String>
     <v:String x:Key="tgl21_system">Функція Windows «Ігровий режим»</v:String>

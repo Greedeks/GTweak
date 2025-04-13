@@ -369,7 +369,7 @@
     <v:String x:Key="tgl15_system">Slowing down Windows startup and program startup</v:String>
     <v:String x:Key="tgl16_system">Usage history for the Quick Access Toolbar</v:String>
     <v:String x:Key="tgl17_system">Autorun removable media</v:String>
-    <v:String x:Key="tgl18_system">Use a conventional power supply circuit</v:String>
+    <v:String x:Key="tgl18_system">Use the default power plan</v:String>
     <v:String x:Key="tgl19_system">Bluetooth and device function</v:String>
     <v:String x:Key="tgl20_system">Windows Defender Firewall</v:String>
     <v:String x:Key="tgl21_system">Windows feature «Game Mode»</v:String>

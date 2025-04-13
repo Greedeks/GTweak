@@ -130,7 +130,7 @@
   <data name="Tickets" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tickets.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
-  <data name="Ultimate_Performance_pow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Ultimate Performance.pow.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="UltPower" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UltPower.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

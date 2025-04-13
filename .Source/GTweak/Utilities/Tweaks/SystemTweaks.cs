@@ -431,8 +431,7 @@ namespace GTweak.Utilities.Tweaks
                     {
                         foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2\power", "SELECT InstanceID FROM Win32_PowerPlan WHERE IsActive=false").Get())
                         {
-                            searchScheme = Convert.ToString(managementObj["InstanceID"]);
-                            searchScheme = Regex.Match(searchScheme, @"\{([^)]*)\}").Groups[1].Value;
+                            searchScheme = Regex.Match(Convert.ToString(managementObj["InstanceID"]), @"\{([^)]*)\}").Groups[1].Value;
 
                             if (RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "Description", string.Empty).Contains("-18") &&
                             RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "FriendlyName", string.Empty).Contains("-19"))
@@ -445,12 +444,15 @@ namespace GTweak.Utilities.Tweaks
                                     _powercfg.StartInfo.Arguments = unlockFrequency;
                                     _powercfg.Start();
                                 }
+                                break;
                             }
+                            else
+                                searchScheme = string.Empty;
                         }
 
                         if (string.IsNullOrEmpty(searchScheme))
                         {
-                            new UnarchiveManager(StoragePaths.PowFile, Properties.Resources.Ultimate_Performance_pow);
+                            new UnarchiveManager(StoragePaths.PowFile, Properties.Resources.UltPower);
 
                             string _guid = Guid.NewGuid().ToString("D");
 
