@@ -120,7 +120,7 @@
     <!--#region Confidentiality Page -->
     <v:String x:Key="tgl1_confidentiality">광고 식별자 및 타겟 광고</v:String>
     <v:String x:Key="tgl2_confidentiality">모든 유형의 데이터 동기화</v:String>
-    <v:String x:Key="tgl3_confidentiality">Windows 원격 분석 추적</v:String>
+    <v:String x:Key="tgl3_confidentiality">Windows 텔레메트리 수집 및 모니터링</v:String>
     <v:String x:Key="tgl4_confidentiality">스케줄러 이벤트를 통한 데이터 수집</v:String>
     <v:String x:Key="tgl5_confidentiality">설치된 응용 프로그램에 대한 데이터 수집</v:String>
     <v:String x:Key="tgl6_confidentiality">응용 프로그램 사용 통계 수집</v:String>
@@ -131,10 +131,10 @@
     <v:String x:Key="tgl11_confidentiality">피드백을 통한 요청 확인</v:String>
     <v:String x:Key="tgl12_confidentiality">음성 합성의 숨겨진 백그라운드 업데이트</v:String>
     <v:String x:Key="tgl13_confidentiality">시스템에 대한 숨겨진 모니터링</v:String>
-    <v:String x:Key="tgl14_confidentiality">PC에서 원격 실험</v:String>
+    <v:String x:Key="tgl14_confidentiality">당신의 시스템에 대한 숨겨진 실험</v:String>
     <v:String x:Key="tgl15_confidentiality">데이터의 은밀한 수집 및 전달을 위한 기관</v:String>
     <v:String x:Key="tgl16_confidentiality">Windows 이벤트 «로깅»</v:String>
-    <v:String x:Key="tgl17_confidentiality">NVIDIA 원격 분석 추적</v:String>
+    <v:String x:Key="tgl17_confidentiality">NVIDIA 텔레메트리 수집 및 모니터링</v:String>
     <v:String x:Key="tgl18_confidentiality">사용자 행동 기록 유지</v:String>
 
     <v:String x:Key="TglButton1_description_confidentiality">Windows는 사용자의 작업을 추적하기 위해 각 사용자에 대해 고유한 광고 식별자를 만듭니다. 이 식별자는 응용 프로그램 개발자와 Windows 자체에서 응용 프로그램에서 특정 광고를 제공하는 등 자체 목적을 위해 사용됩니다.</v:String>
@@ -142,19 +142,19 @@
     <v:String x:Key="TglButton3_description_confidentiality">원격 분석( 진단 데이터)은 Windows가 Microsoft 서버로 보내기 위해 자동으로 수집하는 데이터, 즉 간단히 말해 “무엇? 어디서?  왜 그리고 언제 사용하는가?"에 대한 정보입니다. Microsoft는 이 데이터가 비개인화되어 있으며 회사의 Windows 개발에 도움이 된다고 주장합니다. 정보 수집 사실에 대해 걱정하지 않더라도 프로세서에 과도한 부하가 발생하여 시스템 속도가 느려지는 또 다른 문제가 발생할 수 있습니다.</v:String>
     <v:String x:Key="TglButton4_description_confidentiality">«작업 스케줄러»에는 작업 후 작업에 대한 데이터를 수집하여 Microsoft 서버로 전송하는 서비스가 있습니다.</v:String>
     <v:String x:Key="TglButton5_description_confidentiality">Microsoft는 사용자의 소프트웨어에 대한 데이터를 수집합니다. 이 정보는 Microsoft에서 호환성 문제를 진단하는 데 사용되지만, 이 정보는 Microsoft의 이기적인 목적으로만 사용되므로 새 버전의 Windows에서 호환성을 개선하는 데 도움이 되지 않습니다. 이 기능을 사용하지 않도록 설정하면 잠재적으로 민감한 정보가 전송되지 않습니다.</v:String>
-    <v:String x:Key="TglButton6_description_confidentiality">Microsoft는 사용자의 응용 프로그램 목록만으로는 충분하지 않으며, 이러한 응용 프로그램이나 다른 응용 프로그램을 얼마나 자주 사용하는지, 이 응용 프로그램이나 해당 응용 프로그램에서 작업하는 데 얼마나 많은 시간을 소비하는지 등 이러한 응용 프로그램에서 작업의 성공 여부도 연구합니다.</v:String>
-    <v:String x:Key="TglButton7_description_confidentiality">Windows에 필기와 같은 옵션을 도입한 후 Microsoft는 바로 이 Windows를 사용하는 사람들로부터 학습하여 운영 체제에서 필기 기술을 개선할 수 있다고 결정한 적이 있습니다. 즉, 사용자가 손글씨를 사용하지 않더라도 Microsoft는 기본적으로 손글씨에 대해 알고 있습니다.</v:String>
+    <v:String x:Key="TglButton6_description_confidentiality">이 트윅은 애플리케이션 사용 모니터링 기능을 비활성화하여 사용 빈도, 작업 지속 시간 및 기타 생산성 지표에 대한 데이터 수집을 배제합니다. 이로 인해 시스템은 작업 프로세스 분석을 중단하여 귀하의 기밀 정보를 보호합니다.</v:String>
+    <v:String x:Key="TglButton7_description_confidentiality">이 트윅은 Microsoft가 필기 인식 기술을 향상시키기 위해 사용하는 데이터 수집 메커니즘을 비활성화합니다. 이 기능을 사용하든 사용하지 않든 관계없이, 시스템은 인식 정확도를 높이기 위해 사용자 활동을 추적했습니다. 적용된 변경 사항은 이러한 정보 수집을 방지하여 개인정보 보호에 기여합니다.</v:String>
     <v:String x:Key="TglButton8_description_confidentiality">소프트웨어 품질 개선 프로그램 (CEIP)은 하드웨어 구성과 소프트웨어 및 서비스 사용 방법에 대한 정보를 수집하는 별도의 기능입니다. 또한 이 프로그램은 주기적으로 파일을 다운로드하여 Windows에서 발생할 수 있는 문제에 대한 정보를 수집합니다. 이 프로그램은 자발적으로 참여하며 개인 정보를 침해하는 데이터를 Microsoft에 전송할 필요가 없습니다.</v:String>
-    <v:String x:Key="TglButton9_description_confidentiality">Microsoft는 사용자 정보를 수집하여 서버로 보냅니다. 이 조정은 호스트 및 방화벽 파일에 스파이웨어 도메인 이름을 추가합니다.</v:String>
-    <v:String x:Key="TglButton10_description_confidentiality">Microsoft Windows는 사용자의 위치를 수신하고 이 정보를 광고 목적으로 사용합니다.</v:String>
-    <v:String x:Key="TglButton11_description_confidentiality">«피드백»을 사용하지 않더라도 Microsoft는 공식 지원팀에 통화하는 빈도를 등록합니다.</v:String>
-    <v:String x:Key="TglButton12_description_confidentiality">Microsoft Windows는 특수 음성 인식 및 음성 합성 모듈로 음성을 인식할 수 있습니다. Cortana 또는 Windows 접근성 기능을 사용하지 않더라도 운영 체제는 기본적으로 음성 인식 엔진의 업데이트를 항상 확인합니다.</v:String>
+    <v:String x:Key="TglButton9_description_confidentiality">이 트윅은 hosts 파일에서 특정 도메인 이름 앞에 0.0.0.0 주소를 추가하여 해당 도메인들을 효과적으로 차단합니다. 또한 Microsoft 데이터 수집 서비스와 관련된 여러 IP 주소로의 연결을 차단하도록 Windows 방화벽 설정을 변경합니다.</v:String>
+    <v:String x:Key="TglButton10_description_confidentiality">위치 기반 서비스를 비활성화하면 광고 목적으로 위치 정보를 활용할 가능성이 크게 줄어듭니다 – 이 정보에 대한 접근은 Microsoft 서비스뿐만 아니라 모든 서드파티 애플리케이션과 스크립트에 대해서도 제한됩니다.</v:String>
+    <v:String x:Key="TglButton11_description_confidentiality">이 트윅은 Windows에서 피드백 및 관련 알림의 수집을 차단하여 귀하의 동의 없이 데이터가 전송되는 것을 방지합니다. 또한, «피드백» 기능을 사용하지 않더라도 Microsoft는 공식 지원에 연락하는 빈도를 기록합니다.</v:String>
+    <v:String x:Key="TglButton12_description_confidentiality">Windows는 전용 음성 인식 및 합성 모듈을 통해 음성을 인식할 수 있습니다. Cortana 또는 «접근성»을 사용하지 않더라도, 운영 체제는 기본적으로 음성 인식 엔진 업데이트를 항상 확인합니다.</v:String>
     <v:String x:Key="TglButton13_description_confidentiality">모든 사용자 데이터에 액세스할 수 있는 기능입니다. Microsoft 서버와 일부 정보를 교환하며 운영 체제 또는 애플리케이션의 작동에 어떤 영향도 미치지 않습니다. 어떤 식으로든 사용자에게 도움이 되지 않으므로 쓸모가 없습니다.</v:String>
     <v:String x:Key="TglButton14_description_confidentiality">Microsoft는 Windows 사용자를 대상으로 정기적으로 실험을 수행하여 기능이 널리 사용되는지, 기능을 변경하면 더 유용해지는지 여부를 확인합니다. 하지만 이는 기밀을 침해하는 행위입니다.</v:String>
     <v:String x:Key="TglButton15_description_confidentiality">DiagTrack, dmwappushservice 및 diagsvc 서비스는 키로거로 작동하여 사용자 활동, 키 입력 등을 모두 기록하고 사용자 동의 없이 이 데이터를 Microsoft 서버로 전송합니다. UWF (Unified Write Filter)를 사용할 때 시스템의 안정적인 동작은 dmwappushservice 서비스에 의존합니다. 그러나 그것이 무엇인지 잘 모르거나 대체 도구가 있다면, 이러한 키로거를 제거하는 것이 좋습니다.</v:String>
     <v:String x:Key="TglButton16_description_confidentiality">시스템 진단 정보를 수집하고 처리하여 컴퓨터의 리소스를 낭비하는 이벤트 로그입니다. 이 서비스는 좋은 것을 제공하지 않으므로 비활성화하는 것이 좋으므로 기밀 정보 전송을 방지할 수 있습니다.</v:String>
     <v:String x:Key="TglButton17_description_confidentiality">시스템 및 사용에 대한 데이터 수집 및 전송을 담당하는 서비스 또는 비디오 드라이버의 작동과 관련이 없는 기능은 쓸모가 없습니다. NVIDIA가 수집하는 이유와 정보의 종류는 자체적으로만 알려져 있습니다. 그러나 이것이 최종 사용자에게 유용한 것이 없다는 사실은 분명합니다.</v:String>
-    <v:String x:Key="TglButton18_description_confidentiality">사용자 활동 추적 도구에는 한계가 없습니다. Windows에는 스크린샷 찍기, 타이핑, 프로그램 실행, 잠긴 화면에서 웹캠 액세스 등 컴퓨터에서 수행하는 작업을 단계별로 기록하도록 설계된 또 다른 서비스인 UAR이 있습니다.</v:String>
+    <v:String x:Key="TglButton18_description_confidentiality">이 트윅은 UAR (User Activity Recording) 기능을 비활성화합니다 – 스크린샷 촬영, 텍스트 입력, 프로그램 실행, 화면이 잠긴 상태에서도 웹캠 접근 제공 등 컴퓨터에서 발생하는 모든 행동을 순차적으로 기록하는 시스템입니다.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
