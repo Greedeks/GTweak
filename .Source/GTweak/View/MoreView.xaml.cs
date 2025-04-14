@@ -63,18 +63,23 @@ namespace GTweak.View
             if (folderDialog.ShowDialog() == true)
             {
                 string selectedPath = folderDialog.SelectedPath;
-                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
+                if (NTFSCompressor.IsSupportNtfs(selectedPath))
                 {
-                    BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate
+                    if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
                     {
-                        try { NTFSCompressor.SetCompression(selectedPath, true); }
-                        catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
-                    });
-                    await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_compression_notification"); });
+                        BackgroundQueue backgroundQueue = new BackgroundQueue();
+                        await backgroundQueue.QueueTask(delegate
+                        {
+                            try { NTFSCompressor.SetCompression(selectedPath, true); }
+                            catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
+                        });
+                        await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_compression_notification"); });
+                    }
+                    else
+                        new ViewNotification().Show("", "info", "ready_compression_notification");
                 }
                 else
-                    new ViewNotification().Show("", "info", "ready_compression_notification");
+                    new ViewNotification().Show("", "warn", "notsupport_ntfs_notification");
 
             }
         }
@@ -85,19 +90,24 @@ namespace GTweak.View
             if (folderDialog.ShowDialog() == true)
             {
                 string selectedPath = folderDialog.SelectedPath;
-                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
+                if (NTFSCompressor.IsSupportNtfs(selectedPath))
                 {
-                    BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate
+                    if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
                     {
-                        try { NTFSCompressor.SetCompression(selectedPath, false); }
-                        catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
+                        BackgroundQueue backgroundQueue = new BackgroundQueue();
+                        await backgroundQueue.QueueTask(delegate
+                        {
+                            try { NTFSCompressor.SetCompression(selectedPath, false); }
+                            catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
 
-                    });
-                    await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_decompression_notification"); });
+                        });
+                        await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_decompression_notification"); });
+                    }
+                    else
+                        new ViewNotification().Show("", "info", "ready_decompression_notification");
                 }
                 else
-                    new ViewNotification().Show("", "info", "ready_decompression_notification");
+                    new ViewNotification().Show("", "warn", "notsupport_ntfs_notification");
             }
         }
     }
