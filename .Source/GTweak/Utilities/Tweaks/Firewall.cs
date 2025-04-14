@@ -37,7 +37,7 @@ namespace GTweak.Utilities.Tweaks
             return isCheck;
         }
 
-        protected static void BlockWindowsUpdate(bool isChoose)
+        protected static void BlockWindowsUpdate(bool isDisabled)
         {
             try
             {
@@ -48,19 +48,19 @@ namespace GTweak.Utilities.Tweaks
                 },
                 executableFiles =>
                 {
-                    ChangeRules(isChoose, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN);
-                    ChangeRules(isChoose, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
+                    ChangeRules(isDisabled, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN);
+                    ChangeRules(isDisabled, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
                 });
             }
             catch { new ViewNotification().Show("", "warn", "firewalloff_notification"); }
         }
 
 
-        private static void ChangeRules(bool isChoose, string pathProgram, string nameRule, NET_FW_RULE_DIRECTION_ direction, string description = "Windows update blocking")
+        private static void ChangeRules(bool isDisabled, string pathProgram, string nameRule, NET_FW_RULE_DIRECTION_ direction, string description = "Windows update blocking")
         {
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
 
-            if (isChoose)
+            if (isDisabled)
             {
                 if (CheckRulesWindows(nameRule))
                     firewallPolicy.Rules.Remove(nameRule);
@@ -80,13 +80,13 @@ namespace GTweak.Utilities.Tweaks
                 firewallPolicy.Rules.Remove(nameRule);
         }
 
-        protected static void BlockSpyDomain(in bool isChoose)
+        protected static void BlockSpyDomain(in bool isDisabled)
         {
-            try { RulesHosts(isChoose); }
+            try { RulesHosts(isDisabled); }
             catch { new ViewNotification().Show("", "warn", "firewalloff_notification"); }
         }
 
-        private static void RulesHosts(in bool isChoose)
+        private static void RulesHosts(in bool isDisabled)
         {
             INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
             INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
@@ -115,7 +115,7 @@ namespace GTweak.Utilities.Tweaks
             firewallRule.InterfaceTypes = "All";
             firewallRule.Name = _nameRules["Domain"];
 
-            if (isChoose)
+            if (isDisabled)
             {
                 if (CheckRulesWindows(_nameRules["Domain"]))
                     firewallPolicy.Rules.Remove(_nameRules["Domain"]);
@@ -125,9 +125,9 @@ namespace GTweak.Utilities.Tweaks
                 firewallPolicy.Rules.Remove(_nameRules["Domain"]);
         }
 
-        protected static void BlockWDefender(bool isChoose)
+        protected static void BlockWDefender(bool isDisabled)
         {
-            try { Parallel.Invoke(() => { ChangeRules(isChoose, _сollectExecutablePaths["WD"], _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
+            try { Parallel.Invoke(() => { ChangeRules(isDisabled, _сollectExecutablePaths["WD"], _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
     }

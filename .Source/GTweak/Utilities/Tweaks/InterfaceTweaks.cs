@@ -170,53 +170,53 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "1");
         }
 
-        internal static void ApplyTweaks(string tweak, bool isChoose)
+        internal static void ApplyTweaks(string tweak, bool isDisabled)
         {
-            INIManager.TempWrite(INIManager.TempTweaksIntf, tweak, isChoose);
+            INIManager.TempWrite(INIManager.TempTweaksIntf, tweak, isDisabled);
 
             switch (tweak)
             {
                 case "TglButton1":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "Hilight", isChoose ? "80 80 80" : "0 120 215", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "HotTrackingColor", isChoose ? "80 80 80" : "0 102 204", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "Hilight", isDisabled ? "80 80 80" : "0 120 215", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "HotTrackingColor", isDisabled ? "80 80 80" : "0 102 204", RegistryValueKind.String);
                     break;
                 case "TglButton2":
-                    RegistryHelp.Write(Registry.Users, @".DEFAULT\Control Panel\Colors", "InfoWindow", isChoose ? "240 255 255" : "255 255 255", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.Users, @"S-1-5-19\Control Panel\Colors", "InfoWindow", isChoose ? "240 255 255" : "255 255 255", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.Users, @"S-1-5-20\Control Panel\Colors", "InfoWindow", isChoose ? "240 255 255" : "255 255 255", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.Users, @".DEFAULT\Control Panel\Colors", "InfoWindow", isDisabled ? "240 255 255" : "255 255 255", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.Users, @"S-1-5-19\Control Panel\Colors", "InfoWindow", isDisabled ? "240 255 255" : "255 255 255", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.Users, @"S-1-5-20\Control Panel\Colors", "InfoWindow", isDisabled ? "240 255 255" : "255 255 255", RegistryValueKind.String);
                     break;
                 case "TglButton3":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "CaptionHeight", isChoose ? "-270" : "-330", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "CaptionWidth", isChoose ? "-270" : "-330", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "CaptionHeight", isDisabled ? "-270" : "-330", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "CaptionWidth", isDisabled ? "-270" : "-330", RegistryValueKind.String);
                     break;
                 case "TglButton4":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "CursorBlinkRate", isChoose ? "200" : "530", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "CursorBlinkRate", isDisabled ? "200" : "530", RegistryValueKind.String);
                     break;
                 case "TglButton5":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "ScrollHeight", isChoose ? "-210" : "-255", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "ScrollWidth", isChoose ? "-210" : "-255", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "ScrollHeight", isDisabled ? "-210" : "-255", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "ScrollWidth", isDisabled ? "-210" : "-255", RegistryValueKind.String);
                     break;
                 case "TglButton6":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton7":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", isChoose ? 1 : 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton8":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", isChoose ? 1 : 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton9":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "MenuShowDelay", isChoose ? "20" : "400", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "MenuShowDelay", isDisabled ? "20" : "400", RegistryValueKind.String);
                     break;
                 case "TglButton10":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseHoverTime", isChoose ? "20" : "400", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseHoverTime", isDisabled ? "20" : "400", RegistryValueKind.String);
                     break;
                 case "TglButton11":
                     try
                     {
                         Task.Run(delegate
                         {
-                            if (isChoose)
+                            if (isDisabled)
                             {
                                 new UnarchiveManager(StoragePaths.IconBlank, Properties.Resources.Blank);
                                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
@@ -231,41 +231,41 @@ namespace GTweak.Utilities.Tweaks
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     break;
                 case "TglButton12":
-                    if (isChoose)
+                    if (isDisabled)
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "link", Encoding.Unicode.GetBytes("\0\0"), RegistryValueKind.Binary);
                     else
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "link");
                     break;
                 case "TglButton13":
-                    if (isChoose)
+                    if (isDisabled)
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}");
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton14":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", isChoose ? 1 : 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton15":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton16":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", isChoose ? 1 : 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton17":
-                    if (isChoose)
+                    if (isDisabled)
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", "", "", RegistryValueKind.String);
                     else
                         RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}");
                     break;
                 case "TglButton18":
-                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement", "ScoobeSystemSettingEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement", "ScoobeSystemSettingEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton19":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton20":
-                    if (isChoose)
+                    if (isDisabled)
                     {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "DefaultBrowserSettingsCampaignEnabled", 0, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", 0, RegistryValueKind.DWord);
@@ -287,21 +287,21 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton21":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton22":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
                     if (SystemDiagnostics.IsWindowsVersion[11])
                     {
                         TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Copilot*.lnk""");
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCopilotButton", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCopilotButton", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
-                        if (isChoose && SystemDiagnostics.HardwareData.OSBuild.CompareTo("22635.3785") >= 0)
+                        if (isDisabled && SystemDiagnostics.HardwareData.OSBuild.CompareTo("22635.3785") >= 0)
                         {
                             RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{2cc5ca98-6485-489a-920e-b3e88a6ccce3}");
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{2cc5ca98-6485-489a-920e-b3e88a6ccce3}", 1, RegistryValueKind.DWord);
@@ -315,7 +315,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else if (SystemDiagnostics.IsWindowsVersion[10])
                     {
-                        if (isChoose)
+                        if (isDisabled)
                         {
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Feeds", "EnableFeeds", 0, RegistryValueKind.DWord);
@@ -327,49 +327,49 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Feeds");
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests");
                         }
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Feeds", "ShellFeedsTaskbarViewMode", isChoose ? 2 : 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCortanaButton", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Feeds", "ShellFeedsTaskbarViewMode", isDisabled ? 2 : 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCortanaButton", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     }
                     break;
                 case "TglButton23":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353696Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353694Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353696Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353694Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
                     if (SystemDiagnostics.IsWindowsVersion[10])
                     {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SilentInstalledAppsEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SystemPaneSuggestionsEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353696Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353694Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338393Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SilentInstalledAppsEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SystemPaneSuggestionsEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353696Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-353694Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338393Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     }
 
                     if (SystemDiagnostics.IsWindowsVersion[11])
                     {
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSyncProviderNotifications", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_AccountNotifications", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_IrisRecommendations", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenOverlayEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338387Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSyncProviderNotifications", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_AccountNotifications", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_IrisRecommendations", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenOverlayEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "RotatingLockScreenEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338387Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     }
                     break;
                 case "TglButton24":
-                    if (isChoose)
+                    if (isDisabled)
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers");
                     else
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton25":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
                     if (SystemDiagnostics.IsWindowsVersion[10])
                     {
-                        if (isChoose)
+                        if (isDisabled)
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter", 1, RegistryValueKind.DWord);
                         else
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter");
@@ -377,12 +377,12 @@ namespace GTweak.Utilities.Tweaks
 
                     if (SystemDiagnostics.IsWindowsVersion[11])
                     {
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338389Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     }
                     break;
                 case "TglButton26":
-                    if (isChoose)
+                    if (isDisabled)
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}");
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}");
@@ -403,7 +403,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton27":
-                    if (isChoose)
+                    if (isDisabled)
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
@@ -414,25 +414,25 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
                     }
 
-                    CommandExecutor.RunCommand(isChoose ? @"/c rd /s /q ""%userprofile%\3D Objects""" : @"/c mkdir ""%userprofile%\3D Objects""");
+                    CommandExecutor.RunCommand(isDisabled ? @"/c rd /s /q ""%userprofile%\3D Objects""" : @"/c mkdir ""%userprofile%\3D Objects""");
                     break;
                 case "TglButton28":
-                    if (isChoose)
+                    if (isDisabled)
                         RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "JPEGImportQuality", 100, RegistryValueKind.DWord);
                     else
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Control Panel\Desktop", "JPEGImportQuality");
                     break;
                 case "TglButton29":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", isChoose ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton30":
-                    if (isChoose)
+                    if (isDisabled)
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", 1, RegistryValueKind.DWord);
                     else
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer");
                     break;
                 case "TglButton31":
-                    if (isChoose)
+                    if (isDisabled)
                     {
                         if (SystemDiagnostics.IsWindowsVersion[11])
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", 1, RegistryValueKind.DWord);
@@ -448,7 +448,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton32":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", isChoose ? 1 : 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
 
             }

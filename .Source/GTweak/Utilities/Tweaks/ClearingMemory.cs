@@ -182,6 +182,7 @@ namespace GTweak.Utilities.Tweaks
                 $@"rd /s /q {StoragePaths.SystemDisk}Windows\CbsTemp\* & rd /s /q {StoragePaths.SystemDisk}Windows\System32\SleepStudy\* & " +
                 $@"rd /s /q {StoragePaths.SystemDisk}Users\%USERNAME%\AppData\Local\Microsoft\Windows\INetCache\IE\* & rd /s /q {StoragePaths.SystemDisk}Windows\Downloaded Program Files\* & " +
                 $@"del /f /q {StoragePaths.SystemDisk}Windows\setupapi.log & rd /s /q {StoragePaths.SystemDisk}Windows\Panther\* & " +
+                $@"for /D %D in (""{StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\WER\*"") do (del /s /q ""%D\*.*"" & for /D %E in (""%D\*"") do rd /s /q ""%E"") & " +
                 $@"del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.app.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.dev.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.offline.log");
 
             ExplorerManager.Restart(new Process(), async () =>
