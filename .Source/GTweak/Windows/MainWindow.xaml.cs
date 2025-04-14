@@ -92,18 +92,7 @@ namespace GTweak
 
         private void ButtonMinimized_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => WindowState = WindowState.Minimized;
 
-        private void ButtonExit_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            switch (SystemTweaks.isTweakWorkingAntivirus)
-            {
-                case false:
-                    Close();
-                    break;
-                case true:
-                    new ViewNotification().Show("", "warn", "windefclose_notification");
-                    break;
-            }
-        }
+        private void ButtonExit_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Close();
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {

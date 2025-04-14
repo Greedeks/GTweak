@@ -3,12 +3,13 @@ using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Tweaks;
 using GTweak.Windows;
+using Ookii.Dialogs.Wpf;
 using System;
-using System.Windows.Controls;
+using System.IO;
 
 namespace GTweak.View
 {
-    public partial class MoreView : UserControl
+    public partial class MoreView
     {
         public MoreView()
         {
@@ -42,7 +43,7 @@ namespace GTweak.View
 
         private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
 
-        private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.DisableDefrag();
+        private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.SetDefragState(false);
 
         private async void BtnDisableRecovery_ClickButton(object sender, EventArgs e)
         {
@@ -52,6 +53,52 @@ namespace GTweak.View
                 try { SystemMaintenance.DisableRestorePoint(); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });
             await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "disable_recovery_notification"); });
+        }
+
+        private void BtnEnableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.SetDefragState(true);
+
+        private async void BtnCompression_ClickButton(object sender, EventArgs e)
+        {
+            VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog();
+            if (folderDialog.ShowDialog() == true)
+            {
+                string selectedPath = folderDialog.SelectedPath;
+                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
+                {
+                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    await backgroundQueue.QueueTask(delegate
+                    {
+                        try { NTFSCompressor.SetCompression(selectedPath, true); }
+                        catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
+                    });
+                    await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_compression_notification"); });
+                }
+                else
+                    new ViewNotification().Show("", "info", "ready_compression_notification");
+
+            }
+        }
+
+        private async void BtnDecompression_ClickButton(object sender, EventArgs e)
+        {
+            VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog();
+            if (folderDialog.ShowDialog() == true)
+            {
+                string selectedPath = folderDialog.SelectedPath;
+                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
+                {
+                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    await backgroundQueue.QueueTask(delegate
+                    {
+                        try { NTFSCompressor.SetCompression(selectedPath, false); }
+                        catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
+
+                    });
+                    await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_decompression_notification"); });
+                }
+                else
+                    new ViewNotification().Show("", "info", "ready_decompression_notification");
+            }
         }
     }
 }

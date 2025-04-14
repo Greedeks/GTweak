@@ -38,34 +38,40 @@
     <v:String x:Key="title_info_notification">Information</v:String>
     <v:String x:Key="logout_notification">An exit is required, click on this text to produce it</v:String>
     <v:String x:Key="restart_notification">A reboot is required, click on this text to perform it</v:String>
+    <v:String x:Key="warn_update_notification">An error occurred during the program update, please try again later</v:String>
+    <v:String x:Key="import_warning_notification">This file is not suitable for import</v:String>
+    <v:String x:Key="import_empty_notification">This file is empty, the application of tweaks is not possible</v:String>
+    <v:String x:Key="export_warning_notification">It doesn't make sense, apply at least one tweak first</v:String>
     <v:String x:Key="onedrive_notification">The OneDrive recovery process has started, it will take some time</v:String>
     <v:String x:Key="appsdelete_notification">The application removal process has started, it will take some time</v:String>
+    <v:String x:Key="windefender_notification">The process will take some time, please wait a bit</v:String>
+    <v:String x:Key="firewalloff_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
     <v:String x:Key="viewlicense_notification">To start - activate Windows. Not all tweaks can be applied</v:String>
-    <v:String x:Key="createpoint_notification">It will take some time to create a recovery point</v:String>
-    <v:String x:Key="notsuccessfulpoint_notification">Something went wrong, it was not possible to create a restore point</v:String>
-    <v:String x:Key="successpoint_notification">The recovery point has been successfully created</v:String>
-    <v:String x:Key="notsuccessfulrecovery_notification">Something went wrong, recovery could not be started</v:String>
     <v:String x:Key="readyactivate_notification">Your operating system does not need to be activated</v:String>
     <v:String x:Key="activatewin_notification">The Windows activation process has started, it will take some time</v:String>
     <v:String x:Key="successactivate_notification">Activation was successful, a reboot is recommended</v:String>
     <v:String x:Key="notsuccessactivate_notification">Something went wrong, unfortunately it was not possible to activate the system</v:String>
-    <v:String x:Key="windefender_notification">The process will take some time, please wait a bit</v:String>
-    <v:String x:Key="warningwindef_notification">You will not be able to turn Windows Defender on and off at the same time</v:String>
-    <v:String x:Key="windefclose_notification">Wait for the end of the operation with Windows Defender</v:String>
-    <v:String x:Key="firewalloff_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
-    <v:String x:Key="clearingcache_notification">The system file cache has been cleared</v:String>
-    <v:String x:Key="import_warning_notification">This file is not suitable for import</v:String>
-    <v:String x:Key="import_empty_notification">This file is empty, the application of tweaks is not possible</v:String>
-    <v:String x:Key="export_warning_notification">It doesn't make sense, apply at least one tweak first</v:String>
-    <v:String x:Key="clear_ram_notification">Short-term memory and temporary files have been cleared</v:String>
-    <v:String x:Key="disable_recovery_notification">System recovery is disabled, recovery points are unavailable</v:String>
-    <v:String x:Key="warndisable_recovery_notification">You have already disabled the recovery system</v:String>
-    <v:String x:Key="warn_update_notification">An error occurred during the program update, please try again later</v:String>
-    <v:String x:Key="warn_defrag_notification">You have already disabled disk defragmentation</v:String>
-    <v:String x:Key="error_defrag_notification">Something went wrong, defragmentation could not be disabled.</v:String>
-    <v:String x:Key="success_defrag_notification">Defragmentation has been successfully disabled for your drive</v:String>
     <v:String x:Key="networklicense_notification">An internet connection is required for activation</v:String>
     <v:String x:Key="keynotfound_notification">The key for your Windows edition is missing; activation canceled</v:String>
+    <v:String x:Key="createpoint_notification">It will take some time to create a recovery point</v:String>
+    <v:String x:Key="notsuccessfulpoint_notification">Something went wrong, it was not possible to create a restore point</v:String>
+    <v:String x:Key="successpoint_notification">The recovery point has been successfully created</v:String>
+    <v:String x:Key="notsuccessfulrecovery_notification">Something went wrong, recovery could not be started</v:String>
+    <v:String x:Key="disable_recovery_notification">System recovery is disabled, recovery points are unavailable</v:String>
+    <v:String x:Key="warndisable_recovery_notification">You have already disabled the recovery system</v:String>
+    <v:String x:Key="clearingcache_notification">The system file cache has been cleared</v:String>
+    <v:String x:Key="clear_ram_notification">Short-term memory and temporary files have been cleared</v:String>
+    <v:String x:Key="warn_defrag_off_notification">You have already disabled disk defragmentation</v:String>
+    <v:String x:Key="warn_defrag_on_notification">Disk defragmentation is already enabled</v:String>
+    <v:String x:Key="error_defrag_notification">Something went wrong, failed to change the defragmentation state</v:String>
+    <v:String x:Key="success_defrag_off_notification">Defragmentation has been successfully disabled for your drive</v:String>
+    <v:String x:Key="success_defrag_on_notification">Defragmentation of your disk was successfully enabled</v:String>
+    <v:String x:Key="succes_compression_notification">Compression of the directory and its contents was successful</v:String>
+    <v:String x:Key="succes_decompression_notification">Decompression of the directory and its contents was successful</v:String>
+    <v:String x:Key="ready_compression_notification">The directory is already compressed, no further compression is required</v:String>
+    <v:String x:Key="ready_decompression_notification">The directory is already decompressed, no further operation is required</v:String>
+    <v:String x:Key="error_compression_notification">Something went wrong, there was an error in changing the compression state</v:String>
+    <v:String x:Key="notsupport_ntfs_notification">The operation is unavailable because the directory is not located on an NTFS partition</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -447,8 +453,16 @@
     <v:String x:Key="title_disablepoint_more">Disable protection</v:String>
     <v:String x:Key="text_disablepoint_more">Disables the system restore point, but note that previously created ones are deleted.</v:String>
     <v:String x:Key="btntext_disable_more">Disable</v:String>
-    <v:String x:Key="title_defrag_more">Defragmentation</v:String>
-    <v:String x:Key="text_defrag_more">Disables defragmentation, extending the life of your SSD, saving it from unnecessary writes.</v:String>
+    <v:String x:Key="btntext_enable_more">Enable</v:String>
+    <v:String x:Key="title_defrag_off_more">Disable defragmentation</v:String>
+    <v:String x:Key="text_defrag_off_more">Disables defragmentation, extending the life of your SSD, saving it from unnecessary writes.</v:String>
+    <v:String x:Key="title_defrag_on_more">Enable defragmentation</v:String>
+    <v:String x:Key="text_defrag_on_more">Enables defragmentation that reorganizes files and works effectively only on HDD.</v:String>
+    <v:String x:Key="title_compression_more">NTFS Compression</v:String>
+    <v:String x:Key="text_compression_more">Compresses files using NTFS, effectively reducing their size, especially for text data.</v:String>
+    <v:String x:Key="title_decompression_more">NTFS Decompression</v:String>
+    <v:String x:Key="text_decompression_more">Disables NTFS compression, returning files to their original state for fast access.</v:String>
+    <v:String x:Key="btntext_overview_more">Overview</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

@@ -38,34 +38,40 @@
     <v:String x:Key="title_info_notification">Інформація</v:String>
     <v:String x:Key="logout_notification">Потрібно вийти з системи. Натисніть на цей текст, щоб зробити це</v:String>
     <v:String x:Key="restart_notification">Потрібно перезавантажити комп'ютер. Натисніть на цей текст, щоб зробити це</v:String>
+    <v:String x:Key="import_warning_notification">Цей файл не підходить для імпорту</v:String>
+    <v:String x:Key="import_empty_notification">Цей файл порожній, використання налаштувань неможливе</v:String>
+    <v:String x:Key="export_warning_notification">Це не має сенсу, спочатку застосуйте принаймні одне налаштування</v:String>
+    <v:String x:Key="warn_update_notification">Під час оновлення програми виникла помилка, повторіть спробу пізніше</v:String>
     <v:String x:Key="onedrive_notification">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
     <v:String x:Key="appsdelete_notification">Розпочато процес видалення додатків, на це потрібен деякий час</v:String>
+    <v:String x:Key="windefender_notification">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
+    <v:String x:Key="firewalloff_notification">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
     <v:String x:Key="viewlicense_notification">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
-    <v:String x:Key="createpoint_notification">Для створення точки відновлення потрібен певний час</v:String>
-    <v:String x:Key="notsuccessfulpoint_notification">Щось не так, не вдалося створити точку відновлення</v:String>
-    <v:String x:Key="successpoint_notification">Точку відновлення успішно створено</v:String>
-    <v:String x:Key="notsuccessfulrecovery_notification">Щось не так, не вдалося запустити відновлення</v:String>
     <v:String x:Key="readyactivate_notification">Ваша операційна система не потребує активації</v:String>
     <v:String x:Key="activatewin_notification">Розпочато процес активації Windows, на це потрібен деякий час</v:String>
     <v:String x:Key="successactivate_notification">Операційну систему успішно активовано, рекомендовано перезавантажити комп'ютер</v:String>
     <v:String x:Key="notsuccessactivate_notification">Щось не так, не вдалося активувати систему</v:String>
-    <v:String x:Key="windefender_notification">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
-    <v:String x:Key="warningwindef_notification">Неможливо одночасно вмикати та вимикати Захисник Windows</v:String>
-    <v:String x:Key="windefclose_notification">Дочекайтеся завершення операції із Захисником Windows</v:String>
-    <v:String x:Key="firewalloff_notification">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
-    <v:String x:Key="clearingcache_notification">Виконано очищення системного кешу файлів</v:String>
-    <v:String x:Key="import_warning_notification">Цей файл не підходить для імпорту</v:String>
-    <v:String x:Key="import_empty_notification">Цей файл порожній, використання налаштувань неможливе</v:String>
-    <v:String x:Key="export_warning_notification">Це не має сенсу, спочатку застосуйте принаймні одне налаштування</v:String>
-    <v:String x:Key="clear_ram_notification">Виконано очищення короткочасної пам'яті та тимчасових файлів</v:String>
-    <v:String x:Key="disable_recovery_notification">Відновлення системи вимкнено, точки відновлення недоступні</v:String>
-    <v:String x:Key="warndisable_recovery_notification">У вас вже вимкнено систему відновлення</v:String>
-    <v:String x:Key="warn_update_notification">Під час оновлення програми виникла помилка, повторіть спробу пізніше</v:String>
-    <v:String x:Key="warn_defrag_notification">У вас вже вимкнено дефрагментацію дисків</v:String>
-    <v:String x:Key="error_defrag_notification">Щось не так, не вдалося вимкнути дефрагментацію</v:String>
-    <v:String x:Key="success_defrag_notification">Дефрагментацію ваших дисків успішно вимкнено</v:String>
     <v:String x:Key="networklicense_notification">Для активації потрібне підключення до Інтернету</v:String>
     <v:String x:Key="keynotfound_notification">Ключ для вашої редакції Windows відсутній, активація скасована</v:String>
+    <v:String x:Key="createpoint_notification">Для створення точки відновлення потрібен певний час</v:String>
+    <v:String x:Key="notsuccessfulpoint_notification">Щось не так, не вдалося створити точку відновлення</v:String>
+    <v:String x:Key="successpoint_notification">Точку відновлення успішно створено</v:String>
+    <v:String x:Key="notsuccessfulrecovery_notification">Щось не так, не вдалося запустити відновлення</v:String>
+    <v:String x:Key="disable_recovery_notification">Відновлення системи вимкнено, точки відновлення недоступні</v:String>
+    <v:String x:Key="warndisable_recovery_notification">У вас вже вимкнено систему відновлення</v:String>
+    <v:String x:Key="clearingcache_notification">Виконано очищення системного кешу файлів</v:String>
+    <v:String x:Key="clear_ram_notification">Виконано очищення короткочасної пам'яті та тимчасових файлів</v:String>
+    <v:String x:Key="warn_defrag_off_notification">У вас вже вимкнено дефрагментацію дисків</v:String>
+    <v:String x:Key="warn_defrag_on_notification">ефрагментація диска вже увімкнена</v:String>
+    <v:String x:Key="error_defrag_notification">Щось пішло не так, не вдалося змінити стан дефрагментації</v:String>
+    <v:String x:Key="success_defrag_off_notification">Дефрагментацію ваших дисків успішно вимкнено</v:String>
+    <v:String x:Key="success_defrag_on_notification">Дефрагментація диска успішно увімкнена</v:String>
+    <v:String x:Key="succes_compression_notification">Стиснення каталогу та його вмісту пройшло успішно</v:String>
+    <v:String x:Key="succes_decompression_notification">Декомпресія каталогу та його вмісту пройшла успішно</v:String>
+    <v:String x:Key="ready_compression_notification">Каталог уже стиснутий, повторне стиснення не потрібне</v:String>
+    <v:String x:Key="ready_decompression_notification">Каталог уже декомпресований, повторна операція не потрібна</v:String>
+    <v:String x:Key="error_compression_notification">Щось пішло не так, сталася помилка при зміні стану стиснення</v:String>
+    <v:String x:Key="notsupport_ntfs_notification">Операція недоступна, оскільки каталог не знаходиться на NTFS-розділі</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -447,8 +453,16 @@
     <v:String x:Key="title_disablepoint_more">Вимкнення захисту</v:String>
     <v:String x:Key="text_disablepoint_more">Вимкнення створення точок відновлення системи. Увага, також видаляються раніше створені точки.</v:String>
     <v:String x:Key="btntext_disable_more">Вимкнути</v:String>
-    <v:String x:Key="title_defrag_more">Дефрагментація</v:String>
-    <v:String x:Key="text_defrag_more">Вимкнення дефрагментації дисків збільшує термін служби SSD за рахунок зменшення операцій запису.</v:String>
+    <v:String x:Key="btntext_enable_more">Увімкнути</v:String>
+    <v:String x:Key="title_defrag_off_more">Вимкнути дефрагментацію</v:String>
+    <v:String x:Key="text_defrag_off_more">Вимкнення дефрагментації дисків збільшує термін служби SSD за рахунок зменшення операцій запису.</v:String>
+    <v:String x:Key="title_defrag_on_more">Увімкнути дефрагментацію</v:String>
+    <v:String x:Key="text_defrag_on_more">Увімкнює дефрагментацію, яка реорганізує файли і ефективно працює лише на HDD.</v:String>
+    <v:String x:Key="title_compression_more">Стиснення NTFS</v:String>
+    <v:String x:Key="text_compression_more">Стискає файли за допомогою NTFS, ефективно зменшуючи їх розмір, особливо для текстових даних.</v:String>
+    <v:String x:Key="title_decompression_more">Декомпресія NTFS</v:String>
+    <v:String x:Key="text_decompression_more">Відключає стиснення NTFS, повертаючи файли у первинний стан для швидкого доступу.</v:String>
+    <v:String x:Key="btntext_overview_more">Огляд</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

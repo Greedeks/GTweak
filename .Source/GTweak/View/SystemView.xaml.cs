@@ -61,8 +61,6 @@ namespace GTweak.View
                     SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
                     new ViewNotification().Show("", "info", "windefender_notification");
                 }
-                else if (SystemTweaks.isTweakWorkingAntivirus)
-                    new ViewNotification().Show("", "warn", "warningwindef_notification");
             }
         }
 

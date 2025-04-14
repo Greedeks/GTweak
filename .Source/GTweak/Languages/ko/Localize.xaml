@@ -38,34 +38,40 @@
     <v:String x:Key="title_info_notification">정보</v:String>
     <v:String x:Key="logout_notification">종료가 필요합니다. 이 텍스트를 클릭하여 생성하세요</v:String>
     <v:String x:Key="restart_notification">재부팅이 필요합니다. 이 텍스트를 클릭하여 이를 수행합니다</v:String>
+    <v:String x:Key="import_warning_notification">이 파일은 가져오기에 적합하지 않습니다</v:String>
+    <v:String x:Key="import_empty_notification">이 파일은 비어 있으며 조정을 적용할 수 없습니다</v:String>
+    <v:String x:Key="export_warning_notification">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
+    <v:String x:Key="warn_update_notification">프로그램 업데이트 중 오류가 발생했습니다. 나중에 다시 시도하세요</v:String>
     <v:String x:Key="onedrive_notification">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="appsdelete_notification">응용 프로그램 제거 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
+    <v:String x:Key="windefender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
+    <v:String x:Key="firewalloff_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="viewlicense_notification">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
-    <v:String x:Key="createpoint_notification">복구 지점을 생성하는 데 시간이 좀 걸릴 것입니다</v:String>
-    <v:String x:Key="notsuccessfulpoint_notification">문제가 발생하여 복원 지점을 만들 수 없습니다</v:String>
-    <v:String x:Key="successpoint_notification">복구 지점이 성공적으로 생성되었습니다</v:String>
-    <v:String x:Key="notsuccessfulrecovery_notification">문제가 발생하여 복구를 시작할 수 없습니다</v:String>
     <v:String x:Key="readyactivate_notification">운영 체제를 활성화할 필요가 없습니다</v:String>
     <v:String x:Key="activatewin_notification">Windows 정품 인증 프로세스가 시작되었으며 시간이 다소 소요됩니다.</v:String>
     <v:String x:Key="successactivate_notification">활성화에 성공했습니다. 재부팅을 권장합니다</v:String>
     <v:String x:Key="notsuccessactivate_notification">문제가 발생하여 안타깝게도 시스템을 활성화할 수 없습니다</v:String>
-    <v:String x:Key="windefender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
-    <v:String x:Key="warningwindef_notification">Windows Defender를 동시에 켜고 끌 수 없습니다</v:String>
-    <v:String x:Key="windefclose_notification">Windows Defender로 작업이 끝날 때까지 기다립니다</v:String>
-    <v:String x:Key="firewalloff_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
-    <v:String x:Key="clearingcache_notification">시스템 파일 캐시가 지워졌습니다</v:String>
-    <v:String x:Key="import_warning_notification">이 파일은 가져오기에 적합하지 않습니다</v:String>
-    <v:String x:Key="import_empty_notification">이 파일은 비어 있으며 조정을 적용할 수 없습니다</v:String>
-    <v:String x:Key="export_warning_notification">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
-    <v:String x:Key="clear_ram_notification">단기 메모리 및 임시 파일이 지워졌습니다</v:String>
-    <v:String x:Key="disable_recovery_notification">시스템 복구가 비활성화되고 복구 지점을 사용할 수 없습니다</v:String>
-    <v:String x:Key="warndisable_recovery_notification">이미 복구 시스템을 비활성화했습니다</v:String>
-    <v:String x:Key="warn_update_notification">프로그램 업데이트 중 오류가 발생했습니다. 나중에 다시 시도하세요</v:String>
-    <v:String x:Key="warn_defrag_notification">디스크 조각 모음을 이미 비활성화했습니다</v:String>
-    <v:String x:Key="error_defrag_notification">문제가 발생하여 조각 모음을 비활성화할 수 없습니다.</v:String>
-    <v:String x:Key="success_defrag_notification">드라이브에 대해 조각 모음이 성공적으로 비활성화되었습니다</v:String>
     <v:String x:Key="networklicense_notification">An internet connection is required for activation</v:String>
     <v:String x:Key="keynotfound_notification">The key for your Windows edition is missing; activation canceled</v:String>
+    <v:String x:Key="createpoint_notification">복구 지점을 생성하는 데 시간이 좀 걸릴 것입니다</v:String>
+    <v:String x:Key="notsuccessfulpoint_notification">문제가 발생하여 복원 지점을 만들 수 없습니다</v:String>
+    <v:String x:Key="successpoint_notification">복구 지점이 성공적으로 생성되었습니다</v:String>
+    <v:String x:Key="notsuccessfulrecovery_notification">문제가 발생하여 복구를 시작할 수 없습니다</v:String>
+    <v:String x:Key="disable_recovery_notification">시스템 복구가 비활성화되고 복구 지점을 사용할 수 없습니다</v:String>
+    <v:String x:Key="warndisable_recovery_notification">이미 복구 시스템을 비활성화했습니다</v:String>
+    <v:String x:Key="clearingcache_notification">시스템 파일 캐시가 지워졌습니다</v:String>
+    <v:String x:Key="clear_ram_notification">단기 메모리 및 임시 파일이 지워졌습니다</v:String>
+    <v:String x:Key="warn_defrag_off_notification">디스크 조각 모음을 이미 비활성화했습니다</v:String>
+    <v:String x:Key="warn_defrag_on_notification">디스크 조각 모음 기능이 이미 활성화되었습니다</v:String>
+    <v:String x:Key="error_defrag_notification">문제가 발생하여 조각 모음 상태를 변경하지 못했습니다</v:String>
+    <v:String x:Key="success_defrag_off_notification">드라이브에 대해 조각 모음이 성공적으로 비활성화되었습니다</v:String>
+    <v:String x:Key="success_defrag_on_notification">디스크 조각 모음이 성공적으로 활성화되었습니다</v:String>
+    <v:String x:Key="succes_compression_notification">디렉토리와 그 내용물의 압축이 성공적으로 수행되었습니다</v:String>
+    <v:String x:Key="succes_decompression_notification">디렉토리와 그 내용물의 압축 해제가 성공적으로 수행되었습니다</v:String>
+    <v:String x:Key="ready_compression_notification">디렉토리가 이미 압축되어 있어 추가 압축이 필요하지 않습니다</v:String>
+    <v:String x:Key="ready_decompression_notification">디렉토리가 이미 압축 해제되어 있어 추가 작업이 필요하지 않습니다</v:String>
+    <v:String x:Key="error_compression_notification">문제가 발생하여 압축 상태를 변경하는 중 오류가 발생했습니다</v:String>
+    <v:String x:Key="notsupport_ntfs_notification">디렉토리가 NTFS 파티션에 있지 않으므로 작업을 수행할 수 없습니다</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -447,8 +453,16 @@
     <v:String x:Key="title_disablepoint_more">보호 기능 비활성화</v:String>
     <v:String x:Key="text_disablepoint_more">시스템 복원 지점을 비활성화하지만 이전에 생성한 복원 지점은 삭제됩니다.</v:String>
     <v:String x:Key="btntext_disable_more">비활성화</v:String>
-    <v:String x:Key="title_defrag_more">조각 모음</v:String>
-    <v:String x:Key="text_defrag_more">조각 모음을 비활성화하여 SSD의 수명을 연장하고 불필요한 쓰기로부터 저장합니다.</v:String>
+    <v:String x:Key="btntext_enable_more">켜다</v:String>
+    <v:String x:Key="title_defrag_off_more">조각 모음 끄기</v:String>
+    <v:String x:Key="text_defrag_off_more">조각 모음을 비활성화하여 SSD의 수명을 연장하고 불필요한 쓰기로부터 저장합니다.</v:String>
+    <v:String x:Key="title_defrag_on_more">조각 모음 켜기</v:String>
+    <v:String x:Key="text_defrag_on_more">조각 모음을 활성화하여 파일을 재구성하며, 이는 HDD에서만 효과적으로 작동합니다.</v:String>
+    <v:String x:Key="title_compression_more">NTFS 압축</v:String>
+    <v:String x:Key="text_compression_more">NTFS를 사용하여 파일을 압축하여, 특히 텍스트 데이터의 경우 크기를 효과적으로 줄입니다.</v:String>
+    <v:String x:Key="title_decompression_more">NTFS 압축 해제</v:String>
+    <v:String x:Key="text_decompression_more">NTFS 압축을 해제하여 파일을 빠른 접근을 위해 원래 상태로 복원합니다.</v:String>
+    <v:String x:Key="btntext_overview_more">개요</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

@@ -21,23 +21,40 @@ namespace GTweak.Utilities.Tweaks
 
         internal static bool IsSystemRestoreDisabled => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "RPSessionInterval", "0");
 
-        internal static void DisableDefrag()
+        internal static void SetDefragState(bool enable)
         {
-            if (IsTaskEnabled(defragTask))
+            try
             {
-                try
+                if (enable)
                 {
-                    SetTaskStateOwner(false, defragTask);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 4, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "N", RegistryValueKind.String);
+                    if (!IsTaskEnabled(defragTask))
+                    {
+                        SetTaskStateOwner(true, defragTask);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 2, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "Y", RegistryValueKind.String);
 
-                    new ViewNotification(300).Show("", "info", "success_defrag_notification");
+                        new ViewNotification(300).Show("", "info", "success_defrag_on_notification");
+                    }
+                    else
+                        new ViewNotification().Show("", "info", "warn_defrag_on_notification");
                 }
-                catch { new ViewNotification().Show("", "warn", "error_defrag_notification"); }
+                else
+                {
+                    if (IsTaskEnabled(defragTask))
+                    {
+                        SetTaskStateOwner(false, defragTask);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 4, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "N", RegistryValueKind.String);
+
+                        new ViewNotification(300).Show("", "info", "success_defrag_off_notification");
+                    }
+                    else
+                        new ViewNotification().Show("", "info", "warn_defrag_off_notification");
+                }
             }
-            else
-                new ViewNotification().Show("", "info", "warn_defrag_notification");
+            catch { new ViewNotification().Show("", "warn", "error_defrag_notification"); }
         }
+
 
         internal static void CreateRestorePoint()
         {

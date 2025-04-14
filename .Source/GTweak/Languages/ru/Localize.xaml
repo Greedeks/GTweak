@@ -38,34 +38,40 @@
     <v:String x:Key="title_info_notification">Информация</v:String>
     <v:String x:Key="logout_notification">Требуется выход, нажмите на данный текст, чтобы произвести его</v:String>
     <v:String x:Key="restart_notification">Требуется перезагрузка, нажмите на данный текст, чтобы произвести её</v:String>
+    <v:String x:Key="warn_update_notification">Во время обновления программы произошла ошибка, повторите попытку позже</v:String>
+    <v:String x:Key="import_warning_notification">Данный файл не подходит для импорта</v:String>
+    <v:String x:Key="import_empty_notification">Этот файл пуст, применение твиков невозможно</v:String>
+    <v:String x:Key="export_warning_notification">Это не имеет смысла, сначала примените хотя бы один твик</v:String>
     <v:String x:Key="onedrive_notification">Процесс восстановления OneDrive начался, это займет некоторое время</v:String>
     <v:String x:Key="appsdelete_notification">Процесс удаления приложений начался, это займет некоторое время</v:String>
+    <v:String x:Key="windefender_notification">Процесс займет некоторое время, пожалуйста подождите немного</v:String>
+    <v:String x:Key="firewalloff_notification">У вас отключен брандмауэр, включите и примените твик снова</v:String>
     <v:String x:Key="viewlicense_notification">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>
+    <v:String x:Key="readyactivate_notification">Ваша операционная система не нуждается в активации</v:String>
+    <v:String x:Key="activatewin_notification">Процесс активации Windows начался, это займет некоторое время</v:String>
+    <v:String x:Key="successactivate_notification">Активация прошла успешно, рекомендуется перезагрузка</v:String>
+    <v:String x:Key="keynotfound_notification">Отсутствует ключ для вашей редакции Windows, активация отменена</v:String>
+    <v:String x:Key="networklicense_notification">Для активации требуется подключение к Интернету</v:String>
+    <v:String x:Key="notsuccessactivate_notification">Что-то пошло не так, к сожалению активировать систему не удалось</v:String>
     <v:String x:Key="createpoint_notification">Cоздание точки восстановления займет некоторое время</v:String>
     <v:String x:Key="notsuccessfulpoint_notification">Что-то пошло не так, не удалось создать точку восстановления</v:String>
     <v:String x:Key="successpoint_notification">Точка восстановления успешно создана</v:String>
     <v:String x:Key="notsuccessfulrecovery_notification">Что-то пошло не так, не удалось запустить восстановления</v:String>
-    <v:String x:Key="readyactivate_notification">Ваша операционная система не нуждается в активации</v:String>
-    <v:String x:Key="activatewin_notification">Процесс активации Windows начался, это займет некоторое время</v:String>
-    <v:String x:Key="successactivate_notification">Активация прошла успешно, рекомендуется перезагрузка</v:String>
-    <v:String x:Key="notsuccessactivate_notification">Что-то пошло не так, к сожалению активировать систему не удалось</v:String>
-    <v:String x:Key="windefender_notification">Процесс займет некоторое время, пожалуйста подождите немного</v:String>
-    <v:String x:Key="warningwindef_notification">Одновременно включать и выключать Защитник Windows не получится</v:String>
-    <v:String x:Key="windefclose_notification">Дождитесь окончание операции с Защитником Windows</v:String>
-    <v:String x:Key="firewalloff_notification">У вас отключен брандмауэр, включите и примените твик снова</v:String>
-    <v:String x:Key="clearingcache_notification">Произведена очистка системного кэша файлов</v:String>
-    <v:String x:Key="import_warning_notification">Данный файл не подходит для импорта</v:String>
-    <v:String x:Key="import_empty_notification">Этот файл пуст, применение твиков невозможно</v:String>
-    <v:String x:Key="export_warning_notification">Это не имеет смысла, сначала примените хотя бы один твик</v:String>
-    <v:String x:Key="clear_ram_notification">Очистка кратковременной памяти и временных файлов произведена</v:String>
     <v:String x:Key="disable_recovery_notification">Восстановление системы отключено, точки восстановления недоступны</v:String>
     <v:String x:Key="warndisable_recovery_notification">У вас уже отключена система восстановления</v:String>
-    <v:String x:Key="warn_update_notification">Во время обновления программы произошла ошибка, повторите попытку позже</v:String>
-    <v:String x:Key="warn_defrag_notification">У вас уже отключена дефрагментация диска</v:String>
-    <v:String x:Key="error_defrag_notification">Что то-то пошло не так, не удалось отключить дефрагментацию</v:String>
-    <v:String x:Key="success_defrag_notification">Дефрагментация вашего диска успешно отключена</v:String>
-    <v:String x:Key="networklicense_notification">Для активации требуется подключение к Интернету</v:String>
-    <v:String x:Key="keynotfound_notification">Отсутствует ключ для вашей редакции Windows, активация отменена</v:String>
+    <v:String x:Key="clearingcache_notification">Произведена очистка системного кэша файлов</v:String>
+    <v:String x:Key="clear_ram_notification">Очистка кратковременной памяти и временных файлов произведена</v:String>
+    <v:String x:Key="warn_defrag_off_notification">У вас уже отключена дефрагментация диска</v:String>
+    <v:String x:Key="warn_defrag_on_notification">У вас уже включена дефрагментация диска</v:String>
+    <v:String x:Key="error_defrag_notification">Что то-то пошло не так, не удалось изменить состояние дефрагментации</v:String>
+    <v:String x:Key="success_defrag_off_notification">Дефрагментация вашего диска успешно отключена</v:String>
+    <v:String x:Key="success_defrag_on_notification">Дефрагментация вашего диска успешно включена</v:String>
+    <v:String x:Key="succes_compression_notification">Сжатие каталога и его содержимого прошло успешно</v:String>
+    <v:String x:Key="succes_decompression_notification">Декомпрессия каталога и его содержимого прошла успешно</v:String>
+    <v:String x:Key="ready_compression_notification">Каталог уже сжат, повторное сжатие не требуется</v:String>
+    <v:String x:Key="ready_decompression_notification">Каталог уже декомпрессирован, повторная операция не требуется</v:String>
+    <v:String x:Key="error_compression_notification">Что-то пошло не так, ошибка изменения состояния сжатия</v:String>
+    <v:String x:Key="notsupport_ntfs_notification">Операция недоступна, так как каталог не находится на NTFS-разделе</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -447,8 +453,16 @@
     <v:String x:Key="title_disablepoint_more">Отключить защиту</v:String>
     <v:String x:Key="text_disablepoint_more">Отключает точку восстановления системы, но учтите что ранее созданные удаляются.</v:String>
     <v:String x:Key="btntext_disable_more">Отключить</v:String>
-    <v:String x:Key="title_defrag_more">Дефрагментация</v:String>
-    <v:String x:Key="text_defrag_more">Отключает дефрагментацию, продлевая срок службы вашего SSD, избавляя его от лишних записи.</v:String>
+    <v:String x:Key="btntext_enable_more">Включить</v:String>
+    <v:String x:Key="title_defrag_off_more">Отключить дефрагментацию</v:String>
+    <v:String x:Key="text_defrag_off_more">Отключает дефрагментацию, продлевая срок службы вашего SSD, избавляя его от лишних записи.</v:String>
+    <v:String x:Key="title_defrag_on_more">Включить дефрагментацию</v:String>
+    <v:String x:Key="text_defrag_on_more">Включает дефрагментацию которая реорганизует файлы и эффективно работает только на HDD.</v:String>
+    <v:String x:Key="title_compression_more">Компрессия NTFS</v:String>
+    <v:String x:Key="text_compression_more">Сжимает файлы с помощью NTFS, эффективно уменьшая размер, особенно для текстовых данных.</v:String>
+    <v:String x:Key="title_decompression_more">Декомпрессия NTFS</v:String>
+    <v:String x:Key="text_decompression_more">Отключает NTFS-сжатие, возвращая файлы в исходное состояние для быстрого доступа.</v:String>
+    <v:String x:Key="btntext_overview_more">Обзор</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>
