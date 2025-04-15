@@ -323,6 +323,10 @@
     <Compile Include="Windows\WaitingWindow.xaml.cs">
       <DependentUpon>WaitingWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Assets\DrawingImages\Card.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\DrawingImages\Deleted\Applications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -459,9 +459,9 @@
     <v:String x:Key="title_defrag_on_more">Enable defragmentation</v:String>
     <v:String x:Key="text_defrag_on_more">Enables defragmentation that reorganizes files and works effectively only on HDD.</v:String>
     <v:String x:Key="title_compression_more">NTFS Compression</v:String>
-    <v:String x:Key="text_compression_more">Compresses files using NTFS, effectively reducing their size, especially for text data.</v:String>
+    <v:String x:Key="text_compression_more">Compresses files by reducing their size, especially text files, which helps save disk space without any loss.</v:String>
     <v:String x:Key="title_decompression_more">NTFS Decompression</v:String>
-    <v:String x:Key="text_decompression_more">Disables NTFS compression, returning files to their original state for fast access.</v:String>
+    <v:String x:Key="text_decompression_more">Disables compression by restoring files to their original size and accelerating access to them.</v:String>
     <v:String x:Key="btntext_overview_more">Overview</v:String>
     <!--#endregion-->
     

@@ -36,7 +36,7 @@
                     </UniformGrid>
 
                     <UniformGrid Rows="1" Columns="3" Margin="0,20,0,20">
-                        <UserControl:Card ImageSource="{StaticResource DI_Defrag}" Title="{DynamicResource title_defrag_on_more}" Description="{DynamicResource text_defrag_on_more}" BtnContent="{DynamicResource btntext_enable_more}" ClickButton="BtnEnableDefrag_ClickButton"/>
+                        <UserControl:Card ImageSource="{StaticResource DI_DefragEnable}" Title="{DynamicResource title_defrag_on_more}" Description="{DynamicResource text_defrag_on_more}" BtnContent="{DynamicResource btntext_enable_more}" ClickButton="BtnEnableDefrag_ClickButton"/>
                         <UserControl:Card ImageSource="{StaticResource DI_Compression}" Title="{DynamicResource title_compression_more}" Description="{DynamicResource text_compression_more}" BtnContent="{DynamicResource btntext_overview_more}" ClickButton="BtnCompression_ClickButton"/>
                         <UserControl:Card ImageSource="{StaticResource DI_Decompression}" Title="{DynamicResource title_decompression_more}" Description="{DynamicResource text_decompression_more}" BtnContent="{DynamicResource btntext_overview_more}" ClickButton="BtnDecompression_ClickButton"/>
                     </UniformGrid>

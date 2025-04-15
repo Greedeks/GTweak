@@ -459,9 +459,9 @@
     <v:String x:Key="title_defrag_on_more">조각 모음 켜기</v:String>
     <v:String x:Key="text_defrag_on_more">조각 모음을 활성화하여 파일을 재구성하며, 이는 HDD에서만 효과적으로 작동합니다.</v:String>
     <v:String x:Key="title_compression_more">NTFS 압축</v:String>
-    <v:String x:Key="text_compression_more">NTFS를 사용하여 파일을 압축하여, 특히 텍스트 데이터의 경우 크기를 효과적으로 줄입니다.</v:String>
+    <v:String x:Key="text_compression_more">파일을 압축하여 크기를 줄임으로써 특히 텍스트 파일의 경우 디스크 공간을 손실 없이 절약할 수 있습니다.</v:String>
     <v:String x:Key="title_decompression_more">NTFS 압축 해제</v:String>
-    <v:String x:Key="text_decompression_more">NTFS 압축을 해제하여 파일을 빠른 접근을 위해 원래 상태로 복원합니다.</v:String>
+    <v:String x:Key="text_decompression_more">압축을 해제하여 파일을 원래 크기로 복원하고 접근 속도를 높입니다.</v:String>
     <v:String x:Key="btntext_overview_more">개요</v:String>
     <!--#endregion-->
     

@@ -459,9 +459,9 @@
     <v:String x:Key="title_defrag_on_more">Увімкнути дефрагментацію</v:String>
     <v:String x:Key="text_defrag_on_more">Увімкнює дефрагментацію, яка реорганізує файли і ефективно працює лише на HDD.</v:String>
     <v:String x:Key="title_compression_more">Стиснення NTFS</v:String>
-    <v:String x:Key="text_compression_more">Стискає файли за допомогою NTFS, ефективно зменшуючи їх розмір, особливо для текстових даних.</v:String>
+    <v:String x:Key="text_compression_more">Стискає файли, зменшуючи їх обсяг, особливо текстові, що дозволяє заощаджувати місце на диску без шкоди.</v:String>
     <v:String x:Key="title_decompression_more">Декомпресія NTFS</v:String>
-    <v:String x:Key="text_decompression_more">Відключає стиснення NTFS, повертаючи файли у первинний стан для швидкого доступу.</v:String>
+    <v:String x:Key="text_decompression_more">Відключає стиснення, відновлюючи файли до їх початкового обсягу та прискорюючи доступ до них.</v:String>
     <v:String x:Key="btntext_overview_more">Огляд</v:String>
     <!--#endregion-->
     

@@ -63,7 +63,7 @@ namespace GTweak.View
             if (folderDialog.ShowDialog() == true)
             {
                 string selectedPath = folderDialog.SelectedPath;
-                if (NTFSCompressor.IsSupportNtfs(selectedPath))
+                if (await NTFSCompressor.IsSupportNtfs(selectedPath))
                 {
                     if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
                     {
@@ -73,7 +73,7 @@ namespace GTweak.View
                             try { NTFSCompressor.SetCompression(selectedPath, true); }
                             catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
                         });
-                        await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_compression_notification"); });
+                        await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_compression_notification"); });
                     }
                     else
                         new ViewNotification().Show("", "info", "ready_compression_notification");
@@ -90,7 +90,7 @@ namespace GTweak.View
             if (folderDialog.ShowDialog() == true)
             {
                 string selectedPath = folderDialog.SelectedPath;
-                if (NTFSCompressor.IsSupportNtfs(selectedPath))
+                if (await NTFSCompressor.IsSupportNtfs(selectedPath))
                 {
                     if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
                     {
@@ -101,7 +101,7 @@ namespace GTweak.View
                             catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
 
                         });
-                        await backgroundQueue.QueueTask(delegate { new ViewNotification(300).Show("", "info", "succes_decompression_notification"); });
+                        await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_decompression_notification"); });
                     }
                     else
                         new ViewNotification().Show("", "info", "ready_decompression_notification");

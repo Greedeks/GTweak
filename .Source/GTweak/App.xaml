@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Assets/DrawingImages/Deleted/Applications.xaml" />
                 <ResourceDictionary Source="Assets/DrawingImages/Installed/Applications.xaml" />
                 <ResourceDictionary Source="Assets/DrawingImages/Other.xaml" />
+                <ResourceDictionary Source="Assets/DrawingImages/Card.xaml" />
                 <ResourceDictionary Source="Styles/Themes/Dark/Colors.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/Buttons.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/RadioButtons.xaml" />

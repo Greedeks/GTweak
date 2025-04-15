@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -45,36 +47,47 @@ namespace GTweak.Utilities.Tweaks
         StringBuilder lpFileSystemNameBuffer,
         int nFileSystemNameSize);
 
-        internal static bool IsSupportNtfs(string path)
+        internal static async Task<bool> IsSupportNtfs(string path)
         {
-            string root = Path.GetPathRoot(Path.GetFullPath(path));
-            if (!string.IsNullOrEmpty(root))
+            return await Task.Run(() =>
             {
-                StringBuilder fsName = new StringBuilder(261);
-                if (GetVolumeInformation(root, null, 0, out uint _, out uint _, out uint _, fsName, fsName.Capacity))
-                    return string.Equals(fsName.ToString(), "NTFS", StringComparison.OrdinalIgnoreCase);
-            }
-            return false;
+                string root = Path.GetPathRoot(Path.GetFullPath(path));
+                if (!string.IsNullOrEmpty(root))
+                {
+                    StringBuilder fsName = new StringBuilder(261);
+                    if (GetVolumeInformation(root, null, 0, out uint _, out uint _, out uint _, fsName, fsName.Capacity))
+                    {
+                        return string.Equals(fsName.ToString(), "NTFS", StringComparison.OrdinalIgnoreCase);
+                    }
+                }
+                return false;
+            });
         }
 
         internal static void SetCompression(string directoryPath, bool compress)
         {
-            UpdateCompressionState(directoryPath, compress);
+            Task.Run(() =>
+            {
+                UpdateCompressionState(directoryPath, compress);
 
-            foreach (string dir in Directory.GetDirectories(directoryPath, "*", SearchOption.AllDirectories))
-                UpdateCompressionState(dir, compress);
+                IEnumerable<string> directories = Directory.EnumerateDirectories(directoryPath, "*", SearchOption.AllDirectories);
+                Parallel.ForEach(directories, dir => { UpdateCompressionState(dir, compress); });
 
-            foreach (string file in Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories))
-                UpdateCompressionState(file, compress);
+                IEnumerable<string> files = Directory.EnumerateFiles(directoryPath, "*", SearchOption.AllDirectories);
+                Parallel.ForEach(files, file => { UpdateCompressionState(file, compress); });
+            });
         }
 
         private static void UpdateCompressionState(string path, bool compress)
         {
-            FileAttributes attributes = File.GetAttributes(path);
-            FileAttributes flags = (attributes & FileAttributes.Directory) == FileAttributes.Directory ? BackupSemantics : FileAttributes.Normal;
-            using SafeFileHandle handle = CreateFile(path, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete, IntPtr.Zero, FileMode.Open, flags, IntPtr.Zero);
-            ushort compressionFormat = compress ? COMPRESSION_FORMAT_DEFAULT : COMPRESSION_FORMAT_NONE;
-            DeviceIoControl(handle, FSCTL_SET_COMPRESSION, ref compressionFormat, sizeof(ushort), IntPtr.Zero, 0, out int bytesReturned, IntPtr.Zero);
+            Task.Run(() =>
+            {
+                FileAttributes attributes = File.GetAttributes(path);
+                FileAttributes flags = (attributes & FileAttributes.Directory) == FileAttributes.Directory ? BackupSemantics : FileAttributes.Normal;
+                using SafeFileHandle handle = CreateFile(path, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete, IntPtr.Zero, FileMode.Open, flags, IntPtr.Zero);
+                ushort compressionFormat = compress ? COMPRESSION_FORMAT_DEFAULT : COMPRESSION_FORMAT_NONE;
+                DeviceIoControl(handle, FSCTL_SET_COMPRESSION, ref compressionFormat, sizeof(ushort), IntPtr.Zero, 0, out int bytesReturned, IntPtr.Zero);
+            });
         }
     }
 }
