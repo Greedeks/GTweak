@@ -59,7 +59,8 @@
 - 키보드와 마우스 설정 구성: 키 필터링, 고정 키 및 가속화 비활성화;
 - Windows 설정 구성 및 전원 계획 변경;
 - 음향 지연 문제를 해결하기 위한 Realtek High Definition Audio 드라이버의 전원 설정 조정;
-- 구성 확인 및 시스템 구성 요소 모니터링.
+- 구성 확인 및 시스템 구성 요소 모니터링;
+- NFTS를 이용한 데이터 압축 및 복구 구현.
 ```
 
 <h2> 스크린샷 📷</h2>
@@ -104,11 +105,12 @@ Windows 지원: Windows 10 (build 18362.116)부터
 > 사용하기 전에 바이러스 백신을 중지해야 합니다
 </br>
 
-## NuGet 패키지
-- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler/)
+## NuGet Packages
+- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
 - [Costura](https://github.com/Fody/Costura)
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/13.0.2-beta1)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+- [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
 
 ## 참조
 - FirewallAPI

@@ -59,7 +59,8 @@
 - Configuring keyboard and mouse settings: disabling key filtering, sticky keys, and acceleration;
 - Adjusting Windows settings and modifying the power plan;
 - Adjusting power settings for Realtek High Definition Audio drivers to fix sound delay;
-- Viewing the configuration and monitoring system components.
+- Viewing the configuration and monitoring system components;
+- Implementation of data compression and subsequent restoration using NFTS.
 ```
 
 <h2> Screenshots 📷</h2>
@@ -105,10 +106,11 @@ Installed platform: .NET Framework 4.8
 </br>
 
 ## NuGet Packages
-- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler/)
+- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
 - [Costura](https://github.com/Fody/Costura)
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/13.0.2-beta1)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+- [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
 
 ## Reference
 - FirewallAPI

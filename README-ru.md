@@ -59,7 +59,8 @@
 - Настройка параметров клавиатуры и мыши: отключение фильтрации, залипания клавиш и акселерации;
 - Настройка параметров Windows и изменение схемы электропитания;
 - Настройка электропитания драйверов Realtek High Definition Audio для исправления задержки звука;
-- Просмотр конфигурации и мониторинг комплектующих системы.
+- Просмотр конфигурации и мониторинг комплектующих системы;
+- Реализация сжатия данных и последующего восстановления с использованием NFTS.
 ```
 
 
@@ -107,10 +108,11 @@
 </br>
 
 ## NuGet Packages
-- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler/)
+- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
 - [Costura](https://github.com/Fody/Costura)
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/13.0.2-beta1)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+- [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
 
 ## Reference
 - FirewallAPI
