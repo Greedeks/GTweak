@@ -60,55 +60,56 @@ namespace GTweak.View
         private async void BtnCompression_ClickButton(object sender, EventArgs e)
         {
             VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog();
-            if (folderDialog.ShowDialog() == true)
+
+            if (folderDialog.ShowDialog() == false)
+                return;
+
+            string selectedPath = folderDialog.SelectedPath;
+            if (await NTFSCompressor.IsSupportNtfs(selectedPath))
             {
-                string selectedPath = folderDialog.SelectedPath;
-                if (await NTFSCompressor.IsSupportNtfs(selectedPath))
+                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
                 {
-                    if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
+                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    await backgroundQueue.QueueTask(delegate
                     {
-                        BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate
-                        {
-                            try { NTFSCompressor.SetCompression(selectedPath, true); }
-                            catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
-                        });
-                        await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_compression_notification"); });
-                    }
-                    else
-                        new ViewNotification().Show("", "info", "ready_compression_notification");
+                        try { NTFSCompressor.SetCompression(selectedPath, true); }
+                        catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
+                    });
+                    await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_compression_notification"); });
                 }
                 else
-                    new ViewNotification().Show("", "warn", "notsupport_ntfs_notification");
-
+                    new ViewNotification().Show("", "info", "ready_compression_notification");
             }
+            else
+                new ViewNotification().Show("", "warn", "notsupport_ntfs_notification");
         }
 
         private async void BtnDecompression_ClickButton(object sender, EventArgs e)
         {
             VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog();
-            if (folderDialog.ShowDialog() == true)
-            {
-                string selectedPath = folderDialog.SelectedPath;
-                if (await NTFSCompressor.IsSupportNtfs(selectedPath))
-                {
-                    if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
-                    {
-                        BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate
-                        {
-                            try { NTFSCompressor.SetCompression(selectedPath, false); }
-                            catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
 
-                        });
-                        await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_decompression_notification"); });
-                    }
-                    else
-                        new ViewNotification().Show("", "info", "ready_decompression_notification");
+            if (folderDialog.ShowDialog() == false)
+                return;
+
+            string selectedPath = folderDialog.SelectedPath;
+            if (await NTFSCompressor.IsSupportNtfs(selectedPath))
+            {
+                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
+                {
+                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    await backgroundQueue.QueueTask(delegate
+                    {
+                        try { NTFSCompressor.SetCompression(selectedPath, false); }
+                        catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
+
+                    });
+                    await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_decompression_notification"); });
                 }
                 else
-                    new ViewNotification().Show("", "warn", "notsupport_ntfs_notification");
+                    new ViewNotification().Show("", "info", "ready_decompression_notification");
             }
+            else
+                new ViewNotification().Show("", "warn", "notsupport_ntfs_notification");
         }
     }
 }

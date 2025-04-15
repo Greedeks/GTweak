@@ -2,6 +2,7 @@
 using GTweak.Utilities.Helpers.Managers;
 using GTweak.Windows;
 using Microsoft.Win32;
+using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -106,20 +107,19 @@ namespace GTweak.Utilities.Controls
                 new ViewNotification().Show("", "info", "export_warning_notification");
             else
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog
+                VistaSaveFileDialog vistaSaveFileDialog = new VistaSaveFileDialog
                 {
                     FileName = "Config GTweak",
                     Filter = "(*.INI)|*.INI",
                     RestoreDirectory = true
                 };
 
-                bool? isResultNormal = saveFileDialog.ShowDialog();
-
-                if (isResultNormal != true) return;
+                if (vistaSaveFileDialog.ShowDialog() != true)
+                    return;
 
                 try
                 {
-                    StoragePaths.Config = Path.GetDirectoryName(saveFileDialog.FileName) + @"\" + Path.GetFileNameWithoutExtension(saveFileDialog.FileName) + ".ini";
+                    StoragePaths.Config = Path.Combine(Path.GetDirectoryName(vistaSaveFileDialog.FileName), Path.GetFileNameWithoutExtension(vistaSaveFileDialog.FileName) + ".ini");
 
                     if (File.Exists(StoragePaths.Config))
                         File.Delete(StoragePaths.Config);
@@ -138,22 +138,22 @@ namespace GTweak.Utilities.Controls
 
         internal static void OpenFileConfig()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            VistaOpenFileDialog vistaOpenFileDialog = new VistaOpenFileDialog
             {
-                Filter = "(*.INI)|*.INI"
+                Filter = "(*.INI)|*.INI",
+                RestoreDirectory = true,
             };
 
-            bool? isResultNormal = openFileDialog.ShowDialog();
+            if (vistaOpenFileDialog.ShowDialog() == false)
+                return;
 
-            if (isResultNormal != true) return;
-
-            StoragePaths.Config = openFileDialog.FileName;
+            StoragePaths.Config = vistaOpenFileDialog.FileName;
             INIManager iniManager = new INIManager(StoragePaths.Config);
 
             if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("Release"))
             {
                 if (File.ReadLines(StoragePaths.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(StoragePaths.Config).Any(line => line.Contains("Slider")))
-                    new ImportWindow(openFileDialog.SafeFileName).ShowDialog();
+                    new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
                 else
                     new ViewNotification().Show("", "info", "import_empty_notification");
             }
