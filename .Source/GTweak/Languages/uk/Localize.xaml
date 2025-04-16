@@ -425,7 +425,7 @@
     <v:String x:Key="title_sound_systemInformation">Пристрої відтворення:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Мережеві адаптери:</v:String>
     <v:String x:Key="title_ip_systemInformation">Ваша IP-адреса:</v:String>
-    <v:String x:Key="limited_systemInformation">Доступ до мережі обмежено</v:String>
+    <v:String x:Key="connection_limited_systemInformation">Доступ до мережі обмежено</v:String>
     <v:String x:Key="connection_block_systemInformation">Підключення без доступу до мережі</v:String>
     <v:String x:Key="connection_lose_systemInformation">Немає підключення до Інтернету</v:String>
     <v:String x:Key="text_copy_systemInformatin">Скопійовано!</v:String>

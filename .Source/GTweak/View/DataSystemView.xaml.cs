@@ -31,7 +31,7 @@ namespace GTweak.View
                 {
                     { SystemDiagnostics.ConnectionStatus.Lose, "connection_lose_systemInformation" },
                     { SystemDiagnostics.ConnectionStatus.Block, "connection_block_systemInformation" },
-                    { SystemDiagnostics.ConnectionStatus.Limited, "limited_systemInformation" }
+                    { SystemDiagnostics.ConnectionStatus.Limited, "connection_limited_systemInformation" }
                 }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey)) { SystemDiagnostics.HardwareData.UserIPAddress = (string)FindResource(resourceKey); }
                 DataContext = new DataSystemVM();
             };

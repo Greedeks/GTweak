@@ -425,7 +425,7 @@
     <v:String x:Key="title_sound_systemInformation">Playback devices:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Network adapters:</v:String>
     <v:String x:Key="title_ip_systemInformation">Your IP address:</v:String>
-    <v:String x:Key="limited_systemInformation">Network access is limited</v:String>
+    <v:String x:Key="connection_limited_systemInformation">Network access is limited</v:String>
     <v:String x:Key="connection_block_systemInformation">Connecting without network access</v:String>
     <v:String x:Key="connection_lose_systemInformation">There is no internet connection</v:String>
     <v:String x:Key="text_copy_systemInformatin">Copied!</v:String>

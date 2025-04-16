@@ -425,7 +425,7 @@
     <v:String x:Key="title_sound_systemInformation">재생 장치:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">네트워크 어댑터:</v:String>
     <v:String x:Key="title_ip_systemInformation">IP 주소:</v:String>
-    <v:String x:Key="limited_systemInformation">네트워크 액세스가 제한됩니다</v:String>
+    <v:String x:Key="connection_limited_systemInformation">네트워크 액세스가 제한됩니다</v:String>
     <v:String x:Key="connection_block_systemInformation">네트워크 액세스 없이 연결</v:String>
     <v:String x:Key="connection_lose_systemInformation">인터넷에 연결되어 있지 않습니다</v:String>
     <v:String x:Key="text_copy_systemInformatin">복사 완료!</v:String>

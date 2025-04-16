@@ -2,6 +2,7 @@
 using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -30,11 +31,16 @@ namespace GTweak.Utilities.Configuration
 
         private sealed class IPMetadata
         {
-            [JsonProperty("query")]
             internal string Ip { get; set; }
-
-            [JsonProperty("countryCode")]
             internal string Country { get; set; }
+
+            internal static IPMetadata ParseData(string response)
+            {
+                JObject jObject = JObject.Parse(response);
+                string ip = (string)(jObject["ip"] ?? jObject["ipAddress"] ?? jObject["query"]);
+                string country = (string)(jObject["country_code"] ?? jObject["countryCode"]);
+                return new IPMetadata { Ip = ip, Country = country };
+            }
         }
 
         internal struct HardwareData
@@ -447,21 +453,26 @@ namespace GTweak.Utilities.Configuration
             {
                 if (IsNetworkAvailable())
                 {
-                    try
-                    {
-                        using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5.0) };
-                        string response = await client.GetStringAsync("http://ip-api.com/json/?fields=61439");
-                        IPMetadata ipMetadata = JsonConvert.DeserializeObject<IPMetadata>(response);
+                    using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
 
-                        if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrEmpty(ipMetadata?.Ip) && !string.IsNullOrEmpty(ipMetadata?.Country))
+                    foreach (string url in new[] { "https://ipapi.co/json/", "https://api.db-ip.com/v2/free/self", "http://ip-api.com/json/?fields=61439" })
+                    {
+                        try
                         {
-                            CurrentConnection = ConnectionStatus.Available;
-                            HardwareData.UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
+                            string response = await client.GetStringAsync(url);
+                            IPMetadata ipMetadata = IPMetadata.ParseData(response);
+
+                            if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrWhiteSpace(ipMetadata?.Ip) && !string.IsNullOrWhiteSpace(ipMetadata?.Country))
+                            {
+                                CurrentConnection = ConnectionStatus.Available;
+                                HardwareData.UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
+                                break;
+                            }
+                            else
+                                CurrentConnection = ConnectionStatus.Block;
                         }
-                        else
-                            CurrentConnection = ConnectionStatus.Block;
+                        catch { CurrentConnection = ConnectionStatus.Limited; }
                     }
-                    catch { CurrentConnection = ConnectionStatus.Limited; }
                 }
                 else
                     CurrentConnection = ConnectionStatus.Lose;
@@ -470,7 +481,7 @@ namespace GTweak.Utilities.Configuration
                 {
                     { ConnectionStatus.Lose, "connection_lose_systemInformation" },
                     { ConnectionStatus.Block, "connection_block_systemInformation" },
-                    { ConnectionStatus.Limited, "limited_systemInformation" }
+                    { ConnectionStatus.Limited, "connection_limited_systemInformation" }
                 }.TryGetValue(CurrentConnection, out string resourceKey)) { HardwareData.UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
 
                 isIPAddressFormatValid = HardwareData.UserIPAddress.Any(char.IsDigit);
@@ -495,7 +506,7 @@ namespace GTweak.Utilities.Configuration
                 string DataAsJson = sreader.ReadToEnd();
                 GitMetadata gitVersionUtility = JsonConvert.DeserializeObject<GitMetadata>(DataAsJson);
 
-                if (!string.IsNullOrEmpty(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsRepository.currentRelease) > 0)
+                if (!string.IsNullOrWhiteSpace(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsRepository.currentRelease) > 0)
                 {
                     IsNeedUpdate = true;
                     DownloadVersion = gitVersionUtility.СurrentVersion;
