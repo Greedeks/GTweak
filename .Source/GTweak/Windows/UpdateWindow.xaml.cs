@@ -11,7 +11,7 @@ using System.Windows.Media.Animation;
 
 namespace GTweak.Windows
 {
-    public partial class UpdateWindow : Window
+    public partial class UpdateWindow
     {
         public UpdateWindow()
         {

@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace GTweak.Utilities.Controls
 {
-    internal sealed class BlockRunTweaker
+    internal static class BlockRunTweaker
     {
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr handle, int cmdShow);

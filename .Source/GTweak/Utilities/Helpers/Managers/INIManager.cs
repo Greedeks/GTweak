@@ -30,7 +30,7 @@ namespace GTweak.Utilities.Helpers.Managers
         internal const string SectionSvc = "Services Tweaks";
         internal const string SectionSys = "System Tweaks";
 
-        internal INIManager(string iniPath) => _pathToConfig = new FileInfo(iniPath).FullName.ToString();
+        internal INIManager(string iniPath) => _pathToConfig = new FileInfo(iniPath).FullName;
 
         internal string Read(string section, string key)
         {

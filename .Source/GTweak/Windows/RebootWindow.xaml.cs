@@ -6,7 +6,7 @@ using System.Windows.Media.Animation;
 
 namespace GTweak.Windows
 {
-    public partial class RebootWindow : Window
+    public partial class RebootWindow
     {
         public RebootWindow()
         {

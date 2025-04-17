@@ -4,7 +4,9 @@ namespace GTweak.Utilities.Helpers.Storage
 {
     internal class WinKeyStorage
     {
-        internal static readonly Dictionary<(string pattern, byte words), string> keysKMS = new Dictionary<(string pattern, byte words), string>
+        protected WinKeyStorage() { }
+
+        protected static readonly Dictionary<(string pattern, byte words), string> keysKMS = new Dictionary<(string pattern, byte words), string>
         {
             { ("Home", 1), @"TX9XD-98N7V-6WMQ6-BX7FG-H8Q99" },
             { ("Home|N", 2), @"4CPRK-NM3K3-X6XXQ-RXX86-WXCHW" },
@@ -26,7 +28,7 @@ namespace GTweak.Utilities.Helpers.Storage
             { ("Pro|N|for|Workstations", 4), @"9FNHH-K3HBT-3W4TD-6383H-6XYWF" },
         };
 
-        internal static readonly Dictionary<(string pattern, byte words), string> keysHWID = new Dictionary<(string pattern, byte words), string>
+        protected static readonly Dictionary<(string pattern, byte words), string> keysHWID = new Dictionary<(string pattern, byte words), string>
         {
             { ("Education", 1), @"YNMGQ-8RYV3-4PGQ3-C8XTP-7CFBY" },
             { ("Education|N", 2), @"84NGF-MHBT6-FXBX8-QWJK7-DRR8H" },

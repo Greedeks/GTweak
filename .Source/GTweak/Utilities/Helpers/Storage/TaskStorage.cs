@@ -2,7 +2,7 @@
 {
     internal class TaskStorage
     {
-        internal static readonly string[] dataCollectTasks = {
+        protected static readonly string[] dataCollectTasks = {
         @"\Microsoft\Windows\Maintenance\WinSAT",
         @"\Microsoft\Windows\Autochk\Proxy",
         @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser",
@@ -16,12 +16,12 @@
         @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver",
         @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" };
 
-        internal static readonly string[] nvidiaTasks = {
+        protected static readonly string[] nvidiaTasks = {
         @"\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
         @"\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
         @"\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" };
 
-        internal static readonly string[] telemetryTasks = {
+        protected static readonly string[] telemetryTasks = {
         @"\Microsoft\Office\Office ClickToRun Service Monitor",
         @"\Microsoft\Office\OfficeTelemetry\AgentFallBack2016",
         @"\Microsoft\Office\OfficeTelemetry\OfficeTelemetryAgentLogOn2016",
@@ -31,7 +31,7 @@
         @"\Microsoft\Office\OfficeTelemetryAgentLogOn",
         @"\Microsoft\Office\Office 15 Subscription Heartbeat" };
 
-        internal static readonly string[] winUpdatesTasks = {
+        protected static readonly string[] winUpdatesTasks = {
         @"\Microsoft\Windows\UpdateOrchestrator\Report policies",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Scan",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Scan Static Task",
@@ -44,21 +44,21 @@
         @"\Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
         @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" };
 
-        internal static readonly string[] memoryDiagTasks =  {
+        protected static readonly string[] memoryDiagTasks =  {
         @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
         @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
 
-        internal static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
-        internal static readonly string defragTask = @"\Microsoft\Windows\Defrag\ScheduledDefrag";
+        protected static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
+        protected static readonly string defragTask = @"\Microsoft\Windows\Defrag\ScheduledDefrag";
 
-        internal static readonly string[] edgeTasks = {
+        protected static readonly string[] edgeTasks = {
         @"\MicrosoftEdgeUpdateTaskMachineUA{EA17DF76-AE5F-45F8-8867-FE5E0DD06656}",
         @"\MicrosoftEdgeUpdateTaskMachineCore{11EED34D-1A62-4BB7-9A2E-0D83ED6A609F}",
         @"\MicrosoftEdgeUpdateTaskMachineCore*",
         @"\MicrosoftEdgeUpdateTaskMachineUA*",
         @"\MicrosoftEdgeUpdateTaskUser*" };
 
-        internal static readonly string[] WinDefenderTasks = {
+        protected static readonly string[] WinDefenderTasks = {
         @"\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Cleanup",

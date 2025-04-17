@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 
 namespace GTweak.Utilities.Helpers.Managers
@@ -16,7 +17,7 @@ namespace GTweak.Utilities.Helpers.Managers
                 fileSize = ms.ToArray();
             }
 
-            string folderDir = path.Remove(path.LastIndexOf(@"\"));
+            string folderDir = path.Remove(path.LastIndexOf(@"\", StringComparison.OrdinalIgnoreCase));
 
             if (!Directory.Exists(folderDir))
                 Directory.CreateDirectory(folderDir);

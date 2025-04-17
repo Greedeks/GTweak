@@ -271,7 +271,7 @@ namespace GTweak.Utilities.Tweaks
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
                             }
 
-                            foreach (string folder in new string[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
+                            foreach (string folder in new[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
                             {
                                 if (!removeWebViewFlag && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
                                     continue;

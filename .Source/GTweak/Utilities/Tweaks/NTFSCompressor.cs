@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal sealed class NTFSCompressor
+    internal static class NTFSCompressor
     {
         private const ushort COMPRESSION_FORMAT_NONE = 0x0000;
         private const ushort COMPRESSION_FORMAT_DEFAULT = 0x0001;

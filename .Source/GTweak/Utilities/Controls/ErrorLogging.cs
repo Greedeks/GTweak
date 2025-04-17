@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Controls
 {
-    internal class ErrorLogging
+    internal static class ErrorLogging
     {
         [Conditional("DEBUG")]
         internal static void LogDebug(Exception ex, [CallerMemberName] string memberName = "") => Debug.WriteLine($"Debug: {ex.Message}\nStack Trace: {ex.StackTrace}\nMember: {memberName}\n");

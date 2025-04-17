@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GTweak.Utilities.Helpers.Storage
 {
-    internal class NotifActionsStorage
+    internal static class NotifActionsStorage
     {
         internal static readonly Dictionary<string, string> ConfNotifActions = new[]
         {

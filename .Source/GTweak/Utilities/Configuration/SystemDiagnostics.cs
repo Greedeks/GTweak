@@ -97,10 +97,10 @@ namespace GTweak.Utilities.Configuration
         {
             string nameProfile = string.Empty;
 
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLower()}'", new EnumerationOptions { ReturnImmediately = true }).Get())
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLowerInvariant()}'", new EnumerationOptions { ReturnImmediately = true }).Get())
                 nameProfile = managementObj["FullName"] as string;
 
-            return !string.IsNullOrWhiteSpace(nameProfile) ? nameProfile : Environment.UserName.ToLower();
+            return !string.IsNullOrWhiteSpace(nameProfile) ? nameProfile : Environment.UserName.ToLowerInvariant();
         }
 
         internal void GetHardwareData()

@@ -11,7 +11,7 @@ namespace GTweak.Windows
     /// Darkened screen 
     /// </summary>
 
-    public partial class WaitingWindow : Window
+    public partial class WaitingWindow
     {
         private readonly DisablingWinKeys disablingWinKeys = new DisablingWinKeys();
         public WaitingWindow()

@@ -268,14 +268,14 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else
                     {
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DependOnService", new string[] { "RpcSs" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DependOnService", new[] { "RpcSs" }, RegistryValueKind.MultiString);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Description", @"@%SystemRoot%\system32\diagtrack.dll,-3002", RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DisplayName", @"@%SystemRoot%\system32\diagtrack.dll,-3001", RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ErrorControl", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ImagePath", @"%SystemRoot%\System32\svchost.exe -k utcsvc -p", RegistryValueKind.ExpandString);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ObjectName", "LocalSystem", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "RequiredPrivileges", new string[] { "SeChangeNotifyPrivilege", "SeCreateGlobalPrivilege", "SeAssignPrimaryTokenPrivilege", "SeImpersonatePrivilege", "SeSystemProfilePrivilege", "SeTcbPrivilege", "SeDebugPrivilege", "SeSecurityPrivilege" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "RequiredPrivileges", new[] { "SeChangeNotifyPrivilege", "SeCreateGlobalPrivilege", "SeAssignPrimaryTokenPrivilege", "SeImpersonatePrivilege", "SeSystemProfilePrivilege", "SeTcbPrivilege", "SeDebugPrivilege", "SeSecurityPrivilege" }, RegistryValueKind.MultiString);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ServiceSidType", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Type", 16, RegistryValueKind.DWord);
@@ -284,7 +284,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, $@"{diagTrack}\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
 
                         RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DelayedAutoStart", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DependOnService", new string[] { "rpcss" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DependOnService", new[] { "rpcss" }, RegistryValueKind.MultiString);
                         RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "Description", @"@%SystemRoot%\system32\dmwappushsvc.dll,-201", RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DisplayName", @"@%SystemRoot%\system32\dmwappushsvc.dll,-200", RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ErrorControl", 1, RegistryValueKind.DWord);
@@ -311,14 +311,14 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "Type", 7, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Security", "Security", Array.ConvertAll("01,00,04,80,b0,00,00,00,bc,00,00,00,00,00,00,00,14,00,00,00,02,00,9c,00,07,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,06,00,00,00,00,00,14,00,ff,01,0f,00,01,01,00,00,00,00,00,05,12,00,00,00,00,00,18,00,ff,01,0f,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00,00,00,18,00,14,00,00,00,01,02,00,00,00,00,00,0f,02,00,00,00,01,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,0b,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
 
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "DependOnService", new string[] { "RpcSs" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "DependOnService", new[] { "RpcSs" }, RegistryValueKind.MultiString);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Description", @"@%systemroot%\system32\DiagSvc.dll,-101", RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "DisplayName", @"@%systemroot%\system32\DiagSvc.dll,-100", RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ErrorControl", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ImagePath", @"%SystemRoot%\System32\svchost.exe -k diagnostics", RegistryValueKind.ExpandString);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ObjectName", "LocalSystem", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "RequiredPrivileges", new string[] { "SeTcbPrivilege", "nSeTakeOwnershipPrivilege", "nSeDebugPrivilege", "nSeBackupPrivilege", "nSeImpersonatePrivilege", "nSeLoadDriverPrivilege", "nSeRestorePrivilege", "nSeManageVolumePrivilege" }, RegistryValueKind.MultiString);
+                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "RequiredPrivileges", new[] { "SeTcbPrivilege", "nSeTakeOwnershipPrivilege", "nSeDebugPrivilege", "nSeBackupPrivilege", "nSeImpersonatePrivilege", "nSeLoadDriverPrivilege", "nSeRestorePrivilege", "nSeManageVolumePrivilege" }, RegistryValueKind.MultiString);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ServiceSidType", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Start", 3, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Type", 32, RegistryValueKind.DWord);

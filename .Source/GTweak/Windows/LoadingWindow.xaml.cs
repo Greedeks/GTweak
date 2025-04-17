@@ -7,12 +7,11 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media.Animation;
 
 namespace GTweak.Windows
 {
-    public partial class LoadingWindow : Window
+    public partial class LoadingWindow
     {
         public LoadingWindow()
         {
@@ -75,7 +74,7 @@ namespace GTweak.Windows
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            int index = Array.IndexOf(new int[] { 5, 30, 55, 75, 95 }, e.ProgressPercentage);
+            int index = Array.IndexOf(new[] { 5, 30, 55, 75, 95 }, e.ProgressPercentage);
             if (index >= 0)
                 new TypewriterAnimation((string)FindResource($"text{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
         }
