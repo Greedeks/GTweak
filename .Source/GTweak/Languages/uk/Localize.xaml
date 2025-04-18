@@ -287,7 +287,7 @@
     <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
 
     <v:String x:Key="title_over_applications">Підтвердження видалення</v:String>
-    <v:String x:Key="text_over_applications">Ви збираєтеся видалити браузер Microsoft Edge. При цьому також буде видалено компонент EdgeWebView, який відповідає за відображення веб-сторінок у певних програмах, таких як пакет Microsoft Office та інші. Перш ніж продовжити, переконайтеся, що цей компонент вам не потрібен.</v:String>
+    <v:String x:Key="text_over_applications">Ви збираєтеся видалити браузер Microsoft Edge. Це також призведе до видалення компонента EdgeWebView, який відповідає за відображення веб‑сторінок у таких програмах, як Microsoft Office, а також у деяких Telegram‑ботах, що використовують вбудований WebView для показу меню (міні‑додатків та веб‑контенту), та інших програмах. Перш ніж продовжити, переконайтеся, що вам не потрібен цей компонент.</v:String>
     <v:String x:Key="question_over_applications">Чи хотіли б ви продовжити видалення разом з EdgeWebView?</v:String>
     <v:String x:Key="btn_сancel_applications">Скасувати</v:String>
     <v:String x:Key="btn_delete_applications">Видалити</v:String>

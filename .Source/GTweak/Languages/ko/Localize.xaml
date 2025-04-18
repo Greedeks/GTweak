@@ -287,7 +287,7 @@
     <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
 
     <v:String x:Key="title_over_applications">Uninstallation confirmation</v:String>
-    <v:String x:Key="text_over_applications">You are about to uninstall the Microsoft Edge browser. In addition, the EdgeWebView component, which is responsible for displaying web pages in certain applications, such as the Microsoft Office suite and others, will also be removed. Before proceeding, please ensure that you do not require this component.</v:String>
+    <v:String x:Key="text_over_applications">You are about to remove the Microsoft Edge browser. This will also remove the EdgeWebView component, which is responsible for rendering web pages in applications such as Microsoft Office, as well as in some Telegram bots that use the embedded WebView to display menus (mini‑apps and web content) and other programs. Before proceeding, make sure you do not need this component.</v:String>
     <v:String x:Key="question_over_applications">Would you like to continue deleting along with EdgeWebView?</v:String>
     <v:String x:Key="btn_сancel_applications">Cancel</v:String>
     <v:String x:Key="btn_delete_applications">Delete</v:String>
