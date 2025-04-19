@@ -16,71 +16,52 @@ namespace GTweak.Utilities.Tweaks
         private const FileAttributes BackupSemantics = (FileAttributes)0x02000000;
 
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern SafeFileHandle CreateFile(
-           string lpFileName,
-           FileAccess dwDesiredAccess,
-           FileShare dwShareMode,
-           IntPtr lpSecurityAttributes,
-           FileMode dwCreationDisposition,
-           FileAttributes dwFlagsAndAttributes,
-           IntPtr hTemplateFile);
+        private static extern SafeFileHandle CreateFile(string lpFileName, FileAccess dwDesiredAccess, FileShare dwShareMode, IntPtr lpSecurityAttributes, FileMode dwCreationDisposition, FileAttributes dwFlagsAndAttributes, IntPtr hTemplateFile);
 
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern bool DeviceIoControl(
-           SafeFileHandle hDevice,
-           uint dwIoControlCode,
-           ref ushort lpInBuffer,
-           int nInBufferSize,
-           IntPtr lpOutBuffer,
-           int nOutBufferSize,
-           out int lpBytesReturned,
-           IntPtr lpOverlapped);
+        private static extern bool DeviceIoControl(SafeFileHandle hDevice, uint dwIoControlCode, ref ushort lpInBuffer, int nInBufferSize, IntPtr lpOutBuffer, int nOutBufferSize, out int lpBytesReturned, IntPtr lpOverlapped);
 
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern bool GetVolumeInformation(
-        string lpRootPathName,
-        StringBuilder lpVolumeNameBuffer,
-        int nVolumeNameSize,
-        out uint lpVolumeSerialNumber,
-        out uint lpMaximumComponentLength,
-        out uint lpFileSystemFlags,
-        StringBuilder lpFileSystemNameBuffer,
-        int nFileSystemNameSize);
+        private static extern bool GetVolumeInformation(string lpRootPathName, StringBuilder lpVolumeNameBuffer, int nVolumeNameSize, out uint lpVolumeSerialNumber, out uint lpMaximumComponentLength, out uint lpFileSystemFlags, StringBuilder lpFileSystemNameBuffer, int nFileSystemNameSize);
 
         internal static async Task<bool> IsSupportNtfs(string path)
         {
-            return await Task.Run(() =>
+            try
             {
-                string root = Path.GetPathRoot(Path.GetFullPath(path));
-                if (!string.IsNullOrEmpty(root))
+                return await Task.Run(() =>
                 {
-                    StringBuilder fsName = new StringBuilder(261);
-                    if (GetVolumeInformation(root, null, 0, out uint _, out uint _, out uint _, fsName, fsName.Capacity))
+                    string root = Path.GetPathRoot(Path.GetFullPath(path));
+                    if (!string.IsNullOrEmpty(root))
                     {
-                        return string.Equals(fsName.ToString(), "NTFS", StringComparison.OrdinalIgnoreCase);
+                        StringBuilder fsName = new StringBuilder(261);
+                        if (GetVolumeInformation(root, null, 0, out uint _, out uint _, out uint _, fsName, fsName.Capacity))
+                        {
+                            return string.Equals(fsName.ToString(), "NTFS", StringComparison.OrdinalIgnoreCase);
+                        }
                     }
-                }
-                return false;
-            });
+                    return false;
+                });
+            }
+            catch { return false; }
         }
 
         internal static void SetCompression(string directoryPath, bool compress)
         {
-            Task.Run(() =>
+            Task.Run(async () =>
             {
-                UpdateCompressionState(directoryPath, compress);
+                await UpdateCompressionState(directoryPath, compress);
 
                 IEnumerable<string> directories = Directory.EnumerateDirectories(directoryPath, "*", SearchOption.AllDirectories);
-                Parallel.ForEach(directories, dir => { UpdateCompressionState(dir, compress); });
+                Parallel.ForEach(directories, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, async dir => { await UpdateCompressionState(dir, compress); });
 
                 IEnumerable<string> files = Directory.EnumerateFiles(directoryPath, "*", SearchOption.AllDirectories);
-                Parallel.ForEach(files, file => { UpdateCompressionState(file, compress); });
+                Parallel.ForEach(files, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount }, async file => { await UpdateCompressionState(file, compress); });
             });
         }
 
-        private static void UpdateCompressionState(string path, bool compress)
+        private static async Task UpdateCompressionState(string path, bool compress)
         {
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 FileAttributes attributes = File.GetAttributes(path);
                 FileAttributes flags = (attributes & FileAttributes.Directory) == FileAttributes.Directory ? BackupSemantics : FileAttributes.Normal;
