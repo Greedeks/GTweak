@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -49,6 +50,8 @@ namespace GTweak.Utilities.Tweaks
 
     internal class ClearingMemory
     {
+        internal static bool IsWinOldExists => Directory.Exists(Path.Combine(StoragePaths.SystemDisk, "Windows.old"));
+
         private const int SE_PRIVILEGE_ENABLED = 2;
         private const string SE_INCREASE_QUOTA_NAME = "SeIncreaseQuotaPrivilege";
         private const string SE_PROFILE_SINGLE_PROCESS_NAME = "SeProfileSingleProcessPrivilege";
@@ -175,8 +178,17 @@ namespace GTweak.Utilities.Tweaks
             return num != 0;
         }
 
-        private static void ClearTempSystemCache()
+        private static void ClearTempSystemCache(bool shouldRemoveWinOld = false)
         {
+            if (shouldRemoveWinOld)
+            {
+                string filePath = Path.Combine(StoragePaths.SystemDisk, "Windows.old");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"сmd.exe /c takeown /f \"{filePath}\"");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{filePath}\" /grant %username%:F");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rd /s /q \"{filePath}\"");
+            }
+
             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @$"cmd.exe /c rd /s /q {StoragePaths.SystemDisk}Windows\Temp & " +
                 @$"rd /s /q %localappdata%\Temp & rd /s /q {StoragePaths.SystemDisk}Windows\ff*.tmp & rd /s /q {StoragePaths.SystemDisk}Windows\History\* & " +
                 $@"rd /s /q {StoragePaths.SystemDisk}Windows\CbsTemp\* & rd /s /q {StoragePaths.SystemDisk}Windows\System32\SleepStudy\* & " +
@@ -198,10 +210,10 @@ namespace GTweak.Utilities.Tweaks
             });
         }
 
-        internal async void StartMemoryCleanup()
+        internal async void StartMemoryCleanup(bool removeWinOldFlag = false)
         {
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { ClearFileSystemCache(true); EmptyWorkingSetFunction(); ClearTempSystemCache(); });
+            await backgroundQueue.QueueTask(delegate { ClearFileSystemCache(true); EmptyWorkingSetFunction(); ClearTempSystemCache(removeWinOldFlag); });
             new ViewNotification(500).Show("", "info", "clear_ram_notification");
         }
     }

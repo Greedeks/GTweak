@@ -463,6 +463,12 @@
     <v:String x:Key="title_decompression_more">NTFS 압축 해제</v:String>
     <v:String x:Key="text_decompression_more">압축을 해제하여 파일을 원래 크기로 복원하고 접근 속도를 높입니다.</v:String>
     <v:String x:Key="btntext_overview_more">개요</v:String>
+
+    <v:String x:Key="title_over_more">Disk Cleanup Confirmation</v:String>
+    <v:String x:Key="text_over_more">Your disk contains a Windows.old folder holding files from a previous version of Windows that are taking up a significant amount of space. Please note: once this folder is deleted, its contents cannot be restored, so be sure you’ve saved any files you need.</v:String>
+    <v:String x:Key="question_over_more">Do you want to proceed with the cleanup and delete the Windows.old folder?</v:String>
+    <v:String x:Key="btn_agree_more">Agree</v:String>
+    <v:String x:Key="btn_decline_more">Decline</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

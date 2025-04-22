@@ -44,6 +44,20 @@ namespace GTweak.View
             _timer.Start();
         }
 
+        private void OverlayAnimation(double from, double to, double duration, EventHandler onComplete = null)
+        {
+            DoubleAnimation doubleAnim = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = TimeSpan.FromSeconds(duration),
+                EasingFunction = new QuadraticEase()
+            };
+            if (onComplete != null) { doubleAnim.Completed += onComplete; }
+            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Overlay.BeginAnimation(OpacityProperty, doubleAnim);
+        }
+
         private void Apps_MouseEnter(object sender, MouseEventArgs e)
         {
             string descriptionApp = (string)FindResource(((Image)sender).Name + "_applications");
@@ -94,7 +108,8 @@ namespace GTweak.View
                                 BtnDelete.PreviewMouseLeftButtonDown += DeleteHandler;
                                 BtnCancel.PreviewMouseLeftButtonDown += CancelHandler;
 
-                                _isWebViewRemoval = await tcs.Task;
+                                try { _isWebViewRemoval = await tcs.Task; }
+                                catch (TaskCanceledException) { _isWebViewRemoval = false; }
 
                                 OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
                             }
@@ -229,21 +244,6 @@ namespace GTweak.View
                 string packageName = package.Value;
                 image.Source = AvailabilityInstalledPackage(packageName, packageName == "OneDrive");
             }
-        }
-
-
-        private void OverlayAnimation(double from, double to, double duration, EventHandler onComplete = null)
-        {
-            DoubleAnimation doubleAnim = new DoubleAnimation
-            {
-                From = from,
-                To = to,
-                Duration = TimeSpan.FromSeconds(duration),
-                EasingFunction = new QuadraticEase()
-            };
-            if (onComplete != null) { doubleAnim.Completed += onComplete; }
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
-            Overlay.BeginAnimation(OpacityProperty, doubleAnim);
         }
     }
 }

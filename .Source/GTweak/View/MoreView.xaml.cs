@@ -6,14 +6,34 @@ using GTweak.Windows;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace GTweak.View
 {
     public partial class MoreView
     {
+        private bool _isWinOldRemoval = false;
+        private static bool _hasDeclined = false;
+
         public MoreView()
         {
             InitializeComponent();
+        }
+
+        private void OverlayAnimation(double from, double to, double duration, EventHandler onComplete = null)
+        {
+            DoubleAnimation doubleAnim = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = TimeSpan.FromSeconds(duration),
+                EasingFunction = new QuadraticEase()
+            };
+            if (onComplete != null) { doubleAnim.Completed += onComplete; }
+            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Overlay.BeginAnimation(OpacityProperty, doubleAnim);
         }
 
         private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
@@ -41,7 +61,42 @@ namespace GTweak.View
 
         private void BtnRecoveyLaunch_ClickButton(object sender, EventArgs e) => SystemMaintenance.StartRecovery();
 
-        private void BtnClear_ClickButton(object sender, EventArgs e) => new ClearingMemory().StartMemoryCleanup();
+        private async void BtnClear_ClickButton(object sender, EventArgs e)
+        {
+            if (ClearingMemory.IsWinOldExists && !_hasDeclined)
+            {
+                Overlay.Visibility = Visibility.Visible;
+
+                OverlayAnimation(0, 1, 0.3);
+
+                TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+                void AgreeHandler(object sender, RoutedEventArgs args)
+                {
+                    tcs.TrySetResult(true);
+                    BtnAgree.PreviewMouseLeftButtonDown -= AgreeHandler;
+                    BtnDecline.PreviewMouseLeftButtonDown -= DeclineHandler;
+                }
+
+                void DeclineHandler(object sender, RoutedEventArgs args)
+                {
+                    tcs.TrySetResult(false);
+                    BtnAgree.PreviewMouseLeftButtonDown -= AgreeHandler;
+                    BtnDecline.PreviewMouseLeftButtonDown -= DeclineHandler;
+                    _hasDeclined = true;
+                }
+
+                BtnAgree.PreviewMouseLeftButtonDown += AgreeHandler;
+                BtnDecline.PreviewMouseLeftButtonDown += DeclineHandler;
+
+                try { _isWinOldRemoval = await tcs.Task; }
+                catch (TaskCanceledException) { _isWinOldRemoval = false; }
+
+                OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
+            }
+
+            new ClearingMemory().StartMemoryCleanup(_isWinOldRemoval);
+        }
 
         private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.SetDefragState(false);
 

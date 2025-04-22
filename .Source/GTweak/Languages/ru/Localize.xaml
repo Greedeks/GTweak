@@ -463,6 +463,12 @@
     <v:String x:Key="title_decompression_more">Декомпрессия NTFS</v:String>
     <v:String x:Key="text_decompression_more">Отключает сжатие, восстанавливая файлы до их исходного объёма и ускоряя доступ к ним.</v:String>
     <v:String x:Key="btntext_overview_more">Обзор</v:String>
+
+    <v:String x:Key="title_over_more">Подтверждение очистки диска</v:String>
+    <v:String x:Key="text_over_more">На вашем диске найденая папка Windows.old, содержащая файлы предыдущей версии Windows, активно занимающая значительное пространство. Обратите внимание: после удаления папки восстановить её содержимое будет невозможно, поэтому убедитесь, что все необходимые файлы сохранены.</v:String>
+    <v:String x:Key="question_over_more">Вы хотите продолжить очистку с удалением папки Windows.old?</v:String>
+    <v:String x:Key="btn_agree_more">Согласиться</v:String>
+    <v:String x:Key="btn_decline_more">Отказаться</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>
