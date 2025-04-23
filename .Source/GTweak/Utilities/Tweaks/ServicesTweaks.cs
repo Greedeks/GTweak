@@ -5,6 +5,7 @@ using GTweak.View;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.ServiceProcess;
@@ -25,10 +26,10 @@ namespace GTweak.Utilities.Tweaks
 
         private static string FilesPathUpdate(string program, bool isOldWay = false)
         {
-            string selectedPath = isOldWay || Regex.IsMatch(program, "usoclient|BlockUOrchestrator", RegexOptions.IgnoreCase)
-            ? Path.Combine(StoragePaths.SystemDisk, "Windows", "System32") : Path.Combine(StoragePaths.SystemDisk, "Windows", "UUS", "amd64");
+            bool isUsoClient = _updateFilesWin.TryGetValue("Uso", out var usoFiles) && Regex.IsMatch(program, $"{usoFiles.Default}|{usoFiles.Blocked}", RegexOptions.IgnoreCase);
+            string basePath = (isOldWay || isUsoClient) ? Path.Combine(StoragePaths.SystemDisk, "Windows", "System32") : Path.Combine(StoragePaths.SystemDisk, "Windows", "UUS", "amd64");
 
-            return Path.Combine(selectedPath, program);
+            return Path.Combine(basePath, program);
         }
 
         internal void AnalyzeAndUpdate(ServicesView servicesV)
@@ -100,7 +101,6 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc", "Start", "4");
 
             servicesV.TglButton12.StateNA =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DispBrokerDesktopSvc", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WFDSConMgrSvc", "Start", "4");
 
             servicesV.TglButton13.StateNA =
@@ -301,7 +301,6 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\lfsvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     break;
                 case "TglButton12":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DispBrokerDesktopSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WFDSConMgrSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     break;
                 case "TglButton13":
@@ -324,9 +323,25 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton15":
                     BlockWindowsUpdate(isDisabled);
-                    string[] arguments = _updateFilesWin.Select(key => isDisabled ? $"rename \"{FilesPathUpdate(key.Value.Default)}\" \"{key.Value.Blocked}\"" : $"rename \"{FilesPathUpdate(key.Value.Blocked)}\" \"{key.Value.Default}\"").ToArray();
-                    TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c {string.Join(" & ", arguments)}");
+                    ChangeAccessUpdateFolders(isDisabled);
 
+                    foreach (var key in _updateFilesWin)
+                    {
+                        string currentFileName = isDisabled ? key.Value.Default : key.Value.Blocked;
+                        string targetFileName = isDisabled ? key.Value.Blocked : key.Value.Default;
+
+                        string currentFilePath = FilesPathUpdate(currentFileName);
+                        string targetFilePath = FilesPathUpdate(targetFileName);
+
+                        try
+                        {
+                            if (isDisabled)
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /k takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant %username%:F & rename \"{currentFilePath}\" \"{targetFileName}\"");
+                            else
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /k rename \"{currentFilePath}\" \"{targetFileName}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
+                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    }
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wisvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DmEnrollmentSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wuauserv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -346,7 +361,6 @@ namespace GTweak.Utilities.Tweaks
                     }
                     else
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
-                    ChangeAccessUpdateFolders(isDisabled);
                     break;
                 case "TglButton16":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -428,39 +442,41 @@ namespace GTweak.Utilities.Tweaks
                 {
                     if (isDenyAccess)
                     {
-                        using (ServiceController updateService = new ServiceController("wuauserv"))
-                        using (ServiceController cryptSvc = new ServiceController("CryptSvc"))
+                        TakingOwnership.GrantDebugPrivilege();
+                        foreach (string getName in new[] { "wuauserv", "CryptSvc", "usocoreworker", "RuntimeBroker", "msedge" })
                         {
-                            if (updateService.Status == ServiceControllerStatus.Running)
+                            foreach (Process process in Process.GetProcessesByName(getName))
                             {
-                                updateService.Stop();
-                                updateService.WaitForStatus(ServiceControllerStatus.Stopped);
-                            }
-
-                            if (cryptSvc.Status == ServiceControllerStatus.Running)
-                            {
-                                cryptSvc.Stop();
-                                cryptSvc.WaitForStatus(ServiceControllerStatus.Stopped);
+                                try
+                                {
+                                    process.Kill();
+                                    process.WaitForExit(1000);
+                                }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             }
                         }
 
-                        foreach (string path in new[] { $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\Download", $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\DataStore",
-                            $@"{StoragePaths.SystemDisk}Windows\System32\catroot2", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
+                        foreach (string path in new[] { $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\Download", $@"{StoragePaths.SystemDisk}Windows\SoftwareDistribution\DataStore", $@"{StoragePaths.SystemDisk}Windows\System32\catroot2", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
                         {
-                            TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
 
                             if (Directory.Exists(path))
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"Remove-Item -Path '{path}' -Recurse -Force\"");
+                            {
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"сmd.exe /c takeown /f \"{path}\"");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /grant %username%:F");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rd /s /q \"{path}\"");
+                            }
                         }
 
                         SetTaskStateOwner(false, winUpdatesTasks);
 
-                        using (ServiceController cryptSvc = new ServiceController("CryptSvc"))
+                        foreach (var serviceName in new[] { "CryptSvc", "RuntimeBroker" })
                         {
-                            if (cryptSvc.Status == ServiceControllerStatus.Stopped)
+                            using ServiceController svc = new ServiceController(serviceName);
+                            if (svc.Status == ServiceControllerStatus.Stopped)
                             {
-                                cryptSvc.Start();
-                                cryptSvc.WaitForStatus(ServiceControllerStatus.Running);
+                                svc.Start();
+                                svc.WaitForStatus(ServiceControllerStatus.Running);
                             }
                         }
                     }

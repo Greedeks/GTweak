@@ -51,7 +51,7 @@ namespace GTweak.Utilities.Controls
                         UseShellExecute = true
                     });
                 }
-                else 
+                else
                     LogDebug(new FileNotFoundException(StoragePaths.LogFile));
             }
             catch (Exception fileEx) { LogDebug(fileEx); }

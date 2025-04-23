@@ -216,7 +216,7 @@ namespace GTweak.Utilities.Tweaks
 
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"");
 
-                            foreach (string process in new string[] { "msedge.exe", "edgeupdate.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe" })
+                            foreach (string process in new string[] { "msedge.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
                                 CommandExecutor.RunCommand($"/c taskkill /f /im {process} /t");
                             foreach (var package in new[] { new { AppName = "Edge", Arguments = "--uninstall --msedge --channel=stable --system-level --verbose-logging" }, new { AppName = "EdgeWebView", Arguments = "--uninstall --msedgewebview --system-level --verbose-logging" } })
                             {
@@ -271,16 +271,22 @@ namespace GTweak.Utilities.Tweaks
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
                             }
 
+
+                            static void RemoveDirectory(string path)
+                            {
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c takeown /f \"{path}\"");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /grant %username%:F");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rd /s /q \"{path}\"");
+                            }
+
                             foreach (string folder in new[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
                             {
                                 if (!removeWebViewFlag && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
                                     continue;
 
                                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
-
-                                TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                                await Task.Delay(1000);
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"Remove-Item -Path '{path}' -Recurse -Force\"");
+                                RemoveDirectory(path);
                             }
 
                             try
@@ -295,10 +301,13 @@ namespace GTweak.Utilities.Tweaks
                                         if (!removeWebViewFlag && path.Contains("WebView"))
                                             continue;
 
-                                        path = path.Replace(@"\AppxManifest.xml", "").Trim();
-                                        TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"Remove-Item -Path '{path}' -Recurse -Force\"");
+                                        if (path.EndsWith(@"\AppxManifest.xml", StringComparison.OrdinalIgnoreCase))
+                                            path = path.Replace(@"\AppxManifest.xml", "").Trim();
+
+                                        RemoveDirectory(path);
+
                                         key.DeleteSubKey(subKey);
+
                                         return;
                                     }
                                 }

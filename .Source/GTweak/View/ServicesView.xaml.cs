@@ -35,7 +35,7 @@ namespace GTweak.View
 
             new ViewNotification(300).Show("restart");
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); new ServicesTweaks().AnalyzeAndUpdate(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); new ServicesTweaks().AnalyzeAndUpdate(this); });
         }
 
         private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e) => Parallel.Invoke(() => new ServicesTweaks().AnalyzeAndUpdate(this));

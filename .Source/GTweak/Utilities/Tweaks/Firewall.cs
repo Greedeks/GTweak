@@ -25,6 +25,21 @@ namespace GTweak.Utilities.Tweaks
             ["WD"] = string.Concat(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MpCmdRun.exe"),
         };
 
+        private static void RemoveAllRulesByName(string nameRule)
+        {
+            INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
+            List<INetFwRule> rulesToRemove = new List<INetFwRule>();
+
+            foreach (INetFwRule rule in firewallPolicy.Rules)
+            {
+                if (rule.Name == nameRule)
+                    rulesToRemove.Add(rule);
+            }
+
+            foreach (var rule in rulesToRemove)
+                firewallPolicy.Rules.Remove(rule.Name);
+        }
+
         private static bool CheckRulesWindows(string nameRule)
         {
             bool isCheck = true;
@@ -77,7 +92,7 @@ namespace GTweak.Utilities.Tweaks
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
-                firewallPolicy.Rules.Remove(nameRule);
+                RemoveAllRulesByName(nameRule);
         }
 
         protected static void BlockSpyDomain(in bool isDisabled)
@@ -122,7 +137,7 @@ namespace GTweak.Utilities.Tweaks
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
-                firewallPolicy.Rules.Remove(_nameRules["Domain"]);
+                RemoveAllRulesByName(_nameRules["Domain"]);
         }
 
         protected static void BlockWDefender(bool isDisabled)
