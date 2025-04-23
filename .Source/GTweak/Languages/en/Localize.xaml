@@ -200,7 +200,7 @@
     <v:String x:Key="textcolor_interface">This is an example of a new color.</v:String>
     <v:String x:Key="previewflick_interface">For a comparison</v:String>
 
-    <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «The color of wet asphalt».</v:String>
+    <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «Wet Asphalt».</v:String>
     <v:String x:Key="TglButton2_description_interface">Will change the color of the tooltip in some programs from yellow to light blue «Azure».</v:String>
     <v:String x:Key="TglButton3_description_interface">The tweak will reduce the size of the Сollapse, Expand and close Buttons, making them less bulky. Resizes all windows, including Explorer, Windows Photos, browsers, and other programs you know.</v:String>
     <v:String x:Key="TglButton4_description_interface">The tweak accelerates the flicker frequency of the text cursor. By default, it is every 530 milliseconds.</v:String>
@@ -215,7 +215,7 @@
     <v:String x:Key="TglButton13_description_interface">The PC icon, unlike the PC shortcut, is better because it has the necessary properties of the context menu and is free of unnecessary ones.</v:String>
     <v:String x:Key="TglButton14_description_interface">If you do not need the Trash icon on the desktop and you do not want to waste time looking for a shutdown, then you can use tweaks.</v:String>
     <v:String x:Key="TglButton15_description_interface">Choose where you want the icons on the taskbar to be displayed, on the cent or on the left</v:String>
-    <v:String x:Key="TglButton16_description_interface">Modifies the layout of the «Start» menu, increasing more available space for pinning applications.</v:String>
+    <v:String x:Key="TglButton16_description_interface">Changes the Start menu layout by expanding the area for pinned apps. In addition, except in the Windows Home edition, the «Recommended» section will be removed from the Start menu.</v:String>
     <v:String x:Key="TglButton17_description_interface">This tweak will return you to the usual classic context menu for the desktop and «Explorer». Attention the screen may blink.</v:String>
     <v:String x:Key="TglButton18_description_interface">Windows 11 sometimes shows hints on how to use a particular feature, for example, the new «Start» menu or «Quick Settings». They are useful if you are seeing Windows 11 for the first time, as it is useless junk.</v:String>
     <v:String x:Key="TglButton19_description_interface">By default, Windows adds padding between items in Explorer. This is a new feature designed for touch screens. This tweak will restore the classic layout of the file explorer, removing the indentation between the elements and saving you from searching for settings.</v:String>

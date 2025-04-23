@@ -201,7 +201,7 @@
     <v:String x:Key="previewflick_interface">비교를 위해</v:String>
 
     <v:String x:Key="TglButton1_description_interface">커서 선택 항목의 색상이 파란색에서 «젖은 아스팔트의 색»이 회색으로 변경됩니다.</v:String>
-    <v:String x:Key="TglButton2_description_interface">일부 프로그램에서 도구 설명의 색상이 노란색에서 하늘색  «Azure».로 변경됩니다.</v:String>
+    <v:String x:Key="TglButton2_description_interface">일부 프로그램에서 도구 설명의 색상이 노란색에서 하늘색 «Azure».로 변경됩니다.</v:String>
     <v:String x:Key="TglButton3_description_interface">이 조정으로 축소, 확장, 닫기 버튼의 크기가 줄어들어 부피가 줄어듭니다. 탐색기, Windows 사진, 브라우저 및 기타 프로그램을 포함한 모든 창 크기를 조정합니다.</v:String>
     <v:String x:Key="TglButton4_description_interface">이 조정은 텍스트 커서의 깜박임 빈도를 가속화합니다. 기본적으로 530밀리초마다 깜박입니다.</v:String>
     <v:String x:Key="TglButton5_description_interface">이 조정으로 브라우저와 프로그램을 포함한 창에서 스크롤 막대의 두께가 더 얇아집니다.</v:String>
@@ -215,7 +215,7 @@
     <v:String x:Key="TglButton13_description_interface">PC 아이콘은 PC 바로 가기와 달리 컨텍스트 메뉴에 필요한 속성이 있고 불필요한 속성이 없기 때문에 더 좋습니다.</v:String>
     <v:String x:Key="TglButton14_description_interface">바탕화면에 휴지통 아이콘이 필요하지 않고 종료를 찾는 데 시간을 낭비하고 싶지 않다면 조정을 사용할 수 있습니다.</v:String>
     <v:String x:Key="TglButton15_description_interface">작업 표시줄의 아이콘을 표시할 위치를 중앙 또는 왼쪽 중에서 선택합니다</v:String>
-    <v:String x:Key="TglButton16_description_interface">«시작» 메뉴의 레이아웃을 수정하여 응용 프로그램 고정을 위한 사용 가능한 공간을 늘립니다.</v:String>
+    <v:String x:Key="TglButton16_description_interface">시작 메뉴 레이아웃을 변경하여 고정된 앱 영역을 확장합니다. 또한 Windows Home 에디션을 제외한 모든 에디션에서 시작 메뉴의 «추천(Recommended)» 섹션이 제거됩니다.</v:String>
     <v:String x:Key="TglButton17_description_interface">이렇게 조정하면 바탕화면과 «탐색기»에 대한 일반적인 클래식 컨텍스트 메뉴로 돌아갑니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton18_description_interface">Windows 11에서는 새로운 «시작» 메뉴나 «빠른 설정»과 같은 특정 기능을 사용하는 방법에 대한 힌트를 표시하는 경우가 있습니다. 이러한 힌트는 Windows 11을 처음 사용하는 경우 유용합니다.</v:String>
     <v:String x:Key="TglButton19_description_interface">기본적으로 Windows는 탐색기에서 항목 사이에 패딩을 추가합니다. 이는 터치 스크린을 위해 설계된 새로운 기능입니다. 이 조정은 파일 탐색기의 클래식 레이아웃을 복원하여 요소 사이의 들여쓰기를 제거하고 설정을 검색하는 데 시간을 절약합니다.</v:String>

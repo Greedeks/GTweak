@@ -15,6 +15,7 @@ namespace GTweak.Utilities.Helpers.Managers
         {
             new { Button = "TglButton7", NeedRestart = true },
             new { Button = "TglButton8", NeedRestart = true },
+            new { Button = "TglButton16", NeedRestart = true },
             new { Button = "TglButton17", NeedRestart = true },
             new { Button = "TglButton21", NeedRestart = true },
             new { Button = "TglButton22", NeedRestart = true },
