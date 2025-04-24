@@ -37,7 +37,7 @@ namespace GTweak.Utilities.Controls
             try
             {
                 using var stream = new FileStream(StoragePaths.LogFile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
-                using var writer = new StreamWriter(stream, new UTF8Encoding(false));
+                using var writer = new StreamWriter(stream, Encoding.UTF8);
                 await writer.WriteLineAsync($"[{DateTime.Now}]\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
                 await writer.FlushAsync();
 
@@ -45,14 +45,16 @@ namespace GTweak.Utilities.Controls
 
                 if (File.Exists(StoragePaths.LogFile))
                 {
-                    Process.Start(new ProcessStartInfo
+                    try
                     {
-                        FileName = StoragePaths.LogFile,
-                        UseShellExecute = true
-                    });
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = StoragePaths.LogFile,
+                            UseShellExecute = true
+                        });
+                    }
+                    catch (Exception processEx) { LogDebug(processEx); }
                 }
-                else
-                    LogDebug(new FileNotFoundException(StoragePaths.LogFile));
             }
             catch (Exception fileEx) { LogDebug(fileEx); }
         }
