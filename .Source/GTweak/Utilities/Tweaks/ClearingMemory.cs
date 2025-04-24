@@ -178,8 +178,11 @@ namespace GTweak.Utilities.Tweaks
             return num != 0;
         }
 
-        private static void ClearTempSystemCache(bool shouldRemoveWinOld = false)
+        internal static void StartMemoryCleanupAsync(bool shouldRemoveWinOld = false)
         {
+            ClearFileSystemCache(true);
+            EmptyWorkingSetFunction();
+
             if (shouldRemoveWinOld)
             {
                 string filePath = Path.Combine(StoragePaths.SystemDisk, "Windows.old");
@@ -208,13 +211,6 @@ namespace GTweak.Utilities.Tweaks
 
                 await Task.Delay(200);
             });
-        }
-
-        internal async void StartMemoryCleanup(bool removeWinOldFlag = false)
-        {
-            BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { ClearFileSystemCache(true); EmptyWorkingSetFunction(); ClearTempSystemCache(removeWinOldFlag); });
-            new ViewNotification(500).Show("", "info", "clear_ram_notification");
         }
     }
 }

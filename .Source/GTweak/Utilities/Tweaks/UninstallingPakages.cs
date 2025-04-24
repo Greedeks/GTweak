@@ -81,7 +81,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal void LoadInstalledPackages() => InstalledPackages = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
 
-        internal static Task DeletingPackage(string packageName, bool removeWebViewFlag = false)
+        internal static Task DeletingPackage(string packageName, bool shouldRemoveWebView = false)
         {
             if (packageName == "OneDrive")
                 return DeletedOneDrive();
@@ -185,59 +185,10 @@ namespace GTweak.Utilities.Tweaks
                             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             break;
                         case "Edge":
-                            string script = $@"
-                            $region = (Get-ItemProperty -Path 'Registry::HKEY_USERS\.DEFAULT\Control Panel\International\Geo').Name
-                            $policyFile = '{StoragePaths.SystemDisk}Windows\System32\IntegratedServicesRegionPolicySet.json'
-
-                            if (Test-Path $policyFile) {{
-                                $json = Get-Content -Path $policyFile -Raw | ConvertFrom-Json
-                            
-                                if (-not $json.Policies) {{
-                                    exit 1
-                                }}
-                            
-                                $policy = $json.Policies | Where-Object {{ $_.'$comment' -eq 'Edge is uninstallable.' }}
-                            
-                                if ($policy) {{
-                                    if ($policy.defaultState -ne 'enabled') {{
-                                        $policy.defaultState = 'enabled'
-                                    }}
-                            
-                                    if ($policy.conditions.region.enabled -notcontains $region) {{
-                                        $policy.conditions.region.enabled += $region
-                                        $policy.conditions.region.enabled = $policy.conditions.region.enabled | Sort-Object -Unique
-                            
-                                        $json | ConvertTo-Json -Depth 10 | Set-Content -Path $policyFile -Encoding UTF8
-                                    }}
-                                }}
-                            }} else {{
-                                exit 1
-                            }}";
-
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"{Path.Combine(Environment.SystemDirectory, "WindowsPowerShell\\v1.0\\powershell.exe")} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"");
-
+                            TakingOwnership.GrantDebugPrivilege();
                             foreach (string process in new string[] { "msedge.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
-                                CommandExecutor.RunCommand($"/c taskkill /f /im {process} /t");
-                            foreach (var package in new[] { new { AppName = "Edge", Arguments = "--uninstall --msedge --channel=stable --system-level --verbose-logging" }, new { AppName = "EdgeWebView", Arguments = "--uninstall --msedgewebview --system-level --verbose-logging" } })
-                            {
-                                try
-                                {
-                                    string setupPath = Path.Combine(Directory.GetDirectories(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", package.AppName, "Application")).FirstOrDefault(), "Installer", "setup.exe");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c taskkill /f /im {process} /t");
 
-                                    if (!removeWebViewFlag && package.AppName == "EdgeWebView")
-                                        continue;
-
-                                    Process.Start(new ProcessStartInfo
-                                    {
-                                        FileName = setupPath,
-                                        Arguments = package.Arguments,
-                                        UseShellExecute = true,
-                                        WindowStyle = ProcessWindowStyle.Hidden
-                                    })?.WaitForExitAsync();
-
-                                }
-                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                            }
                             DeletingTask(edgeTasks);
 
                             TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /с rmdir /s /q %LocalAppData%\Microsoft\Edge");
@@ -255,7 +206,7 @@ namespace GTweak.Utilities.Tweaks
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Classes\MSEdgeHTM", true);
                             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
 
-                            if (removeWebViewFlag)
+                            if (shouldRemoveWebView)
                             {
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update", true);
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", true);
@@ -271,7 +222,6 @@ namespace GTweak.Utilities.Tweaks
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
                             }
 
-
                             static void RemoveDirectory(string path)
                             {
                                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c takeown /f \"{path}\"");
@@ -282,7 +232,7 @@ namespace GTweak.Utilities.Tweaks
 
                             foreach (string folder in new[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
                             {
-                                if (!removeWebViewFlag && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
+                                if (!shouldRemoveWebView && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
                                     continue;
 
                                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
@@ -298,7 +248,7 @@ namespace GTweak.Utilities.Tweaks
                                     string path = subKeyEntry?.GetValue("Path") as string;
                                     if (!string.IsNullOrEmpty(path) && path.Equals("Edge"))
                                     {
-                                        if (!removeWebViewFlag && path.Contains("WebView"))
+                                        if (!shouldRemoveWebView && path.Contains("WebView"))
                                             continue;
 
                                         if (path.EndsWith(@"\AppxManifest.xml", StringComparison.OrdinalIgnoreCase))

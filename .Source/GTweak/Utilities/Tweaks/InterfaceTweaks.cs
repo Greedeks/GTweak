@@ -66,7 +66,7 @@ namespace GTweak.Utilities.Tweaks
                 SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", "0");
 
             interfaceV.TglButton16.StateNA =
-                SystemDiagnostics.IsWindowsVersion[11] && 
+                SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", "1") ||
                 SystemDiagnostics.HardwareData.OSVersion.IndexOf("home", StringComparison.OrdinalIgnoreCase) < 0 &&
                 (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start", "HideRecommendedSection", "1") ||

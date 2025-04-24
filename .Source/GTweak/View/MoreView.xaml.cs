@@ -95,7 +95,9 @@ namespace GTweak.View
                 OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
             }
 
-            new ClearingMemory().StartMemoryCleanup(_isWinOldRemoval);
+            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            await backgroundQueue.QueueTask(delegate { ClearingMemory.StartMemoryCleanupAsync(_isWinOldRemoval); });
+            new ViewNotification(500).Show("", "info", "clear_ram_notification");
         }
 
         private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.SetDefragState(false);
