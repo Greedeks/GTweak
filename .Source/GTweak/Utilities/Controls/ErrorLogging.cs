@@ -36,10 +36,12 @@ namespace GTweak.Utilities.Controls
         {
             try
             {
-                using var stream = new FileStream(StoragePaths.LogFile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read);
-                using var writer = new StreamWriter(stream, Encoding.UTF8);
-                await writer.WriteLineAsync($"[{DateTime.Now}]\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
-                await writer.FlushAsync();
+                using (FileStream stream = new FileStream(StoragePaths.LogFile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+                using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
+                {
+                    await writer.WriteLineAsync($"[{DateTime.Now}]\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
+                    await writer.FlushAsync();
+                }
 
                 await EnsureAssociation();
 
@@ -47,6 +49,8 @@ namespace GTweak.Utilities.Controls
                 {
                     try
                     {
+                        await Task.Delay(50);
+
                         Process.Start(new ProcessStartInfo
                         {
                             FileName = StoragePaths.LogFile,
