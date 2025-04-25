@@ -31,7 +31,7 @@ namespace GTweak.Windows
                 disablingWinKeys.ptrHook = DisablingWinKeys.SetWindowsHookEx(13, disablingWinKeys.objKeyboardProcess, DisablingWinKeys.GetModuleHandle(objCurrentModule.ModuleName), 1);
                 Close();
             };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             BeginAnimation(OpacityProperty, doubleAnim);
         }
 
@@ -49,7 +49,7 @@ namespace GTweak.Windows
                 EasingFunction = new PowerEase(),
                 Duration = TimeSpan.FromSeconds(0.3)
             };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             BeginAnimation(OpacityProperty, doubleAnim);
         }
     }

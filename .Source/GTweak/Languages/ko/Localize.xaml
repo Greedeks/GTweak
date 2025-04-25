@@ -6,10 +6,7 @@
     <v:String x:Key="defaultDescriptionApp">응용 프로그램의 아이콘 위에 마우스를 가져가면 이름을 확인할 수 있습니다</v:String>
 
     <!--#region Load Window -->
-    <v:String x:Key="title0_load">로드 중</v:String>
-    <v:String x:Key="title1_load">로드 중.</v:String>
-    <v:String x:Key="title2_load">로드 중..</v:String>
-    <v:String x:Key="title3_load">로드 중...</v:String>
+    <v:String x:Key="title_load">로드 중</v:String>
     <v:String x:Key="text0_load">프로필 업로드 중</v:String>
     <v:String x:Key="text1_load">데이터 확인 중</v:String>
     <v:String x:Key="text2_load">레지스트리 보기</v:String>
@@ -103,7 +100,7 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_win_import">조정 가져오기</v:String>
-    <v:String x:Key="wait_win_import">시간이 좀 걸립니다...</v:String>
+    <v:String x:Key="wait_win_import">시간이 좀 걸립니다</v:String>
     <v:String x:Key="warning_win_import">창을 강제로 닫을 필요는 없습니다</v:String>
     <v:String x:Key="file_import">파일</v:String>
     <!--#endregion-->

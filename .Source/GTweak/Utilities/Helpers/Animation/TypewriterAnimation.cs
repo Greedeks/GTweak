@@ -51,7 +51,7 @@ namespace GTweak.Utilities.Helpers.Animation
                 stringAnimation.KeyFrames.Add(keyFrame);
             }
 
-            Timeline.SetDesiredFrameRate(stringAnimation, 400);
+            Timeline.SetDesiredFrameRate(stringAnimation, 240);
             return stringAnimation;
         }
 
@@ -65,7 +65,7 @@ namespace GTweak.Utilities.Helpers.Animation
                 EasingFunction = new QuadraticEase()
             };
 
-            Timeline.SetDesiredFrameRate(opacityAnimation, 400);
+            Timeline.SetDesiredFrameRate(opacityAnimation, 240);
             return opacityAnimation;
         }
     }

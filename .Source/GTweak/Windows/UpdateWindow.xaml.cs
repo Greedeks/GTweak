@@ -35,7 +35,7 @@ namespace GTweak.Windows
                 Duration = TimeSpan.FromSeconds(0.3),
                 EasingFunction = new QuadraticEase()
             };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -44,7 +44,7 @@ namespace GTweak.Windows
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.1));
             doubleAnim.Completed += delegate { Close(); };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             BeginAnimation(OpacityProperty, doubleAnim);
         }
 

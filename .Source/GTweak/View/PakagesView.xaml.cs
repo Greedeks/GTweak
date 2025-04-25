@@ -54,7 +54,7 @@ namespace GTweak.View
                 EasingFunction = new QuadraticEase()
             };
             if (onComplete != null) { doubleAnim.Completed += onComplete; }
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             Overlay.BeginAnimation(OpacityProperty, doubleAnim);
         }
 

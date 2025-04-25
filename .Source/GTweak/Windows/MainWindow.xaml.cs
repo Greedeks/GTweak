@@ -65,8 +65,8 @@ namespace GTweak
                     Duration = TimeSpan.FromSeconds(1)
                 };
 
-                Timeline.SetDesiredFrameRate(rotateAnimation, 400);
-                Timeline.SetDesiredFrameRate(widthAnimation, 400);
+                Timeline.SetDesiredFrameRate(rotateAnimation, 240);
+                Timeline.SetDesiredFrameRate(widthAnimation, 240);
 
                 Storyboard.SetTarget(rotateAnimation, ImageSettings);
                 Storyboard.SetTargetProperty(rotateAnimation, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
@@ -105,7 +105,7 @@ namespace GTweak
             e.Cancel = true;
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.1));
             doubleAnim.Completed += delegate { Close(); };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             BeginAnimation(OpacityProperty, doubleAnim);
         }
 
@@ -126,7 +126,7 @@ namespace GTweak
                     new UpdateWindow().ShowDialog();
                 }
             };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             BeginAnimation(OpacityProperty, doubleAnim);
             new TypewriterAnimation(UtilityTitle.Text, UtilityTitle, TimeSpan.FromSeconds(0.4));
         }

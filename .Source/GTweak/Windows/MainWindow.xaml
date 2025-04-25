@@ -97,7 +97,7 @@
                                     </Trigger>
                                     <EventTrigger RoutedEvent="Loaded">
                                         <BeginStoryboard>
-                                            <Storyboard Timeline.DesiredFrameRate="400">
+                                            <Storyboard Timeline.DesiredFrameRate="240">
                                                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="-10" To="0" Duration="0:0:1.2" DecelerationRatio="0.6">
                                                     <DoubleAnimation.EasingFunction>
                                                         <ElasticEase/>
@@ -162,7 +162,7 @@
                                     </Trigger>
                                     <EventTrigger RoutedEvent="Loaded">
                                         <BeginStoryboard>
-                                            <Storyboard Timeline.DesiredFrameRate="400">
+                                            <Storyboard Timeline.DesiredFrameRate="240">
                                                 <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="-10" To="0" Duration="0:0:1.2" DecelerationRatio="0.6">
                                                     <DoubleAnimation.EasingFunction>
                                                         <ElasticEase/>

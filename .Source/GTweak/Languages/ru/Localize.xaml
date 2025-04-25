@@ -6,10 +6,7 @@
     <v:String x:Key="defaultDescriptionApp">Наведите указатель мыши на значок любого приложения, чтобы получить его название</v:String>
     
     <!--#region Load Window -->
-    <v:String x:Key="title0_load">Загрузка</v:String>
-    <v:String x:Key="title1_load">Загрузка.</v:String>
-    <v:String x:Key="title2_load">Загрузка..</v:String>
-    <v:String x:Key="title3_load">Загрузка...</v:String>
+    <v:String x:Key="title_load">Загрузка</v:String>
     <v:String x:Key="text0_load">Загрузка профиля</v:String>
     <v:String x:Key="text1_load">Проверка данных</v:String>
     <v:String x:Key="text2_load">Просмотр реестра</v:String>
@@ -103,7 +100,7 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_win_import">Импорт твиков</v:String>
-    <v:String x:Key="wait_win_import">Это занимает некоторое время...</v:String>
+    <v:String x:Key="wait_win_import">Это занимает некоторое время</v:String>
     <v:String x:Key="warning_win_import">Принудительно закрывать окно нет необходимости</v:String>
     <v:String x:Key="file_import">Файл</v:String>
     <!--#endregion-->

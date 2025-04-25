@@ -13,7 +13,7 @@
             </Trigger>
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
-                    <Storyboard Timeline.DesiredFrameRate="400">
+                    <Storyboard Timeline.DesiredFrameRate="240">
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:1" SpeedRatio="5" From="0" To="1" />
                     </Storyboard>
                 </BeginStoryboard>

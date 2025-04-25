@@ -98,7 +98,7 @@ namespace GTweak.Assets.UserControl
 
                     thicknessAnimKeyFrames.KeyFrames.Add(fromFrame);
                     thicknessAnimKeyFrames.KeyFrames.Add(toFrame);
-                    Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 400);
+                    Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 240);
                     Dot.BeginAnimation(MarginProperty, thicknessAnimKeyFrames);
 
                     BrushAnimation brushanimation = new BrushAnimation()
@@ -108,7 +108,7 @@ namespace GTweak.Assets.UserControl
                         SpeedRatio = 1,
                         Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(150)
                     };
-                    Timeline.SetDesiredFrameRate(brushanimation, 400);
+                    Timeline.SetDesiredFrameRate(brushanimation, 240);
                     Back.BeginAnimation(Shape.FillProperty, brushanimation);
                     ToggleText.Style = (Style)FindResource("Text");
                 }
@@ -127,7 +127,7 @@ namespace GTweak.Assets.UserControl
 
                     thicknessAnimKeyFrames.KeyFrames.Add(fromFrame);
                     thicknessAnimKeyFrames.KeyFrames.Add(toFrame);
-                    Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 400);
+                    Timeline.SetDesiredFrameRate(thicknessAnimKeyFrames, 240);
                     Dot.BeginAnimation(MarginProperty, thicknessAnimKeyFrames);
 
                     BrushAnimation brushanimation = new BrushAnimation()
@@ -137,7 +137,7 @@ namespace GTweak.Assets.UserControl
                         SpeedRatio = 1,
                         Duration = isSkipAnimation ? TimeSpan.FromSeconds(0) : TimeSpan.FromMilliseconds(150)
                     };
-                    Timeline.SetDesiredFrameRate(brushanimation, 400);
+                    Timeline.SetDesiredFrameRate(brushanimation, 240);
                     Back.BeginAnimation(Shape.FillProperty, brushanimation);
                     ToggleText.Style = (Style)FindResource("Text_In");
                 }

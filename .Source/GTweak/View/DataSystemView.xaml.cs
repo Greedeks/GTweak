@@ -59,7 +59,7 @@ namespace GTweak.View
                 {
                     DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
                     doubleAnim.Completed += delegate { SettingsRepository.ChangingParameters(false, "HiddenIP"); };
-                    Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                    Timeline.SetDesiredFrameRate(doubleAnim, 240);
                     IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                 }
 
@@ -83,7 +83,7 @@ namespace GTweak.View
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
-                Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                Timeline.SetDesiredFrameRate(doubleAnim, 240);
                 CPULoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
 
 
@@ -94,7 +94,7 @@ namespace GTweak.View
                     EasingFunction = new PowerEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
-                Timeline.SetDesiredFrameRate(doubleAnim, 400);
+                Timeline.SetDesiredFrameRate(doubleAnim, 240);
                 RAMLoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
             });
         }
@@ -115,7 +115,7 @@ namespace GTweak.View
                     Duration = TimeSpan.FromSeconds(3)
                 };
                 opacityAnim.Completed += delegate { PopupCopy.IsOpen = false; };
-                Timeline.SetDesiredFrameRate(opacityAnim, 400);
+                Timeline.SetDesiredFrameRate(opacityAnim, 240);
                 CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, opacityAnim);
 
                 DoubleAnimation offsetAnim = new DoubleAnimation()
@@ -126,7 +126,7 @@ namespace GTweak.View
                     EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(3)
                 };
-                Timeline.SetDesiredFrameRate(offsetAnim, 400);
+                Timeline.SetDesiredFrameRate(offsetAnim, 240);
                 PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, offsetAnim);
             });
         }
@@ -143,7 +143,7 @@ namespace GTweak.View
                 EasingFunction = new QuadraticEase(),
                 Duration = TimeSpan.FromSeconds(0.2)
             };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
         }
 

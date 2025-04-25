@@ -110,8 +110,8 @@ namespace GTweak.Windows
                     Duration = TimeSpan.FromSeconds(0.25)
                 };
 
-                Timeline.SetDesiredFrameRate(doubleAnim, 400);
-                Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 400);
+                Timeline.SetDesiredFrameRate(doubleAnim, 240);
+                Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 240);
 
                 BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
                 BeginAnimation(OpacityProperty, doubleAnim);
@@ -124,7 +124,7 @@ namespace GTweak.Windows
             e.Cancel = true;
             DoubleAnimation doubleAnimation = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
             doubleAnimation.Completed += delegate { Close(); };
-            Timeline.SetDesiredFrameRate(doubleAnimation, 400);
+            Timeline.SetDesiredFrameRate(doubleAnimation, 240);
             BeginAnimation(OpacityProperty, doubleAnimation);
         }
     }

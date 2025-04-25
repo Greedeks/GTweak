@@ -34,7 +34,7 @@
                             <Trigger Property="Image.IsEnabled" Value="True">
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
-                                        <Storyboard Timeline.DesiredFrameRate="400">
+                                        <Storyboard Timeline.DesiredFrameRate="240">
                                             <DoubleAnimation Storyboard.TargetProperty="Data.Transform.Angle" To="360" Duration="0:0:4" SpeedRatio="3" RepeatBehavior="Forever"/>
                                         </Storyboard>
                                     </BeginStoryboard>

@@ -6,10 +6,7 @@
     <v:String x:Key="defaultDescriptionApp">Наведіть вказівник миші на піктограму будь-якого додатку, щоб отримати його назву</v:String>
 
     <!--#region Load Window -->
-    <v:String x:Key="title0_load">Завантаження   </v:String>
-    <v:String x:Key="title1_load">Завантаження.  </v:String>
-    <v:String x:Key="title2_load">Завантаження.. </v:String>
-    <v:String x:Key="title3_load">Завантаження...</v:String>
+    <v:String x:Key="title_load">Завантаження</v:String>
     <v:String x:Key="text0_load">Завантаження профілю</v:String>
     <v:String x:Key="text1_load">Перевірка даних</v:String>
     <v:String x:Key="text2_load">Перегляд реєстру</v:String>
@@ -103,7 +100,7 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_win_import">Імпорт налаштувань</v:String>
-    <v:String x:Key="wait_win_import">На це потрібен деякий час...</v:String>
+    <v:String x:Key="wait_win_import">На це потрібен деякий час</v:String>
     <v:String x:Key="warning_win_import">Немає потреби примусово закривати вікно</v:String>
     <v:String x:Key="file_import">Файл</v:String>
     <!--#endregion-->

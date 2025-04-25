@@ -22,7 +22,7 @@ namespace GTweak.Windows
                 EasingFunction = new QuadraticEase(),
                 Duration = TimeSpan.FromSeconds(1.5)
             };
-            Timeline.SetDesiredFrameRate(doubleAnim, 400);
+            Timeline.SetDesiredFrameRate(doubleAnim, 240);
             doubleAnim.Completed += delegate { SettingsRepository.SelfReboot(); };
             RestartProgress.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
         }

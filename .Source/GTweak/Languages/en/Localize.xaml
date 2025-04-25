@@ -6,10 +6,7 @@
     <v:String x:Key="defaultDescriptionApp">Hover your mouse over the icon of any application to see its name</v:String>
 
     <!--#region Load Window -->
-    <v:String x:Key="title0_load">Loading</v:String>
-    <v:String x:Key="title1_load">Loading.</v:String>
-    <v:String x:Key="title2_load">Loading..</v:String>
-    <v:String x:Key="title3_load">Loading...</v:String>
+    <v:String x:Key="title_load">Loading</v:String>
     <v:String x:Key="text0_load">Uploading a profile</v:String>
     <v:String x:Key="text1_load">Checking the data</v:String>
     <v:String x:Key="text2_load">Viewing the registry</v:String>
@@ -103,7 +100,7 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_win_import">Importing tweaks</v:String>
-    <v:String x:Key="wait_win_import">It takes some time...</v:String>
+    <v:String x:Key="wait_win_import">It takes some time</v:String>
     <v:String x:Key="warning_win_import">It is not necessary to close the window forcibly</v:String>
     <v:String x:Key="file_import">File</v:String>
     <!--#endregion-->

@@ -22,16 +22,18 @@
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">
 
-            <TextBlock x:Name="TextTittle" Text="{DynamicResource title0_load}"  Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
+            <TextBlock x:Name="TextTittle" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
+               <Run Text="{StaticResource title_load}" /><Run x:Name="DotRun" Text="" />
                 <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                         <BeginStoryboard>
-                            <Storyboard>
-                                <StringAnimationUsingKeyFrames  Storyboard.TargetName="TextTittle" Storyboard.TargetProperty="(TextBlock.Text)" Duration="0:0:0:8" SpeedRatio="10" FillBehavior="HoldEnd" RepeatBehavior="Forever">
-                                    <DiscreteStringKeyFrame Value="{DynamicResource title1_load}" KeyTime="0:0:0:1"/>
-                                    <DiscreteStringKeyFrame Value="{DynamicResource title2_load}" KeyTime="0:0:0:2" />
-                                    <DiscreteStringKeyFrame Value="{DynamicResource title3_load}" KeyTime="0:0:0:3" />
-                                </StringAnimationUsingKeyFrames>
+                            <Storyboard Timeline.DesiredFrameRate="240" RepeatBehavior="Forever" Duration="0:0:0.8">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DotRun" Storyboard.TargetProperty="Text">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0"   Value="" />
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="." />
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value=".." />
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="..." />
+                                </ObjectAnimationUsingKeyFrames>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>

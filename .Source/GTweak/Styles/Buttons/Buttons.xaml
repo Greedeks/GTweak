@@ -29,7 +29,7 @@
             </Trigger>
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
-                    <Storyboard Timeline.DesiredFrameRate="400">
+                    <Storyboard Timeline.DesiredFrameRate="240">
                         <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="10" To="0" Duration="0:0:1.2" DecelerationRatio="0.6">
                             <DoubleAnimation.EasingFunction>
                                 <ElasticEase/>
@@ -103,7 +103,7 @@
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="400">
+                        <Storyboard Timeline.DesiredFrameRate="240">
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
                         </Storyboard>
@@ -113,7 +113,7 @@
             <EventTrigger RoutedEvent="Button.MouseLeave">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="400">
+                        <Storyboard Timeline.DesiredFrameRate="240">
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
                         </Storyboard>
@@ -185,7 +185,7 @@
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="400">
+                        <Storyboard Timeline.DesiredFrameRate="240">
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
                         </Storyboard>
@@ -195,7 +195,7 @@
             <EventTrigger RoutedEvent="Button.MouseLeave">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="400">
+                        <Storyboard Timeline.DesiredFrameRate="240">
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
                             <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
                         </Storyboard>
