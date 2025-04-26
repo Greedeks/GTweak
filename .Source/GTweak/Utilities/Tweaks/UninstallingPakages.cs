@@ -85,188 +85,192 @@ namespace GTweak.Utilities.Tweaks
         {
             if (packageName == "OneDrive")
                 return DeletedOneDrive();
-            else
+
+            return Task.Run(async () =>
             {
-                return Task.Run(async () =>
+                try
                 {
-                    try
+                    static async Task RunPowerShell(string script)
                     {
-                        static async Task RunPowerShell(string arguments)
+                        ProcessStartInfo startInfo = new ProcessStartInfo
                         {
-                            ProcessStartInfo startInfo = new ProcessStartInfo
-                            {
-                                FileName = "powershell.exe",
-                                Arguments = arguments,
-                                UseShellExecute = false,
-                                CreateNoWindow = true,
-                                RedirectStandardOutput = true,
-                                RedirectStandardError = true
-                            };
+                            FileName = "powershell.exe",
+                            Arguments = $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"",
+                            UseShellExecute = false,
+                            CreateNoWindow = true,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true
+                        };
 
-                            using var process = new Process { StartInfo = startInfo };
-                            process.Start();
-                            await process.WaitForExitAsync();
-                        }
-
-                        var (Alias, IsUnavailable, Scripts) = PackagesDetails[packageName];
-                        string argument = "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command";
-
-                        await RunPowerShell($"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{packageName}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"");
-
-                        foreach (string getScript in Scripts ?? Enumerable.Empty<string>())
-                        {
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in (""{_pathPackage}\*{getScript}*"") do rd /s /q ""%i""");
-                            await RunPowerShell($"{argument} \"Get-AppxPackage -Name {getScript} -AllUsers | Remove-AppxPackage\"");
-                        }
-
-                        if (!string.IsNullOrEmpty(Alias))
-                            await RunPowerShell($"{argument} \"Get-AppxProvisionedPackage -online | where-object {{$_.PackageName -like '*{Alias}*'}} | Remove-AppxProvisionedPackage -alluser -online –Verbose\"");
+                        using var process = new Process { StartInfo = startInfo };
+                        process.Start();
+                        await process.WaitForExitAsync().ConfigureAwait(false);
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                    switch (packageName)
+                    var (Alias, _, Scripts) = PackagesDetails[packageName];
+
+                    List<string> packageNamesToRemove = new List<string> { packageName };
+
+                    if (!string.IsNullOrEmpty(Alias))
+                        packageNamesToRemove.Add(Alias);
+
+                    if (Scripts != null)
+                        packageNamesToRemove.AddRange(Scripts);
+
+                    List<string> psCommands = packageNamesToRemove.SelectMany(name => new[]
                     {
-                        case "Widgets":
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
-                            break;
-                        case "Cortana":
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Speech_OneCore\Preferences", "ModelDownloadAllowed", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCloudSearch", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCortana", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowSearchToUseLocation", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DisableWebSearch", 1, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitInkCollection", 1, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitTextCollection", 1, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization\TrainedDataStore", "HarvestContacts", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Personalization\Settings", "AcceptedPrivacyPolicy", 0, RegistryValueKind.DWord);
-                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Windows Search", "CortanaConsent", 0, RegistryValueKind.DWord);
-                            break;
-                        case "Phone":
-                            if (RegistryHelp.KeyExists(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\ModernSharing", false))
+                        $@"Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -like '*{name}*' }} | ForEach-Object {{ Remove-AppxPackage -AllUsers -Package $_.PackageFullName }}",
+                        $@"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.PackageName -like '*{name}*' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName -AllUsers -Verbose }}"
+                    }).ToList();
+
+                    await RunPowerShell(string.Join(" ; ", psCommands)).ConfigureAwait(false);
+
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in ({string.Join(" ", packageNamesToRemove.Select(n => $@"""{_pathPackage}\*{n}*"""))}) do takeown /f ""%i"" /r /d Y & icacls ""%i"" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls ""%i"" /grant %username%:F & rd /s /q ""%i""");
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
+                switch (packageName)
+                {
+                    case "Widgets":
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
+                        break;
+                    case "Cortana":
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Speech_OneCore\Preferences", "ModelDownloadAllowed", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCloudSearch", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowCortana", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowSearchToUseLocation", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DisableWebSearch", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Windows Search", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitInkCollection", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization", "RestrictImplicitTextCollection", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\InputPersonalization\TrainedDataStore", "HarvestContacts", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Personalization\Settings", "AcceptedPrivacyPolicy", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Windows Search", "CortanaConsent", 0, RegistryValueKind.DWord);
+                        break;
+                    case "Phone":
+                        if (RegistryHelp.KeyExists(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\ModernSharing", false))
+                        {
+                            RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\SendTo");
+                            RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\ModernShare");
+                        }
+                        else
+                        {
+                            RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo");
+                            RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing");
+                        }
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c reg delete ""HKEY_CLASSES_ROOT\CLSID\{{7AD84985-87B4-4a16-BE58-8B72A5B390F7}}"" /f & reg delete ""HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{{7AD84985-87B4-4a16-BE58-8B72A5B390F7}}"" /f");
+                        break;
+                    case "Paint3D":
+                        try
+                        {
+                            using RegistryKey baseKey = Registry.ClassesRoot.OpenSubKey("SystemFileAssociations", true);
+                            if (baseKey != null)
                             {
-                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\SendTo");
-                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\ModernShare");
-                            }
-                            else
-                            {
-                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo");
-                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing");
-                            }
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c reg delete ""HKEY_CLASSES_ROOT\CLSID\{{7AD84985-87B4-4a16-BE58-8B72A5B390F7}}"" /f & reg delete ""HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{{7AD84985-87B4-4a16-BE58-8B72A5B390F7}}"" /f");
-                            break;
-                        case "Paint3D":
-                            try
-                            {
-                                using RegistryKey baseKey = Registry.ClassesRoot.OpenSubKey("SystemFileAssociations", true);
-                                if (baseKey != null)
+                                foreach (string subkey in baseKey.GetSubKeyNames())
                                 {
-                                    foreach (string subkey in baseKey.GetSubKeyNames())
+                                    try
                                     {
-                                        try
+                                        using RegistryKey assocKey = baseKey.OpenSubKey(subkey, true);
+                                        if (assocKey != null)
                                         {
-                                            using RegistryKey assocKey = baseKey.OpenSubKey(subkey, true);
-                                            if (assocKey != null)
+                                            using RegistryKey shellKey = assocKey.OpenSubKey("Shell", true);
+                                            if (shellKey != null)
                                             {
-                                                using RegistryKey shellKey = assocKey.OpenSubKey("Shell", true);
-                                                if (shellKey != null)
-                                                {
-                                                    if (shellKey.GetSubKeyNames().Any(k => k.Equals("3D Print", StringComparison.OrdinalIgnoreCase)))
-                                                        RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\3D Print");
-                                                }
+                                                if (shellKey.GetSubKeyNames().Any(k => k.Equals("3D Print", StringComparison.OrdinalIgnoreCase)))
+                                                    RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\3D Print");
                                             }
                                         }
-                                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                                     }
-                                    baseKey.Close();
+                                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                                 }
+                                baseKey.Close();
                             }
-                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                            break;
-                        case "Edge":
-                            TakingOwnership.GrantDebugPrivilege();
-                            foreach (string process in new string[] { "msedge.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c taskkill /f /im {process} /t");
+                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        break;
+                    case "Edge":
+                        TakingOwnership.GrantDebugPrivilege();
+                        foreach (string process in new string[] { "msedge.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c taskkill /f /im {process} /t");
 
-                            DeletingTask(edgeTasks);
+                        DeletingTask(edgeTasks);
 
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /с rmdir /s /q %LocalAppData%\Microsoft\Edge");
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""");
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""{StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del ""%f""");
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""{StoragePaths.SystemDisk}Users"" %f in (*Edge*) do @if exist ""%f"" del /f /q ""%f""");
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %d in (""{StoragePaths.SystemDisk}Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""");
-                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /f ""delims="" %i in ('dir /b /s ""{StoragePaths.SystemDisk}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /с rmdir /s /q %LocalAppData%\Microsoft\Edge");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""{StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del ""%f""");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /r ""{StoragePaths.SystemDisk}Users"" %f in (*Edge*) do @if exist ""%f"" del /f /q ""%f""");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %d in (""{StoragePaths.SystemDisk}Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /f ""delims="" %i in ('dir /b /s ""{StoragePaths.SystemDisk}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))");
 
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", true);
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}", true);
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Edge", true);
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge", true);
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Classes\MSEdgeHTM", true);
-                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Edge", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Classes\MSEdgeHTM", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Clients\StartMenuInternet\Microsoft Edge", true);
 
-                            if (shouldRemoveWebView)
+                        if (shouldRemoveWebView)
+                        {
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdatem", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate", true);
+                            RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AppID\MicrosoftEdgeUpdate.exe", true);
+                            RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\EdgeUpdate", true);
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeAutoLaunch_03AF54719E0271FA0A92D5F15CBA10EA");
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeWebView", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\EdgeWebView", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView", true);
+                            RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\EdgeWebView", true);
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
+                        }
+
+                        static void RemoveDirectory(string path)
+                        {
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c takeown /f \"{path}\"");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /grant %username%:F");
+                            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rd /s /q \"{path}\"");
+                        }
+
+                        foreach (string folder in new[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
+                        {
+                            if (!shouldRemoveWebView && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
+                                continue;
+
+                            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
+                            RemoveDirectory(path);
+                        }
+
+                        try
+                        {
+                            using RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications");
+                            foreach (string subKey in key?.GetSubKeyNames() ?? Array.Empty<string>())
                             {
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update", true);
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", true);
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdatem", true);
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate", true);
-                                RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AppID\MicrosoftEdgeUpdate.exe", true);
-                                RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\EdgeUpdate", true);
-                                RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeAutoLaunch_03AF54719E0271FA0A92D5F15CBA10EA");
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeWebView", true);
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\EdgeWebView", true);
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView", true);
-                                RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\EdgeWebView", true);
-                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
-                            }
-
-                            static void RemoveDirectory(string path)
-                            {
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c takeown /f \"{path}\"");
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{path}\" /grant %username%:F");
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rd /s /q \"{path}\"");
-                            }
-
-                            foreach (string folder in new[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
-                            {
-                                if (!shouldRemoveWebView && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
-                                    continue;
-
-                                string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
-                                RemoveDirectory(path);
-                            }
-
-                            try
-                            {
-                                using RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications");
-                                foreach (string subKey in key?.GetSubKeyNames() ?? Array.Empty<string>())
+                                using RegistryKey subKeyEntry = key.OpenSubKey(subKey);
+                                string path = subKeyEntry?.GetValue("Path") as string;
+                                if (!string.IsNullOrEmpty(path) && path.Equals("Edge"))
                                 {
-                                    using RegistryKey subKeyEntry = key.OpenSubKey(subKey);
-                                    string path = subKeyEntry?.GetValue("Path") as string;
-                                    if (!string.IsNullOrEmpty(path) && path.Equals("Edge"))
-                                    {
-                                        if (!shouldRemoveWebView && path.Contains("WebView"))
-                                            continue;
+                                    if (!shouldRemoveWebView && path.Contains("WebView"))
+                                        continue;
 
-                                        if (path.EndsWith(@"\AppxManifest.xml", StringComparison.OrdinalIgnoreCase))
-                                            path = path.Replace(@"\AppxManifest.xml", "").Trim();
+                                    if (path.EndsWith(@"\AppxManifest.xml", StringComparison.OrdinalIgnoreCase))
+                                        path = path.Replace(@"\AppxManifest.xml", "").Trim();
 
-                                        RemoveDirectory(path);
+                                    RemoveDirectory(path);
 
-                                        key.DeleteSubKey(subKey);
+                                    key.DeleteSubKey(subKey);
 
-                                        return;
-                                    }
+                                    return;
                                 }
                             }
-                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                            break;
-                    }
-                });
-            }
+                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        break;
+                }
+            });
         }
 
         internal static Task DeletedOneDrive()
