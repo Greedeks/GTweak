@@ -264,7 +264,6 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagTrack);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, dmwappushservice);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagsvc);
-
                     }
                     else
                     {

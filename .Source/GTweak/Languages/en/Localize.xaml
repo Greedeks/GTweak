@@ -341,7 +341,7 @@
     <v:String x:Key="TglButton19_description_services">Disable if you do not want the services to load your PC while they are handling errors.</v:String>
     <v:String x:Key="TglButton20_description_services">Disable if you do not remotely manage files via Sharing or using WebDAV.</v:String>
     <v:String x:Key="TglButton21_description_services">Disable if you are not using smart cards. A smart card is one of the varieties of electronic identifiers or plastic with a chip. The appearance is a «Bank card». For everyday use of Windows, the service is not needed and you will never need it.</v:String>
-    <v:String x:Key="TglButton22_description_services">Disable if you do not use a Windows Kiosk or do not know what it is.</v:String>
+    <v:String x:Key="TglButton22_description_services">Disable it if you’re not using Windows kiosk mode or have already turned off User Account Control (UAC), since UAC is required for kiosk operation. Kiosk mode restricts the interface: it launches only one UWP application in full-screen mode and blocks all other access. Please note that disabling it may affect the Windows update installation process, as it also disables the preparation and initialization of system data and applications on first sign-in.</v:String>
     <v:String x:Key="TglButton23_description_services">Disable if you do not use BitLocker disk encryption and EFS file or folder encryption.</v:String>
     <v:String x:Key="TglButton24_description_services">Disable if you have configured all the languages that you will use and do not plan to add new ones.</v:String>
     <v:String x:Key="TglButton25_description_services">Disable if you do not use Windows Defender and all additional Windows security.</v:String>

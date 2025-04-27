@@ -359,8 +359,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows Defender", "Support")
             })
             {
-                TakingOwnership.GrantAdministratorsAccess(directory, TakingOwnership.SE_OBJECT_TYPE.SE_UNKNOWN_OBJECT_TYPE);
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c del /q \"{directory}\\*.*\"");
+                foreach (var filePath in Directory.EnumerateFiles(directory, "*", SearchOption.TopDirectoryOnly))
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c takeown /f \"{filePath}\" & icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{filePath}\" /grant %username%:F & del /q \"{filePath}\"");
             }
         }
 

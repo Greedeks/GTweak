@@ -24,19 +24,18 @@ namespace GTweak.Utilities.Helpers
         {
             Task.Run(async delegate
             {
-                if (registrykey.OpenSubKey(subkey) == null || registrykey.OpenSubKey(subkey)?.GetValue(value, null) == null) return;
+                if (registrykey.OpenSubKey(subkey) == null || registrykey.OpenSubKey(subkey)?.GetValue(value, null) == null)
+                    return;
+
                 try
                 {
                     if (isTakingOwner)
-                    {
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-                        await Task.Delay(200);
-                    }
+                        await GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
                     registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            });
+            }).ConfigureAwait(false);
         }
 
         internal static void Write<T>(RegistryKey registrykey, string subkey, string name, T data, RegistryValueKind kind, bool isTakingOwner = false)
@@ -46,10 +45,7 @@ namespace GTweak.Utilities.Helpers
                 try
                 {
                     if (isTakingOwner)
-                    {
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-                        await Task.Delay(200);
-                    }
+                        await GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
                     registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
                 }
@@ -57,7 +53,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     ErrorLogging.LogDebug(ex);
                 }
-            });
+            }).ConfigureAwait(false);
         }
 
         internal static void CreateFolder(RegistryKey registrykey, string subkey)
@@ -66,7 +62,7 @@ namespace GTweak.Utilities.Helpers
             {
                 try { registrykey.CreateSubKey(subkey); }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            });
+            }).ConfigureAwait(false);
         }
 
         internal static void DeleteFolderTree(RegistryKey registrykey, string subkey, bool isTakingOwner = false)
@@ -76,10 +72,7 @@ namespace GTweak.Utilities.Helpers
                 try
                 {
                     if (isTakingOwner)
-                    {
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-                        await Task.Delay(200);
-                    }
+                        await GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
                     RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
 
@@ -94,7 +87,7 @@ namespace GTweak.Utilities.Helpers
                     registrykey.DeleteSubKeyTree(subkey, false);
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            });
+            }).ConfigureAwait(false);
         }
 
         internal static bool KeyExists(in RegistryKey registrykey, in string subkey, in bool isNegation = true)

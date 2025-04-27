@@ -8,7 +8,7 @@ namespace GTweak.Utilities.Helpers
     {
         internal static async Task<string> GetCommandOutput(string arguments, bool isPowerShell = true)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
@@ -27,7 +27,7 @@ namespace GTweak.Utilities.Helpers
                 string output = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();
 
-                process.WaitForExitAsync();
+                await process.WaitForExitAsync().ConfigureAwait(false);
 
                 if (process.ExitCode == 0)
                     return string.Join(Environment.NewLine, output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));

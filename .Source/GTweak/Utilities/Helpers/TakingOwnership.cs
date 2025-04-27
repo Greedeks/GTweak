@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
 {
@@ -201,118 +202,121 @@ namespace GTweak.Utilities.Helpers
             return AdjustTokenPrivileges(hToken, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
         }
 
-        internal static void GrantAdministratorsAccess(string name, SE_OBJECT_TYPE type)
+        internal static async Task GrantAdministratorsAccess(string name, SE_OBJECT_TYPE type)
         {
-            SID_IDENTIFIER_AUTHORITY sidNTAuthority = SECURITY_NT_AUTHORITY;
-
-            IntPtr sidAdmin = IntPtr.Zero;
-            IntPtr sidUsers = IntPtr.Zero;
-            IntPtr sidTrustedInstaller = IntPtr.Zero;
-            IntPtr sidWD = IntPtr.Zero;
-
-            AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                     SECURITY_BUILTIN_DOMAIN_RID,
-                                     DOMAIN_ALIAS_RID_ADMINS,
-                                     0, 0, 0, 0, 0, 0,
-                                     ref sidAdmin);
-
-            AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                     SECURITY_BUILTIN_DOMAIN_RID,
-                                     DOMAIN_ALIAS_RID_USERS,
-                                     0, 0, 0, 0, 0, 0,
-                                     ref sidUsers);
-
-            AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                     SECURITY_BUILTIN_DOMAIN_RID,
-                                     DOMAIN_ALIAS_RID_TRUSTED_INSTALLER,
-                                     0, 0, 0, 0, 0, 0,
-                                     ref sidTrustedInstaller);
-
-            AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                     SECURITY_BUILTIN_DOMAIN_RID,
-                                     DOMAIN_ALIAS_RID_WD,
-                                     0, 0, 0, 0, 0, 0,
-                                     ref sidWD);
-
-            EXPLICIT_ACCESS[] explicitAccesss = new EXPLICIT_ACCESS[4];
-
-            explicitAccesss[0].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
-            explicitAccesss[0].grfAccessMode = ACCESS_MODE.SET_ACCESS;
-            explicitAccesss[0].grfInheritance = NO_INHERITANCE;
-            explicitAccesss[0].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
-            explicitAccesss[0].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
-            explicitAccesss[0].Trustee.ptstrName = sidAdmin;
-
-            explicitAccesss[1].grfAccessPermissions = ACCESS_MASK.GENERIC_READ | ACCESS_MASK.GENERIC_WRITE;
-            explicitAccesss[1].grfAccessMode = ACCESS_MODE.SET_ACCESS;
-            explicitAccesss[1].grfInheritance = NO_INHERITANCE;
-            explicitAccesss[1].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
-            explicitAccesss[1].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
-            explicitAccesss[1].Trustee.ptstrName = sidUsers;
-
-            explicitAccesss[2].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
-            explicitAccesss[2].grfAccessMode = ACCESS_MODE.DENY_ACCESS;
-            explicitAccesss[2].grfInheritance = NO_INHERITANCE;
-            explicitAccesss[2].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
-            explicitAccesss[2].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
-            explicitAccesss[2].Trustee.ptstrName = sidTrustedInstaller;
-
-            explicitAccesss[3].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
-            explicitAccesss[3].grfAccessMode = ACCESS_MODE.DENY_ACCESS;
-            explicitAccesss[3].grfInheritance = NO_INHERITANCE;
-            explicitAccesss[3].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
-            explicitAccesss[3].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
-            explicitAccesss[3].Trustee.ptstrName = sidWD;
-
-            IntPtr acl = IntPtr.Zero;
-            SetEntriesInAcl(4, ref explicitAccesss[0], (IntPtr)0, ref acl);
-
-            static void setPrivilege(string privilege, bool allow)
+            await Task.Run(() =>
             {
-                TOKEN_PRIVILEGES tokenPrivileges = new TOKEN_PRIVILEGES();
-                OpenProcessToken(GetCurrentProcess(),
-                    TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr token);
+                SID_IDENTIFIER_AUTHORITY sidNTAuthority = SECURITY_NT_AUTHORITY;
 
-                if (allow)
+                IntPtr sidAdmin = IntPtr.Zero;
+                IntPtr sidUsers = IntPtr.Zero;
+                IntPtr sidTrustedInstaller = IntPtr.Zero;
+                IntPtr sidWD = IntPtr.Zero;
+
+                AllocateAndInitializeSid(ref sidNTAuthority, 2,
+                                         SECURITY_BUILTIN_DOMAIN_RID,
+                                         DOMAIN_ALIAS_RID_ADMINS,
+                                         0, 0, 0, 0, 0, 0,
+                                         ref sidAdmin);
+
+                AllocateAndInitializeSid(ref sidNTAuthority, 2,
+                                         SECURITY_BUILTIN_DOMAIN_RID,
+                                         DOMAIN_ALIAS_RID_USERS,
+                                         0, 0, 0, 0, 0, 0,
+                                         ref sidUsers);
+
+                AllocateAndInitializeSid(ref sidNTAuthority, 2,
+                                         SECURITY_BUILTIN_DOMAIN_RID,
+                                         DOMAIN_ALIAS_RID_TRUSTED_INSTALLER,
+                                         0, 0, 0, 0, 0, 0,
+                                         ref sidTrustedInstaller);
+
+                AllocateAndInitializeSid(ref sidNTAuthority, 2,
+                                         SECURITY_BUILTIN_DOMAIN_RID,
+                                         DOMAIN_ALIAS_RID_WD,
+                                         0, 0, 0, 0, 0, 0,
+                                         ref sidWD);
+
+                EXPLICIT_ACCESS[] explicitAccesss = new EXPLICIT_ACCESS[4];
+
+                explicitAccesss[0].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
+                explicitAccesss[0].grfAccessMode = ACCESS_MODE.SET_ACCESS;
+                explicitAccesss[0].grfInheritance = NO_INHERITANCE;
+                explicitAccesss[0].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
+                explicitAccesss[0].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
+                explicitAccesss[0].Trustee.ptstrName = sidAdmin;
+
+                explicitAccesss[1].grfAccessPermissions = ACCESS_MASK.GENERIC_READ | ACCESS_MASK.GENERIC_WRITE;
+                explicitAccesss[1].grfAccessMode = ACCESS_MODE.SET_ACCESS;
+                explicitAccesss[1].grfInheritance = NO_INHERITANCE;
+                explicitAccesss[1].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
+                explicitAccesss[1].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
+                explicitAccesss[1].Trustee.ptstrName = sidUsers;
+
+                explicitAccesss[2].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
+                explicitAccesss[2].grfAccessMode = ACCESS_MODE.DENY_ACCESS;
+                explicitAccesss[2].grfInheritance = NO_INHERITANCE;
+                explicitAccesss[2].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
+                explicitAccesss[2].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
+                explicitAccesss[2].Trustee.ptstrName = sidTrustedInstaller;
+
+                explicitAccesss[3].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
+                explicitAccesss[3].grfAccessMode = ACCESS_MODE.DENY_ACCESS;
+                explicitAccesss[3].grfInheritance = NO_INHERITANCE;
+                explicitAccesss[3].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
+                explicitAccesss[3].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
+                explicitAccesss[3].Trustee.ptstrName = sidWD;
+
+                IntPtr acl = IntPtr.Zero;
+                SetEntriesInAcl(4, ref explicitAccesss[0], (IntPtr)0, ref acl);
+
+                static void setPrivilege(string privilege, bool allow)
                 {
-                    LookupPrivilegeValueA(null, privilege, out LUID luid);
-                    tokenPrivileges.PrivilegeCount = 1;
-                    tokenPrivileges.Privileges = new LUID_AND_ATTRIBUTES[1];
-                    tokenPrivileges.Privileges[0].Luid = luid;
-                    tokenPrivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+                    TOKEN_PRIVILEGES tokenPrivileges = new TOKEN_PRIVILEGES();
+                    OpenProcessToken(GetCurrentProcess(),
+                        TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr token);
+
+                    if (allow)
+                    {
+                        LookupPrivilegeValueA(null, privilege, out LUID luid);
+                        tokenPrivileges.PrivilegeCount = 1;
+                        tokenPrivileges.Privileges = new LUID_AND_ATTRIBUTES[1];
+                        tokenPrivileges.Privileges[0].Luid = luid;
+                        tokenPrivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+                    }
+
+                    AdjustTokenPrivileges(token, false, ref tokenPrivileges, 0,
+                        IntPtr.Zero, IntPtr.Zero);
+                    CloseHandle(token);
                 }
 
-                AdjustTokenPrivileges(token, false, ref tokenPrivileges, 0,
-                    IntPtr.Zero, IntPtr.Zero);
-                CloseHandle(token);
-            }
+                setPrivilege(SE_TAKE_OWNERSHIP_NAME, true);
 
-            setPrivilege(SE_TAKE_OWNERSHIP_NAME, true);
+                SetNamedSecurityInfo(
+                    name,
+                    type,
+                    SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION,
+                    sidAdmin,
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    IntPtr.Zero);
 
-            SetNamedSecurityInfo(
-                name,
-                type,
-                SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION,
-                sidAdmin,
-                IntPtr.Zero,
-                IntPtr.Zero,
-                IntPtr.Zero);
+                SetNamedSecurityInfo(
+                    name,
+                    type,
+                    SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                    IntPtr.Zero, IntPtr.Zero,
+                    acl,
+                    IntPtr.Zero);
 
-            SetNamedSecurityInfo(
-                name,
-                type,
-                SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
-                IntPtr.Zero, IntPtr.Zero,
-                acl,
-                IntPtr.Zero);
+                setPrivilege(SE_TAKE_OWNERSHIP_NAME, false);
 
-            setPrivilege(SE_TAKE_OWNERSHIP_NAME, false);
-
-            FreeSid(sidAdmin);
-            FreeSid(sidUsers);
-            FreeSid(sidTrustedInstaller);
-            FreeSid(sidWD);
-            LocalFree(acl);
+                FreeSid(sidAdmin);
+                FreeSid(sidUsers);
+                FreeSid(sidTrustedInstaller);
+                FreeSid(sidWD);
+                LocalFree(acl);
+            }).ConfigureAwait(false);
         }
     }
 }
