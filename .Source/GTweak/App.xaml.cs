@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Windows;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace GTweak
         internal static event EventHandler ImportTweaksUpdate;
 
         internal static string GettingSystemLanguage => Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
+        internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(default, EventArgs.Empty);
+        private void LogError(Exception ex, [CallerMemberName] string memberName = "") => ErrorLogging.LogWritingFile(ex, memberName);
 
         public App()
         {
@@ -24,6 +27,23 @@ namespace GTweak
 
             DispatcherUnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+        }
+
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            if (e.Args.Any(arg => arg.Equals("uninstall", StringComparison.OrdinalIgnoreCase)))
+            {
+                SettingsRepository.SelfRemoval();
+                return;
+            }
+
+            Language = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Language", GettingSystemLanguage);
+            Theme = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Theme", "Dark");
+
+            BlockRunTweaker.CheckingApplicationCopies();
+            BlockRunTweaker.CheckingSystemRequirements();
+
+            new LoadingWindow().Show();
         }
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -38,16 +58,6 @@ namespace GTweak
             if (e.ExceptionObject is Exception ex)
                 LogError(ex);
             Environment.Exit(0);
-        }
-
-        private void LogError(Exception ex, [CallerMemberName] string memberName = "") => ErrorLogging.LogWritingFile(ex, memberName);
-
-        internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(default, EventArgs.Empty);
-
-        internal static void ViewingSettings()
-        {
-            Language = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Language", GettingSystemLanguage);
-            Theme = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Theme", "Dark");
         }
 
         internal static string Language

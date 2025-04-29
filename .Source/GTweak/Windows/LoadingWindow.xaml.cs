@@ -15,12 +15,7 @@ namespace GTweak.Windows
     {
         public LoadingWindow()
         {
-            App.ViewingSettings();
-
             InitializeComponent();
-
-            BlockRunTweaker.CheckingApplicationCopies();
-            BlockRunTweaker.CheckingSystemRequirements();
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -78,7 +73,6 @@ namespace GTweak.Windows
             if (index >= 0)
                 new TypewriterAnimation((string)FindResource($"text{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
         }
-
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {

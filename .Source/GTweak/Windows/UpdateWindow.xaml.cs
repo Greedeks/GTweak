@@ -69,6 +69,8 @@ namespace GTweak.Windows
 
                 try
                 {
+                    string tempFileName = $"GTweak_{Guid.NewGuid().ToString("N").Substring(0, 8)}.exe";
+
                     using WebClient webClient = new WebClient();
                     webClient.DownloadProgressChanged += (s, e) =>
                     {
@@ -77,9 +79,9 @@ namespace GTweak.Windows
                     };
                     webClient.DownloadFileCompleted += delegate
                     {
-                        CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsRepository.currentName}\" && timeout /t 1 && del \"{SettingsRepository.currentLocation}\" && ren Git-GTweak.exe \"{SettingsRepository.currentName}\" &&  \"{SettingsRepository.currentLocation}\"");
+                        CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsRepository.currentName}\" && timeout /t 2 && del \"{SettingsRepository.currentLocation}\" && ren {tempFileName} \"{SettingsRepository.currentName}\" && \"{SettingsRepository.currentLocation}\"");
                     };
-                    webClient.DownloadFileAsync(new Uri("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"), "Git-GTweak.exe");
+                    webClient.DownloadFileAsync(new Uri("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"), tempFileName);
                 }
                 catch
                 {
