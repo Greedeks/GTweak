@@ -123,7 +123,7 @@ namespace GTweak.View
                                     UpdateViewStatePakages();
                                 });
 
-                                await UninstallingPakages.DeletingPackage(packageName, _isWebViewRemoval);
+                                await UninstallingPakages.RemoveAppxPackage(packageName, _isWebViewRemoval);
 
                                 await Task.Delay(3000);
 
@@ -154,7 +154,7 @@ namespace GTweak.View
                                     UpdateViewStatePakages();
                                 });
 
-                                await UninstallingPakages.ResetOneDrive();
+                                await UninstallingPakages.RestoreOneDriveFolder();
 
                                 await Task.Delay(3000);
 

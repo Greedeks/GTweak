@@ -4,7 +4,6 @@ using GTweak.Utilities.Helpers.Managers;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +16,9 @@ namespace GTweak.Utilities.Tweaks
         private static bool _isLocalAccount = false;
         private static readonly string _pathPackage = Path.Combine(StoragePaths.SystemDisk, "Program Files", "WindowsApps");
 
+        internal void LoadInstalledPackages() => InstalledPackages = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
         internal static HashSet<string> InstalledPackages = new HashSet<string>();
+
         internal static readonly Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
         {
             ["OneDrive"] = (null, false, null),
@@ -79,34 +80,43 @@ namespace GTweak.Utilities.Tweaks
             return false;
         }
 
-        internal void LoadInstalledPackages() => InstalledPackages = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
+        internal async void CheckingForLocalAccount()
+        {
+            string output = await CommandExecutor.GetCommandOutput("Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource");
+            _isLocalAccount = !output.Contains("MicrosoftAccount");
+        }
 
-        internal static Task DeletingPackage(string packageName, bool shouldRemoveWebView = false)
+        internal static Task RestoreOneDriveFolder()
+        {
+            return Task.Run(async () =>
+            {
+                await CommandExecutor.InvokeRunCommand(@"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe").ConfigureAwait(false);
+
+                RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+                RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+            });
+        }
+
+        internal static Task RemoveAppxPackage(string packageName, bool shouldRemoveWebView = false)
         {
             if (packageName == "OneDrive")
-                return DeletedOneDrive();
+            {
+                return Task.Run(async () =>
+                {
+                    await CommandExecutor.InvokeRunCommand(@"/c taskkill /f /im OneDrive.exe & %systemroot%\System32\OneDriveSetup.exe /uninstall & %systemroot%\SysWOW64\OneDriveSetup.exe /uninstall").ConfigureAwait(false);
+
+                    RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+                    RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+
+                    CommandExecutor.RunCommand($@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive & 
+                    rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {StoragePaths.SystemDisk}OneDriveTemp{(_isLocalAccount ? @" & rd /s /q %userprofile%\OneDrive" : "")}");
+                });
+            }
 
             return Task.Run(async () =>
             {
                 try
                 {
-                    static async Task RunPowerShell(string script)
-                    {
-                        ProcessStartInfo startInfo = new ProcessStartInfo
-                        {
-                            FileName = "powershell.exe",
-                            Arguments = $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{script}\"",
-                            UseShellExecute = false,
-                            CreateNoWindow = true,
-                            RedirectStandardOutput = true,
-                            RedirectStandardError = true
-                        };
-
-                        using var process = new Process { StartInfo = startInfo };
-                        process.Start();
-                        await process.WaitForExitAsync().ConfigureAwait(false);
-                    }
-
                     var (Alias, _, Scripts) = PackagesDetails[packageName];
 
                     List<string> packageNamesToRemove = new List<string> { packageName };
@@ -123,7 +133,7 @@ namespace GTweak.Utilities.Tweaks
                         $@"Get-AppxProvisionedPackage -Online | Where-Object {{ $_.PackageName -like '*{name}*' }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName -AllUsers -Verbose }}"
                     }).ToList();
 
-                    await RunPowerShell(string.Join(" ; ", psCommands)).ConfigureAwait(false);
+                    await CommandExecutor.InvokeRunCommand(string.Join(" ; ", psCommands), true).ConfigureAwait(false);
 
                     TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c for /d %i in ({string.Join(" ", packageNamesToRemove.Select(n => $@"""{_pathPackage}\*{n}*"""))}) do takeown /f ""%i"" /r /d Y & icacls ""%i"" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls ""%i"" /grant %username%:F & rd /s /q ""%i""");
                 }
@@ -271,69 +281,6 @@ namespace GTweak.Utilities.Tweaks
                         break;
                 }
             });
-        }
-
-        internal static Task DeletedOneDrive()
-        {
-            return Task.Run(async () =>
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = "cmd.exe",
-                    Arguments = @"/c taskkill /f /im OneDrive.exe & %systemroot%\System32\OneDriveSetup.exe /uninstall & %systemroot%\SysWOW64\OneDriveSetup.exe /uninstall",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using Process process = new Process { StartInfo = startInfo };
-
-                process.Start();
-                await process.WaitForExitAsync();
-
-                if (process.ExitCode == 0)
-                {
-                    RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-                    RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-
-                    CommandExecutor.RunCommand($@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive & 
-                    rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {StoragePaths.SystemDisk}OneDriveTemp{(_isLocalAccount ? @" & rd /s /q %userprofile%\OneDrive" : "")}");
-                }
-            });
-        }
-
-        internal static Task ResetOneDrive()
-        {
-            return Task.Run(async () =>
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = "cmd.exe",
-                    Arguments = @"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                };
-
-                using Process process = new Process { StartInfo = startInfo };
-
-                process.Start();
-                await process.WaitForExitAsync();
-
-                if (process.ExitCode == 0)
-                {
-                    RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-                    RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-                }
-            });
-        }
-
-        internal async void CheckingForLocalAccount()
-        {
-            string output = await CommandExecutor.GetCommandOutput("Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource");
-            _isLocalAccount = !output.Contains("MicrosoftAccount");
         }
     }
 }

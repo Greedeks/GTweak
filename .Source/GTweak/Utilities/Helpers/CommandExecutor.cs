@@ -15,6 +15,7 @@ namespace GTweak.Utilities.Helpers
                     FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
                     Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
                     Verb = "runas",
+                    WindowStyle = ProcessWindowStyle.Hidden,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
@@ -49,9 +50,29 @@ namespace GTweak.Utilities.Helpers
                     Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
                     Verb = "runas",
                     WindowStyle = ProcessWindowStyle.Hidden,
-                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
                 });
             });
+        }
+
+        internal static async Task InvokeRunCommand(string arguments, bool isPowerShell = false)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
+                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
+                Verb = "runas",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = new Process { StartInfo = startInfo };
+            process.Start();
+            await process.WaitForExitAsync().ConfigureAwait(false);
         }
 
         internal static Task WaitForExitAsync(this Process process)
