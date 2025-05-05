@@ -87,7 +87,7 @@
     <v:String x:Key="cmbox_lang_main">인터페이스 언어:</v:String>
     <v:String x:Key="cmbox_eng_main">English (EN)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
-    <v:String x:Key="cmbox_ko_main">한국어</v:String>
+    <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
     <v:String x:Key="cmbox_theme_main">인터페이스 테마:</v:String>
     <v:String x:Key="cmbox_dark_main">어두운</v:String>
@@ -195,7 +195,7 @@
     <v:String x:Key="tgl32_interface">Displaying file extensions in explorer</v:String>
     
     <v:String x:Key="textcolor_interface">이것은 새로운 색상의 예입니다.</v:String>
-    <v:String x:Key="previewflick_interface">비교를 위해</v:String>
+    <v:String x:Key="previewflick_interface">- 비교를 위해 -</v:String>
 
     <v:String x:Key="TglButton1_description_interface">커서 선택 항목의 색상이 파란색에서 «젖은 아스팔트의 색»이 회색으로 변경됩니다.</v:String>
     <v:String x:Key="TglButton2_description_interface">일부 프로그램에서 도구 설명의 색상이 노란색에서 하늘색 «Azure».로 변경됩니다.</v:String>

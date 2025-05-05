@@ -85,7 +85,7 @@
     <v:String x:Key="btgl_toast_main">Pin on top of all windows</v:String>
     <v:String x:Key="btgl_update_main">Checking for updates</v:String>
     <v:String x:Key="cmbox_lang_main">Interface language:</v:String>
-    <v:String x:Key="cmbox_eng_main">English</v:String>
+    <v:String x:Key="cmbox_eng_main">English (EN)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
@@ -106,7 +106,7 @@
     <!--#endregion-->
 
     <!--#region Reboot Window -->
-    <v:String x:Key="title_reboot">Attention GTweak reboot</v:String>
+    <v:String x:Key="title_reboot">Attention, GTweak reboot</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->
@@ -195,10 +195,10 @@
     <v:String x:Key="tgl32_interface">Displaying file extensions in explorer</v:String>
     
     <v:String x:Key="textcolor_interface">This is an example of a new color.</v:String>
-    <v:String x:Key="previewflick_interface">For a comparison</v:String>
+    <v:String x:Key="previewflick_interface">- for a comparison -</v:String>
 
-    <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «Wet Asphalt».</v:String>
-    <v:String x:Key="TglButton2_description_interface">Will change the color of the tooltip in some programs from yellow to light blue «Azure».</v:String>
+    <v:String x:Key="TglButton1_description_interface">Will change the color of the cursor selection from blue to gray «wet asphalt».</v:String>
+    <v:String x:Key="TglButton2_description_interface">Will change the color of the tooltip in some programs from yellow to light blue «azure».</v:String>
     <v:String x:Key="TglButton3_description_interface">The tweak will reduce the size of the Сollapse, Expand and close Buttons, making them less bulky. Resizes all windows, including Explorer, Windows Photos, browsers, and other programs you know.</v:String>
     <v:String x:Key="TglButton4_description_interface">The tweak accelerates the flicker frequency of the text cursor. By default, it is every 530 milliseconds.</v:String>
     <v:String x:Key="TglButton5_description_interface">The tweak will make the scrollbar thickness thinner in windows, including browsers and programs. Except for modern application interfaces.</v:String>
@@ -340,7 +340,7 @@
     <v:String x:Key="TglButton18_description_services">Disable if you do not use a remote desktop and do not use a server connection to them.</v:String>
     <v:String x:Key="TglButton19_description_services">Disable if you do not want the services to load your PC while they are handling errors.</v:String>
     <v:String x:Key="TglButton20_description_services">Disable if you do not remotely manage files via Sharing or using WebDAV.</v:String>
-    <v:String x:Key="TglButton21_description_services">Disable if you are not using smart cards. A smart card is one of the varieties of electronic identifiers or plastic with a chip. The appearance is a «Bank card». For everyday use of Windows, the service is not needed and you will never need it.</v:String>
+    <v:String x:Key="TglButton21_description_services">Disable if you are not using smart cards. A smart card is one of the varieties of electronic identifiers or plastic with a chip. The appearance is a «bank card». For everyday use of Windows, the service is not needed and you will never need it.</v:String>
     <v:String x:Key="TglButton22_description_services">Disable it if you’re not using Windows kiosk mode. This mode minimizes the interface: only a single UWP app runs full-screen, and all other features are blocked. Note that this may interfere with installing Windows updates and programs via Windows Installer, since it also disables the setup and initialization of system data and applications on first logon.</v:String>
     <v:String x:Key="TglButton23_description_services">Disable if you do not use BitLocker disk encryption and EFS file or folder encryption.</v:String>
     <v:String x:Key="TglButton24_description_services">Disable if you have configured all the languages that you will use and do not plan to add new ones.</v:String>

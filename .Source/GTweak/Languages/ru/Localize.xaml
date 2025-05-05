@@ -86,7 +86,7 @@
     <v:String x:Key="btgl_update_main">Проверка наличия обновлений</v:String>
     <v:String x:Key="cmbox_lang_main">Язык интерфейса:</v:String>
     <v:String x:Key="cmbox_eng_main">English (EN)</v:String>
-    <v:String x:Key="cmbox_ru_main">Русский</v:String>
+    <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
     <v:String x:Key="cmbox_theme_main">Тема интерфейса:</v:String>
@@ -106,7 +106,7 @@
     <!--#endregion-->
 
     <!--#region Reboot Window -->
-    <v:String x:Key="title_reboot">Внимание перезагрузка GTweak</v:String>
+    <v:String x:Key="title_reboot">Внимание, перезагрузка GTweak</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->
@@ -195,10 +195,10 @@
     <v:String x:Key="tgl32_interface">Отображение расширений файлов в проводнике</v:String>
 
     <v:String x:Key="textcolor_interface">Это пример нового цвета.</v:String>
-    <v:String x:Key="previewflick_interface">В качестве сравнения</v:String>
+    <v:String x:Key="previewflick_interface">- в качестве сравнения -</v:String>
 
-    <v:String x:Key="TglButton1_description_interface">Изменят цвет выделение курсором с синего на серый «Цвет мокрого асфальта».</v:String>
-    <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки в некоторых программах с жёлтого на светло голубой «Небесная лазурь».</v:String>
+    <v:String x:Key="TglButton1_description_interface">Изменят цвет выделение курсором с синего на серый «цвет мокрого асфальта».</v:String>
+    <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки в некоторых программах с жёлтого на светло голубой «небесная лазурь».</v:String>
     <v:String x:Key="TglButton3_description_interface">Твик уменьшит размер кнопок Свернуть, Развернуть, Закрыть делая их менее громоздкими. Изменяет размер для всех окон, включая Проводник, фотографии, браузеры и другие известные вам программы.</v:String>
     <v:String x:Key="TglButton4_description_interface">Твик ускоряет частоту мерцания текстового курсора. По умолчанию она составляет каждые 530 миллисекунд.</v:String>
     <v:String x:Key="TglButton5_description_interface">Твик сделает тоньше толщину полосы прокрутки (scrollbar) в окнах, включая браузеры и программы. За исключением современных интерфейсов приложений.</v:String>
@@ -340,7 +340,7 @@
     <v:String x:Key="TglButton18_description_services">Отключайте, если вы не пользуетесь удалённым рабочим столом и не используете серверное подключение к ним.</v:String>
     <v:String x:Key="TglButton19_description_services">Отключайте, если вы не хотите чтобы службы нагружали ваш ПК, пока они занимаются обработкой ошибок.</v:String>
     <v:String x:Key="TglButton20_description_services">Отключайте, если вы не управляете удаленно файлами через Общий доступ или с помощью WebDAV.</v:String>
-    <v:String x:Key="TglButton21_description_services">Отключайте, если вы не используете смарт-карты. Смарт-карта представляет собой одну из разновидностей электронных идентификаторов или же пластик с микросхемой. Внешний вид - «Банковская карта». Для повседневного использования Windows, служба не нужна и никогда вам не понадобится.</v:String>
+    <v:String x:Key="TglButton21_description_services">Отключайте, если вы не используете смарт-карты. Смарт-карта представляет собой одну из разновидностей электронных идентификаторов или же пластик с микросхемой. Внешний вид - «банковская карта». Для повседневного использования Windows, служба не нужна и никогда вам не понадобится.</v:String>
     <v:String x:Key="TglButton22_description_services">Отключайте, если вы не используете киоск-режим Windows. Этот режим сводит интерфейс к минимуму: во весь экран запускается только одно UWP-приложение, а доступ ко всем остальным функциям блокируется. Обратите внимание, что это может нарушить установку обновлений Windows и программ через Windows Installer, поскольку отключается подготовка и инициализация системных данных и приложений при первом входе.</v:String>
     <v:String x:Key="TglButton23_description_services">Отключайте, если вы не используете шифрования дисков BitLocker и шифрования файлов или папок EFS.</v:String>
     <v:String x:Key="TglButton24_description_services">Отключайте, если вы настроили все языки, которые будете использовать и не планируете добавлять новые.</v:String>
