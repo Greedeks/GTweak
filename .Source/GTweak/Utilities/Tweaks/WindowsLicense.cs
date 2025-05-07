@@ -5,7 +5,6 @@ using GTweak.Utilities.Helpers.Storage;
 using GTweak.Windows;
 using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -44,37 +43,22 @@ namespace GTweak.Utilities.Tweaks
 
             new ViewNotification().Show("", "warn", "activatewin_notification");
 
-            static async Task RunCommandAsync(string arguments, int delay)
-            {
-                using Process cmdProcess = new Process
-                {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        FileName = "cmd.exe",
-                        Arguments = arguments,
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                    }
-                };
-                cmdProcess.Start();
-                await Task.Delay(delay);
-            }
-
             WaitingWindow waitingWindow = new WaitingWindow();
             waitingWindow.Show();
 
             try
             {
                 if (SystemDiagnostics.IsWindowsVersion[10])
-                    await RunCommandAsync("/c assoc .vbs=VBSFile", 500);
+                    await CommandExecutor.InvokeRunCommand(@"/c assoc .vbs=VBSFile & ftype VBSFile=""%SystemRoot%\System32\WScript.exe"" ""%1"" %*""");
 
-                await RunCommandAsync($"/c slmgr.vbs //b /ipk {keyWinHWID}", 4000);
+                await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keyWinHWID}");
 
                 CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
                 string originalGeo = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", CultureInfo.InstalledUICulture.Name.Split('-')[1].ToUpperInvariant());
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", "US", RegistryValueKind.String);
-                foreach (string service in new[] { "ClipSVC", "wlidsvc", "sppsvc", "KeyIso", "LicenseManager", "Winmgmt" })
-                    CommandExecutor.RunCommand($"sc config {service} start= auto && sc start {service}");
+
+                string svcRestartCmd = string.Join(" & ", new[] { "ClipSVC", "wlidsvc", "sppsvc", "KeyIso", "LicenseManager", "Winmgmt" }.Select(service => $"sc config {service} start= auto && sc start {service}"));
+                await CommandExecutor.InvokeRunCommand($"/c {svcRestartCmd}");
 
                 await Task.Delay(3000);
 
@@ -84,10 +68,9 @@ namespace GTweak.Utilities.Tweaks
                 XDocument genuineXml = XDocument.Parse(foundTicket.Element("content")?.Value.Trim());
                 genuineXml.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
                 await Task.Delay(3000);
-                CommandExecutor.RunCommand("clipup -v -o", true);
 
-                await Task.Delay(1000);
-                await RunCommandAsync("/c slmgr.vbs //b /ato", 3500);
+                await CommandExecutor.InvokeRunCommand("clipup -v -o", true);
+                await CommandExecutor.InvokeRunCommand("/c slmgr.vbs //b /ato");
 
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", originalGeo, RegistryValueKind.String);
 
@@ -102,9 +85,9 @@ namespace GTweak.Utilities.Tweaks
                 }
                 else
                 {
-                    await RunCommandAsync($"/c slmgr.vbs //b /ipk {keysKMS}", 4000);
-                    await RunCommandAsync("/c slmgr.vbs //b /skms kms.digiboy.ir", 7000);
-                    await RunCommandAsync("/c slmgr.vbs //b /ato", 3500);
+                    await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keysKMS}");
+                    await CommandExecutor.InvokeRunCommand("/c slmgr.vbs //b /skms kms.digiboy.ir");
+                    await CommandExecutor.InvokeRunCommand("/c slmgr.vbs //b /ato");
 
                     new WindowsLicense().LicenseStatus();
 
