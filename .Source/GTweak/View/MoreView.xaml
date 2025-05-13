@@ -25,8 +25,8 @@
 
                     <TextBlock Margin="0,20,0,0" Text="{DynamicResource question_over_more}" Foreground="{StaticResource Color_Accent}" Height="auto" Width="512" FontFamily="{StaticResource Jura}" FontSize="16px" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap"/>
                     <Grid Margin="0,20,0,0" HorizontalAlignment="Center" Width="345">
-                        <Button x:Name="BtnAgree" Content="{DynamicResource btn_agree_more}" Style="{StaticResource BtnDefaultM}" FontSize="15px" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
-                        <Button x:Name="BtnDecline" Content="{DynamicResource btn_decline_more}" Style="{StaticResource BtnDefault}" FontSize="15px" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
+                        <Button x:Name="BtnAgree" Content="{DynamicResource btn_agree}" Style="{StaticResource BtnDefaultM}" FontSize="15px" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
+                        <Button x:Name="BtnDecline" Content="{DynamicResource btn_decline}" Style="{StaticResource BtnDefault}" FontSize="15px" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
                     </Grid>
                 </StackPanel>
             </Grid>
@@ -50,21 +50,21 @@
                 <ScrollViewer Style="{StaticResource ScrollPage}">
                     <StackPanel>
                         <UniformGrid Rows="1" Columns="3">
-                            <UserControl:Card ImageSource ="{StaticResource DI_LicenseWindows}" Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btntext_licens_more}" ClickButton="BtnLicenseWindows_ClickButton"/>
-                            <UserControl:Card ImageSource="{StaticResource DI_BackupSystem}" Title="{DynamicResource title_createpoint_more}" Description="{DynamicResource text_createpoint_more}" BtnContent="{DynamicResource btntext_createpoint_more}" ClickButton="BtnRestorePoint_ClickButton"/>
-                            <UserControl:Card ImageSource="{StaticResource DI_RecoverySystem}" Title="{DynamicResource title_recovery_more}" Description="{DynamicResource text_recovery_more}" BtnContent="{DynamicResource btntext_recovery_more}" ClickButton="BtnRecoveyLaunch_ClickButton"/>
+                            <UserControl:Card IconSource ="{StaticResource DI_LicenseWindows}" Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btn_activation}" ClickButton="BtnLicenseWindows_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_BackupSystem}" Title="{DynamicResource title_createpoint_more}" Description="{DynamicResource text_createpoint_more}" BtnContent="{DynamicResource btn_save}" ClickButton="BtnRestorePoint_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_RecoverySystem}" Title="{DynamicResource title_recovery_more}" Description="{DynamicResource text_recovery_more}" BtnContent="{DynamicResource btn_recovery}" ClickButton="BtnRecoveyLaunch_ClickButton"/>
                         </UniformGrid>
 
                         <UniformGrid Rows="1" Columns="3" Margin="0,20,0,0">
-                            <UserControl:Card ImageSource="{StaticResource DI_Trash}" Title="{DynamicResource title_clear_more}" Description="{DynamicResource text_clear_more}" BtnContent="{DynamicResource btntext_clear_more}" ClickButton="BtnClear_ClickButton"/>
-                            <UserControl:Card ImageSource="{StaticResource DI_DefragDisable}" Title="{DynamicResource title_defrag_off_more}" Description="{DynamicResource text_defrag_off_more}" BtnContent="{DynamicResource btntext_disable_more}" ClickButton="BtnDisableDefrag_ClickButton"/>
-                            <UserControl:Card ImageSource="{StaticResource DI_DisableRecovery}" Title="{DynamicResource title_disablepoint_more}" Description="{DynamicResource text_disablepoint_more}" BtnContent="{DynamicResource btntext_disable_more}" ClickButton="BtnDisableRecovery_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_Trash}" Title="{DynamicResource title_clear_more}" Description="{DynamicResource text_clear_more}" BtnContent="{DynamicResource btn_clear}" ClickButton="BtnClear_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_DefragDisable}" Title="{DynamicResource title_defrag_off_more}" Description="{DynamicResource text_defrag_off_more}" BtnContent="{DynamicResource btn_disable}" ClickButton="BtnDisableDefrag_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_DisableRecovery}" Title="{DynamicResource title_disablepoint_more}" Description="{DynamicResource text_disablepoint_more}" BtnContent="{DynamicResource btn_disable}" ClickButton="BtnDisableRecovery_ClickButton"/>
                         </UniformGrid>
 
                         <UniformGrid Rows="1" Columns="3" Margin="0,20,0,20">
-                            <UserControl:Card ImageSource="{StaticResource DI_DefragEnable}" Title="{DynamicResource title_defrag_on_more}" Description="{DynamicResource text_defrag_on_more}" BtnContent="{DynamicResource btntext_enable_more}" ClickButton="BtnEnableDefrag_ClickButton"/>
-                            <UserControl:Card ImageSource="{StaticResource DI_Compression}" Title="{DynamicResource title_compression_more}" Description="{DynamicResource text_compression_more}" BtnContent="{DynamicResource btntext_overview_more}" ClickButton="BtnCompression_ClickButton"/>
-                            <UserControl:Card ImageSource="{StaticResource DI_Decompression}" Title="{DynamicResource title_decompression_more}" Description="{DynamicResource text_decompression_more}" BtnContent="{DynamicResource btntext_overview_more}" ClickButton="BtnDecompression_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_DefragEnable}" Title="{DynamicResource title_defrag_on_more}" Description="{DynamicResource text_defrag_on_more}" BtnContent="{DynamicResource btn_enable}" ClickButton="BtnEnableDefrag_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_Compression}" Title="{DynamicResource title_compression_more}" Description="{DynamicResource text_compression_more}" BtnContent="{DynamicResource btn_overview}" ClickButton="BtnCompression_ClickButton"/>
+                            <UserControl:Card IconSource="{StaticResource DI_Decompression}" Title="{DynamicResource title_decompression_more}" Description="{DynamicResource text_decompression_more}" BtnContent="{DynamicResource btn_overview}" ClickButton="BtnDecompression_ClickButton"/>
                         </UniformGrid>
 
                     </StackPanel>

@@ -42,29 +42,28 @@
     <v:String x:Key="onedrive_notification">Процесс восстановления OneDrive начался, это займет некоторое время</v:String>
     <v:String x:Key="appsdelete_notification">Процесс удаления приложений начался, это займет некоторое время</v:String>
     <v:String x:Key="windefender_notification">Процесс займет некоторое время, пожалуйста подождите немного</v:String>
-    <v:String x:Key="firewalloff_notification">У вас отключен брандмауэр, включите и примените твик снова</v:String>
-    <v:String x:Key="viewlicense_notification">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>
-    <v:String x:Key="readyactivate_notification">Ваша операционная система не нуждается в активации</v:String>
-    <v:String x:Key="activatewin_notification">Процесс активации Windows начался, это займет некоторое время</v:String>
-    <v:String x:Key="successactivate_notification">Активация прошла успешно, рекомендуется перезагрузка</v:String>
+    <v:String x:Key="warn_firewall_notification">У вас отключен брандмауэр, включите и примените твик снова</v:String>
+    <v:String x:Key="warn_activate_notification">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>
+    <v:String x:Key="ready_activate_notification">Ваша операционная система не нуждается в активации</v:String>
+    <v:String x:Key="win_activate_notification">Процесс активации Windows начался, это займет некоторое время</v:String>
+    <v:String x:Key="success_activate_notification">Активация прошла успешно, рекомендуется перезагрузка</v:String>
     <v:String x:Key="keynotfound_notification">Отсутствует ключ для вашей редакции Windows, активация отменена</v:String>
-    <v:String x:Key="networklicense_notification">Для активации требуется подключение к Интернету</v:String>
-    <v:String x:Key="notsuccessactivate_notification">Что-то пошло не так, к сожалению активировать систему не удалось</v:String>
+    <v:String x:Key="network_activate_notification">Для активации требуется подключение к Интернету</v:String>
+    <v:String x:Key="error_activate_notification">Что-то пошло не так, к сожалению активировать систему не удалось</v:String>
     <v:String x:Key="createpoint_notification">Cоздание точки восстановления займет некоторое время</v:String>
-    <v:String x:Key="notsuccessfulpoint_notification">Что-то пошло не так, не удалось создать точку восстановления</v:String>
-    <v:String x:Key="successpoint_notification">Точка восстановления успешно создана</v:String>
-    <v:String x:Key="notsuccessfulrecovery_notification">Что-то пошло не так, не удалось запустить восстановления</v:String>
+    <v:String x:Key="error_point_notification">Что-то пошло не так, не удалось создать точку восстановления</v:String>
+    <v:String x:Key="success_point_notification">Точка восстановления успешно создана</v:String>
+    <v:String x:Key="error_recovery_notification">Что-то пошло не так, не удалось запустить восстановления</v:String>
     <v:String x:Key="disable_recovery_notification">Восстановление системы отключено, точки восстановления недоступны</v:String>
-    <v:String x:Key="warndisable_recovery_notification">У вас уже отключена система восстановления</v:String>
-    <v:String x:Key="clearingcache_notification">Произведена очистка системного кэша файлов</v:String>
+    <v:String x:Key="warn_recovery_notification">У вас уже отключена система восстановления</v:String>
     <v:String x:Key="clear_ram_notification">Очистка кратковременной памяти и временных файлов произведена</v:String>
     <v:String x:Key="warn_defrag_off_notification">У вас уже отключена дефрагментация диска</v:String>
     <v:String x:Key="warn_defrag_on_notification">У вас уже включена дефрагментация диска</v:String>
     <v:String x:Key="error_defrag_notification">Что то-то пошло не так, не удалось изменить состояние дефрагментации</v:String>
     <v:String x:Key="success_defrag_off_notification">Дефрагментация вашего диска успешно отключена</v:String>
     <v:String x:Key="success_defrag_on_notification">Дефрагментация вашего диска успешно включена</v:String>
-    <v:String x:Key="succes_compression_notification">Сжатие каталога и его содержимого прошло успешно</v:String>
-    <v:String x:Key="succes_decompression_notification">Декомпрессия каталога и его содержимого прошла успешно</v:String>
+    <v:String x:Key="success_compression_notification">Сжатие каталога и его содержимого прошло успешно</v:String>
+    <v:String x:Key="success_decompression_notification">Декомпрессия каталога и его содержимого прошла успешно</v:String>
     <v:String x:Key="ready_compression_notification">Каталог уже сжат, повторное сжатие не требуется</v:String>
     <v:String x:Key="ready_decompression_notification">Каталог уже декомпрессирован, повторная операция не требуется</v:String>
     <v:String x:Key="error_compression_notification">Что-то пошло не так, ошибка изменения состояния сжатия</v:String>
@@ -85,7 +84,7 @@
     <v:String x:Key="btgl_toast_main">Закрепить поверх всех окон</v:String>
     <v:String x:Key="btgl_update_main">Проверка наличия обновлений</v:String>
     <v:String x:Key="cmbox_lang_main">Язык интерфейса:</v:String>
-    <v:String x:Key="cmbox_eng_main">English (EN)</v:String>
+    <v:String x:Key="cmbox_en_main">English (EN)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
@@ -113,8 +112,8 @@
     <v:String x:Key="title_win_update">Обновление</v:String>
     <v:String x:Key="title_update">Найдено обновление</v:String>
     <v:String x:Key="text_update">Вам доступна новая версия программы. Обновите ее для получения новых функций и исправления ошибок.</v:String>
-    <v:String x:Key="btn_now_update">Обновить</v:String>
-    <v:String x:Key="btn_log_update">Изменения</v:String>
+    <v:String x:Key="btn_upd">Обновить</v:String>
+    <v:String x:Key="btn_log">Изменения</v:String>
     <v:String x:Key="download_update">Скачивания</v:String>
     <v:String x:Key="noty_update">Пожалуйста, дождитесь завершения загрузки</v:String>
     <v:String x:Key="connection_update">Подключение к серверу</v:String>
@@ -286,8 +285,8 @@
     <v:String x:Key="title_over_applications">Подтверждение удаления</v:String>
     <v:String x:Key="text_over_applications">Вы собираетесь удалить браузер Microsoft Edge. При этом будет удалён компонент EdgeWebView, отвечающий за отображение веб‑страниц в таких приложениях, как Microsoft Office, а также в некоторых Telegram‑ботах, использующих встроенный WebView для показа меню (мини‑приложения и веб‑контент) и других программах. Прежде чем продолжить, убедитесь, что этот компонент вам не требуется.</v:String>
     <v:String x:Key="question_over_applications">Желаете продолжить удаление вместе с EdgeWebView?</v:String>
-    <v:String x:Key="btn_сancel_applications">Отмена</v:String>
-    <v:String x:Key="btn_delete_applications">Удалить</v:String>
+    <v:String x:Key="btn_сancel">Отмена</v:String>
+    <v:String x:Key="btn_delete">Удалить</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -436,21 +435,21 @@
     <v:String x:Key="text2_more">создать точку восстановления перед использованием утилиты</v:String>
     <v:String x:Key="title_licens_more">Активация Windows</v:String>
     <v:String x:Key="text_licens_more">Применяется метод HWID или резервный KMS: он может не сработать, если для вашей редакции Windows нет ключа.</v:String>
-    <v:String x:Key="btntext_licens_more">Активировать</v:String>
+    <v:String x:Key="btn_activation">Активировать</v:String>
     <v:String x:Key="title_createpoint_more">Сохранить систему</v:String>
     <v:String x:Key="text_createpoint_more">Создаст точку восстановления системы Windows, даже в случае её отключения.</v:String>
-    <v:String x:Key="btntext_createpoint_more">Сохранить</v:String>
+    <v:String x:Key="btn_save">Сохранить</v:String>
     <v:String x:Key="title_recovery_more">Восстановить систему</v:String>
     <v:String x:Key="text_recovery_more">Запустит процесс восстановления, даже когда восстановление системы отключено.</v:String>
-    <v:String x:Key="btntext_recovery_more">Восстановить</v:String>
+    <v:String x:Key="btn_recovery">Восстановить</v:String>
     <v:String x:Key="textpoint_more">Точка созданная с помощью GTweak</v:String>
     <v:String x:Key="title_clear_more">Очистка памяти</v:String>
     <v:String x:Key="text_clear_more">Очищает кэш системных файлов в памяти компьютера временные файлы и кэш эскизов.</v:String>
-    <v:String x:Key="btntext_clear_more">Очистить</v:String>
+    <v:String x:Key="btn_clear">Очистить</v:String>
     <v:String x:Key="title_disablepoint_more">Отключить защиту</v:String>
     <v:String x:Key="text_disablepoint_more">Отключает точку восстановления системы, но учтите что ранее созданные удаляются.</v:String>
-    <v:String x:Key="btntext_disable_more">Отключить</v:String>
-    <v:String x:Key="btntext_enable_more">Включить</v:String>
+    <v:String x:Key="btn_disable">Отключить</v:String>
+    <v:String x:Key="btn_enable">Включить</v:String>
     <v:String x:Key="title_defrag_off_more">Отключить дефрагментацию</v:String>
     <v:String x:Key="text_defrag_off_more">Отключает дефрагментацию, продлевая срок службы вашего SSD, избавляя его от лишних записи.</v:String>
     <v:String x:Key="title_defrag_on_more">Включить дефрагментацию</v:String>
@@ -459,13 +458,13 @@
     <v:String x:Key="text_compression_more">Сжимает файлы, сокращая их объем, особенно текстовых, что позволяет экономить место на диске, без ущерба.</v:String>
     <v:String x:Key="title_decompression_more">Декомпрессия NTFS</v:String>
     <v:String x:Key="text_decompression_more">Отключает сжатие, восстанавливая файлы до их исходного объёма и ускоряя доступ к ним.</v:String>
-    <v:String x:Key="btntext_overview_more">Обзор</v:String>
+    <v:String x:Key="btn_overview">Обзор</v:String>
 
     <v:String x:Key="title_over_more">Подтверждение очистки диска</v:String>
     <v:String x:Key="text_over_more">На вашем диске найденая папка Windows.old, содержащая файлы предыдущей версии Windows, активно занимающая значительное пространство. Обратите внимание: после удаления папки восстановить её содержимое будет невозможно, поэтому убедитесь, что все необходимые файлы сохранены.</v:String>
     <v:String x:Key="question_over_more">Вы хотите продолжить очистку с удалением папки Windows.old?</v:String>
-    <v:String x:Key="btn_agree_more">Согласиться</v:String>
-    <v:String x:Key="btn_decline_more">Отказаться</v:String>
+    <v:String x:Key="btn_agree">Согласиться</v:String>
+    <v:String x:Key="btn_decline">Отказаться</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

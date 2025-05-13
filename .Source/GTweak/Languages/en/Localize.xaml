@@ -42,29 +42,28 @@
     <v:String x:Key="onedrive_notification">The OneDrive recovery process has started, it will take some time</v:String>
     <v:String x:Key="appsdelete_notification">The application removal process has started, it will take some time</v:String>
     <v:String x:Key="windefender_notification">The process will take some time, please wait a bit</v:String>
-    <v:String x:Key="firewalloff_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
-    <v:String x:Key="viewlicense_notification">To start - activate Windows. Not all tweaks can be applied</v:String>
-    <v:String x:Key="readyactivate_notification">Your operating system does not need to be activated</v:String>
-    <v:String x:Key="activatewin_notification">The Windows activation process has started, it will take some time</v:String>
-    <v:String x:Key="successactivate_notification">Activation was successful, a reboot is recommended</v:String>
-    <v:String x:Key="notsuccessactivate_notification">Something went wrong, unfortunately it was not possible to activate the system</v:String>
-    <v:String x:Key="networklicense_notification">An internet connection is required for activation</v:String>
+    <v:String x:Key="warn_firewall_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
+    <v:String x:Key="warn_activate_notification">To start - activate Windows. Not all tweaks can be applied</v:String>
+    <v:String x:Key="ready_activate_notification">Your operating system does not need to be activated</v:String>
+    <v:String x:Key="win_activate_notification">The Windows activation process has started, it will take some time</v:String>
+    <v:String x:Key="success_activate_notification">Activation was successful, a reboot is recommended</v:String>
+    <v:String x:Key="error_activate_notification">Something went wrong, unfortunately it was not possible to activate the system</v:String>
+    <v:String x:Key="network_activate_notification">An internet connection is required for activation</v:String>
     <v:String x:Key="keynotfound_notification">The key for your Windows edition is missing; activation canceled</v:String>
     <v:String x:Key="createpoint_notification">It will take some time to create a recovery point</v:String>
-    <v:String x:Key="notsuccessfulpoint_notification">Something went wrong, it was not possible to create a restore point</v:String>
-    <v:String x:Key="successpoint_notification">The recovery point has been successfully created</v:String>
-    <v:String x:Key="notsuccessfulrecovery_notification">Something went wrong, recovery could not be started</v:String>
+    <v:String x:Key="error_point_notification">Something went wrong, it was not possible to create a restore point</v:String>
+    <v:String x:Key="success_point_notification">The recovery point has been successfully created</v:String>
+    <v:String x:Key="error_recovery_notification">Something went wrong, recovery could not be started</v:String>
     <v:String x:Key="disable_recovery_notification">System recovery is disabled, recovery points are unavailable</v:String>
-    <v:String x:Key="warndisable_recovery_notification">You have already disabled the recovery system</v:String>
-    <v:String x:Key="clearingcache_notification">The system file cache has been cleared</v:String>
+    <v:String x:Key="warn_recovery_notification">You have already disabled the recovery system</v:String>
     <v:String x:Key="clear_ram_notification">Short-term memory and temporary files have been cleared</v:String>
     <v:String x:Key="warn_defrag_off_notification">You have already disabled disk defragmentation</v:String>
     <v:String x:Key="warn_defrag_on_notification">Disk defragmentation is already enabled</v:String>
     <v:String x:Key="error_defrag_notification">Something went wrong, failed to change the defragmentation state</v:String>
     <v:String x:Key="success_defrag_off_notification">Defragmentation has been successfully disabled for your drive</v:String>
     <v:String x:Key="success_defrag_on_notification">Defragmentation of your disk was successfully enabled</v:String>
-    <v:String x:Key="succes_compression_notification">Compression of the directory and its contents was successful</v:String>
-    <v:String x:Key="succes_decompression_notification">Decompression of the directory and its contents was successful</v:String>
+    <v:String x:Key="success_compression_notification">Compression of the directory and its contents was successful</v:String>
+    <v:String x:Key="success_decompression_notification">Decompression of the directory and its contents was successful</v:String>
     <v:String x:Key="ready_compression_notification">The directory is already compressed, no further compression is required</v:String>
     <v:String x:Key="ready_decompression_notification">The directory is already decompressed, no further operation is required</v:String>
     <v:String x:Key="error_compression_notification">Something went wrong, there was an error in changing the compression state</v:String>
@@ -85,7 +84,7 @@
     <v:String x:Key="btgl_toast_main">Pin on top of all windows</v:String>
     <v:String x:Key="btgl_update_main">Checking for updates</v:String>
     <v:String x:Key="cmbox_lang_main">Interface language:</v:String>
-    <v:String x:Key="cmbox_eng_main">English (EN)</v:String>
+    <v:String x:Key="cmbox_en_main">English (EN)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
@@ -113,8 +112,8 @@
     <v:String x:Key="title_win_update">Update</v:String>
     <v:String x:Key="title_update">An update was found</v:String>
     <v:String x:Key="text_update">A new version of the program is available to you. Update for new features and bug fixes.</v:String>
-    <v:String x:Key="btn_now_update">Update</v:String>
-    <v:String x:Key="btn_log_update">Changelog</v:String>
+    <v:String x:Key="btn_upd">Update</v:String>
+    <v:String x:Key="btn_log">Changelog</v:String>
     <v:String x:Key="download_update">Downloading</v:String>
     <v:String x:Key="noty_update">Please wait for the download to complete</v:String>
     <v:String x:Key="connection_update">Connecting to the server</v:String>
@@ -286,8 +285,8 @@
     <v:String x:Key="title_over_applications">Uninstallation confirmation</v:String>
     <v:String x:Key="text_over_applications">You are about to remove the Microsoft Edge browser. This will also remove the EdgeWebView component, which is responsible for rendering web pages in applications such as Microsoft Office, as well as in some Telegram bots that use the embedded WebView to display menus (mini‑apps and web content) and other programs. Before proceeding, make sure you do not need this component.</v:String>
     <v:String x:Key="question_over_applications">Would you like to continue deleting along with EdgeWebView?</v:String>
-    <v:String x:Key="btn_сancel_applications">Cancel</v:String>
-    <v:String x:Key="btn_delete_applications">Delete</v:String>
+    <v:String x:Key="btn_сancel">Cancel</v:String>
+    <v:String x:Key="btn_delete">Delete</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -436,21 +435,21 @@
     <v:String x:Key="text2_more">to create a restore point before using the utility</v:String>
     <v:String x:Key="title_licens_more">Windows Activation</v:String>
     <v:String x:Key="text_licens_more">The HWID method or backup KMS is applied: it may not work if there is no key for your Windows edition.</v:String>
-    <v:String x:Key="btntext_licens_more">Activate</v:String>
+    <v:String x:Key="btn_activation">Activate</v:String>
     <v:String x:Key="title_createpoint_more">Save the system</v:String>
     <v:String x:Key="text_createpoint_more">It will create a Windows system restore point, even if it is disabled.</v:String>
-    <v:String x:Key="btntext_createpoint_more">Save</v:String>
+    <v:String x:Key="btn_save">Save</v:String>
     <v:String x:Key="title_recovery_more">Restore the system</v:String>
     <v:String x:Key="text_recovery_more">Start the recovery process even when system restore is disabled.</v:String>
-    <v:String x:Key="btntext_recovery_more">Recover</v:String>
+    <v:String x:Key="btn_recovery">Recover</v:String>
     <v:String x:Key="textpoint_more">A point created with a GTweak</v:String>
     <v:String x:Key="title_clear_more">Clearing the memory</v:String>
     <v:String x:Key="text_clear_more">Clears the cache of system files in computer memory, temporary files and icon cache.</v:String>
-    <v:String x:Key="btntext_clear_more">Clear</v:String>
+    <v:String x:Key="btn_clear">Clear</v:String>
     <v:String x:Key="title_disablepoint_more">Disable protection</v:String>
     <v:String x:Key="text_disablepoint_more">Disables the system restore point, but note that previously created ones are deleted.</v:String>
-    <v:String x:Key="btntext_disable_more">Disable</v:String>
-    <v:String x:Key="btntext_enable_more">Enable</v:String>
+    <v:String x:Key="btn_disable">Disable</v:String>
+    <v:String x:Key="btn_enable">Enable</v:String>
     <v:String x:Key="title_defrag_off_more">Disable defragmentation</v:String>
     <v:String x:Key="text_defrag_off_more">Disables defragmentation, extending the life of your SSD, saving it from unnecessary writes.</v:String>
     <v:String x:Key="title_defrag_on_more">Enable defragmentation</v:String>
@@ -459,13 +458,13 @@
     <v:String x:Key="text_compression_more">Compresses files by reducing their size, especially text files, which helps save disk space without any loss.</v:String>
     <v:String x:Key="title_decompression_more">NTFS Decompression</v:String>
     <v:String x:Key="text_decompression_more">Disables compression by restoring files to their original size and accelerating access to them.</v:String>
-    <v:String x:Key="btntext_overview_more">Overview</v:String>
+    <v:String x:Key="btn_overview">Overview</v:String>
 
     <v:String x:Key="title_over_more">Disk Cleanup Confirmation</v:String>
     <v:String x:Key="text_over_more">Your disk contains a Windows.old folder holding files from a previous version of Windows that are taking up a significant amount of space. Please note: once this folder is deleted, its contents cannot be restored, so be sure you’ve saved any files you need.</v:String>
     <v:String x:Key="question_over_more">Do you want to proceed with the cleanup and delete the Windows.old folder?</v:String>
-    <v:String x:Key="btn_agree_more">Agree</v:String>
-    <v:String x:Key="btn_decline_more">Decline</v:String>
+    <v:String x:Key="btn_agree">Agree</v:String>
+    <v:String x:Key="btn_decline">Decline</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

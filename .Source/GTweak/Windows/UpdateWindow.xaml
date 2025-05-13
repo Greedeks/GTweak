@@ -82,8 +82,8 @@
                             </TextBlock>
                             <TextBlock Margin="0,5,0,0" Text="{DynamicResource text_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="370" FontFamily="{StaticResource Jura}" FontSize="14px" TextAlignment="Left" FontStretch="Medium" TextWrapping="Wrap"/>
                             <Grid Margin="0,15,0,0">
-                                <Button x:Name="BtnLog" Content="{DynamicResource btn_log_update}" Style="{StaticResource BtnDefaultM}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnLog_PreviewMouseDown"/>
-                                <Button x:Name="BtnUpdate" Content="{DynamicResource btn_now_update}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnUpdate_PreviewMouseDown" Margin="0,0,20,0"/>
+                                <Button x:Name="BtnLog" Content="{DynamicResource btn_log}" Style="{StaticResource BtnDefaultM}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnLog_PreviewMouseDown"/>
+                                <Button x:Name="BtnUpdate" Content="{DynamicResource btn_upd}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnUpdate_PreviewMouseDown" Margin="0,0,20,0"/>
                             </Grid>
                         </StackPanel>
                     </Grid>

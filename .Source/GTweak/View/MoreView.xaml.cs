@@ -39,13 +39,13 @@ namespace GTweak.View
         private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
             if (WindowsLicense.IsWindowsActivated)
-                new ViewNotification().Show("", "info", "readyactivate_notification");
+                new ViewNotification().Show("", "info", "ready_activate_notification");
             else
             {
                 if (new SystemDiagnostics().IsNetworkAvailable())
                     await WindowsLicense.StartActivation();
                 else
-                    new ViewNotification().Show("", "warn", "networklicense_notification");
+                    new ViewNotification().Show("", "warn", "network_activate_notification");
             }
         }
 
@@ -97,7 +97,7 @@ namespace GTweak.View
 
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate { ClearingMemory.StartMemoryCleanupAsync(_isWinOldRemoval); });
-            new ViewNotification(500).Show("", "info", "clear_ram_notification");
+            await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "clear_ram_notification"); });
         }
 
         private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.SetDefragState(false);
@@ -132,7 +132,7 @@ namespace GTweak.View
                         try { NTFSCompressor.SetCompression(selectedPath, true); }
                         catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
                     });
-                    await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_compression_notification"); });
+                    await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "success_compression_notification"); });
                 }
                 else
                     new ViewNotification().Show("", "info", "ready_compression_notification");
@@ -160,7 +160,7 @@ namespace GTweak.View
                         catch { new ViewNotification().Show("", "warn", "error_compression_notification"); }
 
                     });
-                    await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "succes_decompression_notification"); });
+                    await backgroundQueue.QueueTask(delegate { new ViewNotification(500).Show("", "info", "success_decompression_notification"); });
                 }
                 else
                     new ViewNotification().Show("", "info", "ready_decompression_notification");

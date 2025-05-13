@@ -41,7 +41,7 @@ namespace GTweak.Utilities.Tweaks
                 return;
             }
 
-            new ViewNotification().Show("", "warn", "activatewin_notification");
+            new ViewNotification().Show("", "warn", "win_activate_notification");
 
             WaitingWindow waitingWindow = new WaitingWindow();
             waitingWindow.Show();
@@ -81,7 +81,7 @@ namespace GTweak.Utilities.Tweaks
                 if (IsWindowsActivated)
                 {
                     waitingWindow.Close();
-                    new ViewNotification(300).Show("restart", "warn", "successactivate_notification");
+                    new ViewNotification(300).Show("restart", "warn", "success_activate_notification");
                 }
                 else
                 {
@@ -95,13 +95,13 @@ namespace GTweak.Utilities.Tweaks
 
                     waitingWindow.Close();
 
-                    new ViewNotification(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "successactivate_notification" : "notsuccessactivate_notification");
+                    new ViewNotification(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "success_activate_notification" : "error_activate_notification");
                 }
             }
             catch
             {
                 waitingWindow.Close();
-                new ViewNotification(300).Show("", "warn", "notsuccessactivate_notification");
+                new ViewNotification(300).Show("", "warn", "error_activate_notification");
             }
         }
     }

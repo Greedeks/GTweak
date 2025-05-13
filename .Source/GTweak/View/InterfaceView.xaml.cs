@@ -22,7 +22,7 @@ namespace GTweak.View
             InitializeComponent();
 
             if (!WindowsLicense.IsWindowsActivated)
-                new ViewNotification().Show("", "info", "viewlicense_notification");
+                new ViewNotification().Show("", "info", "warn_activate_notification");
 
             if (SystemDiagnostics.HardwareData.OSBuild.CompareTo("22621.2361") < 0)
                 TglButton21.IsEnabled = false;

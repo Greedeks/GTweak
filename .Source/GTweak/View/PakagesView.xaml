@@ -26,8 +26,8 @@
 
                     <TextBlock Margin="0,20,0,0" Text="{DynamicResource question_over_applications}" Foreground="{StaticResource Color_Accent}" Height="auto" Width="512" FontFamily="{StaticResource Jura}" FontSize="16px" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap"/>
                     <Grid Margin="0,20,0,0" HorizontalAlignment="Center" Width="345">
-                        <Button x:Name="BtnDelete" Content="{DynamicResource btn_delete_applications}" Style="{StaticResource BtnDefaultM}" FontSize="15px" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
-                        <Button x:Name="BtnCancel" Content="{DynamicResource btn_сancel_applications}" Style="{StaticResource BtnDefault}" FontSize="15px" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
+                        <Button x:Name="BtnDelete" Content="{DynamicResource btn_delete}" Style="{StaticResource BtnDefaultM}" FontSize="15px" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
+                        <Button x:Name="BtnCancel" Content="{DynamicResource btn_сancel}" Style="{StaticResource BtnDefault}" FontSize="15px" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Height="30" Cursor="Hand"/>
                     </Grid>
                 </StackPanel>
             </Grid>

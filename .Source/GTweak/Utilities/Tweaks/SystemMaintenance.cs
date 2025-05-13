@@ -80,9 +80,9 @@ namespace GTweak.Utilities.Tweaks
                 _outParams = _restorePoint.InvokeMethod("CreateRestorePoint", _inParams, null);
 
                 if ((uint)_outParams["ReturnValue"] == 0)
-                    new ViewNotification(300).Show("", "info", "successpoint_notification");
+                    new ViewNotification(300).Show("", "info", "success_point_notification");
                 else
-                    new ViewNotification(300).Show("", "warn", "notsuccessfulpoint_notification");
+                    new ViewNotification(300).Show("", "warn", "error_point_notification");
 
                 _isWorkingCreatePoint = false;
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
@@ -90,7 +90,7 @@ namespace GTweak.Utilities.Tweaks
             catch
             {
                 _isWorkingCreatePoint = false;
-                new ViewNotification().Show("", "warn", "notsuccessfulpoint_notification");
+                new ViewNotification().Show("", "warn", "error_point_notification");
             }
         }
 
@@ -101,7 +101,7 @@ namespace GTweak.Utilities.Tweaks
                 EnableRecovery();
                 CommandExecutor.RunCommand("/c rstrui.exe");
             }
-            catch { new ViewNotification().Show("", "warn", "notsuccessfulrecovery_notification"); }
+            catch { new ViewNotification().Show("", "warn", "error_recovery_notification"); }
         }
 
         internal static void DisableRestorePoint()
@@ -120,7 +120,7 @@ namespace GTweak.Utilities.Tweaks
                 DisableSR(StoragePaths.SystemDisk + @"\\");
             }
             else
-                new ViewNotification().Show("", "info", "warndisable_recovery_notification");
+                new ViewNotification().Show("", "info", "warn_recovery_notification");
         }
 
         private static void EnableRecovery()

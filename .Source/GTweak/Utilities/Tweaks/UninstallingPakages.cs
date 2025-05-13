@@ -83,7 +83,7 @@ namespace GTweak.Utilities.Tweaks
         internal async void CheckingForLocalAccount()
         {
             string output = await CommandExecutor.GetCommandOutput("Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource");
-            _isLocalAccount = !output.Contains("MicrosoftAccount");
+            _isLocalAccount = output.IndexOf("MicrosoftAccount", StringComparison.OrdinalIgnoreCase) < 0;
         }
 
         internal static Task RestoreOneDriveFolder()

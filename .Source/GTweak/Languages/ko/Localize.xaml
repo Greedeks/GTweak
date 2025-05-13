@@ -42,29 +42,28 @@
     <v:String x:Key="onedrive_notification">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="appsdelete_notification">응용 프로그램 제거 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="windefender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
-    <v:String x:Key="firewalloff_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
-    <v:String x:Key="viewlicense_notification">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
-    <v:String x:Key="readyactivate_notification">운영 체제를 활성화할 필요가 없습니다</v:String>
-    <v:String x:Key="activatewin_notification">Windows 정품 인증 프로세스가 시작되었으며 시간이 다소 소요됩니다.</v:String>
-    <v:String x:Key="successactivate_notification">활성화에 성공했습니다. 재부팅을 권장합니다</v:String>
-    <v:String x:Key="notsuccessactivate_notification">문제가 발생하여 안타깝게도 시스템을 활성화할 수 없습니다</v:String>
-    <v:String x:Key="networklicense_notification">An internet connection is required for activation</v:String>
+    <v:String x:Key="warn_firewall_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
+    <v:String x:Key="warn_activate_notification">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
+    <v:String x:Key="ready_activate_notification">운영 체제를 활성화할 필요가 없습니다</v:String>
+    <v:String x:Key="win_activate_notification">Windows 정품 인증 프로세스가 시작되었으며 시간이 다소 소요됩니다.</v:String>
+    <v:String x:Key="success_activate_notification">활성화에 성공했습니다. 재부팅을 권장합니다</v:String>
+    <v:String x:Key="error_activate_notification">문제가 발생하여 안타깝게도 시스템을 활성화할 수 없습니다</v:String>
+    <v:String x:Key="network_activate_notification">An internet connection is required for activation</v:String>
     <v:String x:Key="keynotfound_notification">The key for your Windows edition is missing; activation canceled</v:String>
     <v:String x:Key="createpoint_notification">복구 지점을 생성하는 데 시간이 좀 걸릴 것입니다</v:String>
-    <v:String x:Key="notsuccessfulpoint_notification">문제가 발생하여 복원 지점을 만들 수 없습니다</v:String>
-    <v:String x:Key="successpoint_notification">복구 지점이 성공적으로 생성되었습니다</v:String>
-    <v:String x:Key="notsuccessfulrecovery_notification">문제가 발생하여 복구를 시작할 수 없습니다</v:String>
+    <v:String x:Key="error_point_notification">문제가 발생하여 복원 지점을 만들 수 없습니다</v:String>
+    <v:String x:Key="success_point_notification">복구 지점이 성공적으로 생성되었습니다</v:String>
+    <v:String x:Key="error_recovery_notification">문제가 발생하여 복구를 시작할 수 없습니다</v:String>
     <v:String x:Key="disable_recovery_notification">시스템 복구가 비활성화되고 복구 지점을 사용할 수 없습니다</v:String>
-    <v:String x:Key="warndisable_recovery_notification">이미 복구 시스템을 비활성화했습니다</v:String>
-    <v:String x:Key="clearingcache_notification">시스템 파일 캐시가 지워졌습니다</v:String>
+    <v:String x:Key="warn_recovery_notification">이미 복구 시스템을 비활성화했습니다</v:String>
     <v:String x:Key="clear_ram_notification">단기 메모리 및 임시 파일이 지워졌습니다</v:String>
     <v:String x:Key="warn_defrag_off_notification">디스크 조각 모음을 이미 비활성화했습니다</v:String>
     <v:String x:Key="warn_defrag_on_notification">디스크 조각 모음 기능이 이미 활성화되었습니다</v:String>
     <v:String x:Key="error_defrag_notification">문제가 발생하여 조각 모음 상태를 변경하지 못했습니다</v:String>
     <v:String x:Key="success_defrag_off_notification">드라이브에 대해 조각 모음이 성공적으로 비활성화되었습니다</v:String>
     <v:String x:Key="success_defrag_on_notification">디스크 조각 모음이 성공적으로 활성화되었습니다</v:String>
-    <v:String x:Key="succes_compression_notification">디렉토리와 그 내용물의 압축이 성공적으로 수행되었습니다</v:String>
-    <v:String x:Key="succes_decompression_notification">디렉토리와 그 내용물의 압축 해제가 성공적으로 수행되었습니다</v:String>
+    <v:String x:Key="success_compression_notification">디렉토리와 그 내용물의 압축이 성공적으로 수행되었습니다</v:String>
+    <v:String x:Key="success_decompression_notification">디렉토리와 그 내용물의 압축 해제가 성공적으로 수행되었습니다</v:String>
     <v:String x:Key="ready_compression_notification">디렉토리가 이미 압축되어 있어 추가 압축이 필요하지 않습니다</v:String>
     <v:String x:Key="ready_decompression_notification">디렉토리가 이미 압축 해제되어 있어 추가 작업이 필요하지 않습니다</v:String>
     <v:String x:Key="error_compression_notification">문제가 발생하여 압축 상태를 변경하는 중 오류가 발생했습니다</v:String>
@@ -85,7 +84,7 @@
     <v:String x:Key="btgl_toast_main">모든 창 위에 고정</v:String>
     <v:String x:Key="btgl_update_main">업데이트 확인</v:String>
     <v:String x:Key="cmbox_lang_main">인터페이스 언어:</v:String>
-    <v:String x:Key="cmbox_eng_main">English (EN)</v:String>
+    <v:String x:Key="cmbox_en_main">English (EN)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
@@ -113,8 +112,8 @@
     <v:String x:Key="title_win_update">업데이트</v:String>
     <v:String x:Key="title_update">업데이트가 발견되었습니다</v:String>
     <v:String x:Key="text_update">새로운 버전의 프로그램을 사용할 수 있습니다. 새로운 기능과 버그 수정을 위해 업데이트하세요.</v:String>
-    <v:String x:Key="btn_now_update">업데이트</v:String>
-    <v:String x:Key="btn_log_update">변경사항</v:String>
+    <v:String x:Key="btn_upd">업데이트</v:String>
+    <v:String x:Key="btn_log">변경사항</v:String>
     <v:String x:Key="download_update">다운로드</v:String>
     <v:String x:Key="noty_update">다운로드가 완료될 때까지 기다려주세요</v:String>
     <v:String x:Key="connection_update">서버에 연결</v:String>
@@ -286,8 +285,8 @@
     <v:String x:Key="title_over_applications">Uninstallation confirmation</v:String>
     <v:String x:Key="text_over_applications">You are about to remove the Microsoft Edge browser. This will also remove the EdgeWebView component, which is responsible for rendering web pages in applications such as Microsoft Office, as well as in some Telegram bots that use the embedded WebView to display menus (mini‑apps and web content) and other programs. Before proceeding, make sure you do not need this component.</v:String>
     <v:String x:Key="question_over_applications">Would you like to continue deleting along with EdgeWebView?</v:String>
-    <v:String x:Key="btn_сancel_applications">Cancel</v:String>
-    <v:String x:Key="btn_delete_applications">Delete</v:String>
+    <v:String x:Key="btn_сancel">Cancel</v:String>
+    <v:String x:Key="btn_delete">Delete</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -436,21 +435,21 @@
     <v:String x:Key="text2_more">을 생성하는 것이 좋습니다</v:String>
     <v:String x:Key="title_licens_more">Windows 정품 인증</v:String>
     <v:String x:Key="text_licens_more">HWID 또는 백업 KMS 방법이 적용됩니다: Windows 에디션에 키가 없으면 작동하지 않을 수 있습니다.</v:String>
-    <v:String x:Key="btntext_licens_more">활성화</v:String>
+    <v:String x:Key="btn_activation">활성화</v:String>
     <v:String x:Key="title_createpoint_more">시스템 저장</v:String>
     <v:String x:Key="text_createpoint_more">비활성화되어 있어도 Windows 시스템 복원 지점을 생성합니다.</v:String>
-    <v:String x:Key="btntext_createpoint_more">저장</v:String>
+    <v:String x:Key="btn_save">저장</v:String>
     <v:String x:Key="title_recovery_more">시스템 복원</v:String>
     <v:String x:Key="text_recovery_more">시스템 복원이 비활성화된 경우에도 복구 프로세스를 시작합니다.</v:String>
-    <v:String x:Key="btntext_recovery_more">복구</v:String>
+    <v:String x:Key="btn_recovery">복구</v:String>
     <v:String x:Key="textpoint_more">GTweak으로 생성된 지점</v:String>
     <v:String x:Key="title_clear_more">메모리 지우기</v:String>
     <v:String x:Key="text_clear_more">컴퓨터 메모리, 임시 파일 및 아이콘 캐시에 있는 시스템 파일의 캐시를 지웁니다.</v:String>
-    <v:String x:Key="btntext_clear_more">지우기</v:String>
+    <v:String x:Key="btn_clear">지우기</v:String>
     <v:String x:Key="title_disablepoint_more">보호 기능 비활성화</v:String>
     <v:String x:Key="text_disablepoint_more">시스템 복원 지점을 비활성화하지만 이전에 생성한 복원 지점은 삭제됩니다.</v:String>
-    <v:String x:Key="btntext_disable_more">비활성화</v:String>
-    <v:String x:Key="btntext_enable_more">켜다</v:String>
+    <v:String x:Key="btn_disable">비활성화</v:String>
+    <v:String x:Key="btn_enable">켜다</v:String>
     <v:String x:Key="title_defrag_off_more">조각 모음 끄기</v:String>
     <v:String x:Key="text_defrag_off_more">조각 모음을 비활성화하여 SSD의 수명을 연장하고 불필요한 쓰기로부터 저장합니다.</v:String>
     <v:String x:Key="title_defrag_on_more">조각 모음 켜기</v:String>
@@ -459,13 +458,13 @@
     <v:String x:Key="text_compression_more">파일을 압축하여 크기를 줄임으로써 특히 텍스트 파일의 경우 디스크 공간을 손실 없이 절약할 수 있습니다.</v:String>
     <v:String x:Key="title_decompression_more">NTFS 압축 해제</v:String>
     <v:String x:Key="text_decompression_more">압축을 해제하여 파일을 원래 크기로 복원하고 접근 속도를 높입니다.</v:String>
-    <v:String x:Key="btntext_overview_more">개요</v:String>
+    <v:String x:Key="btn_overview">개요</v:String>
 
     <v:String x:Key="title_over_more">Disk Cleanup Confirmation</v:String>
     <v:String x:Key="text_over_more">Your disk contains a Windows.old folder holding files from a previous version of Windows that are taking up a significant amount of space. Please note: once this folder is deleted, its contents cannot be restored, so be sure you’ve saved any files you need.</v:String>
     <v:String x:Key="question_over_more">Do you want to proceed with the cleanup and delete the Windows.old folder?</v:String>
-    <v:String x:Key="btn_agree_more">Agree</v:String>
-    <v:String x:Key="btn_decline_more">Decline</v:String>
+    <v:String x:Key="btn_agree">Agree</v:String>
+    <v:String x:Key="btn_decline">Decline</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>
