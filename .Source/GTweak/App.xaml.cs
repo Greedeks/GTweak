@@ -102,8 +102,9 @@ namespace GTweak
                 {
                     Source = value switch
                     {
-                        "Light" => new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
                         "Dark" => new Uri($"Styles/Themes/Dark/Colors.xaml", UriKind.Relative),
+                        "Light" => new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
+                        "Cold Blue" => new Uri($"Styles/Themes/Cold Blue/Colors.xaml", UriKind.Relative),
                         _ => RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", string.Empty) == "0" ? new Uri("Styles/Themes/Dark/Colors.xaml", UriKind.Relative) : new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
                     }
                 };

@@ -252,6 +252,7 @@
                                         <ComboBox x:Name="ThemeSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" SelectionChanged="ThemeSelectionMenu_SelectionChanged">
                                             <TextBlock Text="{DynamicResource cmbox_dark_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_light_main}"/>
+                                            <TextBlock Text="{DynamicResource cmbox_cblue_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_system_main}"/>
                                         </ComboBox>
                                     </StackPanel>

@@ -5,14 +5,14 @@
     <SolidColorBrush x:Key="Color_Background_Dark" Color="#EAEAEA"/>
 
     <SolidColorBrush x:Key="Color_Accent" Color="#3CB671"/>
-    <SolidColorBrush x:Key="Color_Inactive" Color="#707070"/>
     <SolidColorBrush x:Key="Color_Highlighted" Color="#000000"/>
+    <SolidColorBrush x:Key="Color_Inactive" Color="#707070"/>
 
     <SolidColorBrush x:Key="Color_Over" Color="#4CA874"/>
     <SolidColorBrush x:Key="Color_MButton" Color="#B8B8B8"/>
     <SolidColorBrush x:Key="Color_ButtonOver" Color="#45AB77"/>
-    <SolidColorBrush x:Key="Color_ButtonOver_Navigation" Color="#DADADA"/>
     <SolidColorBrush x:Key="Color_MButtonOver" Color="#989898"/>
+    <SolidColorBrush x:Key="Color_ButtonOver_Navigation" Color="#DADADA"/>
     <SolidColorBrush x:Key="Color_Border" Color="#009843"/>
 
     <SolidColorBrush x:Key="Color_ComboBoxOver" Color="#DADADA"/>

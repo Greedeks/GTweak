@@ -30,7 +30,7 @@ namespace GTweak.Utilities.Controls
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
         internal static string[] AvailableLangs = { "en", "ko", "ru", "uk" };
-        internal static string[] AvailableThemes = { "Dark", "Light", "System" };
+        internal static string[] AvailableThemes = { "Dark", "Light", "Cold Blue", "System" };
 
         internal static int PID = 0;
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();

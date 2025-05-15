@@ -91,6 +91,7 @@
     <v:String x:Key="cmbox_theme_main">Тема інтерфейсу:</v:String>
     <v:String x:Key="cmbox_dark_main">Темна</v:String>
     <v:String x:Key="cmbox_light_main">Світла</v:String>
+    <v:String x:Key="cmbox_cblue_main">Холодний синій</v:String>
     <v:String x:Key="cmbox_system_main">Системна</v:String>
     <v:String x:Key="btn_import">Імпорт</v:String>
     <v:String x:Key="btn_export">Експорт</v:String>
