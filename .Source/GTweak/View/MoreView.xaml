@@ -35,11 +35,11 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="12*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Top" KeyboardNavigation.IsTabStop="False" Margin="0,10,0,0">
+                <TextBlock Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False">
                 <Run Text="{DynamicResource text0_more}"/>
                 <Run Text="{DynamicResource text1_more}" Foreground="{StaticResource Color_Accent}"/>
                 <Run Text="{DynamicResource text2_more}"/>
@@ -49,7 +49,7 @@
             <Grid Grid.Row="1">
                 <ScrollViewer Style="{StaticResource ScrollPage}">
                     <StackPanel>
-                        <UniformGrid Rows="1" Columns="3">
+                        <UniformGrid Rows="1" Columns="3" Margin="0,10,0,0">
                             <UserControl:Card IconSource ="{StaticResource DI_LicenseWindows}" Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btn_activation}" ClickButton="BtnLicenseWindows_ClickButton"/>
                             <UserControl:Card IconSource="{StaticResource DI_BackupSystem}" Title="{DynamicResource title_createpoint_more}" Description="{DynamicResource text_createpoint_more}" BtnContent="{DynamicResource btn_save}" ClickButton="BtnRestorePoint_ClickButton"/>
                             <UserControl:Card IconSource="{StaticResource DI_RecoverySystem}" Title="{DynamicResource title_recovery_more}" Description="{DynamicResource text_recovery_more}" BtnContent="{DynamicResource btn_recovery}" ClickButton="BtnRecoveyLaunch_ClickButton"/>
