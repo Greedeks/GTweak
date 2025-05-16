@@ -91,6 +91,8 @@
     <v:String x:Key="cmbox_theme_main">Interface theme:</v:String>
     <v:String x:Key="cmbox_dark_main">Dark</v:String>
     <v:String x:Key="cmbox_light_main">Light</v:String>
+    <v:String x:Key="cmbox_cobalt_main">Cobalt</v:String>
+    <v:String x:Key="cmbox_amethyst_main">Dark amethyst</v:String>
     <v:String x:Key="cmbox_cblue_main">Cold blue</v:String>
     <v:String x:Key="cmbox_system_main">System</v:String>
     <v:String x:Key="btn_import">Import</v:String>

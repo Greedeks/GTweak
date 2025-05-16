@@ -91,7 +91,9 @@
     <v:String x:Key="cmbox_theme_main">Тема интерфейса:</v:String>
     <v:String x:Key="cmbox_dark_main">Тёмная</v:String>
     <v:String x:Key="cmbox_light_main">Светлая</v:String>
-    <v:String x:Key="cmbox_cblue_main">Холодный синиий</v:String>
+    <v:String x:Key="cmbox_cobalt_main">Кобальт</v:String>
+    <v:String x:Key="cmbox_amethyst_main">Тёмный аметист</v:String>
+    <v:String x:Key="cmbox_cblue_main">Холодный синий</v:String>
     <v:String x:Key="cmbox_system_main">Системная</v:String>
     <v:String x:Key="btn_import">Импорт</v:String>
     <v:String x:Key="btn_export">Экспорт</v:String>
