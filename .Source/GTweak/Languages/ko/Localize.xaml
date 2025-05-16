@@ -108,7 +108,7 @@
     <!--#endregion-->
 
     <!--#region Reboot Window -->
-    <v:String x:Key="title_reboot">GTweak 재부팅 주의</v:String>
+    <v:String x:Key="title_reboot">자동 재시작</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->

@@ -108,7 +108,7 @@
     <!--#endregion-->
 
     <!--#region Reboot Window -->
-    <v:String x:Key="title_reboot">Внимание, перезагрузка GTweak</v:String>
+    <v:String x:Key="title_reboot">Автоматический перезапуск</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->
