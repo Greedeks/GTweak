@@ -30,4 +30,19 @@
     <Color x:Key="Color_ToggleButton_ON_1">#3CB671</Color>
     <Color x:Key="Color_ToggleButton_ON_2">#1AB65E</Color>
 
+    <SolidColorBrush x:Key="Color_Icon1" Color="#FF4E9B70"/>
+    <SolidColorBrush x:Key="Color_Icon2" Color="#FF4D9F71"/>
+    <SolidColorBrush x:Key="Color_Icon3" Color="#FF198519"/>
+    <SolidColorBrush x:Key="Color_Icon4" Color="#FF09A703"/>
+    <SolidColorBrush x:Key="Color_Icon5" Color="#FF416A53"/>
+    <SolidColorBrush x:Key="Color_Icon6" Color="#FF187317"/>
+    <SolidColorBrush x:Key="Color_Icon7" Color="#FF3AA943"/>
+    <SolidColorBrush x:Key="Color_Icon8" Color="#FF128A13"/>
+    <SolidColorBrush x:Key="Color_Icon9" Color="#FF267C28"/>
+    <SolidColorBrush x:Key="Color_Icon10" Color="#FF3DC762"/>
+    <SolidColorBrush x:Key="Color_Icon11" Color="#FF1B841B"/>
+    <SolidColorBrush x:Key="Color_Icon12" Color="#FF3AC35A"/>
+    <SolidColorBrush x:Key="Color_Icon13" Color="#FF41A049"/>
+    <SolidColorBrush x:Key="Color_Icon14" Color="#FF1A8820"/>
+    
 </ResourceDictionary>

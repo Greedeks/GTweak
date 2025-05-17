@@ -25,6 +25,6 @@
                 </xrpb:RadialProgressBar.Effect>
             </xrpb:RadialProgressBar>
 
-            <TextBlock Text="{DynamicResource title_reboot}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="130" TextAlignment="Center" Style="{StaticResource Text}"/>
+            <TextBlock Text="{DynamicResource title_reboot}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="135" TextAlignment="Center" Style="{StaticResource Text}"/>
         </Grid>
 </Window>
