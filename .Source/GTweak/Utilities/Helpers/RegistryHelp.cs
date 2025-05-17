@@ -49,10 +49,7 @@ namespace GTweak.Utilities.Helpers
 
                     registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
                 }
-                catch (Exception ex)
-                {
-                    ErrorLogging.LogDebug(ex);
-                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }).ConfigureAwait(false);
         }
 
