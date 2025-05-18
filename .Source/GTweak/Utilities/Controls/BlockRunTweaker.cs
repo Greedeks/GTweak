@@ -42,11 +42,13 @@ namespace GTweak.Utilities.Controls
             }
         }
 
-        internal static void CheckingSystemRequirements()
+        internal static async Task CheckingSystemRequirements()
         {
-            Task.Run(delegate { new SystemDiagnostics().GetOperatingSystemInfo(); }).Wait();
+            await Task.Run(() => new SystemDiagnostics().GetOperatingSystemInfo());
 
-            if ((SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) && SystemDiagnostics.HardwareData.OSBuild.CompareTo("18362.116") >= 0) return;
+            if ((SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) && SystemDiagnostics.HardwareData.OSBuild.CompareTo("18362.116") >= 0)
+                return;
+
             new MessageWindow(true).ShowDialog();
         }
     }

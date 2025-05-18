@@ -441,7 +441,7 @@
     <v:String x:Key="text1_more">recommandé</v:String>
     <v:String x:Key="text2_more">de créer un point de restauration avant d’utiliser l’utilitaire</v:String>
     <v:String x:Key="title_licens_more">Activation de Windows</v:String>
-    <v:String x:Key="text_licens_more">Méthode HWID ou KMS: peut échouer sans clé pour cette édition</v:String>
+    <v:String x:Key="text_licens_more">Méthode HWID ou KMS: peut échouer sans clé pour cette édition.</v:String>
     <v:String x:Key="btn_activation">Activer</v:String>
     <v:String x:Key="title_createpoint_more">Sauvegarder le système</v:String>
     <v:String x:Key="text_createpoint_more">Crée un point de restauration Windows, même si cette fonction est désactivée.</v:String>
@@ -462,7 +462,7 @@
     <v:String x:Key="title_defrag_on_more">Activer la défragmentation</v:String>
     <v:String x:Key="text_defrag_on_more">Active la défragmentation qui réorganise les fichiers, efficace uniquement sur disque dur (HDD).</v:String>
     <v:String x:Key="title_compression_more">Compression NTFS</v:String>
-    <v:String x:Key="text_compression_more">Compresse les fichiers (surtout texte) pour gagner de l’espace sans perte</v:String>
+    <v:String x:Key="text_compression_more">Compresse les fichiers (surtout texte) pour gagner de l’espace sans perte.</v:String>
     <v:String x:Key="title_decompression_more">Décompression NTFS</v:String>
     <v:String x:Key="text_decompression_more">Désactive la compression en restaurant la taille d’origine des fichiers et accélère leur accès.</v:String>
     <v:String x:Key="btn_overview">Aperçu</v:String>

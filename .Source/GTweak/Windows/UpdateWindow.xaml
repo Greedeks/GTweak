@@ -64,7 +64,7 @@
                     </Grid>
                     
                     <Grid Grid.Row="1">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,5,0,0">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
                             <StackPanel Orientation="Horizontal">
                                 <Image Width="25">
                                     <Image.Style>
@@ -75,12 +75,12 @@
                                 </Image>
                                 <TextBlock Text="{DynamicResource title_update}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="18px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,0,0,0"/>
                             </StackPanel>
-                            <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="16px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,2,0,0">
-                                    <Run x:Name="CurrentVerison" Text="0.00.0" Foreground="{StaticResource Color_Accent}"/>
+                            <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="16px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,3,0,0">
+                                    <Run x:Name="CurrentVerison" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/>
                                     <Run Text="➔"/>
-                                    <Run x:Name="NewVerison" Text="0.00.0" Foreground="{StaticResource Color_Accent}"/>
+                                    <Run x:Name="NewVerison" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/>
                             </TextBlock>
-                            <TextBlock Margin="0,5,0,0" Text="{DynamicResource text_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="370" FontFamily="{StaticResource Jura}" FontSize="14px" TextAlignment="Left" FontStretch="Medium" TextWrapping="Wrap"/>
+                            <TextBlock Margin="0,6,0,0" Text="{DynamicResource text_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="370" FontFamily="{StaticResource Jura}" FontSize="14px" TextAlignment="Left" FontStretch="Medium" TextWrapping="Wrap"/>
                             <Grid Margin="0,15,0,0">
                                 <Button x:Name="BtnLog" Content="{DynamicResource btn_log}" Style="{StaticResource BtnDefaultM}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnLog_PreviewMouseDown"/>
                                 <Button x:Name="BtnUpdate" Content="{DynamicResource btn_upd}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnUpdate_PreviewMouseDown" Margin="0,0,20,0"/>

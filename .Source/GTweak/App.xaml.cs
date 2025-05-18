@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -29,7 +30,7 @@ namespace GTweak
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
         }
 
-        private void App_Startup(object sender, StartupEventArgs e)
+        private async void App_Startup(object sender, StartupEventArgs e)
         {
             if (e.Args.Any(arg => arg.Equals("uninstall", StringComparison.OrdinalIgnoreCase)))
             {
@@ -41,7 +42,7 @@ namespace GTweak
             Theme = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Theme", "Dark");
 
             BlockRunTweaker.CheckingApplicationCopies();
-            BlockRunTweaker.CheckingSystemRequirements();
+            await BlockRunTweaker.CheckingSystemRequirements();
 
             new LoadingWindow().Show();
         }
