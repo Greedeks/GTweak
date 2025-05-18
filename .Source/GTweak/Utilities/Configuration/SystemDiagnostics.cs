@@ -401,12 +401,16 @@ namespace GTweak.Utilities.Configuration
         {
             double totalSize = Convert.ToDouble(sizeInBytes) / (1024.0 * 1024.0);
 
-            if (totalSize < 1024)
+            if (Convert.ToDouble(sizeInBytes) < 1024)
+                return $"{Convert.ToDouble(sizeInBytes):N0} B";
+            else if (totalSize < 1)
+                return $"{Math.Round(totalSize * 1024)} KB";
+            else if (totalSize < 1024)
                 return $"{Math.Round(totalSize)} MB";
             else if (totalSize < 1024 * 1024)
                 return $"{Math.Round(totalSize / 1024.0)} GB";
             else
-                return $"{Math.Round(totalSize / 1024.0, 2):G} TB";
+                return $"{Math.Round(totalSize / (1024.0 * 1024.0), 2):G} TB";
         }
 
         private void GetNetworkAdapters()
