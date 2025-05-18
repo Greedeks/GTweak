@@ -15,7 +15,7 @@
 
 <!-- langues --> 
 <div align="center">
-  <h1>🌍 Langues disponibles :</h1>
+  <h1>🌍 Langues disponibles:</h1>
 
   <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
     <img src="https://cdn-icons-png.flaticon.com/64/16021/16021822.png" alt="Drapeau US" width="40">
@@ -44,26 +44,26 @@
 <h2> Une large gamme de fonctions, incluant : 🔩</h2>
 
 ```java
-- Activation de Windows via HWID et KMS ;
-- Désactivation de Windows Defender, SmartScreen, Antimalware, VBS et UAC ;
-- Désactivation des mises à jour Windows et suppression des fichiers temporaires de mise à jour ;
-- Désactivation des services inutiles et superflus ;
-- Désactivation des keyloggers et de la télémétrie pour Windows et NVIDIA ;
-- Désactivation des services et événements liés à la collecte de données utilisateur ;
-- Désactivation des tâches du Planificateur de tâches Windows ;
-- Désactivation des protocoles réseau inutiles : Teredo, ISATAP et IPv6 ;
-- Désactivation des outils de diagnostic Windows intégrés et de la défragmentation ;
-- Suppression des publicités et bannières système dans Windows, y compris SCOOBE ;
-- Désactivation des notifications, recommandations et suggestions système ;
-- Blocage des domaines fantômes de Microsoft collectant des données ;
-- Désinstallation de OneDrive et Microsoft Edge ainsi que des données et dossiers associés ;
-- Suppression des applications préinstallées dans Windows 10/11 ;
-- Suppression et désactivation des assistants IA : Cortana, Copilot et Recall ;
-- Personnalisation de l’interface : thèmes, fenêtres et icônes ;
-- Configuration du clavier et de la souris : désactivation du filtrage, des touches rémanentes, accélération ;
-- Ajustement des paramètres Windows et du plan d’alimentation ;
-- Ajustement de l'alimentation pour les pilotes Realtek Audio afin de corriger les retards audio ;
-- Affichage de la configuration et surveillance des composants système ;
+- Activation de Windows via HWID et KMS;
+- Désactivation de Windows Defender, SmartScreen, Antimalware, VBS et UAC;
+- Désactivation des mises à jour Windows et suppression des fichiers temporaires de mise à jour;
+- Désactivation des services inutiles et superflus;
+- Désactivation des keyloggers et de la télémétrie pour Windows et NVIDIA;
+- Désactivation des services et événements liés à la collecte de données utilisateur;
+- Désactivation des tâches du Planificateur de tâches Windows;
+- Désactivation des protocoles réseau inutiles : Teredo, ISATAP et IPv6;
+- Désactivation des outils de diagnostic Windows intégrés et de la défragmentation;
+- Suppression des publicités et bannières système dans Windows, y compris SCOOBE;
+- Désactivation des notifications, recommandations et suggestions système;
+- Blocage des domaines fantômes de Microsoft collectant des données;
+- Désinstallation de OneDrive et Microsoft Edge ainsi que des données et dossiers associés;
+- Suppression des applications préinstallées dans Windows 10/11;
+- Suppression et désactivation des assistants IA : Cortana, Copilot et Recall;
+- Personnalisation de l’interface : thèmes, fenêtres et icônes;
+- Configuration du clavier et de la souris : désactivation du filtrage, des touches rémanentes, accélération;
+- Ajustement des paramètres Windows et du plan d’alimentation;
+- Ajustement de l'alimentation pour les pilotes Realtek Audio afin de corriger les retards audio;
+- Affichage de la configuration et surveillance des composants système;
 - Compression et restauration des données via NFTS.
 ```
 
@@ -98,13 +98,13 @@
 > ⚠ L’utilitaire est conçu uniquement pour les images officielles de Windows téléchargées depuis des sources fiables. Si vous avez installé une version modifiée de Windows, vous êtes seul responsable de son bon fonctionnement.
 
 ```c++
-Compatibilité Windows : à partir de la version 10 (build 18362.116)
-Résolution minimale : 1280×720 (HD)
-Plateforme installée : .NET Framework 4.8
+Compatibilité Windows: à partir de la version 10 (build 18362.116)
+Résolution minimale: 1280×720 (HD)
+Plateforme installée: .NET Framework 4.8
 ```
 </br>
 
-> \[!AVERTISSEMENT]
+> [!WARNING]
 > Vous devez désactiver l’antivirus avant utilisation
 </br>
 
