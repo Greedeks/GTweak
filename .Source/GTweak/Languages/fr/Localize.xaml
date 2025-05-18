@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
@@ -81,7 +81,7 @@
     <v:String x:Key="title_settings_main">Paramètres</v:String>
     <v:String x:Key="btgl_notifications_main">Afficher les notifications</v:String>
     <v:String x:Key="slider_volume_main">Volume :</v:String>
-    <v:String x:Key="btgl_toast_main">Épingler au-dessus de toutes les fenêtres</v:String>
+    <v:String x:Key="btgl_toast_main">Épingler au-dessus des fenêtres</v:String>
     <v:String x:Key="btgl_update_main">Vérification des mises à jour</v:String>
     <v:String x:Key="cmbox_lang_main">Langue de l’interface :</v:String>
     <v:String x:Key="cmbox_en_main">English (EN)</v:String>
@@ -117,7 +117,7 @@
     <v:String x:Key="title_update">Une mise à jour a été trouvée</v:String>
     <v:String x:Key="text_update">Une nouvelle version du programme est disponible. Mettez à jour pour bénéficier de nouvelles fonctionnalités et corrections de bugs.</v:String>
     <v:String x:Key="btn_upd">Mettre à jour</v:String>
-    <v:String x:Key="btn_log">Journal des modifications</v:String>
+    <v:String x:Key="btn_log">Modifications</v:String>
     <v:String x:Key="download_update">Téléchargement</v:String>
     <v:String x:Key="noty_update">Veuillez attendre la fin du téléchargement</v:String>
     <v:String x:Key="connection_update">Connexion au serveur</v:String>
@@ -138,7 +138,7 @@
     <v:String x:Key="tgl12_confidentiality">Mises à jour cachées de la synthèse vocale</v:String>
     <v:String x:Key="tgl13_confidentiality">Surveillance cachée de votre système</v:String>
     <v:String x:Key="tgl14_confidentiality">Expérimentations cachées sur votre système</v:String>
-    <v:String x:Key="tgl15_confidentiality">Services de collecte et de transmission de données secrètes</v:String>
+    <v:String x:Key="tgl15_confidentiality">Services de collecte/transmission de données secrètes</v:String>
     <v:String x:Key="tgl16_confidentiality">« Journalisation » des événements Windows</v:String>
     <v:String x:Key="tgl17_confidentiality">Collecte et surveillance de la télémétrie NVIDIA</v:String>
     <v:String x:Key="tgl18_confidentiality">Enregistrement du comportement de l’utilisateur</v:String>
@@ -174,7 +174,7 @@
     <v:String x:Key="tgl8_interface">Thème sombre des applications et de l’explorateur</v:String>
     <v:String x:Key="tgl9_interface">Délai d’apparition du menu contextuel</v:String>
     <v:String x:Key="tgl10_interface">Délai d’affichage des aperçus sur la barre des tâches</v:String>
-    <v:String x:Key="tgl11_interface">Flèches pour les raccourcis de fichiers, dossiers ou programmes</v:String>
+    <v:String x:Key="tgl11_interface">Flèches pour raccourcis de fichiers, dossiers, programmes</v:String>
     <v:String x:Key="tgl12_interface">Préfixe « Raccourci vers… » / suffixe « – Raccourci »</v:String>
     <v:String x:Key="tgl13_interface">Icône « Ce PC » sur le Bureau</v:String>
     <v:String x:Key="tgl14_interface">Icône « Corbeille » sur le Bureau</v:String>
@@ -187,7 +187,7 @@
     <v:String x:Key="tgl21_interface">« Terminer la tâche » via clic droit sur l’application (Windows 11)</v:String>
     <v:String x:Key="tgl22_interface">Icônes et boutons sur la barre des tâches</v:String>
     <v:String x:Key="tgl23_interface">Afficher des publicités personnalisées</v:String>
-    <v:String x:Key="tgl24_interface">Restaurer les fenêtres de dossiers précédentes à la connexion</v:String>
+    <v:String x:Key="tgl24_interface">Restaurer les fenêtres précédentes à la connexion</v:String>
     <v:String x:Key="tgl25_interface">Notifications avec des conseils et suggestions Windows</v:String>
     <v:String x:Key="tgl26_interface">Dossiers situés dans « Ce PC »</v:String>
     <v:String x:Key="tgl27_interface">« Objets 3D » dans l’explorateur</v:String>
@@ -308,7 +308,7 @@
     <v:String x:Key="tgl9_services">Service lié au fonctionnement du scanner</v:String>
     <v:String x:Key="tgl10_services">Services liés au fax</v:String>
     <v:String x:Key="tgl11_services">Services liés à l’utilisation du mode tablette/smartphone</v:String>
-    <v:String x:Key="tgl12_services">Services liés au fonctionnement des moniteurs supplémentaires</v:String>
+    <v:String x:Key="tgl12_services">Services liés aux moniteurs supplémentaires</v:String>
     <v:String x:Key="tgl13_services">Services de bureau virtuel, Votre Téléphone</v:String>
     <v:String x:Key="tgl14_services">Services liés au fonctionnement du réseau local</v:String>
     <v:String x:Key="tgl15_services">Services liés à Windows Update</v:String>
@@ -366,7 +366,7 @@
     <v:String x:Key="tgl3_system">Temps d'attente avant extinction de l'écran de verrouillage</v:String>
     <v:String x:Key="tgl4_system">Technologies « Veille prolongée » et « Démarrage rapide »</v:String>
     <v:String x:Key="tgl5_system">Fenêtre d'avertissement avant arrêt</v:String>
-    <v:String x:Key="tgl6_system">Mise à jour automatique des applications via Microsoft Store</v:String>
+    <v:String x:Key="tgl6_system">Màj. automatique des applications via Microsoft Store</v:String>
     <v:String x:Key="tgl7_system">Délai sonore dans le pilote Realtek</v:String>
     <v:String x:Key="tgl8_system">Windows Defender, Antimalware, SmartScreen et VBS</v:String>
     <v:String x:Key="tgl9_system">UAC (Contrôle de compte utilisateur)</v:String>
@@ -375,7 +375,7 @@
     <v:String x:Key="tgl12_system">Diagnostic automatique de la mémoire</v:String>
     <v:String x:Key="tgl13_system">Protocoles Teredo, ISATAP et IPv6</v:String>
     <v:String x:Key="tgl14_system">Taille standard du cache système de fichiers</v:String>
-    <v:String x:Key="tgl15_system">Ralentissement du démarrage de Windows et des programmes</v:String>
+    <v:String x:Key="tgl15_system">Ralentit le démarrage de Windows et programmes</v:String>
     <v:String x:Key="tgl16_system">Historique d’utilisation de la barre d’accès rapide</v:String>
     <v:String x:Key="tgl17_system">Exécution automatique des médias amovibles</v:String>
     <v:String x:Key="tgl18_system">Utiliser le plan d’alimentation par défaut</v:String>
@@ -416,22 +416,22 @@
     <!--#endregion-->
 
     <!--#region Information System Page -->
-    <v:String x:Key="title_win_systemInformation">Système d’exploitation:</v:String>
-    <v:String x:Key="runprocces_systemInformation">Nombre de processus en cours:</v:String>
-    <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
-    <v:String x:Key="title_mode_systemInformation">Mode:</v:String>
-    <v:String x:Key="title_motherbr_systemInformation">Carte mère:</v:String>
-    <v:String x:Key="title_cpu_systemInformation">Processeur:</v:String>
-    <v:String x:Key="title_gpu_systemInformation">Carte graphique:</v:String>
-    <v:String x:Key="title_ram_systemInformation">Mémoire:</v:String>
-    <v:String x:Key="title_disk_systemInformation">Périphériques de stockage:</v:String>
-    <v:String x:Key="title_sound_systemInformation">Périphériques audio:</v:String>
-    <v:String x:Key="title_netadapter_systemInformation">Adaptateurs réseau:</v:String>
-    <v:String x:Key="title_ip_systemInformation">Votre adresse IP:</v:String>
+    <v:String x:Key="title_win_systemInformation">Système d’exploitation :</v:String>
+    <v:String x:Key="runprocces_systemInformation">Nombre de processus en cours :</v:String>
+    <v:String x:Key="title_bios_systemInformation">BIOS :</v:String>
+    <v:String x:Key="title_mode_systemInformation">Mode :</v:String>
+    <v:String x:Key="title_motherbr_systemInformation">Carte mère :</v:String>
+    <v:String x:Key="title_cpu_systemInformation">Processeur :</v:String>
+    <v:String x:Key="title_gpu_systemInformation">Carte graphique :</v:String>
+    <v:String x:Key="title_ram_systemInformation">Mémoire :</v:String>
+    <v:String x:Key="title_disk_systemInformation">Périphériques de stockage :</v:String>
+    <v:String x:Key="title_sound_systemInformation">Périphériques audio :</v:String>
+    <v:String x:Key="title_netadapter_systemInformation">Adaptateurs réseau :</v:String>
+    <v:String x:Key="title_ip_systemInformation">Votre adresse IP :</v:String>
     <v:String x:Key="connection_limited_systemInformation">Accès réseau limité</v:String>
     <v:String x:Key="connection_block_systemInformation">Connecté sans accès réseau</v:String>
     <v:String x:Key="connection_lose_systemInformation">Pas de connexion Internet</v:String>
-    <v:String x:Key="text_copy_systemInformatin">Copié!</v:String>
+    <v:String x:Key="text_copy_systemInformatin">Copié !</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">Pilote non installé</v:String>
     <v:String x:Key="no_device_information_systemInformatin">Aucune information sur le périphérique trouvée</v:String>
     <!--#endregion-->
@@ -441,7 +441,7 @@
     <v:String x:Key="text1_more">recommandé</v:String>
     <v:String x:Key="text2_more">de créer un point de restauration avant d’utiliser l’utilitaire</v:String>
     <v:String x:Key="title_licens_more">Activation de Windows</v:String>
-    <v:String x:Key="text_licens_more">La méthode HWID ou KMS de sauvegarde est appliquée: elle peut ne pas fonctionner s’il n’y a pas de clé pour votre édition de Windows.</v:String>
+    <v:String x:Key="text_licens_more">Méthode HWID ou KMS: peut échouer sans clé pour cette édition</v:String>
     <v:String x:Key="btn_activation">Activer</v:String>
     <v:String x:Key="title_createpoint_more">Sauvegarder le système</v:String>
     <v:String x:Key="text_createpoint_more">Crée un point de restauration Windows, même si cette fonction est désactivée.</v:String>
@@ -462,7 +462,7 @@
     <v:String x:Key="title_defrag_on_more">Activer la défragmentation</v:String>
     <v:String x:Key="text_defrag_on_more">Active la défragmentation qui réorganise les fichiers, efficace uniquement sur disque dur (HDD).</v:String>
     <v:String x:Key="title_compression_more">Compression NTFS</v:String>
-    <v:String x:Key="text_compression_more">Compresse les fichiers en réduisant leur taille, surtout les fichiers texte, ce qui permet d’économiser de l’espace disque sans perte de données.</v:String>
+    <v:String x:Key="text_compression_more">Compresse les fichiers (surtout texte) pour gagner de l’espace sans perte</v:String>
     <v:String x:Key="title_decompression_more">Décompression NTFS</v:String>
     <v:String x:Key="text_decompression_more">Désactive la compression en restaurant la taille d’origine des fichiers et accélère leur accès.</v:String>
     <v:String x:Key="btn_overview">Aperçu</v:String>
