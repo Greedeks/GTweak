@@ -416,22 +416,22 @@
     <!--#endregion-->
 
     <!--#region Information System Page -->
-    <v:String x:Key="title_win_systemInformation">Système d’exploitation :</v:String>
-    <v:String x:Key="runprocces_systemInformation">Nombre de processus en cours :</v:String>
-    <v:String x:Key="title_bios_systemInformation">BIOS :</v:String>
-    <v:String x:Key="title_mode_systemInformation">Mode :</v:String>
-    <v:String x:Key="title_motherbr_systemInformation">Carte mère :</v:String>
-    <v:String x:Key="title_cpu_systemInformation">Processeur :</v:String>
-    <v:String x:Key="title_gpu_systemInformation">Carte graphique :</v:String>
-    <v:String x:Key="title_ram_systemInformation">Mémoire :</v:String>
-    <v:String x:Key="title_disk_systemInformation">Périphériques de stockage :</v:String>
-    <v:String x:Key="title_sound_systemInformation">Périphériques audio :</v:String>
-    <v:String x:Key="title_netadapter_systemInformation">Adaptateurs réseau :</v:String>
-    <v:String x:Key="title_ip_systemInformation">Votre adresse IP :</v:String>
+    <v:String x:Key="title_win_systemInformation">Système d’exploitation:</v:String>
+    <v:String x:Key="runprocces_systemInformation">Nombre de processus en cours:</v:String>
+    <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
+    <v:String x:Key="title_mode_systemInformation">Mode:</v:String>
+    <v:String x:Key="title_motherbr_systemInformation">Carte mère:</v:String>
+    <v:String x:Key="title_cpu_systemInformation">Processeur:</v:String>
+    <v:String x:Key="title_gpu_systemInformation">Carte graphique:</v:String>
+    <v:String x:Key="title_ram_systemInformation">Mémoire:</v:String>
+    <v:String x:Key="title_disk_systemInformation">Périphériques de stockage:</v:String>
+    <v:String x:Key="title_sound_systemInformation">Périphériques audio:</v:String>
+    <v:String x:Key="title_netadapter_systemInformation">Adaptateurs réseau:</v:String>
+    <v:String x:Key="title_ip_systemInformation">Votre adresse IP:</v:String>
     <v:String x:Key="connection_limited_systemInformation">Accès réseau limité</v:String>
     <v:String x:Key="connection_block_systemInformation">Connecté sans accès réseau</v:String>
     <v:String x:Key="connection_lose_systemInformation">Pas de connexion Internet</v:String>
-    <v:String x:Key="text_copy_systemInformatin">Copié !</v:String>
+    <v:String x:Key="text_copy_systemInformatin">Copié!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">Pilote non installé</v:String>
     <v:String x:Key="no_device_information_systemInformatin">Aucune information sur le périphérique trouvée</v:String>
     <!--#endregion-->
@@ -441,7 +441,7 @@
     <v:String x:Key="text1_more">recommandé</v:String>
     <v:String x:Key="text2_more">de créer un point de restauration avant d’utiliser l’utilitaire</v:String>
     <v:String x:Key="title_licens_more">Activation de Windows</v:String>
-    <v:String x:Key="text_licens_more">La méthode HWID ou KMS de sauvegarde est appliquée : elle peut ne pas fonctionner s’il n’y a pas de clé pour votre édition de Windows.</v:String>
+    <v:String x:Key="text_licens_more">La méthode HWID ou KMS de sauvegarde est appliquée: elle peut ne pas fonctionner s’il n’y a pas de clé pour votre édition de Windows.</v:String>
     <v:String x:Key="btn_activation">Activer</v:String>
     <v:String x:Key="title_createpoint_more">Sauvegarder le système</v:String>
     <v:String x:Key="text_createpoint_more">Crée un point de restauration Windows, même si cette fonction est désactivée.</v:String>
