@@ -89,7 +89,6 @@
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/en/More.png"/>
 </details>
 
-
 <h2> System Requirements</h2>
 
 > ⚠ The utility is designed exclusively for official Windows images downloaded from trusted sources. If you have installed a trimmed/modified version of Windows, you are solely responsible for its functionality.
@@ -120,7 +119,7 @@ Installed platform: .NET Framework 4.8
 ## Translation ❤️ 
 - Korean - [@VenusGirl](https://github.com/VenusGirl)
 - Ukrainian - [@Kopejkin](https://github.com/Kopejkin)
-
+- French - [@Zephyris](https://github.com/Zephyris-Pro)
 </br>
 
 ### How to Translate a Program 📝
