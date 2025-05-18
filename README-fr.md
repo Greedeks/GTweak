@@ -125,6 +125,7 @@ Plateforme installée : .NET Framework 4.8
 - Coréen - [@VenusGirl](https://github.com/VenusGirl)
 - Ukrainien - [@Kopejkin](https://github.com/Kopejkin)
 - Français - [@Zephyris](https://github.com/Zephyris-Pro)
+</br>
 
 ### Comment traduire le programme 📝
 
