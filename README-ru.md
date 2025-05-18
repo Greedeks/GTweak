@@ -34,7 +34,7 @@
   </a>
   
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/5921/5921991.png" alt="French Flag" width="40">
+   <img src="https://cdn-icons-png.flaticon.com/64/7561/7561888.png" alt="French Flag" width="40">
   </a>
 </div>
 
@@ -126,6 +126,7 @@
 ## Перевод ❤️ 
 - Корейский - [@VenusGirl](https://github.com/VenusGirl)
 - Украинский - [@Kopejkin](https://github.com/Kopejkin)
+- Французский - [@Zephyris](https://github.com/Zephyris-Pro)
 
 </br>
 
