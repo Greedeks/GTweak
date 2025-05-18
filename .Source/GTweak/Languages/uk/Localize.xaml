@@ -42,29 +42,28 @@
     <v:String x:Key="onedrive_notification">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
     <v:String x:Key="appsdelete_notification">Розпочато процес видалення додатків, на це потрібен деякий час</v:String>
     <v:String x:Key="windefender_notification">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
-    <v:String x:Key="firewalloff_notification">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
-    <v:String x:Key="viewlicense_notification">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
-    <v:String x:Key="readyactivate_notification">Ваша операційна система не потребує активації</v:String>
-    <v:String x:Key="activatewin_notification">Розпочато процес активації Windows, на це потрібен деякий час</v:String>
-    <v:String x:Key="successactivate_notification">Операційну систему успішно активовано, рекомендовано перезавантажити комп'ютер</v:String>
-    <v:String x:Key="notsuccessactivate_notification">Щось не так, не вдалося активувати систему</v:String>
-    <v:String x:Key="networklicense_notification">Для активації потрібне підключення до Інтернету</v:String>
+    <v:String x:Key="warn_firewall_notification">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
+    <v:String x:Key="warn_activate_notification">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
+    <v:String x:Key="ready_activate_notification">Ваша операційна система не потребує активації</v:String>
+    <v:String x:Key="win_activate_notification">Розпочато процес активації Windows, на це потрібен деякий час</v:String>
+    <v:String x:Key="success_activate_notification">Операційну систему успішно активовано, рекомендовано перезавантажити комп'ютер</v:String>
+    <v:String x:Key="error_activate_notification">Щось не так, не вдалося активувати систему</v:String>
+    <v:String x:Key="network_activate_notification">Для активації потрібне підключення до Інтернету</v:String>
     <v:String x:Key="keynotfound_notification">Не знайдено ключ для вашої редакції Windows, активацію скасовано</v:String>
     <v:String x:Key="createpoint_notification">Для створення точки відновлення потрібен певний час</v:String>
-    <v:String x:Key="notsuccessfulpoint_notification">Щось не так, не вдалося створити точку відновлення</v:String>
-    <v:String x:Key="successpoint_notification">Точку відновлення успішно створено</v:String>
-    <v:String x:Key="notsuccessfulrecovery_notification">Щось не так, не вдалося запустити відновлення</v:String>
+    <v:String x:Key="error_point_notification">Щось не так, не вдалося створити точку відновлення</v:String>
+    <v:String x:Key="success_point_notification">Точку відновлення успішно створено</v:String>
+    <v:String x:Key="error_recovery_notification">Щось не так, не вдалося запустити відновлення</v:String>
     <v:String x:Key="disable_recovery_notification">Відновлення системи вимкнено, точки відновлення недоступні</v:String>
-    <v:String x:Key="warndisable_recovery_notification">У вас вже вимкнено систему відновлення</v:String>
-    <v:String x:Key="clearingcache_notification">Виконано очищення системного кешу файлів</v:String>
+    <v:String x:Key="warn_recovery_notification">У вас вже вимкнено систему відновлення</v:String>
     <v:String x:Key="clear_ram_notification">Виконано очищення короткочасної пам'яті та тимчасових файлів</v:String>
     <v:String x:Key="warn_defrag_off_notification">У вас вже вимкнено дефрагментацію дисків</v:String>
     <v:String x:Key="warn_defrag_on_notification">Дефрагментацію диска вже увімкнено</v:String>
     <v:String x:Key="error_defrag_notification">Щось пішло не так, не вдалося змінити стан дефрагментації</v:String>
     <v:String x:Key="success_defrag_off_notification">Дефрагментацію ваших дисків успішно вимкнено</v:String>
     <v:String x:Key="success_defrag_on_notification">Дефрагментацію диска успішно увімкнено</v:String>
-    <v:String x:Key="succes_compression_notification">Стиснення каталогу та його вмісту успішно виконано</v:String>
-    <v:String x:Key="succes_decompression_notification">Розтиснення каталогу та його вмісту успішно виконано</v:String>
+    <v:String x:Key="success_compression_notification">Стиснення каталогу та його вмісту успішно виконано</v:String>
+    <v:String x:Key="success_decompression_notification">Розтиснення каталогу та його вмісту успішно виконано</v:String>
     <v:String x:Key="ready_compression_notification">Каталог уже стиснуто, повторне стиснення не потрібне</v:String>
     <v:String x:Key="ready_decompression_notification">Каталог уже розтиснуто, повторне розтиснення не потрібне</v:String>
     <v:String x:Key="error_compression_notification">Щось пішло не так, сталася помилка при зміні стану стиснення</v:String>
@@ -85,13 +84,17 @@
     <v:String x:Key="btgl_toast_main">Закріпити над усіма вікнами</v:String>
     <v:String x:Key="btgl_update_main">Перевірка наявності оновлень</v:String>
     <v:String x:Key="cmbox_lang_main">Мова інтерфейсу:</v:String>
-    <v:String x:Key="cmbox_eng_main">English (EN)</v:String>
+    <v:String x:Key="cmbox_en_main">English (EN)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
+    <v:String x:Key="cmbox_fr_main">Français (FR)</v:String>
     <v:String x:Key="cmbox_theme_main">Тема інтерфейсу:</v:String>
     <v:String x:Key="cmbox_dark_main">Темна</v:String>
     <v:String x:Key="cmbox_light_main">Світла</v:String>
+    <v:String x:Key="cmbox_cobalt_main">Кобальт</v:String>
+    <v:String x:Key="cmbox_amethyst_main">Темний аметист</v:String>
+    <v:String x:Key="cmbox_cblue_main">Холодний синій</v:String>
     <v:String x:Key="cmbox_system_main">Системна</v:String>
     <v:String x:Key="btn_import">Імпорт</v:String>
     <v:String x:Key="btn_export">Експорт</v:String>
@@ -106,15 +109,15 @@
     <!--#endregion-->
 
     <!--#region Reboot Window -->
-    <v:String x:Key="title_reboot">Увага, перезавантаження GTweak</v:String>
+    <v:String x:Key="title_reboot">Автоматичний перезапуск</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->
     <v:String x:Key="title_win_update">Оновити</v:String>
     <v:String x:Key="title_update">Знайдено оновлення</v:String>
     <v:String x:Key="text_update">Доступна нова версія програми. Оновіть програму, щоб отримати нові функції та виправити помилки.</v:String>
-    <v:String x:Key="btn_now_update">Оновити</v:String>
-    <v:String x:Key="btn_log_update">Зміни</v:String>
+    <v:String x:Key="btn_upd">Оновити</v:String>
+    <v:String x:Key="btn_log">Зміни</v:String>
     <v:String x:Key="download_update">Завантаження</v:String>
     <v:String x:Key="noty_update">Будь ласка, дочекайтеся завершення завантаження</v:String>
     <v:String x:Key="connection_update">Підключення до сервера</v:String>
@@ -142,7 +145,7 @@
 
     <v:String x:Key="TglButton1_description_confidentiality">Для кожного користувача система Windows створює унікальний рекламний ідентифікатор для відстеження його дій. Використовується розробниками програм та самої Windows для власних цілей, у тому числі для демонстрації конкретної реклами в додатках.</v:String>
     <v:String x:Key="TglButton2_description_confidentiality">Навіть якщо ви використовуєте локальний обліковий запис, Windows завжди намагається синхронізувати з серверами Microsoft такі ваші дані, як теми, паролі, налаштування Windows, налаштування браузера, налаштування мовної панелі, налаштування спрощеного доступу, додаткові налаштування.</v:String>
-    <v:String x:Key="TglButton3_description_confidentiality">Телеметрія - це діагностичні дані, які Windows автоматично збирає та надсилає на сервери Microsoft.  Концепція збору - "Що? Де? Коли? Навіщо ви використовуєте?" Microsoft стверджує, що дані анонімні та допомагають компанії у розробці Windows. Навіть якщо вас не хвилює збір такої інформації, може виникнути інша проблема - надмірне навантаження на процесор і уповільнення роботи системи.</v:String>
+    <v:String x:Key="TglButton3_description_confidentiality">Телеметрія - це діагностичні дані, які Windows автоматично збирає та надсилає на сервери Microsoft.  Концепція збору - «Що? Де? Коли? Навіщо ви використовуєте?» Microsoft стверджує, що дані анонімні та допомагають компанії у розробці Windows. Навіть якщо вас не хвилює збір такої інформації, може виникнути інша проблема - надмірне навантаження на процесор і уповільнення роботи системи.</v:String>
     <v:String x:Key="TglButton4_description_confidentiality">«Планувальник завдань» містить служби, які після використання збирають дані про свою роботу та надсилають на сервер Microsoft.</v:String>
     <v:String x:Key="TglButton5_description_confidentiality">Microsoft збирає дані про ваше програмне забезпечення. Ця інформація використовується Microsoft для діагностики проблем сумісності, але не допомагає вдосконалювати сумісність у нових версіях Windows. Ця інформація використовується лише для власних корисливих цілей Microsoft. Відключення цієї можливості для запобігання надсилання потенційно конфіденційної інформації.</v:String>
     <v:String x:Key="TglButton6_description_confidentiality">Налаштування вимикає функцію відстеження активності додатків, усуваючи збір даних про частоту використання, тривалість роботи та інші показники продуктивності. В результаті система припинить аналіз вашої діяльності, забезпечуючи захист вашої конфіденційної інформації.</v:String>
@@ -197,7 +200,7 @@
     <v:String x:Key="textcolor_interface">Це зразок нового кольору.</v:String>
     <v:String x:Key="previewflick_interface">- для порівняння -</v:String>
 
-    <v:String x:Key="TglButton1_description_interface">Це налаштування змінить колір виділення курсором з синього на сірий «Колір мокрого асфальту».</v:String>
+    <v:String x:Key="TglButton1_description_interface">Це налаштування змінить колір виділення курсором з синього на сірий «колір мокрого асфальту».</v:String>
     <v:String x:Key="TglButton2_description_interface">Це налаштування змінить колір спливної підказки в деяких програмах з жовтого на блідо-блакитний «небесна блакить».</v:String>
     <v:String x:Key="TglButton3_description_interface">Це налаштування зменшить розмір стандартних кнопок вікна Згорнути, Розгорнути, Закрити. Змінюється розмір для всіх вікон, таких як провідник, фотографії, браузери та інші відомі програми.</v:String>
     <v:String x:Key="TglButton4_description_interface">Це налаштування прискорить швидкість мерехтіння текстового курсору. Усталене значення - 530 мілісекунд.</v:String>
@@ -218,7 +221,7 @@
     <v:String x:Key="TglButton19_description_interface">Як усталено, Windows додає відступи між елементами в провіднику. Нову функцію розроблено для сенсорних екранів. Це налаштування відновлює класичний макет файлового провідника шляхом видалення відступів між елементами та позбавляє необхідності пошуку налаштувань.</v:String>
     <v:String x:Key="TglButton20_description_interface">Це налаштування прибирає та вимикає Copilot на панелі завдань, в меню «Пуск» та в Microsoft Edge. також вимикається «Recall». Якщо у вашій редакції Windows взагалі не було цих помічників із штучним інтелектом, використовувати це налаштування немає сенсу.</v:String>
     <v:String x:Key="TglButton21_description_interface">Це налаштування дозволить додати команду «Завершити завдання» в контекстне меню, яке відкривається після натискання правою кнопкою миші на додатку на панелі завдань. Це пришвидшує завершення процесів без необхідності відкривати диспетчер завдань. Увага, екран може мерехтіти.</v:String>
-    <v:String x:Key="TglButton22_description_interface">Це налаштування прибирає піктограми «Пошук», «Перегляд завдань» та «Чат», вимикає макети прив’язки при наведенні на кнопку максимізації та прибирає команду «Дізнатися про це зображення»; у старих збірках Windows\0xA011 також прибирається піктограма Copilot. Для користувачів Windows\0xA010 додатково прибирає «Новини та інтереси», Cortana. Увага, екран може мерехтіти.</v:String>
+    <v:String x:Key="TglButton22_description_interface">Це налаштування прибирає піктограми «Пошук», «Перегляд завдань» та «Чат», вимикає макети прив’язки при наведенні на кнопку максимізації та прибирає команду «Дізнатися про це зображення»; у старих збірках Windows 11 також прибирається піктограма Copilot. Для користувачів Windows 10 додатково прибирає «Новини та інтереси», Cortana. Увага, екран може мерехтіти.</v:String>
     <v:String x:Key="TglButton23_description_interface">Як усталено, Windows використовує зібрану інформацію для цільової реклами - реклами, що відповідає вашим інтересам. Практично ця реклама розміщуватиметься там, де є вільне місце для відображення. Якщо ви не хочете, щоб Windows відображала персоналізовану рекламу у всіх додатках Магазину, в Провіднику, в Налаштуваннях та меню «Пуск», можете вимкнути це сміття.</v:String>
     <v:String x:Key="TglButton24_description_interface">Як усталено, Windows не зберігає позиції вікон та їх стан після вимкнення комп'ютера. Це налаштування дозволить запам'ятати вигляд відкритих папок, щоб відновлювати його виходу з системи, перезавантаження та вимкнення комп'ютера.</v:String>
     <v:String x:Key="TglButton25_description_interface">Це налаштування дозволяє вимкнути всі сповіщення Windows з порадами та пропозиціями, а також вимкнути Second Chance Out of Box Experience (SCOOBE) у Windows 11. SCOOBE - несподівана поява вікна з пропозицією терміново завершити налаштування системи та увійти в обліковий запис Microsoft.</v:String>
@@ -284,10 +287,10 @@
     <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
 
     <v:String x:Key="title_over_applications">Підтвердження видалення</v:String>
-    <v:String x:Key="text_over_applications">Ви збираєтеся видалити браузер Microsoft\0xA0Edge. Це також призведе до видалення компонента EdgeWebView, який відповідає за відображення вебсторінок у таких програмах, як Microsoft\0xA0Office, а також у деяких Telegram‑ботах, що використовують вбудований WebView для відображення меню (міні‑додатків, вебконтенту), та інших програмах. Перш ніж продовжити, переконайтеся, що вам не потрібен цей компонент.</v:String>
+    <v:String x:Key="text_over_applications">Ви збираєтеся видалити браузер Microsoft Edge. Це також призведе до видалення компонента EdgeWebView, який відповідає за відображення вебсторінок у таких програмах, як Microsoft Office, а також у деяких Telegram‑ботах, що використовують вбудований WebView для відображення меню (міні‑додатків, вебконтенту), та інших програмах. Перш ніж продовжити, переконайтеся, що вам не потрібен цей компонент.</v:String>
     <v:String x:Key="question_over_applications">Хочете продовжити видалення разом з EdgeWebView?</v:String>
-    <v:String x:Key="btn_сancel_applications">Скасувати</v:String>
-    <v:String x:Key="btn_delete_applications">Видалити</v:String>
+    <v:String x:Key="btn_сancel">Скасувати</v:String>
+    <v:String x:Key="btn_delete">Видалити</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -386,7 +389,7 @@
     <v:String x:Key="TglButton1_description_system">Як усталено, прискорення миші збільшує швидкість руху миші. Рекомендовано вимкнути прискорення, оскільки з ним погіршується плавність руху та точність позиціонування.</v:String>
     <v:String x:Key="TglButton2_description_system">Якщо під час роботи на комп'ютері вам набридли вікна з пропозицією увімкнути залипання клавіш або фільтрування введення і після відповіді «Ні» такі вікна через деякий час знову з’являються, можна вимкнути цю функція. Фільтрація впливає на швидкість повторного введення на клавіатурі та пропуск повторних натискань клавіш.</v:String>
     <v:String x:Key="TglButton3_description_system">Як усталено, Windows відображає екран блокування протягом 1 хвилини, після чого екран вимикається незалежно від того, чи працює комп'ютер від акумулятора, чи від мережі. Це налаштування скасовує це обмеження.</v:String>
-    <v:String x:Key="TglButton4_description_system">Теоретично «Швидкий запуск» виконується швидше, ніж вихід із «Гібернації», але не завжди це помітно на практиці. Якщо ви не використовуєте "Швидкий запуск» та «Гібернацію», ці функції можна вимкнути. Таким чином можна звільнити додаткове місце на диску.</v:String>
+    <v:String x:Key="TglButton4_description_system">Теоретично «Швидкий запуск» виконується швидше, ніж вихід із «Гібернації», але не завжди це помітно на практиці. Якщо ви не використовуєте «Швидкий запуск» та «Гібернацію», ці функції можна вимкнути. Таким чином можна звільнити додаткове місце на диску.</v:String>
     <v:String x:Key="TglButton5_description_system">Це налаштування дозволяє вимкнути сповіщення системи, яке інформує, що при вимкненні або перезавантаженні комп'ютера відкриті програми буде завершено примусово.</v:String>
     <v:String x:Key="TglButton6_description_system">Якщо ви хочете оновлювати свої додатки з Магазину Microsoft самостійно, необхідно вимкнути функцію автоматичного оновлення. Таким чином, буде знижено навантаження на мережу.</v:String>
     <v:String x:Key="TglButton7_description_system">Деякі версії драйверів Realtek High Definition Audio можуть характеризуватися проблемою затримки відтворення звуку. Це налаштування усуває вказану несправність. Проте не рекомендовано його застосовувати, якщо ви не помічаєте затримки або не впевнені, що встановлено та/або використовується саме драйвер від Realtek.</v:String>
@@ -436,21 +439,21 @@
     <v:String x:Key="text2_more">створити точку відновлення перед використанням утиліти</v:String>
     <v:String x:Key="title_licens_more">Активація Windows</v:String>
     <v:String x:Key="text_licens_more">Застосування методу HWID або резервного KMS: може не працювати, якщо немає ключа для вашої Windows.</v:String>
-    <v:String x:Key="btntext_licens_more">Активувати</v:String>
+    <v:String x:Key="btn_activation">Активувати</v:String>
     <v:String x:Key="title_createpoint_more">Резервування системи</v:String>
     <v:String x:Key="text_createpoint_more">Створення точки відновлення Windows, навіть у разі вимкнення їх створення.</v:String>
-    <v:String x:Key="btntext_createpoint_more">Зберегти</v:String>
+    <v:String x:Key="btn_save">Зберегти</v:String>
     <v:String x:Key="title_recovery_more">Відновлення системи</v:String>
     <v:String x:Key="text_recovery_more">Запуск процесу відновлення навіть тоді, коли відновлення системи вимкнено.</v:String>
-    <v:String x:Key="btntext_recovery_more">Відновити</v:String>
+    <v:String x:Key="btn_recovery">Відновити</v:String>
     <v:String x:Key="textpoint_more">Точка, створена за допомогою GTWeak</v:String>
     <v:String x:Key="title_clear_more">Очищення пам'яті</v:String>
     <v:String x:Key="text_clear_more">Очищення кешу системних файлів у пам'яті комп'ютера, тимчасових файлів та кешу ескізів.</v:String>
-    <v:String x:Key="btntext_clear_more">Очистити</v:String>
+    <v:String x:Key="btn_clear">Очистити</v:String>
     <v:String x:Key="title_disablepoint_more">Вимкнення захисту</v:String>
     <v:String x:Key="text_disablepoint_more">Вимкнення створення точок відновлення системи. Увага, також видаляються раніше створені точки.</v:String>
-    <v:String x:Key="btntext_disable_more">Вимкнути</v:String>
-    <v:String x:Key="btntext_enable_more">Увімкнути</v:String>
+    <v:String x:Key="btn_disable">Вимкнути</v:String>
+    <v:String x:Key="btn_enable">Увімкнути</v:String>
     <v:String x:Key="title_defrag_off_more">Вимкнення дефрагментації</v:String>
     <v:String x:Key="text_defrag_off_more">Вимкнення дефрагментації дисків збільшує термін служби SSD за рахунок зменшення операцій запису.</v:String>
     <v:String x:Key="title_defrag_on_more">Увімкнення дефрагментації</v:String>
@@ -459,13 +462,13 @@
     <v:String x:Key="text_compression_more">Стиснення файлів, зменшення їх розміру, особливо текстових, що дозволяє заощадити місце на диску без втрат.</v:String>
     <v:String x:Key="title_decompression_more">Розтиснення NTFS</v:String>
     <v:String x:Key="text_decompression_more">Вимкнення стиснення, відновлення початкового розміру файлів та прискорення доступу до них.</v:String>
-    <v:String x:Key="btntext_overview_more">Огляд</v:String>
+    <v:String x:Key="btn_overview">Огляд</v:String>
 
     <v:String x:Key="title_over_more">Підтвердження очищення диска</v:String>
     <v:String x:Key="text_over_more">На вашому диску знайдено папку Windows.old, яка містить файли попередньої версії Windows і займає значний обсяг дискового простору. Увага: Після видалення вміст папки відновити буде неможливо, тому переконайтеся, що всі необхідні файли збережено.</v:String>
     <v:String x:Key="question_over_more">Хочете продовжити очищення та видалити папку Windows.old?</v:String>
-    <v:String x:Key="btn_agree_more">Погодитись</v:String>
-    <v:String x:Key="btn_decline_more">Відхилити</v:String>
+    <v:String x:Key="btn_agree">Погодитись</v:String>
+    <v:String x:Key="btn_decline">Відхилити</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>
