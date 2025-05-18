@@ -191,60 +191,71 @@ namespace GTweak.Utilities.Configuration
         {
             static (bool, string, string) GetMemorySize(string name)
             {
-                using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}");
-                if (baseKey != null)
+                try
                 {
-                    foreach (string subKeyName in baseKey.GetSubKeyNames())
+                    using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\ControlSet001\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}");
+                    if (baseKey != null)
                     {
-                        using RegistryKey regKey = baseKey.OpenSubKey(subKeyName);
-                        if (regKey != null)
+                        foreach (string subKeyName in baseKey.GetSubKeyNames())
                         {
-                            string adapterString = regKey.GetValue("HardwareInformation.AdapterString") as string;
-                            string driverDesc = regKey.GetValue("DriverDesc") as string;
-                            object chipTypeValue = regKey.GetValue("HardwareInformation.ChipType");
-                            string chipType = chipTypeValue as string ?? (chipTypeValue is byte[] chipTypeBytes ? Encoding.UTF8.GetString(chipTypeBytes) : string.Empty);
+                            if (subKeyName == "Properties")
+                                continue;
 
-
-                            if ((!string.IsNullOrEmpty(adapterString) && adapterString.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                (!string.IsNullOrEmpty(driverDesc) && driverDesc.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                (!string.IsNullOrEmpty(chipType) && chipType.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0))
+                            using RegistryKey regKey = baseKey.OpenSubKey(subKeyName);
+                            if (regKey != null)
                             {
-                                object memorySizeValue = regKey.GetValue("HardwareInformation.qwMemorySize") ?? regKey.GetValue("HardwareInformation.MemorySize");
-                                if (memorySizeValue != null)
+                                string adapterString = regKey.GetValue("HardwareInformation.AdapterString") as string;
+                                string driverDesc = regKey.GetValue("DriverDesc") as string;
+                                object chipTypeValue = regKey.GetValue("HardwareInformation.ChipType");
+                                string chipType = chipTypeValue as string ?? (chipTypeValue is byte[] chipTypeBytes ? Encoding.UTF8.GetString(chipTypeBytes) : string.Empty);
+
+
+                                if ((!string.IsNullOrEmpty(adapterString) && adapterString.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                    (!string.IsNullOrEmpty(driverDesc) && driverDesc.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                    (!string.IsNullOrEmpty(chipType) && chipType.IndexOf(name, StringComparison.OrdinalIgnoreCase) >= 0))
                                 {
-                                    ulong memorySize = 0;
+                                    object memorySizeValue = regKey.GetValue("HardwareInformation.qwMemorySize") ?? regKey.GetValue("HardwareInformation.MemorySize");
+                                    if (memorySizeValue != null)
+                                    {
+                                        ulong memorySize = 0;
 
-                                    if (memorySizeValue is byte[] byteArray)
-                                    {
-                                        byte[] filledArray = new byte[8];
-                                        Array.Copy(byteArray, filledArray, Math.Min(byteArray.Length, filledArray.Length));
-                                        memorySize = BitConverter.ToUInt64(filledArray, 0);
-                                    }
-                                    else
-                                    {
-                                        memorySize = memorySizeValue switch
+                                        if (memorySizeValue is byte[] byteArray)
                                         {
-                                            int intValue => unchecked((uint)intValue),
-                                            uint uintValue => uintValue,
-                                            long longValue => unchecked((ulong)longValue),
-                                            ulong ulongValue => ulongValue,
-                                            _ => 0
-                                        };
-                                    }
+                                            byte[] filledArray = new byte[8];
+                                            Array.Copy(byteArray, filledArray, Math.Min(byteArray.Length, filledArray.Length));
+                                            memorySize = BitConverter.ToUInt64(filledArray, 0);
+                                        }
+                                        else
+                                        {
+                                            memorySize = memorySizeValue switch
+                                            {
+                                                int intValue => unchecked((uint)intValue),
+                                                uint uintValue => uintValue,
+                                                long longValue => unchecked((ulong)longValue),
+                                                ulong ulongValue => ulongValue,
+                                                _ => 0
+                                            };
+                                        }
 
-                                    return (true, SizeCalculationHelper(memorySize), !string.IsNullOrEmpty(driverDesc) ? driverDesc : chipType);
+                                        return (true, SizeCalculationHelper(memorySize), !string.IsNullOrEmpty(driverDesc) ? driverDesc : chipType);
+                                    }
                                 }
                             }
                         }
                     }
+                    return (false, string.Empty, string.Empty);
                 }
-                return (false, string.Empty, string.Empty);
+                catch (Exception ex) 
+                { 
+                    ErrorLogging.LogDebug(ex);
+                    return (false, string.Empty, string.Empty);
+                }
             }
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = managementObj["Name"] as string;
-                (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
+                (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data); 
                 HardwareData.Graphics += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound ? dataMemoryReg : SizeCalculationHelper((uint)managementObj["AdapterRAM"]))}\n";
             }
             HardwareData.Graphics = HardwareData.Graphics.TrimEnd('\n');
