@@ -37,7 +37,7 @@ namespace GTweak
                 return;
             }
 
-            Language = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Language", GettingSystemLanguage);
+            Language = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Language", "en");
             Theme = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Theme", "Dark");
 
             BlockRunTweaker.CheckingApplicationCopies();
@@ -68,7 +68,7 @@ namespace GTweak
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
-                    Source = value switch
+                    Source = (value == "be" ? "ru" : value) switch
                     {
                         "ru" => new Uri("Languages/ru/Localize.xaml", UriKind.Relative),
                         "ko" => new Uri("Languages/ko/Localize.xaml", UriKind.Relative),
