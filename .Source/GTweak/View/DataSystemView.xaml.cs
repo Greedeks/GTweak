@@ -2,6 +2,7 @@
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Animation;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -104,19 +105,7 @@ namespace GTweak.View
             Dispatcher.Invoke(() =>
             {
                 PopupCopy.IsOpen = true;
-
-                DoubleAnimation opacityAnim = new DoubleAnimation()
-                {
-                    From = 0,
-                    To = 0.9,
-                    SpeedRatio = 9,
-                    AutoReverse = true,
-                    EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(3)
-                };
-                opacityAnim.Completed += delegate { PopupCopy.IsOpen = false; };
-                Timeline.SetDesiredFrameRate(opacityAnim, 240);
-                CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, opacityAnim);
+                CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, FadeAnimation.FadeIn(0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
 
                 DoubleAnimation offsetAnim = new DoubleAnimation()
                 {

@@ -7,7 +7,6 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 
 namespace GTweak.Windows
 {
@@ -78,9 +77,9 @@ namespace GTweak.Windows
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            DoubleAnimation doubleAnim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += delegate { Close(); };
-            BeginAnimation(OpacityProperty, doubleAnim);
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
         }
+
+        private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e) => BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.1));
     }
 }

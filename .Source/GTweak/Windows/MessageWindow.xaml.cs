@@ -1,10 +1,10 @@
 ﻿using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers.Animation;
 using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace GTweak.Windows
@@ -54,22 +54,9 @@ namespace GTweak.Windows
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            DoubleAnimation doubleAnim = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += delegate { timer.Stop(); Application.Current.Shutdown(); };
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-            BeginAnimation(OpacityProperty, doubleAnim);
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            DoubleAnimation doublAnim = new DoubleAnimation()
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(0.2)
-            };
-            Timeline.SetDesiredFrameRate(doublAnim, 240);
-            BeginAnimation(OpacityProperty, doublAnim);
-        }
+        private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.2));
     }
 }

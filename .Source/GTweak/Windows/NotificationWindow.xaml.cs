@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Animation;
 using System;
 using System.ComponentModel;
 using System.Media;
@@ -102,19 +103,12 @@ namespace GTweak.Windows
                 doubleAnimKeyFrames.KeyFrames.Add(fromFrame);
                 doubleAnimKeyFrames.KeyFrames.Add(toFrame);
 
-                DoubleAnimation doubleAnim = new DoubleAnimation()
-                {
-                    From = 0,
-                    To = 1,
-                    EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(0.25)
-                };
-
-                Timeline.SetDesiredFrameRate(doubleAnim, 240);
                 Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 240);
 
                 BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
-                BeginAnimation(OpacityProperty, doubleAnim);
+                BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.25));
+
+
             });
         }
 
@@ -122,10 +116,7 @@ namespace GTweak.Windows
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            DoubleAnimation doubleAnimation = new DoubleAnimation(0, TimeSpan.FromSeconds(0.1));
-            doubleAnimation.Completed += delegate { Close(); };
-            Timeline.SetDesiredFrameRate(doubleAnimation, 240);
-            BeginAnimation(OpacityProperty, doubleAnimation);
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
         }
     }
 }

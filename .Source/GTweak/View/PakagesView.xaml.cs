@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Tweaks;
 using System;
@@ -13,7 +14,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
 namespace GTweak.View
@@ -42,20 +42,6 @@ namespace GTweak.View
             }, Application.Current.Dispatcher);
 
             _timer.Start();
-        }
-
-        private void OverlayAnimation(double from, double to, double duration, EventHandler onComplete = null)
-        {
-            DoubleAnimation doubleAnim = new DoubleAnimation
-            {
-                From = from,
-                To = to,
-                Duration = TimeSpan.FromSeconds(duration),
-                EasingFunction = new QuadraticEase()
-            };
-            if (onComplete != null) { doubleAnim.Completed += onComplete; }
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-            Overlay.BeginAnimation(OpacityProperty, doubleAnim);
         }
 
         private void Apps_MouseEnter(object sender, MouseEventArgs e)
@@ -87,7 +73,7 @@ namespace GTweak.View
                             {
                                 Overlay.Visibility = Visibility.Visible;
 
-                                OverlayAnimation(0, 1, 0.3);
+                                Overlay.BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3));
 
                                 TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
 
@@ -111,7 +97,7 @@ namespace GTweak.View
                                 try { _isWebViewRemoval = await tcs.Task; }
                                 catch (TaskCanceledException) { _isWebViewRemoval = false; }
 
-                                OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
+                                Overlay.BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.25, () => { Overlay.Visibility = Visibility.Collapsed; }));
                             }
 
                             BackgroundQueue backgroundQueue = new BackgroundQueue();

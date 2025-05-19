@@ -1,5 +1,6 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
@@ -34,6 +35,7 @@ namespace GTweak.Windows
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.2));
             Progress<byte> progress = new Progress<byte>(ReportProgress);
             try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
@@ -50,7 +52,7 @@ namespace GTweak.Windows
                 else if (!isRestartNeed && isLogoutNeed)
                     new ViewNotification().Show("logout");
                 App.UpdateImport();
-                Close();
+                BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
             }
         }
 

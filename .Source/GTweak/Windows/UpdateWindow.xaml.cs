@@ -1,13 +1,13 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Animation;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 
 namespace GTweak.Windows
 {
@@ -25,27 +25,13 @@ namespace GTweak.Windows
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            DoubleAnimation doubleAnim = new DoubleAnimation()
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(0.3),
-                EasingFunction = new QuadraticEase()
-            };
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-        }
+        private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3));
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += delegate { Close(); };
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-            BeginAnimation(OpacityProperty, doubleAnim);
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
         }
 
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)

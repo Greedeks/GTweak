@@ -10,7 +10,7 @@
         Title="GTweak" WindowStyle="None"
         Height="260" Width="260" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered" Closing="Window_Closing">
+        IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered" Closing="Window_Closing" Loaded="Window_Loaded">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>

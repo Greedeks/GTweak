@@ -271,6 +271,7 @@
     </Compile>
     <Compile Include="Utilities\Controls\BlockRunTweaker.cs" />
     <Compile Include="Utilities\Controls\ErrorLogging.cs" />
+    <Compile Include="Utilities\Helpers\Animation\FadeAnimation.cs" />
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
     <Compile Include="Utilities\Helpers\Managers\ExplorerManager.cs" />

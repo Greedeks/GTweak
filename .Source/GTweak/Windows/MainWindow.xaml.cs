@@ -103,31 +103,21 @@ namespace GTweak
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.1));
-            doubleAnim.Completed += delegate { Close(); };
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-            BeginAnimation(OpacityProperty, doubleAnim);
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            DoubleAnimation doubleAnim = new DoubleAnimation()
-            {
-                From = 0,
-                To = 1,
-                Duration = TimeSpan.FromSeconds(0.3),
-                EasingFunction = new QuadraticEase()
-            };
-            doubleAnim.Completed += async delegate
-            {
-                if (SystemDiagnostics.IsNeedUpdate && SettingsRepository.IsUpdateCheckRequired)
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3,
+                async () =>
                 {
-                    await Task.Delay(500);
-                    new UpdateWindow().ShowDialog();
-                }
-            };
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-            BeginAnimation(OpacityProperty, doubleAnim);
+
+                    if (SystemDiagnostics.IsNeedUpdate && SettingsRepository.IsUpdateCheckRequired)
+                    {
+                        await Task.Delay(500);
+                        new UpdateWindow().ShowDialog();
+                    }
+                }));
             new TypewriterAnimation(UtilityTitle.Text, UtilityTitle, TimeSpan.FromSeconds(0.4));
         }
         #endregion

@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Tweaks;
 using GTweak.Windows;
 using Ookii.Dialogs.Wpf;
@@ -8,7 +9,6 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Animation;
 
 namespace GTweak.View
 {
@@ -20,20 +20,6 @@ namespace GTweak.View
         public MoreView()
         {
             InitializeComponent();
-        }
-
-        private void OverlayAnimation(double from, double to, double duration, EventHandler onComplete = null)
-        {
-            DoubleAnimation doubleAnim = new DoubleAnimation
-            {
-                From = from,
-                To = to,
-                Duration = TimeSpan.FromSeconds(duration),
-                EasingFunction = new QuadraticEase()
-            };
-            if (onComplete != null) { doubleAnim.Completed += onComplete; }
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-            Overlay.BeginAnimation(OpacityProperty, doubleAnim);
         }
 
         private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
@@ -67,7 +53,7 @@ namespace GTweak.View
             {
                 Overlay.Visibility = Visibility.Visible;
 
-                OverlayAnimation(0, 1, 0.3);
+                Overlay.BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3));
 
                 TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
 
@@ -92,7 +78,7 @@ namespace GTweak.View
                 try { _isWinOldRemoval = await tcs.Task; }
                 catch (TaskCanceledException) { _isWinOldRemoval = false; }
 
-                OverlayAnimation(1, 0, 0.25, (s, e) => Overlay.Visibility = Visibility.Collapsed);
+                Overlay.BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.25, () => { Overlay.Visibility = Visibility.Collapsed; }));
             }
 
             BackgroundQueue backgroundQueue = new BackgroundQueue();
