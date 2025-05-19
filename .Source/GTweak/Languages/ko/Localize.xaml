@@ -35,13 +35,12 @@
     <v:String x:Key="title_info_notification">정보</v:String>
     <v:String x:Key="logout_notification">종료가 필요합니다. 이 텍스트를 클릭하여 생성하세요</v:String>
     <v:String x:Key="restart_notification">재부팅이 필요합니다. 이 텍스트를 클릭하여 이를 수행합니다</v:String>
-    <v:String x:Key="import_warning_notification">이 파일은 가져오기에 적합하지 않습니다</v:String>
-    <v:String x:Key="import_empty_notification">이 파일은 비어 있으며 조정을 적용할 수 없습니다</v:String>
+    <v:String x:Key="warn_import_notification">이 파일은 가져오기에 적합하지 않습니다</v:String>
+    <v:String x:Key="empty_import_notification">이 파일은 비어 있으며 조정을 적용할 수 없습니다</v:String>
     <v:String x:Key="export_warning_notification">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
     <v:String x:Key="warn_update_notification">프로그램 업데이트 중 오류가 발생했습니다. 나중에 다시 시도하세요</v:String>
     <v:String x:Key="onedrive_notification">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
-    <v:String x:Key="appsdelete_notification">응용 프로그램 제거 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
-    <v:String x:Key="windefender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
+    <v:String x:Key="defender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="warn_activate_notification">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
     <v:String x:Key="ready_activate_notification">운영 체제를 활성화할 필요가 없습니다</v:String>

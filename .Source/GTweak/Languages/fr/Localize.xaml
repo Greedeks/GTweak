@@ -36,12 +36,11 @@
     <v:String x:Key="logout_notification">Une déconnexion est requise, cliquez sur ce texte pour l’effectuer</v:String>
     <v:String x:Key="restart_notification">Un redémarrage est requis, cliquez sur ce texte pour l’effectuer</v:String>
     <v:String x:Key="warn_update_notification">Une erreur est survenue lors de la mise à jour du programme, veuillez réessayer plus tard</v:String>
-    <v:String x:Key="import_warning_notification">Ce fichier n’est pas adapté à l’importation</v:String>
-    <v:String x:Key="import_empty_notification">Ce fichier est vide, l’application des réglages est impossible</v:String>
+    <v:String x:Key="warn_import_notification">Ce fichier n’est pas adapté à l’importation</v:String>
+    <v:String x:Key="empty_import_notification">Ce fichier est vide, l’application des réglages est impossible</v:String>
     <v:String x:Key="export_warning_notification">Cela n’a pas de sens, appliquez au moins un réglage d’abord</v:String>
     <v:String x:Key="onedrive_notification">Le processus de récupération OneDrive a commencé, cela prendra un certain temps</v:String>
-    <v:String x:Key="appsdelete_notification">Le processus de suppression des applications a commencé, cela prendra un certain temps</v:String>
-    <v:String x:Key="windefender_notification">Le processus prendra un certain temps, veuillez patienter</v:String>
+    <v:String x:Key="defender_notification">Le processus prendra un certain temps, veuillez patienter</v:String>
     <v:String x:Key="warn_firewall_notification">Votre pare-feu est désactivé, activez-le et appliquez à nouveau le réglage</v:String>
     <v:String x:Key="warn_activate_notification">Pour commencer - activez Windows. Tous les réglages ne peuvent pas être appliqués</v:String>
     <v:String x:Key="ready_activate_notification">Votre système d’exploitation n’a pas besoin d’être activé</v:String>

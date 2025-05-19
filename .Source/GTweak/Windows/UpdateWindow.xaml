@@ -103,7 +103,7 @@
                             <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="20px" HorizontalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0">
                                 <Run Text="{DynamicResource download_update}"/>
                                 <Run Text="“"/><Run Text="GTweak" Foreground="{StaticResource Color_Accent}"/>
-                                <Run x:Name="DownloadVersion" Text="0.00.0" Foreground="{StaticResource Color_Accent}"/><Run Text="”"/>
+                                <Run x:Name="DownloadVersion" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/><Run Text="”"/>
                             </TextBlock>
                         </StackPanel>
                         <TextBlock Text="{DynamicResource noty_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,10,0,0"/>

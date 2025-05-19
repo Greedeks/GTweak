@@ -36,12 +36,11 @@
     <v:String x:Key="logout_notification">An exit is required, click on this text to produce it</v:String>
     <v:String x:Key="restart_notification">A reboot is required, click on this text to perform it</v:String>
     <v:String x:Key="warn_update_notification">An error occurred during the program update, please try again later</v:String>
-    <v:String x:Key="import_warning_notification">This file is not suitable for import</v:String>
-    <v:String x:Key="import_empty_notification">This file is empty, the application of tweaks is not possible</v:String>
+    <v:String x:Key="warn_import_notification">This file is not suitable for import</v:String>
+    <v:String x:Key="empty_import_notification">This file is empty, the application of tweaks is not possible</v:String>
     <v:String x:Key="export_warning_notification">It doesn't make sense, apply at least one tweak first</v:String>
-    <v:String x:Key="onedrive_notification">The OneDrive recovery process has started, it will take some time</v:String>
-    <v:String x:Key="appsdelete_notification">The application removal process has started, it will take some time</v:String>
-    <v:String x:Key="windefender_notification">The process will take some time, please wait a bit</v:String>
+    <v:String x:Key="onedrive_notification">OneDrive recovery is now underway and will take a while</v:String>
+    <v:String x:Key="defender_notification">It will take some time, please wait a bit</v:String>
     <v:String x:Key="warn_firewall_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
     <v:String x:Key="warn_activate_notification">To start - activate Windows. Not all tweaks can be applied</v:String>
     <v:String x:Key="ready_activate_notification">Your operating system does not need to be activated</v:String>

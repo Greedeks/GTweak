@@ -36,12 +36,11 @@
     <v:String x:Key="logout_notification">Требуется выход, нажмите на данный текст, чтобы произвести его</v:String>
     <v:String x:Key="restart_notification">Требуется перезагрузка, нажмите на данный текст, чтобы произвести её</v:String>
     <v:String x:Key="warn_update_notification">Во время обновления программы произошла ошибка, повторите попытку позже</v:String>
-    <v:String x:Key="import_warning_notification">Данный файл не подходит для импорта</v:String>
-    <v:String x:Key="import_empty_notification">Этот файл пуст, применение твиков невозможно</v:String>
+    <v:String x:Key="warn_import_notification">Данный файл не подходит для импорта</v:String>
+    <v:String x:Key="empty_import_notification">Этот файл пуст, применение твиков невозможно</v:String>
     <v:String x:Key="export_warning_notification">Это не имеет смысла, сначала примените хотя бы один твик</v:String>
-    <v:String x:Key="onedrive_notification">Процесс восстановления OneDrive начался, это займет некоторое время</v:String>
-    <v:String x:Key="appsdelete_notification">Процесс удаления приложений начался, это займет некоторое время</v:String>
-    <v:String x:Key="windefender_notification">Процесс займет некоторое время, пожалуйста подождите немного</v:String>
+    <v:String x:Key="onedrive_notification">Начался процесс восстановления OneDrive, который займет некоторое время</v:String>
+    <v:String x:Key="defender_notification">Это займет некоторое время, пожалуйста, подождите немного</v:String>
     <v:String x:Key="warn_firewall_notification">У вас отключен брандмауэр, включите и примените твик снова</v:String>
     <v:String x:Key="warn_activate_notification">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>
     <v:String x:Key="ready_activate_notification">Ваша операционная система не нуждается в активации</v:String>

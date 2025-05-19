@@ -36,12 +36,11 @@
     <v:String x:Key="logout_notification">Потрібно вийти з системи. Натисніть на цей текст, щоб зробити це</v:String>
     <v:String x:Key="restart_notification">Потрібно перезавантажити комп'ютер. Натисніть на цей текст, щоб зробити це</v:String>
     <v:String x:Key="warn_update_notification">Під час оновлення програми виникла помилка, повторіть спробу пізніше</v:String>
-    <v:String x:Key="import_warning_notification">Цей файл не підходить для імпорту</v:String>
-    <v:String x:Key="import_empty_notification">Цей файл порожній, використання налаштувань неможливе</v:String>
+    <v:String x:Key="warn_import_notification">Цей файл не підходить для імпорту</v:String>
+    <v:String x:Key="empty_import_notification">Цей файл порожній, використання налаштувань неможливе</v:String>
     <v:String x:Key="export_warning_notification">Це не має сенсу, спочатку застосуйте принаймні одне налаштування</v:String>
     <v:String x:Key="onedrive_notification">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
-    <v:String x:Key="appsdelete_notification">Розпочато процес видалення додатків, на це потрібен деякий час</v:String>
-    <v:String x:Key="windefender_notification">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
+    <v:String x:Key="defender_notification">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
     <v:String x:Key="warn_firewall_notification">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
     <v:String x:Key="warn_activate_notification">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
     <v:String x:Key="ready_activate_notification">Ваша операційна система не потребує активації</v:String>

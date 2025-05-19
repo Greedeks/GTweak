@@ -59,7 +59,7 @@ namespace GTweak.View
                 {
                     SystemTweaks.isTweakWorkingAntivirus = true;
                     SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
-                    new ViewNotification().Show("", "info", "windefender_notification");
+                    new ViewNotification().Show("", "info", "defender_notification");
                 }
             }
         }

@@ -155,10 +155,10 @@ namespace GTweak.Utilities.Controls
                 if (File.ReadLines(StoragePaths.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(StoragePaths.Config).Any(line => line.Contains("Slider")))
                     new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
                 else
-                    new ViewNotification().Show("", "info", "import_empty_notification");
+                    new ViewNotification().Show("", "info", "empty_import_notification");
             }
             else
-                new ViewNotification().Show("", "info", "import_warning_notification");
+                new ViewNotification().Show("", "info", "warn_import_notification");
         }
 
         internal static void SelfRemoval()

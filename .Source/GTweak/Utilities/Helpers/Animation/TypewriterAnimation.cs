@@ -23,7 +23,7 @@ namespace GTweak.Utilities.Helpers.Animation
             Storyboard.SetTargetProperty(stringAnimation, new PropertyPath(TextBlock.TextProperty));
             storyBoard.Children.Add(stringAnimation);
 
-            DoubleAnimation opacityAnimation = OpacityAnimation(timeSpan);
+            DoubleAnimation opacityAnimation = FadeAnimation.FadeIn(1, timeSpan.TotalSeconds);
             Storyboard.SetTargetName(opacityAnimation, textBlock.Name);
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
             storyBoard.Children.Add(opacityAnimation);
@@ -53,20 +53,6 @@ namespace GTweak.Utilities.Helpers.Animation
 
             Timeline.SetDesiredFrameRate(stringAnimation, 240);
             return stringAnimation;
-        }
-
-        private DoubleAnimation OpacityAnimation(in TimeSpan timeSpan)
-        {
-            DoubleAnimation opacityAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = new Duration(timeSpan),
-                EasingFunction = new QuadraticEase()
-            };
-
-            Timeline.SetDesiredFrameRate(opacityAnimation, 240);
-            return opacityAnimation;
         }
     }
 }
