@@ -69,6 +69,9 @@ namespace GTweak.Utilities.Tweaks
                 {
                     foreach (var subKeyName in regKey.GetSubKeyNames())
                     {
+                        if (subKeyName == "Properties")
+                            continue;
+
                         using RegistryKey subKey = regKey.OpenSubKey(subKeyName);
                         if (subKey != null)
                         {
