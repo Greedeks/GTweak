@@ -202,9 +202,9 @@ namespace GTweak.Utilities.Helpers
             return AdjustTokenPrivileges(hToken, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
         }
 
-        internal static async Task GrantAdministratorsAccess(string name, SE_OBJECT_TYPE type)
+        internal static void GrantAdministratorsAccess(string name, SE_OBJECT_TYPE type)
         {
-            await Task.Run(() =>
+            Task.Run(delegate
             {
                 SID_IDENTIFIER_AUTHORITY sidNTAuthority = SECURITY_NT_AUTHORITY;
 
@@ -213,29 +213,10 @@ namespace GTweak.Utilities.Helpers
                 IntPtr sidTrustedInstaller = IntPtr.Zero;
                 IntPtr sidWD = IntPtr.Zero;
 
-                AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                         SECURITY_BUILTIN_DOMAIN_RID,
-                                         DOMAIN_ALIAS_RID_ADMINS,
-                                         0, 0, 0, 0, 0, 0,
-                                         ref sidAdmin);
-
-                AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                         SECURITY_BUILTIN_DOMAIN_RID,
-                                         DOMAIN_ALIAS_RID_USERS,
-                                         0, 0, 0, 0, 0, 0,
-                                         ref sidUsers);
-
-                AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                         SECURITY_BUILTIN_DOMAIN_RID,
-                                         DOMAIN_ALIAS_RID_TRUSTED_INSTALLER,
-                                         0, 0, 0, 0, 0, 0,
-                                         ref sidTrustedInstaller);
-
-                AllocateAndInitializeSid(ref sidNTAuthority, 2,
-                                         SECURITY_BUILTIN_DOMAIN_RID,
-                                         DOMAIN_ALIAS_RID_WD,
-                                         0, 0, 0, 0, 0, 0,
-                                         ref sidWD);
+                AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, ref sidAdmin);
+                AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_USERS, 0, 0, 0, 0, 0, 0, ref sidUsers);
+                AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_TRUSTED_INSTALLER, 0, 0, 0, 0, 0, 0, ref sidTrustedInstaller);
+                AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_WD, 0, 0, 0, 0, 0, 0, ref sidWD);
 
                 EXPLICIT_ACCESS[] explicitAccesss = new EXPLICIT_ACCESS[4];
 
@@ -273,8 +254,7 @@ namespace GTweak.Utilities.Helpers
                 static void setPrivilege(string privilege, bool allow)
                 {
                     TOKEN_PRIVILEGES tokenPrivileges = new TOKEN_PRIVILEGES();
-                    OpenProcessToken(GetCurrentProcess(),
-                        TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr token);
+                    OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr token);
 
                     if (allow)
                     {
@@ -285,29 +265,14 @@ namespace GTweak.Utilities.Helpers
                         tokenPrivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
                     }
 
-                    AdjustTokenPrivileges(token, false, ref tokenPrivileges, 0,
-                        IntPtr.Zero, IntPtr.Zero);
+                    AdjustTokenPrivileges(token, false, ref tokenPrivileges, 0, IntPtr.Zero, IntPtr.Zero);
                     CloseHandle(token);
                 }
 
                 setPrivilege(SE_TAKE_OWNERSHIP_NAME, true);
 
-                SetNamedSecurityInfo(
-                    name,
-                    type,
-                    SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION,
-                    sidAdmin,
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    IntPtr.Zero);
-
-                SetNamedSecurityInfo(
-                    name,
-                    type,
-                    SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
-                    IntPtr.Zero, IntPtr.Zero,
-                    acl,
-                    IntPtr.Zero);
+                SetNamedSecurityInfo(name, type, SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION, sidAdmin, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+                SetNamedSecurityInfo(name, type, SECURITY_INFORMATION.DACL_SECURITY_INFORMATION, IntPtr.Zero, IntPtr.Zero, acl, IntPtr.Zero);
 
                 setPrivilege(SE_TAKE_OWNERSHIP_NAME, false);
 
@@ -316,7 +281,7 @@ namespace GTweak.Utilities.Helpers
                 FreeSid(sidTrustedInstaller);
                 FreeSid(sidWD);
                 LocalFree(acl);
-            }).ConfigureAwait(false);
+            }).Wait();
         }
     }
 }

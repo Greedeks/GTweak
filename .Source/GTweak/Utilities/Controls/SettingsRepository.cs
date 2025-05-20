@@ -82,7 +82,7 @@ namespace GTweak.Utilities.Controls
             if (isRegistryEmpty)
             {
                 foreach (var subkey in _defaultSettings)
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey.Key, subkey.Value, RegistryValueKind.String);
+                    ChangingParameters(subkey.Value, subkey.Key);
             }
             else
             {
