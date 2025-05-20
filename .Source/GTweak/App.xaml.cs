@@ -74,6 +74,7 @@ namespace GTweak
                         "ko" => new Uri("Languages/ko/Localize.xaml", UriKind.Relative),
                         "uk" => new Uri("Languages/uk/Localize.xaml", UriKind.Relative),
                         "fr" => new Uri("Languages/fr/Localize.xaml", UriKind.Relative),
+                        "it" => new Uri("Languages/it/Localize.xaml", UriKind.Relative),
                         _ => new Uri("Languages/en/Localize.xaml", UriKind.Relative),
                     }
                 };

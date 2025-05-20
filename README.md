@@ -36,6 +36,10 @@
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
    <img src="https://cdn-icons-png.flaticon.com/64/7561/7561888.png" alt="French Flag" width="40">
   </a>
+  
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
+   <img src="https://cdn-icons-png.flaticon.com/64/10600/10600917.png" alt="Italian Flag" width="40">
+  </a>
 </div>
 
 </div>
@@ -123,7 +127,7 @@ Installed platform: .NET Framework 4.8
 ## Translation ❤️ 
 - Korean - [@VenusGirl](https://github.com/VenusGirl)
 - Ukrainian - [@Kopejkin](https://github.com/Kopejkin)
-- French - [@Zephyris](https://github.com/Zephyris-Pro)
+- French + Italian - [@Zephyris](https://github.com/Zephyris-Pro)
 </br>
 
 ### How to Translate a Program 📝
