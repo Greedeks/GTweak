@@ -470,8 +470,15 @@ namespace GTweak.Utilities.Configuration
                     {
                         try
                         {
-                            string response = await client.GetStringAsync(url);
-                            IPMetadata ipMetadata = IPMetadata.ParseData(response);
+                            using HttpResponseMessage response = await client.GetAsync(url);
+
+                            if (!response.IsSuccessStatusCode)
+                            {
+                                CurrentConnection = ConnectionStatus.Block;
+                                continue;
+                            }
+
+                            IPMetadata ipMetadata = IPMetadata.ParseData(await response.Content.ReadAsStringAsync());
 
                             if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrWhiteSpace(ipMetadata?.Ip) && !string.IsNullOrWhiteSpace(ipMetadata?.Country))
                             {
