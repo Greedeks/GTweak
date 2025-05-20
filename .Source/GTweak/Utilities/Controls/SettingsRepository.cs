@@ -29,7 +29,7 @@ namespace GTweak.Utilities.Controls
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
-        internal static string[] AvailableLangs = { "en", "ko", "ru", "uk", "fr" };
+        internal static string[] AvailableLangs = { "en", "ko", "ru", "uk", "fr", "it" };
         internal static string[] AvailableThemes = { "Dark", "Light", "Cobalt", "Dark amethyst", "Cold Blue", "System" };
 
         internal static int PID = 0;

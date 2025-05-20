@@ -36,6 +36,10 @@
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
    <img src="https://cdn-icons-png.flaticon.com/64/7561/7561888.png" alt="French Flag" width="40">
   </a>
+  
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
+   <img src="https://cdn-icons-png.flaticon.com/64/10600/10600917.png" alt="Italian Flag" width="40">
+  </a>
 </div>
 
 </div>
@@ -126,7 +130,7 @@
 ## Переклад ❤️ 
 - Корейська - [@VenusGirl](https://github.com/VenusGirl)
 - Українська - [@Kopejkin](https://github.com/Kopejkin)
-- Французька - [@Zephyris](https://github.com/Zephyris-Pro)
+- Французька + Итальянский - [@Zephyris](https://github.com/Zephyris-Pro)
 
 </br>
 

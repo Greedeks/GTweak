@@ -245,6 +245,7 @@
                                             <TextBlock Text="{DynamicResource cmbox_ru_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_uk_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_fr_main}"/>
+                                            <TextBlock Text="{DynamicResource cmbox_it_main}"/>
                                         </ComboBox>
                                     </StackPanel>
 

@@ -36,6 +36,10 @@
   <a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
    <img src="https://cdn-icons-png.flaticon.com/64/7561/7561888.png" alt="French Flag" width="40">
   </a>
+  
+  <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
+   <img src="https://cdn-icons-png.flaticon.com/64/10600/10600917.png" alt="Italian Flag" width="40">
+  </a>
 </div>
 
 </div>
@@ -124,7 +128,7 @@ Windows 지원: Windows 10 (build 18362.116)부터
 ## 번역 ❤️ 
 - Korean - [@VenusGirl](https://github.com/VenusGirl)
 - Ukrainian - [@Kopejkin](https://github.com/Kopejkin)
-- French - [@Zephyris](https://github.com/Zephyris-Pro)
+- French + Italian - [@Zephyris](https://github.com/Zephyris-Pro)
 
 </br>
 
