@@ -126,7 +126,7 @@
 ## Переклад ❤️ 
 - Корейська - [@VenusGirl](https://github.com/VenusGirl)
 - Українська - [@Kopejkin](https://github.com/Kopejkin)
-- Французький - [@Zephyris](https://github.com/Zephyris-Pro)
+- Французька - [@Zephyris](https://github.com/Zephyris-Pro)
 
 </br>
 
