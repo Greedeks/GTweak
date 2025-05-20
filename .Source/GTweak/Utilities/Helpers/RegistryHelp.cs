@@ -35,7 +35,7 @@ namespace GTweak.Utilities.Helpers
                     registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            }).ConfigureAwait(false);
+            }).GetAwaiter().GetResult();
         }
 
         internal static void Write<T>(RegistryKey registrykey, string subkey, string name, T data, RegistryValueKind kind, bool isTakingOwner = false)
@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Helpers
                     registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            }).ConfigureAwait(false);
+            }).GetAwaiter().GetResult(); ;
         }
 
         internal static void CreateFolder(RegistryKey registrykey, string subkey)
@@ -59,7 +59,7 @@ namespace GTweak.Utilities.Helpers
             {
                 try { registrykey.CreateSubKey(subkey); }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            }).ConfigureAwait(false);
+            }).GetAwaiter().GetResult();
         }
 
         internal static void DeleteFolderTree(RegistryKey registrykey, string subkey, bool isTakingOwner = false)
@@ -84,7 +84,7 @@ namespace GTweak.Utilities.Helpers
                     registrykey.DeleteSubKeyTree(subkey, false);
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            }).ConfigureAwait(false);
+            }).GetAwaiter().GetResult();
         }
 
         internal static bool KeyExists(in RegistryKey registrykey, in string subkey, in bool isNegation = true)

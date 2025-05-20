@@ -123,36 +123,36 @@ namespace GTweak
         #endregion
 
         #region Settings Menu
-        private void BtnNotification_ChangedState(object sender, EventArgs e) => SettingsRepository.ChangingParameters(!BtnNotification.State, "Notification");
+        private void BtnNotification_ChangedState(object sender, EventArgs e) => SettingsRepository.IsViewNotification = !BtnNotification.State;
 
-        private void BtnUpdate_ChangedState(object sender, EventArgs e) => SettingsRepository.ChangingParameters(!BtnUpdate.State, "Update");
+        private void BtnUpdate_ChangedState(object sender, EventArgs e) => SettingsRepository.IsUpdateCheckRequired = !BtnUpdate.State;
 
         private void BtnTopMost_ChangedState(object sender, EventArgs e)
         {
-            SettingsRepository.ChangingParameters(!BtnTopMost.State, "TopMost");
+            SettingsRepository.IsTopMost = !BtnTopMost.State;
             Topmost = !BtnTopMost.State;
         }
 
-        private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.ChangingParameters(!BtnSoundNtn.IsChecked, "Sound");
+        private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.IsPlayingSound = (bool)!BtnSoundNtn.IsChecked;
 
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
-            SettingsRepository.ChangingParameters(SliderVolume.Value, "Volume");
+            SettingsRepository.Volume = (int)SliderVolume.Value;
             SettingsRepository.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) << 16));
         }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedLang = SettingsRepository.AvailableLangs.ElementAtOrDefault(LanguageSelectionMenu.SelectedIndex) ?? SettingsRepository.AvailableLangs.Last();
-            SettingsRepository.ChangingParameters(selectedLang, "Language");
+            SettingsRepository.Language = selectedLang;
             App.Language = selectedLang;
         }
 
         private void ThemeSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedTheme = SettingsRepository.AvailableThemes.ElementAtOrDefault(ThemeSelectionMenu.SelectedIndex) ?? SettingsRepository.AvailableThemes.Last();
-            SettingsRepository.ChangingParameters(selectedTheme, "Theme");
+            SettingsRepository.Theme = selectedTheme;
             App.Theme = selectedTheme;
         }
 

@@ -37,44 +37,40 @@ namespace GTweak.Utilities.Controls
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
         internal static readonly string currentLocation = Assembly.GetExecutingAssembly().Location;
 
-        private static readonly Dictionary<string, Action> _settingsRefreshActions = new Dictionary<string, Action>
+        private static readonly Dictionary<string, object> _defaultSettings = new Dictionary<string, object>
         {
-            { "Notification", () => IsViewNotification = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Notification", IsViewNotification) },
-            { "Update", () => IsUpdateCheckRequired = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Update", IsUpdateCheckRequired) },
-            { "TopMost", () => IsTopMost = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "TopMost", IsTopMost) },
-            { "Sound", () => IsPlayingSound = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Sound", IsPlayingSound) },
-            { "Volume", () => Volume = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Volume", Volume) },
-            { "Language", () => Language = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Language", Language) },
-            { "Theme", () => Theme = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "Theme", Theme) },
-            { "HiddenIP", () => IsHiddenIpAddress = RegistryHelp.GetValue(StoragePaths.RegistryLocation, "HiddenIP", IsHiddenIpAddress) }
+            ["Notification"] = true,
+            ["Update"] = true,
+            ["TopMost"] = false,
+            ["Sound"] = true,
+            ["Volume"] = 50,
+            ["Language"] = App.GettingSystemLanguage,
+            ["Theme"] = "Dark",
+            ["HiddenIP"] = true
         };
 
-        internal static readonly Dictionary<string, object> registryDefaults = new Dictionary<string, object>
-        {
-            { "Notification", true },
-            { "Update", true },
-            { "TopMost", false },
-            { "Sound", true },
-            { "Volume", 50 },
-            { "Language", App.GettingSystemLanguage },
-            { "Theme", "Dark" },
-            { "HiddenIP", true }
-        };
+        private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);
 
-        internal static bool IsViewNotification { get => (bool)registryDefaults["Notification"]; set => registryDefaults["Notification"] = value; }
-        internal static bool IsUpdateCheckRequired { get => (bool)registryDefaults["Update"]; set => registryDefaults["Update"] = value; }
-        internal static bool IsTopMost { get => (bool)registryDefaults["TopMost"]; set => registryDefaults["TopMost"] = value; }
-        internal static bool IsPlayingSound { get => (bool)registryDefaults["Sound"]; set => registryDefaults["Sound"] = value; }
-        internal static int Volume { get => (int)registryDefaults["Volume"]; set => registryDefaults["Volume"] = value; }
-        internal static string Language { get => (string)registryDefaults["Language"]; set => registryDefaults["Language"] = value; }
-        internal static string Theme { get => (string)registryDefaults["Theme"]; set => registryDefaults["Theme"] = value; }
-        internal static bool IsHiddenIpAddress { get => (bool)registryDefaults["HiddenIP"]; set => registryDefaults["HiddenIP"] = value; }
+        internal static bool IsViewNotification { get => (bool)_cachedSettings["Notification"]; set => ChangingParameters(value, "Notification"); }
+        internal static bool IsUpdateCheckRequired { get => (bool)_cachedSettings["Update"]; set => ChangingParameters(value, "Update"); }
+        internal static bool IsTopMost { get => (bool)_cachedSettings["TopMost"]; set => ChangingParameters(value, "TopMost"); }
+        internal static bool IsPlayingSound { get => (bool)_cachedSettings["Sound"]; set => ChangingParameters(value, "Sound"); }
+        internal static int Volume { get => (int)_cachedSettings["Volume"]; set => ChangingParameters(value, "Volume"); }
+        internal static string Language { get => (string)_cachedSettings["Language"]; set => ChangingParameters(value, "Language"); }
+        internal static string Theme { get => (string)_cachedSettings["Theme"]; set => ChangingParameters(value, "Theme"); }
+        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["HiddenIP"]; set => ChangingParameters(value, "HiddenIP"); }
+
+        private static void ChangingParameters<T>(T value, string key)
+        {
+            _cachedSettings[key] = value;
+            RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", key, value.ToString(), RegistryValueKind.String);
+        }
 
         internal void СheckingParameters()
         {
             bool isRegistryEmpty = false;
 
-            foreach (string key in registryDefaults.Keys)
+            foreach (string key in _defaultSettings.Keys)
             {
                 if (RegistryHelp.ValueExists(StoragePaths.RegistryLocation, key))
                 {
@@ -85,20 +81,18 @@ namespace GTweak.Utilities.Controls
 
             if (isRegistryEmpty)
             {
-                foreach (var subkey in registryDefaults)
+                foreach (var subkey in _defaultSettings)
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey.Key, subkey.Value, RegistryValueKind.String);
             }
             else
             {
-                foreach (Action executeUpdate in _settingsRefreshActions.Values)
-                    executeUpdate();
+                foreach (var kv in _defaultSettings)
+                {
+                    _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultBool) :
+                        kv.Value is int defaultInt ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultInt) :
+                        kv.Value is string defaultString ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultString) : kv.Value;
+                }
             }
-        }
-
-        internal static void ChangingParameters<T>(T value, string subkey)
-        {
-            RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", subkey, value.ToString(), RegistryValueKind.String);
-            _settingsRefreshActions[subkey]();
         }
 
         internal static void SaveFileConfig()
