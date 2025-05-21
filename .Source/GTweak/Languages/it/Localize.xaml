@@ -234,8 +234,6 @@
     <v:String x:Key="TglButton32_description_interface">Mostra le estensioni dei file in Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
     <!--#endregion-->
 
-    <!-- TODO: Finish translation -->
-
     <!--#region Applications Page -->
     <v:String x:Key="text0_applications">Le applicazioni verranno eliminate</v:String>
     <v:String x:Key="text1_applications">senza possibilità</v:String>
