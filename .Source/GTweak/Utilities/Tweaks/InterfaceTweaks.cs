@@ -223,7 +223,7 @@ namespace GTweak.Utilities.Tweaks
                         {
                             if (isDisabled)
                             {
-                                new UnarchiveManager(StoragePaths.IconBlank, Properties.Resources.Blank);
+                                ArchiveManager.Unarchive(StoragePaths.IconBlank, Properties.Resources.Blank);
                                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
                             }
                             else

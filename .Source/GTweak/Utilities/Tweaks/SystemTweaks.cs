@@ -455,7 +455,7 @@ namespace GTweak.Utilities.Tweaks
 
                         if (string.IsNullOrEmpty(searchScheme))
                         {
-                            new UnarchiveManager(StoragePaths.PowFile, Properties.Resources.UltPower);
+                            ArchiveManager.Unarchive(StoragePaths.PowFile, Properties.Resources.UltPower);
 
                             string _guid = Guid.NewGuid().ToString("D");
 

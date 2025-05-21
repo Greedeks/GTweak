@@ -193,7 +193,7 @@ namespace GTweak.Utilities.Tweaks
                                     File.Delete(backupFile);
 
                                 File.Move(StoragePaths.HostsFile, backupFile);
-                                new UnarchiveManager(StoragePaths.HostsFile, Resources.hosts);
+                                ArchiveManager.Unarchive(StoragePaths.HostsFile, Resources.hosts);
                             }
                             else
                             {
