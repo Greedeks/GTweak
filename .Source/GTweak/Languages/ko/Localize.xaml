@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
@@ -35,10 +35,10 @@
     <v:String x:Key="title_info_notification">정보</v:String>
     <v:String x:Key="logout_notification">종료가 필요합니다. 이 텍스트를 클릭하여 생성하세요</v:String>
     <v:String x:Key="restart_notification">재부팅이 필요합니다. 이 텍스트를 클릭하여 이를 수행합니다</v:String>
+    <v:String x:Key="warn_update_notification">프로그램 업데이트 중 오류가 발생했습니다. 나중에 다시 시도하세요</v:String>
     <v:String x:Key="warn_import_notification">이 파일은 가져오기에 적합하지 않습니다</v:String>
     <v:String x:Key="empty_import_notification">이 파일은 비어 있으며 조정을 적용할 수 없습니다</v:String>
     <v:String x:Key="export_warning_notification">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
-    <v:String x:Key="warn_update_notification">프로그램 업데이트 중 오류가 발생했습니다. 나중에 다시 시도하세요</v:String>
     <v:String x:Key="onedrive_notification">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="defender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
@@ -47,8 +47,8 @@
     <v:String x:Key="win_activate_notification">Windows 정품 인증 프로세스가 시작되었으며 시간이 다소 소요됩니다.</v:String>
     <v:String x:Key="success_activate_notification">활성화에 성공했습니다. 재부팅을 권장합니다</v:String>
     <v:String x:Key="error_activate_notification">문제가 발생하여 안타깝게도 시스템을 활성화할 수 없습니다</v:String>
-    <v:String x:Key="network_activate_notification">An internet connection is required for activation</v:String>
-    <v:String x:Key="keynotfound_notification">The key for your Windows edition is missing; activation canceled</v:String>
+    <v:String x:Key="network_activate_notification">활성화하려면 인터넷 연결이 필요합니다</v:String>
+    <v:String x:Key="keynotfound_notification">Windows 버전의 키가 누락되어 활성화가 취소되었습니다</v:String>
     <v:String x:Key="createpoint_notification">복구 지점을 생성하는 데 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="error_point_notification">문제가 발생하여 복원 지점을 만들 수 없습니다</v:String>
     <v:String x:Key="success_point_notification">복구 지점이 성공적으로 생성되었습니다</v:String>
@@ -61,12 +61,12 @@
     <v:String x:Key="error_defrag_notification">문제가 발생하여 조각 모음 상태를 변경하지 못했습니다</v:String>
     <v:String x:Key="success_defrag_off_notification">드라이브에 대해 조각 모음이 성공적으로 비활성화되었습니다</v:String>
     <v:String x:Key="success_defrag_on_notification">디스크 조각 모음이 성공적으로 활성화되었습니다</v:String>
-    <v:String x:Key="success_compression_notification">디렉토리와 그 내용물의 압축이 성공적으로 수행되었습니다</v:String>
-    <v:String x:Key="success_decompression_notification">디렉토리와 그 내용물의 압축 해제가 성공적으로 수행되었습니다</v:String>
-    <v:String x:Key="ready_compression_notification">디렉토리가 이미 압축되어 있어 추가 압축이 필요하지 않습니다</v:String>
-    <v:String x:Key="ready_decompression_notification">디렉토리가 이미 압축 해제되어 있어 추가 작업이 필요하지 않습니다</v:String>
+    <v:String x:Key="success_compression_notification">디렉터리와 그 내용물의 압축이 성공적으로 수행되었습니다</v:String>
+    <v:String x:Key="success_decompression_notification">디렉터리와 그 내용물의 압축 해제가 성공적으로 수행되었습니다</v:String>
+    <v:String x:Key="ready_compression_notification">디렉터리가 이미 압축되어 있어 추가 압축이 필요하지 않습니다</v:String>
+    <v:String x:Key="ready_decompression_notification">디렉터리가 이미 압축 해제되어 있어 추가 작업이 필요하지 않습니다</v:String>
     <v:String x:Key="error_compression_notification">문제가 발생하여 압축 상태를 변경하는 중 오류가 발생했습니다</v:String>
-    <v:String x:Key="notsupport_ntfs_notification">디렉토리가 NTFS 파티션에 있지 않으므로 작업을 수행할 수 없습니다</v:String>
+    <v:String x:Key="notsupport_ntfs_notification">디렉터리가 NTFS 파티션에 있지 않으므로 작업을 수행할 수 없습니다</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -148,19 +148,19 @@
     <v:String x:Key="TglButton3_description_confidentiality">원격 분석( 진단 데이터)은 Windows가 Microsoft 서버로 보내기 위해 자동으로 수집하는 데이터, 즉 간단히 말해 “무엇? 어디서?  왜 그리고 언제 사용하는가?"에 대한 정보입니다. Microsoft는 이 데이터가 비개인화되어 있으며 회사의 Windows 개발에 도움이 된다고 주장합니다. 정보 수집 사실에 대해 걱정하지 않더라도 프로세서에 과도한 부하가 발생하여 시스템 속도가 느려지는 또 다른 문제가 발생할 수 있습니다.</v:String>
     <v:String x:Key="TglButton4_description_confidentiality">«작업 스케줄러»에는 작업 후 작업에 대한 데이터를 수집하여 Microsoft 서버로 전송하는 서비스가 있습니다.</v:String>
     <v:String x:Key="TglButton5_description_confidentiality">Microsoft는 사용자의 소프트웨어에 대한 데이터를 수집합니다. 이 정보는 Microsoft에서 호환성 문제를 진단하는 데 사용되지만, 이 정보는 Microsoft의 이기적인 목적으로만 사용되므로 새 버전의 Windows에서 호환성을 개선하는 데 도움이 되지 않습니다. 이 기능을 사용하지 않도록 설정하면 잠재적으로 민감한 정보가 전송되지 않습니다.</v:String>
-    <v:String x:Key="TglButton6_description_confidentiality">이 트윅은 애플리케이션 사용 모니터링 기능을 비활성화하여 사용 빈도, 작업 지속 시간 및 기타 생산성 지표에 대한 데이터 수집을 배제합니다. 이로 인해 시스템은 작업 프로세스 분석을 중단하여 귀하의 기밀 정보를 보호합니다.</v:String>
+    <v:String x:Key="TglButton6_description_confidentiality">이 트윅은 응용 프로그램 사용 모니터링 기능을 비활성화하여 사용 빈도, 작업 지속 시간 및 기타 생산성 지표에 대한 데이터 수집을 배제합니다. 이로 인해 시스템은 작업 프로세스 분석을 중단하여 귀하의 기밀 정보를 보호합니다.</v:String>
     <v:String x:Key="TglButton7_description_confidentiality">이 트윅은 Microsoft가 필기 인식 기술을 향상시키기 위해 사용하는 데이터 수집 메커니즘을 비활성화합니다. 이 기능을 사용하든 사용하지 않든 관계없이, 시스템은 인식 정확도를 높이기 위해 사용자 활동을 추적했습니다. 적용된 변경 사항은 이러한 정보 수집을 방지하여 개인정보 보호에 기여합니다.</v:String>
     <v:String x:Key="TglButton8_description_confidentiality">소프트웨어 품질 개선 프로그램 (CEIP)은 하드웨어 구성과 소프트웨어 및 서비스 사용 방법에 대한 정보를 수집하는 별도의 기능입니다. 또한 이 프로그램은 주기적으로 파일을 다운로드하여 Windows에서 발생할 수 있는 문제에 대한 정보를 수집합니다. 이 프로그램은 자발적으로 참여하며 개인 정보를 침해하는 데이터를 Microsoft에 전송할 필요가 없습니다.</v:String>
     <v:String x:Key="TglButton9_description_confidentiality">이 트윅은 hosts 파일에서 특정 도메인 이름 앞에 0.0.0.0 주소를 추가하여 해당 도메인들을 효과적으로 차단합니다. 또한 Microsoft 데이터 수집 서비스와 관련된 여러 IP 주소로의 연결을 차단하도록 Windows 방화벽 설정을 변경합니다.</v:String>
-    <v:String x:Key="TglButton10_description_confidentiality">위치 기반 서비스를 비활성화하면 광고 목적으로 위치 정보를 활용할 가능성이 크게 줄어듭니다 – 이 정보에 대한 접근은 Microsoft 서비스뿐만 아니라 모든 서드파티 애플리케이션과 스크립트에 대해서도 제한됩니다.</v:String>
+    <v:String x:Key="TglButton10_description_confidentiality">위치 기반 서비스를 비활성화하면 광고 목적으로 위치 정보를 활용할 가능성이 크게 줄어듭니다 – 이 정보에 대한 접근은 Microsoft 서비스뿐만 아니라 모든 서드파티 응용 프로그램과 스크립트에 대해서도 제한됩니다.</v:String>
     <v:String x:Key="TglButton11_description_confidentiality">이 트윅은 Windows에서 피드백 및 관련 알림의 수집을 차단하여 귀하의 동의 없이 데이터가 전송되는 것을 방지합니다. 또한, «피드백» 기능을 사용하지 않더라도 Microsoft는 공식 지원에 연락하는 빈도를 기록합니다.</v:String>
     <v:String x:Key="TglButton12_description_confidentiality">Windows는 전용 음성 인식 및 합성 모듈을 통해 음성을 인식할 수 있습니다. Cortana 또는 «접근성»을 사용하지 않더라도, 운영 체제는 기본적으로 음성 인식 엔진 업데이트를 항상 확인합니다.</v:String>
-    <v:String x:Key="TglButton13_description_confidentiality">모든 사용자 데이터에 액세스할 수 있는 기능입니다. Microsoft 서버와 일부 정보를 교환하며 운영 체제 또는 애플리케이션의 작동에 어떤 영향도 미치지 않습니다. 어떤 식으로든 사용자에게 도움이 되지 않으므로 쓸모가 없습니다.</v:String>
+    <v:String x:Key="TglButton13_description_confidentiality">모든 사용자 데이터에 액세스할 수 있는 기능입니다. Microsoft 서버와 일부 정보를 교환하며 운영 체제 또는 응용 프로그램의 작동에 어떤 영향도 미치지 않습니다. 어떤 식으로든 사용자에게 도움이 되지 않으므로 쓸모가 없습니다.</v:String>
     <v:String x:Key="TglButton14_description_confidentiality">Microsoft는 Windows 사용자를 대상으로 정기적으로 실험을 수행하여 기능이 널리 사용되는지, 기능을 변경하면 더 유용해지는지 여부를 확인합니다. 하지만 이는 기밀을 침해하는 행위입니다.</v:String>
     <v:String x:Key="TglButton15_description_confidentiality">DiagTrack, dmwappushservice 및 diagsvc 서비스는 키로거로 작동하여 사용자 활동, 키 입력 등을 모두 기록하고 사용자 동의 없이 이 데이터를 Microsoft 서버로 전송합니다. UWF (Unified Write Filter)를 사용할 때 시스템의 안정적인 동작은 dmwappushservice 서비스에 의존합니다. 그러나 그것이 무엇인지 잘 모르거나 대체 도구가 있다면, 이러한 키로거를 제거하는 것이 좋습니다.</v:String>
     <v:String x:Key="TglButton16_description_confidentiality">시스템 진단 정보를 수집하고 처리하여 컴퓨터의 리소스를 낭비하는 이벤트 로그입니다. 이 서비스는 좋은 것을 제공하지 않으므로 비활성화하는 것이 좋으므로 기밀 정보 전송을 방지할 수 있습니다.</v:String>
     <v:String x:Key="TglButton17_description_confidentiality">시스템 및 사용에 대한 데이터 수집 및 전송을 담당하는 서비스 또는 비디오 드라이버의 작동과 관련이 없는 기능은 쓸모가 없습니다. NVIDIA가 수집하는 이유와 정보의 종류는 자체적으로만 알려져 있습니다. 그러나 이것이 최종 사용자에게 유용한 것이 없다는 사실은 분명합니다.</v:String>
-    <v:String x:Key="TglButton18_description_confidentiality">이 트윅은 UAR (User Activity Recording) 기능을 비활성화합니다 – 스크린샷 촬영, 텍스트 입력, 프로그램 실행, 화면이 잠긴 상태에서도 웹캠 접근 제공 등 컴퓨터에서 발생하는 모든 행동을 순차적으로 기록하는 시스템입니다.</v:String>
+    <v:String x:Key="TglButton18_description_confidentiality">이 조정은 UAR (사용자 활동 기록) 기능을 비활성화합니다 – 스크린샷 촬영, 텍스트 입력, 프로그램 실행, 화면이 잠긴 상태에서도 웹캠 접근 제공 등 컴퓨터에서 발생하는 모든 행동을 순차적으로 기록하는 시스템입니다.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -184,7 +184,7 @@
     <v:String x:Key="tgl18_interface">팁 및 제안 표시 (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">컴팩트 탐색기 모드 사용 (Windows 11)</v:String>
     <v:String x:Key="tgl20_interface">«Copilot» 및 «Recall» 도우미 (Windows 11)</v:String>
-    <v:String x:Key="tgl21_interface">«End task» via RMB on the application (Windows 11)</v:String>
+    <v:String x:Key="tgl21_interface">응용 프로그램에서 RMB를 통해 «작업 끝내기» (Windows 11)</v:String>
     <v:String x:Key="tgl22_interface">작업 표시줄의 아이콘 및 버튼</v:String>
     <v:String x:Key="tgl23_interface">개인 맞춤형 광고 표시</v:String>
     <v:String x:Key="tgl24_interface">로그인 시 이전 폴더 창 복원</v:String>
@@ -195,7 +195,7 @@
     <v:String x:Key="tgl29_interface">데스크톱 요소의 도구 설명</v:String>
     <v:String x:Key="tgl30_interface">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
    <v:String x:Key="tgl31_interface">«내 PC» 대신 «빠른 액세스» 열기</v:String>
-    <v:String x:Key="tgl32_interface">Displaying file extensions in explorer</v:String>
+    <v:String x:Key="tgl32_interface">탐색기에 파일 확장자 표시</v:String>
     
     <v:String x:Key="textcolor_interface">이것은 새로운 색상의 예입니다.</v:String>
     <v:String x:Key="previewflick_interface">- 비교를 위해 -</v:String>
@@ -220,19 +220,19 @@
     <v:String x:Key="TglButton18_description_interface">Windows 11에서는 새로운 «시작» 메뉴나 «빠른 설정»과 같은 특정 기능을 사용하는 방법에 대한 힌트를 표시하는 경우가 있습니다. 이러한 힌트는 Windows 11을 처음 사용하는 경우 유용합니다.</v:String>
     <v:String x:Key="TglButton19_description_interface">기본적으로 Windows는 탐색기에서 항목 사이에 패딩을 추가합니다. 이는 터치 스크린을 위해 설계된 새로운 기능입니다. 이 조정은 파일 탐색기의 클래식 레이아웃을 복원하여 요소 사이의 들여쓰기를 제거하고 설정을 검색하는 데 시간을 절약합니다.</v:String>
     <v:String x:Key="TglButton20_description_interface">이 조정은 작업 표시줄, «시작» 메뉴 및 Microsoft Edge에서 Copilot을 제거 및 비활성화합니다. 또한 Recall도 비활성화됩니다. 그러나 Windows 버전에 처음에 인공 지능을 갖춘 이러한 비서가 없었다면 조정을 사용할 필요가 없습니다.</v:String>
-    <v:String x:Key="TglButton21_description_interface">This tweak will allow you to add the «End task» option to the context menu when you right-click on the application on the taskbar. This speeds up the completion of processes without having to open the task Manager. Attention the screen may blink.</v:String>
+    <v:String x:Key="TglButton21_description_interface">이 조정을 통해 작업 표시줄에서 응용 프로그램을 마우스 오른쪽 버튼으로 클릭하면 컨텍스트 메뉴에 «작업 끝내기» 옵션을 추가할 수 있습니다. 이렇게 하면 작업 관리자를 열지 않고도 프로세스를 완료하는 속도가 빨라집니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton22_description_interface">이 트윅은 «검색», «작업 보기» 및 «채팅» 아이콘을 제거하고, 최대화 버튼 위에 마우스를 올렸을 때 나타나는 스냅 레이아웃을 비활성화하며, «이 사진에 대해 알아보기»를 제거합니다; 구버전 Windows 11에서는 Copilot 아이콘도 제거됩니다. Windows 10 사용자의 경우 추가로 «뉴스 및 관심사»와 Cortana를 제거합니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton23_description_interface">기본적으로 Windows는 수집된 정보를 사용하여 광고를 타겟팅, 즉 사용자의 관심사와 일치하는 광고를 표시합니다. 그리고 말 그대로 이 광고는 표시할 수 있는 여유 공간이 있는 곳이면 어디든 배치됩니다. 모든 스토어 앱, 탐색기, 옵션 및 시작 메뉴에 개인 맞춤 광고를 표시하지 않으려면 이 정크를 비활성화하면 됩니다.</v:String>
     <v:String x:Key="TglButton24_description_interface">기본적으로 Windows는 창이 꺼져 있을 때의 위치와 상태를 저장하지 않습니다. 이 수정을 통해 로그아웃, 재부팅 및 종료 후에 열린 폴더 유형을 기억하여 복원할 수 있습니다.</v:String>
     <v:String x:Key="TglButton25_description_interface">이 조정을 통해 팁과 제안이 포함된 모든 Windows 알림을 비활성화할 수 있을 뿐만 아니라 Windows 11 사용자를 위한 두 번째 기회 즉시 사용 환경 (SCOOBE)을 비활성화할 수 있습니다. SCOOBE는 장치 구성을 긴급하게 완료하고 Microsoft 계정에 로그인하라는 제안과 함께 예기치 않게 표시되는 창입니다.</v:String>
     <v:String x:Key="TglButton26_description_interface">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕화면, 동영상, 문서, 다운로드, 이미지, 음악.</v:String>
-    <v:String x:Key="TglButton27_description_interface">왼쪽 메뉴 목록의 탐색기 개요에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서).</v:String>
+    <v:String x:Key="TglButton27_description_interface">왼쪽 메뉴 목록의 탐색기 요약에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서).</v:String>
     <v:String x:Key="TglButton28_description_interface">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
     <v:String x:Key="TglButton29_description_interface">조정은 마우스 커서를 마우스오버할 때 바탕화면 요소의 도구 설명을 비활성화합니다.</v:String>
     <v:String x:Key="TglButton30_description_interface">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton31_description_interface">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
-    <v:String x:Key="TglButton32_description_interface">By default, Windows hides file extensions, which makes the File Explorer view less cluttered. If needed, you can enable the display of file extensions using this tweak, saving you the time spent searching. Attention the screen may blink.</v:String>
-    <!--#endregion-->
+    <v:String x:Key="TglButton32_description_interface">기본적으로 Windows는 파일 확장자를 숨기므로 파일 탐색기 보기가 덜 복잡해집니다. 필요한 경우 이 조정을 사용하여 파일 확장자를 표시할 수 있으므로 검색하는 데 걸리는 시간을 절약할 수 있습니다. 화면이 깜빡일 수 있으니 주의하세요.</v:String>
+     <!--#endregion-->
 
     <!--#region Applications Page -->
     <v:String x:Key="text0_applications">OneDrive를 제외한 응용 프로그램은</v:String>
@@ -253,7 +253,7 @@
     <v:String x:Key="Cortana_applications">Cortana</v:String>
     <v:String x:Key="MicrosoftTeams_applications">Microsoft Teams</v:String>
     <v:String x:Key="Music_applications">Windows Media Player</v:String>
-    <v:String x:Key="Video_applications">Movies &amp; TV</v:String>
+    <v:String x:Key="Video_applications">영화 및 TV</v:String>
     <v:String x:Key="SoundRecorder_applications">사운드 녹음기</v:String>
     <v:String x:Key="FeedbackHub_applications">피드백 허브</v:String>
     <v:String x:Key="Mail_applications">메일</v:String>
@@ -286,11 +286,11 @@
     <v:String x:Key="OneConnect_applications">Mobile Plans</v:String>
     <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
 
-    <v:String x:Key="title_over_applications">Uninstallation confirmation</v:String>
-    <v:String x:Key="text_over_applications">You are about to remove the Microsoft Edge browser. This will also remove the EdgeWebView component, which is responsible for rendering web pages in applications such as Microsoft Office, as well as in some Telegram bots that use the embedded WebView to display menus (mini‑apps and web content) and other programs. Before proceeding, make sure you do not need this component.</v:String>
-    <v:String x:Key="question_over_applications">Would you like to continue deleting along with EdgeWebView?</v:String>
-    <v:String x:Key="btn_сancel">Cancel</v:String>
-    <v:String x:Key="btn_delete">Delete</v:String>
+    <v:String x:Key="title_over_applications">설치 제거 확인</v:String>
+    <v:String x:Key="text_over_applications">Microsoft Edge 브라우저를 제거하려고 합니다. 또한 Microsoft Office와 같은 응용 프로그램에서 웹 페이지 렌더링을 담당하는 EdgeWebView 구성 요소와 내장된 WebView를 사용하여 메뉴 (미니 앱 및 웹 콘텐츠) 및 기타 프로그램을 표시하는 일부 Telegram 봇에서도 제거됩니다. 계속 진행하기 전에 이 구성 요소가 필요하지 않은지 확인하세요</v:String>
+    <v:String x:Key="question_over_applications">EdgeWebView와 함께 계속 삭제하시겠습니까?</v:String>
+    <v:String x:Key="btn_сancel">취소</v:String>
+    <v:String x:Key="btn_delete">삭제</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -344,7 +344,7 @@
     <v:String x:Key="TglButton19_description_services">서비스가 오류를 처리하는 동안 PC를 로드하지 않으려면 비활성화합니다.</v:String>
     <v:String x:Key="TglButton20_description_services">공유 또는 WebDAV를 통해 파일을 원격으로 관리하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton21_description_services">스마트 카드를 사용하지 않는 경우 비활성화합니다. 스마트 카드는 전자식 식별자 또는 칩이 있는 플라스틱의 일종입니다. 모양은 “은행 카드”입니다. Windows를 일상적으로 사용하는 경우 이 서비스는 필요하지 않으며 절대로 필요하지 않습니다.</v:String>
-    <v:String x:Key="TglButton22_description_services">Windows 키오스크 모드를 사용하지 않는 경우 해제하세요. 이 모드는 인터페이스를 최소화하여 단 하나의 UWP 앱만 전체 화면으로 실행되고 다른 모든 기능에 대한 접근을 차단합니다. 이 설정을 해제하면 첫 로그인 시 시스템 데이터 및 애플리케이션 초기화가 비활성화되어 Windows 업데이트 및 Windows Installer를 통한 프로그램 설치에 문제가 발생할 수 있습니다.</v:String>
+    <v:String x:Key="TglButton22_description_services">Windows 키오스크 모드를 사용하지 않는 경우 해제하세요. 이 모드는 인터페이스를 최소화하여 단 하나의 UWP 앱만 전체 화면으로 실행되고 다른 모든 기능에 대한 접근을 차단합니다. 이 설정을 해제하면 첫 로그인 시 시스템 데이터 및 응용 프로그램 초기화가 비활성화되어 Windows 업데이트 및 Windows Installer를 통한 프로그램 설치에 문제가 발생할 수 있습니다.</v:String>
     <v:String x:Key="TglButton23_description_services">BitLocker 디스크 암호화 및 EFS 파일 또는 폴더 암호화를 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton24_description_services">사용할 모든 언어를 구성했고 새 언어를 추가할 계획이 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton25_description_services">Windows Defender 및 모든 추가 Windows 보안을 사용하지 않는 경우 비활성화합니다.</v:String>
@@ -380,8 +380,8 @@
     <v:String x:Key="tgl20_system">Windows Defender 방화벽</v:String>
     <v:String x:Key="tgl21_system">«게임 모드» 기능 사용</v:String>
     <v:String x:Key="tgl22_system">«게임 바» 기능 사용</v:String>
-    <v:String x:Key="tgl23_system">Applications run in the background</v:String>
-    <v:String x:Key="tgl24_system">Reserved storage in Windows</v:String>
+    <v:String x:Key="tgl23_system">백그라운드에서 실행되는 응용 프로그램</v:String>
+    <v:String x:Key="tgl24_system">Windows에서 예약된 저장소</v:String>
 
     <v:String x:Key="TextSlider1_description_system">마우스 포인터의 속도를 변경하여 마우스 매개변수를 검색하는 시간을 절약할 수 있습니다.</v:String>
     <v:String x:Key="TextSlider2_description_system">입력한 문자를 반복하기 시작하기 전에 지연 시간을 변경하며, 권장 값은 0입니다..</v:String>
@@ -399,7 +399,7 @@
     <v:String x:Key="TglButton11_description_system">인터넷을 통해 다운로드한 exe, msi, bat, cmd 또는 기타 실행 파일을 실행할 때 Windows 보안 경고가 표시됩니다. 이러한 파일의 실행을 매번 확인하는 것은 꽤 지루할 수 있는데, 이 조정을 통해 이 경고를 비활성화할 수 있습니다.</v:String>
     <v:String x:Key="TglButton12_description_system">이 트윅은 예약된 작업을 비활성화하여 Windows 메모리 진단의 자동 실행을 차단합니다. 그 결과, 불필요한 검사가 없으므로 시스템 부팅 속도가 빨라지며 필요할 때 수동으로 진단을 실행할 수 있습니다.</v:String>
     <v:String x:Key="TglButton13_description_system">이 트윅은 Teredo, ISATAP 및 IPv6 프로토콜을 비활성화하며, 이는 일반적으로 대부분의 사용자에게 필요하지 않습니다. 그러나 업무용 또는 기업용 기기에서 사용하면 네트워크 문제나 일부 서비스의 비정상적인 작동을 초래할 수 있으므로 권장되지 않습니다.</v:String>
-    <v:String x:Key="TglButton14_description_system">이 조정에는 대용량 파일 시스템 캐시에 대한 지원이 포함됩니다. 파일 시스템 캐시 크기를 늘리면 일반적으로 컴퓨터 성능이 향상되지만 애플리케이션과 서비스에 사용할 수 있는 물리적 메모리 공간이 줄어듭니다.</v:String>
+    <v:String x:Key="TglButton14_description_system">이 조정에는 대용량 파일 시스템 캐시에 대한 지원이 포함됩니다. 파일 시스템 캐시 크기를 늘리면 일반적으로 컴퓨터 성능이 향상되지만 응용 프로그램과 서비스에 사용할 수 있는 물리적 메모리 공간이 줄어듭니다.</v:String>
     <v:String x:Key="TglButton15_description_system">기본적으로 Windows에는 시작 프로그램 속도를 늦추는 메커니즘이 내장되어 있습니다. 이 솔루션은 HDD가 장착된 구형 컴퓨터에서는 잘 작동하지만 SSD가 장착된 최신 PC에서는 프로그램 시작 속도가 불필요하게 느려집니다.</v:String>
     <v:String x:Key="TglButton16_description_system">이 트윅은 빠른 실행 패널에 표시되는 파일과 폴더의 사용 기록 기록을 비활성화합니다. 즉, 시스템은 더 이상 최근에 활성화된 항목들을 자동으로 저장하고 표시하지 않습니다.</v:String>
     <v:String x:Key="TglButton17_description_system">이 조정은 탐색기에서 열려고 하는 컴퓨터에 연결된 다양한 이동식 미디어 유형에 대한 자동 실행을 비활성화합니다. 따라서 사용자가 모르는 프로그램은 안정성이 확실하지 않은 미디어에서 자동으로 열리지 않습니다.</v:String>
@@ -408,8 +408,8 @@
     <v:String x:Key="TglButton20_description_system">방화벽은 프로그램의 인터넷 접근을 조절할 수 있게 하여, 연결을 허용하거나 차단하고 트래픽을 제어하는 기능을 제공합니다. 자신이 무엇을 하고 있는지 확신하고 이해한다면 방화벽을 비활성화할 수 있지만, 대부분의 사용자에게는 방화벽을 활성화한 상태로 두는 것이 권장됩니다.</v:String>
     <v:String x:Key="TglButton21_description_system">게임 모드는 강력한 시스템에는 큰 영향을 미치지 않습니다. 하지만 백그라운드에서 프로세스가 많이 실행되는 경우 백그라운드 프로세스가 게임 작동에 영향을 미치지 않도록 보장합니다.</v:String>
     <v:String x:Key="TglButton22_description_system">게임을 녹화하는 기능입니다. 전반적으로 시스템의 리소스를 소모합니다. 더 나은 대안이 많이 있으며, 또한 자발적으로 열리지 않습니다.</v:String>
-    <v:String x:Key="TglButton23_description_system">Some applications allow you to manage background activity, which determines what they can do when they are in the background and not actively used. In general, disabling background applications will help reduce network load, as well as CPU load and power consumption, which is useful for laptops because it prolongs battery life.</v:String>
-    <v:String x:Key="TglButton24_description_system">Reserved storage is designed to provide a predictable allocation of free space that will be used by updates, applications, temporary files, and the system cache. Disabling it can free up a significant amount of space. However, if you have enough free space, it is not recommended to do this, you will not receive any additional benefits.</v:String>
+    <v:String x:Key="TglButton23_description_system">일부 응용 프로그램을 사용하면 백그라운드 활동을 관리할 수 있으며, 백그라운드에서 활발하게 사용하지 않을 때 백그라운드 활동이 무엇을 할 수 있는지 결정합니다. 일반적으로 백그라운드 응용 프로그램을 비활성화하면 네트워크 부하는 물론 CPU 부하와 전력 소비를 줄이는 데 도움이 되며, 이는 배터리 수명을 연장하기 때문에 노트북에 유용합니다.</v:String>
+    <v:String x:Key="TglButton24_description_system">예약 저장소는 업데이트, 응용 프로그램, 임시 파일 및 시스템 캐시에서 사용할 수 있는 예상 가능한 여유 공간 할당을 제공하도록 설계되었습니다. 이를 비활성화하면 상당한 양의 공간을 확보할 수 있습니다. 그러나 충분한 여유 공간이 있는 경우 이 작업을 권장하지 않으므로 추가 혜택을 받을 수 없습니다.</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->
@@ -453,7 +453,7 @@
     <v:String x:Key="title_disablepoint_more">보호 기능 비활성화</v:String>
     <v:String x:Key="text_disablepoint_more">시스템 복원 지점을 비활성화하지만 이전에 생성한 복원 지점은 삭제됩니다.</v:String>
     <v:String x:Key="btn_disable">비활성화</v:String>
-    <v:String x:Key="btn_enable">켜다</v:String>
+    <v:String x:Key="btn_enable">활성화</v:String>
     <v:String x:Key="title_defrag_off_more">조각 모음 끄기</v:String>
     <v:String x:Key="text_defrag_off_more">조각 모음을 비활성화하여 SSD의 수명을 연장하고 불필요한 쓰기로부터 저장합니다.</v:String>
     <v:String x:Key="title_defrag_on_more">조각 모음 켜기</v:String>
@@ -462,13 +462,13 @@
     <v:String x:Key="text_compression_more">파일을 압축하여 크기를 줄임으로써 특히 텍스트 파일의 경우 디스크 공간을 손실 없이 절약할 수 있습니다.</v:String>
     <v:String x:Key="title_decompression_more">NTFS 압축 해제</v:String>
     <v:String x:Key="text_decompression_more">압축을 해제하여 파일을 원래 크기로 복원하고 접근 속도를 높입니다.</v:String>
-    <v:String x:Key="btn_overview">개요</v:String>
+    <v:String x:Key="btn_overview">요약</v:String>
 
-    <v:String x:Key="title_over_more">Disk Cleanup Confirmation</v:String>
-    <v:String x:Key="text_over_more">Your disk contains a Windows.old folder holding files from a previous version of Windows that are taking up a significant amount of space. Please note: once this folder is deleted, its contents cannot be restored, so be sure you’ve saved any files you need.</v:String>
-    <v:String x:Key="question_over_more">Do you want to proceed with the cleanup and delete the Windows.old folder?</v:String>
-    <v:String x:Key="btn_agree">Agree</v:String>
-    <v:String x:Key="btn_decline">Decline</v:String>
+    <v:String x:Key="title_over_more">디스크 정리 확인</v:String>
+    <v:String x:Key="text_over_more">디스크에는 이전 버전의 Windows 파일을 보관하는 Windows.old 폴더가 포함되어 있어 상당한 공간을 차지하고 있습니다. 참고: 이 폴더를 삭제하면 내용을 복원할 수 없으므로 필요한 파일을 저장했는지 확인하세요.</v:String>
+    <v:String x:Key="question_over_more">정리를 진행하고 Windows.old 폴더를 삭제하시겠습니까?</v:String>
+    <v:String x:Key="btn_agree">동의</v:String>
+    <v:String x:Key="btn_decline">거절</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>

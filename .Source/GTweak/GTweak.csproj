@@ -277,7 +277,7 @@
     <Compile Include="Utilities\Helpers\Managers\ExplorerManager.cs" />
     <Compile Include="Utilities\Helpers\Storage\WinKeyStorage.cs" />
     <Compile Include="Utilities\Helpers\Managers\TaskSchedulerManager.cs" />
-    <Compile Include="Utilities\Helpers\Managers\UnarchiveManager.cs" />
+    <Compile Include="Utilities\Helpers\Managers\ArchiveManager.cs" />
     <Compile Include="Utilities\Helpers\BackgroundQueue.cs" />
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />
     <Compile Include="Utilities\Controls\SettingsRepository.cs" />
