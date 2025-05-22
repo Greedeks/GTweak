@@ -117,8 +117,8 @@
     <v:String x:Key="title_update">Aggiornamento trovato</v:String>
     <v:String x:Key="text_update">È disponibile una nuova versione del programma. Aggiorna per nuove funzionalità e correzioni di bug.</v:String>
     <v:String x:Key="btn_upd">Aggiorna</v:String>
-    <v:String x:Key="btn_log">Scaricamento</v:String>
-    <v:String x:Key="download_update">Scaricamento…</v:String>
+    <v:String x:Key="btn_log">Modifiche</v:String>
+    <v:String x:Key="download_update">Scaricamento</v:String>
     <v:String x:Key="noty_update">Attendere il completamento del download</v:String>
     <v:String x:Key="connection_update">Connessione al server</v:String>
     <!--#endregion-->
