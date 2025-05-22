@@ -28,4 +28,4 @@ jobs:
         with:
           name: build
           path: |
-            Source/GTweak/bin/Release/
+            .Source/GTweak/bin/Release/
