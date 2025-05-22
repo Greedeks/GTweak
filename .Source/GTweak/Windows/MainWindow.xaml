@@ -239,7 +239,7 @@
 
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Text="{DynamicResource cmbox_lang_main}"/>
-                                        <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
+                                        <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" MaxDropDownHeight="220" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
                                             <TextBlock Text="{DynamicResource cmbox_en_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_fr_main}"/>
                                             <TextBlock Text="{DynamicResource cmbox_it_main}"/>
