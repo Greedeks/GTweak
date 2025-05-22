@@ -1,8 +1,7 @@
-name: Build .NET Framework 4.8 App
+name: Release Build
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
   pull_request:
     branches: [ main ]
 
