@@ -21,7 +21,7 @@ jobs:
         run: nuget restore GTweak.sln
 
       - name: Build the solution (Release, AnyCPU)
-        run: msbuild GTweak.sln /t:Rebuild /p:Configuration=Release;Platform="Any CPU"
+        run: msbuild GTweak.sln /t:Rebuild /p:Configuration=Release;Platform=AnyCPU
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
