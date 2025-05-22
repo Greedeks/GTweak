@@ -11,7 +11,7 @@
     <v:String x:Key="text1_load">Verifica dei dati</v:String>
     <v:String x:Key="text2_load">Visualizzazione del registro</v:String>
     <v:String x:Key="text3_load">Analisi dell'applicazione</v:String>
-    <v:String x:Key="text4_load">Visualizzazione della configurazione</v:String>
+    <v:String x:Key="text4_load">Configurazione</v:String>
     <v:String x:Key="text5_load">Verifica della connessione</v:String>
     <v:String x:Key="text6_load">Inizializzazione</v:String>
     <!--#endregion-->
@@ -114,11 +114,11 @@
 
     <!--#region Update Window -->
     <v:String x:Key="title_win_update">Aggiornamento</v:String>
-    <v:String x:Key="title_update">È stato trovato un aggiornamento</v:String>
+    <v:String x:Key="title_update">Aggiornamento trovato</v:String>
     <v:String x:Key="text_update">È disponibile una nuova versione del programma. Aggiorna per nuove funzionalità e correzioni di bug.</v:String>
     <v:String x:Key="btn_upd">Aggiorna</v:String>
-    <v:String x:Key="btn_log">Registro modifiche</v:String>
-    <v:String x:Key="download_update">Download in corso</v:String>
+    <v:String x:Key="btn_log">Scaricamento</v:String>
+    <v:String x:Key="download_update">Scaricamento…</v:String>
     <v:String x:Key="noty_update">Attendere il completamento del download</v:String>
     <v:String x:Key="connection_update">Connessione al server</v:String>
     <!--#endregion-->
