@@ -29,8 +29,8 @@ namespace GTweak.Utilities.Controls
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
-        internal static string[] AvailableLangs = { "en", "fr", "it", "ko", "ru", "uk" };
-        internal static string[] AvailableThemes = { "Dark", "Light", "Cobalt", "Dark amethyst", "Cold Blue", "System" };
+        internal static readonly string[] AvailableLangs = { "en", "fr", "it", "ko", "ru", "uk" };
+        internal static readonly string[] AvailableThemes = { "Dark", "Light", "Cobalt", "Dark amethyst", "Cold Blue", "System" };
 
         internal static int PID = 0;
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
@@ -66,7 +66,7 @@ namespace GTweak.Utilities.Controls
             RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", key, value.ToString(), RegistryValueKind.String);
         }
 
-        internal void СheckingParameters()
+        internal static void СheckingParameters()
         {
             bool isRegistryEmpty = false;
 

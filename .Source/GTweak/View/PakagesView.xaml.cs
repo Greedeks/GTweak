@@ -30,7 +30,7 @@ namespace GTweak.View
 
             _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                if (_time.TotalSeconds % 5 == 0)
+                if ((int)_time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.DoWork += delegate { new UninstallingPakages().LoadInstalledPackages(); };

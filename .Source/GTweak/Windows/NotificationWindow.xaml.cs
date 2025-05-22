@@ -107,8 +107,6 @@ namespace GTweak.Windows
 
                 BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
                 BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.25));
-
-
             });
         }
 

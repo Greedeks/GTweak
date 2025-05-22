@@ -21,7 +21,7 @@ namespace GTweak.Utilities.Tweaks
 
         private static bool IsVersionWindows(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(SystemDiagnostics.HardwareData.OSVersion).Count == words;
 
-        internal void LicenseStatus()
+        internal static void LicenseStatus()
         {
             Parallel.Invoke(() =>
             {
@@ -74,7 +74,7 @@ namespace GTweak.Utilities.Tweaks
 
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", originalGeo, RegistryValueKind.String);
 
-                new WindowsLicense().LicenseStatus();
+                LicenseStatus();
 
                 await Task.Delay(2000);
 
@@ -89,7 +89,7 @@ namespace GTweak.Utilities.Tweaks
                     await CommandExecutor.InvokeRunCommand("/c slmgr.vbs //b /skms kms.digiboy.ir");
                     await CommandExecutor.InvokeRunCommand("/c slmgr.vbs //b /ato");
 
-                    new WindowsLicense().LicenseStatus();
+                    LicenseStatus();
 
                     await Task.Delay(2000);
 

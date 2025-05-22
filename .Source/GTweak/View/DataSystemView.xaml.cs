@@ -39,17 +39,17 @@ namespace GTweak.View
 
             _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, async delegate
             {
-                if (_time.TotalSeconds % 2 == 0)
+                if ((int)_time.TotalSeconds % 2 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(async delegate
+                    await backgroundQueue.QueueTask(delegate
                     {
                         new SystemDiagnostics().UpdatingDevicesData();
-                        await new MonitoringSystem().GetTotalProcessorUsage();
+                        new MonitoringSystem().GetTotalProcessorUsageAsync();
                     });
                     Application.Current.Dispatcher.Invoke(AnimationProgressBars);
                 }
-                else if (_time.TotalSeconds % 5 == 0)
+                else if ((int)_time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(delegate { new SystemDiagnostics().GetUserIpAddress(); });

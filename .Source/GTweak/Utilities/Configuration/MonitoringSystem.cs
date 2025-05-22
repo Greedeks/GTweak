@@ -66,22 +66,28 @@ namespace GTweak.Utilities.Configuration
             return (int)((float)(totalMemory - availableMemory) / totalMemory * 100);
         }
 
-        internal async Task<int> GetTotalProcessorUsage()
+        internal async void GetTotalProcessorUsageAsync()
         {
             try
             {
                 static ulong ConvertTimeToTicks(SystemTime systemTime) => ((ulong)systemTime.dwHighDateTime << 32) | systemTime.dwLowDateTime;
 
                 if (!GetSystemTimes(out SystemTime idleTime, out SystemTime kernelTime, out SystemTime userTime))
-                    return 0;
+                {
+                    GetProcessorUsage = 1;
+                    return;
+                }
 
                 ulong idleTicks = ConvertTimeToTicks(idleTime);
                 ulong totalTicks = ConvertTimeToTicks(kernelTime) + ConvertTimeToTicks(userTime);
 
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 if (!GetSystemTimes(out idleTime, out kernelTime, out userTime))
-                    return 0;
+                {
+                    GetProcessorUsage = 1;
+                    return;
+                }
 
                 ulong newIdleTicks = ConvertTimeToTicks(idleTime);
                 ulong newTotalTicks = ConvertTimeToTicks(kernelTime) + ConvertTimeToTicks(userTime);
@@ -89,12 +95,12 @@ namespace GTweak.Utilities.Configuration
                 ulong totalTicksDiff = newTotalTicks - totalTicks;
 
                 GetProcessorUsage = (int)(100.0 * (totalTicksDiff - (newIdleTicks - idleTicks)) / totalTicksDiff);
-                return GetProcessorUsage;
+
             }
             catch (Exception ex)
             {
                 ErrorLogging.LogDebug(ex);
-                return 0;
+                GetProcessorUsage = 1;
             }
         }
     }

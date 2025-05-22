@@ -73,7 +73,7 @@
                                         </Style>
                                     </Image.Style>
                                 </Image>
-                                <TextBlock Text="{DynamicResource title_update}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="18px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,0,0,0"/>
+                                <TextBlock Text="{DynamicResource title_update}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="19px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,0,0,0"/>
                             </StackPanel>
                             <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="16px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,3,0,0">
                                     <Run x:Name="CurrentVerison" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/>
@@ -100,7 +100,7 @@
                                     </Style>
                                 </Image.Style>
                             </Image>
-                            <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="20px" HorizontalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0">
+                            <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="19px" HorizontalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0">
                                 <Run Text="{DynamicResource download_update}"/>
                                 <Run Text="“"/><Run Text="GTweak" Foreground="{StaticResource Color_Accent}"/>
                                 <Run x:Name="DownloadVersion" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/><Run Text="”"/>

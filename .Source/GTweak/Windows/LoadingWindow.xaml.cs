@@ -41,18 +41,16 @@ namespace GTweak.Windows
                 Thread.Sleep(17);
             }
 
-
-            static void ExecuteWithLogging(Action action, string methodName)
+            static void ExecuteWithLogging(Action action, string member)
             {
                 try { action(); }
-                catch (Exception ex) { ErrorLogging.LogWritingFile(ex, methodName); }
+                catch (Exception ex) { ErrorLogging.LogWritingFile(ex, member); }
             }
 
-
             Parallel.Invoke(
-                () => ExecuteWithLogging(() => SettingsRepository.PID = TrustedInstaller.StartTrustedInstallerService(), nameof(SettingsRepository.PID)),
-                () => ExecuteWithLogging(new SettingsRepository().СheckingParameters, nameof(SettingsRepository.СheckingParameters)),
-                () => ExecuteWithLogging(new WindowsLicense().LicenseStatus, nameof(WindowsLicense.LicenseStatus)),
+                () => ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService)),
+                () => ExecuteWithLogging(SettingsRepository.СheckingParameters, nameof(SettingsRepository.СheckingParameters)),
+                () => ExecuteWithLogging(WindowsLicense.LicenseStatus, nameof(WindowsLicense.LicenseStatus)),
                 () => ExecuteWithLogging(new SystemDiagnostics().GetHardwareData, nameof(SystemDiagnostics.GetHardwareData)),
                 () => ExecuteWithLogging(new SystemDiagnostics().ValidateVersionUpdates, nameof(SystemDiagnostics.ValidateVersionUpdates)),
                 () => ExecuteWithLogging(new UninstallingPakages().LoadInstalledPackages, nameof(UninstallingPakages.LoadInstalledPackages)),
@@ -61,9 +59,7 @@ namespace GTweak.Windows
                 () => ExecuteWithLogging(new SystemTweaks().ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus))
             );
 
-
-            MonitoringSystem monitoringSystem = new MonitoringSystem();
-            ExecuteWithLogging(async () => await monitoringSystem.GetTotalProcessorUsage(), nameof(monitoringSystem.GetTotalProcessorUsage));
+            ExecuteWithLogging(new MonitoringSystem().GetTotalProcessorUsageAsync, nameof(MonitoringSystem.GetTotalProcessorUsageAsync));
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

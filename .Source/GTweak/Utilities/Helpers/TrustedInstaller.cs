@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTweak.Utilities.Controls;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -178,8 +179,9 @@ namespace GTweak.Utilities.Helpers
             return false;
         }
 
-        internal static int StartTrustedInstallerService()
+        internal static void StartTrustedInstallerService()
         {
+            CommandExecutor.RunCommand("/c sc config TrustedInstaller start= demand && sc start TrustedInstaller");
             IntPtr hSCManager = OpenSCManager(null, ServicesActiveDatabase, SC_MANAGER_CONNECT | SC_MANAGER_ENUMERATE_SERVICE | SC_MANAGER_QUERY_LOCK_STATUS);
             if (hSCManager == IntPtr.Zero)
             {
@@ -214,7 +216,8 @@ namespace GTweak.Utilities.Helpers
                 {
                     CloseServiceHandle(hService);
                     CloseServiceHandle(hSCManager);
-                    return (int)statusBuffer.dwProcessId;
+                    SettingsRepository.PID = (int)statusBuffer.dwProcessId;
+                    return;
                 }
             }
 

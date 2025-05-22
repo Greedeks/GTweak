@@ -53,7 +53,6 @@ namespace GTweak.Assets.UserControl
         private static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => ((ToggleButton)s).ToggleText.Text = (string)e.NewValue));
 
-
         public ToggleButton()
         {
             InitializeComponent();
