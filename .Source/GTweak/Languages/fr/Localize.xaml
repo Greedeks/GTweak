@@ -114,7 +114,7 @@
 
     <!--#region Update Window -->
     <v:String x:Key="title_win_update">Mise à jour</v:String>
-    <v:String x:Key="title_update">Une mise à jour a été trouvée</v:String>
+    <v:String x:Key="title_update">Mise à jour disponible</v:String>
     <v:String x:Key="text_update">Une nouvelle version du programme est disponible. Mettez à jour pour bénéficier de nouvelles fonctionnalités et corrections de bugs.</v:String>
     <v:String x:Key="btn_upd">Mettre à jour</v:String>
     <v:String x:Key="btn_log">Modifications</v:String>
