@@ -84,11 +84,11 @@
     <v:String x:Key="btgl_update_main">업데이트 확인</v:String>
     <v:String x:Key="cmbox_lang_main">인터페이스 언어:</v:String>
     <v:String x:Key="cmbox_en_main">English (EN)</v:String>
-    <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
-    <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
-    <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
     <v:String x:Key="cmbox_fr_main">Français (FR)</v:String>
     <v:String x:Key="cmbox_it_main">Italiano (IT)</v:String>
+    <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
+    <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
+    <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
     <v:String x:Key="cmbox_theme_main">인터페이스 테마:</v:String>
     <v:String x:Key="cmbox_dark_main">어두운</v:String>
     <v:String x:Key="cmbox_light_main">밝은</v:String>

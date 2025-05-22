@@ -70,11 +70,11 @@ namespace GTweak
                 {
                     Source = (value == "be" ? "ru" : value) switch
                     {
-                        "ru" => new Uri("Languages/ru/Localize.xaml", UriKind.Relative),
-                        "ko" => new Uri("Languages/ko/Localize.xaml", UriKind.Relative),
-                        "uk" => new Uri("Languages/uk/Localize.xaml", UriKind.Relative),
                         "fr" => new Uri("Languages/fr/Localize.xaml", UriKind.Relative),
                         "it" => new Uri("Languages/it/Localize.xaml", UriKind.Relative),
+                        "ko" => new Uri("Languages/ko/Localize.xaml", UriKind.Relative),
+                        "ru" => new Uri("Languages/ru/Localize.xaml", UriKind.Relative),
+                        "uk" => new Uri("Languages/uk/Localize.xaml", UriKind.Relative),
                         _ => new Uri("Languages/en/Localize.xaml", UriKind.Relative),
                     }
                 };
