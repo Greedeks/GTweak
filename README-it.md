@@ -17,29 +17,29 @@
 <div align="center">
   <h1>🌍 Lingue Disponibili:</h1>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/16021/16021822.png" alt="Bandiera USA" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="Bandiera USA" width="40">
+</a>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598694.png" alt="Bandiera Corea" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="Bandiera Francia" width="40">
+</a>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598800.png" alt="Bandiera Russia" width="40">
-  </a>
-
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/7561/7561914.png" alt="Bandiera Ucraina" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Bandiera Italia" width="40">
+</a>
   
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
-   <img src="https://cdn-icons-png.flaticon.com/64/7561/7561888.png" alt="Bandiera Francia" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Bandiera Corea" width="40">
+</a>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
-   <img src="https://cdn-icons-png.flaticon.com/64/10600/10600917.png" alt="Bandiera Italia" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197408.png" alt="Bandiera Russia" width="40">
+</a>
+
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/5315/5315703.png" alt="Bandiera Ucraina" width="40">
+</a>
 </div>
 
 </div>
@@ -129,7 +129,7 @@ Piattaforma installata: .NET Framework 4.8
 ## Traduzioni ❤️
 - Coreano - [@VenusGirl](https://github.com/VenusGirl)
 - Ucraino - [@Kopejkin](https://github.com/Kopejkin)
-- Francese + Italiano - [@Zephyris](https://github.com/Zephyris-Pro)
+- Francese, Italiano - [@Zephyris](https://github.com/Zephyris-Pro)
 </br>
 
 ### Come Tradurre un Programma 📝

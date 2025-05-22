@@ -17,29 +17,29 @@
 <div align="center">
   <h1>🌍 Langues disponibles:</h1>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/16021/16021822.png" alt="Drapeau US" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="Drapeau US" width="40">
+</a>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598694.png" alt="Drapeau coréen" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="Drapeau Français" width="40">
+</a>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/10598/10598800.png" alt="Drapeau russe" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Drapeau Italien" width="40">
+</a>
+  
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Drapeau Coréen" width="40">
+</a>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
-    <img src="https://cdn-icons-png.flaticon.com/64/7561/7561914.png" alt="Drapeau ukrainien" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197408.png" alt="Drapeau Russe" width="40">
+</a>
 
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
-   <img src="https://cdn-icons-png.flaticon.com/64/7561/7561888.png" alt="Drapeau français" width="40">
-  </a>
-
-  <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
-   <img src="https://cdn-icons-png.flaticon.com/64/10600/10600917.png" alt="Drapeau Italien" width="40">
-  </a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/5315/5315703.png" alt="Drapeau Ukrainien" width="40">
+</a>
 </div>
 
 </div>
@@ -128,7 +128,7 @@ Plateforme installée: .NET Framework 4.8
 ## Traduction ❤️
 - Coréen - [@VenusGirl](https://github.com/VenusGirl)
 - Ukrainien - [@Kopejkin](https://github.com/Kopejkin)
-- Français + Italien - [@Zephyris](https://github.com/Zephyris-Pro)
+- Français, Italien - [@Zephyris](https://github.com/Zephyris-Pro)
 </br>
 
 ### Comment traduire le programme 📝
