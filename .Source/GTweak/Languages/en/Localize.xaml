@@ -354,16 +354,16 @@
     <!--#endregion-->
 
     <!--#region System Page -->
-    <v:String x:Key="slider1_system">The speed of the mouse cursor</v:String>
-    <v:String x:Key="slider2_system">Keyboard repeat delay</v:String>
-    <v:String x:Key="slider3_system">Keyboard repetition rate</v:String>
-    <v:String x:Key="text_system">Enter the text to check the keyboard settings</v:String>
-    <v:String x:Key="tgl1_system">Increased accuracy of the pointer installation</v:String>
-    <v:String x:Key="tgl2_system">Key sticking and input filtering</v:String>
-    <v:String x:Key="tgl3_system">Waiting time before turning off the lock screen</v:String>
+    <v:String x:Key="slider1_system">Mouse pointer speed:</v:String>
+    <v:String x:Key="slider2_system">Keyboard repeat delay:</v:String>
+    <v:String x:Key="slider3_system">Keyboard repetition rate:</v:String>
+    <v:String x:Key="text_system">Type here to test your keyboard settings</v:String>
+    <v:String x:Key="tgl1_system">Enhance pointer precision</v:String>
+    <v:String x:Key="tgl2_system">Sticky Keys and Filter Keys</v:String>
+    <v:String x:Key="tgl3_system">Console lock display off timeout</v:String>
     <v:String x:Key="tgl4_system">«Hibernation» and «Fast Startup» technology</v:String>
-    <v:String x:Key="tgl5_system">The shutdown warning window</v:String>
-    <v:String x:Key="tgl6_system">Auto-update of applications via the Microsoft Store</v:String>
+    <v:String x:Key="tgl5_system">Shutdown warning dialog</v:String>
+    <v:String x:Key="tgl6_system">Automatically update apps from the Microsoft Store</v:String>
     <v:String x:Key="tgl7_system">Sound delay in the Realtek Sound driver</v:String>
     <v:String x:Key="tgl8_system">Windows Defender, Antimalware, SmartScreen and VBS</v:String>
     <v:String x:Key="tgl9_system">UAC (User Account Control)</v:String>

@@ -354,9 +354,9 @@
     <!--#endregion-->
 
     <!--#region System Page -->
-    <v:String x:Key="slider1_system">Скорость курсора мыши</v:String>
-    <v:String x:Key="slider2_system">Задержка повтора клавиатуры</v:String>
-    <v:String x:Key="slider3_system">Скорость повторения клавиатуры</v:String>
+    <v:String x:Key="slider1_system">Скорость курсора мыши:</v:String>
+    <v:String x:Key="slider2_system">Задержка повтора клавиатуры:</v:String>
+    <v:String x:Key="slider3_system">Скорость повторения клавиатуры:</v:String>
     <v:String x:Key="text_system">Введите текст для проверки параметров клавиатуры</v:String>
     <v:String x:Key="tgl1_system">Повышенная точность установки указателя</v:String>
     <v:String x:Key="tgl2_system">Залипание клавиш и фильтрацию ввода</v:String>

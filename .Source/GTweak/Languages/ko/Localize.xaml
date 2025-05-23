@@ -354,9 +354,9 @@
     <!--#endregion-->
 
     <!--#region System Page -->
-    <v:String x:Key="slider1_system">마우스 커서 속도</v:String>
-    <v:String x:Key="slider2_system">키보드 반복 지연</v:String>
-    <v:String x:Key="slider3_system">키보드 반복 속도</v:String>
+    <v:String x:Key="slider1_system">마우스 커서 속도:</v:String>
+    <v:String x:Key="slider2_system">키보드 반복 지연:</v:String>
+    <v:String x:Key="slider3_system">키보드 반복 속도:</v:String>
     <v:String x:Key="text_system">키보드 설정을 확인하려면 텍스트를 입력하세요</v:String>
     <v:String x:Key="tgl1_system">포인터 설치의 정확성 향상</v:String>
     <v:String x:Key="tgl2_system">키 고정 및 입력 필터링</v:String>

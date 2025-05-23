@@ -357,9 +357,9 @@
     <!--#endregion-->
 
     <!--#region System Page -->
-    <v:String x:Key="slider1_system">Vitesse du curseur de la souris</v:String>
-    <v:String x:Key="slider2_system">Délai de répétition du clavier</v:String>
-    <v:String x:Key="slider3_system">Fréquence de répétition du clavier</v:String>
+    <v:String x:Key="slider1_system">Vitesse du curseur de la souris:</v:String>
+    <v:String x:Key="slider2_system">Délai de répétition du clavier:</v:String>
+    <v:String x:Key="slider3_system">Fréquence de répétition du clavier:</v:String>
     <v:String x:Key="text_system">Saisissez du texte pour tester les paramètres du clavier</v:String>
     <v:String x:Key="tgl1_system">Précision accrue du positionnement du pointeur</v:String>
     <v:String x:Key="tgl2_system">Blocage des touches et filtrage des entrées</v:String>

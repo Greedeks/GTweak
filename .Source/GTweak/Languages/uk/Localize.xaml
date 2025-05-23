@@ -354,9 +354,9 @@
     <!--#endregion-->
 
     <!--#region System Page -->
-    <v:String x:Key="slider1_system">Швидкість руху вказівника миші</v:String>
-    <v:String x:Key="slider2_system">Затримка повтору введення з клавіатури</v:String>
-    <v:String x:Key="slider3_system">Швидкість повтору клавіатури</v:String>
+    <v:String x:Key="slider1_system">Швидкість руху вказівника миші:</v:String>
+    <v:String x:Key="slider2_system">Затримка повтору введення з клавіатури:</v:String>
+    <v:String x:Key="slider3_system">Швидкість повтору клавіатури:</v:String>
     <v:String x:Key="text_system">Введіть текст для перевірки параметрів клавіатури</v:String>
     <v:String x:Key="tgl1_system">Підвищена точність встановлення вказівника</v:String>
     <v:String x:Key="tgl2_system">Залипання клавіш та фільтрація введення</v:String>
