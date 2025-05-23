@@ -69,7 +69,7 @@ namespace GTweak.Utilities.Tweaks
 
                 foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT Description, SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
-                    if (managementObj["Description"].ToString().Contains("GTweak"))
+                    if (managementObj["Description"].ToString().IndexOf("GTweak", StringComparison.OrdinalIgnoreCase) >= 0)
                         SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]));
                 }
 
