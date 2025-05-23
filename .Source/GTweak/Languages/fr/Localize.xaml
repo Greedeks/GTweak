@@ -30,7 +30,7 @@
     <!--#endregion-->
 
     <!--#region Notification Window -->
-    <v:String x:Key="title_win_notification">Notification</v:String>
+    <v:String x:Key="title_win_notification">Notification - GTweak</v:String>
     <v:String x:Key="title_warn_notification">Attention</v:String>
     <v:String x:Key="title_info_notification">Information</v:String>
     <v:String x:Key="logout_notification">Une déconnexion est requise, cliquez sur ce texte pour l’effectuer</v:String>
@@ -102,9 +102,9 @@
     <!--#endregion-->
 
     <!--#region Import Window -->
-    <v:String x:Key="title_win_import">Importation des réglages</v:String>
-    <v:String x:Key="wait_win_import">Cela prendra un certain temps</v:String>
-    <v:String x:Key="warning_win_import">Il n’est pas nécessaire de fermer la fenêtre de force</v:String>
+    <v:String x:Key="title_import">Importation des réglages</v:String>
+    <v:String x:Key="wait_import">Cela prendra un certain temps</v:String>
+    <v:String x:Key="warn_import">Il n’est pas nécessaire de fermer la fenêtre de force</v:String>
     <v:String x:Key="file_import">Fichier</v:String>
     <!--#endregion-->
 
@@ -113,7 +113,7 @@
     <!--#endregion-->
 
     <!--#region Update Window -->
-    <v:String x:Key="title_win_update">Mise à jour</v:String>
+    <v:String x:Key="title_win_update">Mise à jour - GTweak</v:String>
     <v:String x:Key="title_update">Mise à jour disponible</v:String>
     <v:String x:Key="text_update">Une nouvelle version du programme est disponible. Mettez à jour pour bénéficier de nouvelles fonctionnalités et corrections de bugs.</v:String>
     <v:String x:Key="btn_upd">Mettre à jour</v:String>

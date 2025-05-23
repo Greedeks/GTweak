@@ -30,7 +30,7 @@
     <!--#endregion-->
 
     <!--#region Notification Window -->
-    <v:String x:Key="title_win_notification">Сповіщення</v:String>
+    <v:String x:Key="title_win_notification">Сповіщення - GTweak</v:String>
     <v:String x:Key="title_warn_notification">Увага</v:String>
     <v:String x:Key="title_info_notification">Інформація</v:String>
     <v:String x:Key="logout_notification">Потрібно вийти з системи. Натисніть на цей текст, щоб зробити це</v:String>
@@ -102,9 +102,9 @@
     <!--#endregion-->
 
     <!--#region Import Window -->
-    <v:String x:Key="title_win_import">Імпорт налаштувань</v:String>
-    <v:String x:Key="wait_win_import">На це потрібен деякий час</v:String>
-    <v:String x:Key="warning_win_import">Немає потреби примусово закривати вікно</v:String>
+    <v:String x:Key="title_import">Імпорт налаштувань</v:String>
+    <v:String x:Key="wait_import">На це потрібен деякий час</v:String>
+    <v:String x:Key="warn_import">Немає потреби примусово закривати вікно</v:String>
     <v:String x:Key="file_import">Файл</v:String>
     <!--#endregion-->
 
@@ -113,7 +113,7 @@
     <!--#endregion-->
 
     <!--#region Update Window -->
-    <v:String x:Key="title_win_update">Оновити</v:String>
+    <v:String x:Key="title_win_update">Оновити - GTweak</v:String>
     <v:String x:Key="title_update">Знайдено оновлення</v:String>
     <v:String x:Key="text_update">Доступна нова версія програми. Оновіть програму, щоб отримати нові функції та виправити помилки.</v:String>
     <v:String x:Key="btn_upd">Оновити</v:String>

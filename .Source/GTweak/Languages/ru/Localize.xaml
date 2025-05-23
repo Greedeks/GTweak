@@ -30,7 +30,7 @@
     <!--#endregion-->
 
     <!--#region Notification Window -->
-    <v:String x:Key="title_win_notification">Уведомление</v:String>
+    <v:String x:Key="title_win_notification">Уведомление - GTweak</v:String>
     <v:String x:Key="title_warn_notification">Внимание</v:String>
     <v:String x:Key="title_info_notification">Информация</v:String>
     <v:String x:Key="logout_notification">Требуется выход, нажмите на данный текст, чтобы произвести его</v:String>
@@ -102,9 +102,9 @@
     <!--#endregion-->
 
     <!--#region Import Window -->
-    <v:String x:Key="title_win_import">Импорт твиков</v:String>
-    <v:String x:Key="wait_win_import">Это занимает некоторое время</v:String>
-    <v:String x:Key="warning_win_import">Принудительно закрывать окно нет необходимости</v:String>
+    <v:String x:Key="title_import">Импорт твиков</v:String>
+    <v:String x:Key="wait_import">Это занимает некоторое время</v:String>
+    <v:String x:Key="warn_import">Принудительно закрывать окно нет необходимости</v:String>
     <v:String x:Key="file_import">Файл</v:String>
     <!--#endregion-->
 
@@ -113,7 +113,7 @@
     <!--#endregion-->
 
     <!--#region Update Window -->
-    <v:String x:Key="title_win_update">Обновление</v:String>
+    <v:String x:Key="title_win_update">Обновление - GTweak</v:String>
     <v:String x:Key="title_update">Найдено обновление</v:String>
     <v:String x:Key="text_update">Вам доступна новая версия программы. Обновите ее для получения новых функций и исправления ошибок.</v:String>
     <v:String x:Key="btn_upd">Обновить</v:String>
