@@ -24,17 +24,17 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Width="Auto" Height="Auto">
                         <StackPanel x:Name="TextSlider1" Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="20,0,0,0" MouseEnter="TweakSlider_MouseEnter" MouseLeave="Tweak_MouseLeave">
                             <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_Highlighted}" Margin="0,2,0,0" Text="{DynamicResource slider1_system}"/>
-                            <Slider x:Name="Slider1" Style="{StaticResource VerticalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="20" Margin="7,13,0,0"  Width="150" ValueChanged="Sliders_ValueChanged"/>
+                            <Slider x:Name="Slider1" Style="{StaticResource VerticalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="20" Margin="7,12,0,0"  Width="150" ValueChanged="Sliders_ValueChanged"/>
                         </StackPanel>
 
                         <StackPanel x:Name="TextSlider2" Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="20,4,0,0" MouseEnter="TweakSlider_MouseEnter" MouseLeave="Tweak_MouseLeave">
                             <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_Highlighted}" Margin="0,2,0,0" Text="{DynamicResource slider2_system}"/>
-                            <Slider x:Name="Slider2" Style="{StaticResource VerticalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="3" Margin="7,13,0,0"  Width="150" ValueChanged="Sliders_ValueChanged"/>
+                            <Slider x:Name="Slider2" Style="{StaticResource VerticalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="3" Margin="7,12,0,0"  Width="150" ValueChanged="Sliders_ValueChanged"/>
                         </StackPanel>
 
                         <StackPanel x:Name="TextSlider3" Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="20,4,0,0" MouseEnter="TweakSlider_MouseEnter" MouseLeave="Tweak_MouseLeave">
                             <TextBlock Style="{StaticResource Text}" Foreground="{StaticResource Color_Highlighted}" Margin="0,2,0,0" Text="{DynamicResource slider3_system}"/>
-                            <Slider x:Name="Slider3" Style="{StaticResource VerticalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="31" Margin="7,13,0,0"  Width="170" ValueChanged="Sliders_ValueChanged"/>
+                            <Slider x:Name="Slider3" Style="{StaticResource VerticalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="31" Margin="7,12,0,0"  Width="170" ValueChanged="Sliders_ValueChanged"/>
                         </StackPanel>
 
                         <TextBox x:Name="TestKeybSettings"  Margin="-100,5,0,0" Tag="{DynamicResource text_system}" Width="400" MaxLength="50" Cursor="IBeam"/>

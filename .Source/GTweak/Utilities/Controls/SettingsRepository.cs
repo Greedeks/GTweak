@@ -39,31 +39,38 @@ namespace GTweak.Utilities.Controls
 
         private static readonly Dictionary<string, object> _defaultSettings = new Dictionary<string, object>
         {
-            ["Notification"] = true,
-            ["Update"] = true,
-            ["TopMost"] = false,
-            ["Sound"] = true,
-            ["Volume"] = 50,
+            ["EnableNotifications"] = true,
+            ["EnableAutoUpdate"] = true,
+            ["EnableTopMost"] = false,
+            ["EnableIpBlur"] = true,
+            ["EnableSound"] = true,
+            ["VolumeLevel"] = 50,
             ["Language"] = App.GettingSystemLanguage,
-            ["Theme"] = "Dark",
-            ["HiddenIP"] = true
+            ["Theme"] = "Dark"
         };
 
         private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);
 
-        internal static bool IsViewNotification { get => (bool)_cachedSettings["Notification"]; set => ChangingParameters(value, "Notification"); }
-        internal static bool IsUpdateCheckRequired { get => (bool)_cachedSettings["Update"]; set => ChangingParameters(value, "Update"); }
-        internal static bool IsTopMost { get => (bool)_cachedSettings["TopMost"]; set => ChangingParameters(value, "TopMost"); }
-        internal static bool IsPlayingSound { get => (bool)_cachedSettings["Sound"]; set => ChangingParameters(value, "Sound"); }
-        internal static int Volume { get => (int)_cachedSettings["Volume"]; set => ChangingParameters(value, "Volume"); }
-        internal static string Language { get => (string)_cachedSettings["Language"]; set => ChangingParameters(value, "Language"); }
-        internal static string Theme { get => (string)_cachedSettings["Theme"]; set => ChangingParameters(value, "Theme"); }
-        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["HiddenIP"]; set => ChangingParameters(value, "HiddenIP"); }
+        internal static bool IsViewNotification { get => (bool)_cachedSettings["EnableNotifications"]; set => ChangingParameters("EnableNotifications", value); }
+        internal static bool IsUpdateCheckRequired { get => (bool)_cachedSettings["EnableAutoUpdate"]; set => ChangingParameters("EnableAutoUpdate", value); }
+        internal static bool IsTopMost { get => (bool)_cachedSettings["EnableTopMost"]; set => ChangingParameters("EnableTopMost", value); }
+        internal static bool IsPlayingSound { get => (bool)_cachedSettings["EnableSound"]; set => ChangingParameters("EnableSound", value); }
+        internal static int Volume { get => (int)_cachedSettings["VolumeLevel"]; set => ChangingParameters("VolumeLevel", value); }
+        internal static string Language { get => (string)_cachedSettings["Language"]; set => ChangingParameters("Language", value); }
+        internal static string Theme { get => (string)_cachedSettings["Theme"]; set => ChangingParameters("Theme", value); }
+        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["EnableIpBlur"]; set => ChangingParameters("EnableIpBlur", value); }
 
-        private static void ChangingParameters<T>(T value, string key)
+        private static void ChangingParameters(string key, object value)
         {
+            var (regValue, kind) = value switch
+            {
+                bool valueBool => (valueBool ? 1 : 0, RegistryValueKind.DWord),
+                int valueInt => (valueInt, RegistryValueKind.DWord),
+                _ => ((object)value?.ToString(), RegistryValueKind.String)
+            };
+
             _cachedSettings[key] = value;
-            RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", key, value.ToString(), RegistryValueKind.String);
+            RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", key, regValue, kind);
         }
 
         internal static void СheckingParameters()
@@ -82,15 +89,15 @@ namespace GTweak.Utilities.Controls
             if (isRegistryEmpty)
             {
                 foreach (var subkey in _defaultSettings)
-                    ChangingParameters(subkey.Value, subkey.Key);
+                    ChangingParameters(subkey.Key, subkey.Value);
             }
             else
             {
                 foreach (var kv in _defaultSettings)
                 {
-                    _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultBool) :
-                        kv.Value is int defaultInt ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultInt) :
-                        kv.Value is string defaultString ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultString) : kv.Value;
+                    _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultBool ? 1 : 0) is int asBool ? asBool != 0 : defaultBool :
+                          kv.Value is int defaultInt ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultInt) :
+                          kv.Value is string defaultString ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultString) : kv.Value;
                 }
             }
         }
