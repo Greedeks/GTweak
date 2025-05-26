@@ -11,6 +11,7 @@ using System.Linq;
 using System.Management;
 using System.Net;
 using System.Net.Http;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -80,20 +81,13 @@ namespace GTweak.Utilities.Configuration
         internal static bool isIPAddressFormatValid = false;
 
 
-        internal ImageSource GetProfileImage()
+        internal static ImageSource GetProfileImage()
         {
-            try
-            {
-                RegistryKey regKey = default, ourKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users", true);
-
-                foreach (string keyname in ourKey!.GetSubKeyNames())
-                    regKey = ourKey!.OpenSubKey(keyname);
-                return new BitmapImage(new Uri(regKey?.GetValue("Image1080").ToString() ?? string.Empty));
-            }
-            catch { return null; }
+            string imageSrc = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users\{WindowsIdentity.GetCurrent().User?.Value}", "Image1080", string.Empty);
+            return !string.IsNullOrWhiteSpace(imageSrc) ? new BitmapImage(new Uri(imageSrc)) : Application.Current.Resources["DI_AvatarProfile"] as ImageSource;
         }
 
-        internal string GetProfileName()
+        internal static string GetProfileName()
         {
             string nameProfile = string.Empty;
 

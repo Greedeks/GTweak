@@ -1,7 +1,6 @@
 ﻿using GTweak.Utilities.Configuration;
 using System;
 using System.Reflection;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -17,9 +16,9 @@ namespace GTweak.Core.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ImageSource DisplayProfileAvatar => new SystemDiagnostics().GetProfileImage() ?? Application.Current.Resources["DI_AvatarProfile"] as DrawingImage;
+        public ImageSource DisplayProfileAvatar => SystemDiagnostics.GetProfileImage();
 
-        public string DisplayProfileName => new SystemDiagnostics().GetProfileName();
+        public string DisplayProfileName => SystemDiagnostics.GetProfileName();
 
         public string DisplayTweakVersion => (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 
