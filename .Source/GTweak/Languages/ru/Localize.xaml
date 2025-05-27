@@ -184,7 +184,7 @@
     <v:String x:Key="tgl18_interface">Показывать советы и предложения (Windows 11)</v:String>
     <v:String x:Key="tgl19_interface">Компактный режим элементов проводника (Windows 11)</v:String>
     <v:String x:Key="tgl20_interface">Помощники «Copilot» и «Recall» (Windows 11)</v:String>
-    <v:String x:Key="tgl21_interface">«Завершить задачу» при ПКМ по приложению (Windows 11)</v:String>
+    <v:String x:Key="tgl21_interface">«Завершить задачу» ПКМ по приложению (Windows 11)</v:String>
     <v:String x:Key="tgl22_interface">Значки и кнопки на панели задач</v:String>
     <v:String x:Key="tgl23_interface">Показывать персонализированную рекламу</v:String>
     <v:String x:Key="tgl24_interface">Восстанавливать прежние окна папок при входе</v:String>
@@ -204,7 +204,7 @@
     <v:String x:Key="TglButton2_description_interface">Изменит цвет всплывающей подсказки в некоторых программах с жёлтого на светло голубой «небесная лазурь».</v:String>
     <v:String x:Key="TglButton3_description_interface">Твик уменьшит размер кнопок Свернуть, Развернуть, Закрыть делая их менее громоздкими. Изменяет размер для всех окон, включая Проводник, фотографии, браузеры и другие известные вам программы.</v:String>
     <v:String x:Key="TglButton4_description_interface">Твик ускоряет частоту мерцания текстового курсора. По умолчанию она составляет каждые 530 миллисекунд.</v:String>
-    <v:String x:Key="TglButton5_description_interface">Твик сделает тоньше толщину полосы прокрутки (scrollbar) в окнах, включая браузеры и программы. За исключением современных интерфейсов приложений.</v:String>
+    <v:String x:Key="TglButton5_description_interface">Твик уменьшает толщину полосы прокрутки в классических приложениях Windows, включая проводник, браузеры и другие программы. Однако он не влияет на современные интерфейсы, поскольку они используют собственные элементы управления, не зависящие от системных настроек.</v:String>
     <v:String x:Key="TglButton6_description_interface">Твик отключит или включит эффект прозрачности. Полупрозрачные окна и поверхности.</v:String>
     <v:String x:Key="TglButton7_description_interface">Изменяет тему панели задач на светлую или тёмную. Внимание может моргать экран.</v:String>
     <v:String x:Key="TglButton8_description_interface">Твик поменяет тему проводника на светлую или тёмную, включая браузеры и прочие программы поддерживающие тему устройства. Внимание может моргать экран.</v:String>
