@@ -71,7 +71,7 @@ namespace GTweak.Utilities.Configuration
 
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
-        internal static string SystemDefaultLanguage => Regex.Replace(CultureInfo.CurrentUICulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
+        internal static string SystemDefaultLanguage => Regex.Replace(CultureInfo.CurrentUICulture.Name, @"-.+$", "", RegexOptions.Multiline);
 
         internal static bool IsNeedUpdate { get; private set; } = false;
         internal static string DownloadVersion { get; private set; } = string.Empty;
