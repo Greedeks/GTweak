@@ -12,6 +12,6 @@ namespace GTweak.Windows
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) => RestartProgress.BeginAnimation(ProgressBar.ValueProperty, FadeAnimation.FadeIn(1, 1.5, () => { SettingsRepository.SelfReboot(); }));
+        private void Window_Loaded(object sender, RoutedEventArgs e) => RestartProgress.BeginAnimation(ProgressBar.ValueProperty, FadeAnimation.FadeIn(100, 1.5, () => { SettingsRepository.SelfReboot(); }));
     }
 }

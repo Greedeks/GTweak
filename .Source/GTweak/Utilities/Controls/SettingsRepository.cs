@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Managers;
 using GTweak.Windows;
 using Microsoft.Win32;
@@ -45,7 +46,7 @@ namespace GTweak.Utilities.Controls
             ["EnableIpBlur"] = true,
             ["EnableSound"] = true,
             ["VolumeLevel"] = 50,
-            ["Language"] = App.GettingSystemLanguage,
+            ["Language"] = SystemDiagnostics.SystemDefaultLanguage,
             ["Theme"] = "Dark"
         };
 
@@ -75,31 +76,20 @@ namespace GTweak.Utilities.Controls
 
         internal static void СheckingParameters()
         {
-            bool isRegistryEmpty = false;
-
-            foreach (string key in _defaultSettings.Keys)
+            foreach (var kv in _defaultSettings)
             {
-                if (RegistryHelp.ValueExists(StoragePaths.RegistryLocation, key))
-                {
-                    isRegistryEmpty = true;
-                    break;
-                }
-            }
-
-            if (isRegistryEmpty)
-            {
-                foreach (var subkey in _defaultSettings)
-                    ChangingParameters(subkey.Key, subkey.Value);
-            }
-            else
-            {
-                foreach (var kv in _defaultSettings)
+                if (RegistryHelp.ValueExists(StoragePaths.RegistryLocation, kv.Key))
+                    ChangingParameters(kv.Key, kv.Value);
+                else
                 {
                     _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultBool ? 1 : 0) is int asBool ? asBool != 0 : defaultBool :
-                          kv.Value is int defaultInt ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultInt) :
-                          kv.Value is string defaultString ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultString) : kv.Value;
+                         kv.Value is int defaultInt ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultInt) :
+                         kv.Value is string defaultString ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultString) : kv.Value;
                 }
             }
+
+            App.Language = (string)_cachedSettings["Language"];
+            App.Theme = (string)_cachedSettings["Theme"];
         }
 
         internal static void SaveFileConfig()

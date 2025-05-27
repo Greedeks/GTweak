@@ -111,7 +111,6 @@ namespace GTweak
             BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3,
                 async () =>
                 {
-
                     if (SystemDiagnostics.IsNeedUpdate && SettingsRepository.IsUpdateCheckRequired)
                     {
                         await Task.Delay(500);

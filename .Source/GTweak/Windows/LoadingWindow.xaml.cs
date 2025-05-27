@@ -49,7 +49,6 @@ namespace GTweak.Windows
 
             Parallel.Invoke(
                 () => ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService)),
-                () => ExecuteWithLogging(SettingsRepository.СheckingParameters, nameof(SettingsRepository.СheckingParameters)),
                 () => ExecuteWithLogging(WindowsLicense.LicenseStatus, nameof(WindowsLicense.LicenseStatus)),
                 () => ExecuteWithLogging(new SystemDiagnostics().GetHardwareData, nameof(SystemDiagnostics.GetHardwareData)),
                 () => ExecuteWithLogging(new SystemDiagnostics().ValidateVersionUpdates, nameof(SystemDiagnostics.ValidateVersionUpdates)),

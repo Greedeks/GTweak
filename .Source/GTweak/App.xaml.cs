@@ -1,11 +1,9 @@
-﻿using GTweak.Utilities.Controls;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Windows;
 using System;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -17,9 +15,7 @@ namespace GTweak
         internal static event EventHandler ThemeChanged;
         internal static event EventHandler ImportTweaksUpdate;
 
-        internal static string GettingSystemLanguage => Regex.Replace(CultureInfo.CurrentCulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
         internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(default, EventArgs.Empty);
-        private void LogError(Exception ex, [CallerMemberName] string memberName = "") => ErrorLogging.LogWritingFile(ex, memberName);
 
         public App()
         {
@@ -37,9 +33,7 @@ namespace GTweak
                 return;
             }
 
-            Language = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Language", "en");
-            Theme = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\GTweak", "Theme", "Dark");
-
+            SettingsRepository.СheckingParameters();
             BlockRunTweaker.CheckingApplicationCopies();
             await BlockRunTweaker.CheckingSystemRequirements();
 
@@ -48,7 +42,7 @@ namespace GTweak
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            LogError(e.Exception);
+            ErrorLogging.LogWritingFile(e.Exception);
             e.Handled = true;
             Environment.Exit(0);
         }
@@ -56,7 +50,7 @@ namespace GTweak
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is Exception ex)
-                LogError(ex);
+                ErrorLogging.LogWritingFile(ex);
             Environment.Exit(0);
         }
 
@@ -64,7 +58,7 @@ namespace GTweak
         {
             set
             {
-                value ??= GettingSystemLanguage;
+                value ??= SystemDiagnostics.SystemDefaultLanguage;
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {

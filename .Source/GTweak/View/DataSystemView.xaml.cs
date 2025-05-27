@@ -47,7 +47,7 @@ namespace GTweak.View
                         new SystemDiagnostics().UpdatingDevicesData();
                         new MonitoringSystem().GetTotalProcessorUsageAsync();
                     });
-                    Application.Current.Dispatcher.Invoke(AnimationProgressBars);
+                    AnimationProgressBars();
                 }
                 else if ((int)_time.TotalSeconds % 5 == 0)
                 {
@@ -81,18 +81,17 @@ namespace GTweak.View
                 {
                     From = CPULoad.Value,
                     To = MonitoringSystem.GetProcessorUsage,
-                    EasingFunction = new PowerEase(),
+                    EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
                 Timeline.SetDesiredFrameRate(doubleAnim, 240);
                 CPULoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
 
-
                 doubleAnim = new DoubleAnimation()
                 {
                     From = RAMLoad.Value,
                     To = new MonitoringSystem().GetMemoryUsage,
-                    EasingFunction = new PowerEase(),
+                    EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
                 Timeline.SetDesiredFrameRate(doubleAnim, 240);

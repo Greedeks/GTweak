@@ -71,6 +71,8 @@ namespace GTweak.Utilities.Configuration
 
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
+        internal static string SystemDefaultLanguage => Regex.Replace(CultureInfo.CurrentUICulture.ToString(), @"-.+$", "", RegexOptions.Multiline);
+
         internal static bool IsNeedUpdate { get; private set; } = false;
         internal static string DownloadVersion { get; private set; } = string.Empty;
 
@@ -414,25 +416,25 @@ namespace GTweak.Utilities.Configuration
         {
             try
             {
-                string dns = CultureInfo.InstalledUICulture.Name switch
+                string dns = SystemDefaultLanguage switch
                 {
-                    string name when name.StartsWith("fa") => "aparat.com",
-                    string name when name.StartsWith("zh") => "baidu.com",
-                    string name when name.StartsWith("ru") => "yandex.ru",
-                    string name when name.StartsWith("kk") => "yandex.kz",
-                    string name when name.StartsWith("ko") => "naver.com",
-                    string name when name.StartsWith("cs") => "seznam.cz",
-                    string name when name.StartsWith("tm") => "turkmenportal.com",
-                    string name when name.StartsWith("vn") => "coccoc.com",
-                    string name when name.StartsWith("cu") => "ecured.cu",
-                    string name when name.StartsWith("kp") => "naenara.com.kp",
-                    string name when name.StartsWith("sy") => "duckduckgo.com",
-                    string name when name.StartsWith("jp") => "yahoo.co.jp",
-                    string name when name.StartsWith("de") => "t-online.de",
-                    string name when name.StartsWith("fr") => "orange.fr",
-                    string name when name.StartsWith("es") => "terra.es",
-                    string name when name.StartsWith("it") => "libero.it",
-                    string name when name.StartsWith("tr") || name.StartsWith("in") || name.StartsWith("ar") => "bing.com",
+                    "fa" => "aparat.com",
+                    "zh" => "baidu.com",
+                    "ru" => "yandex.ru",
+                    "kk" => "yandex.kz",
+                    "ko" => "naver.com",
+                    "cs" => "seznam.cz",
+                    "tm" => "turkmenportal.com",
+                    "vn" => "coccoc.com",
+                    "cu" => "ecured.cu",
+                    "kp" => "naenara.com.kp",
+                    "sy" => "duckduckgo.com",
+                    "jp" => "yahoo.co.jp",
+                    "de" => "t-online.de",
+                    "fr" => "orange.fr",
+                    "es" => "terra.es",
+                    "it" => "libero.it",
+                    string lang when new[] { "tr", "in", "ar" }.Contains(lang) => "bing.com",
                     _ => "google.com"
                 };
 
