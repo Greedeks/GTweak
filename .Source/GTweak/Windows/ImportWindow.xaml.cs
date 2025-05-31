@@ -2,7 +2,6 @@
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Helpers.Managers;
-using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
 using GTweak.Utilities.Tweaks.DefenderManager;
 using System;
