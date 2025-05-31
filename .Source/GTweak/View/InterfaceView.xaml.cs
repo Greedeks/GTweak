@@ -1,6 +1,5 @@
 ﻿using GTweak.Assets.UserControl;
 using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Helpers.Storage;
@@ -22,7 +21,7 @@ namespace GTweak.View
             InitializeComponent();
 
             if (!WindowsLicense.IsWindowsActivated)
-                new ViewNotification().Show("", "info", "warn_activate_notification");
+                new NotificationManager().Show("", "info", "warn_activate_notification");
 
             if (SystemDiagnostics.HardwareData.OSBuild.CompareTo("22621.2361") < 0)
                 TglButton21.IsEnabled = false;
@@ -73,8 +72,8 @@ namespace GTweak.View
             if (ExplorerManager.InterfBtnMapping.TryGetValue(toggleButton.Name, out bool needRestart))
                 ExplorerManager.Restart(new Process());
 
-            if (NotifActionsStorage.IntfNotifActions.TryGetValue(toggleButton.Name, out string action))
-                new ViewNotification(300).Show(action);
+            if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out string action))
+                new NotificationManager(300).Show(action);
 
             Parallel.Invoke(async delegate { await Task.Delay(1000); new InterfaceTweaks().AnalyzeAndUpdate(this); });
         }

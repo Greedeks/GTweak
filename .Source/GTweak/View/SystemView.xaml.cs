@@ -1,5 +1,5 @@
 ﻿using GTweak.Assets.UserControl;
-using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Helpers.Storage;
 using GTweak.Utilities.Tweaks;
 using System;
@@ -48,8 +48,8 @@ namespace GTweak.View
             {
                 SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-                if (NotifActionsStorage.SysNotifActions.TryGetValue(toggleButton.Name, out string action))
-                    new ViewNotification(300).Show(action);
+                if (NotificationManager.SysActions.TryGetValue(toggleButton.Name, out string action))
+                    new NotificationManager(300).Show(action);
 
                 Parallel.Invoke(async delegate { await Task.Delay(1000); new SystemTweaks().AnalyzeAndUpdate(this); });
             }
@@ -59,7 +59,7 @@ namespace GTweak.View
                 {
                     SystemTweaks.isTweakWorkingAntivirus = true;
                     SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
-                    new ViewNotification().Show("", "info", "defender_notification");
+                    new NotificationManager().Show("", "info", "defender_notification");
                 }
             }
         }

@@ -227,8 +227,8 @@
     <v:String x:Key="TglButton23_description_interface">Windows utilise par défaut les infos collectées pour cibler les publicités, affichées partout où il y a de la place. Désactive cette publicité personnalisée dans les applications Store, Explorateur, Options et menu Démarrer.</v:String>
     <v:String x:Key="TglButton24_description_interface">Windows ne sauvegarde pas par défaut la position et l’état des fenêtres à l’arrêt. Ce tweak permet de restaurer les dossiers ouverts après déconnexion, redémarrage et extinction.</v:String>
     <v:String x:Key="TglButton25_description_interface">Désactive toutes les notifications Windows avec astuces et suggestions, ainsi que le SCOOBE (Second Chance Out of Box Experience) pour Windows 11, qui propose de finir la configuration du périphérique.</v:String>
-    <v:String x:Key="TglButton26_description_interface">Cache les dossiers du menu « Ce PC » : Bureau, Vidéos, Documents, Téléchargements, Images, Musique.</v:String>
-    <v:String x:Key="TglButton27_description_interface">Supprime l’élément « Objets 3D » dans la liste de gauche de l’explorateur.</v:String>
+    <v:String x:Key="TglButton26_description_interface">Cache les dossiers du menu « Ce PC » : Bureau, Vidéos, Documents, Téléchargements, Images, Musique. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="TglButton27_description_interface">Supprime l’élément « Objets 3D » dans la liste de gauche de l’explorateur. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="TglButton28_description_interface">Par défaut, Windows réduit la qualité des fonds d’écran JPEG à 85 %. Ce tweak fixe la qualité à 100 %.</v:String>
     <v:String x:Key="TglButton29_description_interface">Désactive les infobulles pour les éléments du bureau au survol du curseur.</v:String>
     <v:String x:Key="TglButton30_description_interface">Windows envoie par défaut toutes vos recherches dans le menu Démarrer à ses serveurs pour Bing. Ce tweak désactive la recherche web. Attention, l’écran peut clignoter.</v:String>

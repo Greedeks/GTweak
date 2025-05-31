@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Helpers.Storage;
 using GTweak.Windows;
 using Microsoft.Win32;
@@ -37,11 +38,11 @@ namespace GTweak.Utilities.Tweaks
 
             if (string.IsNullOrEmpty(keyWinHWID) && string.IsNullOrEmpty(keyWinKMS))
             {
-                new ViewNotification(300).Show("", "warn", "keynotfound_notification");
+                new NotificationManager(300).Show("", "warn", "keynotfound_notification");
                 return;
             }
 
-            new ViewNotification().Show("", "warn", "win_activate_notification");
+            new NotificationManager().Show("", "warn", "win_activate_notification");
 
             WaitingWindow waitingWindow = new WaitingWindow();
             waitingWindow.Show();
@@ -81,7 +82,7 @@ namespace GTweak.Utilities.Tweaks
                 if (IsWindowsActivated)
                 {
                     waitingWindow.Close();
-                    new ViewNotification(300).Show("restart", "warn", "success_activate_notification");
+                    new NotificationManager(300).Show("restart", "warn", "success_activate_notification");
                 }
                 else
                 {
@@ -95,13 +96,13 @@ namespace GTweak.Utilities.Tweaks
 
                     waitingWindow.Close();
 
-                    new ViewNotification(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "success_activate_notification" : "error_activate_notification");
+                    new NotificationManager(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "success_activate_notification" : "error_activate_notification");
                 }
             }
             catch
             {
                 waitingWindow.Close();
-                new ViewNotification(300).Show("", "warn", "error_activate_notification");
+                new NotificationManager(300).Show("", "warn", "error_activate_notification");
             }
         }
     }

@@ -128,7 +128,7 @@ namespace GTweak.View
 
                     case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
                         {
-                            new ViewNotification().Show("", "info", "onedrive_notification");
+                            new NotificationManager().Show("", "info", "onedrive_notification");
 
                             BackgroundQueue backgroundQueue = new BackgroundQueue();
                             await backgroundQueue.QueueTask(async () =>

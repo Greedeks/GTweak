@@ -271,7 +271,7 @@ namespace GTweak.Utilities.Tweaks
                             else
                                 WindowsDefender.Activate();
                         });
-                        await backgroundQueue.QueueTask(delegate { isTweakWorkingAntivirus = false; new ViewNotification(300).Show("restart"); });
+                        await backgroundQueue.QueueTask(delegate { isTweakWorkingAntivirus = false; new NotificationManager(300).Show("restart"); });
                         waitingWindow.Close();
                     }
                     BlockWDefender(isDisabled);

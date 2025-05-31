@@ -48,9 +48,9 @@ namespace GTweak.Windows
                     ExplorerManager.Restart(new Process());
 
                 if (isRestartNeed)
-                    new ViewNotification().Show("restart");
+                    new NotificationManager().Show("restart");
                 else if (!isRestartNeed && isLogoutNeed)
-                    new ViewNotification().Show("logout");
+                    new NotificationManager().Show("logout");
                 App.UpdateImport();
                 BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
             }
@@ -80,8 +80,8 @@ namespace GTweak.Windows
                         await Task.Delay(700, _token);
                         ConfidentialityTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
-                        isRestartNeed = NotifActionsStorage.ConfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotifActionsStorage.ConfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                        isRestartNeed = NotificationManager.ConfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotificationManager.ConfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                     }
                 }
 
@@ -99,8 +99,8 @@ namespace GTweak.Windows
                         await Task.Delay(700, _token);
                         InterfaceTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
 
-                        isRestartNeed = NotifActionsStorage.IntfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotifActionsStorage.IntfNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                        isRestartNeed = NotificationManager.IntfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotificationManager.IntfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                         isExpRestartNeed = ExplorerManager.InterfBtnMapping.Any(get => get.Key == set.Tweak && get.Value == true);
                     }
                 }
@@ -151,8 +151,8 @@ namespace GTweak.Windows
                         else
                             SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
 
-                        isRestartNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotifActionsStorage.SysNotifActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                        isRestartNeed = NotificationManager.SysActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
+                        isLogoutNeed = NotificationManager.SysActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
                     }
                 }
 

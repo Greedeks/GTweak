@@ -282,12 +282,11 @@
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />
     <Compile Include="Utilities\Controls\SettingsRepository.cs" />
     <Compile Include="Utilities\Helpers\TakingOwnership.cs" />
-    <Compile Include="Utilities\Helpers\Storage\NotifActionsStorage.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
     <Compile Include="Utilities\Helpers\Managers\INIManager.cs" />
     <Compile Include="Utilities\Configuration\MonitoringSystem.cs" />
     <Compile Include="Utilities\Configuration\SystemDiagnostics.cs" />
-    <Compile Include="Utilities\Controls\ViewNotification.cs" />
+    <Compile Include="Utilities\Helpers\Managers\NotificationManager.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\BackupRights.cs" />

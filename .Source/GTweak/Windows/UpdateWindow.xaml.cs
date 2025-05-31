@@ -2,6 +2,7 @@
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Helpers.Animation;
+using GTweak.Utilities.Helpers.Managers;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -72,7 +73,7 @@ namespace GTweak.Windows
                 catch
                 {
                     Close();
-                    new ViewNotification().Show("", "warn", "warn_update_notification");
+                    new NotificationManager().Show("", "warn", "warn_update_notification");
                 }
             }
         }

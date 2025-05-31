@@ -9,8 +9,6 @@ namespace GTweak.Utilities.Helpers.Managers
 {
     internal class ExplorerManager
     {
-        protected ExplorerManager() { }
-
         internal static readonly Dictionary<string, bool> InterfBtnMapping = new[]
         {
             new { Button = "TglButton7", NeedRestart = true },
@@ -19,6 +17,8 @@ namespace GTweak.Utilities.Helpers.Managers
             new { Button = "TglButton17", NeedRestart = true },
             new { Button = "TglButton21", NeedRestart = true },
             new { Button = "TglButton22", NeedRestart = true },
+            new { Button = "TglButton26", NeedRestart = true },
+            new { Button = "TglButton27", NeedRestart = true },
             new { Button = "TglButton30", NeedRestart = true },
             new { Button = "TglButton32", NeedRestart = true },
         }.ToDictionary(x => x.Button, x => x.NeedRestart);

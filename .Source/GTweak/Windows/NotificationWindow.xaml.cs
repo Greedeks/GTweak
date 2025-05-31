@@ -61,24 +61,6 @@ namespace GTweak.Windows
                 notificationSound.Play();
             }
 
-            switch (ActionNotice)
-            {
-                case "logout":
-                    if (TitleNotice == string.Empty || TextNotice == string.Empty)
-                    {
-                        TitleNotice = (string)FindResource("title_warn_notification");
-                        TextNotice = (string)FindResource("logout_notification");
-                    }
-                    break;
-                case "restart":
-                    if (TitleNotice == string.Empty || TextNotice == string.Empty)
-                    {
-                        TitleNotice = (string)FindResource("title_warn_notification");
-                        TextNotice = (string)FindResource("restart_notification");
-                    }
-                    break;
-            }
-
             Dispatcher.Invoke(() =>
             {
                 Rect primaryMonitorArea = SystemParameters.WorkArea;

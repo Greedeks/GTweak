@@ -95,7 +95,7 @@ namespace GTweak.Utilities.Controls
         internal static void SaveFileConfig()
         {
             if (INIManager.IsAllTempDictionaryEmpty)
-                new ViewNotification().Show("", "info", "export_warning_notification");
+                new NotificationManager().Show("", "info", "export_warning_notification");
             else
             {
                 VistaSaveFileDialog vistaSaveFileDialog = new VistaSaveFileDialog
@@ -146,10 +146,10 @@ namespace GTweak.Utilities.Controls
                 if (File.ReadLines(StoragePaths.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(StoragePaths.Config).Any(line => line.Contains("Slider")))
                     new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
                 else
-                    new ViewNotification().Show("", "info", "empty_import_notification");
+                    new NotificationManager().Show("", "info", "empty_import_notification");
             }
             else
-                new ViewNotification().Show("", "info", "warn_import_notification");
+                new NotificationManager().Show("", "info", "warn_import_notification");
         }
 
         internal static void SelfRemoval()

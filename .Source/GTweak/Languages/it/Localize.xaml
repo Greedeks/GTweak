@@ -225,8 +225,8 @@
     <v:String x:Key="TglButton23_description_interface">Disattiva la pubblicità personalizzata che Windows mostra in varie aree come App Store, Esplora risorse e menu Start.</v:String>
     <v:String x:Key="TglButton24_description_interface">Abilita il ripristino delle cartelle aperte e del loro stato dopo disconnessione, riavvio o spegnimento.</v:String>
     <v:String x:Key="TglButton25_description_interface">Disattiva tutte le notifiche di consigli di Windows e la finestra SCOOBE (Seconda possibilità di configurazione) su Windows 11.</v:String>
-    <v:String x:Key="TglButton26_description_interface">Nasconde le cartelle Desktop, Video, Documenti, Download, Immagini e Musica dalla sezione «Questo PC».</v:String>
-    <v:String x:Key="TglButton27_description_interface">Rimuove la voce «Oggetti 3D» dal pannello laterale di Esplora risorse.</v:String>
+    <v:String x:Key="TglButton26_description_interface">Nasconde le cartelle Desktop, Video, Documenti, Download, Immagini e Musica dalla sezione «Questo PC». Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="TglButton27_description_interface">Rimuove la voce «Oggetti 3D» dal pannello laterale di Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
     <v:String x:Key="TglButton28_description_interface">Imposta la qualità dello sfondo in formato JPEG al 100%, evitando la compressione predefinita all’85%.</v:String>
     <v:String x:Key="TglButton29_description_interface">Disattiva le descrizioni comandi (tooltip) per gli elementi sul desktop quando ci si passa sopra con il mouse.</v:String>
     <v:String x:Key="TglButton30_description_interface">Disattiva l’invio delle ricerche effettuate nel menu Start ai server Microsoft per la ricerca Bing. Attenzione: lo schermo potrebbe lampeggiare.</v:String>

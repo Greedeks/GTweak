@@ -1,5 +1,5 @@
 ﻿using GTweak.Assets.UserControl;
-using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers.Managers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Threading.Tasks;
@@ -33,7 +33,7 @@ namespace GTweak.View
         {
             ServicesTweaks.ApplyTweaks(((ToggleButton)sender).Name, ((ToggleButton)sender).State);
 
-            new ViewNotification(300).Show("restart");
+            new NotificationManager(300).Show("restart");
 
             Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); new ServicesTweaks().AnalyzeAndUpdate(this); });
         }

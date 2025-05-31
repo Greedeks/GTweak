@@ -225,13 +225,13 @@
     <v:String x:Key="TglButton23_description_interface">기본적으로 Windows는 수집된 정보를 사용하여 광고를 타겟팅, 즉 사용자의 관심사와 일치하는 광고를 표시합니다. 그리고 말 그대로 이 광고는 표시할 수 있는 여유 공간이 있는 곳이면 어디든 배치됩니다. 모든 스토어 앱, 탐색기, 옵션 및 시작 메뉴에 개인 맞춤 광고를 표시하지 않으려면 이 정크를 비활성화하면 됩니다.</v:String>
     <v:String x:Key="TglButton24_description_interface">기본적으로 Windows는 창이 꺼져 있을 때의 위치와 상태를 저장하지 않습니다. 이 수정을 통해 로그아웃, 재부팅 및 종료 후에 열린 폴더 유형을 기억하여 복원할 수 있습니다.</v:String>
     <v:String x:Key="TglButton25_description_interface">이 조정을 통해 팁과 제안이 포함된 모든 Windows 알림을 비활성화할 수 있을 뿐만 아니라 Windows 11 사용자를 위한 두 번째 기회 즉시 사용 환경 (SCOOBE)을 비활성화할 수 있습니다. SCOOBE는 장치 구성을 긴급하게 완료하고 Microsoft 계정에 로그인하라는 제안과 함께 예기치 않게 표시되는 창입니다.</v:String>
-    <v:String x:Key="TglButton26_description_interface">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕화면, 동영상, 문서, 다운로드, 이미지, 음악.</v:String>
-    <v:String x:Key="TglButton27_description_interface">왼쪽 메뉴 목록의 탐색기 요약에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서).</v:String>
+    <v:String x:Key="TglButton26_description_interface">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕화면, 동영상, 문서, 다운로드, 이미지, 음악. 화면이 깜박일 수 있으니 주의하세요.</v:String>
+    <v:String x:Key="TglButton27_description_interface">왼쪽 메뉴 목록의 탐색기 요약에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서). 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton28_description_interface">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
     <v:String x:Key="TglButton29_description_interface">조정은 마우스 커서를 마우스오버할 때 바탕화면 요소의 도구 설명을 비활성화합니다.</v:String>
     <v:String x:Key="TglButton30_description_interface">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton31_description_interface">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
-    <v:String x:Key="TglButton32_description_interface">기본적으로 Windows는 파일 확장자를 숨기므로 파일 탐색기 보기가 덜 복잡해집니다. 필요한 경우 이 조정을 사용하여 파일 확장자를 표시할 수 있으므로 검색하는 데 걸리는 시간을 절약할 수 있습니다. 화면이 깜빡일 수 있으니 주의하세요.</v:String>
+    <v:String x:Key="TglButton32_description_interface">기본적으로 Windows는 파일 확장자를 숨기므로 파일 탐색기 보기가 덜 복잡해집니다. 필요한 경우 이 조정을 사용하여 파일 확장자를 표시할 수 있으므로 검색하는 데 걸리는 시간을 절약할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
      <!--#endregion-->
 
     <!--#region Applications Page -->
