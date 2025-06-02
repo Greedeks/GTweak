@@ -42,10 +42,10 @@ namespace GTweak.View
                 if ((int)_time.TotalSeconds % 2 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate
+                    await backgroundQueue.QueueTask(async delegate
                     {
                         new SystemDiagnostics().UpdatingDevicesData();
-                        new MonitoringSystem().GetTotalProcessorUsageAsync();
+                        await new MonitoringSystem().GetTotalProcessorUsage();
                     });
                     AnimationProgressBars();
                 }

@@ -147,9 +147,9 @@ namespace GTweak.Utilities.Configuration
         /// If the manufacturer did not provide a serial number and the obtained value is "Default string", 
         /// then the serial number will not be displayed, similar to the situation with the motherboard.
         /// </summary>
-        private async void GetBiosInfo()
+        private void GetBiosInfo()
         {
-            string output = await CommandExecutor.GetCommandOutput("bcdedit");
+            string output = CommandExecutor.GetCommandOutput("bcdedit").GetAwaiter().GetResult();
             HardwareData.BiosMode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
@@ -434,7 +434,7 @@ namespace GTweak.Utilities.Configuration
                     "fr" => "orange.fr",
                     "es" => "terra.es",
                     "it" => "libero.it",
-                    string lang when new[] { "tr", "in", "ar" }.Contains(lang) => "bing.com",
+                    string name when new[] { "tr", "in", "ar" }.Contains(name) => "bing.com",
                     _ => "google.com"
                 };
 
@@ -456,50 +456,47 @@ namespace GTweak.Utilities.Configuration
 
         internal void GetUserIpAddress()
         {
-            Task.Run(async () =>
+            if (IsNetworkAvailable())
             {
-                if (IsNetworkAvailable())
+                using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+
+                foreach (string url in new[] { "https://ipapi.co/json/", "https://api.db-ip.com/v2/free/self", "http://ip-api.com/json/?fields=61439" })
                 {
-                    using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
-
-                    foreach (string url in new[] { "https://ipapi.co/json/", "https://api.db-ip.com/v2/free/self", "http://ip-api.com/json/?fields=61439" })
+                    try
                     {
-                        try
+                        using HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+
+                        if (!response.IsSuccessStatusCode)
                         {
-                            using HttpResponseMessage response = await client.GetAsync(url);
-
-                            if (!response.IsSuccessStatusCode)
-                            {
-                                CurrentConnection = ConnectionStatus.Block;
-                                continue;
-                            }
-
-                            IPMetadata ipMetadata = IPMetadata.ParseData(await response.Content.ReadAsStringAsync());
-
-                            if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrWhiteSpace(ipMetadata?.Ip) && !string.IsNullOrWhiteSpace(ipMetadata?.Country))
-                            {
-                                CurrentConnection = ConnectionStatus.Available;
-                                HardwareData.UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
-                                break;
-                            }
-                            else
-                                CurrentConnection = ConnectionStatus.Block;
+                            CurrentConnection = ConnectionStatus.Block;
+                            continue;
                         }
-                        catch { CurrentConnection = ConnectionStatus.Limited; }
-                    }
-                }
-                else
-                    CurrentConnection = ConnectionStatus.Lose;
 
-                if (new Dictionary<ConnectionStatus, string>
+                        IPMetadata ipMetadata = IPMetadata.ParseData(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+
+                        if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrWhiteSpace(ipMetadata?.Ip) && !string.IsNullOrWhiteSpace(ipMetadata?.Country))
+                        {
+                            CurrentConnection = ConnectionStatus.Available;
+                            HardwareData.UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
+                            break;
+                        }
+                        else
+                            CurrentConnection = ConnectionStatus.Block;
+                    }
+                    catch { CurrentConnection = ConnectionStatus.Limited; }
+                }
+            }
+            else
+                CurrentConnection = ConnectionStatus.Lose;
+
+            if (new Dictionary<ConnectionStatus, string>
                 {
                     { ConnectionStatus.Lose, "connection_lose_systemInformation" },
                     { ConnectionStatus.Block, "connection_block_systemInformation" },
                     { ConnectionStatus.Limited, "connection_limited_systemInformation" }
                 }.TryGetValue(CurrentConnection, out string resourceKey)) { HardwareData.UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
 
-                isIPAddressFormatValid = HardwareData.UserIPAddress.Any(char.IsDigit);
-            });
+            isIPAddressFormatValid = HardwareData.UserIPAddress.Any(char.IsDigit);
         }
 
         internal void ValidateVersionUpdates()
