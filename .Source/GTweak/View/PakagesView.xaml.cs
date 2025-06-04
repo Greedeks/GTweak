@@ -118,7 +118,7 @@ namespace GTweak.View
                                     UninstallingPakages.HandleAvailabilityStatus(packageName, false);
                                     UpdateViewStatePakages();
 
-                                    if (ExplorerManager.AppImgMapping.TryGetValue(packageName, out bool needRestart))
+                                    if (ExplorerManager.PackageMapping.TryGetValue(packageName, out bool needRestart))
                                         ExplorerManager.Restart(new Process());
                                 });
 

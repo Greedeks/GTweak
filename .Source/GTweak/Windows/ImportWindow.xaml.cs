@@ -17,8 +17,9 @@ namespace GTweak.Windows
 {
     public partial class ImportWindow : Window
     {
-        private bool isRestartNeed = false, isLogoutNeed = false, isExpRestartNeed = false;
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly HashSet<string> requiredActions = new HashSet<string>();
+        private bool isExpRestartNeed = false;
 
         public ImportWindow(in string importedFile)
         {
@@ -36,7 +37,7 @@ namespace GTweak.Windows
         {
             BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.2));
             Progress<byte> progress = new Progress<byte>(ReportProgress);
-            try { await SortByPageDate(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private void ReportProgress(byte valueProgress)
@@ -46,118 +47,92 @@ namespace GTweak.Windows
                 if (isExpRestartNeed)
                     ExplorerManager.Restart(new Process());
 
-                if (isRestartNeed)
+                if (requiredActions.Contains("restart"))
                     new NotificationManager().Show("restart");
-                else if (!isRestartNeed && isLogoutNeed)
+                else if (requiredActions.Contains("logout"))
                     new NotificationManager().Show("logout");
+
                 App.UpdateImport();
                 BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
             }
         }
 
-        private async Task SortByPageDate(CancellationToken _token, IProgress<byte> _progress)
+        private async Task ApplyTweaksWithProgress(CancellationToken token, IProgress<byte> progress)
         {
-            List<string> tempKeys = new List<string>(), tempValues = new List<string>();
-
             INIManager iniManager = new INIManager(StoragePaths.Config);
 
-            for (byte i = 1; i <= 100; i++)
+            var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, string>> NotificationActions, IEnumerable<KeyValuePair<string, bool>> ExplorerMapping)[]
             {
-                _token.ThrowIfCancellationRequested();
+               (INIManager.SectionConf, ConfidentialityTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
+               (INIManager.SectionIntf, InterfaceTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfMapping),
+               (INIManager.SectionSvc, ServicesTweaks.ApplyTweaks, null, null),
+               (INIManager.SectionSys, null, NotificationManager.SysActions, null)
+            };
 
-                if (i == 2 & iniManager.IsThereSection(INIManager.SectionConf))
+            var allTweaks = new List<(string section, string tweak, string value)>();
+
+            foreach (var (Section, _, _, _) in allSections.Where(sectionInfo => iniManager.IsThereSection(sectionInfo.Section)))
+            {
+                var keys = iniManager.GetKeysOrValue(Section);
+                var values = iniManager.GetKeysOrValue(Section, false);
+                allTweaks.AddRange(keys.Zip(values, (t, v) => (Section, t, v)));
+            }
+
+            int totalTweaks = allTweaks.Count;
+            int appliedTweaks = 0;
+
+            if (totalTweaks == 0) progress.Report(100);
+
+            foreach (var (section, tweak, value) in allTweaks)
+            {
+                token.ThrowIfCancellationRequested();
+                try
                 {
-                    tempKeys.Clear(); tempValues.Clear();
-
-                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionConf);
-                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionConf, false);
-
-                    var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
-
-                    foreach (var set in acceptanceList)
+                    if (section == INIManager.SectionSys)
                     {
-                        await Task.Delay(700, _token);
-                        ConfidentialityTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
-
-                        isRestartNeed = NotificationManager.ConfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotificationManager.ConfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
-                    }
-                }
-
-                if (i == 30 & iniManager.IsThereSection(INIManager.SectionIntf))
-                {
-                    tempKeys.Clear(); tempValues.Clear();
-
-                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionIntf);
-                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionIntf, false);
-
-                    var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
-
-                    foreach (var set in acceptanceList)
-                    {
-                        await Task.Delay(700, _token);
-                        InterfaceTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
-
-                        isRestartNeed = NotificationManager.IntfActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotificationManager.IntfActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
-                        isExpRestartNeed = ExplorerManager.InterfBtnMapping.Any(get => get.Key == set.Tweak && get.Value == true);
-                    }
-                }
-
-                if (i == 50 & iniManager.IsThereSection(INIManager.SectionSvc))
-                {
-                    tempKeys.Clear(); tempValues.Clear();
-
-                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionSvc);
-                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionSvc, false);
-
-                    var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
-
-                    foreach (var set in acceptanceList)
-                    {
-                        await Task.Delay(700, _token);
-                        ServicesTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
-                        isRestartNeed = true;
-                    }
-                }
-
-                if (i == 80 & iniManager.IsThereSection(INIManager.SectionSys))
-                {
-                    tempKeys.Clear(); tempValues.Clear();
-
-                    tempKeys = iniManager.GetKeysOrValue(INIManager.SectionSys);
-                    tempValues = iniManager.GetKeysOrValue(INIManager.SectionSys, false);
-
-                    var acceptanceList = tempKeys.Zip(tempValues, (t, v) => new { Tweak = t, Value = v });
-
-                    foreach (var set in acceptanceList)
-                    {
-                        await Task.Delay(700, _token);
-
-                        if (set.Tweak.StartsWith("TglButton") && set.Tweak != "TglButton8")
-                            SystemTweaks.ApplyTweaks(set.Tweak, Convert.ToBoolean(set.Value));
-                        else if (set.Tweak == "TglButton8")
+                        if (tweak.StartsWith("TglButton") && tweak != "TglButton8")
+                            SystemTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
+                        else if (tweak == "TglButton8")
                         {
                             BackgroundQueue backgroundQueue = new BackgroundQueue();
                             await backgroundQueue.QueueTask(delegate
                             {
-                                if (Convert.ToBoolean(set.Value))
+                                if (Convert.ToBoolean(value))
                                     WindowsDefender.Deactivate();
                                 else
                                     WindowsDefender.Activate();
                             });
                         }
                         else
-                            SystemTweaks.ApplyTweaksSlider(set.Tweak, Convert.ToUInt32(set.Value));
+                            SystemTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
 
-                        isRestartNeed = NotificationManager.SysActions.Any(get => get.Key == set.Tweak && get.Value == "restart");
-                        isLogoutNeed = NotificationManager.SysActions.Any(get => get.Key == set.Tweak && get.Value == "logout");
+                        foreach (var act in NotificationManager.SysActions.Where(get => get.Key == tweak))
+                            requiredActions.Add(act.Value);
+                    }
+                    else
+                    {
+                        var (Section, TweakAction, NotificationActions, ExplorerMapping) = allSections.First(s => s.Section == section);
+
+                        TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
+
+                        if (NotificationActions != null)
+                        {
+                            foreach (var act in NotificationActions.Where(get => get.Key == tweak))
+                                requiredActions.Add(act.Value);
+                        }
+
+                        if (ExplorerMapping != null && ExplorerMapping.Any(get => get.Key == tweak && get.Value == true))
+                            isExpRestartNeed = true;
+
+                        if (section == INIManager.SectionSvc)
+                            requiredActions.Add("restart");
                     }
                 }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                await Task.Delay(1, _token);
-
-                _progress.Report(i);
+                appliedTweaks++;
+                progress.Report((byte)((double)appliedTweaks / totalTweaks * 100));
+                await Task.Delay(700, token);
             }
         }
 

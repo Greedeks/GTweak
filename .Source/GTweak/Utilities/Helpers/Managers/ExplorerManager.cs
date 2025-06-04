@@ -9,7 +9,7 @@ namespace GTweak.Utilities.Helpers.Managers
 {
     internal class ExplorerManager
     {
-        internal static readonly Dictionary<string, bool> InterfBtnMapping = new[]
+        internal static readonly Dictionary<string, bool> IntfMapping = new[]
         {
             new { Button = "TglButton7", NeedRestart = true },
             new { Button = "TglButton8", NeedRestart = true },
@@ -23,7 +23,7 @@ namespace GTweak.Utilities.Helpers.Managers
             new { Button = "TglButton32", NeedRestart = true },
         }.ToDictionary(x => x.Button, x => x.NeedRestart);
 
-        internal static readonly Dictionary<string, bool> AppImgMapping = new[]
+        internal static readonly Dictionary<string, bool> PackageMapping = new[]
 {
             new { Package = "Widgets", NeedRestart = true },
             new { Package = "Edge", NeedRestart = true }
