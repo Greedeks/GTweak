@@ -78,10 +78,7 @@ namespace GTweak.Utilities.Configuration
 
         internal static Dictionary<byte, bool> IsWindowsVersion = default;
 
-        private static (string Storage, string Audio, string NetAdapter) _tempData = (string.Empty, string.Empty, string.Empty);
-
         internal static bool isIPAddressFormatValid = false;
-
 
         internal static ImageSource GetProfileImage()
         {
@@ -114,17 +111,19 @@ namespace GTweak.Utilities.Configuration
 
         internal void UpdatingDevicesData()
         {
-            _tempData = (string.Empty, string.Empty, string.Empty);
+            string storage = string.Empty;
+            string audio = string.Empty;
+            string netAdapter = string.Empty;
 
             Parallel.Invoke(
-                GetStorageDevices,
-                GetAudioDevices,
-                GetNetworkAdapters
+                () => storage = GetStorageDevices(),
+                () => audio = GetAudioDevices(),
+                () => netAdapter = GetNetworkAdapters()
             );
 
-            HardwareData.Storage = _tempData.Storage;
-            HardwareData.AudioDevice = _tempData.Audio;
-            HardwareData.NetworkAdapter = _tempData.NetAdapter;
+            HardwareData.Storage = storage;
+            HardwareData.AudioDevice = audio;
+            HardwareData.NetworkAdapter = netAdapter;
         }
 
         internal void GetOperatingSystemInfo()
@@ -140,7 +139,7 @@ namespace GTweak.Utilities.Configuration
                     { 10, HardwareData.OSVersion.Contains("10") }
                 };
             }
-            HardwareData.OperatingSystem = $"\n{HardwareData.OperatingSystem.TrimEnd('\n')}";
+            HardwareData.OperatingSystem = $"\n{HardwareData.OperatingSystem.TrimEnd('\n', '\r')}";
         }
 
         /// <summary>
@@ -158,7 +157,7 @@ namespace GTweak.Utilities.Configuration
                 string dataSN = (string)managementObj["SerialNumber"];
                 HardwareData.Bios += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
             }
-            HardwareData.Bios = HardwareData.Bios.TrimEnd('\n');
+            HardwareData.Bios = HardwareData.Bios.TrimEnd('\n', '\r');
         }
 
         private void GetMotherboardInfo()
@@ -169,14 +168,14 @@ namespace GTweak.Utilities.Configuration
                 string dataVersion = (string)managementObj["Version"];
                 HardwareData.Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
             }
-            HardwareData.Motherboard = HardwareData.Motherboard.TrimEnd('\n');
+            HardwareData.Motherboard = HardwareData.Motherboard.TrimEnd('\n', '\r');
         }
 
         private void GetProcessorInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
                 HardwareData.Processor = $"{(string)managementObj["Name"]}\n";
-            HardwareData.Processor = HardwareData.Processor.TrimEnd('\n');
+            HardwareData.Processor = HardwareData.Processor.TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -250,7 +249,7 @@ namespace GTweak.Utilities.Configuration
                 (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
                 HardwareData.Graphics += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
             }
-            HardwareData.Graphics = HardwareData.Graphics.TrimEnd('\n');
+            HardwareData.Graphics = HardwareData.Graphics.TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -275,14 +274,15 @@ namespace GTweak.Utilities.Configuration
                 };
                 HardwareData.Memory += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
-            HardwareData.Memory = HardwareData.Memory.TrimEnd('\n');
+            HardwareData.Memory = HardwareData.Memory.TrimEnd('\n', '\r');
         }
 
         /// <summary>
         /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
         /// </summary>
-        private static void GetStorageDevices()
+        private string GetStorageDevices()
         {
+            StringBuilder result = new StringBuilder();
             bool isMsftWorking = false;
 
             try
@@ -310,7 +310,7 @@ namespace GTweak.Utilities.Configuration
                     if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
                         storageType = "(Media-Type)";
 
-                    _tempData.Storage += $"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}\n";
+                    result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
                 }
             }
             else
@@ -331,11 +331,11 @@ namespace GTweak.Utilities.Configuration
                     if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
                         storageType = "(Media-Type)";
 
-                    _tempData.Storage += $"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}\n";
+                    result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
                 }
             }
 
-            _tempData.Storage = _tempData.Storage.TrimEnd('\n');
+            return result.ToString().TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -343,8 +343,10 @@ namespace GTweak.Utilities.Configuration
         /// Therefore, for such devices, the name lookup is performed through the registry. 
         /// The search for an identifier in Win32_PnPEntity is slow, although it is more convenient. However, it is inferior in speed.
         /// </summary>
-        private void GetAudioDevices()
+        private string GetAudioDevices()
         {
+            StringBuilder result = new StringBuilder();
+
             static (bool, string) IsUsbAudioDevice(string deviceID)
             {
                 const string basePath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render";
@@ -381,12 +383,13 @@ namespace GTweak.Utilities.Configuration
                     (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
 
                     if (isUsbDevice && !string.IsNullOrEmpty(data))
-                        _tempData.Audio += $"{data}\n";
+                        result.AppendLine(data);
                     else
-                        _tempData.Audio += $"{new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
+                        result.AppendLine(new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
                 }
             }
-            _tempData.Audio = _tempData.Audio.TrimEnd('\n');
+
+            return result.ToString().TrimEnd('\n', '\r');
         }
 
         private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible
@@ -405,11 +408,13 @@ namespace GTweak.Utilities.Configuration
                 return $"{Math.Round(totalSize / (1024.0 * 1024.0), 2):G} TB";
         }
 
-        private void GetNetworkAdapters()
+        private string GetNetworkAdapters()
         {
+            StringBuilder result = new StringBuilder();
+
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
-                _tempData.NetAdapter += $"{new[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info))}\n" ?? string.Empty;
-            _tempData.NetAdapter = _tempData.NetAdapter.TrimEnd('\n');
+                result.AppendLine(new[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+            return result.ToString().TrimEnd('\n', '\r');
         }
 
         internal bool IsNetworkAvailable()
