@@ -2,6 +2,7 @@
 using GTweak.Windows;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -44,19 +45,17 @@ namespace GTweak.Utilities.Helpers.Managers
         }.ToDictionary(x => x.Button, x => x.Action);
 
         private readonly int _delayMs;
-        private static bool _isNotificationOpen = false;
+        private static int _isNotificationOpen = 0;
 
         internal NotificationManager(int delayMs = 100) => _delayMs = delayMs;
 
         internal async void Show(string action, string titleKey = "", string textKey = "")
         {
-            if (SettingsRepository.IsViewNotification && !_isNotificationOpen)
+            if (SettingsRepository.IsViewNotification && Interlocked.CompareExchange(ref _isNotificationOpen, 1, 0) == 0)
             {
                 await Application.Current.Dispatcher.InvokeAsync(async () =>
                 {
-                    _isNotificationOpen = true;
-
-                    NotificationWindow window = new NotificationWindow
+                    var window = new NotificationWindow
                     {
                         ActionNotice = action,
                         TitleNotice = (string)Application.Current.TryFindResource($"title_{titleKey}_notification") ?? string.Empty,
@@ -81,11 +80,10 @@ namespace GTweak.Utilities.Helpers.Managers
                             break;
                     }
 
-                    window.Closed += (s, e) => { _isNotificationOpen = false; };
+                    window.Closed += (s, e) => { Interlocked.Exchange(ref _isNotificationOpen, 0); };
 
-                    await Task.Delay(_delayMs).ContinueWith(_ => window.Show(), TaskScheduler.FromCurrentSynchronizationContext());
+                    await Task.Delay(_delayMs).ContinueWith(_ => { if (window != null && !window.IsVisible) window.Show(); }, TaskScheduler.FromCurrentSynchronizationContext());
                 });
-
             }
         }
     }
