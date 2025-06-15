@@ -41,7 +41,7 @@
         @"\Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScan_LicenseAccepted",
         @"\Microsoft\Windows\UpdateOrchestrator\USO_UxBroker",
         @"\Microsoft\Windows\UpdateOrchestrator\UUS Failover Task",
-        @"\Microsoft\Windows\WindowsUpdate\Refresh Group Policy Workspace",
+        @"\Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
         @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" };
 
         protected static readonly string[] memoryDiagTasks =  {
@@ -60,7 +60,7 @@
 
         protected static readonly string[] WinDefenderTasks = {
         @"\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh",
-        @"\Microsoft\Windows\Windows Defender\Windows Defender Workspace Maintenance",
+        @"\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Cleanup",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Verification", };
