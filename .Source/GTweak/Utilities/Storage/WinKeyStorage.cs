@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GTweak.Utilities.Helpers.Storage
+namespace GTweak.Utilities.Storage
 {
     internal class WinKeyStorage
     {

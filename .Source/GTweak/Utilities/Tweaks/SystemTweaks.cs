@@ -1,6 +1,6 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks.DefenderManager;
 using GTweak.View;
 using GTweak.Windows;
@@ -93,7 +93,7 @@ namespace GTweak.Utilities.Tweaks
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
             if (!isTweakWorkingAntivirus)
-                systemV.TglButton8.StateNA = File.Exists(Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\smartscreen.exe"));
+                systemV.TglButton8.StateNA = File.Exists(Path.Combine(PathLocator.Folders.SystemDrive, @"Windows\System32\smartscreen.exe"));
 
             systemV.TglButton9.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", "0") ||
@@ -455,13 +455,13 @@ namespace GTweak.Utilities.Tweaks
 
                         if (string.IsNullOrEmpty(searchScheme))
                         {
-                            ArchiveManager.Unarchive(StoragePaths.PowFile, Properties.Resources.UltPower);
+                            ArchiveManager.Unarchive(PathLocator.Files.PowPlan, Properties.Resources.UltPower);
 
                             string _guid = Guid.NewGuid().ToString("D");
 
                             using (_powercfg)
                             {
-                                _powercfg.StartInfo.Arguments = $@"-import ""{StoragePaths.PowFile}"" {_guid}";
+                                _powercfg.StartInfo.Arguments = $@"-import ""{PathLocator.Files.PowPlan}"" {_guid}";
                                 _powercfg.Start();
 
                                 await Task.Delay(5);
@@ -473,7 +473,7 @@ namespace GTweak.Utilities.Tweaks
                                 _powercfg.Start();
                             }
 
-                            CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q \"{StoragePaths.FolderLocation}\"");
+                            CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q \"{PathLocator.Folders.Workspace}\"");
                         }
                     }
                     else

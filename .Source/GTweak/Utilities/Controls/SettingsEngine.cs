@@ -1,6 +1,6 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using GTweak.Windows;
 using Microsoft.Win32;
 using Ookii.Dialogs.Wpf;
@@ -13,19 +13,7 @@ using System.Runtime.InteropServices;
 
 namespace GTweak.Utilities.Controls
 {
-    internal struct StoragePaths
-    {
-        internal static string Config = string.Empty;
-        internal static string FolderLocation => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "GTweak");
-        internal static string SystemDisk => Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
-        internal static string HostsFile => Path.Combine(Environment.SystemDirectory, @"drivers\etc\hosts");
-        internal static string PowFile => Path.Combine(FolderLocation, "UltimatePerformance.pow");
-        internal static string IconBlank => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Blank.ico");
-        internal static string LogFile => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GTweak_Error.log");
-        internal static string RegistryLocation => @"HKEY_CURRENT_USER\Software\GTweak";
-    }
-
-    internal sealed class SettingsRepository
+    internal sealed class SettingsEngine
     {
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
@@ -71,20 +59,20 @@ namespace GTweak.Utilities.Controls
             };
 
             _cachedSettings[key] = value;
-            RegistryHelp.Write(Registry.CurrentUser, @"Software\GTweak", key, regValue, kind);
+            RegistryHelp.Write(Registry.CurrentUser, PathLocator.Registry.SubKey, key, regValue, kind);
         }
 
         internal static void СheckingParameters()
         {
             foreach (var kv in _defaultSettings)
             {
-                if (RegistryHelp.ValueExists(StoragePaths.RegistryLocation, kv.Key))
+                if (RegistryHelp.ValueExists(PathLocator.Registry.BaseKey, kv.Key))
                     ChangingParameters(kv.Key, kv.Value);
                 else
                 {
-                    _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultBool ? 1 : 0) is int asBool ? asBool != 0 : defaultBool :
-                         kv.Value is int defaultInt ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultInt) :
-                         kv.Value is string defaultString ? RegistryHelp.GetValue(StoragePaths.RegistryLocation, kv.Key, defaultString) : kv.Value;
+                    _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(PathLocator.Registry.BaseKey, kv.Key, defaultBool ? 1 : 0) is int asBool ? asBool != 0 : defaultBool :
+                         kv.Value is int defaultInt ? RegistryHelp.GetValue(PathLocator.Registry.BaseKey, kv.Key, defaultInt) :
+                         kv.Value is string defaultString ? RegistryHelp.GetValue(PathLocator.Registry.BaseKey, kv.Key, defaultString) : kv.Value;
                 }
             }
 
@@ -110,12 +98,12 @@ namespace GTweak.Utilities.Controls
 
                 try
                 {
-                    StoragePaths.Config = Path.Combine(Path.GetDirectoryName(vistaSaveFileDialog.FileName), Path.GetFileNameWithoutExtension(vistaSaveFileDialog.FileName) + ".ini");
+                    PathLocator.Files.Config = Path.Combine(Path.GetDirectoryName(vistaSaveFileDialog.FileName), Path.GetFileNameWithoutExtension(vistaSaveFileDialog.FileName) + ".ini");
 
-                    if (File.Exists(StoragePaths.Config))
-                        File.Delete(StoragePaths.Config);
+                    if (File.Exists(PathLocator.Files.Config))
+                        File.Delete(PathLocator.Files.Config);
 
-                    INIManager iniManager = new INIManager(StoragePaths.Config);
+                    INIManager iniManager = new INIManager(PathLocator.Files.Config);
                     iniManager.Write("GTweak", "Author", "Greedeks");
                     iniManager.Write("GTweak", "Release", currentRelease);
                     iniManager.WriteAll(INIManager.SectionConf, INIManager.TempTweaksConf);
@@ -138,12 +126,12 @@ namespace GTweak.Utilities.Controls
             if (vistaOpenFileDialog.ShowDialog() == false)
                 return;
 
-            StoragePaths.Config = vistaOpenFileDialog.FileName;
-            INIManager iniManager = new INIManager(StoragePaths.Config);
+            PathLocator.Files.Config = vistaOpenFileDialog.FileName;
+            INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
             if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("Release"))
             {
-                if (File.ReadLines(StoragePaths.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(StoragePaths.Config).Any(line => line.Contains("Slider")))
+                if (File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("Slider")))
                     new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
                 else
                     new NotificationManager().Show("", "info", "empty_import_notification");
@@ -156,12 +144,12 @@ namespace GTweak.Utilities.Controls
         {
             try
             {
-                RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\GTweak");
+                RegistryHelp.DeleteFolderTree(Registry.CurrentUser, PathLocator.Registry.SubKey);
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
                 CommandExecutor.RunCommand($"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 3 & del \"{currentLocation}\" & " +
-                    @$"rd /s /q ""{StoragePaths.FolderLocation}"" & rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""");
+                    @$"rd /s /q ""{PathLocator.Folders.Workspace}"" & rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""");
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }

@@ -1,9 +1,10 @@
 ﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers.Storage;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Storage;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Helpers.Managers
+namespace GTweak.Utilities.Managers
 {
     internal class TaskSchedulerManager : TaskStorage
     {
@@ -50,7 +51,7 @@ namespace GTweak.Utilities.Helpers.Managers
                     command += $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ";
                 command = command.TrimEnd(' ', '&');
 
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, command);
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, command);
             });
         }
 

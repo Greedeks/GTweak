@@ -1,7 +1,7 @@
-﻿using GTweak.Utilities.Configuration;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Animation;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;

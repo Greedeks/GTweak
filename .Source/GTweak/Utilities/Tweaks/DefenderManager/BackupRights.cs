@@ -1,5 +1,5 @@
 ﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
@@ -11,7 +11,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class BackupRights : TaskSchedulerManager
     {
-        private static readonly string _folderBackupPath = Path.Combine(StoragePaths.SystemDisk, @"Windows\System32\Config\WDBackup_GTweak");
+        private static readonly string _folderBackupPath = Path.Combine(PathLocator.Folders.SystemDrive, @"Windows\System32\Config\WDBackup_GTweak");
         private static readonly string _jsonFilePath = Path.Combine(_folderBackupPath, "BackupData.json");
         private static readonly string _aclFilePath = Path.Combine(_folderBackupPath, "BackupRights.acl");
 

@@ -1,7 +1,7 @@
-﻿using GTweak.Utilities.Controls;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Animation;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 using GTweak.Utilities.Tweaks.DefenderManager;
 using System;
@@ -59,7 +59,7 @@ namespace GTweak.Windows
 
         private async Task ApplyTweaksWithProgress(CancellationToken token, IProgress<byte> progress)
         {
-            INIManager iniManager = new INIManager(StoragePaths.Config);
+            INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
             var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, string>> NotificationActions, IEnumerable<KeyValuePair<string, bool>> ExplorerMapping)[]
             {

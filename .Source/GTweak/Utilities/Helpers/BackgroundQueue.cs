@@ -12,10 +12,7 @@ namespace GTweak.Utilities.Helpers
         {
             lock (_key)
             {
-                _previousTask = _previousTask.ContinueWith(t => action()
-                    , CancellationToken.None
-                    , TaskContinuationOptions.None
-                    , TaskScheduler.Default);
+                _previousTask = _previousTask.ContinueWith(t => action(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
                 return _previousTask;
             }
         }
@@ -24,10 +21,7 @@ namespace GTweak.Utilities.Helpers
         {
             lock (_key)
             {
-                var task = _previousTask.ContinueWith(t => func()
-                    , CancellationToken.None
-                    , TaskContinuationOptions.None
-                    , TaskScheduler.Default);
+                var task = _previousTask.ContinueWith(t => func(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
                 _previousTask = task;
                 return task;
             }
@@ -37,10 +31,7 @@ namespace GTweak.Utilities.Helpers
         {
             lock (_key)
             {
-                _previousTask = _previousTask.ContinueWith(t => action(),
-                    CancellationToken.None,
-                    TaskContinuationOptions.None,
-                    TaskScheduler.Default);
+                _previousTask = _previousTask.ContinueWith(t => action(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
                 return _previousTask;
             }
         }

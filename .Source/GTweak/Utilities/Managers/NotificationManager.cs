@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace GTweak.Utilities.Helpers.Managers
+namespace GTweak.Utilities.Managers
 {
     internal sealed class NotificationManager
     {
@@ -51,7 +51,7 @@ namespace GTweak.Utilities.Helpers.Managers
 
         internal async void Show(string action, string titleKey = "", string textKey = "")
         {
-            if (SettingsRepository.IsViewNotification && Interlocked.CompareExchange(ref _isNotificationOpen, 1, 0) == 0)
+            if (SettingsEngine.IsViewNotification && Interlocked.CompareExchange(ref _isNotificationOpen, 1, 0) == 0)
             {
                 await Application.Current.Dispatcher.InvokeAsync(async () =>
                 {

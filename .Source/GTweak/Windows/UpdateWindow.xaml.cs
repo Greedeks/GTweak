@@ -1,8 +1,8 @@
-﻿using GTweak.Utilities.Configuration;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Animation;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -17,7 +17,7 @@ namespace GTweak.Windows
         public UpdateWindow()
         {
             InitializeComponent();
-            CurrentVerison.Text = SettingsRepository.currentRelease;
+            CurrentVerison.Text = SettingsEngine.currentRelease;
             DownloadVersion.Text = NewVerison.Text = SystemDiagnostics.DownloadVersion;
         }
 
@@ -66,7 +66,7 @@ namespace GTweak.Windows
                     };
                     webClient.DownloadFileCompleted += delegate
                     {
-                        CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsRepository.currentName}\" && timeout /t 2 && del \"{SettingsRepository.currentLocation}\" && ren {tempFileName} \"{SettingsRepository.currentName}\" && \"{SettingsRepository.currentLocation}\"");
+                        CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsEngine.currentName}\" && timeout /t 2 && del \"{SettingsEngine.currentLocation}\" && ren {tempFileName} \"{SettingsEngine.currentName}\" && \"{SettingsEngine.currentLocation}\"");
                     };
                     webClient.DownloadFileAsync(new Uri("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"), tempFileName);
                 }

@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Helpers.Managers
+namespace GTweak.Utilities.Managers
 {
     internal class ExplorerManager
     {

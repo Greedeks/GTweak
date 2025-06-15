@@ -506,7 +506,7 @@ namespace GTweak.Utilities.Configuration
 
         internal void ValidateVersionUpdates()
         {
-            if (!SettingsRepository.IsUpdateCheckRequired || !IsNetworkAvailable())
+            if (!SettingsEngine.IsUpdateCheckRequired || !IsNetworkAvailable())
                 return;
 
             try
@@ -522,7 +522,7 @@ namespace GTweak.Utilities.Configuration
                 string DataAsJson = sreader.ReadToEnd();
                 GitMetadata gitVersionUtility = JsonConvert.DeserializeObject<GitMetadata>(DataAsJson);
 
-                if (!string.IsNullOrWhiteSpace(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsRepository.currentRelease) > 0)
+                if (!string.IsNullOrWhiteSpace(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsEngine.currentRelease) > 0)
                 {
                     IsNeedUpdate = true;
                     DownloadVersion = gitVersionUtility.СurrentVersion;

@@ -1,6 +1,6 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Tweaks
 
     internal class ClearingMemory
     {
-        internal static bool IsWinOldExists => Directory.Exists(Path.Combine(StoragePaths.SystemDisk, "Windows.old"));
+        internal static bool IsWinOldExists => Directory.Exists(Path.Combine(PathLocator.Folders.SystemDrive, "Windows.old"));
 
         private const int SE_PRIVILEGE_ENABLED = 2;
         private const string SE_INCREASE_QUOTA_NAME = "SeIncreaseQuotaPrivilege";
@@ -185,24 +185,24 @@ namespace GTweak.Utilities.Tweaks
 
             if (shouldRemoveWinOld)
             {
-                string filePath = Path.Combine(StoragePaths.SystemDisk, "Windows.old");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"сmd.exe /c takeown /f \"{filePath}\"");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c icacls \"{filePath}\" /grant %username%:F");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $"cmd.exe /c rd /s /q \"{filePath}\"");
+                string filePath = Path.Combine(PathLocator.Folders.SystemDrive, "Windows.old");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"сmd.exe /c takeown /f \"{filePath}\"");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{filePath}\" /grant %username%:F");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c rd /s /q \"{filePath}\"");
             }
 
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @$"cmd.exe /c rd /s /q {StoragePaths.SystemDisk}Windows\Temp & " +
-                @$"rd /s /q %localappdata%\Temp & rd /s /q {StoragePaths.SystemDisk}Windows\ff*.tmp & rd /s /q {StoragePaths.SystemDisk}Windows\History\* & " +
-                $@"rd /s /q {StoragePaths.SystemDisk}Windows\CbsTemp\* & rd /s /q {StoragePaths.SystemDisk}Windows\System32\SleepStudy\* & " +
-                $@"rd /s /q {StoragePaths.SystemDisk}Users\%USERNAME%\AppData\Local\Microsoft\Windows\INetCache\IE\* & rd /s /q {StoragePaths.SystemDisk}Windows\Downloaded Program Files\* & " +
-                $@"del /f /q {StoragePaths.SystemDisk}Windows\setupapi.log & rd /s /q {StoragePaths.SystemDisk}Windows\Panther\* & " +
-                $@"for /D %D in (""{StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\WER\*"") do (del /s /q ""%D\*.*"" & for /D %E in (""%D\*"") do rd /s /q ""%E"") & " +
-                $@"del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.app.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.dev.log & del /f /q {StoragePaths.SystemDisk}Windows\INF\setupapi.offline.log");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, @$"cmd.exe /c rd /s /q {PathLocator.Folders.SystemDrive}Windows\Temp & " +
+                @$"rd /s /q %localappdata%\Temp & rd /s /q {PathLocator.Folders.SystemDrive}Windows\ff*.tmp & rd /s /q {PathLocator.Folders.SystemDrive}Windows\History\* & " +
+                $@"rd /s /q {PathLocator.Folders.SystemDrive}Windows\CbsTemp\* & rd /s /q {PathLocator.Folders.SystemDrive}Windows\System32\SleepStudy\* & " +
+                $@"rd /s /q {PathLocator.Folders.SystemDrive}Users\%USERNAME%\AppData\Local\Microsoft\Windows\INetCache\IE\* & rd /s /q {PathLocator.Folders.SystemDrive}Windows\Downloaded Program Files\* & " +
+                $@"del /f /q {PathLocator.Folders.SystemDrive}Windows\setupapi.log & rd /s /q {PathLocator.Folders.SystemDrive}Windows\Panther\* & " +
+                $@"for /D %D in (""{PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\WER\*"") do (del /s /q ""%D\*.*"" & for /D %E in (""%D\*"") do rd /s /q ""%E"") & " +
+                $@"del /f /q {PathLocator.Folders.SystemDrive}Windows\INF\setupapi.app.log & del /f /q {PathLocator.Folders.SystemDrive}Windows\INF\setupapi.dev.log & del /f /q {PathLocator.Folders.SystemDrive}Windows\INF\setupapi.offline.log");
 
             ExplorerManager.Restart(new Process(), async () =>
             {
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, @"cmd.exe /c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_exif.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_idx.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_sr.db & " +

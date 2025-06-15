@@ -1,6 +1,6 @@
-﻿using GTweak.Utilities.Controls;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Animation;
 using System;
 using System.ComponentModel;
 using System.Media;
@@ -55,7 +55,7 @@ namespace GTweak.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (SettingsRepository.IsPlayingSound)
+            if (SettingsEngine.IsPlayingSound)
             {
                 using SoundPlayer notificationSound = new SoundPlayer(Properties.Resources.Sound);
                 notificationSound.Play();

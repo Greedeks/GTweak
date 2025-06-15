@@ -1,5 +1,5 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers.Animation;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Controls;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,6 +12,6 @@ namespace GTweak.Windows
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) => RestartProgress.BeginAnimation(ProgressBar.ValueProperty, FadeAnimation.FadeIn(100, 1.5, () => { SettingsRepository.SelfReboot(); }));
+        private void Window_Loaded(object sender, RoutedEventArgs e) => RestartProgress.BeginAnimation(ProgressBar.ValueProperty, FadeAnimation.FadeIn(100, 1.5, () => { SettingsEngine.SelfReboot(); }));
     }
 }

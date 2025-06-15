@@ -1,7 +1,7 @@
 ﻿using GTweak.Assets.UserControl;
+using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Helpers.Animation;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Diagnostics;

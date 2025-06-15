@@ -1,5 +1,5 @@
 ﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using NetFwTypeLib;
 using System;
 using System.Collections.Generic;
@@ -19,10 +19,10 @@ namespace GTweak.Utilities.Tweaks
 
         private static readonly SortedList<string, string> _сollectExecutablePaths = new SortedList<string, string>
         {
-            ["MoUso"] = File.Exists($@"{StoragePaths.SystemDisk}Windows\UUS\amd64\MoUsoCoreWorker.exe")
-            ? $@"{StoragePaths.SystemDisk}Windows\UUS\amd64\MoUsoCoreWorker.exe" : $@"{StoragePaths.SystemDisk}Windows\System32\MoUsoCoreWorker.exe",
-            ["Uso"] = string.Concat(StoragePaths.SystemDisk, @"Windows\System32\usoclient.exe"),
-            ["WD"] = string.Concat(StoragePaths.SystemDisk, @"Program Files\Windows Defender\MpCmdRun.exe"),
+            ["MoUso"] = File.Exists($@"{PathLocator.Folders.SystemDrive}Windows\UUS\amd64\MoUsoCoreWorker.exe")
+            ? $@"{PathLocator.Folders.SystemDrive}Windows\UUS\amd64\MoUsoCoreWorker.exe" : $@"{PathLocator.Folders.SystemDrive}Windows\System32\MoUsoCoreWorker.exe",
+            ["Uso"] = string.Concat(PathLocator.Folders.SystemDrive, @"Windows\System32\usoclient.exe"),
+            ["WD"] = string.Concat(PathLocator.Folders.SystemDrive, @"Program Files\Windows Defender\MpCmdRun.exe"),
         };
 
         private static void RemoveAllRulesByName(string nameRule)

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace GTweak.Utilities.Helpers.Animation
+namespace GTweak.Utilities.Animation
 {
     internal static class FadeAnimation
     {

@@ -1,8 +1,8 @@
 ﻿using GTweak.Core.ViewModel;
+using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Animation;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -59,7 +59,7 @@ namespace GTweak.View
                 if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
                 {
                     DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
-                    doubleAnim.Completed += delegate { SettingsRepository.IsHiddenIpAddress = false; };
+                    doubleAnim.Completed += delegate { SettingsEngine.IsHiddenIpAddress = false; };
                     Timeline.SetDesiredFrameRate(doubleAnim, 240);
                     IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                 }
@@ -122,7 +122,7 @@ namespace GTweak.View
 
         private void BtnHiddenIP_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            SettingsRepository.IsHiddenIpAddress = !BtnHiddenIP.IsChecked.Value;
+            SettingsEngine.IsHiddenIpAddress = !BtnHiddenIP.IsChecked.Value;
 
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {

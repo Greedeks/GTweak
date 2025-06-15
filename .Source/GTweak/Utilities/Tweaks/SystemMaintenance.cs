@@ -1,6 +1,6 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using Microsoft.Win32;
 using System;
 using System.Management;
@@ -117,7 +117,7 @@ namespace GTweak.Utilities.Tweaks
                 foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
                     SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
 
-                DisableSR(StoragePaths.SystemDisk + @"\\");
+                DisableSR(PathLocator.Folders.SystemDrive + @"\\");
             }
             else
                 new NotificationManager().Show("", "info", "warn_recovery_notification");

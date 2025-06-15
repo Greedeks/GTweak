@@ -1,6 +1,6 @@
-﻿using GTweak.Utilities.Configuration;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers.Animation;
 using GTweak.Windows;
 using System;
 using System.ComponentModel;
@@ -20,13 +20,13 @@ namespace GTweak
         {
             InitializeComponent();
 
-            BtnNotification.StateNA = SettingsRepository.IsViewNotification;
-            BtnUpdate.StateNA = SettingsRepository.IsUpdateCheckRequired;
-            BtnTopMost.StateNA = Topmost = SettingsRepository.IsTopMost;
-            BtnSoundNtn.IsChecked = SettingsRepository.IsPlayingSound;
-            SliderVolume.Value = SettingsRepository.Volume;
-            LanguageSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Language, "en", SettingsRepository.AvailableLangs);
-            ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsRepository.Theme, "Dark", SettingsRepository.AvailableThemes);
+            BtnNotification.StateNA = SettingsEngine.IsViewNotification;
+            BtnUpdate.StateNA = SettingsEngine.IsUpdateCheckRequired;
+            BtnTopMost.StateNA = Topmost = SettingsEngine.IsTopMost;
+            BtnSoundNtn.IsChecked = SettingsEngine.IsPlayingSound;
+            SliderVolume.Value = SettingsEngine.Volume;
+            LanguageSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsEngine.Language, "en", SettingsEngine.AvailableLangs);
+            ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsEngine.Theme, "Dark", SettingsEngine.AvailableThemes);
 
             App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
             App.ThemeChanged += delegate { Close(); new RebootWindow().ShowDialog(); };
@@ -111,7 +111,7 @@ namespace GTweak
             BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3,
                 async () =>
                 {
-                    if (SystemDiagnostics.IsNeedUpdate && SettingsRepository.IsUpdateCheckRequired)
+                    if (SystemDiagnostics.IsNeedUpdate && SettingsEngine.IsUpdateCheckRequired)
                     {
                         await Task.Delay(500);
                         new UpdateWindow().ShowDialog();
@@ -122,44 +122,44 @@ namespace GTweak
         #endregion
 
         #region Settings Menu
-        private void BtnNotification_ChangedState(object sender, EventArgs e) => SettingsRepository.IsViewNotification = !BtnNotification.State;
+        private void BtnNotification_ChangedState(object sender, EventArgs e) => SettingsEngine.IsViewNotification = !BtnNotification.State;
 
-        private void BtnUpdate_ChangedState(object sender, EventArgs e) => SettingsRepository.IsUpdateCheckRequired = !BtnUpdate.State;
+        private void BtnUpdate_ChangedState(object sender, EventArgs e) => SettingsEngine.IsUpdateCheckRequired = !BtnUpdate.State;
 
         private void BtnTopMost_ChangedState(object sender, EventArgs e)
         {
-            SettingsRepository.IsTopMost = !BtnTopMost.State;
+            SettingsEngine.IsTopMost = !BtnTopMost.State;
             Topmost = !BtnTopMost.State;
         }
 
-        private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.IsPlayingSound = (bool)!BtnSoundNtn.IsChecked;
+        private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.IsPlayingSound = (bool)!BtnSoundNtn.IsChecked;
 
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
-            SettingsRepository.Volume = (int)SliderVolume.Value;
-            SettingsRepository.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) << 16));
+            SettingsEngine.Volume = (int)SliderVolume.Value;
+            SettingsEngine.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) << 16));
         }
 
         private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedLang = SettingsRepository.AvailableLangs.ElementAtOrDefault(LanguageSelectionMenu.SelectedIndex) ?? SettingsRepository.AvailableLangs.Last();
-            SettingsRepository.Language = selectedLang;
+            string selectedLang = SettingsEngine.AvailableLangs.ElementAtOrDefault(LanguageSelectionMenu.SelectedIndex) ?? SettingsEngine.AvailableLangs.Last();
+            SettingsEngine.Language = selectedLang;
             App.Language = selectedLang;
         }
 
         private void ThemeSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedTheme = SettingsRepository.AvailableThemes.ElementAtOrDefault(ThemeSelectionMenu.SelectedIndex) ?? SettingsRepository.AvailableThemes.Last();
-            SettingsRepository.Theme = selectedTheme;
+            string selectedTheme = SettingsEngine.AvailableThemes.ElementAtOrDefault(ThemeSelectionMenu.SelectedIndex) ?? SettingsEngine.AvailableThemes.Last();
+            SettingsEngine.Theme = selectedTheme;
             App.Theme = selectedTheme;
         }
 
-        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.SaveFileConfig();
+        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.SaveFileConfig();
 
-        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.OpenFileConfig();
+        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.OpenFileConfig();
 
-        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsRepository.SelfRemoval();
+        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.SelfRemoval();
 
         private void BtnContats_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

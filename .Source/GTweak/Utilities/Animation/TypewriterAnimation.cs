@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace GTweak.Utilities.Helpers.Animation
+namespace GTweak.Utilities.Animation
 {
     internal sealed class TypewriterAnimation
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.IO.Compression;
 
-namespace GTweak.Utilities.Helpers.Managers
+namespace GTweak.Utilities.Managers
 {
     internal static class ArchiveManager
     {

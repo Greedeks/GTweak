@@ -1,5 +1,5 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers.Animation;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Controls;
 using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;

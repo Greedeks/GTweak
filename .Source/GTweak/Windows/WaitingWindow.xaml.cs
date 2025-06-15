@@ -1,5 +1,5 @@
-﻿using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Animation;
+﻿using GTweak.Utilities.Animation;
+using GTweak.Utilities.Helpers;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;

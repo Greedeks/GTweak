@@ -269,24 +269,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Controls\BlockRunTweaker.cs" />
+    <Compile Include="Utilities\Controls\RunGuard.cs" />
     <Compile Include="Utilities\Controls\ErrorLogging.cs" />
-    <Compile Include="Utilities\Helpers\Animation\FadeAnimation.cs" />
+    <Compile Include="Utilities\Animation\FadeAnimation.cs" />
+    <Compile Include="Utilities\Controls\PathLocator.cs" />
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
-    <Compile Include="Utilities\Helpers\Managers\ExplorerManager.cs" />
-    <Compile Include="Utilities\Helpers\Storage\WinKeyStorage.cs" />
-    <Compile Include="Utilities\Helpers\Managers\TaskSchedulerManager.cs" />
-    <Compile Include="Utilities\Helpers\Managers\ArchiveManager.cs" />
+    <Compile Include="Utilities\Managers\ExplorerManager.cs" />
+    <Compile Include="Utilities\Storage\WinKeyStorage.cs" />
+    <Compile Include="Utilities\Managers\TaskSchedulerManager.cs" />
+    <Compile Include="Utilities\Managers\ArchiveManager.cs" />
     <Compile Include="Utilities\Helpers\BackgroundQueue.cs" />
     <Compile Include="Utilities\Helpers\RegistryHelp.cs" />
-    <Compile Include="Utilities\Controls\SettingsRepository.cs" />
+    <Compile Include="Utilities\Controls\SettingsEngine.cs" />
     <Compile Include="Utilities\Helpers\TakingOwnership.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
-    <Compile Include="Utilities\Helpers\Managers\INIManager.cs" />
+    <Compile Include="Utilities\Managers\INIManager.cs" />
     <Compile Include="Utilities\Configuration\MonitoringSystem.cs" />
     <Compile Include="Utilities\Configuration\SystemDiagnostics.cs" />
-    <Compile Include="Utilities\Helpers\Managers\NotificationManager.cs" />
+    <Compile Include="Utilities\Managers\NotificationManager.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\BackupRights.cs" />
@@ -296,11 +297,11 @@
     <Compile Include="Utilities\Tweaks\ServicesTweaks.cs" />
     <Compile Include="Utilities\Tweaks\SystemMaintenance.cs" />
     <Compile Include="Utilities\Tweaks\SystemTweaks.cs" />
-    <Compile Include="Utilities\Helpers\Storage\TaskStorage.cs" />
+    <Compile Include="Utilities\Storage\TaskStorage.cs" />
     <Compile Include="Utilities\Tweaks\UninstallingPakages.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />
-    <Compile Include="Utilities\Helpers\Animation\TypewriterAnimation.cs" />
+    <Compile Include="Utilities\Animation\TypewriterAnimation.cs" />
     <Compile Include="Core\ViewModel\OtherContextVM.cs" />
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
@@ -502,7 +503,7 @@
     <Compile Include="Assets\UserControl\ToggleButton.xaml.cs">
       <DependentUpon>ToggleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Helpers\Animation\BrushAnimation.cs" />
+    <Compile Include="Utilities\Animation\BrushAnimation.cs" />
     <Compile Include="Core\ButtonNavigation.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Core\ViewModelBase.cs" />

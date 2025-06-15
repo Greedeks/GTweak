@@ -1,7 +1,7 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using GTweak.View;
 using Microsoft.Win32;
 using System;
@@ -223,12 +223,12 @@ namespace GTweak.Utilities.Tweaks
                         {
                             if (isDisabled)
                             {
-                                ArchiveManager.Unarchive(StoragePaths.IconBlank, Properties.Resources.Blank);
+                                ArchiveManager.Unarchive(PathLocator.Files.BlankIcon, Properties.Resources.Blank);
                                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0", RegistryValueKind.String);
                             }
                             else
                             {
-                                File.Delete(StoragePaths.IconBlank);
+                                File.Delete(PathLocator.Files.BlankIcon);
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
                             }
                         });
@@ -316,7 +316,7 @@ namespace GTweak.Utilities.Tweaks
 
                     if (SystemDiagnostics.IsWindowsVersion[11])
                     {
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, @"cmd.exe /c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Copilot*.lnk""");
+                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, @"cmd.exe /c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Copilot*.lnk""");
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowCopilotButton", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarDa", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", isDisabled ? 0 : 1, RegistryValueKind.DWord);

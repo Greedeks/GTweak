@@ -36,7 +36,7 @@ namespace GTweak.Utilities.Controls
         {
             try
             {
-                using (FileStream stream = new FileStream(StoragePaths.LogFile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+                using (FileStream stream = new FileStream(PathLocator.Files.ErrorLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                 {
                     await writer.WriteLineAsync($"[{DateTime.Now}]\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
@@ -45,7 +45,7 @@ namespace GTweak.Utilities.Controls
 
                 await EnsureAssociation();
 
-                if (File.Exists(StoragePaths.LogFile))
+                if (File.Exists(PathLocator.Files.ErrorLog))
                 {
                     try
                     {
@@ -53,7 +53,7 @@ namespace GTweak.Utilities.Controls
 
                         Process.Start(new ProcessStartInfo
                         {
-                            FileName = StoragePaths.LogFile,
+                            FileName = PathLocator.Files.ErrorLog,
                             UseShellExecute = true
                         });
                     }

@@ -1,4 +1,4 @@
-﻿using GTweak.Utilities.Helpers.Animation;
+﻿using GTweak.Utilities.Animation;
 using System;
 using System.Windows;
 using System.Windows.Controls;

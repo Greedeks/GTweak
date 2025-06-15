@@ -29,13 +29,13 @@ namespace GTweak
         {
             if (e.Args.Any(arg => arg.Equals("uninstall", StringComparison.OrdinalIgnoreCase)))
             {
-                SettingsRepository.SelfRemoval();
+                SettingsEngine.SelfRemoval();
                 return;
             }
 
-            SettingsRepository.СheckingParameters();
-            BlockRunTweaker.CheckingApplicationCopies();
-            await BlockRunTweaker.CheckingSystemRequirements();
+            SettingsEngine.СheckingParameters();
+            RunGuard.CheckingApplicationCopies();
+            await RunGuard.CheckingSystemRequirements();
 
             new LoadingWindow().Show();
         }

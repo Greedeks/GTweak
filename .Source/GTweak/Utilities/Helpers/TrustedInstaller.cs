@@ -216,7 +216,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     CloseServiceHandle(hService);
                     CloseServiceHandle(hSCManager);
-                    SettingsRepository.PID = (int)statusBuffer.dwProcessId;
+                    SettingsEngine.PID = (int)statusBuffer.dwProcessId;
                     return;
                 }
             }

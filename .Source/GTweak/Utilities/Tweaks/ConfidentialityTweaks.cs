@@ -2,7 +2,7 @@
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Managers;
+using GTweak.Utilities.Managers;
 using GTweak.View;
 using Microsoft.Win32;
 using System;
@@ -92,7 +92,7 @@ namespace GTweak.Utilities.Tweaks
         {
             try
             {
-                int numberRows = File.ReadAllText(StoragePaths.HostsFile).Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Count(line => line.StartsWith("0.0.0.0"));
+                int numberRows = File.ReadAllText(PathLocator.Files.Hosts).Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Count(line => line.StartsWith("0.0.0.0"));
                 return numberRows < 673;
             }
             catch { return false; }
@@ -184,7 +184,7 @@ namespace GTweak.Utilities.Tweaks
                     BlockSpyDomain(isDisabled);
                     Task.Run(delegate
                     {
-                        string backupFile = StoragePaths.HostsFile + @" (Default GTweak)";
+                        string backupFile = PathLocator.Files.Hosts + @" (Default GTweak)";
                         try
                         {
                             if (isDisabled)
@@ -192,17 +192,17 @@ namespace GTweak.Utilities.Tweaks
                                 if (File.Exists(backupFile))
                                     File.Delete(backupFile);
 
-                                File.Move(StoragePaths.HostsFile, backupFile);
-                                ArchiveManager.Unarchive(StoragePaths.HostsFile, Resources.hosts);
+                                File.Move(PathLocator.Files.Hosts, backupFile);
+                                ArchiveManager.Unarchive(PathLocator.Files.Hosts, Resources.hosts);
                             }
                             else
                             {
-                                File.Copy(backupFile, StoragePaths.HostsFile, true);
+                                File.Copy(backupFile, PathLocator.Files.Hosts, true);
 
                                 if (File.Exists(backupFile))
                                     File.Delete(backupFile);
                                 else
-                                    File.WriteAllText(StoragePaths.HostsFile, string.Empty);
+                                    File.WriteAllText(PathLocator.Files.Hosts, string.Empty);
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
@@ -332,7 +332,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton16":
-                    TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsRepository.PID, $@"cmd.exe /c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f");
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $@"cmd.exe /c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f");
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
                     break;
                 case "TglButton17":

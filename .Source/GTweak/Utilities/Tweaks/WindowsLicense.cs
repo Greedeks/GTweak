@@ -1,8 +1,8 @@
 ﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Helpers.Managers;
-using GTweak.Utilities.Helpers.Storage;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Storage;
 using GTweak.Windows;
 using Microsoft.Win32;
 using System;
@@ -54,7 +54,7 @@ namespace GTweak.Utilities.Tweaks
 
                 await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keyWinHWID}");
 
-                CommandExecutor.RunCommand($@"/c del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {StoragePaths.SystemDisk}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
+                CommandExecutor.RunCommand($@"/c del /f /q {PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
                 string originalGeo = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", CultureInfo.InstalledUICulture.Name.Split('-')[1].ToUpperInvariant());
                 RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", "US", RegistryValueKind.String);
 
@@ -67,7 +67,7 @@ namespace GTweak.Utilities.Tweaks
                 XElement foundTicket = xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value.IndexOf(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
                 foundTicket ??= xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value == "KMS");
                 XDocument genuineXml = XDocument.Parse(foundTicket.Element("content")?.Value.Trim());
-                genuineXml.Save(Path.Combine(StoragePaths.SystemDisk, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
+                genuineXml.Save(Path.Combine(PathLocator.Folders.SystemDrive, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
                 await Task.Delay(3000);
 
                 await CommandExecutor.InvokeRunCommand("clipup -v -o", true);
