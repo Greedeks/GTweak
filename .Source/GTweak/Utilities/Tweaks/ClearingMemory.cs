@@ -186,13 +186,13 @@ namespace GTweak.Utilities.Tweaks
             if (shouldRemoveWinOld)
             {
                 string filePath = Path.Combine(PathLocator.Folders.SystemDrive, "Windows.old");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c takeown /f \"{filePath}\"");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{filePath}\" /grant %username%:F");
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c rd /s /q \"{filePath}\"");
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{filePath}\"");
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{filePath}\" /grant {Environment.UserName}:F");
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{filePath}\"");
             }
 
-            TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, @$"cmd.exe /c rd /s /q {PathLocator.Folders.SystemDrive}Windows\Temp & " +
+            CommandExecutor.RunCommandAsTrustedInstaller(@$"/c rd /s /q {PathLocator.Folders.SystemDrive}Windows\Temp & " +
                 @$"rd /s /q %localappdata%\Temp & rd /s /q {PathLocator.Folders.SystemDrive}Windows\ff*.tmp & rd /s /q {PathLocator.Folders.SystemDrive}Windows\History\* & " +
                 $@"rd /s /q {PathLocator.Folders.SystemDrive}Windows\CbsTemp\* & rd /s /q {PathLocator.Folders.SystemDrive}Windows\System32\SleepStudy\* & " +
                 $@"rd /s /q {PathLocator.Folders.SystemDrive}Users\%USERNAME%\AppData\Local\Microsoft\Windows\INetCache\IE\* & rd /s /q {PathLocator.Folders.SystemDrive}Windows\Downloaded Program Files\* & " +
@@ -202,7 +202,7 @@ namespace GTweak.Utilities.Tweaks
 
             ExplorerManager.Restart(new Process(), async () =>
             {
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, @"cmd.exe /c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
+                CommandExecutor.RunCommandAsTrustedInstaller(@"/c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_exif.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_idx.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_sr.db & " +

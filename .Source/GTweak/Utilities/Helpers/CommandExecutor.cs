@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
 {
     internal static class CommandExecutor
     {
-        internal static async Task<string> GetCommandOutput(string arguments, bool isPowerShell = true)
+        internal static int PID = 0;
+
+        private static readonly string _cmdPath = Path.Combine(Environment.SystemDirectory, "cmd.exe");
+        private static readonly string _powerShellPath = Path.Combine(Environment.SystemDirectory, @"WindowsPowerShell\v1.0\powershell.exe");
+
+        internal static async Task<string> GetCommandOutput(string command, bool isPowerShell = true)
         {
             return await Task.Run(async () =>
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
-                    FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
-                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
-                    Verb = "runas",
+                    FileName = isPowerShell ? _powerShellPath : _cmdPath,
+                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -40,29 +45,31 @@ namespace GTweak.Utilities.Helpers
             });
         }
 
-        internal static async void RunCommand(string arguments, bool isPowerShell = false)
+        internal static void RunCommandAsTrustedInstaller(string command, bool isPowerShell = false) =>
+            TrustedInstaller.CreateProcessAsTrustedInstaller(PID, isPowerShell ? $"{_powerShellPath} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\"" : $"{_cmdPath} {command}");
+
+        internal static async void RunCommand(string command, bool isPowerShell = false)
         {
             await Task.Run(() =>
             {
                 Process.Start(new ProcessStartInfo()
                 {
-                    FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
-                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
-                    Verb = "runas",
+                    FileName = isPowerShell ? _powerShellPath : _cmdPath,
+                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
                     WindowStyle = ProcessWindowStyle.Hidden,
-                    UseShellExecute = false,
+                    UseShellExecute = true,
+                    Verb = "runas",              
                     CreateNoWindow = true
                 });
             });
         }
 
-        internal static async Task InvokeRunCommand(string arguments, bool isPowerShell = false)
+        internal static async Task InvokeRunCommand(string command, bool isPowerShell = false)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
-                FileName = isPowerShell ? "powershell.exe" : "cmd.exe",
-                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{arguments}\"" : arguments,
-                Verb = "runas",
+                FileName = isPowerShell ? _powerShellPath : _cmdPath,
+                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,

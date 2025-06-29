@@ -21,7 +21,6 @@ namespace GTweak.Utilities.Controls
         internal static readonly string[] AvailableLangs = { "en", "fr", "it", "ko", "ru", "uk" };
         internal static readonly string[] AvailableThemes = { "Dark", "Light", "Cobalt", "Dark amethyst", "Cold Blue", "System" };
 
-        internal static int PID = 0;
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
         internal static readonly string currentLocation = Assembly.GetExecutingAssembly().Location;

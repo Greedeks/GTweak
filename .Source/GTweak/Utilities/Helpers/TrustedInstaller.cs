@@ -1,5 +1,4 @@
-﻿using GTweak.Utilities.Controls;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -216,7 +215,7 @@ namespace GTweak.Utilities.Helpers
                 {
                     CloseServiceHandle(hService);
                     CloseServiceHandle(hSCManager);
-                    SettingsEngine.PID = (int)statusBuffer.dwProcessId;
+                    CommandExecutor.PID = (int)statusBuffer.dwProcessId;
                     return;
                 }
             }
@@ -228,7 +227,6 @@ namespace GTweak.Utilities.Helpers
 
         internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath)
         {
-
             ImpersonateSystem();
             _ = new PROCESS_INFORMATION();
             var siEx = new STARTUPINFOEX();

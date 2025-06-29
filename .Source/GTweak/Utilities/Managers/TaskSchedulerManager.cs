@@ -1,7 +1,7 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Storage;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Managers
@@ -46,12 +46,12 @@ namespace GTweak.Utilities.Managers
         {
             Task.Run(delegate
             {
-                string command = "cmd.exe /c ";
+                StringBuilder sb = new StringBuilder();
                 foreach (string task in tasklist)
-                    command += $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ";
-                command = command.TrimEnd(' ', '&');
+                    sb.Append($"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ");
+                string tasksCommand = sb.ToString().TrimEnd(' ', '&');
 
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, command);
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c {tasksCommand}");
             });
         }
 

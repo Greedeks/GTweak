@@ -215,7 +215,7 @@ namespace GTweak.Utilities.Tweaks
                     Task.Run(delegate
                     {
                         string value = isDisabled ? "4" : "3";
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $@"cmd.exe /c reg add HKLM\SYSTEM\CurrentControlSet\Services\WalletService /t REG_DWORD /v Start /d {value} /f & " +
+                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\WalletService /t REG_DWORD /v Start /d {value} /f & " +
                              $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\VacSvc /t REG_DWORD /v Start /d {value} /f & " +
                              $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\spectrum /t REG_DWORD /v Start /d {value} /f & " +
                              $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\SharedRealitySvc /t REG_DWORD /v Start /d {value} /f & " +
@@ -252,7 +252,7 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\McpManagementService", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
 
                     if (isDisabled)
-                        TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, @$"cmd.exe /c net stop spooler && del /F /Q %systemroot%\System32\spool\PRINTERS\*.*");
+                        CommandExecutor.RunCommandAsTrustedInstaller(@$"/c net stop spooler && del /F /Q %systemroot%\System32\spool\PRINTERS\*.*");
 
                     try
                     {
@@ -336,9 +336,9 @@ namespace GTweak.Utilities.Tweaks
                         try
                         {
                             if (isDisabled)
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /k takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant %username%:F & rename \"{currentFilePath}\" \"{targetFileName}\"");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant {Environment.UserName}:F & rename \"{currentFilePath}\" \"{targetFileName}\"");
                             else
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /k rename \"{currentFilePath}\" \"{targetFileName}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rename \"{currentFilePath}\" \"{targetFileName}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
@@ -461,10 +461,10 @@ namespace GTweak.Utilities.Tweaks
 
                             if (Directory.Exists(path))
                             {
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c takeown /f \"{path}\"");
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{path}\" /grant %username%:F");
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c rd /s /q \"{path}\"");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\"");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName} :F");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
                             }
                         }
 

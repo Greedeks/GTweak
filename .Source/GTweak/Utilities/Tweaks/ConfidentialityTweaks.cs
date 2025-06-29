@@ -332,7 +332,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton16":
-                    TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $@"cmd.exe /c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f");
+                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f");
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
                     break;
                 case "TglButton17":
