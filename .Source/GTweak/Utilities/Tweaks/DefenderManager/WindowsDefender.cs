@@ -174,7 +174,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 (Path.Combine(PathLocator.Folders.SystemDrive, "Program Files", "Windows Defender", "MpDefenderCoreService.exe"), "BlockAntimalwareCore.exe")
             })
             {
-                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"сmd.exe /c takeown /f \"{filePath}\"");
+                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c takeown /f \"{filePath}\"");
                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{filePath}\" /grant %username%:F");
                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c rename \"{filePath}\" {newFileName}");

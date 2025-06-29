@@ -461,7 +461,7 @@ namespace GTweak.Utilities.Tweaks
 
                             if (Directory.Exists(path))
                             {
-                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"сmd.exe /c takeown /f \"{path}\"");
+                                TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c takeown /f \"{path}\"");
                                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
                                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c icacls \"{path}\" /grant %username%:F");
                                 TrustedInstaller.CreateProcessAsTrustedInstaller(SettingsEngine.PID, $"cmd.exe /c rd /s /q \"{path}\"");
