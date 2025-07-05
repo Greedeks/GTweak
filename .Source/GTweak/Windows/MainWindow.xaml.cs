@@ -161,7 +161,7 @@ namespace GTweak
 
         private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.SelfRemoval();
 
-        private void BtnContats_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void BtnContacts_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Process.Start(new ProcessStartInfo(((Image)sender).Uid switch
             {

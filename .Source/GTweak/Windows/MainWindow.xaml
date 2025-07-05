@@ -314,21 +314,21 @@
 
                                 <Grid Grid.Column="0">
                                     <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                                        <Image x:Uid="git" Width="31" Height="auto" PreviewMouseLeftButtonUp="BtnContats_PreviewMouseLeftButtonUp" Cursor="Hand">
+                                        <Image x:Uid="git" Width="31" Height="auto" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp" Cursor="Hand">
                                             <Image.Style>
                                                 <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
                                                     <Setter Property="Source" Value="{StaticResource DI_Git}"/>
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <Image x:Uid="tg" Width="31" Height="auto" PreviewMouseLeftButtonUp="BtnContats_PreviewMouseLeftButtonUp" Cursor="Hand">
+                                        <Image x:Uid="tg" Width="31" Height="auto" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp" Cursor="Hand">
                                             <Image.Style>
                                                 <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
                                                     <Setter Property="Source" Value="{StaticResource DI_Telegram}"/>
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <Image x:Uid="steam" Width="31" Height="auto" PreviewMouseLeftButtonUp="BtnContats_PreviewMouseLeftButtonUp" Cursor="Hand">
+                                        <Image x:Uid="steam" Width="31" Height="auto" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp" Cursor="Hand">
                                             <Image.Style>
                                                 <Style TargetType="{x:Type Image}" BasedOn="{StaticResource Apps}">
                                                     <Setter Property="Source" Value="{StaticResource DI_Steam}"/>
