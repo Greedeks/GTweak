@@ -88,7 +88,7 @@
     <v:String x:Key="cmbox_it_main">Italiano (IT)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
-    <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
+    <v:String x:Key="cmbox_uk_main">Українська (UA)</v:String>
     <v:String x:Key="cmbox_theme_main">Тема интерфейса:</v:String>
     <v:String x:Key="cmbox_dark_main">Тёмная</v:String>
     <v:String x:Key="cmbox_light_main">Светлая</v:String>
@@ -328,7 +328,7 @@
     <v:String x:Key="TglButton3_description_services">Отключайте, если вы подключены к интернету через кабель или Wi-Fi.</v:String>
     <v:String x:Key="TglButton4_description_services">Отключайте, если вы не используете Магазин Windows и его UWP приложения.</v:String>
     <v:String x:Key="TglButton5_description_services">Отключайте, если вы не хотите, чтобы службы анализировали производительность вашей системы.</v:String>
-    <v:String x:Key="TglButton6_description_services">Отключайте, если вы не используете авторизацию с помощью Windows Hello, по отпечатку пальца или распзования лица.</v:String>
+    <v:String x:Key="TglButton6_description_services">Отключайте, если вы не используете вход по PIN-коду, отпечатку пальца, распознаванию лица или другим методам Windows Hello. Если какой-либо способ уже настроен, он продолжит работать, но для его изменения или удаления потребуется повторно включить Windows Hello.</v:String>
     <v:String x:Key="TglButton7_description_services">Отключайте, если вы не используете Bluetooth и устройства чья работа связана с Bluetooth.</v:String>
     <v:String x:Key="TglButton8_description_services">Отключайте, если у вас нет принтера.</v:String>
     <v:String x:Key="TglButton9_description_services">Отключайте, если у вас нет сканера.</v:String>

@@ -58,7 +58,7 @@ namespace GTweak.Utilities.Helpers
                     Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     UseShellExecute = true,
-                    Verb = "runas",              
+                    Verb = "runas",
                     CreateNoWindow = true
                 });
             });

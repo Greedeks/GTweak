@@ -71,7 +71,11 @@ namespace GTweak.Utilities.Configuration
 
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
-        internal static string SystemDefaultLanguage => Regex.Replace(CultureInfo.CurrentUICulture.Name, @"-.+$", "", RegexOptions.Multiline);
+        internal static (string Сode, string Region) GetCurrentSystemLang()
+        {
+            Match systemLang = Regex.Match(CultureInfo.CurrentUICulture.Name, @"^(?<code>[a-z]{2,3})(?:-(?<region>[A-Za-z]{2,4}))?$", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
+            return (systemLang.Groups["code"].Value, systemLang.Groups["region"].Value);
+        }
 
         internal static bool IsNeedUpdate { get; private set; } = false;
         internal static string DownloadVersion { get; private set; } = string.Empty;
@@ -421,7 +425,7 @@ namespace GTweak.Utilities.Configuration
         {
             try
             {
-                string dns = SystemDefaultLanguage switch
+                string dns = GetCurrentSystemLang().Сode switch
                 {
                     "fa" => "aparat.com",
                     "zh" => "baidu.com",

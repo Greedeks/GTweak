@@ -54,22 +54,33 @@ namespace GTweak
             Environment.Exit(0);
         }
 
+
+        private static Uri GetResourceUri(string folder, bool isTheme = false) => isTheme ? new Uri($"Styles/Themes/{folder}/Colors.xaml", UriKind.Relative) : new Uri($"Languages/{folder}/Localize.xaml", UriKind.Relative);
+
         internal static string Language
         {
             set
             {
-                value ??= SystemDiagnostics.SystemDefaultLanguage;
+                var (code, region) = SystemDiagnostics.GetCurrentSystemLang();
+
+                value ??= code;
+
+                if (value.Contains('-'))
+                {
+                    code = value.Split('-')[0];
+                    region = value.Split('-').Length > 1 ? value.Split('-')[1] : string.Empty;
+                }
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
-                    Source = (value == "be" ? "ru" : value) switch
+                    Source = value switch
                     {
-                        "fr" => new Uri("Languages/fr/Localize.xaml", UriKind.Relative),
-                        "it" => new Uri("Languages/it/Localize.xaml", UriKind.Relative),
-                        "ko" => new Uri("Languages/ko/Localize.xaml", UriKind.Relative),
-                        "ru" => new Uri("Languages/ru/Localize.xaml", UriKind.Relative),
-                        "uk" => new Uri("Languages/uk/Localize.xaml", UriKind.Relative),
-                        _ => new Uri("Languages/en/Localize.xaml", UriKind.Relative),
+                        "fr" => GetResourceUri("fr"),
+                        "it" => GetResourceUri("it"),
+                        "ko" => GetResourceUri("ko"),
+                        _ when new[] { "ru", "be" }.Contains(value) => GetResourceUri("ru"),
+                        "uk" => GetResourceUri("uk"),
+                        _ => GetResourceUri("en")
                     }
                 };
 
@@ -98,12 +109,12 @@ namespace GTweak
                 {
                     Source = value switch
                     {
-                        "Dark" => new Uri($"Styles/Themes/Dark/Colors.xaml", UriKind.Relative),
-                        "Light" => new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
-                        "Cobalt" => new Uri($"Styles/Themes/Cobalt/Colors.xaml", UriKind.Relative),
-                        "Dark amethyst" => new Uri($"Styles/Themes/Dark amethyst/Colors.xaml", UriKind.Relative),
-                        "Cold Blue" => new Uri($"Styles/Themes/Cold blue/Colors.xaml", UriKind.Relative),
-                        _ => RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", string.Empty) == "0" ? new Uri("Styles/Themes/Dark/Colors.xaml", UriKind.Relative) : new Uri($"Styles/Themes/Light/Colors.xaml", UriKind.Relative),
+                        "Dark" => GetResourceUri("Dark", true),
+                        "Light" => GetResourceUri("Light", true),
+                        "Cobalt" => GetResourceUri("Cobalt", true),
+                        "Dark amethyst" => GetResourceUri("Dark amethyst", true),
+                        "Cold Blue" => GetResourceUri("Cold Blue", true),
+                        _ => RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", string.Empty) == "0" ? GetResourceUri("Dark", true) : GetResourceUri("Light", true)
                     }
                 };
 

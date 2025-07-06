@@ -88,7 +88,7 @@
     <v:String x:Key="cmbox_it_main">Italiano (IT)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
-    <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
+    <v:String x:Key="cmbox_uk_main">Українська (UA)</v:String>
     <v:String x:Key="cmbox_theme_main">Interface theme:</v:String>
     <v:String x:Key="cmbox_dark_main">Dark</v:String>
     <v:String x:Key="cmbox_light_main">Light</v:String>
@@ -328,7 +328,7 @@
     <v:String x:Key="TglButton3_description_services">Disable if you are connected to the Internet via cable or Wi-Fi.</v:String>
     <v:String x:Key="TglButton4_description_services">Disable if you are not using the Windows Store and its UWP apps.</v:String>
     <v:String x:Key="TglButton5_description_services">Disable if you do not want services to analyze the performance of your system.</v:String>
-    <v:String x:Key="TglButton6_description_services">Disable if you do not use authorization using Windows Hello, fingerprint or face recognition.</v:String>
+    <v:String x:Key="TglButton6_description_services">Disable if you do not use sign-in with a PIN, fingerprint, facial recognition, or other Windows Hello methods. If a sign-in method has already been set up, it will continue to work, but you’ll need to re-enable Windows Hello to modify or remove it.</v:String>
     <v:String x:Key="TglButton7_description_services">Disable if you do not use Bluetooth and devices whose work is connected to Bluetooth."</v:String>
     <v:String x:Key="TglButton8_description_services">Disable if you don't have a printer.</v:String>
     <v:String x:Key="TglButton9_description_services">Disable if you don't have a scanner.</v:String>
@@ -344,7 +344,7 @@
     <v:String x:Key="TglButton19_description_services">Disable if you do not want the services to load your PC while they are handling errors.</v:String>
     <v:String x:Key="TglButton20_description_services">Disable if you do not remotely manage files via Sharing or using WebDAV.</v:String>
     <v:String x:Key="TglButton21_description_services">Disable if you are not using smart cards. A smart card is one of the varieties of electronic identifiers or plastic with a chip. The appearance is a «bank card». For everyday use of Windows, the service is not needed and you will never need it.</v:String>
-    <v:String x:Key="TglButton22_description_services">Disable it if you’re not using Windows kiosk mode. This mode minimizes the interface: only a single UWP app runs full-screen, and all other features are blocked. Note that this may interfere with installing Windows updates and programs via Windows Installer, since it also disables the setup and initialization of system data and applications on first logon.</v:String>
+    <v:String x:Key="TglButton22_description_services">Disable if you’re not using Windows kiosk mode. This mode minimizes the interface: only a single UWP app runs full-screen, and all other features are blocked. Note that this may interfere with installing Windows updates and programs via Windows Installer, since it also disables the setup and initialization of system data and applications on first logon.</v:String>
     <v:String x:Key="TglButton23_description_services">Disable if you do not use BitLocker disk encryption and EFS file or folder encryption.</v:String>
     <v:String x:Key="TglButton24_description_services">Disable if you have configured all the languages that you will use and do not plan to add new ones.</v:String>
     <v:String x:Key="TglButton25_description_services">Disable if you do not use Windows Defender and all additional Windows security.</v:String>

@@ -88,7 +88,7 @@
     <v:String x:Key="cmbox_it_main">Italiano (IT)</v:String>
     <v:String x:Key="cmbox_ko_main">한국어 (KO)</v:String>
     <v:String x:Key="cmbox_ru_main">Русский (RU)</v:String>
-    <v:String x:Key="cmbox_uk_main">Українська (UK)</v:String>
+    <v:String x:Key="cmbox_uk_main">Українська (UA)</v:String>
     <v:String x:Key="cmbox_theme_main">인터페이스 테마:</v:String>
     <v:String x:Key="cmbox_dark_main">어두운</v:String>
     <v:String x:Key="cmbox_light_main">밝은</v:String>
