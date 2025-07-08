@@ -221,7 +221,7 @@
     <v:String x:Key="TglButton17_description_interface">Reviens au menu contextuel classique pour le bureau et l’explorateur. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="TglButton18_description_interface">Windows 11 affiche parfois des astuces sur l’utilisation de fonctionnalités, par exemple le nouveau menu Démarrer ou les Paramètres rapides. Utile pour les nouveaux utilisateurs, mais souvent inutile.</v:String>
     <v:String x:Key="TglButton19_description_interface">Windows ajoute par défaut un espacement entre les éléments dans l’explorateur pour les écrans tactiles. Ce tweak restaure la disposition classique sans indentation.</v:String>
-    <v:String x:Key="TglButton20_description_interface">Supprime et désactive Copilot dans la barre des tâches, le menu Démarrer et Microsoft Edge. Désactive aussi Recall. Si votre édition Windows ne les a pas, ce tweak n’a pas d’intérêt.</v:String>
+    <v:String x:Key="TglButton20_description_interface">The tweak disables and hides Copilot icons in the taskbar, «Start» menu, Edge, and Notepad, and also disables the Recall feature. Note that only the visual elements and interfaces are removed - Copilot remains available in the system and can still be used if needed. It can only be fully removed by uninstalling Microsoft Edge. If your Windows version never included these AI features (e.g. due to regional restrictions), using the tweak is pointless.</v:String>
     <v:String x:Key="TglButton21_description_interface">Ajoute l’option « Terminer la tâche » dans le menu contextuel du clic droit sur une application dans la barre des tâches. Accélère la fermeture des processus. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="TglButton22_description_interface">Supprime les icônes « Rechercher », « Vue des tâches » et « Chat », désactive les dispositions de capture au survol du bouton maximiser, et supprime « En savoir plus sur cette image ». Sur Windows 10, supprime aussi « Actualités et intérêts » et Cortana. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="TglButton23_description_interface">Windows utilise par défaut les infos collectées pour cibler les publicités, affichées partout où il y a de la place. Désactive cette publicité personnalisée dans les applications Store, Explorateur, Options et menu Démarrer.</v:String>
@@ -289,7 +289,8 @@
     <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
 
     <v:String x:Key="title_over_applications">Confirmation de désinstallation</v:String>
-    <v:String x:Key="text_over_applications">Vous êtes sur le point de supprimer le navigateur Microsoft Edge. Cela entraînera également la suppression du composant EdgeWebView, qui est responsable du rendu des pages web dans des applications telles que Microsoft Office, ainsi que dans certains bots Telegram qui utilisent le WebView intégré pour afficher des menus (mini-applications et contenus web) et d’autres programmes. Avant de continuer, assurez-vous de ne pas avoir besoin de ce composant.</v:String>
+    <v:String x:Key="text_over_applications" xml:space="preserve">You are about to uninstall the Microsoft Edge browser. This will also remove the EdgeWebView component, which is used to display web content in various applications — such as Microsoft Office (e.g., Meeting Insights, Room Finder), the Photos app (the new version uses WebView2), some Telegram bots, and other programs that rely on embedded WebView. Before proceeding, make sure you do not need this component. 
+       In recent builds of Windows 11, Copilot is implemented via EdgeWebView as a PWA or system wrapper. When Edge is uninstalled, Copilot is also removed, since it functions as a web wrapper.</v:String>
     <v:String x:Key="question_over_applications">Souhaitez-vous continuer la suppression avec EdgeWebView ?</v:String>
     <v:String x:Key="btn_сancel">Annuler</v:String>
     <v:String x:Key="btn_delete">Supprimer</v:String>
@@ -331,7 +332,7 @@
     <v:String x:Key="TglButton3_description_services">Désactivez si vous êtes connecté à Internet via câble ou Wi-Fi.</v:String>
     <v:String x:Key="TglButton4_description_services">Désactivez si vous n'utilisez pas le Windows Store et ses applications UWP.</v:String>
     <v:String x:Key="TglButton5_description_services">Désactivez si vous ne souhaitez pas que les services analysent les performances de votre système.</v:String>
-    <v:String x:Key="TglButton6_description_services">Désactivez si vous n'utilisez pas l'authentification Windows Hello, l'empreinte digitale ou la reconnaissance faciale.</v:String>
+    <v:String x:Key="TglButton6_description_services">Disable if you do not use sign-in with a PIN, fingerprint, facial recognition, or other Windows Hello methods. If a sign-in method has already been set up, it will continue to work, but you’ll need to re-enable Windows Hello to modify or remove it.</v:String>
     <v:String x:Key="TglButton7_description_services">Désactivez si vous n'utilisez pas le Bluetooth ni les appareils connectés via Bluetooth.</v:String>
     <v:String x:Key="TglButton8_description_services">Désactivez si vous n'avez pas d'imprimante.</v:String>
     <v:String x:Key="TglButton9_description_services">Désactivez si vous n'avez pas de scanner.</v:String>

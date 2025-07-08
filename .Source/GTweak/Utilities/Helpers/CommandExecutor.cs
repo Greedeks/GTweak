@@ -1,6 +1,6 @@
-﻿using System;
+﻿using GTweak.Utilities.Controls;
+using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
@@ -9,16 +9,13 @@ namespace GTweak.Utilities.Helpers
     {
         internal static int PID = 0;
 
-        private static readonly string _cmdPath = Path.Combine(Environment.SystemDirectory, "cmd.exe");
-        private static readonly string _powerShellPath = Path.Combine(Environment.SystemDirectory, @"WindowsPowerShell\v1.0\powershell.exe");
-
         internal static async Task<string> GetCommandOutput(string command, bool isPowerShell = true)
         {
             return await Task.Run(async () =>
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
-                    FileName = isPowerShell ? _powerShellPath : _cmdPath,
+                    FileName = isPowerShell ? PathLocator.Files.PowerShellExe : PathLocator.Files.CommandShellExe,
                     Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     RedirectStandardOutput = true,
@@ -46,7 +43,7 @@ namespace GTweak.Utilities.Helpers
         }
 
         internal static void RunCommandAsTrustedInstaller(string command, bool isPowerShell = false) =>
-            TrustedInstaller.CreateProcessAsTrustedInstaller(PID, isPowerShell ? $"{_powerShellPath} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\"" : $"{_cmdPath} {command}");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(PID, isPowerShell ? $"{PathLocator.Files.PowerShellExe} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\"" : $"{PathLocator.Files.CommandShellExe} {command}");
 
         internal static async void RunCommand(string command, bool isPowerShell = false)
         {
@@ -54,7 +51,7 @@ namespace GTweak.Utilities.Helpers
             {
                 Process.Start(new ProcessStartInfo()
                 {
-                    FileName = isPowerShell ? _powerShellPath : _cmdPath,
+                    FileName = isPowerShell ? PathLocator.Files.PowerShellExe : PathLocator.Files.CommandShellExe,
                     Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
                     WindowStyle = ProcessWindowStyle.Hidden,
                     UseShellExecute = true,
@@ -68,7 +65,7 @@ namespace GTweak.Utilities.Helpers
         {
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
-                FileName = isPowerShell ? _powerShellPath : _cmdPath,
+                FileName = isPowerShell ? PathLocator.Files.PowerShellExe : PathLocator.Files.CommandShellExe,
                 Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 RedirectStandardOutput = true,

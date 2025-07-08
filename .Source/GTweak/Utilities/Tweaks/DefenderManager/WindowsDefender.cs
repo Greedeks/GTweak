@@ -439,14 +439,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             }
         }
 
-        private static void RunPowerShellCommand(string command)
-        {
-            RunProcess(Path.Combine(Environment.SystemDirectory, @"WindowsPowerShell\v1.0\powershell.exe"),
-                "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -EncodedCommand \"" +
-                Convert.ToBase64String(Encoding.Unicode.GetBytes(command)) + "\"");
-        }
+        private static void RunPowerShellCommand(string command) => RunProcess(PathLocator.Files.PowerShellExe, "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -EncodedCommand \"" + Convert.ToBase64String(Encoding.Unicode.GetBytes(command)) + "\"");
 
-        private static void RunCmdCommand(string command) => RunProcess(Path.Combine(Environment.SystemDirectory, "cmd.exe"), "/d /q /c " + command);
+        private static void RunCmdCommand(string command) => RunProcess(PathLocator.Files.CommandShellExe, "/d /q /c " + command);
 
         private static void RunProcess(string path, string arguments)
         {

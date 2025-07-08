@@ -11,10 +11,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class BackupRights : TaskSchedulerManager
     {
-        private static readonly string _folderBackupPath = Path.Combine(PathLocator.Folders.SystemDrive, @"Windows\System32\Config\WDBackup_GTweak");
-        private static readonly string _jsonFilePath = Path.Combine(_folderBackupPath, "BackupData.json");
-        private static readonly string _aclFilePath = Path.Combine(_folderBackupPath, "BackupRights.acl");
-
         private static readonly Dictionary<string, RegistryKey> _storageRegPaths = new Dictionary<string, RegistryKey>
         {
             { @"SYSTEM\CurrentControlSet\Services\WinDefend", Registry.LocalMachine },
@@ -56,11 +52,11 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         internal static void ExportRights()
         {
-            if (Directory.Exists(_folderBackupPath) == false)
+            if (Directory.Exists(PathLocator.Folders.DefenderBackup) == false)
             {
                 try
                 {
-                    Directory.CreateDirectory(_folderBackupPath);
+                    Directory.CreateDirectory(PathLocator.Folders.DefenderBackup);
 
                     var allValues = new Dictionary<string, Dictionary<string, object>>();
                     var aclDataDict = new Dictionary<string, string>();
@@ -85,8 +81,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                         aclDataDict[path] = aclData;
                     }
 
-                    File.WriteAllText(_jsonFilePath, JsonConvert.SerializeObject(allValues, Formatting.Indented));
-                    File.WriteAllText(_aclFilePath, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
+                    File.WriteAllText(PathLocator.Files.BackupDataJson, JsonConvert.SerializeObject(allValues, Formatting.Indented));
+                    File.WriteAllText(PathLocator.Files.BackupRightsAcl, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
@@ -95,12 +91,12 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         internal static void ImportRights()
         {
-            if (File.Exists(_jsonFilePath) && File.Exists(_aclFilePath))
+            if (File.Exists(PathLocator.Files.BackupDataJson) && File.Exists(PathLocator.Files.BackupRightsAcl))
             {
                 try
                 {
-                    var allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(File.ReadAllText(_jsonFilePath));
-                    var aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(_aclFilePath));
+                    var allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(File.ReadAllText(PathLocator.Files.BackupDataJson));
+                    var aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(PathLocator.Files.BackupRightsAcl));
 
                     foreach (var entry in _storageRegPaths)
                     {
