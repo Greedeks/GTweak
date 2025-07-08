@@ -66,7 +66,7 @@ namespace GTweak.Utilities.Tweaks
             ["LinkedIn"] = ("LinkedInforWindows", false, new List<string> { "Microsoft.LinkedIn" }),
             ["WebMediaExtensions"] = (null, false, new List<string> { "Microsoft.WebMediaExtensions" }),
             ["OneConnect"] = ("MobilePlans", false, new List<string> { "Microsoft.OneConnect" }),
-            ["Edge"] = ("MicrosoftEdge", false, new List<string> { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*" }),
+            ["Edge"] = ("MicrosoftEdge", false, new List<string> { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*", "Microsoft.Copilot" }),
         };
 
         internal static bool HandleAvailabilityStatus(string key, bool? isUnavailable = null)
@@ -202,7 +202,7 @@ namespace GTweak.Utilities.Tweaks
                         break;
                     case "Edge":
                         TakingOwnership.GrantDebugPrivilege();
-                        foreach (string process in new string[] { "msedge.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
+                        foreach (string process in new string[] { "msedge.exe", "pwahelper.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
                             CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f /im {process} /t");
 
                         DeletingTask(edgeTasks);
