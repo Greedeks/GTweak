@@ -245,7 +245,7 @@ namespace GTweak.Utilities.Tweaks
                             CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName}:F");
                             CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
 
-                            Thread.Sleep(500);
+                            Thread.Sleep(1000);
 
                             if (Directory.Exists(path))
                             {

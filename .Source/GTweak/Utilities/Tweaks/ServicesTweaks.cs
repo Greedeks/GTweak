@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.ServiceProcess;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
@@ -212,24 +212,11 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DusmSvc", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton4":
-                    Task.Run(delegate
-                    {
-                        string value = isDisabled ? "4" : "3";
-                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\WalletService /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\VacSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\spectrum /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\SharedRealitySvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\perceptionsimulation /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\MixedRealityOpenXRSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\MapsBroker /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\EntAppSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\embeddedmode /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\wlidsvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\WEPHOSTSVC /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\StorSvc /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\ClipSVC /t REG_DWORD /v Start /d {value} /f & " +
-                             $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\InstallService /t REG_DWORD /v Start /d {value} /f");
-                    });
+                    string[] services = {"WalletService","VacSvc", "spectrum", "SharedRealitySvc","perceptionsimulation", "MixedRealityOpenXRSvc",
+                        "MapsBroker", "EntAppSvc", "embeddedmode","wlidsvc", "WEPHOSTSVC", "StorSvc", "ClipSVC", "InstallService"};
+                    string command = $@"/c {string.Join(" & ", services.Select(s => $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\{s} /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f"))}";
+                    CommandExecutor.RunCommandAsTrustedInstaller(command);
+
                     break;
                 case "TglButton5":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wmiApSrv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -443,42 +430,38 @@ namespace GTweak.Utilities.Tweaks
                     if (isDenyAccess)
                     {
                         TakingOwnership.GrantDebugPrivilege();
-                        foreach (string getName in new[] { "wuauserv", "CryptSvc", "usocoreworker", "RuntimeBroker", "msedge" })
+                        CommandExecutor.RunCommandAsTrustedInstaller("/c net stop wuauserv & net stop bits & net stop cryptSvc & net stop RuntimeBroker");
+
+                        foreach (string name in new[] { "usocoreworker", "RuntimeBroker", "msedge", "MicrosoftEdgeUpdate", "edgeupdate" })
                         {
-                            foreach (Process process in Process.GetProcessesByName(getName))
+                            foreach (Process process in Process.GetProcessesByName(name))
                             {
-                                try
-                                {
-                                    process.Kill();
-                                    process.WaitForExit(1000);
-                                }
-                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                                process.Kill();
+                                process.WaitForExit(1000);
                             }
                         }
 
                         foreach (string path in new[] { $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\Download", $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\DataStore", $@"{PathLocator.Folders.SystemDrive}Windows\System32\catroot2", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
                         {
-
                             if (Directory.Exists(path))
                             {
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\"");
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName} :F");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName}:F");
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
+
+                                Thread.Sleep(1000);
+
+                                if (Directory.Exists(path))
+                                {
+                                    TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
+                                    CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
+                                }
                             }
                         }
 
                         SetTaskStateOwner(false, winUpdatesTasks);
-
-                        foreach (var serviceName in new[] { "CryptSvc", "RuntimeBroker" })
-                        {
-                            using ServiceController svc = new ServiceController(serviceName);
-                            if (svc.Status == ServiceControllerStatus.Stopped)
-                            {
-                                svc.Start();
-                                svc.WaitForStatus(ServiceControllerStatus.Running);
-                            }
-                        }
+                        CommandExecutor.RunCommandAsTrustedInstaller("/c net start bits & net start cryptSvc");
                     }
                     else
                         SetTaskStateOwner(true, winUpdatesTasks);
