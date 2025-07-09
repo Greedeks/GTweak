@@ -152,7 +152,7 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GetBiosInfo()
         {
-            string output = CommandExecutor.GetCommandOutput(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "bcdedit.exe")).GetAwaiter().GetResult();
+            string output = CommandExecutor.GetCommandOutput(PathLocator.Files.BcdEditExe).GetAwaiter().GetResult();
             HardwareData.BiosMode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())

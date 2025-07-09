@@ -36,6 +36,8 @@ namespace GTweak.Utilities.Controls
             internal static readonly string CommandShellExe = FindExecutablePath("cmd.exe");
 
             internal static readonly string PowerShellExe = FindExecutablePath("pwsh.exe") ?? FindExecutablePath("powershell.exe");
+
+            internal static readonly string BcdEditExe = FindExecutablePath("bcdedit.exe");
         }
 
         internal static class Registry

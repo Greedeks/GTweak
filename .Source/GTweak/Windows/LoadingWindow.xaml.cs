@@ -55,7 +55,8 @@ namespace GTweak.Windows
                 () => ExecuteWithLogging(new UninstallingPakages().LoadInstalledPackages, nameof(UninstallingPakages.LoadInstalledPackages)),
                 () => ExecuteWithLogging(new UninstallingPakages().CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount)),
                 () => ExecuteWithLogging(new SystemTweaks().ViewNetshState, nameof(SystemTweaks.ViewNetshState)),
-                () => ExecuteWithLogging(new SystemTweaks().ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus))
+                () => ExecuteWithLogging(new SystemTweaks().ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus)),
+                () => ExecuteWithLogging(new SystemTweaks().ViewConfigTick, nameof(SystemTweaks.ViewConfigTick))
             );
 
             ExecuteWithLogging(() => new MonitoringSystem().GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(MonitoringSystem.GetTotalProcessorUsage));

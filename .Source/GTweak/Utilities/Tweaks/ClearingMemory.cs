@@ -202,12 +202,13 @@ namespace GTweak.Utilities.Tweaks
 
             ExplorerManager.Restart(new Process(), async () =>
             {
-                CommandExecutor.RunCommandAsTrustedInstaller(@"/c attrib -h -r -s %localappdata%\IconCache.db & del /a /q %localappdata%\IconCache.db & " +
+                CommandExecutor.RunCommandAsTrustedInstaller(@"/c attrib -h -r -s %localappdata%\IconCache.db & del /a /f /q %localappdata%\IconCache.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_exif.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_idx.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_sr.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_wide.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_96.db & " +
-                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_256.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_1024.db");
+                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_256.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_1024.db & " +
+                        "ie4uinit.exe -show");
 
                 await Task.Delay(200);
             });

@@ -29,7 +29,7 @@ namespace GTweak.Utilities.Tweaks
     internal sealed class SystemTweaks : Firewall
     {
         internal static bool isTweakWorkingAntivirus = false;
-        private static bool _isNetshState = false, _isBluetoothStatus = false;
+        private static bool _isNetshState = false, _isBluetoothStatus = false, _isTickState = false;
         private readonly string _activeGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);
 
         internal void AnalyzeAndUpdate(SystemView systemV)
@@ -156,7 +156,10 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "MiscPolicyInfo", "2") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "PassedPolicy", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "ShippedWithReserves", "0");
+
+            systemV.TglButton25.StateNA = _isTickState;
         }
+
 
         internal void ViewBluetoothStatus()
         {
@@ -172,6 +175,12 @@ namespace GTweak.Utilities.Tweaks
         {
             string getStateNetsh = await CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false);
             _isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
+        }
+
+        internal void ViewConfigTick()
+        {
+            string output = CommandExecutor.GetCommandOutput(PathLocator.Files.BcdEditExe).GetAwaiter().GetResult();
+            _isTickState = !Regex.IsMatch(output,@"(?is)(?=.*\bdisabledynamictick\s+(yes|true))(?=.*\buseplatformclock\s+(no|false))", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
         }
 
         [DllImport("user32.dll")]
@@ -408,6 +417,18 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "MiscPolicyInfo");
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "PassedPolicy", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "ShippedWithReserves", 1, RegistryValueKind.DWord);
+                    }
+                    break;
+                case "TglButton25":
+                    if (isDisabled)
+                    {
+                        _isTickState = false;
+                        CommandExecutor.RunCommand($@"{PathLocator.Files.BcdEditExe} /set disabledynamictick yes; {PathLocator.Files.BcdEditExe} /set useplatformclock false", true);
+                    }
+                    else
+                    {
+                        _isTickState = true;
+                        CommandExecutor.RunCommand($@"{PathLocator.Files.BcdEditExe} /deletevalue disabledynamictick; {PathLocator.Files.BcdEditExe} /deletevalue useplatformclock", true);
                     }
                     break;
             }

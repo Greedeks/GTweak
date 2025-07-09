@@ -383,7 +383,8 @@
     <v:String x:Key="tgl22_system">«게임 바» 기능 사용</v:String>
     <v:String x:Key="tgl23_system">백그라운드에서 실행되는 응용 프로그램</v:String>
     <v:String x:Key="tgl24_system">Windows에서 예약된 저장소</v:String>
-
+    <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
+    
     <v:String x:Key="TextSlider1_description_system">마우스 포인터의 속도를 변경하여 마우스 매개변수를 검색하는 시간을 절약할 수 있습니다.</v:String>
     <v:String x:Key="TextSlider2_description_system">입력한 문자를 반복하기 시작하기 전에 지연 시간을 변경하며, 권장 값은 0입니다..</v:String>
     <v:String x:Key="TextSlider3_description_system">입력한 문자의 반복 속도를 변경하며, 권장 값은 31입니다.</v:String>
@@ -411,6 +412,7 @@
     <v:String x:Key="TglButton22_description_system">게임을 녹화하는 기능입니다. 전반적으로 시스템의 리소스를 소모합니다. 더 나은 대안이 많이 있으며, 또한 자발적으로 열리지 않습니다.</v:String>
     <v:String x:Key="TglButton23_description_system">일부 응용 프로그램을 사용하면 백그라운드 활동을 관리할 수 있으며, 백그라운드에서 활발하게 사용하지 않을 때 백그라운드 활동이 무엇을 할 수 있는지 결정합니다. 일반적으로 백그라운드 응용 프로그램을 비활성화하면 네트워크 부하는 물론 CPU 부하와 전력 소비를 줄이는 데 도움이 되며, 이는 배터리 수명을 연장하기 때문에 노트북에 유용합니다.</v:String>
     <v:String x:Key="TglButton24_description_system">예약 저장소는 업데이트, 응용 프로그램, 임시 파일 및 시스템 캐시에서 사용할 수 있는 예상 가능한 여유 공간 할당을 제공하도록 설계되었습니다. 이를 비활성화하면 상당한 양의 공간을 확보할 수 있습니다. 그러나 충분한 여유 공간이 있는 경우 이 작업을 권장하지 않으므로 추가 혜택을 받을 수 없습니다.</v:String>
+    <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->

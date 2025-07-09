@@ -169,15 +169,15 @@
     <v:String x:Key="tgl3_interface">Standard size of the system buttons</v:String>
     <v:String x:Key="tgl4_interface">Standard cursor flicker frequency</v:String>
     <v:String x:Key="tgl5_interface">Standard scrollbar size</v:String>
-    <v:String x:Key="tgl6_interface">The transparency effect of the taskbar</v:String>
+    <v:String x:Key="tgl6_interface">Taskbar transparency effect</v:String>
     <v:String x:Key="tgl7_interface">Dark Taskbar theme</v:String>
     <v:String x:Key="tgl8_interface">Dark theme of applications and explorer</v:String>
     <v:String x:Key="tgl9_interface">Delay when calling the context menu</v:String>
     <v:String x:Key="tgl10_interface">Delay in the appearance of previews on the taskbar</v:String>
     <v:String x:Key="tgl11_interface">Arrows for shortcuts to files, folders, or programs</v:String>
     <v:String x:Key="tgl12_interface">Prefix «Label for...»/ postfix «– Label»</v:String>
-    <v:String x:Key="tgl13_interface">The «This PC» icon on the Desktop</v:String>
-    <v:String x:Key="tgl14_interface">The «Trash» icon on the Desktop</v:String>
+    <v:String x:Key="tgl13_interface">«This PC» icon on Desktop</v:String>
+    <v:String x:Key="tgl14_interface">«Trash» icon on Desktop</v:String>
     <v:String x:Key="tgl15_interface">Taskbar Alignment (Windows 11)</v:String>
     <v:String x:Key="tgl16_interface">Standard layout of the «Start» menu (Windows 11)</v:String>
     <v:String x:Key="tgl17_interface">Stripped-down context menu (Windows 11)</v:String>
@@ -193,7 +193,7 @@
     <v:String x:Key="tgl27_interface">«3D Objects» in the explorer</v:String>
     <v:String x:Key="tgl28_interface">Compression of wallpaper format .JPEG of the desktop</v:String>
     <v:String x:Key="tgl29_interface">Tooltips for desktop elements</v:String>
-    <v:String x:Key="tgl30_interface">The search query with «Bing» integration in the Start menu</v:String>
+    <v:String x:Key="tgl30_interface">Search query with «Bing» integration in Start menu</v:String>
     <v:String x:Key="tgl31_interface">Open «Quick Access» instead of «This PC»</v:String>
     <v:String x:Key="tgl32_interface">Displaying file extensions in explorer</v:String>
     
@@ -372,7 +372,7 @@
     <v:String x:Key="tgl11_system">Warnings when running any exe</v:String>
     <v:String x:Key="tgl12_system">Automatic Memory Diagnostics</v:String>
     <v:String x:Key="tgl13_system">Teredo, ISATAP and IPv6 protocols</v:String>
-    <v:String x:Key="tgl14_system">The standard size of the file system cache</v:String>
+    <v:String x:Key="tgl14_system">File system cache standard sizeа</v:String>
     <v:String x:Key="tgl15_system">Slowing down Windows startup and program startup</v:String>
     <v:String x:Key="tgl16_system">Usage history for the Quick Access Toolbar</v:String>
     <v:String x:Key="tgl17_system">Autorun removable media</v:String>
@@ -383,6 +383,7 @@
     <v:String x:Key="tgl22_system">Use the function «Game bar»</v:String>
     <v:String x:Key="tgl23_system">Applications run in the background</v:String>
     <v:String x:Key="tgl24_system">Reserved storage in Windows</v:String>
+    <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
 
     <v:String x:Key="TextSlider1_description_system">Changes the speed of the mouse pointer, saving you time to search for mouse parameters.</v:String>
     <v:String x:Key="TextSlider2_description_system">Will change the delay before starting to repeat the entered character, the recommended value is 0.</v:String>
@@ -411,7 +412,8 @@
     <v:String x:Key="TglButton22_description_system">A function for recording your games. By and large, it uses up the resources of your system. There are many better alternatives, and in addition, which do not open spontaneously.</v:String>
     <v:String x:Key="TglButton23_description_system">Some applications allow you to manage background activity, which determines what they can do when they are in the background and not actively used. In general, disabling background applications will help reduce network load, as well as CPU load and power consumption, which is useful for laptops because it prolongs battery life.</v:String>
     <v:String x:Key="TglButton24_description_system">Reserved storage is designed to provide a predictable allocation of free space that will be used by updates, applications, temporary files, and the system cache. Disabling it can free up a significant amount of space. However, if you have enough free space, it is not recommended to do this, you will not receive any additional benefits.</v:String>
-    <!--#endregion-->
+    <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
+        <!--#endregion-->
 
     <!--#region Information System Page -->
     <v:String x:Key="title_win_systemInformation">Operating system:</v:String>
