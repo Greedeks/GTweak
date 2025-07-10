@@ -46,8 +46,8 @@ namespace GTweak.Utilities.Configuration
 
         internal struct HardwareData
         {
-            internal static string OperatingSystem { get; set; } = string.Empty;
-            internal static string OSVersion { get; set; } = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString() ?? string.Empty;
+            internal static string OperatingSystem { get; set; } = $"\n{Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString()}" ?? string.Empty;
+            internal static string OSVersion { get; set; } = string.Empty;
             internal static string OSBuild { get; set; } = string.Empty;
             internal static string Bios { get; set; } = string.Empty;
             internal static string BiosMode { get; set; } = string.Empty;
@@ -152,7 +152,7 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GetBiosInfo()
         {
-            string output = CommandExecutor.GetCommandOutput(PathLocator.Files.BcdEditExe).GetAwaiter().GetResult();
+            string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).GetAwaiter().GetResult();
             HardwareData.BiosMode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())

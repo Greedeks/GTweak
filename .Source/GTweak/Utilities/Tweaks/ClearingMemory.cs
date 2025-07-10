@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Tweaks
 
     internal class ClearingMemory
     {
-        internal static bool IsWinOldExists => Directory.Exists(Path.Combine(PathLocator.Folders.SystemDrive, "Windows.old"));
+        internal static bool IsWinOldExists => Directory.Exists(PathLocator.Files.WindowsOld);
 
         private const int SE_PRIVILEGE_ENABLED = 2;
         private const string SE_INCREASE_QUOTA_NAME = "SeIncreaseQuotaPrivilege";
@@ -185,11 +185,11 @@ namespace GTweak.Utilities.Tweaks
 
             if (shouldRemoveWinOld)
             {
-                string filePath = Path.Combine(PathLocator.Folders.SystemDrive, "Windows.old");
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{filePath}\"");
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{filePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{filePath}\" /grant {Environment.UserName}:F");
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{filePath}\"");
+                string dir = PathLocator.Files.WindowsOld;
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{dir}\"");
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /grant {Environment.UserName}:F");
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{dir}\"");
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller(@$"/c rd /s /q {PathLocator.Folders.SystemDrive}Windows\Temp & " +

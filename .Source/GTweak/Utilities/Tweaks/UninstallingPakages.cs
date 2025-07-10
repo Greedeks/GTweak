@@ -13,9 +13,8 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingPakages : TaskSchedulerManager
     {
-        internal static bool IsOneDriveInstalled => File.Exists(Environment.ExpandEnvironmentVariables(@"%userprofile%\AppData\Local\Microsoft\OneDrive\OneDrive.exe"));
+        internal static bool IsOneDriveInstalled => File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe"));
         private static bool _isLocalAccount = false;
-        private static readonly string _pathPackage = Path.Combine(PathLocator.Folders.SystemDrive, "Program Files", "WindowsApps");
 
         internal void LoadInstalledPackages() => InstalledPackages = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
         internal static HashSet<string> InstalledPackages = new HashSet<string>();
@@ -136,7 +135,7 @@ namespace GTweak.Utilities.Tweaks
 
                     await CommandExecutor.InvokeRunCommand(string.Join(" ; ", psCommands), true).ConfigureAwait(false);
 
-                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /d %i in ({string.Join(" ", packageNamesToRemove.Select(n => $@"""{_pathPackage}\*{n}*"""))}) do takeown /f ""%i"" /r /d Y & icacls ""%i"" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls ""%i"" /grant {Environment.UserName}:F & rd /s /q ""%i""");
+                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /d %i in ({string.Join(" ", packageNamesToRemove.Select(n => $@"""{Path.Combine(PathLocator.Folders.SystemDrive, "Program Files", "WindowsApps")}\*{n}*"""))}) do takeown /f ""%i"" /r /d Y & icacls ""%i"" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls ""%i"" /grant {Environment.UserName}:F & rd /s /q ""%i""");
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
@@ -259,8 +258,7 @@ namespace GTweak.Utilities.Tweaks
                             if (!shouldRemoveWebView && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
                                 continue;
 
-                            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
-                            RemoveDirectory(path);
+                            RemoveDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder));
                         }
 
                         try

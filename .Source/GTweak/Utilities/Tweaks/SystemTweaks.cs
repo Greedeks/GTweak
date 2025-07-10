@@ -179,8 +179,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal void ViewConfigTick()
         {
-            string output = CommandExecutor.GetCommandOutput(PathLocator.Files.BcdEditExe).GetAwaiter().GetResult();
-            _isTickState = !Regex.IsMatch(output,@"(?is)(?=.*\bdisabledynamictick\s+(yes|true))(?=.*\buseplatformclock\s+(no|false))", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
+            string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).GetAwaiter().GetResult();
+            _isTickState = !Regex.IsMatch(output, @"(?is)(?=.*\bdisabledynamictick\s+(yes|true))(?=.*\buseplatformclock\s+(no|false))", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
         }
 
         [DllImport("user32.dll")]
@@ -423,12 +423,12 @@ namespace GTweak.Utilities.Tweaks
                     if (isDisabled)
                     {
                         _isTickState = false;
-                        CommandExecutor.RunCommand($@"{PathLocator.Files.BcdEditExe} /set disabledynamictick yes; {PathLocator.Files.BcdEditExe} /set useplatformclock false", true);
+                        CommandExecutor.RunCommand($@"{PathLocator.Executable.BcdEdit} /set disabledynamictick yes; {PathLocator.Executable.BcdEdit} /set useplatformclock false", true);
                     }
                     else
                     {
                         _isTickState = true;
-                        CommandExecutor.RunCommand($@"{PathLocator.Files.BcdEditExe} /deletevalue disabledynamictick; {PathLocator.Files.BcdEditExe} /deletevalue useplatformclock", true);
+                        CommandExecutor.RunCommand($@"{PathLocator.Executable.BcdEdit} /deletevalue disabledynamictick; {PathLocator.Executable.BcdEdit} /deletevalue useplatformclock", true);
                     }
                     break;
             }
@@ -441,7 +441,7 @@ namespace GTweak.Utilities.Tweaks
                 Process _powercfg = new Process()
                 {
                     StartInfo = {
-                        FileName = "powercfg",
+                        FileName = PathLocator.Executable.PowerCfg,
                         CreateNoWindow = true,
                         WindowStyle = ProcessWindowStyle.Hidden
                     },

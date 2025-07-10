@@ -37,7 +37,7 @@ namespace GTweak.Utilities.Managers
                 {
                     try
                     {
-                        if (string.Compare(process.MainModule?.FileName, $@"{Environment.GetEnvironmentVariable("WINDIR")}\{"explorer.exe"}", StringComparison.OrdinalIgnoreCase) == 0 && Process.GetProcessesByName("explorer").Length != 0)
+                        if (string.Compare(process.MainModule?.FileName, PathLocator.Executable.Explorer, StringComparison.OrdinalIgnoreCase) == 0 && Process.GetProcessesByName("explorer").Length != 0)
                         {
                             process.Kill();
                             action?.Invoke();
@@ -49,7 +49,7 @@ namespace GTweak.Utilities.Managers
                     {
                         if (Process.GetProcessesByName("explorer").Length == 0)
                         {
-                            launchExplorer.StartInfo.FileName = $@"{Environment.GetEnvironmentVariable("WINDIR")}\explorer.exe";
+                            launchExplorer.StartInfo.FileName = PathLocator.Executable.Explorer;
                             launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
                             launchExplorer.StartInfo.UseShellExecute = true;
                             launchExplorer.Start();

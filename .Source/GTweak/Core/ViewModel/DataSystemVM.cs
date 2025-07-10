@@ -65,22 +65,31 @@ namespace GTweak.Core.ViewModel
 
             DisplayData = new ObservableCollection<DataSystemModel>
             {
-                 new DataSystemModel { Name = "Windows", Data = SystemDiagnostics.HardwareData.OperatingSystem },
-                 new DataSystemModel { Name = "Processes", Data =  new MonitoringSystem().GetNumberRunningProcesses },
-                 new DataSystemModel { Name = "Bios", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.Bios) ? SystemDiagnostics.HardwareData.Bios : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
-                 new DataSystemModel { Name = "Mode", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.BiosMode) ? SystemDiagnostics.HardwareData.BiosMode : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
-                 new DataSystemModel { Name = "Motherboard", Data =  !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.Motherboard) ? SystemDiagnostics.HardwareData.Motherboard : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
-                 new DataSystemModel { Name = "Processor", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.Processor) ? SystemDiagnostics.HardwareData.Processor : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
-                 new DataSystemModel { Name = "Graphics", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.Graphics) ? SystemDiagnostics.HardwareData.Graphics : (string)Application.Current.Resources["driver_not_installed_systemInformatin"] },
-                 new DataSystemModel { Name = "Memory", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.Memory) ? SystemDiagnostics.HardwareData.Memory : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
-                 new DataSystemModel { Name = "Storage", Data =  !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.Storage) ? SystemDiagnostics.HardwareData.Storage : (string)Application.Current.Resources["no_device_information_systemInformatin"] },
-                 new DataSystemModel { Name = "Audio", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.AudioDevice) ? SystemDiagnostics.HardwareData.AudioDevice : (string)Application.Current.Resources["driver_not_installed_systemInformatin"] },
-                 new DataSystemModel { Name = "Network", Data = !string.IsNullOrEmpty(SystemDiagnostics.HardwareData.NetworkAdapter) ? SystemDiagnostics.HardwareData.NetworkAdapter : (string)Application.Current.Resources["driver_not_installed_systemInformatin"] },
-                 new DataSystemModel { Name = "IpAddress", Data = SystemDiagnostics.HardwareData.UserIPAddress }
+                CreateModelCollection("Windows", SystemDiagnostics.HardwareData.OperatingSystem),
+                CreateModelCollection("Processes", new MonitoringSystem().GetNumberRunningProcesses),
+                CreateModelCollection("Bios", SystemDiagnostics.HardwareData.Bios, "no_device_information_systemInformatin"),
+                CreateModelCollection("Mode", SystemDiagnostics.HardwareData.BiosMode, "no_device_information_systemInformatin"),
+                CreateModelCollection("Motherboard", SystemDiagnostics.HardwareData.Motherboard, "no_device_information_systemInformatin"),
+                CreateModelCollection("Processor", SystemDiagnostics.HardwareData.Processor, "no_device_information_systemInformatin"),
+                CreateModelCollection("Graphics", SystemDiagnostics.HardwareData.Graphics, "driver_not_installed_systemInformatin"),
+                CreateModelCollection("Memory", SystemDiagnostics.HardwareData.Memory, "no_device_information_systemInformatin"),
+                CreateModelCollection("Storage", SystemDiagnostics.HardwareData.Storage, "no_device_information_systemInformatin"),
+                CreateModelCollection("Audio", SystemDiagnostics.HardwareData.AudioDevice, "driver_not_installed_systemInformatin"),
+                CreateModelCollection("Network", SystemDiagnostics.HardwareData.NetworkAdapter, "driver_not_installed_systemInformatin"),
+                CreateModelCollection("IpAddress", SystemDiagnostics.HardwareData.UserIPAddress)
             };
 
             SetBlurValue = (SystemDiagnostics.isIPAddressFormatValid && SettingsEngine.IsHiddenIpAddress) ? 20 : 0;
             SetVisibility = SystemDiagnostics.isIPAddressFormatValid ? Visibility.Visible : Visibility.Hidden;
+        }
+
+        private DataSystemModel CreateModelCollection(string name, object data, string fallbackResourceKey = null)
+        {
+            return new DataSystemModel
+            {
+                Name = name,
+                Data = (string)(fallbackResourceKey == null ? data : (!string.IsNullOrEmpty(data as string) ? data : (string)Application.Current.Resources[fallbackResourceKey]))
+            };
         }
     }
 }

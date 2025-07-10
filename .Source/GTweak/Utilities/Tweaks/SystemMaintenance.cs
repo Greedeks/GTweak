@@ -3,6 +3,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -17,7 +18,6 @@ namespace GTweak.Utilities.Tweaks
         private static extern int SRRemoveRestorePoint(int index);
         private static readonly ManagementClass _restorePoint = new ManagementClass(new ManagementScope(@"\\localhost\root\default"), new ManagementPath("SystemRestore"), new ObjectGetOptions());
         private static ManagementBaseObject _inParams, _outParams;
-        private static bool _isWorkingCreatePoint = false;
 
         internal static bool IsSystemRestoreDisabled => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "RPSessionInterval", "0");
 
@@ -58,11 +58,8 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void CreateRestorePoint()
         {
-            if (_isWorkingCreatePoint) return;
-
             try
             {
-                _isWorkingCreatePoint = true;
                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency", 0, RegistryValueKind.DWord);
 
                 EnableRecovery();
@@ -84,14 +81,9 @@ namespace GTweak.Utilities.Tweaks
                 else
                     new NotificationManager(300).Show("", "warn", "error_point_notification");
 
-                _isWorkingCreatePoint = false;
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
             }
-            catch
-            {
-                _isWorkingCreatePoint = false;
-                new NotificationManager().Show("", "warn", "error_point_notification");
-            }
+            catch { new NotificationManager().Show("", "warn", "error_point_notification"); }
         }
 
         internal static void StartRecovery()
@@ -133,7 +125,7 @@ namespace GTweak.Utilities.Tweaks
 
             _inParams = _restorePoint.GetMethodParameters("Enable");
             _inParams["WaitTillEnabled"] = true;
-            _inParams["Drive"] = System.IO.Path.GetPathRoot(Environment.SystemDirectory);
+            _inParams["Drive"] = Path.GetPathRoot(Environment.SystemDirectory);
             _restorePoint.InvokeMethod("Enable", _inParams, null);
         }
     }
