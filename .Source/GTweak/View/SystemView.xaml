@@ -69,6 +69,7 @@
                         <uc:ToggleButton x:Name="TglButton20" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl20_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton22" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl22_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                         <uc:ToggleButton x:Name="TglButton24" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl24_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                        <uc:ToggleButton x:Name="TglButton26" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl26_system}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
                     </StackPanel>
                 </Grid>
             </Grid>

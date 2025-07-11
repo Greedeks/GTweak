@@ -384,7 +384,8 @@
     <v:String x:Key="tgl23_system">Applications run in the background</v:String>
     <v:String x:Key="tgl24_system">Reserved storage in Windows</v:String>
     <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
-
+    <v:String x:Key="tgl26_system">Hide «PC Health Check» from update system</v:String>
+    
     <v:String x:Key="TextSlider1_description_system">Changes the speed of the mouse pointer, saving you time to search for mouse parameters.</v:String>
     <v:String x:Key="TextSlider2_description_system">Will change the delay before starting to repeat the entered character, the recommended value is 0.</v:String>
     <v:String x:Key="TextSlider3_description_system">Changes the repetition rate of the entered character, the recommended value is 31.</v:String>
@@ -413,7 +414,8 @@
     <v:String x:Key="TglButton23_description_system">Some applications allow you to manage background activity, which determines what they can do when they are in the background and not actively used. In general, disabling background applications will help reduce network load, as well as CPU load and power consumption, which is useful for laptops because it prolongs battery life.</v:String>
     <v:String x:Key="TglButton24_description_system">Reserved storage is designed to provide a predictable allocation of free space that will be used by updates, applications, temporary files, and the system cache. Disabling it can free up a significant amount of space. However, if you have enough free space, it is not recommended to do this, you will not receive any additional benefits.</v:String>
     <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
-        <!--#endregion-->
+    <v:String x:Key="TglButton26_description_system">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
+    <!--#endregion-->
 
     <!--#region Information System Page -->
     <v:String x:Key="title_win_systemInformation">Operating system:</v:String>

@@ -384,6 +384,7 @@
     <v:String x:Key="tgl23_system">Програми працюють у фоновому режимі</v:String>
     <v:String x:Key="tgl24_system">Зарезервоване сховище у Windows</v:String>
     <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
+    <v:String x:Key="tgl26_system">Hide «PC Health Check» from update system</v:String>
     
     <v:String x:Key="TextSlider1_description_system">Дозволяє змінити швидкість переміщення вказівника миші, заощаджуючи ваш час на пошук відповідних параметрів.</v:String>
     <v:String x:Key="TextSlider2_description_system">Зміна затримки перед початком повторного введення символу, рекомендоване значення - 0.</v:String>
@@ -413,6 +414,7 @@
     <v:String x:Key="TglButton23_description_system">Деякі програми дозволяють керувати фоновою активністю, що визначає їх роботу, коли вони перебувають у фоновому режимі та не використовуються активно. Загалом, вимкнення фонових програм допоможе зменшити споживання енергії та навантаження на мережу і процесор, що корисно для ноутбуків, оскільки подовжує час автономної роботи.</v:String>
     <v:String x:Key="TglButton24_description_system">Зарезервоване сховище призначено для забезпечення передбачуваного розподілу вільного простору, який використовуватиметься оновленнями, додатками, тимчасовими файлами і системним кешем. Вимкнення сховища може звільнити значний обсяг простору. Однак, якщо у вас достатньо вільного місця, робити це не рекомендовано, ніяких додаткових переваг ви не отримаєте.</v:String>
     <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
+    <v:String x:Key="TglButton26_description_system">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->

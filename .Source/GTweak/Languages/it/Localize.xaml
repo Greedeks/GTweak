@@ -385,7 +385,8 @@
     <v:String x:Key="tgl23_system">Esecuzione delle applicazioni in background</v:String>
     <v:String x:Key="tgl24_system">Spazio riservato in Windows</v:String>
     <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
-
+    <v:String x:Key="tgl26_system">Hide «PC Health Check» from update system</v:String>
+    
     <v:String x:Key="TextSlider1_description_system">Modifica la velocità del puntatore del mouse, risparmiando tempo nella ricerca delle impostazioni.</v:String>
     <v:String x:Key="TextSlider2_description_system">Modifica il ritardo prima che inizi la ripetizione di un carattere; il valore consigliato è 0.</v:String>
     <v:String x:Key="TextSlider3_description_system">Modifica la velocità di ripetizione dei caratteri digitati; il valore consigliato è 31.</v:String>
@@ -414,6 +415,7 @@
     <v:String x:Key="TglButton23_description_system">Disattiva le app in background per ridurre il carico sulla rete, sulla CPU e sulla batteria.</v:String>
     <v:String x:Key="TglButton24_description_system">Lo spazio riservato è utile per aggiornamenti e cache. Disattivandolo si libera spazio, ma non è consigliato se hai spazio sufficiente.</v:String>
     <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
+    <v:String x:Key="TglButton26_description_system">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->
