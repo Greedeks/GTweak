@@ -34,6 +34,7 @@ namespace GTweak.Utilities.Managers
         {
             new { Button = "TglButton2", Action = "logout" },
             new { Button = "TglButton7", Action = "restart" },
+            new { Button = "TglButton8", Action = "restart" },
             new { Button = "TglButton9", Action = "restart" },
             new { Button = "TglButton10", Action = "restart" },
             new { Button = "TglButton12", Action = "restart" },

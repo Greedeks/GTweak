@@ -3,7 +3,6 @@ using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
-using GTweak.Utilities.Tweaks.DefenderManager;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -95,13 +94,7 @@ namespace GTweak.Windows
                         else if (tweak == "TglButton8")
                         {
                             BackgroundQueue backgroundQueue = new BackgroundQueue();
-                            await backgroundQueue.QueueTask(delegate
-                            {
-                                if (Convert.ToBoolean(value))
-                                    WindowsDefender.Deactivate();
-                                else
-                                    WindowsDefender.Activate();
-                            });
+                            await backgroundQueue.QueueTask(delegate { SystemTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false); });
                         }
                         else
                             SystemTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));

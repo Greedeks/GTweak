@@ -53,14 +53,7 @@ namespace GTweak.View
                 Parallel.Invoke(async delegate { await Task.Delay(1000); new SystemTweaks().AnalyzeAndUpdate(this); });
             }
             else
-            {
-                if (!SystemTweaks.isTweakWorkingAntivirus)
-                {
-                    SystemTweaks.isTweakWorkingAntivirus = true;
-                    SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
-                    new NotificationManager().Show("", "info", "defender_notification");
-                }
-            }
+                SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new SystemTweaks().AnalyzeAndUpdate(this));

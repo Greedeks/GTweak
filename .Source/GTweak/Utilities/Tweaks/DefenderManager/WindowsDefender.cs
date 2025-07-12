@@ -11,7 +11,15 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class WindowsDefender : BackupRights
     {
-        internal static void Activate()
+        internal static void SetProtectionState(bool isDisabled)
+        {
+            if (isDisabled)
+                Deactivate();
+            else
+                Activate();
+        }
+
+        private static void Activate()
         {
             CommandExecutor.RunCommandAsTrustedInstaller("/c reg delete HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost /v EnableWebContentEvaluation /f & " +
                 "reg delete HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer /v SmartScreenEnabled /f & " +
@@ -161,7 +169,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             ImportRights();
         }
 
-        internal static void Deactivate()
+        private static void Deactivate()
         {
             ExportRights();
 

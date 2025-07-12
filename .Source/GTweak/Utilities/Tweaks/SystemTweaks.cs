@@ -28,7 +28,6 @@ namespace GTweak.Utilities.Tweaks
 
     internal sealed class SystemTweaks : Firewall
     {
-        internal static bool isTweakWorkingAntivirus = false;
         private static bool _isNetshState = false, _isBluetoothStatus = false, _isTickState = false;
         private readonly string _activeGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);
 
@@ -92,8 +91,7 @@ namespace GTweak.Utilities.Tweaks
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-            if (!isTweakWorkingAntivirus)
-                systemV.TglButton8.StateNA = File.Exists(Path.Combine(PathLocator.Folders.SystemDrive, @"Windows\System32\smartscreen.exe"));
+            systemV.TglButton8.StateNA = File.Exists(Path.Combine(PathLocator.Folders.SystemDrive, @"Windows\System32\smartscreen.exe"));
 
             systemV.TglButton9.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", "0") ||
@@ -213,7 +211,7 @@ namespace GTweak.Utilities.Tweaks
 
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
-        internal static async void ApplyTweaks(string tweak, bool isDisabled)
+        internal static async void ApplyTweaks(string tweak, bool isDisabled, bool canShowWindow = true)
         {
             INIManager.TempWrite(INIManager.TempTweaksSys, tweak, isDisabled);
 
@@ -273,20 +271,20 @@ namespace GTweak.Utilities.Tweaks
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     break;
                 case "TglButton8":
+                    if (canShowWindow)
                     {
                         WaitingWindow waitingWindow = new WaitingWindow();
                         waitingWindow.Show();
+
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate
-                        {
-                            if (isDisabled)
-                                WindowsDefender.Deactivate();
-                            else
-                                WindowsDefender.Activate();
-                        });
-                        await backgroundQueue.QueueTask(delegate { isTweakWorkingAntivirus = false; new NotificationManager(300).Show("restart"); });
+                        await backgroundQueue.QueueTask(delegate { new NotificationManager().Show("", "info", "defender_notification"); });
+                        await backgroundQueue.QueueTask(delegate { WindowsDefender.SetProtectionState(isDisabled); });
+                        await backgroundQueue.QueueTask(delegate { new NotificationManager(300).Show("restart"); });
                         waitingWindow.Close();
                     }
+                    else
+                        WindowsDefender.SetProtectionState(isDisabled);
+
                     BlockWDefender(isDisabled);
                     break;
                 case "TglButton9":
