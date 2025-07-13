@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,7 +12,6 @@ using System.Management;
 using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
-using System.ServiceProcess;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -270,19 +268,44 @@ namespace GTweak.Utilities.Configuration
                 string data = new[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) || !value.Equals("Unknown", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
                 string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
                 {
+                    2 => "DRAM",
+                    3 => "EDRAM",
+                    4 => "VRAM",
+                    5 => "SRAM",
+                    6 => "RAM",
+                    7 => "ROM",
+                    8 => "Flash",
+                    9 => "EEPROM",
+                    10 => "FEPROM",
+                    11 => "EPROM",
+                    12 => "CDRAM",
+                    13 => "3DRAM",
+                    14 => "SDRAM",
+                    15 => "SGRAM",
+                    16 => "RDRAM",
+                    17 => "DDR",
+                    18 => "DDR2",
+                    19 => "DDR2 FB-DIMM",
+                    20 => "Reserved",
+                    21 => "Reserved",
+                    22 => "FBD2",
+                    23 => "DDR3",
                     24 => "DDR3",
+                    25 => "DDR4",
                     26 => "DDR4",
+                    27 => "LPDDR",
+                    28 => "LPDDR2",
                     29 => "LPDDR3",
                     30 => "LPDDR4",
                     31 => "LPDDR4X",
+                    32 => "Logical Non-Volatile",
+                    33 => "HBM",
                     34 => "DDR5",
                     35 => "LPDDR5",
                     36 => "LPDDR5X",
-                    _ => string.Empty
+                    _ => string.Empty,
                 };
-
-                string[] vmKeywords = new[] { "Virtual", "VMware", "Hyper-V", "KVM", "QEMU", "Xen", "Parallels", "VBox", "VirtualBox", "Cloud", "Emulated", "Proxmox", "OpenStack", "Nutanix", "Oracle VM", "Azure", "AWS", "GCP", "vStack", "zVirt", "HCI", "VHD", "OVF", "OVA"};
-                HardwareData.MemoryType = string.IsNullOrEmpty(memoryType) && vmKeywords.Any(keyword => data.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ? "Virtual" : memoryType;
+                HardwareData.MemoryType = memoryType;
                 HardwareData.Memory += $"{string.Concat(data, ", ")}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData.Memory = HardwareData.Memory.TrimEnd('\n', '\r');
@@ -419,39 +442,6 @@ namespace GTweak.Utilities.Configuration
                 return $"{Math.Round(totalSize / (1024.0 * 1024.0), 2):G} TB";
         }
 
-        private static bool IsVirtualMachine()
-        {
-
-            byte score = 0;
-            string[] vmServices = {"vmtools", "vmware tools", "vmtoolsd", "vm3dservice", "wmtools", "tpvcgateway", "tpautoconnsvc", "vpcmap", "wmsrvc",
-                "vmusrvc", "vboxservice", "hvservice", "vmcompute", "hvhost", "prl_cc", "prl_tools", "xen", "xensvc", "qemu-ga", "virtio", "tpautoconnsvc", "tpvcgateway"};
-
-            if (ServiceController.GetServices().Any(s => vmServices.Any(vs => s.ServiceName.IndexOf(vs, StringComparison.OrdinalIgnoreCase) >= 0)))
-                score++;
-
-            if (Process.GetProcesses().Any(p => new[] { "vmtoolsd", "vboxservice", "qemu-ga" }.Any(vp => p.ProcessName.Equals(vp, StringComparison.OrdinalIgnoreCase))))
-                score++;
-
-            foreach (var keyPath in new[] { @"SOFTWARE\VMware, Inc.", @"SOFTWARE\Oracle\VirtualBox", @"SOFTWARE\Microsoft\Virtual Machine" })
-                if (RegistryHelp.KeyExists(Registry.LocalMachine, keyPath))
-                    score++;
-
-            string[] vmDevices = { "VMware", "VMWAREVMWARE", "VBOXVBOXVBOX", "VirtualBox", "PRL HYPERV", "Virtual CPU", "Hypervisor", "KVM", "QEMU", "Virtual RAM", "Virtual", "VMware SVGA", "VirtualBox Graphics", "Microsoft  Corporation", "Microsoft Hyper-V Video" };
-
-            string[] hardwareFields = { HardwareData.Bios, HardwareData.Processor, HardwareData.Graphics, HardwareData.Memory };
-
-            foreach (string field in hardwareFields)
-            {
-                foreach (string indicator in vmDevices)
-                {
-                    if (field.IndexOf(indicator, StringComparison.OrdinalIgnoreCase) >= 0)
-                        score++;
-                }
-            }
-
-            return score > 2;
-        }
-
         private string GetNetworkAdapters()
         {
             StringBuilder result = new StringBuilder();
@@ -507,6 +497,8 @@ namespace GTweak.Utilities.Configuration
         {
             if (IsNetworkAvailable())
             {
+                bool hadLimited = false, hadBlock = false;
+
                 using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
 
                 foreach (string url in new[] { "https://ipapi.co/json/", "https://api.db-ip.com/v2/free/self", "http://ip-api.com/json/?fields=61439" })
@@ -517,7 +509,7 @@ namespace GTweak.Utilities.Configuration
 
                         if (!response.IsSuccessStatusCode)
                         {
-                            CurrentConnection = ConnectionStatus.Block;
+                            hadBlock = true;
                             continue;
                         }
 
@@ -530,9 +522,19 @@ namespace GTweak.Utilities.Configuration
                             break;
                         }
                         else
-                            CurrentConnection = ConnectionStatus.Block;
+                            hadBlock = true;
                     }
-                    catch { CurrentConnection = ConnectionStatus.Limited; }
+                    catch { hadLimited = true; }
+                }
+
+                if (CurrentConnection != ConnectionStatus.Available)
+                {
+                    if (hadLimited)
+                        CurrentConnection = ConnectionStatus.Limited;
+                    else if (hadBlock)
+                        CurrentConnection = ConnectionStatus.Block;
+                    else
+                        CurrentConnection = ConnectionStatus.Lose;
                 }
             }
             else
