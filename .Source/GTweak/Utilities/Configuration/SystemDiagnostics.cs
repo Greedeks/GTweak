@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -12,13 +13,13 @@ using System.Management;
 using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
+using System.ServiceProcess;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 
 namespace GTweak.Utilities.Configuration
 {
@@ -55,6 +56,7 @@ namespace GTweak.Utilities.Configuration
             internal static string Processor { get; set; } = string.Empty;
             internal static string Graphics { get; set; } = string.Empty;
             internal static string Memory { get; set; } = string.Empty;
+            internal static string MemoryType { get; set; } = string.Empty;
             internal static string Storage { get; set; } = string.Empty;
             internal static string AudioDevice { get; set; } = string.Empty;
             internal static string NetworkAdapter { get; set; } = string.Empty;
@@ -262,21 +264,26 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GetMemoryInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
-                string manufacturer = (string)managementObj["Manufacturer"];
+                string data = new[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) || !value.Equals("Unknown", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
                 string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
                 {
                     24 => "DDR3",
                     26 => "DDR4",
                     29 => "LPDDR3",
                     30 => "LPDDR4",
+                    31 => "LPDDR4X",
                     34 => "DDR5",
                     35 => "LPDDR5",
+                    36 => "LPDDR5X",
                     _ => string.Empty
                 };
-                HardwareData.Memory += $"{(manufacturer.Equals("Unknown", StringComparison.OrdinalIgnoreCase) || string.IsNullOrEmpty(manufacturer) ? string.Concat(memoryType, ", ") : string.Concat(manufacturer, ", "))}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+
+                string[] vmKeywords = new[] { "Virtual", "VMware", "Hyper-V", "KVM", "QEMU", "Xen", "Parallels", "VBox", "VirtualBox", "Cloud", "Emulated", "Proxmox", "OpenStack", "Nutanix", "Oracle VM", "Azure", "AWS", "GCP", "vStack", "zVirt", "HCI", "VHD", "OVF", "OVA"};
+                HardwareData.MemoryType = string.IsNullOrEmpty(memoryType) && vmKeywords.Any(keyword => data.IndexOf(keyword, StringComparison.OrdinalIgnoreCase) >= 0) ? "Virtual" : memoryType;
+                HardwareData.Memory += $"{string.Concat(data, ", ")}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
             HardwareData.Memory = HardwareData.Memory.TrimEnd('\n', '\r');
         }
@@ -410,6 +417,39 @@ namespace GTweak.Utilities.Configuration
                 return $"{Math.Round(totalSize / 1024.0)} GB";
             else
                 return $"{Math.Round(totalSize / (1024.0 * 1024.0), 2):G} TB";
+        }
+
+        private static bool IsVirtualMachine()
+        {
+
+            byte score = 0;
+            string[] vmServices = {"vmtools", "vmware tools", "vmtoolsd", "vm3dservice", "wmtools", "tpvcgateway", "tpautoconnsvc", "vpcmap", "wmsrvc",
+                "vmusrvc", "vboxservice", "hvservice", "vmcompute", "hvhost", "prl_cc", "prl_tools", "xen", "xensvc", "qemu-ga", "virtio", "tpautoconnsvc", "tpvcgateway"};
+
+            if (ServiceController.GetServices().Any(s => vmServices.Any(vs => s.ServiceName.IndexOf(vs, StringComparison.OrdinalIgnoreCase) >= 0)))
+                score++;
+
+            if (Process.GetProcesses().Any(p => new[] { "vmtoolsd", "vboxservice", "qemu-ga" }.Any(vp => p.ProcessName.Equals(vp, StringComparison.OrdinalIgnoreCase))))
+                score++;
+
+            foreach (var keyPath in new[] { @"SOFTWARE\VMware, Inc.", @"SOFTWARE\Oracle\VirtualBox", @"SOFTWARE\Microsoft\Virtual Machine" })
+                if (RegistryHelp.KeyExists(Registry.LocalMachine, keyPath))
+                    score++;
+
+            string[] vmDevices = { "VMware", "VMWAREVMWARE", "VBOXVBOXVBOX", "VirtualBox", "PRL HYPERV", "Virtual CPU", "Hypervisor", "KVM", "QEMU", "Virtual RAM", "Virtual", "VMware SVGA", "VirtualBox Graphics", "Microsoft  Corporation", "Microsoft Hyper-V Video" };
+
+            string[] hardwareFields = { HardwareData.Bios, HardwareData.Processor, HardwareData.Graphics, HardwareData.Memory };
+
+            foreach (string field in hardwareFields)
+            {
+                foreach (string indicator in vmDevices)
+                {
+                    if (field.IndexOf(indicator, StringComparison.OrdinalIgnoreCase) >= 0)
+                        score++;
+                }
+            }
+
+            return score > 2;
         }
 
         private string GetNetworkAdapters()

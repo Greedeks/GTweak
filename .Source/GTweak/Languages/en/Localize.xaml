@@ -426,6 +426,7 @@
     <v:String x:Key="title_cpu_systemInformation">Processor:</v:String>
     <v:String x:Key="title_gpu_systemInformation">Graphics:</v:String>
     <v:String x:Key="title_ram_systemInformation">Memory:</v:String>
+    <v:String x:Key="title_mtype_systemInformation">Memory Type:</v:String>
     <v:String x:Key="title_disk_systemInformation">Storage devices:</v:String>
     <v:String x:Key="title_sound_systemInformation">Playback devices:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Network adapters:</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="text_copy_systemInformatin">Copied!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">You don't have a driver installed</v:String>
     <v:String x:Key="no_device_information_systemInformatin">No device information was found</v:String>
+    <v:String x:Key="unknown_information_systemInformatin">Not detected</v:String>
     <!--#endregion-->
 
     <!--#region More Page -->

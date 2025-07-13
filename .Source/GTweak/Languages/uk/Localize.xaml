@@ -426,6 +426,7 @@
     <v:String x:Key="title_cpu_systemInformation">Процесор:</v:String>
     <v:String x:Key="title_gpu_systemInformation">Відеокарта:</v:String>
     <v:String x:Key="title_ram_systemInformation">Оперативна пам’ять:</v:String>
+    <v:String x:Key="title_mtype_systemInformation">Memory Type:</v:String>
     <v:String x:Key="title_disk_systemInformation">Пристрої зберігання даних:</v:String>
     <v:String x:Key="title_sound_systemInformation">Пристрої відтворення:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Мережеві адаптери:</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="text_copy_systemInformatin">Скопійовано!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">У вас не встановлено драйвер</v:String>
     <v:String x:Key="no_device_information_systemInformatin">Не знайдено інформації про пристрій</v:String>
+    <v:String x:Key="unknown_information_systemInformatin">Not detected</v:String>
     <!--#endregion-->
 
     <!--#region More Page -->

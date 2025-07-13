@@ -426,6 +426,7 @@
     <v:String x:Key="title_cpu_systemInformation">프로세스:</v:String>
     <v:String x:Key="title_gpu_systemInformation">그래픽:</v:String>
     <v:String x:Key="title_ram_systemInformation">메모리:</v:String>
+    <v:String x:Key="title_mtype_systemInformation">Memory Type:</v:String>
     <v:String x:Key="title_disk_systemInformation">저장소 장치:</v:String>
     <v:String x:Key="title_sound_systemInformation">재생 장치:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">네트워크 어댑터:</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="text_copy_systemInformatin">복사 완료!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">드라이버가 설치되어 있지 않습니다</v:String>
     <v:String x:Key="no_device_information_systemInformatin">장치 정보를 찾을 수 없습니다</v:String>
+    <v:String x:Key="unknown_information_systemInformatin">Not detected</v:String>
     <!--#endregion-->
 
     <!--#region More Page -->

@@ -157,6 +157,10 @@
                             <StackPanel Orientation="Vertical" Margin="60,20,0,0">
                                 <TextBlock Text="{DynamicResource title_ram_systemInformation}" Style="{StaticResource Text}" HorizontalAlignment="Left" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
                                 <TextBlock Text="{Binding [Memory].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                                <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto">
+                                <Run Text="{DynamicResource title_mtype_systemInformation}" Foreground="{StaticResource Color_Accent}"/>
+                                <Run Text="{Binding [Type].Data}" PreviewMouseDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
+                                </TextBlock>
                             </StackPanel>
                         </Grid>
                     </Grid>

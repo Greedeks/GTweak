@@ -426,6 +426,7 @@
     <v:String x:Key="title_cpu_systemInformation">Процессор:</v:String>
     <v:String x:Key="title_gpu_systemInformation">Видеокарта:</v:String>
     <v:String x:Key="title_ram_systemInformation">Оперативная память:</v:String>
+    <v:String x:Key="title_mtype_systemInformation">Тип памяти:</v:String>
     <v:String x:Key="title_disk_systemInformation">Устройства хранения данных:</v:String>
     <v:String x:Key="title_sound_systemInformation">Устройства воспроизведения:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Сетевые адаптеры:</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="text_copy_systemInformatin">Скопировано!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">У вас не установлен драйвер</v:String>
     <v:String x:Key="no_device_information_systemInformatin">Сведения об устройстве не найдено</v:String>
+    <v:String x:Key="unknown_information_systemInformatin">Не определен</v:String>
     <!--#endregion-->
 
     <!--#region More Page -->
