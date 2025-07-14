@@ -473,6 +473,8 @@ namespace GTweak.Utilities.Configuration
                     "fr" => "orange.fr",
                     "es" => "terra.es",
                     "it" => "libero.it",
+                    "th" => "true.th",
+                    "vi" => "fpt.vn",
                     string name when new[] { "tr", "in", "ar" }.Contains(name) => "bing.com",
                     _ => "google.com"
                 };
