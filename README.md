@@ -131,9 +131,13 @@ Installed platform: .NET Framework 4.8
 </br>
 
 ### How to Translate a Program 📝
-To translate the program into your language, download the file [Localize.xaml (EN)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml). Translate it and place it in a folder named according to your language code. Then, submit a **Pull Request**.
 
-Or choose a more suitable language for you at the path:
+**I. Submit a Pull Request**
+- Fork the repository [here](https://github.com/Greedeks/GTweak/fork).
+- Download the [English base file (Localize.xaml)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml) **or** browse and copy from [existing translations](https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages) in other languages.
+- Translate the file and save it in a folder named after your [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) (e.g., `ko` for Korean, `fr` for French).
+</br>For regional variants: language-region (e.g., `pt-br` for Brazilian Portuguese, `zh-cn` for Simplified Chinese).
+- Place the folder in:
 <div>
     <pre>
 📂 .Source
@@ -141,11 +145,16 @@ Or choose a more suitable language for you at the path:
     └── 📁 Languages
         ├── 📁 en
         ├── 📁 ru
-        └── 📁 ...
+        └── 📁 [your-language-code]
     </pre>
 </div>
 
+- Submit a **Pull Request** with your changes. </br></br>
 
+**II. Request via Issue**
+- If you’re unfamiliar with Git, open a [Feature Request issue](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
+  - Specify your target [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11).
+  - Attach your translated `Localize.xaml` file.
 </br>
 
 ## Contact
