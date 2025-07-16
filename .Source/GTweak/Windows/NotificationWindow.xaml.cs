@@ -70,23 +70,16 @@ namespace GTweak.Windows
 
                 DoubleAnimationUsingKeyFrames doubleAnimKeyFrames = new DoubleAnimationUsingKeyFrames();
 
-                EasingDoubleKeyFrame fromFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right)
+                doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right, TimeSpan.Zero)
                 {
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(0)),
                     EasingFunction = new QuadraticEase()
-                };
-
-                EasingDoubleKeyFrame toFrame = new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10)
+                });
+                doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)))
                 {
-                    KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)),
                     EasingFunction = new QuadraticEase()
-                };
-
-                doubleAnimKeyFrames.KeyFrames.Add(fromFrame);
-                doubleAnimKeyFrames.KeyFrames.Add(toFrame);
+                });
 
                 Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 240);
-
                 BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
                 BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.25));
             });

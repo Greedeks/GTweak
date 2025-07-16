@@ -35,13 +35,17 @@ namespace GTweak.Utilities.Animation
             set => SetValue(ToProperty, value);
         }
 
-        public override object GetCurrentValue(object defaultOriginValue,
-        object defaultDestinationValue, AnimationClock animationClock)
-        {
-            Brush fromVal = ((Brush)GetValue(FromProperty)).CloneCurrentValue();
-            Brush toVal = ((Brush)GetValue(ToProperty)).CloneCurrentValue();
 
-            switch (animationClock.CurrentProgress)
+        public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
+        {
+            QuadraticEase quadraticEase = new QuadraticEase();
+
+            double easedProgress = quadraticEase.Ease(animationClock.CurrentProgress.Value);
+
+            Brush fromVal = ((Brush)GetValue(FromProperty))?.CloneCurrentValue();
+            Brush toVal = ((Brush)GetValue(ToProperty))?.CloneCurrentValue();
+
+            switch (easedProgress)
             {
                 case 0.0:
                     return fromVal;
@@ -49,7 +53,7 @@ namespace GTweak.Utilities.Animation
                     return toVal;
             }
 
-            toVal.Opacity = Convert.ToDouble(animationClock.CurrentProgress);
+            toVal.Opacity = easedProgress;
 
             Border borderFrom = new Border();
             Border borderTo = new Border();
@@ -64,9 +68,8 @@ namespace GTweak.Utilities.Animation
             borderTo.Visibility = Visibility.Visible;
             borderFrom.Child = borderTo;
 
-            Brush vb = new VisualBrush(borderFrom);
-            return vb;
-
+            return new VisualBrush(borderFrom);
         }
+
     }
 }

@@ -10,7 +10,7 @@
         <StackPanel Orientation="Horizontal">
             <Viewbox Margin="0" KeyboardNavigation.IsTabStop="False" MouseLeftButtonUp="Toggle_MouseLeftButtonUp">
                 <Grid Height="60" VerticalAlignment="Center" Width="Auto" Cursor="Hand">
-                    <Rectangle x:Name="Back" Cursor="Hand" HorizontalAlignment="Left" Height="56.5" VerticalAlignment="Top" Width="96.5" Margin="2,2,0,0" RadiusY="29" RadiusX="29" KeyboardNavigation.IsTabStop="False" >
+                    <Rectangle x:Name="Back" Cursor="Hand" HorizontalAlignment="Left" Height="56" VerticalAlignment="Center" Width="96" RadiusY="28" RadiusX="28" KeyboardNavigation.IsTabStop="False" >
                         <Rectangle.Fill>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="{StaticResource Color_ToggleButton_OFF_1}" Offset="1"/>
@@ -18,7 +18,7 @@
                             </LinearGradientBrush>
                         </Rectangle.Fill>
                     </Rectangle>
-                    <Ellipse x:Name="Dot" Cursor="Hand" HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" Width="50" StrokeThickness="1"  KeyboardNavigation.IsTabStop="False" RenderTransformOrigin="1.31,0.51" Margin="6,0,0,0">
+                    <Ellipse x:Name="Dot" Cursor="Hand" HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" Width="50" StrokeThickness="1"  KeyboardNavigation.IsTabStop="False" Margin="4,0,0,0">
                         <Ellipse.Fill>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FFE8E8E8" Offset="0.131"/>
@@ -34,7 +34,7 @@
                     </Ellipse>
                 </Grid>
             </Viewbox>
-            <TextBlock x:Name="ToggleText" Text="TextTglButton" Margin="10,2,0,0" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource Text_In}"/>
+            <TextBlock x:Name="ToggleText" Text="TextTglButton" Margin="10,0,0,0" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource Text_In}"/>
         </StackPanel>
     </Grid>
 </UserControl>
