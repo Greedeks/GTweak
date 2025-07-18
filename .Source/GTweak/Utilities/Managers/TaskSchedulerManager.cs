@@ -30,13 +30,10 @@ namespace GTweak.Utilities.Managers
                 foreach (string taskname in tasklist)
                 {
                     using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
-                    if (task != null)
+                    if (task != null && task.Enabled != state)
                     {
-                        if (task.Enabled != state)
-                        {
-                            task.Definition.Settings.Enabled = state;
-                            task.RegisterChanges();
-                        }
+                        task.Definition.Settings.Enabled = state;
+                        task.RegisterChanges();
                     }
                 }
             });

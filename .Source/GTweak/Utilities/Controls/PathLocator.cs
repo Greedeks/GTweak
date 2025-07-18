@@ -19,14 +19,14 @@ namespace GTweak.Utilities.Controls
         {
             private static string FindExecutablePath(string name)
             {
-                string path = Environment.GetEnvironmentVariable("PATH")?.Split(Path.PathSeparator).Select(dir => Path.Combine(dir, name)).FirstOrDefault(File.Exists);
+                string[] searchDir = Environment.GetEnvironmentVariable("PATH")?.Split(Path.PathSeparator) ?? Array.Empty<string>();
+                searchDir = searchDir.Concat(new[] { Environment.SystemDirectory, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32"),
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Sysnative"), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SysWOW64")})
+                    .Concat(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)) ? Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "PowerShell*", SearchOption.TopDirectoryOnly) : Array.Empty<string>())
+                    .Concat(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)) ? Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "PowerShell*", SearchOption.TopDirectoryOnly) : Array.Empty<string>()
+                    ).Where(dir => !string.IsNullOrEmpty(dir)).ToArray();
 
-                if (!string.IsNullOrWhiteSpace(path))
-                    return path;
-
-                path = new[] { Environment.SystemDirectory, Environment.GetFolderPath(Environment.SpecialFolder.Windows) }.Select(dir => Path.Combine(dir, name)).FirstOrDefault(File.Exists);
-
-                return path;
+                return searchDir.Select(dir => Path.Combine(dir, name)).FirstOrDefault(File.Exists);
             }
 
             internal static readonly string CommandShell = FindExecutablePath("cmd.exe");

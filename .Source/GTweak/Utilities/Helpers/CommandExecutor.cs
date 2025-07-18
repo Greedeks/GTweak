@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Controls;
 using System;
 using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Helpers
@@ -21,7 +22,10 @@ namespace GTweak.Utilities.Helpers
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
-                    CreateNoWindow = true
+                    CreateNoWindow = true,
+                    StandardOutputEncoding = Encoding.UTF8,
+                    StandardErrorEncoding = Encoding.UTF8,
+                    WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
                 };
 
                 using Process process = new Process { StartInfo = startInfo };
