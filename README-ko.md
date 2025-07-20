@@ -33,6 +33,10 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Korean Flag" width="40">
 </a>
 
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906449.png" alt="Brazilian Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
     <img src="https://cdn-icons-png.flaticon.com/128/197/197408.png" alt="Russian Flag" width="40">
 </a>
@@ -129,6 +133,7 @@ Windows 지원: Windows 10 (build 18362.116)부터
 - Korean - [@VenusGirl](https://github.com/VenusGirl)
 - Ukrainian - [@Kopejkin](https://github.com/Kopejkin)
 - French, Italian - [@Zephyris](https://github.com/Zephyris-Pro)
+- Brazilian Portuguese - [@Marcos Evangelista](https://github.com/marcolinojunior)
 
 </br>
 

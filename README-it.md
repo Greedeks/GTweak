@@ -33,6 +33,10 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Bandiera Corea" width="40">
 </a>
 
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906449.png" alt="Brazilian Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
     <img src="https://cdn-icons-png.flaticon.com/128/197/197408.png" alt="Bandiera Russia" width="40">
 </a>
@@ -130,6 +134,8 @@ Piattaforma installata: .NET Framework 4.8
 - Coreano - [@VenusGirl](https://github.com/VenusGirl)
 - Ucraino - [@Kopejkin](https://github.com/Kopejkin)
 - Francese, Italiano - [@Zephyris](https://github.com/Zephyris-Pro)
+- Brazilian Portuguese - [@Marcos Evangelista](https://github.com/marcolinojunior)
+
 </br>
 
 ### Come Tradurre un Programma 📝
