@@ -18,7 +18,7 @@ namespace GTweak.Utilities.Controls
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
-        internal static readonly string[] AvailableLangs = { "en", "fr", "it", "ko", "ru", "uk" };
+        internal static readonly string[] AvailableLangs = { "en", "fr", "it", "ko", "pt-br", "ru", "uk" };
         internal static readonly string[] AvailableThemes = { "Dark", "Light", "Cobalt", "Dark amethyst", "Cold Blue", "System" };
 
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();

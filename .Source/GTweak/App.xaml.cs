@@ -78,6 +78,7 @@ namespace GTweak
                         "fr" => GetResourceUri("fr"),
                         "it" => GetResourceUri("it"),
                         "ko" => GetResourceUri("ko"),
+                        _ when code == "pt" && region == "br" => GetResourceUri("pt-br"),
                         _ when new[] { "ru", "be" }.Contains(value) => GetResourceUri("ru"),
                         "uk" => GetResourceUri("uk"),
                         _ => GetResourceUri("en")

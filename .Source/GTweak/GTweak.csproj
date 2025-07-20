@@ -606,6 +606,10 @@
     <Resource Include="GTweak.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Languages\pt-br\Localize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
