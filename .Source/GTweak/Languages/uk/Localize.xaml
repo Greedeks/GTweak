@@ -370,7 +370,7 @@
     <v:String x:Key="tgl8_system">Захисник Windows, Antimalware, SmartScreen та VBS</v:String>
     <v:String x:Key="tgl9_system">UAC (контроль облікових записів)</v:String>
     <v:String x:Key="tgl10_system">Сповіщення про безпеку від Центру сповіщень</v:String>
-    <v:String x:Key="tgl11_system">Попередження під час запуску будь-яких виконуваних файлів</v:String>
+    <v:String x:Key="tgl11_system">Попередження під час запуску виконуваних файлів</v:String>
     <v:String x:Key="tgl12_system">Автоматична діагностика оперативної пам’яті</v:String>
     <v:String x:Key="tgl13_system">Протоколи Teredo, ISATAP та IPv6</v:String>
     <v:String x:Key="tgl14_system">Стандартний розмір кешу файлової системи</v:String>

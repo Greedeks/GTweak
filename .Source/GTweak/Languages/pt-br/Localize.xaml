@@ -374,7 +374,7 @@
     <v:String x:Key="tgl12_system">Diagnóstico Automático de Memória</v:String>
     <v:String x:Key="tgl13_system">Protocolos Teredo, ISATAP e IPv6</v:String>
     <v:String x:Key="tgl14_system">Tamanho padrão do cache do sistema de arquivos</v:String>
-    <v:String x:Key="tgl15_system">Retardar a inicialização do Windows e a inicialização do programa</v:String>
+    <v:String x:Key="tgl15_system">Inicialização lenta do Windows e de programas</v:String>
     <v:String x:Key="tgl16_system">Histórico uso Barra Ferramentas Acesso Rápido</v:String>
     <v:String x:Key="tgl17_system">Execução automática de mídia removível</v:String>
     <v:String x:Key="tgl18_system">Usar o plano de energia padrão</v:String>
