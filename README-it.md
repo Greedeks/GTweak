@@ -138,25 +138,6 @@ Piattaforma installata: .NET Framework 4.8
 
 </br>
 
-### Come Tradurre un Programma 📝
-
-Per tradurre il programma nella tua lingua, scarica il file [Localize.xaml (EN)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml). Traducilo e posizionalo in una cartella denominata con il codice della tua lingua. Poi invia una **Pull Request**.
-
-Oppure scegli la lingua più adatta a te nel percorso:
-<div>
-    <pre>
-📂 .Source
-└── 📁 GTweak
-    └── 📁 Languages
-        ├── 📁 en
-        ├── 📁 ru
-        └── 📁 ...
-    </pre>
-</div>
-
-
-</br>
-
 ## Contatti
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
