@@ -16,11 +16,6 @@
         @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver",
         @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" };
 
-        protected static readonly string[] nvidiaTasks = {
-        @"\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
-        @"\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
-        @"\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" };
-
         protected static readonly string[] telemetryTasks = {
         @"\Microsoft\Office\Office ClickToRun Service Monitor",
         @"\Microsoft\Office\OfficeTelemetry\AgentFallBack2016",
@@ -31,25 +26,38 @@
         @"\Microsoft\Office\OfficeTelemetryAgentLogOn",
         @"\Microsoft\Office\Office 15 Subscription Heartbeat" };
 
+        protected static readonly string[] nvidiaTasks = {
+        @"\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
+        @"\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
+        @"\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" };
+
         protected static readonly string[] winUpdatesTasks = {
         @"\Microsoft\Windows\UpdateOrchestrator\Report policies",
+        @"\Microsoft\Windows\UpdateOrchestrator\Schedule Maintenance Work",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Scan",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Scan Static Task",
+        @"\Microsoft\Windows\UpdateOrchestrator\Schedule Wake To Work",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Work",
         @"\Microsoft\Windows\UpdateOrchestrator\Start Oobe Expedite Work",
         @"\Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScanAfterUpdate",
         @"\Microsoft\Windows\UpdateOrchestrator\StartOobeAppsScan_LicenseAccepted",
+        @"\Microsoft\Windows\UpdateOrchestrator\UIEOrchestrator",
         @"\Microsoft\Windows\UpdateOrchestrator\USO_UxBroker",
         @"\Microsoft\Windows\UpdateOrchestrator\UUS Failover Task",
         @"\Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
         @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" };
 
-        protected static readonly string[] memoryDiagTasks =  {
-        @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
-        @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
+        protected static readonly string[] xboxGameTasks =  {
+        @"\Microsoft\XblGameSave\XblGameSaveTask",
+        @"\Microsoft\XblGameSave\XblGameSaveTaskLogon" };
 
-        protected static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
-        protected static readonly string defragTask = @"\Microsoft\Windows\Defrag\ScheduledDefrag";
+        protected static readonly string bluetoothTask = @"\Microsoft\Windows\Bluetooth\UninstallDeviceTask";
+
+        protected static readonly string[] mapsTasks =  {
+        @"\Microsoft\Windows\Maps\MapsToastTask",
+        @"\Microsoft\Windows\Maps\MapsUpdateTask" };
+
+        protected static readonly string oneDriveTask = @"\Microsoft\Windows\OneDrive\OneDrive Standalone Update Task";
 
         protected static readonly string[] edgeTasks = {
         @"\MicrosoftEdgeUpdateTaskMachineUA{EA17DF76-AE5F-45F8-8867-FE5E0DD06656}",
@@ -58,11 +66,18 @@
         @"\MicrosoftEdgeUpdateTaskMachineUA*",
         @"\MicrosoftEdgeUpdateTaskUser*" };
 
-        protected static readonly string[] WinDefenderTasks = {
+        protected static readonly string[] memoryDiagTasks =  {
+        @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
+        @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
+
+        protected static readonly string[] winDefenderTasks = {
         @"\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Cleanup",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Verification", };
+
+        protected static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
+        protected static readonly string defragTask = @"\Microsoft\Windows\Defrag\ScheduledDefrag";
     }
 }

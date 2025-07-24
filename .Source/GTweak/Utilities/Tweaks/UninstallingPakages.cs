@@ -92,6 +92,8 @@ namespace GTweak.Utilities.Tweaks
             {
                 await CommandExecutor.InvokeRunCommand(@"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe").ConfigureAwait(false);
 
+                SetTaskState(true, oneDriveTask);
+
                 RegistryHelp.CreateFolder(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                 RegistryHelp.CreateFolder(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
             });
@@ -107,6 +109,8 @@ namespace GTweak.Utilities.Tweaks
 
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+
+                    SetTaskState(false, oneDriveTask);
 
                     CommandExecutor.RunCommand($@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive & 
                     rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {PathLocator.Folders.SystemDrive}OneDriveTemp{(_isLocalAccount ? @" & rd /s /q %userprofile%\OneDrive" : "")}");
@@ -141,6 +145,9 @@ namespace GTweak.Utilities.Tweaks
 
                 switch (packageName)
                 {
+                    case "Maps":
+                        DeletingTask(mapsTasks);
+                        break;
                     case "Widgets":
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
                         break;

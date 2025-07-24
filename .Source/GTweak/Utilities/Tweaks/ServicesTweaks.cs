@@ -202,6 +202,7 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\XblAuthManager", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\XboxNetApiSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\XblGameSave", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    SetTaskState(!isDisabled, xboxGameTasks);
                     break;
                 case "TglButton3":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WwanSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -216,7 +217,6 @@ namespace GTweak.Utilities.Tweaks
                         "MapsBroker", "EntAppSvc", "embeddedmode","wlidsvc", "WEPHOSTSVC", "StorSvc", "ClipSVC", "InstallService"};
                     string command = $@"/c {string.Join(" & ", services.Select(s => $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\{s} /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f"))}";
                     CommandExecutor.RunCommandAsTrustedInstaller(command);
-
                     break;
                 case "TglButton5":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wmiApSrv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -231,6 +231,7 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\bthserv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\BthAvctpSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\BTAGService", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    SetTaskState(!isDisabled, bluetoothTask);
                     break;
                 case "TglButton8":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Spooler", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
