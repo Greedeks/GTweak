@@ -11,6 +11,8 @@ namespace GTweak.View
 {
     public partial class ConfidentialityView : UserControl
     {
+        private readonly ConfidentialityTweaks confTweaks = new ConfidentialityTweaks();
+
         public ConfidentialityView()
         {
             InitializeComponent();
@@ -39,10 +41,10 @@ namespace GTweak.View
             if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out string action))
                 new NotificationManager(300).Show(action);
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); new ConfidentialityTweaks().AnalyzeAndUpdate(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); confTweaks.AnalyzeAndUpdate(this); });
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new ConfidentialityTweaks().AnalyzeAndUpdate(this));
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => confTweaks.AnalyzeAndUpdate(this));
 
     }
 }

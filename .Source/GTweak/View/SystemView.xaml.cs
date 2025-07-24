@@ -11,6 +11,8 @@ namespace GTweak.View
 {
     public partial class SystemView : UserControl
     {
+        private readonly SystemTweaks sysTweaks = new SystemTweaks();
+
         public SystemView()
         {
             InitializeComponent();
@@ -50,12 +52,12 @@ namespace GTweak.View
                 if (NotificationManager.SysActions.TryGetValue(toggleButton.Name, out string action))
                     new NotificationManager(300).Show(action);
 
-                Parallel.Invoke(async delegate { await Task.Delay(1000); new SystemTweaks().AnalyzeAndUpdate(this); });
+                Parallel.Invoke(async delegate { await Task.Delay(1000); sysTweaks.AnalyzeAndUpdate(this); });
             }
             else
                 SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new SystemTweaks().AnalyzeAndUpdate(this));
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => sysTweaks.AnalyzeAndUpdate(this));
     }
 }

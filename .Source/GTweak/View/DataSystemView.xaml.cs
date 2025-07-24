@@ -19,6 +19,8 @@ namespace GTweak.View
 {
     public partial class DataSystemView : UserControl
     {
+        private readonly MonitoringSystem monitoringSystem = new MonitoringSystem();
+        private readonly SystemDiagnostics systemDiagnostics = new SystemDiagnostics();
         private readonly DispatcherTimer _timer = default;
         private TimeSpan _time = TimeSpan.FromSeconds(0);
 
@@ -44,15 +46,15 @@ namespace GTweak.View
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate
                     {
-                        new SystemDiagnostics().UpdatingDevicesData();
-                        await new MonitoringSystem().GetTotalProcessorUsage();
+                        systemDiagnostics.UpdatingDevicesData();
+                        await monitoringSystem.GetTotalProcessorUsage();
                     });
                     AnimationProgressBars();
                 }
                 else if ((int)_time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate { new SystemDiagnostics().GetUserIpAddress(); });
+                    await backgroundQueue.QueueTask(delegate { systemDiagnostics.GetUserIpAddress(); });
                     DataContext = new DataSystemVM();
                 }
 
@@ -68,7 +70,7 @@ namespace GTweak.View
             }, Application.Current.Dispatcher);
             _timer.Start();
 
-            RAMLoad.Value = new MonitoringSystem().GetMemoryUsage;
+            RAMLoad.Value = monitoringSystem.GetMemoryUsage;
             CPULoad.Value = MonitoringSystem.GetProcessorUsage;
         }
 
@@ -90,7 +92,7 @@ namespace GTweak.View
                 doubleAnim = new DoubleAnimation()
                 {
                     From = RAMLoad.Value,
-                    To = new MonitoringSystem().GetMemoryUsage,
+                    To = monitoringSystem.GetMemoryUsage,
                     EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };

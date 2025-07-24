@@ -14,10 +14,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="131"/>
-            <RowDefinition Height="19"/>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="149"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Popup x:Name="PopupCopy" AllowsTransparency="True" Placement="Mouse" HorizontalOffset="20">
@@ -28,8 +26,7 @@
             </Border>
         </Popup>
 
-        <Grid Grid.Row="0">
-
+        <Grid Grid.Row="0" Margin="0,0,0,19">
             <Grid HorizontalAlignment="Left" Margin="50,0,0,0" Width="110" Height="110">
                 <Ellipse Height="90" Width="90" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
 
@@ -96,7 +93,7 @@
         </Grid>
 
         <ScrollViewer Grid.Row="2" Style="{StaticResource ScrollPage}">
-            <Grid>
+            <Grid Margin="0,0,0,25">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -132,7 +129,7 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    
+
                     <Grid Grid.Row="2">
                         <Grid Width="543">
                             <StackPanel Orientation="Vertical" Margin="60,20,0,0">
@@ -150,7 +147,6 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-
 
                     <Grid Grid.Row="4">
                         <Grid Width="543">
@@ -190,7 +186,7 @@
                                 <TextBlock Text="{Binding [Audio].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="TextComputerData_PreviewMouseDown" Cursor="Hand"/>
                             </StackPanel>
                         </Grid>
-                     </Grid>
+                    </Grid>
 
                     <Grid Grid.Row="2">
                         <Grid Width="543">
@@ -217,10 +213,8 @@
                         </Grid>
                     </Grid>
                 </Grid>
-
             </Grid>
         </ScrollViewer>
-
     </Grid>
-
+    
 </UserControl>

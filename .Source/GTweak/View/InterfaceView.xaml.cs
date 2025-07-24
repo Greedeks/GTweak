@@ -15,6 +15,8 @@ namespace GTweak.View
 {
     public partial class InterfaceView : UserControl
     {
+        private readonly InterfaceTweaks intfTweaks = new InterfaceTweaks();
+
         public InterfaceView()
         {
             InitializeComponent();
@@ -74,10 +76,10 @@ namespace GTweak.View
             if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out string action))
                 new NotificationManager(300).Show(action);
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); new InterfaceTweaks().AnalyzeAndUpdate(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); intfTweaks.AnalyzeAndUpdate(this); });
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => new InterfaceTweaks().AnalyzeAndUpdate(this));
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => intfTweaks.AnalyzeAndUpdate(this));
 
     }
 }
