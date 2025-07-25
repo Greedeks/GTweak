@@ -1,35 +1,26 @@
 ﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Controls;
+using GTweak.Utilities.Managers;
 using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace GTweak.Windows
 {
     public partial class MessageWindow
     {
-        private readonly DispatcherTimer _timer;
-        private TimeSpan _time = TimeSpan.FromSeconds(4);
+
 
         public MessageWindow(bool isViolationSystem = false)
         {
             InitializeComponent();
 
-            try
+            TimerControlManager timer = new TimerControlManager(TimeSpan.FromSeconds(4), TimerControlManager.TimerMode.CountDown, time =>
             {
-                _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
-                {
-                    BtnAccept.Content = $"{new Regex("[(05)(04)(03)(02)]").Replace(BtnAccept.Content.ToString(), "")}({_time:ss})";
-                    if (_time == TimeSpan.Zero) { _timer?.Stop(); Application.Current.Shutdown(); }
-                    _time = _time.Add(TimeSpan.FromSeconds(-1));
-                }, Application.Current.Dispatcher);
-
-            }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            _timer?.Start();
+                BtnAccept.Content = $"{new Regex("[(05)(04)(03)(02)]").Replace(BtnAccept.Content.ToString(), "")}({time:ss})";
+            }, () => Application.Current.Shutdown());
+            timer.Start();
 
             if (isViolationSystem)
             {

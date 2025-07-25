@@ -16,6 +16,10 @@ namespace GTweak.Windows
 {
     public partial class ImportWindow : Window
     {
+        private readonly ConfidentialityTweaks _confTweaks = new ConfidentialityTweaks();
+        private readonly InterfaceTweaks _intfTweaks = new InterfaceTweaks();
+        private readonly ServicesTweaks _svcTweaks = new ServicesTweaks();
+        private readonly SystemTweaks _sysTweaks = new SystemTweaks();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly HashSet<string> _requiredActions = new HashSet<string>();
         private bool _isExpRestartNeed = false;
@@ -62,9 +66,9 @@ namespace GTweak.Windows
 
             var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, string>> NotificationActions, IEnumerable<KeyValuePair<string, bool>> ExplorerMapping)[]
             {
-               (INIManager.SectionConf, ConfidentialityTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
-               (INIManager.SectionIntf, InterfaceTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfMapping),
-               (INIManager.SectionSvc, ServicesTweaks.ApplyTweaks, null, null),
+               (INIManager.SectionConf, _confTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
+               (INIManager.SectionIntf, _intfTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfMapping),
+               (INIManager.SectionSvc, _svcTweaks.ApplyTweaks, null, null),
                (INIManager.SectionSys, null, NotificationManager.SysActions, null)
             };
 
@@ -90,14 +94,14 @@ namespace GTweak.Windows
                     if (section == INIManager.SectionSys)
                     {
                         if (tweak.StartsWith("TglButton") && tweak != "TglButton8")
-                            SystemTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
+                            _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
                         else if (tweak == "TglButton8")
                         {
                             BackgroundQueue backgroundQueue = new BackgroundQueue();
-                            await backgroundQueue.QueueTask(delegate { SystemTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false); });
+                            await backgroundQueue.QueueTask(delegate { _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false); });
                         }
                         else
-                            SystemTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
+                            _sysTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
 
                         foreach (var act in NotificationManager.SysActions.Where(get => get.Key == tweak))
                             _requiredActions.Add(act.Value);

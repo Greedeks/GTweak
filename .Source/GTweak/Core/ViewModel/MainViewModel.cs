@@ -8,6 +8,7 @@ namespace GTweak.Core.ViewModel
 {
     internal class MainViewModel : ViewModelBase
     {
+        private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
         private object _currentView;
 
         public object CurrentView
@@ -16,9 +17,9 @@ namespace GTweak.Core.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ImageSource DisplayProfileAvatar => SystemDiagnostics.GetProfileImage();
+        public ImageSource DisplayProfileAvatar => _systemDiagnostics.GetProfileImage();
 
-        public string DisplayProfileName => SystemDiagnostics.GetProfileName();
+        public string DisplayProfileName => _systemDiagnostics.GetProfileName();
 
         public string DisplayTweakVersion => (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 

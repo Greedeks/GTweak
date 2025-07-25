@@ -3,6 +3,7 @@ using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -21,8 +22,7 @@ namespace GTweak.View
     {
         private readonly MonitoringService _monitoringService = new MonitoringService();
         private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
-        private readonly DispatcherTimer _timer = default;
-        private TimeSpan _time = TimeSpan.FromSeconds(0);
+        private readonly TimerControlManager timer = default;
 
         public DataSystemView()
         {
@@ -45,15 +45,15 @@ namespace GTweak.View
                 DataContext = new DataSystemVM();
             };
 
-            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, async delegate
+            timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
             {
-                if ((int)_time.TotalSeconds % 2 == 0)
+                if ((int)time.TotalSeconds % 2 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate { await _monitoringService.GetTotalProcessorUsage(); });
                     AnimationProgressBars();
                 }
-                else if ((int)_time.TotalSeconds % 5 == 0)
+                else if ((int)time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(delegate { _systemDiagnostics.GetUserIpAddress(); });
@@ -67,10 +67,8 @@ namespace GTweak.View
                     Timeline.SetDesiredFrameRate(doubleAnim, 240);
                     IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
                 }
-
-                _time = _time.Add(TimeSpan.FromSeconds(+1));
-            }, Application.Current.Dispatcher);
-            _timer.Start();
+            });
+            timer.Start();
         }
 
         #region Animations
@@ -185,7 +183,7 @@ namespace GTweak.View
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             _monitoringService.StopDeviceMonitoring();
-            _timer.Stop();
+            timer.Stop();
         }
     }
 }

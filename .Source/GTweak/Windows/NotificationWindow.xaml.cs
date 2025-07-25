@@ -1,6 +1,7 @@
 ﻿using GTweak.Utilities.Animation;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
 using System;
 using System.ComponentModel;
 using System.Media;
@@ -14,9 +15,6 @@ namespace GTweak.Windows
 {
     public partial class NotificationWindow
     {
-        private readonly DispatcherTimer _timer;
-        private TimeSpan _time = TimeSpan.FromSeconds(3);
-
         private string clickAction = string.Empty;
         internal string TitleNotice { set => TitleSet.Text = value; get => TitleSet.Text; }
         internal string TextNotice { set => TextSet.Text = value; get => TextSet.Text; }
@@ -26,13 +24,8 @@ namespace GTweak.Windows
         {
             InitializeComponent();
 
-            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
-            {
-                if (_time == TimeSpan.Zero) { _timer.Stop(); Close(); }
-                _time = _time.Add(TimeSpan.FromSeconds(-1));
-            }, Application.Current.Dispatcher);
-
-            _timer.Start();
+            TimerControlManager timer = new TimerControlManager(TimeSpan.FromSeconds(3), TimerControlManager.TimerMode.CountDown, null, () => { Close(); });
+            timer.Start();
         }
 
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)

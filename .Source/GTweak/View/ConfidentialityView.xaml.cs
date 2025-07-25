@@ -36,7 +36,7 @@ namespace GTweak.View
         {
             ToggleButton toggleButton = (ToggleButton)sender;
 
-            ConfidentialityTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+            _confTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
             if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out string action))
                 new NotificationManager(300).Show(action);

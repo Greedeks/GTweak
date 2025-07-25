@@ -40,14 +40,14 @@ namespace GTweak.View
                 CommentTweak.Text = (string)FindResource("defaultDescription");
         }
 
-        private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => SystemTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
+        private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
         private void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
             if (toggleButton.Name != "TglButton8")
             {
-                SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+                _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
                 if (NotificationManager.SysActions.TryGetValue(toggleButton.Name, out string action))
                     new NotificationManager(300).Show(action);
@@ -55,7 +55,7 @@ namespace GTweak.View
                 Parallel.Invoke(async delegate { await Task.Delay(1000); _sysTweaks.AnalyzeAndUpdate(this); });
             }
             else
-                SystemTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+                _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => _sysTweaks.AnalyzeAndUpdate(this));

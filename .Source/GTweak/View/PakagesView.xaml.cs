@@ -20,28 +20,24 @@ namespace GTweak.View
 {
     public partial class PakagesView : UserControl
     {
-        private readonly DispatcherTimer _timer;
-        private TimeSpan _time = TimeSpan.FromSeconds(0);
+        private readonly TimerControlManager timer = default;
         private bool _isWebViewRemoval = false;
 
         public PakagesView()
         {
             InitializeComponent();
 
-            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, time =>
             {
-                if ((int)_time.TotalSeconds % 5 == 0)
+                if ((int)time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.DoWork += delegate { new UninstallingPakages().LoadInstalledPackages(); };
                     backgroundWorker.RunWorkerCompleted += delegate { UpdateViewStatePakages(); };
                     backgroundWorker.RunWorkerAsync();
                 }
-
-                _time = _time.Add(TimeSpan.FromSeconds(+1));
-            }, Application.Current.Dispatcher);
-
-            _timer.Start();
+            });
+            timer.Start();
         }
 
         private void Apps_MouseEnter(object sender, MouseEventArgs e)
@@ -158,6 +154,8 @@ namespace GTweak.View
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => UpdateViewStatePakages();
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e) => timer.Stop();
 
         private ImageSource AvailabilityInstalledPackage(string packageName, bool isOneDrive = false)
         {

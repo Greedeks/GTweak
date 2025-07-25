@@ -176,7 +176,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "1");
         }
 
-        internal static void ApplyTweaks(string tweak, bool isDisabled)
+        internal void ApplyTweaks(string tweak, bool isDisabled)
         {
             INIManager.TempWrite(INIManager.TempTweaksIntf, tweak, isDisabled);
 

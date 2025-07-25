@@ -276,6 +276,7 @@
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
     <Compile Include="Utilities\Managers\ExplorerManager.cs" />
+    <Compile Include="Utilities\Managers\TimerControlManager.cs" />
     <Compile Include="Utilities\Storage\WinKeyStorage.cs" />
     <Compile Include="Utilities\Managers\TaskSchedulerManager.cs" />
     <Compile Include="Utilities\Managers\ArchiveManager.cs" />

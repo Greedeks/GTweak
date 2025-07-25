@@ -187,7 +187,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmicvss", "Start", "4");
         }
 
-        internal static void ApplyTweaks(string tweak, bool isDisabled)
+        internal void ApplyTweaks(string tweak, bool isDisabled)
         {
             INIManager.TempWrite(INIManager.TempTweaksSvc, tweak, isDisabled);
 

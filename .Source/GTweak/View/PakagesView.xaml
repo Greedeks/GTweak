@@ -6,7 +6,7 @@
              xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
              xmlns:local="clr-namespace:GTweak.View"
              mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="1100"
-             Style="{StaticResource LaunchPage}" Loaded="Page_Loaded">
+             Style="{StaticResource LaunchPage}" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <Grid>
         <Grid x:Name="Overlay" Panel.ZIndex="1" Visibility="Collapsed">
             <Grid Background="{StaticResource Color_Background_Dark}" Opacity="0.9"/>

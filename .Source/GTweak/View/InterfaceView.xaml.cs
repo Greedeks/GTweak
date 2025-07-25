@@ -68,7 +68,7 @@ namespace GTweak.View
         private void TglButton_ChangedState(object sender, EventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
-            InterfaceTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+            _intfTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
             if (ExplorerManager.IntfMapping.TryGetValue(toggleButton.Name, out bool needRestart))
                 ExplorerManager.Restart(new Process());

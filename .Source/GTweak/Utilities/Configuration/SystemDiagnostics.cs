@@ -84,13 +84,13 @@ namespace GTweak.Utilities.Configuration
 
         internal static bool isIPAddressFormatValid = false;
 
-        internal static ImageSource GetProfileImage()
+        internal ImageSource GetProfileImage()
         {
             string imageSrc = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users\{WindowsIdentity.GetCurrent().User?.Value}", "Image1080", string.Empty);
             return !string.IsNullOrWhiteSpace(imageSrc) ? new BitmapImage(new Uri(imageSrc)) : Application.Current.Resources["DI_AvatarProfile"] as ImageSource;
         }
 
-        internal static string GetProfileName()
+        internal string GetProfileName()
         {
             string nameProfile = string.Empty;
 

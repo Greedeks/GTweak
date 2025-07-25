@@ -187,7 +187,7 @@ namespace GTweak.Utilities.Tweaks
 
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint _pvParam, uint _fWinIni);
-        internal static void ApplyTweaksSlider(string tweak, uint value)
+        internal void ApplyTweaksSlider(string tweak, uint value)
         {
             INIManager.TempWrite(INIManager.TempTweaksSys, tweak, value);
 
@@ -211,7 +211,7 @@ namespace GTweak.Utilities.Tweaks
 
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
-        internal static async void ApplyTweaks(string tweak, bool isDisabled, bool canShowWindow = true)
+        internal async void ApplyTweaks(string tweak, bool isDisabled, bool canShowWindow = true)
         {
             INIManager.TempWrite(INIManager.TempTweaksSys, tweak, isDisabled);
 

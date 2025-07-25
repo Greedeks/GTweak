@@ -33,7 +33,7 @@ namespace GTweak.View
 
         private void TglButton_ChangedState(object sender, EventArgs e)
         {
-            ServicesTweaks.ApplyTweaks(((ToggleButton)sender).Name, ((ToggleButton)sender).State);
+            _svcTweaks.ApplyTweaks(((ToggleButton)sender).Name, ((ToggleButton)sender).State);
 
             new NotificationManager(300).Show("restart");
 

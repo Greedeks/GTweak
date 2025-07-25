@@ -98,7 +98,7 @@ namespace GTweak.Utilities.Tweaks
             catch { return false; }
         }
 
-        internal static void ApplyTweaks(string tweak, bool isDisabled)
+        internal void ApplyTweaks(string tweak, bool isDisabled)
         {
             INIManager.TempWrite(INIManager.TempTweaksConf, tweak, isDisabled);
 
