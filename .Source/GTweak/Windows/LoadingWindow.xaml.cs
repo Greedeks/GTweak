@@ -59,7 +59,7 @@ namespace GTweak.Windows
                 () => ExecuteWithLogging(new SystemTweaks().ViewConfigTick, nameof(SystemTweaks.ViewConfigTick))
             );
 
-            ExecuteWithLogging(() => new MonitoringSystem().GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(MonitoringSystem.GetTotalProcessorUsage));
+            ExecuteWithLogging(() => new MonitoringService().GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(MonitoringService.GetTotalProcessorUsage));
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

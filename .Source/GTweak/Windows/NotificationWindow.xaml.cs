@@ -14,8 +14,8 @@ namespace GTweak.Windows
 {
     public partial class NotificationWindow
     {
-        private readonly DispatcherTimer timer;
-        private TimeSpan time = TimeSpan.FromSeconds(3);
+        private readonly DispatcherTimer _timer;
+        private TimeSpan _time = TimeSpan.FromSeconds(3);
 
         private string clickAction = string.Empty;
         internal string TitleNotice { set => TitleSet.Text = value; get => TitleSet.Text; }
@@ -26,13 +26,13 @@ namespace GTweak.Windows
         {
             InitializeComponent();
 
-            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                if (time == TimeSpan.Zero) { timer.Stop(); Close(); }
-                time = time.Add(TimeSpan.FromSeconds(-1));
+                if (_time == TimeSpan.Zero) { _timer.Stop(); Close(); }
+                _time = _time.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
 
-            timer.Start();
+            _timer.Start();
         }
 
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)

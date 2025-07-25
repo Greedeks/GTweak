@@ -11,8 +11,8 @@ namespace GTweak.Windows
 {
     public partial class MessageWindow
     {
-        private readonly DispatcherTimer timer;
-        private TimeSpan time = TimeSpan.FromSeconds(4);
+        private readonly DispatcherTimer _timer;
+        private TimeSpan _time = TimeSpan.FromSeconds(4);
 
         public MessageWindow(bool isViolationSystem = false)
         {
@@ -20,16 +20,16 @@ namespace GTweak.Windows
 
             try
             {
-                timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+                _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
                 {
-                    BtnAccept.Content = $"{new Regex("[(05)(04)(03)(02)]").Replace(BtnAccept.Content.ToString(), "")}({time:ss})";
-                    if (time == TimeSpan.Zero) { timer?.Stop(); Application.Current.Shutdown(); }
-                    time = time.Add(TimeSpan.FromSeconds(-1));
+                    BtnAccept.Content = $"{new Regex("[(05)(04)(03)(02)]").Replace(BtnAccept.Content.ToString(), "")}({_time:ss})";
+                    if (_time == TimeSpan.Zero) { _timer?.Stop(); Application.Current.Shutdown(); }
+                    _time = _time.Add(TimeSpan.FromSeconds(-1));
                 }, Application.Current.Dispatcher);
 
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            timer?.Start();
+            _timer?.Start();
 
             if (isViolationSystem)
             {

@@ -19,14 +19,20 @@ namespace GTweak.View
 {
     public partial class DataSystemView : UserControl
     {
-        private readonly MonitoringSystem monitoringSystem = new MonitoringSystem();
-        private readonly SystemDiagnostics systemDiagnostics = new SystemDiagnostics();
+        private readonly MonitoringService _monitoringService = new MonitoringService();
+        private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
         private readonly DispatcherTimer _timer = default;
         private TimeSpan _time = TimeSpan.FromSeconds(0);
 
         public DataSystemView()
         {
             InitializeComponent();
+
+            _monitoringService.HandleDevicesEvents += OnHandleDevicesEvents;
+            _monitoringService.StartDeviceMonitoring();
+
+            RAMLoad.Value = _monitoringService.GetMemoryUsage;
+            CPULoad.Value = MonitoringService.GetProcessorUsage;
 
             App.LanguageChanged += delegate
             {
@@ -44,17 +50,13 @@ namespace GTweak.View
                 if ((int)_time.TotalSeconds % 2 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(async delegate
-                    {
-                        systemDiagnostics.UpdatingDevicesData();
-                        await monitoringSystem.GetTotalProcessorUsage();
-                    });
+                    await backgroundQueue.QueueTask(async delegate { await _monitoringService.GetTotalProcessorUsage(); });
                     AnimationProgressBars();
                 }
                 else if ((int)_time.TotalSeconds % 5 == 0)
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
-                    await backgroundQueue.QueueTask(delegate { systemDiagnostics.GetUserIpAddress(); });
+                    await backgroundQueue.QueueTask(delegate { _systemDiagnostics.GetUserIpAddress(); });
                     DataContext = new DataSystemVM();
                 }
 
@@ -69,9 +71,6 @@ namespace GTweak.View
                 _time = _time.Add(TimeSpan.FromSeconds(+1));
             }, Application.Current.Dispatcher);
             _timer.Start();
-
-            RAMLoad.Value = monitoringSystem.GetMemoryUsage;
-            CPULoad.Value = MonitoringSystem.GetProcessorUsage;
         }
 
         #region Animations
@@ -82,7 +81,7 @@ namespace GTweak.View
                 DoubleAnimation doubleAnim = new DoubleAnimation()
                 {
                     From = CPULoad.Value,
-                    To = MonitoringSystem.GetProcessorUsage,
+                    To = MonitoringService.GetProcessorUsage,
                     EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
@@ -92,7 +91,7 @@ namespace GTweak.View
                 doubleAnim = new DoubleAnimation()
                 {
                     From = RAMLoad.Value,
-                    To = monitoringSystem.GetMemoryUsage,
+                    To = _monitoringService.GetMemoryUsage,
                     EasingFunction = new QuadraticEase(),
                     Duration = TimeSpan.FromSeconds(0.2)
                 };
@@ -100,7 +99,6 @@ namespace GTweak.View
                 RAMLoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
             });
         }
-
         private void AnimationPopup()
         {
             Dispatcher.Invoke(() =>
@@ -137,7 +135,13 @@ namespace GTweak.View
             IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
         }
 
-        private void TextComputerData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType)
+        {
+            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
+        }
+
+        private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -178,6 +182,10 @@ namespace GTweak.View
             }
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e) => _timer.Stop();
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _monitoringService.StopDeviceMonitoring();
+            _timer.Stop();
+        }
     }
 }

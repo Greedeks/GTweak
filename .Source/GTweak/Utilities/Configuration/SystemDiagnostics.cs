@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal sealed class SystemDiagnostics
+    internal sealed class SystemDiagnostics : MonitoringService
     {
         private sealed class GitMetadata
         {
@@ -108,26 +108,42 @@ namespace GTweak.Utilities.Configuration
                 GetProcessorInfo,
                 GeVideoInfo,
                 GetMemoryInfo,
-                UpdatingDevicesData,
-                GetUserIpAddress
+                GetUserIpAddress,
+                () => { UpdatingDevicesData(); }
             );
         }
 
-        internal void UpdatingDevicesData()
+        internal void UpdatingDevicesData(DeviceType deviceType = DeviceType.All)
         {
-            string storage = string.Empty;
-            string audio = string.Empty;
-            string netAdapter = string.Empty;
+            string storage = string.Empty, audio = string.Empty, netAdapter = string.Empty;
 
-            Parallel.Invoke(
-                () => storage = GetStorageDevices(),
-                () => audio = GetAudioDevices(),
-                () => netAdapter = GetNetworkAdapters()
-            );
+            switch (deviceType)
+            {
+                case DeviceType.Storage:
+                    Parallel.Invoke(() => storage = GetStorageDevices());
+                    HardwareData.Storage = storage;
+                    break;
+                case DeviceType.Audio:
+                    Parallel.Invoke(() => audio = GetAudioDevices());
+                    HardwareData.AudioDevice = audio;
+                    break;
+                case DeviceType.Network:
+                    Parallel.Invoke(() => netAdapter = GetNetworkAdapters());
+                    HardwareData.NetworkAdapter = netAdapter;
+                    break;
+                case DeviceType.All:
+                    Parallel.Invoke
+                    (
+                        () => storage = GetStorageDevices(),
+                        () => audio = GetAudioDevices(),
+                        () => netAdapter = GetNetworkAdapters()
+                    );
+                    HardwareData.Storage = storage;
+                    HardwareData.AudioDevice = audio;
+                    HardwareData.NetworkAdapter = netAdapter;
+                    break;
 
-            HardwareData.Storage = storage;
-            HardwareData.AudioDevice = audio;
-            HardwareData.NetworkAdapter = netAdapter;
+            }
         }
 
         internal void GetOperatingSystemInfo()

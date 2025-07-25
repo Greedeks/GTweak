@@ -10,7 +10,7 @@ namespace GTweak.View
 {
     public partial class ServicesView : UserControl
     {
-        private readonly ServicesTweaks svcTweaks = new ServicesTweaks();
+        private readonly ServicesTweaks _svcTweaks = new ServicesTweaks();
 
         public ServicesView()
         {
@@ -37,9 +37,9 @@ namespace GTweak.View
 
             new NotificationManager(300).Show("restart");
 
-            Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); svcTweaks.AnalyzeAndUpdate(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); _svcTweaks.AnalyzeAndUpdate(this); });
         }
 
-        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e) => Parallel.Invoke(() => svcTweaks.AnalyzeAndUpdate(this));
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e) => Parallel.Invoke(() => _svcTweaks.AnalyzeAndUpdate(this));
     }
 }

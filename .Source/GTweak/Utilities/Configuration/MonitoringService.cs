@@ -1,16 +1,30 @@
 ﻿using GTweak.Utilities.Controls;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Management;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal sealed class MonitoringSystem
+    internal class MonitoringService
     {
+        internal event Action<DeviceType> HandleDevicesEvents;
+        private readonly List<ManagementEventWatcher> _eventWatchers = new List<ManagementEventWatcher>();
+
         internal int GetMemoryUsage => GetPhysicalAvailableMemory();
         internal string GetNumberRunningProcesses => Process.GetProcesses().Length.ToString();
         internal static int GetProcessorUsage { get; private set; } = 1;
+
+        internal enum DeviceType
+        {
+            All,
+            Storage,
+            Audio,
+            Network
+        }
+
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SystemTime
@@ -79,6 +93,51 @@ namespace GTweak.Utilities.Configuration
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             finally { if (!success) GetProcessorUsage = 1; }
+        }
+
+        internal void StartDeviceMonitoring()
+        {
+            Task.Run(() =>
+            {
+                foreach (var wmiClass in new[] { "Win32_DiskDrive", "MSFT_PhysicalDisk" })
+                {
+                    SubscribeToDeviceEvents($"TargetInstance ISA '{wmiClass}'", DeviceType.Storage);
+                }
+                SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio);
+                SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network);
+            }).ConfigureAwait(false);
+        }
+
+
+        private void SubscribeToDeviceEvents(string filter, DeviceType type)
+        {
+            try
+            {
+                WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
+                ManagementEventWatcher managementEvent = new ManagementEventWatcher(query);
+                managementEvent.EventArrived += (s, e) => { HandleDevicesEvents?.Invoke(type); };
+                managementEvent.Start();
+                _eventWatchers.Add(managementEvent);
+            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+        }
+
+        internal void StopDeviceMonitoring()
+        {
+            Task.Run(() =>
+            {
+                foreach (ManagementEventWatcher managementEvent in _eventWatchers)
+                {
+                    try
+                    {
+                        managementEvent.Stop();
+                        managementEvent.EventArrived -= null;
+                        managementEvent.Dispose();
+                    }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                }
+                _eventWatchers.Clear();
+            }).ConfigureAwait(false);
         }
     }
 }

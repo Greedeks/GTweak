@@ -285,7 +285,7 @@
     <Compile Include="Utilities\Helpers\TakingOwnership.cs" />
     <Compile Include="Utilities\Tweaks\ClearingMemory.cs" />
     <Compile Include="Utilities\Managers\INIManager.cs" />
-    <Compile Include="Utilities\Configuration\MonitoringSystem.cs" />
+    <Compile Include="Utilities\Configuration\MonitoringService.cs" />
     <Compile Include="Utilities\Configuration\SystemDiagnostics.cs" />
     <Compile Include="Utilities\Managers\NotificationManager.cs" />
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />

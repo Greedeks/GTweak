@@ -17,8 +17,8 @@ namespace GTweak.Windows
     public partial class ImportWindow : Window
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private readonly HashSet<string> requiredActions = new HashSet<string>();
-        private bool isExpRestartNeed = false;
+        private readonly HashSet<string> _requiredActions = new HashSet<string>();
+        private bool _isExpRestartNeed = false;
 
         public ImportWindow(in string importedFile)
         {
@@ -43,12 +43,12 @@ namespace GTweak.Windows
         {
             if (valueProgress == 100)
             {
-                if (isExpRestartNeed)
+                if (_isExpRestartNeed)
                     ExplorerManager.Restart(new Process());
 
-                if (requiredActions.Contains("restart"))
+                if (_requiredActions.Contains("restart"))
                     new NotificationManager().Show("restart");
-                else if (requiredActions.Contains("logout"))
+                else if (_requiredActions.Contains("logout"))
                     new NotificationManager().Show("logout");
 
                 App.UpdateImport();
@@ -100,7 +100,7 @@ namespace GTweak.Windows
                             SystemTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
 
                         foreach (var act in NotificationManager.SysActions.Where(get => get.Key == tweak))
-                            requiredActions.Add(act.Value);
+                            _requiredActions.Add(act.Value);
                     }
                     else
                     {
@@ -111,14 +111,14 @@ namespace GTweak.Windows
                         if (NotificationActions != null)
                         {
                             foreach (var act in NotificationActions.Where(get => get.Key == tweak))
-                                requiredActions.Add(act.Value);
+                                _requiredActions.Add(act.Value);
                         }
 
                         if (ExplorerMapping != null && ExplorerMapping.Any(get => get.Key == tweak && get.Value == true))
-                            isExpRestartNeed = true;
+                            _isExpRestartNeed = true;
 
                         if (section == INIManager.SectionSvc)
-                            requiredActions.Add("restart");
+                            _requiredActions.Add("restart");
                     }
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }

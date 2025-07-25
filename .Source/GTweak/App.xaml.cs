@@ -13,9 +13,9 @@ namespace GTweak
     {
         internal static event EventHandler LanguageChanged;
         internal static event EventHandler ThemeChanged;
-        internal static event EventHandler ImportTweaksUpdate;
+        internal static event EventHandler TweaksImported;
 
-        internal static void UpdateImport() => ImportTweaksUpdate?.Invoke(default, EventArgs.Empty);
+        internal static void UpdateImport() => TweaksImported?.Invoke(default, EventArgs.Empty);
 
         public App()
         {
@@ -53,7 +53,6 @@ namespace GTweak
                 ErrorLogging.LogWritingFile(ex);
             Environment.Exit(0);
         }
-
 
         private static Uri GetResourceUri(string folder, bool isTheme = false) => isTheme ? new Uri($"Styles/Themes/{folder}/Colors.xaml", UriKind.Relative) : new Uri($"Languages/{folder}/Localize.xaml", UriKind.Relative);
 

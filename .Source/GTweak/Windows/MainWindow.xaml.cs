@@ -28,7 +28,7 @@ namespace GTweak
             LanguageSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsEngine.Language, "en", SettingsEngine.AvailableLangs);
             ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsEngine.Theme, "Dark", SettingsEngine.AvailableThemes);
 
-            App.ImportTweaksUpdate += delegate { BtnMore.IsChecked = true; };
+            App.TweaksImported += delegate { BtnMore.IsChecked = true; };
             App.ThemeChanged += delegate { Close(); new RebootWindow().ShowDialog(); };
         }
 
@@ -41,7 +41,7 @@ namespace GTweak
         #region Button Title/Animation Window
         private void ButtonHelp_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Process.Start(new ProcessStartInfo("https://github.com/Greedeks/GTweak/issues/new/choose") { UseShellExecute = true });
 
-        private void SettingsMenuAnimation()
+        private void AnimationSettingsMenu()
         {
             Dispatcher.Invoke(() =>
             {
@@ -80,13 +80,13 @@ namespace GTweak
         private void SettingsMenu_QueryCursor(object sender, QueryCursorEventArgs e)
         {
             if (SettingsMenu.Width == 400)
-                SettingsMenuAnimation();
+                AnimationSettingsMenu();
         }
 
         private void ButtonSettings_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (SettingsMenu.Width == 0 || SettingsMenu.Width == 400)
-                SettingsMenuAnimation();
+                AnimationSettingsMenu();
         }
 
         private void ButtonMinimized_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => WindowState = WindowState.Minimized;

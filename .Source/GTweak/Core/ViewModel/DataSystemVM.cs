@@ -66,7 +66,7 @@ namespace GTweak.Core.ViewModel
             DisplayData = new ObservableCollection<DataSystemModel>
             {
                 CreateModelCollection("Windows", SystemDiagnostics.HardwareData.OperatingSystem),
-                CreateModelCollection("Processes", new MonitoringSystem().GetNumberRunningProcesses),
+                CreateModelCollection("Processes", new MonitoringService().GetNumberRunningProcesses),
                 CreateModelCollection("Bios", SystemDiagnostics.HardwareData.Bios, "no_device_information_systemInformatin"),
                 CreateModelCollection("Mode", SystemDiagnostics.HardwareData.BiosMode, "unknown_information_systemInformatin"),
                 CreateModelCollection("Motherboard", SystemDiagnostics.HardwareData.Motherboard, "no_device_information_systemInformatin"),

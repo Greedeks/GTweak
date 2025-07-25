@@ -50,7 +50,7 @@ namespace GTweak.Core.ViewModel
 
             CurrentView = new MoreVM();
 
-            App.ImportTweaksUpdate += delegate { CurrentView = new MoreVM(); };
+            App.TweaksImported += delegate { CurrentView = new MoreVM(); };
         }
     }
 }
