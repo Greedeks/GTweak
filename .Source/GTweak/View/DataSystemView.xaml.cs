@@ -36,13 +36,16 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                if (new Dictionary<SystemDiagnostics.ConnectionStatus, string>
+                Dispatcher.Invoke(() =>
                 {
-                    { SystemDiagnostics.ConnectionStatus.Lose, "connection_lose_systemInformation" },
-                    { SystemDiagnostics.ConnectionStatus.Block, "connection_block_systemInformation" },
-                    { SystemDiagnostics.ConnectionStatus.Limited, "connection_limited_systemInformation" }
-                }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey)) { SystemDiagnostics.HardwareData.UserIPAddress = (string)FindResource(resourceKey); }
-                DataContext = new DataSystemVM();
+                    if (new Dictionary<SystemDiagnostics.ConnectionStatus, string>
+                    {
+                        { SystemDiagnostics.ConnectionStatus.Lose, "connection_lose_systemInformation" },
+                        { SystemDiagnostics.ConnectionStatus.Block, "connection_block_systemInformation" },
+                        { SystemDiagnostics.ConnectionStatus.Limited, "connection_limited_systemInformation" }
+                    }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey)) { SystemDiagnostics.HardwareData.UserIPAddress = (string)FindResource(resourceKey); }
+                    DataContext = new DataSystemVM();
+                });
             };
 
             timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
@@ -57,16 +60,20 @@ namespace GTweak.View
                 {
                     BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(delegate { _systemDiagnostics.GetUserIpAddress(); });
-                    DataContext = new DataSystemVM();
+                    Dispatcher.Invoke(() => DataContext = new DataSystemVM());
                 }
 
-                if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
+                Dispatcher.Invoke(() =>
                 {
-                    DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
-                    doubleAnim.Completed += delegate { SettingsEngine.IsHiddenIpAddress = false; };
-                    Timeline.SetDesiredFrameRate(doubleAnim, 240);
-                    IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
-                }
+                    if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
+                    {
+                        DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
+                        doubleAnim.Completed += delegate { SettingsEngine.IsHiddenIpAddress = false; };
+                        Timeline.SetDesiredFrameRate(doubleAnim, 240);
+                        IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
+                    }
+                });
+
             });
             timer.Start();
         }
@@ -99,22 +106,19 @@ namespace GTweak.View
         }
         private void AnimationPopup()
         {
-            Dispatcher.Invoke(() =>
-            {
-                PopupCopy.IsOpen = true;
-                CopyTextToastBody.BeginAnimation(ContextMenu.OpacityProperty, FadeAnimation.FadeIn(0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
+            PopupCopy.IsOpen = true;
+            CopyTextToastBody.BeginAnimation(UIElement.OpacityProperty, FadeAnimation.FadeIn(0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
 
-                DoubleAnimation offsetAnim = new DoubleAnimation()
-                {
-                    From = -20,
-                    To = -50,
-                    SpeedRatio = 8,
-                    EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(3)
-                };
-                Timeline.SetDesiredFrameRate(offsetAnim, 240);
-                PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, offsetAnim);
-            });
+            DoubleAnimation offsetAnim = new DoubleAnimation()
+            {
+                From = -20,
+                To = -50,
+                SpeedRatio = 8,
+                EasingFunction = new QuadraticEase(),
+                Duration = TimeSpan.FromSeconds(3)
+            };
+            Timeline.SetDesiredFrameRate(offsetAnim, 240);
+            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, offsetAnim);
         }
         #endregion
 

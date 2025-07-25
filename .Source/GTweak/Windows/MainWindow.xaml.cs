@@ -43,38 +43,35 @@ namespace GTweak
 
         private void AnimationSettingsMenu()
         {
-            Dispatcher.Invoke(() =>
+            Storyboard storyboard = new Storyboard();
+
+            DoubleAnimation rotateAnimation = new DoubleAnimation()
             {
-                Storyboard storyboard = new Storyboard();
+                From = 0.0,
+                To = 360,
+                EasingFunction = new QuadraticEase(),
+                SpeedRatio = 2.0,
+                Duration = TimeSpan.FromSeconds(1)
+            };
 
-                DoubleAnimation rotateAnimation = new DoubleAnimation()
-                {
-                    From = 0.0,
-                    To = 360,
-                    EasingFunction = new QuadraticEase(),
-                    SpeedRatio = 2.0,
-                    Duration = TimeSpan.FromSeconds(1)
-                };
+            DoubleAnimation widthAnimation = new DoubleAnimation()
+            {
+                From = SettingsMenu.Width != 400 ? 0 : 400,
+                To = SettingsMenu.Width != 400 ? 400 : 0,
+                EasingFunction = new QuadraticEase(),
+                SpeedRatio = 2.0,
+                Duration = TimeSpan.FromSeconds(1)
+            };
 
-                DoubleAnimation widthAnimation = new DoubleAnimation()
-                {
-                    From = SettingsMenu.Width != 400 ? 0 : 400,
-                    To = SettingsMenu.Width != 400 ? 400 : 0,
-                    EasingFunction = new QuadraticEase(),
-                    SpeedRatio = 2.0,
-                    Duration = TimeSpan.FromSeconds(1)
-                };
+            Timeline.SetDesiredFrameRate(rotateAnimation, 240);
+            Timeline.SetDesiredFrameRate(widthAnimation, 240);
 
-                Timeline.SetDesiredFrameRate(rotateAnimation, 240);
-                Timeline.SetDesiredFrameRate(widthAnimation, 240);
+            Storyboard.SetTarget(rotateAnimation, ImageSettings);
+            Storyboard.SetTargetProperty(rotateAnimation, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
 
-                Storyboard.SetTarget(rotateAnimation, ImageSettings);
-                Storyboard.SetTargetProperty(rotateAnimation, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
-
-                storyboard.Children.Add(rotateAnimation);
-                storyboard.Begin();
-                SettingsMenu.BeginAnimation(WidthProperty, widthAnimation);
-            });
+            storyboard.Children.Add(rotateAnimation);
+            storyboard.Begin();
+            SettingsMenu.BeginAnimation(WidthProperty, widthAnimation);
         }
 
         private void SettingsMenu_QueryCursor(object sender, QueryCursorEventArgs e)
@@ -114,7 +111,7 @@ namespace GTweak
                     if (SystemDiagnostics.IsNeedUpdate && SettingsEngine.IsUpdateCheckRequired)
                     {
                         await Task.Delay(500);
-                        new UpdateWindow().ShowDialog();
+                        Dispatcher.Invoke(() => new UpdateWindow().ShowDialog());
                     }
                 }));
             new TypewriterAnimation(UtilityTitle.Text, UtilityTitle, TimeSpan.FromSeconds(0.4));

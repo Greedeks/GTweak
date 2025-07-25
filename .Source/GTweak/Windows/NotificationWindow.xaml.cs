@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 
 namespace GTweak.Windows
 {
@@ -54,28 +53,25 @@ namespace GTweak.Windows
                 notificationSound.Play();
             }
 
-            Dispatcher.Invoke(() =>
+            Rect primaryMonitorArea = SystemParameters.WorkArea;
+
+            Top = primaryMonitorArea.Bottom - Height - 10;
+            Left = primaryMonitorArea.Right - Width - 10;
+
+            DoubleAnimationUsingKeyFrames doubleAnimKeyFrames = new DoubleAnimationUsingKeyFrames();
+
+            doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right, TimeSpan.Zero)
             {
-                Rect primaryMonitorArea = SystemParameters.WorkArea;
-
-                Top = primaryMonitorArea.Bottom - Height - 10;
-                Left = primaryMonitorArea.Right - Width - 10;
-
-                DoubleAnimationUsingKeyFrames doubleAnimKeyFrames = new DoubleAnimationUsingKeyFrames();
-
-                doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right, TimeSpan.Zero)
-                {
-                    EasingFunction = new QuadraticEase()
-                });
-                doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)))
-                {
-                    EasingFunction = new QuadraticEase()
-                });
-
-                Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 240);
-                BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
-                BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.25));
+                EasingFunction = new QuadraticEase()
             });
+            doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)))
+            {
+                EasingFunction = new QuadraticEase()
+            });
+
+            Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 240);
+            BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
+            BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.25));
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
