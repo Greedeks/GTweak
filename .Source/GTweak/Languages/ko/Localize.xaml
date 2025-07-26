@@ -7,13 +7,13 @@
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">로드 중</v:String>
-    <v:String x:Key="text0_load">프로필 업로드 중</v:String>
-    <v:String x:Key="text1_load">데이터 확인 중</v:String>
-    <v:String x:Key="text2_load">레지스트리 보기</v:String>
-    <v:String x:Key="text3_load">응용 프로그램 분석</v:String>
-    <v:String x:Key="text4_load">구성 보기</v:String>
-    <v:String x:Key="text5_load">연결 확인 중</v:String>
-    <v:String x:Key="text6_load">초기화</v:String>
+    <v:String x:Key="step1_load">프로필 업로드 중</v:String>
+    <v:String x:Key="step2_load">데이터 확인 중</v:String>
+    <v:String x:Key="step3_load">레지스트리 보기</v:String>
+    <v:String x:Key="step4_load">응용 프로그램 분석</v:String>
+    <v:String x:Key="step5_load">구성 보기</v:String>
+    <v:String x:Key="step6_load">연결 확인 중</v:String>
+    <v:String x:Key="step7_load">초기화</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->
@@ -39,7 +39,8 @@
     <v:String x:Key="warn_import_notification">이 파일은 가져오기에 적합하지 않습니다</v:String>
     <v:String x:Key="empty_import_notification">이 파일은 비어 있으며 조정을 적용할 수 없습니다</v:String>
     <v:String x:Key="export_warning_notification">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
-    <v:String x:Key="onedrive_notification">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
+    <v:String x:Key="success_onedrive_notification">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
+    <v:String x:Key="error_onedrive_notification">OneDrive setup file missing, recovery impossible</v:String>
     <v:String x:Key="defender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="warn_activate_notification">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
@@ -236,11 +237,12 @@
      <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="text0_applications">OneDrive를 제외한 응용 프로그램은</v:String>
-    <v:String x:Key="text1_applications">복구 가능성 없이</v:String>
-    <v:String x:Key="text2_applications">삭제됩니다</v:String>
-    <v:String x:Key="text3_applications">회색</v:String>
-    <v:String x:Key="text4_applications">아이콘을 클릭합니다</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">애플리케이션이</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">영구적으로</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">삭제됩니다(OneDrive 제외). 복원하려면</v:String>
+    <v:String x:Key="deletion_warn_part4_applications">회색</v:String>
+    <v:String x:Key="deletion_warn_part5_applications">아이콘을 클릭하세요</v:String>
+
     <v:String x:Key="MicrosoftStore_applications">Microsoft 스토어</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>
@@ -442,9 +444,10 @@
     <!--#endregion-->
 
     <!--#region More Page -->
-    <v:String x:Key="text0_more">유틸리티를 사용하기 전에</v:String>
-    <v:String x:Key="text1_more">복원 지점</v:String>
-    <v:String x:Key="text2_more">을 생성하는 것이 좋습니다</v:String>
+    <v:String x:Key="point_advice_part1_more">유틸리티를 사용하기 전에</v:String>
+    <v:String x:Key="point_advice_part2_more">복원 지점</v:String>
+    <v:String x:Key="point_advice_part3_more">을 생성하는 것이 좋습니다</v:String>
+    
     <v:String x:Key="title_licens_more">Windows 정품 인증</v:String>
     <v:String x:Key="text_licens_more">HWID 또는 백업 KMS 방법이 적용됩니다: Windows 에디션에 키가 없으면 작동하지 않을 수 있습니다.</v:String>
     <v:String x:Key="btn_activation">활성화</v:String>

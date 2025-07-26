@@ -38,6 +38,8 @@ namespace GTweak.Utilities.Controls
             internal static readonly string PowerCfg = FindExecutablePath("powercfg.exe");
 
             internal static readonly string Explorer = FindExecutablePath("explorer.exe");
+
+            internal static readonly string OneDrive = FindExecutablePath("onedrivesetup.exe");
         }
 
         internal static class Files

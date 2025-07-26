@@ -90,7 +90,7 @@ namespace GTweak.Utilities.Tweaks
         {
             return Task.Run(async () =>
             {
-                await CommandExecutor.InvokeRunCommand(@"/c %systemroot%\System32\OneDriveSetup.exe & %systemroot%\SysWOW64\OneDriveSetup.exe").ConfigureAwait(false);
+                await CommandExecutor.InvokeRunCommand($@"/c {PathLocator.Executable.OneDrive}").ConfigureAwait(false);
 
                 SetTaskState(true, oneDriveTask);
 
@@ -105,7 +105,7 @@ namespace GTweak.Utilities.Tweaks
             {
                 return Task.Run(async () =>
                 {
-                    await CommandExecutor.InvokeRunCommand(@"/c taskkill /f /im OneDrive.exe & %systemroot%\System32\OneDriveSetup.exe /uninstall & %systemroot%\SysWOW64\OneDriveSetup.exe /uninstall").ConfigureAwait(false);
+                    await CommandExecutor.InvokeRunCommand($@"/c taskkill /f /im OneDrive.exe & {PathLocator.Executable.OneDrive} /uninstall").ConfigureAwait(false);
 
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");

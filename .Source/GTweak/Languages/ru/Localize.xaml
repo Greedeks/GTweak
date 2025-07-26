@@ -7,13 +7,13 @@
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Загрузка</v:String>
-    <v:String x:Key="text0_load">Загрузка профиля</v:String>
-    <v:String x:Key="text1_load">Проверка данных</v:String>
-    <v:String x:Key="text2_load">Просмотр реестра</v:String>
-    <v:String x:Key="text3_load">Анализ приложений</v:String>
-    <v:String x:Key="text4_load">Просмотр конфигурации</v:String>
-    <v:String x:Key="text5_load">Проверка соединения</v:String>
-    <v:String x:Key="text6_load">Инициализация</v:String>
+    <v:String x:Key="step1_load">Загрузка профиля</v:String>
+    <v:String x:Key="step2_load">Получение данных</v:String>
+    <v:String x:Key="step3_load">Просмотр реестра</v:String>
+    <v:String x:Key="step4_load">Анализ приложений</v:String>
+    <v:String x:Key="step5_load">Получение конфигурации</v:String>
+    <v:String x:Key="step6_load">Проверка соединения</v:String>
+    <v:String x:Key="step7_load">Инициализация</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->
@@ -39,7 +39,8 @@
     <v:String x:Key="warn_import_notification">Данный файл не подходит для импорта</v:String>
     <v:String x:Key="empty_import_notification">Этот файл пуст, применение твиков невозможно</v:String>
     <v:String x:Key="export_warning_notification">Это не имеет смысла, сначала примените хотя бы один твик</v:String>
-    <v:String x:Key="onedrive_notification">Начался процесс восстановления OneDrive, который займет некоторое время</v:String>
+    <v:String x:Key="success_onedrive_notification">Начался процесс восстановления OneDrive, который займет некоторое время</v:String>
+    <v:String x:Key="error_onedrive_notification">Отсутствует установочный файл OneDrive, восстановление невозможно</v:String>
     <v:String x:Key="defender_notification">Это займет некоторое время, пожалуйста, подождите немного</v:String>
     <v:String x:Key="warn_firewall_notification">У вас отключен брандмауэр, включите и примените твик снова</v:String>
     <v:String x:Key="warn_activate_notification">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>
@@ -236,11 +237,12 @@
     <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="text0_applications">Приложения удаляются</v:String>
-    <v:String x:Key="text1_applications">без возможности</v:String>
-    <v:String x:Key="text2_applications">восстановления, кроме OneDrive. Нажмите на</v:String>
-    <v:String x:Key="text3_applications">серую</v:String>
-    <v:String x:Key="text4_applications">иконку</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Приложения удаляются</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">без возврата</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">(кроме OneDrive). Для восстановления нажмите</v:String>
+    <v:String x:Key="deletion_warn_part4_applications">серую</v:String>
+    <v:String x:Key="deletion_warn_part5_applications">иконку</v:String>
+    
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>
@@ -442,9 +444,10 @@
     <!--#endregion-->
 
     <!--#region More Page -->
-    <v:String x:Key="text0_more">Настоятельно</v:String>
-    <v:String x:Key="text1_more">рекомендовано</v:String>
-    <v:String x:Key="text2_more">создать точку восстановления перед использованием утилиты</v:String>
+    <v:String x:Key="point_advice_part1_more">Настоятельно</v:String>
+    <v:String x:Key="point_advice_part2_more">рекомендовано</v:String>
+    <v:String x:Key="point_advice_part3_more">создать точку восстановления перед использованием утилиты</v:String>
+    
     <v:String x:Key="title_licens_more">Активация Windows</v:String>
     <v:String x:Key="text_licens_more">Применяется метод HWID или резервный KMS: он может не сработать, если для вашей редакции Windows нет ключа.</v:String>
     <v:String x:Key="btn_activation">Активировать</v:String>

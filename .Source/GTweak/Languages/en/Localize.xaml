@@ -7,13 +7,13 @@
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">Loading</v:String>
-    <v:String x:Key="text0_load">Uploading a profile</v:String>
-    <v:String x:Key="text1_load">Checking the data</v:String>
-    <v:String x:Key="text2_load">Viewing the registry</v:String>
-    <v:String x:Key="text3_load">Application Analysis</v:String>
-    <v:String x:Key="text4_load">Viewing the configuration</v:String>
-    <v:String x:Key="text5_load">Checking the connection</v:String>
-    <v:String x:Key="text6_load">Initialization</v:String>
+    <v:String x:Key="step1_load">Uploading a profile</v:String>
+    <v:String x:Key="step2_load">Fetching data</v:String>
+    <v:String x:Key="step3_load">Inspecting registry</v:String>
+    <v:String x:Key="step4_load">Analyzing applications</v:String>
+    <v:String x:Key="step5_load">Hardware Inventory</v:String>
+    <v:String x:Key="step6_load">Checking the connection</v:String>
+    <v:String x:Key="step7_load">Initialization</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->
@@ -39,7 +39,8 @@
     <v:String x:Key="warn_import_notification">This file is not suitable for import</v:String>
     <v:String x:Key="empty_import_notification">This file is empty, the application of tweaks is not possible</v:String>
     <v:String x:Key="export_warning_notification">It doesn't make sense, apply at least one tweak first</v:String>
-    <v:String x:Key="onedrive_notification">OneDrive recovery is now underway and will take a while</v:String>
+    <v:String x:Key="success_onedrive_notification">OneDrive recovery is now underway and will take a while</v:String>
+    <v:String x:Key="error_onedrive_notification">OneDrive setup file missing, recovery impossible</v:String>
     <v:String x:Key="defender_notification">It will take some time, please wait a bit</v:String>
     <v:String x:Key="warn_firewall_notification">Your firewall is disabled, turn it on and apply the tweak again</v:String>
     <v:String x:Key="warn_activate_notification">To start - activate Windows. Not all tweaks can be applied</v:String>
@@ -236,11 +237,12 @@
      <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="text0_applications">Applications are deleted</v:String>
-    <v:String x:Key="text1_applications">without the possibility</v:String>
-    <v:String x:Key="text2_applications">of recovery except OneDrive. Click on the</v:String>
-    <v:String x:Key="text3_applications">gray</v:String>
-    <v:String x:Key="text4_applications">icon</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Applications are</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">permanently</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">deleted (except OneDrive). To restore, click the</v:String>
+    <v:String x:Key="deletion_warn_part4_applications">gray</v:String>
+    <v:String x:Key="deletion_warn_part5_applications">icon</v:String>
+     
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>
@@ -373,7 +375,7 @@
     <v:String x:Key="tgl11_system">Warnings when running any exe</v:String>
     <v:String x:Key="tgl12_system">Automatic Memory Diagnostics</v:String>
     <v:String x:Key="tgl13_system">Teredo, ISATAP and IPv6 protocols</v:String>
-    <v:String x:Key="tgl14_system">File system cache standard sizeа</v:String>
+    <v:String x:Key="tgl14_system">File system cache standard size</v:String>
     <v:String x:Key="tgl15_system">Slowing down Windows startup and program startup</v:String>
     <v:String x:Key="tgl16_system">Usage history for the Quick Access Toolbar</v:String>
     <v:String x:Key="tgl17_system">Autorun removable media</v:String>
@@ -432,9 +434,9 @@
     <v:String x:Key="title_sound_systemInformation">Playback devices:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Network adapters:</v:String>
     <v:String x:Key="title_ip_systemInformation">Your IP address:</v:String>
-    <v:String x:Key="connection_limited_systemInformation">Network access is limited</v:String>
-    <v:String x:Key="connection_block_systemInformation">Connecting without network access</v:String>
-    <v:String x:Key="connection_lose_systemInformation">There is no internet connection</v:String>
+    <v:String x:Key="connection_limited_systemInformation">Network connectivity is limited</v:String>
+    <v:String x:Key="connection_block_systemInformation">Restricted network access</v:String>
+    <v:String x:Key="connection_lose_systemInformation">Internet connectivity lost</v:String>
     <v:String x:Key="text_copy_systemInformatin">Copied!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">You don't have a driver installed</v:String>
     <v:String x:Key="no_device_information_systemInformatin">No device information was found</v:String>
@@ -442,9 +444,10 @@
     <!--#endregion-->
 
     <!--#region More Page -->
-    <v:String x:Key="text0_more">It is strongly</v:String>
-    <v:String x:Key="text1_more">recommended</v:String>
-    <v:String x:Key="text2_more">to create a restore point before using the utility</v:String>
+    <v:String x:Key="point_advice_part1_more">It is strongly</v:String>
+    <v:String x:Key="point_advice_part2_more">recommended</v:String>
+    <v:String x:Key="point_advice_part3_more">to create a restore point before using the utility</v:String>
+    
     <v:String x:Key="title_licens_more">Windows Activation</v:String>
     <v:String x:Key="text_licens_more">The HWID method or backup KMS is applied: it may not work if there is no key for your Windows edition.</v:String>
     <v:String x:Key="btn_activation">Activate</v:String>

@@ -7,6 +7,7 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GTweak.Windows
 {
@@ -25,8 +26,8 @@ namespace GTweak.Windows
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += async delegate
             {
-                new TypewriterAnimation((string)FindResource("text6_load"), TextLoad, TimeSpan.FromMilliseconds(300));
-                await Task.Delay(310);
+                new TypewriterAnimation((string)FindResource("step7_load"), TextLoad, TimeSpan.FromMilliseconds(300));
+                await Task.Delay(400);
                 Close();
                 new MainWindow().Show();
             };
@@ -64,9 +65,9 @@ namespace GTweak.Windows
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            int index = Array.IndexOf(new[] { 5, 30, 55, 75, 95 }, e.ProgressPercentage);
-            if (index >= 0)
-                new TypewriterAnimation((string)FindResource($"text{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
+            int index = Array.IndexOf(new[] { 0, 10, 30, 55, 75, 95 }, e.ProgressPercentage);
+            if (index > 0)
+                new TypewriterAnimation((string)FindResource($"step{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -76,6 +77,6 @@ namespace GTweak.Windows
             BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
         }
 
-        private void Window_Loaded(object sender, System.Windows.RoutedEventArgs e) => BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.1));
+        private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.1));
     }
 }

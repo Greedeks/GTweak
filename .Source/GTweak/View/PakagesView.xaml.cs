@@ -124,28 +124,33 @@ namespace GTweak.View
 
                     case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
                         {
-                            new NotificationManager().Show("", "info", "onedrive_notification");
-
-                            BackgroundQueue backgroundQueue = new BackgroundQueue();
-                            await backgroundQueue.QueueTask(async () =>
+                            if (string.IsNullOrWhiteSpace(PathLocator.Executable.OneDrive))
+                                new NotificationManager().Show("", "warn", "error_onedrive_notification");
+                            else
                             {
+                                new NotificationManager().Show("", "info", "success_onedrive_notification");
 
-                                Dispatcher.Invoke(() =>
+                                BackgroundQueue backgroundQueue = new BackgroundQueue();
+                                await backgroundQueue.QueueTask(async () =>
                                 {
-                                    UninstallingPakages.HandleAvailabilityStatus(packageName, true);
-                                    UpdateViewStatePakages();
+
+                                    Dispatcher.Invoke(() =>
+                                    {
+                                        UninstallingPakages.HandleAvailabilityStatus(packageName, true);
+                                        UpdateViewStatePakages();
+                                    });
+
+                                    await UninstallingPakages.RestoreOneDriveFolder();
+
+                                    await Task.Delay(3000);
+
+                                    Dispatcher.Invoke(() =>
+                                    {
+                                        UninstallingPakages.HandleAvailabilityStatus(packageName, false);
+                                        UpdateViewStatePakages();
+                                    });
                                 });
-
-                                await UninstallingPakages.RestoreOneDriveFolder();
-
-                                await Task.Delay(3000);
-
-                                Dispatcher.Invoke(() =>
-                                {
-                                    UninstallingPakages.HandleAvailabilityStatus(packageName, false);
-                                    UpdateViewStatePakages();
-                                });
-                            });
+                            }
                             break;
                         }
                 }

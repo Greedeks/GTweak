@@ -7,13 +7,13 @@
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">Caricamento</v:String>
-    <v:String x:Key="text0_load">Caricamento di un profilo</v:String>
-    <v:String x:Key="text1_load">Verifica dei dati</v:String>
-    <v:String x:Key="text2_load">Visualizzazione del registro</v:String>
-    <v:String x:Key="text3_load">Analisi dell'applicazione</v:String>
-    <v:String x:Key="text4_load">Configurazione</v:String>
-    <v:String x:Key="text5_load">Verifica della connessione</v:String>
-    <v:String x:Key="text6_load">Inizializzazione</v:String>
+    <v:String x:Key="step1_load">Caricamento di un profilo</v:String>
+    <v:String x:Key="step2_load">Verifica dei dati</v:String>
+    <v:String x:Key="step3_load">Visualizzazione del registro</v:String>
+    <v:String x:Key="step4_load">Analisi dell'applicazione</v:String>
+    <v:String x:Key="step5_load">Configurazione</v:String>
+    <v:String x:Key="step6_load">Verifica della connessione</v:String>
+    <v:String x:Key="step7_load">Inizializzazione</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->
@@ -39,7 +39,8 @@
     <v:String x:Key="warn_import_notification">Questo file non è adatto per l'importazione</v:String>
     <v:String x:Key="empty_import_notification">Questo file è vuoto, l'applicazione delle modifiche non è possibile</v:String>
     <v:String x:Key="export_warning_notification">Non ha senso, applica almeno una modifica prima</v:String>
-    <v:String x:Key="onedrive_notification">Il ripristino di OneDrive è in corso e richiederà un po' di tempo</v:String>
+    <v:String x:Key="success_onedrive_notification">Il ripristino di OneDrive è in corso e richiederà un po' di tempo</v:String>
+    <v:String x:Key="error_onedrive_notification">OneDrive setup file missing, recovery impossible</v:String>
     <v:String x:Key="defender_notification">Ci vorrà un po' di tempo, attendi</v:String>
     <v:String x:Key="warn_firewall_notification">Il tuo firewall è disattivato, attivalo e applica nuovamente la modifica</v:String>
     <v:String x:Key="warn_activate_notification">Per iniziare - attiva Windows. Non tutte le modifiche possono essere applicate</v:String>
@@ -236,11 +237,11 @@
     <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="text0_applications">Le applicazioni verranno eliminate</v:String>
-    <v:String x:Key="text1_applications">senza possibilità</v:String>
-    <v:String x:Key="text2_applications">di recupero, ad eccezione di OneDrive. Fai clic sull'</v:String>
-    <v:String x:Key="text3_applications">icona</v:String>
-    <v:String x:Key="text4_applications">grigia</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Le applicazioni vengono</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">permanentemente</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">eliminate (ad eccezione di OneDrive). Per ripristinare, fai clic sulla</v:String>
+    <v:String x:Key="deletion_warn_part4_applications">grigia</v:String>
+    <v:String x:Key="deletion_warn_part5_applications">icona</v:String>
 
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
@@ -443,9 +444,10 @@
     <!--#endregion-->
 
     <!--#region More Page -->
-    <v:String x:Key="text0_more">È fortemente</v:String>
-    <v:String x:Key="text1_more">consigliato</v:String>
-    <v:String x:Key="text2_more">creare un punto di ripristino prima di usare l'utilità</v:String>
+    <v:String x:Key="point_advice_part1_more">È fortemente</v:String>
+    <v:String x:Key="point_advice_part2_more">consigliato</v:String>
+    <v:String x:Key="point_advice_part3_more">creare un punto di ripristino prima di usare l'utilità</v:String>
+    
     <v:String x:Key="title_licens_more">Attivazione di Windows</v:String>
     <v:String x:Key="text_licens_more">Usa il metodo HWID o backup KMS: potrebbe non funzionare senza chiave per la tua edizione di Windows.</v:String>
     <v:String x:Key="btn_activation">Attiva</v:String>

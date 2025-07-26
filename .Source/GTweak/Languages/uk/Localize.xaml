@@ -7,13 +7,13 @@
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">Завантаження</v:String>
-    <v:String x:Key="text0_load">Завантаження профілю</v:String>
-    <v:String x:Key="text1_load">Перевірка даних</v:String>
-    <v:String x:Key="text2_load">Перегляд реєстру</v:String>
-    <v:String x:Key="text3_load">Аналіз додатків</v:String>
-    <v:String x:Key="text4_load">Перегляд конфігурації</v:String>
-    <v:String x:Key="text5_load">Перевірка з'єднання</v:String>
-    <v:String x:Key="text6_load">Ініціалізація</v:String>
+    <v:String x:Key="step1_load">Завантаження профілю</v:String>
+    <v:String x:Key="step2_load">Перевірка даних</v:String>
+    <v:String x:Key="step3_load">Перегляд реєстру</v:String>
+    <v:String x:Key="step4_load">Аналіз додатків</v:String>
+    <v:String x:Key="step5_load">Перегляд конфігурації</v:String>
+    <v:String x:Key="step6_load">Перевірка з'єднання</v:String>
+    <v:String x:Key="step7_load">Ініціалізація</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->
@@ -39,7 +39,8 @@
     <v:String x:Key="warn_import_notification">Цей файл не підходить для імпорту</v:String>
     <v:String x:Key="empty_import_notification">Цей файл порожній, використання налаштувань неможливе</v:String>
     <v:String x:Key="export_warning_notification">Це не має сенсу, спочатку застосуйте принаймні одне налаштування</v:String>
-    <v:String x:Key="onedrive_notification">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
+    <v:String x:Key="success_onedrive_notification">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
+    <v:String x:Key="error_onedrive_notification">OneDrive setup file missing, recovery impossible</v:String>
     <v:String x:Key="defender_notification">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
     <v:String x:Key="warn_firewall_notification">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
     <v:String x:Key="warn_activate_notification">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
@@ -236,11 +237,12 @@
     <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="text0_applications">Додатки видаляються</v:String>
-    <v:String x:Key="text1_applications">без можливості</v:String>
-    <v:String x:Key="text2_applications">відновлення, крім OneDrive. Натисніть на</v:String>
-    <v:String x:Key="text3_applications">сіру</v:String>
-    <v:String x:Key="text4_applications">піктограму</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Програми</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">назавжди</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">видаляються (крім OneDrive). Щоб відновити, натисніть на</v:String>
+    <v:String x:Key="deletion_warn_part4_applications">сіру</v:String>
+    <v:String x:Key="deletion_warn_part5_applications">піктограму</v:String>
+    
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>
@@ -442,9 +444,10 @@
     <!--#endregion-->
 
     <!--#region More Page -->
-    <v:String x:Key="text0_more">Настійно</v:String>
-    <v:String x:Key="text1_more">рекомендовано</v:String>
-    <v:String x:Key="text2_more">створити точку відновлення перед використанням утиліти</v:String>
+    <v:String x:Key="point_advice_part1_more">Настійно</v:String>
+    <v:String x:Key="point_advice_part2_more">рекомендовано</v:String>
+    <v:String x:Key="point_advice_part3_more">створити точку відновлення перед використанням утиліти</v:String>
+    
     <v:String x:Key="title_licens_more">Активація Windows</v:String>
     <v:String x:Key="text_licens_more">Застосування методу HWID або резервного KMS: може не працювати, якщо немає ключа для вашої Windows.</v:String>
     <v:String x:Key="btn_activation">Активувати</v:String>

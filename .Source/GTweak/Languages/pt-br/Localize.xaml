@@ -7,13 +7,13 @@
 
 	<!--#region Load Window -->
     <v:String x:Key="title_load">Carregando</v:String>
-    <v:String x:Key="text0_load">Carregando um perfil</v:String>
-    <v:String x:Key="text1_load">Verificando os dados</v:String>
-    <v:String x:Key="text2_load">Analisando o registro</v:String>
-    <v:String x:Key="text3_load">Análise de aplicativos</v:String>
-    <v:String x:Key="text4_load">Analisando a configuração</v:String>
-    <v:String x:Key="text5_load">Verificando a conexão</v:String>
-    <v:String x:Key="text6_load">Inicialização</v:String>
+    <v:String x:Key="step1_load">Carregando um perfil</v:String>
+    <v:String x:Key="step2_load">Verificando os dados</v:String>
+    <v:String x:Key="step3_load">Analisando o registro</v:String>
+    <v:String x:Key="step4_load">Análise de aplicativos</v:String>
+    <v:String x:Key="step5_load">Analisando a configuração</v:String>
+    <v:String x:Key="step6_load">Verificando a conexão</v:String>
+    <v:String x:Key="step7_load">Inicialização</v:String>
 	<!--#endregion-->
 
 	<!--#region Message Window -->
@@ -39,7 +39,8 @@
     <v:String x:Key="warn_import_notification">Este arquivo não é adequado para importação</v:String>
     <v:String x:Key="empty_import_notification">Este arquivo está vazio, a aplicação de ajustes não é possível</v:String>
     <v:String x:Key="export_warning_notification">Não faz sentido, aplique pelo menos um ajuste primeiro</v:String>
-    <v:String x:Key="onedrive_notification">A recuperação do OneDrive está em andamento e levará um tempo</v:String>
+    <v:String x:Key="success_onedrive_notification">A recuperação do OneDrive está em andamento e levará um tempo</v:String>
+    <v:String x:Key="error_onedrive_notification">OneDrive setup file missing, recovery impossible</v:String>
     <v:String x:Key="defender_notification">Levará algum tempo, por favor, espere um pouco</v:String>
     <v:String x:Key="warn_firewall_notification">Seu firewall está desativado, ative-o e aplique o ajuste novamente</v:String>
     <v:String x:Key="warn_activate_notification">Para começar - ative o Windows. Nem todos os ajustes podem ser aplicados</v:String>
@@ -236,11 +237,12 @@
     <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="text0_applications">Os aplicativos são excluídos</v:String>
-    <v:String x:Key="text1_applications">sem a possibilidade</v:String>
-    <v:String x:Key="text2_applications">de recuperação, exceto o OneDrive. Clique no ícone</v:String>
-    <v:String x:Key="text3_applications">cinza</v:String>
-    <v:String x:Key="text4_applications">para remover</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Os aplicativos são</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">permanentemente</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">excluídos (exceto o OneDrive). Para restaurar, clique no</v:String>
+    <v:String x:Key="deletion_warn_part4_applications">cinza</v:String>
+    <v:String x:Key="deletion_warn_part5_applications">ícone</v:String>
+
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>
@@ -442,9 +444,10 @@
     <!--#endregion-->
 
     <!--#region More Page -->
-    <v:String x:Key="text0_more">É fortemente</v:String>
-    <v:String x:Key="text1_more">recomendado</v:String>
-    <v:String x:Key="text2_more">criar um ponto de restauração antes de usar o utilitário</v:String>
+    <v:String x:Key="point_advice_part1_more">É fortemente</v:String>
+    <v:String x:Key="point_advice_part2_more">recomendado</v:String>
+    <v:String x:Key="point_advice_part3_more">criar um ponto de restauração antes de usar o utilitário</v:String>
+    
     <v:String x:Key="title_licens_more">Ativação do Windows</v:String>
     <v:String x:Key="text_licens_more">HWID ou KMS de backup aplicado: pode falhar sem chave para sua edição Windows.</v:String>
     <v:String x:Key="btn_activation">Ativar</v:String>
