@@ -26,13 +26,13 @@ namespace GTweak.Windows
             if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3));
+        private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
         }
 
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)

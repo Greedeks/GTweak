@@ -43,35 +43,15 @@ namespace GTweak
 
         private void AnimationSettingsMenu()
         {
+            DoubleAnimation rotateAnimation = FactoryAnimation.CreateIn(0, 360, 0.5);
+
             Storyboard storyboard = new Storyboard();
-
-            DoubleAnimation rotateAnimation = new DoubleAnimation()
-            {
-                From = 0.0,
-                To = 360,
-                EasingFunction = new QuadraticEase(),
-                SpeedRatio = 2.0,
-                Duration = TimeSpan.FromSeconds(1)
-            };
-
-            DoubleAnimation widthAnimation = new DoubleAnimation()
-            {
-                From = SettingsMenu.Width != 400 ? 0 : 400,
-                To = SettingsMenu.Width != 400 ? 400 : 0,
-                EasingFunction = new QuadraticEase(),
-                SpeedRatio = 2.0,
-                Duration = TimeSpan.FromSeconds(1)
-            };
-
-            Timeline.SetDesiredFrameRate(rotateAnimation, 240);
-            Timeline.SetDesiredFrameRate(widthAnimation, 240);
-
             Storyboard.SetTarget(rotateAnimation, ImageSettings);
             Storyboard.SetTargetProperty(rotateAnimation, new PropertyPath("(UIElement.RenderTransform).(RotateTransform.Angle)"));
 
             storyboard.Children.Add(rotateAnimation);
             storyboard.Begin();
-            SettingsMenu.BeginAnimation(WidthProperty, widthAnimation);
+            SettingsMenu.BeginAnimation(WidthProperty, FactoryAnimation.CreateIn(SettingsMenu.Width != 400 ? 0 : 400, SettingsMenu.Width != 400 ? 400 : 0, 0.5));
         }
 
         private void SettingsMenu_QueryCursor(object sender, QueryCursorEventArgs e)
@@ -100,12 +80,12 @@ namespace GTweak
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3,
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3,
                 async () =>
                 {
                     if (SystemDiagnostics.IsNeedUpdate && SettingsEngine.IsUpdateCheckRequired)

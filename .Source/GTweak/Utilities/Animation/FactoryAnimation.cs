@@ -4,13 +4,13 @@ using System.Windows.Media.Animation;
 
 namespace GTweak.Utilities.Animation
 {
-    internal static class FadeAnimation
+    internal static class FactoryAnimation
     {
-        internal static DoubleAnimation FadeIn(double toValue, double seconds, Action onCompleted = null, bool reverse = false)
+        internal static DoubleAnimation CreateIn(double fromValue, double toValue, double seconds, Action onCompleted = null, bool reverse = false)
         {
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {
-                From = 0,
+                From = fromValue,
                 To = toValue,
                 AutoReverse = reverse,
                 Duration = TimeSpan.FromSeconds(seconds),
@@ -24,7 +24,7 @@ namespace GTweak.Utilities.Animation
             return doubleAnim;
         }
 
-        internal static DoubleAnimation FadeTo(double seconds, Action onCompleted = null)
+        internal static DoubleAnimation CreateTo(double seconds, Action onCompleted = null)
         {
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(seconds));
 

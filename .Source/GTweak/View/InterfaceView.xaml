@@ -87,7 +87,7 @@
                                 <Trigger Property="Visibility" Value="Visible">
                                     <Trigger.EnterActions>
                                         <BeginStoryboard>
-                                            <Storyboard>
+                                            <Storyboard Timeline.DesiredFrameRate="240">
                                                 <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"/>
                                             </Storyboard>
                                         </BeginStoryboard>
@@ -103,7 +103,7 @@
                                     <Trigger Property="Visibility" Value="Visible">
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
-                                                <Storyboard Timeline.DesiredFrameRate="400">
+                                                <Storyboard Timeline.DesiredFrameRate="240">
                                                     <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" RepeatBehavior="Forever" AutoReverse="True" Duration="0:0:0.530" />
                                                 </Storyboard>
                                             </BeginStoryboard>
@@ -121,7 +121,7 @@
                                     <Trigger Property="Visibility" Value="Visible">
                                         <Trigger.EnterActions>
                                             <BeginStoryboard>
-                                                <Storyboard>
+                                                <Storyboard Timeline.DesiredFrameRate="240">
                                                     <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" RepeatBehavior="Forever" AutoReverse="True" Duration="0:0:0.200"/>
                                                 </Storyboard>
                                             </BeginStoryboard>

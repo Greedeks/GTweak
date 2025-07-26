@@ -54,7 +54,7 @@ namespace GTweak.View
             {
                 Overlay.Visibility = Visibility.Visible;
 
-                Overlay.BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.3));
+                Overlay.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
 
                 TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
 
@@ -79,7 +79,7 @@ namespace GTweak.View
                 try { _isWinOldRemoval = await tcs.Task; }
                 catch (TaskCanceledException) { _isWinOldRemoval = false; }
 
-                Overlay.BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.25, () => { Overlay.Visibility = Visibility.Collapsed; }));
+                Overlay.BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.25, () => { Overlay.Visibility = Visibility.Collapsed; }));
             }
 
             BackgroundQueue backgroundQueue = new BackgroundQueue();

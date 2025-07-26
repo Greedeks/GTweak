@@ -38,7 +38,7 @@ namespace GTweak.Windows
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.2));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.2));
             Progress<byte> progress = new Progress<byte>(ReportProgress);
             try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
@@ -56,7 +56,7 @@ namespace GTweak.Windows
                     new NotificationManager().Show("logout");
 
                 App.UpdateImport();
-                BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
+                BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
             }
         }
 

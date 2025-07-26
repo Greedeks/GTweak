@@ -271,7 +271,7 @@
     </Compile>
     <Compile Include="Utilities\Controls\RunGuard.cs" />
     <Compile Include="Utilities\Controls\ErrorLogging.cs" />
-    <Compile Include="Utilities\Animation\FadeAnimation.cs" />
+    <Compile Include="Utilities\Animation\FactoryAnimation.cs" />
     <Compile Include="Utilities\Controls\PathLocator.cs" />
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />

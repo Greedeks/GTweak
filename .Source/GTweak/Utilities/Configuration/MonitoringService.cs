@@ -140,9 +140,7 @@ namespace GTweak.Utilities.Configuration
             Task.Run(() =>
             {
                 foreach (var wmiClass in new[] { "Win32_DiskDrive", "MSFT_PhysicalDisk" })
-                {
                     SubscribeToDeviceEvents($"TargetInstance ISA '{wmiClass}'", DeviceType.Storage);
-                }
                 SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio);
                 SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network);
             }).ConfigureAwait(false);

@@ -71,14 +71,14 @@ namespace GTweak.Windows
 
             Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 240);
             BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(1, 0.25));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.25));
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.1, () => { Close(); }));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
         }
     }
 }

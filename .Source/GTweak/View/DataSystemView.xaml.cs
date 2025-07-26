@@ -12,7 +12,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Threading;
 
@@ -22,6 +21,7 @@ namespace GTweak.View
     {
         private readonly MonitoringService _monitoringService = new MonitoringService();
         private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
+        private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
         private readonly TimerControlManager timer = default;
 
         public DataSystemView()
@@ -52,13 +52,11 @@ namespace GTweak.View
             {
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
-                    BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(async delegate { await _monitoringService.GetTotalProcessorUsage(); });
                     AnimationProgressBars();
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
                 {
-                    BackgroundQueue backgroundQueue = new BackgroundQueue();
                     await backgroundQueue.QueueTask(delegate { _systemDiagnostics.GetUserIpAddress(); });
                     Dispatcher.Invoke(() => DataContext = new DataSystemVM());
                 }
@@ -66,81 +64,33 @@ namespace GTweak.View
                 Dispatcher.Invoke(() =>
                 {
                     if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
-                    {
-                        DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.18));
-                        doubleAnim.Completed += delegate { SettingsEngine.IsHiddenIpAddress = false; };
-                        Timeline.SetDesiredFrameRate(doubleAnim, 240);
-                        IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
-                    }
+                        IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
                 });
-
             });
             timer.Start();
         }
 
-        #region Animations
+        private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType) => await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
+
         private void AnimationProgressBars()
         {
             Dispatcher.Invoke(() =>
             {
-                DoubleAnimation doubleAnim = new DoubleAnimation()
-                {
-                    From = CPULoad.Value,
-                    To = MonitoringService.GetProcessorUsage,
-                    EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(0.2)
-                };
-                Timeline.SetDesiredFrameRate(doubleAnim, 240);
-                CPULoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
-
-                doubleAnim = new DoubleAnimation()
-                {
-                    From = RAMLoad.Value,
-                    To = _monitoringService.GetMemoryUsage,
-                    EasingFunction = new QuadraticEase(),
-                    Duration = TimeSpan.FromSeconds(0.2)
-                };
-                Timeline.SetDesiredFrameRate(doubleAnim, 240);
-                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, doubleAnim);
+                CPULoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, MonitoringService.GetProcessorUsage, 0.2));
+                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, _monitoringService.GetMemoryUsage, 0.2));
             });
         }
         private void AnimationPopup()
         {
             PopupCopy.IsOpen = true;
-            CopyTextToastBody.BeginAnimation(UIElement.OpacityProperty, FadeAnimation.FadeIn(0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
-
-            DoubleAnimation offsetAnim = new DoubleAnimation()
-            {
-                From = -20,
-                To = -50,
-                SpeedRatio = 8,
-                EasingFunction = new QuadraticEase(),
-                Duration = TimeSpan.FromSeconds(3)
-            };
-            Timeline.SetDesiredFrameRate(offsetAnim, 240);
-            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, offsetAnim);
+            CopyTextToastBody.BeginAnimation(UIElement.OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
+            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35));
         }
-        #endregion
 
         private void BtnHiddenIP_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             SettingsEngine.IsHiddenIpAddress = !BtnHiddenIP.IsChecked.Value;
-
-            DoubleAnimation doubleAnim = new DoubleAnimation()
-            {
-                From = BtnHiddenIP.IsChecked.Value ? 20 : 0,
-                To = BtnHiddenIP.IsChecked.Value ? 0 : 20,
-                EasingFunction = new QuadraticEase(),
-                Duration = TimeSpan.FromSeconds(0.2)
-            };
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
-            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, doubleAnim);
-        }
-
-        private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType)
-        {
-            BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
+            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, BtnHiddenIP.IsChecked.Value ? FactoryAnimation.CreateTo(0.2) : FactoryAnimation.CreateIn(0, 20, 0.2));
         }
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)

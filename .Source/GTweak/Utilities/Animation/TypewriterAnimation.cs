@@ -23,7 +23,7 @@ namespace GTweak.Utilities.Animation
             Storyboard.SetTargetProperty(stringAnimation, new PropertyPath(TextBlock.TextProperty));
             storyBoard.Children.Add(stringAnimation);
 
-            DoubleAnimation opacityAnimation = FadeAnimation.FadeIn(1, timeSpan.TotalSeconds);
+            DoubleAnimation opacityAnimation = FactoryAnimation.CreateIn(0, 1, timeSpan.TotalSeconds);
             Storyboard.SetTargetName(opacityAnimation, textBlock.Name);
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
             storyBoard.Children.Add(opacityAnimation);

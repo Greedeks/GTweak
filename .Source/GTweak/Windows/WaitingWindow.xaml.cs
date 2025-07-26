@@ -22,7 +22,7 @@ namespace GTweak.Windows
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeTo(0.15, () =>
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.15, () =>
             {
                 ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
                 disablingWinKeys.objKeyboardProcess = new DisablingWinKeys.LowLevelKeyboardProc(disablingWinKeys.CaptureKey);
@@ -36,7 +36,7 @@ namespace GTweak.Windows
             ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
             disablingWinKeys.objKeyboardProcess = new DisablingWinKeys.LowLevelKeyboardProc(disablingWinKeys.CaptureKey);
             disablingWinKeys.ptrHook = DisablingWinKeys.SetWindowsHookEx(13, disablingWinKeys.objKeyboardProcess, DisablingWinKeys.GetModuleHandle(objCurrentModule.ModuleName), 0);
-            BeginAnimation(OpacityProperty, FadeAnimation.FadeIn(0.5, 0.3));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.5, 0.3));
         }
     }
 }

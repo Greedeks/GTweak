@@ -52,7 +52,7 @@
                                         </Trigger>
                                         <EventTrigger RoutedEvent="Loaded">
                                             <BeginStoryboard>
-                                                <Storyboard Timeline.DesiredFrameRate="400">
+                                                <Storyboard Timeline.DesiredFrameRate="240">
                                                     <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="0" To="0" Duration="0"/>
                                                 </Storyboard>
                                             </BeginStoryboard>
