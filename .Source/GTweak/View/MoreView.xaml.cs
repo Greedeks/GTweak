@@ -1,5 +1,4 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
+﻿using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
@@ -8,8 +7,6 @@ using GTweak.Windows;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.IO;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace GTweak.View
 {
@@ -52,34 +49,8 @@ namespace GTweak.View
         {
             if (ClearingMemory.IsWinOldExists && !_hasDeclined)
             {
-                Overlay.Visibility = Visibility.Visible;
-
-                Overlay.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
-
-                TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-
-                void AgreeHandler(object sender, RoutedEventArgs args)
-                {
-                    tcs.TrySetResult(true);
-                    BtnAgree.PreviewMouseLeftButtonDown -= AgreeHandler;
-                    BtnDecline.PreviewMouseLeftButtonDown -= DeclineHandler;
-                }
-
-                void DeclineHandler(object sender, RoutedEventArgs args)
-                {
-                    tcs.TrySetResult(false);
-                    BtnAgree.PreviewMouseLeftButtonDown -= AgreeHandler;
-                    BtnDecline.PreviewMouseLeftButtonDown -= DeclineHandler;
-                    _hasDeclined = true;
-                }
-
-                BtnAgree.PreviewMouseLeftButtonDown += AgreeHandler;
-                BtnDecline.PreviewMouseLeftButtonDown += DeclineHandler;
-
-                try { _isWinOldRemoval = await tcs.Task; }
-                catch (TaskCanceledException) { _isWinOldRemoval = false; }
-
-                Overlay.BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.25, () => { Overlay.Visibility = Visibility.Collapsed; }));
+                OverlayDialogManager overlayDialog = new OverlayDialogManager(Overlay, OpacityProperty, BtnAgree, BtnDecline, onSecondary: () => _hasDeclined = true);
+                _isWinOldRemoval = await overlayDialog.Show();
             }
 
             BackgroundQueue backgroundQueue = new BackgroundQueue();

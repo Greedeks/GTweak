@@ -1,5 +1,4 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Controls;
+﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
@@ -20,7 +19,9 @@ namespace GTweak.View
 {
     public partial class PakagesView : UserControl
     {
+        private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
         private readonly TimerControlManager timer = default;
+
         private bool _isWebViewRemoval = false;
 
         public PakagesView()
@@ -33,7 +34,7 @@ namespace GTweak.View
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
                     backgroundWorker.DoWork += delegate { new UninstallingPakages().LoadInstalledPackages(); };
-                    backgroundWorker.RunWorkerCompleted += delegate { UpdateViewStatePakages(); };
+                    backgroundWorker.RunWorkerCompleted += delegate { Dispatcher.Invoke(() => { UpdateViewStatePakages(); }); };
                     backgroundWorker.RunWorkerAsync();
                 }
             });
@@ -67,36 +68,10 @@ namespace GTweak.View
                         {
                             if (packageName.Equals("Edge"))
                             {
-                                Overlay.Visibility = Visibility.Visible;
-
-                                Overlay.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
-
-                                TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-
-                                void DeleteHandler(object sender, RoutedEventArgs args)
-                                {
-                                    tcs.TrySetResult(true);
-                                    BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
-                                    BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
-                                }
-
-                                void CancelHandler(object sender, RoutedEventArgs args)
-                                {
-                                    tcs.TrySetResult(false);
-                                    BtnDelete.PreviewMouseLeftButtonDown -= DeleteHandler;
-                                    BtnCancel.PreviewMouseLeftButtonDown -= CancelHandler;
-                                }
-
-                                BtnDelete.PreviewMouseLeftButtonDown += DeleteHandler;
-                                BtnCancel.PreviewMouseLeftButtonDown += CancelHandler;
-
-                                try { _isWebViewRemoval = await tcs.Task; }
-                                catch (TaskCanceledException) { _isWebViewRemoval = false; }
-
-                                Overlay.BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.25, () => { Overlay.Visibility = Visibility.Collapsed; }));
+                                OverlayDialogManager overlayDialog = new OverlayDialogManager(Overlay, OpacityProperty, BtnDelete, BtnCancel);
+                                _isWebViewRemoval = await overlayDialog.Show();
                             }
 
-                            BackgroundQueue backgroundQueue = new BackgroundQueue();
                             await backgroundQueue.QueueTask(async () =>
                             {
                                 Dispatcher.Invoke(() =>
@@ -113,11 +88,13 @@ namespace GTweak.View
                                 {
                                     UninstallingPakages.HandleAvailabilityStatus(packageName, false);
                                     UpdateViewStatePakages();
-
-                                    if (ExplorerManager.PackageMapping.TryGetValue(packageName, out bool needRestart))
-                                        ExplorerManager.Restart(new Process());
                                 });
 
+                                await Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    if (ExplorerManager.PackageMapping.TryGetValue(packageName, out bool needRestart))
+                                        ExplorerManager.Restart(new Process());
+                                }), DispatcherPriority.ApplicationIdle);
                             });
                             break;
                         }
@@ -130,7 +107,6 @@ namespace GTweak.View
                             {
                                 new NotificationManager().Show("", "info", "success_onedrive_notification");
 
-                                BackgroundQueue backgroundQueue = new BackgroundQueue();
                                 await backgroundQueue.QueueTask(async () =>
                                 {
 
@@ -159,8 +135,6 @@ namespace GTweak.View
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => UpdateViewStatePakages();
-
-        private void Page_Unloaded(object sender, RoutedEventArgs e) => timer.Stop();
 
         private ImageSource AvailabilityInstalledPackage(string packageName, bool isOneDrive = false)
         {
