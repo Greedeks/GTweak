@@ -15,7 +15,7 @@
 
 <!-- langues --> 
 <div align="center">
-  <h1>🌍 Langues disponibles:</h1>
+  <h1>🌍 Idiomas Disponíveis:</h1>
 
 <a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
     <img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="Drapeau US" width="40">
@@ -33,7 +33,7 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Drapeau Coréen" width="40">
 </a>
 
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md">
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
     <img src="https://cdn-icons-png.flaticon.com/128/9906/9906449.png" alt="Brazilian Flag" width="40">
 </a>
 
@@ -49,74 +49,74 @@
 </div>
 
 ---
-<h2> Une large gamme de fonctions, incluant : 🔩</h2>
+<h2> Uma ampla variedade de funções, incluindo: 🔩</h2>
 
 ```java
-- Activation de Windows via HWID et KMS;
-- Désactivation de Windows Defender, SmartScreen, Antimalware, VBS et UAC;
-- Désactivation des mises à jour Windows et suppression des fichiers temporaires de mise à jour;
-- Désactivation des services inutiles et superflus;
-- Désactivation des keyloggers et de la télémétrie pour Windows et NVIDIA;
-- Désactivation des services et événements liés à la collecte de données utilisateur;
-- Désactivation des tâches du Planificateur de tâches Windows;
-- Désactivation des protocoles réseau inutiles : Teredo, ISATAP et IPv6;
-- Désactivation des outils de diagnostic Windows intégrés et de la défragmentation;
-- Suppression des publicités et bannières système dans Windows, y compris SCOOBE;
-- Désactivation des notifications, recommandations et suggestions système;
-- Blocage des domaines fantômes de Microsoft collectant des données;
-- Désinstallation de OneDrive et Microsoft Edge ainsi que des données et dossiers associés;
-- Suppression des applications préinstallées dans Windows 10/11;
-- Suppression et désactivation des assistants IA : Cortana, Copilot et Recall;
-- Personnalisation de l’interface : thèmes, fenêtres et icônes;
-- Configuration du clavier et de la souris : désactivation du filtrage, des touches rémanentes, accélération;
-- Ajustement des paramètres Windows et du plan d’alimentation;
-- Ajustement de l'alimentation pour les pilotes Realtek Audio afin de corriger les retards audio;
-- Affichage de la configuration et surveillance des composants système;
-- Compression et restauration des données via NFTS.
+- Ativação do Windows usando métodos HWID e KMS;
+- Desativação do Windows Defender, SmartScreen, Antimalware, VBS e UAC;
+- Desativação de atualizações do Windows e remoção de arquivos temporários de atualização;
+- Desativação de serviços não utilizados e desnecessários;
+- Desativação de keyloggers e telemetria do Windows e NVIDIA;
+- Desativação de serviços e eventos relacionados à coleta de dados do usuário;
+- Desativação de tarefas no Agendador de Tarefas do Windows;
+- Desativação de protocolos de rede desnecessários: Teredo, ISATAP e IPv6;
+- Desativação de ferramentas de diagnóstico internas do Windows e desfragmentação;
+- Desativação de anúncios e banners do sistema no Windows, incluindo SCOOBE;
+- Desativação de notificações, recomendações e sugestões do sistema no Windows;
+- Bloqueio de domínios ocultos da Microsoft que coletam dados;
+- Desinstalação do OneDrive e do Microsoft Edge, incluindo limpeza de todos os dados e pastas associados;
+- Remoção de aplicativos pré-instalados padrão no Windows 10/11;
+- Remoção e desativação de assistentes de IA: Cortana, Copilot e Recall;
+- Personalização da interface: alteração de temas, configurações de janelas e ícones;
+- Configuração de teclado e mouse: desativação de filtragem de teclas, teclas aderentes e aceleração;
+- Ajuste das configurações do Windows e modificação do plano de energia;
+- Ajuste das configurações de energia para drivers de áudio Realtek High Definition para corrigir atraso de som;
+- Visualização da configuração e monitoramento dos componentes do sistema;
+- Implementação de compressão de dados e posterior restauração usando NTFS.
 ```
 
-<h2> Captures d'écran 📷</h2>
+<h2> Capturas de Tela 📷</h2>
 <details>
-  <summary> Confidentialité </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Confidentiality.png"/>
+  <summary> Privacidade </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/pt-br/Confidentiality.png"/>
 </details>
 <details>
   <summary> Interface </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/pt-br/Interface.png"/>
 </details>
 <details>
-  <summary> Applications </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Applications.png"/>
+  <summary> Aplicativos </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/pt-br/Applications.png"/>
 </details>
 <details>
-  <summary> Services </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Services.png"/>
+  <summary> Serviços </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/pt-br/Services.png"/>
 </details>
 <details>
-  <summary> Système </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/System.png"/>
+  <summary> Sistema </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/pt-br/System.png"/>
 </details>
 <details>
-  <summary> Autres </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/More.png"/>
+  <summary> Mais </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/pt-br/More.png"/>
 </details>
 
-<h2> Configuration requise </h2>
+<h2> Requisitos do Sistema </h2>
 
-> ⚠ L’utilitaire est conçu uniquement pour les images officielles de Windows téléchargées depuis des sources fiables. Si vous avez installé une version modifiée de Windows, vous êtes seul responsable de son bon fonctionnement.
+> ⚠ A utilidade é projetada exclusivamente para imagens oficiais do Windows baixadas de fontes confiáveis. Se você instalou uma versão reduzida/modificada do Windows, você é o único responsável pela sua funcionalidade.
 
 ```c++
-Compatibilité Windows: à partir de la version 10 (build 18362.116)
-Résolution minimale: 1280×720 (HD)
-Plateforme installée: .NET Framework 4.8
+Suporte Windows: desde 10 (build 18362.116)
+Resolução mínima de tela: 1280×720 (HD)
+Plataforma instalada: .NET Framework 4.8
 ```
 </br>
 
 > [!WARNING]
-> Vous devez désactiver l’antivirus avant utilisation
+> Você precisará parar o antivírus antes de usar
 </br>
 
-## Packages NuGet
+## Pacotes NuGet
 
 - [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
 - [Costura](https://github.com/Fody/Costura)
@@ -124,12 +124,12 @@ Plateforme installée: .NET Framework 4.8
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
 
-## Référence
+## Referência
 - FirewallAPI
 
 </br>
 
-## Traduction ❤️
+## Tradução ❤️
 - 한국어 - [@VenusGirl](https://github.com/VenusGirl)
 - Українська - [@Kopejkin](https://github.com/Kopejkin)
 - Français, Italiano - [@Zephyris](https://github.com/Zephyris-Pro)
@@ -137,7 +137,7 @@ Plateforme installée: .NET Framework 4.8
 
 </br>
 
-## Contact
+## Contato
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
 [![github](https://img.shields.io/badge/Github-gray?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/Greedeks)

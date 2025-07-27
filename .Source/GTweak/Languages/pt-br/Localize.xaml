@@ -237,9 +237,9 @@
     <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="deletion_warn_part1_applications">Os aplicativos são</v:String>
-    <v:String x:Key="deletion_warn_part2_applications">permanentemente</v:String>
-    <v:String x:Key="deletion_warn_part3_applications">excluídos (exceto o OneDrive). Para restaurar, clique no</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Os aplicativos são excluídos</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">permanentemente,</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">mas o OneDrive é uma exceção: para restaurar, clique no</v:String>
     <v:String x:Key="deletion_warn_part4_applications">cinza</v:String>
     <v:String x:Key="deletion_warn_part5_applications">ícone</v:String>
 

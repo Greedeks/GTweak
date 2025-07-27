@@ -237,12 +237,12 @@
      <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="deletion_warn_part1_applications">Applications are</v:String>
-    <v:String x:Key="deletion_warn_part2_applications">permanently</v:String>
-    <v:String x:Key="deletion_warn_part3_applications">deleted (except OneDrive). To restore, click the</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Applications are deleted</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">permanently,</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">but OneDrive is an exception: to restore, click the</v:String>
     <v:String x:Key="deletion_warn_part4_applications">gray</v:String>
     <v:String x:Key="deletion_warn_part5_applications">icon</v:String>
-     
+
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>

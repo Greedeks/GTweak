@@ -237,9 +237,9 @@
     <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="deletion_warn_part1_applications">Le applicazioni vengono</v:String>
-    <v:String x:Key="deletion_warn_part2_applications">permanentemente</v:String>
-    <v:String x:Key="deletion_warn_part3_applications">eliminate (ad eccezione di OneDrive). Per ripristinare, fai clic sulla</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Le applicazioni vengono eliminate</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">definitivamente,</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">ma OneDrive è un'eccezione: per ripristinare, fai clic sulla</v:String>
     <v:String x:Key="deletion_warn_part4_applications">grigia</v:String>
     <v:String x:Key="deletion_warn_part5_applications">icona</v:String>
 

@@ -237,9 +237,9 @@
      <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="deletion_warn_part1_applications">애플리케이션이</v:String>
-    <v:String x:Key="deletion_warn_part2_applications">영구적으로</v:String>
-    <v:String x:Key="deletion_warn_part3_applications">삭제됩니다(OneDrive 제외). 복원하려면</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">애플리케이션은</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">영구적으로 삭제되며,</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">OneDrive는 예외입니다. 복원하려면</v:String>
     <v:String x:Key="deletion_warn_part4_applications">회색</v:String>
     <v:String x:Key="deletion_warn_part5_applications">아이콘을 클릭하세요</v:String>
 

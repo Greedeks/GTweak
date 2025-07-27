@@ -238,9 +238,9 @@
     <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="deletion_warn_part1_applications">Les applications sont</v:String>
-    <v:String x:Key="deletion_warn_part2_applications">définitivement</v:String>
-    <v:String x:Key="deletion_warn_part3_applications">supprimées (sauf OneDrive). Pour restaurer, cliquez sur la</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">Les applications sont supprimées</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">définitivement,</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">sauf OneDrive : pour restaurer, cliquez sur l’</v:String>
     <v:String x:Key="deletion_warn_part4_applications">grise</v:String>
     <v:String x:Key="deletion_warn_part5_applications">icône</v:String>
 

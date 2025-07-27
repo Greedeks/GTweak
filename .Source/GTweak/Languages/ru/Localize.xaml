@@ -238,10 +238,10 @@
 
     <!--#region Applications Page -->
     <v:String x:Key="deletion_warn_part1_applications">Приложения удаляются</v:String>
-    <v:String x:Key="deletion_warn_part2_applications">без возврата</v:String>
-    <v:String x:Key="deletion_warn_part3_applications">(кроме OneDrive). Для восстановления нажмите</v:String>
-    <v:String x:Key="deletion_warn_part4_applications">серую</v:String>
-    <v:String x:Key="deletion_warn_part5_applications">иконку</v:String>
+    <v:String x:Key="deletion_warn_part2_applications">навсегда,</v:String>
+    <v:String x:Key="deletion_warn_part3_applications">но OneDrive исключение: для восстановления нажмите на</v:String>
+    <v:String x:Key="deletion_warn_part4_applications">серый</v:String>
+    <v:String x:Key="deletion_warn_part5_applications">значок</v:String>
     
     <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
     <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
