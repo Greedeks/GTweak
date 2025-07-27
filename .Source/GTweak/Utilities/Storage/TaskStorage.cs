@@ -47,9 +47,12 @@
         @"\Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
         @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" };
 
-        protected static readonly string[] xboxGameTasks =  {
+        protected static readonly string[] xboxTasks =  {
         @"\Microsoft\XblGameSave\XblGameSaveTask",
-        @"\Microsoft\XblGameSave\XblGameSaveTaskLogon" };
+        @"\Microsoft\XblGameSave\XblGameSaveTaskLogon",
+        @"\Microsoft\Xbox\XblGameSaveTask",
+        @"\Microsoft\Xbox\Maintenance\MaintenanceTask",
+        @"\Microsoft\Xbox\XGamingServices\GameServicesTask" };
 
         protected static readonly string bluetoothTask = @"\Microsoft\Windows\Bluetooth\UninstallDeviceTask";
 
@@ -78,6 +81,7 @@
         @"\Microsoft\Windows\Windows Defender\Windows Defender Verification", };
 
         protected static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
+
         protected static readonly string defragTask = @"\Microsoft\Windows\Defrag\ScheduledDefrag";
     }
 }
