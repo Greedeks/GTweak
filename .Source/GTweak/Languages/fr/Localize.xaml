@@ -390,6 +390,7 @@
     <v:String x:Key="tgl24_system">Stockage réservé dans Windows</v:String>
     <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
     <v:String x:Key="tgl26_system">Hide «PC Health Check» from update system</v:String>
+    <v:String x:Key="tgl27_system">Windows Insider’s Background Tasks</v:String>
     
     <v:String x:Key="TextSlider1_description_system">Modifie la vitesse du pointeur de la souris, vous faisant gagner du temps lors de la recherche des paramètres de la souris.</v:String>
     <v:String x:Key="TextSlider2_description_system">Modifie le délai avant la répétition des caractères saisis. La valeur recommandée est 0.</v:String>
@@ -420,6 +421,7 @@
     <v:String x:Key="TglButton24_description_system">Le stockage réservé garantit un espace libre pour mises à jour, applications et cache système. Le désactiver libère de l’espace, mais ce n’est pas conseillé si vous avez suffisamment de place.</v:String>
     <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
     <v:String x:Key="TglButton26_description_system">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
+    <v:String x:Key="TglButton27_description_system">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->

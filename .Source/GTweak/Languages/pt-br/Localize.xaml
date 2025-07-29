@@ -388,7 +388,8 @@
     <v:String x:Key="tgl24_system">Armazenamento reservado no Windows</v:String>
     <v:String x:Key="tgl25_system">Timer de Eventos Dinâmico e de Alta Precisão</v:String>
     <v:String x:Key="tgl26_system">Ocultar "PC Health Check" no sistema atualização</v:String>
-
+    <v:String x:Key="tgl27_system">Windows Insider’s Background Tasks</v:String>
+    
     <v:String x:Key="TextSlider1_description_system">Altera a velocidade do ponteiro do mouse, economizando seu tempo para procurar os parâmetros do mouse.</v:String>
     <v:String x:Key="TextSlider2_description_system">Alterará o atraso antes de começar a repetir o caractere digitado, o valor recomendado é 0.</v:String>
     <v:String x:Key="TextSlider3_description_system">Altera a taxa de repetição do caractere digitado, o valor recomendado é 31.</v:String>
@@ -418,6 +419,7 @@
     <v:String x:Key="TglButton24_description_system">O armazenamento reservado é projetado para fornecer uma alocação previsível de espaço livre que será usado por atualizações, aplicativos, arquivos temporários e o cache do sistema. Desativá-lo pode liberar uma quantidade significativa de espaço. No entanto, se você tiver espaço livre suficiente, não é recomendado fazer isso, você não receberá nenhum benefício adicional.</v:String>
     <v:String x:Key="TglButton25_description_system">Desativar o timer dinâmico e o HPET pode melhorar a capacidade de resposta do sistema, reduzindo micro-travamentos e proporcionando um leve aumento de desempenho. No entanto, o efeito depende da configuração: em alguns casos, em vez de acelerar, o sistema pode desacelerar e apresentar atrasos. Se você estiver usando um laptop, observe que isso também pode aumentar ligeiramente o consumo de energia, pois a CPU permanecerá mais ativa mesmo quando ociosa.</v:String>
     <v:String x:Key="TglButton26_description_system">Bloqueia a instalação automática intrusiva do PC Health Check - utilitário da Microsoft que se implanta forçadamente via Windows Update sem permissão. Uma vez instalado, o programa incomoda com verificações de prontidão para o Windows 11 e recomendações de otimização não solicitadas.</v:String>
+    <v:String x:Key="TglButton27_description_system">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->

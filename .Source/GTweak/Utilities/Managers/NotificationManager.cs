@@ -43,7 +43,8 @@ namespace GTweak.Utilities.Managers
             new { Button = "TglButton15", Action = "restart" },
             new { Button = "TglButton20", Action = "restart" },
             new { Button = "TglButton23", Action = "restart" },
-            new { Button = "TglButton25", Action = "restart" }
+            new { Button = "TglButton25", Action = "restart" },
+            new { Button = "TglButton27", Action = "restart" },
         }.ToDictionary(x => x.Button, x => x.Action);
 
         private readonly int _delayMs;

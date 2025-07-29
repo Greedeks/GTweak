@@ -71,16 +71,29 @@ namespace GTweak.Utilities.Storage
         $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore")}",
         $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")}" };
 
-        protected static readonly string[] memoryDiagTasks =  {
-        @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
-        @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
-
         protected static readonly string[] winDefenderTasks = {
         @"\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Cleanup",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Verification", };
+
+        protected static readonly string[] memoryDiagTasks =  {
+        @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
+        @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
+
+        protected static readonly string[] winInsiderTasks =  {
+        @"Microsoft\Windows\Flighting\FeatureConfig\BootstrapUsageDataReporting",
+        @"Microsoft\Windows\Flighting\FeatureConfig\GovernedFeatureUsageProcessing",
+        @"Microsoft\Windows\Flighting\FeatureConfig\ReconcileConfigs",
+        @"Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeatures",
+        @"Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushing",
+        @"Microsoft\Windows\Flighting\FeatureConfig\UsageDataReceiver",
+        @"Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting",
+        @"Microsoft\Windows\Flighting\OneSettings\RefreshCache",
+        @"Microsoft\Windows\Flighting\OneSettings\CollectUsageData",
+        @"Microsoft\Windows\Flighting\OneSettings\SyncConfigs",
+        @"Microsoft\Windows\Flighting\OneSettings\TrackFlighting" };
 
         protected static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
 

@@ -160,6 +160,8 @@ namespace GTweak.Utilities.Tweaks
             systemV.TglButton26.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHC", "PreviousUninstall", "1", false) ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHealthCheck", "installed", "1", false);
+
+            systemV.TglButton27.StateNA = IsTaskEnabled(winInsiderTasks);
         }
 
 
@@ -444,6 +446,9 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PCHC", "PreviousUninstall", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PCHealthCheck", "installed", 1, RegistryValueKind.DWord);
                     }
+                    break;
+                case "TglButton27":
+                    SetTaskState(!isDisabled, winInsiderTasks);
                     break;
             }
         }
