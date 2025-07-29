@@ -1,5 +1,8 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Storage;
+using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,7 +56,7 @@ namespace GTweak.Utilities.Managers
         }
 
 
-        internal static void DeletingTask(params string[] tasklist)
+        internal static void RemoveTasks(params string[] tasklist)
         {
             Task.Run(delegate
             {
@@ -65,6 +68,17 @@ namespace GTweak.Utilities.Managers
                         taskService.RootFolder.DeleteTask(taskname);
                 }
             });
+        }
+
+        internal static string GetTaskFullPath(string partialName)
+        {
+            string[] files = Directory.GetFiles(PathLocator.Files.Tasks, "*", SearchOption.AllDirectories);
+            string matchPath = files.FirstOrDefault(path => Path.GetFileName(path).IndexOf(partialName, StringComparison.OrdinalIgnoreCase) >= 0);
+
+            if (!string.IsNullOrWhiteSpace(matchPath))
+                return Path.GetFileName(matchPath);
+            else
+                return partialName;
         }
     }
 }

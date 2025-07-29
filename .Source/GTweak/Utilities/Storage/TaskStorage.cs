@@ -1,4 +1,6 @@
-﻿namespace GTweak.Utilities.Storage
+﻿using GTweak.Utilities.Managers;
+
+namespace GTweak.Utilities.Storage
 {
     internal class TaskStorage
     {
@@ -60,14 +62,14 @@
         @"\Microsoft\Windows\Maps\MapsToastTask",
         @"\Microsoft\Windows\Maps\MapsUpdateTask" };
 
-        protected static readonly string oneDriveTask = @"\Microsoft\Windows\OneDrive\OneDrive Standalone Update Task";
+        protected static readonly string[] oneDriveTask = {
+        @"\Microsoft\Windows\OneDrive\OneDrive Standalone Update Task",
+        $@"\{TaskSchedulerManager.GetTaskFullPath("OneDrive Startup")}" };
 
         protected static readonly string[] edgeTasks = {
-        @"\MicrosoftEdgeUpdateTaskMachineUA{EA17DF76-AE5F-45F8-8867-FE5E0DD06656}",
-        @"\MicrosoftEdgeUpdateTaskMachineCore{11EED34D-1A62-4BB7-9A2E-0D83ED6A609F}",
-        @"\MicrosoftEdgeUpdateTaskMachineCore*",
-        @"\MicrosoftEdgeUpdateTaskMachineUA*",
-        @"\MicrosoftEdgeUpdateTaskUser*" };
+        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA")}",
+        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore")}",
+        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")}" };
 
         protected static readonly string[] memoryDiagTasks =  {
         @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",

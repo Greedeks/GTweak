@@ -146,7 +146,7 @@ namespace GTweak.Utilities.Tweaks
                 switch (packageName)
                 {
                     case "Maps":
-                        DeletingTask(mapsTasks);
+                        RemoveTasks(mapsTasks);
                         break;
                     case "Widgets":
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
@@ -211,7 +211,7 @@ namespace GTweak.Utilities.Tweaks
                         foreach (string process in new string[] { "msedge.exe", "pwahelper.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
                             CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f /im {process} /t");
 
-                        DeletingTask(edgeTasks);
+                        RemoveTasks(edgeTasks);
 
                         CommandExecutor.RunCommandAsTrustedInstaller(@"/c rmdir /s /q %LocalAppData%\Microsoft\Edge");
                         CommandExecutor.RunCommandAsTrustedInstaller(@"/c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");

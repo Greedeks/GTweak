@@ -59,6 +59,8 @@ namespace GTweak.Utilities.Controls
             internal static readonly string BackupRightsAcl = Path.Combine(Folders.DefenderBackup, "BackupRights.acl");
 
             internal static readonly string WindowsOld = Path.Combine(Folders.SystemDrive, "Windows.old");
+
+            internal static readonly string Tasks = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "Tasks");
         }
 
         internal static class Registry
