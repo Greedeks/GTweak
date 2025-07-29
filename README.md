@@ -163,6 +163,10 @@ Installed platform: .NET Framework 4.8
   - Attach your translated `Localize.xaml` file.
 </br>
 
+> [!NOTE]  
+> The current translation may be incomplete, as new features might have been added that haven't been translated yet. In such cases, those parts of the program will appear in English by default.
+</br>
+
 ## Contact
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
