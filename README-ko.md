@@ -78,27 +78,27 @@
 <h2> 스크린샷 📷</h2>
 <details>
   <summary> 기밀 유지 </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ko/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Confidentiality.png"/>
 </details>
 <details>
   <summary> 인터페이스 </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ko/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Interface.png"/>
 </details>
 <details>
   <summary> 응용 프로그램 </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ko/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Applications.png"/>
 </details>
 <details>
   <summary> 서비스 </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ko/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Services.png"/>
 </details>
 <details>
   <summary> 시스템 </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ko/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/System.png"/>
 </details>
 <details>
   <summary> 추가 사항 </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ko/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/More.png"/>
 </details>
 
 

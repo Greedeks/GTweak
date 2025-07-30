@@ -79,27 +79,27 @@
 <h2> Скриншоти 📷</h2>
 <details>
   <summary> Конфіденційність </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Confidentiality.png"/>
 </details>
 <details>
   <summary> Інтерфейс </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Interface.png"/>
 </details>
 <details>
   <summary> Додатки </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Applications.png"/>
 </details>
 <details>
   <summary> Служби </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Services.png"/>
 </details>
 <details>
   <summary> Система </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/System.png"/>
 </details>
 <details>
   <summary> Інше </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/uk/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/More.png"/>
 </details>
 
 

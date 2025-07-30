@@ -78,27 +78,27 @@
 <h2> Captures d'écran 📷</h2>
 <details>
   <summary> Confidentialité </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/Confidentiality.png"/>
 </details>
 <details>
   <summary> Interface </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/Interface.png"/>
 </details>
 <details>
   <summary> Applications </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/Applications.png"/>
 </details>
 <details>
   <summary> Services </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/Services.png"/>
 </details>
 <details>
   <summary> Système </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/System.png"/>
 </details>
 <details>
   <summary> Autres </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/fr/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/More.png"/>
 </details>
 
 <h2> Configuration requise </h2>

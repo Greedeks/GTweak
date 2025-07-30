@@ -79,27 +79,27 @@
 <h2> Скриншоты 📷</h2>
 <details>
   <summary> Конфиденциальность </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/Confidentiality.png"/>
 </details>
 <details>
   <summary> Интерфейс </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/Interface.png"/>
 </details>
 <details>
   <summary> Приложения </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/Applications.png"/>
 </details>
 <details>
   <summary> Службы </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/Services.png"/>
 </details>
 <details>
   <summary> Система </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/System.png"/>
 </details>
 <details>
   <summary> Прочее </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/ru/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/More.png"/>
 </details>
 
 
