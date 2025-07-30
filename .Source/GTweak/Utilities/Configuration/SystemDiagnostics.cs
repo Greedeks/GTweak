@@ -52,6 +52,8 @@ namespace GTweak.Utilities.Configuration
             internal static string BiosMode { get; set; } = string.Empty;
             internal static string Motherboard { get; set; } = string.Empty;
             internal static string Processor { get; set; } = string.Empty;
+            internal static string Cores { get; set; } = string.Empty;
+            internal static string Threads { get; set; } = string.Empty;
             internal static string Graphics { get; set; } = string.Empty;
             internal static string Memory { get; set; } = string.Empty;
             internal static string MemoryType { get; set; } = string.Empty;
@@ -193,8 +195,12 @@ namespace GTweak.Utilities.Configuration
 
         private void GetProcessorInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
+            {
                 HardwareData.Processor = $"{(string)managementObj["Name"]}\n";
+                HardwareData.Cores = Convert.ToString(managementObj["NumberOfCores"]);
+                HardwareData.Threads = Convert.ToString(managementObj["NumberOfLogicalProcessors"]);
+            }
             HardwareData.Processor = HardwareData.Processor.TrimEnd('\n', '\r');
         }
 

@@ -429,10 +429,12 @@
     <v:String x:Key="title_mode_systemInformation">Modo:</v:String>
     <v:String x:Key="title_motherbr_systemInformation">Placa-mãe:</v:String>
     <v:String x:Key="title_cpu_systemInformation">Processador:</v:String>
+    <v:String x:Key="title_cores_systemInformation">Núcleos:</v:String>
+    <v:String x:Key="title_threads_systemInformation">Threads:</v:String>
     <v:String x:Key="title_gpu_systemInformation">Gráficos:</v:String>
     <v:String x:Key="title_ram_systemInformation">Memória:</v:String>
     <v:String x:Key="title_mtype_systemInformation">Tipo de Memória:</v:String>
-    <v:String x:Key="title_disk_systemInformation">Dispositivos de armazenamento:</v:String>
+    <v:String x:Key="title_storage_systemInformation">Dispositivos de armazenamento:</v:String>
     <v:String x:Key="title_sound_systemInformation">Dispositivos de reprodução:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Adaptadores de rede:</v:String>
     <v:String x:Key="title_ip_systemInformation">Seu endereço IP:</v:String>

@@ -427,12 +427,14 @@
     <v:String x:Key="runprocces_systemInformation">실행 중인 프로세스 번호:</v:String>
     <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
     <v:String x:Key="title_mode_systemInformation">모드:</v:String>
+    <v:String x:Key="title_cores_systemInformation">코어:</v:String>
+    <v:String x:Key="title_threads_systemInformation">스레드:</v:String>
     <v:String x:Key="title_motherbr_systemInformation">머더보드:</v:String>
     <v:String x:Key="title_cpu_systemInformation">프로세스:</v:String>
     <v:String x:Key="title_gpu_systemInformation">그래픽:</v:String>
     <v:String x:Key="title_ram_systemInformation">메모리:</v:String>
-    <v:String x:Key="title_mtype_systemInformation">Memory Type:</v:String>
-    <v:String x:Key="title_disk_systemInformation">저장소 장치:</v:String>
+    <v:String x:Key="title_mtype_systemInformation">메모리 유형:</v:String>
+    <v:String x:Key="title_storage_systemInformation">저장소 장치:</v:String>
     <v:String x:Key="title_sound_systemInformation">재생 장치:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">네트워크 어댑터:</v:String>
     <v:String x:Key="title_ip_systemInformation">IP 주소:</v:String>

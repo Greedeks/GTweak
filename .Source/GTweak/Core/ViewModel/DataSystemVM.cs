@@ -71,6 +71,8 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("Mode", SystemDiagnostics.HardwareData.BiosMode, "unknown_information_systemInformatin"),
                 CreateModelCollection("Motherboard", SystemDiagnostics.HardwareData.Motherboard, "no_device_information_systemInformatin"),
                 CreateModelCollection("Processor", SystemDiagnostics.HardwareData.Processor, "no_device_information_systemInformatin"),
+                CreateModelCollection("Cores", SystemDiagnostics.HardwareData.Cores, "unknown_information_systemInformatin"),
+                CreateModelCollection("Threads", SystemDiagnostics.HardwareData.Threads, "unknown_information_systemInformatin"),
                 CreateModelCollection("Graphics", SystemDiagnostics.HardwareData.Graphics, "driver_not_installed_systemInformatin"),
                 CreateModelCollection("Memory", SystemDiagnostics.HardwareData.Memory, "no_device_information_systemInformatin"),
                 CreateModelCollection("Type", SystemDiagnostics.HardwareData.MemoryType, "unknown_information_systemInformatin"),

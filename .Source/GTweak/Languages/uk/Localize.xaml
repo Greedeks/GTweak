@@ -429,10 +429,12 @@
     <v:String x:Key="title_mode_systemInformation">Режим:</v:String>
     <v:String x:Key="title_motherbr_systemInformation">Материнська плата:</v:String>
     <v:String x:Key="title_cpu_systemInformation">Процесор:</v:String>
+    <v:String x:Key="title_cores_systemInformation">Ядра:</v:String>
+    <v:String x:Key="title_threads_systemInformation">Потоки:</v:String>
     <v:String x:Key="title_gpu_systemInformation">Відеокарта:</v:String>
     <v:String x:Key="title_ram_systemInformation">Оперативна пам’ять:</v:String>
-    <v:String x:Key="title_mtype_systemInformation">Memory Type:</v:String>
-    <v:String x:Key="title_disk_systemInformation">Пристрої зберігання даних:</v:String>
+    <v:String x:Key="title_mtype_systemInformation">Тип пам'яті:</v:String>
+    <v:String x:Key="title_storage_systemInformation">Пристрої зберігання даних:</v:String>
     <v:String x:Key="title_sound_systemInformation">Пристрої відтворення:</v:String>
     <v:String x:Key="title_netadapter_systemInformation">Мережеві адаптери:</v:String>
     <v:String x:Key="title_ip_systemInformation">Ваша IP-адреса:</v:String>

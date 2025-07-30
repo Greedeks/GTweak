@@ -14,7 +14,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="149"/>
+            <RowDefinition Height="145"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -26,7 +26,7 @@
             </Border>
         </Popup>
 
-        <Grid Grid.Row="0" Margin="0,0,0,19">
+        <Grid Grid.Row="0" Margin="0,0,0,20">
             <Grid HorizontalAlignment="Left" Margin="50,0,0,0" Width="110" Height="110">
                 <Ellipse Height="90" Width="90" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
 
@@ -48,7 +48,7 @@
                 <TextBlock Text="CPU" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" Margin="0,55,0,0"/>
             </Grid>
 
-            <Grid HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Grid HorizontalAlignment="Center" Margin="0,14,0,0">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" Height="91">
                         <TextBlock Style="{StaticResource Text}" FontSize="15pt" Width="Auto" Height="77">
@@ -93,7 +93,7 @@
         </Grid>
 
         <ScrollViewer Grid.Row="2" Style="{StaticResource ScrollPage}">
-            <Grid Margin="0,0,0,25">
+            <Grid Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -135,6 +135,13 @@
                             <StackPanel Orientation="Vertical" Margin="60,20,0,0">
                                 <TextBlock Text="{DynamicResource title_cpu_systemInformation}" Style="{StaticResource Text}" HorizontalAlignment="Left" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
                                 <TextBlock Text="{Binding [Processor].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto">
+                                    <Run Text="{DynamicResource title_cores_systemInformation}" Foreground="{StaticResource Color_Accent}"/>
+                                    <Run Text="{Binding [Cores].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Color_Inactive}"/>
+                                    <Run Text="{DynamicResource title_threads_systemInformation}" Foreground="{StaticResource Color_Accent}"/>
+                                    <Run Text="{Binding [Threads].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                </TextBlock>
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -154,8 +161,8 @@
                                 <TextBlock Text="{DynamicResource title_ram_systemInformation}" Style="{StaticResource Text}" HorizontalAlignment="Left" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
                                 <TextBlock Text="{Binding [Memory].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                                 <TextBlock Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{DynamicResource title_mtype_systemInformation}" Foreground="{StaticResource Color_Accent}"/>
-                                <Run Text="{Binding [Type].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    <Run Text="{DynamicResource title_mtype_systemInformation}" Foreground="{StaticResource Color_Accent}"/>
+                                    <Run Text="{Binding [Type].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
@@ -173,7 +180,7 @@
                     <Grid Grid.Row="0">
                         <Grid Width="543">
                             <StackPanel Orientation="Vertical" Margin="60,20,0,0">
-                                <TextBlock Text="{DynamicResource title_disk_systemInformation}" Style="{StaticResource Text}"  HorizontalAlignment="Left" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
+                                <TextBlock Text="{DynamicResource title_storage_systemInformation}" Style="{StaticResource Text}"  HorizontalAlignment="Left" Foreground="{StaticResource Color_Accent}" Height="Auto" Width="Auto"/>
                                 <TextBlock Text="{Binding [Storage].Data}" Style="{StaticResource Text}" HorizontalAlignment="Left" Margin="1,0,0,0" Foreground="{StaticResource Color_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </StackPanel>
                         </Grid>
