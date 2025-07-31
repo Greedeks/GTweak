@@ -73,7 +73,7 @@ namespace GTweak.Windows
                 catch
                 {
                     Close();
-                    new NotificationManager().Show("", "warn", "warn_update_notification");
+                    new NotificationManager().Show("warn", "warn_update_notification").None();
                 }
             }
         }

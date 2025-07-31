@@ -21,7 +21,7 @@ namespace GTweak.Windows
         private readonly ServicesTweaks _svcTweaks = new ServicesTweaks();
         private readonly SystemTweaks _sysTweaks = new SystemTweaks();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private readonly HashSet<string> _requiredActions = new HashSet<string>();
+        private readonly HashSet<NotificationManager.NoticeAction> _requiredActions = new HashSet<NotificationManager.NoticeAction>();
         private bool _isExpRestartNeed = false;
 
         public ImportWindow(in string importedFile)
@@ -50,10 +50,8 @@ namespace GTweak.Windows
                 if (_isExpRestartNeed)
                     ExplorerManager.Restart(new Process());
 
-                if (_requiredActions.Contains("restart"))
-                    new NotificationManager().Show("restart");
-                else if (_requiredActions.Contains("logout"))
-                    new NotificationManager().Show("logout");
+                if (_requiredActions.Count != 0)
+                    new NotificationManager().Show().Execute(_requiredActions.Max());
 
                 App.UpdateImport();
                 BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
@@ -64,7 +62,7 @@ namespace GTweak.Windows
         {
             INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
-            var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, string>> NotificationActions, IEnumerable<KeyValuePair<string, bool>> ExplorerMapping)[]
+            var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, NotificationManager.NoticeAction>> NoticeActions, IEnumerable<KeyValuePair<string, bool>> ExplorerMapping)[]
             {
                (INIManager.SectionConf, _confTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
                (INIManager.SectionIntf, _intfTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfMapping),
@@ -108,13 +106,13 @@ namespace GTweak.Windows
                     }
                     else
                     {
-                        var (Section, TweakAction, NotificationActions, ExplorerMapping) = allSections.First(s => s.Section == section);
+                        var (Section, TweakAction, NoticeActions, ExplorerMapping) = allSections.First(s => s.Section == section);
 
                         TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
 
-                        if (NotificationActions != null)
+                        if (NoticeActions != null)
                         {
-                            foreach (var act in NotificationActions.Where(get => get.Key == tweak))
+                            foreach (var act in NoticeActions.Where(get => get.Key == tweak))
                                 _requiredActions.Add(act.Value);
                         }
 
@@ -122,7 +120,7 @@ namespace GTweak.Windows
                             _isExpRestartNeed = true;
 
                         if (section == INIManager.SectionSvc)
-                            _requiredActions.Add("restart");
+                            _requiredActions.Add(NotificationManager.NoticeAction.Restart);
                     }
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }

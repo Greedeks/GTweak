@@ -38,8 +38,8 @@ namespace GTweak.View
 
             _confTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-            if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out string action))
-                new NotificationManager(300).Show(action);
+            if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
+                new NotificationManager(300).Show().Execute(action);
 
             Parallel.Invoke(async delegate { await Task.Delay(1000); _confTweaks.AnalyzeAndUpdate(this); });
         }

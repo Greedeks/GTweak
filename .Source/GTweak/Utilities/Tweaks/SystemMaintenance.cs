@@ -33,10 +33,10 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 2, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "Y", RegistryValueKind.String);
 
-                        new NotificationManager(300).Show("", "info", "success_defrag_on_notification");
+                        new NotificationManager(300).Show("info", "success_defrag_on_notification").None();
                     }
                     else
-                        new NotificationManager().Show("", "info", "warn_defrag_on_notification");
+                        new NotificationManager().Show("info", "warn_defrag_on_notification").None();
                 }
                 else
                 {
@@ -46,13 +46,13 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 4, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "N", RegistryValueKind.String);
 
-                        new NotificationManager(300).Show("", "info", "success_defrag_off_notification");
+                        new NotificationManager(300).Show("info", "success_defrag_off_notification").None();
                     }
                     else
-                        new NotificationManager().Show("", "info", "warn_defrag_off_notification");
+                        new NotificationManager().Show("info", "warn_defrag_off_notification").None();
                 }
             }
-            catch { new NotificationManager().Show("", "warn", "error_defrag_notification"); }
+            catch { new NotificationManager().Show("warn", "error_defrag_notification").None(); }
         }
 
 
@@ -77,13 +77,13 @@ namespace GTweak.Utilities.Tweaks
                 _outParams = _restorePoint.InvokeMethod("CreateRestorePoint", _inParams, null);
 
                 if ((uint)_outParams["ReturnValue"] == 0)
-                    new NotificationManager(300).Show("", "info", "success_point_notification");
+                    new NotificationManager(300).Show("info", "success_point_notification").None();
                 else
-                    new NotificationManager(300).Show("", "warn", "error_point_notification");
+                    new NotificationManager(300).Show("warn", "error_point_notification").None();
 
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
             }
-            catch { new NotificationManager().Show("", "warn", "error_point_notification"); }
+            catch { new NotificationManager().Show("warn", "error_point_notification").None(); }
         }
 
         internal static void StartRecovery()
@@ -93,7 +93,7 @@ namespace GTweak.Utilities.Tweaks
                 EnableRecovery();
                 CommandExecutor.RunCommand("/c rstrui.exe");
             }
-            catch { new NotificationManager().Show("", "warn", "error_recovery_notification"); }
+            catch { new NotificationManager().Show("warn", "error_recovery_notification").None(); }
         }
 
         internal static void DisableRestorePoint()
@@ -112,7 +112,7 @@ namespace GTweak.Utilities.Tweaks
                 DisableSR(PathLocator.Folders.SystemDrive + @"\\");
             }
             else
-                new NotificationManager().Show("", "info", "warn_recovery_notification");
+                new NotificationManager().Show("info", "warn_recovery_notification").None();
         }
 
         private static void EnableRecovery()

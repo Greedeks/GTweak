@@ -1,89 +1,98 @@
 ﻿using GTweak.Utilities.Controls;
 using GTweak.Windows;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace GTweak.Utilities.Managers
 {
-    internal sealed class NotificationManager
+    internal class NotificationManager
     {
-        internal static readonly Dictionary<string, string> ConfActions = new[]
-        {
-            new { Button = "TglButton8", Action = "restart" },
-            new { Button = "TglButton15", Action = "restart" }
-        }.ToDictionary(x => x.Button, x => x.Action);
+        internal enum NoticeAction { None, Logout, Restart }
 
-        internal static readonly Dictionary<string, string> IntfActions = new[]
+        internal static readonly Dictionary<string, NoticeAction> ConfActions = new Dictionary<string, NoticeAction>()
         {
-            new { Button = "TglButton1", Action = "logout" },
-            new { Button = "TglButton2", Action = "logout" },
-            new { Button = "TglButton3", Action = "logout" },
-            new { Button = "TglButton4", Action = "logout" },
-            new { Button = "TglButton5", Action = "logout" },
-            new { Button = "TglButton10", Action = "logout" },
-            new { Button = "TglButton11", Action = "logout" },
-            new { Button = "TglButton12", Action = "logout" },
-            new { Button = "TglButton22", Action = "restart" },
-            new { Button = "TglButton20", Action = "restart" }
-        }.ToDictionary(x => x.Button, x => x.Action);
+            ["TglButton8"] = NoticeAction.Restart,
+            ["TglButton15"] = NoticeAction.Restart
+        };
 
-        internal static readonly Dictionary<string, string> SysActions = new[]
+        internal static readonly Dictionary<string, NoticeAction> IntfActions = new Dictionary<string, NoticeAction>()
         {
-            new { Button = "TglButton2", Action = "logout" },
-            new { Button = "TglButton7", Action = "restart" },
-            new { Button = "TglButton8", Action = "restart" },
-            new { Button = "TglButton9", Action = "restart" },
-            new { Button = "TglButton10", Action = "restart" },
-            new { Button = "TglButton12", Action = "restart" },
-            new { Button = "TglButton13", Action = "restart" },
-            new { Button = "TglButton14", Action = "restart" },
-            new { Button = "TglButton15", Action = "restart" },
-            new { Button = "TglButton20", Action = "restart" },
-            new { Button = "TglButton23", Action = "restart" },
-            new { Button = "TglButton25", Action = "restart" },
-            new { Button = "TglButton27", Action = "restart" },
-        }.ToDictionary(x => x.Button, x => x.Action);
+            ["TglButton1"] = NoticeAction.Logout,
+            ["TglButton2"] = NoticeAction.Logout,
+            ["TglButton3"] = NoticeAction.Logout,
+            ["TglButton4"] = NoticeAction.Logout,
+            ["TglButton5"] = NoticeAction.Logout,
+            ["TglButton10"] = NoticeAction.Logout,
+            ["TglButton11"] = NoticeAction.Logout,
+            ["TglButton12"] = NoticeAction.Logout,
+            ["TglButton22"] = NoticeAction.Restart,
+            ["TglButton20"] = NoticeAction.Restart
+        };
+
+        internal static readonly Dictionary<string, NoticeAction> SysActions = new Dictionary<string, NoticeAction>()
+        {
+            ["TglButton2"] = NoticeAction.Logout,
+            ["TglButton7"] = NoticeAction.Restart,
+            ["TglButton8"] = NoticeAction.Restart,
+            ["TglButton9"] = NoticeAction.Restart,
+            ["TglButton10"] = NoticeAction.Restart,
+            ["TglButton12"] = NoticeAction.Restart,
+            ["TglButton13"] = NoticeAction.Restart,
+            ["TglButton14"] = NoticeAction.Restart,
+            ["TglButton15"] = NoticeAction.Restart,
+            ["TglButton20"] = NoticeAction.Restart,
+            ["TglButton23"] = NoticeAction.Restart,
+            ["TglButton25"] = NoticeAction.Restart,
+            ["TglButton27"] = NoticeAction.Restart
+        };
 
         private readonly int _delayMs;
-        private static int _isNotificationOpen = 0;
 
         internal NotificationManager(int delayMs = 100) => _delayMs = delayMs;
 
-        internal async void Show(string action, string titleKey = "", string textKey = "")
+        internal NotificationBuilder Show(string titleKey = "", string textKey = "") => new NotificationBuilder(_delayMs, (string)Application.Current.TryFindResource($"title_{titleKey}_notification") ?? string.Empty, (string)Application.Current.TryFindResource(textKey) ?? string.Empty);
+    }
+
+    internal sealed class NotificationBuilder : NotificationManager
+    {
+        private static int _isNotificationOpen;
+        private readonly int _delayMs;
+        private readonly string _title = string.Empty, _text = string.Empty;
+
+        internal NotificationBuilder(int delayMs, string title, string text)
+        {
+            _delayMs = delayMs;
+            _title = title;
+            _text = text;
+        }
+
+        internal void None() => ShowNotification(NoticeAction.None);
+        internal void Logout() => ShowNotification(NoticeAction.Logout);
+        internal void Restart() => ShowNotification(NoticeAction.Restart);
+        internal void Execute(NoticeAction action) => ShowNotification(action);
+
+        private async void ShowNotification(NoticeAction action)
         {
             if (SettingsEngine.IsViewNotification && Interlocked.CompareExchange(ref _isNotificationOpen, 1, 0) == 0)
             {
                 await Application.Current.Dispatcher.InvokeAsync(async () =>
                 {
-                    var window = new NotificationWindow
+                    NotificationWindow window = new NotificationWindow
                     {
-                        ActionNotice = action,
-                        TitleNotice = (string)Application.Current.TryFindResource($"title_{titleKey}_notification") ?? string.Empty,
-                        TextNotice = (string)Application.Current.TryFindResource(textKey) ?? string.Empty,
+                        NoticeTitle = _title,
+                        NoticeText = _text,
+                        RequiredAction = action
                     };
 
-                    switch (window.ActionNotice)
+                    if (string.IsNullOrWhiteSpace(window.NoticeTitle) && string.IsNullOrWhiteSpace(window.NoticeText))
                     {
-                        case "logout":
-                            if (string.IsNullOrWhiteSpace(window.TitleNotice) || string.IsNullOrWhiteSpace(window.TextNotice))
-                            {
-                                window.TitleNotice = (string)Application.Current.Resources["title_warn_notification"];
-                                window.TextNotice = (string)Application.Current.Resources["logout_notification"];
-                            }
-                            break;
-                        case "restart":
-                            if (string.IsNullOrWhiteSpace(window.TitleNotice) || string.IsNullOrWhiteSpace(window.TextNotice))
-                            {
-                                window.TitleNotice = (string)Application.Current.Resources["title_warn_notification"];
-                                window.TextNotice = (string)Application.Current.Resources["restart_notification"];
-                            }
-                            break;
+                        window.NoticeTitle = (string)Application.Current.Resources["title_warn_notification"];
+                        window.NoticeText = (string)Application.Current.Resources[window.RequiredAction == NoticeAction.Logout ? "logout_notification" : "restart_notification"];
                     }
 
-                    window.Closed += (s, e) => { Interlocked.Exchange(ref _isNotificationOpen, 0); };
+                    window.Closed += (s, e) => Interlocked.Exchange(ref _isNotificationOpen, 0);
 
                     await Task.Delay(_delayMs).ContinueWith(_ => { if (window != null && !window.IsVisible) window.Show(); }, TaskScheduler.FromCurrentSynchronizationContext());
                 });

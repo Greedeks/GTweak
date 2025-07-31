@@ -35,7 +35,7 @@ namespace GTweak.View
         {
             _svcTweaks.ApplyTweaks(((ToggleButton)sender).Name, ((ToggleButton)sender).State);
 
-            new NotificationManager(300).Show("restart");
+            new NotificationManager(300).Show().Restart();
 
             Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); _svcTweaks.AnalyzeAndUpdate(this); });
         }

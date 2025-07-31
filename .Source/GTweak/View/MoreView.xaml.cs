@@ -23,13 +23,13 @@ namespace GTweak.View
         private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
             if (WindowsLicense.IsWindowsActivated)
-                new NotificationManager().Show("", "info", "ready_activate_notification");
+                new NotificationManager().Show("info", "ready_activate_notification").None();
             else
             {
                 if (new SystemDiagnostics().IsNetworkAvailable())
                     await WindowsLicense.StartActivation();
                 else
-                    new NotificationManager().Show("", "warn", "network_activate_notification");
+                    new NotificationManager().Show("warn", "network_activate_notification").None();
             }
         }
 
@@ -37,7 +37,7 @@ namespace GTweak.View
         {
             WaitingWindow waitingWindow = new WaitingWindow();
             waitingWindow.Show();
-            new NotificationManager().Show("", "info", "createpoint_notification");
+            new NotificationManager().Show("info", "createpoint_notification").None();
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate { SystemMaintenance.CreateRestorePoint(); });
             waitingWindow.Close();
@@ -55,7 +55,7 @@ namespace GTweak.View
 
             BackgroundQueue backgroundQueue = new BackgroundQueue();
             await backgroundQueue.QueueTask(delegate { ClearingMemory.StartMemoryCleanupAsync(_isWinOldRemoval); });
-            await backgroundQueue.QueueTask(delegate { new NotificationManager(500).Show("", "info", "clear_ram_notification"); });
+            await backgroundQueue.QueueTask(delegate { new NotificationManager(500).Show("info", "clear_ram_notification").None(); });
         }
 
         private void BtnDisableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.SetDefragState(false);
@@ -67,7 +67,7 @@ namespace GTweak.View
             {
                 try { SystemMaintenance.DisableRestorePoint(); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });
-            await backgroundQueue.QueueTask(delegate { new NotificationManager(300).Show("", "info", "disable_recovery_notification"); });
+            await backgroundQueue.QueueTask(delegate { new NotificationManager(300).Show("info", "disable_recovery_notification").None(); });
         }
 
         private void BtnEnableDefrag_ClickButton(object sender, EventArgs e) => SystemMaintenance.SetDefragState(true);
@@ -88,15 +88,15 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(delegate
                     {
                         try { NTFSCompressor.SetCompression(selectedPath, true); }
-                        catch { new NotificationManager().Show("", "warn", "error_compression_notification"); }
+                        catch { new NotificationManager().Show("warn", "error_compression_notification").None(); }
                     });
-                    await backgroundQueue.QueueTask(delegate { new NotificationManager(500).Show("", "info", "success_compression_notification"); });
+                    await backgroundQueue.QueueTask(delegate { new NotificationManager(500).Show("info", "success_compression_notification").None(); });
                 }
                 else
-                    new NotificationManager().Show("", "info", "ready_compression_notification");
+                    new NotificationManager().Show("info", "ready_compression_notification").None();
             }
             else
-                new NotificationManager().Show("", "warn", "notsupport_ntfs_notification");
+                new NotificationManager().Show("warn", "notsupport_ntfs_notification").None();
         }
 
         private async void BtnDecompression_ClickButton(object sender, EventArgs e)
@@ -115,16 +115,16 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(delegate
                     {
                         try { NTFSCompressor.SetCompression(selectedPath, false); }
-                        catch { new NotificationManager().Show("", "warn", "error_compression_notification"); }
+                        catch { new NotificationManager().Show("warn", "error_compression_notification").None(); }
 
                     });
-                    await backgroundQueue.QueueTask(delegate { new NotificationManager(500).Show("", "info", "success_decompression_notification"); });
+                    await backgroundQueue.QueueTask(delegate { new NotificationManager(500).Show("info", "success_decompression_notification").None(); });
                 }
                 else
-                    new NotificationManager().Show("", "info", "ready_decompression_notification");
+                    new NotificationManager().Show("info", "ready_decompression_notification").None();
             }
             else
-                new NotificationManager().Show("", "warn", "notsupport_ntfs_notification");
+                new NotificationManager().Show("warn", "notsupport_ntfs_notification").None();
         }
     }
 }

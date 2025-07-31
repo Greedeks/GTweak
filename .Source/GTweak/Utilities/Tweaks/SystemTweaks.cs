@@ -279,9 +279,9 @@ namespace GTweak.Utilities.Tweaks
                         waitingWindow.Show();
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { new NotificationManager().Show("", "info", "defender_notification"); });
+                        await backgroundQueue.QueueTask(delegate { new NotificationManager().Show("info", "defender_notification").None(); });
                         await backgroundQueue.QueueTask(delegate { WindowsDefender.SetProtectionState(isDisabled); });
-                        await backgroundQueue.QueueTask(delegate { new NotificationManager(300).Show("restart"); });
+                        await backgroundQueue.QueueTask(delegate { new NotificationManager(300).Show().Restart(); });
                         waitingWindow.Close();
                     }
                     else

@@ -14,10 +14,10 @@ namespace GTweak.Windows
 {
     public partial class NotificationWindow
     {
-        private string clickAction = string.Empty;
-        internal string TitleNotice { set => TitleSet.Text = value; get => TitleSet.Text; }
-        internal string TextNotice { set => TextSet.Text = value; get => TextSet.Text; }
-        internal string ActionNotice { set => clickAction = value; get => clickAction; }
+        private NotificationManager.NoticeAction _requiredAction = default;
+        internal string NoticeTitle { set => Header.Text = value; get => Header.Text; }
+        internal string NoticeText { set => MessageBody.Text = value; get => MessageBody.Text; }
+        internal NotificationManager.NoticeAction RequiredAction { set => _requiredAction = value; get => _requiredAction; }
 
         public NotificationWindow()
         {
@@ -35,14 +35,8 @@ namespace GTweak.Windows
 
         private void ActionSelection_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && !string.IsNullOrEmpty(ActionNotice))
-            {
-                CommandExecutor.RunCommand(ActionNotice switch
-                {
-                    "logout" => @"/c logoff",
-                    _ => @"/c shutdown /r /t 0",
-                });
-            }
+            if (e.LeftButton == MouseButtonState.Pressed && RequiredAction != NotificationManager.NoticeAction.None)
+                CommandExecutor.RunCommand(RequiredAction == NotificationManager.NoticeAction.Logout ? @"/c logoff" : @"/c shutdown /r /t 0");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

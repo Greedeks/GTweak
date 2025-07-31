@@ -38,11 +38,11 @@ namespace GTweak.Utilities.Tweaks
 
             if (string.IsNullOrEmpty(keyWinHWID) && string.IsNullOrEmpty(keyWinKMS))
             {
-                new NotificationManager(300).Show("", "warn", "keynotfound_notification");
+                new NotificationManager(300).Show("warn", "keynotfound_notification").None();
                 return;
             }
 
-            new NotificationManager().Show("", "warn", "win_activate_notification");
+            new NotificationManager().Show("warn", "win_activate_notification").None();
 
             WaitingWindow waitingWindow = new WaitingWindow();
             waitingWindow.Show();
@@ -82,7 +82,7 @@ namespace GTweak.Utilities.Tweaks
                 if (IsWindowsActivated)
                 {
                     waitingWindow.Close();
-                    new NotificationManager(300).Show("restart", "warn", "success_activate_notification");
+                    new NotificationManager(300).Show("warn", "success_activate_notification").Restart();
                 }
                 else
                 {
@@ -96,13 +96,13 @@ namespace GTweak.Utilities.Tweaks
 
                     waitingWindow.Close();
 
-                    new NotificationManager(300).Show(IsWindowsActivated ? "restart" : "", "warn", IsWindowsActivated ? "success_activate_notification" : "error_activate_notification");
+                    new NotificationManager(300).Show("warn", IsWindowsActivated ? "success_activate_notification" : "error_activate_notification").Execute(IsWindowsActivated ? NotificationManager.NoticeAction.Restart : NotificationManager.NoticeAction.None);
                 }
             }
             catch
             {
                 waitingWindow.Close();
-                new NotificationManager(300).Show("", "warn", "error_activate_notification");
+                new NotificationManager(300).Show("warn", "error_activate_notification").None();
             }
         }
     }
