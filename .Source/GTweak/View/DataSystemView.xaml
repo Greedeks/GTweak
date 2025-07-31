@@ -50,12 +50,14 @@
 
             <Grid HorizontalAlignment="Center" Margin="0,14,0,0">
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" Height="91">
-                        <TextBlock Style="{StaticResource Text}" FontSize="15pt" Width="Auto" Height="77">
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                        <TextBlock Style="{StaticResource Text}" FontSize="15pt" TextWrapping="Wrap" VerticalAlignment="Top" Height="Auto">
                             <Run Foreground="{StaticResource Color_Accent}" Text="{DynamicResource title_win_systemInformation}"/>
                             <Run Foreground="{StaticResource Color_Highlighted}" Text="{Binding [Windows].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                         </TextBlock>
-                        <Image x:Name="ImageWindows" Height="80" Width="80" HorizontalAlignment="Right" Margin="30,0,0,0">
+
+                        <Image Height="80" Width="80" HorizontalAlignment="Right" Margin="30,0,0,0">
                             <Image.Style>
                                 <Style TargetType="{x:Type Image}">
                                     <Setter Property="Source" Value="{StaticResource DI_LogoWin}"/>
@@ -63,9 +65,13 @@
                             </Image.Style>
                         </Image>
                     </StackPanel>
-                    <TextBlock  x:Name="ViewCountProcess" HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" MaxWidth="300" Foreground="{StaticResource Color_Inactive}">
-                        <Run Text="{DynamicResource runprocces_systemInformation}"/>
-                        <Run Text="{Binding [Processes].Data}"/>
+
+                    <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" Foreground="{StaticResource Color_Inactive}" Margin="0,5,0,0">
+                        <Run Text="{DynamicResource label_proc_systemInformation}"/>
+                        <Run Text="{Binding [Processes].Data, StringFormat=' {0}'}"/>
+                        <Run Text=" • "/>
+                        <Run Text="{DynamicResource label_svc_systemInformation}"/>
+                        <Run Text="{Binding [Services].Data, StringFormat=' {0}'}"/>
                     </TextBlock>
                 </StackPanel>
             </Grid>

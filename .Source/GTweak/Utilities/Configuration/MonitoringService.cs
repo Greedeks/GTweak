@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Management;
 using System.Runtime.InteropServices;
+using System.ServiceProcess;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Configuration
@@ -12,8 +13,10 @@ namespace GTweak.Utilities.Configuration
     {
         internal event Action<DeviceType> HandleDevicesEvents;
         private readonly List<ManagementEventWatcher> _eventWatchers = new List<ManagementEventWatcher>();
+        private static readonly ServiceController[] _servicesList = ServiceController.GetServices();
 
         internal string GetNumberRunningProcesses => GetProcessCount().Result;
+        internal string GetNumberRunningService => GetServicesCount().Result;
         internal int GetMemoryUsage => GetPhysicalAvailableMemory().Result;
         internal static int GetProcessorUsage { get; private set; } = 1;
 
@@ -88,6 +91,26 @@ namespace GTweak.Utilities.Configuration
                 return Process.GetProcesses().Length.ToString();
             });
         }
+
+        private static Task<string> GetServicesCount()
+        {
+            return Task.Run(() =>
+            {
+                int number = 0;
+                foreach (ServiceController svc in _servicesList)
+                {
+                    try
+                    {
+                        svc.Refresh();
+                        if (svc.Status == ServiceControllerStatus.Running)
+                            ++number;
+                    }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                }
+                return number.ToString();
+            });
+        }
+
         private static Task<int> GetPhysicalAvailableMemory()
         {
             return Task.Run(() =>

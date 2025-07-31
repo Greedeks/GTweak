@@ -424,7 +424,8 @@
 
     <!--#region Information System Page -->
     <v:String x:Key="title_win_systemInformation">Операционная система:</v:String>
-    <v:String x:Key="runprocces_systemInformation">Кол-во запущенных процессов:</v:String>
+    <v:String x:Key="label_proc_systemInformation">Работающих процессов:</v:String>
+    <v:String x:Key="label_svc_systemInformation">служб:</v:String>
     <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
     <v:String x:Key="title_mode_systemInformation">Режим:</v:String>
     <v:String x:Key="title_motherbr_systemInformation">Материнская плата:</v:String>

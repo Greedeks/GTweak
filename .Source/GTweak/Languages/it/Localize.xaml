@@ -424,7 +424,8 @@
 
     <!--#region Information System Page -->
     <v:String x:Key="title_win_systemInformation">Sistema operativo:</v:String>
-    <v:String x:Key="runprocces_systemInformation">Numero di processi in esecuzione:</v:String>
+    <v:String x:Key="label_proc_systemInformation">Processi in esecuzione:</v:String>
+    <v:String x:Key="label_svc_systemInformation">servizi:</v:String>
     <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
     <v:String x:Key="title_mode_systemInformation">Modalità:</v:String>
     <v:String x:Key="title_motherbr_systemInformation">Scheda madre:</v:String>

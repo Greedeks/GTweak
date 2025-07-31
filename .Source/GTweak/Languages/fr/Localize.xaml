@@ -426,7 +426,8 @@
 
     <!--#region Information System Page -->
     <v:String x:Key="title_win_systemInformation">Système d’exploitation :</v:String>
-    <v:String x:Key="runprocces_systemInformation">Nombre de processus en cours :</v:String>
+    <v:String x:Key="label_proc_systemInformation">Processus en cours d’exécution :</v:String>
+    <v:String x:Key="label_svc_systemInformation">services :</v:String>
     <v:String x:Key="title_bios_systemInformation">BIOS :</v:String>
     <v:String x:Key="title_mode_systemInformation">Mode :</v:String>
     <v:String x:Key="title_motherbr_systemInformation">Carte mère :</v:String>
