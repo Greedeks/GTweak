@@ -16,13 +16,3 @@ body:
       placeholder: "Describe your feature request in detail..."
     validations:
       required: true
-
-  - type: textarea
-    id: alternatives
-    attributes:
-      label: "🔄 Alternatives Considered"
-      description: "Describe any alternative solutions or approaches you've evaluated, and explain why the proposed feature is preferred."
-      placeholder: |
-        - **Alternative 1:** Explain the alternative approach and its limitations.  
-        - **Alternative 2:** Describe another possible solution and why it wasn't selected.  
-        - **Alternative 3 (if applicable):** Mention any other options and the reasons for excluding them.

@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Helpers;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -39,7 +40,9 @@ namespace GTweak.Utilities.Controls
                 using (FileStream stream = new FileStream(PathLocator.Files.ErrorLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                 {
-                    await writer.WriteLineAsync($"[{DateTime.Now}]\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
+                    string headerLine = "---------------------------------------------------------";
+                    await writer.WriteLineAsync($"GTweak has crashed!\n{headerLine}\nIf you wish to report this, please open an issue here:\nhttps://github.com/Greedeks/GTweak/issues\n{headerLine}\n");
+                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {SystemDiagnostics.HardwareData.OSVersion}\n{headerLine}\n\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
                     await writer.FlushAsync();
                 }
 
