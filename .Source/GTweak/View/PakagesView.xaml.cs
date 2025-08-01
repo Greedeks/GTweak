@@ -102,10 +102,10 @@ namespace GTweak.View
                     case MouseButtonState.Pressed when Equals(packageImage.Source, FindResource("DA_DI_" + packageName)) && packageName == "OneDrive":
                         {
                             if (string.IsNullOrWhiteSpace(PathLocator.Executable.OneDrive))
-                                new NotificationManager().Show("warn", "error_onedrive_notification").None();
+                                new NotificationManager().Show("warn", "error_onedrive_notification").Perform();
                             else
                             {
-                                new NotificationManager().Show("info", "success_onedrive_notification").None();
+                                new NotificationManager().Show("info", "success_onedrive_notification").Perform();
 
                                 await backgroundQueue.QueueTask(async () =>
                                 {

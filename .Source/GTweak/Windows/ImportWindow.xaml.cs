@@ -51,7 +51,7 @@ namespace GTweak.Windows
                     ExplorerManager.Restart(new Process());
 
                 if (_requiredActions.Count != 0)
-                    new NotificationManager().Show().Execute(_requiredActions.Max());
+                    new NotificationManager().Show().Perform(_requiredActions.Max());
 
                 App.UpdateImport();
                 BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));

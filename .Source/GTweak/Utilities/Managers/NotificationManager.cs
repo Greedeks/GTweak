@@ -68,10 +68,10 @@ namespace GTweak.Utilities.Managers
             _text = text;
         }
 
-        internal void None() => ShowNotification(NoticeAction.None);
+        internal void Perform(NoticeAction action = NoticeAction.None) => ShowNotification(action);
         internal void Logout() => ShowNotification(NoticeAction.Logout);
         internal void Restart() => ShowNotification(NoticeAction.Restart);
-        internal void Execute(NoticeAction action) => ShowNotification(action);
+
 
         private async void ShowNotification(NoticeAction action)
         {
