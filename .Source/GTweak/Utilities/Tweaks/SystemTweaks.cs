@@ -26,7 +26,7 @@ namespace GTweak.Utilities.Tweaks
         internal const uint SPI_SETMOUSE = 0x0004;
     };
 
-    internal sealed class SystemTweaks : Firewall
+    internal sealed class SystemTweaks : FirewallManager
     {
         private static bool _isNetshState = false, _isBluetoothStatus = false, _isTickState = false;
         private readonly string _activeGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);

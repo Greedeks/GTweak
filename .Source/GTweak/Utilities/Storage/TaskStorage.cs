@@ -83,17 +83,17 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
 
         protected static readonly string[] winInsiderTasks =  {
-        @"Microsoft\Windows\Flighting\FeatureConfig\BootstrapUsageDataReporting",
-        @"Microsoft\Windows\Flighting\FeatureConfig\GovernedFeatureUsageProcessing",
-        @"Microsoft\Windows\Flighting\FeatureConfig\ReconcileConfigs",
-        @"Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeatures",
-        @"Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushing",
-        @"Microsoft\Windows\Flighting\FeatureConfig\UsageDataReceiver",
-        @"Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting",
-        @"Microsoft\Windows\Flighting\OneSettings\RefreshCache",
-        @"Microsoft\Windows\Flighting\OneSettings\CollectUsageData",
-        @"Microsoft\Windows\Flighting\OneSettings\SyncConfigs",
-        @"Microsoft\Windows\Flighting\OneSettings\TrackFlighting" };
+        @"\Microsoft\Windows\Flighting\FeatureConfig\BootstrapUsageDataReporting",
+        @"\Microsoft\Windows\Flighting\FeatureConfig\GovernedFeatureUsageProcessing",
+        @"\Microsoft\Windows\Flighting\FeatureConfig\ReconcileConfigs",
+        @"\Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeatures",
+        @"\Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushing",
+        @"\Microsoft\Windows\Flighting\FeatureConfig\UsageDataReceiver",
+        @"\Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting",
+        @"\Microsoft\Windows\Flighting\OneSettings\RefreshCache",
+        @"\Microsoft\Windows\Flighting\OneSettings\CollectUsageData",
+        @"\Microsoft\Windows\Flighting\OneSettings\SyncConfigs",
+        @"\Microsoft\Windows\Flighting\OneSettings\TrackFlighting" };
 
         protected static readonly string restoreTask = @"\Microsoft\Windows\SystemRestore\SR";
 

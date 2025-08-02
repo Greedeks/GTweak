@@ -276,6 +276,7 @@
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
     <Compile Include="Utilities\Managers\ExplorerManager.cs" />
+    <Compile Include="Utilities\Managers\FirewallManager.cs" />
     <Compile Include="Utilities\Managers\OverlayDialogManager.cs" />
     <Compile Include="Utilities\Managers\TimerControlManager.cs" />
     <Compile Include="Utilities\Storage\WinKeyStorage.cs" />
@@ -293,7 +294,6 @@
     <Compile Include="Utilities\Helpers\TrustedInstaller.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\BackupRights.cs" />
-    <Compile Include="Utilities\Tweaks\Firewall.cs" />
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />
     <Compile Include="Utilities\Tweaks\NTFSCompressor.cs" />
     <Compile Include="Utilities\Tweaks\ServicesTweaks.cs" />

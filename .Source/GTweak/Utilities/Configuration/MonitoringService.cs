@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Configuration
@@ -96,18 +97,18 @@ namespace GTweak.Utilities.Configuration
         {
             return Task.Run(() =>
             {
-                int number = 0;
-                foreach (ServiceController svc in _servicesList)
+                int running = 0;
+                Parallel.ForEach(_servicesList, svc =>
                 {
                     try
                     {
                         svc.Refresh();
                         if (svc.Status == ServiceControllerStatus.Running)
-                            ++number;
+                            Interlocked.Increment(ref running);
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                }
-                return number.ToString();
+                });
+                return running.ToString();
             });
         }
 
@@ -162,20 +163,21 @@ namespace GTweak.Utilities.Configuration
         {
             Task.Run(() =>
             {
-                foreach (var wmiClass in new[] { "Win32_DiskDrive", "MSFT_PhysicalDisk" })
-                    SubscribeToDeviceEvents($"TargetInstance ISA '{wmiClass}'", DeviceType.Storage);
+                if (SystemDiagnostics.isMsftAvailable)
+                    SubscribeToDeviceEvents($"TargetInstance ISA 'MSFT_PhysicalDisk'", DeviceType.Storage, @"root\Microsoft\Windows\Storage");
+                else
+                    SubscribeToDeviceEvents($"TargetInstance ISA 'Win32_DiskDrive'", DeviceType.Storage);
                 SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio);
                 SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network);
             }).ConfigureAwait(false);
         }
 
-
-        private void SubscribeToDeviceEvents(string filter, DeviceType type)
+        private void SubscribeToDeviceEvents(string filter, DeviceType type, string scope = @"root\CIMV2")
         {
             try
             {
                 WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
-                ManagementEventWatcher managementEvent = new ManagementEventWatcher(query);
+                ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope), query);
                 managementEvent.EventArrived += (s, e) => { HandleDevicesEvents?.Invoke(type); };
                 managementEvent.Start();
                 _eventWatchers.Add(managementEvent);
