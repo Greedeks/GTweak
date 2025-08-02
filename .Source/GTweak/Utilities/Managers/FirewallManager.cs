@@ -1,14 +1,13 @@
 ﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Managers;
 using NetFwTypeLib;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace GTweak.Utilities.Tweaks
+namespace GTweak.Utilities.Managers
 {
-    internal class Firewall : TaskSchedulerManager
+    internal class FirewallManager : TaskSchedulerManager
     {
         private static readonly SortedList<string, string> _nameRules = new SortedList<string, string>
         {

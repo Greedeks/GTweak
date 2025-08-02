@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal sealed class ServicesTweaks : Firewall
+    internal sealed class ServicesTweaks : FirewallManager
     {
         private static readonly Dictionary<string, (string Default, string Blocked)> _updateFilesWin = new Dictionary<string, (string Default, string Blocked)>()
         {

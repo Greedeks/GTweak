@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
-    internal sealed class ConfidentialityTweaks : Firewall
+    internal sealed class ConfidentialityTweaks : FirewallManager
     {
         internal void AnalyzeAndUpdate(ConfidentialityView confidentialityV)
         {

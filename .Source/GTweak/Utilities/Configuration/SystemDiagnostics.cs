@@ -84,7 +84,7 @@ namespace GTweak.Utilities.Configuration
 
         internal static Dictionary<byte, bool> IsWindowsVersion = default;
 
-        internal static bool isIPAddressFormatValid = false;
+        internal static bool isIPAddressFormatValid = false, isMsftAvailable = false;
 
         internal ImageSource GetProfileImage()
         {
@@ -104,6 +104,14 @@ namespace GTweak.Utilities.Configuration
 
         internal void GetHardwareData()
         {
+            try
+            {
+                using var managementObj = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
+                var results = managementObj.Get();
+                isMsftAvailable = results != null && results.Count > 0;
+            }
+            catch { isMsftAvailable = false; }
+
             Parallel.Invoke(
                 GetBiosInfo,
                 GetMotherboardInfo,
@@ -339,17 +347,8 @@ namespace GTweak.Utilities.Configuration
         private string GetStorageDevices()
         {
             StringBuilder result = new StringBuilder();
-            bool isMsftWorking = false;
 
-            try
-            {
-                using var managementObj = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
-                var results = managementObj.Get();
-                isMsftWorking = results != null && results.Count > 0;
-            }
-            catch { isMsftWorking = false; }
-
-            if (isMsftWorking)
+            if (isMsftAvailable)
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
