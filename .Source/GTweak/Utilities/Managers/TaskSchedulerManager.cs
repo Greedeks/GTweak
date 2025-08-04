@@ -2,6 +2,7 @@
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Storage;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,15 @@ namespace GTweak.Utilities.Managers
     {
         internal static bool IsTaskEnabled(params string[] tasklist)
         {
+            string[] existingTasks = GetExistingTasks(tasklist);
+
+            if (existingTasks.Length == 0)
+                return false;
+
             byte numberRunningTask = 0;
             using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
             {
-                numberRunningTask += (byte)(from string taskname in tasklist
+                numberRunningTask += (byte)(from string taskname in existingTasks
                                             let task = taskService.GetTask(taskname)
                                             where task != null
                                             where task.Enabled
@@ -29,8 +35,13 @@ namespace GTweak.Utilities.Managers
         {
             Task.Run(delegate
             {
+                string[] existingTasks = GetExistingTasks(tasklist);
+
+                if (existingTasks.Length == 0)
+                    return;
+
                 using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in tasklist)
+                foreach (string taskname in existingTasks)
                 {
                     using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
                     if (task != null && task.Enabled != state)
@@ -46,8 +57,13 @@ namespace GTweak.Utilities.Managers
         {
             Task.Run(delegate
             {
+                string[] existingTasks = GetExistingTasks(tasklist);
+
+                if (existingTasks.Length == 0)
+                    return;
+
                 StringBuilder sb = new StringBuilder();
-                foreach (string task in tasklist)
+                foreach (string task in existingTasks)
                     sb.Append($"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ");
                 string tasksCommand = sb.ToString().TrimEnd(' ', '&');
 
@@ -60,8 +76,13 @@ namespace GTweak.Utilities.Managers
         {
             Task.Run(delegate
             {
+                string[] existingTasks = GetExistingTasks(tasklist);
+
+                if (existingTasks.Length == 0)
+                    return;
+
                 using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in tasklist)
+                foreach (string taskname in existingTasks)
                 {
                     Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
                     if (task != null)
@@ -79,6 +100,19 @@ namespace GTweak.Utilities.Managers
                 return Path.GetFileName(matchPath);
             else
                 return partialName;
+        }
+
+        private static string[] GetExistingTasks(params string[] tasklist)
+        {
+            List<string> foundExisting = new List<string>(tasklist.Length);
+
+            foreach (string path in tasklist)
+            {
+                if (File.Exists(Path.Combine(PathLocator.Files.Tasks, path.TrimStart('\\', '/').Replace('/', '\\'))))
+                    foundExisting.Add(path);
+            }
+
+            return foundExisting.ToArray();
         }
     }
 }

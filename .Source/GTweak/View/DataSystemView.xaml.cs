@@ -29,7 +29,6 @@ namespace GTweak.View
             InitializeComponent();
 
             _monitoringService.HandleDevicesEvents += OnHandleDevicesEvents;
-            _monitoringService.StartDeviceMonitoring();
 
             RAMLoad.Value = _monitoringService.GetMemoryUsage;
             CPULoad.Value = MonitoringService.GetProcessorUsage;
@@ -67,7 +66,6 @@ namespace GTweak.View
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
                 });
             });
-            timer.Start();
         }
 
         private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType) => await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
@@ -132,6 +130,12 @@ namespace GTweak.View
                 if (!PopupCopy.IsOpen)
                     AnimationPopup();
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _monitoringService.StartDeviceMonitoring();
+            timer.Start();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)

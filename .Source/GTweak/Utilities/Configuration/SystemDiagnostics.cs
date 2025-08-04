@@ -104,23 +104,27 @@ namespace GTweak.Utilities.Configuration
 
         internal void GetHardwareData()
         {
-            try
+            Parallel.Invoke(() =>
             {
-                using var managementObj = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
-                var results = managementObj.Get();
-                isMsftAvailable = results != null && results.Count > 0;
-            }
-            catch { isMsftAvailable = false; }
+                try
+                {
+                    using var managementObj = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
+                    var results = managementObj.Get();
+                    isMsftAvailable = results != null && results.Count > 0;
+                }
+                catch { isMsftAvailable = false; }
+            });
 
             Parallel.Invoke(
                 GetBiosInfo,
                 GetMotherboardInfo,
                 GetProcessorInfo,
-                GeVideoInfo,
+                GetGraphicsInfo,
                 GetMemoryInfo,
-                GetUserIpAddress,
-                () => { UpdatingDevicesData(); }
+                GetUserIpAddress
             );
+
+            UpdatingDevicesData();
         }
 
         internal void UpdatingDevicesData(DeviceType deviceType = DeviceType.All)
@@ -216,7 +220,7 @@ namespace GTweak.Utilities.Configuration
         /// The maximum video card memory that can be obtained via WMI is 4 GB. Therefore, the memory size is obtained from the registry. 
         /// For discrete video cards or older models, the parameters will have the REG_BINARY type, and for integrated ones, REG_SZ.
         /// </summary>
-        private void GeVideoInfo()
+        private void GetGraphicsInfo()
         {
             static (bool, string, string) GetMemorySize(string name)
             {

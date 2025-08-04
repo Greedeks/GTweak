@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Configuration
@@ -14,7 +13,7 @@ namespace GTweak.Utilities.Configuration
     {
         internal event Action<DeviceType> HandleDevicesEvents;
         private readonly List<ManagementEventWatcher> _eventWatchers = new List<ManagementEventWatcher>();
-        private static readonly ServiceController[] _servicesList = ServiceController.GetServices();
+        private readonly ServiceController[] _servicesList = ServiceController.GetServices();
 
         internal string GetNumberRunningProcesses => GetProcessCount().Result;
         internal string GetNumberRunningService => GetServicesCount().Result;
@@ -62,9 +61,9 @@ namespace GTweak.Utilities.Configuration
         private static extern bool GetSystemTimes(out SystemTime lpIdleTime, out SystemTime lpKernelTime, out SystemTime lpUserTime);
 
 
-        private static Task<string> GetProcessCount()
+        private async Task<string> GetProcessCount()
         {
-            return Task.Run(() =>
+            return await Task.Run(() =>
             {
                 uint capacity = 1024;
 
@@ -90,12 +89,12 @@ namespace GTweak.Utilities.Configuration
                 }
 
                 return Process.GetProcesses().Length.ToString();
-            });
+            }).ConfigureAwait(false);
         }
 
-        private static Task<string> GetServicesCount()
+        private async Task<string> GetServicesCount()
         {
-            return Task.Run(() =>
+            return await Task.Run(() =>
             {
                 int running = 0;
                 Parallel.ForEach(_servicesList, svc =>
@@ -104,17 +103,17 @@ namespace GTweak.Utilities.Configuration
                     {
                         svc.Refresh();
                         if (svc.Status == ServiceControllerStatus.Running)
-                            Interlocked.Increment(ref running);
+                            running++;
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 });
                 return running.ToString();
-            });
+            }).ConfigureAwait(false);
         }
 
-        private static Task<int> GetPhysicalAvailableMemory()
+        private async Task<int> GetPhysicalAvailableMemory()
         {
-            return Task.Run(() =>
+            return await Task.Run(() =>
             {
                 MemoryStatus memStatus = new MemoryStatus();
                 if (!GlobalMemoryStatusEx(memStatus))
@@ -123,7 +122,7 @@ namespace GTweak.Utilities.Configuration
                 int totalMemory = (int)(memStatus.ullTotalPhys / 1048576);
                 int availableMemory = (int)(memStatus.ullAvailPhys / 1048576);
                 return (int)((float)(totalMemory - availableMemory) / totalMemory * 100);
-            });
+            }).ConfigureAwait(false);
         }
 
         internal async Task GetTotalProcessorUsage()
@@ -161,26 +160,26 @@ namespace GTweak.Utilities.Configuration
 
         internal void StartDeviceMonitoring()
         {
-            Task.Run(() =>
-            {
-                if (SystemDiagnostics.isMsftAvailable)
-                    SubscribeToDeviceEvents($"TargetInstance ISA 'MSFT_PhysicalDisk'", DeviceType.Storage, @"root\Microsoft\Windows\Storage");
-                else
-                    SubscribeToDeviceEvents($"TargetInstance ISA 'Win32_DiskDrive'", DeviceType.Storage);
-                SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio);
-                SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network);
-            }).ConfigureAwait(false);
+            if (SystemDiagnostics.isMsftAvailable)
+                SubscribeToDeviceEvents($"TargetInstance ISA 'MSFT_PhysicalDisk'", DeviceType.Storage, @"root\Microsoft\Windows\Storage");
+            else
+                SubscribeToDeviceEvents($"TargetInstance ISA 'Win32_DiskDrive'", DeviceType.Storage);
+            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio);
+            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network);
         }
 
         private void SubscribeToDeviceEvents(string filter, DeviceType type, string scope = @"root\CIMV2")
         {
             try
             {
-                WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
-                ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope), query);
-                managementEvent.EventArrived += (s, e) => { HandleDevicesEvents?.Invoke(type); };
-                managementEvent.Start();
-                _eventWatchers.Add(managementEvent);
+                Task.Run(() =>
+                {
+                    WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
+                    ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope), query);
+                    managementEvent.EventArrived += (s, e) => { HandleDevicesEvents?.Invoke(type); };
+                    managementEvent.Start();
+                    _eventWatchers.Add(managementEvent);
+                });
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
@@ -200,7 +199,7 @@ namespace GTweak.Utilities.Configuration
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
                 _eventWatchers.Clear();
-            }).ConfigureAwait(false);
+            });
         }
     }
 }
