@@ -4,11 +4,11 @@
 
 <div align="center" style="margin: 20px 0; text-align: center;">
 
-[![Dernière version](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&color=179962)](https://github.com/Greedeks/GTweak/releases/latest)
-![Téléchargements](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&color=1982a5)
-![Étoiles](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&color=179962)
-![Taille](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&color=1982a5)
-[![Licence BSD 3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&color=179962)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/releases/latest)
+![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
+![Stars](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=179962)
+![Size](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 </div>
 
 <br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/0c2f2947-6d63-46b3-9933-8e72a8b45ed3" width="260" height="68" alt="Télécharger la dernière version"></a><br/><br/>
