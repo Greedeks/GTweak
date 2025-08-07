@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Controls;
+﻿using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks.DefenderManager;
@@ -384,6 +385,8 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton20":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
                     CommandExecutor.RunCommand($"/c netsh advfirewall set allprofiles state {(isDisabled ? "off" : "on")}");
+                    if (SystemDiagnostics.HardwareData.OSBuild.CompareTo(22621.521m) >= 0)
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wtd", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
                     break;
                 case "TglButton21":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);

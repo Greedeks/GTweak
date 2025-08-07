@@ -47,7 +47,7 @@ namespace GTweak.Utilities.Configuration
         {
             internal static string OperatingSystem { get; set; } = $"\n{Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString()}" ?? string.Empty;
             internal static string OSVersion { get; set; } = string.Empty;
-            internal static string OSBuild { get; set; } = string.Empty;
+            internal static decimal OSBuild { get; set; } = default;
             internal static string Bios { get; set; } = string.Empty;
             internal static string BiosMode { get; set; } = string.Empty;
             internal static string Motherboard { get; set; } = string.Empty;
@@ -162,11 +162,12 @@ namespace GTweak.Utilities.Configuration
 
         internal void GetOperatingSystemInfo()
         {
+            string release = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "DisplayVersion", string.Empty);
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 HardwareData.OSVersion = Convert.ToString(managementObj["Caption"]);
-                HardwareData.OSBuild = Convert.ToString(managementObj["BuildNumber"]);
-                HardwareData.OperatingSystem = $"{HardwareData.OSVersion.Substring(HardwareData.OSVersion.IndexOf('W'))}, {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]}\n";
+                HardwareData.OSBuild = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "UBR", 0)}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : Convert.ToDecimal(managementObj["BuildNumber"]);
+                HardwareData.OperatingSystem = $"{HardwareData.OSVersion.Substring(HardwareData.OSVersion.IndexOf('W'))} {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
                 IsWindowsVersion = new Dictionary<byte, bool>()
                 {
                     { 11, HardwareData.OSVersion.Contains("11") },

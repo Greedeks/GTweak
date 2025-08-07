@@ -24,7 +24,7 @@ namespace GTweak.View
             if (!WindowsLicense.IsWindowsActivated)
                 new NotificationManager().Show("info", "warn_activate_notification").Perform();
 
-            if (SystemDiagnostics.HardwareData.OSBuild.CompareTo("22621.2361") < 0)
+            if (SystemDiagnostics.HardwareData.OSBuild.CompareTo(22621.2361m) < 0)
                 TglButton21.IsEnabled = false;
         }
 
