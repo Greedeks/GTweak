@@ -423,7 +423,8 @@
     <!--#endregion-->
 
     <!--#region Information System Page -->
-    <v:String x:Key="title_win_systemInformation">Sistema operativo:</v:String>
+    <v:String x:Key="title_win_name_systemInformation">Sistema operativo:</v:String>
+    <v:String x:Key="title_win_ver_systemInformation">Versione:</v:String>
     <v:String x:Key="label_proc_systemInformation">Processi in esecuzione:</v:String>
     <v:String x:Key="label_svc_systemInformation">servizi:</v:String>
     <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>

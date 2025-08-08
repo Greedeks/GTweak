@@ -68,7 +68,7 @@ namespace GTweak.Utilities.Tweaks
             interfaceV.TglButton16.StateNA =
                 SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", "1") ||
-                SystemDiagnostics.HardwareData.OSVersion.IndexOf("home", StringComparison.OrdinalIgnoreCase) < 0 &&
+                SystemDiagnostics.HardwareData.OS.Name.IndexOf("home", StringComparison.OrdinalIgnoreCase) < 0 &&
                 (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start", "HideRecommendedSection", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Education", "IsEducationEnvironment", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "1")));
@@ -258,7 +258,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton16":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", isDisabled ? 1 : 0, RegistryValueKind.DWord);
 
-                    if (SystemDiagnostics.HardwareData.OperatingSystem.IndexOf("Home", StringComparison.OrdinalIgnoreCase) < 0)
+                    if (SystemDiagnostics.HardwareData.OS.Name.IndexOf("Home", StringComparison.OrdinalIgnoreCase) < 0)
                     {
                         if (isDisabled)
                         {
@@ -344,7 +344,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
-                        if (isDisabled && SystemDiagnostics.HardwareData.OSBuild.CompareTo(22635.3785m) >= 0)
+                        if (isDisabled && SystemDiagnostics.HardwareData.OS.Build.CompareTo(22635.3785m) >= 0)
                         {
                             RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{2cc5ca98-6485-489a-920e-b3e88a6ccce3}");
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{2cc5ca98-6485-489a-920e-b3e88a6ccce3}", 1, RegistryValueKind.DWord);

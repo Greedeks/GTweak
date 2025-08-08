@@ -26,7 +26,7 @@
             </Border>
         </Popup>
 
-        <Grid Grid.Row="0" Margin="0,0,0,20">
+        <Grid Grid.Row="0" Margin="0,0,0,15">
             <Grid HorizontalAlignment="Left" Margin="50,0,0,0" Width="110" Height="110">
                 <Ellipse Height="90" Width="90" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.2"/>
 
@@ -50,11 +50,12 @@
 
             <Grid HorizontalAlignment="Center" Margin="0,14,0,0">
                 <StackPanel Orientation="Vertical">
-
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <TextBlock Style="{StaticResource Text}" FontSize="15pt" TextWrapping="Wrap" VerticalAlignment="Top" Height="Auto">
-                            <Run Foreground="{StaticResource Color_Accent}" Text="{DynamicResource title_win_systemInformation}"/>
-                            <Run Foreground="{StaticResource Color_Highlighted}" Text="{Binding [Windows].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                            <Run Foreground="{StaticResource Color_Accent}" Text="{DynamicResource title_win_name_systemInformation}"/><LineBreak/>
+                            <Run Foreground="{StaticResource Color_Highlighted}" Text="{Binding [OSName].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                            <Run FontSize="14pt" Foreground="{StaticResource Color_Accent}" Text="{DynamicResource title_win_ver_systemInformation}"/>
+                            <Run FontSize="14pt" Foreground="{StaticResource Color_Highlighted}" Text="{Binding [OSVersion].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                         </TextBlock>
 
                         <Image Height="80" Width="80" HorizontalAlignment="Right" Margin="30,0,0,0">

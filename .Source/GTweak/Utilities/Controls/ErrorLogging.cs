@@ -42,7 +42,7 @@ namespace GTweak.Utilities.Controls
                 {
                     string headerLine = "---------------------------------------------------------";
                     await writer.WriteLineAsync($"GTweak has crashed!\n{headerLine}\nIf you wish to report this, please open an issue here:\nhttps://github.com/Greedeks/GTweak/issues\n{headerLine}\n");
-                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {SystemDiagnostics.HardwareData.OSVersion}\n{headerLine}\n\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
+                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {SystemDiagnostics.HardwareData.OS.Name}\n{headerLine}\n\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
                     await writer.FlushAsync();
                 }
 

@@ -22,7 +22,7 @@ namespace GTweak.View
         private readonly MonitoringService _monitoringService = new MonitoringService();
         private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
-        private readonly TimerControlManager timer = default;
+        private readonly TimerControlManager _timer = default;
 
         public DataSystemView()
         {
@@ -47,7 +47,7 @@ namespace GTweak.View
                 });
             };
 
-            timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
+            _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
             {
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
@@ -135,13 +135,13 @@ namespace GTweak.View
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             _monitoringService.StartDeviceMonitoring();
-            timer.Start();
+            _timer.Start();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             _monitoringService.StopDeviceMonitoring();
-            timer.Stop();
+            _timer.Stop();
         }
     }
 }

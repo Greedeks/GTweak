@@ -423,7 +423,8 @@
     <!--#endregion-->
 
     <!--#region Information System Page -->
-    <v:String x:Key="title_win_systemInformation">운영 체제:</v:String>
+    <v:String x:Key="title_win_name_systemInformation">운영 체제:</v:String>
+    <v:String x:Key="title_win_ver_systemInformation">버전:</v:String>
     <v:String x:Key="label_proc_systemInformation">실행 중인 프로세스:</v:String>
     <v:String x:Key="label_svc_systemInformation">서비스:</v:String>
     <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>

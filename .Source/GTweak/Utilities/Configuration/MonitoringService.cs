@@ -161,18 +161,18 @@ namespace GTweak.Utilities.Configuration
         internal void StartDeviceMonitoring()
         {
             if (SystemDiagnostics.isMsftAvailable)
-                SubscribeToDeviceEvents($"TargetInstance ISA 'MSFT_PhysicalDisk'", DeviceType.Storage, @"root\Microsoft\Windows\Storage");
+                SubscribeToDeviceEvents($"TargetInstance ISA 'MSFT_PhysicalDisk'", DeviceType.Storage, @"root\Microsoft\Windows\Storage").ConfigureAwait(false);
             else
-                SubscribeToDeviceEvents($"TargetInstance ISA 'Win32_DiskDrive'", DeviceType.Storage);
-            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio);
-            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network);
+                SubscribeToDeviceEvents($"TargetInstance ISA 'Win32_DiskDrive'", DeviceType.Storage).ConfigureAwait(false);
+            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio).ConfigureAwait(false);
+            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network).ConfigureAwait(false);
         }
 
-        private void SubscribeToDeviceEvents(string filter, DeviceType type, string scope = @"root\CIMV2")
+        private async Task SubscribeToDeviceEvents(string filter, DeviceType type, string scope = @"root\CIMV2")
         {
             try
             {
-                Task.Run(() =>
+                await Task.Run(() =>
                 {
                     WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
                     ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope), query);

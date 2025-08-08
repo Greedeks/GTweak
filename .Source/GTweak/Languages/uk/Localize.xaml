@@ -423,7 +423,8 @@
     <!--#endregion-->
 
     <!--#region Information System Page -->
-    <v:String x:Key="title_win_systemInformation">Операційна система:</v:String>
+    <v:String x:Key="title_win_name_systemInformation">Операційна система:</v:String>
+    <v:String x:Key="title_win_ver_systemInformation">Версія :</v:String>
     <v:String x:Key="label_proc_systemInformation">Запущені процеси:</v:String>
     <v:String x:Key="label_svc_systemInformation">служби:</v:String>
     <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>

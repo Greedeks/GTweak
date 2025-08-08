@@ -45,9 +45,14 @@ namespace GTweak.Utilities.Configuration
 
         internal struct HardwareData
         {
-            internal static string OperatingSystem { get; set; } = $"\n{Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)?.ToString()}" ?? string.Empty;
-            internal static string OSVersion { get; set; } = string.Empty;
-            internal static decimal OSBuild { get; set; } = default;
+            internal class OperatingSystemInfo
+            {
+                internal string Name { get; set; } = string.Empty;
+                internal string Version { get; set; } = string.Empty;
+                internal decimal Build { get; set; } = default;
+            }
+
+            internal static OperatingSystemInfo OS { get; set; } = new OperatingSystemInfo();
             internal static string Bios { get; set; } = string.Empty;
             internal static string BiosMode { get; set; } = string.Empty;
             internal static string Motherboard { get; set; } = string.Empty;
@@ -162,19 +167,25 @@ namespace GTweak.Utilities.Configuration
 
         internal void GetOperatingSystemInfo()
         {
-            string release = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "DisplayVersion", string.Empty);
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
+            string regPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion";
+            int revisionNumber = RegistryHelp.GetValue(regPath, "UBR", 0);
+            string release = RegistryHelp.GetValue(regPath, "DisplayVersion", string.Empty);
+
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, Description, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                HardwareData.OSVersion = Convert.ToString(managementObj["Caption"]);
-                HardwareData.OSBuild = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "UBR", 0)}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : Convert.ToDecimal(managementObj["BuildNumber"]);
-                HardwareData.OperatingSystem = $"{HardwareData.OSVersion.Substring(HardwareData.OSVersion.IndexOf('W'))} {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")}, V{(string)managementObj["Version"]} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
+                string data = new[] { "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                HardwareData.OS.Name = $"{data.Substring(data.IndexOf('W'))} {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
+                HardwareData.OS.Version = $"{(string)managementObj["Version"]}.{revisionNumber}\n";
+                HardwareData.OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : Convert.ToDecimal(Registry.GetValue(regPath, "CurrentBuild", 0)?.ToString());
+
                 IsWindowsVersion = new Dictionary<byte, bool>()
                 {
-                    { 11, HardwareData.OSVersion.Contains("11") },
-                    { 10, HardwareData.OSVersion.Contains("10") }
+                    { 11, HardwareData.OS.Name.Contains("11") },
+                    { 10, HardwareData.OS.Name.Contains("10") }
                 };
             }
-            HardwareData.OperatingSystem = $"\n{HardwareData.OperatingSystem.TrimEnd('\n', '\r')}";
+            HardwareData.OS.Name = !string.IsNullOrWhiteSpace(HardwareData.OS.Name) ? HardwareData.OS.Name.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "ProductName", "Windows")?.ToString();
+            HardwareData.OS.Version = !string.IsNullOrWhiteSpace(HardwareData.OS.Version) ? HardwareData.OS.Version.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "LCUVer", 0)?.ToString();
         }
 
         /// <summary>
