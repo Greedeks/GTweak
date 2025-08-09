@@ -12,7 +12,7 @@ namespace GTweak.Utilities.Configuration
     internal class MonitoringService
     {
         internal event Action<DeviceType> HandleDevicesEvents;
-        private readonly List<ManagementEventWatcher> _eventWatchers = new List<ManagementEventWatcher>();
+        private readonly List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)> _watcherHandler = new List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)>();
         private readonly ServiceController[] _servicesList = ServiceController.GetServices();
 
         internal string GetNumberRunningProcesses => GetProcessCount().Result;
@@ -160,26 +160,26 @@ namespace GTweak.Utilities.Configuration
 
         internal void StartDeviceMonitoring()
         {
-            if (SystemDiagnostics.isMsftAvailable)
-                SubscribeToDeviceEvents($"TargetInstance ISA 'MSFT_PhysicalDisk'", DeviceType.Storage, @"root\Microsoft\Windows\Storage").ConfigureAwait(false);
-            else
-                SubscribeToDeviceEvents($"TargetInstance ISA 'Win32_DiskDrive'", DeviceType.Storage).ConfigureAwait(false);
-            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio).ConfigureAwait(false);
-            SubscribeToDeviceEvents("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network).ConfigureAwait(false);
+            Parallel.ForEach(new List<(string filter, DeviceType type, string scope)> {
+                ($"TargetInstance ISA {(SystemDiagnostics.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, SystemDiagnostics.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
+                ("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio, null),
+                ("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null),},
+                parameters => { SubscribeToDeviceEvents(parameters.filter, parameters.type, parameters.scope); });
         }
 
-        private async Task SubscribeToDeviceEvents(string filter, DeviceType type, string scope = @"root\CIMV2")
+        private async void SubscribeToDeviceEvents(string filter, DeviceType type, string scope)
         {
             try
             {
                 await Task.Run(() =>
                 {
                     WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
-                    ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope), query);
-                    managementEvent.EventArrived += (s, e) => { HandleDevicesEvents?.Invoke(type); };
+                    ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope ?? @"root\cimv2"), query);
+                    void handler(object s, EventArrivedEventArgs e) => HandleDevicesEvents?.Invoke(type);
+                    managementEvent.EventArrived += handler;
                     managementEvent.Start();
-                    _eventWatchers.Add(managementEvent);
-                });
+                    _watcherHandler.Add((managementEvent, handler));
+                }).ConfigureAwait(false);
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
@@ -188,17 +188,18 @@ namespace GTweak.Utilities.Configuration
         {
             Task.Run(() =>
             {
-                foreach (ManagementEventWatcher managementEvent in _eventWatchers)
+                Parallel.ForEach(_watcherHandler, tuple =>
                 {
+                    var (watcher, handler) = tuple;
                     try
                     {
-                        managementEvent.Stop();
-                        managementEvent.EventArrived -= null;
-                        managementEvent.Dispose();
+                        watcher.EventArrived -= handler;
+                        watcher.Stop();
+                        watcher.Dispose();
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                }
-                _eventWatchers.Clear();
+                });
+                _watcherHandler.Clear();
             });
         }
     }

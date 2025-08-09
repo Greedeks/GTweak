@@ -176,15 +176,15 @@ namespace GTweak.Utilities.Tweaks
             catch { _isBluetoothStatus = false; }
         }
 
-        internal async void ViewNetshState()
+        internal void ViewNetshState()
         {
-            string getStateNetsh = await CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false);
+            string getStateNetsh = CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false).Result;
             _isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
         }
 
         internal void ViewConfigTick()
         {
-            string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).GetAwaiter().GetResult();
+            string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).Result;
             _isTickState = !Regex.IsMatch(output, @"(?is)(?=.*\bdisabledynamictick\s+(yes|true))(?=.*\buseplatformclock\s+(no|false))", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
         }
 
