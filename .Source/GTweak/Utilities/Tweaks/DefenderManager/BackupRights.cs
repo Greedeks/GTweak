@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
+using System.Windows.Shapes;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
@@ -28,6 +29,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { @"SYSTEM\CurrentControlSet\Services\webthreatdefsvc", Registry.LocalMachine },
             { @"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows Defender\Features", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows Defender\Exclusions", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Security Center", Registry.LocalMachine },
             { @"SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection", Registry.LocalMachine },
             { @"SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet", Registry.LocalMachine },
@@ -43,6 +45,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Windows Defender/Operational", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Security-Diagnostic/Operational", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows Defender\Cloud", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCmdRun.exe", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCopyAccelerator.exe", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SgrmBroker.exe", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MsMpEng.exe", Registry.LocalMachine },

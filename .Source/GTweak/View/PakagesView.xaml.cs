@@ -33,7 +33,7 @@ namespace GTweak.View
                 if ((int)time.TotalSeconds % 5 == 0)
                 {
                     BackgroundWorker backgroundWorker = new BackgroundWorker();
-                    backgroundWorker.DoWork += delegate { new UninstallingPakages().LoadInstalledPackages(); };
+                    backgroundWorker.DoWork += delegate { new UninstallingPakages().GetInstalledPackages(); };
                     backgroundWorker.RunWorkerCompleted += delegate { Dispatcher.Invoke(() => { UpdateViewStatePakages(); }); };
                     backgroundWorker.RunWorkerAsync();
                 }
@@ -147,7 +147,7 @@ namespace GTweak.View
                 return (DrawingImage)FindResource("DI_Sandtime");
             }
 
-            bool isContains = details.Scripts.Any(pattern => UninstallingPakages.InstalledPackages.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+            bool isContains = details.Scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
 
             return !UninstallingPakages.HandleAvailabilityStatus(packageName) ? isContains ? (DrawingImage)FindResource($"A_DI_{packageName}") : (DrawingImage)FindResource($"DA_DI_{packageName}") : (DrawingImage)FindResource("DI_Sandtime");
         }

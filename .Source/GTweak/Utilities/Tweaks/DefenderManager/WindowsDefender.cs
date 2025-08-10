@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
@@ -49,6 +50,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpDefenderCoreService.exe\" /f & " +
                 "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\SgrmBroker.exe\" /f & " +
                 "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /f & " +
+                "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpCmdRun.exe\" /f & " +
+                "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpCopyAccelerator.exe\" /f & " +
                 "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /v Debugger /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_DWORD /v CFGOptions /d 1 /f");
 
@@ -140,6 +143,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MsSecWfp", "Start", "3", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefsvc", "Start", "3", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc", "Start", "3", RegistryValueKind.DWord, true);
+
+            ManageExclusions(false);
 
             foreach (var (filePath, originalFileName) in new (string filePath, string originalFileName)[]
             {
@@ -337,6 +342,10 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_SZ /v ConfigureAppInstallControl /d \"Anywhere\" /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /t REG_DWORD /v ConfigureAppInstallControlEnabled /d 0 /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Features\" /t REG_DWORD /v TamperProtection /d 0 /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpCmdRun.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpCmdRun.exe\" /t REG_SZ /v Debugger /d \"S:\\none.exe\" /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpCopyAccelerator.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
+                "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MpCopyAccelerator.exe\" /t REG_SZ /v Debugger /d \"S:\\none.exe\" /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\MsMpEng.exe\" /t REG_SZ /v Debugger /d \"S:\\none.exe\" /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\SgrmBroker.exe\" /t REG_DWORD /v CFGOptions /d 0 /f & " +
@@ -366,10 +375,14 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefsvc", "Start", "4", RegistryValueKind.DWord, true);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc", "Start", "4", RegistryValueKind.DWord, true);
 
+            ManageExclusions(true);
+
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"*\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Directory\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Drive\shellex\ContextMenuHandlers\EPP");
             RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32");
+
+            CommandExecutor.RunCommand("Get-PSDrive -PSProvider FileSystem | ForEach-Object { Add-MpPreference -ExclusionPath \"$($_.Root)\" } ", true);
 
             foreach (var directory in new[]
             {
@@ -428,6 +441,12 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller($"\"Set-ItemProperty -Path HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Features -Name TamperProtection -Value  0x0000000{(isDisable ? 0 : 1)}\"", true);
+        }
+
+        private static void ManageExclusions(bool isDisable)
+        {
+            foreach (string drive in DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed || d.DriveType == DriveType.Removable).Select(d => d.Name))
+                CommandExecutor.RunCommand($" {(isDisable ? "Add-MpPreference" : "Remove-MpPreference")} -ExclusionPath '{drive}'", true);
         }
 
         private static void KillProcess(params string[] nameList)

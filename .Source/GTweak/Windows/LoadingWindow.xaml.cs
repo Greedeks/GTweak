@@ -53,7 +53,7 @@ namespace GTweak.Windows
                 () => ExecuteWithLogging(WindowsLicense.LicenseStatus, nameof(WindowsLicense.LicenseStatus)),
                 () => ExecuteWithLogging(new SystemDiagnostics().GetHardwareData, nameof(SystemDiagnostics.GetHardwareData)),
                 () => ExecuteWithLogging(new SystemDiagnostics().ValidateVersionUpdates, nameof(SystemDiagnostics.ValidateVersionUpdates)),
-                () => ExecuteWithLogging(new UninstallingPakages().LoadInstalledPackages, nameof(UninstallingPakages.LoadInstalledPackages)),
+                () => ExecuteWithLogging(new UninstallingPakages().GetInstalledPackages, nameof(UninstallingPakages.GetInstalledPackages)),
                 () => ExecuteWithLogging(new UninstallingPakages().CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount)),
                 () => ExecuteWithLogging(new SystemTweaks().ViewNetshState, nameof(SystemTweaks.ViewNetshState)),
                 () => ExecuteWithLogging(new SystemTweaks().ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus)),
