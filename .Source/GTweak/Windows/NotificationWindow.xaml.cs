@@ -15,6 +15,8 @@ namespace GTweak.Windows
     public partial class NotificationWindow
     {
         private NotificationManager.NoticeAction _requiredAction = default;
+        private readonly TimerControlManager _timer = default;
+
         internal string NoticeTitle { set => Header.Text = value; get => Header.Text; }
         internal string NoticeText { set => MessageBody.Text = value; get => MessageBody.Text; }
         internal NotificationManager.NoticeAction RequiredAction { set => _requiredAction = value; get => _requiredAction; }
@@ -23,8 +25,8 @@ namespace GTweak.Windows
         {
             InitializeComponent();
 
-            TimerControlManager timer = new TimerControlManager(TimeSpan.FromSeconds(3), TimerControlManager.TimerMode.CountDown, null, () => { Close(); });
-            timer.Start();
+            _timer = new TimerControlManager(TimeSpan.FromSeconds(3), TimerControlManager.TimerMode.CountDown, null, () => { Close(); });
+            _timer.Start();
         }
 
         private void BtnExit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -72,7 +74,7 @@ namespace GTweak.Windows
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { _timer.Stop(); Close(); }));
         }
     }
 }

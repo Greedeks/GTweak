@@ -20,7 +20,7 @@ namespace GTweak.View
     public partial class PakagesView : UserControl
     {
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
-        private readonly TimerControlManager timer = default;
+        private readonly TimerControlManager _timer = default;
 
         private bool _isWebViewRemoval = false;
 
@@ -28,7 +28,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, time =>
+            _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, time =>
             {
                 if ((int)time.TotalSeconds % 5 == 0)
                 {
@@ -38,7 +38,9 @@ namespace GTweak.View
                     backgroundWorker.RunWorkerAsync();
                 }
             });
-            timer.Start();
+
+            if (_timer == null)
+                _timer.Start();
         }
 
         private void Apps_MouseEnter(object sender, MouseEventArgs e)

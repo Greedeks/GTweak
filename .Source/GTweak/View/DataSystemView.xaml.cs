@@ -19,7 +19,6 @@ namespace GTweak.View
 {
     public partial class DataSystemView : UserControl
     {
-        private readonly MonitoringService _monitoringService = new MonitoringService();
         private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
         private readonly TimerControlManager _timer = default;
@@ -28,9 +27,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            _monitoringService.HandleDevicesEvents += OnHandleDevicesEvents;
-
-            RAMLoad.Value = _monitoringService.GetMemoryUsage;
+            RAMLoad.Value = _systemDiagnostics.GetMemoryUsage;
             CPULoad.Value = MonitoringService.GetProcessorUsage;
 
             App.LanguageChanged += delegate
@@ -51,7 +48,7 @@ namespace GTweak.View
             {
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
-                    await backgroundQueue.QueueTask(async delegate { await _monitoringService.GetTotalProcessorUsage(); });
+                    await backgroundQueue.QueueTask(async delegate { await _systemDiagnostics.GetTotalProcessorUsage(); });
                     AnimationProgressBars();
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
@@ -66,16 +63,17 @@ namespace GTweak.View
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
                 });
             });
-        }
+            _timer.Start();
 
-        private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType) => await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
+            Unloaded += delegate { _timer.Stop(); };
+        }
 
         private void AnimationProgressBars()
         {
             Dispatcher.Invoke(() =>
             {
                 CPULoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, MonitoringService.GetProcessorUsage, 0.2));
-                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, _monitoringService.GetMemoryUsage, 0.2));
+                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, _systemDiagnostics.GetMemoryUsage, 0.2));
             });
         }
         private void AnimationPopup()
@@ -130,18 +128,6 @@ namespace GTweak.View
                 if (!PopupCopy.IsOpen)
                     AnimationPopup();
             }
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            _monitoringService.StartDeviceMonitoring();
-            _timer.Start();
-        }
-
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            _monitoringService.StopDeviceMonitoring();
-            _timer.Stop();
         }
     }
 }

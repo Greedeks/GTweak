@@ -10,17 +10,16 @@ namespace GTweak.Windows
 {
     public partial class MessageWindow
     {
-
-
+        private readonly TimerControlManager _timer = default;
         public MessageWindow(bool isViolationSystem = false)
         {
             InitializeComponent();
 
-            TimerControlManager timer = new TimerControlManager(TimeSpan.FromSeconds(4), TimerControlManager.TimerMode.CountDown, time =>
+            _timer = new TimerControlManager(TimeSpan.FromSeconds(4), TimerControlManager.TimerMode.CountDown, time =>
             {
                 BtnAccept.Content = $"{new Regex("[(05)(04)(03)(02)]").Replace(BtnAccept.Content.ToString(), "")}({time:ss})";
             }, () => Application.Current.Shutdown());
-            timer.Start();
+            _timer.Start();
 
             if (isViolationSystem)
             {
@@ -45,7 +44,7 @@ namespace GTweak.Windows
         {
             Closing -= Window_Closing;
             e.Cancel = true;
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
+            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { _timer.Stop(); Close(); }));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.2));

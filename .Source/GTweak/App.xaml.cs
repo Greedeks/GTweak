@@ -15,6 +15,8 @@ namespace GTweak
         internal static event EventHandler ThemeChanged;
         internal static event EventHandler TweaksImported;
 
+        private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
+
         internal static void UpdateImport() => TweaksImported?.Invoke(default, EventArgs.Empty);
 
         public App()
@@ -23,6 +25,7 @@ namespace GTweak
 
             DispatcherUnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            _systemDiagnostics.HandleDevicesEvents += OnHandleDevicesEvents;
         }
 
         private async void App_Startup(object sender, StartupEventArgs e)
@@ -36,6 +39,8 @@ namespace GTweak
             SettingsEngine.СheckingParameters();
             RunGuard.CheckingApplicationCopies();
             await RunGuard.CheckingSystemRequirements();
+
+            _systemDiagnostics.StartDeviceMonitoring();
 
             new LoadingWindow().Show();
         }
@@ -52,6 +57,12 @@ namespace GTweak
             if (e.ExceptionObject is Exception ex)
                 ErrorLogging.LogWritingFile(ex);
             Environment.Exit(0);
+        }
+
+        private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType)
+        {
+            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
         }
 
         private static Uri GetResourceUri(string folder, bool isTheme = false) => isTheme ? new Uri($"Styles/Themes/{folder}/Colors.xaml", UriKind.Relative) : new Uri($"Languages/{folder}/Localize.xaml", UriKind.Relative);
@@ -131,6 +142,12 @@ namespace GTweak
 
                 ThemeChanged?.Invoke(default, EventArgs.Empty);
             }
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _systemDiagnostics?.StopDeviceMonitoring();
+            base.OnExit(e);
         }
     }
 }
