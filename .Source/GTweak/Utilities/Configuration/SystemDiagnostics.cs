@@ -78,10 +78,11 @@ namespace GTweak.Utilities.Configuration
 
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
 
-        internal static (string Сode, string Region) GetCurrentSystemLang()
+        internal static (string Code, string Region) GetCurrentSystemLang()
         {
-            Match systemLang = Regex.Match(CultureInfo.CurrentUICulture.Name, @"^(?<code>[a-z]{2,3})(?:-(?<region>[A-Za-z]{2,4}))?$", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
-            return (systemLang.Groups["code"].Value, systemLang.Groups["region"].Value);
+            CultureInfo culture = CultureInfo.CurrentUICulture;
+            string[] parts = culture.Name.Split('-');
+            return (culture.TwoLetterISOLanguageName.ToLowerInvariant(), parts.Length > 1 ? parts[1].ToLowerInvariant() : string.Empty);
         }
 
         internal static bool IsNeedUpdate { get; private set; } = false;
@@ -492,7 +493,7 @@ namespace GTweak.Utilities.Configuration
         {
             try
             {
-                string dns = GetCurrentSystemLang().Сode switch
+                string dns = GetCurrentSystemLang().Code switch
                 {
                     "fa" => "aparat.com",
                     "zh" => "baidu.com",
@@ -500,19 +501,26 @@ namespace GTweak.Utilities.Configuration
                     "kk" => "yandex.kz",
                     "ko" => "naver.com",
                     "cs" => "seznam.cz",
-                    "tm" => "turkmenportal.com",
-                    "vn" => "coccoc.com",
-                    "cu" => "ecured.cu",
-                    "kp" => "naenara.com.kp",
-                    "sy" => "duckduckgo.com",
-                    "jp" => "yahoo.co.jp",
+                    "tk" => "turkmenportal.com",
+                    "vi" => "fpt.vn",
+                    "es" => "terra.es",
+                    "ja" => "yahoo.co.jp",
                     "de" => "t-online.de",
                     "fr" => "orange.fr",
-                    "es" => "terra.es",
                     "it" => "libero.it",
                     "th" => "true.th",
-                    "vi" => "fpt.vn",
-                    string name when new[] { "tr", "in", "ar" }.Contains(name) => "bing.com",
+                    "pl" => "wp.pl",
+                    "nl" => "nu.nl",
+                    "pt" => "globo.com",
+                    "sv" => "aftonbladet.se",
+                    "no" => "vg.no",
+                    "fi" => "yle.fi",
+                    "ro" => "digisport.ro",
+                    "gr" => "in.gr",
+                    "id" => "detik.com",
+                    "mx" => "univision.com",
+                    "ar" => "claro.com.ar",
+                    string name when new[] { "tr", "hi", "ar" }.Contains(name) => "bing.com",
                     _ => "google.com"
                 };
 

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
-using System.Windows.Shapes;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
