@@ -40,7 +40,7 @@
     <v:String x:Key="empty_import_notification">이 파일은 비어 있으며 조정을 적용할 수 없습니다</v:String>
     <v:String x:Key="export_warning_notification">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
     <v:String x:Key="success_onedrive_notification">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
-    <v:String x:Key="error_onedrive_notification">OneDrive setup file missing, recovery impossible</v:String>
+    <v:String x:Key="error_onedrive_notification">OneDrive 설정 파일이 누락되어 복구가 불가능합니다</v:String>
     <v:String x:Key="defender_notification">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_notification">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="warn_activate_notification">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
@@ -221,12 +221,12 @@
     <v:String x:Key="TglButton17_description_interface">이렇게 조정하면 바탕화면과 «탐색기»에 대한 일반적인 클래식 컨텍스트 메뉴로 돌아갑니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton18_description_interface">Windows 11에서는 새로운 «시작» 메뉴나 «빠른 설정»과 같은 특정 기능을 사용하는 방법에 대한 힌트를 표시하는 경우가 있습니다. 이러한 힌트는 Windows 11을 처음 사용하는 경우 유용합니다.</v:String>
     <v:String x:Key="TglButton19_description_interface">기본적으로 Windows는 탐색기에서 항목 사이에 패딩을 추가합니다. 이는 터치 스크린을 위해 설계된 새로운 기능입니다. 이 조정은 파일 탐색기의 클래식 레이아웃을 복원하여 요소 사이의 들여쓰기를 제거하고 설정을 검색하는 데 시간을 절약합니다.</v:String>
-    <v:String x:Key="TglButton20_description_interface">The tweak disables and, where possible, hides Copilot icons on the taskbar, in the «Start Menu», in Edge, and in Notepad, blocking its functionality, and also disables Recall. At the same time, the core Copilot application itself is not affected, remains in the system, and can be used if needed. Copilot can only be fully removed along with Microsoft Edge. If these AI features are not present in your Windows initially, using the tweak is pointless.</v:String>
+    <v:String x:Key="TglButton20_description_interface">이 조정은 작업 표시줄, 시작 메뉴, Edge, 메모장에서 Copilot 아이콘을 비활성화하고, 가능한 경우 숨겨 기능을 차단하며, Recall 기능도 비활성화합니다. 동시에 핵심 Copilot 애플리케이션 자체는 영향을 받지 않고 시스템에 남아 있으며 필요한 경우 사용할 수 있습니다. Copilot은 Microsoft Edge와 함께만 완전히 제거할 수 있습니다. 이러한 AI 기능이 Windows에 처음부터 없는 경우 이 트윅을 사용해도 소용이 없습니다.</v:String>
     <v:String x:Key="TglButton21_description_interface">이 조정을 통해 작업 표시줄에서 응용 프로그램을 마우스 오른쪽 버튼으로 클릭하면 컨텍스트 메뉴에 «작업 끝내기» 옵션을 추가할 수 있습니다. 이렇게 하면 작업 관리자를 열지 않고도 프로세스를 완료하는 속도가 빨라집니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
-    <v:String x:Key="TglButton22_description_interface">이 트윅은 «검색», «작업 보기» 및 «채팅» 아이콘을 제거하고, 최대화 버튼 위에 마우스를 올렸을 때 나타나는 스냅 레이아웃을 비활성화하며, «이 사진에 대해 알아보기»를 제거합니다; 구버전 Windows 11에서는 Copilot 아이콘도 제거됩니다. Windows 10 사용자의 경우 추가로 «뉴스 및 관심사»와 Cortana를 제거합니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
+    <v:String x:Key="TglButton22_description_interface">이 조정은 «검색», «작업 보기» 및 «채팅» 아이콘을 제거하고, 최대화 버튼 위에 마우스를 올렸을 때 나타나는 스냅 레이아웃을 비활성화하며, «이 사진에 대해 알아보기»를 제거합니다; 구버전 Windows 11에서는 Copilot 아이콘도 제거됩니다. Windows 10 사용자의 경우 추가로 «뉴스 및 관심사»와 Cortana를 제거합니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton23_description_interface">기본적으로 Windows는 수집된 정보를 사용하여 광고를 타겟팅, 즉 사용자의 관심사와 일치하는 광고를 표시합니다. 그리고 말 그대로 이 광고는 표시할 수 있는 여유 공간이 있는 곳이면 어디든 배치됩니다. 모든 스토어 앱, 탐색기, 옵션 및 시작 메뉴에 개인 맞춤 광고를 표시하지 않으려면 이 정크를 비활성화하면 됩니다.</v:String>
     <v:String x:Key="TglButton24_description_interface">기본적으로 Windows는 창이 꺼져 있을 때의 위치와 상태를 저장하지 않습니다. 이 수정을 통해 로그아웃, 재부팅 및 종료 후에 열린 폴더 유형을 기억하여 복원할 수 있습니다.</v:String>
-    <v:String x:Key="TglButton25_description_interface">Tweak allows disabling all Windows tips and notifications, including online hints in settings, as well as disabling Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is suddenly appearing pop-up that aggressively prompts user to «complete device setup urgently» and sign in to Microsoft account.</v:String>
+    <v:String x:Key="TglButton25_description_interface">이 트윅은 설정의 온라인 힌트를 포함한 모든 Windows 팁과 알림을 비활성화할 수 있으며, Windows 11 사용자의 두 번째 기회, 즉석 경험 (SCOOBE)도 비활성화할 수 있습니다. SCOOBE는 사용자에게 "긴급하게 장치 설정을 완료"하고 Microsoft 계정에 로그인하도록 유도하는 팝업을 갑자기 표시합니다.</v:String>
     <v:String x:Key="TglButton26_description_interface">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕화면, 동영상, 문서, 다운로드, 이미지, 음악. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton27_description_interface">왼쪽 메뉴 목록의 탐색기 요약에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서). 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="TglButton28_description_interface">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
@@ -237,7 +237,7 @@
      <!--#endregion-->
 
     <!--#region Applications Page -->
-    <v:String x:Key="deletion_warn_part1_applications">애플리케이션은</v:String>
+    <v:String x:Key="deletion_warn_part1_applications">응용 프로그램은</v:String>
     <v:String x:Key="deletion_warn_part2_applications">영구적으로 삭제되며,</v:String>
     <v:String x:Key="deletion_warn_part3_applications">OneDrive는 예외입니다. 복원하려면</v:String>
     <v:String x:Key="deletion_warn_part4_applications">회색</v:String>
@@ -290,8 +290,8 @@
     <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
 
     <v:String x:Key="title_over_applications">설치 제거 확인</v:String>
-    <v:String x:Key="text_over_applications" xml:space="preserve">You are about to uninstall the Microsoft Edge browser. This will also remove the EdgeWebView component, which is used to display web content in various applications — such as Microsoft Office (e.g., Meeting Insights, Room Finder), the Photos app (the new version uses WebView2), some Telegram bots, and other programs that rely on embedded WebView. Before proceeding, make sure you do not need this component. 
-       In recent builds of Windows 11, Copilot is implemented via EdgeWebView as a PWA or system wrapper. When Edge is uninstalled, Copilot is also removed, since it functions as a web wrapper.</v:String>
+    <v:String x:Key="text_over_applications" xml:space="preserve">MicrosoftEdge 브라우저를 제거하려고 합니다. 이렇게 하면 MicrosoftOffice (예: Meeting 인사이트, 룸 파인더), 사진 앱 (새 버전은 WebView2 사용), 일부 Telegram 봇, 그리고 내장된 WebView를 사용하는 기타 프로그램 등 다양한 응용 프로그램에서 웹 콘텐츠를 표시하는 데 사용되는 EdgeWebView 구성 요소도 제거됩니다. 진행하기 전에 이 구성 요소가 필요하지 않은지 확인하세요. 
+       최근 Windows 11 빌드에서 Copilot은 PWA 또는 시스템 래퍼로 EdgeWebView를 통해 구현되었습니다. Edge를 제거하면 웹 래퍼 역할을 하는 Copilot도 제거됩니다.</v:String>
     <v:String x:Key="question_over_applications">EdgeWebView와 함께 계속 삭제하시겠습니까?</v:String>
     <v:String x:Key="btn_сancel">취소</v:String>
     <v:String x:Key="btn_delete">삭제</v:String>
@@ -332,7 +332,7 @@
     <v:String x:Key="TglButton3_description_services">케이블 또는 Wi-Fi를 통해 인터넷에 연결되어 있는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton4_description_services">Windows 스토어 및 해당 UWP 앱을 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton5_description_services">서비스에서 시스템 성능을 분석하지 않도록 하려면 비활성화합니다.</v:String>
-    <v:String x:Key="TglButton6_description_services">Disable if you do not use sign-in with a PIN, fingerprint, facial recognition, or other Windows Hello methods. If a sign-in method has already been set up, it will continue to work, but you’ll need to re-enable Windows Hello to modify or remove it.</v:String>
+    <v:String x:Key="TglButton6_description_services">PIN, 지문, 얼굴 인식 또는 기타 Windows Hello 로그인 방식을 사용하지 않는 경우 비활성화하세요. 이미 설정된 로그인 방식은 계속 작동하지만, 해당 방식을 수정하거나 제거하려면 Windows Hello를 다시 활성화해야 합니다.</v:String>
     <v:String x:Key="TglButton7_description_services">블루투스를 사용하지 않는 장치와 블루투스에 연결된 장치를 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton8_description_services">프린터가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="TglButton9_description_services">스캐너가 없는 경우 비활성화합니다.</v:String>
@@ -386,9 +386,9 @@
     <v:String x:Key="tgl22_system">«게임 바» 기능 사용</v:String>
     <v:String x:Key="tgl23_system">백그라운드에서 실행되는 응용 프로그램</v:String>
     <v:String x:Key="tgl24_system">Windows에서 예약된 저장소</v:String>
-    <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
-    <v:String x:Key="tgl26_system">Hide «PC Health Check» from update system</v:String>
-    <v:String x:Key="tgl27_system">Windows Insider’s Background Tasks</v:String>
+    <v:String x:Key="tgl25_system">동적 및 고정밀 이벤트 타이머</v:String>
+    <v:String x:Key="tgl26_system">업데이트 시스템에서 «PC 상태 확인 » 숨기기</v:String>
+    <v:String x:Key="tgl27_system">Windows 인사이더의 백그라운드 작업</v:String>
     
     <v:String x:Key="TextSlider1_description_system">마우스 포인터의 속도를 변경하여 마우스 매개변수를 검색하는 시간을 절약할 수 있습니다.</v:String>
     <v:String x:Key="TextSlider2_description_system">입력한 문자를 반복하기 시작하기 전에 지연 시간을 변경하며, 권장 값은 0입니다..</v:String>
@@ -417,9 +417,9 @@
     <v:String x:Key="TglButton22_description_system">게임을 녹화하는 기능입니다. 전반적으로 시스템의 리소스를 소모합니다. 더 나은 대안이 많이 있으며, 또한 자발적으로 열리지 않습니다.</v:String>
     <v:String x:Key="TglButton23_description_system">일부 응용 프로그램을 사용하면 백그라운드 활동을 관리할 수 있으며, 백그라운드에서 활발하게 사용하지 않을 때 백그라운드 활동이 무엇을 할 수 있는지 결정합니다. 일반적으로 백그라운드 응용 프로그램을 비활성화하면 네트워크 부하는 물론 CPU 부하와 전력 소비를 줄이는 데 도움이 되며, 이는 배터리 수명을 연장하기 때문에 노트북에 유용합니다.</v:String>
     <v:String x:Key="TglButton24_description_system">예약 저장소는 업데이트, 응용 프로그램, 임시 파일 및 시스템 캐시에서 사용할 수 있는 예상 가능한 여유 공간 할당을 제공하도록 설계되었습니다. 이를 비활성화하면 상당한 양의 공간을 확보할 수 있습니다. 그러나 충분한 여유 공간이 있는 경우 이 작업을 권장하지 않으므로 추가 혜택을 받을 수 없습니다.</v:String>
-    <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
-    <v:String x:Key="TglButton26_description_system">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
-    <v:String x:Key="TglButton27_description_system">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
+    <v:String x:Key="TglButton25_description_system">동적 타이머와 HPET를 비활성화하면 마이크로 스터터를 줄여 시스템 응답성을 향상시키고 성능을 약간 향상시킬 수 있습니다. 그러나 이 효과는 구성에 따라 달라집니다. 경우에 따라 시스템 속도가 빨라지는 대신 속도가 느려지고 지연이 발생할 수 있습니다. 노트북을 사용하는 경우 유휴 상태에서도 CPU가 더 활성화되기 때문에 전력 소비가 약간 증가할 수도 있습니다.</v:String>
+    <v:String x:Key="TglButton26_description_system">조정은 무단으로 Windows 업데이트를 통해 강제로 배포되는 Microsoft 유틸리티인 PC Health Check의 침입형 자동 설치를 차단합니다. 일단 설치되면 프로그램은 «가 Windows 11 준비 상태를 »로 확인하는 것에 대해 지속적으로 잔소리를 하고 원치 않는 « 최적화 권장 사항을 »로 푸시합니다.</v:String>
+    <v:String x:Key="TglButton27_description_system">Windows 인사이더 참가자의 경우 이러한 작업은 계속 활성화되어야 합니다. 그러나 프로그램에 참여하지 않는 경우 관련된 모든 작업은 불필요한 오버헤드가 됩니다. 시스템 리소스를 소비하고, 쓸모없는 로그를 생성하며, 아무런 이점 없이 원격 측정 연결을 시작할 수 있습니다. 이러한 작업을 비활성화하면 시작 시간과 전체 시스템 성능을 향상시키는 동시에 불필요한 실험 데이터 수집 채널도 제거할 수 있습니다.</v:String>
     <!--#endregion-->
 
     <!--#region Information System Page -->
@@ -446,7 +446,7 @@
     <v:String x:Key="text_copy_systemInformatin">복사 완료!</v:String>
     <v:String x:Key="driver_not_installed_systemInformatin">드라이버가 설치되어 있지 않습니다</v:String>
     <v:String x:Key="no_device_information_systemInformatin">장치 정보를 찾을 수 없습니다</v:String>
-    <v:String x:Key="unknown_information_systemInformatin">Not detected</v:String>
+    <v:String x:Key="unknown_information_systemInformatin">감지되지 않음</v:String>
     <!--#endregion-->
 
     <!--#region More Page -->
