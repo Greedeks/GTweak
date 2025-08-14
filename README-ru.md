@@ -132,10 +132,42 @@
 </br>
 
 ## Перевод ❤️ 
-- 한국어 - [@VenusGirl](https://github.com/VenusGirl)
-- Українська - [@Kopejkin](https://github.com/Kopejkin)
-- Français, Italiano - [@Zephyris](https://github.com/Zephyris-Pro)
-- Português Brasileiro - [@Marcos Evangelista](https://github.com/marcolinojunior)
+<p>
+  <b>Специальное спасибо</b> этим замечательным людям за их вклад в переводы
+</p>
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/VenusGirl">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/53147200?v=4&h=70&w=70&fit=cover&mask=circle" alt="VenusGirl"/>
+        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=VenusGirl"/></div>
+      </a>
+      <div><span>한국어</span></div>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Kopejkin">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/172585094?v=4&h=70&w=70&fit=cover&mask=circle" alt="Kopejkin"/>
+        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Kopejkin"/></div>
+      </a>
+      <div><span>Українська</span></div>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Zephyris-Pro">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/200662396?v=4&h=70&w=70&fit=cover&mask=circle" alt="Zephyris"/>
+        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Zephyris"/></div>
+      </a>
+      <div><span>Français, Italiano</span></div>
+    </td>
+    <td align="center">
+      <a href="https://github.com/marcolinojunior">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/63563268?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
+        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Marcos+Evangelista"/></div>
+      </a>
+      <div><span>Português Brasileiro</span></div>
+    </td>
+  </tr>
+</table>
 
 </br>
 
