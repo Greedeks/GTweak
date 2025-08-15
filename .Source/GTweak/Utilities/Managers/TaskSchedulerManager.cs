@@ -16,19 +16,20 @@ namespace GTweak.Utilities.Managers
         {
             string[] existingTasks = GetExistingTasks(tasklist);
 
-            if (existingTasks.Length == 0)
-                return false;
-
-            byte numberRunningTask = 0;
-            using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
+            if (existingTasks.Length != 0)
             {
-                numberRunningTask += (byte)(from string taskname in existingTasks
-                                            let task = taskService.GetTask(taskname)
-                                            where task != null
-                                            where task.Enabled
-                                            select taskname).Count();
+                byte numberRunningTask = 0;
+                using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
+                {
+                    numberRunningTask += (byte)(from string taskname in existingTasks
+                                                let task = taskService.GetTask(taskname)
+                                                where task != null
+                                                where task.Enabled
+                                                select taskname).Count();
+                }
+                return numberRunningTask > 0;
             }
-            return numberRunningTask > 0;
+            return false;
         }
 
         internal static void SetTaskState(bool state, params string[] tasklist)
@@ -37,17 +38,17 @@ namespace GTweak.Utilities.Managers
             {
                 string[] existingTasks = GetExistingTasks(tasklist);
 
-                if (existingTasks.Length == 0)
-                    return;
-
-                using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in existingTasks)
+                if (existingTasks.Length != 0)
                 {
-                    using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
-                    if (task != null && task.Enabled != state)
+                    using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                    foreach (string taskname in existingTasks)
                     {
-                        task.Definition.Settings.Enabled = state;
-                        task.RegisterChanges();
+                        using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                        if (task != null && task.Enabled != state)
+                        {
+                            task.Definition.Settings.Enabled = state;
+                            task.RegisterChanges();
+                        }
                     }
                 }
             });
@@ -59,15 +60,15 @@ namespace GTweak.Utilities.Managers
             {
                 string[] existingTasks = GetExistingTasks(tasklist);
 
-                if (existingTasks.Length == 0)
-                    return;
+                if (existingTasks.Length != 0)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (string task in existingTasks)
+                        sb.Append($"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ");
+                    string tasksCommand = sb.ToString().TrimEnd(' ', '&');
 
-                StringBuilder sb = new StringBuilder();
-                foreach (string task in existingTasks)
-                    sb.Append($"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ");
-                string tasksCommand = sb.ToString().TrimEnd(' ', '&');
-
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c {tasksCommand}");
+                    CommandExecutor.RunCommandAsTrustedInstaller($"/c {tasksCommand}");
+                }
             });
         }
 
@@ -78,15 +79,15 @@ namespace GTweak.Utilities.Managers
             {
                 string[] existingTasks = GetExistingTasks(tasklist);
 
-                if (existingTasks.Length == 0)
-                    return;
-
-                using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                foreach (string taskname in existingTasks)
+                if (existingTasks.Length != 0)
                 {
-                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
-                    if (task != null)
-                        taskService.RootFolder.DeleteTask(taskname);
+                    using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                    foreach (string taskname in existingTasks)
+                    {
+                        Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                        if (task != null)
+                            taskService.RootFolder.DeleteTask(taskname);
+                    }
                 }
             });
         }
