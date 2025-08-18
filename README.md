@@ -113,7 +113,7 @@ Installed platform: .NET Framework 4.8
 </br>
 
 > [!WARNING]  
-> You will have to stop the antivirus before using it
+> Before using the software, disable your antivirus. If you are using Windows Defender, add the program to its exclusions.
 </br>
 
 ## NuGet Packages
