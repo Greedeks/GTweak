@@ -94,7 +94,7 @@ namespace GTweak.Utilities.Managers
 
         internal static string GetTaskFullPath(string partialName)
         {
-            string[] files = Directory.GetFiles(PathLocator.Files.Tasks, "*", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(PathLocator.Folders.Tasks, "*", SearchOption.AllDirectories);
             string matchPath = files.FirstOrDefault(path => Path.GetFileName(path).IndexOf(partialName, StringComparison.OrdinalIgnoreCase) >= 0);
 
             if (!string.IsNullOrWhiteSpace(matchPath))
@@ -109,7 +109,7 @@ namespace GTweak.Utilities.Managers
 
             foreach (string path in tasklist)
             {
-                if (File.Exists(Path.Combine(PathLocator.Files.Tasks, path.TrimStart('\\', '/').Replace('/', '\\'))))
+                if (File.Exists(Path.Combine(PathLocator.Folders.Tasks, path.TrimStart('\\', '/').Replace('/', '\\'))))
                     foundExisting.Add(path);
             }
 

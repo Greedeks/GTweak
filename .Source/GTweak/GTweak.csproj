@@ -565,6 +565,7 @@
     <None Include="packages.config" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\hosts.gz" />
+    <None Include="Resources\NSudoLC.gz" />
     <None Include="Resources\UltPower.gz" />
     <Resource Include="Assets\Font\Jura-Medium.ttf" />
     <None Include="app.manifest" />

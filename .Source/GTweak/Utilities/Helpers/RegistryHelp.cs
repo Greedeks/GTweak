@@ -8,8 +8,6 @@ namespace GTweak.Utilities.Helpers
 {
     internal sealed class RegistryHelp : TakingOwnership
     {
-        private static readonly SE_OBJECT_TYPE objectType = Environment.Is64BitOperatingSystem ? SE_OBJECT_TYPE.SE_REGISTRY_KEY : SE_OBJECT_TYPE.SE_REGISTRY_WOW64_32KEY;
-
         private static string GeneralRegistry(RegistryKey registrykey)
         {
             return registrykey.Name switch
@@ -32,7 +30,7 @@ namespace GTweak.Utilities.Helpers
                 try
                 {
                     if (isTakingOwner)
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", objectType);
+                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
                     registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
                 }
@@ -47,7 +45,7 @@ namespace GTweak.Utilities.Helpers
                 try
                 {
                     if (isTakingOwner)
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", objectType);
+                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
                     registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
                 }
@@ -71,7 +69,7 @@ namespace GTweak.Utilities.Helpers
                 try
                 {
                     if (isTakingOwner)
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", objectType);
+                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
 
                     RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
 

@@ -81,6 +81,16 @@ namespace GTweak.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] NSudoLC {
+            get {
+                object obj = ResourceManager.GetObject("NSudoLC", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream Sound {
@@ -96,7 +106,7 @@ namespace GTweak.Properties {
         ///		&lt;product&gt;KMS&lt;/product&gt;
         ///		&lt;content&gt;
         ///			&lt;![CDATA[
-        ///			&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;genuineAuthorization xmlns=&quot;http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0&quot;&gt;&lt;version&gt;1.0&lt;/version&gt;&lt;genuineProperties origin=&quot;sppclient&quot;&gt;&lt;properties&gt;OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAwADsARw [остаток строки не уместился]&quot;;.
+        ///			&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;genuineAuthorization xmlns=&quot;http://www.microsoft.com/DRM/SL/GenuineAuthorization/1.0&quot;&gt;&lt;version&gt;1.0&lt;/version&gt;&lt;genuineProperties origin=&quot;sppclient&quot;&gt;&lt;properties&gt;OA3xOriginalProductId=;OA3xOriginalProductKey=;SessionId=TwBTAE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuAD0ANQA7AE8AUwBNAGkAbgBvAHIAVgBlAHIAcwBpAG8AbgA9ADEAOwBPAFMAUABsAGEAdABmAG8AcgBtAEkAZAA9ADIAOwBQAFAAPQAw [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string Tickets {
             get {

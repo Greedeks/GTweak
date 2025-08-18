@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Tweaks
 
     internal class ClearingMemory
     {
-        internal static bool IsWinOldExists => Directory.Exists(PathLocator.Files.WindowsOld);
+        internal static bool IsWinOldExists => Directory.Exists(PathLocator.Folders.WindowsOld);
 
         private const int SE_PRIVILEGE_ENABLED = 2;
         private const string SE_INCREASE_QUOTA_NAME = "SeIncreaseQuotaPrivilege";
@@ -185,7 +185,7 @@ namespace GTweak.Utilities.Tweaks
 
             if (shouldRemoveWinOld)
             {
-                string dir = PathLocator.Files.WindowsOld;
+                string dir = PathLocator.Folders.WindowsOld;
                 CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{dir}\"");
                 CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
                 CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /grant {Environment.UserName}:F");

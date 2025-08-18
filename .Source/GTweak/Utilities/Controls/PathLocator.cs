@@ -13,6 +13,14 @@ namespace GTweak.Utilities.Controls
             internal static readonly string SystemDrive = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
 
             internal static readonly string DefenderBackup = Path.Combine(Environment.SystemDirectory, "Config", "WDBackup_GTweak");
+
+            internal static readonly string WindowsDefender = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Windows Defender");
+
+            internal static readonly string WindowsDefenderX86 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Windows Defender");
+
+            internal static readonly string WindowsOld = Path.Combine(SystemDrive, "Windows.old");
+
+            internal static readonly string Tasks = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "Tasks");
         }
 
         internal static class Executable
@@ -40,6 +48,8 @@ namespace GTweak.Utilities.Controls
             internal static readonly string Explorer = FindExecutablePath("explorer.exe");
 
             internal static readonly string OneDrive = FindExecutablePath("onedrivesetup.exe");
+
+            internal static readonly string NSudo = Path.Combine(Folders.DefenderBackup, "NSudoLC.exe");
         }
 
         internal static class Files
@@ -57,10 +67,6 @@ namespace GTweak.Utilities.Controls
             internal static readonly string BackupDataJson = Path.Combine(Folders.DefenderBackup, "BackupData.json");
 
             internal static readonly string BackupRightsAcl = Path.Combine(Folders.DefenderBackup, "BackupRights.acl");
-
-            internal static readonly string WindowsOld = Path.Combine(Folders.SystemDrive, "Windows.old");
-
-            internal static readonly string Tasks = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "Tasks");
         }
 
         internal static class Registry

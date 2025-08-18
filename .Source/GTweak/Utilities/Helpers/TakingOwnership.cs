@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -106,7 +105,6 @@ namespace GTweak.Utilities.Helpers
             DENY_ACCESS
         }
 
-        private const string SE_DEBUG_NAME = "SeDebugPrivilege";
         private const string SE_TAKE_OWNERSHIP_NAME = "SeTakeOwnershipPrivilege";
         private static SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY =
             new SID_IDENTIFIER_AUTHORITY() { Value = new byte[] { 0, 0, 0, 0, 0, 5 } };
@@ -184,23 +182,6 @@ namespace GTweak.Utilities.Helpers
             ref EXPLICIT_ACCESS ea,
             IntPtr OldAcl,
             ref IntPtr NewAcl);
-
-        internal static bool GrantDebugPrivilege()
-        {
-            if (!OpenProcessToken(Process.GetCurrentProcess().Handle, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken))
-                return false;
-
-            if (!LookupPrivilegeValueA(null, SE_DEBUG_NAME, out LUID luid))
-                return false;
-
-            TOKEN_PRIVILEGES tp;
-            tp.PrivilegeCount = 1;
-            tp.Privileges = new LUID_AND_ATTRIBUTES[1];
-            tp.Privileges[0].Luid = luid;
-            tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-
-            return AdjustTokenPrivileges(hToken, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
-        }
 
         internal static void GrantAdministratorsAccess(string name, SE_OBJECT_TYPE type)
         {

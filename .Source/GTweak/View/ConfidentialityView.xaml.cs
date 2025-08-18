@@ -41,10 +41,10 @@ namespace GTweak.View
             if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
                 new NotificationManager(300).Show().Perform(action);
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); _confTweaks.AnalyzeAndUpdate(this); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); Application.Current.Dispatcher.Invoke(() => { _confTweaks.AnalyzeAndUpdate(this); }); });
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => _confTweaks.AnalyzeAndUpdate(this));
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => Application.Current.Dispatcher.Invoke(() => { _confTweaks.AnalyzeAndUpdate(this); }));
 
     }
 }

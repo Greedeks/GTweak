@@ -44,12 +44,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Windows Defender/Operational", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Security-Diagnostic/Operational", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows Defender\Cloud", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCmdRun.exe", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpCopyAccelerator.exe", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SgrmBroker.exe", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MsMpEng.exe", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MpDefenderCoreService.exe", Registry.LocalMachine },
             { @"Software\Microsoft\Edge", Registry.CurrentUser },
         };
 
@@ -90,7 +84,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
         }
-
 
         internal static void ImportRights()
         {

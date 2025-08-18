@@ -4,6 +4,7 @@ using GTweak.Utilities.Managers;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -207,9 +208,11 @@ namespace GTweak.Utilities.Tweaks
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         break;
                     case "Edge":
-                        TakingOwnership.GrantDebugPrivilege();
-                        foreach (string process in new string[] { "msedge.exe", "pwahelper.exe", "edgeupdate.exe", "edgeupdatem.exe", "msedgewebview2.exe", "MicrosoftEdgeUpdate.exe", "msedgewebviewhost.exe", "msedgeuserbroker.exe", "usocoreworker.exe", "RuntimeBroker.exe" })
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f /im {process} /t");
+                        foreach (string processName in new string[] { "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "msedgewebview2", "MicrosoftEdgeUpdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "RuntimeBroker" })
+                        {
+                            foreach (Process process in Process.GetProcessesByName(processName))
+                                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c taskkill /pid {process.Id} /f");
+                        }
 
                         RemoveTasks(edgeTasks);
 

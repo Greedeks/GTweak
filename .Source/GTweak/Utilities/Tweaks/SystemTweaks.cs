@@ -274,21 +274,24 @@ namespace GTweak.Utilities.Tweaks
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     break;
                 case "TglButton8":
+                    BlockWDefender(isDisabled);
                     if (canShowWindow)
                     {
                         WaitingWindow waitingWindow = new WaitingWindow();
                         waitingWindow.Show();
 
+                        ArchiveManager.Unarchive(PathLocator.Executable.NSudo, Properties.Resources.NSudoLC);
+
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { new NotificationManager().Show("info", "defender_notification").Perform(); });
                         await backgroundQueue.QueueTask(delegate { WindowsDefender.SetProtectionState(isDisabled); });
                         await backgroundQueue.QueueTask(delegate { new NotificationManager(300).Show().Restart(); });
+
+                        CommandExecutor.RunCommand($"/c timeout /t 10 && del /f \"{PathLocator.Executable.NSudo}\"");
                         waitingWindow.Close();
                     }
                     else
                         WindowsDefender.SetProtectionState(isDisabled);
-
-                    BlockWDefender(isDisabled);
                     break;
                 case "TglButton9":
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", isDisabled ? 0 : 5, RegistryValueKind.DWord);
