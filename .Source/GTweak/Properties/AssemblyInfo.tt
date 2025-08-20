@@ -20,7 +20,7 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly
 )]
 <#+
-        private const string majorVersion = "Build: 5.3.0";
+        private const string majorVersion = "Build: 5.3.1";
 
         private string GenerateVersion()
         {
