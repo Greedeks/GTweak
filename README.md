@@ -187,11 +187,14 @@ Installed platform: .NET Framework 4.8
     </pre>
 </div>
 
+- Add your language’s name (as written in your native language) to [LanguageCatalog](https://github.com/Greedeks/GTweak/Languages/LanguageCatalog.xaml).  
+  ⚠️ Make sure to follow the [NOTE](https://github.com/Greedeks/GTweak/blob/8caab74a7cf748f6a20c9d1e7c8a81821905ef9b/.Source/GTweak/Languages/LanguageCatalog.xaml#L5C4-L9C8) inside the file.
 - Submit a **Pull Request** with your changes. </br></br>
 
 **II. Request via Issue**
 - If you’re unfamiliar with Git, open a [Feature Request issue](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
   - Specify your target [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11).
+  - Provide the name of your language written in your native language according to the [NOTE](https://github.com/Greedeks/GTweak/blob/8caab74a7cf748f6a20c9d1e7c8a81821905ef9b/.Source/GTweak/Languages/LanguageCatalog.xaml#L5C4-L9C8).
   - Attach your translated `Localize.xaml` file.
 </br>
 
