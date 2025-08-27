@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <!-- NOTE:
+         - Write the language name in its native form (e.g., Français, 한국어).
+         - In parentheses () always write the short English abbreviation of the language.
+         - If there are regional variants, use the country code (e.g., Portuguese (BR) for Brazilian, Portuguese (PT) for European).
+    -->
+
+    <v:String x:Key="en_main">English (EN)</v:String>
+    <v:String x:Key="fr_main">Français (FR)</v:String>
+    <v:String x:Key="it_main">Italiano (IT)</v:String>
+    <v:String x:Key="ko_main">한국어 (KO)</v:String>
+    <v:String x:Key="pt_br_main">Português (BR)</v:String>
+    <v:String x:Key="ru_main">Русский (RU)</v:String>
+    <v:String x:Key="uk_main">Українська (UA)</v:String>
+    
+</ResourceDictionary>

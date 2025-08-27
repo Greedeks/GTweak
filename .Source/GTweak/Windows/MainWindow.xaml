@@ -240,13 +240,13 @@
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Text="{DynamicResource cmbox_lang_main}"/>
                                         <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" MaxDropDownHeight="220" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
-                                            <TextBlock Text="{DynamicResource cmbox_en_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_fr_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_it_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_ko_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_pt_br_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_ru_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_uk_main}"/>
+                                            <TextBlock Text="{DynamicResource en_main}"/>
+                                            <TextBlock Text="{DynamicResource fr_main}"/>
+                                            <TextBlock Text="{DynamicResource it_main}"/>
+                                            <TextBlock Text="{DynamicResource ko_main}"/>
+                                            <TextBlock Text="{DynamicResource pt_br_main}"/>
+                                            <TextBlock Text="{DynamicResource ru_main}"/>
+                                            <TextBlock Text="{DynamicResource uk_main}"/>
                                         </ComboBox>
                                     </StackPanel>
 
