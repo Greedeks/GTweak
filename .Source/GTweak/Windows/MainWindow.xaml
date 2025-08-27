@@ -239,27 +239,12 @@
 
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Text="{DynamicResource cmbox_lang_main}"/>
-                                        <ComboBox x:Name="LanguageSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" MaxDropDownHeight="220" ScrollViewer.VerticalScrollBarVisibility="Auto" SelectionChanged="LanguageSelectionMenu_SelectionChanged" >
-                                            <TextBlock Text="{DynamicResource en_main}"/>
-                                            <TextBlock Text="{DynamicResource fr_main}"/>
-                                            <TextBlock Text="{DynamicResource it_main}"/>
-                                            <TextBlock Text="{DynamicResource ko_main}"/>
-                                            <TextBlock Text="{DynamicResource pt_br_main}"/>
-                                            <TextBlock Text="{DynamicResource ru_main}"/>
-                                            <TextBlock Text="{DynamicResource uk_main}"/>
-                                        </ComboBox>
+                                        <ComboBox Height="25" Width="155" Margin="10,-5,0,0" MaxDropDownHeight="220" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,5,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Text="{DynamicResource cmbox_theme_main}"/>
-                                        <ComboBox x:Name="ThemeSelectionMenu" Height="25" Width="155" Margin="10,-5,0,0" SelectionChanged="ThemeSelectionMenu_SelectionChanged">
-                                            <TextBlock Text="{DynamicResource cmbox_dark_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_light_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_cobalt_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_amethyst_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_cblue_main}"/>
-                                            <TextBlock Text="{DynamicResource cmbox_system_main}"/>
-                                        </ComboBox>
+                                        <ComboBox Height="25" Width="155" Margin="10,-5,0,0" ItemsSource="{Binding Themes}" SelectedValue="{Binding SelectedTheme, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display"/>
                                     </StackPanel>
 
                                     <Border Background="{DynamicResource Color_Accent}" Height="1.2" Width="330" VerticalAlignment="Bottom" Margin="0,10,0,0" CornerRadius="10 10 0 0"/>

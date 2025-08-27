@@ -7,8 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Languages/LanguageCatalog.xaml" />
                 <ResourceDictionary Source="Languages/en/Localize.xaml" />
+                <ResourceDictionary Source="Languages/LanguageCatalog.xaml" />
                 <ResourceDictionary Source="Core/DataTemplate.xaml" />
                 <ResourceDictionary Source="Assets/Font/Font.xaml" />
                 <ResourceDictionary Source="Assets/DrawingImages/Deleted/Applications.xaml" />

@@ -5,7 +5,6 @@ using GTweak.Windows;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,17 +24,9 @@ namespace GTweak
             BtnTopMost.StateNA = Topmost = SettingsEngine.IsTopMost;
             BtnSoundNtn.IsChecked = SettingsEngine.IsPlayingSound;
             SliderVolume.Value = SettingsEngine.Volume;
-            LanguageSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsEngine.Language, "en", SettingsEngine.AvailableLangs);
-            ThemeSelectionMenu.SelectedIndex = GetSelectedIndex(SettingsEngine.Theme, "Dark", SettingsEngine.AvailableThemes);
 
             App.TweaksImported += delegate { BtnMore.IsChecked = true; };
             App.ThemeChanged += delegate { Close(); new RebootWindow().ShowDialog(); };
-        }
-
-        private int GetSelectedIndex(string value, string defaultValue, params string[] listing)
-        {
-            int index = Array.IndexOf(listing, value);
-            return index >= 0 ? index : Array.IndexOf(listing, defaultValue);
         }
 
         #region Button Title/Animation Window
@@ -116,20 +107,6 @@ namespace GTweak
             SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
             SettingsEngine.Volume = (int)SliderVolume.Value;
             SettingsEngine.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) << 16));
-        }
-
-        private void LanguageSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string selectedLang = SettingsEngine.AvailableLangs.ElementAtOrDefault(LanguageSelectionMenu.SelectedIndex) ?? SettingsEngine.AvailableLangs.Last();
-            SettingsEngine.Language = selectedLang;
-            App.Language = selectedLang;
-        }
-
-        private void ThemeSelectionMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string selectedTheme = SettingsEngine.AvailableThemes.ElementAtOrDefault(ThemeSelectionMenu.SelectedIndex) ?? SettingsEngine.AvailableThemes.Last();
-            SettingsEngine.Theme = selectedTheme;
-            App.Theme = selectedTheme;
         }
 
         private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.SaveFileConfig();

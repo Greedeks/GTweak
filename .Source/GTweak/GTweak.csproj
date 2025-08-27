@@ -248,6 +248,7 @@
     <Compile Include="Assets\UserControl\ProggressRing.xaml.cs">
       <DependentUpon>ProggressRing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Model\MainModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemVM.cs" />
     <Compile Include="Core\ViewModel\InterfaceVM.cs" />
     <Compile Include="Assets\UserControl\Card.xaml.cs">

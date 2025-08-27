@@ -9,7 +9,7 @@ namespace GTweak.Core.ViewModel
 {
     internal class DataSystemVM : ViewModelBase
     {
-        private readonly DataSystemModel _model;
+        private readonly DataSystemModel _model = new DataSystemModel();
         private ObservableCollection<DataSystemModel> _collection;
 
         public ObservableCollection<DataSystemModel> DisplayData
@@ -61,8 +61,6 @@ namespace GTweak.Core.ViewModel
 
         public DataSystemVM()
         {
-            _model = new DataSystemModel();
-
             DisplayData = new ObservableCollection<DataSystemModel>
             {
                 CreateModelCollection("OSName", SystemDiagnostics.HardwareData.OS.Name, "unknown_information_systemInformatin"),

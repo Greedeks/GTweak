@@ -19,7 +19,7 @@ namespace GTweak.Utilities.Controls
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
         internal static readonly string[] AvailableLangs = { "en", "fr", "it", "ko", "pt-br", "ru", "uk" };
-        internal static readonly string[] AvailableThemes = { "Dark", "Light", "Cobalt", "Dark amethyst", "Cold Blue", "System" };
+        internal static readonly string[] AvailableThemes = { "dark", "light", "cobalt", "amethyst", "cblue", "system" };
 
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
@@ -34,7 +34,7 @@ namespace GTweak.Utilities.Controls
             ["EnableSound"] = true,
             ["VolumeLevel"] = 50,
             ["Language"] = SystemDiagnostics.GetCurrentSystemLang().Code,
-            ["Theme"] = "Dark"
+            ["Theme"] = AvailableThemes.First()
         };
 
         private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);

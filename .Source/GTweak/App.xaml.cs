@@ -114,17 +114,17 @@ namespace GTweak
         {
             set
             {
-                value ??= "Dark";
+                value ??= SettingsEngine.AvailableThemes.First();
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
                     Source = value switch
                     {
-                        "Dark" => GetResourceUri("Dark", true),
-                        "Light" => GetResourceUri("Light", true),
-                        "Cobalt" => GetResourceUri("Cobalt", true),
-                        "Dark amethyst" => GetResourceUri("Dark amethyst", true),
-                        "Cold Blue" => GetResourceUri("Cold Blue", true),
+                        "dark" => GetResourceUri("Dark", true),
+                        "light" => GetResourceUri("Light", true),
+                        "cobalt" => GetResourceUri("Cobalt", true),
+                        "amethyst" => GetResourceUri("Dark amethyst", true),
+                        "cblue" => GetResourceUri("Cold Blue", true),
                         _ => RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", string.Empty) == "0" ? GetResourceUri("Dark", true) : GetResourceUri("Light", true)
                     }
                 };
