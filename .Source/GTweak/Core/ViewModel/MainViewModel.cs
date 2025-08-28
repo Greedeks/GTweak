@@ -6,10 +6,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace GTweak.Core.ViewModel
 {
@@ -86,7 +86,7 @@ namespace GTweak.Core.ViewModel
         public MainViewModel()
         {
             App.TweaksImported += delegate { CurrentView = new MoreVM(); };
-            App.LanguageChanged += delegate { FillThemes(); };
+            App.LanguageChanged += delegate { Application.Current.Dispatcher.Invoke(FillThemes); };
 
             ConfidentialityCommand = new RelayCommand(Confidentiality);
             InterfaceCommand = new RelayCommand(Interface);
@@ -98,28 +98,25 @@ namespace GTweak.Core.ViewModel
 
             CurrentView = new MoreVM();
 
-            Task.Run(() =>
+            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                Application.Current.Dispatcher.Invoke(FillLanguages);
-                Application.Current.Dispatcher.Invoke(FillThemes);
-            });
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    FillLanguages();
+                    FillThemes();
+                }), DispatcherPriority.ApplicationIdle);
+            }
         }
 
         private void FillLanguages()
         {
             Languages.Clear();
-            ResourceDictionary dictionary = Application.Current.Resources.MergedDictionaries.FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("LanguageCatalog.xaml")) ?? Application.Current.Resources;
+            ResourceDictionary dictionary = new ResourceDictionary { Source = new Uri($"Languages/LanguageCatalog.xaml", UriKind.Relative) };
 
             foreach (string code in SettingsEngine.AvailableLangs)
-            {
-                string key = $"{code.Replace("-", "_")}_main";
-                string display = dictionary[key] as string ?? code;
-                Languages.Add(new MainModel.LanguageItem { Code = code, Display = display });
-            }
+                Languages.Add(new MainModel.LanguageItem { Code = code, Display = dictionary[$"{code.Replace("-", "_")}_main"] as string ?? code });
 
-            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-                SelectedLanguage = SettingsEngine.AvailableLangs.Contains(SettingsEngine.Language) ? SettingsEngine.Language : SettingsEngine.AvailableLangs.FirstOrDefault();
-
+            SelectedLanguage = SettingsEngine.AvailableLangs.Contains(SettingsEngine.Language) ? SettingsEngine.Language : SettingsEngine.AvailableLangs.FirstOrDefault();
         }
 
         private void FillThemes()
@@ -130,11 +127,7 @@ namespace GTweak.Core.ViewModel
                 Themes.Clear();
 
                 foreach (string code in SettingsEngine.AvailableThemes)
-                {
-                    string key = $"cmbox_{code}_main";
-                    string display = Application.Current.Resources[key] as string ?? code;
-                    Themes.Add(new MainModel.ThemeItem { Code = code, Display = display });
-                }
+                    Themes.Add(new MainModel.ThemeItem { Code = code, Display = Application.Current.Resources[$"cmbox_{code}_main"] as string ?? code });
 
                 SelectedTheme = SettingsEngine.AvailableThemes.Contains(SettingsEngine.Theme) ? SettingsEngine.Theme : SettingsEngine.AvailableThemes.FirstOrDefault();
             }

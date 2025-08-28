@@ -6,7 +6,6 @@ using Microsoft.Win32;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,7 +19,7 @@ namespace GTweak.Utilities.Controls
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
-        internal static readonly string[] AvailableLangs = !DesignerProperties.GetIsInDesignMode(new DependencyObject()) ? new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_main", "").Replace("_", "-")).OrderBy(lang => lang, StringComparer.OrdinalIgnoreCase).ToArray() : Array.Empty<string>();
+        internal static readonly string[] AvailableLangs = new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_main", "").Replace("_", "-")).OrderBy(lang => lang, StringComparer.OrdinalIgnoreCase).ToArray();
         internal static readonly string[] AvailableThemes = { "dark", "light", "cobalt", "amethyst", "cblue", "system" };
 
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
