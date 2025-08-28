@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -97,8 +98,11 @@ namespace GTweak.Core.ViewModel
 
             CurrentView = new MoreVM();
 
-            FillLanguages();
-            FillThemes();
+            Task.Run(() =>
+            {
+                Application.Current.Dispatcher.Invoke(FillLanguages);
+                Application.Current.Dispatcher.Invoke(FillThemes);
+            });
         }
 
         private void FillLanguages()

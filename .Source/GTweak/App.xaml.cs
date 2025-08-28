@@ -85,12 +85,9 @@ namespace GTweak
                 {
                     Source = value switch
                     {
-                        "fr" => GetResourceUri("fr"),
-                        "it" => GetResourceUri("it"),
-                        "ko" => GetResourceUri("ko"),
+                        "be" => GetResourceUri("ru"),
                         _ when code == "pt" && region == "br" => GetResourceUri("pt-br"),
-                        _ when new[] { "ru", "be" }.Contains(value) => GetResourceUri("ru"),
-                        "uk" => GetResourceUri("uk"),
+                        _ when SettingsEngine.AvailableLangs?.Contains(value, StringComparer.OrdinalIgnoreCase) == true => GetResourceUri(value),
                         _ => GetResourceUri("en")
                     }
                 };
