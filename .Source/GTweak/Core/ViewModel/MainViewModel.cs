@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace GTweak.Core.ViewModel
 {
@@ -86,7 +85,7 @@ namespace GTweak.Core.ViewModel
         public MainViewModel()
         {
             App.TweaksImported += delegate { CurrentView = new MoreVM(); };
-            App.LanguageChanged += delegate { Application.Current.Dispatcher.Invoke(FillThemes); };
+            App.LanguageChanged += delegate { Application.Current.Dispatcher.BeginInvoke(new Action(FillThemes)); };
 
             ConfidentialityCommand = new RelayCommand(Confidentiality);
             InterfaceCommand = new RelayCommand(Interface);
@@ -104,7 +103,7 @@ namespace GTweak.Core.ViewModel
                 {
                     FillLanguages();
                     FillThemes();
-                }), DispatcherPriority.ApplicationIdle);
+                }));
             }
         }
 

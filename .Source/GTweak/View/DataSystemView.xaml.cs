@@ -56,21 +56,21 @@ namespace GTweak.View
                     AnimationProgressBars();
                     _ = Dispatcher.BeginInvoke(new Action(async () =>
                     {
-                        Processes.Text = MonitoringService.GetNumberRunningProcesses =  await Task.Run(() => _systemDiagnostics.GetProcessCount());
-                        Services.Text =  MonitoringService.GetNumberRunningService = await Task.Run(() => _systemDiagnostics.GetServicesCount());
+                        MonitoringService.GetNumberRunningProcesses = await Task.Run(() => _systemDiagnostics.GetProcessCount());
+                        MonitoringService.GetNumberRunningService = await Task.Run(() => _systemDiagnostics.GetServicesCount());
                     }));
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
                 {
                     await backgroundQueue.QueueTask(delegate { _systemDiagnostics.GetUserIpAddress(); });
-                    Dispatcher.Invoke(() => DataContext = new DataSystemVM());
+                    _ = Dispatcher.BeginInvoke(new Action(() => { DataContext = new DataSystemVM(); }));
                 }
 
-                Dispatcher.Invoke(() =>
+                _ = Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
-                });
+                }));
             });
             _timer.Start();
 
