@@ -40,7 +40,7 @@
                 </TextBlock.Triggers>
             </TextBlock>
 
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00,20,0,0">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00,18,0,0">
                 <Border BorderBrush="{StaticResource Color_Accent}" CornerRadius="50" Width="75" Height="75" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Border CornerRadius="50">
                         <Border.Effect>
@@ -58,7 +58,7 @@
                 </Path>
             </Grid>
 
-            <TextBlock x:Name="TextLoad" Text="{DynamicResource step1_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" Margin="0,14,0,0"/>
+            <TextBlock x:Name="TextLoad" Text="{DynamicResource step1_load}" MaxHeight="30" MaxWidth="160" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap" Margin="0,14,0,0"/>
         </StackPanel>
     </Grid>
 

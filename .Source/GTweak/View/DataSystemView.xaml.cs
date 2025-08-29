@@ -22,14 +22,11 @@ namespace GTweak.View
     {
         private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
-        private readonly TimerControlManager _timer = default;
+        private TimerControlManager _timer = default;
 
         public DataSystemView()
         {
             InitializeComponent();
-
-            RAMLoad.Value = _systemDiagnostics.GetMemoryUsage;
-            CPULoad.Value = MonitoringService.GetProcessorUsage;
 
             App.LanguageChanged += delegate
             {
@@ -48,12 +45,26 @@ namespace GTweak.View
                 }));
             };
 
+            StartMonitoringData();
+
+            Unloaded += delegate { _timer.Stop(); };
+            Loaded += delegate { _timer.Start(); };
+        }
+
+        private void StartMonitoringData()
+        {
+            RAMLoad.Value = Task.Run(() => _systemDiagnostics.GetMemoryUsage).Result;
+            CPULoad.Value = MonitoringService.GetProcessorUsage;
+
             _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
             {
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
+
                     await backgroundQueue.QueueTask(async delegate { await _systemDiagnostics.GetTotalProcessorUsage(); });
-                    AnimationProgressBars();
+                    var ramTask = Task.Run(() => _systemDiagnostics.GetMemoryUsage);
+                    double ram = ramTask.Result;
+                    AnimationProgressBars(MonitoringService.GetProcessorUsage, ram);
                     _ = Dispatcher.BeginInvoke(new Action(async () =>
                     {
                         MonitoringService.GetNumberRunningProcesses = await Task.Run(() => _systemDiagnostics.GetProcessCount());
@@ -72,19 +83,17 @@ namespace GTweak.View
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
                 }));
             });
-            _timer.Start();
-
-            Unloaded += delegate { _timer.Stop(); };
         }
 
-        private void AnimationProgressBars()
+        private void AnimationProgressBars(double cpuValue, double ramValue)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                CPULoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, MonitoringService.GetProcessorUsage, 0.2));
-                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, _systemDiagnostics.GetMemoryUsage, 0.2));
+                CPULoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, cpuValue, 0.2));
+                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, ramValue, 0.2));
             }));
         }
+
         private void AnimationPopup()
         {
             PopupCopy.IsOpen = true;
