@@ -15,8 +15,8 @@ namespace GTweak.Utilities.Configuration
         private readonly List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)> _watcherHandler = new List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)>();
         private readonly ServiceController[] _servicesList = ServiceController.GetServices();
 
-        internal string GetNumberRunningProcesses => GetProcessCount().Result;
-        internal string GetNumberRunningService => GetServicesCount().Result;
+        internal static string GetNumberRunningProcesses { get; set; } = "...";
+        internal static string GetNumberRunningService { get; set; } = "...";
         internal int GetMemoryUsage => GetPhysicalAvailableMemory().Result;
         internal static int GetProcessorUsage { get; private set; } = 1;
 
@@ -60,8 +60,7 @@ namespace GTweak.Utilities.Configuration
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool GetSystemTimes(out SystemTime lpIdleTime, out SystemTime lpKernelTime, out SystemTime lpUserTime);
 
-
-        private async Task<string> GetProcessCount()
+        internal async Task<string> GetProcessCount()
         {
             return await Task.Run(() =>
             {
@@ -92,7 +91,7 @@ namespace GTweak.Utilities.Configuration
             }).ConfigureAwait(false);
         }
 
-        private async Task<string> GetServicesCount()
+        internal async Task<string> GetServicesCount()
         {
             return await Task.Run(() =>
             {
@@ -186,21 +185,17 @@ namespace GTweak.Utilities.Configuration
 
         internal void StopDeviceMonitoring()
         {
-            Task.Run(() =>
+            foreach ((ManagementEventWatcher watcher, EventArrivedEventHandler handler) in _watcherHandler)
             {
-                Parallel.ForEach(_watcherHandler, tuple =>
+                try
                 {
-                    var (watcher, handler) = tuple;
-                    try
-                    {
-                        watcher.EventArrived -= handler;
-                        watcher.Stop();
-                        watcher.Dispose();
-                    }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                });
-                _watcherHandler.Clear();
-            });
+                    watcher.EventArrived -= handler;
+                    watcher.Stop();
+                    watcher.Dispose();
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            }
+            _watcherHandler.Clear();
         }
     }
 }

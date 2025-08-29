@@ -60,6 +60,8 @@ namespace GTweak.Windows
                 () => ExecuteWithLogging(new SystemTweaks().ViewConfigTick, nameof(SystemTweaks.ViewConfigTick))
             );
 
+            ExecuteWithLogging(() => MonitoringService.GetNumberRunningProcesses = new SystemDiagnostics().GetProcessCount().Result, nameof(MonitoringService.GetProcessCount));
+            ExecuteWithLogging(() => MonitoringService.GetNumberRunningService = new SystemDiagnostics().GetServicesCount().Result, nameof(MonitoringService.GetServicesCount));
             ExecuteWithLogging(() => new MonitoringService().GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(MonitoringService.GetTotalProcessorUsage));
         }
 

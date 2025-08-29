@@ -6,6 +6,7 @@ using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -32,16 +33,19 @@ namespace GTweak.View
 
             App.LanguageChanged += delegate
             {
-                Dispatcher.Invoke(() =>
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (new Dictionary<SystemDiagnostics.ConnectionStatus, string>
                     {
                         { SystemDiagnostics.ConnectionStatus.Lose, "connection_lose_systemInformation" },
                         { SystemDiagnostics.ConnectionStatus.Block, "connection_block_systemInformation" },
                         { SystemDiagnostics.ConnectionStatus.Limited, "connection_limited_systemInformation" }
-                    }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey)) { SystemDiagnostics.HardwareData.UserIPAddress = (string)FindResource(resourceKey); }
-                    DataContext = new DataSystemVM();
-                });
+                    }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey))
+                    {
+                        SystemDiagnostics.HardwareData.UserIPAddress = (string)FindResource(resourceKey);
+                        DataContext = new DataSystemVM();
+                    }
+                }));
             };
 
             _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
@@ -50,6 +54,11 @@ namespace GTweak.View
                 {
                     await backgroundQueue.QueueTask(async delegate { await _systemDiagnostics.GetTotalProcessorUsage(); });
                     AnimationProgressBars();
+                    _ = Dispatcher.BeginInvoke(new Action(async () =>
+                    {
+                        Processes.Text = MonitoringService.GetNumberRunningProcesses =  await Task.Run(() => _systemDiagnostics.GetProcessCount());
+                        Services.Text =  MonitoringService.GetNumberRunningService = await Task.Run(() => _systemDiagnostics.GetServicesCount());
+                    }));
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
                 {
@@ -70,11 +79,11 @@ namespace GTweak.View
 
         private void AnimationProgressBars()
         {
-            Dispatcher.Invoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 CPULoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, MonitoringService.GetProcessorUsage, 0.2));
                 RAMLoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, _systemDiagnostics.GetMemoryUsage, 0.2));
-            });
+            }));
         }
         private void AnimationPopup()
         {
