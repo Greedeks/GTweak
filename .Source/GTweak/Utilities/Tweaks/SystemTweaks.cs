@@ -30,7 +30,9 @@ namespace GTweak.Utilities.Tweaks
     internal sealed class SystemTweaks : FirewallManager
     {
         private static bool _isNetshState = false, _isBluetoothStatus = false, _isTickState = false;
-        private readonly string _activeGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);
+        private static string _currentPowerGuid = string.Empty;
+
+        internal SystemTweaks() { _currentPowerGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty); }
 
         internal void AnalyzeAndUpdate(SystemView systemV)
         {
@@ -129,8 +131,8 @@ namespace GTweak.Utilities.Tweaks
             systemV.TglButton17.StateNA =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", "1");
 
-            systemV.TglButton18.StateNA = !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_activeGuid}", "Description", string.Empty).Contains("-18") &&
-                                          !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_activeGuid}", "FriendlyName", string.Empty).Contains("-19");
+            systemV.TglButton18.StateNA = !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "Description", string.Empty).Contains("-18") &&
+                                          !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "FriendlyName", string.Empty).Contains("-19");
 
             systemV.TglButton19.StateNA = _isBluetoothStatus;
 
@@ -467,8 +469,10 @@ namespace GTweak.Utilities.Tweaks
                 {
                     StartInfo = {
                         FileName = PathLocator.Executable.PowerCfg,
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        UseShellExecute = true,
+                        Verb = "runas",
+                        CreateNoWindow = true
                     },
                 };
 
@@ -485,6 +489,8 @@ namespace GTweak.Utilities.Tweaks
                             if (RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "Description", string.Empty).Contains("-18") &&
                             RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{searchScheme}", "FriendlyName", string.Empty).Contains("-19"))
                             {
+                                _currentPowerGuid = searchScheme;
+
                                 using (_powercfg)
                                 {
                                     _powercfg.StartInfo.Arguments = $"/setactive {searchScheme}";
@@ -519,6 +525,7 @@ namespace GTweak.Utilities.Tweaks
                                 _powercfg.Start();
                             }
 
+                            _currentPowerGuid = _guid;
                             CommandExecutor.RunCommand($"/c timeout /t 10 && rd /s /q \"{PathLocator.Folders.Workspace}\"");
                         }
                     }
@@ -545,6 +552,8 @@ namespace GTweak.Utilities.Tweaks
 
                         if (!string.IsNullOrEmpty(selectedScheme))
                         {
+                            _currentPowerGuid = selectedScheme;
+
                             using (_powercfg)
                             {
                                 _powercfg.StartInfo.Arguments = $"/setactive {selectedScheme}";
