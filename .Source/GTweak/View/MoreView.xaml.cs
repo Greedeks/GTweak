@@ -54,7 +54,7 @@ namespace GTweak.View
             }
 
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { ClearingMemory.StartMemoryCleanupAsync(_isWinOldRemoval); });
+            await backgroundQueue.QueueTask(delegate { ClearingMemory.StartMemoryCleanup(_isWinOldRemoval); });
             await backgroundQueue.QueueTask(delegate { new NotificationManager(500).Show("info", "clear_ram_notification").Perform(); });
         }
 

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
@@ -178,7 +179,7 @@ namespace GTweak.Utilities.Tweaks
             return num != 0;
         }
 
-        internal static void StartMemoryCleanupAsync(bool shouldRemoveWinOld = false)
+        internal static void StartMemoryCleanup(bool shouldRemoveWinOld = false)
         {
             ClearFileSystemCache(true);
             EmptyWorkingSetFunction();
@@ -190,6 +191,15 @@ namespace GTweak.Utilities.Tweaks
                 CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
                 CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /grant {Environment.UserName}:F");
                 CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{dir}\"");
+
+                Thread.Sleep(2000);
+
+                if (Directory.Exists(dir))
+                {
+                    try { Directory.Delete(dir, true); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    TakingOwnership.GrantAdministratorsAccess(dir, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
+                    CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{dir}\"");
+                }
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller(@$"/c rd /s /q {PathLocator.Folders.SystemDrive}Windows\Temp & " +

@@ -211,7 +211,7 @@ namespace GTweak.Utilities.Tweaks
                         foreach (string processName in new string[] { "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "msedgewebview2", "MicrosoftEdgeUpdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "RuntimeBroker" })
                         {
                             foreach (Process process in Process.GetProcessesByName(processName))
-                                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c taskkill /pid {process.Id} /f");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /pid {process.Id} /f");
                         }
 
                         RemoveTasks(edgeTasks);
@@ -254,12 +254,14 @@ namespace GTweak.Utilities.Tweaks
                             CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName}:F");
                             CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
 
-                            Thread.Sleep(1000);
+                            Thread.Sleep(2000);
 
                             if (Directory.Exists(path))
                             {
+                                try { Directory.Delete(path, true); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                                 TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
+                                Thread.Sleep(2000);
                             }
                         }
 

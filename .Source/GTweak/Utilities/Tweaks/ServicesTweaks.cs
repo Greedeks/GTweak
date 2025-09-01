@@ -447,10 +447,11 @@ namespace GTweak.Utilities.Tweaks
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName}:F");
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
 
-                                Thread.Sleep(1000);
+                                Thread.Sleep(2000);
 
                                 if (Directory.Exists(path))
                                 {
+                                    try { Directory.Delete(path, true); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                                     TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                     CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
                                 }
