@@ -338,8 +338,7 @@ namespace GTweak.Utilities.Configuration
                     22 => "FBD2",
                     23 => "DDR3",
                     24 => "DDR3",
-                    25 => "DDR4",
-                    26 => "DDR4",
+                    uint type when type == 25 || type == 26 => "DDR4",
                     27 => "LPDDR",
                     28 => "LPDDR2",
                     29 => "LPDDR3",
@@ -365,19 +364,24 @@ namespace GTweak.Utilities.Configuration
         {
             StringBuilder result = new StringBuilder();
 
+            static string GetStorageType(object mediaType)
+            {
+                (object[] Keys, string Type)[] map = new (object[] Keys, string Type)[]
+                {
+                    (new object[] { (ushort)3, "Removable Media" }, "(HDD)"),
+                    (new object[] { (ushort)4, "Fixed hard disk media" }, "(SSD)"),
+                    (new object[] { (ushort)5, "Unknown" }, "(SCM)")
+                };
+                return map.FirstOrDefault(x => x.Keys.Contains(mediaType)).Type ?? "(Unspecified)";
+            }
+
             if (isMsftAvailable)
             {
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     string data = new[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                     ushort mediaType = managementObj["MediaType"] != null ? (ushort)managementObj["MediaType"] : (ushort)0;
-                    string storageType = mediaType switch
-                    {
-                        3 => "(HDD)",
-                        4 => "(SSD)",
-                        5 => "(SCM)",
-                        _ => "(Unspecified)"
-                    };
+                    string storageType = GetStorageType(mediaType);
 
                     if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
                         storageType = "(Media-Type)";
@@ -391,15 +395,9 @@ namespace GTweak.Utilities.Configuration
                 {
                     string data = new[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                     string mediaType = managementObj["MediaType"] as string ?? string.Empty;
-                    string storageType = mediaType switch
-                    {
-                        "Removable Media" => "(HDD)",
-                        "Fixed hard disk media" => "(SSD)",
-                        "Unknown" => "(SCM)",
-                        _ => "(Unspecified)"
-                    };
-
+                    string storageType = GetStorageType(mediaType);
                     string interfaceType = managementObj["InterfaceType"] as string ?? string.Empty;
+
                     if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
                         storageType = "(Media-Type)";
 
