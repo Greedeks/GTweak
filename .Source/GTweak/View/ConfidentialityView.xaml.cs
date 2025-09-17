@@ -16,6 +16,7 @@ namespace GTweak.View
         public ConfidentialityView()
         {
             InitializeComponent();
+            throw new ApplicationException("Внешняя ошибка!");
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)

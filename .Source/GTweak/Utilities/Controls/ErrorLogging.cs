@@ -41,8 +41,28 @@ namespace GTweak.Utilities.Controls
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                 {
                     string headerLine = "---------------------------------------------------------";
+                    Exception currentEx = ex;
+                    byte exLevel = 1;
+
                     await writer.WriteLineAsync($"GTweak has crashed!\n{headerLine}\nIf you wish to report this, please open an issue here:\nhttps://github.com/Greedeks/GTweak/issues\n{headerLine}\n");
-                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {SystemDiagnostics.HardwareData.OS.Name}\n{headerLine}\n\nMember: {memberName}\nError: {ex.Message}\nStack Trace:\n{ex.StackTrace}\n");
+                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {SystemDiagnostics.HardwareData.OS.Name}\n{headerLine}\n");
+
+                    while (currentEx != null)
+                    {
+                        await writer.WriteLineAsync($"Exception Level: {exLevel}");
+
+                        if (exLevel == 1)
+                            await writer.WriteLineAsync($"Member: {memberName}");
+
+                        await writer.WriteLineAsync($"Type: {currentEx.GetType().FullName}");
+                        await writer.WriteLineAsync($"Error: {currentEx.Message}");
+                        await writer.WriteLineAsync($"Stack Trace:\n{currentEx.StackTrace}");
+                        await writer.WriteLineAsync($"\n{headerLine}\n");
+
+                        currentEx = currentEx.InnerException;
+                        exLevel++;
+                    }
+
                     await writer.FlushAsync();
                 }
 
