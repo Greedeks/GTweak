@@ -1,0 +1,62 @@
+name:  Build with HintPath Fix
+
+on:
+  pull_request:
+    paths:
+      - 'packages.config'
+      - '**/*.csproj'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+
+      - name: Restore packages
+        run: nuget restore YourSolution.sln
+
+      - name: Build solution
+        run: msbuild YourSolution.sln /p:Configuration=Release
+
+      - name: Fix HintPath inline
+        shell: pwsh
+        run: |
+          Write-Host "Fixing HintPath in csproj files..."
+          $solutionDir = "${{ github.workspace }}"
+          
+          $packagesFiles = Get-ChildItem -Path $solutionDir -Recurse -Filter "packages.config"
+          
+          foreach ($packagesFile in $packagesFiles) {
+              Write-Host "Processing $($packagesFile.FullName)"
+              [xml]$xml = Get-Content $packagesFile.FullName
+              
+              foreach ($package in $xml.packages.package) {
+                  $id = $package.id
+                  $version = $package.version
+
+                  $csprojFiles = Get-ChildItem -Path $packagesFile.DirectoryName -Recurse -Filter "*.csproj"
+                  
+                  foreach ($csproj in $csprojFiles) {
+                      [xml]$projXml = Get-Content $csproj.FullName
+                      $ns = @{msb='http://schemas.microsoft.com/developer/msbuild/2003'}
+
+                      $refs = $projXml.SelectNodes("//msb:Reference[contains(@Include,'$id')]", $ns)
+                      foreach ($ref in $refs) {
+                          $hintNode = $ref.HintPath
+                          if ($hintNode) {
+                              $newHint = "..\..\packages\$id.$version\lib\net45\$id.dll"
+                              Write-Host "Updating HintPath in $($csproj.FullName) for $id -> $newHint"
+                              $hintNode.'#text' = $newHint
+                          }
+                      }
+
+                      $projXml.Save($csproj.FullName)
+                  }
+              }
+          }
+          Write-Host "HintPath fix completed."

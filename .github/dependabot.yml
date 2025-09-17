@@ -7,3 +7,5 @@ updates:
     open-pull-requests-limit: 10
     commit-message:
       prefix: "update"
+    allow:
+      - dependency-type: "direct"
