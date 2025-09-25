@@ -3,7 +3,6 @@ using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -38,9 +37,7 @@ namespace GTweak.View
 
             new NotificationManager(300).Show().Restart();
 
-            Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); Application.Current.Dispatcher.Invoke(() => { _svcTweaks.AnalyzeAndUpdate(this); }); });
+            Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); _svcTweaks.AnalyzeAndUpdate(); });
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => Application.Current.Dispatcher.Invoke(() => { _svcTweaks.AnalyzeAndUpdate(this); }));
     }
 }

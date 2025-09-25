@@ -76,10 +76,7 @@ namespace GTweak.View
             if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
                 new NotificationManager(300).Show().Perform(action);
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); Application.Current.Dispatcher.Invoke(() => { _intfTweaks.AnalyzeAndUpdate(this); }); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); _intfTweaks.AnalyzeAndUpdate(); });
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => Application.Current.Dispatcher.Invoke(() => { _intfTweaks.AnalyzeAndUpdate(this); }));
-
     }
 }

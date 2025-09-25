@@ -248,13 +248,21 @@
     <Compile Include="Assets\UserControl\ProggressRing.xaml.cs">
       <DependentUpon>ProggressRing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\BasePageVM.cs" />
+    <Compile Include="Core\Model\InterfaceModel.cs" />
+    <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\MainModel.cs" />
+    <Compile Include="Core\Model\ServicesModel.cs" />
+    <Compile Include="Core\Model\SystemModel.cs" />
+    <Compile Include="Core\ViewModel\ConfidentialityVM.cs" />
     <Compile Include="Core\ViewModel\DataSystemVM.cs" />
     <Compile Include="Core\ViewModel\InterfaceVM.cs" />
     <Compile Include="Assets\UserControl\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Model\DataSystemModel.cs" />
+    <Compile Include="Core\ViewModel\ServicesVM.cs" />
+    <Compile Include="Core\ViewModel\SystemVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

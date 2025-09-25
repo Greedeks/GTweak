@@ -52,12 +52,10 @@ namespace GTweak.View
                 if (NotificationManager.SysActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
                     new NotificationManager(300).Show().Perform(action);
 
-                Parallel.Invoke(async delegate { await Task.Delay(1000); Application.Current.Dispatcher.Invoke(() => { _sysTweaks.AnalyzeAndUpdate(this); }); });
+                Parallel.Invoke(async delegate { await Task.Delay(1000); _sysTweaks.AnalyzeAndUpdate(); });
             }
             else
                 _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => { Application.Current.Dispatcher.Invoke(() => { _sysTweaks.AnalyzeAndUpdate(this); }); });
     }
 }

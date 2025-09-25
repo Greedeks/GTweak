@@ -88,7 +88,11 @@ namespace GTweak.Utilities.Configuration
         internal static bool IsNeedUpdate { get; private set; } = false;
         internal static string DownloadVersion { get; private set; } = string.Empty;
 
-        internal static Dictionary<byte, bool> IsWindowsVersion = default;
+        internal static Dictionary<byte, bool> IsWindowsVersion = new Dictionary<byte, bool>
+        {
+            { 10, default },
+            { 11, default }
+        };
 
         internal static bool isIPAddressFormatValid = false, isMsftAvailable = false;
 
@@ -178,12 +182,9 @@ namespace GTweak.Utilities.Configuration
                 HardwareData.OS.Name = $"{data.Substring(data.IndexOf('W'))} {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
                 HardwareData.OS.Version = $"{(string)managementObj["Version"]}.{revisionNumber}\n";
                 HardwareData.OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : Convert.ToDecimal(Registry.GetValue(regPath, "CurrentBuild", 0)?.ToString());
+                IsWindowsVersion[10] = HardwareData.OS.Name.Contains("10");
+                IsWindowsVersion[11] = HardwareData.OS.Name.Contains("11");
 
-                IsWindowsVersion = new Dictionary<byte, bool>()
-                {
-                    { 11, HardwareData.OS.Name.Contains("11") },
-                    { 10, HardwareData.OS.Name.Contains("10") }
-                };
             }
             HardwareData.OS.Name = !string.IsNullOrWhiteSpace(HardwareData.OS.Name) ? HardwareData.OS.Name.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "ProductName", "Windows")?.ToString();
             HardwareData.OS.Version = !string.IsNullOrWhiteSpace(HardwareData.OS.Version) ? HardwareData.OS.Version.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "LCUVer", 0)?.ToString();

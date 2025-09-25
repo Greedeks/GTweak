@@ -3,7 +3,6 @@ using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 using System;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -16,7 +15,6 @@ namespace GTweak.View
         public ConfidentialityView()
         {
             InitializeComponent();
-            throw new ApplicationException("Внешняя ошибка!");
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
@@ -42,10 +40,7 @@ namespace GTweak.View
             if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
                 new NotificationManager(300).Show().Perform(action);
 
-            Parallel.Invoke(async delegate { await Task.Delay(1000); Application.Current.Dispatcher.Invoke(() => { _confTweaks.AnalyzeAndUpdate(this); }); });
+            Parallel.Invoke(async delegate { await Task.Delay(1000); _confTweaks.AnalyzeAndUpdate(); });
         }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Parallel.Invoke(() => Application.Current.Dispatcher.Invoke(() => { _confTweaks.AnalyzeAndUpdate(this); }));
-
     }
 }
