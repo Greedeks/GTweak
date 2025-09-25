@@ -19,14 +19,34 @@ namespace GTweak.Assets.UserControl
         private readonly LinearGradientBrush brushOffColor = new LinearGradientBrush(), brushOnColor = new LinearGradientBrush();
         private bool _state = false;
         private readonly Thickness _leftPosition = new Thickness(4, 0, 0, 0), _rightPosition = new Thickness(42, 0, 0, 0);
+
         /// <summary>
         /// Changes the state of a Toggle Button with animation
         /// </summary>
         internal bool State { get => _state; set { _state = value; UpdateToggleState(_state); } }
+
         /// <summary>
         /// Changes the state of a ToggleButton without animation
         /// </summary>
-        internal bool StateNA { get => _state; set { _state = value; UpdateToggleState(_state, true); } }
+        internal bool StateNA
+        {
+            get => (bool)GetValue(StateNAProperty);
+            set => SetValue(StateNAProperty, value);
+        }
+
+        /// <summary>
+        /// Dependency property used for binding without triggering animations
+        /// </summary>
+        internal static readonly DependencyProperty StateNAProperty = DependencyProperty.Register(nameof(StateNA), typeof(bool), typeof(ToggleButton), new PropertyMetadata(false, (d, e) =>
+        {
+            if (d is ToggleButton tbtn)
+            {
+                bool newValue = (bool)e.NewValue;
+                tbtn._state = newValue;
+                tbtn.UpdateToggleState(newValue, true);
+            }
+        }));
+
         /// <summary>
         /// Changes the text for ToggleButton. Accepts: Dynamic and Static Resource, just a string.
         /// </summary>

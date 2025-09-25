@@ -33,6 +33,16 @@ namespace GTweak.Core.ViewModel
 
         public string DisplayTweakVersion => (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 
+        public bool IsViewNotification => SettingsEngine.IsViewNotification;
+
+        public bool IsUpdateCheckRequired => SettingsEngine.IsUpdateCheckRequired;
+
+        public bool IsTopMost => SettingsEngine.IsTopMost;
+
+        public bool IsPlayingSound => SettingsEngine.IsPlayingSound;
+
+        public int CurrentVolume => SettingsEngine.Volume;
+
         public string SelectedLanguage
         {
             get => _model.SelectedLanguage;

@@ -19,12 +19,6 @@ namespace GTweak
         {
             InitializeComponent();
 
-            BtnNotification.StateNA = SettingsEngine.IsViewNotification;
-            BtnUpdate.StateNA = SettingsEngine.IsUpdateCheckRequired;
-            BtnTopMost.StateNA = Topmost = SettingsEngine.IsTopMost;
-            BtnSoundNtn.IsChecked = SettingsEngine.IsPlayingSound;
-            SliderVolume.Value = SettingsEngine.Volume;
-
             App.TweaksImported += delegate { BtnMore.IsChecked = true; };
             App.ThemeChanged += delegate { Close(); new RebootWindow().ShowDialog(); };
         }
@@ -94,11 +88,7 @@ namespace GTweak
 
         private void BtnUpdate_ChangedState(object sender, EventArgs e) => SettingsEngine.IsUpdateCheckRequired = !BtnUpdate.State;
 
-        private void BtnTopMost_ChangedState(object sender, EventArgs e)
-        {
-            SettingsEngine.IsTopMost = !BtnTopMost.State;
-            Topmost = !BtnTopMost.State;
-        }
+        private void BtnTopMost_ChangedState(object sender, EventArgs e) => SettingsEngine.IsTopMost = Topmost = !BtnTopMost.State;
 
         private void BtnSoundNtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.IsPlayingSound = (bool)!BtnSoundNtn.IsChecked;
 

@@ -12,7 +12,7 @@
         Title="GTweak" 
         Height="630" Width="1100" MinHeight="630" MinWidth="1100" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True" WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        Closing="Window_Closing" Loaded="Window_Loaded" WindowChrome.IsHitTestVisibleInChrome="False">
+        Closing="Window_Closing" Loaded="Window_Loaded" WindowChrome.IsHitTestVisibleInChrome="False" Topmost="{Binding IsTopMost, Mode=OneWay}">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
@@ -225,16 +225,16 @@
                             <Grid Grid.Row="1">
                                 <StackPanel Orientation="Vertical">
 
-                                    <uс:ToggleButton  x:Name="BtnNotification" TextResource="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
+                                    <uс:ToggleButton x:Name="BtnNotification" StateNA="{Binding IsViewNotification}" TextResource="{DynamicResource btgl_notifications_main}" VerticalAlignment="Top" Height="25" Margin="40,20,0,0" ChangedState="BtnNotification_ChangedState"/>
 
-                                    <uс:ToggleButton x:Name="BtnUpdate" TextResource="{DynamicResource btgl_update_main}"  VerticalAlignment="Top" Height="25" Margin="40,15,0,0" ChangedState="BtnUpdate_ChangedState"/>
+                                    <uс:ToggleButton x:Name="BtnUpdate" StateNA="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource btgl_update_main}"  VerticalAlignment="Top" Height="25" Margin="40,15,0,0" ChangedState="BtnUpdate_ChangedState"/>
 
-                                    <uс:ToggleButton x:Name="BtnTopMost"  VerticalAlignment="Top" Height="25" TextResource="{DynamicResource btgl_toast_main}" Margin="40,15,0,0" ChangedState="BtnTopMost_ChangedState"/>
+                                    <uс:ToggleButton x:Name="BtnTopMost" StateNA="{Binding IsTopMost}" VerticalAlignment="Top" Height="25" TextResource="{DynamicResource btgl_toast_main}" Margin="40,15,0,0" ChangedState="BtnTopMost_ChangedState"/>
 
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
                                         <TextBlock Style="{StaticResource Text_In}" Foreground="{StaticResource Color_Highlighted}" Margin="0,4,0,0" Text="{DynamicResource slider_volume_main}"/>
-                                        <ToggleButton x:Name="BtnSoundNtn" Width="20" Height="20" Margin="10,1,0,0" Style="{StaticResource TglButtonSound}" PreviewMouseLeftButtonUp="BtnSoundNtn_PreviewMouseLeftButtonUp"/>
-                                        <Slider x:Name="SliderVolume" Style="{StaticResource HorizontalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="10,4,0,0"  Width="187" ValueChanged="SliderVolume_ValueChanged" Height="10"/>
+                                        <ToggleButton x:Name="BtnSoundNtn" IsChecked="{Binding IsPlayingSound, Mode=OneWay}" Width="20" Height="20" Margin="10,1,0,0" Style="{StaticResource TglButtonSound}" PreviewMouseLeftButtonUp="BtnSoundNtn_PreviewMouseLeftButtonUp"/>
+                                        <Slider x:Name="SliderVolume" Value="{Binding CurrentVolume, Mode=OneWay}" Style="{StaticResource HorizontalText_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="10,4,0,0"  Width="187" ValueChanged="SliderVolume_ValueChanged" Height="10"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" Margin="40,10,0,0">
