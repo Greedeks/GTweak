@@ -6,25 +6,30 @@
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
         xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
-        Title="GTweak" WindowStyle="None" Height="180" Width="180" ResizeMode="NoResize"
-        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        IsTabStop="False" Opacity="0.98" Topmost="True" ShowInTaskbar="False" Loaded="Window_Loaded">
-    <Grid>
+        Title="GTweak"
+        WindowStyle="None" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
+        SnapsToDevicePixels="True" UseLayoutRounding="True" IsTabStop="False" Opacity="0.98"
+        Topmost="True" ShowInTaskbar="False" Loaded="Window_Loaded" SizeToContent="WidthAndHeight">
+    
+    <Grid Margin="20">
         <Ellipse Height="140" Width="140" Fill="{StaticResource Color_Background_Dark}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <Ellipse Height="154" Width="154" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5"/>
-        
-            <xrpb:RadialProgressBar x:Name="RestartProgress" Value="20" Maximum="100" Width="165" Height="165" ArcWidth="5.5" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <xrpb:RadialProgressBar.Foreground>
-                    <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
-                        <GradientStop Color="{StaticResource Color_Border_Gradient_2}"  Offset="0.7"/>
-                        <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0.4"/>
-                    </LinearGradientBrush>
-                </xrpb:RadialProgressBar.Foreground>
-                <xrpb:RadialProgressBar.Effect>
-                    <DropShadowEffect BlurRadius="15" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}"/>
-                </xrpb:RadialProgressBar.Effect>
-            </xrpb:RadialProgressBar>
 
-            <TextBlock Text="{DynamicResource title_reboot}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="135" TextAlignment="Center" Style="{StaticResource Text}"/>
-        </Grid>
+        <Ellipse Height="154" Width="154" Stroke="{StaticResource Color_Background_RadialProgressBar}" StrokeThickness="5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5"/>
+
+        <xrpb:RadialProgressBar x:Name="RestartProgress" Value="20" Maximum="100" Width="165" Height="165" ArcWidth="5.5" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <xrpb:RadialProgressBar.Foreground>
+                <LinearGradientBrush EndPoint="0,0.3" StartPoint="0.9,0" ColorInterpolationMode="ScRgbLinearInterpolation" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad">
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_2}" Offset="0.7"/>
+                    <GradientStop Color="{StaticResource Color_Border_Gradient_1}" Offset="0.4"/>
+                </LinearGradientBrush>
+            </xrpb:RadialProgressBar.Foreground>
+            <xrpb:RadialProgressBar.Effect>
+                <DropShadowEffect BlurRadius="15" ShadowDepth="1" Direction="-90"  Color="{StaticResource Color_Shadow}"/>
+            </xrpb:RadialProgressBar.Effect>
+        </xrpb:RadialProgressBar>
+
+        <Viewbox Stretch="Uniform" Width="110" Height="Auto" VerticalAlignment="Center" StretchDirection="DownOnly">
+            <TextBlock x:Name="RebootText" Padding="5" Text="{DynamicResource title_reboot}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource Color_TetBlock_Inactivity}" TextAlignment="Center" TextWrapping="Wrap" Height="auto" Style="{StaticResource Text}"/>
+        </Viewbox>
+    </Grid>
 </Window>

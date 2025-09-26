@@ -58,7 +58,9 @@
                 </Path>
             </Grid>
 
-            <TextBlock x:Name="TextLoad" Text="{DynamicResource step1_load}" MaxHeight="30" MaxWidth="160" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap" Margin="0,14,0,0"/>
+            <Viewbox Stretch="Uniform" Width="150" Height="Auto" VerticalAlignment="Center" StretchDirection="DownOnly">
+                <TextBlock x:Name="TextLoad" Text="{DynamicResource step1_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" Height="auto" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap" Margin="1,14,1,1"/>
+            </Viewbox>
         </StackPanel>
     </Grid>
 

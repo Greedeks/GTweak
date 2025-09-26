@@ -12,6 +12,10 @@ namespace GTweak.Windows
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) => RestartProgress.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(0, 100, 1.5, () => { SettingsEngine.SelfReboot(); }));
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            RebootText.Text = RebootText.Text.Replace(" ", "\n");
+            RestartProgress.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(0, 100, 1.5, () => { SettingsEngine.SelfReboot(); }));
+        }
     }
 }
