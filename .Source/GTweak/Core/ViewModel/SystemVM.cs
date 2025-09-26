@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GTweak.Core.ViewModel
 {
-    internal sealed class SystemVM : BasePageVM<SystemModel, SystemTweaks>
+    internal sealed class SystemVM : ViewModelPageBase<SystemModel, SystemTweaks>
     {
         protected override Dictionary<string, object> GetControlStates() => SystemTweaks.ControlStates;
 

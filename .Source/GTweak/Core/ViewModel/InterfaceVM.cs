@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class InterfaceVM : BasePageVM<InterfaceModel, InterfaceTweaks>
+    internal class InterfaceVM : ViewModelPageBase<InterfaceModel, InterfaceTweaks>
     {
         public bool IsBlockForWin10 => SystemDiagnostics.IsWindowsVersion[11];
         public bool IsBlockWithoutLicense => WindowsLicense.IsWindowsActivated;

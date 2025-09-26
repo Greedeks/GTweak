@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class ConfidentialityVM : BasePageVM<ConfidentialityModel, ConfidentialityTweaks>
+    internal class ConfidentialityVM : ViewModelPageBase<ConfidentialityModel, ConfidentialityTweaks>
     {
         protected override Dictionary<string, object> GetControlStates() => ConfidentialityTweaks.ControlStates;
 

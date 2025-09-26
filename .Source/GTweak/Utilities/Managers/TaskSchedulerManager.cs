@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Managers
@@ -56,22 +55,16 @@ namespace GTweak.Utilities.Managers
 
         internal static void SetTaskStateOwner(bool state, params string[] tasklist)
         {
-            Task.Run(delegate
+            Task.Run(() =>
             {
                 string[] existingTasks = GetExistingTasks(tasklist);
-
                 if (existingTasks.Length != 0)
                 {
-                    StringBuilder sb = new StringBuilder();
-                    foreach (string task in existingTasks)
-                        sb.Append($"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\" & ");
-                    string tasksCommand = sb.ToString().TrimEnd(' ', '&');
-
-                    CommandExecutor.RunCommandAsTrustedInstaller($"/c {tasksCommand}");
+                    IEnumerable<string> commands = existingTasks.Select(task => $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task.Replace("\"", "\\\"")}\"");
+                    CommandExecutor.RunCommandAsTrustedInstaller($"/c {string.Join(" & ", commands)}");
                 }
             });
         }
-
 
         internal static void RemoveTasks(params string[] tasklist)
         {

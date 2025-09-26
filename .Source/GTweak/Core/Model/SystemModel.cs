@@ -1,6 +1,6 @@
 ﻿namespace GTweak.Core.Model
 {
-    internal class SystemModel : ISliderModel
+    internal sealed class SystemModel : ITypedPageItem<double>
     {
         public string Name { get; set; }
         public bool State { get; set; }

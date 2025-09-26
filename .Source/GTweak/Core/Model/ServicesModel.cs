@@ -1,6 +1,6 @@
 ﻿namespace GTweak.Core.Model
 {
-    internal class ServicesModel : IToggleModel
+    internal sealed class ServicesModel : IBasePageItem
     {
         public string Name { get; set; }
         public bool State { get; set; }
