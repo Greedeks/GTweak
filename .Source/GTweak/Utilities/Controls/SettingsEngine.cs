@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -98,8 +99,11 @@ namespace GTweak.Utilities.Controls
 
                 try
                 {
-                    PathLocator.Files.Config = Path.Combine(Path.GetDirectoryName(vistaSaveFileDialog.FileName), Path.GetFileNameWithoutExtension(vistaSaveFileDialog.FileName) + ".ini");
+                    PathLocator.Files.Config = vistaSaveFileDialog.FileName;
 
+                    if (Path.GetExtension(PathLocator.Files.Config)?.ToLower() != ".ini")
+                        PathLocator.Files.Config = Path.ChangeExtension(PathLocator.Files.Config, ".ini");
+                    
                     if (File.Exists(PathLocator.Files.Config))
                         File.Delete(PathLocator.Files.Config);
 

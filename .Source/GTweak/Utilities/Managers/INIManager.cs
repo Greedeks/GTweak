@@ -8,12 +8,15 @@ namespace GTweak.Utilities.Managers
 {
     internal sealed class INIManager
     {
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern long WritePrivateProfileString(string section, string key, string value, string filePath);
-        [DllImport("kernel32.dll")]
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern int GetPrivateProfileString(string section, string key, string _default, StringBuilder retVal, int size, string filePath);
-        [DllImport("kernel32.dll")]
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern int GetPrivateProfileSection(string section, StringBuilder retVal, int size, string filePath);
+
 
         private readonly string _pathToConfig;
 
@@ -30,7 +33,7 @@ namespace GTweak.Utilities.Managers
         internal const string SectionSvc = "Services Tweaks";
         internal const string SectionSys = "System Tweaks";
 
-        internal INIManager(string iniPath) => _pathToConfig = new FileInfo(iniPath).FullName;
+        internal INIManager(string iniPath) => _pathToConfig = $@"\\?\{new FileInfo(iniPath).FullName}";
 
         internal string Read(string section, string key)
         {
@@ -56,6 +59,7 @@ namespace GTweak.Utilities.Managers
 
             selectedDictionary.Add(tweak, value.ToString());
         }
+
 
         internal bool IsThereSection(string section)
         {
