@@ -248,7 +248,7 @@
     <Compile Include="Assets\UserControl\ProggressRing.xaml.cs">
       <DependentUpon>ProggressRing.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\ViewModelPageBase.cs" />
+    <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Model\InterfaceModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\MainModel.cs" />
@@ -261,6 +261,7 @@
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Model\DataSystemModel.cs" />
+    <Compile Include="Core\ViewModel\MoreVM.cs" />
     <Compile Include="Core\ViewModel\ServicesVM.cs" />
     <Compile Include="Core\ViewModel\SystemVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -279,6 +280,7 @@
     <Compile Include="Utilities\Controls\PathLocator.cs" />
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
+    <Compile Include="Utilities\Interop\WindowStyleHelper.cs" />
     <Compile Include="Utilities\Managers\ExplorerManager.cs" />
     <Compile Include="Utilities\Managers\FirewallManager.cs" />
     <Compile Include="Utilities\Managers\OverlayDialogManager.cs" />
@@ -308,7 +310,7 @@
     <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\WindowsLicense.cs" />
     <Compile Include="Utilities\Animation\TypewriterAnimation.cs" />
-    <Compile Include="Core\ViewModel\OtherContextVM.cs" />
+    <Compile Include="Core\ViewModel\PackagesVM.cs" />
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
     </Compile>
@@ -516,7 +518,7 @@
     <Compile Include="Utilities\Animation\BrushAnimation.cs" />
     <Compile Include="Core\ButtonNavigation.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="Core\ViewModelBase.cs" />
+    <Compile Include="Core\Base\ViewModelBase.cs" />
     <Compile Include="Core\ViewModel\MainViewModel.cs" />
     <Compile Include="View\PakagesView.xaml.cs">
       <DependentUpon>PakagesView.xaml</DependentUpon>

@@ -8,11 +8,13 @@
         xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
         xmlns:uс="clr-namespace:GTweak.Assets.UserControl" 
         xmlns:nav="clr-namespace:GTweak.Core" 
+        xmlns:in="clr-namespace:GTweak.Utilities.Interop"
         mc:Ignorable="d"
         Title="GTweak" 
+        in:WindowStyleHelper.EnableSystemAnimations="True"
         Height="630" Width="1100" MinHeight="630" MinWidth="1100" ResizeMode="NoResize" WindowStyle="None" Background="Transparent"
         AllowsTransparency="True" WindowStartupLocation="CenterScreen" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        Closing="Window_Closing" Loaded="Window_Loaded" WindowChrome.IsHitTestVisibleInChrome="False" Topmost="{Binding IsTopMost, Mode=OneWay}">
+        Loaded="Window_Loaded" WindowChrome.IsHitTestVisibleInChrome="False" Topmost="{Binding IsTopMost, Mode=OneWay}">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>

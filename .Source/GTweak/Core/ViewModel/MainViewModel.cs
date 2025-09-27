@@ -1,4 +1,5 @@
-﻿using GTweak.Core.Model;
+﻿using GTweak.Core.Base;
+using GTweak.Core.Model;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using System;
@@ -86,7 +87,7 @@ namespace GTweak.Core.ViewModel
 
         private void Confidentiality(object obj) => CurrentView = new ConfidentialityVM();
         private void Interface(object obj) => CurrentView = new InterfaceVM();
-        private void Pakages(object obj) => CurrentView = new PakagesVM();
+        private void Packages(object obj) => CurrentView = new PackagesVM();
         private void Services(object obj) => CurrentView = new ServicesVM();
         private void System(object obj) => CurrentView = new SystemVM();
         private void DataSystem(object obj) => CurrentView = new DataSystemVM();
@@ -99,7 +100,7 @@ namespace GTweak.Core.ViewModel
 
             ConfidentialityCommand = new RelayCommand(Confidentiality);
             InterfaceCommand = new RelayCommand(Interface);
-            PakagesCommand = new RelayCommand(Pakages);
+            PakagesCommand = new RelayCommand(Packages);
             ServicesCommand = new RelayCommand(Services);
             SystemCommand = new RelayCommand(System);
             DataSystemCommand = new RelayCommand(DataSystem);

@@ -3,7 +3,6 @@ using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Windows;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,7 +19,7 @@ namespace GTweak
             InitializeComponent();
 
             App.TweaksImported += delegate { BtnMore.IsChecked = true; };
-            App.ThemeChanged += delegate { Close(); new RebootWindow().ShowDialog(); };
+            App.ThemeChanged += delegate { Hide(); new RebootWindow().ShowDialog(); Close(); };
         }
 
         #region Button Title/Animation Window
@@ -61,24 +60,13 @@ namespace GTweak
                 DragMove();
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Closing -= Window_Closing;
-            e.Cancel = true;
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3,
-                async () =>
-                {
-                    if (SystemDiagnostics.IsNeedUpdate && SettingsEngine.IsUpdateCheckRequired)
-                    {
-                        await Task.Delay(500);
-                        Dispatcher.Invoke(() => new UpdateWindow().ShowDialog());
-                    }
-                }));
+            if (SystemDiagnostics.IsNeedUpdate && SettingsEngine.IsUpdateCheckRequired)
+            {
+                await Task.Delay(500);
+                Dispatcher.Invoke(() => new UpdateWindow().ShowDialog());
+            }
             new TypewriterAnimation(UtilityTitle.Text, UtilityTitle, TimeSpan.FromSeconds(0.4));
         }
         #endregion

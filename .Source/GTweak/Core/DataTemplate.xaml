@@ -11,7 +11,7 @@
         <view:InterfaceView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:PakagesVM}">
+    <DataTemplate DataType="{x:Type vm:PackagesVM}">
         <view:PakagesView />
     </DataTemplate>
 

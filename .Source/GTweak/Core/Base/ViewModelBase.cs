@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace GTweak.Core
+namespace GTweak.Core.Base
 {
     internal class ViewModelBase : INotifyPropertyChanged
     {

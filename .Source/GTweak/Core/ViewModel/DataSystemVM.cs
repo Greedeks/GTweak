@@ -1,4 +1,5 @@
-﻿using GTweak.Core.Model;
+﻿using GTweak.Core.Base;
+using GTweak.Core.Model;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using System.Collections.ObjectModel;

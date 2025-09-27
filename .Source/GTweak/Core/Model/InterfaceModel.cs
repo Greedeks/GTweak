@@ -1,4 +1,6 @@
-﻿namespace GTweak.Core.Model
+﻿using GTweak.Core.Base;
+
+namespace GTweak.Core.Model
 {
     internal sealed class InterfaceModel : IBasePageItem
     {

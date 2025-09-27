@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:in="clr-namespace:GTweak.Utilities.Interop"
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
-        Title="GTweak" WindowStyle="None"
+        Title="GTweak" WindowStyle="None" Loaded="Window_Loaded" Closing="Window_Closing"
         Height="170" Width="370" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="Transparent" AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False" IsTabStop="False">
     <Window.Clip>

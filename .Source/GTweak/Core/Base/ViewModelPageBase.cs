@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GTweak.Core
+namespace GTweak.Core.Base
 {
     internal interface IBasePageItem
     {
