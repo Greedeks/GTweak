@@ -1,7 +1,5 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Managers;
+﻿using GTweak.Utilities.Managers;
 using System;
-using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -39,14 +37,5 @@ namespace GTweak.Windows
             if (e.LeftButton == MouseButtonState.Pressed)
                 Application.Current.Shutdown();
         }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            Closing -= Window_Closing;
-            e.Cancel = true;
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { _timer.Stop(); Close(); }));
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.2));
     }
 }

@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
         xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
+         xmlns:in="clr-namespace:GTweak.Utilities.Interop"
         xmlns:local="clr-namespace:GTweak.Windows" 
         mc:Ignorable="d"
-        Title="GTweak" WindowStyle="None"
+        Title="GTweak" WindowStyle="None" in:WindowStyleHelper.EnableSystemAnimations="True"
         Height="260" Width="260" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
         ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered" Closing="Window_Closing" Loaded="Window_Loaded">
+        IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>

@@ -7,7 +7,6 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace GTweak.Windows
 {
@@ -28,8 +27,9 @@ namespace GTweak.Windows
             {
                 new TypewriterAnimation((string)FindResource("step7_load"), TextLoad, TimeSpan.FromMilliseconds(300));
                 await Task.Delay(400);
-                Close();
+                Hide();
                 new MainWindow().Show();
+                Close();
             };
             backgroundWorker.RunWorkerAsync();
         }
@@ -71,14 +71,5 @@ namespace GTweak.Windows
             if (index > 0)
                 new TypewriterAnimation((string)FindResource($"step{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
         }
-
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            Closing -= Window_Closing;
-            e.Cancel = true;
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e) => BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.1));
     }
 }

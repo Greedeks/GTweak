@@ -6,7 +6,7 @@
         xmlns:in="clr-namespace:GTweak.Utilities.Interop"
         xmlns:local="clr-namespace:GTweak.Windows"
         mc:Ignorable="d"
-        Title="GTweak" WindowStyle="None" Loaded="Window_Loaded" Closing="Window_Closing"
+        Title="GTweak" WindowStyle="None" in:WindowStyleHelper.EnableSystemAnimations="True"
         Height="170" Width="370" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="Transparent" AllowsTransparency="True" 
         WindowStartupLocation="CenterScreen" Topmost="True" ShowInTaskbar="False" IsTabStop="False">
     <Window.Clip>
