@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.View"
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
+             xmlns:anim="clr-namespace:GTweak.Utilities.Animation"
              xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
              mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="1100"
              Style="{StaticResource LaunchPage}">
@@ -69,10 +70,14 @@
 
                     <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" Foreground="{StaticResource Color_Inactive}" Margin="0,5,0,0">
                         <Run Text="{DynamicResource label_proc_systemInformation}"/>
-                        <Run Text="{Binding [Processes].Data, StringFormat=' {0}'}"/>
+                        <InlineUIContainer>
+                            <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,1,0,0" FontFamily="{StaticResource Saira}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5" Foreground="{StaticResource Color_Inactive}"/>
+                        </InlineUIContainer>
                         <Run Text=" • "/>
                         <Run Text="{DynamicResource label_svc_systemInformation}"/>
-                        <Run Text="{Binding [Services].Data, StringFormat=' {0}'}"/>
+                        <InlineUIContainer>
+                            <TextBlock anim:NumberAnimation.Value="{Binding [Services].Data}" Text="0" Margin="0,1,0,0" FontFamily="{StaticResource Saira}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5" Foreground="{StaticResource Color_Inactive}"/>
+                        </InlineUIContainer>
                     </TextBlock>
                 </StackPanel>
             </Grid>

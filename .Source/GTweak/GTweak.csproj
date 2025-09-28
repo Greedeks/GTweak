@@ -274,6 +274,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Animation\NumberAnimation.cs" />
     <Compile Include="Utilities\Controls\RunGuard.cs" />
     <Compile Include="Utilities\Controls\ErrorLogging.cs" />
     <Compile Include="Utilities\Animation\FactoryAnimation.cs" />
@@ -344,7 +345,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\Font\Font.xaml">
+    <Page Include="Assets\Fonts\Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -577,12 +578,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Resource Include="Assets\Fonts\Saira-Medium.ttf" />
     <None Include="packages.config" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\hosts.gz" />
     <None Include="Resources\NSudoLC.gz" />
     <None Include="Resources\UltPower.gz" />
-    <Resource Include="Assets\Font\Jura-Medium.ttf" />
+    <Resource Include="Assets\Fonts\Jura-Medium.ttf" />
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

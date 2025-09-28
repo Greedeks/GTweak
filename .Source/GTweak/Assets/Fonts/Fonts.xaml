@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <FontFamily x:Key="Jura">/Assets/Font/Jura-Medium.ttf#Jura</FontFamily>
-
+    <FontFamily x:Key="Jura">/Assets/Fonts/Jura-Medium.ttf#Jura</FontFamily>
+    <FontFamily x:Key="Saira">/Assets/Fonts/Saira-Medium.tff#Saira</FontFamily>
+    
 </ResourceDictionary>
