@@ -49,7 +49,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -579,7 +579,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Resource Include="Assets\Fonts\Saira-Medium.ttf" />
+    <Resource Include="Assets\Fonts\Play-Regular.ttf" />
     <None Include="packages.config" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\hosts.gz" />
