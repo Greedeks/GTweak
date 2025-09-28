@@ -39,11 +39,13 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False">
-                <Run Text="{DynamicResource point_advice_part1_more}"/>
-                <Run Text="{DynamicResource point_advice_part2_more}" Foreground="{StaticResource Color_Accent}"/>
-                <Run Text="{DynamicResource point_advice_part3_more}"/>
-                </TextBlock>
+                <Viewbox Height="40" Width="1090" MaxWidth="1090" MaxHeight="40" HorizontalAlignment="Center" VerticalAlignment="Center" StretchDirection="DownOnly">
+                    <TextBlock Width="Auto" Height="auto" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Color_TetBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False">
+                        <Run Text="{DynamicResource point_advice_part1_more}"/>
+                        <Run Text="{DynamicResource point_advice_part2_more}" Foreground="{StaticResource Color_Accent}"/>
+                        <Run Text="{DynamicResource point_advice_part3_more}"/>
+                    </TextBlock>
+                </Viewbox>
             </Grid>
 
             <Grid Grid.Row="1">
