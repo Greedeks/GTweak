@@ -33,37 +33,38 @@ namespace GTweak.Utilities.Tweaks
         private static string _currentPowerGuid = string.Empty;
 
         internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
 
         public SystemTweaks() { _currentPowerGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty); }
 
         internal void AnalyzeAndUpdate()
         {
-            ControlStates["Slider1"] = RegistryHelp.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseSensitivity", 10);
+            _сontrolWriter.Slider[1] = RegistryHelp.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseSensitivity", 10);
 
-            ControlStates["Slider2"] = RegistryHelp.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Keyboard", "KeyboardDelay", 1);
+            _сontrolWriter.Slider[2] = RegistryHelp.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Keyboard", "KeyboardDelay", 1);
 
-            ControlStates["Slider3"] = RegistryHelp.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Keyboard", "KeyboardSpeed", 31);
+            _сontrolWriter.Slider[3] = RegistryHelp.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Keyboard", "KeyboardSpeed", 31);
 
-            ControlStates["TglButton1"] =
+            _сontrolWriter.Button[1] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseSpeed", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseThreshold1", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseThreshold2", "0");
 
-            ControlStates["TglButton2"] =
+            _сontrolWriter.Button[2] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys", "Flags", "26") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response", "Flags", "26");
 
-            ControlStates["TglButton3"] =
+            _сontrolWriter.Button[3] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7", "Attributes", "2");
 
-            ControlStates["TglButton4"] =
+            _сontrolWriter.Button[4] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power", "HibernateEnabled", "0");
 
-            ControlStates["TglButton5"] =
+            _сontrolWriter.Button[5] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "AutoEndTasks", "1");
 
-            ControlStates["TglButton6"] =
+            _сontrolWriter.Button[6] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload", "2");
 
             try
@@ -85,9 +86,9 @@ namespace GTweak.Utilities.Tweaks
                                 if (powerSettingsKey != null)
                                 {
                                     if (!(powerSettingsKey.GetValue("ConservationIdleTime") is byte[] conservationIdleTime) || !(powerSettingsKey.GetValue("IdlePowerState") is byte[] idlePowerState) || !(powerSettingsKey.GetValue("PerformanceIdleTime") is byte[] performanceIdleTime))
-                                        ControlStates["TglButton7"] = false;
+                                        _сontrolWriter.Button[7] = false;
                                     else
-                                        ControlStates["TglButton7"] = conservationIdleTime?[0].ToString() != "255" || idlePowerState?[0].ToString() != "0" || performanceIdleTime?[0].ToString() != "255";
+                                        _сontrolWriter.Button[7] = conservationIdleTime?[0].ToString() != "255" || idlePowerState?[0].ToString() != "0" || performanceIdleTime?[0].ToString() != "255";
                                 }
                             }
                         }
@@ -96,9 +97,9 @@ namespace GTweak.Utilities.Tweaks
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-            ControlStates["TglButton8"] = File.Exists(Path.Combine(PathLocator.Folders.SystemDrive, @"Windows\System32\smartscreen.exe"));
+            _сontrolWriter.Button[8] = File.Exists(Path.Combine(PathLocator.Folders.SystemDrive, @"Windows\System32\smartscreen.exe"));
 
-            ControlStates["TglButton9"] =
+            _сontrolWriter.Button[9] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableInstallerDetection", "0") ||
@@ -107,66 +108,66 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableVirtualization", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", "0");
 
-            ControlStates["TglButton10"] =
+            _сontrolWriter.Button[10] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", "0");
 
-            ControlStates["TglButton11"] =
+            _сontrolWriter.Button[11] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Security", "DisableSecuritySettingsCheck", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3", "1806", "0");
 
-            ControlStates["TglButton12"] = IsTaskEnabled(memoryDiagTasks);
+            _сontrolWriter.Button[12] = IsTaskEnabled(memoryDiagTasks);
 
-            ControlStates["TglButton13"] = _isNetshState;
+            _сontrolWriter.Button[13] = _isNetshState;
 
-            ControlStates["TglButton14"] =
+            _сontrolWriter.Button[14] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", "1");
 
-            ControlStates["TglButton15"] =
+            _сontrolWriter.Button[15] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize", "Startupdelayinmsec", "0");
 
-            ControlStates["TglButton16"] =
+            _сontrolWriter.Button[16] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "ShowFrequent", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "ShowRecent", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackDocs", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", "0");
 
-            ControlStates["TglButton17"] =
+            _сontrolWriter.Button[17] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", "1");
 
-            ControlStates["TglButton18"] = !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "Description", string.Empty).Contains("-18") &&
+            _сontrolWriter.Button[18] = !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "Description", string.Empty).Contains("-18") &&
                                           !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "FriendlyName", string.Empty).Contains("-19");
 
-            ControlStates["TglButton19"] = _isBluetoothStatus;
+            _сontrolWriter.Button[19] = _isBluetoothStatus;
 
-            ControlStates["TglButton20"] =
+            _сontrolWriter.Button[20] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "4");
 
-            ControlStates["TglButton21"] =
+            _сontrolWriter.Button[21] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AutoGameModeEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AllowAutoGameMode", "0");
 
-            ControlStates["TglButton22"] =
+            _сontrolWriter.Button[22] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR", "AppCaptureEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\System\GameConfigStore", "GameDVR_Enabled", "0");
 
-            ControlStates["TglButton23"] =
+            _сontrolWriter.Button[23] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications", "GlobalUserDisabled", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search", "BackgroundAppGlobalToggle", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsRunInBackground", "2");
 
-            ControlStates["TglButton24"] =
+            _сontrolWriter.Button[24] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "MiscPolicyInfo", "2") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "PassedPolicy", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "ShippedWithReserves", "0");
 
-            ControlStates["TglButton25"] = _isTickState;
+            _сontrolWriter.Button[25] = _isTickState;
 
-            ControlStates["TglButton26"] =
+            _сontrolWriter.Button[26] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHC", "PreviousUninstall", "1", false) ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHealthCheck", "installed", "1", false);
 
-            ControlStates["TglButton27"] = IsTaskEnabled(winInsiderTasks);
+            _сontrolWriter.Button[27] = IsTaskEnabled(winInsiderTasks);
         }
 
 

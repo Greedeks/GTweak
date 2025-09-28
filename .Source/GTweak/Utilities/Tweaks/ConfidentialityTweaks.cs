@@ -15,14 +15,15 @@ namespace GTweak.Utilities.Tweaks
     internal sealed class ConfidentialityTweaks : FirewallManager
     {
         internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
 
         internal void AnalyzeAndUpdate()
         {
-            ControlStates["TglButton1"] =
+            _сontrolWriter.Button[1] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising", "0");
 
-            ControlStates["TglButton2"] =
+            _сontrolWriter.Button[2] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled", "0") ||
@@ -30,62 +31,62 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled", "0");
 
-            ControlStates["TglButton3"] =
+            _сontrolWriter.Button[3] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1") || IsTaskEnabled(telemetryTasks);
 
-            ControlStates["TglButton4"] = IsTaskEnabled(dataCollectTasks);
+            _сontrolWriter.Button[4] = IsTaskEnabled(dataCollectTasks);
 
-            ControlStates["TglButton5"] =
+            _сontrolWriter.Button[5] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1");
 
-            ControlStates["TglButton6"] =
+            _сontrolWriter.Button[6] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", "0");
 
-            ControlStates["TglButton7"] =
+            _сontrolWriter.Button[7] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Input\TIPC", "Enabled", "0");
 
-            ControlStates["TglButton8"] =
+            _сontrolWriter.Button[8] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", "0");
 
-            ControlStates["TglButton9"] = IsDefaultHosts();
+            _сontrolWriter.Button[9] = IsDefaultHosts();
 
-            ControlStates["TglButton10"] =
+            _сontrolWriter.Button[10] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", "1");
 
-            ControlStates["TglButton11"] =
+            _сontrolWriter.Button[11] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", "1");
 
-            ControlStates["TglButton12"] =
+            _сontrolWriter.Button[12] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", "0");
 
-            ControlStates["TglButton13"] =
+            _сontrolWriter.Button[13] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", "4");
 
-            ControlStates["TglButton14"] =
+            _сontrolWriter.Button[14] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", "0");
 
-            ControlStates["TglButton15"] =
+            _сontrolWriter.Button[15] =
                      RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
                      RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice") ||
                      RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc");
 
-            ControlStates["TglButton16"] =
+            _сontrolWriter.Button[16] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
 
-            ControlStates["TglButton17"] = SystemDiagnostics.HardwareData.Graphics.IndexOf("nvidia", StringComparison.OrdinalIgnoreCase) >= 0
+            _сontrolWriter.Button[17] = SystemDiagnostics.HardwareData.Graphics.IndexOf("nvidia", StringComparison.OrdinalIgnoreCase) >= 0
                 && (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks));
 
-            ControlStates["TglButton18"] =
+            _сontrolWriter.Button[18] =
                   RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
                   RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", "1");
         }

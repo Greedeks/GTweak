@@ -14,60 +14,61 @@ namespace GTweak.Utilities.Tweaks
     internal sealed class InterfaceTweaks
     {
         internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
 
         internal void AnalyzeAndUpdate()
         {
-            ControlStates["TglButton1"] =
+            _сontrolWriter.Button[1] =
                  RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "Hilight", "80 80 80") ||
                  RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "HotTrackingColor", "80 80 80");
 
-            ControlStates["TglButton2"] =
+            _сontrolWriter.Button[2] =
                 RegistryHelp.CheckValue(@"HKEY_USERS\.DEFAULT\Control Panel\Colors", "InfoWindow", "240 255 255") ||
                 RegistryHelp.CheckValue(@"HKEY_USERS\S-1-5-19\Control Panel\Colors", "InfoWindow", "240 255 255") ||
                 RegistryHelp.CheckValue(@"HKEY_USERS\S-1-5-20\Control Panel\Colors", "InfoWindow", "240 255 255");
 
-            ControlStates["TglButton3"] =
+            _сontrolWriter.Button[3] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "CaptionHeight", "-270") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "CaptionWidth", "-270");
 
-            ControlStates["TglButton4"] =
+            _сontrolWriter.Button[4] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "CursorBlinkRate", "530", false);
 
-            ControlStates["TglButton5"] =
+            _сontrolWriter.Button[5] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "ScrollHeight", "-210") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "ScrollWidth", "-210");
 
-            ControlStates["TglButton6"] =
+            _сontrolWriter.Button[6] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", "0");
 
-            ControlStates["TglButton7"] =
+            _сontrolWriter.Button[7] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", "1");
 
-            ControlStates["TglButton8"] =
+            _сontrolWriter.Button[8] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", "1");
 
-            ControlStates["TglButton9"] =
+            _сontrolWriter.Button[9] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "MenuShowDelay", "20");
 
-            ControlStates["TglButton10"] =
+            _сontrolWriter.Button[10] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseHoverTime", "20");
 
-            ControlStates["TglButton11"] =
+            _сontrolWriter.Button[11] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0");
 
-            ControlStates["TglButton12"] =
+            _сontrolWriter.Button[12] =
                 RegistryHelp.CheckValueBytes(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "link", "0000");
 
-            ControlStates["TglButton13"] =
+            _сontrolWriter.Button[13] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", "0", false);
 
-            ControlStates["TglButton14"] =
+            _сontrolWriter.Button[14] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", "1");
 
-            ControlStates["TglButton15"] =
+            _сontrolWriter.Button[15] =
                 SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", "0");
 
-            ControlStates["TglButton16"] =
+            _сontrolWriter.Button[16] =
                 SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_Layout", "1") ||
                 SystemDiagnostics.HardwareData.OS.Name.IndexOf("home", StringComparison.OrdinalIgnoreCase) < 0 &&
@@ -75,18 +76,18 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Education", "IsEducationEnvironment", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "1")));
 
-            ControlStates["TglButton17"] =
+            _сontrolWriter.Button[17] =
                 SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.KeyExists(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", false);
 
-            ControlStates["TglButton18"] =
+            _сontrolWriter.Button[18] =
                 SystemDiagnostics.IsWindowsVersion[11] &&
                (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", "0") ||
                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement", "ScoobeSystemSettingEnabled", "0"));
 
-            ControlStates["TglButton19"] =
+            _сontrolWriter.Button[19] =
                 SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", "1", false);
 
-            ControlStates["TglButton20"] =
+            _сontrolWriter.Button[20] =
                 SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "DefaultBrowserSettingsCampaignEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", "0") ||
@@ -96,10 +97,10 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", "1") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", "1"));
 
-            ControlStates["TglButton21"] =
+            _сontrolWriter.Button[21] =
                 SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", "1", false);
 
-            ControlStates["TglButton22"] =
+            _сontrolWriter.Button[22] =
                 SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarMn", "0") ||
@@ -112,7 +113,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowTaskViewButton", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search", "SearchboxTaskbarMode", "0"));
 
-            ControlStates["TglButton23"] =
+            _сontrolWriter.Button[23] =
                 SystemDiagnostics.IsWindowsVersion[11] &&
                 (RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", "0") ||
@@ -135,10 +136,10 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-338393Enabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SubscribedContent-310093Enabled", "0"));
 
-            ControlStates["TglButton24"] =
+            _сontrolWriter.Button[24] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", "0", false);
 
-            ControlStates["TglButton25"] =
+            _сontrolWriter.Button[25] =
             RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", "0") ||
             RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer", "AllowOnlineTips", "0") ||
 
@@ -149,7 +150,7 @@ namespace GTweak.Utilities.Tweaks
             (SystemDiagnostics.IsWindowsVersion[10] &&
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter", "1"));
 
-            ControlStates["TglButton26"] =
+            _сontrolWriter.Button[26] =
                  RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}") ||
                  RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}") ||
                  RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}") ||
@@ -157,24 +158,24 @@ namespace GTweak.Utilities.Tweaks
                  RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}") ||
                  RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}");
 
-            ControlStates["TglButton27"] =
+            _сontrolWriter.Button[27] =
                 RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}") ||
                 RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}");
 
-            ControlStates["TglButton28"] =
+            _сontrolWriter.Button[28] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "JPEGImportQuality", "100");
 
-            ControlStates["TglButton29"] =
+            _сontrolWriter.Button[29] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", "0");
 
-            ControlStates["TglButton30"] =
+            _сontrolWriter.Button[30] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", "1");
 
-            ControlStates["TglButton31"] =
+            _сontrolWriter.Button[31] =
                 SystemDiagnostics.IsWindowsVersion[11] && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", "1") ||
                 SystemDiagnostics.IsWindowsVersion[10] && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", "1");
 
-            ControlStates["TglButton32"] =
+            _сontrolWriter.Button[32] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "1");
         }
 

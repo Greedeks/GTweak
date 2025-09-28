@@ -282,6 +282,7 @@
     <Compile Include="Utilities\Helpers\DisablingWinKeys.cs" />
     <Compile Include="Utilities\Helpers\CommandExecutor.cs" />
     <Compile Include="Utilities\Interop\WindowStyleHelper.cs" />
+    <Compile Include="Utilities\Managers\ControlWriterManager.cs" />
     <Compile Include="Utilities\Managers\ExplorerManager.cs" />
     <Compile Include="Utilities\Managers\FirewallManager.cs" />
     <Compile Include="Utilities\Managers\OverlayDialogManager.cs" />
