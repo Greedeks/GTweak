@@ -28,7 +28,7 @@
             </xrpb:RadialProgressBar.Effect>
         </xrpb:RadialProgressBar>
 
-        <Viewbox Stretch="Uniform" Width="110" Height="Auto" VerticalAlignment="Center" StretchDirection="DownOnly">
+        <Viewbox Stretch="Uniform" MaxWidth="135" Height="Auto" VerticalAlignment="Center" StretchDirection="DownOnly">
             <TextBlock x:Name="RebootText" Padding="5" Text="{DynamicResource title_reboot}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource Color_TetBlock_Inactivity}" TextAlignment="Center" TextWrapping="Wrap" Height="auto" Style="{StaticResource Text}"/>
         </Viewbox>
     </Grid>

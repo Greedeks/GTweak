@@ -62,7 +62,7 @@
                 </Grid>
                 
                 <Grid Grid.Row="2" VerticalAlignment="Bottom"  Margin="0,0,20,10">
-                    <Viewbox Stretch="Uniform" Width="230" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" StretchDirection="DownOnly">
+                    <Viewbox Stretch="Uniform" MaxWidth="230" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Left" StretchDirection="DownOnly">
                         <TextBlock Text="{DynamicResource noty_message}" Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" MaxWidth="350" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="20,0,0,0"/>
                     </Viewbox>
                     <Button x:Name="BtnAccept" Content="{DynamicResource button_message}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnAccept_PreviewMouseDown"/>

@@ -53,10 +53,12 @@
                             </TextBlock>
                         </StackPanel>
                     </Border>
-                    <TextBlock Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" MaxWidth="350" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0">
+                    <Viewbox Stretch="Uniform" MaxWidth="350" VerticalAlignment="Center" HorizontalAlignment="Left" StretchDirection="DownOnly">
+                        <TextBlock Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" MaxWidth="350" TextWrapping="Wrap" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0">
                            <Run Text="{DynamicResource file_import}"/>
                            <Run Text="“"/><Run x:Name="ImportedFile" Text="The imported file" Foreground="{StaticResource Color_Accent}"/><Run Text="”"/>
-                    </TextBlock>
+                        </TextBlock>
+                    </Viewbox>
                 </StackPanel>
             </Grid>
         </Grid>

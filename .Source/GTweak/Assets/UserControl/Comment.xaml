@@ -8,8 +8,10 @@
              d:DesignHeight="90" d:DesignWidth="1100" Loaded="Comment_Loaded">
     <Viewbox>
         <Grid Width="1100" Height="90">
-            <TextBlock x:Name="FunctionDescription" Style="{StaticResource Description}" Text="{Binding DefaultText, RelativeSource={RelativeSource AncestorType=local:Comment}}"/>
-
+            <Viewbox MaxWidth="1000" MaxHeight="90" Width="1000" Height="90" StretchDirection="DownOnly" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <TextBlock x:Name="FunctionDescription" Style="{StaticResource Description}" Text="{Binding DefaultText, RelativeSource={RelativeSource AncestorType=local:Comment}}"/>
+            </Viewbox>
+            
             <!-- Left Borders -->
             <Border Margin="320,0,0,0" Background="{StaticResource Color_ButtonOver}" Height="1" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="0,15,15,0" Opacity="0">
                 <Border.Triggers>
