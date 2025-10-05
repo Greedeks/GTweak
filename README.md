@@ -25,6 +25,10 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="French Flag" width="40">
 </a>
 
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
     <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Italian Flag" width="40">
 </a>
@@ -163,6 +167,13 @@ Installed platform: .NET Framework 4.8
       </a>
       <div><span>Português Brasileiro</span></div>
     </td>
+    <td align="center">
+      <a href="https://github.com/JohnFowler58">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
+        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=John+Fowler"/></div>
+      </a>
+      <div><span>Magyar</span></div>
+    </td>
   </tr>
 </table>
 
@@ -187,14 +198,14 @@ Installed platform: .NET Framework 4.8
     </pre>
 </div>
 
-- Add your language’s name (as written in your native language) to [LanguageCatalog](https://github.com/Greedeks/GTweak/Languages/LanguageCatalog.xaml).  
-  ⚠️ Make sure to follow the [NOTE](https://github.com/Greedeks/GTweak/blob/8caab74a7cf748f6a20c9d1e7c8a81821905ef9b/.Source/GTweak/Languages/LanguageCatalog.xaml#L5C4-L9C8) inside the file.
+- Add your language’s name (as written in your native language) to [LanguageCatalog](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml).  
+  ⚠️ Make sure to follow the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L10) inside the file.
 - Submit a **Pull Request** with your changes. </br></br>
 
 **II. Request via Issue**
 - If you’re unfamiliar with Git, open a [Feature Request issue](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
   - Specify your target [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11).
-  - Provide the name of your language written in your native language according to the [NOTE](https://github.com/Greedeks/GTweak/blob/8caab74a7cf748f6a20c9d1e7c8a81821905ef9b/.Source/GTweak/Languages/LanguageCatalog.xaml#L5C4-L9C8).
+  - Provide the name of your language written in your native language according to the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L10).
   - Attach your translated `Localize.xaml` file.
 </br>
 

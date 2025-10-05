@@ -25,6 +25,10 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="French Flag" width="40">
 </a>
 
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
     <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Italian Flag" width="40">
 </a>
@@ -163,6 +167,13 @@ Windows 지원: Windows 10 (build 18362.116)부터
         <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Marcos+Evangelista"/></div>
       </a>
       <div><span>Português Brasileiro</span></div>
+    </td>
+    <td align="center">
+      <a href="https://github.com/JohnFowler58">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
+        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=John+Fowler"/></div>
+      </a>
+      <div><span>Magyar</span></div>
     </td>
   </tr>
 </table>

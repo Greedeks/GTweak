@@ -25,10 +25,18 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="Bandiera Francia" width="40">
 </a>
 
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
     <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Bandiera Italia" width="40">
 </a>
-  
+
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
     <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Bandiera Corea" width="40">
 </a>
@@ -164,6 +172,13 @@ Piattaforma installata: .NET Framework 4.8
         <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Marcos+Evangelista"/></div>
       </a>
       <div><span>Português Brasileiro</span></div>
+    </td>
+    <td align="center">
+      <a href="https://github.com/JohnFowler58">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
+        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=John+Fowler"/></div>
+      </a>
+      <div><span>Magyar</span></div>
     </td>
   </tr>
 </table>

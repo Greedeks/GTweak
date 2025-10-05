@@ -6,13 +6,14 @@
          - Write the language name in its native form (e.g., Français, 한국어).
          - In parentheses () always write the short English abbreviation of the language.
          - If there are regional variants, use the country code (e.g., Portuguese (BR) for Brazilian, Portuguese (PT) for European).
+         - The display order does not depend on this list — it will be sorted by code anyway.
     -->
 
     <v:String x:Key="en">English (EN)</v:String>
     <v:String x:Key="fr">Français (FR)</v:String>
+    <v:String x:Key="hu">Magyar (HU)</v:String>
     <v:String x:Key="it">Italiano (IT)</v:String>
     <v:String x:Key="ko">한국어 (KO)</v:String>
-    <v:String x:Key="hu">Hungarian (HU)</v:String>
     <v:String x:Key="pt_br">Português (BR)</v:String>
     <v:String x:Key="ru">Русский (RU)</v:String>
     <v:String x:Key="uk">Українська (UA)</v:String>
