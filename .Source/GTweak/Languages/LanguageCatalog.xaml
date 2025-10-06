@@ -14,6 +14,7 @@
     <v:String x:Key="hu">Magyar (HU)</v:String>
     <v:String x:Key="it">Italiano (IT)</v:String>
     <v:String x:Key="ko">한국어 (KO)</v:String>
+    <v:String x:Key="hu">Hungarian (HU)</v:String>
     <v:String x:Key="pt_br">Português (BR)</v:String>
     <v:String x:Key="ru">Русский (RU)</v:String>
     <v:String x:Key="uk">Українська (UA)</v:String>
