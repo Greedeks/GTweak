@@ -169,7 +169,7 @@
     <v:String x:Key="tgl8_interface">Alkalmazások és fájlkezelő sötét témája</v:String>
     <v:String x:Key="tgl9_interface">Késleltetés a helyi menü megnyitásakor</v:String>
     <v:String x:Key="tgl10_interface">Késés a feladat sávon megjelenő előnézeteknél</v:String>
-    <v:String x:Key="tgl11_interface">Nyilak a fájlokhoz, mappákhoz vagy programokhoz vezető gyorsbillentyűkhöz</v:String>
+    <v:String x:Key="tgl11_interface">Nyilak a fájlok, mappák vagy programok gyorsbillentyűihez</v:String>
     <v:String x:Key="tgl12_interface">Előtag «Címke ehhez...» / utótag «– Címke»</v:String>
     <v:String x:Key="tgl13_interface">„Ez a gép” ikon az Asztalon</v:String>
     <v:String x:Key="tgl14_interface">«Kuka» ikon az Asztalon</v:String>
@@ -189,7 +189,7 @@
     <v:String x:Key="tgl28_interface">A háttérkép formátumának tömörítése. JPEG az asztalon</v:String>
     <v:String x:Key="tgl29_interface">Eszköztippek asztali elemekhez</v:String>
     <v:String x:Key="tgl30_interface">Keresési lekérdezés a" Bing " integrációval a Start menüben</v:String>
-    <v:String x:Key="tgl31_interface">Nyissa meg a «Gyors hozzáférés» lehetőséget a «Ez a számítógép» helyett</v:String>
+    <v:String x:Key="tgl31_interface">Nyissa meg a «Gyors hozzáférés»-t «Ez a gép» helyett</v:String>
     <v:String x:Key="tgl32_interface">Fájlkiterjesztések megjelenítése az Intézőben</v:String>
     
     <v:String x:Key="textcolor_interface">Ez egy példa egy új színre.</v:String>
@@ -293,7 +293,7 @@
     <!--#region Services Page -->
     <v:String x:Key="tgl1_services">A Windows kereséshez kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl2_services">Az Xbox-hoz kapcsolódó szolgáltatások</v:String>
-    <v:String x:Key="tgl3_services">USB modemekkel és routerekkel kapcsolatos szolgáltatások</v:String>
+    <v:String x:Key="tgl3_services">USB modemekkel és routerekkel kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl4_services">A Windows áruházhoz kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl5_services">Teljesítményszámláló Szolgáltatások</v:String>
     <v:String x:Key="tgl6_services">Windows Biometrikus Szolgáltatás</v:String>
@@ -301,21 +301,21 @@
     <v:String x:Key="tgl8_services">Nyomtatóval kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl9_services">A szkenner működésével kapcsolatos szolgáltatás</v:String>
     <v:String x:Key="tgl10_services">Faxhoz kapcsolódó szolgáltatások</v:String>
-    <v:String x:Key="tgl11_services">Táblagép/okostelefon mód használatával kapcsolatos szolgáltatások</v:String>
-    <v:String x:Key="tgl12_services">Kiegészítő monitorok üzemeltetésével kapcsolatos szolgáltatások</v:String>
+    <v:String x:Key="tgl11_services">Táblagép/okostelefon módhoz kapcsolódó szolgáltatások</v:String>
+    <v:String x:Key="tgl12_services">Kiegészítő monitorokhoz kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl13_services">Virtuális asztali szolgáltatások, az Ön telefonja</v:String>
-    <v:String x:Key="tgl14_services">A helyi hálózat üzemeltetésével kapcsolatos szolgáltatások</v:String>
-    <v:String x:Key="tgl15_services">A Windows Update szolgáltatáshoz kapcsolódó szolgáltatások</v:String>
+    <v:String x:Key="tgl14_services">A helyi hálózat üzemeltetésével kapcsolódó szolgáltatások</v:String>
+    <v:String x:Key="tgl15_services">A Windows Update szolgáltatáshoz kapcsolódó funkciók</v:String>
     <v:String x:Key="tgl16_services">VPN-ügyfelekkel kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl17_services">A Windows Media működésével kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl18_services">A Távoli asztalhoz kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl19_services">Hibákat és eseménynaplókat gyűjtő szolgáltatások</v:String>
     <v:String x:Key="tgl20_services">WebDAV távoli fájlkezelési szolgáltatás</v:String>
-    <v:String x:Key="tgl21_services">Az intelligens kártya működésével kapcsolatos szolgáltatások</v:String>
+    <v:String x:Key="tgl21_services">Az intelligens kártyához kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl22_services">A Windows Kioszk működésével kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl23_services">Fájltitkosítással kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl24_services">A Windows honosításával kapcsolatos szolgáltatás</v:String>
-    <v:String x:Key="tgl25_services">Háttérbiztonsági ellenőrzésekkel kapcsolatos szolgáltatások</v:String>
+    <v:String x:Key="tgl25_services">Háttérbiztonsági ellenőrzésekkel kapcsolódó funkciók</v:String>
     <v:String x:Key="tgl26_services">Háttérdiagnosztikával kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl27_services">Vállalati eszközökkel kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl28_services">A Hyper-V működésével kapcsolatos szolgáltatás</v:String>
@@ -369,14 +369,14 @@
     <v:String x:Key="tgl12_system">Automatikus memóriadiagnosztika</v:String>
     <v:String x:Key="tgl13_system">Teredo, ISATAP és IPv6 protokollok</v:String>
     <v:String x:Key="tgl14_system">A fájlrendszer gyorsítótárának szabványos mérete</v:String>
-    <v:String x:Key="tgl15_system">A Windows indításának és a program indításának lelassítása</v:String>
+    <v:String x:Key="tgl15_system">A Windows és a programok indításának lassítása</v:String>
     <v:String x:Key="tgl16_system">A gyorselérési eszköztár használati előzményei</v:String>
     <v:String x:Key="tgl17_system">Cserélhető adathordozó automatikus indítása</v:String>
     <v:String x:Key="tgl18_system">Az alapértelmezett energiaséma használata</v:String>
     <v:String x:Key="tgl19_system">Használja a «Bluetooth és eszközök» funkciót</v:String>
     <v:String x:Key="tgl20_system">Windows Defender tűzfal</v:String>
-    <v:String x:Key="tgl21_system">Használja a "Játék mód" funkciót</v:String>
-    <v:String x:Key="tgl22_system">Használja a "Játéksáv" funkciót</v:String>
+    <v:String x:Key="tgl21_system">Használja a «Játék mód» funkciót</v:String>
+    <v:String x:Key="tgl22_system">Használja a «Játéksáv» funkciót</v:String>
     <v:String x:Key="tgl23_system">Az alkalmazások a háttérben futnak</v:String>
     <v:String x:Key="tgl24_system">Fenntartott tárhely a Windows rendszerben</v:String>
     <v:String x:Key="tgl25_system">Dinamikus és nagy pontosságú eseményidőzítő</v:String>
@@ -448,7 +448,7 @@
     <v:String x:Key="point_advice_part3_more">helyreállítási pont létrehozása az eszköz használata előtt</v:String>
     
     <v:String x:Key="title_licens_more">Windows aktiválás</v:String>
-    <v:String x:Key="text_licens_more">A HWID módszert vagy a biztonsági mentési KMS-t alkalmazzák: előfordulhat, hogy nem működik, ha nincs kulcs a Windows kiadáshoz.</v:String>
+    <v:String x:Key="text_licens_more">HWID módszer vagy helyi KMS használata; kulcs hiányában előfordulhat, hogy nem működik.</v:String>
     <v:String x:Key="btn_activation">Aktiválás</v:String>
     <v:String x:Key="title_createpoint_more">Mentse el a rendszert</v:String>
     <v:String x:Key="text_createpoint_more">Létrehoz egy Windows rendszer-visszaállítási pontot, még akkor is, ha le van tiltva.</v:String>
@@ -458,20 +458,20 @@
     <v:String x:Key="btn_recovery">Helyreállítás</v:String>
     <v:String x:Key="textpoint_more">Egy GTweak-kel létrehozott pont</v:String>
     <v:String x:Key="title_clear_more">A memória törlése</v:String>
-    <v:String x:Key="text_clear_more">Törli a számítógép memóriájában lévő rendszerfájlok gyorsítótárát, az ideiglenes fájlokat és az ikon-gyorsítótárat.</v:String>
+    <v:String x:Key="text_clear_more">Törli a rendszerfájlok gyorsítótárát, ideiglenes fájlokat és az ikoncache-t.</v:String>
     <v:String x:Key="btn_clear">Tisztítás</v:String>
     <v:String x:Key="title_disablepoint_more">Védelem letiltása</v:String>
     <v:String x:Key="text_disablepoint_more">Letiltja a rendszer-visszaállítási pontot, de vegye figyelembe, hogy a korábban létrehozottak törlődnek.</v:String>
     <v:String x:Key="btn_disable">Letiltás</v:String>
     <v:String x:Key="btn_enable">Engedélyezés</v:String>
-    <v:String x:Key="title_defrag_off_more">A töredezettségmentesítés letiltása</v:String>
-    <v:String x:Key="text_defrag_off_more">Letiltja a töredezettségmentesítést, meghosszabbítja az SSD élettartamát, megmentve a felesleges írásoktól.</v:String>
-    <v:String x:Key="title_defrag_on_more">Töredezettségmentesítés engedélyezése</v:String>
-    <v:String x:Key="text_defrag_on_more">Lehetővé teszi a töredezettségmentesítést, amely átszervezi a fájlokat, és csak HDD-n működik hatékonyan.</v:String>
+    <v:String x:Key="title_defrag_off_more">Töredezettségmentesítés — ki</v:String>
+    <v:String x:Key="text_defrag_off_more">Letiltja a töredezettségmentesítést; védi az SSD-t és csökkenti a felesleges írásokat.</v:String>
+    <v:String x:Key="title_defrag_on_more">Töredezettségmentesítés — be</v:String>
+    <v:String x:Key="text_defrag_on_more">Engedélyezi a töredezettségmentesítést és átrendezi a fájlokat; hatékony HDD-ken.</v:String>
     <v:String x:Key="title_compression_more">NTFS tömörítés</v:String>
-    <v:String x:Key="text_compression_more">Tömöríti a fájlokat méretük, különösen a szöveges fájlok csökkentésével, ami veszteség nélkül megtakarítja a lemezterületet.</v:String>
+    <v:String x:Key="text_compression_more">Veszteségmentes tömörítés a fájlok méretének csökkentésére, különösen szöveges állományoknál.</v:String>
     <v:String x:Key="title_decompression_more">NTFS dekompresszió</v:String>
-    <v:String x:Key="text_decompression_more">Letiltja a tömörítést azáltal, hogy visszaállítja a fájlokat az eredeti méretükre, és felgyorsítja a hozzáférést hozzájuk.</v:String>
+    <v:String x:Key="text_decompression_more">Visszaállítja a fájlokat eredeti méretükre és gyorsabb elérést biztosít.</v:String>
     <v:String x:Key="btn_overview">Áttekintés</v:String>
 
     <v:String x:Key="title_over_more">Lemezkarbantartó megerősítése</v:String>

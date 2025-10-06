@@ -8,7 +8,7 @@
              d:DesignHeight="90" d:DesignWidth="1100" Loaded="Comment_Loaded">
     <Viewbox>
         <Grid Width="1100" Height="90">
-            <Viewbox MaxWidth="1000" MaxHeight="90" Width="1000" Height="90" StretchDirection="DownOnly" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Viewbox MaxWidth="1020" MaxHeight="90" StretchDirection="DownOnly" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <TextBlock x:Name="FunctionDescription" Style="{StaticResource Description}" Text="{Binding DefaultText, RelativeSource={RelativeSource AncestorType=local:Comment}}"/>
             </Viewbox>
             

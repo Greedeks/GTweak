@@ -51,7 +51,7 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Cursor" Value="Arrow"/>
         <Setter Property="Margin" Value="0,6,0,6"/>
-        <Setter Property="MaxWidth" Value="1000"/>
+        <Setter Property="MaxWidth" Value="1020"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 

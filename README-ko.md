@@ -25,6 +25,10 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="French Flag" width="40">
 </a>
 
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
     <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Italian Flag" width="40">
 </a>
@@ -136,33 +140,40 @@ Windows 지원: Windows 10 (build 18362.116)부터
 
 <table>
   <tr>
-    <td align="center">
+    <td align="center" width="180">
       <a href="https://github.com/VenusGirl">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/53147200?v=4&h=70&w=70&fit=cover&mask=circle" alt="VenusGirl"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=VenusGirl"/></div>
-      </a>
-      <div><span>한국어</span></div>
+      </a><br/>
+      <b>VenusGirl</b><br/>
+      <i>한국어</i>
     </td>
-    <td align="center">
+    <td align="center" width="180">
       <a href="https://github.com/Kopejkin">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/172585094?v=4&h=70&w=70&fit=cover&mask=circle" alt="Kopejkin"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Kopejkin"/></div>
-      </a>
-      <div><span>Українська</span></div>
+      </a><br/>
+      <b>Kopejkin</b><br/>
+      <i>Українська</i>
     </td>
-    <td align="center">
+    <td align="center" width="180">
       <a href="https://github.com/Zephyris-Pro">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/200662396?v=4&h=70&w=70&fit=cover&mask=circle" alt="Zephyris"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Zephyris"/></div>
-      </a>
-      <div><span>Français, Italiano</span></div>
+      </a><br/>
+      <b>Zephyris</b><br/>
+      <i>Français, Italiano</i>
     </td>
-    <td align="center">
+    <td align="center" width="180">
       <a href="https://github.com/marcolinojunior">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/63563268?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Marcos+Evangelista"/></div>
-      </a>
-      <div><span>Português Brasileiro</span></div>
+      </a><br/>
+      <b>Marcos Evangelista</b><br/>
+      <i>Português Brasileiro</i>
+    </td>
+    <td align="center" width="180">
+      <a href="https://github.com/JohnFowler58">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="John Fowler"/>
+      </a><br/>
+      <b>John Fowler</b><br/>
+      <i>Magyar</i>
     </td>
   </tr>
 </table>
