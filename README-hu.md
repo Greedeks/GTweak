@@ -110,7 +110,7 @@
 > ⚠ A segédprogramot kizárólag megbízható forrásból letöltött hivatalos Windows-képekhez tervezték. Ha a Windows csökkentett/módosított verzióját telepítette, kizárólag Ön felelős annak működéséért.
 
 ```c++
-Windows támogatás: 10-tő (build >=18362.116)
+Windows támogatás: 10-től (build >=18362.116)
 Minimális képernyőfelbontás: 1280×720 (HD)
 Telepített platform: .NET Framework 4.8
 ```
@@ -185,7 +185,7 @@ Telepített platform: .NET Framework 4.8
 **I. Lekérési kérelem benyújtása**
 - Készíts forkot a tárról [itt](https://github.com/Greedeks/GTweak/fork).
 - Töltse le a [English base file (Localize.xaml)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml) **vagy** böngészés és másolás [létező fordítások]ból(https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages) más nyelveken.
-- Translate the file and save it in a folder named after your [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) (például: `ko` a koreaihoz, `hu` a magyar nyelvhez).
+- Fordítsd le a fájlt, és mentsd el egy a nyelvről elnevezett mappába [Nyelvi kód](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) (például: `ko` a koreaihoz, `hu` a magyar nyelvhez).
 </br>Regionális változatok esetén: nyelv-régió (pl. `pt-br` a brazil portugálhoz, `zh-cn` a leegyszerűsített kínaihoz).
 - Készítsen egy mappát:
 <div>
