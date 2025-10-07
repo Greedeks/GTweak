@@ -4,11 +4,11 @@
  
 <div align="center" style="margin: 20px 0; text-align: center;">
  
-[![Legújabb kiadás](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/releases/latest)
-![Letöltések](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
-![Csillagok](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=179962)
-![Méret](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
-[![BSD 3 záradékos licenc](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/releases/latest)
+![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
+![Stars](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=179962)
+![Size](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 </div>
 
 <br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/0c2f2947-6d63-46b3-9933-8e72a8b45ed3" width="260" height="68" alt="Töltse le a legújabb verziót"></a><br/><br/>
@@ -82,27 +82,27 @@
 <h2> Képernyőképek 📷</h2>
 <details>
   <summary> Titoktartás </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Confidentiality.png"/>
 </details>
 <details>
   <summary> Interfész </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Interface.png"/>
 </details>
 <details>
   <summary> Alkalmazások </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Applications.png"/>
 </details>
 <details>
   <summary> Szolgáltatások </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Services.png"/>
 </details>
 <details>
   <summary> Rendszer </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/System.png"/>
 </details>
 <details>
   <summary> Továbbiak </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/More.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/More.png"/>
 </details>
 
 <h2> Rendszerkövetelmények</h2>
@@ -116,7 +116,7 @@ Telepített platform: .NET Framework 4.8
 ```
 </br>
 
-> [!FIGYELMEZTETÉS]  
+> [!WARNING]  
 > A szoftver használata előtt tiltsa le a víruskeresőt. Ha Windows Defendert használ, adja hozzá a programot a kizárásokhoz!
 </br>
 
@@ -142,76 +142,41 @@ Telepített platform: .NET Framework 4.8
     <td align="center" width="180">
       <a href="https://github.com/VenusGirl">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/53147200?v=4&h=70&w=70&fit=cover&mask=circle" alt="VenusGirl"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=VenusGirl"/></div>
-      </a>
-      <div><span>Koreai</span></div>
+      </a><br/>
+      <b>VenusGirl</b><br/>
+      <i>한국어</i>
     </td>
     <td align="center" width="180">
       <a href="https://github.com/Kopejkin">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/172585094?v=4&h=70&w=70&fit=cover&mask=circle" alt="Kopejkin"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Kopejkin"/></div>
-      </a>
-      <div><span>Ukrán</span></div>
+      </a><br/>
+      <b>Kopejkin</b><br/>
+      <i>Українська</i>
     </td>
     <td align="center" width="180">
       <a href="https://github.com/Zephyris-Pro">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/200662396?v=4&h=70&w=70&fit=cover&mask=circle" alt="Zephyris"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Zephyris"/></div>
-      </a>
-      <div><span>Francia, Olasz</span></div>
+      </a><br/>
+      <b>Zephyris</b><br/>
+      <i>Français, Italiano</i>
     </td>
     <td align="center" width="180">
       <a href="https://github.com/marcolinojunior">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/63563268?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
-        <div><img src="https://readme-typing-svg.demolab.com?font=Kanit&size=15&duration=1000&pause=10&center=true&repeat=false&width=130&height=30&lines=Marcos+Evangelista"/></div>
-      </a>
-      <div><span>Brazil Portugál</span></div>
+      </a><br/>
+      <b>Marcos Evangelista</b><br/>
+      <i>Português Brasileiro</i>
     </td>
-	    <td align="center" width="180">
+    <td align="center" width="180">
       <a href="https://github.com/JohnFowler58">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="John Fowler"/>
       </a><br/>
       <b>John Fowler</b><br/>
-      <i>Magyar</i>
+      <i>Hungarian</i>
     </td>
-
   </tr>
 </table>
 
-</br>
-
-### Hogyan lehet lefordítani egy programot 📝
-
-**I. Lekérési kérelem benyújtása**
-- Készíts forkot a tárról [itt](https://github.com/Greedeks/GTweak/fork).
-- Töltse le a [English base file (Localize.xaml)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml) **vagy** böngészés és másolás [létező fordítások]ból(https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages) más nyelveken.
-- Fordítsd le a fájlt, és mentsd el egy a nyelvről elnevezett mappába [Nyelvi kód](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) (például: `ko` a koreaihoz, `hu` a magyar nyelvhez).
-</br>Regionális változatok esetén: nyelv-régió (pl. `pt-br` a brazil portugálhoz, `zh-cn` a leegyszerűsített kínaihoz).
-- Készítsen egy mappát:
-<div>
-    <pre>
-📂 .Source
-└── 📁 GTweak
-    └── 📁 Languages
-        ├── 📁 en
-        ├── 📁 ru
-        └── 📁 [a-te-nyelved-kódja]
-    </pre>
-</div>
-
-- Add meg a nyelved nevét (ahogyan az anyanyelveden van írva) a [LanguageCatalog]-hoz(https://github.com/Greedeks/GTweak/Languages/LanguageCatalog.xaml).  
-  ⚠️ Győződj meg róla, hogy követed a [MEGJEGYZÉS](https://github.com/Greedeks/GTweak/blob/8caab74a7cf748f6a20c9d1e7c8a81821905ef9b/.Source/GTweak/Languages/LanguageCatalog.xaml#L5C4-L9C8) fájlban leírtakat.
-- Nyújts be egy **Pull Request-et** a módosításaidhoz. </br></br>
-
-**II. Kérés kiadáson keresztül**
-- Ha nem ismeri a Git-et, nyisson meg egy [Feature Request issue]-t(https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
-  - Adja meg a célt [nyelvi kód](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11).
-  - Adja meg az anyanyelvén írt nyelv nevét a [MEGJEGYZÉS](https://github.com/Greedeks/GTweak/blob/8caab74a7cf748f6a20c9d1e7c8a81821905ef9b/.Source/GTweak/Languages/LanguageCatalog.xaml#L5C4-L9C8) fájlban leírtnak megfelelően.
-  - Csatolja a lefordított 'Localize.xaml' fájlt.
-</br>
-
-> [!MEGJEGYZÉS]  
-> Előfordulhat, hogy a jelenlegi fordítás hiányos, mivel olyan új funkciókat adtak hozzá, amelyek még nem lettek lefordítva. Ilyen esetekben a program ezen részei alapértelmezés szerint angol nyelven jelennek meg.
 </br>
 
 ## Kapcsolat

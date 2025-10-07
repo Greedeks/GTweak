@@ -11,7 +11,6 @@
 
     <v:String x:Key="en">English (EN)</v:String>
     <v:String x:Key="fr">Français (FR)</v:String>
-    <v:String x:Key="hu">Magyar (HU)</v:String>
     <v:String x:Key="it">Italiano (IT)</v:String>
     <v:String x:Key="ko">한국어 (KO)</v:String>
     <v:String x:Key="hu">Hungarian (HU)</v:String>

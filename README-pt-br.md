@@ -173,7 +173,7 @@ Plataforma instalada: .NET Framework 4.8
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="John Fowler"/>
       </a><br/>
       <b>John Fowler</b><br/>
-      <i>Magyar</i>
+      <i>Hungarian</i>
     </td>
   </tr>
 </table>
