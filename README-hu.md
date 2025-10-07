@@ -11,7 +11,7 @@
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 </div>
 
-<br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/0c2f2947-6d63-46b3-9933-8e72a8b45ed3" width="260" height="68" alt="Töltse le a legújabb verziót"></a><br/><br/>
+<br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/Greedeks/GTweak/blob/main/.github/button.png" width="260" height="68" alt="Download the latest version"></a><br/><br/>
 
 <!-- language --> 
 <div align="center">
