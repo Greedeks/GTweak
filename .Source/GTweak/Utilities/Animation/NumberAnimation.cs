@@ -38,7 +38,7 @@ namespace GTweak.Utilities.Animation
                     Duration = TimeSpan.FromSeconds(0.5),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
                 };
-                Timeline.SetDesiredFrameRate(int32Anim, 240);
+                Timeline.SetDesiredFrameRate(int32Anim, 60);
                 textBlock.BeginAnimation(AnimatedValueProperty, int32Anim);
             }
         }

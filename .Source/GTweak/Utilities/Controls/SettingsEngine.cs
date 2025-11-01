@@ -6,7 +6,6 @@ using Microsoft.Win32;
 using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,8 +19,8 @@ namespace GTweak.Utilities.Controls
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
-        internal static readonly string[] AvailableLangs = new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_main", "").Replace("_", "-")).OrderBy(lang => lang, StringComparer.OrdinalIgnoreCase).ToArray();
-        internal static readonly string[] AvailableThemes = { "dark", "light", "cobalt", "amethyst", "cblue", "system" };
+        internal static readonly string[] AvailableLangs = new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_", "-")).OrderBy(lang => lang, StringComparer.OrdinalIgnoreCase).ToArray();
+        internal static readonly string[] AvailableThemes = { "Dark", "Light" };
 
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
@@ -84,7 +83,7 @@ namespace GTweak.Utilities.Controls
         internal static void SaveFileConfig()
         {
             if (INIManager.IsAllTempDictionaryEmpty)
-                new NotificationManager().Show("info", "export_warning_notification").Perform();
+                NotificationManager.Show("info", "export_warning_noty").Perform();
             else
             {
                 VistaSaveFileDialog vistaSaveFileDialog = new VistaSaveFileDialog
@@ -103,13 +102,13 @@ namespace GTweak.Utilities.Controls
 
                     if (Path.GetExtension(PathLocator.Files.Config)?.ToLower() != ".ini")
                         PathLocator.Files.Config = Path.ChangeExtension(PathLocator.Files.Config, ".ini");
-                    
+
                     if (File.Exists(PathLocator.Files.Config))
                         File.Delete(PathLocator.Files.Config);
 
                     INIManager iniManager = new INIManager(PathLocator.Files.Config);
                     iniManager.Write("GTweak", "Author", "Greedeks");
-                    iniManager.Write("GTweak", "Release", currentRelease);
+                    iniManager.Write("GTweak", "FormatVersion", "2");
                     iniManager.WriteAll(INIManager.SectionConf, INIManager.TempTweaksConf);
                     iniManager.WriteAll(INIManager.SectionIntf, INIManager.TempTweaksIntf);
                     iniManager.WriteAll(INIManager.SectionSvc, INIManager.TempTweaksSvc);
@@ -133,15 +132,15 @@ namespace GTweak.Utilities.Controls
             PathLocator.Files.Config = vistaOpenFileDialog.FileName;
             INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
-            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("Release"))
+            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("FormatVersion") && iniManager.GetKeysOrValue("GTweak", false).Contains("2"))
             {
                 if (File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("Slider")))
                     new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
                 else
-                    new NotificationManager().Show("info", "empty_import_notification").Perform();
+                    NotificationManager.Show("info", "empty_import_noty").Perform();
             }
             else
-                new NotificationManager().Show("info", "warn_import_notification").Perform();
+                NotificationManager.Show("info", "warn_import_noty").Perform();
         }
 
         internal static void SelfRemoval()

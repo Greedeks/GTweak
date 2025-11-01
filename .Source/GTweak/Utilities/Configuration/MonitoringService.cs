@@ -9,16 +9,11 @@ using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal class MonitoringService
+    internal class MonitoringService : HardwareData
     {
         internal event Action<DeviceType> HandleDevicesEvents;
         private readonly List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)> _watcherHandler = new List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)>();
         private readonly ServiceController[] _servicesList = ServiceController.GetServices();
-
-        internal static string GetNumberRunningProcesses { get; set; } = "...";
-        internal static string GetNumberRunningService { get; set; } = "...";
-        internal int GetMemoryUsage => GetPhysicalAvailableMemory().Result;
-        internal static int GetProcessorUsage { get; private set; } = 1;
 
         internal enum DeviceType
         {
@@ -52,7 +47,7 @@ namespace GTweak.Utilities.Configuration
         }
 
         [DllImport("psapi.dll", SetLastError = true)]
-        static extern bool EnumProcesses([Out] uint[] lpidProcess, uint cb, out uint lpcbNeeded);
+        private static extern bool EnumProcesses([Out] uint[] lpidProcess, uint cb, out uint lpcbNeeded);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern bool GlobalMemoryStatusEx([In, Out] MemoryStatus lpBuffer);
@@ -110,17 +105,17 @@ namespace GTweak.Utilities.Configuration
             }).ConfigureAwait(false);
         }
 
-        private async Task<int> GetPhysicalAvailableMemory()
+        internal async Task GetPhysicalAvailableMemory()
         {
-            return await Task.Run(() =>
+            await Task.Run(() =>
             {
                 MemoryStatus memStatus = new MemoryStatus();
                 if (!GlobalMemoryStatusEx(memStatus))
-                    return 0;
+                    Memory.Usage = 0;
 
                 int totalMemory = (int)(memStatus.ullTotalPhys / 1048576);
                 int availableMemory = (int)(memStatus.ullAvailPhys / 1048576);
-                return (int)((float)(totalMemory - availableMemory) / totalMemory * 100);
+                Memory.Usage = (int)((float)(totalMemory - availableMemory) / totalMemory * 100);
             }).ConfigureAwait(false);
         }
 
@@ -149,12 +144,12 @@ namespace GTweak.Utilities.Configuration
 
                     ulong totalTicksDiff = newTotalTicks - totalTicks;
 
-                    GetProcessorUsage = Math.Min(100, Math.Max(0, (int)(100.0 * (totalTicksDiff - (newIdleTicks - idleTicks)) / totalTicksDiff)));
+                    Processor.Usage = Math.Min(100, Math.Max(0, (int)(100.0 * (totalTicksDiff - (newIdleTicks - idleTicks)) / totalTicksDiff)));
                     success = true;
                 }).ConfigureAwait(false);
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            finally { if (!success) GetProcessorUsage = 1; }
+            finally { if (!success) Processor.Usage = 1; }
         }
 
         internal void StartDeviceMonitoring()

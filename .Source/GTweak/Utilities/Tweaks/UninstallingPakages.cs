@@ -14,13 +14,20 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class UninstallingPakages : TaskSchedulerManager
     {
+        internal static event Action DataChanged;
+        internal static void OnPackagesChanged() => DataChanged?.Invoke();
+
         internal static bool IsOneDriveInstalled => File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe"));
         private static bool _isLocalAccount = false;
 
-        internal void GetInstalledPackages() => InstalledPackagesCache = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
+        internal void GetInstalledPackages()
+        {
+            InstalledPackagesCache = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
+            OnPackagesChanged();
+        }
         internal static HashSet<string> InstalledPackagesCache = new HashSet<string>();
 
-        internal static readonly Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
+        internal static Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
         {
             ["OneDrive"] = (null, false, null),
             ["MicrosoftStore"] = (null, false, new List<string> { "Microsoft.WindowsStore" }),
@@ -67,6 +74,9 @@ namespace GTweak.Utilities.Tweaks
             ["WebMediaExtensions"] = (null, false, new List<string> { "Microsoft.WebMediaExtensions" }),
             ["OneConnect"] = ("MobilePlans", false, new List<string> { "Microsoft.OneConnect" }),
             ["Edge"] = ("MicrosoftEdge", false, new List<string> { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*", "Microsoft.Copilot" }),
+            ["Notepad"] = ("Notepad", false, new List<string> { "Microsoft.WindowsNotepad" }),
+            ["Calculator"] = ("Calculator", false, new List<string> { "Microsoft.WindowsCalculator" }),
+            ["Copilot"] = ("Copilot", false, new List<string> { "Microsoft.Copilot" }),
         };
 
         internal static bool HandleAvailabilityStatus(string key, bool? isUnavailable = null)
@@ -76,6 +86,7 @@ namespace GTweak.Utilities.Tweaks
                 if (isUnavailable.HasValue)
                     PackagesDetails[key] = (details.Alias, isUnavailable.Value, details.Scripts);
 
+                OnPackagesChanged();
                 return details.IsUnavailable;
             }
             return false;

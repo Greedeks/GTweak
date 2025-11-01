@@ -66,7 +66,7 @@ namespace GTweak.Utilities.Managers
                     ChangeRules(isDisabled, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
                 });
             }
-            catch { new NotificationManager().Show("warn", "warn_firewall_notification").Perform(); }
+            catch { NotificationManager.Show("warn", "warn_firewall_noty").Perform(); }
         }
 
 
@@ -97,7 +97,7 @@ namespace GTweak.Utilities.Managers
         protected static void BlockSpyDomain(in bool isDisabled)
         {
             try { RulesHosts(isDisabled); }
-            catch { new NotificationManager().Show("warn", "warn_firewall_notification").Perform(); }
+            catch { NotificationManager.Show("warn", "warn_firewall_noty").Perform(); }
         }
 
         private static void RulesHosts(in bool isDisabled)

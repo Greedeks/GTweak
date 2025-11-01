@@ -1,7 +1,6 @@
 ﻿using GTweak.Assets.UserControl;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,37 +19,40 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            string descriptionTweak = (string)FindResource(((ToggleButton)sender).Name + "_description_system");
+            string description = string.Empty;
 
-            if (CommentTweak.Text != descriptionTweak)
-                CommentTweak.Text = descriptionTweak;
-        }
+            switch (sender)
+            {
+                case StackPanel panel:
+                    description = panel.ToolTip?.ToString() ?? string.Empty;
+                    break;
 
-        private void TweakSlider_MouseEnter(object sender, MouseEventArgs e)
-        {
-            string descriptionTweak = (string)FindResource(((StackPanel)sender).Name + "_description_system");
+                case ToggleButton toggle:
+                    description = toggle.Description?.ToString() ?? string.Empty;
+                    break;
+            }
 
-            if (CommentTweak.Text != descriptionTweak)
-                CommentTweak.Text = descriptionTweak;
+            if (DescBlock.Text != description)
+                DescBlock.Text = description;
         }
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (CommentTweak.Text != (string)FindResource("defaultDescription"))
-                CommentTweak.Text = (string)FindResource("defaultDescription");
+            if (DescBlock.Text != DescBlock.DefaultText)
+                DescBlock.Text = DescBlock.DefaultText;
         }
 
-        private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
-        private void TglButton_ChangedState(object sender, EventArgs e)
+        private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
-            if (toggleButton.Name != "TglButton8")
+            if (toggleButton.Name != "TglButton3")
             {
                 _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
                 if (NotificationManager.SysActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
-                    new NotificationManager(300).Show().Perform(action);
+                    NotificationManager.Show().WithDelay(300).Perform(action);
 
                 Parallel.Invoke(async delegate { await Task.Delay(1000); _sysTweaks.AnalyzeAndUpdate(); });
             }

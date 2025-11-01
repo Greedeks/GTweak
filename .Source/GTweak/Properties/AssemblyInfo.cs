@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -7,9 +9,9 @@ using System.Windows;
 [assembly: AssemblyProduct("GTweak")]
 [assembly: AssemblyCopyright("© 2024-2025 Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
-[assembly: AssemblyInformationalVersion("Build: 5.3.4")]
-[assembly: AssemblyVersion("5.3.64.259")]
-[assembly: AssemblyFileVersion("5.3.64.259")]
+[assembly: AssemblyInformationalVersion("Build: 5.3.5")]
+[assembly: AssemblyVersion("5.3.43.433")]
+[assembly: AssemblyFileVersion("5.3.43.433")]
 
 [assembly: ComVisible(false)]
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -7,51 +8,67 @@ namespace GTweak.Utilities.Animation
 {
     internal sealed class TypewriterAnimation
     {
-        internal TypewriterAnimation(in string textToAnimate, in TextBlock textBlock, in TimeSpan timeSpan)
+        private static EventHandler handler = null;
+
+        internal static void Create(in string textToAnimate, in TextBlock textBlock, in TimeSpan timeSpan)
         {
-            if (!(textBlock.FindName(textBlock.Name) is TextBlock))
+            if (textBlock == null || string.IsNullOrEmpty(textToAnimate))
                 return;
 
-            Storyboard storyBoard = new Storyboard
-            {
-                FillBehavior = FillBehavior.HoldEnd
-            };
+            Storyboard storyboard = new Storyboard { FillBehavior = FillBehavior.HoldEnd };
 
-            StringAnimationUsingKeyFrames stringAnimation = StringAnimation(textToAnimate, timeSpan);
-
-            Storyboard.SetTargetName(stringAnimation, textBlock.Name);
+            StringAnimationUsingKeyFrames stringAnimation = CreateStringAnimation(textToAnimate, timeSpan);
+            Storyboard.SetTarget(stringAnimation, textBlock);
             Storyboard.SetTargetProperty(stringAnimation, new PropertyPath(TextBlock.TextProperty));
-            storyBoard.Children.Add(stringAnimation);
+            storyboard.Children.Add(stringAnimation);
 
             DoubleAnimation opacityAnimation = FactoryAnimation.CreateIn(0, 1, timeSpan.TotalSeconds);
-            Storyboard.SetTargetName(opacityAnimation, textBlock.Name);
+            Storyboard.SetTarget(opacityAnimation, textBlock);
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-            storyBoard.Children.Add(opacityAnimation);
+            storyboard.Children.Add(opacityAnimation);
 
-            textBlock.BeginStoryboard(storyBoard);
-            storyBoard.Remove(textBlock);
+            handler = (s, e) =>
+            {
+                storyboard.Children.Clear();
+                storyboard.Completed -= handler;
+            };
+            storyboard.Completed += handler;
+
+            textBlock.BeginStoryboard(storyboard);
         }
 
-        private StringAnimationUsingKeyFrames StringAnimation(in string textToAnimate, in TimeSpan timeSpan)
+        private static StringAnimationUsingKeyFrames CreateStringAnimation(in string textToAnimate, in TimeSpan timeSpan)
         {
             StringAnimationUsingKeyFrames stringAnimation = new StringAnimationUsingKeyFrames
             {
                 Duration = new Duration(timeSpan)
             };
 
-            string temp = string.Empty;
-            foreach (char data in textToAnimate)
+            StringBuilder temp = new StringBuilder();
+            int totalChars = textToAnimate.Length;
+
+            if (totalChars != 0)
             {
-                temp += data;
-                DiscreteStringKeyFrame keyFrame = new DiscreteStringKeyFrame
+                double millisecondsPerChar = timeSpan.TotalMilliseconds / totalChars;
+
+                for (int i = 0; i < totalChars; i++)
                 {
-                    KeyTime = KeyTime.Paced,
-                    Value = temp
-                };
-                stringAnimation.KeyFrames.Add(keyFrame);
+                    temp.Append(textToAnimate[i]);
+                    TimeSpan currentTime = TimeSpan.FromMilliseconds(millisecondsPerChar * (i + 1));
+
+                    DiscreteStringKeyFrame keyFrame = new DiscreteStringKeyFrame
+                    {
+                        KeyTime = KeyTime.FromTimeSpan(currentTime),
+                        Value = temp.ToString()
+                    };
+
+                    stringAnimation.KeyFrames.Add(keyFrame);
+                }
+
+                Timeline.SetDesiredFrameRate(stringAnimation, 60);
+                return stringAnimation;
             }
 
-            Timeline.SetDesiredFrameRate(stringAnimation, 240);
             return stringAnimation;
         }
     }

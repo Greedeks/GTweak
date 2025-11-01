@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground" Value="{StaticResource Color_Highlighted}"/>
+        <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="14" />
@@ -15,15 +15,15 @@
         <Setter Property="Height" Value="27" />
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="CaretBrush" Value="{StaticResource Color_Highlighted}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource Brush_Highlighted}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
-                        <Border x:Name="border" Background="{StaticResource Color_Background_Dark}" BorderBrush="{StaticResource Color_Accent}" BorderThickness="0,0,0,1" CornerRadius="5"/>
+                        <Border x:Name="border" Background="{StaticResource Brush_Background_TextBox}" BorderBrush="{StaticResource Brush_Accent}" BorderThickness="0,0,0,1" CornerRadius="5"/>
                         <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
-                        <Label Margin="5,0,0,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
-                               Visibility="Collapsed" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}"/>
+                        <Label Margin="5,0,5,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontFamily="{StaticResource Jura}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -33,16 +33,16 @@
                             <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{StaticResource Color_Highlighted}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource Color_TetBox_Border}" TargetName="border"/>
+                            <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="False">
                             <Setter Property="Text" Value=""/>
-                            <Setter Property="BorderBrush" Value="{StaticResource Color_TetBox_Border}" TargetName="border"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
                             <Setter Property="Text" Value=""/>
-                            <Setter Property="BorderBrush" Value="{StaticResource Color_TetBox_Border}" TargetName="border"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

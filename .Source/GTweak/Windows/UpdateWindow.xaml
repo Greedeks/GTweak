@@ -1,125 +1,47 @@
-﻿<Window x:Class="GTweak.Windows.UpdateWindow"
+﻿<ui:FluentWindow x:Class="GTweak.Windows.UpdateWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:GTweak.Windows"
-        mc:Ignorable="d"
-        Title="{DynamicResource title_win_update}" WindowStyle="None"
-        Height="180" Width="400" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        IsTabStop="False" Topmost="True" ShowInTaskbar="True" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Window.Clip>
-        <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,400,180"/>
-    </Window.Clip>
+        mc:Ignorable="d" Icon="/GTweak.ico"
+        Background="Transparent" WindowStyle="None" IsTabStop="False" SnapsToDevicePixels="True" UseLayoutRounding="True" KeyboardNavigation.TabNavigation="None"
+        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Title="{DynamicResource title_win_update}" Topmost="True" MaxWidth="400" MaxHeight="250" MinHeight="120" MinWidth="360" Loaded="Window_Loaded">
+    <Grid Background="{StaticResource Brush_Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <Grid MouseDown="TitleBar_MouseDown">
-        <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
-            <Rectangle Style="{StaticResource BordersRectangle}" d:Visibility="Collapsed"/>
-
-            <Grid Margin="0" Background="Transparent">
-                <Grid x:Name="QuestionUpdate" Visibility="Visible">
-                    <Grid Margin="0" Background="Transparent">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="31*"/>
-                            <RowDefinition Height="141*"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
-
-                    <Grid Grid.Row="0">
-                        <Button x:Name="BtnExit" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Height="30" Margin="0,0,10,0" Cursor="Hand" PreviewMouseDown="BtnExit_PreviewMouseDown">
-                            <Image Width="12">
-                                <Image.Style>
-                                    <Style TargetType="{x:Type Image}">
-                                        <Setter Property="Source" Value="{StaticResource DI_BtnExit_In}"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsMouseOver, ElementName=BtnExit}" Value="true">
-                                                <Setter Property="Source" Value="{StaticResource DI_BtnExit}"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitleButtons}">
-                                    <Style.Triggers>
-                                        <Trigger Property="Visibility" Value="Visible">
-                                            <Setter Property="RenderTransform">
-                                                <Setter.Value>
-                                                    <TranslateTransform X="0" Y="0"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                        <EventTrigger RoutedEvent="Loaded">
-                                            <BeginStoryboard>
-                                                <Storyboard Timeline.DesiredFrameRate="240">
-                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="0" To="0" Duration="0"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </Grid>
-                    
-                    <Grid Grid.Row="1">
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Width="25">
-                                    <Image.Style>
-                                        <Style TargetType="Image">
-                                            <Setter Property="Source" Value="{StaticResource DI_Log}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <TextBlock Text="{DynamicResource title_update}" Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="19px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,0,0,0"/>
-                            </StackPanel>
-                            <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="16px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,3,0,0">
-                                    <Run x:Name="CurrentVerison" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/>
-                                    <Run Text="➔"/>
-                                    <Run x:Name="NewVerison" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/>
-                            </TextBlock>
-                            <TextBlock Margin="0,6,0,0" Text="{DynamicResource text_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="370" FontFamily="{StaticResource Jura}" FontSize="14px" TextAlignment="Left" FontStretch="Medium" TextWrapping="Wrap"/>
-                            <Grid Margin="0,15,0,0">
-                                <Button x:Name="BtnLog" Content="{DynamicResource btn_log}" Style="{StaticResource BtnDefaultM}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnLog_PreviewMouseDown"/>
-                                <Button x:Name="BtnUpdate" Content="{DynamicResource btn_upd}" Style="{StaticResource BtnDefault}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="110" Height="30" Cursor="Hand" PreviewMouseDown="BtnUpdate_PreviewMouseDown" Margin="0,0,20,0"/>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                    
-                </Grid>
-                
-                <Grid x:Name="DownloadUpdate" Visibility="Hidden">
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Height="140" Margin="20,20,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="25">
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Setter Property="Source" Value="{StaticResource DI_Download}"/>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                            <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="19px" HorizontalAlignment="Center" TextAlignment="Center" Margin="10,0,0,0">
-                                <Run Text="{DynamicResource download_update}"/>
-                                <Run Text="“"/><Run Text="GTweak" Foreground="{StaticResource Color_Accent}"/>
-                                <Run x:Name="DownloadVersion" Text="0.0.0" Foreground="{StaticResource Color_Accent}"/><Run Text="”"/>
-                            </TextBlock>
-                        </StackPanel>
-                        <TextBlock Text="{DynamicResource noty_update}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,10,0,0"/>
-                        <ProgressBar x:Name="ProgressDownload" Value="0" Style="{StaticResource ProgressBarStyle}"  Margin="0,25,0,0" Width="360" Height="10"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource Text}" FontSize="13px" Margin="0,5,0,0">
-                                <Run Text="{Binding ElementName=ProgressDownload, Path=Value, Mode=OneWay,StringFormat=N0}"/>
-                                <Run Text="%  ● "/>
-                                <Run x:Name="SizeByte" Text="{DynamicResource connection_update}"/>
-                            </TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-                
-            </Grid>
-            
+        <Grid Grid.Row="0" MouseDown="TitleBar_MouseDown" Background="Transparent">
+            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True" Height="48">
+                <ui:SymbolIcon Symbol="CloudArrowDown24" FontSize="20px" Foreground="{StaticResource Brush_Accent}"  Margin="15,5,0,0" HorizontalAlignment="Center"/>
+                <Viewbox Stretch="None">
+                    <TextBlock Style="{StaticResource TextDefault}" FontSize="18px" Margin="5,0,100,0">
+                            <Run Text="{DynamicResource download_update}"/>
+                            <Run Text="“"/><Run Text="GTweak" Foreground="{StaticResource Brush_Accent}"/>
+                            <Run Text="{Binding DownloadVersion}" Foreground="{StaticResource Brush_Accent}"/><Run Text="”"/>
+                    </TextBlock>
+                </Viewbox>
+            </DockPanel>
         </Grid>
+
+        <Grid Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource noty_update}" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                <ProgressBar x:Name="ProgressDownload" Value="0" Foreground="{StaticResource Brush_Accent}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="340" Height="10"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock TextAlignment="Center" Style="{StaticResource TextDefault}"  Foreground="{StaticResource Brush_TextBlock_Inactivity}"  FontSize="13px" Margin="10,5,0,0">
+                       <Run FontFamily="{StaticResource Play}" Text="{Binding ElementName=ProgressDownload, Path=Value, Mode=OneWay,StringFormat=N0}"/>
+                       <Run Text="%  ● "/>
+                       <Run x:Name="SizeByte" Text="{DynamicResource connection_update}"/>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
     </Grid>
-</Window>
+    
+</ui:FluentWindow>

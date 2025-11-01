@@ -5,24 +5,42 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.Assets.UserControl"
              mc:Ignorable="d" 
-             d:Height="auto" d:Width="auto" SnapsToDevicePixels="True" UseLayoutRounding="True">
-    <Border CornerRadius="10" Height="230" Width="230" Background="{StaticResource Color_Background_Dark}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+             d:Height="auto" d:Width="auto" IsTabStop="False" KeyboardNavigation.TabNavigation="None"
+             SnapsToDevicePixels="True" UseLayoutRounding="True">
+    <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left">
+        <Grid HorizontalAlignment="Center">
+            <Border CornerRadius="8" Opacity="0.5" Background="#33000000" Margin="6,6,0,0"  IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=CardBody}" Height="{Binding ActualHeight, ElementName=CardBody}"/>
+            <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}"  CornerRadius="8" Padding="10" MaxWidth="350" HorizontalAlignment="Center" VerticalAlignment="Top" SnapsToDevicePixels="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Vertical" >
-                <Image x:Name="CardImage" Margin="0,15,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="60" Width="60" Stretch="Uniform" Source="{Binding IconSource, RelativeSource={RelativeSource AncestorType=local:Card}}"/>
-                <TextBlock x:Name="CardTitle" Style="{StaticResource Text}" Margin="0,5,0,0" FontSize="11pt" Width="Auto" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"  TextAlignment="Center" Text="Title"/>
-                <TextBlock x:Name="CardText" Style="{StaticResource Text}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Margin="0,10,0,0" FontSize="11pt" Width="218" Height="70" HorizontalAlignment="Center" TextAlignment="Center" Text="Text"/>
-            </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,8">
+                        <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="CardIcon" Height="24" Width="24"/>
+                                <TextBlock Margin="5,0,0,0" x:Name="CardTitle" Style="{StaticResource TextDefault}" FontSize="16" Foreground="{StaticResource Brush_Accent}"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
 
-            <Button x:Name="CardButton" Grid.Row="1" Content="Content" Style="{StaticResource BtnDefault}" 
-                   Width="150" Height="30" Margin="0,0,0,15" HorizontalAlignment="Center" 
-                   VerticalAlignment="Bottom" Cursor="Hand" 
-                   PreviewMouseLeftButtonUp="CardButton_PreviewMouseLeftButtonUp"/>
+                    <TextBlock Margin="0,0,0,12" Grid.Row="1" x:Name="CardText" FontSize="14" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}"/>
+
+
+                    <Grid Grid.Row="2" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button x:Name="CardButtonSecondary" Grid.Column="0" Margin="0,0,10,0" HorizontalAlignment="Right" Style="{StaticResource ButtonContent}" PreviewMouseLeftButtonUp="CardButtonSecondary_PreviewMouseLeftButtonUp" Visibility="Collapsed"/>
+                        <Button x:Name="CardButton" Grid.Column="1" Style="{StaticResource ButtonContent_Inverted}" PreviewMouseLeftButtonUp="CardButton_PreviewMouseLeftButtonUp"/>
+                    </Grid>
+                </Grid>
+            </Border>
         </Grid>
-    </Border>
+    </Viewbox>
 </UserControl>

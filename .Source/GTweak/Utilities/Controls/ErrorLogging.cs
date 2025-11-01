@@ -45,7 +45,7 @@ namespace GTweak.Utilities.Controls
                     byte exLevel = 1;
 
                     await writer.WriteLineAsync($"GTweak has crashed!\n{headerLine}\nIf you wish to report this, please open an issue here:\nhttps://github.com/Greedeks/GTweak/issues\n{headerLine}\n");
-                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {SystemDiagnostics.HardwareData.OS.Name}\n{headerLine}\n");
+                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {HardwareData.OS.Name}\n{headerLine}\n");
 
                     while (currentEx != null)
                     {

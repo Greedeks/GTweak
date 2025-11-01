@@ -7,8 +7,8 @@ namespace GTweak.Core.Base
 {
     internal interface IBasePageItem
     {
-        public string Name { get; set; }
-        public bool State { get; set; }
+        string Name { get; set; }
+        bool State { get; set; }
     }
 
     internal interface ITypedPageItem<T> : IBasePageItem

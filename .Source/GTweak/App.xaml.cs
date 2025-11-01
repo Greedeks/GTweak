@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
+using Wpf.Ui.Appearance;
 
 namespace GTweak
 {
@@ -37,6 +38,8 @@ namespace GTweak
             }
 
             SettingsEngine.СheckingParameters();
+            ApplicationThemeManager.Apply(string.Equals(SettingsEngine.Theme, SettingsEngine.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase) ? ApplicationTheme.Dark : ApplicationTheme.Light);
+
             RunGuard.CheckingApplicationCopies();
             await RunGuard.CheckingSystemRequirements();
 
@@ -115,15 +118,7 @@ namespace GTweak
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
-                    Source = value switch
-                    {
-                        "dark" => GetResourceUri("Dark", true),
-                        "light" => GetResourceUri("Light", true),
-                        "cobalt" => GetResourceUri("Cobalt", true),
-                        "amethyst" => GetResourceUri("Dark amethyst", true),
-                        "cblue" => GetResourceUri("Cold Blue", true),
-                        _ => RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", string.Empty) == "0" ? GetResourceUri("Dark", true) : GetResourceUri("Light", true)
-                    }
+                    Source = GetResourceUri(char.ToUpper(value[0]) + value.Substring(1).ToLower(), true)
                 };
 
                 ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
@@ -148,3 +143,4 @@ namespace GTweak
         }
     }
 }
+

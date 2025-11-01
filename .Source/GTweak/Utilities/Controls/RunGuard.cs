@@ -46,7 +46,7 @@ namespace GTweak.Utilities.Controls
         {
             await Task.Run(() => new SystemDiagnostics().GetOperatingSystemInfo());
 
-            if ((SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) && SystemDiagnostics.HardwareData.OS.Build.CompareTo(18362.116m) >= 0)
+            if ((HardwareData.OS.IsWin11 || HardwareData.OS.IsWin10) && HardwareData.OS.Build.CompareTo(18362.116m) >= 0)
                 return;
 
             new MessageWindow(true).ShowDialog();

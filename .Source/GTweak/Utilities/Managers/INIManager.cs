@@ -33,7 +33,7 @@ namespace GTweak.Utilities.Managers
         internal const string SectionSvc = "Services Tweaks";
         internal const string SectionSys = "System Tweaks";
 
-        internal INIManager(string iniPath) => _pathToConfig = $@"\\?\{new FileInfo(iniPath).FullName}";
+        internal INIManager(string iniPath) => _pathToConfig = new FileInfo(iniPath).FullName;
 
         internal string Read(string section, string key)
         {
@@ -60,7 +60,6 @@ namespace GTweak.Utilities.Managers
             selectedDictionary.Add(tweak, value.ToString());
         }
 
-
         internal bool IsThereSection(string section)
         {
             StringBuilder retValue = new StringBuilder(255);
@@ -68,21 +67,29 @@ namespace GTweak.Utilities.Managers
             return !string.IsNullOrEmpty(retValue.ToString());
         }
 
-        [DllImport("kernel32.dll")]
-        private static extern int GetPrivateProfileSection(string section, byte[] retVal, int size, string filePath);
         internal List<string> GetKeysOrValue(string section, bool isGetKey = true)
         {
-            byte[] buffer = new byte[2048];
-            GetPrivateProfileSection(section, buffer, 2048, _pathToConfig);
-            string[] temp = Encoding.ASCII.GetString(buffer).Trim('\0').Split('\0');
+            var result = new List<string>();
+            string[] lines = File.ReadAllLines(_pathToConfig);
 
-            List<string> result = new List<string>();
-
-            foreach (string data in temp)
+            bool inSection = false;
+            foreach (string rawLine in lines)
             {
-                int equalsIndex = data.IndexOf("=", StringComparison.InvariantCulture);
-                if (equalsIndex > 0)
-                    result.Add(isGetKey ? data.Substring(0, equalsIndex) : data.Substring(equalsIndex + 1));
+                string line = rawLine.Trim();
+
+                if (line.StartsWith("[") && line.EndsWith("]"))
+                    inSection = line.Equals("[" + section + "]", StringComparison.OrdinalIgnoreCase);
+                else if (inSection && line.Contains("="))
+                {
+                    int equalsIndex = line.IndexOf('=');
+                    if (equalsIndex > 0)
+                    {
+                        if (isGetKey)
+                            result.Add(line.Substring(0, equalsIndex));
+                        else
+                            result.Add(line.Substring(equalsIndex + 1));
+                    }
+                }
             }
             return result;
         }

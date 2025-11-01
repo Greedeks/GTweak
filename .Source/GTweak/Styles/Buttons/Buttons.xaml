@@ -1,111 +1,211 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
 
-    <Style TargetType="{x:Type Button}" x:Key="TitleButtons">
-        <Setter Property="Foreground" Value="Transparent"/>
+    <Style x:Key="TitleButtonBase" TargetType="Button">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="13px"/>
-        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+        <Setter Property="IsTabStop" Value="False"/>
+    </Style>
+
+    <Style x:Key="TitleButtonSettings" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
+                        <Border x:Name="Icon" Width="16" Height="16" Background="{StaticResource Brush_Inactive}" RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <RotateTransform x:Name="RotateTransformSettings" Angle="0"/>
+                            </Border.RenderTransform>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Settings}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard Timeline.DesiredFrameRate="120">
+                                    <DoubleAnimation Storyboard.TargetName="RotateTransformSettings" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:0.5" FillBehavior="Stop">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CubicEase/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="Visibility" Value="Visible">
-                <Setter Property="RenderTransform">
-                    <Setter.Value>
-                        <TranslateTransform X="0" Y="0"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-            <EventTrigger RoutedEvent="Loaded">
-                <BeginStoryboard>
-                    <Storyboard Timeline.DesiredFrameRate="240">
-                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="10" To="0" Duration="0:0:1.2" DecelerationRatio="0.6">
-                            <DoubleAnimation.EasingFunction>
-                                <ElasticEase/>
-                            </DoubleAnimation.EasingFunction>
-                        </DoubleAnimation>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type Button}" x:Key="BtnDefault">
-        <Setter Property="Foreground" Value="{StaticResource Color_Background_Dark}"/>
-        <Setter Property="Background" Value="{StaticResource Color_Accent}"/>
+    <Style x:Key="TitleButtonMinimize" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
+                        <Border x:Name="Icon" Width="16" Height="1" Background="{StaticResource Brush_Inactive}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Minimize}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="TitleButtonMaximize" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
+                        <Border x:Name="Icon" Width="16" Height="16" Background="{StaticResource Brush_Inactive}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Maximize}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
+                        </Trigger>
+                        <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" Value="Maximized">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_MaximizeRestore}" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TitleButtonClose" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
+                        <Border x:Name="Icon" Width="16" Height="16" Background="{StaticResource Brush_Inactive}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Close}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_CloseBtn_Hover}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ButtonContent" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
+        <Setter Property="Background" Value="{StaticResource Brush_Button}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="13.5px"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border CornerRadius="7" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="12,6"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
-                <ScaleTransform x:Name="ImageScale" ScaleX="1" ScaleY="1"/>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Border CornerRadius="7" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path = IsMouseOver}" Value="true">
-                                            <DataTrigger.Setters>
-                                                <Setter Property="Effect">
-                                                    <Setter.Value>
-                                                        <BlurEffect Radius="5"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger.Setters>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                        </Border>
-                        <Border CornerRadius="7" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border x:Name="HoverBorder" CornerRadius="7" Background="{TemplateBinding Background}" Visibility="Hidden" SnapsToDevicePixels="True"/>
+                        <Border x:Name="MainBorder" CornerRadius="7" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"   SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
                         </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HoverBorder" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="HoverBorder" Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="5"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Background" Value="{StaticResource Brush_Button_Hover}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_ButtonOver}"/>
-            </Trigger>
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.02" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.02" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -113,9 +213,17 @@
             <EventTrigger RoutedEvent="Button.MouseLeave">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.02" To="1" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.02" To="1" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -123,71 +231,63 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type Button}" x:Key="BtnDefaultM">
-        <Setter Property="Foreground" Value="{StaticResource Color_Highlighted}"/>
-        <Setter Property="Background" Value="{StaticResource Color_MButton}"/>
+    <Style x:Key="ButtonContent_Inverted" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted_Inverted}"/>
+        <Setter Property="Background" Value="{StaticResource Brush_Button_Inverted}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="13.5px"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border CornerRadius="7" Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="12,6"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
-                <ScaleTransform x:Name="ImageScale" ScaleX="1" ScaleY="1"/>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Border CornerRadius="7" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}, Path = IsMouseOver}" Value="true">
-                                            <DataTrigger.Setters>
-                                                <Setter Property="Effect">
-                                                    <Setter.Value>
-                                                        <BlurEffect Radius="5"/>
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger.Setters>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                        </Border>
-                        <Border CornerRadius="7" Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border x:Name="HoverBorder" CornerRadius="7" Background="{TemplateBinding Background}" Visibility="Hidden" SnapsToDevicePixels="True"/>
+                        <Border x:Name="MainBorder" CornerRadius="7" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"   SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
                         </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HoverBorder" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="HoverBorder" Property="Effect">
+                                <Setter.Value>
+                                    <BlurEffect Radius="5"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Background" Value="{StaticResource Brush_Button_Hover_Inverted}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_MButtonOver}"/>
-            </Trigger>
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.02" Duration="0:0:1.0" SpeedRatio="10"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.02" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.02" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -195,9 +295,17 @@
             <EventTrigger RoutedEvent="Button.MouseLeave">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.02" To="1" Duration="0:0:1.0"  SpeedRatio="11"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.02" To="1" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.02" To="1" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>

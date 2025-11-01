@@ -43,40 +43,10 @@ namespace GTweak.Utilities.Configuration
             }
         }
 
-        internal struct HardwareData
-        {
-            internal class OperatingSystemInfo
-            {
-                internal string Name { get; set; } = string.Empty;
-                internal string Version { get; set; } = string.Empty;
-                internal decimal Build { get; set; } = default;
-            }
+        internal static bool IsNeedUpdate { get; private set; } = false;
+        internal static string DownloadVersion { get; private set; } = string.Empty;
 
-            internal static OperatingSystemInfo OS { get; set; } = new OperatingSystemInfo();
-            internal static string Bios { get; set; } = string.Empty;
-            internal static string BiosMode { get; set; } = string.Empty;
-            internal static string Motherboard { get; set; } = string.Empty;
-            internal static string Processor { get; set; } = string.Empty;
-            internal static string Cores { get; set; } = string.Empty;
-            internal static string Threads { get; set; } = string.Empty;
-            internal static string Graphics { get; set; } = string.Empty;
-            internal static string Memory { get; set; } = string.Empty;
-            internal static string MemoryType { get; set; } = string.Empty;
-            internal static string Storage { get; set; } = string.Empty;
-            internal static string AudioDevice { get; set; } = string.Empty;
-            internal static string NetworkAdapter { get; set; } = string.Empty;
-            internal static string UserIPAddress { get; set; } = Application.Current.Resources["connection_lose_systemInformation"].ToString();
-        }
-
-        internal enum ConnectionStatus
-        {
-            Available,
-            Lose,
-            Block,
-            Limited,
-        }
-
-        internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
+        internal static bool isIPAddressFormatValid = false, isMsftAvailable = false;
 
         internal static (string Code, string Region) GetCurrentSystemLang()
         {
@@ -85,21 +55,10 @@ namespace GTweak.Utilities.Configuration
             return (culture.TwoLetterISOLanguageName.ToLowerInvariant(), parts.Length > 1 ? parts[1].ToLowerInvariant() : string.Empty);
         }
 
-        internal static bool IsNeedUpdate { get; private set; } = false;
-        internal static string DownloadVersion { get; private set; } = string.Empty;
-
-        internal static Dictionary<byte, bool> IsWindowsVersion = new Dictionary<byte, bool>
-        {
-            { 10, default },
-            { 11, default }
-        };
-
-        internal static bool isIPAddressFormatValid = false, isMsftAvailable = false;
-
         internal ImageSource GetProfileImage()
         {
             string imageSrc = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users\{WindowsIdentity.GetCurrent().User?.Value}", "Image1080", string.Empty);
-            return !string.IsNullOrWhiteSpace(imageSrc) ? new BitmapImage(new Uri(imageSrc)) : Application.Current.Resources["DI_AvatarProfile"] as ImageSource;
+            return !string.IsNullOrWhiteSpace(imageSrc) ? new BitmapImage(new Uri(imageSrc)) : Application.Current.Resources["Icon_ProfileAvatar"] as ImageSource;
         }
 
         internal string GetProfileName()
@@ -126,6 +85,7 @@ namespace GTweak.Utilities.Configuration
             });
 
             Parallel.Invoke(
+                GetWallpaperImage,
                 GetBiosInfo,
                 GetMotherboardInfo,
                 GetProcessorInfo,
@@ -145,15 +105,15 @@ namespace GTweak.Utilities.Configuration
             {
                 case DeviceType.Storage:
                     Parallel.Invoke(() => storage = GetStorageDevices());
-                    HardwareData.Storage = storage;
+                    Storage = storage;
                     break;
                 case DeviceType.Audio:
                     Parallel.Invoke(() => audio = GetAudioDevices());
-                    HardwareData.AudioDevice = audio;
+                    AudioDevice = audio;
                     break;
                 case DeviceType.Network:
                     Parallel.Invoke(() => netAdapter = GetNetworkAdapters());
-                    HardwareData.NetworkAdapter = netAdapter;
+                    NetworkAdapter = netAdapter;
                     break;
                 case DeviceType.All:
                     Parallel.Invoke
@@ -162,12 +122,25 @@ namespace GTweak.Utilities.Configuration
                         () => audio = GetAudioDevices(),
                         () => netAdapter = GetNetworkAdapters()
                     );
-                    HardwareData.Storage = storage;
-                    HardwareData.AudioDevice = audio;
-                    HardwareData.NetworkAdapter = netAdapter;
+                    Storage = storage;
+                    AudioDevice = audio;
+                    NetworkAdapter = netAdapter;
                     break;
 
             }
+        }
+
+        private void GetWallpaperImage()
+        {
+            BitmapImage bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.UriSource = new Uri(RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "WallPaper", string.Empty), UriKind.Absolute);
+            bmp.DecodePixelWidth = 100;
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
+            bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+            bmp.EndInit();
+            bmp.Freeze();
+            Wallpaper = bmp;
         }
 
         internal void GetOperatingSystemInfo()
@@ -179,15 +152,12 @@ namespace GTweak.Utilities.Configuration
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, Description, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = new[] { "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                HardwareData.OS.Name = $"{data.Substring(data.IndexOf('W'))} {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
-                HardwareData.OS.Version = $"{(string)managementObj["Version"]}.{revisionNumber}\n";
-                HardwareData.OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : Convert.ToDecimal(Registry.GetValue(regPath, "CurrentBuild", 0)?.ToString());
-                IsWindowsVersion[10] = HardwareData.OS.Name.Contains("10");
-                IsWindowsVersion[11] = HardwareData.OS.Name.Contains("11");
-
+                OS.Name = $"{data.Substring(data.IndexOf('W'))} {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
+                OS.Version = $"{(string)managementObj["Version"]}.{revisionNumber}\n";
+                OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : Convert.ToDecimal(Registry.GetValue(regPath, "CurrentBuild", 0)?.ToString());
             }
-            HardwareData.OS.Name = !string.IsNullOrWhiteSpace(HardwareData.OS.Name) ? HardwareData.OS.Name.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "ProductName", "Windows")?.ToString();
-            HardwareData.OS.Version = !string.IsNullOrWhiteSpace(HardwareData.OS.Version) ? HardwareData.OS.Version.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "LCUVer", 0)?.ToString();
+            OS.Name = !string.IsNullOrWhiteSpace(OS.Name) ? OS.Name.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "ProductName", "Windows")?.ToString();
+            OS.Version = !string.IsNullOrWhiteSpace(OS.Version) ? OS.Version.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "LCUVer", 0)?.ToString();
         }
 
         /// <summary>
@@ -197,15 +167,15 @@ namespace GTweak.Utilities.Configuration
         private void GetBiosInfo()
         {
             string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).GetAwaiter().GetResult();
-            HardwareData.BiosMode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
+            Bios.Mode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                 string dataSN = (string)managementObj["SerialNumber"];
-                HardwareData.Bios += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
+                Bios.Data += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
             }
-            HardwareData.Bios = HardwareData.Bios.TrimEnd('\n', '\r');
+            Bios.Data = Bios.Data.TrimEnd('\n', '\r');
         }
 
         private void GetMotherboardInfo()
@@ -214,20 +184,20 @@ namespace GTweak.Utilities.Configuration
             {
                 string data = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}";
                 string dataVersion = (string)managementObj["Version"];
-                HardwareData.Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
+                Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
             }
-            HardwareData.Motherboard = HardwareData.Motherboard.TrimEnd('\n', '\r');
+            Motherboard = Motherboard.TrimEnd('\n', '\r');
         }
 
         private void GetProcessorInfo()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                HardwareData.Processor = $"{(string)managementObj["Name"]}\n";
-                HardwareData.Cores = Convert.ToString(managementObj["NumberOfCores"]);
-                HardwareData.Threads = Convert.ToString(managementObj["NumberOfLogicalProcessors"]);
+                Processor.Data = $"{(string)managementObj["Name"]}\n";
+                Processor.Cores = Convert.ToString(managementObj["NumberOfCores"]);
+                Processor.Threads = Convert.ToString(managementObj["NumberOfLogicalProcessors"]);
             }
-            HardwareData.Processor = HardwareData.Processor.TrimEnd('\n', '\r');
+            Processor.Data = Processor.Data.TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -295,13 +265,14 @@ namespace GTweak.Utilities.Configuration
             }
 
 
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
+            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = managementObj["Name"] as string;
                 (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
-                HardwareData.Graphics += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
+                Graphics += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
+                VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
             }
-            HardwareData.Graphics = HardwareData.Graphics.TrimEnd('\n', '\r');
+            Graphics = Graphics.TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -352,10 +323,10 @@ namespace GTweak.Utilities.Configuration
                     36 => "LPDDR5X",
                     _ => string.Empty,
                 };
-                HardwareData.MemoryType = memoryType;
-                HardwareData.Memory += $"{string.Concat(data, ", ")}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                Memory.Type = memoryType;
+                Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
             }
-            HardwareData.Memory = HardwareData.Memory.TrimEnd('\n', '\r');
+            Memory.Data = Memory.Data.TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -447,7 +418,7 @@ namespace GTweak.Utilities.Configuration
                 return (false, string.Empty);
             }
 
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description, PNPDeviceID from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
             {
                 foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
@@ -457,6 +428,8 @@ namespace GTweak.Utilities.Configuration
                         result.AppendLine(data);
                     else
                         result.AppendLine(new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+
+                    VendorDetection.Realtek |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) >= 0;
                 }
             }
 
@@ -564,7 +537,7 @@ namespace GTweak.Utilities.Configuration
                         if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrWhiteSpace(ipMetadata?.Ip) && !string.IsNullOrWhiteSpace(ipMetadata?.Country))
                         {
                             CurrentConnection = ConnectionStatus.Available;
-                            HardwareData.UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
+                            UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
                             break;
                         }
                         else
@@ -588,12 +561,12 @@ namespace GTweak.Utilities.Configuration
 
             if (new Dictionary<ConnectionStatus, string>
                 {
-                    { ConnectionStatus.Lose, "connection_lose_systemInformation" },
-                    { ConnectionStatus.Block, "connection_block_systemInformation" },
-                    { ConnectionStatus.Limited, "connection_limited_systemInformation" }
-                }.TryGetValue(CurrentConnection, out string resourceKey)) { HardwareData.UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
+                    { ConnectionStatus.Lose, "connection_lose_sysinfo" },
+                    { ConnectionStatus.Block, "connection_block_sysinfo" },
+                    { ConnectionStatus.Limited, "connection_limited_sysinfo" }
+                }.TryGetValue(CurrentConnection, out string resourceKey)) { UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
 
-            isIPAddressFormatValid = HardwareData.UserIPAddress.Any(char.IsDigit);
+            isIPAddressFormatValid = UserIPAddress.Any(char.IsDigit);
         }
 
         internal void ValidateVersionUpdates()

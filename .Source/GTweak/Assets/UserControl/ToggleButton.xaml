@@ -5,36 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.Assets.UserControl"
              mc:Ignorable="d" 
-             d:Height="auto" d:Width="auto" SnapsToDevicePixels="True" UseLayoutRounding="True">
-    <Grid Width="Auto">
-        <StackPanel Orientation="Horizontal">
-            <Viewbox Margin="0" KeyboardNavigation.IsTabStop="False" MouseLeftButtonUp="Toggle_MouseLeftButtonUp">
-                <Grid Height="60" VerticalAlignment="Center" Width="Auto" Cursor="Hand">
-                    <Rectangle x:Name="Back" Cursor="Hand" HorizontalAlignment="Left" Height="56" VerticalAlignment="Center" Width="96" RadiusY="28" RadiusX="28" KeyboardNavigation.IsTabStop="False" >
-                        <Rectangle.Fill>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="{StaticResource Color_ToggleButton_OFF_1}" Offset="1"/>
-                                <GradientStop Color="{StaticResource Color_ToggleButton_OFF_2}" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Ellipse x:Name="Dot" Cursor="Hand" HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" Width="50" StrokeThickness="1"  KeyboardNavigation.IsTabStop="False" Margin="4,0,0,0">
-                        <Ellipse.Fill>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFE8E8E8" Offset="0.131"/>
-                                <GradientStop Color="#FFFFFFFF" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Ellipse.Fill>
-                        <Ellipse.Effect>
-                            <DropShadowEffect ShadowDepth="1" Opacity="0.5"/>
-                        </Ellipse.Effect>
-                        <Ellipse.Stroke>
-                            <SolidColorBrush  Color="Black" Opacity="0.3"/>
-                        </Ellipse.Stroke>
-                    </Ellipse>
-                </Grid>
-            </Viewbox>
-            <TextBlock x:Name="ToggleText" Text="TextTglButton" Margin="10,0,0,0" HorizontalAlignment="Left" Width="Auto" Style="{StaticResource Text_In}"/>
-        </StackPanel>
-    </Grid>
+             d:Height="auto" d:Width="auto" IsTabStop="False" KeyboardNavigation.TabNavigation="None"
+             SnapsToDevicePixels="True" UseLayoutRounding="True">
+    <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left">
+        <Grid Cursor="Hand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Width="44" Height="20" MouseLeftButtonUp="Toggle_MouseLeftButtonUp" MouseEnter="Toggle_MouseEnter" MouseLeave="Toggle_MouseLeave">
+                <Rectangle x:Name="Back" Width="44" Height="20" RadiusY="10" RadiusX="10" StrokeThickness="1" Stroke="{StaticResource Brush_ToggleBorder_Off}">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="Transparent"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <Ellipse x:Name="Dot" Height="14" Width="14" StrokeThickness="0" Margin="24,0,0,0">
+                    <Ellipse.Effect>
+                        <DropShadowEffect ShadowDepth="1" Opacity="0.5"/>
+                    </Ellipse.Effect>
+                    <Ellipse.Fill>
+                        <SolidColorBrush Color="{StaticResource Color_ToggleDot_Off}"/>
+                    </Ellipse.Fill>
+                    <Ellipse.RenderTransform>
+                        <ScaleTransform x:Name="DotScale" ScaleX="1" ScaleY="1" CenterX="8" CenterY="8"/>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Grid>
+
+            <TextBlock x:Name="ToggleText" Grid.Column="1" Text="TextTglButton" Style="{StaticResource TextInactivity}" Margin="10,2,0,2"/>
+        </Grid>
+    </Viewbox>
 </UserControl>

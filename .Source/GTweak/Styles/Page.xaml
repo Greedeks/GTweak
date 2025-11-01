@@ -5,32 +5,25 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
         <Style.Triggers>
             <Trigger Property="Visibility" Value="Collapsed">
                 <Setter Property="Opacity" Value="0" />
             </Trigger>
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
-                    <Storyboard Timeline.DesiredFrameRate="240">
-                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:1" SpeedRatio="5" From="0" To="1" />
+                    <Storyboard Timeline.DesiredFrameRate="120">
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.45" From="0" To="1" >
+                            <DoubleAnimation.EasingFunction>
+                                <QuadraticEase/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
         </Style.Triggers>
     </Style>
-
-    <Style x:Key="ScrollPage" TargetType="{x:Type ScrollViewer}">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="UseLayoutRounding" Value="True"/>
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
-        <Setter Property="VirtualizingPanel.CacheLength" Value="20"/>
-        <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item"/>
-        <Setter Property="CanContentScroll" Value="False"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-    </Style>
-
+    
 </ResourceDictionary>

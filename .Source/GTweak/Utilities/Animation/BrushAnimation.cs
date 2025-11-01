@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -8,68 +7,47 @@ namespace GTweak.Utilities.Animation
 {
     internal sealed class BrushAnimation : AnimationTimeline
     {
-        protected override Freezable CreateInstanceCore() => new BrushAnimation();
-
         public override Type TargetPropertyType => typeof(Brush);
 
-        static BrushAnimation()
-        {
-            FromProperty = DependencyProperty.Register("From", typeof(Brush),
-              typeof(BrushAnimation));
+        protected override Freezable CreateInstanceCore() => new BrushAnimation();
 
-            ToProperty = DependencyProperty.Register("To", typeof(Brush),
-              typeof(BrushAnimation));
-        }
+        public static readonly DependencyProperty FromProperty =
+            DependencyProperty.Register("From", typeof(Brush), typeof(BrushAnimation));
 
-        internal static readonly DependencyProperty FromProperty;
-        internal Brush From
+        public Brush From
         {
             get => (Brush)GetValue(FromProperty);
             set => SetValue(FromProperty, value);
         }
 
-        internal static readonly DependencyProperty ToProperty;
-        internal Brush To
+        public static readonly DependencyProperty ToProperty =
+            DependencyProperty.Register("To", typeof(Brush), typeof(BrushAnimation));
+
+        public Brush To
         {
             get => (Brush)GetValue(ToProperty);
             set => SetValue(ToProperty, value);
         }
 
-
         public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
         {
-            QuadraticEase quadraticEase = new QuadraticEase();
+            if (animationClock.CurrentProgress == null) return From ?? defaultOriginValue;
 
-            double easedProgress = quadraticEase.Ease(animationClock.CurrentProgress.Value);
+            double progress = animationClock.CurrentProgress.Value;
 
-            Brush fromVal = ((Brush)GetValue(FromProperty))?.CloneCurrentValue();
-            Brush toVal = ((Brush)GetValue(ToProperty))?.CloneCurrentValue();
+            var easedProgress = new QuadraticEase().Ease(progress);
 
-            switch (easedProgress)
+            if (From is SolidColorBrush fromBrush && To is SolidColorBrush toBrush)
             {
-                case 0.0:
-                    return fromVal;
-                case 1.0:
-                    return toVal;
+                byte r = (byte)(fromBrush.Color.R + (toBrush.Color.R - fromBrush.Color.R) * easedProgress);
+                byte g = (byte)(fromBrush.Color.G + (toBrush.Color.G - fromBrush.Color.G) * easedProgress);
+                byte b = (byte)(fromBrush.Color.B + (toBrush.Color.B - fromBrush.Color.B) * easedProgress);
+                byte a = (byte)(fromBrush.Color.A + (toBrush.Color.A - fromBrush.Color.A) * easedProgress);
+
+                return new SolidColorBrush(Color.FromArgb(a, r, g, b));
             }
 
-            toVal.Opacity = easedProgress;
-
-            Border borderFrom = new Border();
-            Border borderTo = new Border();
-
-            borderFrom.Width = 1.0;
-            borderFrom.Height = 1.0;
-
-            borderFrom.Background = fromVal;
-            borderTo.Background = toVal;
-
-            borderFrom.Visibility = Visibility.Visible;
-            borderTo.Visibility = Visibility.Visible;
-            borderFrom.Child = borderTo;
-
-            return new VisualBrush(borderFrom);
+            return easedProgress < 0.5 ? From ?? defaultOriginValue : To ?? defaultDestinationValue;
         }
-
     }
 }

@@ -2,37 +2,103 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type RadioButton}" x:Key="BtnNavigation">
-        <Setter Property="Background" Value="{StaticResource Color_Background_Dark}"/>
-        <Setter Property="Foreground" Value="{StaticResource Color_Inactive}"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource Brush_Inactive}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="Indicator" Background="{TemplateBinding Background}" BorderBrush="{StaticResource Color_Accent}" BorderThickness="0">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Border x:Name="OuterPanel" CornerRadius="12" Width="50" Height="48" Background="Transparent" HorizontalAlignment="Left" SnapsToDevicePixels="True">
+                        <Border x:Name="InnerPanel" Height="48" CornerRadius="12" Background="{TemplateBinding Background}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,10,0">
+                            <Grid Height="48">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter x:Name="IconPresenter" Grid.Column="0" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <ContentPresenter.RenderTransform>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <Viewbox x:Name="NavTextBox" Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,15,0" Opacity="0">
+                                    <TextBlock Text="{TemplateBinding Tag}" Foreground="{TemplateBinding Foreground}" FontFamily="{TemplateBinding FontFamily}" TextWrapping="NoWrap"/>
+                                </Viewbox>
+                            </Grid>
+                        </Border>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <DoubleAnimation Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="Width" To="300" Duration="0:0:0.35" FillBehavior="HoldEnd">
+                                            <DoubleAnimation.EasingFunction>
+                                                <PowerEase Power="3" EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="NavTextBox" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <DoubleAnimation Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="Width" To="50" Duration="0:0:0.25" FillBehavior="HoldEnd">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="NavTextBox" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="BorderThickness" TargetName="Indicator" Value="0 1.2 0 0" />
+                            <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
+                            <Setter TargetName="NavTextBox" Property="Opacity" Value="1"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_ButtonOver_Navigation}"/>
-                <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
-            </Trigger>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{StaticResource Color_Background_Dark}"/>
-                <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
-    
+
 </ResourceDictionary>

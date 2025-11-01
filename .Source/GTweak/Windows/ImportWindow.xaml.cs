@@ -1,5 +1,4 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Controls;
+﻿using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
@@ -9,12 +8,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
+using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
 {
-    public partial class ImportWindow : Window
+    public partial class ImportWindow : FluentWindow
     {
         private readonly ConfidentialityTweaks _confTweaks = new ConfidentialityTweaks();
         private readonly InterfaceTweaks _intfTweaks = new InterfaceTweaks();
@@ -36,9 +35,8 @@ namespace GTweak.Windows
                 DragMove();
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private async void Window_ContentRendered(object sender, EventArgs e)
         {
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.2));
             Progress<byte> progress = new Progress<byte>(ReportProgress);
             try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
@@ -51,10 +49,10 @@ namespace GTweak.Windows
                     ExplorerManager.Restart(new Process());
 
                 if (_requiredActions.Count != 0)
-                    new NotificationManager().Show().Perform(_requiredActions.Max());
+                    NotificationManager.Show().Perform(_requiredActions.Max());
 
                 App.UpdateImport();
-                BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.1, () => { Close(); }));
+                Close();
             }
         }
 
@@ -91,7 +89,7 @@ namespace GTweak.Windows
                 {
                     if (section == INIManager.SectionSys)
                     {
-                        if (tweak.StartsWith("TglButton") && tweak != "TglButton8")
+                        if (tweak.StartsWith("TglButton") && tweak != "TglButton3")
                             _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
                         else if (tweak == "TglButton8")
                         {
@@ -130,7 +128,5 @@ namespace GTweak.Windows
                 await Task.Delay(700, token);
             }
         }
-
     }
 }
-

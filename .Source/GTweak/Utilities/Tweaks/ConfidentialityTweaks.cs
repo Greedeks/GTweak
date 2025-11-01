@@ -1,5 +1,4 @@
 ﻿using GTweak.Properties;
-using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
@@ -83,8 +82,8 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[16] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
 
-            _сontrolWriter.Button[17] = SystemDiagnostics.HardwareData.Graphics.IndexOf("nvidia", StringComparison.OrdinalIgnoreCase) >= 0
-                && (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks));
+            _сontrolWriter.Button[17] =
+                (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks));
 
             _сontrolWriter.Button[18] =
                   RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
