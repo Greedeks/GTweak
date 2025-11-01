@@ -81,6 +81,10 @@
 
 <h2> Képernyőképek 📷</h2>
 <details>
+  <summary> Segédprogramok </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Utils.png"/>
+</details>
+<details>
   <summary> Titoktartás </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Confidentiality.png"/>
 </details>
@@ -99,10 +103,6 @@
 <details>
   <summary> Rendszer </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/System.png"/>
-</details>
-<details>
-  <summary> Továbbiak </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/More.png"/>
 </details>
 
 <h2> Rendszerkövetelmények</h2>
@@ -126,6 +126,7 @@ Telepített platform: .NET Framework 4.8
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
+- [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
 ## Referencia
 - FirewallAPI

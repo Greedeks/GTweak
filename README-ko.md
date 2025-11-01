@@ -81,6 +81,10 @@
 
 <h2> 스크린샷 📷</h2>
 <details>
+  <summary> 유틸리티 </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Utils.png"/>
+</details>
+<details>
   <summary> 기밀 유지 </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Confidentiality.png"/>
 </details>
@@ -99,10 +103,6 @@
 <details>
   <summary> 시스템 </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/System.png"/>
-</details>
-<details>
-  <summary> 추가 사항 </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/More.png"/>
 </details>
 
 
@@ -127,6 +127,7 @@ Windows 지원: Windows 10 (build 18362.116)부터
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
+- [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
 ## 참조
 - FirewallAPI

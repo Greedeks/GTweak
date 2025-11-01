@@ -85,6 +85,10 @@
 
 <h2> Screenshot 📷</h2>
 <details>
+  <summary> Utilità </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Utils.png"/>
+</details>
+<details>
   <summary> Riservatezza </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Confidentiality.png"/>
 </details>
@@ -103,10 +107,6 @@
 <details>
   <summary> Sistema </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/System.png"/>
-</details>
-<details>
-  <summary> Altro </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/More.png"/>
 </details>
 
 <h2> Requisiti di Sistema</h2>
@@ -131,6 +131,7 @@ Piattaforma installata: .NET Framework 4.8
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
+- [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
 ## Riferimenti
 

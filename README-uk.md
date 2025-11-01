@@ -82,6 +82,10 @@
 
 <h2> Скриншоти 📷</h2>
 <details>
+  <summary> Утиліти </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Utils.png"/>
+</details>
+<details>
   <summary> Конфіденційність </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Confidentiality.png"/>
 </details>
@@ -100,10 +104,6 @@
 <details>
   <summary> Система </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/System.png"/>
-</details>
-<details>
-  <summary> Інше </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/More.png"/>
 </details>
 
 
@@ -129,6 +129,7 @@
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
+- [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
 ## Reference
 - FirewallAPI

@@ -81,6 +81,10 @@
 
 <h2> Screenshots 📷</h2>
 <details>
+  <summary> Utilities </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Utils.png"/>
+</details>
+<details>
   <summary> Confidentiality </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
 </details>
@@ -99,10 +103,6 @@
 <details>
   <summary> System </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
-</details>
-<details>
-  <summary> More </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/More.png"/>
 </details>
 
 <h2> System Requirements</h2>
@@ -126,6 +126,7 @@ Installed platform: .NET Framework 4.8
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
+- [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
 ## Reference
 - FirewallAPI
