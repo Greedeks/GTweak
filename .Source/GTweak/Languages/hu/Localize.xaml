@@ -55,9 +55,9 @@
     <v:String x:Key="success_point_noty">A helyreállítási pont létrehozása sikeresen megtörtént</v:String>
     <v:String x:Key="error_recovery_noty">Valami elromlott, a helyreállítást nem lehetett elindítani</v:String>
     <v:String x:Key="disable_recovery_noty">A rendszer-helyreállítás le van tiltva, a helyreállítási pontok nem érhetők el</v:String>
-    <v:String x:Key="enable_recovery_noty">System recovery is enabled and available for use when necessary</v:String>
+    <v:String x:Key="enable_recovery_noty">A rendszer-helyreállítás engedélyezve van, és szükség esetén használható</v:String>
     <v:String x:Key="warn_recovery_noty">Már letiltotta a helyreállítási rendszert</v:String>
-    <v:String x:Key="warn_point_enabled_noty">You have already enabled the recovery system</v:String>
+    <v:String x:Key="warn_point_enabled_noty">Már engedélyezte a helyreállítási rendszert</v:String>
     <v:String x:Key="clear_ram_noty">A rövid távú memória és az ideiglenes fájlok törlődtek</v:String>
     <v:String x:Key="success_compression_noty">A könyvtár és tartalmának tömörítése sikeres volt</v:String>
     <v:String x:Key="success_decompression_noty">A könyvtár és annak tartalmának kibontása sikeres volt</v:String>
@@ -65,8 +65,8 @@
     <v:String x:Key="ready_decompression_noty">A könyvtár már ki van csomagolva, nincs szükség további műveletre</v:String>
     <v:String x:Key="error_compression_noty">Valami elromlott, hiba történt a tömörítési állapot megváltoztatásakor</v:String>
     <v:String x:Key="notsupport_ntfs_noty">A művelet nem érhető el, mert a könyvtár nem NTFS-partíción található</v:String>
-    <v:String x:Key="success_reg_exporter_noty">Registry file saved successfully</v:String>
-    <v:String x:Key="error_reg_exporter_noty">An error occurred while saving the registry file</v:String>
+    <v:String x:Key="success_reg_exporter_noty">A rendszerleíró adatbázis fájlja sikeresen mentve</v:String>
+    <v:String x:Key="error_reg_exporter_noty">Hiba történt a rendszerleíró adatbázis fájl mentése közben</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -166,7 +166,7 @@
     <v:String x:Key="tgl19_intf">Kompakt Fájlkezelő mód használata</v:String>
     <v:String x:Key="tgl20_intf">«Copilot» és «Recall» asszisztensek</v:String>
     <v:String x:Key="tgl21_intf">«Feladat befejezése» RMB az alkalmazásban</v:String>
-    <v:String x:Key="tgl22_intf">Show window snap layouts</v:String>
+    <v:String x:Key="tgl22_intf">Ablakok elrendezésének megjelenítése</v:String>
     <v:String x:Key="tgl23_intf">Ikonok és gombok a tálcán</v:String>
     <v:String x:Key="tgl24_intf">Személyre szabott hirdetések megjelenítése</v:String>
     <v:String x:Key="tgl25_intf">Korábbi mappaablakok visszaállítása bejelentkezéskor</v:String>
@@ -200,8 +200,8 @@
     <v:String x:Key="tgl19_desc_intf">Alapértelmezés szerint a Windows kitöltést ad az Intéző elemei közé. Ez egy új funkció, amelyet érintőképernyőkhöz terveztek. Ez a módosítás visszaállítja a fájlkezelő klasszikus elrendezését, eltávolítja az elemek közötti behúzást, és megkíméli Önt a beállítások keresésétől.</v:String>
     <v:String x:Key="tgl20_desc_intf">A beállítás letiltja és ahol lehetséges, elrejti a Copilot ikonokat a tálcán, a «Start menüben», az Edge-ben és a Jegyzettömbben, blokkolva annak működését, és letiltja a Visszahívást is. Ugyanakkor magát a Copilot alapalkalmazást ez nem érinti, a rendszerben marad, és szükség esetén használható. A Copilot csak a Microsoft Edge-vel együtt távolítható el teljesen. Ha ezek az AI-funkciók kezdetben nem találhatók meg a Windows rendszerben, a beállítás használata értelmetlen.</v:String>
     <v:String x:Key="tgl21_desc_intf">Ez a módosítás lehetővé teszi a "Feladat befejezése" opció hozzáadását a helyi menühöz, amikor jobb gombbal kattint az alkalmazásra a tálcán. Ez felgyorsítja a folyamatok befejezését anélkül, hogy meg kellene nyitnia a feladatkezelőt. Figyelem, a képernyő villoghat.</v:String>
-    <v:String x:Key="tgl22_desc_intf">If you don’t need to see the snap layout suggestions when hovering over the «Maximize» button, you can disable this option.</v:String>
-    <v:String x:Key="tgl23_desc_intf">This tweak removes the «Search», «Task View», and «Chat» icons, and hides the «Learn about this picture» element. On older builds of Windows 11, it also removes the Copilot icon. For Windows 10 users, it additionally disables «News and Interests» and Cortana. Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl22_desc_intf">Ha nem szeretnéd látni a rögzítési elrendezési javaslatokat, amikor a «Maximalizálás» gomb fölé viszed az egeret, kikapcsolhatod ezt a lehetőséget.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Ez a beállítás eltávolítja a «Keresés», «Feladatnézet» és «Csevegés» ikonokat, valamint elrejti a «Tudjon meg többet erről a képről» elemet. A Windows 11 régebbi verzióiban a Copilot ikont is eltávolítja. Windows 10 felhasználók esetében emellett kikapcsolja a «Hírek és érdekességek» funkciót és a Cortanát. Figyelem: a képernyő villoghat.</v:String>
     <v:String x:Key="tgl24_desc_intf">Alapértelmezés szerint a Windows az összegyűjtött információkat hirdetések célzására, azaz az Ön érdeklődési körének megfelelő hirdetések megjelenítésére használja. És szó szerint ez a hirdetés ott található, ahol szabad hely áll rendelkezésre a megjelenítéshez. Ha nem szeretné, hogy a Windows személyre szabott hirdetéseket jelenítsen meg az összes Áruházbeli alkalmazásban, az Intézőben, a Beállításokban és a Start menüben, akkor letilthatja ezt a levélszemétet.</v:String>
     <v:String x:Key="tgl25_desc_intf">Alapértelmezés szerint a Windows nem menti el az ablakok helyzetét, valamint azok állapotát, amikor ki van kapcsolva. Ez a módosítás lehetővé teszi, hogy megjegyezze a megnyitott mappák típusát, hogy visszaállítsa azokat a kijelentkezés, újraindítás és leállítás után.</v:String>
     <v:String x:Key="tgl26_desc_intf">A beállítás lehetővé teszi az összes Windows-tipp és értesítés letiltását, beleértve a beállításokban található online tippeket, valamint a Second Chance Out of Box Experience (SCOOBE) letiltását a Windows 11 felhasználók számára. A SCOOBE hirtelen megjelenik egy felugró ablak, amely agresszíven felszólítja a felhasználót, hogy "sürgősen fejezze be az eszköz beállítását", és jelentkezzen be a Microsoft-fiókba.</v:String>
@@ -259,13 +259,13 @@
     <v:String x:Key="BingSearch_pkg">Bing keresés</v:String>
     <v:String x:Key="QuickAssist_pkg">Gyorssegítség</v:String>
     <v:String x:Key="DevHome_pkg">Fejlesztői kezdőlap</v:String>
-    <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">Terminál</v:String>
     <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
     <v:String x:Key="WebMediaExtensions_pkg">Webes média bővítmények</v:String>
     <v:String x:Key="OneConnect_pkg">Mobilcsomagok</v:String>
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
-    <v:String x:Key="Notepad_pkg">Notepad</v:String>
-    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Notepad_pkg">Jegyzettömb</v:String>
+    <v:String x:Key="Calculator_pkg">Számológép</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
 
     <v:String x:Key="title_over_pkg">Eltávolítás megerősítése</v:String>
@@ -289,7 +289,7 @@
     <v:String x:Key="tgl10_svc">Faxhoz kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl11_svc">Táblagép/okostelefon módhoz kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl12_svc">Kiegészítő monitorokhoz kapcsolódó szolgáltatások</v:String>
-    <v:String x:Key="tgl13_svc">Service related to system components</v:String>
+    <v:String x:Key="tgl13_svc">A rendszerkomponensekhez kapcsolódó szolgáltatás</v:String>
     <v:String x:Key="tgl14_svc">A helyi hálózat üzemeltetésével kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl15_svc">USB modemekkel és routerekkel kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl16_svc">VPN-ügyfelekkel kapcsolatos szolgáltatások</v:String>
@@ -305,7 +305,7 @@
     <v:String x:Key="tgl26_svc">Háttérdiagnosztikával kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl27_svc">Vállalati eszközökkel kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl28_svc">A Hyper-V működésével kapcsolatos szolgáltatás</v:String>
-    <v:String x:Key="tgl29_svc">Services related to push notifications</v:String>
+    <v:String x:Key="tgl29_svc">Push értesítésekkel kapcsolatos szolgáltatások</v:String>
 
     <v:String x:Key="tgl1_desc_svc">Tiltsa le, ha nem használja a fájlelőzményeket és a tartalomindexelést.</v:String>
     <v:String x:Key="tgl2_desc_svc">Tiltsa le, ha nem használ Xbox és Microsoft játékvezérlőket.</v:String>
@@ -319,7 +319,7 @@
     <v:String x:Key="tgl10_desc_svc">Tiltsa le, ha nincs faxkészüléke.</v:String>
     <v:String x:Key="tgl11_desc_svc">Tiltsa le, ha vezetékes számítógépe, laptopja vagy netbookja van.</v:String>
     <v:String x:Key="tgl12_desc_svc">Tiltsa le, ha csak egy monitora van, és nem tervezi további monitorok csatlakoztatását.</v:String>
-    <v:String x:Key="tgl13_desc_svc">Disable if you do not use these apps: «Virtual Desktops», «Your Phone», and «Night Light». This service processes user data and synchronizes it with Microsoft servers. It is not critical for the system’s operation; however, some features, such as «Night Light» in Windows 10, may stop working completely or partially if it is disabled.</v:String>
+    <v:String x:Key="tgl13_desc_svc">Ha nem használja ezeket az alkalmazásokat, tiltsa le: „Virtuális asztalok”, „Az Ön telefonja” és az „Éjszakai fény”. Ez a szolgáltatás feldolgozza a felhasználói adatokat, és szinkronizálja azokat a Microsoft szerverekkel. A rendszer működése szempontjából nem kritikus, azonban egyes funkciók, például a Windows 10 „Éjszakai fény” funkciója, teljesen vagy részben leállhat, ha ezt a szolgáltatást letiltja.</v:String>
     <v:String x:Key="tgl14_desc_svc">Tiltsa le, ha nem használ vagy nem tervez helyi hálózatot használni.</v:String>
     <v:String x:Key="tgl15_desc_svc">Tiltsa le, ha kábelen vagy Wi-Fi-n keresztül csatlakozik az internethez.</v:String>
     <v:String x:Key="tgl16_desc_svc">Tiltsa le, ha nem használ VPN-ügyfeleket. Befolyásolhatja az Xbox működését.</v:String>
@@ -335,7 +335,7 @@
     <v:String x:Key="tgl26_desc_svc">Tiltsa le, ha nincs szüksége a Windows rendszerre a rendszer betöltéséhez a háttérben haszontalan diagnosztikával.</v:String>
     <v:String x:Key="tgl27_desc_svc">Tiltsa le, ha nem használja a vállalati alkalmazások távkezelését, és nincs olyan távoli kiszolgálója, amellyel a számítógép kommunikálna.</v:String>
     <v:String x:Key="tgl28_desc_svc">Tiltsa le, ha nem használja a beépített virtualizációs rendszert. Ez semmilyen módon nem befolyásolja a VirtualBox és hasonlók munkáját.</v:String>
-    <v:String x:Key="tgl29_desc_svc">Disable if you do not use paired devices and do not install apps from the Windows Store remotely. These services handle the Notification Center with paired devices, process push requests, allow Windows to detect your smartphone for the «Your Phone» app, automatically reconnect to it, and display its messages and events in the Action Center. In Windows 10, after disabling them, the Notification Center may stop opening.</v:String>
+    <v:String x:Key="tgl29_desc_svc">Kapcsolja ki, ha nem használ párosított eszközöket, és nem telepít alkalmazásokat távolról a Windows Áruházból. Ezek a szolgáltatások kezelik az értesítési központot a párosított eszközökkel, feldolgozzák a push-kérelmeket, lehetővé teszik a Windows számára, hogy felismerje okostelefonját a „Saját telefon” alkalmazáshoz, automatikusan újra csatlakozzon hozzá, és megjelenítsen az üzeneteit és eseményeit a Műveletközpontban. A Windows 10 rendszerben ezek kikapcsolása után előfordulhat, hogy az értesítési központ nem nyílik meg.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -370,8 +370,8 @@
     <v:String x:Key="tgl25_sys">Dinamikus és nagy pontosságú eseményidőzítő</v:String>
     <v:String x:Key="tgl26_sys">A «PC állapotellenőrzés» elrejtése a frissítési rendszerből</v:String>
     <v:String x:Key="tgl27_sys">A Windows Insider háttérfeladatai</v:String>
-    <v:String x:Key="tgl28_sys">System Disk Defragmentation</v:String>
-    
+    <v:String x:Key="tgl28_sys">Rendszerlemez töredezettségmentesítése</v:String>
+
     <v:String x:Key="slider1_desc_sys">Módosítja az egérmutató sebességét, így időt takaríthat meg az egérparaméterek kereséséhez.</v:String>
     <v:String x:Key="slider2_desc_sys">Módosítja a késleltetést, mielőtt megkezdené a beírt karakter ismétlését, az ajánlott érték 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Megváltoztatja a beírt karakter ismétlési gyakoriságát, az ajánlott érték 31.</v:String>
@@ -402,7 +402,7 @@
     <v:String x:Key="tgl25_desc_sys">A dinamikus időzítő és a HPET letiltása javíthatja a rendszer reakcióképességét a mikroakadozás csökkentésével és enyhe teljesítménynövekedéssel. A hatás azonban a konfigurációtól függ: bizonyos esetekben a rendszer a gyorsulás helyett lelassulhat és késést tapasztalhat. Ha laptopot használ, vegye figyelembe, hogy ez kissé növelheti az energiafogyasztást is, mivel a CPU tétlen állapotban is aktívabb marad.</v:String>
     <v:String x:Key="tgl26_desc_sys">A beállítás blokkolja a PC állapotellenőrzésének tolakodó automatikus telepítését - a Microsoft segédprogramja, amely engedély nélkül erőszakkal telepíti magát a Windows Update szolgáltatáson keresztül. A telepítés után a program folyamatosan nyaggatja a "Windows 11 készenlétének ellenőrzését", és kéretlen "optimalizálási ajánlásokat" küld.</v:String>
     <v:String x:Key="tgl27_desc_sys">A Windows Insider résztvevői számára ezeknek a feladatoknak engedélyezve kell maradniuk. Ha azonban nem vesz részt a programban, az összes kapcsolódó feladat felesleges többletterheléssé válik: rendszererőforrásokat fogyasztanak, haszontalan naplókat hoznak létre, és telemetriai kapcsolatokat kezdeményezhetnek anélkül, hogy bármilyen előnyt nyújtanának. Letiltásuk javíthatja az indítási időt és a rendszer általános teljesítményét, miközben kiküszöböli a felesleges kísérleti adatgyűjtési csatornákat.</v:String>
-    <v:String x:Key="tgl28_desc_sys">If you have an SSD, disabling defragmentation and boot file optimization, which are effective only for hard drives (HDD), helps extend the lifespan of your drive. At the same time, the TRIM optimization function continues to work: it informs the SSD controller which data blocks are no longer in use and clears them, maintaining stable speed and drive longevity.</v:String>
+    <v:String x:Key="tgl28_desc_sys">Ha SSD-vel rendelkezik, akkor a defragmentálás és a rendszerindítási fájlok optimalizálásának letiltása, amelyek csak a merevlemezek (HDD) esetében hatékonyak, segít meghosszabbítani a meghajtó élettartamát. Ugyanakkor a TRIM optimalizálási funkció továbbra is működik: tájékoztatja az SSD vezérlőt, hogy mely adatblokkok már nem használatosak, és törli azokat, így biztosítva a stabil sebességet és a meghajtó hosszú élettartamát.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -436,18 +436,18 @@
     <v:String x:Key="advice_part1_more">Ez erősen</v:String>
     <v:String x:Key="advice_part2_more">ajánlott</v:String>
     <v:String x:Key="advice_part3_more">helyreállítási pont létrehozása az eszköz használata előtt</v:String>
-    
+
     <v:String x:Key="title_licens_more">Windows aktiválás</v:String>
-    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
+    <v:String x:Key="text_licens_more">A HWID módszert vagy egy tartalék KMS-t használ. Lehet, hogy nem működik, ha az Ön Windows-kiadásához nincs elérhető kulcs.</v:String>
     <v:String x:Key="btn_activation">Aktiválás</v:String>
 
-    <v:String x:Key="title_point_more">Recovery Point</v:String>
-    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
+    <v:String x:Key="title_point_more">Helyreállítási pont</v:String>
+    <v:String x:Key="text_point_more">Létrehozza vagy elindítja a rendszer-visszaállítási folyamatot, még akkor is, ha a visszaállítási pontok jelenleg le vannak tiltva.</v:String>
     <v:String x:Key="btn_save">Mentés</v:String>
     <v:String x:Key="btn_recovery">Helyreállítás</v:String>
 
-    <v:String x:Key="title_point_state_more">Restore Status</v:String>
-    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
+    <v:String x:Key="title_point_state_more">Állapot visszaállítása</v:String>
+    <v:String x:Key="text_point_state_more">Engedélyezi vagy letiltja a rendszer-visszaállítási pontokat. A letiltás törli az összes meglévő visszaállítási pontot.</v:String>
     <v:String x:Key="btn_disable">Letiltás</v:String>
     <v:String x:Key="btn_enable">Engedélyezés</v:String>
     
@@ -456,11 +456,11 @@
     <v:String x:Key="btn_clear">Tisztítás</v:String>
 
     <v:String x:Key="title_ntfs_more">NTFS tömörítés</v:String>
-    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
+    <v:String x:Key="text_ntfs_more">Engedélyezi vagy letiltja az NTFS-tömörítést. Különösen hatékony szöveges fájlokhoz, így lemezterületet takarít meg.</v:String>
 
-    <v:String x:Key="title_registry_more">Registry Backup</v:String>
-    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
-    <v:String x:Key="btn_create">Create</v:String>
+    <v:String x:Key="title_registry_more">Rendszerleíró adatbázis biztonsági mentése</v:String>
+    <v:String x:Key="text_registry_more">Biztonsági másolatot készít a Windows rendszerleíró adatbázisáról. A rendszer helyreállításának engedélyezése érdekében végzett módosítások előtt ajánlott.</v:String>
+    <v:String x:Key="btn_create">Létrehozás</v:String>
 
     <v:String x:Key="title_over_more">Lemezkarbantartó megerősítése</v:String>
     <v:String x:Key="text_over_more">A lemez tartalmaz egy Windows.old mappát, amely a Windows egy korábbi verziójából származó fájlokat tartalmaz, amelyek jelentős helyet foglalnak el. Kérjük, vegye figyelembe: a mappa törlése után a tartalma nem állítható vissza, ezért győződjön meg arról, hogy elmentette a szükséges fájlokat.</v:String>
