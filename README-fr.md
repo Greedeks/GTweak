@@ -111,7 +111,6 @@
 
 ```c++
 Compatibilité Windows: à partir de la version 10 (build 18362.116)
-Résolution minimale: 1280×720 (HD)
 Plateforme installée: .NET Framework 4.8
 ```
 </br>

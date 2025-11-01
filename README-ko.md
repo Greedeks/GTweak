@@ -112,7 +112,6 @@
 
 ```c++
 Windows 지원: Windows 10 (build 18362.116)부터
-최소 화면 해상도: 1280×720 (HD)
 설치된 플랫폼: .NET Framework 4.8
 ```
 </br>

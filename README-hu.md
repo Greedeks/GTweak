@@ -110,8 +110,7 @@
 > ⚠ A segédprogramot kizárólag megbízható forrásból letöltött hivatalos Windows-képekhez tervezték. Ha a Windows csökkentett/módosított verzióját telepítette, kizárólag Ön felelős annak működéséért.
 
 ```c++
-Windows támogatás: 10-től (build >=18362.116)
-Minimális képernyőfelbontás: 1280×720 (HD)
+Windows támogatás: 10-től (build 18362.116)
 Telepített platform: .NET Framework 4.8
 ```
 </br>

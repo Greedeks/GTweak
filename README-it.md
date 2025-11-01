@@ -115,7 +115,6 @@
 
 ```c++
 Supporto Windows: dalla versione 10 (build 18362.116)
-Risoluzione minima dello schermo: 1280×720 (HD)
 Piattaforma installata: .NET Framework 4.8
 ```
 </br>
