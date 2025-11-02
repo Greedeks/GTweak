@@ -76,6 +76,9 @@ namespace GTweak.Utilities.Controls
                 }
             }
 
+            if (!AvailableThemes.Contains((string)_cachedSettings["Theme"], StringComparer.OrdinalIgnoreCase))
+                ChangingParameters("Theme", _defaultSettings["Theme"]);
+
             App.Language = (string)_cachedSettings["Language"];
             App.Theme = (string)_cachedSettings["Theme"];
         }
