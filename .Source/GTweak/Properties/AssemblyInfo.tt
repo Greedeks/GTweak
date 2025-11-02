@@ -1,6 +1,4 @@
-﻿<#@ template hostspecific="true" language="C#" #>
-<#@ output extension=".cs" #>
-using System.Reflection;
+﻿<#@ template hostspecific="true" language="C#" #><#@ output extension=".cs" #>using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -10,8 +8,8 @@ using System.Windows;
 [assembly: AssemblyCopyright("© 2024-<#= DateTime.Now.Year #> Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
 [assembly: AssemblyInformationalVersion("<#= majorVersion #>")]
-[assembly: AssemblyVersion("5.<#= GenerateVersion() #>")]
-[assembly: AssemblyFileVersion("5.<#= GenerateVersion() #>")]
+[assembly: AssemblyVersion("<#= GenerateVersion() #>")]
+[assembly: AssemblyFileVersion("<#= GenerateVersion() #>")]
 
 [assembly: ComVisible(false)]
 
@@ -20,13 +18,13 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly
 )]
 <#+
-        private const string majorVersion = "Build: 5.3.5";
-
-        private string GenerateVersion()
-        {
-            string subversion = majorVersion.Replace("Build: ", "").Trim().Split('.') switch { { Length: > 1 } parts => parts[1], _ => "0" };
-            int build = (int)(DateTime.UtcNow - new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)).TotalSeconds / 1000;
-            int revision = (int)(DateTime.UtcNow - DateTime.Now.Date).TotalSeconds % 1000;
-            return $"{subversion}.{build}.{revision}";
-        }
+    private const string majorVersion = "Build: 5.3.6";
+    
+    private string GenerateVersion()
+    {
+        string[] parts = majorVersion.Replace("Build:", "").Trim().Split('.');
+        int build = (int)(DateTime.UtcNow - new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)).TotalSeconds / 1000;
+        int revision = (int)(DateTime.UtcNow - DateTime.Now.Date).TotalSeconds % 1000;
+        return $"{parts[0]}.{parts[1]}.{build}.{revision}";
+    }
 #>

@@ -1,8 +1,3 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using Microsoft.Win32;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -18,6 +13,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using Microsoft.Win32;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GTweak.Utilities.Configuration
 {
@@ -66,7 +66,9 @@ namespace GTweak.Utilities.Configuration
             string nameProfile = string.Empty;
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLowerInvariant()}'", new EnumerationOptions { ReturnImmediately = true }).Get())
+            {
                 nameProfile = managementObj["FullName"] as string;
+            }
 
             return !string.IsNullOrWhiteSpace(nameProfile) ? nameProfile : Environment.UserName.ToLowerInvariant();
         }
@@ -214,7 +216,9 @@ namespace GTweak.Utilities.Configuration
                     foreach (string subKeyName in baseKey.GetSubKeyNames())
                     {
                         if (subKeyName == "Properties")
+                        {
                             continue;
+                        }
 
                         using RegistryKey regKey = baseKey.OpenSubKey(subKeyName);
                         if (regKey != null)
@@ -256,7 +260,9 @@ namespace GTweak.Utilities.Configuration
                                     return (true, SizeCalculationHelper(memorySize), !string.IsNullOrEmpty(driverDesc) ? driverDesc : chipType);
                                 }
                                 else
+                                {
                                     return (false, string.Empty, string.Empty);
+                                }
                             }
                         }
                     }
@@ -356,7 +362,9 @@ namespace GTweak.Utilities.Configuration
                     string storageType = GetStorageType(mediaType);
 
                     if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
+                    {
                         storageType = "(Media-Type)";
+                    }
 
                     result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
                 }
@@ -371,7 +379,9 @@ namespace GTweak.Utilities.Configuration
                     string interfaceType = managementObj["InterfaceType"] as string ?? string.Empty;
 
                     if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
+                    {
                         storageType = "(Media-Type)";
+                    }
 
                     result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
                 }
@@ -410,7 +420,9 @@ namespace GTweak.Utilities.Configuration
 
                                 if (!string.IsNullOrEmpty(valueID) && valueID.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0 && ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
                                 (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
+                                {
                                     return (true, RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},6", string.Empty));
+                                }
                             }
                         }
                     }
@@ -425,9 +437,13 @@ namespace GTweak.Utilities.Configuration
                     (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
 
                     if (isUsbDevice && !string.IsNullOrEmpty(data))
+                    {
                         result.AppendLine(data);
+                    }
                     else
+                    {
                         result.AppendLine(new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+                    }
 
                     VendorDetection.Realtek |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) >= 0;
                 }
@@ -441,15 +457,25 @@ namespace GTweak.Utilities.Configuration
             double totalSize = Convert.ToDouble(sizeInBytes) / (1024.0 * 1024.0);
 
             if (Convert.ToDouble(sizeInBytes) < 1024)
+            {
                 return $"{Convert.ToDouble(sizeInBytes):N0} B";
+            }
             else if (totalSize < 1)
+            {
                 return $"{Math.Round(totalSize * 1024)} KB";
+            }
             else if (totalSize < 1024)
+            {
                 return $"{Math.Round(totalSize)} MB";
+            }
             else if (totalSize < 1024 * 1024)
+            {
                 return $"{Math.Round(totalSize / 1024.0)} GB";
+            }
             else
+            {
                 return $"{Math.Round(totalSize / (1024.0 * 1024.0), 2):G} TB";
+            }
         }
 
         private string GetNetworkAdapters()
@@ -457,7 +483,10 @@ namespace GTweak.Utilities.Configuration
             StringBuilder result = new StringBuilder();
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
+            {
                 result.AppendLine(new[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+            }
+
             return result.ToString().TrimEnd('\n', '\r');
         }
 
@@ -505,7 +534,9 @@ namespace GTweak.Utilities.Configuration
                 });
 
                 if (!task.Wait(timeout) || task.Result == null)
+                {
                     return false;
+                }
 
                 return true;
             }
@@ -541,7 +572,9 @@ namespace GTweak.Utilities.Configuration
                             break;
                         }
                         else
+                        {
                             hadBlock = true;
+                        }
                     }
                     catch { hadLimited = true; }
                 }
@@ -549,15 +582,23 @@ namespace GTweak.Utilities.Configuration
                 if (CurrentConnection != ConnectionStatus.Available)
                 {
                     if (hadLimited)
+                    {
                         CurrentConnection = ConnectionStatus.Limited;
+                    }
                     else if (hadBlock)
+                    {
                         CurrentConnection = ConnectionStatus.Block;
+                    }
                     else
+                    {
                         CurrentConnection = ConnectionStatus.Lose;
+                    }
                 }
             }
             else
+            {
                 CurrentConnection = ConnectionStatus.Lose;
+            }
 
             if (new Dictionary<ConnectionStatus, string>
                 {
@@ -572,7 +613,9 @@ namespace GTweak.Utilities.Configuration
         internal void ValidateVersionUpdates()
         {
             if (!SettingsEngine.IsUpdateCheckRequired || !IsNetworkAvailable())
+            {
                 return;
+            }
 
             try
             {

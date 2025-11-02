@@ -1,13 +1,13 @@
-﻿using GTweak.Utilities.Configuration;
+using System;
+using System.IO;
+using System.Windows.Controls;
+using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Managers;
 using GTweak.Windows;
 using Ookii.Dialogs.Wpf;
-using System;
-using System.IO;
-using System.Windows.Controls;
 
 namespace GTweak.View
 {
@@ -27,13 +27,19 @@ namespace GTweak.View
         private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
             if (WindowsLicense.IsWindowsActivated)
+            {
                 NotificationManager.Show("info", "ready_activate_noty").Perform();
+            }
             else
             {
                 if (new SystemDiagnostics().IsNetworkAvailable())
+                {
                     await WindowsLicense.StartActivation();
+                }
                 else
+                {
                     NotificationManager.Show("warn", "network_activate_noty").Perform();
+                }
             }
         }
 
@@ -61,7 +67,9 @@ namespace GTweak.View
                 await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "disable_recovery_noty").WithDelay(300).Perform(); });
             }
             else
+            {
                 NotificationManager.Show("info", "warn_recovery_noty").Perform();
+            }
         }
 
         private async void BtnEnablePoint_ClickButton(object sender, EventArgs e)
@@ -76,7 +84,9 @@ namespace GTweak.View
                 await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "enable_recovery_noty").WithDelay(300).Perform(); });
             }
             else
+            {
                 NotificationManager.Show("info", "warn_point_enabled_noty").Perform();
+            }
         }
 
         private async void BtnCompression_ClickButton(object sender, EventArgs e)
@@ -84,7 +94,9 @@ namespace GTweak.View
             VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog();
 
             if (folderDialog.ShowDialog() == false)
+            {
                 return;
+            }
 
             string selectedPath = folderDialog.SelectedPath;
             if (await _ntfsCompressor.IsSupportNtfs(selectedPath))
@@ -100,10 +112,14 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "success_compression_noty").WithDelay(500).Perform(); });
                 }
                 else
+                {
                     NotificationManager.Show("info", "ready_compression_noty").Perform();
+                }
             }
             else
+            {
                 NotificationManager.Show("warn", "notsupport_ntfs_noty").Perform();
+            }
         }
 
         private async void BtnDecompression_ClickButton(object sender, EventArgs e)
@@ -111,7 +127,9 @@ namespace GTweak.View
             VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog();
 
             if (folderDialog.ShowDialog() == false)
+            {
                 return;
+            }
 
             string selectedPath = folderDialog.SelectedPath;
             if (await _ntfsCompressor.IsSupportNtfs(selectedPath))
@@ -128,10 +146,14 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "success_decompression_noty").WithDelay(500).Perform(); });
                 }
                 else
+                {
                     NotificationManager.Show("info", "ready_decompression_noty").Perform();
+                }
             }
             else
+            {
                 NotificationManager.Show("warn", "notsupport_ntfs_noty").Perform();
+            }
         }
 
         private async void BtnClear_ClickButton(object sender, EventArgs e)
@@ -159,7 +181,9 @@ namespace GTweak.View
             };
 
             if (vistaSaveFileDialog.ShowDialog() != true)
+            {
                 return;
+            }
 
             OverlayWindow overlayWindow = new OverlayWindow();
             overlayWindow.Show();

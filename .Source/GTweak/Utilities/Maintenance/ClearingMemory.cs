@@ -1,6 +1,3 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +7,9 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
 
 namespace GTweak.Utilities.Maintenance
 {
@@ -169,12 +169,16 @@ namespace GTweak.Utilities.Maintenance
             newst.Attr = SE_PRIVILEGE_ENABLED;
 
             if (!LookupPrivilegeValue(null, privilegeName, ref newst.Luid))
+            {
                 throw new Exception("Error in LookupPrivilegeValue: ", new Win32Exception(Marshal.GetLastWin32Error()));
+            }
 
             int num = AdjustTokenPrivileges(current.Token, false, ref newst, 0, IntPtr.Zero, IntPtr.Zero) ? 1 : 0;
 
             if (num == 0)
+            {
                 throw new Exception("Error in AdjustTokenPrivileges: ", new Win32Exception(Marshal.GetLastWin32Error()));
+            }
 
             return num != 0;
         }

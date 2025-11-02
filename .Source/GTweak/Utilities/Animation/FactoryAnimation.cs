@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -18,7 +18,9 @@ namespace GTweak.Utilities.Animation
             };
 
             if (onCompleted != null)
+            {
                 doubleAnim.Completed += (s, e) => onCompleted();
+            }
 
             Timeline.SetDesiredFrameRate(doubleAnim, 120);
             return doubleAnim;
@@ -29,7 +31,9 @@ namespace GTweak.Utilities.Animation
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(seconds));
 
             if (onCompleted != null)
+            {
                 doubleAnim.Completed += (s, e) => onCompleted();
+            }
 
             Timeline.SetDesiredFrameRate(doubleAnim, 120);
             return doubleAnim;

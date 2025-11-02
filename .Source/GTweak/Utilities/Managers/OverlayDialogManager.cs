@@ -1,8 +1,8 @@
-﻿using GTweak.Utilities.Animation;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using GTweak.Utilities.Animation;
 
 namespace GTweak.Utilities.Managers
 {

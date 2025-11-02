@@ -1,12 +1,12 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Windows;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Maintenance
 {
@@ -28,12 +28,16 @@ namespace GTweak.Utilities.Maintenance
                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency", 0, RegistryValueKind.DWord);
 
                 if (!IsPointCreationAllowed)
+                {
                     EnableRestorePoint();
+                }
 
                 foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT Description, SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     if (managementObj["Description"].ToString().IndexOf("GTweak", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
                         SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]));
+                    }
                 }
 
                 _inParams = _restorePoint.GetMethodParameters("CreateRestorePoint");
@@ -43,9 +47,13 @@ namespace GTweak.Utilities.Maintenance
                 _outParams = _restorePoint.InvokeMethod("CreateRestorePoint", _inParams, null);
 
                 if ((uint)_outParams["ReturnValue"] == 0)
+                {
                     NotificationManager.Show("info", "success_point_noty").WithDelay(300).Perform();
+                }
                 else
+                {
                     NotificationManager.Show("warn", "error_point_noty").WithDelay(300).Perform();
+                }
 
                 RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
             }
@@ -57,7 +65,10 @@ namespace GTweak.Utilities.Maintenance
             try
             {
                 if (!IsPointCreationAllowed)
+                {
                     EnableRestorePoint();
+                }
+
                 CommandExecutor.RunCommand("/c rstrui.exe");
             }
             catch { NotificationManager.Show("warn", "error_recovery_noty").Perform(); }
@@ -72,7 +83,9 @@ namespace GTweak.Utilities.Maintenance
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SPP\Clients", "{09F7EDC5-294E-4180-AF6A-FB0E6A0E9513}");
 
             foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
+            {
                 SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
+            }
 
             DisableSR(PathLocator.Folders.SystemDrive + @"\\");
         }

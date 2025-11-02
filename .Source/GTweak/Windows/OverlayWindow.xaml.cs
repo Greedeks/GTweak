@@ -1,8 +1,8 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Helpers;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
+using GTweak.Utilities.Animation;
+using GTweak.Utilities.Helpers;
 
 namespace GTweak.Windows
 {

@@ -1,11 +1,11 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
 using System;
 using System.Net;
 using System.Windows;
 using System.Windows.Input;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -23,7 +23,9 @@ namespace GTweak.Windows
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
+            {
                 DragMove();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

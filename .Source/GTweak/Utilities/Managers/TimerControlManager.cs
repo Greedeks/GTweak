@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -39,7 +39,9 @@ namespace GTweak.Utilities.Managers
                 _time -= _timer.Interval;
             }
             else
+            {
                 _time += _timer.Interval;
+            }
         }
 
         internal void Start() => _timer.Start();

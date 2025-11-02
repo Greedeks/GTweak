@@ -1,10 +1,10 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Managers;
-using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Managers;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Maintenance
 {
@@ -49,7 +49,9 @@ namespace GTweak.Utilities.Maintenance
         {
             int index = fullPath.IndexOf('\\');
             if (index < 0)
+            {
                 return false;
+            }
 
             string hive = fullPath.Substring(0, index);
             string subKey = fullPath.Substring(index + 1);
@@ -65,7 +67,9 @@ namespace GTweak.Utilities.Maintenance
             };
 
             if (baseKey == null)
+            {
                 return false;
+            }
 
             try
             {
@@ -87,7 +91,9 @@ namespace GTweak.Utilities.Maintenance
                 foreach (var path in RegistryPaths)
                 {
                     if (!RegistryKeyExists(path))
+                    {
                         continue;
+                    }
 
                     string tempFile = Path.Combine(tempDir, Path.GetRandomFileName() + ".reg");
                     tempFiles.Add(tempFile);
@@ -103,15 +109,27 @@ namespace GTweak.Utilities.Maintenance
 
                 StringBuilder sb = new StringBuilder();
                 foreach (string file in tempFiles)
+                {
                     sb.AppendLine(File.ReadAllText(file, Encoding.Unicode));
+                }
+
                 File.WriteAllText(finalRegFile, sb.ToString(), Encoding.Unicode);
             }
             catch { NotificationManager.Show("warn", "error_reg_exporter_noty").Perform(); }
             finally
             {
                 foreach (string file in tempFiles)
-                    if (File.Exists(file)) File.Delete(file);
-                if (Directory.Exists(tempDir)) Directory.Delete(tempDir);
+                {
+                    if (File.Exists(file))
+                    {
+                        File.Delete(file);
+                    }
+                }
+
+                if (Directory.Exists(tempDir))
+                {
+                    Directory.Delete(tempDir);
+                }
 
                 NotificationManager.Show("info", "success_reg_exporter_noty").WithDelay(500).Perform();
             }

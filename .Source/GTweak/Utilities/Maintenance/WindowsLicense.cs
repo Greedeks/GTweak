@@ -1,10 +1,3 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Storage;
-using GTweak.Windows;
-using Microsoft.Win32;
 using System;
 using System.Globalization;
 using System.IO;
@@ -13,6 +6,13 @@ using System.Management;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Storage;
+using GTweak.Windows;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Maintenance
 {
@@ -25,7 +25,9 @@ namespace GTweak.Utilities.Maintenance
         internal static void LicenseStatus()
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1").Get())
+            {
                 IsWindowsActivated = (uint)managementObj["LicenseStatus"] == 1;
+            }
         }
 
         internal static async Task StartActivation()
@@ -47,7 +49,9 @@ namespace GTweak.Utilities.Maintenance
             try
             {
                 if (HardwareData.OS.IsWin10)
+                {
                     await CommandExecutor.InvokeRunCommand(@"/c assoc .vbs=VBSFile & ftype VBSFile=""%SystemRoot%\System32\WScript.exe"" ""%1"" %*""");
+                }
 
                 await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keyWinHWID}");
 

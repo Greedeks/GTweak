@@ -1,4 +1,3 @@
-﻿using GTweak.Utilities.Animation;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using GTweak.Utilities.Animation;
 
 namespace GTweak.Assets.UserControl
 {
@@ -103,22 +103,35 @@ namespace GTweak.Assets.UserControl
             {
                 case DynamicResourceExtension dynamicResource:
                     if (target != null && textProperty != null)
+                    {
                         target.SetResourceReference(textProperty, dynamicResource.ResourceKey);
+                    }
                     else
+                    {
                         SetResourceReference(dp, dynamicResource.ResourceKey);
+                    }
+
                     break;
 
                 case StaticResourceExtension staticResource:
                     if (target != null && textProperty != null)
+                    {
                         target.SetResourceReference(textProperty, staticResource.ResourceKey);
+                    }
                     else
+                    {
                         SetResourceReference(dp, staticResource.ResourceKey);
+                    }
+
                     break;
 
                 default:
                     SetValue(dp, value);
                     if (target is TextBlock textBlock && value is string str)
+                    {
                         textBlock.Text = str;
+                    }
+
                     break;
             }
         }
@@ -151,9 +164,13 @@ namespace GTweak.Assets.UserControl
         private void UpdateToggleState(bool isState, bool isSkipAnimation = false)
         {
             if (isState)
+            {
                 AnimateToggle(_rightPosition, brushOffColor, brushOnColor, borderOffColor, borderOnColor, (Color)Application.Current.Resources["Color_ToggleDot_On"], isSkipAnimation, "TextToggle");
+            }
             else
+            {
                 AnimateToggle(_leftPosition, brushOnColor, brushOffColor, borderOnColor, borderOffColor, (Color)Application.Current.Resources["Color_ToggleDot_Off"], isSkipAnimation, "TextInactivity");
+            }
         }
 
         private void AnimateToggle(Thickness targetPosition, Brush fromBrush, Brush toBrush, Brush fromBorder, Brush toBorder, Color dotColor, bool skipAnimation, string textStyle)

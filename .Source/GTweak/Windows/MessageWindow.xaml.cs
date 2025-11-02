@@ -1,8 +1,8 @@
-﻿using GTweak.Utilities.Managers;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using GTweak.Utilities.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -34,13 +34,17 @@ namespace GTweak.Windows
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
+            {
                 DragMove();
+            }
         }
 
         private void BtnAccept_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
+            {
                 Application.Current.Shutdown();
+            }
         }
 
     }

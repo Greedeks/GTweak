@@ -1,7 +1,3 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
 using System;
 using System.Media;
 using System.Windows;
@@ -9,6 +5,10 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using GTweak.Utilities.Animation;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows

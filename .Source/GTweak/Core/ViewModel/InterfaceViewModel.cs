@@ -1,10 +1,10 @@
-﻿using GTweak.Core.Base;
+using System.Collections.Generic;
+using System.Windows;
+using GTweak.Core.Base;
 using GTweak.Core.Model;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Tweaks;
-using System.Collections.Generic;
-using System.Windows;
 
 namespace GTweak.Core.ViewModel
 {

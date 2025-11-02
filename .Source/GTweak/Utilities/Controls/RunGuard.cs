@@ -1,5 +1,3 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Windows;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -7,6 +5,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using GTweak.Utilities.Configuration;
+using GTweak.Windows;
 
 namespace GTweak.Utilities.Controls
 {
@@ -25,9 +25,13 @@ namespace GTweak.Utilities.Controls
                 using (Mutex mutex = new Mutex(false, @"Global\" + "GTweak"))
                 {
                     if (mutex.WaitOne(150, false))
+                    {
                         Application.Current.Dispatcher.Invoke(() => { new MessageWindow().ShowDialog(); });
+                    }
                     else
+                    {
                         Environment.Exit(0);
+                    }
                 }
                 using (Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == Process.GetCurrentProcess().ProcessName))
                 {
@@ -47,7 +51,9 @@ namespace GTweak.Utilities.Controls
             await Task.Run(() => new SystemDiagnostics().GetOperatingSystemInfo());
 
             if ((HardwareData.OS.IsWin11 || HardwareData.OS.IsWin10) && HardwareData.OS.Build.CompareTo(18362.116m) >= 0)
+            {
                 return;
+            }
 
             new MessageWindow(true).ShowDialog();
         }

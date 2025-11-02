@@ -1,9 +1,3 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Windows;
-using Microsoft.Win32;
-using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +5,12 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using GTweak.Windows;
+using Microsoft.Win32;
+using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Utilities.Controls
 {
@@ -67,7 +67,9 @@ namespace GTweak.Utilities.Controls
             foreach (var kv in _defaultSettings)
             {
                 if (RegistryHelp.ValueExists(PathLocator.Registry.BaseKey, kv.Key))
+                {
                     ChangingParameters(kv.Key, kv.Value);
+                }
                 else
                 {
                     _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(PathLocator.Registry.BaseKey, kv.Key, defaultBool ? 1 : 0) is int asBool ? asBool != 0 : defaultBool :
@@ -77,7 +79,9 @@ namespace GTweak.Utilities.Controls
             }
 
             if (!AvailableThemes.Contains((string)_cachedSettings["Theme"], StringComparer.OrdinalIgnoreCase))
+            {
                 ChangingParameters("Theme", _defaultSettings["Theme"]);
+            }
 
             App.Language = (string)_cachedSettings["Language"];
             App.Theme = (string)_cachedSettings["Theme"];
@@ -86,7 +90,9 @@ namespace GTweak.Utilities.Controls
         internal static void SaveFileConfig()
         {
             if (INIManager.IsAllTempDictionaryEmpty)
+            {
                 NotificationManager.Show("info", "export_warning_noty").Perform();
+            }
             else
             {
                 VistaSaveFileDialog vistaSaveFileDialog = new VistaSaveFileDialog
@@ -97,17 +103,23 @@ namespace GTweak.Utilities.Controls
                 };
 
                 if (vistaSaveFileDialog.ShowDialog() != true)
+                {
                     return;
+                }
 
                 try
                 {
                     PathLocator.Files.Config = vistaSaveFileDialog.FileName;
 
                     if (Path.GetExtension(PathLocator.Files.Config)?.ToLower() != ".ini")
+                    {
                         PathLocator.Files.Config = Path.ChangeExtension(PathLocator.Files.Config, ".ini");
+                    }
 
                     if (File.Exists(PathLocator.Files.Config))
+                    {
                         File.Delete(PathLocator.Files.Config);
+                    }
 
                     INIManager iniManager = new INIManager(PathLocator.Files.Config);
                     iniManager.Write("GTweak", "Author", "Greedeks");
@@ -130,7 +142,9 @@ namespace GTweak.Utilities.Controls
             };
 
             if (vistaOpenFileDialog.ShowDialog() == false)
+            {
                 return;
+            }
 
             PathLocator.Files.Config = vistaOpenFileDialog.FileName;
             INIManager iniManager = new INIManager(PathLocator.Files.Config);
@@ -138,12 +152,18 @@ namespace GTweak.Utilities.Controls
             if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("FormatVersion") && iniManager.GetKeysOrValue("GTweak", false).Contains("2"))
             {
                 if (File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("Slider")))
+                {
                     new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
+                }
                 else
+                {
                     NotificationManager.Show("info", "empty_import_noty").Perform();
+                }
             }
             else
+            {
                 NotificationManager.Show("info", "warn_import_noty").Perform();
+            }
         }
 
         internal static void SelfRemoval()

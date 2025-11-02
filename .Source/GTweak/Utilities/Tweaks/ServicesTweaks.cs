@@ -1,7 +1,3 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +6,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -222,9 +222,13 @@ namespace GTweak.Utilities.Tweaks
                         try
                         {
                             if (isDisabled)
+                            {
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant {Environment.UserName}:F & rename \"{currentFilePath}\" \"{targetFileName}\"");
+                            }
                             else
+                            {
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c rename \"{currentFilePath}\" \"{targetFileName}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
+                            }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
@@ -246,7 +250,10 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallDay", 0, RegistryValueKind.DWord);
                     }
                     else
+                    {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
+                    }
+
                     break;
                 case "TglButton4":
                     string[] services = {"WalletService","VacSvc", "spectrum", "SharedRealitySvc","perceptionsimulation", "MixedRealityOpenXRSvc",
@@ -276,7 +283,9 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\McpManagementService", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
 
                     if (isDisabled)
+                    {
                         CommandExecutor.RunCommandAsTrustedInstaller(@$"/c net stop spooler && del /F /Q %systemroot%\System32\spool\PRINTERS\*.*");
+                    }
 
                     try
                     {
@@ -296,9 +305,13 @@ namespace GTweak.Utilities.Tweaks
                                             if (shellKey.GetSubKeyNames().Any(k => k.Equals("print", StringComparison.OrdinalIgnoreCase)))
                                             {
                                                 if (isDisabled)
+                                                {
                                                     RegistryHelp.Write(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\print", "ProgrammaticAccessOnly", string.Empty, RegistryValueKind.String);
+                                                }
                                                 else
+                                                {
                                                     RegistryHelp.DeleteValue(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\print", "ProgrammaticAccessOnly");
+                                                }
                                             }
                                         }
                                     }
@@ -468,7 +481,9 @@ namespace GTweak.Utilities.Tweaks
                         CommandExecutor.RunCommandAsTrustedInstaller("/c net start bits & net start cryptSvc");
                     }
                     else
+                    {
                         SetTaskStateOwner(true, winUpdatesTasks);
+                    }
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });

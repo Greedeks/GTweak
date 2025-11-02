@@ -1,13 +1,13 @@
-﻿using GTweak.Utilities.Animation;
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
+using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Tweaks;
-using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -76,7 +76,9 @@ namespace GTweak.Windows
         {
             int index = Array.IndexOf(new[] { 0, 10, 30, 55, 75, 95 }, e.ProgressPercentage);
             if (index > 0)
+            {
                 TypewriterAnimation.Create((string)FindResource($"step{++index}_load"), StatusLoading, TimeSpan.FromMilliseconds(200));
+            }
         }
     }
 }

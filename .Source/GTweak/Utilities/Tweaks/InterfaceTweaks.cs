@@ -1,13 +1,13 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -235,7 +235,10 @@ namespace GTweak.Utilities.Tweaks
                             else
                             {
                                 if (File.Exists(PathLocator.Files.BlankIcon))
+                                {
                                     File.Delete(PathLocator.Files.BlankIcon);
+                                }
+
                                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
                             }
                         });
@@ -244,15 +247,25 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton12":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "link", Encoding.Unicode.GetBytes("\0\0"), RegistryValueKind.Binary);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "link");
+                    }
+
                     break;
                 case "TglButton13":
                     if (isDisabled)
+                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}");
+                    }
                     else
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", 0, RegistryValueKind.DWord);
+                    }
+
                     break;
                 case "TglButton14":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", isDisabled ? 1 : 0, RegistryValueKind.DWord);
@@ -281,9 +294,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton17":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", "", "", RegistryValueKind.String);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}");
+                    }
+
                     break;
                 case "TglButton18":
                     RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
@@ -408,9 +426,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton25":
                     if (isDisabled)
+                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers");
+                    }
                     else
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", 1, RegistryValueKind.DWord);
+                    }
+
                     break;
                 case "TglButton26":
 
@@ -428,9 +451,13 @@ namespace GTweak.Utilities.Tweaks
                     if (HardwareData.OS.IsWin10)
                     {
                         if (isDisabled)
+                        {
                             RegistryHelp.Write(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter", 1, RegistryValueKind.DWord);
+                        }
                         else
+                        {
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Policies\Microsoft\Windows\Explorer", "DisableNotificationCenter");
+                        }
                     }
                     else if (HardwareData.OS.IsWin11)
                     {
@@ -475,33 +502,51 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton29":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "JPEGImportQuality", 100, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Control Panel\Desktop", "JPEGImportQuality");
+                    }
+
                     break;
                 case "TglButton30":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     break;
                 case "TglButton31":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", 1, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer");
+                    }
+
                     break;
                 case "TglButton32":
                     if (isDisabled)
                     {
                         if (HardwareData.OS.IsWin11)
+                        {
                             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", 1, RegistryValueKind.DWord);
+                        }
                         else if (HardwareData.OS.IsWin10)
+                        {
                             RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", 1, RegistryValueKind.DWord);
+                        }
                     }
                     else
                     {
                         if (HardwareData.OS.IsWin11)
+                        {
                             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode");
+                        }
                         else if (HardwareData.OS.IsWin10)
+                        {
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo");
+                        }
                     }
                     break;
                 case "TglButton33":

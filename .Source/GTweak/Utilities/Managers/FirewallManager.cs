@@ -1,9 +1,9 @@
-﻿using GTweak.Utilities.Controls;
-using NetFwTypeLib;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
+using NetFwTypeLib;
 
 namespace GTweak.Utilities.Managers
 {
@@ -32,11 +32,15 @@ namespace GTweak.Utilities.Managers
             foreach (INetFwRule rule in firewallPolicy.Rules)
             {
                 if (rule.Name == nameRule)
+                {
                     rulesToRemove.Add(rule);
+                }
             }
 
             foreach (var rule in rulesToRemove)
+            {
                 firewallPolicy.Rules.Remove(rule.Name);
+            }
         }
 
         private static bool CheckRulesWindows(string nameRule)
@@ -46,7 +50,9 @@ namespace GTweak.Utilities.Managers
             foreach (INetFwRule rule in firewallRuleCheck.Rules)
             {
                 if (rule.Name == nameRule)
+                {
                     isCheck = false;
+                }
             }
             return isCheck;
         }
@@ -77,7 +83,9 @@ namespace GTweak.Utilities.Managers
             if (isDisabled)
             {
                 if (CheckRulesWindows(nameRule))
+                {
                     firewallPolicy.Rules.Remove(nameRule);
+                }
 
                 INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(Type.GetTypeFromProgID("HNetCfg.FWRule"));
                 firewallRule.ApplicationName = pathProgram;
@@ -91,7 +99,9 @@ namespace GTweak.Utilities.Managers
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
+            {
                 RemoveAllRulesByName(nameRule);
+            }
         }
 
         protected static void BlockSpyDomain(in bool isDisabled)
@@ -132,11 +142,16 @@ namespace GTweak.Utilities.Managers
             if (isDisabled)
             {
                 if (CheckRulesWindows(_nameRules["Domain"]))
+                {
                     firewallPolicy.Rules.Remove(_nameRules["Domain"]);
+                }
+
                 firewallPolicy.Rules.Add(firewallRule);
             }
             else
+            {
                 RemoveAllRulesByName(_nameRules["Domain"]);
+            }
         }
 
         protected static void BlockWDefender(bool isDisabled)

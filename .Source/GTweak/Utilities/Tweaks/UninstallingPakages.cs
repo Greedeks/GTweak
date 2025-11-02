@@ -1,7 +1,3 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -84,7 +84,9 @@ namespace GTweak.Utilities.Tweaks
             if (PackagesDetails.TryGetValue(key, out var details))
             {
                 if (isUnavailable.HasValue)
+                {
                     PackagesDetails[key] = (details.Alias, isUnavailable.Value, details.Scripts);
+                }
 
                 OnPackagesChanged();
                 return details.IsUnavailable;
@@ -138,10 +140,14 @@ namespace GTweak.Utilities.Tweaks
                     List<string> packageNamesToRemove = new List<string> { packageName };
 
                     if (!string.IsNullOrEmpty(Alias))
+                    {
                         packageNamesToRemove.Add(Alias);
+                    }
 
                     if (Scripts != null)
+                    {
                         packageNamesToRemove.AddRange(Scripts);
+                    }
 
                     List<string> psCommands = packageNamesToRemove.SelectMany(name => new[]
                     {
@@ -207,7 +213,9 @@ namespace GTweak.Utilities.Tweaks
                                             if (shellKey != null)
                                             {
                                                 if (shellKey.GetSubKeyNames().Any(k => k.Equals("3D Print", StringComparison.OrdinalIgnoreCase)))
+                                                {
                                                     RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\3D Print");
+                                                }
                                             }
                                         }
                                     }
@@ -222,7 +230,9 @@ namespace GTweak.Utilities.Tweaks
                         foreach (string processName in new string[] { "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "msedgewebview2", "MicrosoftEdgeUpdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "RuntimeBroker" })
                         {
                             foreach (Process process in Process.GetProcessesByName(processName))
+                            {
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /pid {process.Id} /f");
+                            }
                         }
 
                         RemoveTasks(edgeTasks);
@@ -279,7 +289,9 @@ namespace GTweak.Utilities.Tweaks
                         foreach (string folder in new[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" })
                         {
                             if (!shouldRemoveWebView && (folder == "EdgeWebView" || folder == "EdgeCore" || folder == "EdgeUpdate"))
+                            {
                                 continue;
+                            }
 
                             RemoveDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder));
                         }
@@ -294,10 +306,14 @@ namespace GTweak.Utilities.Tweaks
                                 if (!string.IsNullOrEmpty(path) && path.Equals("Edge"))
                                 {
                                     if (!shouldRemoveWebView && path.Contains("WebView"))
+                                    {
                                         continue;
+                                    }
 
                                     if (path.EndsWith(@"\AppxManifest.xml", StringComparison.OrdinalIgnoreCase))
+                                    {
                                         path = path.Replace(@"\AppxManifest.xml", "").Trim();
+                                    }
 
                                     RemoveDirectory(path);
 

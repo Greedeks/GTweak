@@ -1,11 +1,11 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Helpers;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
 
 namespace GTweak.Utilities.Controls
 {
@@ -27,7 +27,9 @@ namespace GTweak.Utilities.Controls
                     string assocTxtFile = await CommandExecutor.GetCommandOutput("/c assoc .txt", false);
 
                     if (assocTxtFile.IndexOf("=", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
                         CommandExecutor.RunCommand($"/c assoc .log={assocTxtFile.Split('=')[1].Trim()}");
+                    }
                 }
             }
             catch (Exception fileEx) { LogDebug(fileEx); }
@@ -52,7 +54,9 @@ namespace GTweak.Utilities.Controls
                         await writer.WriteLineAsync($"Exception Level: {exLevel}");
 
                         if (exLevel == 1)
+                        {
                             await writer.WriteLineAsync($"Member: {memberName}");
+                        }
 
                         await writer.WriteLineAsync($"Type: {currentEx.GetType().FullName}");
                         await writer.WriteLineAsync($"Error: {currentEx.Message}");

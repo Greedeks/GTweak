@@ -1,7 +1,3 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -10,6 +6,10 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
@@ -44,14 +44,17 @@ namespace GTweak.View
             string description = ((ToggleButton)sender).ToolTip?.ToString() ?? string.Empty;
 
             if (DescBlock.Text != description)
+            {
                 DescBlock.Text = description;
-
+            }
         }
 
         private void Package_MouseLeave(object sender, MouseEventArgs e)
         {
             if (DescBlock.Text != DescBlock.DefaultText)
+            {
                 DescBlock.Text = DescBlock.DefaultText;
+            }
         }
 
         private async void ToggleButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -62,7 +65,9 @@ namespace GTweak.View
             if (toggleButton.IsChecked == false && packageName == "OneDrive")
             {
                 if (string.IsNullOrWhiteSpace(PathLocator.Executable.OneDrive))
+                {
                     NotificationManager.Show("warn", "error_onedrive_noty").Perform();
+                }
                 else
                 {
                     NotificationManager.Show("info", "success_onedrive_noty").Perform();
@@ -105,7 +110,9 @@ namespace GTweak.View
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ExplorerManager.PackageMapping.TryGetValue(packageName, out bool needRestart))
+                        {
                             ExplorerManager.Restart(new Process());
+                        }
                     }), DispatcherPriority.ApplicationIdle);
                 });
             }

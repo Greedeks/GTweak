@@ -1,13 +1,13 @@
-﻿using GTweak.Core.Base;
-using GTweak.Core.Model;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Tweaks;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Threading;
+using GTweak.Core.Base;
+using GTweak.Core.Model;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {
@@ -30,7 +30,9 @@ namespace GTweak.Core.ViewModel
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     foreach (PakagesModel item in DisplayState)
+                    {
                         UpdatePackageState(item);
+                    }
                 }), DispatcherPriority.ApplicationIdle);
 
             };
@@ -65,9 +67,13 @@ namespace GTweak.Core.ViewModel
                 if (!item.Name.Equals("OneDrive", StringComparison.OrdinalIgnoreCase))
                 {
                     if (val.Scripts != null && val.Scripts.Any())
+                    {
                         item.Installed = val.Scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+                    }
                     else
+                    {
                         item.Installed = false;
+                    }
                 }
                 else
                 {

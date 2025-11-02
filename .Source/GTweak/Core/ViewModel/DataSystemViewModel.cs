@@ -1,11 +1,11 @@
-﻿using GTweak.Core.Base;
-using GTweak.Core.Model;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using GTweak.Core.Base;
+using GTweak.Core.Model;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
 
 namespace GTweak.Core.ViewModel
 {

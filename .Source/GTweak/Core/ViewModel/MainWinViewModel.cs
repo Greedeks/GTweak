@@ -1,8 +1,3 @@
-﻿using GTweak.Core.Base;
-using GTweak.Core.Model;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.View;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,6 +6,11 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using GTweak.Core.Base;
+using GTweak.Core.Model;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.View;
 
 namespace GTweak.Core.ViewModel
 {
@@ -104,7 +104,9 @@ namespace GTweak.Core.ViewModel
             NavigateToDataSystemCommand = new RelayCommand(NavigateToDataSystem);
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() => { FillLanguages(); }));
+            }
         }
 
         private void FillLanguages()
@@ -113,7 +115,9 @@ namespace GTweak.Core.ViewModel
             ResourceDictionary dictionary = new ResourceDictionary { Source = new Uri($"Languages/LanguageCatalog.xaml", UriKind.Relative) };
 
             foreach (string code in SettingsEngine.AvailableLangs)
+            {
                 Languages.Add(new MainWinModel.LanguageItem { Code = code, Display = dictionary[$"{code.Replace("-", "_")}"] as string ?? code });
+            }
 
             SelectedLanguage = SettingsEngine.AvailableLangs.Contains(SettingsEngine.Language) ? SettingsEngine.Language : SettingsEngine.AvailableLangs.FirstOrDefault();
         }

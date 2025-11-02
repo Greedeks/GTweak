@@ -1,12 +1,12 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
@@ -35,9 +35,13 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
         internal static void SetProtectionState(bool isDisabled)
         {
             if (isDisabled)
+            {
                 Deactivate();
+            }
             else
+            {
                 Activate();
+            }
         }
 
         private static void Activate()
@@ -57,7 +61,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
               (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockConfigSecurityPolicy.exe"), "ConfigSecurityPolicy.exe"),
               (Path.Combine(PathLocator.Folders.WindowsDefenderX86, "BlockMpCmdRun.exe"), "MpCmdRun.exe"),
             })
+            {
                 CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{filePath}\" {originalFileName}");
+            }
 
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalware.exe\" ren \"%D\\BlockAntimalware.exe\" MsMpEng.exe");
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalwareCore.exe\" ren \"%D\\BlockAntimalwareCore.exe\" MpDefenderCoreService.exe");
@@ -167,7 +173,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.ClassesRoot, @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}\InprocServer32", "ThreadingModel", "Apartment", RegistryValueKind.String);
 
             foreach (var service in services)
+            {
                 CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c reg add HKLM\SYSTEM\CurrentControlSet\Services\{service.Key} /v Start /t REG_DWORD /d {service.Value} /f");
+            }
 
             CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c reg add HKLM\SYSTEM\CurrentControlSet\Services\WinDefend /v AutorunsDisabled /t REG_DWORD /d 0 /f");
             CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\wscsvc /v DelayedAutoStart /t REG_DWORD /d 0 /f");
@@ -200,14 +208,18 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 (Path.Combine(PathLocator.Folders.WindowsDefender, "ConfigSecurityPolicy.exe"), "BlockConfigSecurityPolicy.exe"),
                 (Path.Combine(PathLocator.Folders.WindowsDefenderX86, "MpCmdRun.exe"), "BlockMpCmdRun.exe"),
             })
+            {
                 CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{filePath}\" {newFileName}");
+            }
 
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MpDefenderCoreService.exe\" ren \"%D\\MpDefenderCoreService.exe\" BlockAntimalwareCore.exe");
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Windows Defender Advanced Threat Protection")}\" BlockWindowsDefenderATP");
 
             foreach (var service in services)
+            {
                 CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c reg add HKLM\SYSTEM\CurrentControlSet\Services\{service.Key} /v Start /t REG_DWORD /d 4 /f");
+            }
 
             CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c reg add HKLM\SYSTEM\CurrentControlSet\Services\WinDefend /v AutorunsDisabled /t REG_DWORD /d 3 /f");
             CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\wscsvc /v DelayedAutoStart /t REG_DWORD /d 1 /f");
@@ -379,10 +391,14 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 try
                 {
                     if (!Directory.Exists(directory))
+                    {
                         continue;
+                    }
 
                     foreach (var filePath in Directory.EnumerateFiles(directory, "*", SearchOption.TopDirectoryOnly))
+                    {
                         CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c del /q \"{filePath}\"");
+                    }
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
@@ -391,7 +407,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
         private static void ManageExclusions(bool isDisable)
         {
             foreach (string drive in DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed || d.DriveType == DriveType.Removable).Select(d => d.Name))
+            {
                 CommandExecutor.RunCommand($" {(isDisable ? "Add-MpPreference" : "Remove-MpPreference")} -ExclusionPath '{drive}'", true);
+            }
         }
 
         private static void KillProcess(params string[] nameList)
@@ -399,7 +417,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             foreach (string processName in nameList)
             {
                 foreach (Process process in Process.GetProcessesByName(processName))
+                {
                     CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c taskkill /pid {process.Id} /f");
+                }
             }
         }
 

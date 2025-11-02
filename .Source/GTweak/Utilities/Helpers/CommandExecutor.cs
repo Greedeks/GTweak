@@ -1,8 +1,8 @@
-﻿using GTweak.Utilities.Controls;
 using System;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
 
 namespace GTweak.Utilities.Helpers
 {
@@ -37,7 +37,9 @@ namespace GTweak.Utilities.Helpers
                 await process.WaitForExitAsync().ConfigureAwait(false);
 
                 if (process.ExitCode == 0)
+                {
                     return string.Join(Environment.NewLine, output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));
+                }
                 else
                 {
                     Debug.WriteLine($"{process.ExitCode}: {error}");
@@ -86,7 +88,9 @@ namespace GTweak.Utilities.Helpers
         internal static Task WaitForExitAsync(this Process process)
         {
             if (process.HasExited)
+            {
                 return Task.CompletedTask;
+            }
 
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
             process.EnableRaisingEvents = true;

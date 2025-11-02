@@ -1,9 +1,3 @@
-﻿using GTweak.Core.ViewModel;
-using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +8,12 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using GTweak.Core.ViewModel;
+using GTweak.Utilities.Animation;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
 
 namespace GTweak.View
 {
@@ -79,7 +79,9 @@ namespace GTweak.View
                 _ = Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (BtnVision.IsChecked.Value & BtnVision.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
+                    {
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
+                    }
                 }));
             });
         }
@@ -143,7 +145,9 @@ namespace GTweak.View
                 }
 
                 if (!PopupCopy.IsOpen)
+                {
                     AnimationPopup();
+                }
             }
         }
 

@@ -1,11 +1,11 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Managers;
-using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Managers;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
@@ -65,11 +65,15 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
                         using RegistryKey key = baseKey.OpenSubKey(path, false);
                         if (key == null)
+                        {
                             continue;
+                        }
 
                         var values = new Dictionary<string, object>();
                         foreach (string valueName in key.GetValueNames())
+                        {
                             values[valueName] = key.GetValue(valueName);
+                        }
 
                         allValues[path] = values;
 
@@ -101,12 +105,16 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
                         using RegistryKey key = baseKey.OpenSubKey(path, true) ?? baseKey.CreateSubKey(path);
                         if (key == null)
+                        {
                             continue;
+                        }
 
                         if (allValues.ContainsKey(path))
                         {
                             foreach (var pair in allValues[path])
+                            {
                                 key.SetValue(pair.Key, pair.Value);
+                            }
                         }
 
                         if (aclDataDict.ContainsKey(path))

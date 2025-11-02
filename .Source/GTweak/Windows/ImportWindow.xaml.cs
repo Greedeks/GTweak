@@ -1,7 +1,3 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +5,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Tweaks;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -32,7 +32,9 @@ namespace GTweak.Windows
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
+            {
                 DragMove();
+            }
         }
 
         private async void Window_ContentRendered(object sender, EventArgs e)
@@ -46,10 +48,14 @@ namespace GTweak.Windows
             if (valueProgress == 100)
             {
                 if (_isExpRestartNeed)
+                {
                     ExplorerManager.Restart(new Process());
+                }
 
                 if (_requiredActions.Count != 0)
+                {
                     NotificationManager.Show().Perform(_requiredActions.Max());
+                }
 
                 App.UpdateImport();
                 Close();
@@ -80,7 +86,10 @@ namespace GTweak.Windows
             int totalTweaks = allTweaks.Count;
             int appliedTweaks = 0;
 
-            if (totalTweaks == 0) progress.Report(100);
+            if (totalTweaks == 0)
+            {
+                progress.Report(100);
+            }
 
             foreach (var (section, tweak, value) in allTweaks)
             {
@@ -90,17 +99,23 @@ namespace GTweak.Windows
                     if (section == INIManager.SectionSys)
                     {
                         if (tweak.StartsWith("TglButton") && tweak != "TglButton3")
+                        {
                             _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
+                        }
                         else if (tweak == "TglButton8")
                         {
                             BackgroundQueue backgroundQueue = new BackgroundQueue();
                             await backgroundQueue.QueueTask(delegate { _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false); });
                         }
                         else
+                        {
                             _sysTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
+                        }
 
                         foreach (var act in NotificationManager.SysActions.Where(get => get.Key == tweak))
+                        {
                             _requiredActions.Add(act.Value);
+                        }
                     }
                     else
                     {
@@ -111,14 +126,20 @@ namespace GTweak.Windows
                         if (NoticeActions != null)
                         {
                             foreach (var act in NoticeActions.Where(get => get.Key == tweak))
+                            {
                                 _requiredActions.Add(act.Value);
+                            }
                         }
 
                         if (ExplorerMapping != null && ExplorerMapping.Any(get => get.Key == tweak && get.Value == true))
+                        {
                             _isExpRestartNeed = true;
+                        }
 
                         if (section == INIManager.SectionSvc)
+                        {
                             _requiredActions.Add(NotificationManager.NoticeAction.Restart);
+                        }
                     }
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }

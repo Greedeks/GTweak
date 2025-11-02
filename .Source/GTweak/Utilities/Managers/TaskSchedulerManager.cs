@@ -1,11 +1,11 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Storage;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Storage;
 
 namespace GTweak.Utilities.Managers
 {
@@ -79,7 +79,9 @@ namespace GTweak.Utilities.Managers
                     {
                         Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
                         if (task != null)
+                        {
                             taskService.RootFolder.DeleteTask(taskname);
+                        }
                     }
                 }
             });
@@ -91,9 +93,13 @@ namespace GTweak.Utilities.Managers
             string matchPath = files.FirstOrDefault(path => Path.GetFileName(path).IndexOf(partialName, StringComparison.OrdinalIgnoreCase) >= 0);
 
             if (!string.IsNullOrWhiteSpace(matchPath))
+            {
                 return Path.GetFileName(matchPath);
+            }
             else
+            {
                 return partialName;
+            }
         }
 
         private static string[] GetExistingTasks(params string[] tasklist)
@@ -103,7 +109,9 @@ namespace GTweak.Utilities.Managers
             foreach (string path in tasklist)
             {
                 if (File.Exists(Path.Combine(PathLocator.Folders.Tasks, path.TrimStart('\\', '/').Replace('/', '\\'))))
+                {
                     foundExisting.Add(path);
+                }
             }
 
             return foundExisting.ToArray();

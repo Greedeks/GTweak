@@ -1,6 +1,3 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -8,6 +5,9 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using GTweak.Utilities.Animation;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -36,7 +36,9 @@ namespace GTweak.Windows
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
+            {
                 DragMove();
+            }
         }
 
         private void TitleBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -49,7 +51,10 @@ namespace GTweak.Windows
                     while (current != null)
                     {
                         if (current is ButtonBase)
+                        {
                             return;
+                        }
+
                         current = VisualTreeHelper.GetParent(current);
                     }
                 }

@@ -1,8 +1,8 @@
-﻿using GTweak.Utilities.Controls;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Helpers
 {
@@ -25,12 +25,16 @@ namespace GTweak.Utilities.Helpers
             Task.Run(delegate
             {
                 if (registrykey.OpenSubKey(subkey) == null || registrykey.OpenSubKey(subkey)?.GetValue(value, null) == null)
+                {
                     return;
+                }
 
                 try
                 {
                     if (isTakingOwner)
+                    {
                         GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                    }
 
                     registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
                 }
@@ -45,7 +49,9 @@ namespace GTweak.Utilities.Helpers
                 try
                 {
                     if (isTakingOwner)
+                    {
                         GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                    }
 
                     registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
                 }
@@ -69,7 +75,9 @@ namespace GTweak.Utilities.Helpers
                 try
                 {
                     if (isTakingOwner)
+                    {
                         GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
+                    }
 
                     RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
 
@@ -109,7 +117,9 @@ namespace GTweak.Utilities.Helpers
         internal static bool CheckValueBytes(in string subkey, in string valueName, in string expectedValue)
         {
             if (!(Registry.GetValue(subkey, valueName, null) is byte[]))
+            {
                 return true;
+            }
 
             return string.Concat((byte[])Registry.GetValue(subkey, valueName, null) ?? Array.Empty<byte>()) != expectedValue;
         }
@@ -125,11 +135,17 @@ namespace GTweak.Utilities.Helpers
             try
             {
                 using RegistryKey key = baseKey.OpenSubKey(subKeyPath);
-                if (key == null) return new T();
+                if (key == null)
+                {
+                    return new T();
+                }
 
                 T result = new T();
                 foreach (var name in key.GetSubKeyNames())
+                {
                     result.Add(name);
+                }
+
                 return result;
             }
             catch { return new T(); }

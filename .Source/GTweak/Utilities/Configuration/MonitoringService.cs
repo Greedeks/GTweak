@@ -1,4 +1,3 @@
-﻿using GTweak.Utilities.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,6 +5,7 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
 
 namespace GTweak.Utilities.Configuration
 {
@@ -68,16 +68,23 @@ namespace GTweak.Utilities.Configuration
 
                     if (!success)
                     {
-                        if (attempt == 2) break;
+                        if (attempt == 2)
+                        {
+                            break;
+                        }
 
                         if (bytesNeeded > capacity * sizeof(uint))
+                        {
                             capacity = bytesNeeded / sizeof(uint) + 1;
+                        }
 
                         continue;
                     }
 
                     if (bytesNeeded < capacity * sizeof(uint))
+                    {
                         return (bytesNeeded / sizeof(uint)).ToString();
+                    }
 
                     capacity = bytesNeeded / sizeof(uint) + 1;
                 }
@@ -97,7 +104,9 @@ namespace GTweak.Utilities.Configuration
                     {
                         svc.Refresh();
                         if (svc.Status == ServiceControllerStatus.Running)
+                        {
                             running++;
+                        }
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 });
@@ -111,7 +120,9 @@ namespace GTweak.Utilities.Configuration
             {
                 MemoryStatus memStatus = new MemoryStatus();
                 if (!GlobalMemoryStatusEx(memStatus))
+                {
                     Memory.Usage = 0;
+                }
 
                 int totalMemory = (int)(memStatus.ullTotalPhys / 1048576);
                 int availableMemory = (int)(memStatus.ullAvailPhys / 1048576);
@@ -129,7 +140,9 @@ namespace GTweak.Utilities.Configuration
                     static ulong ConvertTimeToTicks(SystemTime systemTime) => ((ulong)systemTime.dwHighDateTime << 32) | systemTime.dwLowDateTime;
 
                     if (!GetSystemTimes(out SystemTime idleTime, out SystemTime kernelTime, out SystemTime userTime))
+                    {
                         return;
+                    }
 
                     ulong idleTicks = ConvertTimeToTicks(idleTime);
                     ulong totalTicks = ConvertTimeToTicks(kernelTime) + ConvertTimeToTicks(userTime);
@@ -137,7 +150,9 @@ namespace GTweak.Utilities.Configuration
                     await Task.Delay(1000);
 
                     if (!GetSystemTimes(out idleTime, out kernelTime, out userTime))
+                    {
                         return;
+                    }
 
                     ulong newIdleTicks = ConvertTimeToTicks(idleTime);
                     ulong newTotalTicks = ConvertTimeToTicks(kernelTime) + ConvertTimeToTicks(userTime);
@@ -149,7 +164,13 @@ namespace GTweak.Utilities.Configuration
                 }).ConfigureAwait(false);
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            finally { if (!success) Processor.Usage = 1; }
+            finally
+            {
+                if (!success)
+                {
+                    Processor.Usage = 1;
+                }
+            }
         }
 
         internal void StartDeviceMonitoring()

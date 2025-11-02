@@ -1,10 +1,10 @@
-﻿using GTweak.Utilities.Animation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using GTweak.Utilities.Animation;
 
 namespace GTweak.Assets.UserControl
 {
@@ -59,13 +59,17 @@ namespace GTweak.Assets.UserControl
                 .ToList();
 
             if (visibleChildren.Count == 0)
+            {
                 return new Size(0, 0);
+            }
 
             double availableWidth = double.IsInfinity(availableSize.Width) ? 1200 : availableSize.Width;
             double availableHeight = double.IsInfinity(availableSize.Height) ? 800 : availableSize.Height;
 
             foreach (UIElement child in visibleChildren)
+            {
                 child.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            }
 
             double neededHeight = CalculateNeededHeight(availableWidth, double.PositiveInfinity, visibleChildren);
 
@@ -80,7 +84,9 @@ namespace GTweak.Assets.UserControl
                 .ToList();
 
             if (visibleChildren.Count == 0)
+            {
                 return new Size(0, 0);
+            }
 
             var columns = CreateOptimalColumns(finalSize.Width, finalSize.Height, visibleChildren);
             ArrangeAligned(columns, finalSize.Width);
@@ -90,7 +96,10 @@ namespace GTweak.Assets.UserControl
 
         private void ArrangeAligned(List<ColumnInfo> columns, double availableWidth)
         {
-            if (columns == null || columns.Count == 0) return;
+            if (columns == null || columns.Count == 0)
+            {
+                return;
+            }
 
             double contentWidth = columns.Sum(c => c.Width) + Math.Max(0, columns.Count - 1) * HorizontalSpacing;
             double extraSpace = Math.Max(0, availableWidth - contentWidth);
@@ -121,7 +130,9 @@ namespace GTweak.Assets.UserControl
                 foreach (var child in column.Elements)
                 {
                     if (child.Visibility == Visibility.Collapsed)
+                    {
                         continue;
+                    }
 
                     if (!(child.RenderTransform is TranslateTransform transform))
                     {
@@ -150,7 +161,10 @@ namespace GTweak.Assets.UserControl
 
         private double CalculateMaxColumnHeight(List<ColumnInfo> columns)
         {
-            if (columns == null || columns.Count == 0) return 0;
+            if (columns == null || columns.Count == 0)
+            {
+                return 0;
+            }
 
             return columns.Max(column =>
             {
@@ -158,7 +172,9 @@ namespace GTweak.Assets.UserControl
                 foreach (var child in column.Elements)
                 {
                     if (child.Visibility == Visibility.Collapsed)
+                    {
                         continue;
+                    }
 
                     h += child.DesiredSize.Height + (h > 0 ? VerticalSpacing : 0);
                 }
@@ -169,7 +185,9 @@ namespace GTweak.Assets.UserControl
         private List<ColumnInfo> CreateOptimalColumns(double availableWidth, double availableHeight, List<UIElement> visibleChildren)
         {
             if (visibleChildren == null || visibleChildren.Count == 0)
+            {
                 return new List<ColumnInfo>();
+            }
 
             int maxPossibleColumns = Math.Max(1, (int)(availableWidth / 100));
 
@@ -177,7 +195,9 @@ namespace GTweak.Assets.UserControl
             {
                 var columns = TryDistributeToColumns(columnCount, availableHeight, visibleChildren);
                 if (columns != null && CalculateTotalWidth(columns) <= availableWidth)
+                {
                     return columns;
+                }
             }
 
             return CreateSingleColumn(visibleChildren);
@@ -198,7 +218,9 @@ namespace GTweak.Assets.UserControl
                     double newHeight = heights[minIndex] + (heights[minIndex] > 0 ? VerticalSpacing : 0) + h;
 
                     if (newHeight > maxHeight)
+                    {
                         return null;
+                    }
 
                     columns[minIndex].Elements.Add(child);
                     columns[minIndex].Width = Math.Max(columns[minIndex].Width, child.DesiredSize.Width);

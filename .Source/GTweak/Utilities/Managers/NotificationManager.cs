@@ -1,9 +1,9 @@
-﻿using GTweak.Utilities.Controls;
-using GTweak.Windows;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using GTweak.Utilities.Controls;
+using GTweak.Windows;
 
 namespace GTweak.Utilities.Managers
 {
@@ -103,7 +103,9 @@ namespace GTweak.Utilities.Managers
                         await Task.Delay(_delayMs).ContinueWith(_ =>
                         {
                             if (window != null && !window.IsVisible)
+                            {
                                 window.Show();
+                            }
                         }, TaskScheduler.FromCurrentSynchronizationContext());
                     });
                 }

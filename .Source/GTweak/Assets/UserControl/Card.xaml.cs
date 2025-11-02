@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -26,7 +26,9 @@ namespace GTweak.Assets.UserControl
                     CardButtonSecondary.Visibility = Visibility.Visible;
                 }
                 else
+                {
                     CardButtonSecondary.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -42,7 +44,9 @@ namespace GTweak.Assets.UserControl
         private static void OnIconStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is Card card && card.CardIcon != null)
+            {
                 card.CardIcon.Style = e.NewValue as Style;
+            }
         }
 
         public Card()

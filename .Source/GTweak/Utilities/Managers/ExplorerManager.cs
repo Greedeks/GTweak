@@ -1,9 +1,9 @@
-﻿using GTweak.Utilities.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
 
 namespace GTweak.Utilities.Managers
 {

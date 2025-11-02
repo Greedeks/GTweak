@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,7 +13,9 @@ namespace GTweak.Utilities.Animation
         internal static void Create(in string textToAnimate, in TextBlock textBlock, in TimeSpan timeSpan)
         {
             if (textBlock == null || string.IsNullOrEmpty(textToAnimate))
+            {
                 return;
+            }
 
             Storyboard storyboard = new Storyboard { FillBehavior = FillBehavior.HoldEnd };
 

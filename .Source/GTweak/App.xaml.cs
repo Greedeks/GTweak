@@ -1,11 +1,13 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Windows;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
+
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Windows;
+
 using Wpf.Ui.Appearance;
 
 namespace GTweak
@@ -58,7 +60,10 @@ namespace GTweak
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is Exception ex)
+            {
                 ErrorLogging.LogWritingFile(ex);
+            }
+
             Environment.Exit(0);
         }
 

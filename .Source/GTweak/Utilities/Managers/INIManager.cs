@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -46,16 +46,23 @@ namespace GTweak.Utilities.Managers
 
         internal void WriteAll(string section, Dictionary<string, string> selectedDictionary)
         {
-            if (selectedDictionary.Count == 0) return;
+            if (selectedDictionary.Count == 0)
+            {
+                return;
+            }
 
             foreach (KeyValuePair<string, string> addKeyValue in selectedDictionary)
+            {
                 WritePrivateProfileString(section, addKeyValue.Key, addKeyValue.Value, _pathToConfig);
+            }
         }
 
         internal static void TempWrite<T>(Dictionary<string, string> selectedDictionary, string tweak, T value)
         {
             if (selectedDictionary.ContainsKey(tweak))
+            {
                 selectedDictionary.Remove(tweak);
+            }
 
             selectedDictionary.Add(tweak, value.ToString());
         }
@@ -78,16 +85,22 @@ namespace GTweak.Utilities.Managers
                 string line = rawLine.Trim();
 
                 if (line.StartsWith("[") && line.EndsWith("]"))
+                {
                     inSection = line.Equals("[" + section + "]", StringComparison.OrdinalIgnoreCase);
+                }
                 else if (inSection && line.Contains("="))
                 {
                     int equalsIndex = line.IndexOf('=');
                     if (equalsIndex > 0)
                     {
                         if (isGetKey)
+                        {
                             result.Add(line.Substring(0, equalsIndex));
+                        }
                         else
+                        {
                             result.Add(line.Substring(equalsIndex + 1));
+                        }
                     }
                 }
             }

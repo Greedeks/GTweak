@@ -1,10 +1,3 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks.DefenderManager;
-using GTweak.Windows;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,6 +8,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Tweaks.DefenderManager;
+using GTweak.Windows;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks
 {
@@ -79,7 +79,9 @@ namespace GTweak.Utilities.Tweaks
                     foreach (var subKeyName in regKey.GetSubKeyNames())
                     {
                         if (subKeyName == "Properties")
+                        {
                             continue;
+                        }
 
                         using RegistryKey subKey = regKey.OpenSubKey(subKeyName);
                         if (subKey != null)
@@ -90,9 +92,13 @@ namespace GTweak.Utilities.Tweaks
                                 if (powerSettingsKey != null)
                                 {
                                     if (!(powerSettingsKey.GetValue("ConservationIdleTime") is byte[] conservationIdleTime) || !(powerSettingsKey.GetValue("IdlePowerState") is byte[] idlePowerState) || !(powerSettingsKey.GetValue("PerformanceIdleTime") is byte[] performanceIdleTime))
+                                    {
                                         _сontrolWriter.Button[7] = false;
+                                    }
                                     else
+                                    {
                                         _сontrolWriter.Button[7] = conservationIdleTime?[0].ToString() != "255" || idlePowerState?[0].ToString() != "0" || performanceIdleTime?[0].ToString() != "255";
+                                    }
                                 }
                             }
                         }
@@ -257,7 +263,10 @@ namespace GTweak.Utilities.Tweaks
                         overlayWindow.Close();
                     }
                     else
+                    {
                         WindowsDefender.SetProtectionState(isDisabled);
+                    }
+
                     break;
                 case "TglButton4":
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", isDisabled ? 0 : 5, RegistryValueKind.DWord);
@@ -273,9 +282,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton6":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload", 2, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload");
+                    }
+
                     break;
                 case "TglButton7":
                     try
@@ -310,9 +324,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton10":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop", "AutoEndTasks", "1", RegistryValueKind.String);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Control Panel\Desktop", "AutoEndTasks");
+                    }
+
                     break;
                 case "TglButton11":
                     if (isDisabled)
@@ -350,9 +369,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton15":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize", "Startupdelayinmsec", 0, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize", "Startupdelayinmsec");
+                    }
+
                     break;
                 case "TglButton16":
                     if (isDisabled)
@@ -398,7 +422,10 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
                     CommandExecutor.RunCommand($"/c netsh advfirewall set allprofiles state {(isDisabled ? "off" : "on")}");
                     if (HardwareData.OS.Build.CompareTo(22621.521m) >= 0)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wtd", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                    }
+
                     break;
                 case "TglButton21":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
@@ -514,7 +541,9 @@ namespace GTweak.Utilities.Tweaks
                                 break;
                             }
                             else
+                            {
                                 searchScheme = string.Empty;
+                            }
                         }
 
                         if (string.IsNullOrEmpty(searchScheme))

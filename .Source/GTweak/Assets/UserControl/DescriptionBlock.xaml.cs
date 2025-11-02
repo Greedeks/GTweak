@@ -1,6 +1,6 @@
-﻿using GTweak.Utilities.Animation;
 using System;
 using System.Windows;
+using GTweak.Utilities.Animation;
 
 namespace GTweak.Assets.UserControl
 {

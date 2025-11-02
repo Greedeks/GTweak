@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -31,7 +31,10 @@ namespace GTweak.Utilities.Animation
 
         public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
         {
-            if (animationClock.CurrentProgress == null) return From ?? defaultOriginValue;
+            if (animationClock.CurrentProgress == null)
+            {
+                return From ?? defaultOriginValue;
+            }
 
             double progress = animationClock.CurrentProgress.Value;
 

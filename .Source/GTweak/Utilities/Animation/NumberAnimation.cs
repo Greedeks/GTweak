@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -46,7 +46,9 @@ namespace GTweak.Utilities.Animation
         private static void OnAnimatedValueChanged(DependencyObject dObject, DependencyPropertyChangedEventArgs e)
         {
             if (dObject is TextBlock textBlock)
+            {
                 textBlock.Text = string.Format(" {0}", e.NewValue.ToString());
+            }
         }
     }
 }

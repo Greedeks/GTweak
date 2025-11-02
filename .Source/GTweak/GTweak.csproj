@@ -429,6 +429,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\hosts.gz" />
     <None Include="Resources\NSudoLC.gz" />
