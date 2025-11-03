@@ -24,10 +24,10 @@ namespace GTweak.Windows
 
         private void AnimateSettings()
         {
-            (double fromX, double toX) = _settingsOpen ? (0, 400) : (400, 0);
+            TranslateTransform transform = (TranslateTransform)SettingsPanel.RenderTransform;
+            double toX = _settingsOpen ? 400 : 0;
             _settingsOpen = !_settingsOpen;
-
-            ((TranslateTransform)SettingsPanel.RenderTransform).BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(fromX, toX, 0.5, null, false, true));
+            transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, toX, 0.5, null, false, true));
         }
 
         #region TitleBar
@@ -113,7 +113,7 @@ namespace GTweak.Windows
             Process.Start(new ProcessStartInfo(((System.Windows.Controls.Image)sender).Uid switch
             {
                 "git" => "https://github.com/Greedeks",
-                "tg" => "https://t.me/Greedeks",
+                "tg" => "https://transform.me/Greedeks",
                 _ => "https://steamcommunity.com/id/greedeks/"
             })
             { UseShellExecute = true });
