@@ -33,10 +33,6 @@
     <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Bandiera Italia" width="40">
 </a>
 
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
-</a>
-
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
     <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Bandiera Corea" width="40">
 </a>
