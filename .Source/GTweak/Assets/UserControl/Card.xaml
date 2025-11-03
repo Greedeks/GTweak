@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GTweak.Assets.UserControl.Card"
+<UserControl x:Class="GTweak.Assets.UserControl.Card"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,7 +22,7 @@
                         <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7">
                             <StackPanel Orientation="Horizontal">
                                 <Image x:Name="CardIcon" Height="24" Width="24"/>
-                                <TextBlock Margin="5,0,0,0" x:Name="CardTitle" Style="{StaticResource TextDefault}" FontSize="16" Foreground="{StaticResource Brush_Accent}"/>
+                                <TextBlock Margin="5,0,0,0" x:Name="CardTitle" Style="{StaticResource TextDefault}" FontSize="16" Foreground="{StaticResource Brush_Accent}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="300"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
