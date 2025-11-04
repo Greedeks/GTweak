@@ -178,6 +178,7 @@
     <v:String x:Key="tgl31_intf">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
     <v:String x:Key="tgl32_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
     <v:String x:Key="tgl33_intf">탐색기에 파일 확장자 표시</v:String>
+    <v:String x:Key="tgl34_intf">밝기가 저절로 변함</v:String>
     
     <v:String x:Key="tgl1_desc_intf">커서 선택 항목의 색상이 파란색에서 «젖은 아스팔트의 색»이 회색으로 변경됩니다.</v:String>
     <v:String x:Key="tgl2_desc_intf">일부 프로그램에서 도구 설명의 색상이 노란색에서 하늘색 «Azure».로 변경됩니다.</v:String>
@@ -212,7 +213,8 @@
     <v:String x:Key="tgl31_desc_intf">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl32_desc_intf">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
     <v:String x:Key="tgl33_desc_intf">기본적으로 Windows는 파일 확장자를 숨기므로 파일 탐색기 보기가 덜 복잡해집니다. 필요한 경우 이 조정을 사용하여 파일 확장자를 표시할 수 있으므로 검색하는 데 걸리는 시간을 절약할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
-     <!--#endregion-->
+    <v:String x:Key="tgl34_desc_intf">일부 기기에서는 표시되는 콘텐츠에 따라 화면 밝기가 저절로 변할 수 있습니다. HDR, 동적 밝기 및 전원 설정을 꺼도 문제가 해결되지 않는다면(특히 노트북을 배터리로 사용할 때 자주 발생합니다), 이 트윅을 사용해 보세요 - 시스템 수준에서 자동 밝기 조절을 강제로 비활성화합니다. 수동 밝기 조절은 계속 사용할 수 있습니다.</v:String>
+    <!--#endregion-->
 
     <!--#region Packages Page -->
     <v:String x:Key="warn_part1_pkg">앱이 삭제됩니다</v:String>

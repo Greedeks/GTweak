@@ -178,7 +178,8 @@
     <v:String x:Key="tgl31_intf">Pesquisa com "Bing" integrada ao menu Iniciar</v:String>
     <v:String x:Key="tgl32_intf">Abrir "Acesso rápido" em vez de "Este Computador"</v:String>
     <v:String x:Key="tgl33_intf">Exibição de extensões de arquivo no explorador</v:String>
-
+    <v:String x:Key="tgl34_intf">Spontaneous brightness changes</v:String>
+    
     <v:String x:Key="tgl1_desc_intf">Mudará a cor da seleção do cursor de azul para cinza "asfalto molhado".</v:String>
     <v:String x:Key="tgl2_desc_intf">Mudará a cor da dica de ferramenta em alguns programas de amarelo para azul claro "azure".</v:String>
     <v:String x:Key="tgl3_desc_intf">Um ajuste reduz o tamanho dos botões Minimizar, Maximizar e Fechar, tornando-os menos volumosos. Ele ajusta o tamanho para todas as janelas, incluindo o Explorador de Arquivos, Fotos, navegadores e outros programas familiares.</v:String>
@@ -212,6 +213,7 @@
     <v:String x:Key="tgl31_desc_intf">Por padrão, o Windows envia tudo o que você pesquisa no menu "Iniciar" para seus servidores para fornecer resultados de pesquisa do Bing. Se você não precisa da integração do Bing no menu "Iniciar", pode aplicar um ajuste para desativar a pesquisa na web. Atenção, a tela pode piscar.</v:String>
     <v:String x:Key="tgl32_desc_intf">Por padrão, ao abrir o Explorador, a primeira guia será "Acesso rápido". E para abrir qualquer disco, você precisa fazer movimentos desnecessários. Este ajuste fará com que "Este Computador" seja aberto ao ser aberto, em vez de "Acesso rápido".</v:String>
     <v:String x:Key="tgl33_desc_intf">Por padrão, o Windows oculta as extensões de arquivo, o que torna a visualização do Explorador de Arquivos menos confusa. Se necessário, você pode ativar a exibição de extensões de arquivo usando este ajuste, economizando o tempo gasto na pesquisa. Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="tgl34_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

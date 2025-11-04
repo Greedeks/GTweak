@@ -179,6 +179,11 @@ namespace GTweak.Utilities.Tweaks
 
             _сontrolWriter.Button[33] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "1");
+
+            _сontrolWriter.Button[34] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", "1") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableContentAdaptiveBrightness", "1") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "EnableAdaptiveBrightness", "0");
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -551,6 +556,20 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton33":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", isDisabled ? 1 : 0, RegistryValueKind.DWord);
+                    break;
+                case "TglButton34":
+                    if (isDisabled)
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableContentAdaptiveBrightness", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "EnableAdaptiveBrightness", 0, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC");
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableContentAdaptiveBrightness");
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "EnableAdaptiveBrightness");
+                    }
                     break;
             }
         }

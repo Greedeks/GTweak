@@ -178,7 +178,8 @@
     <v:String x:Key="tgl31_intf">Пошуковий запит з інтеграцією «Bing» в меню «Пуск»</v:String>
     <v:String x:Key="tgl32_intf">Відкривати «Швидкий доступ» замість «Цей ПК»</v:String>
     <v:String x:Key="tgl33_intf">Відображення розширень файлів у провіднику</v:String>
-
+    <v:String x:Key="tgl34_intf">Spontaneous brightness changes</v:String>
+    
     <v:String x:Key="tgl1_desc_intf">Це налаштування змінить колір виділення курсором з синього на сірий «колір мокрого асфальту».</v:String>
     <v:String x:Key="tgl2_desc_intf">Це налаштування змінить колір спливної підказки в деяких програмах з жовтого на блідо-блакитний «небесна блакить».</v:String>
     <v:String x:Key="tgl3_desc_intf">Це налаштування зменшить розмір стандартних кнопок вікна Згорнути, Розгорнути, Закрити. Змінюється розмір для всіх вікон, таких як провідник, фотографії, браузери та інші відомі програми.</v:String>
@@ -212,6 +213,7 @@
     <v:String x:Key="tgl31_desc_intf">Як усталено, Windows надсилає все, що ви шукаєте у меню «Пуск», на свої сервери, щоб надавати вам результати пошуку в Bing. Якщо вам не потрібна інтеграція з Bing у меню «Пуск», застосуйте це налаштування, щоб вимкнути пошук у веб. Увага, екран може мерехтіти.</v:String>
     <v:String x:Key="tgl32_desc_intf">Як усталено, файловий провідник відкривається на вкладці «Швидкий доступ». Щоб відкрити будь-який диск, потрібно виконати додаткові дії. Якщо це налаштування вимкнено, файловий провідник відкриває вкладку «Цей ПК», а не «Швидкий доступ».</v:String>
     <v:String x:Key="tgl33_desc_intf">Як усталено, розширення файлів у Windows приховуються, що робить інтерфейс Провідника менш завантаженим. Якщо потрібно, можна увімкнути відображення розширень файлів за допомогою цього налаштування, заощаджуючи час на пошук. Увага, екран може мерехтіти.</v:String>
+    <v:String x:Key="tgl34_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

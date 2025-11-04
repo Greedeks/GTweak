@@ -178,6 +178,7 @@
     <v:String x:Key="tgl31_intf">Recherche intégrée à Bing dans le menu Démarrer</v:String>
     <v:String x:Key="tgl32_intf">Ouvrir « Accès rapide » au lieu de « Ce PC »</v:String>
     <v:String x:Key="tgl33_intf">Afficher les extensions de fichiers dans l’explorateur</v:String>
+    <v:String x:Key="tgl34_intf">Spontaneous brightness changes</v:String>
 
     <v:String x:Key="tgl1_desc_intf">Change la couleur de la sélection du curseur de bleu à gris « bitume mouillé ».</v:String>
     <v:String x:Key="tgl2_desc_intf">Change la couleur de l’infobulle dans certains programmes du jaune au bleu clair « azur ».</v:String>
@@ -212,6 +213,7 @@
     <v:String x:Key="tgl31_desc_intf">Windows envoie par défaut toutes vos recherches dans le menu Démarrer à ses serveurs pour Bing. Ce tweak désactive la recherche web. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="tgl32_desc_intf">Par défaut, l’Explorateur s’ouvre sur « Accès rapide ». Ce tweak l’ouvre sur « Ce PC » à la place.</v:String>
     <v:String x:Key="tgl33_desc_intf">Par défaut, Windows cache les extensions des fichiers. Ce tweak affiche les extensions dans l’explorateur, ce qui évite de les chercher. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="tgl34_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
