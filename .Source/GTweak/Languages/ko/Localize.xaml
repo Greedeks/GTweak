@@ -24,7 +24,7 @@
     <v:String x:Key="button_message">수락 (05)</v:String>
     <v:String x:Key="noty_message">▪자동 창 닫기</v:String>
     <v:String x:Key="title_nosupport_message">지원되지 않음</v:String>
-    <v:String x:Key="part1_nosupport_message">이 유틸리티는 Windows를 지원하지 않습니다. 더 이상</v:String>
+    <v:String x:Key="part1_nosupport_message">이 유틸리티는 귀하의 Windows를 지원하지 않습니다. 더 이상</v:String>
     <v:String x:Key="part2_nosupport_message">실행할 수 없으며</v:String>
     <v:String x:Key="part3_nosupport_message">심각한 오류를 방지하기 위해 GTweak이 종료됩니다.</v:String>
     <!--#endregion-->
@@ -118,7 +118,7 @@
     <v:String x:Key="tgl11_conf">피드백을 통한 요청 확인</v:String>
     <v:String x:Key="tgl12_conf">음성 합성의 숨겨진 백그라운드 업데이트</v:String>
     <v:String x:Key="tgl13_conf">시스템에 대한 숨겨진 모니터링</v:String>
-    <v:String x:Key="tgl14_conf">당신의 시스템에 대한 숨겨진 실험</v:String>
+    <v:String x:Key="tgl14_conf">귀하의 시스템에 대한 숨겨진 실험</v:String>
     <v:String x:Key="tgl15_conf">데이터의 은밀한 수집 및 전달을 위한 기관</v:String>
     <v:String x:Key="tgl16_conf">Windows 이벤트 «로깅»</v:String>
     <v:String x:Key="tgl17_conf">NVIDIA 텔레메트리 수집 및 모니터링</v:String>
@@ -126,15 +126,15 @@
 
     <v:String x:Key="tgl1_desc_conf">Windows는 사용자의 작업을 추적하기 위해 각 사용자에 대해 고유한 광고 식별자를 만듭니다. 이 식별자는 응용 프로그램 개발자와 Windows 자체에서 응용 프로그램에서 특정 광고를 제공하는 등 자체 목적을 위해 사용됩니다.</v:String>
     <v:String x:Key="tgl2_desc_conf">로컬 계정을 사용하더라도 Windows는 항상 데이터를 Microsoft 서버와 동기화하려고 시도합니다. 특히 테마, 비밀번호, Windows 설정, 브라우저 설정, 입력 도구 모음 설정, 간소화된 액세스 설정, 추가 설정 등이 이에 해당합니다.</v:String>
-    <v:String x:Key="tgl3_desc_conf">원격 분석( 진단 데이터)은 Windows가 Microsoft 서버로 보내기 위해 자동으로 수집하는 데이터, 즉 간단히 말해 “무엇? 어디서?  왜 그리고 언제 사용하는가?"에 대한 정보입니다. Microsoft는 이 데이터가 비개인화되어 있으며 회사의 Windows 개발에 도움이 된다고 주장합니다. 정보 수집 사실에 대해 걱정하지 않더라도 프로세서에 과도한 부하가 발생하여 시스템 속도가 느려지는 또 다른 문제가 발생할 수 있습니다.</v:String>
+    <v:String x:Key="tgl3_desc_conf">원격 분석 (진단 데이터)은 Windows가 Microsoft 서버로 보내기 위해 자동으로 수집하는 데이터, 즉 간단히 말해 “무엇? 어디서?  왜 그리고 언제 사용하는가?"에 대한 정보입니다. Microsoft는 이 데이터가 비개인화되어 있으며 회사의 Windows 개발에 도움이 된다고 주장합니다. 정보 수집 사실에 대해 걱정하지 않더라도 프로세서에 과도한 부하가 발생하여 시스템 속도가 느려지는 또 다른 문제가 발생할 수 있습니다.</v:String>
     <v:String x:Key="tgl4_desc_conf">«작업 스케줄러»에는 작업 후 작업에 대한 데이터를 수집하여 Microsoft 서버로 전송하는 서비스가 있습니다.</v:String>
     <v:String x:Key="tgl5_desc_conf">Microsoft는 사용자의 소프트웨어에 대한 데이터를 수집합니다. 이 정보는 Microsoft에서 호환성 문제를 진단하는 데 사용되지만, 이 정보는 Microsoft의 이기적인 목적으로만 사용되므로 새 버전의 Windows에서 호환성을 개선하는 데 도움이 되지 않습니다. 이 기능을 사용하지 않도록 설정하면 잠재적으로 민감한 정보가 전송되지 않습니다.</v:String>
-    <v:String x:Key="tgl6_desc_conf">이 트윅은 응용 프로그램 사용 모니터링 기능을 비활성화하여 사용 빈도, 작업 지속 시간 및 기타 생산성 지표에 대한 데이터 수집을 배제합니다. 이로 인해 시스템은 작업 프로세스 분석을 중단하여 귀하의 기밀 정보를 보호합니다.</v:String>
-    <v:String x:Key="tgl7_desc_conf">이 트윅은 Microsoft가 필기 인식 기술을 향상시키기 위해 사용하는 데이터 수집 메커니즘을 비활성화합니다. 이 기능을 사용하든 사용하지 않든 관계없이, 시스템은 인식 정확도를 높이기 위해 사용자 활동을 추적했습니다. 적용된 변경 사항은 이러한 정보 수집을 방지하여 개인정보 보호에 기여합니다.</v:String>
+    <v:String x:Key="tgl6_desc_conf">이 조정은 응용 프로그램 사용 모니터링 기능을 비활성화하여 사용 빈도, 작업 지속 시간 및 기타 생산성 지표에 대한 데이터 수집을 배제합니다. 이로 인해 시스템은 작업 프로세스 분석을 중단하여 귀하의 기밀 정보를 보호합니다.</v:String>
+    <v:String x:Key="tgl7_desc_conf">이 조정은 Microsoft가 필기 인식 기술을 향상시키기 위해 사용하는 데이터 수집 메커니즘을 비활성화합니다. 이 기능을 사용하든 사용하지 않든 관계없이, 시스템은 인식 정확도를 높이기 위해 사용자 활동을 추적했습니다. 적용된 변경 사항은 이러한 정보 수집을 방지하여 개인정보 보호에 기여합니다.</v:String>
     <v:String x:Key="tgl8_desc_conf">소프트웨어 품질 개선 프로그램 (CEIP)은 하드웨어 구성과 소프트웨어 및 서비스 사용 방법에 대한 정보를 수집하는 별도의 기능입니다. 또한 이 프로그램은 주기적으로 파일을 다운로드하여 Windows에서 발생할 수 있는 문제에 대한 정보를 수집합니다. 이 프로그램은 자발적으로 참여하며 개인 정보를 침해하는 데이터를 Microsoft에 전송할 필요가 없습니다.</v:String>
-    <v:String x:Key="tgl9_desc_conf">이 트윅은 hosts 파일에서 특정 도메인 이름 앞에 0.0.0.0 주소를 추가하여 해당 도메인들을 효과적으로 차단합니다. 또한 Microsoft 데이터 수집 서비스와 관련된 여러 IP 주소로의 연결을 차단하도록 Windows 방화벽 설정을 변경합니다.</v:String>
+    <v:String x:Key="tgl9_desc_conf">이 조정은 hosts 파일에서 특정 도메인 이름 앞에 0.0.0.0 주소를 추가하여 해당 도메인들을 효과적으로 차단합니다. 또한 Microsoft 데이터 수집 서비스와 관련된 여러 IP 주소로의 연결을 차단하도록 Windows 방화벽 설정을 변경합니다.</v:String>
     <v:String x:Key="tgl10_desc_conf">위치 기반 서비스를 비활성화하면 광고 목적으로 위치 정보를 활용할 가능성이 크게 줄어듭니다 – 이 정보에 대한 접근은 Microsoft 서비스뿐만 아니라 모든 서드파티 응용 프로그램과 스크립트에 대해서도 제한됩니다.</v:String>
-    <v:String x:Key="tgl11_desc_conf">이 트윅은 Windows에서 피드백 및 관련 알림의 수집을 차단하여 귀하의 동의 없이 데이터가 전송되는 것을 방지합니다. 또한, «피드백» 기능을 사용하지 않더라도 Microsoft는 공식 지원에 연락하는 빈도를 기록합니다.</v:String>
+    <v:String x:Key="tgl11_desc_conf">이 조정은 Windows에서 피드백 및 관련 알림의 수집을 차단하여 귀하의 동의 없이 데이터가 전송되는 것을 방지합니다. 또한, «피드백» 기능을 사용하지 않더라도 Microsoft는 공식 지원에 연락하는 빈도를 기록합니다.</v:String>
     <v:String x:Key="tgl12_desc_conf">Windows는 전용 음성 인식 및 합성 모듈을 통해 음성을 인식할 수 있습니다. Cortana 또는 «접근성»을 사용하지 않더라도, 운영 체제는 기본적으로 음성 인식 엔진 업데이트를 항상 확인합니다.</v:String>
     <v:String x:Key="tgl13_desc_conf">모든 사용자 데이터에 액세스할 수 있는 기능입니다. Microsoft 서버와 일부 정보를 교환하며 운영 체제 또는 응용 프로그램의 작동에 어떤 영향도 미치지 않습니다. 어떤 식으로든 사용자에게 도움이 되지 않으므로 쓸모가 없습니다.</v:String>
     <v:String x:Key="tgl14_desc_conf">Microsoft는 Windows 사용자를 대상으로 정기적으로 실험을 수행하여 기능이 널리 사용되는지, 기능을 변경하면 더 유용해지는지 여부를 확인합니다. 하지만 이는 기밀을 침해하는 행위입니다.</v:String>
@@ -178,8 +178,8 @@
     <v:String x:Key="tgl31_intf">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
     <v:String x:Key="tgl32_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
     <v:String x:Key="tgl33_intf">탐색기에 파일 확장자 표시</v:String>
-    <v:String x:Key="tgl34_intf">밝기가 저절로 변함</v:String>
-    
+    <v:String x:Key="tgl34_intf">자발적인 밝기 변화</v:String>
+
     <v:String x:Key="tgl1_desc_intf">커서 선택 항목의 색상이 파란색에서 «젖은 아스팔트의 색»이 회색으로 변경됩니다.</v:String>
     <v:String x:Key="tgl2_desc_intf">일부 프로그램에서 도구 설명의 색상이 노란색에서 하늘색 «Azure».로 변경됩니다.</v:String>
     <v:String x:Key="tgl3_desc_intf">이 조정으로 축소, 확장, 닫기 버튼의 크기가 줄어들어 부피가 줄어듭니다. 탐색기, Windows 사진, 브라우저 및 기타 프로그램을 포함한 모든 창 크기를 조정합니다.</v:String>
@@ -195,33 +195,33 @@
     <v:String x:Key="tgl13_desc_intf">PC 아이콘은 PC 바로 가기와 달리 컨텍스트 메뉴에 필요한 속성이 있고 불필요한 속성이 없기 때문에 더 좋습니다.</v:String>
     <v:String x:Key="tgl14_desc_intf">바탕 화면에 휴지통 아이콘이 필요하지 않고 종료를 찾는 데 시간을 낭비하고 싶지 않다면 조정을 사용할 수 있습니다.</v:String>
     <v:String x:Key="tgl15_desc_intf">작업 표시줄의 아이콘을 표시할 위치를 중앙 또는 왼쪽 중에서 선택합니다</v:String>
-    <v:String x:Key="tgl16_desc_intf">시작 메뉴 레이아웃을 변경하여 고정된 앱 영역을 확장합니다. 또한 Windows Home 에디션을 제외한 모든 에디션에서 시작 메뉴의 «추천(Recommended)» 섹션이 제거됩니다.</v:String>
+    <v:String x:Key="tgl16_desc_intf">시작 메뉴 레이아웃을 변경하여 고정된 앱 영역을 확장합니다. 또한 Windows Home 에디션을 제외한 모든 에디션에서 시작 메뉴의 «추천» 섹션이 제거됩니다.</v:String>
     <v:String x:Key="tgl17_desc_intf">이렇게 조정하면 바탕 화면과 «탐색기»에 대한 일반적인 클래식 컨텍스트 메뉴로 돌아갑니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl18_desc_intf">Windows 11에서는 새로운 «시작» 메뉴나 «빠른 설정»과 같은 특정 기능을 사용하는 방법에 대한 힌트를 표시하는 경우가 있습니다. 이러한 힌트는 Windows 11을 처음 사용하는 경우 유용합니다.</v:String>
     <v:String x:Key="tgl19_desc_intf">기본적으로 Windows는 탐색기에서 항목 사이에 패딩을 추가합니다. 이는 터치 스크린을 위해 설계된 새로운 기능입니다. 이 조정은 파일 탐색기의 클래식 레이아웃을 복원하여 요소 사이의 들여쓰기를 제거하고 설정을 검색하는 데 시간을 절약합니다.</v:String>
-    <v:String x:Key="tgl20_desc_intf">이 조정은 작업 표시줄, 시작 메뉴, Edge, 메모장에서 Copilot 아이콘을 비활성화하고, 가능한 경우 숨겨 기능을 차단하며, Recall 기능도 비활성화합니다. 동시에 핵심 Copilot 응용 프로그램 자체는 영향을 받지 않고 시스템에 남아 있으며 필요한 경우 사용할 수 있습니다. Copilot은 Microsoft Edge와 함께만 완전히 제거할 수 있습니다. 이러한 AI 기능이 Windows에 처음부터 없는 경우 이 트윅을 사용해도 소용이 없습니다.</v:String>
+    <v:String x:Key="tgl20_desc_intf">이 조정은 작업 표시줄, 시작 메뉴, Edge, 메모장에서 Copilot 아이콘을 비활성화하고, 가능한 경우 숨겨 기능을 차단하며, Recall 기능도 비활성화합니다. 동시에 핵심 Copilot 응용 프로그램 자체는 영향을 받지 않고 시스템에 남아 있으며 필요한 경우 사용할 수 있습니다. Copilot은 Microsoft Edge와 함께만 완전히 제거할 수 있습니다. 이러한 AI 기능이 Windows에 처음부터 없는 경우 이 조정을 사용해도 소용이 없습니다.</v:String>
     <v:String x:Key="tgl21_desc_intf">이 조정을 통해 작업 표시줄에서 응용 프로그램을 마우스 오른쪽 버튼으로 클릭하면 컨텍스트 메뉴에 «작업 끝내기» 옵션을 추가할 수 있습니다. 이렇게 하면 작업 관리자를 열지 않고도 프로세스를 완료하는 속도가 빨라집니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl22_desc_intf">«최대화» 버튼을 누를 때 스냅 레이아웃 제안을 볼 필요가 없다면 이 옵션을 비활성화할 수 있습니다.</v:String>
     <v:String x:Key="tgl23_desc_intf">이 수정은 «검색», «작업 보기», «대화» 아이콘을 제거하고, 이 사진 » 요소에 대해 알아보세요라는 «를 숨깁니다. 이전 Windows 11 빌드에서는 Copilot 아이콘도 제거합니다. Windows 10 사용자의 경우 «뉴스 및 관심사 »와 Cortana를 추가로 비활성화합니다. 화면이 깜빡일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl24_desc_intf">기본적으로 Windows는 수집된 정보를 사용하여 광고를 타겟팅, 즉 사용자의 관심사와 일치하는 광고를 표시합니다. 그리고 말 그대로 이 광고는 표시할 수 있는 여유 공간이 있는 곳이면 어디든 배치됩니다. 모든 스토어 앱, 탐색기, 옵션 및 시작 메뉴에 개인 맞춤 광고를 표시하지 않으려면 이 정크를 비활성화하면 됩니다.</v:String>
     <v:String x:Key="tgl25_desc_intf">기본적으로 Windows는 창이 꺼져 있을 때의 위치와 상태를 저장하지 않습니다. 이 수정을 통해 로그아웃, 재부팅 및 종료 후에 열린 폴더 유형을 기억하여 복원할 수 있습니다.</v:String>
-    <v:String x:Key="tgl26_desc_intf">이 트윅은 설정의 온라인 힌트를 포함한 모든 Windows 팁과 알림을 비활성화할 수 있으며, Windows 11 사용자의 두 번째 기회, 즉석 경험 (SCOOBE)도 비활성화할 수 있습니다. SCOOBE는 사용자에게 "긴급하게 장치 설정을 완료"하고 Microsoft 계정에 로그인하도록 유도하는 팝업을 갑자기 표시합니다.</v:String>
+    <v:String x:Key="tgl26_desc_intf">이 조정은 설정의 온라인 힌트를 포함한 모든 Windows 팁과 알림을 비활성화할 수 있으며, Windows 11 사용자의 두 번째 기회, 즉석 경험 (SCOOBE)도 비활성화할 수 있습니다. SCOOBE는 사용자에게 "긴급하게 장치 설정을 완료"하고 Microsoft 계정에 로그인하도록 유도하는 팝업을 갑자기 표시합니다.</v:String>
     <v:String x:Key="tgl27_desc_intf">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕 화면, 동영상, 문서, 다운로드, 이미지, 음악. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl28_desc_intf">왼쪽 메뉴 목록의 탐색기 요약에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서). 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl29_desc_intf">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
-    <v:String x:Key="tgl30_desc_intf">조정은 마우스 커서를 마우스오버할 때 바탕 화면 요소의 도구 설명을 비활성화합니다.</v:String>
+    <v:String x:Key="tgl30_desc_intf">조정은 마우스 커서를 올려 놓으면 바탕 화면 요소의 도구 설명이 비활성화됩니다.</v:String>
     <v:String x:Key="tgl31_desc_intf">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl32_desc_intf">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
     <v:String x:Key="tgl33_desc_intf">기본적으로 Windows는 파일 확장자를 숨기므로 파일 탐색기 보기가 덜 복잡해집니다. 필요한 경우 이 조정을 사용하여 파일 확장자를 표시할 수 있으므로 검색하는 데 걸리는 시간을 절약할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
-    <v:String x:Key="tgl34_desc_intf">일부 기기에서는 표시되는 콘텐츠에 따라 화면 밝기가 저절로 변할 수 있습니다. HDR, 동적 밝기 및 전원 설정을 꺼도 문제가 해결되지 않는다면(특히 노트북을 배터리로 사용할 때 자주 발생합니다), 이 트윅을 사용해 보세요 - 시스템 수준에서 자동 밝기 조절을 강제로 비활성화합니다. 수동 밝기 조절은 계속 사용할 수 있습니다.</v:String>
+    <v:String x:Key="tgl34_desc_intf">일부 기기에서는 표시되는 콘텐츠에 따라 화면 밝기가 자연스럽게 변경될 수 있습니다. HDR, 동적 밝기 및 전원 설정을 끄더라도 문제가 해결되지 않는다면 (이 문제는 특히 배터리로 작동하는 노트북에서 흔히 발생합니다), 시스템 수준에서 자동 밝기 조정을 강제로 비활성화하는 이 조정을 시도해 볼 수 있습니다. 수동 밝기 제어 기능은 여전히 사용 가능합니다.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
-    <v:String x:Key="warn_part1_pkg">앱이 삭제됩니다</v:String>
-    <v:String x:Key="warn_part2_pkg">영구적으로,</v:String>
-    <v:String x:Key="warn_part3_pkg">하지만 OneDrive는 아이콘을 클릭하여 복원할 수 있습니다</v:String>
+    <v:String x:Key="warn_part1_pkg">앱은</v:String>
+    <v:String x:Key="warn_part2_pkg">영구적으로</v:String>
+    <v:String x:Key="warn_part3_pkg">삭제되지만 OneDrive는 아이콘을 클릭하여 복원할 수 있습니다</v:String>
 
-    <v:String x:Key="MicrosoftStore_pkg">Microsoft 스토어</v:String>
+    <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
     <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_pkg">Microsoft Office OneNote</v:String>
     <v:String x:Key="MicrosoftOfficeHub_pkg">Microsoft Office 허브</v:String>
@@ -263,7 +263,7 @@
     <v:String x:Key="DevHome_pkg">Dev Home</v:String>
     <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
     <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
-    <v:String x:Key="WebMediaExtensions_pkg">Web Media Extensions</v:String>
+    <v:String x:Key="WebMediaExtensions_pkg">Web Media 확장</v:String>
     <v:String x:Key="OneConnect_pkg">Mobile Plans</v:String>
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
     <v:String x:Key="Notepad_pkg">Notepad</v:String>
@@ -282,7 +282,7 @@
     <v:String x:Key="tgl1_svc">Windows 검색 관련 서비스</v:String>
     <v:String x:Key="tgl2_svc">Xbox 관련 서비스</v:String>
     <v:String x:Key="tgl3_svc">Windows 업데이트 관련 서비스</v:String>
-    <v:String x:Key="tgl4_svc">Windows 스토어 관련 서비스</v:String>
+    <v:String x:Key="tgl4_svc">Windows Store 관련 서비스</v:String>
     <v:String x:Key="tgl5_svc">성능 카운터 서비스</v:String>
     <v:String x:Key="tgl6_svc">Windows 생체 인식 서비스</v:String>
     <v:String x:Key="tgl7_svc">블루투스 관련 서비스</v:String>
@@ -308,11 +308,11 @@
     <v:String x:Key="tgl27_svc">회사 도구 관련 서비스</v:String>
     <v:String x:Key="tgl28_svc">Hyper-V 운영 관련 서비스</v:String>
     <v:String x:Key="tgl29_svc">푸시 알림 관련 서비스</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">파일 기록 및 콘텐츠 인덱싱을 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl2_desc_svc">Xbox 및 Microsoft 게임 패드를 사용하지 않는 경우 비활성화합니다.</v:String>
-    <v:String x:Key="tgl3_desc_svc">Windows를 업데이트할 계획이 없다면 비활성화하세요. 이 조정은 서비스 외에도 Windows 업데이트를 담당하는 파일을 변경합니다. 따라서 서비스가 활성화되어 있어도 업데이트 센터가 작동하지 않습니다. 이 조정은 Windows 스토어에서 앱을 다운로드하고 업데이트하는 데 영향을 준다는 점에 유의하세요.</v:String>
-    <v:String x:Key="tgl4_desc_svc">Windows 스토어 및 해당 UWP 앱을 사용하지 않는 경우 비활성화합니다.</v:String>
+    <v:String x:Key="tgl3_desc_svc">Windows를 업데이트할 계획이 없다면 비활성화하세요. 이 조정은 서비스 외에도 Windows 업데이트를 담당하는 파일을 변경합니다. 따라서 서비스가 활성화되어 있어도 업데이트 센터가 작동하지 않습니다. 이 조정은 Windows Store에서 앱을 다운로드하고 업데이트하는 데 영향을 준다는 점에 유의하세요.</v:String>
+    <v:String x:Key="tgl4_desc_svc">Windows Store 및 해당 UWP 앱을 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl5_desc_svc">서비스에서 시스템 성능을 분석하지 않도록 하려면 비활성화합니다.</v:String>
     <v:String x:Key="tgl6_desc_svc">PIN, 지문, 얼굴 인식 또는 기타 Windows Hello 로그인 방식을 사용하지 않는 경우 비활성화하세요. 이미 설정된 로그인 방식은 계속 작동하지만, 해당 방식을 수정하거나 제거하려면 Windows Hello를 다시 활성화해야 합니다.</v:String>
     <v:String x:Key="tgl7_desc_svc">블루투스를 사용하지 않는 장치와 블루투스에 연결된 장치를 사용하지 않는 경우 비활성화합니다.</v:String>
@@ -337,7 +337,7 @@
     <v:String x:Key="tgl26_desc_svc">Windows가 백그라운드에서 쓸모없는 진단을 통해 시스템을 로드할 필요가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl27_desc_svc">회사 응용 프로그램의 원격 관리를 사용하지 않고 PC와 통신하는 원격 서버가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl28_desc_svc">내장 가상화 시스템을 사용하지 않는 경우 비활성화합니다. VirtualBox 등의 작업에는 어떤 영향도 미치지 않습니다.</v:String>
-    <v:String x:Key="tgl29_desc_svc">페어링된 장치를 사용하지 않고 Windows 스토어에서 원격으로 앱을 설치하지 않는 경우 비활성화합니다. 이러한 서비스는 페어링된 장치로 알림 센터를 처리하고 푸시 요청을 처리하며, Windows가 «휴대폰» 앱의 스마트폰을 감지하고 자동으로 다시 연결하여 작업 센터에 메시지와 이벤트를 표시할 수 있도록 허용합니다. Windows 10에서는 알림 센터를 비활성화한 후 알림 센터가 열리지 않을 수 있습니다.</v:String>
+    <v:String x:Key="tgl29_desc_svc">페어링된 장치를 사용하지 않고 Windows Store에서 원격으로 앱을 설치하지 않는 경우 비활성화합니다. 이러한 서비스는 페어링된 장치로 알림 센터를 처리하고 푸시 요청을 처리하며, Windows가 «휴대폰» 앱의 스마트폰을 감지하고 자동으로 다시 연결하여 작업 센터에 메시지와 이벤트를 표시할 수 있도록 허용합니다. Windows 10에서는 알림 센터를 비활성화한 후 알림 센터가 열리지 않을 수 있습니다.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -350,7 +350,7 @@
     <v:String x:Key="tgl3_sys">Windows Defender, 안티맬웨어, 스마트스크린 및 VBS</v:String>
     <v:String x:Key="tgl4_sys">UAC (사용자 계정 컨트롤)</v:String>
     <v:String x:Key="tgl5_sys">알림 센터의 보안 알림</v:String>
-    <v:String x:Key="tgl6_sys">Microsoft 스토어를 통한 응용 프로그램 자동 업데이트</v:String>
+    <v:String x:Key="tgl6_sys">Microsoft Store를 통한 응용 프로그램 자동 업데이트</v:String>
     <v:String x:Key="tgl7_sys">Realtek Sound 드라이버의 사운드 지연</v:String>
     <v:String x:Key="tgl8_sys">잠금 화면을 끄기 전 대기 시간</v:String>
     <v:String x:Key="tgl9_sys">«최대 절전 모드» 및 «빠른 시작» 기술</v:String>
@@ -370,7 +370,7 @@
     <v:String x:Key="tgl23_sys">백그라운드에서 실행되는 응용 프로그램</v:String>
     <v:String x:Key="tgl24_sys">Windows에서 예약된 저장소</v:String>
     <v:String x:Key="tgl25_sys">동적 및 고정밀 이벤트 타이머</v:String>
-    <v:String x:Key="tgl26_sys">업데이트 시스템에서 «PC 상태 확인 » 숨기기</v:String>
+    <v:String x:Key="tgl26_sys">시스템 업데이트에서 «PC 상태 확인 » 숨기기</v:String>
     <v:String x:Key="tgl27_sys">Windows 인사이더의 백그라운드 작업</v:String>
     <v:String x:Key="tgl28_sys">시스템 디스크 조각 모음</v:String>
     
@@ -382,17 +382,17 @@
     <v:String x:Key="tgl3_desc_sys">이 조정은 Windows Defender, 스마트 스크린, 맬웨어 방지 프로세서 및 가상화 기반 보안 (VBS)에 불균형적으로 과중한 부하를 주는 기능을 비활성화 및 중지합니다.</v:String>
     <v:String x:Key="tgl4_desc_sys">이 조정은 UAC (사용자 계정 컨트롤)를 완전히 비활성화하고 방패 아이콘, 보안 알림 및 기타 항목을 제거합니다. UAC는 본격적인 보호 프로그램이 아닙니다.</v:String>
     <v:String x:Key="tgl5_desc_sys">보안 또는 보호와 관련된 기능을 비활성화하면 이에 대한 알림을 지속적으로 받게 됩니다. 이 조정은 알림 센터에서 보안 알림을 비활성화합니다.</v:String>
-    <v:String x:Key="tgl6_desc_sys">Microsoft 스토어에서 앱을 직접 업데이트하려는 경우 자동 업데이트 기능을 해제해야 합니다. 따라서 네트워크의 부하가 줄어듭니다.</v:String>
-    <v:String x:Key="tgl7_desc_sys">일부 Realtek High Definition Audio 드라이버 버전에서는 사운드 지연 문제가 발생할 수 있습니다. 이 트윅은 해당 문제를 해결합니다. 다만, 지연 현상이 느껴지지 않거나 설치 및 작동 중인 드라이버가 실제로 Realtek 제품인지 확실하지 않은 경우에는 사용을 권장하지 않습니다.</v:String>
+    <v:String x:Key="tgl6_desc_sys">Microsoft Store에서 앱을 직접 업데이트하려는 경우 자동 업데이트 기능을 해제해야 합니다. 따라서 네트워크의 부하가 줄어듭니다.</v:String>
+    <v:String x:Key="tgl7_desc_sys">일부 Realtek High Definition Audio 드라이버 버전에서는 사운드 지연 문제가 발생할 수 있습니다. 이 조정은 해당 문제를 해결합니다. 다만, 지연 현상이 느껴지지 않거나 설치 및 작동 중인 드라이버가 실제로 Realtek 제품인지 확실하지 않은 경우에는 사용을 권장하지 않습니다.</v:String>
     <v:String x:Key="tgl8_desc_sys">기본적으로 Windows는 1분 동안 잠금 화면을 표시하고 그 후에는 화면이 꺼지며 배터리 또는 전원 사용 여부와 무관하게 잠금 화면이 표시됩니다. 이 조정은 이러한 제한을 제거합니다.</v:String>
     <v:String x:Key="tgl9_desc_sys">이론적으로 빠른 시작은 최대 절전 모드에서 종료하는 것보다 시간이 덜 걸리지만 실제로는 눈에 띄지 않을 수 있습니다. 빠른 로딩 또는 최대 절전 모드 기능을 사용하지 않는 경우에는 해당 기능을 비활성화할 수도 있습니다. 이렇게 하면 추가 공간을 확보할 수 있습니다.</v:String>
     <v:String x:Key="tgl10_desc_sys">조정을 사용하면 컴퓨터를 끄거나 다시 시작할 때 열려 있는 프로그램이 강제로 종료된다는 시스템 메시지를 표시하지 않도록 설정할 수 있습니다.</v:String>
     <v:String x:Key="tgl11_desc_sys">인터넷을 통해 다운로드한 exe, msi, bat, cmd 또는 기타 실행 파일을 실행할 때 Windows 보안 경고가 표시됩니다. 이러한 파일의 실행을 매번 확인하는 것은 꽤 지루할 수 있는데, 이 조정을 통해 이 경고를 비활성화할 수 있습니다.</v:String>
-    <v:String x:Key="tgl12_desc_sys">이 트윅은 예약된 작업을 비활성화하여 Windows 메모리 진단의 자동 실행을 차단합니다. 그 결과, 불필요한 검사가 없으므로 시스템 부팅 속도가 빨라지며 필요할 때 수동으로 진단을 실행할 수 있습니다.</v:String>
-    <v:String x:Key="tgl13_desc_sys">이 트윅은 Teredo, ISATAP 및 IPv6 프로토콜을 비활성화하며, 이는 일반적으로 대부분의 사용자에게 필요하지 않습니다. 그러나 업무용 또는 기업용 기기에서 사용하면 네트워크 문제나 일부 서비스의 비정상적인 작동을 초래할 수 있으므로 권장되지 않습니다.</v:String>
+    <v:String x:Key="tgl12_desc_sys">이 조정은 예약된 작업을 비활성화하여 Windows 메모리 진단의 자동 실행을 차단합니다. 그 결과, 불필요한 검사가 없으므로 시스템 부팅 속도가 빨라지며 필요할 때 수동으로 진단을 실행할 수 있습니다.</v:String>
+    <v:String x:Key="tgl13_desc_sys">이 조정은 Teredo, ISATAP 및 IPv6 프로토콜을 비활성화하며, 이는 일반적으로 대부분의 사용자에게 필요하지 않습니다. 그러나 업무용 또는 기업용 기기에서 사용하면 네트워크 문제나 일부 서비스의 비정상적인 작동을 초래할 수 있으므로 권장되지 않습니다.</v:String>
     <v:String x:Key="tgl14_desc_sys">이 조정에는 대용량 파일 시스템 캐시에 대한 지원이 포함됩니다. 파일 시스템 캐시 크기를 늘리면 일반적으로 컴퓨터 성능이 향상되지만 응용 프로그램과 서비스에 사용할 수 있는 물리적 메모리 공간이 줄어듭니다.</v:String>
     <v:String x:Key="tgl15_desc_sys">기본적으로 Windows에는 시작 프로그램 속도를 늦추는 메커니즘이 내장되어 있습니다. 이 솔루션은 HDD가 장착된 구형 컴퓨터에서는 잘 작동하지만 SSD가 장착된 최신 PC에서는 프로그램 시작 속도가 불필요하게 느려집니다.</v:String>
-    <v:String x:Key="tgl16_desc_sys">이 트윅은 빠른 실행 패널에 표시되는 파일과 폴더의 사용 기록 기록을 비활성화합니다. 즉, 시스템은 더 이상 최근에 활성화된 항목들을 자동으로 저장하고 표시하지 않습니다.</v:String>
+    <v:String x:Key="tgl16_desc_sys">이 조정은 빠른 실행 패널에 표시되는 파일과 폴더의 사용 기록 기록을 비활성화합니다. 즉, 시스템은 더 이상 최근에 활성화된 항목들을 자동으로 저장하고 표시하지 않습니다.</v:String>
     <v:String x:Key="tgl17_desc_sys">이 조정은 탐색기에서 열려고 하는 컴퓨터에 연결된 다양한 이동식 미디어 유형에 대한 자동 실행을 비활성화합니다. 따라서 사용자가 모르는 프로그램은 안정성이 확실하지 않은 미디어에서 자동으로 열리지 않습니다.</v:String>
     <v:String x:Key="tgl18_desc_sys">«궁극의 성능» 전원 공급 회로를 추가하거나 사용 가능한 경우 기존 전원 공급 회로로 간단히 전환합니다. 또한 프로세서 전원 관리 설정에서 최대 프로세서 주파수 설정을 잠금 해제합니다.</v:String>
     <v:String x:Key="tgl19_desc_sys">블루투스가 필요 없고 블루투스를 통해 기기를 사용하고 싶지 않다면 전원을 끄면 트레이 아이콘도 제거됩니다.</v:String>
@@ -443,7 +443,7 @@
     <v:String x:Key="text_licens_more">HWID 메서드 또는 백업 KMS를 사용합니다. Windows 버전에 사용할 수 있는 키가 없는 경우 작동하지 않을 수 있습니다.</v:String>
     <v:String x:Key="btn_activation">활성화</v:String>
 
-    <v:String x:Key="title_point_more">복원 지점</v:String>
+    <v:String x:Key="title_point_more">복구 지점</v:String>
     <v:String x:Key="text_point_more">복원 지점이 현재 비활성화되어 있더라도 시스템 복원 프로세스를 생성하거나 시작합니다.</v:String>
     <v:String x:Key="btn_save">저장</v:String>
     <v:String x:Key="btn_recovery">복구</v:String>
@@ -453,7 +453,7 @@
     <v:String x:Key="btn_disable">비활성화</v:String>
     <v:String x:Key="btn_enable">활성화</v:String>
     
-    <v:String x:Key="title_clear_more">메모리 지우기</v:String>
+    <v:String x:Key="title_clear_more">메모리 정리</v:String>
     <v:String x:Key="text_clear_more">컴퓨터 메모리, 임시 파일 및 아이콘 캐시에 있는 시스템 파일의 캐시를 지웁니다.</v:String>
     <v:String x:Key="btn_clear">지우기</v:String>
 
