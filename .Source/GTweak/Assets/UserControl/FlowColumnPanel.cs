@@ -101,9 +101,8 @@ namespace GTweak.Assets.UserControl
                 return;
             }
 
-            double contentWidth = columns.Sum(c => c.Width) + Math.Max(0, columns.Count - 1) * HorizontalSpacing;
+            double contentWidth = (columns?.Sum(c => c.Width) ?? 0) + Math.Max(0, (columns?.Count ?? 0) - 1) * HorizontalSpacing;
             double extraSpace = Math.Max(0, availableWidth - contentWidth);
-
             double xStart = ContentAlignment switch
             {
                 HorizontalAlignment.Center => (availableWidth - contentWidth) / 2.0,
@@ -123,7 +122,7 @@ namespace GTweak.Assets.UserControl
                     continue;
                 }
 
-                double shift = (i > 0 && columns.Count > 1) ? (extraSpace * (i / (double)(columns.Count - 1)) * 0.3) : 0;
+                double shift = (columns != null && i > 0 && columns.Count > 1) ? (extraSpace * (i / (double)(columns.Count - 1)) * 0.3) : 0;
                 double columnX = x + shift;
                 double y = 0;
 
@@ -254,6 +253,6 @@ namespace GTweak.Assets.UserControl
             return new List<ColumnInfo> { col };
         }
 
-        private double CalculateTotalWidth(List<ColumnInfo> columns) => columns.Sum(c => c.Width) + Math.Max(0, columns.Count - 1) * HorizontalSpacing;
+        private double CalculateTotalWidth(List<ColumnInfo> columns) => (columns?.Sum(c => c.Width) ?? 0) + Math.Max(0, (columns?.Count ?? 0) - 1) * HorizontalSpacing;
     }
 }

@@ -33,7 +33,7 @@ namespace GTweak
 
         private async void App_Startup(object sender, StartupEventArgs e)
         {
-            if (e.Args.Any(arg => arg.Equals("uninstall", StringComparison.OrdinalIgnoreCase)))
+            if (e.Args != null && e.Args.Any(arg => arg.Equals("uninstall", StringComparison.OrdinalIgnoreCase)))
             {
                 SettingsEngine.SelfRemoval();
                 return;

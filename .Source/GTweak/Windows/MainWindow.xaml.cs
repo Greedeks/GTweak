@@ -43,7 +43,7 @@ namespace GTweak.Windows
 
         private void TitleBar_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2)
+            if (e!.ClickCount == 2)
             {
                 if (e.OriginalSource is DependencyObject source)
                 {

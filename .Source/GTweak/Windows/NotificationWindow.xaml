@@ -17,7 +17,7 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,2.5,3,0" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="ButtonClose_PreviewMouseLeftButtonUp"/>
+                <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,2.5,2.5,0" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="ButtonClose_PreviewMouseLeftButtonUp"/>
             </StackPanel>
 
             <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True">
