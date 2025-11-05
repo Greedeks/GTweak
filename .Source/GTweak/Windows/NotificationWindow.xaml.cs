@@ -1,10 +1,8 @@
 using System;
 using System.Media;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
@@ -17,6 +15,7 @@ namespace GTweak.Windows
     {
         private NotificationManager.NoticeAction _requiredAction = default;
         private TimerControlManager _timer = default;
+        private Rect primaryMonitorArea = SystemParameters.WorkArea;
 
         internal string NoticeTitle { set => Header.Text = value; get => Header.Text; }
         internal string NoticeText { set => MessageBody.Text = value; get => MessageBody.Text; }
@@ -25,6 +24,12 @@ namespace GTweak.Windows
         public NotificationWindow()
         {
             InitializeComponent();
+
+            SourceInitialized += delegate
+            {
+                Top = primaryMonitorArea.Bottom - Height - 10;
+                Left = primaryMonitorArea.Right + 10;
+            };
 
             Unloaded += delegate { _timer.Stop(); };
             Loaded += delegate
@@ -47,24 +52,7 @@ namespace GTweak.Windows
                 notificationSound.Play();
             }
 
-            Rect primaryMonitorArea = SystemParameters.WorkArea;
-
-            Top = primaryMonitorArea.Bottom - Height - 10;
-            Left = primaryMonitorArea.Right - Width - 10;
-
-            DoubleAnimationUsingKeyFrames doubleAnimKeyFrames = new DoubleAnimationUsingKeyFrames();
-
-            doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right, TimeSpan.Zero)
-            {
-                EasingFunction = new QuadraticEase()
-            });
-            doubleAnimKeyFrames.KeyFrames.Add(new EasingDoubleKeyFrame(primaryMonitorArea.Right - Width - 10, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(300)))
-            {
-                EasingFunction = new QuadraticEase()
-            });
-
-            Timeline.SetDesiredFrameRate(doubleAnimKeyFrames, 120);
-            BeginAnimation(Canvas.LeftProperty, doubleAnimKeyFrames);
+            BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.3, null, false, true));
         }
     }
 }
