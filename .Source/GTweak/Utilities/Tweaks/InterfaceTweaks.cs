@@ -182,8 +182,7 @@ namespace GTweak.Utilities.Tweaks
 
             _сontrolWriter.Button[34] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableContentAdaptiveBrightness", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "EnableAdaptiveBrightness", "0");
+                (HardwareData.OS.Build >= 22000m && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption", "0"));
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -561,14 +560,18 @@ namespace GTweak.Utilities.Tweaks
                     if (isDisabled)
                     {
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableContentAdaptiveBrightness", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "EnableAdaptiveBrightness", 0, RegistryValueKind.DWord);
+                        if (HardwareData.OS.Build >= 22000m)
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption", 0, RegistryValueKind.DWord);
+                        }
                     }
                     else
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC");
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableContentAdaptiveBrightness");
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "EnableAdaptiveBrightness");
+                        if (HardwareData.OS.Build >= 22000m)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption");
+                        }
                     }
                     break;
             }
