@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -8,8 +8,8 @@ using System.Windows;
 [assembly: AssemblyCopyright("© 2024-2025 Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
 [assembly: AssemblyInformationalVersion("Build: 5.3.6")]
-[assembly: AssemblyVersion("5.3.59.887")]
-[assembly: AssemblyFileVersion("5.3.59.887")]
+[assembly: AssemblyVersion("5.3.22.201")]
+[assembly: AssemblyFileVersion("5.3.22.201")]
 
 [assembly: ComVisible(false)]
 
@@ -17,3 +17,7 @@ using System.Windows;
     ResourceDictionaryLocation.None,
     ResourceDictionaryLocation.SourceAssembly
 )]
+
+[assembly: AssemblyMetadata("RepositoryUrl", "https://github.com/Greedeks/GTweak")]
+[assembly: AssemblyMetadata("RepositoryType", "git")]
+
