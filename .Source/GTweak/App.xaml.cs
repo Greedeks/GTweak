@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
-
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
@@ -81,35 +80,25 @@ namespace GTweak
             {
                 var (code, region) = SystemDiagnostics.GetCurrentSystemLang();
 
-                value ??= code;
-
-                if (value.Contains('-'))
-                {
-                    code = value.Split('-')[0];
-                    region = value.Split('-').Length > 1 ? value.Split('-')[1] : string.Empty;
-                }
+                value ??= $"{code}-{region}";
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
                     Source = value switch
                     {
                         "be" => GetResourceUri("ru"),
-                        _ when code == "pt" && region == "br" => GetResourceUri("pt-br"),
-                        _ when SettingsEngine.AvailableLangs?.Contains(value, StringComparer.OrdinalIgnoreCase) == true => GetResourceUri(value),
+                        _ when SettingsEngine.AvailableLangs.Any(locale => string.Equals(locale, value, StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value),
+                        _ when value.Contains('-') && SettingsEngine.AvailableLangs.Any(locale => string.Equals(locale, value.Split('-')[0], StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value.Split('-')[0]),
                         _ => GetResourceUri("en")
                     }
                 };
 
-                ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
-                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith($"Languages/")
-                                                    select dict).First();
-                if (oldDictionary != null)
+                foreach (ResourceDictionary oldDictionary in Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Languages/")).ToList())
                 {
-                    int ind = Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
                     Current.Resources.MergedDictionaries.Remove(oldDictionary);
-                    Current.Resources.MergedDictionaries.Insert(ind, dictionary);
                 }
-                else { Current.Resources.MergedDictionaries.Add(dictionary); }
+
+                Current.Resources.MergedDictionaries.Add(dictionary);
 
                 LanguageChanged?.Invoke(default, EventArgs.Empty);
             }
@@ -126,16 +115,12 @@ namespace GTweak
                     Source = GetResourceUri(char.ToUpper(value[0]) + value.Substring(1).ToLower(), true)
                 };
 
-                ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
-                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith("Styles/Themes/")
-                                                    select dict).First();
-                if (oldDictionary != null)
+                foreach (ResourceDictionary oldDictionary in Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Styles/Themes/")).ToList())
                 {
-                    int ind = Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
                     Current.Resources.MergedDictionaries.Remove(oldDictionary);
-                    Current.Resources.MergedDictionaries.Insert(ind, dictionary);
                 }
-                else { Current.Resources.MergedDictionaries.Add(dictionary); }
+
+                Current.Resources.MergedDictionaries.Add(dictionary);
 
                 ThemeChanged?.Invoke(default, EventArgs.Empty);
             }
