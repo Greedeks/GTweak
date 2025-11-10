@@ -32,6 +32,22 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { "wscsvc", "3" }
         };
 
+        private static readonly (string Path, string Normal, string Block)[] fileMappings = new (string Path, string Normal, string Block)[]
+        {
+           (Environment.SystemDirectory, "smartscreen.exe", "BlockSS.exe"),
+           (PathLocator.Folders.WindowsDefender, "MsMpEng.exe", "BlockAntimalware.exe"),
+           (PathLocator.Folders.WindowsDefender, "MpDefenderCoreService.exe", "BlockAntimalwareCore.exe"),
+           (PathLocator.Folders.WindowsDefender, "MpCmdRun.exe", "BlockMpCmdRun.exe"),
+           (PathLocator.Folders.WindowsDefender, "MpCopyAccelerator.exe", "BlockMpCopyAccelerator.exe"),
+           (PathLocator.Folders.WindowsDefender, "DlpUserAgent.exe", "BlockDlpUserAgent.exe"),
+           (PathLocator.Folders.WindowsDefender, "MpDlpCmd.exe", "BlockMpDlpCmd.exe"),
+           (PathLocator.Folders.WindowsDefender, "MpDlpService.exe", "BlockMpDlpService.exe"),
+           (PathLocator.Folders.WindowsDefender, "mpextms.exe", "Blockmpextms.exe"),
+           (PathLocator.Folders.WindowsDefender, "NisSrv.exe", "BlockNisSrv.exe"),
+           (PathLocator.Folders.WindowsDefender, "ConfigSecurityPolicy.exe", "BlockConfigSecurityPolicy.exe"),
+           (PathLocator.Folders.WindowsDefenderX86, "MpCmdRun.exe", "BlockMpCmdRun.exe"),
+        };
+
         internal static void SetProtectionState(bool isDisabled)
         {
             if (isDisabled)
@@ -46,23 +62,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         private static void Activate()
         {
-            foreach (var (filePath, originalFileName) in new (string filePath, string originalFileName)[]
+            foreach (var (path, normal, block) in fileMappings)
             {
-              (Path.Combine(PathLocator.Folders.SystemDrive, "Windows", "System32", "BlockSS.exe"), "smartscreen.exe"),
-              (Path.Combine(PathLocator.Folders.SystemDrive, "Program Files", "Windows Defender", "BlockAntimalware.exe"), "MsMpEng.exe"),
-              (Path.Combine(PathLocator.Folders.SystemDrive, "Program Files", "Windows Defender", "BlockAntimalwareCore.exe"), "MpDefenderCoreService.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockMpCmdRun.exe"), "MpCmdRun.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockMpCopyAccelerator.exe"), "MpCopyAccelerator.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockDlpUserAgent.exe"), "DlpUserAgent.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockMpDlpCmd.exe"), "MpDlpCmd.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockMpDlpService.exe"), "MpDlpService.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "Blockmpextms.exe"), "mpextms.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockNisSrv.exe"), "NisSrv.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefender, "BlockConfigSecurityPolicy.exe"), "ConfigSecurityPolicy.exe"),
-              (Path.Combine(PathLocator.Folders.WindowsDefenderX86, "BlockMpCmdRun.exe"), "MpCmdRun.exe"),
-            })
-            {
-                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{filePath}\" {originalFileName}");
+                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(path, block)}\" {normal}");
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalware.exe\" ren \"%D\\BlockAntimalware.exe\" MsMpEng.exe");
@@ -193,23 +195,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             KillProcess(new[] { "smartscreen", "MpDefenderCoreService", "MsMpEng", "SecurityHealthService", "SecurityHealthSystray", "SecurityHealthUI", "wuauserv", "SearchUI", "SecHealthUI", "RuntimeBroker", "msedge", "ssoncom", "usocoreworker" });
 
-            foreach (var (filePath, newFileName) in new (string filePath, string newFileName)[]
+            foreach (var (path, normal, block) in fileMappings)
             {
-                (Path.Combine(PathLocator.Folders.SystemDrive, "Windows", "System32", "smartscreen.exe"), "BlockSS.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "MsMpEng.exe"), "BlockAntimalware.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "MpDefenderCoreService.exe"), "BlockAntimalwareCore.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "MpCmdRun.exe"), "BlockMpCmdRun.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "MpCopyAccelerator.exe"), "BlockMpCopyAccelerator.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "DlpUserAgent.exe"), "BlockDlpUserAgent.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "MpDlpCmd.exe"), "BlockMpDlpCmd.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "MpDlpService.exe"), "BlockMpDlpService.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "mpextms.exe"), "Blockmpextms.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "NisSrv.exe"), "BlockNisSrv.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefender, "ConfigSecurityPolicy.exe"), "BlockConfigSecurityPolicy.exe"),
-                (Path.Combine(PathLocator.Folders.WindowsDefenderX86, "MpCmdRun.exe"), "BlockMpCmdRun.exe"),
-            })
-            {
-                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{filePath}\" {newFileName}");
+                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(path, normal)}\" {block}");
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");

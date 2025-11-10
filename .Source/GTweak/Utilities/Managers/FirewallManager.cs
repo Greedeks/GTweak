@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
 using NetFwTypeLib;
@@ -14,14 +13,6 @@ namespace GTweak.Utilities.Managers
             ["Update"] = @"GTweak - Windows Update blocking",
             ["Domain"] = @"GTweak - Spy domain names",
             ["WDefender"] = @"GTweak - Windows Defender blocking"
-        };
-
-        private static readonly SortedList<string, string> _сollectExecutablePaths = new SortedList<string, string>
-        {
-            ["MoUso"] = File.Exists($@"{PathLocator.Folders.SystemDrive}Windows\UUS\amd64\MoUsoCoreWorker.exe")
-            ? $@"{PathLocator.Folders.SystemDrive}Windows\UUS\amd64\MoUsoCoreWorker.exe" : $@"{PathLocator.Folders.SystemDrive}Windows\System32\MoUsoCoreWorker.exe",
-            ["Uso"] = string.Concat(PathLocator.Folders.SystemDrive, @"Windows\System32\usoclient.exe"),
-            ["WD"] = string.Concat(PathLocator.Folders.SystemDrive, @"Program Files\Windows Defender\MpCmdRun.exe"),
         };
 
         private static void RemoveAllRulesByName(string nameRule)
@@ -63,13 +54,14 @@ namespace GTweak.Utilities.Managers
             {
                 Parallel.ForEach(new[]
                 {
-                    (_сollectExecutablePaths["MoUso"], _nameRules["Update"]),
-                    (_сollectExecutablePaths["Uso"], $"{_nameRules["Update"]} (Update Orchestrator)")
+                    (PathLocator.Executable.WorkerCore.Normal, _nameRules["Update"]),
+                    (PathLocator.Executable.UsoClient.Normal, $"{_nameRules["Update"]} (Update Orchestrator)")
                 },
-                executableFiles =>
+                executableFile =>
                 {
-                    ChangeRules(isDisabled, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN);
-                    ChangeRules(isDisabled, executableFiles.Item1, executableFiles.Item2, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
+                    (string path, string ruleName) = executableFile;
+                    ChangeRules(isDisabled, path, ruleName, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_IN);
+                    ChangeRules(isDisabled, path, ruleName, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
                 });
             }
             catch { NotificationManager.Show("warn", "warn_firewall_noty").Perform(); }
@@ -156,7 +148,7 @@ namespace GTweak.Utilities.Managers
 
         protected static void BlockWDefender(bool isDisabled)
         {
-            try { Parallel.Invoke(() => { ChangeRules(isDisabled, _сollectExecutablePaths["WD"], _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
+            try { Parallel.Invoke(() => { ChangeRules(isDisabled, PathLocator.Executable.MpCmdRun, _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
     }

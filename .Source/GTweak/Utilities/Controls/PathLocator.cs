@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -20,7 +20,7 @@ namespace GTweak.Utilities.Controls
 
             internal static readonly string WindowsOld = Path.Combine(SystemDrive, "Windows.old");
 
-            internal static readonly string Tasks = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "System32", "Tasks");
+            internal static readonly string Tasks = Path.Combine(Environment.SystemDirectory, "Tasks");
         }
 
         internal static class Executable
@@ -37,6 +37,43 @@ namespace GTweak.Utilities.Controls
                 return searchDir.Select(dir => Path.Combine(dir, name)).FirstOrDefault(File.Exists);
             }
 
+            internal static (string Normal, string Block) FindWindowsUpdateExe(string normalName, string blockName)
+            {
+                static string FindFile(string fileName)
+                {
+                    string uusPath = Path.Combine(Folders.SystemDrive, "Windows", "UUS", "amd64", fileName);
+                    string system32Path = Path.Combine(Environment.SystemDirectory, fileName);
+
+                    if (File.Exists(uusPath))
+                    {
+                        return uusPath;
+                    }
+
+                    if (File.Exists(system32Path))
+                    {
+                        return system32Path;
+                    }
+
+                    return null;
+                }
+
+                string normalPath = FindFile(normalName);
+                string blockPath = FindFile(blockName);
+
+                if (normalPath != null)
+                {
+                    return (normalPath, Path.Combine(Path.GetDirectoryName(normalPath), blockName));
+                }
+
+                if (blockPath != null)
+                {
+                    return (Path.Combine(Path.GetDirectoryName(blockPath), normalName), blockPath);
+                }
+
+                return (string.Empty, string.Empty);
+            }
+
+
             internal static readonly string CommandShell = FindExecutablePath("cmd.exe");
 
             internal static readonly string PowerShell = FindExecutablePath("pwsh.exe") ?? FindExecutablePath("powershell.exe");
@@ -50,6 +87,20 @@ namespace GTweak.Utilities.Controls
             internal static readonly string OneDrive = FindExecutablePath("onedrivesetup.exe");
 
             internal static readonly string NSudo = Path.Combine(Folders.DefenderBackup, "NSudoLC.exe");
+
+            internal static (string Normal, string Block) UsoClient =>
+            (
+                Path.Combine(Environment.SystemDirectory, "usoclient.exe"),
+                Path.Combine(Environment.SystemDirectory, "BlockUOrchestrator-GTweak.exe")
+            );
+
+            internal static (string Normal, string Block) WorkerCore => FindWindowsUpdateExe("MoUsoCoreWorker.exe", "BlockUpdate-GTweak.exe");
+
+            internal static (string Normal, string Block) WuauClient => FindWindowsUpdateExe("wuaucltcore.exe", "BlockUpdateCore-GTweak.exe");
+
+            internal static (string Normal, string Block) WaaSMedic => FindWindowsUpdateExe("WaaSMedicAgent.exe", "BlockUpdateAgent-GTweak.exe");
+
+            internal static readonly string MpCmdRun = Path.Combine(Folders.SystemDrive, "Program Files", "Windows Defender", "MpCmdRun.exe");
         }
 
         internal static class Files

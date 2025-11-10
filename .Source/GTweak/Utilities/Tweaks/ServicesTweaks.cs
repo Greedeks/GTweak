@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
@@ -17,22 +16,7 @@ namespace GTweak.Utilities.Tweaks
     {
         internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
-
-        private static readonly Dictionary<string, (string Default, string Blocked)> _updateFilesWin = new Dictionary<string, (string Default, string Blocked)>()
-        {
-            { "Uso", ("usoclient.exe", "BlockUOrchestrator-GTweak.exe") },
-            { "Worker", ("MoUsoCoreWorker.exe", "BlockUpdate-GTweak.exe") },
-            { "Core", ("wuaucltcore.exe", "BlockUpdateCore-GTweak.exe") },
-            { "Agent", ("WaaSMedicAgent.exe", "BlockUpdateAgent-GTweak.exe") }
-        };
-
-        private static string FilesPathUpdate(string program, bool isOldWay = false)
-        {
-            bool isUsoClient = _updateFilesWin.TryGetValue("Uso", out var usoFiles) && Regex.IsMatch(program, $"{usoFiles.Default}|{usoFiles.Blocked}", RegexOptions.IgnoreCase);
-            string basePath = (isOldWay || isUsoClient) ? Path.Combine(PathLocator.Folders.SystemDrive, "Windows", "System32") : Path.Combine(PathLocator.Folders.SystemDrive, "Windows", "UUS", "amd64");
-
-            return Path.Combine(basePath, program);
-        }
+        private readonly (string Normal, string Block)[] _updateFiles = new[] { PathLocator.Executable.UsoClient, PathLocator.Executable.WorkerCore, PathLocator.Executable.WuauClient, PathLocator.Executable.WaaSMedic };
 
         internal void AnalyzeAndUpdate()
         {
@@ -46,7 +30,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XblGameSave", "Start", "4");
 
-            _сontrolWriter.Button[3] = _updateFilesWin.All(key => File.Exists(FilesPathUpdate(key.Value.Default)) || File.Exists(FilesPathUpdate(key.Value.Default, true)));
+            _сontrolWriter.Button[3] = _updateFiles.All(f => File.Exists(f.Normal));
 
             _сontrolWriter.Button[4] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WalletService", "Start", "4") ||
@@ -211,27 +195,30 @@ namespace GTweak.Utilities.Tweaks
                     BlockWindowsUpdate(isDisabled);
                     ChangeAccessUpdateFolders(isDisabled);
 
-                    foreach (var key in _updateFilesWin)
+                    foreach (var (Normal, Block) in _updateFiles)
                     {
-                        string currentFileName = isDisabled ? key.Value.Default : key.Value.Blocked;
-                        string targetFileName = isDisabled ? key.Value.Blocked : key.Value.Default;
-
-                        string currentFilePath = FilesPathUpdate(currentFileName);
-                        string targetFilePath = FilesPathUpdate(targetFileName);
+                        string currentFilePath = isDisabled ? Normal : Block;
+                        string targetFilePath = isDisabled ? Block : Normal;
 
                         try
                         {
+                            if (isDisabled && File.Exists(currentFilePath) && File.Exists(targetFilePath))
+                            {
+                                CommandExecutor.RunCommand($"/c del /f \"{targetFilePath}\"");
+                            }
+
                             if (isDisabled)
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant {Environment.UserName}:F & rename \"{currentFilePath}\" \"{targetFileName}\"");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant {Environment.UserName}:F & rename \"{currentFilePath}\" \"{Path.GetFileName(targetFilePath)}\"");
                             }
                             else
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rename \"{currentFilePath}\" \"{targetFileName}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
+                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rename \"{currentFilePath}\" \"{Path.GetFileName(targetFilePath)}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
+
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wisvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DmEnrollmentSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wuauserv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
