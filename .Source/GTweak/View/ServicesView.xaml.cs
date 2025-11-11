@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,8 +39,6 @@ namespace GTweak.View
             _svcTweaks.ApplyTweaks(((ToggleButton)sender).Name, ((ToggleButton)sender).State);
 
             NotificationManager.Show().WithDelay(300).Restart();
-
-            Parallel.Invoke(async delegate { await Task.Delay(((ToggleButton)sender).Name.Contains("15") ? 2000 : 1000); _svcTweaks.AnalyzeAndUpdate(); });
         }
     }
 }

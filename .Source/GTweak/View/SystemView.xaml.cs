@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -59,8 +58,6 @@ namespace GTweak.View
                 {
                     NotificationManager.Show().WithDelay(300).Perform(action);
                 }
-
-                Parallel.Invoke(async delegate { await Task.Delay(1000); _sysTweaks.AnalyzeAndUpdate(); });
             }
             else
             {
