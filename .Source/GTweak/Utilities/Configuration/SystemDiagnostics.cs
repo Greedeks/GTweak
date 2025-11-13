@@ -48,6 +48,20 @@ namespace GTweak.Utilities.Configuration
 
         internal static bool isIPAddressFormatValid = false, isMsftAvailable = false;
 
+        private static readonly (object[] Keys, string Type)[] MediaTypeMap = new (object[] Keys, string Type)[]
+        {
+            (new object[] { (ushort)3, "Removable Media" }, DiskTypeLabels.HDD),
+            (new object[] { (ushort)4, "Fixed hard disk media" }, DiskTypeLabels.SSD),
+            (new object[] { (ushort)5, "Unspecified" }, DiskTypeLabels.SCM)
+        };
+
+        private static readonly Dictionary<ushort, string> BusTypeMap = new Dictionary<ushort, string>()
+        {
+            { 7,  DiskTypeLabels.USB },
+            { 12, DiskTypeLabels.SD },
+            { 17, DiskTypeLabels.NVMe }
+        };
+
         internal static (string Code, string Region) GetCurrentSystemLang()
         {
             CultureInfo culture = CultureInfo.CurrentUICulture;
@@ -128,7 +142,6 @@ namespace GTweak.Utilities.Configuration
                     AudioDevice = audio;
                     NetworkAdapter = netAdapter;
                     break;
-
             }
         }
 
@@ -290,7 +303,7 @@ namespace GTweak.Utilities.Configuration
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
-                string data = new[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) || !value.Equals("Unknown", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
+                string data = new[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) || !value.Equals("Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
                 string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
                 {
                     2 => "DRAM",
@@ -338,50 +351,67 @@ namespace GTweak.Utilities.Configuration
         /// <summary>
         /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
         /// </summary>
+        /// 
         private string GetStorageDevices()
         {
             StringBuilder result = new StringBuilder();
 
-            static string GetStorageType(object mediaType)
+            static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
-                (object[] Keys, string Type)[] map = new (object[] Keys, string Type)[]
+                string storageType = MediaTypeMap.FirstOrDefault(x => x.Keys.Contains(mediaType)).Type ?? DiskTypeLabels.Unspecified;
+
+                if (isMsftAvailable)
                 {
-                    (new object[] { (ushort)3, "Removable Media" }, "(HDD)"),
-                    (new object[] { (ushort)4, "Fixed hard disk media" }, "(SSD)"),
-                    (new object[] { (ushort)5, "Unknown" }, "(SCM)")
-                };
-                return map.FirstOrDefault(x => x.Keys.Contains(mediaType)).Type ?? "(Unspecified)";
+                    if (BusTypeMap.TryGetValue(busType, out var busStorageType))
+                    {
+                        storageType = busStorageType;
+                    }
+                }
+                else
+                {
+                    if ((storageType == DiskTypeLabels.Unspecified || storageType == DiskTypeLabels.HDD) && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
+                    {
+                        return DiskTypeLabels.USB;
+                    }
+                }
+
+                if (storageType != DiskTypeLabels.Unspecified)
+                {
+                    string lowLevelType = DiskTypeIdentifier.GetStorageKind(deviceId);
+                    if (!string.IsNullOrEmpty(lowLevelType) && lowLevelType != DiskTypeLabels.Unspecified)
+                    {
+                        return lowLevelType;
+                    }
+                }
+
+                if (storageType == DiskTypeLabels.Unspecified && !string.IsNullOrEmpty(deviceId))
+                {
+                    return DiskTypeIdentifier.GetStorageKind(deviceId);
+                }
+
+                return storageType;
             }
 
             if (isMsftAvailable)
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select DeviceId, FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     string data = new[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                     ushort mediaType = managementObj["MediaType"] != null ? (ushort)managementObj["MediaType"] : (ushort)0;
-                    string storageType = GetStorageType(mediaType);
-
-                    if (storageType == "(Unspecified)" && ((ushort)managementObj["BusType"]) == 7)
-                    {
-                        storageType = "(Media-Type)";
-                    }
+                    ushort busType = managementObj["BusType"] != null ? (ushort)managementObj["BusType"] : (ushort)0;
+                    string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, null);
 
                     result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
                 }
             }
             else
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Model, Caption, Size, MediaType, InterfaceType from Win32_DiskDrive", new EnumerationOptions { ReturnImmediately = true }).Get())
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Model, Caption, Size, MediaType, InterfaceType from Win32_DiskDrive", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     string data = new[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                     string mediaType = managementObj["MediaType"] as string ?? string.Empty;
-                    string storageType = GetStorageType(mediaType);
                     string interfaceType = managementObj["InterfaceType"] as string ?? string.Empty;
-
-                    if ((storageType == "(Unspecified)" || storageType == "(HDD)") && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
-                    {
-                        storageType = "(Media-Type)";
-                    }
+                    string storageType = GetStorageType(mediaType, managementObj["DeviceID"] as string ?? string.Empty, default, interfaceType);
 
                     result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
                 }

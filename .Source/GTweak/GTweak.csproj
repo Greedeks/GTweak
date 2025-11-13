@@ -133,6 +133,7 @@
     <Compile Include="Core\ViewModel\PakagesViewModel.cs" />
     <Compile Include="Core\ViewModel\ServicesViewModel.cs" />
     <Compile Include="Core\ViewModel\SystemViewModel.cs" />
+    <Compile Include="Utilities\Configuration\DiskTypeIdentifier.cs" />
     <Compile Include="Utilities\Configuration\HardwareData.cs" />
     <Compile Include="Utilities\Maintenance\ClearingMemory.cs" />
     <Compile Include="Utilities\Maintenance\RegistryExporter.cs" />

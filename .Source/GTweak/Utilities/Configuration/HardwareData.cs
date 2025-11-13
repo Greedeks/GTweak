@@ -1,4 +1,4 @@
-﻿using System.Windows.Media;
+using System.Windows.Media;
 
 namespace GTweak.Utilities.Configuration
 {
@@ -55,6 +55,19 @@ namespace GTweak.Utilities.Configuration
         {
             internal static bool Nvidia { get; set; } = default;
             internal static bool Realtek { get; set; } = default;
+        }
+
+        internal static class DiskTypeLabels
+        {
+            internal const string Unspecified = "(Unspecified)";
+            internal const string SCM = "(SCM)";
+            internal const string HDD = "(HDD)";
+            internal const string SSD = "(SSD)";
+            internal const string NVMe = "(NVMe SSD)";
+            internal const string USB = "(USB-Media)";
+            internal const string SD = "(SD-Card)";
+            internal const string VHD = "(VHD)";
+            internal const string VHDX = "(VHDX)";
         }
     }
 }
