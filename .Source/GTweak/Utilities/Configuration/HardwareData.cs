@@ -64,8 +64,10 @@ namespace GTweak.Utilities.Configuration
             internal const string HDD = "(HDD)";
             internal const string SSD = "(SSD)";
             internal const string NVMe = "(NVMe SSD)";
+            internal const string SCSI = "(SCSI)";
             internal const string USB = "(USB-Media)";
             internal const string SD = "(SD-Card)";
+            internal const string CD = "(CD/DVD)";
             internal const string VHD = "(VHD)";
             internal const string VHDX = "(VHDX)";
         }

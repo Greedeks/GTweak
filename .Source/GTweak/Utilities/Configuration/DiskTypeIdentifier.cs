@@ -123,6 +123,8 @@ namespace GTweak.Utilities.Configuration
                             STORAGE_BUS_TYPE.BusTypeSd => HardwareData.DiskTypeLabels.SD,
                             STORAGE_BUS_TYPE.BusTypeVirtual => HardwareData.DiskTypeLabels.VHD,
                             STORAGE_BUS_TYPE.BusTypeFileBackedVirtual => HardwareData.DiskTypeLabels.VHDX,
+                            STORAGE_BUS_TYPE.BusTypeAtapi => HardwareData.DiskTypeLabels.CD,
+                            STORAGE_BUS_TYPE.BusTypeScsi => HardwareData.DiskTypeLabels.SCSI,
                             _ => isSSD ? HardwareData.DiskTypeLabels.SSD : HardwareData.DiskTypeLabels.HDD
                         };
                     }

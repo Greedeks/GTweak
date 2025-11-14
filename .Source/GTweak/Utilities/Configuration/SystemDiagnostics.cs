@@ -399,7 +399,7 @@ namespace GTweak.Utilities.Configuration
                     string data = new[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                     ushort mediaType = managementObj["MediaType"] != null ? (ushort)managementObj["MediaType"] : (ushort)0;
                     ushort busType = managementObj["BusType"] != null ? (ushort)managementObj["BusType"] : (ushort)0;
-                    string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, null);
+                    string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, default);
 
                     result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
                 }
@@ -484,28 +484,18 @@ namespace GTweak.Utilities.Configuration
 
         private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible
         {
-            double totalSize = Convert.ToDouble(sizeInBytes) / (1024.0 * 1024.0);
+            decimal bytes = Convert.ToDecimal(sizeInBytes);
 
-            if (Convert.ToDouble(sizeInBytes) < 1024)
+            foreach (string unit in new[] { "B", "KB", "MB", "GB", "TB" })
             {
-                return $"{Convert.ToDouble(sizeInBytes):N0} B";
+                if (bytes < 1024 || unit == "TB")
+                {
+                    return unit == "TB" ? $"{Math.Round(bytes, 2):G} {unit}" : $"{Math.Round(bytes):N0} {unit}";
+                }
+                bytes /= 1024;
             }
-            else if (totalSize < 1)
-            {
-                return $"{Math.Round(totalSize * 1024)} KB";
-            }
-            else if (totalSize < 1024)
-            {
-                return $"{Math.Round(totalSize)} MB";
-            }
-            else if (totalSize < 1024 * 1024)
-            {
-                return $"{Math.Round(totalSize / 1024.0)} GB";
-            }
-            else
-            {
-                return $"{Math.Round(totalSize / (1024.0 * 1024.0), 2):G} TB";
-            }
+
+            return $"{Math.Round(bytes, 2):G} TB";
         }
 
         private string GetNetworkAdapters()
