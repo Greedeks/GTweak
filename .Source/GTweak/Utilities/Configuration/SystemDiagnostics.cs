@@ -571,7 +571,7 @@ namespace GTweak.Utilities.Configuration
 
                 using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
 
-                foreach (string url in new[] { "https://ipapi.co/json/", "https://api.db-ip.com/v2/free/self", "http://ip-api.com/json/?fields=61439" })
+                foreach (string url in new[] { "https://free.freeipapi.com/api/json/", "https://api.db-ip.com/v2/free/self", "https://ipapi.co/json/", "https://reallyfreegeoip.org/json/", "https://get.geojs.io/v1/ip/geo.json", "http://ip-api.com/json/" })
                 {
                     try
                     {
