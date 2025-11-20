@@ -38,8 +38,7 @@ namespace GTweak.Core.ViewModel
             get => !string.Equals(SettingsEngine.Theme, SettingsEngine.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase);
             set
             {
-                SettingsEngine.Theme = value == false ? SettingsEngine.AvailableThemes.First() : SettingsEngine.AvailableThemes.Last();
-                App.Theme = SettingsEngine.Theme;
+                App.Theme = SettingsEngine.Theme = value == false ? SettingsEngine.AvailableThemes.First() : SettingsEngine.AvailableThemes.Last();
                 OnPropertyChanged();
             }
         }

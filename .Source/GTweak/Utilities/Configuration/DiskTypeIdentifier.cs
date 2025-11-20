@@ -4,7 +4,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal  static class DiskTypeIdentifier
+    internal static class DiskTypeIdentifier
     {
         private const uint IOCTL_STORAGE_QUERY_PROPERTY = 0x2D1400;
         private const uint FILE_SHARE_READ = 1;

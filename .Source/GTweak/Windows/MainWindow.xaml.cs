@@ -62,7 +62,8 @@ namespace GTweak.Windows
             }
         }
 
-        private void TitleButton_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+
+        private void TitleButton_Click(object sender, RoutedEventArgs e)
         {
             switch ((sender as FrameworkElement)?.Name)
             {
@@ -93,7 +94,7 @@ namespace GTweak.Windows
 
         private void BtnTopMost_ChangedState(object sender, RoutedEventArgs e) => SettingsEngine.IsTopMost = Topmost = !BtnTopMost.State;
 
-        private void BtnVolume_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.IsPlayingSound = (bool)!BtnVolume.IsChecked;
+        private void BtnVolume_Click(object sender, RoutedEventArgs e) => SettingsEngine.IsPlayingSound = (bool)!BtnVolume.IsChecked;
 
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {

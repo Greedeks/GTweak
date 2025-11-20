@@ -1,4 +1,4 @@
-﻿<ui:FluentWindow x:Class="GTweak.Windows.MainWindow"
+<ui:FluentWindow x:Class="GTweak.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -23,15 +23,15 @@
         <Grid x:Name="TitleBar" Grid.Row="0" MouseDown="TitleBar_MouseDown" Background="Transparent" PreviewMouseDown="TitleBar_PreviewMouseDown">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
 
-                <ToggleButton x:Name="ButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}" PreviewMouseLeftButtonUp="TitleButton_PreviewMouseLeftButtonUp"/>
+                <ToggleButton x:Name="ButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}"  Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
 
-                <Button x:Name="ButtonSettings" Style="{StaticResource TitleButtonSettings}" Margin="0,0,10,2" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="TitleButton_PreviewMouseLeftButtonUp"/>
+                <Button x:Name="ButtonSettings" Style="{StaticResource TitleButtonSettings}" Margin="0,0,10,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
 
-                <Button x:Name="ButtonMinimize" Style="{StaticResource TitleButtonMinimize}" Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="TitleButton_PreviewMouseLeftButtonUp"/>
+                <Button x:Name="ButtonMinimize" Style="{StaticResource TitleButtonMinimize}" Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
 
-                <Button x:Name="ButtonMaximize" Style="{StaticResource TitleButtonMaximize}" Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="TitleButton_PreviewMouseLeftButtonUp"/>
+                <Button x:Name="ButtonMaximize" Style="{StaticResource TitleButtonMaximize}" Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
 
-                <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,0,5,2" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="TitleButton_PreviewMouseLeftButtonUp"/>
+                <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,0,5,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
 
             </StackPanel>
 
@@ -123,7 +123,7 @@
                                 <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                         <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource slider_volume_main}"/>
-                                        <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound, Mode=OneWay}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}" PreviewMouseLeftButtonUp="BtnVolume_PreviewMouseLeftButtonUp"/>
+                                        <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound, Mode=OneWay}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}" Click="BtnVolume_Click"/>
                                         <Slider x:Name="SliderVolume"  Style="{StaticResource Percent_Slider}"  Value="{Binding CurrentVolume, Mode=OneWay}"  IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12" ValueChanged="SliderVolume_ValueChanged"/>
                                     </StackPanel>
                                 </Viewbox>

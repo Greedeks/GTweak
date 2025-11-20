@@ -102,7 +102,7 @@ namespace GTweak.View
             PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, null, false, true));
         }
 
-        private void BtnVision_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void BtnVision_Click(object sender, RoutedEventArgs e)
         {
             SettingsEngine.IsHiddenIpAddress = !BtnVision.IsChecked.Value;
             IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, BtnVision.IsChecked.Value ? FactoryAnimation.CreateTo(0.2) : FactoryAnimation.CreateIn(0, 20, 0.2));
