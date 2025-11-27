@@ -305,7 +305,7 @@
                                         <BlurEffect Radius="{Binding SetBlurValue}"/>
                                     </TextBlock.Effect>
                                 </TextBlock>
-                                <ToggleButton x:Name="BtnVision" Margin="10,0,0,0" Width="24" Height="24" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding StateButtonVision}" Click="BtnVision_Click"/>
+                                <ToggleButton x:Name="BtnVision" Margin="10,0,0,0" Width="24" Height="24" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding StateButtonVision}" PreviewMouseLeftButtonUp="BtnVision_PreviewMouseLeftButtonUp" PreviewKeyDown="BtnVision_PreviewKeyDown"/>
                             </StackPanel>
                         </StackPanel>
 

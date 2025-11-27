@@ -85,6 +85,14 @@ namespace GTweak.Windows
                     break;
             }
         }
+
+        private void TglButton_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space || e.Key == Key.Enter)
+            {
+                e.Handled = true;
+            }
+        }
         #endregion
 
         #region SettingsPanel
@@ -94,7 +102,7 @@ namespace GTweak.Windows
 
         private void BtnTopMost_ChangedState(object sender, RoutedEventArgs e) => SettingsEngine.IsTopMost = Topmost = !BtnTopMost.State;
 
-        private void BtnVolume_Click(object sender, RoutedEventArgs e) => SettingsEngine.IsPlayingSound = (bool)!BtnVolume.IsChecked;
+        private void BtnVolume_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.IsPlayingSound = (bool)!BtnVolume.IsChecked;
 
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
