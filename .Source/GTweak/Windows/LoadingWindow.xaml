@@ -1,4 +1,4 @@
-﻿<ui:FluentWindow x:Class="GTweak.Windows.LoadingWindow"
+<ui:FluentWindow x:Class="GTweak.Windows.LoadingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -23,7 +23,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
-            <Image Source="{Binding DisplayProfileAvatar}" Stretch="UniformToFill">
+            <Image Source="{Binding DisplayProfileAvatar, TargetNullValue={StaticResource Icon_ProfileAvatar}}" Stretch="UniformToFill">
                 <Image.OpacityMask>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                         <GradientStop Offset="0" Color="#FFFFFFFF"/>

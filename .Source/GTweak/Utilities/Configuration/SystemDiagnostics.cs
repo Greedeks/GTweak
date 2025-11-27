@@ -71,8 +71,27 @@ namespace GTweak.Utilities.Configuration
 
         internal ImageSource GetProfileImage()
         {
-            string imageSrc = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users\{WindowsIdentity.GetCurrent().User?.Value}", "Image1080", string.Empty);
-            return !string.IsNullOrWhiteSpace(imageSrc) ? new BitmapImage(new Uri(imageSrc)) : Application.Current.Resources["Icon_ProfileAvatar"] as ImageSource;
+            try
+            {
+                string avatarPath = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AccountPicture\Users\{WindowsIdentity.GetCurrent().User?.Value}", "Image1080", string.Empty);
+
+                if (!string.IsNullOrWhiteSpace(avatarPath) && File.Exists(avatarPath) && new FileInfo(avatarPath).Length != 0)
+                {
+                    BitmapImage bmp = new BitmapImage();
+                    bmp.BeginInit();
+                    bmp.UriSource = new Uri(avatarPath, UriKind.Absolute);
+                    bmp.CacheOption = BitmapCacheOption.OnLoad;
+                    bmp.EndInit();
+                    bmp.Freeze();
+                    return bmp;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogging.LogDebug(ex);
+            }
+
+            return (ImageSource)Application.Current.Resources["Icon_ProfileAvatar"];
         }
 
         internal string GetProfileName()
@@ -147,15 +166,32 @@ namespace GTweak.Utilities.Configuration
 
         private void GetWallpaperImage()
         {
-            BitmapImage bmp = new BitmapImage();
-            bmp.BeginInit();
-            bmp.UriSource = new Uri(RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "WallPaper", string.Empty), UriKind.Absolute);
-            bmp.DecodePixelWidth = 100;
-            bmp.CacheOption = BitmapCacheOption.OnLoad;
-            bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-            bmp.EndInit();
-            bmp.Freeze();
-            Wallpaper = bmp;
+            try
+            {
+                string wallpaperPath = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "WallPaper", string.Empty);
+
+                if (!string.IsNullOrWhiteSpace(wallpaperPath) && File.Exists(wallpaperPath))
+                {
+                    BitmapImage bmp = new BitmapImage();
+                    bmp.BeginInit();
+                    bmp.UriSource = new Uri(wallpaperPath, UriKind.Absolute);
+                    bmp.DecodePixelWidth = 100;
+                    bmp.CacheOption = BitmapCacheOption.OnLoad;
+                    bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                    bmp.EndInit();
+                    bmp.Freeze();
+                    Wallpaper = bmp;
+                }
+                else
+                {
+                    Wallpaper = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogging.LogDebug(ex);
+                Wallpaper = null;
+            }
         }
 
         internal void GetOperatingSystemInfo()

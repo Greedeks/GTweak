@@ -60,7 +60,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Border Width="70" Height="70" HorizontalAlignment="Right">
                         <Border.Background>
-                            <ImageBrush ImageSource="{Binding DisplayWallpaper, Mode=OneWay}" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="{Binding DisplayWallpaper, TargetNullValue={StaticResource Icon_LogoWin}, Mode=OneWay}" Stretch="UniformToFill"/>
                         </Border.Background>
                         <Border.OpacityMask>
                             <ImageBrush ImageSource="{StaticResource Icon_LogoWin}" Stretch="Uniform"/>

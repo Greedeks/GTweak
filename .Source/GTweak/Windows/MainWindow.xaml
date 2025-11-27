@@ -52,7 +52,7 @@
                                 <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
                             </Border.Effect>
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding DisplayProfileAvatar, Mode=OneWay}" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="{Binding DisplayProfileAvatar, TargetNullValue={StaticResource Icon_ProfileAvatar},  Mode=OneWay}" Stretch="Uniform"/>
                             </Border.Background>
                         </Border>
                     </Border>
