@@ -8,8 +8,8 @@ using System.Windows;
 [assembly: AssemblyCopyright("© 2024-2025 Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
 [assembly: AssemblyInformationalVersion("Build: 5.3.7")]
-[assembly: AssemblyVersion("5.3.29.241")]
-[assembly: AssemblyFileVersion("5.3.29.241")]
+[assembly: AssemblyVersion("5.3.68.152")]
+[assembly: AssemblyFileVersion("5.3.68.152")]
 
 [assembly: ComVisible(false)]
 
