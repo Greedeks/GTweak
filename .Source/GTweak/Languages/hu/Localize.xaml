@@ -79,7 +79,7 @@
     <v:String x:Key="rbtn_sysinfo_main">Rendszerinformációk</v:String>
     <v:String x:Key="title_settings_main">Beállítások</v:String>
     <v:String x:Key="btgl_noty_main">Értesítések megjelenítése</v:String>
-    <v:String x:Key="slider_volume_main">Kötet:</v:String>
+    <v:String x:Key="slider_volume_main">Hangerő:</v:String>
     <v:String x:Key="btgl_toast_main">Rögzítse az összes ablak tetejére</v:String>
     <v:String x:Key="btgl_update_main">Frissítések keresése</v:String>
     <v:String x:Key="cmbox_lang_main">Interfész nyelve:</v:String>
@@ -178,7 +178,7 @@
     <v:String x:Key="tgl31_intf">Keresési lekérdezés a" Bing " integrációval a Start menüben</v:String>
     <v:String x:Key="tgl32_intf">Nyissa meg a «Gyors hozzáférés»-t «Ez a gép» helyett</v:String>
     <v:String x:Key="tgl33_intf">Fájlkiterjesztések megjelenítése az Intézőben</v:String>
-    <v:String x:Key="tgl34_intf">Önműködő fényerő-változás</v:String>
+    <v:String x:Key="tgl34_intf">Spontán fényerőváltozások</v:String>
     
     <v:String x:Key="tgl1_desc_intf">A kurzorválasztás színét kékről szürkére változtatja «nedves aszfalt».</v:String>
     <v:String x:Key="tgl2_desc_intf">Egyes programokban megváltoztatja az eszköztipp színét sárgáról világoskékre «azúrkék».</v:String>
@@ -213,7 +213,7 @@
     <v:String x:Key="tgl31_desc_intf">Alapértelmezés szerint a Windows mindent elküld, amit a «Start» menüben keres, a szervereinek, hogy a Bing keresési eredményeit biztosítsa. Ha nincs szüksége Bing integrációra a «Start» menüben, alkalmazhat egy módosítást a webes keresés letiltásához. Figyelem, a képernyő villoghat.</v:String>
     <v:String x:Key="tgl32_desc_intf">Alapértelmezés szerint az Intéző megnyitásakor az első lap a «Gyors hozzáférés» lesz. És bármely lemez megnyitásához felesleges mozdulatokat kell végrehajtania. Ez a módosítás megnyitja a "Ez a számítógép" megnyitáskor a "Gyors hozzáférés" helyett.</v:String>
     <v:String x:Key="tgl33_desc_intf">Alapértelmezés szerint a Windows elrejti a fájlkiterjesztéseket, így a Fájlkezelő nézet kevésbé zsúfolt. Ha szükséges, engedélyezheti a fájlkiterjesztések megjelenítését ezzel a módosítással, így megtakaríthatja a kereséssel töltött időt. Figyelem, a képernyő villoghat.</v:String>
-    <v:String x:Key="tgl34_desc_intf">Egyes eszközökön a képernyő fényereje önműködően, a megjelenített tartalomtól függően változhat. Ha a HDR, a dinamikus fényerő és az energiagazdálkodási beállítások kikapcsolása sem segít (a probléma különösen gyakori laptopokon akkumulátoros üzemmódban), kipróbálhatja ezt a módosítást — ez rendszerszinten letiltja az automatikus fényerő-szabályozást. A kézi fényerőszabályozás továbbra is elérhető.</v:String>
+    <v:String x:Key="tgl34_desc_intf">Néhány eszközön a képernyő fényessége spontán módon változhat a megjelenített tartalomtól függően. Ha a HDR, a dinamikus fényerő és a teljesítménybeállítások kikapcsolása nem oldja meg a problémát (ez különösen akkumulátoros laptopokon gyakori), akkor kipróbálhatod ezt a beállítást – ez erőszakkal kapcsolja ki az automatikus fényerőállítást a rendszer szintjén. A kézi fényerőszabályozás továbbra is elérhető.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
@@ -291,7 +291,7 @@
     <v:String x:Key="tgl10_svc">Faxhoz kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl11_svc">Táblagép/okostelefon módhoz kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl12_svc">Kiegészítő monitorokhoz kapcsolódó szolgáltatások</v:String>
-    <v:String x:Key="tgl13_svc">A rendszerkomponensekhez kapcsolódó szolgáltatás</v:String>
+    <v:String x:Key="tgl13_svc">Rendszerkomponensekhez kapcsolódó szolgáltatás</v:String>
     <v:String x:Key="tgl14_svc">A helyi hálózat üzemeltetésével kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl15_svc">USB modemekkel és routerekkel kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl16_svc">VPN-ügyfelekkel kapcsolatos szolgáltatások</v:String>
@@ -470,7 +470,7 @@
     <v:String x:Key="btn_agree">Elfogadás</v:String>
     <v:String x:Key="btn_decline">Elutasítás</v:String>
 
-    <v:String x:Key="textpoint_more">Egy GTweak-kel létrehozott pont</v:String>
+    <v:String x:Key="textpoint_more">Ez a GTweak-kel létrehozott helyreállítási pont</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>
