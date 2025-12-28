@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="TitleBar" Grid.Row="0" MouseDown="TitleBar_MouseDown" Background="Transparent" PreviewMouseDown="TitleBar_PreviewMouseDown">
+        <Grid x:Name="TitleBar" Grid.Row="0"  Background="Transparent" MouseDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove" MouseLeftButtonUp="TitleBar_MouseLeftButtonUp" PreviewMouseLeftButtonDown="TitleBar_PreviewMouseLeftButtonDown">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
 
                 <ToggleButton x:Name="ButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}"  Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
