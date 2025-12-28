@@ -269,7 +269,11 @@
     <v:String x:Key="Notepad_pkg">Notepad</v:String>
     <v:String x:Key="Calculator_pkg">Calculator</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
-
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    
     <v:String x:Key="title_over_pkg">Confirmação de desinstalação</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Você está prestes a desinstalar o navegador Microsoft Edge. Isso também removerá o componente EdgeWebView, que é usado para exibir conteúdo da web em vários aplicativos — como o Microsoft Office (por exemplo, Análises de Reunião, Localizador de Salas), o aplicativo Fotos (a nova versão usa o WebView2), alguns bots do Telegram e outros programas que dependem do WebView incorporado. Antes de prosseguir, certifique-se de que não precisa deste componente.
         Nas compilações recentes do Windows 11, o Copilot é implementado via EdgeWebView como um PWA ou wrapper do sistema. Quando o Edge é desinstalado, o Copilot também é removido, uma vez que funciona como um wrapper da web.</v:String>

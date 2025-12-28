@@ -269,7 +269,11 @@
     <v:String x:Key="Notepad_pkg">Jegyzettömb</v:String>
     <v:String x:Key="Calculator_pkg">Számológép</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
-
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    
     <v:String x:Key="title_over_pkg">Eltávolítás megerősítése</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Hamarosan eltávolítja a Microsoft Edge böngészőt. Ezzel eltávolítja az EdgeWebView összetevőt is, amely a webes tartalmak megjelenítésére szolgál különféle alkalmazásokban – például a Microsoft Office-ban (pl. Meeting Insights, Room Finder), a Fotók alkalmazásban (az új verzió a WebView2-t használja), néhány Telegram botban és más, a beágyazott WebView-ra támaszkodó programokban. Mielőtt folytatná, győződjön meg arról, hogy nincs szüksége erre az összetevőre.
  A Windows 11 legújabb verzióiban a Copilot az EdgeWebView-n keresztül valósul meg PWA-ként vagy rendszercsomagként. Az Edge eltávolításakor a Copilot is eltávolításra kerül, mivel webes csomagként működik.</v:String>

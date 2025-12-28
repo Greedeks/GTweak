@@ -269,7 +269,11 @@
     <v:String x:Key="Notepad_pkg">Notepad</v:String>
     <v:String x:Key="Calculator_pkg">Calculator</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
-
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    
     <v:String x:Key="title_over_pkg">설치 제거 확인</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Microsoft Edge 브라우저를 제거하려고 합니다. 이렇게 하면 Microsoft Office (예: Meeting 인사이트, 룸 파인더), 사진 앱 (새 버전은 WebView2 사용), 일부 Telegram 봇, 그리고 내장된 WebView를 사용하는 기타 프로그램 등 다양한 응용 프로그램에서 웹 콘텐츠를 표시하는 데 사용되는 EdgeWebView 구성 요소도 제거됩니다. 진행하기 전에 이 구성 요소가 필요하지 않은지 확인하세요. 
        최근 Windows 11 빌드에서 Copilot은 PWA 또는 시스템 래퍼로 EdgeWebView를 통해 구현되었습니다. Edge를 제거하면 웹 래퍼 역할을 하는 Copilot도 제거됩니다.</v:String>

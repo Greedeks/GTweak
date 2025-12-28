@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GTweak.View.PakagesView"
+<UserControl x:Class="GTweak.View.PakagesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -108,7 +108,10 @@
                         <ToggleButton x:Name="Calculator" IsChecked="{Binding [Calculator].Installed}" IsEnabled="{Binding [Calculator].IsUnavailable}" ToolTip="{DynamicResource Calculator_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Calculator}" Visibility="{Binding Win11FeatureOnly}"/>
                         <ToggleButton x:Name="Notepad" IsChecked="{Binding [Notepad].Installed}" IsEnabled="{Binding [Notepad].IsUnavailable}" ToolTip="{DynamicResource Notepad_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Notepad}" Visibility="{Binding Win11FeatureOnly}"/>
                         <ToggleButton x:Name="Copilot" IsChecked="{Binding [Copilot].Installed}" IsEnabled="{Binding [Copilot].IsUnavailable}" ToolTip="{DynamicResource Copilot_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Copilot}"/>
-
+                        <ToggleButton x:Name="Whiteboard" IsChecked="{Binding [Whiteboard].Installed}" IsEnabled="{Binding [Whiteboard].IsUnavailable}" ToolTip="{DynamicResource Whiteboard_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_WhiteBoard}"/>
+                        <ToggleButton x:Name="Wallet" IsChecked="{Binding [Wallet].Installed}" IsEnabled="{Binding [Wallet].IsUnavailable}" ToolTip="{DynamicResource Wallet_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Wallet}"/>
+                        <ToggleButton x:Name="Spotify" IsChecked="{Binding [Spotify].Installed}" IsEnabled="{Binding [Spotify].IsUnavailable}" ToolTip="{DynamicResource Spotify_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Spotify}"/>
+                        <ToggleButton x:Name="WhatsApp" IsChecked="{Binding [WhatsApp].Installed}" IsEnabled="{Binding [WhatsApp].IsUnavailable}" ToolTip="{DynamicResource WhatsApp_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_WhatsApp}"/>
 
                     </uc:FlowColumnPanel>
                 </ScrollViewer>

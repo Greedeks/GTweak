@@ -76,7 +76,11 @@ namespace GTweak.Utilities.Tweaks
             ["Edge"] = ("MicrosoftEdge", false, new List<string> { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdge.*", "Microsoft.Copilot" }),
             ["Notepad"] = ("Notepad", false, new List<string> { "Microsoft.WindowsNotepad" }),
             ["Calculator"] = ("Calculator", false, new List<string> { "Microsoft.WindowsCalculator" }),
-            ["Copilot"] = ("Copilot", false, new List<string> { "Microsoft.Copilot" }),
+            ["Copilot"] = (null, false, new List<string> { "Microsoft.Copilot" }),
+            ["WhiteBoard"] = (null, false, new List<string> { "Microsoft.Whiteboard" }),
+            ["Wallet"] = ("MSPay", false, new List<string> { "Microsoft.Wallet" }),
+            ["Spotify"] = (null, false, new List<string> { "SpotifyAB.SpotifyMusic" }),
+            ["WhatsApp"] = ("WhatsAppDesktop", false, new List<string> { "5319275A.WhatsAppDesktop" }),
         };
 
         internal static bool HandleAvailabilityStatus(string key, bool? isUnavailable = null)

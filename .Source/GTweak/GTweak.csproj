@@ -514,6 +514,10 @@
     <Resource Include="Assets\ImagePackages\Calculator.png" />
     <Resource Include="Assets\ImagePackages\Copilot.png" />
     <Resource Include="Assets\ImagePackages\Notepad.png" />
+    <Resource Include="Assets\ImagePackages\Spotify.png" />
+    <Resource Include="Assets\ImagePackages\Wallet.png" />
+    <Resource Include="Assets\ImagePackages\WhatsApp.png" />
+    <Resource Include="Assets\ImagePackages\WhiteBoard.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

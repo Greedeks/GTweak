@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <BitmapImage x:Key="Img_SandTimer" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/SandTimer.png"/>
@@ -51,5 +51,9 @@
     <BitmapImage x:Key="Img_WebMediaExtensions" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/WebMediaExtensions.png"/>
     <BitmapImage x:Key="Img_Widgets" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Widgets.png"/>
     <BitmapImage x:Key="Img_Xbox" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Xbox.png"/>
-
+    <BitmapImage x:Key="Img_WhiteBoard" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/WhiteBoard.png"/>
+    <BitmapImage x:Key="Img_Wallet" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Wallet.png"/>
+    <BitmapImage x:Key="Img_Spotify" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Spotify.png"/>
+    <BitmapImage x:Key="Img_WhatsApp" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/WhatsApp.png"/>
+    
 </ResourceDictionary>
