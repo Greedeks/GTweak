@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="Color_Accent">#00A15A</Color>
@@ -23,6 +23,7 @@
 
     <SolidColorBrush x:Key="Brush_Separator" Color="#C8C8C8"/>
 
+    <SolidColorBrush x:Key="Brush_Background_СomboBox" Color="#F9F9F9"/>
     <SolidColorBrush x:Key="Brush_ComboBoxBorder_Hover" Color="#008C47"/>
     <SolidColorBrush x:Key="Brush_ComboBoxBG_Active" Color="#E0E0E0"/>
 
