@@ -4,8 +4,9 @@
     <Style x:Key="CustomComboBoxItemStyle" TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
         <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="0,4,0,4"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBoxItem">
@@ -16,7 +17,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Border x:Name="Indicator" Grid.Column="0" Width="3" Height="16" CornerRadius="2" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <ContentPresenter Grid.Column="1" Margin="6,7.5" VerticalAlignment="Center"/>
+                            <ContentPresenter Grid.Column="1" Margin="5,8" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -39,6 +40,9 @@
         <Setter Property="Height" Value="28"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -88,7 +92,9 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="MaxDropDownHeight" Value="220"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="ContextMenu" Value="{x:Null}"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource CustomComboBoxItemStyle}"/>
         <Setter Property="ItemTemplate">
             <Setter.Value>
@@ -134,7 +140,7 @@
                                 </ToggleButton>
                             </Grid>
                         </Border>
-                        <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" VerticalOffset="1" AllowsTransparency="True" Focusable="False">
+                        <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" VerticalOffset="2" AllowsTransparency="True" Focusable="False">
                             <Border x:Name="PopupBorder" 
                                     Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                     Background="{StaticResource Brush_Background_СomboBox}" 
@@ -148,7 +154,7 @@
                                     <ScaleTransform x:Name="PopupScaleTransform" ScaleY="0" CenterY="0"/>
                                 </Border.RenderTransform>
                                 <ScrollViewer MaxHeight="{TemplateBinding MaxDropDownHeight}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="0" Margin="0">
-                                    <ItemsPresenter Margin="0,0,8,0"/>
+                                    <ItemsPresenter Margin="1,4,8,4"/>
                                 </ScrollViewer>
                             </Border>
                         </Popup>
