@@ -20,12 +20,32 @@ namespace GTweak.Utilities.Tweaks
         internal static bool IsOneDriveInstalled => File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe"));
         private static bool _isLocalAccount = false;
 
+        internal static HashSet<string> InstalledPackagesCache = new HashSet<string>();
+
         internal void GetInstalledPackages()
         {
-            InstalledPackagesCache = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
-            OnPackagesChanged();
+            try
+            {
+                HashSet<string> keys = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
+                if (keys == null)
+                {
+                    InstalledPackagesCache = new HashSet<string>();
+                }
+                else
+                {
+                    InstalledPackagesCache = keys;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogging.LogDebug(ex);
+                InstalledPackagesCache = new HashSet<string>();
+            }
+            finally
+            {
+                OnPackagesChanged();
+            }
         }
-        internal static HashSet<string> InstalledPackagesCache = new HashSet<string>();
 
         internal static Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
         {
@@ -139,7 +159,14 @@ namespace GTweak.Utilities.Tweaks
             {
                 try
                 {
-                    var (Alias, _, Scripts) = PackagesDetails[packageName];
+                    if (!PackagesDetails.TryGetValue(packageName, out var details))
+                    {
+                        ErrorLogging.LogDebug(new InvalidOperationException($"PackageDetails does not contain key '{packageName}'"));
+                        return;
+                    }
+
+                    string Alias = details.Alias;
+                    List<string> Scripts = details.Scripts;
 
                     List<string> packageNamesToRemove = new List<string> { packageName };
 
@@ -148,10 +175,11 @@ namespace GTweak.Utilities.Tweaks
                         packageNamesToRemove.Add(Alias);
                     }
 
-                    if (Scripts != null)
+                    if (Scripts != null && Scripts.Count > 0)
                     {
                         packageNamesToRemove.AddRange(Scripts);
                     }
+
 
                     List<string> psCommands = packageNamesToRemove.SelectMany(name => new[]
                     {
