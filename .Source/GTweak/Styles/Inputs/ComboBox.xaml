@@ -200,14 +200,12 @@
                         <EventTrigger RoutedEvent="ToggleButton.Checked">
                             <BeginStoryboard>
                                 <Storyboard Timeline.DesiredFrameRate="120">
-                                    <DoubleAnimation Storyboard.TargetName="PopupBorder" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.15">
+                                    <DoubleAnimation Storyboard.TargetName="PopupBorder" Storyboard.TargetProperty="Opacity" From="0" To="0.7" Duration="0:0:0.1"/>
+                                    <DoubleAnimation Storyboard.TargetName="PopupScale" Storyboard.TargetProperty="ScaleY" From="0" To="0.8" Duration="0:0:0.1"/>
+                                    <DoubleAnimation BeginTime="0:0:0.1" Storyboard.TargetName="PopupBorder" Storyboard.TargetProperty="Opacity" From="0.7" To="1" Duration="0:0:0.15"/>
+                                    <DoubleAnimation BeginTime="0:0:0.1" Storyboard.TargetName="PopupScale" Storyboard.TargetProperty="ScaleY" From="0.8" To="1" Duration="0:0:0.2">
                                         <DoubleAnimation.EasingFunction>
-                                            <QuadraticEase EasingMode="EaseOut"/>
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>
-                                    <DoubleAnimation Storyboard.TargetName="PopupScale" Storyboard.TargetProperty="ScaleY" From="0" To="1" Duration="0:0:0.2">
-                                        <DoubleAnimation.EasingFunction>
-                                            <CubicEase EasingMode="EaseOut"/>
+                                            <BackEase Amplitude="0.3" EasingMode="EaseOut"/>
                                         </DoubleAnimation.EasingFunction>
                                     </DoubleAnimation>
                                 </Storyboard>

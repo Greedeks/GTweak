@@ -26,15 +26,7 @@ namespace GTweak.Utilities.Tweaks
         {
             try
             {
-                HashSet<string> keys = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
-                if (keys == null)
-                {
-                    InstalledPackagesCache = new HashSet<string>();
-                }
-                else
-                {
-                    InstalledPackagesCache = keys;
-                }
+                InstalledPackagesCache = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages") ?? new HashSet<string>();
             }
             catch (Exception ex)
             {

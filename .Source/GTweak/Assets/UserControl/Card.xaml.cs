@@ -38,7 +38,7 @@ namespace GTweak.Assets.UserControl
         internal static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(TextBlock), typeof(string), typeof(Card), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty ContentProperty =
+        internal static new readonly DependencyProperty ContentProperty =
             DependencyProperty.Register(nameof(BtnContent), typeof(string), typeof(Button), new PropertyMetadata(string.Empty, (s, e) => ((Button)s).Content = (string)e.NewValue));
 
         private static void OnIconStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

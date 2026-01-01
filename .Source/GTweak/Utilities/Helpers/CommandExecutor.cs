@@ -96,10 +96,7 @@ namespace GTweak.Utilities.Helpers
                 process.Start();
                 await process.WaitForExitAsync().ConfigureAwait(false);
             }
-            catch (Exception ex)
-            {
-                ErrorLogging.LogDebug(ex);
-            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         internal static Task WaitForExitAsync(this Process process)

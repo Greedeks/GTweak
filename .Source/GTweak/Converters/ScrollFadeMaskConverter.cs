@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using GTweak.Utilities.Controls;
 
 namespace GTweak.Converters
 {
@@ -85,7 +86,8 @@ namespace GTweak.Converters
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            ErrorLogging.LogWritingFile(new NotImplementedException());
+            return Array.Empty<object>();
         }
     }
 }
