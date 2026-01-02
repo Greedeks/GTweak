@@ -18,7 +18,7 @@
                     <Grid>
                         <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
                         <Grid x:Name="IconContainer" SnapsToDevicePixels="True">
-                            <Border x:Name="Icon" Width="18" Height="18" Margin="0,2,0,0"/>
+                            <Border x:Name="Icon" Width="19" Height="19" Margin="0,1,0,0"/>
                         </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -29,8 +29,8 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Inactive}" />
-                            <Setter TargetName="Icon" Property="Width" Value="18"/>
-                            <Setter TargetName="Icon" Property="Height" Value="18"/>
+                            <Setter TargetName="Icon" Property="Width" Value="19"/>
+                            <Setter TargetName="Icon" Property="Height" Value="19"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Icon" Property="OpacityMask">
@@ -39,8 +39,8 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Inactive}" />
-                            <Setter TargetName="Icon" Property="Width" Value="16"/>
-                            <Setter TargetName="Icon" Property="Height" Value="16"/>
+                            <Setter TargetName="Icon" Property="Width" Value="17"/>
+                            <Setter TargetName="Icon" Property="Height" Value="17"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -53,8 +53,8 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
-                            <Setter TargetName="Icon" Property="Width" Value="18"/>
-                            <Setter TargetName="Icon" Property="Height" Value="18"/>
+                            <Setter TargetName="Icon" Property="Width" Value="19"/>
+                            <Setter TargetName="Icon" Property="Height" Value="19"/>
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -67,8 +67,8 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
-                            <Setter TargetName="Icon" Property="Width" Value="16"/>
-                            <Setter TargetName="Icon" Property="Height" Value="16"/>
+                            <Setter TargetName="Icon" Property="Width" Value="17"/>
+                            <Setter TargetName="Icon" Property="Height" Value="17"/>
                         </MultiTrigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
