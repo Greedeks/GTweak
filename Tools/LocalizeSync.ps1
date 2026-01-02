@@ -12,6 +12,7 @@ function Info([string]$s) { Write-Host $s -ForegroundColor Cyan }
 function Ok([string]$s)   { Write-Host $s -ForegroundColor Green }
 function Warn([string]$s) { Write-Host $s -ForegroundColor Yellow }
 
+# detect script directory
 $scriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
 
 # auto-detect BasePath
@@ -48,10 +49,11 @@ if (-not (Test-Path -LiteralPath $RefFile)) { Write-Host "Reference file not fou
 
 $refText = Get-Content -Raw -LiteralPath $RefFile
 
-$elementRegex = '(<v:String\b[^>]*>.*?</v:String>)'
+$elementRegex = '(<v:String\b[^>]*\bx:Key\s*=\s*"[^\"]+"[^>]*?(?:\/>|>.*?<\/v:String>))'
 $keyAttrRegex = 'x:Key\s*=\s*"([^"]+)"'
 $regionStartRegex = '<!--\#region\s*(.*?)\s*-->'
 
+# collect reference elements and key list
 $refElements = @()
 foreach ($m in [regex]::Matches($refText, $elementRegex, [System.Text.RegularExpressions.RegexOptions]::Singleline)) {
     $el = $m.Groups[1].Value
@@ -60,6 +62,10 @@ foreach ($m in [regex]::Matches($refText, $elementRegex, [System.Text.RegularExp
 }
 if ($refElements.Count -eq 0) { Write-Host "No <v:String ...> elements in reference."; exit 5 }
 
+$refKeys = [System.Collections.Generic.HashSet[string]]::new()
+$refElements | ForEach-Object { $refKeys.Add($_.Key) | Out-Null }
+
+# collect ordered region names from reference
 $refRegions = @()
 $pos = 0
 while ($true) {
@@ -71,6 +77,7 @@ while ($true) {
     $pos += $mStart.Index + $mStart.Length
 }
 
+# find targets
 $targets = Get-ChildItem -Path $BasePath -Recurse -File -Filter $Pattern |
            Where-Object { $_.FullName -ne (Get-Item -LiteralPath $RefFile).FullName } |
            Select-Object -ExpandProperty FullName
@@ -81,13 +88,15 @@ Info "Targets: $($targets.Count)"
 
 function MakeKeyRegex([string]$key) {
     $k = [regex]::Escape($key)
-    return [regex]::new('(<v:String\b[^>]*\bx:Key\s*=\s*"' + $k + '"[^>]*>.*?</v:String>)', [System.Text.RegularExpressions.RegexOptions]::Singleline)
+    return [regex]::new('(<v:String\b[^>]*\bx:Key\s*=\s*"' + $k + '"[^>]*?(?:\/>|>.*?<\/v:String>))', [System.Text.RegularExpressions.RegexOptions]::Singleline)
 }
+
 function DetectNewline([string]$text) {
     if ($text -match "`r`n") { return "`r`n" }
     if ($text -match "`n") { return "`n" }
-    return [Environment]::NewLine
+    return [Environment]::Newline
 }
+
 function GetIndentForMatch([string]$text, [System.Text.RegularExpressions.Match]$m) {
     $before = $text.Substring(0, $m.Index)
     $lastNl = $before.LastIndexOf("`n")
@@ -95,10 +104,49 @@ function GetIndentForMatch([string]$text, [System.Text.RegularExpressions.Match]
     $line = $before.Substring($lineStart)
     if ($line -match '^[ \t]*') { return $matches[0] } else { return "" }
 }
+
+function GetIndentForPosition([string]$text, [int]$position) {
+    $before = $text.Substring(0, $position)
+    $lastNl = $before.LastIndexOf("`n")
+    if ($lastNl -lt 0) { $lineStart = 0 } else { $lineStart = $lastNl + 1 }
+    $line = $before.Substring($lineStart)
+    if ($line -match '^[ \t]*') { return $matches[0] } else { return "" }
+}
+
 function IndentElement([string]$elem, [string]$indent, [string]$nl) {
     $lines = [regex]::Split($elem, "\r\n|\n")
     $trimmed = $lines | ForEach-Object { $_ -replace '^[ \t]+' , '' }
     return ($trimmed | ForEach-Object { $indent + $_ }) -join $nl
+}
+
+function GetFollowingWhitespace([string]$text, [int]$position) {
+    $result = ""
+    for ($i = $position; $i -lt $text.Length; $i++) {
+        $c = $text[$i]
+        if ($c -eq "`r" -or $c -eq "`n" -or $c -eq " " -or $c -eq "`t") {
+            $result += $c
+        } else {
+            break
+        }
+    }
+    return $result
+}
+
+function GetPrecedingWhitespace([string]$text, [int]$position) {
+    $result = ""
+    for ($i = $position - 1; $i -ge 0; $i--) {
+        $c = $text[$i]
+        if ($c -eq "`r" -or $c -eq "`n" -or $c -eq " " -or $c -eq "`t") {
+            $result = $c + $result
+        } else {
+            break
+        }
+    }
+    return $result
+}
+
+function HasNewline([string]$whitespace) {
+    return $whitespace -match "`r" -or $whitespace -match "`n"
 }
 
 foreach ($target in $targets) {
@@ -106,7 +154,7 @@ foreach ($target in $targets) {
     $targetText = Get-Content -Raw -LiteralPath $target
     $nl = DetectNewline $targetText
 
-    # existing keys
+    # collect existing keys in target
     $existingKeys = [System.Collections.Generic.HashSet[string]]::new()
     foreach ($m in [regex]::Matches($targetText, $elementRegex, [System.Text.RegularExpressions.RegexOptions]::Singleline)) {
         $el = $m.Groups[1].Value
@@ -114,8 +162,14 @@ foreach ($target in $targets) {
         if ($km.Success) { $existingKeys.Add($km.Groups[1].Value) | Out-Null }
     }
 
-    $missing = $refElements | Where-Object { -not $existingKeys.Contains($_.Key) }
-    Info "  Missing keys: $($missing.Count)"
+    # keys to delete
+    $keysToDelete = @()
+    foreach ($k in $existingKeys) { if (-not $refKeys.Contains($k)) { $keysToDelete += $k } }
+
+    # keys to insert
+    $missing = @($refElements | Where-Object { -not $existingKeys.Contains($_.Key) })
+
+    Info "  Missing keys: $($missing.Count); Extra keys: $($keysToDelete.Count)"
 
     # region checks
     $targetRegionNames = @()
@@ -131,7 +185,7 @@ foreach ($target in $targets) {
     }
     if ($missingRegions.Count -gt 0) { Warn "  Missing regions: $($missingRegions -join ', ')" } else { Ok "  Regions: OK" }
 
-    # ordering check
+    # order check
     $lastIndex = -1
     $orderingMismatch = $false
     for ($ri=0; $ri -lt $refRegions.Count; $ri++) {
@@ -144,85 +198,127 @@ foreach ($target in $targets) {
     }
     if ($orderingMismatch) { Warn "  Regions order differs" }
 
-    if ($missing.Count -eq 0) {
-        Ok "  No key changes"
-    } else {
-        $updatedText = $targetText
-        for ($i=0; $i -lt $refElements.Count; $i++) {
-            $r = $refElements[$i]
-            if ($existingKeys.Contains($r.Key)) { continue }
+    $updatedText = $targetText
 
-            $inserted = $false
+    foreach ($k in $keysToDelete) {
+        $re = MakeKeyRegex $k
+        $m = $re.Match($updatedText)
+        if ($m.Success) {
+            $afterWhitespace = GetFollowingWhitespace $updatedText ($m.Index + $m.Length)
+            
+            $start = $m.Index
+            $len = $m.Length + $afterWhitespace.Length
+            $updatedText = $updatedText.Substring(0, $start) + $updatedText.Substring($start + $len)
+            
+            $existingKeys.Remove($k) | Out-Null
+            Write-Host "  Deleted: $k"
+        } else {
+            Write-Host "  DeleteFailed: $k"
+        }
+    }
 
-            # insert AFTER prev existing element
-            $prevIndex = -1
-            for ($j = $i - 1; $j -ge 0; $j--) { if ($existingKeys.Contains($refElements[$j].Key)) { $prevIndex = $j; break } }
-            if ($prevIndex -ne -1) {
-                $prevKey = $refElements[$prevIndex].Key
-                $mPrev = (MakeKeyRegex $prevKey).Match($updatedText)
-                if ($mPrev.Success) {
-                    $indent = GetIndentForMatch $updatedText $mPrev
+    for ($i=0; $i -lt $refElements.Count; $i++) {
+        $r = $refElements[$i]
+        if ($existingKeys.Contains($r.Key)) { continue }
+
+        $inserted = $false
+
+        $prevIndex = -1
+        for ($j = $i - 1; $j -ge 0; $j--) { if ($existingKeys.Contains($refElements[$j].Key)) { $prevIndex = $j; break } }
+        if ($prevIndex -ne -1) {
+            $prevKey = $refElements[$prevIndex].Key
+            $mPrev = (MakeKeyRegex $prevKey).Match($updatedText)
+            if ($mPrev.Success) {
+                $indent = GetIndentForMatch $updatedText $mPrev
+                $toInsertBody = if ($Placeholder) { "<v:String x:Key=`"$($r.Key)`"></v:String>" } else { $r.Element }
+                $indented = IndentElement $toInsertBody $indent $nl
+                
+                $afterPos = $mPrev.Index + $mPrev.Length
+                $afterWhitespace = GetFollowingWhitespace $updatedText $afterPos
+                
+                if (HasNewline $afterWhitespace) {
+                    $toInsert = $nl + $indented
+                } else {
+                    $toInsert = $nl + $indented + $nl
+                }
+                
+                $insertPos = $mPrev.Index + $mPrev.Length
+                $updatedText = $updatedText.Substring(0, $insertPos) + $toInsert + $updatedText.Substring($insertPos)
+                $existingKeys.Add($r.Key) | Out-Null
+                $inserted = $true
+            }
+        }
+
+        if (-not $inserted) {
+            $nextIndex = -1
+            for ($j = $i + 1; $j -lt $refElements.Count; $j++) { if ($existingKeys.Contains($refElements[$j].Key)) { $nextIndex = $j; break } }
+            if ($nextIndex -ne -1) {
+                $nextKey = $refElements[$nextIndex].Key
+                $mNext = (MakeKeyRegex $nextKey).Match($updatedText)
+                if ($mNext.Success) {
+                    $indent = GetIndentForMatch $updatedText $mNext
                     $toInsertBody = if ($Placeholder) { "<v:String x:Key=`"$($r.Key)`"></v:String>" } else { $r.Element }
                     $indented = IndentElement $toInsertBody $indent $nl
-                    $toInsert = $nl + $indented + $nl
-                    $insertPos = $mPrev.Index + $mPrev.Length
+                    
+                    $beforeWhitespace = GetPrecedingWhitespace $updatedText $mNext.Index
+                    
+                    if (HasNewline $beforeWhitespace) {
+                        $toInsert = $indented + $nl
+                    } else {
+                        $toInsert = $nl + $indented + $nl
+                    }
+                    
+                    $insertPos = $mNext.Index
                     $updatedText = $updatedText.Substring(0, $insertPos) + $toInsert + $updatedText.Substring($insertPos)
                     $existingKeys.Add($r.Key) | Out-Null
                     $inserted = $true
                 }
             }
+        }
 
-            # insert BEFORE next existing element
-            if (-not $inserted) {
-                $nextIndex = -1
-                for ($j = $i + 1; $j -lt $refElements.Count; $j++) { if ($existingKeys.Contains($refElements[$j].Key)) { $nextIndex = $j; break } }
-                if ($nextIndex -ne -1) {
-                    $nextKey = $refElements[$nextIndex].Key
-                    $mNext = (MakeKeyRegex $nextKey).Match($updatedText)
-                    if ($mNext.Success) {
-                        $indent = GetIndentForMatch $updatedText $mNext
-                        $toInsertBody = if ($Placeholder) { "<v:String x:Key=`"$($r.Key)`"></v:String>" } else { $r.Element }
-                        $indented = IndentElement $toInsertBody $indent $nl
-                        $toInsert = $nl + $indented + $nl
-                        $insertPos = $mNext.Index
-                        $updatedText = $updatedText.Substring(0, $insertPos) + $toInsert + $updatedText.Substring($insertPos)
-                        $existingKeys.Add($r.Key) | Out-Null
-                        $inserted = $true
-                    }
+        # fallback: insert before closing ResourceDictionary
+        if (-not $inserted) {
+            $endTag = "</ResourceDictionary>"
+            $idxEnd = $updatedText.LastIndexOf($endTag, [System.StringComparison]::OrdinalIgnoreCase)
+            if ($idxEnd -ge 0) {
+                $beforeEnd = $updatedText.Substring(0, $idxEnd)
+                $lastNonWs = $beforeEnd.Length - 1
+                while ($lastNonWs -ge 0 -and ($beforeEnd[$lastNonWs] -eq " " -or $beforeEnd[$lastNonWs] -eq "`t" -or 
+                       $beforeEnd[$lastNonWs] -eq "`r" -or $beforeEnd[$lastNonWs] -eq "`n")) {
+                    $lastNonWs--
                 }
-            }
-
-            # fallback: before closing tag
-            if (-not $inserted) {
-                $endTag = "</ResourceDictionary>"
-                $idxEnd = $updatedText.LastIndexOf($endTag, [System.StringComparison]::OrdinalIgnoreCase)
-                if ($idxEnd -ge 0) {
-                    $before = $updatedText.Substring(0, $idxEnd)
-                    $lastNl = $before.LastIndexOf("`n")
-                    if ($lastNl -lt 0) { $lineStart = 0 } else { $lineStart = $lastNl + 1 }
-                    $line = $before.Substring($lineStart)
-                    $indent = ""
-                    if ($line -match '^[ \t]*') { $indent = $matches[0] }
-                    $toInsertBody = if ($Placeholder) { "<v:String x:Key=`"$($r.Key)`"></v:String>" } else { $r.Element }
-                    $indented = IndentElement $toInsertBody $indent $nl
+                
+                $indent = GetIndentForPosition $updatedText $idxEnd
+                
+                $toInsertBody = if ($Placeholder) { "<v:String x:Key=`"$($r.Key)`"></v:String>" } else { $r.Element }
+                $indented = IndentElement $toInsertBody $indent $nl
+                
+                $whitespaceBeforeTag = GetPrecedingWhitespace $updatedText $idxEnd
+                if ($whitespaceBeforeTag -match "`r`n" -or $whitespaceBeforeTag -match "`n") {
+                    $toInsert = $indented + $nl
+                } else {
                     $toInsert = $nl + $indented + $nl
-                    $updatedText = $updatedText.Substring(0, $idxEnd) + $toInsert + $updatedText.Substring($idxEnd)
-                    $existingKeys.Add($r.Key) | Out-Null
-                    $inserted = $true
                 }
-            }
-
-            if ($inserted) { Write-Host "  Inserted: $($r.Key)" } else { Write-Host "  Failed: $($r.Key)" }
-        }
-
-        if ($updatedText -ne $targetText) {
-            if ($DryRun) { Write-Host "  (DryRun) File would be changed." }
-            else {
-                if ($Backup) { Copy-Item -LiteralPath $target -Destination ($target + ".bak") -Force }
-                Set-Content -LiteralPath $target -Value $updatedText -Force
-                Ok "  Updated: $target"
+                
+                $updatedText = $updatedText.Substring(0, $idxEnd) + $toInsert + $updatedText.Substring($idxEnd)
+                $existingKeys.Add($r.Key) | Out-Null
+                $inserted = $true
             }
         }
+
+        if ($inserted) { Write-Host "  Inserted: $($r.Key)" } else { Write-Host "  InsertFailed: $($r.Key)" }
+    }
+
+    if ($updatedText -ne $targetText) {
+        if ($DryRun) {
+            Write-Host "  (DryRun) File would be changed."
+        } else {
+            if ($Backup) { Copy-Item -LiteralPath $target -Destination ($target + ".bak") -Force }
+            Set-Content -LiteralPath $target -Value $updatedText -Force
+            Ok "  Updated: $target"
+        }
+    } else {
+        Ok "  No changes: $target"
     }
 }
 
