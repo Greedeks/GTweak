@@ -60,6 +60,8 @@
   <PropertyGroup>
     <ApplicationIcon>GTweak.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -449,9 +451,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="GTweak.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="NetFwTypeLib">
       <Guid>{58FBCF7C-E7A9-467C-80B3-FC65E8FCCA08}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -519,6 +518,7 @@
     <Resource Include="Assets\ImagePackages\Wallet.png" />
     <Resource Include="Assets\ImagePackages\WhatsApp.png" />
     <Resource Include="Assets\ImagePackages\WhiteBoard.png" />
+    <Resource Include="GTweak.ico" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
