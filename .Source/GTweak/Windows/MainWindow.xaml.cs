@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
@@ -14,11 +15,10 @@ namespace GTweak.Windows
 {
     public partial class MainWindow : FluentWindow
     {
-        private bool _settingsOpen = false, _prepareDragFromMax = false;
+        private bool _settingsOpen = false, _draggingFromMaximized = false, _ignoreMouseClick = false;
         private Point? _lastNormalPosition;
         private Size? _lastNormalSize;
         private Point _mouseDownWindowPoint;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace GTweak.Windows
         }
 
         #region TitleBar
-        private void HandleWindowState()
+        private async void HandleWindowState()
         {
             if (WindowState == WindowState.Normal)
             {
@@ -46,9 +46,10 @@ namespace GTweak.Windows
             {
                 WindowState = WindowState.Normal;
             }
-        }
 
-        private double Clamp(double value, double min, double max) => Math.Max(min, Math.Min(max, value));
+            await Task.Delay(100).ConfigureAwait(false);
+            _ignoreMouseClick = false;
+        }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -60,7 +61,7 @@ namespace GTweak.Windows
             if (WindowState == WindowState.Maximized)
             {
                 _mouseDownWindowPoint = e.GetPosition(this);
-                _prepareDragFromMax = true;
+                _draggingFromMaximized = true;
             }
             else
             {
@@ -70,14 +71,14 @@ namespace GTweak.Windows
 
         private void TitleBar_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!_prepareDragFromMax)
+            if (!_draggingFromMaximized)
             {
                 return;
             }
 
             if (e.LeftButton != MouseButtonState.Pressed)
             {
-                _prepareDragFromMax = false;
+                _draggingFromMaximized = false;
                 return;
             }
 
@@ -87,7 +88,7 @@ namespace GTweak.Windows
 
             if (Math.Abs(delta.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(delta.Y) > SystemParameters.MinimumVerticalDragDistance)
             {
-                _prepareDragFromMax = false;
+                _draggingFromMaximized = false;
 
                 Size restoreSize = _lastNormalSize ?? new Size(RestoreBounds.Width, RestoreBounds.Height);
                 double restoreWidth = restoreSize.Width;
@@ -104,8 +105,8 @@ namespace GTweak.Windows
 
                 double screenW = SystemParameters.PrimaryScreenWidth;
                 double screenH = SystemParameters.PrimaryScreenHeight;
-                left = Clamp(left, 0, Math.Max(0, screenW - restoreWidth));
-                top = Clamp(top, 0, Math.Max(0, screenH - restoreHeight));
+                left = Math.Max(0, Math.Min(Math.Max(0, screenW - restoreWidth), left));
+                top = Math.Max(0, Math.Min(Math.Max(0, screenH - restoreHeight), top));
 
                 Left = left;
                 Top = top;
@@ -114,7 +115,7 @@ namespace GTweak.Windows
             }
         }
 
-        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) => _prepareDragFromMax = false;
+        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) => _draggingFromMaximized = false;
 
         private void TitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -137,6 +138,8 @@ namespace GTweak.Windows
                 }
             }
 
+            _ignoreMouseClick = true;
+
             bool wasMax = WindowState == WindowState.Maximized;
 
             HandleWindowState();
@@ -154,6 +157,7 @@ namespace GTweak.Windows
                     Height = sz.Height;
                 }));
             }
+
 
             e.Handled = true;
         }
@@ -228,6 +232,14 @@ namespace GTweak.Windows
         {
             UpdateBanner.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(1, 0, 0.3, () => { UpdateBanner.Visibility = Visibility.Collapsed; }));
             Dispatcher.Invoke(() => new UpdateWindow().ShowDialog());
+        }
+
+        private void ContentControl_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_ignoreMouseClick)
+            {
+                e.Handled = true;
+            }
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)

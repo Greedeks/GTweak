@@ -264,7 +264,7 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
-            <ContentControl Grid.Column="1" Content="{Binding CurrentView}" IsTabStop="False" KeyboardNavigation.TabNavigation="None" Margin="5,5,0,5"/>
+            <ContentControl Grid.Column="1" Content="{Binding CurrentView}" IsTabStop="False" KeyboardNavigation.TabNavigation="None" Margin="5,5,0,5" PreviewMouseLeftButtonUp="ContentControl_PreviewMouseLeftButtonUp"/>
 
         </Grid>
 
