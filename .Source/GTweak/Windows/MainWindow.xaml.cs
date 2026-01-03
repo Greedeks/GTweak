@@ -19,6 +19,7 @@ namespace GTweak.Windows
         private Point? _lastNormalPosition;
         private Size? _lastNormalSize;
         private Point _mouseDownWindowPoint;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,65 +54,58 @@ namespace GTweak.Windows
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Left || e.ClickCount == 2)
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount != 2)
             {
-                return;
-            }
-
-            if (WindowState == WindowState.Maximized)
-            {
-                _mouseDownWindowPoint = e.GetPosition(this);
-                _draggingFromMaximized = true;
-            }
-            else
-            {
-                DragMove();
+                if (WindowState == WindowState.Maximized)
+                {
+                    _mouseDownWindowPoint = e.GetPosition(this);
+                    _draggingFromMaximized = true;
+                }
+                else
+                {
+                    DragMove();
+                }
             }
         }
 
         private void TitleBar_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!_draggingFromMaximized)
+            if (_draggingFromMaximized)
             {
-                return;
-            }
+                if (e.LeftButton != MouseButtonState.Pressed)
+                {
+                    _draggingFromMaximized = false;
+                    return;
+                }
 
-            if (e.LeftButton != MouseButtonState.Pressed)
-            {
-                _draggingFromMaximized = false;
-                return;
-            }
+                Point currentScreen = PointToScreen(e.GetPosition(this));
+                Vector delta = currentScreen - PointToScreen(_mouseDownWindowPoint);
 
-            Point initialScreen = PointToScreen(_mouseDownWindowPoint);
-            Point currentScreen = PointToScreen(e.GetPosition(this));
-            Vector delta = currentScreen - initialScreen;
+                if (Math.Abs(delta.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(delta.Y) > SystemParameters.MinimumVerticalDragDistance)
+                {
+                    _draggingFromMaximized = false;
 
-            if (Math.Abs(delta.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(delta.Y) > SystemParameters.MinimumVerticalDragDistance)
-            {
-                _draggingFromMaximized = false;
+                    Size restoreSize = _lastNormalSize ?? new Size(RestoreBounds.Width, RestoreBounds.Height);
+                    double restoreWidth = restoreSize.Width;
+                    double restoreHeight = restoreSize.Height;
 
-                Size restoreSize = _lastNormalSize ?? new Size(RestoreBounds.Width, RestoreBounds.Height);
-                double restoreWidth = restoreSize.Width;
-                double restoreHeight = restoreSize.Height;
+                    double relX = ActualWidth > 0 ? _mouseDownWindowPoint.X / ActualWidth : 0.5;
 
-                double relX = ActualWidth > 0 ? _mouseDownWindowPoint.X / ActualWidth : 0.5;
+                    WindowState = WindowState.Normal;
+                    Width = restoreWidth;
+                    Height = restoreHeight;
 
-                WindowState = WindowState.Normal;
-                Width = restoreWidth;
-                Height = restoreHeight;
+                    double left = currentScreen.X - restoreWidth * relX;
+                    double top = currentScreen.Y - _mouseDownWindowPoint.Y;
 
-                double left = currentScreen.X - restoreWidth * relX;
-                double top = currentScreen.Y - _mouseDownWindowPoint.Y;
+                    left = Math.Max(0, Math.Min(Math.Max(0, SystemParameters.PrimaryScreenWidth - restoreWidth), left));
+                    top = Math.Max(0, Math.Min(Math.Max(0, SystemParameters.PrimaryScreenHeight - restoreHeight), top));
 
-                double screenW = SystemParameters.PrimaryScreenWidth;
-                double screenH = SystemParameters.PrimaryScreenHeight;
-                left = Math.Max(0, Math.Min(Math.Max(0, screenW - restoreWidth), left));
-                top = Math.Max(0, Math.Min(Math.Max(0, screenH - restoreHeight), top));
+                    Left = left;
+                    Top = top;
 
-                Left = left;
-                Top = top;
-
-                Dispatcher.BeginInvoke((Action)(() => { DragMove(); }));
+                    Dispatcher.BeginInvoke((Action)(() => { DragMove(); }));
+                }
             }
         }
 
@@ -119,47 +113,42 @@ namespace GTweak.Windows
 
         private void TitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Left || e.ClickCount != 2)
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
             {
-                return;
-            }
-
-            if (e.OriginalSource is DependencyObject source)
-            {
-                DependencyObject current = source;
-                while (current != null)
+                if (e.OriginalSource is DependencyObject source)
                 {
-                    if (current is ButtonBase)
+                    DependencyObject current = source;
+                    while (current != null)
                     {
-                        return;
+                        if (current is ButtonBase)
+                        {
+                            return;
+                        }
+
+                        current = VisualTreeHelper.GetParent(current);
                     }
-
-                    current = VisualTreeHelper.GetParent(current);
                 }
-            }
 
-            _ignoreMouseClick = true;
+                _ignoreMouseClick = true;
 
-            bool wasMax = WindowState == WindowState.Maximized;
+                HandleWindowState();
 
-            HandleWindowState();
-
-            if (wasMax && _lastNormalPosition.HasValue && _lastNormalSize.HasValue)
-            {
-                Point pos = _lastNormalPosition.Value;
-                Size sz = _lastNormalSize.Value;
-
-                Dispatcher.BeginInvoke((Action)(() =>
+                if (WindowState == WindowState.Maximized && _lastNormalPosition.HasValue && _lastNormalSize.HasValue)
                 {
-                    Left = pos.X;
-                    Top = pos.Y;
-                    Width = sz.Width;
-                    Height = sz.Height;
-                }));
+                    Point pos = _lastNormalPosition.Value;
+                    Size sz = _lastNormalSize.Value;
+
+                    Dispatcher.BeginInvoke((Action)(() =>
+                    {
+                        Left = pos.X;
+                        Top = pos.Y;
+                        Width = sz.Width;
+                        Height = sz.Height;
+                    }));
+                }
+
+                e.Handled = true;
             }
-
-
-            e.Handled = true;
         }
 
         private void TitleButton_Click(object sender, RoutedEventArgs e)
