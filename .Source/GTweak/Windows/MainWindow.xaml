@@ -227,12 +227,13 @@
 
             <Grid Grid.ColumnSpan="2" Panel.ZIndex="100" VerticalAlignment="Top">
                 <Border Margin="0,15,0,50" MinWidth="70" MaxWidth="320" HorizontalAlignment="Left" ClipToBounds="True">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#33000000" Opacity="0.5" BlurRadius="10" ShadowDepth="2"/>
+                    </Border.Effect>
+                    
                     <ScrollViewer Padding="0,0,15,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  CanContentScroll="True" FlowDirection="RightToLeft">
                         <StackPanel Orientation="Vertical" FlowDirection="LeftToRight">
-                            <StackPanel.Effect>
-                                <DropShadowEffect Opacity="0.2"/>
-                            </StackPanel.Effect>
-
+                        
                             <RadioButton Name="BtnUtils" Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_utils_main}" Command="{Binding NavigateToUtilsCommand}" IsChecked="True" >
                                 <ui:SymbolIcon Symbol="Toolbox20" FontSize="20"/>
                             </RadioButton>
