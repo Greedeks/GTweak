@@ -13,22 +13,30 @@ namespace GTweak.Utilities.Managers
     {
         internal static bool IsTaskEnabled(params string[] tasklist)
         {
-            string[] existingTasks = GetExistingTasks(tasklist);
-
-            if (existingTasks.Length != 0)
+            Task<bool> task = Task.Run(() =>
             {
-                byte numberRunningTask = 0;
-                using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
+                bool result = false;
+
+                string[] existingTasks = GetExistingTasks(tasklist);
+
+                if (existingTasks.Length != 0)
                 {
-                    numberRunningTask += (byte)(from string taskname in existingTasks
-                                                let task = taskService.GetTask(taskname)
-                                                where task != null
-                                                where task.Enabled
-                                                select taskname).Count();
+                    byte numberRunningTask = 0;
+                    using (Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService())
+                    {
+                        numberRunningTask += (byte)(from string taskname in existingTasks
+                                                    let task = taskService.GetTask(taskname)
+                                                    where task != null
+                                                    where task.Enabled
+                                                    select taskname).Count();
+                    }
+                    result = numberRunningTask > 0;
                 }
-                return numberRunningTask > 0;
-            }
-            return false;
+
+                return result;
+            });
+
+            return task.Result;
         }
 
         internal static void SetTaskState(bool state, params string[] tasklist)

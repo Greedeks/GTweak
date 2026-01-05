@@ -35,7 +35,7 @@ namespace GTweak.Windows
         }
 
         #region TitleBar
-        private async void HandleWindowState()
+        private void HandleWindowState()
         {
             if (WindowState == WindowState.Normal)
             {
@@ -47,9 +47,6 @@ namespace GTweak.Windows
             {
                 WindowState = WindowState.Normal;
             }
-
-            await Task.Delay(100).ConfigureAwait(false);
-            _ignoreMouseClick = false;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -111,7 +108,7 @@ namespace GTweak.Windows
 
         private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) => _draggingFromMaximized = false;
 
-        private void TitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private async void TitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
             {
@@ -138,14 +135,14 @@ namespace GTweak.Windows
                     Point pos = _lastNormalPosition.Value;
                     Size sz = _lastNormalSize.Value;
 
-                    Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        Left = pos.X;
-                        Top = pos.Y;
-                        Width = sz.Width;
-                        Height = sz.Height;
-                    }));
+                    Left = pos.X;
+                    Top = pos.Y;
+                    Width = sz.Width;
+                    Height = sz.Height;
                 }
+
+                await Task.Delay(100).ConfigureAwait(false);
+                _ignoreMouseClick = false;
 
                 e.Handled = true;
             }

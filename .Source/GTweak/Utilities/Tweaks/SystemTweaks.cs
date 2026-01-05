@@ -35,7 +35,7 @@ namespace GTweak.Utilities.Tweaks
         internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
 
-        public SystemTweaks() { _currentPowerGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty); }
+        public SystemTweaks() => _currentPowerGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);
 
         internal void AnalyzeAndUpdate()
         {
