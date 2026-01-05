@@ -251,13 +251,8 @@ namespace GTweak.Utilities.Tweaks
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         break;
                     case "Edge":
-                        foreach (string processName in new string[] { "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "msedgewebview2", "MicrosoftEdgeUpdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "RuntimeBroker" })
-                        {
-                            foreach (Process process in Process.GetProcessesByName(processName))
-                            {
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /pid {process.Id} /f");
-                            }
-                        }
+                        string[] processes = { "smartscreen", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "msedgewebview2", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "runtimebroker", "widgets" };
+                        CommandExecutor.RunCommandAsTrustedInstaller( "/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")) );
 
                         RemoveTasks(edgeTasks);
 
@@ -294,19 +289,17 @@ namespace GTweak.Utilities.Tweaks
 
                         static void RemoveDirectory(string path)
                         {
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\"");
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName}:F");
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
+                            CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\" & icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{path}\" /grant {Environment.UserName}:F & rd /s /q \"{path}\"");
 
-                            Thread.Sleep(2000);
-
-                            if (Directory.Exists(path))
+                            for (int i = 0; Directory.Exists(path) && i < 10; i++)
                             {
-                                try { Directory.Delete(path, true); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                                try { Directory.Delete(path, true); }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
                                 TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
-                                Thread.Sleep(2000);
+
+                                Thread.Sleep(500);
                             }
                         }
 
@@ -348,6 +341,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
                         break;
                 }
             });
