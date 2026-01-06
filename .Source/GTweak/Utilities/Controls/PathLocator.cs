@@ -17,8 +17,6 @@ namespace GTweak.Utilities.Controls
 
             internal static readonly string WindowsDefender = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Windows Defender");
 
-            internal static readonly string WindowsDefenderX86 = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Windows Defender");
-
             internal static readonly string WindowsOld = Path.Combine(SystemDrive, "Windows.old");
 
             internal static readonly string Tasks = Path.Combine(Environment.SystemDirectory, "Tasks");

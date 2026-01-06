@@ -45,8 +45,11 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
            (PathLocator.Folders.WindowsDefender, "mpextms.exe", "Blockmpextms.exe"),
            (PathLocator.Folders.WindowsDefender, "NisSrv.exe", "BlockNisSrv.exe"),
            (PathLocator.Folders.WindowsDefender, "ConfigSecurityPolicy.exe", "BlockConfigSecurityPolicy.exe"),
-           (PathLocator.Folders.WindowsDefenderX86, "MpCmdRun.exe", "BlockMpCmdRun.exe"),
+           (Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),"Windows Defender","BlockWindowsDefenderX86"),
+           (Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Windows Defender Advanced Threat Protection", "BlockWindowsDefenderATP" ),
+            (Path.Combine(Environment.SystemDirectory, "HealthAttestationClient"), "HealthAttestationClientAgent.exe", "BlockHACA.exe")
         };
+
 
         internal static void SetProtectionState(bool isDisabled)
         {
@@ -62,6 +65,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         private static void Activate()
         {
+            KillProcess();
+
             foreach (var (path, normal, block) in fileMappings)
             {
                 CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(path, block)}\" {normal}");
@@ -69,7 +74,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalware.exe\" ren \"%D\\BlockAntimalware.exe\" MsMpEng.exe");
             CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\BlockAntimalwareCore.exe\" ren \"%D\\BlockAntimalwareCore.exe\" MpDefenderCoreService.exe");
-            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "BlockWindowsDefenderATP")}\" \"Windows Defender Advanced Threat Protection\"");
 
             CommandExecutor.RunCommandAsTrustedInstaller("/c reg delete \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost\" /v EnableWebContentEvaluation /f & " +
                 "reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\" /v SmartScreenEnabled /f & " +
@@ -193,21 +197,20 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
         {
             ExportRights();
 
-            KillProcess(new[] { "smartscreen", "MpDefenderCoreService", "MsMpEng", "SecurityHealthService", "SecurityHealthSystray", "SecurityHealthUI", "wuauserv", "SearchUI", "SecHealthUI", "RuntimeBroker", "msedge", "ssoncom", "usocoreworker" });
+            KillProcess();
 
             foreach (var (path, normal, block) in fileMappings)
             {
-                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(path, normal)}\" {block}");
+                CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(path, normal)}\" \"{block}\"");
             }
-
-            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");
-            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MpDefenderCoreService.exe\" ren \"%D\\MpDefenderCoreService.exe\" BlockAntimalwareCore.exe");
-            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c rename \"{Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Windows Defender Advanced Threat Protection")}\" BlockWindowsDefenderATP");
 
             foreach (var service in services)
             {
                 CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c reg add HKLM\SYSTEM\CurrentControlSet\Services\{service.Key} /v Start /t REG_DWORD /d 4 /f");
             }
+
+            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe");
+            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\Microsoft\Windows Defender\Platform\*")}\") do if exist \"%D\\MpDefenderCoreService.exe\" ren \"%D\\MpDefenderCoreService.exe\" BlockAntimalwareCore.exe");
 
             CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c reg add HKLM\SYSTEM\CurrentControlSet\Services\WinDefend /v AutorunsDisabled /t REG_DWORD /d 3 /f");
             CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\wscsvc /v DelayedAutoStart /t REG_DWORD /d 1 /f");
@@ -332,7 +335,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "Windows Defender");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", "SecurityHealth");
 
-            KillProcess(new[] { "SecurityHealthUI", "SecurityHealthService", "SecurityHealthSystray", "SecHealthUI" });
+
 
             CommandExecutor.RunCommandAsTrustedInstaller($"/c reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\AppHost\" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f & " +
                 "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\" /v SmartScreenEnabled /t REG_SZ /d \"off\" /f & " +
@@ -400,15 +403,10 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             }
         }
 
-        private static void KillProcess(params string[] nameList)
+        private static void KillProcess()
         {
-            foreach (string processName in nameList)
-            {
-                foreach (Process process in Process.GetProcessesByName(processName))
-                {
-                    CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c taskkill /pid {process.Id} /f");
-                }
-            }
+            string[] processes = { "smartscreen", "mpdefendercoreservice", "msmpeng", "securityhealthservice", "securityhealthsystray", "securityhealthui", "wuauserv", "searchui", "sechealthui", "runtimebroker", "msedge", "ssoncom", "usocoreworker", "defenderbootstrapper", "configsecuritypolicy", "dlpuseragent", "lsass", "mpam-d", "mpam-fe", "mpam-fe_bd", "mpas-d", "mpas-fe", "mpas-fe_bd", "mpav-d", "mpav-fe", "mpav-fe_bd", "mpcmdrun", "mpcopyaccelerator", "mpdlpcmd", "mpdlpservice", "mpextms", "mpsigstub", "mrt", "msmpengcp", "mssense", "nissrv", "offlinescannershell", "securekernel", "securityhealthhost", "senseap", "senseaptoast", "sensecm", "sensegpparser", "senseidentity", "senseimdscollector", "senseir", "sensendr", "sensesampleuploader", "sensetvm", "sensece", "sgrmbroker", "healthattestationclientagent" };
+            CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
         }
 
         private static void RunPowerShellCommand(string command) => RunProcess(PathLocator.Executable.PowerShell, "-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -EncodedCommand \"" + Convert.ToBase64String(Encoding.Unicode.GetBytes(command)) + "\"");
@@ -425,7 +423,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 comandoAEjecutar.StartInfo.RedirectStandardError = true;
                 comandoAEjecutar.StartInfo.CreateNoWindow = true;
                 comandoAEjecutar.Start();
-
                 comandoAEjecutar.StandardOutput.ReadToEnd();
                 return;
             }

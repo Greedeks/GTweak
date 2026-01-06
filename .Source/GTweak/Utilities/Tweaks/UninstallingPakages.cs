@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -252,7 +251,7 @@ namespace GTweak.Utilities.Tweaks
                         break;
                     case "Edge":
                         string[] processes = { "smartscreen", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "msedgewebview2", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "runtimebroker", "widgets" };
-                        CommandExecutor.RunCommandAsTrustedInstaller( "/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")) );
+                        CommandExecutor.RunCommandAsTrustedInstaller("/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
 
                         RemoveTasks(edgeTasks);
 
