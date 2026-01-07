@@ -3,6 +3,7 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
     <v:String x:Key="defaultDescription">Najedź myszką na dowolną modyfikację, aby zobaczyć jej opis</v:String>
     <v:String x:Key="defaultDescriptionApp">Najedź myszką na ikonę dowolnej aplikacji, aby zobaczyć jej nazwę</v:String>
+    
     <!--#region Load Window -->
     <v:String x:Key="title_load">Ładowanie</v:String>
     <v:String x:Key="step1_load">Przesyłanie profilu</v:String>
@@ -13,6 +14,7 @@
     <v:String x:Key="step6_load">Sprawdzanie połączenia</v:String>
     <v:String x:Key="step7_load">Inicjalizacja</v:String>
     <!--#endregion-->
+    
     <!--#region Message Window -->
     <v:String x:Key="title_message">Ups..</v:String>
     <v:String x:Key="part1_message">Tworzenie kopii programu jest</v:String>
@@ -25,6 +27,7 @@
     <v:String x:Key="part2_nosupport_message">niemożliwe,</v:String>
     <v:String x:Key="part3_nosupport_message">GTweak zostanie zamknięty, aby zapobiec krytycznym błędom.</v:String>
     <!--#endregion-->
+    
     <!--#region Notification Window -->
     <v:String x:Key="title_win_noty">Powiadomienie - GTweak</v:String>
     <v:String x:Key="title_warn_noty">Uwaga</v:String>
@@ -64,6 +67,7 @@
     <v:String x:Key="success_reg_exporter_noty">Plik rejestru zapisany pomyślnie</v:String>
     <v:String x:Key="error_reg_exporter_noty">Wystąpił błąd podczas zapisywania pliku rejestru</v:String>
     <!--#endregion-->
+    
     <!--#region Main Window -->
     <v:String x:Key="rbtn_utils_main">Narzędzia</v:String>
     <v:String x:Key="rbtn_conf_main">Prywatność</v:String>
@@ -80,14 +84,16 @@
     <v:String x:Key="cmbox_lang_main">Język interfejsu:</v:String>
     <v:String x:Key="btn_import">Importuj</v:String>
     <v:String x:Key="btn_export">Eksportuj</v:String>
-    <v:String x:Key="btn_selfremove">Samousunięcie</v:String>
+    <v:String x:Key="btn_selfremove">Deinstalacja</v:String>
     <!--#endregion-->
+    
     <!--#region Import Window -->
     <v:String x:Key="title_import">Importowanie modyfikacji</v:String>
     <v:String x:Key="wait_import">To zajmie trochę czasu</v:String>
     <v:String x:Key="warn_import">Nie należy wymuszać zamykania okna</v:String>
     <v:String x:Key="file_import">Plik</v:String>
     <!--#endregion-->
+    
     <!--#region Update Window -->
     <v:String x:Key="title_win_update">Aktualizacja - GTweak</v:String>
     <v:String x:Key="title_update">Znaleziono aktualizację</v:String>
@@ -96,6 +102,7 @@
     <v:String x:Key="noty_update">Proszę czekać na zakończenie pobierania</v:String>
     <v:String x:Key="connection_update">Łączenie z serwerem</v:String>
     <!--#endregion-->
+    
     <!--#region Confidentiality Page -->
     <v:String x:Key="tgl1_conf">Identyfikator reklamowy i reklama ukierunkowana</v:String>
     <v:String x:Key="tgl2_conf">Wszystkie rodzaje synchronizacji danych</v:String>
@@ -134,6 +141,7 @@
     <v:String x:Key="tgl17_desc_conf">Usługa odpowiedzialna za zbieranie i przesyłanie danych o systemie i jego użytkowaniu, lub funkcja niezwiązana z działaniem sterownika karty graficznej, jest bezużyteczna. Dlaczego i jakie informacje zbiera NVIDIA, wie tylko ona sama. Ale fakt, że nie przynosi to nic przydatnego użytkownikowi końcowemu, jest oczywisty.</v:String>
     <v:String x:Key="tgl18_desc_conf">Modyfikacja wyłącza funkcję UAR (User Activity Recording) – system kolejno rejestrujący każdą akcję wykonywaną na komputerze: od zrzutów ekranu i wpisywania tekstu po uruchamianie programów i nawet dostęp do kamery przy zablokowanym ekranie, i wiele więcej.</v:String>
     <!--#endregion-->
+    
     <!--#region Interface Page -->
     <v:String x:Key="tgl1_intf">Standardowy kolor zaznaczenia kursora</v:String>
     <v:String x:Key="tgl2_intf">Standardowy kolor podpowiedzi</v:String>
@@ -204,6 +212,7 @@
     <v:String x:Key="tgl33_desc_intf">Domyślnie Windows ukrywa rozszerzenia plików, co czyni widok Eksploratora mniej zatłoczonym. W razie potrzeby możesz włączyć wyświetlanie rozszerzeń plików za pomocą tej modyfikacji, oszczędzając czas na szukanie. Uwaga, ekran może zamigać.</v:String>
     <v:String x:Key="tgl34_desc_intf">Na niektórych urządzeniach jasność ekranu może zmieniać się spontanicznie w zależności od wyświetlanej zawartości. Jeśli wyłączenie HDR, dynamicznej jasności i ustawień zasilania nie rozwiązuje problemu (ten problem jest szczególnie częsty na laptopach na baterii), możesz spróbować tej modyfikacji – wymusza wyłączenie automatycznej regulacji jasności na poziomie systemu. Ręczna regulacja jasności pozostaje dostępna.</v:String>
     <!--#endregion-->
+    
     <!--#region Packages Page -->
     <v:String x:Key="warn_part1_pkg">Aplikacje zostaną usunięte</v:String>
     <v:String x:Key="warn_part2_pkg">na zawsze,</v:String>
@@ -268,6 +277,7 @@
     <v:String x:Key="btn_сancel">Anuluj</v:String>
     <v:String x:Key="btn_delete">Usuń</v:String>
     <!--#endregion-->
+    
     <!--#region Services Page -->
     <v:String x:Key="tgl1_svc">Usługi związane z wyszukiwaniem Windows</v:String>
     <v:String x:Key="tgl2_svc">Usługi związane z Xbox</v:String>
@@ -328,6 +338,7 @@
     <v:String x:Key="tgl28_desc_svc">Wyłącz, jeśli nie używasz wbudowanego systemu wirtualizacji. Nie wpływa na działanie VirtualBox i podobnych.</v:String>
     <v:String x:Key="tgl29_desc_svc">Wyłącz, jeśli nie używasz sparowanych urządzeń i nie instalujesz aplikacji ze Sklepu Windows zdalnie. Te usługi obsługują Centrum powiadomień ze sparowanymi urządzeniami, przetwarzają żądania push, pozwalają Windows wykryć Twój smartfon dla aplikacji „Twój telefon”, automatycznie się z nim łączyć i wyświetlać jego wiadomości i zdarzenia w Centrum akcji. W Windows 10 po wyłączeniu Centrum powiadomień może przestać się otwierać.</v:String>
     <!--#endregion-->
+    
     <!--#region System Page -->
     <v:String x:Key="slider1_sys">Prędkość wskaźnika myszy:</v:String>
     <v:String x:Key="slider2_sys">Opóźnienie powtarzania klawiszy:</v:String>
@@ -394,6 +405,7 @@
     <v:String x:Key="tgl27_desc_sys">Dla uczestników Windows Insider te zadania powinny pozostać włączone. Jednak jeśli nie jesteś w programie, wszystkie powiązane zadania stają się niepotrzebnym obciążeniem: zużywają zasoby systemu, generują bezużyteczne logi i mogą inicjować połączenia telemetrii bez korzyści. Wyłączenie ich może poprawić czas uruchamiania i ogólną wydajność systemu, eliminując niepotrzebne kanały zbierania danych eksperymentalnych.</v:String>
     <v:String x:Key="tgl28_desc_sys">Jeśli masz SSD, wyłączenie defragmentacji i optymalizacji plików startowych, które są skuteczne tylko dla dysków twardych (HDD), pomaga wydłużyć żywotność dysku. Jednocześnie funkcja optymalizacji TRIM nadal działa: informuje kontroler SSD, które bloki danych nie są już używane i czyści je, utrzymując stabilną prędkość i długowieczność dysku.</v:String>
     <!--#endregion-->
+    
     <!--#region System Information Page -->
     <v:String x:Key="title_win_name_sysinfo">System operacyjny:</v:String>
     <v:String x:Key="title_win_ver_sysinfo">Wersja:</v:String>
@@ -420,6 +432,7 @@
     <v:String x:Key="no_device_information_sysinfo">Nie znaleziono informacji o urządzeniu</v:String>
     <v:String x:Key="unknown_information_sysinfo">Nie wykryto</v:String>
     <!--#endregion-->
+    
     <!--#region More Page -->
     <v:String x:Key="advice_part1_more">Zdecydowanie</v:String>
     <v:String x:Key="advice_part2_more">zaleca się</v:String>

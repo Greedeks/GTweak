@@ -266,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Languages\pl\Localize.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Languages\pt-br\Localize.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
