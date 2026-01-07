@@ -125,12 +125,109 @@ Wymagana platforma: .NET Framework 4.8
 - FirewallAPI
 
 ## Tłumaczenia ❤️
-<b>Specjalne podziękowania</b> dla osób zaangażowanych w tłumaczenia.
+<p>
+  <b>Specjalne podziękowania</b> dla niesamowitych osób za wkład w tłumaczenia
+</p>
 
-*(zachowano oryginalną tabelę autorów)*
+<table>
+  <tr>
+    <td align="center" width="180">
+      <a href="https://github.com/VenusGirl">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/53147200?v=4&h=70&w=70&fit=cover&mask=circle" alt="VenusGirl"/>
+      </a><br/>
+      <b>VenusGirl</b><br/>
+      <i>한국어</i>
+    </td>
+    <td align="center" width="180">
+      <a href="https://github.com/Kopejkin">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/172585094?v=4&h=70&w=70&fit=cover&mask=circle" alt="Kopejkin"/>
+      </a><br/>
+      <b>Kopejkin</b><br/>
+      <i>Українська</i>
+    </td>
+    <td align="center" width="180">
+      <a href="https://github.com/Zephyris-Pro">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/200662396?v=4&h=70&w=70&fit=cover&mask=circle" alt="Zephyris"/>
+      </a><br/>
+      <b>Zephyris</b><br/>
+      <i>Français, Italiano</i>
+    </td>
+    <td align="center" width="180">
+      <a href="https://github.com/marcolinojunior">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/63563268?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
+      </a><br/>
+      <b>Marcos Evangelista</b><br/>
+      <i>Português Brasileiro</i>
+    </td>
+    <td align="center" width="180">
+      <a href="https://github.com/JohnFowler58">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="John Fowler"/>
+      </a><br/>
+      <b>John Fowler</b><br/>
+      <i>Magyar</i>
+    </td>
+    <td align="center" width="180">
+      <a href="https://github.com/seba99317">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/22873964?v=4&h=70&w=70&fit=cover&mask=circle" alt="Seba99317"/>
+      </a><br/>
+      <b>Seba99317</b><br/>
+      <i>Polski</i>
+    </td>
+  </tr>
+</table>
+
+---
+
+### Jak przetłumaczyć program 📝
+
+**I. Zgłoszenie Pull Request**
+
+- Zrób fork repozytorium: https://github.com/Greedeks/GTweak/fork
+- Pobierz bazowy plik językowy `Localize.xaml` (EN) lub skopiuj go z istniejących tłumaczeń:
+  https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages
+- Przetłumacz plik i zapisz go w folderze nazwanym zgodnie z kodem języka (np. `pl`)
+
+Dla wariantów regionalnych użyj formatu `język-region`, np. `pt-br`, `zh-cn`.
+
+Struktura folderów:
+
+```text
+.Source
+└── GTweak
+    └── Languages
+        ├── en
+        ├── ru
+        └── pl
+```
+
+- Dodaj nazwę języka (w języku ojczystym) do pliku:
+  https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml
+
+⚠️ Koniecznie zapoznaj się z komentarzem NOTE w tym pliku.
+
+- Wyślij **Pull Request** ze zmianami
+
+---
+
+**II. Zgłoszenie przez Issue**
+
+Jeżeli nie korzystasz z GitHub / Git:
+
+- Utwórz zgłoszenie typu *Feature Request*:
+  https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation
+- Podaj kod języka (np. `pl`)
+- Podaj nazwę języka zapisaną w języku ojczystym
+- Dołącz przetłumaczony plik `Localize.xaml`
+
+> [!NOTE]
+> Tłumaczenie może być niekompletne, jeśli w programie pojawiły się nowe funkcje. W takim przypadku brakujące elementy będą wyświetlane w języku angielskim.
+
+---
 
 ## Kontakt
-<img src="https://avatars.githubusercontent.com/u/82948926?s=400" width="100px;"/>
+<img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
-[GitHub](https://github.com/Greedeks) • [Telegram](https://t.me/Greedeks) • [Steam](https://steamcommunity.com/id/greedeks/)
+[![GitHub](https://img.shields.io/badge/Github-gray?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Greedeks)
+[![Telegram](https://img.shields.io/badge/Telegram-1DA1F2?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/Greedeks)
+[![Steam](https://img.shields.io/badge/STEAM-042430?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/greedeks/)
 
