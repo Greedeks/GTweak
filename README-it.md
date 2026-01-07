@@ -37,7 +37,7 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Bandiera Corea" width="40">
 </a>
 
-<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+<a href="https://github.com/Greedeks/GTweak/blob/main/README-pl.md">
     <img src="https://cdn-icons-png.flaticon.com/128/197/197529.png" alt="Poland Flag" width="40">
 </a>
 

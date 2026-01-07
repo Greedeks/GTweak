@@ -78,27 +78,27 @@
 <h2> Zrzuty ekranu 📷</h2>
 <details>
   <summary> Narzędzia </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Utils.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/Utils.png"/>
 </details>
 <details>
   <summary> Prywatność </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/Confidentiality.png"/>
 </details>
 <details>
   <summary> Interfejs </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/Interface.png"/>
 </details>
 <details>
   <summary> Aplikacje </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/Applications.png"/>
 </details>
 <details>
   <summary> Usługi </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/Services.png"/>
 </details>
 <details>
   <summary> System </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/System.png"/>
 </details>
 
 <h2> Wymagania systemowe</h2>
@@ -109,20 +109,25 @@
 Obsługiwany system: Windows 10 (build 18362.116) i nowsze
 Wymagana platforma: .NET Framework 4.8
 ```
+</br>
 
 > [!WARNING]
 > Przed użyciem programu wyłącz antywirusa. Jeśli korzystasz z Windows Defender, dodaj aplikację do wyjątków.
+</br>
 
 ## Pakiety NuGet
-- TaskScheduler
-- Costura.Fody
-- XamlRadialProgressBar
-- Newtonsoft.Json
-- Ookii.Dialogs.Wpf
-- WPF-UI
+
+- [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
+- [Costura](https://github.com/Fody/Costura)
+- [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+- [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
+- [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
 ## Referencje
 - FirewallAPI
+
+</br>
 
 ## Tłumaczenia ❤️
 <p>
@@ -176,53 +181,7 @@ Wymagana platforma: .NET Framework 4.8
   </tr>
 </table>
 
----
-
-### Jak przetłumaczyć program 📝
-
-**I. Zgłoszenie Pull Request**
-
-- Zrób fork repozytorium: https://github.com/Greedeks/GTweak/fork
-- Pobierz bazowy plik językowy `Localize.xaml` (EN) lub skopiuj go z istniejących tłumaczeń:
-  https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages
-- Przetłumacz plik i zapisz go w folderze nazwanym zgodnie z kodem języka (np. `pl`)
-
-Dla wariantów regionalnych użyj formatu `język-region`, np. `pt-br`, `zh-cn`.
-
-Struktura folderów:
-
-```text
-.Source
-└── GTweak
-    └── Languages
-        ├── en
-        ├── ru
-        └── pl
-```
-
-- Dodaj nazwę języka (w języku ojczystym) do pliku:
-  https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml
-
-⚠️ Koniecznie zapoznaj się z komentarzem NOTE w tym pliku.
-
-- Wyślij **Pull Request** ze zmianami
-
----
-
-**II. Zgłoszenie przez Issue**
-
-Jeżeli nie korzystasz z GitHub / Git:
-
-- Utwórz zgłoszenie typu *Feature Request*:
-  https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation
-- Podaj kod języka (np. `pl`)
-- Podaj nazwę języka zapisaną w języku ojczystym
-- Dołącz przetłumaczony plik `Localize.xaml`
-
-> [!NOTE]
-> Tłumaczenie może być niekompletne, jeśli w programie pojawiły się nowe funkcje. W takim przypadku brakujące elementy będą wyświetlane w języku angielskim.
-
----
+</br>
 
 ## Kontakt
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
