@@ -178,6 +178,8 @@ Telepített platform: .NET Framework 4.8
       <b>John Fowler</b><br/>
       <i>Magyar</i>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="180">
       <a href="https://github.com/seba99317">
         <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/22873964?v=4&h=70&w=70&fit=cover&mask=circle" alt="Seba99317"/>
