@@ -37,6 +37,10 @@
     <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Korean Flag" width="40">
 </a>
 
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/197/197529.png" alt="Poland Flag" width="40">
+</a>
+
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md">
     <img src="https://cdn-icons-png.flaticon.com/128/9906/9906449.png" alt="Brazilian Flag" width="40">
 </a>
@@ -176,6 +180,13 @@
       </a><br/>
       <b>John Fowler</b><br/>
       <i>Magyar</i>
+    </td>
+    <td align="center" width="180">
+      <a href="https://github.com/seba99317">
+        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/22873964?v=4&h=70&w=70&fit=cover&mask=circle" alt="Seba99317"/>
+      </a><br/>
+      <b>Seba99317</b><br/>
+      <i>Polski</i>
     </td>
   </tr>
 </table>
