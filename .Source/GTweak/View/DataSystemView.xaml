@@ -55,10 +55,10 @@
                 <TextBlock Text="CPU" Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource TextDefault}" Margin="0,15,0,0"/>
             </Grid>
 
-            <uc:FlowColumnPanel Grid.Column="1" ContentAlignment="Center" HorizontalSpacing="0" VerticalSpacing="0" VerticalAlignment="Top" Margin="0,15,0,0">
+            <uc:FlowColumnPanel Grid.Column="1" ContentAlignment="Center" HorizontalSpacing="0" VerticalSpacing="0" VerticalAlignment="Top" Margin="20,15,20,0">
                
                 <StackPanel Orientation="Horizontal">
-                    <Border Width="70" Height="70" HorizontalAlignment="Right">
+                    <Border Width="70" Height="70" HorizontalAlignment="Right" Margin="0,0,15,0">
                         <Border.Background>
                             <ImageBrush ImageSource="{Binding DisplayWallpaper, TargetNullValue={StaticResource Icon_LogoWin}, Mode=OneWay}" Stretch="UniformToFill"/>
                         </Border.Background>
@@ -69,8 +69,8 @@
                             <DropShadowEffect Opacity="0.5" BlurRadius="10" ShadowDepth="10"/>
                         </Border.Effect>
                     </Border>
-                    <StackPanel Margin="15,0,0,0" Orientation="Vertical">
-                        <TextBlock Style="{StaticResource TextDefault}" FontSize="14pt" TextWrapping="Wrap" VerticalAlignment="Center" Height="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource TextDefault}" FontSize="14pt" TextWrapping="Wrap" VerticalAlignment="Center" Height="Auto" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=uc:FlowColumnPanel}}">
                             <Run Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [OSName].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
                             <Run Foreground="{StaticResource Brush_Inactive}" Text="{Binding [OSVersion].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                         </TextBlock>
