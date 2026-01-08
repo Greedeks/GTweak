@@ -405,6 +405,15 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
+
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", 0, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableInstallerDetection", 0, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 0, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableSecureUIAPaths", 0, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableVirtualization", 0, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "FilterAdministratorToken", 0, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", 0, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Run", Path.GetFileNameWithoutExtension(PathLocator.Executable.DisablingWD), $@"""{PathLocator.Executable.DisablingWD}""", RegistryValueKind.String);
         }
 
         private static void ManageExclusions(bool isDisable)
@@ -417,7 +426,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         private static void TerminateProcess()
         {
-            string[] processes = { "smartscreen", "mpdefendercoreservice", "msmpeng", "securityhealthservice", "securityhealthsystray", "securityhealthui", "wuauserv", "searchui", "sechealthui", "runtimebroker", "msedge", "ssoncom", "usocoreworker", "defenderbootstrapper", "configsecuritypolicy", "dlpuseragent", "lsass", "mpam-d", "mpam-fe", "mpam-fe_bd", "mpas-d", "mpas-fe", "mpas-fe_bd", "mpav-d", "mpav-fe", "mpav-fe_bd", "mpcmdrun", "mpcopyaccelerator", "mpdlpcmd", "mpdlpservice", "mpextms", "mpsigstub", "mrt", "msmpengcp", "mssense", "nissrv", "offlinescannershell", "securekernel", "securityhealthhost", "senseap", "senseaptoast", "sensecm", "sensegpparser", "senseidentity", "senseimdscollector", "senseir", "sensendr", "sensesampleuploader", "sensetvm", "sensece", "sgrmbroker", "healthattestationclientagent" };
+            string[] processes = { "smartscreen", "mpdefendercoreservice", "msmpeng", "securityhealthservice", "securityhealthsystray", "securityhealthui", "wuauserv", "searchui", "sechealthui", "configsecuritypolicy", "runtimebroker", "msedge", "ssoncom", "usocoreworker", "defenderbootstrapper", "configsecuritypolicy", "dlpuseragent", "lsass", "mpam-d", "mpam-fe", "mpam-fe_bd", "mpas-d", "mpas-fe", "mpas-fe_bd", "mpav-d", "mpav-fe", "mpav-fe_bd", "mpcmdrun", "mpcopyaccelerator", "mpdlpcmd", "mpdlpservice", "mpextms", "mpsigstub", "mrt", "msmpengcp", "mssense", "nissrv", "offlinescannershell", "securekernel", "securityhealthhost", "senseap", "senseaptoast", "sensecm", "sensegpparser", "senseidentity", "senseimdscollector", "senseir", "sensendr", "sensesampleuploader", "sensetvm", "sensece", "sgrmbroker", "healthattestationclientagent" };
             CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
         }
 

@@ -5,11 +5,11 @@ using System.Windows;
 [assembly: AssemblyTitle("GTweak")]
 [assembly: AssemblyDescription("Portable Tool for an Ideal Windows Setup")]
 [assembly: AssemblyProduct("GTweak")]
-[assembly: AssemblyCopyright("© 2024-2025 Greedeks")]
+[assembly: AssemblyCopyright("© 2024-2026 Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
-[assembly: AssemblyInformationalVersion("Build: 5.3.7")]
-[assembly: AssemblyVersion("5.3.68.152")]
-[assembly: AssemblyFileVersion("5.3.68.152")]
+[assembly: AssemblyInformationalVersion("Build: 5.3.8")]
+[assembly: AssemblyVersion("5.3.40.875")]
+[assembly: AssemblyFileVersion("5.3.40.875")]
 
 [assembly: ComVisible(false)]
 

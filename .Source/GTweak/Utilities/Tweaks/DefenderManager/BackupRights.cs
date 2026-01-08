@@ -43,50 +43,60 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Windows Defender/Operational", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Security-Diagnostic/Operational", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceConfidence/Analytic", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceGuard/Operational", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceGuard/Verbose", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows defender\CoreService", Registry.LocalMachine },
+            { @"SOFTWARE\Microsoft\Windows defender\Windows defender Exploit Guard", Registry.LocalMachine },
             { @"SOFTWARE\Microsoft\Windows Defender\Cloud", Registry.LocalMachine },
             { @"Software\Microsoft\Edge", Registry.CurrentUser },
         };
 
         internal static void ExportRights()
         {
-            if (Directory.Exists(PathLocator.Folders.DefenderBackup) == false)
+            try
             {
-                try
+                Directory.CreateDirectory(PathLocator.Folders.DefenderBackup);
+
+                Dictionary<string, Dictionary<string, object>> allValues = new Dictionary<string, Dictionary<string, object>>();
+                Dictionary<string, string> aclDataDict = new Dictionary<string, string>();
+
+                if (_storageRegPaths == null || _storageRegPaths.Count == 0)
                 {
-                    Directory.CreateDirectory(PathLocator.Folders.DefenderBackup);
+                    return;
+                }
 
-                    var allValues = new Dictionary<string, Dictionary<string, object>>();
-                    var aclDataDict = new Dictionary<string, string>();
+                foreach (var entry in _storageRegPaths)
+                {
+                    string path = entry.Key;
+                    RegistryKey baseKey = entry.Value;
 
-                    foreach (var entry in _storageRegPaths)
+                    using RegistryKey key = baseKey.OpenSubKey(path, false);
+                    if (key == null)
                     {
-                        string path = entry.Key;
-                        RegistryKey baseKey = entry.Value;
+                        continue;
+                    }
 
-                        using RegistryKey key = baseKey.OpenSubKey(path, false);
-                        if (key == null)
-                        {
-                            continue;
-                        }
+                    Dictionary<string, object> values = new Dictionary<string, object>();
+                    foreach (string valueName in key.GetValueNames())
+                    {
+                        values[valueName] = key.GetValue(valueName);
+                    }
+                    allValues[path] = values;
 
-                        var values = new Dictionary<string, object>();
-                        foreach (string valueName in key.GetValueNames())
-                        {
-                            values[valueName] = key.GetValue(valueName);
-                        }
-
-                        allValues[path] = values;
-
+                    try
+                    {
                         RegistrySecurity security = key.GetAccessControl();
                         string aclData = security.GetSecurityDescriptorSddlForm(AccessControlSections.All);
                         aclDataDict[path] = aclData;
                     }
-
-                    File.WriteAllText(PathLocator.Files.BackupDataJson, JsonConvert.SerializeObject(allValues, Formatting.Indented));
-                    File.WriteAllText(PathLocator.Files.BackupRightsAcl, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
+                File.WriteAllText(PathLocator.Files.BackupDataJson, JsonConvert.SerializeObject(allValues, Formatting.Indented));
+                File.WriteAllText(PathLocator.Files.BackupRightsAcl, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
             }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         internal static void ImportRights()

@@ -1,7 +1,7 @@
-﻿namespace GTweak.Properties {
+namespace GTweak.Properties {
     using System;
     
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -38,6 +38,13 @@
         internal static byte[] Blank {
             get {
                 object obj = ResourceManager.GetObject("Blank", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] DisablingWD {
+            get {
+                object obj = ResourceManager.GetObject("DisablingWD", resourceCulture);
                 return ((byte[])(obj));
             }
         }

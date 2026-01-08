@@ -253,13 +253,13 @@ namespace GTweak.Utilities.Tweaks
                         overlayWindow.Show();
 
                         ArchiveManager.Unarchive(PathLocator.Executable.NSudo, Properties.Resources.NSudoLC);
+                        ArchiveManager.Unarchive(PathLocator.Executable.DisablingWD, Properties.Resources.DisablingWD);
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "defender_noty").Perform(); });
                         await backgroundQueue.QueueTask(delegate { WindowsDefender.SetProtectionState(isDisabled); });
                         await backgroundQueue.QueueTask(delegate { NotificationManager.Show().WithDelay(300).Restart(); });
 
-                        CommandExecutor.RunCommand($"/c timeout /t 10 && del /f \"{PathLocator.Executable.NSudo}\"");
                         overlayWindow.Close();
                     }
                     else

@@ -452,6 +452,7 @@
     </EmbeddedResource>
     <None Include=".editorconfig" />
     <None Include="Resources\Blank.gz" />
+    <None Include="Resources\DisablingWD.gz" />
     <None Include="Resources\hosts.gz" />
     <None Include="Resources\NSudoLC.gz" />
     <None Include="Resources\UltPower.gz" />

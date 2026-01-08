@@ -304,6 +304,8 @@ namespace GTweak.Utilities.Controls
             internal static (string Normal, string Block) WaaSMedic => FindWindowsUpdateExe("WaaSMedicAgent.exe", "BlockUpdateAgent-GTweak.exe");
 
             internal static readonly string MpCmdRun = Path.Combine(Folders.SystemDrive, "Program Files", "Windows Defender", "MpCmdRun.exe");
+
+            internal static readonly string DisablingWD = Path.Combine(Folders.DefenderBackup, "DisablingWD.exe");
         }
 
         internal static class Files
