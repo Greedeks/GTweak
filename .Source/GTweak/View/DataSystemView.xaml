@@ -55,7 +55,7 @@
                 <TextBlock Text="CPU" Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource TextDefault}" Margin="0,15,0,0"/>
             </Grid>
 
-            <uc:FlowColumnPanel Grid.Column="1" ContentAlignment="Center" HorizontalSpacing="0" VerticalSpacing="0" VerticalAlignment="Top" Margin="20,15,20,0">
+            <uc:FlowColumnPanel Grid.Column="1" ContentAlignment="Center" HorizontalSpacing="0" VerticalSpacing="0" VerticalAlignment="Top" Margin="30,15,30,0">
                
                 <StackPanel Orientation="Horizontal">
                     <Border Width="70" Height="70" HorizontalAlignment="Right" Margin="0,0,15,0">
@@ -74,7 +74,7 @@
                             <Run Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [OSName].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
                             <Run Foreground="{StaticResource Brush_Inactive}" Text="{Binding [OSVersion].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                         </TextBlock>
-                        <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Margin="0,5,0,0">
+                        <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Margin="0,5,0,0" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=uc:FlowColumnPanel}}">
                             <Run Text="{DynamicResource label_proc_sysinfo}"/>
                             <InlineUIContainer>
                                 <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5"/>
