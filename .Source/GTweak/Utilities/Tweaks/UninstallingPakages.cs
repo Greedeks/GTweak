@@ -288,7 +288,7 @@ namespace GTweak.Utilities.Tweaks
 
                         static void RemoveDirectory(string path)
                         {
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\" & icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{path}\" /grant {Environment.UserName}:F & rd /s /q \"{path}\"");
+                            CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\" /r /d y & icacls \"{path}\" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 & icacls \"{path}\" /grant {Environment.UserName}:F /t & rd /s /q \"{path}\"");
 
                             for (int i = 0; Directory.Exists(path) && i < 10; i++)
                             {
@@ -309,6 +309,7 @@ namespace GTweak.Utilities.Tweaks
                                 continue;
                             }
 
+                            CommandExecutor.RunCommandAsTrustedInstaller("/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
                             RemoveDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder));
                         }
 

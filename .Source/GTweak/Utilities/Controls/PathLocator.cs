@@ -289,8 +289,6 @@ namespace GTweak.Utilities.Controls
 
             internal static readonly string OneDrive = FindExecutablePath("onedrivesetup.exe");
 
-            internal static readonly string NSudo = Path.Combine(Folders.DefenderBackup, "NSudoLC.exe");
-
             internal static (string Normal, string Block) UsoClient =>
             (
                 Path.Combine(Environment.SystemDirectory, "usoclient.exe"),
@@ -306,6 +304,8 @@ namespace GTweak.Utilities.Controls
             internal static readonly string MpCmdRun = Path.Combine(Folders.SystemDrive, "Program Files", "Windows Defender", "MpCmdRun.exe");
 
             internal static readonly string DisablingWD = Path.Combine(Folders.DefenderBackup, "DisablingWD.exe");
+
+            internal static readonly string NSudo = Path.Combine(Folders.DefenderBackup, "NSudoLC.exe");
         }
 
         internal static class Files

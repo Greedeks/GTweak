@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
@@ -191,19 +192,18 @@ namespace GTweak.Utilities.Maintenance
             if (shouldRemoveWinOld)
             {
                 string dir = PathLocator.Folders.WindowsOld;
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{dir}\"");
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{dir}\" /grant {Environment.UserName}:F");
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{dir}\"");
 
-                Thread.Sleep(2000);
+                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{dir}\" /r /d y & icacls \"{dir}\" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 & icacls \"{dir}\" /grant {Environment.UserName}:F /t & rd /s /q \"{dir}\"");
 
-                if (Directory.Exists(dir))
+                for (int i = 0; Directory.Exists(dir) && i < 10; i++)
                 {
-                    try { Directory.Delete(dir, true); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    try { Directory.Delete(dir, true); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
                     TakingOwnership.GrantAdministratorsAccess(dir, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                     CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{dir}\"");
-                    Thread.Sleep(2000);
+
+                    Thread.Sleep(500);
                 }
             }
 

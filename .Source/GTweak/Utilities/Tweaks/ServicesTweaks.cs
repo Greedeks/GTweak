@@ -435,32 +435,22 @@ namespace GTweak.Utilities.Tweaks
                     {
                         CommandExecutor.RunCommandAsTrustedInstaller("/c net stop wuauserv & net stop bits & net stop cryptSvc & net stop RuntimeBroker");
 
-                        foreach (string name in new[] { "usocoreworker", "RuntimeBroker", "msedge", "MicrosoftEdgeUpdate", "edgeupdate" })
-                        {
-                            foreach (Process process in Process.GetProcessesByName(name))
-                            {
-                                process.Kill();
-                                process.WaitForExit(1000);
-                            }
-                        }
+                        string[] processes = { "usocoreworker", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "runtimebroker", "widgets" };
+                        CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
 
                         foreach (string path in new[] { $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\Download", $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\DataStore", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
                         {
-                            if (Directory.Exists(path))
+                            CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\" /r /d y & icacls \"{path}\" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 & icacls \"{path}\" /grant {Environment.UserName}:F /t & rd /s /q \"{path}\"");
+
+                            for (int i = 0; Directory.Exists(path) && i < 10; i++)
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\"");
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName}:F");
+                                try { Directory.Delete(path, true); }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
+                                TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
                                 CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
 
-                                Thread.Sleep(2000);
-
-                                if (Directory.Exists(path))
-                                {
-                                    try { Directory.Delete(path, true); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                                    TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                                    CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
-                                }
+                                Thread.Sleep(500);
                             }
                         }
 
