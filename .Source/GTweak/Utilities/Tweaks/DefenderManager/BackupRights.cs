@@ -6,6 +6,7 @@ using GTweak.Utilities.Controls;
 using GTweak.Utilities.Managers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
@@ -27,6 +28,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             [@"SYSTEM\CurrentControlSet\Services\MsSecWfp"] = RegistryHive.LocalMachine,
             [@"SYSTEM\CurrentControlSet\Services\webthreatdefsvc"] = RegistryHive.LocalMachine,
             [@"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\wscsvc"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\WdFilter"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\WdFilter\Instances\WdFilter Instance"] = RegistryHive.LocalMachine,
             [@"SYSTEM\CurrentControlSet\Control\CI"] = RegistryHive.LocalMachine,
             [@"SYSTEM\CurrentControlSet\Control\CI\Policy"] = RegistryHive.LocalMachine,
             [@"SYSTEM\CurrentControlSet\Control\CI\State"] = RegistryHive.LocalMachine,
@@ -78,7 +82,24 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             [@"SOFTWARE\Microsoft\Windows Advanced Threat Protection"] = RegistryHive.LocalMachine,
             [@"SOFTWARE\Microsoft\Windows Defender Security Center\Notifications"] = RegistryHive.LocalMachine,
             [@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MsMpEng.exe"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\runtimebroker.exe"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MRT.exe"] = RegistryHive.LocalMachine,
         };
+
+        private sealed class RegistryValueBackup
+        {
+            internal string Kind { get; set; }
+            internal object Value { get; set; }
+        }
+
+        private class FileRightsInfo
+        {
+            internal string OriginalPath { get; set; }
+            internal string Owner { get; set; }
+            internal string Permissions { get; set; }
+            internal string Sddl { get; set; }
+        }
 
         internal static void ExportRights()
         {
@@ -86,8 +107,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             {
                 Directory.CreateDirectory(PathLocator.Folders.DefenderBackup);
 
-                Dictionary<string, Dictionary<string, object>> allValues = new Dictionary<string, Dictionary<string, object>>();
-                Dictionary<string, string> aclDataDict = new Dictionary<string, string>();
+                Dictionary<string, Dictionary<string, RegistryValueBackup>> allValues = new Dictionary<string, Dictionary<string, RegistryValueBackup>>(StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, string> aclDataDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
                 if (_storageRegPaths == null || _storageRegPaths.Count == 0)
                 {
@@ -99,48 +120,68 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                     string path = entry.Key;
                     RegistryHive hive = entry.Value;
 
-                    try
+                    foreach (var view in new[] { RegistryView.Registry64, RegistryView.Registry32 })
                     {
-                        using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Registry64);
-                        using RegistryKey key = baseKey.OpenSubKey(path, RegistryKeyPermissionCheck.ReadSubTree, RegistryRights.ReadKey | RegistryRights.ReadPermissions);
-
-                        if (key == null)
-                        {
-                            continue;
-                        }
-                        Dictionary<string, object> values = new Dictionary<string, object>();
-                        foreach (string valueName in key.GetValueNames())
-                        {
-                            object val = key.GetValue(valueName);
-                            if (val is byte[] byteVal)
-                            {
-                                values[valueName] = Convert.ToBase64String(byteVal);
-                            }
-                            else
-                            {
-                                values[valueName] = val;
-                            }
-                        }
-                        allValues[path] = values;
+                        string keyId = $"{view}:{path}";
 
                         try
                         {
-                            RegistrySecurity security = key.GetAccessControl();
-                            string aclData = security.GetSecurityDescriptorSddlForm(AccessControlSections.All);
-                            aclDataDict[path] = aclData;
+                            using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, view);
+                            using RegistryKey key = baseKey.OpenSubKey(path, RegistryKeyPermissionCheck.ReadSubTree, RegistryRights.ReadKey | RegistryRights.ReadPermissions);
+
+                            if (key == null)
+                            {
+                                continue;
+                            }
+
+                            var values = new Dictionary<string, RegistryValueBackup>(StringComparer.Ordinal);
+
+                            foreach (string valueName in key.GetValueNames())
+                            {
+                                try
+                                {
+                                    RegistryValueKind kind = key.GetValueKind(valueName);
+                                    object val = key.GetValue(valueName);
+
+                                    if (val is byte[] bytes)
+                                    {
+                                        values[valueName] = new RegistryValueBackup
+                                        {
+                                            Kind = kind.ToString(),
+                                            Value = Convert.ToBase64String(bytes)
+                                        };
+                                    }
+                                    else
+                                    {
+                                        values[valueName] = new RegistryValueBackup
+                                        {
+                                            Kind = kind.ToString(),
+                                            Value = val
+                                        };
+                                    }
+                                }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                            }
+
+                            allValues[keyId] = values;
+
+                            try
+                            {
+                                RegistrySecurity security = key.GetAccessControl(AccessControlSections.All);
+                                string aclData = security.GetSecurityDescriptorSddlForm(AccessControlSections.All);
+                                aclDataDict[keyId] = aclData;
+                            }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
 
                 File.WriteAllText(PathLocator.Files.BackupDataJson, JsonConvert.SerializeObject(allValues, Formatting.Indented));
                 File.WriteAllText(PathLocator.Files.BackupRightsAcl, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
-
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
-
 
         internal static void ImportRights()
         {
@@ -148,52 +189,84 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             {
                 try
                 {
-                    Dictionary<string, Dictionary<string, object>> allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(File.ReadAllText(PathLocator.Files.BackupDataJson));
+                    Dictionary<string, Dictionary<string, RegistryValueBackup>> allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, RegistryValueBackup>>>(File.ReadAllText(PathLocator.Files.BackupDataJson));
                     Dictionary<string, string> aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(PathLocator.Files.BackupRightsAcl));
 
-                    foreach (var entry in _storageRegPaths)
+                    if (allValues == null)
                     {
-                        string path = entry.Key;
-                        RegistryHive hive = entry.Value;
+                        return;
+                    }
+
+                    foreach (var kv in allValues)
+                    {
+                        string keyId = kv.Key;
+                        string[] parts = keyId.Split(new[] { ':' }, 2);
+                        if (parts.Length != 2)
+                        {
+                            continue;
+                        }
+
+                        if (!Enum.TryParse(parts[0], out RegistryView view))
+                        {
+                            continue;
+                        }
+
+                        string path = parts[1];
+
+                        if (!_storageRegPaths.TryGetValue(path, out RegistryHive hive))
+                        {
+                            hive = RegistryHive.LocalMachine;
+                        }
 
                         try
                         {
-                            using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Registry64);
-                            using RegistryKey key = baseKey.OpenSubKey(path, true) ?? baseKey.CreateSubKey(path);
+                            using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, view);
+                            using RegistryKey key = baseKey.CreateSubKey(path, true);
 
                             if (key == null)
                             {
                                 continue;
                             }
 
-                            if (allValues.ContainsKey(path))
+                            foreach (var valuePair in kv.Value)
                             {
-                                foreach (var pair in allValues[path])
+                                string valueName = valuePair.Key;
+                                RegistryValueBackup backup = valuePair.Value;
+
+                                if (backup == null)
                                 {
-                                    object val = pair.Value;
-
-                                    if (val is string sVal)
-                                    {
-                                        try
-                                        {
-                                            val = Convert.FromBase64String(sVal);
-                                        }
-                                        catch
-                                        {
-                                            val = sVal;
-                                        }
-                                    }
-
-                                    key.SetValue(pair.Key, val);
+                                    continue;
                                 }
+
+                                if (!Enum.TryParse(backup.Kind, out RegistryValueKind kind))
+                                {
+                                    try
+                                    {
+                                        key.SetValue(valueName, ConvertJTokenToObject(backup.Value));
+                                    }
+                                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
+                                    continue;
+                                }
+
+                                try
+                                {
+                                    object valueToSet = ConvertBackupValueToClr(backup.Value, kind);
+                                    key.SetValue(valueName, valueToSet, kind);
+                                }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             }
 
-                            if (aclDataDict.ContainsKey(path))
+                            if (aclDataDict != null && aclDataDict.TryGetValue(keyId, out string sddl) && !string.IsNullOrWhiteSpace(sddl))
                             {
-                                string aclData = aclDataDict[path];
-                                RegistrySecurity security = new RegistrySecurity();
-                                security.SetSecurityDescriptorSddlForm(aclData);
-                                key.SetAccessControl(security);
+                                try
+                                {
+                                    RegistrySecurity security = new RegistrySecurity();
+                                    security.SetSecurityDescriptorSddlForm(sddl);
+
+                                    key.SetAccessControl(security);
+                                }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
@@ -201,6 +274,81 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
+        }
+
+        private static object ConvertBackupValueToClr(object rawValue, RegistryValueKind kind)
+        {
+            if (rawValue is JToken token)
+            {
+                switch (kind)
+                {
+                    case RegistryValueKind.Binary:
+                        string b64 = token.Type == JTokenType.String ? token.ToObject<string>() : token.ToString(Formatting.None);
+                        return Convert.FromBase64String(b64);
+                    case RegistryValueKind.DWord:
+                        return token.ToObject<int>();
+                    case RegistryValueKind.QWord:
+                        return token.ToObject<long>();
+                    case RegistryValueKind.MultiString:
+                        return token.ToObject<string[]>();
+                    case RegistryValueKind.String:
+                    case RegistryValueKind.ExpandString:
+                        return token.ToObject<string>();
+                    case RegistryValueKind.None:
+                    default:
+                        return token.ToObject<object>();
+                }
+            }
+
+            switch (kind)
+            {
+                case RegistryValueKind.Binary:
+                    if (rawValue is string s)
+                    {
+                        return Convert.FromBase64String(s);
+                    }
+
+                    if (rawValue is byte[] bytes)
+                    {
+                        return bytes;
+                    }
+
+                    break;
+                case RegistryValueKind.DWord:
+                    return Convert.ToInt32(rawValue);
+                case RegistryValueKind.QWord:
+                    return Convert.ToInt64(rawValue);
+                case RegistryValueKind.MultiString:
+                    if (rawValue is JArray jarr)
+                    {
+                        return jarr.ToObject<string[]>();
+                    }
+
+                    if (rawValue is string[] sa)
+                    {
+                        return sa;
+                    }
+
+                    break;
+                case RegistryValueKind.String:
+                case RegistryValueKind.ExpandString:
+                    return rawValue?.ToString();
+                case RegistryValueKind.None:
+                default:
+                    return rawValue;
+            }
+
+            return rawValue;
+        }
+
+        private static object ConvertJTokenToObject(object tokenOrObj)
+        {
+            if (tokenOrObj is JToken t)
+            {
+                return t.ToObject<object>();
+            }
+
+            return tokenOrObj;
         }
     }
 }

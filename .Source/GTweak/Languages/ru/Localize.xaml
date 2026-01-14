@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">Это не имеет смысла, сначала примените хотя бы один твик</v:String>
     <v:String x:Key="success_onedrive_noty">Начался процесс восстановления OneDrive, который займет некоторое время</v:String>
     <v:String x:Key="error_onedrive_noty">Отсутствует установочный файл OneDrive, восстановление невозможно</v:String>
-    <v:String x:Key="warn_wd_noty">Ожидайте автоматического завершения процесса с последующим перезапуском системы</v:String>
+    <v:String x:Key="warn_wd_noty">Ожидайте завершения процесса с последующим перезапуском системы</v:String>
     <v:String x:Key="info_wd_noty">Это займет некоторое время, пожалуйста, подождите немного</v:String>
     <v:String x:Key="warn_firewall_noty">У вас отключен брандмауэр, включите и примените твик снова</v:String>
     <v:String x:Key="warn_activate_noty">Для начала активируйте - Windows. Не все твики смогут примениться</v:String>

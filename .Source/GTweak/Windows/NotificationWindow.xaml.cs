@@ -42,7 +42,13 @@ namespace GTweak.Windows
 
         private void ButtonClose_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Close();
 
-        private void Grid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => CommandExecutor.RunCommand(RequiredAction == NotificationManager.NoticeAction.Logout ? @"/c logoff" : @"/c shutdown /r /t 0");
+        private void Grid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (RequiredAction != NotificationManager.NoticeAction.None)
+            {
+                CommandExecutor.RunCommand(RequiredAction == NotificationManager.NoticeAction.Logout ? @"/c logoff" : @"/c shutdown /r /t 0");
+            }
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

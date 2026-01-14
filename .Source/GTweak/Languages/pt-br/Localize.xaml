@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">Não faz sentido, aplique pelo menos um ajuste primeiro</v:String>
     <v:String x:Key="success_onedrive_noty">A recuperação do OneDrive está em andamento e levará um tempo</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">Levará algum tempo, por favor, espere um pouco</v:String>
     <v:String x:Key="warn_firewall_noty">Seu firewall está desativado, ative-o e aplique o ajuste novamente</v:String>
     <v:String x:Key="warn_activate_noty">Para começar - ative o Windows. Nem todos os ajustes podem ser aplicados</v:String>

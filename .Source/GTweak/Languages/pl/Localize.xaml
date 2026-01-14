@@ -40,7 +40,7 @@
     <v:String x:Key="export_warning_noty">Nie ma sensu, zastosuj najpierw przynajmniej jedną modyfikację</v:String>
     <v:String x:Key="success_onedrive_noty">Trwa przywracanie OneDrive, potrwa to chwilę</v:String>
     <v:String x:Key="error_onedrive_noty">Brak pliku instalacyjnego OneDrive, przywracanie niemożliwe</v:String>
-    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">To zajmie trochę czasu, proszę czekać</v:String>
     <v:String x:Key="warn_firewall_noty">Twoja zapora jest wyłączona, włącz ją i zastosuj modyfikację ponownie</v:String>
     <v:String x:Key="warn_activate_noty">Aby rozpocząć - aktywuj Windows. Nie wszystkie modyfikacje można zastosować</v:String>

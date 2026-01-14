@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">It doesn't make sense, apply at least one tweak first</v:String>
     <v:String x:Key="success_onedrive_noty">OneDrive recovery is now underway and will take a while</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">It will take some time, please wait a bit</v:String>
     <v:String x:Key="warn_firewall_noty">Your firewall is disabled, turn it on and apply the tweak again</v:String>
     <v:String x:Key="warn_activate_noty">To start - activate Windows. Not all tweaks can be applied</v:String>

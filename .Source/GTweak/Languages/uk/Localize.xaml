@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">Це не має сенсу, спочатку застосуйте принаймні одне налаштування</v:String>
     <v:String x:Key="success_onedrive_noty">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
     <v:String x:Key="warn_firewall_noty">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
     <v:String x:Key="warn_activate_noty">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>

@@ -247,18 +247,22 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton3":
                     BlockWDefender(isDisabled);
+                    ArchiveManager.Unarchive(PathLocator.Executable.NSudo, Properties.Resources.NSudoLC);
+                    ArchiveManager.Unarchive(PathLocator.Executable.DisablingWD, Properties.Resources.DisablingWD);
                     if (canShowWindow)
                     {
                         OverlayWindow overlayWindow = new OverlayWindow();
                         overlayWindow.Show();
 
-                        ArchiveManager.Unarchive(PathLocator.Executable.NSudo, Properties.Resources.NSudoLC);
-                        ArchiveManager.Unarchive(PathLocator.Executable.DisablingWD, Properties.Resources.DisablingWD);
-
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
                         await backgroundQueue.QueueTask(delegate { NotificationManager.Show(isDisabled ? "warn" : "info", isDisabled ? "warn_wd_noty" : "info_wd_noty").Perform(); });
                         await backgroundQueue.QueueTask(delegate { WindowsDefender.SetProtectionState(isDisabled); });
-                        await backgroundQueue.QueueTask(delegate { NotificationManager.Show().WithDelay(300).Restart(); });
+
+                        if (!isDisabled)
+                        {
+                            await backgroundQueue.QueueTask(delegate { NotificationManager.Show().WithDelay(300).Restart(); });
+                            CommandExecutor.RunCommand($"/c timeout /t 10 && del /f \"{PathLocator.Executable.NSudo}\"");
+                        }
 
                         overlayWindow.Close();
                     }

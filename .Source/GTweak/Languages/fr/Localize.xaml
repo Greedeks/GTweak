@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">Cela n’a pas de sens, appliquez au moins un réglage d’abord</v:String>
     <v:String x:Key="success_onedrive_noty">Le processus de récupération OneDrive a commencé, cela prendra un certain temps</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">Le processus prendra un certain temps, veuillez patienter</v:String>
     <v:String x:Key="warn_firewall_noty">Votre pare-feu est désactivé, activez-le et appliquez à nouveau le réglage</v:String>
     <v:String x:Key="warn_activate_noty">Pour commencer - activez Windows. Tous les réglages ne peuvent pas être appliqués</v:String>

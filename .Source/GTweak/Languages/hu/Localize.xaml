@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">Nincs értelme, először legalább egy módosítást alkalmazzon</v:String>
     <v:String x:Key="success_onedrive_noty">A OneDrive helyreállítása már folyamatban van, és eltart egy ideig</v:String>
     <v:String x:Key="error_onedrive_noty">A OneDrive telepítőfájlja hiányzik, a helyreállítás lehetetlen</v:String>
-    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">Eltart egy ideig, kérlek, várj egy kicsit</v:String>
     <v:String x:Key="warn_firewall_noty">A tűzfal le van tiltva, kapcsolja be, és alkalmazza újra a módosítást</v:String>
     <v:String x:Key="warn_activate_noty">Indításhoz - aktiválja a Windows rendszert. Nem minden módosítás alkalmazható</v:String>

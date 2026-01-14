@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
     <v:String x:Key="success_onedrive_noty">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive 설정 파일이 누락되어 복구가 불가능합니다</v:String>
-    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_noty">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="warn_activate_noty">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>

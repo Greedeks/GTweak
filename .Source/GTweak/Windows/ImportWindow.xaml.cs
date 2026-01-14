@@ -68,15 +68,15 @@ namespace GTweak.Windows
 
             var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, NotificationManager.NoticeAction>> NoticeActions, IEnumerable<KeyValuePair<string, bool>> ExplorerMapping)[]
             {
-               (INIManager.SectionConf, _confTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
-               (INIManager.SectionIntf, _intfTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfMapping),
-               (INIManager.SectionSvc, _svcTweaks.ApplyTweaks, null, null),
-               (INIManager.SectionSys, null, NotificationManager.SysActions, null)
+                (INIManager.SectionConf, _confTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
+                (INIManager.SectionIntf, _intfTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfMapping),
+                (INIManager.SectionSvc, _svcTweaks.ApplyTweaks, null, null),
+                (INIManager.SectionSys, null, NotificationManager.SysActions, null)
             };
 
             var allTweaks = new List<(string section, string tweak, string value)>();
 
-            foreach (var (Section, _, _, _) in allSections.Where(sectionInfo => iniManager.IsThereSection(sectionInfo.Section)))
+            foreach (var (Section, _, _, _) in allSections.Where(s => iniManager.IsThereSection(s.Section)))
             {
                 var keys = iniManager.GetKeysOrValue(Section);
                 var values = iniManager.GetKeysOrValue(Section, false);
@@ -89,9 +89,16 @@ namespace GTweak.Windows
             if (totalTweaks == 0)
             {
                 progress.Report(100);
+                return;
             }
 
-            foreach (var (section, tweak, value) in allTweaks)
+            var sysTweaks = allTweaks.Where(t => t.section == INIManager.SectionSys).ToList();
+            var sysTweaksLast = sysTweaks.Where(t => t.tweak == "TglButton3").ToList();
+            var sysTweaksFirst = sysTweaks.Where(t => t.tweak != "TglButton3").ToList();
+
+            var tweaksToApply = allTweaks.Where(t => t.section != INIManager.SectionSys).Concat(sysTweaksFirst).Concat(sysTweaksLast).ToList();
+
+            foreach (var (section, tweak, value) in tweaksToApply)
             {
                 token.ThrowIfCancellationRequested();
                 try
@@ -102,36 +109,45 @@ namespace GTweak.Windows
                         {
                             _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
                         }
-                        else if (tweak == "TglButton8")
+                        else if (tweak == "TglButton3")
                         {
                             BackgroundQueue backgroundQueue = new BackgroundQueue();
-                            await backgroundQueue.QueueTask(delegate { _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false); });
+                            await backgroundQueue.QueueTask(delegate
+                            {
+                                _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false);
+                            });
+
+                            if (!Convert.ToBoolean(value))
+                            {
+                                CommandExecutor.RunCommand($"/c timeout /t 10 && del /f \"{PathLocator.Executable.NSudo}\"");
+                            }
                         }
                         else
                         {
                             _sysTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
                         }
 
-                        foreach (var act in NotificationManager.SysActions.Where(get => get.Key == tweak))
+                        foreach (var act in NotificationManager.SysActions.Where(a => a.Key == tweak))
                         {
                             _requiredActions.Add(act.Value);
                         }
                     }
                     else
                     {
-                        var (Section, TweakAction, NoticeActions, ExplorerMapping) = allSections.First(s => s.Section == section);
+                        var (Section, TweakAction, NoticeActions, ExplorerMapping) =
+                            allSections.First(s => s.Section == section);
 
                         TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
 
                         if (NoticeActions != null)
                         {
-                            foreach (var act in NoticeActions.Where(get => get.Key == tweak))
+                            foreach (var act in NoticeActions.Where(a => a.Key == tweak))
                             {
                                 _requiredActions.Add(act.Value);
                             }
                         }
 
-                        if (ExplorerMapping != null && ExplorerMapping.Any(get => get.Key == tweak && get.Value == true))
+                        if (ExplorerMapping != null && ExplorerMapping.Any(a => a.Key == tweak && a.Value))
                         {
                             _isExpRestartNeed = true;
                         }
@@ -142,12 +158,16 @@ namespace GTweak.Windows
                         }
                     }
                 }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                catch (Exception ex)
+                {
+                    ErrorLogging.LogDebug(ex);
+                }
 
                 appliedTweaks++;
                 progress.Report((byte)((double)appliedTweaks / totalTweaks * 100));
                 await Task.Delay(700, token);
             }
         }
+
     }
 }
