@@ -41,7 +41,8 @@
     <v:String x:Key="export_warning_noty">Це не має сенсу, спочатку застосуйте принаймні одне налаштування</v:String>
     <v:String x:Key="success_onedrive_noty">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="defender_noty">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
     <v:String x:Key="warn_firewall_noty">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
     <v:String x:Key="warn_activate_noty">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
     <v:String x:Key="ready_activate_noty">Ваша операційна система не потребує активації</v:String>
@@ -383,7 +384,7 @@
     <v:String x:Key="slider3_desc_sys">Зміна швидкості повторного введення символу, рекомендоване значення - 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Як усталено, прискорення миші збільшує швидкість руху миші. Рекомендовано вимкнути прискорення, оскільки з ним погіршується плавність руху та точність позиціонування.</v:String>
     <v:String x:Key="tgl2_desc_sys">Якщо під час роботи на комп'ютері вам набридли вікна з пропозицією увімкнути залипання клавіш або фільтрування введення і після відповіді «Ні» такі вікна через деякий час знову з’являються, можна вимкнути цю функція. Фільтрація впливає на швидкість повторного введення на клавіатурі та пропуск повторних натискань клавіш.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Це налаштування вимикає та зупиняє служби Захисника Windows, SmartScreen, зменшує надмірне навантаження на процесор процесами Antimalware та Virtualization-Based Security (VBS).</v:String>
+    <v:String x:Key="tgl3_desc_sys">Це налаштування вимикає та зупиняє служби Захисника Windows, SmartScreen, зменшує надмірне навантаження на процесор процесами Antimalware та Virtualization-Based Security (VBS). For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">Це налаштування дозволяє повністю вимкнути UAC (контроль облікових записів), щоб прибрати піктограми щита, сповіщення про безпеку тощо. UAC не є повноцінною програмою для захисту системи.</v:String>
     <v:String x:Key="tgl5_desc_sys">Під час вимкнення будь-чого, що стосується безпеки чи захисту, ви постійно отримуєте про це сповіщення. Це налаштування вимикає сповіщення про безпеку від Центру сповіщень.</v:String>
     <v:String x:Key="tgl6_desc_sys">Якщо ви хочете оновлювати свої додатки з Магазину Microsoft самостійно, необхідно вимкнути функцію автоматичного оновлення. Таким чином, буде знижено навантаження на мережу.</v:String>

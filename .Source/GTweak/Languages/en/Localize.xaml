@@ -41,7 +41,8 @@
     <v:String x:Key="export_warning_noty">It doesn't make sense, apply at least one tweak first</v:String>
     <v:String x:Key="success_onedrive_noty">OneDrive recovery is now underway and will take a while</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="defender_noty">It will take some time, please wait a bit</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">It will take some time, please wait a bit</v:String>
     <v:String x:Key="warn_firewall_noty">Your firewall is disabled, turn it on and apply the tweak again</v:String>
     <v:String x:Key="warn_activate_noty">To start - activate Windows. Not all tweaks can be applied</v:String>
     <v:String x:Key="ready_activate_noty">Your operating system does not need to be activated</v:String>
@@ -383,7 +384,7 @@
     <v:String x:Key="slider3_desc_sys">Changes the repetition rate of the entered character, the recommended value is 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">By default, mouse acceleration accelerates mouse movement. It is recommended to turn it off, since with acceleration turned on, uniform movement and directional accuracy want to be better.</v:String>
     <v:String x:Key="tgl2_desc_sys">If you do not want a window to appear every now and then when performing tasks, telling you to enable key sticking or input filtering, and after answering «No» it appears again after a while, then disable this function. In addition, input filtering affects the speed of keyboard repetition and skipping repeated keys.</v:String>
-    <v:String x:Key="tgl3_desc_sys">This tweak will disable and stop Windows Defender, SmartScreen, disproportionately heavy loads on the Antimalware processor and Virtualization-Based Security (VBS).</v:String>
+    <v:String x:Key="tgl3_desc_sys">This tweak will disable and stop Windows Defender, SmartScreen, disproportionately heavy loads on the Antimalware processor and Virtualization-Based Security (VBS). For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required - the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">The tweak will completely disable UAС (User Account Control), get rid of shield icons, security notifications and other things. UAC is not a full-fledged protection program.</v:String>
     <v:String x:Key="tgl5_desc_sys">When you disable something related to security or protection, you constantly receive notifications about it. This tweak will disable security notifications from the Notification Center.</v:String>
     <v:String x:Key="tgl6_desc_sys">If you prefer to update your apps from the Microsoft Store yourself, you need to turn off the automatic update feature. Thus, the load on the network will drop.</v:String>

@@ -41,7 +41,8 @@
     <v:String x:Key="export_warning_noty">Nincs értelme, először legalább egy módosítást alkalmazzon</v:String>
     <v:String x:Key="success_onedrive_noty">A OneDrive helyreállítása már folyamatban van, és eltart egy ideig</v:String>
     <v:String x:Key="error_onedrive_noty">A OneDrive telepítőfájlja hiányzik, a helyreállítás lehetetlen</v:String>
-    <v:String x:Key="defender_noty">Eltart egy ideig, kérlek, várj egy kicsit</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">Eltart egy ideig, kérlek, várj egy kicsit</v:String>
     <v:String x:Key="warn_firewall_noty">A tűzfal le van tiltva, kapcsolja be, és alkalmazza újra a módosítást</v:String>
     <v:String x:Key="warn_activate_noty">Indításhoz - aktiválja a Windows rendszert. Nem minden módosítás alkalmazható</v:String>
     <v:String x:Key="ready_activate_noty">Az operációs rendszert nem kell aktiválni</v:String>
@@ -383,7 +384,7 @@
     <v:String x:Key="slider3_desc_sys">Megváltoztatja a beírt karakter ismétlési gyakoriságát, az ajánlott érték 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Alapértelmezés szerint az egérgyorsítás felgyorsítja az egér mozgását. Javasoljuk, hogy kapcsolja ki, mivel bekapcsolt gyorsulás esetén az egyenletes mozgás és az iránypontosság jobb akar lenni.</v:String>
     <v:String x:Key="tgl2_desc_sys">Ha nem akarja, hogy a feladatok végrehajtása során időnként megjelenjen egy ablak, amely azt mondja, hogy engedélyezze a kulcs beragadását vagy a beviteli szűrést, és a "Nem" válasz után egy idő után újra megjelenik, akkor tiltsa le ezt a funkciót. Ezenkívül a bemeneti szűrés befolyásolja a billentyűzet ismétlésének sebességét és az ismétlődő billentyűk kihagyását.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Ez a módosítás letiltja és leállítja a Windows Defendert, a SmartScreen-t, az Antimalware processzor és a virtualizációs alapú biztonság (VBS) aránytalanul nagy terhelését.</v:String>
+    <v:String x:Key="tgl3_desc_sys">Ez a módosítás letiltja és leállítja a Windows Defendert, a SmartScreen-t, az Antimalware processzor és a virtualizációs alapú biztonság (VBS) aránytalanul nagy terhelését. For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">A csípés teljesen letiltja az UA?-t (User Account Control), megszabadul a pajzs ikonoktól, a biztonsági értesítésektől és egyéb dolgoktól. Az UAC nem teljes értékű védelmi program.</v:String>
     <v:String x:Key="tgl5_desc_sys">Ha letilt valamit, ami a biztonsággal vagy védelemmel kapcsolatos, folyamatosan értesítést kap róla. Ez a módosítás letiltja a biztonsági értesítéseket az Értesítési központból.</v:String>
     <v:String x:Key="tgl6_desc_sys">Ha inkább saját maga szeretné frissíteni alkalmazásait a Microsoft Store-ból, ki kell kapcsolnia az automatikus frissítési funkciót. Így a hálózat terhelése csökken.</v:String>
@@ -478,3 +479,4 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+

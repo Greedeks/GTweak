@@ -11,75 +11,73 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class BackupRights : TaskSchedulerManager
     {
-        private static readonly Dictionary<string, RegistryKey> _storageRegPaths = new Dictionary<string, RegistryKey>
+        private static readonly Dictionary<string, RegistryHive> _storageRegPaths = new Dictionary<string, RegistryHive>
         {
-            { @"SYSTEM\CurrentControlSet\Services\WinDefend", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\SecurityHealthService", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\Sense", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\SgrmAgent", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\SgrmBroker", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\WdBoot", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\WdNisDrv", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\WdNisSvc", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\MDCoreSvc", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\MsSecCore", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\MsSecFlt", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\MsSecWfp", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\webthreatdefsvc", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\CI", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\CI\Policy", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\CI\State", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\CI\Config", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\DeviceGuard", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Defender\Features", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Defender\Exclusions", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Defender\Cloud", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Defender\CoreService", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Defender\Windows Defender\ControlledFolderAccess", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\Scan", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\Reporting", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\UX Configuration", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\Security Center", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows defender\CoreService", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Security Center", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows\System", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost", Registry.LocalMachine },
-            { @"Software\Microsoft\Windows\CurrentVersion\AppHost", Registry.CurrentUser },
-            { @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\MRT", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Microsoft Antimalware", Registry.LocalMachine },
-            { @"SOFTWARE\Policies\Microsoft\Windows\WTDS", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger", Registry.LocalMachine },
-            { @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Windows Defender/Operational", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Security-Diagnostic/Operational", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceConfidence/Analytic", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceGuard/Operational", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceGuard/Verbose", Registry.LocalMachine },
-            { @"SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender", Registry.LocalMachine },
-            { @"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}", Registry.ClassesRoot },
-            { @"Software\Microsoft\Edge", Registry.CurrentUser },
-            { @"SOFTWARE\Microsoft\Windows defender\Windows defender Exploit Guard", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows defender\Windows defender Exploit Guard\ASR", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows defender\Windows defender Exploit Guard\Controlled Folder Access", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows defender\Windows defender Exploit Guard\Network Protection", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Advanced Threat Protection", Registry.LocalMachine },
-            { @"SOFTWARE\Microsoft\Windows Defender Security Center\Notifications", Registry.LocalMachine },
+            [@"SYSTEM\CurrentControlSet\Services\WinDefend"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\SecurityHealthService"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\Sense"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\SgrmAgent"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\SgrmBroker"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\WdBoot"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\WdNisDrv"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\WdNisSvc"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\MDCoreSvc"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\MsSecCore"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\MsSecFlt"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\MsSecWfp"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\webthreatdefsvc"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Services\webthreatdefusersvc"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\CI"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\CI\Policy"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\CI\State"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\CI\Config"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\DeviceGuard"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\Features"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\Exclusions"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\Cloud"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\CoreService"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\Windows Defender\ControlledFolderAccess"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\Scan"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\Reporting"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\UX Configuration"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\Security Center"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Security Center"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender Security Center"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows\System"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost"] = RegistryHive.LocalMachine,
+            [@"Software\Microsoft\Windows\CurrentVersion\AppHost"] = RegistryHive.CurrentUser,
+            [@"SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"] = RegistryHive.LocalMachine,
+            [@"Software\Microsoft\Edge"] = RegistryHive.CurrentUser,
+            [@"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\MRT"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Microsoft Antimalware"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Policies\Microsoft\Windows\WTDS"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger"] = RegistryHive.LocalMachine,
+            [@"SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Windows Defender/Operational"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Security-Diagnostic/Operational"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceConfidence/Analytic"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceGuard/Operational"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceGuard/Verbose"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender"] = RegistryHive.LocalMachine,
+            [@"CLSID\{09A47860-11B0-4DA5-AFA5-26D86198A780}"] = RegistryHive.ClassesRoot,
+            [@"SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard\Controlled Folder Access"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Advanced Threat Protection"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows Defender Security Center\Notifications"] = RegistryHive.LocalMachine,
+            [@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"] = RegistryHive.LocalMachine,
         };
 
         internal static void ExportRights()
@@ -87,6 +85,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             try
             {
                 Directory.CreateDirectory(PathLocator.Folders.DefenderBackup);
+
                 Dictionary<string, Dictionary<string, object>> allValues = new Dictionary<string, Dictionary<string, object>>();
                 Dictionary<string, string> aclDataDict = new Dictionary<string, string>();
 
@@ -98,35 +97,46 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 foreach (var entry in _storageRegPaths)
                 {
                     string path = entry.Key;
-                    RegistryKey baseKey = entry.Value;
-
-
-                    using RegistryKey key = baseKey.OpenSubKey(path, false);
-                    if (key == null)
-                    {
-                        continue;
-                    }
-
-                    Dictionary<string, object> values = new Dictionary<string, object>();
-                    foreach (string valueName in key.GetValueNames())
-                    {
-                        values[valueName] = key.GetValue(valueName);
-                    }
-                    allValues[path] = values;
+                    RegistryHive hive = entry.Value;
 
                     try
                     {
-                        RegistrySecurity security = key.GetAccessControl();
-                        string aclData = security.GetSecurityDescriptorSddlForm(AccessControlSections.All);
-                        aclDataDict[path] = aclData;
+                        using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Registry64);
+                        using RegistryKey key = baseKey.OpenSubKey(path, RegistryKeyPermissionCheck.ReadSubTree, RegistryRights.ReadKey | RegistryRights.ReadPermissions);
+
+                        if (key == null)
+                        {
+                            continue;
+                        }
+                        Dictionary<string, object> values = new Dictionary<string, object>();
+                        foreach (string valueName in key.GetValueNames())
+                        {
+                            object val = key.GetValue(valueName);
+                            if (val is byte[] byteVal)
+                            {
+                                values[valueName] = Convert.ToBase64String(byteVal);
+                            }
+                            else
+                            {
+                                values[valueName] = val;
+                            }
+                        }
+                        allValues[path] = values;
+
+                        try
+                        {
+                            RegistrySecurity security = key.GetAccessControl();
+                            string aclData = security.GetSecurityDescriptorSddlForm(AccessControlSections.All);
+                            aclDataDict[path] = aclData;
+                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-
-
                 }
 
                 File.WriteAllText(PathLocator.Files.BackupDataJson, JsonConvert.SerializeObject(allValues, Formatting.Indented));
                 File.WriteAllText(PathLocator.Files.BackupRightsAcl, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
+
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
@@ -138,35 +148,55 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             {
                 try
                 {
-                    var allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(File.ReadAllText(PathLocator.Files.BackupDataJson));
-                    var aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(PathLocator.Files.BackupRightsAcl));
+                    Dictionary<string, Dictionary<string, object>> allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, object>>>(File.ReadAllText(PathLocator.Files.BackupDataJson));
+                    Dictionary<string, string> aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(PathLocator.Files.BackupRightsAcl));
 
                     foreach (var entry in _storageRegPaths)
                     {
                         string path = entry.Key;
-                        RegistryKey baseKey = entry.Value;
+                        RegistryHive hive = entry.Value;
 
-                        using RegistryKey key = baseKey.OpenSubKey(path, true) ?? baseKey.CreateSubKey(path);
-                        if (key == null)
+                        try
                         {
-                            continue;
-                        }
+                            using RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Registry64);
+                            using RegistryKey key = baseKey.OpenSubKey(path, true) ?? baseKey.CreateSubKey(path);
 
-                        if (allValues.ContainsKey(path))
-                        {
-                            foreach (var pair in allValues[path])
+                            if (key == null)
                             {
-                                key.SetValue(pair.Key, pair.Value);
+                                continue;
+                            }
+
+                            if (allValues.ContainsKey(path))
+                            {
+                                foreach (var pair in allValues[path])
+                                {
+                                    object val = pair.Value;
+
+                                    if (val is string sVal)
+                                    {
+                                        try
+                                        {
+                                            val = Convert.FromBase64String(sVal);
+                                        }
+                                        catch
+                                        {
+                                            val = sVal;
+                                        }
+                                    }
+
+                                    key.SetValue(pair.Key, val);
+                                }
+                            }
+
+                            if (aclDataDict.ContainsKey(path))
+                            {
+                                string aclData = aclDataDict[path];
+                                RegistrySecurity security = new RegistrySecurity();
+                                security.SetSecurityDescriptorSddlForm(aclData);
+                                key.SetAccessControl(security);
                             }
                         }
-
-                        if (aclDataDict.ContainsKey(path))
-                        {
-                            string aclData = aclDataDict[path];
-                            RegistrySecurity security = new RegistrySecurity();
-                            security.SetSecurityDescriptorSddlForm(aclData);
-                            key.SetAccessControl(security);
-                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }

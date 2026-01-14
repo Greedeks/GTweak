@@ -40,7 +40,8 @@
     <v:String x:Key="export_warning_noty">Nie ma sensu, zastosuj najpierw przynajmniej jedną modyfikację</v:String>
     <v:String x:Key="success_onedrive_noty">Trwa przywracanie OneDrive, potrwa to chwilę</v:String>
     <v:String x:Key="error_onedrive_noty">Brak pliku instalacyjnego OneDrive, przywracanie niemożliwe</v:String>
-    <v:String x:Key="defender_noty">To zajmie trochę czasu, proszę czekać</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">To zajmie trochę czasu, proszę czekać</v:String>
     <v:String x:Key="warn_firewall_noty">Twoja zapora jest wyłączona, włącz ją i zastosuj modyfikację ponownie</v:String>
     <v:String x:Key="warn_activate_noty">Aby rozpocząć - aktywuj Windows. Nie wszystkie modyfikacje można zastosować</v:String>
     <v:String x:Key="ready_activate_noty">Twój system operacyjny nie wymaga aktywacji</v:String>
@@ -378,7 +379,7 @@
     <v:String x:Key="slider3_desc_sys">Zmienia szybkość powtarzania wpisywanego znaku, zalecana wartość to 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Domyślnie akceleracja myszy przyspiesza ruch myszy. Zaleca się wyłączenie, ponieważ przy włączonej akceleracji równomierny ruch i dokładność kierunkowa pozostawiają wiele do życzenia.</v:String>
     <v:String x:Key="tgl2_desc_sys">Jeśli nie chcesz, aby co chwilę pojawiało się okno sugerujące włączenie przyklejania klawiszy lub filtrowania wejścia, a po odpowiedzi „Nie” pojawiało się ponownie po chwili, wyłącz tę funkcję. Dodatkowo filtrowanie wejścia wpływa na szybkość powtarzania klawiatury i pomijanie powtarzanych klawiszy.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Ta modyfikacja wyłączy i zatrzyma Windows Defender, SmartScreen, nieproporcjonalnie ciężkie obciążenie procesora Antimalware oraz Virtualization-Based Security (VBS).</v:String>
+    <v:String x:Key="tgl3_desc_sys">Ta modyfikacja wyłączy i zatrzyma Windows Defender, SmartScreen, nieproporcjonalnie ciężkie obciążenie procesora Antimalware oraz Virtualization-Based Security (VBS). For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">Modyfikacja całkowicie wyłączy UAC (Kontrola konta użytkownika), pozbywając się ikon tarczy, powiadomień bezpieczeństwa i innych rzeczy. UAC nie jest pełnoprawnym programem ochronnym.</v:String>
     <v:String x:Key="tgl5_desc_sys">Gdy wyłączasz coś związanego z bezpieczeństwem lub ochroną, stale otrzymujesz o tym powiadomienia. Ta modyfikacja wyłączy powiadomienia bezpieczeństwa z Centrum powiadomień.</v:String>
     <v:String x:Key="tgl6_desc_sys">Jeśli wolisz aktualizować aplikacje ze Sklepu Microsoft samodzielnie, wyłącz funkcję automatycznej aktualizacji. W ten sposób zmniejszy się obciążenie sieci.</v:String>

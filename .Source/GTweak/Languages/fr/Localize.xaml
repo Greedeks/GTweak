@@ -41,7 +41,8 @@
     <v:String x:Key="export_warning_noty">Cela n’a pas de sens, appliquez au moins un réglage d’abord</v:String>
     <v:String x:Key="success_onedrive_noty">Le processus de récupération OneDrive a commencé, cela prendra un certain temps</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="defender_noty">Le processus prendra un certain temps, veuillez patienter</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">Le processus prendra un certain temps, veuillez patienter</v:String>
     <v:String x:Key="warn_firewall_noty">Votre pare-feu est désactivé, activez-le et appliquez à nouveau le réglage</v:String>
     <v:String x:Key="warn_activate_noty">Pour commencer - activez Windows. Tous les réglages ne peuvent pas être appliqués</v:String>
     <v:String x:Key="ready_activate_noty">Votre système d’exploitation n’a pas besoin d’être activé</v:String>
@@ -384,7 +385,7 @@
     <v:String x:Key="slider3_desc_sys">Modifie la vitesse de répétition des caractères saisis. La valeur recommandée est 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Par défaut, l’accélération de la souris augmente la vitesse de déplacement. Il est conseillé de la désactiver, car avec l’accélération activée, le mouvement uniforme et la précision directionnelle en pâtissent.</v:String>
     <v:String x:Key="tgl2_desc_sys">Désactivez cette fonction si vous ne souhaitez pas voir apparaître de fenêtre vous invitant à activer le verrouillage des touches ou le filtrage des entrées, surtout si vous refusez et que la fenêtre revient régulièrement. Le filtrage affecte aussi la vitesse de répétition du clavier et évite les touches répétées involontairement.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Désactive Windows Defender, SmartScreen, la lourde charge de l’antimalware et la sécurité basée sur la virtualisation (VBS).</v:String>
+    <v:String x:Key="tgl3_desc_sys">Désactive Windows Defender, SmartScreen, la lourde charge de l’antimalware et la sécurité basée sur la virtualisation (VBS). For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">Désactive complètement le Contrôle de compte utilisateur (UAC), supprime les icônes de bouclier et les notifications de sécurité. L’UAC n’est pas une protection complète.</v:String>
     <v:String x:Key="tgl5_desc_sys">Désactive les notifications de sécurité provenant du Centre de notifications, utiles lorsque vous désactivez des fonctions de sécurité.</v:String>
     <v:String x:Key="tgl6_desc_sys">Désactive la mise à jour automatique des applications du Microsoft Store, utile si vous préférez les mettre à jour manuellement et réduire la charge réseau.</v:String>
@@ -479,3 +480,4 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+

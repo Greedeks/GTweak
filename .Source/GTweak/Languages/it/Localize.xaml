@@ -41,7 +41,8 @@
     <v:String x:Key="export_warning_noty">Non ha senso, applica almeno una modifica prima</v:String>
     <v:String x:Key="success_onedrive_noty">Il ripristino di OneDrive è in corso e richiederà un po' di tempo</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="defender_noty">Ci vorrà un po' di tempo, attendi</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">Ci vorrà un po' di tempo, attendi</v:String>
     <v:String x:Key="warn_firewall_noty">Il tuo firewall è disattivato, attivalo e applica nuovamente la modifica</v:String>
     <v:String x:Key="warn_activate_noty">Per iniziare - attiva Windows. Non tutte le modifiche possono essere applicate</v:String>
     <v:String x:Key="ready_activate_noty">Il tuo sistema operativo non necessita di attivazione</v:String>
@@ -383,7 +384,7 @@
     <v:String x:Key="slider3_desc_sys">Modifica la velocità di ripetizione dei caratteri digitati; il valore consigliato è 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Per impostazione predefinita, l'accelerazione del mouse accelera il movimento. È consigliabile disattivarla per ottenere un movimento più uniforme e preciso.</v:String>
     <v:String x:Key="tgl2_desc_sys">Disattiva i popup che chiedono di attivare i tasti permanenti o il filtro input. Il filtro input può influenzare la velocità di digitazione.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Disattiva Windows Defender, SmartScreen, Antimalware e VBS, riducendo il carico sul sistema.</v:String>
+    <v:String x:Key="tgl3_desc_sys">Disattiva Windows Defender, SmartScreen, Antimalware e VBS, riducendo il carico sul sistema. For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">Disattiva completamente l'UAC, rimuovendo icone con scudo e notifiche di sicurezza.</v:String>
     <v:String x:Key="tgl5_desc_sys">Disattiva le notifiche di sicurezza dal Centro notifiche.</v:String>
     <v:String x:Key="tgl6_desc_sys">Disattiva l'aggiornamento automatico delle app dallo Store per ridurre il traffico di rete.</v:String>
@@ -478,3 +479,4 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+

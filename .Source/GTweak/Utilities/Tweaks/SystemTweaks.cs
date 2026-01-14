@@ -256,7 +256,7 @@ namespace GTweak.Utilities.Tweaks
                         ArchiveManager.Unarchive(PathLocator.Executable.DisablingWD, Properties.Resources.DisablingWD);
 
                         BackgroundQueue backgroundQueue = new BackgroundQueue();
-                        await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "defender_noty").Perform(); });
+                        await backgroundQueue.QueueTask(delegate { NotificationManager.Show(isDisabled ? "warn" : "info", isDisabled ? "warn_wd_noty" : "info_wd_noty").Perform(); });
                         await backgroundQueue.QueueTask(delegate { WindowsDefender.SetProtectionState(isDisabled); });
                         await backgroundQueue.QueueTask(delegate { NotificationManager.Show().WithDelay(300).Restart(); });
 

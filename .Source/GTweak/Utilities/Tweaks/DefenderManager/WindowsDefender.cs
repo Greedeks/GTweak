@@ -82,7 +82,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             Set-MpPreference -MAPSReporting 2
             Set-MpPreference -PUAProtection Enabled");
 
-            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c " +
+            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v LocalSettingOverrideDisableOnAccessProtection /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v LocalSettingOverrideRealtimeScanDirection /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v LocalSettingOverrideDisableIOAVProtection /f & " +
@@ -103,7 +103,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v DisableArchiveScanning /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v SignatureDisableUpdateOnStartupWithoutEngine /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v DisablePrivacyMode /f & " +
-            @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v DisableBlockAtFirstSeen /f & " +
+            @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v DisableBlockAtFirstSeen /f");
+
+            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c " +
             @"reg delete ""HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost"" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"" /v EnabledV9 /f & " +
             @"reg add ""HKLM\SOFTWARE\Microsoft\Windows Defender"" /v PUAProtection /t REG_DWORD /d 2 /f & " +
@@ -179,7 +181,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             ManageExclusions(false);
 
-            CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -ShowWindowMode:Hide -Wait cmd /c " +
+            CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -M:S -ShowWindowMode:Hide cmd /c " +
             @"reg delete HKLM\SYSTEM\CurrentControlSet\Services\WinDefend /v AutorunsDisabled /f & " +
             @"reg add HKLM\SYSTEM\CurrentControlSet\Services\wscsvc /v DelayedAutoStart /t REG_DWORD /d 1 /f & " +
             @"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\WdFilter\Instances\WdFilter Instance"" /v Altitude /t REG_SZ /d 328010 /f & " +
@@ -206,7 +208,16 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             foreach (var (path, normal, block) in fileMappings)
             {
-                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""rename ""{Path.Combine(path, block)}"" ""{normal}""""");
+                string sourcePath = Path.Combine(path, block);
+                string targetName = normal;
+
+                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""{CleanCommand(string.Join(" && ", new[]  {
+                    $@"takeown /f ""{sourcePath}"" /a",
+                    $@"icacls ""{sourcePath}"" /inheritance:r",
+                    $@"icacls ""{sourcePath}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18",
+                    $@"icacls ""{sourcePath}"" /grant ""{Environment.UserName}"":F",
+                    $@"rename ""{sourcePath}"" ""{targetName}"""
+                }))}""");
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""{CleanCommand(string.Join(" & ", services.Select(kv => $@"reg add \""HKLM\SYSTEM\CurrentControlSet\Services\{kv.Key}\"" /v Start /t REG_DWORD /d {kv.Value} /f")))}""");
@@ -477,8 +488,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
         private static void TerminateProcess()
         {
-            string[] processes = { "smartscreen", "mpdefendercoreservice", "msmpeng", "securityhealthservice", "securityhealthsystray", "securityhealthui", "wuauserv", "searchui", "sechealthui", "configsecuritypolicy", "runtimebroker", "msedge", "ssoncom", "usocoreworker", "defenderbootstrapper", "sensedlpprocessor", "sensetracer", 
-            "dlpuseragent", "lsass", "mpam-d", "mpam-fe", "mpam-fe_bd", "mpas-d", "mpas-fe", "mpas-fe_bd", "mpav-d", "mpav-fe", "mpav-fe_bd", "mpcmdrun", "mpcopyaccelerator", "mpdlpcmd", "mpdlpservice", "mpextms", "mpsigstub", "mrt", "msmpengcp", "mssense", "nissrv", "offlinescannershell", "securekernel", "usocoreworker", "securityhealthhost", 
+            string[] processes = { "smartscreen", "mpdefendercoreservice", "msmpeng", "securityhealthservice", "securityhealthsystray", "securityhealthui", "wuauserv", "searchui", "sechealthui", "configsecuritypolicy", "runtimebroker", "msedge", "ssoncom", "usocoreworker", "defenderbootstrapper", "sensedlpprocessor", "sensetracer",
+            "dlpuseragent", "lsass", "mpam-d", "mpam-fe", "mpam-fe_bd", "mpas-d", "mpas-fe", "mpas-fe_bd", "mpav-d", "mpav-fe", "mpav-fe_bd", "mpcmdrun", "mpcopyaccelerator", "mpdlpcmd", "mpdlpservice", "mpextms", "mpsigstub", "mrt", "msmpengcp", "mssense", "nissrv", "offlinescannershell", "securekernel", "usocoreworker", "securityhealthhost",
             "senseap", "senseaptoast", "sensecm", "sensegpparser", "senseidentity", "senseimdscollector", "senseir", "sensendr", "sensesampleuploader", "sensetvm", "sgrmbroker", "healthattestationclientagent", "wdnissvc", "wdboot", "msseccore", "mssecflt", "mssecwfp", "mdcoresvc", "sensece", "senseui", "sensepp", "wdshield", "mipdlp"  };
             CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
         }
@@ -506,7 +517,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
         private static string CleanCommand(string rawCommand)
         {
             if (string.IsNullOrWhiteSpace(rawCommand))
+            {
                 return string.Empty;
+            }
 
             var lines = rawCommand
                 .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)

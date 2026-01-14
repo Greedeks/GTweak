@@ -41,7 +41,8 @@
     <v:String x:Key="export_warning_noty">Não faz sentido, aplique pelo menos um ajuste primeiro</v:String>
     <v:String x:Key="success_onedrive_noty">A recuperação do OneDrive está em andamento e levará um tempo</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="defender_noty">Levará algum tempo, por favor, espere um pouco</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">Levará algum tempo, por favor, espere um pouco</v:String>
     <v:String x:Key="warn_firewall_noty">Seu firewall está desativado, ative-o e aplique o ajuste novamente</v:String>
     <v:String x:Key="warn_activate_noty">Para começar - ative o Windows. Nem todos os ajustes podem ser aplicados</v:String>
     <v:String x:Key="ready_activate_noty">Seu sistema operacional não precisa ser ativado</v:String>
@@ -383,7 +384,7 @@
     <v:String x:Key="slider3_desc_sys">Altera a taxa de repetição do caractere digitado, o valor recomendado é 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Por padrão, a aceleração do mouse acelera o movimento do mouse. Recomenda-se desligá-la, pois com a aceleração ligada, o movimento uniforme e a precisão direcional deixam a desejar.</v:String>
     <v:String x:Key="tgl2_desc_sys">Se você não quer que uma janela apareça de vez em quando ao realizar tarefas, dizendo para ativar a aderência de teclas ou a filtragem de entrada, e depois de responder "Não", ela aparece novamente depois de um tempo, então desative esta função. Além disso, a filtragem de entrada afeta a velocidade de repetição do teclado e a omissão de teclas repetidas.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Este ajuste desativará e interromperá o Windows Defender, o SmartScreen, cargas desproporcionalmente pesadas no processador pelo Antimalware e a Segurança Baseada em Virtualização (VBS).</v:String>
+    <v:String x:Key="tgl3_desc_sys">Este ajuste desativará e interromperá o Windows Defender, o SmartScreen, cargas desproporcionalmente pesadas no processador pelo Antimalware e a Segurança Baseada em Virtualização (VBS). For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">O ajuste desativará completamente o UAC (Controle de Conta de Usuário), livrando-se de ícones de escudo, notificações de segurança e outras coisas. O UAC não é um programa de proteção completo.</v:String>
     <v:String x:Key="tgl5_desc_sys">Quando você desativa algo relacionado à segurança ou proteção, você recebe constantemente notificações sobre isso. Este ajuste desativará as notificações de segurança da Central de Notificações.</v:String>
     <v:String x:Key="tgl6_desc_sys">Se você prefere atualizar seus aplicativos da Microsoft Store sozinho, precisa desativar o recurso de atualização automática. Assim, a carga na rede diminuirá.</v:String>

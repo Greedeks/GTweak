@@ -41,7 +41,8 @@
     <v:String x:Key="export_warning_noty">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
     <v:String x:Key="success_onedrive_noty">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive 설정 파일이 누락되어 복구가 불가능합니다</v:String>
-    <v:String x:Key="defender_noty">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
+    <v:String x:Key="warn_wd_noty">Expect the process to terminate automatically and the system to restart</v:String>
+    <v:String x:Key="info_wd_noty">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_noty">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="warn_activate_noty">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
     <v:String x:Key="ready_activate_noty">운영 체제를 활성화할 필요가 없습니다</v:String>
@@ -383,7 +384,7 @@
     <v:String x:Key="slider3_desc_sys">입력한 문자의 반복 속도를 변경하며, 권장 값은 31입니다.</v:String>
     <v:String x:Key="tgl1_desc_sys">기본적으로 마우스 가속은 마우스 움직임을 가속화합니다. 가속을 켜면 균일한 움직임과 방향 정확도가 향상되므로 이 기능을 끄는 것이 좋습니다.</v:String>
     <v:String x:Key="tgl2_desc_sys">작업을 수행할 때 가끔씩 키 고정 또는 입력 필터링을 활성화하라는 창이 나타나고 “아니오”라고 대답한 후 잠시 후 다시 나타나는 것을 원하지 않는다면 이 기능을 비활성화하세요. 또한 입력 필터링은 키보드 반복 속도와 반복되는 키를 건너뛰는 속도에 영향을 줍니다.</v:String>
-    <v:String x:Key="tgl3_desc_sys">이 조정은 Windows Defender, 스마트 스크린, 맬웨어 방지 프로세서 및 가상화 기반 보안 (VBS)에 불균형적으로 과중한 부하를 주는 기능을 비활성화 및 중지합니다.</v:String>
+    <v:String x:Key="tgl3_desc_sys">이 조정은 Windows Defender, 스마트 스크린, 맬웨어 방지 프로세서 및 가상화 기반 보안 (VBS)에 불균형적으로 과중한 부하를 주는 기능을 비활성화 및 중지합니다. For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required - the utility will handle everything automatically.</v:String>
     <v:String x:Key="tgl4_desc_sys">이 조정은 UAC (사용자 계정 컨트롤)를 완전히 비활성화하고 방패 아이콘, 보안 알림 및 기타 항목을 제거합니다. UAC는 본격적인 보호 프로그램이 아닙니다.</v:String>
     <v:String x:Key="tgl5_desc_sys">보안 또는 보호와 관련된 기능을 비활성화하면 이에 대한 알림을 지속적으로 받게 됩니다. 이 조정은 알림 센터에서 보안 알림을 비활성화합니다.</v:String>
     <v:String x:Key="tgl6_desc_sys">Microsoft Store에서 앱을 직접 업데이트하려는 경우 자동 업데이트 기능을 해제해야 합니다. 따라서 네트워크의 부하가 줄어듭니다.</v:String>
@@ -478,3 +479,4 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+
