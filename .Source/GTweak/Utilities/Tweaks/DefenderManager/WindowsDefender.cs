@@ -12,7 +12,7 @@ using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
-    internal class WindowsDefender : BackupRights
+    internal class WindowsDefender : AclPermissionsBackup
     {
         private static readonly Dictionary<string, string> services = new Dictionary<string, string>
         {
@@ -109,6 +109,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             @"reg delete ""HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost"" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"" /v EnabledV9 /f & " +
             @"reg add ""HKLM\SOFTWARE\Microsoft\Windows Defender"" /v PUAProtection /t REG_DWORD /d 2 /f & " +
+            @"reg add ""HKLM\SOFTWARE\Microsoft\Windows Defender\Features"" /v TamperProtection /t REG_DWORD /d 1 /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\MRT"" /v DontOfferThroughWUA /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\MRT"" /v DontReportInfectionInformation /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen"" /v ConfigureAppInstallControl /f & " +
@@ -143,12 +144,12 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender", "DisableRoutinelyTakingAction", 0, RegistryValueKind.DWord);
 
-            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Policy", "VerifiedAndReputablePolicyState", 1, RegistryValueKind.DWord);
-
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter");
+
+            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Policy", "VerifiedAndReputablePolicyState", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config", "VulnerableDriverBlocklistEnable", 1, RegistryValueKind.DWord);
-            RegistryHelp.Write(Registry.LocalMachine, @"System\CurrentControlSet\Control\CI\State", "HVCIEnabled", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\CI\Config", "EnabledV9", 1, RegistryValueKind.DWord);
+            RegistryHelp.Write(Registry.LocalMachine, @"System\CurrentControlSet\Control\CI\State", "HVCIEnabled", 1, RegistryValueKind.DWord);
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WTDS");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity", "Enabled");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\DeviceGuard", "EnableVirtualizationBasedSecurity");
@@ -196,7 +197,21 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             foreach (var (path, normal, block) in fileMappings)
             {
-                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""rename ""{Path.Combine(path, block)}"" ""{normal}""""");
+                string sourcePath = Path.Combine(path, block);
+                string targetPath = Path.Combine(path, normal);
+
+                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""{CleanCommand(string.Join(" && ", new[] {
+                    $@"takeown /f ""{sourcePath}"" /a",
+                    $@"rename ""{sourcePath}"" ""{normal}""",
+                    $@"icacls ""{targetPath}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",
+                    $@"icacls ""{targetPath}"" /inheritance:r",
+                    $@"icacls ""{targetPath}"" /grant *S-1-5-32-544:F",
+                    $@"icacls ""{targetPath}"" /grant *S-1-5-32-545:R",
+                    $@"icacls ""{targetPath}"" /grant *S-1-5-18:F",
+                    $@"icacls ""{targetPath}"" /grant *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464:F",
+                    $@"icacls ""{targetPath}"" /grant *S-1-15-2-1:R",
+                    $@"icacls ""{targetPath}"" /grant *S-1-15-2-2:R",
+                    $@"icacls ""{targetPath}"" /remove ""{Environment.UserName}"""}))}""");
             }
 
             ImportRights();

@@ -154,7 +154,7 @@
     <Compile Include="Utilities\Maintenance\ClearingMemory.cs" />
     <Compile Include="Utilities\Maintenance\RegistryExporter.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
-    <Compile Include="Utilities\Tweaks\DefenderManager\BackupRights.cs" />
+    <Compile Include="Utilities\Tweaks\DefenderManager\AclPermissionsBackup.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />
     <Compile Include="Utilities\Maintenance\NTFSCompressor.cs" />

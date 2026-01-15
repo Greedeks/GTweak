@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GTweak.Utilities.Tweaks.DefenderManager
 {
-    internal class BackupRights : TaskSchedulerManager
+    internal class AclPermissionsBackup : TaskSchedulerManager
     {
         private static readonly Dictionary<string, RegistryHive> _storageRegPaths = new Dictionary<string, RegistryHive>
         {
@@ -93,14 +93,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             internal object Value { get; set; }
         }
 
-        private class FileRightsInfo
-        {
-            internal string OriginalPath { get; set; }
-            internal string Owner { get; set; }
-            internal string Permissions { get; set; }
-            internal string Sddl { get; set; }
-        }
-
         internal static void ExportRights()
         {
             try
@@ -177,20 +169,20 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                     }
                 }
 
-                File.WriteAllText(PathLocator.Files.BackupDataJson, JsonConvert.SerializeObject(allValues, Formatting.Indented));
-                File.WriteAllText(PathLocator.Files.BackupRightsAcl, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
+                File.WriteAllText(PathLocator.Files.BackupJsonWD, JsonConvert.SerializeObject(allValues, Formatting.Indented));
+                File.WriteAllText(PathLocator.Files.BackupAclWD, JsonConvert.SerializeObject(aclDataDict, Formatting.Indented));
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         internal static void ImportRights()
         {
-            if (File.Exists(PathLocator.Files.BackupDataJson) && File.Exists(PathLocator.Files.BackupRightsAcl))
+            if (File.Exists(PathLocator.Files.BackupJsonWD) && File.Exists(PathLocator.Files.BackupAclWD))
             {
                 try
                 {
-                    Dictionary<string, Dictionary<string, RegistryValueBackup>> allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, RegistryValueBackup>>>(File.ReadAllText(PathLocator.Files.BackupDataJson));
-                    Dictionary<string, string> aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(PathLocator.Files.BackupRightsAcl));
+                    Dictionary<string, Dictionary<string, RegistryValueBackup>> allValues = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, RegistryValueBackup>>>(File.ReadAllText(PathLocator.Files.BackupJsonWD));
+                    Dictionary<string, string> aclDataDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(PathLocator.Files.BackupAclWD));
 
                     if (allValues == null)
                     {

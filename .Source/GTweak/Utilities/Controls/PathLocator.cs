@@ -320,9 +320,9 @@ namespace GTweak.Utilities.Controls
 
             internal static readonly string ErrorLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GTweak_Error.log");
 
-            internal static readonly string BackupDataJson = Path.Combine(Folders.DefenderBackup, "BackupData.json");
+            internal static readonly string BackupJsonWD = Path.Combine(Folders.DefenderBackup, "BackupData.json");
 
-            internal static readonly string BackupRightsAcl = Path.Combine(Folders.DefenderBackup, "BackupRights.acl");
+            internal static readonly string BackupAclWD = Path.Combine(Folders.DefenderBackup, "AclBackup.acl");
         }
 
         internal static class Registry
