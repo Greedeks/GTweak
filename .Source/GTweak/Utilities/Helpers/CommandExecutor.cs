@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
 
@@ -110,6 +112,35 @@ namespace GTweak.Utilities.Helpers
             process.EnableRaisingEvents = true;
             process.Exited += (sender, args) => tcs.TrySetResult(null);
             return tcs.Task;
+        }
+
+        internal static string CleanCommand(string rawCommand)
+        {
+            if (string.IsNullOrWhiteSpace(rawCommand))
+            {
+                return string.Empty;
+            }
+
+            var lines = rawCommand
+                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim())
+                .Where(line => !string.IsNullOrEmpty(line))
+                .Select(line => Regex.Replace(line, @"\s+", " "))
+                .ToList();
+
+            if (lines.Count == 0)
+            {
+                return "";
+            }
+
+            if (lines.Count == 1)
+            {
+                return lines[0];
+            }
+
+            string separator = rawCommand.Contains("&&") ? " && " : rawCommand.Contains("&") ? " & " : " && ";
+
+            return string.Join(separator, lines);
         }
     }
 }

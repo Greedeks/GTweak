@@ -192,17 +192,16 @@ namespace GTweak.Utilities.Maintenance
             {
                 string dir = PathLocator.Folders.WindowsOld;
 
-                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{dir}\" /r /d y & icacls \"{dir}\" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 & icacls \"{dir}\" /grant {Environment.UserName}:F /t & rd /s /q \"{dir}\"");
+                UnlockHandleHelper.UnlockDirectory(dir);
+
+                CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{dir}"" /r /d y && icacls ""{dir}"" /inheritance:r && icacls ""{dir}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{dir}"" /grant {Environment.UserName}:F /t && rd /s /q ""{dir}""");
 
                 for (int i = 0; Directory.Exists(dir) && i < 10; i++)
                 {
-                    try { Directory.Delete(dir, true); }
+                    try { Directory.Delete(dir, true); Thread.Sleep(300); }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                    TakingOwnership.GrantAdministratorsAccess(dir, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                    CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{dir}\"");
-
-                    Thread.Sleep(500);
+                    CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{dir}' -Recurse -Force", true);
                 }
             }
 

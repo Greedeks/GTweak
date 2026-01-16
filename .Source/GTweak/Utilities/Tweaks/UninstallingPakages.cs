@@ -250,18 +250,19 @@ namespace GTweak.Utilities.Tweaks
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         break;
                     case "Edge":
-                        string[] processes = { "smartscreen", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "msedgewebview2", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "runtimebroker", "widgets" };
+                        string[] processes = { "msedge", "edgeupdate", "edgeupdatem", "msedgewebview2", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "widgets", "microsoftedgesh", "microsoftedgecp", "microsoftedge" };
                         CommandExecutor.RunCommandAsTrustedInstaller("/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
 
                         RemoveTasks(edgeTasks);
 
-                        CommandExecutor.RunCommandAsTrustedInstaller(@"/c rmdir /s /q %LocalAppData%\Microsoft\Edge");
-                        CommandExecutor.RunCommandAsTrustedInstaller(@"/c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");
-                        CommandExecutor.RunCommandAsTrustedInstaller(@"/c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""");
-                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /r ""{PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del ""%f""");
-                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /r ""{PathLocator.Folders.SystemDrive}Users"" %f in (*Edge*) do @if exist ""%f"" del /f /q ""%f""");
-                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /d %d in (""{PathLocator.Folders.SystemDrive}Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""");
-                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /f ""delims="" %i in ('dir /b /s ""{PathLocator.Folders.SystemDrive}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))");
+                        CommandExecutor.RunCommandAsTrustedInstaller(CommandExecutor.CleanCommand(string.Join(" & ", new[] {
+                        @"/c rmdir /s /q ""%LocalAppData%\Microsoft\Edge""",
+                        @"for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""",
+                        @"del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""",
+                        $@"for /r ""{PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del ""%f""",
+                        $@"for /r ""{PathLocator.Folders.SystemDrive}Users"" %f in (*Edge*) do @if exist ""%f"" del /f /q ""%f""",
+                        $@"for /d %d in (""{PathLocator.Folders.SystemDrive}Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""",
+                        $@"for /f ""delims="" %i in ('dir /b /s ""{PathLocator.Folders.SystemDrive}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))"})));
 
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", true);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}", true);
@@ -288,17 +289,14 @@ namespace GTweak.Utilities.Tweaks
 
                         static void RemoveDirectory(string path)
                         {
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\" /r /d y & icacls \"{path}\" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 & icacls \"{path}\" /grant {Environment.UserName}:F /t & rd /s /q \"{path}\"");
+                            CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{path}"" /r /d y && icacls ""{path}"" /inheritance:r && icacls ""{path}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{path}"" /grant {Environment.UserName}:F /t && rd /s /q ""{path}""");
 
                             for (int i = 0; Directory.Exists(path) && i < 10; i++)
                             {
-                                try { Directory.Delete(path, true); }
+                                try { Directory.Delete(path, true); Thread.Sleep(300); }
                                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                                TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
-
-                                Thread.Sleep(500);
+                                CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{path}' -Recurse -Force", true);
                             }
                         }
 
@@ -309,8 +307,9 @@ namespace GTweak.Utilities.Tweaks
                                 continue;
                             }
 
-                            CommandExecutor.RunCommandAsTrustedInstaller("/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
-                            RemoveDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder));
+                            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", folder);
+                            UnlockHandleHelper.UnlockDirectory(dir);
+                            RemoveDirectory(dir);
                         }
 
                         try

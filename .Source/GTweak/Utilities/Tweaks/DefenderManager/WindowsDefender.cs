@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
@@ -193,14 +192,14 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             ManageExclusions(false);
             SetTaskState(true, winDefenderTasks);
 
-            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c {CleanCommand(string.Join(" & ", services.Select(kv => $@"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\{kv.Key}"" /v Start /t REG_DWORD /d {kv.Value} /f")))}""");
+            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c {CommandExecutor.CleanCommand(string.Join(" & ", services.Select(kv => $@"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\{kv.Key}"" /v Start /t REG_DWORD /d {kv.Value} /f")))}""");
 
             foreach (var (path, normal, block) in fileMappings)
             {
                 string sourcePath = Path.Combine(path, block);
                 string targetPath = Path.Combine(path, normal);
 
-                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""{CleanCommand(string.Join(" && ", new[] {
+                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
                     $@"takeown /f ""{sourcePath}"" /a",
                     $@"rename ""{sourcePath}"" ""{normal}""",
                     $@"icacls ""{targetPath}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",
@@ -231,7 +230,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c ""rename ""{Path.Combine(path, normal)}"" ""{block}""""");
             }
 
-            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c {CleanCommand(string.Join(" & ", services.Select(kv => $@"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\{kv.Key}"" /v Start /t REG_DWORD /d 4 /f")))}""");
+            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c {CommandExecutor.CleanCommand(string.Join(" & ", services.Select(kv => $@"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\{kv.Key}"" /v Start /t REG_DWORD /d 4 /f")))}""");
 
             CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -M:S -ShowWindowMode:Hide -Wait cmd /c " +
             $"for /d %D in (\"{Path.Combine(PathLocator.Folders.SystemDrive, @"ProgramData\\Microsoft\\Windows Defender\\Platform\\*")}\") do if exist \"%D\\MsMpEng.exe\" ren \"%D\\MsMpEng.exe\" BlockAntimalware.exe & " +
@@ -509,34 +508,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-        }
-        private static string CleanCommand(string rawCommand)
-        {
-            if (string.IsNullOrWhiteSpace(rawCommand))
-            {
-                return string.Empty;
-            }
-
-            var lines = rawCommand
-                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(line => line.Trim())
-                .Where(line => !string.IsNullOrEmpty(line))
-                .Select(line => Regex.Replace(line, @"\s+", " "))
-                .ToList();
-
-            if (lines.Count == 0)
-            {
-                return "";
-            }
-
-            if (lines.Count == 1)
-            {
-                return lines[0];
-            }
-
-            string separator = rawCommand.Contains("&&") ? " && " : rawCommand.Contains("&") ? " & " : " && ";
-
-            return string.Join(separator, lines);
         }
     }
 }

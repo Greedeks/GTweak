@@ -151,6 +151,7 @@
     <Compile Include="Converters\ScrollFadeMaskConverter.cs" />
     <Compile Include="Utilities\Configuration\DiskTypeIdentifier.cs" />
     <Compile Include="Utilities\Configuration\HardwareData.cs" />
+    <Compile Include="Utilities\Helpers\UnlockHandleHelper.cs" />
     <Compile Include="Utilities\Maintenance\ClearingMemory.cs" />
     <Compile Include="Utilities\Maintenance\RegistryExporter.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />

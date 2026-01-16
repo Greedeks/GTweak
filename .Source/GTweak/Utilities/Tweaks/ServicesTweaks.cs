@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
@@ -208,11 +207,26 @@ namespace GTweak.Utilities.Tweaks
 
                             if (isDisabled)
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant {Environment.UserName}:F & rename \"{currentFilePath}\" \"{Path.GetFileName(targetFilePath)}\"");
+                                CommandExecutor.RunCommandAsTrustedInstaller($@"cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                $@"takeown /f ""{currentFilePath}"" /a",
+                                $@"icacls ""{currentFilePath}"" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18",
+                                $@"icacls ""{currentFilePath}"" /grant ""{Environment.UserName}"":F",
+                                $@"rename ""{currentFilePath}"" ""{Path.GetFileName(targetFilePath)}"""}))}""");
                             }
                             else
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rename \"{currentFilePath}\" \"{Path.GetFileName(targetFilePath)}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
+                                CommandExecutor.RunCommandAsTrustedInstaller($@"cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                $@"takeown /f ""{currentFilePath}"" /a",
+                                $@"rename ""{currentFilePath}"" ""{Path.GetFileName(targetFilePath)}""",
+                                $@"icacls ""{targetFilePath}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",
+                                $@"icacls ""{targetFilePath}"" /inheritance:r",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-32-544:F",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-32-545:R",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-18:F",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464:F",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-15-2-1:R",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-15-2-2:R",
+                                $@"icacls ""{targetFilePath}"" /remove ""{Environment.UserName}"""}))}""");
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
@@ -439,17 +453,16 @@ namespace GTweak.Utilities.Tweaks
 
                         foreach (string path in new[] { $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\Download", $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\DataStore", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
                         {
-                            CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\" /r /d y & icacls \"{path}\" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 & icacls \"{path}\" /grant {Environment.UserName}:F /t & rd /s /q \"{path}\"");
+                            UnlockHandleHelper.UnlockDirectory(path);
 
-                            for (int i = 0; Directory.Exists(path) && i < 10; i++)
+                            CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{path}"" /r /d y && icacls ""{path}"" /inheritance:r && icacls ""{path}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{path}"" /grant {Environment.UserName}:F /t && rd /s /q ""{path}""");
+
+                            for (int i = 0; Directory.Exists(path) && i < 5; i++)
                             {
                                 try { Directory.Delete(path, true); }
                                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                                TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
-
-                                Thread.Sleep(500);
+                                CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{path}' -Recurse -Force", true);
                             }
                         }
 
