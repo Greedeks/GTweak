@@ -20,6 +20,8 @@ namespace GTweak.Utilities.Controls
             internal static readonly string WindowsOld = Path.Combine(SystemDrive, "Windows.old");
 
             internal static readonly string Tasks = Path.Combine(Environment.SystemDirectory, "Tasks");
+
+            internal static readonly string WallpaperCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Windows", "Themes");
         }
 
         internal static class Executable
@@ -275,7 +277,6 @@ namespace GTweak.Utilities.Controls
 
                 return (string.Empty, string.Empty);
             }
-
 
             internal static readonly string CommandShell = FindExecutablePath("cmd.exe");
 

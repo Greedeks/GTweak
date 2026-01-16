@@ -113,11 +113,11 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Wpf.Ui, Version=4.1.0.0, Culture=neutral, PublicKeyToken=11f9f5cc97b3ffd6, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WPF-UI.4.1.0\lib\net472\Wpf.Ui.dll</HintPath>
+    <Reference Include="Wpf.Ui, Version=4.2.0.0, Culture=neutral, PublicKeyToken=11f9f5cc97b3ffd6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WPF-UI.4.2.0\lib\net472\Wpf.Ui.dll</HintPath>
     </Reference>
-    <Reference Include="Wpf.Ui.Abstractions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=11f9f5cc97b3ffd6, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WPF-UI.Abstractions.4.1.0\lib\net462\Wpf.Ui.Abstractions.dll</HintPath>
+    <Reference Include="Wpf.Ui.Abstractions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=11f9f5cc97b3ffd6, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WPF-UI.Abstractions.4.2.0\lib\net462\Wpf.Ui.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="XamlRadialProgressBar.DotNet, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\XamlRadialProgressBar.1.0.3\lib\net452\XamlRadialProgressBar.DotNet.dll</HintPath>

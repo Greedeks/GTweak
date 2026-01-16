@@ -170,11 +170,14 @@ namespace GTweak.Utilities.Configuration
             {
                 string wallpaperPath = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "WallPaper", string.Empty);
 
-                if (!string.IsNullOrWhiteSpace(wallpaperPath) && File.Exists(wallpaperPath))
+                string filePath = !string.IsNullOrWhiteSpace(wallpaperPath) && File.Exists(wallpaperPath) ? wallpaperPath :
+                    Directory.GetFiles(PathLocator.Folders.WallpaperCache, "TranscodedWallpaper*").Select(f => new FileInfo(f)).Where(f => f.Exists).OrderByDescending(f => f.LastWriteTime).FirstOrDefault()?.FullName;
+
+                if (!string.IsNullOrWhiteSpace(filePath))
                 {
                     BitmapImage bmp = new BitmapImage();
                     bmp.BeginInit();
-                    bmp.UriSource = new Uri(wallpaperPath, UriKind.Absolute);
+                    bmp.UriSource = new Uri(filePath, UriKind.Absolute);
                     bmp.DecodePixelWidth = 100;
                     bmp.CacheOption = BitmapCacheOption.OnLoad;
                     bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
