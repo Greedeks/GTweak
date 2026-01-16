@@ -1,4 +1,4 @@
-﻿using GTweak.Utilities.Managers;
+using GTweak.Utilities.Managers;
 
 namespace GTweak.Utilities.Storage
 {
@@ -64,12 +64,12 @@ namespace GTweak.Utilities.Storage
 
         protected static readonly string[] oneDriveTask = {
         @"\Microsoft\Windows\OneDrive\OneDrive Standalone Update Task",
-        $@"\{TaskSchedulerManager.GetTaskFullPath("OneDrive Startup")}" };
+        TaskSchedulerManager.GetTaskFullPath("OneDrive Startup") };
 
         protected static readonly string[] edgeTasks = {
-        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA")}",
-        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore")}",
-        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")}" };
+        TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA"),
+        TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore"),
+        TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")};
 
         protected static readonly string[] winDefenderTasks = {
         @"\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh",

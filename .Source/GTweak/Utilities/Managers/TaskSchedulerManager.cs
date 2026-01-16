@@ -66,10 +66,10 @@ namespace GTweak.Utilities.Managers
             Task.Run(() =>
             {
                 string[] existingTasks = GetExistingTasks(tasklist);
+
                 if (existingTasks.Length != 0)
                 {
-                    IEnumerable<string> commands = existingTasks.Select(task => $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task.Replace("\"", "\\\"")}\"");
-                    CommandExecutor.RunCommandAsTrustedInstaller($"/c {string.Join(" & ", commands)}");
+                    CommandExecutor.RunCommandAsTrustedInstaller("/c " + CommandExecutor.CleanCommand(string.Join(" & ", existingTasks.Select(task => $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\""))));
                 }
             });
         }
@@ -98,17 +98,21 @@ namespace GTweak.Utilities.Managers
         internal static string GetTaskFullPath(string partialName)
         {
             string[] files = Directory.GetFiles(PathLocator.Folders.Tasks, "*", SearchOption.AllDirectories);
-            string matchPath = files.FirstOrDefault(path => Path.GetFileName(path).IndexOf(partialName, StringComparison.OrdinalIgnoreCase) >= 0);
 
-            if (!string.IsNullOrWhiteSpace(matchPath))
+            List<string> matches = files.Where(path => string.Equals(Path.GetFileName(path), partialName, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            if (matches.Count != 0)
             {
-                return Path.GetFileName(matchPath);
+                string matchPath = matches[0];
+
+                string relativePath = matchPath.Substring(PathLocator.Folders.Tasks.Length).Replace(Path.DirectorySeparatorChar, '\\');
+
+                return relativePath.StartsWith("\\") ? relativePath : "\\" + relativePath;
             }
-            else
-            {
-                return partialName;
-            }
+
+            return partialName;
         }
+
 
         private static string[] GetExistingTasks(params string[] tasklist)
         {
