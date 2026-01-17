@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace GTweak.Utilities.Controls
         {
             try
             {
-                using (FileStream stream = new FileStream(PathLocator.Files.ErrorLog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read))
+                using (FileStream stream = new FileStream(PathLocator.Files.ErrorLog, FileMode.Create, FileAccess.Write, FileShare.Read))
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                 {
                     string headerLine = "---------------------------------------------------------";
@@ -47,7 +48,8 @@ namespace GTweak.Utilities.Controls
                     byte exLevel = 1;
 
                     await writer.WriteLineAsync($"GTweak has crashed!\n{headerLine}\nIf you wish to report this, please open an issue here:\nhttps://github.com/Greedeks/GTweak/issues\n{headerLine}\n");
-                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {HardwareData.OS.Name}\n{headerLine}\n");
+                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {(string.IsNullOrEmpty(HardwareData.OS?.Name) ? "Unknown (Loading error)" : HardwareData.OS.Name)}\nRelease: {SettingsEngine.currentRelease}\n{headerLine}\n");
+
 
                     while (currentEx != null)
                     {
@@ -60,7 +62,30 @@ namespace GTweak.Utilities.Controls
 
                         await writer.WriteLineAsync($"Type: {currentEx.GetType().FullName}");
                         await writer.WriteLineAsync($"Error: {currentEx.Message}");
-                        await writer.WriteLineAsync($"Stack Trace:\n{currentEx.StackTrace}");
+
+                        StackTrace stackTrace = new StackTrace(ex, true);
+
+                        if (stackTrace.FrameCount > 0)
+                        {
+                            StackFrame frame = stackTrace.GetFrame(0);
+
+                            if (frame?.GetMethod() is MethodBase method)
+                            {
+                                await writer.WriteLineAsync($"Method: {method.DeclaringType?.FullName}.{method.Name}");
+
+                                ParameterInfo[] parameters = method.GetParameters();
+                                if (parameters.Length > 0)
+                                {
+                                    await writer.WriteLineAsync($"Parameters:");
+                                    foreach (var param in parameters)
+                                    {
+                                        await writer.WriteLineAsync($"{param.Name}: {param.ParameterType}");
+                                    }
+                                }
+                            }
+                        }
+
+                        await writer.WriteLineAsync($"Stack Trace:\n{stackTrace}");
                         await writer.WriteLineAsync($"\n{headerLine}\n");
 
                         currentEx = currentEx.InnerException;
