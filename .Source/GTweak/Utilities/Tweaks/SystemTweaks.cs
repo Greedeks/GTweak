@@ -182,7 +182,7 @@ namespace GTweak.Utilities.Tweaks
         }
 
 
-        internal void ViewBluetoothStatus()
+        internal static void ViewBluetoothStatus()
         {
             try
             {
@@ -192,13 +192,13 @@ namespace GTweak.Utilities.Tweaks
             catch { _isBluetoothStatus = false; }
         }
 
-        internal void ViewNetshState()
+        internal static void ViewNetshState()
         {
             string getStateNetsh = CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false).Result;
             _isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
         }
 
-        internal void ViewConfigTick()
+        internal static void ViewConfigTick()
         {
             string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).Result;
             _isTickState = !Regex.IsMatch(output, @"(?is)(?=.*\bdisabledynamictick\s+(yes|true))(?=.*\buseplatformclock\s+(no|false))", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
@@ -237,7 +237,7 @@ namespace GTweak.Utilities.Tweaks
             switch (tweak)
             {
                 case "TglButton1":
-                    SystemParametersInfo(UIAction.SPI_SETMOUSE, 0, isDisabled ? new uint[3] : new uint[3] { 1, 6, 10 }, 2);
+                    SystemParametersInfo(UIAction.SPI_SETMOUSE, 0, isDisabled ? new uint[3] : new uint[] { 1, 6, 10 }, 2);
                     RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseSpeed", isDisabled ? "0" : "1", RegistryValueKind.String);
                     RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold1", isDisabled ? "0" : "6", RegistryValueKind.String);
                     RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseThreshold2", isDisabled ? "0" : "10", RegistryValueKind.String);

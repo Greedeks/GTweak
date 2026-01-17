@@ -19,7 +19,7 @@ namespace GTweak.Utilities.Animation
 
             if (onCompleted != null)
             {
-                doubleAnim.Completed += (s, e) => onCompleted();
+                doubleAnim.Completed += delegate { onCompleted(); };
             }
 
             Timeline.SetDesiredFrameRate(doubleAnim, 120);
@@ -32,7 +32,7 @@ namespace GTweak.Utilities.Animation
 
             if (onCompleted != null)
             {
-                doubleAnim.Completed += (s, e) => onCompleted();
+                doubleAnim.Completed += delegate { onCompleted(); };
             }
 
             Timeline.SetDesiredFrameRate(doubleAnim, 120);

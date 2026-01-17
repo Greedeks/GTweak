@@ -35,7 +35,7 @@ namespace GTweak.Windows
                 string tempFileName = $"GTweak_{Guid.NewGuid().ToString("N").Substring(0, 8)}.exe";
 
                 using WebClient webClient = new WebClient();
-                webClient.DownloadProgressChanged += (s, e) =>
+                webClient.DownloadProgressChanged += (_, e) =>
                 {
                     ProgressDownload.Value = e.ProgressPercentage;
                     SizeByte.Text = $"{Math.Round(e.BytesReceived / 1024.0)} KB / {Math.Round(e.TotalBytesToReceive / 1024.0)} KB";

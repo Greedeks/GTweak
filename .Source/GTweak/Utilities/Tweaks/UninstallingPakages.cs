@@ -109,7 +109,7 @@ namespace GTweak.Utilities.Tweaks
             return false;
         }
 
-        internal async void CheckingForLocalAccount()
+        internal async static void CheckingForLocalAccount()
         {
             string output = await CommandExecutor.GetCommandOutput("Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource");
             _isLocalAccount = output.IndexOf("MicrosoftAccount", StringComparison.OrdinalIgnoreCase) < 0;
@@ -340,7 +340,6 @@ namespace GTweak.Utilities.Tweaks
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-
                         break;
                 }
             });

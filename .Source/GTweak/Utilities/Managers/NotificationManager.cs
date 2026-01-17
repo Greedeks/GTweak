@@ -99,7 +99,7 @@ namespace GTweak.Utilities.Managers
                             window.NoticeText = Application.Current.Resources[action == NoticeAction.Logout ? "logout_noty" : "restart_noty"] as string;
                         }
 
-                        window.Closed += (s, e) => Interlocked.Exchange(ref _isNotificationOpen, 0);
+                        window.Closed += delegate { Interlocked.Exchange(ref _isNotificationOpen, 0); };
 
                         await Task.Delay(_delayMs).ContinueWith(_ =>
                         {

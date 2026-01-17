@@ -15,7 +15,6 @@ namespace GTweak.Windows
     public partial class LoadingWindow : FluentWindow
     {
         private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
-        private readonly SystemTweaks _systemTweaks = new SystemTweaks();
         private readonly UninstallingPakages _uninstallingPakages = new UninstallingPakages();
 
         public LoadingWindow()
@@ -59,10 +58,10 @@ namespace GTweak.Windows
                 () => ExecuteWithLogging(_systemDiagnostics.GetHardwareData, nameof(_systemDiagnostics.GetHardwareData)),
                 () => ExecuteWithLogging(_systemDiagnostics.ValidateVersionUpdates, nameof(_systemDiagnostics.ValidateVersionUpdates)),
                 () => ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages)),
-                () => ExecuteWithLogging(_uninstallingPakages.CheckingForLocalAccount, nameof(_uninstallingPakages.CheckingForLocalAccount)),
-                () => ExecuteWithLogging(_systemTweaks.ViewNetshState, nameof(_systemTweaks.ViewNetshState)),
-                () => ExecuteWithLogging(_systemTweaks.ViewBluetoothStatus, nameof(_systemTweaks.ViewBluetoothStatus)),
-                () => ExecuteWithLogging(_systemTweaks.ViewConfigTick, nameof(_systemTweaks.ViewConfigTick))
+                () => ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount)),
+                () => ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState)),
+                () => ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus)),
+                () => ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick))
             );
 
             ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _systemDiagnostics.GetProcessCount().Result, nameof(_systemDiagnostics.GetProcessCount));

@@ -110,7 +110,7 @@ namespace GTweak.Utilities.Helpers
 
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
             process.EnableRaisingEvents = true;
-            process.Exited += (sender, args) => tcs.TrySetResult(null);
+            process.Exited += delegate { tcs.TrySetResult(null); };
             return tcs.Task;
         }
 
@@ -121,12 +121,7 @@ namespace GTweak.Utilities.Helpers
                 return string.Empty;
             }
 
-            var lines = rawCommand
-                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(line => line.Trim())
-                .Where(line => !string.IsNullOrEmpty(line))
-                .Select(line => Regex.Replace(line, @"\s+", " "))
-                .ToList();
+            var lines = rawCommand.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).Where(line => !string.IsNullOrEmpty(line)).Select(line => Regex.Replace(line, @"\s+", " ")).ToList();
 
             if (lines.Count == 0)
             {

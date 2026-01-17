@@ -49,13 +49,7 @@ namespace GTweak.View
             }
         }
 
-        private void Package_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (DescBlock.Text != DescBlock.DefaultText)
-            {
-                DescBlock.Text = DescBlock.DefaultText;
-            }
-        }
+        private void Package_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
 
         private async void ToggleButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

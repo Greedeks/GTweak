@@ -23,7 +23,7 @@
 
     <SolidColorBrush x:Key="Brush_Separator" Color="#C8C8C8"/>
 
-    <SolidColorBrush x:Key="Brush_Background_СomboBox" Color="#F9F9F9"/>
+    <SolidColorBrush x:Key="Brush_Background_ComboBox" Color="#F9F9F9"/>
     <SolidColorBrush x:Key="Brush_ComboBoxBorder_Hover" Color="#008C47"/>
     <SolidColorBrush x:Key="Brush_ComboBoxBG_Active" Color="#E0E0E0"/>
 

@@ -34,13 +34,7 @@ namespace GTweak.View
             }
         }
 
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (DescBlock.Text != DescBlock.DefaultText)
-            {
-                DescBlock.Text = DescBlock.DefaultText;
-            }
-        }
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {

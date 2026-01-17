@@ -29,7 +29,7 @@ namespace GTweak.Utilities.Animation
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
             storyboard.Children.Add(opacityAnimation);
 
-            handler = (s, e) =>
+            handler = delegate
             {
                 storyboard.Children.Clear();
                 storyboard.Completed -= handler;
