@@ -73,7 +73,7 @@ namespace GTweak.Windows
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            int index = Array.IndexOf(new[] { 0, 10, 30, 55, 75, 95 }, e.ProgressPercentage);
+            int index = Array.IndexOf(new[] { 0, 10, 30, 55, 75, 95 }, e?.ProgressPercentage ?? 0);
             if (index > 0)
             {
                 TypewriterAnimation.Create((string)FindResource($"step{++index}_load"), StatusLoading, TimeSpan.FromMilliseconds(200));

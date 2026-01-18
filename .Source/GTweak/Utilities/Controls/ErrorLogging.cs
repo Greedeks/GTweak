@@ -77,7 +77,7 @@ namespace GTweak.Utilities.Controls
                                 if (parameters.Length > 0)
                                 {
                                     await writer.WriteLineAsync($"Parameters:");
-                                    foreach (var param in parameters)
+                                    foreach (ParameterInfo param in parameters)
                                     {
                                         await writer.WriteLineAsync($"{param.Name}: {param.ParameterType}");
                                     }

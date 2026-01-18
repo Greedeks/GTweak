@@ -83,7 +83,7 @@ namespace GTweak.Assets.UserControl
                 .Where(c => c != null && c.Visibility != Visibility.Collapsed)
                 .ToList();
 
-            if (visibleChildren.Count == 0)
+            if (visibleChildren?.Count == 0)
             {
                 return new Size(0, 0);
             }
@@ -96,7 +96,7 @@ namespace GTweak.Assets.UserControl
 
         private void ArrangeAligned(List<ColumnInfo> columns, double availableWidth)
         {
-            if (columns == null || columns.Count == 0)
+            if (columns?.Count == 0)
             {
                 return;
             }
@@ -112,10 +112,10 @@ namespace GTweak.Assets.UserControl
 
             double x = xStart;
 
-            for (int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < columns?.Count; i++)
             {
                 var column = columns[i];
-                if (column?.Elements == null || column.Elements.Count == 0)
+                if (column?.Elements == null || column?.Elements.Count == 0)
                 {
                     x += column?.Width ?? 0.0;
                     x += HorizontalSpacing;
@@ -126,7 +126,7 @@ namespace GTweak.Assets.UserControl
                 double columnX = x + shift;
                 double y = 0;
 
-                foreach (var child in column.Elements)
+                foreach (var child in column?.Elements)
                 {
                     if (child.Visibility == Visibility.Collapsed)
                     {
@@ -160,15 +160,20 @@ namespace GTweak.Assets.UserControl
 
         private double CalculateMaxColumnHeight(List<ColumnInfo> columns)
         {
-            if (columns == null || columns.Count == 0)
+            if (columns?.Count == 0)
             {
                 return 0;
             }
 
             return columns.Max(column =>
             {
+                if (column?.Elements == null)
+                {
+                    return 0;
+                }
+
                 double h = 0;
-                foreach (var child in column.Elements)
+                foreach (var child in column?.Elements)
                 {
                     if (child.Visibility == Visibility.Collapsed)
                     {
@@ -183,7 +188,7 @@ namespace GTweak.Assets.UserControl
 
         private List<ColumnInfo> CreateOptimalColumns(double availableWidth, double availableHeight, List<UIElement> visibleChildren)
         {
-            if (visibleChildren == null || visibleChildren.Count == 0)
+            if (visibleChildren?.Count == 0)
             {
                 return new List<ColumnInfo>();
             }

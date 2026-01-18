@@ -23,19 +23,13 @@ namespace GTweak.Utilities.Tweaks
 
         internal void GetInstalledPackages()
         {
-            try
-            {
-                InstalledPackagesCache = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages") ?? new HashSet<string>();
-            }
+            try { InstalledPackagesCache = RegistryHelp.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages") ?? new HashSet<string>(); }
             catch (Exception ex)
             {
                 ErrorLogging.LogDebug(ex);
                 InstalledPackagesCache = new HashSet<string>();
             }
-            finally
-            {
-                OnPackagesChanged();
-            }
+            finally { OnPackagesChanged(); }
         }
 
         internal static Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)> PackagesDetails = new Dictionary<string, (string Alias, bool IsUnavailable, List<string> Scripts)>()
@@ -340,6 +334,8 @@ namespace GTweak.Utilities.Tweaks
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        break;
+                    default:
                         break;
                 }
             });

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
@@ -32,7 +33,7 @@ namespace GTweak
 
         private async void App_Startup(object sender, StartupEventArgs e)
         {
-            if (e.Args != null && e.Args.Any(arg => arg.Equals("uninstall", StringComparison.OrdinalIgnoreCase)))
+            if (e.Args != null && e.Args.Any(arg => string.Equals(arg, "uninstall", StringComparison.OrdinalIgnoreCase)))
             {
                 SettingsEngine.SelfRemoval();
                 return;
@@ -52,13 +53,13 @@ namespace GTweak
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             ErrorLogging.LogWritingFile(e.Exception);
-            e.Handled = true;
+            e!.Handled = true;
             Environment.Exit(0);
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            if (e.ExceptionObject is Exception ex)
+            if (e?.ExceptionObject is Exception ex)
             {
                 ErrorLogging.LogWritingFile(ex);
             }
@@ -112,7 +113,7 @@ namespace GTweak
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
-                    Source = GetResourceUri(char.ToUpper(value[0]) + value.Substring(1).ToLower(), true)
+                    Source = GetResourceUri(char.ToUpper(value[0], CultureInfo.InvariantCulture) + value.Substring(1).ToLower(CultureInfo.InvariantCulture), true)
                 };
 
                 foreach (ResourceDictionary oldDictionary in Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Styles/Themes/")).ToList())

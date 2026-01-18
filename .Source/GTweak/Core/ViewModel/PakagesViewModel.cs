@@ -60,7 +60,7 @@ namespace GTweak.Core.ViewModel
 
         private void UpdatePackageState(PakagesModel item)
         {
-            if (UninstallingPakages.PackagesDetails.TryGetValue(item.Name, out var val))
+            if (UninstallingPakages.PackagesDetails?.TryGetValue(item?.Name ?? default, out var val) == true)
             {
                 item.IsUnavailable = !val.IsUnavailable;
 

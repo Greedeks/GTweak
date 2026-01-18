@@ -13,7 +13,7 @@ namespace GTweak.Utilities.Animation
 
         internal static void SetValue(DependencyObject dObject, int value) => dObject.SetValue(ValueProperty, value);
 
-        internal static int GetValue(DependencyObject dObject) => (int)dObject.GetValue(ValueProperty);
+        internal static int GetValue(DependencyObject dObject) => dObject.GetValue(ValueProperty) as int? ?? 0;
 
         private static void SetAnimatedValue(DependencyObject dObject, int value) => dObject.SetValue(AnimatedValueProperty, value);
 
@@ -21,7 +21,7 @@ namespace GTweak.Utilities.Animation
         {
             if (dObject is TextBlock textBlock)
             {
-                int newValue = (int)e.NewValue;
+                int newValue = e.NewValue as int? ?? 0;
 
                 if (!textBlock.IsLoaded)
                 {
@@ -29,7 +29,7 @@ namespace GTweak.Utilities.Animation
                     return;
                 }
 
-                int oldValue = (int)e.OldValue;
+                int oldValue = (e.OldValue as int?) ?? 0;
 
                 Int32Animation int32Anim = new Int32Animation
                 {

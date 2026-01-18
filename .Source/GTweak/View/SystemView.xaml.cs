@@ -25,9 +25,10 @@ namespace GTweak.View
                 case StackPanel panel:
                     description = panel.ToolTip?.ToString() ?? string.Empty;
                     break;
-
                 case ToggleButton toggle:
                     description = toggle.Description?.ToString() ?? string.Empty;
+                    break;
+                default:
                     break;
             }
 

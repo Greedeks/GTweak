@@ -138,7 +138,7 @@ namespace GTweak.Assets.UserControl
 
         private void ToggleButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if ((bool)e.NewValue == false)
+            if (e.NewValue is bool newBool && !newBool)
             {
                 Back.Opacity = 0.7;
                 Dot.Opacity = 0.7;

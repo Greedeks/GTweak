@@ -17,7 +17,6 @@ namespace GTweak.Utilities.Managers
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern int GetPrivateProfileSection(string section, StringBuilder retVal, int size, string filePath);
 
-
         private readonly string _pathToConfig;
 
         internal static Dictionary<string, string>
@@ -46,7 +45,7 @@ namespace GTweak.Utilities.Managers
 
         internal void WriteAll(string section, Dictionary<string, string> selectedDictionary)
         {
-            if (selectedDictionary.Count == 0)
+            if (selectedDictionary?.Count == 0)
             {
                 return;
             }
@@ -59,7 +58,7 @@ namespace GTweak.Utilities.Managers
 
         internal static void TempWrite<T>(Dictionary<string, string> selectedDictionary, string tweak, T value)
         {
-            if (selectedDictionary.ContainsKey(tweak))
+            if (selectedDictionary?.ContainsKey(tweak) == true)
             {
                 selectedDictionary.Remove(tweak);
             }

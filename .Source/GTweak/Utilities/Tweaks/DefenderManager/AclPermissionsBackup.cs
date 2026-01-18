@@ -275,20 +275,20 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 switch (kind)
                 {
                     case RegistryValueKind.Binary:
-                        string b64 = token.Type == JTokenType.String ? token.ToObject<string>() : token.ToString(Formatting.None);
+                        string b64 = token.Type == JTokenType.String ? token.ToObject<string>() ?? string.Empty : token.ToString(Formatting.None);
                         return Convert.FromBase64String(b64);
                     case RegistryValueKind.DWord:
-                        return token.ToObject<int>();
+                        return token.ToObject<int?>() ?? 0;
                     case RegistryValueKind.QWord:
-                        return token.ToObject<long>();
+                        return token.ToObject<long?>() ?? 0L;
                     case RegistryValueKind.MultiString:
-                        return token.ToObject<string[]>();
+                        return token.ToObject<string[]>() ?? Array.Empty<string>();
                     case RegistryValueKind.String:
                     case RegistryValueKind.ExpandString:
-                        return token.ToObject<string>();
+                        return token.ToObject<string>() ?? string.Empty;
                     case RegistryValueKind.None:
                     default:
-                        return token.ToObject<object>();
+                        return token.ToObject<object>() ?? new object();
                 }
             }
 
@@ -297,40 +297,36 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 case RegistryValueKind.Binary:
                     if (rawValue is string s)
                     {
-                        return Convert.FromBase64String(s);
+                        return Convert.FromBase64String(s ?? string.Empty);
                     }
 
                     if (rawValue is byte[] bytes)
                     {
                         return bytes;
                     }
-
-                    break;
+                    return Array.Empty<byte>();
                 case RegistryValueKind.DWord:
-                    return Convert.ToInt32(rawValue);
+                    return rawValue as int? ?? 0;
                 case RegistryValueKind.QWord:
-                    return Convert.ToInt64(rawValue);
+                    return rawValue as long? ?? 0L;
                 case RegistryValueKind.MultiString:
-                    if (rawValue is JArray jarr)
-                    {
-                        return jarr.ToObject<string[]>();
-                    }
-
                     if (rawValue is string[] sa)
                     {
                         return sa;
                     }
 
-                    break;
+                    if (rawValue is JArray jarr)
+                    {
+                        return jarr.ToObject<string[]>() ?? Array.Empty<string>();
+                    }
+                    return Array.Empty<string>();
                 case RegistryValueKind.String:
                 case RegistryValueKind.ExpandString:
-                    return rawValue?.ToString();
+                    return rawValue?.ToString() ?? string.Empty;
                 case RegistryValueKind.None:
                 default:
-                    return rawValue;
+                    return rawValue ?? new object();
             }
-
-            return rawValue;
         }
 
         private static object ConvertJTokenToObject(object tokenOrObj)

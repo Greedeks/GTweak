@@ -150,7 +150,7 @@ namespace GTweak.Utilities.Configuration
                     Parallel.Invoke(() => netAdapter = GetNetworkAdapters());
                     NetworkAdapter = netAdapter;
                     break;
-                case DeviceType.All:
+                default:
                     Parallel.Invoke
                     (
                         () => storage = GetStorageDevices(),

@@ -110,7 +110,7 @@ namespace GTweak.View
 
         private void BtnVision_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space || e.Key == Key.Enter)
+            if (e?.Key == Key.Space || e?.Key == Key.Enter)
             {
                 e.Handled = true;
             }
@@ -118,7 +118,7 @@ namespace GTweak.View
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e?.LeftButton == MouseButtonState.Pressed)
             {
                 Clipboard.Clear();
                 switch (sender.GetType().Name)
@@ -135,7 +135,7 @@ namespace GTweak.View
                                     textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, textBlock.Foreground, VisualTreeHelper.GetDpi(textBlock).PixelsPerDip);
                                 cumulativeHeight += formattedText.Height;
 
-                                if (cumulativeHeight >= e.GetPosition(textBlock).Y)
+                                if (cumulativeHeight >= e?.GetPosition(textBlock).Y)
                                 {
                                     SelectedLine = line;
                                     break;
@@ -150,6 +150,8 @@ namespace GTweak.View
                             Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
                             break;
                         }
+                    default:
+                        break;
                 }
 
                 if (!PopupCopy.IsOpen)

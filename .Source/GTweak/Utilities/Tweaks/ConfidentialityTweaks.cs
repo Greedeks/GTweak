@@ -393,6 +393,8 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera");
                     }
                     break;
+                default:
+                    break;
             }
         }
     }

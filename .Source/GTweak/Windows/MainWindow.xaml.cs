@@ -51,11 +51,11 @@ namespace GTweak.Windows
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left && e.ClickCount != 2)
+            if (e?.ChangedButton == MouseButton.Left && e.ClickCount != 2)
             {
                 if (WindowState == WindowState.Maximized)
                 {
-                    _mouseDownWindowPoint = e.GetPosition(this);
+                    _mouseDownWindowPoint = e!.GetPosition(this);
                     _draggingFromMaximized = true;
                 }
                 else
@@ -69,7 +69,7 @@ namespace GTweak.Windows
         {
             if (_draggingFromMaximized)
             {
-                if (e.LeftButton != MouseButtonState.Pressed)
+                if (e?.LeftButton != MouseButtonState.Pressed)
                 {
                     _draggingFromMaximized = false;
                     return;
@@ -110,9 +110,9 @@ namespace GTweak.Windows
 
         private async void TitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
+            if (e?.ChangedButton == MouseButton.Left && e?.ClickCount == 2)
             {
-                if (e.OriginalSource is DependencyObject source)
+                if (e?.OriginalSource is DependencyObject source)
                 {
                     DependencyObject current = source;
                     while (current != null)
@@ -127,7 +127,6 @@ namespace GTweak.Windows
                 }
 
                 _ignoreMouseClick = true;
-
                 HandleWindowState();
 
                 if (WindowState == WindowState.Maximized && _lastNormalPosition.HasValue && _lastNormalSize.HasValue)
@@ -144,7 +143,7 @@ namespace GTweak.Windows
                 await Task.Delay(100).ConfigureAwait(false);
                 _ignoreMouseClick = false;
 
-                e.Handled = true;
+                e!.Handled = true;
             }
         }
 
@@ -168,12 +167,14 @@ namespace GTweak.Windows
                     SettingsEngine.SelfReboot();
                     Visibility = Visibility.Collapsed;
                     break;
+                default:
+                    break;
             }
         }
 
         private void TglButton_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Space || e.Key == Key.Enter)
+            if (e?.Key == Key.Space || e?.Key == Key.Enter)
             {
                 e.Handled = true;
             }

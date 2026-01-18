@@ -26,7 +26,7 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            string description = ((ToggleButton)sender).Description?.ToString() ?? string.Empty;
+            string description = ((ToggleButton)sender!).Description?.ToString() ?? string.Empty;
 
             if (DescBlock.Text != description)
             {

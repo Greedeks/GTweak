@@ -69,7 +69,7 @@ namespace GTweak.Utilities.Helpers
                 return;
             }
 
-            HashSet<int> pids = GetUnlockProcessIds(directoryPath);
+            HashSet<int> pids = GetUnlockProcessIds(directoryPath) ?? new HashSet<int>();
 
             foreach (int pid in pids)
             {

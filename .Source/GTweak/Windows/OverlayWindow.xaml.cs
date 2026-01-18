@@ -21,7 +21,7 @@ namespace GTweak.Windows
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             Closing -= Window_Closing;
-            e.Cancel = true;
+            e!.Cancel = true;
             BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.15, () =>
             {
                 ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;

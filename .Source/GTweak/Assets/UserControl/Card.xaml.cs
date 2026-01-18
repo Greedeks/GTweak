@@ -45,7 +45,10 @@ namespace GTweak.Assets.UserControl
         {
             if (d is Card card && card.CardIcon != null)
             {
-                card.CardIcon.Style = e.NewValue as Style;
+                if (e.NewValue is Style style)
+                {
+                    card.CardIcon.Style = style;
+                }
             }
         }
 

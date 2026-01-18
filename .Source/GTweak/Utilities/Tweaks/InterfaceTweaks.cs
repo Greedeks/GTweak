@@ -574,6 +574,8 @@ namespace GTweak.Utilities.Tweaks
                         }
                     }
                     break;
+                default:
+                    break;
             }
         }
     }

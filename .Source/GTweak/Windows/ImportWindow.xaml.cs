@@ -13,7 +13,7 @@ using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
 {
-    public partial class ImportWindow : FluentWindow
+    public partial class ImportWindow : FluentWindow, IDisposable
     {
         private readonly ConfidentialityTweaks _confTweaks = new ConfidentialityTweaks();
         private readonly InterfaceTweaks _intfTweaks = new InterfaceTweaks();
@@ -169,5 +169,16 @@ namespace GTweak.Windows
             }
         }
 
+        public void Dispose()
+        {
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            Dispose();
+            base.OnClosed(e);
+        }
     }
 }
