@@ -224,6 +224,8 @@ namespace GTweak.Utilities.Tweaks
                     SystemParametersInfo(UIAction.SPI_SETKEYBOARDSPEED, value, value, 2);
                     RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Keyboard", "KeyboardSpeed", value, RegistryValueKind.String);
                     break;
+                default:
+                    break;
             }
         }
 

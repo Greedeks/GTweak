@@ -171,7 +171,7 @@ namespace GTweak.Utilities.Configuration
                 string wallpaperPath = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "WallPaper", string.Empty);
 
                 string filePath = !string.IsNullOrWhiteSpace(wallpaperPath) && File.Exists(wallpaperPath) ? wallpaperPath :
-                    Directory.GetFiles(PathLocator.Folders.WallpaperCache, "TranscodedWallpaper*").Select(f => new FileInfo(f)).Where(f => f.Exists).OrderByDescending(f => f.LastWriteTime).FirstOrDefault()?.FullName;
+                    Directory.GetFiles(PathLocator.Folders.WallpaperCache, "TranscodedWallpaper*").Select(f => new FileInfo(f)).Where(f => f.Exists).OrderByDescending(f => f.LastWriteTime).FirstOrDefault()?.FullName ?? string.Empty;
 
                 if (!string.IsNullOrWhiteSpace(filePath))
                 {
@@ -205,10 +205,11 @@ namespace GTweak.Utilities.Configuration
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, Description, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string data = new[] { "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                OS.Name = $"{data.Substring(data.IndexOf('W'))} {Regex.Replace((string)managementObj["OSArchitecture"], @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
-                OS.Version = $"{(string)managementObj["Version"]}.{revisionNumber}\n";
-                OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : Convert.ToDecimal(Registry.GetValue(regPath, "CurrentBuild", 0)?.ToString());
+                string data = new[] { "Caption", "Description" }.Select(p => managementObj[p] as string).FirstOrDefault(s => !string.IsNullOrWhiteSpace(s)) ?? string.Empty;
+                OS.Name = $"{(data.Contains('W') ? data.Substring(data.IndexOf('W')) : data)} {Regex.Replace(managementObj["OSArchitecture"]?.ToString() ?? string.Empty, @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
+                OS.Version = $"{managementObj["Version"]?.ToString() ?? "0"}.{revisionNumber}\n";
+                OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : decimal.TryParse(Registry.GetValue(regPath, "CurrentBuild", "0")?.ToString(), out result) ? result : 0;
+
             }
             OS.Name = !string.IsNullOrWhiteSpace(OS.Name) ? OS.Name.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "ProductName", "Windows")?.ToString();
             OS.Version = !string.IsNullOrWhiteSpace(OS.Version) ? OS.Version.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "LCUVer", 0)?.ToString();
@@ -226,7 +227,7 @@ namespace GTweak.Utilities.Configuration
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
                 string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                string dataSN = (string)managementObj["SerialNumber"];
+                string dataSN = managementObj["SerialNumber"]?.ToString() ?? string.Empty;
                 Bios.Data += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
             }
             Bios.Data = Bios.Data.TrimEnd('\n', '\r');
@@ -236,8 +237,8 @@ namespace GTweak.Utilities.Configuration
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string data = $"{(string)managementObj["Manufacturer"]}{(string)managementObj["Product"]}";
-                string dataVersion = (string)managementObj["Version"];
+                string data = $"{managementObj["Manufacturer"]?.ToString() ?? string.Empty}{managementObj["Product"]?.ToString() ?? string.Empty}";
+                string dataVersion = managementObj["Version"]?.ToString() ?? string.Empty;
                 Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
             }
             Motherboard = Motherboard.TrimEnd('\n', '\r');
@@ -247,9 +248,9 @@ namespace GTweak.Utilities.Configuration
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                Processor.Data = $"{(string)managementObj["Name"]}\n";
-                Processor.Cores = Convert.ToString(managementObj["NumberOfCores"]);
-                Processor.Threads = Convert.ToString(managementObj["NumberOfLogicalProcessors"]);
+                Processor.Data = $"{managementObj["Name"]?.ToString() ?? string.Empty}\n";
+                Processor.Cores = managementObj["NumberOfCores"]?.ToString() ?? string.Empty;
+                Processor.Threads = managementObj["NumberOfLogicalProcessors"]?.ToString() ?? string.Empty;
             }
             Processor.Data = Processor.Data.TrimEnd('\n', '\r');
         }
@@ -275,8 +276,8 @@ namespace GTweak.Utilities.Configuration
                         using RegistryKey regKey = baseKey.OpenSubKey(subKeyName);
                         if (regKey != null)
                         {
-                            string adapterString = regKey.GetValue("HardwareInformation.AdapterString") as string;
-                            string driverDesc = regKey.GetValue("DriverDesc") as string;
+                            string adapterString = regKey.GetValue("HardwareInformation.AdapterString") as string ?? string.Empty;
+                            string driverDesc = regKey.GetValue("DriverDesc") as string ?? string.Empty;
                             object chipTypeValue = regKey.GetValue("HardwareInformation.ChipType");
                             string chipType = chipTypeValue as string ?? (chipTypeValue is byte[] chipTypeBytes ? Encoding.UTF8.GetString(chipTypeBytes) : string.Empty);
 
@@ -325,7 +326,7 @@ namespace GTweak.Utilities.Configuration
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string data = managementObj["Name"] as string;
+                string data = managementObj["Name"] as string ?? string.Empty;
                 (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
                 Graphics += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
                 VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
@@ -341,8 +342,8 @@ namespace GTweak.Utilities.Configuration
         {
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
             {
-                string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop] != null ? Convert.ToString(managementObj[prop]) : null).FirstOrDefault(info => !string.IsNullOrEmpty(info) && info != "0");
-                string data = new[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) || !value.Equals("Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
+                string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
+                string data = new[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
                 string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
                 {
                     2 => "DRAM",
@@ -397,7 +398,7 @@ namespace GTweak.Utilities.Configuration
 
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
-                string storageType = MediaTypeMap.FirstOrDefault(x => x.Keys.Contains(mediaType)).Type ?? DiskTypeLabels.Unspecified;
+                string storageType = MediaTypeMap.Where(x => x.Keys != null && mediaType != null && x.Keys.Contains(mediaType)).Select(x => x.Type).FirstOrDefault() ?? DiskTypeLabels.Unspecified;
 
                 if (isMsftAvailable)
                 {
@@ -436,8 +437,8 @@ namespace GTweak.Utilities.Configuration
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select DeviceId, FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     string data = new[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                    ushort mediaType = managementObj["MediaType"] != null ? (ushort)managementObj["MediaType"] : (ushort)0;
-                    ushort busType = managementObj["BusType"] != null ? (ushort)managementObj["BusType"] : (ushort)0;
+                    ushort mediaType = managementObj["MediaType"] is IConvertible m ? Convert.ToUInt16(m) : (ushort)0;
+                    ushort busType = managementObj["BusType"] is IConvertible b ? Convert.ToUInt16(b) : (ushort)0;
                     string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, default);
 
                     result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
@@ -448,8 +449,8 @@ namespace GTweak.Utilities.Configuration
                 foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Model, Caption, Size, MediaType, InterfaceType from Win32_DiskDrive", new EnumerationOptions { ReturnImmediately = true }).Get())
                 {
                     string data = new[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                    string mediaType = managementObj["MediaType"] as string ?? string.Empty;
-                    string interfaceType = managementObj["InterfaceType"] as string ?? string.Empty;
+                    string mediaType = managementObj["MediaType"]?.ToString() ?? string.Empty;
+                    string interfaceType = managementObj["InterfaceType"].ToString() ?? string.Empty;
                     string storageType = GetStorageType(mediaType, managementObj["DeviceID"] as string ?? string.Empty, default, interfaceType);
 
                     result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
