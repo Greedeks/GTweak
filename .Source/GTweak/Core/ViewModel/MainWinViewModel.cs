@@ -79,6 +79,7 @@ namespace GTweak.Core.ViewModel
         public ICommand NavigateToServicesCommand { get; set; }
         public ICommand NavigateToSystemCommand { get; set; }
         public ICommand NavigateToDataSystemCommand { get; set; }
+        public ICommand NavigateToAddonsCommand { get; set; }
 
         private void NavigateToUtils(object obj) => CurrentView = new UtilsView();
         private void NavigateToConfidentiality(object obj) => CurrentView = new ConfidentialityViewModel();
@@ -87,6 +88,7 @@ namespace GTweak.Core.ViewModel
         private void NavigateToServices(object obj) => CurrentView = new ServicesViewModel();
         private void NavigateToSystem(object obj) => CurrentView = new SystemViewModel();
         private void NavigateToDataSystem(object obj) => CurrentView = new DataSystemViewModel();
+        private void NavigateToAddons(object obj) => CurrentView = new AddonsViewModel();
 
         public MainWinViewModel()
         {
@@ -101,6 +103,7 @@ namespace GTweak.Core.ViewModel
             NavigateToServicesCommand = new RelayCommand(NavigateToServices);
             NavigateToSystemCommand = new RelayCommand(NavigateToSystem);
             NavigateToDataSystemCommand = new RelayCommand(NavigateToDataSystem);
+            NavigateToAddonsCommand = new RelayCommand(NavigateToAddons);
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {

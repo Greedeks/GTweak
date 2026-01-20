@@ -78,6 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Szolgáltatás</v:String>
     <v:String x:Key="rbtn_sys_main">Rendszer</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Rendszerinformációk</v:String>
+    <v:String x:Key="rbtn_adds_main">Addons</v:String>
     <v:String x:Key="title_settings_main">Beállítások</v:String>
     <v:String x:Key="btgl_noty_main">Értesítések megjelenítése</v:String>
     <v:String x:Key="slider_volume_main">Hangerő:</v:String>
@@ -103,6 +104,45 @@
     <v:String x:Key="download_update">Letöltés</v:String>
     <v:String x:Key="noty_update">Kérjük, várja meg a letöltés befejezését</v:String>
     <v:String x:Key="connection_update">Csatlakozás a szerverhez</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">Ez erősen</v:String>
+    <v:String x:Key="advice_part2_more">ajánlott</v:String>
+    <v:String x:Key="advice_part3_more">helyreállítási pont létrehozása az eszköz használata előtt</v:String>
+
+    <v:String x:Key="title_licens_more">Windows aktiválás</v:String>
+    <v:String x:Key="text_licens_more">A HWID módszert vagy egy tartalék KMS-t használ. Lehet, hogy nem működik, ha az Ön Windows-kiadásához nincs elérhető kulcs.</v:String>
+    <v:String x:Key="btn_activation">Aktiválás</v:String>
+
+    <v:String x:Key="title_point_more">Helyreállítási pont</v:String>
+    <v:String x:Key="text_point_more">Létrehozza vagy elindítja a rendszer-visszaállítási folyamatot, még akkor is, ha a visszaállítási pontok jelenleg le vannak tiltva.</v:String>
+    <v:String x:Key="btn_save">Mentés</v:String>
+    <v:String x:Key="btn_recovery">Helyreállítás</v:String>
+
+    <v:String x:Key="title_point_state_more">Állapot visszaállítása</v:String>
+    <v:String x:Key="text_point_state_more">Engedélyezi vagy letiltja a rendszer-visszaállítási pontokat. A letiltás törli az összes meglévő visszaállítási pontot.</v:String>
+    <v:String x:Key="btn_disable">Letiltás</v:String>
+    <v:String x:Key="btn_enable">Engedélyezés</v:String>
+
+    <v:String x:Key="title_clear_more">A memória törlése</v:String>
+    <v:String x:Key="text_clear_more">Törli a rendszerfájlok gyorsítótárát, ideiglenes fájlokat és az ikoncache-t.</v:String>
+    <v:String x:Key="btn_clear">Tisztítás</v:String>
+
+    <v:String x:Key="title_ntfs_more">NTFS tömörítés</v:String>
+    <v:String x:Key="text_ntfs_more">Engedélyezi vagy letiltja az NTFS-tömörítést. Különösen hatékony szöveges fájlokhoz, így lemezterületet takarít meg.</v:String>
+
+    <v:String x:Key="title_registry_more">Rendszerleíró adatbázis biztonsági mentése</v:String>
+    <v:String x:Key="text_registry_more">Biztonsági másolatot készít a Windows rendszerleíró adatbázisáról. A rendszer helyreállításának engedélyezése érdekében végzett módosítások előtt ajánlott.</v:String>
+    <v:String x:Key="btn_create">Létrehozás</v:String>
+
+    <v:String x:Key="title_over_more">Lemezkarbantartó megerősítése</v:String>
+    <v:String x:Key="text_over_more">A lemez tartalmaz egy Windows.old mappát, amely a Windows egy korábbi verziójából származó fájlokat tartalmaz, amelyek jelentős helyet foglalnak el. Kérjük, vegye figyelembe: a mappa törlése után a tartalma nem állítható vissza, ezért győződjön meg arról, hogy elmentette a szükséges fájlokat.</v:String>
+    <v:String x:Key="question_over_more">Folytatni szeretné a tisztítást és törölni szeretné a Windows.old mappát?</v:String>
+    <v:String x:Key="btn_agree">Elfogadás</v:String>
+    <v:String x:Key="btn_decline">Elutasítás</v:String>
+
+    <v:String x:Key="textpoint_more">Ez a GTweak-kel létrehozott helyreállítási pont</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->
@@ -439,44 +479,9 @@
     <v:String x:Key="unknown_information_sysinfo">Nem észlelhető</v:String>
     <!--#endregion-->
 
-    <!--#region More Page -->
-    <v:String x:Key="advice_part1_more">Ez erősen</v:String>
-    <v:String x:Key="advice_part2_more">ajánlott</v:String>
-    <v:String x:Key="advice_part3_more">helyreállítási pont létrehozása az eszköz használata előtt</v:String>
-
-    <v:String x:Key="title_licens_more">Windows aktiválás</v:String>
-    <v:String x:Key="text_licens_more">A HWID módszert vagy egy tartalék KMS-t használ. Lehet, hogy nem működik, ha az Ön Windows-kiadásához nincs elérhető kulcs.</v:String>
-    <v:String x:Key="btn_activation">Aktiválás</v:String>
-
-    <v:String x:Key="title_point_more">Helyreállítási pont</v:String>
-    <v:String x:Key="text_point_more">Létrehozza vagy elindítja a rendszer-visszaállítási folyamatot, még akkor is, ha a visszaállítási pontok jelenleg le vannak tiltva.</v:String>
-    <v:String x:Key="btn_save">Mentés</v:String>
-    <v:String x:Key="btn_recovery">Helyreállítás</v:String>
-
-    <v:String x:Key="title_point_state_more">Állapot visszaállítása</v:String>
-    <v:String x:Key="text_point_state_more">Engedélyezi vagy letiltja a rendszer-visszaállítási pontokat. A letiltás törli az összes meglévő visszaállítási pontot.</v:String>
-    <v:String x:Key="btn_disable">Letiltás</v:String>
-    <v:String x:Key="btn_enable">Engedélyezés</v:String>
-    
-    <v:String x:Key="title_clear_more">A memória törlése</v:String>
-    <v:String x:Key="text_clear_more">Törli a rendszerfájlok gyorsítótárát, ideiglenes fájlokat és az ikoncache-t.</v:String>
-    <v:String x:Key="btn_clear">Tisztítás</v:String>
-
-    <v:String x:Key="title_ntfs_more">NTFS tömörítés</v:String>
-    <v:String x:Key="text_ntfs_more">Engedélyezi vagy letiltja az NTFS-tömörítést. Különösen hatékony szöveges fájlokhoz, így lemezterületet takarít meg.</v:String>
-
-    <v:String x:Key="title_registry_more">Rendszerleíró adatbázis biztonsági mentése</v:String>
-    <v:String x:Key="text_registry_more">Biztonsági másolatot készít a Windows rendszerleíró adatbázisáról. A rendszer helyreállításának engedélyezése érdekében végzett módosítások előtt ajánlott.</v:String>
-    <v:String x:Key="btn_create">Létrehozás</v:String>
-
-    <v:String x:Key="title_over_more">Lemezkarbantartó megerősítése</v:String>
-    <v:String x:Key="text_over_more">A lemez tartalmaz egy Windows.old mappát, amely a Windows egy korábbi verziójából származó fájlokat tartalmaz, amelyek jelentős helyet foglalnak el. Kérjük, vegye figyelembe: a mappa törlése után a tartalma nem állítható vissza, ezért győződjön meg arról, hogy elmentette a szükséges fájlokat.</v:String>
-    <v:String x:Key="question_over_more">Folytatni szeretné a tisztítást és törölni szeretné a Windows.old mappát?</v:String>
-    <v:String x:Key="btn_agree">Elfogadás</v:String>
-    <v:String x:Key="btn_decline">Elutasítás</v:String>
-
-    <v:String x:Key="textpoint_more">Ez a GTweak-kel létrehozott helyreállítási pont</v:String>
+    <!--#region Addons Page -->
     <!--#endregion-->
-    
+
 </ResourceDictionary>
+
 

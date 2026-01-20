@@ -78,6 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Службы</v:String>
     <v:String x:Key="rbtn_sys_main">Система</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Системная информация</v:String>
+    <v:String x:Key="rbtn_adds_main">Аддоны</v:String>
     <v:String x:Key="title_settings_main">Настройки</v:String>
     <v:String x:Key="btgl_noty_main">Показывать уведомления</v:String>
     <v:String x:Key="slider_volume_main">Громкость:</v:String>
@@ -103,6 +104,45 @@
     <v:String x:Key="download_update">Скачивания</v:String>
     <v:String x:Key="noty_update">Пожалуйста, дождитесь завершения загрузки</v:String>
     <v:String x:Key="connection_update">Подключение к серверу</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">Настоятельно</v:String>
+    <v:String x:Key="advice_part2_more">рекомендовано</v:String>
+    <v:String x:Key="advice_part3_more">создать точку восстановления перед использованием утилиты</v:String>
+
+    <v:String x:Key="title_licens_more">Активация Windows</v:String>
+    <v:String x:Key="text_licens_more">Используется метод HWID или резервный KMS. Может не сработать, если для вашей редакции Windows нет подходящего ключа.</v:String>
+    <v:String x:Key="btn_activation">Активировать</v:String>
+
+    <v:String x:Key="title_point_more">Точка восстановления</v:String>
+    <v:String x:Key="text_point_more">Создает или запускает процесс восстановления системы, даже если точки восстановления в данный момент отключены.</v:String>
+    <v:String x:Key="btn_save">Сохранить</v:String>
+    <v:String x:Key="btn_recovery">Восстановить</v:String>
+
+    <v:String x:Key="title_point_state_more">Состояние восстановления</v:String>
+    <v:String x:Key="text_point_state_more">Включает или отключает точки восстановления системы. При отключении все существующие точки будут удалены.</v:String>
+    <v:String x:Key="btn_disable">Отключить</v:String>
+    <v:String x:Key="btn_enable">Включить</v:String>
+
+    <v:String x:Key="title_clear_more">Очистка памяти</v:String>
+    <v:String x:Key="text_clear_more">Очищает кэш системных файлов в памяти компьютера временные файлы и кэш эскизов.</v:String>
+    <v:String x:Key="btn_clear">Очистить</v:String>
+
+    <v:String x:Key="title_ntfs_more">Сжатие NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">Включает или отключает сжатие NTFS. Особенно эффективно для текстовых файлов, позволяя экономить место на диске.</v:String>
+
+    <v:String x:Key="title_registry_more">Резервная копия реестра</v:String>
+    <v:String x:Key="text_registry_more">Создает резервную копию реестра Windows. Рекомендуется перед изменениями, чтобы можно было восстановить систему.</v:String>
+    <v:String x:Key="btn_create">Создать</v:String>
+
+    <v:String x:Key="title_over_more">Подтверждение очистки диска</v:String>
+    <v:String x:Key="text_over_more">На вашем диске найденая папка Windows.old, содержащая файлы предыдущей версии Windows, активно занимающая значительное пространство. Обратите внимание: после удаления папки восстановить её содержимое будет невозможно, поэтому убедитесь, что все необходимые файлы сохранены.</v:String>
+    <v:String x:Key="question_over_more">Вы хотите продолжить очистку с удалением папки Windows.old?</v:String>
+    <v:String x:Key="btn_agree">Согласиться</v:String>
+    <v:String x:Key="btn_decline">Отказаться</v:String>
+
+    <v:String x:Key="textpoint_more">Точка созданная с помощью GTweak</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->
@@ -439,43 +479,7 @@
     <v:String x:Key="unknown_information_sysinfo">Не определен</v:String>
     <!--#endregion-->
 
-    <!--#region More Page -->
-    <v:String x:Key="advice_part1_more">Настоятельно</v:String>
-    <v:String x:Key="advice_part2_more">рекомендовано</v:String>
-    <v:String x:Key="advice_part3_more">создать точку восстановления перед использованием утилиты</v:String>
-    
-    <v:String x:Key="title_licens_more">Активация Windows</v:String>
-    <v:String x:Key="text_licens_more">Используется метод HWID или резервный KMS. Может не сработать, если для вашей редакции Windows нет подходящего ключа.</v:String>
-    <v:String x:Key="btn_activation">Активировать</v:String>
-
-    <v:String x:Key="title_point_more">Точка восстановления</v:String>
-    <v:String x:Key="text_point_more">Создает или запускает процесс восстановления системы, даже если точки восстановления в данный момент отключены.</v:String>
-    <v:String x:Key="btn_save">Сохранить</v:String>
-    <v:String x:Key="btn_recovery">Восстановить</v:String>
-
-    <v:String x:Key="title_point_state_more">Состояние восстановления</v:String>
-    <v:String x:Key="text_point_state_more">Включает или отключает точки восстановления системы. При отключении все существующие точки будут удалены.</v:String>
-    <v:String x:Key="btn_disable">Отключить</v:String>
-    <v:String x:Key="btn_enable">Включить</v:String>
-
-    <v:String x:Key="title_clear_more">Очистка памяти</v:String>
-    <v:String x:Key="text_clear_more">Очищает кэш системных файлов в памяти компьютера временные файлы и кэш эскизов.</v:String>
-    <v:String x:Key="btn_clear">Очистить</v:String>
-
-    <v:String x:Key="title_ntfs_more">Сжатие NTFS</v:String>
-    <v:String x:Key="text_ntfs_more">Включает или отключает сжатие NTFS. Особенно эффективно для текстовых файлов, позволяя экономить место на диске. </v:String>
-
-    <v:String x:Key="title_registry_more">Резервная копия реестра</v:String>
-    <v:String x:Key="text_registry_more">Создает резервную копию реестра Windows. Рекомендуется перед изменениями, чтобы можно было восстановить систему.</v:String>
-    <v:String x:Key="btn_create">Создать</v:String>
-
-    <v:String x:Key="title_over_more">Подтверждение очистки диска</v:String>
-    <v:String x:Key="text_over_more">На вашем диске найденая папка Windows.old, содержащая файлы предыдущей версии Windows, активно занимающая значительное пространство. Обратите внимание: после удаления папки восстановить её содержимое будет невозможно, поэтому убедитесь, что все необходимые файлы сохранены.</v:String>
-    <v:String x:Key="question_over_more">Вы хотите продолжить очистку с удалением папки Windows.old?</v:String>
-    <v:String x:Key="btn_agree">Согласиться</v:String>
-    <v:String x:Key="btn_decline">Отказаться</v:String>
-
-    <v:String x:Key="textpoint_more">Точка созданная с помощью GTweak</v:String>
+    <!--#region Addons Page -->
     <!--#endregion-->
-    
+
 </ResourceDictionary>

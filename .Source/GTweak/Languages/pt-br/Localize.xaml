@@ -78,6 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Serviços</v:String>
     <v:String x:Key="rbtn_sys_main">Sistema</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informações do sistema</v:String>
+    <v:String x:Key="rbtn_adds_main">Addons</v:String>
     <v:String x:Key="title_settings_main">Configurações</v:String>
     <v:String x:Key="btgl_noty_main">Mostrar notificações</v:String>
     <v:String x:Key="slider_volume_main">Volume:</v:String>
@@ -103,6 +104,45 @@
     <v:String x:Key="download_update">Baixando</v:String>
     <v:String x:Key="noty_update">Aguarde a conclusão do download</v:String>
     <v:String x:Key="connection_update">Conectando ao servidor</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">É fortemente</v:String>
+    <v:String x:Key="advice_part2_more">recomendado</v:String>
+    <v:String x:Key="advice_part3_more">criar um ponto de restauração antes de usar o utilitário</v:String>
+
+    <v:String x:Key="title_licens_more">Ativação do Windows</v:String>
+    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
+    <v:String x:Key="btn_activation">Ativar</v:String>
+
+    <v:String x:Key="title_point_more">Recovery Point</v:String>
+    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
+    <v:String x:Key="btn_save">Salvar</v:String>
+    <v:String x:Key="btn_recovery">Restaurar</v:String>
+
+    <v:String x:Key="title_point_state_more">Restore Status</v:String>
+    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
+    <v:String x:Key="btn_disable">Desativar</v:String>
+    <v:String x:Key="btn_enable">Ativar</v:String>
+
+    <v:String x:Key="title_clear_more">Limpando a memória</v:String>
+    <v:String x:Key="text_clear_more">Limpa cache de sistema na memória, arquivos temporários e ícones.</v:String>
+    <v:String x:Key="btn_clear">Limpar</v:String>
+
+    <v:String x:Key="title_ntfs_more">Compressão NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
+
+    <v:String x:Key="title_registry_more">Registry Backup</v:String>
+    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
+    <v:String x:Key="btn_create">Create</v:String>
+
+    <v:String x:Key="title_over_more">Confirmação da Limpeza de Disco</v:String>
+    <v:String x:Key="text_over_more">Seu disco contém uma pasta Windows.old com arquivos de uma versão anterior do Windows que está ocupando uma quantidade significativa de espaço. Atenção: uma vez que esta pasta seja excluída, seu conteúdo não poderá ser restaurado, então certifique-se de ter salvo todos os arquivos de que precisa.</v:String>
+    <v:String x:Key="question_over_more">Deseja prosseguir com a limpeza e excluir a pasta Windows.old?</v:String>
+    <v:String x:Key="btn_agree">Concordar</v:String>
+    <v:String x:Key="btn_decline">Recusar</v:String>
+
+    <v:String x:Key="textpoint_more">Um ponto criado com o GTweak</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->
@@ -439,43 +479,8 @@
     <v:String x:Key="unknown_information_sysinfo">Não detectado</v:String>
     <!--#endregion-->
 
-    <!--#region More Page -->
-    <v:String x:Key="advice_part1_more">É fortemente</v:String>
-    <v:String x:Key="advice_part2_more">recomendado</v:String>
-    <v:String x:Key="advice_part3_more">criar um ponto de restauração antes de usar o utilitário</v:String>
-    
-    <v:String x:Key="title_licens_more">Ativação do Windows</v:String>
-    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
-    <v:String x:Key="btn_activation">Ativar</v:String>
-
-    <v:String x:Key="title_point_more">Recovery Point</v:String>
-    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
-    <v:String x:Key="btn_save">Salvar</v:String>
-    <v:String x:Key="btn_recovery">Restaurar</v:String>
-
-    <v:String x:Key="title_point_state_more">Restore Status</v:String>
-    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
-    <v:String x:Key="btn_disable">Desativar</v:String>
-    <v:String x:Key="btn_enable">Ativar</v:String>
-
-    <v:String x:Key="title_clear_more">Limpando a memória</v:String>
-    <v:String x:Key="text_clear_more">Limpa cache de sistema na memória, arquivos temporários e ícones.</v:String>
-    <v:String x:Key="btn_clear">Limpar</v:String>
-
-    <v:String x:Key="title_ntfs_more">Compressão NTFS</v:String>
-    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
-
-    <v:String x:Key="title_registry_more">Registry Backup</v:String>
-    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
-    <v:String x:Key="btn_create">Create</v:String>
-
-    <v:String x:Key="title_over_more">Confirmação da Limpeza de Disco</v:String>
-    <v:String x:Key="text_over_more">Seu disco contém uma pasta Windows.old com arquivos de uma versão anterior do Windows que está ocupando uma quantidade significativa de espaço. Atenção: uma vez que esta pasta seja excluída, seu conteúdo não poderá ser restaurado, então certifique-se de ter salvo todos os arquivos de que precisa.</v:String>
-    <v:String x:Key="question_over_more">Deseja prosseguir com a limpeza e excluir a pasta Windows.old?</v:String>
-    <v:String x:Key="btn_agree">Concordar</v:String>
-    <v:String x:Key="btn_decline">Recusar</v:String>
-
-    <v:String x:Key="textpoint_more">Um ponto criado com o GTweak</v:String>
+    <!--#region Addons Page -->
     <!--#endregion-->
-    
+
 </ResourceDictionary>
+

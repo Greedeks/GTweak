@@ -78,6 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Служби</v:String>
     <v:String x:Key="rbtn_sys_main">Система</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Системна інформація</v:String>
+    <v:String x:Key="rbtn_adds_main">Addons</v:String>
     <v:String x:Key="title_settings_main">Налаштування</v:String>
     <v:String x:Key="btgl_noty_main">Показувати сповіщення</v:String>
     <v:String x:Key="slider_volume_main">Гучність:</v:String>
@@ -103,6 +104,45 @@
     <v:String x:Key="download_update">Завантаження</v:String>
     <v:String x:Key="noty_update">Будь ласка, дочекайтеся завершення завантаження</v:String>
     <v:String x:Key="connection_update">Підключення до сервера</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">Настійно</v:String>
+    <v:String x:Key="advice_part2_more">рекомендовано</v:String>
+    <v:String x:Key="advice_part3_more">створити точку відновлення перед використанням утиліти</v:String>
+
+    <v:String x:Key="title_licens_more">Активація Windows</v:String>
+    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
+    <v:String x:Key="btn_activation">Активувати</v:String>
+
+    <v:String x:Key="title_point_more">Recovery Point</v:String>
+    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
+    <v:String x:Key="btn_save">Зберегти</v:String>
+    <v:String x:Key="btn_recovery">Відновити</v:String>
+
+    <v:String x:Key="title_point_state_more">Restore Status</v:String>
+    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
+    <v:String x:Key="btn_disable">Вимкнути</v:String>
+    <v:String x:Key="btn_enable">Увімкнути</v:String>
+
+    <v:String x:Key="title_clear_more">Очищення пам'яті</v:String>
+    <v:String x:Key="text_clear_more">Очищення кешу системних файлів у пам'яті комп'ютера, тимчасових файлів та кешу ескізів.</v:String>
+    <v:String x:Key="btn_clear">Очистити</v:String>
+
+    <v:String x:Key="title_ntfs_more">Стиснення NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
+
+    <v:String x:Key="title_registry_more">Registry Backup</v:String>
+    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
+    <v:String x:Key="btn_create">Create</v:String>
+
+    <v:String x:Key="title_over_more">Підтвердження очищення диска</v:String>
+    <v:String x:Key="text_over_more">На вашому диску знайдено папку Windows.old, яка містить файли попередньої версії Windows і займає значний обсяг дискового простору. Увага: Після видалення вміст папки відновити буде неможливо, тому переконайтеся, що всі необхідні файли збережено.</v:String>
+    <v:String x:Key="question_over_more">Хочете продовжити очищення та видалити папку Windows.old?</v:String>
+    <v:String x:Key="btn_agree">Погодитись</v:String>
+    <v:String x:Key="btn_decline">Відхилити</v:String>
+
+    <v:String x:Key="textpoint_more">Точка, створена за допомогою GTweak</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->
@@ -439,43 +479,8 @@
     <v:String x:Key="unknown_information_sysinfo">Not detected</v:String>
     <!--#endregion-->
 
-    <!--#region More Page -->
-    <v:String x:Key="advice_part1_more">Настійно</v:String>
-    <v:String x:Key="advice_part2_more">рекомендовано</v:String>
-    <v:String x:Key="advice_part3_more">створити точку відновлення перед використанням утиліти</v:String>
-    
-    <v:String x:Key="title_licens_more">Активація Windows</v:String>
-    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
-    <v:String x:Key="btn_activation">Активувати</v:String>
-
-    <v:String x:Key="title_point_more">Recovery Point</v:String>
-    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
-    <v:String x:Key="btn_save">Зберегти</v:String>
-    <v:String x:Key="btn_recovery">Відновити</v:String>
-
-    <v:String x:Key="title_point_state_more">Restore Status</v:String>
-    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
-    <v:String x:Key="btn_disable">Вимкнути</v:String>
-    <v:String x:Key="btn_enable">Увімкнути</v:String>
-
-    <v:String x:Key="title_clear_more">Очищення пам'яті</v:String>
-    <v:String x:Key="text_clear_more">Очищення кешу системних файлів у пам'яті комп'ютера, тимчасових файлів та кешу ескізів.</v:String>
-    <v:String x:Key="btn_clear">Очистити</v:String>
-
-    <v:String x:Key="title_ntfs_more">Стиснення NTFS</v:String>
-    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
-
-    <v:String x:Key="title_registry_more">Registry Backup</v:String>
-    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
-    <v:String x:Key="btn_create">Create</v:String>
-
-    <v:String x:Key="title_over_more">Підтвердження очищення диска</v:String>
-    <v:String x:Key="text_over_more">На вашому диску знайдено папку Windows.old, яка містить файли попередньої версії Windows і займає значний обсяг дискового простору. Увага: Після видалення вміст папки відновити буде неможливо, тому переконайтеся, що всі необхідні файли збережено.</v:String>
-    <v:String x:Key="question_over_more">Хочете продовжити очищення та видалити папку Windows.old?</v:String>
-    <v:String x:Key="btn_agree">Погодитись</v:String>
-    <v:String x:Key="btn_decline">Відхилити</v:String>
-
-    <v:String x:Key="textpoint_more">Точка, створена за допомогою GTweak</v:String>
+    <!--#region Addons Page -->
     <!--#endregion-->
 
 </ResourceDictionary>
+

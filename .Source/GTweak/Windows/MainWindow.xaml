@@ -261,6 +261,10 @@
                             <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_sysinfo_main}" Command="{Binding NavigateToDataSystemCommand}">
                                 <ui:SymbolIcon Symbol="Desktop20" FontSize="20"/>
                             </RadioButton>
+
+                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_adds_main}" Command="{Binding NavigateToAddonsCommand}">
+                                <ui:SymbolIcon Symbol="PuzzlePieceShield20" FontSize="20"/>
+                            </RadioButton>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>

@@ -77,6 +77,7 @@
     <v:String x:Key="rbtn_svc_main">Usługi</v:String>
     <v:String x:Key="rbtn_sys_main">System</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informacje o systemie</v:String>
+    <v:String x:Key="rbtn_adds_main">Addons</v:String>
     <v:String x:Key="title_settings_main">Ustawienia</v:String>
     <v:String x:Key="btgl_noty_main">Pokazuj powiadomienia</v:String>
     <v:String x:Key="slider_volume_main">Głośność:</v:String>
@@ -103,7 +104,40 @@
     <v:String x:Key="noty_update">Proszę czekać na zakończenie pobierania</v:String>
     <v:String x:Key="connection_update">Łączenie z serwerem</v:String>
     <!--#endregion-->
-    
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">Zdecydowanie</v:String>
+    <v:String x:Key="advice_part2_more">zaleca się</v:String>
+    <v:String x:Key="advice_part3_more">utworzenie punktu przywracania przed użyciem narzędzia</v:String>
+
+    <v:String x:Key="title_licens_more">Aktywacja Windows</v:String>
+    <v:String x:Key="text_licens_more">Używa metody HWID lub zapasowego KMS. Może nie działać, jeśli nie ma dostępnego klucza dla Twojej edycji Windows.</v:String>
+    <v:String x:Key="btn_activation">Aktywuj</v:String>
+    <v:String x:Key="title_point_more">Punkt przywracania</v:String>
+    <v:String x:Key="text_point_more">Tworzy lub uruchamia proces przywracania systemu, nawet jeśli punkty przywracania są obecnie wyłączone.</v:String>
+    <v:String x:Key="btn_save">Zapisz</v:String>
+    <v:String x:Key="btn_recovery">Przywróć</v:String>
+    <v:String x:Key="title_point_state_more">Stan przywracania</v:String>
+    <v:String x:Key="text_point_state_more">Włącza lub wyłącza punkty przywracania systemu. Wyłączenie usunie wszystkie istniejące punkty przywracania.</v:String>
+    <v:String x:Key="btn_disable">Wyłącz</v:String>
+    <v:String x:Key="btn_enable">Włącz</v:String>
+
+    <v:String x:Key="title_clear_more">Czyszczenie pamięci</v:String>
+    <v:String x:Key="text_clear_more">Czyści pamięć podręczną plików systemowych w pamięci komputera, pliki tymczasowe i pamięć podręczną ikon.</v:String>
+    <v:String x:Key="btn_clear">Wyczyść</v:String>
+    <v:String x:Key="title_ntfs_more">Kompresja NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">Włącza lub wyłącza kompresję NTFS. Szczególnie skuteczna dla plików tekstowych, pomaga oszczędzać miejsce na dysku.</v:String>
+    <v:String x:Key="title_registry_more">Kopia zapasowa rejestru</v:String>
+    <v:String x:Key="text_registry_more">Tworzy kopię zapasową rejestru Windows. Zalecane przed wprowadzaniem zmian, aby umożliwić przywrócenie systemu.</v:String>
+    <v:String x:Key="btn_create">Utwórz</v:String>
+    <v:String x:Key="title_over_more">Potwierdzenie czyszczenia dysku</v:String>
+    <v:String x:Key="text_over_more">Na dysku znajduje się folder Windows.old zawierający pliki z poprzedniej wersji Windows, zajmujący znaczną ilość miejsca. Uwaga: po usunięciu tego folderu jego zawartość nie będzie mogła być przywrócona, więc upewnij się, że zapisałeś potrzebne pliki.</v:String>
+    <v:String x:Key="question_over_more">Czy chcesz kontynuować czyszczenie i usunąć folder Windows.old?</v:String>
+    <v:String x:Key="btn_agree">Zgadzam się</v:String>
+    <v:String x:Key="btn_decline">Odrzuć</v:String>
+    <v:String x:Key="textpoint_more">Punkt utworzony za pomocą GTweak</v:String>
+    <!--#endregion-->
+
     <!--#region Confidentiality Page -->
     <v:String x:Key="tgl1_conf">Identyfikator reklamowy i reklama ukierunkowana</v:String>
     <v:String x:Key="tgl2_conf">Wszystkie rodzaje synchronizacji danych</v:String>
@@ -433,38 +467,9 @@
     <v:String x:Key="no_device_information_sysinfo">Nie znaleziono informacji o urządzeniu</v:String>
     <v:String x:Key="unknown_information_sysinfo">Nie wykryto</v:String>
     <!--#endregion-->
-    
-    <!--#region More Page -->
-    <v:String x:Key="advice_part1_more">Zdecydowanie</v:String>
-    <v:String x:Key="advice_part2_more">zaleca się</v:String>
-    <v:String x:Key="advice_part3_more">utworzenie punktu przywracania przed użyciem narzędzia</v:String>
-   
-    <v:String x:Key="title_licens_more">Aktywacja Windows</v:String>
-    <v:String x:Key="text_licens_more">Używa metody HWID lub zapasowego KMS. Może nie działać, jeśli nie ma dostępnego klucza dla Twojej edycji Windows.</v:String>
-    <v:String x:Key="btn_activation">Aktywuj</v:String>
-    <v:String x:Key="title_point_more">Punkt przywracania</v:String>
-    <v:String x:Key="text_point_more">Tworzy lub uruchamia proces przywracania systemu, nawet jeśli punkty przywracania są obecnie wyłączone.</v:String>
-    <v:String x:Key="btn_save">Zapisz</v:String>
-    <v:String x:Key="btn_recovery">Przywróć</v:String>
-    <v:String x:Key="title_point_state_more">Stan przywracania</v:String>
-    <v:String x:Key="text_point_state_more">Włącza lub wyłącza punkty przywracania systemu. Wyłączenie usunie wszystkie istniejące punkty przywracania.</v:String>
-    <v:String x:Key="btn_disable">Wyłącz</v:String>
-    <v:String x:Key="btn_enable">Włącz</v:String>
-   
-    <v:String x:Key="title_clear_more">Czyszczenie pamięci</v:String>
-    <v:String x:Key="text_clear_more">Czyści pamięć podręczną plików systemowych w pamięci komputera, pliki tymczasowe i pamięć podręczną ikon.</v:String>
-    <v:String x:Key="btn_clear">Wyczyść</v:String>
-    <v:String x:Key="title_ntfs_more">Kompresja NTFS</v:String>
-    <v:String x:Key="text_ntfs_more">Włącza lub wyłącza kompresję NTFS. Szczególnie skuteczna dla plików tekstowych, pomaga oszczędzać miejsce na dysku.</v:String>
-    <v:String x:Key="title_registry_more">Kopia zapasowa rejestru</v:String>
-    <v:String x:Key="text_registry_more">Tworzy kopię zapasową rejestru Windows. Zalecane przed wprowadzaniem zmian, aby umożliwić przywrócenie systemu.</v:String>
-    <v:String x:Key="btn_create">Utwórz</v:String>
-    <v:String x:Key="title_over_more">Potwierdzenie czyszczenia dysku</v:String>
-    <v:String x:Key="text_over_more">Na dysku znajduje się folder Windows.old zawierający pliki z poprzedniej wersji Windows, zajmujący znaczną ilość miejsca. Uwaga: po usunięciu tego folderu jego zawartość nie będzie mogła być przywrócona, więc upewnij się, że zapisałeś potrzebne pliki.</v:String>
-    <v:String x:Key="question_over_more">Czy chcesz kontynuować czyszczenie i usunąć folder Windows.old?</v:String>
-    <v:String x:Key="btn_agree">Zgadzam się</v:String>
-    <v:String x:Key="btn_decline">Odrzuć</v:String>
-    <v:String x:Key="textpoint_more">Punkt utworzony za pomocą GTweak</v:String>
+
+    <!--#region Addons Page -->
     <!--#endregion-->
-   
+
 </ResourceDictionary>
+

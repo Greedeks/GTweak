@@ -136,12 +136,14 @@
     </Compile>
     <Compile Include="Assets\UserControl\FlowColumnPanel.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
+    <Compile Include="Core\Model\AddonsModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\DataSystemModel.cs" />
     <Compile Include="Core\Model\InterfaceModel.cs" />
     <Compile Include="Core\Model\PakagesModel.cs" />
     <Compile Include="Core\Model\ServicesModel.cs" />
     <Compile Include="Core\Model\SystemModel.cs" />
+    <Compile Include="Core\ViewModel\AddonsViewModel.cs" />
     <Compile Include="Core\ViewModel\ConfidentialityViewModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemViewModel.cs" />
     <Compile Include="Core\ViewModel\InterfaceViewModel.cs" />
@@ -163,6 +165,9 @@
     <Compile Include="Utilities\Tweaks\SystemTweaks.cs" />
     <Compile Include="Utilities\Tweaks\UninstallingPakages.cs" />
     <Compile Include="Utilities\Maintenance\WindowsLicense.cs" />
+    <Compile Include="View\AddonsView.xaml.cs">
+      <DependentUpon>AddonsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ConfidentialityView.xaml.cs">
       <DependentUpon>ConfidentialityView.xaml</DependentUpon>
     </Compile>
@@ -329,6 +334,10 @@
     <Page Include="Styles\Themes\Light\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ConfidentialityView.xaml">
       <SubType>Designer</SubType>

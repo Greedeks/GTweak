@@ -78,6 +78,7 @@
     <v:String x:Key="rbtn_svc_main">서비스</v:String>
     <v:String x:Key="rbtn_sys_main">시스템</v:String>
     <v:String x:Key="rbtn_sysinfo_main">시스템 정보</v:String>
+    <v:String x:Key="rbtn_adds_main">Addons</v:String>
     <v:String x:Key="title_settings_main">설정</v:String>
     <v:String x:Key="btgl_noty_main">알림 표시</v:String>
     <v:String x:Key="slider_volume_main">볼륨:</v:String>
@@ -103,6 +104,45 @@
     <v:String x:Key="download_update">다운로드</v:String>
     <v:String x:Key="noty_update">다운로드가 완료될 때까지 기다려주세요</v:String>
     <v:String x:Key="connection_update">서버에 연결</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">유틸리티를 사용하기 전에</v:String>
+    <v:String x:Key="advice_part2_more">복원 지점</v:String>
+    <v:String x:Key="advice_part3_more">을 생성하는 것이 좋습니다</v:String>
+
+    <v:String x:Key="title_licens_more">Windows 정품 인증</v:String>
+    <v:String x:Key="text_licens_more">HWID 메서드 또는 백업 KMS를 사용합니다. Windows 버전에 사용할 수 있는 키가 없는 경우 작동하지 않을 수 있습니다.</v:String>
+    <v:String x:Key="btn_activation">활성화</v:String>
+
+    <v:String x:Key="title_point_more">복구 지점</v:String>
+    <v:String x:Key="text_point_more">복원 지점이 현재 비활성화되어 있더라도 시스템 복원 프로세스를 생성하거나 시작합니다.</v:String>
+    <v:String x:Key="btn_save">저장</v:String>
+    <v:String x:Key="btn_recovery">복구</v:String>
+
+    <v:String x:Key="title_point_state_more">복원 상태</v:String>
+    <v:String x:Key="text_point_state_more">시스템 복원 지점을 활성화하거나 비활성화합니다. 비활성화하면 기존의 모든 복원 지점이 삭제됩니다.</v:String>
+    <v:String x:Key="btn_disable">비활성화</v:String>
+    <v:String x:Key="btn_enable">활성화</v:String>
+
+    <v:String x:Key="title_clear_more">메모리 정리</v:String>
+    <v:String x:Key="text_clear_more">컴퓨터 메모리, 임시 파일 및 아이콘 캐시에 있는 시스템 파일의 캐시를 지웁니다.</v:String>
+    <v:String x:Key="btn_clear">지우기</v:String>
+
+    <v:String x:Key="title_ntfs_more">NTFS 압축</v:String>
+    <v:String x:Key="text_ntfs_more">NTFS 압축을 활성화하거나 비활성화합니다. 특히 텍스트 파일에 효과적이며 디스크 공간을 절약하는 데 도움이 됩니다.</v:String>
+
+    <v:String x:Key="title_registry_more">레지스트리 백업</v:String>
+    <v:String x:Key="text_registry_more">Windows 레지스트리를 백업합니다. 시스템 복구를 위해 변경하기 전에 백업하는 것이 좋습니다.</v:String>
+    <v:String x:Key="btn_create">만들기</v:String>
+
+    <v:String x:Key="title_over_more">디스크 정리 확인</v:String>
+    <v:String x:Key="text_over_more">디스크에는 이전 버전의 Windows 파일을 보관하는 Windows.old 폴더가 포함되어 있어 상당한 공간을 차지하고 있습니다. 참고: 이 폴더를 삭제하면 내용을 복원할 수 없으므로 필요한 파일을 저장했는지 확인하세요.</v:String>
+    <v:String x:Key="question_over_more">정리를 진행하고 Windows.old 폴더를 삭제하시겠습니까?</v:String>
+    <v:String x:Key="btn_agree">동의</v:String>
+    <v:String x:Key="btn_decline">거절</v:String>
+
+    <v:String x:Key="textpoint_more">GTweak으로 생성된 지점</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->
@@ -439,44 +479,9 @@
     <v:String x:Key="unknown_information_sysinfo">감지되지 않음</v:String>
     <!--#endregion-->
 
-    <!--#region More Page -->
-    <v:String x:Key="advice_part1_more">유틸리티를 사용하기 전에</v:String>
-    <v:String x:Key="advice_part2_more">복원 지점</v:String>
-    <v:String x:Key="advice_part3_more">을 생성하는 것이 좋습니다</v:String>
-    
-    <v:String x:Key="title_licens_more">Windows 정품 인증</v:String>
-    <v:String x:Key="text_licens_more">HWID 메서드 또는 백업 KMS를 사용합니다. Windows 버전에 사용할 수 있는 키가 없는 경우 작동하지 않을 수 있습니다.</v:String>
-    <v:String x:Key="btn_activation">활성화</v:String>
-
-    <v:String x:Key="title_point_more">복구 지점</v:String>
-    <v:String x:Key="text_point_more">복원 지점이 현재 비활성화되어 있더라도 시스템 복원 프로세스를 생성하거나 시작합니다.</v:String>
-    <v:String x:Key="btn_save">저장</v:String>
-    <v:String x:Key="btn_recovery">복구</v:String>
-
-    <v:String x:Key="title_point_state_more">복원 상태</v:String>
-    <v:String x:Key="text_point_state_more">시스템 복원 지점을 활성화하거나 비활성화합니다. 비활성화하면 기존의 모든 복원 지점이 삭제됩니다.</v:String>
-    <v:String x:Key="btn_disable">비활성화</v:String>
-    <v:String x:Key="btn_enable">활성화</v:String>
-    
-    <v:String x:Key="title_clear_more">메모리 정리</v:String>
-    <v:String x:Key="text_clear_more">컴퓨터 메모리, 임시 파일 및 아이콘 캐시에 있는 시스템 파일의 캐시를 지웁니다.</v:String>
-    <v:String x:Key="btn_clear">지우기</v:String>
-
-    <v:String x:Key="title_ntfs_more">NTFS 압축</v:String>
-    <v:String x:Key="text_ntfs_more">NTFS 압축을 활성화하거나 비활성화합니다. 특히 텍스트 파일에 효과적이며 디스크 공간을 절약하는 데 도움이 됩니다.</v:String>
-
-    <v:String x:Key="title_registry_more">레지스트리 백업</v:String>
-    <v:String x:Key="text_registry_more">Windows 레지스트리를 백업합니다. 시스템 복구를 위해 변경하기 전에 백업하는 것이 좋습니다.</v:String>
-    <v:String x:Key="btn_create">만들기</v:String>
-
-    <v:String x:Key="title_over_more">디스크 정리 확인</v:String>
-    <v:String x:Key="text_over_more">디스크에는 이전 버전의 Windows 파일을 보관하는 Windows.old 폴더가 포함되어 있어 상당한 공간을 차지하고 있습니다. 참고: 이 폴더를 삭제하면 내용을 복원할 수 없으므로 필요한 파일을 저장했는지 확인하세요.</v:String>
-    <v:String x:Key="question_over_more">정리를 진행하고 Windows.old 폴더를 삭제하시겠습니까?</v:String>
-    <v:String x:Key="btn_agree">동의</v:String>
-    <v:String x:Key="btn_decline">거절</v:String>
-
-    <v:String x:Key="textpoint_more">GTweak으로 생성된 지점</v:String>
+    <!--#region Addons Page -->
     <!--#endregion-->
-    
+
 </ResourceDictionary>
+
 

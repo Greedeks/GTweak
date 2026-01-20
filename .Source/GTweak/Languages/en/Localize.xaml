@@ -78,6 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Services</v:String>
     <v:String x:Key="rbtn_sys_main">System</v:String>
     <v:String x:Key="rbtn_sysinfo_main">System information</v:String>
+    <v:String x:Key="rbtn_adds_main">Addons</v:String>
     <v:String x:Key="title_settings_main">Settings</v:String>
     <v:String x:Key="btgl_noty_main">Show notifications</v:String>
     <v:String x:Key="slider_volume_main">Volume:</v:String>
@@ -103,6 +104,45 @@
     <v:String x:Key="download_update">Downloading</v:String>
     <v:String x:Key="noty_update">Please wait for the download to complete</v:String>
     <v:String x:Key="connection_update">Connecting to the server</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">It is strongly</v:String>
+    <v:String x:Key="advice_part2_more">recommended</v:String>
+    <v:String x:Key="advice_part3_more">to create a restore point before using the utility</v:String>
+
+    <v:String x:Key="title_licens_more">Windows Activation</v:String>
+    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
+    <v:String x:Key="btn_activation">Activate</v:String>
+
+    <v:String x:Key="title_point_more">Recovery Point</v:String>
+    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
+    <v:String x:Key="btn_save">Save</v:String>
+    <v:String x:Key="btn_recovery">Recover</v:String>
+
+    <v:String x:Key="title_point_state_more">Restore Status</v:String>
+    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
+    <v:String x:Key="btn_disable">Disable</v:String>
+    <v:String x:Key="btn_enable">Enable</v:String>
+
+    <v:String x:Key="title_clear_more">Clearing the memory</v:String>
+    <v:String x:Key="text_clear_more">Clears the cache of system files in computer memory, temporary files and icon cache.</v:String>
+    <v:String x:Key="btn_clear">Clear</v:String>
+
+    <v:String x:Key="title_ntfs_more">NTFS Compression</v:String>
+    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
+
+    <v:String x:Key="title_registry_more">Registry Backup</v:String>
+    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
+    <v:String x:Key="btn_create">Create</v:String>
+
+    <v:String x:Key="title_over_more">Disk Cleanup Confirmation</v:String>
+    <v:String x:Key="text_over_more">Your disk contains a Windows.old folder holding files from a previous version of Windows that are taking up a significant amount of space. Please note: once this folder is deleted, its contents cannot be restored, so be sure you’ve saved any files you need.</v:String>
+    <v:String x:Key="question_over_more">Do you want to proceed with the cleanup and delete the Windows.old folder?</v:String>
+    <v:String x:Key="btn_agree">Agree</v:String>
+    <v:String x:Key="btn_decline">Decline</v:String>
+
+    <v:String x:Key="textpoint_more">A point created with a GTweak</v:String>
     <!--#endregion-->
 
     <!--#region Confidentiality Page -->
@@ -439,43 +479,7 @@
     <v:String x:Key="unknown_information_sysinfo">Not detected</v:String>
     <!--#endregion-->
 
-    <!--#region More Page -->
-    <v:String x:Key="advice_part1_more">It is strongly</v:String>
-    <v:String x:Key="advice_part2_more">recommended</v:String>
-    <v:String x:Key="advice_part3_more">to create a restore point before using the utility</v:String>
-    
-    <v:String x:Key="title_licens_more">Windows Activation</v:String>
-    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
-    <v:String x:Key="btn_activation">Activate</v:String>
-
-    <v:String x:Key="title_point_more">Recovery Point</v:String>
-    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
-    <v:String x:Key="btn_save">Save</v:String>
-    <v:String x:Key="btn_recovery">Recover</v:String>
-
-    <v:String x:Key="title_point_state_more">Restore Status</v:String>
-    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
-    <v:String x:Key="btn_disable">Disable</v:String>
-    <v:String x:Key="btn_enable">Enable</v:String>
-    
-    <v:String x:Key="title_clear_more">Clearing the memory</v:String>
-    <v:String x:Key="text_clear_more">Clears the cache of system files in computer memory, temporary files and icon cache.</v:String>
-    <v:String x:Key="btn_clear">Clear</v:String>
-
-    <v:String x:Key="title_ntfs_more">NTFS Compression</v:String>
-    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
-
-    <v:String x:Key="title_registry_more">Registry Backup</v:String>
-    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
-    <v:String x:Key="btn_create">Create</v:String>
-
-    <v:String x:Key="title_over_more">Disk Cleanup Confirmation</v:String>
-    <v:String x:Key="text_over_more">Your disk contains a Windows.old folder holding files from a previous version of Windows that are taking up a significant amount of space. Please note: once this folder is deleted, its contents cannot be restored, so be sure you’ve saved any files you need.</v:String>
-    <v:String x:Key="question_over_more">Do you want to proceed with the cleanup and delete the Windows.old folder?</v:String>
-    <v:String x:Key="btn_agree">Agree</v:String>
-    <v:String x:Key="btn_decline">Decline</v:String>
-
-    <v:String x:Key="textpoint_more">A point created with a GTweak</v:String>
+    <!--#region Addons Page -->
     <!--#endregion-->
-    
+
 </ResourceDictionary>
