@@ -89,7 +89,7 @@ namespace GTweak.Assets.UserControl
             }
 
             var columns = CreateOptimalColumns(finalSize.Width, finalSize.Height, visibleChildren);
-            ArrangeAligned(columns, finalSize.Width);
+            ArrangeAligned(columns ?? new List<ColumnInfo>(), finalSize.Width);
 
             return finalSize;
         }

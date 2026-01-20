@@ -103,16 +103,28 @@ namespace GTweak.Utilities.Helpers
 
         internal static Task WaitForExitAsync(this Process process)
         {
-            if (process.HasExited)
+            if (!process.HasExited)
             {
-                return Task.CompletedTask;
+                var tcs = new TaskCompletionSource<object>();
+
+                void Handler(object s, EventArgs e) => tcs.TrySetResult(null);
+
+                process.EnableRaisingEvents = true;
+                process.Exited += Handler;
+
+                tcs.Task.ContinueWith(_ => process.Exited -= Handler, TaskScheduler.Default);
+
+                if (process.HasExited)
+                {
+                    tcs.TrySetResult(null);
+                }
+
+                return tcs.Task;
             }
 
-            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
-            process.EnableRaisingEvents = true;
-            process.Exited += delegate { tcs.TrySetResult(null); };
-            return tcs.Task;
+            return Task.CompletedTask;
         }
+
 
         internal static string CleanCommand(string rawCommand)
         {
@@ -133,7 +145,7 @@ namespace GTweak.Utilities.Helpers
                 return lines[0];
             }
 
-            string separator = rawCommand.Contains("&&") ? " && " : rawCommand.Contains("&") ? " & " : " && ";
+            string separator = rawCommand?.Contains("&&") == true ? " && " : rawCommand?.Contains("&") == true ? " & " : " && ";
 
             return string.Join(separator, lines);
         }

@@ -293,7 +293,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
-                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="7"/>
                         <Image x:Name="Icon" Width="70" Height="70" Source="{TemplateBinding Tag}" Stretch="Uniform" Opacity="1">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />

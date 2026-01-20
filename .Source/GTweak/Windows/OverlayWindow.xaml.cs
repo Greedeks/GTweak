@@ -20,15 +20,18 @@ namespace GTweak.Windows
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            Closing -= Window_Closing;
-            e!.Cancel = true;
-            BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.15, () =>
+            if (e != null)
             {
-                ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
-                disablingWinKeys.objKeyboardProcess = new DisablingWinKeys.LowLevelKeyboardProc(disablingWinKeys.CaptureKey);
-                disablingWinKeys.ptrHook = DisablingWinKeys.SetWindowsHookEx(13, disablingWinKeys.objKeyboardProcess, DisablingWinKeys.GetModuleHandle(objCurrentModule.ModuleName), 1);
-                Close();
-            }));
+                Closing -= Window_Closing;
+                e.Cancel = true;
+                BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.15, () =>
+                {
+                    ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
+                    disablingWinKeys.objKeyboardProcess = new DisablingWinKeys.LowLevelKeyboardProc(disablingWinKeys.CaptureKey);
+                    disablingWinKeys.ptrHook = DisablingWinKeys.SetWindowsHookEx(13, disablingWinKeys.objKeyboardProcess, DisablingWinKeys.GetModuleHandle(objCurrentModule.ModuleName), 1);
+                    Close();
+                }));
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -41,7 +41,7 @@ namespace GTweak.Utilities.Managers
             return retValue.ToString();
         }
 
-        internal void Write(string section, string key, string value) => WritePrivateProfileString(section, key, value, _pathToConfig);
+        internal void Write(string section, string key, string value) => WritePrivateProfileString(section ?? string.Empty, key ?? string.Empty, value ?? string.Empty, _pathToConfig);
 
         internal void WriteAll(string section, Dictionary<string, string> selectedDictionary)
         {

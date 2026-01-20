@@ -51,12 +51,15 @@ namespace GTweak.Windows
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e?.ChangedButton == MouseButton.Left && e.ClickCount != 2)
+            if (e?.ChangedButton == MouseButton.Left && e?.ClickCount != 2)
             {
                 if (WindowState == WindowState.Maximized)
                 {
-                    _mouseDownWindowPoint = e!.GetPosition(this);
-                    _draggingFromMaximized = true;
+                    if (e != null)
+                    {
+                        _mouseDownWindowPoint = e.GetPosition(this);
+                        _draggingFromMaximized = true;
+                    }
                 }
                 else
                 {
@@ -143,7 +146,10 @@ namespace GTweak.Windows
                 await Task.Delay(100).ConfigureAwait(false);
                 _ignoreMouseClick = false;
 
-                e!.Handled = true;
+                if (e != null)
+                {
+                    e.Handled = true;
+                }
             }
         }
 

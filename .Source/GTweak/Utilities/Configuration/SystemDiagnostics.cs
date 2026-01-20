@@ -398,7 +398,7 @@ namespace GTweak.Utilities.Configuration
 
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
-                string storageType = MediaTypeMap.Where(x => x.Keys != null && mediaType != null && x.Keys.Contains(mediaType)).Select(x => x.Type).FirstOrDefault() ?? DiskTypeLabels.Unspecified;
+                string storageType = MediaTypeMap.Where(x => x.Keys != null && mediaType != null && x.Keys.Contains(mediaType) && x.Type != null).Select(x => x.Type).FirstOrDefault() ?? DiskTypeLabels.Unspecified;
 
                 if (isMsftAvailable)
                 {
@@ -524,7 +524,7 @@ namespace GTweak.Utilities.Configuration
 
         private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible
         {
-            decimal bytes = Convert.ToDecimal(sizeInBytes);
+            decimal bytes = ((IConvertible)sizeInBytes).ToDecimal(null);
 
             foreach (string unit in new[] { "B", "KB", "MB", "GB", "TB" })
             {

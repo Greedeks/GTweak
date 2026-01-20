@@ -18,25 +18,29 @@ namespace GTweak.Utilities.Animation
             }
 
             Storyboard storyboard = new Storyboard { FillBehavior = FillBehavior.HoldEnd };
-
             StringAnimationUsingKeyFrames stringAnimation = CreateStringAnimation(textToAnimate, timeSpan);
-            Storyboard.SetTarget(stringAnimation, textBlock);
-            Storyboard.SetTargetProperty(stringAnimation, new PropertyPath(TextBlock.TextProperty));
-            storyboard.Children.Add(stringAnimation);
-
-            DoubleAnimation opacityAnimation = FactoryAnimation.CreateIn(0, 1, timeSpan.TotalSeconds);
-            Storyboard.SetTarget(opacityAnimation, textBlock);
-            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-            storyboard.Children.Add(opacityAnimation);
-
-            handler = delegate
+            if (stringAnimation != null)
             {
-                storyboard.Children.Clear();
-                storyboard.Completed -= handler;
-            };
-            storyboard.Completed += handler;
+                Storyboard.SetTarget(stringAnimation, textBlock);
+                Storyboard.SetTargetProperty(stringAnimation, new PropertyPath(TextBlock.TextProperty));
+                storyboard.Children.Add(stringAnimation);
 
-            textBlock.BeginStoryboard(storyboard);
+                DoubleAnimation opacityAnimation = FactoryAnimation.CreateIn(0, 1, timeSpan.TotalSeconds);
+                if (opacityAnimation != null)
+                {
+                    Storyboard.SetTarget(opacityAnimation, textBlock);
+                    Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
+                    storyboard.Children.Add(opacityAnimation);
+                }
+
+                handler = delegate
+                {
+                    storyboard.Children.Clear();
+                    storyboard.Completed -= handler;
+                };
+                storyboard.Completed += handler;
+                textBlock.BeginStoryboard(storyboard);
+            }
         }
 
         private static StringAnimationUsingKeyFrames CreateStringAnimation(in string textToAnimate, in TimeSpan timeSpan)
@@ -47,7 +51,7 @@ namespace GTweak.Utilities.Animation
             };
 
             StringBuilder temp = new StringBuilder();
-            int totalChars = textToAnimate.Length;
+            int totalChars = textToAnimate?.Length ?? 0;
 
             if (totalChars != 0)
             {

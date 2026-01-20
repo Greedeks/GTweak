@@ -31,7 +31,7 @@ namespace GTweak.Windows
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e?.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }

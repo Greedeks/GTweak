@@ -31,7 +31,7 @@ namespace GTweak.Utilities.Animation
 
         public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
         {
-            if (animationClock.CurrentProgress == null)
+            if (animationClock?.CurrentProgress == null)
             {
                 return From ?? defaultOriginValue;
             }

@@ -103,15 +103,27 @@ namespace GTweak.Utilities.Helpers
             HashSet<int> result = new HashSet<int>();
 
             string[] files;
-            try
+
+            if (string.IsNullOrEmpty(directoryPath))
             {
-                files = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories);
-                if (files.Length == 0)
+                files = Array.Empty<string>();
+            }
+            else
+            {
+                try
+                {
+                    files = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories);
+
+                    if (files == null || files.Length == 0)
+                    {
+                        files = new[] { Path.GetFullPath(directoryPath) };
+                    }
+                }
+                catch
                 {
                     files = new[] { Path.GetFullPath(directoryPath) };
                 }
             }
-            catch { files = new[] { Path.GetFullPath(directoryPath) }; }
 
             string sessionKey = Guid.NewGuid().ToString();
 

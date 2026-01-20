@@ -60,25 +60,21 @@ namespace GTweak.Core.ViewModel
 
         private void UpdatePackageState(PakagesModel item)
         {
-            if (UninstallingPakages.PackagesDetails?.TryGetValue(item?.Name ?? default, out var val) == true)
+            if (item != null && !string.IsNullOrEmpty(item.Name))
             {
-                item.IsUnavailable = !val.IsUnavailable;
-
-                if (!item.Name.Equals("OneDrive", StringComparison.OrdinalIgnoreCase))
+                if ((UninstallingPakages.PackagesDetails?.TryGetValue(item.Name, out var val)) == true)
                 {
-                    if (val.Scripts != null && val.Scripts.Any())
+                    item.IsUnavailable = !val.IsUnavailable;
+
+                    if (!string.Equals(item?.Name, "OneDrive", StringComparison.OrdinalIgnoreCase))
                     {
-                        item.Installed = val.Scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+                        item.Installed = val.Scripts != null && val.Scripts.Any() && val.Scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
                     }
                     else
                     {
-                        item.Installed = false;
+                        item.Installed = UninstallingPakages.IsOneDriveInstalled;
+                        return;
                     }
-                }
-                else
-                {
-                    item.Installed = UninstallingPakages.IsOneDriveInstalled;
-                    return;
                 }
             }
         }

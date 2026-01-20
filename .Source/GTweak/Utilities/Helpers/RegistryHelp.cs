@@ -103,7 +103,7 @@ namespace GTweak.Utilities.Helpers
 
         internal static bool ValueExists(string subKey, string valueName, in bool isNegation = true)
         {
-            bool result = Registry.GetValue(subKey, valueName, null) == null;
+            bool result = (Registry.GetValue(subKey, valueName, null) ?? null) == null;
             return isNegation ? result : !result;
         }
 

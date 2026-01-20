@@ -99,42 +99,44 @@ namespace GTweak.Assets.UserControl
 
         private void ApplyResource(object value, DependencyProperty dp, DependencyProperty textProperty = null, FrameworkElement target = null)
         {
-            switch (value)
+            if (dp != null || target != null)
             {
-                case DynamicResourceExtension dynamicResource:
-                    if (target != null && textProperty != null)
-                    {
-                        target.SetResourceReference(textProperty, dynamicResource.ResourceKey);
-                    }
-                    else
-                    {
-                        SetResourceReference(dp, dynamicResource.ResourceKey);
-                    }
-
-                    break;
-
-                case StaticResourceExtension staticResource:
-                    if (target != null && textProperty != null)
-                    {
-                        target.SetResourceReference(textProperty, staticResource.ResourceKey);
-                    }
-                    else
-                    {
-                        SetResourceReference(dp, staticResource.ResourceKey);
-                    }
-
-                    break;
-
-                default:
-                    SetValue(dp, value);
-                    if (target is TextBlock textBlock && value is string str)
-                    {
-                        textBlock.Text = str;
-                    }
-
-                    break;
+                switch (value)
+                {
+                    case DynamicResourceExtension dynamicResource:
+                        if (target != null && textProperty != null)
+                        {
+                            target.SetResourceReference(textProperty, dynamicResource.ResourceKey);
+                        }
+                        else if (dp != null)
+                        {
+                            SetResourceReference(dp, dynamicResource.ResourceKey);
+                        }
+                        break;
+                    case StaticResourceExtension staticResource:
+                        if (target != null && textProperty != null)
+                        {
+                            target.SetResourceReference(textProperty, staticResource.ResourceKey);
+                        }
+                        else if (dp != null)
+                        {
+                            SetResourceReference(dp, staticResource.ResourceKey);
+                        }
+                        break;
+                    default:
+                        if (dp != null)
+                        {
+                            SetValue(dp, value);
+                        }
+                        if (target is TextBlock textBlock && value is string str)
+                        {
+                            textBlock.Text = str;
+                        }
+                        break;
+                }
             }
         }
+
 
         private void ToggleButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {

@@ -190,7 +190,11 @@ namespace GTweak.Utilities.Configuration
                 {
                     WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
                     ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope ?? @"root\cimv2"), query);
-                    void handler(object s, EventArrivedEventArgs e) => HandleDevicesEvents?.Invoke(type);
+                    void handler(object s, EventArrivedEventArgs e)
+                    {
+                        Action<DeviceType> handlerEvent = HandleDevicesEvents;
+                        handlerEvent?.Invoke(type);
+                    }
                     managementEvent.EventArrived += handler;
                     managementEvent.Start();
                     _watcherHandler.Add((managementEvent, handler));

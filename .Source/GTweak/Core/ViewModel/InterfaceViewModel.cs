@@ -16,6 +16,6 @@ namespace GTweak.Core.ViewModel
 
         protected override Dictionary<string, object> GetControlStates() => InterfaceTweaks.ControlStates;
 
-        protected override void Analyze(InterfaceTweaks tweaks) => tweaks.AnalyzeAndUpdate();
+        protected override void Analyze(InterfaceTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
     }
 }

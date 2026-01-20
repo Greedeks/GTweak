@@ -47,7 +47,7 @@ namespace GTweak.Utilities.Managers
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     finally
                     {
-                        if (Process.GetProcessesByName("explorer").Length == 0)
+                        if (Process.GetProcessesByName("explorer").Length == 0 && launchExplorer != null)
                         {
                             launchExplorer.StartInfo.FileName = PathLocator.Executable.Explorer;
                             launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";

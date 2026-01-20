@@ -13,6 +13,6 @@ namespace GTweak.Core.ViewModel
 
         protected override Dictionary<string, object> GetControlStates() => ConfidentialityTweaks.ControlStates;
 
-        protected override void Analyze(ConfidentialityTweaks tweaks) => tweaks.AnalyzeAndUpdate();
+        protected override void Analyze(ConfidentialityTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
     }
 }

@@ -33,7 +33,7 @@ namespace GTweak
 
         private async void App_Startup(object sender, StartupEventArgs e)
         {
-            if (e.Args != null && e.Args.Any(arg => string.Equals(arg, "uninstall", StringComparison.OrdinalIgnoreCase)))
+            if (e.Args != null && e.Args.Any(arg => string.Equals(arg ?? string.Empty, "uninstall", StringComparison.OrdinalIgnoreCase)))
             {
                 SettingsEngine.SelfRemoval();
                 return;
@@ -52,9 +52,12 @@ namespace GTweak
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            ErrorLogging.LogWritingFile(e.Exception);
-            e!.Handled = true;
-            Environment.Exit(0);
+            if (e != null)
+            {
+                ErrorLogging.LogWritingFile(e.Exception);
+                e.Handled = true;
+                Environment.Exit(0);
+            }
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)

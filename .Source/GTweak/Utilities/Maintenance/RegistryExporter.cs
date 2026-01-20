@@ -53,8 +53,8 @@ namespace GTweak.Utilities.Maintenance
                 return false;
             }
 
-            string hive = fullPath.Substring(0, index);
-            string subKey = fullPath.Substring(index + 1);
+            string hive = !string.IsNullOrEmpty(fullPath) && index >= 0 && index <= fullPath.Length ? fullPath.Substring(0, index) : string.Empty;
+            string subKey = (fullPath != null && index + 1 < fullPath.Length) ? fullPath.Substring(index + 1) : string.Empty;
 
             RegistryKey baseKey = hive switch
             {
