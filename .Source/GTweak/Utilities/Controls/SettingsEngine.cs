@@ -35,7 +35,8 @@ namespace GTweak.Utilities.Controls
             ["EnableSound"] = true,
             ["VolumeLevel"] = 50,
             ["Language"] = SystemDiagnostics.GetCurrentSystemLang().Code,
-            ["Theme"] = AvailableThemes.First()
+            ["Theme"] = AvailableThemes.First(),
+            ["AddonsPath"] = string.Empty,
         };
 
         private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);
@@ -43,11 +44,12 @@ namespace GTweak.Utilities.Controls
         internal static bool IsViewNotification { get => (bool)_cachedSettings["EnableNotifications"]; set => ChangingParameters("EnableNotifications", value); }
         internal static bool IsUpdateCheckRequired { get => (bool)_cachedSettings["EnableAutoUpdate"]; set => ChangingParameters("EnableAutoUpdate", value); }
         internal static bool IsTopMost { get => (bool)_cachedSettings["EnableTopMost"]; set => ChangingParameters("EnableTopMost", value); }
+        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["EnableIpBlur"]; set => ChangingParameters("EnableIpBlur", value); }
         internal static bool IsPlayingSound { get => (bool)_cachedSettings["EnableSound"]; set => ChangingParameters("EnableSound", value); }
         internal static int Volume { get => (int)_cachedSettings["VolumeLevel"]; set => ChangingParameters("VolumeLevel", value); }
         internal static string Language { get => (string)_cachedSettings["Language"]; set => ChangingParameters("Language", value); }
         internal static string Theme { get => (string)_cachedSettings["Theme"]; set => ChangingParameters("Theme", value); }
-        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["EnableIpBlur"]; set => ChangingParameters("EnableIpBlur", value); }
+        internal static string UserAddonsPath { get => (string)_cachedSettings["AddonsPath"]; set => ChangingParameters("AddonsPath", value); }
 
         private static void ChangingParameters(string key, object value)
         {

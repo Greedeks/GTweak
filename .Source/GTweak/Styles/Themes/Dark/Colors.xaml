@@ -3,6 +3,7 @@
 
     <Color x:Key="Color_Accent">#7BFFB5</Color>
     <Color x:Key="Color_Shadow">#1AFF7E</Color>
+    <Color x:Key="Color_Separator">#434544</Color>
 
     <SolidColorBrush x:Key="Brush_Background" Color="#FF1E1E1E"/>
     <SolidColorBrush x:Key="Brush_Accent" Color="{StaticResource Color_Accent}"/>
@@ -21,7 +22,7 @@
     <SolidColorBrush x:Key="Brush_ScrollBar_Normal" Color="#494949"/>
     <SolidColorBrush x:Key="Brush_ScrollBar_Hover" Color="#5b5b5b"/>
 
-    <SolidColorBrush x:Key="Brush_Separator" Color="#434544"/>
+    <SolidColorBrush x:Key="Brush_Separator" Color="{StaticResource Color_Separator}"/>
 
     <SolidColorBrush x:Key="Brush_Background_ComboBox" Color="#2C2E2D"/>
     <SolidColorBrush x:Key="Brush_ComboBoxBorder_Hover" Color="#65ffa9"/>
@@ -53,6 +54,9 @@
 
     <SolidColorBrush x:Key="Brush_ToggleBorder_Off" Color="{StaticResource Color_ToggleBorder_Off}"/>
 
+    <Color x:Key="Color_Border_Hover_CheckBox">#9B9C9C</Color>
+    <Color x:Key="Color_Background_CheckBox">#40C279</Color>
+    
     <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="UncheckedIconOpacity">0.1</sys:Double>
     <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="RadialProgressOpacity">0.2</sys:Double>
 

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GTweak.View.ServicesView"
+<UserControl x:Class="GTweak.View.ServicesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -28,7 +28,7 @@
         <Grid Grid.Row="0">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 
-                <uc:FlowColumnPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
+                <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
 
                     <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" TextResource="{DynamicResource tgl1_svc}" Description="{DynamicResource tgl1_desc_svc}" />
                     <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton2].State}" TextResource="{DynamicResource tgl2_svc}" Description="{DynamicResource tgl2_desc_svc}" />
@@ -60,7 +60,7 @@
                     <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton28].State}" TextResource="{DynamicResource tgl28_svc}" Description="{DynamicResource tgl28_desc_svc}" />
                     <uc:ToggleButton x:Name="TglButton29" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton29].State}" TextResource="{DynamicResource tgl29_svc}" Description="{DynamicResource tgl29_desc_svc}" />
                     
-                </uc:FlowColumnPanel>
+                </uc:FlowPanel>
 
             </ScrollViewer>
         </Grid>

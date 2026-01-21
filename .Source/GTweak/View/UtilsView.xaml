@@ -45,7 +45,7 @@
             
             <Grid Grid.Row="1">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <uc:FlowColumnPanel Margin="20,20,0,20" UseMasonryLayout="False" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <uc:FlowPanel Margin="20,20,0,20" UseMasonryLayout="False" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <uc:Card Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btn_activation}" ClickButton="BtnLicenseWindows_ClickButton">
                             <uc:Card.IconStyle>
                                 <Style TargetType="Image">
@@ -94,7 +94,7 @@
                             </uc:Card.IconStyle>
                         </uc:Card>
                         
-                    </uc:FlowColumnPanel>
+                    </uc:FlowPanel>
                 </ScrollViewer>
             </Grid>
         </Grid>

@@ -58,7 +58,7 @@
 
             <Grid Grid.Row="1">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <uc:FlowColumnPanel UseMasonryLayout="False" HorizontalSpacing="30" Margin="10,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <uc:FlowPanel UseMasonryLayout="False" HorizontalSpacing="30" Margin="10,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Top">
 
                         <ToggleButton x:Name="MicrosoftStore" IsChecked="{Binding [MicrosoftStore].Installed}" IsEnabled="{Binding [MicrosoftStore].IsUnavailable}" ToolTip="{DynamicResource MicrosoftStore_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_MicrosoftStore}"/>
                         <ToggleButton x:Name="Xbox" IsChecked="{Binding [Xbox].Installed}" IsEnabled="{Binding [Xbox].IsUnavailable}" ToolTip="{DynamicResource Xbox_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Xbox}"/>
@@ -113,7 +113,7 @@
                         <ToggleButton x:Name="Spotify" IsChecked="{Binding [Spotify].Installed}" IsEnabled="{Binding [Spotify].IsUnavailable}" ToolTip="{DynamicResource Spotify_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Spotify}"/>
                         <ToggleButton x:Name="WhatsApp" IsChecked="{Binding [WhatsApp].Installed}" IsEnabled="{Binding [WhatsApp].IsUnavailable}" ToolTip="{DynamicResource WhatsApp_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_WhatsApp}"/>
 
-                    </uc:FlowColumnPanel>
+                    </uc:FlowPanel>
                 </ScrollViewer>
             </Grid>
 

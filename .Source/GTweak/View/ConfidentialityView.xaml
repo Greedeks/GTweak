@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GTweak.View.ConfidentialityView"
+<UserControl x:Class="GTweak.View.ConfidentialityView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -29,7 +29,7 @@
         <Grid Grid.Row="0">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 
-                <uc:FlowColumnPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
+                <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
 
                     <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" TextResource="{DynamicResource tgl1_conf}" Description="{DynamicResource tgl1_desc_conf}" />
                     <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton2].State}" TextResource="{DynamicResource tgl2_conf}" Description="{DynamicResource tgl2_desc_conf}" />
@@ -50,7 +50,7 @@
                     <uc:ToggleButton x:Name="TglButton17" Visibility="{Binding NvSupportAvailable}" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton17].State}" TextResource="{DynamicResource tgl17_conf}" Description="{DynamicResource tgl17_desc_conf}" />
                     <uc:ToggleButton x:Name="TglButton18" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton18].State}" TextResource="{DynamicResource tgl18_conf}" Description="{DynamicResource tgl18_desc_conf}" />
 
-                </uc:FlowColumnPanel>
+                </uc:FlowPanel>
 
             </ScrollViewer>
         </Grid>

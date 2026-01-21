@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GTweak.View.SystemView"
+<UserControl x:Class="GTweak.View.SystemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -29,7 +29,7 @@
         <Grid Grid.Row="0">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 
-                <uc:FlowColumnPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
+                <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
 
                     <StackPanel Orientation="Vertical" Margin="0,-20,0,0">
                         <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource slider1_desc_sys}" ToolTipService.IsEnabled="False">
@@ -81,7 +81,7 @@
                     <uc:ToggleButton x:Name="TglButton27" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton27].State}" TextResource="{DynamicResource tgl27_sys}" Description="{DynamicResource tgl27_desc_sys}" />
                     <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton28].State}" TextResource="{DynamicResource tgl28_sys}" Description="{DynamicResource tgl28_desc_sys}" />
 
-                </uc:FlowColumnPanel>
+                </uc:FlowPanel>
 
             </ScrollViewer>
         </Grid>

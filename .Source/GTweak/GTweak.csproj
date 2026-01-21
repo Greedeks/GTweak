@@ -134,7 +134,7 @@
     <Compile Include="Assets\UserControl\DescriptionBlock.xaml.cs">
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControl\FlowColumnPanel.cs" />
+    <Compile Include="Assets\UserControl\FlowPanel.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Model\AddonsModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
@@ -298,6 +298,10 @@
     <Page Include="Styles\Buttons\ToggleButtons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Inputs\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Display\Images.xaml">
       <Generator>MSBuild:Compile</Generator>

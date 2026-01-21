@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
+             xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
+             xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:GTweak.View"
              mc:Ignorable="d" d:Width="1014" Style="{StaticResource LaunchPage}">
@@ -11,6 +12,47 @@
         <vm:AddonsViewModel />
     </UserControl.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <uc:FlowPanel Grid.Row="0" ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="10,5,10,0">
+
+            <Button Style="{StaticResource ButtonContent}" HorizontalAlignment="Right" Margin="0,0,0,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <ui:SymbolIcon Symbol="FolderOpen20" FontSize="15" Margin="0,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center">
+                        <Run Text="{DynamicResource btn_open_dir}"/><Run Text="..."/>
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <ui:SymbolIcon Symbol="ArrowClockwise20" FontSize="15" Margin="0,0,5,0"/>
+                    <TextBlock Text="{DynamicResource btn_upd}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <CheckBox VerticalAlignment="Top" Content="{DynamicResource chk_run_ti_adds}" Margin="0,6,0,0"/>
+
+        </uc:FlowPanel>
+
+        <Border Grid.Row="1" Background="{StaticResource Brush_Separator}" Height="1.2" Margin="10,10,10,0" CornerRadius="10" HorizontalAlignment="Stretch"/>
+
+        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             
+            <ui:SymbolIcon Symbol="DocumentFlowchart20" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="55" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"/>
+            <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="17pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}"  Grid.Row="1" Margin="0,5,0,0">
+                <Run Text="{DynamicResource text_info_adds}"/><LineBreak/>
+                <Run FontSize="15pt" Text="{DynamicResource scripts_info_adds}"/>
+            </TextBlock>
+        </Grid>
     </Grid>
 </UserControl>

@@ -1,4 +1,4 @@
-﻿<Application x:Class="GTweak.App"
+<Application x:Class="GTweak.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GTweak"
@@ -29,6 +29,7 @@
                 <ResourceDictionary Source="Styles/Inputs/ComboBox.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/Slider.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/TextBox.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/CheckBox.xaml" />
                 <ResourceDictionary Source="Styles/Page.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
