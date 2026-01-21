@@ -17,45 +17,17 @@
 <div align="center">
   <h1>🌍 Langues disponibles:</h1>
 
-<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="Drapeau US" width="40">
-</a>
+[![EN](https://img.icons8.com/color/50/usa-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md) 
+[![FR](https://img.icons8.com/color/50/france-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md) 
+[![HU](https://img.icons8.com/color/50/hungary-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-hu.md) 
+[![IT](https://img.icons8.com/color/50/italy-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-it.md) 
+[![KO](https://img.icons8.com/color/50/south-korea-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md) 
+[![PL](https://img.icons8.com/color/50/poland-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md) 
+[![PT-BR](https://img.icons8.com/color/50/brazil-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md) 
+[![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md) 
+[![UK](https://img.icons8.com/color/50/ukraine-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md) 
+[![ZH-TW](https://img.icons8.com/color/50/china-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md)
 
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="Drapeau Français" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Drapeau Italien" width="40">
-</a>
-  
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Drapeau Coréen" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-pl.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197529.png" alt="Poland Flag" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906449.png" alt="Brazilian Flag" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197408.png" alt="Drapeau Russe" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/5315/5315703.png" alt="Drapeau Ukrainien" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/7826/7826440.png" alt="China Flag" width="40">
-</a>
 </div>
 
 </div>
