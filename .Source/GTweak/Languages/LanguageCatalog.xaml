@@ -18,5 +18,6 @@
     <v:String x:Key="pt_br">Português (BR)</v:String>
     <v:String x:Key="ru">Русский (RU)</v:String>
     <v:String x:Key="uk">Українська (UK)</v:String>
+    <v:String x:Key="zh-TW">繁體中文 (TW)</v:String>
     
 </ResourceDictionary>
