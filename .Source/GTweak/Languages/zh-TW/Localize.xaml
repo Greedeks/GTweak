@@ -386,9 +386,9 @@
     <!--#endregion-->
 
     <!--#region System Page -->
-    <v:String x:Key="slider1_系統">滑鼠游標速度：</v:String>
-    <v:String x:Key="slider2_系統">鍵盤重複延遲：</v:String>
-    <v:String x:Key="slider3_系統">鍵盤重複頻率：</v:String>
+    <v:String x:Key="slider1_sys">滑鼠游標速度：</v:String>
+    <v:String x:Key="slider2_sys">鍵盤重複延遲：</v:String>
+    <v:String x:Key="slider3_sys">鍵盤重複頻率：</v:String>
     <v:String x:Key="text_sys">在此輸入文字以測試鍵盤設定</v:String>
     <v:String x:Key="tgl1_sys">提升游標精準度</v:String>
     <v:String x:Key="tgl2_sys">黏著鍵與篩選鍵功能</v:String>
@@ -480,6 +480,11 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
+    <v:String x:Key="btn_open_dir">Select folder</v:String>
+    <v:String x:Key="btn_run">Run</v:String>
+    <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">Select a directory or make sure it is not empty</v:String>
+    <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

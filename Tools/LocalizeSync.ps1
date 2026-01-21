@@ -11,6 +11,7 @@
 function Info([string]$s) { Write-Host $s -ForegroundColor Cyan }
 function Ok([string]$s)   { Write-Host $s -ForegroundColor Green }
 function Warn([string]$s) { Write-Host $s -ForegroundColor Yellow }
+function Update([string]$s) { Write-Host $s -ForegroundColor Blue }
 
 # detect script directory
 $scriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
@@ -52,6 +53,59 @@ $refText = Get-Content -Raw -LiteralPath $RefFile
 $elementRegex = '(<v:String\b[^>]*\bx:Key\s*=\s*"[^\"]+"[^>]*?(?:\/>|>.*?<\/v:String>))'
 $keyAttrRegex = 'x:Key\s*=\s*"([^"]+)"'
 $regionStartRegex = '<!--\#region\s*(.*?)\s*-->'
+
+
+# Collect the `LanguageCatalog.xaml` and ensure key formatting
+function ProcessLanguageCatalog([string]$catalogFile) {
+    if (-not (Test-Path -LiteralPath $catalogFile)) {
+        Write-Host "LanguageCatalog file not found: $catalogFile"
+        return
+    }
+
+    Info "Processing LanguageCatalog: $catalogFile"
+
+    $catalogText = Get-Content -Raw -LiteralPath $catalogFile
+    $catalogKeys = [regex]::Matches($catalogText, $keyAttrRegex)
+
+    $updatedCatalogText = $catalogText
+
+    foreach ($match in $catalogKeys) {
+        $key = $match.Groups[1].Value
+
+        $newKey = $key.ToLower().Replace('-', '_')
+
+        if ($newKey -ne $key) {
+            Update "  Key '$key' updated to '$newKey'"
+            $updatedCatalogText = $updatedCatalogText -replace ("x:Key=`"$key`""), "x:Key=`"$newKey`""
+        }
+    }
+
+    $endTag = "</ResourceDictionary>"
+    $idxEnd = $updatedCatalogText.LastIndexOf($endTag, [System.StringComparison]::OrdinalIgnoreCase)
+
+    if ($idxEnd -ge 0) {
+        $beforeEnd = $updatedCatalogText.Substring(0, $idxEnd + $endTag.Length)
+        $afterEnd = $updatedCatalogText.Substring($idxEnd + $endTag.Length)
+        $cleanedAfterEnd = $afterEnd.TrimEnd()
+        $updatedCatalogText = $beforeEnd + $cleanedAfterEnd
+    }
+
+    if ($updatedCatalogText -ne $catalogText) {
+        if ($DryRun) {
+            Write-Host "  (DryRun) LanguageCatalog would be changed."
+        } else {
+            if ($Backup) { Copy-Item -LiteralPath $catalogFile -Destination ($catalogFile + ".bak") -Force }
+            Set-Content -LiteralPath $catalogFile -Value $updatedCatalogText -Force
+            Ok "  Updated: $catalogFile"
+        }
+    } else {
+        Ok "  No changes: $catalogFile"
+    }
+}
+
+$languageCatalogFile = Join-Path $BasePath "LanguageCatalog.xaml"
+ProcessLanguageCatalog $languageCatalogFile
+Write-Host ""
 
 # collect reference elements and key list
 $refElements = @()
