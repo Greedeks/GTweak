@@ -52,6 +52,11 @@
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
     <img src="https://cdn-icons-png.flaticon.com/128/5315/5315703.png" alt="Ukrainian Flag" width="40">
 </a>
+
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/7826/7826440.png" alt="China Flag" width="40">
+</a>
+
 </div>
 
 </div>
@@ -144,54 +149,11 @@
   <b>Особлива подяка</b> цим чудовим людям за їхній внесок у переклади
 </p>
 
-<table>
-  <tr>
-    <td align="center" width="180">
-      <a href="https://github.com/VenusGirl">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/53147200?v=4&h=70&w=70&fit=cover&mask=circle" alt="VenusGirl"/>
-      </a><br/>
-      <b>VenusGirl</b><br/>
-      <i>한국어</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/Kopejkin">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/172585094?v=4&h=70&w=70&fit=cover&mask=circle" alt="Kopejkin"/>
-      </a><br/>
-      <b>Kopejkin</b><br/>
-      <i>Українська</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/Zephyris-Pro">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/200662396?v=4&h=70&w=70&fit=cover&mask=circle" alt="Zephyris"/>
-      </a><br/>
-      <b>Zephyris</b><br/>
-      <i>Français, Italiano</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/marcolinojunior">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/63563268?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
-      </a><br/>
-      <b>Marcos Evangelista</b><br/>
-      <i>Português Brasileiro</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/JohnFowler58">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="John Fowler"/>
-      </a><br/>
-      <b>John Fowler</b><br/>
-      <i>Magyar</i>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="180">
-      <a href="https://github.com/seba99317">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/22873964?v=4&h=70&w=70&fit=cover&mask=circle" alt="Seba99317"/>
-      </a><br/>
-      <b>Seba99317</b><br/>
-      <i>Polski</i>
-    </td>
-  </tr>
-</table>
+<div align="left">
+  
+[![VenusGirl](https://wsrv.nl/?url=github.com/VenusGirl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/VenusGirl) [![Kopejkin](https://wsrv.nl/?url=github.com/Kopejkin.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kopejkin) [![Zephyris](https://wsrv.nl/?url=github.com/Zephyris-Pro.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Zephyris-Pro) [![Marcos](https://wsrv.nl/?url=github.com/marcolinojunior.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/marcolinojunior) [![John](https://wsrv.nl/?url=github.com/JohnFowler58.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/JohnFowler58) [![Seba](https://wsrv.nl/?url=github.com/seba99317.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/seba99317) [![Tenshi](https://wsrv.nl/?url=github.com/tenshikohaku0227.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/tenshikohaku0227)
+
+</div>
 
 </br>
 

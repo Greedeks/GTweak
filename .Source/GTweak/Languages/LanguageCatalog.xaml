@@ -3,10 +3,11 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
     <!-- NOTE:
-         - Write the language name in its native form (e.g., Français, 한국어).
-         - In parentheses () always write the short English abbreviation of the language.
-         - If there are regional variants, use the country code (e.g., Portuguese (BR) for Brazilian, Portuguese (PT) for European).
-         - The display order does not depend on this list — it will be sorted by code anyway.
+     - Write the language name in its native form (e.g., Français, 한국어).
+     - In parentheses () always write the short English abbreviation of the language.
+     - If there are regional variants, use the country code (e.g., Portuguese (BR) for Brazilian, Portuguese (PT) for European).
+     - The keys should be in lowercase and use underscores instead of hyphens (e.g., pt_br, zh_tw).
+     - The display order does not depend on this list - it will be sorted by code anyway. 
     -->
 
     <v:String x:Key="en">English (EN)</v:String>

@@ -52,6 +52,10 @@
 <a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
     <img src="https://cdn-icons-png.flaticon.com/128/5315/5315703.png" alt="Ukrainian Flag" width="40">
 </a>
+
+<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
+    <img src="https://cdn-icons-png.flaticon.com/128/7826/7826440.png" alt="China Flag" width="40">
+</a>
 </div>
 
 </div>
@@ -141,54 +145,11 @@ Installed platform: .NET Framework 4.8
   <b>Special Thanks</b> o these amazing people for their translation contributions
 </p>
 
-<table>
-  <tr>
-    <td align="center" width="180">
-      <a href="https://github.com/VenusGirl">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/53147200?v=4&h=70&w=70&fit=cover&mask=circle" alt="VenusGirl"/>
-      </a><br/>
-      <b>VenusGirl</b><br/>
-      <i>한국어</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/Kopejkin">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/172585094?v=4&h=70&w=70&fit=cover&mask=circle" alt="Kopejkin"/>
-      </a><br/>
-      <b>Kopejkin</b><br/>
-      <i>Українська</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/Zephyris-Pro">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/200662396?v=4&h=70&w=70&fit=cover&mask=circle" alt="Zephyris"/>
-      </a><br/>
-      <b>Zephyris</b><br/>
-      <i>Français, Italiano</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/marcolinojunior">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/63563268?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
-      </a><br/>
-      <b>Marcos Evangelista</b><br/>
-      <i>Português Brasileiro</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/JohnFowler58">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="John Fowler"/>
-      </a><br/>
-      <b>John Fowler</b><br/>
-      <i>Magyar</i>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="180">
-      <a href="https://github.com/seba99317">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/22873964?v=4&h=70&w=70&fit=cover&mask=circle" alt="Seba99317"/>
-      </a><br/>
-      <b>Seba99317</b><br/>
-      <i>Polski</i>
-    </td>
-  </tr>
-</table>
+<div align="left">
+  
+[![VenusGirl](https://wsrv.nl/?url=github.com/VenusGirl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/VenusGirl) [![Kopejkin](https://wsrv.nl/?url=github.com/Kopejkin.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kopejkin) [![Zephyris](https://wsrv.nl/?url=github.com/Zephyris-Pro.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Zephyris-Pro) [![Marcos](https://wsrv.nl/?url=github.com/marcolinojunior.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/marcolinojunior) [![John](https://wsrv.nl/?url=github.com/JohnFowler58.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/JohnFowler58) [![Seba](https://wsrv.nl/?url=github.com/seba99317.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/seba99317) [![Tenshi](https://wsrv.nl/?url=github.com/tenshikohaku0227.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/tenshikohaku0227)
+
+</div>
 
 </br>
 
@@ -212,13 +173,13 @@ Installed platform: .NET Framework 4.8
 </div>
 
 - Add your language’s name (as written in your native language) to [LanguageCatalog](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml).  
-  ⚠️ Make sure to follow the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L10) inside the file.
+  ⚠️ Make sure to follow the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11) inside the file.
 - Submit a **Pull Request** with your changes. </br></br>
 
 **II. Request via Issue**
 - If you’re unfamiliar with Git, open a [Feature Request issue](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
   - Specify your target [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11).
-  - Provide the name of your language written in your native language according to the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L10).
+  - Provide the name of your language written in your native language according to the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11).
   - Attach your translated `Localize.xaml` file.
 </br>
 
