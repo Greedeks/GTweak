@@ -1,6 +1,11 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <BitmapImage x:Key="Img_BatFile" UriSource="pack://application:,,,/GTweak;component/Assets/ImageAddonsFiles/BatFile.png"/>
+    <BitmapImage x:Key="Img_CmdFile" UriSource="pack://application:,,,/GTweak;component/Assets/ImageAddonsFiles/CmdFile.png"/>
+    <BitmapImage x:Key="Img_PowershellFile" UriSource="pack://application:,,,/GTweak;component/Assets/ImageAddonsFiles/PowershellFile.png"/>
+    <BitmapImage x:Key="Img_RegistryFile" UriSource="pack://application:,,,/GTweak;component/Assets/ImageAddonsFiles/RegistryFile.png"/>
+
     <BitmapImage x:Key="Img_SandTimer" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/SandTimer.png"/>
     
     <BitmapImage x:Key="Img_Alarms" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Alarms.png"/>

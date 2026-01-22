@@ -481,11 +481,11 @@
 
     <!--#region Addons Page -->
     <v:String x:Key="btn_open_dir">Выбрать папку</v:String>
-    <v:String x:Key="btn_run">Выполнить</v:String>
     <v:String x:Key="chk_run_ti_adds">Запуск от имени TrustedInstaller</v:String>
     <v:String x:Key="text_info_adds">Выберите директорию или убедитесь, что она не пуста</v:String>
     <v:String x:Key="scripts_info_adds">После этого вы сможете запускать скрипты (.ps1, .cmd, .bat, .reg) на этой странице</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>
+
 

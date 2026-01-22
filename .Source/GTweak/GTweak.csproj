@@ -135,6 +135,9 @@
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\UserControl\FlowPanel.cs" />
+    <Compile Include="Assets\UserControl\FileCard.xaml.cs">
+      <DependentUpon>FileCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Model\AddonsModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
@@ -236,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\UserControl\DescriptionBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\UserControl\FileCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -554,6 +561,10 @@
     <Resource Include="Assets\ImagePackages\WhatsApp.png" />
     <Resource Include="Assets\ImagePackages\WhiteBoard.png" />
     <Resource Include="GTweak.ico" />
+    <Resource Include="Assets\ImageAddonsFiles\BatFile.png" />
+    <Resource Include="Assets\ImageAddonsFiles\CmdFile.png" />
+    <Resource Include="Assets\ImageAddonsFiles\PowershellFile.png" />
+    <Resource Include="Assets\ImageAddonsFiles\RegistryFile.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

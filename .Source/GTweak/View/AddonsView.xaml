@@ -19,8 +19,7 @@
         </Grid.RowDefinitions>
 
         <uc:FlowPanel Grid.Row="0" ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="10,5,10,0">
-
-            <Button Style="{StaticResource ButtonContent}" HorizontalAlignment="Right" Margin="0,0,0,0">
+            <Button Command="{Binding SelectFolderCommand}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Right" Margin="0,0,0,0">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <ui:SymbolIcon Symbol="FolderOpen20" FontSize="15" Margin="0,0,5,0"/>
                     <TextBlock VerticalAlignment="Center">
@@ -29,30 +28,62 @@
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right">
+            <Button Command="{Binding UpdateCommand}" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <ui:SymbolIcon Symbol="ArrowClockwise20" FontSize="15" Margin="0,0,5,0"/>
                     <TextBlock Text="{DynamicResource btn_upd}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
-            <CheckBox VerticalAlignment="Top" Content="{DynamicResource chk_run_ti_adds}" Margin="0,6,0,0"/>
-
+            <CheckBox VerticalAlignment="Top" IsChecked="{Binding IsRunAsTrustedInstaller}" Content="{DynamicResource chk_run_ti_adds}" Margin="0,6,0,0"/>
         </uc:FlowPanel>
 
         <Border Grid.Row="1" Background="{StaticResource Brush_Separator}" Height="1.2" Margin="10,10,10,0" CornerRadius="10" HorizontalAlignment="Stretch"/>
 
-        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            
-            <ui:SymbolIcon Symbol="DocumentFlowchart20" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="55" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"/>
-            <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="17pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}"  Grid.Row="1" Margin="0,5,0,0">
-                <Run Text="{DynamicResource text_info_adds}"/><LineBreak/>
-                <Run FontSize="15pt" Text="{DynamicResource scripts_info_adds}"/>
-            </TextBlock>
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding Addons}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <uc:FlowPanel Margin="20,10,0,20" EqualizeItemSize="True" ItemWidth="200" UseMasonryLayout="True" HorizontalSpacing="5" VerticalSpacing="5" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <uc:FileCard FileName="{Binding FileName}" IconSource="{Binding IconImage}" Command="{Binding RunCommand}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Addons.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ui:SymbolIcon Symbol="DocumentFlowchart20" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="55" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"/>
+                            <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="17pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Grid.Row="1" Margin="0,5,0,0">
+                                <Run Text="{DynamicResource text_info_adds}"/><LineBreak/>
+                                <Run FontSize="15pt" Text="{DynamicResource scripts_info_adds}"/>
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
         </Grid>
+
     </Grid>
 </UserControl>
