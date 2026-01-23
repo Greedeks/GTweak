@@ -78,7 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Службы</v:String>
     <v:String x:Key="rbtn_sys_main">Система</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Системная информация</v:String>
-    <v:String x:Key="rbtn_adds_main">Аддоны</v:String>
+    <v:String x:Key="rbtn_adds_main">Расширения</v:String>
     <v:String x:Key="title_settings_main">Настройки</v:String>
     <v:String x:Key="btgl_noty_main">Показывать уведомления</v:String>
     <v:String x:Key="slider_volume_main">Громкость:</v:String>

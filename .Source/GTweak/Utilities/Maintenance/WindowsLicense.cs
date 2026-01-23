@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -22,12 +23,21 @@ namespace GTweak.Utilities.Maintenance
 
         private static bool IsVersionWindows(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(HardwareData.OS.Name).Count == words;
 
-        internal static void LicenseStatus()
+        internal static async void LicenseStatus()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1").Get())
+            try
             {
-                IsWindowsActivated = (uint)managementObj["LicenseStatus"] == 1;
+                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1").Get())
+                {
+                    IsWindowsActivated = (uint)managementObj["LicenseStatus"] == 1;
+                }
             }
+            catch (COMException)
+            {
+                string output = await CommandExecutor.GetCommandOutput("cscript //B \"$env:windir\\system32\\slmgr.vbs\" /ato; $code = $LASTEXITCODE; ($code -eq 0 -or $code -eq -2147024773)", true);
+                bool.TryParse(output, out IsWindowsActivated);
+            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         internal static async Task StartActivation()
