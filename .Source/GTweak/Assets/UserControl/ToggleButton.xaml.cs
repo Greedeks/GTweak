@@ -220,8 +220,8 @@ namespace GTweak.Assets.UserControl
         {
             if (IsEnabled)
             {
-                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, null, false, true));
-                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, null, false, true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, useCubicEase: true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, useCubicEase: true));
             }
         }
 
@@ -229,8 +229,8 @@ namespace GTweak.Assets.UserControl
         {
             if (IsEnabled)
             {
-                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, null, false, true));
-                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, null, false, true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, useCubicEase: true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, useCubicEase: true));
             }
         }
 

@@ -43,7 +43,7 @@
         <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Addons}">
+                    <ItemsControl ItemsSource="{Binding Addons}" VirtualizingPanel.IsVirtualizing="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <uc:FlowPanel Margin="20,10,0,20" EqualizeItemSize="True" ItemWidth="200" UseMasonryLayout="True" HorizontalSpacing="5" VerticalSpacing="5" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -57,7 +57,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <Grid>
+                    <Grid x:Name="EmptyStateGrid">
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -74,16 +74,65 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <ui:SymbolIcon Symbol="DocumentFlowchart20" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="55" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0"/>
-                            <TextBlock Width="Auto" Height="Auto" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="17pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Grid.Row="1" Margin="0,5,0,0">
-                                <Run Text="{DynamicResource text_info_adds}"/><LineBreak/>
-                                <Run FontSize="15pt" Text="{DynamicResource scripts_info_adds}"/>
+
+                            <ui:SymbolIcon Opacity="0" Symbol="DocumentFlowchart20" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="55" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+                                <ui:SymbolIcon.RenderTransform>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                </ui:SymbolIcon.RenderTransform>
+                                <ui:SymbolIcon.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard Timeline.DesiredFrameRate="120">
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6" BeginTime="0:0:0.1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="0.5" To="1" Duration="0:0:0.5" DecelerationRatio="0.5" BeginTime="0:0:0.1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="0.5" To="1" Duration="0:0:0.5" DecelerationRatio="0.5" BeginTime="0:0:0.1">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ui:SymbolIcon.Triggers>
+                            </ui:SymbolIcon>
+
+                            <TextBlock x:Name="EmptyStateText" Width="Auto" Height="Auto" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="17pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Grid.Row="1" Margin="0,15,0,0" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform Y="20"/>
+                                </TextBlock.RenderTransform>
+                                    <Run Text="{DynamicResource text_info_adds}"/><LineBreak/>
+                                    <Run FontSize="15pt" Text="{DynamicResource scripts_info_adds}"/>
+                                <TextBlock.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard Timeline.DesiredFrameRate="120">
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6" BeginTime="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <QuadraticEase/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="20" To="0" Duration="0:0:0.5" DecelerationRatio="0.7" BeginTime="0:0:0.3">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </TextBlock.Triggers>
                             </TextBlock>
                         </Grid>
                     </Grid>
                 </Grid>
             </ScrollViewer>
         </Grid>
-
     </Grid>
 </UserControl>

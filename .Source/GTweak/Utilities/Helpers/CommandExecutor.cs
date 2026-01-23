@@ -68,13 +68,34 @@ namespace GTweak.Utilities.Helpers
                 };
 
                 using Process process = new Process { StartInfo = startInfo };
-                try
+                try { process.Start(); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            }).ConfigureAwait(false);
+        }
+
+        internal static async void RunCommandShow(string fileName, string arguments = "", bool isElevationRequired = false)
+        {
+            await Task.Run(() =>
+            {
+                if (isElevationRequired)
                 {
-                    process.Start();
+                    TrustedInstaller.CreateProcessAsTrustedInstaller(PID, $"{fileName} {arguments}", true);
                 }
-                catch (Exception ex)
+                else
                 {
-                    ErrorLogging.LogDebug(ex);
+                    ProcessStartInfo startInfo = new ProcessStartInfo()
+                    {
+                        FileName = fileName,
+                        Arguments = arguments,
+                        WindowStyle = ProcessWindowStyle.Normal,
+                        UseShellExecute = true,
+                        Verb = "runas",
+                        CreateNoWindow = false
+                    };
+
+                    using Process process = new Process() { StartInfo = startInfo };
+                    try { process.Start(); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
             }).ConfigureAwait(false);
         }

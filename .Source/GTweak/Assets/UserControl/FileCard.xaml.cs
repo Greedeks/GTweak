@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Utilities.Animation;
@@ -44,19 +45,23 @@ namespace GTweak.Assets.UserControl
             InitializeComponent();
         }
 
-        private void Card_MouseEnter(object sender, MouseEventArgs e) => CardBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(1.0, 0.6, 0.2));
-        
+        private void Card_MouseEnter(object sender, MouseEventArgs e) => CardBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(1.0, 0.7, 0.2));
 
-        private void Card_MouseLeave(object sender, MouseEventArgs e) => CardBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0.6, 1.0, 0.2));
-        
+
+        private void Card_MouseLeave(object sender, MouseEventArgs e) => CardBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0.7, 1.0, 0.2));
+
+
 
         private void Card_MouseClick(object sender, MouseButtonEventArgs e)
         {
+            ProgressBar.Visibility = Visibility.Visible;
+
             if (Command != null && Command.CanExecute(CommandParameter))
             {
                 Command.Execute(CommandParameter);
             }
-            CardBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(1.0, 0.7, 0.1, reverse: true));
+
+            ProgressBar.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(0, 100, 0.2, () => { ProgressBar.Visibility = Visibility.Collapsed; }, reverse: true));
         }
 
     }

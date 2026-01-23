@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -9,70 +10,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Core.Base;
 using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
 using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
 {
     internal class AddonsViewModel : ViewModelBase
     {
-        internal class AddonItem
-        {
-            public string FilePath { get; }
-            public string FileName { get; }
-            public ImageSource IconImage { get; }
-            public ICommand RunCommand { get; }
-            private readonly Action _onRunComplete;
-            public bool RequiresElevation { get; }
-
-            public AddonItem(string filePath, string fileName, ImageSource iconImage, Action onRunComplete, bool requiresElevation = false)
-            {
-                FilePath = filePath;
-                FileName = fileName;
-                IconImage = iconImage;
-                _onRunComplete = onRunComplete;
-                RequiresElevation = requiresElevation;
-
-                RunCommand = new RelayCommand(async _ => await RunFileAsync());
-            }
-
-            private async Task RunFileAsync()
-            {
-                try
-                {
-                    var ext = Path.GetExtension(FilePath).ToLowerInvariant();
-
-                    if (RequiresElevation)
-                    {
-                        
-                    }
-                    else
-                    {
-         
-                    }
-
-                    _onRunComplete?.Invoke();
-                }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            }
-        }
-
-        private static readonly string[] AllowedExtensions = new[] { ".ps1", ".bat", ".cmd", ".reg" };
-
-        public ObservableCollection<AddonItem> Addons { get; } = new ObservableCollection<AddonItem>();
+        public ObservableCollection<AddonModel> Addons { get; } = new ObservableCollection<AddonModel>();
 
         public ICommand SelectFolderCommand { get; }
         public ICommand UpdateCommand { get; }
 
         private bool _isRunAsTrustedInstaller;
+        private readonly object _locker = new object();
+        private string _lastKnownFolderPath = string.Empty;
 
         public bool IsRunAsTrustedInstaller
         {
             get => _isRunAsTrustedInstaller;
-            set
-            {
-                _isRunAsTrustedInstaller = value;
-                OnPropertyChanged();
-            }
+            set { _isRunAsTrustedInstaller = value; OnPropertyChanged(); }
         }
 
         public AddonsViewModel()
@@ -93,26 +50,57 @@ namespace GTweak.Core.ViewModel
         {
             try
             {
-                var folderDialog = new VistaFolderBrowserDialog();
-                if (folderDialog.ShowDialog() == false)
+                VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog
                 {
-                    return;
+                    UseDescriptionForTitle = true,
+                    SelectedPath = SettingsEngine.UserAddonsPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+                };
+
+                bool? dialogResult = folderDialog.ShowDialog();
+
+                if (dialogResult != null && dialogResult.Value)
+                {
+                    string selectedPath = folderDialog.SelectedPath;
+                    if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
+                    {
+                        SettingsEngine.UserAddonsPath = selectedPath;
+                        ScanFolder();
+                    }
+                }
+            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+        }
+
+        private void RunFile(AddonModel addon)
+        {
+            try
+            {
+                string fileName = string.Empty, arguments = string.Empty;
+
+                switch (Path.GetExtension(addon.FilePath).ToLowerInvariant())
+                {
+                    case ".reg":
+                        fileName = "reg.exe";
+                        arguments = $"import \"{addon.FilePath}\"";
+                        break;
+
+                    case ".ps1":
+                        fileName = PathLocator.Executable.PowerShell;
+                        arguments = $"-ExecutionPolicy Bypass -File \"{addon.FilePath}\"";
+                        break;
+                    default:
+                        fileName = PathLocator.Executable.CommandShell;
+                        arguments = $"/k \"{addon.FilePath}\"";
+                        break;
                 }
 
-                string selectedPath = folderDialog.SelectedPath;
-                if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
-                {
-                    SettingsEngine.UserAddonsPath = selectedPath;
-                    ScanFolder();
-                }
+                Task.Run(() => { CommandExecutor.RunCommandShow(fileName, CommandExecutor.CleanCommand(arguments), addon.RequiresElevation); });
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private void ScanFolder()
         {
-            Addons.Clear();
-
             try
             {
                 string path = SettingsEngine.UserAddonsPath;
@@ -122,12 +110,42 @@ namespace GTweak.Core.ViewModel
                     return;
                 }
 
+                if (_lastKnownFolderPath != path)
+                {
+                    lock (_locker)
+                    {
+                        Addons.Clear();
+                    }
+
+                    _lastKnownFolderPath = path;
+                }
+
                 IOrderedEnumerable<string> files = Directory.EnumerateFiles(path, "*.*", SearchOption.TopDirectoryOnly)
-                                     .Where(f => AllowedExtensions.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase))
-                                     .OrderBy(f => Path.GetFileName(f));
+                                                         .Where(f => new[] { ".ps1", ".bat", ".cmd", ".reg" }.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase))
+                                                         .OrderBy(f => Path.GetFileName(f));
+
+                List<string> currentFilePaths = Addons.Select(a => a.FilePath).ToList();
+
+                bool collectionChanged = false;
+
+                List<AddonModel> addonsToRemove = Addons.Where(a => !files.Contains(a.FilePath)).ToList();
+
+                foreach (var addon in addonsToRemove)
+                {
+                    lock (_locker)
+                    {
+                        Addons.Remove(addon);
+                    }
+                    collectionChanged = true;
+                }
 
                 foreach (string file in files)
                 {
+                    if (currentFilePaths.Contains(file))
+                    {
+                        continue;
+                    }
+
                     string iconRes = Path.GetExtension(file).ToLowerInvariant() switch
                     {
                         ".ps1" => "Img_PowershellFile",
@@ -140,18 +158,37 @@ namespace GTweak.Core.ViewModel
                     ImageSource iconImage = null;
                     try
                     {
-                        if (Application.Current != null)
+                        if (Application.Current != null && !string.IsNullOrEmpty(iconRes) && Application.Current.Resources.Contains(iconRes))
                         {
-                            if (Application.Current.Resources.Contains(iconRes))
-                            {
-                                iconImage = Application.Current.Resources[iconRes] as ImageSource;
-                            }
+                            iconImage = Application.Current.Resources[iconRes] as ImageSource;
                         }
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                    AddonItem addonItem = new AddonItem(file, Path.GetFileName(file), iconImage, () => ScanFolder(), IsRunAsTrustedInstaller);
-                    Addons.Add(addonItem);
+                    iconImage ??= Application.Current.Resources["Img_BatFile"] as ImageSource;
+
+                    RelayCommand runCommand = new RelayCommand(_ => RunFile(new AddonModel(file, Path.GetFileName(file), iconImage, null, IsRunAsTrustedInstaller)));
+                    AddonModel addonItem = new AddonModel(file, Path.GetFileName(file), iconImage, runCommand, IsRunAsTrustedInstaller);
+
+                    lock (_locker)
+                    {
+                        Addons.Add(addonItem);
+                    }
+
+                    collectionChanged = true;
+                }
+
+                if (collectionChanged)
+                {
+                    lock (_locker)
+                    {
+                        var sortedAddons = Addons.OrderBy(a => a.FileName).ToList();
+                        Addons.Clear();
+                        foreach (var addon in sortedAddons)
+                        {
+                            Addons.Add(addon);
+                        }
+                    }
                 }
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }

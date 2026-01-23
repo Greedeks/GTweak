@@ -90,8 +90,8 @@ namespace GTweak.View
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                CPULoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, cpuValue, 0.2, null, false, true));
-                RAMLoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, ramValue, 0.2, null, false, true));
+                CPULoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, cpuValue, 0.2, useCubicEase: true));
+                RAMLoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, ramValue, 0.2, useCubicEase: true));
             }));
         }
 
@@ -99,7 +99,7 @@ namespace GTweak.View
         {
             PopupCopy.IsOpen = true;
             CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
-            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, null, false, true));
+            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
         }
 
         private void BtnVision_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

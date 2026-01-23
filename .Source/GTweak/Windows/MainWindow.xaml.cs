@@ -31,7 +31,7 @@ namespace GTweak.Windows
             TranslateTransform transform = (TranslateTransform)SettingsPanel.RenderTransform;
             double toX = _settingsOpen ? 400 : 0;
             _settingsOpen = !_settingsOpen;
-            transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, toX, 0.5, null, false, true));
+            transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, toX, 0.5, useCubicEase: true));
         }
 
         #region TitleBar
@@ -253,7 +253,7 @@ namespace GTweak.Windows
 
                 UpdateBanner.Visibility = Visibility.Visible;
                 UpdateBanner.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
-                (UpdateBanner.RenderTransform as TranslateTransform).BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-20, 0, 0.3, null, false, true));
+                (UpdateBanner.RenderTransform as TranslateTransform).BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-20, 0, 0.3, useCubicEase: true));
             }
         }
     }

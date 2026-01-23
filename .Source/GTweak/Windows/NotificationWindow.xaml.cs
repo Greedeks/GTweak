@@ -58,7 +58,7 @@ namespace GTweak.Windows
                 notificationSound.Play();
             }
 
-            BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.3, null, false, true));
+            BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.3, useCubicEase: true));
         }
     }
 }
