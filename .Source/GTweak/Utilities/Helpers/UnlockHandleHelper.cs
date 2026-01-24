@@ -112,7 +112,7 @@ namespace GTweak.Utilities.Helpers
             {
                 try
                 {
-                    files = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories);
+                    files = string.IsNullOrEmpty(directoryPath) ? new string[0] : Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories);
 
                     if (files == null || files.Length == 0)
                     {

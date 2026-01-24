@@ -97,16 +97,16 @@ namespace GTweak.Assets.UserControl
         protected override Size MeasureOverride(Size availableSize)
         {
             List<UIElement> visible = new List<UIElement>(InternalChildren.Count);
-            for (int i = 0; i < InternalChildren.Count; i++)
+            for (int i = 0; i < InternalChildren?.Count; i++)
             {
-                UIElement c = InternalChildren[i];
-                if (c != null && c.Visibility != Visibility.Collapsed)
+                UIElement child = InternalChildren[i];
+                if (child != null && child.Visibility != Visibility.Collapsed)
                 {
-                    visible.Add(c);
+                    visible.Add(child);
                 }
             }
 
-            if (visible.Count == 0)
+            if (visible?.Count == 0)
             {
                 return new Size(0, 0);
             }
@@ -139,12 +139,12 @@ namespace GTweak.Assets.UserControl
         protected override Size ArrangeOverride(Size finalSize)
         {
             List<UIElement> visible = new List<UIElement>(InternalChildren.Count);
-            for (int i = 0; i < InternalChildren.Count; i++)
+            for (int i = 0; i < InternalChildren?.Count; i++)
             {
-                UIElement c = InternalChildren[i];
-                if (c != null && c.Visibility != Visibility.Collapsed)
+                UIElement child = InternalChildren[i];
+                if (child != null && child.Visibility != Visibility.Collapsed)
                 {
-                    visible.Add(c);
+                    visible.Add(child);
                 }
             }
 
@@ -161,7 +161,7 @@ namespace GTweak.Assets.UserControl
 
         private void ArrangeAligned(List<FlowItemGroup> groups, double availableWidth)
         {
-            if (groups == null || groups.Count == 0)
+            if (groups == null || groups?.Count == 0)
             {
                 return;
             }
@@ -170,7 +170,7 @@ namespace GTweak.Assets.UserControl
             {
                 double y = 0;
 
-                for (int i = 0; i < groups.Count; i++)
+                for (int i = 0; i < groups?.Count; i++)
                 {
                     FlowItemGroup row = groups[i];
                     if (row.Elements.Count == 0)
@@ -189,7 +189,7 @@ namespace GTweak.Assets.UserControl
 
                     double x = xStart;
 
-                    foreach (UIElement child in row.Elements)
+                    foreach (UIElement child in row?.Elements)
                     {
                         double w = GetChildWidth(child);
                         double h = GetChildHeight(child);
@@ -221,7 +221,7 @@ namespace GTweak.Assets.UserControl
             }
 
             double contentWidth = 0;
-            for (int i = 0; i < groups.Count; i++)
+            for (int i = 0; i < groups?.Count; i++)
             {
                 contentWidth += groups[i].Width;
                 if (i > 0)
@@ -240,7 +240,7 @@ namespace GTweak.Assets.UserControl
 
             double xV = xStartV;
 
-            for (int i = 0; i < groups.Count; i++)
+            for (int i = 0; i < groups?.Count; i++)
             {
                 FlowItemGroup col = groups[i];
                 if (col.Elements.Count == 0)
@@ -250,7 +250,7 @@ namespace GTweak.Assets.UserControl
                 }
 
                 double shift = 0;
-                if (Orientation == FlowOrientation.Unset && groups.Count > 1 && i > 0)
+                if (Orientation == FlowOrientation.Unset && groups?.Count > 1 && i > 0)
                 {
                     shift = extraSpaceV * (i / (double)(groups.Count - 1)) * 0.3;
                 }
@@ -258,7 +258,7 @@ namespace GTweak.Assets.UserControl
                 double columnX = xV + shift;
                 double y = 0;
 
-                foreach (UIElement child in col.Elements)
+                foreach (UIElement child in col?.Elements)
                 {
                     double w = GetChildWidth(child);
                     double h = GetChildHeight(child);
@@ -294,7 +294,7 @@ namespace GTweak.Assets.UserControl
             if (Orientation == FlowOrientation.Horizontal)
             {
                 double total = 0;
-                for (int i = 0; i < groups.Count; i++)
+                for (int i = 0; i < groups?.Count; i++)
                 {
                     total += groups[i].Height;
                     if (i > 0)
@@ -310,21 +310,21 @@ namespace GTweak.Assets.UserControl
 
         private double CalculateMaxColumnHeight(List<FlowItemGroup> columns)
         {
-            if (columns == null || columns.Count == 0)
+            if (columns == null || columns?.Count == 0)
             {
                 return 0;
             }
 
             double max = 0;
 
-            for (int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < columns?.Count; i++)
             {
                 FlowItemGroup col = columns[i];
                 double h = 0;
 
-                for (int j = 0; j < col.Elements.Count; j++)
+                for (int j = 0; j < col?.Elements.Count; j++)
                 {
-                    UIElement child = col.Elements[j];
+                    UIElement child = col?.Elements[j];
                     h += GetChildHeight(child);
                     if (j > 0)
                     {
@@ -343,7 +343,7 @@ namespace GTweak.Assets.UserControl
 
         private List<FlowItemGroup> CreateOptimalColumns(double availableWidth, double availableHeight, List<UIElement> visibleChildren)
         {
-            if (visibleChildren == null || visibleChildren.Count == 0)
+            if (visibleChildren == null || visibleChildren?.Count == 0)
             {
                 return new List<FlowItemGroup>();
             }
@@ -392,9 +392,9 @@ namespace GTweak.Assets.UserControl
                     continue;
                 }
 
-                double widthIfAdded = current.Width + (current.Width > 0 ? HorizontalSpacing : 0) + childWidth;
+                double widthIfAdded = current.Width + (current?.Width > 0 ? HorizontalSpacing : 0) + childWidth;
 
-                if (widthIfAdded <= maxWidth || current.Elements.Count == 0)
+                if (widthIfAdded <= maxWidth || current?.Elements.Count == 0)
                 {
                     current.Elements.Add(child);
                     current.Width = widthIfAdded;
@@ -433,9 +433,9 @@ namespace GTweak.Assets.UserControl
                     continue;
                 }
 
-                double heightIfAdded = current.Height + (current.Height > 0 ? VerticalSpacing : 0) + childHeight;
+                double heightIfAdded = current.Height + (current?.Height > 0 ? VerticalSpacing : 0) + childHeight;
 
-                if (heightIfAdded <= maxHeight || current.Elements.Count == 0)
+                if (heightIfAdded <= maxHeight || current.Elements?.Count == 0)
                 {
                     current.Elements.Add(child);
                     current.Height = heightIfAdded;
@@ -464,7 +464,7 @@ namespace GTweak.Assets.UserControl
 
             if (UseMasonryLayout)
             {
-                var heights = new double[columnCount];
+                double[] heights = new double[columnCount];
 
                 foreach (UIElement child in visibleChildren)
                 {
@@ -535,7 +535,7 @@ namespace GTweak.Assets.UserControl
                 col.Width = Math.Max(col.Width, GetChildWidth(child));
 
                 totalHeight += GetChildHeight(child);
-                if (col.Elements.Count > 1)
+                if (col.Elements?.Count > 1)
                 {
                     totalHeight += VerticalSpacing;
                 }
@@ -547,13 +547,13 @@ namespace GTweak.Assets.UserControl
 
         private double CalculateTotalWidth(List<FlowItemGroup> columns)
         {
-            if (columns == null || columns.Count == 0)
+            if (columns == null || columns?.Count == 0)
             {
                 return 0;
             }
 
             double total = 0;
-            for (int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < columns?.Count; i++)
             {
                 total += columns[i].Width;
                 if (i > 0)

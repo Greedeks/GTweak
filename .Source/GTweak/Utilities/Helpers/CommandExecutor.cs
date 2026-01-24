@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -154,7 +155,7 @@ namespace GTweak.Utilities.Helpers
                 return string.Empty;
             }
 
-            var lines = rawCommand.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).Where(line => !string.IsNullOrEmpty(line)).Select(line => Regex.Replace(line, @"\s+", " ")).ToList();
+            var lines = string.IsNullOrEmpty(rawCommand) ? new List<string>() : rawCommand.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).Where(line => !string.IsNullOrEmpty(line)).Select(line => Regex.Replace(line, @"\s+", " ")).ToList();
 
             if (lines.Count == 0)
             {

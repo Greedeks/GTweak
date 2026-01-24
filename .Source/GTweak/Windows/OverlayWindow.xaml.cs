@@ -23,7 +23,7 @@ namespace GTweak.Windows
             if (e != null)
             {
                 Closing -= Window_Closing;
-                e.Cancel = true;
+                e!.Cancel = true;
                 BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.15, () =>
                 {
                     ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;

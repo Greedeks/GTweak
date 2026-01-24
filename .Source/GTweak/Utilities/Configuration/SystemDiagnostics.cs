@@ -113,8 +113,8 @@ namespace GTweak.Utilities.Configuration
                 try
                 {
                     using var managementObj = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
-                    var results = managementObj.Get();
-                    isMsftAvailable = results != null && results.Count > 0;
+                    var results = managementObj?.Get();
+                    isMsftAvailable = results?.Count > 0;
                 }
                 catch { isMsftAvailable = false; }
             });
