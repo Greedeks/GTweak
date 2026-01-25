@@ -58,7 +58,7 @@
 
             <Grid Grid.Row="1">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <uc:FlowPanel UseMasonryLayout="False" HorizontalSpacing="30" Margin="10,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <uc:FlowPanel UseMasonryLayout="False" HorizontalSpacing="30" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Top">
 
                         <ToggleButton x:Name="MicrosoftStore" IsChecked="{Binding [MicrosoftStore].Installed}" IsEnabled="{Binding [MicrosoftStore].IsUnavailable}" ToolTip="{DynamicResource MicrosoftStore_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_MicrosoftStore}"/>
                         <ToggleButton x:Name="Xbox" IsChecked="{Binding [Xbox].Installed}" IsEnabled="{Binding [Xbox].IsUnavailable}" ToolTip="{DynamicResource Xbox_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Xbox}"/>

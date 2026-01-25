@@ -46,7 +46,7 @@
                     <ItemsControl ItemsSource="{Binding Addons}" VirtualizingPanel.IsVirtualizing="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <uc:FlowPanel Margin="20,10,0,20" EqualizeItemSize="True" ItemWidth="200" UseMasonryLayout="True" HorizontalSpacing="5" VerticalSpacing="5" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <uc:FlowPanel Margin="20,10,5,20" EqualizeItemSize="True" ItemWidth="200" UseMasonryLayout="True" HorizontalSpacing="5" VerticalSpacing="5" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 
@@ -75,7 +75,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <ui:SymbolIcon Opacity="0" Symbol="DocumentFlowchart20" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="55" Margin="0,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+                            <ui:SymbolIcon Opacity="0" Symbol="FolderProhibited20" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="55" Margin="5,0,5,0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
                                 <ui:SymbolIcon.RenderTransform>
                                     <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                 </ui:SymbolIcon.RenderTransform>
@@ -104,7 +104,7 @@
                                 </ui:SymbolIcon.Triggers>
                             </ui:SymbolIcon>
 
-                            <TextBlock x:Name="EmptyStateText" Width="Auto" Height="Auto" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="17pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Grid.Row="1" Margin="0,15,0,0" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                            <TextBlock x:Name="EmptyStateText" Width="Auto" Height="Auto" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="17pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Grid.Row="1" Margin="5,15,5,0" Opacity="0" RenderTransformOrigin="0.5,0.5">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="20"/>
                                 </TextBlock.RenderTransform>
