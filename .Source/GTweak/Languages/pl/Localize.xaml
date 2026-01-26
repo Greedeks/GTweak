@@ -5,7 +5,7 @@
     <v:String x:Key="defaultDescription">Najedź kursorem myszy na dowolną poprawkę, aby zobaczyć jej opis</v:String>
     <v:String x:Key="defaultDescriptionApp">Najedź kursorem myszy na ikonę dowolnej aplikacji, aby zobaczyć jej nazwę</v:String>
 
-    <!--#region Okno ładowania -->
+    <!--#region Load Window -->
     <v:String x:Key="title_load">Ładowanie</v:String>
     <v:String x:Key="step1_load">Wgrywanie profilu</v:String>
     <v:String x:Key="step2_load">Pobieranie danych</v:String>
@@ -16,41 +16,34 @@
     <v:String x:Key="step7_load">Inicjalizacja</v:String>
     <!--#endregion-->
 
-    <!--#region Okno komunikatów -->
+    <!--#region Message Window -->
     <v:String x:Key="title_message">Ups...</v:String>
     <v:String x:Key="part1_message">Tworzenie kopii programu jest</v:String>
     <v:String x:Key="part2_message">zabronione,</v:String>
     <v:String x:Key="part3_message">aby zapobiec błędom i nieprzewidzianym sytuacjom.</v:String>
     <v:String x:Key="button_message">Akceptuję (05)</v:String>
     <v:String x:Key="noty_message">▪ automatyczne zamykanie okna</v:String>
-
     <v:String x:Key="title_nosupport_message">Nieobsługiwane</v:String>
     <v:String x:Key="part1_nosupport_message">Narzędzie nie obsługuje Twojej wersji systemu Windows.</v:String>
     <v:String x:Key="part2_nosupport_message">Dalsze uruchomienie</v:String>
     <v:String x:Key="part3_nosupport_message">jest niemożliwe, GTweak zostanie zamknięty, aby zapobiec krytycznym błędom.</v:String>
     <!--#endregion-->
 
-    <!--#region Okno powiadomień -->
+    <!--#region Notification Window -->
     <v:String x:Key="title_win_noty">Powiadomienie – GTweak</v:String>
     <v:String x:Key="title_warn_noty">Uwaga</v:String>
     <v:String x:Key="title_info_noty">Informacja</v:String>
-
     <v:String x:Key="logout_noty">Wymagane jest wylogowanie, kliknij ten tekst, aby je wykonać</v:String>
     <v:String x:Key="restart_noty">Wymagany jest restart, kliknij ten tekst, aby go wykonać</v:String>
-
     <v:String x:Key="warn_update_noty">Wystąpił błąd podczas aktualizacji programu, spróbuj ponownie później</v:String>
     <v:String x:Key="warn_import_noty">Ten plik nie nadaje się do importu</v:String>
     <v:String x:Key="empty_import_noty">Ten plik jest pusty, zastosowanie poprawek jest niemożliwe</v:String>
     <v:String x:Key="export_warning_noty">To nie ma sensu, najpierw zastosuj przynajmniej jedną poprawkę</v:String>
-
     <v:String x:Key="success_onedrive_noty">Trwa przywracanie OneDrive, zajmie to chwilę</v:String>
     <v:String x:Key="error_onedrive_noty">Brak pliku instalacyjnego OneDrive, przywrócenie niemożliwe</v:String>
-
     <v:String x:Key="warn_wd_noty">Poczekaj na zakończenie procesu, a następnie zrestartuj system</v:String>
     <v:String x:Key="info_wd_noty">To zajmie trochę czasu, proszę chwilę poczekać</v:String>
-
     <v:String x:Key="warn_firewall_noty">Twoja zapora sieciowa jest wyłączona, włącz ją i ponownie zastosuj poprawkę</v:String>
-
     <v:String x:Key="warn_activate_noty">Aby rozpocząć – aktywuj Windows. Nie wszystkie poprawki będą działać</v:String>
     <v:String x:Key="ready_activate_noty">Twój system operacyjny nie wymaga aktywacji</v:String>
     <v:String x:Key="win_activate_noty">Rozpoczęto proces aktywacji Windows, potrwa to chwilę</v:String>
@@ -58,31 +51,26 @@
     <v:String x:Key="error_activate_noty">Coś poszło nie tak, niestety nie udało się aktywować systemu</v:String>
     <v:String x:Key="network_activate_noty">Do aktywacji wymagane jest połączenie z internetem</v:String>
     <v:String x:Key="keynotfound_noty">Brak klucza dla Twojej edycji Windows; aktywacja anulowana</v:String>
-
     <v:String x:Key="createpoint_noty">Tworzenie punktu przywracania potrwa chwilę</v:String>
     <v:String x:Key="error_point_noty">Coś poszło nie tak, nie udało się utworzyć punktu przywracania</v:String>
     <v:String x:Key="success_point_noty">Punkt przywracania został pomyślnie utworzony</v:String>
-
     <v:String x:Key="error_recovery_noty">Coś poszło nie tak, nie udało się uruchomić przywracania</v:String>
     <v:String x:Key="disable_recovery_noty">Przywracanie systemu jest wyłączone, punkty przywracania są niedostępne</v:String>
     <v:String x:Key="enable_recovery_noty">Przywracanie systemu zostało włączone i jest dostępne w razie potrzeby</v:String>
     <v:String x:Key="warn_recovery_noty">System przywracania został już przez Ciebie wyłączony</v:String>
     <v:String x:Key="warn_point_enabled_noty">System przywracania został już przez Ciebie włączony</v:String>
-
     <v:String x:Key="clear_ram_noty">Pamięć podręczna i pliki tymczasowe zostały wyczyszczone</v:String>
-
     <v:String x:Key="success_compression_noty">Kompresja katalogu i jego zawartości zakończona pomyślnie</v:String>
     <v:String x:Key="success_decompression_noty">Dekompresja katalogu i jego zawartości zakończona pomyślnie</v:String>
     <v:String x:Key="ready_compression_noty">Katalog jest już skompresowany, dalsza kompresja nie jest potrzebna</v:String>
     <v:String x:Key="ready_decompression_noty">Katalog jest już zdekompresowany, dalsza operacja nie jest potrzebna</v:String>
     <v:String x:Key="error_compression_noty">Coś poszło nie tak, wystąpił błąd podczas zmiany stanu kompresji</v:String>
     <v:String x:Key="notsupport_ntfs_noty">Operacja niedostępna, ponieważ katalog nie znajduje się na partycji NTFS</v:String>
-
     <v:String x:Key="success_reg_exporter_noty">Plik rejestru zapisany pomyślnie</v:String>
     <v:String x:Key="error_reg_exporter_noty">Wystąpił błąd podczas zapisywania pliku rejestru</v:String>
     <!--#endregion-->
 
-    <!--#region Główne okno -->
+    <!--#region Main Window -->
     <v:String x:Key="rbtn_utils_main">Narzędzia</v:String>
     <v:String x:Key="rbtn_conf_main">Prywatność</v:String>
     <v:String x:Key="rbtn_int_main">Interfejs</v:String>
@@ -91,27 +79,25 @@
     <v:String x:Key="rbtn_sys_main">System</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informacje o systemie</v:String>
     <v:String x:Key="rbtn_adds_main">Dodatki</v:String>
-
     <v:String x:Key="title_settings_main">Ustawienia</v:String>
     <v:String x:Key="btgl_noty_main">Pokazuj powiadomienia</v:String>
     <v:String x:Key="slider_volume_main">Głośność:</v:String>
     <v:String x:Key="btgl_toast_main">Zawsze na wierzchu wszystkich okien</v:String>
     <v:String x:Key="btgl_update_main">Sprawdzaj aktualizacje</v:String>
     <v:String x:Key="cmbox_lang_main">Język interfejsu:</v:String>
-
     <v:String x:Key="btn_import">Importuj</v:String>
     <v:String x:Key="btn_export">Eksportuj</v:String>
-    <v:String x:Key="btn_selfremove">Samoczynne usunięcie</v:String>
+    <v:String x:Key="btn_selfremove">Deinstalacja</v:String>
     <!--#endregion-->
 
-    <!--#region Okno importu -->
+    <!--#region Import Window -->
     <v:String x:Key="title_import">Importowanie poprawek</v:String>
     <v:String x:Key="wait_import">To potrwa chwilę</v:String>
     <v:String x:Key="warn_import">Nie trzeba na siłę zamykać okna</v:String>
     <v:String x:Key="file_import">Plik</v:String>
     <!--#endregion-->
 
-    <!--#region Okno aktualizacji -->
+    <!--#region Update Window -->
     <v:String x:Key="title_win_update">Aktualizacja – GTweak</v:String>
     <v:String x:Key="title_update">Znaleziono aktualizację</v:String>
     <v:String x:Key="btn_upd">Aktualizuj</v:String>
@@ -120,7 +106,7 @@
     <v:String x:Key="connection_update">Łączenie z serwerem</v:String>
     <!--#endregion-->
 
-    <!--#region Strona Narzędzia -->
+    <!--#region Utils Page -->
     <v:String x:Key="advice_part1_more">Zdecydowanie</v:String>
     <v:String x:Key="advice_part2_more">zalecane</v:String>
     <v:String x:Key="advice_part3_more">jest utworzenie punktu przywracania przed użyciem narzędzia</v:String>
@@ -159,7 +145,7 @@
     <v:String x:Key="textpoint_more">Punkt utworzony przez GTweak</v:String>
     <!--#endregion-->
 
-    <!--#region Strona Prywatność -->
+    <!--#region Confidentiality Page -->
     <v:String x:Key="tgl1_conf">Identyfikator reklamowy i targetowana reklama</v:String>
     <v:String x:Key="tgl2_conf">Wszystkie rodzaje synchronizacji danych</v:String>
     <v:String x:Key="tgl3_conf">Zbieranie i monitorowanie telemetrii Windows</v:String>
@@ -199,7 +185,7 @@
     <v:String x:Key="tgl18_desc_conf">Poprawka wyłącza funkcję UAR (User Activity Recording) – system, który sekwencyjnie rejestruje każdą Twoją czynność na komputerze: od robienia zrzutów ekranu i pisania tekstu, po uruchamianie programów i nawet zapewnianie dostępu do kamery przy zablokowanym ekranie, i wiele więcej.</v:String>
     <!--#endregion-->
 
-    <!--#region Strona Interfejs -->
+    <!--#region Interface Page -->
     <v:String x:Key="tgl1_intf">Standardowy kolor zaznaczenia kursora</v:String>
     <v:String x:Key="tgl2_intf">Standardowy kolor podpowiedzi</v:String>
     <v:String x:Key="tgl3_intf">Standardowy rozmiar przycisków systemowych</v:String>
@@ -271,7 +257,7 @@
     <v:String x:Key="tgl34_desc_intf">Na niektórych urządzeniach jasność ekranu może zmieniać się samoczynnie w zależności od wyświetlanego obrazu. Jeśli wyłączenie HDR, dynamicznej jasności i ustawień zasilania nie rozwiązuje problemu (problem ten jest szczególnie częsty na laptopach działających na baterii), możesz spróbować tej poprawki – wymusza wyłączenie automatycznej regulacji jasności na poziomie systemu. Ręczna regulacja jasności pozostaje dostępna.</v:String>
     <!--#endregion-->
 
-    <!--#region Strona Pakiety -->
+    <!--#region Packages Page -->
     <v:String x:Key="warn_part1_pkg">Aplikacje zostaną usunięte</v:String>
     <v:String x:Key="warn_part2_pkg">na zawsze,</v:String>
     <v:String x:Key="warn_part3_pkg">ale OneDrive można przywrócić klikając jego ikonę</v:String>
@@ -330,14 +316,14 @@
     <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
 
     <v:String x:Key="title_over_pkg">Potwierdzenie odinstalowania</v:String>
-    <v:String x:Key="text_over_pkg" xml:space="preserve">Masz zamiar odinstalować przeglądarkę Microsoft Edge. Spowoduje to również usunięcie komponentu EdgeWebView, który jest używany do wyświetlania treści internetowych w różnych aplikacjach – takich jak Microsoft Office (np. Meeting Insights, Room Finder), aplikacja Zdjęcia (nowa wersja używa WebView2), niektóre boty Telegrama i inne programy korzystające z osadzonego WebView. Przed kontynuacją upewnij się, że nie potrzebujesz tego komponentu.
-W nowszych kompilacjach Windows 11 Copilot jest zaimplementowany za pomocą EdgeWebView jako PWA lub systemowy wrapper. Po odinstalowaniu Edge Copilot również zostanie usunięty, ponieważ działa jako wrapper internetowy.</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">Masz zamiar odinstalować przeglądarkę Microsoft Edge. Spowoduje to również usunięcie komponentu EdgeWebView, który jest używany do wyświetlania treści internetowych w różnych aplikacjach – takich jak Microsoft Office (np. Meeting Insights, Room Finder), aplikacja Zdjęcia (nowa wersja używa WebView2), niektóre boty Telegrama i inne programy korzystające z osadzonego WebView. Przed kontynuacją upewnij się, że nie potrzebujesz tego komponentu. 
+        W nowszych kompilacjach Windows 11 Copilot jest zaimplementowany za pomocą EdgeWebView jako PWA lub systemowy wrapper. Po odinstalowaniu Edge Copilot również zostanie usunięty, ponieważ działa jako wrapper internetowy.</v:String>
     <v:String x:Key="question_over_pkg">Czy chcesz kontynuować usuwanie wraz z EdgeWebView?</v:String>
     <v:String x:Key="btn_cancel">Anuluj</v:String>
     <v:String x:Key="btn_delete">Usuń</v:String>
     <!--#endregion-->
 
-    <!--#region Strona Usługi -->
+    <!--#region Services Page -->
     <v:String x:Key="tgl1_svc">Usługi związane z Windows Search</v:String>
     <v:String x:Key="tgl2_svc">Usługi związane z Xbox</v:String>
     <v:String x:Key="tgl3_svc">Usługi związane z Windows Update</v:String>
@@ -399,12 +385,11 @@ W nowszych kompilacjach Windows 11 Copilot jest zaimplementowany za pomocą Edge
     <v:String x:Key="tgl29_desc_svc">Wyłącz, jeśli nie używasz sparowanych urządzeń i nie instalujesz aplikacji zdalnie ze Sklepu Windows. Usługi te obsługują Centrum powiadomień z sparowanymi urządzeniami, przetwarzają żądania push, umożliwiają Windowsowi wykrycie Twojego smartfona dla aplikacji „Twój telefon”, automatyczne ponowne łączenie się z nim i wyświetlanie jego wiadomości i zdarzeń w Centrum akcji. W Windows 10 po wyłączeniu ich Centrum powiadomień może przestać się otwierać.</v:String>
     <!--#endregion-->
 
-    <!--#region Strona System -->
+    <!--#region System Page -->
     <v:String x:Key="slider1_sys">Prędkość wskaźnika myszy:</v:String>
     <v:String x:Key="slider2_sys">Opóźnienie powtarzania klawiszy:</v:String>
     <v:String x:Key="slider3_sys">Szybkość powtarzania klawiszy:</v:String>
     <v:String x:Key="text_sys">Wpisz tutaj, aby przetestować ustawienia klawiatury</v:String>
-
     <v:String x:Key="tgl1_sys">Zwiększ precyzję wskaźnika</v:String>
     <v:String x:Key="tgl2_sys">Klawisze trwałe i filtry klawiszy</v:String>
     <v:String x:Key="tgl3_sys">Windows Defender, Antimalware, SmartScreen i VBS</v:String>
@@ -467,7 +452,7 @@ W nowszych kompilacjach Windows 11 Copilot jest zaimplementowany za pomocą Edge
     <v:String x:Key="tgl28_desc_sys">Jeśli masz dysk SSD, wyłączenie defragmentacji i optymalizacji plików startowych, które są skuteczne tylko dla dysków twardych (HDD), pomaga wydłużyć żywotność dysku. Jednocześnie funkcja optymalizacji TRIM nadal działa: informuje kontroler SSD, które bloki danych nie są już używane i je czyści, utrzymując stabilną prędkość i długowieczność dysku.</v:String>
     <!--#endregion-->
 
-    <!--#region Strona Informacje o systemie -->
+    <!--#region System Information Page -->
     <v:String x:Key="title_win_name_sysinfo">System operacyjny:</v:String>
     <v:String x:Key="title_win_ver_sysinfo">Wersja:</v:String>
     <v:String x:Key="label_proc_sysinfo">Uruchomione procesy:</v:String>
@@ -485,18 +470,16 @@ W nowszych kompilacjach Windows 11 Copilot jest zaimplementowany za pomocą Edge
     <v:String x:Key="title_sound_sysinfo">Urządzenia odtwarzania:</v:String>
     <v:String x:Key="title_netadapter_sysinfo">Karty sieciowe:</v:String>
     <v:String x:Key="title_ip_sysinfo">Twój adres IP:</v:String>
-
     <v:String x:Key="connection_limited_sysinfo">Ograniczone połączenie sieciowe</v:String>
     <v:String x:Key="connection_block_sysinfo">Ograniczony dostęp do sieci</v:String>
     <v:String x:Key="connection_lose_sysinfo">Utracono połączenie z Internetem</v:String>
-
     <v:String x:Key="text_copy_sysinfo">Skopiowano!</v:String>
     <v:String x:Key="driver_not_installed_sysinfo">Nie masz zainstalowanego sterownika</v:String>
     <v:String x:Key="no_device_information_sysinfo">Nie znaleziono informacji o urządzeniu</v:String>
     <v:String x:Key="unknown_information_sysinfo">Nie wykryto</v:String>
     <!--#endregion-->
 
-    <!--#region Strona Dodatki -->
+    <!--#region Addons Page -->
     <v:String x:Key="btn_open_dir">Wybierz folder</v:String>
     <v:String x:Key="chk_run_ti_adds">Uruchom jako TrustedInstaller</v:String>
     <v:String x:Key="text_info_adds">Wybierz katalog lub upewnij się, że nie jest pusty</v:String>
