@@ -34,7 +34,7 @@
 
                         <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="BtnDelete" Content="{DynamicResource btn_delete}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="120"/>
-                            <Button Margin="50,0,0,0" x:Name="BtnCancel" Content="{DynamicResource btn_сancel}" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="120"/>
+                            <Button Margin="50,0,0,0" x:Name="BtnCancel" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="120"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

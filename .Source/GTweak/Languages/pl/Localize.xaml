@@ -309,7 +309,7 @@
     <v:String x:Key="text_over_pkg" xml:space="preserve">Zamierzasz odinstalować przeglądarkę Microsoft Edge. Spowoduje to również usunięcie komponentu EdgeWebView, używanego do wyświetlania treści internetowych w różnych aplikacjach — takich jak Microsoft Office (np. Meeting Insights, Room Finder), aplikacja Zdjęcia (nowa wersja używa WebView2), niektóre boty Telegram i inne programy zależne od wbudowanego WebView. Przed kontynuacją upewnij się, że nie potrzebujesz tego komponentu.
        W najnowszych kompilacjach Windows 11 Copilot jest implementowany poprzez EdgeWebView jako PWA lub wrapper systemowy. Po odinstalowaniu Edge Copilot również zostanie usunięty, ponieważ działa jako wrapper sieciowy.</v:String>
     <v:String x:Key="question_over_pkg">Czy chcesz kontynuować usuwanie wraz z EdgeWebView?</v:String>
-    <v:String x:Key="btn_сancel">Anuluj</v:String>
+    <v:String x:Key="btn_cancel">Anuluj</v:String>
     <v:String x:Key="btn_delete">Usuń</v:String>
     <!--#endregion-->
     
