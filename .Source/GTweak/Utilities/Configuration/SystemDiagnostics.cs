@@ -66,7 +66,7 @@ namespace GTweak.Utilities.Configuration
         {
             CultureInfo culture = CultureInfo.CurrentUICulture;
             string[] parts = culture.Name.Split('-');
-            return (culture.TwoLetterISOLanguageName.ToLowerInvariant(), parts.Length > 1 ? parts[1].ToLowerInvariant() : string.Empty);
+            return (culture.TwoLetterISOLanguageName.ToLowerInvariant(), parts.Length > 1 ? parts[1].ToUpperInvariant() : string.Empty);
         }
 
         internal ImageSource GetProfileImage()
