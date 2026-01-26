@@ -18,8 +18,8 @@
 
     <!--#region Message Window -->
     <v:String x:Key="title_message">Oops..</v:String>
-    <v:String x:Key="part1_message">製作該程式的複製版本是</v:String>
-    <v:String x:Key="part2_message">禁止，</v:String>
+    <v:String x:Key="part1_message">建立程式副本是</v:String>
+    <v:String x:Key="part2_message">禁止建立程式副本</v:String>
     <v:String x:Key="part3_message">為了防止錯誤和意外情況的發生。</v:String>
     <v:String x:Key="button_message">接受 (05)</v:String>
     <v:String x:Key="noty_message">▪自動關閉視窗</v:String>
@@ -480,11 +480,10 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">選擇資料夾</v:String>
-    <v:String x:Key="btn_run">執行</v:String>
-    <v:String x:Key="chk_run_ti_adds">以 TrustedInstaller 的身份執行</v:String>
-    <v:String x:Key="text_info_adds">選擇一個目錄或確保該目錄不為空</v:String>
-    <v:String x:Key="scripts_info_adds">之後，您就可以在此頁面上執行腳本（.ps1、.cmd、.bat、.reg）了</v:String>
+    <v:String x:Key="btn_open_dir">Select folder</v:String>
+    <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">Select a directory or make sure it is not empty</v:String>
+    <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

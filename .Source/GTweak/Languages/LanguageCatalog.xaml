@@ -20,6 +20,5 @@
     <v:String x:Key="ru">Русский (RU)</v:String>
     <v:String x:Key="uk">Українська (UK)</v:String>
     <v:String x:Key="zh_tw">繁體中文 (TW)</v:String>
-    <v:String x:Key="zh_cn">简体中文 (CN)</v:String>
     
 </ResourceDictionary>
