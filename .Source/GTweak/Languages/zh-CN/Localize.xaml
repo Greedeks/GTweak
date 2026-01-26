@@ -1,0 +1,490 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="defaultDescription">将鼠标悬停在任何微调项目上即可查看其说明</v:String>
+    <v:String x:Key="defaultDescriptionApp">将鼠标悬停在任何应用程序的图标上，即可查看其名称</v:String>
+
+    <!--#region Load Window -->
+    <v:String x:Key="title_load">载入中</v:String>
+    <v:String x:Key="step1_load">载入个人数据</v:String>
+    <v:String x:Key="step2_load">撷取数据</v:String>
+    <v:String x:Key="step3_load">检查注册表</v:String>
+    <v:String x:Key="step4_load">分析应用程序</v:String>
+    <v:String x:Key="step5_load">硬件清单</v:String>
+    <v:String x:Key="step6_load">检查连接状态</v:String>
+    <v:String x:Key="step7_load">初始化程序</v:String>
+    <!--#endregion-->
+
+    <!--#region Message Window -->
+    <v:String x:Key="title_message">Oops..</v:String>
+    <v:String x:Key="part1_message">制作该程序的复制版本是</v:String>
+    <v:String x:Key="part2_message">禁止，</v:String>
+    <v:String x:Key="part3_message">为防止错误与不可预见的情况发生。</v:String>
+    <v:String x:Key="button_message">接受 (05)</v:String>
+    <v:String x:Key="noty_message">▪自动关闭窗口</v:String>
+    <v:String x:Key="title_nosupport_message">不支持</v:String>
+    <v:String x:Key="part1_nosupport_message">该实用程序不支持您的 Windows 系统。</v:String>
+    <v:String x:Key="part2_nosupport_message">无法继续启动，</v:String>
+    <v:String x:Key="part3_nosupport_message">GTweak 将会关闭以防止严重错误。</v:String>
+    <!--#endregion-->
+
+    <!--#region Notification Window -->
+    <v:String x:Key="title_win_noty">通知 - GTweak</v:String>
+    <v:String x:Key="title_warn_noty">注意</v:String>
+    <v:String x:Key="title_info_noty">资讯</v:String>
+    <v:String x:Key="logout_noty">需要注销，点击此文字运行注销操作</v:String>
+    <v:String x:Key="restart_noty">需要重新启动，点击此文字运行操作</v:String>
+    <v:String x:Key="warn_update_noty">程序更新过程中发生错误，请稍后再试</v:String>
+    <v:String x:Key="warn_import_noty">此文档不适用于导入操作</v:String>
+    <v:String x:Key="empty_import_noty">此文档为空档，无法套用调整设置</v:String>
+    <v:String x:Key="export_warning_noty">此操作无效，请先套用至少一项调整项目</v:String>
+    <v:String x:Key="success_onedrive_noty">OneDrive 还原程序已启动，此过程将耗费数分钟</v:String>
+    <v:String x:Key="error_onedrive_noty">OneDrive 设置文档遗失，无法运行还原程序</v:String>
+    <v:String x:Key="warn_wd_noty">请等待程序完成后重新启动系统</v:String>
+    <v:String x:Key="info_wd_noty">此过程需耗费时间，请稍候片刻</v:String>
+    <v:String x:Key="warn_firewall_noty">您的防火墙已停用，请启用后重新运行调整程序</v:String>
+    <v:String x:Key="warn_activate_noty">开始前请先启动 Windows 授权。并非所有调整皆可套用</v:String>
+    <v:String x:Key="ready_activate_noty">您的操作系统无需进行授权</v:String>
+    <v:String x:Key="win_activate_noty">Windows 启用程序已启动，此过程将耗费数分钟</v:String>
+    <v:String x:Key="success_activate_noty">启用程序已成功完成，建议重新启动电脑</v:String>
+    <v:String x:Key="error_activate_noty">发生错误，很遗憾无法完成系统启动</v:String>
+    <v:String x:Key="network_activate_noty">启动需连接至互联网</v:String>
+    <v:String x:Key="keynotfound_noty">您的 Windows 版本密钥遗失；已取消启用程序</v:String>
+    <v:String x:Key="createpoint_noty">创建还原点需耗费些许时间</v:String>
+    <v:String x:Key="error_point_noty">发生错误，无法创建还原点</v:String>
+    <v:String x:Key="success_point_noty">已成功创建还原点</v:String>
+    <v:String x:Key="error_recovery_noty">发生错误，无法启动系统还原程序</v:String>
+    <v:String x:Key="disable_recovery_noty">系统还原功能已停用，无法使用还原点</v:String>
+    <v:String x:Key="enable_recovery_noty">系统还原功能已启用，必要时可供使用</v:String>
+    <v:String x:Key="warn_recovery_noty">您已停用系统还原功能</v:String>
+    <v:String x:Key="warn_point_enabled_noty">您已启用系统还原功能</v:String>
+    <v:String x:Key="clear_ram_noty">短期内存与临时文档已清除</v:String>
+    <v:String x:Key="success_compression_noty">目录及其内容压缩成功</v:String>
+    <v:String x:Key="success_decompression_noty">目录及其内容解压缩成功</v:String>
+    <v:String x:Key="ready_compression_noty">目录已处于压缩状态，无需进一步压缩</v:String>
+    <v:String x:Key="ready_decompression_noty">目录已处于解压缩状态，无需进一步操作</v:String>
+    <v:String x:Key="error_compression_noty">发生错误，变更压缩状态时出现问题</v:String>
+    <v:String x:Key="notsupport_ntfs_noty">此操作无法运行，因为目录未位于 NTFS 分区上</v:String>
+    <v:String x:Key="success_reg_exporter_noty">注册表已成功存储</v:String>
+    <v:String x:Key="error_reg_exporter_noty">存储注册表时发生错误</v:String>
+    <!--#endregion-->
+
+    <!--#region Main Window -->
+    <v:String x:Key="rbtn_utils_main">实用工具</v:String>
+    <v:String x:Key="rbtn_conf_main">机密性</v:String>
+    <v:String x:Key="rbtn_int_main">接口</v:String>
+    <v:String x:Key="rbtn_app_main">应用程序</v:String>
+    <v:String x:Key="rbtn_svc_main">服务</v:String>
+    <v:String x:Key="rbtn_sys_main">系统</v:String>
+    <v:String x:Key="rbtn_sysinfo_main">系统信息</v:String>
+    <v:String x:Key="rbtn_adds_main">附加元件</v:String>
+    <v:String x:Key="title_settings_main">设置</v:String>
+    <v:String x:Key="btgl_noty_main">显示通知</v:String>
+    <v:String x:Key="slider_volume_main">音量：</v:String>
+    <v:String x:Key="btgl_toast_main">固定于所有窗口顶端</v:String>
+    <v:String x:Key="btgl_update_main">检查更新中</v:String>
+    <v:String x:Key="cmbox_lang_main">接口语言：</v:String>
+    <v:String x:Key="btn_import">导入</v:String>
+    <v:String x:Key="btn_export">导出</v:String>
+    <v:String x:Key="btn_selfremove">自我删除</v:String>
+    <!--#endregion-->
+
+    <!--#region Import Window -->
+    <v:String x:Key="title_import">导入调整项目</v:String>
+    <v:String x:Key="wait_import">需要一些时间</v:String>
+    <v:String x:Key="warn_import">无需强制关闭窗口</v:String>
+    <v:String x:Key="file_import">文档</v:String>
+    <!--#endregion-->
+
+    <!--#region Update Window -->
+    <v:String x:Key="title_win_update">更新 - GTweak</v:String>
+    <v:String x:Key="title_update">已找到更新</v:String>
+    <v:String x:Key="btn_upd">更新</v:String>
+    <v:String x:Key="download_update">正在下载</v:String>
+    <v:String x:Key="noty_update">请等待下载完成</v:String>
+    <v:String x:Key="connection_update">正在连接服务器</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">强烈建议</v:String>
+    <v:String x:Key="advice_part2_more">在使用此工具前</v:String>
+    <v:String x:Key="advice_part3_more">创建系统还原点</v:String>
+
+    <v:String x:Key="title_licens_more">Windows 启用</v:String>
+    <v:String x:Key="text_licens_more">采用硬件识别码 (HWID) 方法或备援 KMS 服务器。若您的 Windows 版本无可用密钥，此方法可能无法运作。</v:String>
+    <v:String x:Key="btn_activation">启动</v:String>
+
+    <v:String x:Key="title_point_more">还原点</v:String>
+    <v:String x:Key="text_point_more">即使目前已停用还原点功能，仍可创建或启动系统还原程序。</v:String>
+    <v:String x:Key="btn_save">存储</v:String>
+    <v:String x:Key="btn_recovery">还原</v:String>
+
+    <v:String x:Key="title_point_state_more">还原状态</v:String>
+    <v:String x:Key="text_point_state_more">启用或停用系统还原点。停用将删除所有现有还原点。</v:String>
+    <v:String x:Key="btn_disable">停用</v:String>
+    <v:String x:Key="btn_enable">启用</v:String>
+
+    <v:String x:Key="title_clear_more">清除内存</v:String>
+    <v:String x:Key="text_clear_more">清除电脑内存中的系统文档快取、临时文档及图标快取。</v:String>
+    <v:String x:Key="btn_clear">清除</v:String>
+
+    <v:String x:Key="title_ntfs_more">NTFS 压缩</v:String>
+    <v:String x:Key="text_ntfs_more">启用或停用 NTFS 压缩功能。对文字文档特别有效，有助节省磁盘空间。</v:String>
+
+    <v:String x:Key="title_registry_more">注册表备份</v:String>
+    <v:String x:Key="text_registry_more">创建 Windows 注册表备份。建议在进行变更前运行，以便系统恢复。</v:String>
+    <v:String x:Key="btn_create">创建</v:String>
+
+    <v:String x:Key="title_over_more">磁盘清理确认</v:String>
+    <v:String x:Key="text_over_more">您的磁盘中包含一个 Windows.old 数据夹，该数据夹存放着先前版本的 Windows 文档，占用了大量空间。请注意：此数据夹一旦删除，其内容将无法还原，请务必备份所需文档。</v:String>
+    <v:String x:Key="question_over_more">是否继续运行清理并删除 Windows.old 数据夹？</v:String>
+    <v:String x:Key="btn_agree">同意</v:String>
+    <v:String x:Key="btn_decline">拒绝</v:String>
+
+    <v:String x:Key="textpoint_more">使用 GTweak 创建的标记点</v:String>
+    <!--#endregion-->
+
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_conf">广告识别码与定向广告</v:String>
+    <v:String x:Key="tgl2_conf">所有类型的数据同步功能</v:String>
+    <v:String x:Key="tgl3_conf">Windows 遥测数据的收集与监控</v:String>
+    <v:String x:Key="tgl4_conf">透过调度事件收集数据</v:String>
+    <v:String x:Key="tgl5_conf">收集已安装应用程序相关数据</v:String>
+    <v:String x:Key="tgl6_conf">收集应用程序使用统计数据</v:String>
+    <v:String x:Key="tgl7_conf">收集并传送手写数据</v:String>
+    <v:String x:Key="tgl8_conf">收集硬件配置数据</v:String>
+    <v:String x:Key="tgl9_conf">网络存取以监控 Microsoft 网域</v:String>
+    <v:String x:Key="tgl10_conf">判定用户位置</v:String>
+    <v:String x:Key="tgl11_conf">透过"意见反馈"检查请求</v:String>
+    <v:String x:Key="tgl12_conf">隐藏式语音合成背景更新</v:String>
+    <v:String x:Key="tgl13_conf">隐藏监控您的系统</v:String>
+    <v:String x:Key="tgl14_conf">在您的系统上进行隐藏实验</v:String>
+    <v:String x:Key="tgl15_conf">用于秘密数据收集与传输的服务</v:String>
+    <v:String x:Key="tgl16_conf">记录 Windows 事件</v:String>
+    <v:String x:Key="tgl17_conf">收集与监控 NVIDIA 遥测数据</v:String>
+    <v:String x:Key="tgl18_conf">记录用户行为</v:String>
+
+    <v:String x:Key="tgl1_desc_conf">Windows 会为每位用户创建唯一的广告识别码以追踪您的操作。此识别码由应用程序开发者及 Windows 系统本身用于各自目的，包括在应用程序中向您提供特定广告。</v:String>
+    <v:String x:Key="tgl2_desc_conf">即使使用本地帐户，Windows 仍会持续尝试将您的数据与 Microsoft 服务器同步。具体同步项目包含：主题、密码、Windows 设置、浏览器设置、语言工具列设置、简易存取设置及其他附加设置。</v:String>
+    <v:String x:Key="tgl3_desc_conf">遥测数据（诊断数据）是 Windows 自动收集并传送至 Microsoft 服务器的资讯，简言之即"您使用什么？在哪里？为何及何时使用？"。Microsoft 声称此类数据已去个人化，有助于公司开发 Windows。即使您不介意数据收集行为，仍可能引发另一问题——处理器负载过高，进而导致系统运行迟缓。</v:String>
+    <v:String x:Key="tgl4_desc_conf">在"工作排程器"中存在若干服务，其运行任务后会收集运作数据并传送至微软服务器。</v:String>
+    <v:String x:Key="tgl5_desc_conf">Microsoft 会收集您的软件相关数据。此资讯用于诊断相容性问题，但您并不会协助 Microsoft 改善新版 Windows 的相容性，因为这些资讯仅供 Microsoft 自身使用。停用此功能可防止潜在敏感资讯被传送。</v:String>
+    <v:String x:Key="tgl6_desc_conf">此调整将停用应用程序使用监控功能，停止收集使用频率、工作时长及其他生产力指标数据。系统将不再分析您的工作流程，确保机密资讯获得保护。</v:String>
+    <v:String x:Key="tgl7_desc_conf">此调整将停用微软用于提升手写辨识技术的数据收集机制。无论您是否启用此功能，系统皆会追踪您的操作以增进辨识精准度。本次变更将阻止此类数据收集，有助维护隐私权。</v:String>
+    <v:String x:Key="tgl8_desc_conf">软件品质改善计画 (CEIP) 是一项独立功能，用于收集您的硬件配置资讯以及您使用软件和服务的方式。该计画还会定期下载文档，以收集您在使用 Windows 时可能遇到的问题资讯。此计画属自愿性质，您无需将数据传送至 Microsoft，因此不会侵犯您的隐私权。</v:String>
+    <v:String x:Key="tgl9_desc_conf">此调整会修改 hosts 文档，在特定网域名称前添加地址 0.0.0.0 以有效封锁其连接。此外，它还会调整 Windows 防火墙设置，阻挡与微软数据收集服务相关的多个 IP 地址之连接。</v:String>
+    <v:String x:Key="tgl10_desc_conf">停用地理位置服务可大幅降低位置数据遭用于广告之风险——此类资讯不仅对微软服务受限，亦禁止任何第三方应用程序与脚本存取。</v:String>
+    <v:String x:Key="tgl11_desc_conf">此调整功能可阻止 Windows 收集用户回馈及其相关通知，避免在未经您同意的情况下传输数据。同时，即使您未使用"回馈"功能，微软仍会记录您联系官方支持的频率。</v:String>
+    <v:String x:Key="tgl12_desc_conf">Windows 具备透过专用语音辨识与合成模组识别语音的能力。即使您未使用 Cortana 或"无障碍功能"，操作系统预设仍会持续检查语音辨识引擎的更新。</v:String>
+    <v:String x:Key="tgl13_desc_conf">此功能可存取任何用户数据，会与微软服务器交换部分资讯，但完全不影响操作系统或应用程序的运作。由于对用户毫无助益，故属无用功能。</v:String>
+    <v:String x:Key="tgl14_desc_conf">微软定期对 Windows 用户进行实验，以判断某项功能是否被广泛使用，以及修改功能是否能提升其实用性。然而，此举本身却构成了保密性违规行为。</v:String>
+    <v:String x:Key="tgl15_desc_conf">DiagTrack、dmwappushservice 和 diagsvc 服务充当键盘记录器——它们记录每项用户活动（包括按键操作），并在未经用户同意的情况下将这些数据传送至微软服务器。使用统一写入过滤器（UWF）时，系统的稳定运作仰赖 dmwappushservice 服务。然而，若您不了解此服务功能，或已具备替代工具，移除此类键盘记录程序实属合理之举。</v:String>
+    <v:String x:Key="tgl16_desc_conf">此事件记录服务负责收集并处理系统诊断资讯，会消耗电脑资源。该服务不会带来任何益处，建议停用以防止机密资讯外泄。</v:String>
+    <v:String x:Key="tgl17_desc_conf">负责收集并传输系统及其使用数据的服务，或与视讯驱动程序运作无关的功能皆属无用。NVIDIA收集何种资讯及其目的仅其自身知晓。但此举对终端用户毫无助益的事实显而易见。</v:String>
+    <v:String x:Key="tgl18_desc_conf">此调整项将停用 UAR（用户活动记录）功能——该系统会逐一记录您在电脑上的所有操作：从撷取屏幕截图、输入文字、启动程序，甚至在屏幕锁定时提供网络摄影机存取权限等诸多行为。</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="tgl1_intf">标准游标颜色选项</v:String>
+    <v:String x:Key="tgl2_intf">标准工具提示颜色</v:String>
+    <v:String x:Key="tgl3_intf">系统按钮标准尺寸</v:String>
+    <v:String x:Key="tgl4_intf">标准游标闪烁频率</v:String>
+    <v:String x:Key="tgl5_intf">标准卷动列尺寸</v:String>
+    <v:String x:Key="tgl6_intf">任务栏透明效果</v:String>
+    <v:String x:Key="tgl7_intf">深色任务栏主题</v:String>
+    <v:String x:Key="tgl8_intf">应用程序与文档总管深色主题</v:String>
+    <v:String x:Key="tgl9_intf">呼叫内容菜单延迟时间</v:String>
+    <v:String x:Key="tgl10_intf">任务栏预览显示延迟</v:String>
+    <v:String x:Key="tgl11_intf">文档、数据夹或程序的捷径箭头</v:String>
+    <v:String x:Key="tgl12_intf">前缀"标签为..."/ 后缀"– 标签"</v:String>
+    <v:String x:Key="tgl13_intf">桌面上的"本机"图标</v:String>
+    <v:String x:Key="tgl14_intf">桌面上的"垃圾桶"图标</v:String>
+    <v:String x:Key="tgl15_intf">任务栏对齐方式</v:String>
+    <v:String x:Key="tgl16_intf">"开始"功能表的标准布局</v:String>
+    <v:String x:Key="tgl17_intf">精简版内容菜单</v:String>
+    <v:String x:Key="tgl18_intf">显示提示与建议</v:String>
+    <v:String x:Key="tgl19_intf">使用精简资源管理器模式</v:String>
+    <v:String x:Key="tgl20_intf">"Copilot"与"Recall"助理功能</v:String>
+    <v:String x:Key="tgl21_intf">在应用程序上点击右键选择"结束任务"</v:String>
+    <v:String x:Key="tgl22_intf">显示窗口贴靠布局</v:String>
+    <v:String x:Key="tgl23_intf">任务栏上的图标与按钮</v:String>
+    <v:String x:Key="tgl24_intf">显示个人化广告</v:String>
+    <v:String x:Key="tgl25_intf">登入时还原先前数据夹窗口</v:String>
+    <v:String x:Key="tgl26_intf">显示 Windows 提示与建议的通知</v:String>
+    <v:String x:Key="tgl27_intf">位于"本机"中的数据夹</v:String>
+    <v:String x:Key="tgl28_intf">文档总管中的"3D 物件"</v:String>
+    <v:String x:Key="tgl29_intf">桌面壁纸格式 .JPEG 压缩</v:String>
+    <v:String x:Key="tgl30_intf">桌面元素工具提示</v:String>
+    <v:String x:Key="tgl31_intf">开始功能表中整合"Bing"的搜索查询</v:String>
+    <v:String x:Key="tgl32_intf">开启"快速存取"而非"本机"</v:String>
+    <v:String x:Key="tgl33_intf">文档总管中显示扩展名</v:String>
+    <v:String x:Key="tgl34_intf">亮度异常变化</v:String>
+
+    <v:String x:Key="tgl1_desc_intf">将游标选取的颜色从蓝色变更为灰色"湿沥青"。</v:String>
+    <v:String x:Key="tgl2_desc_intf">将某些程序的工具提示颜色从黄色变更为浅蓝色"蔚蓝"。</v:String>
+    <v:String x:Key="tgl3_desc_intf">此调整会缩小最小化、最大化及关闭按钮的尺寸，使其更为精简。此设置将套用至所有窗口，包含文档总管、照片、浏览器及其他常用程序。</v:String>
+    <v:String x:Key="tgl4_desc_intf">此调整会提高文字游标的闪烁频率。预设情况下，游标每 530 毫秒闪烁一次。</v:String>
+    <v:String x:Key="tgl5_desc_intf">此调整功能可降低经典 Windows 应用程序（包含文档总管、浏览器及其他旧版程序）中卷动列的粗细。但此设置不影响现代化接口，因其采用独立于系统设置的专属控制元件。</v:String>
+    <v:String x:Key="tgl6_desc_intf">此调整将启用或停用透明效果。半透明窗口与表面。</v:String>
+    <v:String x:Key="tgl7_desc_intf">将任务栏主题切换为浅色或深色。注意：屏幕可能闪烁。</v:String>
+    <v:String x:Key="tgl8_desc_intf">此调整将变更文档总管主题为浅色或深色，包含浏览器及其他支持装置主题的程序。注意屏幕可能闪烁。</v:String>
+    <v:String x:Key="tgl9_desc_intf">预设情况下，新增的内容菜单项目会延迟 400 毫秒显示。若需加快显示速度，可缩短此延迟时间。</v:String>
+    <v:String x:Key="tgl10_desc_intf">预设情况下，任务栏预览会过久地显示运行中应用程序的预览画面。若要加快预览显示速度，请套用此调整项。</v:String>
+    <v:String x:Key="tgl11_desc_intf">此调整项将替换箭头文档，从标签中移除箭头图标。</v:String>
+    <v:String x:Key="tgl12_desc_intf">移除标签过于直观的前缀-后缀命名方式。</v:String>
+    <v:String x:Key="tgl13_desc_intf">相较于电脑捷径，电脑图标更为优异，因其具备右键菜单所需属性，且不含多余功能。</v:String>
+    <v:String x:Key="tgl14_desc_intf">若您不需要桌面上的垃圾桶图标，且不想浪费时间寻找关机选项，则可使用微调功能。</v:String>
+    <v:String x:Key="tgl15_desc_intf">选择任务栏图标显示位置：居中或靠左</v:String>
+    <v:String x:Key="tgl16_desc_intf">调整开始功能表布局，扩展固定应用程序区域。此外，除 Windows Home 版本外，开始功能表将移除"推荐"区块。</v:String>
+    <v:String x:Key="tgl17_desc_intf">此调整将恢复桌面与"文档总管"的经典右键菜单。注意：屏幕可能闪烁。</v:String>
+    <v:String x:Key="tgl18_desc_intf">Windows 11 偶尔会显示特定功能的使用提示，例如新版"开始"菜单或"快速设置"。若您初次接触 Windows 11，这些提示或许有用；否则仅是无用的垃圾讯息。</v:String>
+    <v:String x:Key="tgl19_desc_intf">预设情况下，Windows 会在文档总管项目间添加填充空间。此为触控屏幕设计的新功能。此调整将恢复文档总管的经典布局，移除元素间的缩排，让您无需费心寻找设置选项。</v:String>
+    <v:String x:Key="tgl20_desc_intf">此调整将停用并尽可能隐藏任务列、开始功能表、Edge 浏览器及记事本中的 Copilot 图标，阻断其功能运作，同时停用 Recall 功能。但核心 Copilot 应用程序本身不受影响，仍保留于系统中，可依需求使用。若要完全移除 Copilot，必须连同 Microsoft Edge 一并卸载。若您的 Windows 系统未预载这些 AI 功能，使用此调整项将无效。</v:String>
+    <v:String x:Key="tgl21_desc_intf">此调整项可让您在右键点击任务栏应用程序时，于内容菜单新增"结束任务"选项。此功能可加速程序终止流程，无需开启工作管理员。注意：屏幕可能出现闪烁现象。</v:String>
+    <v:String x:Key="tgl22_desc_intf">若您不需要在悬停"最大化"按钮时显示快照布局建议，可关闭此选项。</v:String>
+    <v:String x:Key="tgl23_desc_intf">此调整将移除「搜索」、「工作检视」及「聊天」图标，并隐藏「了解此图片」元素。在较旧版本的 Windows 11 中，亦会移除 Copilot 图标。对于 Windows 10 用户，此设置还会额外停用「新闻与兴趣」及 Cortana。请注意屏幕可能闪烁。</v:String>
+    <v:String x:Key="tgl24_desc_intf">预设情况下，Windows 会利用收集到的资讯投放广告，即显示符合您兴趣的广告。而这些广告实际上会出现在任何可用的显示空间。若您不希望 Windows 在所有 Store 应用程序、文档总管、设置选项及开始功能表中显示个人化广告，则可关闭此功能。</v:String>
+    <v:String x:Key="tgl25_desc_intf">预设情况下，Windows 不会存储窗口位置及关闭时的状态。此调整功能可让系统记忆开启中的数据夹类型，以便在注销、重新启动或关机后恢复其状态。</v:String>
+    <v:String x:Key="tgl26_desc_intf">此调整可停用所有窗口提示与通知（含设置中的线上提示），并为 Windows 11 用户停用"二次开箱体验"（SCOOBE）。SCOOBE 会突然弹出窗口，强迫用户"立即完成装置设置"并登入 Microsoft 帐户。</v:String>
+    <v:String x:Key="tgl27_desc_intf">此调整将隐藏"本机"中的数据夹：桌面、影片、文档、下载、图片、音乐。注意画面可能闪烁。</v:String>
+    <v:String x:Key="tgl28_desc_intf">从左侧菜单清单（文档总管清单树状结构）的文档总管概览中移除"3D 物件"项目。注意画面可能闪烁。</v:String>
+    <v:String x:Key="tgl29_desc_intf">预设情况下，当您将 jpeg 图片设为桌布时，Windows 会自动将其品质降低至 85%。此调整将把 jpeg 桌布品质设为 100%。</v:String>
+    <v:String x:Key="tgl30_desc_intf">此调整将停用鼠标悬停于桌面元素时的工具提示功能。</v:String>
+    <v:String x:Key="tgl31_desc_intf">预设情况下，Windows 会将您在"开始"功能表中的所有搜索内容传送至其服务器，以提供 Bing 搜索结果。若您不需要"开始"功能表整合 Bing 功能，可透过调整设置停用网页搜索。请注意画面可能闪烁。</v:String>
+    <v:String x:Key="tgl32_desc_intf">预设情况下，开启文档总管时，第一个标签页会显示"快速存取"。若要开启任何磁盘机，则需进行多余的操作。此调整将使开启文档总管时预设显示"本机"而非"快速存取"。</v:String>
+    <v:String x:Key="tgl33_desc_intf">预设情况下，Windows 会隐藏文档扩展名，使文档总管接口更简洁。若需显示扩展名，可透过此调整功能启用，节省搜索时间。注意：屏幕可能闪烁。</v:String>
+    <v:String x:Key="tgl34_desc_intf">部分装置的屏幕亮度可能随显示内容自动变化。若关闭 HDR、动态亮度及电源设置仍无法解决问题（此状况在电池供电的笔记型电脑上尤为常见），可尝试此调整项——它将在系统层级强制停用自动亮度调节功能。手动亮度控制功能仍可正常使用。</v:String>
+    <!--#endregion-->
+
+    <!--#region Packages Page -->
+    <v:String x:Key="warn_part1_pkg">应用程序将会被删除</v:String>
+    <v:String x:Key="warn_part2_pkg">永远,</v:String>
+    <v:String x:Key="warn_part3_pkg">但 OneDrive 可透过点击其图标进行还原</v:String>
+
+    <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
+    <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
+    <v:String x:Key="OneNote_pkg">Microsoft Office OneNote</v:String>
+    <v:String x:Key="MicrosoftOfficeHub_pkg">Microsoft Office Hub</v:String>
+    <v:String x:Key="MicrosoftSolitaireCollection_pkg">Microsoft Solitaire Collection</v:String>
+    <v:String x:Key="MixedReality_pkg">Mixed Reality</v:String>
+    <v:String x:Key="BingWeather_pkg">Bing Weather</v:String>
+    <v:String x:Key="Microsoft3D_pkg">Microsoft 3D Viewer</v:String>
+    <v:String x:Key="SkypeApp_pkg">Microsoft Skype</v:String>
+    <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
+    <v:String x:Key="Cortana_pkg">Cortana</v:String>
+    <v:String x:Key="MicrosoftTeams_pkg">Microsoft Teams</v:String>
+    <v:String x:Key="Music_pkg">Windows Media Player</v:String>
+    <v:String x:Key="Video_pkg">Movies &amp; TV</v:String>
+    <v:String x:Key="SoundRecorder_pkg">Sound Recorder</v:String>
+    <v:String x:Key="FeedbackHub_pkg">Feedback Hub</v:String>
+    <v:String x:Key="Mail_pkg">Mail</v:String>
+    <v:String x:Key="Widgets_pkg">Widgets</v:String>
+    <v:String x:Key="Photos_pkg">Windows Photos</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Screen Sketch</v:String>
+    <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
+    <v:String x:Key="GetStarted_pkg">Get Started</v:String>
+    <v:String x:Key="GetHelp_pkg">Get Help</v:String>
+    <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Sticky Notes</v:String>
+    <v:String x:Key="Maps_pkg">Windows Maps</v:String>
+    <v:String x:Key="Camera_pkg">Windows Camera</v:String>
+    <v:String x:Key="Paint3D_pkg">Paint3D</v:String>
+    <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
+    <v:String x:Key="People_pkg">People</v:String>
+    <v:String x:Key="BingNews_pkg">Microsoft News</v:String>
+    <v:String x:Key="Todos_pkg">Microsoft To Do</v:String>
+    <v:String x:Key="Alarms_pkg">Windows Clock</v:String>
+    <v:String x:Key="Phone_pkg">Your Phone</v:String>
+    <v:String x:Key="Outlook_pkg">Outlook for Windows</v:String>
+    <v:String x:Key="BingSports_pkg">Bing Sports</v:String>
+    <v:String x:Key="BingFinance_pkg">Bing Finance</v:String>
+    <v:String x:Key="MicrosoftFamily_pkg">Microsoft Family Safety</v:String>
+    <v:String x:Key="BingSearch_pkg">Bing Search</v:String>
+    <v:String x:Key="QuickAssist_pkg">Quick Assist</v:String>
+    <v:String x:Key="DevHome_pkg">Dev Home</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
+    <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_pkg">Web Media Extensions</v:String>
+    <v:String x:Key="OneConnect_pkg">Mobile Plans</v:String>
+    <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
+    <v:String x:Key="Notepad_pkg">Notepad</v:String>
+    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Copilot_pkg">Copilot</v:String>
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    
+    <v:String x:Key="title_over_pkg">解除安装确认</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">您即将解除安装 Microsoft Edge 浏览器。此操作亦将移除 EdgeWebView 组件，该组件用于在多种应用程序中显示网页内容——例如 Microsoft Office（如会议洞察、会议室搜索功能）、照片应用程序（新版采用 WebView2）、部分 Telegram 机器人，以及其他依赖嵌入式 WebView 的程序。继续操作前，请确认您不再需要此组件。 
+       在 Windows 11 的近期版本中, Copilot 透过 EdgeWebView 以 PWA 或系统封装器形式实现。由于其作为网页封装器的运作特性，当 Edge 被解除安装时，Copilot 亦会随之移除。</v:String>
+    <v:String x:Key="question_over_pkg">您是否要继续删除与 EdgeWebView 相关的项目？</v:String>
+    <v:String x:Key="btn_сancel">取消</v:String>
+    <v:String x:Key="btn_delete">删除</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_svc">与 Windows 搜索相关的服务</v:String>
+    <v:String x:Key="tgl2_svc">与 Xbox 相关的服务</v:String>
+    <v:String x:Key="tgl3_svc">与 Windows 更新相关的服务</v:String>
+    <v:String x:Key="tgl4_svc">与 Windows 市集相关的服务</v:String>
+    <v:String x:Key="tgl5_svc">性能计数器服务</v:String>
+    <v:String x:Key="tgl6_svc">Windows 生物辨识服务</v:String>
+    <v:String x:Key="tgl7_svc">与蓝牙相关的服务</v:String>
+    <v:String x:Key="tgl8_svc">与印表机相关的服务</v:String>
+    <v:String x:Key="tgl9_svc">与扫描器运作相关的服务</v:String>
+    <v:String x:Key="tgl10_svc">传真相关服务</v:String>
+    <v:String x:Key="tgl11_svc">平板/智慧型手机模式相关服务</v:String>
+    <v:String x:Key="tgl12_svc">附加显示器运作相关服务</v:String>
+    <v:String x:Key="tgl13_svc">系统元件相关服务</v:String>
+    <v:String x:Key="tgl14_svc">区域网络运作相关服务</v:String>
+    <v:String x:Key="tgl15_svc">与 USB 数据机及路由器相关的服务</v:String>
+    <v:String x:Key="tgl16_svc">与 VPN 客户端相关的服务</v:String>
+    <v:String x:Key="tgl17_svc">与 Windows Media 运作相关的服务</v:String>
+    <v:String x:Key="tgl18_svc">与远端桌面相关的服务</v:String>
+    <v:String x:Key="tgl19_svc">收集错误与事件日志的服务</v:String>
+    <v:String x:Key="tgl20_svc">WebDAV 远端文档管理服务</v:String>
+    <v:String x:Key="tgl21_svc">与智能卡运作相关的服务</v:String>
+    <v:String x:Key="tgl22_svc">与 Windows Kiosk 运作相关之服务</v:String>
+    <v:String x:Key="tgl23_svc">与文档加密相关之服务</v:String>
+    <v:String x:Key="tgl24_svc">与 Windows 本地化相关之服务</v:String>
+    <v:String x:Key="tgl25_svc">与背景安全性检查相关之服务</v:String>
+    <v:String x:Key="tgl26_svc">与背景诊断相关之服务</v:String>
+    <v:String x:Key="tgl27_svc">与企业工具相关之服务</v:String>
+    <v:String x:Key="tgl28_svc">与 Hyper-V 运作相关之服务</v:String>
+    <v:String x:Key="tgl29_svc">与推播通知相关之服务</v:String>
+
+    <v:String x:Key="tgl1_desc_svc">若您未使用文档历史记录与内容索引功能，请停用此设置。</v:String>
+    <v:String x:Key="tgl2_desc_svc">若您未使用 Xbox 与 Microsoft 游戏控制器，请停用此设置。</v:String>
+    <v:String x:Key="tgl3_desc_svc">若您不打算更新 Windows，请停用此设置。此调整除变更服务外，亦会修改负责 Windows 更新的文档。因此即使服务处于启用状态，更新中心仍将无法运作。请注意此调整将影响从 Windows 市集下载及更新应用程序。</v:String>
+    <v:String x:Key="tgl4_desc_svc">若未使用 Windows 市集及其 UWP 应用程序，请停用此功能。</v:String>
+    <v:String x:Key="tgl5_desc_svc">若不希望服务分析系统性能，请停用此功能。</v:String>
+    <v:String x:Key="tgl6_desc_svc">若未使用 PIN 码、指纹、脸部辨识或其他 Windows Hello 登入方式，请停用此设置。已设置的登入方式仍可运作，但需重新启用 Windows Hello 才能修改或移除设置。</v:String>
+    <v:String x:Key="tgl7_desc_svc">若未使用蓝牙及相关装置，请停用此设置。</v:String>
+    <v:String x:Key="tgl8_desc_svc">若无印表机请停用此功能。</v:String>
+    <v:String x:Key="tgl9_desc_svc">若无扫描器请停用此功能。</v:String>
+    <v:String x:Key="tgl10_desc_svc">若无传真机请停用此功能。</v:String>
+    <v:String x:Key="tgl11_desc_svc">若您使用的是家用电脑、笔记型电脑或迷你笔电，请停用此服务。</v:String>
+    <v:String x:Key="tgl12_desc_svc">若您仅有一台显示器且无意连接额外显示器，请停用此服务。</v:String>
+    <v:String x:Key="tgl13_desc_svc">若未使用以下应用程序请停用："虚拟桌面"、"您的手机"及"夜间模式"。此服务会处理用户数据并与 Microsoft 服务器同步。此服务对系统运作非必要，但停用后部分功能（如 Windows 10 的"夜间模式"）可能完全或部分失效。</v:String>
+    <v:String x:Key="tgl14_desc_svc">若未使用或无意使用区域网络，请停用此服务。</v:String>
+    <v:String x:Key="tgl15_desc_svc">若透过有线网络或 Wi-Fi 连接至互联网，请停用此服务。</v:String>
+    <v:String x:Key="tgl16_desc_svc">若未使用 VPN 客户端，请停用此服务。可能影响 Xbox 运作。</v:String>
+    <v:String x:Key="tgl17_desc_svc">若您不需要文档同步功能，且无需透过区域网络存取 Windows Media Player 的文档，请停用此服务。这些服务并非关键组件，您仍可继续使用播放器。</v:String>
+    <v:String x:Key="tgl18_desc_svc">若您未使用远端桌面且不透过服务器连接存取，请停用此服务。</v:String>
+    <v:String x:Key="tgl19_desc_svc">若您不希望服务在处理错误时占用电脑资源，请停用此服务。</v:String>
+    <v:String x:Key="tgl20_desc_svc">若您不透过共用功能或 WebDAV 远端管理文档，请停用此服务。</v:String>
+    <v:String x:Key="tgl21_desc_svc">若您未使用智能卡，请停用此服务。智能卡是电子识别装置或含晶片塑胶卡的一种，外观类似"银行卡"。日常使用 Windows 时无需此服务，您也永远不会用到它。</v:String>
+    <v:String x:Key="tgl22_desc_svc">若未使用 Windows 资讯站模式，请停用此设置。此模式会最小化接口：仅单一 UWP 应用程序以全屏运行，其余所有功能皆遭封锁。请注意，此设置可能干扰透过 Windows Installer 安装系统更新与程序，因其同时停用首次登入时的系统数据与应用程序设置及初始化程序。</v:String>
+    <v:String x:Key="tgl23_desc_svc">若未使用 BitLocker 磁盘加密及 EFS 文档/数据夹加密，请停用此功能。</v:String>
+    <v:String x:Key="tgl24_desc_svc">若您已配置所有使用语言且无新增计画，请停用此服务。</v:String>
+    <v:String x:Key="tgl25_desc_svc">若未使用 Windows Defender 及所有附加 Windows 安全性功能，请停用此服务。</v:String>
+    <v:String x:Key="tgl26_desc_svc">若您不需要 Windows 在背景运行无用的系统诊断程序，请停用此选项。</v:String>
+    <v:String x:Key="tgl27_desc_svc">若您未使用企业应用程序的远端管理功能，且电脑未与任何远端服务器通讯，请停用此选项。</v:String>
+    <v:String x:Key="tgl28_desc_svc">若未使用内建虚拟化系统，请停用此服务。此设置绝不影响 VirtualBox 等虚拟化软件运作。</v:String>
+    <v:String x:Key="tgl29_desc_svc">若未使用配对装置且不透过 Windows 市集远端安装应用程序，请停用此服务。这些服务负责处理配对装置的通知中心、处理推播请求、让 Windows 能侦测您的智慧型手机以供"您的手机"应用程序使用、自动重新连接至手机，并在操作中心显示手机讯息与事件。在 Windows 10 中，停用后通知中心可能无法开启。</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_sys">鼠标指针速度：</v:String>
+    <v:String x:Key="slider2_sys">键盘重复延迟：</v:String>
+    <v:String x:Key="slider3_sys">键盘重复频率：</v:String>
+    <v:String x:Key="text_sys">在此输入文字以测试键盘设置</v:String>
+    <v:String x:Key="tgl1_sys">提升游标精准度</v:String>
+    <v:String x:Key="tgl2_sys">黏着键与筛选键功能</v:String>
+    <v:String x:Key="tgl3_sys">Windows Defender、防恶意软件、SmartScreen 与 VBS</v:String>
+    <v:String x:Key="tgl4_sys">用户帐户控制 (UAC)</v:String>
+    <v:String x:Key="tgl5_sys">来自通知中心的安全性通知</v:String>
+    <v:String x:Key="tgl6_sys">自动更新 Microsoft Store 应用程序</v:String>
+    <v:String x:Key="tgl7_sys">Realtek 音效驱动程序中的声音延迟</v:String>
+    <v:String x:Key="tgl8_sys">主控台锁定显示关闭时限</v:String>
+    <v:String x:Key="tgl9_sys">"休眠"与"快速启动"技术</v:String>
+    <v:String x:Key="tgl10_sys">关机警告对话方块</v:String>
+    <v:String x:Key="tgl11_sys">运行任何 exe 档时的警告</v:String>
+    <v:String x:Key="tgl12_sys">自动内存诊断</v:String>
+    <v:String x:Key="tgl13_sys">Teredo、ISATAP 与 IPv6 协议</v:String>
+    <v:String x:Key="tgl14_sys">文档系统快取标准大小</v:String>
+    <v:String x:Key="tgl15_sys">减缓 Windows 启动与程序启动速度</v:String>
+    <v:String x:Key="tgl16_sys">快速存取工具列的使用历史记录</v:String>
+    <v:String x:Key="tgl17_sys">自动运行可移除媒体</v:String>
+    <v:String x:Key="tgl18_sys">使用预设电源方案</v:String>
+    <v:String x:Key="tgl19_sys">使用"蓝牙与装置"功能</v:String>
+    <v:String x:Key="tgl20_sys">Windows Defender 防火墙</v:String>
+    <v:String x:Key="tgl21_sys">使用"游戏模式"功能</v:String>
+    <v:String x:Key="tgl22_sys">使用"游戏列"功能</v:String>
+    <v:String x:Key="tgl23_sys">应用程序在背景运行</v:String>
+    <v:String x:Key="tgl24_sys">Windows 预留存储空间</v:String>
+    <v:String x:Key="tgl25_sys">动态与高精度事件计时器</v:String>
+    <v:String x:Key="tgl26_sys">从更新系统中隐藏"电脑健康检查"</v:String>
+    <v:String x:Key="tgl27_sys">Windows Insider 背景任务</v:String>
+    <v:String x:Key="tgl28_sys">系统磁盘重整</v:String>
+    
+    <v:String x:Key="slider1_desc_sys">调整鼠标指针移动速度，省去您搜索鼠标参数的时间。</v:String>
+    <v:String x:Key="slider2_desc_sys">调整开始重复输入字元前的延迟时间，建议值为 0。</v:String>
+    <v:String x:Key="slider3_desc_sys">调整输入字元的重复频率，建议值为 31。</v:String>
+    <v:String x:Key="tgl1_desc_sys">预设鼠标加速功能会提升移动速度。建议关闭此功能，因开启加速时，均匀移动与方向精准度将更为理想。</v:String>
+    <v:String x:Key="tgl2_desc_sys">若您在运行任务时不希望频繁弹出窗口，要求启用按键滞留或输入过滤功能，且在回答"否"后仍会再次出现，请关闭此功能。此外，输入过滤会影响键盘重复速度并跳过重复按键。</v:String>
+    <v:String x:Key="tgl3_desc_sys">此调整将停用并停止 Windows Defender、SmartScreen、反恶意软件处理器的不当高负载，以及基于虚拟化的安全性 (VBS)。为使变更完全生效，系统将自动重新启动至安全模式。无需任何操作——本工具将自动处理所有流程。</v:String>
+    <v:String x:Key="tgl4_desc_sys">此调整将完全停用用户帐户控制（UAC），移除盾牌图标、安全通知等相关项目。请注意：UAC并非完整防护程序。</v:String>
+    <v:String x:Key="tgl5_desc_sys">停用安全防护相关功能时，系统会持续显示相关通知。此调整将停用通知中心的安全警示功能。</v:String>
+    <v:String x:Key="tgl6_desc_sys">若您偏好自行从 Microsoft Store 更新应用程序，需关闭自动更新功能。如此可降低网络负载。</v:String>
+    <v:String x:Key="tgl7_desc_sys">部分版本的 Realtek 高解析度音效驱动程序可能出现声音延迟问题。此调整可修复该故障。但若您未察觉任何延迟现象，或无法确认已安装及/或运作中的驱动程序确实来自 Realtek，则不建议使用此设置。</v:String>
+    <v:String x:Key="tgl8_desc_sys">预设情况下，Windows 会在屏幕关闭后显示锁定画面 1 分钟，此设置与电池或电源供应状态无关。此调整将解除上述限制。</v:String>
+    <v:String x:Key="tgl9_desc_sys">理论上快速启动耗时少于退出休眠状态，但实际操作中差异可能不易察觉。若您未使用快速启动或休眠功能，亦可将其停用。此举可为硬盘释放额外空间。</v:String>
+    <v:String x:Key="tgl10_desc_sys">此调整项可让您停用系统消息，该讯息会提醒您：当关闭或重新启动电脑时，所有开启中的程序将被强制终止。</v:String>
+    <v:String x:Key="tgl11_desc_sys">当您运行从互联网下载的 exe、msi、bat、cmd 或其他可运行文档时，Windows 会显示安全性警示。每次确认运行此类文档可能相当烦人，此调整将停用此警告。</v:String>
+    <v:String x:Key="tgl12_desc_sys">此调整透过停用排程任务，关闭 Windows 内存诊断的自动启动功能。借此省略不必要的检查程序，加速系统开机速度，同时保留用户手动运行诊断的选项。</v:String>
+    <v:String x:Key="tgl13_desc_sys">此调整将停用 Teredo、ISATAP 及 IPv6 协议，这些协议通常对多数用户并非必要。但请勿在工作或企业装置上套用此设置：此举可能导致网络问题或部分服务运作异常。</v:String>
+    <v:String x:Key="tgl14_desc_sys">此调整包含对大型文档系统快取的支持。增加文档系统快取的大小通常能提升电脑性能，但同时会减少应用程序与服务可用的实体内存空间。</v:String>
+    <v:String x:Key="tgl15_desc_sys">Windows 预设具备减缓启动程序速度的内建机制。此机制在配备 HDD 的旧式电脑上运作良好，但在搭载 SSD 的现代电脑上，却会不必要地拖慢系统启动速度。</v:String>
+    <v:String x:Key="tgl16_desc_sys">此调整将停用快速存取面板中文档与数据夹的使用历史记录功能。换言之，系统将不再自动存储并显示最近使用的项目。</v:String>
+    <v:String x:Key="tgl17_desc_sys">此调整将停用电脑连接各种可移除媒体时，文档总管尝试开启的自动运行功能。如此一来，当您对媒体可靠性存疑时，未知程序便不会自动开启。</v:String>
+    <v:String x:Key="tgl18_desc_sys">新增"极致性能"电源供应电路，若系统已具备此功能则直接切换至现有电源供应电路。此外，此设置将解锁处理器电源管理设置中的最高处理器频率限制。</v:String>
+    <v:String x:Key="tgl19_desc_sys">若您不需要蓝牙功能且不欲透过蓝牙使用装置，请关闭此功能，系统亦将移除系统列图标。</v:String>
+    <v:String x:Key="tgl20_desc_sys">防火墙可透过允许或封锁程序连接及流量控制，管理程序存取互联网的权限。若您确知操作意图且理解其影响，可选择停用防火墙；但建议多数用户维持启用状态。</v:String>
+    <v:String x:Key="tgl21_desc_sys">游戏模式对高性能系统影响有限。但若背景运行大量程序时，此模式可确保背景程序不会干扰游戏运作。</v:String>
+    <v:String x:Key="tgl22_desc_sys">一款用于录制游戏的程序。总体而言，它会消耗系统资源。市面上存在许多更优质的替代方案，且不会自动开启。</v:String>
+    <v:String x:Key="tgl23_desc_sys">部分应用程序允许您管理其背景活动，此设置决定程序在背景运行且未被主动使用时的运作范围。通常停用背景应用程序有助降低网络负载、CPU 负载及电力消耗，对笔记型电脑尤为实用，因其能延长电池续航时间。</v:String>
+    <v:String x:Key="tgl24_desc_sys">保留存储空间旨在为更新、应用程序、临时文档及系统快取预留可预测的可用空间。停用此功能可释放大量空间，但若您已有充足可用空间，则不建议运行此操作，因无法获得额外效益。</v:String>
+    <v:String x:Key="tgl25_desc_sys">停用动态计时器与 HPET 可减少微卡顿现象，从而提升系统反应速度并带来些微性能提升。但效果取决于系统配置：某些情况下，系统可能非但未加速反而变慢并出现延迟。若使用笔记型电脑，请注意此举可能略微增加功耗，因处理器即使处于闲置状态仍会保持较高运作活性。</v:String>
+    <v:String x:Key="tgl26_desc_sys">调整区块可阻止"电脑健康检查"的侵入式自动安装——此为微软工具，会透过 Windows 更新在未经许可下强制部署自身。安装后，程序将不断催促"检查 Windows 11 就绪状态"，并推送未经请求的"最佳化建议"。</v:String>
+    <v:String x:Key="tgl27_desc_sys">Windows Insider 参与者应保持这些任务启用状态。但若您未加入该计画，所有相关任务将成为无谓负担：它们消耗系统资源、产生无用日志，并可能在毫无效益的情况下启动遥测连接。停用这些功能可缩短启动时间、提升整体系统性能，同时消除不必要的实验性数据收集管道。</v:String>
+    <v:String x:Key="tgl28_desc_sys">若您使用固态硬盘（SSD），停用仅适用于传统硬盘（HDD）的磁盘重组与开机文档优化功能，有助延长存储设备寿命。同时，TRIM 优化功能仍会持续运作：它会告知 SSD 控制器哪些数据区块已不再使用并清除它们，从而维持稳定速度与硬盘寿命。</v:String>
+    <!--#endregion-->
+
+    <!--#region System Information Page -->
+    <v:String x:Key="title_win_name_sysinfo">操作系统：</v:String>
+    <v:String x:Key="title_win_ver_sysinfo">版本：</v:String>
+    <v:String x:Key="label_proc_sysinfo">运行中的程序：</v:String>
+    <v:String x:Key="label_svc_sysinfo">服务：</v:String>
+    <v:String x:Key="title_bios_sysinfo">BIOS：</v:String>
+    <v:String x:Key="title_mode_sysinfo">模式：</v:String>
+    <v:String x:Key="title_motherbr_sysinfo">主板：</v:String>
+    <v:String x:Key="title_cpu_sysinfo">处理器：</v:String>
+    <v:String x:Key="title_cores_sysinfo">核心数：</v:String>
+    <v:String x:Key="title_threads_sysinfo">运行绪数：</v:String>
+    <v:String x:Key="title_gpu_sysinfo">显卡：</v:String>
+    <v:String x:Key="title_ram_sysinfo">内存：</v:String>
+    <v:String x:Key="title_mtype_sysinfo">内存类型：</v:String>
+    <v:String x:Key="title_storage_sysinfo">存储设备：</v:String>
+    <v:String x:Key="title_sound_sysinfo">播放设备：</v:String>
+    <v:String x:Key="title_netadapter_sysinfo">网络接口卡：</v:String>
+    <v:String x:Key="title_ip_sysinfo">您的 IP 地址：</v:String>
+    <v:String x:Key="connection_limited_sysinfo">网络连接受限</v:String>
+    <v:String x:Key="connection_block_sysinfo">网络存取受限</v:String>
+    <v:String x:Key="connection_lose_sysinfo">互联网连接中断</v:String>
+    <v:String x:Key="text_copy_sysinfo">已复制！</v:String>
+    <v:String x:Key="driver_not_installed_sysinfo">您尚未安装驱动程序</v:String>
+    <v:String x:Key="no_device_information_sysinfo">未找到装置资讯</v:String>
+    <v:String x:Key="unknown_information_sysinfo">未侦测到</v:String>
+    <!--#endregion-->
+
+    <!--#region Addons Page -->
+    <v:String x:Key="btn_open_dir">选择文档夹</v:String>
+    <v:String x:Key="btn_run">运行</v:String>
+    <v:String x:Key="chk_run_ti_adds">以 TrustedInstaller 身份运行</v:String>
+    <v:String x:Key="text_info_adds">选择一个目录或确保该目录不为空。</v:String>
+    <v:String x:Key="scripts_info_adds">之后，您就可以在此页面上运行脚本（.ps1、.cmd、.bat、.reg）了。</v:String>
+    <!--#endregion-->
+
+</ResourceDictionary>
