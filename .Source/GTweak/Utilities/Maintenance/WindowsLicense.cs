@@ -34,8 +34,12 @@ namespace GTweak.Utilities.Maintenance
             }
             catch (COMException)
             {
-                string output = await CommandExecutor.GetCommandOutput("cscript //B \"$env:windir\\system32\\slmgr.vbs\" /ato; $code = $LASTEXITCODE; ($code -eq 0 -or $code -eq -2147024773)", true);
-                bool.TryParse(output, out IsWindowsActivated);
+                try
+                {
+                    string output = await CommandExecutor.GetCommandOutput("cscript //B \"$env:windir\\system32\\slmgr.vbs\" /ato; $code = $LASTEXITCODE; ($code -eq 0 -or $code -eq -2147024773)", true);
+                    bool.TryParse(output, out IsWindowsActivated);
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
