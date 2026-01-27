@@ -41,7 +41,7 @@
     <v:String x:Key="export_warning_noty">이해가 되지 않는다면 먼저 한 가지 이상의 조정을 적용하세요</v:String>
     <v:String x:Key="success_onedrive_noty">OneDrive 복구 프로세스가 시작되었습니다. 시간이 좀 걸릴 것입니다</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive 설정 파일이 누락되어 복구가 불가능합니다</v:String>
-    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
+    <v:String x:Key="warn_wd_noty">프로세스 완료 후 시스템 재시작을 기다립니다</v:String>
     <v:String x:Key="info_wd_noty">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_noty">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="warn_activate_noty">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
@@ -480,14 +480,10 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">Select folder</v:String>
-    <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
-    <v:String x:Key="text_info_adds">Select a directory or make sure it is not empty</v:String>
-    <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
+    <v:String x:Key="btn_open_dir">폴더 선택</v:String>
+    <v:String x:Key="chk_run_ti_adds">TrustedInstaller로 실행</v:String>
+    <v:String x:Key="text_info_adds">디렉토리를 선택하거나 비어 있지 않은지 확인하세요</v:String>
+    <v:String x:Key="scripts_info_adds">그 후, 이 페이지에서 스크립트 (.ps1, .cmd, .bat, .reg)를 실행할 수 있습니다</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>
-
-
-
-
