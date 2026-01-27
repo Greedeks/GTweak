@@ -100,7 +100,7 @@ Windows 지원: Windows 10 (build 18362.116)부터
 > 사용하기 전에 바이러스 백신을 중지해야 합니다
 </br>
 
-## NuGet Packages
+## NuGet 패키지
 - [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
 - [Costura](https://github.com/Fody/Costura)
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
