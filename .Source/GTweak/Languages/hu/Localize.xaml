@@ -480,14 +480,10 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">Select folder</v:String>
-    <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
-    <v:String x:Key="text_info_adds">Select a directory or make sure it is not empty</v:String>
-    <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
+    <v:String x:Key="btn_open_dir">Mappa kiválasztása</v:String>
+    <v:String x:Key="chk_run_ti_adds">Futtassa TrustedInstallerként</v:String>
+    <v:String x:Key="text_info_adds">Válasszon ki egy könyvtárat, vagy győződjön meg róla, hogy nem üres</v:String>
+    <v:String x:Key="scripts_info_adds">Ezután képes lesz futtatni szkripteket (.ps1, .cmd, .bat, .reg) ezen az oldalon</v:String>
     <!--#endregion-->
     
 </ResourceDictionary>
-
-
-
-
