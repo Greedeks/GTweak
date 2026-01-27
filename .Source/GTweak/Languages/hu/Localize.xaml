@@ -78,7 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Szolgáltatás</v:String>
     <v:String x:Key="rbtn_sys_main">Rendszer</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Rendszerinformációk</v:String>
-    <v:String x:Key="rbtn_adds_main">Addons</v:String>
+    <v:String x:Key="rbtn_adds_main">Bővítmények</v:String>
     <v:String x:Key="title_settings_main">Beállítások</v:String>
     <v:String x:Key="btgl_noty_main">Értesítések megjelenítése</v:String>
     <v:String x:Key="slider_volume_main">Hangerő:</v:String>
