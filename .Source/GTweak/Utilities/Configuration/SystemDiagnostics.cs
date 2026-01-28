@@ -471,9 +471,9 @@ namespace GTweak.Utilities.Configuration
 
             static (bool, string) IsUsbAudioDevice(string deviceID)
             {
-                const string basePath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render";
-                using (RegistryKey regKey = Registry.LocalMachine.OpenSubKey(basePath))
+                foreach (string basePath in new[] { @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture" })
                 {
+                    using RegistryKey regKey = Registry.LocalMachine.OpenSubKey(basePath);
                     if (regKey != null)
                     {
                         foreach (string subKeyName in regKey.GetSubKeyNames())
@@ -488,15 +488,30 @@ namespace GTweak.Utilities.Configuration
                                 string value6 = RegistryHelp.GetValue(propsPath, "{a8b865dd-2e3d-4094-ad97-e593a70c75d6},6", string.Empty);
                                 string valueID = RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},2", string.Empty);
 
-                                if (!string.IsNullOrEmpty(valueID) && valueID.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0 && ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) || (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
+                                if (!string.IsNullOrEmpty(valueID) && valueID.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0 &&
+                                    ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                     (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                     (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                     (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
                                 {
-                                    return (true, RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},6", string.Empty));
+
+                                    string nameValue6 = RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},6", string.Empty).Trim();
+                                    string typeNameValue2 = RegistryHelp.GetValue(propsPath, "{a45c254e-df1c-4efd-8020-67d146a850e0},2", string.Empty).Trim();
+
+                                    if (nameValue6.Length > 10 && !string.Equals(nameValue6, typeNameValue2, StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        return (true, nameValue6);
+                                    }
+                                    else
+                                    {
+                                        return (true, $"{typeNameValue2} {nameValue6}");
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
                 return (false, string.Empty);
             }
 
