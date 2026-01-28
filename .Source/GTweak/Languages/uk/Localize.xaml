@@ -26,7 +26,7 @@
     <v:String x:Key="title_nosupport_message">Не підтримується</v:String>
     <v:String x:Key="part1_nosupport_message">Утиліта не підтримує вашу Windows. Подальший запуск</v:String>
     <v:String x:Key="part2_nosupport_message">неможливий,</v:String>
-    <v:String x:Key="part3_nosupport_message">для запобігання критичним помилкам.</v:String>
+    <v:String x:Key="part3_nosupport_message">GTweak буде закрито для запобігання критичним помилкам.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->
@@ -40,8 +40,8 @@
     <v:String x:Key="empty_import_noty">Цей файл порожній, використання налаштувань неможливе</v:String>
     <v:String x:Key="export_warning_noty">Це не має сенсу, спочатку застосуйте принаймні одне налаштування</v:String>
     <v:String x:Key="success_onedrive_noty">Розпочато процес відновлення OneDrive, на це потрібен деякий час</v:String>
-    <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
+    <v:String x:Key="error_onedrive_noty">Не знайдено файл встановлення OneDrive, відновлення неможливе</v:String>
+    <v:String x:Key="warn_wd_noty">Очікуйте завершення процесу з наступним перезапуском системи</v:String>
     <v:String x:Key="info_wd_noty">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
     <v:String x:Key="warn_firewall_noty">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
     <v:String x:Key="warn_activate_noty">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
@@ -56,9 +56,9 @@
     <v:String x:Key="success_point_noty">Точку відновлення успішно створено</v:String>
     <v:String x:Key="error_recovery_noty">Щось не так, не вдалося запустити відновлення</v:String>
     <v:String x:Key="disable_recovery_noty">Відновлення системи вимкнено, точки відновлення недоступні</v:String>
-    <v:String x:Key="enable_recovery_noty">System recovery is enabled and available for use when necessary</v:String>
+    <v:String x:Key="enable_recovery_noty">Відновлення системи увімкнено та готове до використання за потреби</v:String>
     <v:String x:Key="warn_recovery_noty">У вас вже вимкнено систему відновлення</v:String>
-    <v:String x:Key="warn_point_enabled_noty">You have already enabled the recovery system</v:String>
+    <v:String x:Key="warn_point_enabled_noty">Систему відновлення вже увімкнено</v:String>
     <v:String x:Key="clear_ram_noty">Виконано очищення короткочасної пам'яті та тимчасових файлів</v:String>
     <v:String x:Key="success_compression_noty">Стиснення каталогу та його вмісту успішно виконано</v:String>
     <v:String x:Key="success_decompression_noty">Розтиснення каталогу та його вмісту успішно виконано</v:String>
@@ -66,8 +66,8 @@
     <v:String x:Key="ready_decompression_noty">Каталог уже розтиснуто, повторне розтиснення не потрібне</v:String>
     <v:String x:Key="error_compression_noty">Щось пішло не так, сталася помилка при зміні стану стиснення</v:String>
     <v:String x:Key="notsupport_ntfs_noty">Операція недоступна, оскільки каталог не знаходиться на NTFS-розділі</v:String>
-    <v:String x:Key="success_reg_exporter_noty">Registry file saved successfully</v:String>
-    <v:String x:Key="error_reg_exporter_noty">An error occurred while saving the registry file</v:String>
+    <v:String x:Key="success_reg_exporter_noty">Файл реєстру успішно збережено</v:String>
+    <v:String x:Key="error_reg_exporter_noty">Виникла помилка під час збереження файлу реєстру</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -78,7 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Служби</v:String>
     <v:String x:Key="rbtn_sys_main">Система</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Системна інформація</v:String>
-    <v:String x:Key="rbtn_adds_main">Addons</v:String>
+    <v:String x:Key="rbtn_adds_main">Розширення</v:String>
     <v:String x:Key="title_settings_main">Налаштування</v:String>
     <v:String x:Key="btgl_noty_main">Показувати сповіщення</v:String>
     <v:String x:Key="slider_volume_main">Гучність:</v:String>
@@ -112,16 +112,16 @@
     <v:String x:Key="advice_part3_more">створити точку відновлення перед використанням утиліти</v:String>
 
     <v:String x:Key="title_licens_more">Активація Windows</v:String>
-    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
+    <v:String x:Key="text_licens_more">Використання методу HWID або резервного KMS. Це може не працювати, якщо немає відповідного ключа для вашої версії Windows.</v:String>
     <v:String x:Key="btn_activation">Активувати</v:String>
 
-    <v:String x:Key="title_point_more">Recovery Point</v:String>
-    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
+    <v:String x:Key="title_point_more">Точка відновлення</v:String>
+    <v:String x:Key="text_point_more">Створення або запуск процесу відновлення системи, навіть якщо точки відновлення наразі вимкнено.</v:String>
     <v:String x:Key="btn_save">Зберегти</v:String>
     <v:String x:Key="btn_recovery">Відновити</v:String>
 
-    <v:String x:Key="title_point_state_more">Restore Status</v:String>
-    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
+    <v:String x:Key="title_point_state_more">Стан відновлення</v:String>
+    <v:String x:Key="text_point_state_more">Увімкнення або вимкнення створення точок відновлення системи. Якщо вимикається, усі наявні точки буде видалено.</v:String>
     <v:String x:Key="btn_disable">Вимкнути</v:String>
     <v:String x:Key="btn_enable">Увімкнути</v:String>
 
@@ -130,11 +130,11 @@
     <v:String x:Key="btn_clear">Очистити</v:String>
 
     <v:String x:Key="title_ntfs_more">Стиснення NTFS</v:String>
-    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
+    <v:String x:Key="text_ntfs_more">Увімкнення або вимкнення стиснення NTFS. Особливо ефективно для текстових файлів, допомагає заощадити місце на диску.</v:String>
 
-    <v:String x:Key="title_registry_more">Registry Backup</v:String>
-    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
-    <v:String x:Key="btn_create">Create</v:String>
+    <v:String x:Key="title_registry_more">Резервування реєстру</v:String>
+    <v:String x:Key="text_registry_more">Створення резервної копії реєстру Windows. Рекомендовано перед внесенням змін, щоб можна було відновити систему.</v:String>
+    <v:String x:Key="btn_create">Створити</v:String>
 
     <v:String x:Key="title_over_more">Підтвердження очищення диска</v:String>
     <v:String x:Key="text_over_more">На вашому диску знайдено папку Windows.old, яка містить файли попередньої версії Windows і займає значний обсяг дискового простору. Увага: Після видалення вміст папки відновити буде неможливо, тому переконайтеся, що всі необхідні файли збережено.</v:String>
@@ -207,7 +207,7 @@
     <v:String x:Key="tgl19_intf">Компактний режим елементів провідника</v:String>
     <v:String x:Key="tgl20_intf">Помічники «Copilot» та «Recall»</v:String>
     <v:String x:Key="tgl21_intf">«Завершити завдання» ПКМ на додатку</v:String>
-    <v:String x:Key="tgl22_intf">Show window snap layouts</v:String>
+    <v:String x:Key="tgl22_intf">Показувати макети прив’язки вікон</v:String>
     <v:String x:Key="tgl23_intf">Піктограми та кнопки на панелі завдань</v:String>
     <v:String x:Key="tgl24_intf">Показувати персоналізовану рекламу</v:String>
     <v:String x:Key="tgl25_intf">Відновлювати останні вікна папок під час входу</v:String>
@@ -219,8 +219,8 @@
     <v:String x:Key="tgl31_intf">Пошуковий запит з інтеграцією «Bing» в меню «Пуск»</v:String>
     <v:String x:Key="tgl32_intf">Відкривати «Швидкий доступ» замість «Цей ПК»</v:String>
     <v:String x:Key="tgl33_intf">Відображення розширень файлів у провіднику</v:String>
-    <v:String x:Key="tgl34_intf">Spontaneous brightness changes</v:String>
-    
+    <v:String x:Key="tgl34_intf">Спонтанна зміна яскравості</v:String>
+
     <v:String x:Key="tgl1_desc_intf">Це налаштування змінить колір виділення курсором з синього на сірий «колір мокрого асфальту».</v:String>
     <v:String x:Key="tgl2_desc_intf">Це налаштування змінить колір спливної підказки в деяких програмах з жовтого на блідо-блакитний «небесна блакить».</v:String>
     <v:String x:Key="tgl3_desc_intf">Це налаштування зменшить розмір стандартних кнопок вікна Згорнути, Розгорнути, Закрити. Змінюється розмір для всіх вікон, таких як провідник, фотографії, браузери та інші відомі програми.</v:String>
@@ -240,13 +240,13 @@
     <v:String x:Key="tgl17_desc_intf">Це налаштування поверне звичне класичне контекстне меню для робочого столу та «Провідника». Увага, екран може мерехтіти.</v:String>
     <v:String x:Key="tgl18_desc_intf">Іноді Windows 11 показує поради щодо використання тої чи іншої функції, наприклад, нового меню «Пуск» або «Швидкі налаштування». Це корисно під час першого знайомства з Windows 11, потім лише відволікає.</v:String>
     <v:String x:Key="tgl19_desc_intf">Як усталено, Windows додає відступи між елементами в провіднику. Нову функцію розроблено для сенсорних екранів. Це налаштування відновлює класичний макет файлового провідника шляхом видалення відступів між елементами та позбавляє необхідності пошуку налаштувань.</v:String>
-    <v:String x:Key="tgl20_desc_intf">The tweak disables and, where possible, hides Copilot icons on the taskbar, in the «Start Menu», in Edge, and in Notepad, blocking its functionality, and also disables Recall. At the same time, the core Copilot application itself is not affected, remains in the system, and can be used if needed. Copilot can only be fully removed along with Microsoft Edge. If these AI features are not present in your Windows initially, using the tweak is pointless.</v:String>
+    <v:String x:Key="tgl20_desc_intf">Це налаштування вимикає і, де це можливо, приховує значки Copilot на панелі завдань, у меню «Пуск», в Edge та Блокноті, блокує його функціональність, а також вимикає Recall. У той же час, це налаштування на Copilot не впливає і програма залишається в системі і може бути використана за потреби. Copilot можна повністю видалити лише разом разом з Microsoft Edge. Якщо цих функцій ШІ у вашій Windows немає, використання цього налаштування не має сенсу.</v:String>
     <v:String x:Key="tgl21_desc_intf">Це налаштування дозволить додати команду «Завершити завдання» в контекстне меню, яке відкривається після натискання правою кнопкою миші на додатку на панелі завдань. Це пришвидшує завершення процесів без необхідності відкривати диспетчер завдань. Увага, екран може мерехтіти.</v:String>
-    <v:String x:Key="tgl22_desc_intf">If you don’t need to see the snap layout suggestions when hovering over the «Maximize» button, you can disable this option.</v:String>
-    <v:String x:Key="tgl23_desc_intf">This tweak removes the «Search», «Task View», and «Chat» icons, and hides the «Learn about this picture» element. On older builds of Windows 11, it also removes the Copilot icon. For Windows 10 users, it additionally disables «News and Interests» and Cortana. Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl22_desc_intf">Можна вимкнути, якщо не хочете, щоб під час наведення курсору на кнопку «Розгорнути» відображалися макети прив’язки вікон.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Це тонке налаштування видаляє піктограми «Пошук», «Подання завдань», «Чат» і ярлик «Додаткова інформація про це зображення». У старіших збірках Windows 11 також видаляє піктограму «Copilot». Для користувачів Windows 10 додатково видалятимуться «Новини та інтереси» та «Cortana». Увага, екран може миготіти.</v:String>
     <v:String x:Key="tgl24_desc_intf">Як усталено, Windows використовує зібрану інформацію для цільової реклами - реклами, що відповідає вашим інтересам. Практично ця реклама розміщуватиметься там, де є вільне місце для відображення. Якщо ви не хочете, щоб Windows відображала персоналізовану рекламу у всіх додатках Магазину, в Провіднику, в Налаштуваннях та меню «Пуск», можете вимкнути це сміття.</v:String>
     <v:String x:Key="tgl25_desc_intf">Як усталено, Windows не зберігає позиції вікон та їх стан після вимкнення комп'ютера. Це налаштування дозволить запам'ятати вигляд відкритих папок, щоб відновлювати його виходу з системи, перезавантаження та вимкнення комп'ютера.</v:String>
-    <v:String x:Key="tgl26_desc_intf">Tweak allows disabling all Windows tips and notifications, including online hints in settings, as well as disabling Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is suddenly appearing pop-up that aggressively prompts user to «complete device setup urgently» and sign in to Microsoft account.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Це налаштування вимкнути всі порадами у сповіщеннях Windows разом із онлайн-підказками в налаштуваннях, а також вимкнути Second Chance Out of Box Experience (SCOOBE) для користувачів Windows 11. SCOOBE - це вікно, що виникає раптово, надокучливо пропонує користувачу «терміново завершити налаштування пристрою та увійти в обліковий запис Microsoft.</v:String>
     <v:String x:Key="tgl27_desc_intf">Це налаштування дозволяє приховати у вікні «Цей ПК» наступні папки: Робочий стіл, Відео, Документи, Завантаження, Зображення, Музика. Увага, екран може мерехтіти.</v:String>
     <v:String x:Key="tgl28_desc_intf">Це налаштування видаляє елемент 3D Objects з області переходів провідника (деревоподібний список в лівій частині вікна). Увага, екран може мерехтіти.</v:String>
     <v:String x:Key="tgl29_desc_intf">Як усталено, Windows знижує якість зображень шпалер робочого столу в форматі JPEG до 85%. Це налаштування встановлює для шпалер в форматі JPEG якість 100%.</v:String>
@@ -254,7 +254,7 @@
     <v:String x:Key="tgl31_desc_intf">Як усталено, Windows надсилає все, що ви шукаєте у меню «Пуск», на свої сервери, щоб надавати вам результати пошуку в Bing. Якщо вам не потрібна інтеграція з Bing у меню «Пуск», застосуйте це налаштування, щоб вимкнути пошук у веб. Увага, екран може мерехтіти.</v:String>
     <v:String x:Key="tgl32_desc_intf">Як усталено, файловий провідник відкривається на вкладці «Швидкий доступ». Щоб відкрити будь-який диск, потрібно виконати додаткові дії. Якщо це налаштування вимкнено, файловий провідник відкриває вкладку «Цей ПК», а не «Швидкий доступ».</v:String>
     <v:String x:Key="tgl33_desc_intf">Як усталено, розширення файлів у Windows приховуються, що робить інтерфейс Провідника менш завантаженим. Якщо потрібно, можна увімкнути відображення розширень файлів за допомогою цього налаштування, заощаджуючи час на пошук. Увага, екран може мерехтіти.</v:String>
-    <v:String x:Key="tgl34_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
+    <v:String x:Key="tgl34_desc_intf">На деяких пристроях яскравість екрана може спонтанно змінюватися залежно від вмісту, що відображається. Якщо вимкнення HDR, динамічної яскравості та налаштувань живлення не допомагає (проблема особливо поширена на ноутбуках, які працюють від акумулятора), можна спробувати це тонке налаштування - воно примусово вимикає автоматичне регулювання яскравості на системному рівні. Проте ручна зміна яскравості залишається доступною.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
@@ -291,7 +291,7 @@
     <v:String x:Key="Paint3D_pkg">Paint3D</v:String>
     <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
     <v:String x:Key="People_pkg">Люди</v:String>
-    <v:String x:Key="BingNews_pkg">Microsoft News</v:String>
+    <v:String x:Key="BingNews_pkg">Новини</v:String>
     <v:String x:Key="Todos_pkg">Microsoft To Do</v:String>
     <v:String x:Key="Alarms_pkg">Будильники та годинник Windows</v:String>
     <v:String x:Key="Phone_pkg">Зв'язок з телефоном</v:String>
@@ -307,17 +307,17 @@
     <v:String x:Key="WebMediaExtensions_pkg">Розширення для інтернету-мультимедіа</v:String>
     <v:String x:Key="OneConnect_pkg">Тарифні плани</v:String>
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
-    <v:String x:Key="Notepad_pkg">Notepad</v:String>
-    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Notepad_pkg">Блокнот</v:String>
+    <v:String x:Key="Calculator_pkg">Калькулятор</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
-    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
-    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Whiteboard_pkg">Цифрова онлайн-дошка - Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Гаманець - Microsoft Wallet</v:String>
     <v:String x:Key="Spotify_pkg">Spotify</v:String>
     <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
     
     <v:String x:Key="title_over_pkg">Підтвердження видалення</v:String>
-    <v:String x:Key="text_over_pkg" xml:space="preserve">You are about to uninstall the Microsoft Edge browser. This will also remove the EdgeWebView component, which is used to display web content in various applications — such as Microsoft Office (e.g., Meeting Insights, Room Finder), the Photos app (the new version uses WebView2), some Telegram bots, and other programs that rely on embedded WebView. Before proceeding, make sure you do not need this component. 
-       In recent builds of Windows 11, Copilot is implemented via EdgeWebView as a PWA or system wrapper. When Edge is uninstalled, Copilot is also removed, since it functions as a web wrapper.</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">Ви збираєтесь видалити браузер Microsoft Edge. При цьому буде видалений компонент EdgeWebView, який використовується для відображення веб-сторінок у додатках — таких як Microsoft Office (наприклад, Meeting Insights, Room Finder), стандартний додаток «Фотографії» (нова версія використовує WebView2), деякі боти Telegram, а також інші програми, які залежать від вбудованого WebView. Перед тим як продовжити, переконайтесь, що цей компонент вам справді не потрібен. 
+      У останніх збірках Windows 11 Copilot реалізовано через EdgeWebView як PWA або системну оболонку. При видаленні Edge Copilot також буде видалений, оскільки він працює як web wrapper.</v:String>
     <v:String x:Key="question_over_pkg">Хочете продовжити видалення разом з EdgeWebView?</v:String>
     <v:String x:Key="btn_cancel">Скасувати</v:String>
     <v:String x:Key="btn_delete">Видалити</v:String>
@@ -336,7 +336,7 @@
     <v:String x:Key="tgl10_svc">Служби, пов’язані з роботою факсу</v:String>
     <v:String x:Key="tgl11_svc">Служби, пов'язані з режимом планшета/смартфона</v:String>
     <v:String x:Key="tgl12_svc">Служби, пов’язані з роботою додаткових моніторів</v:String>
-    <v:String x:Key="tgl13_svc">Service related to system components</v:String>
+    <v:String x:Key="tgl13_svc">Служба, пов'язана із системними компонентами</v:String>
     <v:String x:Key="tgl14_svc">Служби, пов’язані з роботою локальної мережі</v:String>
     <v:String x:Key="tgl15_svc">Служби, пов’язані з USB-модемами та роутерами</v:String>
     <v:String x:Key="tgl16_svc">Служби, пов’язані з клієнтами VPN</v:String>
@@ -352,21 +352,21 @@
     <v:String x:Key="tgl26_svc">Служби, пов’язані з фоновою діагностикою</v:String>
     <v:String x:Key="tgl27_svc">Служби, пов’язані з корпоративними засобами</v:String>
     <v:String x:Key="tgl28_svc">Служба, пов’язана з роботою Hyper-V</v:String>
-    <v:String x:Key="tgl29_svc">Services related to push notifications</v:String>
-    
+    <v:String x:Key="tgl29_svc">Служби, пов'язані з push-сповіщеннями</v:String>
+
     <v:String x:Key="tgl1_desc_svc">Можна вимкнути, якщо ви не використовуєте історію файлів та індексацію вмісту.</v:String>
     <v:String x:Key="tgl2_desc_svc">Можна вимкнути, якщо ви не використовуєте Xbox та маніпулятор Microsoft Gamepad.</v:String>
     <v:String x:Key="tgl3_desc_svc">Можна вимкнути, якщо ви не плануєте оновлювати Windows. Також буде змінено файли, відповідальні за оновлення Windows. Через це, навіть якщо служби увімкнути, Центр оновлень не працюватиме. Зверніть увагу, це налаштування впливає на завантаження та оновлення програм із Магазину Windows.</v:String>
     <v:String x:Key="tgl4_desc_svc">Можна вимкнути, якщо ви не використовуєте Магазин Windows та його UWP додатки.</v:String>
     <v:String x:Key="tgl5_desc_svc">Можна вимкнути, якщо не хочете, щоб служби аналізували продуктивність вашої системи.</v:String>
-    <v:String x:Key="tgl6_desc_svc">Disable if you do not use sign-in with a PIN, fingerprint, facial recognition, or other Windows Hello methods. If a sign-in method has already been set up, it will continue to work, but you’ll need to re-enable Windows Hello to modify or remove it.</v:String>
+    <v:String x:Key="tgl6_desc_svc">Можна вимкнути, якщо ви не використовуєте вхід за допомогою PIN-коду, відбитків пальців, розпізнавання обличчя або інших методів Windows Hello. Якщо метод входу вже налаштовано, він і надалі працюватиме, але для його зміни або видалення потрібно буде знову увімкнути Windows Hello.</v:String>
     <v:String x:Key="tgl7_desc_svc">Можна вимкнути, якщо ви не використовуєте Bluetooth та пристрої, робота яких пов'язана з Bluetooth.</v:String>
     <v:String x:Key="tgl8_desc_svc">Можна вимкнути, якщо не плануєте використовувати принтер.</v:String>
     <v:String x:Key="tgl9_desc_svc">Можна вимкнути, якщо не плануєте використовувати сканер.</v:String>
     <v:String x:Key="tgl10_desc_svc">Можна вимкнути, якщо не плануєте використовувати факс.</v:String>
     <v:String x:Key="tgl11_desc_svc">Можна вимкнути, якщо у вас стаціонарний комп'ютер, ноутбук або нетбук.</v:String>
     <v:String x:Key="tgl12_desc_svc">Можна вимкнути, якщо у вас лише один монітор, і ви не плануєте підключати додаткові.</v:String>
-    <v:String x:Key="tgl13_desc_svc">Disable if you do not use these apps: «Virtual Desktops», «Your Phone», and «Night Light». This service processes user data and synchronizes it with Microsoft servers. It is not critical for the system’s operation; however, some features, such as «Night Light» in Windows 10, may stop working completely or partially if it is disabled.</v:String>
+    <v:String x:Key="tgl13_desc_svc">Можна вимкнути, якщо не використовуєте програми «Віртуальні робочі столи», «Телефон» і «Нічник». Ця служба обробляє дані користувачів і синхронізує їх із серверами Microsoft. Вимкнення не критичне для роботи системи, однак деякі функції, наприклад, «Нічник» у Windows 10, можуть повністю або частково перестати працювати, якщо службу вимкнути.</v:String>
     <v:String x:Key="tgl14_desc_svc">Можна вимкнути, якщо ви не використовуєте локальну мережу і не плануєте в майбутньому.</v:String>
     <v:String x:Key="tgl15_desc_svc">Можна вимкнути, якщо ви підключаєтеся до Інтернету за допомогою кабелю або Wi-Fi.</v:String>
     <v:String x:Key="tgl16_desc_svc">Можна вимкнути, якщо ви не використовуєте клієнтів VPN. Може вплинути на роботу Xbox.</v:String>
@@ -378,11 +378,11 @@
     <v:String x:Key="tgl22_desc_svc">Можна вимкнути, якщо ви не використовуєте режим кіоску Windows. Цей режим спрощує інтерфейс: запускається лише один UWP-додаток на весь екран, а доступ до інших функцій блокується. Зверніть увагу, що це може завадити встановленню оновлень Windows та програм через Windows Installer, оскільки також вимикається підготовка та ініціалізація системних даних і додатків при першому вході.</v:String>
     <v:String x:Key="tgl23_desc_svc">Можна вимкнути, якщо ви не використовуєте шифрування дисків BitLocker та EFS-шифрування файлів або папок.</v:String>
     <v:String x:Key="tgl24_desc_svc">Можна вимкнути, якщо всі потрібні вам мови вже налаштовано, і додавання нових не планується.</v:String>
-    <v:String x:Key="tgl25_desc_svc">Можна вимкнути, якщо ви не використовуєте Захисник Windows та всі пов'язані з ним додаткові засоби безпеку Windows.</v:String>
+    <v:String x:Key="tgl25_desc_svc">Можна вимкнути, якщо ви не використовуєте Захисник Windows та всі пов'язані з ним додаткові засоби безпеки Windows.</v:String>
     <v:String x:Key="tgl26_desc_svc">Можна вимкнути, якщо не хочете, щоб Windows марно завантажувала комп'ютер фоновою діагностикою.</v:String>
     <v:String x:Key="tgl27_desc_svc">Можна вимкнути, якщо ви не використовуєте віддалене керування корпоративними додатками, і у вас немає віддаленого сервера, з яким з'єднується ваш комп'ютер.</v:String>
     <v:String x:Key="tgl28_desc_svc">Можна вимкнути, якщо ви не використовуєте вбудовану систему віртуалізації. Це не впливає на роботу таких додатків як VirtualBox тощо.</v:String>
-    <v:String x:Key="tgl29_desc_svc">Disable if you do not use paired devices and do not install apps from the Windows Store remotely. These services handle the Notification Center with paired devices, process push requests, allow Windows to detect your smartphone for the «Your Phone» app, automatically reconnect to it, and display its messages and events in the Action Center. In Windows 10, after disabling them, the Notification Center may stop opening.</v:String>
+    <v:String x:Key="tgl29_desc_svc">Можна вимкнути, якщо не використовуєте сполучені пристрої або віддалено не встановлюєте програми з Магазину Windows. Ці служби забезпечують роботу Центру сповіщень зі сполученими пристроями, обробку push-запитів та дозволяють програмі «Телефон» знаходити ваш смартфон, автоматично підключатися до нього та відображати його повідомлення та події в Центрі сповіщень. У Windows 10 після вимкнення цих служб Центр сповіщень може не відкриватися.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -400,7 +400,7 @@
     <v:String x:Key="tgl8_sys">Час очікування перед вимкненням екрана блокування</v:String>
     <v:String x:Key="tgl9_sys">Технологія «Гібернація» та «Швидкий запуск»</v:String>
     <v:String x:Key="tgl10_sys">Вікно попередження під час завершення роботи</v:String>
-    <v:String x:Key="tgl11_sys">Попередження під час запуску виконуваних файлів</v:String>
+    <v:String x:Key="tgl11_sys">Попередження під час запуску будь-яких виконуваних файлів</v:String>
     <v:String x:Key="tgl12_sys">Автоматична діагностика оперативної пам’яті</v:String>
     <v:String x:Key="tgl13_sys">Протоколи Teredo, ISATAP та IPv6</v:String>
     <v:String x:Key="tgl14_sys">Стандартний розмір кешу файлової системи</v:String>
@@ -414,17 +414,17 @@
     <v:String x:Key="tgl22_sys">Використовувати функцію «Ігрова панель»</v:String>
     <v:String x:Key="tgl23_sys">Програми працюють у фоновому режимі</v:String>
     <v:String x:Key="tgl24_sys">Зарезервоване сховище у Windows</v:String>
-    <v:String x:Key="tgl25_sys">Dynamic and High Precision Event Timer</v:String>
-    <v:String x:Key="tgl26_sys">Hide «PC Health Check» from update system</v:String>
-    <v:String x:Key="tgl27_sys">Windows Insider’s Background Tasks</v:String>
-    <v:String x:Key="tgl28_sys">System Disk Defragmentation</v:String>
+    <v:String x:Key="tgl25_sys">Динамічний та надточний таймер подій</v:String>
+    <v:String x:Key="tgl26_sys">Приховування «PC Health Check» від системи оновлень</v:String>
+    <v:String x:Key="tgl27_sys">Фонові завдання Windows Insider</v:String>
+    <v:String x:Key="tgl28_sys">Дефрагментація системного диска</v:String>
     
     <v:String x:Key="slider1_desc_sys">Дозволяє змінити швидкість переміщення вказівника миші, заощаджуючи ваш час на пошук відповідних параметрів.</v:String>
     <v:String x:Key="slider2_desc_sys">Зміна затримки перед початком повторного введення символу, рекомендоване значення - 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Зміна швидкості повторного введення символу, рекомендоване значення - 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Як усталено, прискорення миші збільшує швидкість руху миші. Рекомендовано вимкнути прискорення, оскільки з ним погіршується плавність руху та точність позиціонування.</v:String>
     <v:String x:Key="tgl2_desc_sys">Якщо під час роботи на комп'ютері вам набридли вікна з пропозицією увімкнути залипання клавіш або фільтрування введення і після відповіді «Ні» такі вікна через деякий час знову з’являються, можна вимкнути цю функція. Фільтрація впливає на швидкість повторного введення на клавіатурі та пропуск повторних натискань клавіш.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Це налаштування вимикає та зупиняє служби Захисника Windows, SmartScreen, зменшує надмірне навантаження на процесор процесами Antimalware та Virtualization-Based Security (VBS). For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
+    <v:String x:Key="tgl3_desc_sys">Це налаштування вимикає та зупиняє служби Захисника Windows, SmartScreen, зменшує надмірне навантаження на процесор процесами Antimalware та Virtualization-Based Security (VBS). Для повного застосування змін система автоматично перезавантажиться в Безпечному режимі. Дії не потрібні - утиліта все зробить автоматично.</v:String>
     <v:String x:Key="tgl4_desc_sys">Це налаштування дозволяє повністю вимкнути UAC (контроль облікових записів), щоб прибрати піктограми щита, сповіщення про безпеку тощо. UAC не є повноцінною програмою для захисту системи.</v:String>
     <v:String x:Key="tgl5_desc_sys">Під час вимкнення будь-чого, що стосується безпеки чи захисту, ви постійно отримуєте про це сповіщення. Це налаштування вимикає сповіщення про безпеку від Центру сповіщень.</v:String>
     <v:String x:Key="tgl6_desc_sys">Якщо ви хочете оновлювати свої додатки з Магазину Microsoft самостійно, необхідно вимкнути функцію автоматичного оновлення. Таким чином, буде знижено навантаження на мережу.</v:String>
@@ -440,21 +440,21 @@
     <v:String x:Key="tgl16_desc_sys">Це налаштування вимикає запис історії використання файлів і папок, що відображаються на панелі швидкого доступу. Іншими словами, система більше не буде автоматично зберігати та показувати останні активні елементи.</v:String>
     <v:String x:Key="tgl17_desc_sys">Це налаштування вимикає автозапуск для підключених до вашого комп’ютера різних типів знімних носіїв, які провідник намагатиметься відкрити. Таким чином, невідома програма не зможе відкритися на носії, у надійності якого ви не впевнені.</v:String>
     <v:String x:Key="tgl18_desc_sys">Додається схема живлення «Максимальна продуктивність». Якщо така схема вже є, буде застосовано цю наявну схему живлення. Крім того, розблоковується встановлення максимальної частоти процесора в параметрах керування живленням процесора.</v:String>
-    <v:String x:Key="tgl19_desc_sys">Вимкніть, якщо ви не користуєтеся пристроями Bluetooth. Також буде видалено піктограму в області системних сповіщень (в треї).</v:String>
+    <v:String x:Key="tgl19_desc_sys">Можна вимкнути, якщо ви не користуєтеся пристроями Bluetooth. Також буде видалено піктограму в області системних сповіщень (в треї).</v:String>
     <v:String x:Key="tgl20_desc_sys">Брандмауер дозволяє керувати доступом програм до Інтернету шляхом дозволу або блокування підключення та контролювати трафік. Якщо ви впевнені у своїх діях і розумієте, що робите, можна вимкнути брандмауер, однак для більшості користувачів рекомендовано залишити його увімкненим.</v:String>
     <v:String x:Key="tgl21_desc_sys">Увімкнення «Ігрового режиму» не має великого впливу на потужних системах. Однак якщо у вас запущено багато фонових процесів, режим гарантує, що ці фонові процеси не впливатимуть на роботу гри.</v:String>
     <v:String x:Key="tgl22_desc_sys">Функція для запису ваших ігор. Можна вважати її малопродуктивною. Існує багато кращих альтернатив, які, на відміну від цього додатку, не відкриваються спонтанно.</v:String>
     <v:String x:Key="tgl23_desc_sys">Деякі програми дозволяють керувати фоновою активністю, що визначає їх роботу, коли вони перебувають у фоновому режимі та не використовуються активно. Загалом, вимкнення фонових програм допоможе зменшити споживання енергії та навантаження на мережу і процесор, що корисно для ноутбуків, оскільки подовжує час автономної роботи.</v:String>
     <v:String x:Key="tgl24_desc_sys">Зарезервоване сховище призначено для забезпечення передбачуваного розподілу вільного простору, який використовуватиметься оновленнями, додатками, тимчасовими файлами і системним кешем. Вимкнення сховища може звільнити значний обсяг простору. Однак, якщо у вас достатньо вільного місця, робити це не рекомендовано, ніяких додаткових переваг ви не отримаєте.</v:String>
-    <v:String x:Key="tgl25_desc_sys">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
-    <v:String x:Key="tgl26_desc_sys">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
-    <v:String x:Key="tgl27_desc_sys">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
-    <v:String x:Key="tgl28_desc_sys">If you have an SSD, disabling defragmentation and boot file optimization, which are effective only for hard drives (HDD), helps extend the lifespan of your drive. At the same time, the TRIM optimization function continues to work: it informs the SSD controller which data blocks are no longer in use and clears them, maintaining stable speed and drive longevity.</v:String>
+    <v:String x:Key="tgl25_desc_sys">Вимкнення динамічного таймера та HPET може покращити відгук системи за рахунок зменшення короткочасних гальмувань та спричинить незначне підвищення продуктивності. Однак ефект залежатиме від конфігурації: в деяких випадках, замість прискорення система навпаки може сповільнитися та працювати із затримками. Якщо ви використовуєте ноутбук, зауважте, що це також може дещо збільшити споживання електроенергії, оскільки процесор залишатиметься активнішим навіть під час бездіяльності.</v:String>
+    <v:String x:Key="tgl26_desc_sys">Це налаштування блокує надокучливе автоматичне встановлення PC Health Check - службової утиліти Microsoft, яка без вашого дозволу інтегрується в систему через службу оновлення Windows. Після встановлення програма починає докучати запитами на «перевірку готовності до Windows 11» та «рекомендаціями з оптимізації».</v:String>
+    <v:String x:Key="tgl27_desc_sys">Для учасників програми Windows Insider завдання мають бути увімкнені. Але якщо ви не учасник, всі завдання, пов'язані з програмою, стають зайвим баластом: споживають ресурси, створюють непотрібні журнали і можуть ініціювати телеметричні з'єднання без будь-якої користі. Вимкнення може прискорити запуск та загальну продуктивність системи, а також усунути непотрібні канали збору експериментальних даних.</v:String>
+    <v:String x:Key="tgl28_desc_sys">Якщо використовуєте SSD, вимкнення дефрагментації та оптимізації завантажувального файлу, які діють лише на жорстких дисках (HDD), допоможе продовжити термін служби диска. Проте функція оптимізації TRIM продовжить працювати: вона повідомляє контролеру SSD, які блоки даних більше не використовуються, і очищає їх, підтримуючи стабільну швидкість і довговічність накопичувача.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
     <v:String x:Key="title_win_name_sysinfo">Операційна система:</v:String>
-    <v:String x:Key="title_win_ver_sysinfo">Версія :</v:String>
+    <v:String x:Key="title_win_ver_sysinfo">Версія:</v:String>
     <v:String x:Key="label_proc_sysinfo">Запущені процеси:</v:String>
     <v:String x:Key="label_svc_sysinfo">служби:</v:String>
     <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
@@ -476,17 +476,14 @@
     <v:String x:Key="text_copy_sysinfo">Скопійовано!</v:String>
     <v:String x:Key="driver_not_installed_sysinfo">У вас не встановлено драйвер</v:String>
     <v:String x:Key="no_device_information_sysinfo">Не знайдено інформації про пристрій</v:String>
-    <v:String x:Key="unknown_information_sysinfo">Not detected</v:String>
+    <v:String x:Key="unknown_information_sysinfo">Не виявлено</v:String>
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">Select folder</v:String>
-    <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
-    <v:String x:Key="text_info_adds">Select a directory or make sure it is not empty</v:String>
-    <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
+    <v:String x:Key="btn_open_dir">Вибрати папку</v:String>
+    <v:String x:Key="chk_run_ti_adds">Запуск від імені TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">Виберіть каталог або переконайтеся, що він не порожній</v:String>
+    <v:String x:Key="scripts_info_adds">Після цього ви зможете запускати скрипти (.ps1, .cmd, .bat, .reg) на цій сторінці</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>
-
-
-
