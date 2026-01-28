@@ -85,6 +85,10 @@
   <summary> System </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/System.png"/>
 </details>
+<details>
+  <summary> Dodatki </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pl/Addons.png"/>
+</details>
 
 <h2> Wymagania systemowe</h2>
 

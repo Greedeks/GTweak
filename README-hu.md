@@ -84,6 +84,10 @@
   <summary> Rendszer </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/System.png"/>
 </details>
+<details>
+  <summary> Bővítmények </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Addons.png"/>
+</details>
 
 <h2> Rendszerkövetelmények</h2>
 
