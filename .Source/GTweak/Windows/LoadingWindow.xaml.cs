@@ -52,23 +52,19 @@ namespace GTweak.Windows
                 catch (Exception ex) { ErrorLogging.LogWritingFile(ex, member); }
             }
 
-            Parallel.Invoke(
-                () => ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService)),
-                () => ExecuteWithLogging(WindowsLicense.LicenseStatus, nameof(WindowsLicense.LicenseStatus)),
-                () => ExecuteWithLogging(_systemDiagnostics.GetHardwareData, nameof(_systemDiagnostics.GetHardwareData)),
-                () => ExecuteWithLogging(_systemDiagnostics.ValidateVersionUpdates, nameof(_systemDiagnostics.ValidateVersionUpdates)),
-                () => ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages)),
-                () => ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount)),
-                () => ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState)),
-                () => ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus)),
-                () => ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick))
-            );
-
-            ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _systemDiagnostics.GetProcessCount().Result, nameof(_systemDiagnostics.GetProcessCount));
-            ExecuteWithLogging(() => HardwareData.RunningServicesCount = _systemDiagnostics.GetServicesCount().Result, nameof(_systemDiagnostics.GetServicesCount));
+            ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
+            ExecuteWithLogging(WindowsLicense.LicenseStatus, nameof(WindowsLicense.LicenseStatus));
+            ExecuteWithLogging(() => _systemDiagnostics.GetHardwareData(), nameof(_systemDiagnostics.GetHardwareData));
+            ExecuteWithLogging(_systemDiagnostics.ValidateVersionUpdates, nameof(_systemDiagnostics.ValidateVersionUpdates));
+            ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
+            ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
+            ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
+            ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
+            ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
+            ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _systemDiagnostics.GetProcessCount().GetAwaiter().GetResult(), nameof(_systemDiagnostics.GetProcessCount));
+            ExecuteWithLogging(() => HardwareData.RunningServicesCount = _systemDiagnostics.GetServicesCount().GetAwaiter().GetResult(), nameof(_systemDiagnostics.GetServicesCount));
             ExecuteWithLogging(() => _systemDiagnostics.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_systemDiagnostics.GetTotalProcessorUsage));
             ExecuteWithLogging(() => _systemDiagnostics.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_systemDiagnostics.GetPhysicalAvailableMemory));
-
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

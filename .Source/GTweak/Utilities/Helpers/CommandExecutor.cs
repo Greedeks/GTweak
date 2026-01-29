@@ -32,7 +32,8 @@ namespace GTweak.Utilities.Helpers
                 };
 
                 using Process process = new Process { StartInfo = startInfo };
-                process.Start();
+                try { process.Start(); }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
                 string output = process.StandardOutput.ReadToEnd();
                 string error = process.StandardError.ReadToEnd();

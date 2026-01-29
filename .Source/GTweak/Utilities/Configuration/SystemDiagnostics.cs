@@ -108,7 +108,7 @@ namespace GTweak.Utilities.Configuration
 
         internal void GetHardwareData()
         {
-            Parallel.Invoke(() =>
+            Task.Run(() =>
             {
                 try
                 {
@@ -117,50 +117,38 @@ namespace GTweak.Utilities.Configuration
                     isMsftAvailable = results?.Count > 0;
                 }
                 catch { isMsftAvailable = false; }
+
+                Parallel.Invoke(
+                    () => GetWallpaperImage(),
+                    () => GetBiosInfo(),
+                    () => GetMotherboardInfo(),
+                    () => GetProcessorInfo(),
+                    () => GetGraphicsInfo(),
+                    () => GetMemoryInfo(),
+                    () => RefreshDevicesData(),
+                    () => GetUserIpAddress()
+                );
             });
-
-            Parallel.Invoke(
-                GetWallpaperImage,
-                GetBiosInfo,
-                GetMotherboardInfo,
-                GetProcessorInfo,
-                GetGraphicsInfo,
-                GetMemoryInfo,
-                GetUserIpAddress
-            );
-
-            UpdatingDevicesData();
         }
 
-        internal void UpdatingDevicesData(DeviceType deviceType = DeviceType.All)
+        internal void RefreshDevicesData(DeviceType deviceType = DeviceType.All)
         {
-            string storage = string.Empty, audio = string.Empty, netAdapter = string.Empty;
-
-            switch (deviceType)
+            if (deviceType == DeviceType.Storage || deviceType == DeviceType.All)
             {
-                case DeviceType.Storage:
-                    Parallel.Invoke(() => storage = GetStorageDevices());
-                    Storage = storage;
-                    break;
-                case DeviceType.Audio:
-                    Parallel.Invoke(() => audio = GetAudioDevices());
-                    AudioDevice = audio;
-                    break;
-                case DeviceType.Network:
-                    Parallel.Invoke(() => netAdapter = GetNetworkAdapters());
-                    NetworkAdapter = netAdapter;
-                    break;
-                default:
-                    Parallel.Invoke
-                    (
-                        () => storage = GetStorageDevices(),
-                        () => audio = GetAudioDevices(),
-                        () => netAdapter = GetNetworkAdapters()
-                    );
-                    Storage = storage;
-                    AudioDevice = audio;
-                    NetworkAdapter = netAdapter;
-                    break;
+                string value = GetStorageDevices();
+                Storage = value;
+            }
+
+            if (deviceType == DeviceType.Audio || deviceType == DeviceType.All)
+            {
+                string value = GetAudioDevices();
+                AudioDevice = value;
+            }
+
+            if (deviceType == DeviceType.Network || deviceType == DeviceType.All)
+            {
+                string value = GetNetworkAdapters();
+                NetworkAdapter = value;
             }
         }
 
@@ -221,8 +209,12 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GetBiosInfo()
         {
-            string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).GetAwaiter().GetResult();
-            Bios.Mode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
+            try
+            {
+                string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).GetAwaiter().GetResult();
+                Bios.Mode = output.IndexOf("efi", StringComparison.OrdinalIgnoreCase) >= 0 ? "UEFI" : "Legacy Boot";
+            }
+            catch { Bios.Mode = string.Empty; }
 
             foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
             {

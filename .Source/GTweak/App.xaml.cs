@@ -73,7 +73,7 @@ namespace GTweak
         private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType)
         {
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
+            await backgroundQueue.QueueTask(delegate { _systemDiagnostics.RefreshDevicesData(deviceType); });
         }
 
         private static Uri GetResourceUri(string folder, bool isTheme = false) => isTheme ? new Uri($"Styles/Themes/{folder}/Colors.xaml", UriKind.Relative) : new Uri($"Languages/{folder}/Localize.xaml", UriKind.Relative);

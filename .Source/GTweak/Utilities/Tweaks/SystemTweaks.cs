@@ -194,14 +194,22 @@ namespace GTweak.Utilities.Tweaks
 
         internal static void ViewNetshState()
         {
-            string getStateNetsh = CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false).Result;
-            _isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
+            try
+            {
+                string getStateNetsh = CommandExecutor.GetCommandOutput("/c chcp 65001 & netsh int teredo show state & netsh int ipv6 isatap show state & netsh int isatap show state & netsh int ipv6 6to4 show state", false).GetAwaiter().GetResult();
+                _isNetshState = getStateNetsh.Contains("default") || getStateNetsh.Contains("enabled");
+            }
+            catch { _isNetshState = false; }
         }
 
         internal static void ViewConfigTick()
         {
-            string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).Result;
-            _isTickState = !Regex.IsMatch(output, @"(?is)(?=.*\bdisabledynamictick\s+(yes|true))(?=.*\buseplatformclock\s+(no|false))", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
+            try
+            {
+                string output = CommandExecutor.GetCommandOutput(PathLocator.Executable.BcdEdit).GetAwaiter().GetResult();
+                _isTickState = !Regex.IsMatch(output, @"(?is)(?=.*\bdisabledynamictick\s+(yes|true))(?=.*\buseplatformclock\s+(no|false))", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.CultureInvariant);
+            }
+            catch { _isTickState = false; }
         }
 
         [DllImport("user32.dll")]
@@ -502,7 +510,7 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton28":
                     SetTaskState(true, defragTask);
-                    RegistryHelp.Write(Registry.CurrentUser, @"""SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", isDisabled ? "N" : "Y", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", isDisabled ? "N" : "Y", RegistryValueKind.String);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\services\defragsvc", "Start", 2, RegistryValueKind.DWord);
                     break;
                 default:
