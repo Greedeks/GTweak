@@ -72,7 +72,7 @@
 
     <!--#region Main Window -->
     <v:String x:Key="rbtn_utils_main">Segédprogramok</v:String>
-    <v:String x:Key="rbtn_conf_main">Titoktartás</v:String>
+    <v:String x:Key="rbtn_conf_main">Adatgyűjtés</v:String>
     <v:String x:Key="rbtn_int_main">Interfész</v:String>
     <v:String x:Key="rbtn_app_main">Alkalmazások</v:String>
     <v:String x:Key="rbtn_svc_main">Szolgáltatás</v:String>
