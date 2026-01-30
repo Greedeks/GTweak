@@ -86,10 +86,7 @@ namespace GTweak.Utilities.Configuration
                     return bmp;
                 }
             }
-            catch (Exception ex)
-            {
-                ErrorLogging.LogDebug(ex);
-            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
             return (ImageSource)Application.Current.Resources["Icon_ProfileAvatar"];
         }

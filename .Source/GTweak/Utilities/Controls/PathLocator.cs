@@ -122,10 +122,7 @@ namespace GTweak.Utilities.Controls
                                     return candidateRel;
                                 }
                             }
-                            catch (Exception ex)
-                            {
-                                ErrorLogging.LogDebug(ex);
-                            }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                         }
                     }
 
@@ -179,10 +176,7 @@ namespace GTweak.Utilities.Controls
                                         break;
                                     }
                                 }
-                                catch (Exception ex)
-                                {
-                                    ErrorLogging.LogDebug(ex);
-                                }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                             }
 
                             if (found)
@@ -190,10 +184,7 @@ namespace GTweak.Utilities.Controls
                                 break;
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            ErrorLogging.LogDebug(ex);
-                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
 
                     if (found)

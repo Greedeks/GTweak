@@ -15,18 +15,38 @@ namespace GTweak.Utilities.Managers
         {
             if (tasklist != null && tasklist.Length != 0)
             {
-                using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                bool isEnabledFound = false;
 
-                foreach (var taskName in tasklist)
+                Parallel.ForEach(tasklist, () => new Microsoft.Win32.TaskScheduler.TaskService(),
+                (taskName, loopState, taskScheduler) =>
                 {
-                    Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskName);
-                    if (task != null && task.Enabled)
+                    try
                     {
-                        return true;
-                    }
-                }
+                        if (isEnabledFound)
+                        {
+                            loopState.Stop();
+                            return taskScheduler;
+                        }
 
-                return false;
+                        Microsoft.Win32.TaskScheduler.Task scheduledTask = taskScheduler.GetTask(taskName);
+
+                        if (scheduledTask != null && scheduledTask.Enabled)
+                        {
+                            isEnabledFound = true;
+                            loopState.Stop();
+                        }
+                    }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
+                    return taskScheduler;
+                },
+                taskScheduler =>
+                {
+                    try { taskScheduler.Dispose(); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                });
+
+                return isEnabledFound;
             }
 
             return false;

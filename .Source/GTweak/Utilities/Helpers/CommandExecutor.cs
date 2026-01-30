@@ -15,41 +15,35 @@ namespace GTweak.Utilities.Helpers
 
         internal static async Task<string> GetCommandOutput(string command, bool isPowerShell = true)
         {
-            return await Task.Run(async () =>
+            ProcessStartInfo startInfo = new ProcessStartInfo
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = isPowerShell ? PathLocator.Executable.PowerShell : PathLocator.Executable.CommandShell,
-                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    StandardOutputEncoding = Encoding.UTF8,
-                    StandardErrorEncoding = Encoding.UTF8,
-                    WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
-                };
+                FileName = isPowerShell ? PathLocator.Executable.PowerShell : PathLocator.Executable.CommandShell,
+                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                StandardOutputEncoding = Encoding.UTF8,
+                StandardErrorEncoding = Encoding.UTF8,
+                WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
+            };
 
-                using Process process = new Process { StartInfo = startInfo };
-                try { process.Start(); }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            using Process process = new Process { StartInfo = startInfo };
+            try { process.Start(); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                string output = process.StandardOutput.ReadToEnd();
-                string error = process.StandardError.ReadToEnd();
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
 
-                await process.WaitForExitAsync().ConfigureAwait(false);
+            await process.WaitForExitAsync().ConfigureAwait(false);
 
-                if (process.ExitCode == 0)
-                {
-                    return string.Join(Environment.NewLine, output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));
-                }
-                else
-                {
-                    Debug.WriteLine($"{process.ExitCode}: {error}");
-                    return string.Empty;
-                }
-            });
+            if (process.ExitCode == 0)
+            {
+                return string.Join(Environment.NewLine, output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries));
+            }
+
+            return string.Empty;
         }
 
         internal static void RunCommandAsTrustedInstaller(string command, bool isPowerShell = false) =>
@@ -147,7 +141,6 @@ namespace GTweak.Utilities.Helpers
 
             return Task.CompletedTask;
         }
-
 
         internal static string CleanCommand(string rawCommand)
         {

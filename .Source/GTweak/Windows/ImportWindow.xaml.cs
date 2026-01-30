@@ -158,10 +158,7 @@ namespace GTweak.Windows
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    ErrorLogging.LogDebug(ex);
-                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
                 appliedTweaks++;
                 progress.Report((byte)((double)appliedTweaks / totalTweaks * 100));
