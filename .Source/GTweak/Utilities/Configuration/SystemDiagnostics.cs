@@ -615,7 +615,7 @@ namespace GTweak.Utilities.Configuration
 
                 using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
 
-                foreach (string url in new[] { "https://free.freeipapi.com/api/json/", "https://api.db-ip.com/v2/free/self", "https://ipapi.co/json/", "https://reallyfreegeoip.org/json/", "https://get.geojs.io/v1/ip/geo.json", "http://ip-api.com/json/" })
+                foreach (string url in PathLocator.Links.IpServices)
                 {
                     try
                     {
@@ -683,7 +683,7 @@ namespace GTweak.Utilities.Configuration
 
             try
             {
-                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("https://api.github.com/repos/greedeks/gtweak/releases/latest");
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(PathLocator.Links.GitHubApi);
 
                 webRequest.ContentType = "application/json";
                 webRequest.UserAgent = "Nothing";

@@ -217,9 +217,9 @@ namespace GTweak.Windows
         {
             Process.Start(new ProcessStartInfo(((System.Windows.Controls.Image)sender).Uid switch
             {
-                "git" => "https://github.com/Greedeks",
-                "tg" => "https://t.me/Greedeks",
-                _ => "https://steamcommunity.com/id/greedeks/"
+                "git" => PathLocator.Links.GitHub,
+                "tg" => PathLocator.Links.Telegram,
+                _ => PathLocator.Links.Steam
             })
             { UseShellExecute = true });
         }

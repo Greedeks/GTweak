@@ -235,35 +235,38 @@ namespace GTweak.Utilities.Controls
 
             internal static (string Normal, string Block) FindWindowsUpdateExe(string normalName, string blockName)
             {
-                static string FindFile(string fileName)
+                static string TryFind(string name)
                 {
-                    string uusPath = Path.Combine(Folders.SystemDrive, "Windows", "UUS", "amd64", fileName);
-                    string system32Path = Path.Combine(Environment.SystemDirectory, fileName);
-
-                    if (File.Exists(uusPath))
+                    if (!string.IsNullOrWhiteSpace(name))
                     {
-                        return uusPath;
+                        try
+                        {
+                            string path = Path.Combine(Folders.SystemDrive, "Windows", "UUS", "amd64", name);
+
+                            if (File.Exists(path))
+                            {
+                                return path;
+                            }
+
+                            path = Path.Combine(Environment.SystemDirectory, name);
+                            return File.Exists(path) ? path : string.Empty;
+                        }
+                        catch { return string.Empty; }
                     }
 
-                    if (File.Exists(system32Path))
-                    {
-                        return system32Path;
-                    }
-
-                    return null;
+                    return string.Empty;
                 }
 
-                string normalPath = FindFile(normalName);
-                string blockPath = FindFile(blockName);
-
-                if (normalPath != null)
+                string normalPath = TryFind(normalName);
+                if (!string.IsNullOrEmpty(normalPath))
                 {
-                    return (normalPath, Path.Combine(Path.GetDirectoryName(normalPath), blockName));
+                    return (normalPath, Path.Combine(Path.GetDirectoryName(normalPath)!, blockName));
                 }
 
-                if (blockPath != null)
+                string blockPath = TryFind(blockName);
+                if (!string.IsNullOrEmpty(blockPath))
                 {
-                    return (Path.Combine(Path.GetDirectoryName(blockPath), normalName), blockPath);
+                    return (Path.Combine(Path.GetDirectoryName(blockPath)!, normalName), blockPath);
                 }
 
                 return (string.Empty, string.Empty);
@@ -293,6 +296,8 @@ namespace GTweak.Utilities.Controls
 
             internal static (string Normal, string Block) WaaSMedic => FindWindowsUpdateExe("WaaSMedicAgent.exe", "BlockUpdateAgent-GTweak.exe");
 
+            internal static (string Normal, string Block) MoNotificationUx => FindWindowsUpdateExe("MoNotificationUx.exe", "BlockUpdateNotify-GTweak.exe");
+
             internal static readonly string MpCmdRun = Path.Combine(Folders.SystemDrive, "Program Files", "Windows Defender", "MpCmdRun.exe");
 
             internal static readonly string DisablingWD = Path.Combine(Folders.DefenderBackup, "DisablingWD.exe");
@@ -321,6 +326,29 @@ namespace GTweak.Utilities.Controls
         {
             internal const string SubKey = @"Software\GTweak";
             internal static readonly string BaseKey = @$"HKEY_CURRENT_USER\{SubKey}";
+        }
+
+        internal static class Links
+        {
+            internal const string GitHub = "https://github.com/Greedeks";
+
+            internal const string Telegram = "https://t.me/Greedeks";
+
+            internal const string Steam = "https://steamcommunity.com/id/greedeks/";
+
+            internal const string GitHubLatest = "https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe";
+
+            internal const string GitHubApi = "https://api.github.com/repos/greedeks/gtweak/releases/latest";
+
+            internal static readonly IReadOnlyList<string> IpServices = Array.AsReadOnly(new[]
+            {
+                "https://free.freeipapi.com/api/json/",
+                "https://api.db-ip.com/v2/free/self",
+                "https://ipapi.co/json/",
+                "https://reallyfreegeoip.org/json/",
+                "https://get.geojs.io/v1/ip/geo.json",
+                "http://ip-api.com/json/"
+            });
         }
     }
 }

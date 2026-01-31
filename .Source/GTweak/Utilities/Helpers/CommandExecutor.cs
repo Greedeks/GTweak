@@ -149,7 +149,7 @@ namespace GTweak.Utilities.Helpers
                 return string.Empty;
             }
 
-            var lines = string.IsNullOrEmpty(rawCommand) ? new List<string>() : rawCommand.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).Where(line => !string.IsNullOrEmpty(line)).Select(line => Regex.Replace(line, @"\s+", " ")).ToList();
+            List<string> lines = string.IsNullOrEmpty(rawCommand) ? new List<string>() : rawCommand.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()).Where(line => !string.IsNullOrEmpty(line)).Select(line => Regex.Replace(line, @"\s+", " ")).ToList();
 
             if (lines.Count == 0)
             {

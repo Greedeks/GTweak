@@ -44,7 +44,7 @@ namespace GTweak.Windows
                 {
                     CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsEngine.currentName}\" && timeout /t 2 && del \"{SettingsEngine.currentLocation}\" && ren {tempFileName} \"{SettingsEngine.currentName}\" && \"{SettingsEngine.currentLocation}\"");
                 };
-                webClient.DownloadFileAsync(new Uri("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe"), tempFileName);
+                webClient.DownloadFileAsync(new Uri(PathLocator.Links.GitHubLatest), tempFileName);
             }
             catch
             {
