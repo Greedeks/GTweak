@@ -17,20 +17,25 @@ using Microsoft.Win32;
 
 namespace GTweak.Utilities.Maintenance
 {
-    internal sealed class WindowsLicense : WinKeyStorage
+    internal sealed class WinLicenseHandler : WinKeyStorage
     {
         internal static bool IsWindowsActivated = false;
 
-        private static bool IsVersionWindows(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(HardwareData.OS.Name).Count == words;
+        private static bool IsKeyExists(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(HardwareData.OS.Name).Count == words;
 
         internal static async void LicenseStatus()
         {
             try
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1").Get())
+                using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "SELECT LicenseStatus FROM SoftwareLicensingProduct WHERE ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f' and LicenseStatus = 1");
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
-                    IsWindowsActivated = (uint)managementObj["LicenseStatus"] == 1;
+                    using (managementObj)
+                    {
+                        IsWindowsActivated = (uint)managementObj["LicenseStatus"] == 1;
+                    }
                 }
+
             }
             catch (COMException)
             {
@@ -46,8 +51,8 @@ namespace GTweak.Utilities.Maintenance
 
         internal static async Task StartActivation()
         {
-            string keyWinHWID = keysHWID.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
-            string keyWinKMS = keysKMS.FirstOrDefault(k => IsVersionWindows(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
+            string keyWinHWID = keysHWID.FirstOrDefault(k => IsKeyExists(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
+            string keyWinKMS = keysKMS.FirstOrDefault(k => IsKeyExists(k.Key.pattern, k.Key.words)).Value ?? string.Empty;
 
             if (string.IsNullOrEmpty(keyWinHWID) && string.IsNullOrEmpty(keyWinKMS))
             {
@@ -64,7 +69,7 @@ namespace GTweak.Utilities.Maintenance
             {
                 if (HardwareData.OS.IsWin10)
                 {
-                    await CommandExecutor.InvokeRunCommand(@"/c assoc .vbs=VBSFile & ftype VBSFile=""%SystemRoot%\System32\WScript.exe"" ""%1"" %*""");
+                    await CommandExecutor.InvokeRunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[] { "assoc .vbs=VBSFile", "ftype VBSFile=\"%SystemRoot%\\System32\\WScript.exe\" \"%1\" %*" })));
                 }
 
                 await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keyWinHWID}");

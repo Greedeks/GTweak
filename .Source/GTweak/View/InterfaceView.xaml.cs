@@ -17,7 +17,7 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            if (!WindowsLicense.IsWindowsActivated)
+            if (!WinLicenseHandler.IsWindowsActivated)
             {
                 NotificationManager.Show("info", "warn_activate_noty").Perform();
             }

@@ -167,7 +167,7 @@
     <Compile Include="Utilities\Maintenance\SystemRestoreService.cs" />
     <Compile Include="Utilities\Tweaks\SystemTweaks.cs" />
     <Compile Include="Utilities\Tweaks\UninstallingPakages.cs" />
-    <Compile Include="Utilities\Maintenance\WindowsLicense.cs" />
+    <Compile Include="Utilities\Maintenance\WinLicenseHandler.cs" />
     <Compile Include="View\AddonsView.xaml.cs">
       <DependentUpon>AddonsView.xaml</DependentUpon>
     </Compile>

@@ -68,7 +68,7 @@ namespace GTweak.Utilities.Controls
         {
             foreach (var kv in _defaultSettings)
             {
-                if (RegistryHelp.ValueExists(PathLocator.Registry.BaseKey, kv.Key))
+                if (RegistryHelp.ValueExists(PathLocator.Registry.BaseKey, kv.Key) == false)
                 {
                     ChangingParameters(kv.Key, kv.Value);
                 }

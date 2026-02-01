@@ -53,7 +53,7 @@ namespace GTweak.Windows
             }
 
             ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
-            ExecuteWithLogging(WindowsLicense.LicenseStatus, nameof(WindowsLicense.LicenseStatus));
+            ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
             ExecuteWithLogging(() => _systemDiagnostics.GetHardwareData(), nameof(_systemDiagnostics.GetHardwareData));
             ExecuteWithLogging(_systemDiagnostics.ValidateVersionUpdates, nameof(_systemDiagnostics.ValidateVersionUpdates));
             ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));

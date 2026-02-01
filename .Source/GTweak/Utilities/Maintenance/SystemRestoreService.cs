@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -32,11 +33,17 @@ namespace GTweak.Utilities.Maintenance
                     EnableRestorePoint();
                 }
 
-                foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT Description, SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT Description, SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }))
                 {
-                    if (managementObj["Description"].ToString().IndexOf("GTweak", StringComparison.OrdinalIgnoreCase) >= 0)
+                    foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                     {
-                        SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]));
+                        using (managementObj)
+                        {
+                            if (managementObj["Description"]?.ToString().IndexOf("GTweak", StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]));
+                            }
+                        }
                     }
                 }
 
@@ -82,9 +89,15 @@ namespace GTweak.Utilities.Maintenance
 
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SPP\Clients", "{09F7EDC5-294E-4180-AF6A-FB0E6A0E9513}");
 
-            foreach (var managementObj in new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }))
             {
-                SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"].ToString()));
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]?.ToString()));
+                    }
+                }
             }
 
             DisableSR(PathLocator.Folders.SystemDrive + @"\\");

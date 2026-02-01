@@ -26,7 +26,7 @@ namespace GTweak.View
 
         private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
         {
-            if (WindowsLicense.IsWindowsActivated)
+            if (WinLicenseHandler.IsWindowsActivated)
             {
                 NotificationManager.Show("info", "ready_activate_noty").Perform();
             }
@@ -34,7 +34,7 @@ namespace GTweak.View
             {
                 if (new SystemDiagnostics().IsNetworkAvailable())
                 {
-                    await WindowsLicense.StartActivation();
+                    await WinLicenseHandler.StartActivation();
                 }
                 else
                 {

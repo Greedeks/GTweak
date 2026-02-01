@@ -79,7 +79,7 @@ namespace GTweak.Utilities.Helpers
                         GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                     }
 
-                    RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
+                    using RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
 
                     if (registryFolder != null)
                     {
@@ -95,26 +95,27 @@ namespace GTweak.Utilities.Helpers
             }).GetAwaiter().GetResult();
         }
 
-        internal static bool KeyExists(in RegistryKey registrykey, in string subkey, in bool isNegation = true)
+        internal static bool KeyExists(RegistryKey registryKey, string subKey, bool invert = false)
         {
-            bool result = registrykey.OpenSubKey(subkey) != null;
-            return isNegation ? result : !result;
+            using RegistryKey opened = registryKey.OpenSubKey(subKey);
+            bool result = opened != null;
+            return invert ? !result : result;
         }
 
-        internal static bool ValueExists(string subKey, string valueName, in bool isNegation = true)
+        internal static bool ValueExists(string subKey, string valueName, bool invert = false)
         {
-            bool result = (Registry.GetValue(subKey, valueName, null) ?? null) == null;
-            return isNegation ? result : !result;
+            bool result = Registry.GetValue(subKey, valueName, null) != null;
+            return invert ? !result : result;
         }
 
-        internal static bool CheckValue(in string subkey, in string valueName, in string expectedValue, in bool isNegation = true)
+        internal static bool CheckValue(string subKey, string valueName, string expectedValue, bool invert = false)
         {
-            string value = Registry.GetValue(subkey, valueName, null)?.ToString();
-            bool result = value != null && value == expectedValue;
-            return isNegation ? !result : result;
+            string value = Registry.GetValue(subKey, valueName, null)?.ToString();
+            bool result = !string.Equals(value, expectedValue, StringComparison.OrdinalIgnoreCase);
+            return invert ? !result : result;
         }
 
-        internal static bool CheckValueBytes(in string subkey, in string valueName, in string expectedValue)
+        internal static bool CheckValueBytes(string subkey, string valueName, string expectedValue)
         {
             if (!(Registry.GetValue(subkey, valueName, null) is byte[]))
             {
@@ -124,7 +125,7 @@ namespace GTweak.Utilities.Helpers
             return string.Concat(Registry.GetValue(subkey, valueName, null) as byte[] ?? Array.Empty<byte>()) != expectedValue;
         }
 
-        internal static T GetValue<T>(in string subKey, in string valueName, in T defaultValue)
+        internal static T GetValue<T>(string subKey, string valueName, T defaultValue)
         {
             try { return (T)Convert.ChangeType(Registry.GetValue(subKey, valueName, defaultValue), typeof(T)); }
             catch { return defaultValue; }

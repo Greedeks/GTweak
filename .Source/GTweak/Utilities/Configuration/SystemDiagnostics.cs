@@ -95,9 +95,15 @@ namespace GTweak.Utilities.Configuration
         {
             string nameProfile = string.Empty;
 
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLowerInvariant()}'", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", $"select FullName from Win32_UserAccount where domain='{Environment.UserDomainName}' and name='{Environment.UserName.ToLowerInvariant()}'", new EnumerationOptions { ReturnImmediately = true }))
             {
-                nameProfile = managementObj["FullName"] as string;
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        nameProfile = managementObj["FullName"] as string;
+                    }
+                }
             }
 
             return !string.IsNullOrWhiteSpace(nameProfile) ? nameProfile : Environment.UserName.ToLowerInvariant();
@@ -109,9 +115,10 @@ namespace GTweak.Utilities.Configuration
             {
                 try
                 {
-                    using var managementObj = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
-                    var results = managementObj?.Get();
+                    using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select FriendlyName from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
+                    using ManagementObjectCollection results = searcher.Get();
                     isMsftAvailable = results?.Count > 0;
+
                 }
                 catch { isMsftAvailable = false; }
 
@@ -188,14 +195,21 @@ namespace GTweak.Utilities.Configuration
             int revisionNumber = RegistryHelp.GetValue(regPath, "UBR", 0);
             string release = RegistryHelp.GetValue(regPath, "DisplayVersion", string.Empty);
 
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Caption, Description, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Caption, Description, OSArchitecture, BuildNumber, Version from Win32_OperatingSystem", new EnumerationOptions { ReturnImmediately = true }))
             {
-                string data = new[] { "Caption", "Description" }.Select(p => managementObj[p] as string).FirstOrDefault(s => !string.IsNullOrWhiteSpace(s)) ?? string.Empty;
-                OS.Name = $"{(data.Contains('W') ? data.Substring(data.IndexOf('W')) : data)} {Regex.Replace(managementObj["OSArchitecture"]?.ToString() ?? string.Empty, @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
-                OS.Version = $"{managementObj["Version"]?.ToString() ?? "0"}.{revisionNumber}\n";
-                OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : decimal.TryParse(Registry.GetValue(regPath, "CurrentBuild", "0")?.ToString(), out result) ? result : 0;
-
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        string data = new string[] { "Caption", "Description" }.Select(p => managementObj[p] as string).FirstOrDefault(s => !string.IsNullOrWhiteSpace(s)) ?? string.Empty;
+                        OS.Name = $"{(data.Contains('W') ? data.Substring(data.IndexOf('W')) : data)} {Regex.Replace(managementObj["OSArchitecture"]?.ToString() ?? string.Empty, @"\-.+", "-bit")} {(!string.IsNullOrWhiteSpace(release) ? $"({release})" : string.Empty)}\n";
+                        OS.Version = $"{managementObj["Version"]?.ToString() ?? "0"}.{revisionNumber}\n";
+                        OS.Build = decimal.TryParse($"{Convert.ToString(managementObj["BuildNumber"])}.{revisionNumber}", NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal result) ? result : decimal.TryParse(Registry.GetValue(regPath, "CurrentBuild", "0")?.ToString(), out result) ? result : 0;
+                    }
+                }
             }
+
+
             OS.Name = !string.IsNullOrWhiteSpace(OS.Name) ? OS.Name.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "ProductName", "Windows")?.ToString();
             OS.Version = !string.IsNullOrWhiteSpace(OS.Version) ? OS.Version.TrimEnd('\n', '\r') : Registry.GetValue(regPath, "LCUVer", 0)?.ToString();
         }
@@ -213,33 +227,51 @@ namespace GTweak.Utilities.Configuration
             }
             catch { Bios.Mode = string.Empty; }
 
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, Caption, Description, SMBIOSBIOSVersion, SerialNumber from Win32_BIOS", new EnumerationOptions { ReturnImmediately = true }))
             {
-                string data = new[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                string dataSN = managementObj["SerialNumber"]?.ToString() ?? string.Empty;
-                Bios.Data += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        string data = new string[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                        string dataSN = managementObj["SerialNumber"]?.ToString() ?? string.Empty;
+                        Bios.Data += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
+                    }
+                }
             }
+
             Bios.Data = Bios.Data.TrimEnd('\n', '\r');
         }
 
         private void GetMotherboardInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }))
             {
-                string data = $"{managementObj["Manufacturer"]?.ToString() ?? string.Empty}{managementObj["Product"]?.ToString() ?? string.Empty}";
-                string dataVersion = managementObj["Version"]?.ToString() ?? string.Empty;
-                Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        string data = $"{managementObj["Manufacturer"]?.ToString() ?? string.Empty}{managementObj["Product"]?.ToString() ?? string.Empty}";
+                        string dataVersion = managementObj["Version"]?.ToString() ?? string.Empty;
+                        Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
+                    }
+                }
             }
             Motherboard = Motherboard.TrimEnd('\n', '\r');
         }
-
         private void GetProcessorInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }))
             {
-                Processor.Data = $"{managementObj["Name"]?.ToString() ?? string.Empty}\n";
-                Processor.Cores = managementObj["NumberOfCores"]?.ToString() ?? string.Empty;
-                Processor.Threads = managementObj["NumberOfLogicalProcessors"]?.ToString() ?? string.Empty;
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        Processor.Data = $"{managementObj["Name"]?.ToString() ?? string.Empty}\n";
+                        Processor.Cores = managementObj["NumberOfCores"]?.ToString() ?? string.Empty;
+                        Processor.Threads = managementObj["NumberOfLogicalProcessors"]?.ToString() ?? string.Empty;
+                    }
+                }
             }
             Processor.Data = Processor.Data.TrimEnd('\n', '\r');
         }
@@ -312,14 +344,20 @@ namespace GTweak.Utilities.Configuration
                 return (false, string.Empty, string.Empty);
             }
 
-
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }))
             {
-                string data = managementObj["Name"] as string ?? string.Empty;
-                (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
-                Graphics += $"{(data == null && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
-                VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        string data = managementObj["Name"] as string ?? string.Empty;
+                        (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
+                        Graphics += $"{(string.IsNullOrEmpty(data) && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
+                        VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
+                    }
+                }
             }
+
             Graphics = Graphics.TrimEnd('\n', '\r');
         }
 
@@ -329,51 +367,59 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GetMemoryInfo()
         {
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }))
             {
-                string speedData = new[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
-                string data = new[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
-                string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
-                    2 => "DRAM",
-                    3 => "EDRAM",
-                    4 => "VRAM",
-                    5 => "SRAM",
-                    6 => "RAM",
-                    7 => "ROM",
-                    8 => "Flash",
-                    9 => "EEPROM",
-                    10 => "FEPROM",
-                    11 => "EPROM",
-                    12 => "CDRAM",
-                    13 => "3DRAM",
-                    14 => "SDRAM",
-                    15 => "SGRAM",
-                    16 => "RDRAM",
-                    17 => "DDR",
-                    18 => "DDR2",
-                    19 => "DDR2 FB-DIMM",
-                    20 => "Reserved",
-                    21 => "Reserved",
-                    22 => "FBD2",
-                    23 => "DDR3",
-                    24 => "DDR3",
-                    uint type when type == 25 || type == 26 => "DDR4",
-                    27 => "LPDDR",
-                    28 => "LPDDR2",
-                    29 => "LPDDR3",
-                    30 => "LPDDR4",
-                    31 => "LPDDR4X",
-                    32 => "Logical Non-Volatile",
-                    33 => "HBM",
-                    34 => "DDR5",
-                    35 => "LPDDR5",
-                    36 => "LPDDR5X",
-                    _ => string.Empty,
-                };
-                Memory.Type = memoryType;
-                Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                    using (managementObj)
+                    {
+                        string speedData = new string[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
+                        string data = new string[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
+                        string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
+                        {
+                            2 => "DRAM",
+                            3 => "EDRAM",
+                            4 => "VRAM",
+                            5 => "SRAM",
+                            6 => "RAM",
+                            7 => "ROM",
+                            8 => "Flash",
+                            9 => "EEPROM",
+                            10 => "FEPROM",
+                            11 => "EPROM",
+                            12 => "CDRAM",
+                            13 => "3DRAM",
+                            14 => "SDRAM",
+                            15 => "SGRAM",
+                            16 => "RDRAM",
+                            17 => "DDR",
+                            18 => "DDR2",
+                            19 => "DDR2 FB-DIMM",
+                            20 => "Reserved",
+                            21 => "Reserved",
+                            22 => "FBD2",
+                            23 => "DDR3",
+                            24 => "DDR3",
+                            uint type when type == 25 || type == 26 => "DDR4",
+                            27 => "LPDDR",
+                            28 => "LPDDR2",
+                            29 => "LPDDR3",
+                            30 => "LPDDR4",
+                            31 => "LPDDR4X",
+                            32 => "Logical Non-Volatile",
+                            33 => "HBM",
+                            34 => "DDR5",
+                            35 => "LPDDR5",
+                            36 => "LPDDR5X",
+                            _ => string.Empty,
+                        };
+
+                        Memory.Type = memoryType;
+                        Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                    }
+                }
             }
+
             Memory.Data = Memory.Data.TrimEnd('\n', '\r');
         }
 
@@ -423,26 +469,35 @@ namespace GTweak.Utilities.Configuration
 
             if (isMsftAvailable)
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select DeviceId, FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true }).Get())
+                using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\microsoft\windows\storage", "select DeviceId, FriendlyName, Model, Description, MediaType, Size, BusType from MSFT_PhysicalDisk", new EnumerationOptions { ReturnImmediately = true });
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
-                    string data = new[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                    ushort mediaType = managementObj["MediaType"] is IConvertible m ? Convert.ToUInt16(m) : (ushort)0;
-                    ushort busType = managementObj["BusType"] is IConvertible b ? Convert.ToUInt16(b) : (ushort)0;
-                    string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, default);
+                    using (managementObj)
+                    {
+                        string data = new string[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                        ushort mediaType = managementObj["MediaType"] is IConvertible m ? Convert.ToUInt16(m) : (ushort)0;
+                        ushort busType = managementObj["BusType"] is IConvertible b ? Convert.ToUInt16(b) : (ushort)0;
+                        string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, default);
 
-                    result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
+                        result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
+                    }
                 }
+
             }
             else
             {
-                foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Model, Caption, Size, MediaType, InterfaceType from Win32_DiskDrive", new EnumerationOptions { ReturnImmediately = true }).Get())
+                using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Model, Caption, Size, MediaType, InterfaceType from Win32_DiskDrive", new EnumerationOptions { ReturnImmediately = true });
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
-                    string data = new[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
-                    string mediaType = managementObj["MediaType"]?.ToString() ?? string.Empty;
-                    string interfaceType = managementObj["InterfaceType"].ToString() ?? string.Empty;
-                    string storageType = GetStorageType(mediaType, managementObj["DeviceID"] as string ?? string.Empty, default, interfaceType);
+                    using (managementObj)
+                    {
+                        string data = new string[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                        string mediaType = managementObj["MediaType"]?.ToString() ?? string.Empty;
+                        string interfaceType = managementObj["InterfaceType"]?.ToString() ?? string.Empty;
+                        string storageType = GetStorageType(mediaType, managementObj["DeviceID"] as string ?? string.Empty, default, interfaceType);
 
-                    result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
+                        result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
+                    }
                 }
             }
 
@@ -508,18 +563,21 @@ namespace GTweak.Utilities.Configuration
             {
                 foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
-                    (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
-
-                    if (isUsbDevice && !string.IsNullOrEmpty(data))
+                    using (managementObj)
                     {
-                        result.AppendLine(data);
-                    }
-                    else
-                    {
-                        result.AppendLine(new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
-                    }
+                        (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
 
-                    VendorDetection.Realtek |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) >= 0;
+                        if (isUsbDevice && !string.IsNullOrEmpty(data))
+                        {
+                            result.AppendLine(data);
+                        }
+                        else
+                        {
+                            result.AppendLine(new string[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+                        }
+
+                        VendorDetection.Realtek |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) >= 0;
+                    }
                 }
             }
 
@@ -546,9 +604,15 @@ namespace GTweak.Utilities.Configuration
         {
             StringBuilder result = new StringBuilder();
 
-            foreach (var managementObj in new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }).Get())
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }))
             {
-                result.AppendLine(new[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                {
+                    using (managementObj)
+                    {
+                        result.AppendLine(new string[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+                    }
+                }
             }
 
             return result.ToString().TrimEnd('\n', '\r');
