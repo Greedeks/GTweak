@@ -9,7 +9,6 @@ using System.Windows.Threading;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
-using GTweak.Utilities.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -25,9 +24,6 @@ namespace GTweak.Windows
         {
             InitializeComponent();
             App.TweaksImported += delegate { BtnUtils.IsChecked = true; };
-
-            ArchiveManager.Unarchive(PathLocator.Executable.NSudo, Properties.Resources.NSudoLC);
-            ArchiveManager.Unarchive(PathLocator.Executable.DisablingWD, Properties.Resources.DisablingWD);
         }
 
         private void AnimateSettings()

@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
 using GTweak.Windows;
 
 namespace GTweak.Utilities.Controls
@@ -57,5 +58,7 @@ namespace GTweak.Utilities.Controls
 
             new MessageWindow(true).ShowDialog();
         }
+
+        internal static void CheckingDefenderExclusions() => CommandExecutor.RunCommandAsTrustedInstaller($@"$ErrorActionPreference = 'Stop'; $target = '{SettingsEngine.currentLocation}'; try {{ $mp = Get-MpPreference; if ($mp.ExclusionProcess -notcontains $target) {{ Add-MpPreference -ExclusionProcess $target }}; if ($mp.ExclusionPath -notcontains $target) {{ Add-MpPreference -ExclusionPath $target }} }} catch {{}}", true);
     }
 }

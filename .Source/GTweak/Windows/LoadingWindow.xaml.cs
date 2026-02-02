@@ -65,6 +65,7 @@ namespace GTweak.Windows
             ExecuteWithLogging(() => HardwareData.RunningServicesCount = _systemDiagnostics.GetServicesCount().GetAwaiter().GetResult(), nameof(_systemDiagnostics.GetServicesCount));
             ExecuteWithLogging(() => _systemDiagnostics.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_systemDiagnostics.GetTotalProcessorUsage));
             ExecuteWithLogging(() => _systemDiagnostics.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_systemDiagnostics.GetPhysicalAvailableMemory));
+            ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
