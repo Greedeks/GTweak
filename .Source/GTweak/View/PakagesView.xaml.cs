@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -17,6 +16,7 @@ namespace GTweak.View
     {
         private TimerControlManager _timer = default;
         private readonly BackgroundQueue _backgroundQueue = new BackgroundQueue();
+        private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private readonly UninstallingPakages _uninstalling = new UninstallingPakages();
         private bool _isWebViewRemoval = false;
 
@@ -27,13 +27,24 @@ namespace GTweak.View
             Unloaded += delegate { _timer.Stop(); };
             Loaded += delegate
             {
-                _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
+                backgroundWorker.DoWork += delegate
                 {
-                    if ((int)time.TotalSeconds % 3 == 0)
+                    _uninstalling.GetInstalledPackages();
+                };
+                backgroundWorker.RunWorkerCompleted += delegate
+                {
+                    Dispatcher.Invoke(() => { UninstallingPakages.OnPackagesChanged(); });
+                };
+
+                _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, time =>
+                {
+                    if ((int)time.TotalSeconds % 3 != 0)
                     {
-                        BackgroundWorker backgroundWorker = new BackgroundWorker();
-                        backgroundWorker.DoWork += delegate { _uninstalling.GetInstalledPackages(); };
-                        backgroundWorker.RunWorkerCompleted += delegate { Dispatcher.Invoke(() => { UninstallingPakages.OnPackagesChanged(); }); };
+                        return;
+                    }
+
+                    if (!backgroundWorker.IsBusy)
+                    {
                         backgroundWorker.RunWorkerAsync();
                     }
                 });
@@ -71,13 +82,10 @@ namespace GTweak.View
 
                     await _backgroundQueue.QueueTask(async () =>
                     {
-                        Dispatcher.Invoke(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); });
+                        await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); });
 
-                        await UninstallingPakages.RestoreOneDriveFolder();
-
-                        await Task.Delay(3000);
-
-                        Dispatcher.Invoke(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, false); });
+                        try { await UninstallingPakages.RestoreOneDriveFolder(); }
+                        finally { await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, false); }); }
                     });
                 }
             }
@@ -96,13 +104,10 @@ namespace GTweak.View
 
                 await _backgroundQueue.QueueTask(async () =>
                 {
-                    Dispatcher.Invoke(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); }); ;
+                    await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); });
 
-                    await UninstallingPakages.RemoveAppxPackage(packageName, _isWebViewRemoval);
-
-                    await Task.Delay(3000);
-
-                    Dispatcher.Invoke(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, false); });
+                    try { await UninstallingPakages.RemoveAppxPackage(packageName, _isWebViewRemoval); }
+                    finally { await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, false); }); }
 
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {

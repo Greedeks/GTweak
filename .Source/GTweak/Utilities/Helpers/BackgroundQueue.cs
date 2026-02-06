@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,6 +8,7 @@ namespace GTweak.Utilities.Helpers
     {
         private Task _previousTask = Task.FromResult(true);
         private readonly object _key = new object();
+
         internal Task QueueTask(Action action)
         {
             lock (_key)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -45,12 +46,12 @@ namespace GTweak.Core.ViewModel
             foreach (var kv in UninstallingPakages.PackagesDetails)
             {
                 string name = kv.Key;
-                var (_, IsUnavailable, _) = kv.Value;
+                UninstallingPakages.PackagesInfo details = kv.Value;
 
                 PakagesModel pkg = new PakagesModel
                 {
                     Name = name,
-                    IsUnavailable = !IsUnavailable
+                    IsUnavailable = !details.IsUnavailable
                 };
 
                 UpdatePackageState(pkg);
@@ -62,13 +63,21 @@ namespace GTweak.Core.ViewModel
         {
             if (item != null && !string.IsNullOrEmpty(item.Name))
             {
-                if ((UninstallingPakages.PackagesDetails?.TryGetValue(item.Name, out var val)) == true)
+                if (UninstallingPakages.PackagesDetails != null && UninstallingPakages.PackagesDetails.TryGetValue(item.Name, out UninstallingPakages.PackagesInfo val) && val != null)
                 {
                     item.IsUnavailable = !val.IsUnavailable;
 
                     if (!string.Equals(item?.Name, "OneDrive", StringComparison.OrdinalIgnoreCase))
                     {
-                        item.Installed = val.Scripts != null && val.Scripts.Any() && val.Scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+                        IReadOnlyList<string> scripts = val.Scripts;
+                        if (scripts != null && scripts?.Count > 0)
+                        {
+                            item.Installed = scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+                        }
+                        else
+                        {
+                            item.Installed = false;
+                        }
                     }
                     else
                     {
