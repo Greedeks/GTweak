@@ -27,25 +27,17 @@ namespace GTweak.View
             Unloaded += delegate { _timer.Stop(); };
             Loaded += delegate
             {
-                backgroundWorker.DoWork += delegate
-                {
-                    _uninstalling.GetInstalledPackages();
-                };
-                backgroundWorker.RunWorkerCompleted += delegate
-                {
-                    Dispatcher.Invoke(() => { UninstallingPakages.OnPackagesChanged(); });
-                };
+                backgroundWorker.DoWork += delegate { _uninstalling.GetInstalledPackages(); };
+                backgroundWorker.RunWorkerCompleted += delegate { Dispatcher.Invoke(() => { UninstallingPakages.OnPackagesChanged(); }); };
 
                 _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, time =>
                 {
-                    if ((int)time.TotalSeconds % 3 != 0)
+                    if ((int)time.TotalSeconds % 3 == 0)
                     {
-                        return;
-                    }
-
-                    if (!backgroundWorker.IsBusy)
-                    {
-                        backgroundWorker.RunWorkerAsync();
+                        if (!backgroundWorker.IsBusy)
+                        {
+                            backgroundWorker.RunWorkerAsync();
+                        }
                     }
                 });
 

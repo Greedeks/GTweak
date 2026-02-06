@@ -264,32 +264,18 @@ namespace GTweak.Utilities.Tweaks
 
                     RemoveTasks(edgeTasks);
 
-                    CommandExecutor.RunCommandAsTrustedInstaller("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[]
+                    CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[]
                     {
                         @"rmdir /s /q ""%LocalAppData%\Microsoft\Edge""",
                         @"rmdir /s /q ""%ProgramFiles%\Microsoft\Edge""",
-                        @"for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del /f /q ""%f""",
-                        @"del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*""",
-                        @"del /f /q ""%Public%\Desktop\*Edge*""",
-                        @"del /f /q ""%UserProfile%\Desktop\*Edge*""",
-                        $@"for /r ""{PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del /f /q ""%f""",
+                        @"del /f /q ""%AppData%\Microsoft\Internet Explorer\Quick Launch\*Edge*.lnk""",
+                        @"del /f /q ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""",
+                        @"del /f /q ""%Public%\Desktop\*Edge*.lnk""",
+                        @"del /f /q ""%UserProfile%\Desktop\*Edge*.lnk""",
+                        $@"del /f /q ""{PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\Start Menu\Programs\*Edge*.lnk""",
                         $@"for /r ""{PathLocator.Folders.SystemDrive}Users"" %f in (*Edge*) do @if exist ""%f"" del /f /q ""%f""",
                         $@"for /f ""delims="" %i in ('dir /b /s ""{PathLocator.Folders.SystemDrive}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))"
                     })));
-
-
-                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c rmdir /s /q %LocalAppData%\Microsoft\Edge");
-                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c rmdir /s /q %ProgramFiles%\Microsoft\Edge");
-                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c for /r ""%AppData%\Microsoft\Internet Explorer\Quick Launch"" %f in (*Edge*) do del ""%f""");
-                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""");
-
-                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""");
-                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c del /q /f ""%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*Edge*.lnk""");
-
-                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /r ""{PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\Start Menu\Programs"" %f in (*Edge*) do del ""%f""");
-                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /r ""{PathLocator.Folders.SystemDrive}Users"" %f in (*Edge*) do @if exist ""%f"" del /f /q ""%f""");
-                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /d %d in (""{PathLocator.Folders.SystemDrive}Program Files (x86)\Microsoft\*Edge*"") do rmdir /s /q ""%d""");
-                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /f ""delims="" %i in ('dir /b /s ""{PathLocator.Folders.SystemDrive}Windows\System32\Tasks\*Edge*""') do (if exist ""%i"" (if exist ""%i\"" (rmdir /s /q ""%i"") else (del /f /q ""%i"")))");
 
                     RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Edge", true);
                     RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Active Setup\Installed Components\{9459C573-B17A-45AE-9F64-1857B5D58CEE}", true);
