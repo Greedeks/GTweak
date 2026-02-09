@@ -318,6 +318,7 @@ namespace GTweak.Utilities.Tweaks
                         }
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    SetTaskState(!isDisabled, printTasks);
                     break;
                 case "TglButton9":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WiaRpc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);

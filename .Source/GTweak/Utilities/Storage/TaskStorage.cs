@@ -56,6 +56,11 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Xbox\Maintenance\MaintenanceTask",
         @"\Microsoft\Xbox\XGamingServices\GameServicesTask" };
 
+        protected static readonly string[] printTasks =  {
+        @"\Microsoft\Windows\Printing\EduPrintProv",
+        @"\Microsoft\Windows\Printing\PrinterCleanupTask",
+        @"\Microsoft\Windows\Printing\PrintJobCleanupTask" };
+
         protected static readonly string bluetoothTask = @"\Microsoft\Windows\Bluetooth\UninstallDeviceTask";
 
         protected static readonly string[] mapsTasks =  {

@@ -168,14 +168,14 @@ namespace GTweak.Utilities.Tweaks
                     return;
                 }
 
-                string Alias = details.Alias;
+                string alias = details.Alias;
                 IReadOnlyList<string> scripts = details.Scripts;
 
                 List<string> packageNamesToRemove = new List<string> { packageName };
 
-                if (!string.IsNullOrWhiteSpace(Alias))
+                if (!string.IsNullOrWhiteSpace(alias))
                 {
-                    packageNamesToRemove.Add(Alias);
+                    packageNamesToRemove.Add(alias);
                 }
 
                 if (scripts != null && scripts.Count > 0)
