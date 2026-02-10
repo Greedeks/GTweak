@@ -164,6 +164,7 @@
     <v:String x:Key="tgl16_conf">Windows 이벤트 «로깅»</v:String>
     <v:String x:Key="tgl17_conf">NVIDIA 텔레메트리 수집 및 모니터링</v:String>
     <v:String x:Key="tgl18_conf">사용자 행동 기록 유지</v:String>
+    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
 
     <v:String x:Key="tgl1_desc_conf">Windows는 사용자의 작업을 추적하기 위해 각 사용자에 대해 고유한 광고 식별자를 만듭니다. 이 식별자는 응용 프로그램 개발자와 Windows 자체에서 응용 프로그램에서 특정 광고를 제공하는 등 자체 목적을 위해 사용됩니다.</v:String>
     <v:String x:Key="tgl2_desc_conf">로컬 계정을 사용하더라도 Windows는 항상 데이터를 Microsoft 서버와 동기화하려고 시도합니다. 특히 테마, 비밀번호, Windows 설정, 브라우저 설정, 입력 도구 모음 설정, 간소화된 액세스 설정, 추가 설정 등이 이에 해당합니다.</v:String>
@@ -183,6 +184,7 @@
     <v:String x:Key="tgl16_desc_conf">시스템 진단 정보를 수집하고 처리하여 컴퓨터의 리소스를 낭비하는 이벤트 로그입니다. 이 서비스는 좋은 것을 제공하지 않으므로 비활성화하는 것이 좋으므로 기밀 정보 전송을 방지할 수 있습니다.</v:String>
     <v:String x:Key="tgl17_desc_conf">시스템 및 사용에 대한 데이터 수집 및 전송을 담당하는 서비스 또는 비디오 드라이버의 작동과 관련이 없는 기능은 쓸모가 없습니다. NVIDIA가 수집하는 이유와 정보의 종류는 자체적으로만 알려져 있습니다. 그러나 이것이 최종 사용자에게 유용한 것이 없다는 사실은 분명합니다.</v:String>
     <v:String x:Key="tgl18_desc_conf">이 조정은 UAR (사용자 활동 기록) 기능을 비활성화합니다 – 스크린샷 촬영, 텍스트 입력, 프로그램 실행, 화면이 잠긴 상태에서도 웹캠 접근 제공 등 컴퓨터에서 발생하는 모든 행동을 순차적으로 기록하는 시스템입니다.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -487,3 +489,4 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+

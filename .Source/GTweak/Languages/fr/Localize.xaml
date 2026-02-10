@@ -164,6 +164,7 @@
     <v:String x:Key="tgl16_conf">« Journalisation » des événements Windows</v:String>
     <v:String x:Key="tgl17_conf">Collecte et surveillance de la télémétrie NVIDIA</v:String>
     <v:String x:Key="tgl18_conf">Enregistrement du comportement de l’utilisateur</v:String>
+    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
 
     <v:String x:Key="tgl1_desc_conf">Windows crée un identifiant publicitaire unique pour chaque utilisateur afin de suivre vos actions. Cet identifiant est utilisé par les développeurs d’applications et par Windows lui-même, notamment pour vous proposer des publicités ciblées dans les applications.</v:String>
     <v:String x:Key="tgl2_desc_conf">Même en utilisant un compte local, Windows tente toujours de synchroniser vos données avec les serveurs de Microsoft. Cela inclut notamment : les thèmes, les mots de passe, les paramètres Windows, les paramètres du navigateur, la barre de langue, l’accessibilité simplifiée, et d’autres paramètres.</v:String>
@@ -183,6 +184,7 @@
     <v:String x:Key="tgl16_desc_conf">Le journal des événements collecte et traite des informations de diagnostic système, ce qui utilise des ressources. Il est préférable de désactiver ce service pour éviter l’envoi de données confidentielles.</v:String>
     <v:String x:Key="tgl17_desc_conf">Ce service collecte et transmet des données sur le système et son utilisation, sans rapport avec les pilotes NVIDIA. L'utilité pour l'utilisateur final est discutable.</v:String>
     <v:String x:Key="tgl18_desc_conf">Ce paramètre désactive l’enregistrement de l’activité utilisateur (UAR), qui peut suivre toutes vos actions, captures d’écran, saisies, lancements de programmes, et même l’accès à la webcam, y compris lorsque l’écran est verrouillé.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -488,6 +490,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

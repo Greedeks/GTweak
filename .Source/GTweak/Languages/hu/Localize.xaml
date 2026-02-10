@@ -164,6 +164,7 @@
     <v:String x:Key="tgl16_conf">«Naplózás» Windows események</v:String>
     <v:String x:Key="tgl17_conf">NVIDIA telemetria gyűjtése és monitorozása</v:String>
     <v:String x:Key="tgl18_conf">A felhasználói viselkedés nyilvántartása</v:String>
+    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
 
     <v:String x:Key="tgl1_desc_conf">A Windows minden felhasználó számára egyedi hirdetési azonosítót hoz létre a műveletek nyomon követéséhez. Amelyet az alkalmazásfejlesztők és maga a Windows használnak saját céljaikra, beleértve az alkalmazások konkrét hirdetéseinek megjelenítését is.</v:String>
     <v:String x:Key="tgl2_desc_conf">A Windows még helyi fiók használatával is mindig megpróbálja szinkronizálni az adatokat a Microsoft szervereivel. Különösen a következők: témák, jelszavak, Windows-beállítások, böngészőbeállítások, nyelvi sáv beállításai, egyszerűsített hozzáférési beállítások, további beállítások.</v:String>
@@ -183,6 +184,7 @@
     <v:String x:Key="tgl16_desc_conf">Olyan eseménynapló, amely rendszerdiagnosztikai adatokat gyűjt és dolgoz fel, pazarolva a számítógép erőforrásait. A szolgáltatás nem ad semmi jót, jobb, ha letiltja, így megakadályozza a bizalmas információk küldését.</v:String>
     <v:String x:Key="tgl17_desc_conf">Haszontalan az a szolgáltatás, amely felelős a rendszerrel és annak használatával kapcsolatos adatok gyűjtéséért és továbbításáért, vagy egy olyan funkcióért, amely nem kapcsolódik a video-illesztőprogram működéséhez. Hogy miért és milyen információkat gyűjt az NVIDIA, azt csak saját maga tudja. De az a tény, hogy ez nem hoz semmi hasznosat a végfelhasználó számára, teljesen nyilvánvaló.</v:String>
     <v:String x:Key="tgl18_desc_conf">A beállítás letiltja az UAR (User Activity Recording) funkciót - egy olyan rendszert, amely szekvenciálisan naplózza a számítógépen végrehajtott összes műveletet: a képernyőképek készítésétől és a szöveg beírásától a programok indításáig, sőt a webkamerához való hozzáférés biztosításáig, miközben a képernyő zárolva van, és még sok más.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -487,3 +489,4 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+

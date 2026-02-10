@@ -164,6 +164,7 @@
     <v:String x:Key="tgl16_conf">Журналювання подій Windows</v:String>
     <v:String x:Key="tgl17_conf">Збір даних та моніторинг телеметрії NVIDIA</v:String>
     <v:String x:Key="tgl18_conf">Журналювання дій користувача</v:String>
+    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
 
     <v:String x:Key="tgl1_desc_conf">Для кожного користувача система Windows створює унікальний рекламний ідентифікатор для відстеження його дій. Використовується розробниками програм та самої Windows для власних цілей, у тому числі для демонстрації конкретної реклами в додатках.</v:String>
     <v:String x:Key="tgl2_desc_conf">Навіть якщо ви використовуєте локальний обліковий запис, Windows завжди намагається синхронізувати з серверами Microsoft такі ваші дані, як теми, паролі, налаштування Windows, налаштування браузера, налаштування мовної панелі, налаштування спрощеного доступу, додаткові налаштування.</v:String>
@@ -183,6 +184,7 @@
     <v:String x:Key="tgl16_desc_conf">Журнал подій, який збирає та обробляє діагностичну інформацію системи, марно споживає комп'ютерні ресурси. Ця служба фактично нічого корисного для користувача не робить. Можна вимкнути, щоб запобігти надсиланню конфіденційної інформації.</v:String>
     <v:String x:Key="tgl17_desc_conf">Служба для збору та передачі даних про систему та її використання. Марна і не пов'язана з роботою відео дайвера. Чому і яка інформація збирається, знає лише NVIDIA. Факт, що служба нічого корисного для кінцевого користувача не робить, абсолютно очевидний.</v:String>
     <v:String x:Key="tgl18_desc_conf">Налаштування вимикає функцію UAR (User Activity Recording) – систему, яка послідовно фіксує кожну вашу дію на комп’ютері: від створення скриншотів і набору тексту до запуску програм та надання доступу до вебкамери навіть у стані заблокованого екрану, а також багато іншого.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -487,3 +489,4 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+

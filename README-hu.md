@@ -65,7 +65,7 @@
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Utils.png"/>
 </details>
 <details>
-  <summary> Titoktartás </summary>
+  <summary> Adatgyűjtés </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Confidentiality.png"/>
 </details>
 <details>

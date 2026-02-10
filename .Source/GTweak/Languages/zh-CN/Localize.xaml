@@ -164,6 +164,7 @@
     <v:String x:Key="tgl16_conf">记录 Windows 事件</v:String>
     <v:String x:Key="tgl17_conf">收集与监控 NVIDIA 遥测数据</v:String>
     <v:String x:Key="tgl18_conf">记录用户行为</v:String>
+    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
 
     <v:String x:Key="tgl1_desc_conf">Windows 会为每位用户创建唯一的广告识别码以追踪您的操作。此识别码由应用程序开发者及 Windows 系统本身用于各自目的，包括在应用程序中向您提供特定广告。</v:String>
     <v:String x:Key="tgl2_desc_conf">即使使用本地帐户，Windows 仍会持续尝试将您的数据与 Microsoft 服务器同步。具体同步项目包含：主题、密码、Windows 设置、浏览器设置、语言工具列设置、简易存取设置及其他附加设置。</v:String>
@@ -183,6 +184,7 @@
     <v:String x:Key="tgl16_desc_conf">此事件记录服务负责收集并处理系统诊断资讯，会消耗电脑资源。该服务不会带来任何益处，建议停用以防止机密资讯外泄。</v:String>
     <v:String x:Key="tgl17_desc_conf">负责收集并传输系统及其使用数据的服务，或与视讯驱动程序运作无关的功能皆属无用。NVIDIA收集何种资讯及其目的仅其自身知晓。但此举对终端用户毫无助益的事实显而易见。</v:String>
     <v:String x:Key="tgl18_desc_conf">此调整项将停用 UAR（用户活动记录）功能——该系统会逐一记录您在电脑上的所有操作：从撷取屏幕截图、输入文字、启动程序，甚至在屏幕锁定时提供网络摄影机存取权限等诸多行为。</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -487,3 +489,4 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+

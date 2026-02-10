@@ -164,6 +164,7 @@
     <v:String x:Key="tgl16_conf">"Logging" de eventos do Windows</v:String>
     <v:String x:Key="tgl17_conf">Coleta e monitoramento da telemetria da NVIDIA</v:String>
     <v:String x:Key="tgl18_conf">Manter um registro do comportamento do usuário</v:String>
+    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
 
     <v:String x:Key="tgl1_desc_conf">O Windows cria um identificador de publicidade exclusivo para cada usuário rastrear suas ações. Que é usado por desenvolvedores de aplicativos e pelo próprio Windows para seus próprios fins, inclusive para oferecer anúncios específicos em aplicativos.</v:String>
     <v:String x:Key="tgl2_desc_conf">Mesmo usando uma conta local, o Windows sempre tenta sincronizar seus dados com os servidores da Microsoft. Em particular, o seguinte: temas, senhas, configurações do Windows, configurações do navegador, configurações da barra de idiomas, configurações de acesso simplificado, configurações adicionais.</v:String>
@@ -183,6 +184,7 @@
     <v:String x:Key="tgl16_desc_conf">Um log de eventos que coleta e processa informações de diagnóstico do sistema, desperdiçando os recursos do seu computador. O serviço não lhe trará nada de bom, é melhor desativá-lo, assim você evitará o envio de informações confidenciais.</v:String>
     <v:String x:Key="tgl17_desc_conf">O serviço responsável por coletar e transmitir dados sobre o sistema e seu uso, ou uma função que não está relacionada à operação do driver de vídeo, é inútil. Por que e que tipo de informação a NVIDIA coleta, só ela sabe. Mas o fato de que isso não traz nada de útil para o usuário final é bastante óbvio.</v:String>
     <v:String x:Key="tgl18_desc_conf">O ajuste desativa o recurso UAR (User Activity Recording) - um sistema que registra sequencialmente todas as ações que você realiza no seu computador: desde tirar screenshots e digitar texto até iniciar programas e até mesmo fornecer acesso à webcam enquanto a tela está bloqueada, e muito mais.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -487,6 +489,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

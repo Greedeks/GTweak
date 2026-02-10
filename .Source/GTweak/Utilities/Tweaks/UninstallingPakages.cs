@@ -195,9 +195,6 @@ namespace GTweak.Utilities.Tweaks
 
             switch (packageName)
             {
-                case "Maps":
-                    RemoveTasks(mapsTasks);
-                    break;
                 case "Widgets":
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
                     break;
