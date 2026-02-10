@@ -34,7 +34,7 @@ namespace GTweak.Utilities.Controls
             ["EnableIpBlur"] = true,
             ["EnableSound"] = true,
             ["VolumeLevel"] = 50,
-            ["Language"] = SystemDiagnostics.GetCurrentSystemLang().Code,
+            ["Language"] = SystemDataCollector.GetCurrentSystemLang().Code,
             ["Theme"] = AvailableThemes.First(),
             ["AddonsPath"] = string.Empty,
         };

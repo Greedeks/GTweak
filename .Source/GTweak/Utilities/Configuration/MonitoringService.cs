@@ -23,7 +23,6 @@ namespace GTweak.Utilities.Configuration
             Network
         }
 
-
         [StructLayout(LayoutKind.Sequential)]
         private struct SystemTime
         {
@@ -176,7 +175,7 @@ namespace GTweak.Utilities.Configuration
         internal void StartDeviceMonitoring()
         {
             Parallel.ForEach(new List<(string filter, DeviceType type, string scope)> {
-                ($"TargetInstance ISA {(SystemDiagnostics.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, SystemDiagnostics.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
+                ($"TargetInstance ISA {(SystemDataCollector.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, SystemDataCollector.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
                 ("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio, null),
                 ("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null),},
                 parameters => { SubscribeToDeviceEvents(parameters.filter, parameters.type, parameters.scope); });

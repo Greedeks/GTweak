@@ -21,12 +21,18 @@ using Newtonsoft.Json.Linq;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal sealed class SystemDiagnostics : MonitoringService
+    internal sealed class SystemDataCollector : MonitoringService
     {
-        private sealed class GitMetadata
+        private class GitMetadata
         {
             [JsonProperty("tag_name")]
-            internal string СurrentVersion { get; set; }
+            internal string CurrentVersion { get; set; }
+        }
+
+        private sealed class GitLabMetadata : GitMetadata
+        {
+            [JsonProperty("description")]
+            internal string Description { get; set; }
         }
 
         private sealed class IPMetadata
@@ -745,26 +751,54 @@ namespace GTweak.Utilities.Configuration
                 return;
             }
 
-            try
+            foreach (string api in PathLocator.Links.ReleaseApi)
             {
-                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(PathLocator.Links.GitHubApi);
-
-                webRequest.ContentType = "application/json";
-                webRequest.UserAgent = "Nothing";
-                webRequest.Timeout = 5000;
-
-                using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
-                using StreamReader sreader = new StreamReader(response.GetResponseStream());
-                string DataAsJson = sreader.ReadToEnd();
-                GitMetadata gitVersionUtility = JsonConvert.DeserializeObject<GitMetadata>(DataAsJson);
-
-                if (!string.IsNullOrWhiteSpace(gitVersionUtility.СurrentVersion) && gitVersionUtility.СurrentVersion.CompareTo(SettingsEngine.currentRelease) > 0)
+                try
                 {
-                    IsNeedUpdate = true;
-                    DownloadVersion = gitVersionUtility.СurrentVersion;
+                    HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(api);
+                    webRequest.ContentType = "application/json";
+                    webRequest.UserAgent = "Nothing";
+                    webRequest.Timeout = 5000;
+
+                    using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+                    using StreamReader reader = new StreamReader(response.GetResponseStream());
+                    string json = reader.ReadToEnd();
+                    GitMetadata latest = null;
+
+                    if (api.Contains("github"))
+                    {
+                        latest = JsonConvert.DeserializeObject<GitMetadata>(json);
+                    }
+                    else
+                    {
+                        List<GitLabMetadata> releases = JsonConvert.DeserializeObject<List<GitLabMetadata>>(json);
+                        latest = releases?.FirstOrDefault();
+
+                        if (latest != null && !string.IsNullOrEmpty(((GitLabMetadata)latest).Description))
+                        {
+                            GitLabMetadata gitLabMetadata = (GitLabMetadata)latest;
+                            Match match = Regex.Match(gitLabMetadata.Description, @"\[(?<name>.*?)\]\(/uploads/(?<hash>.+?)\)");
+
+                            if (match.Success)
+                            {
+                                string hashFile = match.Groups["hash"].Value;
+                                PathLocator.Links.GitLabLatest = (true, $"{PathLocator.Links.GitLabLatest.Url}{hashFile}");
+                            }
+                        }
+                    }
+
+                    if (latest != null && !string.IsNullOrWhiteSpace(latest.CurrentVersion))
+                    {
+                        if (new Version(latest.CurrentVersion) > new Version(SettingsEngine.currentRelease))
+                        {
+                            IsNeedUpdate = true;
+                            DownloadVersion = latest.CurrentVersion;
+                            break;
+                        }
+                    }
                 }
+                catch { continue; }
             }
-            catch { IsNeedUpdate = false; }
         }
     }
 }

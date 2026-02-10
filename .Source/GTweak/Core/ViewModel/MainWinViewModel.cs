@@ -19,7 +19,7 @@ namespace GTweak.Core.ViewModel
         public ObservableCollection<MainWinModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWinModel.LanguageItem>();
 
         private readonly MainWinModel _model = new MainWinModel();
-        private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
+        private readonly SystemDataCollector _systemDataCollector  = new SystemDataCollector();
 
         public object CurrentView
         {
@@ -27,9 +27,9 @@ namespace GTweak.Core.ViewModel
             set { _model.CurrentView = value; OnPropertyChanged(); }
         }
 
-        public ImageSource DisplayProfileAvatar => _systemDiagnostics.GetProfileImage();
+        public ImageSource DisplayProfileAvatar => _systemDataCollector.GetProfileImage();
 
-        public string DisplayProfileName => _systemDiagnostics.GetProfileName();
+        public string DisplayProfileName => _systemDataCollector.GetProfileName();
 
         public string DisplayTweakVersion => (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 
@@ -45,7 +45,7 @@ namespace GTweak.Core.ViewModel
 
         public string CurrentVersion => SettingsEngine.currentRelease;
 
-        public string DownloadVersion => SystemDiagnostics.DownloadVersion;
+        public string DownloadVersion => SystemDataCollector.DownloadVersion;
 
         public bool IsViewNotification => SettingsEngine.IsViewNotification;
 

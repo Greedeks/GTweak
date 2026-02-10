@@ -7,6 +7,12 @@ namespace GTweak.Utilities.Controls
 {
     internal class PathLocator
     {
+        internal static class Registry
+        {
+            internal const string SubKey = @"Software\GTweak";
+            internal static readonly string BaseKey = @$"HKEY_CURRENT_USER\{SubKey}";
+        }
+
         internal static class Folders
         {
             internal static readonly string Workspace = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "GTweak");
@@ -322,12 +328,6 @@ namespace GTweak.Utilities.Controls
             internal static readonly string BackupAclWD = Path.Combine(Folders.DefenderBackup, "AclBackup.acl");
         }
 
-        internal static class Registry
-        {
-            internal const string SubKey = @"Software\GTweak";
-            internal static readonly string BaseKey = @$"HKEY_CURRENT_USER\{SubKey}";
-        }
-
         internal static class Links
         {
             internal const string GitHub = "https://github.com/Greedeks";
@@ -338,7 +338,13 @@ namespace GTweak.Utilities.Controls
 
             internal const string GitHubLatest = "https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe";
 
-            internal const string GitHubApi = "https://api.github.com/repos/greedeks/gtweak/releases/latest";
+            internal static (bool Created, string Url) GitLabLatest = (false, "https://gitlab.com/-/project/79375382/uploads/");
+
+            internal static readonly IReadOnlyList<string> ReleaseApi = Array.AsReadOnly(new[]
+            {
+                "https://api.github.com/repos/greedeks/gtweak/releases/latest",
+                "https://gitlab.com/api/v4/projects/Greedeks%2Fgtweak-ota-server/releases"
+            });
 
             internal static readonly IReadOnlyList<string> IpServices = Array.AsReadOnly(new[]
             {

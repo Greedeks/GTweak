@@ -416,7 +416,7 @@
     <Compile Include="Utilities\Animation\NumberAnimation.cs" />
     <Compile Include="Utilities\Animation\TypewriterAnimation.cs" />
     <Compile Include="Utilities\Configuration\MonitoringService.cs" />
-    <Compile Include="Utilities\Configuration\SystemDiagnostics.cs" />
+    <Compile Include="Utilities\Configuration\SystemDataCollector.cs" />
     <Compile Include="Utilities\Controls\ErrorLogging.cs" />
     <Compile Include="Utilities\Controls\PathLocator.cs" />
     <Compile Include="Utilities\Controls\RunGuard.cs" />

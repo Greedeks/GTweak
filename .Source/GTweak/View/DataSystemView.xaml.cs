@@ -19,7 +19,7 @@ namespace GTweak.View
 {
     public partial class DataSystemView : UserControl
     {
-        private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
+        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
         private TimerControlManager _timer = default;
 
@@ -62,23 +62,23 @@ namespace GTweak.View
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
 
-                    await backgroundQueue.QueueTask(async delegate { await _systemDiagnostics.GetTotalProcessorUsage(); });
-                    await backgroundQueue.QueueTask(async delegate { await _systemDiagnostics.GetPhysicalAvailableMemory(); });
+                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetTotalProcessorUsage(); });
+                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetPhysicalAvailableMemory(); });
                     AnimationProgressBars(HardwareData.Processor.Usage, HardwareData.Memory.Usage);
                     _ = Dispatcher.BeginInvoke(new Action(async () =>
                     {
-                        HardwareData.RunningProcessesCount = await Task.Run(() => _systemDiagnostics.GetProcessCount());
-                        HardwareData.RunningServicesCount = await Task.Run(() => _systemDiagnostics.GetServicesCount());
+                        HardwareData.RunningProcessesCount = await Task.Run(() => _systemDataCollector.GetProcessCount());
+                        HardwareData.RunningServicesCount = await Task.Run(() => _systemDataCollector.GetServicesCount());
                     }));
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
                 {
-                    await backgroundQueue.QueueTask(delegate { _systemDiagnostics.GetUserIpAddress(); });
+                    await backgroundQueue.QueueTask(delegate { _systemDataCollector.GetUserIpAddress(); });
                     _ = Dispatcher.BeginInvoke(new Action(() => { DataContext = new DataSystemViewModel(); }));
                 }
                 _ = Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (BtnVision.IsChecked.Value & BtnVision.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
+                    if (BtnVision.IsChecked.Value & BtnVision.Visibility == Visibility.Hidden & !SystemDataCollector.isIPAddressFormatValid)
                     {
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
                     }

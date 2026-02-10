@@ -12,7 +12,7 @@ namespace GTweak.Windows
 {
     public partial class UpdateWindow : FluentWindow
     {
-        public string DownloadVersion { get; set; } = SystemDiagnostics.DownloadVersion;
+        public string DownloadVersion { get; set; } = SystemDataCollector.DownloadVersion;
 
         public UpdateWindow()
         {
@@ -44,7 +44,7 @@ namespace GTweak.Windows
                 {
                     CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsEngine.currentName}\" && timeout /t 2 && del \"{SettingsEngine.currentLocation}\" && ren {tempFileName} \"{SettingsEngine.currentName}\" && \"{SettingsEngine.currentLocation}\"");
                 };
-                webClient.DownloadFileAsync(new Uri(PathLocator.Links.GitHubLatest), tempFileName);
+                webClient.DownloadFileAsync(new Uri(PathLocator.Links.GitLabLatest.Created == false ? PathLocator.Links.GitHubLatest : PathLocator.Links.GitLabLatest.Url), tempFileName);
             }
             catch
             {
