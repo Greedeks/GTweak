@@ -355,6 +355,7 @@
     <v:String x:Key="tgl27_svc">Servizi relativi agli strumenti aziendali</v:String>
     <v:String x:Key="tgl28_svc">Servizio relativo al funzionamento di Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Services related to push notifications</v:String>
+    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
     
     <v:String x:Key="tgl1_desc_svc">Disattiva se non utilizzi la cronologia dei file e l’indicizzazione dei contenuti.</v:String>
     <v:String x:Key="tgl2_desc_svc">Disattiva se non utilizzi Xbox e gamepad Microsoft.</v:String>
@@ -385,6 +386,7 @@
     <v:String x:Key="tgl27_desc_svc">Disattiva se non usi strumenti aziendali per la gestione remota e non ti colleghi a server aziendali.</v:String>
     <v:String x:Key="tgl28_desc_svc">Disattiva se non usi il sistema di virtualizzazione Hyper-V integrato. Non influisce su VirtualBox o simili.</v:String>
     <v:String x:Key="tgl29_desc_svc">Disable do not use the «Your Phone» app and do not install apps from the Windows Store remotely on other devices, as it is responsible for delivering instant notifications and synchronization between the computer and connected devices. Keep in mind that in Windows 10, after disabling it, the Notification Center may stop opening due to its dependency on this notification system.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -489,6 +491,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

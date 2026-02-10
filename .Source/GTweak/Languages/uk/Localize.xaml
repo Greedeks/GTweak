@@ -355,6 +355,7 @@
     <v:String x:Key="tgl27_svc">Служби, пов’язані з корпоративними засобами</v:String>
     <v:String x:Key="tgl28_svc">Служба, пов’язана з роботою Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Служби, пов'язані з push-сповіщеннями</v:String>
+    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
 
     <v:String x:Key="tgl1_desc_svc">Можна вимкнути, якщо ви не використовуєте історію файлів та індексацію вмісту.</v:String>
     <v:String x:Key="tgl2_desc_svc">Можна вимкнути, якщо ви не використовуєте Xbox та маніпулятор Microsoft Gamepad.</v:String>
@@ -385,6 +386,7 @@
     <v:String x:Key="tgl27_desc_svc">Можна вимкнути, якщо ви не використовуєте віддалене керування корпоративними додатками, і у вас немає віддаленого сервера, з яким з'єднується ваш комп'ютер.</v:String>
     <v:String x:Key="tgl28_desc_svc">Можна вимкнути, якщо ви не використовуєте вбудовану систему віртуалізації. Це не впливає на роботу таких додатків як VirtualBox тощо.</v:String>
     <v:String x:Key="tgl29_desc_svc">Можна вимкнути, якщо не використовуєте сполучені пристрої або віддалено не встановлюєте програми з Магазину Windows. Ці служби забезпечують роботу Центру сповіщень зі сполученими пристроями, обробку push-запитів та дозволяють програмі «Телефон» знаходити ваш смартфон, автоматично підключатися до нього та відображати його повідомлення та події в Центрі сповіщень. У Windows 10 після вимкнення цих служб Центр сповіщень може не відкриватися.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -489,4 +491,5 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 

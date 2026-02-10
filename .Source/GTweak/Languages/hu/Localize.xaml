@@ -355,6 +355,7 @@
     <v:String x:Key="tgl27_svc">Vállalati eszközökkel kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl28_svc">A Hyper-V működésével kapcsolatos szolgáltatás</v:String>
     <v:String x:Key="tgl29_svc">Push értesítésekkel kapcsolatos szolgáltatások</v:String>
+    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
 
     <v:String x:Key="tgl1_desc_svc">Tiltsa le, ha nem használja a fájlelőzményeket és a tartalomindexelést.</v:String>
     <v:String x:Key="tgl2_desc_svc">Tiltsa le, ha nem használ Xbox és Microsoft játékvezérlőket.</v:String>
@@ -385,6 +386,7 @@
     <v:String x:Key="tgl27_desc_svc">Tiltsa le, ha nem használja a vállalati alkalmazások távkezelését, és nincs olyan távoli kiszolgálója, amellyel a számítógép kommunikálna.</v:String>
     <v:String x:Key="tgl28_desc_svc">Tiltsa le, ha nem használja a beépített virtualizációs rendszert. Ez semmilyen módon nem befolyásolja a VirtualBox és hasonlók munkáját.</v:String>
     <v:String x:Key="tgl29_desc_svc">Kapcsolja ki, ha nem használ párosított eszközöket, és nem telepít alkalmazásokat távolról a Windows Áruházból. Ezek a szolgáltatások kezelik az értesítési központot a párosított eszközökkel, feldolgozzák a push-kérelmeket, lehetővé teszik a Windows számára, hogy felismerje okostelefonját a „Saját telefon” alkalmazáshoz, automatikusan újra csatlakozzon hozzá, és megjelenítsen az üzeneteit és eseményeit a Műveletközpontban. A Windows 10 rendszerben ezek kikapcsolása után előfordulhat, hogy az értesítési központ nem nyílik meg.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -489,4 +491,5 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+
 

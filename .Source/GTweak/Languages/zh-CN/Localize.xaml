@@ -355,6 +355,7 @@
     <v:String x:Key="tgl27_svc">与企业工具相关之服务</v:String>
     <v:String x:Key="tgl28_svc">与 Hyper-V 运作相关之服务</v:String>
     <v:String x:Key="tgl29_svc">与推播通知相关之服务</v:String>
+    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
 
     <v:String x:Key="tgl1_desc_svc">若您未使用文档历史记录与内容索引功能，请停用此设置。</v:String>
     <v:String x:Key="tgl2_desc_svc">若您未使用 Xbox 与 Microsoft 游戏控制器，请停用此设置。</v:String>
@@ -385,6 +386,7 @@
     <v:String x:Key="tgl27_desc_svc">若您未使用企业应用程序的远端管理功能，且电脑未与任何远端服务器通讯，请停用此选项。</v:String>
     <v:String x:Key="tgl28_desc_svc">若未使用内建虚拟化系统，请停用此服务。此设置绝不影响 VirtualBox 等虚拟化软件运作。</v:String>
     <v:String x:Key="tgl29_desc_svc">若未使用配对装置且不透过 Windows 市集远端安装应用程序，请停用此服务。这些服务负责处理配对装置的通知中心、处理推播请求、让 Windows 能侦测您的智慧型手机以供"您的手机"应用程序使用、自动重新连接至手机，并在操作中心显示手机讯息与事件。在 Windows 10 中，停用后通知中心可能无法开启。</v:String>
+    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -489,4 +491,5 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 

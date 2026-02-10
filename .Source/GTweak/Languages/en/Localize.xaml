@@ -355,7 +355,8 @@
     <v:String x:Key="tgl27_svc">Services related to corporate tools</v:String>
     <v:String x:Key="tgl28_svc">Service related to the operation of Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Services related to push notifications</v:String>
-
+    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Disable if you don't use file history and content indexing.</v:String>
     <v:String x:Key="tgl2_desc_svc">Disable if you don't use Xbox and Microsoft gamepads.</v:String>
     <v:String x:Key="tgl3_desc_svc">Disable if you do not plan to update Windows. In addition to services, the tweak will change the files responsible for Windows updates. Because of this, even if the services are enabled, the Update Center will not work. Please note that the tweak affects downloading and updating apps from the Windows Store.</v:String>
@@ -385,6 +386,7 @@
     <v:String x:Key="tgl27_desc_svc">Disable if you do not use remote management of corporate applications and you do not have a remote server that your PC communicates with.</v:String>
     <v:String x:Key="tgl28_desc_svc">Disable if you are not using the built-in virtualization system. It does not affect the work of VirtualBox and its like in any way.</v:String>
     <v:String x:Key="tgl29_desc_svc">Disable if you do not use paired devices and do not install apps from the Windows Store remotely. These services handle the Notification Center with paired devices, process push requests, allow Windows to detect your smartphone for the «Your Phone» app, automatically reconnect to it, and display its messages and events in the Action Center. In Windows 10, after disabling them, the Notification Center may stop opening.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

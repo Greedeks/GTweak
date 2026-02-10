@@ -59,7 +59,8 @@
                     <uc:ToggleButton x:Name="TglButton27" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton27].State}" TextResource="{DynamicResource tgl27_svc}" Description="{DynamicResource tgl27_desc_svc}" />
                     <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton28].State}" TextResource="{DynamicResource tgl28_svc}" Description="{DynamicResource tgl28_desc_svc}" />
                     <uc:ToggleButton x:Name="TglButton29" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton29].State}" TextResource="{DynamicResource tgl29_svc}" Description="{DynamicResource tgl29_desc_svc}" />
-                    
+                    <uc:ToggleButton x:Name="TglButton30" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton30].State}" TextResource="{DynamicResource tgl30_svc}" Description="{DynamicResource tgl30_desc_svc}" />
+                
                 </uc:FlowPanel>
 
             </ScrollViewer>

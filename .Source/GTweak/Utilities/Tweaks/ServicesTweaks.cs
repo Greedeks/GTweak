@@ -170,6 +170,9 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[29] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PushToInstall", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnService", "Start", "4");
+
+            _сontrolWriter.Button[30] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", "4");
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -432,6 +435,10 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\PushToInstall", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WpnService", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WpnService", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
+                    break;
+                case "TglButton30":
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
+                    SetTaskState(!isDisabled, retailTasks);
                     break;
                 default:
                     break;

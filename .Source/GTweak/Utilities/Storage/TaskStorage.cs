@@ -93,6 +93,12 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\OneDrive\OneDrive Standalone Update Task",
         TaskSchedulerManager.GetTaskFullPath("OneDrive Startup") };
 
+        protected static readonly string[] retailTasks = {
+        @"\Microsoft\Windows\RetailDemo\CleanupOfflineContent",
+        @"\Microsoft\Windows\RetailDemo\Retail Demo System Agent",
+        @"\Microsoft\Windows\RetailDemo\Retail Demo System Agent",
+        @"\Microsoft\Windows\RetailDemo\Desktop Retail Demo Idle Detector" };
+
         protected static readonly string[] edgeTasks = {
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA"),
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore"),

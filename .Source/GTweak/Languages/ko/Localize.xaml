@@ -355,6 +355,7 @@
     <v:String x:Key="tgl27_svc">회사 도구 관련 서비스</v:String>
     <v:String x:Key="tgl28_svc">Hyper-V 운영 관련 서비스</v:String>
     <v:String x:Key="tgl29_svc">푸시 알림 관련 서비스</v:String>
+    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
 
     <v:String x:Key="tgl1_desc_svc">파일 기록 및 콘텐츠 인덱싱을 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl2_desc_svc">Xbox 및 Microsoft 게임 패드를 사용하지 않는 경우 비활성화합니다.</v:String>
@@ -385,6 +386,7 @@
     <v:String x:Key="tgl27_desc_svc">회사 응용 프로그램의 원격 관리를 사용하지 않고 PC와 통신하는 원격 서버가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl28_desc_svc">내장 가상화 시스템을 사용하지 않는 경우 비활성화합니다. VirtualBox 등의 작업에는 어떤 영향도 미치지 않습니다.</v:String>
     <v:String x:Key="tgl29_desc_svc">페어링된 장치를 사용하지 않고 Windows Store에서 원격으로 앱을 설치하지 않는 경우 비활성화합니다. 이러한 서비스는 페어링된 장치로 알림 센터를 처리하고 푸시 요청을 처리하며, Windows가 «휴대폰» 앱의 스마트폰을 감지하고 자동으로 다시 연결하여 작업 센터에 메시지와 이벤트를 표시할 수 있도록 허용합니다. Windows 10에서는 알림 센터를 비활성화한 후 알림 센터가 열리지 않을 수 있습니다.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -489,4 +491,5 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
