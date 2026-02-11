@@ -54,20 +54,6 @@ namespace GTweak.Utilities.Configuration
 
         internal static bool isIPAddressFormatValid = false, isMsftAvailable = false;
 
-        private static readonly (object[] Keys, string Type)[] MediaTypeMap = new (object[] Keys, string Type)[]
-        {
-            (new object[] { (ushort)3, "Removable Media" }, DiskTypeLabels.HDD),
-            (new object[] { (ushort)4, "Fixed hard disk media" }, DiskTypeLabels.SSD),
-            (new object[] { (ushort)5, "Unspecified" }, DiskTypeLabels.SCM)
-        };
-
-        private static readonly Dictionary<ushort, string> BusTypeMap = new Dictionary<ushort, string>()
-        {
-            { 7,  DiskTypeLabels.USB },
-            { 12, DiskTypeLabels.SD },
-            { 17, DiskTypeLabels.NVMe }
-        };
-
         internal static (string Code, string Region) GetCurrentSystemLang()
         {
             CultureInfo culture = CultureInfo.CurrentUICulture;
@@ -176,7 +162,7 @@ namespace GTweak.Utilities.Configuration
                     BitmapImage bmp = new BitmapImage();
                     bmp.BeginInit();
                     bmp.UriSource = new Uri(filePath, UriKind.Absolute);
-                    bmp.DecodePixelWidth = 100;
+                    bmp.DecodePixelWidth = 200;
                     bmp.CacheOption = BitmapCacheOption.OnLoad;
                     bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
                     bmp.EndInit();
@@ -439,35 +425,32 @@ namespace GTweak.Utilities.Configuration
 
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
-                string storageType = MediaTypeMap.Where(x => x.Keys != null && mediaType != null && x.Keys.Contains(mediaType) && x.Type != null).Select(x => x.Type).FirstOrDefault() ?? DiskTypeLabels.Unspecified;
+                string storageType = StorageTypeMappings.MediaTypeMap.Where(x => x.Keys != null && mediaType != null && x.Keys.Contains(mediaType) && x.Type != null).Select(x => x.Type).FirstOrDefault() ?? StorageTypeLabels.Unspecified;
 
                 if (isMsftAvailable)
                 {
-                    if (BusTypeMap.TryGetValue(busType, out var busStorageType))
-                    {
-                        storageType = busStorageType;
-                    }
+                    storageType = StorageTypeMappings.BusTypeMap.FirstOrDefault(map => map.BusType == busType).StorageType ?? StorageTypeLabels.Unspecified;
                 }
                 else
                 {
-                    if ((storageType == DiskTypeLabels.Unspecified || storageType == DiskTypeLabels.HDD) && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
+                    if ((storageType == StorageTypeLabels.Unspecified || storageType == StorageTypeLabels.HDD) && (string.IsNullOrEmpty(interfaceType) || interfaceType.IndexOf("USB", StringComparison.OrdinalIgnoreCase) >= 0))
                     {
-                        return DiskTypeLabels.USB;
+                        return StorageTypeLabels.USB;
                     }
                 }
 
-                if (storageType != DiskTypeLabels.Unspecified)
+                if (storageType != StorageTypeLabels.Unspecified)
                 {
-                    string lowLevelType = DiskTypeIdentifier.GetStorageKind(deviceId);
-                    if (!string.IsNullOrEmpty(lowLevelType) && lowLevelType != DiskTypeLabels.Unspecified)
+                    string lowLevelType = StorageTypeIdentifier.GetStorageKind(deviceId);
+                    if (!string.IsNullOrEmpty(lowLevelType) && lowLevelType != StorageTypeLabels.Unspecified)
                     {
                         return lowLevelType;
                     }
                 }
 
-                if (storageType == DiskTypeLabels.Unspecified && !string.IsNullOrEmpty(deviceId))
+                if (storageType == StorageTypeLabels.Unspecified && !string.IsNullOrEmpty(deviceId))
                 {
-                    return DiskTypeIdentifier.GetStorageKind(deviceId);
+                    return StorageTypeIdentifier.GetStorageKind(deviceId);
                 }
 
                 return storageType;

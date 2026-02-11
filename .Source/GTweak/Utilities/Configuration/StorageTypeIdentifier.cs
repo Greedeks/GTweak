@@ -4,7 +4,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal static class DiskTypeIdentifier
+    internal static class StorageTypeIdentifier
     {
         private const uint IOCTL_STORAGE_QUERY_PROPERTY = 0x2D1400;
         private const uint FILE_SHARE_READ = 1;
@@ -90,7 +90,7 @@ namespace GTweak.Utilities.Configuration
 
                 if (handle.IsInvalid)
                 {
-                    return HardwareData.DiskTypeLabels.Unspecified;
+                    return HardwareData.StorageTypeLabels.Unspecified;
                 }
 
                 STORAGE_PROPERTY_QUERY query = new STORAGE_PROPERTY_QUERY
@@ -117,15 +117,15 @@ namespace GTweak.Utilities.Configuration
 
                         return descriptor.BusType switch
                         {
-                            STORAGE_BUS_TYPE.BusTypeUnknown => HardwareData.DiskTypeLabels.Unspecified,
-                            STORAGE_BUS_TYPE.BusTypeNvme => HardwareData.DiskTypeLabels.NVMe,
-                            STORAGE_BUS_TYPE.BusTypeUsb => HardwareData.DiskTypeLabels.USB,
-                            STORAGE_BUS_TYPE.BusTypeSd => HardwareData.DiskTypeLabels.SD,
-                            STORAGE_BUS_TYPE.BusTypeVirtual => HardwareData.DiskTypeLabels.VHD,
-                            STORAGE_BUS_TYPE.BusTypeFileBackedVirtual => HardwareData.DiskTypeLabels.VHDX,
-                            STORAGE_BUS_TYPE.BusTypeAtapi => HardwareData.DiskTypeLabels.CD,
-                            STORAGE_BUS_TYPE.BusTypeScsi => HardwareData.DiskTypeLabels.SCSI,
-                            _ => isSSD ? HardwareData.DiskTypeLabels.SSD : HardwareData.DiskTypeLabels.HDD
+                            STORAGE_BUS_TYPE.BusTypeUnknown => HardwareData.StorageTypeLabels.Unspecified,
+                            STORAGE_BUS_TYPE.BusTypeNvme => HardwareData.StorageTypeLabels.NVMe,
+                            STORAGE_BUS_TYPE.BusTypeUsb => HardwareData.StorageTypeLabels.USB,
+                            STORAGE_BUS_TYPE.BusTypeSd => HardwareData.StorageTypeLabels.SD,
+                            STORAGE_BUS_TYPE.BusTypeVirtual => HardwareData.StorageTypeLabels.VHD,
+                            STORAGE_BUS_TYPE.BusTypeFileBackedVirtual => HardwareData.StorageTypeLabels.VHDX,
+                            STORAGE_BUS_TYPE.BusTypeAtapi => HardwareData.StorageTypeLabels.CD,
+                            STORAGE_BUS_TYPE.BusTypeScsi => HardwareData.StorageTypeLabels.SCSI,
+                            _ => isSSD ? HardwareData.StorageTypeLabels.SSD : HardwareData.StorageTypeLabels.HDD
                         };
                     }
                 }
@@ -134,11 +134,11 @@ namespace GTweak.Utilities.Configuration
                     Marshal.FreeHGlobal(buffer);
                 }
 
-                return HardwareData.DiskTypeLabels.Unspecified;
+                return HardwareData.StorageTypeLabels.Unspecified;
             }
             catch
             {
-                return HardwareData.DiskTypeLabels.Unspecified;
+                return HardwareData.StorageTypeLabels.Unspecified;
             }
         }
     }

@@ -19,7 +19,7 @@ namespace GTweak.Core.ViewModel
         public ObservableCollection<MainWinModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWinModel.LanguageItem>();
 
         private readonly MainWinModel _model = new MainWinModel();
-        private readonly SystemDataCollector _systemDataCollector  = new SystemDataCollector();
+        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
 
         public object CurrentView
         {

@@ -57,7 +57,7 @@ namespace GTweak.Utilities.Configuration
             internal static bool Realtek { get; set; } = default;
         }
 
-        internal static class DiskTypeLabels
+        internal static class StorageTypeLabels
         {
             internal const string Unspecified = "(Unspecified)";
             internal const string SCM = "(SCM)";
@@ -70,6 +70,23 @@ namespace GTweak.Utilities.Configuration
             internal const string CD = "(CD/DVD)";
             internal const string VHD = "(VHD)";
             internal const string VHDX = "(VHDX)";
+        }
+
+        internal static class StorageTypeMappings
+        {
+            internal static readonly (object[] Keys, string Type)[] MediaTypeMap = new (object[] Keys, string Type)[]
+            {
+                (new object[] { (ushort)3, "Removable Media" }, StorageTypeLabels.HDD),
+                (new object[] { (ushort)4, "Fixed hard disk media" }, StorageTypeLabels.SSD),
+                (new object[] { (ushort)5, "Unspecified" }, StorageTypeLabels.SCM)
+            };
+
+            internal static readonly (ushort BusType, string StorageType)[] BusTypeMap = new (ushort, string)[]
+            {
+                (7, StorageTypeLabels.USB),
+                (12, StorageTypeLabels.SD),
+                (17, StorageTypeLabels.NVMe)
+            };
         }
     }
 }

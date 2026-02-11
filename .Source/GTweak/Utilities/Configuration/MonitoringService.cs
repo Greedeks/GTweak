@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
 
@@ -58,12 +60,14 @@ namespace GTweak.Utilities.Configuration
         {
             return await Task.Run(() =>
             {
-                uint capacity = 1024;
+                const uint initialCapacity = 1024;
+                uint capacity = initialCapacity;
+                uint[] buffer = new uint[capacity];
+                bool success = false;
 
                 for (int attempt = 0; attempt < 3; attempt++)
                 {
-                    uint[] buffer = new uint[capacity];
-                    bool success = EnumProcesses(buffer, capacity * sizeof(uint), out uint bytesNeeded);
+                    success = EnumProcesses(buffer, capacity * sizeof(uint), out uint bytesNeeded);
 
                     if (!success)
                     {
@@ -75,6 +79,7 @@ namespace GTweak.Utilities.Configuration
                         if (bytesNeeded > capacity * sizeof(uint))
                         {
                             capacity = bytesNeeded / sizeof(uint) + 1;
+                            buffer = new uint[capacity];
                         }
 
                         continue;
@@ -86,6 +91,7 @@ namespace GTweak.Utilities.Configuration
                     }
 
                     capacity = bytesNeeded / sizeof(uint) + 1;
+                    buffer = new uint[capacity];
                 }
 
                 return Process.GetProcesses().Length.ToString();
@@ -94,23 +100,22 @@ namespace GTweak.Utilities.Configuration
 
         internal async Task<string> GetServicesCount()
         {
-            return await Task.Run(() =>
+            int running = 0;
+
+            await Task.WhenAll(_servicesList.Select(async svc =>
             {
-                int running = 0;
-                Parallel.ForEach(_servicesList, svc =>
+                try
                 {
-                    try
+                    svc.Refresh();
+                    if (svc.Status == ServiceControllerStatus.Running)
                     {
-                        svc.Refresh();
-                        if (svc.Status == ServiceControllerStatus.Running)
-                        {
-                            running++;
-                        }
+                        Interlocked.Increment(ref running);
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                });
-                return running.ToString();
-            }).ConfigureAwait(false);
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            }).ToArray()).ConfigureAwait(false);
+
+            return running.ToString();
         }
 
         internal async Task GetPhysicalAvailableMemory()
@@ -172,16 +177,17 @@ namespace GTweak.Utilities.Configuration
             }
         }
 
-        internal void StartDeviceMonitoring()
+        internal async Task StartDeviceMonitoring()
         {
-            Parallel.ForEach(new List<(string filter, DeviceType type, string scope)> {
+            await Task.WhenAll(new List<(string filter, DeviceType type, string scope)>
+            {
                 ($"TargetInstance ISA {(SystemDataCollector.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, SystemDataCollector.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
                 ("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio, null),
-                ("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null),},
-                parameters => { SubscribeToDeviceEvents(parameters.filter, parameters.type, parameters.scope); });
+                ("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null)
+            }.Select(device => Task.Run(() => SubscribeToDeviceEvents(device.filter, device.type, device.scope))).ToArray());
         }
 
-        private async void SubscribeToDeviceEvents(string filter, DeviceType type, string scope)
+        private async Task SubscribeToDeviceEvents(string filter, DeviceType type, string scope)
         {
             try
             {

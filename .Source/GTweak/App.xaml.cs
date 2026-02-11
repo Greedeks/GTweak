@@ -45,7 +45,7 @@ namespace GTweak
             RunGuard.CheckingApplicationCopies();
             await RunGuard.CheckingSystemRequirements();
 
-            _systemDataCollector.StartDeviceMonitoring();
+            await _systemDataCollector.StartDeviceMonitoring();
 
             new LoadingWindow().Show();
         }
