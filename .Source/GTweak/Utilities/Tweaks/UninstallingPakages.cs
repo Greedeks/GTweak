@@ -259,8 +259,6 @@ namespace GTweak.Utilities.Tweaks
                     string[] processes = { "msedge", "edge", "edgeupdate", "edgeupdatem", "msedgewebview2", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "usocoreworker", "widgets", "microsoftedgesh", "microsoftedgecp", "microsoftedge" };
                     CommandExecutor.RunCommandAsTrustedInstaller("/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
 
-                    RemoveTasks(edgeTasks);
-
                     CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[]
                     {
                         @"rmdir /s /q ""%LocalAppData%\Microsoft\Edge""",
@@ -289,13 +287,35 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate", true);
                         RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"AppID\MicrosoftEdgeUpdate.exe", true);
                         RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\EdgeUpdate", true);
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Run", "MicrosoftEdgeAutoLaunch_03AF54719E0271FA0A92D5F15CBA10EA");
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\EdgeWebView", true);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\EdgeWebView", true);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView", true);
                         RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Microsoft\EdgeWebView", true);
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects", true);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects", true);
+
+                        foreach (var path in new[] { @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", @"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" })
+                        {
+                            try
+                            {
+                                using RegistryKey key = Registry.CurrentUser.OpenSubKey(path, writable: true);
+                                if (key != null)
+                                {
+                                    foreach (var valueName in key.GetValueNames())
+                                    {
+                                        if (valueName.Contains("MicrosoftEdgeAutoLaunch"))
+                                        {
+                                            RegistryHelp.DeleteValue(Registry.CurrentUser, path, valueName);
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        }
                     }
+
+                    RemoveTasks(edgeTasks);
 
                     static void RemoveDirectory(string path)
                     {

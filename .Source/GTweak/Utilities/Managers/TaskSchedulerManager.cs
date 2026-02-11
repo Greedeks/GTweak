@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
@@ -95,15 +96,7 @@ namespace GTweak.Utilities.Managers
 
                 if (existingTasks.Length != 0)
                 {
-                    using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                    foreach (string taskname in existingTasks)
-                    {
-                        Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
-                        if (task != null)
-                        {
-                            taskService.RootFolder.DeleteTask(taskname);
-                        }
-                    }
+                    CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", existingTasks.Select(task => $"schtasks /delete /tn \"{task}\" /f"))));
                 }
             });
         }
@@ -112,20 +105,42 @@ namespace GTweak.Utilities.Managers
         {
             string[] files = Directory.GetFiles(PathLocator.Folders.Tasks, "*", SearchOption.AllDirectories);
 
-            List<string> matches = files.Where(path => string.Equals(Path.GetFileName(path), partialName, StringComparison.OrdinalIgnoreCase)).ToList();
+            List<string> matches = files.Where(path => Path.GetFileName(path).StartsWith(partialName, StringComparison.OrdinalIgnoreCase)).ToList();
 
             if (matches.Count != 0)
             {
-                string matchPath = matches[0];
+                string relativePath = matches[0].Substring(PathLocator.Folders.Tasks.Length).Replace(Path.DirectorySeparatorChar, '\\');
+                relativePath = Regex.Replace(relativePath, @"^\\+", "");
 
-                string relativePath = matchPath.Substring(PathLocator.Folders.Tasks.Length).Replace(Path.DirectorySeparatorChar, '\\');
-
-                return relativePath.StartsWith("\\") ? relativePath : "\\" + relativePath;
+                return $@"\{relativePath}";
             }
 
-            return partialName;
+            return $@"\{partialName}*";
         }
 
+        internal static string[] GetAllTasksInPaths(params string[] basePaths)
+        {
+            List<string> taskList = new List<string>();
+
+            foreach (var basePath in basePaths)
+            {
+                string fullBasePath = Path.Combine(PathLocator.Folders.Tasks, basePath.TrimStart('\\'));
+
+                if (Directory.Exists(fullBasePath))
+                {
+                    string[] files = Directory.GetFiles(fullBasePath, "*", SearchOption.AllDirectories);
+
+                    foreach (string file in files)
+                    {
+                        string relativePath = file.Substring(PathLocator.Folders.Tasks.Length).Replace(Path.DirectorySeparatorChar, '\\');
+                        relativePath = Regex.Replace(relativePath, @"^\\+", "");
+                        taskList.Add(@"\" + relativePath);
+                    }
+                }
+            }
+
+            return taskList.ToArray();
+        }
 
         private static string[] GetExistingTasks(params string[] tasklist)
         {

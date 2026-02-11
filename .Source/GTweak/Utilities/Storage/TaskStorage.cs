@@ -1,3 +1,4 @@
+using System.Linq;
 using GTweak.Utilities.Managers;
 
 namespace GTweak.Utilities.Storage
@@ -46,9 +47,7 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\Feedback\Siuf\DmClient",
         @"\Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" };
 
-        protected static readonly string[] speechTasks = {
-        @"\Microsoft\Windows\Speech\SpeechModelDownloadTask",
-        @"\Microsoft\Windows\Speech\SpeechModelUpdateTask" };
+        protected static readonly string[] speechTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\Speech\");
 
         protected static readonly string[] nvidiaTasks = {
         @"\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
@@ -89,17 +88,15 @@ namespace GTweak.Utilities.Storage
 
         protected static readonly string bluetoothTask = @"\Microsoft\Windows\Bluetooth\UninstallDeviceTask";
 
-        protected static readonly string[] oneDriveTask = {
-        @"\Microsoft\Windows\OneDrive\OneDrive Standalone Update Task",
-        TaskSchedulerManager.GetTaskFullPath("OneDrive Startup") };
+        protected static readonly string[] oneDriveTask = new[] {
+        TaskSchedulerManager.GetTaskFullPath("OneDrive Reporting"),
+        TaskSchedulerManager.GetTaskFullPath("OneDrive Standalone Update"),
+        TaskSchedulerManager.GetTaskFullPath("OneDrive Startup")}
+        .Concat(TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\OneDrive\")).ToArray();
 
-        protected static readonly string[] retailTasks = {
-        @"\Microsoft\Windows\RetailDemo\CleanupOfflineContent",
-        @"\Microsoft\Windows\RetailDemo\Retail Demo System Agent",
-        @"\Microsoft\Windows\RetailDemo\Retail Demo System Agent",
-        @"\Microsoft\Windows\RetailDemo\Desktop Retail Demo Idle Detector" };
+        protected static readonly string[] retailTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\RetailDemo\", @"\Microsoft\Windows\Retail Demo\");
 
-        protected static readonly string[] edgeTasks = {
+        public static readonly string[] edgeTasks = {
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA"),
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore"),
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")};
