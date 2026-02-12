@@ -50,6 +50,7 @@
                     <uc:ToggleButton x:Name="TglButton17" Visibility="{Binding NvSupportAvailable}" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton17].State}" TextResource="{DynamicResource tgl17_conf}" Description="{DynamicResource tgl17_desc_conf}" />
                     <uc:ToggleButton x:Name="TglButton18" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton18].State}" TextResource="{DynamicResource tgl18_conf}" Description="{DynamicResource tgl18_desc_conf}" />
                     <uc:ToggleButton x:Name="TglButton19" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton19].State}" TextResource="{DynamicResource tgl19_conf}" Description="{DynamicResource tgl19_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton20" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton20].State}" TextResource="{DynamicResource tgl20_conf}" Description="{DynamicResource tgl20_desc_conf}" />
                     
                 </uc:FlowPanel>
 

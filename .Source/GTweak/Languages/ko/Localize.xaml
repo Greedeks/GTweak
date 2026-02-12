@@ -165,7 +165,8 @@
     <v:String x:Key="tgl17_conf">NVIDIA 텔레메트리 수집 및 모니터링</v:String>
     <v:String x:Key="tgl18_conf">사용자 행동 기록 유지</v:String>
     <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
-
+    <v:String x:Key="tgl20_conf">Intel 텔레메트리 수집 및 모니터링</v:String>
+    
     <v:String x:Key="tgl1_desc_conf">Windows는 사용자의 작업을 추적하기 위해 각 사용자에 대해 고유한 광고 식별자를 만듭니다. 이 식별자는 응용 프로그램 개발자와 Windows 자체에서 응용 프로그램에서 특정 광고를 제공하는 등 자체 목적을 위해 사용됩니다.</v:String>
     <v:String x:Key="tgl2_desc_conf">로컬 계정을 사용하더라도 Windows는 항상 데이터를 Microsoft 서버와 동기화하려고 시도합니다. 특히 테마, 비밀번호, Windows 설정, 브라우저 설정, 입력 도구 모음 설정, 간소화된 액세스 설정, 추가 설정 등이 이에 해당합니다.</v:String>
     <v:String x:Key="tgl3_desc_conf">원격 분석 (진단 데이터)은 Windows가 Microsoft 서버로 보내기 위해 자동으로 수집하는 데이터, 즉 간단히 말해 “무엇? 어디서?  왜 그리고 언제 사용하는가?"에 대한 정보입니다. Microsoft는 이 데이터가 비개인화되어 있으며 회사의 Windows 개발에 도움이 된다고 주장합니다. 정보 수집 사실에 대해 걱정하지 않더라도 프로세서에 과도한 부하가 발생하여 시스템 속도가 느려지는 또 다른 문제가 발생할 수 있습니다.</v:String>
@@ -185,6 +186,7 @@
     <v:String x:Key="tgl17_desc_conf">시스템 및 사용에 대한 데이터 수집 및 전송을 담당하는 서비스 또는 비디오 드라이버의 작동과 관련이 없는 기능은 쓸모가 없습니다. NVIDIA가 수집하는 이유와 정보의 종류는 자체적으로만 알려져 있습니다. 그러나 이것이 최종 사용자에게 유용한 것이 없다는 사실은 분명합니다.</v:String>
     <v:String x:Key="tgl18_desc_conf">이 조정은 UAR (사용자 활동 기록) 기능을 비활성화합니다 – 스크린샷 촬영, 텍스트 입력, 프로그램 실행, 화면이 잠긴 상태에서도 웹캠 접근 제공 등 컴퓨터에서 발생하는 모든 행동을 순차적으로 기록하는 시스템입니다.</v:String>
     <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
+    <v:String x:Key="tgl20_desc_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -491,5 +493,6 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 

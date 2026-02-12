@@ -58,6 +58,8 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\Maps\MapsToastTask",
         @"\Microsoft\Windows\Maps\MapsUpdateTask" };
 
+        protected static readonly string intelTask = @"\Intel\Intel Telemetry 2 (x86)";
+
         protected static readonly string[] winUpdatesTasks = {
         @"\Microsoft\Windows\UpdateOrchestrator\Report policies",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Maintenance Work",
@@ -96,7 +98,7 @@ namespace GTweak.Utilities.Storage
 
         protected static readonly string[] retailTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\RetailDemo\", @"\Microsoft\Windows\Retail Demo\");
 
-        public static readonly string[] edgeTasks = {
+        protected static readonly string[] edgeTasks = {
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA"),
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore"),
         TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")};

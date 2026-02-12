@@ -93,6 +93,8 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "MapUpdate", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "AutoUpdateEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", "0") || IsTaskEnabled(mapsTasks);
+
+            _сontrolWriter.Button[20] = IsTaskEnabled(intelTask);
         }
 
         internal bool IsDefaultHosts()
@@ -409,6 +411,9 @@ namespace GTweak.Utilities.Tweaks
                     }
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "MapUpdate", isDisabled ? 0 : 1, RegistryValueKind.DWord);
                     SetTaskState(!isDisabled, mapsTasks);
+                    break;
+                case "TglButton20":
+                    SetTaskState(!isDisabled, intelTask);
                     break;
                 default:
                     break;

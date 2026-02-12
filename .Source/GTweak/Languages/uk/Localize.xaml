@@ -165,7 +165,8 @@
     <v:String x:Key="tgl17_conf">Збір даних та моніторинг телеметрії NVIDIA</v:String>
     <v:String x:Key="tgl18_conf">Журналювання дій користувача</v:String>
     <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
-
+    <v:String x:Key="tgl20_conf">Збір даних та моніторинг телеметрії Intel</v:String>
+    
     <v:String x:Key="tgl1_desc_conf">Для кожного користувача система Windows створює унікальний рекламний ідентифікатор для відстеження його дій. Використовується розробниками програм та самої Windows для власних цілей, у тому числі для демонстрації конкретної реклами в додатках.</v:String>
     <v:String x:Key="tgl2_desc_conf">Навіть якщо ви використовуєте локальний обліковий запис, Windows завжди намагається синхронізувати з серверами Microsoft такі ваші дані, як теми, паролі, налаштування Windows, налаштування браузера, налаштування мовної панелі, налаштування спрощеного доступу, додаткові налаштування.</v:String>
     <v:String x:Key="tgl3_desc_conf">Телеметрія - це діагностичні дані, які Windows автоматично збирає та надсилає на сервери Microsoft.  Концепція збору - «Що? Де? Коли? Навіщо ви використовуєте?» Microsoft стверджує, що дані анонімні та допомагають компанії у розробці Windows. Навіть якщо вас не хвилює збір такої інформації, може виникнути інша проблема - надмірне навантаження на процесор і уповільнення роботи системи.</v:String>
@@ -185,6 +186,7 @@
     <v:String x:Key="tgl17_desc_conf">Служба для збору та передачі даних про систему та її використання. Марна і не пов'язана з роботою відео дайвера. Чому і яка інформація збирається, знає лише NVIDIA. Факт, що служба нічого корисного для кінцевого користувача не робить, абсолютно очевидний.</v:String>
     <v:String x:Key="tgl18_desc_conf">Налаштування вимикає функцію UAR (User Activity Recording) – систему, яка послідовно фіксує кожну вашу дію на комп’ютері: від створення скриншотів і набору тексту до запуску програм та надання доступу до вебкамери навіть у стані заблокованого екрану, а також багато іншого.</v:String>
     <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
+    <v:String x:Key="tgl20_desc_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -491,5 +493,6 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
