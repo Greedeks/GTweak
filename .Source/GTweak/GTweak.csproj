@@ -569,6 +569,16 @@
     <Resource Include="Assets\ImageAddonsFiles\CmdFile.png" />
     <Resource Include="Assets\ImageAddonsFiles\PowershellFile.png" />
     <Resource Include="Assets\ImageAddonsFiles\RegistryFile.png" />
+    <Resource Include="Assets\ImagePackages\3DBuilder.png" />
+    <Resource Include="Assets\ImagePackages\Disney.png" />
+    <Resource Include="Assets\ImagePackages\Facebook.png" />
+    <Resource Include="Assets\ImagePackages\Hulu.png" />
+    <Resource Include="Assets\ImagePackages\Instagram.png" />
+    <Resource Include="Assets\ImagePackages\MicrosoftSway.png" />
+    <Resource Include="Assets\ImagePackages\Netflix.png" />
+    <Resource Include="Assets\ImagePackages\TikTok.png" />
+    <Resource Include="Assets\ImagePackages\TwitterX.png" />
+    <Resource Include="Assets\ImagePackages\YandexMusic.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

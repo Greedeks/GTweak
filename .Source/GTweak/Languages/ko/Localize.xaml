@@ -318,6 +318,16 @@
     <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
     <v:String x:Key="Spotify_pkg">Spotify</v:String>
     <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    <v:String x:Key="Facebook_pkg">Facebook</v:String>
+    <v:String x:Key="Hulu_pkg">Hulu</v:String>
+    <v:String x:Key="Disney_pkg">Disney</v:String>
+    <v:String x:Key="Instagram_pkg">Instagram</v:String>
+    <v:String x:Key="TwitterX_pkg">Twitter - X</v:String>
+    <v:String x:Key="TikTok_pkg">TikTok</v:String>
+    <v:String x:Key="MicrosoftSway_pkg">Microsoft Sway</v:String>
+    <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
+    <v:String x:Key="Netflix_pkg">Netflix</v:String>
+    <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
     
     <v:String x:Key="title_over_pkg">설치 제거 확인</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Microsoft Edge 브라우저를 제거하려고 합니다. 이렇게 하면 Microsoft Office (예: Meeting 인사이트, 룸 파인더), 사진 앱 (새 버전은 WebView2 사용), 일부 Telegram 봇, 그리고 내장된 WebView를 사용하는 기타 프로그램 등 다양한 응용 프로그램에서 웹 콘텐츠를 표시하는 데 사용되는 EdgeWebView 구성 요소도 제거됩니다. 진행하기 전에 이 구성 요소가 필요하지 않은지 확인하세요. 
@@ -493,6 +503,8 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
+
 
 
 

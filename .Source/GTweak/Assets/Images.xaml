@@ -7,7 +7,8 @@
     <BitmapImage x:Key="Img_RegistryFile" UriSource="pack://application:,,,/GTweak;component/Assets/ImageAddonsFiles/RegistryFile.png"/>
 
     <BitmapImage x:Key="Img_SandTimer" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/SandTimer.png"/>
-    
+
+    <BitmapImage x:Key="Img_3DBuilder" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/3DBuilder.png"/>
     <BitmapImage x:Key="Img_Alarms" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Alarms.png"/>
     <BitmapImage x:Key="Img_BingFinance" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/BingFinance.png"/>
     <BitmapImage x:Key="Img_BingNews" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/BingNews.png"/>
@@ -20,10 +21,14 @@
     <BitmapImage x:Key="Img_Copilot" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Copilot.png"/>
     <BitmapImage x:Key="Img_Cortana" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Cortana.png"/>
     <BitmapImage x:Key="Img_DevHome" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/DevHome.png"/>
+    <BitmapImage x:Key="Img_Disney" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Disney.png"/>
     <BitmapImage x:Key="Img_Edge" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Edge.png"/>
+    <BitmapImage x:Key="Img_Facebook" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Facebook.png"/>
     <BitmapImage x:Key="Img_FeedbackHub" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/FeedbackHub.png"/>
     <BitmapImage x:Key="Img_GetHelp" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/GetHelp.png"/>
     <BitmapImage x:Key="Img_GetStarted" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/GetStarted.png"/>
+    <BitmapImage x:Key="Img_Hulu" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Hulu.png"/>
+    <BitmapImage x:Key="Img_Instagram" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Instagram.png"/>
     <BitmapImage x:Key="Img_Linkedin" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Linkedin.png"/>
     <BitmapImage x:Key="Img_Mail" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Mail.png"/>
     <BitmapImage x:Key="Img_Maps" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Maps.png"/>
@@ -34,10 +39,12 @@
     <BitmapImage x:Key="Img_MicrosoftSolitaireCollection" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/MicrosoftSolitaireCollection.png"/>
     <BitmapImage x:Key="Img_MicrosoftStickyNotes" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/MicrosoftStickyNotes.png"/>
     <BitmapImage x:Key="Img_MicrosoftStore" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/MicrosoftStore.png"/>
+    <BitmapImage x:Key="Img_MicrosoftSway" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/MicrosoftSway.png"/>
     <BitmapImage x:Key="Img_MicrosoftTeams" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/MicrosoftTeams.png"/>
     <BitmapImage x:Key="Img_MixedReality" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/MixedReality.png"/>
     <BitmapImage x:Key="Img_MobilePlanOneConnect" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/MobilePlanOneConnect.png"/>
     <BitmapImage x:Key="Img_Music" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Music.png"/>
+    <BitmapImage x:Key="Img_Netflix" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Netflix.png"/>
     <BitmapImage x:Key="Img_Notepad" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Notepad.png"/>
     <BitmapImage x:Key="Img_OneDrive" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/OneDrive.png"/>
     <BitmapImage x:Key="Img_OneNote" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/OneNote.png"/>
@@ -50,15 +57,18 @@
     <BitmapImage x:Key="Img_ScreenSketch" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/ScreenSketch.png"/>
     <BitmapImage x:Key="Img_SkypeApp" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/SkypeApp.png"/>
     <BitmapImage x:Key="Img_SoundRecorder" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/SoundRecorder.png"/>
+    <BitmapImage x:Key="Img_Spotify" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Spotify.png"/>
     <BitmapImage x:Key="Img_Terminal" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Terminal.png"/>
+    <BitmapImage x:Key="Img_TikTok" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/TikTok.png"/>
     <BitmapImage x:Key="Img_Todos" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Todos.png"/>
+    <BitmapImage x:Key="Img_TwitterX" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/TwitterX.png"/>
     <BitmapImage x:Key="Img_Video" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Video.png"/>
     <BitmapImage x:Key="Img_WebMediaExtensions" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/WebMediaExtensions.png"/>
     <BitmapImage x:Key="Img_Widgets" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Widgets.png"/>
-    <BitmapImage x:Key="Img_Xbox" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Xbox.png"/>
     <BitmapImage x:Key="Img_WhiteBoard" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/WhiteBoard.png"/>
     <BitmapImage x:Key="Img_Wallet" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Wallet.png"/>
-    <BitmapImage x:Key="Img_Spotify" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Spotify.png"/>
     <BitmapImage x:Key="Img_WhatsApp" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/WhatsApp.png"/>
+    <BitmapImage x:Key="Img_Xbox" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/Xbox.png"/>
+    <BitmapImage x:Key="Img_YandexMusic" UriSource="pack://application:,,,/GTweak;component/Assets/ImagePackages/YandexMusic.png"/>
     
 </ResourceDictionary>

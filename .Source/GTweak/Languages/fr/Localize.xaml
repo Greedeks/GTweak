@@ -318,6 +318,16 @@
     <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
     <v:String x:Key="Spotify_pkg">Spotify</v:String>
     <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    <v:String x:Key="Facebook_pkg">Facebook</v:String>
+    <v:String x:Key="Hulu_pkg">Hulu</v:String>
+    <v:String x:Key="Disney_pkg">Disney</v:String>
+    <v:String x:Key="Instagram_pkg">Instagram</v:String>
+    <v:String x:Key="TwitterX_pkg">Twitter - X</v:String>
+    <v:String x:Key="TikTok_pkg">TikTok</v:String>
+    <v:String x:Key="MicrosoftSway_pkg">Microsoft Sway</v:String>
+    <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
+    <v:String x:Key="Netflix_pkg">Netflix</v:String>
+    <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
     
     <v:String x:Key="title_over_pkg">Confirmation de désinstallation</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">You are about to uninstall the Microsof  Edge browser. This will also remove the EdgeWebView component, which is used to display web content in various applications — such as Microsoft  Office (e.g., Meeting Insights, Room Finder), the Photos app (the new version uses WebView2), some Telegram bots, and other programs that rely on embedded WebView. Before proceeding, make sure you do not need this component. 
@@ -494,6 +504,8 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
+
 
 
 

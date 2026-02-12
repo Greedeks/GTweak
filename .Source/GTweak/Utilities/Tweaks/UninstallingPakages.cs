@@ -89,6 +89,16 @@ namespace GTweak.Utilities.Tweaks
             ["Wallet"] = new PackagesInfo("MSPay", new[] { "Microsoft.Wallet" }),
             ["Spotify"] = new PackagesInfo(scripts: new[] { "SpotifyAB.SpotifyMusic" }),
             ["WhatsApp"] = new PackagesInfo("WhatsAppDesktop", new[] { "5319275A.WhatsAppDesktop" }),
+            ["Facebook"] = new PackagesInfo(scripts: new[] { "Facebook.Facebook" }),
+            ["Hulu"] = new PackagesInfo(scripts: new[] { "Hulu.Hulu" }),
+            ["Disney"] = new PackagesInfo("9nxqxxlfst89", new[] { "Disney.37853FC22B2CE" }),
+            ["Instagram"] = new PackagesInfo(scripts: new[] { "Facebook.InstagramBeta" }),
+            ["Twitter"] = new PackagesInfo(scripts: new[] { "9E2F88E3.Twitter" }),
+            ["TikTok"] = new PackagesInfo(scripts: new[] { "BytedancePte.Ltd.TikTok" }),
+            ["MicrosoftSway"] = new PackagesInfo(scripts: new[] { "Microsoft.Office.Sway" }),
+            ["Builder3D"] = new PackagesInfo("3D Builder", new[] { "Microsoft.3DBuilder" }),
+            ["Netflix"] = new PackagesInfo(scripts: new[] { "4DF9E0F8.Netflix" }),
+            ["YandexMusic"] = new PackagesInfo(scripts: new[] { "A025C540.Yandex.Music" }),
         };
 
         internal static HashSet<string> InstalledPackagesCache = new HashSet<string>();
