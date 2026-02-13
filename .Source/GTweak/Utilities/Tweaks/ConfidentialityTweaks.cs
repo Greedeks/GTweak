@@ -94,7 +94,8 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "AutoUpdateEnabled", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", "0") || IsTaskEnabled(mapsTasks);
 
-            _сontrolWriter.Button[20] = IsTaskEnabled(intelTask);
+            _сontrolWriter.Button[20] = (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start")
+                && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start", "4")) || IsTaskEnabled(intelTask);
         }
 
         internal bool IsDefaultHosts()
@@ -413,6 +414,10 @@ namespace GTweak.Utilities.Tweaks
                     SetTaskState(!isDisabled, mapsTasks);
                     break;
                 case "TglButton20":
+                    if (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start"))
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Telemetry", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                    }
                     SetTaskState(!isDisabled, intelTask);
                     break;
                 default:
