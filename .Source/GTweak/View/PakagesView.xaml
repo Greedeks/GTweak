@@ -87,6 +87,7 @@
                         <ToggleButton x:Name="MicrosoftTeams" IsChecked="{Binding [MicrosoftTeams].Installed}" IsEnabled="{Binding [MicrosoftTeams].IsUnavailable}" ToolTip="{DynamicResource MicrosoftTeams_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_MicrosoftTeams}"/>
                         <ToggleButton x:Name="SkypeApp" IsChecked="{Binding [SkypeApp].Installed}" IsEnabled="{Binding [SkypeApp].IsUnavailable}" ToolTip="{DynamicResource SkypeApp_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_SkypeApp}"/>
                         <ToggleButton x:Name="Camera" IsChecked="{Binding [Camera].Installed}" IsEnabled="{Binding [Camera].IsUnavailable}" ToolTip="{DynamicResource Camera_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Camera}"/>
+                        <ToggleButton x:Name="Messaging" IsChecked="{Binding [Messaging].Installed}" IsEnabled="{Binding [Messaging].IsUnavailable}" ToolTip="{DynamicResource Messaging_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Messaging}"/>
                         <ToggleButton x:Name="BingSports" IsChecked="{Binding [BingSports].Installed}" IsEnabled="{Binding [BingSports].IsUnavailable}" ToolTip="{DynamicResource BingSports_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_BingSports}"/>
                         <ToggleButton x:Name="BingFinance" IsChecked="{Binding [BingFinance].Installed}" IsEnabled="{Binding [BingFinance].IsUnavailable}" ToolTip="{DynamicResource BingFinance_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_BingFinance}"/>
                         <ToggleButton x:Name="OneNote" IsChecked="{Binding [OneNote].Installed}" IsEnabled="{Binding [OneNote].IsUnavailable}" ToolTip="{DynamicResource OneNote_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_OneNote}"/>
@@ -122,7 +123,16 @@
                         <ToggleButton x:Name="Twitter" IsChecked="{Binding [TwitterX].Installed}" IsEnabled="{Binding [TwitterX].IsUnavailable}" ToolTip="{DynamicResource TwitterX_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_TwitterX}"/>
                         <ToggleButton x:Name="TikTok" IsChecked="{Binding [TikTok].Installed}" IsEnabled="{Binding [TikTok].IsUnavailable}" ToolTip="{DynamicResource TikTok_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_TikTok}"/>
                         <ToggleButton x:Name="Netflix" IsChecked="{Binding [Netflix].Installed}" IsEnabled="{Binding [Netflix].IsUnavailable}" ToolTip="{DynamicResource Netflix_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Netflix}"/>
-
+                        <ToggleButton x:Name="Viber" IsChecked="{Binding [Viber].Installed}" IsEnabled="{Binding [Viber].IsUnavailable}" ToolTip="{DynamicResource Viber_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Viber}"/>
+                        <ToggleButton x:Name="Picsart" IsChecked="{Binding [Picsart].Installed}" IsEnabled="{Binding [Picsart].IsUnavailable}" ToolTip="{DynamicResource Picsart_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Picsart}"/>
+                        <ToggleButton x:Name="PrimeVideo" IsChecked="{Binding [PrimeVideo].Installed}" IsEnabled="{Binding [PrimeVideo].IsUnavailable}" ToolTip="{DynamicResource PrimeVideo_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_PrimeVideo}"/>
+                        <ToggleButton x:Name="TuneInRadio" IsChecked="{Binding [TuneInRadio].Installed}" IsEnabled="{Binding [TuneInRadio].IsUnavailable}" ToolTip="{DynamicResource TuneInRadio_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_TuneInRadio}"/>
+                        <ToggleButton x:Name="iHeartRadio" IsChecked="{Binding [iHeartRadio].Installed}" IsEnabled="{Binding [iHeartRadio].IsUnavailable}" ToolTip="{DynamicResource iHeartRadio_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_iHeartRadio}"/>
+                        <ToggleButton x:Name="Shazam" IsChecked="{Binding [Shazam].Installed}" IsEnabled="{Binding [Shazam].IsUnavailable}" ToolTip="{DynamicResource Shazam_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Shazam}"/>
+                        <ToggleButton x:Name="Plex" IsChecked="{Binding [Plex].Installed}" IsEnabled="{Binding [Plex].IsUnavailable}" ToolTip="{DynamicResource Plex_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Plex}"/>
+                        <ToggleButton x:Name="Pandora" IsChecked="{Binding [Pandora].Installed}" IsEnabled="{Binding [Pandora].IsUnavailable}" ToolTip="{DynamicResource Pandora_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_Pandora}"/>
+                        <ToggleButton x:Name="DolbyAccess" IsChecked="{Binding [DolbyAccess].Installed}" IsEnabled="{Binding [DolbyAccess].IsUnavailable}" ToolTip="{DynamicResource DolbyAccess_pkg}" Style="{StaticResource TglPackages}" Tag="{StaticResource Img_DolbyAccess}"/>
+                   
                     </uc:FlowPanel>
                 </ScrollViewer>
             </Grid>

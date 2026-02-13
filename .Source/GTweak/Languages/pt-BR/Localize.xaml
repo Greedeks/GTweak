@@ -328,6 +328,16 @@
     <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
     <v:String x:Key="Netflix_pkg">Netflix</v:String>
     <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
     
     <v:String x:Key="title_over_pkg">Confirmação de desinstalação</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Você está prestes a desinstalar o navegador Microsoft Edge. Isso também removerá o componente EdgeWebView, que é usado para exibir conteúdo da web em vários aplicativos — como o Microsoft Office (por exemplo, Análises de Reunião, Localizador de Salas), o aplicativo Fotos (a nova versão usa o WebView2), alguns bots do Telegram e outros programas que dependem do WebView incorporado. Antes de prosseguir, certifique-se de que não precisa deste componente.
@@ -503,6 +513,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

@@ -328,6 +328,16 @@
     <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
     <v:String x:Key="Netflix_pkg">Netflix</v:String>
     <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
     
     <v:String x:Key="title_over_pkg">Підтвердження видалення</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Ви збираєтесь видалити браузер Microsoft Edge. При цьому буде видалений компонент EdgeWebView, який використовується для відображення веб-сторінок у додатках — таких як Microsoft Office (наприклад, Meeting Insights, Room Finder), стандартний додаток «Фотографії» (нова версія використовує WebView2), деякі боти Telegram, а також інші програми, які залежать від вбудованого WebView. Перед тим як продовжити, переконайтесь, що цей компонент вам справді не потрібен. 
@@ -503,6 +513,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

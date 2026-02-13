@@ -328,6 +328,16 @@
     <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
     <v:String x:Key="Netflix_pkg">Netflix</v:String>
     <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
     
     <v:String x:Key="title_over_pkg">Eltávolítás megerősítése</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Hamarosan eltávolítja a Microsoft Edge böngészőt. Ezzel eltávolítja az EdgeWebView összetevőt is, amely a webes tartalmak megjelenítésére szolgál különféle alkalmazásokban – például a Microsoft Office-ban (pl. Meeting Insights, Room Finder), a Fotók alkalmazásban (az új verzió a WebView2-t használja), néhány Telegram botban és más, a beágyazott WebView-ra támaszkodó programokban. Mielőtt folytatná, győződjön meg arról, hogy nincs szüksége erre az összetevőre.
@@ -503,6 +513,7 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+
 
 
 

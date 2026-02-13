@@ -579,6 +579,16 @@
     <Resource Include="Assets\ImagePackages\TikTok.png" />
     <Resource Include="Assets\ImagePackages\TwitterX.png" />
     <Resource Include="Assets\ImagePackages\YandexMusic.png" />
+    <Resource Include="Assets\ImagePackages\iHeartRadio.png" />
+    <Resource Include="Assets\ImagePackages\Messaging.png" />
+    <Resource Include="Assets\ImagePackages\Picsart.png" />
+    <Resource Include="Assets\ImagePackages\Plex.png" />
+    <Resource Include="Assets\ImagePackages\PrimeVideo.png" />
+    <Resource Include="Assets\ImagePackages\Shazam.png" />
+    <Resource Include="Assets\ImagePackages\TuneInRadio.png" />
+    <Resource Include="Assets\ImagePackages\Viber.png" />
+    <Resource Include="Assets\ImagePackages\Pandora.png" />
+    <Resource Include="Assets\ImagePackages\DolbyAccess.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

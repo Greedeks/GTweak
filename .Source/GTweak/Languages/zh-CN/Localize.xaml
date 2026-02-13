@@ -328,6 +328,16 @@
     <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
     <v:String x:Key="Netflix_pkg">Netflix</v:String>
     <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
     
     <v:String x:Key="title_over_pkg">解除安装确认</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">您即将解除安装 Microsoft Edge 浏览器。此操作亦将移除 EdgeWebView 组件，该组件用于在多种应用程序中显示网页内容——例如 Microsoft Office（如会议洞察、会议室搜索功能）、照片应用程序（新版采用 WebView2）、部分 Telegram 机器人，以及其他依赖嵌入式 WebView 的程序。继续操作前，请确认您不再需要此组件。 
@@ -503,6 +513,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 
