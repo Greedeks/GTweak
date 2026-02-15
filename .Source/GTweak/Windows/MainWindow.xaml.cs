@@ -146,10 +146,7 @@ namespace GTweak.Windows
                 await Task.Delay(100).ConfigureAwait(false);
                 _ignoreMouseClick = false;
 
-                if (e != null)
-                {
-                    e.Handled = true;
-                }
+                e.Handled = true;
             }
         }
 

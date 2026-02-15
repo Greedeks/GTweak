@@ -20,32 +20,29 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="TitleBar" Grid.Row="0"  Background="Transparent" MouseDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove" MouseLeftButtonUp="TitleBar_MouseLeftButtonUp" PreviewMouseLeftButtonDown="TitleBar_PreviewMouseLeftButtonDown">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+        <Grid x:Name="TitleBar" Grid.Row="0" Background="Transparent" MouseDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove" MouseLeftButtonUp="TitleBar_MouseLeftButtonUp" PreviewMouseLeftButtonDown="TitleBar_PreviewMouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-                <ToggleButton x:Name="ButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}"  Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
-
-                <Button x:Name="ButtonSettings" Style="{StaticResource TitleButtonSettings}" Margin="0,0,10,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click" PreviewKeyDown="TglButton_PreviewKeyDown"/>
-
-                <Button x:Name="ButtonMinimize" Style="{StaticResource TitleButtonMinimize}" Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
-
-                <Button x:Name="ButtonMaximize" Style="{StaticResource TitleButtonMaximize}" Margin="0,0,0,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
-
-                <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,0,5,2" HorizontalAlignment="Right" VerticalAlignment="Center" Click="TitleButton_Click"/>
-
-            </StackPanel>
-
-            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True" Height="48">
+            <DockPanel Grid.Column="0" VerticalAlignment="Center" LastChildFill="False" Height="48">
                 <Image Width="20" Height="20" Source="/GTweak.ico" Stretch="Uniform" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="15,0,0,0" />
-                <TextBlock x:Name="TitleName" Text="GTweak" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="10,0,20,0" TextTrimming="CharacterEllipsis" KeyboardNavigation.IsTabStop="False">
+                <TextBlock x:Name="TitleName" Text="GTweak" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="10,0,20,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" KeyboardNavigation.IsTabStop="False" Width="61">
                     <TextBlock.Effect>
                         <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
                     </TextBlock.Effect>
                 </TextBlock>
             </DockPanel>
 
-            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center" LastChildFill="True" Height="40">
-                <Grid Width="30" Height="30">
+            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0"  Width="30" Height="30">
                     <Border BorderBrush="{StaticResource Brush_Accent}" CornerRadius="50" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center">
                         <Border CornerRadius="50">
                             <Border.Effect>
@@ -63,12 +60,21 @@
                     </Path>
                 </Grid>
 
-                <TextBlock Width="Auto" Text="{Binding DisplayProfileName}" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" HorizontalAlignment="Right" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False" Margin="10,0,0,0">
+                <TextBlock Grid.Column="1" Text="{Binding DisplayProfileName}" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="10,0,10,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" KeyboardNavigation.IsTabStop="False" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Grid}}">
                     <TextBlock.Effect>
                         <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
                     </TextBlock.Effect>
                 </TextBlock>
-            </DockPanel>
+            </Grid>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <ToggleButton x:Name="ButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}"  Margin="0,0,0,2" Click="TitleButton_Click"/>
+                <Button x:Name="ButtonSettings" Style="{StaticResource TitleButtonSettings}" Margin="0,0,10,2" Click="TitleButton_Click"/>
+                <Button x:Name="ButtonMinimize" Style="{StaticResource TitleButtonMinimize}" Margin="0,0,0,2" Click="TitleButton_Click"/>
+                <Button x:Name="ButtonMaximize" Style="{StaticResource TitleButtonMaximize}" Margin="0,0,0,2" Click="TitleButton_Click"/>
+                <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,0,5,2" Click="TitleButton_Click"/>
+            </StackPanel>
+
         </Grid>
 
         <Grid Grid.Row="1">
