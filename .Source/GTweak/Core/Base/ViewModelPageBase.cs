@@ -22,7 +22,7 @@ namespace GTweak.Core.Base
         public ObservableCollection<TModel> Toggles { get; private set; }
 
         public TModel this[string name] => Toggles.FirstOrDefault(d => d.Name == name);
-        protected abstract Dictionary<string, object> GetControlStates();
+        protected abstract IReadOnlyDictionary<string, object> GetControlStates();
         protected abstract void Analyze(TTweaksClass tweaks);
 
         protected ViewModelPageBase()

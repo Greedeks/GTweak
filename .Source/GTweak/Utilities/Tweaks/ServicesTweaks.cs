@@ -12,7 +12,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : FirewallManager
     {
-        internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
         private readonly (string Normal, string Block)[] _updateFiles = new[] { PathLocator.Executable.UsoClient, PathLocator.Executable.WorkerCore, PathLocator.Executable.WuauClient, PathLocator.Executable.WaaSMedic, PathLocator.Executable.MoNotificationUx };
 

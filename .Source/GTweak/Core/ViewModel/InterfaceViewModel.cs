@@ -14,7 +14,7 @@ namespace GTweak.Core.ViewModel
         public Visibility Win11FeatureAvailable => HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(22621.2361m) >= 0 ? Visibility.Visible : Visibility.Collapsed;
         public bool IsBlockWithoutLicense => WinLicenseHandler.IsWindowsActivated;
 
-        protected override Dictionary<string, object> GetControlStates() => InterfaceTweaks.ControlStates;
+        protected override IReadOnlyDictionary<string, object> GetControlStates() => InterfaceTweaks.ControlStates;
 
         protected override void Analyze(InterfaceTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
     }

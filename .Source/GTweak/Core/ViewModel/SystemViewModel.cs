@@ -11,7 +11,7 @@ namespace GTweak.Core.ViewModel
     {
         public Visibility RealtekSupportAvailable => HardwareData.VendorDetection.Realtek ? Visibility.Visible : Visibility.Collapsed;
 
-        protected override Dictionary<string, object> GetControlStates() => SystemTweaks.ControlStates;
+        protected override IReadOnlyDictionary<string, object> GetControlStates() => SystemTweaks.ControlStates;
 
         protected override void Analyze(SystemTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
     }

@@ -13,7 +13,7 @@ namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ConfidentialityTweaks : FirewallManager
     {
-        internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
 
         internal void AnalyzeAndUpdate()

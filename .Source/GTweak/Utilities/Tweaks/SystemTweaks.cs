@@ -32,7 +32,7 @@ namespace GTweak.Utilities.Tweaks
         private static bool _isNetshState = false, _isBluetoothStatus = false, _isTickState = false;
         private static string _currentPowerGuid = string.Empty;
 
-        internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
 
         public SystemTweaks() => _currentPowerGuid = RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);

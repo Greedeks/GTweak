@@ -7,7 +7,7 @@ namespace GTweak.Core.ViewModel
 {
     internal class ConfidentialityViewModel : ViewModelPageBase<ConfidentialityModel, ConfidentialityTweaks>
     {
-        protected override Dictionary<string, object> GetControlStates() => ConfidentialityTweaks.ControlStates;
+        protected override IReadOnlyDictionary<string, object> GetControlStates() => ConfidentialityTweaks.ControlStates;
 
         protected override void Analyze(ConfidentialityTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
     }

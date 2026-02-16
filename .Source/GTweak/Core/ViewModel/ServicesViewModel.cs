@@ -7,7 +7,7 @@ namespace GTweak.Core.ViewModel
 {
     internal class ServicesViewModel : ViewModelPageBase<ServicesModel, ServicesTweaks>
     {
-        protected override Dictionary<string, object> GetControlStates() => ServicesTweaks.ControlStates;
+        protected override IReadOnlyDictionary<string, object> GetControlStates() => ServicesTweaks.ControlStates;
 
         protected override void Analyze(ServicesTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
     }

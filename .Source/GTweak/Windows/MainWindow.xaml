@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="TitleBar" Grid.Row="0" Background="Transparent" MouseDown="TitleBar_MouseDown" MouseMove="TitleBar_MouseMove" MouseLeftButtonUp="TitleBar_MouseLeftButtonUp" PreviewMouseLeftButtonDown="TitleBar_PreviewMouseLeftButtonDown">
+        <Grid x:Name="TitleBar" Grid.Row="0" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -67,7 +67,7 @@
                 </TextBlock>
             </Grid>
 
-            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <StackPanel x:Name="TitleButtonsPanel" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <ToggleButton x:Name="ButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}"  Margin="0,0,0,2" Click="TitleButton_Click"/>
                 <Button x:Name="ButtonSettings" Style="{StaticResource TitleButtonSettings}" Margin="0,0,10,2" Click="TitleButton_Click"/>
                 <Button x:Name="ButtonMinimize" Style="{StaticResource TitleButtonMinimize}" Margin="0,0,0,2" Click="TitleButton_Click"/>

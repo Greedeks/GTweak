@@ -1,9 +1,11 @@
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using GTweak.Utilities.Animation;
@@ -15,10 +17,14 @@ namespace GTweak.Windows
 {
     public partial class MainWindow : FluentWindow
     {
-        private bool _settingsOpen = false, _draggingFromMaximized = false, _ignoreMouseClick = false;
-        private Point? _lastNormalPosition;
-        private Size? _lastNormalSize;
-        private Point _mouseDownWindowPoint;
+        [DllImport("user32.dll")]
+        private static extern bool ReleaseCapture();
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        private const int WM_NCLBUTTONDOWN = 0xA1, HTCAPTION = 0x2;
+        private bool _settingsOpen = false, _ignoreMouseClick = false;
 
         public MainWindow()
         {
@@ -35,85 +41,11 @@ namespace GTweak.Windows
         }
 
         #region TitleBar
-        private void HandleWindowState()
+        private void HandleWindowState() => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+
+        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (WindowState == WindowState.Normal)
-            {
-                _lastNormalPosition = new Point(Left, Top);
-                _lastNormalSize = new Size(Width, Height);
-                WindowState = WindowState.Maximized;
-            }
-            else
-            {
-                WindowState = WindowState.Normal;
-            }
-        }
-
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e?.ChangedButton == MouseButton.Left && e?.ClickCount != 2)
-            {
-                if (WindowState == WindowState.Maximized)
-                {
-                    if (e != null)
-                    {
-                        _mouseDownWindowPoint = e.GetPosition(this);
-                        _draggingFromMaximized = true;
-                    }
-                }
-                else
-                {
-                    DragMove();
-                }
-            }
-        }
-
-        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_draggingFromMaximized)
-            {
-                if (e?.LeftButton != MouseButtonState.Pressed)
-                {
-                    _draggingFromMaximized = false;
-                    return;
-                }
-
-                Point currentScreen = PointToScreen(e.GetPosition(this));
-                Vector delta = currentScreen - PointToScreen(_mouseDownWindowPoint);
-
-                if (Math.Abs(delta.X) > SystemParameters.MinimumHorizontalDragDistance || Math.Abs(delta.Y) > SystemParameters.MinimumVerticalDragDistance)
-                {
-                    _draggingFromMaximized = false;
-
-                    Size restoreSize = _lastNormalSize ?? new Size(RestoreBounds.Width, RestoreBounds.Height);
-                    double restoreWidth = restoreSize.Width;
-                    double restoreHeight = restoreSize.Height;
-
-                    double relX = ActualWidth > 0 ? _mouseDownWindowPoint.X / ActualWidth : 0.5;
-
-                    WindowState = WindowState.Normal;
-                    Width = restoreWidth;
-                    Height = restoreHeight;
-
-                    double left = currentScreen.X - restoreWidth * relX;
-                    double top = currentScreen.Y - _mouseDownWindowPoint.Y;
-
-                    left = Math.Max(0, Math.Min(Math.Max(0, SystemParameters.PrimaryScreenWidth - restoreWidth), left));
-                    top = Math.Max(0, Math.Min(Math.Max(0, SystemParameters.PrimaryScreenHeight - restoreHeight), top));
-
-                    Left = left;
-                    Top = top;
-
-                    Dispatcher.BeginInvoke((Action)(() => { DragMove(); }));
-                }
-            }
-        }
-
-        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) => _draggingFromMaximized = false;
-
-        private async void TitleBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e?.ChangedButton == MouseButton.Left && e?.ClickCount == 2)
+            if (e?.ChangedButton == MouseButton.Left)
             {
                 if (e?.OriginalSource is DependencyObject source)
                 {
@@ -130,23 +62,19 @@ namespace GTweak.Windows
                 }
 
                 _ignoreMouseClick = true;
-                HandleWindowState();
+                TitleButtonsPanel.IsHitTestVisible = false;
 
-                if (WindowState == WindowState.Maximized && _lastNormalPosition.HasValue && _lastNormalSize.HasValue)
+                if (e?.ClickCount == 2)
                 {
-                    Point pos = _lastNormalPosition.Value;
-                    Size sz = _lastNormalSize.Value;
-
-                    Left = pos.X;
-                    Top = pos.Y;
-                    Width = sz.Width;
-                    Height = sz.Height;
+                    HandleWindowState();
+                    return;
                 }
 
-                await Task.Delay(100).ConfigureAwait(false);
-                _ignoreMouseClick = false;
+                IntPtr hwnd = new WindowInteropHelper(this).Handle;
+                ReleaseCapture();
+                SendMessage(hwnd, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);
 
-                e.Handled = true;
+                Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = false; TitleButtonsPanel.IsHitTestVisible = true; }));
             }
         }
 
