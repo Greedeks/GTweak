@@ -164,7 +164,7 @@
     <v:String x:Key="tgl16_conf">«Naplózás» Windows események</v:String>
     <v:String x:Key="tgl17_conf">NVIDIA telemetria gyűjtése és monitorozása</v:String>
     <v:String x:Key="tgl18_conf">A felhasználói viselkedés nyilvántartása</v:String>
-    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
+    <v:String x:Key="tgl19_conf">Adatok gyűjtése és offline térképek háttérfrissítései</v:String>
     <v:String x:Key="tgl20_conf">Intel telemetria gyűjtése és monitorozása</v:String>
     
     <v:String x:Key="tgl1_desc_conf">A Windows minden felhasználó számára egyedi hirdetési azonosítót hoz létre a műveletek nyomon követéséhez. Amelyet az alkalmazásfejlesztők és maga a Windows használnak saját céljaikra, beleértve az alkalmazások konkrét hirdetéseinek megjelenítését is.</v:String>
@@ -185,8 +185,8 @@
     <v:String x:Key="tgl16_desc_conf">Olyan eseménynapló, amely rendszerdiagnosztikai adatokat gyűjt és dolgoz fel, pazarolva a számítógép erőforrásait. A szolgáltatás nem ad semmi jót, jobb, ha letiltja, így megakadályozza a bizalmas információk küldését.</v:String>
     <v:String x:Key="tgl17_desc_conf">Haszontalan az a szolgáltatás, amely felelős a rendszerrel és annak használatával kapcsolatos adatok gyűjtéséért és továbbításáért, vagy egy olyan funkcióért, amely nem kapcsolódik a video-illesztőprogram működéséhez. Hogy miért és milyen információkat gyűjt az NVIDIA, azt csak saját maga tudja. De az a tény, hogy ez nem hoz semmi hasznosat a végfelhasználó számára, teljesen nyilvánvaló.</v:String>
     <v:String x:Key="tgl18_desc_conf">A beállítás letiltja az UAR (User Activity Recording) funkciót - egy olyan rendszert, amely szekvenciálisan naplózza a számítógépen végrehajtott összes műveletet: a képernyőképek készítésétől és a szöveg beírásától a programok indításáig, sőt a webkamerához való hozzáférés biztosításáig, miközben a képernyő zárolva van, és még sok más.</v:String>
-    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
-    <v:String x:Key="tgl20_desc_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
+    <v:String x:Key="tgl19_desc_conf">A Windows rendszeresen frissíti az offline térképeket, és háttérben értesítéseket küld az új adatokról. Ezek a folyamatok információkat gyűjthetnek a felhasználó tartózkodási helyéről, útvonalairól és a térkép használatáról. Ha nem használja az offline térképeket, javasoljuk azok letiltását, hogy elkerülje a rejtett frissítéseket és az adatok Microsoft szerverekre történő továbbítását a felhasználó közvetlen beavatkozása nélkül.</v:String>
+    <v:String x:Key="tgl20_desc_conf">Az Intel modul, amely a háttérben működik az adatok gyűjtése és továbbítása céljából, a vállalat termékeinek fejlesztését szolgáló eszközként van pozícionálva. Az átlagos felhasználó számára azonban ez a funkció kevés gyakorlati hasznot jelent, és letiltásával csökkenthető a háttértevékenység és megelőzhető a felesleges adatátvitel.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -227,8 +227,8 @@
     
     <v:String x:Key="tgl1_desc_intf">A kurzorválasztás színét kékről szürkére változtatja «nedves aszfalt».</v:String>
     <v:String x:Key="tgl2_desc_intf">Egyes programokban megváltoztatja az eszköztipp színét sárgáról világoskékre «azúrkék».</v:String>
-    <v:String x:Key="tgl3_desc_intf">Egy módosítás csökkenti a Minimalizálás, a Maximalizálás és a Bezárás gombok méretét, így kevésbé terjedelmesek. Beállítja az összes ablak méretét, beleértve a Fájlkezelőt, a Fényképeket, a böngészőket és más ismerős programokat.</v:String>
-    <v:String x:Key="tgl4_desc_intf">Egy beállítás növeli a szövegkurzor villogásának gyakoriságát. Alapértelmezés szerint a kurzor 530 ezredmásodpercenként villog.</v:String>
+    <v:String x:Key="tgl3_desc_intf">Ez a módosítás csökkenti a Minimalizálás, a Maximalizálás és a Bezárás gombok méretét, így kevésbé terjedelmesek. Beállítja az összes ablak méretét, beleértve a Fájlkezelőt, a Fényképeket, a böngészőket és más ismerős programokat.</v:String>
+    <v:String x:Key="tgl4_desc_intf">Ez a beállítás növeli a szövegkurzor villogásának gyakoriságát. Alapértelmezés szerint a kurzor 530 ezredmásodpercenként villog.</v:String>
     <v:String x:Key="tgl5_desc_intf">A módosítás csökkenti a görgetősávok vastagságát a klasszikus Windows-alkalmazásokban, beleértve a File Explorert, a böngészőket és más régi programokat. Ez azonban nem érinti a modern interfészeket, mivel azok a rendszerbeállításoktól független saját vezérlőelemeiket használják.</v:String>
     <v:String x:Key="tgl6_desc_intf">A módosítás letiltja vagy engedélyezi az átlátszósági effektust. Áttetsző ablakok és felületek.</v:String>
     <v:String x:Key="tgl7_desc_intf">A tálca témáját világosra vagy sötétre változtatja. Figyelem, a képernyő villoghat.</v:String>
@@ -264,7 +264,7 @@
     <!--#region Packages Page -->
     <v:String x:Key="warn_part1_pkg">Az alkalmazások törlésre kerülnek</v:String>
     <v:String x:Key="warn_part2_pkg">véglegesen,</v:String>
-    <v:String x:Key="warn_part3_pkg">de a OneDrive visszaállítható az ikonjára kattintva</v:String>
+    <v:String x:Key="warn_part3_pkg">de az OneDrive visszaállítható az ikonjára kattintva</v:String>
 
     <v:String x:Key="MicrosoftStore_pkg">Microsoft Áruház</v:String>
     <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
@@ -377,7 +377,7 @@
     <v:String x:Key="tgl27_svc">Vállalati eszközökkel kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl28_svc">A Hyper-V működésével kapcsolatos szolgáltatás</v:String>
     <v:String x:Key="tgl29_svc">Push értesítésekkel kapcsolatos szolgáltatások</v:String>
-    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
+    <v:String x:Key="tgl30_svc">Üzleti bemutató móddal kapcsolatos szolgáltatások</v:String>
 
     <v:String x:Key="tgl1_desc_svc">Tiltsa le, ha nem használja a fájlelőzményeket és a tartalomindexelést.</v:String>
     <v:String x:Key="tgl2_desc_svc">Tiltsa le, ha nem használ Xbox és Microsoft játékvezérlőket.</v:String>
@@ -408,7 +408,7 @@
     <v:String x:Key="tgl27_desc_svc">Tiltsa le, ha nem használja a vállalati alkalmazások távkezelését, és nincs olyan távoli kiszolgálója, amellyel a számítógép kommunikálna.</v:String>
     <v:String x:Key="tgl28_desc_svc">Tiltsa le, ha nem használja a beépített virtualizációs rendszert. Ez semmilyen módon nem befolyásolja a VirtualBox és hasonlók munkáját.</v:String>
     <v:String x:Key="tgl29_desc_svc">Kapcsolja ki, ha nem használ párosított eszközöket, és nem telepít alkalmazásokat távolról a Windows Áruházból. Ezek a szolgáltatások kezelik az értesítési központot a párosított eszközökkel, feldolgozzák a push-kérelmeket, lehetővé teszik a Windows számára, hogy felismerje okostelefonját a „Saját telefon” alkalmazáshoz, automatikusan újra csatlakozzon hozzá, és megjelenítsen az üzeneteit és eseményeit a Műveletközpontban. A Windows 10 rendszerben ezek kikapcsolása után előfordulhat, hogy az értesítési központ nem nyílik meg.</v:String>
-    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Ha nem használja az eszközt üzletben a Windows funkciók bemutatására, akkor tiltsa le. A Store Demo szolgáltatás kezeli a bemutató tartalmak és interaktív funkciók megjelenítését, amelyek kizárólag üzletek bemutatói és tesztelése céljára szolgálnak. Ez a szolgáltatás nem szükséges a számítógép mindennapi használatához.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -451,7 +451,7 @@
     <v:String x:Key="tgl1_desc_sys">Alapértelmezés szerint az egérgyorsítás felgyorsítja az egér mozgását. Javasoljuk, hogy kapcsolja ki, mivel bekapcsolt gyorsulás esetén az egyenletes mozgás és az iránypontosság jobb akar lenni.</v:String>
     <v:String x:Key="tgl2_desc_sys">Ha nem akarja, hogy a feladatok végrehajtása során időnként megjelenjen egy ablak, amely azt mondja, hogy engedélyezze a kulcs beragadását vagy a beviteli szűrést, és a "Nem" válasz után egy idő után újra megjelenik, akkor tiltsa le ezt a funkciót. Ezenkívül a bemeneti szűrés befolyásolja a billentyűzet ismétlésének sebességét és az ismétlődő billentyűk kihagyását.</v:String>
     <v:String x:Key="tgl3_desc_sys">Ez a módosítás letiltja és leállítja a Windows Defendert, a SmartScreent, az antimalware processzor és a virtualizációalapú biztonság (VBS) aránytalanul nagy terhelését. A módosítások teljes körű alkalmazásához a rendszer automatikusan újraindul csökkentett módban. Nincs szükség semmilyen műveletre - a segédprogram mindent automatikusan kezel.</v:String>
-    <v:String x:Key="tgl4_desc_sys">A csípés teljesen letiltja az UA?-t (User Account Control), megszabadul a pajzs ikonoktól, a biztonsági értesítésektől és egyéb dolgoktól. Az UAC nem teljes értékű védelmi program.</v:String>
+    <v:String x:Key="tgl4_desc_sys">A módosítás teljesen letiltja az UAC-t (User Account Control), megszabadul a pajzs ikonoktól, a biztonsági értesítésektől és egyéb dolgoktól. Az UAC nem teljes értékű védelmi program.</v:String>
     <v:String x:Key="tgl5_desc_sys">Ha letilt valamit, ami a biztonsággal vagy védelemmel kapcsolatos, folyamatosan értesítést kap róla. Ez a módosítás letiltja a biztonsági értesítéseket az Értesítési központból.</v:String>
     <v:String x:Key="tgl6_desc_sys">Ha inkább saját maga szeretné frissíteni alkalmazásait a Microsoft Store-ból, ki kell kapcsolnia az automatikus frissítési funkciót. Így a hálózat terhelése csökken.</v:String>
     <v:String x:Key="tgl7_desc_sys">A Realtek High Definition Audio illesztőprogramok egyes verziói hangkésleltetési problémát mutathatnak. Ez a módosítás kijavítja ezt a hibát. Nem ajánlott azonban használni, ha nem észlel késést, vagy ha nem biztos abban, hogy a telepített és/vagy működő illesztőprogram valóban a Realtektől származik.</v:String>
