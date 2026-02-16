@@ -1,0 +1,104 @@
+<UserControl x:Class="GTweak.View.UtilsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:local="clr-namespace:GTweak.View"
+             mc:Ignorable="d" d:Width="1014" Style="{StaticResource LaunchPage}">
+    <Grid>
+        <Grid x:Name="Overlay" Panel.ZIndex="1" Visibility="Collapsed">
+            <Grid Background="{StaticResource Brush_Background}" Opacity="0.9"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Height="auto" Width="auto" Margin="0,100,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <ui:SymbolIcon Symbol="Warning24" FontSize="20px" Foreground="{StaticResource Brush_Accent}"  Margin="0,0,0,0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{DynamicResource title_over_more}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" FontSize="20px" Margin="5,0,0,0"/>
+                        </StackPanel>
+                        <TextBlock  Margin="0,10,0,0" Text="{DynamicResource text_over_more}" Style="{StaticResource TextDefault}" MaxWidth="700" Foreground="{DynamicResource Brush_TextBlock_Inactivity}" FontSize="16px" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock  Margin="0,10,0,0" Text="{DynamicResource question_over_more}" Style="{StaticResource TextDefault}" MaxWidth="700" Foreground="{DynamicResource Brush_Accent}" FontSize="16px" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+
+                        <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="BtnAgree" Content="{DynamicResource btn_agree}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="120"/>
+                            <Button Margin="50,0,0,0" x:Name="BtnDecline" Content="{DynamicResource btn_decline}" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="120"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock Margin="5" Width="Auto" Height="auto" TextAlignment="Center" FontFamily="{StaticResource Jura}" FontSize="13pt" Foreground="{StaticResource Brush_TextBlock_Inactivity}" HorizontalAlignment="Center" VerticalAlignment="Center" KeyboardNavigation.IsTabStop="False" TextWrapping="Wrap" TextTrimming="CharacterEllipsis">
+                    <Run Text="{DynamicResource advice_part1_more}"/>
+                    <Run Text="{DynamicResource advice_part2_more}" Foreground="{StaticResource Brush_Accent}"/>
+                    <Run Text="{DynamicResource advice_part3_more}"/>
+                </TextBlock>
+            </Grid>
+            
+            <Grid Grid.Row="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <uc:FlowPanel Margin="20,20,5,20" UseMasonryLayout="False" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <uc:Card Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btn_activation}" ClickButton="BtnLicenseWindows_ClickButton">
+                            <uc:Card.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_LicenseWindows}" />
+                                </Style>
+                            </uc:Card.IconStyle>
+                        </uc:Card>
+
+                        <uc:Card Title="{DynamicResource title_point_more}" Description="{DynamicResource text_point_more}" BtnContentSecondary="{DynamicResource btn_recovery}" BtnContent="{DynamicResource btn_save}" ClickButton="BtnCreatePoint_ClickButton" ClickButtonSecondary="BtnRecovey_ClickButton">
+                            <uc:Card.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Backup}" />
+                                </Style>
+                            </uc:Card.IconStyle>
+                        </uc:Card>
+
+                        <uc:Card Title="{DynamicResource title_point_state_more}" Description="{DynamicResource text_point_state_more}" BtnContentSecondary="{DynamicResource btn_enable}" BtnContent="{DynamicResource btn_disable}" ClickButton="BtnDisablePoint_ClickButton" ClickButtonSecondary="BtnEnablePoint_ClickButton">
+                            <uc:Card.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_BackupState}" />
+                                </Style>
+                            </uc:Card.IconStyle>
+                        </uc:Card>
+
+                        <uc:Card Title="{DynamicResource title_clear_more}" Description="{DynamicResource text_clear_more}" BtnContent="{DynamicResource btn_clear}" ClickButton="BtnClear_ClickButton">
+                            <uc:Card.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Trash}" />
+                                </Style>
+                            </uc:Card.IconStyle>
+                        </uc:Card>
+
+                        <uc:Card Title="{DynamicResource title_ntfs_more}" Description="{DynamicResource text_ntfs_more}" BtnContentSecondary="{DynamicResource btn_enable}" BtnContent="{DynamicResource btn_disable}" ClickButton="BtnDecompression_ClickButton" ClickButtonSecondary="BtnCompression_ClickButton">
+                            <uc:Card.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Ntfs}" />
+                                </Style>
+                            </uc:Card.IconStyle>
+                        </uc:Card>
+
+                        <uc:Card Title="{DynamicResource title_registry_more}" Description="{DynamicResource text_registry_more}" BtnContent="{DynamicResource btn_create}" ClickButton="BtnRegExport_ClickButton">
+                            <uc:Card.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Registry}" />
+                                </Style>
+                            </uc:Card.IconStyle>
+                        </uc:Card>
+                        
+                    </uc:FlowPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        
+        
+    </Grid>
+</UserControl>

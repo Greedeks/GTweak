@@ -1,17 +1,22 @@
-﻿using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Tweaks;
 using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using GTweak.Utilities.Animation;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Maintenance;
+using GTweak.Utilities.Tweaks;
+using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
 {
-    public partial class LoadingWindow
+    public partial class LoadingWindow : FluentWindow
     {
+        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
+        private readonly UninstallingPakages _uninstallingPakages = new UninstallingPakages();
+
         public LoadingWindow()
         {
             InitializeComponent();
@@ -25,9 +30,8 @@ namespace GTweak.Windows
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += async delegate
             {
-                new TypewriterAnimation((string)FindResource("step7_load"), TextLoad, TimeSpan.FromMilliseconds(300));
+                TypewriterAnimation.Create((string)FindResource("step7_load"), StatusLoading, TimeSpan.FromMilliseconds(300));
                 await Task.Delay(400);
-                Hide();
                 new MainWindow().Show();
                 Close();
             };
@@ -48,28 +52,29 @@ namespace GTweak.Windows
                 catch (Exception ex) { ErrorLogging.LogWritingFile(ex, member); }
             }
 
-            Parallel.Invoke(
-                () => ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService)),
-                () => ExecuteWithLogging(WindowsLicense.LicenseStatus, nameof(WindowsLicense.LicenseStatus)),
-                () => ExecuteWithLogging(new SystemDiagnostics().GetHardwareData, nameof(SystemDiagnostics.GetHardwareData)),
-                () => ExecuteWithLogging(new SystemDiagnostics().ValidateVersionUpdates, nameof(SystemDiagnostics.ValidateVersionUpdates)),
-                () => ExecuteWithLogging(new UninstallingPakages().GetInstalledPackages, nameof(UninstallingPakages.GetInstalledPackages)),
-                () => ExecuteWithLogging(new UninstallingPakages().CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount)),
-                () => ExecuteWithLogging(new SystemTweaks().ViewNetshState, nameof(SystemTweaks.ViewNetshState)),
-                () => ExecuteWithLogging(new SystemTweaks().ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus)),
-                () => ExecuteWithLogging(new SystemTweaks().ViewConfigTick, nameof(SystemTweaks.ViewConfigTick))
-            );
-
-            ExecuteWithLogging(() => MonitoringService.GetNumberRunningProcesses = new SystemDiagnostics().GetProcessCount().Result, nameof(MonitoringService.GetProcessCount));
-            ExecuteWithLogging(() => MonitoringService.GetNumberRunningService = new SystemDiagnostics().GetServicesCount().Result, nameof(MonitoringService.GetServicesCount));
-            ExecuteWithLogging(() => new MonitoringService().GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(MonitoringService.GetTotalProcessorUsage));
+            ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
+            ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
+            ExecuteWithLogging(() => _systemDataCollector.GetHardwareData(), nameof(_systemDataCollector.GetHardwareData));
+            ExecuteWithLogging(_systemDataCollector.ValidateVersionUpdates, nameof(_systemDataCollector.ValidateVersionUpdates));
+            ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
+            ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
+            ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
+            ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
+            ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
+            ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _systemDataCollector.GetProcessCount().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetProcessCount));
+            ExecuteWithLogging(() => HardwareData.RunningServicesCount = _systemDataCollector.GetServicesCount().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetServicesCount));
+            ExecuteWithLogging(() => _systemDataCollector.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetTotalProcessorUsage));
+            ExecuteWithLogging(() => _systemDataCollector.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetPhysicalAvailableMemory));
+            ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            int index = Array.IndexOf(new[] { 0, 10, 30, 55, 75, 95 }, e.ProgressPercentage);
+            int index = Array.IndexOf(new[] { 0, 10, 30, 55, 75, 95 }, e?.ProgressPercentage ?? 0);
             if (index > 0)
-                new TypewriterAnimation((string)FindResource($"step{++index}_load"), TextLoad, TimeSpan.FromMilliseconds(200));
+            {
+                TypewriterAnimation.Create((string)FindResource($"step{++index}_load"), StatusLoading, TimeSpan.FromMilliseconds(200));
+            }
         }
     }
 }

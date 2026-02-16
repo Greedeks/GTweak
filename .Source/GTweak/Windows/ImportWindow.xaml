@@ -1,66 +1,57 @@
-﻿<Window x:Class="GTweak.Windows.ImportWindow"
+﻿<ui:FluentWindow x:Class="GTweak.Windows.ImportWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:GTweak.Windows"
-        mc:Ignorable="d"
-        Title="GTweak" WindowStyle="None"
-        Height="160" Width="390" ResizeMode="NoResize" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Topmost="True"
-        ShowInTaskbar="False" IsTabStop="False" Loaded="Window_Loaded">
-    <Window.Clip>
-        <RectangleGeometry RadiusX="7" RadiusY="7" Rect="0,0,390,160"/>
-    </Window.Clip>
+        mc:Ignorable="d" Icon="/GTweak.ico"
+        Background="Transparent" WindowStyle="None" IsTabStop="False" SnapsToDevicePixels="True" UseLayoutRounding="True" ShowInTaskbar="False" KeyboardNavigation.TabNavigation="None"
+        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" SizeToContent="Width" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Title="GTweak" Topmost="True" MinHeight="135" MinWidth="310" MaxHeight="135" MaxWidth="380" ContentRendered="Window_ContentRendered">
+    <Grid Background="{StaticResource Brush_Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <Grid MouseDown="TitleBar_MouseDown">
-        <Grid Background="{StaticResource Color_Background}" Opacity="0.98">
-            <Rectangle Style="{StaticResource BordersRectangle}" d:Visibility="Collapsed"/>
+        <Grid x:Name="TitleBar" Grid.Row="0" MouseDown="TitleBar_MouseDown" Background="Transparent">
+            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True" Height="48">
+                <ui:SymbolIcon Symbol="DocumentArrowDown16" FontSize="20px" Foreground="{StaticResource Brush_Accent}"  Margin="10,5,0,0" HorizontalAlignment="Center"/>
+                <Viewbox Stretch="None">
+                    <TextBlock Text="{DynamicResource title_import}" Style="{StaticResource TextDefault}" FontSize="18px" Margin="5,0,50,0"/>
+                </Viewbox>
+            </DockPanel>
+        </Grid>
 
-            <Grid Margin="0" Background="Transparent">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Height="140" Margin="20,20,0,0">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Width="25">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Source" Value="{StaticResource DI_MultiImport}"/>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                        <TextBlock Text="{DynamicResource title_import}" Margin="10,1,0,0"  Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="19px" HorizontalAlignment="Left" TextAlignment="Center"/>
-                    </StackPanel>
-                    <TextBlock Text="{DynamicResource warn_import}" Foreground="{StaticResource Color_TetBlock_Inactivity}" Height="auto" Width="auto" MaxWidth="350" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,10,0,0"/>
-                    <Border Margin="0,20,0,0" CornerRadius="5" Background="{StaticResource Color_Background_RadialProgressBar}" Height="30" Width="350" HorizontalAlignment="Left">
-                        <StackPanel Orientation="Horizontal">
-                            <uc:ProggressRing ChangeBackground="{StaticResource Color_Background_Dark}" ChangeStrokeThickness="10" Width="24" Margin="10,0,0,0" />
-                            <TextBlock Foreground="{StaticResource Color_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" Margin="5,0,0,2" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center">
-                                <Run Text="{StaticResource wait_import}" /><Run x:Name="DotRun" Text="" />
-                                <TextBlock.Triggers>
-                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                        <BeginStoryboard>
-                                            <Storyboard Timeline.DesiredFrameRate="240" RepeatBehavior="Forever" Duration="0:0:0.8">
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DotRun" Storyboard.TargetProperty="Text">
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0"   Value="" />
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="." />
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value=".." />
-                                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="..." />
-                                                </ObjectAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </TextBlock.Triggers>
-                            </TextBlock>
-                        </StackPanel>
-                    </Border>
-                    <Viewbox Stretch="Uniform" MaxWidth="350" VerticalAlignment="Center" HorizontalAlignment="Left" StretchDirection="DownOnly">
-                        <TextBlock Foreground="{StaticResource Color_Inactive}" Height="auto" Width="auto" MaxWidth="350" TextWrapping="Wrap" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="0,12,0,0">
-                           <Run Text="{DynamicResource file_import}"/>
-                           <Run Text="“"/><Run x:Name="ImportedFile" Text="The imported file" Foreground="{StaticResource Color_Accent}"/><Run Text="”"/>
-                        </TextBlock>
-                    </Viewbox>
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{DynamicResource warn_import}" Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,0,10,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <ui:ProgressRing Margin="10,10,0,0" Width="25" Height="25" Foreground="{StaticResource Brush_Accent}" IsIndeterminate="True"/>
+                    <TextBlock Foreground="{StaticResource Brush_Highlighted}" Height="auto" Width="auto" FontFamily="{StaticResource Jura}" FontSize="13px" Margin="10,10,0,0" HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center">
+                        <Run Text="{DynamicResource wait_import}" /><Run x:Name="DotRun" Text="" />
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="60" RepeatBehavior="Forever" Duration="0:0:0.8">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DotRun" Storyboard.TargetProperty="Text">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0"   Value="" />
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="." />
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value=".." />
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="..." />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                 </StackPanel>
-            </Grid>
+                <TextBlock Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" FontFamily="{StaticResource Jura}" FontSize="12px" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,10,0,0">
+                           <Run Text="{DynamicResource file_import}"/>
+                           <Run Text="“"/><Run x:Name="ImportedFile" Text="The imported file" Foreground="{StaticResource Brush_Accent}"/><Run Text="”"/>
+                </TextBlock>
+            </StackPanel>
         </Grid>
     </Grid>
-</Window>
+</ui:FluentWindow>

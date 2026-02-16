@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -225,7 +225,7 @@ namespace GTweak.Utilities.Helpers
             throw new Win32Exception("QueryServiceStatusEx failed: " + Marshal.GetLastWin32Error());
         }
 
-        internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath)
+        internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath, bool showWindow = false)
         {
             ImpersonateSystem();
             _ = new PROCESS_INFORMATION();
@@ -247,9 +247,18 @@ namespace GTweak.Utilities.Helpers
             var ts = new SECURITY_ATTRIBUTES();
             ps.nLength = Marshal.SizeOf(ps);
             ts.nLength = Marshal.SizeOf(ts);
-            _ = CreateProcess(null, binaryPath, ref ps, ref ts, true, EXTENDED_STARTUPINFO_PRESENT | CREATE_NO_WINDOW, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo);
-            _ = pInfo.dwProcessId.ToString();
 
+            STARTUPINFO startInfo = new STARTUPINFO
+            {
+                cb = Marshal.SizeOf(typeof(STARTUPINFO)),
+                dwFlags = 0x00000001,
+                wShowWindow = showWindow ? (short)5 : (short)0
+            };
+
+            siEx.StartupInfo = startInfo;
+
+            _ = CreateProcess(null, binaryPath, ref ps, ref ts, true, EXTENDED_STARTUPINFO_PRESENT, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo);
+            _ = pInfo.dwProcessId.ToString();
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using GTweak.Assets.UserControl;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
-using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GTweak.Assets.UserControl;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
@@ -20,42 +18,46 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            string descriptionTweak = (string)FindResource(((ToggleButton)sender).Name + "_description_system");
+            string description = string.Empty;
 
-            if (CommentTweak.Text != descriptionTweak)
-                CommentTweak.Text = descriptionTweak;
+            switch (sender)
+            {
+                case StackPanel panel:
+                    description = panel.ToolTip?.ToString() ?? string.Empty;
+                    break;
+                case ToggleButton toggle:
+                    description = toggle.Description?.ToString() ?? string.Empty;
+                    break;
+                default:
+                    break;
+            }
+
+            if (DescBlock.Text != description)
+            {
+                DescBlock.Text = description;
+            }
         }
 
-        private void TweakSlider_MouseEnter(object sender, MouseEventArgs e)
-        {
-            string descriptionTweak = (string)FindResource(((StackPanel)sender).Name + "_description_system");
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
 
-            if (CommentTweak.Text != descriptionTweak)
-                CommentTweak.Text = descriptionTweak;
-        }
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (CommentTweak.Text != (string)FindResource("defaultDescription"))
-                CommentTweak.Text = (string)FindResource("defaultDescription");
-        }
-
-        private void Sliders_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
-
-        private void TglButton_ChangedState(object sender, EventArgs e)
+        private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
-            if (toggleButton.Name != "TglButton8")
+            if (toggleButton.Name != "TglButton3")
             {
                 _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
                 if (NotificationManager.SysActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
-                    new NotificationManager(300).Show().Perform(action);
-
-                Parallel.Invoke(async delegate { await Task.Delay(1000); _sysTweaks.AnalyzeAndUpdate(); });
+                {
+                    NotificationManager.Show().WithDelay(300).Perform(action);
+                }
             }
             else
+            {
                 _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+            }
         }
     }
 }

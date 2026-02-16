@@ -3,6 +3,8 @@
 
     <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -26,9 +28,12 @@
 
     <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="Foreground" Value="{StaticResource Color_Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource Brush_ScrollBar_Normal}"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
+        <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item"/>
         <Setter Property="Width" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -50,10 +55,10 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
-                            <Setter Value="{StaticResource Color_Accent}" TargetName="Thumb" Property="Background"/>
+                            <Setter Value="{StaticResource Brush_ScrollBar_Hover}" TargetName="Thumb" Property="Background"/>
                         </Trigger>
                         <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
-                            <Setter Value="{StaticResource Color_Accent}" TargetName="Thumb" Property="Background"/>
+                            <Setter Value="{StaticResource Brush_ScrollBar_Hover}" TargetName="Thumb" Property="Background"/>
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="false">
@@ -83,4 +88,15 @@
         </Setter>
     </Style>
 
+    <Style x:Key="{x:Type ScrollViewer}" TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource {x:Type ScrollViewer}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
+        <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item"/>
+        <Setter Property="CanContentScroll" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+    
 </ResourceDictionary>

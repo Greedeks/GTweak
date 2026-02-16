@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -11,17 +11,17 @@ namespace GTweak.Utilities.Animation
 
         private static readonly DependencyProperty AnimatedValueProperty = DependencyProperty.RegisterAttached("AnimatedValue", typeof(int), typeof(NumberAnimation), new PropertyMetadata(0, OnAnimatedValueChanged));
 
-        internal static void SetValue(DependencyObject dObject, int value) => dObject.SetValue(ValueProperty, value);
+        internal static void SetValue(DependencyObject dObject, int value) => dObject?.SetValue(ValueProperty, value);
 
-        internal static int GetValue(DependencyObject dObject) => (int)dObject.GetValue(ValueProperty);
+        internal static int GetValue(DependencyObject dObject) => dObject?.GetValue(ValueProperty) as int? ?? 0;
 
-        private static void SetAnimatedValue(DependencyObject dObject, int value) => dObject.SetValue(AnimatedValueProperty, value);
+        private static void SetAnimatedValue(DependencyObject dObject, int value) => dObject?.SetValue(AnimatedValueProperty, value);
 
         private static void OnValueChanged(DependencyObject dObject, DependencyPropertyChangedEventArgs e)
         {
             if (dObject is TextBlock textBlock)
             {
-                int newValue = (int)e.NewValue;
+                int newValue = (e.NewValue as int?) ?? 0;
 
                 if (!textBlock.IsLoaded)
                 {
@@ -29,7 +29,7 @@ namespace GTweak.Utilities.Animation
                     return;
                 }
 
-                int oldValue = (int)e.OldValue;
+                int oldValue = (e.OldValue as int?) ?? 0;
 
                 Int32Animation int32Anim = new Int32Animation
                 {
@@ -38,7 +38,7 @@ namespace GTweak.Utilities.Animation
                     Duration = TimeSpan.FromSeconds(0.5),
                     EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
                 };
-                Timeline.SetDesiredFrameRate(int32Anim, 240);
+                Timeline.SetDesiredFrameRate(int32Anim, 60);
                 textBlock.BeginAnimation(AnimatedValueProperty, int32Anim);
             }
         }
@@ -46,7 +46,9 @@ namespace GTweak.Utilities.Animation
         private static void OnAnimatedValueChanged(DependencyObject dObject, DependencyPropertyChangedEventArgs e)
         {
             if (dObject is TextBlock textBlock)
-                textBlock.Text = string.Format(" {0}", e.NewValue.ToString());
+            {
+                textBlock.Text = string.Format(" {0}", e.NewValue?.ToString() ?? string.Empty);
+            }
         }
     }
 }

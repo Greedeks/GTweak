@@ -1,20 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="SliderRepeatButton_In" TargetType="{x:Type RepeatButton}">
-        <Setter Property="SnapsToDevicePixels" Value="true" />
-        <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="RepeatButton">
-                    <Border BorderThickness="1" BorderBrush="{StaticResource Color_Background_Slider}" Background="{StaticResource Color_Background_Slider}" Height="5" CornerRadius="0,1,1,0"/>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="SliderRepeatButton" TargetType="{x:Type RepeatButton}">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -23,7 +9,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border SnapsToDevicePixels="True" Background="{StaticResource Color_Accent}"  BorderThickness="1" BorderBrush="{StaticResource Color_Border}" Height="5" CornerRadius="1,0,0,1"/>
+                    <Border SnapsToDevicePixels="True" Background="{StaticResource Brush_Accent}" BorderThickness="1" BorderBrush="{StaticResource Brush_Accent}" Height="5" CornerRadius="1,0,0,1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SliderRepeatButton_In" TargetType="{x:Type RepeatButton}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Border SnapsToDevicePixels="True" Background="{StaticResource Brush_Background_Slider}" BorderThickness="1" BorderBrush="{StaticResource Brush_Background_Slider}" Height="5" CornerRadius="0,1,1,0"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -34,16 +34,42 @@
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Margin" Value="0,0,1,0"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Border x:Name="Switch" Height="14" Width="14" Background="{StaticResource Color_Border}" CornerRadius="10" BorderBrush="{StaticResource Color_Background_Dark}" BorderThickness="1"/>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="Switch" Property="Background" Value="{StaticResource Color_Accent}"></Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
+                    <Border x:Name="Switch" Height="14" Width="14" Background="{StaticResource Brush_Accent}" CornerRadius="10" BorderBrush="{StaticResource Brush_BorderDot_Slider}" BorderThickness="2">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard Timeline.DesiredFrameRate="120">
+                                                    <ThicknessAnimation Duration="0:0:0.3" Storyboard.TargetProperty="BorderThickness" To="1">
+                                                        <ThicknessAnimation.EasingFunction>
+                                                            <QuadraticEase/>
+                                                        </ThicknessAnimation.EasingFunction>
+                                                    </ThicknessAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                        <DataTrigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard Timeline.DesiredFrameRate="120">
+                                                    <ThicknessAnimation Duration="0:0:0.3" Storyboard.TargetProperty="BorderThickness" To="2">
+                                                        <ThicknessAnimation.EasingFunction>
+                                                            <QuadraticEase/>
+                                                        </ThicknessAnimation.EasingFunction>
+                                                    </ThicknessAnimation>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.ExitActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -68,7 +94,7 @@
                 </Track.IncreaseRepeatButton>
             </Track>
             <TextBlock Grid.Row="2" FocusVisualStyle="{x:Null}" Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}" 
-                       FontFamily="{StaticResource Jura}" FontSize="14px" FontWeight="Medium" Margin="0,-5,0,0" HorizontalAlignment="Center" Foreground="{StaticResource Color_Highlighted}">
+                       FontFamily="{StaticResource Play}" FontSize="14px" FontWeight="Medium" Margin="0,-5,0,0" HorizontalAlignment="Center" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" Foreground="{DynamicResource Brush_Highlighted}">
             </TextBlock>
         </Grid>
     </ControlTemplate>
@@ -95,14 +121,14 @@
                         <RepeatButton Style="{StaticResource SliderRepeatButton_In}" Command="Slider.IncreaseLarge" />
                     </Track.IncreaseRepeatButton>
                 </Track>
-                <TextBlock Grid.Column="1"  Margin="10,-3,0,0" FocusVisualStyle="{x:Null}" FontFamily="{StaticResource Jura}" FontSize="14px" FontWeight="Medium" HorizontalAlignment="Left" Foreground="{StaticResource Color_Highlighted}">
+                <TextBlock Grid.Column="1"  Margin="10,-3,0,0" FocusVisualStyle="{x:Null}" FontFamily="{StaticResource Play}" FontSize="14px" FontWeight="Medium" HorizontalAlignment="Left" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" Foreground="{DynamicResource Brush_Highlighted}">
                     <Run Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}"/><Run Text="%"/>
                 </TextBlock>
             </Grid>
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="VerticalText_Slider" TargetType="{x:Type Slider}">
+    <Style x:Key="Numeric_Slider" TargetType="{x:Type Slider}">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -117,7 +143,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="HorizontalText_Slider" TargetType="{x:Type Slider}">
+    <Style x:Key="Percent_Slider" TargetType="{x:Type Slider}">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />

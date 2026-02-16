@@ -1,4 +1,5 @@
-﻿using GTweak.Utilities.Managers;
+using System.Linq;
+using GTweak.Utilities.Managers;
 
 namespace GTweak.Utilities.Storage
 {
@@ -19,6 +20,7 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" };
 
         protected static readonly string[] telemetryTasks = {
+        @"\Microsoft\Windows\Application Experience\CompatibilityAssistant",
         @"\Microsoft\Office\Office ClickToRun Service Monitor",
         @"\Microsoft\Office\OfficeTelemetry\AgentFallBack2016",
         @"\Microsoft\Office\OfficeTelemetry\OfficeTelemetryAgentLogOn2016",
@@ -28,10 +30,35 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Office\OfficeTelemetryAgentLogOn",
         @"\Microsoft\Office\Office 15 Subscription Heartbeat" };
 
+        protected static readonly string[] appExpInventoryTasks = {
+        @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser Exp",
+        @"\Microsoft\Windows\Application Experience\SdbinstMergeDbTask",
+        @"\Microsoft\Windows\Application Experience\MareBackup" };
+
+        protected static readonly string appExpUsageTasks = @"\Microsoft\Windows\Application Experience\AitAgent";
+
+        protected static readonly string[] ceipTasks = {
+        @"\Microsoft\Windows\Customer Experience Improvement Program\BthSQM",
+        @"\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask",
+        @"\Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
+        @"\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" };
+
+        protected static readonly string[] feedbackTasks = {
+        @"\Microsoft\Windows\Feedback\Siuf\DmClient",
+        @"\Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" };
+
+        protected static readonly string[] speechTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\Speech\");
+
         protected static readonly string[] nvidiaTasks = {
         @"\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
         @"\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
         @"\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" };
+
+        protected static readonly string[] mapsTasks = {
+        @"\Microsoft\Windows\Maps\MapsToastTask",
+        @"\Microsoft\Windows\Maps\MapsUpdateTask" };
+
+        protected static readonly string intelTask = @"\Intel\Intel Telemetry 2 (x86)";
 
         protected static readonly string[] winUpdatesTasks = {
         @"\Microsoft\Windows\UpdateOrchestrator\Report policies",
@@ -49,27 +76,32 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
         @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" };
 
-        protected static readonly string[] xboxTasks =  {
+        protected static readonly string[] xboxTasks = {
         @"\Microsoft\XblGameSave\XblGameSaveTask",
         @"\Microsoft\XblGameSave\XblGameSaveTaskLogon",
         @"\Microsoft\Xbox\XblGameSaveTask",
         @"\Microsoft\Xbox\Maintenance\MaintenanceTask",
         @"\Microsoft\Xbox\XGamingServices\GameServicesTask" };
 
+        protected static readonly string[] printTasks = {
+        @"\Microsoft\Windows\Printing\EduPrintProv",
+        @"\Microsoft\Windows\Printing\PrinterCleanupTask",
+        @"\Microsoft\Windows\Printing\PrintJobCleanupTask" };
+
         protected static readonly string bluetoothTask = @"\Microsoft\Windows\Bluetooth\UninstallDeviceTask";
 
-        protected static readonly string[] mapsTasks =  {
-        @"\Microsoft\Windows\Maps\MapsToastTask",
-        @"\Microsoft\Windows\Maps\MapsUpdateTask" };
+        protected static readonly string[] oneDriveTask = new[] {
+        TaskSchedulerManager.GetTaskFullPath("OneDrive Reporting"),
+        TaskSchedulerManager.GetTaskFullPath("OneDrive Standalone Update"),
+        TaskSchedulerManager.GetTaskFullPath("OneDrive Startup")}
+        .Concat(TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\OneDrive\")).ToArray();
 
-        protected static readonly string[] oneDriveTask = {
-        @"\Microsoft\Windows\OneDrive\OneDrive Standalone Update Task",
-        $@"\{TaskSchedulerManager.GetTaskFullPath("OneDrive Startup")}" };
+        protected static readonly string[] retailTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\RetailDemo\", @"\Microsoft\Windows\Retail Demo\");
 
         protected static readonly string[] edgeTasks = {
-        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA")}",
-        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore")}",
-        $@"\{TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")}" };
+        TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineUA"),
+        TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskMachineCore"),
+        TaskSchedulerManager.GetTaskFullPath("MicrosoftEdgeUpdateTaskUser")};
 
         protected static readonly string[] winDefenderTasks = {
         @"\Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh",
@@ -78,11 +110,11 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan",
         @"\Microsoft\Windows\Windows Defender\Windows Defender Verification", };
 
-        protected static readonly string[] memoryDiagTasks =  {
+        protected static readonly string[] memoryDiagTasks = {
         @"\Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvents",
         @"\Microsoft\Windows\MemoryDiagnostic\RunFullMemoryDiagnostic" };
 
-        protected static readonly string[] winInsiderTasks =  {
+        protected static readonly string[] winInsiderTasks = {
         @"\Microsoft\Windows\Flighting\FeatureConfig\BootstrapUsageDataReporting",
         @"\Microsoft\Windows\Flighting\FeatureConfig\GovernedFeatureUsageProcessing",
         @"\Microsoft\Windows\Flighting\FeatureConfig\ReconcileConfigs",

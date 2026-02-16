@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
@@ -18,79 +18,73 @@
 
     <!--#region Message Window -->
     <v:String x:Key="title_message">Ops..</v:String>
-    <v:String x:Key="text0_message">La creazione di copie del programma è</v:String>
-    <v:String x:Key="text1_message">vietata,</v:String>
-    <v:String x:Key="text2_message">per evitare errori e situazioni impreviste, scenari.</v:String>
+    <v:String x:Key="part1_message">La creazione di copie del programma è</v:String>
+    <v:String x:Key="part2_message">vietata,</v:String>
+    <v:String x:Key="part3_message">per evitare errori e situazioni impreviste, scenari.</v:String>
     <v:String x:Key="button_message">Accetta (05)</v:String>
     <v:String x:Key="noty_message">▪chiusura automatica della finestra</v:String>
     <v:String x:Key="title_nosupport_message">Non supportato</v:String>
-    <v:String x:Key="text0_nosupport_message">L'utilità non supporta il tuo Windows. Nessun ulteriore avvio è</v:String>
-    <v:String x:Key="text1_nosupport_message">possibile,</v:String>
-    <v:String x:Key="text2_nosupport_message">GTweak verrà chiuso per prevenire errori critici.</v:String>
+    <v:String x:Key="part1_nosupport_message">L'utilità non supporta il tuo Windows. Nessun ulteriore avvio è</v:String>
+    <v:String x:Key="part2_nosupport_message">possibile,</v:String>
+    <v:String x:Key="part3_nosupport_message">GTweak verrà chiuso per prevenire errori critici.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->
-    <v:String x:Key="title_win_notification">Notifica - GTweak</v:String>
-    <v:String x:Key="title_warn_notification">Attenzione</v:String>
-    <v:String x:Key="title_info_notification">Informazione</v:String>
-    <v:String x:Key="logout_notification">È necessaria un'uscita, clicca su questo testo per eseguirla</v:String>
-    <v:String x:Key="restart_notification">È necessario un riavvio, clicca su questo testo per eseguirlo</v:String>
-    <v:String x:Key="warn_update_notification">Si è verificato un errore durante l'aggiornamento del programma, riprova più tardi</v:String>
-    <v:String x:Key="warn_import_notification">Questo file non è adatto per l'importazione</v:String>
-    <v:String x:Key="empty_import_notification">Questo file è vuoto, l'applicazione delle modifiche non è possibile</v:String>
-    <v:String x:Key="export_warning_notification">Non ha senso, applica almeno una modifica prima</v:String>
-    <v:String x:Key="success_onedrive_notification">Il ripristino di OneDrive è in corso e richiederà un po' di tempo</v:String>
-    <v:String x:Key="error_onedrive_notification">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="defender_notification">Ci vorrà un po' di tempo, attendi</v:String>
-    <v:String x:Key="warn_firewall_notification">Il tuo firewall è disattivato, attivalo e applica nuovamente la modifica</v:String>
-    <v:String x:Key="warn_activate_notification">Per iniziare - attiva Windows. Non tutte le modifiche possono essere applicate</v:String>
-    <v:String x:Key="ready_activate_notification">Il tuo sistema operativo non necessita di attivazione</v:String>
-    <v:String x:Key="win_activate_notification">Il processo di attivazione di Windows è iniziato, richiederà del tempo</v:String>
-    <v:String x:Key="success_activate_notification">Attivazione riuscita, è consigliato un riavvio</v:String>
-    <v:String x:Key="error_activate_notification">Qualcosa è andato storto, attivazione del sistema non riuscita</v:String>
-    <v:String x:Key="network_activate_notification">È necessaria una connessione a Internet per l'attivazione</v:String>
-    <v:String x:Key="keynotfound_notification">La chiave per la tua edizione di Windows è mancante; attivazione annullata</v:String>
-    <v:String x:Key="createpoint_notification">La creazione di un punto di ripristino richiederà un po' di tempo</v:String>
-    <v:String x:Key="error_point_notification">Qualcosa è andato storto, impossibile creare un punto di ripristino</v:String>
-    <v:String x:Key="success_point_notification">Punto di ripristino creato con successo</v:String>
-    <v:String x:Key="error_recovery_notification">Qualcosa è andato storto, impossibile avviare il ripristino</v:String>
-    <v:String x:Key="disable_recovery_notification">Il ripristino di sistema è disattivato, i punti di ripristino non sono disponibili</v:String>
-    <v:String x:Key="warn_recovery_notification">Hai già disattivato il sistema di ripristino</v:String>
-    <v:String x:Key="clear_ram_notification">La memoria a breve termine e i file temporanei sono stati eliminati</v:String>
-    <v:String x:Key="warn_defrag_off_notification">Hai già disattivato la deframmentazione del disco</v:String>
-    <v:String x:Key="warn_defrag_on_notification">La deframmentazione del disco è già attiva</v:String>
-    <v:String x:Key="error_defrag_notification">Qualcosa è andato storto, impossibile cambiare lo stato della deframmentazione</v:String>
-    <v:String x:Key="success_defrag_off_notification">Deframmentazione disattivata con successo per il tuo disco</v:String>
-    <v:String x:Key="success_defrag_on_notification">Deframmentazione del disco attivata con successo</v:String>
-    <v:String x:Key="success_compression_notification">Compressione della directory e dei suoi contenuti riuscita</v:String>
-    <v:String x:Key="success_decompression_notification">Decompressione della directory e dei suoi contenuti riuscita</v:String>
-    <v:String x:Key="ready_compression_notification">La directory è già compressa, nessuna ulteriore compressione necessaria</v:String>
-    <v:String x:Key="ready_decompression_notification">La directory è già decompressa, nessuna ulteriore operazione necessaria</v:String>
-    <v:String x:Key="error_compression_notification">Qualcosa è andato storto, errore nel cambiare lo stato di compressione</v:String>
-    <v:String x:Key="notsupport_ntfs_notification">Operazione non disponibile perché la directory non si trova su una partizione NTFS</v:String>
+    <v:String x:Key="title_win_noty">Notifica - GTweak</v:String>
+    <v:String x:Key="title_warn_noty">Attenzione</v:String>
+    <v:String x:Key="title_info_noty">Informazione</v:String>
+    <v:String x:Key="logout_noty">È necessaria un'uscita, clicca su questo testo per eseguirla</v:String>
+    <v:String x:Key="restart_noty">È necessario un riavvio, clicca su questo testo per eseguirlo</v:String>
+    <v:String x:Key="warn_update_noty">Si è verificato un errore durante l'aggiornamento del programma, riprova più tardi</v:String>
+    <v:String x:Key="warn_import_noty">Questo file non è adatto per l'importazione</v:String>
+    <v:String x:Key="empty_import_noty">Questo file è vuoto, l'applicazione delle modifiche non è possibile</v:String>
+    <v:String x:Key="export_warning_noty">Non ha senso, applica almeno una modifica prima</v:String>
+    <v:String x:Key="success_onedrive_noty">Il ripristino di OneDrive è in corso e richiederà un po' di tempo</v:String>
+    <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
+    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
+    <v:String x:Key="info_wd_noty">Ci vorrà un po' di tempo, attendi</v:String>
+    <v:String x:Key="warn_firewall_noty">Il tuo firewall è disattivato, attivalo e applica nuovamente la modifica</v:String>
+    <v:String x:Key="warn_activate_noty">Per iniziare - attiva Windows. Non tutte le modifiche possono essere applicate</v:String>
+    <v:String x:Key="ready_activate_noty">Il tuo sistema operativo non necessita di attivazione</v:String>
+    <v:String x:Key="win_activate_noty">Il processo di attivazione di Windows è iniziato, richiederà del tempo</v:String>
+    <v:String x:Key="success_activate_noty">Attivazione riuscita, è consigliato un riavvio</v:String>
+    <v:String x:Key="error_activate_noty">Qualcosa è andato storto, attivazione del sistema non riuscita</v:String>
+    <v:String x:Key="network_activate_noty">È necessaria una connessione a Internet per l'attivazione</v:String>
+    <v:String x:Key="keynotfound_noty">La chiave per la tua edizione di Windows è mancante; attivazione annullata</v:String>
+    <v:String x:Key="createpoint_noty">La creazione di un punto di ripristino richiederà un po' di tempo</v:String>
+    <v:String x:Key="error_point_noty">Qualcosa è andato storto, impossibile creare un punto di ripristino</v:String>
+    <v:String x:Key="success_point_noty">Punto di ripristino creato con successo</v:String>
+    <v:String x:Key="error_recovery_noty">Qualcosa è andato storto, impossibile avviare il ripristino</v:String>
+    <v:String x:Key="disable_recovery_noty">Il ripristino di sistema è disattivato, i punti di ripristino non sono disponibili</v:String>
+    <v:String x:Key="enable_recovery_noty">System recovery is enabled and available for use when necessary</v:String>
+    <v:String x:Key="warn_recovery_noty">Hai già disattivato il sistema di ripristino</v:String>
+    <v:String x:Key="warn_point_enabled_noty">You have already enabled the recovery system</v:String>
+    <v:String x:Key="clear_ram_noty">La memoria a breve termine e i file temporanei sono stati eliminati</v:String>
+    <v:String x:Key="success_compression_noty">Compressione della directory e dei suoi contenuti riuscita</v:String>
+    <v:String x:Key="success_decompression_noty">Decompressione della directory e dei suoi contenuti riuscita</v:String>
+    <v:String x:Key="ready_compression_noty">La directory è già compressa, nessuna ulteriore compressione necessaria</v:String>
+    <v:String x:Key="ready_decompression_noty">La directory è già decompressa, nessuna ulteriore operazione necessaria</v:String>
+    <v:String x:Key="error_compression_noty">Qualcosa è andato storto, errore nel cambiare lo stato di compressione</v:String>
+    <v:String x:Key="notsupport_ntfs_noty">Operazione non disponibile perché la directory non si trova su una partizione NTFS</v:String>
+    <v:String x:Key="success_reg_exporter_noty">Registry file saved successfully</v:String>
+    <v:String x:Key="error_reg_exporter_noty">An error occurred while saving the registry file</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
-    <v:String x:Key="btn1_main">Riservatezza</v:String>
-    <v:String x:Key="btn2_main">Interfaccia</v:String>
-    <v:String x:Key="btn3_main">Applicazioni</v:String>
-    <v:String x:Key="btn4_main">Servizi</v:String>
-    <v:String x:Key="btn5_main">Sistema</v:String>
-    <v:String x:Key="btn6_main">Informazioni di sistema</v:String>
-    <v:String x:Key="btn7_main">Altro</v:String>
+    <v:String x:Key="rbtn_utils_main">Utilità</v:String>
+    <v:String x:Key="rbtn_conf_main">Riservatezza</v:String>
+    <v:String x:Key="rbtn_int_main">Interfaccia</v:String>
+    <v:String x:Key="rbtn_app_main">Applicazioni</v:String>
+    <v:String x:Key="rbtn_svc_main">Servizi</v:String>
+    <v:String x:Key="rbtn_sys_main">Sistema</v:String>
+    <v:String x:Key="rbtn_sysinfo_main">Informazioni di sistema</v:String>
+    <v:String x:Key="rbtn_adds_main">Addons</v:String>
     <v:String x:Key="title_settings_main">Impostazioni</v:String>
-    <v:String x:Key="btgl_notifications_main">Mostra notifiche</v:String>
+    <v:String x:Key="btgl_noty_main">Mostra notifiche</v:String>
     <v:String x:Key="slider_volume_main">Volume:</v:String>
     <v:String x:Key="btgl_toast_main">Fissa sopra tutte le finestre</v:String>
     <v:String x:Key="btgl_update_main">Verifica aggiornamenti</v:String>
     <v:String x:Key="cmbox_lang_main">Lingua dell'interfaccia:</v:String>
-    <v:String x:Key="cmbox_theme_main">Tema dell'interfaccia:</v:String>
-    <v:String x:Key="cmbox_dark_main">Scuro</v:String>
-    <v:String x:Key="cmbox_light_main">Chiaro</v:String>
-    <v:String x:Key="cmbox_cobalt_main">Cobalto</v:String>
-    <v:String x:Key="cmbox_amethyst_main">Ametista scuro</v:String>
-    <v:String x:Key="cmbox_cblue_main">Blu freddo</v:String>
-    <v:String x:Key="cmbox_system_main">Sistema</v:String>
     <v:String x:Key="btn_import">Importa</v:String>
     <v:String x:Key="btn_export">Esporta</v:String>
     <v:String x:Key="btn_selfremove">Elimina</v:String>
@@ -103,382 +97,429 @@
     <v:String x:Key="file_import">File</v:String>
     <!--#endregion-->
 
-    <!--#region Reboot Window -->
-    <v:String x:Key="title_reboot">Riavvio automatico</v:String>
-    <!--#endregion-->
-
     <!--#region Update Window -->
     <v:String x:Key="title_win_update">Aggiornamento - GTweak</v:String>
     <v:String x:Key="title_update">Aggiornamento trovato</v:String>
-    <v:String x:Key="text_update">È disponibile una nuova versione del programma. Aggiorna per nuove funzionalità e correzioni di bug.</v:String>
     <v:String x:Key="btn_upd">Aggiorna</v:String>
-    <v:String x:Key="btn_log">Modifiche</v:String>
     <v:String x:Key="download_update">Scaricamento</v:String>
     <v:String x:Key="noty_update">Attendere il completamento del download</v:String>
     <v:String x:Key="connection_update">Connessione al server</v:String>
     <!--#endregion-->
 
-    <!--#region Confidentiality Page -->
-    <v:String x:Key="tgl1_confidentiality">Identificatore pubblicitario e pubblicità mirata</v:String>
-    <v:String x:Key="tgl2_confidentiality">Tutti i tipi di sincronizzazione dei tuoi dati</v:String>
-    <v:String x:Key="tgl3_confidentiality">Raccolta e monitoraggio della telemetria di Windows</v:String>
-    <v:String x:Key="tgl4_confidentiality">Raccolta dati tramite eventi del pianificatore</v:String>
-    <v:String x:Key="tgl5_confidentiality">Raccolta dati sulle applicazioni installate</v:String>
-    <v:String x:Key="tgl6_confidentiality">Raccolta delle statistiche di utilizzo delle applicazioni</v:String>
-    <v:String x:Key="tgl7_confidentiality">Raccolta e invio dei dati della scrittura a mano</v:String>
-    <v:String x:Key="tgl8_confidentiality">Raccolta dei dati della configurazione hardware</v:String>
-    <v:String x:Key="tgl9_confidentiality">Accesso di rete ai domini spia di Microsoft</v:String>
-    <v:String x:Key="tgl10_confidentiality">Determinazione della posizione dell'utente</v:String>
-    <v:String x:Key="tgl11_confidentiality">Controllo delle richieste tramite Feedback</v:String>
-    <v:String x:Key="tgl12_confidentiality">Aggiornamenti nascosti in background della sintesi vocale</v:String>
-    <v:String x:Key="tgl13_confidentiality">Monitoraggio nascosto del sistema</v:String>
-    <v:String x:Key="tgl14_confidentiality">Esperimenti nascosti sul sistema</v:String>
-    <v:String x:Key="tgl15_confidentiality">Servizi per la raccolta e trasmissione segreta dei dati</v:String>
-    <v:String x:Key="tgl16_confidentiality">Registrazione degli eventi di Windows</v:String>
-    <v:String x:Key="tgl17_confidentiality">Raccolta e monitoraggio della telemetria NVIDIA</v:String>
-    <v:String x:Key="tgl18_confidentiality">Registrazione del comportamento dell'utente</v:String>
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">È fortemente</v:String>
+    <v:String x:Key="advice_part2_more">consigliato</v:String>
+    <v:String x:Key="advice_part3_more">creare un punto di ripristino prima di usare l'utilità</v:String>
 
-    <v:String x:Key="TglButton1_description_confidentiality">Windows crea un identificatore pubblicitario univoco per ogni utente per tracciare le sue azioni. Questo viene utilizzato dagli sviluppatori di applicazioni e da Windows stesso per scopi propri, incluso offrire pubblicità mirate nelle applicazioni.</v:String>
-    <v:String x:Key="TglButton2_description_confidentiality">Anche utilizzando un account locale, Windows cerca sempre di sincronizzare i tuoi dati con i server Microsoft. In particolare: temi, password, impostazioni di Windows, impostazioni del browser, barra della lingua, accessibilità semplificata e altre impostazioni.</v:String>
-    <v:String x:Key="TglButton3_description_confidentiality">La telemetria (dati diagnostici) è una raccolta automatica di informazioni da parte di Windows da inviare ai server Microsoft, in breve: "Cosa? Dove? Perché e quando lo usi?". Microsoft sostiene che i dati siano resi anonimi e servano a migliorare Windows, ma possono anche causare un carico eccessivo sul processore, rallentando il sistema.</v:String>
-    <v:String x:Key="TglButton4_description_confidentiality">Nel «Task Scheduler» ci sono servizi che, dopo essere stati eseguiti, raccolgono dati sul loro funzionamento e li inviano ai server Microsoft.</v:String>
-    <v:String x:Key="TglButton5_description_confidentiality">Microsoft raccoglie informazioni sul tuo software. Questi dati vengono utilizzati per diagnosticare problemi di compatibilità, ma non migliorano le versioni future per l’utente. Disattivando questa funzione, eviti l'invio di informazioni potenzialmente sensibili.</v:String>
-    <v:String x:Key="TglButton6_description_confidentiality">Il tweak disabilita il monitoraggio dell'uso delle applicazioni, impedendo la raccolta di dati su frequenza, durata e produttività, proteggendo così la tua privacy.</v:String>
-    <v:String x:Key="TglButton7_description_confidentiality">Questo tweak disabilita la raccolta dei dati per il miglioramento del riconoscimento della scrittura a mano. Anche se non usi questa funzione, il sistema tracciava comunque la tua attività. Ora non più.</v:String>
-    <v:String x:Key="TglButton8_description_confidentiality">Il Programma CEIP raccoglie informazioni sull’hardware e su come utilizzi i servizi. Anche se teoricamente volontario, raccoglie comunque dati e scarica file automaticamente, violando la tua privacy.</v:String>
-    <v:String x:Key="TglButton9_description_confidentiality">Questo tweak modifica il file hosts per bloccare determinati domini e imposta il firewall di Windows per impedire connessioni a indirizzi IP associati alla raccolta dati di Microsoft.</v:String>
-    <v:String x:Key="TglButton10_description_confidentiality">Disattivare i servizi di geolocalizzazione limita notevolmente l’uso dei dati sulla posizione sia da parte di Microsoft che di app e script di terze parti.</v:String>
-    <v:String x:Key="TglButton11_description_confidentiality">Il tweak blocca la raccolta dei feedback e le relative notifiche, impedendo l'invio automatico dei dati. Anche se non utilizzi il «Feedback», Windows monitora comunque l'interazione con il supporto.</v:String>
-    <v:String x:Key="TglButton12_description_confidentiality">Windows controlla periodicamente gli aggiornamenti per il modulo di sintesi vocale, anche se non usi Cortana o le opzioni di accessibilità. Questo tweak disabilita tale comportamento.</v:String>
-    <v:String x:Key="TglButton13_description_confidentiality">Una funzione nascosta con accesso ai tuoi dati, che scambia informazioni con i server Microsoft senza apportare alcun beneficio. Meglio disattivarla.</v:String>
-    <v:String x:Key="TglButton14_description_confidentiality">Microsoft effettua regolarmente esperimenti sugli utenti di Windows per testare funzionalità. Tuttavia, ciò rappresenta una violazione della tua riservatezza.</v:String>
-    <v:String x:Key="TglButton15_description_confidentiality">I servizi DiagTrack, dmwappushservice e diagsvc agiscono come keylogger, registrando ogni attività dell'utente, comprese le digitazioni, e inviano i dati ai server Microsoft. Se non usi UWF, è consigliabile disattivarli.</v:String>
-    <v:String x:Key="TglButton16_description_confidentiality">Il registro eventi raccoglie informazioni diagnostiche di sistema, consumando risorse inutilmente. È preferibile disattivarlo per evitare fughe di dati.</v:String>
-    <v:String x:Key="TglButton17_description_confidentiality">Il servizio NVIDIA raccoglie dati sul sistema e sull’utilizzo, ma non influisce sul driver video. Le finalità della raccolta sono poco chiare e non portano benefici evidenti all’utente.</v:String>
-    <v:String x:Key="TglButton18_description_confidentiality">Il tweak disabilita la funzione UAR (User Activity Recording), che registra ogni azione sul PC: screenshot, testo digitato, programmi aperti e persino l'accesso alla webcam con lo schermo bloccato.</v:String>
-    <!--#endregion-->
-
-    <!--#region Interface Page -->
-    <v:String x:Key="tgl1_interface">Selezione del colore standard del cursore</v:String>
-    <v:String x:Key="tgl2_interface">Colore standard della descrizione comandi (tooltip)</v:String>
-    <v:String x:Key="tgl3_interface">Dimensione standard dei pulsanti di sistema</v:String>
-    <v:String x:Key="tgl4_interface">Frequenza standard del lampeggio del cursore</v:String>
-    <v:String x:Key="tgl5_interface">Dimensione standard della barra di scorrimento</v:String>
-    <v:String x:Key="tgl6_interface">Effetto trasparenza sulla barra delle applicazioni</v:String>
-    <v:String x:Key="tgl7_interface">Tema scuro per la barra delle applicazioni</v:String>
-    <v:String x:Key="tgl8_interface">Tema scuro per applicazioni ed Esplora risorse</v:String>
-    <v:String x:Key="tgl9_interface">Ritardo nell'apertura del menu contestuale</v:String>
-    <v:String x:Key="tgl10_interface">Ritardo anteprime sulla barra delle applicazioni</v:String>
-    <v:String x:Key="tgl11_interface">Frecce sui collegamenti a file, cartelle o programmi</v:String>
-    <v:String x:Key="tgl12_interface">Prefisso «Collegamento a...» / Suffisso «– Collegamento»</v:String>
-    <v:String x:Key="tgl13_interface">Icona «Questo PC» sul desktop</v:String>
-    <v:String x:Key="tgl14_interface">Icona «Cestino» sul desktop</v:String>
-    <v:String x:Key="tgl15_interface">Allineamento della barra delle applicazioni (Windows 11)</v:String>
-    <v:String x:Key="tgl16_interface">Layout standard del menu «Start» (Windows 11)</v:String>
-    <v:String x:Key="tgl17_interface">Menu contestuale semplificato (Windows 11)</v:String>
-    <v:String x:Key="tgl18_interface">Mostra suggerimenti e consigli (Windows 11)</v:String>
-    <v:String x:Key="tgl19_interface">Modalità Esplora file compatta (Windows 11)</v:String>
-    <v:String x:Key="tgl20_interface">Assistenti «Copilot» e «Recall» (Windows 11)</v:String>
-    <v:String x:Key="tgl21_interface">«Termina attività» con clic destro sull'app (Windows 11)</v:String>
-    <v:String x:Key="tgl22_interface">Icone e pulsanti sulla barra delle applicazioni</v:String>
-    <v:String x:Key="tgl23_interface">Mostra pubblicità personalizzate</v:String>
-    <v:String x:Key="tgl24_interface">Ripristina le finestre delle cartelle precedenti all'accesso</v:String>
-    <v:String x:Key="tgl25_interface">Notifiche con suggerimenti e consigli di Windows</v:String>
-    <v:String x:Key="tgl26_interface">Cartelle visibili in «Questo PC»</v:String>
-    <v:String x:Key="tgl27_interface">«Oggetti 3D» nell’Esplora risorse</v:String>
-    <v:String x:Key="tgl28_interface">Compressione del formato .JPEG dello sfondo del desktop</v:String>
-    <v:String x:Key="tgl29_interface">Descrizioni comandi per gli elementi sul desktop</v:String>
-    <v:String x:Key="tgl30_interface">Query di ricerca con integrazione «Bing» nel menu Start</v:String>
-    <v:String x:Key="tgl31_interface">Apri «Accesso rapido» invece di «Questo PC»</v:String>
-    <v:String x:Key="tgl32_interface">Visualizza estensioni dei file in Esplora risorse</v:String>
-
-    <v:String x:Key="textcolor_interface">Questo è un esempio di nuovo colore.</v:String>
-    <v:String x:Key="previewflick_interface">- per un confronto -</v:String>
-
-    <v:String x:Key="TglButton1_description_interface">Modifica il colore della selezione del cursore da blu a grigio tipo «asfalto bagnato».</v:String>
-    <v:String x:Key="TglButton2_description_interface">Cambia il colore delle descrizioni comandi in alcuni programmi da giallo ad azzurro chiaro tipo «azzurro cielo».</v:String>
-    <v:String x:Key="TglButton3_description_interface">Riduce la dimensione dei pulsanti di Riduzione, Ingrandimento e Chiusura, rendendoli meno ingombranti. Si applica a tutte le finestre, incluso Esplora risorse, Foto, browser e altri programmi.</v:String>
-    <v:String x:Key="TglButton4_description_interface">Aumenta la frequenza di lampeggio del cursore di testo. Per impostazione predefinita, lampeggia ogni 530 millisecondi.</v:String>
-    <v:String x:Key="TglButton5_description_interface">Rende più sottile lo spessore delle barre di scorrimento in finestre, browser e programmi (escluse le app moderne).</v:String>
-    <v:String x:Key="TglButton6_description_interface">Attiva o disattiva l'effetto trasparenza delle finestre e delle superfici dell'interfaccia.</v:String>
-    <v:String x:Key="TglButton7_description_interface">Cambia il tema della barra delle applicazioni in chiaro o scuro. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton8_description_interface">Cambia il tema di Esplora risorse, browser e altri programmi compatibili con il tema di sistema. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton9_description_interface">Riduce il ritardo (predefinito: 400 ms) con cui appaiono le voci aggiuntive del menu contestuale.</v:String>
-    <v:String x:Key="TglButton10_description_interface">Riduce il ritardo nella comparsa delle anteprime delle applicazioni sulla barra delle applicazioni.</v:String>
-    <v:String x:Key="TglButton11_description_interface">Rimuove le frecce dai collegamenti sostituendo il file dell'icona della freccia.</v:String>
-    <v:String x:Key="TglButton12_description_interface">Rimuove il prefisso/suffisso troppo esplicito per i collegamenti (es. «Collegamento a...»).</v:String>
-    <v:String x:Key="TglButton13_description_interface">L'icona «Questo PC» (non il collegamento) ha proprietà utili del menu contestuale ed è priva di voci superflue.</v:String>
-    <v:String x:Key="TglButton14_description_interface">Se non usi l'icona del Cestino sul desktop, puoi rimuoverla con questo tweak per risparmiare spazio e clic.</v:String>
-    <v:String x:Key="TglButton15_description_interface">Permette di scegliere l’allineamento delle icone sulla barra delle applicazioni: al centro o a sinistra.</v:String>
-    <v:String x:Key="TglButton16_description_interface">Modifica il layout del menu Start espandendo l’area delle app bloccate. Rimuove anche la sezione «Consigliati» (eccetto su Windows Home).</v:String>
-    <v:String x:Key="TglButton17_description_interface">Ripristina il classico menu contestuale per desktop ed Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton18_description_interface">Disattiva i suggerimenti e consigli di Windows 11 su funzionalità come il nuovo menu Start o Impostazioni rapide.</v:String>
-    <v:String x:Key="TglButton19_description_interface">Ripristina il layout classico di Esplora risorse, rimuovendo gli spazi aggiuntivi pensati per i touchscreen.</v:String>
-    <v:String x:Key="TglButton20_description_interface">The tweak disables and, where possible, hides Copilot icons on the taskbar, in the «Start Menu», in Edge, and in Notepad, blocking its functionality, and also disables Recall. At the same time, the core Copilot application itself is not affected, remains in the system, and can be used if needed. Copilot can only be fully removed along with Microsoft Edge. If these AI features are not present in your Windows initially, using the tweak is pointless.</v:String>
-    <v:String x:Key="TglButton21_description_interface">Aggiunge l’opzione «Termina attività» al menu contestuale delle app sulla barra delle applicazioni. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton22_description_interface">Rimuove le icone «Cerca», «Visualizzazione attività» e «Chat», disattiva le disposizioni automatiche e, in Windows 11, rimuove anche l’icona Copilot. In Windows 10, rimuove anche «Notizie e Interessi» e Cortana. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton23_description_interface">Disattiva la pubblicità personalizzata che Windows mostra in varie aree come App Store, Esplora risorse e menu Start.</v:String>
-    <v:String x:Key="TglButton24_description_interface">Abilita il ripristino delle cartelle aperte e del loro stato dopo disconnessione, riavvio o spegnimento.</v:String>
-    <v:String x:Key="TglButton25_description_interface">Tweak allows disabling all Windows tips and notifications, including online hints in settings, as well as disabling Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is suddenly appearing pop-up that aggressively prompts user to «complete device setup urgently» and sign in to Microsoft account.</v:String>
-    <v:String x:Key="TglButton26_description_interface">Nasconde le cartelle Desktop, Video, Documenti, Download, Immagini e Musica dalla sezione «Questo PC». Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton27_description_interface">Rimuove la voce «Oggetti 3D» dal pannello laterale di Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton28_description_interface">Imposta la qualità dello sfondo in formato JPEG al 100%, evitando la compressione predefinita all’85%.</v:String>
-    <v:String x:Key="TglButton29_description_interface">Disattiva le descrizioni comandi (tooltip) per gli elementi sul desktop quando ci si passa sopra con il mouse.</v:String>
-    <v:String x:Key="TglButton30_description_interface">Disattiva l’invio delle ricerche effettuate nel menu Start ai server Microsoft per la ricerca Bing. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="TglButton31_description_interface">Fa sì che Esplora risorse si apra su «Questo PC» anziché su «Accesso rapido».</v:String>
-    <v:String x:Key="TglButton32_description_interface">Mostra le estensioni dei file in Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <!--#endregion-->
-
-    <!--#region Applications Page -->
-    <v:String x:Key="deletion_warn_part1_applications">Le applicazioni vengono eliminate</v:String>
-    <v:String x:Key="deletion_warn_part2_applications">definitivamente,</v:String>
-    <v:String x:Key="deletion_warn_part3_applications">ma OneDrive è un'eccezione: per ripristinare, fai clic sulla</v:String>
-    <v:String x:Key="deletion_warn_part4_applications">grigia</v:String>
-    <v:String x:Key="deletion_warn_part5_applications">icona</v:String>
-
-    <v:String x:Key="MicrosoftStore_applications">Microsoft Store</v:String>
-    <v:String x:Key="Xbox_applications">Microsoft Xbox</v:String>
-    <v:String x:Key="OneNote_applications">Microsoft Office OneNote</v:String>
-    <v:String x:Key="MicrosoftOfficeHub_applications">Microsoft Office Hub</v:String>
-    <v:String x:Key="MicrosoftSolitaireCollection_applications">Microsoft Solitaire Collection</v:String>
-    <v:String x:Key="MixedReality_applications">Realtà mista</v:String>
-    <v:String x:Key="BingWeather_applications">Meteo Bing</v:String>
-    <v:String x:Key="Microsoft3D_applications">Visualizzatore 3D Microsoft</v:String>
-    <v:String x:Key="SkypeApp_applications">Microsoft Skype</v:String>
-    <v:String x:Key="OneDrive_applications">OneDrive</v:String>
-    <v:String x:Key="Cortana_applications">Cortana</v:String>
-    <v:String x:Key="MicrosoftTeams_applications">Microsoft Teams</v:String>
-    <v:String x:Key="Music_applications">Lettore multimediale di Windows</v:String>
-    <v:String x:Key="Video_applications">Film e TV</v:String>
-    <v:String x:Key="SoundRecorder_applications">Registratore vocale</v:String>
-    <v:String x:Key="FeedbackHub_applications">Centro feedback</v:String>
-    <v:String x:Key="Mail_applications">Posta</v:String>
-    <v:String x:Key="Widgets_applications">Widget</v:String>
-    <v:String x:Key="Photos_applications">Foto di Windows</v:String>
-    <v:String x:Key="ScreenSketch_applications">Strumento di cattura</v:String>
-    <v:String x:Key="ClipChamp_applications">Clipchamp - editor video</v:String>
-    <v:String x:Key="GetStarted_applications">Introduzione</v:String>
-    <v:String x:Key="GetHelp_applications">Ottieni supporto</v:String>
-    <v:String x:Key="MicrosoftStickyNotes_applications">Note adesive Microsoft</v:String>
-    <v:String x:Key="Maps_applications">Mappe di Windows</v:String>
-    <v:String x:Key="Camera_applications">Fotocamera di Windows</v:String>
-    <v:String x:Key="Paint3D_applications">Paint 3D</v:String>
-    <v:String x:Key="PowerAutomateDesktop_applications">Power Automate</v:String>
-    <v:String x:Key="People_applications">Contatti</v:String>
-    <v:String x:Key="BingNews_applications">Notizie Bing</v:String>
-    <v:String x:Key="Todos_applications">Microsoft To Do</v:String>
-    <v:String x:Key="Alarms_applications">Orologio di Windows</v:String>
-    <v:String x:Key="Phone_applications">Il tuo telefono</v:String>
-    <v:String x:Key="Outlook_applications">Outlook per Windows</v:String>
-    <v:String x:Key="BingSports_applications">Sport Bing</v:String>
-    <v:String x:Key="BingFinance_applications">Finanza Bing</v:String>
-    <v:String x:Key="MicrosoftFamily_applications">Microsoft Family Safety</v:String>
-    <v:String x:Key="BingSearch_applications">Ricerca Bing</v:String>
-    <v:String x:Key="QuickAssist_applications">Assistenza rapida</v:String>
-    <v:String x:Key="DevHome_applications">Dev Home</v:String>
-    <v:String x:Key="WindowsTerminal_applications">Terminale</v:String>
-    <v:String x:Key="LinkedIn_applications">LinkedIn</v:String>
-    <v:String x:Key="WebMediaExtensions_applications">Estensioni multimediali Web</v:String>
-    <v:String x:Key="OneConnect_applications">Piani mobili</v:String>
-    <v:String x:Key="Edge_applications">Microsoft Edge</v:String>
-
-    <v:String x:Key="title_over_applications">Conferma disinstallazione</v:String>
-    <v:String x:Key="text_over_applications" xml:space="preserve">You are about to uninstall the Microsoft Edge browser. This will also remove the EdgeWebView component, which is used to display web content in various applications — such as Microsoft Office (e.g., Meeting Insights, Room Finder), the Photos app (the new version uses WebView2), some Telegram bots, and other programs that rely on embedded WebView. Before proceeding, make sure you do not need this component. 
-       In recent builds of Windows 11, Copilot is implemented via EdgeWebView as a PWA or system wrapper. When Edge is uninstalled, Copilot is also removed, since it functions as a web wrapper.</v:String>
-    <v:String x:Key="question_over_applications">Vuoi continuare con l'eliminazione anche di EdgeWebView?</v:String>
-    <v:String x:Key="btn_сancel">Annulla</v:String>
-    <v:String x:Key="btn_delete">Elimina</v:String>
-    <!--#endregion-->
-
-    <!--#region Services Page -->
-    <v:String x:Key="tgl1_services">Servizi relativi alla ricerca di Windows</v:String>
-    <v:String x:Key="tgl2_services">Servizi relativi a Xbox</v:String>
-    <v:String x:Key="tgl3_services">Servizi relativi a modem USB e router</v:String>
-    <v:String x:Key="tgl4_services">Servizi relativi al Windows Store</v:String>
-    <v:String x:Key="tgl5_services">Servizi dei contatori di prestazioni</v:String>
-    <v:String x:Key="tgl6_services">Servizio biometrico di Windows</v:String>
-    <v:String x:Key="tgl7_services">Servizi relativi al Bluetooth</v:String>
-    <v:String x:Key="tgl8_services">Servizi relativi alla stampante</v:String>
-    <v:String x:Key="tgl9_services">Servizio relativo al funzionamento dello scanner</v:String>
-    <v:String x:Key="tgl10_services">Servizi relativi al fax</v:String>
-    <v:String x:Key="tgl11_services">Servizi relativi all’uso della modalità tablet/smartphone</v:String>
-    <v:String x:Key="tgl12_services">Servizi relativi al funzionamento di monitor aggiuntivi</v:String>
-    <v:String x:Key="tgl13_services">Servizi di desktop virtuale, Il tuo telefono</v:String>
-    <v:String x:Key="tgl14_services">Servizi relativi al funzionamento della rete locale</v:String>
-    <v:String x:Key="tgl15_services">Servizi relativi a Windows Update</v:String>
-    <v:String x:Key="tgl16_services">Servizi relativi ai client VPN</v:String>
-    <v:String x:Key="tgl17_services">Servizi relativi al funzionamento di Windows Media</v:String>
-    <v:String x:Key="tgl18_services">Servizi relativi al Desktop remoto</v:String>
-    <v:String x:Key="tgl19_services">Servizi che raccolgono errori e registri eventi</v:String>
-    <v:String x:Key="tgl20_services">Servizio di gestione remota file WebDAV</v:String>
-    <v:String x:Key="tgl21_services">Servizi relativi al funzionamento della smart card</v:String>
-    <v:String x:Key="tgl22_services">Servizi relativi al funzionamento del chiosco Windows</v:String>
-    <v:String x:Key="tgl23_services">Servizi relativi alla crittografia dei file</v:String>
-    <v:String x:Key="tgl24_services">Servizio relativo alla localizzazione di Windows</v:String>
-    <v:String x:Key="tgl25_services">Servizi relativi ai controlli di sicurezza in background</v:String>
-    <v:String x:Key="tgl26_services">Servizi relativi alla diagnostica in background</v:String>
-    <v:String x:Key="tgl27_services">Servizi relativi agli strumenti aziendali</v:String>
-    <v:String x:Key="tgl28_services">Servizio relativo al funzionamento di Hyper-V</v:String>
-
-    <v:String x:Key="TglButton1_description_services">Disattiva se non utilizzi la cronologia dei file e l’indicizzazione dei contenuti.</v:String>
-    <v:String x:Key="TglButton2_description_services">Disattiva se non utilizzi Xbox e gamepad Microsoft.</v:String>
-    <v:String x:Key="TglButton3_description_services">Disattiva se ti connetti a Internet tramite cavo o Wi‑Fi.</v:String>
-    <v:String x:Key="TglButton4_description_services">Disattiva se non utilizzi il Windows Store e le app UWP.</v:String>
-    <v:String x:Key="TglButton5_description_services">Disattiva se non vuoi che i servizi analizzino le prestazioni del sistema.</v:String>
-    <v:String x:Key="TglButton6_description_services">Disable if you do not use sign-in with a PIN, fingerprint, facial recognition, or other Windows Hello methods. If a sign-in method has already been set up, it will continue to work, but you’ll need to re-enable Windows Hello to modify or remove it.</v:String>
-    <v:String x:Key="TglButton7_description_services">Disattiva se non usi dispositivi Bluetooth o non hai bisogno del Bluetooth.</v:String>
-    <v:String x:Key="TglButton8_description_services">Disattiva se non hai una stampante.</v:String>
-    <v:String x:Key="TglButton9_description_services">Disattiva se non hai uno scanner.</v:String>
-    <v:String x:Key="TglButton10_description_services">Disattiva se non hai un fax.</v:String>
-    <v:String x:Key="TglButton11_description_services">Disattiva se hai un computer fisso, un portatile o un netbook.</v:String>
-    <v:String x:Key="TglButton12_description_services">Disattiva se hai un solo monitor e non prevedi di collegarne altri.</v:String>
-    <v:String x:Key="TglButton13_description_services">Disattiva se non usi Desktop virtuali, Il tuo telefono o Luci notturne.</v:String>
-    <v:String x:Key="TglButton14_description_services">Disattiva se non utilizzi o non prevedi di usare una rete locale.</v:String>
-    <v:String x:Key="TglButton15_description_services">Disattiva se non prevedi di aggiornare Windows. Oltre ai servizi, il tweak modifica anche i file responsabili degli aggiornamenti. Di conseguenza, anche se i servizi vengono riattivati, il Centro aggiornamenti non funzionerà. Nota che questa modifica influisce anche sul download e aggiornamento delle app dal Windows Store.</v:String>
-    <v:String x:Key="TglButton16_description_services">Disattiva se non usi client VPN. Potrebbe influire sul funzionamento di Xbox.</v:String>
-    <v:String x:Key="TglButton17_description_services">Disattiva se non ti serve la sincronizzazione dei file e l’accesso in rete locale per Windows Media Player. Questi servizi non sono critici, il player continuerà a funzionare.</v:String>
-    <v:String x:Key="TglButton18_description_services">Disattiva se non usi Desktop remoto né connessioni a server remoti.</v:String>
-    <v:String x:Key="TglButton19_description_services">Disattiva se non vuoi che i servizi carichino il sistema durante la gestione degli errori.</v:String>
-    <v:String x:Key="TglButton20_description_services">Disattiva se non gestisci file da remoto tramite Condivisione o WebDAV.</v:String>
-    <v:String x:Key="TglButton21_description_services">Disattiva se non utilizzi smart card. Una smart card è un identificatore elettronico simile a una carta bancaria. Per l’uso quotidiano di Windows non è necessaria.</v:String>
-    <v:String x:Key="TglButton22_description_services">Disattiva se non utilizzi la modalità chiosco di Windows. Questa modalità mostra solo un’app UWP a schermo intero e blocca tutte le altre funzioni. Nota: può interferire con l’installazione di aggiornamenti e programmi, poiché disabilita l’inizializzazione dei dati di sistema al primo accesso.</v:String>
-    <v:String x:Key="TglButton23_description_services">Disattiva se non utilizzi la crittografia BitLocker o la crittografia EFS per file/cartelle.</v:String>
-    <v:String x:Key="TglButton24_description_services">Disattiva se hai già configurato tutte le lingue che userai e non intendi aggiungerne altre.</v:String>
-    <v:String x:Key="TglButton25_description_services">Disattiva se non utilizzi Windows Defender né altre protezioni di sicurezza di Windows.</v:String>
-    <v:String x:Key="TglButton26_description_services">Disattiva se non vuoi che Windows esegua diagnosi inutili in background.</v:String>
-    <v:String x:Key="TglButton27_description_services">Disattiva se non usi strumenti aziendali per la gestione remota e non ti colleghi a server aziendali.</v:String>
-    <v:String x:Key="TglButton28_description_services">Disattiva se non usi il sistema di virtualizzazione Hyper-V integrato. Non influisce su VirtualBox o simili.</v:String>
-    <!--#endregion-->
-
-    <!--#region System Page -->
-    <v:String x:Key="slider1_system">Velocità del cursore del mouse:</v:String>
-    <v:String x:Key="slider2_system">Ritardo nella ripetizione della tastiera:</v:String>
-    <v:String x:Key="slider3_system">Velocità di ripetizione della tastiera:</v:String>
-    <v:String x:Key="text_system">Inserisci testo per verificare le impostazioni tastiera</v:String>
-    <v:String x:Key="tgl1_system">Aumento della precisione del puntatore</v:String>
-    <v:String x:Key="tgl2_system">Tasti permanenti e filtro di input</v:String>
-    <v:String x:Key="tgl3_system">Attesa disattivazione schermata di blocco</v:String>
-    <v:String x:Key="tgl4_system">Tecnologie «Ibernazione» e «Avvio Rapido»</v:String>
-    <v:String x:Key="tgl5_system">Finestra di avviso allo spegnimento</v:String>
-    <v:String x:Key="tgl6_system">Aggiornamento automatico app via Microsoft Store</v:String>
-    <v:String x:Key="tgl7_system">Ritardo audio nel driver Realtek</v:String>
-    <v:String x:Key="tgl8_system">Windows Defender, Antimalware, SmartScreen e VBS</v:String>
-    <v:String x:Key="tgl9_system">UAC (Controllo dell'account utente)</v:String>
-    <v:String x:Key="tgl10_system">Notifiche di sicurezza dal Centro notifiche</v:String>
-    <v:String x:Key="tgl11_system">Avvisi durante l'esecuzione di file exe</v:String>
-    <v:String x:Key="tgl12_system">Diagnostica automatica della memoria</v:String>
-    <v:String x:Key="tgl13_system">Protocolli Teredo, ISATAP e IPv6</v:String>
-    <v:String x:Key="tgl14_system">Dimensione standard della cache del file system</v:String>
-    <v:String x:Key="tgl15_system">Rallentamento dell'avvio di Windows e dei programmi</v:String>
-    <v:String x:Key="tgl16_system">Cronologia di utilizzo della barra di accesso rapido</v:String>
-    <v:String x:Key="tgl17_system">Esecuzione automatica dei supporti rimovibili</v:String>
-    <v:String x:Key="tgl18_system">Utilizza il piano di alimentazione predefinito</v:String>
-    <v:String x:Key="tgl19_system">Utilizza la funzione «Bluetooth e dispositivi»</v:String>
-    <v:String x:Key="tgl20_system">Firewall di Windows Defender</v:String>
-    <v:String x:Key="tgl21_system">Utilizza la funzione «Modalità gioco»</v:String>
-    <v:String x:Key="tgl22_system">Utilizza la funzione «Barra dei giochi»</v:String>
-    <v:String x:Key="tgl23_system">Esecuzione delle applicazioni in background</v:String>
-    <v:String x:Key="tgl24_system">Spazio riservato in Windows</v:String>
-    <v:String x:Key="tgl25_system">Dynamic and High Precision Event Timer</v:String>
-    <v:String x:Key="tgl26_system">Hide «PC Health Check» from update system</v:String>
-    <v:String x:Key="tgl27_system">Windows Insider’s Background Tasks</v:String>
-    
-    <v:String x:Key="TextSlider1_description_system">Modifica la velocità del puntatore del mouse, risparmiando tempo nella ricerca delle impostazioni.</v:String>
-    <v:String x:Key="TextSlider2_description_system">Modifica il ritardo prima che inizi la ripetizione di un carattere; il valore consigliato è 0.</v:String>
-    <v:String x:Key="TextSlider3_description_system">Modifica la velocità di ripetizione dei caratteri digitati; il valore consigliato è 31.</v:String>
-    <v:String x:Key="TglButton1_description_system">Per impostazione predefinita, l'accelerazione del mouse accelera il movimento. È consigliabile disattivarla per ottenere un movimento più uniforme e preciso.</v:String>
-    <v:String x:Key="TglButton2_description_system">Disattiva i popup che chiedono di attivare i tasti permanenti o il filtro input. Il filtro input può influenzare la velocità di digitazione.</v:String>
-    <v:String x:Key="TglButton3_description_system">Rimuove il limite di 1 minuto prima dello spegnimento della schermata di blocco, indipendentemente dalla fonte di alimentazione.</v:String>
-    <v:String x:Key="TglButton4_description_system">Se non usi l'ibernazione o l'avvio rapido, puoi disattivarli per liberare spazio su disco.</v:String>
-    <v:String x:Key="TglButton5_description_system">Disattiva l'avviso che segnala la chiusura forzata dei programmi in caso di spegnimento o riavvio.</v:String>
-    <v:String x:Key="TglButton6_description_system">Disattiva l'aggiornamento automatico delle app dallo Store per ridurre il traffico di rete.</v:String>
-    <v:String x:Key="TglButton7_description_system">Corregge il ritardo audio nei driver Realtek. Non usarlo se non riscontri problemi o se non sei certo del driver installato.</v:String>
-    <v:String x:Key="TglButton8_description_system">Disattiva Windows Defender, SmartScreen, Antimalware e VBS, riducendo il carico sul sistema.</v:String>
-    <v:String x:Key="TglButton9_description_system">Disattiva completamente l'UAC, rimuovendo icone con scudo e notifiche di sicurezza.</v:String>
-    <v:String x:Key="TglButton10_description_system">Disattiva le notifiche di sicurezza dal Centro notifiche.</v:String>
-    <v:String x:Key="TglButton11_description_system">Disattiva l'avviso di sicurezza all'esecuzione di file scaricati come exe, msi, bat o cmd.</v:String>
-    <v:String x:Key="TglButton12_description_system">Disattiva la diagnostica automatica della memoria, velocizzando l'avvio del sistema. Può comunque essere avviata manualmente.</v:String>
-    <v:String x:Key="TglButton13_description_system">Disattiva i protocolli Teredo, ISATAP e IPv6, inutili per la maggior parte degli utenti. Sconsigliato su dispositivi aziendali.</v:String>
-    <v:String x:Key="TglButton14_description_system">Attiva una cache file system più grande, migliorando le prestazioni ma riducendo la memoria disponibile per le app.</v:String>
-    <v:String x:Key="TglButton15_description_system">Disattiva il meccanismo di rallentamento dell'avvio dei programmi, utile su PC moderni con SSD.</v:String>
-    <v:String x:Key="TglButton16_description_system">Disattiva la cronologia dei file e cartelle usati di recente nella barra di accesso rapido.</v:String>
-    <v:String x:Key="TglButton17_description_system">Disattiva l'esecuzione automatica dei supporti rimovibili, evitando l'avvio di software non sicuro.</v:String>
-    <v:String x:Key="TglButton18_description_system">Aggiunge o attiva il piano di alimentazione «Prestazioni elevate» e sblocca l'impostazione della frequenza massima della CPU.</v:String>
-    <v:String x:Key="TglButton19_description_system">Disattiva il Bluetooth e rimuove l'icona nel tray se non lo usi.</v:String>
-    <v:String x:Key="TglButton20_description_system">Il firewall gestisce l'accesso a Internet delle applicazioni. Disattivalo solo se sei sicuro di ciò che stai facendo.</v:String>
-    <v:String x:Key="TglButton21_description_system">La modalità gioco non influisce molto su PC potenti, ma può migliorare le prestazioni se ci sono molti processi in background.</v:String>
-    <v:String x:Key="TglButton22_description_system">La barra dei giochi consuma risorse. Esistono alternative migliori che non si avviano automaticamente.</v:String>
-    <v:String x:Key="TglButton23_description_system">Disattiva le app in background per ridurre il carico sulla rete, sulla CPU e sulla batteria.</v:String>
-    <v:String x:Key="TglButton24_description_system">Lo spazio riservato è utile per aggiornamenti e cache. Disattivandolo si libera spazio, ma non è consigliato se hai spazio sufficiente.</v:String>
-    <v:String x:Key="TglButton25_description_system">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
-    <v:String x:Key="TglButton26_description_system">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
-    <v:String x:Key="TglButton27_description_system">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
-    <!--#endregion-->
-
-    <!--#region Information System Page -->
-    <v:String x:Key="title_win_name_systemInformation">Sistema operativo:</v:String>
-    <v:String x:Key="title_win_ver_systemInformation">Versione:</v:String>
-    <v:String x:Key="label_proc_systemInformation">Processi in esecuzione:</v:String>
-    <v:String x:Key="label_svc_systemInformation">servizi:</v:String>
-    <v:String x:Key="title_bios_systemInformation">BIOS:</v:String>
-    <v:String x:Key="title_mode_systemInformation">Modalità:</v:String>
-    <v:String x:Key="title_motherbr_systemInformation">Scheda madre:</v:String>
-    <v:String x:Key="title_cpu_systemInformation">Processore:</v:String>
-    <v:String x:Key="title_cores_systemInformation">Core:</v:String>
-    <v:String x:Key="title_threads_systemInformation">Thread:</v:String>
-    <v:String x:Key="title_gpu_systemInformation">Grafica:</v:String>
-    <v:String x:Key="title_ram_systemInformation">Memoria:</v:String>
-    <v:String x:Key="title_mtype_systemInformation">Tipo di memoria:</v:String>
-    <v:String x:Key="title_storage_systemInformation">Dispositivi di archiviazione:</v:String>
-    <v:String x:Key="title_sound_systemInformation">Dispositivi di riproduzione:</v:String>
-    <v:String x:Key="title_netadapter_systemInformation">Schede di rete:</v:String>
-    <v:String x:Key="title_ip_systemInformation">Il tuo indirizzo IP:</v:String>
-    <v:String x:Key="connection_limited_systemInformation">Accesso alla rete limitato</v:String>
-    <v:String x:Key="connection_block_systemInformation">Connessione senza accesso alla rete</v:String>
-    <v:String x:Key="connection_lose_systemInformation">Nessuna connessione a Internet</v:String>
-    <v:String x:Key="text_copy_systemInformatin">Copiato!</v:String>
-    <v:String x:Key="driver_not_installed_systemInformatin">Driver non installato</v:String>
-    <v:String x:Key="no_device_information_systemInformatin">Nessuna informazione sul dispositivo trovata</v:String>
-    <v:String x:Key="unknown_information_systemInformatin">Not detected</v:String>
-    <!--#endregion-->
-
-    <!--#region More Page -->
-    <v:String x:Key="point_advice_part1_more">È fortemente</v:String>
-    <v:String x:Key="point_advice_part2_more">consigliato</v:String>
-    <v:String x:Key="point_advice_part3_more">creare un punto di ripristino prima di usare l'utilità</v:String>
-    
     <v:String x:Key="title_licens_more">Attivazione di Windows</v:String>
-    <v:String x:Key="text_licens_more">Usa il metodo HWID o backup KMS: potrebbe non funzionare senza chiave per la tua edizione di Windows.</v:String>
+    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
     <v:String x:Key="btn_activation">Attiva</v:String>
-    <v:String x:Key="title_createpoint_more">Salva il sistema</v:String>
-    <v:String x:Key="text_createpoint_more">Creerà un punto di ripristino di Windows, anche se è disabilitato.</v:String>
+
+    <v:String x:Key="title_point_more">Recovery Point</v:String>
+    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
     <v:String x:Key="btn_save">Salva</v:String>
-    <v:String x:Key="title_recovery_more">Ripristina il sistema</v:String>
-    <v:String x:Key="text_recovery_more">Avvia il processo di ripristino anche quando il ripristino del sistema è disabilitato.</v:String>
     <v:String x:Key="btn_recovery">Ripristina</v:String>
-    <v:String x:Key="textpoint_more">Un punto creato con GTweak</v:String>
+
+    <v:String x:Key="title_point_state_more">Restore Status</v:String>
+    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
+    <v:String x:Key="btn_disable">Disattiva</v:String>
+    <v:String x:Key="btn_enable">Attiva</v:String>
+
     <v:String x:Key="title_clear_more">Pulizia della memoria</v:String>
     <v:String x:Key="text_clear_more">Pulisce la cache dei file di sistema nella memoria del computer, i file temporanei e la cache delle icone.</v:String>
     <v:String x:Key="btn_clear">Pulisci</v:String>
-    <v:String x:Key="title_disablepoint_more">Disabilita la protezione</v:String>
-    <v:String x:Key="text_disablepoint_more">Disabilita i punti di ripristino del sistema, ma tieni presente che quelli già creati verranno eliminati.</v:String>
-    <v:String x:Key="btn_disable">Disattiva</v:String>
-    <v:String x:Key="btn_enable">Attiva</v:String>
-    <v:String x:Key="title_defrag_off_more">Disattiva la deframmentazione</v:String>
-    <v:String x:Key="text_defrag_off_more">Disattiva la deframmentazione, allunga la vita dell'SSD e previene scritture inutili.</v:String>
-    <v:String x:Key="title_defrag_on_more">Attiva la deframmentazione</v:String>
-    <v:String x:Key="text_defrag_on_more">Attiva la deframmentazione, che riorganizza i file ed è efficace solo sugli HDD.</v:String>
-    <v:String x:Key="title_compression_more">Compressione NTFS</v:String>
-    <v:String x:Key="text_compression_more">Comprimi i file, soprattutto di testo, per risparmiare spazio senza perdita di dati.</v:String>
-    <v:String x:Key="title_decompression_more">Decompressione NTFS</v:String>
-    <v:String x:Key="text_decompression_more">Disabilita la compressione, ripristinando la dimensione originale dei file e velocizzandone l'accesso.</v:String>
-    <v:String x:Key="btn_overview">Panoramica</v:String>
+
+    <v:String x:Key="title_ntfs_more">Compressione NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
+
+    <v:String x:Key="title_registry_more">Registry Backup</v:String>
+    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
+    <v:String x:Key="btn_create">Create</v:String>
 
     <v:String x:Key="title_over_more">Conferma Pulizia Disco</v:String>
     <v:String x:Key="text_over_more">Il tuo disco contiene una cartella Windows.old con i file di una precedente versione di Windows che occupano una quantità significativa di spazio. Nota: una volta eliminata questa cartella, il contenuto non potrà essere recuperato. Assicurati di aver salvato tutti i file necessari.</v:String>
     <v:String x:Key="question_over_more">Vuoi procedere con la pulizia ed eliminare la cartella Windows.old?</v:String>
     <v:String x:Key="btn_agree">Conferma</v:String>
     <v:String x:Key="btn_decline">Annulla</v:String>
+
+    <v:String x:Key="textpoint_more">Un punto creato con GTweak</v:String>
     <!--#endregion-->
+
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_conf">Identificatore pubblicitario e pubblicità mirata</v:String>
+    <v:String x:Key="tgl2_conf">Tutti i tipi di sincronizzazione dei tuoi dati</v:String>
+    <v:String x:Key="tgl3_conf">Raccolta e monitoraggio della telemetria di Windows</v:String>
+    <v:String x:Key="tgl4_conf">Raccolta dati tramite eventi del pianificatore</v:String>
+    <v:String x:Key="tgl5_conf">Raccolta dati sulle applicazioni installate</v:String>
+    <v:String x:Key="tgl6_conf">Raccolta delle statistiche di utilizzo delle applicazioni</v:String>
+    <v:String x:Key="tgl7_conf">Raccolta e invio dei dati della scrittura a mano</v:String>
+    <v:String x:Key="tgl8_conf">Raccolta dei dati della configurazione hardware</v:String>
+    <v:String x:Key="tgl9_conf">Accesso di rete ai domini spia di Microsoft</v:String>
+    <v:String x:Key="tgl10_conf">Determinazione della posizione dell'utente</v:String>
+    <v:String x:Key="tgl11_conf">Controllo delle richieste tramite Feedback</v:String>
+    <v:String x:Key="tgl12_conf">Aggiornamenti nascosti in background della sintesi vocale</v:String>
+    <v:String x:Key="tgl13_conf">Monitoraggio nascosto del sistema</v:String>
+    <v:String x:Key="tgl14_conf">Esperimenti nascosti sul sistema</v:String>
+    <v:String x:Key="tgl15_conf">Servizi per la raccolta e trasmissione segreta dei dati</v:String>
+    <v:String x:Key="tgl16_conf">Registrazione degli eventi di Windows</v:String>
+    <v:String x:Key="tgl17_conf">Raccolta e monitoraggio della telemetria NVIDIA</v:String>
+    <v:String x:Key="tgl18_conf">Registrazione del comportamento dell'utente</v:String>
+    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
+    <v:String x:Key="tgl20_conf">Raccolta e monitoraggio della telemetria Intel</v:String>
     
+    <v:String x:Key="tgl1_desc_conf">Windows crea un identificatore pubblicitario univoco per ogni utente per tracciare le sue azioni. Questo viene utilizzato dagli sviluppatori di applicazioni e da Windows stesso per scopi propri, incluso offrire pubblicità mirate nelle applicazioni.</v:String>
+    <v:String x:Key="tgl2_desc_conf">Anche utilizzando un account locale, Windows cerca sempre di sincronizzare i tuoi dati con i server Microsoft. In particolare: temi, password, impostazioni di Windows, impostazioni del browser, barra della lingua, accessibilità semplificata e altre impostazioni.</v:String>
+    <v:String x:Key="tgl3_desc_conf">La telemetria (dati diagnostici) è una raccolta automatica di informazioni da parte di Windows da inviare ai server Microsoft, in breve: "Cosa? Dove? Perché e quando lo usi?". Microsoft sostiene che i dati siano resi anonimi e servano a migliorare Windows, ma possono anche causare un carico eccessivo sul processore, rallentando il sistema.</v:String>
+    <v:String x:Key="tgl4_desc_conf">Nel «Task Scheduler» ci sono servizi che, dopo essere stati eseguiti, raccolgono dati sul loro funzionamento e li inviano ai server Microsoft.</v:String>
+    <v:String x:Key="tgl5_desc_conf">Microsoft raccoglie informazioni sul tuo software. Questi dati vengono utilizzati per diagnosticare problemi di compatibilità, ma non migliorano le versioni future per l’utente. Disattivando questa funzione, eviti l'invio di informazioni potenzialmente sensibili.</v:String>
+    <v:String x:Key="tgl6_desc_conf">Il tweak disabilita il monitoraggio dell'uso delle applicazioni, impedendo la raccolta di dati su frequenza, durata e produttività, proteggendo così la tua privacy.</v:String>
+    <v:String x:Key="tgl7_desc_conf">Questo tweak disabilita la raccolta dei dati per il miglioramento del riconoscimento della scrittura a mano. Anche se non usi questa funzione, il sistema tracciava comunque la tua attività. Ora non più.</v:String>
+    <v:String x:Key="tgl8_desc_conf">Il Programma CEIP raccoglie informazioni sull’hardware e su come utilizzi i servizi. Anche se teoricamente volontario, raccoglie comunque dati e scarica file automaticamente, violando la tua privacy.</v:String>
+    <v:String x:Key="tgl9_desc_conf">Questo tweak modifica il file hosts per bloccare determinati domini e imposta il firewall di Windows per impedire connessioni a indirizzi IP associati alla raccolta dati di Microsoft.</v:String>
+    <v:String x:Key="tgl10_desc_conf">Disattivare i servizi di geolocalizzazione limita notevolmente l’uso dei dati sulla posizione sia da parte di Microsoft che di app e script di terze parti.</v:String>
+    <v:String x:Key="tgl11_desc_conf">Il tweak blocca la raccolta dei feedback e le relative notifiche, impedendo l'invio automatico dei dati. Anche se non utilizzi il «Feedback», Windows monitora comunque l'interazione con il supporto.</v:String>
+    <v:String x:Key="tgl12_desc_conf">Windows controlla periodicamente gli aggiornamenti per il modulo di sintesi vocale, anche se non usi Cortana o le opzioni di accessibilità. Questo tweak disabilita tale comportamento.</v:String>
+    <v:String x:Key="tgl13_desc_conf">Una funzione nascosta con accesso ai tuoi dati, che scambia informazioni con i server Microsoft senza apportare alcun beneficio. Meglio disattivarla.</v:String>
+    <v:String x:Key="tgl14_desc_conf">Microsoft effettua regolarmente esperimenti sugli utenti di Windows per testare funzionalità. Tuttavia, ciò rappresenta una violazione della tua riservatezza.</v:String>
+    <v:String x:Key="tgl15_desc_conf">I servizi DiagTrack, dmwappushservice e diagsvc agiscono come keylogger, registrando ogni attività dell'utente, comprese le digitazioni, e inviano i dati ai server Microsoft. Se non usi UWF, è consigliabile disattivarli.</v:String>
+    <v:String x:Key="tgl16_desc_conf">Il registro eventi raccoglie informazioni diagnostiche di sistema, consumando risorse inutilmente. È preferibile disattivarlo per evitare fughe di dati.</v:String>
+    <v:String x:Key="tgl17_desc_conf">Il servizio NVIDIA raccoglie dati sul sistema e sull’utilizzo, ma non influisce sul driver video. Le finalità della raccolta sono poco chiare e non portano benefici evidenti all’utente.</v:String>
+    <v:String x:Key="tgl18_desc_conf">Il tweak disabilita la funzione UAR (User Activity Recording), che registra ogni azione sul PC: screenshot, testo digitato, programmi aperti e persino l'accesso alla webcam con lo schermo bloccato.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
+    <v:String x:Key="tgl20_desc_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="tgl1_intf">Selezione del colore standard del cursore</v:String>
+    <v:String x:Key="tgl2_intf">Colore standard della descrizione comandi (tooltip)</v:String>
+    <v:String x:Key="tgl3_intf">Dimensione standard dei pulsanti di sistema</v:String>
+    <v:String x:Key="tgl4_intf">Frequenza standard del lampeggio del cursore</v:String>
+    <v:String x:Key="tgl5_intf">Dimensione standard della barra di scorrimento</v:String>
+    <v:String x:Key="tgl6_intf">Effetto trasparenza sulla barra delle applicazioni</v:String>
+    <v:String x:Key="tgl7_intf">Tema scuro per la barra delle applicazioni</v:String>
+    <v:String x:Key="tgl8_intf">Tema scuro per applicazioni ed Esplora risorse</v:String>
+    <v:String x:Key="tgl9_intf">Ritardo nell'apertura del menu contestuale</v:String>
+    <v:String x:Key="tgl10_intf">Ritardo anteprime sulla barra delle applicazioni</v:String>
+    <v:String x:Key="tgl11_intf">Frecce sui collegamenti a file, cartelle o programmi</v:String>
+    <v:String x:Key="tgl12_intf">Prefisso «Collegamento a...» / Suffisso «– Collegamento»</v:String>
+    <v:String x:Key="tgl13_intf">Icona «Questo PC» sul desktop</v:String>
+    <v:String x:Key="tgl14_intf">Icona «Cestino» sul desktop</v:String>
+    <v:String x:Key="tgl15_intf">Allineamento della barra delle applicazioni</v:String>
+    <v:String x:Key="tgl16_intf">Layout standard del menu «Start»</v:String>
+    <v:String x:Key="tgl17_intf">Menu contestuale semplificato</v:String>
+    <v:String x:Key="tgl18_intf">Mostra suggerimenti e consigli</v:String>
+    <v:String x:Key="tgl19_intf">Modalità Esplora file compatta</v:String>
+    <v:String x:Key="tgl20_intf">Assistenti «Copilot» e «Recall»</v:String>
+    <v:String x:Key="tgl21_intf">«Termina attività» con clic destro sull'app</v:String>
+    <v:String x:Key="tgl22_intf">Show window snap layouts</v:String>
+    <v:String x:Key="tgl23_intf">Icone e pulsanti sulla barra delle applicazioni</v:String>
+    <v:String x:Key="tgl24_intf">Mostra pubblicità personalizzate</v:String>
+    <v:String x:Key="tgl25_intf">Ripristina le finestre delle cartelle precedenti all'accesso</v:String>
+    <v:String x:Key="tgl26_intf">Notifiche con suggerimenti e consigli di Windows</v:String>
+    <v:String x:Key="tgl27_intf">Cartelle visibili in «Questo PC»</v:String>
+    <v:String x:Key="tgl28_intf">«Oggetti 3D» nell’Esplora risorse</v:String>
+    <v:String x:Key="tgl29_intf">Compressione del formato .JPEG dello sfondo del desktop</v:String>
+    <v:String x:Key="tgl30_intf">Descrizioni comandi per gli elementi sul desktop</v:String>
+    <v:String x:Key="tgl31_intf">Query di ricerca con integrazione «Bing» nel menu Start</v:String>
+    <v:String x:Key="tgl32_intf">Apri «Accesso rapido» invece di «Questo PC»</v:String>
+    <v:String x:Key="tgl33_intf">Visualizza estensioni dei file in Esplora risorse</v:String>
+    <v:String x:Key="tgl34_intf">Spontaneous brightness changes</v:String>
+    
+    <v:String x:Key="tgl1_desc_intf">Modifica il colore della selezione del cursore da blu a grigio tipo «asfalto bagnato».</v:String>
+    <v:String x:Key="tgl2_desc_intf">Cambia il colore delle descrizioni comandi in alcuni programmi da giallo ad azzurro chiaro tipo «azzurro cielo».</v:String>
+    <v:String x:Key="tgl3_desc_intf">Riduce la dimensione dei pulsanti di Riduzione, Ingrandimento e Chiusura, rendendoli meno ingombranti. Si applica a tutte le finestre, incluso Esplora risorse, Foto, browser e altri programmi.</v:String>
+    <v:String x:Key="tgl4_desc_intf">Aumenta la frequenza di lampeggio del cursore di testo. Per impostazione predefinita, lampeggia ogni 530 millisecondi.</v:String>
+    <v:String x:Key="tgl5_desc_intf">Rende più sottile lo spessore delle barre di scorrimento in finestre, browser e programmi (escluse le app moderne).</v:String>
+    <v:String x:Key="tgl6_desc_intf">Attiva o disattiva l'effetto trasparenza delle finestre e delle superfici dell'interfaccia.</v:String>
+    <v:String x:Key="tgl7_desc_intf">Cambia il tema della barra delle applicazioni in chiaro o scuro. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl8_desc_intf">Cambia il tema di Esplora risorse, browser e altri programmi compatibili con il tema di sistema. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Riduce il ritardo (predefinito: 400 ms) con cui appaiono le voci aggiuntive del menu contestuale.</v:String>
+    <v:String x:Key="tgl10_desc_intf">Riduce il ritardo nella comparsa delle anteprime delle applicazioni sulla barra delle applicazioni.</v:String>
+    <v:String x:Key="tgl11_desc_intf">Rimuove le frecce dai collegamenti sostituendo il file dell'icona della freccia.</v:String>
+    <v:String x:Key="tgl12_desc_intf">Rimuove il prefisso/suffisso troppo esplicito per i collegamenti (es. «Collegamento a...»).</v:String>
+    <v:String x:Key="tgl13_desc_intf">L'icona «Questo PC» (non il collegamento) ha proprietà utili del menu contestuale ed è priva di voci superflue.</v:String>
+    <v:String x:Key="tgl14_desc_intf">Se non usi l'icona del Cestino sul desktop, puoi rimuoverla con questo tweak per risparmiare spazio e clic.</v:String>
+    <v:String x:Key="tgl15_desc_intf">Permette di scegliere l’allineamento delle icone sulla barra delle applicazioni: al centro o a sinistra.</v:String>
+    <v:String x:Key="tgl16_desc_intf">Modifica il layout del menu Start espandendo l’area delle app bloccate. Rimuove anche la sezione «Consigliati» (eccetto su Windows Home).</v:String>
+    <v:String x:Key="tgl17_desc_intf">Ripristina il classico menu contestuale per desktop ed Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl18_desc_intf">Disattiva i suggerimenti e consigli di Windows 11 su funzionalità come il nuovo menu Start o Impostazioni rapide.</v:String>
+    <v:String x:Key="tgl19_desc_intf">Ripristina il layout classico di Esplora risorse, rimuovendo gli spazi aggiuntivi pensati per i touchscreen.</v:String>
+    <v:String x:Key="tgl20_desc_intf">The tweak disables and, where possible, hides Copilot icons on the taskbar, in the «Start Menu», in Edge, and in Notepad, blocking its functionality, and also disables Recall. At the same time, the core Copilot application itself is not affected, remains in the system, and can be used if needed. Copilot can only be fully removed along with Microsoft Edge. If these AI features are not present in your Windows initially, using the tweak is pointless.</v:String>
+    <v:String x:Key="tgl21_desc_intf">Aggiunge l’opzione «Termina attività» al menu contestuale delle app sulla barra delle applicazioni. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl22_desc_intf">If you don’t need to see the snap layout suggestions when hovering over the «Maximize» button, you can disable this option.</v:String>
+    <v:String x:Key="tgl23_desc_intf">This tweak removes the «Search», «Task View», and «Chat» icons, and hides the «Learn about this picture» element. On older builds of Windows 11, it also removes the Copilot icon. For Windows 10 users, it additionally disables «News and Interests» and Cortana. Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl24_desc_intf">Disattiva la pubblicità personalizzata che Windows mostra in varie aree come App Store, Esplora risorse e menu Start.</v:String>
+    <v:String x:Key="tgl25_desc_intf">Abilita il ripristino delle cartelle aperte e del loro stato dopo disconnessione, riavvio o spegnimento.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Tweak allows disabling all Windows tips and notifications, including online hints in settings, as well as disabling Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is suddenly appearing pop-up that aggressively prompts user to «complete device setup urgently» and sign in to Microsoft account.</v:String>
+    <v:String x:Key="tgl27_desc_intf">Nasconde le cartelle Desktop, Video, Documenti, Download, Immagini e Musica dalla sezione «Questo PC». Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl28_desc_intf">Rimuove la voce «Oggetti 3D» dal pannello laterale di Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl29_desc_intf">Imposta la qualità dello sfondo in formato JPEG al 100%, evitando la compressione predefinita all’85%.</v:String>
+    <v:String x:Key="tgl30_desc_intf">Disattiva le descrizioni comandi (tooltip) per gli elementi sul desktop quando ci si passa sopra con il mouse.</v:String>
+    <v:String x:Key="tgl31_desc_intf">Disattiva l’invio delle ricerche effettuate nel menu Start ai server Microsoft per la ricerca Bing. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl32_desc_intf">Fa sì che Esplora risorse si apra su «Questo PC» anziché su «Accesso rapido».</v:String>
+    <v:String x:Key="tgl33_desc_intf">Mostra le estensioni dei file in Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl34_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
+    <!--#endregion-->
+
+    <!--#region Packages Page -->
+    <v:String x:Key="warn_part1_pkg">Le app verranno eliminate</v:String>
+    <v:String x:Key="warn_part2_pkg">permanentemente,</v:String>
+    <v:String x:Key="warn_part3_pkg">ma OneDrive può essere ripristinato facendo clic sulla sua icona</v:String>
+
+    <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
+    <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
+    <v:String x:Key="OneNote_pkg">Microsoft Office OneNote</v:String>
+    <v:String x:Key="MicrosoftOfficeHub_pkg">Microsoft Office Hub</v:String>
+    <v:String x:Key="MicrosoftSolitaireCollection_pkg">Microsoft Solitaire Collection</v:String>
+    <v:String x:Key="MixedReality_pkg">Realtà mista</v:String>
+    <v:String x:Key="BingWeather_pkg">Meteo Bing</v:String>
+    <v:String x:Key="Microsoft3D_pkg">Visualizzatore 3D Microsoft</v:String>
+    <v:String x:Key="SkypeApp_pkg">Microsoft Skype</v:String>
+    <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
+    <v:String x:Key="Cortana_pkg">Cortana</v:String>
+    <v:String x:Key="MicrosoftTeams_pkg">Microsoft Teams</v:String>
+    <v:String x:Key="Music_pkg">Lettore multimediale di Windows</v:String>
+    <v:String x:Key="Video_pkg">Film e TV</v:String>
+    <v:String x:Key="SoundRecorder_pkg">Registratore vocale</v:String>
+    <v:String x:Key="FeedbackHub_pkg">Centro feedback</v:String>
+    <v:String x:Key="Mail_pkg">Posta</v:String>
+    <v:String x:Key="Widgets_pkg">Widget</v:String>
+    <v:String x:Key="Photos_pkg">Foto di Windows</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Strumento di cattura</v:String>
+    <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
+    <v:String x:Key="GetStarted_pkg">Introduzione</v:String>
+    <v:String x:Key="GetHelp_pkg">Ottieni supporto</v:String>
+    <v:String x:Key="MicrosoftStickyNotes_pkg">Note adesive Microsoft</v:String>
+    <v:String x:Key="Maps_pkg">Mappe di Windows</v:String>
+    <v:String x:Key="Camera_pkg">Fotocamera di Windows</v:String>
+    <v:String x:Key="Paint3D_pkg">Paint 3D</v:String>
+    <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
+    <v:String x:Key="People_pkg">Contatti</v:String>
+    <v:String x:Key="BingNews_pkg">Microsoft Notizie</v:String>
+    <v:String x:Key="Todos_pkg">Microsoft To Do</v:String>
+    <v:String x:Key="Alarms_pkg">Orologio di Windows</v:String>
+    <v:String x:Key="Phone_pkg">Il tuo telefono</v:String>
+    <v:String x:Key="Outlook_pkg">Outlook per Windows</v:String>
+    <v:String x:Key="BingSports_pkg">Sport Bing</v:String>
+    <v:String x:Key="BingFinance_pkg">Finanza Bing</v:String>
+    <v:String x:Key="MicrosoftFamily_pkg">Microsoft Family Safety</v:String>
+    <v:String x:Key="BingSearch_pkg">Ricerca Bing</v:String>
+    <v:String x:Key="QuickAssist_pkg">Assistenza rapida</v:String>
+    <v:String x:Key="DevHome_pkg">Dev Home</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">Terminale</v:String>
+    <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_pkg">Estensioni multimediali Web</v:String>
+    <v:String x:Key="OneConnect_pkg">Piani mobili</v:String>
+    <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
+    <v:String x:Key="Notepad_pkg">Notepad</v:String>
+    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Copilot_pkg">Copilot</v:String>
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    <v:String x:Key="Facebook_pkg">Facebook</v:String>
+    <v:String x:Key="Hulu_pkg">Hulu</v:String>
+    <v:String x:Key="Disney_pkg">Disney</v:String>
+    <v:String x:Key="Instagram_pkg">Instagram</v:String>
+    <v:String x:Key="TwitterX_pkg">Twitter - X</v:String>
+    <v:String x:Key="TikTok_pkg">TikTok</v:String>
+    <v:String x:Key="MicrosoftSway_pkg">Microsoft Sway</v:String>
+    <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
+    <v:String x:Key="Netflix_pkg">Netflix</v:String>
+    <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
+    
+    <v:String x:Key="title_over_pkg">Conferma disinstallazione</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">You are about to uninstall the Microsoft Edge browser. This will also remove the EdgeWebView component, which is used to display web content in various applications — such as Microsoft Office (e.g., Meeting Insights, Room Finder), the Photos app (the new version uses WebView2), some Telegram bots, and other programs that rely on embedded WebView. Before proceeding, make sure you do not need this component. 
+       In recent builds of Windows 11, Copilot is implemented via EdgeWebView as a PWA or system wrapper. When Edge is uninstalled, Copilot is also removed, since it functions as a web wrapper.</v:String>
+    <v:String x:Key="question_over_pkg">Vuoi continuare con l'eliminazione anche di EdgeWebView?</v:String>
+    <v:String x:Key="btn_cancel">Annulla</v:String>
+    <v:String x:Key="btn_delete">Elimina</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_svc">Servizi relativi alla ricerca di Windows</v:String>
+    <v:String x:Key="tgl2_svc">Servizi relativi a Xbox</v:String>
+    <v:String x:Key="tgl3_svc">Servizi relativi a Windows Update</v:String>
+    <v:String x:Key="tgl4_svc">Servizi relativi al Windows Store</v:String>
+    <v:String x:Key="tgl5_svc">Servizi dei contatori di prestazioni</v:String>
+    <v:String x:Key="tgl6_svc">Servizio biometrico di Windows</v:String>
+    <v:String x:Key="tgl7_svc">Servizi relativi al Bluetooth</v:String>
+    <v:String x:Key="tgl8_svc">Servizi relativi alla stampante</v:String>
+    <v:String x:Key="tgl9_svc">Servizio relativo al funzionamento dello scanner</v:String>
+    <v:String x:Key="tgl10_svc">Servizi relativi al fax</v:String>
+    <v:String x:Key="tgl11_svc">Servizi relativi all’uso della modalità tablet/smartphone</v:String>
+    <v:String x:Key="tgl12_svc">Servizi relativi al funzionamento di monitor aggiuntivi</v:String>
+    <v:String x:Key="tgl13_svc">Service related to system components</v:String>
+    <v:String x:Key="tgl14_svc">Servizi relativi al funzionamento della rete locale</v:String>
+    <v:String x:Key="tgl15_svc">Servizi relativi a modem USB e router</v:String>
+    <v:String x:Key="tgl16_svc">Servizi relativi ai client VPN</v:String>
+    <v:String x:Key="tgl17_svc">Servizi relativi al funzionamento di Windows Media</v:String>
+    <v:String x:Key="tgl18_svc">Servizi relativi al Desktop remoto</v:String>
+    <v:String x:Key="tgl19_svc">Servizi che raccolgono errori e registri eventi</v:String>
+    <v:String x:Key="tgl20_svc">Servizio di gestione remota file WebDAV</v:String>
+    <v:String x:Key="tgl21_svc">Servizi relativi al funzionamento della smart card</v:String>
+    <v:String x:Key="tgl22_svc">Servizi relativi al funzionamento del chiosco Windows</v:String>
+    <v:String x:Key="tgl23_svc">Servizi relativi alla crittografia dei file</v:String>
+    <v:String x:Key="tgl24_svc">Servizio relativo alla localizzazione di Windows</v:String>
+    <v:String x:Key="tgl25_svc">Servizi relativi ai controlli di sicurezza in background</v:String>
+    <v:String x:Key="tgl26_svc">Servizi relativi alla diagnostica in background</v:String>
+    <v:String x:Key="tgl27_svc">Servizi relativi agli strumenti aziendali</v:String>
+    <v:String x:Key="tgl28_svc">Servizio relativo al funzionamento di Hyper-V</v:String>
+    <v:String x:Key="tgl29_svc">Services related to push notifications</v:String>
+    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
+    
+    <v:String x:Key="tgl1_desc_svc">Disattiva se non utilizzi la cronologia dei file e l’indicizzazione dei contenuti.</v:String>
+    <v:String x:Key="tgl2_desc_svc">Disattiva se non utilizzi Xbox e gamepad Microsoft.</v:String>
+    <v:String x:Key="tgl3_desc_svc">Disattiva se non prevedi di aggiornare Windows. Oltre ai servizi, il tweak modifica anche i file responsabili degli aggiornamenti. Di conseguenza, anche se i servizi vengono riattivati, il Centro aggiornamenti non funzionerà. Nota che questa modifica influisce anche sul download e aggiornamento delle app dal Windows Store.</v:String>
+    <v:String x:Key="tgl4_desc_svc">Disattiva se non utilizzi il Windows Store e le app UWP.</v:String>
+    <v:String x:Key="tgl5_desc_svc">Disattiva se non vuoi che i servizi analizzino le prestazioni del sistema.</v:String>
+    <v:String x:Key="tgl6_desc_svc">Disable if you do not use sign-in with a PIN, fingerprint, facial recognition, or other Windows Hello methods. If a sign-in method has already been set up, it will continue to work, but you’ll need to re-enable Windows Hello to modify or remove it.</v:String>
+    <v:String x:Key="tgl7_desc_svc">Disattiva se non usi dispositivi Bluetooth o non hai bisogno del Bluetooth.</v:String>
+    <v:String x:Key="tgl8_desc_svc">Disattiva se non hai una stampante.</v:String>
+    <v:String x:Key="tgl9_desc_svc">Disattiva se non hai uno scanner.</v:String>
+    <v:String x:Key="tgl10_desc_svc">Disattiva se non hai un fax.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Disattiva se hai un computer fisso, un portatile o un netbook.</v:String>
+    <v:String x:Key="tgl12_desc_svc">Disattiva se hai un solo monitor e non prevedi di collegarne altri.</v:String>
+    <v:String x:Key="tgl13_desc_svc">Disable if you do not use these apps: «Virtual Desktops», «Your Phone», and «Night Light». This service processes user data and synchronizes it with Microsoft servers. It is not critical for the system’s operation; however, some features, such as «Night Light» in Windows 10, may stop working completely or partially if it is disabled.</v:String>
+    <v:String x:Key="tgl14_desc_svc">Disattiva se non utilizzi o non prevedi di usare una rete locale.</v:String>
+    <v:String x:Key="tgl15_desc_svc">Disattiva se ti connetti a Internet tramite cavo o Wi‑Fi.</v:String>
+    <v:String x:Key="tgl16_desc_svc">Disattiva se non usi client VPN. Potrebbe influire sul funzionamento di Xbox.</v:String>
+    <v:String x:Key="tgl17_desc_svc">Disattiva se non ti serve la sincronizzazione dei file e l’accesso in rete locale per Windows Media Player. Questi servizi non sono critici, il player continuerà a funzionare.</v:String>
+    <v:String x:Key="tgl18_desc_svc">Disattiva se non usi Desktop remoto né connessioni a server remoti.</v:String>
+    <v:String x:Key="tgl19_desc_svc">Disattiva se non vuoi che i servizi carichino il sistema durante la gestione degli errori.</v:String>
+    <v:String x:Key="tgl20_desc_svc">Disattiva se non gestisci file da remoto tramite Condivisione o WebDAV.</v:String>
+    <v:String x:Key="tgl21_desc_svc">Disattiva se non utilizzi smart card. Una smart card è un identificatore elettronico simile a una carta bancaria. Per l’uso quotidiano di Windows non è necessaria.</v:String>
+    <v:String x:Key="tgl22_desc_svc">Disattiva se non utilizzi la modalità chiosco di Windows. Questa modalità mostra solo un’app UWP a schermo intero e blocca tutte le altre funzioni. Nota: può interferire con l’installazione di aggiornamenti e programmi, poiché disabilita l’inizializzazione dei dati di sistema al primo accesso.</v:String>
+    <v:String x:Key="tgl23_desc_svc">Disattiva se non utilizzi la crittografia BitLocker o la crittografia EFS per file/cartelle.</v:String>
+    <v:String x:Key="tgl24_desc_svc">Disattiva se hai già configurato tutte le lingue che userai e non intendi aggiungerne altre.</v:String>
+    <v:String x:Key="tgl25_desc_svc">Disattiva se non utilizzi Windows Defender né altre protezioni di sicurezza di Windows.</v:String>
+    <v:String x:Key="tgl26_desc_svc">Disattiva se non vuoi che Windows esegua diagnosi inutili in background.</v:String>
+    <v:String x:Key="tgl27_desc_svc">Disattiva se non usi strumenti aziendali per la gestione remota e non ti colleghi a server aziendali.</v:String>
+    <v:String x:Key="tgl28_desc_svc">Disattiva se non usi il sistema di virtualizzazione Hyper-V integrato. Non influisce su VirtualBox o simili.</v:String>
+    <v:String x:Key="tgl29_desc_svc">Disable do not use the «Your Phone» app and do not install apps from the Windows Store remotely on other devices, as it is responsible for delivering instant notifications and synchronization between the computer and connected devices. Keep in mind that in Windows 10, after disabling it, the Notification Center may stop opening due to its dependency on this notification system.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_sys">Velocità del cursore del mouse:</v:String>
+    <v:String x:Key="slider2_sys">Ritardo nella ripetizione della tastiera:</v:String>
+    <v:String x:Key="slider3_sys">Velocità di ripetizione della tastiera:</v:String>
+    <v:String x:Key="text_sys">Inserisci testo per verificare le impostazioni tastiera</v:String>
+    <v:String x:Key="tgl1_sys">Aumento della precisione del puntatore</v:String>
+    <v:String x:Key="tgl2_sys">Tasti permanenti e filtro di input</v:String>
+    <v:String x:Key="tgl3_sys">Windows Defender, Antimalware, SmartScreen e VBS</v:String>
+    <v:String x:Key="tgl4_sys">UAC (Controllo dell'account utente)</v:String>
+    <v:String x:Key="tgl5_sys">Notifiche di sicurezza dal Centro notifiche</v:String>
+    <v:String x:Key="tgl6_sys">Aggiornamento automatico app via Microsoft Store</v:String>
+    <v:String x:Key="tgl7_sys">Ritardo audio nel driver Realtek</v:String>
+    <v:String x:Key="tgl8_sys">Attesa disattivazione schermata di blocco</v:String>
+    <v:String x:Key="tgl9_sys">Tecnologie «Ibernazione» e «Avvio Rapido»</v:String>
+    <v:String x:Key="tgl10_sys">Finestra di avviso allo spegnimento</v:String>
+    <v:String x:Key="tgl11_sys">Avvisi durante l'esecuzione di file exe</v:String>
+    <v:String x:Key="tgl12_sys">Diagnostica automatica della memoria</v:String>
+    <v:String x:Key="tgl13_sys">Protocolli Teredo, ISATAP e IPv6</v:String>
+    <v:String x:Key="tgl14_sys">Dimensione standard della cache del file system</v:String>
+    <v:String x:Key="tgl15_sys">Rallentamento dell'avvio di Windows e dei programmi</v:String>
+    <v:String x:Key="tgl16_sys">Cronologia di utilizzo della barra di accesso rapido</v:String>
+    <v:String x:Key="tgl17_sys">Esecuzione automatica dei supporti rimovibili</v:String>
+    <v:String x:Key="tgl18_sys">Utilizza il piano di alimentazione predefinito</v:String>
+    <v:String x:Key="tgl19_sys">Utilizza la funzione «Bluetooth e dispositivi»</v:String>
+    <v:String x:Key="tgl20_sys">Firewall di Windows Defender</v:String>
+    <v:String x:Key="tgl21_sys">Utilizza la funzione «Modalità gioco»</v:String>
+    <v:String x:Key="tgl22_sys">Utilizza la funzione «Barra dei giochi»</v:String>
+    <v:String x:Key="tgl23_sys">Esecuzione delle applicazioni in background</v:String>
+    <v:String x:Key="tgl24_sys">Spazio riservato in Windows</v:String>
+    <v:String x:Key="tgl25_sys">Dynamic and High Precision Event Timer</v:String>
+    <v:String x:Key="tgl26_sys">Hide «PC Health Check» from update system</v:String>
+    <v:String x:Key="tgl27_sys">Windows Insider’s Background Tasks</v:String>
+    <v:String x:Key="tgl28_sys">System Disk Defragmentation</v:String>
+    
+    <v:String x:Key="slider1_desc_sys">Modifica la velocità del puntatore del mouse, risparmiando tempo nella ricerca delle impostazioni.</v:String>
+    <v:String x:Key="slider2_desc_sys">Modifica il ritardo prima che inizi la ripetizione di un carattere; il valore consigliato è 0.</v:String>
+    <v:String x:Key="slider3_desc_sys">Modifica la velocità di ripetizione dei caratteri digitati; il valore consigliato è 31.</v:String>
+    <v:String x:Key="tgl1_desc_sys">Per impostazione predefinita, l'accelerazione del mouse accelera il movimento. È consigliabile disattivarla per ottenere un movimento più uniforme e preciso.</v:String>
+    <v:String x:Key="tgl2_desc_sys">Disattiva i popup che chiedono di attivare i tasti permanenti o il filtro input. Il filtro input può influenzare la velocità di digitazione.</v:String>
+    <v:String x:Key="tgl3_desc_sys">Disattiva Windows Defender, SmartScreen, Antimalware e VBS, riducendo il carico sul sistema. For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
+    <v:String x:Key="tgl4_desc_sys">Disattiva completamente l'UAC, rimuovendo icone con scudo e notifiche di sicurezza.</v:String>
+    <v:String x:Key="tgl5_desc_sys">Disattiva le notifiche di sicurezza dal Centro notifiche.</v:String>
+    <v:String x:Key="tgl6_desc_sys">Disattiva l'aggiornamento automatico delle app dallo Store per ridurre il traffico di rete.</v:String>
+    <v:String x:Key="tgl7_desc_sys">Corregge il ritardo audio nei driver Realtek. Non usarlo se non riscontri problemi o se non sei certo del driver installato.</v:String>
+    <v:String x:Key="tgl8_desc_sys">Rimuove il limite di 1 minuto prima dello spegnimento della schermata di blocco, indipendentemente dalla fonte di alimentazione.</v:String>
+    <v:String x:Key="tgl9_desc_sys">Se non usi l'ibernazione o l'avvio rapido, puoi disattivarli per liberare spazio su disco.</v:String>
+    <v:String x:Key="tgl10_desc_sys">Disattiva l'avviso che segnala la chiusura forzata dei programmi in caso di spegnimento o riavvio.</v:String>
+    <v:String x:Key="tgl11_desc_sys">Disattiva l'avviso di sicurezza all'esecuzione di file scaricati come exe, msi, bat o cmd.</v:String>
+    <v:String x:Key="tgl12_desc_sys">Disattiva la diagnostica automatica della memoria, velocizzando l'avvio del sistema. Può comunque essere avviata manualmente.</v:String>
+    <v:String x:Key="tgl13_desc_sys">Disattiva i protocolli Teredo, ISATAP e IPv6, inutili per la maggior parte degli utenti. Sconsigliato su dispositivi aziendali.</v:String>
+    <v:String x:Key="tgl14_desc_sys">Attiva una cache file system più grande, migliorando le prestazioni ma riducendo la memoria disponibile per le app.</v:String>
+    <v:String x:Key="tgl15_desc_sys">Disattiva il meccanismo di rallentamento dell'avvio dei programmi, utile su PC moderni con SSD.</v:String>
+    <v:String x:Key="tgl16_desc_sys">Disattiva la cronologia dei file e cartelle usati di recente nella barra di accesso rapido.</v:String>
+    <v:String x:Key="tgl17_desc_sys">Disattiva l'esecuzione automatica dei supporti rimovibili, evitando l'avvio di software non sicuro.</v:String>
+    <v:String x:Key="tgl18_desc_sys">Aggiunge o attiva il piano di alimentazione «Prestazioni elevate» e sblocca l'impostazione della frequenza massima della CPU.</v:String>
+    <v:String x:Key="tgl19_desc_sys">Disattiva il Bluetooth e rimuove l'icona nel tray se non lo usi.</v:String>
+    <v:String x:Key="tgl20_desc_sys">Il firewall gestisce l'accesso a Internet delle applicazioni. Disattivalo solo se sei sicuro di ciò che stai facendo.</v:String>
+    <v:String x:Key="tgl21_desc_sys">La modalità gioco non influisce molto su PC potenti, ma può migliorare le prestazioni se ci sono molti processi in background.</v:String>
+    <v:String x:Key="tgl22_desc_sys">La barra dei giochi consuma risorse. Esistono alternative migliori che non si avviano automaticamente.</v:String>
+    <v:String x:Key="tgl23_desc_sys">Disattiva le app in background per ridurre il carico sulla rete, sulla CPU e sulla batteria.</v:String>
+    <v:String x:Key="tgl24_desc_sys">Lo spazio riservato è utile per aggiornamenti e cache. Disattivandolo si libera spazio, ma non è consigliato se hai spazio sufficiente.</v:String>
+    <v:String x:Key="tgl25_desc_sys">Disabling the dynamic timer and HPET can improve system responsiveness by reducing micro‑stutter and yield a slight performance boost. However, the effect depends on the configuration: in some cases, instead of speeding up, the system may slow down and experience lag. If you're using a laptop, note that this may also slightly increase power consumption, as the CPU will remain more active even when idle.</v:String>
+    <v:String x:Key="tgl26_desc_sys">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
+    <v:String x:Key="tgl27_desc_sys">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
+    <v:String x:Key="tgl28_desc_sys">If you have an SSD, disabling defragmentation and boot file optimization, which are effective only for hard drives (HDD), helps extend the lifespan of your drive. At the same time, the TRIM optimization function continues to work: it informs the SSD controller which data blocks are no longer in use and clears them, maintaining stable speed and drive longevity.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Information Page -->
+    <v:String x:Key="title_win_name_sysinfo">Sistema operativo:</v:String>
+    <v:String x:Key="title_win_ver_sysinfo">Versione:</v:String>
+    <v:String x:Key="label_proc_sysinfo">Processi in esecuzione:</v:String>
+    <v:String x:Key="label_svc_sysinfo">servizi:</v:String>
+    <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
+    <v:String x:Key="title_mode_sysinfo">Modalità:</v:String>
+    <v:String x:Key="title_motherbr_sysinfo">Scheda madre:</v:String>
+    <v:String x:Key="title_cpu_sysinfo">Processore:</v:String>
+    <v:String x:Key="title_cores_sysinfo">Core:</v:String>
+    <v:String x:Key="title_threads_sysinfo">Thread:</v:String>
+    <v:String x:Key="title_gpu_sysinfo">Grafica:</v:String>
+    <v:String x:Key="title_ram_sysinfo">Memoria:</v:String>
+    <v:String x:Key="title_mtype_sysinfo">Tipo di memoria:</v:String>
+    <v:String x:Key="title_storage_sysinfo">Dispositivi di archiviazione:</v:String>
+    <v:String x:Key="title_sound_sysinfo">Dispositivi di riproduzione:</v:String>
+    <v:String x:Key="title_netadapter_sysinfo">Schede di rete:</v:String>
+    <v:String x:Key="title_ip_sysinfo">Il tuo indirizzo IP:</v:String>
+    <v:String x:Key="connection_limited_sysinfo">Accesso alla rete limitato</v:String>
+    <v:String x:Key="connection_block_sysinfo">Connessione senza accesso alla rete</v:String>
+    <v:String x:Key="connection_lose_sysinfo">Nessuna connessione a Internet</v:String>
+    <v:String x:Key="text_copy_sysinfo">Copiato!</v:String>
+    <v:String x:Key="driver_not_installed_sysinfo">Driver non installato</v:String>
+    <v:String x:Key="no_device_information_sysinfo">Nessuna informazione sul dispositivo trovata</v:String>
+    <v:String x:Key="unknown_information_sysinfo">Not detected</v:String>
+    <!--#endregion-->
+
+    <!--#region Addons Page -->
+    <v:String x:Key="btn_open_dir">Select folder</v:String>
+    <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">Select a directory or make sure it is not empty</v:String>
+    <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
+
+
+
+
+
+
+
+
+
+

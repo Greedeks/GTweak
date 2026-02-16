@@ -1,9 +1,3 @@
-﻿using GTweak.Core.ViewModel;
-using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,13 +8,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using System.Windows.Threading;
+using GTweak.Core.ViewModel;
+using GTweak.Utilities.Animation;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
 
 namespace GTweak.View
 {
     public partial class DataSystemView : UserControl
     {
-        private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
+        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
         private TimerControlManager _timer = default;
 
@@ -32,55 +31,57 @@ namespace GTweak.View
             {
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (new Dictionary<SystemDiagnostics.ConnectionStatus, string>
+                    if (new Dictionary<HardwareData.ConnectionStatus, string>
                     {
-                        { SystemDiagnostics.ConnectionStatus.Lose, "connection_lose_systemInformation" },
-                        { SystemDiagnostics.ConnectionStatus.Block, "connection_block_systemInformation" },
-                        { SystemDiagnostics.ConnectionStatus.Limited, "connection_limited_systemInformation" }
-                    }.TryGetValue(SystemDiagnostics.CurrentConnection, out string resourceKey))
+                        { HardwareData.ConnectionStatus.Lose, "connection_lose_sysinfo" },
+                        { HardwareData.ConnectionStatus.Block, "connection_block_sysinfo" },
+                        { HardwareData.ConnectionStatus.Limited, "connection_limited_sysinfo" }
+                    }.TryGetValue(HardwareData.CurrentConnection, out string resourceKey))
                     {
-                        SystemDiagnostics.HardwareData.UserIPAddress = (string)FindResource(resourceKey);
-                        DataContext = new DataSystemVM();
+                        HardwareData.UserIPAddress = (string)FindResource(resourceKey);
+                        DataContext = new DataSystemViewModel();
                     }
                 }));
             };
 
-            StartMonitoringData();
-
             Unloaded += delegate { _timer.Stop(); };
-            Loaded += delegate { _timer.Start(); };
+            Loaded += delegate
+            {
+                StartMonitoringData();
+                _timer.Start();
+            };
         }
 
         private void StartMonitoringData()
         {
-            RAMLoad.Value = Task.Run(() => _systemDiagnostics.GetMemoryUsage).Result;
-            CPULoad.Value = MonitoringService.GetProcessorUsage;
+            RAMLoad.Value = HardwareData.Memory.Usage;
+            CPULoad.Value = HardwareData.Processor.Usage;
 
             _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
             {
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
 
-                    await backgroundQueue.QueueTask(async delegate { await _systemDiagnostics.GetTotalProcessorUsage(); });
-                    var ramTask = Task.Run(() => _systemDiagnostics.GetMemoryUsage);
-                    double ram = ramTask.Result;
-                    AnimationProgressBars(MonitoringService.GetProcessorUsage, ram);
+                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetTotalProcessorUsage(); });
+                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetPhysicalAvailableMemory(); });
+                    AnimationProgressBars(HardwareData.Processor.Usage, HardwareData.Memory.Usage);
                     _ = Dispatcher.BeginInvoke(new Action(async () =>
                     {
-                        MonitoringService.GetNumberRunningProcesses = await Task.Run(() => _systemDiagnostics.GetProcessCount());
-                        MonitoringService.GetNumberRunningService = await Task.Run(() => _systemDiagnostics.GetServicesCount());
+                        HardwareData.RunningProcessesCount = await Task.Run(() => _systemDataCollector.GetProcessCount());
+                        HardwareData.RunningServicesCount = await Task.Run(() => _systemDataCollector.GetServicesCount());
                     }));
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
                 {
-                    await backgroundQueue.QueueTask(delegate { _systemDiagnostics.GetUserIpAddress(); });
-                    _ = Dispatcher.BeginInvoke(new Action(() => { DataContext = new DataSystemVM(); }));
+                    await backgroundQueue.QueueTask(delegate { _systemDataCollector.GetUserIpAddress(); });
+                    _ = Dispatcher.BeginInvoke(new Action(() => { DataContext = new DataSystemViewModel(); }));
                 }
-
                 _ = Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (BtnHiddenIP.IsChecked.Value & BtnHiddenIP.Visibility == Visibility.Hidden & !SystemDiagnostics.isIPAddressFormatValid)
+                    if (BtnVision.IsChecked.Value & BtnVision.Visibility == Visibility.Hidden & !SystemDataCollector.isIPAddressFormatValid)
+                    {
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
+                    }
                 }));
             });
         }
@@ -89,27 +90,35 @@ namespace GTweak.View
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                CPULoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, cpuValue, 0.2));
-                RAMLoad.BeginAnimation(ProgressBar.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, ramValue, 0.2));
+                CPULoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, cpuValue, 0.2, useCubicEase: true));
+                RAMLoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, ramValue, 0.2, useCubicEase: true));
             }));
         }
 
         private void AnimationPopup()
         {
             PopupCopy.IsOpen = true;
-            CopyTextToastBody.BeginAnimation(UIElement.OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
-            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35));
+            CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
+            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
         }
 
-        private void BtnHiddenIP_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void BtnVision_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            SettingsEngine.IsHiddenIpAddress = !BtnHiddenIP.IsChecked.Value;
-            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, BtnHiddenIP.IsChecked.Value ? FactoryAnimation.CreateTo(0.2) : FactoryAnimation.CreateIn(0, 20, 0.2));
+            SettingsEngine.IsHiddenIpAddress = !BtnVision.IsChecked.Value;
+            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, BtnVision.IsChecked.Value ? FactoryAnimation.CreateTo(0.2) : FactoryAnimation.CreateIn(0, 20, 0.2));
+        }
+
+        private void BtnVision_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e?.Key == Key.Space || e?.Key == Key.Enter)
+            {
+                e.Handled = true;
+            }
         }
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e?.LeftButton == MouseButtonState.Pressed)
             {
                 Clipboard.Clear();
                 switch (sender.GetType().Name)
@@ -126,7 +135,7 @@ namespace GTweak.View
                                     textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, textBlock.Foreground, VisualTreeHelper.GetDpi(textBlock).PixelsPerDip);
                                 cumulativeHeight += formattedText.Height;
 
-                                if (cumulativeHeight >= e.GetPosition(textBlock).Y)
+                                if (cumulativeHeight >= e?.GetPosition(textBlock).Y)
                                 {
                                     SelectedLine = line;
                                     break;
@@ -141,11 +150,16 @@ namespace GTweak.View
                             Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
                             break;
                         }
+                    default:
+                        break;
                 }
 
                 if (!PopupCopy.IsOpen)
+                {
                     AnimationPopup();
+                }
             }
         }
+
     }
 }

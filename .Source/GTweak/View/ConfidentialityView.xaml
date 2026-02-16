@@ -1,74 +1,65 @@
-﻿<UserControl x:Class="GTweak.View.ConfidentialityView"
+<UserControl x:Class="GTweak.View.ConfidentialityView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
-             xmlns:local="clr-namespace:GTweak.View"
              xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
-             mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="1100"
-             Style="{StaticResource LaunchPage}">
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:local="clr-namespace:GTweak.View"
+             mc:Ignorable="d" d:Width="1014" Style="{StaticResource LaunchPage}">
     <UserControl.DataContext>
-        <vm:ConfidentialityVM />
+        <vm:ConfidentialityViewModel />
     </UserControl.DataContext>
-    
+    <UserControl.Resources>
+        <Style TargetType="uc:ToggleButton" x:Key="ToggleStyle">
+            <Setter Property="Height" Value="23"/>
+            <EventSetter Event="MouseEnter" Handler="Tweak_MouseEnter"/>
+            <EventSetter Event="MouseLeave" Handler="Tweak_MouseLeave"/>
+            <EventSetter Event="ChangedState" Handler="TglButton_ChangedState"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="139*"/>
-            <RowDefinition Height="45*"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="130" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer Style="{StaticResource ScrollPage}">
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 
-                <Grid Grid.Column="0">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Width="Auto" Height="Auto">
+                <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
 
-                        <uc:ToggleButton x:Name="TglButton1" StateNA="{Binding [TglButton1].State}" Height="25" Width="Auto" Margin="20,25,0,0" TextResource="{DynamicResource tgl1_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton2" StateNA="{Binding [TglButton2].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl2_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton3" StateNA="{Binding [TglButton3].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl3_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton4" StateNA="{Binding [TglButton4].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl4_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton5" StateNA="{Binding [TglButton5].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl5_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton6" StateNA="{Binding [TglButton6].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl6_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton7" StateNA="{Binding [TglButton7].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl7_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton8" StateNA="{Binding [TglButton8].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl8_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton9" StateNA="{Binding [TglButton9].State}" Height="25" Width="Auto" Margin="20,20,0,0" TextResource="{DynamicResource tgl9_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
+                    <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" TextResource="{DynamicResource tgl1_conf}" Description="{DynamicResource tgl1_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton2].State}" TextResource="{DynamicResource tgl2_conf}" Description="{DynamicResource tgl2_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton3" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton3].State}" TextResource="{DynamicResource tgl3_conf}" Description="{DynamicResource tgl3_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton4" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton4].State}" TextResource="{DynamicResource tgl4_conf}" Description="{DynamicResource tgl4_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton5" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton5].State}" TextResource="{DynamicResource tgl5_conf}" Description="{DynamicResource tgl5_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton6" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton6].State}" TextResource="{DynamicResource tgl6_conf}" Description="{DynamicResource tgl6_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton7" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton7].State}" TextResource="{DynamicResource tgl7_conf}" Description="{DynamicResource tgl7_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton8" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton8].State}" TextResource="{DynamicResource tgl8_conf}" Description="{DynamicResource tgl8_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton9" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton9].State}" TextResource="{DynamicResource tgl9_conf}" Description="{DynamicResource tgl9_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton10" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton10].State}" TextResource="{DynamicResource tgl10_conf}" Description="{DynamicResource tgl10_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton11" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton11].State}" TextResource="{DynamicResource tgl11_conf}" Description="{DynamicResource tgl11_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton12" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton12].State}" TextResource="{DynamicResource tgl12_conf}" Description="{DynamicResource tgl12_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton13" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton13].State}" TextResource="{DynamicResource tgl13_conf}" Description="{DynamicResource tgl13_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton14" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton14].State}" TextResource="{DynamicResource tgl14_conf}" Description="{DynamicResource tgl14_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton15" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton15].State}" TextResource="{DynamicResource tgl15_conf}" Description="{DynamicResource tgl15_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton16" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton16].State}" TextResource="{DynamicResource tgl16_conf}" Description="{DynamicResource tgl16_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton17" Visibility="{Binding NvSupportAvailable}" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton17].State}" TextResource="{DynamicResource tgl17_conf}" Description="{DynamicResource tgl17_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton18" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton18].State}" TextResource="{DynamicResource tgl18_conf}" Description="{DynamicResource tgl18_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton19" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton19].State}" TextResource="{DynamicResource tgl19_conf}" Description="{DynamicResource tgl19_desc_conf}" />
+                    <uc:ToggleButton x:Name="TglButton20" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton20].State}" TextResource="{DynamicResource tgl20_conf}" Description="{DynamicResource tgl20_desc_conf}" />
+                    
+                </uc:FlowPanel>
 
-                    </StackPanel>
-                </Grid>
-
-                <Grid Grid.Column="1">
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Width="Auto" Height="Auto">
-
-                        <uc:ToggleButton x:Name="TglButton10" StateNA="{Binding [TglButton10].State}" Height="25" Width="Auto" Margin="30,25,0,0" TextResource="{DynamicResource tgl10_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton11" StateNA="{Binding [TglButton11].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl11_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton12" StateNA="{Binding [TglButton12].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl12_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton13" StateNA="{Binding [TglButton13].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl13_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton14" StateNA="{Binding [TglButton14].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl14_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton15" StateNA="{Binding [TglButton15].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl15_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton16" StateNA="{Binding [TglButton16].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl16_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton17" StateNA="{Binding [TglButton17].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl17_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-                        <uc:ToggleButton x:Name="TglButton18" StateNA="{Binding [TglButton18].State}" Height="25" Width="Auto" Margin="30,20,0,0" TextResource="{DynamicResource tgl18_confidentiality}" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ChangedState="TglButton_ChangedState"/>
-
-                    </StackPanel>
-                </Grid>
-            </Grid>
-        </ScrollViewer>
-
+            </ScrollViewer>
+        </Grid>
 
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40*"/>
-                <RowDefinition Height="95"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="1">
-                <uc:Comment x:Name="CommentTweak" DefaultText="{DynamicResource defaultDescription}"/>
-            </Grid>
+            <uc:DescriptionBlock VerticalAlignment="Stretch" x:Name="DescBlock" DefaultText="{DynamicResource defaultDescription}"/>
         </Grid>
+
     </Grid>
 </UserControl>

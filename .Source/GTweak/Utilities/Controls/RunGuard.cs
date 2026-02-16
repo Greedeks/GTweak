@@ -1,5 +1,3 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Windows;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -7,6 +5,9 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
+using GTweak.Windows;
 
 namespace GTweak.Utilities.Controls
 {
@@ -25,9 +26,13 @@ namespace GTweak.Utilities.Controls
                 using (Mutex mutex = new Mutex(false, @"Global\" + "GTweak"))
                 {
                     if (mutex.WaitOne(150, false))
+                    {
                         Application.Current.Dispatcher.Invoke(() => { new MessageWindow().ShowDialog(); });
+                    }
                     else
+                    {
                         Environment.Exit(0);
+                    }
                 }
                 using (Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == Process.GetCurrentProcess().ProcessName))
                 {
@@ -44,12 +49,16 @@ namespace GTweak.Utilities.Controls
 
         internal static async Task CheckingSystemRequirements()
         {
-            await Task.Run(() => new SystemDiagnostics().GetOperatingSystemInfo());
+            await Task.Run(() => new SystemDataCollector().GetOperatingSystemInfo());
 
-            if ((SystemDiagnostics.IsWindowsVersion[11] || SystemDiagnostics.IsWindowsVersion[10]) && SystemDiagnostics.HardwareData.OS.Build.CompareTo(18362.116m) >= 0)
+            if ((HardwareData.OS.IsWin11 || HardwareData.OS.IsWin10) && HardwareData.OS.Build.CompareTo(18362.116m) >= 0)
+            {
                 return;
+            }
 
             new MessageWindow(true).ShowDialog();
         }
+
+        internal static void CheckingDefenderExclusions() => CommandExecutor.RunCommandAsTrustedInstaller($@"$ErrorActionPreference = 'Stop'; $target = '{SettingsEngine.currentLocation}'; try {{ $mp = Get-MpPreference; if ($mp.ExclusionProcess -notcontains $target) {{ Add-MpPreference -ExclusionProcess $target }}; if ($mp.ExclusionPath -notcontains $target) {{ Add-MpPreference -ExclusionPath $target }} }} catch {{}}", true);
     }
 }

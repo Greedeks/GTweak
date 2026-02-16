@@ -11,43 +11,23 @@
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 </div>
 
-<br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/user-attachments/assets/0c2f2947-6d63-46b3-9933-8e72a8b45ed3" width="260" height="68" alt="Télécharger la dernière version"></a><br/><br/>
+<br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/Greedeks/GTweak/blob/main/.github/button.png" width="260" height="68" alt="Download the latest version"></a><br/><br/>
 
 <!-- langues --> 
 <div align="center">
   <h1>🌍 Idiomas Disponíveis:</h1>
 
-<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197484.png" alt="Drapeau US" width="40">
-</a>
+[![EN](https://img.icons8.com/color/50/usa-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md) 
+[![FR](https://img.icons8.com/color/50/france-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md) 
+[![HU](https://img.icons8.com/color/50/hungary-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-hu.md) 
+[![IT](https://img.icons8.com/color/50/italy-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-it.md) 
+[![KO](https://img.icons8.com/color/50/south-korea-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md) 
+[![PL](https://img.icons8.com/color/50/poland-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md) 
+[![PT-BR](https://img.icons8.com/color/50/brazil-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md) 
+[![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md) 
+[![UK](https://img.icons8.com/color/50/ukraine-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md) 
+[![ZH-TW](https://img.icons8.com/color/50/china-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md)
 
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-fr.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197560.png" alt="Drapeau Français" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-hu.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197584.png" alt="Hungarian Flag" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-it.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906483.png" alt="Drapeau Italien" width="40">
-</a>
-  
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-ko.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197582.png" alt="Drapeau Coréen" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/9906/9906449.png" alt="Brazilian Flag" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-ru.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/197/197408.png" alt="Drapeau Russe" width="40">
-</a>
-
-<a href="https://github.com/Greedeks/GTweak/blob/main/README-uk.md">
-    <img src="https://cdn-icons-png.flaticon.com/128/5315/5315703.png" alt="Drapeau Ukrainien" width="40">
-</a>
 </div>
 
 </div>
@@ -81,6 +61,10 @@
 
 <h2> Capturas de Tela 📷</h2>
 <details>
+  <summary> Utilitários </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pt-br/Utils.png"/>
+</details>
+<details>
   <summary> Privacidade </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pt-br/Confidentiality.png"/>
 </details>
@@ -100,10 +84,6 @@
   <summary> Sistema </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pt-br/System.png"/>
 </details>
-<details>
-  <summary> Mais </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pt-br/More.png"/>
-</details>
 
 <h2> Requisitos do Sistema </h2>
 
@@ -111,7 +91,6 @@
 
 ```c++
 Suporte Windows: desde 10 (build 18362.116)
-Resolução mínima de tela: 1280×720 (HD)
 Plataforma instalada: .NET Framework 4.8
 ```
 </br>
@@ -127,6 +106,7 @@ Plataforma instalada: .NET Framework 4.8
 - [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
+- [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
 ## Referência
 - FirewallAPI
@@ -138,45 +118,11 @@ Plataforma instalada: .NET Framework 4.8
   <b>Agradecimento especial</b> a estas pessoas incríveis por sua contribuição às traduções
 </p>
 
-<table>
-  <tr>
-    <td align="center" width="180">
-      <a href="https://github.com/VenusGirl">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/53147200?v=4&h=70&w=70&fit=cover&mask=circle" alt="VenusGirl"/>
-      </a><br/>
-      <b>VenusGirl</b><br/>
-      <i>한국어</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/Kopejkin">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/172585094?v=4&h=70&w=70&fit=cover&mask=circle" alt="Kopejkin"/>
-      </a><br/>
-      <b>Kopejkin</b><br/>
-      <i>Українська</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/Zephyris-Pro">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/200662396?v=4&h=70&w=70&fit=cover&mask=circle" alt="Zephyris"/>
-      </a><br/>
-      <b>Zephyris</b><br/>
-      <i>Français, Italiano</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/marcolinojunior">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/63563268?v=4&h=70&w=70&fit=cover&mask=circle" alt="Marcos Evangelista"/>
-      </a><br/>
-      <b>Marcos Evangelista</b><br/>
-      <i>Português Brasileiro</i>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/JohnFowler58">
-        <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/182429115?v=4&h=70&w=70&fit=cover&mask=circle" alt="John Fowler"/>
-      </a><br/>
-      <b>John Fowler</b><br/>
-      <i>Magyar</i>
-    </td>
-  </tr>
-</table>
+<div align="left">
+  
+[![VenusGirl](https://wsrv.nl/?url=github.com/VenusGirl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/VenusGirl) [![Kopejkin](https://wsrv.nl/?url=github.com/Kopejkin.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kopejkin) [![Zephyris](https://wsrv.nl/?url=github.com/Zephyris-Pro.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Zephyris-Pro) [![Marcos](https://wsrv.nl/?url=github.com/marcolinojunior.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/marcolinojunior) [![John](https://wsrv.nl/?url=github.com/JohnFowler58.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/JohnFowler58) [![Seba](https://wsrv.nl/?url=github.com/seba99317.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/seba99317) [![Tenshi](https://wsrv.nl/?url=github.com/tenshikohaku0227.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/tenshikohaku0227)
+
+</div>
 
 </br>
 

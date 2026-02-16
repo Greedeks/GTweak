@@ -1,7 +1,85 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="{x:Type ToggleButton}" x:Key="TglButtonSound">
+    <Style x:Key="TglThemeSwitch" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
+                        <Grid x:Name="IconContainer" SnapsToDevicePixels="True">
+                            <Border x:Name="Icon" Width="19" Height="19" Margin="0,1,0,0"/>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Sun}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Inactive}" />
+                            <Setter TargetName="Icon" Property="Width" Value="19"/>
+                            <Setter TargetName="Icon" Property="Height" Value="19"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Moon}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Inactive}" />
+                            <Setter TargetName="Icon" Property="Width" Value="17"/>
+                            <Setter TargetName="Icon" Property="Height" Value="17"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Sun}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
+                            <Setter TargetName="Icon" Property="Width" Value="19"/>
+                            <Setter TargetName="Icon" Property="Height" Value="19"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Moon}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
+                            <Setter TargetName="Icon" Property="Width" Value="17"/>
+                            <Setter TargetName="Icon" Property="Height" Value="17"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TglVolume" TargetType="{x:Type ToggleButton}">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -14,14 +92,48 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Image Name="Image"/>
+                    <Border x:Name="Icon" SnapsToDevicePixels="True" Background="{StaticResource Brush_Highlighted}"/>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Image" Property="Source" Value="{StaticResource DI_BtnSoundOn}" />
-                        </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="Image" Property="Source" Value="{StaticResource DI_BtnSoundOff}" />
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_VolumeMute}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Highlighted}" />
                         </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Volume}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Highlighted}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_VolumeMute}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Volume}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -30,9 +142,17 @@
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.07" Duration="0:0:0.1"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.07" Duration="0:0:0.1"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.05" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.05" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -40,9 +160,17 @@
             <EventTrigger RoutedEvent="Button.MouseLeave">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.07" To="1" Duration="0:0:0.1"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.07" To="1" Duration="0:0:0.1"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.05" To="1" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.05" To="1" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -50,7 +178,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type ToggleButton}" x:Key="TglButtonIP">
+    <Style x:Key="TglVision" TargetType="{x:Type ToggleButton}">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -63,14 +191,48 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Image Name="Image"/>
+                    <Border x:Name="Icon" SnapsToDevicePixels="True" Background="{StaticResource Brush_Inactive}"/>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Image" Property="Source" Value="{StaticResource DI_Show}" />
-                        </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="Image" Property="Source" Value="{StaticResource DI_Hide}" />
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_NoVision}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Inactive}" />
                         </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Vision}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Inactive}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_NoVision}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}" />
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Vision}" />
+                                </Setter.Value>
+                            </Setter>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -79,9 +241,17 @@
             <EventTrigger RoutedEvent="Button.MouseEnter">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.07" Duration="0:0:0.1"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.07" Duration="0:0:0.1"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="1.05" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="1.05" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
@@ -89,14 +259,114 @@
             <EventTrigger RoutedEvent="Button.MouseLeave">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
-                        <Storyboard Timeline.DesiredFrameRate="240">
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.07" To="1" Duration="0:0:0.1"/>
-                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.07" To="1" Duration="0:0:0.1"/>
+                        <Storyboard Timeline.DesiredFrameRate="120">
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" From="1.05" To="1" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" From="1.05" To="1" Duration="0:0:0.1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
             </EventTrigger>
         </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TglPackagesStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ToolTipService.IsEnabled" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="7"/>
+                        <Image x:Name="Icon" Width="70" Height="70" Source="{TemplateBinding Tag}" Stretch="Uniform" Opacity="1">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" />
+                            </Image.RenderTransform>
+                            <Image.RenderTransformOrigin>0.5,0.5</Image.RenderTransformOrigin>
+                        </Image>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_Button}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="Icon" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" To="1.07" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="Icon" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" To="1.07" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <DoubleAnimation Storyboard.TargetName="Icon" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="Icon" Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_Button}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="Icon" Property="Opacity" Value="{StaticResource UncheckedIconOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Icon" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Icon" Property="Source" Value="{StaticResource Img_SandTimer}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="PulseAnimation">
+                                    <Storyboard Timeline.DesiredFrameRate="120" RepeatBehavior="Forever" AutoReverse="True">
+                                        <DoubleAnimation Storyboard.TargetName="Icon" Storyboard.TargetProperty="Opacity" From="0.4" To="1" Duration="0:0:1.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="PulseAnimation"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

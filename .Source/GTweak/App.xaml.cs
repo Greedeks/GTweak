@@ -1,11 +1,14 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Windows;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Windows;
+
+using Wpf.Ui.Appearance;
 
 namespace GTweak
 {
@@ -15,7 +18,7 @@ namespace GTweak
         internal static event EventHandler ThemeChanged;
         internal static event EventHandler TweaksImported;
 
-        private readonly SystemDiagnostics _systemDiagnostics = new SystemDiagnostics();
+        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
 
         internal static void UpdateImport() => TweaksImported?.Invoke(default, EventArgs.Empty);
 
@@ -25,44 +28,52 @@ namespace GTweak
 
             DispatcherUnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-            _systemDiagnostics.HandleDevicesEvents += OnHandleDevicesEvents;
+            _systemDataCollector.HandleDevicesEvents += OnHandleDevicesEvents;
         }
 
         private async void App_Startup(object sender, StartupEventArgs e)
         {
-            if (e.Args.Any(arg => arg.Equals("uninstall", StringComparison.OrdinalIgnoreCase)))
+            if (e.Args != null && e.Args.Any(arg => string.Equals(arg ?? string.Empty, "uninstall", StringComparison.OrdinalIgnoreCase)))
             {
                 SettingsEngine.SelfRemoval();
                 return;
             }
 
             SettingsEngine.СheckingParameters();
+            ApplicationThemeManager.Apply(string.Equals(SettingsEngine.Theme, SettingsEngine.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase) ? ApplicationTheme.Dark : ApplicationTheme.Light);
+
             RunGuard.CheckingApplicationCopies();
             await RunGuard.CheckingSystemRequirements();
 
-            _systemDiagnostics.StartDeviceMonitoring();
+            await _systemDataCollector.StartDeviceMonitoring();
 
             new LoadingWindow().Show();
         }
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            ErrorLogging.LogWritingFile(e.Exception);
-            e.Handled = true;
-            Environment.Exit(0);
+            if (e != null)
+            {
+                ErrorLogging.LogWritingFile(e.Exception);
+                e.Handled = true;
+                Environment.Exit(0);
+            }
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            if (e.ExceptionObject is Exception ex)
+            if (e?.ExceptionObject is Exception ex)
+            {
                 ErrorLogging.LogWritingFile(ex);
+            }
+
             Environment.Exit(0);
         }
 
         private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType)
         {
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { _systemDiagnostics.UpdatingDevicesData(deviceType); });
+            await backgroundQueue.QueueTask(delegate { _systemDataCollector.RefreshDevicesData(deviceType); });
         }
 
         private static Uri GetResourceUri(string folder, bool isTheme = false) => isTheme ? new Uri($"Styles/Themes/{folder}/Colors.xaml", UriKind.Relative) : new Uri($"Languages/{folder}/Localize.xaml", UriKind.Relative);
@@ -71,37 +82,27 @@ namespace GTweak
         {
             set
             {
-                var (code, region) = SystemDiagnostics.GetCurrentSystemLang();
+                var (code, region) = SystemDataCollector.GetCurrentSystemLang();
 
-                value ??= code;
-
-                if (value.Contains('-'))
-                {
-                    code = value.Split('-')[0];
-                    region = value.Split('-').Length > 1 ? value.Split('-')[1] : string.Empty;
-                }
+                value ??= $"{code}-{region}";
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
                     Source = value switch
                     {
                         "be" => GetResourceUri("ru"),
-                        _ when code == "pt" && region == "br" => GetResourceUri("pt-br"),
-                        _ when SettingsEngine.AvailableLangs?.Contains(value, StringComparer.OrdinalIgnoreCase) == true => GetResourceUri(value),
+                        _ when SettingsEngine.AvailableLangs.Any(locale => string.Equals(locale, value, StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value),
+                        _ when value.Contains('-') && SettingsEngine.AvailableLangs.Any(locale => string.Equals(locale, value.Split('-')[0], StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value.Split('-')[0]),
                         _ => GetResourceUri("en")
                     }
                 };
 
-                ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
-                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith($"Languages/")
-                                                    select dict).First();
-                if (oldDictionary != null)
+                foreach (ResourceDictionary oldDictionary in Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Languages/")).ToList())
                 {
-                    int ind = Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
                     Current.Resources.MergedDictionaries.Remove(oldDictionary);
-                    Current.Resources.MergedDictionaries.Insert(ind, dictionary);
                 }
-                else { Current.Resources.MergedDictionaries.Add(dictionary); }
+
+                Current.Resources.MergedDictionaries.Add(dictionary);
 
                 LanguageChanged?.Invoke(default, EventArgs.Empty);
             }
@@ -115,27 +116,15 @@ namespace GTweak
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {
-                    Source = value switch
-                    {
-                        "dark" => GetResourceUri("Dark", true),
-                        "light" => GetResourceUri("Light", true),
-                        "cobalt" => GetResourceUri("Cobalt", true),
-                        "amethyst" => GetResourceUri("Dark amethyst", true),
-                        "cblue" => GetResourceUri("Cold Blue", true),
-                        _ => RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", string.Empty) == "0" ? GetResourceUri("Dark", true) : GetResourceUri("Light", true)
-                    }
+                    Source = GetResourceUri(char.ToUpper(value[0], CultureInfo.InvariantCulture) + value.Substring(1).ToLower(CultureInfo.InvariantCulture), true)
                 };
 
-                ResourceDictionary oldDictionary = (from dict in Current.Resources.MergedDictionaries
-                                                    where dict.Source != null && dict.Source.OriginalString.StartsWith("Styles/Themes/")
-                                                    select dict).First();
-                if (oldDictionary != null)
+                foreach (ResourceDictionary oldDictionary in Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Styles/Themes/")).ToList())
                 {
-                    int ind = Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
                     Current.Resources.MergedDictionaries.Remove(oldDictionary);
-                    Current.Resources.MergedDictionaries.Insert(ind, dictionary);
                 }
-                else { Current.Resources.MergedDictionaries.Add(dictionary); }
+
+                Current.Resources.MergedDictionaries.Add(dictionary);
 
                 ThemeChanged?.Invoke(default, EventArgs.Empty);
             }
@@ -143,8 +132,9 @@ namespace GTweak
 
         protected override void OnExit(ExitEventArgs e)
         {
-            _systemDiagnostics?.StopDeviceMonitoring();
+            _systemDataCollector?.StopDeviceMonitoring();
             base.OnExit(e);
         }
     }
 }
+

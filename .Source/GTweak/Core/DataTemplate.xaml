@@ -1,35 +1,34 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
                     xmlns:view="clr-namespace:GTweak.View">
 
-    <DataTemplate DataType="{x:Type vm:ConfidentialityVM}">
+    <DataTemplate DataType="{x:Type vm:ConfidentialityViewModel}">
         <view:ConfidentialityView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:InterfaceVM}">
+    <DataTemplate DataType="{x:Type vm:InterfaceViewModel}">
         <view:InterfaceView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:PackagesVM}">
+    <DataTemplate DataType="{x:Type vm:PakagesViewModel}">
         <view:PakagesView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ServicesVM}">
+    <DataTemplate DataType="{x:Type vm:ServicesViewModel}">
         <view:ServicesView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:SystemVM}">
+    <DataTemplate DataType="{x:Type vm:SystemViewModel}">
         <view:SystemView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:DataSystemVM}">
+    <DataTemplate DataType="{x:Type vm:DataSystemViewModel}">
         <view:DataSystemView />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:MoreVM}">
-        <view:MoreView />
+    <DataTemplate DataType="{x:Type vm:AddonsViewModel}">
+        <view:AddonsView />
     </DataTemplate>
-
 
 </ResourceDictionary>

@@ -1,38 +1,20 @@
-﻿using GTweak.Utilities.Controls;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ServicesTweaks : FirewallManager
     {
-        internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
-
-        private static readonly Dictionary<string, (string Default, string Blocked)> _updateFilesWin = new Dictionary<string, (string Default, string Blocked)>()
-        {
-            { "Uso", ("usoclient.exe", "BlockUOrchestrator-GTweak.exe") },
-            { "Worker", ("MoUsoCoreWorker.exe", "BlockUpdate-GTweak.exe") },
-            { "Core", ("wuaucltcore.exe", "BlockUpdateCore-GTweak.exe") },
-            { "Agent", ("WaaSMedicAgent.exe", "BlockUpdateAgent-GTweak.exe") }
-        };
-
-        private static string FilesPathUpdate(string program, bool isOldWay = false)
-        {
-            bool isUsoClient = _updateFilesWin.TryGetValue("Uso", out var usoFiles) && Regex.IsMatch(program, $"{usoFiles.Default}|{usoFiles.Blocked}", RegexOptions.IgnoreCase);
-            string basePath = (isOldWay || isUsoClient) ? Path.Combine(PathLocator.Folders.SystemDrive, "Windows", "System32") : Path.Combine(PathLocator.Folders.SystemDrive, "Windows", "UUS", "amd64");
-
-            return Path.Combine(basePath, program);
-        }
+        private readonly (string Normal, string Block)[] _updateFiles = new[] { PathLocator.Executable.UsoClient, PathLocator.Executable.WorkerCore, PathLocator.Executable.WuauClient, PathLocator.Executable.WaaSMedic, PathLocator.Executable.MoNotificationUx };
 
         internal void AnalyzeAndUpdate()
         {
@@ -46,12 +28,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XblGameSave", "Start", "4");
 
-            _сontrolWriter.Button[3] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WwanSvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlpasvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\icssvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DusmSvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\autotimesvc", "Start", "4");
+            _сontrolWriter.Button[3] = _updateFiles.All(f => File.Exists(f.Normal));
 
             _сontrolWriter.Button[4] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WalletService", "Start", "4") ||
@@ -85,7 +62,7 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[8] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PrintNotify", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\McpManagementService", "Start", "4");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\McpManagementService", "Start", "4") || IsTaskEnabled(printTasks);
 
             _сontrolWriter.Button[9] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WiaRpc", "Start", "4");
@@ -106,9 +83,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WFDSConMgrSvc", "Start", "4");
 
             _сontrolWriter.Button[13] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PushToInstall", "Start", "4") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnService", "Start", "4");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc", "Start", "4");
 
             _сontrolWriter.Button[14] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon", "Start", "4") ||
@@ -119,7 +94,12 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation", "Start", "4");
 
-            _сontrolWriter.Button[15] = _updateFilesWin.All(key => File.Exists(FilesPathUpdate(key.Value.Default)) || File.Exists(FilesPathUpdate(key.Value.Default, true)));
+            _сontrolWriter.Button[15] =
+                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WwanSvc", "Start", "4") ||
+                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wlpasvc", "Start", "4") ||
+                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\icssvc", "Start", "4") ||
+                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DusmSvc", "Start", "4") ||
+                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\autotimesvc", "Start", "4");
 
             _сontrolWriter.Button[16] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", "4") ||
@@ -186,6 +166,13 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmicguestinterface", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HvHost", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmicvss", "Start", "4");
+
+            _сontrolWriter.Button[29] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PushToInstall", "Start", "4") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WpnService", "Start", "4");
+
+            _сontrolWriter.Button[30] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", "4");
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -206,12 +193,67 @@ namespace GTweak.Utilities.Tweaks
                     SetTaskState(!isDisabled, xboxTasks);
                     break;
                 case "TglButton3":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WwanSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wlpasvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\icssvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DusmSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\autotimesvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DusmSvc", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
+                    BlockWindowsUpdate(isDisabled);
+                    ChangeAccessUpdateFolders(isDisabled);
+
+                    foreach (var (Normal, Block) in _updateFiles)
+                    {
+                        string currentFilePath = isDisabled ? Normal : Block;
+                        string targetFilePath = isDisabled ? Block : Normal;
+
+                        try
+                        {
+                            if (isDisabled && File.Exists(currentFilePath) && File.Exists(targetFilePath))
+                            {
+                                CommandExecutor.RunCommand($"/c del /f \"{targetFilePath}\"");
+                            }
+
+                            if (isDisabled)
+                            {
+                                CommandExecutor.RunCommandAsTrustedInstaller($@"cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                $@"takeown /f ""{currentFilePath}"" /a",
+                                $@"icacls ""{currentFilePath}"" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18",
+                                $@"icacls ""{currentFilePath}"" /grant ""{Environment.UserName}"":F",
+                                $@"rename ""{currentFilePath}"" ""{Path.GetFileName(targetFilePath)}"""}))}""");
+                            }
+                            else
+                            {
+                                CommandExecutor.RunCommandAsTrustedInstaller($@"cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                $@"takeown /f ""{currentFilePath}"" /a",
+                                $@"rename ""{currentFilePath}"" ""{Path.GetFileName(targetFilePath)}""",
+                                $@"icacls ""{targetFilePath}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",
+                                $@"icacls ""{targetFilePath}"" /inheritance:r",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-32-544:F",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-32-545:R",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-18:F",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464:F",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-15-2-1:R",
+                                $@"icacls ""{targetFilePath}"" /grant *S-1-15-2-2:R",
+                                $@"icacls ""{targetFilePath}"" /remove ""{Environment.UserName}"""}))}""");
+                            }
+                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    }
+
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wisvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DmEnrollmentSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wuauserv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WaaSMedicSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DoSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+
+                    if (isDisabled)
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "AutomaticMaintenanceEnabled", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "DisableWindowsUpdateAccess", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "DoNotConnectToWindowsUpdateInternetLocations", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", 1, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate");
+                    }
                     break;
                 case "TglButton4":
                     string[] services = {"WalletService","VacSvc", "spectrum", "SharedRealitySvc","perceptionsimulation", "MixedRealityOpenXRSvc",
@@ -241,7 +283,9 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\McpManagementService", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
 
                     if (isDisabled)
+                    {
                         CommandExecutor.RunCommandAsTrustedInstaller(@$"/c net stop spooler && del /F /Q %systemroot%\System32\spool\PRINTERS\*.*");
+                    }
 
                     try
                     {
@@ -261,9 +305,13 @@ namespace GTweak.Utilities.Tweaks
                                             if (shellKey.GetSubKeyNames().Any(k => k.Equals("print", StringComparison.OrdinalIgnoreCase)))
                                             {
                                                 if (isDisabled)
+                                                {
                                                     RegistryHelp.Write(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\print", "ProgrammaticAccessOnly", string.Empty, RegistryValueKind.String);
+                                                }
                                                 else
+                                                {
                                                     RegistryHelp.DeleteValue(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\print", "ProgrammaticAccessOnly");
+                                                }
                                             }
                                         }
                                     }
@@ -273,6 +321,7 @@ namespace GTweak.Utilities.Tweaks
                         }
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    SetTaskState(!isDisabled, printTasks);
                     break;
                 case "TglButton9":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WiaRpc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -294,10 +343,7 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton13":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\PushToInstall", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WpnService", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPSvc", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WpnService", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton14":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Netlogon", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -311,45 +357,12 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\LanmanWorkstation", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton15":
-                    BlockWindowsUpdate(isDisabled);
-                    ChangeAccessUpdateFolders(isDisabled);
-
-                    foreach (var key in _updateFilesWin)
-                    {
-                        string currentFileName = isDisabled ? key.Value.Default : key.Value.Blocked;
-                        string targetFileName = isDisabled ? key.Value.Blocked : key.Value.Default;
-
-                        string currentFilePath = FilesPathUpdate(currentFileName);
-                        string targetFilePath = FilesPathUpdate(targetFileName);
-
-                        try
-                        {
-                            if (isDisabled)
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{currentFilePath}\" & icacls \"{currentFilePath}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 & icacls \"{currentFilePath}\" /grant {Environment.UserName}:F & rename \"{currentFilePath}\" \"{targetFileName}\"");
-                            else
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rename \"{currentFilePath}\" \"{targetFileName}\" & icacls \"{targetFilePath}\" /reset & takeown /f \"{targetFilePath}\" /a & icacls \"{targetFilePath}\" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464");
-                        }
-                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                    }
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wisvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DmEnrollmentSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wuauserv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WaaSMedicSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DoSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\UsoSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
-
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "AllowMUUpdateService", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "AUOptions", 2, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "AutomaticMaintenanceEnabled", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "NoAutoRebootWithLoggedOnUsers", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallTime", 3, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate\AU", "ScheduledInstallDay", 0, RegistryValueKind.DWord);
-                    }
-                    else
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\WindowsUpdate");
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WwanSvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wlpasvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\icssvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DusmSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\autotimesvc", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DusmSvc", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton16":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
@@ -418,6 +431,17 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\HvHost", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\vmicvss", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     break;
+                case "TglButton29":
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\PushToInstall", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WpnService", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WpnService", "DelayedAutoStart", isDisabled ? 1 : 0, RegistryValueKind.DWord);
+                    break;
+                case "TglButton30":
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
+                    SetTaskState(!isDisabled, retailTasks);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -431,32 +455,21 @@ namespace GTweak.Utilities.Tweaks
                     {
                         CommandExecutor.RunCommandAsTrustedInstaller("/c net stop wuauserv & net stop bits & net stop cryptSvc & net stop RuntimeBroker");
 
-                        foreach (string name in new[] { "usocoreworker", "RuntimeBroker", "msedge", "MicrosoftEdgeUpdate", "edgeupdate" })
-                        {
-                            foreach (Process process in Process.GetProcessesByName(name))
-                            {
-                                process.Kill();
-                                process.WaitForExit(1000);
-                            }
-                        }
+                        string[] processes = { "usocoreworker", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "runtimebroker", "widgets" };
+                        CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
 
                         foreach (string path in new[] { $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\Download", $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\DataStore", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
                         {
-                            if (Directory.Exists(path))
+                            UnlockHandleHelper.UnlockDirectory(path);
+
+                            CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{path}"" /r /d y && icacls ""{path}"" /inheritance:r && icacls ""{path}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{path}"" /grant {Environment.UserName}:F /t && rd /s /q ""{path}""");
+
+                            for (int i = 0; Directory.Exists(path) && i < 5; i++)
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c takeown /f \"{path}\"");
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18");
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c icacls \"{path}\" /grant {Environment.UserName}:F");
-                                CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
+                                try { Directory.Delete(path, true); }
+                                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                                Thread.Sleep(2000);
-
-                                if (Directory.Exists(path))
-                                {
-                                    try { Directory.Delete(path, true); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                                    TakingOwnership.GrantAdministratorsAccess(path, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                                    CommandExecutor.RunCommandAsTrustedInstaller($"/c rd /s /q \"{path}\"");
-                                }
+                                CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{path}' -Recurse -Force", true);
                             }
                         }
 
@@ -464,7 +477,9 @@ namespace GTweak.Utilities.Tweaks
                         CommandExecutor.RunCommandAsTrustedInstaller("/c net start bits & net start cryptSvc");
                     }
                     else
+                    {
                         SetTaskStateOwner(true, winUpdatesTasks);
+                    }
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });

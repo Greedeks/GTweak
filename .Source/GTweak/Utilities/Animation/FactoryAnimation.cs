@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -6,7 +6,7 @@ namespace GTweak.Utilities.Animation
 {
     internal static class FactoryAnimation
     {
-        internal static DoubleAnimation CreateIn(double fromValue, double toValue, double seconds, Action onCompleted = null, bool reverse = false)
+        internal static DoubleAnimation CreateIn(double fromValue, double toValue, double seconds, Action onCompleted = null, bool reverse = false, bool useCubicEase = false)
         {
             DoubleAnimation doubleAnim = new DoubleAnimation()
             {
@@ -14,13 +14,15 @@ namespace GTweak.Utilities.Animation
                 To = toValue,
                 AutoReverse = reverse,
                 Duration = TimeSpan.FromSeconds(seconds),
-                EasingFunction = new QuadraticEase()
+                EasingFunction = useCubicEase ? new CubicEase() : (IEasingFunction)new QuadraticEase()
             };
 
             if (onCompleted != null)
-                doubleAnim.Completed += (s, e) => onCompleted();
+            {
+                doubleAnim.Completed += delegate { onCompleted(); };
+            }
 
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
+            Timeline.SetDesiredFrameRate(doubleAnim, 120);
             return doubleAnim;
         }
 
@@ -29,9 +31,11 @@ namespace GTweak.Utilities.Animation
             DoubleAnimation doubleAnim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(seconds));
 
             if (onCompleted != null)
-                doubleAnim.Completed += (s, e) => onCompleted();
+            {
+                doubleAnim.Completed += delegate { onCompleted(); };
+            }
 
-            Timeline.SetDesiredFrameRate(doubleAnim, 240);
+            Timeline.SetDesiredFrameRate(doubleAnim, 120);
             return doubleAnim;
         }
     }

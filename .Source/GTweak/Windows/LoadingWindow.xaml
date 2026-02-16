@@ -1,68 +1,113 @@
-﻿<Window x:Class="GTweak.Windows.LoadingWindow"
+<ui:FluentWindow x:Class="GTweak.Windows.LoadingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
-        xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
-         xmlns:in="clr-namespace:GTweak.Utilities.Interop"
-        xmlns:local="clr-namespace:GTweak.Windows" 
-        mc:Ignorable="d"
-        Title="GTweak" WindowStyle="None" in:WindowStyleHelper.EnableSystemAnimations="True"
-        Height="260" Width="260" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
-        ResizeMode="CanMinimize" SnapsToDevicePixels="True" UseLayoutRounding="True"
-        IsTabStop="False" Opacity="0.98" ContentRendered="Window_ContentRendered">
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
+        xmlns:local="clr-namespace:GTweak.Windows"
+        mc:Ignorable="d" Icon="/GTweak.ico"
+        Background="Transparent" WindowStyle="None" IsTabStop="False"
+        SnapsToDevicePixels="True" UseLayoutRounding="True"
+        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" KeyboardNavigation.TabNavigation="None"
+        Title="GTweak" MinHeight="150" MinWidth="350" MaxHeight="150" MaxWidth="350" ContentRendered="Window_ContentRendered">
+    <ui:FluentWindow.DataContext>
+        <vm:MainWinViewModel/>
+    </ui:FluentWindow.DataContext>
 
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <uc:ProggressRing ChangeStrokeThickness="3" Width="210" Margin="0,0,-0.5,0" />
-        
-        <Ellipse Height="200" Width="200" Fill="{StaticResource Color_Background}" StrokeThickness="6.6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    <Grid Background="{StaticResource Brush_Background}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,30,0,0">
+        <Grid Grid.Column="0">
+            <Image Source="{Binding DisplayProfileAvatar, TargetNullValue={StaticResource Icon_ProfileAvatar}}" Stretch="UniformToFill">
+                <Image.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#FFFFFFFF"/>
+                        <GradientStop Offset="0.5" Color="#88FFFFFF"/>
+                        <GradientStop Offset="1" Color="#00FFFFFF"/>
+                    </LinearGradientBrush>
+                </Image.OpacityMask>
+            </Image>
+        </Grid>
 
-            <TextBlock x:Name="TextTittle" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium">
-               <Run Text="{StaticResource title_load}" /><Run x:Name="DotRun" Text="" />
-                <TextBlock.Triggers>
-                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard Timeline.DesiredFrameRate="240" RepeatBehavior="Forever" Duration="0:0:0.8">
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DotRun" Storyboard.TargetProperty="Text">
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0"   Value="" />
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="." />
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value=".." />
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="..." />
-                                </ObjectAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </TextBlock.Triggers>
-            </TextBlock>
+        <Grid Grid.Column="1">
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="00,18,0,0">
-                <Border BorderBrush="{StaticResource Color_Accent}" CornerRadius="50" Width="75" Height="75" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Border CornerRadius="50">
-                        <Border.Effect>
-                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
-                        </Border.Effect>
-                        <Border.Background>
-                            <ImageBrush x:Name="ProfileAvatar" ImageSource="{Binding DisplayProfileAvatar}" Stretch="Uniform"/>
-                        </Border.Background>
-                    </Border>
-                </Border>
-                <Path Stroke="{StaticResource Color_Accent}" StrokeThickness="1"  Stretch="Uniform">
-                    <Path.Data>
-                        <EllipseGeometry RadiusX="5" RadiusY="5"/>
-                    </Path.Data>
-                </Path>
+                <StackPanel Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                    <TextBlock x:Name="TextTittle" Foreground="{StaticResource Brush_Inactive}" FontFamily="{StaticResource Jura}" FontSize="9pt" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium">
+                        <Run Text="{DynamicResource title_load}" /><Run x:Name="DotRun" Text="" />
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="60" RepeatBehavior="Forever" Duration="0:0:1">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DotRun" Storyboard.TargetProperty="Text">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0"   Value="" />
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="." />
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value=".." />
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="..." />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <TextBlock x:Name="StatusLoading" Margin="0,5,0,0" FontSize="9pt" Text="{DynamicResource step1_load}" Foreground="{StaticResource Brush_TextBlock_Inactivity}"  FontFamily="{StaticResource Jura}" TextAlignment="Left" FontStretch="Medium" TextWrapping="Wrap" MaxWidth="195" />
+                </StackPanel>
             </Grid>
+        </Grid>
 
-            <Viewbox Stretch="Uniform" MaxWidth="161" VerticalAlignment="Center" StretchDirection="DownOnly">
-                <TextBlock x:Name="TextLoad" MaxWidth="160" Text="{DynamicResource step1_load}" Foreground="{StaticResource Color_TetBlock_Inactivity}" FontFamily="{StaticResource Jura}" Height="auto" HorizontalAlignment="Center" TextAlignment="Center" FontStretch="Medium" TextWrapping="Wrap" Margin="1,14,1,1"/>
-            </Viewbox>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,8,8,0" Panel.ZIndex="10">
+
+            <StackPanel.Resources>
+                <Style TargetType="Ellipse">
+                    <Setter Property="Width" Value="6"/>
+                    <Setter Property="Height" Value="6"/>
+                    <Setter Property="Margin" Value="2"/>
+                    <Setter Property="StrokeThickness" Value="1"/>
+                    <Setter Property="Stroke" Value="{StaticResource Brush_Separator}"/>
+                    <Setter Property="Fill" Value="Transparent"/>
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Ellipse x:Name="Indicator1"/>
+            <Ellipse x:Name="Indicator2"/>
+            <Ellipse x:Name="Indicator3"/>
+
+            <StackPanel.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard Timeline.DesiredFrameRate="120" RepeatBehavior="Forever" Duration="0:0:1.8">
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Indicator1" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                <DiscreteColorKeyFrame KeyTime="0:0:0" Value="{StaticResource Color_Accent}"/>
+                                <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="Transparent"/>
+                            </ColorAnimationUsingKeyFrames>
+
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Indicator2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="{StaticResource Color_Accent}"/>
+                                <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="Transparent"/>
+                            </ColorAnimationUsingKeyFrames>
+
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Indicator3" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="{StaticResource Color_Accent}"/>
+                                <DiscreteColorKeyFrame KeyTime="0:0:1.8" Value="Transparent"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </StackPanel.Triggers>
         </StackPanel>
+        
     </Grid>
-
-</Window>
+</ui:FluentWindow>

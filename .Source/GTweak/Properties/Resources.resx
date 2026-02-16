@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -121,6 +121,9 @@
   <data name="Blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Blank.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="DisablingWD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DisablingWD.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="hosts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hosts.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -131,7 +134,7 @@
     <value>..\Resources\Sound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Tickets" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Tickets.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+    <value>..\Resources\Tickets.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="UltPower" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UltPower.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

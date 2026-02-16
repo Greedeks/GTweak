@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 
 namespace GTweak.Core
@@ -19,6 +19,7 @@ namespace GTweak.Core
             this._canExecute = _canExecute;
         }
         public bool CanExecute(object parameter) => _canExecute == null || _canExecute(parameter);
-        public void Execute(object parameter) => _execute(parameter);
+        public void Execute(object parameter) => _execute?.Invoke(parameter);
+
     }
 }

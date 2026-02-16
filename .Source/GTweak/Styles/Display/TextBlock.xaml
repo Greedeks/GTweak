@@ -1,48 +1,54 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="{x:Type TextBlock}" x:Key="Text_In">
-        <Setter Property="Foreground" Value="{StaticResource Color_TetBlock_Inactivity}"/>
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextToggle">
+        <Setter Property="Foreground" Value="{StaticResource Brush_Toggle_Text}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="16px"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="15px"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="Width" Value="Auto"/>
-        <Setter Property="MaxWidth" Value="465"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="Cursor" Value="Arrow"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource Color_Highlighted}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush_Toggle_Text_Hover}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="{x:Type TextBlock}" x:Key="Text">
-        <Setter Property="Foreground" Value="{StaticResource Color_Accent}"/>
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextInactivity">
+        <Setter Property="Foreground" Value="{StaticResource Brush_TextBlock_Inactivity}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="16px"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="15px"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="Width" Value="Auto"/>
-        <Setter Property="MaxWidth" Value="465"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
         <Setter Property="Cursor" Value="Arrow"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="{StaticResource Color_Over}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextDefault">
+        <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="15.5px"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="Cursor" Value="Arrow"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="Description">
-        <Setter Property="Foreground" Value="{StaticResource Color_Highlighted}"/>
+        <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="FontSize" Value="16px"/>
@@ -50,8 +56,6 @@
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="Cursor" Value="Arrow"/>
-        <Setter Property="Margin" Value="0,6,0,6"/>
-        <Setter Property="MaxWidth" Value="1020"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 

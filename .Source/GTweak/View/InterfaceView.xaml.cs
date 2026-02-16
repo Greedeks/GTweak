@@ -1,15 +1,11 @@
-﻿using GTweak.Assets.UserControl;
-using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
-using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
+using GTweak.Assets.UserControl;
+using GTweak.Utilities.Maintenance;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
@@ -21,62 +17,40 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            if (!WindowsLicense.IsWindowsActivated)
-                new NotificationManager().Show("info", "warn_activate_notification").Perform();
-
-            if (SystemDiagnostics.HardwareData.OS.Build.CompareTo(22621.2361m) < 0)
-                TglButton21.IsEnabled = false;
-        }
-
-        private void Tweak_MouseEnter(object sender, MouseEventArgs e)
-        {
-            ToggleButton toggleButton = (ToggleButton)sender;
-            string descriptionTweak = (string)FindResource(toggleButton.Name + "_description_interface");
-
-            if (CommentTweak.Text != descriptionTweak)
+            if (!WinLicenseHandler.IsWindowsActivated)
             {
-                CommentTweak.Text = descriptionTweak;
-
-                if (toggleButton.Name == "TglButton1")
-                {
-                    TextViewColor.Foreground = new SolidColorBrush(Color.FromArgb(255, 80, 80, 80));
-                    TextViewColor.Visibility = Visibility.Visible;
-                    new TypewriterAnimation((string)FindResource("textcolor_interface"), TextViewColor, TimeSpan.FromMilliseconds(350));
-                }
-                else if (toggleButton.Name == "TglButton2")
-                {
-                    TextViewColor.Foreground = new SolidColorBrush(Color.FromArgb(255, 240, 255, 255));
-                    TextViewColor.Visibility = Visibility.Visible;
-                    new TypewriterAnimation((string)FindResource("textcolor_interface"), TextViewColor, TimeSpan.FromMilliseconds(350));
-                }
-                else if (toggleButton.Name == "TglButton4")
-                    PreviewFlick.Visibility = Visibility.Visible;
-
+                NotificationManager.Show("info", "warn_activate_noty").Perform();
             }
         }
 
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
+
+        private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (TextViewColor.Visibility == Visibility.Visible)
-                TextViewColor.Visibility = Visibility.Hidden;
-            else if (PreviewFlick.Visibility == Visibility.Visible)
-                PreviewFlick.Visibility = Visibility.Hidden;
-            if (CommentTweak.Text != (string)FindResource("defaultDescription"))
-                CommentTweak.Text = (string)FindResource("defaultDescription");
+            string description = ((ToggleButton)sender!).Description?.ToString() ?? string.Empty;
+
+            if (DescBlock.Text != description)
+            {
+                DescBlock.Text = description;
+            }
         }
 
-        private void TglButton_ChangedState(object sender, EventArgs e)
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
+
+        private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
+
             _intfTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
             if (ExplorerManager.IntfMapping.TryGetValue(toggleButton.Name, out bool needRestart))
+            {
                 ExplorerManager.Restart(new Process());
+            }
 
             if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
-                new NotificationManager(300).Show().Perform(action);
-
-            Parallel.Invoke(async delegate { await Task.Delay(1000); _intfTweaks.AnalyzeAndUpdate(); });
+            {
+                NotificationManager.Show().WithDelay(300).Perform(action);
+            }
         }
     }
 }

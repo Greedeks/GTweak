@@ -1,0 +1,35 @@
+<UserControl x:Class="GTweak.Assets.UserControl.FileCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:GTweak.Assets.UserControl"
+             mc:Ignorable="d"
+             d:Height="Auto" d:Width="Auto" IsTabStop="False" KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True"
+             UseLayoutRounding="True" Cursor="Hand" MaxWidth="200" >
+    <Grid Cursor="Hand">
+        <ProgressBar x:Name="ProgressBar" Height="4" Margin="8,0,8,0" Width="Auto" VerticalAlignment="Top" Visibility="Collapsed" Value="0" Maximum="100" Foreground="{StaticResource Brush_Accent}" />
+
+        <Border CornerRadius="8" Opacity="0.45" Background="#33000000" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Panel.ZIndex="0">
+            <Border.RenderTransform>
+                <TranslateTransform X="3" Y="6" />
+            </Border.RenderTransform>
+        </Border>
+
+        <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15" HorizontalAlignment="Stretch" VerticalAlignment="Top" SnapsToDevicePixels="True" Panel.ZIndex="1" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave"  MouseLeftButtonDown="Card_MouseClick">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0" Width="50" Height="50" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="{Binding IconSource, RelativeSource={RelativeSource AncestorType=local:FileCard}, TargetNullValue={StaticResource Img_BatFile}}" Stretch="Uniform"/>
+                </Viewbox>
+
+                <TextBlock Grid.Row="1" Margin="0,15,0,0" FontSize="13px" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding FileName, RelativeSource={RelativeSource AncestorType=local:FileCard}}"
+                           TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" MaxWidth="150" MaxHeight="200" TextTrimming="CharacterEllipsis"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,33 +1,36 @@
-﻿<Application x:Class="GTweak.App"
+<Application x:Class="GTweak.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GTweak"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              Startup="App_Startup">
     
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ui:ThemesDictionary Theme="Dark" />
+                <ui:ControlsDictionary />
+                <ResourceDictionary Source="Core/DataTemplate.xaml" />
                 <ResourceDictionary Source="Languages/en/Localize.xaml" />
                 <ResourceDictionary Source="Languages/LanguageCatalog.xaml" />
-                <ResourceDictionary Source="Core/DataTemplate.xaml" />
                 <ResourceDictionary Source="Assets/Fonts/Fonts.xaml" />
-                <ResourceDictionary Source="Assets/DrawingImages/Deleted/Applications.xaml" />
-                <ResourceDictionary Source="Assets/DrawingImages/Installed/Applications.xaml" />
-                <ResourceDictionary Source="Assets/DrawingImages/Other.xaml" />
-                <ResourceDictionary Source="Assets/DrawingImages/Card.xaml" />
+                <ResourceDictionary Source="Assets/DrawingImages/Cards.xaml" />
+                <ResourceDictionary Source="Assets/DrawingImages/TitleBar.xaml" />
+                <ResourceDictionary Source="Assets/DrawingImages/SettingsPanel.xaml" />
+                <ResourceDictionary Source="Assets/DrawingImages/SystemInfo.xaml" />
+                <ResourceDictionary Source="Assets/Images.xaml" />
                 <ResourceDictionary Source="Styles/Themes/Dark/Colors.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/Buttons.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/RadioButtons.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/ToggleButtons.xaml" />
                 <ResourceDictionary Source="Styles/Display/ScrollBar.xaml" />
                 <ResourceDictionary Source="Styles/Display/TextBlock.xaml" />
-                <ResourceDictionary Source="Styles/Display/ProgressBar.xaml" />
+                <ResourceDictionary Source="Styles/Display/Images.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/ComboBox.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/Slider.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/TextBox.xaml" />
-                <ResourceDictionary Source="Styles/Inputs/ComboBox.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/CheckBox.xaml" />
                 <ResourceDictionary Source="Styles/Page.xaml" />
-                <ResourceDictionary Source="Styles/Images.xaml" />
-                <ResourceDictionary Source="Styles/Rectangle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

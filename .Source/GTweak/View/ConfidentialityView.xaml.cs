@@ -1,10 +1,9 @@
-﻿using GTweak.Assets.UserControl;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
-using System;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GTweak.Assets.UserControl;
+using GTweak.Utilities.Managers;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
@@ -19,28 +18,26 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            string descriptionTweak = (string)FindResource(((ToggleButton)sender).Name + "_description_confidentiality");
+            string description = ((ToggleButton)sender!).Description?.ToString() ?? string.Empty;
 
-            if (CommentTweak.Text != descriptionTweak)
-                CommentTweak.Text = descriptionTweak;
+            if (DescBlock.Text != description)
+            {
+                DescBlock.Text = description;
+            }
         }
 
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (CommentTweak.Text != (string)FindResource("defaultDescription"))
-                CommentTweak.Text = (string)FindResource("defaultDescription");
-        }
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
 
-        private void TglButton_ChangedState(object sender, EventArgs e)
+        private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;
 
             _confTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
             if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
-                new NotificationManager(300).Show().Perform(action);
-
-            Parallel.Invoke(async delegate { await Task.Delay(1000); _confTweaks.AnalyzeAndUpdate(); });
+            {
+                NotificationManager.Show().WithDelay(300).Perform(action);
+            }
         }
     }
 }

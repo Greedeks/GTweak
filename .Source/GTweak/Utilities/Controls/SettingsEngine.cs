@@ -1,17 +1,16 @@
-﻿using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Windows;
-using Microsoft.Win32;
-using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using GTweak.Windows;
+using Microsoft.Win32;
+using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Utilities.Controls
 {
@@ -20,8 +19,8 @@ namespace GTweak.Utilities.Controls
         [DllImport("winmm.dll")]
         internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
 
-        internal static readonly string[] AvailableLangs = new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_main", "").Replace("_", "-")).OrderBy(lang => lang, StringComparer.OrdinalIgnoreCase).ToArray();
-        internal static readonly string[] AvailableThemes = { "dark", "light", "cobalt", "amethyst", "cblue", "system" };
+        internal static readonly string[] AvailableLangs = new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_", "-")).OrderBy(locale => locale, StringComparer.OrdinalIgnoreCase).ToArray();
+        internal static readonly string[] AvailableThemes = { "Dark", "Light" };
 
         internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
         internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
@@ -35,8 +34,9 @@ namespace GTweak.Utilities.Controls
             ["EnableIpBlur"] = true,
             ["EnableSound"] = true,
             ["VolumeLevel"] = 50,
-            ["Language"] = SystemDiagnostics.GetCurrentSystemLang().Code,
-            ["Theme"] = AvailableThemes.First()
+            ["Language"] = SystemDataCollector.GetCurrentSystemLang().Code,
+            ["Theme"] = AvailableThemes.First(),
+            ["AddonsPath"] = string.Empty,
         };
 
         private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);
@@ -44,11 +44,12 @@ namespace GTweak.Utilities.Controls
         internal static bool IsViewNotification { get => (bool)_cachedSettings["EnableNotifications"]; set => ChangingParameters("EnableNotifications", value); }
         internal static bool IsUpdateCheckRequired { get => (bool)_cachedSettings["EnableAutoUpdate"]; set => ChangingParameters("EnableAutoUpdate", value); }
         internal static bool IsTopMost { get => (bool)_cachedSettings["EnableTopMost"]; set => ChangingParameters("EnableTopMost", value); }
+        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["EnableIpBlur"]; set => ChangingParameters("EnableIpBlur", value); }
         internal static bool IsPlayingSound { get => (bool)_cachedSettings["EnableSound"]; set => ChangingParameters("EnableSound", value); }
         internal static int Volume { get => (int)_cachedSettings["VolumeLevel"]; set => ChangingParameters("VolumeLevel", value); }
         internal static string Language { get => (string)_cachedSettings["Language"]; set => ChangingParameters("Language", value); }
         internal static string Theme { get => (string)_cachedSettings["Theme"]; set => ChangingParameters("Theme", value); }
-        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["EnableIpBlur"]; set => ChangingParameters("EnableIpBlur", value); }
+        internal static string UserAddonsPath { get => (string)_cachedSettings["AddonsPath"]; set => ChangingParameters("AddonsPath", value); }
 
         private static void ChangingParameters(string key, object value)
         {
@@ -67,14 +68,21 @@ namespace GTweak.Utilities.Controls
         {
             foreach (var kv in _defaultSettings)
             {
-                if (RegistryHelp.ValueExists(PathLocator.Registry.BaseKey, kv.Key))
+                if (RegistryHelp.ValueExists(PathLocator.Registry.BaseKey, kv.Key) == false)
+                {
                     ChangingParameters(kv.Key, kv.Value);
+                }
                 else
                 {
                     _cachedSettings[kv.Key] = kv.Value is bool defaultBool ? RegistryHelp.GetValue(PathLocator.Registry.BaseKey, kv.Key, defaultBool ? 1 : 0) is int asBool ? asBool != 0 : defaultBool :
                          kv.Value is int defaultInt ? RegistryHelp.GetValue(PathLocator.Registry.BaseKey, kv.Key, defaultInt) :
                          kv.Value is string defaultString ? RegistryHelp.GetValue(PathLocator.Registry.BaseKey, kv.Key, defaultString) : kv.Value;
                 }
+            }
+
+            if (!AvailableThemes.Contains((string)_cachedSettings["Theme"], StringComparer.OrdinalIgnoreCase))
+            {
+                ChangingParameters("Theme", _defaultSettings["Theme"]);
             }
 
             App.Language = (string)_cachedSettings["Language"];
@@ -84,7 +92,9 @@ namespace GTweak.Utilities.Controls
         internal static void SaveFileConfig()
         {
             if (INIManager.IsAllTempDictionaryEmpty)
-                new NotificationManager().Show("info", "export_warning_notification").Perform();
+            {
+                NotificationManager.Show("info", "export_warning_noty").Perform();
+            }
             else
             {
                 VistaSaveFileDialog vistaSaveFileDialog = new VistaSaveFileDialog
@@ -95,21 +105,27 @@ namespace GTweak.Utilities.Controls
                 };
 
                 if (vistaSaveFileDialog.ShowDialog() != true)
+                {
                     return;
+                }
 
                 try
                 {
                     PathLocator.Files.Config = vistaSaveFileDialog.FileName;
 
                     if (Path.GetExtension(PathLocator.Files.Config)?.ToLower() != ".ini")
+                    {
                         PathLocator.Files.Config = Path.ChangeExtension(PathLocator.Files.Config, ".ini");
-                    
+                    }
+
                     if (File.Exists(PathLocator.Files.Config))
+                    {
                         File.Delete(PathLocator.Files.Config);
+                    }
 
                     INIManager iniManager = new INIManager(PathLocator.Files.Config);
                     iniManager.Write("GTweak", "Author", "Greedeks");
-                    iniManager.Write("GTweak", "Release", currentRelease);
+                    iniManager.Write("GTweak", "FormatVersion", "2");
                     iniManager.WriteAll(INIManager.SectionConf, INIManager.TempTweaksConf);
                     iniManager.WriteAll(INIManager.SectionIntf, INIManager.TempTweaksIntf);
                     iniManager.WriteAll(INIManager.SectionSvc, INIManager.TempTweaksSvc);
@@ -128,20 +144,28 @@ namespace GTweak.Utilities.Controls
             };
 
             if (vistaOpenFileDialog.ShowDialog() == false)
+            {
                 return;
+            }
 
             PathLocator.Files.Config = vistaOpenFileDialog.FileName;
             INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
-            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("Release"))
+            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("FormatVersion") && iniManager.GetKeysOrValue("GTweak", false).Contains("2"))
             {
                 if (File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("Slider")))
+                {
                     new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
+                }
                 else
-                    new NotificationManager().Show("info", "empty_import_notification").Perform();
+                {
+                    NotificationManager.Show("info", "empty_import_noty").Perform();
+                }
             }
             else
-                new NotificationManager().Show("info", "warn_import_notification").Perform();
+            {
+                NotificationManager.Show("info", "warn_import_noty").Perform();
+            }
         }
 
         internal static void SelfRemoval()
@@ -152,8 +176,8 @@ namespace GTweak.Utilities.Controls
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
-                CommandExecutor.RunCommand($"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 3 & del \"{currentLocation}\" & " +
-                    @$"rd /s /q ""{PathLocator.Folders.Workspace}"" & rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""");
+                CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[] { $@"taskkill /f /im ""{currentName}""", "choice /c y /n /d y /t 3", $@"del ""{currentLocation}""",
+                    $@"rd /s /q ""{PathLocator.Folders.Workspace}""", $@"rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""" })));
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }

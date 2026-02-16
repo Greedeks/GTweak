@@ -1,20 +1,19 @@
-﻿using GTweak.Properties;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using GTweak.Properties;
+using GTweak.Utilities.Controls;
+using GTweak.Utilities.Helpers;
+using GTweak.Utilities.Managers;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks
 {
     internal sealed class ConfidentialityTweaks : FirewallManager
     {
-        internal static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
+        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
 
         internal void AnalyzeAndUpdate()
@@ -38,13 +37,13 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[4] = IsTaskEnabled(dataCollectTasks);
 
             _сontrolWriter.Button[5] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1") || IsTaskEnabled(appExpInventoryTasks);
 
             _сontrolWriter.Button[6] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", "0");
+                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", "0") || IsTaskEnabled(appExpUsageTasks);
 
             _сontrolWriter.Button[7] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", "1") ||
@@ -52,7 +51,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Input\TIPC", "Enabled", "0");
 
             _сontrolWriter.Button[8] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", "0");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", "0") || IsTaskEnabled(ceipTasks);
 
             _сontrolWriter.Button[9] = IsDefaultHosts();
 
@@ -64,10 +63,10 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[11] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", "1");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", "1") || IsTaskEnabled(feedbackTasks);
 
             _сontrolWriter.Button[12] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", "0");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", "0") || IsTaskEnabled(speechTasks);
 
             _сontrolWriter.Button[13] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", "4");
@@ -76,19 +75,27 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", "0");
 
             _сontrolWriter.Button[15] =
-                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
-                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice") ||
-                     RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc");
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice") ||
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc");
 
             _сontrolWriter.Button[16] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
 
-            _сontrolWriter.Button[17] = SystemDiagnostics.HardwareData.Graphics.IndexOf("nvidia", StringComparison.OrdinalIgnoreCase) >= 0
-                && (RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks));
+            _сontrolWriter.Button[17] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks);
 
             _сontrolWriter.Button[18] =
-                  RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
-                  RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", "1");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", "1");
+
+            _сontrolWriter.Button[19] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "MapUpdate", "0") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "AutoUpdateEnabled", "0") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", "0") || IsTaskEnabled(mapsTasks);
+
+            _сontrolWriter.Button[20] = (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start")
+                && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start", "4")) || IsTaskEnabled(intelTask);
         }
 
         internal bool IsDefaultHosts()
@@ -143,10 +150,13 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
-
+                    }
                     SetTaskState(!isDisabled, telemetryTasks);
                     break;
                 case "TglButton4":
@@ -154,9 +164,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton5":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", 1, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory");
+                    }
+                    SetTaskStateOwner(!isDisabled, appExpInventoryTasks);
                     break;
                 case "TglButton6":
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", isDisabled ? 0 : 1, RegistryValueKind.DWord);
@@ -164,24 +179,38 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", 0, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry");
+                    }
+                    SetTaskStateOwner(!isDisabled, appExpUsageTasks);
                     break;
                 case "TglButton7":
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Input\TIPC", "Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
 
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", 1, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing");
+                    }
                     break;
                 case "TglButton8":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", 0, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient");
+                    }
+                    SetTaskState(!isDisabled, ceipTasks);
                     break;
                 case "TglButton9":
                     BlockSpyDomain(isDisabled);
@@ -193,7 +222,9 @@ namespace GTweak.Utilities.Tweaks
                             if (isDisabled)
                             {
                                 if (File.Exists(backupFile))
+                                {
                                     File.Delete(backupFile);
+                                }
 
                                 File.Move(PathLocator.Files.Hosts, backupFile);
                                 ArchiveManager.Unarchive(PathLocator.Files.Hosts, Resources.hosts);
@@ -203,9 +234,13 @@ namespace GTweak.Utilities.Tweaks
                                 File.Copy(backupFile, PathLocator.Files.Hosts, true);
 
                                 if (File.Exists(backupFile))
+                                {
                                     File.Delete(backupFile);
+                                }
                                 else
+                                {
                                     File.WriteAllText(PathLocator.Files.Hosts, string.Empty);
+                                }
                             }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
@@ -238,21 +273,31 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds");
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications");
                     }
+                    SetTaskState(!isDisabled, feedbackTasks);
                     break;
                 case "TglButton12":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", 0, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate");
+                    }
+                    SetTaskState(!isDisabled, speechTasks);
                     break;
                 case "TglButton13":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
                     break;
                 case "TglButton14":
                     if (isDisabled)
+                    {
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", 0, RegistryValueKind.DWord);
+                    }
                     else
+                    {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation");
+                    }
                     break;
                 case "TglButton15":
                     (string diagTrack, string dmwappushservice, string diagsvc) =
@@ -353,6 +398,29 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR");
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera");
                     }
+                    break;
+                case "TglButton19":
+                    if (isDisabled)
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", 0, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled");
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps");
+                    }
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "MapUpdate", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    SetTaskState(!isDisabled, mapsTasks);
+                    break;
+                case "TglButton20":
+                    if (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start"))
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Telemetry", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                    }
+                    SetTaskState(!isDisabled, intelTask);
+                    break;
+                default:
                     break;
             }
         }
