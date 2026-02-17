@@ -21,7 +21,7 @@ namespace GTweak.Windows
         private readonly SystemTweaks _sysTweaks = new SystemTweaks();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private readonly HashSet<NotificationManager.NoticeAction> _requiredActions = new HashSet<NotificationManager.NoticeAction>();
-        private bool _isExpRestartNeed = false;
+        private bool _isExpRestartNeed = false, _isWDNotyNeed = false;
 
         public ImportWindow(in string importedFile)
         {
@@ -47,14 +47,21 @@ namespace GTweak.Windows
         {
             if (valueProgress == 100)
             {
-                if (_isExpRestartNeed)
+                if (_isWDNotyNeed)
                 {
-                    ExplorerManager.Restart(new Process());
+                    NotificationManager.Show("warn", "warn_wd_noty").Perform();
                 }
-
-                if (_requiredActions.Count != 0)
+                else
                 {
-                    NotificationManager.Show().Perform(_requiredActions.Max());
+                    if (_isExpRestartNeed)
+                    {
+                        ExplorerManager.Restart(new Process());
+                    }
+
+                    if (_requiredActions.Count != 0)
+                    {
+                        NotificationManager.Show().Perform(_requiredActions.Max());
+                    }
                 }
 
                 App.UpdateImport();
@@ -108,6 +115,11 @@ namespace GTweak.Windows
                         if (tweak.StartsWith("TglButton") && tweak != "TglButton3")
                         {
                             _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
+
+                            foreach (var act in NotificationManager.SysActions.Where(a => a.Key == tweak))
+                            {
+                                _requiredActions.Add(act.Value);
+                            }
                         }
                         else if (tweak == "TglButton3")
                         {
@@ -117,19 +129,11 @@ namespace GTweak.Windows
                                 _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false);
                             });
 
-                            if (!Convert.ToBoolean(value))
-                            {
-                                CommandExecutor.RunCommand($"/c timeout /t 10 && del /f \"{PathLocator.Executable.NSudo}\"");
-                            }
+                            _isWDNotyNeed = true;
                         }
                         else
                         {
                             _sysTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
-                        }
-
-                        foreach (var act in NotificationManager.SysActions.Where(a => a.Key == tweak))
-                        {
-                            _requiredActions.Add(act.Value);
                         }
                     }
                     else
