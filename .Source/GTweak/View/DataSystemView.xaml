@@ -37,7 +37,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,2,10,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgressOpacity}">
+                <Ellipse CacheMode="BitmapCache" Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgressOpacity}">
                     <Ellipse.Effect>
                         <DropShadowEffect Opacity="0.3"/>
                     </Ellipse.Effect>
@@ -58,7 +58,7 @@
             <uc:FlowPanel Grid.Column="1" ContentAlignment="Center" HorizontalSpacing="0" VerticalSpacing="0" VerticalAlignment="Top" Margin="30,15,30,0">
                
                 <StackPanel Orientation="Horizontal">
-                    <Border Width="70" Height="70" HorizontalAlignment="Right" Margin="0,0,15,0">
+                    <Border Width="70" Height="70" HorizontalAlignment="Right" Margin="0,0,15,0" CacheMode="BitmapCache">
                         <Border.Background>
                             <ImageBrush ImageSource="{Binding DisplayWallpaper, TargetNullValue={StaticResource Icon_LogoWin}, Mode=OneWay}" Stretch="UniformToFill"/>
                         </Border.Background>
@@ -91,7 +91,7 @@
             </uc:FlowPanel>
 
             <Grid Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,2,15,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgressOpacity}">
+                <Ellipse CacheMode="BitmapCache" Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgressOpacity}">
                     <Ellipse.Effect>
                         <DropShadowEffect Opacity="0.5"/>
                     </Ellipse.Effect>

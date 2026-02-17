@@ -17,27 +17,45 @@
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border x:Name="OuterPanel" CornerRadius="12" Width="50" Height="48" Background="Transparent" HorizontalAlignment="Left" SnapsToDevicePixels="True">
-                        <Border x:Name="InnerPanel" Height="48" CornerRadius="12" Background="{TemplateBinding Background}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,10,0">
-                            <Grid Height="48">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="48"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <ContentPresenter x:Name="IconPresenter" Grid.Column="0" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                                    <ContentPresenter.RenderTransform>
-                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                    </ContentPresenter.RenderTransform>
-                                </ContentPresenter>
-                                <Viewbox x:Name="NavTextBox" Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,15,0" Opacity="0">
-                                    <TextBlock Text="{TemplateBinding Tag}" Foreground="{TemplateBinding Foreground}" FontFamily="{TemplateBinding FontFamily}" TextWrapping="NoWrap"/>
-                                </Viewbox>
-                            </Grid>
-                        </Border>
+                        <Grid CacheMode="BitmapCache">
+                            <Border x:Name="ShadowPanel" CornerRadius="12" Opacity="0" Background="#33000000" IsHitTestVisible="False" Width="{Binding ActualWidth, ElementName=InnerPanel}" Height="{Binding ActualHeight, ElementName=InnerPanel}" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="3" Y="4" />
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border x:Name="InnerPanel" Height="48" CornerRadius="12" Background="{TemplateBinding Background}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,10,0">
+                                <Grid Height="48">
+                                    <Rectangle x:Name="ContentShadowMask" Grid.ColumnSpan="2" Fill="#33000000" Opacity="0.7" IsHitTestVisible="False">
+                                        <Rectangle.RenderTransform>
+                                            <TranslateTransform X="3" Y="3" />
+                                        </Rectangle.RenderTransform>
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Visual="{Binding ElementName=RealContent}" Stretch="None" AlignmentX="Left" AlignmentY="Center" />
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                    <Grid x:Name="RealContent" Background="Transparent">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ContentPresenter x:Name="IconPresenter" Grid.Column="0" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                            <ContentPresenter.RenderTransform>
+                                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                            </ContentPresenter.RenderTransform>
+                                        </ContentPresenter>
+                                        <Viewbox x:Name="NavTextBox" Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,15,0" Opacity="0">
+                                            <TextBlock Text="{TemplateBinding Tag}" Foreground="{TemplateBinding Foreground}" FontFamily="{TemplateBinding FontFamily}" TextWrapping="NoWrap"/>
+                                        </Viewbox>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
                             <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
+                            <Setter TargetName="ShadowPanel" Property="Opacity" Value="0.8"/>
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard Timeline.DesiredFrameRate="120">
@@ -95,6 +113,7 @@
                             <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
                             <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
                             <Setter TargetName="NavTextBox" Property="Opacity" Value="1"/>
+                            <Setter TargetName="ShadowPanel" Property="Opacity" Value="0.8"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

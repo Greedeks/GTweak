@@ -20,7 +20,7 @@
                 <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,2.5,2.5,0" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="ButtonClose_PreviewMouseLeftButtonUp"/>
             </StackPanel>
 
-            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True">
+            <DockPanel CacheMode="BitmapCache" VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True">
                 <TextBlock x:Name="TitleName" Text="GTweak" FontSize="15" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="15,0,0,0" TextTrimming="CharacterEllipsis" KeyboardNavigation.IsTabStop="False">
                     <TextBlock.Effect>
                         <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
@@ -39,7 +39,7 @@
                 <Image Width="53" Height="53" Source="/GTweak.ico" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="20,0,0,15" />
             </Grid>
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" CacheMode="BitmapCache">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
