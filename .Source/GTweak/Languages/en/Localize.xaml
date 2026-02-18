@@ -285,7 +285,7 @@
     <v:String x:Key="Mail_pkg">Mail</v:String>
     <v:String x:Key="Widgets_pkg">Widgets</v:String>
     <v:String x:Key="Photos_pkg">Windows Photos</v:String>
-    <v:String x:Key="ScreenSketch_pkg">Screen Sketch</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Snipping Tool</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
     <v:String x:Key="GetStarted_pkg">Get Started</v:String>
     <v:String x:Key="GetHelp_pkg">Get Help</v:String>

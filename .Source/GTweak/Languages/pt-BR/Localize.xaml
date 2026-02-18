@@ -7,14 +7,14 @@
 
 	<!--#region Load Window -->
     <v:String x:Key="title_load">Carregando</v:String>
-    <v:String x:Key="step1_load">Carregando um perfil</v:String>
-    <v:String x:Key="step2_load">Verificando os dados</v:String>
-    <v:String x:Key="step3_load">Analisando o registro</v:String>
-    <v:String x:Key="step4_load">Análise de aplicativos</v:String>
-    <v:String x:Key="step5_load">Analisando a configuração</v:String>
+    <v:String x:Key="step1_load">Carregando perfil</v:String>
+    <v:String x:Key="step2_load">Buscando dados</v:String>
+    <v:String x:Key="step3_load">Inspecionando registro</v:String>
+    <v:String x:Key="step4_load">Analisando aplicativos</v:String>
+    <v:String x:Key="step5_load">Inventário de hardware</v:String>
     <v:String x:Key="step6_load">Verificando a conexão</v:String>
     <v:String x:Key="step7_load">Inicialização</v:String>
-	<!--#endregion-->
+    <!--#endregion-->
 
 	<!--#region Message Window -->
     <v:String x:Key="title_message">Opa..</v:String>
@@ -40,8 +40,8 @@
     <v:String x:Key="empty_import_noty">Este arquivo está vazio, a aplicação de ajustes não é possível</v:String>
     <v:String x:Key="export_warning_noty">Não faz sentido, aplique pelo menos um ajuste primeiro</v:String>
     <v:String x:Key="success_onedrive_noty">A recuperação do OneDrive está em andamento e levará um tempo</v:String>
-    <v:String x:Key="error_onedrive_noty">OneDrive setup file missing, recovery impossible</v:String>
-    <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
+    <v:String x:Key="error_onedrive_noty">Arquivo de configuração do OneDrive ausente, recuperação impossível</v:String>
+    <v:String x:Key="warn_wd_noty">Aguarde a conclusão do processo seguida da reinicialização do sistema</v:String>
     <v:String x:Key="info_wd_noty">Levará algum tempo, por favor, espere um pouco</v:String>
     <v:String x:Key="warn_firewall_noty">Seu firewall está desativado, ative-o e aplique o ajuste novamente</v:String>
     <v:String x:Key="warn_activate_noty">Para começar - ative o Windows. Nem todos os ajustes podem ser aplicados</v:String>
@@ -56,9 +56,9 @@
     <v:String x:Key="success_point_noty">O ponto de restauração foi criado com sucesso</v:String>
     <v:String x:Key="error_recovery_noty">Algo deu errado, a restauração não pôde ser iniciada</v:String>
     <v:String x:Key="disable_recovery_noty">A restauração do sistema está desativada, os pontos de restauração não estão disponíveis</v:String>
-    <v:String x:Key="enable_recovery_noty">System recovery is enabled and available for use when necessary</v:String>
+    <v:String x:Key="enable_recovery_noty">A recuperação do sistema está ativada e disponível para uso quando necessário</v:String>
     <v:String x:Key="warn_recovery_noty">Você já desativou o sistema de restauração</v:String>
-    <v:String x:Key="warn_point_enabled_noty">You have already enabled the recovery system</v:String>
+    <v:String x:Key="warn_point_enabled_noty">Você já ativou o sistema de recuperação</v:String>
     <v:String x:Key="clear_ram_noty">A memória de curto prazo e os arquivos temporários foram limpos</v:String>
     <v:String x:Key="success_compression_noty">A compactação do diretório e seu conteúdo foi bem-sucedida</v:String>
     <v:String x:Key="success_decompression_noty">A descompactação do diretório e seu conteúdo foi bem-sucedida</v:String>
@@ -66,8 +66,8 @@
     <v:String x:Key="ready_decompression_noty">O diretório já está descompactado, nenhuma operação adicional é necessária</v:String>
     <v:String x:Key="error_compression_noty">Algo deu errado, houve um erro ao alterar o estado de compactação</v:String>
     <v:String x:Key="notsupport_ntfs_noty">A operação não está disponível porque o diretório não está localizado em uma partição NTFS</v:String>
-    <v:String x:Key="success_reg_exporter_noty">Registry file saved successfully</v:String>
-    <v:String x:Key="error_reg_exporter_noty">An error occurred while saving the registry file</v:String>
+    <v:String x:Key="success_reg_exporter_noty">Arquivo de registro salvo com sucesso</v:String>
+    <v:String x:Key="error_reg_exporter_noty">Ocorreu um erro ao salvar o arquivo de registro</v:String>
     <!--#endregion-->
     
     <!--#region Main Window -->
@@ -78,7 +78,7 @@
     <v:String x:Key="rbtn_svc_main">Serviços</v:String>
     <v:String x:Key="rbtn_sys_main">Sistema</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informações do sistema</v:String>
-    <v:String x:Key="rbtn_adds_main">Addons</v:String>
+    <v:String x:Key="rbtn_adds_main">Complementos</v:String>
     <v:String x:Key="title_settings_main">Configurações</v:String>
     <v:String x:Key="btgl_noty_main">Mostrar notificações</v:String>
     <v:String x:Key="slider_volume_main">Volume:</v:String>
@@ -112,16 +112,16 @@
     <v:String x:Key="advice_part3_more">criar um ponto de restauração antes de usar o utilitário</v:String>
 
     <v:String x:Key="title_licens_more">Ativação do Windows</v:String>
-    <v:String x:Key="text_licens_more">Uses the HWID method or a backup KMS. It may not work if there is no key available for your edition of Windows.</v:String>
+    <v:String x:Key="text_licens_more">Usa o método HWID ou um backup KMS. Pode não funcionar se não houver uma chave disponível para a sua edição do Windows.</v:String>
     <v:String x:Key="btn_activation">Ativar</v:String>
 
-    <v:String x:Key="title_point_more">Recovery Point</v:String>
-    <v:String x:Key="text_point_more">Creates or starts the system restore process, even if restore points are currently disabled.</v:String>
+    <v:String x:Key="title_point_more">Ponto de Recuperação</v:String>
+    <v:String x:Key="text_point_more">Cria ou inicia o processo de restauração do sistema, mesmo que os pontos de restauração estejam desativados no momento.</v:String>
     <v:String x:Key="btn_save">Salvar</v:String>
     <v:String x:Key="btn_recovery">Restaurar</v:String>
 
-    <v:String x:Key="title_point_state_more">Restore Status</v:String>
-    <v:String x:Key="text_point_state_more">Enables or disables system restore points. Disabling will delete all existing restore points.</v:String>
+    <v:String x:Key="title_point_state_more">Status da Restauração</v:String>
+    <v:String x:Key="text_point_state_more">Ativa ou desativa os pontos de restauração do sistema. Desativar excluirá todos os pontos de restauração existentes.</v:String>
     <v:String x:Key="btn_disable">Desativar</v:String>
     <v:String x:Key="btn_enable">Ativar</v:String>
 
@@ -130,11 +130,11 @@
     <v:String x:Key="btn_clear">Limpar</v:String>
 
     <v:String x:Key="title_ntfs_more">Compressão NTFS</v:String>
-    <v:String x:Key="text_ntfs_more">Enables or disables NTFS compression. Particularly effective for text files, helping save disk space.</v:String>
+    <v:String x:Key="text_ntfs_more">Ativa ou desativa a compressão NTFS. Particularmente eficaz para arquivos de texto, ajudando a economizar espaço em disco.</v:String>
 
-    <v:String x:Key="title_registry_more">Registry Backup</v:String>
-    <v:String x:Key="text_registry_more">Creates a backup of the Windows registry. Recommended before making changes to allow system recovery.</v:String>
-    <v:String x:Key="btn_create">Create</v:String>
+    <v:String x:Key="title_registry_more">Backup do Registro</v:String>
+    <v:String x:Key="text_registry_more">Cria um backup do registro do Windows. Recomendado antes de fazer alterações para permitir a recuperação do sistema.</v:String>
+    <v:String x:Key="btn_create">Criar</v:String>
 
     <v:String x:Key="title_over_more">Confirmação da Limpeza de Disco</v:String>
     <v:String x:Key="text_over_more">Seu disco contém uma pasta Windows.old com arquivos de uma versão anterior do Windows que está ocupando uma quantidade significativa de espaço. Atenção: uma vez que esta pasta seja excluída, seu conteúdo não poderá ser restaurado, então certifique-se de ter salvo todos os arquivos de que precisa.</v:String>
@@ -164,7 +164,7 @@
     <v:String x:Key="tgl16_conf">"Logging" de eventos do Windows</v:String>
     <v:String x:Key="tgl17_conf">Coleta e monitoramento da telemetria da NVIDIA</v:String>
     <v:String x:Key="tgl18_conf">Manter um registro do comportamento do usuário</v:String>
-    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
+    <v:String x:Key="tgl19_conf">Coleta de dados e atualizações de mapas offline</v:String>
     <v:String x:Key="tgl20_conf">Coleta e monitoramento da telemetria da Intel</v:String>
     
     <v:String x:Key="tgl1_desc_conf">O Windows cria um identificador de publicidade exclusivo para cada usuário rastrear suas ações. Que é usado por desenvolvedores de aplicativos e pelo próprio Windows para seus próprios fins, inclusive para oferecer anúncios específicos em aplicativos.</v:String>
@@ -185,8 +185,8 @@
     <v:String x:Key="tgl16_desc_conf">Um log de eventos que coleta e processa informações de diagnóstico do sistema, desperdiçando os recursos do seu computador. O serviço não lhe trará nada de bom, é melhor desativá-lo, assim você evitará o envio de informações confidenciais.</v:String>
     <v:String x:Key="tgl17_desc_conf">O serviço responsável por coletar e transmitir dados sobre o sistema e seu uso, ou uma função que não está relacionada à operação do driver de vídeo, é inútil. Por que e que tipo de informação a NVIDIA coleta, só ela sabe. Mas o fato de que isso não traz nada de útil para o usuário final é bastante óbvio.</v:String>
     <v:String x:Key="tgl18_desc_conf">O ajuste desativa o recurso UAR (User Activity Recording) - um sistema que registra sequencialmente todas as ações que você realiza no seu computador: desde tirar screenshots e digitar texto até iniciar programas e até mesmo fornecer acesso à webcam enquanto a tela está bloqueada, e muito mais.</v:String>
-    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
-    <v:String x:Key="tgl20_desc_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
+    <v:String x:Key="tgl19_desc_conf">O Windows atualiza periodicamente os mapas offline e envia notificações sobre novos dados em segundo plano. Esses processos podem coletar informações sobre sua localização, rotas e uso de mapas. Se você não usa mapas offline, recomenda-se desativá‑los para evitar atualizações ocultas e transmissão de dados para os servidores da Microsoft sem seu envolvimento direto.</v:String>
+    <v:String x:Key="tgl20_desc_conf">O módulo Intel, que opera em segundo plano para coletar e transmitir dados, é posicionado como uma ferramenta para melhorar os produtos da empresa. No entanto, para o usuário médio, ele oferece pouco benefício prático, e desativar esse recurso pode reduzir a atividade em segundo plano e evitar a transmissão desnecessária de dados.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -211,7 +211,7 @@
     <v:String x:Key="tgl19_intf">Usar modo compacto do Explorer</v:String>
     <v:String x:Key="tgl20_intf">Assistentes "Copilot" e "Recall"</v:String>
     <v:String x:Key="tgl21_intf">"Finalizar tarefa" com botão direito no app</v:String>
-    <v:String x:Key="tgl22_intf">Show window snap layouts</v:String>
+    <v:String x:Key="tgl22_intf">Mostrar layouts de ajuste de janela (Snap)</v:String>
     <v:String x:Key="tgl23_intf">Ícones e botões na barra de tarefas</v:String>
     <v:String x:Key="tgl24_intf">Mostrar anúncios personalizados</v:String>
     <v:String x:Key="tgl25_intf">Restaurar janelas de pastas anteriores ao fazer login</v:String>
@@ -223,7 +223,7 @@
     <v:String x:Key="tgl31_intf">Pesquisa com "Bing" integrada ao menu Iniciar</v:String>
     <v:String x:Key="tgl32_intf">Abrir "Acesso rápido" em vez de "Este Computador"</v:String>
     <v:String x:Key="tgl33_intf">Exibição de extensões de arquivo no explorador</v:String>
-    <v:String x:Key="tgl34_intf">Spontaneous brightness changes</v:String>
+    <v:String x:Key="tgl34_intf">Mudanças espontâneas de brilho</v:String>
     
     <v:String x:Key="tgl1_desc_intf">Mudará a cor da seleção do cursor de azul para cinza "asfalto molhado".</v:String>
     <v:String x:Key="tgl2_desc_intf">Mudará a cor da dica de ferramenta em alguns programas de amarelo para azul claro "azure".</v:String>
@@ -244,10 +244,10 @@
     <v:String x:Key="tgl17_desc_intf">Este ajuste irá retorná-lo ao menu de contexto clássico usual para a área de trabalho e "Explorador". Atenção, a tela pode piscar.</v:String>
     <v:String x:Key="tgl18_desc_intf">O Windows 11 às vezes mostra dicas sobre como usar um recurso específico, por exemplo, o novo menu "Iniciar" ou "Configurações rápidas". Eles são úteis se você estiver vendo o Windows 11 pela primeira vez, caso contrário, é lixo inútil.</v:String>
     <v:String x:Key="tgl19_desc_intf">Por padrão, o Windows adiciona preenchimento entre os itens no Explorer. Este é um novo recurso projetado para telas sensíveis ao toque. Este ajuste irá restaurar o layout clássico do explorador de arquivos, removendo o recuo entre os elementos e poupando-o de procurar configurações.</v:String>
-    <v:String x:Key="tgl20_desc_intf">O ajuste desativa e, onde possível, oculta os ícones do Copilot na barra de tarefas, no menu "Iniciar", no Edge e no Bloco de Notas, bloqueando sua funcionalidade, além de desativar o Recall. O aplicativo principal do Copilot não é afetado, permanece no sistema e pode ser usado se necessário. A remoção completa do Copilot só é possível com o Microsoft Edge. Se estes recursos de IA não existirem no seu Windows inicialmente, usar o ajuste é inútil.</v:String>
+    <v:String x:Key="tgl20_desc_intf">O ajuste desativa e, onde possível, oculta os ícones do Copilot na barra de tarefas, no "Menu Iniciar", no Edge e no Bloco de Notas, bloqueando sua funcionalidade, e também desativa o Recall. Ao mesmo tempo, o aplicativo principal do Copilot não é afetado, permanece no sistema e pode ser usado se necessário. O Copilot só pode ser totalmente removido junto com o Microsoft Edge. Se esses recursos de IA não estiverem presentes no seu Windows inicialmente, o uso do ajuste é inútil.</v:String>
     <v:String x:Key="tgl21_desc_intf">Este ajuste permitirá que você adicione a opção "Finalizar tarefa" ao menu de contexto quando você clicar com o botão direito no aplicativo na barra de tarefas. Isso acelera a conclusão dos processos sem ter que abrir o Gerenciador de Tarefas. Atenção, a tela pode piscar.</v:String>
-    <v:String x:Key="tgl22_desc_intf">If you don’t need to see the snap layout suggestions when hovering over the «Maximize» button, you can disable this option.</v:String>
-    <v:String x:Key="tgl23_desc_intf">This tweak removes the «Search», «Task View», and «Chat» icons, and hides the «Learn about this picture» element. On older builds of Windows 11, it also removes the Copilot icon. For Windows 10 users, it additionally disables «News and Interests» and Cortana. Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl22_desc_intf">Se você não precisa ver as sugestões de layout de ajuste ao passar o mouse sobre o botão "Maximizar", você pode desativar esta opção.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Este ajuste remove os ícones "Pesquisar", "Visão de Tarefas" e "Chat", e oculta o elemento "Saiba mais sobre esta imagem". Em compilações mais antigas do Windows 11, ele também remove o ícone do Copilot. Para usuários do Windows 10, ele desativa adicionalmente "Notícias e Interesses" e Cortana. Atenção: a tela pode piscar.</v:String>
     <v:String x:Key="tgl24_desc_intf">Por padrão, o Windows usa as informações coletadas para direcionar anúncios, ou seja, para exibir anúncios que correspondem aos seus interesses. E, literalmente, essa propaganda está localizada onde quer que haja espaço livre disponível para exibição. Se você não quer que o Windows exiba anúncios personalizados em todos os aplicativos da Loja, Explorador, Opções e menu Iniciar, então você pode desativar este lixo.</v:String>
     <v:String x:Key="tgl25_desc_intf">Por padrão, o Windows não salva as posições das janelas, bem como seu estado quando desligado. Este ajuste permitirá que você lembre o tipo de pastas abertas para restaurá-las após Sair, Reiniciar e Desligar.</v:String>
     <v:String x:Key="tgl26_desc_intf">O ajuste permite desativar todas as dicas e notificações do Windows, incluindo dicas online nas configurações, bem como desativar a Second Chance Out of Box Experience (SCOOBE) para usuários do Windows 11. SCOOBE é um pop-up que aparece de repente e solicita agressivamente ao usuário que "conclua a configuração do dispositivo urgentemente" e faça login na conta da Microsoft.</v:String>
@@ -258,7 +258,7 @@
     <v:String x:Key="tgl31_desc_intf">Por padrão, o Windows envia tudo o que você pesquisa no menu "Iniciar" para seus servidores para fornecer resultados de pesquisa do Bing. Se você não precisa da integração do Bing no menu "Iniciar", pode aplicar um ajuste para desativar a pesquisa na web. Atenção, a tela pode piscar.</v:String>
     <v:String x:Key="tgl32_desc_intf">Por padrão, ao abrir o Explorador, a primeira guia será "Acesso rápido". E para abrir qualquer disco, você precisa fazer movimentos desnecessários. Este ajuste fará com que "Este Computador" seja aberto ao ser aberto, em vez de "Acesso rápido".</v:String>
     <v:String x:Key="tgl33_desc_intf">Por padrão, o Windows oculta as extensões de arquivo, o que torna a visualização do Explorador de Arquivos menos confusa. Se necessário, você pode ativar a exibição de extensões de arquivo usando este ajuste, economizando o tempo gasto na pesquisa. Atenção, a tela pode piscar.</v:String>
-    <v:String x:Key="tgl34_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
+    <v:String x:Key="tgl34_desc_intf">Em alguns dispositivos, o brilho da tela pode mudar espontaneamente dependendo do conteúdo exibido. Se desligar o HDR, o brilho dinâmico e as configurações de energia não resolverem o problema (comum em laptops na bateria), você pode tentar este ajuste — ele desativa forçadamente o ajuste automático de brilho no nível do sistema. O controle de brilho manual permanece disponível.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
@@ -311,11 +311,11 @@
     <v:String x:Key="WebMediaExtensions_pkg">Extensões de Mídia da Web</v:String>
     <v:String x:Key="OneConnect_pkg">Planos de Celular</v:String>
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
-    <v:String x:Key="Notepad_pkg">Notepad</v:String>
-    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Notepad_pkg">Bloco de Notas</v:String>
+    <v:String x:Key="Calculator_pkg">Calculadora</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
     <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
-    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Wallet_pkg">Carteira Microsoft</v:String>
     <v:String x:Key="Spotify_pkg">Spotify</v:String>
     <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
     <v:String x:Key="Facebook_pkg">Facebook</v:String>
@@ -331,7 +331,7 @@
     <v:String x:Key="Viber_pkg">Viber</v:String>
     <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
     <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
-    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="Plex_pkg">Plex para Windows</v:String>
     <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
     <v:String x:Key="Shazam_pkg">Shazam</v:String>
     <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
@@ -360,7 +360,7 @@
     <v:String x:Key="tgl10_svc">Serviços relacionados a fax</v:String>
     <v:String x:Key="tgl11_svc">Serviços relacionados ao uso do modo tablet/smartphone</v:String>
     <v:String x:Key="tgl12_svc">Serviços relacionados à operação de monitores adicionais</v:String>
-    <v:String x:Key="tgl13_svc">Service related to system components</v:String>
+    <v:String x:Key="tgl13_svc">Serviço relacionado a componentes do sistema</v:String>
     <v:String x:Key="tgl14_svc">Serviços relacionados à operação da rede local</v:String>
     <v:String x:Key="tgl15_svc">Serviços relacionados a modems e roteadores USB</v:String>
     <v:String x:Key="tgl16_svc">Serviços relacionados a clientes VPN</v:String>
@@ -376,9 +376,9 @@
     <v:String x:Key="tgl26_svc">Serviços relacionados a diagnósticos em segundo plano</v:String>
     <v:String x:Key="tgl27_svc">Serviços relacionados a ferramentas corporativas</v:String>
     <v:String x:Key="tgl28_svc">Serviço relacionado à operação do Hyper-V</v:String>
-    <v:String x:Key="tgl29_svc">Services related to push notifications</v:String>
-    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
-
+    <v:String x:Key="tgl29_svc">Serviços relacionados a notificações push</v:String>
+    <v:String x:Key="tgl30_svc">Serviços relacionados ao Modo de Demonstração de Loja</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Desative se você não usa histórico de arquivos e indexação de conteúdo.</v:String>
     <v:String x:Key="tgl2_desc_svc">Desative se você não usa Xbox e gamepads da Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Desative se você não planeja atualizar o Windows. Além dos serviços, o ajuste mudará os arquivos responsáveis pelas atualizações do Windows. Por causa disso, mesmo que os serviços estejam ativados, a Central de Atualizações não funcionará. Observe que o ajuste afeta o download e a atualização de aplicativos da Windows Store.</v:String>
@@ -391,7 +391,7 @@
     <v:String x:Key="tgl10_desc_svc">Desative se você não tiver um aparelho de fax.</v:String>
     <v:String x:Key="tgl11_desc_svc">Desative se você tiver um computador de mesa, laptop ou netbook.</v:String>
     <v:String x:Key="tgl12_desc_svc">Desative se você tiver apenas um monitor e não planeja conectar monitores adicionais.</v:String>
-    <v:String x:Key="tgl13_desc_svc">Disable if you do not use these apps: «Virtual Desktops», «Your Phone», and «Night Light». This service processes user data and synchronizes it with Microsoft servers. It is not critical for the system’s operation; however, some features, such as «Night Light» in Windows 10, may stop working completely or partially if it is disabled.</v:String>
+    <v:String x:Key="tgl13_desc_svc">Desative se não utilizar estes apps: "Áreas de Trabalho Virtuais", "Seu Telefone" e "Luz Noturna". Este serviço processa dados do usuário e os sincroniza com os servidores da Microsoft. Não é crítico para a operação do sistema; no entanto, alguns recursos, como a "Luz Noturna" no Windows 10, podem parar de funcionar total ou parcialmente se for desativado.</v:String>
     <v:String x:Key="tgl14_desc_svc">Desative se você não usa ou planeja usar uma rede local.</v:String>
     <v:String x:Key="tgl15_desc_svc">Desative se você estiver conectado à Internet via cabo ou Wi-Fi.</v:String>
     <v:String x:Key="tgl16_desc_svc">Desative se você não estiver usando clientes VPN. Pode afetar a operação do Xbox.</v:String>
@@ -407,8 +407,8 @@
     <v:String x:Key="tgl26_desc_svc">Desative se você não precisa que o Windows sobrecarregue o sistema com seus diagnósticos inúteis em segundo plano.</v:String>
     <v:String x:Key="tgl27_desc_svc">Desative se você não usar o gerenciamento remoto de aplicativos corporativos e não tiver um servidor remoto com o qual seu PC se comunica.</v:String>
     <v:String x:Key="tgl28_desc_svc">Desative se você não estiver usando o sistema de virtualização integrado. Não afeta o trabalho do VirtualBox e similares de forma alguma.</v:String>
-    <v:String x:Key="tgl29_desc_svc">Disable if you do not use paired devices and do not install apps from the Windows Store remotely. These services handle the Notification Center with paired devices, process push requests, allow Windows to detect your smartphone for the «Your Phone» app, automatically reconnect to it, and display its messages and events in the Action Center. In Windows 10, after disabling them, the Notification Center may stop opening.</v:String>
-    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
+    <v:String x:Key="tgl29_desc_svc">Desative se não utilizar o app "Seu Telefone" e não instalar apps da Windows Store remotamente em outros dispositivos, pois ele é responsável por entregar notificações instantâneas e sincronização entre o computador e dispositivos conectados. Tenha em mente que no Windows 10, após desativá‑lo, a Central de Notificações pode parar de abrir devido à dependência deste sistema.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Desative se não utilizar o dispositivo em uma loja para demonstrar recursos do Windows. O serviço Store Demo gerencia a exibição de conteúdo de demonstração e recursos interativos destinados apenas a exibições em lojas e testes. Este serviço não é necessário para o uso diário do computador.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -442,15 +442,15 @@
     <v:String x:Key="tgl24_sys">Armazenamento reservado no Windows</v:String>
     <v:String x:Key="tgl25_sys">Timer de Eventos Dinâmico e de Alta Precisão</v:String>
     <v:String x:Key="tgl26_sys">Ocultar "PC Health Check" no sistema atualização</v:String>
-    <v:String x:Key="tgl27_sys">Windows Insider’s Background Tasks</v:String>
-    <v:String x:Key="tgl28_sys">System Disk Defragmentation</v:String>
-    
+    <v:String x:Key="tgl27_sys">Tarefas de segundo plano do Windows Insider</v:String>
+    <v:String x:Key="tgl28_sys">Desfragmentação de disco do sistema</v:String>
+
     <v:String x:Key="slider1_desc_sys">Altera a velocidade do ponteiro do mouse, economizando seu tempo para procurar os parâmetros do mouse.</v:String>
     <v:String x:Key="slider2_desc_sys">Alterará o atraso antes de começar a repetir o caractere digitado, o valor recomendado é 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Altera a taxa de repetição do caractere digitado, o valor recomendado é 31.</v:String>
     <v:String x:Key="tgl1_desc_sys">Por padrão, a aceleração do mouse acelera o movimento do mouse. Recomenda-se desligá-la, pois com a aceleração ligada, o movimento uniforme e a precisão direcional deixam a desejar.</v:String>
     <v:String x:Key="tgl2_desc_sys">Se você não quer que uma janela apareça de vez em quando ao realizar tarefas, dizendo para ativar a aderência de teclas ou a filtragem de entrada, e depois de responder "Não", ela aparece novamente depois de um tempo, então desative esta função. Além disso, a filtragem de entrada afeta a velocidade de repetição do teclado e a omissão de teclas repetidas.</v:String>
-    <v:String x:Key="tgl3_desc_sys">Este ajuste desativará e interromperá o Windows Defender, o SmartScreen, cargas desproporcionalmente pesadas no processador pelo Antimalware e a Segurança Baseada em Virtualização (VBS). For the changes to be fully applied, the system will automatically reboot into Safe Mode. No actions are required — the utility will handle everything automatically.</v:String>
+    <v:String x:Key="tgl3_desc_sys">Desativa o Windows Defender, SmartScreen, Antimalware e VBS, reduzindo a carga no sistema. Para que as alterações sejam totalmente aplicadas, o sistema será reiniciado automaticamente no Modo de Segurança. Nenhuma ação é necessária — o utilitário cuidará de tudo automaticamente.</v:String>
     <v:String x:Key="tgl4_desc_sys">O ajuste desativará completamente o UAC (Controle de Conta de Usuário), livrando-se de ícones de escudo, notificações de segurança e outras coisas. O UAC não é um programa de proteção completo.</v:String>
     <v:String x:Key="tgl5_desc_sys">Quando você desativa algo relacionado à segurança ou proteção, você recebe constantemente notificações sobre isso. Este ajuste desativará as notificações de segurança da Central de Notificações.</v:String>
     <v:String x:Key="tgl6_desc_sys">Se você prefere atualizar seus aplicativos da Microsoft Store sozinho, precisa desativar o recurso de atualização automática. Assim, a carga na rede diminuirá.</v:String>
@@ -474,8 +474,8 @@
     <v:String x:Key="tgl24_desc_sys">O armazenamento reservado é projetado para fornecer uma alocação previsível de espaço livre que será usado por atualizações, aplicativos, arquivos temporários e o cache do sistema. Desativá-lo pode liberar uma quantidade significativa de espaço. No entanto, se você tiver espaço livre suficiente, não é recomendado fazer isso, você não receberá nenhum benefício adicional.</v:String>
     <v:String x:Key="tgl25_desc_sys">Desativar o timer dinâmico e o HPET pode melhorar a capacidade de resposta do sistema, reduzindo micro-travamentos e proporcionando um leve aumento de desempenho. No entanto, o efeito depende da configuração: em alguns casos, em vez de acelerar, o sistema pode desacelerar e apresentar atrasos. Se você estiver usando um laptop, observe que isso também pode aumentar ligeiramente o consumo de energia, pois a CPU permanecerá mais ativa mesmo quando ociosa.</v:String>
     <v:String x:Key="tgl26_desc_sys">Bloqueia a instalação automática intrusiva do PC Health Check - utilitário da Microsoft que se implanta forçadamente via Windows Update sem permissão. Uma vez instalado, o programa incomoda com verificações de prontidão para o Windows 11 e recomendações de otimização não solicitadas.</v:String>
-    <v:String x:Key="tgl27_desc_sys">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
-    <v:String x:Key="tgl28_desc_sys">If you have an SSD, disabling defragmentation and boot file optimization, which are effective only for hard drives (HDD), helps extend the lifespan of your drive. At the same time, the TRIM optimization function continues to work: it informs the SSD controller which data blocks are no longer in use and clears them, maintaining stable speed and drive longevity.</v:String>
+    <v:String x:Key="tgl27_desc_sys">Para participantes do Windows Insider, estas tarefas devem permanecer ativadas. No entanto, se você não faz parte do programa, todas as tarefas associadas tornam‑se um excesso desnecessário: consomem recursos, geram logs inúteis e podem iniciar conexões de telemetria sem benefício. Desativá‑las pode melhorar o tempo de inicialização e o desempenho geral.</v:String>
+    <v:String x:Key="tgl28_desc_sys">Se você possui um SSD, desativar a desfragmentação e a otimização de arquivos de inicialização (eficazes apenas para HDDs) ajuda a estender a vida útil do seu drive. Ao mesmo tempo, a função de otimização TRIM continua funcionando: ela informa ao controlador do SSD quais blocos de dados não estão mais em uso, mantendo a velocidade estável e a longevidade da unidade.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -506,10 +506,10 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">Select folder</v:String>
-    <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
-    <v:String x:Key="text_info_adds">Select a directory or make sure it is not empty</v:String>
-    <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
+    <v:String x:Key="btn_open_dir">Selecionar pasta</v:String>
+    <v:String x:Key="chk_run_ti_adds">Executar como TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">Selecione um diretório ou certifique‑se de que não está vazio</v:String>
+    <v:String x:Key="scripts_info_adds">Depois disso, você poderá executar scripts (.ps1, .cmd, .bat, .reg) nesta página</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>
