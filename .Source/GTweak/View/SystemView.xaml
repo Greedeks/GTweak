@@ -80,8 +80,9 @@
                     <uc:ToggleButton x:Name="TglButton26" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton26].State}" TextResource="{DynamicResource tgl26_sys}" Description="{DynamicResource tgl26_desc_sys}" />
                     <uc:ToggleButton x:Name="TglButton27" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton27].State}" TextResource="{DynamicResource tgl27_sys}" Description="{DynamicResource tgl27_desc_sys}" />
                     <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton28].State}" TextResource="{DynamicResource tgl28_sys}" Description="{DynamicResource tgl28_desc_sys}" />
-                    <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton29].State}" TextResource="{DynamicResource tgl28_sys}" Description="{DynamicResource tgl28_desc_sys}" />
-                    <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton30].State}" TextResource="{DynamicResource tgl28_sys}" Description="{DynamicResource tgl28_desc_sys}" />                    
+                    <uc:ToggleButton x:Name="TglButton29" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton29].State}" TextResource="{DynamicResource tgl29_sys}" Description="{DynamicResource tgl29_desc_sys}" />
+                    <uc:ToggleButton x:Name="TglButton30" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton30].State}" TextResource="{DynamicResource tgl30_sys}" Description="{DynamicResource tgl30_desc_sys}" />
+                    <uc:ToggleButton x:Name="TglButton31" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton31].State}" TextResource="{DynamicResource tgl31_sys}" Description="{DynamicResource tgl31_desc_sys}" />                    
 
                 </uc:FlowPanel>
 
