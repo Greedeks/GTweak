@@ -8,7 +8,7 @@
         mc:Ignorable="d" Icon="/GTweak.ico"
         Background="Transparent" WindowStyle="None" IsTabStop="False" SnapsToDevicePixels="True" UseLayoutRounding="True" ShowInTaskbar="False"
         ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="Manual" KeyboardNavigation.TabNavigation="None"
-        Title="{DynamicResource title_win_noty}" Topmost="True" MinHeight="125" MinWidth="375" MaxHeight="170" MaxWidth="375" Loaded="Window_Loaded">
+        Title="{DynamicResource title_win_noty}" Topmost="True" MinHeight="125" MinWidth="375" MaxHeight="170" MaxWidth="375">
     <Grid Background="{StaticResource Brush_Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

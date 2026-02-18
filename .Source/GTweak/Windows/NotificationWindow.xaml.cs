@@ -29,11 +29,22 @@ namespace GTweak.Windows
             {
                 Top = primaryMonitorArea.Bottom - Height - 10;
                 Left = primaryMonitorArea.Right + 10;
+
+
             };
 
             Unloaded += delegate { _timer.Stop(); };
-            Loaded += delegate
+            Loaded += (s, e) =>
             {
+                if (SettingsEngine.IsPlayingSound)
+                {
+                    using SoundPlayer notificationSound = new SoundPlayer(Properties.Resources.Sound);
+                    notificationSound.Play();
+                }
+
+                BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.2));
+                BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.35, useCubicEase: true));
+
                 _timer = new TimerControlManager(TimeSpan.FromSeconds(3), TimerControlManager.TimerMode.CountDown, null, () => { Close(); });
                 _timer.Start();
                 ProgressTimer.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(0, 100, 4.1));
@@ -48,17 +59,6 @@ namespace GTweak.Windows
             {
                 CommandExecutor.RunCommand(RequiredAction == NotificationManager.NoticeAction.Logout ? @"/c logoff" : @"/c shutdown /r /t 0");
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (SettingsEngine.IsPlayingSound)
-            {
-                using SoundPlayer notificationSound = new SoundPlayer(Properties.Resources.Sound);
-                notificationSound.Play();
-            }
-
-            BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.3, useCubicEase: true));
         }
     }
 }
