@@ -88,12 +88,6 @@ namespace GTweak.View
             }
             else if (toggleButton.IsChecked == true)
             {
-                if (packageName.Equals("Edge"))
-                {
-                    OverlayDialogManager overlayDialog = new OverlayDialogManager(Overlay, OpacityProperty, BtnDelete, BtnCancel);
-                    _isWebViewRemoval = await overlayDialog.Show();
-                }
-
                 await _backgroundQueue.QueueTask(async () =>
                 {
                     await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); });

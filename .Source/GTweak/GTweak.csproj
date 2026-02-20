@@ -163,6 +163,7 @@
     <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />
     <Compile Include="Utilities\Tweaks\InterfaceTweaks.cs" />
     <Compile Include="Utilities\Maintenance\NTFSCompressor.cs" />
+    <Compile Include="Utilities\Tweaks\EdgeUninstaller.cs" />
     <Compile Include="Utilities\Tweaks\ServicesTweaks.cs" />
     <Compile Include="Utilities\Maintenance\SystemRestoreService.cs" />
     <Compile Include="Utilities\Tweaks\SystemTweaks.cs" />
