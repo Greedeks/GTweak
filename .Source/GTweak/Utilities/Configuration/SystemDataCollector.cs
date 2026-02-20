@@ -243,7 +243,7 @@ namespace GTweak.Utilities.Configuration
                 {
                     using (managementObj)
                     {
-                        string data = $"{managementObj["Manufacturer"]?.ToString() ?? string.Empty}{managementObj["Product"]?.ToString() ?? string.Empty}";
+                        string data = $"{managementObj["Manufacturer"]?.ToString() ?? string.Empty} {managementObj["Product"]?.ToString() ?? string.Empty}";
                         string dataVersion = managementObj["Version"]?.ToString() ?? string.Empty;
                         Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
                     }
