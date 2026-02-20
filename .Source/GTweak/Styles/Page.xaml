@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="LaunchPage" TargetType="{x:Type UserControl}">
@@ -15,9 +15,9 @@
             <EventTrigger RoutedEvent="Loaded">
                 <BeginStoryboard>
                     <Storyboard Timeline.DesiredFrameRate="120">
-                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.45" From="0" To="1" >
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" From="0" To="1" >
                             <DoubleAnimation.EasingFunction>
-                                <QuadraticEase/>
+                                <CircleEase EasingMode="EaseOut"/>
                             </DoubleAnimation.EasingFunction>
                         </DoubleAnimation>
                     </Storyboard>

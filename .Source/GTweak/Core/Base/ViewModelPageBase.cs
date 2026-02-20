@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace GTweak.Core.Base
 {
@@ -19,19 +18,59 @@ namespace GTweak.Core.Base
         where TModel : IBasePageItem, new()
         where TTweaksClass : new()
     {
-        public ObservableCollection<TModel> Toggles { get; private set; }
+        private ObservableCollection<TModel> _toggles;
 
-        public TModel this[string name] => Toggles.FirstOrDefault(d => d.Name == name);
         protected abstract IReadOnlyDictionary<string, object> GetControlStates();
         protected abstract void Analyze(TTweaksClass tweaks);
 
-        protected ViewModelPageBase()
+        public TModel this[string name]
+        {
+            get
+            {
+                foreach (TModel toggle in Toggles)
+                {
+                    if (toggle.Name == name)
+                    {
+                        return toggle;
+                    }
+                }
+                return default;
+            }
+        }
+
+        public ObservableCollection<TModel> Toggles
+        {
+            get
+            {
+                if (_toggles == null)
+                {
+                    InitializeData();
+                }
+                return _toggles;
+            }
+            set
+            {
+                _toggles = value;
+                OnPropertyChanged(nameof(Toggles));
+            }
+        }
+
+        protected ViewModelPageBase() { }
+
+        private void InitializeData()
         {
             TTweaksClass tweaks = new TTweaksClass();
             Analyze(tweaks);
-            Toggles = new ObservableCollection<TModel>(GetControlStates().Select(kvp => CreateModelFromState(kvp.Key, kvp.Value)));
 
-            OnPropertyChanged(nameof(Toggles));
+            IReadOnlyDictionary<string, object> states = GetControlStates();
+            List<TModel> modelsList = new List<TModel>(states.Count);
+
+            foreach (var kvp in states)
+            {
+                modelsList.Add(CreateModelFromState(kvp.Key, kvp.Value));
+            }
+
+            _toggles = new ObservableCollection<TModel>(modelsList);
         }
 
         private TModel CreateModelFromState(string name, object parameter)
