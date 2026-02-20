@@ -444,7 +444,8 @@
     <v:String x:Key="tgl26_sys">Hide «PC Health Check» from update system</v:String>
     <v:String x:Key="tgl27_sys">Windows Insider’s Background Tasks</v:String>
     <v:String x:Key="tgl28_sys">System Disk Defragmentation</v:String>
-    
+    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
+
     <v:String x:Key="slider1_desc_sys">Changes the speed of the mouse pointer, saving you time to search for mouse parameters.</v:String>
     <v:String x:Key="slider2_desc_sys">Will change the delay before starting to repeat the entered character, the recommended value is 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Changes the repetition rate of the entered character, the recommended value is 31.</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">Tweak blocks intrusive automatic installation of PC Health Check - Microsoft utility that forcibly deploys itself through Windows Update without permission. Once installed, program constantly nags about «checking Windows 11 readiness» and pushes unsolicited «optimization recommendations».</v:String>
     <v:String x:Key="tgl27_desc_sys">For Windows Insider participants, these tasks should remain enabled. However, if you are not part of the program, all associated tasks become unnecessary overhead: they consume system resources, generate useless logs, and may initiate telemetry connections without providing any benefit. Disabling them can improve startup time and overall system performance while also eliminating unneeded experimental data collection channels.</v:String>
     <v:String x:Key="tgl28_desc_sys">If you have an SSD, disabling defragmentation and boot file optimization, which are effective only for hard drives (HDD), helps extend the lifespan of your drive. At the same time, the TRIM optimization function continues to work: it informs the SSD controller which data blocks are no longer in use and clears them, maintaining stable speed and drive longevity.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->

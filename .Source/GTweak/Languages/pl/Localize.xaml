@@ -444,6 +444,7 @@
     <v:String x:Key="tgl26_sys">Ukryj „PC Health Check” z systemu aktualizacji</v:String>
     <v:String x:Key="tgl27_sys">Zadania w tle Windows Insider</v:String>
     <v:String x:Key="tgl28_sys">Defragmentacja dysku systemowego</v:String>
+    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
 
     <v:String x:Key="slider1_desc_sys">Zmienia prędkość wskaźnika myszy, oszczędzając Ci czas na szukanie parametrów myszy.</v:String>
     <v:String x:Key="slider2_desc_sys">Zmieni opóźnienie przed rozpoczęciem powtarzania wprowadzonego znaku, zalecana wartość to 0.</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">Poprawka blokuje natarczywe automatyczne instalowanie PC Health Check – narzędzia Microsoftu, które instaluje się samo przez Windows Update bez pozwolenia. Po zainstalowaniu program ciągle narzeka na „sprawdzanie gotowości do Windows 11” i wciska niechciane „zalecenia optymalizacyjne”.</v:String>
     <v:String x:Key="tgl27_desc_sys">Dla uczestników programu Windows Insider te zadania powinny pozostać włączone. Jednak jeśli nie bierzesz udziału w programie, wszystkie powiązane zadania stają się niepotrzebnym obciążeniem: zużywają zasoby systemu, generują bezużyteczne logi i mogą inicjować połączenia telemetrii bez przynoszenia korzyści. Wyłączenie ich może poprawić czas uruchamiania i ogólną wydajność systemu, a także wyeliminować niepotrzebne kanały zbierania danych eksperymentalnych.</v:String>
     <v:String x:Key="tgl28_desc_sys">Jeśli masz dysk SSD, wyłączenie defragmentacji i optymalizacji plików startowych, które są skuteczne tylko dla dysków twardych (HDD), pomaga wydłużyć żywotność dysku. Jednocześnie funkcja optymalizacji TRIM nadal działa: informuje kontroler SSD, które bloki danych nie są już używane i je czyści, utrzymując stabilną prędkość i długowieczność dysku.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -513,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

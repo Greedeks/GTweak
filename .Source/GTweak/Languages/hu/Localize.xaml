@@ -444,6 +444,7 @@
     <v:String x:Key="tgl26_sys">A «PC állapotellenőrzés» elrejtése a frissítési rendszerből</v:String>
     <v:String x:Key="tgl27_sys">A Windows Insider háttérfeladatai</v:String>
     <v:String x:Key="tgl28_sys">Rendszerlemez töredezettségmentesítése</v:String>
+    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
 
     <v:String x:Key="slider1_desc_sys">Módosítja az egérmutató sebességét, így időt takaríthat meg az egérparaméterek kereséséhez.</v:String>
     <v:String x:Key="slider2_desc_sys">Módosítja a késleltetést, mielőtt megkezdené a beírt karakter ismétlését, az ajánlott érték 0.</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">A beállítás blokkolja a PC állapotellenőrzésének tolakodó automatikus telepítését - a Microsoft segédprogramja, amely engedély nélkül erőszakkal telepíti magát a Windows Update szolgáltatáson keresztül. A telepítés után a program folyamatosan nyaggatja a "Windows 11 készenlétének ellenőrzését", és kéretlen "optimalizálási ajánlásokat" küld.</v:String>
     <v:String x:Key="tgl27_desc_sys">A Windows Insider résztvevői számára ezeknek a feladatoknak engedélyezve kell maradniuk. Ha azonban nem vesz részt a programban, az összes kapcsolódó feladat felesleges többletterheléssé válik: rendszererőforrásokat fogyasztanak, haszontalan naplókat hoznak létre, és telemetriai kapcsolatokat kezdeményezhetnek anélkül, hogy bármilyen előnyt nyújtanának. Letiltásuk javíthatja az indítási időt és a rendszer általános teljesítményét, miközben kiküszöböli a felesleges kísérleti adatgyűjtési csatornákat.</v:String>
     <v:String x:Key="tgl28_desc_sys">Ha SSD-vel rendelkezik, akkor a defragmentálás és a rendszerindítási fájlok optimalizálásának letiltása, amelyek csak a merevlemezek (HDD) esetében hatékonyak, segít meghosszabbítani a meghajtó élettartamát. Ugyanakkor a TRIM optimalizálási funkció továbbra is működik: tájékoztatja az SSD vezérlőt, hogy mely adatblokkok már nem használatosak, és törli azokat, így biztosítva a stabil sebességet és a meghajtó hosszú élettartamát.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -513,6 +515,7 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+
 
 
 

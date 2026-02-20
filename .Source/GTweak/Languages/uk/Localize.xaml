@@ -444,6 +444,7 @@
     <v:String x:Key="tgl26_sys">Приховування «PC Health Check» від системи оновлень</v:String>
     <v:String x:Key="tgl27_sys">Фонові завдання Windows Insider</v:String>
     <v:String x:Key="tgl28_sys">Дефрагментація системного диска</v:String>
+    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
     
     <v:String x:Key="slider1_desc_sys">Дозволяє змінити швидкість переміщення вказівника миші, заощаджуючи ваш час на пошук відповідних параметрів.</v:String>
     <v:String x:Key="slider2_desc_sys">Зміна затримки перед початком повторного введення символу, рекомендоване значення - 0.</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">Це налаштування блокує надокучливе автоматичне встановлення PC Health Check - службової утиліти Microsoft, яка без вашого дозволу інтегрується в систему через службу оновлення Windows. Після встановлення програма починає докучати запитами на «перевірку готовності до Windows 11» та «рекомендаціями з оптимізації».</v:String>
     <v:String x:Key="tgl27_desc_sys">Для учасників програми Windows Insider завдання мають бути увімкнені. Але якщо ви не учасник, всі завдання, пов'язані з програмою, стають зайвим баластом: споживають ресурси, створюють непотрібні журнали і можуть ініціювати телеметричні з'єднання без будь-якої користі. Вимкнення може прискорити запуск та загальну продуктивність системи, а також усунути непотрібні канали збору експериментальних даних.</v:String>
     <v:String x:Key="tgl28_desc_sys">Якщо використовуєте SSD, вимкнення дефрагментації та оптимізації завантажувального файлу, які діють лише на жорстких дисках (HDD), допоможе продовжити термін служби диска. Проте функція оптимізації TRIM продовжить працювати: вона повідомляє контролеру SSD, які блоки даних більше не використовуються, і очищає їх, підтримуючи стабільну швидкість і довговічність накопичувача.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -513,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

@@ -444,6 +444,7 @@
     <v:String x:Key="tgl26_sys">Ocultar "PC Health Check" no sistema atualização</v:String>
     <v:String x:Key="tgl27_sys">Tarefas de segundo plano do Windows Insider</v:String>
     <v:String x:Key="tgl28_sys">Desfragmentação de disco do sistema</v:String>
+    <v:String x:Key="tgl29_sys">Pausar atualizações do Windows</v:String>
 
     <v:String x:Key="slider1_desc_sys">Altera a velocidade do ponteiro do mouse, economizando seu tempo para procurar os parâmetros do mouse.</v:String>
     <v:String x:Key="slider2_desc_sys">Alterará o atraso antes de começar a repetir o caractere digitado, o valor recomendado é 0.</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">Bloqueia a instalação automática intrusiva do PC Health Check - utilitário da Microsoft que se implanta forçadamente via Windows Update sem permissão. Uma vez instalado, o programa incomoda com verificações de prontidão para o Windows 11 e recomendações de otimização não solicitadas.</v:String>
     <v:String x:Key="tgl27_desc_sys">Para participantes do Windows Insider, estas tarefas devem permanecer ativadas. No entanto, se você não faz parte do programa, todas as tarefas associadas tornam‑se um excesso desnecessário: consomem recursos, geram logs inúteis e podem iniciar conexões de telemetria sem benefício. Desativá‑las pode melhorar o tempo de inicialização e o desempenho geral.</v:String>
     <v:String x:Key="tgl28_desc_sys">Se você possui um SSD, desativar a desfragmentação e a otimização de arquivos de inicialização (eficazes apenas para HDDs) ajuda a estender a vida útil do seu drive. Ao mesmo tempo, a função de otimização TRIM continua funcionando: ela informa ao controlador do SSD quais blocos de dados não estão mais em uso, mantendo a velocidade estável e a longevidade da unidade.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Pausa as atualizações do sistema Windows por 10 anos, mantendo as atualizações de aplicativos e os downloads da Microsoft Store ativos. Para desativar completamente as atualizações, vá para Serviços e desative os serviços correspondentes do Windows Update.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -513,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

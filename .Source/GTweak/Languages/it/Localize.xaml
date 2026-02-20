@@ -444,7 +444,8 @@
     <v:String x:Key="tgl26_sys">Nascondi «Controllo integrità PC» dal sistema di aggiornamento</v:String>
     <v:String x:Key="tgl27_sys">Attività in background di Windows Insider</v:String>
     <v:String x:Key="tgl28_sys">Deframmentazione del disco di sistema</v:String>
-
+    <v:String x:Key="tgl29_sys">Metti in pausa gli aggiornamenti di Windows</v:String>
+    
     <v:String x:Key="slider1_desc_sys">Modifica la velocità del puntatore del mouse, risparmiando tempo nella ricerca delle impostazioni.</v:String>
     <v:String x:Key="slider2_desc_sys">Modifica il ritardo prima che inizi la ripetizione di un carattere; il valore consigliato è 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Modifica la velocità di ripetizione dei caratteri digitati; il valore consigliato è 31.</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">Il tweak blocca l'installazione automatica intrusiva di Controllo integrità PC, un'utility Microsoft che si installa forzatamente tramite Windows Update senza permesso. Una volta installato, il programma segnala costantemente la «compatibilità con Windows 11» e invia raccomandazioni di ottimizzazione non richieste.</v:String>
     <v:String x:Key="tgl27_desc_sys">Per i partecipanti al programma Windows Insider, queste attività dovrebbero rimanere abilitate. Tuttavia, se non ne fai parte, tutte le attività associate diventano un carico inutile: consumano risorse di sistema, generano log inutili e possono avviare connessioni di telemetria senza fornire alcun beneficio. Disabilitarle può migliorare il tempo di avvio e le prestazioni generali.</v:String>
     <v:String x:Key="tgl28_desc_sys">Se hai un SSD, la disabilitazione della deframmentazione e dell'ottimizzazione dei file di avvio (efficaci solo per HDD) aiuta a prolungare la vita dell'unità. Allo stesso tempo, la funzione di ottimizzazione TRIM continua a funzionare: informa il controller dell'SSD su quali blocchi di dati non sono più in uso, mantenendo velocità e longevità costanti.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Sospende gli aggiornamenti di sistema di Windows per 10 anni, mantenendo però attivi gli aggiornamenti delle app e i download dal Microsoft Store. Per disabilitare completamente gli aggiornamenti, vai in Servizi e disattiva i servizi di Windows Update corrispondenti.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->

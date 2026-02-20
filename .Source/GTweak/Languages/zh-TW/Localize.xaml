@@ -444,6 +444,7 @@
     <v:String x:Key="tgl26_sys">從更新系統中隱藏"電腦健康檢查"</v:String>
     <v:String x:Key="tgl27_sys">Windows Insider 背景任務</v:String>
     <v:String x:Key="tgl28_sys">系統磁碟重整</v:String>
+    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
     
     <v:String x:Key="slider1_desc_sys">調整滑鼠游標移動速度，省去您搜尋滑鼠參數的時間。</v:String>
     <v:String x:Key="slider2_desc_sys">調整開始重複輸入字元前的延遲時間，建議值為 0。</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">調整區塊可阻止"電腦健康檢查"的侵入式自動安裝——此為微軟工具，會透過 Windows 更新在未經許可下強制部署自身。安裝後，程式將不斷催促"檢查 Windows 11 就緒狀態"，並推送未經請求的"最佳化建議"。</v:String>
     <v:String x:Key="tgl27_desc_sys">Windows Insider 參與者應保持這些任務啟用狀態。但若您未加入該計畫，所有相關任務將成為無謂負擔：它們消耗系統資源、產生無用日誌，並可能在毫無效益的情況下啟動遙測連線。停用這些功能可縮短啟動時間、提升整體系統效能，同時消除不必要的實驗性數據收集管道。</v:String>
     <v:String x:Key="tgl28_desc_sys">若您使用固態硬碟（SSD），停用僅適用於傳統硬碟（HDD）的磁碟重組與開機檔案優化功能，有助延長儲存裝置壽命。同時，TRIM 優化功能仍會持續運作：它會告知 SSD 控制器哪些資料區塊已不再使用並清除它們，從而維持穩定速度與硬碟壽命。</v:String>
+    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -513,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

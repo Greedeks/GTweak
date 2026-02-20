@@ -445,7 +445,8 @@
     <v:String x:Key="tgl26_sys">Masquer « Contrôle de l’intégrité du PC » dans les mises à jour</v:String>
     <v:String x:Key="tgl27_sys">Tâches d'arrière-plan de Windows Insider</v:String>
     <v:String x:Key="tgl28_sys">Défragmentation du disque système</v:String>
-
+    <v:String x:Key="tgl29_sys">Mettre à jour en pause Windows</v:String>
+    
     <v:String x:Key="slider1_desc_sys">Modifie la vitesse du pointeur de la souris, vous faisant gagner du temps lors de la recherche des paramètres de la souris.</v:String>
     <v:String x:Key="slider2_desc_sys">Modifie le délai avant la répétition des caractères saisis. La valeur recommandée est 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Modifie la vitesse de répétition des caractères saisis. La valeur recommandée est 31.</v:String>
@@ -477,6 +478,7 @@
     <v:String x:Key="tgl26_desc_sys">Ce tweak bloque l'installation automatique intrusive de « Contrôle de l'intégrité du PC », un utilitaire Microsoft qui s'installe de force via Windows Update sans autorisation. Une fois installé, le programme vous harcèle constamment pour « vérifier la compatibilité avec Windows 11 » et pousse des « recommandations d'optimisation » non sollicitées.</v:String>
     <v:String x:Key="tgl27_desc_sys">Pour les participants au programme Windows Insider, ces tâches doivent rester activées. Cependant, si vous n'en faites pas partie, toutes les tâches associées deviennent une surcharge inutile : elles consomment des ressources système, génèrent des journaux inutiles et peuvent initier des connexions de télémétrie sans aucun avantage. Les désactiver peut améliorer le temps de démarrage et les performances globales tout en éliminant des canaux de collecte de données expérimentales inutiles.</v:String>
     <v:String x:Key="tgl28_desc_sys">Si vous avez un SSD, la désactivation de la défragmentation et de l'optimisation des fichiers de démarrage, qui ne sont efficaces que pour les disques durs (HDD), aide à prolonger la durée de vie de votre disque. Parallèlement, la fonction d'optimisation TRIM continue de fonctionner : elle informe le contrôleur SSD des blocs de données inutilisés et les efface, maintenant ainsi une vitesse stable et la longévité du disque.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Suspend les mises à jour système de Windows pendant 10 ans, tout en conservant les mises à jour des applications et les téléchargements depuis le Microsoft Store. Pour désactiver complètement les mises à jour, accédez aux Services et désactivez les services Windows Update correspondants.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->

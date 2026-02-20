@@ -444,6 +444,7 @@
     <v:String x:Key="tgl26_sys">시스템 업데이트에서 «PC 상태 확인 » 숨기기</v:String>
     <v:String x:Key="tgl27_sys">Windows 인사이더의 백그라운드 작업</v:String>
     <v:String x:Key="tgl28_sys">시스템 디스크 조각 모음</v:String>
+    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
     
     <v:String x:Key="slider1_desc_sys">마우스 포인터의 속도를 변경하여 마우스 매개변수를 검색하는 시간을 절약할 수 있습니다.</v:String>
     <v:String x:Key="slider2_desc_sys">입력한 문자를 반복하기 시작하기 전에 지연 시간을 변경하며, 권장 값은 0입니다..</v:String>
@@ -476,6 +477,7 @@
     <v:String x:Key="tgl26_desc_sys">조정은 무단으로 Windows 업데이트를 통해 강제로 배포되는 Microsoft 유틸리티인 PC Health Check의 침입형 자동 설치를 차단합니다. 일단 설치되면 프로그램은 «가 Windows 11 준비 상태를 »로 확인하는 것에 대해 지속적으로 잔소리를 하고 원치 않는 « 최적화 권장 사항을 »로 푸시합니다.</v:String>
     <v:String x:Key="tgl27_desc_sys">Windows 인사이더 참가자의 경우 이러한 작업은 계속 활성화되어야 합니다. 그러나 프로그램에 참여하지 않는 경우 관련된 모든 작업은 불필요한 오버헤드가 됩니다. 시스템 리소스를 소비하고, 쓸모없는 로그를 생성하며, 아무런 이점 없이 원격 측정 연결을 시작할 수 있습니다. 이러한 작업을 비활성화하면 시작 시간과 전체 시스템 성능을 향상시키는 동시에 불필요한 실험 데이터 수집 채널도 제거할 수 있습니다.</v:String>
     <v:String x:Key="tgl28_desc_sys">SSD가 있는 경우 하드 드라이브 (HDD)에만 효과적인 조각 모음 및 부팅 파일 최적화를 비활성화하면 드라이브의 수명을 연장하는 데 도움이 됩니다. 동시에 TRIM 최적화 기능은 SSD 컨트롤러에 어떤 데이터 블록이 더 이상 사용되지 않는지 알려주고 삭제하여 안정적인 속도와 드라이브 수명을 유지하는 등 계속 작동합니다.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -513,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 
