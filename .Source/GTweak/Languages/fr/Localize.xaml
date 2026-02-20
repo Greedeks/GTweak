@@ -343,8 +343,8 @@
     <v:String x:Key="text_over_pkg" xml:space="preserve">Vous êtes sur le point de désinstaller le navigateur Microsoft Edge. Cela supprimera également le composant EdgeWebView, utilisé pour afficher du contenu Web dans diverses applications (Microsoft Office, Photos, bots Telegram, etc.). 
         Avant de continuer, assurez-vous de ne pas avoir besoin de ce composant. Dans les versions récentes de Windows 11, Copilot dépend également d'EdgeWebView.</v:String>
     <v:String x:Key="question_over_pkg">Souhaitez-vous continuer la suppression avec EdgeWebView ?</v:String>
-    <v:String x:Key="btn_cancel">Annuler</v:String>
-    <v:String x:Key="btn_delete">Supprimer</v:String>
+    <v:String x:Key="btn_delete_all">Oui, tout supprimer</v:String>
+    <v:String x:Key="btn_keep_webview">Non, conserver EdgeWebView</v:String>
 
     <!--#endregion-->
 

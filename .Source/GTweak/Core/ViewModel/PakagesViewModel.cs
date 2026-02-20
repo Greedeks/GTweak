@@ -61,29 +61,30 @@ namespace GTweak.Core.ViewModel
 
         private void UpdatePackageState(PakagesModel item)
         {
-            if (item != null && !string.IsNullOrEmpty(item.Name))
+            if (item != null && !string.IsNullOrWhiteSpace(item.Name) && UninstallingPakages.PackagesDetails?.TryGetValue(item?.Name, out var val) == true && val != null)
             {
-                if (UninstallingPakages.PackagesDetails != null && UninstallingPakages.PackagesDetails.TryGetValue(item.Name, out UninstallingPakages.PackagesInfo val) && val != null)
-                {
-                    item.IsUnavailable = !val.IsUnavailable;
+                item.IsUnavailable = !val.IsUnavailable;
 
-                    if (!string.Equals(item?.Name, "OneDrive", StringComparison.OrdinalIgnoreCase))
-                    {
-                        IReadOnlyList<string> scripts = val.Scripts;
-                        if (scripts != null && scripts?.Count > 0)
-                        {
-                            item.Installed = scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
-                        }
-                        else
-                        {
-                            item.Installed = false;
-                        }
-                    }
-                    else
-                    {
+                switch (item?.Name.ToLowerInvariant())
+                {
+                    case "onedrive":
                         item.Installed = UninstallingPakages.IsOneDriveInstalled;
                         return;
-                    }
+
+                    case "edge":
+                        item.Installed = UninstallingPakages.IsEdgeInstalled;
+                        return;
+                }
+
+                IReadOnlyList<string> scripts = val.Scripts;
+
+                if (scripts != null && scripts?.Count > 0)
+                {
+                    item.Installed = scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+                }
+                else
+                {
+                    item.Installed = false;
                 }
             }
         }

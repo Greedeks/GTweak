@@ -343,8 +343,8 @@
     <v:String x:Key="text_over_pkg" xml:space="preserve">您即将解除安装 Microsoft Edge 浏览器。此操作亦将移除 EdgeWebView 组件，该组件用于在多种应用程序中显示网页内容——例如 Microsoft Office（如会议洞察、会议室搜索功能）、照片应用程序（新版采用 WebView2）、部分 Telegram 机器人，以及其他依赖嵌入式 WebView 的程序。继续操作前，请确认您不再需要此组件。 
        在 Windows 11 的近期版本中, Copilot 透过 EdgeWebView 以 PWA 或系统封装器形式实现。由于其作为网页封装器的运作特性，当 Edge 被解除安装时，Copilot 亦会随之移除。</v:String>
     <v:String x:Key="question_over_pkg">您是否要继续删除与 EdgeWebView 相关的项目？</v:String>
-    <v:String x:Key="btn_cancel">取消</v:String>
-    <v:String x:Key="btn_delete">删除</v:String>
+    <v:String x:Key="btn_delete_all">Yes, delete all</v:String>
+    <v:String x:Key="btn_keep_webview">No, keep EdgeWebView</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -515,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

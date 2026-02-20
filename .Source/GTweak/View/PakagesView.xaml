@@ -33,8 +33,8 @@
                         <TextBlock  Margin="0,10,0,0" Text="{DynamicResource question_over_pkg}" Style="{StaticResource TextDefault}" MaxWidth="700" Foreground="{DynamicResource Brush_Accent}" FontSize="16px" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
 
                         <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button x:Name="BtnDelete" Content="{DynamicResource btn_delete}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="120"/>
-                            <Button Margin="50,0,0,0" x:Name="BtnCancel" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="120"/>
+                            <Button x:Name="BtnDelete" Content="{DynamicResource btn_delete_all}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="120"/>
+                            <Button Margin="50,0,0,0" x:Name="BtnCancel" Content="{DynamicResource btn_keep_webview}" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right" VerticalAlignment="Top" MinWidth="120"/>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

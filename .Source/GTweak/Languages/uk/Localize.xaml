@@ -343,8 +343,8 @@
     <v:String x:Key="text_over_pkg" xml:space="preserve">Ви збираєтесь видалити браузер Microsoft Edge. При цьому буде видалений компонент EdgeWebView, який використовується для відображення веб-сторінок у додатках — таких як Microsoft Office (наприклад, Meeting Insights, Room Finder), стандартний додаток «Фотографії» (нова версія використовує WebView2), деякі боти Telegram, а також інші програми, які залежать від вбудованого WebView. Перед тим як продовжити, переконайтесь, що цей компонент вам справді не потрібен. 
       У останніх збірках Windows 11 Copilot реалізовано через EdgeWebView як PWA або системну оболонку. При видаленні Edge Copilot також буде видалений, оскільки він працює як web wrapper.</v:String>
     <v:String x:Key="question_over_pkg">Хочете продовжити видалення разом з EdgeWebView?</v:String>
-    <v:String x:Key="btn_cancel">Скасувати</v:String>
-    <v:String x:Key="btn_delete">Видалити</v:String>
+    <v:String x:Key="btn_delete_all">Yes, delete all</v:String>
+    <v:String x:Key="btn_keep_webview">No, keep EdgeWebView</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -515,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 
