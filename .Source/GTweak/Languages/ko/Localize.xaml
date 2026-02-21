@@ -287,7 +287,6 @@
     <v:String x:Key="Photos_pkg">휴대폰과 연결</v:String>
     <v:String x:Key="ScreenSketch_pkg">화면 스케치</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
-    <v:String x:Key="GetStarted_pkg">시작하기</v:String>
     <v:String x:Key="GetHelp_pkg">도움말 얻기</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft 스티커 메모</v:String>
     <v:String x:Key="Maps_pkg">Windows 지도</v:String>
@@ -313,6 +312,7 @@
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
     <v:String x:Key="Notepad_pkg">Notepad</v:String>
     <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Paint_pkg">Microsoft Paint</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
     <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
     <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
@@ -515,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

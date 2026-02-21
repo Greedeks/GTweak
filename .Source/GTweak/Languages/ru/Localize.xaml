@@ -287,9 +287,8 @@
     <v:String x:Key="Photos_pkg">Фотографии</v:String>
     <v:String x:Key="ScreenSketch_pkg">Ножницы</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
-    <v:String x:Key="GetStarted_pkg">Начало работы</v:String>
-    <v:String x:Key="GetHelp_pkg">Get Help</v:String>
-    <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Sticky Notes</v:String>
+    <v:String x:Key="GetHelp_pkg">Техническая поддержка</v:String>
+    <v:String x:Key="MicrosoftStickyNotes_pkg">Записки</v:String>
     <v:String x:Key="Maps_pkg">Карты Windows</v:String>
     <v:String x:Key="Camera_pkg">Камера Windows</v:String>
     <v:String x:Key="Paint3D_pkg">Paint3D</v:String>
@@ -313,6 +312,7 @@
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
     <v:String x:Key="Notepad_pkg">Блокнот</v:String>
     <v:String x:Key="Calculator_pkg">Калькулятор</v:String>
+    <v:String x:Key="Paint_pkg">Microsoft Paint</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
     <v:String x:Key="Whiteboard_pkg">Цифровой холст</v:String>
     <v:String x:Key="Wallet_pkg">Кошелёк</v:String>
@@ -515,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

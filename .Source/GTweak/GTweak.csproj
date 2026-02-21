@@ -523,7 +523,6 @@
     <Resource Include="Assets\ImagePackages\Edge.png" />
     <Resource Include="Assets\ImagePackages\FeedbackHub.png" />
     <Resource Include="Assets\ImagePackages\GetHelp.png" />
-    <Resource Include="Assets\ImagePackages\GetStarted.png" />
     <Resource Include="Assets\ImagePackages\Linkedin.png" />
     <Resource Include="Assets\ImagePackages\Mail.png" />
     <Resource Include="Assets\ImagePackages\Maps.png" />
@@ -589,6 +588,7 @@
     <Resource Include="Assets\ImagePackages\Viber.png" />
     <Resource Include="Assets\ImagePackages\Pandora.png" />
     <Resource Include="Assets\ImagePackages\DolbyAccess.png" />
+    <Resource Include="Assets\ImagePackages\Paint.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

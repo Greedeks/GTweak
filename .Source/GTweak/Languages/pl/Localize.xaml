@@ -287,7 +287,6 @@
     <v:String x:Key="Photos_pkg">Zdjęcia Windows</v:String>
     <v:String x:Key="ScreenSketch_pkg">Wycinanie i szkicowanie</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
-    <v:String x:Key="GetStarted_pkg">Pierwsze kroki</v:String>
     <v:String x:Key="GetHelp_pkg">Uzyskaj pomoc</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Sticky Notes</v:String>
     <v:String x:Key="Maps_pkg">Mapy Windows</v:String>
@@ -313,6 +312,7 @@
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
     <v:String x:Key="Notepad_pkg">Notatnik</v:String>
     <v:String x:Key="Calculator_pkg">Kalkulator</v:String>
+    <v:String x:Key="Paint_pkg">Microsoft Paint</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
     <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
     <v:String x:Key="Wallet_pkg">Portfel Microsoft</v:String>
@@ -515,6 +515,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

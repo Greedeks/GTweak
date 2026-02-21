@@ -287,7 +287,6 @@
     <v:String x:Key="Photos_pkg">Windows Fotók</v:String>
     <v:String x:Key="ScreenSketch_pkg">Képernyő rögzítő</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
-    <v:String x:Key="GetStarted_pkg">Segítség az induláskor</v:String>
     <v:String x:Key="GetHelp_pkg">Segítség kérése</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Ragadós Jegyzetek</v:String>
     <v:String x:Key="Maps_pkg">Windows Térképek</v:String>
@@ -313,6 +312,7 @@
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
     <v:String x:Key="Notepad_pkg">Jegyzettömb</v:String>
     <v:String x:Key="Calculator_pkg">Számológép</v:String>
+    <v:String x:Key="Paint_pkg">Microsoft Paint</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
     <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
     <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
@@ -515,6 +515,7 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+
 
 
 

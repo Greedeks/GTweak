@@ -27,7 +27,6 @@
     <BitmapImage x:Key="Img_Facebook" UriSource="/GTweak;component/Assets/ImagePackages/Facebook.png"/>
     <BitmapImage x:Key="Img_FeedbackHub" UriSource="/GTweak;component/Assets/ImagePackages/FeedbackHub.png"/>
     <BitmapImage x:Key="Img_GetHelp" UriSource="/GTweak;component/Assets/ImagePackages/GetHelp.png"/>
-    <BitmapImage x:Key="Img_GetStarted" UriSource="/GTweak;component/Assets/ImagePackages/GetStarted.png"/>
     <BitmapImage x:Key="Img_Hulu" UriSource="/GTweak;component/Assets/ImagePackages/Hulu.png"/>
     <BitmapImage x:Key="Img_iHeartRadio" UriSource="/GTweak;component/Assets/ImagePackages/iHeartRadio.png"/>
     <BitmapImage x:Key="Img_Instagram" UriSource="/GTweak;component/Assets/ImagePackages/Instagram.png"/>
@@ -52,6 +51,7 @@
     <BitmapImage x:Key="Img_OneDrive" UriSource="/GTweak;component/Assets/ImagePackages/OneDrive.png"/>
     <BitmapImage x:Key="Img_OneNote" UriSource="/GTweak;component/Assets/ImagePackages/OneNote.png"/>
     <BitmapImage x:Key="Img_Outlook" UriSource="/GTweak;component/Assets/ImagePackages/Outlook.png"/>
+    <BitmapImage x:Key="Img_Paint" UriSource="/GTweak;component/Assets/ImagePackages/Paint.png"/>
     <BitmapImage x:Key="Img_Paint3D" UriSource="/GTweak;component/Assets/ImagePackages/Paint3D.png"/>
     <BitmapImage x:Key="Img_Pandora" UriSource="/GTweak;component/Assets/ImagePackages/Pandora.png"/>
     <BitmapImage x:Key="Img_People" UriSource="/GTweak;component/Assets/ImagePackages/People.png"/>
