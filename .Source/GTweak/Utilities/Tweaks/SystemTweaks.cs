@@ -66,7 +66,8 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", "0");
 
             _сontrolWriter.Button[5] =
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", "0");
+                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", "0") ||
+                RegistryHelp.CheckValue(@"HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications", "DisableNotifications", "1");                
 
             _сontrolWriter.Button[6] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload", "2");
@@ -301,6 +302,14 @@ namespace GTweak.Utilities.Tweaks
                     break;
                 case "TglButton5":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    if (isDisabled)
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications", "DisableNotifications", "1", RegistryValueKind.String);
+                    }
+                    else
+                    {
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications", "DisableNotifications");
+                    }                    
                     break;
                 case "TglButton6":
                     if (isDisabled)
