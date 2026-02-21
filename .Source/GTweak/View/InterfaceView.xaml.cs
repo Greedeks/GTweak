@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -44,7 +43,7 @@ namespace GTweak.View
 
             if (ExplorerManager.IntfMapping.TryGetValue(toggleButton.Name, out bool needRestart))
             {
-                ExplorerManager.Restart(new Process());
+                ExplorerManager.Restart();
             }
 
             if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))

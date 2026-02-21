@@ -258,7 +258,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer", "link");
                     }
-
                     break;
                 case "TglButton13":
                     if (isDisabled)
@@ -269,7 +268,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", 0, RegistryValueKind.DWord);
                     }
-
                     break;
                 case "TglButton14":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", isDisabled ? 1 : 0, RegistryValueKind.DWord);
@@ -305,7 +303,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}");
                     }
-
                     break;
                 case "TglButton18":
                     RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager", "SoftLandingEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
@@ -502,7 +499,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", 1, RegistryValueKind.DWord);
                     }
-
                     break;
                 case "TglButton26":
 
@@ -578,7 +574,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"Control Panel\Desktop", "JPEGImportQuality");
                     }
-
                     break;
                 case "TglButton30":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", isDisabled ? 0 : 1, RegistryValueKind.DWord);
@@ -592,7 +587,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Explorer");
                     }
-
                     break;
                 case "TglButton32":
                     if (isDisabled)

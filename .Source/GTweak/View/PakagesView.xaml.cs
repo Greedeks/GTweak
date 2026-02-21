@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -105,7 +104,7 @@ namespace GTweak.View
                     {
                         if (ExplorerManager.PackageMapping.TryGetValue(packageName, out bool needRestart))
                         {
-                            ExplorerManager.Restart(new Process());
+                            ExplorerManager.Restart();
                         }
                     }), DispatcherPriority.ApplicationIdle);
                 });

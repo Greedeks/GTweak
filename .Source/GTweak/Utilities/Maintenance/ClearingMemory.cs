@@ -213,7 +213,7 @@ namespace GTweak.Utilities.Maintenance
                 $@"for /D %D in (""{PathLocator.Folders.SystemDrive}ProgramData\Microsoft\Windows\WER\*"") do (del /s /q ""%D\*.*"" & for /D %E in (""%D\*"") do rd /s /q ""%E"") & " +
                 $@"del /f /q {PathLocator.Folders.SystemDrive}Windows\INF\setupapi.app.log & del /f /q {PathLocator.Folders.SystemDrive}Windows\INF\setupapi.dev.log & del /f /q {PathLocator.Folders.SystemDrive}Windows\INF\setupapi.offline.log");
 
-            ExplorerManager.Restart(new Process(), async () =>
+            ExplorerManager.Restart(async () =>
             {
                 CommandExecutor.RunCommandAsTrustedInstaller(@"/c attrib -h -r -s %localappdata%\IconCache.db & del /a /f /q %localappdata%\IconCache.db & " +
                         @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +

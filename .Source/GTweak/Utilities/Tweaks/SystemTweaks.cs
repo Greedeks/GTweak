@@ -289,7 +289,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         WindowsDefender.SetProtectionState(isDisabled);
                     }
-
                     break;
                 case "TglButton4":
                     RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", isDisabled ? 0 : 5, RegistryValueKind.DWord);
@@ -312,7 +311,6 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload");
                     }
-
                     break;
                 case "TglButton7":
                     try

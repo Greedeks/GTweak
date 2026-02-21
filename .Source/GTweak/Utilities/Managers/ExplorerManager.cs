@@ -13,6 +13,7 @@ namespace GTweak.Utilities.Managers
         {
             new { Button = "TglButton7", NeedRestart = true },
             new { Button = "TglButton8", NeedRestart = true },
+            new { Button = "TglButton15", NeedRestart = true },
             new { Button = "TglButton16", NeedRestart = true },
             new { Button = "TglButton17", NeedRestart = true },
             new { Button = "TglButton21", NeedRestart = true },
@@ -24,12 +25,12 @@ namespace GTweak.Utilities.Managers
         }.ToDictionary(x => x.Button, x => x.NeedRestart);
 
         internal static readonly Dictionary<string, bool> PackageMapping = new[]
-{
+        {
             new { Package = "Widgets", NeedRestart = true },
             new { Package = "Edge", NeedRestart = true }
         }.ToDictionary(x => x.Package, x => x.NeedRestart);
 
-        internal static void Restart(Process launchExplorer, Action action = null)
+        internal static void Restart(Action action = null)
         {
             Task.Run(delegate
             {
@@ -41,19 +42,17 @@ namespace GTweak.Utilities.Managers
                         {
                             process.Kill();
                             action?.Invoke();
-                            process.Start();
                         }
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                    finally
+
+                    if (Process.GetProcessesByName("explorer").Length == 0)
                     {
-                        if (Process.GetProcessesByName("explorer").Length == 0 && launchExplorer != null)
-                        {
-                            launchExplorer.StartInfo.FileName = PathLocator.Executable.Explorer;
-                            launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
-                            launchExplorer.StartInfo.UseShellExecute = true;
-                            launchExplorer.Start();
-                        }
+                        using Process launchExplorer = new Process();
+                        launchExplorer.StartInfo.FileName = PathLocator.Executable.Explorer;
+                        launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
+                        launchExplorer.StartInfo.UseShellExecute = true;
+                        launchExplorer.Start();
                     }
                 }
             });

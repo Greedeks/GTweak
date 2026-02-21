@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,7 +54,7 @@ namespace GTweak.Windows
                 {
                     if (_isExpRestartNeed)
                     {
-                        ExplorerManager.Restart(new Process());
+                        ExplorerManager.Restart();
                     }
 
                     if (_requiredActions.Count != 0)
