@@ -162,7 +162,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="Root" RenderTransformOrigin="0.5,0.5">
+                    <Grid x:Name="Root" RenderTransformOrigin="0.5,0.5" RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid.CacheMode>
+                            <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                        </Grid.CacheMode>
                         <Grid.RenderTransform>
                             <ScaleTransform ScaleX="1" ScaleY="1"/>
                         </Grid.RenderTransform>
@@ -231,7 +234,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="Root" RenderTransformOrigin="0.5,0.5">
+                    <Grid x:Name="Root" RenderTransformOrigin="0.5,0.5" RenderOptions.BitmapScalingMode="HighQuality">
+                        <Grid.CacheMode>
+                            <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                        </Grid.CacheMode>
                         <Grid.RenderTransform>
                             <ScaleTransform ScaleX="1" ScaleY="1"/>
                         </Grid.RenderTransform>

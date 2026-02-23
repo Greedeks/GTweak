@@ -20,8 +20,11 @@
                 <Button x:Name="ButtonClose" Style="{StaticResource TitleButtonClose}" Margin="0,2.5,2.5,0" HorizontalAlignment="Right" VerticalAlignment="Center" PreviewMouseLeftButtonUp="ButtonClose_PreviewMouseLeftButtonUp"/>
             </StackPanel>
 
-            <DockPanel CacheMode="BitmapCache" VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True">
+            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True">
                 <TextBlock x:Name="TitleName" Text="GTweak" FontSize="15" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="15,0,0,0" TextTrimming="CharacterEllipsis" KeyboardNavigation.IsTabStop="False">
+                    <TextBlock.CacheMode>
+                        <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                    </TextBlock.CacheMode>
                     <TextBlock.Effect>
                         <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
                     </TextBlock.Effect>
@@ -39,7 +42,7 @@
                 <Image Width="53" Height="53" Source="/GTweak.ico" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="20,0,0,15" />
             </Grid>
 
-            <Grid Grid.Column="1" CacheMode="BitmapCache">
+            <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -48,6 +51,9 @@
                 <Grid Grid.Row="0">
                     <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True">
                         <TextBlock x:Name="Header" Margin="15,10,0,0" Text="Title" Foreground="{StaticResource Brush_Highlighted}" Height="auto" FontFamily="{StaticResource Jura}" FontSize="15"  TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium">
+                            <TextBlock.CacheMode>
+                                <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                            </TextBlock.CacheMode>
                             <TextBlock.Effect>
                                 <DropShadowEffect Opacity="0.2"/>
                             </TextBlock.Effect>
@@ -57,6 +63,9 @@
 
                 <Grid Grid.Row="1">
                     <TextBlock x:Name="MessageBody" Margin="15,0,0,3" Text="Text" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Height="auto" FontFamily="{StaticResource Jura}" FontSize="14"  TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium" MaxWidth="285" >
+                        <TextBlock.CacheMode>
+                            <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                        </TextBlock.CacheMode>
                         <TextBlock.Effect>
                             <DropShadowEffect Opacity="0.2"/>
                         </TextBlock.Effect>

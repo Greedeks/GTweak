@@ -67,7 +67,10 @@
             </Grid>
         </Grid>
 
-        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,8,8,0" Panel.ZIndex="10">
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0" Panel.ZIndex="10" RenderOptions.BitmapScalingMode="HighQuality">
+            <StackPanel.CacheMode>
+                <BitmapCache RenderAtScale="2" />
+            </StackPanel.CacheMode>
 
             <StackPanel.Resources>
                 <Style TargetType="Ellipse">
@@ -78,6 +81,11 @@
                     <Setter Property="Stroke" Value="{StaticResource Brush_Separator}"/>
                     <Setter Property="Fill" Value="Transparent"/>
                     <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect x:Name="IndicatorShadow" BlurRadius="15" ShadowDepth="0" Opacity="0" Color="{StaticResource Color_Shadow}" />
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </StackPanel.Resources>
 
@@ -89,25 +97,39 @@
                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                     <BeginStoryboard>
                         <Storyboard Timeline.DesiredFrameRate="120" RepeatBehavior="Forever" Duration="0:0:1.8">
+
                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Indicator1" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
                                 <DiscreteColorKeyFrame KeyTime="0:0:0" Value="{StaticResource Color_Accent}"/>
                                 <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="Transparent"/>
                             </ColorAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Indicator1" Storyboard.TargetProperty="Effect.Opacity">
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.7"/>
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
 
                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Indicator2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
                                 <DiscreteColorKeyFrame KeyTime="0:0:0.6" Value="{StaticResource Color_Accent}"/>
                                 <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="Transparent"/>
                             </ColorAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Indicator2" Storyboard.TargetProperty="Effect.Opacity">
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:0.6" Value="0.7"/>
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
 
                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Indicator3" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
                                 <DiscreteColorKeyFrame KeyTime="0:0:1.2" Value="{StaticResource Color_Accent}"/>
                                 <DiscreteColorKeyFrame KeyTime="0:0:1.8" Value="Transparent"/>
                             </ColorAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Indicator3" Storyboard.TargetProperty="Effect.Opacity">
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:1.2" Value="0.7"/>
+                                <DiscreteDoubleKeyFrame KeyTime="0:0:1.8" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
             </StackPanel.Triggers>
         </StackPanel>
-        
+
     </Grid>
 </ui:FluentWindow>

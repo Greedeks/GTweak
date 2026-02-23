@@ -21,15 +21,18 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <Ellipse x:Name="Dot" Height="14" Width="14" StrokeThickness="0" Margin="24,0,0,0">
-                    <Ellipse.Effect>
-                        <DropShadowEffect ShadowDepth="1" Opacity="0.5"/>
-                    </Ellipse.Effect>
+                <Ellipse x:Name="Dot" Height="14" Width="14" Margin="24,0,0,0" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5">
+                    <Ellipse.CacheMode>
+                        <BitmapCache RenderAtScale="2" />
+                    </Ellipse.CacheMode>
                     <Ellipse.Fill>
                         <SolidColorBrush Color="{StaticResource Color_ToggleDot_Off}"/>
                     </Ellipse.Fill>
+                    <Ellipse.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.5"/>
+                    </Ellipse.Effect>
                     <Ellipse.RenderTransform>
-                        <ScaleTransform x:Name="DotScale" ScaleX="1" ScaleY="1" CenterX="8" CenterY="8"/>
+                        <ScaleTransform x:Name="DotScale" ScaleX="1" ScaleY="1"/>
                     </Ellipse.RenderTransform>
                 </Ellipse>
             </Grid>

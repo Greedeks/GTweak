@@ -9,7 +9,11 @@
              SnapsToDevicePixels="True" UseLayoutRounding="True">
     <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left">
         <Grid HorizontalAlignment="Center">
-            <Border CornerRadius="8" Opacity="0.5" Background="#33000000" Margin="6,6,0,0"  IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=CardBody}" Height="{Binding ActualHeight, ElementName=CardBody}"/>
+            <Border CornerRadius="8" Opacity="0.5" Background="#33000000" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=CardBody}" Height="{Binding ActualHeight, ElementName=CardBody}">
+                <Border.RenderTransform>
+                    <TranslateTransform X="3" Y="6" />
+                </Border.RenderTransform>
+            </Border>
             <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}"  CornerRadius="8" Padding="10" MaxWidth="350" HorizontalAlignment="Center" VerticalAlignment="Top" SnapsToDevicePixels="True">
                 <Grid>
                     <Grid.RowDefinitions>
