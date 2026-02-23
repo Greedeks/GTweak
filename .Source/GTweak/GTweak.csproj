@@ -131,6 +131,10 @@
     <Compile Include="Assets\UserControl\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\UserControl\ColorWheelPicker\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\UserControl\ColorWheelPicker\ColorWheelEffect.cs" />
     <Compile Include="Assets\UserControl\DescriptionBlock.xaml.cs">
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
@@ -235,6 +239,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\UserControl\Card.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\UserControl\ColorWheelPicker\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -479,6 +487,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include=".editorconfig" />
+    <Resource Include="Assets\UserControl\ColorWheelPicker\ColorWheelEffect.ps" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\DisablingWD.gz" />
     <None Include="Resources\hosts.gz" />
