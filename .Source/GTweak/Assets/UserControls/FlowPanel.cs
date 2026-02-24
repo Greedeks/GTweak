@@ -25,10 +25,10 @@ namespace GTweak.Assets.UserControls
         }
 
         public static readonly DependencyProperty HorizontalSpacingProperty = DependencyProperty.Register(nameof(HorizontalSpacing), typeof(double), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(20.0, FrameworkPropertyMetadataOptions.AffectsArrange));
+            new FrameworkPropertyMetadata(20.0, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty VerticalSpacingProperty = DependencyProperty.Register(nameof(VerticalSpacing), typeof(double), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsArrange));
+            new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty ContentAlignmentProperty = DependencyProperty.Register(nameof(ContentAlignment), typeof(HorizontalAlignment), typeof(FlowPanel),
             new FrameworkPropertyMetadata(HorizontalAlignment.Left, FrameworkPropertyMetadataOptions.AffectsArrange));
@@ -115,7 +115,7 @@ namespace GTweak.Assets.UserControls
                 }
 
                 double aw = double.IsInfinity(availableSize.Width) ? 1200 : availableSize.Width;
-                double ah = double.PositiveInfinity;
+                double ah = availableSize.Height;
 
                 if (EqualizeItemSize)
                 {
@@ -137,7 +137,11 @@ namespace GTweak.Assets.UserControls
                 double neededHeight = CalculateNeededHeight(aw, ah, visible);
                 return new Size(aw, neededHeight);
             }
-            catch { return new Size(0, 0); }
+            catch (Exception ex)
+            {
+                ErrorLogging.LogDebug(ex);
+                return new Size(0, 0);
+            }
         }
 
         protected override Size ArrangeOverride(Size finalSize)
@@ -164,166 +168,176 @@ namespace GTweak.Assets.UserControls
 
                 return finalSize;
             }
-            catch { return finalSize; }
+            catch (Exception ex)
+            {
+                ErrorLogging.LogDebug(ex);
+                return finalSize;
+            }
         }
 
         private void ArrangeAligned(List<FlowItemGroup> groups, double availableWidth)
         {
-            if (groups == null || groups?.Count == 0)
+            if (groups != null && (groups?.Count) != 0)
             {
-                return;
-            }
-
-            try
-            {
-                if (Orientation == FlowOrientation.Horizontal)
+                try
                 {
-                    double y = 0;
+                    if (Orientation == FlowOrientation.Horizontal)
+                    {
+                        double y = 0;
+
+                        for (int i = 0; i < groups?.Count; i++)
+                        {
+                            FlowItemGroup row = groups[i];
+                            if (row == null || row.Elements.Count == 0)
+                            {
+                                if (row != null)
+                                {
+                                    y += row.Height + VerticalSpacing;
+                                }
+
+                                continue;
+                            }
+
+                            double extraSpace = Math.Max(0, availableWidth - row.Width);
+                            double xStart = ContentAlignment switch
+                            {
+                                HorizontalAlignment.Center => extraSpace / 2.0,
+                                HorizontalAlignment.Right => extraSpace,
+                                _ => 0
+                            };
+
+                            double x = xStart;
+
+                            foreach (UIElement child in row.Elements)
+                            {
+                                if (child == null)
+                                {
+                                    continue;
+                                }
+
+                                try
+                                {
+                                    double w = GetChildWidth(child);
+                                    double h = GetChildHeight(child);
+
+                                    Point newPos = new Point(x, y);
+                                    child.Arrange(new Rect(newPos.X, newPos.Y, w, h));
+
+                                    if (!_lastPos.TryGetValue(child, out Point oldPos) || Moved(oldPos, newPos))
+                                    {
+                                        _lastPos[child] = newPos;
+
+                                        if (!(child.RenderTransform is TranslateTransform transform))
+                                        {
+                                            transform = new TranslateTransform(0, 0);
+                                            child.RenderTransform = transform;
+                                        }
+
+                                        transform?.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, 0, 0.30, useCubicEase: true));
+                                        transform?.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(transform.Y, 0, 0.30, useCubicEase: true));
+                                    }
+
+                                    x += w + HorizontalSpacing;
+                                }
+                                catch (Exception exChild)
+                                {
+                                    ErrorLogging.LogDebug(exChild);
+                                    continue;
+                                }
+                            }
+
+                            y += row.Height + VerticalSpacing;
+                        }
+
+                        return;
+                    }
+
+                    double contentWidth = 0;
+                    for (int i = 0; i < groups?.Count; i++)
+                    {
+                        if (groups[i] != null)
+                        {
+                            contentWidth += groups[i].Width;
+                            if (i > 0)
+                            {
+                                contentWidth += HorizontalSpacing;
+                            }
+                        }
+                    }
+
+                    double extraSpaceV = Math.Max(0, availableWidth - contentWidth);
+                    double xStartV = ContentAlignment switch
+                    {
+                        HorizontalAlignment.Center => extraSpaceV / 2.0,
+                        HorizontalAlignment.Right => extraSpaceV,
+                        _ => 0
+                    };
+
+                    double xV = xStartV;
 
                     for (int i = 0; i < groups?.Count; i++)
                     {
-                        FlowItemGroup row = groups[i];
-                        if (row == null || row.Elements.Count == 0)
+                        FlowItemGroup col = groups[i];
+                        if (col == null || col.Elements.Count == 0)
                         {
-                            if (row != null)
+                            if (col != null)
                             {
-                                y += row.Height + VerticalSpacing;
+                                xV += col.Width + HorizontalSpacing;
                             }
 
                             continue;
                         }
 
-                        double extraSpace = Math.Max(0, availableWidth - row.Width);
-                        double xStart = ContentAlignment switch
+                        double shift = 0;
+                        if (Orientation == FlowOrientation.Unset && groups?.Count > 1 && i > 0)
                         {
-                            HorizontalAlignment.Center => extraSpace / 2.0,
-                            HorizontalAlignment.Right => extraSpace,
-                            _ => 0
-                        };
+                            shift = extraSpaceV * (i / (double)(groups.Count - 1)) * 0.3;
+                        }
 
-                        double x = xStart;
+                        double columnX = xV + shift;
+                        double y = 0;
 
-                        foreach (UIElement child in row.Elements)
+                        foreach (UIElement child in col.Elements)
                         {
-                            if (child == null)
+                            if (child != null)
                             {
-                                continue;
-                            }
-
-                            try
-                            {
-                                double w = GetChildWidth(child);
-                                double h = GetChildHeight(child);
-
-                                Point newPos = new Point(x, y);
-                                child.Arrange(new Rect(newPos.X, newPos.Y, w, h));
-
-                                if (!_lastPos.TryGetValue(child, out var oldPos) || Moved(oldPos, newPos))
+                                try
                                 {
-                                    _lastPos[child] = newPos;
+                                    double w = GetChildWidth(child);
+                                    double h = GetChildHeight(child);
 
-                                    if (!(child.RenderTransform is TranslateTransform transform))
+                                    Point newPos = new Point(columnX, y);
+                                    child.Arrange(new Rect(newPos.X, newPos.Y, w, h));
+
+                                    if (!_lastPos.TryGetValue(child, out Point oldPos) || Moved(oldPos, newPos))
                                     {
-                                        transform = new TranslateTransform(0, 0);
-                                        child.RenderTransform = transform;
+                                        _lastPos[child] = newPos;
+
+                                        if (!(child.RenderTransform is TranslateTransform transform))
+                                        {
+                                            transform = new TranslateTransform(0, 0);
+                                            child.RenderTransform = transform;
+                                        }
+
+                                        transform?.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, 0, 0.30, null, false, true));
+                                        transform?.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(transform.Y, 0, 0.30, null, false, true));
                                     }
 
-                                    transform?.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, 0, 0.30, null, false, true));
-                                    transform?.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(transform.Y, 0, 0.30, null, false, true));
+                                    y += h + VerticalSpacing;
                                 }
-
-                                x += w + HorizontalSpacing;
-                            }
-                            catch { continue; }
-                        }
-
-                        y += row.Height + VerticalSpacing;
-                    }
-
-                    return;
-                }
-
-                double contentWidth = 0;
-                for (int i = 0; i < groups?.Count; i++)
-                {
-                    if (groups[i] != null)
-                    {
-                        contentWidth += groups[i].Width;
-                        if (i > 0)
-                        {
-                            contentWidth += HorizontalSpacing;
-                        }
-                    }
-                }
-
-                double extraSpaceV = Math.Max(0, availableWidth - contentWidth);
-                double xStartV = ContentAlignment switch
-                {
-                    HorizontalAlignment.Center => extraSpaceV / 2.0,
-                    HorizontalAlignment.Right => extraSpaceV,
-                    _ => 0
-                };
-
-                double xV = xStartV;
-
-                for (int i = 0; i < groups?.Count; i++)
-                {
-                    FlowItemGroup col = groups[i];
-                    if (col == null || col.Elements.Count == 0)
-                    {
-                        if (col != null)
-                        {
-                            xV += col.Width + HorizontalSpacing;
-                        }
-
-                        continue;
-                    }
-
-                    double shift = 0;
-                    if (Orientation == FlowOrientation.Unset && groups?.Count > 1 && i > 0)
-                    {
-                        shift = extraSpaceV * (i / (double)(groups.Count - 1)) * 0.3;
-                    }
-
-                    double columnX = xV + shift;
-                    double y = 0;
-
-                    foreach (UIElement child in col.Elements)
-                    {
-                        if (child != null)
-                        {
-                            try
-                            {
-                                double w = GetChildWidth(child);
-                                double h = GetChildHeight(child);
-
-                                Point newPos = new Point(columnX, y);
-                                child.Arrange(new Rect(newPos.X, newPos.Y, w, h));
-
-                                if (!_lastPos.TryGetValue(child, out var oldPos) || Moved(oldPos, newPos))
+                                catch (Exception exChild)
                                 {
-                                    _lastPos[child] = newPos;
-
-                                    if (!(child.RenderTransform is TranslateTransform transform))
-                                    {
-                                        transform = new TranslateTransform(0, 0);
-                                        child.RenderTransform = transform;
-                                    }
-
-                                    transform?.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, 0, 0.30, null, false, true));
-                                    transform?.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(transform.Y, 0, 0.30, null, false, true));
+                                    ErrorLogging.LogDebug(exChild);
+                                    continue;
                                 }
-
-                                y += h + VerticalSpacing;
                             }
-                            catch { continue; }
                         }
-                    }
 
-                    xV += col.Width + HorizontalSpacing;
+                        xV += col.Width + HorizontalSpacing;
+                    }
                 }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private double CalculateNeededHeight(double availableWidth, double availableHeight, List<UIElement> visibleChildren)
@@ -351,54 +365,54 @@ namespace GTweak.Assets.UserControls
 
                 return CalculateMaxColumnHeight(groups);
             }
-            catch { return 0; }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); return 0; }
         }
 
         private double CalculateMaxColumnHeight(List<FlowItemGroup> columns)
         {
             try
             {
-                if (columns == null || columns?.Count == 0)
+                if (columns != null && (columns?.Count) != 0)
                 {
-                    return 0;
-                }
+                    double max = 0;
 
-                double max = 0;
-
-                for (int i = 0; i < columns?.Count; i++)
-                {
-                    FlowItemGroup col = columns[i];
-                    if (col == null)
+                    for (int i = 0; i < columns?.Count; i++)
                     {
-                        continue;
-                    }
-
-                    double h = 0;
-
-                    for (int j = 0; j < col.Elements.Count; j++)
-                    {
-                        UIElement child = col.Elements[j];
-                        if (child == null)
+                        FlowItemGroup col = columns[i];
+                        if (col == null)
                         {
                             continue;
                         }
 
-                        h += GetChildHeight(child);
-                        if (j > 0)
+                        double h = 0;
+
+                        for (int j = 0; j < col.Elements.Count; j++)
                         {
-                            h += VerticalSpacing;
+                            UIElement child = col.Elements[j];
+                            if (child == null)
+                            {
+                                continue;
+                            }
+
+                            h += GetChildHeight(child);
+                            if (j > 0)
+                            {
+                                h += VerticalSpacing;
+                            }
+                        }
+
+                        if (h > max)
+                        {
+                            max = h;
                         }
                     }
 
-                    if (h > max)
-                    {
-                        max = h;
-                    }
+                    return max;
                 }
 
-                return max;
+                return 0;
             }
-            catch { return 0; }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); return 0; }
         }
 
         private List<FlowItemGroup> CreateOptimalColumns(double availableWidth, double availableHeight, List<UIElement> visibleChildren)
@@ -420,12 +434,42 @@ namespace GTweak.Assets.UserControls
                     return CreateWrappedColumns(availableHeight, visibleChildren);
                 }
 
-                int maxPossibleColumns = Math.Max(1, (int)(availableWidth / 100));
+                double basisWidth;
+                if (EqualizeItemSize)
+                {
+                    basisWidth = Math.Max(16.0, ItemWidth);
+                }
+                else
+                {
+                    double sum = 0.0;
+                    int count = 0;
+
+                    for (int i = 0; i < visibleChildren.Count; i++)
+                    {
+                        UIElement child = visibleChildren[i];
+                        if (child == null)
+                        {
+                            continue;
+                        }
+
+                        double w = GetChildWidth(child);
+                        if (w > 0)
+                        {
+                            sum += w;
+                            count++;
+                        }
+                    }
+
+                    double avg = count > 0 ? sum / count : 100.0;
+                    basisWidth = Math.Max(16.0, avg);
+                }
+
+                int maxPossibleColumns = Math.Max(1, (int)(availableWidth / (basisWidth + HorizontalSpacing)));
 
                 for (int columnCount = maxPossibleColumns; columnCount >= 1; columnCount--)
                 {
                     List<FlowItemGroup> columns = TryDistributeToColumns(columnCount, availableHeight, visibleChildren);
-                    if (columns != null && CalculateTotalWidth(columns) <= availableWidth)
+                    if (columns != null && CalculateTotalWidth(columns) <= availableWidth && columns.Count > 0)
                     {
                         return columns;
                     }
@@ -433,7 +477,7 @@ namespace GTweak.Assets.UserControls
 
                 return CreateSingleColumn(visibleChildren);
             }
-            catch { return new List<FlowItemGroup>(); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); return new List<FlowItemGroup>(); }
         }
 
         private List<FlowItemGroup> CreateWrappedRows(double maxWidth, List<UIElement> visibleChildren)
@@ -483,7 +527,7 @@ namespace GTweak.Assets.UserControls
 
                 return rows;
             }
-            catch { return new List<FlowItemGroup>(); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); return new List<FlowItemGroup>(); }
         }
 
         private List<FlowItemGroup> CreateWrappedColumns(double maxHeight, List<UIElement> visibleChildren)
@@ -533,7 +577,7 @@ namespace GTweak.Assets.UserControls
 
                 return cols;
             }
-            catch { return new List<FlowItemGroup>(); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); return new List<FlowItemGroup>(); }
         }
 
         private List<FlowItemGroup> TryDistributeToColumns(int columnCount, double maxHeight, List<UIElement> visibleChildren)
@@ -552,7 +596,7 @@ namespace GTweak.Assets.UserControls
                 {
                     if (child == null)
                     {
-                        continue;  // ← Проверка ПЕРЕД использованием
+                        continue;
                     }
 
                     int minIndex = 0;
@@ -569,25 +613,19 @@ namespace GTweak.Assets.UserControls
                     double h = GetChildHeight(child);
                     double newHeight = heights[minIndex] + (heights[minIndex] > 0 ? VerticalSpacing : 0) + h;
 
-                    if (newHeight > maxHeight)
+                    if (!double.IsInfinity(maxHeight) && newHeight > maxHeight)
                     {
-                        return new List<FlowItemGroup>();  // ← Возвращаем пустой список
+                        return null;
                     }
 
-                    if (columns[minIndex] != null)  // ← Дополнительная проверка
-                    {
-                        columns[minIndex].Elements.Add(child);
-                        columns[minIndex].Width = Math.Max(columns[minIndex].Width, GetChildWidth(child));
-                        heights[minIndex] = newHeight;
-                    }
+                    columns[minIndex].Elements.Add(child);
+                    columns[minIndex].Width = Math.Max(columns[minIndex].Width, GetChildWidth(child));
+                    heights[minIndex] = newHeight;
                 }
 
                 for (int i = 0; i < columnCount; i++)
                 {
-                    if (columns[i] != null)
-                    {
-                        columns[i].Height = heights[i];
-                    }
+                    columns[i].Height = heights[i];
                 }
             }
             else
@@ -603,20 +641,17 @@ namespace GTweak.Assets.UserControls
 
                     int colIndex = index % columnCount;
 
-                    if (columns[colIndex] != null)
+                    double addedHeight = (columns[colIndex].Height > 0 ? VerticalSpacing : 0) + GetChildHeight(child);
+                    double newHeight = columns[colIndex].Height + addedHeight;
+
+                    if (!double.IsInfinity(maxHeight) && newHeight > maxHeight)
                     {
-                        double addedHeight = (columns[colIndex].Height > 0 ? VerticalSpacing : 0) + GetChildHeight(child);
-                        double newHeight = columns[colIndex].Height + addedHeight;
-
-                        if (newHeight > maxHeight)
-                        {
-                            return new List<FlowItemGroup>();
-                        }
-
-                        columns[colIndex].Elements.Add(child);
-                        columns[colIndex].Width = Math.Max(columns[colIndex].Width, GetChildWidth(child));
-                        columns[colIndex].Height = newHeight;
+                        return null;
                     }
+
+                    columns[colIndex].Elements.Add(child);
+                    columns[colIndex].Width = Math.Max(columns[colIndex].Width, GetChildWidth(child));
+                    columns[colIndex].Height = newHeight;
 
                     index++;
                 }
@@ -652,7 +687,7 @@ namespace GTweak.Assets.UserControls
                 col.Height = totalHeight;
                 return new List<FlowItemGroup> { col };
             }
-            catch { return new List<FlowItemGroup>(); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); return new List<FlowItemGroup>(); }
         }
 
         private double CalculateTotalWidth(List<FlowItemGroup> columns)
@@ -678,7 +713,28 @@ namespace GTweak.Assets.UserControls
                 }
                 return total;
             }
-            catch { return 0; }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); return 0; }
+        }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            base.OnRenderSizeChanged(sizeInfo);
+
+            if (Math.Abs(sizeInfo.PreviousSize.Width - sizeInfo.NewSize.Width) > 0.5 ||
+                Math.Abs(sizeInfo.PreviousSize.Height - sizeInfo.NewSize.Height) > 0.5)
+            {
+                _lastPos.Clear();
+                InvalidateMeasure();
+                InvalidateArrange();
+            }
+        }
+
+        protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
+        {
+            base.OnVisualChildrenChanged(visualAdded, visualRemoved);
+            _lastPos.Clear();
+            InvalidateMeasure();
+            InvalidateArrange();
         }
     }
 }
