@@ -63,7 +63,7 @@
 
                 <Ellipse x:Name="PART_ColorPreview" Grid.Column="0" Width="20" Height="20" Stroke="{StaticResource Brush_Separator}" StrokeThickness="2" Margin="0,0,8,0" Fill="White"/>
 
-                <TextBlock x:Name="PART_ColorTextBlock" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted}" Text="255 255 255" MinWidth="80"/>
+                <TextBlock x:Name="PART_ColorTextBlock" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted}" Text="255 255 255" MinWidth="80" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining"/>
             </Grid>
         </ToggleButton>
 

@@ -42,10 +42,14 @@ namespace GTweak.Utilities.Configuration
 
             internal static IPMetadata ParseData(string response)
             {
-                JObject jObject = JObject.Parse(response);
-                string ip = (string)(jObject["ip"] ?? jObject["ipAddress"] ?? jObject["query"]);
-                string country = (string)(jObject["country_code"] ?? jObject["countryCode"]);
-                return new IPMetadata { Ip = ip, Country = country };
+                if (!string.IsNullOrWhiteSpace(response))
+                {
+                    JObject jObject = JObject.Parse(response);
+                    string ip = jObject["ip"]?.ToString() ?? jObject["ipAddress"]?.ToString() ?? jObject["query"]?.ToString() ?? string.Empty;
+                    string country = jObject["country_code"]?.ToString() ?? jObject["countryCode"]?.ToString() ?? string.Empty;
+                    return new IPMetadata { Ip = ip, Country = country };
+                }
+                return new IPMetadata { Ip = string.Empty, Country = string.Empty };
             }
         }
 
@@ -367,7 +371,7 @@ namespace GTweak.Utilities.Configuration
                     {
                         string speedData = new string[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
                         string data = new string[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
-                        string memoryType = (uint)managementObj["SMBIOSMemoryType"] switch
+                        string memoryType = Convert.ToUInt32(managementObj["SMBIOSMemoryType"] ?? 0u) switch
                         {
                             2 => "DRAM",
                             3 => "EDRAM",
@@ -407,7 +411,7 @@ namespace GTweak.Utilities.Configuration
                         };
 
                         Memory.Type = memoryType;
-                        Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper((ulong)managementObj["Capacity"])}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
+                        Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper(Convert.ToUInt64(managementObj["Capacity"] ?? 0UL))}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
                     }
                 }
             }
@@ -425,7 +429,7 @@ namespace GTweak.Utilities.Configuration
 
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
-                string storageType = StorageTypeMappings.MediaTypeMap.Where(x => x.Keys != null && mediaType != null && x.Keys.Contains(mediaType) && x.Type != null).Select(x => x.Type).FirstOrDefault() ?? StorageTypeLabels.Unspecified;
+                string storageType = StorageTypeMappings.MediaTypeMap.FirstOrDefault(x => x.Keys != null && x.Keys.Any(k => k is string ks && mediaType is string ms ? string.Equals(ks, ms, StringComparison.OrdinalIgnoreCase) : Equals(k, mediaType))).Type ?? StorageTypeLabels.Unspecified;
 
                 if (isMsftAvailable)
                 {
@@ -441,7 +445,7 @@ namespace GTweak.Utilities.Configuration
 
                 if (storageType != StorageTypeLabels.Unspecified)
                 {
-                    string lowLevelType = StorageTypeIdentifier.GetStorageKind(deviceId);
+                    string lowLevelType = StorageTypeIdentifier.GetStorageKind(deviceId ?? string.Empty) ?? string.Empty;
                     if (!string.IsNullOrEmpty(lowLevelType) && lowLevelType != StorageTypeLabels.Unspecified)
                     {
                         return lowLevelType;
@@ -450,7 +454,7 @@ namespace GTweak.Utilities.Configuration
 
                 if (storageType == StorageTypeLabels.Unspecified && !string.IsNullOrEmpty(deviceId))
                 {
-                    return StorageTypeIdentifier.GetStorageKind(deviceId);
+                    return StorageTypeIdentifier.GetStorageKind(deviceId ?? string.Empty) ?? StorageTypeLabels.Unspecified;
                 }
 
                 return storageType;
@@ -468,10 +472,9 @@ namespace GTweak.Utilities.Configuration
                         ushort busType = managementObj["BusType"] is IConvertible b ? Convert.ToUInt16(b) : (ushort)0;
                         string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, default);
 
-                        result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
+                        result.AppendLine($"{SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL))} [{data}] {storageType}");
                     }
                 }
-
             }
             else
             {
@@ -485,7 +488,7 @@ namespace GTweak.Utilities.Configuration
                         string interfaceType = managementObj["InterfaceType"]?.ToString() ?? string.Empty;
                         string storageType = GetStorageType(mediaType, managementObj["DeviceID"] as string ?? string.Empty, default, interfaceType);
 
-                        result.AppendLine($"{SizeCalculationHelper((ulong)managementObj["Size"])} [{data}] {storageType}");
+                        result.AppendLine($"{SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL))} [{data}] {storageType}");
                     }
                 }
             }
@@ -554,7 +557,7 @@ namespace GTweak.Utilities.Configuration
                 {
                     using (managementObj)
                     {
-                        (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"].ToString());
+                        (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"]?.ToString() ?? string.Empty);
 
                         if (isUsbDevice && !string.IsNullOrEmpty(data))
                         {
@@ -565,7 +568,7 @@ namespace GTweak.Utilities.Configuration
                             result.AppendLine(new string[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
                         }
 
-                        VendorDetection.Realtek |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) >= 0;
+                        VendorDetection.Realtek |= (managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) ?? -1) >= 0;
                     }
                 }
             }
@@ -599,7 +602,7 @@ namespace GTweak.Utilities.Configuration
                 {
                     using (managementObj)
                     {
-                        result.AppendLine(new string[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
+                        result.AppendLine(new string[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty); ;
                     }
                 }
             }
