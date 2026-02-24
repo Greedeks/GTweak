@@ -165,7 +165,7 @@
     <v:String x:Key="tgl16_conf">Журналювання подій Windows</v:String>
     <v:String x:Key="tgl17_conf">Збір даних та моніторинг телеметрії NVIDIA</v:String>
     <v:String x:Key="tgl18_conf">Журналювання дій користувача</v:String>
-    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
+    <v:String x:Key="tgl19_conf">Збір даних та фонове оновлення офлайн-карт</v:String>
     <v:String x:Key="tgl20_conf">Збір даних та моніторинг телеметрії Intel</v:String>
     
     <v:String x:Key="tgl1_desc_conf">Для кожного користувача система Windows створює унікальний рекламний ідентифікатор для відстеження його дій. Використовується розробниками програм та самої Windows для власних цілей, у тому числі для демонстрації конкретної реклами в додатках.</v:String>
@@ -186,8 +186,8 @@
     <v:String x:Key="tgl16_desc_conf">Журнал подій, який збирає та обробляє діагностичну інформацію системи, марно споживає комп'ютерні ресурси. Ця служба фактично нічого корисного для користувача не робить. Можна вимкнути, щоб запобігти надсиланню конфіденційної інформації.</v:String>
     <v:String x:Key="tgl17_desc_conf">Служба для збору та передачі даних про систему та її використання. Марна і не пов'язана з роботою відео дайвера. Чому і яка інформація збирається, знає лише NVIDIA. Факт, що служба нічого корисного для кінцевого користувача не робить, абсолютно очевидний.</v:String>
     <v:String x:Key="tgl18_desc_conf">Налаштування вимикає функцію UAR (User Activity Recording) – систему, яка послідовно фіксує кожну вашу дію на комп’ютері: від створення скриншотів і набору тексту до запуску програм та надання доступу до вебкамери навіть у стані заблокованого екрану, а також багато іншого.</v:String>
-    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
-    <v:String x:Key="tgl20_desc_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows періодично оновлює офлайн-карти та надсилає сповіщення про нові дані у фоновому режимі. Ці процеси можуть збирати інформацію про ваше місцезнаходження, маршрути та використання карт. Якщо ви не користуєтеся офлайн-картами, рекомендується вимкнути їх, щоб уникнути прихованих оновлень і передачі даних на сервери Microsoft без вашої прямої участі.</v:String>
+    <v:String x:Key="tgl20_desc_conf">Модуль Intel, який працює у фоновому режимі для збору та передачі даних, позиціонується як інструмент для вдосконалення продуктів компанії. Однак для пересічного користувача він приносить мало практичної користі, а вимкнення цієї функції може зменшити фонову активність і запобігти непотрібній передачі даних.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -226,8 +226,8 @@
     <v:String x:Key="tgl31_intf">Пошуковий запит з інтеграцією «Bing» в меню «Пуск»</v:String>
     <v:String x:Key="tgl32_intf">Відкривати «Швидкий доступ» замість «Цей ПК»</v:String>
 
-    <v:String x:Key="color1_desc_intf">Налаштування кольору фону при виділенні тексту або об'єктів курсором у системі.</v:String>
-    <v:String x:Key="color2_desc_intf">Налаштування кольору спливаючих підказок (tooltip) у підтримуваних додатках.</v:String>
+    <v:String x:Key="color1_desc_intf">Зміна кольору фону при виділенні тексту або об'єктів курсором у системі.</v:String>
+    <v:String x:Key="color2_desc_intf">Зміна кольору спливаючих підказок у підтримуваних додатках.</v:String>
     <v:String x:Key="tgl1_desc_intf">Як усталено, розширення файлів у Windows приховуються, що робить інтерфейс Провідника менш завантаженим. Якщо потрібно, можна увімкнути відображення розширень файлів за допомогою цього налаштування, заощаджуючи час на пошук. Увага, екран може мерехтіти.</v:String>
     <v:String x:Key="tgl2_desc_intf">На деяких пристроях яскравість екрана може спонтанно змінюватися залежно від вмісту, що відображається. Якщо вимкнення HDR, динамічної яскравості та налаштувань живлення не допомагає (проблема особливо поширена на ноутбуках, які працюють від акумулятора), можна спробувати це тонке налаштування - воно примусово вимикає автоматичне регулювання яскравості на системному рівні. Проте ручна зміна яскравості залишається доступною.</v:String>
     <v:String x:Key="tgl3_desc_intf">Це налаштування зменшить розмір стандартних кнопок вікна Згорнути, Розгорнути, Закрити. Змінюється розмір для всіх вікон, таких як провідник, фотографії, браузери та інші відомі програми.</v:String>
@@ -378,7 +378,7 @@
     <v:String x:Key="tgl27_svc">Служби, пов’язані з корпоративними засобами</v:String>
     <v:String x:Key="tgl28_svc">Служба, пов’язана з роботою Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Служби, пов'язані з push-сповіщеннями</v:String>
-    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
+    <v:String x:Key="tgl30_svc">Служби, пов'язані з демонстраційним режимом магазину</v:String>
 
     <v:String x:Key="tgl1_desc_svc">Можна вимкнути, якщо ви не використовуєте історію файлів та індексацію вмісту.</v:String>
     <v:String x:Key="tgl2_desc_svc">Можна вимкнути, якщо ви не використовуєте Xbox та маніпулятор Microsoft Gamepad.</v:String>
@@ -409,7 +409,7 @@
     <v:String x:Key="tgl27_desc_svc">Можна вимкнути, якщо ви не використовуєте віддалене керування корпоративними додатками, і у вас немає віддаленого сервера, з яким з'єднується ваш комп'ютер.</v:String>
     <v:String x:Key="tgl28_desc_svc">Можна вимкнути, якщо ви не використовуєте вбудовану систему віртуалізації. Це не впливає на роботу таких додатків як VirtualBox тощо.</v:String>
     <v:String x:Key="tgl29_desc_svc">Можна вимкнути, якщо не використовуєте сполучені пристрої або віддалено не встановлюєте програми з Магазину Windows. Ці служби забезпечують роботу Центру сповіщень зі сполученими пристроями, обробку push-запитів та дозволяють програмі «Телефон» знаходити ваш смартфон, автоматично підключатися до нього та відображати його повідомлення та події в Центрі сповіщень. У Windows 10 після вимкнення цих служб Центр сповіщень може не відкриватися.</v:String>
-    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Можна вимкнути, якщо ви не використовуєте пристрій у магазині для демонстрації функцій Windows. Служба Store Demo керує відображенням демо-контенту та інтерактивних функцій, призначених лише для вітрин магазинів та тестування. Ця служба не потрібна для щоденного використання комп'ютера.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -445,7 +445,7 @@
     <v:String x:Key="tgl26_sys">Приховування «PC Health Check» від системи оновлень</v:String>
     <v:String x:Key="tgl27_sys">Фонові завдання Windows Insider</v:String>
     <v:String x:Key="tgl28_sys">Дефрагментація системного диска</v:String>
-    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
+    <v:String x:Key="tgl29_sys">Призупинити оновлення Windows</v:String>
     
     <v:String x:Key="slider1_desc_sys">Дозволяє змінити швидкість переміщення вказівника миші, заощаджуючи ваш час на пошук відповідних параметрів.</v:String>
     <v:String x:Key="slider2_desc_sys">Зміна затримки перед початком повторного введення символу, рекомендоване значення - 0.</v:String>
@@ -478,7 +478,7 @@
     <v:String x:Key="tgl26_desc_sys">Це налаштування блокує надокучливе автоматичне встановлення PC Health Check - службової утиліти Microsoft, яка без вашого дозволу інтегрується в систему через службу оновлення Windows. Після встановлення програма починає докучати запитами на «перевірку готовності до Windows 11» та «рекомендаціями з оптимізації».</v:String>
     <v:String x:Key="tgl27_desc_sys">Для учасників програми Windows Insider завдання мають бути увімкнені. Але якщо ви не учасник, всі завдання, пов'язані з програмою, стають зайвим баластом: споживають ресурси, створюють непотрібні журнали і можуть ініціювати телеметричні з'єднання без будь-якої користі. Вимкнення може прискорити запуск та загальну продуктивність системи, а також усунути непотрібні канали збору експериментальних даних.</v:String>
     <v:String x:Key="tgl28_desc_sys">Якщо використовуєте SSD, вимкнення дефрагментації та оптимізації завантажувального файлу, які діють лише на жорстких дисках (HDD), допоможе продовжити термін служби диска. Проте функція оптимізації TRIM продовжить працювати: вона повідомляє контролеру SSD, які блоки даних більше не використовуються, і очищає їх, підтримуючи стабільну швидкість і довговічність накопичувача.</v:String>
-    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Призупиняє системні оновлення Windows на 10 років, зберігаючи при цьому можливість оновлення програм і завантажень із Microsoft Store активними. Щоб повністю вимкнути оновлення, перейдіть до розділу «Служби» та вимкніть відповідні служби Windows Update.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->

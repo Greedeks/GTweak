@@ -226,8 +226,8 @@
     <v:String x:Key="tgl31_intf">Zapytanie wyszukiwania z integracją „Bing” w menu Start</v:String>
     <v:String x:Key="tgl32_intf">Otwieraj „Szybki dostęp” zamiast „Ten komputer”</v:String>
 
-    <v:String x:Key="color1_desc_intf">Ustawienia koloru tła podczas zaznaczania tekstu lub obiektów kursorem.</v:String>
-    <v:String x:Key="color2_desc_intf">Ustawienia koloru podpowiedzi (tooltip) w obsługiwanych aplikacjach.</v:String>
+    <v:String x:Key="color1_desc_intf">Zmienia kolor tła podczas zaznaczania tekstu lub obiektów kursorem w systemie.</v:String>
+    <v:String x:Key="color2_desc_intf">Zmienia kolor podpowiedzi w obsługiwanych aplikacjach.</v:String>
     <v:String x:Key="tgl1_desc_intf">Domyślnie Windows ukrywa rozszerzenia plików, co sprawia, że widok Eksploratora jest mniej zagracony. Jeśli potrzebujesz, możesz włączyć wyświetlanie rozszerzeń nazw plików za pomocą tej poprawki, oszczędzając czas na szukanie. Uwaga, ekran może mignąć.</v:String>
     <v:String x:Key="tgl2_desc_intf">Na niektórych urządzeniach jasność ekranu może zmieniać się samoczynnie w zależności od wyświetlanego obrazu. Jeśli wyłączenie HDR, dynamicznej jasności i ustawień zasilania nie rozwiązuje problemu (problem ten jest szczególnie częsty na laptopach działających na baterii), możesz spróbować tej poprawki – wymusza wyłączenie automatycznej regulacji jasności na poziomie systemu. Ręczna regulacja jasności pozostaje dostępna.</v:String>
     <v:String x:Key="tgl3_desc_intf">Poprawka zmniejsza rozmiar przycisków Minimalizuj, Maksymalizuj i Zamknij, czyniąc je mniej topornymi. Dostosowuje rozmiar dla wszystkich okien, w tym Eksploratora plików, Zdjęć, przeglądarek i innych znanych programów.</v:String>

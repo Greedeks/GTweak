@@ -165,7 +165,7 @@
     <v:String x:Key="tgl16_conf">记录 Windows 事件</v:String>
     <v:String x:Key="tgl17_conf">收集与监控 NVIDIA 遥测数据</v:String>
     <v:String x:Key="tgl18_conf">记录用户行为</v:String>
-    <v:String x:Key="tgl19_conf">Collecting data and background updates of Offline maps</v:String>
+    <v:String x:Key="tgl19_conf">离线地图的数据收集和后台更新</v:String>
     <v:String x:Key="tgl20_conf">收集与监控 Intel 遥测数据</v:String>
 
     <v:String x:Key="tgl1_desc_conf">Windows 会为每位用户创建唯一的广告识别码以追踪您的操作。此识别码由应用程序开发者及 Windows 系统本身用于各自目的，包括在应用程序中向您提供特定广告。</v:String>
@@ -186,8 +186,8 @@
     <v:String x:Key="tgl16_desc_conf">此事件记录服务负责收集并处理系统诊断资讯，会消耗电脑资源。该服务不会带来任何益处，建议停用以防止机密资讯外泄。</v:String>
     <v:String x:Key="tgl17_desc_conf">负责收集并传输系统及其使用数据的服务，或与视讯驱动程序运作无关的功能皆属无用。NVIDIA收集何种资讯及其目的仅其自身知晓。但此举对终端用户毫无助益的事实显而易见。</v:String>
     <v:String x:Key="tgl18_desc_conf">此调整项将停用 UAR（用户活动记录）功能——该系统会逐一记录您在电脑上的所有操作：从撷取屏幕截图、输入文字、启动程序，甚至在屏幕锁定时提供网络摄影机存取权限等诸多行为。</v:String>
-    <v:String x:Key="tgl19_desc_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
-    <v:String x:Key="tgl20_desc_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows 会定期更新离线地图并在后台发送有关新数据的通知。这些过程可能会收集有关您的位置、路线和地图使用情况的信息。如果您不使用离线地图，建议将其禁用，以避免在没有您直接参与的情况下进行隐藏更新和向 Microsoft 服务器传输数据。</v:String>
+    <v:String x:Key="tgl20_desc_conf">在后台运行以收集和传输数据的 Intel 模块被定位为改进公司产品的工具。然而，对于普通用户来说，它几乎没有实际益处，禁用此功能可以减少后台活动并防止不必要的数据传输。</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -226,8 +226,8 @@
     <v:String x:Key="tgl31_intf">开始功能表中整合"Bing"的搜索查询</v:String>
     <v:String x:Key="tgl32_intf">开启"快速存取"而非"本机"</v:String>
 
-    <v:String x:Key="color1_desc_intf">设置使用光标选择文本或对象时的背景颜色。</v:String>
-    <v:String x:Key="color2_desc_intf">设置受支持应用程序中工具提示（tooltip）的颜色。</v:String>
+    <v:String x:Key="color1_desc_intf">调整在系统中使用光标选择文本或对象时的背景颜色。</v:String>
+    <v:String x:Key="color2_desc_intf">调整受支持应用程序中工具提示的颜色。</v:String>
     <v:String x:Key="tgl1_desc_intf">预设情况下，Windows 会隐藏文档扩展名，使文档总管接口更简洁。若需显示扩展名，可透过此调整功能启用，节省搜索时间。注意：屏幕可能闪烁。</v:String>
     <v:String x:Key="tgl2_desc_intf">部分装置的屏幕亮度可能随显示内容自动变化。若关闭 HDR、动态亮度及电源设置仍无法解决问题（此状况在电池供电的笔记型电脑上尤为常见），可尝试此调整项——它将在系统层级强制停用自动亮度调节功能。手动亮度控制功能仍可正常使用。</v:String>
     <v:String x:Key="tgl3_desc_intf">此调整会缩小最小化、最大化及关闭按钮的尺寸，使其更为精简。此设置将套用至所有窗口，包含文档总管、照片、浏览器及其他常用程序。</v:String>
@@ -378,8 +378,8 @@
     <v:String x:Key="tgl27_svc">与企业工具相关之服务</v:String>
     <v:String x:Key="tgl28_svc">与 Hyper-V 运作相关之服务</v:String>
     <v:String x:Key="tgl29_svc">与推播通知相关之服务</v:String>
-    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
-
+    <v:String x:Key="tgl30_svc">与零售演示模式相关的服务</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">若您未使用文档历史记录与内容索引功能，请停用此设置。</v:String>
     <v:String x:Key="tgl2_desc_svc">若您未使用 Xbox 与 Microsoft 游戏控制器，请停用此设置。</v:String>
     <v:String x:Key="tgl3_desc_svc">若您不打算更新 Windows，请停用此设置。此调整除变更服务外，亦会修改负责 Windows 更新的文档。因此即使服务处于启用状态，更新中心仍将无法运作。请注意此调整将影响从 Windows 市集下载及更新应用程序。</v:String>
@@ -409,7 +409,7 @@
     <v:String x:Key="tgl27_desc_svc">若您未使用企业应用程序的远端管理功能，且电脑未与任何远端服务器通讯，请停用此选项。</v:String>
     <v:String x:Key="tgl28_desc_svc">若未使用内建虚拟化系统，请停用此服务。此设置绝不影响 VirtualBox 等虚拟化软件运作。</v:String>
     <v:String x:Key="tgl29_desc_svc">若未使用配对装置且不透过 Windows 市集远端安装应用程序，请停用此服务。这些服务负责处理配对装置的通知中心、处理推播请求、让 Windows 能侦测您的智慧型手机以供"您的手机"应用程序使用、自动重新连接至手机，并在操作中心显示手机讯息与事件。在 Windows 10 中，停用后通知中心可能无法开启。</v:String>
-    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
+    <v:String x:Key="tgl30_desc_svc">如果您不在商店中使用该设备来演示 Windows 功能，请将其禁用。零售演示 (Store Demo) 服务负责管理专门用于商店展示和测试的演示内容及交互功能的显示。日常使用电脑时不需要此服务。</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -445,8 +445,8 @@
     <v:String x:Key="tgl26_sys">从更新系统中隐藏"电脑健康检查"</v:String>
     <v:String x:Key="tgl27_sys">Windows Insider 背景任务</v:String>
     <v:String x:Key="tgl28_sys">系统磁盘重整</v:String>
-    <v:String x:Key="tgl29_sys">Pause Windows Updates</v:String>
-    
+    <v:String x:Key="tgl29_sys">暂停 Windows 更新</v:String>
+
     <v:String x:Key="slider1_desc_sys">调整鼠标指针移动速度，省去您搜索鼠标参数的时间。</v:String>
     <v:String x:Key="slider2_desc_sys">调整开始重复输入字元前的延迟时间，建议值为 0。</v:String>
     <v:String x:Key="slider3_desc_sys">调整输入字元的重复频率，建议值为 31。</v:String>
@@ -478,7 +478,7 @@
     <v:String x:Key="tgl26_desc_sys">调整区块可阻止"电脑健康检查"的侵入式自动安装——此为微软工具，会透过 Windows 更新在未经许可下强制部署自身。安装后，程序将不断催促"检查 Windows 11 就绪状态"，并推送未经请求的"最佳化建议"。</v:String>
     <v:String x:Key="tgl27_desc_sys">Windows Insider 参与者应保持这些任务启用状态。但若您未加入该计画，所有相关任务将成为无谓负担：它们消耗系统资源、产生无用日志，并可能在毫无效益的情况下启动遥测连接。停用这些功能可缩短启动时间、提升整体系统性能，同时消除不必要的实验性数据收集管道。</v:String>
     <v:String x:Key="tgl28_desc_sys">若您使用固态硬盘（SSD），停用仅适用于传统硬盘（HDD）的磁盘重组与开机文档优化功能，有助延长存储设备寿命。同时，TRIM 优化功能仍会持续运作：它会告知 SSD 控制器哪些数据区块已不再使用并清除它们，从而维持稳定速度与硬盘寿命。</v:String>
-    <v:String x:Key="tgl29_desc_sys">Pauses Windows system updates for 10 years, while keeping app updates and downloads from the Microsoft Store active. To completely disable updates, go to Services and disable the corresponding Windows Update services.</v:String>
+    <v:String x:Key="tgl29_desc_sys">将 Windows 系统更新暂停 10 年，同时保持来自 Microsoft Store 的应用更新和下载处于活动状态。要完全禁用更新，请转到“服务”并禁用相应的 Windows 更新服务。</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
