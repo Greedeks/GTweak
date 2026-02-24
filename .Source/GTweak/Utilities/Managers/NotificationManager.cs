@@ -29,7 +29,7 @@ namespace GTweak.Utilities.Managers
             ["TglButton12"] = NoticeAction.Logout,
             ["TglButton20"] = NoticeAction.Restart,
             ["TglButton22"] = NoticeAction.Logout,
-            ["TglButton23"] = NoticeAction.Restart,
+            ["TglButton23"] = NoticeAction.Restart
         };
 
         internal static readonly Dictionary<string, NoticeAction> SysActions = new Dictionary<string, NoticeAction>()

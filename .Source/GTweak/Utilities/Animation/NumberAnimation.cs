@@ -7,13 +7,14 @@ namespace GTweak.Utilities.Animation
 {
     internal static class NumberAnimation
     {
-        internal static readonly DependencyProperty ValueProperty = DependencyProperty.RegisterAttached("Value", typeof(int), typeof(NumberAnimation), new PropertyMetadata(0, OnValueChanged));
+        internal static readonly DependencyProperty ValueProperty =
+            DependencyProperty.RegisterAttached("Value", typeof(int), typeof(NumberAnimation), new PropertyMetadata(0, OnValueChanged));
 
-        private static readonly DependencyProperty AnimatedValueProperty = DependencyProperty.RegisterAttached("AnimatedValue", typeof(int), typeof(NumberAnimation), new PropertyMetadata(0, OnAnimatedValueChanged));
+        private static readonly DependencyProperty AnimatedValueProperty =
+            DependencyProperty.RegisterAttached("AnimatedValue", typeof(int), typeof(NumberAnimation), new PropertyMetadata(0, OnAnimatedValueChanged));
 
         internal static void SetValue(DependencyObject dObject, int value) => dObject?.SetValue(ValueProperty, value);
-
-        internal static int GetValue(DependencyObject dObject) => dObject?.GetValue(ValueProperty) as int? ?? 0;
+        internal static int GetValue(DependencyObject dObject) => (int)(dObject?.GetValue(ValueProperty) ?? 0);
 
         private static void SetAnimatedValue(DependencyObject dObject, int value) => dObject?.SetValue(AnimatedValueProperty, value);
 
@@ -21,25 +22,32 @@ namespace GTweak.Utilities.Animation
         {
             if (dObject is TextBlock textBlock)
             {
-                int newValue = (e.NewValue as int?) ?? 0;
+                int newValue = e.NewValue is int val ? val : 0;
+                int oldValue = e.OldValue is int old ? old : 0;
 
-                if (!textBlock.IsLoaded)
+                if (newValue != oldValue || !textBlock.IsLoaded)
                 {
-                    SetAnimatedValue(textBlock, newValue);
-                    return;
+                    if (!textBlock.IsLoaded)
+                    {
+                        textBlock.BeginAnimation(AnimatedValueProperty, null);
+                        SetAnimatedValue(textBlock, newValue);
+                        return;
+                    }
+
+                    try
+                    {
+                        Int32Animation int32Anim = new Int32Animation
+                        {
+                            From = oldValue,
+                            To = newValue,
+                            Duration = TimeSpan.FromSeconds(0.5),
+                            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+                        };
+                        Timeline.SetDesiredFrameRate(int32Anim, 60);
+                        textBlock.BeginAnimation(AnimatedValueProperty, int32Anim);
+                    }
+                    catch { SetAnimatedValue(textBlock, newValue); }
                 }
-
-                int oldValue = (e.OldValue as int?) ?? 0;
-
-                Int32Animation int32Anim = new Int32Animation
-                {
-                    From = oldValue,
-                    To = newValue,
-                    Duration = TimeSpan.FromSeconds(0.5),
-                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
-                };
-                Timeline.SetDesiredFrameRate(int32Anim, 60);
-                textBlock.BeginAnimation(AnimatedValueProperty, int32Anim);
             }
         }
 
@@ -47,7 +55,7 @@ namespace GTweak.Utilities.Animation
         {
             if (dObject is TextBlock textBlock)
             {
-                textBlock.Text = string.Format(" {0}", e.NewValue?.ToString() ?? string.Empty);
+                textBlock.Text = $" {(int)(e.NewValue ?? 0)}";
             }
         }
     }

@@ -120,17 +120,29 @@ namespace GTweak.Assets.UserControls
                 if (EqualizeItemSize)
                 {
                     Size constraint = new Size(ItemWidth, double.PositiveInfinity);
-                    foreach (UIElement child in visible)
+                    for (int i = 0; i < visible.Count; i++)
                     {
-                        child?.Measure(constraint);
+                        UIElement child = visible[i];
+
+                        if (child != null)
+                        {
+                            try { child.Measure(constraint); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        }
                     }
                 }
                 else
                 {
                     Size constraint = new Size(double.PositiveInfinity, double.PositiveInfinity);
-                    foreach (UIElement child in visible)
+                    for (int i = 0; i < visible.Count; i++)
                     {
-                        child?.Measure(constraint);
+                        UIElement child = visible[i];
+
+                        if (child != null)
+                        {
+                            try { child.Measure(constraint); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        }
                     }
                 }
 
@@ -469,7 +481,8 @@ namespace GTweak.Assets.UserControls
                 for (int columnCount = maxPossibleColumns; columnCount >= 1; columnCount--)
                 {
                     List<FlowItemGroup> columns = TryDistributeToColumns(columnCount, availableHeight, visibleChildren);
-                    if (columns != null && CalculateTotalWidth(columns) <= availableWidth && columns.Count > 0)
+
+                    if (columns != null && columns.Count > 0 && CalculateTotalWidth(columns) <= availableWidth)
                     {
                         return columns;
                     }
