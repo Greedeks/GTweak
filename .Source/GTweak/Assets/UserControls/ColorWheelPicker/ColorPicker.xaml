@@ -1,0 +1,142 @@
+<UserControl x:Class="GTweak.Assets.UserControls.ColorWheelPicker.ColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GTweak.Assets.UserControls.ColorWheelPicker"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" IsTabStop="False">
+    <Grid>
+        <ToggleButton x:Name="PART_ToggleButton" Checked="PART_ToggleButton_Checked" Unchecked="PART_ToggleButton_Unchecked">
+            <ToggleButton.Template>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="RootBorder" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_ComboBox}" CornerRadius="4" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter Grid.Column="0" VerticalAlignment="Center"/>
+
+                            <Path x:Name="Arrow" Grid.Column="1" Data="M 0,2 L 4,6 L 8,2" Stroke="{StaticResource Brush_Highlighted}" StrokeThickness="1" Margin="8,0,2,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <Path.RenderTransform>
+                                    <RotateTransform x:Name="ArrowRotate" Angle="0"/>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <DoubleAnimation Storyboard.TargetName="ArrowRotate" Storyboard.TargetProperty="Angle" To="180" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <DoubleAnimation Storyboard.TargetName="ArrowRotate" Storyboard.TargetProperty="Angle" To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </ToggleButton.Template>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse x:Name="PART_ColorPreview" Grid.Column="0" Width="20" Height="20" Stroke="{StaticResource Brush_Separator}" StrokeThickness="2" Margin="0,0,8,0" Fill="White"/>
+
+                <TextBlock x:Name="PART_ColorTextBlock" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted}" Text="255 255 255" MinWidth="80"/>
+            </Grid>
+        </ToggleButton>
+
+        <Popup x:Name="ColorPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Opened="ColorPopup_Opened" Closed="ColorPopup_Closed" VerticalOffset="4">
+            <Border x:Name="PopupBorder" Background="{StaticResource Brush_Background_ComboBox}"  BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="10">
+                <Border.CacheMode>
+                    <BitmapCache RenderAtScale="2" />
+                </Border.CacheMode>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" Opacity="0.15" ShadowDepth="2"/>
+                </Border.Effect>
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="PopupTransform"/>
+                </Border.RenderTransform>
+
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Canvas Grid.Column="0" Width="150" Height="150">
+                            <Rectangle x:Name="PART_Wheel" Width="150" Height="150" Fill="Transparent" MouseDown="ColorWheel_MouseDown" MouseMove="ColorWheel_MouseMove" MouseUp="ColorWheel_MouseUp">
+                                <Rectangle.Effect>
+                                    <local:ColorWheelEffect />
+                                </Rectangle.Effect>
+                                <Rectangle.Clip>
+                                    <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75"/>
+                                </Rectangle.Clip>
+                            </Rectangle>
+
+                            <Grid x:Name="PART_MarkerWheel" Width="14" Height="14" IsHitTestVisible="False">
+                                <Grid.CacheMode>
+                                    <BitmapCache RenderAtScale="2" />
+                                </Grid.CacheMode>
+                                <Grid.Effect>
+                                    <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.6"/>
+                                </Grid.Effect>
+
+                                <Ellipse Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="{StaticResource Brush_Highlighted_Inverted}" StrokeThickness="1.5" Fill="Transparent"/>
+                                <Ellipse Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="{StaticResource Brush_Highlighted}" StrokeThickness="1.5" Fill="Transparent"/>
+                            </Grid>
+                        </Canvas>
+
+                        <Canvas x:Name="PART_ValueCanvas" Grid.Column="2" Width="8" Height="150" MouseDown="ValueCanvas_MouseDown" MouseMove="ValueCanvas_MouseMove" MouseUp="ValueCanvas_MouseUp">
+                            <Rectangle x:Name="PART_ValueBar" Width="8" Height="150" RadiusX="4" RadiusY="4"/>
+
+                            <Grid x:Name="PART_MarkerValue" Width="14" Height="14" IsHitTestVisible="False">
+                                <Grid.CacheMode>
+                                    <BitmapCache RenderAtScale="2" />
+                                </Grid.CacheMode>
+                                <Grid.Effect>
+                                    <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity="0.6"/>
+                                </Grid.Effect>
+
+                                <Ellipse Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="{StaticResource Brush_Highlighted}"  StrokeThickness="1.5" Fill="Transparent"/>
+                                <Ellipse Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="{StaticResource Brush_Highlighted_Inverted}"  StrokeThickness="1.5" Fill="Transparent"/>
+                            </Grid>
+                        </Canvas>
+                    </Grid>
+
+                    <TextBox x:Name="PART_HexBox" Height="30" Margin="0,10,0,0" MaxLength="7" Width="{Binding ElementName=BtnDefault, Path=ActualWidth}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" KeyDown="HexBox_KeyDown" LostFocus="HexBox_LostFocus" TextChanged="HexBox_TextChanged">
+                        <TextBox.Background>
+                            <SolidColorBrush Color="{Binding SelectedColor, RelativeSource={RelativeSource AncestorType=local:ColorPicker}}"/>
+                        </TextBox.Background>
+                    </TextBox>
+
+                    <Button x:Name="BtnDefault" Content="{DynamicResource btn_default}" Style="{StaticResource ButtonContent_Inverted}" Margin="0,10,0,0" HorizontalAlignment="Stretch" Click="BtnDefault_Click"/>
+
+                </StackPanel>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

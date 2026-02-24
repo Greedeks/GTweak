@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Utilities.Animation;
 
-namespace GTweak.Assets.UserControl
+namespace GTweak.Assets.UserControls
 {
     public partial class FileCard
     {

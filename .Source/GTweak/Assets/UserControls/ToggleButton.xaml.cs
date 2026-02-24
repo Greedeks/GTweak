@@ -7,7 +7,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using GTweak.Utilities.Animation;
 
-namespace GTweak.Assets.UserControl
+namespace GTweak.Assets.UserControls
 {
     public partial class ToggleButton
     {

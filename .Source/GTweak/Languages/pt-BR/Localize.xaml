@@ -4,8 +4,9 @@
 
     <v:String x:Key="defaultDescription">Passe o mouse sobre qualquer ajuste para obter sua descrição</v:String>
     <v:String x:Key="defaultDescriptionApp">Passe o mouse sobre o ícone de qualquer aplicativo para ver seu nome</v:String>
-
-	<!--#region Load Window -->
+    <v:String x:Key="btn_default">Padrão</v:String>
+    
+    <!--#region Load Window -->
     <v:String x:Key="title_load">Carregando</v:String>
     <v:String x:Key="step1_load">Carregando perfil</v:String>
     <v:String x:Key="step2_load">Buscando dados</v:String>
@@ -190,8 +191,10 @@
     <!--#endregion-->
 
     <!--#region Interface Page -->
-    <v:String x:Key="tgl1_intf">Seleção de cor padrão do cursor</v:String>
-    <v:String x:Key="tgl2_intf">Cor padrão da dica de ferramenta</v:String>
+    <v:String x:Key="color1_intf">Cor de seleção do cursor:</v:String>
+    <v:String x:Key="color2_intf">Cor da dica de ferramenta:</v:String>
+    <v:String x:Key="tgl1_intf">Exibição de extensões de arquivo no explorador</v:String>
+    <v:String x:Key="tgl2_intf">Mudanças espontâneas de brilho</v:String>
     <v:String x:Key="tgl3_intf">Tamanho padrão dos botões do sistema</v:String>
     <v:String x:Key="tgl4_intf">Frequência de piscar padrão do cursor</v:String>
     <v:String x:Key="tgl5_intf">Tamanho padrão da barra de rolagem</v:String>
@@ -222,11 +225,11 @@
     <v:String x:Key="tgl30_intf">Dicas de ferramentas para elementos da área de trabalho</v:String>
     <v:String x:Key="tgl31_intf">Pesquisa com "Bing" integrada ao menu Iniciar</v:String>
     <v:String x:Key="tgl32_intf">Abrir "Acesso rápido" em vez de "Este Computador"</v:String>
-    <v:String x:Key="tgl33_intf">Exibição de extensões de arquivo no explorador</v:String>
-    <v:String x:Key="tgl34_intf">Mudanças espontâneas de brilho</v:String>
-    
-    <v:String x:Key="tgl1_desc_intf">Mudará a cor da seleção do cursor de azul para cinza "asfalto molhado".</v:String>
-    <v:String x:Key="tgl2_desc_intf">Mudará a cor da dica de ferramenta em alguns programas de amarelo para azul claro "azure".</v:String>
+
+    <v:String x:Key="color1_desc_intf">Ajusta a cor de fundo ao selecionar texto ou objetos com o cursor.</v:String>
+    <v:String x:Key="color2_desc_intf">Ajusta a cor das dicas de ferramenta (tooltip) em aplicativos compatíveis.</v:String>
+    <v:String x:Key="tgl1_desc_intf">Por padrão, o Windows oculta as extensões de arquivo, o que torna a visualização do Explorador de Arquivos menos confusa. Se necessário, você pode ativar a exibição de extensões de arquivo usando este ajuste, economizando o tempo gasto na pesquisa. Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="tgl2_desc_intf">Em alguns dispositivos, o brilho da tela pode mudar espontaneamente dependendo do conteúdo exibido. Se desligar o HDR, o brilho dinâmico e as configurações de energia não resolverem o problema (comum em laptops na bateria), você pode tentar este ajuste — ele desativa forçadamente o ajuste automático de brilho no nível do sistema. O controle de brilho manual permanece disponível.</v:String>
     <v:String x:Key="tgl3_desc_intf">Um ajuste reduz o tamanho dos botões Minimizar, Maximizar e Fechar, tornando-os menos volumosos. Ele ajusta o tamanho para todas as janelas, incluindo o Explorador de Arquivos, Fotos, navegadores e outros programas familiares.</v:String>
     <v:String x:Key="tgl4_desc_intf">Um ajuste aumenta a frequência de piscar do cursor de texto. Por padrão, o cursor pisca a cada 530 milissegundos.</v:String>
     <v:String x:Key="tgl5_desc_intf">Um ajuste reduz a espessura das barras de rolagem em aplicativos clássicos do Windows, incluindo o Explorador de Arquivos, navegadores e outros programas legados. No entanto, não afeta as interfaces modernas, pois elas utilizam seus próprios elementos de controle independentes das configurações do sistema.</v:String>
@@ -257,8 +260,6 @@
     <v:String x:Key="tgl30_desc_intf">O ajuste desativará as dicas de ferramentas para elementos da área de trabalho ao passar o cursor do mouse.</v:String>
     <v:String x:Key="tgl31_desc_intf">Por padrão, o Windows envia tudo o que você pesquisa no menu "Iniciar" para seus servidores para fornecer resultados de pesquisa do Bing. Se você não precisa da integração do Bing no menu "Iniciar", pode aplicar um ajuste para desativar a pesquisa na web. Atenção, a tela pode piscar.</v:String>
     <v:String x:Key="tgl32_desc_intf">Por padrão, ao abrir o Explorador, a primeira guia será "Acesso rápido". E para abrir qualquer disco, você precisa fazer movimentos desnecessários. Este ajuste fará com que "Este Computador" seja aberto ao ser aberto, em vez de "Acesso rápido".</v:String>
-    <v:String x:Key="tgl33_desc_intf">Por padrão, o Windows oculta as extensões de arquivo, o que torna a visualização do Explorador de Arquivos menos confusa. Se necessário, você pode ativar a exibição de extensões de arquivo usando este ajuste, economizando o tempo gasto na pesquisa. Atenção, a tela pode piscar.</v:String>
-    <v:String x:Key="tgl34_desc_intf">Em alguns dispositivos, o brilho da tela pode mudar espontaneamente dependendo do conteúdo exibido. Se desligar o HDR, o brilho dinâmico e as configurações de energia não resolverem o problema (comum em laptops na bateria), você pode tentar este ajuste — ele desativa forçadamente o ajuste automático de brilho no nível do sistema. O controle de brilho manual permanece disponível.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
@@ -515,6 +516,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

@@ -128,18 +128,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Assets\UserControl\Card.xaml.cs">
+    <Compile Include="Assets\UserControls\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControl\ColorWheelPicker\ColorPicker.xaml.cs">
+    <Compile Include="Assets\UserControls\ColorWheelPicker\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControl\ColorWheelPicker\ColorWheelEffect.cs" />
-    <Compile Include="Assets\UserControl\DescriptionBlock.xaml.cs">
+    <Compile Include="Assets\UserControls\ColorWheelPicker\ColorWheelEffect.cs" />
+    <Compile Include="Assets\UserControls\DescriptionBlock.xaml.cs">
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControl\FlowPanel.cs" />
-    <Compile Include="Assets\UserControl\FileCard.xaml.cs">
+    <Compile Include="Assets\UserControls\FlowPanel.cs" />
+    <Compile Include="Assets\UserControls\FileCard.xaml.cs">
       <DependentUpon>FileCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
@@ -238,23 +238,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\UserControl\Card.xaml">
+    <Page Include="Assets\UserControls\Card.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\UserControl\ColorWheelPicker\ColorPicker.xaml">
+    <Page Include="Assets\UserControls\ColorWheelPicker\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\UserControl\DescriptionBlock.xaml">
+    <Page Include="Assets\UserControls\DescriptionBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\UserControl\FileCard.xaml">
+    <Page Include="Assets\UserControls\FileCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\UserControl\ToggleButton.xaml">
+    <Page Include="Assets\UserControls\ToggleButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -406,7 +406,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Assets\UserControl\ToggleButton.xaml.cs">
+    <Compile Include="Assets\UserControls\ToggleButton.xaml.cs">
       <DependentUpon>ToggleButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Model\MainWinModel.cs" />
@@ -487,7 +487,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include=".editorconfig" />
-    <Resource Include="Assets\UserControl\ColorWheelPicker\ColorWheelEffect.ps" />
+    <Resource Include="Assets\UserControls\ColorWheelPicker\ColorWheelEffect.ps" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\DisablingWD.gz" />
     <None Include="Resources\hosts.gz" />

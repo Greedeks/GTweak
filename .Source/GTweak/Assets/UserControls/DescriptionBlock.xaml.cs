@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Controls;
 
-namespace GTweak.Assets.UserControl
+namespace GTweak.Assets.UserControls
 {
     public partial class DescriptionBlock
     {

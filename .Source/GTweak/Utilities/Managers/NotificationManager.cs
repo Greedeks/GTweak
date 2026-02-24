@@ -20,8 +20,7 @@ namespace GTweak.Utilities.Managers
 
         internal static readonly Dictionary<string, NoticeAction> IntfActions = new Dictionary<string, NoticeAction>()
         {
-            ["TglButton1"] = NoticeAction.Logout,
-            ["TglButton2"] = NoticeAction.Logout,
+            ["TglButton2"] = NoticeAction.Restart,
             ["TglButton3"] = NoticeAction.Logout,
             ["TglButton4"] = NoticeAction.Logout,
             ["TglButton5"] = NoticeAction.Logout,
@@ -31,7 +30,6 @@ namespace GTweak.Utilities.Managers
             ["TglButton20"] = NoticeAction.Restart,
             ["TglButton22"] = NoticeAction.Logout,
             ["TglButton23"] = NoticeAction.Restart,
-            ["TglButton34"] = NoticeAction.Restart
         };
 
         internal static readonly Dictionary<string, NoticeAction> SysActions = new Dictionary<string, NoticeAction>()

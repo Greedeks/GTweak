@@ -4,7 +4,8 @@
 
     <v:String x:Key="defaultDescription">Survolez une modification avec votre souris pour obtenir sa description</v:String>
     <v:String x:Key="defaultDescriptionApp">Survolez l'icône d'une application pour voir son nom</v:String>
-
+    <v:String x:Key="btn_default">Par défaut</v:String>
+    
     <!--#region Load Window -->
     <v:String x:Key="title_load">Chargement</v:String>
     <v:String x:Key="step1_load">Téléversement du profil</v:String>
@@ -190,8 +191,10 @@
     <!--#endregion-->
 
     <!--#region Interface Page -->
-    <v:String x:Key="tgl1_intf">Sélection de la couleur standard du curseur</v:String>
-    <v:String x:Key="tgl2_intf">Couleur standard de l’infobulle</v:String>
+    <v:String x:Key="color1_intf">Couleur de sélection au curseur :</v:String>
+    <v:String x:Key="color2_intf">Couleur de l'infobulle :</v:String>
+    <v:String x:Key="tgl1_intf">Afficher les extensions de fichiers dans l’explorateur</v:String>
+    <v:String x:Key="tgl2_intf">Changements de luminosité spontanés</v:String>
     <v:String x:Key="tgl3_intf">Taille standard des boutons système</v:String>
     <v:String x:Key="tgl4_intf">Fréquence de clignotement standard du curseur</v:String>
     <v:String x:Key="tgl5_intf">Taille standard de la barre de défilement</v:String>
@@ -222,11 +225,11 @@
     <v:String x:Key="tgl30_intf">Infobulles pour les éléments du Bureau</v:String>
     <v:String x:Key="tgl31_intf">Recherche intégrée à Bing dans le menu Démarrer</v:String>
     <v:String x:Key="tgl32_intf">Ouvrir « Accès rapide » au lieu de « Ce PC »</v:String>
-    <v:String x:Key="tgl33_intf">Afficher les extensions de fichiers dans l’explorateur</v:String>
-    <v:String x:Key="tgl34_intf">Changements de luminosité spontanés</v:String>
 
-    <v:String x:Key="tgl1_desc_intf">Change la couleur de la sélection du curseur de bleu à gris « bitume mouillé ».</v:String>
-    <v:String x:Key="tgl2_desc_intf">Change la couleur de l’infobulle dans certains programmes du jaune au bleu clair « azur ».</v:String>
+    <v:String x:Key="color1_desc_intf">Personnaliser la couleur de fond lors de la sélection de texte ou d'objets avec le curseur.</v:String>
+    <v:String x:Key="color2_desc_intf">Personnaliser la couleur des infobulles (tooltip) dans les applications prises en charge.</v:String>
+    <v:String x:Key="tgl1_desc_intf">Par défaut, Windows cache les extensions des fichiers. Ce tweak affiche les extensions dans l’explorateur, ce qui évite de les chercher. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="tgl2_desc_intf">Sur certains appareils, la luminosité de l'écran peut changer spontanément en fonction du contenu affiché. Si la désactivation du HDR, de la luminosité dynamique et des paramètres d'alimentation ne résот pas le problème, vous pouvez essayer ce tweak — il désactive de force le réglage automatique de la luminosité au niveau du système. Le contrôle manuel reste disponible.</v:String>
     <v:String x:Key="tgl3_desc_intf">Réduit la taille des boutons Réduire, Agrandir et Fermer, les rendant moins volumineux. Redimensionne toutes les fenêtres, y compris l’Explorateur, Windows Photos, navigateurs et autres programmes connus.</v:String>
     <v:String x:Key="tgl4_desc_intf">Accélère la fréquence de clignotement du curseur texte. Par défaut, elle est de 530 millisecondes.</v:String>
     <v:String x:Key="tgl5_desc_intf">Rend la largeur de la barre de défilement plus fine dans les fenêtres, y compris navigateurs et programmes. Sauf pour les interfaces modernes des applications.</v:String>
@@ -257,8 +260,6 @@
     <v:String x:Key="tgl30_desc_intf">Désactive les infobulles pour les éléments du bureau au survol du curseur.</v:String>
     <v:String x:Key="tgl31_desc_intf">Windows envoie par défaut toutes vos recherches dans le menu Démarrer à ses serveurs pour Bing. Ce tweak désactive la recherche web. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="tgl32_desc_intf">Par défaut, l’Explorateur s’ouvre sur « Accès rapide ». Ce tweak l’ouvre sur « Ce PC » à la place.</v:String>
-    <v:String x:Key="tgl33_desc_intf">Par défaut, Windows cache les extensions des fichiers. Ce tweak affiche les extensions dans l’explorateur, ce qui évite de les chercher. Attention, l’écran peut clignoter.</v:String>
-    <v:String x:Key="tgl34_desc_intf">Sur certains appareils, la luminosité de l'écran peut changer spontanément en fonction du contenu affiché. Si la désactivation du HDR, de la luminosité dynamique et des paramètres d'alimentation ne résот pas le problème, vous pouvez essayer ce tweak — il désactive de force le réglage automatique de la luminosité au niveau du système. Le contrôle manuel reste disponible.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

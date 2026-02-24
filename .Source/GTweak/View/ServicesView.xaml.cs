@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using GTweak.Assets.UserControl;
+using GTweak.Assets.UserControls;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 

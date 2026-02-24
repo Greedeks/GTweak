@@ -140,7 +140,14 @@ namespace GTweak.Windows
                         var (Section, TweakAction, NoticeActions, ExplorerMapping) =
                             allSections.First(s => s.Section == section);
 
-                        TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
+                        if (section == INIManager.SectionIntf && tweak.StartsWith("ColorPicker"))
+                        {
+                            _intfTweaks.ApplyTweaksColor(tweak, value);
+                        }
+                        else
+                        {
+                            TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
+                        }
 
                         if (NoticeActions != null)
                         {

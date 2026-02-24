@@ -1,9 +1,9 @@
-<UserControl x:Class="GTweak.Assets.UserControl.FileCard"
+<UserControl x:Class="GTweak.Assets.UserControls.FileCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:GTweak.Assets.UserControl"
+             xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d"
              d:Height="Auto" d:Width="Auto" IsTabStop="False" KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True"
              UseLayoutRounding="True" Cursor="Hand" MaxWidth="200" >

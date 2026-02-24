@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 
-namespace GTweak.Assets.UserControl
+namespace GTweak.Assets.UserControls
 {
     public partial class Card
     {

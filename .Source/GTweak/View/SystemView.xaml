@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel"  
-             xmlns:uc="clr-namespace:GTweak.Assets.UserControl"
+             xmlns:uc="clr-namespace:GTweak.Assets.UserControls"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:GTweak.View"
              mc:Ignorable="d" d:Width="1014" Style="{StaticResource LaunchPage}">
@@ -52,7 +52,6 @@
                         <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" Margin="0,20,0,0" TextResource="{DynamicResource tgl1_sys}" Description="{DynamicResource tgl1_desc_sys}" />
                         <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton2].State}" Margin="0,20,0,0" TextResource="{DynamicResource tgl2_sys}" Description="{DynamicResource tgl2_desc_sys}" />
                     </StackPanel>
-                    
                     
                     <uc:ToggleButton x:Name="TglButton3" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton3].State}" TextResource="{DynamicResource tgl3_sys}" Description="{DynamicResource tgl3_desc_sys}" />
                     <uc:ToggleButton x:Name="TglButton4" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton4].State}" TextResource="{DynamicResource tgl4_sys}" Description="{DynamicResource tgl4_desc_sys}" />

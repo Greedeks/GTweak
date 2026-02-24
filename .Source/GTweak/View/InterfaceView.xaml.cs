@@ -1,7 +1,10 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using GTweak.Assets.UserControl;
+using System.Windows.Media;
+using GTweak.Assets.UserControls;
+using GTweak.Assets.UserControls.ColorWheelPicker;
 using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
@@ -22,18 +25,36 @@ namespace GTweak.View
             }
         }
 
-
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            string description = ((ToggleButton)sender!).Description?.ToString() ?? string.Empty;
+            string description = string.Empty;
+
+            switch (sender)
+            {
+                case StackPanel panel:
+                    description = panel.ToolTip?.ToString() ?? string.Empty;
+                    break;
+                case ToggleButton toggle:
+                    description = toggle.Description?.ToString() ?? string.Empty;
+                    break;
+                default:
+                    break;
+            }
 
             if (DescBlock.Text != description)
             {
                 DescBlock.Text = description;
             }
         }
-
         private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
+
+        private void ColorPicker_ColorPicked(object sender, Color e)
+        {
+            ColorPicker colorPicker = (ColorPicker)sender;
+            _intfTweaks.ApplyTweaksColor(colorPicker.Name, colorPicker.SelectedColorString);
+        }
+
+        private void ColorPicker_PickerClosed(object sender, EventArgs e) => NotificationManager.Show().WithDelay(300).Logout();
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {

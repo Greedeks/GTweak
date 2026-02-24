@@ -18,14 +18,16 @@ namespace GTweak.Utilities.Tweaks
 
         internal void AnalyzeAndUpdate()
         {
+            _сontrolWriter.ColorPicker[1] = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "Hilight", "0 120 215");
+
+            _сontrolWriter.ColorPicker[2] = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "InfoWindow", "255 255 225");
+
             _сontrolWriter.Button[1] =
-                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "Hilight", "80 80 80") ||
-                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "HotTrackingColor", "80 80 80");
+                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "1");
 
             _сontrolWriter.Button[2] =
-                RegistryHelp.CheckValue(@"HKEY_USERS\.DEFAULT\Control Panel\Colors", "InfoWindow", "240 255 255") ||
-                RegistryHelp.CheckValue(@"HKEY_USERS\S-1-5-19\Control Panel\Colors", "InfoWindow", "240 255 255") ||
-                RegistryHelp.CheckValue(@"HKEY_USERS\S-1-5-20\Control Panel\Colors", "InfoWindow", "240 255 255");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", "1") ||
+                (HardwareData.OS.Build >= 22000m && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption", "0"));
 
             _сontrolWriter.Button[3] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "CaptionHeight", "-270") ||
@@ -176,13 +178,26 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[32] =
                 HardwareData.OS.IsWin11 && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", "1") ||
                 HardwareData.OS.IsWin10 && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", "1");
+        }
 
-            _сontrolWriter.Button[33] =
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "1");
+        internal void ApplyTweaksColor(string tweak, string value)
+        {
+            INIManager.TempWrite(INIManager.TempTweaksIntf, tweak, value);
 
-            _сontrolWriter.Button[34] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", "1") ||
-                (HardwareData.OS.Build >= 22000m && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption", "0"));
+            switch (tweak)
+            {
+                case "ColorPicker1":
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "Hilight", value, RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "HotTrackingColor", value == "0 120 215" ? "0 102 204" : value, RegistryValueKind.String);
+                    break;
+                case "ColorPicker2":
+                    RegistryHelp.Write(Registry.Users, @".DEFAULT\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.Users, @"S-1-5-19\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.Users, @"S-1-5-20\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
+                    break;
+                default:
+                    break;
+            }
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -192,13 +207,25 @@ namespace GTweak.Utilities.Tweaks
             switch (tweak)
             {
                 case "TglButton1":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "Hilight", isDisabled ? "80 80 80" : "0 120 215", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Colors", "HotTrackingColor", isDisabled ? "80 80 80" : "0 102 204", RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", isDisabled ? 1 : 0, RegistryValueKind.DWord);
                     break;
                 case "TglButton2":
-                    RegistryHelp.Write(Registry.Users, @".DEFAULT\Control Panel\Colors", "InfoWindow", isDisabled ? "240 255 255" : "255 255 255", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.Users, @"S-1-5-19\Control Panel\Colors", "InfoWindow", isDisabled ? "240 255 255" : "255 255 255", RegistryValueKind.String);
-                    RegistryHelp.Write(Registry.Users, @"S-1-5-20\Control Panel\Colors", "InfoWindow", isDisabled ? "240 255 255" : "255 255 255", RegistryValueKind.String);
+                    if (isDisabled)
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", 1, RegistryValueKind.DWord);
+                        if (HardwareData.OS.Build >= 22000m)
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption", 0, RegistryValueKind.DWord);
+                        }
+                    }
+                    else
+                    {
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC");
+                        if (HardwareData.OS.Build >= 22000m)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption");
+                        }
+                    }
                     break;
                 case "TglButton3":
                     RegistryHelp.Write(Registry.CurrentUser, @"Control Panel\Desktop\WindowMetrics", "CaptionHeight", isDisabled ? "-270" : "-330", RegistryValueKind.String);
@@ -609,27 +636,6 @@ namespace GTweak.Utilities.Tweaks
                         else if (HardwareData.OS.IsWin10)
                         {
                             RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo");
-                        }
-                    }
-                    break;
-                case "TglButton33":
-                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", isDisabled ? 1 : 0, RegistryValueKind.DWord);
-                    break;
-                case "TglButton34":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", 1, RegistryValueKind.DWord);
-                        if (HardwareData.OS.Build >= 22000m)
-                        {
-                            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption", 0, RegistryValueKind.DWord);
-                        }
-                    }
-                    else
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC");
-                        if (HardwareData.OS.Build >= 22000m)
-                        {
-                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "CABCOption");
                         }
                     }
                     break;

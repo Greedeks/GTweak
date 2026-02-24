@@ -4,7 +4,8 @@
 
     <v:String x:Key="defaultDescription">Passa il mouse su una modifica per visualizzarne la descrizione</v:String>
     <v:String x:Key="defaultDescriptionApp">Passa il mouse sull'icona di un'applicazione per vedere il suo nome</v:String>
-
+    <v:String x:Key="btn_default">Predefinito</v:String>
+    
     <!--#region Load Window -->
     <v:String x:Key="title_load">Caricamento</v:String>
     <v:String x:Key="step1_load">Caricamento del profilo</v:String>
@@ -190,8 +191,10 @@
     <!--#endregion-->
 
     <!--#region Interface Page -->
-    <v:String x:Key="tgl1_intf">Selezione del colore standard del cursore</v:String>
-    <v:String x:Key="tgl2_intf">Colore standard della descrizione comandi (tooltip)</v:String>
+    <v:String x:Key="color1_intf">Colore selezione cursore:</v:String>
+    <v:String x:Key="color2_intf">Colore suggerimento:</v:String>
+    <v:String x:Key="tgl1_intf">Visualizza estensioni dei file in Esplora risorse</v:String>
+    <v:String x:Key="tgl2_intf">Cambiamenti improvvisi di luminosità</v:String>
     <v:String x:Key="tgl3_intf">Dimensione standard dei pulsanti di sistema</v:String>
     <v:String x:Key="tgl4_intf">Frequenza standard del lampeggio del cursore</v:String>
     <v:String x:Key="tgl5_intf">Dimensione standard della barra di scorrimento</v:String>
@@ -222,11 +225,11 @@
     <v:String x:Key="tgl30_intf">Descrizioni comandi per gli elementi sul desktop</v:String>
     <v:String x:Key="tgl31_intf">Query di ricerca con integrazione «Bing» nel menu Start</v:String>
     <v:String x:Key="tgl32_intf">Apri «Accesso rapido» invece di «Questo PC»</v:String>
-    <v:String x:Key="tgl33_intf">Visualizza estensioni dei file in Esplora risorse</v:String>
-    <v:String x:Key="tgl34_intf">Cambiamenti improvvisi di luminosità</v:String>
 
-    <v:String x:Key="tgl1_desc_intf">Modifica il colore della selezione del cursore da blu a grigio tipo «asfalto bagnato».</v:String>
-    <v:String x:Key="tgl2_desc_intf">Cambia il colore delle descrizioni comandi in alcuni programmi da giallo ad azzurro chiaro tipo «azzurro cielo».</v:String>
+    <v:String x:Key="color1_desc_intf">Configura il colore di sfondo durante la selezione di testo o oggetti con il cursore.</v:String>
+    <v:String x:Key="color2_desc_intf">Configura il colore dei suggerimenti (tooltip) nelle applicazioni supportate.</v:String>
+    <v:String x:Key="tgl1_desc_intf">Mostra le estensioni dei file in Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl2_desc_intf">Su alcuni dispositivi, la luminosità dello schermo può cambiare spontaneamente a seconda del contenuto visualizzato. Se la disattivazione dell'HDR, della luminosità dinamica e delle impostazioni di risparmio energetico non risolve il problema (comune sui laptop alimentati a batteria), puoi provare questo tweak: forza la disattivazione della regolazione automatica della luminosità a livello di sistema. Il controllo manuale rimane disponibile.</v:String>
     <v:String x:Key="tgl3_desc_intf">Riduce la dimensione dei pulsanti di Riduzione, Ingrandimento e Chiusura, rendendoli meno ingombranti. Si applica a tutte le finestre, incluso Esplora risorse, Foto, browser e altri programmi.</v:String>
     <v:String x:Key="tgl4_desc_intf">Aumenta la frequenza di lampeggio del cursore di testo. Per impostazione predefinita, lampeggia ogni 530 millisecondi.</v:String>
     <v:String x:Key="tgl5_desc_intf">Rende più sottile lo spessore delle barre di scorrimento in finestre, browser e programmi (escluse le app moderne).</v:String>
@@ -257,8 +260,6 @@
     <v:String x:Key="tgl30_desc_intf">Disattiva le descrizioni comandi (tooltip) per gli elementi sul desktop quando ci si passa sopra con il mouse.</v:String>
     <v:String x:Key="tgl31_desc_intf">Disattiva l’invio delle ricerche effettuate nel menu Start ai server Microsoft per la ricerca Bing. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
     <v:String x:Key="tgl32_desc_intf">Fa sì che Esplora risorse si apra su «Questo PC» anziché su «Accesso rapido».</v:String>
-    <v:String x:Key="tgl33_desc_intf">Mostra le estensioni dei file in Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="tgl34_desc_intf">Su alcuni dispositivi, la luminosità dello schermo può cambiare spontaneamente a seconda del contenuto visualizzato. Se la disattivazione dell'HDR, della luminosità dinamica e delle impostazioni di risparmio energetico non risolve il problema (comune sui laptop alimentati a batteria), puoi provare questo tweak: forza la disattivazione della regolazione automatica della luminosità a livello di sistema. Il controllo manuale rimane disponibile.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

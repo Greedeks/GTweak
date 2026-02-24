@@ -4,7 +4,8 @@
 
     <v:String x:Key="defaultDescription">將滑鼠懸停在任何微調項目上即可查看其說明</v:String>
     <v:String x:Key="defaultDescriptionApp">將滑鼠懸停在任何應用程式的圖示上，即可查看其名稱</v:String>
-
+    <v:String x:Key="btn_default">預設</v:String>
+    
     <!--#region Load Window -->
     <v:String x:Key="title_load">載入中</v:String>
     <v:String x:Key="step1_load">載入個人資料</v:String>
@@ -190,8 +191,10 @@
     <!--#endregion-->
 
     <!--#region Interface Page -->
-    <v:String x:Key="tgl1_intf">標準游標顏色選項</v:String>
-    <v:String x:Key="tgl2_intf">標準工具提示顏色</v:String>
+    <v:String x:Key="color1_intf">游標選取顏色：</v:String>
+    <v:String x:Key="color2_intf">工具提示顏色：</v:String>
+    <v:String x:Key="tgl1_intf">檔案總管中顯示副檔名</v:String>
+    <v:String x:Key="tgl2_intf">亮度異常變化</v:String>
     <v:String x:Key="tgl3_intf">系統按鈕標準尺寸</v:String>
     <v:String x:Key="tgl4_intf">標準游標閃爍頻率</v:String>
     <v:String x:Key="tgl5_intf">標準捲動列尺寸</v:String>
@@ -222,11 +225,11 @@
     <v:String x:Key="tgl30_intf">桌面元素工具提示</v:String>
     <v:String x:Key="tgl31_intf">開始功能表中整合"Bing"的搜尋查詢</v:String>
     <v:String x:Key="tgl32_intf">開啟"快速存取"而非"本機"</v:String>
-    <v:String x:Key="tgl33_intf">檔案總管中顯示副檔名</v:String>
-    <v:String x:Key="tgl34_intf">亮度異常變化</v:String>
 
-    <v:String x:Key="tgl1_desc_intf">將游標選取的顏色從藍色變更為灰色"濕瀝青"。</v:String>
-    <v:String x:Key="tgl2_desc_intf">將某些程式的工具提示顏色從黃色變更為淺藍色"蔚藍"。</v:String>
+    <v:String x:Key="color1_desc_intf">設定使用游標選取文字或物件時的背景顏色。</v:String>
+    <v:String x:Key="color2_desc_intf">設定受支援應用程式中工具提示（tooltip）的顏色。</v:String>
+    <v:String x:Key="tgl1_desc_intf">預設情況下，Windows 會隱藏檔案副檔名，使檔案總管介面更簡潔。若需顯示副檔名，可透過此調整功能啟用，節省搜尋時間。注意：螢幕可能閃爍。</v:String>
+    <v:String x:Key="tgl2_desc_intf">部分裝置的螢幕亮度可能隨顯示內容自動變化。若關閉 HDR、動態亮度及電源設定仍無法解決問題（此狀況在電池供電的筆記型電腦上尤為常見），可嘗試此調整項——它將在系統層級強制停用自動亮度調節功能。手動亮度控制功能仍可正常使用。</v:String>
     <v:String x:Key="tgl3_desc_intf">此調整會縮小最小化、最大化及關閉按鈕的尺寸，使其更為精簡。此設定將套用至所有視窗，包含檔案總管、相片、瀏覽器及其他常用程式。</v:String>
     <v:String x:Key="tgl4_desc_intf">此調整會提高文字游標的閃爍頻率。預設情況下，游標每 530 毫秒閃爍一次。</v:String>
     <v:String x:Key="tgl5_desc_intf">此調整功能可降低經典 Windows 應用程式（包含檔案總管、瀏覽器及其他舊版程式）中捲動列的粗細。但此設定不影響現代化介面，因其採用獨立於系統設定的專屬控制元件。</v:String>
@@ -257,8 +260,6 @@
     <v:String x:Key="tgl30_desc_intf">此調整將停用滑鼠懸停於桌面元素時的工具提示功能。</v:String>
     <v:String x:Key="tgl31_desc_intf">預設情況下，Windows 會將您在"開始"功能表中的所有搜尋內容傳送至其伺服器，以提供 Bing 搜尋結果。若您不需要"開始"功能表整合 Bing 功能，可透過調整設定停用網頁搜尋。請注意畫面可能閃爍。</v:String>
     <v:String x:Key="tgl32_desc_intf">預設情況下，開啟檔案總管時，第一個標籤頁會顯示"快速存取"。若要開啟任何磁碟機，則需進行多餘的操作。此調整將使開啟檔案總管時預設顯示"本機"而非"快速存取"。</v:String>
-    <v:String x:Key="tgl33_desc_intf">預設情況下，Windows 會隱藏檔案副檔名，使檔案總管介面更簡潔。若需顯示副檔名，可透過此調整功能啟用，節省搜尋時間。注意：螢幕可能閃爍。</v:String>
-    <v:String x:Key="tgl34_desc_intf">部分裝置的螢幕亮度可能隨顯示內容自動變化。若關閉 HDR、動態亮度及電源設定仍無法解決問題（此狀況在電池供電的筆記型電腦上尤為常見），可嘗試此調整項——它將在系統層級強制停用自動亮度調節功能。手動亮度控制功能仍可正常使用。</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
