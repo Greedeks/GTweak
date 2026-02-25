@@ -64,12 +64,17 @@ namespace GTweak.Assets.UserControls
         internal object TextResource
         {
             get => (string)GetValue(TextProperty);
-            set => ApplyResource(value, TextProperty, TextBlock.TextProperty, ToggleText);
+            set
+            {
+                if (value != null)
+                {
+                    ApplyResource(value, TextProperty, TextBlock.TextProperty, ToggleText);
+                }
+            }
         }
 
         private static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => ((ToggleButton)s).ToggleText.Text = (string)e.NewValue));
-
+            DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => { if (s is ToggleButton btn && btn.ToggleText != null) { btn.ToggleText.Text = e.NewValue as string; } }));
 
         /// <summary>
         /// Sets the description text for the ToggleButton. Can be assigned from a DynamicResource, StaticResource, or directly as a string.
@@ -77,7 +82,13 @@ namespace GTweak.Assets.UserControls
         internal object Description
         {
             get => GetValue(DescriptionProperty);
-            set => ApplyResource(value, DescriptionProperty);
+            set
+            {
+                if (value != null)
+                {
+                    ApplyResource(value, DescriptionProperty);
+                }
+            }
         }
 
         private static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(nameof(Description), typeof(object), typeof(ToggleButton), new PropertyMetadata(null));
@@ -99,28 +110,34 @@ namespace GTweak.Assets.UserControls
 
         private void ApplyResource(object value, DependencyProperty dp, DependencyProperty textProperty = null, FrameworkElement target = null)
         {
-            if (dp != null || target != null)
+            if (value != null && (dp != null || target != null))
             {
                 switch (value)
                 {
                     case DynamicResourceExtension dynamicResource:
-                        if (target != null && textProperty != null)
+                        if (dynamicResource.ResourceKey != null)
                         {
-                            target.SetResourceReference(textProperty, dynamicResource.ResourceKey);
-                        }
-                        else if (dp != null)
-                        {
-                            SetResourceReference(dp, dynamicResource.ResourceKey);
+                            if (target != null && textProperty != null)
+                            {
+                                target.SetResourceReference(textProperty, dynamicResource.ResourceKey);
+                            }
+                            else if (dp != null)
+                            {
+                                SetResourceReference(dp, dynamicResource.ResourceKey);
+                            }
                         }
                         break;
                     case StaticResourceExtension staticResource:
-                        if (target != null && textProperty != null)
+                        if (staticResource.ResourceKey != null)
                         {
-                            target.SetResourceReference(textProperty, staticResource.ResourceKey);
-                        }
-                        else if (dp != null)
-                        {
-                            SetResourceReference(dp, staticResource.ResourceKey);
+                            if (target != null && textProperty != null)
+                            {
+                                target.SetResourceReference(textProperty, staticResource.ResourceKey);
+                            }
+                            else if (dp != null)
+                            {
+                                SetResourceReference(dp, staticResource.ResourceKey);
+                            }
                         }
                         break;
                     default:
@@ -137,26 +154,28 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-
         private void ToggleButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue is bool newBool && !newBool)
+            if (Back != null && Dot != null && ToggleText != null)
             {
-                Back.Opacity = 0.7;
-                Dot.Opacity = 0.7;
-                ToggleText.Opacity = 0.7;
-            }
-            else
-            {
-                Back.Opacity = 1.0;
-                Dot.Opacity = 1.0;
-                ToggleText.Opacity = 1.0;
+                if (e.NewValue is bool newBool && !newBool)
+                {
+                    Back.Opacity = 0.7;
+                    Dot.Opacity = 0.7;
+                    ToggleText.Opacity = 0.7;
+                }
+                else
+                {
+                    Back.Opacity = 1.0;
+                    Dot.Opacity = 1.0;
+                    ToggleText.Opacity = 1.0;
+                }
             }
         }
 
         private void Toggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (IsEnabled || sender.GetType() != typeof(TextBlock))
+            if (IsEnabled || sender?.GetType() != typeof(TextBlock))
             {
                 RaiseEvent(new RoutedEventArgs(ChangedStateEvent));
                 State = !_state;
@@ -183,7 +202,7 @@ namespace GTweak.Assets.UserControls
                 EasingFunction = new QuadraticEase()
             });
             Timeline.SetDesiredFrameRate(marginAnimation, 120);
-            Dot.BeginAnimation(MarginProperty, marginAnimation);
+            Dot?.BeginAnimation(MarginProperty, marginAnimation);
 
             BrushAnimation brushAnimation = new BrushAnimation
             {
@@ -192,7 +211,7 @@ namespace GTweak.Assets.UserControls
                 Duration = skipAnimation ? TimeSpan.Zero : TimeSpan.FromMilliseconds(100)
             };
             Timeline.SetDesiredFrameRate(brushAnimation, 120);
-            Back.BeginAnimation(Shape.FillProperty, brushAnimation);
+            Back?.BeginAnimation(Shape.FillProperty, brushAnimation);
 
             BrushAnimation borderAnimation = new BrushAnimation
             {
@@ -201,8 +220,7 @@ namespace GTweak.Assets.UserControls
                 Duration = skipAnimation ? TimeSpan.Zero : TimeSpan.FromMilliseconds(100)
             };
             Timeline.SetDesiredFrameRate(borderAnimation, 120);
-            Back.BeginAnimation(Shape.StrokeProperty, borderAnimation);
-
+            Back?.BeginAnimation(Shape.StrokeProperty, borderAnimation);
 
             ColorAnimation dotColorAnimation = new ColorAnimation
             {
@@ -211,14 +229,21 @@ namespace GTweak.Assets.UserControls
                 EasingFunction = new QuadraticEase()
             };
             Timeline.SetDesiredFrameRate(dotColorAnimation, 120);
-            ((SolidColorBrush)Dot.Fill).BeginAnimation(SolidColorBrush.ColorProperty, dotColorAnimation);
 
-            ToggleText.Style = (Style)FindResource(textStyle);
+            if (Dot?.Fill is SolidColorBrush solidColorBrush)
+            {
+                solidColorBrush.BeginAnimation(SolidColorBrush.ColorProperty, dotColorAnimation);
+            }
+
+            if (ToggleText != null && TryFindResource(textStyle) is Style foundStyle)
+            {
+                ToggleText.Style = foundStyle;
+            }
         }
 
         private void Toggle_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (IsEnabled)
+            if (IsEnabled && DotScale != null)
             {
                 DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, useCubicEase: true));
                 DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, useCubicEase: true));
@@ -227,12 +252,11 @@ namespace GTweak.Assets.UserControls
 
         private void Toggle_MouseLeave(object sender, MouseEventArgs e)
         {
-            if (IsEnabled)
+            if (IsEnabled && DotScale != null)
             {
                 DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, useCubicEase: true));
                 DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, useCubicEase: true));
             }
         }
-
     }
 }

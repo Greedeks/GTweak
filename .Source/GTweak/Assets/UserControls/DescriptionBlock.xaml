@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d" IsTabStop="False" KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True" UseLayoutRounding="True"
-             d:DesignHeight="450" d:DesignWidth="800" Loaded="DescriptionBlock_Loaded">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
         <ScrollViewer x:Name="Scroller" Margin="6" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" ClipToBounds="True">
             <TextBlock x:Name="FunctionDescription" Style="{StaticResource Description}" Text="{Binding DefaultText, RelativeSource={RelativeSource AncestorType=local:DescriptionBlock}}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
