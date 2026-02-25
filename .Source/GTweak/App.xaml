@@ -18,7 +18,7 @@
                 <ResourceDictionary Source="Assets/DrawingImages/TitleBar.xaml" />
                 <ResourceDictionary Source="Assets/DrawingImages/SettingsPanel.xaml" />
                 <ResourceDictionary Source="Assets/DrawingImages/SystemInfo.xaml" />
-                <ResourceDictionary Source="Assets/Images.xaml" />
+                <ResourceDictionary Source="Assets/Images/ImageResources.xaml" />
                 <ResourceDictionary Source="Styles/Themes/Dark/Colors.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/Buttons.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/RadioButtons.xaml" />

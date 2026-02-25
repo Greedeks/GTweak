@@ -3,13 +3,13 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
-namespace GTweak.Assets.UserControls.ColorWheelPicker
+namespace GTweak.Assets.ShaderEffects
 {
     public class ColorWheelEffect : ShaderEffect
     {
         private static readonly PixelShader _shader = new PixelShader()
         {
-            UriSource = new Uri("pack://application:,,,/GTweak;component/Assets/UserControls/ColorWheelPicker/ColorWheelEffect.ps")
+            UriSource = new Uri("/GTweak;component/Assets/ShaderEffects/ColorWheelEffect.ps", UriKind.Relative)
         };
 
         public ColorWheelEffect()

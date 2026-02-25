@@ -8,19 +8,11 @@ using System.Windows.Media;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Controls;
 
-namespace GTweak.Assets.UserControls.ColorWheelPicker
+namespace GTweak.Assets.UserControls
 {
     public partial class ColorPicker
     {
-        private const double WheelSize = 150.0;
-        private const double WheelRadius = WheelSize / 2.0;
-
-        private bool _isWheelBeingDragged, _isValueBeingDragged, _isInitialized, _isUpdatingFromProperty, _isUpdatingHexValue;
-        private double _selectedWheelX, _selectedWheelY, _currentHue, _currentSaturation, _currentValue = 1.0;
-        private Color _colorOnOpen;
-
-        internal event EventHandler<Color> ColorPicked;
-        internal event EventHandler PickerClosed;
+        internal event EventHandler ColorPicked, PickerClosed;
 
         internal static readonly DependencyProperty SelectedColorProperty =
             DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorPicker), new FrameworkPropertyMetadata(Colors.White, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedColorChanged));
@@ -50,29 +42,12 @@ namespace GTweak.Assets.UserControls.ColorWheelPicker
             set => SetValue(SelectedColorStringProperty, value);
         }
 
-        private static void OnSelectedColorStringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ColorPicker picker = (ColorPicker)d;
-            string newValue = e.NewValue as string;
+        private const double WheelSize = 150.0;
+        private const double WheelRadius = WheelSize / 2.0;
 
-            if (!string.IsNullOrWhiteSpace(newValue) && !picker._isUpdatingFromProperty)
-            {
-                try
-                {
-                    string[] components = newValue.Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (components.Length == 3)
-                    {
-                        Color newColor = Color.FromRgb(byte.Parse(components[0]), byte.Parse(components[1]), byte.Parse(components[2]));
-
-                        picker._isUpdatingFromProperty = true;
-                        picker.SelectedColor = newColor;
-                        picker.UpdateInternalStateFromColor(newColor);
-                        picker._isUpdatingFromProperty = false;
-                    }
-                }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            }
-        }
+        private bool _isWheelBeingDragged, _isValueBeingDragged, _isInitialized, _isUpdatingFromProperty, _isUpdatingHexValue;
+        private double _selectedWheelX, _selectedWheelY, _currentHue, _currentSaturation, _currentValue = 1.0;
+        private Color _colorOnOpen;
 
         public ColorPicker()
         {
@@ -107,13 +82,37 @@ namespace GTweak.Assets.UserControls.ColorWheelPicker
             }
         }
 
+        private static void OnSelectedColorStringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ColorPicker picker = (ColorPicker)d;
+            string newValue = e.NewValue as string;
+
+            if (!string.IsNullOrWhiteSpace(newValue) && !picker._isUpdatingFromProperty)
+            {
+                try
+                {
+                    string[] components = newValue.Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (components.Length == 3)
+                    {
+                        Color newColor = Color.FromRgb(byte.Parse(components[0]), byte.Parse(components[1]), byte.Parse(components[2]));
+
+                        picker._isUpdatingFromProperty = true;
+                        picker.SelectedColor = newColor;
+                        picker.UpdateInternalStateFromColor(newColor);
+                        picker._isUpdatingFromProperty = false;
+                    }
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            }
+        }
+
         private void NotifyColorChanged(Color newColor)
         {
             _isUpdatingFromProperty = true;
             SelectedColor = newColor;
             SelectedColorString = $"{newColor.R} {newColor.G} {newColor.B}";
             _isUpdatingFromProperty = false;
-            ColorPicked?.Invoke(this, newColor);
+            ColorPicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void PART_ToggleButton_Checked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = true;

@@ -2,9 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using GTweak.Assets.UserControls;
-using GTweak.Assets.UserControls.ColorWheelPicker;
 using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
@@ -48,7 +46,7 @@ namespace GTweak.View
         }
         private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
 
-        private void ColorPicker_ColorPicked(object sender, Color e)
+        private void ColorPicker_ColorPicked(object sender, EventArgs e)
         {
             ColorPicker colorPicker = (ColorPicker)sender;
             _intfTweaks.ApplyTweaksColor(colorPicker.Name, colorPicker.SelectedColorString);

@@ -131,10 +131,10 @@
     <Compile Include="Assets\UserControls\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControls\ColorWheelPicker\ColorPicker.xaml.cs">
+    <Compile Include="Assets\UserControls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControls\ColorWheelPicker\ColorWheelEffect.cs" />
+    <Compile Include="Assets\ShaderEffects\ColorWheelEffect.cs" />
     <Compile Include="Assets\UserControls\DescriptionBlock.xaml.cs">
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
@@ -234,7 +234,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Assets\Images.xaml">
+    <Page Include="Assets\Images\ImageResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,7 +242,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Assets\UserControls\ColorWheelPicker\ColorPicker.xaml">
+    <Page Include="Assets\UserControls\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -487,7 +487,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include=".editorconfig" />
-    <Resource Include="Assets\UserControls\ColorWheelPicker\ColorWheelEffect.ps" />
+    <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\DisablingWD.gz" />
     <None Include="Resources\hosts.gz" />
@@ -520,84 +520,84 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\ImagePackages\BingSearch.png" />
-    <Resource Include="Assets\ImagePackages\Alarms.png" />
-    <Resource Include="Assets\ImagePackages\BingFinance.png" />
-    <Resource Include="Assets\ImagePackages\BingNews.png" />
-    <Resource Include="Assets\ImagePackages\BingWeather.png" />
-    <Resource Include="Assets\ImagePackages\Camera.png" />
-    <Resource Include="Assets\ImagePackages\Clipchamp.png" />
-    <Resource Include="Assets\ImagePackages\Cortana.png" />
-    <Resource Include="Assets\ImagePackages\DevHome.png" />
-    <Resource Include="Assets\ImagePackages\Edge.png" />
-    <Resource Include="Assets\ImagePackages\FeedbackHub.png" />
-    <Resource Include="Assets\ImagePackages\GetHelp.png" />
-    <Resource Include="Assets\ImagePackages\Linkedin.png" />
-    <Resource Include="Assets\ImagePackages\Mail.png" />
-    <Resource Include="Assets\ImagePackages\Maps.png" />
-    <Resource Include="Assets\ImagePackages\Microsoft3DViewer.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftFamilySafety.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftOfficeHub.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftPowerAutomate.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftSolitaireCollection.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftStickyNotes.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftStore.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftTeams.png" />
-    <Resource Include="Assets\ImagePackages\MixedReality.png" />
-    <Resource Include="Assets\ImagePackages\MobilePlanOneConnect.png" />
-    <Resource Include="Assets\ImagePackages\Music.png" />
-    <Resource Include="Assets\ImagePackages\OneDrive.png" />
-    <Resource Include="Assets\ImagePackages\OneNote.png" />
-    <Resource Include="Assets\ImagePackages\Outlook.png" />
-    <Resource Include="Assets\ImagePackages\Paint3D.png" />
-    <Resource Include="Assets\ImagePackages\People.png" />
-    <Resource Include="Assets\ImagePackages\Phone.png" />
-    <Resource Include="Assets\ImagePackages\Photos.png" />
-    <Resource Include="Assets\ImagePackages\QuickAssist.png" />
-    <Resource Include="Assets\ImagePackages\ScreenSketch.png" />
-    <Resource Include="Assets\ImagePackages\SkypeApp.png" />
-    <Resource Include="Assets\ImagePackages\SoundRecorder.png" />
-    <Resource Include="Assets\ImagePackages\Terminal.png" />
-    <Resource Include="Assets\ImagePackages\Todos.png" />
-    <Resource Include="Assets\ImagePackages\Video.png" />
-    <Resource Include="Assets\ImagePackages\WebMediaExtensions.png" />
-    <Resource Include="Assets\ImagePackages\Widgets.png" />
-    <Resource Include="Assets\ImagePackages\Xbox.png" />
-    <Resource Include="Assets\ImagePackages\SandTimer.png" />
-    <Resource Include="Assets\ImagePackages\BingSports.png" />
-    <Resource Include="Assets\ImagePackages\Calculator.png" />
-    <Resource Include="Assets\ImagePackages\Copilot.png" />
-    <Resource Include="Assets\ImagePackages\Notepad.png" />
-    <Resource Include="Assets\ImagePackages\Spotify.png" />
-    <Resource Include="Assets\ImagePackages\Wallet.png" />
-    <Resource Include="Assets\ImagePackages\WhatsApp.png" />
-    <Resource Include="Assets\ImagePackages\WhiteBoard.png" />
     <Resource Include="GTweak.ico" />
-    <Resource Include="Assets\ImageAddonsFiles\BatFile.png" />
-    <Resource Include="Assets\ImageAddonsFiles\CmdFile.png" />
-    <Resource Include="Assets\ImageAddonsFiles\PowershellFile.png" />
-    <Resource Include="Assets\ImageAddonsFiles\RegistryFile.png" />
-    <Resource Include="Assets\ImagePackages\3DBuilder.png" />
-    <Resource Include="Assets\ImagePackages\Disney.png" />
-    <Resource Include="Assets\ImagePackages\Facebook.png" />
-    <Resource Include="Assets\ImagePackages\Hulu.png" />
-    <Resource Include="Assets\ImagePackages\Instagram.png" />
-    <Resource Include="Assets\ImagePackages\MicrosoftSway.png" />
-    <Resource Include="Assets\ImagePackages\Netflix.png" />
-    <Resource Include="Assets\ImagePackages\TikTok.png" />
-    <Resource Include="Assets\ImagePackages\TwitterX.png" />
-    <Resource Include="Assets\ImagePackages\YandexMusic.png" />
-    <Resource Include="Assets\ImagePackages\iHeartRadio.png" />
-    <Resource Include="Assets\ImagePackages\Messaging.png" />
-    <Resource Include="Assets\ImagePackages\Picsart.png" />
-    <Resource Include="Assets\ImagePackages\Plex.png" />
-    <Resource Include="Assets\ImagePackages\PrimeVideo.png" />
-    <Resource Include="Assets\ImagePackages\Shazam.png" />
-    <Resource Include="Assets\ImagePackages\TuneInRadio.png" />
-    <Resource Include="Assets\ImagePackages\Viber.png" />
-    <Resource Include="Assets\ImagePackages\Pandora.png" />
-    <Resource Include="Assets\ImagePackages\DolbyAccess.png" />
-    <Resource Include="Assets\ImagePackages\Paint.png" />
+    <Resource Include="Assets\Images\AddonsFiles\BatFile.png" />
+    <Resource Include="Assets\Images\AddonsFiles\CmdFile.png" />
+    <Resource Include="Assets\Images\AddonsFiles\PowershellFile.png" />
+    <Resource Include="Assets\Images\AddonsFiles\RegistryFile.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\3DBuilder.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Alarms.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\BingFinance.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\BingNews.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\BingSearch.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\BingSports.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\BingWeather.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Calculator.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Camera.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Clipchamp.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Copilot.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Cortana.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\DevHome.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Disney.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\DolbyAccess.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Edge.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Facebook.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\FeedbackHub.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\GetHelp.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Hulu.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\iHeartRadio.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Instagram.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Linkedin.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Mail.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Maps.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Messaging.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Microsoft3DViewer.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftFamilySafety.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftOfficeHub.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftPowerAutomate.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftSolitaireCollection.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftStickyNotes.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftStore.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftSway.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftTeams.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MixedReality.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\MobilePlanOneConnect.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Music.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Netflix.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Notepad.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\OneDrive.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\OneNote.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Outlook.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Paint.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Paint3D.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Pandora.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\People.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Phone.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Photos.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Picsart.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Plex.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\PrimeVideo.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\QuickAssist.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\SandTimer.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\ScreenSketch.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Shazam.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\SkypeApp.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\SoundRecorder.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Spotify.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Terminal.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\TikTok.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Todos.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\TuneInRadio.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\TwitterX.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Viber.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Video.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Wallet.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\WebMediaExtensions.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\WhatsApp.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\WhiteBoard.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Widgets.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\Xbox.png" />
+    <Resource Include="Assets\Images\PreinstalledApps\YandexMusic.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

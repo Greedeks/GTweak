@@ -1,9 +1,10 @@
-<UserControl x:Class="GTweak.Assets.UserControls.ColorWheelPicker.ColorPicker"
+<UserControl x:Class="GTweak.Assets.UserControls.ColorPicker"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GTweak.Assets.UserControls.ColorWheelPicker"
+             xmlns:local="clr-namespace:GTweak.Assets.UserControls"
+             xmlns:effects="clr-namespace:GTweak.Assets.ShaderEffects"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" IsTabStop="False">
     <Grid>
@@ -90,7 +91,7 @@
                         <Canvas Grid.Column="0" Width="150" Height="150">
                             <Rectangle x:Name="PART_Wheel" Width="150" Height="150" Fill="Transparent" MouseDown="ColorWheel_MouseDown" MouseMove="ColorWheel_MouseMove" MouseUp="ColorWheel_MouseUp">
                                 <Rectangle.Effect>
-                                    <local:ColorWheelEffect />
+                                    <effects:ColorWheelEffect />
                                 </Rectangle.Effect>
                                 <Rectangle.Clip>
                                     <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75"/>
