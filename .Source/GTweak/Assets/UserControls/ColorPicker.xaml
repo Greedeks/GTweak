@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              xmlns:effects="clr-namespace:GTweak.Assets.ShaderEffects"
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" IsTabStop="False">
+             d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" IsTabStop="False" PreviewKeyDown="ColorPopup_PreviewKeyDown">
     <Grid>
         <ToggleButton x:Name="PART_ToggleButton" Checked="PART_ToggleButton_Checked" Unchecked="PART_ToggleButton_Unchecked">
             <ToggleButton.Template>
