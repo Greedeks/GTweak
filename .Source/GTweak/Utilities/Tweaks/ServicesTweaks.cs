@@ -173,6 +173,19 @@ namespace GTweak.Utilities.Tweaks
 
             _сontrolWriter.Button[30] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", "4");
+
+            _сontrolWriter.Button[31] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EdgeUpdate", "Start", "4") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EdgeUpdateM", "Start", "4") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", "Start", "4") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "cmdLine", @"C:\Windows\System32\usoclient.exe", true) ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "startArg", @"EdgeUpdate /ua /installsource scheduler-uo-express", true) ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "updaterClientMetadata", @"{""NdupProperties"": {}, ""allowedFailureCount"":4, ""updaterOOBETimeoutInMinutes"":10, ""updaterMinsToWaitAfterOobeFailure"":30, ""BusinessCritical"":true, ""allowedPreOobeComplete"":true, ""id"":""ExpeditedApps_SV_EdgeUpdate_0""}", true) ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "updaterPriority", "5", true);
+            IsTaskEnabled(edgeTasks);
+
+            _сontrolWriter.Button[32] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MMCSS", "Start", "4");
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -439,6 +452,36 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton30":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
                     SetTaskState(!isDisabled, retailTasks);
+                    break;
+                case "TglButton31":
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\EdgeUpdate", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\EdgeUpdateM", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
+                    if (isDisabled)
+                    {
+                        Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", false);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            using (RegistryKey key = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate"))
+                            {
+                                if (key != null)
+                                {
+                                    key.SetValue("cmdLine", @"C:\Windows\System32\usoclient.exe", RegistryValueKind.ExpandString);
+                                    key.SetValue("startArg", "EdgeUpdate /ua /installsource scheduler-uo-express", RegistryValueKind.String);
+                                    key.SetValue("updaterClientMetadata", @"{""NdupProperties"":{}, ""allowedFailureCount"":4, ""updaterOOBETimeoutInMinutes"":10, ""updaterMinsToWaitAfterOobeFailure"":30, ""BusinessCritical"":true, ""allowedPreOobeComplete"":true, ""id"":""ExpeditedApps_SV_EdgeUpdate_0""}", RegistryValueKind.String);
+                                    key.SetValue("updaterPriority", 5, RegistryValueKind.DWord);
+                                }
+                            }
+                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    }
+                    SetTaskState(!isDisabled, edgeTasks);
+                    break;
+                case "TglButton32":
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MMCSS", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord, true);
                     break;
                 default:
                     break;

@@ -32,9 +32,8 @@ namespace GTweak.Assets.UserControls
             set => SetValue(DefaultColorProperty, value);
         }
 
-        internal static readonly DependencyProperty SelectedColorStringProperty =
-         DependencyProperty.Register(nameof(SelectedColorString), typeof(string), typeof(ColorPicker),
-             new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedColorStringChanged));
+        internal static readonly DependencyProperty SelectedColorStringProperty = 
+            DependencyProperty.Register(nameof(SelectedColorString), typeof(string), typeof(ColorPicker), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedColorStringChanged));
 
         internal string SelectedColorString
         {
@@ -67,42 +66,43 @@ namespace GTweak.Assets.UserControls
 
             if (parentWindow != null)
             {
-                parentWindow.LocationChanged += delegate { UpdatePopupPosition(); };
-                parentWindow.SizeChanged += delegate { UpdatePopupPosition(); };
+                parentWindow.LocationChanged += (s, args) => UpdatePopupPosition();
+                parentWindow.SizeChanged += (s, args) => UpdatePopupPosition();
             }
         }
 
         private static void OnSelectedColorChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
-            ColorPicker colorPickerControl = (ColorPicker)dependencyObject;
-
-            if (!colorPickerControl._isUpdatingFromProperty)
+            if (dependencyObject is ColorPicker colorPickerControl && eventArgs.NewValue is Color newColor)
             {
-                colorPickerControl.UpdateInternalStateFromColor((Color)eventArgs.NewValue);
+                if (!colorPickerControl._isUpdatingFromProperty)
+                {
+                    colorPickerControl.UpdateInternalStateFromColor(newColor);
+                }
             }
         }
 
         private static void OnSelectedColorStringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ColorPicker picker = (ColorPicker)d;
-            string newValue = e.NewValue as string;
-
-            if (!string.IsNullOrWhiteSpace(newValue) && !picker._isUpdatingFromProperty)
+            if (d is ColorPicker picker && e.NewValue is string newValue)
             {
-                try
+                if (!string.IsNullOrWhiteSpace(newValue) && !picker._isUpdatingFromProperty)
                 {
-                    string[] components = newValue.Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (components.Length == 3)
+                    try
                     {
-                        Color newColor = Color.FromRgb(byte.Parse(components[0]), byte.Parse(components[1]), byte.Parse(components[2]));
+                        string[] components = newValue.Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (components.Length == 3)
+                        {
+                            Color newColor = Color.FromRgb(byte.Parse(components[0]), byte.Parse(components[1]), byte.Parse(components[2]));
 
-                        picker._isUpdatingFromProperty = true;
-                        picker.SelectedColor = newColor;
-                        picker.UpdateInternalStateFromColor(newColor);
-                        picker._isUpdatingFromProperty = false;
+                            picker._isUpdatingFromProperty = true;
+                            picker.SelectedColor = newColor;
+                            picker.UpdateInternalStateFromColor(newColor);
+                            picker._isUpdatingFromProperty = false;
+                        }
                     }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
         }
 
@@ -115,46 +115,65 @@ namespace GTweak.Assets.UserControls
             ColorPicked?.Invoke(this, EventArgs.Empty);
         }
 
-        private void PART_ToggleButton_Checked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = true;
+        private void PART_ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (ColorPopup != null)
+            {
+                ColorPopup.IsOpen = true;
+            }
+        }
 
-        private void PART_ToggleButton_Unchecked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = false;
+        private void PART_ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (ColorPopup != null)
+            {
+                ColorPopup.IsOpen = false;
+            }
+        }
 
         private void ColorPopup_Opened(object sender, EventArgs e)
         {
             _colorOnOpen = SelectedColor;
-            PopupTransform.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-5, 0, 0.3, useCubicEase: true));
-            PopupBorder.BeginAnimation(UIElement.OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.15));
+            PopupTransform?.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-5, 0, 0.3, useCubicEase: true));
+            PopupBorder?.BeginAnimation(UIElement.OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.15));
         }
 
         private void ColorPopup_Closed(object sender, EventArgs e)
         {
-            if (Mouse.LeftButton != MouseButtonState.Pressed || !PART_ToggleButton.IsMouseOver)
+            if (PART_ToggleButton != null)
             {
-                PART_ToggleButton.IsChecked = false;
-                if (_colorOnOpen != SelectedColor)
+                if (Mouse.LeftButton != MouseButtonState.Pressed || !PART_ToggleButton.IsMouseOver)
                 {
-                    PickerClosed?.Invoke(this, EventArgs.Empty);
+                    PART_ToggleButton.IsChecked = false;
+                    if (_colorOnOpen != SelectedColor)
+                    {
+                        PickerClosed?.Invoke(this, EventArgs.Empty);
+                    }
                 }
             }
         }
 
         private void BtnDefault_Click(object sender, RoutedEventArgs e)
         {
-            SelectedColor = DefaultColor;
-            UpdateInternalStateFromColor(DefaultColor);
-            NotifyColorChanged(DefaultColor);
+            Color def = DefaultColor;
+            SelectedColor = def;
+            UpdateInternalStateFromColor(def);
+            NotifyColorChanged(def);
         }
 
         private void ColorWheel_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            _isWheelBeingDragged = true;
-            PART_Wheel.CaptureMouse();
-            CalculateAndSetColorFromWheelPosition(e.GetPosition(PART_Wheel));
+            if (PART_Wheel != null)
+            {
+                _isWheelBeingDragged = true;
+                PART_Wheel.CaptureMouse();
+                CalculateAndSetColorFromWheelPosition(e.GetPosition(PART_Wheel));
+            }
         }
 
         private void ColorWheel_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_isWheelBeingDragged)
+            if (_isWheelBeingDragged && PART_Wheel != null)
             {
                 CalculateAndSetColorFromWheelPosition(e.GetPosition(PART_Wheel));
             }
@@ -163,19 +182,22 @@ namespace GTweak.Assets.UserControls
         private void ColorWheel_MouseUp(object sender, MouseButtonEventArgs e)
         {
             _isWheelBeingDragged = false;
-            PART_Wheel.ReleaseMouseCapture();
+            PART_Wheel?.ReleaseMouseCapture();
         }
 
         private void ValueCanvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            _isValueBeingDragged = true;
-            PART_ValueCanvas.CaptureMouse();
-            CalculateAndSetValueFromMouseY(e.GetPosition(PART_ValueCanvas).Y);
+            if (PART_ValueCanvas != null)
+            {
+                _isValueBeingDragged = true;
+                PART_ValueCanvas.CaptureMouse();
+                CalculateAndSetValueFromMouseY(e.GetPosition(PART_ValueCanvas).Y);
+            }
         }
 
         private void ValueCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_isValueBeingDragged)
+            if (_isValueBeingDragged && PART_ValueCanvas != null)
             {
                 CalculateAndSetValueFromMouseY(e.GetPosition(PART_ValueCanvas).Y);
             }
@@ -184,15 +206,15 @@ namespace GTweak.Assets.UserControls
         private void ValueCanvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
             _isValueBeingDragged = false;
-            PART_ValueCanvas.ReleaseMouseCapture();
+            PART_ValueCanvas?.ReleaseMouseCapture();
         }
 
         private void HexBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e?.Key == Key.Enter)
             {
                 ValidateAndApplyHexColor();
-                PART_HexBox.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                PART_HexBox?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
 
@@ -200,7 +222,7 @@ namespace GTweak.Assets.UserControls
 
         private void HexBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_isUpdatingHexValue)
+            if (!_isUpdatingHexValue && PART_HexBox != null)
             {
                 string rawHexInput = PART_HexBox.Text.Trim().Replace("#", "");
                 string cleanedHexInput = Regex.Replace(rawHexInput, "[^0-9a-fA-F]", "");
@@ -222,7 +244,7 @@ namespace GTweak.Assets.UserControls
 
         private void UpdatePopupPosition()
         {
-            if (ColorPopup.IsOpen)
+            if (ColorPopup != null && ColorPopup.IsOpen)
             {
                 MethodInfo updatePositionMethod = typeof(System.Windows.Controls.Primitives.Popup).GetMethod("UpdatePosition", BindingFlags.NonPublic | BindingFlags.Instance);
                 updatePositionMethod?.Invoke(ColorPopup, null);
@@ -246,29 +268,24 @@ namespace GTweak.Assets.UserControls
             _currentSaturation = Math.Min(1.0, distanceFromCenter / WheelRadius);
 
             double angleInDegrees = Math.Atan2(deltaY, deltaX) * 180.0 / Math.PI;
-
-            if (angleInDegrees < 0)
-            {
-                _currentHue = angleInDegrees + 360.0;
-            }
-            else
-            {
-                _currentHue = angleInDegrees;
-            }
+            _currentHue = angleInDegrees < 0 ? angleInDegrees + 360.0 : angleInDegrees;
 
             ApplyCurrentHsvToInterface();
         }
 
         private void CalculateAndSetValueFromMouseY(double mouseYPosition)
         {
-            double barHeight = PART_ValueBar.Height;
-            double markerHeight = PART_MarkerValue.Height;
-            double clampedY = Math.Max(markerHeight / 2, Math.Min(barHeight - markerHeight / 2, mouseYPosition));
+            if (PART_ValueBar != null && PART_MarkerValue != null)
+            {
+                double barHeight = PART_ValueBar.Height;
+                double markerHeight = PART_MarkerValue.Height;
+                double clampedY = Math.Max(markerHeight / 2, Math.Min(barHeight - markerHeight / 2, mouseYPosition));
 
-            Canvas.SetTop(PART_MarkerValue, clampedY - markerHeight / 2);
-            _currentValue = 1.0 - ((clampedY - markerHeight / 2) / (barHeight - markerHeight));
+                Canvas.SetTop(PART_MarkerValue, clampedY - markerHeight / 2);
+                _currentValue = 1.0 - ((clampedY - markerHeight / 2) / (barHeight - markerHeight));
 
-            ApplyCurrentHsvToInterface();
+                ApplyCurrentHsvToInterface();
+            }
         }
 
         private void ApplyCurrentHsvToInterface()
@@ -281,12 +298,9 @@ namespace GTweak.Assets.UserControls
             PART_ColorPreview.Fill = new SolidColorBrush(newColor);
             PART_ColorTextBlock.Text = $"{newColor.R} {newColor.G} {newColor.B}";
 
-            if (!_isUpdatingHexValue)
-            {
-                _isUpdatingHexValue = true;
-                PART_HexBox.Text = $"#{newColor.R:X2}{newColor.G:X2}{newColor.B:X2}";
-                _isUpdatingHexValue = false;
-            }
+            _isUpdatingHexValue = true;
+            PART_HexBox.Text = $"#{newColor.R:X2}{newColor.G:X2}{newColor.B:X2}";
+            _isUpdatingHexValue = false;
 
             NotifyColorChanged(newColor);
             UpdateBrightnessBarBackground();
@@ -306,59 +320,68 @@ namespace GTweak.Assets.UserControls
 
         private void UpdateBrightnessBarBackground()
         {
-            Color pureHueColor = ConvertHsvToRgbColor(_currentHue, _currentSaturation, 1.0);
-            PART_ValueBar.Fill = new LinearGradientBrush(pureHueColor, Colors.Black, new Point(0.5, 0), new Point(0.5, 1));
+            if (PART_ValueBar != null)
+            {
+                Color pureHueColor = ConvertHsvToRgbColor(_currentHue, _currentSaturation, 1.0);
+                PART_ValueBar.Fill = new LinearGradientBrush(pureHueColor, Colors.Black, new Point(0.5, 0), new Point(0.5, 1));
+            }
         }
 
         private void UpdateBrightnessMarkerPosition()
         {
-            double barHeight = PART_ValueBar.Height;
-            double markerHeight = PART_MarkerValue.Height;
-            double markerYPosition = (1.0 - _currentValue) * (barHeight - markerHeight) + markerHeight / 2;
+            if (PART_ValueBar != null && PART_MarkerValue != null)
+            {
+                double barHeight = PART_ValueBar.Height;
+                double markerHeight = PART_MarkerValue.Height;
+                double markerYPosition = (1.0 - _currentValue) * (barHeight - markerHeight) + markerHeight / 2;
 
-            Canvas.SetTop(PART_MarkerValue, markerYPosition - markerHeight / 2);
-            Canvas.SetLeft(PART_MarkerValue, (PART_ValueBar.Width - markerHeight) / 2);
+                Canvas.SetTop(PART_MarkerValue, markerYPosition - markerHeight / 2);
+                Canvas.SetLeft(PART_MarkerValue, (PART_ValueBar.Width - markerHeight) / 2);
+            }
         }
 
         private void ValidateAndApplyHexColor()
         {
-            if (!_isUpdatingHexValue)
+            if (_isUpdatingHexValue || PART_HexBox == null)
             {
-                string rawHexInput = Regex.Replace(PART_HexBox.Text.Trim().Replace("#", ""), "[^0-9a-fA-F]", "");
+                return;
+            }
 
-                if (rawHexInput.Length != 0)
+            string rawHexInput = Regex.Replace(PART_HexBox.Text.Trim().Replace("#", ""), "[^0-9a-fA-F]", "");
+
+            if (rawHexInput.Length != 0)
+            {
+                if (rawHexInput.Length < 6)
                 {
-                    if (rawHexInput.Length < 6)
-                    {
-                        char lastCharacter = rawHexInput[rawHexInput.Length - 1];
-                        rawHexInput = rawHexInput.PadRight(6, lastCharacter);
-                    }
-
-                    try
-                    {
-                        Color parsedColor = Color.FromRgb(Convert.ToByte(rawHexInput.Substring(0, 2), 16), Convert.ToByte(rawHexInput.Substring(2, 2), 16), Convert.ToByte(rawHexInput.Substring(4, 2), 16));
-
-                        _isUpdatingHexValue = true;
-                        UpdateInternalStateFromColor(parsedColor);
-                        PART_HexBox.Text = $"#{rawHexInput.ToUpper()}";
-                        _isUpdatingHexValue = false;
-                        NotifyColorChanged(parsedColor);
-                    }
-                    catch { RevertHexBoxToSelectedColor(); }
+                    char lastCharacter = rawHexInput[rawHexInput.Length - 1];
+                    rawHexInput = rawHexInput.PadRight(6, lastCharacter);
                 }
-                else
+
+                try
                 {
-                    RevertHexBoxToSelectedColor();
-                    return;
+                    Color parsedColor = Color.FromRgb(Convert.ToByte(rawHexInput.Substring(0, 2), 16), Convert.ToByte(rawHexInput.Substring(2, 2), 16), Convert.ToByte(rawHexInput.Substring(4, 2), 16));
+                    _isUpdatingHexValue = true;
+                    UpdateInternalStateFromColor(parsedColor);
+                    PART_HexBox.Text = $"#{rawHexInput.ToUpper()}";
+                    _isUpdatingHexValue = false;
+                    NotifyColorChanged(parsedColor);
                 }
+                catch { RevertHexBoxToSelectedColor(); }
+            }
+            else
+            {
+                RevertHexBoxToSelectedColor();
             }
         }
 
         private void RevertHexBoxToSelectedColor()
         {
-            _isUpdatingHexValue = true;
-            PART_HexBox.Text = $"#{SelectedColor.R:X2}{SelectedColor.G:X2}{SelectedColor.B:X2}";
-            _isUpdatingHexValue = false;
+            if (PART_HexBox != null)
+            {
+                _isUpdatingHexValue = true;
+                PART_HexBox.Text = $"#{SelectedColor.R:X2}{SelectedColor.G:X2}{SelectedColor.B:X2}";
+                _isUpdatingHexValue = false;
+            }
         }
 
         private static void ConvertRgbToHsv(Color rgbColor, out double hue, out double saturation, out double value)
