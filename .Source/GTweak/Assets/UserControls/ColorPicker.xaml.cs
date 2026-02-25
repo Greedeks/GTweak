@@ -32,7 +32,7 @@ namespace GTweak.Assets.UserControls
             set => SetValue(DefaultColorProperty, value);
         }
 
-        internal static readonly DependencyProperty SelectedColorStringProperty = 
+        internal static readonly DependencyProperty SelectedColorStringProperty =
             DependencyProperty.Register(nameof(SelectedColorString), typeof(string), typeof(ColorPicker), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedColorStringChanged));
 
         internal string SelectedColorString
@@ -112,7 +112,6 @@ namespace GTweak.Assets.UserControls
             SelectedColor = newColor;
             SelectedColorString = $"{newColor.R} {newColor.G} {newColor.B}";
             _isUpdatingFromProperty = false;
-            ColorPicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void PART_ToggleButton_Checked(object sender, RoutedEventArgs e)
@@ -140,16 +139,28 @@ namespace GTweak.Assets.UserControls
 
         private void ColorPopup_Closed(object sender, EventArgs e)
         {
+            if (_colorOnOpen != SelectedColor)
+            {
+                ColorPicked?.Invoke(this, EventArgs.Empty);
+            }
+
             if (PART_ToggleButton != null)
             {
                 if (Mouse.LeftButton != MouseButtonState.Pressed || !PART_ToggleButton.IsMouseOver)
                 {
                     PART_ToggleButton.IsChecked = false;
-                    if (_colorOnOpen != SelectedColor)
-                    {
-                        PickerClosed?.Invoke(this, EventArgs.Empty);
-                    }
                 }
+            }
+
+            PickerClosed?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void ColorPopup_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                ColorPopup.IsOpen = false;
+                e.Handled = true;
             }
         }
 
