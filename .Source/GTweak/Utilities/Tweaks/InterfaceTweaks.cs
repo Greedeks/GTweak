@@ -176,8 +176,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", "1");
 
             _сontrolWriter.Button[32] =
-                HardwareData.OS.IsWin11 && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", "1") ||
-                HardwareData.OS.IsWin10 && RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", "1");
+                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", "1");
         }
 
         internal void ApplyTweaksColor(string tweak, string value)
@@ -616,28 +615,7 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton32":
-                    if (isDisabled)
-                    {
-                        if (HardwareData.OS.IsWin11)
-                        {
-                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", 1, RegistryValueKind.DWord);
-                        }
-                        else if (HardwareData.OS.IsWin10)
-                        {
-                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", 1, RegistryValueKind.DWord);
-                        }
-                    }
-                    else
-                    {
-                        if (HardwareData.OS.IsWin11)
-                        {
-                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode");
-                        }
-                        else if (HardwareData.OS.IsWin10)
-                        {
-                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo");
-                        }
-                    }
+                    RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "LaunchTo", isDisabled ? 1 : 2, RegistryValueKind.DWord);
                     break;
                 default:
                     break;
