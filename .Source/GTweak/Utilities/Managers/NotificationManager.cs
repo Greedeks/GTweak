@@ -43,7 +43,6 @@ namespace GTweak.Utilities.Managers
             ["TglButton13"] = NoticeAction.Restart,
             ["TglButton14"] = NoticeAction.Restart,
             ["TglButton15"] = NoticeAction.Restart,
-            ["TglButton20"] = NoticeAction.Restart,
             ["TglButton23"] = NoticeAction.Restart,
             ["TglButton25"] = NoticeAction.Restart,
             ["TglButton27"] = NoticeAction.Restart

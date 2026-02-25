@@ -150,7 +150,9 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[19] = _isBluetoothStatus;
 
             _сontrolWriter.Button[20] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "4");
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "EnableFirewall", "0") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile", "EnableFirewall", "0") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PublicProfile", "EnableFirewall", "0");
 
             _сontrolWriter.Button[21] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AutoGameModeEnabled", "0") ||
@@ -472,12 +474,7 @@ namespace GTweak.Utilities.Tweaks
                     _isBluetoothStatus = !isDisabled;
                     break;
                 case "TglButton20":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
-                    CommandExecutor.RunCommand($"/c netsh advfirewall set allprofiles state {(isDisabled ? "off" : "on")}");
-                    if (HardwareData.OS.Build.CompareTo(22621.521m) >= 0)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wtd", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
-                    }
+                    CommandExecutor.RunCommand($"Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled {(isDisabled ? "false" : "true")}", true);
                     break;
                 case "TglButton21":
                     RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\GameBar", "AutoGameModeEnabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
