@@ -379,6 +379,8 @@
     <v:String x:Key="tgl28_svc">Serviço relacionado à operação do Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Serviços relacionados a notificações push</v:String>
     <v:String x:Key="tgl30_svc">Serviços relacionados ao Modo de Demonstração de Loja</v:String>
+    <v:String x:Key="tgl31_svc">Serviços relacionados à atualização do Microsoft Edge</v:String>
+    <v:String x:Key="tgl32_svc">Serviço de Agendador de Classes Multimídia</v:String>
     
     <v:String x:Key="tgl1_desc_svc">Desative se você não usa histórico de arquivos e indexação de conteúdo.</v:String>
     <v:String x:Key="tgl2_desc_svc">Desative se você não usa Xbox e gamepads da Microsoft.</v:String>
@@ -410,6 +412,8 @@
     <v:String x:Key="tgl28_desc_svc">Desative se você não estiver usando o sistema de virtualização integrado. Não afeta o trabalho do VirtualBox e similares de forma alguma.</v:String>
     <v:String x:Key="tgl29_desc_svc">Desative se não utilizar o app "Seu Telefone" e não instalar apps da Windows Store remotamente em outros dispositivos, pois ele é responsável por entregar notificações instantâneas e sincronização entre o computador e dispositivos conectados. Tenha em mente que no Windows 10, após desativá‑lo, a Central de Notificações pode parar de abrir devido à dependência deste sistema.</v:String>
     <v:String x:Key="tgl30_desc_svc">Desative se não utilizar o dispositivo em uma loja para demonstrar recursos do Windows. O serviço Store Demo gerencia a exibição de conteúdo de demonstração e recursos interativos destinados apenas a exibições em lojas e testes. Este serviço não é necessário para o uso diário do computador.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Desative se você não pretende atualizar ou não usa o Microsoft Edge. Isso também interrompe as atualizações automáticas do WebView2 Runtime — esses componentes usam o mesmo mecanismo de atualização e são fortemente interdependentes.</v:String>
+    <v:String x:Key="tgl32_desc_svc">Desative se entender as possíveis consequências e não utilizar aplicativos multimídia que exigem processamento prioritário de áudio e vídeo. Em casos raros, isso pode reduzir ligeiramente o número de eventos do sistema e a carga (por exemplo, ao usar adaptadores de rede com NetAdapterCX); no entanto, o efeito depende da configuração do sistema. Pode causar falhas de áudio, dessincronia de áudio/vídeo e outros problemas de reprodução.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

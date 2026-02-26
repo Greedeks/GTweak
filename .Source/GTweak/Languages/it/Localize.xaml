@@ -379,7 +379,9 @@
     <v:String x:Key="tgl28_svc">Servizio relativo al funzionamento di Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Servizi relativi alle notifiche push</v:String>
     <v:String x:Key="tgl30_svc">Servizi relativi alla Modalità Demo del Microsoft Store</v:String>
-
+    <v:String x:Key="tgl31_svc">Servizi relativi all'aggiornamento di Microsoft Edge</v:String>
+    <v:String x:Key="tgl32_svc">Servizio di pianificazione delle classi multimediali</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Disattiva se non utilizzi la cronologia dei file e l’indicizzazione dei contenuti.</v:String>
     <v:String x:Key="tgl2_desc_svc">Disattiva se non utilizzi Xbox e gamepad Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Disattiva se non prevedi di aggiornare Windows. Oltre ai servizi, il tweak modifica anche i file responsabili degli aggiornamenti. Di conseguenza, anche se i servizi vengono riattivati, il Centro aggiornamenti non funzionerà. Nota che questa modifica influisce anche sul download e aggiornamento delle app dal Windows Store.</v:String>
@@ -410,6 +412,8 @@
     <v:String x:Key="tgl28_desc_svc">Disattiva se non usi il sistema di virtualizzazione Hyper-V integrato. Non influisce su VirtualBox o simili.</v:String>
     <v:String x:Key="tgl29_desc_svc">Disattiva se non utilizzi l'app «Il tuo telefono» e non installi app dal Windows Store in remoto su altri dispositivi, poiché è responsabile della consegna delle notifiche istantanee e della sincronizzazione tra il computer e i dispositivi connessi. Tieni presente che in Windows 10, dopo la disattivazione, il Centro Notifiche potrebbe smettere di aprirsi a causa della sua dipendenza da questo sistema.</v:String>
     <v:String x:Key="tgl30_desc_svc">Disattiva se non utilizzi il dispositivo in un negozio per dimostrare le funzionalità di Windows. Il servizio Store Demo gestisce la visualizzazione di contenuti dimostrativi e funzioni interattive destinate solo ai display dei negozi e ai test. Questo servizio non è necessario per l'uso quotidiano del computer.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Disattiva se non prevedete di aggiornare o non utilizzate Microsoft Edge. Ciò interrompe anche gli aggiornamenti automatici del WebView2 Runtime — questi componenti utilizzano lo stesso meccanismo di aggiornamento e sono strettamente interdipendenti.</v:String>
+    <v:String x:Key="tgl32_desc_svc">Disattiva se si comprendono le possibili conseguenze e non si utilizzano applicazioni multimediali che richiedono l'elaborazione prioritaria di audio e video. In rari casi ciò può ridurre leggermente il numero di eventi di sistema e il carico (ad esempio quando si utilizzano adattatori di rete con NetAdapterCX); tuttavia l'effetto dipende dalla configurazione del sistema. Potrebbe causare interruzioni audio, disallineamento audio/video e altri problemi di riproduzione.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

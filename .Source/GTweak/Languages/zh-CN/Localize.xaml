@@ -379,6 +379,8 @@
     <v:String x:Key="tgl28_svc">与 Hyper-V 运作相关之服务</v:String>
     <v:String x:Key="tgl29_svc">与推播通知相关之服务</v:String>
     <v:String x:Key="tgl30_svc">与零售演示模式相关的服务</v:String>
+    <v:String x:Key="tgl31_svc">与 Microsoft Edge 组件更新相关的服务</v:String>
+    <v:String x:Key="tgl32_svc">多媒体类调度服务</v:String>
     
     <v:String x:Key="tgl1_desc_svc">若您未使用文档历史记录与内容索引功能，请停用此设置。</v:String>
     <v:String x:Key="tgl2_desc_svc">若您未使用 Xbox 与 Microsoft 游戏控制器，请停用此设置。</v:String>
@@ -410,6 +412,8 @@
     <v:String x:Key="tgl28_desc_svc">若未使用内建虚拟化系统，请停用此服务。此设置绝不影响 VirtualBox 等虚拟化软件运作。</v:String>
     <v:String x:Key="tgl29_desc_svc">若未使用配对装置且不透过 Windows 市集远端安装应用程序，请停用此服务。这些服务负责处理配对装置的通知中心、处理推播请求、让 Windows 能侦测您的智慧型手机以供"您的手机"应用程序使用、自动重新连接至手机，并在操作中心显示手机讯息与事件。在 Windows 10 中，停用后通知中心可能无法开启。</v:String>
     <v:String x:Key="tgl30_desc_svc">如果您不在商店中使用该设备来演示 Windows 功能，请将其禁用。零售演示 (Store Demo) 服务负责管理专门用于商店展示和测试的演示内容及交互功能的显示。日常使用电脑时不需要此服务。</v:String>
+    <v:String x:Key="tgl31_desc_svc">如果您不打算更新或不使用 Microsoft Edge，请禁用。这样也会停止 WebView2 Runtime 的自动更新 — 这些组件使用相同的更新机制并彼此紧密相依。</v:String>
+    <v:String x:Key="tgl32_desc_svc">如果您理解可能的后果并且不使用需要优先处理音频和视频的多媒体应用程序，请将其禁用。在极少数情况下，这可能会略微减少系统事件和负载（例如在使用带有 NetAdapterCX 的网络适配器时），但效果取决于系统配置。可能会导致音频卡顿、音视频不同步以及其他播放问题。</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

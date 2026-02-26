@@ -225,7 +225,9 @@
     <v:String x:Key="tgl30_intf">데스크톱 요소의 도구 설명</v:String>
     <v:String x:Key="tgl31_intf">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
     <v:String x:Key="tgl32_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
-
+    <v:String x:Key="tgl31_svc">Microsoft Edge 구성 요소 업데이트 관련 서비스</v:String>
+    <v:String x:Key="tgl32_svc">멀티미디어 클래스 스케줄러 서비스</v:String>
+    
     <v:String x:Key="color1_desc_intf">시스템에서 커서로 텍스트나 개체를 선택할 때의 배경 색상을 변경합니다.</v:String>
     <v:String x:Key="color2_desc_intf">지원되는 애플리케이션에서 도구 설명의 색상을 변경합니다.</v:String>
     <v:String x:Key="tgl1_desc_intf">기본적으로 Windows는 파일 확장자를 숨기므로 파일 탐색기 보기가 덜 복잡해집니다. 필요한 경우 이 조정을 사용하여 파일 확장자를 표시할 수 있으므로 검색하는 데 걸리는 시간을 절약할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
@@ -260,6 +262,8 @@
     <v:String x:Key="tgl30_desc_intf">조정은 마우스 커서를 올려 놓으면 바탕 화면 요소의 도구 설명이 비활성화됩니다.</v:String>
     <v:String x:Key="tgl31_desc_intf">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl32_desc_intf">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Microsoft Edge를 업데이트할 계획이 없거나 사용하지 않는 경우 비활성화하세요. 이렇게 하면 WebView2 Runtime의 자동 업데이트도 중지됩니다 — 이 구성요소들은 동일한 업데이트 메커니즘을 사용하며 서로 밀접하게 상호의존합니다.</v:String>
+    <v:String x:Key="tgl32_desc_svc">오디오 및 비디오의 우선 처리가 필요한 멀티미디어 응용 프로그램을 사용하지 않으며 가능한 결과를 이해하는 경우에만 비활성화하십시오. 드문 경우지만(예: NetAdapterCX가 적용된 네트워크 어댑터 사용 시) 시스템 이벤트 수와 부하가 약간 줄어들 수 있습니다. 다만 효과는 시스템 구성에 따라 다릅니다. 오디오 끊김, 오디오/비디오 비동기화 및 기타 재생 문제가 발생할 수 있습니다.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

@@ -379,7 +379,9 @@
     <v:String x:Key="tgl28_svc">A Hyper-V működésével kapcsolatos szolgáltatás</v:String>
     <v:String x:Key="tgl29_svc">Push értesítésekkel kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl30_svc">Üzleti bemutató móddal kapcsolatos szolgáltatások</v:String>
-
+    <v:String x:Key="tgl31_svc">A Microsoft Edge frissítéséhez kapcsolódó szolgáltatások</v:String>
+    <v:String x:Key="tgl32_svc">Multimédia osztályütemező szolgáltatás</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Tiltsa le, ha nem használja a fájlelőzményeket és a tartalomindexelést.</v:String>
     <v:String x:Key="tgl2_desc_svc">Tiltsa le, ha nem használ Xbox és Microsoft játékvezérlőket.</v:String>
     <v:String x:Key="tgl3_desc_svc">Tiltsa le, ha nem tervezi a Windows frissítését. A szolgáltatások mellett a módosítás megváltoztatja a Windows frissítésekért felelős fájlokat. Emiatt a Frissítési központ még akkor sem fog működni, ha a szolgáltatások engedélyezve vannak. Felhívjuk figyelmét, hogy a módosítás az alkalmazások letöltését és frissítését érinti a Windows Store-ból.</v:String>
@@ -408,8 +410,10 @@
     <v:String x:Key="tgl26_desc_svc">Tiltsa le, ha nincs szüksége a Windows rendszerre a rendszer betöltéséhez a háttérben haszontalan diagnosztikával.</v:String>
     <v:String x:Key="tgl27_desc_svc">Tiltsa le, ha nem használja a vállalati alkalmazások távkezelését, és nincs olyan távoli kiszolgálója, amellyel a számítógép kommunikálna.</v:String>
     <v:String x:Key="tgl28_desc_svc">Tiltsa le, ha nem használja a beépített virtualizációs rendszert. Ez semmilyen módon nem befolyásolja a VirtualBox és hasonlók munkáját.</v:String>
-    <v:String x:Key="tgl29_desc_svc">Kapcsolja ki, ha nem használ párosított eszközöket, és nem telepít alkalmazásokat távolról a Windows Áruházból. Ezek a szolgáltatások kezelik az értesítési központot a párosított eszközökkel, feldolgozzák a push-kérelmeket, lehetővé teszik a Windows számára, hogy felismerje okostelefonját a „Saját telefon” alkalmazáshoz, automatikusan újra csatlakozzon hozzá, és megjelenítsen az üzeneteit és eseményeit a Műveletközpontban. A Windows 10 rendszerben ezek kikapcsolása után előfordulhat, hogy az értesítési központ nem nyílik meg.</v:String>
+    <v:String x:Key="tgl29_desc_svc">Tiltsa le, ha nem használ párosított eszközöket, és nem telepít alkalmazásokat távolról a Windows Áruházból. Ezek a szolgáltatások kezelik az értesítési központot a párosított eszközökkel, feldolgozzák a push-kérelmeket, lehetővé teszik a Windows számára, hogy felismerje okostelefonját a „Saját telefon” alkalmazáshoz, automatikusan újra csatlakozzon hozzá, és megjelenítsen az üzeneteit és eseményeit a Műveletközpontban. A Windows 10 rendszerben ezek kikapcsolása után előfordulhat, hogy az értesítési központ nem nyílik meg.</v:String>
     <v:String x:Key="tgl30_desc_svc">Ha nem használja az eszközt üzletben a Windows funkciók bemutatására, akkor tiltsa le. A Store Demo szolgáltatás kezeli a bemutató tartalmak és interaktív funkciók megjelenítését, amelyek kizárólag üzletek bemutatói és tesztelése céljára szolgálnak. Ez a szolgáltatás nem szükséges a számítógép mindennapi használatához.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Tiltsa le, ha nem tervezi a frissítést, vagy nem használja a Microsoft Edge böngészőt. Ezzel a WebView2 Runtime automatikus frissítése is leáll — ezek az összetevők ugyanazt a frissítési mechanizmust használják és szorosan kölcsönösen függenek egymástól.</v:String>
+    <v:String x:Key="tgl32_desc_svc">Tiltsa le, ha érti a lehetséges következményeket, és nem használ olyan multimédiás alkalmazásokat, amelyek prioritást igényelnek a hang és a videó feldolgozásában. Ritka esetekben ez kissé csökkentheti a rendszeresemények számát és a terhelést (például NetAdapterCX-szel rendelkező hálózati adapterek használatakor), azonban a hatás a rendszer konfigurációjától függ. Hangszaggatást, hang/videó szinkronizációs problémákat és egyéb lejátszási hibákat okozhat.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

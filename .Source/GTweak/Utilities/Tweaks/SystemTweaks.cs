@@ -330,7 +330,7 @@ namespace GTweak.Utilities.Tweaks
                         using RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}");
                         if (regKey != null)
                         {
-                            foreach (var subKeyName in regKey.GetSubKeyNames())
+                            foreach (string subKeyName in regKey.GetSubKeyNames())
                             {
                                 using RegistryKey subKey = regKey.OpenSubKey(subKeyName);
                                 if (subKey != null)
@@ -557,31 +557,31 @@ namespace GTweak.Utilities.Tweaks
                     else
                     {
                         DateTime now = DateTime.UtcNow;
-                        string startTimeZ = now.ToString("yyyy-MM-ddTHH:mm:ssZ");
-                        string endTimeZ = now.AddYears(10).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                        string start = now.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                        string end = now.AddYears(10).ToString("yyyy-MM-ddTHH:mm:ssZ");
 
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "AUOptions", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseFeatureUpdatesStartTime", startTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseFeatureUpdatesEndTime", endTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseQualityUpdatesStartTime", startTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseQualityUpdatesEndTime", endTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseUpdatesStartTime", startTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseUpdatesExpiryTime", endTimeZ, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseFeatureUpdatesStartTime", start, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseFeatureUpdatesEndTime", end, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseQualityUpdatesStartTime", start, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseQualityUpdatesEndTime", end, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseUpdatesStartTime", start, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseUpdatesExpiryTime", end, RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings", "PausedFeatureStatus", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings", "PausedQualityStatus", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings", "PausedFeatureDate", startTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings", "PausedQualityDate", startTimeZ, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings", "PausedFeatureDate", start, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\Settings", "PausedQualityDate", start, RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "IsDeferralIsActive", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PolicySources", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "QualityUpdatesPaused", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "QualityUpdatePausePeriodInDays", 447, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "FeatureUpdatesPaused", 1, RegistryValueKind.DWord);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "FeatureUpdatePausePeriodInDays", 447, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseFeatureUpdatesStartTime", startTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseFeatureUpdatesEndTime", endTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseQualityUpdatesStartTime", startTimeZ, RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseQualityUpdatesEndTime", endTimeZ, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseFeatureUpdatesStartTime", start, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseFeatureUpdatesEndTime", end, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseQualityUpdatesStartTime", start, RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseQualityUpdatesEndTime", end, RegistryValueKind.String);
                         CommandExecutor.RunCommand("/c gpupdate /force");
                     }
                     break;

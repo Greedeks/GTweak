@@ -50,9 +50,8 @@ namespace GTweak.View
         {
             ColorPicker colorPicker = (ColorPicker)sender;
             _intfTweaks.ApplyTweaksColor(colorPicker.Name, colorPicker.SelectedColorString);
+            NotificationManager.Show().WithDelay(300).Logout();
         }
-
-        private void ColorPicker_PickerClosed(object sender, EventArgs e) => NotificationManager.Show().WithDelay(300).Logout();
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {

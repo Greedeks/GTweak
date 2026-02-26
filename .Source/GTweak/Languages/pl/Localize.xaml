@@ -378,8 +378,10 @@
     <v:String x:Key="tgl27_svc">Usługi związane z narzędziami korporacyjnymi</v:String>
     <v:String x:Key="tgl28_svc">Usługa związana z działaniem Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Usługi związane z powiadomieniami push</v:String>
-    <v:String x:Key="tgl30_svc">Services related to Store Demo Mode</v:String>
-
+    <v:String x:Key="tgl30_svc">Usługi związane z trybem demonstracyjnym</v:String>
+    <v:String x:Key="tgl31_svc">Usługi związane z aktualizacją Microsoft Edge</v:String>
+    <v:String x:Key="tgl32_svc">Usługa planowania klas multimedialnych</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Wyłącz, jeśli nie używasz historii plików i indeksowania zawartości.</v:String>
     <v:String x:Key="tgl2_desc_svc">Wyłącz, jeśli nie używasz Xbox i padów Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Wyłącz, jeśli nie planujesz aktualizować Windows. Oprócz usług poprawka zmieni pliki odpowiedzialne za aktualizacje Windows. Z tego powodu, nawet jeśli usługi będą włączone, Centrum aktualizacji nie będzie działać. Uwaga: poprawka wpływa na pobieranie i aktualizowanie aplikacji ze Sklepu Windows.</v:String>
@@ -409,7 +411,9 @@
     <v:String x:Key="tgl27_desc_svc">Wyłącz, jeśli nie używasz zdalnego zarządzania aplikacjami korporacyjnymi i nie masz zdalnego serwera, z którym komunikuje się Twój komputer.</v:String>
     <v:String x:Key="tgl28_desc_svc">Wyłącz, jeśli nie używasz wbudowanego systemu wirtualizacji. Nie wpływa to w żaden sposób na działanie VirtualBox i podobnych programów.</v:String>
     <v:String x:Key="tgl29_desc_svc">Wyłącz, jeśli nie używasz sparowanych urządzeń i nie instalujesz aplikacji zdalnie ze Sklepu Windows. Usługi te obsługują Centrum powiadomień z sparowanymi urządzeniami, przetwarzają żądania push, umożliwiają Windowsowi wykrycie Twojego smartfona dla aplikacji „Twój telefon”, automatyczne ponowne łączenie się z nim i wyświetlanie jego wiadomości i zdarzeń w Centrum akcji. W Windows 10 po wyłączeniu ich Centrum powiadomień może przestać się otwierać.</v:String>
-    <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Wyłącz, jeśli nie używasz urządzenia w sklepie do prezentacji funkcji systemu Windows. Usługa Store Demo zarządza wyświetlaniem treści demonstracyjnych i funkcji interaktywnych przeznaczonych wyłącznie na wystawy sklepowe oraz do celów testowych. Usługa ta nie jest potrzebna do codziennego użytkowania komputera.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Wyłącz, jeśli nie zamierzasz aktualizować lub nie używasz Microsoft Edge. Spowoduje to również zatrzymanie automatycznych aktualizacji środowiska WebView2 Runtime — te komponenty korzystają z tego samego mechanizmu aktualizacji i są od siebie silnie zależne.</v:String>
+    <v:String x:Key="tgl32_desc_svc">Wyłącz, jeśli rozumiesz możliwe konsekwencje i nie używasz aplikacji multimedialnych wymagających priorytetowego przetwarzania dźwięku i obrazu. W rzadkich przypadkach może to nieznacznie zmniejszyć liczbę zdarzeń systemowych i obciążenie (na przykład przy użyciu adapterów sieciowych z NetAdapterCX); efekt zależy jednak od konfiguracji systemu. Może powodować zacinanie się dźwięku, desynchronizację audio/wideo i inne problemy z odtwarzaniem.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

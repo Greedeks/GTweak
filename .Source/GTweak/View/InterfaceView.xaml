@@ -34,12 +34,12 @@
                     <StackPanel Orientation="Vertical" Margin="0,-10,0,-10">
                         <StackPanel Orientation="Horizontal" Height="45"  MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource color1_desc_intf}" ToolTipService.IsEnabled="False">
                             <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource color1_intf}"/>
-                            <uc:ColorPicker x:Name="ColorPicker1" SelectedColorString="{Binding [ColorPicker1].Value}" DefaultColor="#0077D4" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" ColorPicked="ColorPicker_ColorPicked" PickerClosed="ColorPicker_PickerClosed"/>
+                            <uc:ColorPicker x:Name="ColorPicker1" SelectedColorString="{Binding [ColorPicker1].Value}" DefaultColor="#0077D4" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" ColorPicked="ColorPicker_ColorPicked"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource color2_desc_intf}" ToolTipService.IsEnabled="False">
                             <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource color2_intf}"/>
-                            <uc:ColorPicker x:Name="ColorPicker2" SelectedColorString="{Binding [ColorPicker2].Value}" DefaultColor="#FFFFE1" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" ColorPicked="ColorPicker_ColorPicked" PickerClosed="ColorPicker_PickerClosed"/>
+                            <uc:ColorPicker x:Name="ColorPicker2" SelectedColorString="{Binding [ColorPicker2].Value}" DefaultColor="#FFFFE1" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" ColorPicked="ColorPicker_ColorPicked"/>
                         </StackPanel>
                     </StackPanel>
 

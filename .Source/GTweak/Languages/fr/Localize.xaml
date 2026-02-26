@@ -380,7 +380,9 @@
     <v:String x:Key="tgl28_svc">Service lié au fonctionnement de Hyper-V</v:String>
     <v:String x:Key="tgl29_svc">Services liés aux notifications push</v:String>
     <v:String x:Key="tgl30_svc">Services liés au mode de démonstration en magasin</v:String>
-
+    <v:String x:Key="tgl31_svc">Services liés à la mise à jour de Microsoft Edge</v:String>
+    <v:String x:Key="tgl32_svc">Service de planification des classes multimédia</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Désactivez si vous n'utilisez pas l'historique des fichiers et l'indexation du contenu.</v:String>
     <v:String x:Key="tgl2_desc_svc">Désactivez si vous n'utilisez pas Xbox et les manettes Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Désactivez si vous ne prévoyez pas de mettre à jour Windows. En plus des services, ce réglage modifie les fichiers responsables des mises à jour. Même si les services sont activés, le Centre de mises à jour ne fonctionnera pas. Notez aussi que cela affecte le téléchargement et la mise à jour des applications du Windows Store.</v:String>
@@ -411,6 +413,8 @@
     <v:String x:Key="tgl28_desc_svc">Désactivez si vous n'utilisez pas le système de virtualisation intégré. Cela n'affecte en rien VirtualBox ou similaires.</v:String>
     <v:String x:Key="tgl29_desc_svc">Désactivez si vous n'utilisez pas d'appareils jumelés et n'installez pas d'applications du Windows Store à distance. Ces services gèrent le Centre de notifications avec les appareils jumelés, traitent les requêtes push, permettent à Windows de détecter votre smartphone pour l'application « Votre téléphone », s'y reconnectent automatiquement et affichent ses messages et événements dans le Centre de notifications. Dans Windows 10, après les avoir désactivés, le Centre de notifications peut ne plus s'ouvrir.</v:String>
     <v:String x:Key="tgl30_desc_svc">Désactivez si vous n'utilisez pas l'appareil dans un magasin pour faire la démonstration des fonctionnalités de Windows. Le service de démonstration gère l'affichage du contenu de démo et des fonctionnalités interactives destinées uniquement aux présentoirs et aux tests. Ce service n'est pas nécessaire pour une utilisation quotidienne de l'ordinateur.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Désactivez si vous ne prévoyez pas de mettre à jour ou si vous n'utilisez pas Microsoft Edge. Cela arrête également les mises à jour automatiques du WebView2 Runtime — ces composants utilisent le même mécanisme de mise à jour et sont étroitement interdépendants.</v:String>
+    <v:String x:Key="tgl32_desc_svc">Désactivez si vous comprenez les conséquences possibles et n'utilisez pas d'applications multimédia nécessitant un traitement prioritaire de l'audio et de la vidéo. Dans de rares cas, cela peut légèrement réduire le nombre d'événements système et la charge (par exemple lors de l'utilisation d'adaptateurs réseau avec NetAdapterCX) ; toutefois, l'effet dépend de la configuration du système. Cela peut provoquer des saccades audio, une désynchronisation audio/vidéo et d'autres problèmes de lecture.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

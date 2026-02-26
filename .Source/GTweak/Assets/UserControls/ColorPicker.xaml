@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              xmlns:effects="clr-namespace:GTweak.Assets.ShaderEffects"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Loaded="OnLoaded" Unloaded="OnUnloaded"
              d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" IsTabStop="False" PreviewKeyDown="ColorPopup_PreviewKeyDown">
     <Grid>
-        <ToggleButton x:Name="PART_ToggleButton" Checked="PART_ToggleButton_Checked" Unchecked="PART_ToggleButton_Unchecked">
+        <ToggleButton x:Name="TglArrow" Checked="TglArrow_Checked" Unchecked="TglArrow_Unchecked">
             <ToggleButton.Template>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border x:Name="RootBorder" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_ComboBox}" CornerRadius="4" Padding="5">
@@ -17,9 +17,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-
                             <ContentPresenter Grid.Column="0" VerticalAlignment="Center"/>
-
                             <Path x:Name="Arrow" Grid.Column="1" Data="M 0,2 L 4,6 L 8,2" Stroke="{StaticResource Brush_Highlighted}" StrokeThickness="1" Margin="8,0,2,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                                 <Path.RenderTransform>
                                     <RotateTransform x:Name="ArrowRotate" Angle="0"/>
@@ -62,9 +60,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Ellipse x:Name="PART_ColorPreview" Grid.Column="0" Width="20" Height="20" Stroke="{StaticResource Brush_Separator}" StrokeThickness="2" Margin="0,0,8,0" Fill="White"/>
+                <Ellipse x:Name="ColorPreview" Grid.Column="0" Width="20" Height="20" Stroke="{StaticResource Brush_Separator}" StrokeThickness="2" Margin="0,0,8,0" Fill="White"/>
 
-                <TextBlock x:Name="PART_ColorTextBlock" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted}" Text="255 255 255" MinWidth="80" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining"/>
+                <TextBlock x:Name="ColorTextBlock" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted}" Text="255 255 255" MinWidth="80" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining"/>
             </Grid>
         </ToggleButton>
 
@@ -128,7 +126,7 @@
                         </Canvas>
                     </Grid>
 
-                    <TextBox x:Name="PART_HexBox" Height="30" Margin="0,10,0,0" MaxLength="7" Width="{Binding ElementName=BtnDefault, Path=ActualWidth}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" KeyDown="HexBox_KeyDown" LostFocus="HexBox_LostFocus" TextChanged="HexBox_TextChanged">
+                    <TextBox x:Name="HexBox" Height="30" Margin="0,10,0,0" MaxLength="7" Width="{Binding ElementName=BtnDefault, Path=ActualWidth}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" KeyDown="HexBox_KeyDown" LostFocus="HexBox_LostFocus" TextChanged="HexBox_TextChanged">
                         <TextBox.Background>
                             <SolidColorBrush Color="{Binding SelectedColor, RelativeSource={RelativeSource AncestorType=local:ColorPicker}}"/>
                         </TextBox.Background>

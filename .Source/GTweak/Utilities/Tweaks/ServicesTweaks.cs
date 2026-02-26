@@ -173,6 +173,15 @@ namespace GTweak.Utilities.Tweaks
 
             _сontrolWriter.Button[30] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", "4");
+
+            _сontrolWriter.Button[31] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdate", "Start", "4") ||
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdatem", "Start", "4") ||
+                RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "cmdLine", string.Empty).IndexOf(PathLocator.Executable.UsoClient.Normal, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                IsTaskEnabled(edgeTasks);
+
+            _сontrolWriter.Button[32] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MMCSS", "Start", "4");
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -439,6 +448,15 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton30":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
                     SetTaskState(!isDisabled, retailTasks);
+                    break;
+                case "TglButton31":
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdatem", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "cmdLine", isDisabled ? "dllhost.exe" : PathLocator.Executable.UsoClient.Normal, RegistryValueKind.String);
+                    SetTaskState(!isDisabled, edgeTasks);
+                    break;
+                case "TglButton32":
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MMCSS", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
                     break;
                 default:
                     break;
