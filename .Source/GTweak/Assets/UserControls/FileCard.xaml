@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d"
-             d:Height="Auto" d:Width="Auto" IsTabStop="False" KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True"
+             d:Height="Auto" d:Width="Auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True"
              UseLayoutRounding="True" Cursor="Hand" MaxWidth="200" >
     <Grid Cursor="Hand">
         <ProgressBar x:Name="ProgressBar" Height="4" Margin="8,0,8,0" Width="Auto" VerticalAlignment="Top" Visibility="Collapsed" Value="0" Maximum="100" Foreground="{StaticResource Brush_Accent}" />

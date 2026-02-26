@@ -11,7 +11,9 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="IsTabStop" Value="False"/>
     </Style>
 
@@ -155,9 +157,11 @@
         <Setter Property="Background" Value="{StaticResource Brush_Button}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Padding" Value="12,6"/>
         <Setter Property="Template">
             <Setter.Value>

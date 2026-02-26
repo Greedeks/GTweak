@@ -7,7 +7,9 @@
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Padding" Value="4"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Setter Property="RenderTransform">

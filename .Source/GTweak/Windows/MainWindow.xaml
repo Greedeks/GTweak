@@ -149,7 +149,7 @@
                                 <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                         <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource cmbox_lang_main}"/>
-                                        <ComboBox Style="{StaticResource CustomComboBoxStyle}" Margin="10,0,0,0" Height="33" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display" >
+                                        <ComboBox Style="{StaticResource CustomComboBoxStyle}" Margin="10,0,0,0" Height="33" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display">
                                             <ComboBox.CacheMode>
                                                 <BitmapCache RenderAtScale="2" EnableClearType="True"/>
                                             </ComboBox.CacheMode>

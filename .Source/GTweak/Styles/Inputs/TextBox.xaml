@@ -8,9 +8,11 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="TextAlignment" Value="Left"/>
         <Setter Property="Width" Value="350" />
         <Setter Property="Height" Value="27" />
         <Setter Property="Cursor" Value="IBeam" />

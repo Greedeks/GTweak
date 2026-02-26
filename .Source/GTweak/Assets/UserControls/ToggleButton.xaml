@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d" 
-             d:Height="auto" d:Width="auto" IsTabStop="False" KeyboardNavigation.TabNavigation="None"
+             d:Height="auto" d:Width="auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None"
              SnapsToDevicePixels="True" UseLayoutRounding="True">
     <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left">
         <Grid Cursor="Hand">

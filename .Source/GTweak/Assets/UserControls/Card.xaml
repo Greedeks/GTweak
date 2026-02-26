@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d" 
-             d:Height="auto" d:Width="auto" IsTabStop="False" KeyboardNavigation.TabNavigation="None"
-             SnapsToDevicePixels="True" UseLayoutRounding="True">
+             d:Height="auto" d:Width="auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None"
+             SnapsToDevicePixels="True" UseLayoutRounding="True"> 
     <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left">
         <Grid HorizontalAlignment="Center">
             <Border CornerRadius="8" Opacity="0.5" Background="#33000000" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=CardBody}" Height="{Binding ActualHeight, ElementName=CardBody}">

@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              xmlns:effects="clr-namespace:GTweak.Assets.ShaderEffects"
              mc:Ignorable="d" Loaded="OnLoaded" Unloaded="OnUnloaded"
-             d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" IsTabStop="False" PreviewKeyDown="ColorPopup_PreviewKeyDown">
+             d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" 
+             IsTabStop="False" Focusable="False" PreviewKeyDown="ColorPopup_PreviewKeyDown">
     <Grid>
-        <ToggleButton x:Name="TglArrow" Checked="TglArrow_Checked" Unchecked="TglArrow_Unchecked">
+        <ToggleButton x:Name="TglArrow" Checked="TglArrow_Checked" Unchecked="TglArrow_Unchecked" Focusable="False">
             <ToggleButton.Template>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border x:Name="RootBorder" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_ComboBox}" CornerRadius="4" Padding="5">

@@ -3,9 +3,10 @@
 
     <Style x:Key="CustomComboBoxItemStyle" TargetType="ComboBoxItem" BasedOn="{StaticResource {x:Type ComboBoxItem}}">
         <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
-        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Padding" Value="0,4,0,4"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
@@ -62,9 +63,10 @@
         <Setter Property="Height" Value="28"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -113,9 +115,10 @@
         <Setter Property="BorderBrush" Value="{StaticResource Brush_Separator}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="MaxDropDownHeight" Value="230"/>
-        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="ContextMenu" Value="{x:Null}"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource CustomComboBoxItemStyle}"/>
         <Setter Property="ItemTemplate">
