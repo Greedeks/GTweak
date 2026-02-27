@@ -154,11 +154,18 @@
                         </Canvas>
                     </Grid>
 
-                    <TextBox x:Name="HexBox" Height="30" Margin="0,10,0,0" MaxLength="7" Width="{Binding ElementName=BtnDefault, Path=ActualWidth}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" KeyDown="HexBox_KeyDown" LostFocus="HexBox_LostFocus" TextChanged="HexBox_TextChanged">
-                        <TextBox.Background>
-                            <SolidColorBrush Color="{Binding SelectedColor, RelativeSource={RelativeSource AncestorType=local:ColorPicker}}"/>
-                        </TextBox.Background>
-                    </TextBox>
+                    <Grid Width="{Binding ElementName=BtnDefault, Path=ActualWidth}" Margin="0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" BorderThickness="1" BorderBrush="{StaticResource Brush_Separator}" CornerRadius="6"  Margin="0,0,5,0" Background="Transparent" VerticalAlignment="Stretch" Padding="10,0">
+                            <TextBlock Text="HEX" Style="{StaticResource Description}" FontSize="14px" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0,5"/>
+                        </Border>
+
+                        <TextBox x:Name="HexBox" Grid.Column="1" MinWidth="0" Width="Auto" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" BorderThickness="0" Background="Transparent" FontWeight="SemiBold" MaxLength="7" TextChanged="HexBox_TextChanged" KeyDown="HexBox_KeyDown" LostFocus="HexBox_LostFocus"/>
+                    </Grid>
 
                     <Button x:Name="BtnDefault" Content="{DynamicResource btn_default}" Style="{StaticResource ButtonContent_Inverted}" Margin="0,10,0,0" HorizontalAlignment="Stretch" Click="BtnDefault_Click"/>
 

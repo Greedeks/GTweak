@@ -127,7 +127,27 @@ namespace GTweak.Utilities.Helpers
 
         internal static T GetValue<T>(string subKey, string valueName, T defaultValue)
         {
-            try { return (T)Convert.ChangeType(Registry.GetValue(subKey, valueName, defaultValue), typeof(T)); }
+            try
+            {
+                object value = Registry.GetValue(subKey, valueName, null);
+
+                switch (value)
+                {
+                    case null:
+                        return defaultValue;
+                    case T t:
+                        return t;
+                }
+
+                Type targetType = typeof(T);
+
+                if (targetType.IsEnum)
+                {
+                    return (T)Enum.Parse(targetType, value.ToString());
+                }
+
+                return (T)Convert.ChangeType(value, targetType);
+            }
             catch { return defaultValue; }
         }
 
