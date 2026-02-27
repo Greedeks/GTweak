@@ -56,8 +56,9 @@
 
     <Color x:Key="Color_Border_Hover_CheckBox">#9B9C9C</Color>
     <Color x:Key="Color_Background_CheckBox">#40C279</Color>
-    
-    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="UncheckedIconOpacity">0.1</sys:Double>
-    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="RadialProgressOpacity">0.2</sys:Double>
+
+    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="IconAppUnchecked_Opacity">0.1</sys:Double>
+    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="RadialProgress_Opacity">0.2</sys:Double>
+    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="IconNavigation_Opacity">0.7</sys:Double>
 
 </ResourceDictionary>

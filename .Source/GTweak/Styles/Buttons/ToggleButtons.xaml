@@ -349,7 +349,7 @@
                             <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_Button}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="Icon" Property="Opacity" Value="{StaticResource UncheckedIconOpacity}"/>
+                            <Setter TargetName="Icon" Property="Opacity" Value="{StaticResource IconAppUnchecked_Opacity}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Icon" Property="Opacity" Value="1"/>

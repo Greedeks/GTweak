@@ -29,7 +29,7 @@
                             </Border>
                             <Border x:Name="InnerPanel" Height="48" CornerRadius="12" Background="{TemplateBinding Background}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,10,0">
                                 <Grid Height="48">
-                                    <Rectangle x:Name="ContentShadowMask" Grid.ColumnSpan="2" Fill="#33000000" Opacity="0.7" IsHitTestVisible="False">
+                                    <Rectangle x:Name="ContentShadowMask" Grid.ColumnSpan="2" Fill="#33000000" Opacity="{StaticResource IconNavigation_Opacity}" IsHitTestVisible="False">
                                         <Rectangle.RenderTransform>
                                             <TranslateTransform X="3" Y="3" />
                                         </Rectangle.RenderTransform>
@@ -59,7 +59,7 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
                             <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
-                            <Setter TargetName="ShadowPanel" Property="Opacity" Value="0.8"/>
+                            <Setter TargetName="ShadowPanel" Property="Opacity" Value="0.7"/>
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard Timeline.DesiredFrameRate="120">
@@ -117,7 +117,7 @@
                             <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
                             <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
                             <Setter TargetName="NavTextBox" Property="Opacity" Value="1"/>
-                            <Setter TargetName="ShadowPanel" Property="Opacity" Value="0.8"/>
+                            <Setter TargetName="ShadowPanel" Property="Opacity" Value="0.7"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
