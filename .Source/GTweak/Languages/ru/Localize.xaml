@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">Утилита не поддерживает вашу Windows. Дальнейший запуск</v:String>
     <v:String x:Key="part2_nosupport_message">невозможен,</v:String>
     <v:String x:Key="part3_nosupport_message">для предотвращения критических ошибок.</v:String>
+    <v:String x:Key="title_admin_message">Недостаточно прав</v:String>
+    <v:String x:Key="part1_admin_message">Запуск утилиты</v:String>
+    <v:String x:Key="part2_admin_message">невозможен,</v:String>
+    <v:String x:Key="part3_admin_message">для корректной работы запустите её от имени администратора.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->

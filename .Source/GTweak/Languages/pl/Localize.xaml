@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">Narzędzie nie obsługuje Twojej wersji systemu Windows.</v:String>
     <v:String x:Key="part2_nosupport_message">Dalsze uruchomienie</v:String>
     <v:String x:Key="part3_nosupport_message">jest niemożliwe, GTweak zostanie zamknięty, aby zapobiec krytycznym błędom.</v:String>
+    <v:String x:Key="title_admin_message">Niewystarczające uprawnienia</v:String>
+    <v:String x:Key="part1_admin_message">Uruchomienie narzędzia</v:String>
+    <v:String x:Key="part2_admin_message">niemożliwe,</v:String>
+    <v:String x:Key="part3_admin_message">aby działało poprawnie, uruchom je jako administrator.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->

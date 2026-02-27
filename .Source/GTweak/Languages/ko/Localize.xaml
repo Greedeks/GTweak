@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">이 유틸리티는 귀하의 Windows를 지원하지 않습니다. 더 이상</v:String>
     <v:String x:Key="part2_nosupport_message">실행할 수 없으며</v:String>
     <v:String x:Key="part3_nosupport_message">심각한 오류를 방지하기 위해 GTweak이 종료됩니다.</v:String>
+    <v:String x:Key="title_admin_message">권한 부족</v:String>
+    <v:String x:Key="part1_admin_message">유틸리티 실행</v:String>
+    <v:String x:Key="part2_admin_message">불가능합니다,</v:String>
+    <v:String x:Key="part3_admin_message">정상 동작을 위해 관리자 권한으로 실행해 주세요.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->

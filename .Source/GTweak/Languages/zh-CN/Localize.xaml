@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">该实用程序不支持您的 Windows 系统。</v:String>
     <v:String x:Key="part2_nosupport_message">无法继续启动，</v:String>
     <v:String x:Key="part3_nosupport_message">GTweak 将会关闭以防止严重错误。</v:String>
+    <v:String x:Key="title_admin_message">权限不足</v:String>
+    <v:String x:Key="part1_admin_message">启动该工具</v:String>
+    <v:String x:Key="part2_admin_message">无法进行，</v:String>
+    <v:String x:Key="part3_admin_message">为保证正常运行，请以管理员身份运行该程序。</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->

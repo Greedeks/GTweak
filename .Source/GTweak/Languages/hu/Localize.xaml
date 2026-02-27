@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">A segédprogram nem támogatja a Windows rendszert. Nincs további indítás</v:String>
     <v:String x:Key="part2_nosupport_message">lehetséges,</v:String>
     <v:String x:Key="part3_nosupport_message">A GTweak bezárul a kritikus hibák elkerülése érdekében.</v:String>
+    <v:String x:Key="title_admin_message">Nincs elegendő jogosultság</v:String>
+    <v:String x:Key="part1_admin_message">A segédprogram indítása</v:String>
+    <v:String x:Key="part2_admin_message">nem lehetséges,</v:String>
+    <v:String x:Key="part3_admin_message">a helyes működés érdekében indítsa rendszergazdai jogosultságokkal.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->

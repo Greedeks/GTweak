@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -56,9 +57,20 @@ namespace GTweak.Utilities.Controls
                 return;
             }
 
-            new MessageWindow(true).ShowDialog();
+            new MessageWindow(MessageWindow.MessageWindowType.NotSupported).ShowDialog();
         }
 
+        internal static void CheckingAdministratorPrivileges()
+        {
+            using WindowsIdentity identity = WindowsIdentity.GetCurrent();
+
+            if (new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator))
+            {
+                return;
+            }
+
+            new MessageWindow(MessageWindow.MessageWindowType.NotAdmin).ShowDialog();
+        }
         internal static void CheckingDefenderExclusions() => CommandExecutor.RunCommandAsTrustedInstaller($@"$ErrorActionPreference = 'Stop'; $target = '{SettingsEngine.currentLocation}'; try {{ $mp = Get-MpPreference; if ($mp.ExclusionProcess -notcontains $target) {{ Add-MpPreference -ExclusionProcess $target }}; if ($mp.ExclusionPath -notcontains $target) {{ Add-MpPreference -ExclusionPath $target }} }} catch {{}}", true);
     }
 }

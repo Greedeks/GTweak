@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">Утиліта не підтримує вашу Windows. Подальший запуск</v:String>
     <v:String x:Key="part2_nosupport_message">неможливий,</v:String>
     <v:String x:Key="part3_nosupport_message">GTweak буде закрито для запобігання критичним помилкам.</v:String>
+    <v:String x:Key="title_admin_message">Недостатньо прав</v:String>
+    <v:String x:Key="part1_admin_message">Запуск утиліти</v:String>
+    <v:String x:Key="part2_admin_message">неможливий,</v:String>
+    <v:String x:Key="part3_admin_message">для коректної роботи запустіть її від імені адміністратора.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->

@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">L’utilitaire ne prend pas en charge votre version de Windows. Aucun lancement supplémentaire n’est</v:String>
     <v:String x:Key="part2_nosupport_message">possible,</v:String>
     <v:String x:Key="part3_nosupport_message">GTweak va se fermer pour éviter des erreurs critiques.</v:String>
+    <v:String x:Key="title_admin_message">Privilèges insuffisants</v:String>
+    <v:String x:Key="part1_admin_message">Lancement de l'utilitaire</v:String>
+    <v:String x:Key="part2_admin_message">impossible,</v:String>
+    <v:String x:Key="part3_admin_message">pour un fonctionnement correct, exécutez-le en tant qu'administrateur.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->

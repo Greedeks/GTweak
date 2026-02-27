@@ -28,7 +28,11 @@
     <v:String x:Key="part1_nosupport_message">O utilitário não suporta o seu Windows. A execução não é</v:String>
     <v:String x:Key="part2_nosupport_message">possível,</v:String>
     <v:String x:Key="part3_nosupport_message">o GTweak será fechado para evitar erros críticos.</v:String>
-	<!--#endregion-->
+    <v:String x:Key="title_admin_message">Permissões insuficientes</v:String>
+    <v:String x:Key="part1_admin_message">Execução do utilitário</v:String>
+    <v:String x:Key="part2_admin_message">não é possível,</v:String>
+    <v:String x:Key="part3_admin_message">para o funcionamento correto, execute-o como administrador.</v:String>
+    <!--#endregion-->
 
     <!--#region Notification Window -->
     <v:String x:Key="title_win_noty">Notificação - GTweak</v:String>

@@ -28,6 +28,10 @@
     <v:String x:Key="part1_nosupport_message">The utility does not support your Windows. No further launch is</v:String>
     <v:String x:Key="part2_nosupport_message">possible,</v:String>
     <v:String x:Key="part3_nosupport_message">GTweak will be closed to prevent critical errors.</v:String>
+    <v:String x:Key="title_admin_message">Insufficient privileges</v:String>
+    <v:String x:Key="part1_admin_message">Launching the program</v:String>
+    <v:String x:Key="part2_admin_message">is not possible,</v:String>
+    <v:String x:Key="part3_admin_message">for correct operation, please run it as an administrator.</v:String>
     <!--#endregion-->
 
     <!--#region Notification Window -->
