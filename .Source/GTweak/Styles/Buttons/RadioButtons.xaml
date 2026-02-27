@@ -12,12 +12,12 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Focusable" Value="False"/>
         <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="OuterPanel" CornerRadius="12" Width="50" Height="48" Background="Transparent" HorizontalAlignment="Left" SnapsToDevicePixels="True">
+                    <Border x:Name="OuterPanel" CornerRadius="12" Width="50" Height="48" Background="{x:Null}" HorizontalAlignment="Left" SnapsToDevicePixels="True">
                         <Grid RenderOptions.BitmapScalingMode="HighQuality">
                             <Grid.CacheMode>
                                 <BitmapCache RenderAtScale="2" EnableClearType="True"/>
@@ -55,7 +55,7 @@
                             </Border>
                         </Grid>
                     </Border>
-                    <ControlTemplate.Triggers>
+                    <ControlTemplate.Triggers> 
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
                             <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>

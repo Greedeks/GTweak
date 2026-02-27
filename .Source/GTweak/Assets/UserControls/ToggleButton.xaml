@@ -8,13 +8,13 @@
              d:Height="auto" d:Width="auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None"
              SnapsToDevicePixels="True" UseLayoutRounding="True">
     <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left">
-        <Grid Cursor="Hand">
+        <Grid Cursor="Hand" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" Width="44" Height="20" MouseLeftButtonUp="Toggle_MouseLeftButtonUp" MouseEnter="Toggle_MouseEnter" MouseLeave="Toggle_MouseLeave">
+            <Grid Grid.Column="0" Background="Transparent" Width="44" Height="20" MouseLeftButtonUp="Toggle_MouseLeftButtonUp" MouseEnter="Toggle_MouseEnter" MouseLeave="Toggle_MouseLeave">
                 <Rectangle x:Name="Back" Width="44" Height="20" RadiusY="10" RadiusX="10" StrokeThickness="1" Stroke="{StaticResource Brush_ToggleBorder_Off}">
                     <Rectangle.Fill>
                         <SolidColorBrush Color="Transparent"/>
@@ -37,7 +37,9 @@
                 </Ellipse>
             </Grid>
 
-            <TextBlock x:Name="ToggleText" Grid.Column="1" Text="TextTglButton" Style="{StaticResource TextInactivity}" Margin="10,2,0,2"/>
+            <Grid Grid.Column="1" Background="Transparent">
+                <TextBlock x:Name="ToggleText" Text="TextTglButton" Style="{StaticResource TextInactivity}" Margin="10,2,0,2"/>
+            </Grid>
         </Grid>
     </Viewbox>
 </UserControl>
