@@ -225,8 +225,6 @@
     <v:String x:Key="tgl30_intf">데스크톱 요소의 도구 설명</v:String>
     <v:String x:Key="tgl31_intf">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
     <v:String x:Key="tgl32_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
-    <v:String x:Key="tgl31_svc">Microsoft Edge 구성 요소 업데이트 관련 서비스</v:String>
-    <v:String x:Key="tgl32_svc">멀티미디어 클래스 스케줄러 서비스</v:String>
     
     <v:String x:Key="color1_desc_intf">시스템에서 커서로 텍스트나 개체를 선택할 때의 배경 색상을 변경합니다.</v:String>
     <v:String x:Key="color2_desc_intf">지원되는 애플리케이션에서 도구 설명의 색상을 변경합니다.</v:String>
@@ -262,8 +260,6 @@
     <v:String x:Key="tgl30_desc_intf">조정은 마우스 커서를 올려 놓으면 바탕 화면 요소의 도구 설명이 비활성화됩니다.</v:String>
     <v:String x:Key="tgl31_desc_intf">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl32_desc_intf">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
-    <v:String x:Key="tgl31_desc_svc">Microsoft Edge를 업데이트할 계획이 없거나 사용하지 않는 경우 비활성화하세요. 이렇게 하면 WebView2 Runtime의 자동 업데이트도 중지됩니다 — 이 구성요소들은 동일한 업데이트 메커니즘을 사용하며 서로 밀접하게 상호의존합니다.</v:String>
-    <v:String x:Key="tgl32_desc_svc">오디오 및 비디오의 우선 처리가 필요한 멀티미디어 응용 프로그램을 사용하지 않으며 가능한 결과를 이해하는 경우에만 비활성화하십시오. 드문 경우지만(예: NetAdapterCX가 적용된 네트워크 어댑터 사용 시) 시스템 이벤트 수와 부하가 약간 줄어들 수 있습니다. 다만 효과는 시스템 구성에 따라 다릅니다. 오디오 끊김, 오디오/비디오 비동기화 및 기타 재생 문제가 발생할 수 있습니다.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
@@ -296,7 +292,7 @@
     <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft 스티커 메모</v:String>
     <v:String x:Key="Maps_pkg">Windows 지도</v:String>
     <v:String x:Key="Camera_pkg">Windows 카메라</v:String>
-    <v:String x:Key="Paint3D_pkg">Paint3D</v:String>
+    <v:String x:Key="Paint3D_pkg">그림판3D</v:String>
     <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
     <v:String x:Key="People_pkg">피플</v:String>
     <v:String x:Key="BingNews_pkg">Microsoft 뉴스</v:String>
@@ -309,14 +305,14 @@
     <v:String x:Key="MicrosoftFamily_pkg">Microsoft 가족 보호</v:String>
     <v:String x:Key="BingSearch_pkg">Bing 검색</v:String>
     <v:String x:Key="QuickAssist_pkg">빠른 지원</v:String>
-    <v:String x:Key="DevHome_pkg">Dev Home</v:String>
-    <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
+    <v:String x:Key="DevHome_pkg">Dev 홈</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">터미널</v:String>
     <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
     <v:String x:Key="WebMediaExtensions_pkg">Web Media 확장</v:String>
-    <v:String x:Key="OneConnect_pkg">Mobile Plans</v:String>
+    <v:String x:Key="OneConnect_pkg">모바일 요금제</v:String>
     <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
-    <v:String x:Key="Notepad_pkg">Notepad</v:String>
-    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Notepad_pkg">메모장</v:String>
+    <v:String x:Key="Calculator_pkg">계산기</v:String>
     <v:String x:Key="Paint_pkg">Microsoft Paint</v:String>
     <v:String x:Key="Copilot_pkg">Copilot</v:String>
     <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
@@ -343,7 +339,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
-    
+
     <v:String x:Key="title_over_pkg">설치 제거 확인</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Microsoft Edge 브라우저를 제거하려고 합니다. 이렇게 하면 Microsoft Office (예: Meeting 인사이트, 룸 파인더), 사진 앱 (새 버전은 WebView2 사용), 일부 Telegram 봇, 그리고 내장된 WebView를 사용하는 기타 프로그램 등 다양한 응용 프로그램에서 웹 콘텐츠를 표시하는 데 사용되는 EdgeWebView 구성 요소도 제거됩니다. 진행하기 전에 이 구성 요소가 필요하지 않은지 확인하세요. 
        최근 Windows 11 빌드에서 Copilot은 PWA 또는 시스템 래퍼로 EdgeWebView를 통해 구현되었습니다. Edge를 제거하면 웹 래퍼 역할을 하는 Copilot도 제거됩니다.</v:String>
@@ -383,6 +379,8 @@
     <v:String x:Key="tgl28_svc">Hyper-V 운영 관련 서비스</v:String>
     <v:String x:Key="tgl29_svc">푸시 알림 관련 서비스</v:String>
     <v:String x:Key="tgl30_svc">매장 데모 모드 관련 서비스</v:String>
+    <v:String x:Key="tgl31_svc">Microsoft Edge 업데이트 관련 서비스</v:String>
+    <v:String x:Key="tgl32_svc">멀티미디어 클래스 스케줄러 서비스</v:String>
 
     <v:String x:Key="tgl1_desc_svc">파일 기록 및 콘텐츠 인덱싱을 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl2_desc_svc">Xbox 및 Microsoft 게임 패드를 사용하지 않는 경우 비활성화합니다.</v:String>
@@ -414,6 +412,8 @@
     <v:String x:Key="tgl28_desc_svc">내장 가상화 시스템을 사용하지 않는 경우 비활성화합니다. VirtualBox 등의 작업에는 어떤 영향도 미치지 않습니다.</v:String>
     <v:String x:Key="tgl29_desc_svc">페어링된 장치를 사용하지 않고 Windows Store에서 원격으로 앱을 설치하지 않는 경우 비활성화합니다. 이러한 서비스는 페어링된 장치로 알림 센터를 처리하고 푸시 요청을 처리하며, Windows가 «휴대폰» 앱의 스마트폰을 감지하고 자동으로 다시 연결하여 작업 센터에 메시지와 이벤트를 표시할 수 있도록 허용합니다. Windows 10에서는 알림 센터를 비활성화한 후 알림 센터가 열리지 않을 수 있습니다.</v:String>
     <v:String x:Key="tgl30_desc_svc">매장에서 Windows 기능을 시연하기 위해 장치를 사용하는 경우가 아니라면 비활성화하십시오. Store 데모 서비스는 매장 전시 및 테스트용으로 제작된 데모 콘텐츠와 대화형 기능의 표시를 관리합니다. 이 서비스는 일반적인 컴퓨터 사용에는 필요하지 않습니다.</v:String>
+    <v:String x:Key="tgl31_desc_svc">업데이트할 계획이 없거나 Microsoft Edge를 사용하지 않는 경우 비활성화합니다. 이렇게 하면 WebView2 런타임에 대한 자동 업데이트도 중지됩니다. 이러한 구성 요소는 동일한 업데이트 메커니즘을 사용하며 상호 의존적입니다.</v:String>
+    <v:String x:Key="tgl32_desc_svc">가능한 결과를 이해하고 우선순위가 있는 오디오 및 비디오 처리가 필요한 멀티미디어 응용 프로그램을 사용하지 않는 경우 비활성화합니다. 드물게는 NetAdapterCX와 함께 네트워크 어댑터를 사용할 때 시스템 이벤트 수와 부하를 약간 줄일 수 있지만, 그 효과는 시스템 구성에 따라 달라집니다. 이로 인해 오디오 끊김, 오디오/비디오 비동기화 및 기타 재생 문제가 발생할 수 있습니다.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -520,12 +520,3 @@
     <!--#endregion-->
 
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
