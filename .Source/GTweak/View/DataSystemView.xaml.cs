@@ -54,8 +54,8 @@ namespace GTweak.View
 
         private void StartMonitoringData()
         {
-            RAMLoad.Value = HardwareData.Memory.Usage;
-            CPULoad.Value = HardwareData.Processor.Usage;
+            CPULoad.EndAngle = HardwareData.Processor.Usage * 3.6;
+            RAMLoad.EndAngle = HardwareData.Memory.Usage * 3.6;
 
             _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
             {
@@ -64,7 +64,11 @@ namespace GTweak.View
 
                     await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetTotalProcessorUsage(); });
                     await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetPhysicalAvailableMemory(); });
-                    AnimationProgressBars(HardwareData.Processor.Usage, HardwareData.Memory.Usage);
+                    _ = Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        AnimateArcProgress(CPULoad, HardwareData.Processor.Usage);
+                        AnimateArcProgress(RAMLoad, HardwareData.Memory.Usage);
+                    }));
                     _ = Dispatcher.BeginInvoke(new Action(async () =>
                     {
                         HardwareData.RunningProcessesCount = await Task.Run(() => _systemDataCollector.GetProcessCount());
@@ -86,14 +90,7 @@ namespace GTweak.View
             });
         }
 
-        private void AnimationProgressBars(double cpuValue, double ramValue)
-        {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                CPULoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(CPULoad.Value, cpuValue, 0.2, useCubicEase: true));
-                RAMLoad.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(RAMLoad.Value, ramValue, 0.2, useCubicEase: true));
-            }));
-        }
+        private void AnimateArcProgress(Wpf.Ui.Controls.Arc arc, double percent) => arc.BeginAnimation(Wpf.Ui.Controls.Arc.EndAngleProperty, FactoryAnimation.CreateIn(arc.EndAngle, percent * 3.6, 0.2, useCubicEase: true));
 
         private void AnimationPopup()
         {
@@ -160,6 +157,5 @@ namespace GTweak.View
                 }
             }
         }
-
     }
 }

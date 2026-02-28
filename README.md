@@ -106,7 +106,6 @@ Installed platform: .NET Framework 4.8
 ## NuGet Packages
 - [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
 - [Costura](https://www.nuget.org/packages/Costura.Fody)
-- [XamlRadialProgressBar](https://www.nuget.org/packages/XamlRadialProgressBar)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
 - [WPF-UI](https://www.nuget.org/packages/wpf-ui/)

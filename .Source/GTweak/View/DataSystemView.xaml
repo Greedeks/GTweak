@@ -6,14 +6,17 @@
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
              xmlns:uc="clr-namespace:GTweak.Assets.UserControls"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             xmlns:xrpb="http://XamlRadialProgressBar/DotNet"
              xmlns:anim="clr-namespace:GTweak.Utilities.Animation"
+             xmlns:conv="clr-namespace:GTweak.Core.Converters"
              xmlns:local="clr-namespace:GTweak.View"
              mc:Ignorable="d" d:Width="1014" Style="{StaticResource LaunchPage}">
     <UserControl.DataContext>
         <vm:DataSystemViewModel/>
     </UserControl.DataContext>
-    
+    <UserControl.Resources>
+        <conv:AngleToPercentConverter x:Key="AngleToPercent"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="110"/>
@@ -36,67 +39,73 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,2,10,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgress_Opacity}">
+            <Grid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,10,0">
+                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgress_Opacity}">
                     <Ellipse.CacheMode>
-                        <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                        <BitmapCache RenderAtScale="2"/>
                     </Ellipse.CacheMode>
                     <Ellipse.Effect>
                         <DropShadowEffect Opacity="0.3"/>
                     </Ellipse.Effect>
                 </Ellipse>
-                <xrpb:RadialProgressBar x:Name="CPULoad" Value="0" Foreground="{StaticResource Brush_Accent}" Maximum="100" Width="100" Height="100" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <xrpb:RadialProgressBar.Effect>
+                <ui:Arc x:Name="CPULoad" Width="90" Height="90" Stroke="{StaticResource Brush_Accent}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" EndAngle="0">
+                    <ui:Arc.CacheMode>
+                        <BitmapCache RenderAtScale="2"/>
+                    </ui:Arc.CacheMode>
+                    <ui:Arc.Effect>
                         <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
-                    </xrpb:RadialProgressBar.Effect>
-                </xrpb:RadialProgressBar>
-                <TextBlock Foreground="{StaticResource Brush_Inactive}" TextAlignment="Center" Style="{StaticResource TextDefault}" Margin="0,0,0,20">
-                    <InlineUIContainer>
-                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" anim:NumberAnimation.Value="{Binding ElementName=CPULoad, Path=Value, Mode=OneWay}"/>
-                    </InlineUIContainer><Run Text="%"/>
+                    </ui:Arc.Effect>
+                </ui:Arc>
+                <TextBlock Foreground="{StaticResource Brush_Inactive}" TextAlignment="Center"  Style="{StaticResource TextDefault}" Margin="0,0,0,20">
+                <InlineUIContainer>
+                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" anim:NumberAnimation.Value="{Binding ElementName=CPULoad, Path=EndAngle, Converter={StaticResource AngleToPercent}, FallbackValue=0}"/>
+                </InlineUIContainer><Run Text="%"/>
                 </TextBlock>
                 <TextBlock Text="CPU" Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource TextDefault}" Margin="0,15,0,0"/>
             </Grid>
 
-            <uc:FlowPanel Grid.Column="1" ContentAlignment="Center" HorizontalSpacing="0" VerticalSpacing="0" VerticalAlignment="Top" Margin="30,15,30,0">
-               
-                <StackPanel Orientation="Horizontal">
-                    <Border Width="70" Height="70" HorizontalAlignment="Right" Margin="0,0,15,0">
-                        <Border.CacheMode>
-                            <BitmapCache RenderAtScale="2"/>
-                        </Border.CacheMode>
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding DisplayWallpaper, TargetNullValue={StaticResource Icon_LogoWin}, Mode=OneWay}" Stretch="UniformToFill"/>
-                        </Border.Background>
-                        <Border.OpacityMask>
-                            <ImageBrush ImageSource="{StaticResource Icon_LogoWin}" Stretch="Uniform"/>
-                        </Border.OpacityMask>
-                        <Border.Effect>
-                            <DropShadowEffect Opacity="0.5" BlurRadius="10" ShadowDepth="10"/>
-                        </Border.Effect>
-                    </Border>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Style="{StaticResource TextDefault}" FontSize="14pt" TextWrapping="Wrap" VerticalAlignment="Center" Height="Auto" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=uc:FlowPanel}}">
-                            <Run Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [OSName].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                            <Run Foreground="{StaticResource Brush_Inactive}" Text="{Binding [OSVersion].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                        </TextBlock>
-                        <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Margin="0,5,0,0" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=uc:FlowPanel}}">
-                            <Run Text="{DynamicResource label_proc_sysinfo}"/>
-                            <InlineUIContainer>
-                                <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5"/>
-                            </InlineUIContainer>
-                            <Run Text=" • "/>
-                            <Run Text="{DynamicResource label_svc_sysinfo}"/>
-                            <InlineUIContainer>
-                                <TextBlock anim:NumberAnimation.Value="{Binding [Services].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5"/>
-                            </InlineUIContainer>
-                        </TextBlock>
-                    </StackPanel>
-                </StackPanel>
-                
-            </uc:FlowPanel>
+            <Grid Grid.Column="1" VerticalAlignment="Top" Margin="30,15,30,0" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,2,15,0">
+                <Border Grid.Column="0" Width="70" Height="70" HorizontalAlignment="Right" Margin="0,0,15,0">
+                    <Border.CacheMode>
+                        <BitmapCache RenderAtScale="2"/>
+                    </Border.CacheMode>
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding DisplayWallpaper, TargetNullValue={StaticResource Icon_LogoWin}, Mode=OneWay}" Stretch="UniformToFill"/>
+                    </Border.Background>
+                    <Border.OpacityMask>
+                        <ImageBrush ImageSource="{StaticResource Icon_LogoWin}" Stretch="Uniform"/>
+                    </Border.OpacityMask>
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="10" ShadowDepth="10"/>
+                    </Border.Effect>
+                </Border>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource TextDefault}" FontSize="14pt" TextWrapping="Wrap" VerticalAlignment="Center" Height="Auto">
+                        <Run Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [OSName].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                        <Run Foreground="{StaticResource Brush_Inactive}" Text="{Binding [OSVersion].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                    </TextBlock>
+
+                    <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Margin="0,5,0,0" TextWrapping="Wrap">
+                        <Run Text="{DynamicResource label_proc_sysinfo}"/>
+                    <InlineUIContainer>
+                        <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5"/>
+                    </InlineUIContainer>
+                        <Run Text=" • "/>
+                        <Run Text="{DynamicResource label_svc_sysinfo}"/>
+                    <InlineUIContainer>
+                        <TextBlock anim:NumberAnimation.Value="{Binding [Services].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5"/>
+                    </InlineUIContainer>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,5,15,0">
                 <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgress_Opacity}">
                     <Ellipse.CacheMode>
                         <BitmapCache RenderAtScale="2" EnableClearType="True"/>
@@ -105,19 +114,21 @@
                         <DropShadowEffect Opacity="0.5"/>
                     </Ellipse.Effect>
                 </Ellipse>
-                <xrpb:RadialProgressBar x:Name="RAMLoad" Value="0" Foreground="{StaticResource Brush_Accent}" Maximum="100" Width="100" Height="100" ArcWidth="4" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <xrpb:RadialProgressBar.Effect>
+                <ui:Arc x:Name="RAMLoad" Width="90" Height="90" Stroke="{StaticResource Brush_Accent}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" EndAngle="0">
+                    <ui:Arc.CacheMode>
+                        <BitmapCache RenderAtScale="2"/>
+                    </ui:Arc.CacheMode>
+                    <ui:Arc.Effect>
                         <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
-                    </xrpb:RadialProgressBar.Effect>
-                </xrpb:RadialProgressBar>
+                    </ui:Arc.Effect>
+                </ui:Arc>
                 <TextBlock Foreground="{StaticResource Brush_Inactive}" TextAlignment="Center"  Style="{StaticResource TextDefault}" Margin="0,0,0,20">
                     <InlineUIContainer>
-                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" anim:NumberAnimation.Value="{Binding ElementName=RAMLoad, Path=Value, Mode=OneWay}"/>
+                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"  anim:NumberAnimation.Value="{Binding ElementName=RAMLoad, Path=EndAngle, Converter={StaticResource AngleToPercent}, FallbackValue=0}"/>
                     </InlineUIContainer><Run Text="%"/>
                 </TextBlock>
                 <TextBlock Text="RAM" Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource TextDefault}" Margin="0,15,0,0"/>
             </Grid>
-
         </Grid>
 
         <Grid Grid.Row="1">

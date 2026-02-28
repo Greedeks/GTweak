@@ -10,11 +10,8 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Grid x:Name="Grid" Margin="0">
-                        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" 
-                                           Height="Auto" Fill="Transparent"/>
-                        <Border x:Name="Rectangle1" CornerRadius="2" HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Stretch" Width="4" Height="Auto" 
-                                        Background="{TemplateBinding Background}"/>
+                        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" Height="Auto" Fill="Transparent"/>
+                        <Border x:Name="Rectangle1" CornerRadius="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="4" Height="Auto" Background="{TemplateBinding Background}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Tag" Value="Horizontal">
@@ -36,6 +33,7 @@
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
         <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item"/>
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
         <Setter Property="Width" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -43,8 +41,7 @@
                     <Border x:Name="GridRoot" Width="4" Margin="0,5,-6,0">
                         <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="False">
                             <Track.Thumb>
-                                <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" 
-                                               Style="{StaticResource ScrollThumbs}" Width="4"/>
+                                <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{StaticResource ScrollThumbs}" Width="4"/>
                             </Track.Thumb>
                             <Track.IncreaseRepeatButton>
                                 <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/>
@@ -54,7 +51,6 @@
                             </Track.DecreaseRepeatButton>
                         </Track>
                     </Border>
-
                     <ControlTemplate.Triggers>
                         <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
                             <Setter Value="{StaticResource Brush_ScrollBar_Hover}" TargetName="Thumb" Property="Background"/>
@@ -62,7 +58,6 @@
                         <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
                             <Setter Value="{StaticResource Brush_ScrollBar_Hover}" TargetName="Thumb" Property="Background"/>
                         </Trigger>
-
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="GridRoot"  Property="Width" Value="0"/>
@@ -95,6 +90,7 @@
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
         <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item"/>
+        <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
         <Setter Property="CanContentScroll" Value="False"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

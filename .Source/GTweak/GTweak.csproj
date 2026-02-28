@@ -119,9 +119,6 @@
     <Reference Include="Wpf.Ui.Abstractions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=11f9f5cc97b3ffd6, processorArchitecture=MSIL">
       <HintPath>..\..\packages\WPF-UI.Abstractions.4.2.0\lib\net462\Wpf.Ui.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="XamlRadialProgressBar.DotNet, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\XamlRadialProgressBar.1.0.3\lib\net452\XamlRadialProgressBar.DotNet.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -143,6 +140,7 @@
       <DependentUpon>FileCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
+    <Compile Include="Core\Converters\AngleToPercentConverter.cs" />
     <Compile Include="Core\Model\AddonsModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\DataSystemModel.cs" />
