@@ -106,12 +106,12 @@
             </Grid>
 
             <Grid Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,5,15,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4.5" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgress_Opacity}">
+                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource RadialProgress_Opacity}">
                     <Ellipse.CacheMode>
                         <BitmapCache RenderAtScale="2" EnableClearType="True"/>
                     </Ellipse.CacheMode>
                     <Ellipse.Effect>
-                        <DropShadowEffect Opacity="0.5"/>
+                        <DropShadowEffect Opacity="0.3"/>
                     </Ellipse.Effect>
                 </Ellipse>
                 <ui:Arc x:Name="RAMLoad" Width="90" Height="90" Stroke="{StaticResource Brush_Accent}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" EndAngle="0">
