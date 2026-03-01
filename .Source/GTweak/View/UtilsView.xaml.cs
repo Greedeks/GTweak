@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Controls;
 using GTweak.Utilities.Configuration;
@@ -11,6 +12,8 @@ using Ookii.Dialogs.Wpf;
 
 namespace GTweak.View
 {
+    [ToolboxItem(false)]
+    [DesignTimeVisible(false)]
     public partial class UtilsView : UserControl
     {
         private readonly SystemRestoreService _systemRestore = new SystemRestoreService();

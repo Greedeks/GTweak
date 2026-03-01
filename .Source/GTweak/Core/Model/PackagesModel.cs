@@ -1,8 +1,8 @@
-﻿using GTweak.Core.Base;
+using GTweak.Core.Base;
 
 namespace GTweak.Core.Model
 {
-    internal sealed class PakagesModel : ViewModelBase
+    internal sealed class PackagesModel : ViewModelBase
     {
         private string _name;
         private bool _installed;

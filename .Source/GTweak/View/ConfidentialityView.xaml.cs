@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,6 +8,8 @@ using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
+    [ToolboxItem(false)]
+    [DesignTimeVisible(false)]
     public partial class ConfidentialityView : UserControl
     {
         private readonly ConfidentialityTweaks _confTweaks = new ConfidentialityTweaks();

@@ -11,7 +11,9 @@ using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
-    public partial class PakagesView : UserControl
+    [ToolboxItem(false)]
+    [DesignTimeVisible(false)]
+    public partial class PackagesView : UserControl
     {
         private TimerControlManager _timer = default;
         private readonly BackgroundQueue _backgroundQueue = new BackgroundQueue();
@@ -19,7 +21,7 @@ namespace GTweak.View
         private readonly UninstallingPakages _uninstalling = new UninstallingPakages();
         private bool _isWebViewRemoval = false;
 
-        public PakagesView()
+        public PackagesView()
         {
             InitializeComponent();
 

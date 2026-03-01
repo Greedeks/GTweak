@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,8 @@ using GTweak.Utilities.Managers;
 
 namespace GTweak.View
 {
+    [ToolboxItem(false)]
+    [DesignTimeVisible(false)]
     public partial class DataSystemView : UserControl
     {
         private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();

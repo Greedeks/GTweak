@@ -1,10 +1,13 @@
 using System;
+using System.ComponentModel;
 using System.Windows.Controls;
 using GTweak.Core.ViewModel;
 using GTweak.Utilities.Managers;
 
 namespace GTweak.View
 {
+    [ToolboxItem(false)]
+    [DesignTimeVisible(false)]
     public partial class AddonsView : UserControl
     {
         private TimerControlManager _timer = default;

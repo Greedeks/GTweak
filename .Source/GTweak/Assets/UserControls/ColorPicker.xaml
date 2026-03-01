@@ -94,8 +94,8 @@
             </Grid>
         </ToggleButton>
 
-        <Popup x:Name="ColorPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Opened="ColorPopup_Opened" Closed="ColorPopup_Closed" VerticalOffset="4">
-            <Border x:Name="PopupBorder" Background="{StaticResource Brush_Background_ComboBox}"  BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="10">
+        <Popup x:Name="ColorPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Opened="ColorPopup_Opened" Closed="ColorPopup_Closed" VerticalOffset="2">
+            <Border x:Name="PopupBorder" Background="{StaticResource Brush_Background_ComboBox}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="10">
                 <Border.CacheMode>
                     <BitmapCache RenderAtScale="2" />
                 </Border.CacheMode>

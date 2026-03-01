@@ -84,7 +84,7 @@ namespace GTweak.Core.ViewModel
         private void NavigateToUtils(object obj) => CurrentView = new UtilsView();
         private void NavigateToConfidentiality(object obj) => CurrentView = new ConfidentialityViewModel();
         private void NavigateToInterface(object obj) => CurrentView = new InterfaceViewModel();
-        private void NavigateToPackages(object obj) => CurrentView = new PakagesViewModel();
+        private void NavigateToPackages(object obj) => CurrentView = new PackagesViewModel();
         private void NavigateToServices(object obj) => CurrentView = new ServicesViewModel();
         private void NavigateToSystem(object obj) => CurrentView = new SystemViewModel();
         private void NavigateToDataSystem(object obj) => CurrentView = new DataSystemViewModel();

@@ -145,14 +145,14 @@
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\DataSystemModel.cs" />
     <Compile Include="Core\Model\InterfaceModel.cs" />
-    <Compile Include="Core\Model\PakagesModel.cs" />
+    <Compile Include="Core\Model\PackagesModel.cs" />
     <Compile Include="Core\Model\ServicesModel.cs" />
     <Compile Include="Core\Model\SystemModel.cs" />
     <Compile Include="Core\ViewModel\AddonsViewModel.cs" />
     <Compile Include="Core\ViewModel\ConfidentialityViewModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemViewModel.cs" />
     <Compile Include="Core\ViewModel\InterfaceViewModel.cs" />
-    <Compile Include="Core\ViewModel\PakagesViewModel.cs" />
+    <Compile Include="Core\ViewModel\PackagesViewModel.cs" />
     <Compile Include="Core\ViewModel\ServicesViewModel.cs" />
     <Compile Include="Core\ViewModel\SystemViewModel.cs" />
     <Compile Include="Utilities\Configuration\StorageTypeIdentifier.cs" />
@@ -185,8 +185,8 @@
     <Compile Include="View\UtilsView.xaml.cs">
       <DependentUpon>UtilsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PakagesView.xaml.cs">
-      <DependentUpon>PakagesView.xaml</DependentUpon>
+    <Compile Include="View\PackagesView.xaml.cs">
+      <DependentUpon>PackagesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ServicesView.xaml.cs">
       <DependentUpon>ServicesView.xaml</DependentUpon>
@@ -380,7 +380,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PakagesView.xaml">
+    <Page Include="View\PackagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -415,7 +415,6 @@
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="Core\Base\ViewModelBase.cs" />
-    <Compile Include="Core\ButtonNavigation.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Utilities\Animation\BrushAnimation.cs" />
     <Compile Include="Utilities\Animation\FactoryAnimation.cs" />

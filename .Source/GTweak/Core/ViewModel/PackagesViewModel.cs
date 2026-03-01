@@ -12,17 +12,17 @@ using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class PakagesViewModel : ViewModelBase
+    internal class PackagesViewModel : ViewModelBase
     {
-        public ObservableCollection<PakagesModel> DisplayState { get; set; }
+        public ObservableCollection<PackagesModel> DisplayState { get; set; }
 
         public Visibility Win11FeatureOnly => HardwareData.OS.IsWin11 ? Visibility.Visible : Visibility.Collapsed;
 
-        public PakagesModel this[string name] => DisplayState.FirstOrDefault(d => d.Name == name);
+        public PackagesModel this[string name] => DisplayState.FirstOrDefault(d => d.Name == name);
 
-        public PakagesViewModel()
+        public PackagesViewModel()
         {
-            DisplayState = new ObservableCollection<PakagesModel>();
+            DisplayState = new ObservableCollection<PackagesModel>();
 
             BuildCollection();
 
@@ -30,7 +30,7 @@ namespace GTweak.Core.ViewModel
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    foreach (PakagesModel item in DisplayState)
+                    foreach (PackagesModel item in DisplayState)
                     {
                         UpdatePackageState(item);
                     }
@@ -48,7 +48,7 @@ namespace GTweak.Core.ViewModel
                 string name = kv.Key;
                 UninstallingPakages.PackagesInfo details = kv.Value;
 
-                PakagesModel pkg = new PakagesModel
+                PackagesModel pkg = new PackagesModel
                 {
                     Name = name,
                     IsUnavailable = !details.IsUnavailable
@@ -59,7 +59,7 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        private void UpdatePackageState(PakagesModel item)
+        private void UpdatePackageState(PackagesModel item)
         {
             if (item != null && !string.IsNullOrWhiteSpace(item.Name) && UninstallingPakages.PackagesDetails?.TryGetValue(item?.Name, out var val) == true && val != null)
             {
