@@ -13,6 +13,7 @@ namespace GTweak.Core.ViewModel
         public Visibility Win11FeatureOnly => HardwareData.OS.IsWin11 ? Visibility.Visible : Visibility.Collapsed;
         public Visibility Win11FeatureAvailable => HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(22621.2361m) >= 0 ? Visibility.Visible : Visibility.Collapsed;
         public bool IsBlockWithoutLicense => WinLicenseHandler.IsWindowsActivated;
+        public Visibility OneDriveAvailable => UninstallingPakages.IsOneDriveInstalled ? Visibility.Visible : Visibility.Collapsed;
 
         protected override IReadOnlyDictionary<string, object> GetControlStates() => InterfaceTweaks.ControlStates;
 

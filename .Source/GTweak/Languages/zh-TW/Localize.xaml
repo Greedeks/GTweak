@@ -5,6 +5,7 @@
     <v:String x:Key="defaultDescription">將滑鼠懸停在任何微調項目上即可查看其說明</v:String>
     <v:String x:Key="defaultDescriptionApp">將滑鼠懸停在任何應用程式的圖示上，即可查看其名稱</v:String>
     <v:String x:Key="btn_default">預設</v:String>
+    <v:String x:Key="btn_change">變更</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">載入中</v:String>
@@ -197,6 +198,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">游標選取顏色：</v:String>
     <v:String x:Key="color2_intf">工具提示顏色：</v:String>
+    <v:String x:Key="exblock1_intf">檔案總管 導覽項目：</v:String>
     <v:String x:Key="tgl1_intf">檔案總管中顯示副檔名</v:String>
     <v:String x:Key="tgl2_intf">亮度異常變化</v:String>
     <v:String x:Key="tgl3_intf">系統按鈕標準尺寸</v:String>
@@ -230,8 +232,13 @@
     <v:String x:Key="tgl31_intf">開始功能表中整合"Bing"的搜尋查詢</v:String>
     <v:String x:Key="tgl32_intf">開啟"快速存取"而非"本機"</v:String>
 
+    <v:String x:Key="chk1_intf">首頁</v:String>
+    <v:String x:Key="chk2_intf">圖庫</v:String>
+    <v:String x:Key="chk3_intf">OneDrive</v:String>
+
     <v:String x:Key="color1_desc_intf">調整在系統中使用游標選取文字或物件時的背景顏色。</v:String>
     <v:String x:Key="color2_desc_intf">調整受支援應用程式中工具提示的顏色。</v:String>
+    <v:String x:Key="exblock1_desc_intf">變更導覽窗格中內建系統項目的可見性，這些項目無法以一般方式解除釘選。</v:String>
     <v:String x:Key="tgl1_desc_intf">預設情況下，Windows 會隱藏檔案副檔名，使檔案總管介面更簡潔。若需顯示副檔名，可透過此調整功能啟用，節省搜尋時間。注意：螢幕可能閃爍。</v:String>
     <v:String x:Key="tgl2_desc_intf">部分裝置的螢幕亮度可能隨顯示內容自動變化。若關閉 HDR、動態亮度及電源設定仍無法解決問題（此狀況在電池供電的筆記型電腦上尤為常見），可嘗試此調整項——它將在系統層級強制停用自動亮度調節功能。手動亮度控制功能仍可正常使用。</v:String>
     <v:String x:Key="tgl3_desc_intf">此調整會縮小最小化、最大化及關閉按鈕的尺寸，使其更為精簡。此設定將套用至所有視窗，包含檔案總管、相片、瀏覽器及其他常用程式。</v:String>
@@ -524,6 +531,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

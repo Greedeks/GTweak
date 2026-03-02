@@ -5,6 +5,7 @@
     <v:String x:Key="defaultDescription">Hover your mouse over any tweak to get its description</v:String>
     <v:String x:Key="defaultDescriptionApp">Hover your mouse over the icon of any application to see its name</v:String>
     <v:String x:Key="btn_default">Default</v:String>
+    <v:String x:Key="btn_change">Change</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Loading</v:String>
@@ -197,6 +198,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">Cursor selection color:</v:String>
     <v:String x:Key="color2_intf">Tooltip color:</v:String>
+    <v:String x:Key="exblock1_intf">Explorer navigation items:</v:String>
     <v:String x:Key="tgl1_intf">Displaying file extensions in explorer</v:String>
     <v:String x:Key="tgl2_intf">Spontaneous brightness changes</v:String>
     <v:String x:Key="tgl3_intf">Standard size of the system buttons</v:String>
@@ -229,9 +231,14 @@
     <v:String x:Key="tgl30_intf">Tooltips for desktop elements</v:String>
     <v:String x:Key="tgl31_intf">Search query with «Bing» integration in Start menu</v:String>
     <v:String x:Key="tgl32_intf">Open «Quick Access» instead of «This PC»</v:String>
-    
+
+    <v:String x:Key="chk1_intf">Home</v:String>
+    <v:String x:Key="chk2_intf">Gallery</v:String>
+    <v:String x:Key="chk3_intf">OneDrive</v:String>
+
     <v:String x:Key="color1_desc_intf">Changes the background color when selecting text or objects with the cursor in the system.</v:String>
     <v:String x:Key="color2_desc_intf">Changes the color of tooltips in supported applications.</v:String>
+    <v:String x:Key="exblock1_desc_intf">Changes the visibility of built-in system items in the navigation pane that cannot be unpinned by conventional means.</v:String>
     <v:String x:Key="tgl1_desc_intf">By default, Windows hides file extensions, which makes the File Explorer view less cluttered. If needed, you can enable the display of file extensions using this tweak, saving you the time spent searching. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl2_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
     <v:String x:Key="tgl3_desc_intf">A tweak reduces the size of the Minimize, Maximize, and Close buttons, making them less bulky. It adjusts the size for all windows, including File Explorer, Photos, browsers, and other familiar programs.</v:String>

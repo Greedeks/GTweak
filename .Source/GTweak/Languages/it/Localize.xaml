@@ -5,6 +5,7 @@
     <v:String x:Key="defaultDescription">Passa il mouse su una modifica per visualizzarne la descrizione</v:String>
     <v:String x:Key="defaultDescriptionApp">Passa il mouse sull'icona di un'applicazione per vedere il suo nome</v:String>
     <v:String x:Key="btn_default">Predefinito</v:String>
+    <v:String x:Key="btn_change">Modifica</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Caricamento</v:String>
@@ -197,6 +198,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">Colore selezione cursore:</v:String>
     <v:String x:Key="color2_intf">Colore suggerimento:</v:String>
+    <v:String x:Key="exblock1_intf">Elementi di navigazione di Esplora file:</v:String>
     <v:String x:Key="tgl1_intf">Visualizza estensioni dei file in Esplora risorse</v:String>
     <v:String x:Key="tgl2_intf">Cambiamenti improvvisi di luminosità</v:String>
     <v:String x:Key="tgl3_intf">Dimensione standard dei pulsanti di sistema</v:String>
@@ -230,8 +232,13 @@
     <v:String x:Key="tgl31_intf">Query di ricerca con integrazione «Bing» nel menu Start</v:String>
     <v:String x:Key="tgl32_intf">Apri «Accesso rapido» invece di «Questo PC»</v:String>
 
+    <v:String x:Key="chk1_intf">Home</v:String>
+    <v:String x:Key="chk2_intf">Galleria</v:String>
+    <v:String x:Key="chk3_intf">OneDrive</v:String>
+
     <v:String x:Key="color1_desc_intf">Modifica il colore di sfondo durante la selezione di testo o oggetti con il cursore nel sistema.</v:String>
     <v:String x:Key="color2_desc_intf">Modifica il colore dei suggerimenti nelle applicazioni supportate.</v:String>
+    <v:String x:Key="exblock1_desc_intf">Modifica la visibilità degli elementi di sistema integrati nel riquadro di navigazione che non possono essere rimossi con i metodi convenzionali.</v:String>
     <v:String x:Key="tgl1_desc_intf">Mostra le estensioni dei file in Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
     <v:String x:Key="tgl2_desc_intf">Su alcuni dispositivi, la luminosità dello schermo può cambiare spontaneamente a seconda del contenuto visualizzato. Se la disattivazione dell'HDR, della luminosità dinamica e delle impostazioni di risparmio energetico non risolve il problema (comune sui laptop alimentati a batteria), puoi provare questo tweak: forza la disattivazione della regolazione automatica della luminosità a livello di sistema. Il controllo manuale rimane disponibile.</v:String>
     <v:String x:Key="tgl3_desc_intf">Riduce la dimensione dei pulsanti di Riduzione, Ingrandimento e Chiusura, rendendoli meno ingombranti. Si applica a tutte le finestre, incluso Esplora risorse, Foto, browser e altri programmi.</v:String>
@@ -524,3 +531,4 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+

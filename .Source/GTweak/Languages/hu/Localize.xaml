@@ -5,6 +5,7 @@
     <v:String x:Key="defaultDescription">Vigye az egeret bármelyik módosítás fölé, hogy megkapja a leírását</v:String>
     <v:String x:Key="defaultDescriptionApp">Vigye az egeret bármely alkalmazás ikonja fölé a nevének megtekintéséhez</v:String>
     <v:String x:Key="btn_default">Alapértelmezett</v:String>
+    <v:String x:Key="btn_change">Módosítás</v:String>
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">Betöltés</v:String>
@@ -197,6 +198,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">Kurzoros kijelölés színe:</v:String>
     <v:String x:Key="color2_intf">Buboréksúgó színe:</v:String>
+    <v:String x:Key="exblock1_intf">Fájlkezelő navigációs elemei:</v:String>
     <v:String x:Key="tgl1_intf">Fájlkiterjesztések megjelenítése az Intézőben</v:String>
     <v:String x:Key="tgl2_intf">Spontán fényerőváltozások</v:String>
     <v:String x:Key="tgl3_intf">A rendszergombok szabványos mérete</v:String>
@@ -230,8 +232,13 @@
     <v:String x:Key="tgl31_intf">Keresési lekérdezés a" Bing " integrációval a Start menüben</v:String>
     <v:String x:Key="tgl32_intf">Nyissa meg a «Gyors hozzáférés»-t «Ez a gép» helyett</v:String>
 
+    <v:String x:Key="chk1_intf">Kezdőlap</v:String>
+    <v:String x:Key="chk2_intf">Galéria</v:String>
+    <v:String x:Key="chk3_intf">OneDrive</v:String>
+    
     <v:String x:Key="color1_desc_intf">Módosítja a háttérszínt a szövegek vagy objektumok kurzorral történő kijelölésekor a rendszerben.</v:String>
     <v:String x:Key="color2_desc_intf">Módosítja a buboréksúgók színét a támogatott alkalmazásokban.</v:String>
+    <v:String x:Key="exblock1_desc_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>
     <v:String x:Key="tgl1_desc_intf">Alapértelmezés szerint a Windows elrejti a fájlkiterjesztéseket, így a Fájlkezelő nézet kevésbé zsúfolt. Ha szükséges, engedélyezheti a fájlkiterjesztések megjelenítését ezzel a módosítással, így megtakaríthatja a kereséssel töltött időt. Figyelem, a képernyő villoghat.</v:String>
     <v:String x:Key="tgl2_desc_intf">Néhány eszközön a képernyő fényessége spontán módon változhat a megjelenített tartalomtól függően. Ha a HDR, a dinamikus fényerő és a teljesítménybeállítások kikapcsolása nem oldja meg a problémát (ez különösen akkumulátoros laptopokon gyakori), akkor kipróbálhatod ezt a beállítást – ez erőszakkal kapcsolja ki az automatikus fényerőállítást a rendszer szintjén. A kézi fényerőszabályozás továbbra is elérhető.</v:String>
     <v:String x:Key="tgl3_desc_intf">Ez a módosítás csökkenti a Minimalizálás, a Maximalizálás és a Bezárás gombok méretét, így kevésbé terjedelmesek. Beállítja az összes ablak méretét, beleértve a Fájlkezelőt, a Fényképeket, a böngészőket és más ismerős programokat.</v:String>
@@ -524,6 +531,7 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+
 
 
 

@@ -56,6 +56,12 @@ namespace GTweak.View
             NotificationManager.Show().WithDelay(300).Logout();
         }
 
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            _intfTweaks.ApplyTweaksCheckBox(checkBox.Uid, checkBox.IsChecked == false);
+        }
+
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = (ToggleButton)sender;

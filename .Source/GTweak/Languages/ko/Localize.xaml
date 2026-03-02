@@ -5,6 +5,7 @@
     <v:String x:Key="defaultDescription">조정 사항 위에 마우스를 가져가면 설명이 표시됩니다</v:String>
     <v:String x:Key="defaultDescriptionApp">응용 프로그램의 아이콘 위에 마우스를 가져가면 이름을 확인할 수 있습니다</v:String>
     <v:String x:Key="btn_default">기본값</v:String>
+    <v:String x:Key="btn_change">변경</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">로드 중</v:String>
@@ -197,6 +198,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">커서 선택 색상:</v:String>
     <v:String x:Key="color2_intf">도구 설명 색상:</v:String>
+    <v:String x:Key="exblock1_intf">파일 탐색기 탐색 항목:</v:String>
     <v:String x:Key="tgl1_intf">탐색기에 파일 확장자 표시</v:String>
     <v:String x:Key="tgl2_intf">자발적인 밝기 변화</v:String>
     <v:String x:Key="tgl3_intf">시스템 버튼의 표준 크기</v:String>
@@ -229,9 +231,14 @@
     <v:String x:Key="tgl30_intf">데스크톱 요소의 도구 설명</v:String>
     <v:String x:Key="tgl31_intf">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
     <v:String x:Key="tgl32_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
+
+    <v:String x:Key="chk1_intf">홈</v:String>
+    <v:String x:Key="chk2_intf">갤러리</v:String>
+    <v:String x:Key="chk3_intf">OneDrive</v:String>
     
     <v:String x:Key="color1_desc_intf">시스템에서 커서로 텍스트나 개체를 선택할 때의 배경 색상을 변경합니다.</v:String>
     <v:String x:Key="color2_desc_intf">지원되는 애플리케이션에서 도구 설명의 색상을 변경합니다.</v:String>
+    <v:String x:Key="exblock1_desc_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다.</v:String>
     <v:String x:Key="tgl1_desc_intf">기본적으로 Windows는 파일 확장자를 숨기므로 파일 탐색기 보기가 덜 복잡해집니다. 필요한 경우 이 조정을 사용하여 파일 확장자를 표시할 수 있으므로 검색하는 데 걸리는 시간을 절약할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="tgl2_desc_intf">일부 기기에서는 표시되는 콘텐츠에 따라 화면 밝기가 자연스럽게 변경될 수 있습니다. HDR, 동적 밝기 및 전원 설정을 끄더라도 문제가 해결되지 않는다면 (이 문제는 특히 배터리로 작동하는 노트북에서 흔히 발생합니다), 시스템 수준에서 자동 밝기 조정을 강제로 비활성화하는 이 조정을 시도해 볼 수 있습니다. 수동 밝기 제어 기능은 여전히 사용 가능합니다.</v:String>
     <v:String x:Key="tgl3_desc_intf">이 조정으로 축소, 확장, 닫기 버튼의 크기가 줄어들어 부피가 줄어듭니다. 탐색기, Windows 사진, 브라우저 및 기타 프로그램을 포함한 모든 창 크기를 조정합니다.</v:String>
@@ -524,3 +531,4 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+

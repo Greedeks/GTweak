@@ -7,72 +7,38 @@ namespace GTweak.Utilities.Managers
     {
         private readonly Dictionary<string, object> _controlStates;
 
-        internal ButtonCollection Button { get; }
-        internal SliderCollection Slider { get; }
-        internal ColorPickerCollection ColorPicker { get; }
+        internal GenericCollection<bool> Button { get; }
+        internal GenericCollection<bool> Checkbox { get; }
+        internal GenericCollection<object> Slider { get; }
+        internal GenericCollection<object> ColorPicker { get; }
 
         internal ControlWriterManager(Dictionary<string, object> controlStates)
         {
             _controlStates = controlStates ?? new Dictionary<string, object>();
-            Button = new ButtonCollection(_controlStates);
-            Slider = new SliderCollection(_controlStates);
-            ColorPicker = new ColorPickerCollection(_controlStates);
+
+            Button = new GenericCollection<bool>(_controlStates, "TglButton");
+            Checkbox = new GenericCollection<bool>(_controlStates, "Checkbox");
+            Slider = new GenericCollection<object>(_controlStates, "Slider");
+            ColorPicker = new GenericCollection<object>(_controlStates, "ColorPicker");
         }
-
-        internal class ButtonCollection
+        internal class GenericCollection<T>
         {
+            private readonly string _prefix;
             private readonly Dictionary<string, object> _controlStates;
-            private static readonly ConcurrentDictionary<int, string> KeyCache = new ConcurrentDictionary<int, string>();
+            private readonly ConcurrentDictionary<int, string> _keyCache = new ConcurrentDictionary<int, string>();
 
-            internal ButtonCollection(Dictionary<string, object> controlStates) => _controlStates = controlStates;
-
-            internal bool this[int index]
+            internal GenericCollection(Dictionary<string, object> controlStates, string prefix)
             {
-                set
-                {
-                    string key = KeyCache.GetOrAdd(index, i => $"TglButton{i}");
-
-                    if (_controlStates != null)
-                    {
-                        _controlStates[key] = value;
-                    }
-                }
+                _controlStates = controlStates;
+                _prefix = prefix;
             }
-        }
 
-        internal class SliderCollection
-        {
-            private readonly Dictionary<string, object> _controlStates;
-            private static readonly ConcurrentDictionary<int, string> KeyCache = new ConcurrentDictionary<int, string>();
-
-            internal SliderCollection(Dictionary<string, object> controlStates) => _controlStates = controlStates;
-
-            internal object this[int index]
+            internal T this[int index]
             {
                 set
                 {
-                    string key = KeyCache.GetOrAdd(index, i => $"Slider{i}");
+                    string key = _keyCache.GetOrAdd(index, i => $"{_prefix}{i}");
 
-                    if (_controlStates != null)
-                    {
-                        _controlStates[key] = value;
-                    }
-                }
-            }
-        }
-
-        internal class ColorPickerCollection
-        {
-            private readonly Dictionary<string, object> _controlStates;
-            private static readonly ConcurrentDictionary<int, string> KeyCache = new ConcurrentDictionary<int, string>();
-
-            internal ColorPickerCollection(Dictionary<string, object> controlStates) => _controlStates = controlStates;
-
-            internal object this[int index]
-            {
-                set
-                {
-                    string key = KeyCache.GetOrAdd(index, i => $"ColorPicker{i}");
                     if (_controlStates != null)
                     {
                         _controlStates[key] = value;

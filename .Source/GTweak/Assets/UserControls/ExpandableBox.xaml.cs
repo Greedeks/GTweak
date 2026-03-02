@@ -33,7 +33,7 @@ namespace GTweak.Assets.UserControls
             set => SetValue(MaxDropdownHeightProperty, value);
         }
 
-        internal ObservableCollection<object> Items { get; } = new ObservableCollection<object>();
+        public ObservableCollection<object> Items { get; } = new ObservableCollection<object>();
 
         private static readonly MethodInfo UpdatePositionMethod = typeof(Popup).GetMethod("UpdatePosition", BindingFlags.NonPublic | BindingFlags.Instance);
 

@@ -22,6 +22,20 @@ namespace GTweak.Utilities.Tweaks
 
             _сontrolWriter.ColorPicker[2] = RegistryHelp.GetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "InfoWindow", "255 255 225");
 
+            _сontrolWriter.Checkbox[1] = HardwareData.OS.IsWin11 &&
+                ((HardwareData.OS.Build > 22621m && (RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}") ||
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}"))) ||
+                (HardwareData.OS.Build <= 22621m && (RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}") ||
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}"))));
+
+            _сontrolWriter.Checkbox[2] = HardwareData.OS.IsWin11 &&
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}") ||
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}");
+
+            _сontrolWriter.Checkbox[3] =
+                RegistryHelp.CheckValue(@"HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0") ||
+                RegistryHelp.CheckValue(@"HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0");
+
             _сontrolWriter.Button[1] =
                 RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "1");
 
@@ -187,6 +201,46 @@ namespace GTweak.Utilities.Tweaks
                     RegistryHelp.Write(Registry.Users, @".DEFAULT\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
                     RegistryHelp.Write(Registry.Users, @"S-1-5-19\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
                     RegistryHelp.Write(Registry.Users, @"S-1-5-20\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        internal void ApplyTweaksCheckBox(string tweak, bool isDisabled)
+        {
+            INIManager.TempWrite(INIManager.TempTweaksIntf, tweak, isDisabled);
+
+            switch (tweak)
+            {
+                case "Checkbox1":
+                    string baseKey = HardwareData.OS.Build > 22621m ? @"NameSpace" : @"NameSpace_36354489";
+                    if (isDisabled)
+                    {
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, $@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}");
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, $@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}");
+                    }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, $@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}", string.Empty, @"CLSID_MSGraphHomeFolder", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, $@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}", string.Empty, @"CLSID_MSGraphHomeFolder", RegistryValueKind.String);
+                    }
+                    break;
+                case "Checkbox2":
+                    if (isDisabled)
+                    {
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}");
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}");
+                    }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}", string.Empty, @"{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}", RegistryValueKind.String);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}", string.Empty, @"{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}", RegistryValueKind.String);
+                    }
+                    break;
+                case "Checkbox3":
+                    RegistryHelp.Write(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", isDisabled ? 0 : 1, RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", isDisabled ? 0 : 1, RegistryValueKind.String);
                     break;
                 default:
                     break;
