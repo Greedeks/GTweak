@@ -24,11 +24,24 @@
         </Grid.RowDefinitions>
 
         <Popup x:Name="PopupCopy" AllowsTransparency="True" Placement="Mouse" HorizontalOffset="20">
-            <Border x:Name="CopyTextToastBody" Opacity="0" Background="{StaticResource Brush_Accent}" CornerRadius="3" Padding="5,2,3,2" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1">
+            <Border x:Name="CopyTextToastBody" Opacity="0" Background="{StaticResource Brush_Background_ComboBox}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="5" Padding="5" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1">
                 <Border.LayoutTransform>
                     <ScaleTransform ScaleX="0.85" ScaleY="0.85"/>
                 </Border.LayoutTransform>
-                <Label Content="{DynamicResource text_copy_sysinfo}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontFamily="{StaticResource Jura}" FontSize="11" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Border.CacheMode>
+                    <BitmapCache RenderAtScale="2" />
+                </Border.CacheMode>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" Opacity="0.3" ShadowDepth="2"/>
+                </Border.Effect>
+                <Label Content="{DynamicResource text_copy_sysinfo}" Foreground="{StaticResource Brush_Highlighted}" FontFamily="{StaticResource Jura}" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <Label.CacheMode>
+                        <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                    </Label.CacheMode>
+                    <Label.Effect>
+                        <DropShadowEffect Opacity="0.2"/>
+                    </Label.Effect>
+                </Label>
             </Border>
         </Popup>
 
