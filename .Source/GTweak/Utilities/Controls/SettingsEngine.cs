@@ -125,7 +125,7 @@ namespace GTweak.Utilities.Controls
 
                     INIManager iniManager = new INIManager(PathLocator.Files.Config);
                     iniManager.Write("GTweak", "Author", "Greedeks");
-                    iniManager.Write("GTweak", "FormatVersion", "3");
+                    iniManager.Write("GTweak", "FormatVersion", "4");
                     iniManager.WriteAll(INIManager.SectionConf, INIManager.TempTweaksConf);
                     iniManager.WriteAll(INIManager.SectionIntf, INIManager.TempTweaksIntf);
                     iniManager.WriteAll(INIManager.SectionSvc, INIManager.TempTweaksSvc);
@@ -151,7 +151,7 @@ namespace GTweak.Utilities.Controls
             PathLocator.Files.Config = vistaOpenFileDialog.FileName;
             INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
-            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("FormatVersion") && iniManager.GetKeysOrValue("GTweak", false).Contains("3"))
+            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("FormatVersion") && iniManager.GetKeysOrValue("GTweak", false).Contains("4"))
             {
                 if (File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("Slider")) || File.ReadLines(PathLocator.Files.Config).Any(line => line.Contains("ColorPicker")))
                 {

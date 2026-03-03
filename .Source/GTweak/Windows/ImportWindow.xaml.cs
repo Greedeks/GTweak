@@ -137,12 +137,15 @@ namespace GTweak.Windows
                     }
                     else
                     {
-                        var (Section, TweakAction, NoticeActions, ExplorerMapping) =
-                            allSections.First(s => s.Section == section);
+                        var (Section, TweakAction, NoticeActions, ExplorerMapping) = allSections.First(s => s.Section == section);
 
                         if (section == INIManager.SectionIntf && tweak.StartsWith("ColorPicker"))
                         {
                             _intfTweaks.ApplyTweaksColor(tweak, value);
+                        }
+                        else if (section == INIManager.SectionIntf && tweak.StartsWith("CheckBox"))
+                        {
+                            _intfTweaks.ApplyTweaksCheckBox(tweak, Convert.ToBoolean(value));
                         }
                         else
                         {

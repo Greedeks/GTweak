@@ -15,6 +15,8 @@ namespace GTweak.Assets.UserControls
     [ContentProperty("Items")]
     public partial class ExpandableBox : UserControl
     {
+        internal event EventHandler Closed;
+
         internal static readonly DependencyProperty TextProperty =
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(ExpandableBox), new PropertyMetadata("Select"));
 
@@ -107,6 +109,8 @@ namespace GTweak.Assets.UserControls
             {
                 TglArrow.IsChecked = false;
             }
+
+            Closed?.Invoke(this, EventArgs.Empty);
         }
 
         private void ParentScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)

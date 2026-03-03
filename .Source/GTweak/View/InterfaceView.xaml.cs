@@ -15,6 +15,7 @@ namespace GTweak.View
     public partial class InterfaceView : UserControl
     {
         private readonly InterfaceTweaks _intfTweaks = new InterfaceTweaks();
+        private bool _isExpRestartNeed = false;
 
         public InterfaceView()
         {
@@ -60,6 +61,16 @@ namespace GTweak.View
         {
             CheckBox checkBox = (CheckBox)sender;
             _intfTweaks.ApplyTweaksCheckBox(checkBox.Uid, checkBox.IsChecked == false);
+            _isExpRestartNeed = true;
+        }
+
+        private void ExpandableBox_Closed(object sender, EventArgs e)
+        {
+            if (_isExpRestartNeed)
+            {
+                ExplorerManager.Restart();
+                _isExpRestartNeed = false;
+            }
         }
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)

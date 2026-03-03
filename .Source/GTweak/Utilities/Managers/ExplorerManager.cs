@@ -11,17 +11,16 @@ namespace GTweak.Utilities.Managers
     {
         internal static readonly Dictionary<string, bool> IntfMapping = new[]
         {
-            new { Button = "TglButton7", NeedRestart = true },
-            new { Button = "TglButton8", NeedRestart = true },
-            new { Button = "TglButton15", NeedRestart = true },
-            new { Button = "TglButton16", NeedRestart = true },
+            new { Button = "TglButton5", NeedRestart = true },
+            new { Button = "TglButton6", NeedRestart = true },
+            new { Button = "TglButton11", NeedRestart = true },
+            new { Button = "TglButton12", NeedRestart = true },
+            new { Button = "TglButton13", NeedRestart = true },
             new { Button = "TglButton17", NeedRestart = true },
-            new { Button = "TglButton21", NeedRestart = true },
+            new { Button = "TglButton19", NeedRestart = true },
             new { Button = "TglButton23", NeedRestart = true },
-            new { Button = "TglButton27", NeedRestart = true },
-            new { Button = "TglButton28", NeedRestart = true },
-            new { Button = "TglButton31", NeedRestart = true },
-            new { Button = "TglButton33", NeedRestart = true },
+            new { Button = "TglButton24", NeedRestart = true },
+            new { Button = "TglButton27", NeedRestart = true }
         }.ToDictionary(x => x.Button, x => x.NeedRestart);
 
         internal static readonly Dictionary<string, bool> PackageMapping = new[]

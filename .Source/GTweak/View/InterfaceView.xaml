@@ -45,13 +45,36 @@
                         <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" Visibility="{Binding Win11FeatureOnly}" ToolTip="{DynamicResource exblock1_desc_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource exblock1_intf}"/>
                             <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center">
-                                <CheckBox x:Uid="Checkbox1" Content="{DynamicResource chk1_intf}" IsChecked="{Binding [Checkbox1].State}" Click="CheckBox_Click" />
-                                <CheckBox x:Uid="Checkbox2" Content="{DynamicResource chk2_intf}" IsChecked="{Binding [Checkbox2].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
-                                <CheckBox x:Uid="Checkbox3" Content="{DynamicResource chk3_intf}" IsChecked="{Binding [Checkbox3].State}" Visibility="{Binding OneDriveAvailable}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox1" Content="{DynamicResource chk1_home_intf}" IsChecked="{Binding [Checkbox1].State}" Click="CheckBox_Click" />
+                                <CheckBox x:Uid="Checkbox2" Content="{DynamicResource chk2_gallery_intf}" IsChecked="{Binding [Checkbox2].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox3" Content="{DynamicResource chk3_onedrive_intf}" IsChecked="{Binding [Checkbox3].State}" Visibility="{Binding OneDriveAvailable}" Margin="0,4,0,0" Click="CheckBox_Click"/>
                             </uc:ExpandableBox>
                         </StackPanel>
                     </StackPanel>
 
+                    <StackPanel Orientation="Vertical" Margin="0,-10,0,-10">
+                        <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource exblock2_desc_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
+                            <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource exblock2_intf}"/>
+                            <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" Closed="ExpandableBox_Closed">
+                                <CheckBox x:Uid="Checkbox4" Content="{DynamicResource chk4_hidden_intf}" IsChecked="{Binding [Checkbox4].State}" Click="CheckBox_Click" />
+                                <CheckBox x:Uid="Checkbox5" Content="{DynamicResource chk5_system_intf}" IsChecked="{Binding [Checkbox5].State}" Margin="0,4,0,0" Click="CheckBox_Click" />
+                                <CheckBox x:Uid="Checkbox6" Content="{DynamicResource chk6_extension_intf}" IsChecked="{Binding [Checkbox6].State}" Margin="0,4,0,0" Click="CheckBox_Click" />
+                                <CheckBox x:Uid="Checkbox7" Content="{DynamicResource chk7_emptydrives_intf}" IsChecked="{Binding [Checkbox7].State}" Margin="0,4,0,0" Click="CheckBox_Click" />
+                            </uc:ExpandableBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource exblock3_desc_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
+                            <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource exblock3_intf}"/>
+                            <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center">
+                                <CheckBox x:Uid="Checkbox8" Content="{DynamicResource chk8_pc_intf}" IsChecked="{Binding [Checkbox8].State}" Click="CheckBox_Click" />
+                                <CheckBox x:Uid="Checkbox9" Content="{DynamicResource chk9_net_intf}" IsChecked="{Binding [Checkbox9].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox10" Content="{DynamicResource chk10_trash_intf}" IsChecked="{Binding [Checkbox10].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox11" Content="{DynamicResource chk11_panel_intf}" IsChecked="{Binding [Checkbox11].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox12" Content="{DynamicResource chk12_user_intf}" IsChecked="{Binding [Checkbox12].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                            </uc:ExpandableBox>
+                        </StackPanel>
+                    </StackPanel>
+                    
                     <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" TextResource="{DynamicResource tgl1_intf}" Description="{DynamicResource tgl1_desc_intf}" />
                     <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton2].State}" TextResource="{DynamicResource tgl2_intf}" Description="{DynamicResource tgl2_desc_intf}" />
                     <uc:ToggleButton x:Name="TglButton3" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton3].State}" TextResource="{DynamicResource tgl3_intf}" Description="{DynamicResource tgl3_desc_intf}" />
@@ -81,9 +104,6 @@
                     <uc:ToggleButton x:Name="TglButton27" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton27].State}" TextResource="{DynamicResource tgl27_intf}" Description="{DynamicResource tgl27_desc_intf}" />
                     <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton28].State}" TextResource="{DynamicResource tgl28_intf}" Description="{DynamicResource tgl28_desc_intf}" />
                     <uc:ToggleButton x:Name="TglButton29" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton29].State}" TextResource="{DynamicResource tgl29_intf}" Description="{DynamicResource tgl29_desc_intf}" />
-                    <uc:ToggleButton x:Name="TglButton30" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton30].State}" TextResource="{DynamicResource tgl30_intf}" Description="{DynamicResource tgl30_desc_intf}" />
-                    <uc:ToggleButton x:Name="TglButton31" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton31].State}" TextResource="{DynamicResource tgl31_intf}" Description="{DynamicResource tgl31_desc_intf}" />
-                    <uc:ToggleButton x:Name="TglButton32" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton32].State}" TextResource="{DynamicResource tgl32_intf}" Description="{DynamicResource tgl32_desc_intf}" />
 
                 </uc:FlowPanel>
 
