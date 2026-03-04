@@ -104,7 +104,7 @@ namespace GTweak.View
 
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        if (ExplorerManager.PackageMapping.TryGetValue(packageName, out bool needRestart))
+                        if (ExplorerManager.PackageActions.TryGetValue(packageName, out ExplorerManager.ExplorerAction explorerAction))
                         {
                             ExplorerManager.Restart();
                         }

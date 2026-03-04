@@ -15,7 +15,7 @@ namespace GTweak.View
     public partial class InterfaceView : UserControl
     {
         private readonly InterfaceTweaks _intfTweaks = new InterfaceTweaks();
-        private bool _isExpRestartNeed = false;
+        private ExplorerManager.ExplorerAction _explorerAction = ExplorerManager.ExplorerAction.None;
 
         public InterfaceView()
         {
@@ -61,16 +61,28 @@ namespace GTweak.View
         {
             CheckBox checkBox = (CheckBox)sender;
             _intfTweaks.ApplyTweaksCheckBox(checkBox.Uid, checkBox.IsChecked == false);
-            _isExpRestartNeed = true;
+
+            if (ExplorerManager.IntfActions.TryGetValue(checkBox.Uid, out ExplorerManager.ExplorerAction explorerAction))
+            {
+                _explorerAction = explorerAction;
+            }
         }
 
         private void ExpandableBox_Closed(object sender, EventArgs e)
         {
-            if (_isExpRestartNeed)
+            switch (_explorerAction)
             {
-                ExplorerManager.Restart();
-                _isExpRestartNeed = false;
+                case ExplorerManager.ExplorerAction.Restart:
+                    ExplorerManager.Restart();
+                    break;
+                case ExplorerManager.ExplorerAction.Refresh:
+                    ExplorerManager.RefreshDesktop();
+                    break;
+                default:
+                    break;
             }
+
+            _explorerAction = ExplorerManager.ExplorerAction.None;
         }
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
@@ -79,14 +91,14 @@ namespace GTweak.View
 
             _intfTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
 
-            if (ExplorerManager.IntfMapping.TryGetValue(toggleButton.Name, out bool needRestart))
+            if (ExplorerManager.IntfActions.TryGetValue(toggleButton.Name, out ExplorerManager.ExplorerAction explorerAction) && explorerAction == ExplorerManager.ExplorerAction.Restart)
             {
                 ExplorerManager.Restart();
             }
 
-            if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
+            if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction noticeAction))
             {
-                NotificationManager.Show().WithDelay(300).Perform(action);
+                NotificationManager.Show().WithDelay(300).Perform(noticeAction);
             }
         }
     }

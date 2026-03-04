@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
 
@@ -9,25 +9,48 @@ namespace GTweak.Utilities.Managers
 {
     internal class ExplorerManager
     {
-        internal static readonly Dictionary<string, bool> IntfMapping = new[]
-        {
-            new { Button = "TglButton5", NeedRestart = true },
-            new { Button = "TglButton6", NeedRestart = true },
-            new { Button = "TglButton11", NeedRestart = true },
-            new { Button = "TglButton12", NeedRestart = true },
-            new { Button = "TglButton13", NeedRestart = true },
-            new { Button = "TglButton17", NeedRestart = true },
-            new { Button = "TglButton19", NeedRestart = true },
-            new { Button = "TglButton23", NeedRestart = true },
-            new { Button = "TglButton24", NeedRestart = true },
-            new { Button = "TglButton27", NeedRestart = true }
-        }.ToDictionary(x => x.Button, x => x.NeedRestart);
+        [DllImport("shell32.dll")]
+        static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
+        const uint SHCNE_ASSOCCHANGED = 0x08000000;
+        const uint SHCNF_FLUSH = 0x1000;
 
-        internal static readonly Dictionary<string, bool> PackageMapping = new[]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint Msg, UIntPtr wParam, string lParam, uint fuFlags, uint uTimeout, out UIntPtr lpdwResult);
+        const uint HWND_BROADCAST = 0xffff;
+        const uint WM_SETTINGCHANGE = 0x001A;
+        const uint SMTO_ABORTIFHUNG = 0x0002;
+
+        internal enum ExplorerAction { None, Refresh, Restart }
+
+        internal static readonly Dictionary<string, ExplorerAction> IntfActions = new Dictionary<string, ExplorerAction>()
         {
-            new { Package = "Widgets", NeedRestart = true },
-            new { Package = "Edge", NeedRestart = true }
-        }.ToDictionary(x => x.Package, x => x.NeedRestart);
+            ["Checkbox4"] = ExplorerAction.Restart,
+            ["Checkbox5"] = ExplorerAction.Restart,
+            ["Checkbox6"] = ExplorerAction.Restart,
+            ["Checkbox7"] = ExplorerAction.Restart,
+            ["Checkbox8"] = ExplorerAction.Refresh,
+            ["Checkbox9"] = ExplorerAction.Refresh,
+            ["Checkbox10"] = ExplorerAction.Refresh,
+            ["Checkbox11"] = ExplorerAction.Refresh,
+            ["Checkbox12"] = ExplorerAction.Refresh,
+            ["Checkbox13"] = ExplorerAction.Refresh,
+            ["TglButton5"] = ExplorerAction.Restart,
+            ["TglButton6"] = ExplorerAction.Restart,
+            ["TglButton11"] = ExplorerAction.Restart,
+            ["TglButton12"] = ExplorerAction.Restart,
+            ["TglButton13"] = ExplorerAction.Restart,
+            ["TglButton17"] = ExplorerAction.Restart,
+            ["TglButton19"] = ExplorerAction.Restart,
+            ["TglButton23"] = ExplorerAction.Restart,
+            ["TglButton24"] = ExplorerAction.Restart,
+            ["TglButton27"] = ExplorerAction.Restart
+        };
+
+        internal static readonly Dictionary<string, ExplorerAction> PackageActions = new Dictionary<string, ExplorerAction>()
+        {
+            ["Widgets"] = ExplorerAction.Restart,
+            ["Edge"] = ExplorerAction.Restart
+        };
 
         internal static void Restart(Action action = null)
         {
@@ -54,6 +77,19 @@ namespace GTweak.Utilities.Managers
                         launchExplorer.Start();
                     }
                 }
+            });
+        }
+
+        internal static void RefreshDesktop()
+        {
+            Task.Run(delegate
+            {
+                try
+                {
+                    SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_FLUSH, IntPtr.Zero, IntPtr.Zero);
+                    SendMessageTimeout(new IntPtr((int)HWND_BROADCAST), WM_SETTINGCHANGE, UIntPtr.Zero, "TraySettings", SMTO_ABORTIFHUNG, 100, out UIntPtr result);
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             });
         }
     }

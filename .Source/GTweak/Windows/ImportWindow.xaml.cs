@@ -19,8 +19,9 @@ namespace GTweak.Windows
         private readonly ServicesTweaks _svcTweaks = new ServicesTweaks();
         private readonly SystemTweaks _sysTweaks = new SystemTweaks();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private readonly HashSet<NotificationManager.NoticeAction> _requiredActions = new HashSet<NotificationManager.NoticeAction>();
-        private bool _isExpRestartNeed = false, _isWDNotyNeed = false;
+        private readonly HashSet<NotificationManager.NoticeAction> _notyActions = new HashSet<NotificationManager.NoticeAction>();
+        private ExplorerManager.ExplorerAction _expAction = ExplorerManager.ExplorerAction.None;
+        private bool _isWDNotyNeed = false;
 
         public ImportWindow(in string importedFile)
         {
@@ -52,14 +53,21 @@ namespace GTweak.Windows
                 }
                 else
                 {
-                    if (_isExpRestartNeed)
+                    switch (_expAction)
                     {
-                        ExplorerManager.Restart();
+                        case ExplorerManager.ExplorerAction.Restart:
+                            ExplorerManager.Restart();
+                            break;
+                        case ExplorerManager.ExplorerAction.Refresh:
+                            ExplorerManager.RefreshDesktop();
+                            break;
+                        default:
+                            break;
                     }
 
-                    if (_requiredActions.Count != 0)
+                    if (_notyActions.Count != 0)
                     {
-                        NotificationManager.Show().Perform(_requiredActions.Max());
+                        NotificationManager.Show().Perform(_notyActions.Max());
                     }
                 }
 
@@ -72,10 +80,10 @@ namespace GTweak.Windows
         {
             INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
-            var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, NotificationManager.NoticeAction>> NoticeActions, IEnumerable<KeyValuePair<string, bool>> ExplorerMapping)[]
+            var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, NotificationManager.NoticeAction>> NoticeActions, IEnumerable<KeyValuePair<string, ExplorerManager.ExplorerAction>> ExplorerMapping)[]
             {
                 (INIManager.SectionConf, _confTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
-                (INIManager.SectionIntf, _intfTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfMapping),
+                (INIManager.SectionIntf, _intfTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfActions),
                 (INIManager.SectionSvc, _svcTweaks.ApplyTweaks, null, null),
                 (INIManager.SectionSys, null, NotificationManager.SysActions, null)
             };
@@ -117,7 +125,7 @@ namespace GTweak.Windows
 
                             foreach (var act in NotificationManager.SysActions.Where(a => a.Key == tweak))
                             {
-                                _requiredActions.Add(act.Value);
+                                _notyActions.Add(act.Value);
                             }
                         }
                         else if (tweak == "TglButton3")
@@ -152,22 +160,28 @@ namespace GTweak.Windows
                             TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
                         }
 
-                        if (NoticeActions != null)
+                        if (NoticeActions is Dictionary<string, NotificationManager.NoticeAction> dict)
                         {
-                            foreach (var act in NoticeActions.Where(a => a.Key == tweak))
+                            if (dict.TryGetValue(tweak, out NotificationManager.NoticeAction action))
                             {
-                                _requiredActions.Add(act.Value);
+                                _notyActions.Add(action);
                             }
                         }
 
-                        if (ExplorerMapping != null && ExplorerMapping.Any(a => a.Key == tweak && a.Value))
+                        if (ExplorerMapping is IDictionary<string, ExplorerManager.ExplorerAction> expDict)
                         {
-                            _isExpRestartNeed = true;
+                            if (expDict.TryGetValue(tweak, out ExplorerManager.ExplorerAction action))
+                            {
+                                if (action > _expAction)
+                                {
+                                    _expAction = action;
+                                }
+                            }
                         }
 
                         if (section == INIManager.SectionSvc)
                         {
-                            _requiredActions.Add(NotificationManager.NoticeAction.Restart);
+                            _notyActions.Add(NotificationManager.NoticeAction.Restart);
                         }
                     }
                 }

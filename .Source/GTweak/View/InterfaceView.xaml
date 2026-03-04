@@ -65,7 +65,7 @@
 
                         <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource exblock3_desc_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource exblock3_intf}"/>
-                            <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center">
+                            <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" Closed="ExpandableBox_Closed">
                                 <CheckBox x:Uid="Checkbox8" Content="{DynamicResource chk_pc_intf}" IsChecked="{Binding [Checkbox8].State}" Click="CheckBox_Click" />
                                 <CheckBox x:Uid="Checkbox9" Content="{DynamicResource chk_net_intf}" IsChecked="{Binding [Checkbox9].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
                                 <CheckBox x:Uid="Checkbox10" Content="{DynamicResource chk_trash_intf}" IsChecked="{Binding [Checkbox10].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
