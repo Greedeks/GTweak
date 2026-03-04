@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">Kolor podpowiedzi:</v:String>
     
     <v:String x:Key="exblock1_intf">Elementy nawigacyjne Eksploratora plików:</v:String>
-    <v:String x:Key="chk1_home_intf">Home</v:String>
-    <v:String x:Key="chk2_gallery_intf">Galeria</v:String>
-    <v:String x:Key="chk3_onedrive_intf">OneDrive</v:String>
+    <v:String x:Key="chk_home_intf">Home</v:String>
+    <v:String x:Key="chk_gallery_intf">Galeria</v:String>
 
     <v:String x:Key="exblock2_intf">Ustawienia wyświetlania w Eksploratorze plików:</v:String>
-    <v:String x:Key="chk4_hidden_intf">Pokaż ukryte pliki i foldery</v:String>
-    <v:String x:Key="chk5_system_intf">Pokaż ukryte chronione pliki systemowe</v:String>
-    <v:String x:Key="chk6_extension_intf">Wyświetlanie rozszerzeń nazw plików</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">Wyświetlanie pustych dysków</v:String>
+    <v:String x:Key="chk_hidden_intf">Pokaż ukryte pliki i foldery</v:String>
+    <v:String x:Key="chk_system_intf">Pokaż ukryte chronione pliki systemowe</v:String>
+    <v:String x:Key="chk_extension_intf">Wyświetlanie rozszerzeń nazw plików</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Wyświetlanie pustych dysków</v:String>
 
     <v:String x:Key="exblock3_intf">Wyświetlanie ikon na pulpicie:</v:String>
-    <v:String x:Key="chk8_pc_intf">Ten komputer</v:String>
-    <v:String x:Key="chk9_net_intf">Sieć</v:String>
-    <v:String x:Key="chk10_trash_intf">Kosz</v:String>
-    <v:String x:Key="chk11_panel_intf">Panel sterowania</v:String>
-    <v:String x:Key="chk12_user_intf">Pliki użytkownika</v:String>
+    <v:String x:Key="chk_pc_intf">Ten komputer</v:String>
+    <v:String x:Key="chk_net_intf">Sieć</v:String>
+    <v:String x:Key="chk_trash_intf">Kosz</v:String>
+    <v:String x:Key="chk_panel_intf">Panel sterowania</v:String>
+    <v:String x:Key="chk_user_intf">Pliki użytkownika</v:String>
 
     <v:String x:Key="tgl1_intf">Standardowy rozmiar przycisków systemowych</v:String>
     <v:String x:Key="tgl2_intf">Standardowa częstotliwość migania kursora</v:String>

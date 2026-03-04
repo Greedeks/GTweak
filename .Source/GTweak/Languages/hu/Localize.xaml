@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">Buboréksúgó színe:</v:String>
     
     <v:String x:Key="exblock1_intf">Fájlkezelő navigációs elemei:</v:String>
-    <v:String x:Key="chk1_home_intf">Kezdőlap</v:String>
-    <v:String x:Key="chk2_gallery_intf">Galéria</v:String>
-    <v:String x:Key="chk3_onedrive_intf">OneDrive</v:String>
+    <v:String x:Key="chk_home_intf">Kezdőlap</v:String>
+    <v:String x:Key="chk_gallery_intf">Galéria</v:String>
 
     <v:String x:Key="exblock2_intf">Fájlkezelő megjelenítési beállításai:</v:String>
-    <v:String x:Key="chk4_hidden_intf">Rejtett fájlok és mappák megjelenítése</v:String>
-    <v:String x:Key="chk5_system_intf">Rejtett, védett rendszerfájlok megjelenítése</v:String>
-    <v:String x:Key="chk6_extension_intf">Fájlnév-kiterjesztések megjelenítése</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">Üres meghajtók megjelenítése</v:String>
+    <v:String x:Key="chk_hidden_intf">Rejtett fájlok és mappák megjelenítése</v:String>
+    <v:String x:Key="chk_system_intf">Rejtett, védett rendszerfájlok megjelenítése</v:String>
+    <v:String x:Key="chk_extension_intf">Fájlnév-kiterjesztések megjelenítése</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Üres meghajtók megjelenítése</v:String>
 
     <v:String x:Key="exblock3_intf">Asztali ikonok megjelenítése:</v:String>
-    <v:String x:Key="chk8_pc_intf">Ez a gép</v:String>
-    <v:String x:Key="chk9_net_intf">Hálózat</v:String>
-    <v:String x:Key="chk10_trash_intf">Lomtár</v:String>
-    <v:String x:Key="chk11_panel_intf">Vezérlőpult</v:String>
-    <v:String x:Key="chk12_user_intf">Felhasználói fájlok</v:String>
+    <v:String x:Key="chk_pc_intf">Ez a gép</v:String>
+    <v:String x:Key="chk_net_intf">Hálózat</v:String>
+    <v:String x:Key="chk_trash_intf">Lomtár</v:String>
+    <v:String x:Key="chk_panel_intf">Vezérlőpult</v:String>
+    <v:String x:Key="chk_user_intf">Felhasználói fájlok</v:String>
 
     <v:String x:Key="tgl1_intf">A rendszergombok szabványos mérete</v:String>
     <v:String x:Key="tgl2_intf">A kurzor normál villogási frekvenciája</v:String>

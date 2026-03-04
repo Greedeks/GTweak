@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">Colore suggerimento:</v:String>
     
     <v:String x:Key="exblock1_intf">Elementi di navigazione di Esplora file:</v:String>
-    <v:String x:Key="chk1_home_intf">Home</v:String>
-    <v:String x:Key="chk2_gallery_intf">Galleria</v:String>
-    <v:String x:Key="chk3_onedrive_intf">OneDrive</v:String>
+    <v:String x:Key="chk_home_intf">Home</v:String>
+    <v:String x:Key="chk_gallery_intf">Galleria</v:String>
 
     <v:String x:Key="exblock2_intf">Impostazioni di visualizzazione di Esplora file:</v:String>
-    <v:String x:Key="chk4_hidden_intf">Mostra file e cartelle nascosti</v:String>
-    <v:String x:Key="chk5_system_intf">Mostra file protetti e nascosti del sistema operativo</v:String>
-    <v:String x:Key="chk6_extension_intf">Visualizzazione delle estensioni dei nomi dei file</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">Visualizzazione delle unità vuote</v:String>
+    <v:String x:Key="chk_hidden_intf">Mostra file e cartelle nascosti</v:String>
+    <v:String x:Key="chk_system_intf">Mostra file protetti e nascosti del sistema operativo</v:String>
+    <v:String x:Key="chk_extension_intf">Visualizzazione delle estensioni dei nomi dei file</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Visualizzazione delle unità vuote</v:String>
 
     <v:String x:Key="exblock3_intf">Visualizzazione delle icone del desktop:</v:String>
-    <v:String x:Key="chk8_pc_intf">Questo PC</v:String>
-    <v:String x:Key="chk9_net_intf">Rete</v:String>
-    <v:String x:Key="chk10_trash_intf">Cestino</v:String>
-    <v:String x:Key="chk11_panel_intf">Pannello di controllo</v:String>
-    <v:String x:Key="chk12_user_intf">File dell'utente</v:String>
+    <v:String x:Key="chk_pc_intf">Questo PC</v:String>
+    <v:String x:Key="chk_net_intf">Rete</v:String>
+    <v:String x:Key="chk_trash_intf">Cestino</v:String>
+    <v:String x:Key="chk_panel_intf">Pannello di controllo</v:String>
+    <v:String x:Key="chk_user_intf">File dell'utente</v:String>
 
     <v:String x:Key="tgl1_intf">Dimensione standard dei pulsanti di sistema</v:String>
     <v:String x:Key="tgl2_intf">Frequenza standard del lampeggio del cursore</v:String>

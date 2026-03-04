@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">Cor da dica de ferramenta:</v:String>
 
     <v:String x:Key="exblock1_intf">Itens de navegação do Explorador de Arquivos:</v:String>
-    <v:String x:Key="chk1_home_intf">Início</v:String>
-    <v:String x:Key="chk2_gallery_intf">Galeria</v:String>
-    <v:String x:Key="chk3_onedrive_intf">OneDrive</v:String>
+    <v:String x:Key="chk_home_intf">Início</v:String>
+    <v:String x:Key="chk_gallery_intf">Galeria</v:String>
 
     <v:String x:Key="exblock2_intf">Configurações de exibição no Explorador de Arquivos:</v:String>
-    <v:String x:Key="chk4_hidden_intf">Mostrar arquivos e pastas ocultos</v:String>
-    <v:String x:Key="chk5_system_intf">Mostrar arquivos protegidos e ocultos do sistema operacional</v:String>
-    <v:String x:Key="chk6_extension_intf">Exibição de extensões de nomes de arquivos</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">Exibição de unidades vazias</v:String>
+    <v:String x:Key="chk_hidden_intf">Mostrar arquivos e pastas ocultos</v:String>
+    <v:String x:Key="chk_system_intf">Mostrar arquivos protegidos e ocultos do sistema operacional</v:String>
+    <v:String x:Key="chk_extension_intf">Exibição de extensões de nomes de arquivos</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Exibição de unidades vazias</v:String>
 
     <v:String x:Key="exblock3_intf">Exibição dos ícones da área de trabalho:</v:String>
-    <v:String x:Key="chk8_pc_intf">Este PC</v:String>
-    <v:String x:Key="chk9_net_intf">Rede</v:String>
-    <v:String x:Key="chk10_trash_intf">Lixeira</v:String>
-    <v:String x:Key="chk11_panel_intf">Painel de Controle</v:String>
-    <v:String x:Key="chk12_user_intf">Arquivos do usuário</v:String>
+    <v:String x:Key="chk_pc_intf">Este PC</v:String>
+    <v:String x:Key="chk_net_intf">Rede</v:String>
+    <v:String x:Key="chk_trash_intf">Lixeira</v:String>
+    <v:String x:Key="chk_panel_intf">Painel de Controle</v:String>
+    <v:String x:Key="chk_user_intf">Arquivos do usuário</v:String>
 
     <v:String x:Key="tgl1_intf">Tamanho padrão dos botões do sistema</v:String>
     <v:String x:Key="tgl2_intf">Frequência de piscar padrão do cursor</v:String>

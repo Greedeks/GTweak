@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">도구 설명 색상:</v:String>
     
     <v:String x:Key="exblock1_intf">파일 탐색기 탐색 항목:</v:String>
-    <v:String x:Key="chk1_home_intf">홈</v:String>
-    <v:String x:Key="chk2_gallery_intf">갤러리</v:String>
-    <v:String x:Key="chk3_onedrive_intf">OneDrive</v:String>
+    <v:String x:Key="chk_home_intf">홈</v:String>
+    <v:String x:Key="chk_gallery_intf">갤러리</v:String>
 
     <v:String x:Key="exblock2_intf">파일 탐색기 표시 설정:</v:String>
-    <v:String x:Key="chk4_hidden_intf">숨김 파일 및 폴더 표시</v:String>
-    <v:String x:Key="chk5_system_intf">숨겨진 보호된 시스템 파일 표시</v:String>
-    <v:String x:Key="chk6_extension_intf">파일 이름 확장자 표시</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">빈 드라이브 표시</v:String>
+    <v:String x:Key="chk_hidden_intf">숨김 파일 및 폴더 표시</v:String>
+    <v:String x:Key="chk_system_intf">숨겨진 보호된 시스템 파일 표시</v:String>
+    <v:String x:Key="chk_extension_intf">파일 이름 확장자 표시</v:String>
+    <v:String x:Key="chk_emptydrives_intf">빈 드라이브 표시</v:String>
 
     <v:String x:Key="exblock3_intf">바탕 화면 아이콘 표시:</v:String>
-    <v:String x:Key="chk8_pc_intf">내 PC</v:String>
-    <v:String x:Key="chk9_net_intf">네트워크</v:String>
-    <v:String x:Key="chk10_trash_intf">휴지통</v:String>
-    <v:String x:Key="chk11_panel_intf">제어판</v:String>
-    <v:String x:Key="chk12_user_intf">사용자 파일</v:String>
+    <v:String x:Key="chk_pc_intf">내 PC</v:String>
+    <v:String x:Key="chk_net_intf">네트워크</v:String>
+    <v:String x:Key="chk_trash_intf">휴지통</v:String>
+    <v:String x:Key="chk_panel_intf">제어판</v:String>
+    <v:String x:Key="chk_user_intf">사용자 파일</v:String>
 
     <v:String x:Key="tgl1_intf">시스템 버튼의 표준 크기</v:String>
     <v:String x:Key="tgl2_intf">표준 커서 깜박임 빈도</v:String>

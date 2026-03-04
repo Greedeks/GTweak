@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">Цвет всплывающей подсказки:</v:String>
     
     <v:String x:Key="exblock1_intf">Элементы навигации Проводника:</v:String>
-    <v:String x:Key="chk1_home_intf">Главная</v:String>
-    <v:String x:Key="chk2_gallery_intf">Галерея</v:String>
-    <v:String x:Key="chk3_onedrive_intf">Быстрый доступ</v:String>
+    <v:String x:Key="chk_home_intf">Главная</v:String>
+    <v:String x:Key="chk_gallery_intf">Галерея</v:String>
 
     <v:String x:Key="exblock2_intf">Параметры отображения в Проводнике:</v:String>
-    <v:String x:Key="chk4_hidden_intf">Показывать скрытые файлы и папки</v:String>
-    <v:String x:Key="chk5_system_intf">Показывать скрытые защищенные системные файлы</v:String>
-    <v:String x:Key="chk6_extension_intf">Отображение расширений имен файлов</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">Отображение пустых дисков</v:String>
+    <v:String x:Key="chk_hidden_intf">Показывать скрытые файлы и папки</v:String>
+    <v:String x:Key="chk_system_intf">Показывать скрытые защищенные системные файлы</v:String>
+    <v:String x:Key="chk_extension_intf">Отображение расширений имен файлов</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Отображение пустых дисков</v:String>
 
     <v:String x:Key="exblock3_intf">Отображение значков на рабочем столе</v:String>
-    <v:String x:Key="chk8_pc_intf">Этот компьютер</v:String>
-    <v:String x:Key="chk9_net_intf">Сеть</v:String>
-    <v:String x:Key="chk10_trash_intf">Корзина</v:String>
-    <v:String x:Key="chk11_panel_intf">Панель управления</v:String>
-    <v:String x:Key="chk12_user_intf">Файлы пользователя</v:String>
+    <v:String x:Key="chk_pc_intf">Этот компьютер</v:String>
+    <v:String x:Key="chk_net_intf">Сеть</v:String>
+    <v:String x:Key="chk_trash_intf">Корзина</v:String>
+    <v:String x:Key="chk_panel_intf">Панель управления</v:String>
+    <v:String x:Key="chk_user_intf">Файлы пользователя</v:String>
 
     <v:String x:Key="tgl1_intf">Стандартный размер системных кнопок</v:String>
     <v:String x:Key="tgl2_intf">Стандартная частота мерцания курсора</v:String>

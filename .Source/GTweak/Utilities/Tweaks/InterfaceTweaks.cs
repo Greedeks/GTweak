@@ -42,9 +42,16 @@ namespace GTweak.Utilities.Tweaks
                 _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", n, v, true);
             }
 
-            foreach ((int i, string g) in new (int Index, string Guid)[] { (8, "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"), (9, "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"), (10, "{645FF040-5081-101B-9F08-00AA002F954E}"), (11, "{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}"), (12, "{59031A47-3F72-44A7-89C5-5595FE6B30EE}") })
+            foreach ((int i, string g) in new (int Index, string Guid)[] { (8, "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"), (9, "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"), (10, "{645FF040-5081-101B-9F08-00AA002F954E}"), (11, "{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}"), (12, "{59031A47-3F72-44A7-89C5-5595FE6B30EE}"), (13, "{018D5C66-4533-4307-9B53-224DE2ED1FE6}") })
             {
-                _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", g, "0", true);
+                if (i == 10)
+                {
+                    _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", g, "1");
+                }
+                else
+                {
+                    _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", g, "0", true);
+                }
             }
 
             _сontrolWriter.Button[1] =
@@ -258,25 +265,18 @@ namespace GTweak.Utilities.Tweaks
                     }
 
                     break;
-                case string checkbox when new[] { "Checkbox8", "Checkbox9", "Checkbox10", "Checkbox11", "Checkbox12" }.Contains(checkbox):
+                case string checkbox when new[] { "Checkbox8", "Checkbox9", "Checkbox10", "Checkbox11", "Checkbox12", "Checkbox13" }.Contains(checkbox):
                     {
-                        (string guid, int value, bool isDelete) = checkbox switch
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", checkbox switch
                         {
-                            "Checkbox8" => ("{20D04FE0-3AEA-1069-A2D8-08002B30309D}", 0, true),
-                            "Checkbox9" => ("{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}", 0, false),
-                            "Checkbox10" => ("{645FF040-5081-101B-9F08-00AA002F954E}", 0, false),
-                            "Checkbox11" => ("{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}", 0, false),
-                            _ => ("{59031A47-3F72-44A7-89C5-5595FE6B30EE}", 0, false)
-                        };
+                            "Checkbox8" => ("{20D04FE0-3AEA-1069-A2D8-08002B30309D}"),
+                            "Checkbox9" => ("{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"),
+                            "Checkbox10" => ("{645FF040-5081-101B-9F08-00AA002F954E}"),
+                            "Checkbox11" => ("{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}"),
+                            "Checkbox12" => ("{59031A47-3F72-44A7-89C5-5595FE6B30EE}"),
+                            _ => ("{018D5C66-4533-4307-9B53-224DE2ED1FE6}")
+                        }, isDisabled ? 1 : 0, RegistryValueKind.DWord);
 
-                        if (isDisabled && isDelete)
-                        {
-                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", guid);
-                        }
-                        else
-                        {
-                            RegistryHelp.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", guid, isDisabled ? 1 - value : value, RegistryValueKind.DWord);
-                        }
                     }
                     break;
                 default:

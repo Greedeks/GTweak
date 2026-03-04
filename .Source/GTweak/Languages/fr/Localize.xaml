@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">Couleur de l'infobulle :</v:String>
 
     <v:String x:Key="exblock1_intf">Éléments de navigation de l'Explorateur :</v:String>
-    <v:String x:Key="chk1_home_intf">Accueil</v:String>
-    <v:String x:Key="chk2_gallery_intf">Galerie</v:String>
-    <v:String x:Key="chk3_onedrive_intf">OneDrive</v:String>
+    <v:String x:Key="chk_home_intf">Accueil</v:String>
+    <v:String x:Key="chk_gallery_intf">Galerie</v:String>
 
     <v:String x:Key="exblock2_intf">Paramètres d'affichage de l'Explorateur de fichiers :</v:String>
-    <v:String x:Key="chk4_hidden_intf">Afficher les fichiers et dossiers cachés</v:String>
-    <v:String x:Key="chk5_system_intf">Afficher les fichiers protégés et cachés du système d'exploitation</v:String>
-    <v:String x:Key="chk6_extension_intf">Affichage des extensions des noms de fichiers</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">Affichage des lecteurs vides</v:String>
+    <v:String x:Key="chk_hidden_intf">Afficher les fichiers et dossiers cachés</v:String>
+    <v:String x:Key="chk_system_intf">Afficher les fichiers protégés et cachés du système d'exploitation</v:String>
+    <v:String x:Key="chk_extension_intf">Affichage des extensions des noms de fichiers</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Affichage des lecteurs vides</v:String>
 
     <v:String x:Key="exblock3_intf">Affichage des icônes du bureau :</v:String>
-    <v:String x:Key="chk8_pc_intf">Ce PC</v:String>
-    <v:String x:Key="chk9_net_intf">Réseau</v:String>
-    <v:String x:Key="chk10_trash_intf">Corbeille</v:String>
-    <v:String x:Key="chk11_panel_intf">Panneau de configuration</v:String>
-    <v:String x:Key="chk12_user_intf">Fichiers de l’utilisateur</v:String>
+    <v:String x:Key="chk_pc_intf">Ce PC</v:String>
+    <v:String x:Key="chk_net_intf">Réseau</v:String>
+    <v:String x:Key="chk_trash_intf">Corbeille</v:String>
+    <v:String x:Key="chk_panel_intf">Panneau de configuration</v:String>
+    <v:String x:Key="chk_user_intf">Fichiers de l’utilisateur</v:String>
 
     <v:String x:Key="tgl1_intf">Taille standard des boutons système</v:String>
     <v:String x:Key="tgl2_intf">Fréquence de clignotement standard du curseur</v:String>

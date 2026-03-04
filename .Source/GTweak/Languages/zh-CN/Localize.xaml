@@ -200,22 +200,21 @@
     <v:String x:Key="color2_intf">工具提示颜色：</v:String>
     
     <v:String x:Key="exblock1_intf">文件资源管理器 导航项：</v:String>
-    <v:String x:Key="chk1_home_intf">主页</v:String>
-    <v:String x:Key="chk2_gallery_intf">图库</v:String>
-    <v:String x:Key="chk3_onedrive_intf">OneDrive</v:String>
+    <v:String x:Key="chk_home_intf">主页</v:String>
+    <v:String x:Key="chk_gallery_intf">图库</v:String>
 
     <v:String x:Key="exblock2_intf">文件资源管理器显示设置：</v:String>
-    <v:String x:Key="chk4_hidden_intf">显示隐藏的文件和文件夹</v:String>
-    <v:String x:Key="chk5_system_intf">显示隐藏的受保护的系统文件</v:String>
-    <v:String x:Key="chk6_extension_intf">显示文件名扩展名</v:String>
-    <v:String x:Key="chk7_emptydrives_intf">显示空驱动器</v:String>
+    <v:String x:Key="chk_hidden_intf">显示隐藏的文件和文件夹</v:String>
+    <v:String x:Key="chk_system_intf">显示隐藏的受保护的系统文件</v:String>
+    <v:String x:Key="chk_extension_intf">显示文件名扩展名</v:String>
+    <v:String x:Key="chk_emptydrives_intf">显示空驱动器</v:String>
 
     <v:String x:Key="exblock3_intf">显示桌面图标：</v:String>
-    <v:String x:Key="chk8_pc_intf">此电脑</v:String>
-    <v:String x:Key="chk9_net_intf">网络</v:String>
-    <v:String x:Key="chk10_trash_intf">回收站</v:String>
-    <v:String x:Key="chk11_panel_intf">控制面板</v:String>
-    <v:String x:Key="chk12_user_intf">用户文件</v:String>
+    <v:String x:Key="chk_pc_intf">此电脑</v:String>
+    <v:String x:Key="chk_net_intf">网络</v:String>
+    <v:String x:Key="chk_trash_intf">回收站</v:String>
+    <v:String x:Key="chk_panel_intf">控制面板</v:String>
+    <v:String x:Key="chk_user_intf">用户文件</v:String>
 
     <v:String x:Key="tgl1_intf">系统按钮标准尺寸</v:String>
     <v:String x:Key="tgl2_intf">标准游标闪烁频率</v:String>
