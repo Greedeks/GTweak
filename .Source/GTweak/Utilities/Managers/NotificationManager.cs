@@ -26,6 +26,7 @@ namespace GTweak.Utilities.Managers
             ["TglButton7"] = NoticeAction.Logout,
             ["TglButton8"] = NoticeAction.Logout,
             ["TglButton9"] = NoticeAction.Logout,
+            ["TglButton10"] = NoticeAction.Logout,
             ["TglButton16"] = NoticeAction.Restart,
             ["TglButton18"] = NoticeAction.Logout,
             ["TglButton29"] = NoticeAction.Restart

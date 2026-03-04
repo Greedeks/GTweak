@@ -37,21 +37,14 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0") ||
                 RegistryHelp.CheckValue(@"HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0");
 
-            foreach ((int i, string n, string v) in new (int Index, string Name, string Value)[] { (4, "Hidden", "1"), (5, "ShowSuperHidden", "1"), (6, "HideFileExt", "0"), (7, "HideDrivesWithNoMedia", "0") })
+            foreach ((int i, string n, string v) in new (int index, string name, string value)[] { (4, "Hidden", "1"), (5, "ShowSuperHidden", "1"), (6, "HideFileExt", "0"), (7, "HideDrivesWithNoMedia", "0") })
             {
                 _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", n, v, true);
             }
 
-            foreach ((int i, string g) in new (int Index, string Guid)[] { (8, "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"), (9, "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"), (10, "{645FF040-5081-101B-9F08-00AA002F954E}"), (11, "{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}"), (12, "{59031A47-3F72-44A7-89C5-5595FE6B30EE}"), (13, "{018D5C66-4533-4307-9B53-224DE2ED1FE6}") })
+            foreach ((int i, string g) in new (int index, string guid)[] { (8, "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"), (9, "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"), (10, "{645FF040-5081-101B-9F08-00AA002F954E}"), (11, "{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}"), (12, "{59031A47-3F72-44A7-89C5-5595FE6B30EE}"), (13, "{018D5C66-4533-4307-9B53-224DE2ED1FE6}") })
             {
-                if (i == 10)
-                {
-                    _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", g, "1");
-                }
-                else
-                {
-                    _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", g, "0", true);
-                }
+                _сontrolWriter.Checkbox[i] = RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", g, i == 10 ? "1" : "0", i != 10);
             }
 
             _сontrolWriter.Button[1] =

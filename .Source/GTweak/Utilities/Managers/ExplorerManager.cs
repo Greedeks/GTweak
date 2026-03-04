@@ -64,6 +64,7 @@ namespace GTweak.Utilities.Managers
                         {
                             process.Kill();
                             action?.Invoke();
+                            process.Dispose();
                         }
                     }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
@@ -74,7 +75,8 @@ namespace GTweak.Utilities.Managers
                         launchExplorer.StartInfo.FileName = PathLocator.Executable.Explorer;
                         launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
                         launchExplorer.StartInfo.UseShellExecute = true;
-                        launchExplorer.Start();
+                        try { launchExplorer.Start(); }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
                 }
             });
