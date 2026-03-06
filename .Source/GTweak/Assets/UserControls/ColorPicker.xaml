@@ -9,87 +9,19 @@
              d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" 
              IsTabStop="False" Focusable="False" PreviewKeyDown="ColorPopup_PreviewKeyDown">
     <Grid>
-        <ToggleButton x:Name="TglArrow" Checked="TglArrow_Checked" Unchecked="TglArrow_Unchecked" Focusable="False">
-            <ToggleButton.Template>
-                <ControlTemplate TargetType="ToggleButton">
-                    <Border x:Name="RootBorder" BorderThickness="1" Background="{StaticResource Brush_Background_ComboBox}" CornerRadius="4" Padding="5">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Setter Property="BorderBrush">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource Color_Separator}" />
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Trigger.EnterActions>
-                                            <BeginStoryboard>
-                                                <Storyboard Timeline.DesiredFrameRate="120">
-                                                    <ColorAnimation  Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource Color_Border_Hover_CheckBox}" Duration="0:0:0.1"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.EnterActions>
-                                        <Trigger.ExitActions>
-                                            <BeginStoryboard>
-                                                <Storyboard Timeline.DesiredFrameRate="120">
-                                                    <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource Color_Separator}"  Duration="0:0:0.1"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </Trigger.ExitActions>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter Grid.Column="0" VerticalAlignment="Center"/>
-                            <Path x:Name="Arrow" Grid.Column="1" Data="M 0,2 L 4,6 L 8,2" Stroke="{StaticResource Brush_Highlighted}" StrokeThickness="1" Margin="8,0,2,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                                <Path.RenderTransform>
-                                    <RotateTransform x:Name="ArrowRotate" Angle="0"/>
-                                </Path.RenderTransform>
-                            </Path>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard Timeline.DesiredFrameRate="120">
-                                        <DoubleAnimation Storyboard.TargetName="ArrowRotate" Storyboard.TargetProperty="Angle" To="180" Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard Timeline.DesiredFrameRate="120">
-                                        <DoubleAnimation Storyboard.TargetName="ArrowRotate" Storyboard.TargetProperty="Angle" To="0" Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </ToggleButton.Template>
-
+        <ToggleButton x:Name="TglArrow" Style="{StaticResource TglDropDown}" Checked="TglArrow_Checked" Unchecked="TglArrow_Unchecked" PreviewMouseRightButtonDown="TglArrow_PreviewMouseRightButtonDown">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <Ellipse  Grid.Column="0" Fill="#33000000" Width="20" Height="20" Margin="0,0,8,0" Opacity="0.7">
+                    <Ellipse.RenderTransform>
+                        <TranslateTransform X="1" Y="1" />
+                    </Ellipse.RenderTransform>
+                </Ellipse>
                 <Ellipse x:Name="ColorPreview" Grid.Column="0" Width="20" Height="20" Stroke="{StaticResource Brush_Separator}" StrokeThickness="2" Margin="0,0,8,0" Fill="White"/>
-
                 <TextBlock x:Name="ColorTextBlock" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted}" Text="255 255 255" MinWidth="80" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining"/>
             </Grid>
         </ToggleButton>

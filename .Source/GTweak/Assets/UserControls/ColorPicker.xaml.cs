@@ -314,6 +314,7 @@ namespace GTweak.Assets.UserControls
         private void ParentWindow_MovedOrResized(object sender, EventArgs e) => UpdatePopupPosition();
         private void TglArrow_Checked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = true;
         private void TglArrow_Unchecked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = false;
+        private void TglArrow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) => e.Handled = true;
 
         private void BtnDefault_Click(object sender, RoutedEventArgs e)
         {

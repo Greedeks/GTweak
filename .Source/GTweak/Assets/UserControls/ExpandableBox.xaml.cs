@@ -84,6 +84,7 @@ namespace GTweak.Assets.UserControls
         private void UpdatePositionProxy(object s, EventArgs e) => UpdatePopupPosition();
         private void TglArrow_Checked(object sender, RoutedEventArgs e) => DropdownPopup.IsOpen = true;
         private void TglArrow_Unchecked(object sender, RoutedEventArgs e) => DropdownPopup.IsOpen = false;
+        private void TglArrow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) => e.Handled = true;
 
         private void Popup_PreviewKeyDown(object sender, KeyEventArgs e)
         {
