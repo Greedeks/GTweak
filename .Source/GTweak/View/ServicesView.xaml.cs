@@ -1,16 +1,14 @@
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
+using GTweak.Core.Base;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
-    [ToolboxItem(false)]
-    [DesignTimeVisible(false)]
-    public partial class ServicesView : UserControl
+    public partial class ServicesView : UserControl, IViewPageBase
     {
         private readonly ServicesTweaks _svcTweaks = new ServicesTweaks();
 

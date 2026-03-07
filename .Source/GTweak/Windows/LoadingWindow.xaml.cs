@@ -49,7 +49,7 @@ namespace GTweak.Windows
             static void ExecuteWithLogging(Action action, string member)
             {
                 try { action(); }
-                catch (Exception ex) { ErrorLogging.LogWritingFile(ex, member); }
+                catch (Exception ex) { ErrorLogging.LogWritingFile(ex, false, member); }
             }
 
             ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));

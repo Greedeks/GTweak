@@ -1,18 +1,16 @@
 using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
+using GTweak.Core.Base;
 using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
-    [ToolboxItem(false)]
-    [DesignTimeVisible(false)]
-    public partial class InterfaceView : UserControl
+    public partial class InterfaceView : UserControl, IViewPageBase
     {
         private readonly InterfaceTweaks _intfTweaks = new InterfaceTweaks();
         private ExplorerManager.ExplorerAction _explorerAction = ExplorerManager.ExplorerAction.None;

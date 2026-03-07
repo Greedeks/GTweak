@@ -1,7 +1,7 @@
 using System;
-using System.ComponentModel;
 using System.IO;
 using System.Windows.Controls;
+using GTweak.Core.Base;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
@@ -12,9 +12,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace GTweak.View
 {
-    [ToolboxItem(false)]
-    [DesignTimeVisible(false)]
-    public partial class UtilsView : UserControl
+    public partial class UtilsView : UserControl, IViewPageBase
     {
         private readonly SystemRestoreService _systemRestore = new SystemRestoreService();
         private readonly NTFSCompressor _ntfsCompressor = new NTFSCompressor();

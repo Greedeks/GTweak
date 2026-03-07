@@ -7,7 +7,6 @@ using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Windows;
-
 using Wpf.Ui.Appearance;
 
 namespace GTweak
@@ -55,7 +54,7 @@ namespace GTweak
         {
             if (e != null)
             {
-                ErrorLogging.LogWritingFile(e.Exception);
+                ErrorLogging.LogWritingFile(e.Exception, true);
                 e.Handled = true;
                 Environment.Exit(0);
             }
@@ -65,7 +64,7 @@ namespace GTweak
         {
             if (e?.ExceptionObject is Exception ex)
             {
-                ErrorLogging.LogWritingFile(ex);
+                ErrorLogging.LogWritingFile(ex, true);
             }
 
             Environment.Exit(0);

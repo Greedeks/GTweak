@@ -15,41 +15,41 @@ namespace GTweak.Utilities.Controls
         [Conditional("DEBUG")]
         internal static void LogDebug(Exception ex, [CallerMemberName] string memberName = "") => Debug.WriteLine($"Debug: {ex.Message}\nStack Trace: {ex.StackTrace}\nMember: {memberName}\n");
 
-        internal static void LogWritingFile(Exception ex, [CallerMemberName] string memberName = "") => Task.Run(() => LogToFile(ex, memberName)).Wait();
+        internal static void LogWritingFile(Exception ex, bool isFatal = false, [CallerMemberName] string memberName = "") => Task.Run(() => SaveDumpToFile(ex, isFatal, memberName)).Wait();
 
-        private static async Task EnsureAssociation()
+        private static async Task EnsureLogFileAssociation()
         {
             try
             {
-                string assocLogFile = await CommandExecutor.GetCommandOutput("/c assoc .log", false);
+                string logAssocOutput = await CommandExecutor.GetCommandOutput("/c assoc .log", false);
 
-                if (assocLogFile.IndexOf("=", StringComparison.OrdinalIgnoreCase) < 0)
+                if (logAssocOutput.IndexOf("=", StringComparison.OrdinalIgnoreCase) < 0)
                 {
-                    string assocTxtFile = await CommandExecutor.GetCommandOutput("/c assoc .txt", false);
+                    string txtAssocOutput = await CommandExecutor.GetCommandOutput("/c assoc .txt", false);
 
-                    if (assocTxtFile.IndexOf("=", StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (txtAssocOutput.IndexOf("=", StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        CommandExecutor.RunCommand($"/c assoc .log={assocTxtFile.Split('=')[1].Trim()}");
+                        string txtApp = txtAssocOutput.Split('=')[1].Trim();
+                        CommandExecutor.RunCommand($"/c assoc .log={txtApp}");
                     }
                 }
             }
-            catch (Exception fileEx) { LogDebug(fileEx); }
+            catch (Exception ex) { LogDebug(ex); }
         }
 
-        private static async Task LogToFile(Exception ex, string memberName)
+        private static async Task SaveDumpToFile(Exception ex, bool isFatal, string memberName)
         {
             try
             {
                 using (FileStream stream = new FileStream(PathLocator.Files.ErrorLog, FileMode.Create, FileAccess.Write, FileShare.Read))
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                 {
-                    string headerLine = "---------------------------------------------------------";
+                    string separator = "---------------------------------------------------------";
                     Exception currentEx = ex;
                     byte exLevel = 1;
 
-                    await writer.WriteLineAsync($"GTweak has crashed!\n{headerLine}\nIf you wish to report this, please open an issue here:\nhttps://github.com/Greedeks/GTweak/issues\n{headerLine}\n");
-                    await writer.WriteLineAsync($"{headerLine}\n[{DateTime.Now}]\nOS: {(string.IsNullOrEmpty(HardwareData.OS?.Name) ? "Unknown (Loading error)" : HardwareData.OS.Name)}\nRelease: {SettingsEngine.currentRelease}\n{headerLine}\n");
-
+                    await writer.WriteLineAsync($"{(isFatal ? "GTweak has crashed!" : "GTweak has encountered an error.")}\n{separator}\nIf you wish to report this, please open an issue here:\n{PathLocator.Links.GitHub}/GTweak/issues\n{separator}\n");
+                    await writer.WriteLineAsync($"{separator}\n[{DateTime.Now}]\nOS: {(string.IsNullOrEmpty(HardwareData.OS?.Name) ? "Unknown" : HardwareData.OS.Name)}\nVersion: {(string.IsNullOrEmpty(HardwareData.OS?.Version) ? "Unknown" : HardwareData.OS.Version)}\nRelease: {SettingsEngine.currentRelease}\n{separator}\n");
 
                     while (currentEx != null)
                     {
@@ -63,7 +63,7 @@ namespace GTweak.Utilities.Controls
                         await writer.WriteLineAsync($"Type: {currentEx.GetType().FullName}");
                         await writer.WriteLineAsync($"Error: {currentEx.Message}");
 
-                        StackTrace stackTrace = new StackTrace(ex, true);
+                        StackTrace stackTrace = new StackTrace(currentEx, true);
 
                         if (stackTrace.FrameCount > 0)
                         {
@@ -71,22 +71,29 @@ namespace GTweak.Utilities.Controls
 
                             if (frame?.GetMethod() is MethodBase method)
                             {
-                                await writer.WriteLineAsync($"Method: {method.DeclaringType?.FullName}.{method.Name}");
+                                await writer.WriteLineAsync($"Class: {method.DeclaringType?.FullName}\nMethod: {method.Name}");
+
+                                int fileLine = frame.GetFileLineNumber();
+                                if (fileLine > 0)
+                                {
+                                    await writer.WriteLineAsync($"Line: {fileLine}");
+                                }
 
                                 ParameterInfo[] parameters = method.GetParameters();
                                 if (parameters.Length > 0)
                                 {
-                                    await writer.WriteLineAsync($"Parameters:");
+                                    await writer.WriteLineAsync("Parameters:");
+
                                     foreach (ParameterInfo param in parameters)
                                     {
-                                        await writer.WriteLineAsync($"{param.Name}: {param.ParameterType}");
+                                        await writer.WriteLineAsync($"  - Name: {param.Name} | Type: {param.ParameterType}");
                                     }
                                 }
                             }
                         }
 
-                        await writer.WriteLineAsync($"Stack Trace:\n{stackTrace}");
-                        await writer.WriteLineAsync($"\n{headerLine}\n");
+                        await writer.WriteLineAsync($"Stack Trace:\n{currentEx.StackTrace}");
+                        await writer.WriteLineAsync($"\n{separator}\n");
 
                         currentEx = currentEx.InnerException;
                         exLevel++;
@@ -95,19 +102,14 @@ namespace GTweak.Utilities.Controls
                     await writer.FlushAsync();
                 }
 
-                await EnsureAssociation();
+                await EnsureLogFileAssociation();
 
                 if (File.Exists(PathLocator.Files.ErrorLog))
                 {
                     try
                     {
                         await Task.Delay(50);
-
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = PathLocator.Files.ErrorLog,
-                            UseShellExecute = true
-                        });
+                        Process.Start(new ProcessStartInfo { FileName = PathLocator.Files.ErrorLog, UseShellExecute = true });
                     }
                     catch (Exception processEx) { LogDebug(processEx); }
                 }

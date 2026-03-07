@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
+using GTweak.Core.Base;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
@@ -11,9 +12,7 @@ using GTweak.Utilities.Tweaks;
 
 namespace GTweak.View
 {
-    [ToolboxItem(false)]
-    [DesignTimeVisible(false)]
-    public partial class PackagesView : UserControl
+    public partial class PackagesView : UserControl, IViewPageBase
     {
         private TimerControlManager _timer = default;
         private readonly BackgroundQueue _backgroundQueue = new BackgroundQueue();

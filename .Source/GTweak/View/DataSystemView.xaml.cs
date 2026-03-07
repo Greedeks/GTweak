@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using GTweak.Core.Base;
 using GTweak.Core.ViewModel;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
@@ -18,9 +18,7 @@ using GTweak.Utilities.Managers;
 
 namespace GTweak.View
 {
-    [ToolboxItem(false)]
-    [DesignTimeVisible(false)]
-    public partial class DataSystemView : UserControl
+    public partial class DataSystemView : UserControl, IViewPageBase
     {
         private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
