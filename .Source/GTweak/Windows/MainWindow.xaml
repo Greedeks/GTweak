@@ -29,7 +29,7 @@
 
             <DockPanel Grid.Column="0" VerticalAlignment="Center" LastChildFill="False" Height="48">
                 <Image Width="20" Height="20" Source="/GTweak.ico" Stretch="Uniform" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="15,0,0,0" />
-                <TextBlock x:Name="TitleName" Text="GTweak" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="10,0,20,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" KeyboardNavigation.IsTabStop="False" Width="61">
+                <TextBlock x:Name="TitleName" Text="GTweak" FontSize="17" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="10,0,20,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" KeyboardNavigation.IsTabStop="False" Width="65">
                     <TextBlock.CacheMode>
                         <BitmapCache RenderAtScale="2" EnableClearType="True"/>
                     </TextBlock.CacheMode>

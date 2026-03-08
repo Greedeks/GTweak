@@ -31,6 +31,25 @@ namespace GTweak.Windows
             InitializeComponent();
             App.TweaksImported += delegate { BtnUtils.IsChecked = true; };
         }
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            Rect area = SystemParameters.WorkArea;
+
+            double rawWidth = area.Width * (area.Width <= 1600 ? 0.82 : 0.62);
+            Width = Math.Max(1150, Math.Min(rawWidth, 1500));
+
+            if (Width > area.Width)
+            {
+                Width = area.Width * 0.96;
+            }
+
+            Height = Math.Min(Width / 1.8, area.Height * 0.90);
+
+            Left = area.Left + (area.Width - Width) / 2;
+            Top = area.Top + (area.Height - Height) / 2;
+        }
 
         private void AnimateSettings()
         {
@@ -162,14 +181,6 @@ namespace GTweak.Windows
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            (double screenWidth, double screenHeight) = (SystemParameters.PrimaryScreenWidth, SystemParameters.PrimaryScreenHeight);
-
-            Width = screenWidth * 0.61;
-            Height = screenHeight * 0.60;
-
-            Left = (screenWidth - Width) / 2;
-            Top = (screenHeight - Height) / 2;
-
             TypewriterAnimation.Create(TitleName.Text, TitleName, TimeSpan.FromSeconds(0.4));
 
             if (SystemDataCollector.IsNeedUpdate && SettingsEngine.IsUpdateCheckRequired)
@@ -177,8 +188,13 @@ namespace GTweak.Windows
                 await Task.Delay(500);
 
                 UpdateBanner.Visibility = Visibility.Visible;
+
                 UpdateBanner.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
-                (UpdateBanner.RenderTransform as TranslateTransform).BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-20, 0, 0.3, useCubicEase: true));
+
+                if (UpdateBanner.RenderTransform is TranslateTransform transform)
+                {
+                    transform.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-20, 0, 0.3, useCubicEase: true));
+                }
             }
         }
     }
