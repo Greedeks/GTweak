@@ -28,7 +28,6 @@
 
         <Grid Grid.Row="0">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-
                 <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
 
                     <StackPanel Orientation="Vertical" Margin="0,-20,0,0">
@@ -52,7 +51,7 @@
                         <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" Margin="0,20,0,0" TextResource="{DynamicResource tgl1_sys}" Description="{DynamicResource tgl1_desc_sys}" />
                         <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton2].State}" Margin="0,20,0,0" TextResource="{DynamicResource tgl2_sys}" Description="{DynamicResource tgl2_desc_sys}" />
                     </StackPanel>
-                    
+
                     <uc:ToggleButton x:Name="TglButton3" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton3].State}" TextResource="{DynamicResource tgl3_sys}" Description="{DynamicResource tgl3_desc_sys}" />
                     <uc:ToggleButton x:Name="TglButton4" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton4].State}" TextResource="{DynamicResource tgl4_sys}" Description="{DynamicResource tgl4_desc_sys}" />
                     <uc:ToggleButton x:Name="TglButton5" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton5].State}" TextResource="{DynamicResource tgl5_sys}" Description="{DynamicResource tgl5_desc_sys}" />
@@ -81,7 +80,6 @@
                     <uc:ToggleButton x:Name="TglButton28" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton28].State}" TextResource="{DynamicResource tgl28_sys}" Description="{DynamicResource tgl28_desc_sys}" />
                     <uc:ToggleButton x:Name="TglButton29" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton29].State}" TextResource="{DynamicResource tgl29_sys}" Description="{DynamicResource tgl29_desc_sys}" />
                 </uc:FlowPanel>
-
             </ScrollViewer>
         </Grid>
 

@@ -104,7 +104,7 @@
                     </LinearGradientBrush>
                 </Border.OpacityMask>
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <Grid Width="400" Margin="0" VirtualizingStackPanel.IsVirtualizing="True">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -253,9 +253,9 @@
 
             <Grid Grid.ColumnSpan="2" Panel.ZIndex="100" VerticalAlignment="Top">
                 <Border Margin="0,15,0,50" MinWidth="70" MaxWidth="320" HorizontalAlignment="Left" ClipToBounds="True">
-                
-                    <ScrollViewer Padding="0,0,15,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" FlowDirection="RightToLeft">
-                        <StackPanel Orientation="Vertical" FlowDirection="LeftToRight">
+
+                    <ScrollViewer x:Name="NavScroll" Padding="0,0,15,0" SizeChanged="NavigationScrollViewer_SizeChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" FlowDirection="RightToLeft">
+                        <StackPanel x:Name="NavPanel" Orientation="Vertical" FlowDirection="LeftToRight" RadioButton.Checked="NavigationRtbn_Checked">
                         
                             <RadioButton Name="BtnUtils" Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_utils_main}" Command="{Binding NavigateToUtilsCommand}" IsChecked="True" >
                                 <ui:SymbolIcon Symbol="Toolbox20" FontSize="20"/>
@@ -269,7 +269,7 @@
                                 <ui:SymbolIcon Symbol="Color20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_app_main}" Command="{Binding NavigateToPackagesCommand}">
+                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_app_main}" Command="{Binding NavigateToPackagesCommand}" Checked="NavigationRtbn_Checked">
                                 <ui:SymbolIcon Symbol="Apps20" FontSize="20"/>
                             </RadioButton>
 

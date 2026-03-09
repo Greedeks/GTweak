@@ -28,7 +28,6 @@
 
         <Grid Grid.Row="0">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-
                 <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
 
                     <StackPanel Orientation="Vertical" Margin="0,-10,0,-10">
@@ -75,7 +74,7 @@
                             </uc:ExpandableBox>
                         </StackPanel>
                     </StackPanel>
-                    
+
                     <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" TextResource="{DynamicResource tgl1_intf}" Description="{DynamicResource tgl1_desc_intf}" />
                     <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton2].State}" TextResource="{DynamicResource tgl2_intf}" Description="{DynamicResource tgl2_desc_intf}" />
                     <uc:ToggleButton x:Name="TglButton3" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton3].State}" TextResource="{DynamicResource tgl3_intf}" Description="{DynamicResource tgl3_desc_intf}" />
@@ -107,7 +106,6 @@
                     <uc:ToggleButton x:Name="TglButton29" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton29].State}" TextResource="{DynamicResource tgl29_intf}" Description="{DynamicResource tgl29_desc_intf}" />
 
                 </uc:FlowPanel>
-
             </ScrollViewer>
         </Grid>
         

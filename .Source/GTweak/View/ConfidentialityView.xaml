@@ -28,7 +28,6 @@
 
         <Grid Grid.Row="0">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-
                 <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
 
                     <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton1].State}" TextResource="{DynamicResource tgl1_conf}" Description="{DynamicResource tgl1_desc_conf}" />
@@ -51,9 +50,8 @@
                     <uc:ToggleButton x:Name="TglButton18" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton18].State}" TextResource="{DynamicResource tgl18_conf}" Description="{DynamicResource tgl18_desc_conf}" />
                     <uc:ToggleButton x:Name="TglButton19" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton19].State}" TextResource="{DynamicResource tgl19_conf}" Description="{DynamicResource tgl19_desc_conf}" />
                     <uc:ToggleButton x:Name="TglButton20" Style="{StaticResource ToggleStyle}" StateNA="{Binding [TglButton20].State}" TextResource="{DynamicResource tgl20_conf}" Description="{DynamicResource tgl20_desc_conf}" />
-                    
-                </uc:FlowPanel>
 
+                </uc:FlowPanel>
             </ScrollViewer>
         </Grid>
 

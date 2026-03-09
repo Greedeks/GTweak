@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -23,14 +24,29 @@ namespace GTweak.Windows
         [DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
+        internal static readonly DependencyProperty CurrentVerticalOffsetProperty =
+            DependencyProperty.RegisterAttached("CurrentVerticalOffset", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0, OnCurrentVerticalOffsetChanged));
+
+        internal static void SetCurrentVerticalOffset(DependencyObject target, double value) => target.SetValue(CurrentVerticalOffsetProperty, value);
+
+        private static void OnCurrentVerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ScrollViewer scrollViewer)
+            {
+                scrollViewer.ScrollToVerticalOffset((double)e.NewValue);
+            }
+        }
+
         private const int WM_NCLBUTTONDOWN = 0xA1, HTCAPTION = 0x2;
         private bool _settingsOpen = false, _ignoreMouseClick = false;
+        private RadioButton _activeBtnCache;
 
         public MainWindow()
         {
             InitializeComponent();
             App.TweaksImported += delegate { BtnUtils.IsChecked = true; };
         }
+
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
@@ -59,9 +75,9 @@ namespace GTweak.Windows
             transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, toX, 0.5, useCubicEase: true));
         }
 
-        #region TitleBar
         private void HandleWindowState() => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 
+        #region TitleBar
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e?.ChangedButton == MouseButton.Left)
@@ -131,7 +147,7 @@ namespace GTweak.Windows
         }
         #endregion
 
-        #region SettingsPanel
+        #region Settings Panel
         private void BtnNotification_ChangedState(object sender, RoutedEventArgs e) => SettingsEngine.IsViewNotification = !BtnNotification.State;
 
         private void BtnUpdate_ChangedState(object sender, RoutedEventArgs e) => SettingsEngine.IsUpdateCheckRequired = !BtnUpdate.State;
@@ -162,6 +178,61 @@ namespace GTweak.Windows
                 _ => PathLocator.Links.Steam
             })
             { UseShellExecute = true });
+        }
+        #endregion
+
+        #region Navigation & Scrolling
+        private void NavigationScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (sender is ScrollViewer scrollViewer)
+            {
+                if (e.HeightChanged && _activeBtnCache != null && scrollViewer.ScrollableHeight > 0)
+                {
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (_activeBtnCache.IsLoaded)
+                        {
+                            _activeBtnCache.BringIntoView();
+                        }
+                    }), DispatcherPriority.Loaded);
+                }
+            }
+        }
+
+        private void NavigationRtbn_Checked(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is RadioButton radioButton)
+            {
+                _activeBtnCache = radioButton;
+
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (radioButton.IsLoaded && radioButton.IsDescendantOf(NavPanel))
+                    {
+                        double margin = radioButton.ActualHeight;
+
+                        Point btnPos = radioButton.TranslatePoint(new Point(0, 0), NavPanel);
+
+                        double btnTop = btnPos.Y, btnBottom = btnTop + margin, viewTop = NavScroll.VerticalOffset,
+                        viewBottom = viewTop + NavScroll.ViewportHeight, targetOffset = viewTop;
+
+                        if (btnTop - margin < viewTop)
+                        {
+                            targetOffset = btnTop - margin;
+                        }
+                        else if (btnBottom + margin > viewBottom)
+                        {
+                            targetOffset = btnBottom + margin - NavScroll.ViewportHeight;
+                        }
+
+                        if (targetOffset != viewTop)
+                        {
+                            SetCurrentVerticalOffset(NavScroll, viewTop);
+                            NavScroll.BeginAnimation(CurrentVerticalOffsetProperty, FactoryAnimation.CreateIn(viewTop, targetOffset, 0.5, useCubicEase: true));
+                        }
+                    }
+                }), DispatcherPriority.Loaded);
+            }
         }
         #endregion
 
