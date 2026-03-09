@@ -22,14 +22,14 @@
                             <Grid.CacheMode>
                                 <BitmapCache RenderAtScale="2" EnableClearType="True"/>
                             </Grid.CacheMode>
-                            <Border x:Name="ShadowPanel" CornerRadius="12" Opacity="0" Background="#33000000" IsHitTestVisible="False" Width="{Binding ActualWidth, ElementName=InnerPanel}" Height="{Binding ActualHeight, ElementName=InnerPanel}" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Border x:Name="ShadowPanel" CornerRadius="12" Opacity="0" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" Width="{Binding ActualWidth, ElementName=InnerPanel}" Height="{Binding ActualHeight, ElementName=InnerPanel}" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Border.RenderTransform>
                                     <TranslateTransform X="3" Y="4" />
                                 </Border.RenderTransform>
                             </Border>
                             <Border x:Name="InnerPanel" Height="48" CornerRadius="12" Background="{TemplateBinding Background}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,10,0">
                                 <Grid Height="48">
-                                    <Rectangle x:Name="ContentShadowMask" Grid.ColumnSpan="2" Fill="#33000000" Opacity="{StaticResource IconNavigation_Opacity}" IsHitTestVisible="False">
+                                    <Rectangle x:Name="ContentShadowMask" Grid.ColumnSpan="2" Fill="{StaticResource Brush_ShadowOverlay}" Opacity="{StaticResource IconNavigation_Opacity}" IsHitTestVisible="False">
                                         <Rectangle.RenderTransform>
                                             <TranslateTransform X="3" Y="3" />
                                         </Rectangle.RenderTransform>

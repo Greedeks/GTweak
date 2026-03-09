@@ -53,6 +53,8 @@ namespace GTweak.Utilities.Configuration
             }
         }
 
+        private static readonly HttpClient sharedClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+
         internal static bool IsNeedUpdate { get; private set; } = false;
         internal static string DownloadVersion { get; private set; } = string.Empty;
 
@@ -126,7 +128,7 @@ namespace GTweak.Utilities.Configuration
                     () => GetGraphicsInfo(),
                     () => GetMemoryInfo(),
                     () => RefreshDevicesData(),
-                    () => GetUserIpAddress()
+                    () => GetUserIpAddress().GetAwaiter().GetResult()
                 );
             });
         }
@@ -610,72 +612,63 @@ namespace GTweak.Utilities.Configuration
             return result.ToString().TrimEnd('\n', '\r');
         }
 
-        internal bool IsNetworkAvailable()
+        internal async Task<bool> IsNetworkAvailable()
         {
+            string dns = GetCurrentSystemLang().Code switch
+            {
+                "fa" => "aparat.com",
+                "zh" => "baidu.com",
+                "ru" => "yandex.ru",
+                "kk" => "yandex.kz",
+                "ko" => "naver.com",
+                "cs" => "seznam.cz",
+                "tk" => "turkmenportal.com",
+                "vi" => "fpt.vn",
+                "es" => "terra.es",
+                "ja" => "yahoo.co.jp",
+                "de" => "t-online.de",
+                "fr" => "orange.fr",
+                "it" => "libero.it",
+                "th" => "true.th",
+                "pl" => "wp.pl",
+                "nl" => "nu.nl",
+                "pt" => "globo.com",
+                "sv" => "aftonbladet.se",
+                "no" => "vg.no",
+                "fi" => "yle.fi",
+                "ro" => "digisport.ro",
+                "gr" => "in.gr",
+                "id" => "detik.com",
+                "mx" => "univision.com",
+                "ar" => "claro.com.ar",
+                string name when new[] { "tr", "hi", "ar" }.Contains(name) => "bing.com",
+                _ => "google.com"
+            };
+
+            Task<IPHostEntry> dnsTask = Dns.GetHostEntryAsync(dns);
+            Task timeoutTask = Task.Delay(TimeSpan.FromSeconds(5));
+
+            if (await Task.WhenAny(dnsTask, timeoutTask) == timeoutTask) { return false; }
+
             try
             {
-                string dns = GetCurrentSystemLang().Code switch
-                {
-                    "fa" => "aparat.com",
-                    "zh" => "baidu.com",
-                    "ru" => "yandex.ru",
-                    "kk" => "yandex.kz",
-                    "ko" => "naver.com",
-                    "cs" => "seznam.cz",
-                    "tk" => "turkmenportal.com",
-                    "vi" => "fpt.vn",
-                    "es" => "terra.es",
-                    "ja" => "yahoo.co.jp",
-                    "de" => "t-online.de",
-                    "fr" => "orange.fr",
-                    "it" => "libero.it",
-                    "th" => "true.th",
-                    "pl" => "wp.pl",
-                    "nl" => "nu.nl",
-                    "pt" => "globo.com",
-                    "sv" => "aftonbladet.se",
-                    "no" => "vg.no",
-                    "fi" => "yle.fi",
-                    "ro" => "digisport.ro",
-                    "gr" => "in.gr",
-                    "id" => "detik.com",
-                    "mx" => "univision.com",
-                    "ar" => "claro.com.ar",
-                    string name when new[] { "tr", "hi", "ar" }.Contains(name) => "bing.com",
-                    _ => "google.com"
-                };
-
-                TimeSpan timeout = TimeSpan.FromSeconds(5.0);
-
-                using Task<IPAddress> task = Task.Run(() =>
-                {
-                    try { return Dns.GetHostEntry(dns).AddressList[0]; }
-                    catch { return null; }
-                });
-
-                if (!task.Wait(timeout) || task.Result == null)
-                {
-                    return false;
-                }
-
-                return true;
+                IPHostEntry entry = await dnsTask;
+                return entry?.AddressList?.Length > 0;
             }
             catch { return false; }
         }
 
-        internal void GetUserIpAddress()
+        internal async Task GetUserIpAddress()
         {
-            if (IsNetworkAvailable())
+            if (await IsNetworkAvailable())
             {
                 bool hadLimited = false, hadBlock = false;
-
-                using HttpClient client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
 
                 foreach (string url in PathLocator.Links.IpServices)
                 {
                     try
                     {
-                        using HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+                        using HttpResponseMessage response = await sharedClient.GetAsync(url);
 
                         if (!response.IsSuccessStatusCode)
                         {
@@ -683,18 +676,17 @@ namespace GTweak.Utilities.Configuration
                             continue;
                         }
 
-                        IPMetadata ipMetadata = IPMetadata.ParseData(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+                        string content = await response.Content.ReadAsStringAsync();
+                        IPMetadata ipMetadata = IPMetadata.ParseData(content);
 
-                        if (IPAddress.TryParse(ipMetadata.Ip, out _) && !string.IsNullOrWhiteSpace(ipMetadata?.Ip) && !string.IsNullOrWhiteSpace(ipMetadata?.Country))
+                        if (ipMetadata != null && !string.IsNullOrWhiteSpace(ipMetadata.Ip) && !string.IsNullOrWhiteSpace(ipMetadata.Country) && IPAddress.TryParse(ipMetadata.Ip, out _))
                         {
                             CurrentConnection = ConnectionStatus.Available;
                             UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
                             break;
                         }
-                        else
-                        {
-                            hadBlock = true;
-                        }
+
+                        hadBlock = true;
                     }
                     catch { hadLimited = true; }
                 }
@@ -721,69 +713,67 @@ namespace GTweak.Utilities.Configuration
             }
 
             if (new Dictionary<ConnectionStatus, string>
-                {
-                    { ConnectionStatus.Lose, "connection_lose_sysinfo" },
-                    { ConnectionStatus.Block, "connection_block_sysinfo" },
-                    { ConnectionStatus.Limited, "connection_limited_sysinfo" }
-                }.TryGetValue(CurrentConnection, out string resourceKey)) { UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
+            {
+                { ConnectionStatus.Lose, "connection_lose_sysinfo" },
+                { ConnectionStatus.Block, "connection_block_sysinfo" },
+                { ConnectionStatus.Limited, "connection_limited_sysinfo" }
+            }.TryGetValue(CurrentConnection, out string resourceKey)) { UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
 
             isIPAddressFormatValid = UserIPAddress.Any(char.IsDigit);
         }
 
-        internal void ValidateVersionUpdates()
+        internal async Task ValidateVersionUpdates()
         {
-            if (!SettingsEngine.IsUpdateCheckRequired || !IsNetworkAvailable())
+            if (SettingsEngine.IsUpdateCheckRequired && await IsNetworkAvailable())
             {
-                return;
-            }
-
-            foreach (string api in PathLocator.Links.ReleaseApi)
-            {
-                try
+                foreach (string api in PathLocator.Links.ReleaseApi)
                 {
-                    HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(api);
-                    webRequest.ContentType = "application/json";
-                    webRequest.UserAgent = "Nothing";
-                    webRequest.Timeout = 5000;
-
-                    using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
-                    using StreamReader reader = new StreamReader(response.GetResponseStream());
-                    string json = reader.ReadToEnd();
-                    GitMetadata latest = null;
-
-                    if (api.Contains("github"))
+                    try
                     {
-                        latest = JsonConvert.DeserializeObject<GitMetadata>(json);
-                    }
-                    else
-                    {
-                        List<GitLabMetadata> releases = JsonConvert.DeserializeObject<List<GitLabMetadata>>(json);
-                        latest = releases?.FirstOrDefault();
+                        HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(api);
+                        webRequest.ContentType = "application/json";
+                        webRequest.UserAgent = "Nothing";
+                        webRequest.Timeout = 5000;
 
-                        if (latest != null && !string.IsNullOrEmpty(((GitLabMetadata)latest).Description))
+                        using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+                        using StreamReader reader = new StreamReader(response.GetResponseStream());
+                        string json = reader.ReadToEnd();
+                        GitMetadata latest = null;
+
+                        if (api.Contains("github"))
                         {
-                            GitLabMetadata gitLabMetadata = (GitLabMetadata)latest;
-                            Match match = Regex.Match(gitLabMetadata.Description, @"\[(?<name>.*?)\]\(/uploads/(?<hash>.+?)\)");
+                            latest = JsonConvert.DeserializeObject<GitMetadata>(json);
+                        }
+                        else
+                        {
+                            List<GitLabMetadata> releases = JsonConvert.DeserializeObject<List<GitLabMetadata>>(json);
+                            latest = releases?.FirstOrDefault();
 
-                            if (match.Success)
+                            if (latest != null && !string.IsNullOrEmpty(((GitLabMetadata)latest).Description))
                             {
-                                string hashFile = match.Groups["hash"].Value;
-                                PathLocator.Links.GitLabLatest = (true, $"{PathLocator.Links.GitLabLatest.Url}{hashFile}");
+                                GitLabMetadata gitLabMetadata = (GitLabMetadata)latest;
+                                Match match = Regex.Match(gitLabMetadata.Description, @"\[(?<name>.*?)\]\(/uploads/(?<hash>.+?)\)");
+
+                                if (match.Success)
+                                {
+                                    string hashFile = match.Groups["hash"].Value;
+                                    PathLocator.Links.GitLabLatest = (true, $"{PathLocator.Links.GitLabLatest.Url}{hashFile}");
+                                }
+                            }
+                        }
+
+                        if (latest != null && !string.IsNullOrWhiteSpace(latest.CurrentVersion))
+                        {
+                            if (new Version(latest.CurrentVersion) > new Version(SettingsEngine.currentRelease))
+                            {
+                                IsNeedUpdate = true;
+                                DownloadVersion = latest.CurrentVersion;
+                                break;
                             }
                         }
                     }
-
-                    if (latest != null && !string.IsNullOrWhiteSpace(latest.CurrentVersion))
-                    {
-                        if (new Version(latest.CurrentVersion) > new Version(SettingsEngine.currentRelease))
-                        {
-                            IsNeedUpdate = true;
-                            DownloadVersion = latest.CurrentVersion;
-                            break;
-                        }
-                    }
+                    catch { continue; }
                 }
-                catch { continue; }
             }
         }
     }

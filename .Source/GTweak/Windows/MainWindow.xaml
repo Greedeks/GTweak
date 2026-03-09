@@ -244,7 +244,7 @@
                 </ScrollViewer>
             </Border>
 
-            <Border Background="#33000000" Opacity="0.7" CornerRadius="10" Margin="10,15,0,50" IsHitTestVisible="False">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" CornerRadius="10" Margin="10,15,0,50" IsHitTestVisible="False">
                 <Border.RenderTransform>
                     <TranslateTransform X="2" Y="4" />
                 </Border.RenderTransform>
@@ -301,7 +301,7 @@
                 <TranslateTransform Y="-20"/>
             </Grid.RenderTransform>
 
-            <Border Background="#33000000" Opacity="0.7" IsHitTestVisible="False" CornerRadius="10" Panel.ZIndex="0">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" IsHitTestVisible="False" CornerRadius="10" Panel.ZIndex="0">
                 <Border.RenderTransform>
                     <TranslateTransform X="3" Y="4"/>
                 </Border.RenderTransform>

@@ -78,7 +78,7 @@ namespace GTweak.View
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
                 {
-                    await backgroundQueue.QueueTask(delegate { _systemDataCollector.GetUserIpAddress(); });
+                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetUserIpAddress(); });
                     _ = Dispatcher.BeginInvoke(new Action(() => { DataContext = new DataSystemViewModel(); }));
                 }
                 _ = Dispatcher.BeginInvoke(new Action(() =>

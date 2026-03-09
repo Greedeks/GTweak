@@ -54,8 +54,7 @@ namespace GTweak.Windows
 
             ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
             ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
-            ExecuteWithLogging(() => _systemDataCollector.GetHardwareData(), nameof(_systemDataCollector.GetHardwareData));
-            ExecuteWithLogging(_systemDataCollector.ValidateVersionUpdates, nameof(_systemDataCollector.ValidateVersionUpdates));
+            ExecuteWithLogging(_systemDataCollector.GetHardwareData, nameof(_systemDataCollector.GetHardwareData));
             ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
             ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
             ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
@@ -63,6 +62,7 @@ namespace GTweak.Windows
             ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
             ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _systemDataCollector.GetProcessCount().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetProcessCount));
             ExecuteWithLogging(() => HardwareData.RunningServicesCount = _systemDataCollector.GetServicesCount().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetServicesCount));
+            ExecuteWithLogging(() => _systemDataCollector.ValidateVersionUpdates().GetAwaiter().GetResult(), nameof(_systemDataCollector.ValidateVersionUpdates));
             ExecuteWithLogging(() => _systemDataCollector.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetTotalProcessorUsage));
             ExecuteWithLogging(() => _systemDataCollector.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetPhysicalAvailableMemory));
             ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));

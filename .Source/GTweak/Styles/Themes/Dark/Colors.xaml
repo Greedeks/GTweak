@@ -10,6 +10,7 @@
     <SolidColorBrush x:Key="Brush_Inactive" Color="#808080"/>
     <SolidColorBrush x:Key="Brush_Highlighted" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Brush_Highlighted_Inverted" Color="#2C2E2D"/>
+    <SolidColorBrush x:Key="Brush_ShadowOverlay" Color="#33000000"/>
     
     <SolidColorBrush x:Key="Brush_TextBlock_Inactivity" Color="#DFDFDF"/>
 
@@ -58,7 +59,7 @@
     <Color x:Key="Color_Background_CheckBox">#40C279</Color>
 
     <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="IconAppUnchecked_Opacity">0.1</sys:Double>
-    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="RadialProgress_Opacity">0.2</sys:Double>
+    <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="DataElement_Opacity">0.2</sys:Double>
     <sys:Double xmlns:sys="clr-namespace:System;assembly=mscorlib" x:Key="IconNavigation_Opacity">0.7</sys:Double>
 
 </ResourceDictionary>

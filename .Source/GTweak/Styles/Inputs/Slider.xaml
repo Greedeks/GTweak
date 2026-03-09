@@ -84,7 +84,7 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="Slider"  TargetType="{x:Type Slider}">
+    <ControlTemplate x:Key="Slider" TargetType="{x:Type Slider}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -102,13 +102,11 @@
                     <RepeatButton Style="{StaticResource SliderRepeatButton_In}" Command="Slider.IncreaseLarge" />
                 </Track.IncreaseRepeatButton>
             </Track>
-            <TextBlock Grid.Row="2" FocusVisualStyle="{x:Null}" Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}" 
-                       FontFamily="{StaticResource Play}" FontSize="14px" FontWeight="Medium" Margin="0,-5,0,0" HorizontalAlignment="Center" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" Foreground="{DynamicResource Brush_Highlighted}">
-            </TextBlock>
+            <TextBlock Grid.Row="2" FocusVisualStyle="{x:Null}" Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}" FontFamily="{StaticResource Play}" FontSize="14px" FontWeight="Medium" Margin="0,-5,0,0" HorizontalAlignment="Center" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" Foreground="{DynamicResource Brush_Highlighted}"/>
         </Grid>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="SliderPercent"  TargetType="{x:Type Slider}">
+    <ControlTemplate x:Key="SliderPercent" TargetType="{x:Type Slider}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -121,7 +119,7 @@
                 </Grid.ColumnDefinitions>
                 <Track Grid.Column="0" Grid.Row="1" x:Name="PART_Track" Cursor="Hand">
                     <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource SliderRepeatButton}"  Command="Slider.DecreaseLarge" />
+                        <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.DecreaseLarge" />
                     </Track.DecreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb Style="{StaticResource SliderThumb}"  />
@@ -137,24 +135,6 @@
         </Grid>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="SliderNoText" TargetType="{x:Type Slider}">
-        <Grid>
-            <Track x:Name="PART_Track" Cursor="Hand">
-                <Track.DecreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.DecreaseLarge"/>
-                </Track.DecreaseRepeatButton>
-
-                <Track.Thumb>
-                    <Thumb Style="{StaticResource SliderThumb}"/>
-                </Track.Thumb>
-
-                <Track.IncreaseRepeatButton>
-                    <RepeatButton Style="{StaticResource SliderRepeatButton_In}" Command="Slider.IncreaseLarge"/>
-                </Track.IncreaseRepeatButton>
-            </Track>
-        </Grid>
-    </ControlTemplate>
-    
     <Style x:Key="Numeric_Slider" TargetType="{x:Type Slider}">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -187,16 +167,6 @@
                 <Setter Property="Template" Value="{StaticResource SliderPercent}" />
             </Trigger>
         </Style.Triggers>
-    </Style>
-
-    <Style x:Key="Slider_NoValue" TargetType="{x:Type Slider}">
-        <Setter Property="Focusable" Value="False"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-
-        <Setter Property="Template" Value="{StaticResource SliderNoText}"/>
     </Style>
 
 </ResourceDictionary>
