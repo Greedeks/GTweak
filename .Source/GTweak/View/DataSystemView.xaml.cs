@@ -20,7 +20,7 @@ namespace GTweak.View
 {
     public partial class DataSystemView : UserControl, IViewPageBase
     {
-        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
+        private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
         private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
         private TimerControlManager _timer = default;
 
@@ -63,8 +63,8 @@ namespace GTweak.View
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
 
-                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetTotalProcessorUsage(); });
-                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetPhysicalAvailableMemory(); });
+                    await backgroundQueue.QueueTask(async delegate { await _hardwareProvider.GetTotalProcessorUsage(); });
+                    await backgroundQueue.QueueTask(async delegate { await _hardwareProvider.GetPhysicalAvailableMemory(); });
                     _ = Dispatcher.BeginInvoke(new Action(() =>
                     {
                         AnimateArcProgress(CPULoad, HardwareData.Processor.Usage);
@@ -72,18 +72,18 @@ namespace GTweak.View
                     }));
                     _ = Dispatcher.BeginInvoke(new Action(async () =>
                     {
-                        HardwareData.RunningProcessesCount = await Task.Run(() => _systemDataCollector.GetProcessCount());
-                        HardwareData.RunningServicesCount = await Task.Run(() => _systemDataCollector.GetServicesCount());
+                        HardwareData.RunningProcessesCount = await Task.Run(() => _hardwareProvider.GetProcessCount());
+                        HardwareData.RunningServicesCount = await Task.Run(() => _hardwareProvider.GetServicesCount());
                     }));
                 }
                 else if ((int)time.TotalSeconds % 5 == 0)
                 {
-                    await backgroundQueue.QueueTask(async delegate { await _systemDataCollector.GetUserIpAddress(); });
+                    await backgroundQueue.QueueTask(async delegate { await _hardwareProvider.GetUserIpAddress(); });
                     _ = Dispatcher.BeginInvoke(new Action(() => { DataContext = new DataSystemViewModel(); }));
                 }
                 _ = Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (BtnVision.IsChecked.Value & BtnVision.Visibility == Visibility.Hidden & !SystemDataCollector.isIPAddressFormatValid)
+                    if (BtnVision.IsChecked.Value & BtnVision.Visibility == Visibility.Hidden & !NetworkProvider.isIPAddressFormatValid)
                     {
                         IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
                     }

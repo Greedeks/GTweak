@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Net;
-using System.Net.Http;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,49 +13,12 @@ using System.Windows.Media.Imaging;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using Microsoft.Win32;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal sealed class SystemDataCollector : MonitoringService
+    internal sealed class HardwareProvider : NetworkProvider
     {
-        private class GitMetadata
-        {
-            [JsonProperty("tag_name")]
-            internal string CurrentVersion { get; set; }
-        }
-
-        private sealed class GitLabMetadata : GitMetadata
-        {
-            [JsonProperty("description")]
-            internal string Description { get; set; }
-        }
-
-        private sealed class IPMetadata
-        {
-            internal string Ip { get; set; }
-            internal string Country { get; set; }
-
-            internal static IPMetadata ParseData(string response)
-            {
-                if (!string.IsNullOrWhiteSpace(response))
-                {
-                    JObject jObject = JObject.Parse(response);
-                    string ip = jObject["ip"]?.ToString() ?? jObject["ipAddress"]?.ToString() ?? jObject["query"]?.ToString() ?? string.Empty;
-                    string country = jObject["country_code"]?.ToString() ?? jObject["countryCode"]?.ToString() ?? string.Empty;
-                    return new IPMetadata { Ip = ip, Country = country };
-                }
-                return new IPMetadata { Ip = string.Empty, Country = string.Empty };
-            }
-        }
-
-        private static readonly HttpClient sharedClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
-
-        internal static bool IsNeedUpdate { get; private set; } = false;
-        internal static string DownloadVersion { get; private set; } = string.Empty;
-
-        internal static bool isIPAddressFormatValid = false, isMsftAvailable = false;
+        internal static bool isMsftAvailable = false;
 
         internal static (string Code, string Region) GetCurrentSystemLang()
         {
@@ -610,171 +570,6 @@ namespace GTweak.Utilities.Configuration
             }
 
             return result.ToString().TrimEnd('\n', '\r');
-        }
-
-        internal async Task<bool> IsNetworkAvailable()
-        {
-            string dns = GetCurrentSystemLang().Code switch
-            {
-                "fa" => "aparat.com",
-                "zh" => "baidu.com",
-                "ru" => "yandex.ru",
-                "kk" => "yandex.kz",
-                "ko" => "naver.com",
-                "cs" => "seznam.cz",
-                "tk" => "turkmenportal.com",
-                "vi" => "fpt.vn",
-                "es" => "terra.es",
-                "ja" => "yahoo.co.jp",
-                "de" => "t-online.de",
-                "fr" => "orange.fr",
-                "it" => "libero.it",
-                "th" => "true.th",
-                "pl" => "wp.pl",
-                "nl" => "nu.nl",
-                "pt" => "globo.com",
-                "sv" => "aftonbladet.se",
-                "no" => "vg.no",
-                "fi" => "yle.fi",
-                "ro" => "digisport.ro",
-                "gr" => "in.gr",
-                "id" => "detik.com",
-                "mx" => "univision.com",
-                "ar" => "claro.com.ar",
-                string name when new[] { "tr", "hi", "ar" }.Contains(name) => "bing.com",
-                _ => "google.com"
-            };
-
-            Task<IPHostEntry> dnsTask = Dns.GetHostEntryAsync(dns);
-            Task timeoutTask = Task.Delay(TimeSpan.FromSeconds(5));
-
-            if (await Task.WhenAny(dnsTask, timeoutTask) == timeoutTask) { return false; }
-
-            try
-            {
-                IPHostEntry entry = await dnsTask;
-                return entry?.AddressList?.Length > 0;
-            }
-            catch { return false; }
-        }
-
-        internal async Task GetUserIpAddress()
-        {
-            if (await IsNetworkAvailable())
-            {
-                bool hadLimited = false, hadBlock = false;
-
-                foreach (string url in PathLocator.Links.IpServices)
-                {
-                    try
-                    {
-                        using HttpResponseMessage response = await sharedClient.GetAsync(url);
-
-                        if (!response.IsSuccessStatusCode)
-                        {
-                            hadBlock = true;
-                            continue;
-                        }
-
-                        string content = await response.Content.ReadAsStringAsync();
-                        IPMetadata ipMetadata = IPMetadata.ParseData(content);
-
-                        if (ipMetadata != null && !string.IsNullOrWhiteSpace(ipMetadata.Ip) && !string.IsNullOrWhiteSpace(ipMetadata.Country) && IPAddress.TryParse(ipMetadata.Ip, out _))
-                        {
-                            CurrentConnection = ConnectionStatus.Available;
-                            UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
-                            break;
-                        }
-
-                        hadBlock = true;
-                    }
-                    catch { hadLimited = true; }
-                }
-
-                if (CurrentConnection != ConnectionStatus.Available)
-                {
-                    if (hadLimited)
-                    {
-                        CurrentConnection = ConnectionStatus.Limited;
-                    }
-                    else if (hadBlock)
-                    {
-                        CurrentConnection = ConnectionStatus.Block;
-                    }
-                    else
-                    {
-                        CurrentConnection = ConnectionStatus.Lose;
-                    }
-                }
-            }
-            else
-            {
-                CurrentConnection = ConnectionStatus.Lose;
-            }
-
-            if (new Dictionary<ConnectionStatus, string>
-            {
-                { ConnectionStatus.Lose, "connection_lose_sysinfo" },
-                { ConnectionStatus.Block, "connection_block_sysinfo" },
-                { ConnectionStatus.Limited, "connection_limited_sysinfo" }
-            }.TryGetValue(CurrentConnection, out string resourceKey)) { UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
-
-            isIPAddressFormatValid = UserIPAddress.Any(char.IsDigit);
-        }
-
-        internal async Task ValidateVersionUpdates()
-        {
-            if (SettingsEngine.IsUpdateCheckRequired && await IsNetworkAvailable())
-            {
-                foreach (string api in PathLocator.Links.ReleaseApi)
-                {
-                    try
-                    {
-                        HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(api);
-                        webRequest.ContentType = "application/json";
-                        webRequest.UserAgent = "Nothing";
-                        webRequest.Timeout = 5000;
-
-                        using HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
-                        using StreamReader reader = new StreamReader(response.GetResponseStream());
-                        string json = reader.ReadToEnd();
-                        GitMetadata latest = null;
-
-                        if (api.Contains("github"))
-                        {
-                            latest = JsonConvert.DeserializeObject<GitMetadata>(json);
-                        }
-                        else
-                        {
-                            List<GitLabMetadata> releases = JsonConvert.DeserializeObject<List<GitLabMetadata>>(json);
-                            latest = releases?.FirstOrDefault();
-
-                            if (latest != null && !string.IsNullOrEmpty(((GitLabMetadata)latest).Description))
-                            {
-                                GitLabMetadata gitLabMetadata = (GitLabMetadata)latest;
-                                Match match = Regex.Match(gitLabMetadata.Description, @"\[(?<name>.*?)\]\(/uploads/(?<hash>.+?)\)");
-
-                                if (match.Success)
-                                {
-                                    string hashFile = match.Groups["hash"].Value;
-                                    PathLocator.Links.GitLabLatest = (true, $"{PathLocator.Links.GitLabLatest.Url}{hashFile}");
-                                }
-                            }
-                        }
-
-                        if (latest != null && !string.IsNullOrWhiteSpace(latest.CurrentVersion))
-                        {
-                            if (new Version(latest.CurrentVersion) > new Version(SettingsEngine.currentRelease))
-                            {
-                                IsNeedUpdate = true;
-                                DownloadVersion = latest.CurrentVersion;
-                                break;
-                            }
-                        }
-                    }
-                    catch { continue; }
-                }
-            }
         }
     }
 }

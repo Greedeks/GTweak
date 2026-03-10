@@ -12,7 +12,7 @@ namespace GTweak.Windows
 {
     public partial class UpdateWindow : FluentWindow
     {
-        public string DownloadVersion { get; set; } = SystemDataCollector.DownloadVersion;
+        public string DownloadVersion { get; set; } = HardwareProvider.DownloadVersion;
 
         public UpdateWindow()
         {

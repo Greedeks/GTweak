@@ -50,7 +50,7 @@ namespace GTweak.Utilities.Controls
 
         internal static async Task CheckingSystemRequirements()
         {
-            await Task.Run(() => new SystemDataCollector().GetOperatingSystemInfo());
+            await Task.Run(() => new HardwareProvider().GetOperatingSystemInfo());
 
             if ((HardwareData.OS.IsWin11 || HardwareData.OS.IsWin10) && HardwareData.OS.Build.CompareTo(18362.116m) >= 0)
             {

@@ -11,7 +11,7 @@ using GTweak.Utilities.Controls;
 
 namespace GTweak.Utilities.Configuration
 {
-    internal class MonitoringService : HardwareData
+    internal class MonitoringProvider : HardwareData
     {
         internal event Action<DeviceType> HandleDevicesEvents;
         private readonly List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)> _watcherHandler = new List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)>();
@@ -181,7 +181,7 @@ namespace GTweak.Utilities.Configuration
         {
             await Task.WhenAll(new List<(string filter, DeviceType type, string scope)>
             {
-                ($"TargetInstance ISA {(SystemDataCollector.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, SystemDataCollector.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
+                ($"TargetInstance ISA {(HardwareProvider.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, HardwareProvider.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
                 ("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio, null),
                 ("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null)
             }.Select(device => Task.Run(() => SubscribeToDeviceEvents(device.filter, device.type, device.scope))).ToArray());

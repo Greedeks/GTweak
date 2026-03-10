@@ -86,8 +86,8 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("IpAddress", HardwareData.UserIPAddress, "connection_lose_sysinfo")
             };
 
-            SetBlurValue = (SystemDataCollector.isIPAddressFormatValid && SettingsEngine.IsHiddenIpAddress) ? 20 : 0;
-            SetVisibility = SystemDataCollector.isIPAddressFormatValid ? Visibility.Visible : Visibility.Hidden;
+            SetBlurValue = (NetworkProvider.isIPAddressFormatValid && SettingsEngine.IsHiddenIpAddress) ? 20 : 0;
+            SetVisibility = NetworkProvider.isIPAddressFormatValid ? Visibility.Visible : Visibility.Hidden;
         }
 
         private DataSystemModel CreateModelCollection(string name, object data, string fallbackResourceKey = null)

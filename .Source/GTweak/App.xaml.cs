@@ -17,7 +17,7 @@ namespace GTweak
         internal static event EventHandler ThemeChanged;
         internal static event EventHandler TweaksImported;
 
-        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
+        private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
 
         internal static void UpdateImport() => TweaksImported?.Invoke(default, EventArgs.Empty);
 
@@ -27,7 +27,7 @@ namespace GTweak
 
             DispatcherUnhandledException += OnDispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-            _systemDataCollector.HandleDevicesEvents += OnHandleDevicesEvents;
+            _hardwareProvider.HandleDevicesEvents += OnHandleDevicesEvents;
         }
 
         private async void App_Startup(object sender, StartupEventArgs e)
@@ -45,7 +45,7 @@ namespace GTweak
             await RunGuard.CheckingSystemRequirements();
             RunGuard.CheckingAdministratorPrivileges();
 
-            await _systemDataCollector.StartDeviceMonitoring();
+            await _hardwareProvider.StartDeviceMonitoring();
 
             new LoadingWindow().Show();
         }
@@ -70,10 +70,10 @@ namespace GTweak
             Environment.Exit(0);
         }
 
-        private async void OnHandleDevicesEvents(MonitoringService.DeviceType deviceType)
+        private async void OnHandleDevicesEvents(MonitoringProvider.DeviceType deviceType)
         {
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { _systemDataCollector.RefreshDevicesData(deviceType); });
+            await backgroundQueue.QueueTask(delegate { _hardwareProvider.RefreshDevicesData(deviceType); });
         }
 
         private static Uri GetResourceUri(string folder, bool isTheme = false) => isTheme ? new Uri($"Styles/Themes/{folder}/Colors.xaml", UriKind.Relative) : new Uri($"Languages/{folder}/Localize.xaml", UriKind.Relative);
@@ -82,7 +82,7 @@ namespace GTweak
         {
             set
             {
-                var (code, region) = SystemDataCollector.GetCurrentSystemLang();
+                var (code, region) = HardwareProvider.GetCurrentSystemLang();
 
                 value ??= $"{code}-{region}";
 
@@ -132,7 +132,7 @@ namespace GTweak
 
         protected override void OnExit(ExitEventArgs e)
         {
-            _systemDataCollector?.StopDeviceMonitoring();
+            _hardwareProvider?.StopDeviceMonitoring();
             base.OnExit(e);
         }
     }

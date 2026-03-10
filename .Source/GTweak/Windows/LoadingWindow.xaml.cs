@@ -14,7 +14,7 @@ namespace GTweak.Windows
 {
     public partial class LoadingWindow : FluentWindow
     {
-        private readonly SystemDataCollector _systemDataCollector = new SystemDataCollector();
+        private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
         private readonly UninstallingPakages _uninstallingPakages = new UninstallingPakages();
 
         public LoadingWindow()
@@ -54,17 +54,17 @@ namespace GTweak.Windows
 
             ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
             ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
-            ExecuteWithLogging(_systemDataCollector.GetHardwareData, nameof(_systemDataCollector.GetHardwareData));
+            ExecuteWithLogging(_hardwareProvider.GetHardwareData, nameof(_hardwareProvider.GetHardwareData));
             ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
             ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
             ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
             ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
             ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
-            ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _systemDataCollector.GetProcessCount().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetProcessCount));
-            ExecuteWithLogging(() => HardwareData.RunningServicesCount = _systemDataCollector.GetServicesCount().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetServicesCount));
-            ExecuteWithLogging(() => _systemDataCollector.ValidateVersionUpdates().GetAwaiter().GetResult(), nameof(_systemDataCollector.ValidateVersionUpdates));
-            ExecuteWithLogging(() => _systemDataCollector.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetTotalProcessorUsage));
-            ExecuteWithLogging(() => _systemDataCollector.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_systemDataCollector.GetPhysicalAvailableMemory));
+            ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _hardwareProvider.GetProcessCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetProcessCount));
+            ExecuteWithLogging(() => HardwareData.RunningServicesCount = _hardwareProvider.GetServicesCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetServicesCount));
+            ExecuteWithLogging(() => _hardwareProvider.ValidateVersionUpdates().GetAwaiter().GetResult(), nameof(_hardwareProvider.ValidateVersionUpdates));
+            ExecuteWithLogging(() => _hardwareProvider.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetTotalProcessorUsage));
+            ExecuteWithLogging(() => _hardwareProvider.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetPhysicalAvailableMemory));
             ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));
         }
 

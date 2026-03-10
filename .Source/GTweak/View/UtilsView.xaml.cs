@@ -33,7 +33,7 @@ namespace GTweak.View
             }
             else
             {
-                if (await new SystemDataCollector().IsNetworkAvailable())
+                if (await new NetworkProvider().IsNetworkAvailable())
                 {
                     await WinLicenseHandler.StartActivation();
                 }
