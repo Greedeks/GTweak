@@ -18,13 +18,17 @@ namespace GTweak.View
         private readonly BackgroundQueue _backgroundQueue = new BackgroundQueue();
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private readonly UninstallingPakages _uninstalling = new UninstallingPakages();
-        private bool _isWebViewRemoval = false;
+        private bool? _isWebViewRemoval = false;
 
         public PackagesView()
         {
             InitializeComponent();
 
-            Unloaded += delegate { _timer.Stop(); };
+            Unloaded += delegate
+            {
+                _timer.Stop();
+                OverlayDialogManager.Close();
+            };
             Loaded += delegate
             {
                 backgroundWorker.DoWork += delegate { _uninstalling.GetInstalledPackages(); };
@@ -90,15 +94,19 @@ namespace GTweak.View
             {
                 if (packageName.Equals("Edge"))
                 {
-                    OverlayDialogManager overlayDialog = new OverlayDialogManager(Overlay, OpacityProperty, BtnDelete, BtnCancel);
-                    _isWebViewRemoval = await overlayDialog.Show();
+                    _isWebViewRemoval = await OverlayDialogManager.Show("title_over_pkg", "text_over_pkg", "question_over_pkg", "btn_delete_all", "btn_keep_webview");
+
+                    if (_isWebViewRemoval == null)
+                    {
+                        return;
+                    }
                 }
 
                 await _backgroundQueue.QueueTask(async () =>
                 {
                     await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); });
 
-                    try { await UninstallingPakages.RemoveAppxPackage(packageName, _isWebViewRemoval); }
+                    try { await UninstallingPakages.RemoveAppxPackage(packageName, (bool)_isWebViewRemoval); }
                     finally { await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, false); }); }
 
                     await Dispatcher.BeginInvoke(new Action(() =>

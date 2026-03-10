@@ -12,6 +12,7 @@ using System.Windows.Threading;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
+using GTweak.Utilities.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -44,6 +45,7 @@ namespace GTweak.Windows
         public MainWindow()
         {
             InitializeComponent();
+            OverlayDialogManager.Initialize(OverlayDialog, DialogTitle, DialogText, DialogQuestion, DialogBtnPrimary, DialogBtnSecondary);
             App.TweaksImported += delegate { BtnUtils.IsChecked = true; };
         }
 

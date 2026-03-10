@@ -38,7 +38,7 @@ namespace GTweak.Utilities.Animation
 
             double progress = animationClock.CurrentProgress.Value;
 
-            var easedProgress = new QuadraticEase().Ease(progress);
+            double easedProgress = new QuadraticEase().Ease(progress);
 
             if (From is SolidColorBrush fromBrush && To is SolidColorBrush toBrush)
             {

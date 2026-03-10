@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -6,61 +5,70 @@ using GTweak.Utilities.Animation;
 
 namespace GTweak.Utilities.Managers
 {
-    internal sealed class OverlayDialogManager
+    internal static class OverlayDialogManager
     {
-        private readonly FrameworkElement _overlay;
-        private readonly DependencyProperty _opacityProperty;
-        private readonly Button _btnPrimary;
-        private readonly Button _btnSecondary;
-        private readonly Action _onPrimary;
-        private readonly Action _onSecondary;
+        private static FrameworkElement _overlay;
+        private static TextBlock _tbTitle, _tbText, _tbQuestion;
+        private static Button _btnPrimary, _btnSecondary;
 
-        internal OverlayDialogManager(FrameworkElement overlay, DependencyProperty opacityProperty, Button btnPrimary, Button btnSecondary, Action onPrimary = null, Action onSecondary = null)
+        private static TaskCompletionSource<bool?> _tcs;
+
+        internal static void Initialize(FrameworkElement overlay, TextBlock tbTitle, TextBlock tbText, TextBlock tbQuestion, Button btnPrimary, Button btnSecondary)
         {
             _overlay = overlay;
-            _opacityProperty = opacityProperty;
+            _tbTitle = tbTitle;
+            _tbText = tbText;
+            _tbQuestion = tbQuestion;
             _btnPrimary = btnPrimary;
             _btnSecondary = btnSecondary;
-            _onPrimary = onPrimary;
-            _onSecondary = onSecondary;
         }
 
-        internal async Task<bool> Show()
+        internal static async Task<bool?> Show(string titleKey, string textKey, string questionKey, string btnPrimaryKey, string btnSecondaryKey)
         {
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-
-            void PrimaryHandler(object s, RoutedEventArgs e)
+            if (_overlay != null)
             {
-                tcs.TrySetResult(true);
-                _onPrimary?.Invoke();
-                Detach();
+                Close();
+
+                _tbTitle.SetResourceReference(TextBlock.TextProperty, titleKey);
+                _tbText.SetResourceReference(TextBlock.TextProperty, textKey);
+                _tbQuestion.SetResourceReference(TextBlock.TextProperty, questionKey);
+                _btnPrimary.SetResourceReference(ContentControl.ContentProperty, btnPrimaryKey);
+                _btnSecondary.SetResourceReference(ContentControl.ContentProperty, btnSecondaryKey);
+
+                _tcs = new TaskCompletionSource<bool?>();
+
+                static void onPrimary(object s, RoutedEventArgs e) => _tcs?.TrySetResult(true);
+                static void onSecondary(object s, RoutedEventArgs e) => _tcs?.TrySetResult(false);
+
+                _btnPrimary.Click += onPrimary;
+                _btnSecondary.Click += onSecondary;
+
+                _overlay.Visibility = Visibility.Visible;
+                _overlay.BeginAnimation(UIElement.OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
+
+                bool? result = await _tcs.Task;
+
+                _btnPrimary.Click -= onPrimary;
+                _btnSecondary.Click -= onSecondary;
+
+                Close();
+
+                return result;
             }
-            void SecondaryHandler(object s, RoutedEventArgs e)
+
+            return null;
+        }
+
+        internal static void Close()
+        {
+            if (_tcs != null && !_tcs.Task.IsCompleted)
             {
-                tcs.TrySetResult(false);
-                _onSecondary?.Invoke();
-                Detach();
+                _tcs.TrySetResult(null);
             }
-
-            void Detach()
+            else if (_overlay != null && _overlay.Visibility == Visibility.Visible)
             {
-                _btnPrimary.PreviewMouseLeftButtonDown -= PrimaryHandler;
-                _btnSecondary.PreviewMouseLeftButtonDown -= SecondaryHandler;
+                _overlay.Visibility = Visibility.Collapsed;
             }
-
-            _overlay.Visibility = Visibility.Visible;
-            _overlay.BeginAnimation(_opacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
-
-            _btnPrimary.PreviewMouseLeftButtonDown += PrimaryHandler;
-            _btnSecondary.PreviewMouseLeftButtonDown += SecondaryHandler;
-
-            bool result;
-            try { result = await tcs.Task; }
-            catch (TaskCanceledException) { result = false; }
-
-            _overlay.BeginAnimation(_opacityProperty, FactoryAnimation.CreateTo(0.25, () => { _overlay.Visibility = Visibility.Collapsed; }));
-
-            return result;
         }
     }
 }

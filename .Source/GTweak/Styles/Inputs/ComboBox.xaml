@@ -153,6 +153,10 @@
                                 <ToggleButton Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
                                     <ToggleButton.Style>
                                         <Style TargetType="ToggleButton">
+                                            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                            <Setter Property="Focusable" Value="False"/>
+                                            <Setter Property="IsTabStop" Value="False"/>
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="ToggleButton">

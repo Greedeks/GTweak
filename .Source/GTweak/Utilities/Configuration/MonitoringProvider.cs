@@ -17,13 +17,7 @@ namespace GTweak.Utilities.Configuration
         private readonly List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)> _watcherHandler = new List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)>();
         private readonly ServiceController[] _servicesList = ServiceController.GetServices();
 
-        internal enum DeviceType
-        {
-            All,
-            Storage,
-            Audio,
-            Network
-        }
+        internal enum DeviceType { All, Storage, Audio, Network }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SystemTime
@@ -35,15 +29,15 @@ namespace GTweak.Utilities.Configuration
         [StructLayout(LayoutKind.Sequential)]
         private class MemoryStatus
         {
-            public uint dwLength;
-            public uint dwMemoryLoad;
-            public ulong ullTotalPhys;
-            public ulong ullAvailPhys;
-            public ulong ullTotalPageFile;
-            public ulong ullAvailPageFile;
-            public ulong ullTotalVirtual;
-            public ulong ullAvailVirtual;
-            public ulong ullAvailExtendedVirtual;
+            internal uint dwLength;
+            internal uint dwMemoryLoad;
+            internal ulong ullTotalPhys;
+            internal ulong ullAvailPhys;
+            internal ulong ullTotalPageFile;
+            internal ulong ullAvailPageFile;
+            internal ulong ullTotalVirtual;
+            internal ulong ullAvailVirtual;
+            internal ulong ullAvailExtendedVirtual;
             internal MemoryStatus() => dwLength = (uint)Marshal.SizeOf(typeof(MemoryStatus));
         }
 

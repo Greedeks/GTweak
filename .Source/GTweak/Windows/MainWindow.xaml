@@ -146,16 +146,14 @@
                                     </StackPanel>
                                 </Viewbox>
 
-                                <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                                        <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource cmbox_lang_main}"/>
-                                        <ComboBox Style="{StaticResource CustomComboBoxStyle}" Margin="10,0,0,0" Height="33" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display">
-                                            <ComboBox.CacheMode>
-                                                <BitmapCache RenderAtScale="2" EnableClearType="True"/>
-                                            </ComboBox.CacheMode>
-                                        </ComboBox>
-                                    </StackPanel>
-                                </Viewbox>
+                                <uc:FlowPanel ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="40,10,5,0">
+                                    <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource cmbox_lang_main}" Margin="0,5,0,0"/>
+                                    <ComboBox Style="{StaticResource CustomComboBoxStyle}" Height="32" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display">
+                                        <ComboBox.CacheMode>
+                                            <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                                        </ComboBox.CacheMode>
+                                    </ComboBox>
+                                </uc:FlowPanel>
 
                                 <Border Background="{StaticResource Brush_Separator}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10" Margin="0,10,0,0"/>
 
@@ -292,7 +290,31 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
-            <ContentControl Grid.Column="1" Content="{Binding CurrentView}" IsTabStop="False" KeyboardNavigation.TabNavigation="None" Margin="5,5,0,5" PreviewMouseLeftButtonUp="ContentControl_PreviewMouseLeftButtonUp"/>
+
+            <Grid Grid.Column="1">
+                <ContentControl Content="{Binding CurrentView}" IsTabStop="False" KeyboardNavigation.TabNavigation="None" Margin="5,5,0,5" PreviewMouseLeftButtonUp="ContentControl_PreviewMouseLeftButtonUp"/>
+
+                <Grid x:Name="OverlayDialog" Panel.ZIndex="100" Visibility="Collapsed">
+                    <Grid Background="{StaticResource Brush_Background}" Opacity="0.9"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <ui:SymbolIcon Symbol="Warning24" FontSize="20px" Foreground="{StaticResource Brush_Accent}"/>
+                                    <TextBlock x:Name="DialogTitle" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" FontSize="20px" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <TextBlock x:Name="DialogText" Margin="0,10,0,0" Style="{StaticResource TextDefault}" MaxWidth="700" Foreground="{DynamicResource Brush_TextBlock_Inactivity}" FontSize="16px" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock x:Name="DialogQuestion" Margin="0,10,0,0" Style="{StaticResource TextDefault}" MaxWidth="700" Foreground="{DynamicResource Brush_Accent}" FontSize="16px" TextAlignment="Center" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+
+                                <StackPanel Margin="0,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Button x:Name="DialogBtnPrimary" Style="{StaticResource ButtonContent}" HorizontalAlignment="Left" MinWidth="120"/>
+                                    <Button x:Name="DialogBtnSecondary" Margin="50,0,0,0" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right" MinWidth="120"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
 
         </Grid>
 

@@ -17,12 +17,13 @@ namespace GTweak.View
         private readonly SystemRestoreService _systemRestore = new SystemRestoreService();
         private readonly NTFSCompressor _ntfsCompressor = new NTFSCompressor();
 
-        private bool _isWinOldRemoval = false;
-        private static bool _hasDeclined = false;
+        private bool? _isWinOldRemoval = false;
 
         public UtilsView()
         {
             InitializeComponent();
+
+            Unloaded += delegate { OverlayDialogManager.Close(); };
         }
 
         private async void BtnLicenseWindows_ClickButton(object sender, EventArgs e)
@@ -161,14 +162,18 @@ namespace GTweak.View
         {
             ClearingMemory clearingMemory = new ClearingMemory();
 
-            if (clearingMemory.IsWinOldExists && !_hasDeclined)
+            if (clearingMemory.IsWinOldExists)
             {
-                OverlayDialogManager overlayDialog = new OverlayDialogManager(Overlay, OpacityProperty, BtnAgree, BtnDecline, onSecondary: () => _hasDeclined = true);
-                _isWinOldRemoval = await overlayDialog.Show();
+                _isWinOldRemoval = await OverlayDialogManager.Show("title_over_more", "text_over_more", "question_over_more", "btn_agree", "btn_decline");
+
+                if (_isWinOldRemoval == null)
+                {
+                    return;
+                }
             }
 
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { clearingMemory.StartMemoryCleanup(_isWinOldRemoval); });
+            await backgroundQueue.QueueTask(delegate { clearingMemory.StartMemoryCleanup((bool)_isWinOldRemoval); });
             await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "clear_ram_noty").WithDelay(500).Perform(); });
         }
 
