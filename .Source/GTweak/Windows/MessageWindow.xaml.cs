@@ -22,7 +22,6 @@ namespace GTweak.Windows
             InitializeComponent();
             InitializeMessageContent(type);
 
-            Unloaded += delegate { _timer.Stop(); };
             Loaded += delegate
             {
                 _timer = new TimerControlManager(TimeSpan.FromSeconds(4), TimerControlManager.TimerMode.CountDown, time =>
@@ -31,6 +30,7 @@ namespace GTweak.Windows
                 }, () => Application.Current.Shutdown());
                 _timer.Start();
             };
+            Unloaded += delegate { _timer.Stop(); };
         }
 
         private void InitializeMessageContent(MessageWindowType type)

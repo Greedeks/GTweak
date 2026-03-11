@@ -7,12 +7,10 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 using GTweak.Core.Base;
 using GTweak.Core.ViewModel;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 
@@ -28,29 +26,34 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            App.LanguageChanged += delegate
-            {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    if (new Dictionary<HardwareData.ConnectionStatus, string>
-                    {
-                        { HardwareData.ConnectionStatus.Lose, "connection_lose_sysinfo" },
-                        { HardwareData.ConnectionStatus.Block, "connection_block_sysinfo" },
-                        { HardwareData.ConnectionStatus.Limited, "connection_limited_sysinfo" }
-                    }.TryGetValue(HardwareData.CurrentConnection, out string resourceKey))
-                    {
-                        HardwareData.UserIPAddress = (string)FindResource(resourceKey);
-                        DataContext = new DataSystemViewModel();
-                    }
-                }));
-            };
-
-            Unloaded += delegate { _timer.Stop(); };
             Loaded += delegate
             {
+                App.LanguageChanged += OnLanguageChanged;
                 StartMonitoringData();
                 _timer.Start();
             };
+            Unloaded += delegate
+            {
+                App.LanguageChanged -= OnLanguageChanged;
+                _timer.Stop();
+            };
+        }
+
+        private void OnLanguageChanged(object sender, EventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if (new Dictionary<HardwareData.ConnectionStatus, string>
+                {
+                    { HardwareData.ConnectionStatus.Lose, "connection_lose_sysinfo" },
+                    { HardwareData.ConnectionStatus.Block, "connection_block_sysinfo" },
+                    { HardwareData.ConnectionStatus.Limited, "connection_limited_sysinfo" }
+                }.TryGetValue(HardwareData.CurrentConnection, out string resourceKey))
+                {
+                    HardwareData.UserIPAddress = (string)FindResource(resourceKey);
+                    UpdateDataContext();
+                }
+            }));
         }
 
         private void StartMonitoringData()
@@ -62,68 +65,48 @@ namespace GTweak.View
             {
                 if ((int)time.TotalSeconds % 2 == 0)
                 {
+                    await backgroundQueue.QueueTask(async () =>
+                    {
+                        await _hardwareProvider.GetTotalProcessorUsage();
+                        await _hardwareProvider.GetPhysicalAvailableMemory();
+                    });
 
-                    await backgroundQueue.QueueTask(async delegate { await _hardwareProvider.GetTotalProcessorUsage(); });
-                    await backgroundQueue.QueueTask(async delegate { await _hardwareProvider.GetPhysicalAvailableMemory(); });
+                    HardwareData.RunningProcessesCount = await Task.Run(() => _hardwareProvider.GetProcessCount());
+                    HardwareData.RunningServicesCount = await Task.Run(() => _hardwareProvider.GetServicesCount());
+
                     _ = Dispatcher.BeginInvoke(new Action(() =>
                     {
                         AnimateArcProgress(CPULoad, HardwareData.Processor.Usage);
                         AnimateArcProgress(RAMLoad, HardwareData.Memory.Usage);
-                    }));
-                    _ = Dispatcher.BeginInvoke(new Action(async () =>
-                    {
-                        HardwareData.RunningProcessesCount = await Task.Run(() => _hardwareProvider.GetProcessCount());
-                        HardwareData.RunningServicesCount = await Task.Run(() => _hardwareProvider.GetServicesCount());
+                        UpdateDataContext();
                     }));
                 }
-                else if ((int)time.TotalSeconds % 5 == 0)
+                if ((int)time.TotalSeconds % 5 == 0)
                 {
                     await backgroundQueue.QueueTask(async delegate { await _hardwareProvider.GetUserIpAddress(); });
-                    _ = Dispatcher.BeginInvoke(new Action(() => { DataContext = new DataSystemViewModel(); }));
                 }
-                _ = Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    if (BtnVision.IsChecked.Value & BtnVision.Visibility == Visibility.Hidden & !NetworkProvider.isIPAddressFormatValid)
-                    {
-                        IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, FactoryAnimation.CreateTo(0.18, () => { SettingsEngine.IsHiddenIpAddress = false; }));
-                    }
-                }));
             });
         }
 
-        private void AnimateArcProgress(Wpf.Ui.Controls.Arc arc, double percent) => arc.BeginAnimation(Wpf.Ui.Controls.Arc.EndAngleProperty, FactoryAnimation.CreateIn(arc.EndAngle, percent * 3.6, 0.2, useCubicEase: true));
-
-        private void AnimationPopup()
+        private void UpdateDataContext()
         {
-            PopupCopy.IsOpen = true;
-            CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
-            PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
-        }
-
-        private void BtnVision_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            SettingsEngine.IsHiddenIpAddress = !BtnVision.IsChecked.Value;
-            IpAddress.Effect.BeginAnimation(BlurEffect.RadiusProperty, BtnVision.IsChecked.Value ? FactoryAnimation.CreateTo(0.2) : FactoryAnimation.CreateIn(0, 20, 0.2));
-        }
-
-        private void BtnVision_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e?.Key == Key.Space || e?.Key == Key.Enter)
+            if (DataContext as DataSystemViewModel is var vm && vm != null)
             {
-                e.Handled = true;
+                vm.Update();
             }
         }
+
+        private void AnimateArcProgress(Wpf.Ui.Controls.Arc arc, double percent) => arc.BeginAnimation(Wpf.Ui.Controls.Arc.EndAngleProperty, FactoryAnimation.CreateIn(arc.EndAngle, percent * 3.6, 0.2, useCubicEase: true));
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e?.LeftButton == MouseButtonState.Pressed)
             {
                 Clipboard.Clear();
-                switch (sender.GetType().Name)
+                switch (sender)
                 {
-                    case "TextBlock":
+                    case TextBlock textBlock:
                         {
-                            TextBlock textBlock = (TextBlock)sender;
                             double cumulativeHeight = 0;
                             string SelectedLine = string.Empty;
 
@@ -142,9 +125,8 @@ namespace GTweak.View
                             Clipboard.SetData(DataFormats.UnicodeText, SelectedLine);
                             break;
                         }
-                    case "Run":
+                    case Run runtext:
                         {
-                            Run runtext = (Run)sender;
                             Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
                             break;
                         }
@@ -154,7 +136,9 @@ namespace GTweak.View
 
                 if (!PopupCopy.IsOpen)
                 {
-                    AnimationPopup();
+                    PopupCopy.IsOpen = true;
+                    CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
+                    PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
                 }
             }
         }

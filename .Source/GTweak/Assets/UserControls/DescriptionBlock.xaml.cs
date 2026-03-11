@@ -50,13 +50,18 @@ namespace GTweak.Assets.UserControls
 
             Loaded += delegate
             {
+                App.LanguageChanged += OnLanguageChanged;
                 if (FunctionDescription != null)
                 {
                     TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.FromMilliseconds(300));
                 }
             };
 
-            Unloaded += delegate { _scrollCts?.Cancel(); };
+            Unloaded += delegate
+            {
+                App.LanguageChanged -= OnLanguageChanged;
+                _scrollCts?.Cancel();
+            };
 
             App.LanguageChanged += delegate
             {
@@ -68,6 +73,14 @@ namespace GTweak.Assets.UserControls
             };
         }
 
+        private void OnLanguageChanged(object sender, EventArgs e)
+        {
+            _scrollCts?.Cancel();
+            if (FunctionDescription != null)
+            {
+                TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.Zero);
+            }
+        }
 
         private async Task StartAutoScrollAsync(string text, CancellationToken token)
         {

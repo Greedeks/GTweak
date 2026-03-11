@@ -24,11 +24,6 @@ namespace GTweak.View
         {
             InitializeComponent();
 
-            Unloaded += delegate
-            {
-                _timer.Stop();
-                OverlayDialogManager.Close();
-            };
             Loaded += delegate
             {
                 backgroundWorker.DoWork += delegate { _uninstalling.GetInstalledPackages(); };
@@ -46,6 +41,11 @@ namespace GTweak.View
                 });
 
                 _timer.Start();
+            };
+            Unloaded += delegate
+            {
+                _timer.Stop();
+                OverlayDialogManager.Close();
             };
         }
 

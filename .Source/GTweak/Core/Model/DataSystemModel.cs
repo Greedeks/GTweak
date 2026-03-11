@@ -1,12 +1,29 @@
-﻿using System.Windows;
+using System.Windows;
+using GTweak.Core.Base;
 
-namespace GTweak.Core.Model
+internal sealed class DataSystemModel : ViewModelBase
 {
-    internal sealed class DataSystemModel
+    private string _data;
+    private int _blurValue;
+    private Visibility _ipVisibility;
+
+    public string Name { get; set; }
+
+    public string Data
     {
-        public string Name { get; set; }
-        public string Data { get; set; }
-        internal int BlurValue { get; set; }
-        internal Visibility IpVisibility { get; set; }
+        get => _data;
+        set { _data = value; OnPropertyChanged(); }
+    }
+
+    public int BlurValue
+    {
+        get => _blurValue;
+        set { _blurValue = value; OnPropertyChanged(); }
+    }
+
+    public Visibility IpVisibility
+    {
+        get => _ipVisibility;
+        set { _ipVisibility = value; OnPropertyChanged(); }
     }
 }

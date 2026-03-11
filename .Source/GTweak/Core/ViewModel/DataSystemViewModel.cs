@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using GTweak.Core.Base;
-using GTweak.Core.Model;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 
@@ -59,6 +58,7 @@ namespace GTweak.Core.ViewModel
                 {
                     SettingsEngine.IsHiddenIpAddress = value;
                     OnPropertyChanged();
+                    RefreshStates();
                 }
             }
         }
@@ -86,8 +86,44 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("IpAddress", HardwareData.UserIPAddress, "connection_lose_sysinfo")
             };
 
-            SetBlurValue = (NetworkProvider.isIPAddressFormatValid && SettingsEngine.IsHiddenIpAddress) ? 20 : 0;
-            SetVisibility = NetworkProvider.isIPAddressFormatValid ? Visibility.Visible : Visibility.Hidden;
+            RefreshStates();
+        }
+
+        public void Update()
+        {
+            UpdateModelData("Storage", HardwareData.Storage, "no_device_information_sysinfo");
+            UpdateModelData("Audio", HardwareData.AudioDevice, "driver_not_installed_sysinfo");
+            UpdateModelData("Network", HardwareData.NetworkAdapter, "driver_not_installed_sysinfo");
+            UpdateModelData("IpAddress", HardwareData.UserIPAddress, "connection_lose_sysinfo");
+
+            RefreshStates();
+        }
+
+        private void RefreshStates()
+        {
+            DataSystemModel ipModel = this["IpAddress"];
+            if (ipModel != null)
+            {
+                if (NetworkProvider.isIPAddressFormatValid || ipModel.Data.Any(char.IsDigit))
+                {
+                    SetBlurValue = SettingsEngine.IsHiddenIpAddress ? 20 : 0;
+                    SetVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    SetBlurValue = 0;
+                    SetVisibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        private void UpdateModelData(string name, string newData, string fallbackResourceKey)
+        {
+            DataSystemModel model = this[name];
+            if (model != null)
+            {
+                model.Data = !string.IsNullOrEmpty(newData) ? newData : (string)Application.Current.Resources[fallbackResourceKey];
+            }
         }
 
         private DataSystemModel CreateModelCollection(string name, object data, string fallbackResourceKey = null)

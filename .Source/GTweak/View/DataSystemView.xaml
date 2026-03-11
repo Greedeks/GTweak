@@ -333,12 +333,12 @@
                                 </Grid>
                             </Border>
                             <StackPanel Orientation="Horizontal" Margin="5,1,0,0">
-                                <TextBlock x:Name="IpAddress" Text="{Binding [IpAddress].Data}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand">
+                                <TextBlock x:Name="IpAddress" Text="{Binding [IpAddress].Data}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
                                     <TextBlock.Effect>
                                         <BlurEffect Radius="{Binding SetBlurValue}"/>
                                     </TextBlock.Effect>
                                 </TextBlock>
-                                <ToggleButton x:Name="BtnVision" Margin="10,0,0,0" Width="24" Height="24" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding StateButtonVision}" PreviewMouseLeftButtonUp="BtnVision_PreviewMouseLeftButtonUp" PreviewKeyDown="BtnVision_PreviewKeyDown"/>
+                                <ToggleButton x:Name="BtnVision" Margin="10,0,0,0" Width="24" Height="24" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding StateButtonVision, Mode=TwoWay}"/>
                             </StackPanel>
                         </StackPanel>
 
