@@ -41,7 +41,7 @@ namespace GTweak
             SettingsEngine.СheckingParameters();
             ApplicationThemeManager.Apply(string.Equals(SettingsEngine.Theme, SettingsEngine.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase) ? ApplicationTheme.Dark : ApplicationTheme.Light);
 
-            RunGuard.CheckingApplicationCopies();
+            RunGuard.CheckingSingleInstance();
             await RunGuard.CheckingSystemRequirements();
             RunGuard.CheckingAdministratorPrivileges();
 

@@ -20,9 +20,9 @@
 
     <!--#region Message Window -->
     <v:String x:Key="title_message">Oups..</v:String>
-    <v:String x:Key="part1_message">La création de copies du programme est</v:String>
-    <v:String x:Key="part2_message">interdite,</v:String>
-    <v:String x:Key="part3_message">afin d’éviter les erreurs et les situations imprévues, les scénarios.</v:String>
+    <v:String x:Key="part1_message">L'utilitaire est déjà en cours d'exécution. Le lancement de plusieurs instances</v:String>
+    <v:String x:Key="part2_message">est interdit</v:String>
+    <v:String x:Key="part3_message">afin d'éviter les conflits internes et les pannes logicielles.</v:String>
     <v:String x:Key="button_message">Accepter (05)</v:String>
     <v:String x:Key="noty_message">▪fermeture automatique de la fenêtre</v:String>
     <v:String x:Key="title_nosupport_message">Non pris en charge</v:String>

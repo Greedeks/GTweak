@@ -18,31 +18,28 @@ namespace GTweak.Utilities.Controls
         private static extern bool ShowWindow(IntPtr handle, int cmdShow);
         [DllImport("user32.dll")]
         private static extern int SetForegroundWindow(IntPtr handle);
-        private static readonly Mutex _mutex = new Mutex(false, "GTweak");
 
-        internal static void CheckingApplicationCopies()
+        private static readonly Mutex _mutex = new Mutex(false, @"GTweak"), _msgMutex = new Mutex(false, @"Global\GTweak");
+
+        internal static void CheckingSingleInstance()
         {
-            if (!_mutex.WaitOne(150, false))
+            if (!_mutex.WaitOne(0, false))
             {
-                using (Mutex mutex = new Mutex(false, @"Global\" + "GTweak"))
+                Process existing = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).FirstOrDefault(p => p.Id != Process.GetCurrentProcess().Id);
+                if (existing != null)
                 {
-                    if (mutex.WaitOne(150, false))
+                    IntPtr handle = existing.MainWindowHandle;
+                    if (handle != IntPtr.Zero)
                     {
-                        Application.Current.Dispatcher.Invoke(() => { new MessageWindow().ShowDialog(); });
-                    }
-                    else
-                    {
-                        Environment.Exit(0);
-                    }
-                }
-                using (Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == Process.GetCurrentProcess().ProcessName))
-                {
-                    if (process != null)
-                    {
-                        IntPtr handle = process.MainWindowHandle;
-                        ShowWindow(handle, 1);
+                        ShowWindow(handle, 9);
                         SetForegroundWindow(handle);
                     }
+                }
+
+                if (_msgMutex.WaitOne(0, false))
+                {
+                    try { Application.Current.Dispatcher.Invoke(() => { new MessageWindow().ShowDialog(); }); }
+                    finally { _msgMutex.ReleaseMutex(); }
                 }
                 Environment.Exit(0);
             }

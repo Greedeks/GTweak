@@ -20,9 +20,9 @@
 
     <!--#region Message Window -->
     <v:String x:Key="title_message">Упс..</v:String>
-    <v:String x:Key="part1_message">Создание копий программы</v:String>
-    <v:String x:Key="part2_message">запрещено,</v:String>
-    <v:String x:Key="part3_message">для предотвращения ошибок и не непредвиденных ситуаций, сценариев.</v:String>
+    <v:String x:Key="part1_message">Утилита уже запущено. Запуск нескольких экземпляров</v:String>
+    <v:String x:Key="part2_message">запрещен</v:String>
+    <v:String x:Key="part3_message">во избежание внутренних конфликтов и программных сбоев.</v:String>
     <v:String x:Key="button_message">Понятно (05)</v:String>
     <v:String x:Key="noty_message">▪автоматическое закрытие окна</v:String>
     <v:String x:Key="title_nosupport_message">Не поддерживается</v:String>

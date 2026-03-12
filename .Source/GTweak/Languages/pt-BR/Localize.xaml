@@ -20,9 +20,9 @@
 
 	<!--#region Message Window -->
     <v:String x:Key="title_message">Opa..</v:String>
-    <v:String x:Key="part1_message">A criação de cópias do programa é</v:String>
-    <v:String x:Key="part2_message">proibida,</v:String>
-    <v:String x:Key="part3_message">a fim de evitar erros e situações imprevistas.</v:String>
+    <v:String x:Key="part1_message">O utilitário já está em execução. Iniciar várias instâncias</v:String>
+    <v:String x:Key="part2_message">é proibido</v:String>
+    <v:String x:Key="part3_message">para evitar conflitos internos e falhas de software.</v:String>
     <v:String x:Key="button_message">Aceitar (05)</v:String>
     <v:String x:Key="noty_message">▪fechamento automático da janela</v:String>
     <v:String x:Key="title_nosupport_message">Não suportado</v:String>

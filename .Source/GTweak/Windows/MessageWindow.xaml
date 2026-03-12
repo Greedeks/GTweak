@@ -8,20 +8,20 @@
         mc:Ignorable="d" Icon="/GTweak.ico"
         Background="Transparent" WindowStyle="None" IsTabStop="False" SnapsToDevicePixels="True" UseLayoutRounding="True" KeyboardNavigation.TabNavigation="None"
         ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
-        Title="GTweak" Topmost="True" MinHeight="140" MinWidth="350" MaxHeight="250" MaxWidth="400">
+        Title="GTweak" ShowInTaskbar="False" Topmost="True" MinHeight="140" MinWidth="350" MaxHeight="250" MaxWidth="400">
     <Grid Background="{StaticResource Brush_Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" MouseDown="TitleBar_MouseDown" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid x:Name="TitleBar" Grid.Row="0" MouseDown="TitleBar_MouseDown" Background="Transparent">
+            <Grid Grid.Row="0">
                 <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True" Height="48">
                     <ui:SymbolIcon x:Name="MsgIcon" Symbol="Warning24" FontSize="20px" Foreground="{StaticResource Brush_Accent}" Margin="15,5,0,0"/>
                     <Viewbox Stretch="None">

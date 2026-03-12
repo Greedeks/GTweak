@@ -20,9 +20,9 @@
 
     <!--#region Message Window -->
     <v:String x:Key="title_message">Ups...</v:String>
-    <v:String x:Key="part1_message">Tworzenie kopii programu jest</v:String>
-    <v:String x:Key="part2_message">zabronione,</v:String>
-    <v:String x:Key="part3_message">aby zapobiec błędom i nieprzewidzianym sytuacjom.</v:String>
+    <v:String x:Key="part1_message">Narzędzie jest już uruchomione. Uruchamianie wielu instancji</v:String>
+    <v:String x:Key="part2_message">jest zabronione</v:String>
+    <v:String x:Key="part3_message">aby uniknąć konfliktów wewnętrznych i awarii oprogramowania.</v:String>
     <v:String x:Key="button_message">Akceptuję (05)</v:String>
     <v:String x:Key="noty_message">▪ automatyczne zamykanie okna</v:String>
     <v:String x:Key="title_nosupport_message">Nieobsługiwane</v:String>
