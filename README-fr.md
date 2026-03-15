@@ -36,27 +36,29 @@
 <h2> Une large gamme de fonctions, incluant : 🔩</h2>
 
 ```java
-- Activation de Windows via HWID et KMS;
-- Désactivation de Windows Defender, SmartScreen, Antimalware, VBS et UAC;
-- Désactivation des mises à jour Windows et suppression des fichiers temporaires de mise à jour;
-- Désactivation des services inutiles et superflus;
-- Désactivation des keyloggers et de la télémétrie pour Windows et NVIDIA;
-- Désactivation des services et événements liés à la collecte de données utilisateur;
-- Désactivation des tâches du Planificateur de tâches Windows;
-- Désactivation des protocoles réseau inutiles : Teredo, ISATAP et IPv6;
-- Désactivation des outils de diagnostic Windows intégrés et de la défragmentation;
-- Suppression des publicités et bannières système dans Windows, y compris SCOOBE;
-- Désactivation des notifications, recommandations et suggestions système;
-- Blocage des domaines fantômes de Microsoft collectant des données;
-- Désinstallation de OneDrive et Microsoft Edge ainsi que des données et dossiers associés;
-- Suppression des applications préinstallées dans Windows 10/11;
-- Suppression et désactivation des assistants IA : Cortana, Copilot et Recall;
-- Personnalisation de l’interface : thèmes, fenêtres et icônes;
-- Configuration du clavier et de la souris : désactivation du filtrage, des touches rémanentes, accélération;
-- Ajustement des paramètres Windows et du plan d’alimentation;
-- Ajustement de l'alimentation pour les pilotes Realtek Audio afin de corriger les retards audio;
-- Affichage de la configuration et surveillance des composants système;
-- Compression et restauration des données via NFTS.
+- Activation de Windows via les méthodes HWID et KMS ;
+- Désactivation de Windows Defender, SmartScreen, Antimalware, VBS et du Contrôle de compte d'utilisateur (UAC) ;
+- Désactivation et suspension des mises à jour Windows, ainsi que suppression des fichiers temporaires de mise à jour ;
+- Désactivation des services système inutilisés et superflus ;
+- Désactivation des enregistreurs de frappe et de la télémétrie pour Windows, NVIDIA et Intel ;
+- Désactivation des services et événements liés à la collecte des données de diagnostic utilisateur ;
+- Désactivation des tâches de collecte de données dans le Planificateur de tâches Windows ;
+- Désactivation des protocoles réseau inutiles : Teredo, ISATAP et IPv6 ;
+- Désactivation des outils de diagnostic intégrés à Windows et de la défragmentation des disques ;
+- Désactivation des publicités personnalisées et des bannières système, y compris l'écran SCOOBE ;
+- Désactivation des notifications système, des recommandations et des suggestions de Windows ;
+- Blocage des domaines « fantômes » de Microsoft collectant des données via le fichier hosts et le pare-feu ;
+- Désinstallation de OneDrive et Microsoft Edge avec suppression de toutes les données associées et du composant WebView2 ;
+- Suppression des applications préinstallées standard (UWP) dans Windows 10/11 ;
+- Suppression et désactivation des assistants IA : Cortana, Copilot et Recall ;
+- Personnalisation de l'interface : changement de thèmes, paramètres des fenêtres, disposition de la barre des tâches et icônes ;
+- Configuration du clavier et de la souris : désactivation du filtrage des touches, des touches rémanentes et de l'accélération du curseur ;
+- Optimisation des paramètres Windows et application du mode d'alimentation « Performances optimales » ;
+- Ajustement de l'alimentation des pilotes Realtek High Definition Audio pour corriger les retards de son ;
+- Visualisation de la configuration matérielle et surveillance des composants système ;
+- Compression et restauration de fichiers et dossiers via les fonctions NTFS pour gagner de l'espace ;
+- Nettoyage de la mémoire RAM, des fichiers temporaires, du cache et suppression sécurisée du dossier Windows.old ;
+- Exécution de scripts personnalisés (.ps1, .cmd, .bat, .reg) avec les privilèges TrustedInstaller.
 ```
 
 <h2> Captures d'écran 📷</h2>

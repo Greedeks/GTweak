@@ -36,27 +36,29 @@
 <h2> Una vasta gamma di funzioni, tra cui: 🔩</h2>
 
 ```java
-- Attivazione di Windows tramite metodi HWID e KMS;
-- Disabilitazione di Windows Defender, SmartScreen, Antimalware, VBS e UAC;
-- Disabilitazione degli aggiornamenti di Windows e rimozione dei file temporanei di aggiornamento;
-- Disabilitazione di servizi inutilizzati e superflui;
-- Disabilitazione di keylogger e telemetria per Windows e NVIDIA;
-- Disabilitazione di servizi ed eventi relativi alla raccolta dati dell’utente;
-- Disabilitazione di attività nel Task Scheduler di Windows;
-- Disabilitazione di protocolli di rete non necessari: Teredo, ISATAP e IPv6;
-- Disabilitazione degli strumenti diagnostici integrati di Windows e della deframmentazione;
-- Disabilitazione di pubblicità e banner di sistema in Windows, incluso SCOOBE;
-- Disabilitazione delle notifiche di sistema, raccomandazioni e suggerimenti in Windows;
-- Blocco dei domini “ombra” di Microsoft che raccolgono dati;
-- Disinstallazione di OneDrive e Microsoft Edge con rimozione di tutti i dati e cartelle associati;
-- Rimozione delle app preinstallate standard in Windows 10/11;
-- Rimozione e disabilitazione degli assistenti AI: Cortana, Copilot e Recall;
-- Personalizzazione dell’interfaccia: modifica di temi, impostazioni delle finestre e icone;
-- Configurazione di tastiera e mouse: disabilitazione del filtraggio tasti, tasti permanenti e accelerazione;
-- Regolazione delle impostazioni di Windows e modifica del piano di alimentazione;
-- Regolazione delle impostazioni di alimentazione per i driver audio Realtek High Definition per correggere ritardi del suono;
-- Visualizzazione della configurazione e monitoraggio dei componenti di sistema;
-- Implementazione della compressione dati e successivo ripristino usando NFTS.
+- Attivazione di Windows tramite i metodi HWID e KMS;
+- Disattivazione di Windows Defender, SmartScreen, Antimalware, VBS e Controllo Account Utente (UAC);
+- Disattivazione e sospensione degli aggiornamenti di Windows, oltre alla rimozione dei file temporanei degli aggiornamenti;
+- Disattivazione dei servizi di sistema inutilizzati e superflui;
+- Disattivazione di keylogger e telemetria per Windows, NVIDIA e Intel;
+- Disattivazione dei servizi e degli eventi relativi alla raccolta dei dati diagnostici dell'utente;
+- Disattivazione delle attività di raccolta dati nell'Utilità di pianificazione di Windows;
+- Disattivazione dei protocolli di rete non necessari: Teredo, ISATAP e IPv6;
+- Disattivazione degli strumenti di diagnostica integrati di Windows e della deframmentazione dei dischi;
+- Disattivazione di annunci personalizzati e banner di sistema, incluso lo schermo SCOOBE;
+- Disattivazione delle notifiche di sistema, delle raccomandazioni e dei suggerimenti di Windows;
+- Blocco dei domini "ombra" di Microsoft che raccolgono dati tramite il file hosts e il firewall;
+- Disinstallazione di OneDrive e Microsoft Edge con pulizia di tutti i dati associati e del componente WebView2;
+- Rimozione delle applicazioni preinstallate standard (UWP) in Windows 10/11;
+- Rimozione e disattivazione degli assistenti AI: Cortana, Copilot e Recall;
+- Personalizzazione dell'interfaccia: cambio di temi, impostazioni delle finestre, layout della barra delle applicazioni e icone;
+- Configurazione di tastiera e mouse: disattivazione del filtraggio dei tasti, dei tasti permanenti e dell'accelerazione del cursore;
+- Ottimizzazione delle impostazioni di Windows e applicazione della combinazione per il risparmio energia "Prestazioni eccellenti";
+- Regolazione del risparmio energia dei driver Realtek High Definition Audio per correggere il ritardo del suono;
+- Visualizzazione della configurazione hardware e monitoraggio dei componenti di sistema;
+- Compressione e ripristino di file e cartelle tramite funzioni NTFS per risparmiare spazio;
+- Pulizia della memoria RAM, dei file temporanei, della cache e rimozione sicura della cartella Windows.old;
+- Esecuzione di script personalizzati (.ps1, .cmd, .bat, .reg) con privilegi TrustedInstaller.
 ```
 
 <h2> Screenshot 📷</h2>

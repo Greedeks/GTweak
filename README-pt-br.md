@@ -36,27 +36,29 @@
 <h2> Uma ampla variedade de funções, incluindo: 🔩</h2>
 
 ```java
-- Ativação do Windows usando métodos HWID e KMS;
-- Desativação do Windows Defender, SmartScreen, Antimalware, VBS e UAC;
-- Desativação de atualizações do Windows e remoção de arquivos temporários de atualização;
-- Desativação de serviços não utilizados e desnecessários;
-- Desativação de keyloggers e telemetria do Windows e NVIDIA;
-- Desativação de serviços e eventos relacionados à coleta de dados do usuário;
-- Desativação de tarefas no Agendador de Tarefas do Windows;
+- Ativação do Windows via métodos HWID e KMS (com suporte a backup);
+- Desativação do Windows Defender, SmartScreen, Antimalware, VBS e Controle de Conta de Usuário (UAC);
+- Desativação e pausa das atualizações do Windows, além da remoção de arquivos temporários de atualização;
+- Desativação de serviços de sistema não utilizados e desnecessários;
+- Desativação de keyloggers e telemetria para Windows, NVIDIA e Intel;
+- Desativação de serviços e eventos relacionados à coleta de dados de diagnóstico do usuário;
+- Desativação de tarefas de coleta de dados no Agendador de Tarefas do Windows;
 - Desativação de protocolos de rede desnecessários: Teredo, ISATAP e IPv6;
-- Desativação de ferramentas de diagnóstico internas do Windows e desfragmentação;
-- Desativação de anúncios e banners do sistema no Windows, incluindo SCOOBE;
-- Desativação de notificações, recomendações e sugestões do sistema no Windows;
-- Bloqueio de domínios ocultos da Microsoft que coletam dados;
-- Desinstalação do OneDrive e do Microsoft Edge, incluindo limpeza de todos os dados e pastas associados;
-- Remoção de aplicativos pré-instalados padrão no Windows 10/11;
+- Desativação das ferramentas de diagnóstico integradas do Windows e da desfragmentação de disco;
+- Desativação de anúncios personalizados e banners do sistema, incluindo a tela SCOOBE;
+- Desativação de notificações do sistema, recomendações e dicas do Windows;
+- Bloqueio de domínios "sombra" da Microsoft que coletam dados via hosts e firewall;
+- Desinstalação do OneDrive e Microsoft Edge com limpeza de todos os dados associados e do componente WebView2;
+- Remoção de aplicativos pré-instalados padrão (UWP) no Windows 10/11;
 - Remoção e desativação de assistentes de IA: Cortana, Copilot e Recall;
-- Personalização da interface: alteração de temas, configurações de janelas e ícones;
-- Configuração de teclado e mouse: desativação de filtragem de teclas, teclas aderentes e aceleração;
-- Ajuste das configurações do Windows e modificação do plano de energia;
-- Ajuste das configurações de energia para drivers de áudio Realtek High Definition para corrigir atraso de som;
-- Visualização da configuração e monitoramento dos componentes do sistema;
-- Implementação de compressão de dados e posterior restauração usando NTFS.
+- Personalização da interface: alteração de temas, configurações de janelas, layout da barra de tarefas e ícones;
+- Configuração de teclado e mouse: desativação da filtragem de teclas, teclas de aderência e aceleração do cursor;
+- Otimização das configurações do Windows e aplicação do plano de energia "Desempenho Máximo";
+- Ajuste de energia dos drivers Realtek High Definition Audio para corrigir o atraso do som;
+- Visualização da configuração de hardware e monitoramento dos componentes do sistema;
+- Compressão e restauração de arquivos e pastas usando funções NTFS para economizar espaço;
+- Limpeza da memória RAM, arquivos temporários, caches e exclusão segura da pasta Windows.old;
+- Execução de scripts personalizados (.ps1, .cmd, .bat, .reg) com privilégios de TrustedInstaller.
 ```
 
 <h2> Capturas de Tela 📷</h2>

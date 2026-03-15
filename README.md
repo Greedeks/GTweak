@@ -38,25 +38,27 @@
 ```java
 - Activating Windows using HWID and KMS methods;
 - Disabling Windows Defender, SmartScreen, Antimalware, VBS, and UAC;
-- Disabling Windows updates and removing temporary update files;
-- Disabling unused and unnecessary services;
-- Disabling keyloggers and telemetry for Windows and NVIDIA;
+- Disabling/pausing Windows updates and removing temporary update files;
+- Disabling unused and unnecessary system services;
+- Disabling keyloggers and telemetry for Windows, NVIDIA, and Intel;
 - Disabling services and events related to the collection of user data;
-- Disabling tasks in the Windows Task Scheduler;
+- Disabling data collection tasks in the Windows Task Scheduler;
 - Disabling unnecessary network protocols: Teredo, ISATAP, and IPv6;
-- Disabling built-in Windows diagnostic tools and defragmentation;
-- Disabling ads and system banners in Windows, including SCOOBE;
-- Disabling system notifications, recommendations, and suggestions in Windows;
-- Blocking Microsoft's shadow domains that collect data;
-- Uninstalling OneDrive and Microsoft Edge along with clearing all associated data, folders;
-- Removing standard pre-installed apps in Windows 10/11;
+- Disabling built-in Windows diagnostic tools and disk defragmentation;
+- Disabling personalized ads and system banners in Windows, including SCOOBE;
+- Disabling system notifications, recommendations, and tips in Windows;
+- Blocking Microsoft's shadow domains that collect data via hosts and firewall;
+- Uninstalling OneDrive and Microsoft Edge along with clearing all associated data and WebView2;
+- Removing standard pre-installed UWP apps in Windows 10/11;
 - Removing and disabling AI assistants: Cortana, Copilot, and Recall;
-- Customizing the interface: changing themes, window settings, and icons;
-- Configuring keyboard and mouse settings: disabling key filtering, sticky keys, and acceleration;
-- Adjusting Windows settings and modifying the power plan;
+- Customizing the interface: changing themes, window settings, taskbar layout, and icons;
+- Configuring keyboard and mouse settings: disabling key filtering, sticky keys, and pointer acceleration;
+- Adjusting Windows settings and applying the ultimate performance power plan;
 - Adjusting power settings for Realtek High Definition Audio drivers to fix sound delay;
-- Viewing the configuration and monitoring system components;
-- Implementation of data compression and subsequent restoration using NFTS.
+- Viewing the hardware configuration and monitoring system components;
+- Compressing and decompressing files and directories using NTFS to save space;
+- Clearing RAM, temporary files, icon caches, and securely deleting the Windows.old folder;
+- Executing custom scripts (.ps1, .cmd, .bat, .reg) with TrustedInstaller privileges.
 ```
 
 <h2> Screenshots 📷</h2>
