@@ -139,32 +139,9 @@ namespace GTweak.Windows
                     break;
             }
         }
-
-        private void TglButton_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e?.Key == Key.Space || e?.Key == Key.Enter)
-            {
-                e.Handled = true;
-            }
-        }
         #endregion
 
         #region Settings Panel
-        private void BtnNotification_ChangedState(object sender, RoutedEventArgs e) => SettingsEngine.IsViewNotification = !BtnNotification.State;
-
-        private void BtnUpdate_ChangedState(object sender, RoutedEventArgs e) => SettingsEngine.IsUpdateCheckRequired = !BtnUpdate.State;
-
-        private void BtnTopMost_ChangedState(object sender, RoutedEventArgs e) => SettingsEngine.IsTopMost = Topmost = !BtnTopMost.State;
-
-        private void BtnVolume_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.IsPlayingSound = (bool)!BtnVolume.IsChecked;
-
-        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            SliderVolume.Value = SliderVolume.Value == 0 ? 1 : SliderVolume.Value;
-            SettingsEngine.Volume = (int)SliderVolume.Value;
-            SettingsEngine.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * SliderVolume.Value) << 16));
-        }
-
         private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.SaveFileConfig();
 
         private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.OpenFileConfig();

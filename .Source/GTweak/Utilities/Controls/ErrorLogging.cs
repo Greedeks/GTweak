@@ -49,7 +49,7 @@ namespace GTweak.Utilities.Controls
                     byte exLevel = 1;
 
                     await writer.WriteLineAsync($"{(isFatal ? "GTweak has crashed!" : "GTweak has encountered an error.")}\n{separator}\nIf you wish to report this, please open an issue here:\n{PathLocator.Links.GitHub}/GTweak/issues\n{separator}\n");
-                    await writer.WriteLineAsync($"{separator}\n[{DateTime.Now}]\nOS: {(string.IsNullOrEmpty(HardwareData.OS?.Name) ? "Unknown" : HardwareData.OS.Name)}\nVersion: {(string.IsNullOrEmpty(HardwareData.OS?.Version) ? "Unknown" : HardwareData.OS.Version)}\nRelease: {SettingsEngine.currentRelease}\n{separator}\n");
+                    await writer.WriteLineAsync($"{separator}\n[{DateTime.Now}]\nOS: {(string.IsNullOrEmpty(HardwareData.OS?.Name) ? "Unknown" : HardwareData.OS.Name)}\nVersion: {(string.IsNullOrEmpty(HardwareData.OS?.Version) ? "Unknown" : HardwareData.OS.Version)}\n{SettingsEngine.CurrentRelease.Full}\n{separator}\n");
 
                     while (currentEx != null)
                     {

@@ -203,7 +203,7 @@ namespace GTweak.Utilities.Configuration
 
                         if (latest != null && !string.IsNullOrWhiteSpace(latest.CurrentVersion))
                         {
-                            if (new Version(latest.CurrentVersion) > new Version(SettingsEngine.currentRelease))
+                            if (new Version(latest.CurrentVersion) > new Version(SettingsEngine.CurrentRelease.Short))
                             {
                                 IsNeedUpdate = true;
                                 DownloadVersion = latest.CurrentVersion;

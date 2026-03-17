@@ -127,22 +127,22 @@
                         <Grid Grid.Row="1">
                             <StackPanel Orientation="Vertical">
                                 <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                    <uc:ToggleButton x:Name="BtnNotification" StateNA="{Binding IsViewNotification}" TextResource="{DynamicResource btgl_noty_main}" ChangedState="BtnNotification_ChangedState" />
+                                    <uc:ToggleButton x:Name="BtnNotification" State="{Binding IsViewNotification}" TextResource="{DynamicResource btgl_noty_main}"/>
                                 </Viewbox>
 
                                 <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                    <uc:ToggleButton x:Name="BtnUpdate" StateNA="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource btgl_update_main}" ChangedState="BtnUpdate_ChangedState" />
+                                    <uc:ToggleButton x:Name="BtnUpdate" State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource btgl_update_main}"/>
                                 </Viewbox>
 
                                 <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                    <uc:ToggleButton x:Name="BtnTopMost" StateNA="{Binding IsTopMost}" TextResource="{DynamicResource btgl_toast_main}" ChangedState="BtnTopMost_ChangedState"/>
+                                    <uc:ToggleButton x:Name="BtnTopMost" State="{Binding IsTopMost}" TextResource="{DynamicResource btgl_toast_main}"/>
                                 </Viewbox>
 
                                 <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                         <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource slider_volume_main}"/>
-                                        <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound, Mode=OneWay}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}" PreviewMouseLeftButtonUp="BtnVolume_PreviewMouseLeftButtonUp" PreviewKeyDown="TglButton_PreviewKeyDown"/>
-                                        <Slider x:Name="SliderVolume"  Style="{StaticResource Percent_Slider}"  Value="{Binding CurrentVolume, Mode=OneWay}"  IsSnapToTickEnabled="True" Minimum="0" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12" ValueChanged="SliderVolume_ValueChanged"/>
+                                        <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}"/>
+                                        <Slider x:Name="SliderVolume" Style="{StaticResource Percent_Slider}" Value="{Binding CurrentVolume}" IsSnapToTickEnabled="True" Minimum="1" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12"/>
                                     </StackPanel>
                                 </Viewbox>
 

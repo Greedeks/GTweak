@@ -22,9 +22,9 @@ namespace GTweak.Utilities.Controls
         internal static readonly string[] AvailableLangs = new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_", "-")).OrderBy(locale => locale, StringComparer.OrdinalIgnoreCase).ToArray();
         internal static readonly string[] AvailableThemes = { "Dark", "Light" };
 
-        internal static string currentRelease = (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion.Split(' ').Last().Trim();
-        internal static readonly string currentName = AppDomain.CurrentDomain.FriendlyName;
-        internal static readonly string currentLocation = Assembly.GetExecutingAssembly().Location;
+        internal static (string Full, string Short) CurrentRelease => (Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? string.Empty) is var raw ? (raw, raw.Split(' ').Last().Trim()) : (string.Empty, string.Empty);
+        internal static string CurrentName => AppDomain.CurrentDomain.FriendlyName;
+        internal static string CurrentLocation => Assembly.GetExecutingAssembly().Location;
 
         private static readonly Dictionary<string, object> _defaultSettings = new Dictionary<string, object>
         {
@@ -176,12 +176,12 @@ namespace GTweak.Utilities.Controls
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
-                CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[] { $@"taskkill /f /im ""{currentName}""", "choice /c y /n /d y /t 3", $@"del ""{currentLocation}""",
+                CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[] { $@"taskkill /f /im ""{CurrentName}""", "choice /c y /n /d y /t 3", $@"del ""{CurrentLocation}""",
                     $@"rd /s /q ""{PathLocator.Folders.Workspace}""", $@"rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""" })));
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
-        internal static void SelfReboot() => CommandExecutor.RunCommand($"/c taskkill /f /im \"{currentName}\" & choice /c y /n /d y /t 1 & start \"\" \"{currentLocation}\"");
+        internal static void SelfReboot() => CommandExecutor.RunCommand($"/c taskkill /f /im \"{CurrentName}\" & choice /c y /n /d y /t 1 & start \"\" \"{CurrentLocation}\"");
     }
 }

@@ -47,7 +47,9 @@ namespace GTweak.Utilities.Animation
                 byte b = (byte)(fromBrush.Color.B + (toBrush.Color.B - fromBrush.Color.B) * easedProgress);
                 byte a = (byte)(fromBrush.Color.A + (toBrush.Color.A - fromBrush.Color.A) * easedProgress);
 
-                return new SolidColorBrush(Color.FromArgb(a, r, g, b));
+                SolidColorBrush newBrush = new SolidColorBrush(Color.FromArgb(a, r, g, b));
+                newBrush.Freeze();
+                return newBrush;
             }
 
             return easedProgress < 0.5 ? From ?? defaultOriginValue : To ?? defaultDestinationValue;

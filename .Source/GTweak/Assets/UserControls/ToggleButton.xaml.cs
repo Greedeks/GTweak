@@ -14,7 +14,17 @@ namespace GTweak.Assets.UserControls
         /// <summary>
         /// Custom Event - Processing keypresses only for the button and not for the text
         /// </summary>
-        internal static readonly RoutedEvent ChangedStateEvent = EventManager.RegisterRoutedEvent(nameof(ChangedState), RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(ToggleButton));
+        internal static readonly RoutedEvent ChangedStateEvent =
+            EventManager.RegisterRoutedEvent(nameof(ChangedState), RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(ToggleButton));
+
+        private static readonly DependencyProperty StateProperty =
+           DependencyProperty.Register(nameof(State), typeof(bool), typeof(ToggleButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnStateChanged));
+
+        private static readonly DependencyProperty TextProperty =
+         DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => { if (s is ToggleButton btn && btn.ToggleText != null) { btn.ToggleText.Text = e.NewValue as string; } }));
+
+        private static readonly DependencyProperty DescriptionProperty =
+            DependencyProperty.Register(nameof(Description), typeof(object), typeof(ToggleButton), new PropertyMetadata(null));
 
         internal event RoutedEventHandler ChangedState
         {
@@ -22,41 +32,14 @@ namespace GTweak.Assets.UserControls
             remove => RemoveHandler(ChangedStateEvent, value);
         }
 
-        private readonly SolidColorBrush brushOffColor = new SolidColorBrush();
-        private readonly SolidColorBrush brushOnColor = new SolidColorBrush();
-        private readonly SolidColorBrush borderOffColor = new SolidColorBrush();
-        private readonly SolidColorBrush borderOnColor = new SolidColorBrush();
-        private bool _state = false;
-
-        private readonly Thickness _leftPosition = new Thickness(0, 0, 24, 0);
-        private readonly Thickness _rightPosition = new Thickness(24, 0, 0, 0);
-
         /// <summary>
-        /// Changes the state of a Toggle Button with animation
+        /// Gets or sets the current state of the ToggleButton. Supports two-way binding (MVVM) and automatically handles state transition animations.
         /// </summary>
-        internal bool State { get => _state; set { _state = value; UpdateToggleState(_state); } }
-
-        /// <summary>
-        /// Changes the state of a ToggleButton without animation
-        /// </summary>
-        internal bool StateNA
+        internal bool State
         {
-            get => (bool)GetValue(StateNAProperty);
-            set => SetValue(StateNAProperty, value);
+            get => (bool)GetValue(StateProperty);
+            set => SetValue(StateProperty, value);
         }
-
-        /// <summary>
-        /// Dependency property used for binding without triggering animations
-        /// </summary>
-        internal static readonly DependencyProperty StateNAProperty = DependencyProperty.Register(nameof(StateNA), typeof(bool), typeof(ToggleButton), new PropertyMetadata(false, (d, e) =>
-        {
-            if (d is ToggleButton tbtn)
-            {
-                bool newValue = (bool)e.NewValue;
-                tbtn._state = newValue;
-                tbtn.UpdateToggleState(newValue, true);
-            }
-        }));
 
         /// <summary>
         /// Changes the text for ToggleButton.Accepts: Dynamic and Static Resource, just a string.
@@ -73,9 +56,6 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        private static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => { if (s is ToggleButton btn && btn.ToggleText != null) { btn.ToggleText.Text = e.NewValue as string; } }));
-
         /// <summary>
         /// Sets the description text for the ToggleButton. Can be assigned from a DynamicResource, StaticResource, or directly as a string.
         /// </summary>
@@ -91,7 +71,18 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        private static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register(nameof(Description), typeof(object), typeof(ToggleButton), new PropertyMetadata(null));
+        private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ToggleButton tbtn)
+            {
+                tbtn.UpdateToggleState((bool)e.NewValue, !tbtn.IsLoaded);
+            }
+        }
+
+        private readonly SolidColorBrush brushOffColor = new SolidColorBrush(), brushOnColor = new SolidColorBrush(),
+            borderOffColor = new SolidColorBrush(), borderOnColor = new SolidColorBrush();
+
+        private readonly Thickness _leftPosition = new Thickness(0, 0, 24, 0), _rightPosition = new Thickness(24, 0, 0, 0);
 
         public ToggleButton()
         {
@@ -105,7 +96,7 @@ namespace GTweak.Assets.UserControls
 
             IsEnabledChanged += ToggleButton_IsEnabledChanged;
 
-            UpdateToggleState(_state, true);
+            UpdateToggleState(State, true);
         }
 
         private void ApplyResource(object value, DependencyProperty dp, DependencyProperty textProperty = null, FrameworkElement target = null)
@@ -178,61 +169,87 @@ namespace GTweak.Assets.UserControls
             if (IsEnabled || sender?.GetType() != typeof(TextBlock))
             {
                 RaiseEvent(new RoutedEventArgs(ChangedStateEvent));
-                State = !_state;
+                State = !State;
             }
         }
 
-        private void UpdateToggleState(bool isState, bool isSkipAnimation = false)
+        private void UpdateToggleState(bool State, bool skipAnimation = false)
         {
-            if (isState)
+            if (State)
             {
-                AnimateToggle(_rightPosition, brushOffColor, brushOnColor, borderOffColor, borderOnColor, (Color)Application.Current.Resources["Color_ToggleDot_On"], isSkipAnimation, "TextToggle");
+                AnimateToggle(_rightPosition, brushOffColor, brushOnColor, borderOffColor, borderOnColor, (Color)Application.Current.Resources["Color_ToggleDot_On"], skipAnimation, "TextToggle");
             }
             else
             {
-                AnimateToggle(_leftPosition, brushOnColor, brushOffColor, borderOnColor, borderOffColor, (Color)Application.Current.Resources["Color_ToggleDot_Off"], isSkipAnimation, "TextInactivity");
+                AnimateToggle(_leftPosition, brushOnColor, brushOffColor, borderOnColor, borderOffColor, (Color)Application.Current.Resources["Color_ToggleDot_Off"], skipAnimation, "TextInactivity");
             }
         }
 
         private void AnimateToggle(Thickness targetPosition, Brush fromBrush, Brush toBrush, Brush fromBorder, Brush toBorder, Color dotColor, bool skipAnimation, string textStyle)
         {
-            ThicknessAnimationUsingKeyFrames marginAnimation = new ThicknessAnimationUsingKeyFrames();
-            marginAnimation.KeyFrames.Add(new EasingThicknessKeyFrame(targetPosition, KeyTime.FromTimeSpan(skipAnimation ? TimeSpan.Zero : TimeSpan.FromMilliseconds(200)))
+            if (skipAnimation)
             {
-                EasingFunction = new QuadraticEase()
-            });
-            Timeline.SetDesiredFrameRate(marginAnimation, 120);
-            Dot?.BeginAnimation(MarginProperty, marginAnimation);
+                Dot?.BeginAnimation(MarginProperty, null);
+                Back?.BeginAnimation(Shape.FillProperty, null);
+                Back?.BeginAnimation(Shape.StrokeProperty, null);
 
-            BrushAnimation brushAnimation = new BrushAnimation
-            {
-                From = fromBrush,
-                To = toBrush,
-                Duration = skipAnimation ? TimeSpan.Zero : TimeSpan.FromMilliseconds(100)
-            };
-            Timeline.SetDesiredFrameRate(brushAnimation, 120);
-            Back?.BeginAnimation(Shape.FillProperty, brushAnimation);
+                if (Dot != null)
+                {
+                    Dot.Margin = targetPosition;
+                }
 
-            BrushAnimation borderAnimation = new BrushAnimation
-            {
-                From = fromBorder,
-                To = toBorder,
-                Duration = skipAnimation ? TimeSpan.Zero : TimeSpan.FromMilliseconds(100)
-            };
-            Timeline.SetDesiredFrameRate(borderAnimation, 120);
-            Back?.BeginAnimation(Shape.StrokeProperty, borderAnimation);
+                if (Back != null)
+                {
+                    Back.Fill = toBrush;
+                    Back.Stroke = toBorder;
+                }
 
-            ColorAnimation dotColorAnimation = new ColorAnimation
+                if (Dot?.Fill is SolidColorBrush solidColorBrush)
+                {
+                    solidColorBrush.BeginAnimation(SolidColorBrush.ColorProperty, null);
+                    solidColorBrush.Color = dotColor;
+                }
+            }
+            else
             {
-                To = dotColor,
-                Duration = skipAnimation ? TimeSpan.Zero : TimeSpan.FromMilliseconds(100),
-                EasingFunction = new QuadraticEase()
-            };
-            Timeline.SetDesiredFrameRate(dotColorAnimation, 120);
+                ThicknessAnimationUsingKeyFrames marginAnimation = new ThicknessAnimationUsingKeyFrames();
+                marginAnimation.KeyFrames.Add(new EasingThicknessKeyFrame(targetPosition, KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(200)))
+                {
+                    EasingFunction = new QuadraticEase()
+                });
+                Timeline.SetDesiredFrameRate(marginAnimation, 120);
+                Dot?.BeginAnimation(MarginProperty, marginAnimation);
 
-            if (Dot?.Fill is SolidColorBrush solidColorBrush)
-            {
-                solidColorBrush.BeginAnimation(SolidColorBrush.ColorProperty, dotColorAnimation);
+                BrushAnimation brushAnimation = new BrushAnimation
+                {
+                    From = fromBrush,
+                    To = toBrush,
+                    Duration = TimeSpan.FromMilliseconds(100)
+                };
+                Timeline.SetDesiredFrameRate(brushAnimation, 120);
+                Back?.BeginAnimation(Shape.FillProperty, brushAnimation);
+
+                BrushAnimation borderAnimation = new BrushAnimation
+                {
+                    From = fromBorder,
+                    To = toBorder,
+                    Duration = TimeSpan.FromMilliseconds(100)
+                };
+                Timeline.SetDesiredFrameRate(borderAnimation, 120);
+                Back?.BeginAnimation(Shape.StrokeProperty, borderAnimation);
+
+                ColorAnimation dotColorAnimation = new ColorAnimation
+                {
+                    To = dotColor,
+                    Duration = TimeSpan.FromMilliseconds(100),
+                    EasingFunction = new QuadraticEase()
+                };
+                Timeline.SetDesiredFrameRate(dotColorAnimation, 120);
+
+                if (Dot?.Fill is SolidColorBrush solidColorBrush)
+                {
+                    solidColorBrush.BeginAnimation(SolidColorBrush.ColorProperty, dotColorAnimation);
+                }
             }
 
             if (ToggleText != null && TryFindResource(textStyle) is Style foundStyle)

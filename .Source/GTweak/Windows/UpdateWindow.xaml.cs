@@ -42,7 +42,7 @@ namespace GTweak.Windows
                 };
                 webClient.DownloadFileCompleted += delegate
                 {
-                    CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsEngine.currentName}\" && timeout /t 2 && del \"{SettingsEngine.currentLocation}\" && ren {tempFileName} \"{SettingsEngine.currentName}\" && \"{SettingsEngine.currentLocation}\"");
+                    CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsEngine.CurrentName}\" && timeout /t 2 && del \"{SettingsEngine.CurrentLocation}\" && ren {tempFileName} \"{SettingsEngine.CurrentName}\" && \"{SettingsEngine.CurrentLocation}\"");
                 };
                 webClient.DownloadFileAsync(new Uri(PathLocator.Links.GitLabLatest.Created == false ? PathLocator.Links.GitHubLatest : PathLocator.Links.GitLabLatest.Url), tempFileName);
             }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -31,7 +30,11 @@ namespace GTweak.Core.ViewModel
 
         public string DisplayProfileName => _hardwareProvider.GetProfileName();
 
-        public string DisplayTweakVersion => (Assembly.GetEntryAssembly() ?? throw new InvalidOperationException()).GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+        public string DisplayTweakVersion => SettingsEngine.CurrentRelease.Full;
+
+        public string CurrentVersion => SettingsEngine.CurrentRelease.Short;
+
+        public string DownloadVersion => NetworkProvider.DownloadVersion;
 
         public bool StateButtonTheme
         {
@@ -43,19 +46,71 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        public string CurrentVersion => SettingsEngine.currentRelease;
+        public bool IsViewNotification
+        {
+            get => SettingsEngine.IsViewNotification;
+            set
+            {
+                if (SettingsEngine.IsViewNotification != value)
+                {
+                    SettingsEngine.IsViewNotification = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public string DownloadVersion => HardwareProvider.DownloadVersion;
+        public bool IsUpdateCheckRequired
+        {
+            get => SettingsEngine.IsUpdateCheckRequired;
+            set
+            {
+                if (SettingsEngine.IsUpdateCheckRequired != value)
+                {
+                    SettingsEngine.IsUpdateCheckRequired = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public bool IsViewNotification => SettingsEngine.IsViewNotification;
+        public bool IsTopMost
+        {
+            get => SettingsEngine.IsTopMost;
+            set
+            {
+                if (SettingsEngine.IsTopMost != value)
+                {
+                    SettingsEngine.IsTopMost = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public bool IsUpdateCheckRequired => SettingsEngine.IsUpdateCheckRequired;
+        public bool IsPlayingSound
+        {
+            get => SettingsEngine.IsPlayingSound;
+            set
+            {
+                if (SettingsEngine.IsPlayingSound != value)
+                {
+                    SettingsEngine.IsPlayingSound = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
-        public bool IsTopMost => SettingsEngine.IsTopMost;
-
-        public bool IsPlayingSound => SettingsEngine.IsPlayingSound;
-
-        public int CurrentVolume => SettingsEngine.Volume;
+        public int CurrentVolume
+        {
+            get => SettingsEngine.Volume;
+            set
+            {
+                if (SettingsEngine.Volume != value)
+                {
+                    SettingsEngine.Volume = value;
+                    SettingsEngine.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * value) << 16));
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public string SelectedLanguage
         {
