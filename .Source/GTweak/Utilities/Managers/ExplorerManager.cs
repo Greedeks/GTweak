@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
 
@@ -52,22 +53,27 @@ namespace GTweak.Utilities.Managers
             ["Edge"] = ExplorerAction.Restart
         };
 
+        private static int _restartToken = 0;
+
         internal static void Restart(Action action = null)
         {
-            Task.Run(delegate
+            if (Interlocked.CompareExchange(ref _restartToken, 1, 0) != 1)
             {
-                foreach (Process process in Process.GetProcesses())
+                Task.Run(async delegate
                 {
-                    try
+                    foreach (Process process in Process.GetProcesses())
                     {
-                        if (string.Compare(process.MainModule?.FileName, PathLocator.Executable.Explorer, StringComparison.OrdinalIgnoreCase) == 0 && Process.GetProcessesByName("explorer").Length != 0)
+                        try
                         {
-                            process.Kill();
-                            action?.Invoke();
-                            process.Dispose();
+                            if (string.Compare(process.MainModule?.FileName, PathLocator.Executable.Explorer, StringComparison.OrdinalIgnoreCase) == 0 && Process.GetProcessesByName("explorer").Length != 0)
+                            {
+                                process.Kill();
+                                action?.Invoke();
+                                process.Dispose();
+                            }
                         }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
                     if (Process.GetProcessesByName("explorer").Length == 0)
                     {
@@ -78,8 +84,12 @@ namespace GTweak.Utilities.Managers
                         try { launchExplorer.Start(); }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     }
-                }
-            });
+
+                    await Task.Delay(1500);
+
+                    Interlocked.Exchange(ref _restartToken, 0);
+                });
+            }
         }
 
         internal static void RefreshDesktop()
