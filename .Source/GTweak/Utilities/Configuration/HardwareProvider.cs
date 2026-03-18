@@ -86,6 +86,7 @@ namespace GTweak.Utilities.Configuration
                     () => GetMotherboardInfo(),
                     () => GetProcessorInfo(),
                     () => GetGraphicsInfo(),
+                    () => GetPrimaryRefreshRate(),
                     () => GetMemoryInfo(),
                     () => RefreshDevicesData(),
                     () => GetUserIpAddress().GetAwaiter().GetResult()

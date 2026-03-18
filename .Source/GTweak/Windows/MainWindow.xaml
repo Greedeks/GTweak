@@ -148,11 +148,7 @@
 
                                 <uc:FlowPanel ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="40,10,5,0">
                                     <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource cmbox_lang_main}" Margin="0,5,0,0"/>
-                                    <ComboBox Style="{StaticResource CustomComboBoxStyle}" Height="32" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display">
-                                        <ComboBox.CacheMode>
-                                            <BitmapCache RenderAtScale="2" EnableClearType="True"/>
-                                        </ComboBox.CacheMode>
-                                    </ComboBox>
+                                    <ComboBox Style="{StaticResource CustomComboBoxStyle}" Height="32" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display"/>
                                 </uc:FlowPanel>
 
                                 <Border Background="{StaticResource Brush_Separator}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10" Margin="0,10,0,0"/>

@@ -12,6 +12,7 @@ namespace GTweak.Core.ViewModel
     {
         private readonly DataSystemModel _model = new DataSystemModel();
         private ObservableCollection<DataSystemModel> _collection;
+        private enum FallbackState { None, Unknown, NoDevice, NoDriver, ConnectionLost }
 
         public ObservableCollection<DataSystemModel> DisplayData
         {
@@ -63,38 +64,54 @@ namespace GTweak.Core.ViewModel
             }
         }
 
+        private string GetFallbackResourceString(FallbackState state)
+        {
+            string key = state switch
+            {
+                FallbackState.Unknown => "unknown_information_sysinfo",
+                FallbackState.NoDevice => "no_device_information_sysinfo",
+                FallbackState.NoDriver => "driver_not_installed_sysinfo",
+                FallbackState.ConnectionLost => "connection_lose_sysinfo",
+                _ => null
+            };
+
+            return key == null ? string.Empty : (string)Application.Current.Resources[key];
+        }
+
         public DataSystemViewModel()
         {
             DisplayData = new ObservableCollection<DataSystemModel>
             {
-                CreateModelCollection("OSName", HardwareData.OS.Name, "unknown_information_sysinfo"),
-                CreateModelCollection("OSVersion", HardwareData.OS.Version, "unknown_information_sysinfo"),
+                CreateModelCollection("OSName", HardwareData.OS.Name, FallbackState.Unknown),
+                CreateModelCollection("OSVersion", HardwareData.OS.Version, FallbackState.Unknown),
                 CreateModelCollection("Processes", HardwareData.RunningProcessesCount),
                 CreateModelCollection("Services", HardwareData.RunningServicesCount),
-                CreateModelCollection("Bios", HardwareData.Bios.Data, "no_device_information_sysinfo"),
-                CreateModelCollection("Mode", HardwareData.Bios.Mode, "unknown_information_sysinfo"),
-                CreateModelCollection("Motherboard", HardwareData.Motherboard, "no_device_information_sysinfo"),
-                CreateModelCollection("Processor", HardwareData.Processor.Data, "no_device_information_sysinfo"),
-                CreateModelCollection("Cores", HardwareData.Processor.Cores, "unknown_information_sysinfo"),
-                CreateModelCollection("Threads", HardwareData.Processor.Threads, "unknown_information_sysinfo"),
-                CreateModelCollection("Graphics", HardwareData.Graphics, "driver_not_installed_sysinfo"),
-                CreateModelCollection("Memory", HardwareData.Memory.Data, "no_device_information_sysinfo"),
-                CreateModelCollection("Type", HardwareData.Memory.Type, "unknown_information_sysinfo"),
-                CreateModelCollection("Storage", HardwareData.Storage, "no_device_information_sysinfo"),
-                CreateModelCollection("Audio", HardwareData.AudioDevice, "driver_not_installed_sysinfo"),
-                CreateModelCollection("Network", HardwareData.NetworkAdapter, "driver_not_installed_sysinfo"),
-                CreateModelCollection("IpAddress", HardwareData.UserIPAddress, "connection_lose_sysinfo")
+                CreateModelCollection("Bios", HardwareData.Bios.Data, FallbackState.NoDevice),
+                CreateModelCollection("Mode", HardwareData.Bios.Mode, FallbackState.Unknown),
+                CreateModelCollection("Motherboard", HardwareData.Motherboard, FallbackState.NoDevice),
+                CreateModelCollection("Processor", HardwareData.Processor.Data, FallbackState.NoDevice),
+                CreateModelCollection("Cores", HardwareData.Processor.Cores, FallbackState.Unknown),
+                CreateModelCollection("Threads", HardwareData.Processor.Threads, FallbackState.Unknown),
+                CreateModelCollection("Graphics", HardwareData.Graphics, FallbackState.NoDriver),
+                CreateModelCollection("RefreshRate", HardwareData.MonitorRefreshRate, FallbackState.Unknown),
+                CreateModelCollection("Memory", HardwareData.Memory.Data, FallbackState.NoDevice),
+                CreateModelCollection("Type", HardwareData.Memory.Type, FallbackState.Unknown),
+                CreateModelCollection("Storage", HardwareData.Storage, FallbackState.NoDevice),
+                CreateModelCollection("Audio", HardwareData.AudioDevice, FallbackState.NoDriver),
+                CreateModelCollection("Network", HardwareData.NetworkAdapter, FallbackState.NoDriver),
+                CreateModelCollection("IpAddress", HardwareData.UserIPAddress, FallbackState.ConnectionLost)
             };
 
             RefreshStates();
         }
 
-        public void Update()
+        internal void Update()
         {
-            UpdateModelData("Storage", HardwareData.Storage, "no_device_information_sysinfo");
-            UpdateModelData("Audio", HardwareData.AudioDevice, "driver_not_installed_sysinfo");
-            UpdateModelData("Network", HardwareData.NetworkAdapter, "driver_not_installed_sysinfo");
-            UpdateModelData("IpAddress", HardwareData.UserIPAddress, "connection_lose_sysinfo");
+            UpdateModelData("RefreshRate", HardwareData.MonitorRefreshRate, FallbackState.Unknown);
+            UpdateModelData("Storage", HardwareData.Storage, FallbackState.NoDevice);
+            UpdateModelData("Audio", HardwareData.AudioDevice, FallbackState.NoDriver);
+            UpdateModelData("Network", HardwareData.NetworkAdapter, FallbackState.NoDriver);
+            UpdateModelData("IpAddress", HardwareData.UserIPAddress, FallbackState.ConnectionLost);
 
             RefreshStates();
         }
@@ -117,21 +134,21 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        private void UpdateModelData(string name, string newData, string fallbackResourceKey)
+        private void UpdateModelData(string name, string newData, FallbackState fallbackState = FallbackState.None)
         {
             DataSystemModel model = this[name];
             if (model != null)
             {
-                model.Data = !string.IsNullOrEmpty(newData) ? newData : (string)Application.Current.Resources[fallbackResourceKey];
+                model.Data = (fallbackState == FallbackState.None) ? newData : (!string.IsNullOrEmpty(newData) ? newData : GetFallbackResourceString(fallbackState));
             }
         }
 
-        private DataSystemModel CreateModelCollection(string name, object data, string fallbackResourceKey = null)
+        private DataSystemModel CreateModelCollection(string name, string data, FallbackState fallbackState = FallbackState.None)
         {
             return new DataSystemModel
             {
                 Name = name,
-                Data = (string)(fallbackResourceKey == null ? data : (!string.IsNullOrEmpty(data as string) ? data : (string)Application.Current.Resources[fallbackResourceKey]))
+                Data = (fallbackState == FallbackState.None) ? data : (!string.IsNullOrEmpty(data) ? data : GetFallbackResourceString(fallbackState))
             };
         }
     }

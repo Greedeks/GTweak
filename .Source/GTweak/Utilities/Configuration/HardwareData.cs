@@ -44,6 +44,7 @@ namespace GTweak.Utilities.Configuration
         internal static ProcessorInfo Processor { get; set; } = new ProcessorInfo();
         internal static string Motherboard { get; set; } = string.Empty;
         internal static string Graphics { get; set; } = string.Empty;
+        internal static string MonitorRefreshRate { get; set; } = string.Empty;
         internal static MemoryInfo Memory { get; set; } = new MemoryInfo();
         internal static string Storage { get; set; } = string.Empty;
         internal static string AudioDevice { get; set; } = string.Empty;

@@ -8,6 +8,7 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
+using Microsoft.Win32;
 
 namespace GTweak.Utilities.Configuration
 {
@@ -18,6 +19,43 @@ namespace GTweak.Utilities.Configuration
         private readonly ServiceController[] _servicesList = ServiceController.GetServices();
 
         internal enum DeviceType { All, Storage, Audio, Network }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct DEVMODE
+        {
+            private const int CCHDEVICENAME = 32;
+            private const int CCHFORMNAME = 32;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CCHDEVICENAME)]
+            internal string dmDeviceName;
+            internal short dmSpecVersion;
+            internal short dmDriverVersion;
+            internal short dmSize;
+            internal short dmDriverExtra;
+            internal int dmFields;
+
+            internal int dmPositionX;
+            internal int dmPositionY;
+            internal int dmDisplayOrientation;
+            internal int dmDisplayFixedOutput;
+
+            internal short dmColor;
+            internal short dmDuplex;
+            internal short dmYResolution;
+            internal short dmTTOption;
+            internal short dmCollate;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = CCHFORMNAME)]
+            internal string dmFormName;
+
+            internal short dmLogPixels;
+            internal int dmBitsPerPel;
+            internal int dmPelsWidth;
+            internal int dmPelsHeight;
+
+            internal int dmDisplayFlags;
+            internal int dmDisplayFrequency;
+        }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SystemTime
@@ -40,6 +78,9 @@ namespace GTweak.Utilities.Configuration
             internal ulong ullAvailExtendedVirtual;
             internal MemoryStatus() => dwLength = (uint)Marshal.SizeOf(typeof(MemoryStatus));
         }
+
+        [DllImport("user32.dll")]
+        private static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
 
         [DllImport("psapi.dll", SetLastError = true)]
         private static extern bool EnumProcesses([Out] uint[] lpidProcess, uint cb, out uint lpcbNeeded);
@@ -171,6 +212,16 @@ namespace GTweak.Utilities.Configuration
             }
         }
 
+        internal void GetPrimaryRefreshRate()
+        {
+            DEVMODE vDevMode = new DEVMODE
+            {
+                dmSize = (short)Marshal.SizeOf(typeof(DEVMODE))
+            };
+
+            MonitorRefreshRate = EnumDisplaySettings(null, -1, ref vDevMode) && vDevMode.dmDisplayFrequency > 0 ? $"{vDevMode.dmDisplayFrequency} Hz" : string.Empty;
+        }
+
         internal async Task StartDeviceMonitoring()
         {
             await Task.WhenAll(new List<(string filter, DeviceType type, string scope)>
@@ -179,7 +230,11 @@ namespace GTweak.Utilities.Configuration
                 ("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio, null),
                 ("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null)
             }.Select(device => Task.Run(() => SubscribeToDeviceEvents(device.filter, device.type, device.scope))).ToArray());
+
+            SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
         }
+
+        private void OnDisplaySettingsChanged(object sender, EventArgs e) => GetPrimaryRefreshRate();
 
         private async Task SubscribeToDeviceEvents(string filter, DeviceType type, string scope)
         {
@@ -215,6 +270,7 @@ namespace GTweak.Utilities.Configuration
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
             _watcherHandler.Clear();
+            SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
         }
     }
 }

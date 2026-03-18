@@ -517,6 +517,7 @@
     <v:String x:Key="title_cores_sysinfo">코어:</v:String>
     <v:String x:Key="title_threads_sysinfo">스레드:</v:String>
     <v:String x:Key="title_gpu_sysinfo">그래픽:</v:String>
+    <v:String x:Key="title_refreshrate_sysinfo">Refresh Rate:</v:String>
     <v:String x:Key="title_ram_sysinfo">메모리:</v:String>
     <v:String x:Key="title_mtype_sysinfo">메모리 유형:</v:String>
     <v:String x:Key="title_storage_sysinfo">저장소 장치:</v:String>
@@ -540,4 +541,5 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 

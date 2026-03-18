@@ -517,6 +517,7 @@
     <v:String x:Key="title_cores_sysinfo">Cores:</v:String>
     <v:String x:Key="title_threads_sysinfo">Threads:</v:String>
     <v:String x:Key="title_gpu_sysinfo">Graphics:</v:String>
+    <v:String x:Key="title_refreshrate_sysinfo">Refresh Rate:</v:String>
     <v:String x:Key="title_ram_sysinfo">Memory:</v:String>
     <v:String x:Key="title_mtype_sysinfo">Memory Type:</v:String>
     <v:String x:Key="title_storage_sysinfo">Storage devices:</v:String>
