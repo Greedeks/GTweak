@@ -10,9 +10,16 @@ namespace GTweak.Core.ViewModel
 {
     internal class DataSystemViewModel : ViewModelBase
     {
+        private static class FallbackKeys
+        {
+            internal const string Unknown = "unknown_information_sysinfo";
+            internal const string NoDevice = "no_device_information_sysinfo";
+            internal const string NoDriver = "driver_not_installed_sysinfo";
+            internal const string ConnectionLost = "connection_lose_sysinfo";
+        }
+
         private readonly DataSystemModel _model = new DataSystemModel();
         private ObservableCollection<DataSystemModel> _collection;
-        private enum FallbackState { None, Unknown, NoDevice, NoDriver, ConnectionLost }
 
         public ObservableCollection<DataSystemModel> DisplayData
         {
@@ -20,7 +27,7 @@ namespace GTweak.Core.ViewModel
             set { _collection = value; OnPropertyChanged(); }
         }
 
-        public DataSystemModel this[string name] => DisplayData.FirstOrDefault(d => d.Name == name);
+        public DataSystemModel this[string name] => DisplayData?.FirstOrDefault(d => d.Name == name);
 
         public ImageSource DisplayWallpaper => HardwareData.Wallpaper;
 
@@ -64,42 +71,28 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        private string GetFallbackResourceString(FallbackState state)
-        {
-            string key = state switch
-            {
-                FallbackState.Unknown => "unknown_information_sysinfo",
-                FallbackState.NoDevice => "no_device_information_sysinfo",
-                FallbackState.NoDriver => "driver_not_installed_sysinfo",
-                FallbackState.ConnectionLost => "connection_lose_sysinfo",
-                _ => null
-            };
-
-            return key == null ? string.Empty : (string)Application.Current.Resources[key];
-        }
-
         public DataSystemViewModel()
         {
             DisplayData = new ObservableCollection<DataSystemModel>
             {
-                CreateModelCollection("OSName", HardwareData.OS.Name, FallbackState.Unknown),
-                CreateModelCollection("OSVersion", HardwareData.OS.Version, FallbackState.Unknown),
-                CreateModelCollection("Processes", HardwareData.RunningProcessesCount),
-                CreateModelCollection("Services", HardwareData.RunningServicesCount),
-                CreateModelCollection("Bios", HardwareData.Bios.Data, FallbackState.NoDevice),
-                CreateModelCollection("Mode", HardwareData.Bios.Mode, FallbackState.Unknown),
-                CreateModelCollection("Motherboard", HardwareData.Motherboard, FallbackState.NoDevice),
-                CreateModelCollection("Processor", HardwareData.Processor.Data, FallbackState.NoDevice),
-                CreateModelCollection("Cores", HardwareData.Processor.Cores, FallbackState.Unknown),
-                CreateModelCollection("Threads", HardwareData.Processor.Threads, FallbackState.Unknown),
-                CreateModelCollection("Graphics", HardwareData.Graphics, FallbackState.NoDriver),
-                CreateModelCollection("RefreshRate", HardwareData.MonitorRefreshRate, FallbackState.Unknown),
-                CreateModelCollection("Memory", HardwareData.Memory.Data, FallbackState.NoDevice),
-                CreateModelCollection("Type", HardwareData.Memory.Type, FallbackState.Unknown),
-                CreateModelCollection("Storage", HardwareData.Storage, FallbackState.NoDevice),
-                CreateModelCollection("Audio", HardwareData.AudioDevice, FallbackState.NoDriver),
-                CreateModelCollection("Network", HardwareData.NetworkAdapter, FallbackState.NoDriver),
-                CreateModelCollection("IpAddress", HardwareData.UserIPAddress, FallbackState.ConnectionLost)
+                UpsertModelCollection("OSName", HardwareData.OS.Name, FallbackKeys.Unknown),
+                UpsertModelCollection("OSVersion", HardwareData.OS.Version, FallbackKeys.Unknown),
+                UpsertModelCollection("Processes", HardwareData.RunningProcessesCount),
+                UpsertModelCollection("Services", HardwareData.RunningServicesCount),
+                UpsertModelCollection("Bios", HardwareData.Bios.Data, FallbackKeys.NoDevice),
+                UpsertModelCollection("Mode", HardwareData.Bios.Mode, FallbackKeys.Unknown),
+                UpsertModelCollection("Motherboard", HardwareData.Motherboard, FallbackKeys.NoDevice),
+                UpsertModelCollection("Processor", HardwareData.Processor.Data, FallbackKeys.NoDevice),
+                UpsertModelCollection("Cores", HardwareData.Processor.Cores, FallbackKeys.Unknown),
+                UpsertModelCollection("Threads", HardwareData.Processor.Threads, FallbackKeys.Unknown),
+                UpsertModelCollection("Graphics", HardwareData.Graphics, FallbackKeys.NoDriver),
+                UpsertModelCollection("RefreshRate", HardwareData.MonitorRefreshRate, FallbackKeys.Unknown),
+                UpsertModelCollection("Memory", HardwareData.Memory.Data, FallbackKeys.NoDevice),
+                UpsertModelCollection("Type", HardwareData.Memory.Type, FallbackKeys.Unknown),
+                UpsertModelCollection("Storage", HardwareData.Storage, FallbackKeys.NoDevice),
+                UpsertModelCollection("Audio", HardwareData.AudioDevice, FallbackKeys.NoDriver),
+                UpsertModelCollection("Network", HardwareData.NetworkAdapter, FallbackKeys.NoDriver),
+                UpsertModelCollection("IpAddress", HardwareData.UserIPAddress, FallbackKeys.ConnectionLost)
             };
 
             RefreshStates();
@@ -107,11 +100,11 @@ namespace GTweak.Core.ViewModel
 
         internal void Update()
         {
-            UpdateModelData("RefreshRate", HardwareData.MonitorRefreshRate, FallbackState.Unknown);
-            UpdateModelData("Storage", HardwareData.Storage, FallbackState.NoDevice);
-            UpdateModelData("Audio", HardwareData.AudioDevice, FallbackState.NoDriver);
-            UpdateModelData("Network", HardwareData.NetworkAdapter, FallbackState.NoDriver);
-            UpdateModelData("IpAddress", HardwareData.UserIPAddress, FallbackState.ConnectionLost);
+            UpsertModelCollection("RefreshRate", HardwareData.MonitorRefreshRate, FallbackKeys.Unknown);
+            UpsertModelCollection("Storage", HardwareData.Storage, FallbackKeys.NoDevice);
+            UpsertModelCollection("Audio", HardwareData.AudioDevice, FallbackKeys.NoDriver);
+            UpsertModelCollection("Network", HardwareData.NetworkAdapter, FallbackKeys.NoDriver);
+            UpsertModelCollection("IpAddress", HardwareData.UserIPAddress, FallbackKeys.ConnectionLost);
 
             RefreshStates();
         }
@@ -134,22 +127,18 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        private void UpdateModelData(string name, string newData, FallbackState fallbackState = FallbackState.None)
+        private DataSystemModel UpsertModelCollection(string name, string data, string fallbackKey = null)
         {
+            string targetData = (fallbackKey == null) ? (data ?? string.Empty) : (!string.IsNullOrEmpty(data) ? data : (Application.Current.Resources[fallbackKey] as string ?? string.Empty));
             DataSystemModel model = this[name];
+
             if (model != null)
             {
-                model.Data = (fallbackState == FallbackState.None) ? newData : (!string.IsNullOrEmpty(newData) ? newData : GetFallbackResourceString(fallbackState));
+                model.Data = targetData;
+                return model;
             }
-        }
 
-        private DataSystemModel CreateModelCollection(string name, string data, FallbackState fallbackState = FallbackState.None)
-        {
-            return new DataSystemModel
-            {
-                Name = name,
-                Data = (fallbackState == FallbackState.None) ? data : (!string.IsNullOrEmpty(data) ? data : GetFallbackResourceString(fallbackState))
-            };
+            return new DataSystemModel { Name = name, Data = targetData };
         }
     }
 }
