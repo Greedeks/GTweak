@@ -521,6 +521,8 @@
     <v:String x:Key="title_ram_sysinfo">메모리:</v:String>
     <v:String x:Key="title_mtype_sysinfo">메모리 유형:</v:String>
     <v:String x:Key="title_storage_sysinfo">저장소 장치:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">Used:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">Free:</v:String>
     <v:String x:Key="title_sound_sysinfo">재생 장치:</v:String>
     <v:String x:Key="title_netadapter_sysinfo">네트워크 어댑터:</v:String>
     <v:String x:Key="title_ip_sysinfo">IP 주소:</v:String>
@@ -541,5 +543,6 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 

@@ -521,6 +521,8 @@
     <v:String x:Key="title_ram_sysinfo">Memória:</v:String>
     <v:String x:Key="title_mtype_sysinfo">Tipo de Memória:</v:String>
     <v:String x:Key="title_storage_sysinfo">Dispositivos de armazenamento:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">Usado:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">Livre:</v:String>
     <v:String x:Key="title_sound_sysinfo">Dispositivos de reprodução:</v:String>
     <v:String x:Key="title_netadapter_sysinfo">Adaptadores de rede:</v:String>
     <v:String x:Key="title_ip_sysinfo">Seu endereço IP:</v:String>
@@ -541,6 +543,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

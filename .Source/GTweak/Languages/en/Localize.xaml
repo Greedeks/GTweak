@@ -521,6 +521,8 @@
     <v:String x:Key="title_ram_sysinfo">Memory:</v:String>
     <v:String x:Key="title_mtype_sysinfo">Memory Type:</v:String>
     <v:String x:Key="title_storage_sysinfo">Storage devices:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">Used:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">Free:</v:String>
     <v:String x:Key="title_sound_sysinfo">Playback devices:</v:String>
     <v:String x:Key="title_netadapter_sysinfo">Network adapters:</v:String>
     <v:String x:Key="title_ip_sysinfo">Your IP address:</v:String>

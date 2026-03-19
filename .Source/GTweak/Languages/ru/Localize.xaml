@@ -521,6 +521,8 @@
     <v:String x:Key="title_ram_sysinfo">Оперативная память:</v:String>
     <v:String x:Key="title_mtype_sysinfo">Тип памяти:</v:String>
     <v:String x:Key="title_storage_sysinfo">Устройства хранения данных:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">Использовано:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">Свободно:</v:String>
     <v:String x:Key="title_sound_sysinfo">Устройства воспроизведения:</v:String>
     <v:String x:Key="title_netadapter_sysinfo">Сетевые адаптеры:</v:String>
     <v:String x:Key="title_ip_sysinfo">Ваш IP адрес:</v:String>
@@ -541,6 +543,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

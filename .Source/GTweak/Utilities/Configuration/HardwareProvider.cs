@@ -98,8 +98,10 @@ namespace GTweak.Utilities.Configuration
         {
             if (deviceType == DeviceType.Storage || deviceType == DeviceType.All)
             {
-                string value = GetStorageDevices();
-                Storage = value;
+                var (Data, FreePercentage, UsedPercentage) = GetStorageDevices();
+                Storage.Data = Data;
+                Storage.FreeSpace = FreePercentage;
+                Storage.UsedSpace = UsedPercentage;
             }
 
             if (deviceType == DeviceType.Audio || deviceType == DeviceType.All)
@@ -334,46 +336,7 @@ namespace GTweak.Utilities.Configuration
                     {
                         string speedData = new string[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
                         string data = new string[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
-                        string memoryType = Convert.ToUInt32(managementObj["SMBIOSMemoryType"] ?? 0u) switch
-                        {
-                            2 => "DRAM",
-                            3 => "EDRAM",
-                            4 => "VRAM",
-                            5 => "SRAM",
-                            6 => "RAM",
-                            7 => "ROM",
-                            8 => "Flash",
-                            9 => "EEPROM",
-                            10 => "FEPROM",
-                            11 => "EPROM",
-                            12 => "CDRAM",
-                            13 => "3DRAM",
-                            14 => "SDRAM",
-                            15 => "SGRAM",
-                            16 => "RDRAM",
-                            17 => "DDR",
-                            18 => "DDR2",
-                            19 => "DDR2 FB-DIMM",
-                            20 => "Reserved",
-                            21 => "Reserved",
-                            22 => "FBD2",
-                            23 => "DDR3",
-                            24 => "DDR3",
-                            uint type when type == 25 || type == 26 => "DDR4",
-                            27 => "LPDDR",
-                            28 => "LPDDR2",
-                            29 => "LPDDR3",
-                            30 => "LPDDR4",
-                            31 => "LPDDR4X",
-                            32 => "Logical Non-Volatile",
-                            33 => "HBM",
-                            34 => "DDR5",
-                            35 => "LPDDR5",
-                            36 => "LPDDR5X",
-                            _ => string.Empty,
-                        };
-
-                        Memory.Type = memoryType;
+                        Memory.Type = HardwareMappings.GetMemoryType(Convert.ToUInt32(managementObj["SMBIOSMemoryType"] ?? 0u));
                         Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper(Convert.ToUInt64(managementObj["Capacity"] ?? 0UL))}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
                     }
                 }
@@ -386,17 +349,36 @@ namespace GTweak.Utilities.Configuration
         /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
         /// </summary>
         /// 
-        private string GetStorageDevices()
+        private (string Data, string FreePercentage, string UsedPercentage) GetStorageDevices()
         {
             StringBuilder result = new StringBuilder();
 
+            long totalSize = 0;
+            long totalFreeSpace = 0;
+
+            foreach (var drive in DriveInfo.GetDrives())
+            {
+                try
+                {
+                    if (drive.IsReady && (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Removable))
+                    {
+                        totalSize += drive.TotalSize;
+                        totalFreeSpace += drive.TotalFreeSpace;
+                    }
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            }
+
+            string freePercent = totalSize > 0 ? $"{(Math.Round((double)totalFreeSpace / totalSize * 100, 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
+            string usedPercent = totalSize > 0 ? $"{(Math.Round(100 - ((double)totalFreeSpace / totalSize * 100), 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
+
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
-                string storageType = StorageTypeMappings.MediaTypeMap.FirstOrDefault(x => x.Keys != null && x.Keys.Any(k => k is string ks && mediaType is string ms ? string.Equals(ks, ms, StringComparison.OrdinalIgnoreCase) : Equals(k, mediaType))).Type ?? StorageTypeLabels.Unspecified;
+                string storageType = HardwareMappings.MediaTypeMap.FirstOrDefault(x => x.Keys != null && x.Keys.Any(k => k is string ks && mediaType is string ms ? string.Equals(ks, ms, StringComparison.OrdinalIgnoreCase) : Equals(k, mediaType))).Type ?? StorageTypeLabels.Unspecified;
 
                 if (isMsftAvailable)
                 {
-                    storageType = StorageTypeMappings.BusTypeMap.FirstOrDefault(map => map.BusType == busType).StorageType ?? StorageTypeLabels.Unspecified;
+                    storageType = HardwareMappings.BusTypeMap.FirstOrDefault(map => map.BusType == busType).StorageType ?? StorageTypeLabels.Unspecified;
                 }
                 else
                 {
@@ -456,7 +438,7 @@ namespace GTweak.Utilities.Configuration
                 }
             }
 
-            return result.ToString().TrimEnd('\n', '\r');
+            return (result.ToString().TrimEnd('\n', '\r'), freePercent, usedPercent);
         }
 
         /// <summary>

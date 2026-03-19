@@ -34,6 +34,13 @@ namespace GTweak.Utilities.Configuration
             internal string Type { get; set; } = string.Empty;
         }
 
+        internal sealed class StorageInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string UsedSpace { get; set; } = string.Empty;
+            internal string FreeSpace { get; set; } = string.Empty;
+        }
+
         internal enum ConnectionStatus { Available, Lose, Block, Limited, }
 
         internal static OperatingSystemInfo OS { get; set; } = new OperatingSystemInfo();
@@ -46,7 +53,7 @@ namespace GTweak.Utilities.Configuration
         internal static string Graphics { get; set; } = string.Empty;
         internal static string MonitorRefreshRate { get; set; } = string.Empty;
         internal static MemoryInfo Memory { get; set; } = new MemoryInfo();
-        internal static string Storage { get; set; } = string.Empty;
+        internal static StorageInfo Storage { get; set; } = new StorageInfo();
         internal static string AudioDevice { get; set; } = string.Empty;
         internal static string NetworkAdapter { get; set; } = string.Empty;
         internal static string UserIPAddress { get; set; } = string.Empty;
@@ -73,7 +80,7 @@ namespace GTweak.Utilities.Configuration
             internal const string VHDX = "(VHDX)";
         }
 
-        internal static class StorageTypeMappings
+        internal static class HardwareMappings
         {
             internal static readonly (object[] Keys, string Type)[] MediaTypeMap = new (object[] Keys, string Type)[]
             {
@@ -87,6 +94,46 @@ namespace GTweak.Utilities.Configuration
                 (7, StorageTypeLabels.USB),
                 (12, StorageTypeLabels.SD),
                 (17, StorageTypeLabels.NVMe)
+            };
+
+            internal static string GetMemoryType(uint smbiosMemoryType) => smbiosMemoryType switch
+            {
+                2 => "DRAM",
+                3 => "EDRAM",
+                4 => "VRAM",
+                5 => "SRAM",
+                6 => "RAM",
+                7 => "ROM",
+                8 => "Flash",
+                9 => "EEPROM",
+                10 => "FEPROM",
+                11 => "EPROM",
+                12 => "CDRAM",
+                13 => "3DRAM",
+                14 => "SDRAM",
+                15 => "SGRAM",
+                16 => "RDRAM",
+                17 => "DDR",
+                18 => "DDR2",
+                19 => "DDR2 FB-DIMM",
+                20 => "Reserved",
+                21 => "Reserved",
+                22 => "FBD2",
+                23 => "DDR3",
+                24 => "DDR3",
+                25 => "DDR4",
+                26 => "DDR4",
+                27 => "LPDDR",
+                28 => "LPDDR2",
+                29 => "LPDDR3",
+                30 => "LPDDR4",
+                31 => "LPDDR4X",
+                32 => "Logical Non-Volatile",
+                33 => "HBM",
+                34 => "DDR5",
+                35 => "LPDDR5",
+                36 => "LPDDR5X",
+                _ => string.Empty,
             };
         }
     }

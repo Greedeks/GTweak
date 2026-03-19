@@ -243,7 +243,7 @@ namespace GTweak.Utilities.Configuration
             {
                 await Task.Run(() =>
                 {
-                    WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(1), filter);
+                    WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(2), filter);
                     ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope ?? @"root\cimv2"), query);
                     void handler(object s, EventArrivedEventArgs e)
                     {

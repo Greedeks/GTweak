@@ -521,6 +521,8 @@
     <v:String x:Key="title_ram_sysinfo">Memória:</v:String>
     <v:String x:Key="title_mtype_sysinfo">Memória típusa:</v:String>
     <v:String x:Key="title_storage_sysinfo">Tárolóeszközök:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">Used:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">Free:</v:String>
     <v:String x:Key="title_sound_sysinfo">Lejátszó eszközök:</v:String>
     <v:String x:Key="title_netadapter_sysinfo">Hálózati adapterek:</v:String>
     <v:String x:Key="title_ip_sysinfo">Az Ön IP-címe:</v:String>
@@ -541,6 +543,7 @@
     <!--#endregion-->
     
 </ResourceDictionary>
+
 
 
 

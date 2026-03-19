@@ -521,6 +521,8 @@
     <v:String x:Key="title_ram_sysinfo">記憶體：</v:String>
     <v:String x:Key="title_mtype_sysinfo">記憶體類型：</v:String>
     <v:String x:Key="title_storage_sysinfo">儲存裝置：</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">已使用：</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">可用：</v:String>
     <v:String x:Key="title_sound_sysinfo">播放裝置：</v:String>
     <v:String x:Key="title_netadapter_sysinfo">網路介面卡：</v:String>
     <v:String x:Key="title_ip_sysinfo">您的 IP 位址：</v:String>
@@ -541,6 +543,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

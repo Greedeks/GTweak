@@ -93,7 +93,9 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("RefreshRate", () => HardwareData.MonitorRefreshRate, FallbackKeys.Unknown, true),
                 CreateModelCollection("Memory", () => HardwareData.Memory.Data, FallbackKeys.NoDevice),
                 CreateModelCollection("Type", () => HardwareData.Memory.Type, FallbackKeys.Unknown),
-                CreateModelCollection("Storage", () => HardwareData.Storage, FallbackKeys.NoDevice, true),
+                CreateModelCollection("Storage", () => HardwareData.Storage.Data, FallbackKeys.NoDevice, true),
+                CreateModelCollection("UsedSpace", () => HardwareData.Storage.UsedSpace, FallbackKeys.Unknown, true),
+                CreateModelCollection("FreeSpace", () => HardwareData.Storage.FreeSpace, FallbackKeys.Unknown, true),
                 CreateModelCollection("Audio", () => HardwareData.AudioDevice, FallbackKeys.NoDriver, true),
                 CreateModelCollection("Network", () => HardwareData.NetworkAdapter, FallbackKeys.NoDriver, true),
                 (_ipAddressModel = CreateModelCollection("IpAddress", () => HardwareData.UserIPAddress, FallbackKeys.ConnectionLost, true))
