@@ -191,7 +191,11 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                            <TextBlock Text="{Binding [Motherboard].Data}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
+                                <Run Text="{Binding [Motherboard].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                <Run Text="{DynamicResource title_chipset_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                <Run Text="{Binding [Chipset].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                            </TextBlock>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Margin="0,20,0,0">

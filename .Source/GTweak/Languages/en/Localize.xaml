@@ -513,6 +513,7 @@
     <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
     <v:String x:Key="title_mode_sysinfo">Mode:</v:String>
     <v:String x:Key="title_motherbr_sysinfo">Motherboard:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">Chipset:</v:String>
     <v:String x:Key="title_cpu_sysinfo">Processor:</v:String>
     <v:String x:Key="title_cores_sysinfo">Cores:</v:String>
     <v:String x:Key="title_threads_sysinfo">Threads:</v:String>

@@ -1,4 +1,5 @@
 using System;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -206,7 +207,7 @@ namespace GTweak.Utilities.Configuration
 
         private void GetMotherboardInfo()
         {
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }))
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Product, Version, SerialNumber from Win32_BaseBoard", new EnumerationOptions { ReturnImmediately = true }))
             {
                 foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
@@ -214,12 +215,60 @@ namespace GTweak.Utilities.Configuration
                     {
                         string data = $"{managementObj["Manufacturer"]?.ToString() ?? string.Empty} {managementObj["Product"]?.ToString() ?? string.Empty}";
                         string dataVersion = managementObj["Version"]?.ToString() ?? string.Empty;
-                        Motherboard += !string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace) ? $"{data}, V{dataVersion}\n" : $"{data}\n";
+                        string dataSN = managementObj["SerialNumber"]?.ToString() ?? string.Empty;
+                        Motherboard.Data = $"{data}".Trim();
+
+                        if (!string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace))
+                        {
+                            Motherboard.Data += $", V{dataVersion}";
+                        }
+                        else if (!string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace))
+                        {
+                            Motherboard.Data += $", S/N-{dataSN}";
+                        }
+
+
                     }
                 }
             }
-            Motherboard = Motherboard.TrimEnd('\n', '\r');
+            Motherboard.Data = Motherboard.Data.TrimEnd('\n', '\r');
+
+            bool chipsetFound = false;
+            using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Enum\PCI");
+            if (baseKey != null)
+            {
+                foreach (string deviceId in baseKey.GetSubKeyNames())
+                {
+                    if (!chipsetFound)
+                    {
+                        using RegistryKey deviceKey = baseKey.OpenSubKey(deviceId);
+                        if (deviceKey != null)
+                        {
+                            foreach (string subId in deviceKey.GetSubKeyNames())
+                            {
+                                using RegistryKey subKey = deviceKey.OpenSubKey(subId);
+                                string deviceDesc = subKey?.GetValue("DeviceDesc")?.ToString() ?? string.Empty;
+                                string friendlyName = subKey?.GetValue("FriendlyName")?.ToString() ?? string.Empty;
+                                string targetString = deviceDesc.Contains("LPC") ? deviceDesc : (friendlyName.Contains("LPC") ? friendlyName : string.Empty);
+
+                                if (!string.IsNullOrWhiteSpace(targetString))
+                                {
+                                    string chipset = ParseChipset(targetString) ?? string.Empty;
+
+                                    if (!string.IsNullOrEmpty(chipset))
+                                    {
+                                        Motherboard.Chipset = chipset;
+                                        chipsetFound = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+
         private void GetProcessorInfo()
         {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }))
@@ -348,7 +397,6 @@ namespace GTweak.Utilities.Configuration
         /// <summary>
         /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
         /// </summary>
-        /// 
         private (string Data, string FreePercentage, string UsedPercentage) GetStorageDevices()
         {
             StringBuilder result = new StringBuilder();
@@ -521,22 +569,6 @@ namespace GTweak.Utilities.Configuration
             return result.ToString().TrimEnd('\n', '\r');
         }
 
-        private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible
-        {
-            decimal bytes = ((IConvertible)sizeInBytes).ToDecimal(null);
-
-            foreach (string unit in new[] { "B", "KB", "MB", "GB", "TB" })
-            {
-                if (bytes < 1024 || unit == "TB")
-                {
-                    return unit == "TB" ? $"{Math.Round(bytes, 2):G} {unit}" : $"{Math.Round(bytes):N0} {unit}";
-                }
-                bytes /= 1024;
-            }
-
-            return $"{Math.Round(bytes, 2):G} TB";
-        }
-
         private string GetNetworkAdapters()
         {
             StringBuilder result = new StringBuilder();
@@ -553,6 +585,41 @@ namespace GTweak.Utilities.Configuration
             }
 
             return result.ToString().TrimEnd('\n', '\r');
+        }
+
+        private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible
+        {
+            decimal bytes = ((IConvertible)sizeInBytes).ToDecimal(null);
+
+            foreach (string unit in new[] { "B", "KB", "MB", "GB", "TB" })
+            {
+                if (bytes < 1024 || unit == "TB")
+                {
+                    return unit == "TB" ? $"{Math.Round(bytes, 2):G} {unit}" : $"{Math.Round(bytes):N0} {unit}";
+                }
+                bytes /= 1024;
+            }
+
+            return $"{Math.Round(bytes, 2):G} TB";
+        }
+
+        private string ParseChipset(string rawCaption)
+        {
+            if (!string.IsNullOrWhiteSpace(rawCaption))
+            {
+                Match match = Regex.Match(rawCaption, @"\((?<res>(?=[^)]*\d)[^)]{3,})\)|\b(?<res>[A-Z]{1,2}\d{2,4}[A-Z]?)\b");
+                if (match.Success)
+                {
+                    return match.Groups["res"].Value;
+                }
+
+                string clean = Regex.Replace(rawCaption, @"\([RTMtm]+\)|(?i:\b(Intel|AMD|NVIDIA|VIA|Series|Chipset|Family|LPC|Controller|Interface|Bridge|Host|Standard)\b)", "");
+                clean = Regex.Replace(clean, @"[()\[\]\-\s]+", " ").Trim();
+
+                return clean.Length > 2 ? clean : rawCaption;
+            }
+
+            return string.Empty;
         }
     }
 }

@@ -19,6 +19,12 @@ namespace GTweak.Utilities.Configuration
             internal string Mode { get; set; } = string.Empty;
         }
 
+        internal sealed class MotherboardInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string Chipset { get; set; } = string.Empty;
+        }
+
         internal sealed class ProcessorInfo
         {
             internal string Data { get; set; } = string.Empty;
@@ -49,7 +55,7 @@ namespace GTweak.Utilities.Configuration
         internal static string RunningServicesCount { get; set; } = string.Empty;
         internal static BiosInfo Bios { get; set; } = new BiosInfo();
         internal static ProcessorInfo Processor { get; set; } = new ProcessorInfo();
-        internal static string Motherboard { get; set; } = string.Empty;
+        internal static MotherboardInfo Motherboard { get; set; } = new MotherboardInfo();
         internal static string Graphics { get; set; } = string.Empty;
         internal static string MonitorRefreshRate { get; set; } = string.Empty;
         internal static MemoryInfo Memory { get; set; } = new MemoryInfo();

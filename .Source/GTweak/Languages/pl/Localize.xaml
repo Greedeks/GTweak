@@ -513,6 +513,7 @@
     <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
     <v:String x:Key="title_mode_sysinfo">Tryb:</v:String>
     <v:String x:Key="title_motherbr_sysinfo">Płyta główna:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">Chipset:</v:String>
     <v:String x:Key="title_cpu_sysinfo">Procesor:</v:String>
     <v:String x:Key="title_cores_sysinfo">Rdzenie:</v:String>
     <v:String x:Key="title_threads_sysinfo">Wątki:</v:String>
@@ -543,6 +544,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

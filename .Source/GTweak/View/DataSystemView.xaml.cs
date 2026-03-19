@@ -71,7 +71,6 @@ namespace GTweak.View
                             _hardwareProvider.GetProcessCount(), _hardwareProvider.GetServicesCount());
                     });
 
-
                     _ = Dispatcher.BeginInvoke(new Action(() =>
                     {
                         AnimateArcProgress(CPULoad, HardwareData.Processor.Usage);

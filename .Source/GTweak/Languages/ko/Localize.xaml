@@ -513,6 +513,7 @@
     <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
     <v:String x:Key="title_mode_sysinfo">모드:</v:String>
     <v:String x:Key="title_motherbr_sysinfo">머더보드:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">Chipset:</v:String>
     <v:String x:Key="title_cpu_sysinfo">프로세스:</v:String>
     <v:String x:Key="title_cores_sysinfo">코어:</v:String>
     <v:String x:Key="title_threads_sysinfo">스레드:</v:String>
@@ -543,6 +544,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

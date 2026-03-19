@@ -513,6 +513,7 @@
     <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
     <v:String x:Key="title_mode_sysinfo">Режим:</v:String>
     <v:String x:Key="title_motherbr_sysinfo">Материнська плата:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">Чіпсет:</v:String>
     <v:String x:Key="title_cpu_sysinfo">Процесор:</v:String>
     <v:String x:Key="title_cores_sysinfo">Ядра:</v:String>
     <v:String x:Key="title_threads_sysinfo">Потоки:</v:String>
@@ -543,6 +544,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 
