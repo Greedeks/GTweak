@@ -54,14 +54,14 @@ namespace GTweak.Windows
 
             ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
             ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
-            ExecuteWithLogging(_hardwareProvider.GetHardwareData, nameof(_hardwareProvider.GetHardwareData));
             ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
             ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
             ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
             ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
             ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
-            ExecuteWithLogging(() => HardwareData.RunningProcessesCount = _hardwareProvider.GetProcessCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetProcessCount));
-            ExecuteWithLogging(() => HardwareData.RunningServicesCount = _hardwareProvider.GetServicesCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetServicesCount));
+            ExecuteWithLogging(_hardwareProvider.GetHardwareData, nameof(_hardwareProvider.GetHardwareData));
+            ExecuteWithLogging(() => _hardwareProvider.GetProcessCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetProcessCount));
+            ExecuteWithLogging(() => _hardwareProvider.GetServicesCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetServicesCount));
             ExecuteWithLogging(() => _hardwareProvider.ValidateVersionUpdates().GetAwaiter().GetResult(), nameof(_hardwareProvider.ValidateVersionUpdates));
             ExecuteWithLogging(() => _hardwareProvider.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetTotalProcessorUsage));
             ExecuteWithLogging(() => _hardwareProvider.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetPhysicalAvailableMemory));

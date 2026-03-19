@@ -91,9 +91,9 @@ namespace GTweak.Utilities.Configuration
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool GetSystemTimes(out SystemTime lpIdleTime, out SystemTime lpKernelTime, out SystemTime lpUserTime);
 
-        internal async Task<string> GetProcessCount()
+        internal Task GetProcessCount()
         {
-            return await Task.Run(() =>
+            return Task.Run(() =>
             {
                 const uint initialCapacity = 1024;
                 uint capacity = initialCapacity;
@@ -122,18 +122,19 @@ namespace GTweak.Utilities.Configuration
 
                     if (bytesNeeded < capacity * sizeof(uint))
                     {
-                        return (bytesNeeded / sizeof(uint)).ToString();
+                        RunningProcessesCount = ((int)(bytesNeeded / sizeof(uint))).ToString();
+                        return;
                     }
 
                     capacity = bytesNeeded / sizeof(uint) + 1;
                     buffer = new uint[capacity];
                 }
 
-                return Process.GetProcesses().Length.ToString();
-            }).ConfigureAwait(false);
+                RunningProcessesCount = Process.GetProcesses().Length.ToString();
+            });
         }
 
-        internal async Task<string> GetServicesCount()
+        internal async Task GetServicesCount()
         {
             int running = 0;
 
@@ -150,7 +151,7 @@ namespace GTweak.Utilities.Configuration
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }).ToArray()).ConfigureAwait(false);
 
-            return running.ToString();
+            RunningServicesCount = running.ToString();
         }
 
         internal async Task GetPhysicalAvailableMemory()

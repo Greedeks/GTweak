@@ -67,12 +67,10 @@ namespace GTweak.View
                 {
                     await backgroundQueue.QueueTask(async () =>
                     {
-                        await _hardwareProvider.GetTotalProcessorUsage();
-                        await _hardwareProvider.GetPhysicalAvailableMemory();
+                        await Task.WhenAll(_hardwareProvider.GetTotalProcessorUsage(), _hardwareProvider.GetPhysicalAvailableMemory(),
+                            _hardwareProvider.GetProcessCount(), _hardwareProvider.GetServicesCount());
                     });
 
-                    HardwareData.RunningProcessesCount = await Task.Run(() => _hardwareProvider.GetProcessCount());
-                    HardwareData.RunningServicesCount = await Task.Run(() => _hardwareProvider.GetServicesCount());
 
                     _ = Dispatcher.BeginInvoke(new Action(() =>
                     {
