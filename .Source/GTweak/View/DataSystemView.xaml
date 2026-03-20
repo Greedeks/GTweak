@@ -171,7 +171,7 @@
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
                                     <Run Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                    <Run Text="{DynamicResource title_mode_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                    <Run Text="{DynamicResource title_mode_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                     <Run Text="{Binding [Mode].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
@@ -193,7 +193,7 @@
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
                                 <Run Text="{Binding [Motherboard].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_chipset_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                <Run Text="{DynamicResource title_chipset_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                 <Run Text="{Binding [Chipset].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
@@ -215,10 +215,10 @@
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
                                     <Run Text="{Binding [Processor].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                    <Run Text="{DynamicResource title_cores_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                    <Run Text="{DynamicResource title_cores_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                     <Run Text="{Binding [Cores].Data}"/>
                                     <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
-                                    <Run Text="{DynamicResource title_threads_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                    <Run Text="{DynamicResource title_threads_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                     <Run Text="{Binding [Threads].Data}"/>
                             </TextBlock>
                         </StackPanel>
@@ -240,7 +240,7 @@
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
                                 <Run Text="{Binding [Graphics].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_refreshrate_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                <Run Text="{DynamicResource title_refreshrate_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                 <Run Text="{Binding [RefreshRate].Data}"/>
                             </TextBlock>
                         </StackPanel>
@@ -262,7 +262,7 @@
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
                                     <Run Text="{Binding [Memory].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                    <Run Text="{DynamicResource title_mtype_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                    <Run Text="{DynamicResource title_mtype_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                     <Run Text="{Binding [Type].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
@@ -288,13 +288,12 @@
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
                                  <Run Text="{Binding [Storage].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                 <Run Text="{DynamicResource title_storage_used_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
-                                 <Run Text="{Binding [UsedSpace].Data}"/>
-                                 <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
-                                 <Run Text="{DynamicResource title_storage_free_sysinfo}" Foreground="{StaticResource Brush_Accent}"/>
+                                 <Run Text="{DynamicResource title_storage_free_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                  <Run Text="{Binding [FreeSpace].Data}"/>
+                                 <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
+                                 <Run Text="{DynamicResource title_storage_used_sysinfo}"  Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                 <Run Text="{Binding [UsedSpace].Data}"/>
                             </TextBlock>
-
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Margin="0,20,0,0">

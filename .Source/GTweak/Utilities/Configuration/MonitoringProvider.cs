@@ -18,7 +18,7 @@ namespace GTweak.Utilities.Configuration
         private readonly List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)> _watcherHandler = new List<(ManagementEventWatcher watcher, EventArrivedEventHandler handler)>();
         private readonly ServiceController[] _servicesList = ServiceController.GetServices();
 
-        internal enum DeviceType { All, Storage, Audio, Network }
+        internal enum DeviceType { All, Storage, StorageSpace, Audio, Network }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct DEVMODE
@@ -225,25 +225,27 @@ namespace GTweak.Utilities.Configuration
 
         internal async Task StartDeviceMonitoring()
         {
-            await Task.WhenAll(new List<(string filter, DeviceType type, string scope)>
+            await Task.WhenAll(new List<(string eventClass, TimeSpan within, string condition, DeviceType type, string scope)>
             {
-                ($"TargetInstance ISA {(HardwareProvider.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, HardwareProvider.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
-                ("TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio, null),
-                ("TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null)
-            }.Select(device => Task.Run(() => SubscribeToDeviceEvents(device.filter, device.type, device.scope))).ToArray());
+                ("__InstanceOperationEvent", TimeSpan.FromSeconds(2), $"TargetInstance ISA {(HardwareProvider.isMsftAvailable ? "'MSFT_PhysicalDisk'" : "'Win32_DiskDrive'")}", DeviceType.Storage, HardwareProvider.isMsftAvailable ? @"root\microsoft\windows\storage" : null),
+                ("__InstanceOperationEvent", TimeSpan.FromSeconds(2), "TargetInstance ISA 'Win32_SoundDevice'", DeviceType.Audio, null),
+                ("__InstanceOperationEvent", TimeSpan.FromSeconds(2), "TargetInstance ISA 'Win32_NetworkAdapter' AND TargetInstance.NetConnectionStatus IS NOT NULL", DeviceType.Network, null),
+                ("__InstanceModificationEvent", TimeSpan.FromSeconds(5), "TargetInstance ISA 'Win32_LogicalDisk'", DeviceType.StorageSpace, null)
+
+            }.Select(device => Task.Run(() => SubscribeToDeviceEvents(device.eventClass, device.within, device.condition, device.type, device.scope))).ToArray());
 
             SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
         }
 
         private void OnDisplaySettingsChanged(object sender, EventArgs e) => GetPrimaryRefreshRate();
 
-        private async Task SubscribeToDeviceEvents(string filter, DeviceType type, string scope)
+        private async Task SubscribeToDeviceEvents(string eventClassName, TimeSpan within, string condition, DeviceType type, string scope)
         {
             try
             {
                 await Task.Run(() =>
                 {
-                    WqlEventQuery query = new WqlEventQuery("__InstanceOperationEvent", TimeSpan.FromSeconds(2), filter);
+                    WqlEventQuery query = new WqlEventQuery(eventClassName, within, condition);
                     ManagementEventWatcher managementEvent = new ManagementEventWatcher(new ManagementScope(scope ?? @"root\cimv2"), query);
                     void handler(object s, EventArrivedEventArgs e)
                     {
@@ -265,12 +267,12 @@ namespace GTweak.Utilities.Configuration
                 try
                 {
                     watcher.EventArrived -= handler;
-                    watcher.Stop();
-                    watcher.Dispose();
+                    watcher?.Stop();
+                    watcher?.Dispose();
                 }
                 catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
-            _watcherHandler.Clear();
+            _watcherHandler?.Clear();
             SystemEvents.DisplaySettingsChanged -= OnDisplaySettingsChanged;
         }
     }

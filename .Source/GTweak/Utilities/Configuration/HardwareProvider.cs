@@ -99,22 +99,24 @@ namespace GTweak.Utilities.Configuration
         {
             if (deviceType == DeviceType.Storage || deviceType == DeviceType.All)
             {
-                var (Data, FreePercentage, UsedPercentage) = GetStorageDevices();
-                Storage.Data = Data;
+                Storage.Data = GetStorageDevices();
+            }
+
+            if (deviceType == DeviceType.StorageSpace || deviceType == DeviceType.All || deviceType == DeviceType.Storage)
+            {
+                (string FreePercentage, string UsedPercentage) = GetStorageSpace();
                 Storage.FreeSpace = FreePercentage;
                 Storage.UsedSpace = UsedPercentage;
             }
 
             if (deviceType == DeviceType.Audio || deviceType == DeviceType.All)
             {
-                string value = GetAudioDevices();
-                AudioDevice = value;
+                AudioDevice = GetAudioDevices();
             }
 
             if (deviceType == DeviceType.Network || deviceType == DeviceType.All)
             {
-                string value = GetNetworkAdapters();
-                NetworkAdapter = value;
+                NetworkAdapter = GetNetworkAdapters();
             }
         }
 
@@ -397,28 +399,9 @@ namespace GTweak.Utilities.Configuration
         /// <summary>
         /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
         /// </summary>
-        private (string Data, string FreePercentage, string UsedPercentage) GetStorageDevices()
+        private string GetStorageDevices()
         {
             StringBuilder result = new StringBuilder();
-
-            long totalSize = 0;
-            long totalFreeSpace = 0;
-
-            foreach (var drive in DriveInfo.GetDrives())
-            {
-                try
-                {
-                    if (drive.IsReady && (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Removable))
-                    {
-                        totalSize += drive.TotalSize;
-                        totalFreeSpace += drive.TotalFreeSpace;
-                    }
-                }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-            }
-
-            string freePercent = totalSize > 0 ? $"{(Math.Round((double)totalFreeSpace / totalSize * 100, 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
-            string usedPercent = totalSize > 0 ? $"{(Math.Round(100 - ((double)totalFreeSpace / totalSize * 100), 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
 
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
@@ -486,7 +469,31 @@ namespace GTweak.Utilities.Configuration
                 }
             }
 
-            return (result.ToString().TrimEnd('\n', '\r'), freePercent, usedPercent);
+            return result.ToString().TrimEnd('\n', '\r');
+        }
+
+        private (string FreePercentage, string UsedPercentage) GetStorageSpace()
+        {
+            long totalSize = 0;
+            long totalFreeSpace = 0;
+
+            foreach (DriveInfo drive in DriveInfo.GetDrives())
+            {
+                try
+                {
+                    if (drive.IsReady && (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Removable))
+                    {
+                        totalSize += drive.TotalSize;
+                        totalFreeSpace += drive.TotalFreeSpace;
+                    }
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            }
+
+            string freePercent = totalSize > 0 ? $"{(Math.Round((double)totalFreeSpace / totalSize * 100, 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
+            string usedPercent = totalSize > 0 ? $"{(Math.Round(100 - ((double)totalFreeSpace / totalSize * 100), 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
+
+            return (freePercent, usedPercent);
         }
 
         /// <summary>
