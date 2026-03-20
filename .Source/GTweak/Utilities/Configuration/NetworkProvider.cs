@@ -174,39 +174,42 @@ namespace GTweak.Utilities.Configuration
                         request.Headers.Add("User-Agent", "GTweak");
                         request.Headers.Add("Accept", "application/json");
 
-                        using HttpResponseMessage response = await sharedClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
-                        response.EnsureSuccessStatusCode();
-
-                        string json = await response.Content.ReadAsStringAsync();
-                        GitMetadata latest = null;
-
-                        if (api.Contains("github"))
+                        using HttpResponseMessage response = await sharedClient.SendAsync(request);
+                        if (response.IsSuccessStatusCode)
                         {
-                            latest = JsonConvert.DeserializeObject<GitMetadata>(json);
-                        }
-                        else
-                        {
-                            List<GitLabMetadata> releases = JsonConvert.DeserializeObject<List<GitLabMetadata>>(json);
-                            latest = releases?.FirstOrDefault();
+                            string json = await response.Content.ReadAsStringAsync();
+                            string foundVersion = string.Empty, foundUrl = string.Empty;
 
-                            if (latest is GitLabMetadata gitLabMetadata && !string.IsNullOrEmpty(gitLabMetadata.Description))
+                            if (api.Contains("github"))
                             {
-                                Match match = Regex.Match(gitLabMetadata.Description, @"\[(?<name>.*?)\]\(/uploads/(?<hash>.+?)\)");
-
-                                if (match.Success)
+                                GitMetadata latest = JsonConvert.DeserializeObject<GitMetadata>(json);
+                                foundVersion = latest?.CurrentVersion;
+                                foundUrl = PathLocator.Links.LatestUpdate.GitHub;
+                            }
+                            else
+                            {
+                                List<GitLabMetadata> releases = JsonConvert.DeserializeObject<List<GitLabMetadata>>(json);
+                                GitLabMetadata latest = releases?.FirstOrDefault();
+                                if (latest != null)
                                 {
-                                    string hashFile = match.Groups["hash"].Value;
-                                    PathLocator.Links.GitLabLatest = (true, $"{PathLocator.Links.GitLabLatest.Url}{hashFile}");
+                                    foundVersion = latest.CurrentVersion;
+                                    Match match = Regex.Match(latest.Description ?? "", @"\[.*?\]\(/uploads/(?<hash>.+?)\)");
+                                    if (match.Success)
+                                    {
+                                        foundUrl = $"{PathLocator.Links.LatestUpdate.GitLabBase}{match.Groups["hash"].Value}";
+                                    }
                                 }
                             }
-                        }
 
-                        if (latest != null && !string.IsNullOrWhiteSpace(latest.CurrentVersion))
-                        {
-                            if (new Version(latest.CurrentVersion) > new Version(SettingsEngine.CurrentRelease.Short))
+                            if (!string.IsNullOrEmpty(foundUrl))
                             {
-                                IsNeedUpdate = true;
-                                DownloadVersion = latest.CurrentVersion;
+                                PathLocator.Links.LatestUpdate.Resolved = foundUrl;
+
+                                if (new Version(foundVersion) > new Version(SettingsEngine.CurrentRelease.Short))
+                                {
+                                    IsNeedUpdate = true;
+                                    DownloadVersion = foundVersion;
+                                }
                                 break;
                             }
                         }

@@ -44,7 +44,7 @@ namespace GTweak.Windows
                 {
                     CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsEngine.CurrentName}\" && timeout /t 2 && del \"{SettingsEngine.CurrentLocation}\" && ren {tempFileName} \"{SettingsEngine.CurrentName}\" && \"{SettingsEngine.CurrentLocation}\"");
                 };
-                webClient.DownloadFileAsync(new Uri(PathLocator.Links.GitLabLatest.Created == false ? PathLocator.Links.GitHubLatest : PathLocator.Links.GitLabLatest.Url), tempFileName);
+                webClient.DownloadFileAsync(new Uri(PathLocator.Links.LatestUpdate.Resolved), tempFileName);
             }
             catch
             {

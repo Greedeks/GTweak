@@ -338,9 +338,7 @@ namespace GTweak.Utilities.Controls
 
             internal const string Steam = "https://steamcommunity.com/id/greedeks/";
 
-            internal const string GitHubLatest = "https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe";
-
-            internal static (bool Created, string Url) GitLabLatest = (false, "https://gitlab.com/-/project/79375382/uploads/");
+            internal static (string GitHub, string GitLabBase, string Resolved) LatestUpdate = ("https://github.com/Greedeks/GTweak/releases/latest/download/GTweak.exe", "https://gitlab.com/-/project/79375382/uploads/", GitHub);
 
             internal static readonly IReadOnlyList<string> ReleaseApi = Array.AsReadOnly(new[]
             {
