@@ -53,42 +53,59 @@ namespace GTweak.Utilities.Managers
             ["Edge"] = ExplorerAction.Restart
         };
 
-        private static int _restartToken = 0;
+        private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+        private static readonly object _lockObj = new object();
+        private static CancellationTokenSource _restartDelayCts;
+        private static Action _pendingActions;
 
         internal static void Restart(Action action = null)
         {
-            if (Interlocked.CompareExchange(ref _restartToken, 1, 0) != 1)
+            lock (_lockObj)
             {
-                Task.Run(async delegate
+                if (action != null)
                 {
-                    foreach (Process process in Process.GetProcesses())
+                    _pendingActions += action;
+                }
+
+                _restartDelayCts?.Cancel();
+                _restartDelayCts = new CancellationTokenSource();
+                var token = _restartDelayCts.Token;
+
+                Task.Run(async () =>
+                {
+                    try
                     {
+                        await Task.Delay(500, token);
+                        await _semaphore.WaitAsync(token);
+
                         try
                         {
-                            if (string.Compare(process.MainModule?.FileName, PathLocator.Executable.Explorer, StringComparison.OrdinalIgnoreCase) == 0 && Process.GetProcessesByName("explorer").Length != 0)
+                            Action capturedActions;
+                            lock (_lockObj)
                             {
-                                process.Kill();
-                                action?.Invoke();
-                                process.Dispose();
+                                capturedActions = _pendingActions;
+                                _pendingActions = null;
                             }
+
+                            foreach (Process process in Process.GetProcessesByName("explorer"))
+                            {
+                                try { process.Kill(); }
+                                finally { process.Dispose(); }
+                            }
+
+                            try { capturedActions?.Invoke(); }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+
+                            using Process launchExplorer = new Process();
+                            launchExplorer.StartInfo.FileName = PathLocator.Executable.Explorer;
+                            launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
+                            launchExplorer.StartInfo.UseShellExecute = true;
+                            launchExplorer.Start();
                         }
-                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        finally { _semaphore.Release(); }
                     }
-
-                    if (Process.GetProcessesByName("explorer").Length == 0)
-                    {
-                        using Process launchExplorer = new Process();
-                        launchExplorer.StartInfo.FileName = PathLocator.Executable.Explorer;
-                        launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
-                        launchExplorer.StartInfo.UseShellExecute = true;
-                        try { launchExplorer.Start(); }
-                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                    }
-
-                    await Task.Delay(1500);
-
-                    Interlocked.Exchange(ref _restartToken, 0);
-                });
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                }, token);
             }
         }
 
