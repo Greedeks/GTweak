@@ -318,26 +318,35 @@ namespace GTweak.Assets.UserControls
 
         private void ArrangeVertical(List<FlowItemGroup> groups, double availableWidth)
         {
-            double contentWidth = CalculateTotalWidth(groups);
-            double extraSpaceV = Math.Max(0, availableWidth - contentWidth);
-            double xV = ContentAlignment switch
+            if (groups != null && groups.Count != 0)
             {
-                HorizontalAlignment.Center => extraSpaceV / 2.0,
-                HorizontalAlignment.Right => extraSpaceV,
-                _ => 0
-            };
-
-            for (int i = 0; i < groups.Count; i++)
-            {
-                FlowItemGroup col = groups[i];
-                if (col != null && col.Elements.Count != 0)
+                double totalColumnsWidth = 0;
+                for (int i = 0; i < groups.Count; i++)
                 {
-                    double shift = 0;
-                    if (Orientation == FlowOrientation.Unset && groups.Count > 1 && i > 0)
+                    totalColumnsWidth += groups[i].Width;
+                    if (i < groups.Count - 1)
                     {
-                        double maxShiftPerColumn = col.Width * 0.2;
-                        double shareOfSpace = extraSpaceV * ((double)i / (groups.Count - 1)) * 0.3;
-                        shift = Math.Min(shareOfSpace, maxShiftPerColumn);
+                        totalColumnsWidth += HorizontalSpacing;
+                    }
+                }
+
+                double extraSpace = Math.Max(0, availableWidth - totalColumnsWidth);
+
+                double xV = ContentAlignment switch
+                {
+                    HorizontalAlignment.Center => extraSpace / 2.0,
+                    HorizontalAlignment.Right => extraSpace,
+                    _ => 0
+                };
+
+                for (int i = 0; i < groups.Count; i++)
+                {
+                    FlowItemGroup col = groups[i];
+
+                    double shift = 0;
+                    if (!EqualizeItemSize && groups.Count > 1)
+                    {
+                        shift = extraSpace * ((double)i / (groups.Count - 1)) * 0.3;
                     }
 
                     double columnX = xV + shift;
@@ -345,26 +354,14 @@ namespace GTweak.Assets.UserControls
 
                     foreach (UIElement child in col.Elements)
                     {
-                        if (child != null)
-                        {
-                            double w = GetChildWidth(child);
-                            double h = GetChildHeight(child);
+                        double w = GetChildWidth(child);
+                        double h = GetChildHeight(child);
 
-                            child.Arrange(new Rect(columnX, y, w, h));
-                            y += h + VerticalSpacing;
-                        }
+                        child.Arrange(new Rect(columnX, y, w, h));
+                        y += h + VerticalSpacing;
                     }
 
                     xV += col.Width + HorizontalSpacing;
-                }
-                else
-                {
-                    if (col != null)
-                    {
-                        xV += col.Width + HorizontalSpacing;
-                    }
-
-                    continue;
                 }
             }
         }
@@ -425,7 +422,7 @@ namespace GTweak.Assets.UserControls
 
             int maxPossibleColumns = Math.Max(1, (int)((availableWidth + HorizontalSpacing) / (basisWidth + HorizontalSpacing)));
 
-            for (int columnCount = maxPossibleColumns; columnCount >= 1; columnCount--)
+            for (int columnCount = Math.Min(maxPossibleColumns, visibleChildren.Count); columnCount >= 1; columnCount--)
             {
                 List<FlowItemGroup> columns = TryDistributeToColumns(columnCount, availableHeight, visibleChildren);
 
