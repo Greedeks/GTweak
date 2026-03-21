@@ -27,7 +27,9 @@ namespace GTweak.Utilities.Tweaks
                 ((HardwareData.OS.Build > 22621m && (RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}") ||
                 RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}"))) ||
                 (HardwareData.OS.Build <= 22621m && (RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}") ||
-                RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}"))));
+                RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}")))) ||
+                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Classes\CLSID\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}", "System.IsPinnedToNameSpaceTree", "0") ||
+                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Classes\CLSID\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}\ShellFolder", "Attributes", unchecked((int)0xB0940064).ToString());
 
             _сontrolWriter.Checkbox[2] = HardwareData.OS.IsWin11 &&
                 RegistryHelp.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}") ||
@@ -221,11 +223,14 @@ namespace GTweak.Utilities.Tweaks
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, $@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}");
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, $@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}");
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Classes\CLSID\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}", "System.IsPinnedToNameSpaceTree", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"Software\Classes\CLSID\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}\ShellFolder", "Attributes", unchecked((int)0xB0940064), RegistryValueKind.DWord);
                     }
                     else
                     {
                         RegistryHelp.Write(Registry.LocalMachine, $@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}", string.Empty, @"CLSID_MSGraphHomeFolder", RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, $@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\{baseKey}\{{f874310e-b6b7-47dc-bc84-b9e6b38f5903}}", string.Empty, @"CLSID_MSGraphHomeFolder", RegistryValueKind.String);
+                        RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"Software\Classes\CLSID\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}");
                     }
                     break;
                 case "Checkbox2":
