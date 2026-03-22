@@ -317,7 +317,11 @@ namespace GTweak.Utilities.Controls
         {
             internal static string Config = string.Empty;
 
-            internal static readonly string Hosts = Path.Combine(Environment.SystemDirectory, "drivers", "etc", "hosts");
+            internal static readonly (string Original, string Backup) Hosts =
+            (
+                Path.Combine(Environment.SystemDirectory, "drivers", "etc", "hosts"),
+                Path.Combine(Environment.SystemDirectory, "drivers", "etc", "hosts (Default GTweak)")
+            );
 
             internal static readonly string PowPlan = Path.Combine(Folders.Workspace, "UltimatePerformance.pow");
 

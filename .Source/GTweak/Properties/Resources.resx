@@ -121,11 +121,11 @@
   <data name="Blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Blank.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Blocklist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Blocklist.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="DisablingWD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DisablingWD.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="hosts" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hosts.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="NSudoLC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NSudoLC.gz;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

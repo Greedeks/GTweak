@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using GTweak.Properties;
 using GTweak.Utilities.Controls;
@@ -102,10 +103,34 @@ namespace GTweak.Utilities.Tweaks
         {
             try
             {
-                int numberRows = File.ReadAllText(PathLocator.Files.Hosts).Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Count(line => line.StartsWith("0.0.0.0"));
-                return numberRows < 673;
+                HashSet<string> resourceEntries = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (string line in Resources.Blocklist.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    string trimmed = line.Trim();
+                    if (trimmed.StartsWith("0.0.0.0"))
+                    {
+                        resourceEntries.Add(trimmed);
+                    }
+                }
+
+                if (resourceEntries.Count == 0)
+                {
+                    return true;
+                }
+
+                HashSet<string> fileEntries = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (string line in File.ReadLines(PathLocator.Files.Hosts.Original))
+                {
+                    string trimmed = line.Trim();
+                    if (trimmed.StartsWith("0.0.0.0"))
+                    {
+                        fileEntries.Add(trimmed);
+                    }
+                }
+
+                return !resourceEntries.IsSubsetOf(fileEntries);
             }
-            catch { return false; }
+            catch { return true; }
         }
 
         internal void ApplyTweaks(string tweak, bool isDisabled)
@@ -216,30 +241,57 @@ namespace GTweak.Utilities.Tweaks
                     BlockSpyDomain(isDisabled);
                     Task.Run(delegate
                     {
-                        string backupFile = PathLocator.Files.Hosts + @" (Default GTweak)";
                         try
                         {
                             if (isDisabled)
                             {
-                                if (File.Exists(backupFile))
+                                File.Copy(PathLocator.Files.Hosts.Original, PathLocator.Files.Hosts.Backup, true);
+
+                                string existingText = File.Exists(PathLocator.Files.Hosts.Original) ? File.ReadAllText(PathLocator.Files.Hosts.Original) : string.Empty;
+
+                                HashSet<string> existingEntries = new HashSet<string>(existingText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()), StringComparer.OrdinalIgnoreCase);
+
+                                StringBuilder blocklist = new StringBuilder();
+
+                                foreach (string line in Resources.Blocklist.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
                                 {
-                                    File.Delete(backupFile);
+                                    string trimmedLine = line.Trim();
+                                    if (!string.IsNullOrEmpty(trimmedLine) && existingEntries.Add(trimmedLine))
+                                    {
+                                        blocklist.AppendLine(trimmedLine);
+                                    }
                                 }
 
-                                File.Move(PathLocator.Files.Hosts, backupFile);
-                                ArchiveManager.Unarchive(PathLocator.Files.Hosts, Resources.hosts);
+                                if (blocklist.Length > 0)
+                                {
+                                    FileInfo fileInfo = new FileInfo(PathLocator.Files.Hosts.Original);
+
+                                    if (fileInfo.Exists && fileInfo.IsReadOnly)
+                                    {
+                                        fileInfo.IsReadOnly = false;
+                                    }
+
+                                    string prefix = string.Empty;
+                                    if (existingText.Length > 0)
+                                    {
+                                        string lastLine = existingText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()?.Trim() ?? string.Empty;
+                                        prefix = lastLine.StartsWith("0.0.0.0") ? existingText.EndsWith("\n") ? string.Empty : Environment.NewLine : existingText.EndsWith("\n") ? Environment.NewLine : Environment.NewLine + Environment.NewLine;
+                                    }
+
+                                    File.AppendAllText(PathLocator.Files.Hosts.Original, $"{prefix}{blocklist.ToString().TrimEnd()}");
+                                }
                             }
                             else
                             {
-                                File.Copy(backupFile, PathLocator.Files.Hosts, true);
+                                File.Copy(PathLocator.Files.Hosts.Backup, PathLocator.Files.Hosts.Original, true);
 
-                                if (File.Exists(backupFile))
+                                if (File.Exists(PathLocator.Files.Hosts.Backup))
                                 {
-                                    File.Delete(backupFile);
+                                    File.Delete(PathLocator.Files.Hosts.Backup);
                                 }
                                 else
                                 {
-                                    File.WriteAllText(PathLocator.Files.Hosts, string.Empty);
+                                    File.WriteAllText(PathLocator.Files.Hosts.Original, string.Empty);
                                 }
                             }
                         }

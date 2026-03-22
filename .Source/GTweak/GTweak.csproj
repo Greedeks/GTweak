@@ -494,14 +494,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include=".editorconfig" />
-    <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
     <None Include="Resources\Blank.gz" />
     <None Include="Resources\DisablingWD.gz" />
-    <None Include="Resources\hosts.gz" />
     <None Include="Resources\NSudoLC.gz" />
     <None Include="Resources\UltPower.gz" />
-    <Resource Include="Assets\Fonts\Jura-Medium.ttf" />
-    <Resource Include="Assets\Fonts\Play-Regular.ttf" />
+    <None Include="Resources\Blocklist.txt" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -528,6 +525,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="GTweak.ico" />
+    <Resource Include="Assets\Fonts\Jura-Medium.ttf" />
+    <Resource Include="Assets\Fonts\Play-Regular.ttf" />
+    <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
     <Resource Include="Assets\Images\AddonsFiles\BatFile.png" />
     <Resource Include="Assets\Images\AddonsFiles\CmdFile.png" />
     <Resource Include="Assets\Images\AddonsFiles\PowershellFile.png" />
