@@ -39,7 +39,7 @@ namespace GTweak.Windows
         }
 
         private const int WM_NCLBUTTONDOWN = 0xA1, HTCAPTION = 0x2;
-        private bool _settingsOpen = false, _ignoreMouseClick = false;
+        private bool _ignoreMouseClick = false;
         private RadioButton _activeBtnCache;
 
         public MainWindow()
@@ -69,17 +69,9 @@ namespace GTweak.Windows
             Top = area.Top + (area.Height - Height) / 2;
         }
 
-        private void AnimateSettings()
-        {
-            TranslateTransform transform = (TranslateTransform)SettingsPanel.RenderTransform;
-            double toX = _settingsOpen ? 400 : 0;
-            _settingsOpen = !_settingsOpen;
-            transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, toX, 0.5, useCubicEase: true));
-        }
-
-        private void HandleWindowState() => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-
         #region TitleBar
+        private void HandleWindowState(bool isMinimized = false) => WindowState = isMinimized ? WindowState.Minimized : WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e?.ChangedButton == MouseButton.Left)
@@ -98,18 +90,18 @@ namespace GTweak.Windows
                     }
                 }
 
-                _ignoreMouseClick = true;
-                TitleButtonsPanel.IsHitTestVisible = false;
+                Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = true; TitleButtonsPanel.IsHitTestVisible = false; }));
 
                 if (e?.ClickCount == 2)
                 {
                     HandleWindowState();
-                    return;
                 }
-
-                IntPtr hwnd = new WindowInteropHelper(this).Handle;
-                ReleaseCapture();
-                SendMessage(hwnd, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);
+                else
+                {
+                    IntPtr hwnd = new WindowInteropHelper(this).Handle;
+                    ReleaseCapture();
+                    SendMessage(hwnd, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);
+                }
 
                 Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = false; TitleButtonsPanel.IsHitTestVisible = true; }));
             }
@@ -126,12 +118,13 @@ namespace GTweak.Windows
                     HandleWindowState();
                     break;
                 case nameof(ButtonMinimize):
-                    WindowState = WindowState.Minimized;
+                    HandleWindowState(true);
                     break;
-                case nameof(ButtonSettings):
-                    AnimateSettings();
+                case nameof(TglButtonSettings):
+                    TranslateTransform transform = (TranslateTransform)SettingsPanel.RenderTransform;
+                    transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, useCubicEase: true));
                     break;
-                case nameof(ButtonTheme):
+                case nameof(TglButtonTheme):
                     SettingsEngine.SelfReboot();
                     Visibility = Visibility.Collapsed;
                     break;

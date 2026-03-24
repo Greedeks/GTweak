@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
 
-    <Style x:Key="TitleButtonBase" TargetType="Button">
+    <Style x:Key="TitleButtonBase" TargetType="Control">
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -17,50 +17,7 @@
         <Setter Property="IsTabStop" Value="False"/>
     </Style>
 
-    <Style x:Key="TitleButtonSettings" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
-                        <Border x:Name="Icon" Width="16" Height="16" Background="{StaticResource Brush_Inactive}" RenderTransformOrigin="0.5,0.5">
-                            <Border.RenderTransform>
-                                <RotateTransform x:Name="RotateTransformSettings" Angle="0"/>
-                            </Border.RenderTransform>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="True">
-                            <Setter TargetName="Icon" Property="OpacityMask">
-                                <Setter.Value>
-                                    <ImageBrush ImageSource="{StaticResource Icon_Settings}" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
-                        </Trigger>
-                        <EventTrigger RoutedEvent="Button.Click">
-                            <BeginStoryboard>
-                                <Storyboard Timeline.DesiredFrameRate="120">
-                                    <DoubleAnimation Storyboard.TargetName="RotateTransformSettings" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:0.5" FillBehavior="Stop">
-                                        <DoubleAnimation.EasingFunction>
-                                            <CubicEase/>
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="TitleButtonMinimize" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
+    <Style x:Key="ButtonMinimize" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -88,8 +45,7 @@
         </Setter>
     </Style>
 
-
-    <Style x:Key="TitleButtonMaximize" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
+    <Style x:Key="ButtonMaximize" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -124,7 +80,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="TitleButtonClose" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
+    <Style x:Key="ButtonClose" TargetType="Button" BasedOn="{StaticResource TitleButtonBase}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
