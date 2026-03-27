@@ -46,7 +46,8 @@ namespace GTweak.Utilities.Managers
             ["TglButton20"] = NoticeAction.Restart,
             ["TglButton23"] = NoticeAction.Restart,
             ["TglButton25"] = NoticeAction.Restart,
-            ["TglButton27"] = NoticeAction.Restart
+            ["TglButton27"] = NoticeAction.Restart,
+            ["TglButton30"] = NoticeAction.Restart
         };
 
         private static int _isNotificationOpen;

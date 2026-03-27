@@ -470,6 +470,7 @@
     <v:String x:Key="tgl27_sys">Windows Insider 背景任务</v:String>
     <v:String x:Key="tgl28_sys">系统磁盘重整</v:String>
     <v:String x:Key="tgl29_sys">暂停 Windows 更新</v:String>
+    <v:String x:Key="tgl30_sys">多平面叠加 (MPO)</v:String>
 
     <v:String x:Key="slider1_desc_sys">调整鼠标指针移动速度，省去您搜索鼠标参数的时间。</v:String>
     <v:String x:Key="slider2_desc_sys">调整开始重复输入字元前的延迟时间，建议值为 0。</v:String>
@@ -503,6 +504,7 @@
     <v:String x:Key="tgl27_desc_sys">Windows Insider 参与者应保持这些任务启用状态。但若您未加入该计画，所有相关任务将成为无谓负担：它们消耗系统资源、产生无用日志，并可能在毫无效益的情况下启动遥测连接。停用这些功能可缩短启动时间、提升整体系统性能，同时消除不必要的实验性数据收集管道。</v:String>
     <v:String x:Key="tgl28_desc_sys">若您使用固态硬盘（SSD），停用仅适用于传统硬盘（HDD）的磁盘重组与开机文档优化功能，有助延长存储设备寿命。同时，TRIM 优化功能仍会持续运作：它会告知 SSD 控制器哪些数据区块已不再使用并清除它们，从而维持稳定速度与硬盘寿命。</v:String>
     <v:String x:Key="tgl29_desc_sys">将 Windows 系统更新暂停 10 年，同时保持来自 Microsoft Store 的应用更新和下载处于活动状态。要完全禁用更新，请转到“服务”并禁用相应的 Windows 更新服务。</v:String>
+    <v:String x:Key="tgl30_desc_sys">Multiplane Overlay 是一项 Windows 显示技术，旨在通过硬件图层叠加来提高性能。然而在某些情况下，系统与驱动程序可能会与应用程序产生冲突，导致黑屏、卡顿、闪烁和画面撕裂。建议仅在遇到此类问题时将其禁用。</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->

@@ -187,6 +187,10 @@ namespace GTweak.Utilities.Tweaks
                 DateTime.TryParse(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseUpdatesStartTime", string.Empty), null, System.Globalization.DateTimeStyles.RoundtripKind, out var start) &&
                 DateTime.TryParse(RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseUpdatesExpiryTime", string.Empty), null, System.Globalization.DateTimeStyles.RoundtripKind, out var end) &&
                 (end - start).TotalDays >= 3650;
+
+            _сontrolWriter.Button[30] =
+                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm", "OverlayTestMode", "5") ||
+                (HardwareData.OS.Build >= 26200m && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm", "EnableOverlay", "0"));
         }
 
 
@@ -583,6 +587,26 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseQualityUpdatesStartTime", start, RegistryValueKind.String);
                         RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\UpdatePolicy\PolicyState", "PauseQualityUpdatesEndTime", end, RegistryValueKind.String);
                         CommandExecutor.RunCommand("/c gpupdate /force");
+                    }
+                    break;
+                case "TglButton30":
+                    bool isSupportedBuild = HardwareData.OS.Build >= 26200;
+
+                    if (isDisabled)
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\Dwm", "OverlayTestMode", 5, RegistryValueKind.DWord);
+                        if (isSupportedBuild)
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\Dwm", "EnableOverlay", 0, RegistryValueKind.DWord);
+                        }
+                    }
+                    else
+                    {
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\Dwm", "OverlayTestMode");
+                        if (isSupportedBuild)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\Dwm", "EnableOverlay");
+                        }
                     }
                     break;
                 default:

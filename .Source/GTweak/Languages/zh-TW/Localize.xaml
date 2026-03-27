@@ -470,7 +470,8 @@
     <v:String x:Key="tgl27_sys">Windows Insider 背景任務</v:String>
     <v:String x:Key="tgl28_sys">系統磁碟重整</v:String>
     <v:String x:Key="tgl29_sys">暫停 Windows 更新</v:String>
-
+    <v:String x:Key="tgl30_sys">多平面疊加 (MPO)</v:String>
+    
     <v:String x:Key="slider1_desc_sys">調整滑鼠游標移動速度，省去您搜尋滑鼠參數的時間。</v:String>
     <v:String x:Key="slider2_desc_sys">調整開始重複輸入字元前的延遲時間，建議值為 0。</v:String>
     <v:String x:Key="slider3_desc_sys">調整輸入字元的重複頻率，建議值為 31。</v:String>
@@ -503,6 +504,7 @@
     <v:String x:Key="tgl27_desc_sys">Windows Insider 參與者應保持這些任務啟用狀態。但若您未加入該計畫，所有相關任務將成為無謂負擔：它們消耗系統資源、產生無用日誌，並可能在毫無效益的情況下啟動遙測連線。停用這些功能可縮短啟動時間、提升整體系統效能，同時消除不必要的實驗性數據收集管道。</v:String>
     <v:String x:Key="tgl28_desc_sys">若您使用固態硬碟（SSD），停用僅適用於傳統硬碟（HDD）的磁碟重組與開機檔案優化功能，有助延長儲存裝置壽命。同時，TRIM 優化功能仍會持續運作：它會告知 SSD 控制器哪些資料區塊已不再使用並清除它們，從而維持穩定速度與硬碟壽命。</v:String>
     <v:String x:Key="tgl29_desc_sys">將 Windows 系統更新暫停 10 年，同時保持來自 Microsoft Store 的應用程式更新和下載處於啟用狀態。要完全停用更新，請轉到「服務」並停用對應的 Windows Update 服務。</v:String>
+    <v:String x:Key="tgl30_desc_sys">Multiplane Overlay 是一項 Windows 顯示技術，旨在透過硬體圖層疊加來提高效能。然而在某些情況下，系統與驅動程式可能會與應用程式產生衝突，導致黑畫面、凍結、閃爍和畫面撕裂。建議僅在遇到此類問題時才將其停用。</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
