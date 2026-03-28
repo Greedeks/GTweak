@@ -60,7 +60,7 @@ namespace GTweak.Utilities.Storage
 
         protected static readonly string intelTask = @"\Intel\Intel Telemetry 2 (x86)";
 
-        protected static readonly string[] winUpdatesTasks = {
+        protected static readonly string[] winUpdatesTasks = new[] {
         @"\Microsoft\Windows\UpdateOrchestrator\Report policies",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Maintenance Work",
         @"\Microsoft\Windows\UpdateOrchestrator\Schedule Scan",
@@ -74,7 +74,8 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\UpdateOrchestrator\USO_UxBroker",
         @"\Microsoft\Windows\UpdateOrchestrator\UUS Failover Task",
         @"\Microsoft\Windows\WindowsUpdate\Refresh Group Policy Cache",
-        @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" };
+        @"\Microsoft\Windows\WindowsUpdate\Scheduled Start" }
+        .Concat(TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\UpdateAssistant\")).ToArray();
 
         protected static readonly string[] xboxTasks = {
         @"\Microsoft\XblGameSave\XblGameSaveTask",
