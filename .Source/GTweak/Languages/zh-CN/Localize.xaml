@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">应用程序与文档总管深色主题</v:String>
     <v:String x:Key="tgl7_intf">呼叫内容菜单延迟时间</v:String>
     <v:String x:Key="tgl8_intf">任务栏预览显示延迟</v:String>
-    <v:String x:Key="tgl9_intf">文档、数据夹或程序的捷径箭头</v:String>
+    <v:String x:Key="tgl9_intf">在图标上显示叠加标记</v:String>
     <v:String x:Key="tgl10_intf">前缀"标签为..."/ 后缀"– 标签"</v:String>
     <v:String x:Key="tgl11_intf">任务栏对齐方式</v:String>
     <v:String x:Key="tgl12_intf">"开始"功能表的标准布局</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">此调整将变更文档总管主题为浅色或深色，包含浏览器及其他支持装置主题的程序。注意屏幕可能闪烁。</v:String>
     <v:String x:Key="tgl7_desc_intf">预设情况下，新增的内容菜单项目会延迟 400 毫秒显示。若需加快显示速度，可缩短此延迟时间。</v:String>
     <v:String x:Key="tgl8_desc_intf">预设情况下，任务栏预览会过久地显示运行中应用程序的预览画面。若要加快预览显示速度，请套用此调整项。</v:String>
-    <v:String x:Key="tgl9_desc_intf">此调整项将替换箭头文档，从标签中移除箭头图标。</v:String>
+    <v:String x:Key="tgl9_desc_intf">允许隐藏快捷方式箭头、云端同步状态 (OneDrive、Dropbox) 以及文件类型标记 (例如 SVG 图形)。</v:String>
     <v:String x:Key="tgl10_desc_intf">移除标签过于直观的前缀-后缀命名方式。</v:String>
     <v:String x:Key="tgl11_desc_intf">选择任务栏图标显示位置：居中或靠左</v:String>
     <v:String x:Key="tgl12_desc_intf">调整开始功能表布局，扩展固定应用程序区域。此外，除 Windows Home 版本外，开始功能表将移除"推荐"区块。</v:String>

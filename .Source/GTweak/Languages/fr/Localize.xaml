@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">Thème sombre des applications et de l’explorateur</v:String>
     <v:String x:Key="tgl7_intf">Délai d’apparition du menu contextuel</v:String>
     <v:String x:Key="tgl8_intf">Délai d’affichage des aperçus sur la barre des tâches</v:String>
-    <v:String x:Key="tgl9_intf">Flèches pour raccourcis de fichiers, dossiers, programmes</v:String>
+    <v:String x:Key="tgl9_intf">Affichage des badges de superposition sur les icônes</v:String>
     <v:String x:Key="tgl10_intf">Préfixe « Raccourci vers… » / suffixe « – Raccourci »</v:String>
     <v:String x:Key="tgl11_intf">Alignement de la barre des tâches</v:String>
     <v:String x:Key="tgl12_intf">Disposition standard du menu « Démarrer »</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">Change le thème de l’explorateur en clair ou sombre, y compris navigateurs et autres programmes qui supportent le thème du système. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="tgl7_desc_intf">Par défaut, les éléments supplémentaires du menu contextuel apparaissent avec un délai de 400 millisecondes. Pour aller plus vite, vous pouvez réduire ce délai.</v:String>
     <v:String x:Key="tgl8_desc_intf">Par défaut, la prévisualisation dans la barre des tâches reste affichée trop longtemps. Ce tweak accélère l’apparition des aperçus.</v:String>
-    <v:String x:Key="tgl9_desc_intf">Supprime les flèches sur les raccourcis en remplaçant le fichier flèche.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Permet de masquer les flèches de raccourci, les statuts de synchronisation cloud (OneDrive, Dropbox) et les badges de types de fichiers, comme les graphiques SVG.</v:String>
     <v:String x:Key="tgl10_desc_intf">Supprime le préfixe et suffixe trop intuitifs pour les étiquettes.</v:String>
     <v:String x:Key="tgl11_desc_intf">Choisissez l’alignement des icônes dans la barre des tâches, centré ou à gauche.</v:String>
     <v:String x:Key="tgl12_desc_intf">Modifie la disposition du menu Démarrer en agrandissant la zone des applications épinglées. De plus, sauf pour l’édition Windows Home, la section « Recommandé » est supprimée.</v:String>

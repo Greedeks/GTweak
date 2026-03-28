@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">Alkalmazások és fájlkezelő sötét témája</v:String>
     <v:String x:Key="tgl7_intf">Késleltetés a helyi menü megnyitásakor</v:String>
     <v:String x:Key="tgl8_intf">Késés a feladat sávon megjelenő előnézeteknél</v:String>
-    <v:String x:Key="tgl9_intf">Nyilak a fájlok, mappák vagy programok gyorsbillentyűihez</v:String>
+    <v:String x:Key="tgl9_intf">Átfedő jelzések megjelenítése az ikonokon</v:String>
     <v:String x:Key="tgl10_intf">Előtag «Címke ehhez...» / utótag «– Címke»</v:String>
     <v:String x:Key="tgl11_intf">Tálca igazítása</v:String>
     <v:String x:Key="tgl12_intf">A «Start» menü szabványos elrendezése</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">A beállítás világosra vagy sötétre változtatja a Fájlkezelő témáját, beleértve a böngészőket és az eszköz témáját támogató egyéb programokat is. Figyelem, a képernyő villoghat.</v:String>
     <v:String x:Key="tgl7_desc_intf">Alapértelmezés szerint további helyi menüelemek jelennek meg 400 ezredmásodperces késleltetéssel. Ha gyorsabban szeretne haladni, csökkentheti ezt a késleltetést.</v:String>
     <v:String x:Key="tgl8_desc_intf">Alapértelmezés szerint a tálca előnézete túl sokáig jeleníti meg a futó alkalmazások előnézetét. Az előnézetek gyorsabb megjelenéséhez alkalmazza ezt a módosítást.</v:String>
-    <v:String x:Key="tgl9_desc_intf">A beállítás eltávolítja a nyilakat a címkékről a nyílfájl cseréjével.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Lehetővé teszi a parancsikon-nyilak, a felhőalapú szinkronizálási állapotok (OneDrive, Dropbox) és a fájltípus-jelölések (például SVG-grafika) elrejtését.</v:String>
     <v:String x:Key="tgl10_desc_intf">A címkék túl intuitív előtag-utótagjának eltávolítása.</v:String>
     <v:String x:Key="tgl11_desc_intf">Válassza ki, hogy hol szeretné megjeleníteni az ikonokat a tálcán, a centen vagy a bal oldalon</v:String>
     <v:String x:Key="tgl12_desc_intf">Módosítja a Start menü elrendezését a rögzített alkalmazások területének kibővítésével. Ezenkívül a Windows Home kiadás kivételével az «Ajánlott» szakasz eltávolításra kerül a Start menüből.</v:String>

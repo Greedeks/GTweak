@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">Ciemny motyw aplikacji i eksploratora</v:String>
     <v:String x:Key="tgl7_intf">Opóźnienie wywoływania menu kontekstowego</v:String>
     <v:String x:Key="tgl8_intf">Opóźnienie pojawiania się podglądów na pasku zadań</v:String>
-    <v:String x:Key="tgl9_intf">Strzałki na skrótach do plików, folderów lub programów</v:String>
+    <v:String x:Key="tgl9_intf">Wyświetlanie znaczników nakładek na ikonach</v:String>
     <v:String x:Key="tgl10_intf">Przedrostek „Skrót do…” / przyrostek „– Skrót”</v:String>
     <v:String x:Key="tgl11_intf">Wyrównanie paska zadań</v:String>
     <v:String x:Key="tgl12_intf">Standardowy układ menu „Start”</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">Poprawka zmieni motyw eksploratora na jasny lub ciemny, w tym przeglądarki i inne programy, które obsługują motyw systemowy. Uwaga, ekran może mignąć.</v:String>
     <v:String x:Key="tgl7_desc_intf">Domyślnie dodatkowe elementy menu kontekstowego pojawiają się z opóźnieniem 400 milisekund. Jeśli chcesz szybciej, możesz zmniejszyć to opóźnienie.</v:String>
     <v:String x:Key="tgl8_desc_intf">>Domyślnie podgląd na pasku zadań pokazuje miniatury uruchomionych aplikacji zbyt długo. Aby miniatury pojawiały się szybciej, zastosuj tę poprawkę.</v:String>
-    <v:String x:Key="tgl9_desc_intf">>Poprawka usunie strzałki z etykiet zastępując plik strzałki.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Pozwala ukryć strzałki skrótów, statusy synchronizacji w chmurze (OneDrive, Dropbox) oraz oznaczenia typów plików, takich jak grafika SVG.</v:String>
     <v:String x:Key="tgl10_desc_intf">Usuwanie zbyt intuicyjnego przedrostka/przyrostka dla etykiet.</v:String>
     <v:String x:Key="tgl11_desc_intf">Wybierz, gdzie chcesz, aby ikony na pasku zadań były wyświetlane – na środku czy po lewej.</v:String>
     <v:String x:Key="tgl12_desc_intf">Zmienia układ menu Start, rozszerzając obszar dla przypiętych aplikacji. Dodatkowo, poza edycją Windows Home, sekcja „Polecane” zostanie usunięta z menu Start.</v:String>

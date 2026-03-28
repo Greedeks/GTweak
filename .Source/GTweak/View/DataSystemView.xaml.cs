@@ -97,6 +97,11 @@ namespace GTweak.View
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (sender is FrameworkContentElement { IsEnabled: false } || sender is FrameworkElement { IsEnabled: false })
+            {
+                return;
+            }
+
             if (e?.LeftButton == MouseButtonState.Pressed)
             {
                 Clipboard.Clear();

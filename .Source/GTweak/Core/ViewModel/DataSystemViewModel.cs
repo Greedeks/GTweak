@@ -120,11 +120,13 @@ namespace GTweak.Core.ViewModel
             {
                 SetBlurValue = SettingsEngine.IsHiddenIpAddress ? 20 : 0;
                 SetVisibility = Visibility.Visible;
+                _ipAddressModel.IsEnabled = true;
             }
             else
             {
                 SetBlurValue = 0;
                 SetVisibility = Visibility.Hidden;
+                _ipAddressModel.IsEnabled = false;
             }
         }
 
@@ -135,7 +137,17 @@ namespace GTweak.Core.ViewModel
             void UpdateModelData()
             {
                 string data = dataProvider();
-                model.Data = fallbackKey == null ? (data ?? string.Empty) : (!string.IsNullOrEmpty(data) ? data : (Application.Current.Resources[fallbackKey] as string ?? string.Empty));
+
+                if (!string.IsNullOrEmpty(data))
+                {
+                    model.Data = data;
+                    model.IsEnabled = true;
+                }
+                else
+                {
+                    model.Data = fallbackKey == null ? string.Empty : (Application.Current.Resources[fallbackKey] as string ?? string.Empty);
+                    model.IsEnabled = false;
+                }
             }
 
             UpdateModelData();

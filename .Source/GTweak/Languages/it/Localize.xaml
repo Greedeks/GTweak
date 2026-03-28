@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">Tema scuro per applicazioni ed Esplora risorse</v:String>
     <v:String x:Key="tgl7_intf">Ritardo nell'apertura del menu contestuale</v:String>
     <v:String x:Key="tgl8_intf">Ritardo anteprime sulla barra delle applicazioni</v:String>
-    <v:String x:Key="tgl9_intf">Frecce sui collegamenti a file, cartelle o programmi</v:String>
+    <v:String x:Key="tgl9_intf">Visualizzazione dei contrassegni in sovrapposizione sulle icone</v:String>
     <v:String x:Key="tgl10_intf">Prefisso «Collegamento a...» / Suffisso «– Collegamento»</v:String>
     <v:String x:Key="tgl11_intf">Allineamento della barra delle applicazioni</v:String>
     <v:String x:Key="tgl12_intf">Layout standard del menu «Start»</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">Cambia il tema di Esplora risorse, browser e altri programmi compatibili con il tema di sistema. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
     <v:String x:Key="tgl7_desc_intf">Riduce il ritardo (predefinito: 400 ms) con cui appaiono le voci aggiuntive del menu contestuale.</v:String>
     <v:String x:Key="tgl8_desc_intf">Riduce il ritardo nella comparsa delle anteprime delle applicazioni sulla barra delle applicazioni.</v:String>
-    <v:String x:Key="tgl9_desc_intf">Rimuove le frecce dai collegamenti sostituendo il file dell'icona della freccia.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Consente di nascondere le frecce dei collegamenti, gli stati di sincronizzazione cloud (OneDrive, Dropbox) e i contrassegni dei tipi di file, come la grafica SVG.</v:String>
     <v:String x:Key="tgl10_desc_intf">Rimuove il prefisso/suffisso troppo esplicito per i collegamenti (es. «Collegamento a...»).</v:String>
     <v:String x:Key="tgl11_desc_intf">Permette di scegliere l’allineamento delle icone sulla barra delle applicazioni: al centro o a sinistra.</v:String>
     <v:String x:Key="tgl12_desc_intf">Modifica il layout del menu Start espandendo l’area delle app bloccate. Rimuove anche la sezione «Consigliati» (eccetto su Windows Home).</v:String>

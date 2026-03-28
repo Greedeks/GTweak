@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">應用程式與檔案總管深色主題</v:String>
     <v:String x:Key="tgl7_intf">呼叫內容選單延遲時間</v:String>
     <v:String x:Key="tgl8_intf">工作列預覽顯示延遲</v:String>
-    <v:String x:Key="tgl9_intf">檔案、資料夾或程式的捷徑箭頭</v:String>
+    <v:String x:Key="tgl9_intf">在圖示上顯示覆蓋標記</v:String>
     <v:String x:Key="tgl10_intf">前綴"標籤為..."/ 後綴"– 標籤"</v:String>
     <v:String x:Key="tgl11_intf">工作列對齊方式</v:String>
     <v:String x:Key="tgl12_intf">"開始"功能表的標準佈局</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">此調整將變更檔案總管主題為淺色或深色，包含瀏覽器及其他支援裝置主題的程式。注意螢幕可能閃爍。</v:String>
     <v:String x:Key="tgl7_desc_intf">預設情況下，新增的內容選單項目會延遲 400 毫秒顯示。若需加快顯示速度，可縮短此延遲時間。</v:String>
     <v:String x:Key="tgl8_desc_intf">預設情況下，工作列預覽會過久地顯示執行中應用程式的預覽畫面。若要加快預覽顯示速度，請套用此調整項。</v:String>
-    <v:String x:Key="tgl9_desc_intf">此調整項將替換箭頭檔案，從標籤中移除箭頭圖示。</v:String>
+    <v:String x:Key="tgl9_desc_intf">允許隱藏捷徑箭頭、雲端同步狀態 (OneDrive、Dropbox) 以及檔案類型標記 (例如 SVG 圖形)。</v:String>
     <v:String x:Key="tgl10_desc_intf">移除標籤過於直觀的前綴-後綴命名方式。</v:String>
     <v:String x:Key="tgl11_desc_intf">選擇工作列圖示顯示位置：居中或靠左</v:String>
     <v:String x:Key="tgl12_desc_intf">調整開始功能表佈局，擴展固定應用程式區域。此外，除 Windows Home 版本外，開始功能表將移除"推薦"區塊。</v:String>

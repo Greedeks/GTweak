@@ -4,6 +4,7 @@ using GTweak.Core.Base;
 internal sealed class DataSystemModel : ViewModelBase
 {
     private string _data;
+    private bool _isEnabled;
     private int _blurValue;
     private Visibility _ipVisibility;
 
@@ -13,6 +14,12 @@ internal sealed class DataSystemModel : ViewModelBase
     {
         get => _data;
         set { _data = value; OnPropertyChanged(); }
+    }
+
+    public bool IsEnabled
+    {
+        get => _isEnabled;
+        set { _isEnabled = value; OnPropertyChanged(); }
     }
 
     public int BlurValue

@@ -170,9 +170,9 @@
                                 </Grid>
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                    <Run Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                    <Run Text="{DynamicResource title_mode_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                    <Run Text="{Binding [Mode].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                <Run Text="{Binding [Bios].Data}" IsEnabled="{Binding [Bios].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                <Run Text="{DynamicResource title_mode_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                <Run Text="{Binding [Mode].Data}" IsEnabled="{Binding [Mode].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
 
@@ -192,9 +192,9 @@
                                 </Grid>
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Motherboard].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                <Run Text="{Binding [Motherboard].Data}" IsEnabled="{Binding [Motherboard].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
                                 <Run Text="{DynamicResource title_chipset_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Chipset].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                <Run Text="{Binding [Chipset].Data}" IsEnabled="{Binding [Chipset].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
 
@@ -214,12 +214,12 @@
                                 </Grid>
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                    <Run Text="{Binding [Processor].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                    <Run Text="{DynamicResource title_cores_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                    <Run Text="{Binding [Cores].Data}"/>
-                                    <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
-                                    <Run Text="{DynamicResource title_threads_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                    <Run Text="{Binding [Threads].Data}"/>
+                                <Run Text="{Binding [Processor].Data}" IsEnabled="{Binding [Processor].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                <Run Text="{DynamicResource title_cores_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                <Run Text="{Binding [Cores].Data}"/>
+                                <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
+                                <Run Text="{DynamicResource title_threads_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                <Run Text="{Binding [Threads].Data}"/>
                             </TextBlock>
                         </StackPanel>
 
@@ -239,9 +239,9 @@
                                 </Grid>
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Graphics].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                <Run Text="{Binding [Graphics].Data}" IsEnabled="{Binding [Graphics].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
                                 <Run Text="{DynamicResource title_refreshrate_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [RefreshRate].Data}"/>
+                                <Run Text="{Binding [RefreshRate].Data}" IsEnabled="{Binding [RefreshRate].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
 
@@ -261,9 +261,9 @@
                                 </Grid>
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                    <Run Text="{Binding [Memory].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                    <Run Text="{DynamicResource title_mtype_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                    <Run Text="{Binding [Type].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                <Run Text="{Binding [Memory].Data}" IsEnabled="{Binding [Memory].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                <Run Text="{DynamicResource title_mtype_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                <Run Text="{Binding [Type].Data}" IsEnabled="{Binding [Type].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
 
@@ -287,7 +287,7 @@
                                 </Grid>
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                 <Run Text="{Binding [Storage].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                 <Run Text="{Binding [Storage].Data}" IsEnabled="{Binding [Storage].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
                                  <Run Text="{DynamicResource title_storage_free_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                  <Run Text="{Binding [FreeSpace].Data}"/>
                                  <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
@@ -311,7 +311,7 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                            <TextBlock Text="{Binding [Audio].Data}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Text="{Binding [Audio].Data}" IsEnabled="{Binding [Audio].IsEnabled}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Margin="0,20,0,0">
@@ -329,7 +329,7 @@
                                     </StackPanel>
                                 </Grid>
                             </Border>
-                            <TextBlock Text="{Binding [Network].Data}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                            <TextBlock Text="{Binding [Network].Data}" IsEnabled="{Binding [Network].IsEnabled}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" Margin="0,20,0,0">
@@ -348,7 +348,7 @@
                                 </Grid>
                             </Border>
                             <StackPanel Orientation="Horizontal" Margin="5,1,0,0">
-                                <TextBlock x:Name="IpAddress" Text="{Binding [IpAddress].Data}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
+                                <TextBlock x:Name="IpAddress" Text="{Binding [IpAddress].Data}" IsEnabled="{Binding [IpAddress].IsEnabled}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
                                     <TextBlock.Effect>
                                         <BlurEffect Radius="{Binding SetBlurValue}"/>
                                     </TextBlock.Effect>

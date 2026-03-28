@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">Dark theme of applications and explorer</v:String>
     <v:String x:Key="tgl7_intf">Delay when calling the context menu</v:String>
     <v:String x:Key="tgl8_intf">Delay in the appearance of previews on the taskbar</v:String>
-    <v:String x:Key="tgl9_intf">Arrows for shortcuts to files, folders, or programs</v:String>
+    <v:String x:Key="tgl9_intf">Display of overlay badges on icons</v:String>
     <v:String x:Key="tgl10_intf">Prefix «Label for...»/ postfix «– Label»</v:String>
     <v:String x:Key="tgl11_intf">Taskbar Alignment</v:String>
     <v:String x:Key="tgl12_intf">Standard layout of the «Start» menu</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">The tweak will change the explorer theme to light or dark, including browsers and other programs that support the device theme. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl7_desc_intf">By default, additional context menu items appear with a delay of 400 milliseconds. If you want to go faster, you can reduce this delay.</v:String>
     <v:String x:Key="tgl8_desc_intf">By default, the Taskbar preview shows previews of running applications for too long. To make previews appear faster, apply this tweak.</v:String>
-    <v:String x:Key="tgl9_desc_intf">Tweak will remove arrows from labels by replacing the arrow file.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Allows hiding shortcut arrows, cloud synchronization statuses (OneDrive, Dropbox), and file type badges, such as SVG graphics.</v:String>
     <v:String x:Key="tgl10_desc_intf">Removing the too intuitive prefix-postfix for labels.</v:String>
     <v:String x:Key="tgl11_desc_intf">Choose where you want the icons on the taskbar to be displayed, on the cent or on the left</v:String>
     <v:String x:Key="tgl12_desc_intf">Changes the Start menu layout by expanding the area for pinned apps. In addition, except in the Windows Home edition, the «Recommended» section will be removed from the Start menu.</v:String>

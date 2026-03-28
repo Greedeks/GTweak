@@ -224,7 +224,7 @@
     <v:String x:Key="tgl6_intf">Tema escuro de aplicativos e explorador</v:String>
     <v:String x:Key="tgl7_intf">Atraso ao chamar o menu de contexto</v:String>
     <v:String x:Key="tgl8_intf">Atraso nas pré-visualizações da barra</v:String>
-    <v:String x:Key="tgl9_intf">Setas para atalhos de arquivos, pastas ou programas</v:String>
+    <v:String x:Key="tgl9_intf">Exibição de indicadores de sobreposição nos ícones</v:String>
     <v:String x:Key="tgl10_intf">Prefixo "Rótulo para..."/ pós-fixo "– Rótulo"</v:String>
     <v:String x:Key="tgl11_intf">Alinhamento da barra de tarefas</v:String>
     <v:String x:Key="tgl12_intf">Layout padrão do menu "Iniciar"</v:String>
@@ -259,7 +259,7 @@
     <v:String x:Key="tgl6_desc_intf">O ajuste mudará o tema do explorador para claro ou escuro, incluindo navegadores e outros programas que suportam o tema do dispositivo. Atenção, a tela pode piscar.</v:String>
     <v:String x:Key="tgl7_desc_intf">Por padrão, itens adicionais do menu de contexto aparecem com um atraso de 400 milissegundos. Se você quiser ir mais rápido, pode reduzir esse atraso.</v:String>
     <v:String x:Key="tgl8_desc_intf">Por padrão, a visualização da barra de tarefas mostra visualizações de aplicativos em execução por muito tempo. Para fazer as visualizações aparecerem mais rápido, aplique este ajuste.</v:String>
-    <v:String x:Key="tgl9_desc_intf">O ajuste removerá as setas dos rótulos substituindo o arquivo da seta.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Permite ocultar setas de atalho, status de sincronização em nuvem (OneDrive, Dropbox) e etiquetas de tipos de arquivo, como gráficos SVG.</v:String>
     <v:String x:Key="tgl10_desc_intf">Removendo o prefixo-pós-fixo muito intuitivo para rótulos.</v:String>
     <v:String x:Key="tgl11_desc_intf">Escolha onde você quer que os ícones na barra de tarefas sejam exibidos, no centro ou à esquerda</v:String>
     <v:String x:Key="tgl12_desc_intf">Altera o layout do menu Iniciar, expandindo a área para aplicativos fixados. Além disso, exceto na edição Windows Home, a seção "Recomendado" será removida do menu Iniciar.</v:String>
