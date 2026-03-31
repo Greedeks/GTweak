@@ -21,7 +21,12 @@ namespace GTweak.Utilities.Managers
             _action = action;
             _onFinished = onFinished;
 
-            _timer = new DispatcherTimer(interval ?? TimeSpan.FromSeconds(1), DispatcherPriority.Normal, TimerTick, Application.Current.Dispatcher);
+            _timer = new DispatcherTimer(DispatcherPriority.Normal, Application.Current.Dispatcher)
+            {
+                Interval = interval ?? TimeSpan.FromSeconds(1)
+            };
+
+            _timer.Tick += TimerTick;
         }
 
         private void TimerTick(object sender, EventArgs e)

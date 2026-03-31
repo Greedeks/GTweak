@@ -18,6 +18,7 @@ namespace GTweak.Utilities.Managers
         private static extern int GetPrivateProfileSection(string section, StringBuilder retVal, int size, string filePath);
 
         private readonly string _pathToConfig;
+        private const int MaxBuffer = 4096;
 
         internal static Dictionary<string, string>
             TempTweaksConf = new Dictionary<string, string>(),
@@ -36,8 +37,8 @@ namespace GTweak.Utilities.Managers
 
         internal string Read(string section, string key)
         {
-            StringBuilder retValue = new StringBuilder(255);
-            GetPrivateProfileString(section, key, "", retValue, 255, _pathToConfig);
+            StringBuilder retValue = new StringBuilder(MaxBuffer);
+            GetPrivateProfileString(section, key, "", retValue, MaxBuffer, _pathToConfig);
             return retValue.ToString();
         }
 
@@ -45,37 +46,33 @@ namespace GTweak.Utilities.Managers
 
         internal void WriteAll(string section, Dictionary<string, string> selectedDictionary)
         {
-            if (selectedDictionary?.Count == 0)
+            if ((selectedDictionary?.Count) != 0)
             {
-                return;
-            }
-
-            foreach (KeyValuePair<string, string> addKeyValue in selectedDictionary)
-            {
-                WritePrivateProfileString(section, addKeyValue.Key, addKeyValue.Value, _pathToConfig);
+                foreach (KeyValuePair<string, string> addKeyValue in selectedDictionary)
+                {
+                    WritePrivateProfileString(section, addKeyValue.Key, addKeyValue.Value, _pathToConfig);
+                }
             }
         }
 
         internal static void TempWrite<T>(Dictionary<string, string> selectedDictionary, string tweak, T value)
         {
-            if (selectedDictionary?.ContainsKey(tweak) == true)
+            if (selectedDictionary != null)
             {
-                selectedDictionary.Remove(tweak);
+                selectedDictionary[tweak] = value?.ToString();
             }
-
-            selectedDictionary.Add(tweak, value.ToString());
         }
 
         internal bool IsThereSection(string section)
         {
-            StringBuilder retValue = new StringBuilder(255);
-            GetPrivateProfileSection(section, retValue, 255, _pathToConfig);
+            StringBuilder retValue = new StringBuilder(MaxBuffer);
+            GetPrivateProfileSection(section, retValue, MaxBuffer, _pathToConfig);
             return !string.IsNullOrEmpty(retValue.ToString());
         }
 
         internal List<string> GetKeysOrValue(string section, bool isGetKey = true)
         {
-            var result = new List<string>();
+            List<string> result = new List<string>();
             string[] lines = File.ReadAllLines(_pathToConfig);
 
             bool inSection = false;
