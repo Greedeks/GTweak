@@ -31,4 +31,8 @@
         <view:AddonsView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ToolsetViewModel}">
+        <view:ToolsetView />
+    </DataTemplate>
+
 </ResourceDictionary>

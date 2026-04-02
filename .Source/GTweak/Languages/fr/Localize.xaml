@@ -85,6 +85,7 @@
     <v:String x:Key="rbtn_sys_main">Système</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informations système</v:String>
     <v:String x:Key="rbtn_adds_main">Addons</v:String>
+    <v:String x:Key="rbtn_ts_main">Toolset</v:String>
     <v:String x:Key="title_settings_main">Paramètres</v:String>
     <v:String x:Key="btgl_noty_main">Afficher les notifications</v:String>
     <v:String x:Key="slider_volume_main">Volume :</v:String>
@@ -547,6 +548,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 

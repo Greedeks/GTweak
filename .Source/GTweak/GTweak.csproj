@@ -152,6 +152,7 @@
     <Compile Include="Core\Model\PackagesModel.cs" />
     <Compile Include="Core\Model\ServicesModel.cs" />
     <Compile Include="Core\Model\SystemModel.cs" />
+    <Compile Include="Core\Model\ToolsetModel.cs" />
     <Compile Include="Core\ViewModel\AddonsViewModel.cs" />
     <Compile Include="Core\ViewModel\ConfidentialityViewModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemViewModel.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Core\ViewModel\PackagesViewModel.cs" />
     <Compile Include="Core\ViewModel\ServicesViewModel.cs" />
     <Compile Include="Core\ViewModel\SystemViewModel.cs" />
+    <Compile Include="Core\ViewModel\ToolsetViewModel.cs" />
     <Compile Include="Utilities\Animation\BlurAnimation.cs" />
     <Compile Include="Utilities\Configuration\NetworkProvider.cs" />
     <Compile Include="Utilities\Configuration\StorageTypeIdentifier.cs" />
@@ -187,6 +189,9 @@
     </Compile>
     <Compile Include="View\InterfaceView.xaml.cs">
       <DependentUpon>InterfaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ToolsetView.xaml.cs">
+      <DependentUpon>ToolsetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UtilsView.xaml.cs">
       <DependentUpon>UtilsView.xaml</DependentUpon>
@@ -383,6 +388,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\InterfaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ToolsetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

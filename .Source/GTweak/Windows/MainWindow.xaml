@@ -10,7 +10,7 @@
         mc:Ignorable="d" Icon="/GTweak.ico"
         Background="Transparent" WindowStyle="None" IsTabStop="False" KeyboardNavigation.TabNavigation="None" FocusVisualStyle="{x:Null}" SnapsToDevicePixels="True" UseLayoutRounding="True"
         ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" MinWidth="700" MinHeight="400"
-        Title="GTweak" d:Height="616" d:Width="1094" Loaded="Window_Loaded" Topmost="{Binding IsTopMost}">
+        Title="GTweak" d:Height="650" d:Width="1094" Loaded="Window_Loaded" Topmost="{Binding IsTopMost}">
     <ui:FluentWindow.DataContext>
         <vm:MainWinViewModel/>
     </ui:FluentWindow.DataContext>
@@ -281,6 +281,10 @@
 
                             <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_adds_main}" Command="{Binding NavigateToAddonsCommand}">
                                 <ui:SymbolIcon Symbol="PuzzlePieceShield20" FontSize="20"/>
+                            </RadioButton>
+
+                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_ts_main}" Command="{Binding NavigateToToolsetCommand}">
+                                <ui:SymbolIcon Symbol="DrawerArrowDownload20" FontSize="20"/>
                             </RadioButton>
                         </StackPanel>
                     </ScrollViewer>

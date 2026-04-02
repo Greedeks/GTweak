@@ -85,6 +85,7 @@
     <v:String x:Key="rbtn_sys_main">System</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informacje o systemie</v:String>
     <v:String x:Key="rbtn_adds_main">Dodatki</v:String>
+    <v:String x:Key="rbtn_ts_main">Toolset</v:String>
     <v:String x:Key="title_settings_main">Ustawienia</v:String>
     <v:String x:Key="btgl_noty_main">Pokazuj powiadomienia</v:String>
     <v:String x:Key="slider_volume_main">Głośność:</v:String>
@@ -546,6 +547,7 @@
     <!--#endregion-->
 
 </ResourceDictionary>
+
 
 
 
