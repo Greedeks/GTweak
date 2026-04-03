@@ -173,7 +173,7 @@
     <v:String x:Key="tgl18_conf">记录用户行为</v:String>
     <v:String x:Key="tgl19_conf">离线地图的数据收集和后台更新</v:String>
     <v:String x:Key="tgl20_conf">收集与监控 Intel 遥测数据</v:String>
-
+    
     <v:String x:Key="tgl1_desc_conf">Windows 会为每位用户创建唯一的广告识别码以追踪您的操作。此识别码由应用程序开发者及 Windows 系统本身用于各自目的，包括在应用程序中向您提供特定广告。</v:String>
     <v:String x:Key="tgl2_desc_conf">即使使用本地帐户，Windows 仍会持续尝试将您的数据与 Microsoft 服务器同步。具体同步项目包含：主题、密码、Windows 设置、浏览器设置、语言工具列设置、简易存取设置及其他附加设置。</v:String>
     <v:String x:Key="tgl3_desc_conf">遥测数据（诊断数据）是 Windows 自动收集并传送至 Microsoft 服务器的资讯，简言之即"您使用什么？在哪里？为何及何时使用？"。Microsoft 声称此类数据已去个人化，有助于公司开发 Windows。即使您不介意数据收集行为，仍可能引发另一问题——处理器负载过高，进而导致系统运行迟缓。</v:String>
@@ -246,7 +246,7 @@
     <v:String x:Key="tgl27_intf">开始功能表中整合"Bing"的搜索查询</v:String>
     <v:String x:Key="tgl28_intf">开启"快速存取"而非"本机"</v:String>
     <v:String x:Key="tgl29_intf">亮度异常变化</v:String>
-    
+
     <v:String x:Key="color1_desc_intf">调整在系统中使用光标选择文本或对象时的背景颜色。</v:String>
     <v:String x:Key="color2_desc_intf">调整受支持应用程序中工具提示的颜色。</v:String>
     <v:String x:Key="exblock1_desc_intf">更改导航窗格中内置系统项的可见性——这些项无法通过常规方法取消固定。</v:String>
@@ -360,7 +360,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
-    
+
     <v:String x:Key="title_over_pkg">解除安装确认</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">您即将解除安装 Microsoft Edge 浏览器。此操作亦将移除 EdgeWebView 组件，该组件用于在多种应用程序中显示网页内容——例如 Microsoft Office（如会议洞察、会议室搜索功能）、照片应用程序（新版采用 WebView2）、部分 Telegram 机器人，以及其他依赖嵌入式 WebView 的程序。继续操作前，请确认您不再需要此组件。 
        在 Windows 11 的近期版本中, Copilot 透过 EdgeWebView 以 PWA 或系统封装器形式实现。由于其作为网页封装器的运作特性，当 Edge 被解除安装时，Copilot 亦会随之移除。</v:String>
@@ -402,7 +402,7 @@
     <v:String x:Key="tgl30_svc">与零售演示模式相关的服务</v:String>
     <v:String x:Key="tgl31_svc">与 Microsoft Edge 组件更新相关的服务</v:String>
     <v:String x:Key="tgl32_svc">多媒体类调度服务</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">若您未使用文档历史记录与内容索引功能，请停用此设置。</v:String>
     <v:String x:Key="tgl2_desc_svc">若您未使用 Xbox 与 Microsoft 游戏控制器，请停用此设置。</v:String>
     <v:String x:Key="tgl3_desc_svc">若您不打算更新 Windows，请停用此设置。此调整除变更服务外，亦会修改负责 Windows 更新的文档。因此即使服务处于启用状态，更新中心仍将无法运作。请注意此调整将影响从 Windows 市集下载及更新应用程序。</v:String>
@@ -546,18 +546,10 @@
     <v:String x:Key="scripts_info_adds">之后，您就可以在此页面上运行脚本（.ps1、.cmd、.bat、.reg）了。</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -546,4 +546,10 @@
     <v:String x:Key="scripts_info_adds">After that, you will be able to run scripts (.ps1, .cmd, .bat, .reg) on this page</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>

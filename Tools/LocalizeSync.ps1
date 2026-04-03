@@ -8,10 +8,10 @@
     [switch]$Wait
 )
 
-function Info([string]$s) { Write-Host "$s" -ForegroundColor Cyan }
-function Ok([string]$s)   { Write-Host "$s" -ForegroundColor Green }
-function Warn([string]$s) { Write-Host "$s" -ForegroundColor Yellow }
-function Update([string]$s) { Write-Host "$s" -ForegroundColor Blue }
+function Info([string]$s) { Write-Host $s -ForegroundColor Cyan }
+function Ok([string]$s)   { Write-Host $s -ForegroundColor Green }
+function Warn([string]$s) { Write-Host $s -ForegroundColor Yellow }
+function Update([string]$s) { Write-Host $s -ForegroundColor Blue }
 
 function Get-RegionName([string]$filePath, [string]$basePath) {
     try {
@@ -79,6 +79,7 @@ function Write-SyncReport {
 
 $scriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
 
+# auto-detect BasePath
 if (-not $BasePath) {
     $cur = $scriptDir
     $gtweakRoot = $null

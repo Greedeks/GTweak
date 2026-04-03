@@ -142,6 +142,9 @@
     <Compile Include="Assets\UserControls\FileCard.xaml.cs">
       <DependentUpon>FileCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\UserControls\ToolsetCard.xaml.cs">
+      <DependentUpon>ToolsetCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\Base\IViewPageBase.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Converters\AngleToPercentConverter.cs" />
@@ -270,6 +273,10 @@
     <Page Include="Assets\UserControls\ToggleButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\UserControls\ToolsetCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Core\DataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>

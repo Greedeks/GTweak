@@ -246,7 +246,7 @@
     <v:String x:Key="tgl27_intf">Пошуковий запит з інтеграцією «Bing» в меню «Пуск»</v:String>
     <v:String x:Key="tgl28_intf">Відкривати «Швидкий доступ» замість «Цей ПК»</v:String>
     <v:String x:Key="tgl29_intf">Спонтанна зміна яскравості</v:String>
-    
+
     <v:String x:Key="color1_desc_intf">Зміна кольору фону при виділенні тексту або об'єктів курсором у системі.</v:String>
     <v:String x:Key="color2_desc_intf">Зміна кольору спливаючих підказок у підтримуваних додатках.</v:String>
     <v:String x:Key="exblock1_desc_intf">Змінює відображення вбудованих системних пунктів у панелі навігації, які не можна від’єднати звичайними способами.</v:String>
@@ -360,7 +360,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
-    
+
     <v:String x:Key="title_over_pkg">Підтвердження видалення</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Ви збираєтесь видалити браузер Microsoft Edge. При цьому буде видалений компонент EdgeWebView, який використовується для відображення веб-сторінок у додатках — таких як Microsoft Office (наприклад, Meeting Insights, Room Finder), стандартний додаток «Фотографії» (нова версія використовує WebView2), деякі боти Telegram, а також інші програми, які залежать від вбудованого WebView. Перед тим як продовжити, переконайтесь, що цей компонент вам справді не потрібен. 
       У останніх збірках Windows 11 Copilot реалізовано через EdgeWebView як PWA або системну оболонку. При видаленні Edge Copilot також буде видалений, оскільки він працює як web wrapper.</v:String>
@@ -402,7 +402,7 @@
     <v:String x:Key="tgl30_svc">Служби, пов'язані з демонстраційним режимом магазину</v:String>
     <v:String x:Key="tgl31_svc">Служби, пов'язані з оновленням Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Служба планувальника класів мультимедіа</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">Можна вимкнути, якщо ви не використовуєте історію файлів та індексацію вмісту.</v:String>
     <v:String x:Key="tgl2_desc_svc">Можна вимкнути, якщо ви не використовуєте Xbox та маніпулятор Microsoft Gamepad.</v:String>
     <v:String x:Key="tgl3_desc_svc">Можна вимкнути, якщо ви не плануєте оновлювати Windows. Також буде змінено файли, відповідальні за оновлення Windows. Через це, навіть якщо служби увімкнути, Центр оновлень не працюватиме. Зверніть увагу, це налаштування впливає на завантаження та оновлення програм із Магазину Windows.</v:String>
@@ -472,7 +472,7 @@
     <v:String x:Key="tgl28_sys">Дефрагментація системного диска</v:String>
     <v:String x:Key="tgl29_sys">Призупинити оновлення Windows</v:String>
     <v:String x:Key="tgl30_sys">Багатоплощинне накладення (MPO)</v:String>
-    
+
     <v:String x:Key="slider1_desc_sys">Дозволяє змінити швидкість переміщення вказівника миші, заощаджуючи ваш час на пошук відповідних параметрів.</v:String>
     <v:String x:Key="slider2_desc_sys">Зміна затримки перед початком повторного введення символу, рекомендоване значення - 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Зміна швидкості повторного введення символу, рекомендоване значення - 31.</v:String>
@@ -546,18 +546,10 @@
     <v:String x:Key="scripts_info_adds">Після цього ви зможете запускати скрипти (.ps1, .cmd, .bat, .reg) на цій сторінці</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

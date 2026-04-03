@@ -246,7 +246,7 @@
     <v:String x:Key="tgl27_intf">開始功能表中整合"Bing"的搜尋查詢</v:String>
     <v:String x:Key="tgl28_intf">開啟"快速存取"而非"本機"</v:String>
     <v:String x:Key="tgl29_intf">亮度異常變化</v:String>
-    
+
     <v:String x:Key="color1_desc_intf">調整在系統中使用游標選取文字或物件時的背景顏色。</v:String>
     <v:String x:Key="color2_desc_intf">調整受支援應用程式中工具提示的顏色。</v:String>
     <v:String x:Key="exblock1_desc_intf">變更導覽窗格中內建系統項目的可見性，這些項目無法以一般方式解除釘選。</v:String>
@@ -360,7 +360,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
-    
+
     <v:String x:Key="title_over_pkg">解除安裝確認</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">您即將解除安裝 Microsoft Edge 瀏覽器。此操作亦將移除 EdgeWebView 組件，該組件用於在多種應用程式中顯示網頁內容——例如 Microsoft Office（如會議洞察、會議室搜尋功能）、照片應用程式（新版採用 WebView2）、部分 Telegram 機器人，以及其他依賴嵌入式 WebView 的程式。繼續操作前，請確認您不再需要此組件。 
        在 Windows 11 的近期版本中, Copilot 透過 EdgeWebView 以 PWA 或系統封裝器形式實現。由於其作為網頁封裝器的運作特性，當 Edge 被解除安裝時，Copilot 亦會隨之移除。</v:String>
@@ -402,7 +402,7 @@
     <v:String x:Key="tgl30_svc">與零售展示模式相關的服務</v:String>
     <v:String x:Key="tgl31_svc">與 Microsoft Edge 組件更新相關的服務</v:String>
     <v:String x:Key="tgl32_svc">多媒體類調度服務</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">若您未使用檔案歷史記錄與內容索引功能，請停用此設定。</v:String>
     <v:String x:Key="tgl2_desc_svc">若您未使用 Xbox 與 Microsoft 遊戲控制器，請停用此設定。</v:String>
     <v:String x:Key="tgl3_desc_svc">若您不打算更新 Windows，請停用此設定。此調整除變更服務外，亦會修改負責 Windows 更新的檔案。因此即使服務處於啟用狀態，更新中心仍將無法運作。請注意此調整將影響從 Windows 市集下載及更新應用程式。</v:String>
@@ -472,7 +472,7 @@
     <v:String x:Key="tgl28_sys">系統磁碟重整</v:String>
     <v:String x:Key="tgl29_sys">暫停 Windows 更新</v:String>
     <v:String x:Key="tgl30_sys">多平面疊加 (MPO)</v:String>
-    
+
     <v:String x:Key="slider1_desc_sys">調整滑鼠游標移動速度，省去您搜尋滑鼠參數的時間。</v:String>
     <v:String x:Key="slider2_desc_sys">調整開始重複輸入字元前的延遲時間，建議值為 0。</v:String>
     <v:String x:Key="slider3_desc_sys">調整輸入字元的重複頻率，建議值為 31。</v:String>
@@ -546,20 +546,10 @@
     <v:String x:Key="scripts_info_adds">之後，您就可以在此頁面上執行腳本（.ps1、.cmd、.bat、.reg）了</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

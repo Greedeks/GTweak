@@ -54,9 +54,9 @@
     <v:String x:Key="ready_activate_noty">Ваша операционная система не нуждается в активации</v:String>
     <v:String x:Key="win_activate_noty">Процесс активации Windows начался, это займет некоторое время</v:String>
     <v:String x:Key="success_activate_noty">Активация прошла успешно, рекомендуется перезагрузка</v:String>
-    <v:String x:Key="keynotfound_noty">Отсутствует ключ для вашей редакции Windows, активация отменена</v:String>
-    <v:String x:Key="network_activate_noty">Для активации требуется подключение к Интернету</v:String>
     <v:String x:Key="error_activate_noty">Что-то пошло не так, к сожалению активировать систему не удалось</v:String>
+    <v:String x:Key="network_activate_noty">Для активации требуется подключение к Интернету</v:String>
+    <v:String x:Key="keynotfound_noty">Отсутствует ключ для вашей редакции Windows, активация отменена</v:String>
     <v:String x:Key="createpoint_noty">Cоздание точки восстановления займет некоторое время</v:String>
     <v:String x:Key="error_point_noty">Что-то пошло не так, не удалось создать точку восстановления</v:String>
     <v:String x:Key="success_point_noty">Точка восстановления успешно создана</v:String>
@@ -246,7 +246,7 @@
     <v:String x:Key="tgl27_intf">Поисковый запрос с итреграцией «Bing» в меню пуск</v:String>
     <v:String x:Key="tgl28_intf">Открывать «Быстрый доступ» вместо «Этот компьютер»</v:String>
     <v:String x:Key="tgl29_intf">Самопроизвольное изменение яркости</v:String>
-    
+
     <v:String x:Key="color1_desc_intf">Изменяет цвет фона при выделении текста или объектов курсором в системе.</v:String>
     <v:String x:Key="color2_desc_intf">Изменяет цвет всплывающих подсказок в поддерживаемых приложениях.</v:String>
     <v:String x:Key="exblock1_desc_intf">Изменяет отображение встроенных системных элементов в области навигации, которые нельзя открепить обычным способом.</v:String>
@@ -360,7 +360,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
-    
+
     <v:String x:Key="title_over_pkg">Подтверждение удаления</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Вы собираетесь удалить браузер Microsoft Edge. При этом будет удалён компонент EdgeWebView, используемый для отображения веб‑страниц в приложениях — таких как Microsoft Office (например, Meeting Insights, Room Finder), стандартное приложение «Фотографии» (новая версия использует WebView2), некоторые Telegram‑боты, а также другие программы, зависящие от встроенного WebView. Прежде чем продолжить, убедитесь, что этот компонент вам действительно не нужен. 
         В последних сборках Windows 11 Copilot реализован через EdgeWebView в виде PWA или системной оболочки. При удалении Edge Copilot также удаляется, поскольку он работает как web wrapper.</v:String>
@@ -472,7 +472,7 @@
     <v:String x:Key="tgl28_sys">Дефрагментация системного диска</v:String>
     <v:String x:Key="tgl29_sys">Приостановить обновления Windows</v:String>
     <v:String x:Key="tgl30_sys">Многоплоскостное наложение (MPO)</v:String>
-    
+
     <v:String x:Key="slider1_desc_sys">Изменяет скорость движения указателя мыши, экономя ваше время для поисков параметров мыши.</v:String>
     <v:String x:Key="slider2_desc_sys">Изменят задержку перед началом повтора вводимого символа, рекомендованное значение - 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Изменяет скорость повтора вводимого символа, рекомендованное значение - 31.</v:String>
@@ -546,18 +546,10 @@
     <v:String x:Key="scripts_info_adds">После этого вы сможете запускать скрипты (.ps1, .cmd, .bat, .reg) на этой странице</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Источник</v:String>
+    <v:String x:Key="btn_download">Скачать</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

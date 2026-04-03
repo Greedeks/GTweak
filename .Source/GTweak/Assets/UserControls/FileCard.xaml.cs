@@ -47,10 +47,7 @@ namespace GTweak.Assets.UserControls
 
         private void Card_MouseEnter(object sender, MouseEventArgs e) => CardBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(1.0, 0.7, 0.2));
 
-
         private void Card_MouseLeave(object sender, MouseEventArgs e) => CardBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0.7, 1.0, 0.2));
-
-
 
         private void Card_MouseClick(object sender, MouseButtonEventArgs e)
         {

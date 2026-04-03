@@ -18,7 +18,7 @@
     <v:String x:Key="step7_load">Inicialização</v:String>
     <!--#endregion-->
 
-	<!--#region Message Window -->
+    <!--#region Message Window -->
     <v:String x:Key="title_message">Opa..</v:String>
     <v:String x:Key="part1_message">O utilitário já está em execução. Iniciar várias instâncias</v:String>
     <v:String x:Key="part2_message">é proibido</v:String>
@@ -75,7 +75,7 @@
     <v:String x:Key="success_reg_exporter_noty">Arquivo de registro salvo com sucesso</v:String>
     <v:String x:Key="error_reg_exporter_noty">Ocorreu um erro ao salvar o arquivo de registro</v:String>
     <!--#endregion-->
-    
+
     <!--#region Main Window -->
     <v:String x:Key="rbtn_utils_main">Utilitários</v:String>
     <v:String x:Key="rbtn_conf_main">Privacidade</v:String>
@@ -199,7 +199,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">Cor de seleção do cursor:</v:String>
     <v:String x:Key="color2_intf">Cor da dica de ferramenta:</v:String>
-
+    
     <v:String x:Key="exblock1_intf">Itens de navegação do Explorador de Arquivos:</v:String>
     <v:String x:Key="chk_home_intf">Início</v:String>
     <v:String x:Key="chk_gallery_intf">Galeria</v:String>
@@ -360,7 +360,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
-    
+
     <v:String x:Key="title_over_pkg">Confirmação de desinstalação</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Você está prestes a desinstalar o navegador Microsoft Edge. Isso também removerá o componente EdgeWebView, que é usado para exibir conteúdo da web em vários aplicativos — como o Microsoft Office (por exemplo, Análises de Reunião, Localizador de Salas), o aplicativo Fotos (a nova versão usa o WebView2), alguns bots do Telegram e outros programas que dependem do WebView incorporado. Antes de prosseguir, certifique-se de que não precisa deste componente.
         Nas compilações recentes do Windows 11, o Copilot é implementado via EdgeWebView como um PWA ou wrapper do sistema. Quando o Edge é desinstalado, o Copilot também é removido, uma vez que funciona como um wrapper da web.</v:String>
@@ -402,7 +402,7 @@
     <v:String x:Key="tgl30_svc">Serviços relacionados ao Modo de Demonstração de Loja</v:String>
     <v:String x:Key="tgl31_svc">Serviços relacionados à atualização do Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Serviço de Agendador de Classes Multimídia</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">Desative se você não usa histórico de arquivos e indexação de conteúdo.</v:String>
     <v:String x:Key="tgl2_desc_svc">Desative se você não usa Xbox e gamepads da Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Desative se você não planeja atualizar o Windows. Além dos serviços, o ajuste mudará os arquivos responsáveis pelas atualizações do Windows. Por causa disso, mesmo que os serviços estejam ativados, a Central de Atualizações não funcionará. Observe que o ajuste afeta o download e a atualização de aplicativos da Windows Store.</v:String>
@@ -546,21 +546,10 @@
     <v:String x:Key="scripts_info_adds">Depois disso, você poderá executar scripts (.ps1, .cmd, .bat, .reg) nesta página</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -246,7 +246,7 @@
     <v:String x:Key="tgl27_intf">Zapytanie wyszukiwania z integracją „Bing” w menu Start</v:String>
     <v:String x:Key="tgl28_intf">Otwieraj „Szybki dostęp” zamiast „Ten komputer”</v:String>
     <v:String x:Key="tgl29_intf">Samoczynne zmiany jasności</v:String>
-    
+
     <v:String x:Key="color1_desc_intf">Zmienia kolor tła podczas zaznaczania tekstu lub obiektów kursorem w systemie.</v:String>
     <v:String x:Key="color2_desc_intf">Zmienia kolor podpowiedzi w obsługiwanych aplikacjach.</v:String>
     <v:String x:Key="exblock1_desc_intf">Zmienia widoczność wbudowanych elementów systemowych w panelu nawigacji, których nie można odpiąć przy użyciu standardowych metod.</v:String>
@@ -402,7 +402,7 @@
     <v:String x:Key="tgl30_svc">Usługi związane z trybem demonstracyjnym</v:String>
     <v:String x:Key="tgl31_svc">Usługi związane z aktualizacją Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Usługa planowania klas multimedialnych</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">Wyłącz, jeśli nie używasz historii plików i indeksowania zawartości.</v:String>
     <v:String x:Key="tgl2_desc_svc">Wyłącz, jeśli nie używasz Xbox i padów Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Wyłącz, jeśli nie planujesz aktualizować Windows. Oprócz usług poprawka zmieni pliki odpowiedzialne za aktualizacje Windows. Z tego powodu, nawet jeśli usługi będą włączone, Centrum aktualizacji nie będzie działać. Uwaga: poprawka wpływa na pobieranie i aktualizowanie aplikacji ze Sklepu Windows.</v:String>
@@ -546,18 +546,10 @@
     <v:String x:Key="scripts_info_adds">Po tym będziesz mógł uruchamiać skrypty (.ps1, .cmd, .bat, .reg) na tej stronie</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

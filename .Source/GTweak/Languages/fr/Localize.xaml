@@ -173,7 +173,7 @@
     <v:String x:Key="tgl18_conf">Enregistrement du comportement de l’utilisateur</v:String>
     <v:String x:Key="tgl19_conf">Collecte de données et mises à jour des cartes hors ligne</v:String>
     <v:String x:Key="tgl20_conf">Collecte et surveillance de la télémétrie Intel</v:String>
-
+    
     <v:String x:Key="tgl1_desc_conf">Windows crée un identifiant publicitaire unique pour chaque utilisateur afin de suivre vos actions. Cet identifiant est utilisé par les développeurs d’applications et par Windows lui-même, notamment pour vous proposer des publicités ciblées dans les applications.</v:String>
     <v:String x:Key="tgl2_desc_conf">Même en utilisant un compte local, Windows tente toujours de synchroniser vos données avec les serveurs de Microsoft. Cela inclut notamment : les thèmes, les mots de passe, les paramètres Windows, les paramètres du navigateur, la barre de langue, l’accessibilité simplifiée, et d’autres paramètres.</v:String>
     <v:String x:Key="tgl3_desc_conf">La télémétrie (ou données de diagnostic) est l’ensemble des données que Windows collecte automatiquement pour les envoyer à Microsoft. En résumé : « Quoi ? Où ? Pourquoi et quand l’utilisez-vous ? ». Microsoft affirme que ces données sont anonymisées, mais elles peuvent également surcharger le processeur et ralentir votre système.</v:String>
@@ -199,7 +199,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">Couleur de sélection au curseur :</v:String>
     <v:String x:Key="color2_intf">Couleur de l'infobulle :</v:String>
-
+    
     <v:String x:Key="exblock1_intf">Éléments de navigation de l'Explorateur :</v:String>
     <v:String x:Key="chk_home_intf">Accueil</v:String>
     <v:String x:Key="chk_gallery_intf">Galerie</v:String>
@@ -246,7 +246,7 @@
     <v:String x:Key="tgl27_intf">Recherche intégrée à Bing dans le menu Démarrer</v:String>
     <v:String x:Key="tgl28_intf">Ouvrir « Accès rapide » au lieu de « Ce PC »</v:String>
     <v:String x:Key="tgl29_intf">Changements de luminosité spontanés</v:String>
-    
+
     <v:String x:Key="color1_desc_intf">Modifie la couleur d'arrière-plan lors de la sélection de texte ou d'objets avec le curseur dans le système.</v:String>
     <v:String x:Key="color2_desc_intf">Modifie la couleur des infobulles dans les applications prises en charge.</v:String>
     <v:String x:Key="exblock1_desc_intf">Modifie la visibilité des éléments système intégrés dans le volet de navigation, qui ne peuvent pas être détachés par les moyens habituels.</v:String>
@@ -367,7 +367,6 @@
     <v:String x:Key="question_over_pkg">Souhaitez-vous continuer la suppression avec EdgeWebView ?</v:String>
     <v:String x:Key="btn_delete_all">Oui, tout supprimer</v:String>
     <v:String x:Key="btn_keep_webview">Non, conserver EdgeWebView</v:String>
-
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -403,7 +402,7 @@
     <v:String x:Key="tgl30_svc">Services liés au mode de démonstration en magasin</v:String>
     <v:String x:Key="tgl31_svc">Services liés à la mise à jour de Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Service de planification des classes multimédia</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">Désactivez si vous n'utilisez pas l'historique des fichiers et l'indexation du contenu.</v:String>
     <v:String x:Key="tgl2_desc_svc">Désactivez si vous n'utilisez pas Xbox et les manettes Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Désactivez si vous ne prévoyez pas de mettre à jour Windows. En plus des services, ce réglage modifie les fichiers responsables des mises à jour. Même si les services sont activés, le Centre de mises à jour ne fonctionnera pas. Notez aussi que cela affecte le téléchargement et la mise à jour des applications du Windows Store.</v:String>
@@ -547,11 +546,10 @@
     <v:String x:Key="scripts_info_adds">Après cela, vous pourrez exécuter des scripts (.ps1, .cmd, .bat, .reg) sur cette page</v:String>
     <!--#endregion-->
 
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-

@@ -23,25 +23,28 @@ namespace GTweak.Assets.UserControls
         }
 
         public static readonly DependencyProperty HorizontalSpacingProperty = DependencyProperty.Register(nameof(HorizontalSpacing), typeof(double), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(20.0, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+          new FrameworkPropertyMetadata(20.0, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty VerticalSpacingProperty = DependencyProperty.Register(nameof(VerticalSpacing), typeof(double), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+          new FrameworkPropertyMetadata(10.0, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty ContentAlignmentProperty = DependencyProperty.Register(nameof(ContentAlignment), typeof(HorizontalAlignment), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(HorizontalAlignment.Left, FrameworkPropertyMetadataOptions.AffectsArrange));
+          new FrameworkPropertyMetadata(HorizontalAlignment.Left, FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty UseMasonryLayoutProperty = DependencyProperty.Register(nameof(UseMasonryLayout), typeof(bool), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+          new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(nameof(Orientation), typeof(FlowOrientation), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(FlowOrientation.Unset, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+          new FrameworkPropertyMetadata(FlowOrientation.Unset, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty EqualizeItemSizeProperty = DependencyProperty.Register(nameof(EqualizeItemSize), typeof(bool), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+          new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty ItemWidthProperty = DependencyProperty.Register(nameof(ItemWidth), typeof(double), typeof(FlowPanel),
-            new FrameworkPropertyMetadata(320.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
+          new FrameworkPropertyMetadata(320.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        public static readonly DependencyProperty ResponsiveModeProperty = DependencyProperty.Register(nameof(ResponsiveMode), typeof(bool), typeof(FlowPanel),
+              new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public double HorizontalSpacing
         {
@@ -83,6 +86,12 @@ namespace GTweak.Assets.UserControls
         {
             get => (double)GetValue(ItemWidthProperty);
             set => SetValue(ItemWidthProperty, value);
+        }
+
+        public bool ResponsiveMode
+        {
+            get => (bool)GetValue(ResponsiveModeProperty);
+            set => SetValue(ResponsiveModeProperty, value);
         }
 
         private List<FlowItemGroup> _cachedLayout = new List<FlowItemGroup>();
@@ -150,6 +159,18 @@ namespace GTweak.Assets.UserControls
             }
         }
 
+        private double GetResponsiveAlignmentOffset(double outerWidth, double contentWidth)
+        {
+            double extra = Math.Max(0, outerWidth - contentWidth);
+
+            return ContentAlignment switch
+            {
+                HorizontalAlignment.Center => extra / 2.0,
+                HorizontalAlignment.Right => extra,
+                _ => 0
+            };
+        }
+
         protected override Size MeasureOverride(Size availableSize)
         {
             try
@@ -164,11 +185,49 @@ namespace GTweak.Assets.UserControls
                 double aw = double.IsInfinity(availableSize.Width) ? 1200 : availableSize.Width;
                 double ah = availableSize.Height;
 
-                Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(double.PositiveInfinity, double.PositiveInfinity);
+                Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(availableSize.Width, double.PositiveInfinity);
 
                 for (int i = 0; i < _visibleCache.Count; i++)
                 {
                     _visibleCache[i]?.Measure(constraint);
+                }
+
+                if (ResponsiveMode)
+                {
+                    double totalItemWidth = 0;
+                    double totalItemHeight = 0;
+                    double maxItemHeight = 0;
+                    double maxItemWidth = 0;
+                    int count = _visibleCache.Count;
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        double cw = GetChildWidth(_visibleCache[i]);
+                        double ch = GetChildHeight(_visibleCache[i]);
+
+                        totalItemWidth += cw;
+                        totalItemHeight += ch;
+
+                        if (cw > maxItemWidth)
+                        {
+                            maxItemWidth = cw;
+                        }
+
+                        if (ch > maxItemHeight)
+                        {
+                            maxItemHeight = ch;
+                        }
+                    }
+
+                    double horizontalRequired = totalItemWidth + (count > 1 ? (count - 1) * HorizontalSpacing : 0);
+                    double verticalRequired = totalItemHeight + (count > 1 ? (count - 1) * VerticalSpacing : 0);
+
+                    if (horizontalRequired <= aw)
+                    {
+                        return new Size(aw, maxItemHeight);
+                    }
+
+                    return new Size(maxItemWidth, verticalRequired);
                 }
 
                 if (_cachedLayout != null)
@@ -190,30 +249,72 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        private double CalculateLayoutHeight(List<FlowItemGroup> layout)
+        private void ArrangeResponsive(Size finalSize)
         {
-            if (layout == null || layout.Count == 0)
+            int count = _visibleCache.Count;
+            if (count == 0)
             {
-                return 0;
+                return;
             }
 
-            double neededHeight = 0;
-            if (Orientation == FlowOrientation.Horizontal)
+            double totalItemWidth = 0;
+            double totalItemHeight = 0;
+            double maxItemWidth = 0;
+
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; i < layout.Count; i++)
+                double w = GetChildWidth(_visibleCache[i]);
+                double h = GetChildHeight(_visibleCache[i]);
+
+                totalItemWidth += w;
+                totalItemHeight += h;
+
+                if (w > maxItemWidth)
                 {
-                    neededHeight += layout[i].Height;
-                    if (i > 0)
-                    {
-                        neededHeight += VerticalSpacing;
-                    }
+                    maxItemWidth = w;
+                }
+            }
+
+            double horizontalRequired = totalItemWidth + (count > 1 ? (count - 1) * HorizontalSpacing : 0);
+
+            if (horizontalRequired <= finalSize.Width)
+            {
+                double extraSpace = Math.Max(0, finalSize.Width - totalItemWidth);
+                double spacing = count > 1 ? extraSpace / (count - 1) : 0;
+
+                double x = 0;
+                if (count == 1)
+                {
+                    x = GetResponsiveAlignmentOffset(finalSize.Width, totalItemWidth);
+                }
+
+                for (int i = 0; i < count; i++)
+                {
+                    UIElement child = _visibleCache[i];
+                    double w = GetChildWidth(child);
+                    double h = GetChildHeight(child);
+
+                    child.Arrange(new Rect(x, 0, w, h));
+                    x += w + spacing;
                 }
             }
             else
             {
-                neededHeight = CalculateMaxColumnHeight(layout);
+                double contentWidth = maxItemWidth;
+                double y = 0;
+
+                for (int i = 0; i < count; i++)
+                {
+                    UIElement child = _visibleCache[i];
+                    double w = GetChildWidth(child);
+                    double h = GetChildHeight(child);
+
+                    double x = GetResponsiveAlignmentOffset(contentWidth, w);
+
+                    child.Arrange(new Rect(x, y, w, h));
+                    y += h + VerticalSpacing;
+                }
             }
-            return neededHeight;
         }
 
         protected override Size ArrangeOverride(Size finalSize)
@@ -224,6 +325,12 @@ namespace GTweak.Assets.UserControls
 
                 if (_visibleCache.Count != 0)
                 {
+                    if (ResponsiveMode)
+                    {
+                        ArrangeResponsive(finalSize);
+                        return finalSize;
+                    }
+
                     List<FlowItemGroup> groupsToArrange = null;
                     bool usedCache = false;
 
@@ -260,6 +367,32 @@ namespace GTweak.Assets.UserControls
             }
         }
 
+        private double CalculateLayoutHeight(List<FlowItemGroup> layout)
+        {
+            if (layout == null || layout.Count == 0)
+            {
+                return 0;
+            }
+
+            double neededHeight = 0;
+            if (Orientation == FlowOrientation.Horizontal)
+            {
+                for (int i = 0; i < layout.Count; i++)
+                {
+                    neededHeight += layout[i].Height;
+                    if (i > 0)
+                    {
+                        neededHeight += VerticalSpacing;
+                    }
+                }
+            }
+            else
+            {
+                neededHeight = CalculateMaxColumnHeight(layout);
+            }
+            return neededHeight;
+        }
+
         private void ArrangeAligned(List<FlowItemGroup> groups, double availableWidth)
         {
             if (groups != null && groups.Count != 0)
@@ -288,7 +421,6 @@ namespace GTweak.Assets.UserControls
                     {
                         y += row.Height + VerticalSpacing;
                     }
-
                     continue;
                 }
 

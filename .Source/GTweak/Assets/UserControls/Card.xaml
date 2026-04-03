@@ -6,45 +6,43 @@
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d" 
              d:Height="auto" d:Width="auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None"
-             SnapsToDevicePixels="True" UseLayoutRounding="True"> 
-    <Viewbox Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Left">
-        <Grid HorizontalAlignment="Center">
-            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=CardBody}" Height="{Binding ActualHeight, ElementName=CardBody}">
-                <Border.RenderTransform>
-                    <TranslateTransform X="3" Y="6" />
-                </Border.RenderTransform>
-            </Border>
-            <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}"  CornerRadius="8" Padding="10" MaxWidth="350" HorizontalAlignment="Center" VerticalAlignment="Top" SnapsToDevicePixels="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+             SnapsToDevicePixels="True" UseLayoutRounding="True">
+    <Grid HorizontalAlignment="Center">
+        <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=CardBody}" Height="{Binding ActualHeight, ElementName=CardBody}">
+            <Border.RenderTransform>
+                <TranslateTransform X="3" Y="6" />
+            </Border.RenderTransform>
+        </Border>
+        <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}"  CornerRadius="8" Padding="10" MaxWidth="350" HorizontalAlignment="Center" VerticalAlignment="Top" SnapsToDevicePixels="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                    <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,8">
-                        <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7">
-                            <StackPanel Orientation="Horizontal">
-                                <Image x:Name="CardIcon" Height="24" Width="24"/>
-                                <TextBlock Margin="5,0,0,0" x:Name="CardTitle" Style="{StaticResource TextDefault}" FontSize="16" Foreground="{StaticResource Brush_Accent}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="300"/>
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,8">
+                    <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="CardIcon" Height="24" Width="24"/>
+                            <TextBlock Margin="5,0,0,0" x:Name="CardTitle" Style="{StaticResource TextDefault}" FontSize="16" Foreground="{StaticResource Brush_Accent}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="300"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
 
-                    <TextBlock Margin="0,0,0,12" Grid.Row="1" x:Name="CardText" FontSize="14" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}"/>
+                <TextBlock Margin="0,0,0,12" Grid.Row="1" x:Name="CardText" FontSize="14" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}"/>
 
 
-                    <Grid Grid.Row="2" Margin="0,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                <Grid Grid.Row="2" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Button x:Name="CardButtonSecondary" Grid.Column="0" Margin="0,0,10,0" HorizontalAlignment="Right" Style="{StaticResource ButtonContent}" PreviewMouseLeftButtonUp="CardButtonSecondary_PreviewMouseLeftButtonUp" Visibility="Collapsed"/>
-                        <Button x:Name="CardButton" Grid.Column="1" Style="{StaticResource ButtonContent_Inverted}" PreviewMouseLeftButtonUp="CardButton_PreviewMouseLeftButtonUp"/>
-                    </Grid>
+                    <Button x:Name="CardButtonSecondary" Grid.Column="0" Margin="0,0,10,0" HorizontalAlignment="Right" Style="{StaticResource ButtonContent}" PreviewMouseLeftButtonUp="CardButtonSecondary_PreviewMouseLeftButtonUp" Visibility="Collapsed"/>
+                    <Button x:Name="CardButton" Grid.Column="1" Style="{StaticResource ButtonContent_Inverted}" PreviewMouseLeftButtonUp="CardButton_PreviewMouseLeftButtonUp"/>
                 </Grid>
-            </Border>
-        </Grid>
-    </Viewbox>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

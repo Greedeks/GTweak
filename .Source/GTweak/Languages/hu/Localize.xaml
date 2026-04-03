@@ -1,12 +1,12 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-		    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		    xmlns:v="clr-namespace:System;assembly=mscorlib">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
 
     <v:String x:Key="defaultDescription">Vigye az egeret bármelyik módosítás fölé, hogy megkapja a leírását</v:String>
     <v:String x:Key="defaultDescriptionApp">Vigye az egeret bármely alkalmazás ikonja fölé a nevének megtekintéséhez</v:String>
     <v:String x:Key="btn_default">Alapértelmezett</v:String>
     <v:String x:Key="btn_change">Módosítás</v:String>
-
+    
     <!--#region Load Window -->
     <v:String x:Key="title_load">Betöltés</v:String>
     <v:String x:Key="step1_load">Profil feltöltése</v:String>
@@ -246,7 +246,7 @@
     <v:String x:Key="tgl27_intf">Keresési lekérdezés a" Bing " integrációval a Start menüben</v:String>
     <v:String x:Key="tgl28_intf">Nyissa meg a «Gyors hozzáférés»-t «Ez a gép» helyett</v:String>
     <v:String x:Key="tgl29_intf">Spontán fényerőváltozások</v:String>
-    
+
     <v:String x:Key="color1_desc_intf">Módosítja a háttérszínt a szövegek vagy objektumok kurzorral történő kijelölésekor a rendszerben.</v:String>
     <v:String x:Key="color2_desc_intf">Módosítja a buboréksúgók színét a támogatott alkalmazásokban.</v:String>
     <v:String x:Key="exblock1_desc_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>
@@ -360,7 +360,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
-    
+
     <v:String x:Key="title_over_pkg">Eltávolítás megerősítése</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Hamarosan eltávolítja a Microsoft Edge böngészőt. Ezzel eltávolítja az EdgeWebView összetevőt is, amely a webes tartalmak megjelenítésére szolgál különféle alkalmazásokban – például a Microsoft Office-ban (pl. Meeting Insights, Room Finder), a Fotók alkalmazásban (az új verzió a WebView2-t használja), néhány Telegram botban és más, a beágyazott WebView-ra támaszkodó programokban. Mielőtt folytatná, győződjön meg arról, hogy nincs szüksége erre az összetevőre. 
         A Windows 11 legújabb verzióiban a Copilot az EdgeWebView-n keresztül valósul meg PWA-ként vagy rendszercsomagként. Az Edge eltávolításakor a Copilot is eltávolításra kerül, mivel webes csomagként működik.</v:String>
@@ -402,7 +402,7 @@
     <v:String x:Key="tgl30_svc">Üzleti bemutató móddal kapcsolatos szolgáltatások</v:String>
     <v:String x:Key="tgl31_svc">A Microsoft Edge frissítéséhez kapcsolódó szolgáltatások</v:String>
     <v:String x:Key="tgl32_svc">Multimédia osztályütemező szolgáltatás</v:String>
-    
+
     <v:String x:Key="tgl1_desc_svc">Tiltsa le, ha nem használja a fájlelőzményeket és a tartalomindexelést.</v:String>
     <v:String x:Key="tgl2_desc_svc">Tiltsa le, ha nem használ Xbox és Microsoft játékvezérlőket.</v:String>
     <v:String x:Key="tgl3_desc_svc">Tiltsa le, ha nem tervezi a Windows frissítését. A szolgáltatások mellett a módosítás megváltoztatja a Windows frissítésekért felelős fájlokat. Emiatt a Frissítési központ még akkor sem fog működni, ha a szolgáltatások engedélyezve vannak. Felhívjuk figyelmét, hogy a módosítás az alkalmazások letöltését és frissítését érinti a Windows Store-ból.</v:String>
@@ -545,16 +545,11 @@
     <v:String x:Key="text_info_adds">Válasszon ki egy könyvtárat, vagy győződjön meg róla, hogy nem üres</v:String>
     <v:String x:Key="scripts_info_adds">Ezután képes lesz futtatni szkripteket (.ps1, .cmd, .bat, .reg) ezen az oldalon</v:String>
     <!--#endregion-->
-    
+
+    <!--#region ToolsetCard Page -->
+    <v:String x:Key="source_ts">Source</v:String>
+    <v:String x:Key="btn_download">Download</v:String>
+    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <!--#endregion-->
+
 </ResourceDictionary>
-
-
-
-
-
-
-
-
-
-
-
