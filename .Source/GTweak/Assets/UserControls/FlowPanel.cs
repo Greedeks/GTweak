@@ -15,12 +15,7 @@ namespace GTweak.Assets.UserControls
             internal double Height;
         }
 
-        public enum FlowOrientation
-        {
-            Unset = 0,
-            Vertical = 1,
-            Horizontal = 2
-        }
+        public enum FlowOrientation { Unset, Vertical, Horizontal }
 
         public static readonly DependencyProperty HorizontalSpacingProperty = DependencyProperty.Register(nameof(HorizontalSpacing), typeof(double), typeof(FlowPanel),
           new FrameworkPropertyMetadata(20.0, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
@@ -44,7 +39,7 @@ namespace GTweak.Assets.UserControls
           new FrameworkPropertyMetadata(320.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public static readonly DependencyProperty ResponsiveModeProperty = DependencyProperty.Register(nameof(ResponsiveMode), typeof(bool), typeof(FlowPanel),
-              new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public double HorizontalSpacing
         {
@@ -159,72 +154,59 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        private double GetResponsiveAlignmentOffset(double outerWidth, double contentWidth)
-        {
-            double extra = Math.Max(0, outerWidth - contentWidth);
-
-            return ContentAlignment switch
-            {
-                HorizontalAlignment.Center => extra / 2.0,
-                HorizontalAlignment.Right => extra,
-                _ => 0
-            };
-        }
-
         protected override Size MeasureOverride(Size availableSize)
         {
             try
             {
                 UpdateVisibleCache();
 
-                if (_visibleCache.Count == 0)
+                int count = _visibleCache.Count;
+                if (count == 0)
                 {
                     return new Size(0, 0);
                 }
 
-                double aw = double.IsInfinity(availableSize.Width) ? 1200 : availableSize.Width;
-                double ah = availableSize.Height;
-
                 Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(availableSize.Width, double.PositiveInfinity);
 
-                for (int i = 0; i < _visibleCache.Count; i++)
+                double totalItemWidth = 0;
+                double totalItemHeight = 0;
+                double maxItemHeight = 0;
+                double maxItemWidth = 0;
+
+                for (int i = 0; i < count; i++)
                 {
-                    _visibleCache[i]?.Measure(constraint);
+                    UIElement child = _visibleCache[i];
+                    child?.Measure(constraint);
+
+                    double cw = GetChildWidth(child);
+                    double ch = GetChildHeight(child);
+
+                    totalItemWidth += cw;
+                    totalItemHeight += ch;
+
+                    if (cw > maxItemWidth)
+                    {
+                        maxItemWidth = cw;
+                    }
+
+                    if (ch > maxItemHeight)
+                    {
+                        maxItemHeight = ch;
+                    }
                 }
+
+                double horizontalRequired = totalItemWidth + (count > 1 ? (count - 1) * HorizontalSpacing : 0);
+                double verticalRequired = totalItemHeight + (count > 1 ? (count - 1) * VerticalSpacing : 0);
+
+                double aw = double.IsInfinity(availableSize.Width) ? horizontalRequired : availableSize.Width;
+                double ah = availableSize.Height;
 
                 if (ResponsiveMode)
                 {
-                    double totalItemWidth = 0;
-                    double totalItemHeight = 0;
-                    double maxItemHeight = 0;
-                    double maxItemWidth = 0;
-                    int count = _visibleCache.Count;
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        double cw = GetChildWidth(_visibleCache[i]);
-                        double ch = GetChildHeight(_visibleCache[i]);
-
-                        totalItemWidth += cw;
-                        totalItemHeight += ch;
-
-                        if (cw > maxItemWidth)
-                        {
-                            maxItemWidth = cw;
-                        }
-
-                        if (ch > maxItemHeight)
-                        {
-                            maxItemHeight = ch;
-                        }
-                    }
-
-                    double horizontalRequired = totalItemWidth + (count > 1 ? (count - 1) * HorizontalSpacing : 0);
-                    double verticalRequired = totalItemHeight + (count > 1 ? (count - 1) * VerticalSpacing : 0);
-
                     if (horizontalRequired <= aw)
                     {
-                        return new Size(aw, maxItemHeight);
+                        double returnWidth = double.IsInfinity(availableSize.Width) ? horizontalRequired : aw;
+                        return new Size(returnWidth, maxItemHeight);
                     }
 
                     return new Size(maxItemWidth, verticalRequired);
@@ -236,17 +218,32 @@ namespace GTweak.Assets.UserControls
                     _cachedLayout = null;
                 }
 
-                _cachedMeasureWidth = aw;
                 _cachedLayout = CreateOptimalColumns(aw, ah, _visibleCache);
 
                 double neededHeight = CalculateLayoutHeight(_cachedLayout);
-                return new Size(aw, neededHeight);
+                double neededWidth = double.IsInfinity(availableSize.Width) ? CalculateTotalWidth(_cachedLayout) : aw;
+
+                _cachedMeasureWidth = neededWidth;
+
+                return new Size(neededWidth, neededHeight);
             }
             catch (Exception ex)
             {
                 ErrorLogging.LogDebug(ex);
                 return new Size(0, 0);
             }
+        }
+
+        private double GetResponsiveAlignmentOffset(double outerWidth, double contentWidth)
+        {
+            double extra = Math.Max(0, outerWidth - contentWidth);
+
+            return ContentAlignment switch
+            {
+                HorizontalAlignment.Center => extra / 2.0,
+                HorizontalAlignment.Right => extra,
+                _ => 0
+            };
         }
 
         private void ArrangeResponsive(Size finalSize)
@@ -529,6 +526,8 @@ namespace GTweak.Assets.UserControls
                     return CreateWrappedRows(availableWidth, visibleChildren);
                 case FlowOrientation.Vertical:
                     return CreateWrappedColumns(availableHeight, visibleChildren);
+                default:
+                    break;
             }
 
             double basisWidth;
