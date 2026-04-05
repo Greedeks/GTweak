@@ -47,7 +47,7 @@
                     <ItemsControl ItemsSource="{Binding Tools}" VirtualizingPanel.IsVirtualizing="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <uc:FlowPanel Margin="20,10,5,20" UseMasonryLayout="True" ItemWidth="100" HorizontalSpacing="5" VerticalSpacing="5" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <uc:FlowPanel Margin="10,10,10,20" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 

@@ -154,86 +154,6 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        protected override Size MeasureOverride(Size availableSize)
-        {
-            try
-            {
-                UpdateVisibleCache();
-
-                int count = _visibleCache.Count;
-                if (count == 0)
-                {
-                    return new Size(0, 0);
-                }
-
-                Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(availableSize.Width, double.PositiveInfinity);
-
-                double totalItemWidth = 0;
-                double totalItemHeight = 0;
-                double maxItemHeight = 0;
-                double maxItemWidth = 0;
-
-                for (int i = 0; i < count; i++)
-                {
-                    UIElement child = _visibleCache[i];
-                    child?.Measure(constraint);
-
-                    double cw = GetChildWidth(child);
-                    double ch = GetChildHeight(child);
-
-                    totalItemWidth += cw;
-                    totalItemHeight += ch;
-
-                    if (cw > maxItemWidth)
-                    {
-                        maxItemWidth = cw;
-                    }
-
-                    if (ch > maxItemHeight)
-                    {
-                        maxItemHeight = ch;
-                    }
-                }
-
-                double horizontalRequired = totalItemWidth + (count > 1 ? (count - 1) * HorizontalSpacing : 0);
-                double verticalRequired = totalItemHeight + (count > 1 ? (count - 1) * VerticalSpacing : 0);
-
-                double aw = double.IsInfinity(availableSize.Width) ? horizontalRequired : availableSize.Width;
-                double ah = availableSize.Height;
-
-                if (ResponsiveMode)
-                {
-                    if (horizontalRequired <= aw)
-                    {
-                        double returnWidth = double.IsInfinity(availableSize.Width) ? horizontalRequired : aw;
-                        return new Size(returnWidth, maxItemHeight);
-                    }
-
-                    return new Size(maxItemWidth, verticalRequired);
-                }
-
-                if (_cachedLayout != null)
-                {
-                    ReleaseGroups(_cachedLayout);
-                    _cachedLayout = null;
-                }
-
-                _cachedLayout = CreateOptimalColumns(aw, ah, _visibleCache);
-
-                double neededHeight = CalculateLayoutHeight(_cachedLayout);
-                double neededWidth = double.IsInfinity(availableSize.Width) ? CalculateTotalWidth(_cachedLayout) : aw;
-
-                _cachedMeasureWidth = neededWidth;
-
-                return new Size(neededWidth, neededHeight);
-            }
-            catch (Exception ex)
-            {
-                ErrorLogging.LogDebug(ex);
-                return new Size(0, 0);
-            }
-        }
-
         private double GetResponsiveAlignmentOffset(double outerWidth, double contentWidth)
         {
             double extra = Math.Max(0, outerWidth - contentWidth);
@@ -246,63 +166,157 @@ namespace GTweak.Assets.UserControls
             };
         }
 
-        private void ArrangeResponsive(Size finalSize)
+        protected override Size MeasureOverride(Size availableSize)
         {
-            int count = _visibleCache.Count;
-            if (count != 0)
+            try
             {
+                UpdateVisibleCache();
+                int count = _visibleCache.Count;
+                if (count == 0)
+                {
+                    return new Size(0, 0);
+                }
+
+                double aw = availableSize.Width;
+                double ah = availableSize.Height;
+
+                Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(aw, double.PositiveInfinity);
+
                 double totalItemWidth = 0;
+                double maxItemHeight = 0;
+                double totalVerticalHeight = 0;
                 double maxItemWidth = 0;
 
                 for (int i = 0; i < count; i++)
                 {
-                    double w = GetChildWidth(_visibleCache[i]);
-                    totalItemWidth += w;
-                    if (w > maxItemWidth)
+                    var child = _visibleCache[i];
+                    child?.Measure(constraint);
+
+                    double cw = GetChildWidth(child);
+                    double ch = GetChildHeight(child);
+
+                    totalItemWidth += cw;
+                    totalVerticalHeight += ch;
+                    if (ch > maxItemHeight)
                     {
-                        maxItemWidth = w;
+                        maxItemHeight = ch;
+                    }
+
+                    if (cw > maxItemWidth)
+                    {
+                        maxItemWidth = cw;
                     }
                 }
 
-                double rowSpacing = count > 1 ? HorizontalSpacing * (count - 1) : 0;
-                double rowWidth = totalItemWidth + rowSpacing;
-
-                if (rowWidth <= finalSize.Width)
+                if (ResponsiveMode)
                 {
-                    double x = GetResponsiveAlignmentOffset(finalSize.Width, rowWidth);
+                    if (_cachedLayout != null) { ReleaseGroups(_cachedLayout); _cachedLayout = null; }
 
-                    for (int i = 0; i < count; i++)
+                    double smallOffset = 30.0;
+                    double horizontalRequired = totalItemWidth;
+                    if (count > 1)
                     {
-                        UIElement child = _visibleCache[i];
-                        double w = GetChildWidth(child);
-                        double h = GetChildHeight(child);
-
-                        if (i == count - 1)
+                        horizontalRequired += smallOffset;
+                        if (count > 2)
                         {
-                            child.Arrange(new Rect(finalSize.Width - w, 0, w, h));
-                        }
-                        else
-                        {
-                            child.Arrange(new Rect(x, 0, w, h));
-                            x += w + HorizontalSpacing;
+                            horizontalRequired += (count - 2) * HorizontalSpacing;
                         }
                     }
-                }
-                else
-                {
-                    double y = 0;
 
-                    for (int i = 0; i < count; i++)
+                    double verticalRequired = totalVerticalHeight + (count > 1 ? (count - 1) * VerticalSpacing : 0);
+
+                    Size resultSize;
+                    if (horizontalRequired <= aw || double.IsInfinity(aw))
                     {
-                        UIElement child = _visibleCache[i];
-                        double w = GetChildWidth(child);
-                        double h = GetChildHeight(child);
+                        resultSize = new Size(double.IsInfinity(aw) ? horizontalRequired : aw, maxItemHeight);
+                    }
+                    else
+                    {
+                        resultSize = new Size(double.IsInfinity(aw) ? maxItemWidth : aw, verticalRequired);
+                    }
 
-                        double x = GetResponsiveAlignmentOffset(finalSize.Width, w);
+                    _cachedMeasureWidth = resultSize.Width;
+                    return resultSize;
+                }
+
+                if (_cachedLayout != null)
+                {
+                    ReleaseGroups(_cachedLayout); _cachedLayout = null;
+                }
+
+                _cachedLayout = CreateOptimalColumns(aw, ah, _visibleCache);
+
+                double neededHeight = CalculateLayoutHeight(_cachedLayout);
+                double finalWidth = double.IsInfinity(aw) ? CalculateTotalWidth(_cachedLayout) : aw;
+
+                _cachedMeasureWidth = finalWidth;
+
+                return new Size(finalWidth, neededHeight);
+            }
+            catch (Exception ex)
+            {
+                ErrorLogging.LogDebug(ex);
+                return new Size(0, 0);
+            }
+        }
+
+        private void ArrangeResponsive(Size finalSize)
+        {
+            int count = _visibleCache.Count;
+            if (count == 0)
+            {
+                return;
+            }
+
+            double smallOffset = 30.0;
+            double totalWidth = 0;
+            for (int i = 0; i < count; i++)
+            {
+                totalWidth += GetChildWidth(_visibleCache[i]);
+            }
+
+            double horizontalRequired = totalWidth;
+            if (count > 1)
+            {
+                horizontalRequired += smallOffset;
+                if (count > 2)
+                {
+                    horizontalRequired += (count - 2) * HorizontalSpacing;
+                }
+            }
+
+            if (horizontalRequired <= finalSize.Width || double.IsInfinity(finalSize.Width))
+            {
+                double x = 0;
+                for (int i = 0; i < count; i++)
+                {
+                    UIElement child = _visibleCache[i];
+                    double w = GetChildWidth(child);
+                    double h = GetChildHeight(child);
+                    double y = Math.Max(0, (finalSize.Height - h) / 2.0);
+
+                    if (i == count - 1 && count > 1)
+                    {
+                        child.Arrange(new Rect(finalSize.Width - w, y, w, h));
+                    }
+                    else
+                    {
                         child.Arrange(new Rect(x, y, w, h));
-
-                        y += h + VerticalSpacing;
+                        x += w + (i == 0 ? smallOffset : HorizontalSpacing);
                     }
+                }
+            }
+            else
+            {
+                double y = 0;
+                for (int i = 0; i < count; i++)
+                {
+                    UIElement child = _visibleCache[i];
+                    double w = GetChildWidth(child);
+                    double h = GetChildHeight(child);
+                    double xOffset = GetResponsiveAlignmentOffset(finalSize.Width, w);
+                    child.Arrange(new Rect(xOffset, y, w, h));
+                    y += h + VerticalSpacing;
                 }
             }
         }
