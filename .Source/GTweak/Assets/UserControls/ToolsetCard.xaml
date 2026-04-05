@@ -25,16 +25,51 @@
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid Width="25" Height="25" Margin="0,5,0,0">
-                        <Border BorderBrush="{StaticResource Brush_Separator}" CornerRadius="50" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <Border CornerRadius="50">
-                                <Border.Background>
-                                    <ImageBrush ImageSource="{Binding AuthorIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Stretch="Fill"/>
-                                </Border.Background>
-                            </Border>
+                        <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="0.5" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="50"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSquareIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                            <Setter Property="CornerRadius" Value="0"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding AuthorIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Stretch="Uniform"/>
+                            </Border.Background>
                         </Border>
+
                         <Path Stroke="{StaticResource Brush_Separator}" StrokeThickness="0.5" Stretch="Uniform">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSquareIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Path.Style>
                             <Path.Data>
                                 <EllipseGeometry RadiusX="5" RadiusY="5"/>
+                            </Path.Data>
+                        </Path>
+
+                        <Path Stroke="{StaticResource Brush_Separator}" StrokeThickness="0.5" Stretch="Uniform">
+                            <Path.Style>
+                                <Style TargetType="Path">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSquareIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Path.Style>
+                            <Path.Data>
+                                <RectangleGeometry Rect="0,0,10,10"/>
                             </Path.Data>
                         </Path>
                     </Grid>

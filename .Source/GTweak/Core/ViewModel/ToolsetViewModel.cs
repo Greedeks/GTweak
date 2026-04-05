@@ -121,6 +121,7 @@ namespace GTweak.Core.ViewModel
             private ImageSource _authorIconSource;
             private bool _isDownloading;
             private double _progress;
+            private bool _isSquareIcon;
 
             public ToolsetItem(ToolsetModel model)
             {
@@ -160,6 +161,12 @@ namespace GTweak.Core.ViewModel
                 set { _progress = value; OnPropertyChanged(); }
             }
 
+            public bool IsSquareIcon
+            {
+                get => _isSquareIcon;
+                set { _isSquareIcon = value; OnPropertyChanged(); }
+            }
+
             public ICommand DownloadCommand { get; }
             public ICommand CancelCommand { get; }
 
@@ -167,14 +174,15 @@ namespace GTweak.Core.ViewModel
             {
                 try
                 {
+                    IsSquareIcon = false;
+
                     AppIconSource = ToolsetIconManager.GetAppIconFromResource(_model.IconResourceName);
                     AuthorIconSource = ToolsetIconManager.GetPlaceholder(_model.Group);
 
-                    ImageSource realIcon = await ToolsetIconManager.GetAuthorIconAsync(_model.Group, _model.AuthorIconUrl);
-                    if (realIcon != null)
-                    {
-                        AuthorIconSource = realIcon;
-                    }
+                    (ImageSource Image, bool IsFallback) = await ToolsetIconManager.GetAuthorIconAsync(_model.Group, _model.AuthorIconUrl);
+
+                    AuthorIconSource = Image;
+                    IsSquareIcon = string.Equals(_model.Group, "web", StringComparison.OrdinalIgnoreCase) && !IsFallback;
                 }
                 catch (Exception ex)
                 {

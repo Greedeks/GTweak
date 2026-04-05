@@ -17,35 +17,35 @@ namespace GTweak.Utilities.Managers
 
         public static ImageSource GetPlaceholder(string group) => Application.Current.TryFindResource(group.ToLower() == "github" ? "Icon_Git" : "Icon_Website") as ImageSource;
 
-        public static async Task<ImageSource> GetAuthorIconAsync(string group, string authorIconUrlOrDomain)
+        public static async Task<(ImageSource Image, bool IsFallback)> GetAuthorIconAsync(string group, string authorIconUrlOrDomain)
         {
             if (string.IsNullOrWhiteSpace(authorIconUrlOrDomain))
             {
-                return GetPlaceholder(group);
+                return (GetPlaceholder(group), true);
             }
 
             if (_imageCache.TryGetValue(authorIconUrlOrDomain, out ImageSource cachedImage))
             {
-                return cachedImage;
+                return (cachedImage, false);
             }
 
             string urlToDownload = authorIconUrlOrDomain;
-            bool isWeb = group.ToLower() == "web";
+            bool isWeb = string.Equals(group, "web", StringComparison.OrdinalIgnoreCase);
 
             if (isWeb)
             {
-                urlToDownload = $"https://www.google.com/s2/favicons?domain={authorIconUrlOrDomain}&sz=64";
+                urlToDownload = $"https://www.google.com/s2/favicons?domain={authorIconUrlOrDomain}&sz=48";
             }
 
             try
             {
-                var imageBytes = await _httpClient.GetByteArrayAsync(urlToDownload);
-                var image = LoadImage(imageBytes);
+                byte[] imageBytes = await _httpClient.GetByteArrayAsync(urlToDownload);
+                ImageSource image = LoadImage(imageBytes);
 
                 if (image != null)
                 {
                     _imageCache.TryAdd(authorIconUrlOrDomain, image);
-                    return image;
+                    return (image, false);
                 }
             }
             catch
@@ -61,14 +61,14 @@ namespace GTweak.Utilities.Managers
                         if (image != null)
                         {
                             _imageCache.TryAdd(authorIconUrlOrDomain, image);
-                            return image;
+                            return (image, false);
                         }
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex);  }
                 }
             }
 
-            return GetPlaceholder(group);
+            return (GetPlaceholder(group), true);
         }
 
         private static ImageSource LoadImage(byte[] imageData)

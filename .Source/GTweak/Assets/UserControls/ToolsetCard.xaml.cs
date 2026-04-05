@@ -20,6 +20,7 @@ namespace GTweak.Assets.UserControls
 
         public static readonly DependencyProperty IsDownloadingProperty = DependencyProperty.Register(nameof(IsDownloading), typeof(bool), typeof(ToolsetCard), new PropertyMetadata(false));
         public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(nameof(Progress), typeof(double), typeof(ToolsetCard), new PropertyMetadata(0.0));
+        public static readonly DependencyProperty IsSquareIconProperty = DependencyProperty.Register(nameof(IsSquareIcon), typeof(bool), typeof(ToolsetCard), new PropertyMetadata(false));
 
         public ImageSource AppIcon
         {
@@ -73,6 +74,12 @@ namespace GTweak.Assets.UserControls
         {
             get => (double)GetValue(ProgressProperty);
             set => SetValue(ProgressProperty, value);
+        }
+
+        public bool IsSquareIcon
+        {
+            get => (bool)GetValue(IsSquareIconProperty);
+            set => SetValue(IsSquareIconProperty, value);
         }
 
         public ToolsetCard()

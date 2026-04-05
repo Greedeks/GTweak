@@ -53,7 +53,7 @@
 
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <uc:ToolsetCard AppName="{Binding AppName}" AppIcon="{Binding AppIconSource}" AuthorName="{Binding AuthorName}" AuthorIcon="{Binding AuthorIconSource}" SourceUrl="{Binding SourceUrl}" DownloadCommand="{Binding DownloadCommand}" CancelCommand="{Binding CancelCommand}" IsDownloading="{Binding IsDownloading}" Progress="{Binding Progress}" />
+                                <uc:ToolsetCard AppName="{Binding AppName}" AppIcon="{Binding AppIconSource}" AuthorName="{Binding AuthorName}" AuthorIcon="{Binding AuthorIconSource}" IsSquareIcon="{Binding IsSquareIcon}" SourceUrl="{Binding SourceUrl}" DownloadCommand="{Binding DownloadCommand}" CancelCommand="{Binding CancelCommand}" IsDownloading="{Binding IsDownloading}" Progress="{Binding Progress}" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
