@@ -549,7 +549,8 @@
     <!--#region ToolsetCard Page -->
     <v:String x:Key="source_ts">Источник</v:String>
     <v:String x:Key="btn_download">Скачать</v:String>
-    <v:String x:Key="btn_cancel">Сancel</v:String>
+    <v:String x:Key="btn_cancel">Отмена</v:String>
+    <v:String x:Key="download_folder_ts">Папка загрузки</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

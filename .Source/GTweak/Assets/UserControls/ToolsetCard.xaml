@@ -94,7 +94,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0}%', RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0:0}%', RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
                                 <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" VerticalAlignment="Center"/>
                             </Grid>
 

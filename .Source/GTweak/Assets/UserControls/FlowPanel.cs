@@ -249,67 +249,60 @@ namespace GTweak.Assets.UserControls
         private void ArrangeResponsive(Size finalSize)
         {
             int count = _visibleCache.Count;
-            if (count == 0)
+            if (count != 0)
             {
-                return;
-            }
-
-            double totalItemWidth = 0;
-            double totalItemHeight = 0;
-            double maxItemWidth = 0;
-
-            for (int i = 0; i < count; i++)
-            {
-                double w = GetChildWidth(_visibleCache[i]);
-                double h = GetChildHeight(_visibleCache[i]);
-
-                totalItemWidth += w;
-                totalItemHeight += h;
-
-                if (w > maxItemWidth)
-                {
-                    maxItemWidth = w;
-                }
-            }
-
-            double horizontalRequired = totalItemWidth + (count > 1 ? (count - 1) * HorizontalSpacing : 0);
-
-            if (horizontalRequired <= finalSize.Width)
-            {
-                double extraSpace = Math.Max(0, finalSize.Width - totalItemWidth);
-                double spacing = count > 1 ? extraSpace / (count - 1) : 0;
-
-                double x = 0;
-                if (count == 1)
-                {
-                    x = GetResponsiveAlignmentOffset(finalSize.Width, totalItemWidth);
-                }
+                double totalItemWidth = 0;
+                double maxItemWidth = 0;
 
                 for (int i = 0; i < count; i++)
                 {
-                    UIElement child = _visibleCache[i];
-                    double w = GetChildWidth(child);
-                    double h = GetChildHeight(child);
-
-                    child.Arrange(new Rect(x, 0, w, h));
-                    x += w + spacing;
+                    double w = GetChildWidth(_visibleCache[i]);
+                    totalItemWidth += w;
+                    if (w > maxItemWidth)
+                    {
+                        maxItemWidth = w;
+                    }
                 }
-            }
-            else
-            {
-                double contentWidth = maxItemWidth;
-                double y = 0;
 
-                for (int i = 0; i < count; i++)
+                double rowSpacing = count > 1 ? HorizontalSpacing * (count - 1) : 0;
+                double rowWidth = totalItemWidth + rowSpacing;
+
+                if (rowWidth <= finalSize.Width)
                 {
-                    UIElement child = _visibleCache[i];
-                    double w = GetChildWidth(child);
-                    double h = GetChildHeight(child);
+                    double x = GetResponsiveAlignmentOffset(finalSize.Width, rowWidth);
 
-                    double x = GetResponsiveAlignmentOffset(contentWidth, w);
+                    for (int i = 0; i < count; i++)
+                    {
+                        UIElement child = _visibleCache[i];
+                        double w = GetChildWidth(child);
+                        double h = GetChildHeight(child);
 
-                    child.Arrange(new Rect(x, y, w, h));
-                    y += h + VerticalSpacing;
+                        if (i == count - 1)
+                        {
+                            child.Arrange(new Rect(finalSize.Width - w, 0, w, h));
+                        }
+                        else
+                        {
+                            child.Arrange(new Rect(x, 0, w, h));
+                            x += w + HorizontalSpacing;
+                        }
+                    }
+                }
+                else
+                {
+                    double y = 0;
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        UIElement child = _visibleCache[i];
+                        double w = GetChildWidth(child);
+                        double h = GetChildHeight(child);
+
+                        double x = GetResponsiveAlignmentOffset(finalSize.Width, w);
+                        child.Arrange(new Rect(x, y, w, h));
+
+                        y += h + VerticalSpacing;
+                    }
                 }
             }
         }

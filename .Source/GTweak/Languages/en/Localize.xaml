@@ -550,6 +550,7 @@
     <v:String x:Key="source_ts">Source</v:String>
     <v:String x:Key="btn_download">Download</v:String>
     <v:String x:Key="btn_cancel">Сancel</v:String>
+    <v:String x:Key="download_folder_ts">Download Folder</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

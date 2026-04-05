@@ -156,6 +156,7 @@
     <Compile Include="Core\Model\ServicesModel.cs" />
     <Compile Include="Core\Model\SystemModel.cs" />
     <Compile Include="Core\Model\ToolsetModel.cs" />
+    <Compile Include="Core\Service\ToolsetDownloadService.cs" />
     <Compile Include="Core\ViewModel\AddonsViewModel.cs" />
     <Compile Include="Core\ViewModel\ConfidentialityViewModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemViewModel.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Utilities\Helpers\UnlockHandleHelper.cs" />
     <Compile Include="Utilities\Maintenance\ClearingMemory.cs" />
     <Compile Include="Utilities\Maintenance\RegistryExporter.cs" />
+    <Compile Include="Utilities\Managers\ToolsetIconManager.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\AclPermissionsBackup.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />
@@ -540,6 +542,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\AppsCatalog.xml" />
     <Resource Include="GTweak.ico" />
     <Resource Include="Assets\Fonts\Jura-Medium.ttf" />
     <Resource Include="Assets\Fonts\Play-Regular.ttf" />
@@ -621,6 +624,13 @@
     <Resource Include="Assets\Images\PreinstalledApps\Widgets.png" />
     <Resource Include="Assets\Images\PreinstalledApps\Xbox.png" />
     <Resource Include="Assets\Images\PreinstalledApps\YandexMusic.png" />
+    <Resource Include="Assets\Images\DownloadApps\Amd.png" />
+    <Resource Include="Assets\Images\DownloadApps\Autoruns.png" />
+    <Resource Include="Assets\Images\DownloadApps\DeviceTweaker.png" />
+    <Resource Include="Assets\Images\DownloadApps\FirstEverTech.png" />
+    <Resource Include="Assets\Images\DownloadApps\Nvidia.png" />
+    <Resource Include="Assets\Images\DownloadApps\NvidiaPI.png" />
+    <Resource Include="Assets\Images\DownloadApps\Occt.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

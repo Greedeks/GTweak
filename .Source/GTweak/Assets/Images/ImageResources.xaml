@@ -1,6 +1,14 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <BitmapImage x:Key="Img_Amd" UriSource="/GTweak;component/Assets/Images/DownloadApps/Amd.png"/>
+    <BitmapImage x:Key="Img_Autoruns" UriSource="/GTweak;component/Assets/Images/DownloadApps/Autoruns.png"/>
+    <BitmapImage x:Key="Img_DeviceTweaker" UriSource="/GTweak;component/Assets/Images/DownloadApps/DeviceTweaker.png"/>
+    <BitmapImage x:Key="Img_FirstEverTech" UriSource="/GTweak;component/Assets/Images/DownloadApps/FirstEverTech.png"/>
+    <BitmapImage x:Key="Img_Nvidia" UriSource="/GTweak;component/Assets/Images/DownloadApps/Nvidia.png"/>
+    <BitmapImage x:Key="Img_NvidiaPI" UriSource="/GTweak;component/Assets/Images/DownloadApps/NvidiaPI.png"/>
+    <BitmapImage x:Key="Img_Occt" UriSource="/GTweak;component/Assets/Images/DownloadApps/Occt.png"/>
+
     <BitmapImage x:Key="Img_BatFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/BatFile.png"/>
     <BitmapImage x:Key="Img_CmdFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/CmdFile.png"/>
     <BitmapImage x:Key="Img_PowershellFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/PowershellFile.png"/>

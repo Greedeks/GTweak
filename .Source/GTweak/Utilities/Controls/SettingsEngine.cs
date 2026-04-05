@@ -36,7 +36,8 @@ namespace GTweak.Utilities.Controls
             ["VolumeLevel"] = 50,
             ["Language"] = HardwareProvider.GetCurrentSystemLang().Code,
             ["Theme"] = AvailableThemes.First(),
-            ["AddonsPath"] = string.Empty,
+            ["AddonsPath"] = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+            ["DownloadPath"] = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
         };
 
         private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);
@@ -50,6 +51,7 @@ namespace GTweak.Utilities.Controls
         internal static string Language { get => (string)_cachedSettings["Language"]; set => ChangingParameters("Language", value); }
         internal static string Theme { get => (string)_cachedSettings["Theme"]; set => ChangingParameters("Theme", value); }
         internal static string UserAddonsPath { get => (string)_cachedSettings["AddonsPath"]; set => ChangingParameters("AddonsPath", value); }
+        internal static string DownloadPath { get => (string)_cachedSettings["DownloadPath"]; set => ChangingParameters("DownloadPath", value); }
 
         private static void ChangingParameters(string key, object value)
         {

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Apps>
+    <App>
+        <Icon>Img_FirstEverTech</Icon>
+        <Name>Universal Intel Chipset Device Updater</Name>
+        <Group>github</Group>
+        <Author>FirstEverTech</Author>
+        <AuthorIcon>https://github.com/FirstEverTech.png</AuthorIcon>
+        <Source>https://github.com/FirstEverTech/Universal-Intel-Chipset-Updater</Source>
+        <DownloadPath>FirstEverTech/Universal-Intel-Chipset-Updater</DownloadPath>
+        <FilePattern><![CDATA[.*\.exe$]]></FilePattern>
+    </App>
+
+    <App>
+        <Icon>Img_FirstEverTech</Icon>
+        <Name>Universal Intel Wi-Fi and Bluetooth Drivers Updater</Name>
+        <Group>github</Group>
+        <Author>FirstEverTech</Author>
+        <AuthorIcon>https://github.com/FirstEverTech.png</AuthorIcon>
+        <Source>https://github.com/FirstEverTech/Universal-Intel-WiFi-BT-Updater</Source>
+        <DownloadPath>FirstEverTech/Universal-Intel-WiFi-BT-Updater</DownloadPath>
+        <FilePattern><![CDATA[.*\.exe$]]></FilePattern>
+    </App>
+
+    <App>
+        <Icon>Img_DeviceTweaker</Icon>
+        <Name>DEVICE TWEAKER</Name>
+        <Group>github</Group>
+        <Author>arsenzaaa</Author>
+        <AuthorIcon>https://github.com/arsenzaaa.png</AuthorIcon>
+        <Source>https://github.com/arsenzaaa/DEVICE-TWEAKER</Source>
+        <DownloadPath>arsenzaaa/DEVICE-TWEAKER</DownloadPath>
+        <FilePattern><![CDATA[(?i)DEVICE.*NET.*FRAMEWORK.*\.exe$]]></FilePattern>
+    </App>
+
+    <App>
+        <Icon>Img_NvidiaPI</Icon>
+        <Name>NVIDIA Profile Inspector</Name>
+        <Group>github</Group>
+        <Author>Orbmu2k</Author>
+        <AuthorIcon>https://github.com/Orbmu2k.png</AuthorIcon>
+        <Source>https://github.com/Orbmu2k/nvidiaProfileInspector</Source>
+        <DownloadPath>Orbmu2k/nvidiaProfileInspector</DownloadPath>
+        <FilePattern><![CDATA[(?i)nvidiaProfileInspector.*\.zip$]]></FilePattern>
+    </App>
+
+    <App>
+        <Icon>Img_Nvidia</Icon>
+        <Name>NVIDIA App</Name>
+        <Group>web</Group>
+        <Author>(C) NVIDIA Corporation</Author>
+        <AuthorIcon>nvidia.com</AuthorIcon>
+        <Source>https://www.nvidia.com/en-eu/software/nvidia-app/</Source>
+        <DownloadPath>https://www.nvidia.com/en-us/software/nvidia-app/</DownloadPath>
+        <UrlPattern><![CDATA[https://.*?download\.nvidia\.com/nvapp/client/.*?/NVIDIA_app_.*?\.exe]]></UrlPattern>
+    </App>
+
+    <App>
+        <Icon>Img_Amd</Icon>
+        <Name>AMD Software: Adrenalin Edition™</Name>
+        <Group>web</Group>
+        <Author>Advanced Micro Devices, Inc</Author>
+        <AuthorIcon>amd.com</AuthorIcon>
+        <Source>https://www.amd.com/en/support/download/drivers.html</Source>
+        <DownloadPath>https://www.amd.com/en/support/download/drivers.html</DownloadPath>
+        <UrlPattern><![CDATA[https://drivers\.amd\.com/drivers/installer/.*?/whql/.*?minimalsetup.*?\.exe]]></UrlPattern>
+    </App>
+
+    <App>
+        <Icon>Img_Autoruns</Icon>
+        <Name>Autoruns</Name>
+        <Group>web</Group>
+        <Author>Mark Russinovich</Author>
+        <AuthorIcon>microsoft.com</AuthorIcon>
+        <Source>https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns</Source>
+        <DownloadPath>https://download.sysinternals.com/files/Autoruns.zip</DownloadPath>
+    </App>
+
+    <App>
+        <Icon>Img_Occt</Icon>
+        <Name>OCCT</Name>
+        <Group>web</Group>
+        <Author>OCCT</Author>
+        <AuthorIcon>ocbase.com</AuthorIcon>
+        <Source>https://www.ocbase.com/download</Source>
+        <DownloadPath>https://www.ocbase.com/download/edition:Personal/os:Windows</DownloadPath>
+    </App>
+</Apps>

@@ -61,6 +61,25 @@ namespace GTweak.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;Apps&gt;
+        ///    &lt;App&gt;
+        ///        &lt;Icon&gt;Img_FirstEverTech&lt;/Icon&gt;
+        ///        &lt;Name&gt;Universal Intel Chipset Device Updater&lt;/Name&gt;
+        ///        &lt;Group&gt;github&lt;/Group&gt; 
+        ///        &lt;Author&gt;FirstEverTech&lt;/Author&gt;
+        ///        &lt;AuthorIcon&gt;https://github.com/FirstEverTech.png&lt;/AuthorIcon&gt;
+        ///        &lt;Source&gt;https://github.com/FirstEverTech/Universal-Intel-Chipset-Updater&lt;/Source&gt;
+        ///        &lt;DownloadPath&gt;FirstEverTech/Universal-Intel-Chipset-Updater&lt;/DownloadPath&gt; 
+        ///		&lt;FilePattern&gt;&lt;![CDATA[Setup.*\\ [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string AppsCatalog {
+            get {
+                return ResourceManager.GetString("AppsCatalog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
         internal static byte[] Blank {
@@ -71,7 +90,13 @@ namespace GTweak.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на # Blocklist Domain - GTweak
+        ///   Ищет локализованную строку, похожую на 0.0.0.0 1oavsblobprodcus350.blob.core.windows.net
+        ///0.0.0.0 2539951.r.bat.bing.com
+        ///0.0.0.0 37bvsblobprodcus311.blob.core.windows.net
+        ///0.0.0.0 a.ads1.msn.com
+        ///0.0.0.0 a.ads2.msads.net
+        ///0.0.0.0 a.ads2.msn.com
+        ///0.0.0.0 a.rad.msn.com
         ///0.0.0.0 a-0001.a-msedge.net
         ///0.0.0.0 a-0001.dc-msedge.net
         ///0.0.0.0 a-0002.a-msedge.net
@@ -81,14 +106,7 @@ namespace GTweak.Properties {
         ///0.0.0.0 a-0005.a-msedge.net
         ///0.0.0.0 a-0006.a-msedge.net
         ///0.0.0.0 a-0007.a-msedge.net
-        ///0.0.0.0 a-0008.a-msedge.net
-        ///0.0.0.0 a-0009.a-msedge.net
-        ///0.0.0.0 a-0010.a-msedge.net
-        ///0.0.0.0 a-0011.a-msedge.net
-        ///0.0.0.0 a-0012.a-msedge.net
-        ///0.0.0.0 a-msedge.net
-        ///0.0.0.0 1oavsblobprodcus350.blob.core.windows.net
-        ///0. [остаток строки не уместился]&quot;;.
+        ///0.0.0.0 a-0008.a-m [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string Blocklist {
             get {
