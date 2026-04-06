@@ -14,24 +14,61 @@
                 <TranslateTransform X="3" Y="6" />
             </Border.RenderTransform>
         </Border>
-        <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Left" VerticalAlignment="Top" SnapsToDevicePixels="True">
+        <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Left" VerticalAlignment="Top" SnapsToDevicePixels="True">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{StaticResource Color_Separator}"/>
+            </Border.BorderBrush>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource Color_Border_Hover_CheckBox}" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource Color_Separator}" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
 
             <local:FlowPanel ResponsiveMode="True" HorizontalAlignment="Left" Margin="5" HorizontalSpacing="0" VerticalSpacing="5">
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Image x:Name="CardIcon" Height="35" Width="35" Source="{Binding AppIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Stretch="Uniform"/>
-                    <TextBlock x:Name="CardTitle" Margin="10,0,0,0" Text="{Binding AppName, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center"/>
-                </StackPanel>
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Grid Width="25" Height="25" Margin="0,5,0,0">
+                    <Image Grid.Column="0" x:Name="CardIcon" Height="35" Width="35" Source="{Binding AppIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Stretch="Uniform"/>
+                    <TextBlock Grid.Column="1" x:Name="CardTitle" Margin="10,0,0,0" Text="{Binding AppName, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                </Grid>
+
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,15,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Width="25" Height="25" Margin="0,5,0,0">
                         <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="0.5" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <Border.Style>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="50"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsSquareIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
-                                            <Setter Property="CornerRadius" Value="0"/>
+                                            <Setter Property="CornerRadius" Value="5"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -69,16 +106,16 @@
                                 </Style>
                             </Path.Style>
                             <Path.Data>
-                                <RectangleGeometry Rect="0,0,10,10"/>
+                                <RectangleGeometry Rect="0,0,10,10" RadiusX="2" RadiusY="2"/>
                             </Path.Data>
                         </Path>
                     </Grid>
 
-                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{Binding AuthorName, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    <TextBlock Grid.Column="1" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{Binding AuthorName, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" VerticalAlignment="Center" Margin="5,0,0,0" TextTrimming="CharacterEllipsis"/>
 
-                    <TextBlock Text=" • " Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <TextBlock Grid.Column="2" Text=" • " Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="5,0,5,0"/>
 
-                    <Border Background="Transparent" Cursor="Hand" VerticalAlignment="Center" SnapsToDevicePixels="True" BorderThickness="0,0,0,1" MouseLeftButtonDown="OpenSource_MouseLeftButtonDown">
+                    <Border Grid.Column="3" Background="Transparent" Cursor="Hand" VerticalAlignment="Center" SnapsToDevicePixels="True" BorderThickness="0,0,0,1" MouseLeftButtonDown="OpenSource_MouseLeftButtonDown">
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Setter Property="BorderBrush" Value="Transparent" />
@@ -90,53 +127,55 @@
                             </Style>
                         </Border.Style>
 
-                        <StackPanel Orientation="Horizontal" Background="Transparent">
-                            <TextBlock Text="{DynamicResource source_ts}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Cursor="Hand"/>
-                            <ui:SymbolIcon Symbol="Share20" FontSize="16" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="5,0,0,0" Cursor="Hand"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                    <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,3,0,0">
-                        <Button x:Name="CardButton" Content="{DynamicResource btn_download}" Command="{Binding DownloadCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}">
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource ButtonContent}">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsDownloading, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-
-                        <Grid>
-                            <Grid.Style>
-                                <Style TargetType="Grid">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsDownloading, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Grid.Style>
+                        <Grid Background="Transparent">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0">
-                                <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0:0}%', RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
-                                <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" VerticalAlignment="Center"/>
-                            </Grid>
-
-                            <Button Grid.Column="2" Content="{DynamicResource btn_cancel}"  Style="{StaticResource ButtonContent}" Command="{Binding CancelCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Margin="10,0,0,0"/>
+                            <TextBlock Grid.Column="0" Text="{DynamicResource source_ts}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Cursor="Hand"/>
+                            <ui:SymbolIcon Grid.Column="1" Symbol="Share20" FontSize="16" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="5,0,0,0" Cursor="Hand"/>
                         </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,3,0,0">
+                    <Button x:Name="CardButton" Content="{DynamicResource btn_download}" Command="{Binding DownloadCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource ButtonContent}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsDownloading, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsDownloading, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0:0}%', RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" MinWidth="150" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <Button Grid.Column="1" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent}" Command="{Binding CancelCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Margin="10,0,0,0"/>
                     </Grid>
-                </StackPanel>
+                </Grid>
 
             </local:FlowPanel>
         </Border>

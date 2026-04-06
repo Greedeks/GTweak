@@ -26,7 +26,7 @@ namespace GTweak.Core.Services
         }
 
         internal static DownloadSession GetOrCreateSession(ToolsetModel model) => _sessions.GetOrAdd(!string.IsNullOrWhiteSpace(model.SourceUrl) ? model.SourceUrl : model.AppName, _ => new DownloadSession(model));
-        
+
         internal static async Task<string> GetResolvedDownloadUrl(ToolsetModel model)
         {
             try

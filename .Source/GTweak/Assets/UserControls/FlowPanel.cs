@@ -180,21 +180,44 @@ namespace GTweak.Assets.UserControls
                 double aw = availableSize.Width;
                 double ah = availableSize.Height;
 
-                Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(aw, double.PositiveInfinity);
+                double finiteAw = (double.IsInfinity(aw) || double.IsNaN(aw) || aw <= 0) ? (double)(double.IsInfinity(MaxWidth) ? 320.0 : MaxWidth) : aw;
 
                 double totalItemWidth = 0;
                 double maxItemHeight = 0;
                 double totalVerticalHeight = 0;
                 double maxItemWidth = 0;
 
+                if (ResponsiveMode)
+                {
+                    for (int i = 1; i < count; i++)
+                    {
+                        _visibleCache[i]?.Measure(new Size(finiteAw, double.PositiveInfinity));
+                    }
+
+                    if (count > 1)
+                    {
+                        double lastChildWidth = _visibleCache[count - 1].DesiredSize.Width;
+                        double firstMaxWidth = Math.Max(0, finiteAw - lastChildWidth - HorizontalSpacing - 30.0);
+                        _visibleCache[0]?.Measure(new Size(firstMaxWidth, double.PositiveInfinity));
+                    }
+                    else
+                    {
+                        _visibleCache[0]?.Measure(new Size(finiteAw, double.PositiveInfinity));
+                    }
+                }
+                else
+                {
+                    Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(finiteAw, double.PositiveInfinity);
+                    for (int i = 0; i < count; i++)
+                    {
+                        _visibleCache[i]?.Measure(constraint);
+                    }
+                }
+
                 for (int i = 0; i < count; i++)
                 {
-                    var child = _visibleCache[i];
-                    child?.Measure(constraint);
-
-                    double cw = GetChildWidth(child);
-                    double ch = GetChildHeight(child);
-
+                    double cw = _visibleCache[i].DesiredSize.Width;
+                    double ch = _visibleCache[i].DesiredSize.Height;
                     totalItemWidth += cw;
                     totalVerticalHeight += ch;
                     if (ch > maxItemHeight)
@@ -212,38 +235,11 @@ namespace GTweak.Assets.UserControls
                 {
                     if (_cachedLayout != null) { ReleaseGroups(_cachedLayout); _cachedLayout = null; }
 
-                    double smallOffset = 30.0;
-                    double horizontalRequired = totalItemWidth;
-                    if (count > 1)
-                    {
-                        horizontalRequired += smallOffset;
-                        if (count > 2)
-                        {
-                            horizontalRequired += (count - 2) * HorizontalSpacing;
-                        }
-                    }
+                    double horizontalRequired = totalItemWidth + (count > 1 ? 30.0 : 0) + (count > 2 ? (count - 2) * HorizontalSpacing : 0);
 
-                    double verticalRequired = 0;
-                    if (count > 1)
-                    {
-                        double buttonHeight = GetChildHeight(_visibleCache[count - 1]);
-                        verticalRequired = totalVerticalHeight - buttonHeight + ((count - 2) * VerticalSpacing);
-                        verticalRequired = Math.Max(verticalRequired, buttonHeight);
-                    }
-                    else
-                    {
-                        verticalRequired = totalVerticalHeight;
-                    }
+                    double verticalRequired = (count > 1) ? Math.Max(totalVerticalHeight - _visibleCache[count - 1].DesiredSize.Height + (count - 2) * VerticalSpacing, _visibleCache[count - 1].DesiredSize.Height) : totalVerticalHeight;
 
-                    Size resultSize;
-                    if (horizontalRequired <= aw || double.IsInfinity(aw))
-                    {
-                        resultSize = new Size(double.IsInfinity(aw) ? horizontalRequired : aw, maxItemHeight);
-                    }
-                    else
-                    {
-                        resultSize = new Size(double.IsInfinity(aw) ? maxItemWidth : aw, verticalRequired);
-                    }
+                    Size resultSize = (horizontalRequired <= aw || double.IsInfinity(aw)) ? new Size(double.IsInfinity(aw) ? horizontalRequired : aw, maxItemHeight) : new Size(double.IsInfinity(aw) ? maxItemWidth : aw, verticalRequired);
 
                     _cachedMeasureWidth = resultSize.Width;
                     return resultSize;
@@ -251,17 +247,17 @@ namespace GTweak.Assets.UserControls
 
                 if (_cachedLayout != null)
                 {
-                    ReleaseGroups(_cachedLayout); _cachedLayout = null;
+                    ReleaseGroups(_cachedLayout);
+                    _cachedLayout = null;
                 }
-
                 _cachedLayout = CreateOptimalColumns(aw, ah, _visibleCache);
 
-                double neededHeight = CalculateLayoutHeight(_cachedLayout);
+                double finalHeight = CalculateLayoutHeight(_cachedLayout);
                 double finalWidth = double.IsInfinity(aw) ? CalculateTotalWidth(_cachedLayout) : aw;
 
                 _cachedMeasureWidth = finalWidth;
 
-                return new Size(finalWidth, neededHeight);
+                return new Size(finalWidth, finalHeight);
             }
             catch (Exception ex)
             {
@@ -278,41 +274,37 @@ namespace GTweak.Assets.UserControls
                 return;
             }
 
-            double smallOffset = 30.0;
+            double width = (double.IsInfinity(finalSize.Width) || finalSize.Width <= 0) ? (_cachedMeasureWidth > 0 ? _cachedMeasureWidth : 320.0) : finalSize.Width;
+
             double totalWidth = 0;
             for (int i = 0; i < count; i++)
             {
-                totalWidth += GetChildWidth(_visibleCache[i]);
+                totalWidth += _visibleCache[i].DesiredSize.Width;
             }
 
-            double horizontalRequired = totalWidth;
-            if (count > 1)
-            {
-                horizontalRequired += smallOffset;
-                if (count > 2)
-                {
-                    horizontalRequired += (count - 2) * HorizontalSpacing;
-                }
-            }
+            double horizontalRequired = totalWidth + (count > 1 ? 30.0 : 0) + (count > 2 ? (count - 2) * HorizontalSpacing : 0);
+            double lastChildWidth = count > 1 ? _visibleCache[count - 1].DesiredSize.Width : 0;
 
             if (horizontalRequired <= finalSize.Width || double.IsInfinity(finalSize.Width))
             {
                 double x = 0;
+                double availableLeftWidth = Math.Max(0, width - lastChildWidth - HorizontalSpacing);
                 for (int i = 0; i < count; i++)
                 {
-                    UIElement child = _visibleCache[i];
-                    double w = GetChildWidth(child);
-                    double h = GetChildHeight(child);
+                    var child = _visibleCache[i];
+                    double w = child.DesiredSize.Width;
+                    double h = child.DesiredSize.Height;
                     double y = Math.Max(0, (finalSize.Height - h) / 2.0);
 
                     if (i == count - 1 && count > 1)
                     {
-                        child.Arrange(new Rect(finalSize.Width - w, y, w, h));
+                        child.Arrange(new Rect(width - w, y, w, h));
                     }
                     else
                     {
-                        child.Arrange(new Rect(x, y, w, h));
-                        x += w + (i == 0 ? smallOffset : HorizontalSpacing);
+                        double arrangeWidth = Math.Min(w, Math.Max(0, availableLeftWidth - x));
+                        child.Arrange(new Rect(x, y, arrangeWidth, h));
+                        x += arrangeWidth + (i == 0 ? 30.0 : HorizontalSpacing);
                     }
                 }
             }
@@ -321,19 +313,20 @@ namespace GTweak.Assets.UserControls
                 double y = 0;
                 for (int i = 0; i < count; i++)
                 {
-                    UIElement child = _visibleCache[i];
-                    double w = GetChildWidth(child);
-                    double h = GetChildHeight(child);
+                    var child = _visibleCache[i];
+                    double w = child.DesiredSize.Width;
+                    double h = child.DesiredSize.Height;
 
                     if (i == count - 1 && count > 1)
                     {
-                        double buttonY = Math.Max(0, (GetChildHeight(_visibleCache[0]) - h) / 2.0);
-                        child.Arrange(new Rect(finalSize.Width - w, buttonY, w, h));
+                        double buttonY = Math.Max(0, (_visibleCache[0].DesiredSize.Height - h) / 2.0);
+                        child.Arrange(new Rect(width - w, buttonY, w, h));
                     }
                     else
                     {
-                        double xOffset = GetResponsiveAlignmentOffset(finalSize.Width, w);
-                        child.Arrange(new Rect(xOffset, y, w, h));
+                        double maxWidth = (i == 0 && count > 1) ? Math.Max(0, width - lastChildWidth - HorizontalSpacing - 30.0) : width;
+                        double arrangeWidth = Math.Min(w, maxWidth);
+                        child.Arrange(new Rect(GetResponsiveAlignmentOffset(width, arrangeWidth), y, arrangeWidth, h));
                         y += h + VerticalSpacing;
                     }
                 }
