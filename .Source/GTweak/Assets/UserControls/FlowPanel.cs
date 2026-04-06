@@ -223,7 +223,17 @@ namespace GTweak.Assets.UserControls
                         }
                     }
 
-                    double verticalRequired = totalVerticalHeight + (count > 1 ? (count - 1) * VerticalSpacing : 0);
+                    double verticalRequired = 0;
+                    if (count > 1)
+                    {
+                        double buttonHeight = GetChildHeight(_visibleCache[count - 1]);
+                        verticalRequired = totalVerticalHeight - buttonHeight + ((count - 2) * VerticalSpacing);
+                        verticalRequired = Math.Max(verticalRequired, buttonHeight);
+                    }
+                    else
+                    {
+                        verticalRequired = totalVerticalHeight;
+                    }
 
                     Size resultSize;
                     if (horizontalRequired <= aw || double.IsInfinity(aw))
@@ -314,9 +324,18 @@ namespace GTweak.Assets.UserControls
                     UIElement child = _visibleCache[i];
                     double w = GetChildWidth(child);
                     double h = GetChildHeight(child);
-                    double xOffset = GetResponsiveAlignmentOffset(finalSize.Width, w);
-                    child.Arrange(new Rect(xOffset, y, w, h));
-                    y += h + VerticalSpacing;
+
+                    if (i == count - 1 && count > 1)
+                    {
+                        double buttonY = Math.Max(0, (GetChildHeight(_visibleCache[0]) - h) / 2.0);
+                        child.Arrange(new Rect(finalSize.Width - w, buttonY, w, h));
+                    }
+                    else
+                    {
+                        double xOffset = GetResponsiveAlignmentOffset(finalSize.Width, w);
+                        child.Arrange(new Rect(xOffset, y, w, h));
+                        y += h + VerticalSpacing;
+                    }
                 }
             }
         }

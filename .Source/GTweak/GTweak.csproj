@@ -148,6 +148,8 @@
     <Compile Include="Core\Base\IViewPageBase.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Converters\AngleToPercentConverter.cs" />
+    <Compile Include="Core\ViewModel\Components\DownloadSession.cs" />
+    <Compile Include="Core\ViewModel\Components\ToolsetItem.cs" />
     <Compile Include="Core\Model\AddonsModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\DataSystemModel.cs" />
@@ -156,7 +158,8 @@
     <Compile Include="Core\Model\ServicesModel.cs" />
     <Compile Include="Core\Model\SystemModel.cs" />
     <Compile Include="Core\Model\ToolsetModel.cs" />
-    <Compile Include="Core\Service\ToolsetDownloadService.cs" />
+    <Compile Include="Core\Services\ToolsetDownloadService.cs" />
+    <Compile Include="Core\Services\ToolsetIconService.cs" />
     <Compile Include="Core\ViewModel\AddonsViewModel.cs" />
     <Compile Include="Core\ViewModel\ConfidentialityViewModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemViewModel.cs" />
@@ -172,7 +175,6 @@
     <Compile Include="Utilities\Helpers\UnlockHandleHelper.cs" />
     <Compile Include="Utilities\Maintenance\ClearingMemory.cs" />
     <Compile Include="Utilities\Maintenance\RegistryExporter.cs" />
-    <Compile Include="Utilities\Managers\ToolsetIconManager.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\AclPermissionsBackup.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />

@@ -1,18 +1,23 @@
 using System;
+using System.Collections.Concurrent;
 using System.IO;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Core.Models;
+using GTweak.Core.ViewModel.Components;
 using GTweak.Utilities.Controls;
 using Newtonsoft.Json.Linq;
 
-namespace GTweak.Core.Service
+namespace GTweak.Core.Services
 {
     internal static class ToolsetDownloadService
     {
         private static readonly HttpClient _httpClient;
+        private static readonly ConcurrentDictionary<string, DownloadSession> _sessions = new ConcurrentDictionary<string, DownloadSession>();
 
         static ToolsetDownloadService()
         {
@@ -20,7 +25,9 @@ namespace GTweak.Core.Service
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "GTweak");
         }
 
-        public static async Task<string> ResolveDownloadUrlAsync(ToolsetModel model)
+        internal static DownloadSession GetOrCreateSession(ToolsetModel model) => _sessions.GetOrAdd(!string.IsNullOrWhiteSpace(model.SourceUrl) ? model.SourceUrl : model.AppName, _ => new DownloadSession(model));
+        
+        internal static async Task<string> GetResolvedDownloadUrl(ToolsetModel model)
         {
             try
             {
@@ -63,7 +70,8 @@ namespace GTweak.Core.Service
 
                             firstFoundUrl ??= downloadUrl;
 
-                            if (!string.IsNullOrEmpty(model.FilePattern) && Regex.IsMatch(downloadUrl, model.FilePattern, RegexOptions.IgnoreCase))
+                            if (!string.IsNullOrEmpty(model.FilePattern) &&
+                                Regex.IsMatch(downloadUrl, model.FilePattern, RegexOptions.IgnoreCase))
                             {
                                 return downloadUrl;
                             }
@@ -78,36 +86,75 @@ namespace GTweak.Core.Service
             return null;
         }
 
-        public static async Task DownloadFileAsync(string url, string destinationPath, string referrer, IProgress<double> progress, CancellationToken ct)
+        internal static async Task DownloadFile(string url, string destinationPath, string referrer, IProgress<double> progress, CancellationToken ct)
         {
-            string tempPath = destinationPath + ".tmp";
+            string tempPath = $"{destinationPath}.download";
+            long existingBytes = 0;
+            bool append = false;
+
             try
             {
+                if (File.Exists(tempPath))
+                {
+                    existingBytes = new FileInfo(tempPath).Length;
+                }
+
                 using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
+
                 if (!string.IsNullOrEmpty(referrer))
                 {
                     request.Headers.Referrer = new Uri(referrer);
                 }
 
+                if (existingBytes > 0)
+                {
+                    request.Headers.Range = new RangeHeaderValue(existingBytes, null);
+                }
+
                 using HttpResponseMessage response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, ct);
+
+                if (existingBytes > 0 && response.StatusCode == HttpStatusCode.OK)
+                {
+                    existingBytes = 0;
+                    append = false;
+                }
+                else if (response.StatusCode == HttpStatusCode.PartialContent && existingBytes > 0)
+                {
+                    append = true;
+                }
+
                 response.EnsureSuccessStatusCode();
 
-                long totalBytes = response.Content.Headers.ContentLength ?? -1L;
+                long contentLength = response.Content.Headers.ContentLength ?? -1L;
+                long totalBytes = contentLength;
+
+                if (response.StatusCode == HttpStatusCode.PartialContent && contentLength > 0)
+                {
+                    totalBytes = existingBytes + contentLength;
+                }
+
+                long totalReadBytes = existingBytes;
+                int lastReportedProgress = -1;
 
                 using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
-                using (FileStream fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (FileStream fileStream = new FileStream(tempPath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     byte[] buffer = new byte[8192];
-                    long totalReadBytes = 0L;
                     int readBytes;
-                    int lastReportedProgress = 0;
+
+                    if (progress != null && totalBytes > 0 && existingBytes > 0)
+                    {
+                        int initialProgress = (int)Math.Round((double)existingBytes / totalBytes * 100);
+                        progress.Report(initialProgress);
+                        lastReportedProgress = initialProgress;
+                    }
 
                     while ((readBytes = await streamToReadFrom.ReadAsync(buffer, 0, buffer.Length, ct)) > 0)
                     {
                         await fileStream.WriteAsync(buffer, 0, readBytes, ct);
                         totalReadBytes += readBytes;
 
-                        if (totalBytes != -1 && progress != null)
+                        if (totalBytes > 0 && progress != null)
                         {
                             int newProgress = (int)Math.Round((double)totalReadBytes / totalBytes * 100);
                             if (newProgress != lastReportedProgress)
@@ -121,20 +168,18 @@ namespace GTweak.Core.Service
 
                 if (File.Exists(destinationPath))
                 {
-                    File.Delete(destinationPath);
+                    File.Replace(tempPath, destinationPath, null);
+                }
+                else
+                {
+                    File.Move(tempPath, destinationPath);
                 }
 
-                File.Move(tempPath, destinationPath);
                 progress?.Report(100);
             }
             catch (Exception ex)
             {
                 ErrorLogging.LogDebug(ex);
-                if (File.Exists(tempPath))
-                {
-                    try { File.Delete(tempPath); }
-                    catch (Exception exc) { ErrorLogging.LogDebug(exc); }
-                }
                 throw;
             }
         }

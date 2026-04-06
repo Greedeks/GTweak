@@ -2,16 +2,12 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Xml.Linq;
 using GTweak.Core.Base;
+using GTweak.Core.Item;
 using GTweak.Core.Models;
-using GTweak.Core.Service;
 using GTweak.Utilities.Controls;
-using GTweak.Utilities.Managers;
 using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
@@ -109,123 +105,6 @@ namespace GTweak.Core.ViewModel
             catch (Exception ex)
             {
                 ErrorLogging.LogDebug(ex);
-            }
-        }
-
-        internal class ToolsetItem : ViewModelBase
-        {
-            private readonly ToolsetModel _model;
-            private CancellationTokenSource _cts;
-
-            private ImageSource _appIconSource;
-            private ImageSource _authorIconSource;
-            private bool _isDownloading;
-            private double _progress;
-            private bool _isSquareIcon;
-
-            public ToolsetItem(ToolsetModel model)
-            {
-                _model = model;
-
-                DownloadCommand = new RelayCommand(async _ => await DownloadAsync(), _ => !IsDownloading);
-                CancelCommand = new RelayCommand(_ => CancelDownload(), _ => IsDownloading);
-
-                _ = LoadIconsAsync();
-            }
-
-            public string AppName => _model.AppName;
-            public string AuthorName => _model.AuthorName;
-            public string SourceUrl => _model.SourceUrl;
-
-            public ImageSource AppIconSource
-            {
-                get => _appIconSource;
-                set { _appIconSource = value; OnPropertyChanged(); }
-            }
-
-            public ImageSource AuthorIconSource
-            {
-                get => _authorIconSource;
-                set { _authorIconSource = value; OnPropertyChanged(); }
-            }
-
-            public bool IsDownloading
-            {
-                get => _isDownloading;
-                set { _isDownloading = value; OnPropertyChanged(); }
-            }
-
-            public double Progress
-            {
-                get => _progress;
-                set { _progress = value; OnPropertyChanged(); }
-            }
-
-            public bool IsSquareIcon
-            {
-                get => _isSquareIcon;
-                set { _isSquareIcon = value; OnPropertyChanged(); }
-            }
-
-            public ICommand DownloadCommand { get; }
-            public ICommand CancelCommand { get; }
-
-            private async Task LoadIconsAsync()
-            {
-                try
-                {
-                    IsSquareIcon = false;
-
-                    AppIconSource = ToolsetIconManager.GetAppIconFromResource(_model.IconResourceName);
-                    AuthorIconSource = ToolsetIconManager.GetPlaceholder(_model.Group);
-
-                    (ImageSource Image, bool IsFallback) = await ToolsetIconManager.GetAuthorIconAsync(_model.Group, _model.AuthorIconUrl);
-
-                    AuthorIconSource = Image;
-                    IsSquareIcon = string.Equals(_model.Group, "web", StringComparison.OrdinalIgnoreCase) && !IsFallback;
-                }
-                catch (Exception ex)
-                {
-                    ErrorLogging.LogDebug(ex);
-                }
-            }
-
-            private async Task DownloadAsync()
-            {
-                IsDownloading = true;
-                Progress = 0;
-                _cts = new CancellationTokenSource();
-
-                Progress<double> progressHandler = new Progress<double>(value => Progress = value);
-
-                try
-                {
-                    string finalUrl = await ToolsetDownloadService.ResolveDownloadUrlAsync(_model);
-
-                    if (!string.IsNullOrEmpty(finalUrl))
-                    {
-                        string destinationPath = Path.Combine(SettingsEngine.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), Path.GetFileName(new Uri(finalUrl).LocalPath));
-                        await ToolsetDownloadService.DownloadFileAsync(finalUrl, destinationPath, _model.SourceUrl, progressHandler, _cts.Token);
-                    }
-                }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                finally
-                {
-                    IsDownloading = false;
-
-                    if (Progress != 100)
-                    {
-                        Progress = 0;
-                    }
-
-                    _cts?.Dispose();
-                    _cts = null;
-                }
-            }
-
-            private void CancelDownload()
-            {
-                _cts?.Cancel();
             }
         }
     }

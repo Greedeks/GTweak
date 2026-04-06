@@ -8,33 +8,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GTweak.Utilities.Controls;
 
-namespace GTweak.Utilities.Managers
+namespace GTweak.Core.Services
 {
-    internal static class ToolsetIconManager
+    internal class ToolsetIconService
     {
         private static readonly ConcurrentDictionary<string, ImageSource> _imageCache = new ConcurrentDictionary<string, ImageSource>();
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        public static ImageSource GetPlaceholder(string group) => Application.Current.TryFindResource(group.ToLower() == "github" ? "Icon_Git" : "Icon_Website") as ImageSource;
+        internal static ImageSource GetPlaceholder(string group) => Application.Current.TryFindResource(group.ToLower() == "github" ? "Icon_Git" : "Icon_Website") as ImageSource;
 
-        public static async Task<(ImageSource Image, bool IsFallback)> GetAuthorIconAsync(string group, string authorIconUrlOrDomain)
+        internal static async Task<(ImageSource Image, bool IsFallback)> GetAuthorIcon(string group, string iconSource)
         {
-            if (string.IsNullOrWhiteSpace(authorIconUrlOrDomain))
+            if (string.IsNullOrWhiteSpace(iconSource))
             {
                 return (GetPlaceholder(group), true);
             }
 
-            if (_imageCache.TryGetValue(authorIconUrlOrDomain, out ImageSource cachedImage))
+            if (_imageCache.TryGetValue(iconSource, out ImageSource cachedImage))
             {
                 return (cachedImage, false);
             }
 
-            string urlToDownload = authorIconUrlOrDomain;
+            string urlToDownload = iconSource;
             bool isWeb = string.Equals(group, "web", StringComparison.OrdinalIgnoreCase);
 
             if (isWeb)
             {
-                urlToDownload = $"https://www.google.com/s2/favicons?domain={authorIconUrlOrDomain}&sz=48";
+                urlToDownload = $"https://www.google.com/s2/favicons?domain={iconSource}&sz=48";
             }
 
             try
@@ -44,7 +44,7 @@ namespace GTweak.Utilities.Managers
 
                 if (image != null)
                 {
-                    _imageCache.TryAdd(authorIconUrlOrDomain, image);
+                    _imageCache.TryAdd(iconSource, image);
                     return (image, false);
                 }
             }
@@ -54,17 +54,16 @@ namespace GTweak.Utilities.Managers
                 {
                     try
                     {
-                        string backupUrl = $"https://icons.duckduckgo.com/ip3/{authorIconUrlOrDomain}.ico";
-                        byte[] imageBytes = await _httpClient.GetByteArrayAsync(backupUrl);
+                        byte[] imageBytes = await _httpClient.GetByteArrayAsync($"https://icons.duckduckgo.com/ip3/{iconSource}.ico");
                         ImageSource image = LoadImage(imageBytes);
 
                         if (image != null)
                         {
-                            _imageCache.TryAdd(authorIconUrlOrDomain, image);
+                            _imageCache.TryAdd(iconSource, image);
                             return (image, false);
                         }
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex);  }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
             }
 
@@ -91,7 +90,5 @@ namespace GTweak.Utilities.Managers
 
             return null;
         }
-
-        public static ImageSource GetAppIconFromResource(string resourceName) => Application.Current.TryFindResource(resourceName) as ImageSource;
     }
 }
