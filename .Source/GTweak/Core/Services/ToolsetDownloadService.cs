@@ -29,60 +29,58 @@ namespace GTweak.Core.Services
 
         internal static async Task<string> GetResolvedDownloadUrl(ToolsetModel model)
         {
-            try
+            if (model.Group.Equals("web", StringComparison.OrdinalIgnoreCase))
             {
-                if (model.Group.Equals("web", StringComparison.OrdinalIgnoreCase))
+                if (string.IsNullOrEmpty(model.UrlPattern))
                 {
-                    if (string.IsNullOrEmpty(model.UrlPattern))
-                    {
-                        return model.DownloadPathStr;
-                    }
-
-                    string htmlCode = await _httpClient.GetStringAsync(model.DownloadPathStr);
-                    Match match = Regex.Match(htmlCode, model.UrlPattern);
-                    return match.Success ? match.Value : null;
+                    return model.DownloadPathStr;
                 }
 
-                if (model.Group.Equals("github", StringComparison.OrdinalIgnoreCase))
+                string htmlCode = await _httpClient.GetStringAsync(model.DownloadPathStr);
+                Match match = Regex.Match(htmlCode, model.UrlPattern);
+                return match.Success ? match.Value : null;
+            }
+
+            if (model.Group.Equals("github", StringComparison.OrdinalIgnoreCase))
+            {
+                string apiUrl = $"https://api.github.com/repos/{model.DownloadPathStr}/releases/latest";
+
+                using HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+                if (!response.IsSuccessStatusCode)
                 {
-                    string apiUrl = $"https://api.github.com/repos/{model.DownloadPathStr}/releases/latest";
-
-                    HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-                    if (!response.IsSuccessStatusCode)
+                    if (response.StatusCode == HttpStatusCode.Forbidden || (int)response.StatusCode == 429)
                     {
-                        return null;
+                        throw new Exception("GitHubRateLimit");
                     }
+                    throw new HttpRequestException();
+                }
 
-                    string content = await response.Content.ReadAsStringAsync();
-                    JObject json = JObject.Parse(content);
+                string content = await response.Content.ReadAsStringAsync();
+                JObject json = JObject.Parse(content);
 
-                    if (json["assets"] is JArray assets && assets.Count > 0)
+                if (json["assets"] is JArray assets && assets.Count > 0)
+                {
+                    string firstFoundUrl = null;
+                    foreach (JToken asset in assets)
                     {
-                        string firstFoundUrl = null;
-
-                        foreach (JToken asset in assets)
+                        string downloadUrl = asset["browser_download_url"]?.ToString();
+                        if (string.IsNullOrEmpty(downloadUrl))
                         {
-                            string downloadUrl = asset["browser_download_url"]?.ToString();
-                            if (string.IsNullOrEmpty(downloadUrl))
-                            {
-                                continue;
-                            }
-
-                            firstFoundUrl ??= downloadUrl;
-
-                            if (!string.IsNullOrEmpty(model.FilePattern) &&
-                                Regex.IsMatch(downloadUrl, model.FilePattern, RegexOptions.IgnoreCase))
-                            {
-                                return downloadUrl;
-                            }
+                            continue;
                         }
 
-                        return firstFoundUrl;
+                        firstFoundUrl ??= downloadUrl;
+
+                        if (!string.IsNullOrEmpty(model.FilePattern) &&
+                            Regex.IsMatch(downloadUrl, model.FilePattern, RegexOptions.IgnoreCase))
+                        {
+                            return downloadUrl;
+                        }
                     }
+                    return firstFoundUrl;
                 }
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-
             return null;
         }
 

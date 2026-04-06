@@ -74,6 +74,8 @@
     <v:String x:Key="notsupport_ntfs_noty">Операция недоступна, так как каталог не находится на NTFS-разделе</v:String>
     <v:String x:Key="success_reg_exporter_noty">Файл реестра успешно сохранён</v:String>
     <v:String x:Key="error_reg_exporter_noty">Произошла ошибка при сохранении файла реестра</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub временно ограничил запросы к API, попробуйте позже</v:String>
+    <v:String x:Key="error_download_noty">Не удалось установить соединение с сервером</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->

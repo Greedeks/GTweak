@@ -74,6 +74,8 @@
     <v:String x:Key="notsupport_ntfs_noty">디렉터리가 NTFS 파티션에 있지 않으므로 작업을 수행할 수 없습니다</v:String>
     <v:String x:Key="success_reg_exporter_noty">레지스트리 파일이 성공적으로 저장되었습니다</v:String>
     <v:String x:Key="error_reg_exporter_noty">레지스트리 파일을 저장하는 동안 오류가 발생했습니다</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub has temporarily rate-limited API requests, please try again later</v:String>
+    <v:String x:Key="error_download_noty">Failed to establish a connection with the server</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->

@@ -74,6 +74,8 @@
     <v:String x:Key="notsupport_ntfs_noty">Operazione non disponibile perché la directory non si trova su una partizione NTFS</v:String>
     <v:String x:Key="success_reg_exporter_noty">File di registro salvato con successo</v:String>
     <v:String x:Key="error_reg_exporter_noty">Si è verificato un errore durante il salvataggio del file di registro</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub has temporarily rate-limited API requests, please try again later</v:String>
+    <v:String x:Key="error_download_noty">Failed to establish a connection with the server</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
