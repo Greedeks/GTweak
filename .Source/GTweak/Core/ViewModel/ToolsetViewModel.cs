@@ -21,9 +21,9 @@ namespace GTweak.Core.ViewModel
         private string _searchText;
 
         public ICollectionView ToolsView { get; }
-
         public ICommand SelectFolderCommand { get; }
         public ICommand OpenFolderCommand { get; }
+        public ICommand ClearCommand { get; }
 
         public string SearchText
         {
@@ -43,6 +43,7 @@ namespace GTweak.Core.ViewModel
         {
             SelectFolderCommand = new RelayCommand(_ => SelectFolder());
             OpenFolderCommand = new RelayCommand(_ => OpenFolder());
+            ClearCommand = new RelayCommand(obj => { SearchText = string.Empty; });
 
             LoadApps();
 

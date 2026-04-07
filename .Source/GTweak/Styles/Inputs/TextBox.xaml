@@ -17,21 +17,26 @@
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="CaretBrush" Value="{StaticResource Brush_Highlighted}"/>
+        <Setter Property="SelectionBrush" Value="{StaticResource Brush_Accent}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
-                        <Border x:Name="border" Background="{StaticResource Brush_Background_TextBox}" BorderBrush="{StaticResource Brush_Accent}" BorderThickness="0,0,0,1" CornerRadius="5"/>
-                        <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
-                        <Label Margin="5,0,5,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center" Visibility="Collapsed" Foreground="{StaticResource Brush_Inactive}" FontFamily="{StaticResource Jura}"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.ColumnSpan="2" x:Name="border" Background="{StaticResource Brush_Background_TextBox}" BorderBrush="{StaticResource Brush_Accent}" BorderThickness="0,0,0,1" CornerRadius="5"/>
+                        <ScrollViewer Grid.Column="0" x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
+                        <Label Grid.Column="0" Margin="5,0,5,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center" Visibility="Collapsed" Foreground="{StaticResource Brush_Inactive}" FontFamily="{StaticResource Jura}"/>
+                        <Button Grid.Column="1" x:Name="PART_ClearButton" Command="{Binding DataContext.ClearCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource ButtonClearTextBox}" Width="20" Height="20" Margin="0,0,5,0" Visibility="Visible"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Text" Value=""/>
-                            </MultiTrigger.Conditions>
+                        <Trigger Property="Text" Value="">
                             <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
-                        </MultiTrigger>
+                            <Setter Property="Visibility" TargetName="PART_ClearButton" Value="Collapsed"/>
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
                             <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
@@ -49,5 +54,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

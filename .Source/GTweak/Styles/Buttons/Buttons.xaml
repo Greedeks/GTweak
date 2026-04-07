@@ -107,6 +107,32 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="ButtonClearTextBox" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="Transparent" Cursor="Hand">
+                        <Border x:Name="BackgroundBorder" Background="Transparent" CornerRadius="4"/>
+                        <Border x:Name="Icon" Width="14" Height="14" Background="{StaticResource Brush_Inactive}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="Icon" Property="OpacityMask">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Close}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}"/>
+                            <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     
     <Style x:Key="ButtonContent" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
