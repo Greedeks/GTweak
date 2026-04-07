@@ -542,17 +542,18 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">Выбрать папку</v:String>
+    <v:String x:Key="btn_select_dir">Выбрать папку</v:String>
     <v:String x:Key="chk_run_ti_adds">Запуск от имени TrustedInstaller</v:String>
     <v:String x:Key="text_info_adds">Выберите директорию или убедитесь, что она не пуста</v:String>
     <v:String x:Key="scripts_info_adds">После этого вы сможете запускать скрипты (.ps1, .cmd, .bat, .reg) на этой странице</v:String>
     <!--#endregion-->
 
-    <!--#region ToolsetCard Page -->
+    <!--#region Toolset Page -->
     <v:String x:Key="source_ts">Источник</v:String>
     <v:String x:Key="btn_download">Скачать</v:String>
     <v:String x:Key="btn_cancel">Отмена</v:String>
-    <v:String x:Key="download_folder_ts">Папка загрузки</v:String>
+    <v:String x:Key="btn_open_dir">Открыть папку</v:String>
+    <v:String x:Key="text_ts">Поиск по названию или автору</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

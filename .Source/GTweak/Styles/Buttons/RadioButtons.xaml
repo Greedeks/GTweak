@@ -18,10 +18,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
                     <Border x:Name="OuterPanel" CornerRadius="12" Width="50" Height="48" Background="{x:Null}" HorizontalAlignment="Left" SnapsToDevicePixels="True">
-                        <Grid RenderOptions.BitmapScalingMode="HighQuality">
-                            <Grid.CacheMode>
-                                <BitmapCache RenderAtScale="2" EnableClearType="True"/>
-                            </Grid.CacheMode>
+                        <Grid>
                             <Border x:Name="ShadowPanel" CornerRadius="12" Opacity="0" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" Width="{Binding ActualWidth, ElementName=InnerPanel}" Height="{Binding ActualHeight, ElementName=InnerPanel}" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <Border.RenderTransform>
                                     <TranslateTransform X="3" Y="4" />

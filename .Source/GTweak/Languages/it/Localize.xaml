@@ -542,17 +542,18 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">Seleziona cartella</v:String>
+    <v:String x:Key="btn_select_dir">Seleziona cartella</v:String>
     <v:String x:Key="chk_run_ti_adds">Esegui come TrustedInstaller</v:String>
     <v:String x:Key="text_info_adds">Seleziona una directory o assicurati che non sia vuota</v:String>
     <v:String x:Key="scripts_info_adds">Dopodiché, potrai eseguire script (.ps1, .cmd, .bat, .reg) su questa pagina</v:String>
     <!--#endregion-->
 
-    <!--#region ToolsetCard Page -->
+    <!--#region Toolset Page -->
     <v:String x:Key="source_ts">Source</v:String>
     <v:String x:Key="btn_download">Download</v:String>
     <v:String x:Key="btn_cancel">Сancel</v:String>
-    <v:String x:Key="download_folder_ts">Download Folder</v:String>
+    <v:String x:Key="btn_open_dir">Open folder</v:String>
+    <v:String x:Key="text_ts">Search by name or author</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

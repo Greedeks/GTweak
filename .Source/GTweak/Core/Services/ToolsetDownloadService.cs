@@ -33,17 +33,17 @@ namespace GTweak.Core.Services
             {
                 if (string.IsNullOrEmpty(model.UrlPattern))
                 {
-                    return model.DownloadPathStr;
+                    return model.DownloadPath;
                 }
 
-                string htmlCode = await _httpClient.GetStringAsync(model.DownloadPathStr);
+                string htmlCode = await _httpClient.GetStringAsync(model.DownloadPath);
                 Match match = Regex.Match(htmlCode, model.UrlPattern);
                 return match.Success ? match.Value : null;
             }
 
             if (model.Group.Equals("github", StringComparison.OrdinalIgnoreCase))
             {
-                string apiUrl = $"https://api.github.com/repos/{model.DownloadPathStr}/releases/latest";
+                string apiUrl = $"https://api.github.com/repos/{model.DownloadPath}/releases/latest";
 
                 using HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
@@ -81,6 +81,41 @@ namespace GTweak.Core.Services
                     return firstFoundUrl;
                 }
             }
+
+            if (model.Group.Equals("sourceforge", StringComparison.OrdinalIgnoreCase))
+            {
+                string projectName = model.DownloadPath;
+                Match match = Regex.Match(projectName, @"projects/([^/]+)");
+                if (match.Success)
+                {
+                    projectName = match.Groups[1].Value;
+                }
+                else
+                {
+                    projectName = projectName.Trim('/');
+                }
+
+                string apiUrl = $"https://sourceforge.net/projects/{projectName}/best_release.json";
+
+                using HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException();
+                }
+
+                string content = await response.Content.ReadAsStringAsync();
+                JObject json = JObject.Parse(content);
+
+                string filename = json["release"]?["filename"]?.ToString();
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    return $"https://downloads.sourceforge.net/project/{projectName}{filename}";
+                }
+
+                return null;
+            }
+
             return null;
         }
 

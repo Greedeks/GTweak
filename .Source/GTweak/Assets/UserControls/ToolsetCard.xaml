@@ -173,7 +173,7 @@
                             <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" MinWidth="150" VerticalAlignment="Center"/>
                         </Grid>
 
-                        <Button Grid.Column="1" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent}" Command="{Binding CancelCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Margin="10,0,0,0"/>
+                        <Button Grid.Column="1" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent_Inverted}" Command="{Binding CancelCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Margin="10,0,0,0"/>
                     </Grid>
                 </Grid>
 

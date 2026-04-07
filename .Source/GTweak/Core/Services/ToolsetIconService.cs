@@ -30,9 +30,9 @@ namespace GTweak.Core.Services
             }
 
             string urlToDownload = iconSource;
-            bool isWeb = string.Equals(group, "web", StringComparison.OrdinalIgnoreCase);
+            bool isWebBased = !string.Equals(group, "github", StringComparison.OrdinalIgnoreCase);
 
-            if (isWeb)
+            if (isWebBased)
             {
                 urlToDownload = $"https://www.google.com/s2/favicons?domain={iconSource}&sz=48";
             }
@@ -50,7 +50,7 @@ namespace GTweak.Core.Services
             }
             catch
             {
-                if (isWeb)
+                if (isWebBased)
                 {
                     try
                     {

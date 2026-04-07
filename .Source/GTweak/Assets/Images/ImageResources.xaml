@@ -3,7 +3,10 @@
 
     <BitmapImage x:Key="Img_Amd" UriSource="/GTweak;component/Assets/Images/DownloadApps/Amd.png"/>
     <BitmapImage x:Key="Img_Autoruns" UriSource="/GTweak;component/Assets/Images/DownloadApps/Autoruns.png"/>
+    <BitmapImage x:Key="Img_CPUz" UriSource="/GTweak;component/Assets/Images/DownloadApps/CPUz.png"/>
     <BitmapImage x:Key="Img_DeviceTweaker" UriSource="/GTweak;component/Assets/Images/DownloadApps/DeviceTweaker.png"/>
+    <BitmapImage x:Key="Img_DiskInfo" UriSource="/GTweak;component/Assets/Images/DownloadApps/DiskInfo.png"/>
+    <BitmapImage x:Key="Img_DiskMark" UriSource="/GTweak;component/Assets/Images/DownloadApps/DiskMark.png"/>
     <BitmapImage x:Key="Img_FirstEverTech" UriSource="/GTweak;component/Assets/Images/DownloadApps/FirstEverTech.png"/>
     <BitmapImage x:Key="Img_Nvidia" UriSource="/GTweak;component/Assets/Images/DownloadApps/Nvidia.png"/>
     <BitmapImage x:Key="Img_NvidiaPI" UriSource="/GTweak;component/Assets/Images/DownloadApps/NvidiaPI.png"/>

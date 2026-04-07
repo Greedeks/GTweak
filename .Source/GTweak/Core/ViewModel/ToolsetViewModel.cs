@@ -1,7 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml.Linq;
 using GTweak.Core.Base;
@@ -16,18 +18,23 @@ namespace GTweak.Core.ViewModel
     {
         public ObservableCollection<ToolsetItem> Tools { get; } = new ObservableCollection<ToolsetItem>();
 
+        private string _searchText;
+
+        public ICollectionView ToolsView { get; }
+
         public ICommand SelectFolderCommand { get; }
         public ICommand OpenFolderCommand { get; }
 
-        public string DownloadPath
+        public string SearchText
         {
-            get => SettingsEngine.DownloadPath;
+            get => _searchText;
             set
             {
-                if (SettingsEngine.DownloadPath != value)
+                if (_searchText != value)
                 {
-                    SettingsEngine.DownloadPath = value;
+                    _searchText = value;
                     OnPropertyChanged();
+                    ToolsView.Refresh();
                 }
             }
         }
@@ -38,6 +45,27 @@ namespace GTweak.Core.ViewModel
             OpenFolderCommand = new RelayCommand(_ => OpenFolder());
 
             LoadApps();
+
+            ToolsView = CollectionViewSource.GetDefaultView(Tools);
+            ToolsView.Filter = FilterTools;
+        }
+
+        private bool FilterTools(object obj)
+        {
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                if (obj is ToolsetItem item)
+                {
+                    bool nameMatch = item.AppName?.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0;
+                    bool authorMatch = item.AuthorName?.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0;
+
+                    return nameMatch || authorMatch;
+                }
+
+                return false;
+            }
+
+            return true;
         }
 
         private void LoadApps()
@@ -57,10 +85,7 @@ namespace GTweak.Core.ViewModel
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                ErrorLogging.LogDebug(ex);
-            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private void SelectFolder()
@@ -78,34 +103,28 @@ namespace GTweak.Core.ViewModel
                     string selectedPath = folderDialog.SelectedPath;
                     if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
                     {
-                        DownloadPath = selectedPath;
+                        SettingsEngine.DownloadPath = selectedPath;
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                ErrorLogging.LogDebug(ex);
-            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private void OpenFolder()
         {
             try
             {
-                if (Directory.Exists(DownloadPath))
+                if (Directory.Exists(SettingsEngine.DownloadPath))
                 {
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = DownloadPath,
+                        FileName = SettingsEngine.DownloadPath,
                         UseShellExecute = true,
                         Verb = "open"
                     });
                 }
             }
-            catch (Exception ex)
-            {
-                ErrorLogging.LogDebug(ex);
-            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
     }
 }

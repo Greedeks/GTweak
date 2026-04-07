@@ -18,33 +18,41 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <uc:FlowPanel Grid.Row="0" ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="10,5,10,0">
+        <uc:FlowPanel  Grid.Row="0" HorizontalAlignment="Left" Margin="10,5,10,0"  ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5">
+
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" Width="300" MaxLength="50" HorizontalAlignment="Left" Height="28">
+                <TextBox.Tag>
+                    <TextBlock>
+                        <Run Text="🔍"/> <Run Text="{DynamicResource text_ts}"/>
+                    </TextBlock>
+                </TextBox.Tag>
+            </TextBox>
+
             <Button Command="{Binding SelectFolderCommand}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <ui:SymbolIcon Symbol="FolderOpen20" FontSize="15" Margin="0,0,5,0"/>
                     <TextBlock VerticalAlignment="Center">
-                        <Run Text="{DynamicResource btn_open_dir}"/><Run Text="..."/>
+                        <Run Text="{DynamicResource btn_select_dir}"/><Run Text="..."/>
                     </TextBlock>
                 </StackPanel>
             </Button>
 
-            <Border Grid.Column="0" BorderThickness="1" BorderBrush="{StaticResource Brush_Separator}" Height="29" CornerRadius="6" Background="Transparent" VerticalAlignment="Stretch" Padding="10,0" Cursor="Hand">
-                <Border.InputBindings>
-                    <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFolderCommand}"/>
-                </Border.InputBindings>
-                <TextBlock Style="{StaticResource Description}" FontSize="14px" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0,5" TextTrimming="CharacterEllipsis" Cursor="Hand">
-                    <Run Text="{DynamicResource download_folder_ts}"/><Run Text=": "/><Run Text="{Binding DownloadPath}" Foreground="{StaticResource Brush_Inactive}"/>
-                </TextBlock>
-            </Border>
-            
+            <Button Command="{Binding OpenFolderCommand}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <ui:SymbolIcon Symbol="CloudArrowDown20" FontSize="15" Margin="0,0,5,0"/>
+                    <TextBlock VerticalAlignment="Center" Text="{DynamicResource btn_open_dir}"/>
+                </StackPanel>
+            </Button>
+
         </uc:FlowPanel>
+
 
         <Border Grid.Row="1" Background="{StaticResource Brush_Separator}" Height="1.2" Margin="10,10,10,0" CornerRadius="10" HorizontalAlignment="Stretch"/>
 
         <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding Tools}" VirtualizingPanel.IsVirtualizing="True">
+                    <ItemsControl ItemsSource="{Binding ToolsView}" VirtualizingPanel.IsVirtualizing="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <uc:FlowPanel Margin="10,10,10,20" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>

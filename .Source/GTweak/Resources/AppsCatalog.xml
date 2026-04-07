@@ -77,12 +77,43 @@
     </App>
 
     <App>
+        <Icon>Img_CPUz</Icon>
+        <Name>CPU-Z</Name>
+        <Group>sourceforge</Group>
+        <Author>CPUID</Author>
+        <AuthorIcon>cpuid.com</AuthorIcon>
+        <Source>https://sourceforge.net/projects/cpu-z/</Source>
+        <DownloadPath>https://sourceforge.net/projects/cpu-z/files/latest/download</DownloadPath>
+    </App>
+
+    <App>
+        <Icon>Img_DiskInfo</Icon>
+        <Name>Crystal Disk Info</Name>
+        <Group>sourceforge</Group>
+        <Author>hiyohiyo</Author>
+        <AuthorIcon>crystalmark.info</AuthorIcon>
+        <Source>https://sourceforge.net/projects/crystaldiskinfo/</Source>
+        <DownloadPath>https://sourceforge.net/projects/crystaldiskinfo/files/latest/download</DownloadPath>
+    </App>
+    
+    <App>
+        <Icon>Img_DiskMark</Icon>
+        <Name>Crystal Disk Mark</Name>
+        <Group>sourceforge</Group>
+        <Author>hiyohiyo</Author>
+        <AuthorIcon>crystalmark.info</AuthorIcon>
+        <Source>https://sourceforge.net/projects/crystaldiskmark/</Source>
+        <DownloadPath>https://sourceforge.net/projects/crystaldiskmark/files/latest/download</DownloadPath>
+    </App>
+    
+    <App>
         <Icon>Img_Occt</Icon>
         <Name>OCCT</Name>
         <Group>web</Group>
-        <Author>OCCT</Author>
+        <Author>OCCT/OCBASE</Author>
         <AuthorIcon>ocbase.com</AuthorIcon>
         <Source>https://www.ocbase.com/download</Source>
         <DownloadPath>https://www.ocbase.com/download/edition:Personal/os:Windows</DownloadPath>
+        <FileName>OCCT.exe</FileName>
     </App>
 </Apps>

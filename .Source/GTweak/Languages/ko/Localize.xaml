@@ -542,17 +542,18 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_open_dir">폴더 선택</v:String>
+    <v:String x:Key="btn_select_dir">폴더 선택</v:String>
     <v:String x:Key="chk_run_ti_adds">TrustedInstaller로 실행</v:String>
     <v:String x:Key="text_info_adds">디렉토리를 선택하거나 비어 있지 않은지 확인하세요</v:String>
     <v:String x:Key="scripts_info_adds">그 후, 이 페이지에서 스크립트 (.ps1, .cmd, .bat, .reg)를 실행할 수 있습니다</v:String>
     <!--#endregion-->
 
-    <!--#region ToolsetCard Page -->
+    <!--#region Toolset Page -->
     <v:String x:Key="source_ts">Source</v:String>
     <v:String x:Key="btn_download">Download</v:String>
     <v:String x:Key="btn_cancel">Сancel</v:String>
-    <v:String x:Key="download_folder_ts">Download Folder</v:String>
+    <v:String x:Key="btn_open_dir">Open folder</v:String>
+    <v:String x:Key="text_ts">Search by name or author</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

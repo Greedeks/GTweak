@@ -633,6 +633,9 @@
     <Resource Include="Assets\Images\DownloadApps\Nvidia.png" />
     <Resource Include="Assets\Images\DownloadApps\NvidiaPI.png" />
     <Resource Include="Assets\Images\DownloadApps\Occt.png" />
+    <Resource Include="Assets\Images\DownloadApps\DiskInfo.png" />
+    <Resource Include="Assets\Images\DownloadApps\DiskMark.png" />
+    <Resource Include="Assets\Images\DownloadApps\CPUz.png" />
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

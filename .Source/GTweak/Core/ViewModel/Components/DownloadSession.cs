@@ -97,12 +97,12 @@ namespace GTweak.Core.ViewModel.Components
 
                 if (string.IsNullOrEmpty(Path.GetExtension(fileName)))
                 {
-                    return !string.IsNullOrEmpty(_model.FilePattern) ? _model.FilePattern : $"{_model.AppName}.exe";
+                    return !string.IsNullOrEmpty(_model.FilePattern) ? _model.FilePattern : _model.FileName;
                 }
 
                 return fileName;
             }
-            catch { return $"{_model.AppName}.exe"; }
+            catch { return _model.FileName; }
         }
     }
 }
