@@ -50,6 +50,26 @@ namespace GTweak.Core.ViewModel
             ToolsView.Filter = FilterTools;
         }
 
+        private void LoadApps()
+        {
+            try
+            {
+                string xmlContent = Properties.Resources.AppsCatalog;
+
+                if (!string.IsNullOrWhiteSpace(xmlContent))
+                {
+                    XDocument doc = XDocument.Parse(xmlContent);
+
+                    foreach (XElement appElement in doc.Descendants("App"))
+                    {
+                        ToolsetModel model = new ToolsetModel(appElement);
+                        Tools.Add(new ToolsetItem(model));
+                    }
+                }
+            }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+        }
+
         private bool FilterTools(object obj)
         {
             if (!string.IsNullOrWhiteSpace(SearchText))
@@ -66,26 +86,6 @@ namespace GTweak.Core.ViewModel
             }
 
             return true;
-        }
-
-        private void LoadApps()
-        {
-            try
-            {
-                string xmlContent = Properties.Resources.AppsCatalog;
-
-                if (!string.IsNullOrWhiteSpace(xmlContent))
-                {
-                    XDocument doc = XDocument.Parse(xmlContent);
-
-                    foreach (var appElement in doc.Descendants("App"))
-                    {
-                        ToolsetModel model = new ToolsetModel(appElement);
-                        Tools.Add(new ToolsetItem(model));
-                    }
-                }
-            }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private void SelectFolder()

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Apps>
     <App>
+        <Icon>Img_Nvidia</Icon>
+        <Name>NVIDIA App</Name>
+        <Group>web</Group>
+        <Author>(C) NVIDIA Corporation</Author>
+        <AuthorIcon>nvidia.com</AuthorIcon>
+        <Source>https://www.nvidia.com/en-eu/software/nvidia-app/</Source>
+        <DownloadPath>https://www.nvidia.com/en-us/software/nvidia-app/</DownloadPath>
+        <UrlPattern><![CDATA[https://.*?download\.nvidia\.com/nvapp/client/.*?/NVIDIA_app_.*?\.exe]]></UrlPattern>
+    </App>
+    
+    <App>
+        <Icon>Img_Amd</Icon>
+        <Name>AMD Software: Adrenalin Edition™</Name>
+        <Group>web</Group>
+        <Author>Advanced Micro Devices, Inc</Author>
+        <AuthorIcon>amd.com</AuthorIcon>
+        <Source>https://www.amd.com/en/support/download/drivers.html</Source>
+        <DownloadPath>https://www.amd.com/en/support/download/drivers.html</DownloadPath>
+        <UrlPattern><![CDATA[https://drivers\.amd\.com/drivers/installer/.*?/whql/.*?minimalsetup.*?\.exe]]></UrlPattern>
+    </App>
+    
+    <App>
         <Icon>Img_FirstEverTech</Icon>
         <Name>Universal Intel Chipset Device Updater</Name>
         <Group>github</Group>
@@ -10,7 +32,7 @@
         <DownloadPath>FirstEverTech/Universal-Intel-Chipset-Updater</DownloadPath>
         <FilePattern><![CDATA[.*\.exe$]]></FilePattern>
     </App>
-
+    
     <App>
         <Icon>Img_FirstEverTech</Icon>
         <Name>Universal Intel Wi-Fi and Bluetooth Drivers Updater</Name>
@@ -23,17 +45,6 @@
     </App>
 
     <App>
-        <Icon>Img_DeviceTweaker</Icon>
-        <Name>DEVICE TWEAKER</Name>
-        <Group>github</Group>
-        <Author>arsenzaaa</Author>
-        <AuthorIcon>https://github.com/arsenzaaa.png</AuthorIcon>
-        <Source>https://github.com/arsenzaaa/DEVICE-TWEAKER</Source>
-        <DownloadPath>arsenzaaa/DEVICE-TWEAKER</DownloadPath>
-        <FilePattern><![CDATA[(?i)DEVICE.*NET.*FRAMEWORK.*\.exe$]]></FilePattern>
-    </App>
-
-    <App>
         <Icon>Img_NvidiaPI</Icon>
         <Name>NVIDIA Profile Inspector</Name>
         <Group>github</Group>
@@ -43,29 +54,18 @@
         <DownloadPath>Orbmu2k/nvidiaProfileInspector</DownloadPath>
         <FilePattern><![CDATA[(?i)nvidiaProfileInspector.*\.zip$]]></FilePattern>
     </App>
-
+    
     <App>
-        <Icon>Img_Nvidia</Icon>
-        <Name>NVIDIA App</Name>
-        <Group>web</Group>
-        <Author>(C) NVIDIA Corporation</Author>
-        <AuthorIcon>nvidia.com</AuthorIcon>
-        <Source>https://www.nvidia.com/en-eu/software/nvidia-app/</Source>
-        <DownloadPath>https://www.nvidia.com/en-us/software/nvidia-app/</DownloadPath>
-        <UrlPattern><![CDATA[https://.*?download\.nvidia\.com/nvapp/client/.*?/NVIDIA_app_.*?\.exe]]></UrlPattern>
+        <Icon>Img_DeviceTweaker</Icon>
+        <Name>DEVICE TWEAKER</Name>
+        <Group>github</Group>
+        <Author>arsenzaaa</Author>
+        <AuthorIcon>https://github.com/arsenzaaa.png</AuthorIcon>
+        <Source>https://github.com/arsenzaaa/DEVICE-TWEAKER</Source>
+        <DownloadPath>arsenzaaa/DEVICE-TWEAKER</DownloadPath>
+        <FilePattern><![CDATA[(?i)DEVICE.*NET.*FRAMEWORK.*\.exe$]]></FilePattern>
     </App>
-
-    <App>
-        <Icon>Img_Amd</Icon>
-        <Name>AMD Software: Adrenalin Edition™</Name>
-        <Group>web</Group>
-        <Author>Advanced Micro Devices, Inc</Author>
-        <AuthorIcon>amd.com</AuthorIcon>
-        <Source>https://www.amd.com/en/support/download/drivers.html</Source>
-        <DownloadPath>https://www.amd.com/en/support/download/drivers.html</DownloadPath>
-        <UrlPattern><![CDATA[https://drivers\.amd\.com/drivers/installer/.*?/whql/.*?minimalsetup.*?\.exe]]></UrlPattern>
-    </App>
-
+    
     <App>
         <Icon>Img_Autoruns</Icon>
         <Name>Autoruns</Name>
@@ -74,6 +74,17 @@
         <AuthorIcon>microsoft.com</AuthorIcon>
         <Source>https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns</Source>
         <DownloadPath>https://download.sysinternals.com/files/Autoruns.zip</DownloadPath>
+    </App>
+    
+    <App>
+        <Icon>Img_Rufus</Icon>
+        <Name>Rufus</Name>
+        <Group>github</Group>
+        <Author>pbatard</Author>
+        <AuthorIcon>https://github.com/pbatard.png</AuthorIcon>
+        <Source>https://github.com/pbatard/rufus</Source>
+        <DownloadPath>pbatard/rufus</DownloadPath>
+        <FilePattern><![CDATA[(?i)rufus-.*?p\.exe$]]></FilePattern>
     </App>
 
     <App>
@@ -85,7 +96,7 @@
         <Source>https://sourceforge.net/projects/cpu-z/</Source>
         <DownloadPath>https://sourceforge.net/projects/cpu-z/files/latest/download</DownloadPath>
     </App>
-
+    
     <App>
         <Icon>Img_DiskInfo</Icon>
         <Name>Crystal Disk Info</Name>

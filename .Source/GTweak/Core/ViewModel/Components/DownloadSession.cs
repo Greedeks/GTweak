@@ -3,6 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GTweak.Core.Base;
 using GTweak.Core.Models;
 using GTweak.Core.Services;
@@ -27,7 +28,7 @@ namespace GTweak.Core.ViewModel.Components
                 {
                     _isDownloading = value;
                     OnPropertyChanged();
-                    System.Windows.Input.CommandManager.InvalidateRequerySuggested();
+                    CommandManager.InvalidateRequerySuggested();
                 }
             }
         }
@@ -67,14 +68,8 @@ namespace GTweak.Core.ViewModel.Components
                     await ToolsetDownloadService.DownloadFile(finalUrl, destinationPath, _model.SourceUrl, new Progress<double>(v => Progress = v), _cts.Token);
                 }
             }
-            catch (Exception ex) when (ex.Message == "GitHubRateLimit")
-            {
-                NotificationManager.Show("warn", "error_git_limit_noty").Perform();
-            }
-            catch (HttpRequestException)
-            {
-                NotificationManager.Show("warn", "error_download_noty").Perform();
-            }
+            catch (Exception ex) when (ex.Message == "GitHubRateLimit") { NotificationManager.Show("warn", "error_git_limit_noty").Perform(); }
+            catch (HttpRequestException) { NotificationManager.Show("warn", "error_download_noty").Perform(); }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             finally
             {
@@ -84,10 +79,7 @@ namespace GTweak.Core.ViewModel.Components
             }
         }
 
-        public void Cancel()
-        {
-            _cts?.Cancel();
-        }
+        public void Cancel() => _cts?.Cancel();
 
         private string GetFileNameFromUrl(string url)
         {

@@ -11,6 +11,7 @@
     <BitmapImage x:Key="Img_Nvidia" UriSource="/GTweak;component/Assets/Images/DownloadApps/Nvidia.png"/>
     <BitmapImage x:Key="Img_NvidiaPI" UriSource="/GTweak;component/Assets/Images/DownloadApps/NvidiaPI.png"/>
     <BitmapImage x:Key="Img_Occt" UriSource="/GTweak;component/Assets/Images/DownloadApps/Occt.png"/>
+    <BitmapImage x:Key="Img_Rufus" UriSource="/GTweak;component/Assets/Images/DownloadApps/Rufus.png"/>
 
     <BitmapImage x:Key="Img_BatFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/BatFile.png"/>
     <BitmapImage x:Key="Img_CmdFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/CmdFile.png"/>

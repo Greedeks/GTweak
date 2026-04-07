@@ -70,7 +70,7 @@ namespace GTweak.Core.Item
                 (ImageSource Image, bool IsFallback) = await ToolsetIconService.GetAuthorIcon(_model.Group, _model.AuthorIconUrl);
 
                 AuthorIconSource = Image;
-                IsSquareIcon = string.Equals(_model.Group, "web", StringComparison.OrdinalIgnoreCase) && !IsFallback;
+                IsSquareIcon = !string.Equals(_model.Group, "github", StringComparison.OrdinalIgnoreCase) && !IsFallback;
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
