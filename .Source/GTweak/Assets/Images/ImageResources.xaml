@@ -1,6 +1,14 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!--#region AddonsFiles -->
+    <BitmapImage x:Key="Img_BatFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/BatFile.png"/>
+    <BitmapImage x:Key="Img_CmdFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/CmdFile.png"/>
+    <BitmapImage x:Key="Img_PowershellFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/PowershellFile.png"/>
+    <BitmapImage x:Key="Img_RegistryFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/RegistryFile.png"/>
+    <!--#endregion -->
+
+    <!--#region DownloadApps -->
     <BitmapImage x:Key="Img_Amd" UriSource="/GTweak;component/Assets/Images/DownloadApps/Amd.png"/>
     <BitmapImage x:Key="Img_Autoruns" UriSource="/GTweak;component/Assets/Images/DownloadApps/Autoruns.png"/>
     <BitmapImage x:Key="Img_CPUz" UriSource="/GTweak;component/Assets/Images/DownloadApps/CPUz.png"/>
@@ -12,14 +20,9 @@
     <BitmapImage x:Key="Img_NvidiaPI" UriSource="/GTweak;component/Assets/Images/DownloadApps/NvidiaPI.png"/>
     <BitmapImage x:Key="Img_Occt" UriSource="/GTweak;component/Assets/Images/DownloadApps/Occt.png"/>
     <BitmapImage x:Key="Img_Rufus" UriSource="/GTweak;component/Assets/Images/DownloadApps/Rufus.png"/>
+    <!--#endregion -->
 
-    <BitmapImage x:Key="Img_BatFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/BatFile.png"/>
-    <BitmapImage x:Key="Img_CmdFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/CmdFile.png"/>
-    <BitmapImage x:Key="Img_PowershellFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/PowershellFile.png"/>
-    <BitmapImage x:Key="Img_RegistryFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/RegistryFile.png"/>
-
-    <BitmapImage x:Key="Img_SandTimer" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/SandTimer.png"/>
-
+    <!--#region PreinstalledApps -->
     <BitmapImage x:Key="Img_3DBuilder" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/3DBuilder.png"/>
     <BitmapImage x:Key="Img_Alarms" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Alarms.png"/>
     <BitmapImage x:Key="Img_BingFinance" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/BingFinance.png"/>
@@ -73,6 +76,7 @@
     <BitmapImage x:Key="Img_Plex" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Plex.png"/>
     <BitmapImage x:Key="Img_PrimeVideo" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/PrimeVideo.png"/>
     <BitmapImage x:Key="Img_QuickAssist" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/QuickAssist.png"/>
+    <BitmapImage x:Key="Img_SandTimer" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/SandTimer.png"/>
     <BitmapImage x:Key="Img_ScreenSketch" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/ScreenSketch.png"/>
     <BitmapImage x:Key="Img_Shazam" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Shazam.png"/>
     <BitmapImage x:Key="Img_SkypeApp" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/SkypeApp.png"/>
@@ -83,14 +87,15 @@
     <BitmapImage x:Key="Img_Todos" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Todos.png"/>
     <BitmapImage x:Key="Img_TuneInRadio" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/TuneInRadio.png"/>
     <BitmapImage x:Key="Img_TwitterX" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/TwitterX.png"/>
-    <BitmapImage x:Key="Img_Video" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Video.png"/>
     <BitmapImage x:Key="Img_Viber" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Viber.png"/>
-    <BitmapImage x:Key="Img_WebMediaExtensions" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/WebMediaExtensions.png"/>
-    <BitmapImage x:Key="Img_Widgets" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Widgets.png"/>
-    <BitmapImage x:Key="Img_WhiteBoard" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/WhiteBoard.png"/>
+    <BitmapImage x:Key="Img_Video" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Video.png"/>
     <BitmapImage x:Key="Img_Wallet" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Wallet.png"/>
+    <BitmapImage x:Key="Img_WebMediaExtensions" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/WebMediaExtensions.png"/>
     <BitmapImage x:Key="Img_WhatsApp" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/WhatsApp.png"/>
+    <BitmapImage x:Key="Img_WhiteBoard" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/WhiteBoard.png"/>
+    <BitmapImage x:Key="Img_Widgets" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Widgets.png"/>
     <BitmapImage x:Key="Img_Xbox" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Xbox.png"/>
     <BitmapImage x:Key="Img_YandexMusic" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/YandexMusic.png"/>
-    
+    <!--#endregion -->
+
 </ResourceDictionary>

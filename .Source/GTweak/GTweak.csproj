@@ -251,8 +251,11 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\Images\ImageResources.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImageResources.tt</DependentUpon>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Assets\UserControls\Card.xaml">
       <SubType>Designer</SubType>
@@ -637,6 +640,10 @@
     <Resource Include="Assets\Images\DownloadApps\DiskMark.png" />
     <Resource Include="Assets\Images\DownloadApps\CPUz.png" />
     <Resource Include="Assets\Images\DownloadApps\Rufus.png" />
+    <Content Include="Assets\Images\ImageResources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ImageResources.xaml</LastGenOutput>
+    </Content>
     <Content Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>

@@ -1,0 +1,31 @@
+<#@ template language="C#" hostspecific="true" #>
+<#@ output extension=".xaml" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+<#
+    string imagesRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Host.TemplateFile), "."));
+
+    foreach (string folder in Directory.GetDirectories(imagesRoot).OrderBy(d => d))
+    {
+        string folderName = Path.GetFileName(folder);
+#>
+    <!--#region <#= folderName #> -->
+<#
+    foreach (string file in Directory.GetFiles(folder, "*.png").OrderBy(f => f))
+    {
+#>
+    <BitmapImage x:Key="Img_<#= Path.GetFileNameWithoutExtension(file) #>" UriSource="/GTweak;component/Assets/Images/<#= folderName #>/<#= Path.GetFileName(file) #>"/>
+<#
+    }
+#>
+    <!--#endregion -->
+
+<#
+    }
+#>
+</ResourceDictionary>
