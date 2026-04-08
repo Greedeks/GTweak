@@ -15,27 +15,12 @@
             </Border.RenderTransform>
         </Border>
         <Border x:Name="CardBody" Background="{StaticResource Brush_Background_Card}" BorderThickness="1" CornerRadius="8" HorizontalAlignment="Left" VerticalAlignment="Top" SnapsToDevicePixels="True">
-            <Border.BorderBrush>
-                <SolidColorBrush Color="{StaticResource Color_Separator}"/>
-            </Border.BorderBrush>
             <Border.Style>
                 <Style TargetType="Border">
+                    <Setter Property="BorderBrush" Value="{StaticResource Brush_Separator}" />
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard Timeline.DesiredFrameRate="120">
-                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource Color_Border_Hover_CheckBox}" Duration="0:0:0.05"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard Timeline.DesiredFrameRate="120">
-                                        <ColorAnimation Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource Color_Separator}" Duration="0:0:0.05"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_Inactive}" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>

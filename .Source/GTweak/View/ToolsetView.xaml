@@ -20,7 +20,7 @@
 
         <uc:FlowPanel  Grid.Row="0" HorizontalAlignment="Left" Margin="10,5,10,0"  ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5">
 
-            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" Width="300" MaxLength="55" HorizontalAlignment="Left" Height="28">
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" Width="300" MaxLength="55" HorizontalAlignment="Left" Height="29">
                 <TextBox.Tag>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <ui:SymbolIcon Symbol="Search20" FontSize="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
