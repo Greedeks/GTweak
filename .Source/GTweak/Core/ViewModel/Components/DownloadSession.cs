@@ -53,24 +53,49 @@ namespace GTweak.Core.ViewModel.Components
 
         public async Task Start()
         {
+            IsDownloading = true;
+            Progress = 0;
+
             try
             {
                 string finalUrl = await ToolsetDownloadService.GetResolvedDownloadUrl(_model);
 
-                if (!string.IsNullOrEmpty(finalUrl))
+                if (string.IsNullOrEmpty(finalUrl))
                 {
-                    IsDownloading = true;
-                    _cts = new CancellationTokenSource();
+                    IsDownloading = false;
+                    return;
+                }
 
-                    string destinationFolder = SettingsEngine.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-                    string destinationPath = Path.Combine(destinationFolder, GetFileNameFromUrl(finalUrl));
+                _cts = new CancellationTokenSource();
+                string destinationFolder = SettingsEngine.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                string destinationPath = Path.Combine(destinationFolder, GetFileNameFromUrl(finalUrl));
 
-                    await ToolsetDownloadService.DownloadFile(finalUrl, destinationPath, _model.SourceUrl, new Progress<double>(v => Progress = v), _cts.Token);
+                if (!File.Exists($"{destinationPath}.download"))
+                {
+                    Progress = 0;
+                }
+
+                await ToolsetDownloadService.DownloadFile(finalUrl, destinationPath, _model.SourceUrl, new Progress<double>(v => Progress = v), _cts.Token);
+            }
+            catch (Exception ex)
+            {
+                await Task.Delay(500);
+
+                switch (ex)
+                {
+                    case Exception e when e.Message == "GitHubRateLimit":
+                        NotificationManager.Show("warn", "error_git_limit_noty").Perform();
+                        break;
+                    case HttpRequestException _:
+                        NotificationManager.Show("warn", "error_download_noty").Perform();
+                        break;
+                    case OperationCanceledException _:
+                        break;
+                    default:
+                        ErrorLogging.LogDebug(ex);
+                        break;
                 }
             }
-            catch (Exception ex) when (ex.Message == "GitHubRateLimit") { NotificationManager.Show("warn", "error_git_limit_noty").Perform(); }
-            catch (HttpRequestException) { NotificationManager.Show("warn", "error_download_noty").Perform(); }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             finally
             {
                 IsDownloading = false;

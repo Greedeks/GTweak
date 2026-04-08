@@ -554,6 +554,7 @@
     <v:String x:Key="btn_cancel">Сancel</v:String>
     <v:String x:Key="btn_open_dir">Open folder</v:String>
     <v:String x:Key="text_ts">Search by name or author</v:String>
+    <v:String x:Key="connecting_ts">Connecting</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

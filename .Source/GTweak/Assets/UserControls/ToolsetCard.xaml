@@ -139,6 +139,7 @@
                 </Grid>
 
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,3,0,0">
+
                     <Button x:Name="CardButton" Content="{DynamicResource btn_download}" Command="{Binding DownloadCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource ButtonContent}">
@@ -169,8 +170,36 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Column="0">
-                            <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0:0}%', RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" MinWidth="150" VerticalAlignment="Center"/>
+
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-2,0,0" FontSize="13px">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="0">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                                <Run Text="{DynamicResource connecting_ts}"/><Run Text="..."/>
+                            </TextBlock>
+
+                            <Grid>
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="0">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+
+                                <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0:0}%', RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" MinWidth="150" VerticalAlignment="Center"/>
+                            </Grid>
                         </Grid>
 
                         <Button Grid.Column="1" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent_Inverted}" Command="{Binding CancelCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Margin="10,0,0,0"/>
