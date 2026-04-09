@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using GTweak.Core.Base;
 using GTweak.Core.Item;
 using GTweak.Core.Models;
+using GTweak.Core.Services;
 using GTweak.Utilities.Controls;
 using Ookii.Dialogs.Wpf;
 
@@ -17,8 +18,9 @@ namespace GTweak.Core.ViewModel
     internal class ToolsetViewModel : ViewModelBase
     {
         public ObservableCollection<ToolsetItem> Tools { get; } = new ObservableCollection<ToolsetItem>();
+        private readonly FuzzySearchService _fuzzyService = new FuzzySearchService();
 
-        private string _searchText;
+        private string _searchText = string.Empty;
 
         public ICollectionView ToolsView { get; }
         public ICommand SelectFolderCommand { get; }
@@ -30,11 +32,13 @@ namespace GTweak.Core.ViewModel
             get => _searchText;
             set
             {
+                value ??= string.Empty;
+
                 if (_searchText != value)
                 {
                     _searchText = value;
                     OnPropertyChanged();
-                    ToolsView.Refresh();
+                    ToolsView?.Refresh();
                 }
             }
         }
@@ -43,12 +47,12 @@ namespace GTweak.Core.ViewModel
         {
             SelectFolderCommand = new RelayCommand(_ => SelectFolder());
             OpenFolderCommand = new RelayCommand(_ => OpenFolder());
-            ClearCommand = new RelayCommand(obj => { SearchText = string.Empty; });
-
-            LoadApps();
+            ClearCommand = new RelayCommand(_ => SearchText = string.Empty);
 
             ToolsView = CollectionViewSource.GetDefaultView(Tools);
             ToolsView.Filter = FilterTools;
+
+            LoadApps();
         }
 
         private void LoadApps()
@@ -67,26 +71,25 @@ namespace GTweak.Core.ViewModel
                         Tools.Add(new ToolsetItem(model));
                     }
                 }
+
+                ToolsView?.Refresh();
             }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
 
         private bool FilterTools(object obj)
         {
-            if (!string.IsNullOrWhiteSpace(SearchText))
+            if (obj is ToolsetItem item)
             {
-                if (obj is ToolsetItem item)
+                if (string.IsNullOrWhiteSpace(_searchText))
                 {
-                    bool nameMatch = item.AppName?.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0;
-                    bool authorMatch = item.AuthorName?.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0;
-
-                    return nameMatch || authorMatch;
+                    return true;
                 }
 
-                return false;
+                return _fuzzyService.IsMatch(item.AppName, _searchText) || _fuzzyService.IsMatch(item.AuthorName, _searchText);
             }
 
-            return true;
+            return false;
         }
 
         private void SelectFolder()
@@ -102,6 +105,7 @@ namespace GTweak.Core.ViewModel
                 if (folderDialog.ShowDialog() == true)
                 {
                     string selectedPath = folderDialog.SelectedPath;
+
                     if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
                     {
                         SettingsEngine.DownloadPath = selectedPath;
