@@ -91,6 +91,10 @@
   <summary> Расширения </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/Addons.png"/>
 </details>
+<details>
+  <summary> Набор инструментов </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ru/Toolset.png"/>
+</details>
 
 <h2> Системные Требования</h2>
 
