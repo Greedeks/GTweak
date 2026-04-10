@@ -74,8 +74,8 @@
     <v:String x:Key="notsupport_ntfs_noty">A művelet nem érhető el, mert a könyvtár nem NTFS-partíción található</v:String>
     <v:String x:Key="success_reg_exporter_noty">A rendszerleíró adatbázis fájlja sikeresen mentve</v:String>
     <v:String x:Key="error_reg_exporter_noty">Hiba történt a rendszerleíró adatbázis fájl mentése közben</v:String>
-    <v:String x:Key="error_git_limit_noty">GitHub has temporarily rate-limited API requests, please try again later</v:String>
-    <v:String x:Key="error_download_noty">Failed to establish a connection with the server</v:String>
+    <v:String x:Key="error_git_limit_noty">A GitHub ideiglenesen korlátozta az API-lekérdezések számát, kérjük, próbálja meg később újra</v:String>
+    <v:String x:Key="error_download_noty">Nem sikerült kapcsolatot létesíteni a szerverrel</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -87,7 +87,7 @@
     <v:String x:Key="rbtn_sys_main">Rendszer</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Rendszerinformációk</v:String>
     <v:String x:Key="rbtn_adds_main">Bővítmények</v:String>
-    <v:String x:Key="rbtn_ts_main">Toolset</v:String>
+    <v:String x:Key="rbtn_ts_main">Eszközkészlet</v:String>
     <v:String x:Key="title_settings_main">Beállítások</v:String>
     <v:String x:Key="btgl_noty_main">Értesítések megjelenítése</v:String>
     <v:String x:Key="slider_volume_main">Hangerő:</v:String>
@@ -227,7 +227,7 @@
     <v:String x:Key="tgl6_intf">Alkalmazások és fájlkezelő sötét témája</v:String>
     <v:String x:Key="tgl7_intf">Késleltetés a helyi menü megnyitásakor</v:String>
     <v:String x:Key="tgl8_intf">Késés a feladat sávon megjelenő előnézeteknél</v:String>
-    <v:String x:Key="tgl9_intf">Átfedő jelzések megjelenítése az ikonokon</v:String>
+    <v:String x:Key="tgl9_intf">Az ikonokon megjelenő feliratos jelvények megjelenítése</v:String>
     <v:String x:Key="tgl10_intf">Előtag «Címke ehhez...» / utótag «– Címke»</v:String>
     <v:String x:Key="tgl11_intf">Tálca igazítása</v:String>
     <v:String x:Key="tgl12_intf">A «Start» menü szabványos elrendezése</v:String>
@@ -262,7 +262,7 @@
     <v:String x:Key="tgl6_desc_intf">A beállítás világosra vagy sötétre változtatja a Fájlkezelő témáját, beleértve a böngészőket és az eszköz témáját támogató egyéb programokat is. Figyelem, a képernyő villoghat.</v:String>
     <v:String x:Key="tgl7_desc_intf">Alapértelmezés szerint további helyi menüelemek jelennek meg 400 ezredmásodperces késleltetéssel. Ha gyorsabban szeretne haladni, csökkentheti ezt a késleltetést.</v:String>
     <v:String x:Key="tgl8_desc_intf">Alapértelmezés szerint a tálca előnézete túl sokáig jeleníti meg a futó alkalmazások előnézetét. Az előnézetek gyorsabb megjelenéséhez alkalmazza ezt a módosítást.</v:String>
-    <v:String x:Key="tgl9_desc_intf">Lehetővé teszi a parancsikon-nyilak, a felhőalapú szinkronizálási állapotok (OneDrive, Dropbox) és a fájltípus-jelölések (például SVG-grafika) elrejtését.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Lehetővé teszi a gyorsbillentyű-nyilak, a felhőalapú szinkronizálás állapotjelzőinek (OneDrive, Dropbox) és a fájltípus-jelölők (pl. SVG-grafikák) elrejtését.</v:String>
     <v:String x:Key="tgl10_desc_intf">A címkék túl intuitív előtag-utótagjának eltávolítása.</v:String>
     <v:String x:Key="tgl11_desc_intf">Válassza ki, hogy hol szeretné megjeleníteni az ikonokat a tálcán, a centen vagy a bal oldalon</v:String>
     <v:String x:Key="tgl12_desc_intf">Módosítja a Start menü elrendezését a rögzített alkalmazások területének kibővítésével. Ezenkívül a Windows Home kiadás kivételével az «Ajánlott» szakasz eltávolításra kerül a Start menüből.</v:String>
@@ -473,7 +473,7 @@
     <v:String x:Key="tgl27_sys">A Windows Insider háttérfeladatai</v:String>
     <v:String x:Key="tgl28_sys">Rendszerlemez töredezettségmentesítése</v:String>
     <v:String x:Key="tgl29_sys">Windows-frissítések szüneteltetése</v:String>
-    <v:String x:Key="tgl30_sys">Multiplane Overlay (MPO)</v:String>
+    <v:String x:Key="tgl30_sys">Többszintű átfedés (MPO)</v:String>
 
     <v:String x:Key="slider1_desc_sys">Módosítja az egérmutató sebességét, így időt takaríthat meg az egérparaméterek kereséséhez.</v:String>
     <v:String x:Key="slider2_desc_sys">Módosítja a késleltetést, mielőtt megkezdené a beírt karakter ismétlését, az ajánlott érték 0.</v:String>
@@ -507,7 +507,7 @@
     <v:String x:Key="tgl27_desc_sys">A Windows Insider résztvevői számára ezeknek a feladatoknak engedélyezve kell maradniuk. Ha azonban nem vesz részt a programban, az összes kapcsolódó feladat felesleges többletterheléssé válik: rendszererőforrásokat fogyasztanak, haszontalan naplókat hoznak létre, és telemetriai kapcsolatokat kezdeményezhetnek anélkül, hogy bármilyen előnyt nyújtanának. Letiltásuk javíthatja az indítási időt és a rendszer általános teljesítményét, miközben kiküszöböli a felesleges kísérleti adatgyűjtési csatornákat.</v:String>
     <v:String x:Key="tgl28_desc_sys">Ha SSD-vel rendelkezik, akkor a defragmentálás és a rendszerindítási fájlok optimalizálásának letiltása, amelyek csak a merevlemezek (HDD) esetében hatékonyak, segít meghosszabbítani a meghajtó élettartamát. Ugyanakkor a TRIM optimalizálási funkció továbbra is működik: tájékoztatja az SSD vezérlőt, hogy mely adatblokkok már nem használatosak, és törli azokat, így biztosítva a stabil sebességet és a meghajtó hosszú élettartamát.</v:String>
     <v:String x:Key="tgl29_desc_sys">10 évre szünetelteti a Windows rendszerfrissítéseit, miközben az alkalmazásfrissítések és a Microsoft Store-ból történő letöltések aktívak maradnak. A frissítések teljes letiltásához lépjen a Szolgáltatások menüpontba, és tiltsa le a megfelelő Windows Update szolgáltatásokat.</v:String>
-    <v:String x:Key="tgl30_desc_sys">Multiplane Overlay is a Windows display technology designed to improve performance through hardware-accelerated layer overlay. However, in some cases, the system and drivers may interact incorrectly with applications, leading to black screens, freezes, flickering, and screen tearing. It is recommended to disable this only if you encounter such issues.</v:String>
+    <v:String x:Key="tgl30_desc_sys">A többszintű átfedés (Multiplane Overlay) egy Windows-megjelenítési technológia, amelyet a hardveresen gyorsított rétegátfedés révén a teljesítmény javítására fejlesztettek ki. Bizonyos esetekben azonban előfordulhat, hogy a rendszer és az illesztőprogramok nem megfelelően működnek együtt az alkalmazásokkal, ami fekete képernyőt, lefagyást, villódzást és képernyőszakadást okozhat. Ezt a funkciót csak akkor ajánlott letiltani, ha ilyen problémákkal szembesül.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -549,12 +549,12 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
-    <v:String x:Key="source_ts">Source</v:String>
-    <v:String x:Key="btn_download">Download</v:String>
-    <v:String x:Key="btn_cancel">Сancel</v:String>
-    <v:String x:Key="btn_open_dir">Open folder</v:String>
-    <v:String x:Key="text_ts">Search by name or author</v:String>
-    <v:String x:Key="connecting_ts">Connecting</v:String>
+    <v:String x:Key="source_ts">Forrás</v:String>
+    <v:String x:Key="btn_download">Letöltés</v:String>
+    <v:String x:Key="btn_cancel">Mégse</v:String>
+    <v:String x:Key="btn_open_dir">Mappa megnyitása</v:String>
+    <v:String x:Key="text_ts">Keresés név vagy szerző szerint</v:String>
+    <v:String x:Key="connecting_ts">Csatlakozás</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>
