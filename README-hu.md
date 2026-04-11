@@ -88,6 +88,10 @@
   <summary> Bővítmények </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Addons.png"/>
 </details>
+<details>
+  <summary> Eszközkészlet </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/hu/Toolset.png"/>
+</details>
 
 <h2> Rendszerkövetelmények</h2>
 

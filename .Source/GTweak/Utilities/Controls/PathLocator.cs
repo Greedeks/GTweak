@@ -292,6 +292,10 @@ namespace GTweak.Utilities.Controls
 
             internal static readonly string OneDrive = FindExecutablePath("onedrivesetup.exe");
 
+            internal static readonly string DisablingWD = Path.Combine(Folders.DefenderBackup, "DisablingWD.exe");
+
+            internal static readonly string NSudo = Path.Combine(Folders.DefenderBackup, "NSudoLC.exe");
+
             internal static (string Normal, string Block) UsoClient =>
             (
                 Path.Combine(Environment.SystemDirectory, "usoclient.exe"),
@@ -308,9 +312,23 @@ namespace GTweak.Utilities.Controls
 
             internal static readonly string MpCmdRun = Path.Combine(Folders.SystemDrive, "Program Files", "Windows Defender", "MpCmdRun.exe");
 
-            internal static readonly string DisablingWD = Path.Combine(Folders.DefenderBackup, "DisablingWD.exe");
 
-            internal static readonly string NSudo = Path.Combine(Folders.DefenderBackup, "NSudoLC.exe");
+
+            internal static class Protections
+            {
+                private static (string Normal, string Block) CreatePath(string dir, string normalName, string blockName) => (Path.Combine(dir, normalName), Path.Combine(dir, blockName));
+
+                internal static (string Normal, string Block) MpCmdRun => CreatePath(Folders.WindowsDefender, "MpCmdRun.exe", "BlockMpCmdRun.exe");
+
+                internal static (string Normal, string Block) SmartScreen => CreatePath(Environment.SystemDirectory, "smartscreen.exe", "BlockSS.exe");
+
+                internal static (string Normal, string Block) DefenderEngine => CreatePath(Folders.WindowsDefender, "MsMpEng.exe", "BlockAntimalware.exe");
+
+                internal static (string Normal, string Block) DefenderCore => CreatePath(Folders.WindowsDefender, "MpDefenderCoreService.exe", "BlockAntimalwareCore.exe");
+
+                internal static (string Normal, string Block) HealthAttestation => CreatePath(Path.Combine(Environment.SystemDirectory, "HealthAttestationClient"), "HealthAttestationClientAgent.exe", "BlockHACA.exe");
+
+            }
         }
 
         internal static class Files
