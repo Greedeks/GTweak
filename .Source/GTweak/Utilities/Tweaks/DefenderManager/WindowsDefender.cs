@@ -33,25 +33,6 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { "wscsvc", "2" }
         };
 
-        private static readonly (string Path, string Normal, string Block)[] fileMappings = new (string Path, string Normal, string Block)[]
-        {
-           (Environment.SystemDirectory, "smartscreen.exe", "BlockSS.exe"),
-           (PathLocator.Folders.WindowsDefender, "MsMpEng.exe", "BlockAntimalware.exe"),
-           (PathLocator.Folders.WindowsDefender, "MpDefenderCoreService.exe", "BlockAntimalwareCore.exe"),
-           (PathLocator.Folders.WindowsDefender, "MpCmdRun.exe", "BlockMpCmdRun.exe"),
-           (PathLocator.Folders.WindowsDefender, "MpCopyAccelerator.exe", "BlockMpCopyAccelerator.exe"),
-           (PathLocator.Folders.WindowsDefender, "DlpUserAgent.exe", "BlockDlpUserAgent.exe"),
-           (PathLocator.Folders.WindowsDefender, "MpDlpCmd.exe", "BlockMpDlpCmd.exe"),
-           (PathLocator.Folders.WindowsDefender, "MipDlp.exe", "BlockMDlp.exe"),
-           (PathLocator.Folders.WindowsDefender, "MpDlpService.exe", "BlockMpDlpService.exe"),
-           (PathLocator.Folders.WindowsDefender, "mpextms.exe", "Blockmpextms.exe"),
-           (PathLocator.Folders.WindowsDefender, "NisSrv.exe", "BlockNisSrv.exe"),
-           (PathLocator.Folders.WindowsDefender, "ConfigSecurityPolicy.exe", "BlockConfigSecurityPolicy.exe"),
-           (Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),"Windows Defender","BlockWindowsDefenderX86"),
-           (Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Windows Defender Advanced Threat Protection", "BlockWindowsDefenderATP" ),
-           (Path.Combine(Environment.SystemDirectory, "HealthAttestationClient"), "HealthAttestationClientAgent.exe", "BlockHACA.exe")
-        };
-
         internal static void SetProtectionState(bool isDisabled)
         {
             if (isDisabled)
@@ -194,23 +175,21 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c {CommandExecutor.CleanCommand(string.Join(" & ", services.Select(kv => $@"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\{kv.Key}"" /v Start /t REG_DWORD /d {kv.Value} /f")))}""");
 
-            foreach (var (path, normal, block) in fileMappings)
+            foreach ((string Normal, string Block) in PathLocator.Targets.Defender.Mappings)
             {
-                string sourcePath = Path.Combine(path, block);
-                string targetPath = Path.Combine(path, normal);
-
                 CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
-                    $@"takeown /f ""{sourcePath}"" /a",
-                    $@"rename ""{sourcePath}"" ""{normal}""",
-                    $@"icacls ""{targetPath}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",
-                    $@"icacls ""{targetPath}"" /inheritance:r",
-                    $@"icacls ""{targetPath}"" /grant *S-1-5-32-544:F",
-                    $@"icacls ""{targetPath}"" /grant *S-1-5-32-545:R",
-                    $@"icacls ""{targetPath}"" /grant *S-1-5-18:F",
-                    $@"icacls ""{targetPath}"" /grant *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464:F",
-                    $@"icacls ""{targetPath}"" /grant *S-1-15-2-1:R",
-                    $@"icacls ""{targetPath}"" /grant *S-1-15-2-2:R",
-                    $@"icacls ""{targetPath}"" /remove ""{Environment.UserName}"""}))}""");
+                    $@"(if exist ""{Normal}"" (takeown /f ""{Normal}"" /a && del /f /q /a ""{Normal}"") else (cd .))",
+                    $@"takeown /f ""{Block}"" /a",
+                    $@"rename ""{Block}"" ""{Path.GetFileName(Normal)}""",
+                    $@"icacls ""{Normal}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",
+                    $@"icacls ""{Normal}"" /inheritance:r",
+                    $@"icacls ""{Normal}"" /grant *S-1-5-32-544:F",
+                    $@"icacls ""{Normal}"" /grant *S-1-5-32-545:R",
+                    $@"icacls ""{Normal}"" /grant *S-1-5-18:F",
+                    $@"icacls ""{Normal}"" /grant *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464:F",
+                    $@"icacls ""{Normal}"" /grant *S-1-15-2-1:R",
+                    $@"icacls ""{Normal}"" /grant *S-1-15-2-2:R",
+                    $@"icacls ""{Normal}"" /remove ""{Environment.UserName}"""}))}""");
             }
 
             ImportRights();
@@ -225,9 +204,16 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             TerminateProcess();
 
-            foreach (var (path, normal, block) in fileMappings)
+            foreach (var (Normal, Block) in PathLocator.Targets.Defender.Mappings)
             {
-                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""rename ""{Path.Combine(path, normal)}"" ""{block}""""");
+                CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                    $@"takeown /f ""{Normal}"" /a",
+                    $@"icacls ""{Normal}"" /inheritance:r",
+                    $@"icacls ""{Normal}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18",
+                    $@"icacls ""{Normal}"" /grant ""{Environment.UserName}"":F",
+                    $@"(if exist ""{Block}"" (takeown /f ""{Block}"" /a && del /f /q /a ""{Block}"") else (cd .))",
+                    $@"rename ""{Normal}"" ""{Path.GetFileName(Block)}"""
+                }))}""");
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c {CommandExecutor.CleanCommand(string.Join(" & ", services.Select(kv => $@"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\{kv.Key}"" /v Start /t REG_DWORD /d 4 /f")))}""");
@@ -417,12 +403,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 
             ManageExclusions(true);
 
-            foreach (var directory in new[]
-            {
-                Path.Combine(PathLocator.Folders.SystemDrive, "ProgramData", "Microsoft", "Windows Defender", "Scans", "History"),
-                Path.Combine(PathLocator.Folders.SystemDrive, "ProgramData", "Microsoft", "Windows Defender", "Scans", "Workspace"),
-                Path.Combine(PathLocator.Folders.SystemDrive, "ProgramData", "Microsoft", "Windows Defender", "Support")
-            })
+            foreach (string directory in PathLocator.Targets.Defender.CleanupFolders)
             {
                 try
                 {
@@ -431,7 +412,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                         continue;
                     }
 
-                    foreach (var filePath in Directory.EnumerateFiles(directory, "*", SearchOption.TopDirectoryOnly))
+                    foreach (string filePath in Directory.EnumerateFiles(directory, "*", SearchOption.TopDirectoryOnly))
                     {
                         CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""takeown /f \""{filePath}\"" /r /d y && icacls \""{filePath}\"" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls \""{filePath}\"" /grant {Environment.UserName}:F /t && del /q \""{filePath}\""""");
 

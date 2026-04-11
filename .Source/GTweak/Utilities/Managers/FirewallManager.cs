@@ -54,8 +54,8 @@ namespace GTweak.Utilities.Managers
             {
                 Parallel.ForEach(new[]
                 {
-                    (PathLocator.Executable.WorkerCore.Normal, _nameRules["Update"]),
-                    (PathLocator.Executable.UsoClient.Normal, $"{_nameRules["Update"]} (Update Orchestrator)")
+                    (PathLocator.Targets.WindowsUpdate.WorkerCore.Normal, _nameRules["Update"]),
+                    (PathLocator.Targets.WindowsUpdate.UsoClient.Normal, $"{_nameRules["Update"]} (Update Orchestrator)")
                 },
                 executableFile =>
                 {
@@ -148,7 +148,7 @@ namespace GTweak.Utilities.Managers
 
         protected static void BlockWDefender(bool isDisabled)
         {
-            try { Parallel.Invoke(() => { ChangeRules(isDisabled, PathLocator.Executable.MpCmdRun, _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
+            try { Parallel.Invoke(() => { ChangeRules(isDisabled, PathLocator.Targets.Defender.MpCmdRun.Normal, _nameRules["WDefender"], NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT, "blocking Windows Defender database updates"); }); }
             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
         }
     }

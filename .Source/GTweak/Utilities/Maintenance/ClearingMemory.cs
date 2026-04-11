@@ -190,18 +190,16 @@ namespace GTweak.Utilities.Maintenance
 
             if (shouldRemoveWinOld)
             {
-                string dir = PathLocator.Folders.WindowsOld;
+                UnlockHandleHelper.UnlockDirectory(PathLocator.Folders.WindowsOld);
 
-                UnlockHandleHelper.UnlockDirectory(dir);
+                CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{PathLocator.Folders.WindowsOld}"" /r /d y && icacls ""{PathLocator.Folders.WindowsOld}"" /inheritance:r && icacls ""{PathLocator.Folders.WindowsOld}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{PathLocator.Folders.WindowsOld}"" /grant {Environment.UserName}:F /t && rd /s /q ""{PathLocator.Folders.WindowsOld}""");
 
-                CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{dir}"" /r /d y && icacls ""{dir}"" /inheritance:r && icacls ""{dir}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{dir}"" /grant {Environment.UserName}:F /t && rd /s /q ""{dir}""");
-
-                for (int i = 0; Directory.Exists(dir) && i < 10; i++)
+                for (int i = 0; IsWinOldExists && i < 10; i++)
                 {
-                    try { Directory.Delete(dir, true); Thread.Sleep(300); }
+                    try { Directory.Delete(PathLocator.Folders.WindowsOld, true); Thread.Sleep(300); }
                     catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                    CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{dir}' -Recurse -Force", true);
+                    CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{PathLocator.Folders.WindowsOld}' -Recurse -Force", true);
                 }
             }
 
@@ -216,12 +214,12 @@ namespace GTweak.Utilities.Maintenance
             ExplorerManager.Restart(async () =>
             {
                 CommandExecutor.RunCommandAsTrustedInstaller(@"/c attrib -h -r -s %localappdata%\IconCache.db & del /a /f /q %localappdata%\IconCache.db & " +
-                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +
-                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_exif.db & " +
-                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_idx.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_sr.db & " +
-                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_wide.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_96.db & " +
-                        @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_256.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_1024.db & " +
-                        "ie4uinit.exe -show");
+                    @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\iconcache* & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache* & " +
+                    @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_*.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_exif.db & " +
+                    @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_idx.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_sr.db & " +
+                    @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_wide.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_96.db & " +
+                    @"del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_256.db & del /a /f /q %localappdata%\Microsoft\Windows\Explorer\thumbcache_1024.db & " +
+                    "ie4uinit.exe -show");
 
                 await Task.Delay(200);
             });

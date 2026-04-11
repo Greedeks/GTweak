@@ -14,7 +14,6 @@ namespace GTweak.Utilities.Tweaks
     {
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
-        private readonly (string Normal, string Block)[] _updateFiles = new[] { PathLocator.Executable.UsoClient, PathLocator.Executable.WorkerCore, PathLocator.Executable.WuauClient, PathLocator.Executable.WaaSMedic, PathLocator.Executable.MoNotificationUx };
 
         internal void AnalyzeAndUpdate()
         {
@@ -28,7 +27,7 @@ namespace GTweak.Utilities.Tweaks
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XblGameSave", "Start", "4");
 
-            _сontrolWriter.Button[3] = _updateFiles.All(f => File.Exists(f.Normal));
+            _сontrolWriter.Button[3] = PathLocator.Targets.WindowsUpdate.Mappings.All(f => File.Exists(f.Normal));
 
             _сontrolWriter.Button[4] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WalletService", "Start", "4") ||
@@ -177,7 +176,7 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[31] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdate", "Start", "4") ||
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdatem", "Start", "4") ||
-                RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "cmdLine", string.Empty).IndexOf(PathLocator.Executable.UsoClient.Normal, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                RegistryHelp.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "cmdLine", string.Empty).IndexOf(PathLocator.Targets.WindowsUpdate.UsoClient.Normal, StringComparison.OrdinalIgnoreCase) >= 0 ||
                 IsTaskEnabled(edgeTasks);
 
             _сontrolWriter.Button[32] =
@@ -205,7 +204,7 @@ namespace GTweak.Utilities.Tweaks
                     BlockWindowsUpdate(isDisabled);
                     ChangeAccessUpdateFolders(isDisabled);
 
-                    foreach (var (Normal, Block) in _updateFiles)
+                    foreach ((string Normal, string Block) in PathLocator.Targets.WindowsUpdate.Mappings)
                     {
                         string currentFilePath = isDisabled ? Normal : Block;
                         string targetFilePath = isDisabled ? Block : Normal;
@@ -452,7 +451,7 @@ namespace GTweak.Utilities.Tweaks
                 case "TglButton31":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdate", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\edgeupdatem", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "cmdLine", isDisabled ? "dllhost.exe" : PathLocator.Executable.UsoClient.Normal, RegistryValueKind.String);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", "cmdLine", isDisabled ? "dllhost.exe" : PathLocator.Targets.WindowsUpdate.UsoClient.Normal, RegistryValueKind.String);
                     SetTaskState(!isDisabled, edgeTasks);
                     break;
                 case "TglButton32":
@@ -471,12 +470,9 @@ namespace GTweak.Utilities.Tweaks
                 {
                     if (isDenyAccess)
                     {
-                        CommandExecutor.RunCommandAsTrustedInstaller("/c net stop wuauserv & net stop bits & net stop cryptSvc & net stop RuntimeBroker");
+                        CommandExecutor.RunCommandAsTrustedInstaller($"/c net stop wuauserv & net stop bits & net stop cryptSvc & net stop RuntimeBroker & taskkill /f " + string.Join(" ", (new string[] { "usocoreworker", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "runtimebroker", "widgets" }).Select(p => $"/im {p}.exe")));
 
-                        string[] processes = { "usocoreworker", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "runtimebroker", "widgets" };
-                        CommandExecutor.RunCommandAsTrustedInstaller($"/c taskkill /f " + string.Join(" ", processes.Select(p => $"/im {p}.exe")));
-
-                        foreach (string path in new[] { $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\Download", $@"{PathLocator.Folders.SystemDrive}Windows\SoftwareDistribution\DataStore", Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "Windows", "DeliveryOptimization") })
+                        foreach (string path in PathLocator.Targets.WindowsUpdate.CleanupFolders)
                         {
                             UnlockHandleHelper.UnlockDirectory(path);
 

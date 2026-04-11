@@ -59,7 +59,7 @@ namespace GTweak.Core.Services
 
             if (model.Group.Equals("github", StringComparison.OrdinalIgnoreCase))
             {
-                string apiUrl = $"https://api.github.com/repos/{model.DownloadPath}/releases/latest";
+                string apiUrl = PathLocator.Links.DownloadSources.GitHubLatest(model.DownloadPath);
                 using HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
                 if (!response.IsSuccessStatusCode)
@@ -101,7 +101,7 @@ namespace GTweak.Core.Services
                 Match match = Regex.Match(projectName, @"projects/([^/]+)");
                 projectName = match.Success ? match.Groups[1].Value : projectName.Trim('/');
 
-                string bestReleaseUrl = $"https://sourceforge.net/projects/{projectName}/best_release.json";
+                string bestReleaseUrl = PathLocator.Links.DownloadSources.SourceForgeBest(projectName);
                 try
                 {
                     using HttpResponseMessage response = await _httpClient.GetAsync(bestReleaseUrl);
@@ -115,7 +115,7 @@ namespace GTweak.Core.Services
                         {
                             if (string.IsNullOrEmpty(model.FilePattern) || Regex.IsMatch(filename, model.FilePattern, RegexOptions.IgnoreCase))
                             {
-                                return $"https://downloads.sourceforge.net/project/{projectName}{filename}";
+                                return PathLocator.Links.DownloadSources.SourceForgeFile(projectName, filename.TrimStart('/'));
                             }
                         }
                     }
@@ -127,10 +127,10 @@ namespace GTweak.Core.Services
 
                 try
                 {
-                    string rssUrl = $"https://sourceforge.net/projects/{projectName}/rss?path=/";
+                    string rssUrl = PathLocator.Links.DownloadSources.SourceForgeRss(projectName);
                     string rssContent = await _httpClient.GetStringAsync(rssUrl);
 
-                    MatchCollection rssMatches = Regex.Matches(rssContent, $@"<link>https://sourceforge\.net/projects/{projectName}/files/([^<]+?)/download</link>", RegexOptions.IgnoreCase);
+                    MatchCollection rssMatches = Regex.Matches(rssContent, PathLocator.Links.DownloadSources.SourceForgeRssRegex(projectName), RegexOptions.IgnoreCase);
 
                     if (rssMatches.Count > 0)
                     {
@@ -142,13 +142,13 @@ namespace GTweak.Core.Services
                                 if (Regex.IsMatch(filePath, model.FilePattern, RegexOptions.IgnoreCase))
                                 {
 
-                                    return $"https://downloads.sourceforge.net/project/{projectName}/{filePath}";
+                                    return PathLocator.Links.DownloadSources.SourceForgeFile(projectName, filePath.TrimStart('/'));
                                 }
                             }
                         }
 
                         string firstFilePath = rssMatches[0].Groups[1].Value;
-                        return $"https://downloads.sourceforge.net/project/{projectName}/{firstFilePath}";
+                        return PathLocator.Links.DownloadSources.SourceForgeFile(projectName, firstFilePath.TrimStart('/'));
                     }
                 }
                 catch (Exception ex)

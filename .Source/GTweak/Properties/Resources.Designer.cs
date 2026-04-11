@@ -64,14 +64,14 @@ namespace GTweak.Properties {
         ///   Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;Apps&gt;
         ///    &lt;App&gt;
-        ///        &lt;Icon&gt;Img_FirstEverTech&lt;/Icon&gt;
-        ///        &lt;Name&gt;Universal Intel Chipset Device Updater&lt;/Name&gt;
-        ///        &lt;Group&gt;github&lt;/Group&gt; 
-        ///        &lt;Author&gt;FirstEverTech&lt;/Author&gt;
-        ///        &lt;AuthorIcon&gt;https://github.com/FirstEverTech.png&lt;/AuthorIcon&gt;
-        ///        &lt;Source&gt;https://github.com/FirstEverTech/Universal-Intel-Chipset-Updater&lt;/Source&gt;
-        ///        &lt;DownloadPath&gt;FirstEverTech/Universal-Intel-Chipset-Updater&lt;/DownloadPath&gt; 
-        ///		&lt;FilePattern&gt;&lt;![CDATA[Setup.*\\ [остаток строки не уместился]&quot;;.
+        ///        &lt;Icon&gt;Img_Nvidia&lt;/Icon&gt;
+        ///        &lt;Name&gt;NVIDIA App&lt;/Name&gt;
+        ///        &lt;Group&gt;web&lt;/Group&gt;
+        ///        &lt;Author&gt;(C) NVIDIA Corporation&lt;/Author&gt;
+        ///        &lt;AuthorIcon&gt;nvidia.com&lt;/AuthorIcon&gt;
+        ///        &lt;Source&gt;https://www.nvidia.com/en-eu/software/nvidia-app/&lt;/Source&gt;
+        ///        &lt;DownloadPath&gt;https://www.nvidia.com/en-us/software/nvidia-app/&lt;/DownloadPath&gt;
+        ///        &lt;UrlPattern&gt;&lt;![CDATA[https://.*?download\.nvidia\.com/nvapp/client/.*?/NVIDIA_app_.*?\.exe]]&gt; [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string AppsCatalog {
             get {

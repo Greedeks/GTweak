@@ -34,7 +34,7 @@ namespace GTweak.Core.Services
 
             if (isWebBased)
             {
-                urlToDownload = $"https://www.google.com/s2/favicons?domain={iconSource}&sz=48";
+                urlToDownload = PathLocator.Links.Favicons.Google(iconSource);
             }
 
             try
@@ -54,7 +54,7 @@ namespace GTweak.Core.Services
                 {
                     try
                     {
-                        byte[] imageBytes = await _httpClient.GetByteArrayAsync($"https://icons.duckduckgo.com/ip3/{iconSource}.ico");
+                        byte[] imageBytes = await _httpClient.GetByteArrayAsync(PathLocator.Links.Favicons.DuckDuckGo(iconSource));
                         ImageSource image = LoadImage(imageBytes);
 
                         if (image != null)
