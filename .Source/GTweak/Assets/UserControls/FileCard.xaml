@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d"
              d:Height="Auto" d:Width="Auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True"
-             UseLayoutRounding="True" Cursor="Hand" MaxWidth="200" >
+             x:Name="root" UseLayoutRounding="True" Cursor="Hand" MaxWidth="200" >
     <Grid Cursor="Hand">
         <ProgressBar x:Name="ProgressBar" Height="4" Margin="8,0,8,0" Width="Auto" VerticalAlignment="Top" Visibility="Collapsed" Value="0" Maximum="100" Foreground="{StaticResource Brush_Accent}" />
 
@@ -24,10 +24,10 @@
                 </Grid.RowDefinitions>
 
                 <Viewbox Grid.Row="0" Width="50" Height="50" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="{Binding IconSource, RelativeSource={RelativeSource AncestorType=local:FileCard}, TargetNullValue={StaticResource Img_BatFile}}" Stretch="Uniform"/>
+                    <Image Source="{Binding IconSource,ElementName=root, TargetNullValue={StaticResource Img_BatFile}}" Stretch="Uniform"/>
                 </Viewbox>
 
-                <TextBlock Grid.Row="1" Margin="0,15,0,0" FontSize="13px" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding FileName, RelativeSource={RelativeSource AncestorType=local:FileCard}}"
+                <TextBlock Grid.Row="1" Margin="0,15,0,0" FontSize="13px" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding FileName,ElementName=root}"
                            TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Center" MaxWidth="150" MaxHeight="200" TextTrimming="CharacterEllipsis"/>
             </Grid>
         </Border>

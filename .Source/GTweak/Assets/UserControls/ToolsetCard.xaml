@@ -7,7 +7,7 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d" 
              d:Height="auto" d:Width="auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None"
-             SnapsToDevicePixels="True" UseLayoutRounding="True">
+             x:Name="root" SnapsToDevicePixels="True" UseLayoutRounding="True">
     <Grid HorizontalAlignment="Left">
         <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=CardBody}" Height="{Binding ActualHeight, ElementName=CardBody}">
             <Border.RenderTransform>
@@ -34,8 +34,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" x:Name="CardIcon" Height="35" Width="35" Source="{Binding AppIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Stretch="Uniform"/>
-                    <TextBlock Grid.Column="1" x:Name="CardTitle" Margin="10,0,0,0" Text="{Binding AppName, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                    <Image Grid.Column="0" x:Name="CardIcon" Height="35" Width="35" Source="{Binding AppIcon,ElementName=root}" Stretch="Uniform"/>
+                    <TextBlock Grid.Column="1" x:Name="CardTitle" Margin="10,0,0,0" Text="{Binding AppName,ElementName=root}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                 </Grid>
 
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,15,0">
@@ -52,14 +52,14 @@
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="50"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSquareIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                        <DataTrigger Binding="{Binding IsSquareIcon,ElementName=root}" Value="True">
                                             <Setter Property="CornerRadius" Value="5"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding AuthorIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="{Binding AuthorIcon,ElementName=root}" Stretch="Uniform"/>
                             </Border.Background>
                         </Border>
 
@@ -68,7 +68,7 @@
                                 <Style TargetType="Path">
                                     <Setter Property="Visibility" Value="Visible"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSquareIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                        <DataTrigger Binding="{Binding IsSquareIcon,ElementName=root}" Value="True">
                                             <Setter Property="Visibility" Value="Collapsed"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -84,7 +84,7 @@
                                 <Style TargetType="Path">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSquareIcon, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                        <DataTrigger Binding="{Binding IsSquareIcon,ElementName=root}" Value="True">
                                             <Setter Property="Visibility" Value="Visible"/>
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -96,7 +96,7 @@
                         </Path>
                     </Grid>
 
-                    <TextBlock Grid.Column="1" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{Binding AuthorName, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" VerticalAlignment="Center" Margin="5,0,0,0" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Grid.Column="1" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{Binding AuthorName,ElementName=root}" VerticalAlignment="Center" Margin="5,0,0,0" TextTrimming="CharacterEllipsis"/>
 
                     <TextBlock Grid.Column="2" Text=" • " Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="5,0,5,0"/>
 
@@ -125,12 +125,12 @@
 
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,3,0,0">
 
-                    <Button x:Name="CardButton" Content="{DynamicResource btn_download}" Command="{Binding DownloadCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}">
+                    <Button x:Name="CardButton" Content="{DynamicResource btn_download}" Command="{Binding DownloadCommand,ElementName=root}">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource ButtonContent}">
                                 <Setter Property="Visibility" Value="Visible"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsDownloading, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                    <DataTrigger Binding="{Binding IsDownloading,ElementName=root}" Value="True">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -143,7 +143,7 @@
                             <Style TargetType="Grid">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsDownloading, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="True">
+                                    <DataTrigger Binding="{Binding IsDownloading,ElementName=root}" Value="True">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -161,7 +161,7 @@
                                     <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="0">
+                                            <DataTrigger Binding="{Binding Progress,ElementName=root}" Value="0">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -175,19 +175,19 @@
                                     <Style TargetType="Grid">
                                         <Setter Property="Visibility" Value="Visible"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Value="0">
+                                            <DataTrigger Binding="{Binding Progress,ElementName=root}" Value="0">
                                                 <Setter Property="Visibility" Value="Collapsed"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Grid.Style>
 
-                                <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0:0}%', RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <ProgressBar Value="{Binding Progress, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" MinWidth="150" VerticalAlignment="Center"/>
+                                <TextBlock Panel.ZIndex="5" Text="{Binding Progress, StringFormat='{}{0:0}%',ElementName=root}" Style="{StaticResource TextDefault}" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted_Inverted}" FontSize="12px" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ProgressBar Value="{Binding Progress,ElementName=root}" Foreground="{StaticResource Brush_Accent}" Minimum="0" Maximum="100" Height="20" MinWidth="150" VerticalAlignment="Center"/>
                             </Grid>
                         </Grid>
 
-                        <Button Grid.Column="1" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent_Inverted}" Command="{Binding CancelCommand, RelativeSource={RelativeSource AncestorType=local:ToolsetCard}}" Margin="10,0,0,0"/>
+                        <Button Grid.Column="1" Content="{DynamicResource btn_cancel}" Style="{StaticResource ButtonContent_Inverted}" Command="{Binding CancelCommand,ElementName=root}" Margin="10,0,0,0"/>
                     </Grid>
                 </Grid>
 

@@ -55,7 +55,7 @@
         <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
-                    <ItemsControl ItemsSource="{Binding ToolsView}" VirtualizingPanel.IsVirtualizing="True">
+                    <ItemsControl ItemsSource="{Binding ToolsView}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <uc:FlowPanel Margin="10,10,10,20" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>

@@ -134,7 +134,6 @@
     <Compile Include="Assets\UserControls\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\ShaderEffects\ColorWheelEffect.cs" />
     <Compile Include="Assets\UserControls\DescriptionBlock.xaml.cs">
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
@@ -145,6 +144,7 @@
     <Compile Include="Assets\UserControls\ToolsetCard.xaml.cs">
       <DependentUpon>ToolsetCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\ShaderEffects\ColorWheelEffect.cs" />
     <Compile Include="Core\Base\IViewPageBase.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Converters\AngleToPercentConverter.cs" />

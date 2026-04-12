@@ -36,7 +36,7 @@
     <SolidColorBrush x:Key="Brush_Button_Hover" Color="#303231"/>
 
     <SolidColorBrush x:Key="Brush_Button_Inverted" Color="#ECEBE7"/>
-    <SolidColorBrush x:Key="Brush_Button_Hover_Inverted" Color="#E0DFDA"/>
+    <SolidColorBrush x:Key="Brush_Button_Hover_Inverted" Color="#D9D8D5"/>
 
     <SolidColorBrush x:Key="Brush_Background_TextBox" Color="#252525"/>
     <SolidColorBrush x:Key="Brush_TextBox_Border" Color="#858685"/>
