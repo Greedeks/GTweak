@@ -97,52 +97,73 @@ namespace GTweak.View
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is FrameworkContentElement { IsEnabled: false } || sender is FrameworkElement { IsEnabled: false })
+            object source = e.OriginalSource;
+
+            if (source is FrameworkContentElement { IsEnabled: false } || source is FrameworkElement { IsEnabled: false } || e?.LeftButton != MouseButtonState.Pressed)
             {
                 return;
             }
 
-            if (e?.LeftButton == MouseButtonState.Pressed)
+            string textToProcess = string.Empty;
+            TextBlock parentTextBlock = null;
+            double startY = 0;
+
+            if (source is Run runtext && runtext.Parent is TextBlock tb)
             {
-                Clipboard.Clear();
-                switch (sender)
+                textToProcess = runtext.Text;
+                parentTextBlock = tb;
+                startY = runtext.ContentStart.GetCharacterRect(LogicalDirection.Forward).Y;
+            }
+            else if (source is TextBlock textBlock)
+            {
+                textToProcess = textBlock.Text;
+                parentTextBlock = textBlock;
+                startY = 0;
+            }
+
+            if (parentTextBlock != null && !string.IsNullOrEmpty(textToProcess))
+            {
+                double clickY = e.GetPosition(parentTextBlock).Y;
+                string selectedLine = GetClickedLine(textToProcess, parentTextBlock, startY, clickY);
+
+                if (!string.IsNullOrEmpty(selectedLine))
                 {
-                    case TextBlock textBlock:
-                        {
-                            double cumulativeHeight = 0;
-                            string SelectedLine = string.Empty;
+                    Clipboard.Clear();
+                    Clipboard.SetData(DataFormats.UnicodeText, selectedLine);
 
-                            foreach (string line in textBlock.Text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
-                            {
-                                FormattedText formattedText = new FormattedText(line, System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(textBlock.FontFamily,
-                                    textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch), textBlock.FontSize, textBlock.Foreground, VisualTreeHelper.GetDpi(textBlock).PixelsPerDip);
-                                cumulativeHeight += formattedText.Height;
+                    e.Handled = true;
 
-                                if (cumulativeHeight >= e?.GetPosition(textBlock).Y)
-                                {
-                                    SelectedLine = line;
-                                    break;
-                                }
-                            }
-                            Clipboard.SetData(DataFormats.UnicodeText, SelectedLine);
-                            break;
-                        }
-                    case Run runtext:
-                        {
-                            Clipboard.SetData(DataFormats.UnicodeText, runtext.Text.Replace('\n', ' '));
-                            break;
-                        }
-                    default:
-                        break;
-                }
-
-                if (!PopupCopy.IsOpen)
-                {
-                    PopupCopy.IsOpen = true;
-                    CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
-                    PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
+                    if (!PopupCopy.IsOpen)
+                    {
+                        PopupCopy.IsOpen = true;
+                        CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
+                        PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
+                    }
                 }
             }
+        }
+
+        private string GetClickedLine(string text, TextBlock textBlock, double startY, double clickY)
+        {
+            double cumulativeHeight = startY;
+
+            Typeface typeface = new Typeface(textBlock.FontFamily, textBlock.FontStyle, textBlock.FontWeight, textBlock.FontStretch);
+            double pixelsPerDip = VisualTreeHelper.GetDpi(textBlock).PixelsPerDip;
+
+            string[] lines = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (string line in lines)
+            {
+                FormattedText formattedText = new FormattedText(line, System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeface, textBlock.FontSize, textBlock.Foreground, pixelsPerDip);
+                cumulativeHeight += formattedText.Height;
+
+                if (cumulativeHeight >= clickY)
+                {
+                    return line;
+                }
+            }
+
+            return string.Empty;
         }
     }
 }
