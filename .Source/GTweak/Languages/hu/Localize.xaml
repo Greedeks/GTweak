@@ -9,13 +9,12 @@
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Betöltés</v:String>
-    <v:String x:Key="step1_load">Profil feltöltése</v:String>
-    <v:String x:Key="step2_load">Adatok lekérése</v:String>
-    <v:String x:Key="step3_load">A rendszerleíró adatbázis ellenőrzése</v:String>
-    <v:String x:Key="step4_load">Alkalmazások elemzése</v:String>
-    <v:String x:Key="step5_load">Hardver leltár</v:String>
-    <v:String x:Key="step6_load">A kapcsolat ellenőrzése</v:String>
-    <v:String x:Key="step7_load">Inicializálás</v:String>
+    <v:String x:Key="step1_load">Környezet előkészítése</v:String>
+    <v:String x:Key="step2_load">Összetevők állapotának ellenőrzése</v:String>
+    <v:String x:Key="step3_load">Konfiguráció vizsgálata</v:String>
+    <v:String x:Key="step4_load">Telepített csomagok keresése</v:String>
+    <v:String x:Key="step5_load">Hálózat és frissítések ellenőrzése</v:String>
+    <v:String x:Key="step6_load">Inicializálás</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->

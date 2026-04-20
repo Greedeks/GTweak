@@ -89,8 +89,7 @@ namespace GTweak.Utilities.Configuration
                     () => GetGraphicsInfo(),
                     () => GetPrimaryRefreshRate(),
                     () => GetMemoryInfo(),
-                    () => RefreshDevicesData(),
-                    () => GetUserIpAddress().GetAwaiter().GetResult()
+                    () => RefreshDevicesData()
                 );
             });
         }

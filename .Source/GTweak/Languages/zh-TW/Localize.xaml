@@ -9,13 +9,12 @@
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">載入中</v:String>
-    <v:String x:Key="step1_load">載入個人資料</v:String>
-    <v:String x:Key="step2_load">擷取資料</v:String>
-    <v:String x:Key="step3_load">檢查登錄檔</v:String>
-    <v:String x:Key="step4_load">分析應用程式</v:String>
-    <v:String x:Key="step5_load">硬體清單</v:String>
-    <v:String x:Key="step6_load">檢查連線狀態</v:String>
-    <v:String x:Key="step7_load">初始化程式</v:String>
+    <v:String x:Key="step1_load">正在準備環境</v:String>
+    <v:String x:Key="step2_load">正在檢查組件狀態</v:String>
+    <v:String x:Key="step3_load">正在掃描配置</v:String>
+    <v:String x:Key="step4_load">正在搜尋已安裝的包</v:String>
+    <v:String x:Key="step5_load">正在檢查網路和更新</v:String>
+    <v:String x:Key="step6_load">初始化程式</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->

@@ -9,13 +9,12 @@
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Загрузка</v:String>
-    <v:String x:Key="step1_load">Загрузка профиля</v:String>
-    <v:String x:Key="step2_load">Получение данных</v:String>
-    <v:String x:Key="step3_load">Просмотр реестра</v:String>
-    <v:String x:Key="step4_load">Анализ приложений</v:String>
-    <v:String x:Key="step5_load">Получение конфигурации</v:String>
-    <v:String x:Key="step6_load">Проверка соединения</v:String>
-    <v:String x:Key="step7_load">Инициализация</v:String>
+    <v:String x:Key="step1_load">Подготовка среды</v:String>
+    <v:String x:Key="step2_load">Проверка статуса компонентов</v:String>
+    <v:String x:Key="step3_load">Сканирование конфигурации</v:String>
+    <v:String x:Key="step4_load">Поиск установленных пакетов</v:String>
+    <v:String x:Key="step5_load">Проверка сети и обновлений</v:String>
+    <v:String x:Key="step6_load">Инициализация</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->

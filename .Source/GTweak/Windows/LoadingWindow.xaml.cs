@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Threading;
-using System.Threading.Tasks;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
@@ -28,22 +27,27 @@ namespace GTweak.Windows
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
-            backgroundWorker.RunWorkerCompleted += async delegate
+            backgroundWorker.RunWorkerCompleted += delegate
             {
-                TypewriterAnimation.Create((string)FindResource("step7_load"), StatusLoading, TimeSpan.FromMilliseconds(300));
-                await Task.Delay(400);
                 new MainWindow().Show();
                 Close();
             };
+
             backgroundWorker.RunWorkerAsync();
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (byte i = 0; i <= 100; i++)
+            BackgroundWorker worker = sender as BackgroundWorker;
+
+            void ReportStep(byte stepId, int percent, int delay = 0)
             {
-                (sender as BackgroundWorker)?.ReportProgress(i);
-                Thread.Sleep(17);
+                worker?.ReportProgress(percent, stepId);
+
+                if (delay > 0)
+                {
+                    Thread.Sleep(delay);
+                }
             }
 
             static void ExecuteWithLogging(Action action, string member)
@@ -52,28 +56,38 @@ namespace GTweak.Windows
                 catch (Exception ex) { ErrorLogging.LogWritingFile(ex, false, member); }
             }
 
-            ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
+            ReportStep(1, 15, 300);
             ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
-            ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
-            ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
-            ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
-            ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
+            ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
+            ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));
+
+            ReportStep(2, 35, 300);
             ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
+            ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
+            ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
+
+            ReportStep(3, 55, 150);
             ExecuteWithLogging(_hardwareProvider.GetHardwareData, nameof(_hardwareProvider.GetHardwareData));
             ExecuteWithLogging(() => _hardwareProvider.GetProcessCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetProcessCount));
             ExecuteWithLogging(() => _hardwareProvider.GetServicesCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetServicesCount));
-            ExecuteWithLogging(() => _hardwareProvider.ValidateVersionUpdates().GetAwaiter().GetResult(), nameof(_hardwareProvider.ValidateVersionUpdates));
             ExecuteWithLogging(() => _hardwareProvider.GetTotalProcessorUsage().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetTotalProcessorUsage));
             ExecuteWithLogging(() => _hardwareProvider.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetPhysicalAvailableMemory));
-            ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));
+
+            ReportStep(4, 75, 300);
+            ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
+            ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
+
+            ReportStep(5, 90, 150);
+            ExecuteWithLogging(() => _hardwareProvider.GetUserIpAddress().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetUserIpAddress));
+            ExecuteWithLogging(() => _hardwareProvider.ValidateVersionUpdates().GetAwaiter().GetResult(), nameof(_hardwareProvider.ValidateVersionUpdates));
+            ReportStep(6, 100, 400);
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            int index = Array.IndexOf(new[] { 0, 10, 30, 55, 75, 95 }, e?.ProgressPercentage ?? 0);
-            if (index > 0)
+            if (e.UserState is byte index)
             {
-                TypewriterAnimation.Create((string)FindResource($"step{++index}_load"), StatusLoading, TimeSpan.FromMilliseconds(200));
+                TypewriterAnimation.Create((string)FindResource($"step{index}_load"), StatusLoading, TimeSpan.FromMilliseconds(200));
             }
         }
     }

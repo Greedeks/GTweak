@@ -9,13 +9,12 @@
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Carregando</v:String>
-    <v:String x:Key="step1_load">Carregando perfil</v:String>
-    <v:String x:Key="step2_load">Buscando dados</v:String>
-    <v:String x:Key="step3_load">Inspecionando registro</v:String>
-    <v:String x:Key="step4_load">Analisando aplicativos</v:String>
-    <v:String x:Key="step5_load">Inventário de hardware</v:String>
-    <v:String x:Key="step6_load">Verificando a conexão</v:String>
-    <v:String x:Key="step7_load">Inicialização</v:String>
+    <v:String x:Key="step1_load">Preparando o ambiente</v:String>
+    <v:String x:Key="step2_load">Verificando o status dos componentes</v:String>
+    <v:String x:Key="step3_load">Escaneando a configuração</v:String>
+    <v:String x:Key="step4_load">Procurando pacotes instalados</v:String>
+    <v:String x:Key="step5_load">Verificando rede e atualizações</v:String>
+    <v:String x:Key="step6_load">Inicialização</v:String>
     <!--#endregion-->
 
     <!--#region Message Window -->
