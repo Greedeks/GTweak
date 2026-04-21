@@ -318,7 +318,7 @@
 
         </Grid>
 
-        <Grid x:Name="UpdateBanner" Grid.Row="2" Panel.ZIndex="200" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" Visibility="Collapsed" Opacity="0">
+        <Grid x:Name="UpdateBanner" Grid.Row="2" Panel.ZIndex="200" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" Visibility="Collapsed" Opacity="0" CacheMode="BitmapCache" d:CacheMode="{x:Null}">
             <Grid.RenderTransform>
                 <TranslateTransform Y="-20"/>
             </Grid.RenderTransform>

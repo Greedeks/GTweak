@@ -16,28 +16,21 @@ namespace GTweak.Utilities.Managers
         {
             if (tasklist != null && tasklist.Length != 0)
             {
-                ParallelLoopResult result = Parallel.ForEach(tasklist, () => new Microsoft.Win32.TaskScheduler.TaskService(),
-                (taskName, loopState, taskScheduler) =>
+                try
                 {
-                    try
+                    using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                    foreach (string taskName in tasklist)
                     {
-                        Microsoft.Win32.TaskScheduler.Task scheduledTask = taskScheduler.GetTask(taskName);
-
+                        Microsoft.Win32.TaskScheduler.Task scheduledTask = taskService.GetTask(taskName);
                         if (scheduledTask != null && scheduledTask.Enabled)
                         {
-                            loopState.Stop();
+                            return true;
                         }
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                }
+                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                    return taskScheduler;
-                },
-                taskScheduler =>
-                {
-                    try { taskScheduler.Dispose(); }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                });
-                return !result.IsCompleted;
+                return false;
             }
 
             return false;

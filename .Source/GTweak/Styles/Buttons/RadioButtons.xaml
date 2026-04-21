@@ -52,7 +52,8 @@
                             </Border>
                         </Grid>
                     </Border>
-                    <ControlTemplate.Triggers> 
+
+                    <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
                             <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
@@ -60,6 +61,13 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard Timeline.DesiredFrameRate="120">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <BitmapCache RenderAtScale="1"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="Width" To="300" Duration="0:0:0.35" FillBehavior="HoldEnd">
                                             <DoubleAnimation.EasingFunction>
                                                 <PowerEase Power="3" EasingMode="EaseIn"/>
@@ -80,12 +88,23 @@
                                                 <CubicEase/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
+
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Null}"/>
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard Timeline.DesiredFrameRate="120">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <BitmapCache RenderAtScale="1"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="Width" To="50" Duration="0:0:0.25" FillBehavior="HoldEnd">
                                             <DoubleAnimation.EasingFunction>
                                                 <QuadraticEase/>
@@ -106,6 +125,9 @@
                                                 <CubicEase/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Null}"/>
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -121,5 +143,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
 </ResourceDictionary>

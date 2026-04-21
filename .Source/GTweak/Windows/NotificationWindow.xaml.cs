@@ -43,7 +43,7 @@ namespace GTweak.Windows
                 }
 
                 BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.2));
-                BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.35, useCubicEase: true));
+                BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.35, () => { CacheMode = null; }, useCubicEase: true));
 
                 _timer = new TimerControlManager(TimeSpan.FromSeconds(3), TimerControlManager.TimerMode.CountDown, null, () => { Close(); });
                 _timer.Start();

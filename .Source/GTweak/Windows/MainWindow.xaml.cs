@@ -124,8 +124,11 @@ namespace GTweak.Windows
                     HandleWindowState(true);
                     break;
                 case nameof(TglButtonSettings):
-                    TranslateTransform transform = (TranslateTransform)SettingsPanel.RenderTransform;
-                    transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, useCubicEase: true));
+                    SettingsPanel.CacheMode = new BitmapCache { RenderAtScale = 1 };
+                    if (SettingsPanel.RenderTransform is TranslateTransform transform)
+                    {
+                        transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, () => { SettingsPanel.CacheMode = null; }, useCubicEase: true));
+                    }
                     break;
                 case nameof(TglButtonTheme):
                     SettingsEngine.SelfReboot();
@@ -234,12 +237,10 @@ namespace GTweak.Windows
                 await Task.Delay(500);
 
                 UpdateBanner.Visibility = Visibility.Visible;
-
                 UpdateBanner.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
-
                 if (UpdateBanner.RenderTransform is TranslateTransform transform)
                 {
-                    transform.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-20, 0, 0.3, useCubicEase: true));
+                    transform.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-20, 0, 0.3, () => { UpdateBanner.CacheMode = null; }, useCubicEase: true));
                 }
             }
         }

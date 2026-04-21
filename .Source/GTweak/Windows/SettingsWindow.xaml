@@ -1,0 +1,55 @@
+<Window x:Class="GTweak.Windows.SettingsWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
+                 xmlns:uc="clr-namespace:GTweak.Assets.UserControls"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 mc:Ignorable="d"
+                 Title="Настройки" Width="400" Height="600"
+                 Background="{StaticResource Brush_Background}"
+                 WindowStyle="None"
+           
+                 Topmost="True">
+
+    <Window.DataContext>
+        <vm:MainWinViewModel/>
+    </Window.DataContext>
+
+    <Grid RenderTransformOrigin="0,0">
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="SlideTransform" X="-400"/>
+        </Grid.RenderTransform>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+                <TextBlock FontSize="20" Text="{DynamicResource title_settings_main}" Foreground="{StaticResource Brush_Accent}" Margin="0,0,0,20"/>
+
+                <!-- Toggle кнопки -->
+                <uc:ToggleButton x:Name="BtnNotification" State="{Binding IsViewNotification}" TextResource="{DynamicResource btgl_noty_main}" Margin="0,5"/>
+                <uc:ToggleButton x:Name="BtnUpdate" State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource btgl_update_main}" Margin="0,5"/>
+                <uc:ToggleButton x:Name="BtnTopMost" State="{Binding IsTopMost}" TextResource="{DynamicResource btgl_toast_main}" Margin="0,5"/>
+
+                <!-- Громкость -->
+                <StackPanel Orientation="Horizontal" Margin="0,10">
+                    <TextBlock Text="{DynamicResource slider_volume_main}" VerticalAlignment="Center"/>
+                    <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound}" Width="20" Height="20" Margin="10,0"/>
+                    <Slider Value="{Binding CurrentVolume}" Minimum="1" Maximum="100" Width="150" Margin="10,0"/>
+                </StackPanel>
+
+                <!-- Язык -->
+                <StackPanel Orientation="Horizontal" Margin="0,10">
+                    <TextBlock Text="{DynamicResource cmbox_lang_main}" VerticalAlignment="Center"/>
+                    <ComboBox ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage}" DisplayMemberPath="Display" SelectedValuePath="Code" Width="150" Margin="10,0"/>
+                </StackPanel>
+
+                <!-- Кнопки Экспорт/Импорт/Удаление -->
+                <StackPanel Orientation="Horizontal" Margin="0,20">
+                    <Button Content="{DynamicResource btn_export}" Width="100" Margin="0,0,10,0"/>
+                    <Button Content="{DynamicResource btn_import}" Width="100" Margin="0,0,10,0"/>
+                    <Button Content="{DynamicResource btn_selfremove}" Width="100"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
