@@ -46,6 +46,7 @@ namespace GTweak.View
                 DescBlock.Text = description;
             }
         }
+
         private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
 
         private void ColorPicker_ColorPicked(object sender, EventArgs e)

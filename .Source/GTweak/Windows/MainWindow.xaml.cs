@@ -12,7 +12,6 @@ using System.Windows.Threading;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using Wpf.Ui.Controls;
 
@@ -48,8 +47,6 @@ namespace GTweak.Windows
             InitializeComponent();
             OverlayDialogManager.Initialize(OverlayDialog, DialogTitle, DialogText, DialogQuestion, DialogBtnPrimary, DialogBtnSecondary);
             App.TweaksImported += delegate { BtnUtils.IsChecked = true; };
-
-            CommandExecutor.RunCommandAsTrustedInstaller($"/c del /f \"{PathLocator.Targets.Defender.SmartScreen}\"");
         }
 
         protected override void OnSourceInitialized(EventArgs e)

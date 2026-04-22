@@ -56,17 +56,17 @@ namespace GTweak.Windows
                 catch (Exception ex) { ErrorLogging.LogWritingFile(ex, false, member); }
             }
 
-            ReportStep(1, 15, 300);
+            ReportStep(1, 15);
             ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
             ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
             ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));
 
-            ReportStep(2, 35, 300);
+            ReportStep(2, 35);
             ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
             ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
             ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
 
-            ReportStep(3, 55, 150);
+            ReportStep(3, 55);
             ExecuteWithLogging(_hardwareProvider.GetHardwareData, nameof(_hardwareProvider.GetHardwareData));
             ExecuteWithLogging(() => _hardwareProvider.GetProcessCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetProcessCount));
             ExecuteWithLogging(() => _hardwareProvider.GetServicesCount().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetServicesCount));
@@ -77,7 +77,7 @@ namespace GTweak.Windows
             ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
             ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
 
-            ReportStep(5, 90, 150);
+            ReportStep(5, 90);
             ExecuteWithLogging(() => _hardwareProvider.GetUserIpAddress().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetUserIpAddress));
             ExecuteWithLogging(() => _hardwareProvider.ValidateVersionUpdates().GetAwaiter().GetResult(), nameof(_hardwareProvider.ValidateVersionUpdates));
             ReportStep(6, 100, 400);

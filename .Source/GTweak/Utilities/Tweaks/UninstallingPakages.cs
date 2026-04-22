@@ -33,7 +33,7 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        internal static bool IsOneDriveInstalled => File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe")) ||
+        internal static bool IsOneDriveInstalled => Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive")) ||
             File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft OneDrive", "OneDrive.exe")) || File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft OneDrive", "OneDrive.exe"));
 
         internal static bool IsEdgeInstalled => Directory.Exists(PathLocator.Folders.Edge);
@@ -150,10 +150,7 @@ namespace GTweak.Utilities.Tweaks
                 string output = CommandExecutor.GetCommandOutput("Get-LocalUser | Where-Object { $_.Enabled -match 'True'} | Select-Object -ExpandProperty PrincipalSource").GetAwaiter().GetResult();
                 _isLocalAccount = output.IndexOf("MicrosoftAccount", StringComparison.OrdinalIgnoreCase) < 0;
             }
-            catch
-            {
-                _isLocalAccount = false;
-            }
+            catch { _isLocalAccount = false; }
         }
 
         internal static async Task RestoreOneDriveFolder()

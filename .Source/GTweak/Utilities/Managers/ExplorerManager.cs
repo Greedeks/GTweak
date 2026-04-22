@@ -25,6 +25,9 @@ namespace GTweak.Utilities.Managers
 
         internal static readonly Dictionary<string, ExplorerAction> IntfActions = new Dictionary<string, ExplorerAction>()
         {
+            ["Checkbox1"] = ExplorerAction.Restart,
+            ["Checkbox2"] = ExplorerAction.Restart,
+            ["Checkbox3"] = ExplorerAction.Restart,
             ["Checkbox4"] = ExplorerAction.Restart,
             ["Checkbox5"] = ExplorerAction.Restart,
             ["Checkbox6"] = ExplorerAction.Restart,

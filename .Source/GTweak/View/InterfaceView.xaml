@@ -42,10 +42,25 @@
 
                         <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" Visibility="{Binding Win11FeatureOnly}" ToolTip="{DynamicResource exblock1_desc_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource exblock1_intf}"/>
-                            <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center">
-                                <CheckBox x:Uid="Checkbox1" Content="{DynamicResource chk_home_intf}" IsChecked="{Binding [Checkbox1].State}" Click="CheckBox_Click" />
-                                <CheckBox x:Uid="Checkbox2" Content="{DynamicResource chk_gallery_intf}" IsChecked="{Binding [Checkbox2].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
-                                <CheckBox x:Uid="Checkbox3" Content="{DynamicResource OneDrive_pkg}" IsChecked="{Binding [Checkbox3].State}" Margin="0,4,0,0" Click="CheckBox_Click" Visibility="{Binding OneDriveAvailable}"/>
+                            <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" Closed="ExpandableBox_Closed">
+                                <CheckBox x:Uid="Checkbox1" IsChecked="{Binding [Checkbox1].State}" Click="CheckBox_Click">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding HomeIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource chk_home_intf}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </CheckBox>
+                                <CheckBox x:Uid="Checkbox2" IsChecked="{Binding [Checkbox2].State}" Margin="0,4,0,0" Click="CheckBox_Click">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding GalleryIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource chk_gallery_intf}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </CheckBox>
+                                <CheckBox x:Uid="Checkbox3" Visibility="{Binding OneDriveAvailable}" IsChecked="{Binding [Checkbox3].State}" Margin="0,4,0,0" Click="CheckBox_Click">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding OneDriveIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource OneDrive_pkg}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </CheckBox>
                             </uc:ExpandableBox>
                         </StackPanel>
                     </StackPanel>
@@ -54,22 +69,55 @@
                         <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource exblock2_desc_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource exblock2_intf}"/>
                             <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" Closed="ExpandableBox_Closed">
-                                <CheckBox x:Uid="Checkbox4" Content="{DynamicResource chk_hidden_intf}" IsChecked="{Binding [Checkbox4].State}" Click="CheckBox_Click" />
-                                <CheckBox x:Uid="Checkbox5" Content="{DynamicResource chk_system_intf}" IsChecked="{Binding [Checkbox5].State}" Margin="0,4,0,0" Click="CheckBox_Click" />
-                                <CheckBox x:Uid="Checkbox6" Content="{DynamicResource chk_extension_intf}" IsChecked="{Binding [Checkbox6].State}" Margin="0,4,0,0" Click="CheckBox_Click" />
-                                <CheckBox x:Uid="Checkbox7" Content="{DynamicResource chk_emptydrives_intf}" IsChecked="{Binding [Checkbox7].State}" Margin="0,4,0,0" Click="CheckBox_Click" />
+                                <CheckBox x:Uid="Checkbox4" Content="{DynamicResource chk_hidden_intf}" IsChecked="{Binding [Checkbox4].State}" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox5" Content="{DynamicResource chk_system_intf}" IsChecked="{Binding [Checkbox5].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox6" Content="{DynamicResource chk_extension_intf}" IsChecked="{Binding [Checkbox6].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
+                                <CheckBox x:Uid="Checkbox7" Content="{DynamicResource chk_emptydrives_intf}" IsChecked="{Binding [Checkbox7].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
                             </uc:ExpandableBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource exblock3_desc_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource exblock3_intf}"/>
                             <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" Closed="ExpandableBox_Closed">
-                                <CheckBox x:Uid="Checkbox8" Content="{DynamicResource chk_pc_intf}" IsChecked="{Binding [Checkbox8].State}" Click="CheckBox_Click" />
-                                <CheckBox x:Uid="Checkbox9" Content="{DynamicResource chk_net_intf}" IsChecked="{Binding [Checkbox9].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
-                                <CheckBox x:Uid="Checkbox10" Content="{DynamicResource chk_trash_intf}" IsChecked="{Binding [Checkbox10].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
-                                <CheckBox x:Uid="Checkbox11" Content="{DynamicResource chk_panel_intf}" IsChecked="{Binding [Checkbox11].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
-                                <CheckBox x:Uid="Checkbox12" Content="{DynamicResource chk_user_intf}" IsChecked="{Binding [Checkbox12].State}" Margin="0,4,0,0" Click="CheckBox_Click"/>
-                                <CheckBox x:Uid="Checkbox13" Content="{DynamicResource OneDrive_pkg}" IsChecked="{Binding [Checkbox13].State}" Margin="0,4,0,0" Click="CheckBox_Click" Visibility="{Binding OneDriveAvailable}"/>
+                                <CheckBox x:Uid="Checkbox8" IsChecked="{Binding [Checkbox8].State}" Click="CheckBox_Click">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding PCIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource chk_pc_intf}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </CheckBox>
+                                <CheckBox x:Uid="Checkbox9" IsChecked="{Binding [Checkbox9].State}" Click="CheckBox_Click" Margin="0,4,0,0">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding NetworkIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource chk_net_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
+                                    </StackPanel>
+                                </CheckBox>
+                                <CheckBox x:Uid="Checkbox10" IsChecked="{Binding [Checkbox10].State}" Click="CheckBox_Click" Margin="0,4,0,0">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding TrashIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource chk_trash_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
+                                    </StackPanel>
+                                </CheckBox>
+
+                                <CheckBox x:Uid="Checkbox11" IsChecked="{Binding [Checkbox11].State}" Click="CheckBox_Click" Margin="0,4,0,0">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding PanelIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource chk_panel_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
+                                    </StackPanel>
+                                </CheckBox>
+
+                                <CheckBox x:Uid="Checkbox12" IsChecked="{Binding [Checkbox12].State}" Click="CheckBox_Click" Margin="0,4,0,0">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding UserIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource chk_user_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
+                                    </StackPanel>
+                                </CheckBox>
+
+                                <CheckBox x:Uid="Checkbox13" Visibility="{Binding OneDriveAvailable}" IsChecked="{Binding [Checkbox13].State}" Click="CheckBox_Click" Margin="0,4,0,0">
+                                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                                        <Image Source="{Binding OneDriveIcon}" Width="16" Height="16"/>
+                                        <TextBlock Text="{DynamicResource OneDrive_pkg}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
+                                    </StackPanel>
+                                </CheckBox>
                             </uc:ExpandableBox>
                         </StackPanel>
                     </StackPanel>

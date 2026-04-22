@@ -170,6 +170,7 @@
     <Compile Include="Core\ViewModel\SystemViewModel.cs" />
     <Compile Include="Core\ViewModel\ToolsetViewModel.cs" />
     <Compile Include="Utilities\Animation\BlurAnimation.cs" />
+    <Compile Include="Utilities\Configuration\IconExtractProvider.cs" />
     <Compile Include="Utilities\Configuration\NetworkProvider.cs" />
     <Compile Include="Utilities\Configuration\StorageTypeIdentifier.cs" />
     <Compile Include="Utilities\Configuration\HardwareData.cs" />
