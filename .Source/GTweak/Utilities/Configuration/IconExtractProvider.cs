@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -19,27 +18,24 @@ namespace GTweak.Utilities.Configuration
 
         private static readonly ConcurrentDictionary<(string, int, bool), ImageSource> _iconCache = new ConcurrentDictionary<(string, int, bool), ImageSource>();
 
-        internal enum StockIconType { Home, Gallery, PC, Network, Trash, Panel, User, OneDrive }
-
-        private static readonly Dictionary<StockIconType, (string file, int index)> _stockIconMappings = new Dictionary<StockIconType, (string, int)>
-        {
-            { StockIconType.Home, ("shell32.dll", -51380) },
-            { StockIconType.Gallery, ("shell32.dll", -51586) },
-            { StockIconType.PC, ("imageres.dll", -109) },
-            { StockIconType.Network, ("imageres.dll", -25) },
-            { StockIconType.Trash, ("imageres.dll", -54) },
-            { StockIconType.Panel, ("imageres.dll", -27) },
-            { StockIconType.User, ("imageres.dll", -123) },
-            { StockIconType.OneDrive, ("imageres.dll", -1040) }
-        };
+        internal enum StockIconType { Home, Gallery, OneDrive, PC, Network, Trash, Panel, UserFile }
 
         internal static ImageSource GetStockIcon(StockIconType type)
         {
-            if (_stockIconMappings.TryGetValue(type, out (string file, int index) iconInfo))
+            (string file, int index) = type switch
             {
-                return GetIcon(iconInfo.file, iconInfo.index);
-            }
-            return null;
+                StockIconType.Home => ("shell32.dll", -51380),
+                StockIconType.Gallery => ("shell32.dll", -51586),
+                StockIconType.OneDrive => ("imageres.dll", -1040),
+                StockIconType.PC => ("imageres.dll", -109),
+                StockIconType.Network => ("imageres.dll", -25),
+                StockIconType.Trash => ("imageres.dll", -54),
+                StockIconType.Panel => ("imageres.dll", -27),
+                StockIconType.UserFile => ("imageres.dll", -123),
+                _ => (null, 0)
+            };
+
+            return file != null ? GetIcon(file, index) : null;
         }
 
         internal static ImageSource GetIcon(string file, int index, bool large = true)

@@ -45,19 +45,19 @@
                             <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" Closed="ExpandableBox_Closed">
                                 <CheckBox x:Uid="Checkbox1" IsChecked="{Binding [Checkbox1].State}" Click="CheckBox_Click">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding HomeIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[Home]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource chk_home_intf}" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </CheckBox>
                                 <CheckBox x:Uid="Checkbox2" IsChecked="{Binding [Checkbox2].State}" Margin="0,4,0,0" Click="CheckBox_Click">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding GalleryIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[Gallery]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource chk_gallery_intf}" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </CheckBox>
                                 <CheckBox x:Uid="Checkbox3" Visibility="{Binding OneDriveAvailable}" IsChecked="{Binding [Checkbox3].State}" Margin="0,4,0,0" Click="CheckBox_Click">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding OneDriveIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[OneDrive]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource OneDrive_pkg}" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </CheckBox>
@@ -81,40 +81,40 @@
                             <uc:ExpandableBox Text="{DynamicResource btn_change}" Margin="7,5,5,0" Height="32" VerticalAlignment="Center" Closed="ExpandableBox_Closed">
                                 <CheckBox x:Uid="Checkbox8" IsChecked="{Binding [Checkbox8].State}" Click="CheckBox_Click">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding PCIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[PC]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource chk_pc_intf}" Margin="5,0,0,0"/>
                                     </StackPanel>
                                 </CheckBox>
                                 <CheckBox x:Uid="Checkbox9" IsChecked="{Binding [Checkbox9].State}" Click="CheckBox_Click" Margin="0,4,0,0">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding NetworkIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[Network]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource chk_net_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
                                     </StackPanel>
                                 </CheckBox>
                                 <CheckBox x:Uid="Checkbox10" IsChecked="{Binding [Checkbox10].State}" Click="CheckBox_Click" Margin="0,4,0,0">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding TrashIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[Trash]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource chk_trash_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
                                     </StackPanel>
                                 </CheckBox>
 
                                 <CheckBox x:Uid="Checkbox11" IsChecked="{Binding [Checkbox11].State}" Click="CheckBox_Click" Margin="0,4,0,0">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding PanelIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[Panel]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource chk_panel_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
                                     </StackPanel>
                                 </CheckBox>
 
                                 <CheckBox x:Uid="Checkbox12" IsChecked="{Binding [Checkbox12].State}" Click="CheckBox_Click" Margin="0,4,0,0">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding UserIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[UserFile]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource chk_user_intf}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
                                     </StackPanel>
                                 </CheckBox>
 
                                 <CheckBox x:Uid="Checkbox13" Visibility="{Binding OneDriveAvailable}" IsChecked="{Binding [Checkbox13].State}" Click="CheckBox_Click" Margin="0,4,0,0">
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
-                                        <Image Source="{Binding OneDriveIcon}" Width="16" Height="16"/>
+                                        <Image Source="{Binding Icons[OneDrive]}" Width="16" Height="16"/>
                                         <TextBlock Text="{DynamicResource OneDrive_pkg}" Style="{StaticResource TextDefault}" Margin="5,0,0,0" FontSize="14px"/>
                                     </StackPanel>
                                 </CheckBox>
