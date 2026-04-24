@@ -15,7 +15,7 @@
         <Popup x:Name="DropdownPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Opened="Popup_Opened" Closed="Popup_Closed" VerticalOffset="2">
             <Border x:Name="PopupBorder" Background="{StaticResource Brush_Background_ComboBox}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="10">
                 <Border.CacheMode>
-                    <BitmapCache RenderAtScale="2" />
+                    <BitmapCache RenderAtScale="2" EnableClearType="True"/>
                 </Border.CacheMode>
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="10" Opacity="0.15" ShadowDepth="2"/>

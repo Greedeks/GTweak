@@ -9,19 +9,19 @@
              d:DesignHeight="40" d:DesignWidth="140" UseLayoutRounding="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="None" 
              IsTabStop="False" Focusable="False" PreviewKeyDown="ColorPopup_PreviewKeyDown">
     <Grid>
-        <ToggleButton x:Name="TglArrow" Style="{StaticResource TglDropDown}" Checked="TglArrow_Checked" Unchecked="TglArrow_Unchecked" PreviewMouseRightButtonDown="TglArrow_PreviewMouseRightButtonDown">
+        <ToggleButton x:Name="TglArrow" Style="{StaticResource TglDropDown}" Height="31" Checked="TglArrow_Checked" Unchecked="TglArrow_Unchecked" PreviewMouseRightButtonDown="TglArrow_PreviewMouseRightButtonDown">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Ellipse  Grid.Column="0" Fill="{StaticResource Brush_ShadowOverlay}" Width="20" Height="20" Margin="0,0,8,0" Opacity="0.7">
+                <Ellipse Grid.Column="0" Fill="{StaticResource Brush_ShadowOverlay}" Width="19" Height="19" Opacity="0.7">
                     <Ellipse.RenderTransform>
-                        <TranslateTransform X="1" Y="1" />
+                        <TranslateTransform X="-3" Y="1" />
                     </Ellipse.RenderTransform>
                 </Ellipse>
-                <Ellipse x:Name="ColorPreview" Grid.Column="0" Width="20" Height="20" Stroke="{StaticResource Brush_Separator}" StrokeThickness="2" Margin="0,0,8,0" Fill="White"/>
+                <Ellipse x:Name="ColorPreview" Grid.Column="0" Width="19" Height="19" Stroke="{StaticResource Brush_Separator}" StrokeThickness="2" Margin="0,0,8,0" Fill="White"/>
                 <TextBlock x:Name="ColorTextBlock" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Play}" Foreground="{StaticResource Brush_Highlighted}" Text="255 255 255" MinWidth="80" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining"/>
             </Grid>
         </ToggleButton>
@@ -29,7 +29,7 @@
         <Popup x:Name="ColorPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Opened="ColorPopup_Opened" Closed="ColorPopup_Closed" VerticalOffset="2">
             <Border x:Name="PopupBorder" Background="{StaticResource Brush_Background_ComboBox}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="10">
                 <Border.CacheMode>
-                    <BitmapCache RenderAtScale="2" />
+                    <BitmapCache RenderAtScale="2" EnableClearType="True"/>
                 </Border.CacheMode>
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="10" Opacity="0.15" ShadowDepth="2"/>
@@ -37,7 +37,6 @@
                 <Border.RenderTransform>
                     <TranslateTransform x:Name="PopupTransform"/>
                 </Border.RenderTransform>
-
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -100,7 +99,6 @@
                     </Grid>
 
                     <Button x:Name="BtnDefault" Content="{DynamicResource btn_default}" Style="{StaticResource ButtonContent_Inverted}" Margin="0,10,0,0" HorizontalAlignment="Stretch" Click="BtnDefault_Click"/>
-
                 </StackPanel>
             </Border>
         </Popup>
