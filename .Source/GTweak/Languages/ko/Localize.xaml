@@ -73,7 +73,7 @@
     <v:String x:Key="notsupport_ntfs_noty">디렉터리가 NTFS 파티션에 있지 않으므로 작업을 수행할 수 없습니다</v:String>
     <v:String x:Key="success_reg_exporter_noty">레지스트리 파일이 성공적으로 저장되었습니다</v:String>
     <v:String x:Key="error_reg_exporter_noty">레지스트리 파일을 저장하는 동안 오류가 발생했습니다</v:String>
-    <v:String x:Key="error_git_limit_noty">GitHub API 요청이 일시적으로 제한되었습니다. 나중에 다시 시도하세요</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub에서 API 요청에 대한 일시적인 요청 제한이 적용되었습니다. 잠시 후 다시 시도해 주세요.</v:String>
     <v:String x:Key="error_download_noty">서버에 연결할 수 없습니다</v:String>
     <!--#endregion-->
 
@@ -506,7 +506,7 @@
     <v:String x:Key="tgl27_desc_sys">Windows 인사이더 참가자의 경우 이러한 작업은 계속 활성화되어야 합니다. 그러나 프로그램에 참여하지 않는 경우 관련된 모든 작업은 불필요한 오버헤드가 됩니다. 시스템 리소스를 소비하고, 쓸모없는 로그를 생성하며, 아무런 이점 없이 원격 측정 연결을 시작할 수 있습니다. 이러한 작업을 비활성화하면 시작 시간과 전체 시스템 성능을 향상시키는 동시에 불필요한 실험 데이터 수집 채널도 제거할 수 있습니다.</v:String>
     <v:String x:Key="tgl28_desc_sys">SSD가 있는 경우 하드 드라이브 (HDD)에만 효과적인 조각 모음 및 부팅 파일 최적화를 비활성화하면 드라이브의 수명을 연장하는 데 도움이 됩니다. 동시에 TRIM 최적화 기능은 SSD 컨트롤러에 어떤 데이터 블록이 더 이상 사용되지 않는지 알려주고 삭제하여 안정적인 속도와 드라이브 수명을 유지하는 등 계속 작동합니다.</v:String>
     <v:String x:Key="tgl29_desc_sys">Windows 시스템 업데이트를 10년 동안 일시 중지하며, Microsoft Store의 앱 업데이트 및 다운로드는 활성 상태로 유지합니다. 업데이트를 완전히 비활성화하려면 '서비스'에서 해당 Windows 업데이트 서비스를 비활성화하십시오.</v:String>
-    <v:String x:Key="tgl30_desc_sys">멀티플레인 오버레이(MPO)는 하드웨어 가속 레이어 오버레이를 통해 성능을 향상시키도록 설계된 Windows 디스플레이 기술입니다. 그러나 경우에 따라 시스템과 드라이버가 애플리케이션과 올바르게 상호작용하지 못해 검은 화면, 멈춤, 깜빡임, 화면 찢어짐 현상이 발생할 수 있습니다. 이러한 문제가 발생하는 경우에만 비활성화하는 것이 권장됩니다.</v:String>
+    <v:String x:Key="tgl30_desc_sys">멀티플레인 오버레이는 하드웨어 가속 레이어 오버레이를 통해 성능을 향상시키기 위해 설계된 Windows 디스플레이 기술입니다. 그러나 경우에 따라 시스템과 드라이버가 응용 프로그램과 잘못 상호 작용하여 화면이 검게 나타나고, 멈추고, 깜빡이며, 화면이 찢어질 수 있습니다. 이러한 문제가 발생할 경우에만 이 기능을 비활성화하는 것이 좋습니다.</v:String>
     <!--#endregion-->
 
     <!--#region System Information Page -->
@@ -523,7 +523,7 @@
     <v:String x:Key="title_threads_sysinfo">스레드:</v:String>
     <v:String x:Key="title_freq_sysinfo">주파수:</v:String>
     <v:String x:Key="title_gpu_sysinfo">그래픽:</v:String>
-    <v:String x:Key="title_refreshrate_sysinfo">주사율:</v:String>
+    <v:String x:Key="title_refreshrate_sysinfo">새로 고침 속도:</v:String>
     <v:String x:Key="title_ram_sysinfo">메모리:</v:String>
     <v:String x:Key="title_mtype_sysinfo">메모리 유형:</v:String>
     <v:String x:Key="title_storage_sysinfo">저장소 장치:</v:String>
