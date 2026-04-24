@@ -219,7 +219,9 @@
                                 <Run Text="{Binding [Cores].Data}"/>
                                 <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
                                 <Run Text="{DynamicResource title_threads_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Threads].Data}"/>
+                                <Run Text="{Binding [Threads].Data}"/><LineBreak/>
+                                <Run Text="{DynamicResource title_freq_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                <Run Text="{Binding [Frequency].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                             </TextBlock>
                         </StackPanel>
 

@@ -521,6 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">Процессор:</v:String>
     <v:String x:Key="title_cores_sysinfo">Ядра:</v:String>
     <v:String x:Key="title_threads_sysinfo">Потоки:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Частота:</v:String>
     <v:String x:Key="title_gpu_sysinfo">Графика:</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">Частота обновления:</v:String>
     <v:String x:Key="title_ram_sysinfo">Оперативная память:</v:String>

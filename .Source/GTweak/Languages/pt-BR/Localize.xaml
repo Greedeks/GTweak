@@ -521,6 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">Processador:</v:String>
     <v:String x:Key="title_cores_sysinfo">Núcleos:</v:String>
     <v:String x:Key="title_threads_sysinfo">Threads:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Frequency:</v:String>
     <v:String x:Key="title_gpu_sysinfo">Gráficos:</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">Taxa de atualização:</v:String>
     <v:String x:Key="title_ram_sysinfo">Memória:</v:String>

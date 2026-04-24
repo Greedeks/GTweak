@@ -521,6 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">處理器：</v:String>
     <v:String x:Key="title_cores_sysinfo">核心數：</v:String>
     <v:String x:Key="title_threads_sysinfo">執行緒數：</v:String>
+    <v:String x:Key="title_freq_sysinfo">Frequency:</v:String>
     <v:String x:Key="title_gpu_sysinfo">顯示卡：</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">螢幕刷新率：</v:String>
     <v:String x:Key="title_ram_sysinfo">記憶體：</v:String>

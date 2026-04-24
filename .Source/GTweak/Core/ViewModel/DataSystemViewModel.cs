@@ -90,6 +90,7 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("Processor", () => HardwareData.Processor.Data, FallbackKeys.NoDevice),
                 CreateModelCollection("Cores", () => HardwareData.Processor.Cores, FallbackKeys.Unknown),
                 CreateModelCollection("Threads", () => HardwareData.Processor.Threads, FallbackKeys.Unknown),
+                CreateModelCollection("Frequency", () => HardwareData.Processor.Frequency, FallbackKeys.Unknown),
                 CreateModelCollection("Graphics", () => HardwareData.Graphics, FallbackKeys.NoDevice),
                 CreateModelCollection("RefreshRate", () => HardwareData.MonitorRefreshRate, FallbackKeys.Unknown, true),
                 CreateModelCollection("Memory", () => HardwareData.Memory.Data, FallbackKeys.NoDevice),

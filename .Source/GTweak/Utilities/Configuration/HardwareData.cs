@@ -31,6 +31,7 @@ namespace GTweak.Utilities.Configuration
             internal int Usage { get; set; } = default;
             internal string Cores { get; set; } = string.Empty;
             internal string Threads { get; set; } = string.Empty;
+            internal string Frequency { get; set; } = string.Empty;
         }
 
         internal sealed class MemoryInfo

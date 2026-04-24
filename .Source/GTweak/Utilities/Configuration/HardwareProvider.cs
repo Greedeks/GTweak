@@ -272,15 +272,16 @@ namespace GTweak.Utilities.Configuration
 
         private void GetProcessorInfo()
         {
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }))
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, CurrentClockSpeed, MaxClockSpeed, NumberOfCores, NumberOfLogicalProcessors from Win32_Processor", new EnumerationOptions { ReturnImmediately = true }))
             {
                 foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
                 {
                     using (managementObj)
                     {
-                        Processor.Data = $"{managementObj["Name"]?.ToString() ?? string.Empty}\n";
+                        Processor.Data = managementObj["Name"]?.ToString()?.Split('@')[0].Replace("CPU", string.Empty).Trim() ?? string.Empty;
                         Processor.Cores = managementObj["NumberOfCores"]?.ToString() ?? string.Empty;
                         Processor.Threads = managementObj["NumberOfLogicalProcessors"]?.ToString() ?? string.Empty;
+                        Processor.Frequency = (managementObj["CurrentClockSpeed"] ?? managementObj["MaxClockSpeed"]) != null ? $"{(Convert.ToDouble(managementObj["CurrentClockSpeed"] ?? managementObj["MaxClockSpeed"]) / 1000.0).ToString("0.00", CultureInfo.InvariantCulture)} GHz" : string.Empty;
                     }
                 }
             }

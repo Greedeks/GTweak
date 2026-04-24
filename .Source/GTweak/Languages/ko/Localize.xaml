@@ -521,6 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">프로세스:</v:String>
     <v:String x:Key="title_cores_sysinfo">코어:</v:String>
     <v:String x:Key="title_threads_sysinfo">스레드:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Frequency:</v:String>
     <v:String x:Key="title_gpu_sysinfo">그래픽:</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">Refresh Rate:</v:String>
     <v:String x:Key="title_ram_sysinfo">메모리:</v:String>
