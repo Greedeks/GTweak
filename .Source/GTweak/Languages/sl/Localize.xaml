@@ -1,0 +1,560 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="defaultDescription">Premaknite miško nad poljuben popravek za opis</v:String>
+    <v:String x:Key="defaultDescriptionApp">Premaknite miško nad ikono poljubne aplikacije, da vidite njeno ime</v:String>
+    <v:String x:Key="btn_default">Privzeto</v:String>
+    <v:String x:Key="btn_change">Spremeni</v:String>
+    
+    <!--#region Load Window -->
+    <v:String x:Key="title_load">Nalaganje</v:String>
+    <v:String x:Key="step1_load">Pripravljanje okolja</v:String>
+    <v:String x:Key="step2_load">Preverjanje stanja komponent</v:String>
+    <v:String x:Key="step3_load">Optično branje konfiguracije</v:String>
+    <v:String x:Key="step4_load">Iskanje nameščenih paketov</v:String>
+    <v:String x:Key="step5_load">Preverjanje omrežja in posodobitev</v:String>
+    <v:String x:Key="step6_load">Inicializacija</v:String>
+    <!--#endregion-->
+
+    <!--#region Message Window -->
+    <v:String x:Key="title_message">Ups..</v:String>
+    <v:String x:Key="part1_message">Pripomoček že teče. Zagon več primerkov</v:String>
+    <v:String x:Key="part2_message">je prepovedan,</v:String>
+    <v:String x:Key="part3_message">da se preprečijo notranji konflikti in zrušitve programske opreme.</v:String>
+    <v:String x:Key="button_message">Sprejmi (05)</v:String>
+    <v:String x:Key="noty_message">▪samodejno zapiranje okna</v:String>
+    <v:String x:Key="title_nosupport_message">Nepodprto</v:String>
+    <v:String x:Key="part1_nosupport_message">Pripomoček ne podpira vašega operacijskega sistema Windows. Nadaljnji zagon ni</v:String>
+    <v:String x:Key="part2_nosupport_message">možen,</v:String>
+    <v:String x:Key="part3_nosupport_message">GTweak se bo zaprl, da prepreči kritične napake.</v:String>
+    <v:String x:Key="title_admin_message">Nezadostna dovoljenja</v:String>
+    <v:String x:Key="part1_admin_message">Zagon programa</v:String>
+    <v:String x:Key="part2_admin_message">ni mogoč,</v:String>
+    <v:String x:Key="part3_admin_message">za pravilno delovanje ga zaženite kot skrbnik.</v:String>
+    <!--#endregion-->
+
+    <!--#region Notification Window -->
+    <v:String x:Key="title_win_noty">Obvestilo - GTweak</v:String>
+    <v:String x:Key="title_warn_noty">Pozor</v:String>
+    <v:String x:Key="title_info_noty">Informacija</v:String>
+    <v:String x:Key="logout_noty">Zahtevan je odjav, kliknite na to besedilo za izvedbo</v:String>
+    <v:String x:Key="restart_noty">Zahtevan je ponovni zagon, kliknite na to besedilo za izvedbo</v:String>
+    <v:String x:Key="warn_update_noty">Med posodabljanjem programa je prišlo do napake, poskusite pozneje znova</v:String>
+    <v:String x:Key="warn_import_noty">Ta datoteka ni primerna za uvoz</v:String>
+    <v:String x:Key="empty_import_noty">Ta datoteka je prazna, uporaba popravkov ni mogoča</v:String>
+    <v:String x:Key="export_warning_noty">Nima smisla, najprej uporabite vsaj en popravek</v:String>
+    <v:String x:Key="success_onedrive_noty">Obnavljanje OneDrive poteka, kar bo trajalo nekaj časa</v:String>
+    <v:String x:Key="error_onedrive_noty">Namestitvena datoteka OneDrive manjka, obnovitev ni mogoča</v:String>
+    <v:String x:Key="warn_wd_noty">Počakajte na dokončanje postopka, ki mu sledi ponovni zagon sistema</v:String>
+    <v:String x:Key="info_wd_noty">To bo trajalo nekaj časa, prosim počakajte</v:String>
+    <v:String x:Key="warn_firewall_noty">Vaš požarni zid je onemogočen, vklopite ga in znova uporabite popravek</v:String>
+    <v:String x:Key="warn_activate_noty">Za začetek - aktivirajte Windows. Ni mogoče uporabiti vseh popravkov</v:String>
+    <v:String x:Key="ready_activate_noty">Vašega operacijskega sistema ni treba aktivirati</v:String>
+    <v:String x:Key="win_activate_noty">Postopek aktivacije Windows se je začel, trajalo bo nekaj časa</v:String>
+    <v:String x:Key="success_activate_noty">Aktivacija je uspela, priporočljiv je ponovni zagon</v:String>
+    <v:String x:Key="error_activate_noty">Nekaj je šlo narobe, žal sistema ni bilo mogoče aktivirati</v:String>
+    <v:String x:Key="network_activate_noty">Za aktivacijo je potrebna internetna povezava</v:String>
+    <v:String x:Key="keynotfound_noty">Ključ za vašo izdajo Windows manjka; aktivacija preklicana</v:String>
+    <v:String x:Key="createpoint_noty">Ustvarjanje točke obnovitve bo trajalo nekaj časa</v:String>
+    <v:String x:Key="error_point_noty">Nekaj je šlo narobe, ni bilo mogoče ustvariti točke obnovitve</v:String>
+    <v:String x:Key="success_point_noty">Točka obnovitve je bila uspešno ustvarjena</v:String>
+    <v:String x:Key="error_recovery_noty">Nekaj je šlo narobe, obnovitve ni bilo mogoče začeti</v:String>
+    <v:String x:Key="disable_recovery_noty">Obnovitev sistema je onemogočena, točke obnovitve niso na voljo</v:String>
+    <v:String x:Key="enable_recovery_noty">Obnovitev sistema je omogočena in na voljo za uporabo, ko je to potrebno</v:String>
+    <v:String x:Key="warn_recovery_noty">Sistem za obnovitev ste že onemogočili</v:String>
+    <v:String x:Key="warn_point_enabled_noty">Sistem za obnovitev ste že omogočili</v:String>
+    <v:String x:Key="clear_ram_noty">Kratkoročni pomnilnik in začasne datoteke so bili počiščeni</v:String>
+    <v:String x:Key="success_compression_noty">Stiskanje mape in njene vsebine je uspelo</v:String>
+    <v:String x:Key="success_decompression_noty">Odpiranje stisnjene mape in njene vsebine je uspelo</v:String>
+    <v:String x:Key="ready_compression_noty">Mapa je že stisnjena, nadaljnje stiskanje ni potrebno</v:String>
+    <v:String x:Key="ready_decompression_noty">Mapa je že razširjena, nadaljnja operacija ni potrebna</v:String>
+    <v:String x:Key="error_compression_noty">Nekaj je šlo narobe, prišlo je do napake pri spreminjanju stanja stiskanja</v:String>
+    <v:String x:Key="notsupport_ntfs_noty">Operacija ni na voljo, ker se mapa ne nahaja na particiji NTFS</v:String>
+    <v:String x:Key="success_reg_exporter_noty">Registrska datoteka uspešno shranjena</v:String>
+    <v:String x:Key="error_reg_exporter_noty">Med shranjevanjem registrske datoteke je prišlo do napake</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub je začasno omejil hitrost zahtevkov API, poskusite pozneje znova</v:String>
+    <v:String x:Key="error_download_noty">Povezave s strežnikom ni bilo mogoče vzpostaviti</v:String>
+    <!--#endregion-->
+
+    <!--#region Main Window -->
+    <v:String x:Key="rbtn_utils_main">Pripomočki</v:String>
+    <v:String x:Key="rbtn_conf_main">Zaupnost</v:String>
+    <v:String x:Key="rbtn_int_main">Vmesnik</v:String>
+    <v:String x:Key="rbtn_app_main">Aplikacije</v:String>
+    <v:String x:Key="rbtn_svc_main">Storitve</v:String>
+    <v:String x:Key="rbtn_sys_main">Sistem</v:String>
+    <v:String x:Key="rbtn_sysinfo_main">Sistemske informacije</v:String>
+    <v:String x:Key="rbtn_adds_main">Dodatki</v:String>
+    <v:String x:Key="rbtn_ts_main">Nabor orodij</v:String>
+    <v:String x:Key="title_settings_main">Nastavitve</v:String>
+    <v:String x:Key="btgl_noty_main">Pokaži obvestila</v:String>
+    <v:String x:Key="slider_volume_main">Glasnost:</v:String>
+    <v:String x:Key="btgl_toast_main">Pripni na vrh vseh oken</v:String>
+    <v:String x:Key="btgl_update_main">Preverjanje posodobitev</v:String>
+    <v:String x:Key="cmbox_lang_main">Jezik vmesnika:</v:String>
+    <v:String x:Key="btn_import">Uvozi</v:String>
+    <v:String x:Key="btn_export">Izvozi</v:String>
+    <v:String x:Key="btn_selfremove">Samodejno brisanje</v:String>
+    <!--#endregion-->
+
+    <!--#region Import Window -->
+    <v:String x:Key="title_import">Uvažanje popravkov</v:String>
+    <v:String x:Key="wait_import">To traja nekaj časa</v:String>
+    <v:String x:Key="warn_import">Okna ni treba prisilno zapreti</v:String>
+    <v:String x:Key="file_import">Datoteka</v:String>
+    <!--#endregion-->
+
+    <!--#region Update Window -->
+    <v:String x:Key="title_win_update">Posodobitev - GTweak</v:String>
+    <v:String x:Key="title_update">Najdena je bila posodobitev</v:String>
+    <v:String x:Key="btn_upd">Posodobi</v:String>
+    <v:String x:Key="download_update">Prenos</v:String>
+    <v:String x:Key="noty_update">Počakajte na dokončanje prenosa</v:String>
+    <v:String x:Key="connection_update">Povezovanje s strežnikom</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">Močno</v:String>
+    <v:String x:Key="advice_part2_more">priporočamo</v:String>
+    <v:String x:Key="advice_part3_more">ustvarjanje točke obnovitve pred uporabo pripomočka</v:String>
+
+    <v:String x:Key="title_licens_more">Aktivacija sistema Windows</v:String>
+    <v:String x:Key="text_licens_more">Uporablja metodo HWID ali rezervni KMS. Morda ne bo delovalo, če ni na voljo ključa za vašo izdajo sistema Windows.</v:String>
+    <v:String x:Key="btn_activation">Aktiviraj</v:String>
+
+    <v:String x:Key="title_point_more">Točka obnovitve</v:String>
+    <v:String x:Key="text_point_more">Ustvari ali zažene postopek obnovitve sistema, tudi če so točke obnovitve trenutno onemogočene.</v:String>
+    <v:String x:Key="btn_save">Shrani</v:String>
+    <v:String x:Key="btn_recovery">Obnovi</v:String>
+
+    <v:String x:Key="title_point_state_more">Stanje obnovitve</v:String>
+    <v:String x:Key="text_point_state_more">Omogoči ali onemogoči sistemske točke obnovitve. Onemogočanje bo izbrisalo vse obstoječe točke obnovitve.</v:String>
+    <v:String x:Key="btn_disable">Onemogoči</v:String>
+    <v:String x:Key="btn_enable">Omogoči</v:String>
+
+    <v:String x:Key="title_clear_more">Čiščenje pomnilnika</v:String>
+    <v:String x:Key="text_clear_more">Počisti predpomnilnik sistemskih datotek v pomnilniku računalnika, začasne datoteke in predpomnilnik ikon.</v:String>
+    <v:String x:Key="btn_clear">Počisti</v:String>
+
+    <v:String x:Key="title_ntfs_more">Stiskanje NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">Omogoči ali onemogoči stiskanje NTFS. Še posebej učinkovito za besedilne datoteke, pomaga prihraniti prostor na disku.</v:String>
+
+    <v:String x:Key="title_registry_more">Varnostno kopiranje registra</v:String>
+    <v:String x:Key="text_registry_more">Ustvari varnostno kopijo registra Windows. Priporočljivo pred spreminjanjem za omogočanje obnovitve sistema.</v:String>
+    <v:String x:Key="btn_create">Ustvari</v:String>
+
+    <v:String x:Key="title_over_more">Potrditev čiščenja diska</v:String>
+    <v:String x:Key="text_over_more">Vaš disk vsebuje mapo Windows.old, ki hrani datoteke iz prejšnje različice sistema Windows in zavzema veliko prostora. Upoštevajte: ko je ta mapa izbrisana, njene vsebine ni mogoče obnoviti, zato se prepričajte, da ste shranili vse datoteke, ki jih potrebujete.</v:String>
+    <v:String x:Key="question_over_more">Ali želite nadaljevati s čiščenjem in izbrisati mapo Windows.old?</v:String>
+    <v:String x:Key="btn_agree">Strinjam se</v:String>
+    <v:String x:Key="btn_decline">Zavrni</v:String>
+
+    <v:String x:Key="textpoint_more">Točka, ustvarjena z GTweak</v:String>
+    <!--#endregion-->
+
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_conf">Identifikator oglaševanja in ciljno oglaševanje</v:String>
+    <v:String x:Key="tgl2_conf">Vse vrste sinhronizacije vaših podatkov</v:String>
+    <v:String x:Key="tgl3_conf">Zbiranje in spremljanje telemetrije Windows</v:String>
+    <v:String x:Key="tgl4_conf">Zbiranje podatkov prek dogodkov načrtovalnika</v:String>
+    <v:String x:Key="tgl5_conf">Zbiranje podatkov o nameščenih aplikacijah</v:String>
+    <v:String x:Key="tgl6_conf">Zbiranje statistike uporabe aplikacij</v:String>
+    <v:String x:Key="tgl7_conf">Zbiranje in pošiljanje podatkov o rokopisu</v:String>
+    <v:String x:Key="tgl8_conf">Zbiranje podatkov o strojni konfiguraciji</v:String>
+    <v:String x:Key="tgl9_conf">Omrežni dostop do vohunskih domen Microsoft</v:String>
+    <v:String x:Key="tgl10_conf">Določanje lokacije uporabnika</v:String>
+    <v:String x:Key="tgl11_conf">Preverjanje zahtevkov prek povratnih informacij</v:String>
+    <v:String x:Key="tgl12_conf">Skrite posodobitve sinteze govora v ozadju</v:String>
+    <v:String x:Key="tgl13_conf">Skrito spremljanje vašega sistema</v:String>
+    <v:String x:Key="tgl14_conf">Skriti poskusi na vašem sistemu</v:String>
+    <v:String x:Key="tgl15_conf">Storitve za skrito zbiranje in pošiljanje podatkov</v:String>
+    <v:String x:Key="tgl16_conf">"Beleženje" dogodkov Windows</v:String>
+    <v:String x:Key="tgl17_conf">Zbiranje in spremljanje telemetrije NVIDIA</v:String>
+    <v:String x:Key="tgl18_conf">Vodenje evidence vedenja uporabnika</v:String>
+    <v:String x:Key="tgl19_conf">Zbiranje podatkov in posodobitve izklopnih zemljevidov v ozadju</v:String>
+    <v:String x:Key="tgl20_conf">Zbiranje in spremljanje telemetrije Intel</v:String>
+    
+    <v:String x:Key="tgl1_desc_conf">Windows ustvari edinstven identifikator oglaševanja za vsakega uporabnika za sledenje vašim dejanjem. Uporabljajo ga razvijalci aplikacij in sam Windows za svoje namene, vključno s prikazovanjem specifičnih oglasov v aplikacijah.</v:String>
+    <v:String x:Key="tgl2_desc_conf">Tudi pri uporabi lokalnega računa Windows vedno poskuša sinhronizirati vaše podatke s strežniki Microsoft. Zlasti: teme, gesla, nastavitve sistema Windows, nastavitve brskalnika, nastavitve jezikovne vrstice, nastavitve poenostavljenega dostopa, dodatne nastavitve.</v:String>
+    <v:String x:Key="tgl3_desc_conf">Telemetrija (diagnostični podatki) so podatki, ki jih Windows samodejno zbira za pošiljanje na strežnike Microsoft, na kratko "Kaj? Kje? Zakaj in kdaj uporabljate?". Microsoft trdi, da so podatki depersonalizirani in podjetju pomagajo pri razvoju Windows. Tudi če vas ne skrbi samo dejstvo zbiranja informacij, lahko pride do druge težave - prekomerne obremenitve procesorja, kar posledično upočasni sistem.</v:String>
+    <v:String x:Key="tgl4_desc_conf">V "Načrtovalniku opravil" obstajajo storitve, ki po svojem delu zbirajo podatke o svojem delu in jih pošiljajo na strežnik Microsoft.</v:String>
+    <v:String x:Key="tgl5_desc_conf">Microsoft zbira podatke o vaši programski opremi. Microsoft te podatke uporablja za diagnosticiranje težav z združljivostjo, vendar Microsoftu ne boste pomagali izboljšati združljivosti v novih različicah Windows, ker se ti podatki uporabljajo le za sebične namene Microsofta. Onemogočanje te funkcije preprečuje pošiljanje potencialno občutljivih informacij.</v:String>
+    <v:String x:Key="tgl6_desc_conf">Popravek bo onemogočil funkcijo spremljanja uporabe aplikacij, s čimer odpravi zbiranje podatkov o pogostosti uporabe, trajanju dela in drugih meritvah produktivnosti. Posledično bo sistem prenehal analizirati vaš delovni proces, kar zagotavlja zaščito vaših zaupnih informacij.</v:String>
+    <v:String x:Key="tgl7_desc_conf">Ta popravek onemogoči mehanizem zbiranja podatkov, ki ga Microsoft uporablja za izboljšanje svoje tehnologije prepoznavanja rokopisa. Ne glede na to, ali uporabljate to funkcijo ali ne, je sistem sledil vaši dejavnosti za izboljšanje natančnosti prepoznavanja. Uvedene spremembe preprečujejo takšno zbiranje podatkov in pomagajo ohranjati zasebnost.</v:String>
+    <v:String x:Key="tgl8_desc_conf">Program za izboljšanje kakovosti programske opreme (CEIP) je ločena funkcija, ki zbira informacije o konfiguraciji vaše strojne opreme in o tem, kako uporabljate programsko opremo in storitve. Program občasno prenese tudi datoteko za zbiranje informacij o težavah, ki jih imate z Windows. Program je prostovoljen in vam ni treba pošiljati svojih podatkov Microsoftu, kar krši vašo zasebnost.</v:String>
+    <v:String x:Key="tgl9_desc_conf">Ta popravek spremeni datoteko hosts tako, da doda naslov 0.0.0.0 pred specifična imena domen, s čimer jih dejansko blokira. Poleg tega prilagodi nastavitve požarnega zidu Windows za blokiranje povezav z več naslovi IP, povezanimi s storitvami zbiranja podatkov Microsoft.</v:String>
+    <v:String x:Key="tgl10_desc_conf">Onemogočanje geolokacijskih storitev znatno zmanjša možnost uporabe podatkov o lokaciji za namene oglaševanja – dostop do teh informacij je omejen ne samo za Microsoftove storitve, ampak tudi za vse aplikacije in skripte tretjih oseb.</v:String>
+    <v:String x:Key="tgl11_desc_conf">Popravek blokira zbiranje povratnih informacij in njihovih obvestil v Windows, kar preprečuje prenos podatkov brez vašega soglasja. Medtem, tudi če ne uporabljate funkcije "Povratne informacije", Microsoft še vedno beleži, kako pogosto stopite v stik z uradno podporo.</v:String>
+    <v:String x:Key="tgl12_desc_conf">Windows lahko prepozna govor z uporabo namenskega modula za prepoznavanje in sintezo govora. Tudi če ne uporabljate Cortane ali "Enostavnega dostopa", vaš operacijski sistem privzeto vedno preverja posodobitve za svoj motor za prepoznavanje govora.</v:String>
+    <v:String x:Key="tgl13_desc_conf">Funkcija, ki ima dostop do vseh uporabniških podatkov. Izmenjuje nekaj informacij s strežniki Microsoft in nikakor ne vpliva na delovanje operacijskega sistema ali aplikacij. Uporabniku nikakor ne pomaga, zaradi česar je neuporabna.</v:String>
+    <v:String x:Key="tgl14_desc_conf">Microsoft redno izvaja poskuse z uporabniki Windows, da bi ugotovil, ali se funkcija pogosto uporablja, ali sprememba funkcije naredi bolj uporabno. A to je kršitev zaupnosti.</v:String>
+    <v:String x:Key="tgl15_desc_conf">Storitve DiagTrack, dmwappushservice in diagsvc delujejo kot keyloggerji – beležijo vsako uporabniško dejavnost, vključno s pritiski tipk, in te podatke pošiljajo na Microsoftove strežnike brez soglasja uporabnika. Pri uporabi UWF (Unified Write Filter) je stabilno delovanje sistema odvisno od storitve dmwappushservice. Če pa ne veste, kaj to je, ali če imate alternativno orodje, se je smiselno znebiti teh keyloggerjev.</v:String>
+    <v:String x:Key="tgl16_desc_conf">Dnevnik dogodkov, ki zbira in obdeluje sistemske diagnostične informacije ter zapravlja vire vašega računalnika. Storitev vam ne bo dala nič dobrega, bolje jo je onemogočiti, s čimer preprečite pošiljanje zaupnih informacij.</v:String>
+    <v:String x:Key="tgl17_desc_conf">Storitev, ki je odgovorna za zbiranje in prenos podatkov o sistemu in njegovi uporabi, oziroma funkcija, ki ni povezana z delovanjem video gonilnika, je neuporabna. Zakaj in kakšne informacije NVIDIA zbira, ve le ona sama. A dejstvo, da končnemu uporabniku to ne prinaša nič koristnega, je povsem očitno.</v:String>
+    <v:String x:Key="tgl18_desc_conf">Popravek onemogoči funkcijo UAR (User Activity Recording) – sistem, ki zaporedno beleži vsako vaše dejanje na računalniku: od zajemanja zaslonskih slik in tipkanja besedila do zaganjanja programov in celo omogočanja dostopa do spletne kamere, ko je zaslon zaklenjen, in veliko več.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows občasno posodablja izklopne zemljevide in v ozadju pošilja obvestila o novih podatkih. Ti procesi lahko zbirajo informacije o vaši lokaciji, poteh in uporabi zemljevidov. Če ne uporabljate izklopnih zemljevidov, jih priporočamo, da jih onemogočite, da se izognete skritim posodobitvam in prenosu podatkov na Microsoftove strežnike brez vaše neposredne vpletenosti.</v:String>
+    <v:String x:Key="tgl20_desc_conf">Modul Intel, ki deluje v ozadju za zbiranje in prenos podatkov, je predstavljen kot orodje za izboljšanje izdelkov podjetja. Vendar za povprečnega uporabnika nima veliko praktične koristi, onemogočanje te funkcije pa lahko zmanjša aktivnost v ozadju in prepreči nepotreben prenos podatkov.</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="color1_intf">Barva izbire kazalca:</v:String>
+    <v:String x:Key="color2_intf">Barva namigov:</v:String>
+    
+    <v:String x:Key="exblock1_intf">Elementi krmarjenja Raziskovalca:</v:String>
+    <v:String x:Key="chk_home_intf">Domov</v:String>
+    <v:String x:Key="chk_gallery_intf">Galerija</v:String>
+
+    <v:String x:Key="exblock2_intf">Nastavitve prikaza Raziskovalca datotek:</v:String>
+    <v:String x:Key="chk_hidden_intf">Pokaži skrite datoteke in mape</v:String>
+    <v:String x:Key="chk_system_intf">Pokaži skrite zaščitene sistemske datoteke</v:String>
+    <v:String x:Key="chk_extension_intf">Pokaži končnice imen datotek</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Pokaži prazne pogone</v:String>
+
+    <v:String x:Key="exblock3_intf">Prikaz namiznih ikon:</v:String>
+    <v:String x:Key="chk_pc_intf">Ta računalnik</v:String>
+    <v:String x:Key="chk_net_intf">Omrežje</v:String>
+    <v:String x:Key="chk_trash_intf">Koš</v:String>
+    <v:String x:Key="chk_panel_intf">Nadzorna plošča</v:String>
+    <v:String x:Key="chk_user_intf">Uporabniške datoteke</v:String>
+
+    <v:String x:Key="tgl1_intf">Standardna velikost sistemskih gumbov</v:String>
+    <v:String x:Key="tgl2_intf">Standardna frekvenca utripanja kazalca</v:String>
+    <v:String x:Key="tgl3_intf">Standardna velikost drsnega traku</v:String>
+    <v:String x:Key="tgl4_intf">Učinek prosojnosti opravilne vrstice</v:String>
+    <v:String x:Key="tgl5_intf">Tema opravilne vrstice (temna)</v:String>
+    <v:String x:Key="tgl6_intf">Tema aplikacij in Raziskovalca (temna)</v:String>
+    <v:String x:Key="tgl7_intf">Zamik pri klicu kontekstnega menija</v:String>
+    <v:String x:Key="tgl8_intf">Zamik pri prikazu predogledov v opravilni vrstici</v:String>
+    <v:String x:Key="tgl9_intf">Prikaz nalepk prekrivanja na ikonah</v:String>
+    <v:String x:Key="tgl10_intf">Predpona "Oznaka za..."/ pripona "– Oznaka"</v:String>
+    <v:String x:Key="tgl11_intf">Poravnava opravilne vrstice</v:String>
+    <v:String x:Key="tgl12_intf">Standardna postavitev menija "Start"</v:String>
+    <v:String x:Key="tgl13_intf">Okrnjen kontekstni meni</v:String>
+    <v:String x:Key="tgl14_intf">Pokaži namige in predloge</v:String>
+    <v:String x:Key="tgl15_intf">Uporabi kompaktni način Raziskovalca</v:String>
+    <v:String x:Key="tgl16_intf">Pomočnika "Copilot" in "Recall"</v:String>
+    <v:String x:Key="tgl17_intf">"Končaj opravilo" z desnim klikom na aplikacijo</v:String>
+    <v:String x:Key="tgl18_intf">Pokaži postavitve pritrditve oken</v:String>
+    <v:String x:Key="tgl19_intf">Ikone in gumbi v opravilni vrstici</v:String>
+    <v:String x:Key="tgl20_intf">Pokaži personalizirane oglase</v:String>
+    <v:String x:Key="tgl21_intf">Obnovi prejšnja okna map ob prijavi</v:String>
+    <v:String x:Key="tgl22_intf">Obvestila z namigi in predlogi Windows</v:String>
+    <v:String x:Key="tgl23_intf">Mape, ki se nahajajo v "Ta računalnik"</v:String>
+    <v:String x:Key="tgl24_intf">"3D Predmeti" v Raziskovalcu</v:String>
+    <v:String x:Key="tgl25_intf">Stiskanje ozadja namizja v formatu .JPEG</v:String>
+    <v:String x:Key="tgl26_intf">Namigi za elemente namizja</v:String>
+    <v:String x:Key="tgl27_intf">Iskalni poizvedbi z integracijo "Bing" v meniju Start</v:String>
+    <v:String x:Key="tgl28_intf">Odpri "Hitri dostop" namesto "Ta računalnik"</v:String>
+    <v:String x:Key="tgl29_intf">Spontane spremembe svetlosti</v:String>
+
+    <v:String x:Key="color1_desc_intf">Spremeni barvo ozadja pri izbiranju besedila ali predmetov s kazalcem v sistemu.</v:String>
+    <v:String x:Key="color2_desc_intf">Spremeni barvo namigov v podprtih aplikacijah.</v:String>
+    <v:String x:Key="exblock1_desc_intf">Spremeni vidnost vgrajenih sistemskih elementov v navigacijskem podoknu, ki jih ni mogoče odpeti z običajnimi sredstvi.</v:String>
+    <v:String x:Key="exblock2_desc_intf">Spremeni sistemska pravila za prikazovanje elementov v Raziskovalcu datotek, vključno z vidnostjo skritih elementov, končnic datotek in strukturo diskovnih pogonov. Pozor: zaslon lahko utripne.</v:String>
+    <v:String x:Key="exblock3_desc_intf">Spremeni prikaz sistemskih ikon na namizju, ki so vgrajeni sistemski predmeti in ne običajne bližnjice.</v:String>
+    <v:String x:Key="tgl1_desc_intf">Popravek zmanjša velikost gumbov Za majhno okno, Povečaj in Zapri, zaradi česar so manj obsežni. Prilagodi velikost za vsa okna, vključno z Raziskovalcem datotek, Fotografijami, brskalniki in drugimi znanimi programi.</v:String>
+    <v:String x:Key="tgl2_desc_intf">Popravek poveča frekvenco utripanja besedilnega kazalca. Privzeto kazalec utripne vsakih 530 milisekund.</v:String>
+    <v:String x:Key="tgl3_desc_intf">Popravek zmanjša debelino drsnih trakov v klasičnih aplikacijah Windows, vključno z Raziskovalcem datotek, brskalniki in drugimi starejšimi programi. Vendar ne vpliva na sodobne vmesnike, saj ti uporabljajo lastne kontrolne elemente, neodvisne od sistemskih nastavitev.</v:String>
+    <v:String x:Key="tgl4_desc_intf">Popravek bo onemogočil ali omogočil učinek prosojnosti. Prosojna okna in površine.</v:String>
+    <v:String x:Key="tgl5_desc_intf">Spremeni temo opravilne vrstice na svetlo ali temno. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl6_desc_intf">Popravek bo spremenil temo Raziskovalca na svetlo ali temno, vključno z brskalniki in drugimi programi, ki podpirajo temo naprave. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl7_desc_intf">Privzeto se dodatne postavke kontekstnega menija prikažejo z zamikom 400 milisekund. Če želite hitreje, lahko ta zamik zmanjšate.</v:String>
+    <v:String x:Key="tgl8_desc_intf">Privzeto predogled opravilne vrstice predolgo prikazuje predoglede tekočih aplikacij. Če želite, da se predogledi prikažejo hitreje, uporabite ta popravek.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Omogoča skrivanje puščic bližnjic, stanj sinhronizacije v oblaku (OneDrive, Dropbox) in značk vrste datotek, kot je grafika SVG.</v:String>
+    <v:String x:Key="tgl10_desc_intf">Odstranitev preveč intuitivne predpone-pripone za oznake.</v:String>
+    <v:String x:Key="tgl11_desc_intf">Izberite, kje naj bodo ikone prikazane v opravilni vrstici, na sredini ali na levi.</v:String>
+    <v:String x:Key="tgl12_desc_intf">Spremeni postavitev menija Start z razširitvijo območja za pripete aplikacije. Poleg tega, razen v izdaji Windows Home, bo oddelek "Priporočeno" odstranjen iz menija Start.</v:String>
+    <v:String x:Key="tgl13_desc_intf">Ta popravek vam bo vrnil običajni klasični kontekstni meni za namizje in "Raziskovalca". Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl14_desc_intf">Windows 11 včasih prikaže namige o uporabi določene funkcije, na primer novega menija "Start" ali "Hitrih nastavitev". Uporabni so, če prvič vidite Windows 11, sicer so neuporabna navlaka.</v:String>
+    <v:String x:Key="tgl15_desc_intf">Privzeto Windows doda odmike med elementi v Raziskovalcu. To je nova funkcija, namenjena zaslonom na dotik. Ta popravek bo obnovil klasično postavitev Raziskovalca datotek, odstranil odmike med elementi in vas rešil iskanja nastavitev.</v:String>
+    <v:String x:Key="tgl16_desc_intf">Popravek onemogoči in, kjer je mogoče, skrije ikone Copilot v opravilni vrstici, meniju "Start", Edge in Beležnici, blokira njegovo funkcionalnost ter onemogoči Recall. Hkrati na jedro aplikacije Copilot ne vpliva, ostane v sistemu in se lahko uporablja, če je potrebno. Copilot je mogoče popolnoma odstraniti le skupaj z Microsoft Edge. Če te funkcije umetne inteligence niso prisotne v vašem sistemu Windows, je uporaba popravka nesmiselna.</v:String>
+    <v:String x:Key="tgl17_desc_intf">Ta popravek vam bo omogočil dodajanje možnosti "Končaj opravilo" v kontekstni meni, ko z desno miškino tipko kliknete aplikacijo v opravilni vrstici. To pospeši zaključevanje procesov brez odpiranja upravitelja opravil. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl18_desc_intf">Če ne želite videti predlogov za pritrditev, ko premaknete kazalec nad gumb "Povečaj", lahko to možnost onemogočite.</v:String>
+    <v:String x:Key="tgl19_desc_intf">Ta popravek odstrani ikone "Iskanje", "Pogled opravil" in "Klepet" ter skrije element "Več o tej sliki". Na starejših zgradbah Windows 11 odstrani tudi ikono Copilot. Za uporabnike Windows 10 dodatno onemogoči "Novice in interesi" ter Cortano. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl20_desc_intf">Privzeto Windows uporablja zbrane informacije za ciljno oglaševanje, tj. za prikazovanje oglasov, ki ustrezajo vašim interesom. In dobesedno se ta reklama nahaja kjerkoli je prosti prostor za prikaz. Če ne želite, da Windows prikazuje personalizirane oglase v vseh aplikacijah Trgovine, Raziskovalcu, Možnostih in meniju Start, lahko to navlako onemogočite.</v:String>
+    <v:String x:Key="tgl21_desc_intf">Privzeto Windows ne shrani položajev oken, kot tudi njihovega stanja ob izklopu. Ta popravek vam bo omogočil, da si zapomnite vrsto odprtih map, da jih obnovite po odjavi, ponovnem zagonu in izklopu.</v:String>
+    <v:String x:Key="tgl22_desc_intf">Popravek omogoča onemogočanje vseh namigov in obvestil Windows, vključno s spletnimi namigi v nastavitvah, ter onemogočanje SCOOBE (Second Chance Out of Box Experience) za uporabnike Windows 11. SCOOBE je nenadoma pojavljajoče se pojavno okno, ki agresivno poziva uporabnika, naj "nujno dokonča nastavitev naprave" in se prijavi v Microsoftov račun.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Popravek bo skril mape iz "Ta računalnik": Namizje, Videoposnetki, Dokumenti, Prenosi, Slike, Glasba. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl24_desc_intf">Odstrani element 3D Objects iz pogleda Raziskovalca na levem seznamu menija (iz drevesnega seznama Raziskovalca). Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl25_desc_intf">Privzeto, ko nastavite sliko jpeg kot ozadje namizja, Windows samodejno zmanjša njeno kakovost na 85%. Ta popravek bo nastavil kakovost ozadja jpeg na 100%.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Popravek bo onemogočil namige za elemente namizja, ko premaknete kazalec miške.</v:String>
+    <v:String x:Key="tgl27_desc_intf">Privzeto Windows pošlje vse, kar iščete v meniju "Start", svojim strežnikom, da vam zagotovi rezultate iskanja Bing. Če ne potrebujete integracije Bing v meniju "Start", lahko uporabite popravek za onemogočanje spletnega iskanja. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl28_desc_intf">Privzeto bo ob odpiranju Raziskovalca prvi zavihek "Hitri dostop". Če želite odpreti kateri koli disk, morate narediti nepotrebne premike. Ta popravek bo omogočil, da se ob odprtju odpre "Ta računalnik" namesto "Hitri dostop".</v:String>
+    <v:String x:Key="tgl29_desc_intf">Na nekaterih napravah se lahko svetlost zaslona spontano spremeni glede na prikazano vsebino. Če izklop HDR, dinamične svetlosti in nastavitev napajanja ne reši težave (ta težava je še posebej pogosta pri prenosnikih, ki delujejo na baterijo), lahko poskusite s tem popravkom - prisilno onemogoči samodejno prilagajanje svetlosti na sistemski ravni. Ročno upravljanje svetlosti ostane na voljo.</v:String>
+    <!--#endregion-->
+
+    <!--#region Packages Page -->
+    <v:String x:Key="warn_part1_pkg">Aplikacije bodo izbrisane</v:String>
+    <v:String x:Key="warn_part2_pkg">za vedno,</v:String>
+    <v:String x:Key="warn_part3_pkg">vendar je OneDrive mogoče obnoviti s klikom na njegovo ikono</v:String>
+
+    <v:String x:Key="MicrosoftStore_pkg">Trgovina Microsoft Store</v:String>
+    <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
+    <v:String x:Key="OneNote_pkg">Microsoft Office OneNote</v:String>
+    <v:String x:Key="MicrosoftOfficeHub_pkg">Microsoft Office Hub</v:String>
+    <v:String x:Key="MicrosoftSolitaireCollection_pkg">Microsoftova zbirka pasijansov</v:String>
+    <v:String x:Key="MixedReality_pkg">Mešana resničnost</v:String>
+    <v:String x:Key="BingWeather_pkg">Bing Vreme</v:String>
+    <v:String x:Key="Microsoft3D_pkg">Microsoft 3D Viewer</v:String>
+    <v:String x:Key="SkypeApp_pkg">Microsoft Skype</v:String>
+    <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
+    <v:String x:Key="Cortana_pkg">Cortana</v:String>
+    <v:String x:Key="MicrosoftTeams_pkg">Microsoft Teams</v:String>
+    <v:String x:Key="Music_pkg">Windows Media Player</v:String>
+    <v:String x:Key="Video_pkg">Filmi in TV</v:String>
+    <v:String x:Key="SoundRecorder_pkg">Snemalnik zvoka</v:String>
+    <v:String x:Key="FeedbackHub_pkg">Središče za povratne informacije</v:String>
+    <v:String x:Key="Mail_pkg">Pošta</v:String>
+    <v:String x:Key="Widgets_pkg">Pripomočki</v:String>
+    <v:String x:Key="Photos_pkg">Windows Fotografije</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Orodje za izrezovanje</v:String>
+    <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
+    <v:String x:Key="GetHelp_pkg">Pridobite pomoč</v:String>
+    <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Lepilni listki</v:String>
+    <v:String x:Key="Maps_pkg">Windows Zemljevidi</v:String>
+    <v:String x:Key="Camera_pkg">Windows Kamera</v:String>
+    <v:String x:Key="Paint3D_pkg">3D Slikar</v:String>
+    <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
+    <v:String x:Key="People_pkg">Ljudje</v:String>
+    <v:String x:Key="BingNews_pkg">Microsoft Novice</v:String>
+    <v:String x:Key="Todos_pkg">Microsoft To Do</v:String>
+    <v:String x:Key="Alarms_pkg">Windows Ura</v:String>
+    <v:String x:Key="Phone_pkg">Telefon</v:String>
+    <v:String x:Key="Outlook_pkg">Outlook za Windows</v:String>
+    <v:String x:Key="BingSports_pkg">Bing Šport</v:String>
+    <v:String x:Key="BingFinance_pkg">Bing Finance</v:String>
+    <v:String x:Key="MicrosoftFamily_pkg">Microsoft Family Safety</v:String>
+    <v:String x:Key="BingSearch_pkg">Bing Iskanje</v:String>
+    <v:String x:Key="QuickAssist_pkg">Hitra pomoč</v:String>
+    <v:String x:Key="DevHome_pkg">Dev Home</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
+    <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_pkg">Spletne medijske razširitve</v:String>
+    <v:String x:Key="OneConnect_pkg">Mobilni načrti</v:String>
+    <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
+    <v:String x:Key="Notepad_pkg">Beležnica</v:String>
+    <v:String x:Key="Calculator_pkg">Kalkulator</v:String>
+    <v:String x:Key="Paint_pkg">Microsoft Slikar</v:String>
+    <v:String x:Key="Copilot_pkg">Copilot</v:String>
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Denarnica</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    <v:String x:Key="Facebook_pkg">Facebook</v:String>
+    <v:String x:Key="Hulu_pkg">Hulu</v:String>
+    <v:String x:Key="Disney_pkg">Disney</v:String>
+    <v:String x:Key="Instagram_pkg">Instagram</v:String>
+    <v:String x:Key="TwitterX_pkg">Twitter - X</v:String>
+    <v:String x:Key="TikTok_pkg">TikTok</v:String>
+    <v:String x:Key="MicrosoftSway_pkg">Microsoft Sway</v:String>
+    <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
+    <v:String x:Key="Netflix_pkg">Netflix</v:String>
+    <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex za Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
+
+    <v:String x:Key="title_over_pkg">Potrditev odstranitve</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">Odstranili boste brskalnik Microsoft Edge. S tem boste odstranili tudi komponento EdgeWebView, ki se uporablja za prikaz spletne vsebine v različnih aplikacijah – kot so Microsoft Office (npr. Meeting Insights, Room Finder), aplikacija Fotografije (nova različica uporablja WebView2), nekateri Telegram boti in drugi programi, ki so odvisni od vdelanega WebView. Pred nadaljevanjem se prepričajte, da te komponente ne potrebujete.
+       V novejših zgradbah Windows 11 je Copilot implementiran prek EdgeWebView kot PWA ali sistemski ovoj. Ko je Edge odstranjen, je odstranjen tudi Copilot, saj deluje kot spletni ovoj.</v:String>
+    <v:String x:Key="question_over_pkg">Ali želite nadaljevati z brisanjem skupaj z EdgeWebView?</v:String>
+    <v:String x:Key="btn_delete_all">Da, izbriši vse</v:String>
+    <v:String x:Key="btn_keep_webview">Ne, obdrži EdgeWebView</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_svc">Storitve, povezane z iskanjem Windows</v:String>
+    <v:String x:Key="tgl2_svc">Storitve, povezane z Xbox</v:String>
+    <v:String x:Key="tgl3_svc">Storitve, povezane s posodabljanjem Windows</v:String>
+    <v:String x:Key="tgl4_svc">Storitve, povezane s Trgovino Windows Store</v:String>
+    <v:String x:Key="tgl5_svc">Storitve števcev uspešnosti</v:String>
+    <v:String x:Key="tgl6_svc">Biometrična storitev sistema Windows</v:String>
+    <v:String x:Key="tgl7_svc">Storitve, povezane z Bluetooth</v:String>
+    <v:String x:Key="tgl8_svc">Storitve, povezane s tiskalnikom</v:String>
+    <v:String x:Key="tgl9_svc">Storitev, povezana z delovanjem optičnega bralnika</v:String>
+    <v:String x:Key="tgl10_svc">Storitve, povezane s faksom</v:String>
+    <v:String x:Key="tgl11_svc">Storitve, povezane z uporabo načina tablice/pametnega telefona</v:String>
+    <v:String x:Key="tgl12_svc">Storitve, povezane z delovanjem dodatnih monitorjev</v:String>
+    <v:String x:Key="tgl13_svc">Storitev, povezana s sistemskimi komponentami</v:String>
+    <v:String x:Key="tgl14_svc">Storitve, povezane z delovanjem lokalnega omrežja</v:String>
+    <v:String x:Key="tgl15_svc">Storitve, povezane z USB modemi in usmerjevalniki</v:String>
+    <v:String x:Key="tgl16_svc">Storitve, povezane z VPN odjemalci</v:String>
+    <v:String x:Key="tgl17_svc">Storitve, povezane z delovanjem Windows Media</v:String>
+    <v:String x:Key="tgl18_svc">Storitve, povezane z oddaljenim namizjem</v:String>
+    <v:String x:Key="tgl19_svc">Storitve, ki zbirajo napake in dnevnike dogodkov</v:String>
+    <v:String x:Key="tgl20_svc">Storitev za oddaljeno upravljanje datotek WebDAV</v:String>
+    <v:String x:Key="tgl21_svc">Storitve, povezane z delovanjem pametne kartice</v:String>
+    <v:String x:Key="tgl22_svc">Storitve, povezane z delovanjem Windows Kiosk</v:String>
+    <v:String x:Key="tgl23_svc">Storitve, povezane s šifriranjem datotek</v:String>
+    <v:String x:Key="tgl24_svc">Storitev, povezana z lokalizacijo Windows</v:String>
+    <v:String x:Key="tgl25_svc">Storitve, povezane s preverjanjem varnosti v ozadju</v:String>
+    <v:String x:Key="tgl26_svc">Storitve, povezane z diagnostiko v ozadju</v:String>
+    <v:String x:Key="tgl27_svc">Storitve, povezane s podjetniškimi orodji</v:String>
+    <v:String x:Key="tgl28_svc">Storitev, povezana z delovanjem Hyper-V</v:String>
+    <v:String x:Key="tgl29_svc">Storitve, povezane s potisnimi obvestili</v:String>
+    <v:String x:Key="tgl30_svc">Storitve, povezane s predstavitvenim načinom Trgovine</v:String>
+    <v:String x:Key="tgl31_svc">Storitve, povezane s posodabljanjem Microsoft Edge</v:String>
+    <v:String x:Key="tgl32_svc">Storitev načrtovanja razreda večpredstavnosti</v:String>
+
+    <v:String x:Key="tgl1_desc_svc">Onemogočite, če ne uporabljate zgodovine datotek in indeksiranja vsebine.</v:String>
+    <v:String x:Key="tgl2_desc_svc">Onemogočite, če ne uporabljate Xbox in Microsoftovih igralnih ploščkov.</v:String>
+    <v:String x:Key="tgl3_desc_svc">Onemogočite, če ne nameravate posodabljati Windows. Poleg storitev bo popravek spremenil datoteke, odgovorne za posodobitve Windows. Zaradi tega, tudi če so storitve omogočene, Središče za posodobitve ne bo delovalo. Upoštevajte, da popravek vpliva na prenos in posodabljanje aplikacij iz Trgovine Windows Store.</v:String>
+    <v:String x:Key="tgl4_desc_svc">Onemogočite, če ne uporabljate Trgovine Windows Store in njenih UWP aplikacij.</v:String>
+    <v:String x:Key="tgl5_desc_svc">Onemogočite, če ne želite, da storitve analizirajo uspešnost vašega sistema.</v:String>
+    <v:String x:Key="tgl6_desc_svc">Onemogočite, če ne uporabljate prijave s PIN, prstnim odtisom, prepoznavanjem obraza ali drugimi metodami Windows Hello. Če je bila metoda prijave že nastavljena, bo še naprej delovala, vendar boste morali za njeno spremembo ali odstranitev znova omogočiti Windows Hello.</v:String>
+    <v:String x:Key="tgl7_desc_svc">Onemogočite, če ne uporabljate Bluetooth in naprav, katerih delo je povezano z Bluetooth.</v:String>
+    <v:String x:Key="tgl8_desc_svc">Onemogočite, če nimate tiskalnika.</v:String>
+    <v:String x:Key="tgl9_desc_svc">Onemogočite, če nimate optičnega bralnika.</v:String>
+    <v:String x:Key="tgl10_desc_svc">Onemogočite, če nimate faks aparata.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Onemogočite, če imate stacionarni računalnik, prenosnik ali netbook.</v:String>
+    <v:String x:Key="tgl12_desc_svc">Onemogočite, če imate samo en monitor in ne nameravate priključiti dodatnih.</v:String>
+    <v:String x:Key="tgl13_desc_svc">Onemogočite, če ne uporabljate teh aplikacij: "Navidezna namizja", "Vaš telefon" in "Nočna svetloba". Ta storitev obdeluje uporabniške podatke in jih sinhronizira s strežniki Microsoft. Za delovanje sistema ni kritična; vendar nekatere funkcije, kot je "Nočna svetloba" v Windows 10, lahko po onemogočanju prenehajo delovati v celoti ali delno.</v:String>
+    <v:String x:Key="tgl14_desc_svc">Onemogočite, če ne uporabljate ali ne nameravate uporabljati lokalnega omrežja.</v:String>
+    <v:String x:Key="tgl15_desc_svc">Onemogočite, če ste na internet povezani preko kabla ali Wi-Fi.</v:String>
+    <v:String x:Key="tgl16_desc_svc">Onemogočite, če ne uporabljate VPN odjemalcev. Lahko vpliva na delovanje Xbox.</v:String>
+    <v:String x:Key="tgl17_desc_svc">Onemogočite, če ne potrebujete sinhronizacije datotek in dostopa do njih v lokalnem omrežju za Windows Media Player. Te storitve niso kritične, lahko še naprej uporabljate predvajalnik.</v:String>
+    <v:String x:Key="tgl18_desc_svc">Onemogočite, če ne uporabljate oddaljenega namizja in ne uporabljate povezave strežnika z njimi.</v:String>
+    <v:String x:Key="tgl19_desc_svc">Onemogočite, če ne želite, da storitve obremenjujejo vaš računalnik med obravnavanjem napak.</v:String>
+    <v:String x:Key="tgl20_desc_svc">Onemogočite, če ne upravljate datotek na daljavo prek souporabe ali z uporabo WebDAV.</v:String>
+    <v:String x:Key="tgl21_desc_svc">Onemogočite, če ne uporabljate pametnih kartic. Pametna kartica je ena od vrst elektronskih identifikatorjev ali plastike s čipom. Videz je "bančna kartica". Za vsakodnevno uporabo Windows storitev ni potrebna in je nikoli ne boste potrebovali.</v:String>
+    <v:String x:Key="tgl22_desc_svc">Onemogočite, če ne uporabljate načina Windows kiosk. Ta način minimizira vmesnik: samo ena UWP aplikacija teče celozaslonsko, vse druge funkcije pa so blokirane. Upoštevajte, da lahko to moti namestitev posodobitev Windows in programov prek Windows Installer, saj prav tako onemogoči nastavitev in inicializacijo sistemskih podatkov in aplikacij ob prvi prijavi.</v:String>
+    <v:String x:Key="tgl23_desc_svc">Onemogočite, če ne uporabljate šifriranja diska BitLocker in šifriranja datotek ali map EFS.</v:String>
+    <v:String x:Key="tgl24_desc_svc">Onemogočite, če ste konfigurirali vse jezike, ki jih boste uporabljali, in ne nameravate dodajati novih.</v:String>
+    <v:String x:Key="tgl25_desc_svc">Onemogočite, če ne uporabljate Windows Defenderja in vse dodatne varnosti Windows.</v:String>
+    <v:String x:Key="tgl26_desc_svc">Onemogočite, če ne želite, da Windows obremenjuje sistem s svojo neuporabno diagnostiko v ozadju.</v:String>
+    <v:String x:Key="tgl27_desc_svc">Onemogočite, če ne uporabljate oddaljenega upravljanja podjetniških aplikacij in nimate oddaljenega strežnika, s katerim komunicira vaš računalnik.</v:String>
+    <v:String x:Key="tgl28_desc_svc">Onemogočite, če ne uporabljate vgrajenega virtualizacijskega sistema. To nikakor ne vpliva na delovanje VirtualBox in podobnih.</v:String>
+    <v:String x:Key="tgl29_desc_svc">Onemogočite, če ne uporabljate seznanjenih naprav in ne nameščate aplikacij iz Trgovine Windows Store na daljavo. Te storitve upravljajo Središče za obvestila s seznanjenimi napravami, obdelujejo zahteve potiska, omogočajo Windowsu zaznavanje vašega pametnega telefona za aplikacijo "Vaš telefon", samodejno ponovno povezavo z njim in prikaz njegovih sporočil in dogodkov v Akcijskem središču. V Windows 10 se po njihovem onemogočanju Središče za obvestila morda ne bo odprlo.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Onemogočite, če ne uporabljate naprave v trgovini za prikazovanje funkcij Windows. Storitev Store Demo upravlja prikaz predstavitvene vsebine in interaktivnih funkcij, namenjenih samo za trgovinske izložbe in testiranje. Ta storitev ni potrebna za vsakodnevno uporabo računalnika.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Onemogočite, če ne nameravate posodabljati ali ne uporabljate Microsoft Edge. To prav tako ustavi samodejne posodobitve za WebView2 Runtime - te komponente uporabljajo isti mehanizem posodabljanja in so tesno soodvisne.</v:String>
+    <v:String x:Key="tgl32_desc_svc">Onemogočite, če razumete možne posledice in ne uporabljate večpredstavnostnih aplikacij, ki zahtevajo prednostno obdelavo zvoka in videa. V redkih primerih lahko to nekoliko zmanjša število sistemskih dogodkov in obremenitev (na primer pri uporabi omrežnih adapterjev z NetAdapterCX); vendar je učinek odvisen od sistemske konfiguracije. Lahko povzroči zatikanje zvoka, desinhronizacijo zvoka/slike in druge težave s predvajanjem.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_sys">Hitrost kazalca miške:</v:String>
+    <v:String x:Key="slider2_sys">Zamik ponavljanja tipkovnice:</v:String>
+    <v:String x:Key="slider3_sys">Hitrost ponavljanja tipkovnice:</v:String>
+    <v:String x:Key="text_sys">Tukaj vnesite besedilo za preizkus nastavitev tipkovnice</v:String>
+    <v:String x:Key="tgl1_sys">Izboljšaj natančnost kazalca</v:String>
+    <v:String x:Key="tgl2_sys">Lepljive tipke in tipke za filtriranje</v:String>
+    <v:String x:Key="tgl3_sys">Windows Defender, Antimalware, SmartScreen in VBS</v:String>
+    <v:String x:Key="tgl4_sys">Nadzor uporabniškega računa (UAC)</v:String>
+    <v:String x:Key="tgl5_sys">Varnostna obvestila Središča za obvestila</v:String>
+    <v:String x:Key="tgl6_sys">Samodejno posodabljanje aplikacij iz Trgovine Microsoft Store</v:String>
+    <v:String x:Key="tgl7_sys">Zvočna zamuda v gonilniku Realtek Sound</v:String>
+    <v:String x:Key="tgl8_sys">Časovna omejitev izklopa zaslona zaklenjene konzole</v:String>
+    <v:String x:Key="tgl9_sys">Tehnologija "Hibernacija" in "Hitri zagon"</v:String>
+    <v:String x:Key="tgl10_sys">Pogovorno okno opozorila ob izklopu</v:String>
+    <v:String x:Key="tgl11_sys">Opozorila pri zagonu katerega koli exe</v:String>
+    <v:String x:Key="tgl12_sys">Samodejno diagnosticiranje pomnilnika</v:String>
+    <v:String x:Key="tgl13_sys">Protokoli Teredo, ISATAP in IPv6</v:String>
+    <v:String x:Key="tgl14_sys">Standardna velikost predpomnilnika datotečnega sistema</v:String>
+    <v:String x:Key="tgl15_sys">Upočasnitev zagona sistema Windows in zaganjanja programov</v:String>
+    <v:String x:Key="tgl16_sys">Zgodovina uporabe orodne vrstice za hitri dostop</v:String>
+    <v:String x:Key="tgl17_sys">Samodejni zagon prenosnih medijev</v:String>
+    <v:String x:Key="tgl18_sys">Uporaba privzetega načrta napajanja</v:String>
+    <v:String x:Key="tgl19_sys">Uporaba funkcije "Bluetooth in naprave"</v:String>
+    <v:String x:Key="tgl20_sys">Požarni zid Windows Defender</v:String>
+    <v:String x:Key="tgl21_sys">Uporaba funkcije "Igralni način"</v:String>
+    <v:String x:Key="tgl22_sys">Uporaba funkcije "Igralna vrstica"</v:String>
+    <v:String x:Key="tgl23_sys">Aplikacije, ki se izvajajo v ozadju</v:String>
+    <v:String x:Key="tgl24_sys">Rezervirana shramba v sistemu Windows</v:String>
+    <v:String x:Key="tgl25_sys">Dinamični in visoko natančni časovnik dogodkov</v:String>
+    <v:String x:Key="tgl26_sys">Skrij "PC Health Check" pred sistemom za posodabljanje</v:String>
+    <v:String x:Key="tgl27_sys">Ozadnje naloge programa Windows Insider</v:String>
+    <v:String x:Key="tgl28_sys">Defragmentacija sistemskega diska</v:String>
+    <v:String x:Key="tgl29_sys">Začasna ustavitev posodobitev sistema Windows</v:String>
+    <v:String x:Key="tgl30_sys">Večplansko prekrivanje (MPO)</v:String>
+
+    <v:String x:Key="slider1_desc_sys">Spremeni hitrost kazalca miške, kar vam prihrani čas pri iskanju parametrov miške.</v:String>
+    <v:String x:Key="slider2_desc_sys">Bo spremenilo zamik pred začetkom ponavljanja vnesenega znaka, priporočena vrednost je 0.</v:String>
+    <v:String x:Key="slider3_desc_sys">Spremeni hitrost ponavljanja vnesenega znaka, priporočena vrednost je 31.</v:String>
+    <v:String x:Key="tgl1_desc_sys">Privzeto pospešek miške pospeši premikanje miške. Priporočljivo ga je izklopiti, saj pri vklopljenem pospešku enakomerno premikanje in natančnost smeri želita biti boljša.</v:String>
+    <v:String x:Key="tgl2_desc_sys">Če ne želite, da se med opravljanjem nalog vedno znova pojavi okno, ki vam sporoča, da omogočite lepljenje tipk ali filtriranje vnosa, in po odgovoru "Ne" se znova pojavi čez nekaj časa, potem onemogočite to funkcijo. Poleg tega filtriranje vnosa vpliva na hitrost ponavljanja tipkovnice in preskakovanje ponovljenih tipk.</v:String>
+    <v:String x:Key="tgl3_desc_sys">Ta popravek bo onemogočil in ustavil Windows Defender, SmartScreen, nesorazmerno težke obremenitve procesorja Antimalware in virtualizacijsko varnost (VBS). Za popolno uveljavitev sprememb se bo sistem samodejno znova zagnal v varnem načinu. Nobena dejanja niso potrebna – pripomoček bo vse opravil samodejno.</v:String>
+    <v:String x:Key="tgl4_desc_sys">Popravek bo popolnoma onemogočil Nadzor uporabniškega računa (UAC), se znebil ikon ščita, varnostnih obvestil in drugih stvari. UAC ni popoln varnostni program.</v:String>
+    <v:String x:Key="tgl5_desc_sys">Ko onemogočite nekaj, kar je povezano z varnostjo ali zaščito, nenehno prejemate obvestila o tem. Ta popravek bo onemogočil varnostna obvestila Središča za obvestila.</v:String>
+    <v:String x:Key="tgl6_desc_sys">Če raje sami posodabljate svoje aplikacije iz Trgovine Microsoft Store, morate izklopiti funkcijo samodejnega posodabljanja. Tako se bo obremenitev omrežja zmanjšala.</v:String>
+    <v:String x:Key="tgl7_desc_sys">Nekatere različice gonilnikov Realtek High Definition Audio imajo lahko težavo z zvočno zamudo. Ta popravek odpravi to napako. Vendar ga ni priporočljivo uporabljati, če ne opazite nobene zamude ali če niste prepričani, da je nameščen in/ali delujoč gonilnik res iz Realteka.</v:String>
+    <v:String x:Key="tgl8_desc_sys">Privzeto Windows prikaže zaklenjeni zaslon 1 minuto, nato pa zaslon ugasne in to je neodvisno od tega, ali delujete na baterijo ali omrežje. Ta popravek bo odstranil te omejitve.</v:String>
+    <v:String x:Key="tgl9_desc_sys">Teoretično hitri zagon potrebuje manj časa kot izhod iz hibernacije, vendar v praksi morda ni opazno. Če ne uporabljate niti hitrega nalaganja niti funkcij hibernacije, jih lahko tudi onemogočite. Tako lahko sprostite dodaten prostor na disku.</v:String>
+    <v:String x:Key="tgl10_desc_sys">Popravek vam omogoča onemogočanje sistemskega sporočila, ki vas obvešča, da bodo ob izklopu ali ponovnem zagonu računalnika odprti programi prisilno zaprti.</v:String>
+    <v:String x:Key="tgl11_desc_sys">Varnostno opozorilo Windows, ko zaženete exe, msi, bat, cmd ali druge izvedljive datoteke, prenesene prek interneta. Potrjevanje zagona takšnih datotek lahko hitro postane dolgočasno vsakič, ta popravek bo onemogočil to opozorilo.</v:String>
+    <v:String x:Key="tgl12_desc_sys">Ta popravek onemogoči samodejni zagon diagnostike pomnilnika Windows z izklopom načrtovane naloge. Posledično se sistem hitreje zažene zaradi odsotnosti nepotrebnih preverjanj, medtem ko vam ostane možnost, da po potrebi poženete diagnostiko ročno.</v:String>
+    <v:String x:Key="tgl13_desc_sys">Ta popravek onemogoči protokole Teredo, ISATAP in IPv6, ki jih večina uporabnikov praviloma ne potrebuje. Vendar ga ni priporočljivo uporabljati na delovnih ali podjetniških napravah: to lahko povzroči težave z omrežjem ali nepravilno delovanje nekaterih storitev.</v:String>
+    <v:String x:Key="tgl14_desc_sys">Ta popravek vključuje podporo za velik predpomnilnik datotečnega sistema. Povečanje velikosti predpomnilnika datotečnega sistema na splošno izboljša delovanje računalnika, vendar to posledično zmanjša fizični pomnilniški prostor, ki je na voljo za aplikacije in storitve.</v:String>
+    <v:String x:Key="tgl15_desc_sys">Privzeto ima Windows vgrajen mehanizem za upočasnitev zagonskih programov. Ta rešitev deluje precej dobro na starejših računalnikih s HDD, vendar na sodobnih računalnikih s SSD po nepotrebnem upočasni zagon sistema s programi.</v:String>
+    <v:String x:Key="tgl16_desc_sys">Popravek bo onemogočil beleženje zgodovine uporabe datotek in map, prikazanih na plošči Hitri dostop. Z drugimi besedami, sistem ne bo več samodejno shranjeval in prikazoval najnovejših aktivnih elementov.</v:String>
+    <v:String x:Key="tgl17_desc_sys">Popravek onemogoči samodejni zagon za različne vrste prenosnih medijev, priključenih na vaš računalnik, ki jih Raziskovalec poskuša odpreti. Tako se program, ki vam ni znan, ne bo samodejno odprl na mediju, v katerega zanesljivost niste prepričani.</v:String>
+    <v:String x:Key="tgl18_desc_sys">Doda vezje za napajanje "Vrhunska zmogljivost", ali če je na voljo, preprosto preklopi na obstoječe vezje za napajanje. Poleg tega odkleni nastavitev največje frekvence procesorja v nastavitvah upravljanja napajanja procesorja.</v:String>
+    <v:String x:Key="tgl19_desc_sys">Če ne potrebujete Bluetooth in ne želite uporabljati svojih naprav prek Bluetooth, ga izklopite, prav tako bo odstranil ikono v sistemski vrstici.</v:String>
+    <v:String x:Key="tgl20_desc_sys">Požarni zid vam omogoča uravnavanje dostopa programov do interneta z dovoljevanjem ali blokiranjem njihovih povezav in nadzorovanjem prometa. Če ste prepričani v svoja dejanja in razumete, kaj počnete, lahko onemogočite požarni zid; vendar je za večino uporabnikov priporočljivo, da ostane omogočen.</v:String>
+    <v:String x:Key="tgl21_desc_sys">Igralni način nima velikega učinka na zmogljive sisteme. Če pa imate v ozadju veliko procesov, način zagotavlja, da procesi v ozadju ne bodo vplivali na delovanje igre.</v:String>
+    <v:String x:Key="tgl22_desc_sys">Funkcija za snemanje vaših iger. V bistvu uporablja vire vašega sistema. Obstaja veliko boljših alternativ, ki se poleg tega ne odpirajo spontano.</v:String>
+    <v:String x:Key="tgl23_desc_sys">Nekatere aplikacije vam omogočajo upravljanje dejavnosti v ozadju, kar določa, kaj lahko počnejo, ko so v ozadju in se ne uporabljajo aktivno. Na splošno bo onemogočanje ozadnih aplikacij pomagalo zmanjšati obremenitev omrežja, kot tudi obremenitev procesorja in porabo energije, kar je uporabno za prenosnike, saj podaljšuje življenjsko dobo baterije.</v:String>
+    <v:String x:Key="tgl24_desc_sys">Rezervirana shramba je zasnovana za zagotavljanje predvidljive dodelitve prostega prostora, ki ga bodo uporabljale posodobitve, aplikacije, začasne datoteke in sistemski predpomnilnik. Onemogočanje lahko sprosti znatno količino prostora. Če pa imate dovolj prostega prostora, tega ni priporočljivo storiti, ne boste pridobili nobenih dodatnih koristi.</v:String>
+    <v:String x:Key="tgl25_desc_sys">Onemogočanje dinamičnega časovnika in HPET lahko izboljša odzivnost sistema z zmanjšanjem mikrozatikov in lahko prinese rahlo izboljšanje zmogljivosti. Vendar je učinek odvisen od konfiguracije: v nekaterih primerih lahko namesto pospešitve pride do upočasnitve sistema in zastajanja. Če uporabljate prenosnik, upoštevajte, da lahko to nekoliko poveča porabo energije, saj bo procesor ostal bolj aktiven tudi v mirovanju.</v:String>
+    <v:String x:Key="tgl26_desc_sys">Popravek blokira vsiljivo samodejno namestitev PC Health Check - Microsoftovega pripomočka, ki se prisilno namešča prek Windows Update brez dovoljenja. Ko je nameščen, program nenehno opozarja o "preverjanju pripravljenosti za Windows 11" in potiska neželena "priporočila za optimizacijo".</v:String>
+    <v:String x:Key="tgl27_desc_sys">Za udeležence programa Windows Insider naj te naloge ostanejo omogočene. Če pa niste del programa, vse povezane naloge postanejo nepotrebno breme: porabljajo sistemske vire, ustvarjajo neuporabne dnevnike in lahko sprožijo povezave telemetrije, ne da bi prinašale kakršno koli korist. Njihovo onemogočanje lahko izboljša čas zagona in splošno zmogljivost sistema, hkrati pa odpravi nepotrebne kanale zbiranja eksperimentalnih podatkov.</v:String>
+    <v:String x:Key="tgl28_desc_sys">Če imate SSD, onemogočanje defragmentacije in optimizacije zagonskih datotek, ki sta učinkoviti samo za trde diske (HDD), pomaga podaljšati življenjsko dobo vašega pogona. Hkrati funkcija TRIM optimizacije še naprej deluje: obvesti krmilnik SSD-ja, kateri podatkovni bloki niso več v uporabi, in jih počisti, s čimer ohranja stabilno hitrost in dolgo življenjsko dobo pogona.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Začasno ustavi sistemske posodobitve Windows za 10 let, medtem ko posodobitve aplikacij in prenosi iz Trgovine Microsoft Store ostanejo aktivni. Če želite popolnoma onemogočiti posodobitve, pojdite v Storitve in onemogočite ustrezne storitve Windows Update.</v:String>
+    <v:String x:Key="tgl30_desc_sys">Večplansko prekrivanje je tehnologija prikaza Windows, zasnovana za izboljšanje zmogljivosti s pomočjo strojno pospešenega prekrivanja plasti. Vendar pa lahko v nekaterih primerih sistem in gonilniki nepravilno komunicirajo z aplikacijami, kar vodi do črnih zaslonov, zatikov, utripanja in trganja zaslona. Priporočljivo je, da to onemogočite le, če naletite na takšne težave.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Information Page -->
+    <v:String x:Key="title_win_name_sysinfo">Operacijski sistem:</v:String>
+    <v:String x:Key="title_win_ver_sysinfo">Različica:</v:String>
+    <v:String x:Key="label_proc_sysinfo">Procesov v izvajanju:</v:String>
+    <v:String x:Key="label_svc_sysinfo">storitev:</v:String>
+    <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
+    <v:String x:Key="title_mode_sysinfo">Način:</v:String>
+    <v:String x:Key="title_motherbr_sysinfo">Matična plošča:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">Čipovje:</v:String>
+    <v:String x:Key="title_cpu_sysinfo">Procesor:</v:String>
+    <v:String x:Key="title_cores_sysinfo">Jedra:</v:String>
+    <v:String x:Key="title_threads_sysinfo">Niti:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Frekvenca:</v:String>
+    <v:String x:Key="title_gpu_sysinfo">Grafika:</v:String>
+    <v:String x:Key="title_refreshrate_sysinfo">Osveževalna frekvenca:</v:String>
+    <v:String x:Key="title_ram_sysinfo">Pomnilnik:</v:String>
+    <v:String x:Key="title_mtype_sysinfo">Vrsta pomnilnika:</v:String>
+    <v:String x:Key="title_storage_sysinfo">Pomnilniške naprave:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">Uporabljeno:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">Prosto:</v:String>
+    <v:String x:Key="title_sound_sysinfo">Naprave za predvajanje:</v:String>
+    <v:String x:Key="title_netadapter_sysinfo">Omrežni vmesniki:</v:String>
+    <v:String x:Key="title_ip_sysinfo">Vaš IP naslov:</v:String>
+    <v:String x:Key="connection_limited_sysinfo">Omrežna povezava je omejena</v:String>
+    <v:String x:Key="connection_block_sysinfo">Omejen dostop do omrežja</v:String>
+    <v:String x:Key="connection_lose_sysinfo">Internetna povezava izgubljena</v:String>
+    <v:String x:Key="text_copy_sysinfo">Kopirano!</v:String>
+    <v:String x:Key="driver_not_installed_sysinfo">Nimate nameščenega gonilnika</v:String>
+    <v:String x:Key="no_device_information_sysinfo">Ni bilo najdenih podatkov o napravi</v:String>
+    <v:String x:Key="unknown_information_sysinfo">Ni zaznano</v:String>
+    <!--#endregion-->
+
+    <!--#region Addons Page -->
+    <v:String x:Key="btn_select_dir">Izberi mapo</v:String>
+    <v:String x:Key="chk_run_ti_adds">Zaženi kot TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">Izberite mapo ali pa se prepričajte, da ni prazna</v:String>
+    <v:String x:Key="scripts_info_adds">Nato boste lahko na tej strani izvajali skripte (.ps1, .cmd, .bat, .reg)</v:String>
+    <!--#endregion-->
+
+    <!--#region Toolset Page -->
+    <v:String x:Key="source_ts">Vir</v:String>
+    <v:String x:Key="btn_download">Prenesi</v:String>
+    <v:String x:Key="btn_cancel">Prekliči</v:String>
+    <v:String x:Key="btn_open_dir">Odpri mapo</v:String>
+    <v:String x:Key="text_ts">Iskanje po imenu ali avtorju</v:String>
+    <v:String x:Key="connecting_ts">Povezovanje</v:String>
+    <!--#endregion-->
+
+</ResourceDictionary>
