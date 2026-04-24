@@ -25,7 +25,7 @@
 [![PL](https://img.icons8.com/color/50/poland-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md) 
 [![PT-BR](https://img.icons8.com/color/50/brazil-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md) 
 [![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md)
-[![RU](https://img.icons8.com/color/50/slovenia-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-sl.md) 
+[![SI](https://img.icons8.com/color/50/slovenia-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-sl.md) 
 [![UK](https://img.icons8.com/color/50/ukraine-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md) 
 [![ZH-TW](https://img.icons8.com/color/50/china-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md)
 
