@@ -32,7 +32,7 @@
             </DockPanel>
         </Grid>
 
-        <Grid Grid.Row="1" PreviewMouseLeftButtonUp="Grid_PreviewMouseLeftButtonUp">
+        <Grid Grid.Row="1" Background="Transparent" PreviewMouseLeftButtonUp="Grid_PreviewMouseLeftButtonUp">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

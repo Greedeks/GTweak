@@ -73,8 +73,8 @@
     <v:String x:Key="notsupport_ntfs_noty">L’opération est indisponible car le répertoire n’est pas situé sur une partition NTFS</v:String>
     <v:String x:Key="success_reg_exporter_noty">Fichier de registre enregistré avec succès</v:String>
     <v:String x:Key="error_reg_exporter_noty">Une erreur est survenue lors de l'enregistrement du fichier de registre</v:String>
-    <v:String x:Key="error_git_limit_noty">GitHub has temporarily rate-limited API requests, please try again later</v:String>
-    <v:String x:Key="error_download_noty">Failed to establish a connection with the server</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub a temporairement limité les requêtes API, veuillez réessayer plus tard</v:String>
+    <v:String x:Key="error_download_noty">Impossible d'établir une connexion avec le serveur</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -86,7 +86,7 @@
     <v:String x:Key="rbtn_sys_main">Système</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informations système</v:String>
     <v:String x:Key="rbtn_adds_main">Addons</v:String>
-    <v:String x:Key="rbtn_ts_main">Toolset</v:String>
+    <v:String x:Key="rbtn_ts_main">Boîte à outils</v:String>
     <v:String x:Key="title_settings_main">Paramètres</v:String>
     <v:String x:Key="btgl_noty_main">Afficher les notifications</v:String>
     <v:String x:Key="slider_volume_main">Volume :</v:String>
@@ -521,7 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">Processeur :</v:String>
     <v:String x:Key="title_cores_sysinfo">Cœurs :</v:String>
     <v:String x:Key="title_threads_sysinfo">Threads :</v:String>
-    <v:String x:Key="title_freq_sysinfo">Frequency:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Fréquence :</v:String>
     <v:String x:Key="title_gpu_sysinfo">Carte graphique :</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">Taux de rafraîchissement :</v:String>
     <v:String x:Key="title_ram_sysinfo">Mémoire :</v:String>
@@ -550,11 +550,11 @@
 
     <!--#region Toolset Page -->
     <v:String x:Key="source_ts">Source</v:String>
-    <v:String x:Key="btn_download">Download</v:String>
-    <v:String x:Key="btn_cancel">Сancel</v:String>
-    <v:String x:Key="btn_open_dir">Open folder</v:String>
-    <v:String x:Key="text_ts">Search by name or author</v:String>
-    <v:String x:Key="connecting_ts">Connecting</v:String>
+    <v:String x:Key="btn_download">Télécharger</v:String>
+    <v:String x:Key="btn_cancel">Annuler</v:String>
+    <v:String x:Key="btn_open_dir">Ouvrir le dossier</v:String>
+    <v:String x:Key="text_ts">Rechercher par nom ou auteur</v:String>
+    <v:String x:Key="connecting_ts">Connexion</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

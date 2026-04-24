@@ -73,8 +73,8 @@
     <v:String x:Key="notsupport_ntfs_noty">此操作無法執行，因為目錄未位於 NTFS 分區上</v:String>
     <v:String x:Key="success_reg_exporter_noty">登錄檔已成功儲存</v:String>
     <v:String x:Key="error_reg_exporter_noty">儲存登錄檔時發生錯誤</v:String>
-    <v:String x:Key="error_git_limit_noty">GitHub has temporarily rate-limited API requests, please try again later</v:String>
-    <v:String x:Key="error_download_noty">Failed to establish a connection with the server</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub 已暫時限制 API 請求，請稍後再試</v:String>
+    <v:String x:Key="error_download_noty">無法與伺服器建立連線</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -86,7 +86,7 @@
     <v:String x:Key="rbtn_sys_main">系統</v:String>
     <v:String x:Key="rbtn_sysinfo_main">系統資訊</v:String>
     <v:String x:Key="rbtn_adds_main">附加元件</v:String>
-    <v:String x:Key="rbtn_ts_main">Toolset</v:String>
+    <v:String x:Key="rbtn_ts_main">工具組</v:String>
     <v:String x:Key="title_settings_main">設定</v:String>
     <v:String x:Key="btgl_noty_main">顯示通知</v:String>
     <v:String x:Key="slider_volume_main">音量：</v:String>
@@ -521,7 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">處理器：</v:String>
     <v:String x:Key="title_cores_sysinfo">核心數：</v:String>
     <v:String x:Key="title_threads_sysinfo">執行緒數：</v:String>
-    <v:String x:Key="title_freq_sysinfo">Frequency:</v:String>
+    <v:String x:Key="title_freq_sysinfo">時脈：</v:String>
     <v:String x:Key="title_gpu_sysinfo">顯示卡：</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">螢幕刷新率：</v:String>
     <v:String x:Key="title_ram_sysinfo">記憶體：</v:String>
@@ -549,12 +549,12 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
-    <v:String x:Key="source_ts">Source</v:String>
-    <v:String x:Key="btn_download">Download</v:String>
-    <v:String x:Key="btn_cancel">Сancel</v:String>
-    <v:String x:Key="btn_open_dir">Open folder</v:String>
-    <v:String x:Key="text_ts">Search by name or author</v:String>
-    <v:String x:Key="connecting_ts">Connecting</v:String>
+    <v:String x:Key="source_ts">來源</v:String>
+    <v:String x:Key="btn_download">下載</v:String>
+    <v:String x:Key="btn_cancel">取消</v:String>
+    <v:String x:Key="btn_open_dir">開啟資料夾</v:String>
+    <v:String x:Key="text_ts">依名稱或作者搜尋</v:String>
+    <v:String x:Key="connecting_ts">連線中</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

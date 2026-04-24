@@ -521,7 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">Processzor:</v:String>
     <v:String x:Key="title_cores_sysinfo">Magok:</v:String>
     <v:String x:Key="title_threads_sysinfo">Szálak:</v:String>
-    <v:String x:Key="title_freq_sysinfo">Frequency:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Frekvencia:</v:String>
     <v:String x:Key="title_gpu_sysinfo">Grafika:</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">Refresh Rate:</v:String>
     <v:String x:Key="title_ram_sysinfo">Memória:</v:String>

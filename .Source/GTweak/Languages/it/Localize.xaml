@@ -73,8 +73,8 @@
     <v:String x:Key="notsupport_ntfs_noty">Operazione non disponibile perché la directory non si trova su una partizione NTFS</v:String>
     <v:String x:Key="success_reg_exporter_noty">File di registro salvato con successo</v:String>
     <v:String x:Key="error_reg_exporter_noty">Si è verificato un errore durante il salvataggio del file di registro</v:String>
-    <v:String x:Key="error_git_limit_noty">GitHub has temporarily rate-limited API requests, please try again later</v:String>
-    <v:String x:Key="error_download_noty">Failed to establish a connection with the server</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub ha temporaneamente limitato le richieste API, riprova più tardi</v:String>
+    <v:String x:Key="error_download_noty">Impossibile stabilire una connessione con il server</v:String>
     <!--#endregion-->
 
     <!--#region Main Window -->
@@ -86,7 +86,7 @@
     <v:String x:Key="rbtn_sys_main">Sistema</v:String>
     <v:String x:Key="rbtn_sysinfo_main">Informazioni di sistema</v:String>
     <v:String x:Key="rbtn_adds_main">Estensioni</v:String>
-    <v:String x:Key="rbtn_ts_main">Toolset</v:String>
+    <v:String x:Key="rbtn_ts_main">Set di strumenti</v:String>
     <v:String x:Key="title_settings_main">Impostazioni</v:String>
     <v:String x:Key="btgl_noty_main">Mostra notifiche</v:String>
     <v:String x:Key="slider_volume_main">Volume:</v:String>
@@ -521,7 +521,7 @@
     <v:String x:Key="title_cpu_sysinfo">Processore:</v:String>
     <v:String x:Key="title_cores_sysinfo">Core:</v:String>
     <v:String x:Key="title_threads_sysinfo">Thread:</v:String>
-    <v:String x:Key="title_freq_sysinfo">Frequency:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Frequenza:</v:String>
     <v:String x:Key="title_gpu_sysinfo">Grafica:</v:String>
     <v:String x:Key="title_refreshrate_sysinfo">Frequenza di aggiornamento:</v:String>
     <v:String x:Key="title_ram_sysinfo">Memoria:</v:String>
@@ -549,12 +549,12 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
-    <v:String x:Key="source_ts">Source</v:String>
-    <v:String x:Key="btn_download">Download</v:String>
-    <v:String x:Key="btn_cancel">Сancel</v:String>
-    <v:String x:Key="btn_open_dir">Open folder</v:String>
-    <v:String x:Key="text_ts">Search by name or author</v:String>
-    <v:String x:Key="connecting_ts">Connecting</v:String>
+    <v:String x:Key="source_ts">Fonte</v:String>
+    <v:String x:Key="btn_download">Scarica</v:String>
+    <v:String x:Key="btn_cancel">Annulla</v:String>
+    <v:String x:Key="btn_open_dir">Apri cartella</v:String>
+    <v:String x:Key="text_ts">Cerca per nome o autore</v:String>
+    <v:String x:Key="connecting_ts">Connessione</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>
