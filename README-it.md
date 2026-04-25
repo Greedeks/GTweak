@@ -91,6 +91,10 @@
   <summary> Estensioni </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Addons.png"/>
 </details>
+<details>
+  <summary> Set di strumenti </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Toolset.png"/>
+</details>
 
 <h2> Requisiti di Sistema</h2>
 

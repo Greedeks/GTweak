@@ -89,6 +89,10 @@
   <summary> 부가 기능 </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Addons.png"/>
 </details>
+<details>
+  <summary> 도구 모음 </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/ko/Toolset.png"/>
+</details>
 
 <h2> 시스템 요구 사항</h2>
 

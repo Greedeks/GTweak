@@ -91,6 +91,10 @@
   <summary> Addons </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/Addons.png"/>
 </details>
+<details>
+  <summary> Boîte à outils </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/fr/Toolset.png"/>
+</details>
 
 <h2> Configuration requise </h2>
 

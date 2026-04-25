@@ -89,6 +89,10 @@
   <summary> Розширення </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Addons.png"/>
 </details>
+<details>
+  <summary> Набір інструментів </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/uk/Toolset.png"/>
+</details>
 
 <h2> Системні вимоги</h2>
 

@@ -90,7 +90,11 @@
 <details>
   <summary> Complementos </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pt-br/Addons.png"/>
-</details
+</details>
+<details>
+  <summary> Conjunto de ferramentas </summary>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/pt-br/Toolset.png"/>
+</details>
 
 <h2> Requisitos do Sistema </h2>
 
