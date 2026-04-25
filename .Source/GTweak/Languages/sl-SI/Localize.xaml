@@ -95,7 +95,7 @@
     <v:String x:Key="cmbox_lang_main">Jezik vmesnika:</v:String>
     <v:String x:Key="btn_import">Uvozi</v:String>
     <v:String x:Key="btn_export">Izvozi</v:String>
-    <v:String x:Key="btn_selfremove">Samodejno brisanje</v:String>
+    <v:String x:Key="btn_selfremove">Deinstalacija</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->

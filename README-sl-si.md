@@ -65,35 +65,35 @@
 <h2> Posnetki zaslona 📷</h2>
 <details>
   <summary> Orodja </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Utils.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/Utils.png"/>
 </details>
 <details>
   <summary> Zaupnost </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/Confidentiality.png"/>
 </details>
 <details>
   <summary> Vmesnik </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/Interface.png"/>
 </details>
 <details>
   <summary> Aplikacije </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/Applications.png"/>
 </details>
 <details>
   <summary> Storitve </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/Services.png"/>
 </details>
 <details>
   <summary> Sistem </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/System.png"/>
 </details>
 <details>
   <summary> Dodatki </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Addons.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/Addons.png"/>
 </details>
 <details>
   <summary> Nabori orodij </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Toolset.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/sl-si/Toolset.png"/>
 </details>
 
 <h2> Sistemske zahteve</h2>
