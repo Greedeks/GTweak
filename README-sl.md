@@ -15,7 +15,7 @@
 
 <!-- language --> 
 <div align="center">
-  <h1>🌍 Available Languages:</h1>
+  <h1>🌍 Razpoložljivi jeziki:</h1>
 
 [![EN](https://img.icons8.com/color/50/usa-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md) 
 [![FR](https://img.icons8.com/color/50/france-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md) 
@@ -24,8 +24,8 @@
 [![KO](https://img.icons8.com/color/50/south-korea-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md) 
 [![PL](https://img.icons8.com/color/50/poland-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md) 
 [![PT-BR](https://img.icons8.com/color/50/brazil-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md) 
-[![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md) 
-[![SI](https://img.icons8.com/color/50/slovenia-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-sl.md)
+[![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md)
+[![SI](https://img.icons8.com/color/50/slovenia-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-sl.md) 
 [![UK](https://img.icons8.com/color/50/ukraine-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md) 
 [![ZH-TW](https://img.icons8.com/color/50/china-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md)
 
@@ -34,97 +34,97 @@
 </div>
 
 ---
-<h2> A wide range of functions, including: 🔩</h2>
+<h2> Širok nabor funkcij, vključno s/z: 🔩</h2>
 
 ```java
-- Activating Windows using HWID and KMS methods;
-- Disabling Windows Defender, SmartScreen, Antimalware, VBS, and UAC;
-- Disabling/pausing Windows updates and removing temporary update files;
-- Disabling unused and unnecessary system services;
-- Disabling keyloggers and telemetry for Windows, NVIDIA, and Intel;
-- Disabling services and events related to the collection of user data;
-- Disabling data collection tasks in the Windows Task Scheduler;
-- Disabling unnecessary network protocols: Teredo, ISATAP, and IPv6;
-- Disabling built-in Windows diagnostic tools and disk defragmentation;
-- Disabling personalized ads and system banners in Windows, including SCOOBE;
-- Disabling system notifications, recommendations, and tips in Windows;
-- Blocking Microsoft's shadow domains that collect data via hosts and firewall;
-- Uninstalling OneDrive and Microsoft Edge along with clearing all associated data and WebView2;
-- Removing standard pre-installed UWP apps in Windows 10/11;
-- Removing and disabling AI assistants: Cortana, Copilot, and Recall;
-- Customizing the interface: changing themes, window settings, taskbar layout, and icons;
-- Configuring keyboard and mouse settings: disabling key filtering, sticky keys, and pointer acceleration;
-- Adjusting Windows settings and applying the ultimate performance power plan;
-- Adjusting power settings for Realtek High Definition Audio drivers to fix sound delay;
-- Viewing the hardware configuration and monitoring system components;
-- Compressing and decompressing files and directories using NTFS to save space;
-- Clearing RAM, temporary files, icon caches, and securely deleting the Windows.old folder;
-- Executing custom scripts (.ps1, .cmd, .bat, .reg) with TrustedInstaller privileges.
+- Aktiviranje sistema Windows z metodami HWID in KMS;
+- Onemogočanje programov Windows Defender, SmartScreen, Antimalware, VBS in UAC;
+- Onemogočanje/začasna ustavitev posodobitev sistema Windows in odstranjevanje začasnih datotek s posodobitvami;
+- Onemogočanje neuporabljenih in nepotrebnih sistemskih storitev;
+- Onemogočanje keyloggerjev in telemetrije za Windows, NVIDIA in Intel;
+- Onemogočanje storitev in dogodkov, povezanih z zbiranjem uporabniških podatkov;
+- Onemogočanje opravil zbiranja podatkov v razporejevalniku opravil sistema Windows;
+- Onemogočanje nepotrebnih omrežnih protokolov: Teredo, ISATAP in IPv6;
+- Onemogočanje vgrajenih diagnostičnih orodij sistema Windows in defragmentacije diska;
+- Onemogočanje prilagojenih oglasov in sistemskih pasic v sistemu Windows, vključno s SCOOBE;
+- Onemogočanje sistemskih obvestil, priporočil in nasvetov v sistemu Windows;
+- Blokiranje Microsoftovih senčnih domen, ki zbirajo podatke prek gostiteljev in požarnega zidu;
+- Odstranjevanje programov OneDrive in Microsoft Edge skupaj z brisanjem vseh povezanih podatkov in WebView2;
+- Odstranjevanje standardnih prednameščenih aplikacij UWP v sistemu Windows 10/11;
+- Odstranjevanje in onemogočanje pomočnikov umetne inteligence: Cortana, Copilot in Recall;
+- Prilagajanje vmesnika: spreminjanje tem, nastavitev oken, postavitve opravilne vrstice in ikon;
+- Konfiguriranje nastavitev tipkovnice in miške: onemogočanje filtriranja tipk, lepljivih tipk in pospeševanja kazalca;
+- Prilagajanje nastavitev sistema Windows in uporaba načrta porabe energije za najvišjo zmogljivost;
+- Prilagajanje nastavitev porabe energije za gonilnike Realtek High Definition Audio za odpravo zakasnitve zvoka;
+- Ogled konfiguracije strojne opreme in spremljanje sistemskih komponent;
+- Stiskanje in razširjanje datotek in imenikov z uporabo NTFS za prihranek prostora;
+- Brisanje RAM-a, začasnih datotek, predpomnilnikov ikon in varno brisanje mape Windows.old;
+- Izvajanje skriptov po meri (.ps1, .cmd, .bat, .reg) s privilegiji TrustedInstaller.
 ```
 
-<h2> Screenshots 📷</h2>
+<h2> Posnetki zaslona 📷</h2>
 <details>
-  <summary> Utilities </summary>
+  <summary> Orodja </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Utils.png"/>
 </details>
 <details>
-  <summary> Confidentiality </summary>
+  <summary> Zaupnost </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
 </details>
 <details>
-  <summary> Interface </summary>
+  <summary> Vmesnik </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Interface.png"/>
 </details>
 <details>
-  <summary> Applications </summary>
+  <summary> Aplikacije </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Applications.png"/>
 </details>
 <details>
-  <summary> Services </summary>
+  <summary> Storitve </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Services.png"/>
 </details>
 <details>
-  <summary> System </summary>
+  <summary> Sistem </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
 </details>
 <details>
-  <summary> Addons </summary>
+  <summary> Dodatki </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Addons.png"/>
 </details>
 <details>
-  <summary> Toolset </summary>
+  <summary> Nabori orodij </summary>
   <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Toolset.png"/>
 </details>
 
-<h2> System Requirements</h2>
+<h2> Sistemske zahteve</h2>
 
-> ⚠ The utility is designed exclusively for official Windows images downloaded from trusted sources. If you have installed a trimmed/modified version of Windows, you are solely responsible for its functionality.
+> ⚠ Pripomoček je zasnovan izključno za uradne slike sistema Windows, prenesene iz zaupanja vrednih virov. Če ste namestili obrezano/spremenjeno različico sistema Windows, ste izključno sami odgovorni za njegovo delovanje.
 
 ```c++
-Windows support: since 10 (build 18362.116)
-Installed platform: .NET Framework 4.8
+Podpora za Windows: od različice 10 (graditev 18362.116)
+Nameščena platforma: .NET Framework 4.8
 ```
 </br>
 
 > [!WARNING]  
-> Before using the software, disable your antivirus. If you are using Windows Defender, add the program to its exclusions.
+> Pred uporabo programske opreme onemogočite protivirusni program. Če uporabljate Windows Defender, dodajte program med izključitve.
 </br>
 
-## NuGet Packages
+## Paketi NuGet
 - [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
 - [Costura](https://www.nuget.org/packages/Costura.Fody)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
 - [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
-## Reference
+## Referenca
 - FirewallAPI
 
 </br>
 
 ## Translation ❤️ 
-<p>
-  <b>Special Thanks</b> o these amazing people for their translation contributions
+<p>  
+  <b>Posebna zahvala</b> tem neverjetnim ljudem za njihove prispevke k prevajanju
 </p>
 
 <div align="left">
@@ -135,14 +135,14 @@ Installed platform: .NET Framework 4.8
 
 </br>
 
-### How to Translate a Program 📝
+### Kako prevesti program 📝
 
-**I. Submit a Pull Request**
-- Fork the repository [here](https://github.com/Greedeks/GTweak/fork).
-- Download the [English base file (Localize.xaml)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml) **or** browse and copy from [existing translations](https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages) in other languages.
-- Translate the file and save it in a folder named after your [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) (e.g., `ko` for Korean, `fr` for French).
-</br>For regional variants: language-region (e.g., `pt-br` for Brazilian Portuguese, `zh-cn` for Simplified Chinese).
-- Place the folder in:
+**I. Oddajte zahtevo za združitev sprememb**
+- Ustvarite razvejitev repozitorija [tukaj](https://github.com/Greedeks/GTweak/fork).
+- Prenesite [osnovno datoteko za angleščino (Localize.xaml)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml) **ali** prebrskajte in kopirajte iz [obstoječih prevodov](https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages) v drugih jezikih.
+- Prevedite datoteko in jo shranite v mapo, poimenovano po vaši [kodi jezika](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) (npr. `ko` za korejščino, `fr` za francoščino).
+</br>Za regionalne različice: jezikovna_regija (npr. `pt-br` za brazilsko portugalščino, `zh-cn` za poenostavljeno kitajščino).
+- Ustvarite mapo v:
 <div>
     <pre>
 📂 .Source
@@ -154,22 +154,22 @@ Installed platform: .NET Framework 4.8
     </pre>
 </div>
 
-- Add your language’s name (as written in your native language) to [LanguageCatalog](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml).  
-  ⚠️ Make sure to follow the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11) inside the file.
-- Submit a **Pull Request** with your changes. </br></br>
+- Dodajte ime svojega jezika (kot je zapisano v vašem maternem jeziku) v [LanguageCatalog](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml).  
+  ⚠️ Upoštevajte [OPOMBO](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11) v datoteki.
+- Oddajte **zahtevo za združitev sprememb** s svojimi spremembami. </br></br>
 
-**II. Request via Issue**
-- If you’re unfamiliar with Git, open a [Feature Request issue](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
-  - Specify your target [language code](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11).
-  - Provide the name of your language written in your native language according to the [NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11).
-  - Attach your translated `Localize.xaml` file.
+**II. Zahteva preko težav GitHub**
+- Če niste seznanjeni z Gitom, odprite [zahtevo za funkcijo](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
+  - Navedite ciljno [kodo jezika](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11).
+  - Navedite ime svojega jezika, zapisano v vašem maternem jeziku, v skladu z [OPOMBO](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11).
+  - Priložite prevedeno datoteko `Localize.xaml`.
 </br>
 
 > [!NOTE]  
-> The current translation may be incomplete, as new features might have been added that haven't been translated yet. In such cases, those parts of the program will appear in English by default.
+> Trenutni prevod je morda nepopoln, saj so bile morda dodane nove funkcije, ki še niso prevedene. V takih primerih bodo ti deli programa kot privzeto prikazani v angleščini.
 </br>
 
-## Contact
+## Kontakt
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
 [![github](https://img.shields.io/badge/Github-gray?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Greedeks)
