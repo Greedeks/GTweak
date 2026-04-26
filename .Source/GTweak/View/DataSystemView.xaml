@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:b="clr-namespace:GTweak.Utilities.Behaviors"
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
              xmlns:uc="clr-namespace:GTweak.Assets.UserControls"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -145,7 +146,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ScrollViewer Margin="0,0,0,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ScrollViewer b:ScrollFadeBehavior.EnableFade="True" Margin="0,0,0,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid Margin="20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
