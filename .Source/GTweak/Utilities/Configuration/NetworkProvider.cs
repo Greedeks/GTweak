@@ -35,11 +35,17 @@ namespace GTweak.Utilities.Configuration
             {
                 if (!string.IsNullOrWhiteSpace(response))
                 {
-                    JObject jObject = JObject.Parse(response);
-                    string ip = jObject["ip"]?.ToString() ?? jObject["ipAddress"]?.ToString() ?? jObject["query"]?.ToString() ?? string.Empty;
-                    string country = jObject["country_code"]?.ToString() ?? jObject["countryCode"]?.ToString() ?? string.Empty;
-                    return new IPMetadata { Ip = ip, Country = country };
+                    response = Regex.Match(response, @"\{.*\}", RegexOptions.Singleline).Value;
+                    try
+                    {
+                        JObject jObject = JObject.Parse(response);
+                        string ip = jObject["ip"]?.ToString() ?? jObject["ipAddress"]?.ToString() ?? jObject["query"]?.ToString() ?? string.Empty;
+                        string country = jObject["country_code"]?.ToString() ?? jObject["countryCode"]?.ToString() ?? jObject["addr"]?.ToString() ?? string.Empty;
+                        return new IPMetadata { Ip = ip, Country = country.Trim() };
+                    }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                 }
+
                 return new IPMetadata { Ip = string.Empty, Country = string.Empty };
             }
         }

@@ -36,6 +36,8 @@ namespace GTweak.Utilities.Controls
                 "https://ipapi.co/json/",
                 "https://reallyfreegeoip.org/json/",
                 "https://get.geojs.io/v1/ip/geo.json",
+                "https://api.ip.sb/geoip",
+                "https://whois.pconline.com.cn/ipJson.jsp?json=true",
                 "http://ip-api.com/json/"
             });
 
