@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props" Condition="Exists('..\..\packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" />
+  <Import Project="..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.props" Condition="Exists('..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -66,8 +66,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Costura, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Costura.Fody.6.0.0\lib\netstandard2.0\Costura.dll</HintPath>
+    <Reference Include="Costura, Version=6.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Costura.Fody.6.1.0\lib\netstandard2.0\Costura.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.12.1.0, Culture=neutral, PublicKeyToken=2806574b39b74d4b, processorArchitecture=MSIL">
       <HintPath>..\..\packages\TaskScheduler.2.12.2\lib\net48\Microsoft.Win32.TaskScheduler.dll</HintPath>
@@ -114,11 +114,37 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="Wpf.Ui, Version=4.2.0.0, Culture=neutral, PublicKeyToken=11f9f5cc97b3ffd6, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WPF-UI.4.2.0\lib\net472\Wpf.Ui.dll</HintPath>
+      <HintPath>..\..\packages\WPF-UI.4.2.1\lib\net472\Wpf.Ui.dll</HintPath>
     </Reference>
     <Reference Include="Wpf.Ui.Abstractions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=11f9f5cc97b3ffd6, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WPF-UI.Abstractions.4.2.0\lib\net462\Wpf.Ui.Abstractions.dll</HintPath>
+      <HintPath>..\..\packages\WPF-UI.Abstractions.4.2.1\lib\net472\Wpf.Ui.Abstractions.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="Resources\AppsCatalog.xml" />
+    <None Include="Resources\*.gz" />
+    <None Include="Resources\Blocklist.txt" />
+    <None Include="Resources\Tickets.xml" />
+    <None Include="Resources\Sound.wav" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GTweak.ico" />
+    <Resource Include="Assets\Images\**\*.png" />
+    <Resource Include="Assets\Fonts\*.ttf" />
+    <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Languages\**\*.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -289,58 +315,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Core\DataTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\en\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\fr\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\hu\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\it\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\ko\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\LanguageCatalog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\pl\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\pt-BR\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\ru\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\sl-SI\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\uk\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\zh-CN\Localize.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Languages\zh-TW\Localize.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -523,18 +497,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include=".editorconfig" />
-    <None Include="Resources\Blank.gz" />
-    <None Include="Resources\DisablingWD.gz" />
-    <None Include="Resources\NSudoLC.gz" />
-    <None Include="Resources\UltPower.gz" />
-    <None Include="Resources\Blocklist.txt" />
-    <None Include="app.manifest" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -554,99 +516,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AppsCatalog.xml" />
-    <Resource Include="GTweak.ico" />
-    <Resource Include="Assets\Fonts\Jura-Medium.ttf" />
-    <Resource Include="Assets\Fonts\Play-Regular.ttf" />
-    <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
-    <Resource Include="Assets\Images\AddonsFiles\BatFile.png" />
-    <Resource Include="Assets\Images\AddonsFiles\CmdFile.png" />
-    <Resource Include="Assets\Images\AddonsFiles\PowershellFile.png" />
-    <Resource Include="Assets\Images\AddonsFiles\RegistryFile.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\3DBuilder.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Alarms.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\BingFinance.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\BingNews.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\BingSearch.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\BingSports.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\BingWeather.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Calculator.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Camera.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Clipchamp.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Copilot.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Cortana.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\DevHome.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Disney.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\DolbyAccess.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Edge.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Facebook.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\FeedbackHub.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\GetHelp.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Hulu.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\iHeartRadio.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Instagram.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Linkedin.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Mail.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Maps.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Messaging.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Microsoft3DViewer.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftFamilySafety.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftOfficeHub.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftPowerAutomate.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftSolitaireCollection.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftStickyNotes.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftStore.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftSway.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MicrosoftTeams.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MixedReality.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\MobilePlanOneConnect.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Music.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Netflix.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Notepad.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\OneDrive.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\OneNote.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Outlook.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Paint.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Paint3D.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Pandora.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\People.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Phone.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Photos.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Picsart.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Plex.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\PrimeVideo.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\QuickAssist.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\SandTimer.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\ScreenSketch.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Shazam.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\SkypeApp.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\SoundRecorder.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Spotify.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Terminal.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\TikTok.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Todos.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\TuneInRadio.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\TwitterX.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Viber.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Video.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Wallet.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\WebMediaExtensions.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\WhatsApp.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\WhiteBoard.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Widgets.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\Xbox.png" />
-    <Resource Include="Assets\Images\PreinstalledApps\YandexMusic.png" />
-    <Resource Include="Assets\Images\DownloadApps\Amd.png" />
-    <Resource Include="Assets\Images\DownloadApps\Autoruns.png" />
-    <Resource Include="Assets\Images\DownloadApps\DeviceTweaker.png" />
-    <Resource Include="Assets\Images\DownloadApps\FirstEverTech.png" />
-    <Resource Include="Assets\Images\DownloadApps\Nvidia.png" />
-    <Resource Include="Assets\Images\DownloadApps\NvidiaPI.png" />
-    <Resource Include="Assets\Images\DownloadApps\Occt.png" />
-    <Resource Include="Assets\Images\DownloadApps\DiskInfo.png" />
-    <Resource Include="Assets\Images\DownloadApps\DiskMark.png" />
-    <Resource Include="Assets\Images\DownloadApps\CPUz.png" />
-    <Resource Include="Assets\Images\DownloadApps\Rufus.png" />
     <Content Include="Assets\Images\ImageResources.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ImageResources.xaml</LastGenOutput>
@@ -655,8 +524,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\Tickets.xml" />
-    <None Include="Resources\Sound.wav" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -673,6 +540,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
-  <Import Project="..\..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('..\..\packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />
   <Import Project="..\..\packages\Fody.6.9.3\build\Fody.targets" Condition="Exists('..\..\packages\Fody.6.9.3\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.targets" Condition="Exists('..\..\packages\Costura.Fody.6.1.0\build\Costura.Fody.targets')" />
 </Project>

@@ -70,10 +70,11 @@ namespace GTweak.Core.ViewModel
                     case "onedrive":
                         item.Installed = UninstallingPakages.IsOneDriveInstalled;
                         return;
-
                     case "edge":
                         item.Installed = UninstallingPakages.IsEdgeInstalled;
                         return;
+                    default:
+                        break;
                 }
 
                 IReadOnlyList<string> scripts = val.Scripts;

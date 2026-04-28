@@ -137,6 +137,8 @@ namespace GTweak.Utilities.Helpers
                         return defaultValue;
                     case T t:
                         return t;
+                    default:
+                        break;
                 }
 
                 Type targetType = typeof(T);
