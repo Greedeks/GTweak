@@ -141,4 +141,5 @@ Plateforme installée: .NET Framework 4.8
 
 [![github](https://img.shields.io/badge/Github-gray?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/Greedeks)
 [![telegram](https://img.shields.io/badge/Telegram-1DA1F2?style=for-the-badge\&logo=telegram\&logoColor=white)](https://t.me/Greedeks)
+[![X](https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/Greed3ks)
 [![steam](https://img.shields.io/badge/STEAM-042430?style=for-the-badge\&logo=steam\&logoColor=white)](https://steamcommunity.com/id/greedeks/)
