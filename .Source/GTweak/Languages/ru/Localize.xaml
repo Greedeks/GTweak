@@ -311,6 +311,7 @@
     <v:String x:Key="ScreenSketch_pkg">Ножницы</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
     <v:String x:Key="GetHelp_pkg">Техническая поддержка</v:String>
+    <v:String x:Key="GetStarted_pkg">Начало работы</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Записки</v:String>
     <v:String x:Key="Maps_pkg">Карты Windows</v:String>
     <v:String x:Key="Camera_pkg">Камера Windows</v:String>

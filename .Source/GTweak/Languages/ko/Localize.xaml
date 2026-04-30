@@ -311,6 +311,7 @@
     <v:String x:Key="ScreenSketch_pkg">화면 스케치</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
     <v:String x:Key="GetHelp_pkg">도움말 얻기</v:String>
+    <v:String x:Key="GetStarted_pkg">시작하기</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft 스티커 메모</v:String>
     <v:String x:Key="Maps_pkg">Windows 지도</v:String>
     <v:String x:Key="Camera_pkg">Windows 카메라</v:String>

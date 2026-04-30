@@ -311,6 +311,7 @@
     <v:String x:Key="ScreenSketch_pkg">Képernyő rögzítő</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
     <v:String x:Key="GetHelp_pkg">Segítség kérése</v:String>
+    <v:String x:Key="GetStarted_pkg">Segítség az induláskor</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Ragadós Jegyzetek</v:String>
     <v:String x:Key="Maps_pkg">Windows Térképek</v:String>
     <v:String x:Key="Camera_pkg">Windows Kamera</v:String>

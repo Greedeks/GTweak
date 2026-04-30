@@ -42,6 +42,7 @@
     <BitmapImage x:Key="Img_Facebook" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Facebook.png"/>
     <BitmapImage x:Key="Img_FeedbackHub" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/FeedbackHub.png"/>
     <BitmapImage x:Key="Img_GetHelp" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/GetHelp.png"/>
+    <BitmapImage x:Key="Img_GetStarted" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/GetStarted.png"/>
     <BitmapImage x:Key="Img_Hulu" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Hulu.png"/>
     <BitmapImage x:Key="Img_iHeartRadio" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/iHeartRadio.png"/>
     <BitmapImage x:Key="Img_Instagram" UriSource="/GTweak;component/Assets/Images/PreinstalledApps/Instagram.png"/>

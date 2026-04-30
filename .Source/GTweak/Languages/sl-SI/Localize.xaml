@@ -311,6 +311,7 @@
     <v:String x:Key="ScreenSketch_pkg">Orodje za izrezovanje</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
     <v:String x:Key="GetHelp_pkg">Pridobite pomoč</v:String>
+    <v:String x:Key="GetStarted_pkg">Get Started</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Lepilni listki</v:String>
     <v:String x:Key="Maps_pkg">Windows Zemljevidi</v:String>
     <v:String x:Key="Camera_pkg">Windows Kamera</v:String>

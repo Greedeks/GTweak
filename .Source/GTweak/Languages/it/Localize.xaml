@@ -311,6 +311,7 @@
     <v:String x:Key="ScreenSketch_pkg">Strumento di cattura</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
     <v:String x:Key="GetHelp_pkg">Ottieni supporto</v:String>
+    <v:String x:Key="GetStarted_pkg">Introduzione</v:String>
     <v:String x:Key="MicrosoftStickyNotes_pkg">Note adesive Microsoft</v:String>
     <v:String x:Key="Maps_pkg">Mappe di Windows</v:String>
     <v:String x:Key="Camera_pkg">Fotocamera di Windows</v:String>
