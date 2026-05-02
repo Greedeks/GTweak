@@ -12,8 +12,8 @@
             <TextBlock Text="{Binding ElementName=Root, Path=Text}" VerticalAlignment="Center" FontSize="14px" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Highlighted}" Margin="0,0,10,0"/>
         </ToggleButton>
 
-        <Popup x:Name="DropdownPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Opened="Popup_Opened" Closed="Popup_Closed" VerticalOffset="2">
-            <Border x:Name="PopupBorder" Background="{StaticResource Brush_Background_ComboBox}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="10">
+        <Popup x:Name="DropdownPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Opened="Popup_Opened" Closed="Popup_Closed" VerticalOffset="2" PopupAnimation="Fade">
+            <Border x:Name="PopupBorder" Background="{StaticResource Brush_Background_ComboBox}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="10" RenderOptions.EdgeMode="Aliased">
                 <Border.CacheMode>
                     <BitmapCache RenderAtScale="2" EnableClearType="True"/>
                 </Border.CacheMode>

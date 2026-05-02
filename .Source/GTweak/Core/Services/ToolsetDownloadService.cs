@@ -159,6 +159,59 @@ namespace GTweak.Core.Services
                 throw new HttpRequestException();
             }
 
+            if (model.Group.Equals("techpowerup", StringComparison.OrdinalIgnoreCase))
+            {
+                Match idMatch = Regex.Match(await _httpClient.GetStringAsync(model.DownloadPath), @"name=""id""\s+value=""(?<id>\d+)""", RegexOptions.IgnoreCase);
+
+                if (!idMatch.Success)
+                {
+                    throw new HttpRequestException();
+                }
+
+                string fileId = idMatch.Groups["id"].Value;
+
+                FormUrlEncodedContent firstStepPayload = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("id", fileId) });
+
+                using HttpResponseMessage firstResponse = await _httpClient.PostAsync(model.DownloadPath, firstStepPayload);
+                string serverSelectionHtml = await firstResponse.Content.ReadAsStringAsync();
+
+                MatchCollection serverMatches = Regex.Matches(serverSelectionHtml, @"(?is)<button[^>]+?name=""server_id""[^>]+?value=""(?<sid>\d+)""[^>]*>(?<content>.*?)</button>");
+
+                string closestId = null, lowLoadId = null, firstId = null;
+
+                foreach (Match m in serverMatches)
+                {
+                    string sid = m.Groups["sid"].Value;
+                    string content = m.Groups["content"].Value;
+
+                    firstId ??= sid;
+
+                    if (content.IndexOf("closest", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        closestId = sid;
+                        break;
+                    }
+
+                    if (lowLoadId == null && content.IndexOf("server-load low", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        lowLoadId = sid;
+                    }
+                }
+
+                FormUrlEncodedContent finalPayload = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("id", fileId), new KeyValuePair<string, string>("server_id", closestId ?? lowLoadId ?? firstId ?? throw new HttpRequestException()) });
+
+                using HttpRequestMessage finalRequest = new HttpRequestMessage(HttpMethod.Post, model.DownloadPath)
+                {
+                    Content = finalPayload
+                };
+
+                finalRequest.Headers.Referrer = new Uri(model.DownloadPath);
+
+                using HttpResponseMessage finalResponse = await _httpClient.SendAsync(finalRequest, HttpCompletionOption.ResponseHeadersRead);
+
+                return finalResponse.RequestMessage.RequestUri.ToString();
+            }
+
             throw new HttpRequestException();
         }
 

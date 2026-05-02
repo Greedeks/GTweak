@@ -88,6 +88,17 @@
     </App>
 
     <App>
+        <Icon>Img_SystemInfo</Icon>
+        <Name>SystemInformer</Name>
+        <Group>github</Group>
+        <Author>Winsider Seminars &amp; Solutions, Inc</Author>
+        <AuthorIcon>https://github.com/winsiderss.png</AuthorIcon>
+        <Source>https://github.com/winsiderss/systeminformer</Source>
+        <DownloadPath>winsiderss/systeminformer</DownloadPath>
+        <FilePattern><![CDATA[(?i)systeminformer.*bin.*\.zip]]></FilePattern>
+    </App>
+    
+    <App>
         <Icon>Img_CPUz</Icon>
         <Name>CPU-Z</Name>
         <Group>sourceforge</Group>
@@ -95,6 +106,16 @@
         <AuthorIcon>cpuid.com</AuthorIcon>
         <Source>https://sourceforge.net/projects/cpu-z/</Source>
         <DownloadPath>https://sourceforge.net/projects/cpu-z/files/latest/download</DownloadPath>
+    </App>
+
+    <App>
+        <Icon>Img_GPUz</Icon>
+        <Name>GPU-Z</Name>
+        <Group>techpowerup</Group>
+        <Author>TechPowerUp</Author>
+        <AuthorIcon>techpowerup.com</AuthorIcon>
+        <Source>https://www.techpowerup.com/gpuz/</Source>
+        <DownloadPath>https://www.techpowerup.com/download/techpowerup-gpu-z/</DownloadPath>
     </App>
     
     <App>

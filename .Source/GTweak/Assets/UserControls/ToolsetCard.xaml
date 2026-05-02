@@ -156,18 +156,37 @@
 
                         <Grid Grid.Column="0">
 
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-2,0,0" FontSize="13px">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0" FontSize="13px">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Progress,ElementName=root}" Value="0">
+                                            <DataTrigger Binding="{Binding Progress, ElementName=root}" Value="0">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-                                <Run Text="{DynamicResource connecting_ts}"/><Run Text="..."/>
+                                <Run Text="{DynamicResource connecting_ts}" /><InlineUIContainer>
+                                    <Border Width="15">
+                                        <TextBlock x:Name="DotText" Text="" Style="{StaticResource TextDefault}" FontSize="13px">
+                                            <TextBlock.Triggers>
+                                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                                    <BeginStoryboard>
+                                                        <Storyboard Timeline.DesiredFrameRate="60" RepeatBehavior="Forever" Duration="0:0:1">
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DotText" Storyboard.TargetProperty="Text">
+                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0"   Value="" />
+                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="." />
+                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value=".." />
+                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="..." />
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                            </TextBlock.Triggers>
+                                        </TextBlock>
+                                    </Border>
+                                </InlineUIContainer>
                             </TextBlock>
 
                             <Grid>
