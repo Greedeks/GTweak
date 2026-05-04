@@ -53,12 +53,13 @@ namespace GTweak.Core.ViewModel.Components
 
         public async Task Start()
         {
+            _cts = new CancellationTokenSource();
             IsDownloading = true;
             Progress = 0;
 
             try
             {
-                string finalUrl = await ToolsetDownloadService.GetResolvedDownloadUrl(_model);
+                string finalUrl = await ToolsetDownloadService.GetResolvedDownloadUrl(_model, _cts.Token);
 
                 if (string.IsNullOrEmpty(finalUrl))
                 {
@@ -66,7 +67,6 @@ namespace GTweak.Core.ViewModel.Components
                     return;
                 }
 
-                _cts = new CancellationTokenSource();
                 string destinationFolder = SettingsEngine.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                 string destinationPath = Path.Combine(destinationFolder, GetFileNameFromUrl(finalUrl));
 
@@ -79,6 +79,11 @@ namespace GTweak.Core.ViewModel.Components
             }
             catch (Exception ex)
             {
+                if (ex is OperationCanceledException || ex is TaskCanceledException)
+                {
+                    return;
+                }
+
                 await Task.Delay(500);
 
                 switch (ex)
@@ -88,8 +93,6 @@ namespace GTweak.Core.ViewModel.Components
                         break;
                     case HttpRequestException _:
                         NotificationManager.Show("warn", "error_download_noty").Perform();
-                        break;
-                    case OperationCanceledException _:
                         break;
                     default:
                         ErrorLogging.LogDebug(ex);

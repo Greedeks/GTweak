@@ -167,9 +167,9 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-                                <Run Text="{DynamicResource connecting_ts}" /><InlineUIContainer>
-                                    <Border Width="15">
-                                        <TextBlock x:Name="DotText" Text="" Style="{StaticResource TextDefault}" FontSize="13px">
+                                <Run Text="{DynamicResource connecting_ts}" /><InlineUIContainer BaselineAlignment="Baseline">
+                                   <Border Width="15" Margin="0,0,0,-2" Background="Transparent" VerticalAlignment="Bottom">
+                                        <TextBlock x:Name="DotText" Style="{StaticResource TextDefault}" FontSize="13px">
                                             <TextBlock.Triggers>
                                                 <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                                     <BeginStoryboard>
