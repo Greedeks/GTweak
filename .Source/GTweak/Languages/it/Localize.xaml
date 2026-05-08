@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">Attendere il completamento del processo seguito dal riavvio del sistema</v:String>
     <v:String x:Key="info_wd_noty">Ci vorrà un po' di tempo, attendi</v:String>
     <v:String x:Key="warn_firewall_noty">Il tuo firewall è disattivato, attivalo e applica nuovamente la modifica</v:String>
-    <v:String x:Key="warn_activate_noty">Per iniziare - attiva Windows. Non tutte le modifiche possono essere applicate</v:String>
     <v:String x:Key="ready_activate_noty">Il tuo sistema operativo non necessita di attivazione</v:String>
     <v:String x:Key="win_activate_noty">Il processo di attivazione di Windows è iniziato, richiederà del tempo</v:String>
     <v:String x:Key="success_activate_noty">Attivazione riuscita, è consigliato un riavvio</v:String>

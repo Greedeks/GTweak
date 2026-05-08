@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">Várja meg a folyamat befejezését, majd a rendszer újraindulását.</v:String>
     <v:String x:Key="info_wd_noty">Eltart egy ideig, kérlek, várj egy kicsit</v:String>
     <v:String x:Key="warn_firewall_noty">A tűzfal le van tiltva, kapcsolja be, és alkalmazza újra a módosítást</v:String>
-    <v:String x:Key="warn_activate_noty">Indításhoz - aktiválja a Windows rendszert. Nem minden módosítás alkalmazható</v:String>
     <v:String x:Key="ready_activate_noty">Az operációs rendszert nem kell aktiválni</v:String>
     <v:String x:Key="win_activate_noty">A Windows aktiválási folyamata elindult, eltart egy ideig</v:String>
     <v:String x:Key="success_activate_noty">Az aktiválás sikeres volt, újraindítás javasolt</v:String>

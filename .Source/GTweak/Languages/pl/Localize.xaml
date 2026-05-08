@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">Poczekaj na zakończenie procesu, a następnie zrestartuj system</v:String>
     <v:String x:Key="info_wd_noty">To zajmie trochę czasu, proszę chwilę poczekać</v:String>
     <v:String x:Key="warn_firewall_noty">Twoja zapora sieciowa jest wyłączona, włącz ją i ponownie zastosuj poprawkę</v:String>
-    <v:String x:Key="warn_activate_noty">Aby rozpocząć – aktywuj Windows. Nie wszystkie poprawki będą działać</v:String>
     <v:String x:Key="ready_activate_noty">Twój system operacyjny nie wymaga aktywacji</v:String>
     <v:String x:Key="win_activate_noty">Rozpoczęto proces aktywacji Windows, potrwa to chwilę</v:String>
     <v:String x:Key="success_activate_noty">Aktywacja zakończona pomyślnie, zalecany restart</v:String>

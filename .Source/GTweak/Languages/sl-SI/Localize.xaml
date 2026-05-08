@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">Počakajte na dokončanje postopka, ki mu sledi ponovni zagon sistema</v:String>
     <v:String x:Key="info_wd_noty">To bo trajalo nekaj časa, prosim počakajte</v:String>
     <v:String x:Key="warn_firewall_noty">Vaš požarni zid je onemogočen, vklopite ga in znova uporabite popravek</v:String>
-    <v:String x:Key="warn_activate_noty">Za začetek - aktivirajte Windows. Ni mogoče uporabiti vseh popravkov</v:String>
     <v:String x:Key="ready_activate_noty">Vašega operacijskega sistema ni treba aktivirati</v:String>
     <v:String x:Key="win_activate_noty">Postopek aktivacije Windows se je začel, trajalo bo nekaj časa</v:String>
     <v:String x:Key="success_activate_noty">Aktivacija je uspela, priporočljiv je ponovni zagon</v:String>

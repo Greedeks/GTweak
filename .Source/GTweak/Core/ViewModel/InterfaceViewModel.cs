@@ -4,7 +4,6 @@ using System.Windows.Media;
 using GTweak.Core.Base;
 using GTweak.Core.Model;
 using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Core.ViewModel
@@ -14,7 +13,6 @@ namespace GTweak.Core.ViewModel
         public IReadOnlyDictionary<string, ImageSource> Icons { get; }
         public Visibility Win11FeatureOnly => HardwareData.OS.IsWin11 ? Visibility.Visible : Visibility.Collapsed;
         public Visibility Win11FeatureAvailable => HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(22621.2361m) >= 0 ? Visibility.Visible : Visibility.Collapsed;
-        public bool IsBlockWithoutLicense => WinLicenseHandler.IsWindowsActivated;
         public Visibility OneDriveAvailable => UninstallingPakages.IsOneDriveInstalled ? Visibility.Visible : Visibility.Collapsed;
 
         protected override void Analyze(InterfaceTweaks tweaks) => tweaks?.AnalyzeAndUpdate();

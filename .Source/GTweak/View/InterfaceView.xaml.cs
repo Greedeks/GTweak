@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Base;
-using GTweak.Utilities.Maintenance;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 
@@ -18,11 +17,6 @@ namespace GTweak.View
         public InterfaceView()
         {
             InitializeComponent();
-
-            if (!WinLicenseHandler.IsWindowsActivated)
-            {
-                NotificationManager.Show("info", "warn_activate_noty").Perform();
-            }
         }
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)

@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">프로세스 완료 후 시스템 재시작을 기다립니다</v:String>
     <v:String x:Key="info_wd_noty">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
     <v:String x:Key="warn_firewall_noty">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
-    <v:String x:Key="warn_activate_noty">시작하려면 - Windows를 활성화합니다. 모든 조정을 적용할 수 있는 것은 아닙니다</v:String>
     <v:String x:Key="ready_activate_noty">운영 체제를 활성화할 필요가 없습니다</v:String>
     <v:String x:Key="win_activate_noty">Windows 정품 인증 프로세스가 시작되었으며 시간이 다소 소요됩니다.</v:String>
     <v:String x:Key="success_activate_noty">활성화에 성공했습니다. 재부팅을 권장합니다</v:String>

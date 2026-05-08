@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">Await the process completion followed by system restart</v:String>
     <v:String x:Key="info_wd_noty">It will take some time, please wait a bit</v:String>
     <v:String x:Key="warn_firewall_noty">Your firewall is disabled, turn it on and apply the tweak again</v:String>
-    <v:String x:Key="warn_activate_noty">To start - activate Windows. Not all tweaks can be applied</v:String>
     <v:String x:Key="ready_activate_noty">Your operating system does not need to be activated</v:String>
     <v:String x:Key="win_activate_noty">The Windows activation process has started, it will take some time</v:String>
     <v:String x:Key="success_activate_noty">Activation was successful, a reboot is recommended</v:String>

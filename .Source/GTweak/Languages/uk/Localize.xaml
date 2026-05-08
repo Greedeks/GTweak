@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">Очікуйте завершення процесу з наступним перезапуском системи</v:String>
     <v:String x:Key="info_wd_noty">Процес потребує деякого часу, будь ласка, зачекайте</v:String>
     <v:String x:Key="warn_firewall_noty">Ваш брандмауер вимкнено, увімкніть та застосовуйте налаштування знову</v:String>
-    <v:String x:Key="warn_activate_noty">Для початку активуйте Windows. Не всі налаштування можна застосовувати на не активованій ОС</v:String>
     <v:String x:Key="ready_activate_noty">Ваша операційна система не потребує активації</v:String>
     <v:String x:Key="win_activate_noty">Розпочато процес активації Windows, на це потрібен деякий час</v:String>
     <v:String x:Key="success_activate_noty">Операційну систему успішно активовано, рекомендовано перезавантажити комп'ютер</v:String>

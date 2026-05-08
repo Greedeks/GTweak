@@ -49,7 +49,6 @@
     <v:String x:Key="warn_wd_noty">請等待程序完成後重新啟動系統</v:String>
     <v:String x:Key="info_wd_noty">此過程需耗費時間，請稍候片刻</v:String>
     <v:String x:Key="warn_firewall_noty">您的防火牆已停用，請啟用後重新執行調整程序</v:String>
-    <v:String x:Key="warn_activate_noty">開始前請先啟動 Windows 授權。並非所有調整皆可套用</v:String>
     <v:String x:Key="ready_activate_noty">您的作業系統無需進行授權</v:String>
     <v:String x:Key="win_activate_noty">Windows 啟用程序已啟動，此過程將耗費數分鐘</v:String>
     <v:String x:Key="success_activate_noty">啟用程序已成功完成，建議重新啟動電腦</v:String>
