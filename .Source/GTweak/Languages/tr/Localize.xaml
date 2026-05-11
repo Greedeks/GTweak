@@ -1,0 +1,560 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="defaultDescription">Açıklamasını görmek için farenizi herhangi bir ayarın üzerine getirin</v:String>
+    <v:String x:Key="defaultDescriptionApp">Adını görmek için farenizi herhangi bir uygulamanın simgesi üzerine getirin</v:String>
+    <v:String x:Key="btn_default">Varsayılan</v:String>
+    <v:String x:Key="btn_change">Değiştir</v:String>
+    
+    <!--#region Load Window -->
+    <v:String x:Key="title_load">Yükleniyor</v:String>
+    <v:String x:Key="step1_load">Ortam hazırlanıyor</v:String>
+    <v:String x:Key="step2_load">Bileşen durumu kontrol ediliyor</v:String>
+    <v:String x:Key="step3_load">Yapılandırma taranıyor</v:String>
+    <v:String x:Key="step4_load">Yüklü paketler aranıyor</v:String>
+    <v:String x:Key="step5_load">Ağ ve güncellemeler kontrol ediliyor</v:String>
+    <v:String x:Key="step6_load">Başlatılıyor</v:String>
+    <!--#endregion-->
+
+    <!--#region Message Window -->
+    <v:String x:Key="title_message">Hay aksi..</v:String>
+    <v:String x:Key="part1_message">Program zaten çalışıyor.</v:String>
+    <v:String x:Key="part2_message">Çakışmaları ve çökmeleri önlemek için</v:String>
+    <v:String x:Key="part3_message">aynı anda birden fazla kez açılamaz.</v:String>
+    <v:String x:Key="button_message">Kabul Et (05)</v:String>
+    <v:String x:Key="noty_message">▪otomatik pencere kapatma</v:String>
+    <v:String x:Key="title_nosupport_message">Desteklenmiyor</v:String>
+    <v:String x:Key="part1_nosupport_message">GTweak bu Windows sürümünü desteklemiyor.</v:String>
+    <v:String x:Key="part2_nosupport_message">Kritik sistem hatalarını önlemek amacıyla</v:String>
+    <v:String x:Key="part3_nosupport_message">program şimdi kapatılacak.</v:String>
+    <v:String x:Key="title_admin_message">Yetersiz yetki</v:String>
+    <v:String x:Key="part1_admin_message">Program başlatılamıyor</v:String>
+    <v:String x:Key="part2_admin_message">düzgün çalışması için</v:String>
+    <v:String x:Key="part3_admin_message">lütfen yönetici olarak çalıştırın.</v:String>
+    <!--#endregion-->
+
+    <!--#region Notification Window -->
+    <v:String x:Key="title_win_noty">Bildirim - GTweak</v:String>
+    <v:String x:Key="title_warn_noty">Dikkat</v:String>
+    <v:String x:Key="title_info_noty">Bilgi</v:String>
+    <v:String x:Key="logout_noty">Oturumu kapatmanız gerekiyor, kapatmak için bu metne tıklayın</v:String>
+    <v:String x:Key="restart_noty">Sistemi yeniden başlatmanız gerekiyor, başlatmak için bu metne tıklayın</v:String>
+    <v:String x:Key="warn_update_noty">Program güncellenirken bir hata oluştu, lütfen daha sonra tekrar deneyin</v:String>
+    <v:String x:Key="warn_import_noty">Bu dosya içe aktarmaya uygun değil</v:String>
+    <v:String x:Key="empty_import_noty">Bu dosya boş, ayarlar uygulanamaz</v:String>
+    <v:String x:Key="export_warning_noty">Dışa aktarılacak bir şey yok, en az bir ayar uygulayın</v:String>
+    <v:String x:Key="success_onedrive_noty">OneDrive kurtarma işlemi başladı, tamamlanması biraz zaman alabilir</v:String>
+    <v:String x:Key="error_onedrive_noty">OneDrive kurulum dosyası bulunamadı, kurtarma işlemi yapılamıyor</v:String>
+    <v:String x:Key="warn_wd_noty">İşlemin tamamlanmasını bekleyin ve ardından sistemi yeniden başlatın</v:String>
+    <v:String x:Key="info_wd_noty">Bu işlem biraz zaman alabilir, lütfen bekleyin</v:String>
+    <v:String x:Key="warn_firewall_noty">Güvenlik duvarınız kapalı. Lütfen açıp ayarı tekrar uygulayın</v:String>
+    <v:String x:Key="ready_activate_noty">İşletim sisteminizin etkinleştirilmeye ihtiyacı yok</v:String>
+    <v:String x:Key="win_activate_noty">Windows etkinleştirme işlemi başladı, tamamlanması biraz zaman alabilir</v:String>
+    <v:String x:Key="success_activate_noty">Etkinleştirme başarılı! Sistemi yeniden başlatmanız önerilir</v:String>
+    <v:String x:Key="error_activate_noty">Bir şeyler ters gitti, maalesef sistem etkinleştirilemedi</v:String>
+    <v:String x:Key="network_activate_noty">Etkinleştirme için internet bağlantısı gerekiyor</v:String>
+    <v:String x:Key="keynotfound_noty">Windows sürümünüze ait ürün anahtarı bulunamadı; etkinleştirme iptal edildi</v:String>
+    <v:String x:Key="createpoint_noty">Sistem geri yükleme noktası oluşturuluyor, bu biraz zaman alabilir</v:String>
+    <v:String x:Key="error_point_noty">Bir şeyler ters gitti, geri yükleme noktası oluşturulamadı</v:String>
+    <v:String x:Key="success_point_noty">Geri yükleme noktası başarıyla oluşturuldu</v:String>
+    <v:String x:Key="error_recovery_noty">Bir şeyler ters gitti, kurtarma işlemi başlatılamadı</v:String>
+    <v:String x:Key="disable_recovery_noty">Sistem geri yükleme devre dışı bırakılmış, geri yükleme noktası kullanılamaz</v:String>
+    <v:String x:Key="enable_recovery_noty">Sistem geri yükleme etkinleştirildi ve gerektiğinde kullanıma hazır</v:String>
+    <v:String x:Key="warn_recovery_noty">Sistem geri yüklemeyi zaten devre dışı bıraktınız</v:String>
+    <v:String x:Key="warn_point_enabled_noty">Sistem geri yüklemeyi zaten etkinleştirdiniz</v:String>
+    <v:String x:Key="clear_ram_noty">Bellek (RAM) ve geçici dosyalar temizlendi</v:String>
+    <v:String x:Key="success_compression_noty">Dizin ve içeriği başarıyla sıkıştırıldı</v:String>
+    <v:String x:Key="success_decompression_noty">Dizin ve içeriğinin sıkıştırması başarıyla kaldırıldı</v:String>
+    <v:String x:Key="ready_compression_noty">Dizin zaten sıkıştırılmış durumda</v:String>
+    <v:String x:Key="ready_decompression_noty">Dizinin sıkıştırması zaten kaldırılmış durumda</v:String>
+    <v:String x:Key="error_compression_noty">Bir şeyler ters gitti, sıkıştırma durumu değiştirilirken bir hata oluştu</v:String>
+    <v:String x:Key="notsupport_ntfs_noty">Dizin bir NTFS bölümünde olmadığından bu işlem kullanılamıyor</v:String>
+    <v:String x:Key="success_reg_exporter_noty">Kayıt defteri dosyası başarıyla kaydedildi</v:String>
+    <v:String x:Key="error_reg_exporter_noty">Kayıt defteri dosyası kaydedilirken bir hata oluştu</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub API isteklerini geçici olarak sınırlandırdı, lütfen daha sonra tekrar deneyin</v:String>
+    <v:String x:Key="error_download_noty">Sunucuyla bağlantı kurulamadı</v:String>
+    <!--#endregion-->
+
+    <!--#region Main Window -->
+    <v:String x:Key="rbtn_utils_main">Araçlar</v:String>
+    <v:String x:Key="rbtn_conf_main">Gizlilik</v:String>
+    <v:String x:Key="rbtn_int_main">Arayüz</v:String>
+    <v:String x:Key="rbtn_app_main">Uygulamalar</v:String>
+    <v:String x:Key="rbtn_svc_main">Hizmetler</v:String>
+    <v:String x:Key="rbtn_sys_main">Sistem</v:String>
+    <v:String x:Key="rbtn_sysinfo_main">Sistem bilgisi</v:String>
+    <v:String x:Key="rbtn_adds_main">Eklentiler</v:String>
+    <v:String x:Key="rbtn_ts_main">Araç seti</v:String>
+    <v:String x:Key="title_settings_main">Ayarlar</v:String>
+    <v:String x:Key="btgl_noty_main">Bildirimleri göster</v:String>
+    <v:String x:Key="slider_volume_main">Ses seviyesi:</v:String>
+    <v:String x:Key="btgl_toast_main">Diğer pencerelerin üstünde tut</v:String>
+    <v:String x:Key="btgl_update_main">Güncellemeleri kontrol et</v:String>
+    <v:String x:Key="cmbox_lang_main">Arayüz dili:</v:String>
+    <v:String x:Key="btn_import">İçe aktar</v:String>
+    <v:String x:Key="btn_export">Dışa aktar</v:String>
+    <v:String x:Key="btn_selfremove">Programı Sil</v:String>
+    <!--#endregion-->
+
+    <!--#region Import Window -->
+    <v:String x:Key="title_import">Ayarlar içe aktarılıyor</v:String>
+    <v:String x:Key="wait_import">Bu biraz zaman alabilir</v:String>
+    <v:String x:Key="warn_import">Lütfen pencereyi zorla kapatmayın</v:String>
+    <v:String x:Key="file_import">Dosya</v:String>
+    <!--#endregion-->
+
+    <!--#region Update Window -->
+    <v:String x:Key="title_win_update">Güncelleme - GTweak</v:String>
+    <v:String x:Key="title_update">Yeni bir güncelleme bulundu</v:String>
+    <v:String x:Key="btn_upd">Güncelle</v:String>
+    <v:String x:Key="download_update">İndiriliyor</v:String>
+    <v:String x:Key="noty_update">Lütfen indirme işleminin tamamlanmasını bekleyin</v:String>
+    <v:String x:Key="connection_update">Sunucuya bağlanılıyor</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">Programı kullanmadan önce</v:String>
+    <v:String x:Key="advice_part2_more">geri yükleme noktası oluşturmanız</v:String>
+    <v:String x:Key="advice_part3_more">şiddetle tavsiye edilir.</v:String>
+
+    <v:String x:Key="title_licens_more">Windows Etkinleştirme</v:String>
+    <v:String x:Key="text_licens_more">HWID yöntemini veya yedek bir KMS sunucusunu kullanır. Windows sürümünüz için uygun bir ürün anahtarı yoksa çalışmayabilir.</v:String>
+    <v:String x:Key="btn_activation">Etkinleştir</v:String>
+
+    <v:String x:Key="title_point_more">Geri Yükleme Noktası</v:String>
+    <v:String x:Key="text_point_more">Geri yükleme noktası şu anda kapalı olsa bile bir tane oluşturur veya sistem geri yükleme işlemini başlatır.</v:String>
+    <v:String x:Key="btn_save">Oluştur</v:String>
+    <v:String x:Key="btn_recovery">Geri Yükle</v:String>
+
+    <v:String x:Key="title_point_state_more">Geri Yükleme Durumu</v:String>
+    <v:String x:Key="text_point_state_more">Sistem geri yükleme noktasını açar veya kapatır. Kapatmak, mevcut tüm geri yükleme noktalarını silecektir.</v:String>
+    <v:String x:Key="btn_disable">Devre Dışı Bırak</v:String>
+    <v:String x:Key="btn_enable">Etkinleştir</v:String>
+
+    <v:String x:Key="title_clear_more">Bellek Temizliği</v:String>
+    <v:String x:Key="text_clear_more">Bilgisayar belleğindeki sistem dosyası önbelleğini, geçici dosyaları ve simge önbelleğini temizler.</v:String>
+    <v:String x:Key="btn_clear">Temizle</v:String>
+
+    <v:String x:Key="title_ntfs_more">NTFS Sıkıştırma</v:String>
+    <v:String x:Key="text_ntfs_more">NTFS sıkıştırmasını açar veya kapatır. Özellikle metin dosyalarında etkilidir ve disk alanından tasarruf sağlar.</v:String>
+
+    <v:String x:Key="title_registry_more">Kayıt Defteri Yedeği</v:String>
+    <v:String x:Key="text_registry_more">Windows kayıt defterinin bir yedeğini oluşturur. Değişiklik yapmadan önce sistem kurtarımına olanak tanımak için önerilir.</v:String>
+    <v:String x:Key="btn_create">Oluştur</v:String>
+
+    <v:String x:Key="title_over_more">Disk Temizleme Onayı</v:String>
+    <v:String x:Key="text_over_more">Diskinizde, önceki Windows sürümüne ait dosyaları içeren ve ciddi miktarda yer kaplayan bir Windows.old klasörü bulunuyor. Lütfen unutmayın: Bu klasör silindikten sonra içindekiler kurtarılamaz, bu nedenle ihtiyacınız olan dosyaları yedeklediğinizden emin olun.</v:String>
+    <v:String x:Key="question_over_more">Temizliğe devam etmek ve Windows.old klasörünü silmek istiyor musunuz?</v:String>
+    <v:String x:Key="btn_agree">Onayla</v:String>
+    <v:String x:Key="btn_decline">Vazgeç</v:String>
+
+    <v:String x:Key="textpoint_more">GTweak tarafından oluşturulan nokta</v:String>
+    <!--#endregion-->
+
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_conf">Reklam kimliği ve hedefli reklamlar</v:String>
+    <v:String x:Key="tgl2_conf">Tüm veri senkronizasyonu türleri</v:String>
+    <v:String x:Key="tgl3_conf">Windows telemetri veri toplama ve izleme</v:String>
+    <v:String x:Key="tgl4_conf">Zamanlanmış görevler aracılığıyla veri toplama</v:String>
+    <v:String x:Key="tgl5_conf">Yüklü uygulamalar hakkında veri toplama</v:String>
+    <v:String x:Key="tgl6_conf">Uygulama kullanım istatistiklerinin toplanması</v:String>
+    <v:String x:Key="tgl7_conf">El yazısı verilerinin toplanması ve gönderilmesi</v:String>
+    <v:String x:Key="tgl8_conf">Donanım yapılandırma verilerinin toplanması</v:String>
+    <v:String x:Key="tgl9_conf">Microsoft casus sunucularına ağ erişimi</v:String>
+    <v:String x:Key="tgl10_conf">Kullanıcı konumunun belirlenmesi</v:String>
+    <v:String x:Key="tgl11_conf">Geri Bildirim aracılığıyla isteklerin izlenmesi</v:String>
+    <v:String x:Key="tgl12_conf">Konuşma sentezinin arka planda gizlice güncellenmesi</v:String>
+    <v:String x:Key="tgl13_conf">Sisteminizin gizlice izlenmesi</v:String>
+    <v:String x:Key="tgl14_conf">Sisteminiz üzerinde yapılan gizli deneyler</v:String>
+    <v:String x:Key="tgl15_conf">Gizli veri toplama ve iletme hizmetleri</v:String>
+    <v:String x:Key="tgl16_conf">Windows Olaylarının Günlüğe Kaydedilmesi</v:String>
+    <v:String x:Key="tgl17_conf">NVIDIA telemetri verilerinin toplanması ve izlenmesi</v:String>
+    <v:String x:Key="tgl18_conf">Kullanıcı davranışlarının kayıt altına alınması</v:String>
+    <v:String x:Key="tgl19_conf">Çevrimdışı haritaların veri toplaması ve arka plan güncellemeleri</v:String>
+    <v:String x:Key="tgl20_conf">Intel telemetri verilerinin toplanması ve izlenmesi</v:String>
+    
+    <v:String x:Key="tgl1_desc_conf">Windows, her kullanıcı için benzersiz bir reklam kimliği oluşturarak eylemlerinizi izler. Bu kimlik, uygulama geliştiricileri ve bizzat Windows tarafından özellikle size kişiselleştirilmiş reklamlar sunmak gibi kendi amaçları doğrultusunda kullanılır.</v:String>
+    <v:String x:Key="tgl2_desc_conf">Yerel bir hesap kullansanız bile Windows, verilerinizi Microsoft sunucularıyla sürekli senkronize etmeye çalışır. Senkronize edilen veriler arasında temalar, parolalar, Windows ayarları, tarayıcı ayarları, dil çubuğu ayarları, Erişim Kolaylığı ayarları ve diğer ek ayarlar yer alır.</v:String>
+    <v:String x:Key="tgl3_desc_conf">Telemetri (tanılama verileri), Windows'un Microsoft sunucularına göndermek üzere otomatik olarak topladığı verilerdir; kısaca bilgisayarı "Ne? Nerede? Neden ve ne zaman?" kullandığınızın bilgisidir. Microsoft, bu verilerin anonim olduğunu ve Windows'un geliştirilmesine katkı sağladığını öne sürer. Veri toplanması sizi rahatsız etmese bile, bu arka plan işlemleri işlemciye aşırı yük bindirerek sistemi yavaşlatabilir.</v:String>
+    <v:String x:Key="tgl4_desc_conf">Görev Zamanlayıcı içinde, çalışması tamamlandıktan sonra kendi etkinliklerine ait verileri toplayıp Microsoft sunucularına gönderen hizmetler bulunur.</v:String>
+    <v:String x:Key="tgl5_desc_conf">Microsoft, kullandığınız yazılımlara ilişkin veriler toplar. Bu bilgilerin resmi olarak uyumluluk sorunlarını teşhis etmek için kullanıldığı söylense de, aslında yalnızca Microsoft'un kendi çıkarlarına hizmet eder; Windows'un yeni sürümlerindeki uyumluluğu iyileştirmenize somut bir katkısı yoktur. Bu özelliği devre dışı bırakmak, hassas olabilecek bilgilerin gönderilmesini engeller.</v:String>
+    <v:String x:Key="tgl6_desc_conf">Bu ayar, uygulama kullanım izleme işlevini devre dışı bırakarak; kullanım sıklığı, çalışma süresi ve diğer verimlilik ölçütlerine ilişkin veri toplanmasını engeller. Böylece sistem iş sürecinizi analiz etmeyi bırakır ve gizli bilgileriniz korunur.</v:String>
+    <v:String x:Key="tgl7_desc_conf">Bu ayar, Microsoft'un el yazısı tanıma teknolojisini geliştirmek için kullandığı veri toplama mekanizmasını devre dışı bırakır. Bu özelliği kullanıp kullanmadığınızdan bağımsız olarak sistem, tanıma doğruluğunu artırmak amacıyla etkinliklerinizi izliyordu. Bu ayar, veri toplanmasını önleyerek gizliliğinizi korur.</v:String>
+    <v:String x:Key="tgl8_desc_conf">Müşteri Deneyimi Geliştirme Programı (CEIP), donanım yapılandırmanız ile yazılım ve hizmetleri nasıl kullandığınıza dair bilgileri toplayan ayrı bir özelliktir. Program ayrıca Windows'ta karşılaşabileceğiniz sorunlara ilişkin bilgi toplamak için periyodik olarak dosya indirir. Katılım isteğe bağlıdır; verilerinizi gizliliğinizi ihlal edecek biçimde Microsoft'a göndermek zorunda değilsiniz.</v:String>
+    <v:String x:Key="tgl9_desc_conf">Bu ayar, Windows hosts dosyasına belirli alan adlarının önüne 0.0.0.0 adresi ekleyerek casus sunucuları engeller. Ayrıca Windows güvenlik duvarı ayarlarını, Microsoft'un veri toplama hizmetleriyle ilişkili çeşitli IP adreslerine yapılan bağlantıları engelleyecek şekilde yapılandırır.</v:String>
+    <v:String x:Key="tgl10_desc_conf">Konum hizmetlerinin devre dışı bırakılması, konum verilerinin reklam amacıyla kullanılma potansiyelini önemli ölçüde azaltır. Bu bilgilere yalnızca Microsoft hizmetleri değil, üçüncü taraf uygulamalar ve komut dosyaları (script) da erişemez.</v:String>
+    <v:String x:Key="tgl11_desc_conf">Bu ayar, Windows'taki geri bildirim toplanmasını ve buna ait bildirimleri engelleyerek verilerinizin izniniz olmadan iletilmesini önler. Ayrıca, Geri Bildirim özelliğini kullanmasanız bile Microsoft, resmi destekle ne sıklıkta iletişime geçtiğinizi kayıt altına almaktadır.</v:String>
+    <v:String x:Key="tgl12_desc_conf">Windows, özel bir konuşma tanıma ve sentezleme modülü aracılığıyla sesi tanıyabilir. Cortana veya Erişim Kolaylığı özelliklerini kullanmasanız bile işletim sisteminiz, varsayılan olarak ses tanıma motoru güncellemelerini sürekli denetler.</v:String>
+    <v:String x:Key="tgl13_desc_conf">Herhangi bir kullanıcı verisine erişebilen ve Microsoft sunucularıyla bazı bilgileri paylaşan bir işlevdir. İşletim sisteminin veya uygulamaların çalışmasını hiçbir şekilde etkilemez ve kullanıcıya hiçbir faydası yoktur, bu da onu tamamen gereksiz kılar.</v:String>
+    <v:String x:Key="tgl14_desc_conf">Microsoft, bir özelliğin yaygın kullanılıp kullanılmadığını veya değiştirilmesinin onu daha kullanışlı yapıp yapmadığını belirlemek için Windows kullanıcıları üzerinde düzenli olarak deneyler yapar. Ancak bu durum doğrudan bir gizlilik ihlalidir.</v:String>
+    <v:String x:Key="tgl15_desc_conf">DiagTrack, dmwappushservice ve diagsvc hizmetleri birer Keylogger (tuş kaydedici) gibi davranır; tuş vuruşları dahil tüm kullanıcı etkinliklerini kaydederek kullanıcının onayı olmadan Microsoft sunucularına gönderir. UWF (Birleşik Yazma Filtresi) kullanılıyorsa sistemin kararlı çalışması dmwappushservice hizmetine bağlıdır. Ancak ne olduğunu bilmiyorsanız, bu izleyicilerden kurtulmak en mantıklısıdır.</v:String>
+    <v:String x:Key="tgl16_desc_conf">Sistem tanılama bilgilerini toplayıp işleyerek bilgisayarınızın kaynaklarını israf eden bir olay günlüğüdür. Bu hizmet size faydalı hiçbir şey sunmaz; devre dışı bırakarak gizli bilgilerinizin gönderilmesini önleyebilirsiniz.</v:String>
+    <v:String x:Key="tgl17_desc_conf">Sistem ve kullanım verilerini toplayıp ileten bu hizmet, video sürücüsünün çalışmasıyla ilgisi olmayan tamamen gereksiz bir işlevdir. NVIDIA'nın hangi bilgileri neden topladığı yalnızca kendisi tarafından bilinir; ancak bunun son kullanıcıya somut hiçbir katkı sağlamadığı oldukça açıktır.</v:String>
+    <v:String x:Key="tgl18_desc_conf">Bu ayar, UAR (Kullanıcı Etkinliği Kaydı) özelliğini devre dışı bırakır. Bu sistem; ekran görüntüsü almaktan metin yazmaya, program başlatmaktan ekran kilitliyken web kamerasına erişime kadar bilgisayarınızda gerçekleştirdiğiniz her eylemi sırayla kaydeder.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows periyodik olarak Çevrimdışı Haritaları günceller ve arka planda yeni veriler hakkında bildirim gönderir. Bu süreçler konumunuz, rotalarınız ve harita kullanımınız hakkında bilgi toplayabilir. Çevrimdışı Haritaları kullanmıyorsanız, gizli güncellemeleri ve sizden habersiz Microsoft sunucularına veri iletimini önlemek için bunları devre dışı bırakmanız önerilir.</v:String>
+    <v:String x:Key="tgl20_desc_conf">Veri toplamak ve iletmek için arka planda çalışan bu Intel modülü, şirketin ürünlerini geliştirmesi için bir araç olarak konumlandırılmıştır. Ancak ortalama bir kullanıcı için pratik hiçbir fayda sağlamaz. Bu özelliği devre dışı bırakmak arka plan etkinliğini azaltır ve gereksiz veri aktarımını önler.</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="color1_intf">İmleç seçim rengi:</v:String>
+    <v:String x:Key="color2_intf">Araç ipucu rengi:</v:String>
+    
+    <v:String x:Key="exblock1_intf">Gezinti bölmesi öğeleri:</v:String>
+    <v:String x:Key="chk_home_intf">Giriş</v:String>
+    <v:String x:Key="chk_gallery_intf">Galeri</v:String>
+
+    <v:String x:Key="exblock2_intf">Dosya Gezgini görünüm ayarları:</v:String>
+    <v:String x:Key="chk_hidden_intf">Gizli dosya ve klasörleri göster</v:String>
+    <v:String x:Key="chk_system_intf">Korunan işletim sistemi dosyalarını göster</v:String>
+    <v:String x:Key="chk_extension_intf">Dosya adı uzantılarını göster</v:String>
+    <v:String x:Key="chk_emptydrives_intf">Boş sürücüleri göster</v:String>
+
+    <v:String x:Key="exblock3_intf">Masaüstü simgeleri:</v:String>
+    <v:String x:Key="chk_pc_intf">Bu bilgisayar</v:String>
+    <v:String x:Key="chk_net_intf">Ağ</v:String>
+    <v:String x:Key="chk_trash_intf">Geri Dönüşüm Kutusu</v:String>
+    <v:String x:Key="chk_panel_intf">Denetim Masası</v:String>
+    <v:String x:Key="chk_user_intf">Kullanıcı Dosyaları</v:String>
+
+    <v:String x:Key="tgl1_intf">Sistem düğmelerinin standart boyutu</v:String>
+    <v:String x:Key="tgl2_intf">Standart imleç yanıp sönme hızı</v:String>
+    <v:String x:Key="tgl3_intf">Standart kaydırma çubuğu boyutu</v:String>
+    <v:String x:Key="tgl4_intf">Görev çubuğu saydamlık efekti</v:String>
+    <v:String x:Key="tgl5_intf">Koyu Görev Çubuğu teması</v:String>
+    <v:String x:Key="tgl6_intf">Uygulamalar ve Dosya Gezgini için koyu tema</v:String>
+    <v:String x:Key="tgl7_intf">Bağlam (Sağ tık) menüsü açılma gecikmesi</v:String>
+    <v:String x:Key="tgl8_intf">Görev çubuğu önizleme gecikmesi</v:String>
+    <v:String x:Key="tgl9_intf">Simgeler üzerindeki katman rozetlerinin görünümü</v:String>
+    <v:String x:Key="tgl10_intf">Kısayol adlarındaki "- Kısayol" uzantısı</v:String>
+    <v:String x:Key="tgl11_intf">Görev çubuğu hizalaması</v:String>
+    <v:String x:Key="tgl12_intf">Başlat menüsünün standart düzeni</v:String>
+    <v:String x:Key="tgl13_intf">Klasik (Sadeleştirilmiş) bağlam menüsü</v:String>
+    <v:String x:Key="tgl14_intf">İpuçlarını ve önerileri göster</v:String>
+    <v:String x:Key="tgl15_intf">Kompakt Dosya Gezgini görünümü</v:String>
+    <v:String x:Key="tgl16_intf">Copilot ve Recall asistanları</v:String>
+    <v:String x:Key="tgl17_intf">Uygulamaya sağ tıklandığında "Görevi sonlandır"</v:String>
+    <v:String x:Key="tgl18_intf">Pencere tutturma düzenlerini göster</v:String>
+    <v:String x:Key="tgl19_intf">Görev çubuğundaki simgeler ve düğmeler</v:String>
+    <v:String x:Key="tgl20_intf">Kişiselleştirilmiş reklamları göster</v:String>
+    <v:String x:Key="tgl21_intf">Oturum açıldığında önceki klasör pencerelerini geri yükle</v:String>
+    <v:String x:Key="tgl22_intf">Windows ipuçları ve öneri bildirimleri</v:String>
+    <v:String x:Key="tgl23_intf">"Bu Bilgisayar" içindeki klasörler</v:String>
+    <v:String x:Key="tgl24_intf">Dosya Gezgini'ndeki "3B Nesneler"</v:String>
+    <v:String x:Key="tgl25_intf">Masaüstü JPEG duvar kağıdı sıkıştırması</v:String>
+    <v:String x:Key="tgl26_intf">Masaüstü öğeleri için ipuçları</v:String>
+    <v:String x:Key="tgl27_intf">Başlat menüsünde Bing entegrasyonlu web araması</v:String>
+    <v:String x:Key="tgl28_intf">Dosya Gezgini'ni "Bu Bilgisayar" konumunda aç</v:String>
+    <v:String x:Key="tgl29_intf">Otomatik parlaklık değişimleri</v:String>
+
+    <v:String x:Key="color1_desc_intf">Sistemde metin veya nesne seçtiğinizde imleç seçim alanının arka plan rengini değiştirir.</v:String>
+    <v:String x:Key="color2_desc_intf">Desteklenen uygulamalardaki bilgi baloncuklarının (ipuçlarının) rengini değiştirir.</v:String>
+    <v:String x:Key="exblock1_desc_intf">Dosya Gezgini gezinti bölmesinde bulunan ve normal yollarla kaldırılamayan yerleşik sistem öğelerinin görünürlüğünü değiştirir.</v:String>
+    <v:String x:Key="exblock2_desc_intf">Dosya Gezgini'nde gizli öğelerin görünürlüğü, dosya uzantıları ve disk sürücüsü yapısı dahil olmak üzere öğelerin görüntülenme kurallarını değiştirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="exblock3_desc_intf">Masaüstündeki sistem simgelerinin görünümünü değiştirir; bu simgeler sıradan kısayollar değil, yerleşik sistem nesneleridir.</v:String>
+    <v:String x:Key="tgl1_desc_intf">Bu ayar; Simge Durumuna Küçült, Ekranı Kapla ve Kapat düğmelerinin boyutunu küçülterek daha sade bir görünüm sağlar. Dosya Gezgini, Fotoğraflar, tarayıcılar ve diğer tanıdık programlar dahil tüm pencereleri etkiler.</v:String>
+    <v:String x:Key="tgl2_desc_intf">Metin imlecinin yanıp sönme hızını artırır. Varsayılan olarak imleç her 530 milisaniyede bir yanıp söner.</v:String>
+    <v:String x:Key="tgl3_desc_intf">Dosya Gezgini, tarayıcılar ve diğer klasik programlar dahil klasik Windows uygulamalarındaki kaydırma çubuklarının kalınlığını azaltır. Ancak kendi denetim öğelerini kullanan modern arayüzleri etkilemez.</v:String>
+    <v:String x:Key="tgl4_desc_intf">Pencereleri ve yüzeyleri yarı saydam yapan saydamlık efektini etkinleştirir veya devre dışı bırakır.</v:String>
+    <v:String x:Key="tgl5_desc_intf">Görev çubuğu temasını açık veya koyu olarak değiştirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl6_desc_intf">Dosya Gezgini temasını, cihaz temasını destekleyen tarayıcılar ve diğer programlar dahil açık veya koyu olarak değiştirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl7_desc_intf">Varsayılan olarak ek bağlam (sağ tık) menüsü öğeleri 400 milisaniyelik bir gecikmeyle görünür. Menünün daha hızlı açılmasını istiyorsanız bu gecikmeyi azaltabilirsiniz.</v:String>
+    <v:String x:Key="tgl8_desc_intf">Varsayılan olarak görev çubuğu önizlemeleri uygulamaların üzerine gelindiğinde çok geç görünür. Önizlemelerin daha hızlı belirmesi için bu ayarı uygulayabilirsiniz.</v:String>
+    <v:String x:Key="tgl9_desc_intf">Kısayol oklarını, bulut senkronizasyon durumlarını (OneDrive, Dropbox) ve SVG grafikleri gibi dosya türü rozetlerini gizlemeye olanak tanır.</v:String>
+    <v:String x:Key="tgl10_desc_intf">Yeni bir kısayol oluşturduğunuzda ismin sonuna otomatik olarak eklenen gereksiz "- Kısayol" uzantısını kaldırır.</v:String>
+    <v:String x:Key="tgl11_desc_intf">Görev çubuğundaki simgelerin ortada mı yoksa solda mı hizalanacağını seçmenizi sağlar.</v:String>
+    <v:String x:Key="tgl12_desc_intf">Sabitlenmiş uygulamalar için ayrılan alanı genişleterek Başlat menüsü düzenini değiştirir. Ayrıca (Windows Home sürümü hariç) "Önerilenler" bölümünü Başlat menüsünden kaldırır.</v:String>
+    <v:String x:Key="tgl13_desc_intf">Masaüstü ve Dosya Gezgini için alıştığınız klasik sağ tık (bağlam) menüsünü geri getirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl14_desc_intf">Windows 11 zaman zaman yeni Başlat menüsü veya Hızlı Ayarlar gibi özelliklerin nasıl kullanılacağına dair ipuçları gösterir. Windows 11'i ilk kez kullananlar için faydalı olsa da zamanla gereksiz bir kalabalığa dönüşür.</v:String>
+    <v:String x:Key="tgl15_desc_intf">Varsayılan olarak Windows, dokunmatik ekranlar için Dosya Gezgini'ndeki öğeler arasına boşluk (dolgu) ekler. Bu ayar, öğeler arasındaki boşluğu kaldırarak klasik Dosya Gezgini görünümünü geri getirir.</v:String>
+    <v:String x:Key="tgl16_desc_intf">Görev çubuğundaki, Başlat Menüsündeki, Edge ve Not Defteri'ndeki Copilot simgelerini devre dışı bırakıp gizler, işlevselliğini engeller ve Recall özelliğini de devre dışı bırakır. Copilot uygulamasının kendisi sistemde kalır. Bu yapay zeka özellikleri sisteminizde zaten yoksa bu ayarı uygulamak anlamsızdır.</v:String>
+    <v:String x:Key="tgl17_desc_intf">Görev çubuğundaki bir uygulamaya sağ tıkladığınızda menüye "Görevi sonlandır" seçeneğini ekler. Böylece Görev Yöneticisi'ni açmaya gerek kalmadan işlemleri hızlıca sonlandırabilirsiniz. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl18_desc_intf">"Ekranı Kapla" düğmesinin üzerine geldiğinizde beliren pencere tutturma düzeni (Snap Layouts) önerilerini devre dışı bırakır.</v:String>
+    <v:String x:Key="tgl19_desc_intf">Arama, Görev Görünümü ve Sohbet simgelerini görev çubuğundan kaldırır. Windows 11'in eski derlemelerinde Copilot simgesini de gizler. Windows 10 kullanıcıları için ayrıca Haberler ve İlgi Alanları ile Cortana'yı devre dışı bırakır. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl20_desc_intf">Varsayılan olarak Windows, ilgi alanlarınıza uygun reklamlar göstermek için topladığı bilgileri kullanır. Bu reklamlar Mağaza uygulamalarında, Dosya Gezgini'nde, Ayarlar'da ve Başlat menüsünde karşınıza çıkabilir. Kişiselleştirilmiş reklamları görmek istemiyorsanız bu özelliği kapatabilirsiniz.</v:String>
+    <v:String x:Key="tgl21_desc_intf">Varsayılan olarak Windows, kapatılırken pencere konumlarını kaydetmez. Bu ayar, açık klasörlerin durumunu hatırlayarak oturumu kapatma, yeniden başlatma veya sistemi kapatma işlemlerinden sonra onları geri yüklemenizi sağlar.</v:String>
+    <v:String x:Key="tgl22_desc_intf">Ayarlardaki çevrimiçi ipuçları dahil tüm Windows ipuçlarını ve bildirimlerini devre dışı bırakır. Ayrıca kullanıcıyı "cihaz kurulumunu tamamlamaya" ve Microsoft hesabıyla oturum açmaya zorlayan agresif SCOOBE (İkinci Şans Kutu Deneyimi) ekranını da engeller.</v:String>
+    <v:String x:Key="tgl23_desc_intf">"Bu Bilgisayar" içindeki: Masaüstü, İndirilenler, Belgeler, Resimler, Müzikler, Videolar klasörlerini gizler. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl24_desc_intf">Dosya Gezgini'nin sol tarafındaki gezinti bölmesinden "3B Nesneler" klasörünü kaldırır. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl25_desc_intf">Varsayılan olarak Windows, bir JPEG görselini masaüstü duvar kağıdı olarak ayarladığınızda kalitesini otomatik olarak %85'e düşürür. Bu ayar, JPEG duvar kağıdı kalitesini %100 olarak sabitler.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Fare imleci masaüstü öğelerinin üzerine geldiğinde görünen bilgi baloncuklarını (ipuçlarını) devre dışı bırakır.</v:String>
+    <v:String x:Key="tgl27_desc_intf">Varsayılan olarak Windows, Başlat menüsünde aradığınız her şeyi Bing arama sonuçları sunmak için kendi sunucularına gönderir. Başlat menüsünde web aramasına ihtiyaç duymuyorsanız bu ayarla Bing entegrasyonunu kapatabilirsiniz. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl28_desc_intf">Varsayılan olarak Dosya Gezgini açıldığında ilk olarak "Hızlı Erişim" sekmesi gösterilir. Bu ayar, Dosya Gezgini'ni açtığınızda doğrudan disklerinizi görebileceğiniz "Bu Bilgisayar" konumunun açılmasını sağlar.</v:String>
+    <v:String x:Key="tgl29_desc_intf">Bazı cihazlarda ekran parlaklığı, ekrandaki içeriğe bağlı olarak kendiliğinden değişebilir. HDR, dinamik parlaklık ve güç ayarlarını kapatmak sorunu çözmezse (özellikle pilde çalışan dizüstü bilgisayarlarda) bu ayarı deneyebilirsiniz; sistem düzeyinde otomatik parlaklık ayarını zorla devre dışı bırakır. Manuel parlaklık kontrolü çalışmaya devam eder.</v:String>
+    <!--#endregion-->
+
+    <!--#region Packages Page -->
+    <v:String x:Key="warn_part1_pkg">Uygulamalar sisteminizden</v:String>
+    <v:String x:Key="warn_part2_pkg">kalıcı olarak silinir,</v:String>
+    <v:String x:Key="warn_part3_pkg">ancak OneDrive'ı simgesine tıklayarak geri yükleyebilirsiniz.</v:String>
+
+    <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
+    <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
+    <v:String x:Key="OneNote_pkg">Microsoft OneNote</v:String>
+    <v:String x:Key="MicrosoftOfficeHub_pkg">Microsoft Office Hub</v:String>
+    <v:String x:Key="MicrosoftSolitaireCollection_pkg">Microsoft Solitaire Collection</v:String>
+    <v:String x:Key="MixedReality_pkg">Karma Gerçeklik</v:String>
+    <v:String x:Key="BingWeather_pkg">Hava Durumu</v:String>
+    <v:String x:Key="Microsoft3D_pkg">3B Görüntüleyici</v:String>
+    <v:String x:Key="SkypeApp_pkg">Skype</v:String>
+    <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
+    <v:String x:Key="Cortana_pkg">Cortana</v:String>
+    <v:String x:Key="MicrosoftTeams_pkg">Microsoft Teams</v:String>
+    <v:String x:Key="Music_pkg">Media Player</v:String>
+    <v:String x:Key="Video_pkg">Filmler ve TV</v:String>
+    <v:String x:Key="SoundRecorder_pkg">Ses Kaydedici</v:String>
+    <v:String x:Key="FeedbackHub_pkg">Geri Bildirim Merkezi</v:String>
+    <v:String x:Key="Mail_pkg">Posta</v:String>
+    <v:String x:Key="Widgets_pkg">Widget'lar</v:String>
+    <v:String x:Key="Photos_pkg">Fotoğraflar</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Ekran Alıntısı Aracı</v:String>
+    <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
+    <v:String x:Key="GetHelp_pkg">Yardım Alın</v:String>
+    <v:String x:Key="GetStarted_pkg">Başlarken</v:String>
+    <v:String x:Key="MicrosoftStickyNotes_pkg">Yapışkan Notlar</v:String>
+    <v:String x:Key="Maps_pkg">Haritalar</v:String>
+    <v:String x:Key="Camera_pkg">Kamera</v:String>
+    <v:String x:Key="Paint3D_pkg">Paint 3D</v:String>
+    <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
+    <v:String x:Key="People_pkg">Kişiler</v:String>
+    <v:String x:Key="BingNews_pkg">Haberler</v:String>
+    <v:String x:Key="Todos_pkg">Microsoft To Do</v:String>
+    <v:String x:Key="Alarms_pkg">Saat</v:String>
+    <v:String x:Key="Phone_pkg">Telefon Bağlantısı</v:String>
+    <v:String x:Key="Outlook_pkg">Windows için Outlook</v:String>
+    <v:String x:Key="BingSports_pkg">Spor</v:String>
+    <v:String x:Key="BingFinance_pkg">Finans</v:String>
+    <v:String x:Key="MicrosoftFamily_pkg">Aile</v:String>
+    <v:String x:Key="BingSearch_pkg">Bing Arama</v:String>
+    <v:String x:Key="QuickAssist_pkg">Hızlı Yardım</v:String>
+    <v:String x:Key="DevHome_pkg">Dev Home</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
+    <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_pkg">Web Medya Uzantıları</v:String>
+    <v:String x:Key="OneConnect_pkg">Mobil Tarifeler</v:String>
+    <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
+    <v:String x:Key="Notepad_pkg">Not Defteri</v:String>
+    <v:String x:Key="Calculator_pkg">Hesap Makinesi</v:String>
+    <v:String x:Key="Paint_pkg">Paint</v:String>
+    <v:String x:Key="Copilot_pkg">Copilot</v:String>
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Cüzdan</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    <v:String x:Key="Facebook_pkg">Facebook</v:String>
+    <v:String x:Key="Hulu_pkg">Hulu</v:String>
+    <v:String x:Key="Disney_pkg">Disney+</v:String>
+    <v:String x:Key="Instagram_pkg">Instagram</v:String>
+    <v:String x:Key="TwitterX_pkg">X</v:String>
+    <v:String x:Key="TikTok_pkg">TikTok</v:String>
+    <v:String x:Key="MicrosoftSway_pkg">Microsoft Sway</v:String>
+    <v:String x:Key="Builder3D_pkg">3B Oluşturucu</v:String>
+    <v:String x:Key="Netflix_pkg">Netflix</v:String>
+    <v:String x:Key="YandexMusic_pkg">Yandex Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Mesajlaşma</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
+
+    <v:String x:Key="title_over_pkg">Kaldırma onayı</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">Microsoft Edge tarayıcısını kaldırmak üzeresiniz. Bu işlem; Microsoft Office, Fotoğraflar uygulaması (yeni sürüm WebView2 kullanır), bazı Telegram botları ve gömülü web içeriği kullanan diğer programlarda web sayfalarını görüntülemek için kullanılan EdgeWebView bileşenini de silecektir. Devam etmeden önce bu bileşene ihtiyacınız olmadığından emin olun. 
+       Windows 11'in yeni derlemelerinde Copilot, bir PWA veya sistem sarmalayıcısı olarak EdgeWebView üzerinden çalışır. Edge kaldırıldığında, web tabanlı bir araç olduğu için Copilot da otomatik olarak kaldırılır.</v:String>
+    <v:String x:Key="question_over_pkg">EdgeWebView ile birlikte tamamen silmeye devam etmek istiyor musunuz?</v:String>
+    <v:String x:Key="btn_delete_all">Evet, hepsini sil</v:String>
+    <v:String x:Key="btn_keep_webview">Hayır, EdgeWebView kalsın</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_svc">Windows Arama ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl2_svc">Xbox ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl3_svc">Windows Update ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl4_svc">Microsoft Store ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl5_svc">Performans Sayacı Hizmetleri</v:String>
+    <v:String x:Key="tgl6_svc">Windows Biyometrik Hizmeti</v:String>
+    <v:String x:Key="tgl7_svc">Bluetooth ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl8_svc">Yazıcı ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl9_svc">Tarayıcı çalışmasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl10_svc">Faks ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl11_svc">Tablet/akıllı telefon moduyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl12_svc">Ek monitörlerin çalışmasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl13_svc">Sistem bileşenleriyle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl14_svc">Yerel ağın çalışmasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl15_svc">USB modem ve yönlendiricilerle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl16_svc">VPN istemcileriyle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl17_svc">Windows Media çalışmasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl18_svc">Uzak Masaüstü ile ilgili hizmetler</v:String>
+    <v:String x:Key="tgl19_svc">Hata ve olay günlüklerini toplayan hizmetler</v:String>
+    <v:String x:Key="tgl20_svc">WebDAV Uzaktan Dosya Yönetim Hizmeti</v:String>
+    <v:String x:Key="tgl21_svc">Akıllı kart çalışmasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl22_svc">Windows Kiosk çalışmasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl23_svc">Dosya şifrelemeyle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl24_svc">Windows yerelleştirmesiyle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl25_svc">Arka plan güvenlik denetimleriyle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl26_svc">Arka plan tanılamasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl27_svc">Kurumsal araçlarla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl28_svc">Hyper-V çalışmasıyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl29_svc">Anında iletme (Push) bildirimleriyle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl30_svc">Mağaza Demo Moduyla ilgili hizmetler</v:String>
+    <v:String x:Key="tgl31_svc">Microsoft Edge güncellemesiyle ilgili hizmetler</v:String>
+    <v:String x:Key="tgl32_svc">Multimedya Sınıfı Zamanlayıcı Hizmeti</v:String>
+
+    <v:String x:Key="tgl1_desc_svc">Dosya Geçmişi ve içerik dizinleme özelliklerini kullanmıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl2_desc_svc">Xbox ve Microsoft oyun kumandalarını (gamepad) kullanmıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl3_desc_svc">Windows'u güncellemeyecekseniz devre dışı bırakın. Bu ayar, hizmetlerin yanı sıra Windows güncellemelerinden sorumlu dosyaları da değiştirir; bu nedenle hizmetler etkinleştirilmiş olsa bile Güncelleştirme Merkezi çalışmaz. Ayarın Microsoft Store'dan uygulama indirme ve güncellemeyi de etkilediğini unutmayın.</v:String>
+    <v:String x:Key="tgl4_desc_svc">Microsoft Store'u ve UWP uygulamalarını kullanmıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl5_desc_svc">Hizmetlerin sistem performansınızı analiz etmesini istemiyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl6_desc_svc">PIN, parmak izi, yüz tanıma veya diğer Windows Hello yöntemleriyle oturum açmıyorsanız devre dışı bırakın. Daha önce yapılandırılmış bir oturum açma yöntemi çalışmaya devam eder; ancak değiştirmek veya kaldırmak için Windows Hello'yu yeniden etkinleştirmeniz gerekir.</v:String>
+    <v:String x:Key="tgl7_desc_svc">Bluetooth ve Bluetooth'a bağlı cihazları kullanmıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl8_desc_svc">Yazıcınız yoksa devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl9_desc_svc">Tarayıcınız (Scanner) yoksa devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl10_desc_svc">Faks makineniz yoksa devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Masaüstü bilgisayar, dizüstü veya netbook kullanıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl12_desc_svc">Sadece tek bir monitörünüz varsa ve ek monitör bağlamayı planlamıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl13_desc_svc">Sanal Masaüstü, Telefon Bağlantısı ve Gece Işığı özelliklerini kullanmıyorsanız devre dışı bırakın. Bu hizmet kullanıcı verilerini işler ve Microsoft sunucularıyla senkronize eder. Sistem için kritik değildir; ancak devre dışı bırakıldığında Windows 10'daki Gece Işığı gibi bazı özellikler kısmen veya tamamen çalışmayabilir.</v:String>
+    <v:String x:Key="tgl14_desc_svc">Yerel ağ kullanmıyorsanız ve kullanmayı planlamıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl15_desc_svc">İnternet bağlantınızı kablo veya Wi-Fi üzerinden sağlıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl16_desc_svc">VPN istemcisi kullanmıyorsanız devre dışı bırakın. Xbox'ın çalışmasını etkileyebilir.</v:String>
+    <v:String x:Key="tgl17_desc_svc">Windows Media Player için yerel ağda dosya senkronizasyonuna ve erişimine ihtiyaç duymuyorsanız devre dışı bırakın. Bu hizmetler kritik değildir; oynatıcıyı kullanmaya devam edebilirsiniz.</v:String>
+    <v:String x:Key="tgl18_desc_svc">Uzak Masaüstü kullanmıyorsanız ve sunucu bağlantısına ihtiyaç duymuyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl19_desc_svc">Hataları işlerken hizmetlerin bilgisayarınıza yük bindirmesini istemiyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl20_desc_svc">Ağ paylaşımı veya WebDAV aracılığıyla dosyaları uzaktan yönetmiyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl21_desc_svc">Akıllı kart kullanmıyorsanız devre dışı bırakın. Akıllı kart, banka kartı görünümünde çipli bir elektronik kimlik türüdür. Günlük Windows kullanımı için gerekli değildir ve büyük ihtimalle hiç ihtiyaç duymazsınız.</v:String>
+    <v:String x:Key="tgl22_desc_svc">Windows Kiosk modunu kullanmıyorsanız devre dışı bırakın. Bu mod arayüzü kısıtlar: yalnızca tek bir UWP uygulaması tam ekranda çalışır ve diğer tüm özellikler engellenir. Ayrıca ilk oturum açmada sistem verilerinin ve uygulamaların kurulumunu da devre dışı bıraktığından, Windows güncellemelerinin ve Windows Installer (MSI) aracılığıyla program yüklemenin etkilenebileceğini unutmayın.</v:String>
+    <v:String x:Key="tgl23_desc_svc">BitLocker disk şifrelemesi ve EFS dosya/klasör şifrelemesi kullanmıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl24_desc_svc">Kullanacağınız tüm dilleri ayarladıysanız ve yeni dil eklemeyi planlamıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl25_desc_svc">Windows Defender'ı ve ek Windows güvenlik özelliklerini kullanmıyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl26_desc_svc">Windows'un arka planda gereksiz tanılamalarla sisteme yük bindirmesini istemiyorsanız devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl27_desc_svc">Kurumsal uygulamaları uzaktan yönetmiyorsanız ve bilgisayarınızın iletişim kurduğu uzak bir şirket sunucusu yoksa devre dışı bırakın.</v:String>
+    <v:String x:Key="tgl28_desc_svc">Yerleşik sanallaştırma sistemini kullanmıyorsanız devre dışı bırakın. VirtualBox ve benzeri programların çalışmasını hiçbir şekilde etkilemez.</v:String>
+    <v:String x:Key="tgl29_desc_svc">Eşleştirilmiş cihaz kullanmıyorsanız ve Microsoft Store'dan uzaktan uygulama yüklemiyorsanız devre dışı bırakın. Bu hizmetler; eşleştirilmiş cihazlarla Bildirim Merkezi'ni yönetir, anında iletme (push) isteklerini işler, Windows'un Telefon Bağlantısı uygulaması için akıllı telefonunuzu algılamasını, otomatik yeniden bağlanmasını ve mesajlarınız ile etkinliklerinizi İşlem Merkezi'nde görüntülemesini sağlar. Windows 10'da devre dışı bırakıldığında Bildirim Merkezi açılmayabilir.</v:String>
+    <v:String x:Key="tgl30_desc_svc">Cihazı bir mağazada Windows özelliklerini sergilemek için kullanmıyorsanız devre dışı bırakın. Mağaza Demo hizmeti, yalnızca mağaza teşhiri ve test amaçlı demo içeriğini ve etkileşimli özellikleri yönetir. Günlük bilgisayar kullanımı için gerekli değildir.</v:String>
+    <v:String x:Key="tgl31_desc_svc">Microsoft Edge'i kullanmıyorsanız veya güncellemeyecekseniz devre dışı bırakın. Bu aynı zamanda WebView2 Runtime'ın otomatik güncellemelerini de durdurur; bu bileşenler aynı güncelleme mekanizmasını kullanır ve birbirine sıkıca bağlıdır.</v:String>
+    <v:String x:Key="tgl32_desc_svc">Olası sonuçları biliyorsanız ve öncelikli ses/video işleme gerektiren multimedya uygulamaları kullanmıyorsanız devre dışı bırakın. Nadir durumlarda sistem olaylarının sayısını ve yükü hafifçe azaltabilir (örneğin NetAdapterCX destekli ağ adaptörü kullanılırken); ancak etki sistem yapılandırmasına göre değişir. Ses takılmaları, ses/video senkronizasyon kayması ve diğer oynatma sorunlarına yol açabilir.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_sys">Fare işaretçisi hızı:</v:String>
+    <v:String x:Key="slider2_sys">Klavye yineleme gecikmesi:</v:String>
+    <v:String x:Key="slider3_sys">Klavye yineleme hızı:</v:String>
+    <v:String x:Key="text_sys">Klavye ayarlarınızı test etmek için buraya yazın</v:String>
+    <v:String x:Key="tgl1_sys">İşaretçi hassasiyetini artır</v:String>
+    <v:String x:Key="tgl2_sys">Yapışkan Tuşlar ve Filtre Tuşları</v:String>
+    <v:String x:Key="tgl3_sys">Windows Defender, Antimalware, SmartScreen ve VBS</v:String>
+    <v:String x:Key="tgl4_sys">UAC (Kullanıcı Hesabı Denetimi)</v:String>
+    <v:String x:Key="tgl5_sys">Bildirim Merkezi'nden gelen güvenlik bildirimleri</v:String>
+    <v:String x:Key="tgl6_sys">Microsoft Store uygulamalarını otomatik güncelle</v:String>
+    <v:String x:Key="tgl7_sys">Realtek Ses sürücüsündeki ses gecikmesi</v:String>
+    <v:String x:Key="tgl8_sys">Kilit ekranı kapatma zaman aşımı</v:String>
+    <v:String x:Key="tgl9_sys">"Hazırda Beklet" ve "Hızlı Başlatma" teknolojileri</v:String>
+    <v:String x:Key="tgl10_sys">Kapatma uyarısı penceresi (Zorla kapat)</v:String>
+    <v:String x:Key="tgl11_sys">Herhangi bir .exe çalıştırıldığında çıkan uyarılar</v:String>
+    <v:String x:Key="tgl12_sys">Otomatik Windows Bellek Tanılama</v:String>
+    <v:String x:Key="tgl13_sys">Teredo, ISATAP ve IPv6 protokolleri</v:String>
+    <v:String x:Key="tgl14_sys">Dosya sistemi önbellek boyutu</v:String>
+    <v:String x:Key="tgl15_sys">Başlangıç programlarının açılışını geciktirme</v:String>
+    <v:String x:Key="tgl16_sys">Hızlı Erişim paneli kullanım geçmişi</v:String>
+    <v:String x:Key="tgl17_sys">Çıkarılabilir diskler için Otomatik Kullan</v:String>
+    <v:String x:Key="tgl18_sys">Varsayılan güç planını kullan ("Nihai Performans")</v:String>
+    <v:String x:Key="tgl19_sys">"Bluetooth ve cihazlar" işlevini kullan</v:String>
+    <v:String x:Key="tgl20_sys">Windows Defender Güvenlik Duvarı</v:String>
+    <v:String x:Key="tgl21_sys">"Oyun Modu" işlevini kullan</v:String>
+    <v:String x:Key="tgl22_sys">"Oyun Çubuğu" (Game Bar) işlevini kullan</v:String>
+    <v:String x:Key="tgl23_sys">Arka plan uygulamaları</v:String>
+    <v:String x:Key="tgl24_sys">Windows Ayrılmış Depolama alanı</v:String>
+    <v:String x:Key="tgl25_sys">Dinamik ve Yüksek Hassasiyetli Olay Zamanlayıcısı (HPET)</v:String>
+    <v:String x:Key="tgl26_sys">"PC Sistem Durumu Denetimi"ni güncellemelerden gizle</v:String>
+    <v:String x:Key="tgl27_sys">Windows Insider Arka Plan Görevleri</v:String>
+    <v:String x:Key="tgl28_sys">Sistem Diski Birleştirme (Defragmentation)</v:String>
+    <v:String x:Key="tgl29_sys">Windows Güncelleştirmelerini Duraklat</v:String>
+    <v:String x:Key="tgl30_sys">Çok Düzlemli Kaplama (MPO)</v:String>
+
+    <v:String x:Key="slider1_desc_sys">Fare işaretçisinin hızını değiştirir, böylece fare ayarlarını aramakla zaman kaybetmezsiniz.</v:String>
+    <v:String x:Key="slider2_desc_sys">Basılı tutulan bir tuşun yinelenmeye başlamasından önceki gecikmeyi değiştirir; önerilen değer 0'dır.</v:String>
+    <v:String x:Key="slider3_desc_sys">Basılı tutulan bir tuşun yinelenme hızını değiştirir; önerilen değer 31'dir.</v:String>
+    <v:String x:Key="tgl1_desc_sys">Varsayılan olarak fare ivmesi, fare hareketini hızlandırır. İvme açıkken tutarlı hareket ve yön isabeti olumsuz etkilendiği için (özellikle oyunlarda) kapatılması önerilir.</v:String>
+    <v:String x:Key="tgl2_desc_sys">Oyun oynarken veya çalışırken sürekli karşınıza çıkan ve "Hayır" dedikten sonra bile tekrar beliren Yapışkan Tuşlar veya Filtre Tuşları uyarı penceresinden kurtulmak istiyorsanız bu işlevi devre dışı bırakın. Ayrıca Filtre Tuşları, klavye yineleme hızını ve tekrarlanan tuşların atlanmasını da etkiler.</v:String>
+    <v:String x:Key="tgl3_desc_sys">Bu ayar; Windows Defender'ı, SmartScreen'i, Antimalware hizmetinin orantısız işlemci yükünü ve Sanallaştırma Tabanlı Güvenliği (VBS) tamamen durdurup devre dışı bırakır. Değişikliklerin tam olarak uygulanabilmesi için sistem otomatik olarak Güvenli Mod'da yeniden başlatılacaktır. Herhangi bir işlem yapmanıza gerek yoktur; araç her şeyi otomatik olarak halleder.</v:String>
+    <v:String x:Key="tgl4_desc_sys">Bu ayar, Kullanıcı Hesabı Denetimi'ni (UAC) tamamen devre dışı bırakır; simgelerdeki kalkan işaretlerinden, sürekli çıkan onay pencerelerinden ve güvenlik bildirimlerinden kurtulursunuz. UAC tam anlamıyla bir antivirüs koruması değildir.</v:String>
+    <v:String x:Key="tgl5_desc_sys">Güvenlik veya koruma ile ilgili bir ayarı kapattığınızda Windows sürekli uyarı gönderir. Bu ayar, Bildirim Merkezi'nden gelen can sıkıcı güvenlik bildirimlerini devre dışı bırakır.</v:String>
+    <v:String x:Key="tgl6_desc_sys">Microsoft Store'daki uygulamalarınızı kendiniz güncellemeyi tercih ediyorsanız otomatik güncelleme özelliğini kapatabilirsiniz. Böylece arka plandaki gereksiz ağ kullanımı ve internet yavaşlaması önlenmiş olur.</v:String>
+    <v:String x:Key="tgl7_desc_sys">Bazı Realtek High Definition Audio sürücüleri ses gecikmesi sorununa yol açabilir. Bu ayar söz konusu arızayı giderir. Ancak herhangi bir ses gecikmesi fark etmiyorsanız veya yüklü sürücünün Realtek olduğundan emin değilseniz kullanılması önerilmez.</v:String>
+    <v:String x:Key="tgl8_desc_sys">Windows varsayılan olarak kilit ekranını 1 dakika boyunca görüntüler ve ardından cihazın pilde veya prize takılı olmasından bağımsız olarak ekranı kapatır. Bu ayar söz konusu kısıtlamayı kaldırır.</v:String>
+    <v:String x:Key="tgl9_desc_sys">Teorik olarak Hızlı Başlatma, Hazırda Beklet modundan çıkmaktan daha kısa sürer ancak pratikte bu fark pek hissedilmez. Hızlı Başlatma veya Hazırda Beklet özelliklerini kullanmıyorsanız bunları devre dışı bırakabilirsiniz. Böylece sistem diskinizde (C: sürücüsü) GB'larca ek boş alan açmış olursunuz.</v:String>
+    <v:String x:Key="tgl10_desc_sys">Bilgisayarı kapatırken veya yeniden başlatırken açık kalan programların zorla kapatılacağını bildiren ve süreci duraklatan sistem uyarı ekranını devre dışı bırakır.</v:String>
+    <v:String x:Key="tgl11_desc_sys">İnternetten indirilen .exe, .msi, .bat, .cmd veya diğer çalıştırılabilir dosyaları açarken karşınıza çıkan Windows güvenlik uyarısıdır. Her seferinde onay vermek can sıkıcı olabilir; bu ayar söz konusu uyarıyı devre dışı bırakır.</v:String>
+    <v:String x:Key="tgl12_desc_sys">Bu ayar, zamanlanmış görevi kapatarak Windows Bellek Tanılama aracının otomatik başlamasını engeller. Sonuç olarak sistem, gereksiz denetimler yapmadığı için daha hızlı açılır. İhtiyaç duyduğunuzda tanılamayı Başlat menüsünden manuel olarak çalıştırabilirsiniz.</v:String>
+    <v:String x:Key="tgl13_desc_sys">Bu ayar, son kullanıcıların büyük çoğunluğunun ihtiyaç duymadığı Teredo, ISATAP ve IPv6 protokollerini devre dışı bırakır. Ancak iş veya kurumsal ağlara bağlı cihazlarda uygulanması önerilmez; ağ sorunlarına veya bazı şirket hizmetlerinin düzgün çalışmamasına yol açabilir.</v:String>
+    <v:String x:Key="tgl14_desc_sys">Bu ayar, büyük dosya sistemi önbelleği desteğini etkinleştirir. Önbellek boyutunu artırmak genel olarak bilgisayar performansını iyileştirir ancak uygulamalar ve hizmetler için kullanılabilecek fiziksel RAM miktarını bir miktar azaltır.</v:String>
+    <v:String x:Key="tgl15_desc_sys">Windows varsayılan olarak başlangıç programlarının açılışını geciktiren yerleşik bir mekanizmaya sahiptir. Bu özellik eski HDD'li bilgisayarlarda işe yarasa da, SSD'ye sahip modern bilgisayarlarda sistemin ve başlangıç programlarının gereksiz yere geç açılmasına neden olur. Bu ayar gecikmeyi ortadan kaldırır.</v:String>
+    <v:String x:Key="tgl16_desc_sys">Bu ayar, Dosya Gezgini'ndeki Hızlı Erişim panelinde görüntülenen dosya ve klasörlerin kullanım geçmişinin kaydedilmesini devre dışı bırakır. Yani sistem, en son açtığınız öğeleri artık otomatik olarak kaydetmez ve başkalarının görmesini engeller.</v:String>
+    <v:String x:Key="tgl17_desc_sys">Bu ayar, bilgisayarınıza bağlanan USB bellek gibi çıkarılabilir diskler için Dosya Gezgini'nin Otomatik Kullan özelliğini devre dışı bırakır. Böylece, güvenilirliğinden emin olmadığınız bir diskteki virüs veya bilinmeyen bir program otomatik olarak çalışamaz.</v:String>
+    <v:String x:Key="tgl18_desc_sys">"Nihai Performans" güç planını sisteme ekler ve doğrudan bu plana geçiş yapar. Ayrıca, işlemci güç yönetimi ayarlarında maksimum işlemci frekansını ayarlama kilidini açarak bilgisayarınızdan tam performans almanızı sağlar.</v:String>
+    <v:String x:Key="tgl19_desc_sys">Bluetooth kullanmıyorsanız ve cihazlarınızı Bluetooth üzerinden bağlamıyorsanız bunu kapatın; böylece sistem tepsisindeki gereksiz Bluetooth simgesi de kaldırılır.</v:String>
+    <v:String x:Key="tgl20_desc_sys">Güvenlik Duvarı, programların internet erişimini denetleyerek bağlantılarına izin vermenizi veya engellemenizi sağlar. Ne yaptığınızdan eminseniz ve alternatif bir korumanız varsa devre dışı bırakabilirsiniz; ancak standart kullanıcılar için etkin tutulması önerilir.</v:String>
+    <v:String x:Key="tgl21_desc_sys">Oyun Modu, çok güçlü sistemlerde belirgin bir FPS artışı sağlamaz. Ancak arka planda çok sayıda uygulama çalışıyorsa bu mod, arka plan işlemlerini kısıtlayarak oyun performansınızın anlık olarak düşmesini engeller.</v:String>
+    <v:String x:Key="tgl22_desc_sys">Oyunlarınızı kaydetmeye ve Xbox özelliklerini kullanmaya yarayan Oyun Çubuğu (Game Bar) işlevidir. Arka planda sürekli çalışarak sistem kaynaklarınızı tüketir. Oyun kaydetmek için kendiliğinden açılmayan çok daha iyi alternatifler mevcuttur.</v:String>
+    <v:String x:Key="tgl23_desc_sys">Bazı uygulamalar, aktif olarak kullanılmadıklarında bile arka planda çalışmaya devam eder. Arka plan uygulamalarını tamamen devre dışı bırakmak; ağ kullanımını, işlemci yükünü ve güç tüketimini azaltır. Özellikle dizüstü bilgisayarlarda pil ömrünü uzatması açısından çok faydalıdır.</v:String>
+    <v:String x:Key="tgl24_desc_sys">Ayrılmış Depolama Alanı; güncellemeler, uygulamalar, geçici dosyalar ve sistem önbelleği tarafından kullanılmak üzere diskinizde rezerve edilmiş bir alandır. Devre dışı bırakmak önemli miktarda disk alanı açabilir; ancak diskinizde zaten yeterince boş yer varsa kapatmanız ekstra bir performans artışı sağlamaz.</v:String>
+    <v:String x:Key="tgl25_desc_sys">Dinamik zamanlayıcıyı ve HPET'i devre dışı bırakmak, mikro takılmaları azaltarak sistemin tepki süresini iyileştirebilir ve oyunlarda akıcılık sağlayabilir. Ancak etki donanıma göre değişir; bazı sistemlerde hızlanma yerine yavaşlama ve gecikme yaşanabilir. Dizüstü bilgisayar kullanıyorsanız, işlemci daha aktif kalacağından pil tüketiminin hafifçe artabileceğini unutmayın.</v:String>
+    <v:String x:Key="tgl26_desc_sys">Bu ayar, "PC Sistem Durumu Denetimi" aracının izinsiz kurulumunu engeller. Bu Microsoft aracı, Windows Update aracılığıyla onay alınmadan zorla yüklenir ve sürekli olarak "Windows 11'e hazır olup olmadığınızı" kontrol ederek istenmeyen optimizasyon önerileri sunar.</v:String>
+    <v:String x:Key="tgl27_desc_sys">Windows Insider programına (Beta testleri) katılanlar için bu görevler etkin kalmalıdır. Ancak programa dahil değilseniz bu görevler tamamen gereksizdir: Sistem kaynaklarını tüketir, işe yaramaz günlük dosyaları oluşturur ve size hiçbir fayda sağlamadan arka planda telemetri verileri gönderir. Devre dışı bırakmak açılış süresini ve genel sistem performansını iyileştirir.</v:String>
+    <v:String x:Key="tgl28_desc_sys">Sisteminizde SSD varsa, yalnızca eski tip mekanik disklerde (HDD) işe yarayan "Disk Birleştirme" işlemini devre dışı bırakmak SSD'nizin ömrünü uzatır. Bu ayar kapatıldığında bile SSD'ler için hayati önem taşıyan TRIM optimizasyon işlevi çalışmaya devam eder ve sürücünüzün hızını korur.</v:String>
+    <v:String x:Key="tgl29_desc_sys">Windows sistem güncelleştirmelerini 10 yıl süreyle duraklatır; ancak Microsoft Store'dan yapılan uygulama indirmeleri ve güncellemeleri çalışmaya devam eder. Güncelleştirmeleri tamamen kapatmak isterseniz, Hizmetler sekmesine gidip ilgili Windows Update hizmetlerini devre dışı bırakabilirsiniz.</v:String>
+    <v:String x:Key="tgl30_desc_sys">Çok Düzlemli Kaplama (MPO), donanım hızlandırmalı katman bindirme yoluyla performansı artırmak için tasarlanmış bir Windows görüntü teknolojisidir. Ancak bazı durumlarda sistem ve ekran kartı sürücüleri hatalı etkileşime girerek siyah ekran, donma, titreme ve ekran yırtılması (tearing) gibi sorunlara neden olabilir. Yalnızca bu tür grafiksel sorunlar yaşıyorsanız devre dışı bırakmanız önerilir.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Information Page -->
+    <v:String x:Key="title_win_name_sysinfo">İşletim sistemi:</v:String>
+    <v:String x:Key="title_win_ver_sysinfo">Sürüm:</v:String>
+    <v:String x:Key="label_proc_sysinfo">Çalışan işlemler:</v:String>
+    <v:String x:Key="label_svc_sysinfo">hizmetler:</v:String>
+    <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
+    <v:String x:Key="title_mode_sysinfo">Mod:</v:String>
+    <v:String x:Key="title_motherbr_sysinfo">Anakart:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">Yonga Seti:</v:String>
+    <v:String x:Key="title_cpu_sysinfo">İşlemci:</v:String>
+    <v:String x:Key="title_cores_sysinfo">Çekirdekler:</v:String>
+    <v:String x:Key="title_threads_sysinfo">İş parçacıkları:</v:String>
+    <v:String x:Key="title_freq_sysinfo">Frekans:</v:String>
+    <v:String x:Key="title_gpu_sysinfo">Ekran Kartı:</v:String>
+    <v:String x:Key="title_refreshrate_sysinfo">Yenileme Hızı:</v:String>
+    <v:String x:Key="title_ram_sysinfo">Bellek:</v:String>
+    <v:String x:Key="title_mtype_sysinfo">Bellek Türü:</v:String>
+    <v:String x:Key="title_storage_sysinfo">Depolama birimleri:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">Kullanılan:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">Boş:</v:String>
+    <v:String x:Key="title_sound_sysinfo">Ses çıkış cihazları:</v:String>
+    <v:String x:Key="title_netadapter_sysinfo">Ağ bağdaştırıcıları:</v:String>
+    <v:String x:Key="title_ip_sysinfo">IP adresiniz:</v:String>
+    <v:String x:Key="connection_limited_sysinfo">Ağ bağlantısı sınırlı</v:String>
+    <v:String x:Key="connection_block_sysinfo">Kısıtlı ağ erişimi</v:String>
+    <v:String x:Key="connection_lose_sysinfo">İnternet bağlantısı koptu</v:String>
+    <v:String x:Key="text_copy_sysinfo">Kopyalandı!</v:String>
+    <v:String x:Key="driver_not_installed_sysinfo">Sürücü yüklü değil</v:String>
+    <v:String x:Key="no_device_information_sysinfo">Cihaz bilgisi bulunamadı</v:String>
+    <v:String x:Key="unknown_information_sysinfo">Algılanmadı</v:String>
+    <!--#endregion-->
+
+    <!--#region Addons Page -->
+    <v:String x:Key="btn_select_dir">Klasör seç</v:String>
+    <v:String x:Key="chk_run_ti_adds">TrustedInstaller olarak çalıştır</v:String>
+    <v:String x:Key="text_info_adds">Bir klasör seçin veya klasörün boş olmadığından emin olun</v:String>
+    <v:String x:Key="scripts_info_adds">Ardından bu sayfada komut dosyalarını (.ps1, .cmd, .bat, .reg) çalıştırabilirsiniz</v:String>
+    <!--#endregion-->
+
+    <!--#region Toolset Page -->
+    <v:String x:Key="source_ts">Kaynak</v:String>
+    <v:String x:Key="btn_download">İndir</v:String>
+    <v:String x:Key="btn_cancel">İptal</v:String>
+    <v:String x:Key="btn_open_dir">Klasörü aç</v:String>
+    <v:String x:Key="text_ts">Ada veya yazara göre ara</v:String>
+    <v:String x:Key="connecting_ts">Bağlanılıyor</v:String>
+    <!--#endregion-->
+
+</ResourceDictionary>
