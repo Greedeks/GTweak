@@ -21,13 +21,13 @@
             </TextBlock>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,5,0,0">
             <ScrollViewer b:ScrollFadeBehavior.EnableFade="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <uc:FlowPanel Margin="20,20,5,20" UseMasonryLayout="False" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <uc:FlowPanel Margin="10,10,10,20" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                     <uc:Card Title="{DynamicResource title_licens_more}" Description="{DynamicResource text_licens_more}" BtnContent="{DynamicResource btn_activation}" ClickButton="BtnLicenseWindows_ClickButton">
                         <uc:Card.IconStyle>
                             <Style TargetType="Image">
-                                <Setter Property="Source" Value="{StaticResource Icon_LicenseWindows}" />
+                                <Setter Property="Source" Value="{StaticResource Icon_Activation}" />
                             </Style>
                         </uc:Card.IconStyle>
                     </uc:Card>
@@ -51,7 +51,7 @@
                     <uc:Card Title="{DynamicResource title_clear_more}" Description="{DynamicResource text_clear_more}" BtnContent="{DynamicResource btn_clear}" ClickButton="BtnClear_ClickButton">
                         <uc:Card.IconStyle>
                             <Style TargetType="Image">
-                                <Setter Property="Source" Value="{StaticResource Icon_Trash}" />
+                                <Setter Property="Source" Value="{StaticResource Icon_Cleaning}" />
                             </Style>
                         </uc:Card.IconStyle>
                     </uc:Card>
@@ -59,7 +59,7 @@
                     <uc:Card Title="{DynamicResource title_ntfs_more}" Description="{DynamicResource text_ntfs_more}" BtnContentSecondary="{DynamicResource btn_enable}" BtnContent="{DynamicResource btn_disable}" ClickButton="BtnDecompression_ClickButton" ClickButtonSecondary="BtnCompression_ClickButton">
                         <uc:Card.IconStyle>
                             <Style TargetType="Image">
-                                <Setter Property="Source" Value="{StaticResource Icon_Ntfs}" />
+                                <Setter Property="Source" Value="{StaticResource Icon_Compressed}" />
                             </Style>
                         </uc:Card.IconStyle>
                     </uc:Card>

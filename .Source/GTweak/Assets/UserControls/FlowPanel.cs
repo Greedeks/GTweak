@@ -445,29 +445,41 @@ namespace GTweak.Assets.UserControls
             }
 
             double extraSpace = Math.Max(0, availableWidth - totalColumnsWidth);
-            double xV = ContentAlignment switch
+
+            bool isStretch = ContentAlignment == HorizontalAlignment.Stretch && !EqualizeItemSize;
+
+            double xV = 0;
+            if (!isStretch)
             {
-                HorizontalAlignment.Center => extraSpace / 2.0,
-                HorizontalAlignment.Right => extraSpace,
-                _ => 0
-            };
+                xV = ContentAlignment switch
+                {
+                    HorizontalAlignment.Center => extraSpace / 2.0,
+                    HorizontalAlignment.Right => extraSpace,
+                    _ => 0
+                };
+            }
+
+            double stretchExtraPerColumn = (isStretch && groups.Count > 0) ? extraSpace / groups.Count : 0;
 
             for (int i = 0; i < groups.Count; i++)
             {
                 FlowItemGroup col = groups[i];
-                double shift = (!EqualizeItemSize && groups.Count > 1) ? (extraSpace * ((double)i / (groups.Count - 1)) * 0.3) : 0;
+                double shift = (!EqualizeItemSize && groups.Count > 1 && !isStretch) ? (extraSpace * ((double)i / (groups.Count - 1)) * 0.3) : 0;
 
                 double columnX = xV + shift;
                 double y = 0;
 
+                double actualColWidth = isStretch ? col.Width + stretchExtraPerColumn : col.Width;
+
                 foreach (UIElement child in col.Elements)
                 {
-                    double w = GetChildWidth(child);
+                    double w = isStretch ? actualColWidth : GetChildWidth(child);
                     double h = GetChildHeight(child);
+
                     child.Arrange(new Rect(columnX, y, w, h));
                     y += h + VerticalSpacing;
                 }
-                xV += col.Width + HorizontalSpacing;
+                xV += actualColWidth + HorizontalSpacing;
             }
         }
 
