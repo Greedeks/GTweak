@@ -11,6 +11,7 @@
     -->
 
     <v:String x:Key="en">English (EN)</v:String>
+    <v:String x:Key="he">עברית (HE)</v:String>
     <v:String x:Key="fr">Français (FR)</v:String>
     <v:String x:Key="hu">Magyar (HU)</v:String>
     <v:String x:Key="it">Italiano (IT)</v:String>
