@@ -25,11 +25,12 @@
 [![KO](https://img.icons8.com/color/50/south-korea-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md) 
 [![PL](https://img.icons8.com/color/50/poland-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md) 
 [![PT-BR](https://img.icons8.com/color/50/brazil-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md) 
-[![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md)
+[![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md) 
 [![SI](https://img.icons8.com/color/50/slovenia-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-sl-si.md)
+[![TH](https://img.icons8.com/color/50/thailand-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-th.md)
+[![TR](https://img.icons8.com/color/50/turkey-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-tr.md)
 [![UK](https://img.icons8.com/color/50/ukraine-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md) 
 [![ZH-TW](https://img.icons8.com/color/50/china-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md)
-[![TR](https://img.icons8.com/color/50/turkey-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-tr.md)
 
 </div>
 
@@ -131,7 +132,7 @@ Nameščena platforma: .NET Framework 4.8
 
 <div align="left">
   
-[![VenusGirl](https://wsrv.nl/?url=github.com/VenusGirl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/VenusGirl) [![Kopejkin](https://wsrv.nl/?url=github.com/Kopejkin.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kopejkin) [![Zephyris](https://wsrv.nl/?url=github.com/Zephyris-Pro.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Zephyris-Pro) [![Marcos](https://wsrv.nl/?url=github.com/marcolinojunior.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/marcolinojunior) [![John](https://wsrv.nl/?url=github.com/JohnFowler58.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/JohnFowler58) [![Seba](https://wsrv.nl/?url=github.com/seba99317.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/seba99317) [![Tenshi](https://wsrv.nl/?url=github.com/tenshikohaku0227.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/tenshikohaku0227) [![Andrew Poženel](https://wsrv.nl/?url=github.com/anderlli0053.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/anderlli0053) [![Ahmet Güzel](https://wsrv.nl/?url=github.com/ahmetgzl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/ahmetgzl)
+[![VenusGirl](https://wsrv.nl/?url=github.com/VenusGirl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/VenusGirl) [![Kasemcyber](https://wsrv.nl/?url=github.com/Kasemcyber.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kasemcyber)  [![Kopejkin](https://wsrv.nl/?url=github.com/Kopejkin.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kopejkin) [![Zephyris](https://wsrv.nl/?url=github.com/Zephyris-Pro.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Zephyris-Pro) [![Marcos](https://wsrv.nl/?url=github.com/marcolinojunior.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/marcolinojunior) [![John](https://wsrv.nl/?url=github.com/JohnFowler58.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/JohnFowler58) [![Seba](https://wsrv.nl/?url=github.com/seba99317.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/seba99317) [![Tenshi](https://wsrv.nl/?url=github.com/tenshikohaku0227.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/tenshikohaku0227) [![Andrew Poženel](https://wsrv.nl/?url=github.com/anderlli0053.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/anderlli0053) [![Ahmet Güzel](https://wsrv.nl/?url=github.com/ahmetgzl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/ahmetgzl)[![Yosef Chai](https://wsrv.nl/?url=github.com/yosef-chai.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/yosef-chai)
 
 </div>
 
