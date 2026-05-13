@@ -1,0 +1,560 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="defaultDescription">העבר את העכבר מעל טוויק כלשהו כדי לקבל את תיאורו</v:String>
+    <v:String x:Key="defaultDescriptionApp">העבר את העכבר מעל הסמל של אפליקציה כלשהי כדי לראות את שמה</v:String>
+    <v:String x:Key="btn_default">ברירת מחדל</v:String>
+    <v:String x:Key="btn_change">שינוי</v:String>
+
+    <!--#region Load Window -->
+    <v:String x:Key="title_load">טעינה</v:String>
+    <v:String x:Key="step1_load">הכנת סביבת העבודה</v:String>
+    <v:String x:Key="step2_load">בדיקת מצב הרכיבים</v:String>
+    <v:String x:Key="step3_load">סריקת התצורה</v:String>
+    <v:String x:Key="step4_load">חיפוש חבילות מותקנות</v:String>
+    <v:String x:Key="step5_load">בדיקת רשת ועדכונים</v:String>
+    <v:String x:Key="step6_load">אתחול</v:String>
+    <!--#endregion-->
+
+    <!--#region Message Window -->
+    <v:String x:Key="title_message">אופס..</v:String>
+    <v:String x:Key="part1_message">היישום כבר פועל. הפעלה של מספר עותקים</v:String>
+    <v:String x:Key="part2_message">אסורה</v:String>
+    <v:String x:Key="part3_message">כדי למנוע התנגשויות פנימיות וקריסות של התוכנה.</v:String>
+    <v:String x:Key="button_message">אישור (05)</v:String>
+    <v:String x:Key="noty_message">▪סגירה אוטומטית של החלון</v:String>
+    <v:String x:Key="title_nosupport_message">לא נתמך</v:String>
+    <v:String x:Key="part1_nosupport_message">היישום אינו תומך בגרסת ה-Windows שלך. המשך הפעולה</v:String>
+    <v:String x:Key="part2_nosupport_message">בלתי אפשרי,</v:String>
+    <v:String x:Key="part3_nosupport_message">GTweak ייסגר כדי למנוע שגיאות קריטיות.</v:String>
+    <v:String x:Key="title_admin_message">הרשאות לא מספיקות</v:String>
+    <v:String x:Key="part1_admin_message">הפעלת התוכנה</v:String>
+    <v:String x:Key="part2_admin_message">בלתי אפשרית,</v:String>
+    <v:String x:Key="part3_admin_message">לפעולה תקינה, יש להריץ כמנהל מערכת.</v:String>
+    <!--#endregion-->
+
+    <!--#region Notification Window -->
+    <v:String x:Key="title_win_noty">התראה - GTweak</v:String>
+    <v:String x:Key="title_warn_noty">שים לב</v:String>
+    <v:String x:Key="title_info_noty">מידע</v:String>
+    <v:String x:Key="logout_noty">נדרשת יציאה מהמשתמש, לחץ על טקסט זה כדי לבצעה</v:String>
+    <v:String x:Key="restart_noty">נדרש אתחול, לחץ על טקסט זה כדי לבצעו</v:String>
+    <v:String x:Key="warn_update_noty">אירעה שגיאה במהלך עדכון התוכנה, נסה שוב מאוחר יותר</v:String>
+    <v:String x:Key="warn_import_noty">קובץ זה אינו מתאים לייבוא</v:String>
+    <v:String x:Key="empty_import_noty">הקובץ ריק, לא ניתן להחיל טוויקים</v:String>
+    <v:String x:Key="export_warning_noty">אין בכך טעם, החל לפחות טוויק אחד תחילה</v:String>
+    <v:String x:Key="success_onedrive_noty">תהליך השחזור של OneDrive החל וייקח זמן מה</v:String>
+    <v:String x:Key="error_onedrive_noty">קובץ ההתקנה של OneDrive חסר, השחזור בלתי אפשרי</v:String>
+    <v:String x:Key="warn_wd_noty">המתן לסיום התהליך ולאחריו לאתחול המערכת</v:String>
+    <v:String x:Key="info_wd_noty">זה ייקח זמן מה, אנא המתן מעט</v:String>
+    <v:String x:Key="warn_firewall_noty">חומת האש שלך מושבתת, הפעל אותה והחל את הטוויק שוב</v:String>
+    <v:String x:Key="ready_activate_noty">מערכת ההפעלה שלך אינה זקוקה לאקטיבציה</v:String>
+    <v:String x:Key="win_activate_noty">תהליך האקטיבציה של Windows החל, פעולה זו תיקח זמן מה</v:String>
+    <v:String x:Key="success_activate_noty">האקטיבציה הצליחה, מומלץ לאתחל את המחשב</v:String>
+    <v:String x:Key="error_activate_noty">משהו השתבש, לצערנו לא ניתן היה להפעיל את המערכת</v:String>
+    <v:String x:Key="network_activate_noty">נדרש חיבור לאינטרנט לצורך האקטיבציה</v:String>
+    <v:String x:Key="keynotfound_noty">המפתח לגרסת ה-Windows שלך חסר; האקטיבציה בוטלה</v:String>
+    <v:String x:Key="createpoint_noty">יצירת נקודת שחזור תיקח זמן מה</v:String>
+    <v:String x:Key="error_point_noty">משהו השתבש, לא ניתן היה ליצור נקודת שחזור</v:String>
+    <v:String x:Key="success_point_noty">נקודת השחזור נוצרה בהצלחה</v:String>
+    <v:String x:Key="error_recovery_noty">משהו השתבש, לא ניתן היה להתחיל את השחזור</v:String>
+    <v:String x:Key="disable_recovery_noty">שחזור המערכת מושבת, נקודות השחזור אינן זמינות</v:String>
+    <v:String x:Key="enable_recovery_noty">שחזור המערכת פעיל וזמין לשימוש בעת הצורך</v:String>
+    <v:String x:Key="warn_recovery_noty">כבר ביטלת את מערכת השחזור</v:String>
+    <v:String x:Key="warn_point_enabled_noty">כבר הפעלת את מערכת השחזור</v:String>
+    <v:String x:Key="clear_ram_noty">הזיכרון לטווח קצר וקבצים זמניים נוקו</v:String>
+    <v:String x:Key="success_compression_noty">דחיסת התיקייה ותכולתה הסתיימה בהצלחה</v:String>
+    <v:String x:Key="success_decompression_noty">פריסת התיקייה ותכולתה הסתיימה בהצלחה</v:String>
+    <v:String x:Key="ready_compression_noty">התיקייה כבר דחוסה, אין צורך בדחיסה נוספת</v:String>
+    <v:String x:Key="ready_decompression_noty">התיקייה כבר פרוסה, אין צורך בפעולה נוספת</v:String>
+    <v:String x:Key="error_compression_noty">משהו השתבש, אירעה שגיאה בשינוי מצב הדחיסה</v:String>
+    <v:String x:Key="notsupport_ntfs_noty">הפעולה לא זמינה מכיוון שהתיקייה אינה נמצאת על מחיצת NTFS</v:String>
+    <v:String x:Key="success_reg_exporter_noty">קובץ הרישום נשמר בהצלחה</v:String>
+    <v:String x:Key="error_reg_exporter_noty">אירעה שגיאה בשמירת קובץ הרישום</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub הגביל זמנית את בקשות ה-API, נסה שוב מאוחר יותר</v:String>
+    <v:String x:Key="error_download_noty">לא ניתן היה ליצור חיבור עם השרת</v:String>
+    <!--#endregion-->
+
+    <!--#region Main Window -->
+    <v:String x:Key="rbtn_utils_main">כלי שירות</v:String>
+    <v:String x:Key="rbtn_conf_main">פרטיות</v:String>
+    <v:String x:Key="rbtn_int_main">ממשק</v:String>
+    <v:String x:Key="rbtn_app_main">יישומים</v:String>
+    <v:String x:Key="rbtn_svc_main">שירותים</v:String>
+    <v:String x:Key="rbtn_sys_main">מערכת</v:String>
+    <v:String x:Key="rbtn_sysinfo_main">מידע על המערכת</v:String>
+    <v:String x:Key="rbtn_adds_main">תוספים</v:String>
+    <v:String x:Key="rbtn_ts_main">ארגז כלים</v:String>
+    <v:String x:Key="title_settings_main">הגדרות</v:String>
+    <v:String x:Key="btgl_noty_main">הצג התראות</v:String>
+    <v:String x:Key="slider_volume_main">עוצמת קול:</v:String>
+    <v:String x:Key="btgl_toast_main">הצמד מעל כל החלונות</v:String>
+    <v:String x:Key="btgl_update_main">בדיקת עדכונים</v:String>
+    <v:String x:Key="cmbox_lang_main">שפת הממשק:</v:String>
+    <v:String x:Key="btn_import">ייבוא</v:String>
+    <v:String x:Key="btn_export">ייצוא</v:String>
+    <v:String x:Key="btn_selfremove">הסרה עצמית</v:String>
+    <!--#endregion-->
+
+    <!--#region Import Window -->
+    <v:String x:Key="title_import">ייבוא טוויקים</v:String>
+    <v:String x:Key="wait_import">פעולה זו לוקחת זמן מה</v:String>
+    <v:String x:Key="warn_import">אין צורך לסגור את החלון בכוח</v:String>
+    <v:String x:Key="file_import">קובץ</v:String>
+    <!--#endregion-->
+
+    <!--#region Update Window -->
+    <v:String x:Key="title_win_update">עדכון - GTweak</v:String>
+    <v:String x:Key="title_update">נמצא עדכון</v:String>
+    <v:String x:Key="btn_upd">עדכן</v:String>
+    <v:String x:Key="download_update">מוריד</v:String>
+    <v:String x:Key="noty_update">אנא המתן לסיום ההורדה</v:String>
+    <v:String x:Key="connection_update">מתחבר לשרת</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">מומלץ</v:String>
+    <v:String x:Key="advice_part2_more">בחום</v:String>
+    <v:String x:Key="advice_part3_more">ליצור נקודת שחזור לפני השימוש בכלי</v:String>
+
+    <v:String x:Key="title_licens_more">אקטיבציה של Windows</v:String>
+    <v:String x:Key="text_licens_more">משתמש בשיטת HWID או ב-KMS כגיבוי. ייתכן שלא יעבוד אם אין מפתח זמין עבור גרסת ה-Windows שלך.</v:String>
+    <v:String x:Key="btn_activation">הפעל</v:String>
+
+    <v:String x:Key="title_point_more">נקודת שחזור</v:String>
+    <v:String x:Key="text_point_more">יוצר נקודת שחזור או מתחיל את תהליך השחזור של המערכת, גם אם נקודות שחזור מושבתות כעת.</v:String>
+    <v:String x:Key="btn_save">שמור</v:String>
+    <v:String x:Key="btn_recovery">שחזר</v:String>
+
+    <v:String x:Key="title_point_state_more">מצב השחזור</v:String>
+    <v:String x:Key="text_point_state_more">הפעלה או השבתה של נקודות שחזור המערכת. השבתה תמחק את כל נקודות השחזור הקיימות.</v:String>
+    <v:String x:Key="btn_disable">השבת</v:String>
+    <v:String x:Key="btn_enable">הפעל</v:String>
+
+    <v:String x:Key="title_clear_more">ניקוי הזיכרון</v:String>
+    <v:String x:Key="text_clear_more">מנקה את המטמון של קבצי המערכת בזיכרון המחשב, קבצים זמניים ומטמון של סמלים.</v:String>
+    <v:String x:Key="btn_clear">נקה</v:String>
+
+    <v:String x:Key="title_ntfs_more">דחיסת NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">מפעיל או משבית דחיסת NTFS. יעיל במיוחד לקבצי טקסט, ועוזר לחסוך מקום בדיסק.</v:String>
+
+    <v:String x:Key="title_registry_more">גיבוי הרישום</v:String>
+    <v:String x:Key="text_registry_more">יוצר גיבוי של רישום ה-Windows. מומלץ לפני ביצוע שינויים כדי לאפשר שחזור של המערכת.</v:String>
+    <v:String x:Key="btn_create">צור</v:String>
+
+    <v:String x:Key="title_over_more">אישור ניקוי דיסק</v:String>
+    <v:String x:Key="text_over_more">בדיסק שלך קיימת תיקיית Windows.old המכילה קבצים מגרסה קודמת של Windows התופסים מקום משמעותי. שים לב: לאחר מחיקת התיקייה, תכולתה לא ניתנת לשחזור, לכן ודא ששמרת את הקבצים הדרושים לך.</v:String>
+    <v:String x:Key="question_over_more">האם ברצונך להמשיך בניקוי ולמחוק את תיקיית Windows.old?</v:String>
+    <v:String x:Key="btn_agree">אשר</v:String>
+    <v:String x:Key="btn_decline">בטל</v:String>
+
+    <v:String x:Key="textpoint_more">נקודה שנוצרה באמצעות GTweak</v:String>
+    <!--#endregion-->
+
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_conf">מזהה פרסום ופרסומות ממוקדות</v:String>
+    <v:String x:Key="tgl2_conf">סוגי סנכרון נתונים שונים</v:String>
+    <v:String x:Key="tgl3_conf">איסוף ומעקב של טלמטריית Windows</v:String>
+    <v:String x:Key="tgl4_conf">איסוף נתונים דרך אירועי מתזמן המשימות</v:String>
+    <v:String x:Key="tgl5_conf">איסוף נתונים על יישומים מותקנים</v:String>
+    <v:String x:Key="tgl6_conf">איסוף סטטיסטיקה של שימוש ביישומים</v:String>
+    <v:String x:Key="tgl7_conf">איסוף ושליחה של נתוני כתב יד</v:String>
+    <v:String x:Key="tgl8_conf">איסוף נתוני תצורת חומרה</v:String>
+    <v:String x:Key="tgl9_conf">גישת רשת לדומיינים מרגלים של Microsoft</v:String>
+    <v:String x:Key="tgl10_conf">קביעת מיקום המשתמש</v:String>
+    <v:String x:Key="tgl11_conf">בדיקת בקשות דרך Feedback</v:String>
+    <v:String x:Key="tgl12_conf">עדכוני רקע נסתרים של סינתזת דיבור</v:String>
+    <v:String x:Key="tgl13_conf">ניטור נסתר של המערכת שלך</v:String>
+    <v:String x:Key="tgl14_conf">ניסויים נסתרים במערכת שלך</v:String>
+    <v:String x:Key="tgl15_conf">שירותים לאיסוף ושידור נתונים בסתר</v:String>
+    <v:String x:Key="tgl16_conf">«תיעוד» של אירועי Windows</v:String>
+    <v:String x:Key="tgl17_conf">איסוף ומעקב של טלמטריית NVIDIA</v:String>
+    <v:String x:Key="tgl18_conf">שמירת תיעוד של התנהגות המשתמש</v:String>
+    <v:String x:Key="tgl19_conf">איסוף נתונים ועדכוני רקע של מפות לא מקוונות</v:String>
+    <v:String x:Key="tgl20_conf">איסוף ומעקב של טלמטריית Intel</v:String>
+
+    <v:String x:Key="tgl1_desc_conf">Windows יוצר מזהה פרסום ייחודי לכל משתמש כדי לעקוב אחר הפעולות שלך. מזהה זה משמש מפתחי יישומים ואת Windows עצמה למטרותיהם, כולל הצגת פרסומות ספציפיות ביישומים.</v:String>
+    <v:String x:Key="tgl2_desc_conf">גם בשימוש בחשבון מקומי, Windows תמיד מנסה לסנכרן את הנתונים שלך עם שרתי Microsoft. בפרט: ערכות נושא, סיסמאות, הגדרות Windows, הגדרות דפדפן, הגדרות שורת השפה, הגדרות נגישות והגדרות נוספות.</v:String>
+    <v:String x:Key="tgl3_desc_conf">טלמטריה (נתוני אבחון) הם נתונים ש-Windows אוסף אוטומטית ושולח לשרתי Microsoft, או בקיצור, "מה? איפה? למה ומתי אתה משתמש בזה?". Microsoft טוענת שהנתונים אנונימיים ומסייעים לחברה לפתח את Windows. גם אם איסוף המידע אינו מטריד אותך, עלולה להיווצר בעיה אחרת - עומס מוגזם על המעבד, שמאט את המערכת.</v:String>
+    <v:String x:Key="tgl4_desc_conf">ב«מתזמן המשימות» קיימים שירותים שלאחר פעולתם אוספים נתונים על פעילותם ושולחים אותם לשרת Microsoft.</v:String>
+    <v:String x:Key="tgl5_desc_conf">Microsoft אוספת נתונים על התוכנות שלך. מידע זה משמש את Microsoft לאבחון בעיות תאימות, אך אינך עוזר ל-Microsoft לשפר את התאימות בגרסאות חדשות של Windows מכיוון שמידע זה משמש רק למטרות אנוכיות של Microsoft. השבתת תכונה זו מונעת שליחה של מידע רגיש פוטנציאלית.</v:String>
+    <v:String x:Key="tgl6_desc_conf">הטוויק ישבית את פונקציית הניטור של השימוש ביישומים, וימנע איסוף נתונים על תדירות השימוש, משך הפעולה ומדדי פרודוקטיביות נוספים. כתוצאה מכך, המערכת תפסיק לנתח את תהליך העבודה שלך, ותבטיח הגנה על המידע הסודי שלך.</v:String>
+    <v:String x:Key="tgl7_desc_conf">טוויק זה משבית את מנגנון איסוף הנתונים ש-Microsoft משתמשת בו לשיפור טכנולוגיית זיהוי כתב היד שלה. ללא קשר לשימוש בתכונה זו, המערכת עקבה אחר הפעילות שלך כדי לשפר את דיוק הזיהוי. השינויים שיופעלו מונעים איסוף נתונים כזה ועוזרים לשמור על הפרטיות.</v:String>
+    <v:String x:Key="tgl8_desc_conf">תוכנית שיפור איכות התוכנה (CEIP) היא תכונה נפרדת האוספת מידע על תצורת החומרה ועל אופן השימוש שלך בתוכנה ובשירותים. התוכנית גם מורידה מעת לעת קובץ לאיסוף מידע על בעיות שאתה עלול לחוות עם Windows. התוכנית היא וולונטרית, ואינך חייב לשלוח את הנתונים שלך ל-Microsoft ולפגוע בפרטיות שלך.</v:String>
+    <v:String x:Key="tgl9_desc_conf">טוויק זה משנה את קובץ hosts על ידי הוספת הכתובת 0.0.0.0 לפני שמות דומיינים מסוימים, וחוסם אותם למעשה. בנוסף, הוא משנה את הגדרות חומת האש של Windows כדי לחסום חיבורים לכמה כתובות IP הקשורות לשירותי איסוף הנתונים של Microsoft.</v:String>
+    <v:String x:Key="tgl10_desc_conf">השבתת שירותי המיקום מצמצמת משמעותית את הפוטנציאל לשימוש בנתוני מיקום למטרות פרסום – הגישה למידע זה מוגבלת לא רק עבור שירותי Microsoft אלא גם עבור יישומים וסקריפטים של צד שלישי.</v:String>
+    <v:String x:Key="tgl11_desc_conf">הטוויק חוסם את איסוף המשוב וההתראות שלו ב-Windows, מה שמונע שידור נתונים ללא הסכמתך. בנוסף, גם אם אינך משתמש בתכונת «Feedback», Microsoft עדיין מתעדת באיזו תדירות אתה פונה לתמיכה הרשמית.</v:String>
+    <v:String x:Key="tgl12_desc_conf">Windows מסוגלת לזהות דיבור באמצעות מודול ייעודי לזיהוי וסינתזת דיבור. גם אם אינך משתמש ב-Cortana או ב«אפשרויות נגישות», מערכת ההפעלה שלך תמיד בודקת כברירת מחדל אם יש עדכונים למנוע זיהוי הדיבור.</v:String>
+    <v:String x:Key="tgl13_desc_conf">פונקציה שיש לה גישה לכל נתוני המשתמש. היא מחליפה מידע עם שרתי Microsoft ואינה משפיעה על פעולת המערכת או היישומים. היא אינה עוזרת למשתמש בשום צורה, מה שהופך אותה לחסרת תועלת.</v:String>
+    <v:String x:Key="tgl14_desc_conf">Microsoft עורכת באופן קבוע ניסויים על משתמשי Windows כדי לקבוע אם תכונה מסוימת בשימוש נרחב, או אם שינוי בתכונה יהפוך אותה למועילה יותר. אך זוהי גם הפרת פרטיות.</v:String>
+    <v:String x:Key="tgl15_desc_conf">השירותים DiagTrack, dmwappushservice ו-diagsvc פועלים ככלי תיעוד מקלדת (keylogger) — הם רושמים כל פעולת משתמש, כולל הקשות מקלדת, ושולחים נתונים אלה לשרתי Microsoft ללא הסכמת המשתמש. בשימוש ב-UFW (Unified Write Filter), הפעולה היציבה של המערכת תלויה בשירות dmwappushservice. אולם, אם אינך יודע מהו, או אם יש לך כלי חלופי, הגיוני להיפטר ממתעדי המקלדת הללו.</v:String>
+    <v:String x:Key="tgl16_desc_conf">יומן אירועים האוסף ומעבד מידע אבחוני של המערכת ובכך מבזבז את משאבי המחשב שלך. השירות לא ייתן לך דבר טוב, עדיף להשביתו ובכך תמנע שליחת מידע סודי.</v:String>
+    <v:String x:Key="tgl17_desc_conf">השירות האחראי על איסוף ושידור נתונים על המערכת והשימוש בה, או תכונה שאינה קשורה לפעולת מנהל ההתקן של הווידאו, הוא חסר תועלת. למה ואיזה מידע NVIDIA אוספת ידוע רק לה. אך העובדה שזה לא מביא דבר מועיל למשתמש הקצה ברורה למדי.</v:String>
+    <v:String x:Key="tgl18_desc_conf">הטוויק משבית את התכונה UAR (User Activity Recording) – מערכת המתעדת ברצף כל פעולה שאתה מבצע במחשב שלך: מצילומי מסך והקלדת טקסט ועד הפעלת תוכנות ואפילו מתן גישה למצלמת האינטרנט כשהמסך נעול, ועוד.</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows מעדכן מעת לעת מפות לא מקוונות ושולח התראות על נתונים חדשים ברקע. תהליכים אלו עשויים לאסוף מידע על מיקומך, מסלוליך ושימושך במפות. אם אינך משתמש במפות לא מקוונות, מומלץ להשביתן כדי להימנע מעדכונים נסתרים ומשידור נתונים לשרתי Microsoft ללא מעורבותך הישירה.</v:String>
+    <v:String x:Key="tgl20_desc_conf">מודול ה-Intel הפועל ברקע לאיסוף ושידור נתונים מוצג ככלי לשיפור מוצרי החברה. עם זאת, עבור המשתמש הממוצע הוא מעניק תועלת מעשית מועטה, והשבתת תכונה זו עשויה לצמצם פעילות רקע ולמנוע שידור נתונים מיותר.</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="color1_intf">צבע סימון של הסמן:</v:String>
+    <v:String x:Key="color2_intf">צבע של חלוניות עזרה:</v:String>
+
+    <v:String x:Key="exblock1_intf">פריטי ניווט בסייר הקבצים:</v:String>
+    <v:String x:Key="chk_home_intf">דף הבית</v:String>
+    <v:String x:Key="chk_gallery_intf">גלריה</v:String>
+
+    <v:String x:Key="exblock2_intf">הגדרות תצוגה של סייר הקבצים:</v:String>
+    <v:String x:Key="chk_hidden_intf">הצג קבצים ותיקיות מוסתרים</v:String>
+    <v:String x:Key="chk_system_intf">הצג קבצי מערכת מוגנים מוסתרים</v:String>
+    <v:String x:Key="chk_extension_intf">הצג סיומות של שמות קבצים</v:String>
+    <v:String x:Key="chk_emptydrives_intf">הצג כוננים ריקים</v:String>
+
+    <v:String x:Key="exblock3_intf">תצוגת סמלי שולחן עבודה:</v:String>
+    <v:String x:Key="chk_pc_intf">המחשב שלי</v:String>
+    <v:String x:Key="chk_net_intf">רשת</v:String>
+    <v:String x:Key="chk_trash_intf">סל המיחזור</v:String>
+    <v:String x:Key="chk_panel_intf">לוח הבקרה</v:String>
+    <v:String x:Key="chk_user_intf">קבצי משתמש</v:String>
+
+    <v:String x:Key="tgl1_intf">גודל סטנדרטי של כפתורי המערכת</v:String>
+    <v:String x:Key="tgl2_intf">תדירות מהבהוב סטנדרטית של הסמן</v:String>
+    <v:String x:Key="tgl3_intf">גודל פס גלילה סטנדרטי</v:String>
+    <v:String x:Key="tgl4_intf">אפקט שקיפות בשורת המשימות</v:String>
+    <v:String x:Key="tgl5_intf">ערכת נושא כהה לשורת המשימות</v:String>
+    <v:String x:Key="tgl6_intf">ערכת נושא כהה ליישומים ולסייר</v:String>
+    <v:String x:Key="tgl7_intf">השהיה בהופעת תפריט ההקשר</v:String>
+    <v:String x:Key="tgl8_intf">השהיה בהופעת תצוגות מקדימות בשורת המשימות</v:String>
+    <v:String x:Key="tgl9_intf">תצוגת סמלי שכבת-על על סמלים</v:String>
+    <v:String x:Key="tgl10_intf">קידומת «קיצור דרך אל...» / סיומת «– קיצור דרך»</v:String>
+    <v:String x:Key="tgl11_intf">יישור שורת המשימות</v:String>
+    <v:String x:Key="tgl12_intf">פריסה סטנדרטית של תפריט «התחל»</v:String>
+    <v:String x:Key="tgl13_intf">תפריט הקשר מקוצר</v:String>
+    <v:String x:Key="tgl14_intf">הצג עצות והצעות</v:String>
+    <v:String x:Key="tgl15_intf">השתמש במצב סייר קומפקטי</v:String>
+    <v:String x:Key="tgl16_intf">העוזרים «Copilot» ו«Recall»</v:String>
+    <v:String x:Key="tgl17_intf">«סיים משימה» בקליק ימני על יישום</v:String>
+    <v:String x:Key="tgl18_intf">הצג פריסות הצמדת חלונות</v:String>
+    <v:String x:Key="tgl19_intf">סמלים וכפתורים בשורת המשימות</v:String>
+    <v:String x:Key="tgl20_intf">הצג פרסומות מותאמות אישית</v:String>
+    <v:String x:Key="tgl21_intf">שחזר חלונות תיקייה קודמים בעת התחברות</v:String>
+    <v:String x:Key="tgl22_intf">התראות עם עצות והצעות של Windows</v:String>
+    <v:String x:Key="tgl23_intf">תיקיות הממוקמות ב«מחשב זה»</v:String>
+    <v:String x:Key="tgl24_intf">«אובייקטים תלת-ממדיים» בסייר הקבצים</v:String>
+    <v:String x:Key="tgl25_intf">דחיסת רקעים בפורמט .JPEG של שולחן העבודה</v:String>
+    <v:String x:Key="tgl26_intf">חלוניות עזרה לאלמנטים בשולחן העבודה</v:String>
+    <v:String x:Key="tgl27_intf">שאילתת חיפוש עם שילוב «Bing» בתפריט התחל</v:String>
+    <v:String x:Key="tgl28_intf">פתח את «גישה מהירה» במקום «מחשב זה»</v:String>
+    <v:String x:Key="tgl29_intf">שינויי בהירות ספונטניים</v:String>
+
+    <v:String x:Key="color1_desc_intf">משנה את צבע הרקע בעת בחירת טקסט או אובייקטים עם הסמן במערכת.</v:String>
+    <v:String x:Key="color2_desc_intf">משנה את צבע חלוניות העזרה ביישומים נתמכים.</v:String>
+    <v:String x:Key="exblock1_desc_intf">משנה את הנראות של פריטי המערכת המובנים בחלונית הניווט שאינם ניתנים לביטול הצמדה באמצעים רגילים.</v:String>
+    <v:String x:Key="exblock2_desc_intf">משנה את חוקי המערכת להצגת פריטים בסייר הקבצים, כולל נראות פריטים מוסתרים, סיומות קבצים ומבנה כונני הדיסק. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="exblock3_desc_intf">משנה את התצוגה של סמלי מערכת בשולחן העבודה, שהם אובייקטי מערכת מובנים ולא קיצורי דרך רגילים.</v:String>
+    <v:String x:Key="tgl1_desc_intf">הטוויק מקטין את גודל כפתורי המזעור, ההגדלה והסגירה, ועושה אותם פחות מגושמים. הוא מתאים את הגודל לכל החלונות, כולל סייר הקבצים, התמונות, דפדפנים ותוכנות מוכרות נוספות.</v:String>
+    <v:String x:Key="tgl2_desc_intf">הטוויק מגביר את תדירות המהבהוב של סמן הטקסט. כברירת מחדל, הסמן מהבהב כל 530 אלפיות שנייה.</v:String>
+    <v:String x:Key="tgl3_desc_intf">הטוויק מקטין את עובי פסי הגלילה ביישומים קלאסיים של Windows, כולל סייר הקבצים, דפדפנים ותוכנות ישנות אחרות. עם זאת, הוא אינו משפיע על ממשקים מודרניים, מכיוון שהם משתמשים ברכיבי בקרה משלהם בלתי תלויים בהגדרות המערכת.</v:String>
+    <v:String x:Key="tgl4_desc_intf">הטוויק ישבית או יפעיל את אפקט השקיפות. חלונות ומשטחים שקופים למחצה.</v:String>
+    <v:String x:Key="tgl5_desc_intf">משנה את ערכת הנושא של שורת המשימות לבהירה או כהה. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl6_desc_intf">הטוויק ישנה את ערכת הנושא של סייר הקבצים לבהירה או כהה, כולל דפדפנים ותוכנות אחרות התומכות בערכת המכשיר. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl7_desc_intf">כברירת מחדל, פריטי תפריט הקשר נוספים מופיעים בהשהיה של 400 אלפיות שנייה. אם ברצונך לפעול מהר יותר, ניתן לקצר השהיה זו.</v:String>
+    <v:String x:Key="tgl8_desc_intf">כברירת מחדל, התצוגה המקדימה של שורת המשימות מציגה תצוגות מקדימות של יישומים פועלים למשך זמן ארוך מדי. כדי שהתצוגות יופיעו מהר יותר, החל טוויק זה.</v:String>
+    <v:String x:Key="tgl9_desc_intf">מאפשר להסתיר חצי קיצורי דרך, סטטוסי סנכרון ענן (OneDrive, Dropbox) וסמלי סוגי קבצים, כגון SVG.</v:String>
+    <v:String x:Key="tgl10_desc_intf">הסרת הקידומת-סיומת האינטואיטיביות מדי של קיצורי הדרך.</v:String>
+    <v:String x:Key="tgl11_desc_intf">בחר היכן ברצונך להציג את הסמלים בשורת המשימות, במרכז או בצד</v:String>
+    <v:String x:Key="tgl12_desc_intf">משנה את פריסת תפריט התחל על ידי הרחבת השטח עבור יישומים מוצמדים. בנוסף, למעט במהדורת Windows Home, הקטע «מומלץ» יוסר מתפריט התחל.</v:String>
+    <v:String x:Key="tgl13_desc_intf">טוויק זה יחזיר אותך לתפריט ההקשר הקלאסי הרגיל של שולחן העבודה ו«סייר הקבצים». שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl14_desc_intf">Windows 11 מציג לעיתים עצות כיצד להשתמש בתכונה מסוימת, למשל תפריט «התחל» החדש או «הגדרות מהירות». הן שימושיות אם זו הפעם הראשונה שאתה רואה את Windows 11, אך מעבר לכך הן זבל חסר תועלת.</v:String>
+    <v:String x:Key="tgl15_desc_intf">כברירת מחדל, Windows מוסיף ריווח בין פריטים בסייר הקבצים. זוהי תכונה חדשה שנועדה למסכי מגע. טוויק זה ישחזר את הפריסה הקלאסית של סייר הקבצים, יסיר את הריווח בין הפריטים ויחסוך לך חיפוש בהגדרות.</v:String>
+    <v:String x:Key="tgl16_desc_intf">הטוויק משבית ומסתיר במידת האפשר את סמלי Copilot בשורת המשימות, בתפריט «התחל», ב-Edge וב-Notepad, חוסם את פונקציונליותו, וגם משבית את Recall. עם זאת, יישום הליבה של Copilot עצמו אינו מושפע, נשאר במערכת וניתן לשימוש בעת הצורך. ניתן להסיר את Copilot באופן מלא רק יחד עם Microsoft Edge. אם תכונות AI אלו אינן קיימות ב-Windows שלך מלכתחילה, השימוש בטוויק חסר טעם.</v:String>
+    <v:String x:Key="tgl17_desc_intf">טוויק זה יאפשר לך להוסיף את האפשרות «סיים משימה» לתפריט ההקשר בעת קליק ימני על יישום בשורת המשימות. הדבר מאיץ את סיום התהליכים מבלי לפתוח את מנהל המשימות. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl18_desc_intf">אם אין לך צורך לראות את הצעות פריסת ההצמדה בעת ריחוף מעל כפתור «הגדל», ניתן להשבית אפשרות זו.</v:String>
+    <v:String x:Key="tgl19_desc_intf">טוויק זה מסיר את הסמלים «חיפוש», «תצוגת משימה» ו«צ'אט», ומסתיר את האלמנט «למד על תמונה זו». במהדורות ישנות יותר של Windows 11, הוא גם מסיר את סמל Copilot. למשתמשי Windows 10, הוא גם משבית את «חדשות ועניין» ואת Cortana. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl20_desc_intf">כברירת מחדל, Windows משתמש במידע שנאסף כדי למקד פרסומות, כלומר להציג פרסומות המתאימות לתחומי העניין שלך. ופשוט, פרסומת זו נמצאת בכל מקום שבו יש שטח פנוי לתצוגה. אם אינך רוצה ש-Windows יציג פרסומות מותאמות אישית בכל יישומי החנות, סייר הקבצים, האפשרויות ותפריט התחל, ניתן להשבית את הזבל הזה.</v:String>
+    <v:String x:Key="tgl21_desc_intf">כברירת מחדל, Windows אינו שומר את מיקומי החלונות, וכן את מצבם בעת הכיבוי. טוויק זה יאפשר לך לזכור את סוג התיקיות הפתוחות כדי לשחזרן לאחר יציאה, אתחול וכיבוי.</v:String>
+    <v:String x:Key="tgl22_desc_intf">הטוויק מאפשר להשבית את כל העצות וההתראות של Windows, כולל עצות מקוונות בהגדרות, ולהשבית את חוויית ההפעלה השנייה (SCOOBE) למשתמשי Windows 11. SCOOBE היא חלון קופץ שמופיע פתאום ומבקש בתוקפנות מהמשתמש «להשלים בדחיפות את הגדרת ההתקן» ולהיכנס לחשבון Microsoft.</v:String>
+    <v:String x:Key="tgl23_desc_intf">הטוויק יסתיר תיקיות מ«מחשב זה»: שולחן עבודה, סרטוני וידאו, מסמכים, הורדות, תמונות, מוזיקה. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl24_desc_intf">מסיר את הפריט «אובייקטים תלת-ממדיים» מתצוגת סייר הקבצים בתפריט השמאלי (מתוך עץ רשימת הסייר). שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl25_desc_intf">כברירת מחדל, כאשר אתה מגדיר תמונת jpeg כרקע שולחן העבודה, Windows מקטין אוטומטית את איכותה ל-85%. טוויק זה יקבע את איכות רקע ה-jpeg ל-100%.</v:String>
+    <v:String x:Key="tgl26_desc_intf">הטוויק ישבית חלוניות עזרה עבור אלמנטים בשולחן העבודה בעת ריחוף עם סמן העכבר.</v:String>
+    <v:String x:Key="tgl27_desc_intf">כברירת מחדל, Windows שולח את כל מה שאתה מחפש בתפריט «התחל» לשרתיו כדי לספק לך תוצאות חיפוש של Bing. אם אינך זקוק לשילוב Bing בתפריט «התחל», ניתן להחיל טוויק להשבתת חיפוש האינטרנט. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl28_desc_intf">כברירת מחדל, כאשר אתה פותח את סייר הקבצים, הכרטיסייה הראשונה תהיה «גישה מהירה». וכדי לפתוח כונן כלשהו, עליך לבצע פעולות מיותרות. טוויק זה יגרום ל«מחשב זה» להיפתח בעת הפתיחה, במקום «גישה מהירה».</v:String>
+    <v:String x:Key="tgl29_desc_intf">בחלק מהמכשירים, בהירות המסך עלולה להשתנות ספונטנית בהתאם לתוכן המוצג. אם השבתת HDR, בהירות דינמית והגדרות חשמל אינן פותרות את הבעיה (הבעיה נפוצה במיוחד במחשבים ניידים הפועלים על סוללה), ניתן לנסות טוויק זה - הוא משבית בכוח את כוונון הבהירות האוטומטי ברמת המערכת. הבקרה הידנית של הבהירות נשארת זמינה.</v:String>
+    <!--#endregion-->
+
+    <!--#region Packages Page -->
+    <v:String x:Key="warn_part1_pkg">היישומים יימחקו</v:String>
+    <v:String x:Key="warn_part2_pkg">לצמיתות,</v:String>
+    <v:String x:Key="warn_part3_pkg">אך OneDrive ניתן לשחזור בלחיצה על הסמל שלו</v:String>
+
+    <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
+    <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
+    <v:String x:Key="OneNote_pkg">Microsoft Office OneNote</v:String>
+    <v:String x:Key="MicrosoftOfficeHub_pkg">Microsoft Office Hub</v:String>
+    <v:String x:Key="MicrosoftSolitaireCollection_pkg">Microsoft Solitaire Collection</v:String>
+    <v:String x:Key="MixedReality_pkg">Mixed Reality</v:String>
+    <v:String x:Key="BingWeather_pkg">Bing Weather</v:String>
+    <v:String x:Key="Microsoft3D_pkg">Microsoft 3D Viewer</v:String>
+    <v:String x:Key="SkypeApp_pkg">Microsoft Skype</v:String>
+    <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
+    <v:String x:Key="Cortana_pkg">Cortana</v:String>
+    <v:String x:Key="MicrosoftTeams_pkg">Microsoft Teams</v:String>
+    <v:String x:Key="Music_pkg">Windows Media Player</v:String>
+    <v:String x:Key="Video_pkg">Movies &amp; TV</v:String>
+    <v:String x:Key="SoundRecorder_pkg">Sound Recorder</v:String>
+    <v:String x:Key="FeedbackHub_pkg">Feedback Hub</v:String>
+    <v:String x:Key="Mail_pkg">Mail</v:String>
+    <v:String x:Key="Widgets_pkg">Widgets</v:String>
+    <v:String x:Key="Photos_pkg">Windows Photos</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Snipping Tool</v:String>
+    <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
+    <v:String x:Key="GetHelp_pkg">Get Help</v:String>
+    <v:String x:Key="GetStarted_pkg">Get Started</v:String>
+    <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Sticky Notes</v:String>
+    <v:String x:Key="Maps_pkg">Windows Maps</v:String>
+    <v:String x:Key="Camera_pkg">Windows Camera</v:String>
+    <v:String x:Key="Paint3D_pkg">Paint3D</v:String>
+    <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
+    <v:String x:Key="People_pkg">People</v:String>
+    <v:String x:Key="BingNews_pkg">Microsoft News</v:String>
+    <v:String x:Key="Todos_pkg">Microsoft To Do</v:String>
+    <v:String x:Key="Alarms_pkg">Windows Clock</v:String>
+    <v:String x:Key="Phone_pkg">Your Phone</v:String>
+    <v:String x:Key="Outlook_pkg">Outlook for Windows</v:String>
+    <v:String x:Key="BingSports_pkg">Bing Sports</v:String>
+    <v:String x:Key="BingFinance_pkg">Bing Finance</v:String>
+    <v:String x:Key="MicrosoftFamily_pkg">Microsoft Family Safety</v:String>
+    <v:String x:Key="BingSearch_pkg">Bing Search</v:String>
+    <v:String x:Key="QuickAssist_pkg">Quick Assist</v:String>
+    <v:String x:Key="DevHome_pkg">Dev Home</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
+    <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_pkg">Web Media Extensions</v:String>
+    <v:String x:Key="OneConnect_pkg">Mobile Plans</v:String>
+    <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
+    <v:String x:Key="Notepad_pkg">Notepad</v:String>
+    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Paint_pkg">Microsoft Paint</v:String>
+    <v:String x:Key="Copilot_pkg">Copilot</v:String>
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    <v:String x:Key="Facebook_pkg">Facebook</v:String>
+    <v:String x:Key="Hulu_pkg">Hulu</v:String>
+    <v:String x:Key="Disney_pkg">Disney</v:String>
+    <v:String x:Key="Instagram_pkg">Instagram</v:String>
+    <v:String x:Key="TwitterX_pkg">Twitter - X</v:String>
+    <v:String x:Key="TikTok_pkg">TikTok</v:String>
+    <v:String x:Key="MicrosoftSway_pkg">Microsoft Sway</v:String>
+    <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
+    <v:String x:Key="Netflix_pkg">Netflix</v:String>
+    <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
+
+    <v:String x:Key="title_over_pkg">אישור הסרת התקנה</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">אתה עומד להסיר את התקנת דפדפן Microsoft Edge. פעולה זו תסיר גם את רכיב EdgeWebView, המשמש להצגת תוכן אינטרנט ביישומים שונים — כגון Microsoft Office (לדוגמה, Meeting Insights, Room Finder), יישום Photos (הגרסה החדשה משתמשת ב-WebView2), חלק מהבוטים של Telegram ותוכנות אחרות המסתמכות על WebView מוטמע. לפני שתמשיך, ודא שאינך זקוק לרכיב זה.
+       בגרסאות עדכניות של Windows 11, Copilot מיושם באמצעות EdgeWebView כ-PWA או כעטיפת מערכת. כאשר Edge מוסר, Copilot מוסר גם הוא, מכיוון שהוא פועל כעטיפת אינטרנט.</v:String>
+    <v:String x:Key="question_over_pkg">האם ברצונך להמשיך במחיקה יחד עם EdgeWebView?</v:String>
+    <v:String x:Key="btn_delete_all">כן, מחק הכל</v:String>
+    <v:String x:Key="btn_keep_webview">לא, שמור על EdgeWebView</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_svc">שירותים הקשורים ל-Windows Search</v:String>
+    <v:String x:Key="tgl2_svc">שירותים הקשורים ל-Xbox</v:String>
+    <v:String x:Key="tgl3_svc">שירותים הקשורים ל-Windows Update</v:String>
+    <v:String x:Key="tgl4_svc">שירותים הקשורים ל-Windows Store</v:String>
+    <v:String x:Key="tgl5_svc">שירותי מוני ביצועים</v:String>
+    <v:String x:Key="tgl6_svc">שירות ביומטרי של Windows</v:String>
+    <v:String x:Key="tgl7_svc">שירותים הקשורים ל-Bluetooth</v:String>
+    <v:String x:Key="tgl8_svc">שירותים הקשורים למדפסת</v:String>
+    <v:String x:Key="tgl9_svc">שירות הקשור לפעולת הסורק</v:String>
+    <v:String x:Key="tgl10_svc">שירותים הקשורים לפקס</v:String>
+    <v:String x:Key="tgl11_svc">שירותים הקשורים לשימוש במצב טאבלט/סמארטפון</v:String>
+    <v:String x:Key="tgl12_svc">שירותים הקשורים לפעולת צגים נוספים</v:String>
+    <v:String x:Key="tgl13_svc">שירות הקשור לרכיבי מערכת</v:String>
+    <v:String x:Key="tgl14_svc">שירותים הקשורים לפעולת הרשת המקומית</v:String>
+    <v:String x:Key="tgl15_svc">שירותים הקשורים למודמים ונתבי USB</v:String>
+    <v:String x:Key="tgl16_svc">שירותים הקשורים ללקוחות VPN</v:String>
+    <v:String x:Key="tgl17_svc">שירותים הקשורים לפעולת Windows Media</v:String>
+    <v:String x:Key="tgl18_svc">שירותים הקשורים לשולחן עבודה מרוחק</v:String>
+    <v:String x:Key="tgl19_svc">שירותים האוספים שגיאות ויומני אירועים</v:String>
+    <v:String x:Key="tgl20_svc">שירות ניהול קבצים מרחוק WebDAV</v:String>
+    <v:String x:Key="tgl21_svc">שירותים הקשורים לפעולת כרטיס חכם</v:String>
+    <v:String x:Key="tgl22_svc">שירותים הקשורים לפעולת Windows Kiosk</v:String>
+    <v:String x:Key="tgl23_svc">שירותים הקשורים להצפנת קבצים</v:String>
+    <v:String x:Key="tgl24_svc">שירות הקשור ללוקליזציה של Windows</v:String>
+    <v:String x:Key="tgl25_svc">שירותים הקשורים לבדיקות אבטחה ברקע</v:String>
+    <v:String x:Key="tgl26_svc">שירותים הקשורים לאבחון ברקע</v:String>
+    <v:String x:Key="tgl27_svc">שירותים הקשורים לכלים ארגוניים</v:String>
+    <v:String x:Key="tgl28_svc">שירות הקשור לפעולת Hyper-V</v:String>
+    <v:String x:Key="tgl29_svc">שירותים הקשורים להתראות דחיפה</v:String>
+    <v:String x:Key="tgl30_svc">שירותים הקשורים למצב הדגמה של Store</v:String>
+    <v:String x:Key="tgl31_svc">שירותים הקשורים לעדכון Microsoft Edge</v:String>
+    <v:String x:Key="tgl32_svc">שירות מתזמן מחלקות מולטימדיה</v:String>
+
+    <v:String x:Key="tgl1_desc_svc">השבת אם אינך משתמש בהיסטוריית קבצים ובאינדוקס תוכן.</v:String>
+    <v:String x:Key="tgl2_desc_svc">השבת אם אינך משתמש ב-Xbox ובבקרי משחק של Microsoft.</v:String>
+    <v:String x:Key="tgl3_desc_svc">השבת אם אינך מתכנן לעדכן את Windows. בנוסף לשירותים, הטוויק ישנה את הקבצים האחראים לעדכוני Windows. בשל כך, גם אם השירותים פועלים, Windows Update לא יעבוד. שים לב שהטוויק משפיע על הורדה ועדכון של יישומים מ-Windows Store.</v:String>
+    <v:String x:Key="tgl4_desc_svc">השבת אם אינך משתמש ב-Windows Store וביישומי ה-UWP שלו.</v:String>
+    <v:String x:Key="tgl5_desc_svc">השבת אם אינך רוצה ששירותים ינתחו את ביצועי המערכת שלך.</v:String>
+    <v:String x:Key="tgl6_desc_svc">השבת אם אינך משתמש בכניסה באמצעות PIN, טביעת אצבע, זיהוי פנים או שיטות Windows Hello אחרות. אם כבר הוגדרה שיטת כניסה, היא תמשיך לפעול, אך תצטרך להפעיל מחדש את Windows Hello כדי לשנותה או להסירה.</v:String>
+    <v:String x:Key="tgl7_desc_svc">השבת אם אינך משתמש ב-Bluetooth ובהתקנים שעבודתם מחוברת ל-Bluetooth.</v:String>
+    <v:String x:Key="tgl8_desc_svc">השבת אם אין לך מדפסת.</v:String>
+    <v:String x:Key="tgl9_desc_svc">השבת אם אין לך סורק.</v:String>
+    <v:String x:Key="tgl10_desc_svc">השבת אם אין לך מכשיר פקס.</v:String>
+    <v:String x:Key="tgl11_desc_svc">השבת אם יש לך מחשב נייח, מחשב נייד או נטבוק.</v:String>
+    <v:String x:Key="tgl12_desc_svc">השבת אם יש לך צג אחד בלבד ואינך מתכנן לחבר צגים נוספים.</v:String>
+    <v:String x:Key="tgl13_desc_svc">השבת אם אינך משתמש ביישומים הבאים: «שולחנות עבודה וירטואליים», «הטלפון שלך» ו«תאורת לילה». שירות זה מעבד נתוני משתמש ומסנכרן אותם עם שרתי Microsoft. הוא אינו קריטי לפעולת המערכת; עם זאת, תכונות מסוימות, כגון «תאורת לילה» ב-Windows 10, עלולות להפסיק לפעול כליל או חלקית בעת השבתתו.</v:String>
+    <v:String x:Key="tgl14_desc_svc">השבת אם אינך משתמש או מתכנן להשתמש ברשת מקומית.</v:String>
+    <v:String x:Key="tgl15_desc_svc">השבת אם אתה מחובר לאינטרנט באמצעות כבל או Wi-Fi.</v:String>
+    <v:String x:Key="tgl16_desc_svc">השבת אם אינך משתמש בלקוחות VPN. עשוי להשפיע על פעולת ה-Xbox.</v:String>
+    <v:String x:Key="tgl17_desc_svc">השבת אם אינך זקוק לסנכרון קבצים וגישה אליהם ברשת מקומית עבור Windows Media Player. שירותים אלה אינם קריטיים, ניתן להמשיך להשתמש בנגן.</v:String>
+    <v:String x:Key="tgl18_desc_svc">השבת אם אינך משתמש בשולחן עבודה מרוחק ואינך משתמש בחיבור שרת אליהם.</v:String>
+    <v:String x:Key="tgl19_desc_svc">השבת אם אינך רוצה שהשירותים יעמיסו על המחשב בזמן שהם מטפלים בשגיאות.</v:String>
+    <v:String x:Key="tgl20_desc_svc">השבת אם אינך מנהל קבצים מרחוק דרך שיתוף או באמצעות WebDAV.</v:String>
+    <v:String x:Key="tgl21_desc_svc">השבת אם אינך משתמש בכרטיסים חכמים. כרטיס חכם הוא אחד מסוגי המזהים האלקטרוניים או פלסטיק עם שבב. המראה הוא של «כרטיס בנק». לשימוש יומיומי ב-Windows, השירות אינו נחוץ ולעולם לא תזדקק לו.</v:String>
+    <v:String x:Key="tgl22_desc_svc">השבת אם אינך משתמש במצב Windows kiosk. מצב זה ממזער את הממשק: רק יישום UWP יחיד פועל במסך מלא, וכל שאר התכונות חסומות. שים לב שזה עלול להפריע להתקנת עדכוני Windows ותוכניות באמצעות Windows Installer, מכיוון שהוא גם משבית את ההגדרה והאתחול של נתוני המערכת והיישומים בכניסה הראשונה.</v:String>
+    <v:String x:Key="tgl23_desc_svc">השבת אם אינך משתמש בהצפנת דיסק BitLocker ובהצפנת קבצים או תיקיות EFS.</v:String>
+    <v:String x:Key="tgl24_desc_svc">השבת אם הגדרת את כל השפות שתשתמש בהן ואינך מתכנן להוסיף חדשות.</v:String>
+    <v:String x:Key="tgl25_desc_svc">השבת אם אינך משתמש ב-Windows Defender ובכל אבטחת Windows הנוספת.</v:String>
+    <v:String x:Key="tgl26_desc_svc">השבת אם אינך זקוק ש-Windows יעמיס על המערכת באבחונים חסרי תועלת ברקע.</v:String>
+    <v:String x:Key="tgl27_desc_svc">השבת אם אינך משתמש בניהול מרחוק של יישומים ארגוניים ואין לך שרת מרוחק שהמחשב שלך מתקשר איתו.</v:String>
+    <v:String x:Key="tgl28_desc_svc">השבת אם אינך משתמש במערכת הווירטואליזציה המובנית. אינה משפיעה על פעולת VirtualBox ודומיו.</v:String>
+    <v:String x:Key="tgl29_desc_svc">השבת אם אינך משתמש בהתקנים מצומדים ואינך מתקין יישומים מ-Windows Store מרחוק. שירותים אלה מטפלים במרכז ההתראות עם התקנים מצומדים, מעבדים בקשות דחיפה, מאפשרים ל-Windows לזהות את הסמארטפון שלך עבור היישום «הטלפון שלך», מתחברים אליו מחדש אוטומטית ומציגים את הודעותיו ואירועיו במרכז הפעולות. ב-Windows 10, לאחר השבתתם, מרכז ההתראות עלול להפסיק להיפתח.</v:String>
+    <v:String x:Key="tgl30_desc_svc">השבת אם אינך משתמש במכשיר בחנות להדגמת תכונות Windows. שירות Store Demo מנהל את הצגת תוכן ההדגמה והתכונות האינטראקטיביות המיועדות רק לתצוגות חנות ולבדיקה. שירות זה אינו נחוץ לשימוש יומיומי במחשב.</v:String>
+    <v:String x:Key="tgl31_desc_svc">השבת אם אינך מתכנן לעדכן או אינך משתמש ב-Microsoft Edge. פעולה זו גם עוצרת עדכונים אוטומטיים של WebView2 Runtime - רכיבים אלו משתמשים באותו מנגנון עדכון ותלויים זה בזה הדוקות.</v:String>
+    <v:String x:Key="tgl32_desc_svc">השבת אם אתה מבין את ההשלכות האפשריות ואינך משתמש ביישומי מולטימדיה הדורשים עיבוד אודיו ווידאו עם עדיפות. במקרים נדירים זה עשוי להפחית מעט את מספר אירועי המערכת ואת העומס (לדוגמה, בשימוש במתאמי רשת עם NetAdapterCX); עם זאת, האפקט תלוי בתצורת המערכת. הדבר עלול לגרום לגמגום באודיו, חוסר סנכרון בין אודיו לווידאו ובעיות הפעלה אחרות.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_sys">מהירות מצביע העכבר:</v:String>
+    <v:String x:Key="slider2_sys">השהיית חזרה במקלדת:</v:String>
+    <v:String x:Key="slider3_sys">קצב חזרת המקלדת:</v:String>
+    <v:String x:Key="text_sys">הקלד כאן כדי לבדוק את הגדרות המקלדת</v:String>
+    <v:String x:Key="tgl1_sys">שיפור דיוק המצביע</v:String>
+    <v:String x:Key="tgl2_sys">מקשים דביקים ומסנני מקשים</v:String>
+    <v:String x:Key="tgl3_sys">Windows Defender, Antimalware, SmartScreen ו-VBS</v:String>
+    <v:String x:Key="tgl4_sys">UAC (בקרת חשבון משתמש)</v:String>
+    <v:String x:Key="tgl5_sys">התראות אבטחה ממרכז ההתראות</v:String>
+    <v:String x:Key="tgl6_sys">עדכון אוטומטי של יישומים מ-Microsoft Store</v:String>
+    <v:String x:Key="tgl7_sys">השהיית קול במנהל ההתקן של Realtek Sound</v:String>
+    <v:String x:Key="tgl8_sys">תפוגת תצוגת הקונסולה הנעולה</v:String>
+    <v:String x:Key="tgl9_sys">טכנולוגיית «Hibernation» ו«Fast Startup»</v:String>
+    <v:String x:Key="tgl10_sys">דיאלוג אזהרת כיבוי</v:String>
+    <v:String x:Key="tgl11_sys">אזהרות בעת הרצת קבצי exe</v:String>
+    <v:String x:Key="tgl12_sys">אבחון זיכרון אוטומטי</v:String>
+    <v:String x:Key="tgl13_sys">פרוטוקולי Teredo, ISATAP ו-IPv6</v:String>
+    <v:String x:Key="tgl14_sys">גודל מטמון סטנדרטי של מערכת הקבצים</v:String>
+    <v:String x:Key="tgl15_sys">האטה של הפעלת Windows והפעלת תוכניות</v:String>
+    <v:String x:Key="tgl16_sys">היסטוריית שימוש בסרגל הכלים גישה מהירה</v:String>
+    <v:String x:Key="tgl17_sys">הפעלה אוטומטית של מדיה נשלפת</v:String>
+    <v:String x:Key="tgl18_sys">השתמש בתוכנית צריכת חשמל ברירת מחדל</v:String>
+    <v:String x:Key="tgl19_sys">השתמש בתכונה «Bluetooth והתקנים»</v:String>
+    <v:String x:Key="tgl20_sys">חומת האש של Windows Defender</v:String>
+    <v:String x:Key="tgl21_sys">השתמש בתכונה «מצב משחק»</v:String>
+    <v:String x:Key="tgl22_sys">השתמש בתכונה «סרגל המשחק»</v:String>
+    <v:String x:Key="tgl23_sys">יישומים פועלים ברקע</v:String>
+    <v:String x:Key="tgl24_sys">אחסון שמור ב-Windows</v:String>
+    <v:String x:Key="tgl25_sys">טיימר אירועים דינמי ובדיוק גבוה</v:String>
+    <v:String x:Key="tgl26_sys">הסתר את «PC Health Check» ממערכת העדכונים</v:String>
+    <v:String x:Key="tgl27_sys">משימות רקע של Windows Insider</v:String>
+    <v:String x:Key="tgl28_sys">מיטוב דיסק המערכת</v:String>
+    <v:String x:Key="tgl29_sys">השהה עדכוני Windows</v:String>
+    <v:String x:Key="tgl30_sys">Multiplane Overlay (MPO)</v:String>
+
+    <v:String x:Key="slider1_desc_sys">משנה את מהירות מצביע העכבר וחוסך לך זמן בחיפוש בפרמטרי העכבר.</v:String>
+    <v:String x:Key="slider2_desc_sys">ישנה את ההשהיה לפני תחילת חזרה של התו שהוקש, הערך המומלץ הוא 0.</v:String>
+    <v:String x:Key="slider3_desc_sys">משנה את קצב החזרה של התו שהוקש, הערך המומלץ הוא 31.</v:String>
+    <v:String x:Key="tgl1_desc_sys">כברירת מחדל, האצת העכבר מאיצה את תנועתו. מומלץ לכבות אותה, מכיוון שעם האצה מופעלת, תנועה אחידה ודיוק הכיוון פחות טובים.</v:String>
+    <v:String x:Key="tgl2_desc_sys">אם אינך רוצה שחלון יופיע מדי פעם בעת ביצוע משימות ויאמר לך להפעיל הדבקת מקשים או סינון הקלדה, ולאחר שתענה «לא» הוא יופיע שוב לאחר זמן מה, אז השבת תכונה זו. בנוסף, סינון הקלדה משפיע על מהירות חזרת המקלדת ועל דילוג על מקשים חוזרים.</v:String>
+    <v:String x:Key="tgl3_desc_sys">טוויק זה ישבית ויעצור את Windows Defender, SmartScreen, עומסים כבדים באופן לא פרופורציונלי של מעבד Antimalware ואת אבטחה מבוססת וירטואליזציה (VBS). כדי שהשינויים יוחלו במלואם, המערכת תאתחל אוטומטית למצב בטוח. אין צורך בפעולות כלשהן - היישום יטפל בכל אוטומטית.</v:String>
+    <v:String x:Key="tgl4_desc_sys">הטוויק ישבית לחלוטין את UAC (בקרת חשבון משתמש), יפטר מסמלי המגן, התראות האבטחה ועוד. UAC אינה תוכנת הגנה מלאה.</v:String>
+    <v:String x:Key="tgl5_desc_sys">כאשר אתה משבית משהו הקשור לאבטחה או הגנה, אתה מקבל ללא הרף התראות על כך. טוויק זה ישבית את התראות האבטחה ממרכז ההתראות.</v:String>
+    <v:String x:Key="tgl6_desc_sys">אם אתה מעדיף לעדכן את היישומים שלך מ-Microsoft Store בעצמך, עליך לכבות את תכונת העדכון האוטומטי. כך, העומס על הרשת יירד.</v:String>
+    <v:String x:Key="tgl7_desc_sys">חלק מהגרסאות של מנהלי ההתקן של Realtek High Definition Audio עלולות להציג בעיה של השהיית קול. טוויק זה מתקן את התקלה הזו. עם זאת, לא מומלץ להשתמש בו אם אינך מבחין בכל השהיה או אם אינך בטוח שמנהל ההתקן המותקן ו/או הפועל הוא אכן של Realtek.</v:String>
+    <v:String x:Key="tgl8_desc_sys">כברירת מחדל, Windows מציג את מסך הנעילה למשך דקה אחת, ולאחר מכן המסך נכבה, ולא משנה אם אתה פועל על סוללה או על חשמל. טוויק זה יסיר את ההגבלות הללו.</v:String>
+    <v:String x:Key="tgl9_desc_sys">תיאורטית, אתחול מהיר לוקח פחות זמן מיציאה ממצב שינה, אך בפועל זה עשוי לא להיות מורגש. אם אינך משתמש בפונקציות אתחול מהיר או מצב שינה, ניתן להשבית גם אותן. כך תוכל לפנות שטח נוסף בדיסק.</v:String>
+    <v:String x:Key="tgl10_desc_sys">הטוויק מאפשר להשבית את הודעת המערכת המודיעה לך שבעת כיבוי או הפעלה מחדש של המחשב, תוכניות פתוחות יסתיימו בכוח.</v:String>
+    <v:String x:Key="tgl11_desc_sys">התראת אבטחה של Windows בעת הרצת קבצי exe, msi, bat, cmd או קבצי הפעלה אחרים שהורדו מהאינטרנט. אישור הפעלת קבצים כאלה יכול להפוך משעמם די מהר בכל פעם, טוויק זה ישבית את האזהרה הזו.</v:String>
+    <v:String x:Key="tgl12_desc_sys">טוויק זה משבית את ההפעלה האוטומטית של אבחון זיכרון Windows על ידי כיבוי המשימה המתוזמנת. כתוצאה מכך, המערכת מתאתחלת מהר יותר בשל היעדר בדיקות מיותרות, בעוד שאתה שומר על האפשרות להפעיל אבחון באופן ידני בעת הצורך.</v:String>
+    <v:String x:Key="tgl13_desc_sys">טוויק זה משבית את פרוטוקולי Teredo, ISATAP ו-IPv6, אשר ככלל אינם נדרשים על ידי רוב המשתמשים. עם זאת, לא מומלץ להחילו על מחשבי עבודה או ארגוניים: הדבר עלול להוביל לבעיות רשת או לתפקוד לקוי של שירותים מסוימים.</v:String>
+    <v:String x:Key="tgl14_desc_sys">טוויק זה כולל תמיכה במטמון גדול של מערכת הקבצים. הגדלת גודל המטמון של מערכת הקבצים בדרך כלל משפרת את ביצועי המחשב, אך זה בתורו מצמצם את שטח הזיכרון הפיזי הזמין ליישומים ולשירותים.</v:String>
+    <v:String x:Key="tgl15_desc_sys">כברירת מחדל, ל-Windows יש מנגנון מובנה להאטת תוכניות אתחול. פתרון זה עובד היטב במחשבים ישנים יותר עם HDD, אך במחשבים מודרניים עם SSD הוא מאט שלא לצורך את הפעלת המערכת יחד עם התוכניות.</v:String>
+    <v:String x:Key="tgl16_desc_sys">הטוויק ישבית את תיעוד היסטוריית השימוש של קבצים ותיקיות המוצגים בחלונית הגישה המהירה. במילים אחרות, המערכת לא תשמור ותציג עוד באופן אוטומטי את הפריטים האחרונים שפעילים.</v:String>
+    <v:String x:Key="tgl17_desc_sys">הטוויק משבית הפעלה אוטומטית עבור סוגי מדיה נשלפים שונים המחוברים למחשב שלך שסייר הקבצים מנסה לפתוח. כך, תוכנית לא ידועה לא תיפתח אוטומטית במדיה שאינך בטוח באמינותה.</v:String>
+    <v:String x:Key="tgl18_desc_sys">מוסיף את ערכת צריכת החשמל «Ultimate Performance», או אם זמין, פשוט עובר לערכת צריכת החשמל הקיימת. בנוסף, הוא משחרר את הגדרת תדר המעבד המקסימלי בהגדרות ניהול צריכת החשמל של המעבד.</v:String>
+    <v:String x:Key="tgl19_desc_sys">אם אינך זקוק ל-Bluetooth ואינך רוצה להשתמש בהתקנים שלך באמצעות Bluetooth, אז כבה אותו, וגם זה יסיר את סמל מגש המערכת.</v:String>
+    <v:String x:Key="tgl20_desc_sys">חומת האש מאפשרת לך לווסת את הגישה של תוכניות לאינטרנט על ידי התרת או חסימת חיבוריהן ובקרת התעבורה. אם אתה בטוח בפעולותיך ומבין מה אתה עושה, אתה יכול להשבית את חומת האש; עם זאת, מומלץ לשמור עליה מופעלת עבור רוב המשתמשים.</v:String>
+    <v:String x:Key="tgl21_desc_sys">למצב המשחק אין השפעה רבה על מערכות חזקות. עם זאת, אם יש לך הרבה תהליכים פועלים ברקע, אז המצב מבטיח שתהליכי הרקע לא ישפיעו על פעולת המשחק.</v:String>
+    <v:String x:Key="tgl22_desc_sys">תכונה להקלטת המשחקים שלך. בגדול, היא מנצלת את משאבי המערכת שלך. ישנן חלופות טובות רבות, ובנוסף, חלופות שאינן נפתחות באופן ספונטני.</v:String>
+    <v:String x:Key="tgl23_desc_sys">חלק מהיישומים מאפשרים לך לנהל פעילות רקע, הקובעת מה הם יכולים לעשות כשהם ברקע ואינם בשימוש פעיל. באופן כללי, השבתת יישומי רקע תעזור להפחית את עומס הרשת, וכן את עומס המעבד וצריכת החשמל, מה שמועיל למחשבים ניידים מכיוון שזה מאריך את חיי הסוללה.</v:String>
+    <v:String x:Key="tgl24_desc_sys">אחסון שמור נועד לספק הקצאה צפויה של שטח פנוי שישמש לעדכונים, יישומים, קבצים זמניים ומטמון המערכת. השבתתו יכולה לפנות כמות משמעותית של שטח. עם זאת, אם יש לך מספיק שטח פנוי, לא מומלץ לעשות זאת, לא תקבל יתרונות נוספים.</v:String>
+    <v:String x:Key="tgl25_desc_sys">השבתת הטיימר הדינמי ו-HPET יכולה לשפר את תגובת המערכת על ידי הפחתת מיקרו-גמגום ולהניב שיפור ביצועים קל. עם זאת, האפקט תלוי בתצורה: במקרים מסוימים, במקום להאיץ, המערכת עלולה להאט ולחוות עיכובים. אם אתה משתמש במחשב נייד, שים לב שזה עשוי גם להגדיל מעט את צריכת החשמל, מכיוון שהמעבד יישאר פעיל יותר גם במצב סרק.</v:String>
+    <v:String x:Key="tgl26_desc_sys">הטוויק חוסם התקנה אוטומטית פולשנית של PC Health Check - כלי עזר של Microsoft שמתקין את עצמו בכוח דרך Windows Update ללא רשות. לאחר ההתקנה, התוכנית מציקה ללא הרף לגבי «בדיקת מוכנות של Windows 11» ודוחפת «המלצות אופטימיזציה» לא רצויות.</v:String>
+    <v:String x:Key="tgl27_desc_sys">עבור משתתפי Windows Insider, משימות אלה צריכות להישאר מופעלות. עם זאת, אם אינך חלק מהתוכנית, כל המשימות הקשורות הופכות לעומס מיותר: הן צורכות משאבי מערכת, יוצרות יומנים חסרי תועלת ועלולות ליזום חיבורי טלמטריה ללא כל תועלת. השבתתן עשויה לשפר את זמן ההפעלה ואת ביצועי המערכת הכוללים תוך ביטול ערוצי איסוף נתונים ניסיוניים שאינם נחוצים.</v:String>
+    <v:String x:Key="tgl28_desc_sys">אם יש לך SSD, השבתת מיטוב הדיסק ומיטוב קבצי האתחול, שהם יעילים רק לדיסקים קשיחים (HDD), עוזרת להאריך את חיי הכונן. במקביל, פונקציית מיטוב TRIM ממשיכה לפעול: היא מודיעה לבקר ה-SSD אילו בלוקי נתונים אינם בשימוש עוד ומנקה אותם, ושומרת על מהירות יציבה ועל אורך חיי הכונן.</v:String>
+    <v:String x:Key="tgl29_desc_sys">משהה את עדכוני מערכת Windows למשך 10 שנים, תוך שמירה על פעילות עדכוני היישומים וההורדות מ-Microsoft Store. כדי להשבית עדכונים לחלוטין, עבור לשירותים והשבת את שירותי Windows Update המתאימים.</v:String>
+    <v:String x:Key="tgl30_desc_sys">Multiplane Overlay היא טכנולוגיית תצוגה של Windows שנועדה לשפר ביצועים באמצעות שכבת-על מואצת חומרה. עם זאת, במקרים מסוימים, המערכת ומנהלי ההתקן עלולים לקיים אינטראקציה שגויה עם יישומים, מה שמוביל למסכים שחורים, קיפאון, הבהוב וקריעת מסך. מומלץ להשבית זאת רק אם אתה נתקל בבעיות כאלה.</v:String>
+    <!--#endregion-->
+
+    <!--#region System Information Page -->
+    <v:String x:Key="title_win_name_sysinfo">מערכת ההפעלה:</v:String>
+    <v:String x:Key="title_win_ver_sysinfo">גרסה:</v:String>
+    <v:String x:Key="label_proc_sysinfo">תהליכים פעילים:</v:String>
+    <v:String x:Key="label_svc_sysinfo">שירותים:</v:String>
+    <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
+    <v:String x:Key="title_mode_sysinfo">מצב:</v:String>
+    <v:String x:Key="title_motherbr_sysinfo">לוח אם:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">שבבים:</v:String>
+    <v:String x:Key="title_cpu_sysinfo">מעבד:</v:String>
+    <v:String x:Key="title_cores_sysinfo">ליבות:</v:String>
+    <v:String x:Key="title_threads_sysinfo">תהליכונים:</v:String>
+    <v:String x:Key="title_freq_sysinfo">תדר:</v:String>
+    <v:String x:Key="title_gpu_sysinfo">כרטיס מסך:</v:String>
+    <v:String x:Key="title_refreshrate_sysinfo">קצב רענון:</v:String>
+    <v:String x:Key="title_ram_sysinfo">זיכרון:</v:String>
+    <v:String x:Key="title_mtype_sysinfo">סוג זיכרון:</v:String>
+    <v:String x:Key="title_storage_sysinfo">התקני אחסון:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">בשימוש:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">פנוי:</v:String>
+    <v:String x:Key="title_sound_sysinfo">התקני השמעה:</v:String>
+    <v:String x:Key="title_netadapter_sysinfo">מתאמי רשת:</v:String>
+    <v:String x:Key="title_ip_sysinfo">כתובת ה-IP שלך:</v:String>
+    <v:String x:Key="connection_limited_sysinfo">קישוריות הרשת מוגבלת</v:String>
+    <v:String x:Key="connection_block_sysinfo">גישה לרשת מוגבלת</v:String>
+    <v:String x:Key="connection_lose_sysinfo">קישוריות האינטרנט אבדה</v:String>
+    <v:String x:Key="text_copy_sysinfo">הועתק!</v:String>
+    <v:String x:Key="driver_not_installed_sysinfo">לא מותקן אצלך מנהל התקן</v:String>
+    <v:String x:Key="no_device_information_sysinfo">לא נמצא מידע על ההתקן</v:String>
+    <v:String x:Key="unknown_information_sysinfo">לא זוהה</v:String>
+    <!--#endregion-->
+
+    <!--#region Addons Page -->
+    <v:String x:Key="btn_select_dir">בחר תיקייה</v:String>
+    <v:String x:Key="chk_run_ti_adds">הרץ כ-TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">בחר תיקייה או ודא שאינה ריקה</v:String>
+    <v:String x:Key="scripts_info_adds">לאחר מכן, תוכל להריץ סקריפטים (.ps1, .cmd, .bat, .reg) בדף זה</v:String>
+    <!--#endregion-->
+
+    <!--#region Toolset Page -->
+    <v:String x:Key="source_ts">מקור</v:String>
+    <v:String x:Key="btn_download">הורד</v:String>
+    <v:String x:Key="btn_cancel">בטל</v:String>
+    <v:String x:Key="btn_open_dir">פתח תיקייה</v:String>
+    <v:String x:Key="text_ts">חפש לפי שם או מחבר</v:String>
+    <v:String x:Key="connecting_ts">מתחבר</v:String>
+    <!--#endregion-->
+
+</ResourceDictionary>

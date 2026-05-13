@@ -19,6 +19,7 @@
 
 [![EN](https://img.icons8.com/color/50/usa-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md) 
 [![FR](https://img.icons8.com/color/50/france-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md) 
+[![HE](https://img.icons8.com/color/50/israel-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-he.md) 
 [![HU](https://img.icons8.com/color/50/hungary-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-hu.md) 
 [![IT](https://img.icons8.com/color/50/italy-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-it.md) 
 [![KO](https://img.icons8.com/color/50/south-korea-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md) 
