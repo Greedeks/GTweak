@@ -1,0 +1,560 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <v:String x:Key="defaultDescription">เลื่อนเมาส์ไปวางเหนือการปรับแต่งใดๆ เพื่อดูคำอธิบาย</v:String>
+    <v:String x:Key="defaultDescriptionApp">เลื่อนเมาส์ไปวางเหนือไอคอนของแอปพลิเคชันใดๆ เพื่อดูชื่อของแอปพลิเคชันนั้น</v:String>
+    <v:String x:Key="btn_default">ค่าเริ่มต้น</v:String>
+    <v:String x:Key="btn_change">เปลี่ยน</v:String>
+    
+    <!--#region Load Window -->
+    <v:String x:Key="title_load">กำลังโหลด</v:String>
+    <v:String x:Key="step1_load">กำลังเตรียมสภาพแวดล้อม</v:String>
+    <v:String x:Key="step2_load">กำลังตรวจสอบสถานะของส่วนประกอบ</v:String>
+    <v:String x:Key="step3_load">กำลังสแกนการตั้งค่า</v:String>
+    <v:String x:Key="step4_load">กำลังค้นหาแพคเกจที่ติดตั้งแล้ว</v:String>
+    <v:String x:Key="step5_load">กำลังตรวจสอบเครือข่ายและการอัปเดต</v:String>
+    <v:String x:Key="step6_load">กำลังเริ่มต้น</v:String>
+    <!--#endregion-->
+
+    <!--#region Message Window -->
+    <v:String x:Key="title_message">อุ๊ปส์..</v:String>
+    <v:String x:Key="part1_message">โปรแกรมกำลังทำงานอยู่แล้ว ระบบกำลังเปิดใช้งานแบบหลายอินสแตนซ์ (หน้าต่าง)</v:String>
+    <v:String x:Key="part2_message">เป็นสิ่งต้องห้าม</v:String>
+    <v:String x:Key="part3_message">เพื่อหลีกเลี่ยงความขัดแย้งภายในและการทำงานผิดพลาดของซอฟต์แวร์</v:String>
+    <v:String x:Key="button_message">ยอมรับ</v:String>
+    <v:String x:Key="noty_message">กำลังปิดหน้าต่างอัตโนมัติ</v:String>
+    <v:String x:Key="title_nosupport_message">ไม่รองรับ</v:String>
+    <v:String x:Key="part1_nosupport_message">ยูทิลิตี้นี้ไม่รองรับ Windows ของคุณ ไม่มีการเปิดตัวเลือกอื่นอีกต่อไป</v:String>
+    <v:String x:Key="part2_nosupport_message">เป็นไปได้,</v:String>
+    <v:String x:Key="part3_nosupport_message">GTweak จะถูกปิดเพื่อป้องกันข้อผิดพลาดร้ายแรง</v:String>
+    <v:String x:Key="title_admin_message">สิทธิ์ไม่เพียงพอ</v:String>
+    <v:String x:Key="part1_admin_message">โปรแกรมกำลังเริ่มทำงาน</v:String>
+    <v:String x:Key="part2_admin_message">เป็นไปไม่ได้,</v:String>
+    <v:String x:Key="part3_admin_message">เพื่อให้โปรแกรมทำงานได้อย่างถูกต้อง โปรดเรียกใช้โปรแกรมในฐานะผู้ดูแลระบบ</v:String>
+    <!--#endregion-->
+
+    <!--#region Notification Window -->
+    <v:String x:Key="title_win_noty">การแจ้งเตือน - GTweak</v:String>
+    <v:String x:Key="title_warn_noty">ความสนใจ</v:String>
+    <v:String x:Key="title_info_noty">รายงานข้อมูล</v:String>
+    <v:String x:Key="logout_noty">มีความจำเป็นต้องออกจากระบบ, คลิกที่ข้อความนี้เพื่อดำเนินการ</v:String>
+    <v:String x:Key="restart_noty">จำเป็นต้องรีบูตเครื่อง, คลิกที่ข้อความนี้เพื่อดำเนินการ</v:String>
+    <v:String x:Key="warn_update_noty">เกิดข้อผิดพลาดระหว่างการอัปเดตโปรแกรม, โปรดลองใหม่อีกครั้ง</v:String>
+    <v:String x:Key="warn_import_noty">ไฟล์นี้ไม่สามารถนำเข้าได้</v:String>
+    <v:String x:Key="empty_import_noty">ไฟล์นี้ว่างเปล่า, ไม่สามารถทำการปรับแต่งได้</v:String>
+    <v:String x:Key="export_warning_noty">ไม่สมเหตุสมผลเลย, โปรดเลือกการปรับแต่งอย่างน้อยหนึ่งรายการก่อน</v:String>
+    <v:String x:Key="success_onedrive_noty">กำลังกู้คืน OneDrive ซึ่งอาจใช้เวลาสักครู่</v:String>
+    <v:String x:Key="error_onedrive_noty">ไม่พบไฟล์ติดตั้ง OneDrive, ไม่สามารถกู้คืนได้</v:String>
+    <v:String x:Key="warn_wd_noty">โปรดรอจนกระทั่งกระบวนการเสร็จสิ้น จากนั้นระบบจะรีสตาร์ท</v:String>
+    <v:String x:Key="info_wd_noty">อาจใช้เวลาสักครู่, โปรดรอสักครู่</v:String>
+    <v:String x:Key="warn_firewall_noty">ไฟร์วอลล์ของคุณถูกปิดใช้งาน, โปรดเปิดใช้งานและใช้การปรับแต่งอีกครั้ง</v:String>
+    <v:String x:Key="ready_activate_noty">ระบบปฏิบัติการของคุณไม่จำเป็นต้องเปิดใช้งาน</v:String>
+    <v:String x:Key="win_activate_noty">กระบวนการเปิดใช้งาน Windows ได้เริ่มต้นแล้ว, อาจใช้เวลาสักครู่</v:String>
+    <v:String x:Key="success_activate_noty">การเปิดใช้งานสำเร็จ, แนะนำให้รีสตาร์ทระบบ</v:String>
+    <v:String x:Key="error_activate_noty">เกิดข้อผิดพลาด, ไม่สามารถเปิดใช้งานระบบได้</v:String>
+    <v:String x:Key="network_activate_noty">จำเป็นต้องมีการเชื่อมต่ออินเทอร์เน็ตสำหรับการเปิดใช้งาน</v:String>
+    <v:String x:Key="keynotfound_noty">ไม่พบคีย์สำหรับ Windows รุ่นของคุณ, ยกเลิกการเปิดใช้งาน</v:String>
+    <v:String x:Key="createpoint_noty">การสร้างจุดคืนค่าอาจใช้เวลาสักครู่</v:String>
+    <v:String x:Key="error_point_noty">เกิดข้อผิดพลาด, ไม่สามารถสร้างจุดคืนค่าได้</v:String>
+    <v:String x:Key="success_point_noty">สร้างจุดคืนค่าสำเร็จแล้ว</v:String>
+    <v:String x:Key="error_recovery_noty">เกิดข้อผิดพลาด, ไม่สามารถเริ่มการกู้คืนได้</v:String>
+    <v:String x:Key="disable_recovery_noty">การกู้คืนระบบถูกปิดใช้งาน, ไม่สามารถใช้จุดคืนค่าได้</v:String>
+    <v:String x:Key="enable_recovery_noty">การกู้คืนระบบเปิดใช้งานแล้วและพร้อมใช้งานเมื่อจำเป็น</v:String>
+    <v:String x:Key="warn_recovery_noty">คุณได้ปิดใช้งานระบบการกู้คืนแล้ว</v:String>
+    <v:String x:Key="warn_point_enabled_noty">คุณได้เปิดใช้งานระบบการกู้คืนแล้ว</v:String>
+    <v:String x:Key="clear_ram_noty">ล้างหน่วยความจำระยะสั้นและไฟล์ชั่วคราวเรียบร้อยแล้ว</v:String>
+    <v:String x:Key="success_compression_noty">บีบอัดไดเรกทอรีและเนื้อหาสำเร็จแล้ว</v:String>
+    <v:String x:Key="success_decompression_noty">ขยายขนาดไดเรกทอรีและเนื้อหาสำเร็จแล้ว</v:String>
+    <v:String x:Key="ready_compression_noty">ไดเรกทอรีนี้ถูกบีบอัดแล้ว, ไม่จำเป็นต้องบีบอัดเพิ่มเติม</v:String>
+    <v:String x:Key="ready_decompression_noty">ไดเรกทอรีนี้ถูกขยายขนาดแล้ว, ไม่จำเป็นต้องดำเนินการใดๆ เพิ่มเติม</v:String>
+    <v:String x:Key="error_compression_noty">เกิดข้อผิดพลาดในการเปลี่ยนสถานะการบีบอัด</v:String>
+    <v:String x:Key="notsupport_ntfs_noty">ไม่สามารถดำเนินการได้เนื่องจากไดเรกทอรีไม่ได้อยู่ในพาร์ติชัน NTFS</v:String>
+    <v:String x:Key="success_reg_exporter_noty">บันทึกไฟล์รีจิสทรีสำเร็จแล้ว</v:String>
+    <v:String x:Key="error_reg_exporter_noty">เกิดข้อผิดพลาดในการบันทึกไฟล์รีจิสทรี</v:String>
+    <v:String x:Key="error_git_limit_noty">GitHub ได้จำกัดคำขอ API ชั่วคราว, โปรดลองอีกครั้งในภายหลัง</v:String>
+    <v:String x:Key="error_download_noty">ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้</v:String>
+    <!--#endregion-->
+
+    <!--#region Main Window -->
+    <v:String x:Key="rbtn_utils_main">ยูทิลิตี้</v:String>
+    <v:String x:Key="rbtn_conf_main">ความเป็นส่วนตัว</v:String>
+    <v:String x:Key="rbtn_int_main">อินเทอร์เฟซ</v:String>
+    <v:String x:Key="rbtn_app_main">แอปพลิเคชัน</v:String>
+    <v:String x:Key="rbtn_svc_main">บริการ</v:String>
+    <v:String x:Key="rbtn_sys_main">ระบบ</v:String>
+    <v:String x:Key="rbtn_sysinfo_main">ข้อมูลระบบ</v:String>
+    <v:String x:Key="rbtn_adds_main">ส่วนเสริม</v:String>
+    <v:String x:Key="rbtn_ts_main">ชุดเครื่องมือ</v:String>
+    <v:String x:Key="title_settings_main">การตั้งค่า</v:String>
+    <v:String x:Key="btgl_noty_main">แสดงการแจ้งเตือน</v:String>
+    <v:String x:Key="slider_volume_main">ระดับเสียง:</v:String>
+    <v:String x:Key="btgl_toast_main">ปักหมุดไว้ด้านบนสุดของหน้าต่างทั้งหมด</v:String>
+    <v:String x:Key="btgl_update_main">ตรวจสอบอัปเดต</v:String>
+    <v:String x:Key="cmbox_lang_main">ภาษาของอินเทอร์เฟซ:</v:String>
+    <v:String x:Key="btn_import">นำเข้า</v:String>
+    <v:String x:Key="btn_export">ส่งออก</v:String>
+    <v:String x:Key="btn_selfremove">ลบตัวเอง</v:String>
+    <!--#endregion-->
+
+    <!--#region Import Window -->
+    <v:String x:Key="title_import">กำลังนำเข้าการปรับแต่ง</v:String>
+    <v:String x:Key="wait_import">อาจใช้เวลาสักครู่</v:String>
+    <v:String x:Key="warn_import">ไม่จำเป็นต้องบังคับปิดหน้าต่าง</v:String>
+    <v:String x:Key="file_import">ไฟล์</v:String>
+    <!--#endregion-->
+
+    <!--#region Update Window -->
+    <v:String x:Key="title_win_update">อัปเดต - GTweak</v:String>
+    <v:String x:Key="title_update">พบอัปเดต</v:String>
+    <v:String x:Key="btn_upd">อัปเดต</v:String>
+    <v:String x:Key="download_update">กำลังดาวน์โหลด</v:String>
+    <v:String x:Key="noty_update">โปรดรอให้การดาวน์โหลดเสร็จสมบูรณ์</v:String>
+    <v:String x:Key="connection_update">กำลังเชื่อมต่อกับเซิร์ฟเวอร์</v:String>
+    <!--#endregion-->
+
+    <!--#region Utils Page -->
+    <v:String x:Key="advice_part1_more">ขอแนะนำ</v:String>
+    <v:String x:Key="advice_part2_more">อย่างยิ่ง</v:String>
+    <v:String x:Key="advice_part3_more">ให้สร้างจุดคืนค่าก่อนใช้ยูทิลิตี้</v:String>
+
+    <v:String x:Key="title_licens_more">การเปิดใช้งาน Windows</v:String>
+    <v:String x:Key="text_licens_more">ใช้วิธีการ HWID หรือ KMS สำรอง อาจไม่ทำงานหากไม่มีคีย์สำหรับ Windows รุ่นของคุณ</v:String>
+    <v:String x:Key="btn_activation">เปิดใช้งาน</v:String>
+
+    <v:String x:Key="title_point_more">จุดคืนค่า</v:String>
+    <v:String x:Key="text_point_more">สร้างหรือเริ่มกระบวนการคืนค่าระบบ, แม้ว่าจุดคืนค่าจะถูกปิดใช้งานอยู่</v:String>
+    <v:String x:Key="btn_save">บันทึก</v:String>
+    <v:String x:Key="btn_recovery">กู้คืน</v:String>
+
+    <v:String x:Key="title_point_state_more">สถานะการคืนค่า</v:String>
+    <v:String x:Key="text_point_state_more">เปิดหรือปิดจุดคืนค่าระบบ การปิดจะลบจุดคืนค่าที่มีอยู่ทั้งหมด</v:String>
+    <v:String x:Key="btn_disable">ปิดใช้งาน</v:String>
+    <v:String x:Key="btn_enable">เปิดใช้งาน</v:String>
+
+    <v:String x:Key="title_clear_more">การล้างหน่วยความจำ</v:String>
+    <v:String x:Key="text_clear_more">ล้างแคชของไฟล์ระบบในหน่วยความจำคอมพิวเตอร์, ไฟล์ชั่วคราวและแคชไอคอน</v:String>
+    <v:String x:Key="btn_clear">ล้าง</v:String>
+
+    <v:String x:Key="title_ntfs_more">การบีบอัด NTFS</v:String>
+    <v:String x:Key="text_ntfs_more">เปิดหรือปิดการบีบอัด NTFS มีประสิทธิภาพโดยเฉพาะกับไฟล์ข้อความ, ช่วยประหยัดพื้นที่ดิสก์</v:String>
+
+    <v:String x:Key="title_registry_more">สำรองรีจิสทรี</v:String>
+    <v:String x:Key="text_registry_more">สร้างสำเนาสำรองของรีจิสทรี Windows แนะนำก่อนทำการเปลี่ยนแปลงเพื่อให้สามารถกู้คืนระบบได้</v:String>
+    <v:String x:Key="btn_create">สร้าง</v:String>
+
+    <v:String x:Key="title_over_more">ยืนยันการล้างข้อมูลดิสก์</v:String>
+    <v:String x:Key="text_over_more">ดิสก์ของคุณมีโฟลเดอร์ Windows.old ที่เก็บไฟล์จาก Windows เวอร์ชันก่อนหน้าซึ่งใช้พื้นที่จำนวนมาก โปรดทราบ: เมื่อลบโฟลเดอร์นี้แล้ว จะไม่สามารถกู้คืนเนื้อหาได้, ดังนั้นโปรดตรวจสอบให้แน่ใจว่าคุณได้บันทึกไฟล์ที่จำเป็นไว้แล้ว</v:String>
+    <v:String x:Key="question_over_more">คุณต้องการดำเนินการล้างข้อมูลและลบโฟลเดอร์ Windows.old หรือไม่?</v:String>
+    <v:String x:Key="btn_agree">ยอมรับ</v:String>
+    <v:String x:Key="btn_decline">ปฏิเสธ</v:String>
+
+    <v:String x:Key="textpoint_more">จุดที่สร้างด้วย GTweak</v:String>
+    <!--#endregion-->
+
+    <!--#region Confidentiality Page -->
+    <v:String x:Key="tgl1_conf">รหัสโฆษณาและการโฆษณาแบบกำหนดเป้าหมาย</v:String>
+    <v:String x:Key="tgl2_conf">การซิงค์ข้อมูลทุกประเภท</v:String>
+    <v:String x:Key="tgl3_conf">การรวบรวมและตรวจสอบข้อมูลเทเลเมทรีของ Windows</v:String>
+    <v:String x:Key="tgl4_conf">การรวบรวมข้อมูลผ่านเหตุการณ์ตัวกำหนดเวลา</v:String>
+    <v:String x:Key="tgl5_conf">การรวบรวมข้อมูลเกี่ยวกับแอปพลิเคชันที่ติดตั้ง</v:String>
+    <v:String x:Key="tgl6_conf">การรวบรวมสถิติการใช้งานแอปพลิเคชัน</v:String>
+    <v:String x:Key="tgl7_conf">การรวบรวมและส่งข้อมูลลายมือ</v:String>
+    <v:String x:Key="tgl8_conf">การรวบรวมข้อมูลการกำหนดค่าฮาร์ดแวร์</v:String>
+    <v:String x:Key="tgl9_conf">การเข้าถึงเครือข่ายไปยังโดเมนสอดแนมของ Microsoft</v:String>
+    <v:String x:Key="tgl10_conf">การระบุตำแหน่งของผู้ใช้</v:String>
+    <v:String x:Key="tgl11_conf">การตรวจสอบคำขอผ่านทาง Feedback</v:String>
+    <v:String x:Key="tgl12_conf">การอัปเดตพื้นหลังที่ซ่อนอยู่ของการสังเคราะห์เสียง</v:String>
+    <v:String x:Key="tgl13_conf">การตรวจสอบระบบที่ซ่อนอยู่</v:String>
+    <v:String x:Key="tgl14_conf">การทดลองที่ซ่อนอยู่ในระบบของคุณ</v:String>
+    <v:String x:Key="tgl15_conf">บริการสำหรับการรวบรวมและส่งข้อมูลอย่างลับๆ</v:String>
+    <v:String x:Key="tgl16_conf">«การบันทึก» เหตุการณ์ Windows</v:String>
+    <v:String x:Key="tgl17_conf">การรวบรวมและตรวจสอบข้อมูลเทเลเมทรีของ NVIDIA</v:String>
+    <v:String x:Key="tgl18_conf">การบันทึกพฤติกรรมของผู้ใช้</v:String>
+    <v:String x:Key="tgl19_conf">การรวบรวมข้อมูลและการอัปเดตพื้นหลังของแผนที่ออฟไลน์</v:String>
+    <v:String x:Key="tgl20_conf">การรวบรวมและตรวจสอบข้อมูลเทเลเมทรีของ Intel</v:String>
+    
+    <v:String x:Key="tgl1_desc_conf">Windows สร้างรหัสโฆษณาเฉพาะสำหรับผู้ใช้แต่ละคนเพื่อติดตามการกระทำของคุณ ซึ่งถูกใช้โดยนักพัฒนาแอปพลิเคชันและ Windows เองเพื่อวัตถุประสงค์ของตนเอง, รวมถึงเพื่อเสนอโฆษณาที่เฉพาะเจาะจงในแอปพลิเคชัน</v:String>
+    <v:String x:Key="tgl2_desc_conf">แม้จะใช้บัญชีภายในเครื่อง, Windows ก็พยายามซิงค์ข้อมูลของคุณกับเซิร์ฟเวอร์ของ Microsoft อยู่เสมอ โดยเฉพาะอย่างยิ่ง: ชุดตกแต่ง, รหัสผ่าน, การตั้งค่า Windows, การตั้งค่าเบราว์เซอร์, การตั้งค่าแถบภาษา, การตั้งค่าการช่วยเหลือพิเศษ, การตั้งค่าเพิ่มเติม</v:String>
+    <v:String x:Key="tgl3_desc_conf">เทเลเมทรี (ข้อมูลวินิจฉัย) คือข้อมูลที่ Windows รวบรวมโดยอัตโนมัติเพื่อส่งไปยังเซิร์ฟเวอร์ของ Microsoft หรือเรียกสั้นๆ ว่า "อะไร? ที่ไหน? ทำไมและเมื่อไหร่ที่คุณใช้งาน?" Microsoft อ้างว่าข้อมูลถูกทำให้ไม่ระบุตัวตนและช่วยให้บริษัทพัฒนา Windows ต่อไป แม้ว่าคุณจะไม่กังวลเกี่ยวกับการรวบรวมข้อมูล, ปัญหาอีกอย่างอาจเกิดขึ้น - โหลดโปรเซสเซอร์มากเกินไป, ซึ่งจะทำให้ระบบช้าลง</v:String>
+    <v:String x:Key="tgl4_desc_conf">ใน «ตัวกำหนดเวลางาน» มีบริการที่หลังจากทำงานเสร็จ จะรวบรวมข้อมูลเกี่ยวกับการทำงานและส่งไปยังเซิร์ฟเวอร์ของ Microsoft</v:String>
+    <v:String x:Key="tgl5_desc_conf">Microsoft รวบรวมข้อมูลเกี่ยวกับซอฟต์แวร์ของคุณ ข้อมูลนี้ถูกใช้โดย Microsoft เพื่อวินิจฉัยปัญหาความเข้ากันได้, แต่คุณจะไม่ช่วยให้ Microsoft ปรับปรุงความเข้ากันได้ใน Windows เวอร์ชันใหม่เพราะข้อมูลนี้ถูกใช้เพื่อวัตถุประสงค์ที่เห็นแก่ตัวของ Microsoft เท่านั้น การปิดคุณสมบัตินี้จะป้องกันการส่งข้อมูลที่อาจเป็นความลับ</v:String>
+    <v:String x:Key="tgl6_desc_conf">การปรับแต่งนี้จะปิดฟังก์ชันการตรวจสอบการใช้งานแอปพลิเคชัน, กำจัดการรวบรวมข้อมูลเกี่ยวกับความถี่ในการใช้งาน, ระยะเวลาการทำงาน, และตัวชี้วัดประสิทธิภาพอื่นๆ ผลลัพธ์คือระบบจะหยุดวิเคราะห์กระบวนการทำงานของคุณ, ทำให้มั่นใจในการปกป้องข้อมูลที่เป็นความลับของคุณ</v:String>
+    <v:String x:Key="tgl7_desc_conf">การปรับแต่งนี้จะปิดกลไกการรวบรวมข้อมูลที่ Microsoft ใช้เพื่อปรับปรุงเทคโนโลยีการรู้จำลายมือของตน ไม่ว่าคุณจะใช้คุณสมบัตินี้หรือไม่, ระบบก็กำลังติดตามกิจกรรมของคุณเพื่อปรับปรุงความแม่นยำในการรู้จำ การเปลี่ยนแปลงที่นำไปใช้จะป้องกันการรวบรวมข้อมูลดังกล่าว, ช่วยรักษาความเป็นส่วนตัว</v:String>
+    <v:String x:Key="tgl8_desc_conf">โปรแกรมปรับปรุงคุณภาพซอฟต์แวร์ (CEIP) เป็นคุณสมบัติแยกต่างหากที่รวบรวมข้อมูลเกี่ยวกับการกำหนดค่าฮาร์ดแวร์ของคุณและวิธีที่คุณใช้ซอฟต์แวร์และบริการ โปรแกรมยังดาวน์โหลดไฟล์เป็นระยะเพื่อรวบรวมข้อมูลเกี่ยวกับปัญหาที่คุณอาจมีกับ Windows โปรแกรมเป็นไปโดยสมัครใจและคุณไม่จำเป็นต้องส่งข้อมูลของคุณไปยัง Microsoft, ซึ่งละเมิดความเป็นส่วนตัวของคุณ</v:String>
+    <v:String x:Key="tgl9_desc_conf">การปรับแต่งนี้จะแก้ไขไฟล์ hosts โดยเพิ่มที่อยู่ 0.0.0.0 หน้าชื่อโดเมนที่ระบุ, เพื่อปิดกั้นโดเมนเหล่านั้นอย่างมีประสิทธิภาพ นอกจากนี้ยังปรับการตั้งค่าไฟร์วอลล์ของ Windows เพื่อปิดกั้นการเชื่อมต่อไปยังที่อยู่ IP หลายแห่งที่เกี่ยวข้องกับบริการรวบรวมข้อมูลของ Microsoft</v:String>
+    <v:String x:Key="tgl10_desc_conf">การปิดบริการระบุตำแหน่งทางภูมิศาสตร์ช่วยลดศักยภาพในการใช้ข้อมูลตำแหน่งเพื่อวัตถุประสงค์ในการโฆษณาได้อย่างมาก – การเข้าถึงข้อมูลนี้ถูกจำกัดไม่เพียงสำหรับบริการของ Microsoft แต่ยังรวมถึงแอปพลิเคชันและสคริปต์ของบุคคลที่สามด้วย</v:String>
+    <v:String x:Key="tgl11_desc_conf">การปรับแต่งนี้จะปิดกั้นการรวบรวมข้อเสนอแนะและการแจ้งเตือนใน Windows, ซึ่งป้องกันการส่งข้อมูลโดยไม่ได้รับความยินยอมจากคุณ ในขณะเดียวกัน, แม้ว่าคุณจะไม่ได้ใช้คุณสมบัติ «ข้อเสนอแนะ», Microsoft ก็ยังคงบันทึกความถี่ที่คุณติดต่อฝ่ายสนับสนุนอย่างเป็นทางการ</v:String>
+    <v:String x:Key="tgl12_desc_conf">Windows สามารถรู้จำเสียงพูดได้โดยใช้โมดูลรู้จำและสังเคราะห์เสียงโดยเฉพาะ แม้ว่าคุณจะไม่ได้ใช้ Cortana หรือ «การช่วยเหลือพิเศษ», ระบบปฏิบัติการของคุณจะตรวจสอบการอัปเดตสำหรับเอ็นจินรู้จำเสียงของตนโดยค่าเริ่มต้นเสมอ</v:String>
+    <v:String x:Key="tgl13_desc_conf">ฟังก์ชันที่สามารถเข้าถึงข้อมูลผู้ใช้ใดๆ มันแลกเปลี่ยนข้อมูลบางอย่างกับเซิร์ฟเวอร์ของ Microsoft และไม่ส่งผลกระทบต่อการทำงานของระบบปฏิบัติการหรือแอปพลิเคชันแต่อย่างใด มันไม่ได้ช่วยผู้ใช้ในทางใดทางหนึ่ง, ทำให้มันไร้ประโยชน์</v:String>
+    <v:String x:Key="tgl14_desc_conf">Microsoft ดำเนินการทดลองกับผู้ใช้ Windows เป็นประจำเพื่อพิจารณาว่าคุณสมบัติใดถูกใช้อย่างแพร่หลาย, การเปลี่ยนคุณสมบัติทำให้มีประโยชน์มากขึ้นหรือไม่ แต่ในทางกลับกัน, นี่คือการละเมิดความเป็นส่วนตัว</v:String>
+    <v:String x:Key="tgl15_desc_conf">บริการ DiagTrack, dmwappushservice และ diagsvc ทำหน้าที่เป็นคีย์ล็อกเกอร์ — บันทึกทุกกิจกรรมของผู้ใช้, รวมถึงการกดแป้นพิมพ์, และส่งข้อมูลนี้ไปยังเซิร์ฟเวอร์ของ Microsoft โดยไม่ได้รับความยินยอมจากผู้ใช้ เมื่อใช้ UWF (Unified Write Filter), การทำงานที่เสถียรของระบบขึ้นอยู่กับบริการ dmwappushservice อย่างไรก็ตาม, หากคุณไม่รู้ว่ามันคืออะไรหรือคุณมีเครื่องมืออื่น, ก็ควรกำจัดคีย์ล็อกเกอร์เหล่านี้</v:String>
+    <v:String x:Key="tgl16_desc_conf">บันทึกเหตุการณ์ที่รวบรวมและประมวลผลข้อมูลการวินิจฉัยระบบ, สิ้นเปลืองทรัพยากรคอมพิวเตอร์ของคุณ บริการนี้จะไม่ให้อะไรดีๆ กับคุณ, ควรปิดมันดีกว่า, เพื่อป้องกันการส่งข้อมูลที่เป็นความลับ</v:String>
+    <v:String x:Key="tgl17_desc_conf">บริการที่รับผิดชอบในการรวบรวมและส่งข้อมูลเกี่ยวกับระบบและการใช้งาน, หรือฟังก์ชันที่ไม่เกี่ยวข้องกับการทำงานของไดรเวอร์วิดีโอ, ไร้ประโยชน์ ทำไมและข้อมูลประเภทใดที่ NVIDIA รวบรวมนั้นมีเพียง NVIDIA เท่านั้นที่รู้ แต่ความจริงที่ว่ามันไม่ได้นำสิ่งที่มีประโยชน์มาสู่ผู้ใช้ปลายทางนั้นค่อนข้างชัดเจน</v:String>
+    <v:String x:Key="tgl18_desc_conf">การปรับแต่งนี้จะปิดคุณสมบัติ UAR (User Activity Recording) – ระบบที่บันทึกทุกการกระทำที่คุณทำบนคอมพิวเตอร์ตามลำดับ: ตั้งแต่การจับภาพหน้าจอและการพิมพ์ข้อความ ไปจนถึงการเปิดโปรแกรมและแม้กระทั่งการเข้าถึงกล้องเว็บเมื่อหน้าจอล็อกอยู่ และอื่นๆ อีกมากมาย</v:String>
+    <v:String x:Key="tgl19_desc_conf">Windows อัปเดตแผนที่ออฟไลน์เป็นระยะและส่งการแจ้งเตือนเกี่ยวกับข้อมูลใหม่ในพื้นหลัง กระบวนการเหล่านี้อาจรวบรวมข้อมูลเกี่ยวกับตำแหน่งของคุณ, เส้นทาง, และการใช้งานแผนที่ หากคุณไม่ได้ใช้แผนที่ออฟไลน์, แนะนำให้ปิดเพื่อหลีกเลี่ยงการอัปเดตที่ซ่อนอยู่และการส่งข้อมูลไปยังเซิร์ฟเวอร์ของ Microsoft โดยที่คุณไม่ได้เกี่ยวข้องโดยตรง</v:String>
+    <v:String x:Key="tgl20_desc_conf">โมดูล Intel ที่ทำงานในพื้นหลังเพื่อรวบรวมและส่งข้อมูล ถูกวางตำแหน่งเป็นเครื่องมือสำหรับปรับปรุงผลิตภัณฑ์ของบริษัท อย่างไรก็ตาม, สำหรับผู้ใช้ทั่วไปมันให้ประโยชน์เชิงปฏิบัติน้อย, และการปิดคุณสมบัตินี้สามารถลดกิจกรรมพื้นหลังและป้องกันการส่งข้อมูลที่ไม่จำเป็น</v:String>
+    <!--#endregion-->
+
+    <!--#region Interface Page -->
+    <v:String x:Key="color1_intf">สีการเลือกเคอร์เซอร์:</v:String>
+    <v:String x:Key="color2_intf">สีของคำแนะนำเครื่องมือ:</v:String>
+    
+    <v:String x:Key="exblock1_intf">รายการนำทางใน Explorer:</v:String>
+    <v:String x:Key="chk_home_intf">หน้าแรก</v:String>
+    <v:String x:Key="chk_gallery_intf">แกลเลอรี</v:String>
+
+    <v:String x:Key="exblock2_intf">การตั้งค่าการแสดงผลของ File Explorer:</v:String>
+    <v:String x:Key="chk_hidden_intf">แสดงไฟล์และโฟลเดอร์ที่ซ่อนอยู่</v:String>
+    <v:String x:Key="chk_system_intf">แสดงไฟล์ระบบที่ซ่อนอยู่ซึ่งได้รับการป้องกัน</v:String>
+    <v:String x:Key="chk_extension_intf">แสดงนามสกุลไฟล์</v:String>
+    <v:String x:Key="chk_emptydrives_intf">แสดงไดรฟ์ที่ว่างเปล่า</v:String>
+
+    <v:String x:Key="exblock3_intf">การแสดงไอคอนเดสก์ท็อป:</v:String>
+    <v:String x:Key="chk_pc_intf">เครื่องนี้</v:String>
+    <v:String x:Key="chk_net_intf">เครือข่าย</v:String>
+    <v:String x:Key="chk_trash_intf">ถังรีไซเคิล</v:String>
+    <v:String x:Key="chk_panel_intf">แผงควบคุม</v:String>
+    <v:String x:Key="chk_user_intf">ไฟล์ผู้ใช้</v:String>
+
+    <v:String x:Key="tgl1_intf">ขนาดมาตรฐานของปุ่มระบบ</v:String>
+    <v:String x:Key="tgl2_intf">ความถี่การกระพริบของเคอร์เซอร์มาตรฐาน</v:String>
+    <v:String x:Key="tgl3_intf">ขนาดแถบเลื่อนมาตรฐาน</v:String>
+    <v:String x:Key="tgl4_intf">เอฟเฟกต์ความโปร่งใสของทาสก์บาร์</v:String>
+    <v:String x:Key="tgl5_intf">ธีมทาสก์บาร์สีเข้ม</v:String>
+    <v:String x:Key="tgl6_intf">ธีมสีเข้มของแอปพลิเคชันและ explorer</v:String>
+    <v:String x:Key="tgl7_intf">ความล่าช้าเมื่อเรียกเมนูบริบท</v:String>
+    <v:String x:Key="tgl8_intf">ความล่าช้าในการแสดงตัวอย่างบนทาสก์บาร์</v:String>
+    <v:String x:Key="tgl9_intf">การแสดงป้ายซ้อนทับบนไอคอน</v:String>
+    <v:String x:Key="tgl10_intf">คำนำหน้า «ป้ายกำกับสำหรับ...»/ คำต่อท้าย «– ป้ายกำกับ»</v:String>
+    <v:String x:Key="tgl11_intf">การจัดตำแหน่งทาสก์บาร์</v:String>
+    <v:String x:Key="tgl12_intf">เค้าโครงมาตรฐานของเมนู «เริ่ม»</v:String>
+    <v:String x:Key="tgl13_intf">เมนูบริบทแบบย่อ</v:String>
+    <v:String x:Key="tgl14_intf">แสดงเคล็ดลับและคำแนะนำ</v:String>
+    <v:String x:Key="tgl15_intf">ใช้โหมด Compact Explorer</v:String>
+    <v:String x:Key="tgl16_intf">ผู้ช่วย «Copilot» และ «Recall»</v:String>
+    <v:String x:Key="tgl17_intf">«สิ้นสุดงาน» คลิกขวาบนแอปพลิเคชัน</v:String>
+    <v:String x:Key="tgl18_intf">แสดงเค้าโครงดักจับหน้าต่าง</v:String>
+    <v:String x:Key="tgl19_intf">ไอคอนและปุ่มบนทาสก์บาร์</v:String>
+    <v:String x:Key="tgl20_intf">แสดงโฆษณาส่วนบุคคล</v:String>
+    <v:String x:Key="tgl21_intf">คืนค่าหน้าต่างโฟลเดอร์ก่อนหน้าเมื่อเข้าสู่ระบบ</v:String>
+    <v:String x:Key="tgl22_intf">การแจ้งเตือนพร้อมเคล็ดลับและคำแนะนำของ Windows</v:String>
+    <v:String x:Key="tgl23_intf">โฟลเดอร์ที่อยู่ใน «เครื่องนี้»</v:String>
+    <v:String x:Key="tgl24_intf">«วัตถุ 3 มิติ» ใน explorer</v:String>
+    <v:String x:Key="tgl25_intf">การบีบอัดรูปแบบวอลเปเปอร์ .JPEG ของเดสก์ท็อป</v:String>
+    <v:String x:Key="tgl26_intf">คำแนะนำเครื่องมือสำหรับองค์ประกอบเดสก์ท็อป</v:String>
+    <v:String x:Key="tgl27_intf">การค้นหาด้วยการรวม «Bing» ในเมนูเริ่ม</v:String>
+    <v:String x:Key="tgl28_intf">เปิด «การเข้าถึงด่วน» แทน «เครื่องนี้»</v:String>
+    <v:String x:Key="tgl29_intf">การเปลี่ยนแปลงความสว่างที่เกิดขึ้นเอง</v:String>
+
+    <v:String x:Key="color1_desc_intf">เปลี่ยนสีพื้นหลังเมื่อเลือกข้อความหรือวัตถุด้วยเคอร์เซอร์ในระบบ</v:String>
+    <v:String x:Key="color2_desc_intf">เปลี่ยนสีของคำแนะนำเครื่องมือในแอปพลิเคชันที่รองรับ</v:String>
+    <v:String x:Key="exblock1_desc_intf">เปลี่ยนการมองเห็นของรายการระบบในตัวในบานหน้าต่างนำทางที่ไม่สามารถเลิกปักหมุดได้ด้วยวิธีปกติ</v:String>
+    <v:String x:Key="exblock2_desc_intf">เปลี่ยนกฎของระบบสำหรับการแสดงรายการใน File Explorer, รวมถึงการมองเห็นของรายการที่ซ่อนอยู่, นามสกุลไฟล์, และโครงสร้างของไดรฟ์ดิสก์ ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="exblock3_desc_intf">เปลี่ยนการแสดงไอคอนระบบบนเดสก์ท็อป, ซึ่งเป็นวัตถุระบบในตัวไม่ใช่ทางลัดธรรมดา</v:String>
+    <v:String x:Key="tgl1_desc_intf">การปรับแต่งจะลดขนาดของปุ่มย่อขนาด, ขยายใหญ่สุด, และปิด, ทำให้ดูเล็กลง มันปรับขนาดสำหรับหน้าต่างทั้งหมด, รวมถึง File Explorer, รูปภาพ, เบราว์เซอร์, และโปรแกรมอื่นๆ ที่คุ้นเคย</v:String>
+    <v:String x:Key="tgl2_desc_intf">การปรับแต่งจะเพิ่มความถี่ในการกระพริบของเคอร์เซอร์ข้อความ โดยค่าเริ่มต้น, เคอร์เซอร์จะกระพริบทุก 530 มิลลิวินาที</v:String>
+    <v:String x:Key="tgl3_desc_intf">การปรับแต่งจะลดความหนาของแถบเลื่อนในแอปพลิเคชัน Windows แบบคลาสสิก, รวมถึง File Explorer, เบราว์เซอร์, และโปรแกรมรุ่นเก่าอื่นๆ อย่างไรก็ตาม, มันไม่มีผลต่ออินเทอร์เฟซสมัยใหม่, เพราะพวกมันใช้องค์ประกอบควบคุมของตัวเองที่ไม่ขึ้นกับการตั้งค่าระบบ</v:String>
+    <v:String x:Key="tgl4_desc_intf">การปรับแต่งจะปิดหรือเปิดเอฟเฟกต์ความโปร่งใส หน้าต่างและพื้นผิวโปร่งแสง</v:String>
+    <v:String x:Key="tgl5_desc_intf">เปลี่ยนธีมทาสก์บาร์เป็นสว่างหรือเข้ม ข้อควรระวัง, หน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl6_desc_intf">การปรับแต่งจะเปลี่ยนธีม explorer เป็นสว่างหรือเข้ม, รวมถึงเบราว์เซอร์และโปรแกรมอื่นๆ ที่รองรับธีมของอุปกรณ์ ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl7_desc_intf">โดยค่าเริ่มต้น, รายการเมนูบริบทเพิ่มเติมจะปรากฏขึ้นหลังจากหน่วงเวลา 400 มิลลิวินาที หากคุณต้องการให้เร็วกว่านี้, คุณสามารถลดความล่าช้านี้ได้</v:String>
+    <v:String x:Key="tgl8_desc_intf">โดยค่าเริ่มต้น, การแสดงตัวอย่างทาสก์บาร์จะแสดงตัวอย่างแอปพลิเคชันที่ทำงานอยู่เป็นเวลานานเกินไป เพื่อให้ตัวอย่างปรากฏเร็วขึ้น, ให้ใช้การปรับแต่งนี้</v:String>
+    <v:String x:Key="tgl9_desc_intf">อนุญาตให้ซ่อนลูกศรทางลัด, สถานะการซิงค์คลาวด์ (OneDrive, Dropbox), และป้ายประเภทไฟล์ เช่น กราฟิก SVG</v:String>
+    <v:String x:Key="tgl10_desc_intf">ลบคำนำหน้า-คำต่อท้ายที่เข้าใจง่ายเกินไปสำหรับป้ายกำกับ</v:String>
+    <v:String x:Key="tgl11_desc_intf">เลือกตำแหน่งที่คุณต้องการให้แสดงไอคอนบนทาสก์บาร์, ตรงกลางหรือทางซ้าย</v:String>
+    <v:String x:Key="tgl12_desc_intf">เปลี่ยนเค้าโครงเมนูเริ่มโดยขยายพื้นที่สำหรับแอปที่ปักหมุด นอกจากนี้, ยกเว้นใน Windows รุ่น Home, ส่วน «แนะนำ» จะถูกลบออกจากเมนูเริ่ม</v:String>
+    <v:String x:Key="tgl13_desc_intf">การปรับแต่งนี้จะคืนคุณกลับไปยังเมนูบริบทคลาสสิกปกติสำหรับเดสก์ท็อปและ «Explorer» ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl14_desc_intf">Windows 11 บางครั้งแสดงคำแนะนำเกี่ยวกับวิธีการใช้คุณสมบัติเฉพาะ, ตัวอย่างเช่น เมนู «เริ่ม» ใหม่หรือ «การตั้งค่าด่วน» มันมีประโยชน์ถ้าคุณเห็น Windows 11 เป็นครั้งแรก, แต่มิฉะนั้นมันก็เป็นขยะไร้ประโยชน์</v:String>
+    <v:String x:Key="tgl15_desc_intf">โดยค่าเริ่มต้น, Windows เพิ่มระยะห่างระหว่างรายการใน Explorer นี่คือคุณสมบัติใหม่ที่ออกแบบมาสำหรับหน้าจอสัมผัส การปรับแต่งนี้จะคืนค่าเค้าโครงแบบคลาสสิกของ file explorer, ลบการเยื้องระหว่างองค์ประกอบและช่วยคุณจากการค้นหาการตั้งค่า</v:String>
+    <v:String x:Key="tgl16_desc_intf">การปรับแต่งจะปิดและซ่อนไอคอน Copilot บนทาสก์บาร์, ใน «เมนูเริ่ม», ใน Edge, และใน Notepad เท่าที่ทำได้, ปิดกั้นการทำงานของมัน, และยังปิด Recall อีกด้วย ในขณะเดียวกัน, แอปพลิเคชัน Copilot หลักเองจะไม่ได้รับผลกระทบ, ยังคงอยู่ในระบบ, และสามารถใช้ได้หากจำเป็น Copilot สามารถลบออกได้อย่างสมบูรณ์พร้อมกับ Microsoft Edge เท่านั้น หากคุณสมบัติ AI เหล่านี้ไม่มีอยู่ใน Windows ของคุณตั้งแต่แรก, การใช้การปรับแต่งก็ไร้ประโยชน์</v:String>
+    <v:String x:Key="tgl17_desc_intf">การปรับแต่งนี้จะช่วยให้คุณเพิ่มตัวเลือก «สิ้นสุดงาน» ในเมนูบริบทเมื่อคลิกขวาที่แอปพลิเคชันบนทาสก์บาร์ ซึ่งช่วยเร่งการสิ้นสุดกระบวนการโดยไม่ต้องเปิดตัวจัดการงาน ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl18_desc_intf">หากคุณไม่ต้องการเห็นคำแนะนำเค้าโครงดักจับเมื่อวางเมาส์เหนือปุ่ม «ขยายใหญ่สุด», คุณสามารถปิดตัวเลือกนี้ได้</v:String>
+    <v:String x:Key="tgl19_desc_intf">การปรับแต่งนี้จะลบไอคอน «ค้นหา», «มุมมองงาน», และ «แชท», และซ่อนองค์ประกอบ «เรียนรู้เกี่ยวกับรูปภาพนี้» ใน Windows 11 รุ่นเก่า, มันยังลบไอคอน Copilot อีกด้วย สำหรับผู้ใช้ Windows 10, มันจะปิด «ข่าวสารและความสนใจ» และ Cortana เพิ่มเติม ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl20_desc_intf">โดยค่าเริ่มต้น, Windows ใช้ข้อมูลที่รวบรวมเพื่อกำหนดเป้าหมายโฆษณา, เช่น เพื่อแสดงโฆษณาที่ตรงกับความสนใจของคุณ และตามตัวอักษร, โฆษณานี้อยู่ในทุกที่ที่มีพื้นที่ว่างสำหรับแสดง หากคุณไม่ต้องการให้ Windows แสดงโฆษณาส่วนบุคคลในแอป Store ทั้งหมด, Explorer, ตัวเลือก, และเมนูเริ่ม, คุณสามารถปิดขยะนี้ได้</v:String>
+    <v:String x:Key="tgl21_desc_intf">โดยค่าเริ่มต้น, Windows ไม่ได้บันทึกตำแหน่งของหน้าต่าง, รวมถึงสถานะเมื่อปิดเครื่อง การปรับแต่งนี้จะช่วยให้คุณจำประเภทของโฟลเดอร์ที่เปิดอยู่เพื่อคืนค่าหลังจากออกจากระบบ, รีบูตและปิดเครื่อง</v:String>
+    <v:String x:Key="tgl22_desc_intf">การปรับแต่งช่วยให้ปิดเคล็ดลับและการแจ้งเตือนทั้งหมดของ Windows, รวมถึงคำแนะนำออนไลน์ในการตั้งค่า, รวมถึงปิด Second Chance Out of Box Experience (SCOOBE) สำหรับผู้ใช้ Windows 11 SCOOBE คือป๊อปอัปที่ปรากฏขึ้นอย่างกะทันหันซึ่งรบกวนผู้ใช้ให้ «ตั้งค่าอุปกรณ์ให้เสร็จสมบูรณ์โดยด่วน» และลงชื่อเข้าใช้บัญชี Microsoft</v:String>
+    <v:String x:Key="tgl23_desc_intf">การปรับแต่งจะซ่อนโฟลเดอร์จาก «เครื่องนี้»: เดสก์ท็อป, วิดีโอ, เอกสาร, ดาวน์โหลด, รูปภาพ, เพลง ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl24_desc_intf">ลบรายการวัตถุ 3 มิติจากภาพรวม Explorer ในรายการเมนูด้านซ้าย (จากรายการโครงสร้าง Explorer) ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl25_desc_intf">โดยค่าเริ่มต้น, เมื่อคุณตั้งค่ารูปภาพ jpeg เป็นวอลเปเปอร์เดสก์ท็อป, Windows จะลดคุณภาพลงเหลือ 85% โดยอัตโนมัติ การปรับแต่งนี้จะตั้งค่าคุณภาพวอลเปเปอร์ jpeg เป็น 100%</v:String>
+    <v:String x:Key="tgl26_desc_intf">การปรับแต่งจะปิดคำแนะนำเครื่องมือสำหรับองค์ประกอบเดสก์ท็อปเมื่อวางเคอร์เซอร์ของเมาส์</v:String>
+    <v:String x:Key="tgl27_desc_intf">โดยค่าเริ่มต้น, Windows ส่งทุกสิ่งที่คุณค้นหาในเมนู «เริ่ม» ไปยังเซิร์ฟเวอร์ของตนเพื่อให้ผลการค้นหา Bing แก่คุณ หากคุณไม่ต้องการการรวม Bing ในเมนู «เริ่ม», คุณสามารถใช้การปรับแต่งเพื่อปิดการค้นหาเว็บ ข้อควรระวังหน้าจออาจกระพริบ</v:String>
+    <v:String x:Key="tgl28_desc_intf">โดยค่าเริ่มต้น, เมื่อคุณเปิด Explorer, แท็บแรกจะเป็น «การเข้าถึงด่วน» และในการเปิดดิสก์ใดๆ คุณต้องทำการเคลื่อนไหวที่ไม่จำเป็น การปรับแต่งนี้จะทำให้ «เครื่องนี้» เปิดขึ้นเมื่อเปิด, แทนที่จะเป็น «การเข้าถึงด่วน»</v:String>
+    <v:String x:Key="tgl29_desc_intf">บนอุปกรณ์บางชนิด, ความสว่างหน้าจออาจเปลี่ยนแปลงได้เองตามเนื้อหาที่แสดง หากการปิด HDR, ความสว่างแบบไดนามิก, และการตั้งค่าพลังงานไม่ได้แก้ปัญหา (ปัญหานี้พบได้บ่อยในแล็ปท็อปที่ใช้พลังงานแบตเตอรี่), คุณสามารถลองการปรับแต่งนี้ - มันจะปิดการปรับความสว่างอัตโนมัติที่ระดับระบบโดยบังคับ การควบคุมความสว่างด้วยตนเองยังคงใช้งานได้</v:String>
+    <!--#endregion-->
+
+    <!--#region Packages Page -->
+    <v:String x:Key="warn_part1_pkg">แอปจะถูกลบ</v:String>
+    <v:String x:Key="warn_part2_pkg">อย่างถาวร,</v:String>
+    <v:String x:Key="warn_part3_pkg">แต่ OneDrive สามารถกู้คืนได้โดยคลิกที่ไอคอน</v:String>
+
+    <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
+    <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
+    <v:String x:Key="OneNote_pkg">Microsoft Office OneNote</v:String>
+    <v:String x:Key="MicrosoftOfficeHub_pkg">Microsoft Office Hub</v:String>
+    <v:String x:Key="MicrosoftSolitaireCollection_pkg">Microsoft Solitaire Collection</v:String>
+    <v:String x:Key="MixedReality_pkg">Mixed Reality</v:String>
+    <v:String x:Key="BingWeather_pkg">Bing Weather</v:String>
+    <v:String x:Key="Microsoft3D_pkg">Microsoft 3D Viewer</v:String>
+    <v:String x:Key="SkypeApp_pkg">Microsoft Skype</v:String>
+    <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
+    <v:String x:Key="Cortana_pkg">Cortana</v:String>
+    <v:String x:Key="MicrosoftTeams_pkg">Microsoft Teams</v:String>
+    <v:String x:Key="Music_pkg">Windows Media Player</v:String>
+    <v:String x:Key="Video_pkg">Movies &amp; TV</v:String>
+    <v:String x:Key="SoundRecorder_pkg">Sound Recorder</v:String>
+    <v:String x:Key="FeedbackHub_pkg">Feedback Hub</v:String>
+    <v:String x:Key="Mail_pkg">Mail</v:String>
+    <v:String x:Key="Widgets_pkg">Widgets</v:String>
+    <v:String x:Key="Photos_pkg">Windows Photos</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Snipping Tool</v:String>
+    <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
+    <v:String x:Key="GetHelp_pkg">Get Help</v:String>
+    <v:String x:Key="GetStarted_pkg">Get Started</v:String>
+    <v:String x:Key="MicrosoftStickyNotes_pkg">Microsoft Sticky Notes</v:String>
+    <v:String x:Key="Maps_pkg">Windows Maps</v:String>
+    <v:String x:Key="Camera_pkg">Windows Camera</v:String>
+    <v:String x:Key="Paint3D_pkg">Paint3D</v:String>
+    <v:String x:Key="PowerAutomateDesktop_pkg">Power Automate</v:String>
+    <v:String x:Key="People_pkg">People</v:String>
+    <v:String x:Key="BingNews_pkg">Microsoft News</v:String>
+    <v:String x:Key="Todos_pkg">Microsoft To Do</v:String>
+    <v:String x:Key="Alarms_pkg">Windows Clock</v:String>
+    <v:String x:Key="Phone_pkg">Your Phone</v:String>
+    <v:String x:Key="Outlook_pkg">Outlook for Windows</v:String>
+    <v:String x:Key="BingSports_pkg">Bing Sports</v:String>
+    <v:String x:Key="BingFinance_pkg">Bing Finance</v:String>
+    <v:String x:Key="MicrosoftFamily_pkg">Microsoft Family Safety</v:String>
+    <v:String x:Key="BingSearch_pkg">Bing Search</v:String>
+    <v:String x:Key="QuickAssist_pkg">Quick Assist</v:String>
+    <v:String x:Key="DevHome_pkg">Dev Home</v:String>
+    <v:String x:Key="WindowsTerminal_pkg">Terminal</v:String>
+    <v:String x:Key="LinkedIn_pkg">LinkedIn</v:String>
+    <v:String x:Key="WebMediaExtensions_pkg">Web Media Extensions</v:String>
+    <v:String x:Key="OneConnect_pkg">Mobile Plans</v:String>
+    <v:String x:Key="Edge_pkg">Microsoft Edge</v:String>
+    <v:String x:Key="Notepad_pkg">Notepad</v:String>
+    <v:String x:Key="Calculator_pkg">Calculator</v:String>
+    <v:String x:Key="Paint_pkg">Microsoft Paint</v:String>
+    <v:String x:Key="Copilot_pkg">Copilot</v:String>
+    <v:String x:Key="Whiteboard_pkg">Microsoft Whiteboard</v:String>
+    <v:String x:Key="Wallet_pkg">Microsoft Wallet</v:String>
+    <v:String x:Key="Spotify_pkg">Spotify</v:String>
+    <v:String x:Key="WhatsApp_pkg">WhatsApp</v:String>
+    <v:String x:Key="Facebook_pkg">Facebook</v:String>
+    <v:String x:Key="Hulu_pkg">Hulu</v:String>
+    <v:String x:Key="Disney_pkg">Disney</v:String>
+    <v:String x:Key="Instagram_pkg">Instagram</v:String>
+    <v:String x:Key="TwitterX_pkg">Twitter - X</v:String>
+    <v:String x:Key="TikTok_pkg">TikTok</v:String>
+    <v:String x:Key="MicrosoftSway_pkg">Microsoft Sway</v:String>
+    <v:String x:Key="Builder3D_pkg">Microsoft 3D-Builder</v:String>
+    <v:String x:Key="Netflix_pkg">Netflix</v:String>
+    <v:String x:Key="YandexMusic_pkg">Yandex.Music</v:String>
+    <v:String x:Key="Viber_pkg">Viber</v:String>
+    <v:String x:Key="Messaging_pkg">Microsoft Messaging</v:String>
+    <v:String x:Key="Picsart_pkg">Picsart AI Photo Editor</v:String>
+    <v:String x:Key="Plex_pkg">Plex for Windows</v:String>
+    <v:String x:Key="PrimeVideo_pkg">Amazon Prime Video</v:String>
+    <v:String x:Key="Shazam_pkg">Shazam</v:String>
+    <v:String x:Key="TuneInRadio_pkg">TuneIn Radio</v:String>
+    <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Music, Podcasts</v:String>
+    <v:String x:Key="Pandora_pkg">Pandora</v:String>
+    <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
+
+    <v:String x:Key="title_over_pkg">ยืนยันการถอนการติดตั้ง</v:String>
+    <v:String x:Key="text_over_pkg" xml:space="preserve">คุณกำลังจะถอนการติดตั้งเบราว์เซอร์ Microsoft Edge การดำเนินการนี้จะลบส่วนประกอบ EdgeWebView ซึ่งใช้ในการแสดงเนื้อหาเว็บในแอปพลิเคชันต่างๆ เช่น Microsoft Office (เช่น Meeting Insights, Room Finder), แอปรูปภาพ (เวอร์ชันใหม่ใช้ WebView2), บอท Telegram บางตัว, และโปรแกรมอื่นๆ ที่พึ่งพา WebView แบบฝัง ก่อนดำเนินการต่อ, โปรดตรวจสอบให้แน่ใจว่าคุณไม่จำเป็นต้องใช้ส่วนประกอบนี้ 
+       ใน Windows 11 รุ่นล่าสุด, Copilot ถูกนำมาใช้ผ่าน EdgeWebView ในรูปแบบ PWA หรือ wrapper ของระบบ เมื่อ Edge ถูกถอนการติดตั้ง, Copilot ก็จะถูกลบออกด้วย, เนื่องจากมันทำงานเป็นเว็บ wrapper</v:String>
+    <v:String x:Key="question_over_pkg">คุณต้องการดำเนินการลบพร้อมกับ EdgeWebView หรือไม่?</v:String>
+    <v:String x:Key="btn_delete_all">ใช่, ลบทั้งหมด</v:String>
+    <v:String x:Key="btn_keep_webview">ไม่, เก็บ EdgeWebView ไว้</v:String>
+    <!--#endregion-->
+
+    <!--#region Services Page -->
+    <v:String x:Key="tgl1_svc">บริการที่เกี่ยวข้องกับ Windows Search</v:String>
+    <v:String x:Key="tgl2_svc">บริการที่เกี่ยวข้องกับ Xbox</v:String>
+    <v:String x:Key="tgl3_svc">บริการที่เกี่ยวข้องกับ Windows Update</v:String>
+    <v:String x:Key="tgl4_svc">บริการที่เกี่ยวข้องกับ Windows Store</v:String>
+    <v:String x:Key="tgl5_svc">บริการ Performance Counter</v:String>
+    <v:String x:Key="tgl6_svc">บริการไบโอเมตริกซ์ของ Windows</v:String>
+    <v:String x:Key="tgl7_svc">บริการที่เกี่ยวข้องกับ Bluetooth</v:String>
+    <v:String x:Key="tgl8_svc">บริการที่เกี่ยวข้องกับเครื่องพิมพ์</v:String>
+    <v:String x:Key="tgl9_svc">บริการที่เกี่ยวข้องกับการทำงานของสแกนเนอร์</v:String>
+    <v:String x:Key="tgl10_svc">บริการที่เกี่ยวข้องกับแฟกซ์</v:String>
+    <v:String x:Key="tgl11_svc">บริการที่เกี่ยวข้องกับการใช้โหมดแท็บเล็ต/สมาร์ทโฟน</v:String>
+    <v:String x:Key="tgl12_svc">บริการที่เกี่ยวข้องกับการทำงานของจอภาพเพิ่มเติม</v:String>
+    <v:String x:Key="tgl13_svc">บริการที่เกี่ยวข้องกับส่วนประกอบของระบบ</v:String>
+    <v:String x:Key="tgl14_svc">บริการที่เกี่ยวข้องกับการทำงานของเครือข่ายท้องถิ่น</v:String>
+    <v:String x:Key="tgl15_svc">บริการที่เกี่ยวข้องกับโมเด็ม USB และเราเตอร์</v:String>
+    <v:String x:Key="tgl16_svc">บริการที่เกี่ยวข้องกับ VPN ไคลเอ็นต์</v:String>
+    <v:String x:Key="tgl17_svc">บริการที่เกี่ยวข้องกับการทำงานของ Windows Media</v:String>
+    <v:String x:Key="tgl18_svc">บริการที่เกี่ยวข้องกับเดสก์ท็อประยะไกล</v:String>
+    <v:String x:Key="tgl19_svc">บริการที่รวบรวมข้อผิดพลาดและบันทึกเหตุการณ์</v:String>
+    <v:String x:Key="tgl20_svc">บริการจัดการไฟล์ระยะไกล WebDAV</v:String>
+    <v:String x:Key="tgl21_svc">บริการที่เกี่ยวข้องกับการทำงานของสมาร์ทการ์ด</v:String>
+    <v:String x:Key="tgl22_svc">บริการที่เกี่ยวข้องกับการทำงานของ Windows Kiosk</v:String>
+    <v:String x:Key="tgl23_svc">บริการที่เกี่ยวข้องกับการเข้ารหัสไฟล์</v:String>
+    <v:String x:Key="tgl24_svc">บริการที่เกี่ยวข้องกับการปรับภาษา Windows</v:String>
+    <v:String x:Key="tgl25_svc">บริการที่เกี่ยวข้องกับการตรวจสอบความปลอดภัยพื้นหลัง</v:String>
+    <v:String x:Key="tgl26_svc">บริการที่เกี่ยวข้องกับการวินิจฉัยพื้นหลัง</v:String>
+    <v:String x:Key="tgl27_svc">บริการที่เกี่ยวข้องกับเครื่องมือขององค์กร</v:String>
+    <v:String x:Key="tgl28_svc">บริการที่เกี่ยวข้องกับการทำงานของ Hyper-V</v:String>
+    <v:String x:Key="tgl29_svc">บริการที่เกี่ยวข้องกับการแจ้งเตือนแบบพุช</v:String>
+    <v:String x:Key="tgl30_svc">บริการที่เกี่ยวข้องกับโหมดสาธิตของ Store</v:String>
+    <v:String x:Key="tgl31_svc">บริการที่เกี่ยวข้องกับการอัปเดต Microsoft Edge</v:String>
+    <v:String x:Key="tgl32_svc">บริการ Multimedia Class Scheduler</v:String>
+
+    <v:String x:Key="tgl1_desc_svc">ปิดถ้าคุณไม่ได้ใช้ประวัติไฟล์และการจัดทำดัชนีเนื้อหา</v:String>
+    <v:String x:Key="tgl2_desc_svc">ปิดถ้าคุณไม่ได้ใช้ Xbox และเกมแพดของ Microsoft</v:String>
+    <v:String x:Key="tgl3_desc_svc">ปิดถ้าคุณไม่ได้วางแผนที่จะอัปเดต Windows นอกจากบริการแล้ว, การปรับแต่งจะเปลี่ยนไฟล์ที่รับผิดชอบการอัปเดต Windows ด้วยเหตุนี้, แม้ว่าบริการจะเปิดใช้งาน, ศูนย์อัปเดตจะไม่ทำงาน โปรดทราบว่าการปรับแต่งมีผลต่อการดาวน์โหลดและอัปเดตแอปจาก Windows Store</v:String>
+    <v:String x:Key="tgl4_desc_svc">ปิดถ้าคุณไม่ได้ใช้ Windows Store และแอป UWP ของมัน</v:String>
+    <v:String x:Key="tgl5_desc_svc">ปิดถ้าคุณไม่ต้องการให้บริการวิเคราะห์ประสิทธิภาพของระบบของคุณ</v:String>
+    <v:String x:Key="tgl6_desc_svc">ปิดถ้าคุณไม่ได้ใช้การลงชื่อเข้าใช้ด้วย PIN, ลายนิ้วมือ, การรู้จำใบหน้า, หรือวิธีการ Windows Hello อื่นๆ หากตั้งค่าวิธีการลงชื่อเข้าใช้แล้ว, มันจะยังคงทำงานต่อไป, แต่คุณจะต้องเปิดใช้งาน Windows Hello อีกครั้งเพื่อแก้ไขหรือลบมัน</v:String>
+    <v:String x:Key="tgl7_desc_svc">ปิดถ้าคุณไม่ได้ใช้ Bluetooth และอุปกรณ์ที่ทำงานเชื่อมต่อกับ Bluetooth</v:String>
+    <v:String x:Key="tgl8_desc_svc">ปิดถ้าคุณไม่มีเครื่องพิมพ์</v:String>
+    <v:String x:Key="tgl9_desc_svc">ปิดถ้าคุณไม่มีสแกนเนอร์</v:String>
+    <v:String x:Key="tgl10_desc_svc">ปิดถ้าคุณไม่มีเครื่องแฟกซ์</v:String>
+    <v:String x:Key="tgl11_desc_svc">ปิดถ้าคุณมีคอมพิวเตอร์ตั้งโต๊ะ, แล็ปท็อป หรือเน็ตบุ๊ก</v:String>
+    <v:String x:Key="tgl12_desc_svc">ปิดถ้าคุณมีจอภาพเดียวและคุณไม่ได้วางแผนที่จะเชื่อมต่อเพิ่มเติม</v:String>
+    <v:String x:Key="tgl13_desc_svc">ปิดถ้าคุณไม่ได้ใช้แอปเหล่านี้: «เดสก์ท็อปเสมือน», «โทรศัพท์ของคุณ», และ «ไฟกลางคืน» บริการนี้ประมวลผลข้อมูลผู้ใช้และซิงค์กับเซิร์ฟเวอร์ของ Microsoft มันไม่จำเป็นต่อการทำงานของระบบ, อย่างไรก็ตาม, คุณสมบัติบางอย่าง เช่น «ไฟกลางคืน» ใน Windows 10, อาจหยุดทำงานทั้งหมดหรือบางส่วนหากปิดใช้งาน</v:String>
+    <v:String x:Key="tgl14_desc_svc">ปิดถ้าคุณไม่ได้ใช้หรือไม่ได้วางแผนที่จะใช้เครือข่ายท้องถิ่น</v:String>
+    <v:String x:Key="tgl15_desc_svc">ปิดถ้าคุณเชื่อมต่ออินเทอร์เน็ตผ่านสายหรือ Wi-Fi</v:String>
+    <v:String x:Key="tgl16_desc_svc">ปิดถ้าคุณไม่ได้ใช้ VPN ไคลเอ็นต์ อาจมีผลต่อการทำงานของ Xbox</v:String>
+    <v:String x:Key="tgl17_desc_svc">ปิดถ้าคุณไม่ต้องการการซิงค์ไฟล์และการเข้าถึงไฟล์บนเครือข่ายท้องถิ่นสำหรับ Windows Media Player บริการเหล่านี้ไม่จำเป็น, คุณสามารถใช้เครื่องเล่นต่อไปได้</v:String>
+    <v:String x:Key="tgl18_desc_svc">ปิดถ้าคุณไม่ได้ใช้เดสก์ท็อประยะไกลและไม่ได้ใช้การเชื่อมต่อเซิร์ฟเวอร์กับพวกมัน</v:String>
+    <v:String x:Key="tgl19_desc_svc">ปิดถ้าคุณไม่ต้องการให้บริการโหลดพีซีของคุณในขณะที่จัดการกับข้อผิดพลาด</v:String>
+    <v:String x:Key="tgl20_desc_svc">ปิดถ้าคุณไม่ได้จัดการไฟล์ระยะไกลผ่านทาง Sharing หรือ WebDAV</v:String>
+    <v:String x:Key="tgl21_desc_svc">ปิดถ้าคุณไม่ได้ใช้สมาร์ทการ์ด สมาร์ทการ์ดคือหนึ่งในตัวระบุอิเล็กทรอนิกส์หรือพลาสติกที่มีชิปหลากหลายชนิด ลักษณะที่ปรากฏคือ «บัตรธนาคาร» สำหรับการใช้งาน Windows ทุกวัน, บริการนี้ไม่จำเป็นและคุณจะไม่ต้องการมัน</v:String>
+    <v:String x:Key="tgl22_desc_svc">ปิดถ้าคุณไม่ได้ใช้โหมด kiosk ของ Windows โหมดนี้จะลดขนาดอินเทอร์เฟซให้เหลือน้อยที่สุด: มีเพียงแอป UWP เดียวที่ทำงานแบบเต็มหน้าจอ, และคุณสมบัติอื่นๆ ทั้งหมดถูกบล็อก โปรดทราบว่าสิ่งนี้อาจรบกวนการติดตั้งอัปเดต Windows และโปรแกรมผ่าน Windows Installer, เนื่องจากมันยังปิดการตั้งค่าและการเริ่มต้นข้อมูลระบบและแอปพลิเคชันในการเข้าสู่ระบบครั้งแรก</v:String>
+    <v:String x:Key="tgl23_desc_svc">ปิดถ้าคุณไม่ได้ใช้การเข้ารหัสดิสก์ BitLocker และการเข้ารหัสไฟล์หรือโฟลเดอร์ EFS</v:String>
+    <v:String x:Key="tgl24_desc_svc">ปิดถ้าคุณได้กำหนดค่าภาษาทั้งหมดที่คุณจะใช้และไม่ได้วางแผนที่จะเพิ่มภาษาใหม่</v:String>
+    <v:String x:Key="tgl25_desc_svc">ปิดถ้าคุณไม่ได้ใช้ Windows Defender และความปลอดภัยเพิ่มเติมทั้งหมดของ Windows</v:String>
+    <v:String x:Key="tgl26_desc_svc">ปิดถ้าคุณไม่ต้องการให้ Windows โหลดระบบด้วยการวินิจฉัยที่ไร้ประโยชน์ในพื้นหลัง</v:String>
+    <v:String x:Key="tgl27_desc_svc">ปิดถ้าคุณไม่ได้ใช้การจัดการระยะไกลของแอปพลิเคชันองค์กรและคุณไม่มีเซิร์ฟเวอร์ระยะไกลที่พีซีของคุณสื่อสารด้วย</v:String>
+    <v:String x:Key="tgl28_desc_svc">ปิดถ้าคุณไม่ได้ใช้ระบบเสมือนจริงในตัว มันไม่ส่งผลกระทบต่อการทำงานของ VirtualBox และโปรแกรมที่คล้ายกันแต่อย่างใด</v:String>
+    <v:String x:Key="tgl29_desc_svc">ปิดถ้าคุณไม่ได้ใช้อุปกรณ์ที่จับคู่และไม่ได้ติดตั้งแอปจาก Windows Store จากระยะไกล บริการเหล่านี้จัดการศูนย์การแจ้งเตือนกับอุปกรณ์ที่จับคู่, ประมวลผลคำขอพุช, อนุญาตให้ Windows ตรวจจับสมาร์ทโฟนของคุณสำหรับแอป «โทรศัพท์ของคุณ», เชื่อมต่อใหม่โดยอัตโนมัติ, และแสดงข้อความและเหตุการณ์ในศูนย์ปฏิบัติการ ใน Windows 10, หลังจากปิดใช้งาน, ศูนย์การแจ้งเตือนอาจหยุดเปิด</v:String>
+    <v:String x:Key="tgl30_desc_svc">ปิดถ้าคุณไม่ได้ใช้อุปกรณ์ในร้านค้าเพื่อสาธิตคุณสมบัติของ Windows บริการ Store Demo จัดการการแสดงเนื้อหาสาธิตและคุณสมบัติเชิงโต้ตอบที่มีไว้สำหรับจอแสดงผลในร้านค้าและการทดสอบเท่านั้น บริการนี้ไม่จำเป็นสำหรับการใช้งานคอมพิวเตอร์ในชีวิตประจำวัน</v:String>
+    <v:String x:Key="tgl31_desc_svc">ปิดถ้าคุณไม่ได้วางแผนที่จะอัปเดตหรือไม่ได้ใช้ Microsoft Edge การดำเนินการนี้ยังหยุดการอัปเดตอัตโนมัติสำหรับ WebView2 Runtime - ส่วนประกอบเหล่านี้ใช้กลไกการอัปเดตเดียวกันและพึ่งพากันอย่างใกล้ชิด</v:String>
+    <v:String x:Key="tgl32_desc_svc">ปิดถ้าคุณเข้าใจผลกระทบที่อาจเกิดขึ้นและไม่ได้ใช้แอปพลิเคชันมัลติมีเดียที่ต้องการการประมวลผลเสียงและวิดีโอแบบมีลำดับความสำคัญ ในบางกรณีซึ่งพบไม่บ่อยอาจลดจำนวนเหตุการณ์ของระบบและภาระงาน (เช่น เมื่อใช้อะแดปเตอร์เครือข่ายกับ NetAdapterCX), อย่างไรก็ตาม, ผลกระทบขึ้นอยู่กับการกำหนดค่าระบบ อาจทำให้เสียงกระตุก, เสียง/วิดีโอไม่ประสานกัน, และปัญหาการเล่นอื่นๆ</v:String>
+    <!--#endregion-->
+
+    <!--#region System Page -->
+    <v:String x:Key="slider1_sys">ความเร็วตัวชี้เมาส์:</v:String>
+    <v:String x:Key="slider2_sys">ความหน่วงการซ้ำแป้นพิมพ์:</v:String>
+    <v:String x:Key="slider3_sys">อัตราการซ้ำแป้นพิมพ์:</v:String>
+    <v:String x:Key="text_sys">พิมพ์ที่นี่เพื่อทดสอบการตั้งค่าแป้นพิมพ์ของคุณ</v:String>
+    <v:String x:Key="tgl1_sys">เพิ่มความแม่นยำของตัวชี้</v:String>
+    <v:String x:Key="tgl2_sys">ปุ่มตรึงและปุ่มกรอง</v:String>
+    <v:String x:Key="tgl3_sys">Windows Defender, Antimalware, SmartScreen และ VBS</v:String>
+    <v:String x:Key="tgl4_sys">UAC (การควบคุมบัญชีผู้ใช้)</v:String>
+    <v:String x:Key="tgl5_sys">การแจ้งเตือนความปลอดภัยจากศูนย์การแจ้งเตือน</v:String>
+    <v:String x:Key="tgl6_sys">อัปเดตแอปจาก Microsoft Store โดยอัตโนมัติ</v:String>
+    <v:String x:Key="tgl7_sys">ความหน่วงของเสียงในไดรเวอร์เสียง Realtek</v:String>
+    <v:String x:Key="tgl8_sys">หมดเวลาปิดจอแสดงผลเมื่อล็อกคอนโซล</v:String>
+    <v:String x:Key="tgl9_sys">เทคโนโลยี «ไฮเบอร์เนต» และ «เริ่มต้นด่วน»</v:String>
+    <v:String x:Key="tgl10_sys">กล่องโต้ตอบเตือนการปิดเครื่อง</v:String>
+    <v:String x:Key="tgl11_sys">คำเตือนเมื่อเรียกใช้ exe ใดๆ</v:String>
+    <v:String x:Key="tgl12_sys">การวินิจฉัยหน่วยความจำอัตโนมัติ</v:String>
+    <v:String x:Key="tgl13_sys">โปรโตคอล Teredo, ISATAP และ IPv6</v:String>
+    <v:String x:Key="tgl14_sys">ขนาดมาตรฐานของแคชระบบไฟล์</v:String>
+    <v:String x:Key="tgl15_sys">การชะลอการเริ่มต้น Windows และการเริ่มโปรแกรม</v:String>
+    <v:String x:Key="tgl16_sys">ประวัติการใช้งานสำหรับแถบเครื่องมือด่วน</v:String>
+    <v:String x:Key="tgl17_sys">การทำงานอัตโนมัติของสื่อแบบถอดได้</v:String>
+    <v:String x:Key="tgl18_sys">ใช้แผนการใช้พลังงานเริ่มต้น</v:String>
+    <v:String x:Key="tgl19_sys">ใช้ฟังก์ชัน «Bluetooth และอุปกรณ์»</v:String>
+    <v:String x:Key="tgl20_sys">ไฟร์วอลล์ Windows Defender</v:String>
+    <v:String x:Key="tgl21_sys">ใช้ฟังก์ชัน «โหมดเกม»</v:String>
+    <v:String x:Key="tgl22_sys">ใช้ฟังก์ชัน «แถบเกม»</v:String>
+    <v:String x:Key="tgl23_sys">แอปพลิเคชันทำงานในพื้นหลัง</v:String>
+    <v:String x:Key="tgl24_sys">พื้นที่จัดเก็บที่สงวนไว้ใน Windows</v:String>
+    <v:String x:Key="tgl25_sys">ตัวจับเวลาแบบไดนามิกและ High Precision Event Timer</v:String>
+    <v:String x:Key="tgl26_sys">ซ่อน «PC Health Check» จากระบบอัปเดต</v:String>
+    <v:String x:Key="tgl27_sys">งานพื้นหลังของ Windows Insider</v:String>
+    <v:String x:Key="tgl28_sys">การจัดเรียงข้อมูลดิสก์ระบบ</v:String>
+    <v:String x:Key="tgl29_sys">หยุดอัปเดต Windows ชั่วคราว</v:String>
+    <v:String x:Key="tgl30_sys">Multiplane Overlay (MPO)</v:String>
+
+    <v:String x:Key="slider1_desc_sys">เปลี่ยนความเร็วของตัวชี้เมาส์, ช่วยประหยัดเวลาในการค้นหาพารามิเตอร์ของเมาส์</v:String>
+    <v:String x:Key="slider2_desc_sys">จะเปลี่ยนความหน่วงก่อนเริ่มการซ้ำอักขระที่ป้อน, ค่าที่แนะนำคือ 0</v:String>
+    <v:String x:Key="slider3_desc_sys">เปลี่ยนอัตราการซ้ำของอักขระที่ป้อน, ค่าที่แนะนำคือ 31</v:String>
+    <v:String x:Key="tgl1_desc_sys">โดยค่าเริ่มต้น, การเร่งความเร็วของเมาส์จะเร่งการเคลื่อนที่ของเมาส์ แนะนำให้ปิด, เพราะเมื่อเปิดการเร่งความเร็ว, การเคลื่อนที่ที่สม่ำเสมอและความแม่นยำของทิศทางนั้นไม่ดีเท่าที่ควร</v:String>
+    <v:String x:Key="tgl2_desc_sys">หากคุณไม่ต้องการให้หน้าต่างปรากฏขึ้นบ่อยครั้งเมื่อทำงาน, บอกให้คุณเปิดการตรึงแป้นหรือการกรองอินพุต, และหลังจากตอบ «ไม่» มันก็ปรากฏขึ้นอีกครั้งหลังจากนั้นสักครู่, แล้วปิดฟังก์ชันนี้ นอกจากนี้, การกรองอินพุตมีผลต่อความเร็วของการซ้ำแป้นพิมพ์และการข้ามแป้นที่ซ้ำ</v:String>
+    <v:String x:Key="tgl3_desc_sys">การปรับแต่งนี้จะปิดและหยุด Windows Defender, SmartScreen, ภาระงานที่มากเกินไปอย่างไม่สมส่วนบนโปรเซสเซอร์ Antimalware และ Virtualization-Based Security (VBS) สำหรับการเปลี่ยนแปลงที่จะนำไปใช้อย่างสมบูรณ์, ระบบจะรีบูตเข้าสู่ Safe Mode โดยอัตโนมัติ ไม่จำเป็นต้องดำเนินการใดๆ - ยูทิลิตี้จะจัดการทุกอย่างโดยอัตโนมัติ</v:String>
+    <v:String x:Key="tgl4_desc_sys">การปรับแต่งจะปิด UAC (การควบคุมบัญชีผู้ใช้) อย่างสมบูรณ์, กำจัดไอคอนโล่, การแจ้งเตือนความปลอดภัยและอื่นๆ UAC ไม่ใช่โปรแกรมป้องกันที่สมบูรณ์</v:String>
+    <v:String x:Key="tgl5_desc_sys">เมื่อคุณปิดสิ่งที่เกี่ยวข้องกับความปลอดภัยหรือการป้องกัน, คุณจะได้รับการแจ้งเตือนเกี่ยวกับมันอย่างต่อเนื่อง การปรับแต่งนี้จะปิดการแจ้งเตือนความปลอดภัยจากศูนย์การแจ้งเตือน</v:String>
+    <v:String x:Key="tgl6_desc_sys">หากคุณต้องการอัปเดตแอปของคุณจาก Microsoft Store ด้วยตัวเอง, คุณต้องปิดคุณสมบัติการอัปเดตอัตโนมัติ ดังนั้น, ภาระงานบนเครือข่ายจะลดลง</v:String>
+    <v:String x:Key="tgl7_desc_sys">ไดรเวอร์ Realtek High Definition Audio บางเวอร์ชันอาจมีปัญหากับความหน่วงของเสียง การปรับแต่งนี้จะแก้ไขข้อบกพร่องนั้น อย่างไรก็ตาม, ไม่แนะนำให้ใช้หากคุณไม่สังเกตเห็นความหน่วงใดๆ หรือหากคุณไม่แน่ใจว่าไดรเวอร์ที่ติดตั้งและ/หรือที่ใช้งานอยู่เป็นของ Realtek จริงๆ</v:String>
+    <v:String x:Key="tgl8_desc_sys">โดยค่าเริ่มต้น, Windows จะแสดงหน้าจอล็อกเป็นเวลา 1 นาที, หลังจากนั้นหน้าจอจะดับลงและไม่ขึ้นอยู่กับว่าคุณใช้พลังงานแบตเตอรี่หรือไฟบ้าน การปรับแต่งนี้จะลบข้อจำกัดเหล่านี้</v:String>
+    <v:String x:Key="tgl9_desc_sys">ในทางทฤษฎี, การเริ่มต้นด่วนใช้เวลาน้อยกว่าการออกจากไฮเบอร์เนต, แต่ในทางปฏิบัติอาจไม่สังเกตเห็นได้ หากคุณไม่ได้ใช้ฟังก์ชันการโหลดด่วนหรือไฮเบอร์เนต, คุณก็สามารถปิดได้เช่นกัน วิธีนี้, คุณสามารถเพิ่มพื้นที่ว่างบนดิสก์ของคุณได้</v:String>
+    <v:String x:Key="tgl10_desc_sys">การปรับแต่งช่วยให้คุณปิดข้อความระบบที่แจ้งให้คุณทราบว่าเมื่อปิดหรือรีสตาร์ทคอมพิวเตอร์, โปรแกรมที่เปิดอยู่จะถูกยุติโดยบังคับ</v:String>
+    <v:String x:Key="tgl11_desc_sys">การเตือนความปลอดภัยของ Windows เมื่อคุณเรียกใช้ไฟล์ exe, msi, bat, cmd หรือไฟล์ปฏิบัติการอื่นๆ ที่ดาวน์โหลดผ่านอินเทอร์เน็ต การยืนยันการเปิดใช้ไฟล์ดังกล่าวอาจทำให้เบื่อได้เร็วทุกครั้ง, การปรับแต่งนี้จะปิดคำเตือนนี้</v:String>
+    <v:String x:Key="tgl12_desc_sys">การปรับแต่งนี้จะปิดการเปิดใช้การวินิจฉัยหน่วยความจำ Windows โดยอัตโนมัติโดยการปิดงานที่กำหนดเวลาไว้ ผลลัพธ์คือระบบบูตเร็วขึ้นเนื่องจากการไม่มีการตรวจสอบที่ไม่จำเป็น, ในขณะที่คุณยังคงมีตัวเลือกในการเรียกใช้การวินิจฉัยด้วยตนเองเมื่อจำเป็น</v:String>
+    <v:String x:Key="tgl13_desc_sys">การปรับแต่งนี้จะปิดโปรโตคอล Teredo, ISATAP และ IPv6, ซึ่งโดยทั่วไปแล้ว, ผู้ใช้ส่วนใหญ่ไม่ต้องการ อย่างไรก็ตาม, ไม่แนะนำให้นำไปใช้กับอุปกรณ์ทำงานหรือขององค์กร: อาจทำให้เกิดปัญหาเครือข่ายหรือการทำงานที่ไม่ถูกต้องของบริการบางอย่าง</v:String>
+    <v:String x:Key="tgl14_desc_sys">การปรับแต่งนี้รวมถึงการสนับสนุนแคชระบบไฟล์ขนาดใหญ่ การเพิ่มขนาดของแคชระบบไฟล์โดยทั่วไปจะปรับปรุงประสิทธิภาพของคอมพิวเตอร์, แต่ในทางกลับกันจะลดพื้นที่หน่วยความจำกายภาพที่มีให้สำหรับแอปพลิเคชันและบริการ</v:String>
+    <v:String x:Key="tgl15_desc_sys">โดยค่าเริ่มต้น, Windows มีกลไกในตัวเพื่อชะลอโปรแกรมเริ่มต้น วิธีนี้ทำงานได้ค่อนข้างดีบนคอมพิวเตอร์รุ่นเก่าที่มี HDD, แต่บนพีซีสมัยใหม่ที่มี SSD จะทำให้การเริ่มต้นระบบพร้อมโปรแกรมช้าลงโดยไม่จำเป็น</v:String>
+    <v:String x:Key="tgl16_desc_sys">การปรับแต่งจะปิดการบันทึกประวัติการใช้งานไฟล์และโฟลเดอร์ที่แสดงบนแผงการเข้าถึงด่วน กล่าวอีกนัยหนึ่ง, ระบบจะไม่บันทึกและแสดงรายการที่ใช้งานล่าสุดโดยอัตโนมัติอีกต่อไป</v:String>
+    <v:String x:Key="tgl17_desc_sys">การปรับแต่งจะปิดการทำงานอัตโนมัติสำหรับสื่อแบบถอดได้หลายประเภทที่เชื่อมต่อกับคอมพิวเตอร์ของคุณที่ Explorer พยายามเปิด ดังนั้น, โปรแกรมที่ไม่รู้จักจะไม่เปิดโดยอัตโนมัติบนสื่อที่คุณไม่แน่ใจในความน่าเชื่อถือ</v:String>
+    <v:String x:Key="tgl18_desc_sys">เพิ่มวงจรจ่ายไฟ «ประสิทธิภาพสูงสุด», หรือหากมีอยู่แล้ว, เพียงแค่สลับไปยังวงจรจ่ายไฟที่มีอยู่ นอกจากนี้, ยังปลดล็อกการตั้งค่าความถี่โปรเซสเซอร์สูงสุดในการตั้งค่าการจัดการพลังงานของโปรเซสเซอร์</v:String>
+    <v:String x:Key="tgl19_desc_sys">หากคุณไม่ต้องการ Bluetooth และคุณไม่ต้องการใช้อุปกรณ์ของคุณผ่าน Bluetooth, แล้วปิดมัน, และมันจะลบไอคอนถาดระบบด้วย</v:String>
+    <v:String x:Key="tgl20_desc_sys">ไฟร์วอลล์ช่วยให้คุณควบคุมการเข้าถึงอินเทอร์เน็ตของโปรแกรมโดยอนุญาตหรือปิดกั้นการเชื่อมต่อและควบคุมการรับส่งข้อมูล หากคุณมั่นใจในการกระทำของคุณและเข้าใจสิ่งที่คุณกำลังทำ, คุณสามารถปิดไฟร์วอลล์, อย่างไรก็ตาม, แนะนำให้เปิดไว้สำหรับผู้ใช้ส่วนใหญ่</v:String>
+    <v:String x:Key="tgl21_desc_sys">โหมดเกมไม่มีผลมากนักบนระบบที่มีประสิทธิภาพสูง อย่างไรก็ตาม, หากคุณมีกระบวนการจำนวนมากที่ทำงานอยู่ในพื้นหลัง, โหมดนี้จะช่วยให้แน่ใจว่ากระบวนการพื้นหลังจะไม่ส่งผลกระทบต่อการทำงานของเกม</v:String>
+    <v:String x:Key="tgl22_desc_sys">ฟังก์ชันสำหรับบันทึกเกมของคุณ โดยรวมแล้ว, มันใช้ทรัพยากรของระบบของคุณ มีทางเลือกที่ดีกว่ามากมาย, และนอกจากนี้, ซึ่งไม่เปิดขึ้นมาเอง</v:String>
+    <v:String x:Key="tgl23_desc_sys">แอปพลิเคชันบางตัวอนุญาตให้คุณจัดการกิจกรรมพื้นหลัง, ซึ่งกำหนดสิ่งที่พวกเขาสามารถทำได้เมื่ออยู่ในพื้นหลังและไม่ได้ใช้งาน โดยทั่วไป, การปิดแอปพลิเคชันพื้นหลังจะช่วยลดภาระเครือข่าย, รวมถึงภาระ CPU และการใช้พลังงาน, ซึ่งมีประโยชน์สำหรับแล็ปท็อปเพราะช่วยยืดอายุแบตเตอรี่</v:String>
+    <v:String x:Key="tgl24_desc_sys">พื้นที่จัดเก็บที่สงวนไว้ออกแบบมาเพื่อให้การจัดสรรพื้นที่ว่างที่คาดเดาได้ซึ่งจะถูกใช้โดยอัปเดต, แอปพลิเคชัน, ไฟล์ชั่วคราว, และแคชของระบบ การปิดสามารถเพิ่มพื้นที่ว่างได้อย่างมาก อย่างไรก็ตาม, หากคุณมีพื้นที่ว่างเพียงพอ, ไม่แนะนำให้ทำเช่นนี้, คุณจะไม่ได้รับประโยชน์เพิ่มเติมใดๆ</v:String>
+    <v:String x:Key="tgl25_desc_sys">การปิดตัวจับเวลาแบบไดนามิกและ HPET สามารถปรับปรุงการตอบสนองของระบบโดยการลดอาการกระตุกเล็กน้อยและเพิ่มประสิทธิภาพเล็กน้อย อย่างไรก็ตาม, ผลกระทบขึ้นอยู่กับการกำหนดค่า: ในบางกรณี, แทนที่จะเร่งความเร็ว, ระบบอาจช้าลงและเกิดอาการแล็ก หากคุณใช้แล็ปท็อป, โปรดทราบว่าสิ่งนี้อาจเพิ่มการใช้พลังงานเล็กน้อย, เนื่องจาก CPU จะยังคงทำงานมากขึ้นแม้ในขณะที่ไม่ได้ใช้งาน</v:String>
+    <v:String x:Key="tgl26_desc_sys">การปรับแต่งจะบล็อกการติดตั้งอัตโนมัติที่รบกวนของ PC Health Check - ยูทิลิตี้ของ Microsoft ที่บังคับใช้งานตัวเองผ่าน Windows Update โดยไม่ได้รับอนุญาต เมื่อติดตั้งแล้ว, โปรแกรมจะรบกวนอย่างต่อเนื่องเกี่ยวกับ «การตรวจสอบความพร้อมของ Windows 11» และผลักดัน «คำแนะนำการปรับแต่งประสิทธิภาพ» ที่ไม่พึงประสงค์</v:String>
+    <v:String x:Key="tgl27_desc_sys">สำหรับผู้เข้าร่วม Windows Insider, งานเหล่านี้ควรเปิดใช้งานไว้ อย่างไรก็ตาม, หากคุณไม่ได้เป็นส่วนหนึ่งของโปรแกรม, งานที่เกี่ยวข้องทั้งหมดจะกลายเป็นภาระที่ไม่จำเป็น: พวกมันใช้ทรัพยากรระบบ, สร้างบันทึกที่ไร้ประโยชน์, และอาจเริ่มการเชื่อมต่อเทเลเมทรีโดยไม่ให้ประโยชน์ใดๆ การปิดสามารถปรับปรุงเวลาเริ่มต้นและประสิทธิภาพโดยรวมของระบบในขณะที่กำจัดช่องทางการรวบรวมข้อมูลการทดลองที่ไม่จำเป็น</v:String>
+    <v:String x:Key="tgl28_desc_sys">หากคุณมี SSD, การปิดการจัดเรียงข้อมูลและการเพิ่มประสิทธิภาพไฟล์บูต, ซึ่งมีประสิทธิภาพเฉพาะกับฮาร์ดไดรฟ์ (HDD), ช่วยยืดอายุการใช้งานของไดรฟ์ของคุณ ในขณะเดียวกัน, ฟังก์ชันการเพิ่มประสิทธิภาพ TRIM ยังคงทำงาน: มันแจ้งให้ตัวควบคุม SSD ทราบว่าบล็อกข้อมูลใดบ้างที่ไม่ได้ใช้งานอีกต่อไปและล้างข้อมูลเหล่านั้น, รักษาความเร็วที่เสถียรและอายุการใช้งานของไดรฟ์</v:String>
+    <v:String x:Key="tgl29_desc_sys">หยุดอัปเดตระบบ Windows ชั่วคราวเป็นเวลา 10 ปี, ในขณะที่ยังคงให้อัปเดตแอปและดาวน์โหลดจาก Microsoft Store ทำงานอยู่ หากต้องการปิดอัปเดตอย่างสมบูรณ์, ไปที่บริการและปิดบริการ Windows Update ที่เกี่ยวข้อง</v:String>
+    <v:String x:Key="tgl30_desc_sys">Multiplane Overlay เป็นเทคโนโลยีการแสดงผลของ Windows ที่ออกแบบมาเพื่อปรับปรุงประสิทธิภาพผ่านการซ้อนทับเลเยอร์ด้วยการเร่งด้วยฮาร์ดแวร์ อย่างไรก็ตาม, ในบางกรณี, ระบบและไดรเวอร์อาจโต้ตอบกับแอปพลิเคชันอย่างไม่ถูกต้อง, นำไปสู่หน้าจอดำ, ค้าง, กระพริบ, และภาพฉีกขาด แนะนำให้ปิดเฉพาะเมื่อคุณพบปัญหาดังกล่าว</v:String>
+    <!--#endregion-->
+
+    <!--#region System Information Page -->
+    <v:String x:Key="title_win_name_sysinfo">ระบบปฏิบัติการ:</v:String>
+    <v:String x:Key="title_win_ver_sysinfo">เวอร์ชัน:</v:String>
+    <v:String x:Key="label_proc_sysinfo">กระบวนการที่ทำงานอยู่:</v:String>
+    <v:String x:Key="label_svc_sysinfo">บริการ:</v:String>
+    <v:String x:Key="title_bios_sysinfo">BIOS:</v:String>
+    <v:String x:Key="title_mode_sysinfo">โหมด:</v:String>
+    <v:String x:Key="title_motherbr_sysinfo">เมนบอร์ด:</v:String>
+    <v:String x:Key="title_chipset_sysinfo">ชิปเซ็ต:</v:String>
+    <v:String x:Key="title_cpu_sysinfo">โปรเซสเซอร์:</v:String>
+    <v:String x:Key="title_cores_sysinfo">คอร์:</v:String>
+    <v:String x:Key="title_threads_sysinfo">เธรด:</v:String>
+    <v:String x:Key="title_freq_sysinfo">ความถี่:</v:String>
+    <v:String x:Key="title_gpu_sysinfo">กราฟิก:</v:String>
+    <v:String x:Key="title_refreshrate_sysinfo">อัตรารีเฟรช:</v:String>
+    <v:String x:Key="title_ram_sysinfo">หน่วยความจำ:</v:String>
+    <v:String x:Key="title_mtype_sysinfo">ประเภทหน่วยความจำ:</v:String>
+    <v:String x:Key="title_storage_sysinfo">อุปกรณ์จัดเก็บข้อมูล:</v:String>
+    <v:String x:Key="title_storage_used_sysinfo">ใช้ไป:</v:String>
+    <v:String x:Key="title_storage_free_sysinfo">ว่าง:</v:String>
+    <v:String x:Key="title_sound_sysinfo">อุปกรณ์เล่นเสียง:</v:String>
+    <v:String x:Key="title_netadapter_sysinfo">อะแดปเตอร์เครือข่าย:</v:String>
+    <v:String x:Key="title_ip_sysinfo">ที่อยู่ IP ของคุณ:</v:String>
+    <v:String x:Key="connection_limited_sysinfo">การเชื่อมต่อเครือข่ายมีข้อจำกัด</v:String>
+    <v:String x:Key="connection_block_sysinfo">การเข้าถึงเครือข่ายถูกจำกัด</v:String>
+    <v:String x:Key="connection_lose_sysinfo">สูญเสียการเชื่อมต่ออินเทอร์เน็ต</v:String>
+    <v:String x:Key="text_copy_sysinfo">คัดลอกแล้ว!</v:String>
+    <v:String x:Key="driver_not_installed_sysinfo">คุณไม่ได้ติดตั้งไดรเวอร์</v:String>
+    <v:String x:Key="no_device_information_sysinfo">ไม่พบข้อมูลอุปกรณ์</v:String>
+    <v:String x:Key="unknown_information_sysinfo">ตรวจไม่พบ</v:String>
+    <!--#endregion-->
+
+    <!--#region Addons Page -->
+    <v:String x:Key="btn_select_dir">เลือกโฟลเดอร์</v:String>
+    <v:String x:Key="chk_run_ti_adds">เรียกใช้ในฐานะ TrustedInstaller</v:String>
+    <v:String x:Key="text_info_adds">เลือกไดเรกทอรีหรือตรวจสอบให้แน่ใจว่าไม่ว่างเปล่า</v:String>
+    <v:String x:Key="scripts_info_adds">หลังจากนั้น, คุณจะสามารถเรียกใช้สคริปต์ (.ps1, .cmd, .bat, .reg) บนหน้านี้ได้</v:String>
+    <!--#endregion-->
+
+    <!--#region Toolset Page -->
+    <v:String x:Key="source_ts">แหล่งที่มา</v:String>
+    <v:String x:Key="btn_download">ดาวน์โหลด</v:String>
+    <v:String x:Key="btn_cancel">ยกเลิก</v:String>
+    <v:String x:Key="btn_open_dir">เปิดโฟลเดอร์</v:String>
+    <v:String x:Key="text_ts">ค้นหาตามชื่อหรือผู้เขียน</v:String>
+    <v:String x:Key="connecting_ts">กำลังเชื่อมต่อ</v:String>
+    <!--#endregion-->
+
+</ResourceDictionary>
