@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,6 +44,8 @@ namespace GTweak.Utilities.Animation
             }
         }
 
+
+
         private static StringAnimationUsingKeyFrames CreateStringAnimation(in string textToAnimate, in TimeSpan timeSpan)
         {
             StringAnimationUsingKeyFrames stringAnimation = new StringAnimationUsingKeyFrames
@@ -50,17 +53,26 @@ namespace GTweak.Utilities.Animation
                 Duration = new Duration(timeSpan)
             };
 
-            StringBuilder temp = new StringBuilder();
-            int totalChars = textToAnimate?.Length ?? 0;
-
-            if (totalChars != 0)
+            if (string.IsNullOrEmpty(textToAnimate))
             {
-                double millisecondsPerChar = timeSpan.TotalMilliseconds / totalChars;
+                return stringAnimation;
+            }
 
-                for (int i = 0; i < totalChars; i++)
+            StringInfo stringInfo = new StringInfo(textToAnimate);
+            int totalElements = stringInfo.LengthInTextElements;
+
+            if (totalElements > 0)
+            {
+                double millisecondsPerElement = timeSpan.TotalMilliseconds / totalElements;
+                StringBuilder temp = new StringBuilder();
+
+                TextElementEnumerator enumerator = StringInfo.GetTextElementEnumerator(textToAnimate);
+                int index = 0;
+
+                while (enumerator.MoveNext())
                 {
-                    temp.Append(textToAnimate[i]);
-                    TimeSpan currentTime = TimeSpan.FromMilliseconds(millisecondsPerChar * (i + 1));
+                    temp.Append(enumerator.GetTextElement());
+                    TimeSpan currentTime = TimeSpan.FromMilliseconds(millisecondsPerElement * (index + 1));
 
                     DiscreteStringKeyFrame keyFrame = new DiscreteStringKeyFrame
                     {
@@ -69,10 +81,10 @@ namespace GTweak.Utilities.Animation
                     };
 
                     stringAnimation.KeyFrames.Add(keyFrame);
+                    index++;
                 }
 
                 Timeline.SetDesiredFrameRate(stringAnimation, 60);
-                return stringAnimation;
             }
 
             return stringAnimation;

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,6 +33,8 @@ namespace GTweak.Assets.UserControls
 
                 if (Scroller != null && FunctionDescription != null)
                 {
+                    UpdateFlowDirection();
+
                     Scroller.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, null);
                     Scroller.ScrollToVerticalOffset(0);
                     Scroller.UpdateLayout();
@@ -51,8 +54,10 @@ namespace GTweak.Assets.UserControls
             Loaded += delegate
             {
                 App.LanguageChanged += OnLanguageChanged;
+
                 if (FunctionDescription != null)
                 {
+                    UpdateFlowDirection();
                     TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.FromMilliseconds(300));
                 }
             };
@@ -62,15 +67,6 @@ namespace GTweak.Assets.UserControls
                 App.LanguageChanged -= OnLanguageChanged;
                 _scrollCts?.Cancel();
             };
-
-            App.LanguageChanged += delegate
-            {
-                _scrollCts?.Cancel();
-                if (FunctionDescription != null)
-                {
-                    TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.Zero);
-                }
-            };
         }
 
         private void OnLanguageChanged(object sender, EventArgs e)
@@ -78,7 +74,20 @@ namespace GTweak.Assets.UserControls
             _scrollCts?.Cancel();
             if (FunctionDescription != null)
             {
+                UpdateFlowDirection();
                 TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.Zero);
+            }
+        }
+
+        private void UpdateFlowDirection()
+        {
+            if (FunctionDescription != null)
+            {
+                try
+                {
+                    FunctionDescription.FlowDirection = CultureInfo.GetCultureInfo(SettingsEngine.Language).TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+                }
+                catch (CultureNotFoundException) { FunctionDescription.FlowDirection = FlowDirection.LeftToRight; }
             }
         }
 
