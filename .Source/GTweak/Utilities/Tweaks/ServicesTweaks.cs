@@ -218,7 +218,7 @@ namespace GTweak.Utilities.Tweaks
 
                             if (isDisabled)
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($@"cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                CommandExecutor.RunCommandAsTrustedInstaller($@"/c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
                                 $@"takeown /f ""{currentFilePath}"" /a",
                                 $@"icacls ""{currentFilePath}"" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18",
                                 $@"icacls ""{currentFilePath}"" /grant ""{Environment.UserName}"":F",
@@ -226,7 +226,7 @@ namespace GTweak.Utilities.Tweaks
                             }
                             else
                             {
-                                CommandExecutor.RunCommandAsTrustedInstaller($@"cmd /c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                CommandExecutor.RunCommandAsTrustedInstaller($@"/c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
                                 $@"takeown /f ""{currentFilePath}"" /a",
                                 $@"rename ""{currentFilePath}"" ""{Path.GetFileName(targetFilePath)}""",
                                 $@"icacls ""{targetFilePath}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",

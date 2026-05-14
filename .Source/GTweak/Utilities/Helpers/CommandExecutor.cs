@@ -47,7 +47,9 @@ namespace GTweak.Utilities.Helpers
         }
 
         internal static void RunCommandAsTrustedInstaller(string command, bool isPowerShell = false) =>
-            TrustedInstaller.CreateProcessAsTrustedInstaller(PID, isPowerShell ? $"{PathLocator.Executable.PowerShell} -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\"" : $"{PathLocator.Executable.CommandShell} {command}");
+            TrustedInstaller.CreateProcessAsTrustedInstaller(PID, isPowerShell
+                ? $"\"{PathLocator.Executable.PowerShell}\" -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\""
+                : $"\"{PathLocator.Executable.CommandShell}\" {command}");
 
         internal static async void RunCommand(string command, bool isPowerShell = false)
         {
