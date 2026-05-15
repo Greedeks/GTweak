@@ -169,7 +169,7 @@
                                 </ToggleButton>
                             </Grid>
                         </Border>
-                        <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" VerticalOffset="2" AllowsTransparency="True" Focusable="False">
+                        <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" VerticalOffset="2" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
                             <Border x:Name="PopupBorder" 
                                 Width="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}" 
                                 Background="{StaticResource Brush_Background_ComboBox}" 

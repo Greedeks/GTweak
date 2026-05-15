@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:b="clr-namespace:GTweak.Utilities.Behaviors"
              xmlns:local="clr-namespace:GTweak.Assets.UserControls"
              mc:Ignorable="d" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True" UseLayoutRounding="True"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
-        <ScrollViewer x:Name="Scroller" Margin="6" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" ClipToBounds="True">
+        <ScrollViewer x:Name="Scroller" b:ScrollFadeBehavior.EnableFade="True" Margin="6" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" ClipToBounds="True">
             <TextBlock x:Name="FunctionDescription" Style="{StaticResource Description}" Text="{Binding DefaultText, RelativeSource={RelativeSource AncestorType=local:DescriptionBlock}}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
         </ScrollViewer>
 

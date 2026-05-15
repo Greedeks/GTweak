@@ -51,7 +51,16 @@ namespace GTweak.View
             overlayWindow.Show();
             NotificationManager.Show("info", "createpoint_noty").Perform();
             BackgroundQueue backgroundQueue = new BackgroundQueue();
-            await backgroundQueue.QueueTask(delegate { _systemRestore.CreateRestorePoint(); });
+
+            if (_systemRestore == null)
+            {
+                overlayWindow.Close();
+                NotificationManager.Show("warn", "error_point_noty").WithDelay(300).Perform();
+                return;
+            }
+
+            try { await backgroundQueue.QueueTask(delegate { _systemRestore.CreateRestorePoint(); }); }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             overlayWindow.Close();
         }
 

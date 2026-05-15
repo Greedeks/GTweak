@@ -28,9 +28,9 @@ namespace GTweak.Utilities.Maintenance
             {
                 RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency", 0, RegistryValueKind.DWord);
 
-                if (!IsPointCreationAllowed)
+                if (!IsPointCreationAllowed && !EnableRestorePoint("error_point_noty"))
                 {
-                    EnableRestorePoint();
+                    return;
                 }
 
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"\\localhost\root\default", "SELECT Description, SequenceNumber FROM SystemRestore", new EnumerationOptions { ReturnImmediately = true }))
@@ -39,7 +39,8 @@ namespace GTweak.Utilities.Maintenance
                     {
                         using (managementObj)
                         {
-                            if (managementObj["Description"]?.ToString().IndexOf("GTweak", StringComparison.OrdinalIgnoreCase) >= 0)
+                            string description = managementObj["Description"] as string;
+                            if (!string.IsNullOrEmpty(description) && description.IndexOf("GTweak", StringComparison.OrdinalIgnoreCase) >= 0)
                             {
                                 SRRemoveRestorePoint(Convert.ToInt32(managementObj["SequenceNumber"]));
                             }
@@ -48,12 +49,18 @@ namespace GTweak.Utilities.Maintenance
                 }
 
                 _inParams = _restorePoint.GetMethodParameters("CreateRestorePoint");
+                if (_inParams == null)
+                {
+                    NotificationManager.Show("warn", "error_point_noty").Perform();
+                    return;
+                }
+
                 _inParams["Description"] = (string)Application.Current.Resources["textpoint_more"];
                 _inParams["EventType"] = 100;
                 _inParams["RestorePointType"] = 12;
                 _outParams = _restorePoint.InvokeMethod("CreateRestorePoint", _inParams, null);
 
-                if ((uint)_outParams["ReturnValue"] == 0)
+                if (_outParams != null && _outParams["ReturnValue"] is uint retCode && retCode == 0)
                 {
                     NotificationManager.Show("info", "success_point_noty").WithDelay(300).Perform();
                 }
@@ -71,9 +78,9 @@ namespace GTweak.Utilities.Maintenance
         {
             try
             {
-                if (!IsPointCreationAllowed)
+                if (!IsPointCreationAllowed && !EnableRestorePoint("error_recovery_noty"))
                 {
-                    EnableRestorePoint();
+                    return;
                 }
 
                 CommandExecutor.RunCommand("/c rstrui.exe");
@@ -103,18 +110,42 @@ namespace GTweak.Utilities.Maintenance
             DisableSR(PathLocator.Folders.SystemDrive + @"\\");
         }
 
-        internal void EnableRestorePoint()
+        internal bool EnableRestorePoint(string errorKey = "error_recovery_noty")
         {
-            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore");
+            try
+            {
+                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore");
 
-            SetTaskState(true, restoreTask);
+                SetTaskState(true, restoreTask);
 
-            CommandExecutor.RunCommand("/c sc config wbengine start= demand && sc config swprv start= demand && sc config vds start= demand && sc config VSS start= demand");
+                CommandExecutor.RunCommand("/c sc config wbengine start= demand && sc config swprv start= demand && sc config vds start= demand && sc config VSS start= demand");
 
-            _inParams = _restorePoint.GetMethodParameters("Enable");
-            _inParams["WaitTillEnabled"] = true;
-            _inParams["Drive"] = Path.GetPathRoot(Environment.SystemDirectory);
-            _restorePoint.InvokeMethod("Enable", _inParams, null);
+                ManagementBaseObject inParams = _restorePoint.GetMethodParameters("Enable");
+
+                if (inParams == null)
+                {
+                    NotificationManager.Show("warn", errorKey).Perform();
+                    return false;
+                }
+
+                inParams["WaitTillEnabled"] = true;
+                inParams["Drive"] = Path.GetPathRoot(Environment.SystemDirectory);
+
+                ManagementBaseObject outParams = _restorePoint.InvokeMethod("Enable", inParams, null);
+
+                if (outParams == null || !(outParams["ReturnValue"] is uint retCode) || retCode != 0)
+                {
+                    NotificationManager.Show("warn", errorKey).Perform();
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                NotificationManager.Show("warn", errorKey).Perform();
+                return false;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -81,7 +82,7 @@ namespace GTweak.Assets.UserControls
 
         private void UpdateFlowDirection()
         {
-            if (FunctionDescription != null)
+            if (FunctionDescription != null && !DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 try
                 {
