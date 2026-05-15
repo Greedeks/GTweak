@@ -72,35 +72,35 @@
 <h2 dir="rtl"> צילומי מסך 📷</h2>
 <details dir="rtl">
   <summary> כלי שירות </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Utils.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/Utils.png"/>
 </details>
 <details dir="rtl">
   <summary> פרטיות </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/Confidentiality.png"/>
 </details>
 <details dir="rtl">
   <summary> ממשק </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/Interface.png"/>
 </details>
 <details dir="rtl">
   <summary> יישומים </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/Applications.png"/>
 </details>
 <details dir="rtl">
   <summary> שירותים </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/Services.png"/>
 </details>
 <details dir="rtl">
   <summary> מערכת </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/System.png"/>
 </details>
 <details dir="rtl">
   <summary> תוספים </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Addons.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/Addons.png"/>
 </details>
 <details dir="rtl">
   <summary> ארגז כלים </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Toolset.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/he/Toolset.png"/>
 </details>
 
 <h2 dir="rtl"> דרישות מערכת</h2>

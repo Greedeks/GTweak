@@ -68,35 +68,35 @@
 <h2> Ekran Görüntüleri 📷</h2>
 <details>
   <summary> Araçlar </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Utils.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/Utils.png"/>
 </details>
 <details>
   <summary> Gizlilik </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/Confidentiality.png"/>
 </details>
 <details>
   <summary> Arayüz </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/Interface.png"/>
 </details>
 <details>
   <summary> Uygulamalar </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/Applications.png"/>
 </details>
 <details>
   <summary> Hizmetler </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/Services.png"/>
 </details>
 <details>
   <summary> Sistem </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/System.png"/>
 </details>
 <details>
   <summary> Eklentiler </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Addons.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/Addons.png"/>
 </details>
 <details>
   <summary> Araç Seti </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Toolset.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/tr/Toolset.png"/>
 </details>
 
 <h2> Sistem Gereksinimleri</h2>

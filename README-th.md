@@ -68,35 +68,35 @@
 <h2> Screenshots 📷</h2>
 <details>
   <summary> โปรแกรมอรรถประโยชน์ </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Utils.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/Utils.png"/>
 </details>
 <details>
   <summary> การรักษาความลับ </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Confidentiality.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/Confidentiality.png"/>
 </details>
 <details>
   <summary> ส่วนต่อประสานผู้ใช้ </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Interface.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/Interface.png"/>
 </details>
 <details>
   <summary> แอปพลิเคชั่น </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Applications.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/Applications.png"/>
 </details>
 <details>
   <summary> บริการ </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Services.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/Services.png"/>
 </details>
 <details>
   <summary> ระบบ </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/System.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/System.png"/>
 </details>
 <details>
   <summary> ส่วนเสริม </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Addons.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/Addons.png"/>
 </details>
 <details>
   <summary> ชุดเครื่องมือ </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/en/Toolset.png"/>
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/th/Toolset.png"/>
 </details>
 
 <h2> ความต้องการของระบบ</h2>
