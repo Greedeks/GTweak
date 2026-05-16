@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ using GTweak.Core.Base;
 using GTweak.Core.ViewModel;
 using GTweak.Utilities.Animation;
 using GTweak.Utilities.Configuration;
+using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 
@@ -128,9 +130,6 @@ namespace GTweak.View
 
                 if (!string.IsNullOrEmpty(selectedLine))
                 {
-                    Clipboard.Clear();
-                    Clipboard.SetData(DataFormats.UnicodeText, selectedLine);
-
                     e.Handled = true;
 
                     if (!PopupCopy.IsOpen)
@@ -139,6 +138,20 @@ namespace GTweak.View
                         CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
                         PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
                     }
+
+                    Thread thread = new Thread(() =>
+                    {
+                        try
+                        {
+                            Clipboard.Clear();
+                            Clipboard.SetData(DataFormats.UnicodeText, selectedLine);
+                        }
+                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    });
+
+                    thread.SetApartmentState(ApartmentState.STA);
+                    thread.IsBackground = true;
+                    thread.Start();
                 }
             }
         }
