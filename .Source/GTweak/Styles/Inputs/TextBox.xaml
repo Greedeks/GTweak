@@ -30,23 +30,20 @@
                         <Border Grid.ColumnSpan="2" x:Name="border" Background="{StaticResource Brush_Background_TextBox}" BorderBrush="{StaticResource Brush_Accent}" BorderThickness="0,0,0,1" CornerRadius="5"/>
                         <ScrollViewer Grid.Column="0" x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
                         <Label Grid.Column="0" Margin="5,0,5,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center" Visibility="Collapsed" Foreground="{StaticResource Brush_Inactive}" FontFamily="{StaticResource Jura}"/>
-                        <Button Grid.Column="1" x:Name="PART_ClearButton" Command="{Binding DataContext.ClearCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource ButtonClearTextBox}" Width="20" Height="20" Margin="0,0,5,0" Visibility="Visible"/>
+                        <Button Grid.Column="1" x:Name="PART_ClearButton" Style="{StaticResource ButtonClearTextBox}" Width="20" Height="20" Margin="0,0,5,0" Visibility="Collapsed"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Text" Value="">
                             <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="PART_ClearButton" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
                             <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="False">
-                            <Setter Property="Text" Value=""/>
                             <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="False">
-                            <Setter Property="Text" Value=""/>
                             <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -54,4 +51,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
 </ResourceDictionary>

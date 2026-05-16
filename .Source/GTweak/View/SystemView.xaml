@@ -45,8 +45,8 @@
                             <TextBlock Style="{StaticResource TextDefault}" Margin="0,2,0,0" Text="{DynamicResource slider3_sys}"/>
                             <Slider x:Name="Slider3"  Value="{Binding [Slider3].Value}" Style="{StaticResource Numeric_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="31" Margin="7,15,0,0"  Width="170" ValueChanged="Slider_ValueChanged"/>
                         </StackPanel>
-
-                        <TextBox Margin="0,5,0,0" Tag="{DynamicResource text_sys}" Width="450" MaxLength="50" HorizontalAlignment="Left"/>
+                        
+                        <TextBox Tag="{DynamicResource text_sys}" b:TextBoxClearBehavior.ClearButton="True" Margin="0,5,0,0" Width="450" MaxLength="50" HorizontalAlignment="Left"/>
 
                         <uc:ToggleButton x:Name="TglButton1" Style="{StaticResource ToggleStyle}" State="{Binding [TglButton1].State}" Margin="0,20,0,0" TextResource="{DynamicResource tgl1_sys}" Description="{DynamicResource tgl1_desc_sys}" />
                         <uc:ToggleButton x:Name="TglButton2" Style="{StaticResource ToggleStyle}" State="{Binding [TglButton2].State}" Margin="0,20,0,0" TextResource="{DynamicResource tgl2_sys}" Description="{DynamicResource tgl2_desc_sys}" />
