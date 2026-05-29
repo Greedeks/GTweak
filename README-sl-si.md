@@ -4,11 +4,11 @@
  
 <div align="center" style="margin: 20px 0; text-align: center;">
  
-[![Latest Release](https://img.shields.io/github/v/release/Greedeks/GTweak?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/releases/latest)
-![Downloads](https://img.shields.io/github/downloads/Greedeks/GTweak/total.svg?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
-![Stars](https://img.shields.io/github/stars/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=179962)
-![Size](https://img.shields.io/github/repo-size/greedeks/gtweak?style=for-the-badge&labelColor=3d3d3d&color=1982a5)
-[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-yellow.svg?style=for-the-badge&labelColor=3d3d3d&color=179962)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+[![Latest Release](https://shieldcn.dev/github/Greedeks/GTweak/release.svg?split=true&color=179962&labelColor=3d3d3d)](https://github.com/Greedeks/GTweak/releases/latest)
+![Downloads](https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?split=true&color=1982a5&labelColor=3d3d3d)
+![Stars](https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?split=true&color=179962&labelColor=3d3d3d)
+![Forks](https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?split=true&color=1982a5&labelColor=3d3d3d)
+[![BSD 3-Clause License](https://shieldcn.dev/github/Greedeks/GTweak/license.svg?split=true&color=179962&labelColor=3d3d3d)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
 </div>
 
 <br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/Greedeks/GTweak/blob/main/.github/button.png" width="260" height="68" alt="Download the latest version"></a><br/><br/>
@@ -175,7 +175,6 @@ Nameščena platforma: .NET Framework 4.8
 ## Kontakt
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
 
-[![github](https://img.shields.io/badge/Github-gray?style=for-the-badge\&logo=github\&logoColor=white)](https://github.com/Greedeks)
-[![telegram](https://img.shields.io/badge/Telegram-1DA1F2?style=for-the-badge\&logo=telegram\&logoColor=white)](https://t.me/Greedeks)
-[![X](https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/Greed3ks)
-[![steam](https://img.shields.io/badge/STEAM-042430?style=for-the-badge\&logo=steam\&logoColor=white)](https://steamcommunity.com/id/greedeks/)
+[![github](https://shieldcn.dev/badge/github-gray.svg?logo=ri%3AFaGithub)](https://github.com/Greedeks)
+[![telegram](https://shieldcn.dev/badge/telegram-1DA1F2.svg?logo=ri%3AFaTelegram)](https://t.me/Greedeks)
+[![steam](https://shieldcn.dev/badge/steam-042430.svg?logo=ri%3AFaSteam)](https://steamcommunity.com/id/greedeks/)
