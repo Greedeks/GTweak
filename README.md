@@ -127,7 +127,7 @@ Installed platform: .NET Framework 4.8
 
 ## Translation ❤️ 
 <p>
-  <b>Special Thanks</b> o these amazing people for their translation contributions
+  <b>Special Thanks</b> to these amazing people for their translation contributions
 </p>
 
 <div align="left">
