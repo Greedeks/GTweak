@@ -264,10 +264,8 @@ namespace GTweak.Utilities.Tweaks
                     }
                     break;
                 case "TglButton4":
-                    string[] services = {"WalletService","VacSvc", "spectrum", "SharedRealitySvc","perceptionsimulation", "MixedRealityOpenXRSvc",
-                        "MapsBroker", "EntAppSvc", "embeddedmode","wlidsvc", "WEPHOSTSVC", "StorSvc", "ClipSVC", "InstallService"};
-                    string command = $@"/c {string.Join(" & ", services.Select(s => $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\{s} /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f"))}";
-                    CommandExecutor.RunCommandAsTrustedInstaller(command);
+                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c {string.Join(" & ", new[] { "WalletService", "VacSvc", "spectrum", "SharedRealitySvc", "perceptionsimulation", "MixedRealityOpenXRSvc", "MapsBroker", "EntAppSvc",
+                        "embeddedmode", "wlidsvc", "WEPHOSTSVC", "StorSvc", "ClipSVC", "InstallService" }.Select(s => $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\{s} /v Start /t REG_DWORD /d {(isDisabled ? "4" : "3")} /f"))}");
                     break;
                 case "TglButton5":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\wmiApSrv", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord);

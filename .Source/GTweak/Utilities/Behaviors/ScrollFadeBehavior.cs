@@ -7,7 +7,8 @@ namespace GTweak.Utilities.Behaviors
 {
     internal static class ScrollFadeBehavior
     {
-        public static readonly DependencyProperty EnableFadeProperty = DependencyProperty.RegisterAttached("EnableFade", typeof(bool), typeof(ScrollFadeBehavior), new PropertyMetadata(false, OnEnableFadeChanged));
+        public static readonly DependencyProperty EnableFadeProperty =
+            DependencyProperty.RegisterAttached("EnableFade", typeof(bool), typeof(ScrollFadeBehavior), new PropertyMetadata(false, OnEnableFadeChanged));
 
         public static bool GetEnableFade(DependencyObject obj) => (bool)obj.GetValue(EnableFadeProperty);
         public static void SetEnableFade(DependencyObject obj, bool value) => obj.SetValue(EnableFadeProperty, value);

@@ -8,8 +8,8 @@ namespace GTweak.Utilities.Behaviors
         public static readonly DependencyProperty ClearButtonProperty =
             DependencyProperty.RegisterAttached("ClearButton", typeof(bool), typeof(TextBoxClearBehavior), new PropertyMetadata(false, OnClearButtonChanged));
 
-        public static void SetClearButton(UIElement element, bool value) => element.SetValue(ClearButtonProperty, value);
         public static bool GetClearButton(UIElement element) => (bool)element.GetValue(ClearButtonProperty);
+        public static void SetClearButton(UIElement element, bool value) => element.SetValue(ClearButtonProperty, value);
 
         private static void OnClearButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
