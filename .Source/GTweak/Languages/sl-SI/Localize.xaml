@@ -403,7 +403,8 @@
     <v:String x:Key="tgl30_svc">Storitve, povezane s predstavitvenim načinom Trgovine</v:String>
     <v:String x:Key="tgl31_svc">Storitve, povezane s posodabljanjem Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Storitev načrtovanja razreda večpredstavnosti</v:String>
-
+    <v:String x:Key="tgl33_svc">Windows Geolocation Service</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Onemogočite, če ne uporabljate zgodovine datotek in indeksiranja vsebine.</v:String>
     <v:String x:Key="tgl2_desc_svc">Onemogočite, če ne uporabljate Xbox in Microsoftovih igralnih ploščkov.</v:String>
     <v:String x:Key="tgl3_desc_svc">Onemogočite, če ne nameravate posodabljati Windows. Poleg storitev bo popravek spremenil datoteke, odgovorne za posodobitve Windows. Zaradi tega, tudi če so storitve omogočene, Središče za posodobitve ne bo delovalo. Upoštevajte, da popravek vpliva na prenos in posodabljanje aplikacij iz Trgovine Windows Store.</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="tgl30_desc_svc">Onemogočite, če ne uporabljate naprave v trgovini za prikazovanje funkcij Windows. Storitev Store Demo upravlja prikaz predstavitvene vsebine in interaktivnih funkcij, namenjenih samo za trgovinske izložbe in testiranje. Ta storitev ni potrebna za vsakodnevno uporabo računalnika.</v:String>
     <v:String x:Key="tgl31_desc_svc">Onemogočite, če ne nameravate posodabljati ali ne uporabljate Microsoft Edge. To prav tako ustavi samodejne posodobitve za WebView2 Runtime - te komponente uporabljajo isti mehanizem posodabljanja in so tesno soodvisne.</v:String>
     <v:String x:Key="tgl32_desc_svc">Onemogočite, če razumete možne posledice in ne uporabljate večpredstavnostnih aplikacij, ki zahtevajo prednostno obdelavo zvoka in videa. V redkih primerih lahko to nekoliko zmanjša število sistemskih dogodkov in obremenitev (na primer pri uporabi omrežnih adapterjev z NetAdapterCX); vendar je učinek odvisen od sistemske konfiguracije. Lahko povzroči zatikanje zvoka, desinhronizacijo zvoka/slike in druge težave s predvajanjem.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in applications. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Note that some system and third-party applications that interact with geolocation tasks may fail to launch or crash upon opening. If you encounter this after disabling - re-enable the service.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

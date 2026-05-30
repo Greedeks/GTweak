@@ -89,6 +89,8 @@ namespace GTweak.Utilities.Storage
         @"\Microsoft\Windows\Printing\PrinterCleanupTask",
         @"\Microsoft\Windows\Printing\PrintJobCleanupTask" };
 
+        protected static readonly string[] geoTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\Speech\");
+
         protected static readonly string bluetoothTask = @"\Microsoft\Windows\Bluetooth\UninstallDeviceTask";
 
         protected static readonly string[] oneDriveTask = new[] {

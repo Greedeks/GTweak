@@ -403,7 +403,8 @@
     <v:String x:Key="tgl30_svc">บริการที่เกี่ยวข้องกับโหมดสาธิตของ Store</v:String>
     <v:String x:Key="tgl31_svc">บริการที่เกี่ยวข้องกับการอัปเดต Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">บริการ Multimedia Class Scheduler</v:String>
-
+    <v:String x:Key="tgl33_svc">Windows Geolocation Service</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">ปิดถ้าคุณไม่ได้ใช้ประวัติไฟล์และการจัดทำดัชนีเนื้อหา</v:String>
     <v:String x:Key="tgl2_desc_svc">ปิดถ้าคุณไม่ได้ใช้ Xbox และเกมแพดของ Microsoft</v:String>
     <v:String x:Key="tgl3_desc_svc">ปิดถ้าคุณไม่ได้วางแผนที่จะอัปเดต Windows นอกจากบริการแล้ว, การปรับแต่งจะเปลี่ยนไฟล์ที่รับผิดชอบการอัปเดต Windows ด้วยเหตุนี้, แม้ว่าบริการจะเปิดใช้งาน, ศูนย์อัปเดตจะไม่ทำงาน โปรดทราบว่าการปรับแต่งมีผลต่อการดาวน์โหลดและอัปเดตแอปจาก Windows Store</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="tgl30_desc_svc">ปิดถ้าคุณไม่ได้ใช้อุปกรณ์ในร้านค้าเพื่อสาธิตคุณสมบัติของ Windows บริการ Store Demo จัดการการแสดงเนื้อหาสาธิตและคุณสมบัติเชิงโต้ตอบที่มีไว้สำหรับจอแสดงผลในร้านค้าและการทดสอบเท่านั้น บริการนี้ไม่จำเป็นสำหรับการใช้งานคอมพิวเตอร์ในชีวิตประจำวัน</v:String>
     <v:String x:Key="tgl31_desc_svc">ปิดถ้าคุณไม่ได้วางแผนที่จะอัปเดตหรือไม่ได้ใช้ Microsoft Edge การดำเนินการนี้ยังหยุดการอัปเดตอัตโนมัติสำหรับ WebView2 Runtime - ส่วนประกอบเหล่านี้ใช้กลไกการอัปเดตเดียวกันและพึ่งพากันอย่างใกล้ชิด</v:String>
     <v:String x:Key="tgl32_desc_svc">ปิดถ้าคุณเข้าใจผลกระทบที่อาจเกิดขึ้นและไม่ได้ใช้แอปพลิเคชันมัลติมีเดียที่ต้องการการประมวลผลเสียงและวิดีโอแบบมีลำดับความสำคัญ ในบางกรณีซึ่งพบไม่บ่อยอาจลดจำนวนเหตุการณ์ของระบบและภาระงาน (เช่น เมื่อใช้อะแดปเตอร์เครือข่ายกับ NetAdapterCX), อย่างไรก็ตาม, ผลกระทบขึ้นอยู่กับการกำหนดค่าระบบ อาจทำให้เสียงกระตุก, เสียง/วิดีโอไม่ประสานกัน, และปัญหาการเล่นอื่นๆ</v:String>
+    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in applications. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Note that some system and third-party applications that interact with geolocation tasks may fail to launch or crash upon opening. If you encounter this after disabling - re-enable the service.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

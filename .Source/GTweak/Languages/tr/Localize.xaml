@@ -403,7 +403,8 @@
     <v:String x:Key="tgl30_svc">Mağaza Demo Moduyla ilgili hizmetler</v:String>
     <v:String x:Key="tgl31_svc">Microsoft Edge güncellemesiyle ilgili hizmetler</v:String>
     <v:String x:Key="tgl32_svc">Multimedya Sınıfı Zamanlayıcı Hizmeti</v:String>
-
+    <v:String x:Key="tgl33_svc">Windows Geolocation Service</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Dosya Geçmişi ve içerik dizinleme özelliklerini kullanmıyorsanız devre dışı bırakın.</v:String>
     <v:String x:Key="tgl2_desc_svc">Xbox ve Microsoft oyun kumandalarını (gamepad) kullanmıyorsanız devre dışı bırakın.</v:String>
     <v:String x:Key="tgl3_desc_svc">Windows'u güncellemeyecekseniz devre dışı bırakın. Bu ayar, hizmetlerin yanı sıra Windows güncellemelerinden sorumlu dosyaları da değiştirir; bu nedenle hizmetler etkinleştirilmiş olsa bile Güncelleştirme Merkezi çalışmaz. Ayarın Microsoft Store'dan uygulama indirme ve güncellemeyi de etkilediğini unutmayın.</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="tgl30_desc_svc">Cihazı bir mağazada Windows özelliklerini sergilemek için kullanmıyorsanız devre dışı bırakın. Mağaza Demo hizmeti, yalnızca mağaza teşhiri ve test amaçlı demo içeriğini ve etkileşimli özellikleri yönetir. Günlük bilgisayar kullanımı için gerekli değildir.</v:String>
     <v:String x:Key="tgl31_desc_svc">Microsoft Edge'i kullanmıyorsanız veya güncellemeyecekseniz devre dışı bırakın. Bu aynı zamanda WebView2 Runtime'ın otomatik güncellemelerini de durdurur; bu bileşenler aynı güncelleme mekanizmasını kullanır ve birbirine sıkıca bağlıdır.</v:String>
     <v:String x:Key="tgl32_desc_svc">Olası sonuçları biliyorsanız ve öncelikli ses/video işleme gerektiren multimedya uygulamaları kullanmıyorsanız devre dışı bırakın. Nadir durumlarda sistem olaylarının sayısını ve yükü hafifçe azaltabilir (örneğin NetAdapterCX destekli ağ adaptörü kullanılırken); ancak etki sistem yapılandırmasına göre değişir. Ses takılmaları, ses/video senkronizasyon kayması ve diğer oynatma sorunlarına yol açabilir.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in applications. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Note that some system and third-party applications that interact with geolocation tasks may fail to launch or crash upon opening. If you encounter this after disabling - re-enable the service.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

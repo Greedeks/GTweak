@@ -6,7 +6,7 @@
     <v:String x:Key="defaultDescriptionApp">העבר את העכבר מעל הסמל של אפליקציה כלשהי כדי לראות את שמה</v:String>
     <v:String x:Key="btn_default">ברירת מחדל</v:String>
     <v:String x:Key="btn_change">שינוי</v:String>
-
+    
     <!--#region Load Window -->
     <v:String x:Key="title_load">טעינה</v:String>
     <v:String x:Key="step1_load">הכנת סביבת העבודה</v:String>
@@ -173,7 +173,7 @@
     <v:String x:Key="tgl18_conf">שמירת תיעוד של התנהגות המשתמש</v:String>
     <v:String x:Key="tgl19_conf">איסוף נתונים ועדכוני רקע של מפות לא מקוונות</v:String>
     <v:String x:Key="tgl20_conf">איסוף ומעקב של טלמטריית Intel</v:String>
-
+    
     <v:String x:Key="tgl1_desc_conf">Windows יוצר מזהה פרסום ייחודי לכל משתמש כדי לעקוב אחר הפעולות שלך. מזהה זה משמש מפתחי יישומים ואת Windows עצמה למטרותיהם, כולל הצגת פרסומות ספציפיות ביישומים.</v:String>
     <v:String x:Key="tgl2_desc_conf">גם בשימוש בחשבון מקומי, Windows תמיד מנסה לסנכרן את הנתונים שלך עם שרתי Microsoft. בפרט: ערכות נושא, סיסמאות, הגדרות Windows, הגדרות דפדפן, הגדרות שורת השפה, הגדרות נגישות והגדרות נוספות.</v:String>
     <v:String x:Key="tgl3_desc_conf">טלמטריה (נתוני אבחון) הם נתונים ש-Windows אוסף אוטומטית ושולח לשרתי Microsoft, או בקיצור, "מה? איפה? למה ומתי אתה משתמש בזה?". Microsoft טוענת שהנתונים אנונימיים ומסייעים לחברה לפתח את Windows. גם אם איסוף המידע אינו מטריד אותך, עלולה להיווצר בעיה אחרת - עומס מוגזם על המעבד, שמאט את המערכת.</v:String>
@@ -199,7 +199,7 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">צבע סימון של הסמן:</v:String>
     <v:String x:Key="color2_intf">צבע של חלוניות עזרה:</v:String>
-
+    
     <v:String x:Key="exblock1_intf">פריטי ניווט בסייר הקבצים:</v:String>
     <v:String x:Key="chk_home_intf">דף הבית</v:String>
     <v:String x:Key="chk_gallery_intf">גלריה</v:String>
@@ -403,7 +403,8 @@
     <v:String x:Key="tgl30_svc">שירותים הקשורים למצב הדגמה של Store</v:String>
     <v:String x:Key="tgl31_svc">שירותים הקשורים לעדכון Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">שירות מתזמן מחלקות מולטימדיה</v:String>
-
+    <v:String x:Key="tgl33_svc">Windows Geolocation Service</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">השבת אם אינך משתמש בהיסטוריית קבצים ובאינדוקס תוכן.</v:String>
     <v:String x:Key="tgl2_desc_svc">השבת אם אינך משתמש ב-Xbox ובבקרי משחק של Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">השבת אם אינך מתכנן לעדכן את Windows. בנוסף לשירותים, הטוויק ישנה את הקבצים האחראים לעדכוני Windows. בשל כך, גם אם השירותים פועלים, Windows Update לא יעבוד. שים לב שהטוויק משפיע על הורדה ועדכון של יישומים מ-Windows Store.</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="tgl30_desc_svc">השבת אם אינך משתמש במכשיר בחנות להדגמת תכונות Windows. שירות Store Demo מנהל את הצגת תוכן ההדגמה והתכונות האינטראקטיביות המיועדות רק לתצוגות חנות ולבדיקה. שירות זה אינו נחוץ לשימוש יומיומי במחשב.</v:String>
     <v:String x:Key="tgl31_desc_svc">השבת אם אינך מתכנן לעדכן או אינך משתמש ב-Microsoft Edge. פעולה זו גם עוצרת עדכונים אוטומטיים של WebView2 Runtime - רכיבים אלו משתמשים באותו מנגנון עדכון ותלויים זה בזה הדוקות.</v:String>
     <v:String x:Key="tgl32_desc_svc">השבת אם אתה מבין את ההשלכות האפשריות ואינך משתמש ביישומי מולטימדיה הדורשים עיבוד אודיו ווידאו עם עדיפות. במקרים נדירים זה עשוי להפחית מעט את מספר אירועי המערכת ואת העומס (לדוגמה, בשימוש במתאמי רשת עם NetAdapterCX); עם זאת, האפקט תלוי בתצורת המערכת. הדבר עלול לגרום לגמגום באודיו, חוסר סנכרון בין אודיו לווידאו ובעיות הפעלה אחרות.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in applications. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Note that some system and third-party applications that interact with geolocation tasks may fail to launch or crash upon opening. If you encounter this after disabling - re-enable the service.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

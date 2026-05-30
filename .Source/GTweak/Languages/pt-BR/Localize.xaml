@@ -403,6 +403,7 @@
     <v:String x:Key="tgl30_svc">Serviços relacionados ao Modo de Demonstração de Loja</v:String>
     <v:String x:Key="tgl31_svc">Serviços relacionados à atualização do Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Serviço de Agendador de Classes Multimídia</v:String>
+    <v:String x:Key="tgl33_svc">Serviço de Geolocalização do Windows</v:String>
 
     <v:String x:Key="tgl1_desc_svc">Desative se você não usa histórico de arquivos e indexação de conteúdo.</v:String>
     <v:String x:Key="tgl2_desc_svc">Desative se você não usa Xbox e gamepads da Microsoft.</v:String>
@@ -436,6 +437,7 @@
     <v:String x:Key="tgl30_desc_svc">Desative se não utilizar o dispositivo em uma loja para demonstrar recursos do Windows. O serviço Store Demo gerencia a exibição de conteúdo de demonstração e recursos interativos destinados apenas a exibições em lojas e testes. Este serviço não é necessário para o uso diário do computador.</v:String>
     <v:String x:Key="tgl31_desc_svc">Desative se você não pretende atualizar ou não usa o Microsoft Edge. Isso também interrompe as atualizações automáticas do WebView2 Runtime — esses componentes usam o mesmo mecanismo de atualização e são fortemente interdependentes.</v:String>
     <v:String x:Key="tgl32_desc_svc">Desative se entender as possíveis consequências e não utilizar aplicativos multimídia que exigem processamento prioritário de áudio e vídeo. Em casos raros, isso pode reduzir ligeiramente o número de eventos do sistema e a carga (por exemplo, ao usar adaptadores de rede com NetAdapterCX); no entanto, o efeito depende da configuração do sistema. Pode causar falhas de áudio, dessincronia de áudio/vídeo e outros problemas de reprodução.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Desative se você não usa geolocalização em aplicativos. O serviço determina sua localização via GPS, Wi-Fi e endereço IP. Quando desativado, os recursos dependentes de localização deixarão de funcionar: clima, mapas, fuso horário automático. Observe que alguns aplicativos do sistema e de terceiros que interagem com as tarefas de geolocalização podem falhar ao iniciar ou travar ao abrir. Se você encontrar isso após desativar — reative o serviço.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
