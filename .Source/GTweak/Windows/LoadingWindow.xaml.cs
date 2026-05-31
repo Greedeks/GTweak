@@ -6,6 +6,7 @@ using GTweak.Utilities.Configuration;
 using GTweak.Utilities.Controls;
 using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Maintenance;
+using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 using Wpf.Ui.Controls;
 
@@ -63,7 +64,7 @@ namespace GTweak.Windows
 
             ReportStep(2, 35);
             ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));
-            ExecuteWithLogging(SystemTweaks.ViewBluetoothStatus, nameof(SystemTweaks.ViewBluetoothStatus));
+            ExecuteWithLogging(BluetoothManager.Initialize, nameof(BluetoothManager.Initialize));
             ExecuteWithLogging(SystemTweaks.ViewNetshState, nameof(SystemTweaks.ViewNetshState));
 
             ReportStep(3, 55);

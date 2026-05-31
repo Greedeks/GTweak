@@ -29,7 +29,7 @@ namespace GTweak.Utilities.Tweaks
 
     internal sealed class SystemTweaks : FirewallManager
     {
-        private static bool _isNetshState = false, _isBluetoothStatus = false, _isTickState = false;
+        private static bool _isNetshState = false, _isTickState = false;
         private static string _currentPowerGuid = string.Empty;
 
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
@@ -147,7 +147,7 @@ namespace GTweak.Utilities.Tweaks
                 !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "Description", string.Empty).Contains("-18") &&
                 !RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "FriendlyName", string.Empty).Contains("-19");
 
-            _сontrolWriter.Button[19] = _isBluetoothStatus;
+            _сontrolWriter.Button[19] = BluetoothManager.IsEnabled;
 
             _сontrolWriter.Button[20] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "4");
@@ -191,18 +191,6 @@ namespace GTweak.Utilities.Tweaks
             _сontrolWriter.Button[30] =
                 RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm", "OverlayTestMode", "5") ||
                 (HardwareData.OS.Build >= 26200m && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm", "EnableOverlay", "0"));
-        }
-
-
-        internal static void ViewBluetoothStatus()
-        {
-            try
-            {
-                using ManagementObjectCollection managementObjCollection = new ManagementObjectSearcher("SELECT DeviceID FROM Win32_PnPEntity WHERE Service='BthLEEnum'").Get();
-                _isBluetoothStatus = managementObjCollection.Cast<ManagementObject>().Any();
-
-            }
-            catch { _isBluetoothStatus = false; }
         }
 
         internal static void ViewNetshState()
@@ -249,7 +237,6 @@ namespace GTweak.Utilities.Tweaks
                     break;
             }
         }
-
 
         [DllImport("user32.dll")]
         private static extern bool SystemParametersInfo(uint _uiAction, uint _uiParam, uint[] _pvParam, uint _fWinIni);
@@ -437,22 +424,7 @@ namespace GTweak.Utilities.Tweaks
                     SetPowercfg(isDisabled);
                     break;
                 case "TglButton19":
-                    CommandExecutor.RunCommand(@"Add-Type -AssemblyName System.Runtime.WindowsRuntime
-                    $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
-                    Function Await($WinRtTask, $ResultType) {
-                        $asTask = $asTaskGeneric.MakeGenericMethod($ResultType)
-                        $netTask = $asTask.Invoke($null, @($WinRtTask))
-                        $netTask.Wait(-1) | Out-Null
-                        $netTask.Result
-                    }
-                    [Windows.Devices.Radios.Radio,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-                    [Windows.Devices.Radios.RadioAccessStatus,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-                    Await ([Windows.Devices.Radios.Radio]::RequestAccessAsync()) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null
-                    $radios = Await ([Windows.Devices.Radios.Radio]::GetRadiosAsync()) ([System.Collections.Generic.IReadOnlyList[Windows.Devices.Radios.Radio]])
-                    $bluetooth = $radios | ? { $_.Kind -eq 'Bluetooth' }
-                    [Windows.Devices.Radios.RadioState,Windows.System.Devices,ContentType=WindowsRuntime] | Out-Null
-                    Await ($bluetooth.SetStateAsync(" + (isDisabled ? "'off'" : "'on'") + ")) ([Windows.Devices.Radios.RadioAccessStatus]) | Out-Null", true);
-                    _isBluetoothStatus = !isDisabled;
+                    BluetoothManager.SetState(!isDisabled);
                     break;
                 case "TglButton20":
                     RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\mpssvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);

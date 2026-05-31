@@ -121,6 +121,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <AvailableWinMDs Include="$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\*\Windows.winmd" />
+  </ItemGroup>
+  <PropertyGroup>
+    <LatestWinMDPath>%(AvailableWinMDs.Identity)</LatestWinMDPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Windows">
+      <HintPath>$(LatestWinMDPath)</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="Resources\AppsCatalog.xml" />
     <None Include="Resources\*.gz" />
@@ -205,6 +216,7 @@
     <Compile Include="Utilities\Helpers\UnlockHandleHelper.cs" />
     <Compile Include="Utilities\Maintenance\ClearingMemory.cs" />
     <Compile Include="Utilities\Maintenance\RegistryExporter.cs" />
+    <Compile Include="Utilities\Managers\BluetoothManager.cs" />
     <Compile Include="Utilities\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\AclPermissionsBackup.cs" />
     <Compile Include="Utilities\Tweaks\DefenderManager\WindowsDefender.cs" />
