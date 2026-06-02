@@ -33,17 +33,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             { "wscsvc", "2" }
         };
 
-        internal static void SetProtectionState(bool isDisabled)
-        {
-            if (isDisabled)
-            {
-                Deactivate();
-            }
-            else
-            {
-                Activate();
-            }
-        }
+        internal static void SetProtectionState(bool state) => (state ? (Action)Activate : Deactivate)();
 
         private static void Activate()
         {

@@ -157,15 +157,5 @@ namespace GTweak.Properties {
                 return ResourceManager.GetString("Tickets", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
-        internal static byte[] UltPower {
-            get {
-                object obj = ResourceManager.GetObject("UltPower", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

@@ -168,8 +168,8 @@ namespace GTweak.Assets.UserControls
         {
             if (IsEnabled || sender?.GetType() != typeof(TextBlock))
             {
-                RaiseEvent(new RoutedEventArgs(ChangedStateEvent));
                 State = !State;
+                RaiseEvent(new RoutedEventArgs(ChangedStateEvent));
             }
         }
 

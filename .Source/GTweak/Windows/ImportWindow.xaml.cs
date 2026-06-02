@@ -88,12 +88,12 @@ namespace GTweak.Windows
                 (INIManager.SectionSys, null, NotificationManager.SysActions, null)
             };
 
-            var allTweaks = new List<(string section, string tweak, string value)>();
+            List<(string section, string tweak, string value)> allTweaks = new List<(string section, string tweak, string value)>();
 
             foreach (var (Section, _, _, _) in allSections.Where(s => iniManager.IsThereSection(s.Section)))
             {
-                var keys = iniManager.GetKeysOrValue(Section);
-                var values = iniManager.GetKeysOrValue(Section, false);
+                List<string> keys = iniManager.GetKeysOrValue(Section);
+                List<string> values = iniManager.GetKeysOrValue(Section, false);
                 allTweaks.AddRange(keys.Zip(values, (t, v) => (Section, t, v)));
             }
 
@@ -140,7 +140,7 @@ namespace GTweak.Windows
                         }
                         else
                         {
-                            _sysTweaks.ApplyTweaksSlider(tweak, Convert.ToUInt32(value));
+                            _sysTweaks.ApplyTweaks(tweak, Convert.ToUInt32(value));
                         }
                     }
                     else
@@ -149,11 +149,7 @@ namespace GTweak.Windows
 
                         if (section == INIManager.SectionIntf && tweak.StartsWith("ColorPicker"))
                         {
-                            _intfTweaks.ApplyTweaksColor(tweak, value);
-                        }
-                        else if (section == INIManager.SectionIntf && tweak.StartsWith("CheckBox"))
-                        {
-                            _intfTweaks.ApplyTweaksCheckBox(tweak, Convert.ToBoolean(value));
+                            _intfTweaks.ApplyTweaks(tweak, value);
                         }
                         else
                         {

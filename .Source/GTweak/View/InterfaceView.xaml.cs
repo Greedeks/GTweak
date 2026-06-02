@@ -46,14 +46,14 @@ namespace GTweak.View
         private void ColorPicker_ColorPicked(object sender, EventArgs e)
         {
             ColorPicker colorPicker = (ColorPicker)sender;
-            _intfTweaks.ApplyTweaksColor(colorPicker.Name, colorPicker.SelectedColorString);
+            _intfTweaks.ApplyTweaks(colorPicker.Name, colorPicker.SelectedColorString);
             NotificationManager.Show().WithDelay(300).Logout();
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            _intfTweaks.ApplyTweaksCheckBox(checkBox.Uid, checkBox.IsChecked == false);
+            _intfTweaks.ApplyTweaks(checkBox.Uid, checkBox.IsChecked == false);
 
             if (ExplorerManager.IntfActions.TryGetValue(checkBox.Uid, out ExplorerManager.ExplorerAction explorerAction))
             {

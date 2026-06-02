@@ -133,35 +133,26 @@ namespace GTweak.Utilities.Tweaks
             catch { return true; }
         }
 
-        internal void ApplyTweaks(string tweak, bool isDisabled)
+        internal void ApplyTweaks(string tweak, bool state)
         {
-            INIManager.TempWrite(INIManager.TempTweaksConf, tweak, isDisabled);
+            INIManager.TempWrite(INIManager.TempTweaksConf, tweak, state);
 
             switch (tweak)
             {
                 case "TglButton1":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising", 0, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled");
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising");
                     }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising", 0, RegistryValueKind.DWord);
+                    }
                     break;
                 case "TglButton2":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", 0, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled");
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled");
@@ -170,80 +161,102 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled");
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled");
                     }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", 0, RegistryValueKind.DWord);
+                    }
                     break;
                 case "TglButton3":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", state ? 1 : 0, RegistryValueKind.DWord);
 
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
                     }
-                    SetTaskState(!isDisabled, telemetryTasks);
+                    else
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
+                    }
+                    SetTaskState(state, telemetryTasks);
                     break;
                 case "TglButton4":
-                    SetTaskState(!isDisabled, dataCollectTasks);
+                    SetTaskState(state, dataCollectTasks);
                     break;
                 case "TglButton5":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", 1, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory");
                     }
-                    SetTaskStateOwner(!isDisabled, appExpInventoryTasks);
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", 1, RegistryValueKind.DWord);
+                    }
+                    SetTaskStateOwner(state, appExpInventoryTasks);
                     break;
                 case "TglButton6":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", isDisabled ? 0 : 1, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", isDisabled ? 0 : 1, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", state ? 1 : 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", state ? 1 : 0, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", state ? 1 : 0, RegistryValueKind.DWord);
 
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", 0, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry");
                     }
-                    SetTaskStateOwner(!isDisabled, appExpUsageTasks);
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", 0, RegistryValueKind.DWord);
+                    }
+                    SetTaskStateOwner(state, appExpUsageTasks);
                     break;
                 case "TglButton7":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", isDisabled ? 1 : 0, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Input\TIPC", "Enabled", isDisabled ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", state ? 0 : 1, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Input\TIPC", "Enabled", state ? 1 : 0, RegistryValueKind.DWord);
 
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", 1, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing");
                     }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", 1, RegistryValueKind.DWord);
+                    }
                     break;
                 case "TglButton8":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", 0, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient");
                     }
-                    SetTaskState(!isDisabled, ceipTasks);
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", 0, RegistryValueKind.DWord);
+                    }
+                    SetTaskState(state, ceipTasks);
                     break;
                 case "TglButton9":
-                    BlockSpyDomain(isDisabled);
+                    BlockSpyDomain(state);
                     Task.Run(delegate
                     {
                         try
                         {
-                            if (isDisabled)
+                            if (state)
+                            {
+                                File.Copy(PathLocator.Files.Hosts.Backup, PathLocator.Files.Hosts.Original, true);
+
+                                if (File.Exists(PathLocator.Files.Hosts.Backup))
+                                {
+                                    File.Delete(PathLocator.Files.Hosts.Backup);
+                                }
+                                else
+                                {
+                                    File.WriteAllText(PathLocator.Files.Hosts.Original, string.Empty);
+                                }
+                            }
+                            else
                             {
                                 File.Copy(PathLocator.Files.Hosts.Original, PathLocator.Files.Hosts.Backup, true);
 
@@ -281,74 +294,61 @@ namespace GTweak.Utilities.Tweaks
                                     File.AppendAllText(PathLocator.Files.Hosts.Original, $"{prefix}{blocklist.ToString().TrimEnd()}");
                                 }
                             }
-                            else
-                            {
-                                File.Copy(PathLocator.Files.Hosts.Backup, PathLocator.Files.Hosts.Original, true);
-
-                                if (File.Exists(PathLocator.Files.Hosts.Backup))
-                                {
-                                    File.Delete(PathLocator.Files.Hosts.Backup);
-                                }
-                                else
-                                {
-                                    File.WriteAllText(PathLocator.Files.Hosts.Original, string.Empty);
-                                }
-                            }
                         }
                         catch (Exception ex) { ErrorLogging.LogDebug(ex); }
                     });
                     break;
                 case "TglButton10":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 1, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation");
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting");
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider");
                     }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 1, RegistryValueKind.DWord);
+                    }
                     break;
                 case "TglButton11":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", 1, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod");
                         RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds");
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications");
                     }
-                    SetTaskState(!isDisabled, feedbackTasks);
+                    else
+                    {
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", 1, RegistryValueKind.DWord);
+                    }
+                    SetTaskState(state, feedbackTasks);
                     break;
                 case "TglButton12":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", 0, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate");
                     }
-                    SetTaskState(!isDisabled, speechTasks);
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", 0, RegistryValueKind.DWord);
+                    }
+                    SetTaskState(state, speechTasks);
                     break;
                 case "TglButton13":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", state ? 2 : 4, RegistryValueKind.DWord);
                     break;
                 case "TglButton14":
-                    if (isDisabled)
+                    if (state)
                     {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", 0, RegistryValueKind.DWord);
+                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation");
                     }
                     else
                     {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation");
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", 0, RegistryValueKind.DWord);
                     }
                     break;
                 case "TglButton15":
@@ -359,13 +359,7 @@ namespace GTweak.Utilities.Tweaks
                         @"SYSTEM\CurrentControlSet\Services\diagsvc"
                     );
 
-                    if (isDisabled)
-                    {
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagTrack);
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, dmwappushservice);
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagsvc);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DependOnService", new[] { "RpcSs" }, RegistryValueKind.MultiString);
                         RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Description", @"@%SystemRoot%\system32\diagtrack.dll,-3002", RegistryValueKind.String);
@@ -430,47 +424,53 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "GUID", Array.ConvertAll("67,d1,90,bc,70,94,39,41,a9,ba,be,0b,bb,f5,b7,4d".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
                         RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "Type", 6, RegistryValueKind.DWord);
                     }
+                    else
+                    {
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagTrack);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, dmwappushservice);
+                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagsvc);
+                    }
                     break;
                 case "TglButton16":
-                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(isDisabled ? "4" : "3")} /f");
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", isDisabled ? 4 : 3, RegistryValueKind.DWord, true);
+                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(state ? "3" : "4")} /f");
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", state ? 3 : 4, RegistryValueKind.DWord, true);
                     break;
                 case "TglButton17":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
-                    SetTaskState(!isDisabled, nvidiaTasks);
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", state ? 2 : 4, RegistryValueKind.DWord);
+                    SetTaskState(state, nvidiaTasks);
                     break;
                 case "TglButton18":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", 1, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR");
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera");
                     }
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", 1, RegistryValueKind.DWord);
+                    }
                     break;
                 case "TglButton19":
-                    if (isDisabled)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", 0, RegistryValueKind.DWord);
-                    }
-                    else
+                    if (state)
                     {
                         RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled");
                         RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps");
                     }
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "MapUpdate", isDisabled ? 0 : 1, RegistryValueKind.DWord);
-                    SetTaskState(!isDisabled, mapsTasks);
+                    else
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled", 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", 0, RegistryValueKind.DWord);
+                    }
+                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "MapUpdate", state ? 1 : 0, RegistryValueKind.DWord);
+                    SetTaskState(state, mapsTasks);
                     break;
                 case "TglButton20":
                     if (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start"))
                     {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Telemetry", "Start", isDisabled ? 4 : 2, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Telemetry", "Start", state ? 2 : 4, RegistryValueKind.DWord);
                     }
-                    SetTaskState(!isDisabled, intelTask);
+                    SetTaskState(state, intelTask);
                     break;
                 default:
                     break;

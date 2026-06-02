@@ -21,7 +21,7 @@
                     </Rectangle.Fill>
                 </Rectangle>
 
-                <Ellipse x:Name="Dot" Height="14" Width="14" Margin="24,0,0,0" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5">
+                <Ellipse x:Name="Dot" Height="14" Width="14" Margin="0,0,24,0" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5">
                     <Ellipse.CacheMode>
                         <BitmapCache RenderAtScale="2" />
                     </Ellipse.CacheMode>

@@ -41,7 +41,7 @@ namespace GTweak.View
 
         private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaksSlider(((Slider)sender).Name, (uint)((Slider)sender).Value);
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaks(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {

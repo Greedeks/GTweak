@@ -314,8 +314,6 @@ namespace GTweak.Utilities.Controls
                 Path.Combine(Environment.SystemDirectory, "drivers", "etc", "hosts (Default GTweak)")
             );
 
-            internal static readonly string PowPlan = Path.Combine(Folders.Workspace, "UltimatePerformance.pow");
-
             internal static readonly string BlankIcon = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Blank.ico");
 
             internal static readonly string ErrorLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GTweak_Error.log");
