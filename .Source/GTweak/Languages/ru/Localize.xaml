@@ -133,7 +133,7 @@
     <v:String x:Key="btn_enable">Включить</v:String>
 
     <v:String x:Key="title_clear_more">Очистка памяти</v:String>
-    <v:String x:Key="text_clear_more">Очищает кэш системных файлов в памяти компьютера временные файлы и кэш эскизов.</v:String>
+    <v:String x:Key="text_clear_more">Очищает кэш системных файлов в памяти компьютера, временные файлы и кэш эскизов.</v:String>
     <v:String x:Key="btn_clear">Очистить</v:String>
 
     <v:String x:Key="title_ntfs_more">Сжатие NTFS</v:String>

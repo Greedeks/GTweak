@@ -65,7 +65,6 @@ namespace GTweak.Utilities.Helpers
 
         private const int PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
         private const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
-        private const uint CREATE_NO_WINDOW = 0x08000000;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SECURITY_ATTRIBUTES
@@ -286,10 +285,6 @@ namespace GTweak.Utilities.Helpers
                 };
 
                 uint creationFlags = EXTENDED_STARTUPINFO_PRESENT;
-                if (!showWindow)
-                {
-                    creationFlags |= CREATE_NO_WINDOW;
-                }
 
                 if (!CreateProcess(null, binaryPath, ref ps, ref ts, true, creationFlags, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo))
                 {
