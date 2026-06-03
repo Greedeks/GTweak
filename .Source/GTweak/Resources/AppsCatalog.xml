@@ -117,6 +117,16 @@
         <Source>https://www.techpowerup.com/gpuz/</Source>
         <DownloadPath>https://www.techpowerup.com/download/techpowerup-gpu-z/</DownloadPath>
     </App>
+
+    <App>
+        <Icon>Img_PCIz</Icon>
+        <Name>PCI-Z</Name>
+        <Group>web</Group>
+        <Author>Bruno Banelli</Author>
+        <AuthorIcon>pci-z.com</AuthorIcon>
+        <Source>https://www.pci-z.com/#download</Source>
+        <DownloadPath>https://www.pci-z.com/current/PCI-Z.zip</DownloadPath>
+    </App>
     
     <App>
         <Icon>Img_DiskInfo</Icon>
