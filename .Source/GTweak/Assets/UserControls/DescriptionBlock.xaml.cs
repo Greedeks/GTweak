@@ -4,8 +4,9 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using GTweak.Utilities.Animation;
+using GTweak.Utilities.Behaviors;
 using GTweak.Utilities.Controls;
 
 namespace GTweak.Assets.UserControls
@@ -13,6 +14,13 @@ namespace GTweak.Assets.UserControls
     public partial class DescriptionBlock
     {
         private CancellationTokenSource _scrollCts;
+        private string _currentDefaultText = string.Empty;
+
+        internal static readonly DependencyProperty DefaultTextProperty =
+            DependencyProperty.Register("DefaultText", typeof(string), typeof(DescriptionBlock), new UIPropertyMetadata(string.Empty));
+
+        internal static readonly DependencyProperty TargetStateProperty =
+            DependencyProperty.Register("TargetState", typeof(bool?), typeof(DescriptionBlock), new UIPropertyMetadata(null));
 
         internal string DefaultText
         {
@@ -20,15 +28,19 @@ namespace GTweak.Assets.UserControls
             set => SetValue(DefaultTextProperty, value);
         }
 
-        public static readonly DependencyProperty DefaultTextProperty =
-            DependencyProperty.Register("DefaultText", typeof(string), typeof(DescriptionBlock), new UIPropertyMetadata(string.Empty));
+        internal bool? TargetState
+        {
+            get => (bool?)GetValue(TargetStateProperty);
+            set => SetValue(TargetStateProperty, value);
+        }
 
         internal string Text
         {
-            get => FunctionDescription?.Text ?? string.Empty;
+            get => _currentDefaultText;
             set
             {
                 string safeValue = value ?? string.Empty;
+                _currentDefaultText = safeValue;
 
                 _scrollCts?.Cancel();
 
@@ -40,10 +52,18 @@ namespace GTweak.Assets.UserControls
                     Scroller.ScrollToVerticalOffset(0);
                     Scroller.UpdateLayout();
 
-                    TypewriterAnimation.Create(safeValue, FunctionDescription, safeValue.Length <= 50 ? TimeSpan.FromMilliseconds(200) : safeValue.Length <= 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550));
+                    StatusPanel.BeginAnimation(OpacityProperty, null);
+                    StatusPanel.Opacity = 0;
+
+                    TimeSpan duration = safeValue.Length <= 50 ? TimeSpan.FromMilliseconds(200) : safeValue.Length <= 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
+
+                    Caret.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(1.0, 0.0, 0.3, reverse: true));
+
+                    FunctionDescription.Text = string.Empty;
+                    TypewriterAnimation.Create(safeValue, FunctionDescription, duration);
 
                     _scrollCts = new CancellationTokenSource();
-                    _ = StartAutoScrollAsync(safeValue, _scrollCts.Token);
+                    _ = HandleStatusAndScrollAsync(safeValue, duration, _scrollCts.Token);
                 }
             }
         }
@@ -59,6 +79,7 @@ namespace GTweak.Assets.UserControls
                 if (FunctionDescription != null)
                 {
                     UpdateFlowDirection();
+                    _currentDefaultText = DefaultText;
                     TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.FromMilliseconds(300));
                 }
             };
@@ -76,6 +97,8 @@ namespace GTweak.Assets.UserControls
             if (FunctionDescription != null)
             {
                 UpdateFlowDirection();
+                _currentDefaultText = DefaultText;
+                FunctionDescription.Text = string.Empty;
                 TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.Zero);
             }
         }
@@ -92,52 +115,63 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        private async Task StartAutoScrollAsync(string text, CancellationToken token)
+        private async Task HandleStatusAndScrollAsync(string text, TimeSpan typewriterDuration, CancellationToken token)
         {
-            await Task.Delay(2000, token);
+            await Task.Delay(typewriterDuration, token);
 
-            if (text != DefaultText && !token.IsCancellationRequested)
+            if (!token.IsCancellationRequested)
             {
                 await Dispatcher.InvokeAsync(() =>
                 {
-                    if (FunctionDescription != null && Scroller != null)
+                    if (!token.IsCancellationRequested)
                     {
-                        FunctionDescription.UpdateLayout();
-                        Scroller.UpdateLayout();
-                        Scroller.ScrollToVerticalOffset(0);
+                        Caret.BeginAnimation(OpacityProperty, null);
+                        Caret.Opacity = 1;
+
+                        if (TargetState != null && text != DefaultText)
+                        {
+                            StatusPanel.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0.0, 1.0, 0.3));
+                        }
                     }
                 });
 
-                if (Scroller != null && !token.IsCancellationRequested)
+                await Task.Delay(1500, token);
+
+                if (text != DefaultText && !token.IsCancellationRequested)
                 {
-                    double maxOffset = Scroller.ScrollableHeight;
-                    if (maxOffset > 0)
+                    await Dispatcher.InvokeAsync(() =>
                     {
-                        double durationSeconds = Math.Max(2.0, maxOffset / 20);
+                        if (FunctionDescription != null && Scroller != null)
+                        {
+                            FunctionDescription.UpdateLayout();
+                            Scroller.UpdateLayout();
+                        }
+                    });
 
-                        await Dispatcher.InvokeAsync(() => { Scroller?.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, FactoryAnimation.CreateIn(0, maxOffset, durationSeconds, useCubicEase: true)); });
+                    if (Scroller != null && !token.IsCancellationRequested)
+                    {
+                        double maxOffset = Scroller.ScrollableHeight;
+                        if (maxOffset > 0)
+                        {
+                            double durationSeconds = Math.Min(6.0, (maxOffset / 20.0) + 0.8);
 
-                        try { await Task.Delay(TimeSpan.FromSeconds(durationSeconds), token); }
-                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                            await Dispatcher.InvokeAsync(() =>
+                            {
+                                DoubleAnimation inertiaAnimation = new DoubleAnimation(0, maxOffset, TimeSpan.FromSeconds(durationSeconds))
+                                {
+                                    EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseOut }
+                                };
+
+                                Scroller?.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, inertiaAnimation);
+                            });
+
+                            try
+                            {
+                                await Task.Delay(TimeSpan.FromSeconds(durationSeconds), token);
+                            }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        }
                     }
-                }
-            }
-        }
-
-        private static class ScrollViewerBehavior
-        {
-            internal static readonly DependencyProperty VerticalOffsetProperty =
-                DependencyProperty.RegisterAttached("VerticalOffset", typeof(double), typeof(ScrollViewerBehavior), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnVerticalOffsetChanged));
-
-            internal static double GetVerticalOffset(ScrollViewer viewer) => (double)(viewer?.GetValue(VerticalOffsetProperty) ?? 0.0);
-
-            internal static void SetVerticalOffset(ScrollViewer viewer, double value) => viewer?.SetValue(VerticalOffsetProperty, value);
-
-            private static void OnVerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-            {
-                if (d is ScrollViewer viewer && e.NewValue is double offset)
-                {
-                    viewer.ScrollToVerticalOffset(offset);
                 }
             }
         }

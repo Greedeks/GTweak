@@ -18,10 +18,10 @@ namespace GTweak.Assets.UserControls
             EventManager.RegisterRoutedEvent(nameof(ChangedState), RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(ToggleButton));
 
         private static readonly DependencyProperty StateProperty =
-           DependencyProperty.Register(nameof(State), typeof(bool), typeof(ToggleButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnStateChanged));
+            DependencyProperty.Register(nameof(State), typeof(bool), typeof(ToggleButton), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnStateChanged));
 
         private static readonly DependencyProperty TextProperty =
-         DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => { if (s is ToggleButton btn && btn.ToggleText != null) { btn.ToggleText.Text = e.NewValue as string; } }));
+            DependencyProperty.Register(nameof(TextResource), typeof(string), typeof(ToggleButton), new PropertyMetadata("", (s, e) => { if (s is ToggleButton btn && btn.ToggleText != null) { btn.ToggleText.Text = e.NewValue as string; } }));
 
         private static readonly DependencyProperty DescriptionProperty =
             DependencyProperty.Register(nameof(Description), typeof(object), typeof(ToggleButton), new PropertyMetadata(null));

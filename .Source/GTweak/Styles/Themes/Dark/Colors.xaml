@@ -3,6 +3,7 @@
 
     <Color x:Key="Color_Accent">#7BFFB5</Color>
     <Color x:Key="Color_Shadow">#1AFF7E</Color>
+    <Color x:Key="Color_Shadow_Danger">#FF1A3E</Color>
     <Color x:Key="Color_Separator">#434544</Color>
 
     <SolidColorBrush x:Key="Brush_Background" Color="#FF1E1E1E"/>
@@ -14,7 +15,7 @@
     
     <SolidColorBrush x:Key="Brush_TextBlock_Inactivity" Color="#DFDFDF"/>
 
-    <SolidColorBrush x:Key="Brush_CloseBtn_Hover" Color="#DE6E62"/>
+    <SolidColorBrush x:Key="Brush_Danger_Hover" Color="#DE6E62"/>
     <SolidColorBrush x:Key="Brush_TitleBtnBG_Pressed" Color="#FF333534"/>
 
     <SolidColorBrush x:Key="Brush_BtnBG_Navigation" Color="#2C3932"/>

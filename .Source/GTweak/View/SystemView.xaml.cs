@@ -20,44 +20,52 @@ namespace GTweak.View
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             string description = string.Empty;
+            bool? state = null;
 
             switch (sender)
             {
                 case StackPanel panel:
                     description = panel.ToolTip?.ToString() ?? string.Empty;
                     break;
-                case ToggleButton toggle:
-                    description = toggle.Description?.ToString() ?? string.Empty;
-                    break;
-                default:
+                case ToggleButton tglButton:
+                    description = tglButton.Description?.ToString() ?? string.Empty;
+                    state = tglButton.State;
                     break;
             }
 
             if (DescBlock.Text != description)
             {
                 DescBlock.Text = description;
+                DescBlock.TargetState = state;
             }
         }
 
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DescBlock.Text = DescBlock.DefaultText;
+            DescBlock.TargetState = null;
+        }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaks(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
-            ToggleButton toggleButton = (ToggleButton)sender;
-            if (toggleButton.Name != "TglButton3")
-            {
-                _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+            ToggleButton tglButton = (ToggleButton)sender;
 
-                if (NotificationManager.SysActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
+            DescBlock.TargetState = tglButton.State;
+
+            if (tglButton.Name != "TglButton3")
+            {
+                _sysTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+
+                if (NotificationManager.SysActions.TryGetValue(tglButton.Name, out NotificationManager.NoticeAction action))
                 {
                     NotificationManager.Show().WithDelay(300).Perform(action);
                 }
             }
             else
             {
-                _sysTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+                _sysTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
             }
         }
     }

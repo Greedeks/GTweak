@@ -8,33 +8,37 @@ namespace GTweak.Assets.UserControls
 {
     public partial class FileCard
     {
-        public static readonly DependencyProperty FileNameProperty = DependencyProperty.Register(nameof(FileName), typeof(string), typeof(FileCard), new PropertyMetadata(string.Empty));
+        internal static readonly DependencyProperty FileNameProperty = 
+            DependencyProperty.Register(nameof(FileName), typeof(string), typeof(FileCard), new PropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register(nameof(IconSource), typeof(ImageSource), typeof(FileCard), new PropertyMetadata(null));
+        internal static readonly DependencyProperty IconSourceProperty = 
+            DependencyProperty.Register(nameof(IconSource), typeof(ImageSource), typeof(FileCard), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(FileCard), new PropertyMetadata(null));
+        internal static readonly DependencyProperty CommandProperty = 
+            DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(FileCard), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(FileCard), new PropertyMetadata(null));
+        internal static readonly DependencyProperty CommandParameterProperty = 
+            DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(FileCard), new PropertyMetadata(null));
 
-        public string FileName
+        internal string FileName
         {
             get => (string)GetValue(FileNameProperty);
             set => SetValue(FileNameProperty, value);
         }
 
-        public ImageSource IconSource
+        internal ImageSource IconSource
         {
             get => (ImageSource)GetValue(IconSourceProperty);
             set => SetValue(IconSourceProperty, value);
         }
 
-        public ICommand Command
+        internal ICommand Command
         {
             get => (ICommand)GetValue(CommandProperty);
             set => SetValue(CommandProperty, value);
         }
 
-        public object CommandParameter
+        internal object CommandParameter
         {
             get => GetValue(CommandParameterProperty);
             set => SetValue(CommandParameterProperty, value);

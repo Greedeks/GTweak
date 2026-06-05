@@ -22,26 +22,31 @@ namespace GTweak.View
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
             string description = string.Empty;
+            bool? state = null;
 
             switch (sender)
             {
                 case StackPanel panel:
                     description = panel.ToolTip?.ToString() ?? string.Empty;
                     break;
-                case ToggleButton toggle:
-                    description = toggle.Description?.ToString() ?? string.Empty;
-                    break;
-                default:
+                case ToggleButton tglButton:
+                    description = tglButton.Description?.ToString() ?? string.Empty;
+                    state = tglButton.State;
                     break;
             }
 
             if (DescBlock.Text != description)
             {
                 DescBlock.Text = description;
+                DescBlock.TargetState = state;
             }
         }
 
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DescBlock.Text = DescBlock.DefaultText;
+            DescBlock.TargetState = null;
+        }
 
         private void ColorPicker_ColorPicked(object sender, EventArgs e)
         {
@@ -80,16 +85,18 @@ namespace GTweak.View
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
-            ToggleButton toggleButton = (ToggleButton)sender;
+            ToggleButton tglButton = (ToggleButton)sender;
 
-            _intfTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+            DescBlock.TargetState = tglButton.State;
 
-            if (ExplorerManager.IntfActions.TryGetValue(toggleButton.Name, out ExplorerManager.ExplorerAction explorerAction) && explorerAction == ExplorerManager.ExplorerAction.Restart)
+            _intfTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+
+            if (ExplorerManager.IntfActions.TryGetValue(tglButton.Name, out ExplorerManager.ExplorerAction explorerAction) && explorerAction == ExplorerManager.ExplorerAction.Restart)
             {
                 ExplorerManager.Restart();
             }
 
-            if (NotificationManager.IntfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction noticeAction))
+            if (NotificationManager.IntfActions.TryGetValue(tglButton.Name, out NotificationManager.NoticeAction noticeAction))
             {
                 NotificationManager.Show().WithDelay(300).Perform(noticeAction);
             }

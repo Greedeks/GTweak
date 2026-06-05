@@ -98,7 +98,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_CloseBtn_Hover}"/>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Danger_Hover}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>

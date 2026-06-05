@@ -7,6 +7,9 @@
     <v:String x:Key="btn_default">По умолчанию</v:String>
     <v:String x:Key="btn_change">Изменить</v:String>
     
+    <v:String x:Key="status_active">АКТИВЕН</v:String>
+    <v:String x:Key="status_disabled">ОТКЛЮЧЁН</v:String>
+    
     <!--#region Load Window -->
     <v:String x:Key="title_load">Загрузка</v:String>
     <v:String x:Key="step1_load">Подготовка среды</v:String>

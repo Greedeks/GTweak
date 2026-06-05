@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">העבר את העכבר מעל הסמל של אפליקציה כלשהי כדי לראות את שמה</v:String>
     <v:String x:Key="btn_default">ברירת מחדל</v:String>
     <v:String x:Key="btn_change">שינוי</v:String>
+
+    <v:String x:Key="status_active">ACTIVE</v:String>
+    <v:String x:Key="status_disabled">DISABLED</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">טעינה</v:String>

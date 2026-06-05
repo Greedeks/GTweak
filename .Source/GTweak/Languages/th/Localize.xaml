@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">เลื่อนเมาส์ไปวางเหนือไอคอนของแอปพลิเคชันใดๆ เพื่อดูชื่อของแอปพลิเคชันนั้น</v:String>
     <v:String x:Key="btn_default">ค่าเริ่มต้น</v:String>
     <v:String x:Key="btn_change">เปลี่ยน</v:String>
+
+    <v:String x:Key="status_active">ACTIVE</v:String>
+    <v:String x:Key="status_disabled">DISABLED</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">กำลังโหลด</v:String>

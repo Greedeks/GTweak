@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">Najedź kursorem myszy na ikonę dowolnej aplikacji, aby zobaczyć jej nazwę</v:String>
     <v:String x:Key="btn_default">Domyślne</v:String>
     <v:String x:Key="btn_change">Zmień</v:String>
+
+    <v:String x:Key="status_active">ACTIVE</v:String>
+    <v:String x:Key="status_disabled">DISABLED</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Ładowanie</v:String>

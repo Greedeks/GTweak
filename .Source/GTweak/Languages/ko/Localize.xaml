@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">응용 프로그램의 아이콘 위에 마우스를 가져가면 이름을 확인할 수 있습니다</v:String>
     <v:String x:Key="btn_default">기본값</v:String>
     <v:String x:Key="btn_change">변경</v:String>
+
+    <v:String x:Key="status_active">ACTIVE</v:String>
+    <v:String x:Key="status_disabled">DISABLED</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">로드 중</v:String>

@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">Premaknite miško nad ikono poljubne aplikacije, da vidite njeno ime</v:String>
     <v:String x:Key="btn_default">Privzeto</v:String>
     <v:String x:Key="btn_change">Spremeni</v:String>
+
+    <v:String x:Key="status_active">ACTIVE</v:String>
+    <v:String x:Key="status_disabled">DISABLED</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Nalaganje</v:String>

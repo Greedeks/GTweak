@@ -208,6 +208,7 @@
     <Compile Include="Core\ViewModel\ToolsetViewModel.cs" />
     <Compile Include="Utilities\Animation\BlurAnimation.cs" />
     <Compile Include="Utilities\Behaviors\ScrollFadeBehavior.cs" />
+    <Compile Include="Utilities\Behaviors\ScrollViewerBehavior.cs" />
     <Compile Include="Utilities\Behaviors\TextBoxClearBehavior.cs" />
     <Compile Include="Utilities\Configuration\IconExtractProvider.cs" />
     <Compile Include="Utilities\Configuration\NetworkProvider.cs" />

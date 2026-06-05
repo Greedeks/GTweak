@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">Vigye az egeret bármely alkalmazás ikonja fölé a nevének megtekintéséhez</v:String>
     <v:String x:Key="btn_default">Alapértelmezett</v:String>
     <v:String x:Key="btn_change">Módosítás</v:String>
+
+    <v:String x:Key="status_active">ACTIVE</v:String>
+    <v:String x:Key="status_disabled">DISABLED</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Betöltés</v:String>

@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">Наведіть вказівник миші на піктограму будь-якого додатку, щоб отримати його назву</v:String>
     <v:String x:Key="btn_default">За замовчуванням</v:String>
     <v:String x:Key="btn_change">Змінити</v:String>
+
+    <v:String x:Key="status_active">АКТИВНИЙ</v:String>
+    <v:String x:Key="status_disabled">ВИМКНЕНЙ</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Завантаження</v:String>

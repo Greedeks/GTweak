@@ -19,23 +19,28 @@ namespace GTweak.View
 
         private void Tweak_MouseEnter(object sender, MouseEventArgs e)
         {
-            string description = ((ToggleButton)sender!).Description?.ToString() ?? string.Empty;
-
-            if (DescBlock.Text != description)
+            if (sender is ToggleButton tglButton && DescBlock.Text != tglButton.Description?.ToString())
             {
-                DescBlock.Text = description;
+                DescBlock.Text = tglButton.Description?.ToString() ?? string.Empty;
+                DescBlock.TargetState = tglButton.State;
             }
         }
 
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DescBlock.Text = DescBlock.DefaultText;
+            DescBlock.TargetState = null;
+        }
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
-            ToggleButton toggleButton = (ToggleButton)sender;
+            ToggleButton tglButton = (ToggleButton)sender;
 
-            _confTweaks.ApplyTweaks(toggleButton.Name, toggleButton.State);
+            DescBlock.TargetState = tglButton.State;
 
-            if (NotificationManager.ConfActions.TryGetValue(toggleButton.Name, out NotificationManager.NoticeAction action))
+            _confTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+
+            if (NotificationManager.ConfActions.TryGetValue(tglButton.Name, out var action))
             {
                 NotificationManager.Show().WithDelay(300).Perform(action);
             }

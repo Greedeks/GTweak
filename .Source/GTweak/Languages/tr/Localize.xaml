@@ -6,6 +6,9 @@
     <v:String x:Key="defaultDescriptionApp">Adını görmek için farenizi herhangi bir uygulamanın simgesi üzerine getirin</v:String>
     <v:String x:Key="btn_default">Varsayılan</v:String>
     <v:String x:Key="btn_change">Değiştir</v:String>
+
+    <v:String x:Key="status_active">ACTIVE</v:String>
+    <v:String x:Key="status_disabled">DISABLED</v:String>
     
     <!--#region Load Window -->
     <v:String x:Key="title_load">Yükleniyor</v:String>
