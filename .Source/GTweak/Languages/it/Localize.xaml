@@ -6,7 +6,8 @@
     <v:String x:Key="defaultDescriptionApp">Passa il mouse sull'icona di un'applicazione per vedere il suo nome</v:String>
     <v:String x:Key="btn_default">Predefinito</v:String>
     <v:String x:Key="btn_change">Modifica</v:String>
-
+    
+    <v:String x:Key="label_target_status">Parametro</v:String>
     <v:String x:Key="status_active">ATTIVO</v:String>
     <v:String x:Key="status_disabled">DISATTIVATO</v:String>
     

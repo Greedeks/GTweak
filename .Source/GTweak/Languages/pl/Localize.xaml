@@ -7,9 +7,10 @@
     <v:String x:Key="btn_default">Domyślne</v:String>
     <v:String x:Key="btn_change">Zmień</v:String>
 
-    <v:String x:Key="status_active">ACTIVE</v:String>
-    <v:String x:Key="status_disabled">DISABLED</v:String>
-    
+    <v:String x:Key="label_target_status">Parametr</v:String>
+    <v:String x:Key="status_active">AKTYWNY</v:String>
+    <v:String x:Key="status_disabled">WYŁĄCZONY</v:String>
+
     <!--#region Load Window -->
     <v:String x:Key="title_load">Ładowanie</v:String>
     <v:String x:Key="step1_load">Przygotowywanie środowiska</v:String>

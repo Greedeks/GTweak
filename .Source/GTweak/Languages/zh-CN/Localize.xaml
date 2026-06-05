@@ -7,6 +7,7 @@
     <v:String x:Key="btn_default">默认</v:String>
     <v:String x:Key="btn_change">更改</v:String>
 
+    <v:String x:Key="label_target_status">参数</v:String>
     <v:String x:Key="status_active">已启用</v:String>
     <v:String x:Key="status_disabled">已禁用</v:String>
     

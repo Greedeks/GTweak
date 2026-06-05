@@ -7,9 +7,10 @@
     <v:String x:Key="btn_default">Privzeto</v:String>
     <v:String x:Key="btn_change">Spremeni</v:String>
 
+    <v:String x:Key="label_target_status">Parameter</v:String>
     <v:String x:Key="status_active">ACTIVE</v:String>
     <v:String x:Key="status_disabled">DISABLED</v:String>
-    
+
     <!--#region Load Window -->
     <v:String x:Key="title_load">Nalaganje</v:String>
     <v:String x:Key="step1_load">Pripravljanje okolja</v:String>

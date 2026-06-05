@@ -7,6 +7,7 @@
     <v:String x:Key="btn_default">Par défaut</v:String>
     <v:String x:Key="btn_change">Modifier</v:String>
 
+    <v:String x:Key="label_target_status">Paramètre</v:String>
     <v:String x:Key="status_active">ACTIF</v:String>
     <v:String x:Key="status_disabled">DÉSACTIVÉ</v:String>
     

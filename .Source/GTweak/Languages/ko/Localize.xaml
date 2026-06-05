@@ -7,9 +7,10 @@
     <v:String x:Key="btn_default">기본값</v:String>
     <v:String x:Key="btn_change">변경</v:String>
 
+    <v:String x:Key="label_target_status">Parameter</v:String>
     <v:String x:Key="status_active">ACTIVE</v:String>
     <v:String x:Key="status_disabled">DISABLED</v:String>
-    
+
     <!--#region Load Window -->
     <v:String x:Key="title_load">로드 중</v:String>
     <v:String x:Key="step1_load">환경 준비 중</v:String>

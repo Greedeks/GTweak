@@ -8,16 +8,16 @@ namespace GTweak.Assets.UserControls
 {
     public partial class FileCard
     {
-        internal static readonly DependencyProperty FileNameProperty = 
+        internal static readonly DependencyProperty FileNameProperty =
             DependencyProperty.Register(nameof(FileName), typeof(string), typeof(FileCard), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty IconSourceProperty = 
+        internal static readonly DependencyProperty IconSourceProperty =
             DependencyProperty.Register(nameof(IconSource), typeof(ImageSource), typeof(FileCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty CommandProperty = 
+        internal static readonly DependencyProperty CommandProperty =
             DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(FileCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty CommandParameterProperty = 
+        internal static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(FileCard), new PropertyMetadata(null));
 
         internal string FileName

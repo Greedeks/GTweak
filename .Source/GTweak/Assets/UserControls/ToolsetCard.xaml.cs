@@ -8,34 +8,34 @@ namespace GTweak.Assets.UserControls
 {
     public partial class ToolsetCard : UserControl
     {
-        internal static readonly DependencyProperty AppIconProperty = 
+        internal static readonly DependencyProperty AppIconProperty =
             DependencyProperty.Register(nameof(AppIcon), typeof(ImageSource), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty AppNameProperty = 
+        internal static readonly DependencyProperty AppNameProperty =
             DependencyProperty.Register(nameof(AppName), typeof(string), typeof(ToolsetCard), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty AuthorIconProperty = 
+        internal static readonly DependencyProperty AuthorIconProperty =
             DependencyProperty.Register(nameof(AuthorIcon), typeof(ImageSource), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty AuthorNameProperty = 
+        internal static readonly DependencyProperty AuthorNameProperty =
             DependencyProperty.Register(nameof(AuthorName), typeof(string), typeof(ToolsetCard), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty SourceUrlProperty = 
+        internal static readonly DependencyProperty SourceUrlProperty =
             DependencyProperty.Register(nameof(SourceUrl), typeof(string), typeof(ToolsetCard), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty DownloadCommandProperty = 
+        internal static readonly DependencyProperty DownloadCommandProperty =
             DependencyProperty.Register(nameof(DownloadCommand), typeof(ICommand), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty CancelCommandProperty = 
+        internal static readonly DependencyProperty CancelCommandProperty =
             DependencyProperty.Register(nameof(CancelCommand), typeof(ICommand), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty IsDownloadingProperty = 
+        internal static readonly DependencyProperty IsDownloadingProperty =
             DependencyProperty.Register(nameof(IsDownloading), typeof(bool), typeof(ToolsetCard), new PropertyMetadata(false));
 
-        internal static readonly DependencyProperty ProgressProperty = 
+        internal static readonly DependencyProperty ProgressProperty =
             DependencyProperty.Register(nameof(Progress), typeof(double), typeof(ToolsetCard), new PropertyMetadata(0.0));
 
-        internal static readonly DependencyProperty IsSquareIconProperty = 
+        internal static readonly DependencyProperty IsSquareIconProperty =
             DependencyProperty.Register(nameof(IsSquareIcon), typeof(bool), typeof(ToolsetCard), new PropertyMetadata(false));
 
         internal ImageSource AppIcon
