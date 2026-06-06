@@ -49,6 +49,8 @@
 
     <SolidColorBrush x:Key="Brush_Background_Card" Color="#FF232323"/>
 
+    <SolidColorBrush x:Key="Brush_Border_Description" Color="#2F3030"/>
+    
     <Color x:Key="Color_ToggleBG_On">#40C279</Color>
     <Color x:Key="Color_ToggleBorder_Off">#FF888888</Color>
     <Color x:Key="Color_ToggleDot_Off">#FF666666</Color>
