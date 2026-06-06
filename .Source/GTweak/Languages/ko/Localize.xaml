@@ -4,9 +4,9 @@
 
     <v:String x:Key="default_desc">조정 사항 위에 마우스를 가져가면 설명이 표시됩니다</v:String>
     <v:String x:Key="default_app_desc">응용 프로그램의 아이콘 위에 마우스를 가져가면 이름을 확인할 수 있습니다</v:String>
-    <v:String x:Key="label_target_status">Parameter</v:String>
-    <v:String x:Key="status_active">ACTIVE</v:String>
-    <v:String x:Key="status_disabled">DISABLED</v:String>
+    <v:String x:Key="label_target_status">매개변수</v:String>
+    <v:String x:Key="status_active">활성화</v:String>
+    <v:String x:Key="status_disabled">사용 안 함</v:String>
 
     <v:String x:Key="btn_default">기본값</v:String>
     <v:String x:Key="btn_change">변경</v:String>
@@ -370,8 +370,8 @@
     <v:String x:Key="text_over_pkg" xml:space="preserve">Microsoft Edge 브라우저를 제거하려고 합니다. 이렇게 하면 Microsoft Office (예: Meeting 인사이트, 룸 파인더), 사진 앱 (새 버전은 WebView2 사용), 일부 Telegram 봇, 그리고 내장된 WebView를 사용하는 기타 프로그램 등 다양한 응용 프로그램에서 웹 콘텐츠를 표시하는 데 사용되는 EdgeWebView 구성 요소도 제거됩니다. 진행하기 전에 이 구성 요소가 필요하지 않은지 확인하세요. 
        최근 Windows 11 빌드에서 Copilot은 PWA 또는 시스템 래퍼로 EdgeWebView를 통해 구현되었습니다. Edge를 제거하면 웹 래퍼 역할을 하는 Copilot도 제거됩니다.</v:String>
     <v:String x:Key="question_over_pkg">EdgeWebView와 함께 계속 삭제하시겠습니까?</v:String>
-    <v:String x:Key="btn_delete_all">Yes, delete all</v:String>
-    <v:String x:Key="btn_keep_webview">No, keep EdgeWebView</v:String>
+    <v:String x:Key="btn_delete_all">예, 모두 삭제</v:String>
+    <v:String x:Key="btn_keep_webview">아니요, EdgeWebView 유지</v:String>
     <!--#endregion-->
 
     <!--#region Services Page -->
@@ -407,7 +407,7 @@
     <v:String x:Key="tgl30_svc">매장 데모 모드 관련 서비스</v:String>
     <v:String x:Key="tgl31_svc">Microsoft Edge 업데이트 관련 서비스</v:String>
     <v:String x:Key="tgl32_svc">멀티미디어 클래스 스케줄러 서비스</v:String>
-    <v:String x:Key="tgl33_svc">Windows Geolocation Service</v:String>
+    <v:String x:Key="tgl33_svc">Windows 지리정보 서비스</v:String>
     
     <v:String x:Key="tgl1_desc_svc">파일 기록 및 콘텐츠 인덱싱을 사용하지 않는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl2_desc_svc">Xbox 및 Microsoft 게임 패드를 사용하지 않는 경우 비활성화합니다.</v:String>
@@ -441,7 +441,7 @@
     <v:String x:Key="tgl30_desc_svc">매장에서 Windows 기능을 시연하기 위해 장치를 사용하는 경우가 아니라면 비활성화하십시오. Store 데모 서비스는 매장 전시 및 테스트용으로 제작된 데모 콘텐츠와 대화형 기능의 표시를 관리합니다. 이 서비스는 일반적인 컴퓨터 사용에는 필요하지 않습니다.</v:String>
     <v:String x:Key="tgl31_desc_svc">업데이트할 계획이 없거나 Microsoft Edge를 사용하지 않는 경우 비활성화합니다. 이렇게 하면 WebView2 런타임에 대한 자동 업데이트도 중지됩니다. 이러한 구성 요소는 동일한 업데이트 메커니즘을 사용하며 상호 의존적입니다.</v:String>
     <v:String x:Key="tgl32_desc_svc">가능한 결과를 이해하고 우선순위가 있는 오디오 및 비디오 처리가 필요한 멀티미디어 응용 프로그램을 사용하지 않는 경우 비활성화합니다. 드물게는 NetAdapterCX와 함께 네트워크 어댑터를 사용할 때 시스템 이벤트 수와 부하를 약간 줄일 수 있지만, 그 효과는 시스템 구성에 따라 달라집니다. 이로 인해 오디오 끊김, 오디오/비디오 비동기화 및 기타 재생 문제가 발생할 수 있습니다.</v:String>
-    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in apps. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Third-party software depending on geolocation may also crash or fail to open. If you experience this, turn the service back on.</v:String>
+    <v:String x:Key="tgl33_desc_svc">앱에서 지리적 위치를 사용하지 않는 경우 비활성화합니다. 서비스는 GPS, Wi-Fi 및 IP 주소를 통해 사용자의 위치를 결정합니다. 비활성화하면 날씨, 지도, 자동 시간대 등 위치에 따라 달라지는 기능이 작동을 중지합니다. 지리적 위치에 따라 타사 소프트웨어도 충돌하거나 열리지 않을 수 있습니다. 이러한 문제가 발생하면 서비스를 다시 켜세요.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -550,7 +550,7 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">폴더 선택</v:String>
     <v:String x:Key="chk_run_ti_adds">TrustedInstaller로 실행</v:String>
-    <v:String x:Key="text_info_adds">디렉토리를 선택하거나 비어 있지 않은지 확인하세요</v:String>
+    <v:String x:Key="text_info_adds">디렉터리를 선택하거나 비어 있지 않은지 확인하세요</v:String>
     <v:String x:Key="scripts_info_adds">그 후, 이 페이지에서 스크립트 (.ps1, .cmd, .bat, .reg)를 실행할 수 있습니다</v:String>
     <!--#endregion-->
 
