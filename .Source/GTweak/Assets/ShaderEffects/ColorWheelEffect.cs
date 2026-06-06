@@ -5,8 +5,19 @@ using System.Windows.Media.Effects;
 
 namespace GTweak.Assets.ShaderEffects
 {
-    public class ColorWheelEffect : ShaderEffect
+    public sealed class ColorWheelEffect : ShaderEffect
     {
+        protected override Freezable CreateInstanceCore() => new ColorWheelEffect();
+
+        internal static readonly DependencyProperty InputProperty =
+            RegisterPixelShaderSamplerProperty("Input", typeof(ColorWheelEffect), 0);
+
+        internal Brush Input
+        {
+            get => (Brush)GetValue(InputProperty);
+            set => SetValue(InputProperty, value);
+        }
+
         private static readonly PixelShader _shader = new PixelShader()
         {
             UriSource = new Uri("/GTweak;component/Assets/ShaderEffects/ColorWheelEffect.ps", UriKind.Relative)
@@ -16,14 +27,6 @@ namespace GTweak.Assets.ShaderEffects
         {
             PixelShader = _shader;
             UpdateShaderValue(InputProperty);
-        }
-
-        public static readonly DependencyProperty InputProperty = RegisterPixelShaderSamplerProperty("Input", typeof(ColorWheelEffect), 0);
-
-        public Brush Input
-        {
-            get => (Brush)GetValue(InputProperty);
-            set => SetValue(InputProperty, value);
         }
     }
 }

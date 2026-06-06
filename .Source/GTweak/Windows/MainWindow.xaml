@@ -105,7 +105,7 @@
                 </Border.OpacityMask>
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <Grid Width="400" Margin="0" VirtualizingStackPanel.IsVirtualizing="True">
+                    <Grid Width="400" Margin="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
