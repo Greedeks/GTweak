@@ -19,13 +19,13 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,0,10,0" VerticalAlignment="Top" Opacity="0.8">
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,0,5,0" VerticalAlignment="Top" Opacity="0.8">
                     <TextBlock Text=">" FontFamily="{StaticResource Jura}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource Brush_Accent}"/>
                     <TextBlock x:Name="Caret" Text="_" FontFamily="{StaticResource Jura}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource Brush_Accent}"/>
                 </StackPanel>
 
                 <ScrollViewer x:Name="Scroller" Grid.Row="0" Grid.Column="1" b:ScrollFadeBehavior.EnableFade="True" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled" ClipToBounds="True">
-                    <TextBlock x:Name="FunctionDescription" Style="{StaticResource Description}" SnapsToDevicePixels="False" UseLayoutRounding="False" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Top" TextAlignment="Center" LineHeight="18" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                    <TextBlock x:Name="FunctionDescription" Style="{StaticResource Description}" SnapsToDevicePixels="False" UseLayoutRounding="False" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Top" TextAlignment="Center" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                 </ScrollViewer>
 
                 <Grid x:Name="StatusPanel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,10,0,0" Opacity="0">

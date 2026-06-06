@@ -57,7 +57,7 @@
         <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>
-        <Setter Property="FontSize" Value="15px"/>
+        <Setter Property="FontSize" Value="15.5px"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="TextAlignment" Value="Center"/>
         <Setter Property="TextWrapping" Value="Wrap"/>

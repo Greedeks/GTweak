@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
-    <v:String x:Key="defaultDescription">将鼠标悬停在任何微调项目上即可查看其说明</v:String>
-    <v:String x:Key="defaultDescriptionApp">将鼠标悬停在任何应用程序的图标上，即可查看其名称</v:String>
-    <v:String x:Key="btn_default">默认</v:String>
-    <v:String x:Key="btn_change">更改</v:String>
-
+    <v:String x:Key="default_desc">将鼠标悬停在任何微调项目上即可查看其说明</v:String>
+    <v:String x:Key="default_app_desc">将鼠标悬停在任何应用程序的图标上，即可查看其名称</v:String>
     <v:String x:Key="label_target_status">参数</v:String>
     <v:String x:Key="status_active">已启用</v:String>
     <v:String x:Key="status_disabled">已禁用</v:String>
-    
+
+    <v:String x:Key="btn_default">默认</v:String>
+    <v:String x:Key="btn_change">更改</v:String>
+
     <!--#region Load Window -->
     <v:String x:Key="title_load">载入中</v:String>
     <v:String x:Key="step1_load">正在准备环境</v:String>
@@ -441,7 +441,7 @@
     <v:String x:Key="tgl30_desc_svc">如果您不在商店中使用该设备来演示 Windows 功能，请将其禁用。零售演示 (Store Demo) 服务负责管理专门用于商店展示和测试的演示内容及交互功能的显示。日常使用电脑时不需要此服务。</v:String>
     <v:String x:Key="tgl31_desc_svc">如果您不打算更新或不使用 Microsoft Edge，请禁用。这样也会停止 WebView2 Runtime 的自动更新 — 这些组件使用相同的更新机制并彼此紧密相依。</v:String>
     <v:String x:Key="tgl32_desc_svc">如果您理解可能的后果并且不使用需要优先处理音频和视频的多媒体应用程序，请将其禁用。在极少数情况下，这可能会略微减少系统事件和负载（例如在使用带有 NetAdapterCX 的网络适配器时），但效果取决于系统配置。可能会导致音频卡顿、音视频不同步以及其他播放问题。</v:String>
-    <v:String x:Key="tgl33_desc_svc">如果您不在应用程序中使用地理位置功能，请将其禁用。该服务通过 GPS、Wi-Fi 和 IP 地址确定您的位置。禁用后，依赖位置的功能将停止工作：天气、地图、自动时区。请注意，某些与地理位置计划任务交互的系统及第三方应用程序，可能会在打开时无法启动或崩溃。如果禁用后遇到此类问题，请重新启用该服务。</v:String>
+    <v:String x:Key="tgl33_desc_svc">如果您在应用中不使用定位功能，请将其禁用。此服务通过 GPS、Wi-Fi 和 IP 地址确定您的位置。禁用后，依赖位置的功能将停止运作：天气、地图、自动时区。依赖定位的第三方软件也可能崩溃或无法打开。如果遇到此类问题，请重新启用该服务。</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

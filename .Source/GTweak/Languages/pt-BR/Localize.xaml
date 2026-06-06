@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
-    <v:String x:Key="defaultDescription">Passe o mouse sobre qualquer ajuste para obter sua descrição</v:String>
-    <v:String x:Key="defaultDescriptionApp">Passe o mouse sobre o ícone de qualquer aplicativo para ver seu nome</v:String>
-    <v:String x:Key="btn_default">Padrão</v:String>
-    <v:String x:Key="btn_change">Alterar</v:String>
-    
+    <v:String x:Key="default_desc">Passe o mouse sobre qualquer ajuste para obter sua descrição</v:String>
+    <v:String x:Key="default_app_desc">Passe o mouse sobre o ícone de qualquer aplicativo para ver seu nome</v:String>
     <v:String x:Key="label_target_status">Parâmetro</v:String>
     <v:String x:Key="status_active">ATIVO</v:String>
     <v:String x:Key="status_disabled">DESATIVADO</v:String>
-    
+
+    <v:String x:Key="btn_default">Padrão</v:String>
+    <v:String x:Key="btn_change">Alterar</v:String>
+
     <!--#region Load Window -->
     <v:String x:Key="title_load">Carregando</v:String>
     <v:String x:Key="step1_load">Preparando o ambiente</v:String>
@@ -441,7 +441,7 @@
     <v:String x:Key="tgl30_desc_svc">Desative se não utilizar o dispositivo em uma loja para demonstrar recursos do Windows. O serviço Store Demo gerencia a exibição de conteúdo de demonstração e recursos interativos destinados apenas a exibições em lojas e testes. Este serviço não é necessário para o uso diário do computador.</v:String>
     <v:String x:Key="tgl31_desc_svc">Desative se você não pretende atualizar ou não usa o Microsoft Edge. Isso também interrompe as atualizações automáticas do WebView2 Runtime — esses componentes usam o mesmo mecanismo de atualização e são fortemente interdependentes.</v:String>
     <v:String x:Key="tgl32_desc_svc">Desative se entender as possíveis consequências e não utilizar aplicativos multimídia que exigem processamento prioritário de áudio e vídeo. Em casos raros, isso pode reduzir ligeiramente o número de eventos do sistema e a carga (por exemplo, ao usar adaptadores de rede com NetAdapterCX); no entanto, o efeito depende da configuração do sistema. Pode causar falhas de áudio, dessincronia de áudio/vídeo e outros problemas de reprodução.</v:String>
-    <v:String x:Key="tgl33_desc_svc">Desative se você não usa geolocalização em aplicativos. O serviço determina sua localização via GPS, Wi-Fi e endereço IP. Quando desativado, os recursos dependentes de localização deixarão de funcionar: clima, mapas, fuso horário automático. Observe que alguns aplicativos do sistema e de terceiros que interagem com as tarefas de geolocalização podem falhar ao iniciar ou travar ao abrir. Se você encontrar isso após desativar — reative o serviço.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Desative se você não usa a geolocalização em aplicativos. O serviço determina sua localização via GPS, Wi-Fi e endereço IP. Ao desativar, os recursos dependentes de localização pararão de funcionar: clima, mapas, fuso horário automático. Softwares de terceiros que dependem da geolocalização também podem fechar inesperadamente ou não abrir. Se encontrar problemas, ative o serviço novamente.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

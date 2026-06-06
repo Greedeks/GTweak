@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
-    <v:String x:Key="defaultDescription">העבר את העכבר מעל טוויק כלשהו כדי לקבל את תיאורו</v:String>
-    <v:String x:Key="defaultDescriptionApp">העבר את העכבר מעל הסמל של אפליקציה כלשהי כדי לראות את שמה</v:String>
-    <v:String x:Key="btn_default">ברירת מחדל</v:String>
-    <v:String x:Key="btn_change">שינוי</v:String>
-
+    <v:String x:Key="default_desc">העבר את העכבר מעל טוויק כלשהו כדי לקבל את תיאורו</v:String>
+    <v:String x:Key="default_app_desc">העבר את העכבר מעל הסמל של אפליקציה כלשהי כדי לראות את שמה</v:String>
     <v:String x:Key="label_target_status">Parameter</v:String>
     <v:String x:Key="status_active">ACTIVE</v:String>
     <v:String x:Key="status_disabled">DISABLED</v:String>
+
+    <v:String x:Key="btn_default">ברירת מחדל</v:String>
+    <v:String x:Key="btn_change">שינוי</v:String>
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">טעינה</v:String>
@@ -441,7 +441,7 @@
     <v:String x:Key="tgl30_desc_svc">השבת אם אינך משתמש במכשיר בחנות להדגמת תכונות Windows. שירות Store Demo מנהל את הצגת תוכן ההדגמה והתכונות האינטראקטיביות המיועדות רק לתצוגות חנות ולבדיקה. שירות זה אינו נחוץ לשימוש יומיומי במחשב.</v:String>
     <v:String x:Key="tgl31_desc_svc">השבת אם אינך מתכנן לעדכן או אינך משתמש ב-Microsoft Edge. פעולה זו גם עוצרת עדכונים אוטומטיים של WebView2 Runtime - רכיבים אלו משתמשים באותו מנגנון עדכון ותלויים זה בזה הדוקות.</v:String>
     <v:String x:Key="tgl32_desc_svc">השבת אם אתה מבין את ההשלכות האפשריות ואינך משתמש ביישומי מולטימדיה הדורשים עיבוד אודיו ווידאו עם עדיפות. במקרים נדירים זה עשוי להפחית מעט את מספר אירועי המערכת ואת העומס (לדוגמה, בשימוש במתאמי רשת עם NetAdapterCX); עם זאת, האפקט תלוי בתצורת המערכת. הדבר עלול לגרום לגמגום באודיו, חוסר סנכרון בין אודיו לווידאו ובעיות הפעלה אחרות.</v:String>
-    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in applications. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Note that some system and third-party applications that interact with geolocation tasks may fail to launch or crash upon opening. If you encounter this after disabling - re-enable the service.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in apps. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Third-party software depending on geolocation may also crash or fail to open. If you experience this, turn the service back on.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

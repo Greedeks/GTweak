@@ -85,7 +85,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <uc:DescriptionBlock VerticalAlignment="Stretch" x:Name="DescBlock" DefaultText="{DynamicResource defaultDescription}"/>
+            <uc:DescriptionBlock VerticalAlignment="Stretch" x:Name="DescBlock" DefaultText="{DynamicResource default_desc}"/>
         </Grid>
 
     </Grid>

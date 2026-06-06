@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
-    <v:String x:Key="defaultDescription">Hover your mouse over any tweak to get its description</v:String>
-    <v:String x:Key="defaultDescriptionApp">Hover your mouse over the icon of any application to see its name</v:String>
-    <v:String x:Key="btn_default">Default</v:String>
-    <v:String x:Key="btn_change">Change</v:String>
-
+    <v:String x:Key="default_desc">Hover your mouse over any tweak to get its description</v:String>
+    <v:String x:Key="default_app_desc">Hover your mouse over the icon of any application to see its name</v:String>
     <v:String x:Key="label_target_status">Parameter</v:String>
     <v:String x:Key="status_active">ACTIVE</v:String>
     <v:String x:Key="status_disabled">DISABLED</v:String>
+
+    <v:String x:Key="btn_default">Default</v:String>
+    <v:String x:Key="btn_change">Change</v:String>
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">Loading</v:String>
@@ -441,7 +441,7 @@
     <v:String x:Key="tgl30_desc_svc">Disable if you do not use the device in a store to demonstrate Windows features. The Store Demo service manages the display of demo content and interactive features intended only for store displays and testing. This service is not needed for everyday use of the computer.</v:String>
     <v:String x:Key="tgl31_desc_svc">Disable if you do not plan to update or do not use Microsoft Edge. This also stops automatic updates for the WebView2 Runtime - these components use the same update mechanism and are tightly interdependent.</v:String>
     <v:String x:Key="tgl32_desc_svc">Disable if you understand the possible consequences and do not use multimedia applications that require prioritized audio and video processing. In rare cases this may slightly reduce the number of system events and the load (for example, when using network adapters with NetAdapterCX); however, the effect depends on system configuration. It may cause audio stuttering, audio/video desynchronization, and other playback issues.</v:String>
-    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in applications. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Note that some system and third-party applications that interact with geolocation tasks may fail to launch or crash upon opening. If you encounter this after disabling - re-enable the service.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in apps. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Third-party software depending on geolocation may also crash or fail to open. If you experience this, turn the service back on.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
@@ -452,7 +452,7 @@
     <v:String x:Key="tgl1_sys">Enhance pointer precision</v:String>
     <v:String x:Key="tgl2_sys">Sticky Keys and Filter Keys</v:String>
     <v:String x:Key="tgl3_sys">Windows Defender, Antimalware, SmartScreen and VBS</v:String>
-    <v:String x:Key="tgl4_sys">UAC (User Account Control)</v:String>
+    <v:String x:Key="tgl4_sys">User Account Control (UAC)</v:String>
     <v:String x:Key="tgl5_sys">Security notifications from the Notification Center</v:String>
     <v:String x:Key="tgl6_sys">Automatically update apps from the Microsoft Store</v:String>
     <v:String x:Key="tgl7_sys">Sound delay in the Realtek Sound driver</v:String>

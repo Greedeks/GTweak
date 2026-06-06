@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
-    <v:String x:Key="defaultDescription">Najedź kursorem myszy na dowolną poprawkę, aby zobaczyć jej opis</v:String>
-    <v:String x:Key="defaultDescriptionApp">Najedź kursorem myszy na ikonę dowolnej aplikacji, aby zobaczyć jej nazwę</v:String>
-    <v:String x:Key="btn_default">Domyślne</v:String>
-    <v:String x:Key="btn_change">Zmień</v:String>
-
+    <v:String x:Key="default_desc">Najedź kursorem myszy na dowolną poprawkę, aby zobaczyć jej opis</v:String>
+    <v:String x:Key="default_app_desc">Najedź kursorem myszy na ikonę dowolnej aplikacji, aby zobaczyć jej nazwę</v:String>
     <v:String x:Key="label_target_status">Parametr</v:String>
     <v:String x:Key="status_active">AKTYWNY</v:String>
     <v:String x:Key="status_disabled">WYŁĄCZONY</v:String>
+
+    <v:String x:Key="btn_default">Domyślne</v:String>
+    <v:String x:Key="btn_change">Zmień</v:String>
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">Ładowanie</v:String>
@@ -441,7 +441,7 @@
     <v:String x:Key="tgl30_desc_svc">Wyłącz, jeśli nie używasz urządzenia w sklepie do prezentacji funkcji systemu Windows. Usługa Store Demo zarządza wyświetlaniem treści demonstracyjnych i funkcji interaktywnych przeznaczonych wyłącznie na wystawy sklepowe oraz do celów testowych. Usługa ta nie jest potrzebna do codziennego użytkowania komputera.</v:String>
     <v:String x:Key="tgl31_desc_svc">Wyłącz, jeśli nie zamierzasz aktualizować lub nie używasz Microsoft Edge. Spowoduje to również zatrzymanie automatycznych aktualizacji środowiska WebView2 Runtime — te komponenty korzystają z tego samego mechanizmu aktualizacji i są od siebie silnie zależne.</v:String>
     <v:String x:Key="tgl32_desc_svc">Wyłącz, jeśli rozumiesz możliwe konsekwencje i nie używasz aplikacji multimedialnych wymagających priorytetowego przetwarzania dźwięku i obrazu. W rzadkich przypadkach może to nieznacznie zmniejszyć liczbę zdarzeń systemowych i obciążenie (na przykład przy użyciu adapterów sieciowych z NetAdapterCX); efekt zależy jednak od konfiguracji systemu. Może powodować zacinanie się dźwięku, desynchronizację audio/wideo i inne problemy z odtwarzaniem.</v:String>
-    <v:String x:Key="tgl33_desc_svc">Wyłącz, jeśli nie używasz geolokalizacji w aplikacjach. Usługa określa Twoją lokalizację za pomocą GPS, Wi-Fi i adresu IP. Po wyłączeniu przestaną działać funkcje zależne od lokalizacji: pogoda, mapy, automatyczna strefa czasowa. Należy pamiętać, że niektóre aplikacje systemowe i innych firm współpracujące z zadaniami geolokalizacji mogą nie uruchamiać się lub ulegać awarii podczas otwierania. Jeśli po wyłączeniu napotkasz taki problem — włącz usługę ponownie.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Wyłącz, jeśli nie używasz geolokalizacji w aplikacjach. Usługa określa Twoją lokalizację za pomocą GPS, Wi-Fi i adresu IP. Po wyłączeniu funkcje zależne od lokalizacji przestaną działać: pogoda, mapy, automatyczna strefa czasowa. Oprogramowanie firm trzecich zależne od geolokalizacji może również się zawieszać lub nie otwierać. W przypadku wystąpienia takich problemów włącz usługę ponownie.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

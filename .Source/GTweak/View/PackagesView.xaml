@@ -118,7 +118,7 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <uc:DescriptionBlock VerticalAlignment="Stretch" x:Name="DescBlock" DefaultText="{DynamicResource defaultDescriptionApp}"/>
+            <uc:DescriptionBlock VerticalAlignment="Stretch" x:Name="DescBlock" DefaultText="{DynamicResource default_app_desc}"/>
         </Grid>
     </Grid>
 </UserControl>

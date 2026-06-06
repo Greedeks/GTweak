@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
-    <v:String x:Key="defaultDescription">Vigye az egeret bármelyik módosítás fölé, hogy megkapja a leírását</v:String>
-    <v:String x:Key="defaultDescriptionApp">Vigye az egeret bármely alkalmazás ikonja fölé a nevének megtekintéséhez</v:String>
-    <v:String x:Key="btn_default">Alapértelmezett</v:String>
-    <v:String x:Key="btn_change">Módosítás</v:String>
-
+    <v:String x:Key="default_desc">Vigye az egeret bármelyik módosítás fölé, hogy megkapja a leírását</v:String>
+    <v:String x:Key="default_app_desc">Vigye az egeret bármely alkalmazás ikonja fölé a nevének megtekintéséhez</v:String>
     <v:String x:Key="label_target_status">Parameter</v:String>
     <v:String x:Key="status_active">ACTIVE</v:String>
     <v:String x:Key="status_disabled">DISABLED</v:String>
+
+    <v:String x:Key="btn_default">Alapértelmezett</v:String>
+    <v:String x:Key="btn_change">Módosítás</v:String>
 
     <!--#region Load Window -->
     <v:String x:Key="title_load">Betöltés</v:String>
@@ -441,7 +441,7 @@
     <v:String x:Key="tgl30_desc_svc">Ha nem használja az eszközt üzletben a Windows funkciók bemutatására, akkor tiltsa le. A Store Demo szolgáltatás kezeli a bemutató tartalmak és interaktív funkciók megjelenítését, amelyek kizárólag üzletek bemutatói és tesztelése céljára szolgálnak. Ez a szolgáltatás nem szükséges a számítógép mindennapi használatához.</v:String>
     <v:String x:Key="tgl31_desc_svc">Tiltsa le, ha nem tervezi a frissítést, vagy nem használja a Microsoft Edge böngészőt. Ezzel a WebView2 Runtime automatikus frissítése is leáll — ezek az összetevők ugyanazt a frissítési mechanizmust használják és szorosan kölcsönösen függenek egymástól.</v:String>
     <v:String x:Key="tgl32_desc_svc">Tiltsa le, ha érti a lehetséges következményeket, és nem használ olyan multimédiás alkalmazásokat, amelyek prioritást igényelnek a hang és a videó feldolgozásában. Ritka esetekben ez kissé csökkentheti a rendszeresemények számát és a terhelést (például NetAdapterCX-szel rendelkező hálózati adapterek használatakor), azonban a hatás a rendszer konfigurációjától függ. Hangszaggatást, hang/videó szinkronizációs problémákat és egyéb lejátszási hibákat okozhat.</v:String>
-    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in applications. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Note that some system and third-party applications that interact with geolocation tasks may fail to launch or crash upon opening. If you encounter this after disabling - re-enable the service.</v:String>
+    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in apps. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Third-party software depending on geolocation may also crash or fail to open. If you experience this, turn the service back on.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
