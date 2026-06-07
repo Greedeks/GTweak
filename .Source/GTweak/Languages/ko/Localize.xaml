@@ -98,7 +98,7 @@
     <v:String x:Key="cmbox_lang_main">인터페이스 언어:</v:String>
     <v:String x:Key="btn_import">가져오기</v:String>
     <v:String x:Key="btn_export">내보내기</v:String>
-    <v:String x:Key="btn_selfremove">삭제</v:String>
+    <v:String x:Key="btn_selfremove">자동 삭제</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->

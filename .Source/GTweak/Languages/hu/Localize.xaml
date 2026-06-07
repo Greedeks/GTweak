@@ -98,7 +98,7 @@
     <v:String x:Key="cmbox_lang_main">Interfész nyelve:</v:String>
     <v:String x:Key="btn_import">Importálás</v:String>
     <v:String x:Key="btn_export">Exportálás</v:String>
-    <v:String x:Key="btn_selfremove">Törlés</v:String>
+    <v:String x:Key="btn_selfremove">Öneltávolítás</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->

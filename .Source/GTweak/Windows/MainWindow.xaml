@@ -153,10 +153,17 @@
 
                                 <Border Background="{StaticResource Brush_Separator}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10" Margin="0,10,0,0"/>
 
-                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Width="330">
-                                    <Button Style="{StaticResource ButtonContent}" Height="55" Width="100" PreviewMouseLeftButtonUp="BtnExport_PreviewMouseLeftButtonUp" Cursor="Hand">
-                                        <Viewbox Stretch="Uniform" Margin="-2">
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel Orientation="Vertical" Margin="0,12,0,0" Width="330">
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="8"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Grid.Column="0" Style="{StaticResource ButtonContent}" Height="34" PreviewMouseLeftButtonUp="BtnExport_PreviewMouseLeftButtonUp">
+                                            <StackPanel Orientation="Horizontal">
                                                 <Image>
                                                     <Image.Style>
                                                         <Style TargetType="{x:Type Image}">
@@ -164,13 +171,12 @@
                                                         </Style>
                                                     </Image.Style>
                                                 </Image>
-                                                <TextBlock Margin="0,2,0,0" Text="{DynamicResource btn_export}"/>
+                                                <TextBlock Text="{DynamicResource btn_export}" Margin="7,0,0,0" VerticalAlignment="Center"/>
                                             </StackPanel>
-                                        </Viewbox>
-                                    </Button>
-                                    <Button Margin="15,0,0,0" Style="{StaticResource ButtonContent_Inverted}" Height="55" Width="100" PreviewMouseLeftButtonUp="BtnImport_PreviewMouseLeftButtonUp">
-                                        <Viewbox Stretch="Uniform" Margin="-2">
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        </Button>
+
+                                        <Button Grid.Column="2" Style="{StaticResource ButtonContent}" Height="34" PreviewMouseLeftButtonUp="BtnImport_PreviewMouseLeftButtonUp">
+                                            <StackPanel Orientation="Horizontal">
                                                 <Image>
                                                     <Image.Style>
                                                         <Style TargetType="{x:Type Image}">
@@ -178,24 +184,24 @@
                                                         </Style>
                                                     </Image.Style>
                                                 </Image>
-                                                <TextBlock Margin="0,2,0,0" Text="{DynamicResource btn_import}"/>
+                                                <TextBlock Text="{DynamicResource btn_import}" Margin="7,0,0,0" VerticalAlignment="Center"/>
                                             </StackPanel>
-                                        </Viewbox>
+                                        </Button>
+                                    </Grid>
+
+                                    <Button Margin="0,8,0,0" Style="{StaticResource ButtonContent}" Height="34" PreviewMouseLeftButtonUp="BtnDelete_PreviewMouseLeftButtonUp">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image>
+                                                <Image.Style>
+                                                    <Style TargetType="{x:Type Image}">
+                                                        <Setter Property="Source" Value="{StaticResource Icon_SelfRemoval}"/>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <TextBlock Text="{DynamicResource btn_selfremove}" Margin="7,0,0,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
                                     </Button>
-                                    <Button Margin="15,0,0,0" Style="{StaticResource ButtonContent}" Height="55" Width="100" PreviewMouseLeftButtonUp="BtnDelete_PreviewMouseLeftButtonUp">
-                                        <Viewbox Stretch="Uniform" Margin="-2">
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <Image>
-                                                    <Image.Style>
-                                                        <Style TargetType="{x:Type Image}">
-                                                            <Setter Property="Source" Value="{StaticResource Icon_SelfRemoval}"/>
-                                                        </Style>
-                                                    </Image.Style>
-                                                </Image>
-                                                <TextBlock Margin="0,2,0,0" Text="{DynamicResource btn_selfremove}"/>
-                                            </StackPanel>
-                                        </Viewbox>
-                                    </Button>
+
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

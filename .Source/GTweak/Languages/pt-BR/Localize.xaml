@@ -98,7 +98,7 @@
     <v:String x:Key="cmbox_lang_main">Idioma da interface:</v:String>
     <v:String x:Key="btn_import">Importar</v:String>
     <v:String x:Key="btn_export">Exportar</v:String>
-    <v:String x:Key="btn_selfremove">Excluir</v:String>
+    <v:String x:Key="btn_selfremove">Remoção</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->

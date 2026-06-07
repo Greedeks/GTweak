@@ -154,9 +154,13 @@
                             </Border.RenderTransform>
                         </Border>
                         <Border Background="{TemplateBinding Background}" CornerRadius="7">
-                            <Border x:Name="RollTarget" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+                            <Border x:Name="RollTarget" Background="Transparent"
+                                RenderTransformOrigin="0.5,0.5">
                                 <Border.RenderTransform>
-                                    <TranslateTransform x:Name="Translate" Y="0"/>
+                                    <TransformGroup>
+                                        <ScaleTransform x:Name="PressScale" ScaleX="1" ScaleY="1"/>
+                                        <TranslateTransform x:Name="Translate" Y="0"/>
+                                    </TransformGroup>
                                 </Border.RenderTransform>
                                 <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" IsHitTestVisible="False"/>
                             </Border>
@@ -192,6 +196,41 @@
                                 </BeginStoryboard>
                             </MultiDataTrigger.ExitActions>
                         </MultiDataTrigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="EnterPress">
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <DoubleAnimation Storyboard.TargetName="PressScale" Storyboard.TargetProperty="ScaleX" To="0.92" Duration="0:0:0.12">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="PressScale" Storyboard.TargetProperty="ScaleY" To="0.92" Duration="0:0:0.12">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="EnterPress"/>
+                                <BeginStoryboard>
+                                    <Storyboard Timeline.DesiredFrameRate="120">
+                                        <DoubleAnimation Storyboard.TargetName="PressScale" Storyboard.TargetProperty="ScaleX" To="1.0" Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="PressScale" Storyboard.TargetProperty="ScaleY" To="1.0" Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
