@@ -241,77 +241,96 @@ namespace GTweak.Utilities.Helpers
 
         internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath, bool showWindow = false)
         {
-            ImpersonateSystem();
+            Exception lastException = null;
+            bool impersonated = false;
 
-            STARTUPINFOEX siEx = new STARTUPINFOEX();
-            IntPtr lpSize = IntPtr.Zero;
-            IntPtr lpValueProc = IntPtr.Zero;
-            IntPtr parentHandle = IntPtr.Zero;
-
-            InitializeProcThreadAttributeList(IntPtr.Zero, 1, 0, ref lpSize);
-            siEx.lpAttributeList = Marshal.AllocHGlobal(lpSize);
-
-            try
+            for (int attempt = 0; attempt < 3; attempt++)
             {
-                if (!InitializeProcThreadAttributeList(siEx.lpAttributeList, 1, 0, ref lpSize))
+                STARTUPINFOEX siEx = new STARTUPINFOEX();
+                IntPtr lpSize = IntPtr.Zero;
+                IntPtr lpValueProc = IntPtr.Zero;
+                IntPtr parentHandle = IntPtr.Zero;
+
+                InitializeProcThreadAttributeList(IntPtr.Zero, 1, 0, ref lpSize);
+                siEx.lpAttributeList = Marshal.AllocHGlobal(lpSize);
+
+                try
                 {
-                    throw new Win32Exception(Marshal.GetLastWin32Error());
+                    if (!impersonated)
+                    {
+                        impersonated = ImpersonateSystem();
+                    }
+
+                    if (!impersonated)
+                    {
+                        throw new Win32Exception("Failed to impersonate SYSTEM identity");
+                    }
+
+                    if (!InitializeProcThreadAttributeList(siEx.lpAttributeList, 1, 0, ref lpSize))
+                    {
+                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+
+                    parentHandle = OpenProcess(ProcessAccessFlags.CreateProcess | ProcessAccessFlags.DuplicateHandle, false, parentProcessId);
+                    if (parentHandle == IntPtr.Zero)
+                    {
+                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+
+                    lpValueProc = Marshal.AllocHGlobal(IntPtr.Size);
+                    Marshal.WriteIntPtr(lpValueProc, parentHandle);
+
+                    if (!UpdateProcThreadAttribute(siEx.lpAttributeList, 0, (IntPtr)PROC_THREAD_ATTRIBUTE_PARENT_PROCESS, lpValueProc, (IntPtr)IntPtr.Size, IntPtr.Zero, IntPtr.Zero))
+                    {
+                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+
+                    SECURITY_ATTRIBUTES ps = new SECURITY_ATTRIBUTES();
+                    SECURITY_ATTRIBUTES ts = new SECURITY_ATTRIBUTES();
+                    ps.nLength = Marshal.SizeOf(ps);
+                    ts.nLength = Marshal.SizeOf(ts);
+
+                    siEx.StartupInfo = new STARTUPINFO
+                    {
+                        cb = Marshal.SizeOf(typeof(STARTUPINFO)),
+                        dwFlags = 0x00000001,
+                        wShowWindow = showWindow ? (short)5 : (short)0
+                    };
+
+                    if (!CreateProcess(null, binaryPath, ref ps, ref ts, true, EXTENDED_STARTUPINFO_PRESENT, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo))
+                    {
+                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+
+                    CloseHandle(pInfo.hProcess);
+                    CloseHandle(pInfo.hThread);
+                    return;
                 }
-
-                parentHandle = OpenProcess(ProcessAccessFlags.CreateProcess | ProcessAccessFlags.DuplicateHandle, false, parentProcessId);
-                if (parentHandle == IntPtr.Zero)
+                catch (Exception ex)
                 {
-                    throw new Win32Exception(Marshal.GetLastWin32Error());
+                    lastException = ex;
                 }
-
-                lpValueProc = Marshal.AllocHGlobal(IntPtr.Size);
-                Marshal.WriteIntPtr(lpValueProc, parentHandle);
-
-                if (!UpdateProcThreadAttribute(siEx.lpAttributeList, 0, (IntPtr)PROC_THREAD_ATTRIBUTE_PARENT_PROCESS, lpValueProc, (IntPtr)IntPtr.Size, IntPtr.Zero, IntPtr.Zero))
+                finally
                 {
-                    throw new Win32Exception(Marshal.GetLastWin32Error());
+                    if (lpValueProc != IntPtr.Zero)
+                    {
+                        Marshal.FreeHGlobal(lpValueProc);
+                    }
+
+                    if (parentHandle != IntPtr.Zero)
+                    {
+                        CloseHandle(parentHandle);
+                    }
+
+                    if (siEx.lpAttributeList != IntPtr.Zero)
+                    {
+                        DeleteProcThreadAttributeList(siEx.lpAttributeList);
+                        Marshal.FreeHGlobal(siEx.lpAttributeList);
+                    }
                 }
-
-                SECURITY_ATTRIBUTES ps = new SECURITY_ATTRIBUTES();
-                SECURITY_ATTRIBUTES ts = new SECURITY_ATTRIBUTES();
-                ps.nLength = Marshal.SizeOf(ps);
-                ts.nLength = Marshal.SizeOf(ts);
-
-                siEx.StartupInfo = new STARTUPINFO
-                {
-                    cb = Marshal.SizeOf(typeof(STARTUPINFO)),
-                    dwFlags = 0x00000001,
-                    wShowWindow = showWindow ? (short)5 : (short)0
-                };
-
-                uint creationFlags = EXTENDED_STARTUPINFO_PRESENT;
-
-                if (!CreateProcess(null, binaryPath, ref ps, ref ts, true, creationFlags, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo))
-                {
-                    throw new Win32Exception(Marshal.GetLastWin32Error());
-                }
-
-                CloseHandle(pInfo.hProcess);
-                CloseHandle(pInfo.hThread);
             }
-            finally
-            {
-                if (lpValueProc != IntPtr.Zero)
-                {
-                    Marshal.FreeHGlobal(lpValueProc);
-                }
 
-                if (parentHandle != IntPtr.Zero)
-                {
-                    CloseHandle(parentHandle);
-                }
-
-                if (siEx.lpAttributeList != IntPtr.Zero)
-                {
-                    DeleteProcThreadAttributeList(siEx.lpAttributeList);
-                    Marshal.FreeHGlobal(siEx.lpAttributeList);
-                }
-            }
+            throw lastException ?? new Win32Exception("CreateProcessAsTrustedInstaller failed after 3 attempts");
         }
     }
 }
