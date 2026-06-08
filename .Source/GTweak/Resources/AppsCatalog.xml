@@ -45,6 +45,17 @@
     </App>
 
     <App>
+        <Icon>Img_Rapr</Icon>
+        <Name>Driver Store Explorer</Name>
+        <Group>github</Group>
+        <Author>lostindark</Author>
+        <AuthorIcon>https://github.com/lostindark.png</AuthorIcon>
+        <Source>https://github.com/lostindark/DriverStoreExplorer</Source>
+        <DownloadPath>lostindark/DriverStoreExplorer</DownloadPath>
+        <FilePattern><![CDATA[(?i)DriverStoreExplorer.*\.zip$]]></FilePattern>
+    </App>
+    
+    <App>
         <Icon>Img_NvidiaPI</Icon>
         <Name>NVIDIA Profile Inspector</Name>
         <Group>github</Group>
@@ -86,7 +97,7 @@
         <DownloadPath>pbatard/rufus</DownloadPath>
         <FilePattern><![CDATA[(?i)rufus-.*?p\.exe$]]></FilePattern>
     </App>
-
+    
     <App>
         <Icon>Img_SystemInfo</Icon>
         <Name>SystemInformer</Name>
