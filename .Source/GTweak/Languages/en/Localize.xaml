@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Update - GTweak</v:String>
     <v:String x:Key="title_update">An update was found</v:String>
     <v:String x:Key="btn_upd">Update</v:String>
-    <v:String x:Key="download_update">Downloading</v:String>
-    <v:String x:Key="noty_update">Please wait for the download to complete</v:String>
-    <v:String x:Key="connection_update">Connecting to the server</v:String>
+    <v:String x:Key="connecting">Connecting</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">Сancel</v:String>
     <v:String x:Key="btn_open_dir">Open folder</v:String>
     <v:String x:Key="text_ts">Search by name or author</v:String>
-    <v:String x:Key="connecting_ts">Connecting</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">อัปเดต - GTweak</v:String>
     <v:String x:Key="title_update">พบอัปเดต</v:String>
     <v:String x:Key="btn_upd">อัปเดต</v:String>
-    <v:String x:Key="download_update">กำลังดาวน์โหลด</v:String>
-    <v:String x:Key="noty_update">โปรดรอให้การดาวน์โหลดเสร็จสมบูรณ์</v:String>
-    <v:String x:Key="connection_update">กำลังเชื่อมต่อกับเซิร์ฟเวอร์</v:String>
+    <v:String x:Key="connecting">กำลังเชื่อมต่อ</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">ยกเลิก</v:String>
     <v:String x:Key="btn_open_dir">เปิดโฟลเดอร์</v:String>
     <v:String x:Key="text_ts">ค้นหาตามชื่อหรือผู้เขียน</v:String>
-    <v:String x:Key="connecting_ts">กำลังเชื่อมต่อ</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

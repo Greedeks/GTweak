@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Оновити - GTweak</v:String>
     <v:String x:Key="title_update">Знайдено оновлення</v:String>
     <v:String x:Key="btn_upd">Оновити</v:String>
-    <v:String x:Key="download_update">Завантаження</v:String>
-    <v:String x:Key="noty_update">Будь ласка, дочекайтеся завершення завантаження</v:String>
-    <v:String x:Key="connection_update">Підключення до сервера</v:String>
+    <v:String x:Key="connecting">Підключення</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">Скасувати</v:String>
     <v:String x:Key="btn_open_dir">Відкрити папку</v:String>
     <v:String x:Key="text_ts">Пошук за назвою або автором</v:String>
-    <v:String x:Key="connecting_ts">Підключення</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

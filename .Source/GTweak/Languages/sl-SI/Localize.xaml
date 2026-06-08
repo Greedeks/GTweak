@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Posodobitev - GTweak</v:String>
     <v:String x:Key="title_update">Najdena je bila posodobitev</v:String>
     <v:String x:Key="btn_upd">Posodobi</v:String>
-    <v:String x:Key="download_update">Prenos</v:String>
-    <v:String x:Key="noty_update">Počakajte na dokončanje prenosa</v:String>
-    <v:String x:Key="connection_update">Povezovanje s strežnikom</v:String>
+    <v:String x:Key="connecting">Povezovanje</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">Prekliči</v:String>
     <v:String x:Key="btn_open_dir">Odpri mapo</v:String>
     <v:String x:Key="text_ts">Iskanje po imenu ali avtorju</v:String>
-    <v:String x:Key="connecting_ts">Povezovanje</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">עדכון - GTweak</v:String>
     <v:String x:Key="title_update">נמצא עדכון</v:String>
     <v:String x:Key="btn_upd">עדכן</v:String>
-    <v:String x:Key="download_update">מוריד</v:String>
-    <v:String x:Key="noty_update">אנא המתן לסיום ההורדה</v:String>
-    <v:String x:Key="connection_update">מתחבר לשרת</v:String>
+    <v:String x:Key="connecting">מתחבר</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">בטל</v:String>
     <v:String x:Key="btn_open_dir">פתח תיקייה</v:String>
     <v:String x:Key="text_ts">חפש לפי שם או מחבר</v:String>
-    <v:String x:Key="connecting_ts">מתחבר</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

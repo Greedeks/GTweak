@@ -149,7 +149,10 @@ namespace GTweak.Core.ViewModel
 
         public MainWinViewModel()
         {
-            App.TweaksImported += delegate { CurrentView = new UtilsView(); };
+            App.TweaksImported += delegate
+            {
+                CurrentView = new UtilsView();
+            };
 
             CurrentView = new UtilsView();
 

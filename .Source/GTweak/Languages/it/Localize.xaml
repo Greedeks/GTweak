@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Aggiornamento - GTweak</v:String>
     <v:String x:Key="title_update">Aggiornamento trovato</v:String>
     <v:String x:Key="btn_upd">Aggiorna</v:String>
-    <v:String x:Key="download_update">Scaricamento</v:String>
-    <v:String x:Key="noty_update">Attendere il completamento del download</v:String>
-    <v:String x:Key="connection_update">Connessione al server</v:String>
+    <v:String x:Key="connecting">Connessione</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">Annulla</v:String>
     <v:String x:Key="btn_open_dir">Apri cartella</v:String>
     <v:String x:Key="text_ts">Cerca per nome o autore</v:String>
-    <v:String x:Key="connecting_ts">Connessione</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

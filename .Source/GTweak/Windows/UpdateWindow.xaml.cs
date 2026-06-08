@@ -12,7 +12,7 @@ namespace GTweak.Windows
 {
     public partial class UpdateWindow : FluentWindow
     {
-        public string DownloadVersion { get; set; } = HardwareProvider.DownloadVersion;
+        public string DownloadVersion { get; set; } = NetworkProvider.DownloadVersion;
 
         public UpdateWindow()
         {
@@ -38,7 +38,7 @@ namespace GTweak.Windows
                 webClient.DownloadProgressChanged += (_, e) =>
                 {
                     ProgressDownload.Value = e.ProgressPercentage;
-                    SizeByte.Text = $"{Math.Round(e.BytesReceived / 1024.0)} KB / {Math.Round(e.TotalBytesToReceive / 1024.0)} KB";
+                    SizeByte.Text = $"{e.BytesReceived / 1048576.0:F1} MB / {e.TotalBytesToReceive / 1048576.0:F1} MB";
                 };
                 webClient.DownloadFileCompleted += delegate
                 {

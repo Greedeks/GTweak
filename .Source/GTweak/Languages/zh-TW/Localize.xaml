@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">更新 - GTweak</v:String>
     <v:String x:Key="title_update">已找到更新</v:String>
     <v:String x:Key="btn_upd">更新</v:String>
-    <v:String x:Key="download_update">正在下載</v:String>
-    <v:String x:Key="noty_update">請等待下載完成</v:String>
-    <v:String x:Key="connection_update">正在連接伺服器</v:String>
+    <v:String x:Key="connecting">連線中</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">取消</v:String>
     <v:String x:Key="btn_open_dir">開啟資料夾</v:String>
     <v:String x:Key="text_ts">依名稱或作者搜尋</v:String>
-    <v:String x:Key="connecting_ts">連線中</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

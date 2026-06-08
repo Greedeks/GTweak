@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Frissítés - GTweak</v:String>
     <v:String x:Key="title_update">Frissítés található</v:String>
     <v:String x:Key="btn_upd">Frissítés</v:String>
-    <v:String x:Key="download_update">Letöltés</v:String>
-    <v:String x:Key="noty_update">Kérjük, várja meg a letöltés befejezését</v:String>
-    <v:String x:Key="connection_update">Csatlakozás a szerverhez</v:String>
+    <v:String x:Key="connecting">Csatlakozás</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">Mégse</v:String>
     <v:String x:Key="btn_open_dir">Mappa megnyitása</v:String>
     <v:String x:Key="text_ts">Keresés név vagy szerző szerint</v:String>
-    <v:String x:Key="connecting_ts">Csatlakozás</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

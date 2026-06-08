@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">업데이트 - GTweak</v:String>
     <v:String x:Key="title_update">업데이트가 발견되었습니다</v:String>
     <v:String x:Key="btn_upd">업데이트</v:String>
-    <v:String x:Key="download_update">다운로드</v:String>
-    <v:String x:Key="noty_update">다운로드가 완료될 때까지 기다려주세요</v:String>
-    <v:String x:Key="connection_update">서버에 연결</v:String>
+    <v:String x:Key="connecting">연결 중</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">취소</v:String>
     <v:String x:Key="btn_open_dir">폴더 열기</v:String>
     <v:String x:Key="text_ts">이름 또는 작성자로 검색</v:String>
-    <v:String x:Key="connecting_ts">연결 중</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

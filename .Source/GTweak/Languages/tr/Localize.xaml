@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Güncelleme - GTweak</v:String>
     <v:String x:Key="title_update">Yeni bir güncelleme bulundu</v:String>
     <v:String x:Key="btn_upd">Güncelle</v:String>
-    <v:String x:Key="download_update">İndiriliyor</v:String>
-    <v:String x:Key="noty_update">Lütfen indirme işleminin tamamlanmasını bekleyin</v:String>
-    <v:String x:Key="connection_update">Sunucuya bağlanılıyor</v:String>
+    <v:String x:Key="connecting">Bağlanılıyor</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">İptal</v:String>
     <v:String x:Key="btn_open_dir">Klasörü aç</v:String>
     <v:String x:Key="text_ts">Ada veya yazara göre ara</v:String>
-    <v:String x:Key="connecting_ts">Bağlanılıyor</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

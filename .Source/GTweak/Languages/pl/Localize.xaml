@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Aktualizacja - GTweak</v:String>
     <v:String x:Key="title_update">Znaleziono aktualizację</v:String>
     <v:String x:Key="btn_upd">Aktualizuj</v:String>
-    <v:String x:Key="download_update">Pobieranie</v:String>
-    <v:String x:Key="noty_update">Proszę poczekać na zakończenie pobierania</v:String>
-    <v:String x:Key="connection_update">Łączenie z serwerem</v:String>
+    <v:String x:Key="connecting">Łączenie</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -177,7 +175,7 @@
     <v:String x:Key="tgl18_conf">Prowadzenie rejestru zachowania użytkownika</v:String>
     <v:String x:Key="tgl19_conf">Zbieranie danych i aktualizacje w tle map offline</v:String>
     <v:String x:Key="tgl20_conf">Zbieranie i monitorowanie telemetrii Intel</v:String>
-
+    
     <v:String x:Key="tgl1_desc_conf">System Windows tworzy unikalny identyfikator reklamowy dla każdego użytkownika w celu śledzenia jego działań. Jest on używany przez deweloperów aplikacji i sam Windows do własnych celów, w tym do wyświetlania spersonalizowanych reklam w aplikacjach.</v:String>
     <v:String x:Key="tgl2_desc_conf">Nawet korzystając z konta lokalnego, system Windows stale próbuje synchronizować dane z serwerami Microsoft. Dotyczy to m.in.: motywów, haseł, ustawień systemu Windows, ustawień przeglądarki, ustawień paska języka, ustawień ułatwień dostępu i innych ustawień dodatkowych.</v:String>
     <v:String x:Key="tgl3_desc_conf">Telemetria (dane diagnostyczne) to dane, które system Windows automatycznie gromadzi i wysyła na serwery Microsoft, czyli w skrócie: „Co? Gdzie? Dlaczego i kiedy tego używasz?". Microsoft twierdzi, że dane są anonimowe i pomagają rozwijać system Windows. Nawet jeśli nie martwi Cię sam fakt zbierania informacji, może pojawić się inny problem — nadmierne obciążenie procesora, które z kolei spowalnia system.</v:String>
@@ -203,20 +201,24 @@
     <!--#region Interface Page -->
     <v:String x:Key="color1_intf">Kolor zaznaczenia kursorem:</v:String>
     <v:String x:Key="color2_intf">Kolor podpowiedzi:</v:String>
+    
     <v:String x:Key="exblock1_intf">Elementy nawigacji Eksploratora:</v:String>
     <v:String x:Key="chk_home_intf">Strona główna</v:String>
     <v:String x:Key="chk_gallery_intf">Galeria</v:String>
+
     <v:String x:Key="exblock2_intf">Ustawienia wyświetlania Eksploratora plików:</v:String>
     <v:String x:Key="chk_hidden_intf">Pokazuj ukryte pliki i foldery</v:String>
     <v:String x:Key="chk_system_intf">Pokazuj ukryte chronione pliki systemowe</v:String>
     <v:String x:Key="chk_extension_intf">Wyświetlaj rozszerzenia nazw plików</v:String>
     <v:String x:Key="chk_emptydrives_intf">Wyświetlaj puste dyski</v:String>
+
     <v:String x:Key="exblock3_intf">Wyświetlanie ikon pulpitu:</v:String>
     <v:String x:Key="chk_pc_intf">Ten komputer</v:String>
     <v:String x:Key="chk_net_intf">Sieć</v:String>
     <v:String x:Key="chk_trash_intf">Kosz</v:String>
     <v:String x:Key="chk_panel_intf">Panel sterowania</v:String>
     <v:String x:Key="chk_user_intf">Pliki użytkownika</v:String>
+
     <v:String x:Key="tgl1_intf">Standardowy rozmiar przycisków systemowych</v:String>
     <v:String x:Key="tgl2_intf">Standardowa częstotliwość migania kursora</v:String>
     <v:String x:Key="tgl3_intf">Standardowy rozmiar paska przewijania</v:String>
@@ -246,6 +248,7 @@
     <v:String x:Key="tgl27_intf">Wyszukiwanie z integracją «Bing» w menu Start</v:String>
     <v:String x:Key="tgl28_intf">Otwieraj «Szybki dostęp» zamiast «Ten komputer»</v:String>
     <v:String x:Key="tgl29_intf">Samoczynne zmiany jasności</v:String>
+
     <v:String x:Key="color1_desc_intf">Zmienia kolor tła podczas zaznaczania tekstu lub obiektów kursorem w systemie.</v:String>
     <v:String x:Key="color2_desc_intf">Zmienia kolor podpowiedzi w obsługiwanych aplikacjach.</v:String>
     <v:String x:Key="exblock1_desc_intf">Zmienia widoczność wbudowanych elementów systemowych w panelu nawigacji, których nie można odpiąć zwykłymi metodami.</v:String>
@@ -286,6 +289,7 @@
     <v:String x:Key="warn_part1_pkg">Aplikacje zostaną usunięte</v:String>
     <v:String x:Key="warn_part2_pkg">na zawsze,</v:String>
     <v:String x:Key="warn_part3_pkg">ale OneDrive można przywrócić klikając jego ikonę</v:String>
+
     <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
     <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>
     <v:String x:Key="OneNote_pkg">Microsoft Office OneNote</v:String>
@@ -359,6 +363,7 @@
     <v:String x:Key="iHeartRadio_pkg">iHeart: Radio, Muzyka, Podcasty</v:String>
     <v:String x:Key="Pandora_pkg">Pandora</v:String>
     <v:String x:Key="DolbyAccess_pkg">Dolby Access</v:String>
+
     <v:String x:Key="title_over_pkg">Potwierdzenie odinstalowania</v:String>
     <v:String x:Key="text_over_pkg" xml:space="preserve">Zamierzasz odinstalować przeglądarkę Microsoft Edge. Spowoduje to również usunięcie komponentu EdgeWebView, który służy do wyświetlania treści internetowych w różnych aplikacjach — takich jak Microsoft Office (np. Meeting Insights, Room Finder), aplikacja Zdjęcia (nowa wersja używa WebView2), niektóre boty Telegrama i inne programy korzystające z osadzonego WebView. Przed kontynuowaniem upewnij się, że nie potrzebujesz tego komponentu.
        W najnowszych kompilacjach systemu Windows 11 Copilot jest zaimplementowany przez EdgeWebView jako PWA lub nakładka systemowa. Po odinstalowaniu Edge, Copilot również zostaje usunięty, ponieważ działa jako nakładka internetowa.</v:String>
@@ -401,6 +406,7 @@
     <v:String x:Key="tgl31_svc">Usługi związane z aktualizowaniem Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Usługa harmonogramu klas multimediów</v:String>
     <v:String x:Key="tgl33_svc">Usługa geolokalizacji Windows</v:String>
+    
     <v:String x:Key="tgl1_desc_svc">Wyłącz, jeśli nie korzystasz z historii plików i indeksowania zawartości.</v:String>
     <v:String x:Key="tgl2_desc_svc">Wyłącz, jeśli nie korzystasz z Xbox i gamepadów Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Wyłącz, jeśli nie planujesz aktualizować systemu Windows. Oprócz usług, poprawka zmieni pliki odpowiedzialne za aktualizacje Windows. Z tego powodu nawet po włączeniu usług Centrum aktualizacji nie będzie działać. Pamiętaj, że poprawka wpływa na pobieranie i aktualizowanie aplikacji ze Sklepu Windows.</v:String>
@@ -471,6 +477,7 @@
     <v:String x:Key="tgl28_sys">Defragmentacja dysku systemowego</v:String>
     <v:String x:Key="tgl29_sys">Wstrzymaj aktualizacje systemu Windows</v:String>
     <v:String x:Key="tgl30_sys">Multiplane Overlay (MPO)</v:String>
+
     <v:String x:Key="slider1_desc_sys">Zmienia szybkość kursora myszy, oszczędzając czas na szukaniu parametrów myszy.</v:String>
     <v:String x:Key="slider2_desc_sys">Zmieni opóźnienie przed rozpoczęciem powtarzania wprowadzonego znaku, zalecana wartość to 0.</v:String>
     <v:String x:Key="slider3_desc_sys">Zmienia częstotliwość powtarzania wprowadzonego znaku, zalecana wartość to 31.</v:String>
@@ -551,7 +558,6 @@
     <v:String x:Key="btn_cancel">Anuluj</v:String>
     <v:String x:Key="btn_open_dir">Otwórz folder</v:String>
     <v:String x:Key="text_ts">Szukaj według nazwy lub autora</v:String>
-    <v:String x:Key="connecting_ts">Łączenie</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

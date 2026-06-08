@@ -112,9 +112,7 @@
     <v:String x:Key="title_win_update">Обновление - GTweak</v:String>
     <v:String x:Key="title_update">Найдено обновление</v:String>
     <v:String x:Key="btn_upd">Обновить</v:String>
-    <v:String x:Key="download_update">Скачивания</v:String>
-    <v:String x:Key="noty_update">Пожалуйста, дождитесь завершения загрузки</v:String>
-    <v:String x:Key="connection_update">Подключение к серверу</v:String>
+    <v:String x:Key="connecting">Подключение</v:String>
     <!--#endregion-->
 
     <!--#region Utils Page -->
@@ -408,7 +406,7 @@
     <v:String x:Key="tgl31_svc">Службы связанные с обновлением Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Служба планировщика классов мультимедиа</v:String>
     <v:String x:Key="tgl33_svc">Служба геолокации Windows</v:String>
-
+    
     <v:String x:Key="tgl1_desc_svc">Отключайте, если вы не используете историю файлов и индексирование контента.</v:String>
     <v:String x:Key="tgl2_desc_svc">Отключайте, если вы не используете Xbox и геймпады Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">Отключайте, если вы не планируете обновлять Windows. Помимо служб, твик изменит файлы, отвечающие за обновления Windows. Из-за этого, даже если службы будут включены, Центр обновлений работать не будет. Обратите внимание, что твик влияет на скачивание и обновление приложений из Магазина Windows.</v:String>
@@ -560,7 +558,6 @@
     <v:String x:Key="btn_cancel">Отмена</v:String>
     <v:String x:Key="btn_open_dir">Открыть папку</v:String>
     <v:String x:Key="text_ts">Поиск по названию или автору</v:String>
-    <v:String x:Key="connecting_ts">Подключение</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

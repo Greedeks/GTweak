@@ -253,7 +253,6 @@
 
             <Grid Grid.ColumnSpan="2" Panel.ZIndex="100" VerticalAlignment="Top">
                 <Border Margin="0,15,0,50" MinWidth="70" MaxWidth="320" HorizontalAlignment="Left" ClipToBounds="True">
-
                     <ScrollViewer x:Name="NavScroll" Padding="0,0,15,0" SizeChanged="NavigationScrollViewer_SizeChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" FlowDirection="RightToLeft">
                         <StackPanel x:Name="NavPanel" Orientation="Vertical" FlowDirection="LeftToRight" RadioButton.Checked="NavigationRtbn_Checked">
                         
@@ -329,26 +328,25 @@
                 <TranslateTransform Y="-20"/>
             </Grid.RenderTransform>
 
-            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" IsHitTestVisible="False" CornerRadius="10" Panel.ZIndex="0">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" IsHitTestVisible="False" CornerRadius="7" Panel.ZIndex="0">
                 <Border.RenderTransform>
                     <TranslateTransform X="3" Y="4"/>
                 </Border.RenderTransform>
             </Border>
 
-            <Border  Background="{StaticResource Brush_Background_TextBox}" Padding="14,10" CornerRadius="10" Panel.ZIndex="1" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1">
+            <Border Background="{StaticResource Brush_Background_NavPanel}" Padding="14,10" CornerRadius="7" Panel.ZIndex="1" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="0" Background="{StaticResource Brush_Separator}" CornerRadius="2"/>
-
-                    <ui:SymbolIcon Grid.Column="1" Symbol="Pin20" FontSize="25" Foreground="{StaticResource Brush_Accent}" Margin="12,0,10,0" VerticalAlignment="Center"/>
-
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <Border Grid.Column="0" Grid.RowSpan="2" Width="38" Height="38" CornerRadius="8" Background="{StaticResource Brush_Background_Labels}" BorderBrush="{StaticResource Brush_Accent}" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0">
+                        <ui:SymbolIcon Symbol="Pin20" FontSize="20px" Foreground="{StaticResource Brush_Accent}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                  
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock Text="{DynamicResource title_update}" Style="{StaticResource TextDefault}"/>
                         <TextBlock FontSize="13" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}">
                             <Run Text="{Binding CurrentVersion, Mode=OneWay}"/>
@@ -357,7 +355,7 @@
                         </TextBlock>
                     </StackPanel>
 
-                    <Button Grid.Column="3" Style="{StaticResource ButtonContent_Inverted}" Content="{DynamicResource btn_upd}" Height="28" Margin="16,0,0,0" PreviewMouseLeftButtonUp="BtnUpdate_PreviewMouseLeftButtonUp"/>
+                    <Button Grid.Column="2" Style="{StaticResource ButtonContent_Inverted}" Content="{DynamicResource btn_upd}" Height="28" Margin="16,0,0,0" PreviewMouseLeftButtonUp="BtnUpdate_PreviewMouseLeftButtonUp"/>
                 </Grid>
             </Border>
         </Grid>
