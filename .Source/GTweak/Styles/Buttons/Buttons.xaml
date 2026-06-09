@@ -148,14 +148,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Border CornerRadius="7" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Border CornerRadius="7" Opacity="0.4" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <Border.RenderTransform>
                                 <TranslateTransform X="3" Y="6"/>
                             </Border.RenderTransform>
                         </Border>
                         <Border Background="{TemplateBinding Background}" CornerRadius="7">
-                            <Border x:Name="RollTarget" Background="Transparent"
-                                RenderTransformOrigin="0.5,0.5">
+                            <Border x:Name="RollTarget" Background="Transparent" RenderTransformOrigin="0.5,0.5">
                                 <Border.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform x:Name="PressScale" ScaleX="1" ScaleY="1"/>

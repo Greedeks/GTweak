@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using GTweak.Utilities.Controls;
 using GTweak.Windows;
 
@@ -51,10 +52,11 @@ namespace GTweak.Utilities.Managers
         };
 
         private static int _isNotificationOpen;
+
         internal static NotificationBuilder Show(string titleKey = "", string textKey = "")
         {
-            string title = Application.Current.TryFindResource($"title_{titleKey}_noty") as string ?? string.Empty;
-            string text = Application.Current.TryFindResource(textKey) as string ?? string.Empty;
+            string title = Application.Current?.TryFindResource($"title_{titleKey}_noty") as string ?? string.Empty;
+            string text = Application.Current?.TryFindResource(textKey) as string ?? string.Empty;
             return new NotificationBuilder(title, text);
         }
 
@@ -84,7 +86,14 @@ namespace GTweak.Utilities.Managers
             {
                 if (SettingsEngine.IsViewNotification && Interlocked.CompareExchange(ref _isNotificationOpen, 1, 0) == 0)
                 {
-                    await Application.Current.Dispatcher.InvokeAsync(async () =>
+                    Dispatcher dispatcher = Application.Current?.Dispatcher;
+                    if (dispatcher == null)
+                    {
+                        Interlocked.Exchange(ref _isNotificationOpen, 0);
+                        return;
+                    }
+
+                    await dispatcher.InvokeAsync(async () =>
                     {
                         NotificationWindow window = new NotificationWindow
                         {
@@ -95,8 +104,8 @@ namespace GTweak.Utilities.Managers
 
                         if (string.IsNullOrWhiteSpace(window.NoticeTitle) && string.IsNullOrWhiteSpace(window.NoticeText))
                         {
-                            window.NoticeTitle = Application.Current.Resources["title_warn_noty"] as string;
-                            window.NoticeText = Application.Current.Resources[action == NoticeAction.Logout ? "logout_noty" : "restart_noty"] as string;
+                            window.NoticeTitle = (Application.Current?.Resources)?["title_warn_noty"] as string ?? string.Empty;
+                            window.NoticeText = (Application.Current?.Resources)?[action == NoticeAction.Logout ? "logout_noty" : "restart_noty"] as string ?? string.Empty;
                         }
 
                         window.Closed += delegate { Interlocked.Exchange(ref _isNotificationOpen, 0); };
@@ -113,5 +122,4 @@ namespace GTweak.Utilities.Managers
             }
         }
     }
-
 }

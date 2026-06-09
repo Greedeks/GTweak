@@ -10,42 +10,27 @@ namespace GTweak.Utilities.Maintenance
 {
     internal sealed class RegistryExporter
     {
-        internal string[] RegistryPaths = {
+        internal readonly string[] RegistryPaths =
+        {
             @"HKEY_CLASSES_ROOT\*\shellex",
             @"HKEY_CLASSES_ROOT\CLSID",
             @"HKEY_CLASSES_ROOT\Wow6432Node\CLSID",
-            @"HKEY_CLASSES_ROOT\AppID\MicrosoftEdgeUpdate.exe",
-            @"HKEY_CURRENT_USER\Software\Microsoft",
+            @"HKEY_CLASSES_ROOT\AppID",
+            @"HKEY_CURRENT_USER\Software",
+            @"HKEY_CURRENT_USER\System",
             @"HKEY_CURRENT_USER\Control Panel",
-            @"HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion",
-            @"HKEY_CURRENT_USER\Software\Microsoft\EdgeUpdate",
-            @"HKEY_CURRENT_USER\Software\Microsoft\EdgeWebView",
-            @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run",
             @"HKEY_USERS\.DEFAULT\Control Panel",
             @"HKEY_USERS\S-1-5-19\Control Panel",
             @"HKEY_USERS\S-1-5-20\Control Panel",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device",
-            @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge",
-            @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Edge",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Edge Update",
-            @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdate",
-            @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdatem",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeWebView",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeWebView",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft EdgeWebView",
-            @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MicrosoftEdgeElevationService",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Classes\MSEdgeHTM",
-            @"HKEY_LOCAL_MACHINE\SOFTWARE\Clients\StartMenuInternet\Microsoft Edge"
+            @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft",
+            @"HKEY_LOCAL_MACHINE\SOFTWARE\Policies",
+            @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet",
+            @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft",
+            @"HKEY_LOCAL_MACHINE\SOFTWARE\Classes",
+            @"HKEY_LOCAL_MACHINE\SOFTWARE\Clients"
         };
 
-        private bool RegistryKeyExists(string fullPath)
+        private static bool RegistryKeyExists(string fullPath)
         {
             int index = fullPath.IndexOf('\\');
             if (index < 0)
@@ -53,8 +38,8 @@ namespace GTweak.Utilities.Maintenance
                 return false;
             }
 
-            string hive = !string.IsNullOrEmpty(fullPath) && index >= 0 && index <= fullPath.Length ? fullPath.Substring(0, index) : string.Empty;
-            string subKey = (fullPath != null && index + 1 < fullPath.Length) ? fullPath.Substring(index + 1) : string.Empty;
+            string hive = fullPath.Substring(0, index);
+            string subKey = fullPath.Substring(index + 1);
 
             RegistryKey baseKey = hive switch
             {
@@ -73,7 +58,7 @@ namespace GTweak.Utilities.Maintenance
 
             try
             {
-                using var key = baseKey.OpenSubKey(subKey);
+                using RegistryKey key = baseKey.OpenSubKey(subKey);
                 return key != null;
             }
             catch { return false; }
@@ -81,14 +66,13 @@ namespace GTweak.Utilities.Maintenance
 
         internal void Export(string fileName)
         {
-            string finalRegFile = fileName;
             string tempDir = PathLocator.Folders.Workspace;
             Directory.CreateDirectory(tempDir);
 
             List<string> tempFiles = new List<string>();
             try
             {
-                foreach (var path in RegistryPaths)
+                foreach (string path in RegistryPaths)
                 {
                     if (!RegistryKeyExists(path))
                     {
@@ -98,22 +82,19 @@ namespace GTweak.Utilities.Maintenance
                     string tempFile = Path.Combine(tempDir, Path.GetRandomFileName() + ".reg");
                     tempFiles.Add(tempFile);
 
-                    ProcessStartInfo psi = new ProcessStartInfo("reg.exe", $"EXPORT \"{path}\" \"{tempFile}\" /y")
+                    using Process proc = Process.Start(new ProcessStartInfo("reg.exe", $"EXPORT \"{path}\" \"{tempFile}\" /y")
                     {
                         CreateNoWindow = true,
                         UseShellExecute = false
-                    };
-                    Process proc = Process.Start(psi);
+                    });
                     proc.WaitForExit();
                 }
 
-                StringBuilder sb = new StringBuilder();
+                using StreamWriter writer = new StreamWriter(fileName, false, Encoding.Unicode);
                 foreach (string file in tempFiles)
                 {
-                    sb.AppendLine(File.ReadAllText(file, Encoding.Unicode));
+                    writer.WriteLine(File.ReadAllText(file, Encoding.Unicode));
                 }
-
-                File.WriteAllText(finalRegFile, sb.ToString(), Encoding.Unicode);
             }
             catch { NotificationManager.Show("warn", "error_reg_exporter_noty").Perform(); }
             finally
