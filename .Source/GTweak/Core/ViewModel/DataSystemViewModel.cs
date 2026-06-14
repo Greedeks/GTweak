@@ -83,6 +83,8 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("OSVersion", () => HardwareData.OS.Version, FallbackKeys.Unknown),
                 CreateModelCollection("Processes", () => HardwareData.RunningProcessesCount, isUpdatable: true),
                 CreateModelCollection("Services", () => HardwareData.RunningServicesCount, isUpdatable: true),
+                CreateModelCollection("CPUAngle", () => HardwareData.Processor.Usage.ToString(), isUpdatable: true),
+                CreateModelCollection("RAMAngle", () => HardwareData.Memory.Usage.ToString(), isUpdatable: true),
                 CreateModelCollection("Bios", () => HardwareData.Bios.Data, FallbackKeys.NoDevice),
                 CreateModelCollection("Mode", () => HardwareData.Bios.Mode, FallbackKeys.Unknown),
                 CreateModelCollection("Motherboard", () => HardwareData.Motherboard.Data, FallbackKeys.NoDevice),
@@ -102,6 +104,7 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("Network", () => HardwareData.NetworkAdapter, FallbackKeys.NoDriver, true),
                 (_ipAddressModel = CreateModelCollection("IpAddress", () => HardwareData.UserIPAddress, FallbackKeys.ConnectionLost, true))
             };
+
             RefreshStates();
         }
 

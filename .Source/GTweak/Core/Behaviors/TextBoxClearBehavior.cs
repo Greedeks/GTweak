@@ -1,15 +1,15 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace GTweak.Utilities.Behaviors
+namespace GTweak.Core.Behaviors
 {
     internal class TextBoxClearBehavior
     {
-        public static readonly DependencyProperty ClearButtonProperty =
+        internal static readonly DependencyProperty ClearButtonProperty =
             DependencyProperty.RegisterAttached("ClearButton", typeof(bool), typeof(TextBoxClearBehavior), new PropertyMetadata(false, OnClearButtonChanged));
 
-        public static bool GetClearButton(UIElement element) => (bool)element.GetValue(ClearButtonProperty);
-        public static void SetClearButton(UIElement element, bool value) => element.SetValue(ClearButtonProperty, value);
+        internal static bool GetClearButton(UIElement element) => (bool)element.GetValue(ClearButtonProperty);
+        internal static void SetClearButton(UIElement element, bool value) => element.SetValue(ClearButtonProperty, value);
 
         private static void OnClearButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

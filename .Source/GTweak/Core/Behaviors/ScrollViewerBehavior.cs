@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace GTweak.Utilities.Behaviors
+namespace GTweak.Core.Behaviors
 {
     internal static class ScrollViewerBehavior
     {

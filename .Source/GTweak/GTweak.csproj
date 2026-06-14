@@ -185,6 +185,7 @@
     <Compile Include="Core\Base\IViewPageBase.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Converters\AngleToPercentConverter.cs" />
+    <Compile Include="Core\Converters\UsageToAngleConverter.cs" />
     <Compile Include="Core\Services\FuzzySearchService.cs" />
     <Compile Include="Core\ViewModel\Components\DownloadSession.cs" />
     <Compile Include="Core\ViewModel\Components\ToolsetItem.cs" />
@@ -207,9 +208,10 @@
     <Compile Include="Core\ViewModel\SystemViewModel.cs" />
     <Compile Include="Core\ViewModel\ToolsetViewModel.cs" />
     <Compile Include="Utilities\Animation\BlurAnimation.cs" />
-    <Compile Include="Utilities\Behaviors\ScrollFadeBehavior.cs" />
-    <Compile Include="Utilities\Behaviors\ScrollViewerBehavior.cs" />
-    <Compile Include="Utilities\Behaviors\TextBoxClearBehavior.cs" />
+    <Compile Include="Core\Behaviors\ArcAnimationBehavior.cs" />
+    <Compile Include="Core\Behaviors\ScrollFadeBehavior.cs" />
+    <Compile Include="Core\Behaviors\ScrollViewerBehavior.cs" />
+    <Compile Include="Core\Behaviors\TextBoxClearBehavior.cs" />
     <Compile Include="Utilities\Configuration\IconExtractProvider.cs" />
     <Compile Include="Utilities\Configuration\NetworkProvider.cs" />
     <Compile Include="Utilities\Configuration\StorageTypeIdentifier.cs" />
