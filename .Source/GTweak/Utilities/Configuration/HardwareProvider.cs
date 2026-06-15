@@ -198,7 +198,9 @@ namespace GTweak.Utilities.Configuration
                     {
                         string data = new string[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                         string dataSN = managementObj["SerialNumber"]?.ToString() ?? string.Empty;
-                        Bios.Data += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
+
+                        Bios.Data = data;
+                        Bios.SerialNumber = !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? dataSN : string.Empty;
                     }
                 }
             }
@@ -221,14 +223,12 @@ namespace GTweak.Utilities.Configuration
 
                         if (!string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace))
                         {
-                            Motherboard.Data += $", V{dataVersion}";
+                            Motherboard.Version += dataVersion;
                         }
                         else if (!string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace))
                         {
-                            Motherboard.Data += $", S/N-{dataSN}";
+                            Motherboard.SerialNumber += dataSN;
                         }
-
-
                     }
                 }
             }
@@ -356,21 +356,21 @@ namespace GTweak.Utilities.Configuration
                 return (false, string.Empty, string.Empty);
             }
 
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    string data = managementObj["Name"] as string ?? string.Empty;
+                    (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
+                    Graphics.Add(new GraphicsInfo
                     {
-                        string data = managementObj["Name"] as string ?? string.Empty;
-                        (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
-                        Graphics += $"{(string.IsNullOrEmpty(data) && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
-                        VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
-                    }
+                        Data = string.IsNullOrEmpty(data) && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data,
+                        Memory = isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM ? SizeCalculationHelper(valueRAM) : "N/A"
+                    });
+                    VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
                 }
             }
-
-            Graphics = Graphics.TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -379,21 +379,22 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GetMemoryInfo()
         {
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    string speedData = new string[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
+                    string data = new string[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
+                    Memory.Type = HardwareMappings.GetMemoryType(Convert.ToUInt32(managementObj["SMBIOSMemoryType"] ?? 0u));
+                    Memory.Modules.Add(new MemoryModuleInfo
                     {
-                        string speedData = new string[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
-                        string data = new string[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
-                        Memory.Type = HardwareMappings.GetMemoryType(Convert.ToUInt32(managementObj["SMBIOSMemoryType"] ?? 0u));
-                        Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper(Convert.ToUInt64(managementObj["Capacity"] ?? 0UL))}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
-                    }
+                        Data = data,
+                        Frequency = string.IsNullOrEmpty(speedData) ? string.Empty : $"{speedData} MHz",
+                        Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Capacity"] ?? 0UL))
+                    });
                 }
             }
-
-            Memory.Data = Memory.Data.TrimEnd('\n', '\r');
         }
 
         /// <summary>

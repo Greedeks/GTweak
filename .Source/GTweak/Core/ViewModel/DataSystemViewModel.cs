@@ -86,16 +86,19 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("CPUAngle", () => HardwareData.Processor.Usage.ToString(), isUpdatable: true),
                 CreateModelCollection("RAMAngle", () => HardwareData.Memory.Usage.ToString(), isUpdatable: true),
                 CreateModelCollection("Bios", () => HardwareData.Bios.Data, FallbackKeys.NoDevice),
+                CreateModelCollection("BiosSerial", () => HardwareData.Bios.SerialNumber, FallbackKeys.Unknown),
                 CreateModelCollection("Mode", () => HardwareData.Bios.Mode, FallbackKeys.Unknown),
                 CreateModelCollection("Motherboard", () => HardwareData.Motherboard.Data, FallbackKeys.NoDevice),
+                CreateModelCollection("MotherboardVersion", () => HardwareData.Motherboard.Version, FallbackKeys.Unknown),
+                CreateModelCollection("MotherboardSerial", () => HardwareData.Motherboard.SerialNumber, FallbackKeys.Unknown),
                 CreateModelCollection("Chipset", () => HardwareData.Motherboard.Chipset, FallbackKeys.Unknown),
                 CreateModelCollection("Processor", () => HardwareData.Processor.Data, FallbackKeys.NoDevice),
                 CreateModelCollection("Cores", () => HardwareData.Processor.Cores, FallbackKeys.Unknown),
                 CreateModelCollection("Threads", () => HardwareData.Processor.Threads, FallbackKeys.Unknown),
                 CreateModelCollection("Frequency", () => HardwareData.Processor.Frequency, FallbackKeys.Unknown),
-                CreateModelCollection("Graphics", () => HardwareData.Graphics, FallbackKeys.NoDevice),
+                CreateListCollection("Graphics", () => HardwareData.Graphics.Select(g => new[] { g.Data, g.Memory }).ToList(), isUpdatable:false, FallbackKeys.NoDevice, FallbackKeys.Unknown),
                 CreateModelCollection("RefreshRate", () => HardwareData.MonitorRefreshRate, FallbackKeys.Unknown, true),
-                CreateModelCollection("Memory", () => HardwareData.Memory.Data, FallbackKeys.NoDevice),
+                CreateListCollection("Memory", () => HardwareData.Memory.Modules.Select(m => new[] { m.Data, m.Frequency, m.Capacity }).ToList(), isUpdatable:false, FallbackKeys.NoDevice, FallbackKeys.Unknown, FallbackKeys.Unknown),
                 CreateModelCollection("Type", () => HardwareData.Memory.Type, FallbackKeys.Unknown),
                 CreateModelCollection("Storage", () => HardwareData.Storage.Data, FallbackKeys.NoDevice, true),
                 CreateModelCollection("UsedSpace", () => HardwareData.Storage.UsedSpace, FallbackKeys.Unknown, true),
@@ -141,7 +144,6 @@ namespace GTweak.Core.ViewModel
             void UpdateModelData()
             {
                 string data = dataProvider();
-
                 if (!string.IsNullOrEmpty(data))
                 {
                     model.Data = data;
@@ -149,7 +151,7 @@ namespace GTweak.Core.ViewModel
                 }
                 else
                 {
-                    model.Data = fallbackKey == null ? string.Empty : (Application.Current.Resources[fallbackKey] as string ?? string.Empty);
+                    model.Data = ResolveFallback(fallbackKey);
                     model.IsEnabled = false;
                 }
             }
@@ -163,5 +165,45 @@ namespace GTweak.Core.ViewModel
 
             return model;
         }
+
+        private DataSystemModel CreateListCollection(string name, Func<List<string[]>> listProvider, bool isUpdatable = false, params string[] fallbacks)
+        {
+            DataSystemModel model = new DataSystemModel { Name = name };
+
+            void UpdateModelData()
+            {
+                List<string[]> list = listProvider();
+                if (list != null && list.Count > 0)
+                {
+                    model.Items = list.Select(item => new DataSystemModel
+                    {
+                        DataItems = item,
+                        IsEnabled = true
+                    }).ToList();
+                }
+                else
+                {
+                    model.Items = new List<DataSystemModel>
+                    {
+                        new DataSystemModel
+                        {
+                            DataItems = fallbacks.Select(ResolveFallback).ToArray(),
+                            IsEnabled = false
+                        }
+                    };
+                }
+            }
+
+            UpdateModelData();
+
+            if (isUpdatable)
+            {
+                _modelUpdateActions.Add(UpdateModelData);
+            }
+
+            return model;
+        }
+
+        private string ResolveFallback(string fallbackKey) => fallbackKey == null ? string.Empty : (Application.Current.Resources[fallbackKey] as string ?? string.Empty);
     }
 }

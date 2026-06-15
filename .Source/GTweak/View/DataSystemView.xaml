@@ -149,7 +149,7 @@
 
         <Grid Grid.Row="1">
             <ScrollViewer b:ScrollFadeBehavior.EnableFade="True" Margin="0,0,0,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <Grid Margin="20">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -157,10 +157,16 @@
 
                     <WrapPanel Grid.Column="0" Orientation="Vertical">
 
-                        <StackPanel Orientation="Vertical">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
+                        <Grid Margin="10">
+                            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False">
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="3" Y="6"/>
+                                </Border.RenderTransform>
+                            </Border>
+
+                            <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15,12" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                                         <Image Height="16" Width="16" VerticalAlignment="Bottom">
                                             <Image.Style>
                                                 <Style TargetType="{x:Type Image}">
@@ -168,20 +174,79 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_bios_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_bios_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Bios].Data}" IsEnabled="{Binding [Bios].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_mode_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Mode].Data}" IsEnabled="{Binding [Mode].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
 
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,10"/>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [BiosSerial].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mode_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <Border Grid.Column="2" Padding="8,2" CornerRadius="5">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="{StaticResource Brush_Background_Labels}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding [Mode].Data}" Value="Legacy Boot">
+                                                            <Setter Property="Background" Value="{StaticResource Brush_Background_Labels_P}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock>
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
+                                                        <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding [Mode].Data}" Value="Legacy Boot">
+                                                                <Setter Property="Foreground" Value="{StaticResource Brush_Accent_P}"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                                <Run Text="{Binding [Mode].Data}"/>
+                                            </TextBlock>
+                                        </Border>
+                                    </Grid>
+
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <Grid Margin="10">
+                            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False">
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="3" Y="6"/>
+                                </Border.RenderTransform>
+                            </Border>
+
+                            <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15,12" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Vertical">
+
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="16" Width="16" VerticalAlignment="Bottom">
                                             <Image.Style>
@@ -190,20 +255,65 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_motherbr_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_motherbr_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Motherboard].Data}" IsEnabled="{Binding [Motherboard].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_chipset_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Chipset].Data}" IsEnabled="{Binding [Chipset].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
 
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,10"/>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Motherboard].Data}" IsEnabled="{Binding [Motherboard].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardVersion].Data}" IsEnabled="{Binding [MotherboardVersion].IsEnabled}"  PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardSerial].Data}" IsEnabled="{Binding [MotherboardSerial].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_chipset_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Chipset].Data}" IsEnabled="{Binding [Chipset].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <Grid Margin="10">
+                            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False">
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="3" Y="6"/>
+                                </Border.RenderTransform>
+                            </Border>
+
+                            <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15,12" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Vertical">
+
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="16" Width="16" VerticalAlignment="Bottom">
                                             <Image.Style>
@@ -212,25 +322,64 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_cpu_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_cpu_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Processor].Data}" IsEnabled="{Binding [Processor].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_cores_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Cores].Data}"/>
-                                <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
-                                <Run Text="{DynamicResource title_threads_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Threads].Data}"/><LineBreak/>
-                                <Run Text="{DynamicResource title_freq_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Frequency].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
 
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,10"/>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Processor].Data}" IsEnabled="{Binding [Processor].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}">
+                                            <Run Text="{DynamicResource label_cores_sysinfo}"/>
+                                            <Run Text=" / "/>
+                                            <Run Text="{DynamicResource label_threads_sysinfo}"/>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" IsEnabled="{Binding [MotherboardVersion].IsEnabled}"  PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand">
+                                            <Run Text="{Binding [Cores].Data}"/>
+                                            <Run Text=" / "/>
+                                            <Run Text="{Binding [Threads].Data}"/>
+                                        </TextBlock>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Frequency].Data}" IsEnabled="{Binding [Frequency].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <Grid Margin="10">
+                            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}"
+            IsHitTestVisible="False">
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="3" Y="6"/>
+                                </Border.RenderTransform>
+                            </Border>
+
+                            <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15,12" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Vertical">
+                                    
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="16" Width="16" VerticalAlignment="Bottom">
                                             <Image.Style>
@@ -239,20 +388,65 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_gpu_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_gpu_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Graphics].Data}" IsEnabled="{Binding [Graphics].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_refreshrate_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [RefreshRate].Data}" IsEnabled="{Binding [RefreshRate].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
 
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,10"/>
+
+                                    <Grid Margin="0,0,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                    </Grid>
+
+                                    <ItemsControl ItemsSource="{Binding [Graphics].Items}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,2,0,2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                                    <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[1]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,10"/>
+                                    
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_refreshrate_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels_Y}">
+                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent_Y}" Text="{Binding [RefreshRate].Data}" IsEnabled="{Binding [RefreshRate].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                        </Border>
+                                    </Grid>
+
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <Grid Margin="10">
+                            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False">
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="3" Y="6"/>
+                                </Border.RenderTransform>
+                            </Border>
+
+                            <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15,12" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Vertical">
+
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="16" Width="16" VerticalAlignment="Bottom">
                                             <Image.Style>
@@ -261,16 +455,60 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_ram_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_ram_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
-                                </Grid>
+
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,6"/>
+
+                                    <Grid Margin="0,0,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="4" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                    </Grid>
+
+                                    <ItemsControl ItemsSource="{Binding [Memory].Items}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,2,0,2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                                    <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[1]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                                    <TextBlock Grid.Column="4" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[2]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,10"/>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mtype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}">
+                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding [Type].Data}"/>
+                                        </Border>
+                                    </Grid>
+
+                                </StackPanel>
                             </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Memory].Data}" IsEnabled="{Binding [Memory].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_mtype_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Type].Data}" IsEnabled="{Binding [Type].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
+                        </Grid>
 
                     </WrapPanel>
 
@@ -287,16 +525,16 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_storage_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_storage_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
                             <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
                                  <Run Text="{Binding [Storage].Data}" IsEnabled="{Binding [Storage].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                 <Run Text="{DynamicResource title_storage_free_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                 <Run Text="{DynamicResource label_storage_free_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
                                  <Run Text="{Binding [FreeSpace].Data}"/>
                                  <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
-                                 <Run Text="{DynamicResource title_storage_used_sysinfo}"  Foreground="{StaticResource Brush_Toggle_Text}"/>
+                                 <Run Text="{DynamicResource label_storage_used_sysinfo}"  Foreground="{StaticResource Brush_Toggle_Text}"/>
                                  <Run Text="{Binding [UsedSpace].Data}"/>
                             </TextBlock>
                         </StackPanel>
@@ -312,7 +550,7 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_sound_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_sound_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -330,7 +568,7 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_netadapter_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_netadapter_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>
@@ -348,7 +586,7 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_ip_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_ip_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
                                     </StackPanel>
                                 </Grid>
                             </Border>

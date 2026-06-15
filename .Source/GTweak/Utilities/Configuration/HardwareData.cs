@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace GTweak.Utilities.Configuration
@@ -17,11 +18,14 @@ namespace GTweak.Utilities.Configuration
         {
             internal string Data { get; set; } = string.Empty;
             internal string Mode { get; set; } = string.Empty;
+            internal string SerialNumber { get; set; } = string.Empty;
         }
 
         internal sealed class MotherboardInfo
         {
             internal string Data { get; set; } = string.Empty;
+            internal string Version { get; set; } = string.Empty;
+            internal string SerialNumber { get; set; } = string.Empty;
             internal string Chipset { get; set; } = string.Empty;
         }
 
@@ -34,11 +38,24 @@ namespace GTweak.Utilities.Configuration
             internal string Frequency { get; set; } = string.Empty;
         }
 
-        internal sealed class MemoryInfo
+        internal sealed class GraphicsInfo
         {
             internal string Data { get; set; } = string.Empty;
+            internal string Memory { get; set; } = string.Empty;
+        }
+
+        internal sealed class MemoryInfo
+        {
             internal int Usage { get; set; } = default;
             internal string Type { get; set; } = string.Empty;
+            internal List<MemoryModuleInfo> Modules { get; set; } = new List<MemoryModuleInfo>();
+        }
+
+        internal sealed class MemoryModuleInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string Frequency { get; set; } = string.Empty;
+            internal string Capacity { get; set; } = string.Empty;
         }
 
         internal sealed class StorageInfo
@@ -57,7 +74,7 @@ namespace GTweak.Utilities.Configuration
         internal static BiosInfo Bios { get; set; } = new BiosInfo();
         internal static ProcessorInfo Processor { get; set; } = new ProcessorInfo();
         internal static MotherboardInfo Motherboard { get; set; } = new MotherboardInfo();
-        internal static string Graphics { get; set; } = string.Empty;
+        internal static List<GraphicsInfo> Graphics { get; set; } = new List<GraphicsInfo>();
         internal static string MonitorRefreshRate { get; set; } = string.Empty;
         internal static MemoryInfo Memory { get; set; } = new MemoryInfo();
         internal static StorageInfo Storage { get; set; } = new StorageInfo();
