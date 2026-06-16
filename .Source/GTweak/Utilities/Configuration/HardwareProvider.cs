@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -98,14 +99,13 @@ namespace GTweak.Utilities.Configuration
         {
             if (deviceType == DeviceType.Storage || deviceType == DeviceType.All)
             {
-                Storage.Data = GetStorageDevices();
+                Storage = GetStorageDevices();
+                RefreshStorageSpace();
             }
 
-            if (deviceType == DeviceType.StorageSpace || deviceType == DeviceType.All || deviceType == DeviceType.Storage)
+            if (deviceType == DeviceType.StorageSpace)
             {
-                (string FreePercentage, string UsedPercentage) = GetStorageSpace();
-                Storage.FreeSpace = FreePercentage;
-                Storage.UsedSpace = UsedPercentage;
+                RefreshStorageSpace();
             }
 
             if (deviceType == DeviceType.Audio || deviceType == DeviceType.All)
@@ -400,9 +400,9 @@ namespace GTweak.Utilities.Configuration
         /// <summary>
         /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
         /// </summary>
-        private string GetStorageDevices()
+        private List<StorageInfo> GetStorageDevices()
         {
-            StringBuilder result = new StringBuilder();
+            List<StorageInfo> result = new List<StorageInfo>();
 
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
@@ -444,12 +444,19 @@ namespace GTweak.Utilities.Configuration
                 {
                     using (managementObj)
                     {
-                        string data = new string[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                        string data = new[] { "FriendlyName", "Model", "Description" }.Select(p => managementObj[p] as string).FirstOrDefault(s => !string.IsNullOrEmpty(s)) ?? string.Empty;
                         ushort mediaType = managementObj["MediaType"] is IConvertible m ? Convert.ToUInt16(m) : (ushort)0;
                         ushort busType = managementObj["BusType"] is IConvertible b ? Convert.ToUInt16(b) : (ushort)0;
-                        string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, default);
+                        uint diskIndex = Convert.ToUInt32(managementObj["DeviceId"] ?? 0);
+                        string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{diskIndex}", busType, default);
 
-                        result.AppendLine($"{SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL))} [{data}] {storageType}");
+                        result.Add(new StorageInfo
+                        {
+                            Data = data,
+                            Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL)),
+                            StorageType = storageType,
+                            DriveLetters = GetDriveLettersForDisk(diskIndex)
+                        });
                     }
                 }
             }
@@ -460,41 +467,99 @@ namespace GTweak.Utilities.Configuration
                 {
                     using (managementObj)
                     {
-                        string data = new string[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                        string data = new[] { "Model", "Caption" }.Select(p => managementObj[p] as string).FirstOrDefault(s => !string.IsNullOrEmpty(s)) ?? string.Empty;
                         string mediaType = managementObj["MediaType"]?.ToString() ?? string.Empty;
                         string interfaceType = managementObj["InterfaceType"]?.ToString() ?? string.Empty;
-                        string storageType = GetStorageType(mediaType, managementObj["DeviceID"] as string ?? string.Empty, default, interfaceType);
+                        string deviceId = managementObj["DeviceID"] as string ?? string.Empty;
+                        string storageType = GetStorageType(mediaType, deviceId, default, interfaceType);
+                        uint.TryParse(deviceId.Replace(@"\\.\PHYSICALDRIVE", "").Replace(@"\\.\PhysicalDrive", ""), out uint diskIndex);
 
-                        result.AppendLine($"{SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL))} [{data}] {storageType}");
+                        result.Add(new StorageInfo
+                        {
+                            Data = data,
+                            Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL)),
+                            StorageType = storageType,
+                            DriveLetters = GetDriveLettersForDisk(diskIndex)
+                        });
                     }
                 }
             }
 
-            return result.ToString().TrimEnd('\n', '\r');
+            return result;
+
         }
 
-        private (string FreePercentage, string UsedPercentage) GetStorageSpace()
+        private static List<string> GetDriveLettersForDisk(uint diskIndex)
         {
-            long totalSize = 0;
-            long totalFreeSpace = 0;
+            List<string> letters = new List<string>();
 
-            foreach (DriveInfo drive in DriveInfo.GetDrives())
+            try
             {
-                try
+                using ManagementObjectSearcher partSearcher = new ManagementObjectSearcher(@"root\cimv2", $"select DeviceID from Win32_DiskPartition where DiskIndex = {diskIndex}", new EnumerationOptions { ReturnImmediately = true });
+                foreach (ManagementObject partition in partSearcher.Get().Cast<ManagementObject>())
                 {
-                    if (drive.IsReady && (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Removable))
+                    using (partition)
                     {
-                        totalSize += drive.TotalSize;
-                        totalFreeSpace += drive.TotalFreeSpace;
+                        string partitionId = partition["DeviceID"]?.ToString() ?? string.Empty;
+                        if (string.IsNullOrEmpty(partitionId))
+                        {
+                            continue;
+                        }
+
+                        using ManagementObjectSearcher logicalSearcher = new ManagementObjectSearcher(@"root\cimv2", $"associators of {{Win32_DiskPartition.DeviceID='{partitionId}'}} where AssocClass=Win32_LogicalDiskToPartition", new EnumerationOptions { ReturnImmediately = true });
+                        foreach (ManagementObject logical in logicalSearcher.Get().Cast<ManagementObject>())
+                        {
+                            using (logical)
+                            {
+                                string letter = logical["DeviceID"]?.ToString();
+                                if (!string.IsNullOrEmpty(letter))
+                                {
+                                    letters.Add(letter);
+                                }
+                            }
+                        }
                     }
                 }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-            string freePercent = totalSize > 0 ? $"{(Math.Round((double)totalFreeSpace / totalSize * 100, 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
-            string usedPercent = totalSize > 0 ? $"{(Math.Round(100 - ((double)totalFreeSpace / totalSize * 100), 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
+            return letters;
+        }
 
-            return (freePercent, usedPercent);
+        private void RefreshStorageSpace()
+        {
+            foreach (StorageInfo storageInfo in Storage)
+            {
+                long totalSize = 0;
+                long totalFreeSpace = 0;
+
+                foreach (string letter in storageInfo.DriveLetters)
+                {
+                    try
+                    {
+                        DriveInfo drive = new DriveInfo(letter);
+                        if (drive.IsReady)
+                        {
+                            totalSize += drive.TotalSize;
+                            totalFreeSpace += drive.TotalFreeSpace;
+                        }
+                    }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                }
+
+                if (totalSize > 0)
+                {
+                    storageInfo.UsedPercent = Math.Round(100 - (double)totalFreeSpace / totalSize * 100, 1);
+                    storageInfo.FreeSpace = SizeCalculationHelper((ulong)totalFreeSpace);
+                    storageInfo.UsedSpace = SizeCalculationHelper((ulong)(totalSize - totalFreeSpace));
+                }
+                else
+                {
+                    storageInfo.UsedPercent = 0;
+                    storageInfo.FreeSpace = string.Empty;
+                    storageInfo.UsedSpace = string.Empty;
+                }
+            }
         }
 
         /// <summary>

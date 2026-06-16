@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -100,9 +101,7 @@ namespace GTweak.Core.ViewModel
                 CreateModelCollection("RefreshRate", () => HardwareData.MonitorRefreshRate, FallbackKeys.Unknown, true),
                 CreateListCollection("Memory", () => HardwareData.Memory.Modules.Select(m => new[] { m.Data, m.Frequency, m.Capacity }).ToList(), isUpdatable:false, FallbackKeys.NoDevice, FallbackKeys.Unknown, FallbackKeys.Unknown),
                 CreateModelCollection("Type", () => HardwareData.Memory.Type, FallbackKeys.Unknown),
-                CreateModelCollection("Storage", () => HardwareData.Storage.Data, FallbackKeys.NoDevice, true),
-                CreateModelCollection("UsedSpace", () => HardwareData.Storage.UsedSpace, FallbackKeys.Unknown, true),
-                CreateModelCollection("FreeSpace", () => HardwareData.Storage.FreeSpace, FallbackKeys.Unknown, true),
+                CreateListCollection("Storage", () => HardwareData.Storage.Select(s => new[] { s.Data, s.Capacity, s.StorageType, s.UsedPercent.ToString(CultureInfo.InvariantCulture), s.FreeSpace, s.UsedSpace }).ToList(),true,FallbackKeys.NoDevice,string.Empty,FallbackKeys.Unknown, string.Empty,string.Empty, string.Empty),
                 CreateModelCollection("Audio", () => HardwareData.AudioDevice, FallbackKeys.NoDriver, true),
                 CreateModelCollection("Network", () => HardwareData.NetworkAdapter, FallbackKeys.NoDriver, true),
                 (_ipAddressModel = CreateModelCollection("IpAddress", () => HardwareData.UserIPAddress, FallbackKeys.ConnectionLost, true))
@@ -204,6 +203,6 @@ namespace GTweak.Core.ViewModel
             return model;
         }
 
-        private string ResolveFallback(string fallbackKey) => fallbackKey == null ? string.Empty : (Application.Current.Resources[fallbackKey] as string ?? string.Empty);
+        private string ResolveFallback(string fallbackKeyOrValue) => string.IsNullOrEmpty(fallbackKeyOrValue) ? string.Empty : (Application.Current.Resources[fallbackKeyOrValue] as string ?? fallbackKeyOrValue);
     }
 }

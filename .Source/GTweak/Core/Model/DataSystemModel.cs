@@ -6,10 +6,10 @@ internal sealed class DataSystemModel : ViewModelBase
 {
     private string _data;
     private string[] _dataItems;
+    private List<DataSystemModel> _items;
     private bool _isEnabled;
     private int _blurValue;
     private Visibility _ipVisibility;
-    private List<DataSystemModel> _items;
 
     public string Name { get; set; }
 
@@ -23,6 +23,12 @@ internal sealed class DataSystemModel : ViewModelBase
     {
         get => _dataItems;
         set { _dataItems = value; OnPropertyChanged(); }
+    }
+
+    public List<DataSystemModel> Items
+    {
+        get => _items;
+        set { _items = value; OnPropertyChanged(); }
     }
 
     public bool IsEnabled
@@ -41,11 +47,5 @@ internal sealed class DataSystemModel : ViewModelBase
     {
         get => _ipVisibility;
         set { _ipVisibility = value; OnPropertyChanged(); }
-    }
-
-    public List<DataSystemModel> Items
-    {
-        get => _items;
-        set { _items = value; OnPropertyChanged(); }
     }
 }

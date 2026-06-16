@@ -185,6 +185,7 @@
     <Compile Include="Core\Base\IViewPageBase.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Core\Converters\AngleToPercentConverter.cs" />
+    <Compile Include="Core\Converters\PercentToWidthConverter.cs" />
     <Compile Include="Core\Converters\UsageToAngleConverter.cs" />
     <Compile Include="Core\Services\FuzzySearchService.cs" />
     <Compile Include="Core\ViewModel\Components\DownloadSession.cs" />

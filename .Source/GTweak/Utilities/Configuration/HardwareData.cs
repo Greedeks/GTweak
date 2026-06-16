@@ -61,8 +61,12 @@ namespace GTweak.Utilities.Configuration
         internal sealed class StorageInfo
         {
             internal string Data { get; set; } = string.Empty;
+            internal string Capacity { get; set; } = string.Empty;
+            internal string StorageType { get; set; } = string.Empty;
             internal string UsedSpace { get; set; } = string.Empty;
             internal string FreeSpace { get; set; } = string.Empty;
+            internal double UsedPercent { get; set; } = 0;
+            internal List<string> DriveLetters { get; set; } = new List<string>();
         }
 
         internal enum ConnectionStatus { Available, Lose, Block, Limited, }
@@ -77,7 +81,7 @@ namespace GTweak.Utilities.Configuration
         internal static List<GraphicsInfo> Graphics { get; set; } = new List<GraphicsInfo>();
         internal static string MonitorRefreshRate { get; set; } = string.Empty;
         internal static MemoryInfo Memory { get; set; } = new MemoryInfo();
-        internal static StorageInfo Storage { get; set; } = new StorageInfo();
+        internal static List<StorageInfo> Storage { get; set; } = new List<StorageInfo>();
         internal static string AudioDevice { get; set; } = string.Empty;
         internal static string NetworkAdapter { get; set; } = string.Empty;
         internal static string UserIPAddress { get; set; } = string.Empty;
