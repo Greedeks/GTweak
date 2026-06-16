@@ -535,6 +535,7 @@
     <v:String x:Key="label_ram_sysinfo">Оперативна пам’ять:</v:String>
     <v:String x:Key="label_mtype_sysinfo">Тип пам'яті:</v:String>
     <v:String x:Key="label_storage_sysinfo">Пристрої зберігання даних:</v:String>
+    <v:String x:Key="label_itype_sysinfo">Interface Type</v:String>
     <v:String x:Key="label_storage_used_sysinfo">Зайнято:</v:String>
     <v:String x:Key="label_storage_free_sysinfo">Вільно:</v:String>
     <v:String x:Key="label_sound_sysinfo">Пристрої відтворення:</v:String>

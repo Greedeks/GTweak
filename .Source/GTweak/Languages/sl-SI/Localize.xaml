@@ -535,6 +535,7 @@
     <v:String x:Key="label_ram_sysinfo">Pomnilnik:</v:String>
     <v:String x:Key="label_mtype_sysinfo">Vrsta pomnilnika:</v:String>
     <v:String x:Key="label_storage_sysinfo">Pomnilniške naprave:</v:String>
+    <v:String x:Key="label_itype_sysinfo">Interface Type</v:String>
     <v:String x:Key="label_storage_used_sysinfo">Uporabljeno:</v:String>
     <v:String x:Key="label_storage_free_sysinfo">Prosto:</v:String>
     <v:String x:Key="label_sound_sysinfo">Naprave za predvajanje:</v:String>

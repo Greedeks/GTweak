@@ -178,9 +178,9 @@
                                         <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_bios_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
 
-                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,10"/>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,0"/>
 
-                                    <Grid Margin="0,2,0,2">
+                                    <Grid Margin="0,8,0,2">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="20"/>
@@ -259,9 +259,9 @@
                                         <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_motherbr_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
 
-                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,10"/>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,0"/>
 
-                                    <Grid Margin="0,2,0,2">
+                                    <Grid Margin="0,8,0,2">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="20"/>
@@ -326,9 +326,9 @@
                                         <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_cpu_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
 
-                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,10"/>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,0"/>
 
-                                    <Grid Margin="0,2,0,2">
+                                    <Grid Margin="0,8,0,2">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="20"/>
@@ -391,9 +391,9 @@
                                         <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_gpu_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
 
-                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,10"/>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,0"/>
 
-                                    <Grid Margin="0,0,0,4">
+                                    <Grid Margin="0,8,0,4">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="20"/>
@@ -473,9 +473,9 @@
                                         <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_ram_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
 
-                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,6"/>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,0"/>
 
-                                    <Grid Margin="0,0,0,4">
+                                    <Grid Margin="0,8,0,4">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="20"/>
@@ -565,7 +565,7 @@
                                         <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_storage_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
 
-                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,0"/>
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,0"/>
 
                                     <Grid Margin="0,8,0,4">
                                         <Grid.ColumnDefinitions>
@@ -574,7 +574,7 @@
                                             <ColumnDefinition Width="Auto" SharedSizeGroup="StorageTypeColumn"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
-                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_mtype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_itype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
                                     </Grid>
 
                                     <ItemsControl ItemsSource="{Binding [Storage].Items}">
@@ -703,9 +703,16 @@
                             </Border>
                         </Grid>
 
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
+                        <Grid Margin="10">
+                            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False">
+                                <Border.RenderTransform>
+                                    <TranslateTransform X="3" Y="6"/>
+                                </Border.RenderTransform>
+                            </Border>
+
+                            <Border BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15,12" SnapsToDevicePixels="True">
+                                <StackPanel Orientation="Vertical">
+
                                     <StackPanel Orientation="Horizontal">
                                         <Image Height="16" Width="16" VerticalAlignment="Bottom">
                                             <Image.Style>
@@ -714,12 +721,63 @@
                                                 </Style>
                                             </Image.Style>
                                         </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_sound_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
+                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource label_sound_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}"/>
                                     </StackPanel>
-                                </Grid>
+
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1" CornerRadius="10" Margin="0,10,0,0"/>
+
+                                    <Grid Margin="0,8,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                    </Grid>
+
+                                    <ItemsControl ItemsSource="{Binding [Audio].Items}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Vertical">
+                                                    <Border Height="1" Background="{StaticResource Brush_Separator}" Opacity="0.4" Margin="0,4,0,4">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                    </Border>
+
+                                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                                                        <Image Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,6,0">
+                                                            <Image.Style>
+                                                                <Style TargetType="Image">
+                                                                    <Setter Property="Source" Value="{StaticResource Icon_Audio}"/>
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding DataItems[1]}" Value="1">
+                                                                            <Setter Property="Source" Value="{StaticResource Icon_Microphone}"/>
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding DataItems[1], FallbackValue='Hide', TargetNullValue='Hide'}" Value="Hide">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </Image.Style>
+                                                        </Image>
+                                                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                    </StackPanel>
+
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </StackPanel>
                             </Border>
-                            <TextBlock Text="{Binding [Audio].Data}" IsEnabled="{Binding [Audio].IsEnabled}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                        </StackPanel>
+                        </Grid>
 
                         <StackPanel Orientation="Vertical" Margin="0,20,0,0">
                             <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">

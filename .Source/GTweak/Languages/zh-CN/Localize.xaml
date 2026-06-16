@@ -535,6 +535,7 @@
     <v:String x:Key="label_ram_sysinfo">内存：</v:String>
     <v:String x:Key="label_mtype_sysinfo">内存类型：</v:String>
     <v:String x:Key="label_storage_sysinfo">存储设备：</v:String>
+    <v:String x:Key="label_itype_sysinfo">Interface Type</v:String>
     <v:String x:Key="label_storage_used_sysinfo">已使用：</v:String>
     <v:String x:Key="label_storage_free_sysinfo">可用：</v:String>
     <v:String x:Key="label_sound_sysinfo">播放设备：</v:String>

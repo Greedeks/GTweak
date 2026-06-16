@@ -567,13 +567,13 @@ namespace GTweak.Utilities.Configuration
         /// Therefore, for such devices, the name lookup is performed through the registry. 
         /// The search for an identifier in Win32_PnPEntity is slow, although it is more convenient. However, it is inferior in speed.
         /// </summary>
-        private string GetAudioDevices()
+        private List<AudioDeviceInfo> GetAudioDevices()
         {
-            StringBuilder result = new StringBuilder();
+            List<AudioDeviceInfo> result = new List<AudioDeviceInfo>();
 
-            static (bool, string) IsUsbAudioDevice(string deviceID)
+            static (bool isUsb, string name, bool isCapture) IsUsbAudioDevice(string deviceID)
             {
-                foreach (string basePath in new[] { @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture" })
+                foreach ((string basePath, bool isCapture) in new[] { (@"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", false), (@"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture", true) })
                 {
                     using RegistryKey regKey = Registry.LocalMachine.OpenSubKey(basePath);
                     if (regKey != null)
@@ -591,55 +591,46 @@ namespace GTweak.Utilities.Configuration
                                 string valueID = RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},2", string.Empty);
 
                                 if (!string.IsNullOrEmpty(valueID) && valueID.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0 &&
-                                    ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                     (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                     (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                     (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
+                                   ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                   (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                   (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                   (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
                                 {
-
                                     string nameValue6 = RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},6", string.Empty).Trim();
                                     string typeNameValue2 = RegistryHelp.GetValue(propsPath, "{a45c254e-df1c-4efd-8020-67d146a850e0},2", string.Empty).Trim();
+                                    string name = nameValue6.Length > 10 && !string.Equals(nameValue6, typeNameValue2, StringComparison.OrdinalIgnoreCase) ? nameValue6 : $"{typeNameValue2} {nameValue6}";
 
-                                    if (nameValue6.Length > 10 && !string.Equals(nameValue6, typeNameValue2, StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        return (true, nameValue6);
-                                    }
-                                    else
-                                    {
-                                        return (true, $"{typeNameValue2} {nameValue6}");
-                                    }
+                                    return (true, name, isCapture);
                                 }
                             }
                         }
                     }
                 }
 
-                return (false, string.Empty);
+                return (false, string.Empty, false);
             }
 
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description, PNPDeviceID from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description, PNPDeviceID from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    (bool isUsbDevice, string usbName, bool usbIsCapture) = IsUsbAudioDevice(managementObj["DeviceID"]?.ToString() ?? string.Empty);
+
+                    if (isUsbDevice && !string.IsNullOrEmpty(usbName))
                     {
-                        (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"]?.ToString() ?? string.Empty);
-
-                        if (isUsbDevice && !string.IsNullOrEmpty(data))
-                        {
-                            result.AppendLine(data);
-                        }
-                        else
-                        {
-                            result.AppendLine(new string[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
-                        }
-
-                        VendorDetection.Realtek |= (managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) ?? -1) >= 0;
+                        result.Add(new AudioDeviceInfo { Data = usbName, IsCapture = usbIsCapture });
                     }
+                    else if (new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) is string wmiName)
+                    {
+                        result.Add(new AudioDeviceInfo { Data = wmiName, IsCapture = false });
+                    }
+
+                    VendorDetection.Realtek |= (managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) ?? -1) >= 0;
                 }
             }
 
-            return result.ToString().TrimEnd('\n', '\r');
+            return result;
         }
 
         private string GetNetworkAdapters()

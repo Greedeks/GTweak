@@ -102,7 +102,7 @@ namespace GTweak.Core.ViewModel
                 CreateListCollection("Memory", () => HardwareData.Memory.Modules.Select(m => new[] { m.Data, m.Frequency, m.Capacity }).ToList(), isUpdatable:false, FallbackKeys.NoDevice, FallbackKeys.Unknown, FallbackKeys.Unknown),
                 CreateModelCollection("Type", () => HardwareData.Memory.Type, FallbackKeys.Unknown),
                 CreateListCollection("Storage", () => HardwareData.Storage.Select(s => new[] { s.Data, s.Capacity, s.StorageType, s.UsedPercent.ToString(CultureInfo.InvariantCulture), s.FreeSpace, s.UsedSpace }).ToList(),true,FallbackKeys.NoDevice,string.Empty,FallbackKeys.Unknown, string.Empty,string.Empty, string.Empty),
-                CreateModelCollection("Audio", () => HardwareData.AudioDevice, FallbackKeys.NoDriver, true),
+                CreateListCollection("Audio", () => HardwareData.AudioDevice.Select(a => new[] { a.Data, a.IsCapture ? "1" : "0" }).ToList(),true, FallbackKeys.NoDriver),
                 CreateModelCollection("Network", () => HardwareData.NetworkAdapter, FallbackKeys.NoDriver, true),
                 (_ipAddressModel = CreateModelCollection("IpAddress", () => HardwareData.UserIPAddress, FallbackKeys.ConnectionLost, true))
             };

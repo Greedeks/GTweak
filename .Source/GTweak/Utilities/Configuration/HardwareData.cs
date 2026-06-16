@@ -69,6 +69,12 @@ namespace GTweak.Utilities.Configuration
             internal List<string> DriveLetters { get; set; } = new List<string>();
         }
 
+        internal sealed class AudioDeviceInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal bool IsCapture { get; set; } = false;
+        }
+
         internal enum ConnectionStatus { Available, Lose, Block, Limited, }
 
         internal static OperatingSystemInfo OS { get; set; } = new OperatingSystemInfo();
@@ -82,7 +88,7 @@ namespace GTweak.Utilities.Configuration
         internal static string MonitorRefreshRate { get; set; } = string.Empty;
         internal static MemoryInfo Memory { get; set; } = new MemoryInfo();
         internal static List<StorageInfo> Storage { get; set; } = new List<StorageInfo>();
-        internal static string AudioDevice { get; set; } = string.Empty;
+        internal static List<AudioDeviceInfo> AudioDevice { get; set; } = new List<AudioDeviceInfo>();
         internal static string NetworkAdapter { get; set; } = string.Empty;
         internal static string UserIPAddress { get; set; } = string.Empty;
         internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;

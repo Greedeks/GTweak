@@ -535,6 +535,7 @@
     <v:String x:Key="label_ram_sysinfo">Memoria:</v:String>
     <v:String x:Key="label_mtype_sysinfo">Tipo di memoria:</v:String>
     <v:String x:Key="label_storage_sysinfo">Dispositivi di archiviazione:</v:String>
+    <v:String x:Key="label_itype_sysinfo">Interface Type</v:String>
     <v:String x:Key="label_storage_used_sysinfo">Usato:</v:String>
     <v:String x:Key="label_storage_free_sysinfo">Libero:</v:String>
     <v:String x:Key="label_sound_sysinfo">Dispositivi di riproduzione:</v:String>

@@ -535,6 +535,7 @@
     <v:String x:Key="label_ram_sysinfo">메모리:</v:String>
     <v:String x:Key="label_mtype_sysinfo">메모리 유형:</v:String>
     <v:String x:Key="label_storage_sysinfo">저장소 장치:</v:String>
+    <v:String x:Key="label_itype_sysinfo">Interface Type</v:String>
     <v:String x:Key="label_storage_used_sysinfo">Used:</v:String>
     <v:String x:Key="label_storage_free_sysinfo">Free:</v:String>
     <v:String x:Key="label_sound_sysinfo">재생 장치:</v:String>

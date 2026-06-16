@@ -535,6 +535,7 @@
     <v:String x:Key="label_ram_sysinfo">זיכרון:</v:String>
     <v:String x:Key="label_mtype_sysinfo">סוג זיכרון:</v:String>
     <v:String x:Key="label_storage_sysinfo">התקני אחסון:</v:String>
+    <v:String x:Key="label_itype_sysinfo">Interface Type</v:String>
     <v:String x:Key="label_storage_used_sysinfo">בשימוש:</v:String>
     <v:String x:Key="label_storage_free_sysinfo">פנוי:</v:String>
     <v:String x:Key="label_sound_sysinfo">התקני השמעה:</v:String>
