@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -43,21 +42,10 @@ namespace GTweak.View
 
         private void OnLanguageChanged(object sender, EventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
+            if (DataContext as DataSystemViewModel is var vm && vm != null)
             {
-                if (new Dictionary<HardwareData.ConnectionStatus, string>
-                {
-                    { HardwareData.ConnectionStatus.Lose, "connection_lose_sysinfo" },
-                    { HardwareData.ConnectionStatus.Block, "connection_block_sysinfo" },
-                    { HardwareData.ConnectionStatus.Limited, "connection_limited_sysinfo" }
-                }.TryGetValue(HardwareData.CurrentConnection, out string resourceKey))
-                {
-                    HardwareData.UserIPAddress = (string)FindResource(resourceKey);
-                    UpdateDataContext();
-                }
-
-                (DataContext as DataSystemViewModel)?.RefreshFallback();
-            }));
+                vm.RefreshFallback();
+            }
         }
 
         private void StartMonitoringData()
@@ -68,13 +56,16 @@ namespace GTweak.View
                 {
                     await backgroundQueue.QueueTask(async () =>
                     {
-                        await Task.WhenAll(_hardwareProvider.GetTotalProcessorUsage(), _hardwareProvider.GetPhysicalAvailableMemory(),
-                            _hardwareProvider.GetProcessCount(), _hardwareProvider.GetServicesCount());
+                        await Task.WhenAll(_hardwareProvider.GetTotalProcessorUsage(), _hardwareProvider.GetPhysicalAvailableMemory(), _hardwareProvider.GetProcessCount(), _hardwareProvider.GetServicesCount());
                     });
 
                     _ = Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        UpdateDataContext();
+                        if (DataContext as DataSystemViewModel is var vm && vm != null)
+                        {
+                            vm.UpdateModel();
+                            vm.RefreshStates();
+                        }
                     }));
                 }
                 if ((int)time.TotalSeconds % 5 == 0)
@@ -82,14 +73,6 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(async delegate { await _hardwareProvider.GetUserIpAddress(); });
                 }
             });
-        }
-
-        private void UpdateDataContext()
-        {
-            if (DataContext as DataSystemViewModel is var vm && vm != null)
-            {
-                vm.UpdateModel();
-            }
         }
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)

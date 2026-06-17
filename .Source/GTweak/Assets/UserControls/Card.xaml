@@ -7,9 +7,7 @@
              mc:Ignorable="d" 
              d:Height="auto" d:Width="auto" IsTabStop="False" Focusable="False" KeyboardNavigation.TabNavigation="None"
              SnapsToDevicePixels="True" UseLayoutRounding="True">
-
     <Grid HorizontalAlignment="Stretch">
-
         <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Border.RenderTransform>
                 <TranslateTransform X="3" Y="6" />

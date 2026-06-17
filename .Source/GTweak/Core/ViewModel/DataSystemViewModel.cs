@@ -18,7 +18,6 @@ namespace GTweak.Core.ViewModel
             internal const string Unknown = "unknown_information_sysinfo";
             internal const string NoDevice = "no_device_information_sysinfo";
             internal const string NoDriver = "driver_not_installed_sysinfo";
-            internal const string ConnectionLost = "connection_lose_sysinfo";
         }
 
         private readonly DataSystemModel _model = new DataSystemModel();
@@ -37,7 +36,7 @@ namespace GTweak.Core.ViewModel
 
         public ImageSource DisplayWallpaper => HardwareData.Wallpaper;
 
-        public int SetBlurValue
+        public int IpBlurRadius
         {
             get => _model.BlurValue;
             set
@@ -50,7 +49,7 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        public Visibility SetVisibility
+        public Visibility IpSectionVisibility
         {
             get => _model.IpVisibility;
             set
@@ -63,7 +62,7 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        public bool StateButtonVision
+        public bool IsIpHidden
         {
             get => SettingsEngine.IsHiddenIpAddress;
             set
@@ -106,27 +105,36 @@ namespace GTweak.Core.ViewModel
                 CreateListCollection("Audio", () => HardwareData.AudioDevices.Select(a => new[] { a.Data, a.IsCapture ? "1" : "0" }).ToList(),true, FallbackKeys.NoDriver),
                 CreateListCollection("Network", () => HardwareData.NetworkAdapters.Select(n => new[] { n.Data, n.IsConnected ? "1" : "0" }).ToList(),true, FallbackKeys.NoDriver),
                 CreateModelCollection("CountryCode", () => HardwareData.UserCountryCode, isUpdatable: true),
-                (_ipAddressModel = CreateModelCollection("IpAddress", () => HardwareData.UserIPAddress, FallbackKeys.ConnectionLost, true))
+                (_ipAddressModel = CreateModelCollection("IpAddress", () => HardwareData.UserIPAddress, NetworkProvider.GetConnectionResourceKey(), true))
             };
 
             RefreshStates();
         }
 
-        internal void RefreshFallback() => _fallbackRefresh.ForEach(action => action());
+        internal void RefreshFallback()
+        {
+            string key = NetworkProvider.GetConnectionResourceKey();
+            if (key != null)
+            {
+                HardwareData.UserIPAddress = Application.Current.Resources[key] as string;
+            }
+            _fallbackRefresh.ForEach(action => action());
+        }
+
         internal void UpdateModel() => _modelUpdateActions.ForEach(action => action());
 
-        private void RefreshStates()
+        internal void RefreshStates()
         {
-            if (NetworkProvider.isIPAddressFormatValid || _ipAddressModel.Data.Any(char.IsDigit))
+            if (NetworkProvider.isIPAddressFormatValid || (_ipAddressModel?.Data?.Any(char.IsDigit) == true))
             {
-                SetBlurValue = SettingsEngine.IsHiddenIpAddress ? 20 : 0;
-                SetVisibility = Visibility.Visible;
+                IpBlurRadius = SettingsEngine.IsHiddenIpAddress ? 20 : 0;
+                IpSectionVisibility = Visibility.Visible;
                 _ipAddressModel.IsEnabled = true;
             }
             else
             {
-                SetBlurValue = 0;
-                SetVisibility = Visibility.Hidden;
+                IpBlurRadius = 0;
+                IpSectionVisibility = Visibility.Collapsed;
                 _ipAddressModel.IsEnabled = false;
             }
         }

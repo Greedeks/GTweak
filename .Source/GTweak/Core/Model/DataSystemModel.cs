@@ -9,7 +9,7 @@ internal sealed class DataSystemModel : ViewModelBase
     private List<DataSystemModel> _items;
     private bool _isEnabled;
     private int _blurValue;
-    private Visibility _ipVisibility;
+    private Visibility _ipVisibility = Visibility.Collapsed;
 
     public string Name { get; set; }
 

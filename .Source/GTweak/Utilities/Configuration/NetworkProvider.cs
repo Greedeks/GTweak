@@ -57,6 +57,14 @@ namespace GTweak.Utilities.Configuration
 
         internal static bool isIPAddressFormatValid = false;
 
+        internal static string GetConnectionResourceKey() => CurrentConnection switch
+        {
+            ConnectionStatus.Lose => "connection_lose_sysinfo",
+            ConnectionStatus.Block => "connection_block_sysinfo",
+            ConnectionStatus.Limited => "connection_limited_sysinfo",
+            _ => null
+        };
+
         internal async Task<bool> IsNetworkAvailable()
         {
             string dns = HardwareProvider.GetCurrentSystemLang().Code switch
@@ -159,17 +167,12 @@ namespace GTweak.Utilities.Configuration
                 CurrentConnection = ConnectionStatus.Lose;
             }
 
-            if (new Dictionary<ConnectionStatus, string>
-            {
-                { ConnectionStatus.Lose, "connection_lose_sysinfo" },
-                { ConnectionStatus.Block, "connection_block_sysinfo" },
-                { ConnectionStatus.Limited, "connection_limited_sysinfo" }
-            }.TryGetValue(CurrentConnection, out string resourceKey))
+            string key = GetConnectionResourceKey();
+            if (key != null)
             {
                 UserCountryCode = string.Empty;
-                UserIPAddress = (string)Application.Current.Resources[resourceKey];
+                UserIPAddress = Application.Current.Resources[key] as string ?? string.Empty;
             }
-
             isIPAddressFormatValid = UserIPAddress.Any(char.IsDigit);
         }
 

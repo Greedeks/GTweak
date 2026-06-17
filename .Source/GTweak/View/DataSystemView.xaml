@@ -711,33 +711,24 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" Text="{Binding [IpAddress].Data}" IsEnabled="{Binding [IpAddress].IsEnabled}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"  anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
+                                    <TextBlock Grid.Column="0" Text="{Binding [IpAddress].Data}" IsEnabled="{Binding [IpAddress].IsEnabled}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" anim:BlurAnimation.TargetRadius="{Binding IpBlurRadius}">
                                         <TextBlock.Effect>
-                                            <BlurEffect Radius="{Binding SetBlurValue}"/>
+                                            <BlurEffect Radius="{Binding IpBlurRadius}"/>
                                         </TextBlock.Effect>
                                     </TextBlock>
 
-                                    <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}" VerticalAlignment="Center">
+                                    <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}" Visibility="{Binding IpSectionVisibility}" VerticalAlignment="Center" anim:BlurAnimation.TargetRadius="{Binding IpBlurRadius}">
                                         <Border.Effect>
-                                            <BlurEffect Radius="{Binding SetBlurValue}"/>
+                                            <BlurEffect Radius="{Binding IpBlurRadius}"/>
                                         </Border.Effect>
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Visibility" Value="{Binding SetVisibility}"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding [CountryCode].Data, FallbackValue='', TargetNullValue=''}" Value="">
-                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding [CountryCode].Data}"/>
+                                        <TextBlock Style="{StaticResource TextDefault}" FontSize="14" Foreground="{StaticResource Brush_Accent}" Text="{Binding [CountryCode].Data}"/>
                                     </Border>
 
-                                    <ToggleButton Grid.Column="4" Width="24" Height="24" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding StateButtonVision, Mode=TwoWay}"/>
+                                    <ToggleButton Grid.Column="4" Width="24" Height="24" Visibility="{Binding IpSectionVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding IsIpHidden, Mode=TwoWay}"/>
                                 </Grid>
                             </uc:InfoCard.CardContent>
                         </uc:InfoCard>
+
                     </StackPanel>
            
                 </uc:FlowPanel>
