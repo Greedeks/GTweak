@@ -711,7 +711,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" Text="{Binding [IpAddress].Data}" IsEnabled="{Binding [IpAddress].IsEnabled}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"  anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
+                                    <TextBlock Grid.Column="0" Text="{Binding [IpAddress].Data}" IsEnabled="{Binding [IpAddress].IsEnabled}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"  anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
                                         <TextBlock.Effect>
                                             <BlurEffect Radius="{Binding SetBlurValue}"/>
                                         </TextBlock.Effect>

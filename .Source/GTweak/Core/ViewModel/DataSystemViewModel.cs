@@ -24,6 +24,7 @@ namespace GTweak.Core.ViewModel
         private readonly DataSystemModel _model = new DataSystemModel();
         private ObservableCollection<DataSystemModel> _collection;
         private readonly List<Action> _modelUpdateActions = new List<Action>();
+        private readonly List<Action> _fallbackRefresh = new List<Action>();
         private readonly DataSystemModel _ipAddressModel;
 
         public ObservableCollection<DataSystemModel> DisplayData
@@ -111,25 +112,11 @@ namespace GTweak.Core.ViewModel
             RefreshStates();
         }
 
-        internal void Update()
-        {
-            foreach (Action updateItemAction in _modelUpdateActions)
-            {
-                updateItemAction();
-            }
-
-            RefreshStates();
-        }
+        internal void RefreshFallback() => _fallbackRefresh.ForEach(action => action());
+        internal void UpdateModel() => _modelUpdateActions.ForEach(action => action());
 
         private void RefreshStates()
         {
-            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
-            {
-                SetVisibility = Visibility.Visible;
-                SetBlurValue = 0;
-                return;
-            }
-
             if (NetworkProvider.isIPAddressFormatValid || _ipAddressModel.Data.Any(char.IsDigit))
             {
                 SetBlurValue = SettingsEngine.IsHiddenIpAddress ? 20 : 0;
@@ -170,6 +157,8 @@ namespace GTweak.Core.ViewModel
                 _modelUpdateActions.Add(UpdateModelData);
             }
 
+            _fallbackRefresh.Add(UpdateModelData);
+
             return model;
         }
 
@@ -207,6 +196,8 @@ namespace GTweak.Core.ViewModel
             {
                 _modelUpdateActions.Add(UpdateModelData);
             }
+
+            _fallbackRefresh.Add(UpdateModelData);
 
             return model;
         }

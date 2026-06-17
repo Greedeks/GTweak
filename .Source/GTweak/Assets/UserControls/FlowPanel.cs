@@ -459,8 +459,6 @@ namespace GTweak.Assets.UserControls
                 };
             }
 
-            double stretchExtraPerColumn = (isStretch && groups.Count > 0) ? extraSpace / groups.Count : 0;
-
             for (int i = 0; i < groups.Count; i++)
             {
                 FlowItemGroup col = groups[i];
@@ -469,7 +467,8 @@ namespace GTweak.Assets.UserControls
                 double columnX = xV + shift;
                 double y = 0;
 
-                double actualColWidth = isStretch ? col.Width + stretchExtraPerColumn : col.Width;
+                double equalWidth = isStretch ? (availableWidth - (groups.Count - 1) * HorizontalSpacing) / groups.Count : 0;
+                double actualColWidth = isStretch ? equalWidth : col.Width;
 
                 foreach (UIElement child in col.Elements)
                 {

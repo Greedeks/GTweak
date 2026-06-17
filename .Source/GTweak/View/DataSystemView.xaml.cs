@@ -55,6 +55,8 @@ namespace GTweak.View
                     HardwareData.UserIPAddress = (string)FindResource(resourceKey);
                     UpdateDataContext();
                 }
+
+                (DataContext as DataSystemViewModel)?.RefreshFallback();
             }));
         }
 
@@ -86,7 +88,7 @@ namespace GTweak.View
         {
             if (DataContext as DataSystemViewModel is var vm && vm != null)
             {
-                vm.Update();
+                vm.UpdateModel();
             }
         }
 
