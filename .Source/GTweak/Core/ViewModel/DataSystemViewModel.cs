@@ -102,8 +102,9 @@ namespace GTweak.Core.ViewModel
                 CreateListCollection("Memory", () => HardwareData.Memory.Modules.Select(m => new[] { m.Data, m.Frequency, m.Capacity }).ToList(), isUpdatable:false, FallbackKeys.NoDevice, FallbackKeys.Unknown, FallbackKeys.Unknown),
                 CreateModelCollection("Type", () => HardwareData.Memory.Type, FallbackKeys.Unknown),
                 CreateListCollection("Storage", () => HardwareData.Storage.Select(s => new[] { s.Data, s.Capacity, s.StorageType, s.UsedPercent.ToString(CultureInfo.InvariantCulture), s.FreeSpace, s.UsedSpace }).ToList(),true,FallbackKeys.NoDevice,string.Empty,FallbackKeys.Unknown, string.Empty,string.Empty, string.Empty),
-                CreateListCollection("Audio", () => HardwareData.AudioDevice.Select(a => new[] { a.Data, a.IsCapture ? "1" : "0" }).ToList(),true, FallbackKeys.NoDriver),
-                CreateModelCollection("Network", () => HardwareData.NetworkAdapter, FallbackKeys.NoDriver, true),
+                CreateListCollection("Audio", () => HardwareData.AudioDevices.Select(a => new[] { a.Data, a.IsCapture ? "1" : "0" }).ToList(),true, FallbackKeys.NoDriver),
+                CreateListCollection("Network", () => HardwareData.NetworkAdapters.Select(n => new[] { n.Data, n.IsConnected ? "1" : "0" }).ToList(),true, FallbackKeys.NoDriver),
+                CreateModelCollection("CountryCode", () => HardwareData.UserCountryCode, isUpdatable: true),
                 (_ipAddressModel = CreateModelCollection("IpAddress", () => HardwareData.UserIPAddress, FallbackKeys.ConnectionLost, true))
             };
 
@@ -122,6 +123,13 @@ namespace GTweak.Core.ViewModel
 
         private void RefreshStates()
         {
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            {
+                SetVisibility = Visibility.Visible;
+                SetBlurValue = 0;
+                return;
+            }
+
             if (NetworkProvider.isIPAddressFormatValid || _ipAddressModel.Data.Any(char.IsDigit))
             {
                 SetBlurValue = SettingsEngine.IsHiddenIpAddress ? 20 : 0;

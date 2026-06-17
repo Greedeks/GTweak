@@ -152,6 +152,10 @@
     <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\UserControls\InfoCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Languages\**\*.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -177,6 +181,9 @@
     <Compile Include="Assets\UserControls\FlowPanel.cs" />
     <Compile Include="Assets\UserControls\FileCard.xaml.cs">
       <DependentUpon>FileCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\UserControls\InfoCard.xaml.cs">
+      <DependentUpon>InfoCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\UserControls\ToolsetCard.xaml.cs">
       <DependentUpon>ToolsetCard.xaml</DependentUpon>

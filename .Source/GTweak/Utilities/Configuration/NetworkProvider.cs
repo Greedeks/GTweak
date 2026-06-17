@@ -128,7 +128,8 @@ namespace GTweak.Utilities.Configuration
                         if (ipMetadata != null && !string.IsNullOrWhiteSpace(ipMetadata.Ip) && !string.IsNullOrWhiteSpace(ipMetadata.Country) && IPAddress.TryParse(ipMetadata.Ip, out _))
                         {
                             CurrentConnection = ConnectionStatus.Available;
-                            UserIPAddress = $"{ipMetadata.Ip} ({ipMetadata.Country})";
+                            UserIPAddress = ipMetadata.Ip;
+                            UserCountryCode = ipMetadata.Country;
                             break;
                         }
 
@@ -163,7 +164,11 @@ namespace GTweak.Utilities.Configuration
                 { ConnectionStatus.Lose, "connection_lose_sysinfo" },
                 { ConnectionStatus.Block, "connection_block_sysinfo" },
                 { ConnectionStatus.Limited, "connection_limited_sysinfo" }
-            }.TryGetValue(CurrentConnection, out string resourceKey)) { UserIPAddress = (string)Application.Current.Resources[resourceKey]; }
+            }.TryGetValue(CurrentConnection, out string resourceKey))
+            {
+                UserCountryCode = string.Empty;
+                UserIPAddress = (string)Application.Current.Resources[resourceKey];
+            }
 
             isIPAddressFormatValid = UserIPAddress.Any(char.IsDigit);
         }

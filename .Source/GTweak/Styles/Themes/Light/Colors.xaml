@@ -8,7 +8,6 @@
     
     <SolidColorBrush x:Key="Brush_Background" Color="#FFF3F3F3"/>
     <SolidColorBrush x:Key="Brush_Accent" Color="{StaticResource Color_Accent}"/>
-    <SolidColorBrush x:Key="Brush_Accent_P" Color="#6A00C7" />
     <SolidColorBrush x:Key="Brush_Accent_B" Color="#0066CC" />
     <SolidColorBrush x:Key="Brush_Accent_Y" Color="#B88600" />
     <SolidColorBrush x:Key="Brush_Inactive" Color="#6D6D6D"/>
@@ -49,7 +48,6 @@
     <SolidColorBrush x:Key="Brush_Toggle_Text_Hover" Color="#008C47"/>
 
     <SolidColorBrush x:Key="Brush_Background_Labels" Color="#C1E8D6"/>
-    <SolidColorBrush x:Key="Brush_Background_Labels_P" Color="#E1D3F5" />
     <SolidColorBrush x:Key="Brush_Background_Labels_B" Color="#D6E8FA" />
     <SolidColorBrush x:Key="Brush_Background_Labels_Y" Color="#F8EFCB" />
     

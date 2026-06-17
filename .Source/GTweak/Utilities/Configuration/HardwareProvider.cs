@@ -110,12 +110,12 @@ namespace GTweak.Utilities.Configuration
 
             if (deviceType == DeviceType.Audio || deviceType == DeviceType.All)
             {
-                AudioDevice = GetAudioDevices();
+                AudioDevices = GetAudioDevices();
             }
 
             if (deviceType == DeviceType.Network || deviceType == DeviceType.All)
             {
-                NetworkAdapter = GetNetworkAdapters();
+                NetworkAdapters = GetNetworkAdapters();
             }
         }
 
@@ -455,7 +455,7 @@ namespace GTweak.Utilities.Configuration
                             Data = data,
                             Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL)),
                             StorageType = storageType,
-                            DriveLetters = GetDriveLettersForDisk(diskIndex)
+                            DriveLetters = GetDriveLetters(diskIndex)
                         });
                     }
                 }
@@ -479,7 +479,7 @@ namespace GTweak.Utilities.Configuration
                             Data = data,
                             Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL)),
                             StorageType = storageType,
-                            DriveLetters = GetDriveLettersForDisk(diskIndex)
+                            DriveLetters = GetDriveLetters(diskIndex)
                         });
                     }
                 }
@@ -489,7 +489,7 @@ namespace GTweak.Utilities.Configuration
 
         }
 
-        private static List<string> GetDriveLettersForDisk(uint diskIndex)
+        private static List<string> GetDriveLetters(uint diskIndex)
         {
             List<string> letters = new List<string>();
 
@@ -615,11 +615,11 @@ namespace GTweak.Utilities.Configuration
             {
                 using (managementObj)
                 {
-                    (bool isUsbDevice, string usbName, bool usbIsCapture) = IsUsbAudioDevice(managementObj["DeviceID"]?.ToString() ?? string.Empty);
+                    (bool isUsbDevice, string usbName, bool isCapture) = IsUsbAudioDevice(managementObj["DeviceID"]?.ToString() ?? string.Empty);
 
                     if (isUsbDevice && !string.IsNullOrEmpty(usbName))
                     {
-                        result.Add(new AudioDeviceInfo { Data = usbName, IsCapture = usbIsCapture });
+                        result.Add(new AudioDeviceInfo { Data = usbName, IsCapture = isCapture });
                     }
                     else if (new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) is string wmiName)
                     {
@@ -633,22 +633,26 @@ namespace GTweak.Utilities.Configuration
             return result;
         }
 
-        private string GetNetworkAdapters()
+        private List<NetworkAdapterInfo> GetNetworkAdapters()
         {
-            StringBuilder result = new StringBuilder();
+            List<NetworkAdapterInfo> result = new List<NetworkAdapterInfo>();
 
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer, NetConnectionStatus from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    string name = new string[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                    ushort status = managementObj["NetConnectionStatus"] is IConvertible s ? Convert.ToUInt16(s) : (ushort)7;
+
+                    if (!string.IsNullOrEmpty(name))
                     {
-                        result.AppendLine(new string[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty); ;
+                        result.Add(new NetworkAdapterInfo { Data = name, IsConnected = status == 2 });
                     }
                 }
             }
 
-            return result.ToString().TrimEnd('\n', '\r');
+            return result;
         }
 
         private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible
