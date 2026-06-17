@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using System.Windows;
 using GTweak.Core.Base;
 
 internal sealed class DataSystemModel : ViewModelBase
 {
     private string _data;
+    private string[] _dataItems;
+    private List<DataSystemModel> _items;
     private bool _isEnabled;
     private int _blurValue;
     private Visibility _ipVisibility;
@@ -14,6 +17,18 @@ internal sealed class DataSystemModel : ViewModelBase
     {
         get => _data;
         set { _data = value; OnPropertyChanged(); }
+    }
+
+    public string[] DataItems
+    {
+        get => _dataItems;
+        set { _dataItems = value; OnPropertyChanged(); }
+    }
+
+    public List<DataSystemModel> Items
+    {
+        get => _items;
+        set { _items = value; OnPropertyChanged(); }
     }
 
     public bool IsEnabled

@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
+using GTweak.Core.Behaviors;
 using GTweak.Utilities.Animation;
-using GTweak.Utilities.Behaviors;
 using GTweak.Utilities.Controls;
 
 namespace GTweak.Assets.UserControls

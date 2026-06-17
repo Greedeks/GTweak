@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -98,24 +99,23 @@ namespace GTweak.Utilities.Configuration
         {
             if (deviceType == DeviceType.Storage || deviceType == DeviceType.All)
             {
-                Storage.Data = GetStorageDevices();
+                Storage = GetStorageDevices();
+                RefreshStorageSpace();
             }
 
-            if (deviceType == DeviceType.StorageSpace || deviceType == DeviceType.All || deviceType == DeviceType.Storage)
+            if (deviceType == DeviceType.StorageSpace)
             {
-                (string FreePercentage, string UsedPercentage) = GetStorageSpace();
-                Storage.FreeSpace = FreePercentage;
-                Storage.UsedSpace = UsedPercentage;
+                RefreshStorageSpace();
             }
 
             if (deviceType == DeviceType.Audio || deviceType == DeviceType.All)
             {
-                AudioDevice = GetAudioDevices();
+                AudioDevices = GetAudioDevices();
             }
 
             if (deviceType == DeviceType.Network || deviceType == DeviceType.All)
             {
-                NetworkAdapter = GetNetworkAdapters();
+                NetworkAdapters = GetNetworkAdapters();
             }
         }
 
@@ -198,7 +198,9 @@ namespace GTweak.Utilities.Configuration
                     {
                         string data = new string[] { "Name", "Caption", "Description", "SMBIOSBIOSVersion" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
                         string dataSN = managementObj["SerialNumber"]?.ToString() ?? string.Empty;
-                        Bios.Data += !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? $"{data}, S/N-{dataSN}\n" : $"{data}\n";
+
+                        Bios.Data = data;
+                        Bios.SerialNumber = !string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace) ? dataSN : string.Empty;
                     }
                 }
             }
@@ -221,14 +223,12 @@ namespace GTweak.Utilities.Configuration
 
                         if (!string.IsNullOrWhiteSpace(dataVersion) && !dataVersion.Any(char.IsWhiteSpace))
                         {
-                            Motherboard.Data += $", V{dataVersion}";
+                            Motherboard.Version += dataVersion;
                         }
                         else if (!string.IsNullOrWhiteSpace(dataSN) && !dataSN.Any(char.IsWhiteSpace))
                         {
-                            Motherboard.Data += $", S/N-{dataSN}";
+                            Motherboard.SerialNumber += dataSN;
                         }
-
-
                     }
                 }
             }
@@ -356,21 +356,21 @@ namespace GTweak.Utilities.Configuration
                 return (false, string.Empty, string.Empty);
             }
 
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, AdapterRAM, PNPDeviceID from Win32_VideoController", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    string data = managementObj["Name"] as string ?? string.Empty;
+                    (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
+                    Graphics.Add(new GraphicsInfo
                     {
-                        string data = managementObj["Name"] as string ?? string.Empty;
-                        (bool isFound, string dataMemoryReg, string driverDesc) = GetMemorySize(data);
-                        Graphics += $"{(string.IsNullOrEmpty(data) && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data)}, {(isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM && managementObj["AdapterRAM"] != null ? SizeCalculationHelper(valueRAM) : "N/A")}\n";
-                        VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
-                    }
+                        Data = string.IsNullOrEmpty(data) && !string.IsNullOrEmpty(driverDesc) ? driverDesc : data,
+                        Memory = isFound && !string.IsNullOrEmpty(dataMemoryReg) ? dataMemoryReg : managementObj["AdapterRAM"] is uint valueRAM ? SizeCalculationHelper(valueRAM) : "N/A"
+                    });
+                    VendorDetection.Nvidia |= managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10DE", StringComparison.OrdinalIgnoreCase) >= 0;
                 }
             }
-
-            Graphics = Graphics.TrimEnd('\n', '\r');
         }
 
         /// <summary>
@@ -379,29 +379,30 @@ namespace GTweak.Utilities.Configuration
         /// </summary>
         private void GetMemoryInfo()
         {
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Manufacturer, Name, Caption, Description, Tag, Capacity, ConfiguredClockSpeed, Speed, SMBIOSMemoryType from Win32_PhysicalMemory", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    string speedData = new string[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
+                    string data = new string[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
+                    Memory.Type = HardwareMappings.GetMemoryType(Convert.ToUInt32(managementObj["SMBIOSMemoryType"] ?? 0u));
+                    Memory.Modules.Add(new MemoryModuleInfo
                     {
-                        string speedData = new string[] { "ConfiguredClockSpeed", "Speed" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(s => !string.IsNullOrEmpty(s) && s != "0");
-                        string data = new string[] { "Manufacturer", "Name", "Caption", "Description", "Tag" }.Select(prop => managementObj[prop] as string).FirstOrDefault(value => !string.IsNullOrWhiteSpace(value) && !string.Equals(value, "Unspecified", StringComparison.OrdinalIgnoreCase)) ?? string.Empty;
-                        Memory.Type = HardwareMappings.GetMemoryType(Convert.ToUInt32(managementObj["SMBIOSMemoryType"] ?? 0u));
-                        Memory.Data += $"{string.Concat(data, ", ")}{SizeCalculationHelper(Convert.ToUInt64(managementObj["Capacity"] ?? 0UL))}{(string.IsNullOrEmpty(speedData) ? "" : $", {speedData}MHz")}\n";
-                    }
+                        Data = data,
+                        Frequency = string.IsNullOrEmpty(speedData) ? string.Empty : $"{speedData} MHz",
+                        Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Capacity"] ?? 0UL))
+                    });
                 }
             }
-
-            Memory.Data = Memory.Data.TrimEnd('\n', '\r');
         }
 
         /// <summary>
         /// The MSFT_PhysicalDisk class may be missing or malfunctioning; in such cases, it will be replaced by the universal Win32_DiskDrive class. 
         /// </summary>
-        private string GetStorageDevices()
+        private List<StorageInfo> GetStorageDevices()
         {
-            StringBuilder result = new StringBuilder();
+            List<StorageInfo> result = new List<StorageInfo>();
 
             static string GetStorageType(object mediaType, string deviceId, ushort busType, string interfaceType)
             {
@@ -443,12 +444,19 @@ namespace GTweak.Utilities.Configuration
                 {
                     using (managementObj)
                     {
-                        string data = new string[] { "FriendlyName", "Model", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                        string data = new[] { "FriendlyName", "Model", "Description" }.Select(p => managementObj[p] as string).FirstOrDefault(s => !string.IsNullOrEmpty(s)) ?? string.Empty;
                         ushort mediaType = managementObj["MediaType"] is IConvertible m ? Convert.ToUInt16(m) : (ushort)0;
                         ushort busType = managementObj["BusType"] is IConvertible b ? Convert.ToUInt16(b) : (ushort)0;
-                        string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{managementObj["DeviceId"]?.ToString() ?? "0"}", busType, default);
+                        uint diskIndex = Convert.ToUInt32(managementObj["DeviceId"] ?? 0);
+                        string storageType = GetStorageType(mediaType, $@"\\.\PhysicalDrive{diskIndex}", busType, default);
 
-                        result.AppendLine($"{SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL))} [{data}] {storageType}");
+                        result.Add(new StorageInfo
+                        {
+                            Data = data,
+                            Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL)),
+                            StorageType = storageType,
+                            DriveLetters = GetDriveLetters(diskIndex)
+                        });
                     }
                 }
             }
@@ -459,41 +467,99 @@ namespace GTweak.Utilities.Configuration
                 {
                     using (managementObj)
                     {
-                        string data = new string[] { "Model", "Caption" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                        string data = new[] { "Model", "Caption" }.Select(p => managementObj[p] as string).FirstOrDefault(s => !string.IsNullOrEmpty(s)) ?? string.Empty;
                         string mediaType = managementObj["MediaType"]?.ToString() ?? string.Empty;
                         string interfaceType = managementObj["InterfaceType"]?.ToString() ?? string.Empty;
-                        string storageType = GetStorageType(mediaType, managementObj["DeviceID"] as string ?? string.Empty, default, interfaceType);
+                        string deviceId = managementObj["DeviceID"] as string ?? string.Empty;
+                        string storageType = GetStorageType(mediaType, deviceId, default, interfaceType);
+                        uint.TryParse(deviceId.Replace(@"\\.\PHYSICALDRIVE", "").Replace(@"\\.\PhysicalDrive", ""), out uint diskIndex);
 
-                        result.AppendLine($"{SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL))} [{data}] {storageType}");
+                        result.Add(new StorageInfo
+                        {
+                            Data = data,
+                            Capacity = SizeCalculationHelper(Convert.ToUInt64(managementObj["Size"] ?? 0UL)),
+                            StorageType = storageType,
+                            DriveLetters = GetDriveLetters(diskIndex)
+                        });
                     }
                 }
             }
 
-            return result.ToString().TrimEnd('\n', '\r');
+            return result;
+
         }
 
-        private (string FreePercentage, string UsedPercentage) GetStorageSpace()
+        private static List<string> GetDriveLetters(uint diskIndex)
         {
-            long totalSize = 0;
-            long totalFreeSpace = 0;
+            List<string> letters = new List<string>();
 
-            foreach (DriveInfo drive in DriveInfo.GetDrives())
+            try
             {
-                try
+                using ManagementObjectSearcher partSearcher = new ManagementObjectSearcher(@"root\cimv2", $"select DeviceID from Win32_DiskPartition where DiskIndex = {diskIndex}", new EnumerationOptions { ReturnImmediately = true });
+                foreach (ManagementObject partition in partSearcher.Get().Cast<ManagementObject>())
                 {
-                    if (drive.IsReady && (drive.DriveType == DriveType.Fixed || drive.DriveType == DriveType.Removable))
+                    using (partition)
                     {
-                        totalSize += drive.TotalSize;
-                        totalFreeSpace += drive.TotalFreeSpace;
+                        string partitionId = partition["DeviceID"]?.ToString() ?? string.Empty;
+                        if (string.IsNullOrEmpty(partitionId))
+                        {
+                            continue;
+                        }
+
+                        using ManagementObjectSearcher logicalSearcher = new ManagementObjectSearcher(@"root\cimv2", $"associators of {{Win32_DiskPartition.DeviceID='{partitionId}'}} where AssocClass=Win32_LogicalDiskToPartition", new EnumerationOptions { ReturnImmediately = true });
+                        foreach (ManagementObject logical in logicalSearcher.Get().Cast<ManagementObject>())
+                        {
+                            using (logical)
+                            {
+                                string letter = logical["DeviceID"]?.ToString();
+                                if (!string.IsNullOrEmpty(letter))
+                                {
+                                    letters.Add(letter);
+                                }
+                            }
+                        }
                     }
                 }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
             }
+            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-            string freePercent = totalSize > 0 ? $"{(Math.Round((double)totalFreeSpace / totalSize * 100, 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
-            string usedPercent = totalSize > 0 ? $"{(Math.Round(100 - ((double)totalFreeSpace / totalSize * 100), 1)).ToString("0.#", CultureInfo.InvariantCulture)}%" : string.Empty;
+            return letters;
+        }
 
-            return (freePercent, usedPercent);
+        private void RefreshStorageSpace()
+        {
+            foreach (StorageInfo storageInfo in Storage)
+            {
+                long totalSize = 0;
+                long totalFreeSpace = 0;
+
+                foreach (string letter in storageInfo.DriveLetters)
+                {
+                    try
+                    {
+                        DriveInfo drive = new DriveInfo(letter);
+                        if (drive.IsReady)
+                        {
+                            totalSize += drive.TotalSize;
+                            totalFreeSpace += drive.TotalFreeSpace;
+                        }
+                    }
+                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                }
+
+                if (totalSize > 0)
+                {
+                    storageInfo.UsedPercent = Math.Round(100 - (double)totalFreeSpace / totalSize * 100, 1);
+                    storageInfo.FreeSpace = SizeCalculationHelper((ulong)totalFreeSpace);
+                    storageInfo.UsedSpace = SizeCalculationHelper((ulong)(totalSize - totalFreeSpace));
+                }
+                else
+                {
+                    storageInfo.UsedPercent = 0;
+                    storageInfo.FreeSpace = string.Empty;
+                    storageInfo.UsedSpace = string.Empty;
+                }
+            }
         }
 
         /// <summary>
@@ -501,13 +567,13 @@ namespace GTweak.Utilities.Configuration
         /// Therefore, for such devices, the name lookup is performed through the registry. 
         /// The search for an identifier in Win32_PnPEntity is slow, although it is more convenient. However, it is inferior in speed.
         /// </summary>
-        private string GetAudioDevices()
+        private List<AudioDeviceInfo> GetAudioDevices()
         {
-            StringBuilder result = new StringBuilder();
+            List<AudioDeviceInfo> result = new List<AudioDeviceInfo>();
 
-            static (bool, string) IsUsbAudioDevice(string deviceID)
+            static (bool isUsb, string name, bool isCapture) IsUsbAudioDevice(string deviceID)
             {
-                foreach (string basePath in new[] { @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture" })
+                foreach ((string basePath, bool isCapture) in new[] { (@"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", false), (@"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Capture", true) })
                 {
                     using RegistryKey regKey = Registry.LocalMachine.OpenSubKey(basePath);
                     if (regKey != null)
@@ -525,73 +591,68 @@ namespace GTweak.Utilities.Configuration
                                 string valueID = RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},2", string.Empty);
 
                                 if (!string.IsNullOrEmpty(valueID) && valueID.IndexOf(deviceID, StringComparison.OrdinalIgnoreCase) >= 0 &&
-                                    ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                     (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                     (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
-                                     (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
+                                   ((!string.IsNullOrEmpty(value5) && value5.IndexOf("wdma_usb.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                   (!string.IsNullOrEmpty(value8) && value8.IndexOf(@"USB\Class_01", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                   (!string.IsNullOrEmpty(value6) && value6.IndexOf("USBAudio.inf", StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                   (!string.IsNullOrEmpty(value24) && value24.IndexOf("usb", StringComparison.OrdinalIgnoreCase) >= 0)))
                                 {
-
                                     string nameValue6 = RegistryHelp.GetValue(propsPath, "{b3f8fa53-0004-438e-9003-51a46e139bfc},6", string.Empty).Trim();
                                     string typeNameValue2 = RegistryHelp.GetValue(propsPath, "{a45c254e-df1c-4efd-8020-67d146a850e0},2", string.Empty).Trim();
+                                    string name = nameValue6.Length > 10 && !string.Equals(nameValue6, typeNameValue2, StringComparison.OrdinalIgnoreCase) ? nameValue6 : $"{typeNameValue2} {nameValue6}";
 
-                                    if (nameValue6.Length > 10 && !string.Equals(nameValue6, typeNameValue2, StringComparison.OrdinalIgnoreCase))
-                                    {
-                                        return (true, nameValue6);
-                                    }
-                                    else
-                                    {
-                                        return (true, $"{typeNameValue2} {nameValue6}");
-                                    }
+                                    return (true, name, isCapture);
                                 }
                             }
                         }
                     }
                 }
 
-                return (false, string.Empty);
+                return (false, string.Empty, false);
             }
 
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description, PNPDeviceID from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select DeviceID, Name, Caption, Description, PNPDeviceID from Win32_SoundDevice where Status = 'OK'", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    (bool isUsbDevice, string usbName, bool isCapture) = IsUsbAudioDevice(managementObj["DeviceID"]?.ToString() ?? string.Empty);
+
+                    if (isUsbDevice && !string.IsNullOrEmpty(usbName))
                     {
-                        (bool isUsbDevice, string data) = IsUsbAudioDevice(managementObj["DeviceID"]?.ToString() ?? string.Empty);
-
-                        if (isUsbDevice && !string.IsNullOrEmpty(data))
-                        {
-                            result.AppendLine(data);
-                        }
-                        else
-                        {
-                            result.AppendLine(new string[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty);
-                        }
-
-                        VendorDetection.Realtek |= (managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) ?? -1) >= 0;
+                        result.Add(new AudioDeviceInfo { Data = usbName, IsCapture = isCapture });
                     }
+                    else if (new[] { "Name", "Caption", "Description" }.Select(prop => managementObj[prop] as string).FirstOrDefault(info => !string.IsNullOrEmpty(info)) is string wmiName)
+                    {
+                        result.Add(new AudioDeviceInfo { Data = wmiName, IsCapture = false });
+                    }
+
+                    VendorDetection.Realtek |= (managementObj["PNPDeviceID"]?.ToString().IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) ?? -1) >= 0;
                 }
             }
 
-            return result.ToString().TrimEnd('\n', '\r');
+            return result;
         }
 
-        private string GetNetworkAdapters()
+        private List<NetworkAdapterInfo> GetNetworkAdapters()
         {
-            StringBuilder result = new StringBuilder();
+            List<NetworkAdapterInfo> result = new List<NetworkAdapterInfo>();
 
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true }))
+            using ManagementObjectSearcher searcher = new ManagementObjectSearcher(@"root\cimv2", "select Name, Description, ProductName, Manufacturer, NetConnectionStatus from Win32_NetworkAdapter where NetConnectionStatus=2 or NetConnectionStatus=7", new EnumerationOptions { ReturnImmediately = true });
+            foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
             {
-                foreach (ManagementObject managementObj in searcher.Get().Cast<ManagementObject>())
+                using (managementObj)
                 {
-                    using (managementObj)
+                    string name = new string[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty;
+                    ushort status = managementObj["NetConnectionStatus"] is IConvertible s ? Convert.ToUInt16(s) : (ushort)7;
+
+                    if (!string.IsNullOrEmpty(name))
                     {
-                        result.AppendLine(new string[] { "Name", "Description", "ProductName", "Manufacturer" }.Select(prop => managementObj[prop]?.ToString()).FirstOrDefault(info => !string.IsNullOrEmpty(info)) ?? string.Empty); ;
+                        result.Add(new NetworkAdapterInfo { Data = name, IsConnected = status == 2 });
                     }
                 }
             }
 
-            return result.ToString().TrimEnd('\n', '\r');
+            return result;
         }
 
         private static string SizeCalculationHelper<T>(T sizeInBytes) where T : struct, IConvertible

@@ -3,15 +3,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace GTweak.Utilities.Behaviors
+namespace GTweak.Core.Behaviors
 {
     internal static class ScrollFadeBehavior
     {
-        public static readonly DependencyProperty EnableFadeProperty =
+        internal static readonly DependencyProperty EnableFadeProperty =
             DependencyProperty.RegisterAttached("EnableFade", typeof(bool), typeof(ScrollFadeBehavior), new PropertyMetadata(false, OnEnableFadeChanged));
 
-        public static bool GetEnableFade(DependencyObject obj) => (bool)obj.GetValue(EnableFadeProperty);
-        public static void SetEnableFade(DependencyObject obj, bool value) => obj.SetValue(EnableFadeProperty, value);
+        internal static bool GetEnableFade(DependencyObject obj) => (bool)obj.GetValue(EnableFadeProperty);
+        internal static void SetEnableFade(DependencyObject obj, bool value) => obj.SetValue(EnableFadeProperty, value);
 
         private static void OnEnableFadeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

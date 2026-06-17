@@ -18,13 +18,44 @@ namespace GTweak.Assets.UserControls
         internal static new readonly DependencyProperty ContentProperty =
             DependencyProperty.Register(nameof(BtnContent), typeof(string), typeof(Button), new PropertyMetadata(string.Empty, (s, e) => { if (s is Button btn && e.NewValue is string str) { btn.Content = str; } }));
 
-        internal Style IconStyle { get => (Style)GetValue(IconStyleProperty); set => SetValue(IconStyleProperty, value); }
+        internal Style IconStyle
+        {
+            get => (Style)GetValue(IconStyleProperty);
+            set => SetValue(IconStyleProperty, value);
+        }
 
-        internal DynamicResourceExtension Title { set { if (value != null) { CardTitle?.SetResourceReference(TextBlock.TextProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey)); } } }
+        internal DynamicResourceExtension Title
+        {
+            set
+            {
+                if (value != null)
+                {
+                    CardTitle?.SetResourceReference(TextBlock.TextProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey));
+                }
+            }
+        }
 
-        internal DynamicResourceExtension Description { set { if (value != null) { CardText?.SetResourceReference(TextBlock.TextProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey)); } } }
+        internal DynamicResourceExtension Description
+        {
+            set
+            {
+                if (value != null)
+                {
+                    CardText?.SetResourceReference(TextBlock.TextProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey));
+                }
+            }
+        }
 
-        internal DynamicResourceExtension BtnContent { set { if (value != null) { CardButton?.SetResourceReference(ContentProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey)); } } }
+        internal DynamicResourceExtension BtnContent
+        {
+            set
+            {
+                if (value != null)
+                {
+                    CardButton?.SetResourceReference(ContentProperty, new DynamicResourceExtensionConverter().ConvertToString(value.ResourceKey));
+                }
+            }
+        }
 
         internal DynamicResourceExtension BtnContentSecondary
         {

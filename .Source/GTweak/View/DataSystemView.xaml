@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:b="clr-namespace:GTweak.Utilities.Behaviors"
+             xmlns:b="clr-namespace:GTweak.Core.Behaviors"
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel" 
              xmlns:uc="clr-namespace:GTweak.Assets.UserControls"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -16,6 +16,8 @@
     </UserControl.DataContext>
     <UserControl.Resources>
         <conv:AngleToPercentConverter x:Key="AngleToPercent"/>
+        <conv:UsageToAngleConverter x:Key="UsageToAngle"/>
+        <conv:PercentToWidthConverter x:Key="PercentToWidth"/>
     </UserControl.Resources>
 
     <Grid>
@@ -46,326 +48,701 @@
             </Border>
         </Popup>
 
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Margin="10,10,10,0">
+            <Border CornerRadius="8" Opacity="0.5" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Border.RenderTransform>
+                    <TranslateTransform X="3" Y="6" />
+                </Border.RenderTransform>
+            </Border>
 
-            <Grid Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,10,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource DataElement_Opacity}">
-                    <Ellipse.CacheMode>
-                        <BitmapCache RenderAtScale="2"/>
-                    </Ellipse.CacheMode>
-                    <Ellipse.Effect>
-                        <DropShadowEffect Opacity="0.3"/>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <ui:Arc x:Name="CPULoad" Width="90" Height="90" Stroke="{StaticResource Brush_Accent}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" EndAngle="0">
-                    <ui:Arc.CacheMode>
-                        <BitmapCache RenderAtScale="2"/>
-                    </ui:Arc.CacheMode>
-                    <ui:Arc.Effect>
-                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
-                    </ui:Arc.Effect>
-                </ui:Arc>
-                <TextBlock Foreground="{StaticResource Brush_Inactive}" TextAlignment="Center"  Style="{StaticResource TextDefault}" Margin="0,0,0,20">
-                <InlineUIContainer>
-                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" anim:NumberAnimation.Value="{Binding ElementName=CPULoad, Path=EndAngle, Converter={StaticResource AngleToPercent}, FallbackValue=0}"/>
-                </InlineUIContainer><Run Text="%"/>
-                </TextBlock>
-                <TextBlock Text="CPU" Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource TextDefault}" Margin="0,15,0,0"/>
-            </Grid>
+            <Border x:Name="CardBody" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Background="{StaticResource Brush_Background_Card}" CornerRadius="8" Padding="15,12" HorizontalAlignment="Stretch" VerticalAlignment="Top" SnapsToDevicePixels="True">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="1" VerticalAlignment="Top" Margin="30,15,30,0" HorizontalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,15,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Width="70" Height="70" HorizontalAlignment="Right" Margin="0,0,15,0">
-                    <Border.CacheMode>
-                        <BitmapCache RenderAtScale="2"/>
-                    </Border.CacheMode>
-                    <Border.Background>
-                        <ImageBrush ImageSource="{Binding DisplayWallpaper, TargetNullValue={StaticResource Icon_LogoWin}, Mode=OneWay}" Stretch="UniformToFill"/>
-                    </Border.Background>
-                    <Border.OpacityMask>
-                        <ImageBrush ImageSource="{StaticResource Icon_LogoWin}" Stretch="Uniform"/>
-                    </Border.OpacityMask>
-                    <Border.Effect>
-                        <DropShadowEffect Opacity="{StaticResource DataElement_Opacity}" BlurRadius="10" ShadowDepth="10"/>
-                    </Border.Effect>
-                </Border>
+                        <Border Grid.Column="0" VerticalAlignment="Stretch" Margin="0,0,12,0" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                            <Border.CacheMode>
+                                <BitmapCache RenderAtScale="2"/>
+                            </Border.CacheMode>
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding DisplayWallpaper, TargetNullValue={StaticResource Icon_LogoWin}, Mode=OneWay}" Stretch="UniformToFill"/>
+                            </Border.Background>
+                            <Border.OpacityMask>
+                                <ImageBrush ImageSource="{StaticResource Icon_LogoWin}" Stretch="Uniform"/>
+                            </Border.OpacityMask>
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="{StaticResource DataElement_Opacity}" BlurRadius="8" ShadowDepth="4"/>
+                            </Border.Effect>
+                        </Border>
 
-                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Style="{StaticResource TextDefault}" FontSize="14pt" TextWrapping="Wrap" VerticalAlignment="Center" Height="Auto">
-                        <Run Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [OSName].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                        <Run Foreground="{StaticResource Brush_Inactive}" Text="{Binding [OSVersion].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                    </TextBlock>
+                        <Grid Grid.Column="1" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                    <TextBlock HorizontalAlignment="Left" FontFamily="{StaticResource Jura}" FontSize="14" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Margin="0,5,0,0" TextWrapping="Wrap">
-                        <Run Text="{DynamicResource label_proc_sysinfo}"/>
-                    <InlineUIContainer>
-                        <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5"/>
-                    </InlineUIContainer>
-                        <Run Text=" • "/>
+                            <TextBlock Grid.Row="0" Style="{StaticResource TextDefault}" FontSize="14pt" TextWrapping="Wrap">
+                                <Run Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [OSName].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
+                                <Run Foreground="{StaticResource Brush_Inactive}" Text="{Binding [OSVersion].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                            </TextBlock>
+
+                            <TextBlock Grid.Row="1" FontFamily="{StaticResource Jura}" FontSize="13" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Margin="0,3,0,0" TextWrapping="Wrap">
+                            <Run Text="{DynamicResource label_proc_sysinfo}"/>
+                                <InlineUIContainer>
+                                    <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="12.5"/>
+                                </InlineUIContainer>
+                            <Run Text=" • "/>
                         <Run Text="{DynamicResource label_svc_sysinfo}"/>
-                    <InlineUIContainer>
-                        <TextBlock anim:NumberAnimation.Value="{Binding [Services].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="13.5"/>
-                    </InlineUIContainer>
+                        <InlineUIContainer>
+                            <TextBlock anim:NumberAnimation.Value="{Binding [Services].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="12.5"/>
+                        </InlineUIContainer>
                     </TextBlock>
-                </StackPanel>
-            </Grid>
+                        </Grid>
+                    </Grid>
 
-            <Grid Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,5,15,0">
-                <Ellipse Height="90" Width="90" Stroke="{StaticResource Brush_Separator}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="{StaticResource DataElement_Opacity}">
-                    <Ellipse.CacheMode>
-                        <BitmapCache RenderAtScale="2" EnableClearType="True"/>
-                    </Ellipse.CacheMode>
-                    <Ellipse.Effect>
-                        <DropShadowEffect Opacity="0.3"/>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <ui:Arc x:Name="RAMLoad" Width="90" Height="90" Stroke="{StaticResource Brush_Accent}" StrokeThickness="4" VerticalAlignment="Center" HorizontalAlignment="Center" EndAngle="0">
-                    <ui:Arc.CacheMode>
-                        <BitmapCache RenderAtScale="2"/>
-                    </ui:Arc.CacheMode>
-                    <ui:Arc.Effect>
-                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="-90" Opacity="0.5" Color="{StaticResource Color_Shadow}"/>
-                    </ui:Arc.Effect>
-                </ui:Arc>
-                <TextBlock Foreground="{StaticResource Brush_Inactive}" TextAlignment="Center"  Style="{StaticResource TextDefault}" Margin="0,0,0,20">
-                    <InlineUIContainer>
-                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"  anim:NumberAnimation.Value="{Binding ElementName=RAMLoad, Path=EndAngle, Converter={StaticResource AngleToPercent}, FallbackValue=0}"/>
-                    </InlineUIContainer><Run Text="%"/>
-                </TextBlock>
-                <TextBlock Text="RAM" Foreground="{StaticResource Brush_Inactive}" Height="auto" Width="auto" TextAlignment="Center" Style="{StaticResource TextDefault}" Margin="0,15,0,0"/>
-            </Grid>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,0,10,0">
+                            <Grid Width="60" Height="60">
+                                <Ellipse Stroke="{StaticResource Brush_Separator}" StrokeThickness="3" Width="60" Height="60" Opacity="{StaticResource DataElement_Opacity}"/>
+                                <ui:Arc b:ArcAnimationBehavior.AnimatedAngle="{Binding [CPUAngle].Data, Converter={StaticResource UsageToAngle}}" x:Name="CPULoad" Width="60" Height="60" Stroke="{StaticResource Brush_Accent_B}" StrokeThickness="3" VerticalAlignment="Center" HorizontalAlignment="Center" EndAngle="0"/>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TextDefault}" FontSize="12" Foreground="{StaticResource Brush_Inactive}">
+                                    <InlineUIContainer>
+                                        <TextBlock Style="{StaticResource TextDefault}" FontSize="12" Foreground="{StaticResource Brush_Inactive}" anim:NumberAnimation.Value="{Binding ElementName=CPULoad, Path=EndAngle, Converter={StaticResource AngleToPercent}, FallbackValue=0}"/>
+                                    </InlineUIContainer><Run Text="%"/>
+                                </TextBlock>
+                            </Grid>
+                            
+                            <Border Background="{StaticResource Brush_Background_Labels_B}" CornerRadius="5" Padding="8,2" Margin="0,4,0,0" HorizontalAlignment="Center">
+                                <TextBlock Text="CPU" Foreground="{StaticResource Brush_Accent_B}" Style="{StaticResource TextDefault}" FontSize="13"/>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <Grid Width="60" Height="60">
+                                <Ellipse Stroke="{StaticResource Brush_Separator}" StrokeThickness="3" Width="60" Height="60" Opacity="{StaticResource DataElement_Opacity}"/>
+                                <ui:Arc b:ArcAnimationBehavior.AnimatedAngle="{Binding [RAMAngle].Data, Converter={StaticResource UsageToAngle}}" x:Name="RAMLoad" Width="60" Height="60" Stroke="{StaticResource Brush_Accent}" StrokeThickness="3" VerticalAlignment="Center" HorizontalAlignment="Center" EndAngle="0"/>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TextDefault}" FontSize="12" Foreground="{StaticResource Brush_Inactive}">
+                                    <InlineUIContainer>
+                                        <TextBlock Style="{StaticResource TextDefault}" FontSize="12" Foreground="{StaticResource Brush_Inactive}" anim:NumberAnimation.Value="{Binding ElementName=RAMLoad, Path=EndAngle, Converter={StaticResource AngleToPercent}, FallbackValue=0}"/>
+                                    </InlineUIContainer><Run Text="%"/>
+                                </TextBlock>
+                            </Grid>
+                            
+                            <Border Background="{StaticResource Brush_Background_Labels}" CornerRadius="5" Padding="8,2" Margin="0,4,0,0" HorizontalAlignment="Center">
+                                <TextBlock Text="RAM" Foreground="{StaticResource Brush_Accent}" Style="{StaticResource TextDefault}" FontSize="13"/>
+                            </Border>
+                        </StackPanel>
+
+                    </StackPanel>
+                    
+                </Grid>
+            </Border>
         </Grid>
 
         <Grid Grid.Row="1">
             <ScrollViewer b:ScrollFadeBehavior.EnableFade="True" Margin="0,0,0,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <Grid Margin="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <WrapPanel Grid.Column="0" Orientation="Vertical">
-                        
-                        <StackPanel Orientation="Vertical">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_Bios}"/>
+                <uc:FlowPanel Margin="5" ContentAlignment="Stretch" HorizontalSpacing="0" VerticalSpacing="0">
+
+                    <StackPanel VerticalAlignment="Top">
+                        <uc:InfoCard Title="{DynamicResource label_bios_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Bios}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <StackPanel Orientation="Vertical">
+                                    <Grid Margin="0,0,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [BiosSerial].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mode_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <Border Grid.Column="2" Padding="8,2" CornerRadius="5">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="{StaticResource Brush_Background_Labels}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding [Mode].Data}" Value="Legacy Boot">
+                                                            <Setter Property="Background" Value="{StaticResource Brush_Background_Labels_B}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
                                                 </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_bios_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Bios].Data}" IsEnabled="{Binding [Bios].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_mode_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Mode].Data}" IsEnabled="{Binding [Mode].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
+                                            </Border.Style>
+                                            <TextBlock>
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
+                                                        <Setter Property="Foreground" Value="{StaticResource Brush_Accent}"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding [Mode].Data}" Value="Legacy Boot">
+                                                                <Setter Property="Foreground" Value="{StaticResource Brush_Accent_B}"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                                <Run Text="{Binding [Mode].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                            </TextBlock>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
 
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
+                        <uc:InfoCard Title="{DynamicResource label_motherbr_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Motherboard}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <StackPanel Orientation="Vertical">
+                                    <Grid Margin="0,0,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Motherboard].Data}" IsEnabled="{Binding [Motherboard].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardVersion].Data}" IsEnabled="{Binding [MotherboardVersion].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardSerial].Data}" IsEnabled="{Binding [MotherboardSerial].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_chipset_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Chipset].Data}" IsEnabled="{Binding [Chipset].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+                                </StackPanel>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+
+                        <uc:InfoCard Title="{DynamicResource label_cpu_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Processor}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <StackPanel Orientation="Vertical">
+                                    <Grid Margin="0,0,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Processor].Data}" IsEnabled="{Binding [Processor].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis">
+                                            <Run Text="{DynamicResource label_cores_sysinfo}"/>
+                                            <Run Text=" / "/>
+                                            <Run Text="{DynamicResource label_threads_sysinfo}"/>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}">
+                                            <Run Text="{Binding [Cores].Data}"/>
+                                            <Run Text=" / " Foreground="{StaticResource Brush_Inactive}"/>
+                                            <Run Text="{Binding [Threads].Data}"/>
+                                        </TextBlock>
+                                    </Grid>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Frequency].Data}" IsEnabled="{Binding [Frequency].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+                                </StackPanel>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+
+                        <uc:InfoCard Title="{DynamicResource label_gpu_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_VideoCard}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <StackPanel Orientation="Vertical">
+                                    <Grid Margin="0,0,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <ItemsControl ItemsSource="{Binding [Graphics].Items}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Border Height="1" Background="{StaticResource Brush_Separator}" Opacity="0.4" Margin="0,4,0,4">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                    </Border>
+                                                    <Grid Margin="0,2,0,2">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="20"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[1]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,10"/>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_refreshrate_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}"/>
+                                        <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels_B}">
+                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent_B}" Text="{Binding [RefreshRate].Data}" IsEnabled="{Binding [RefreshRate].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+
+                        <uc:InfoCard Title="{DynamicResource label_ram_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Memory}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
+                                    <Grid Margin="0,0,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto" SharedSizeGroup="RamFreqColumn"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto" SharedSizeGroup="RamCapacityColumn"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="4" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <ItemsControl ItemsSource="{Binding [Memory].Items}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Border Height="1" Background="{StaticResource Brush_Separator}" Opacity="0.4" Margin="0,4,0,4">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                    </Border>
+                                                    <Grid Margin="0,2,0,2">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="20"/>
+                                                            <ColumnDefinition Width="Auto" SharedSizeGroup="RamFreqColumn"/>
+                                                            <ColumnDefinition Width="20"/>
+                                                            <ColumnDefinition Width="Auto" SharedSizeGroup="RamCapacityColumn"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[1]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" HorizontalAlignment="Right"/>
+                                                        <TextBlock Grid.Column="4" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[2]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" HorizontalAlignment="Right"/>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Border Background="{StaticResource Brush_Separator}" Height="1.2" CornerRadius="10" Margin="0,10,0,10"/>
+
+                                    <Grid Margin="0,2,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mtype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}" HorizontalAlignment="Left">
+                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding [Type].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+
+                    </StackPanel>
+
+                    <StackPanel VerticalAlignment="Top">
+                        <uc:InfoCard Title="{DynamicResource label_storage_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Storage}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <StackPanel Orientation="Vertical" Grid.IsSharedSizeScope="True">
+                                    <Grid Margin="0,0,0,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition Width="Auto" SharedSizeGroup="StorageTypeColumn"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_itype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+
+                                    <ItemsControl ItemsSource="{Binding [Storage].Items}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="0,2,0,4">
+                                                    <Border Height="1" Background="{StaticResource Brush_Separator}" Opacity="0.4" Margin="0,4,0,8">
+                                                        <Border.Style>
+                                                            <Style TargetType="Border">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Border.Style>
+                                                    </Border>
+
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="20"/>
+                                                            <ColumnDefinition Width="Auto" SharedSizeGroup="StorageTypeColumn"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" Margin="0,0,2,0"/>
+                                                            <TextBlock Grid.Column="1" Foreground="{StaticResource Brush_Accent_B}" TextTrimming="CharacterEllipsis">
+                                                                <TextBlock.Style>
+                                                                    <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
+                                                                        <Setter Property="Text" Value="{Binding DataItems[1], StringFormat=' ({0})'}"/>
+                                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding DataItems[1]}" Value="{x:Null}">
+                                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                                            </DataTrigger>
+                                                                            <DataTrigger Binding="{Binding DataItems[1]}" Value="">
+                                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </TextBlock.Style>
+                                                            </TextBlock>
+                                                        </Grid>
+                                                        <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding DataItems[2]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                        </Border>
+                                                    </Grid>
+
+                                                    <Grid Margin="0,5,0,4" Height="4">
+                                                        <Grid.Style>
+                                                            <Style TargetType="Grid">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding DataItems[3]}" Value="{x:Null}">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding DataItems[3]}" Value="">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Grid.Style>
+                                                        <Border CornerRadius="2" Background="{StaticResource Brush_Separator}"/>
+                                                        <Border CornerRadius="2" Background="{StaticResource Brush_Accent}" HorizontalAlignment="Left">
+                                                            <Border.Width>
+                                                                <MultiBinding Converter="{StaticResource PercentToWidth}">
+                                                                    <Binding Path="DataItems[3]"/>
+                                                                    <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="ActualWidth"/>
+                                                                </MultiBinding>
+                                                            </Border.Width>
+                                                        </Border>
+                                                    </Grid>
+
+                                                    <Grid Margin="0,2,0,0">
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                            <StackPanel.Style>
+                                                                <Style TargetType="StackPanel">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding DataItems[5]}" Value="{x:Null}">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding DataItems[5]}" Value="">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </StackPanel.Style>
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{DynamicResource label_storage_used_sysinfo}" FontSize="13" TextTrimming="CharacterEllipsis"/>
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[5]}" Margin="4,0,0,0" FontSize="13" TextTrimming="CharacterEllipsis"/>
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                            <StackPanel.Style>
+                                                                <Style TargetType="StackPanel">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                    <Style.Triggers>
+                                                                        <DataTrigger Binding="{Binding DataItems[4]}" Value="{x:Null}">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        </DataTrigger>
+                                                                        <DataTrigger Binding="{Binding DataItems[4]}" Value="">
+                                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                </Style>
+                                                            </StackPanel.Style>
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{DynamicResource label_storage_free_sysinfo}" FontSize="13"/>
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[4]}" Margin="4,0,0,0" FontSize="13"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+
+                        <uc:InfoCard Title="{DynamicResource label_sound_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_SoundDevices}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <ItemsControl ItemsSource="{Binding [Audio].Items}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <Border Height="1" Background="{StaticResource Brush_Separator}" Opacity="0.4" Margin="0,4,0,4">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                </Border>
+                                                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                                                    <Image Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,6,0">
+                                                        <Image.Style>
+                                                            <Style TargetType="Image">
+                                                                <Setter Property="Source" Value="{StaticResource Icon_Audio}"/>
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding DataItems[1]}" Value="1">
+                                                                        <Setter Property="Source" Value="{StaticResource Icon_Microphone}"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding DataItems[1], FallbackValue='Hide', TargetNullValue='Hide'}" Value="Hide">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Image.Style>
+                                                    </Image>
+                                                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+
+                        <uc:InfoCard Title="{DynamicResource label_netadapter_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_Network}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
+                                <ItemsControl ItemsSource="{Binding [Network].Items}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <Border Height="1" Background="{StaticResource Brush_Separator}" Opacity="0.4" Margin="0,4,0,4">
+                                                    <Border.Style>
+                                                        <Style TargetType="Border">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                </Border>
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,2,0,2">
+                                                    <Ellipse Width="8" Height="8" Margin="0,0,8,0" VerticalAlignment="Center">
+                                                        <Ellipse.Style>
+                                                            <Style TargetType="Ellipse">
+                                                                <Setter Property="Fill" Value="{StaticResource Brush_Accent}"/>
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding DataItems[1]}" Value="0">
+                                                                        <Setter Property="Fill" Value="{StaticResource Brush_Accent_Y}"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding DataItems[1], FallbackValue='Hide', TargetNullValue='Hide'}" Value="Hide">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Ellipse.Style>
+                                                    </Ellipse>
+                                                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+
+                        <uc:InfoCard Title="{DynamicResource label_ip_sysinfo}">
+                            <uc:InfoCard.IconStyle>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="{StaticResource Icon_IPaddress}" />
+                                </Style>
+                            </uc:InfoCard.IconStyle>
+                            <uc:InfoCard.CardContent>
                                 <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_Motherboard}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_motherbr_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" Text="{Binding [IpAddress].Data}" IsEnabled="{Binding [IpAddress].IsEnabled}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" VerticalAlignment="Center" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"  anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
+                                        <TextBlock.Effect>
+                                            <BlurEffect Radius="{Binding SetBlurValue}"/>
+                                        </TextBlock.Effect>
+                                    </TextBlock>
+
+                                    <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}" VerticalAlignment="Center">
+                                        <Border.Effect>
+                                            <BlurEffect Radius="{Binding SetBlurValue}"/>
+                                        </Border.Effect>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Visibility" Value="{Binding SetVisibility}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding [CountryCode].Data, FallbackValue='', TargetNullValue=''}" Value="">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding [CountryCode].Data}"/>
+                                    </Border>
+
+                                    <ToggleButton Grid.Column="4" Width="24" Height="24" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding StateButtonVision, Mode=TwoWay}"/>
                                 </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Motherboard].Data}" IsEnabled="{Binding [Motherboard].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_chipset_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Chipset].Data}" IsEnabled="{Binding [Chipset].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_Processor}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_cpu_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Processor].Data}" IsEnabled="{Binding [Processor].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_cores_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Cores].Data}"/>
-                                <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
-                                <Run Text="{DynamicResource title_threads_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Threads].Data}"/><LineBreak/>
-                                <Run Text="{DynamicResource title_freq_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Frequency].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_VideoCard}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_gpu_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Graphics].Data}" IsEnabled="{Binding [Graphics].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_refreshrate_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [RefreshRate].Data}" IsEnabled="{Binding [RefreshRate].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_Memory}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_ram_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                <Run Text="{Binding [Memory].Data}" IsEnabled="{Binding [Memory].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                <Run Text="{DynamicResource title_mtype_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                <Run Text="{Binding [Type].Data}" IsEnabled="{Binding [Type].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                    </WrapPanel>
-
-                    <WrapPanel Grid.Column="1" Orientation="Vertical">
-
-                        <StackPanel Orientation="Vertical">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_Storage}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_storage_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto">
-                                 <Run Text="{Binding [Storage].Data}" IsEnabled="{Binding [Storage].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/><LineBreak/>
-                                 <Run Text="{DynamicResource title_storage_free_sysinfo}" Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                 <Run Text="{Binding [FreeSpace].Data}"/>
-                                 <Run Text=" | " FontWeight="Bold" Foreground="{StaticResource Brush_Inactive}"/>
-                                 <Run Text="{DynamicResource title_storage_used_sysinfo}"  Foreground="{StaticResource Brush_Toggle_Text}"/>
-                                 <Run Text="{Binding [UsedSpace].Data}"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_SoundDevices}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_sound_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Text="{Binding [Audio].Data}" IsEnabled="{Binding [Audio].IsEnabled}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_Network}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_netadapter_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <TextBlock Text="{Binding [Network].Data}" IsEnabled="{Binding [Network].IsEnabled}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Margin="5,1,0,0" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" Margin="0,20,0,0">
-                            <Border Padding="5,3,10,3" Background="{StaticResource Brush_Background_Labels}" CornerRadius="7" HorizontalAlignment="Left">
-                                <Grid>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Height="16" Width="16" VerticalAlignment="Bottom">
-                                            <Image.Style>
-                                                <Style TargetType="{x:Type Image}">
-                                                    <Setter Property="Source" Value="{StaticResource Icon_IPaddress}"/>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                        <TextBlock Margin="5,0,0,0" Text="{DynamicResource title_ip_sysinfo}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Accent}" Height="Auto" Width="Auto"/>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                            <StackPanel Orientation="Horizontal" Margin="5,1,0,0">
-                                <TextBlock x:Name="IpAddress" Text="{Binding [IpAddress].Data}" IsEnabled="{Binding [IpAddress].IsEnabled}" Style="{StaticResource TextDefault}" HorizontalAlignment="Left" Foreground="{StaticResource Brush_Highlighted}" Height="Auto" Width="Auto" PreviewMouseLeftButtonDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" anim:BlurAnimation.TargetRadius="{Binding SetBlurValue}">
-                                    <TextBlock.Effect>
-                                        <BlurEffect Radius="{Binding SetBlurValue}"/>
-                                    </TextBlock.Effect>
-                                </TextBlock>
-                                <ToggleButton x:Name="BtnVision" Margin="10,0,0,0" Width="24" Height="24" Visibility="{Binding SetVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding StateButtonVision, Mode=TwoWay}"/>
-                            </StackPanel>
-                        </StackPanel>
-
-                    </WrapPanel>
-                    
-                </Grid>
-
+                            </uc:InfoCard.CardContent>
+                        </uc:InfoCard>
+                    </StackPanel>
+           
+                </uc:FlowPanel>
             </ScrollViewer>
         </Grid>
-        
+
     </Grid>
 </UserControl>

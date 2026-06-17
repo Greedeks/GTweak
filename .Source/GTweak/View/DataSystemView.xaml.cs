@@ -55,14 +55,13 @@ namespace GTweak.View
                     HardwareData.UserIPAddress = (string)FindResource(resourceKey);
                     UpdateDataContext();
                 }
+
+                (DataContext as DataSystemViewModel)?.RefreshFallback();
             }));
         }
 
         private void StartMonitoringData()
         {
-            CPULoad.EndAngle = Math.Min(HardwareData.Processor.Usage * 3.6, 359.9);
-            RAMLoad.EndAngle = Math.Min(HardwareData.Memory.Usage * 3.6, 359.9);
-
             _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, async time =>
             {
                 if ((int)time.TotalSeconds % 2 == 0)
@@ -75,8 +74,6 @@ namespace GTweak.View
 
                     _ = Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        AnimateArcProgress(CPULoad, HardwareData.Processor.Usage);
-                        AnimateArcProgress(RAMLoad, HardwareData.Memory.Usage);
                         UpdateDataContext();
                     }));
                 }
@@ -91,11 +88,9 @@ namespace GTweak.View
         {
             if (DataContext as DataSystemViewModel is var vm && vm != null)
             {
-                vm.Update();
+                vm.UpdateModel();
             }
         }
-
-        private void AnimateArcProgress(Wpf.Ui.Controls.Arc arc, double percent) => arc.BeginAnimation(Wpf.Ui.Controls.Arc.EndAngleProperty, FactoryAnimation.CreateIn(arc.EndAngle, Math.Min(percent * 3.6, 359.9), 0.2, useCubicEase: true));
 
         private void HandleCopyingData_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
