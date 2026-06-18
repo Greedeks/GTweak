@@ -33,9 +33,8 @@ namespace GTweak.Utilities.Tweaks
             }
         }
 
-        internal static bool IsOneDriveInstalled => File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe")) ||
-            File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft OneDrive", "OneDrive.exe")) ||
-            File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft OneDrive", "OneDrive.exe"));
+        internal static bool IsOneDriveInstalled => PathLocator.Executable.OneDrive.Any(File.Exists) || (Directory.Exists(PathLocator.Folders.OneDrive) &&
+            Directory.EnumerateDirectories(PathLocator.Folders.OneDrive).Any(dir => File.Exists(Path.Combine(dir, "OneDrive.exe"))));
 
         internal static bool IsEdgeInstalled => Directory.Exists(PathLocator.Folders.Edge);
 
@@ -157,7 +156,7 @@ namespace GTweak.Utilities.Tweaks
 
         internal static async Task RestoreOneDriveFolder()
         {
-            await CommandExecutor.InvokeRunCommand($@"/c {PathLocator.Executable.OneDrive}").ConfigureAwait(false);
+            await CommandExecutor.InvokeRunCommand($@"/c {PathLocator.Executable.OneDriveSetup}").ConfigureAwait(false);
 
             SetTaskState(true, oneDriveTask);
 
@@ -169,7 +168,7 @@ namespace GTweak.Utilities.Tweaks
         {
             if (packageName == "OneDrive")
             {
-                await CommandExecutor.InvokeRunCommand($@"/c taskkill /f /im OneDrive.exe & {PathLocator.Executable.OneDrive} /uninstall").ConfigureAwait(false);
+                await CommandExecutor.InvokeRunCommand($@"/c taskkill /f /im OneDrive.exe & {PathLocator.Executable.OneDriveSetup} /uninstall").ConfigureAwait(false);
 
                 RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
                 RegistryHelp.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");

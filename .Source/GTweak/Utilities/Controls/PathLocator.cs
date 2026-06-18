@@ -76,6 +76,8 @@ namespace GTweak.Utilities.Controls
             internal static readonly string WallpaperCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Windows", "Themes");
 
             internal static readonly string Edge = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge");
+
+            internal static readonly string OneDrive = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive");
         }
 
         internal static class Executable
@@ -297,7 +299,15 @@ namespace GTweak.Utilities.Controls
 
             internal static readonly string Explorer = FindExecutablePath("explorer.exe");
 
-            internal static readonly string OneDrive = FindExecutablePath("onedrivesetup.exe");
+            internal static readonly string OneDriveSetup = FindExecutablePath("onedrivesetup.exe");
+
+            internal static readonly string[] OneDrive = new[]
+            {
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "Update", "OneDrive.exe"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft OneDrive", "OneDrive.exe"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft OneDrive", "OneDrive.exe"),
+            };
 
             internal static readonly string DisablingWD = Path.Combine(Folders.DefenderBackup, "DisablingWD.exe");
 

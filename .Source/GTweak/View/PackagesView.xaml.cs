@@ -68,7 +68,7 @@ namespace GTweak.View
 
             if (toggleButton.IsChecked == false && packageName == "OneDrive")
             {
-                if (string.IsNullOrWhiteSpace(PathLocator.Executable.OneDrive))
+                if (string.IsNullOrWhiteSpace(PathLocator.Executable.OneDriveSetup))
                 {
                     NotificationManager.Show("warn", "error_onedrive_noty").Perform();
                 }
