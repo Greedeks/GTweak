@@ -44,11 +44,11 @@ namespace GTweak.Utilities.Helpers
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool UpdateProcThreadAttribute(IntPtr lpAttributeList, uint dwFlags, IntPtr Attribute, IntPtr lpValue, IntPtr cbSize, IntPtr lpPreviousValue, IntPtr lpReturnSize);
+        private static extern bool UpdateProcThreadAttribute(IntPtr lpAttributeList, uint dwFlags, IntPtr Attribute, IntPtr lpValue, UIntPtr cbSize, IntPtr lpPreviousValue, IntPtr lpReturnSize);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool InitializeProcThreadAttributeList(IntPtr lpAttributeList, int dwAttributeCount, int dwFlags, ref IntPtr lpSize);
+        private static extern bool InitializeProcThreadAttributeList(IntPtr lpAttributeList, int dwAttributeCount, int dwFlags, ref UIntPtr lpSize);
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern void DeleteProcThreadAttributeList(IntPtr lpAttributeList);
@@ -63,7 +63,7 @@ namespace GTweak.Utilities.Helpers
         private const int SC_STATUS_PROCESS_INFO = 0;
         private const string ServicesActiveDatabase = "ServicesActive";
 
-        private const int PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
+        private const uint PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
         private const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
 
         [StructLayout(LayoutKind.Sequential)]
@@ -244,15 +244,18 @@ namespace GTweak.Utilities.Helpers
             Exception lastException = null;
             bool impersonated = false;
 
+            UIntPtr lpSize = UIntPtr.Zero;
+            InitializeProcThreadAttributeList(IntPtr.Zero, 1, 0, ref lpSize);
+            if (lpSize == UIntPtr.Zero)
+            {
+                throw new Win32Exception("InitializeProcThreadAttributeList returned zero size");
+            }
+
             for (int attempt = 0; attempt < 3; attempt++)
             {
-                STARTUPINFOEX siEx = new STARTUPINFOEX();
-                IntPtr lpSize = IntPtr.Zero;
                 IntPtr lpValueProc = IntPtr.Zero;
                 IntPtr parentHandle = IntPtr.Zero;
-
-                InitializeProcThreadAttributeList(IntPtr.Zero, 1, 0, ref lpSize);
-                siEx.lpAttributeList = Marshal.AllocHGlobal(lpSize);
+                IntPtr attributeList = IntPtr.Zero;
 
                 try
                 {
@@ -266,12 +269,15 @@ namespace GTweak.Utilities.Helpers
                         throw new Win32Exception("Failed to impersonate SYSTEM identity");
                     }
 
-                    if (!InitializeProcThreadAttributeList(siEx.lpAttributeList, 1, 0, ref lpSize))
+                    attributeList = Marshal.AllocHGlobal((IntPtr)(long)lpSize);
+
+                    if (!InitializeProcThreadAttributeList(attributeList, 1, 0, ref lpSize))
                     {
                         throw new Win32Exception(Marshal.GetLastWin32Error());
                     }
 
-                    parentHandle = OpenProcess(ProcessAccessFlags.CreateProcess | ProcessAccessFlags.DuplicateHandle, false, parentProcessId);
+                    parentHandle = OpenProcess(ProcessAccessFlags.CreateProcess | ProcessAccessFlags.DuplicateHandle | ProcessAccessFlags.Synchronize, false, parentProcessId);
+
                     if (parentHandle == IntPtr.Zero)
                     {
                         throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -280,22 +286,19 @@ namespace GTweak.Utilities.Helpers
                     lpValueProc = Marshal.AllocHGlobal(IntPtr.Size);
                     Marshal.WriteIntPtr(lpValueProc, parentHandle);
 
-                    if (!UpdateProcThreadAttribute(siEx.lpAttributeList, 0, (IntPtr)PROC_THREAD_ATTRIBUTE_PARENT_PROCESS, lpValueProc, (IntPtr)IntPtr.Size, IntPtr.Zero, IntPtr.Zero))
+                    if (!UpdateProcThreadAttribute(attributeList, 0, new IntPtr(unchecked(PROC_THREAD_ATTRIBUTE_PARENT_PROCESS)), lpValueProc, new UIntPtr((uint)IntPtr.Size), IntPtr.Zero, IntPtr.Zero))
                     {
                         throw new Win32Exception(Marshal.GetLastWin32Error());
                     }
 
-                    SECURITY_ATTRIBUTES ps = new SECURITY_ATTRIBUTES();
-                    SECURITY_ATTRIBUTES ts = new SECURITY_ATTRIBUTES();
-                    ps.nLength = Marshal.SizeOf(ps);
-                    ts.nLength = Marshal.SizeOf(ts);
+                    STARTUPINFOEX siEx = new STARTUPINFOEX();
+                    siEx.StartupInfo.cb = Marshal.SizeOf(typeof(STARTUPINFOEX));
+                    siEx.StartupInfo.dwFlags = 0x00000001;
+                    siEx.StartupInfo.wShowWindow = showWindow ? (short)5 : (short)0;
+                    siEx.lpAttributeList = attributeList;
 
-                    siEx.StartupInfo = new STARTUPINFO
-                    {
-                        cb = Marshal.SizeOf(typeof(STARTUPINFO)),
-                        dwFlags = 0x00000001,
-                        wShowWindow = showWindow ? (short)5 : (short)0
-                    };
+                    SECURITY_ATTRIBUTES ps = new SECURITY_ATTRIBUTES { nLength = Marshal.SizeOf(typeof(SECURITY_ATTRIBUTES)) };
+                    SECURITY_ATTRIBUTES ts = new SECURITY_ATTRIBUTES { nLength = Marshal.SizeOf(typeof(SECURITY_ATTRIBUTES)) };
 
                     if (!CreateProcess(null, binaryPath, ref ps, ref ts, true, EXTENDED_STARTUPINFO_PRESENT, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo))
                     {
@@ -322,10 +325,10 @@ namespace GTweak.Utilities.Helpers
                         CloseHandle(parentHandle);
                     }
 
-                    if (siEx.lpAttributeList != IntPtr.Zero)
+                    if (attributeList != IntPtr.Zero)
                     {
-                        DeleteProcThreadAttributeList(siEx.lpAttributeList);
-                        Marshal.FreeHGlobal(siEx.lpAttributeList);
+                        DeleteProcThreadAttributeList(attributeList);
+                        Marshal.FreeHGlobal(attributeList);
                     }
                 }
             }
