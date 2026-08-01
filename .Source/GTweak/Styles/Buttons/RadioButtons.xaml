@@ -24,35 +24,20 @@
                                     <TranslateTransform X="3" Y="4" />
                                 </Border.RenderTransform>
                             </Border>
-                            <Border x:Name="InnerPanel" Height="48" CornerRadius="12" Background="{TemplateBinding Background}" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,10,0">
-                                <Grid Height="48">
-                                    <Rectangle x:Name="ContentShadowMask" Grid.ColumnSpan="2" Fill="{StaticResource Brush_ShadowOverlay}" Opacity="{StaticResource IconNavigation_Opacity}" IsHitTestVisible="False">
-                                        <Rectangle.RenderTransform>
-                                            <TranslateTransform X="3" Y="3" />
-                                        </Rectangle.RenderTransform>
-                                        <Rectangle.OpacityMask>
-                                            <VisualBrush Visual="{Binding ElementName=RealContent}" Stretch="None" AlignmentX="Left" AlignmentY="Center" />
-                                        </Rectangle.OpacityMask>
-                                    </Rectangle>
-                                    <Grid x:Name="RealContent" Background="Transparent">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="48"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <ContentPresenter x:Name="IconPresenter" Grid.Column="0" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                                            <ContentPresenter.RenderTransform>
-                                                <ScaleTransform ScaleX="1" ScaleY="1"/>
-                                            </ContentPresenter.RenderTransform>
-                                        </ContentPresenter>
-                                        <Viewbox x:Name="NavTextBox" Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,15,0" Opacity="0">
-                                            <TextBlock Text="{TemplateBinding Tag}" Foreground="{TemplateBinding Foreground}" FontFamily="{TemplateBinding FontFamily}" TextWrapping="NoWrap"/>
-                                        </Viewbox>
-                                    </Grid>
+                            <Border x:Name="InnerPanel" Height="48" CornerRadius="12" Background="{TemplateBinding Background}"  HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,0,10,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="48"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter x:Name="IconPresenter" Grid.Column="0" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Viewbox x:Name="NavTextBox" Grid.Column="1" Stretch="Uniform" StretchDirection="DownOnly" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,15,0" Opacity="0">
+                                        <TextBlock Text="{TemplateBinding Tag}" Foreground="{TemplateBinding Foreground}" FontFamily="{TemplateBinding FontFamily}" TextWrapping="NoWrap"/>
+                                    </Viewbox>
                                 </Grid>
                             </Border>
                         </Grid>
                     </Border>
-
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InnerPanel" Property="Background" Value="{StaticResource Brush_BtnBG_Navigation}"/>
@@ -61,13 +46,6 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard Timeline.DesiredFrameRate="120">
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <BitmapCache RenderAtScale="1"/>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="Width" To="300" Duration="0:0:0.35" FillBehavior="HoldEnd">
                                             <DoubleAnimation.EasingFunction>
                                                 <PowerEase Power="3" EasingMode="EaseIn"/>
@@ -78,33 +56,12 @@
                                                 <QuadraticEase/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1.1" Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1.1" Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Null}"/>
-                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard Timeline.DesiredFrameRate="120">
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <BitmapCache RenderAtScale="1"/>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="Width" To="50" Duration="0:0:0.25" FillBehavior="HoldEnd">
                                             <DoubleAnimation.EasingFunction>
                                                 <QuadraticEase/>
@@ -115,19 +72,6 @@
                                                 <QuadraticEase/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="IconPresenter" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase/>
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="OuterPanel" Storyboard.TargetProperty="CacheMode">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Null}"/>
-                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>

@@ -235,35 +235,36 @@ namespace GTweak.Utilities.Configuration
             Motherboard.Data = Motherboard.Data.TrimEnd('\n', '\r');
 
             bool chipsetFound = false;
-            using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Enum\PCI");
-            if (baseKey != null)
+            List<string> pciDevices = RegistryHelp.GetSubKeyNames<List<string>>(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Enum\PCI");
+
+            foreach (string deviceId in pciDevices)
             {
-                foreach (string deviceId in baseKey.GetSubKeyNames())
+                if (chipsetFound)
                 {
-                    if (!chipsetFound)
+                    break;
+                }
+
+                List<string> deviceInstances = RegistryHelp.GetSubKeyNames<List<string>>(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Enum\PCI\{deviceId}");
+
+                foreach (string instanceId in deviceInstances)
+                {
+                    string driverRef = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\PCI\{deviceId}\{instanceId}", "Driver", string.Empty);
+                    if (string.IsNullOrEmpty(driverRef))
                     {
-                        using RegistryKey deviceKey = baseKey.OpenSubKey(deviceId);
-                        if (deviceKey != null)
+                        continue;
+                    }
+
+                    string driverDesc = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{driverRef}", "DriverDesc", string.Empty);
+
+                    if (driverDesc.IndexOf("LPC", StringComparison.OrdinalIgnoreCase) >= 0 || driverDesc.IndexOf("eSPI", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        string chipset = ParseChipset(driverDesc) ?? string.Empty;
+
+                        if (!string.IsNullOrWhiteSpace(chipset))
                         {
-                            foreach (string subId in deviceKey.GetSubKeyNames())
-                            {
-                                using RegistryKey subKey = deviceKey.OpenSubKey(subId);
-                                string deviceDesc = subKey?.GetValue("DeviceDesc")?.ToString() ?? string.Empty;
-                                string friendlyName = subKey?.GetValue("FriendlyName")?.ToString() ?? string.Empty;
-                                string targetString = deviceDesc.Contains("LPC") ? deviceDesc : (friendlyName.Contains("LPC") ? friendlyName : string.Empty);
-
-                                if (!string.IsNullOrWhiteSpace(targetString))
-                                {
-                                    string chipset = ParseChipset(targetString) ?? string.Empty;
-
-                                    if (!string.IsNullOrEmpty(chipset))
-                                    {
-                                        Motherboard.Chipset = chipset;
-                                        chipsetFound = true;
-                                        break;
-                                    }
-                                }
-                            }
+                            Motherboard.Chipset = chipset;
+                            chipsetFound = true;
+                            break;
                         }
                     }
                 }
