@@ -1,0 +1,17 @@
+name: "✨ Feature Request"
+description: "Suggest a new idea or improvement"
+title: "[IDEA] "
+labels: 
+  - enhancement
+assignees: 
+  - Greedeks
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Briefly describe your idea and why it would be useful."
+      placeholder: "I suggest adding..."
+    validations:
+      required: true

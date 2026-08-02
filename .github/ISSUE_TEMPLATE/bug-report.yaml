@@ -1,0 +1,17 @@
+name: "🐞 Bug Report"
+description: "Report a bug"
+title: "[BUG] "
+labels:
+  - bug
+assignees:
+  - Greedeks
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Briefly describe the problem and how to reproduce it."
+      placeholder: "What went wrong?"
+    validations:
+      required: true
