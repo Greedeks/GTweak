@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using GTweak.Utilities.Controls;
+using GTweak.Utilities.Tweaks;
 using GTweak.Windows;
 
 namespace GTweak.Utilities.Managers
@@ -12,43 +14,43 @@ namespace GTweak.Utilities.Managers
     {
         internal enum NoticeAction { None, Logout, Restart }
 
-        internal static readonly Dictionary<string, NoticeAction> ConfActions = new Dictionary<string, NoticeAction>()
+        internal static readonly Dictionary<Enum, NoticeAction> ConfActions = new Dictionary<Enum, NoticeAction>()
         {
-            ["TglButton8"] = NoticeAction.Restart,
-            ["TglButton15"] = NoticeAction.Restart,
-            ["TglButton20"] = NoticeAction.Restart
+            [ConfidentialityToggle.HardwareConfigurationData] = NoticeAction.Restart,
+            [ConfidentialityToggle.CovertDataCollectionServices] = NoticeAction.Restart,
+            [ConfidentialityToggle.IntelTelemetry] = NoticeAction.Restart
         };
 
-        internal static readonly Dictionary<string, NoticeAction> IntfActions = new Dictionary<string, NoticeAction>()
+        internal static readonly Dictionary<Enum, NoticeAction> IntfActions = new Dictionary<Enum, NoticeAction>()
         {
-            ["TglButton1"] = NoticeAction.Logout,
-            ["TglButton2"] = NoticeAction.Logout,
-            ["TglButton3"] = NoticeAction.Logout,
-            ["TglButton7"] = NoticeAction.Logout,
-            ["TglButton8"] = NoticeAction.Logout,
-            ["TglButton9"] = NoticeAction.Logout,
-            ["TglButton10"] = NoticeAction.Logout,
-            ["TglButton16"] = NoticeAction.Restart,
-            ["TglButton18"] = NoticeAction.Logout,
-            ["TglButton29"] = NoticeAction.Restart
+            [InterfaceToggle.SystemButtonSize] = NoticeAction.Logout,
+            [InterfaceToggle.CursorFlickerFrequency] = NoticeAction.Logout,
+            [InterfaceToggle.ScrollbarSize] = NoticeAction.Logout,
+            [InterfaceToggle.ContextMenuDelay] = NoticeAction.Logout,
+            [InterfaceToggle.TaskbarPreviewDelay] = NoticeAction.Logout,
+            [InterfaceToggle.IconOverlayBadges] = NoticeAction.Logout,
+            [InterfaceToggle.ShortcutNameSuffix] = NoticeAction.Logout,
+            [InterfaceToggle.CopilotRecall] = NoticeAction.Restart,
+            [InterfaceToggle.SnapLayouts] = NoticeAction.Logout,
+            [InterfaceToggle.AdaptiveBrightness] = NoticeAction.Restart
         };
 
-        internal static readonly Dictionary<string, NoticeAction> SysActions = new Dictionary<string, NoticeAction>()
+        internal static readonly Dictionary<Enum, NoticeAction> SysActions = new Dictionary<Enum, NoticeAction>()
         {
-            ["TglButton2"] = NoticeAction.Logout,
-            ["TglButton3"] = NoticeAction.Restart,
-            ["TglButton4"] = NoticeAction.Restart,
-            ["TglButton5"] = NoticeAction.Restart,
-            ["TglButton7"] = NoticeAction.Restart,
-            ["TglButton12"] = NoticeAction.Restart,
-            ["TglButton13"] = NoticeAction.Restart,
-            ["TglButton14"] = NoticeAction.Restart,
-            ["TglButton15"] = NoticeAction.Restart,
-            ["TglButton20"] = NoticeAction.Restart,
-            ["TglButton23"] = NoticeAction.Restart,
-            ["TglButton25"] = NoticeAction.Restart,
-            ["TglButton27"] = NoticeAction.Restart,
-            ["TglButton30"] = NoticeAction.Restart
+            [SystemToggle.StickyKeysFilter] = NoticeAction.Logout,
+            [SystemToggle.WindowsDefender] = NoticeAction.Restart,
+            [SystemToggle.UserAccountControl] = NoticeAction.Restart,
+            [SystemToggle.SecurityNotifications] = NoticeAction.Restart,
+            [SystemToggle.RealtekAudioDelay] = NoticeAction.Restart,
+            [SystemToggle.MemoryDiagnostics] = NoticeAction.Restart,
+            [SystemToggle.NetworkProtocols] = NoticeAction.Restart,
+            [SystemToggle.FileSystemCache] = NoticeAction.Restart,
+            [SystemToggle.StartupDelay] = NoticeAction.Restart,
+            [SystemToggle.WindowsFirewall] = NoticeAction.Restart,
+            [SystemToggle.BackgroundApps] = NoticeAction.Restart,
+            [SystemToggle.DynamicTickHpet] = NoticeAction.Restart,
+            [SystemToggle.InsiderTasks] = NoticeAction.Restart,
+            [SystemToggle.MultiPlaneOverlay] = NoticeAction.Restart
         };
 
         private static int _isNotificationOpen;

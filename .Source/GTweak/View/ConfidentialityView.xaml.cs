@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Base;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 
@@ -38,9 +39,9 @@ namespace GTweak.View
 
             DescBlock.TargetState = tglButton.State;
 
-            _confTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+            _confTweaks.Apply(tglButton.Name, tglButton.State);
 
-            if (NotificationManager.ConfActions.TryGetValue(tglButton.Name, out var action))
+            if (NotificationManager.ConfActions.TryGetAction(tglButton.Name, out NotificationManager.NoticeAction action))
             {
                 NotificationManager.Show().WithDelay(300).Perform(action);
             }

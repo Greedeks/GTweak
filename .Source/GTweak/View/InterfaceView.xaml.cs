@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Base;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 
@@ -51,16 +52,16 @@ namespace GTweak.View
         private void ColorPicker_ColorPicked(object sender, EventArgs e)
         {
             ColorPicker colorPicker = (ColorPicker)sender;
-            _intfTweaks.ApplyTweaks(colorPicker.Name, colorPicker.SelectedColorString);
+            _intfTweaks.Apply(colorPicker.Name, colorPicker.SelectedColorString);
             NotificationManager.Show().WithDelay(300).Logout();
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            _intfTweaks.ApplyTweaks(checkBox.Uid, checkBox.IsChecked == false);
+            _intfTweaks.Apply(checkBox.Uid, checkBox.IsChecked == false);
 
-            if (ExplorerManager.IntfActions.TryGetValue(checkBox.Uid, out ExplorerManager.ExplorerAction explorerAction))
+            if (ExplorerManager.IntfActions.TryGetAction(checkBox.Uid, out ExplorerManager.ExplorerAction explorerAction))
             {
                 _explorerAction = explorerAction;
             }
@@ -89,14 +90,14 @@ namespace GTweak.View
 
             DescBlock.TargetState = tglButton.State;
 
-            _intfTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+            _intfTweaks.Apply(tglButton.Name, tglButton.State);
 
-            if (ExplorerManager.IntfActions.TryGetValue(tglButton.Name, out ExplorerManager.ExplorerAction explorerAction) && explorerAction == ExplorerManager.ExplorerAction.Restart)
+            if (ExplorerManager.IntfActions.TryGetAction(tglButton.Name, out ExplorerManager.ExplorerAction explorerAction) && explorerAction == ExplorerManager.ExplorerAction.Restart)
             {
                 ExplorerManager.Restart();
             }
 
-            if (NotificationManager.IntfActions.TryGetValue(tglButton.Name, out NotificationManager.NoticeAction noticeAction))
+            if (NotificationManager.IntfActions.TryGetAction(tglButton.Name, out NotificationManager.NoticeAction noticeAction))
             {
                 NotificationManager.Show().WithDelay(300).Perform(noticeAction);
             }

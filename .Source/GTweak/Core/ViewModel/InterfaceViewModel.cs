@@ -15,7 +15,7 @@ namespace GTweak.Core.ViewModel
         public Visibility Win11FeatureAvailable => HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(22621.2361m) >= 0 ? Visibility.Visible : Visibility.Collapsed;
         public Visibility OneDriveAvailable => UninstallingPakages.IsOneDriveInstalled ? Visibility.Visible : Visibility.Collapsed;
 
-        protected override void Analyze(InterfaceTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
+        protected override void Analyze(InterfaceTweaks tweaks) => tweaks?.CheckAll();
         protected override IReadOnlyDictionary<string, object> GetControlStates() => InterfaceTweaks.ControlStates;
 
         public InterfaceViewModel()

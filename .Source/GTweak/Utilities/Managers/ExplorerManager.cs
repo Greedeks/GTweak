@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Utilities.Controls;
+using GTweak.Utilities.Tweaks;
 
 namespace GTweak.Utilities.Managers
 {
@@ -23,31 +24,31 @@ namespace GTweak.Utilities.Managers
 
         internal enum ExplorerAction { None, Refresh, Restart }
 
-        internal static readonly Dictionary<string, ExplorerAction> IntfActions = new Dictionary<string, ExplorerAction>()
+        internal static readonly Dictionary<Enum, ExplorerAction> IntfActions = new Dictionary<Enum, ExplorerAction>()
         {
-            ["Checkbox1"] = ExplorerAction.Restart,
-            ["Checkbox2"] = ExplorerAction.Restart,
-            ["Checkbox3"] = ExplorerAction.Restart,
-            ["Checkbox4"] = ExplorerAction.Restart,
-            ["Checkbox5"] = ExplorerAction.Restart,
-            ["Checkbox6"] = ExplorerAction.Restart,
-            ["Checkbox7"] = ExplorerAction.Restart,
-            ["Checkbox8"] = ExplorerAction.Refresh,
-            ["Checkbox9"] = ExplorerAction.Refresh,
-            ["Checkbox10"] = ExplorerAction.Refresh,
-            ["Checkbox11"] = ExplorerAction.Refresh,
-            ["Checkbox12"] = ExplorerAction.Refresh,
-            ["Checkbox13"] = ExplorerAction.Refresh,
-            ["TglButton5"] = ExplorerAction.Restart,
-            ["TglButton6"] = ExplorerAction.Restart,
-            ["TglButton11"] = ExplorerAction.Restart,
-            ["TglButton12"] = ExplorerAction.Restart,
-            ["TglButton13"] = ExplorerAction.Restart,
-            ["TglButton17"] = ExplorerAction.Restart,
-            ["TglButton19"] = ExplorerAction.Restart,
-            ["TglButton23"] = ExplorerAction.Restart,
-            ["TglButton24"] = ExplorerAction.Restart,
-            ["TglButton27"] = ExplorerAction.Restart
+            [InterfaceCheckbox.ExplorerHome] = ExplorerAction.Restart,
+            [InterfaceCheckbox.ExplorerGallery] = ExplorerAction.Restart,
+            [InterfaceCheckbox.ExplorerOneDrive] = ExplorerAction.Restart,
+            [InterfaceCheckbox.HiddenFiles] = ExplorerAction.Restart,
+            [InterfaceCheckbox.SystemFiles] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FileExtensions] = ExplorerAction.Restart,
+            [InterfaceCheckbox.EmptyDrives] = ExplorerAction.Restart,
+            [InterfaceCheckbox.IconComputer] = ExplorerAction.Refresh,
+            [InterfaceCheckbox.IconNetwork] = ExplorerAction.Refresh,
+            [InterfaceCheckbox.IconRecycleBin] = ExplorerAction.Refresh,
+            [InterfaceCheckbox.IconControlPanel] = ExplorerAction.Refresh,
+            [InterfaceCheckbox.IconUserFiles] = ExplorerAction.Refresh,
+            [InterfaceCheckbox.IconOneDrive] = ExplorerAction.Refresh,
+            [InterfaceToggle.TaskbarDarkTheme] = ExplorerAction.Restart,
+            [InterfaceToggle.AppDarkTheme] = ExplorerAction.Restart,
+            [InterfaceToggle.TaskbarAlignment] = ExplorerAction.Restart,
+            [InterfaceToggle.StartMenuLayout] = ExplorerAction.Restart,
+            [InterfaceToggle.CompactContextMenu] = ExplorerAction.Restart,
+            [InterfaceToggle.TaskbarEndTask] = ExplorerAction.Restart,
+            [InterfaceToggle.TaskbarIconsButtons] = ExplorerAction.Restart,
+            [InterfaceToggle.ComputerFolders] = ExplorerAction.Restart,
+            [InterfaceToggle.Explorer3DObjects] = ExplorerAction.Restart,
+            [InterfaceToggle.BingStartSearch] = ExplorerAction.Restart
         };
 
         internal static readonly Dictionary<string, ExplorerAction> PackageActions = new Dictionary<string, ExplorerAction>()

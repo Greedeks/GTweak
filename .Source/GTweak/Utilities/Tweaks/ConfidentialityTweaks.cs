@@ -12,94 +12,563 @@ using Microsoft.Win32;
 
 namespace GTweak.Utilities.Tweaks
 {
+    internal enum ConfidentialityToggle
+    {
+        TargetedAdvertising = 1,
+        DataSynchronization,
+        WindowsTelemetry,
+        SchedulerDataCollection,
+        InstalledAppsData,
+        AppUsageStatistics,
+        HandwritingData,
+        HardwareConfigurationData,
+        HiddenMicrosoftDomains,
+        UserLocationTracking,
+        FeedbackRequests,
+        SpeechSynthesisUpdates,
+        HiddenSystemMonitoring,
+        SystemExperiments,
+        CovertDataCollectionServices,
+        WindowsEventLogging,
+        NvidiaTelemetry,
+        UserBehaviorRecording,
+        OfflineMapsUpdates,
+        IntelTelemetry
+    }
+
     internal sealed class ConfidentialityTweaks : FirewallManager
     {
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
         private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
+        private readonly Dictionary<ConfidentialityToggle, (Func<bool> Check, Action<bool> Apply)> _tglTweaks;
 
-        internal void AnalyzeAndUpdate()
+        public ConfidentialityTweaks()
         {
-            _сontrolWriter.Button[1] =
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising", "0");
+            _tglTweaks = new Dictionary<ConfidentialityToggle, (Func<bool> Check, Action<bool> Apply)>
+            {
+                [ConfidentialityToggle.TargetedAdvertising] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising", "0");
+                    },
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled");
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising", 0, RegistryValueKind.DWord);
+                        }
+                    }
+                ),
 
-            _сontrolWriter.Button[2] =
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled", "0");
+                [ConfidentialityToggle.DataSynchronization] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled", "0");
+                    },
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled");
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled");
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled");
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled");
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled");
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", 0, RegistryValueKind.DWord);
+                        }
+                    }
+                ),
 
-            _сontrolWriter.Button[3] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1") || IsTaskEnabled(telemetryTasks);
+                [ConfidentialityToggle.WindowsTelemetry] = (
+                   Check: () =>
+                   {
+                       return RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
+                       RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1") || IsTaskEnabled(telemetryTasks);
+                   },
+                   Apply: (state) =>
+                   {
+                       RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", state ? 1 : 0, RegistryValueKind.DWord);
 
-            _сontrolWriter.Button[4] = IsTaskEnabled(dataCollectTasks);
+                       if (state)
+                       {
+                           RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
+                       }
+                       else
+                       {
+                           RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
+                       }
 
-            _сontrolWriter.Button[5] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1") || IsTaskEnabled(appExpInventoryTasks);
+                       SetTaskState(state, telemetryTasks);
+                   }
+                ),
 
-            _сontrolWriter.Button[6] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", "0") || IsTaskEnabled(appExpUsageTasks);
+                [ConfidentialityToggle.SchedulerDataCollection] = (
+                    Check: () => IsTaskEnabled(dataCollectTasks),
+                    Apply: (state) => SetTaskState(state, dataCollectTasks)
+                ),
 
-            _сontrolWriter.Button[7] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Input\TIPC", "Enabled", "0");
+                [ConfidentialityToggle.InstalledAppsData] = (
+                    Check: () => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1") || IsTaskEnabled(appExpInventoryTasks),
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", 1, RegistryValueKind.DWord);
+                        }
 
-            _сontrolWriter.Button[8] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", "0") || IsTaskEnabled(ceipTasks);
+                        SetTaskStateOwner(state, appExpInventoryTasks);
+                    }
+                ),
 
-            _сontrolWriter.Button[9] = IsDefaultHosts();
+                [ConfidentialityToggle.AppUsageStatistics] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", "0") || IsTaskEnabled(appExpUsageTasks);
+                    },
+                    Apply: (state) =>
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", state ? 1 : 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", state ? 1 : 0, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", state ? 1 : 0, RegistryValueKind.DWord);
 
-            _сontrolWriter.Button[10] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", "1");
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", 0, RegistryValueKind.DWord);
+                        }
 
-            _сontrolWriter.Button[11] =
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", "1") || IsTaskEnabled(feedbackTasks);
+                        SetTaskStateOwner(state, appExpUsageTasks);
+                    }
+                ),
 
-            _сontrolWriter.Button[12] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", "0") || IsTaskEnabled(speechTasks);
+                [ConfidentialityToggle.HandwritingData] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", "1") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", "1") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Input\TIPC", "Enabled", "0");
+                    },
+                    Apply: (state) =>
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", state ? 0 : 1, RegistryValueKind.DWord);
+                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Input\TIPC", "Enabled", state ? 1 : 0, RegistryValueKind.DWord);
 
-            _сontrolWriter.Button[13] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", "4");
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", 1, RegistryValueKind.DWord);
+                        }
+                    }
+                ),
 
-            _сontrolWriter.Button[14] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", "0");
+                [ConfidentialityToggle.HardwareConfigurationData] = (
+                    Check: () => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", "0") || IsTaskEnabled(ceipTasks),
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", 0, RegistryValueKind.DWord);
+                        }
 
-            _сontrolWriter.Button[15] =
-                RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
-                RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice") ||
-                RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc");
+                        SetTaskState(state, ceipTasks);
+                    }
+                ),
 
-            _сontrolWriter.Button[16] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4");
+                [ConfidentialityToggle.HiddenMicrosoftDomains] = (
+                    Check: () => IsDefaultHosts(),
+                    Apply: (state) =>
+                    {
+                        BlockSpyDomain(state);
 
-            _сontrolWriter.Button[17] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks);
+                        Task.Run(delegate
+                        {
+                            try
+                            {
+                                if (state)
+                                {
+                                    File.Copy(PathLocator.Files.Hosts.Backup, PathLocator.Files.Hosts.Original, true);
 
-            _сontrolWriter.Button[18] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", "1");
+                                    if (File.Exists(PathLocator.Files.Hosts.Backup))
+                                    {
+                                        File.Delete(PathLocator.Files.Hosts.Backup);
+                                    }
+                                    else
+                                    {
+                                        File.WriteAllText(PathLocator.Files.Hosts.Original, string.Empty);
+                                    }
+                                }
+                                else
+                                {
+                                    File.Copy(PathLocator.Files.Hosts.Original, PathLocator.Files.Hosts.Backup, true);
 
-            _сontrolWriter.Button[19] =
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "MapUpdate", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "AutoUpdateEnabled", "0") ||
-                RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", "0") || IsTaskEnabled(mapsTasks);
+                                    string existingText = File.Exists(PathLocator.Files.Hosts.Original) ? File.ReadAllText(PathLocator.Files.Hosts.Original) : string.Empty;
 
-            _сontrolWriter.Button[20] = (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start")
-                && RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start", "4")) || IsTaskEnabled(intelTask);
+                                    HashSet<string> existingEntries = new HashSet<string>(existingText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()), StringComparer.OrdinalIgnoreCase);
+
+                                    StringBuilder blocklist = new StringBuilder();
+
+                                    foreach (string line in Resources.Blocklist.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                                    {
+                                        string trimmedLine = line.Trim();
+                                        if (!string.IsNullOrEmpty(trimmedLine) && existingEntries.Add(trimmedLine))
+                                        {
+                                            blocklist.AppendLine(trimmedLine);
+                                        }
+                                    }
+
+                                    if (blocklist.Length > 0)
+                                    {
+                                        FileInfo fileInfo = new FileInfo(PathLocator.Files.Hosts.Original);
+
+                                        if (fileInfo.Exists && fileInfo.IsReadOnly)
+                                        {
+                                            fileInfo.IsReadOnly = false;
+                                        }
+
+                                        string prefix = string.Empty;
+                                        if (existingText.Length > 0)
+                                        {
+                                            string lastLine = existingText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()?.Trim() ?? string.Empty;
+                                            prefix = lastLine.StartsWith("0.0.0.0") ? existingText.EndsWith("\n") ? string.Empty : Environment.NewLine : existingText.EndsWith("\n") ? Environment.NewLine : Environment.NewLine + Environment.NewLine;
+                                        }
+
+                                        File.AppendAllText(PathLocator.Files.Hosts.Original, $"{prefix}{blocklist.ToString().TrimEnd()}");
+                                    }
+                                }
+                            }
+                            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        });
+                    }
+                ),
+
+                [ConfidentialityToggle.UserLocationTracking] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "1") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", "1") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", "1");
+                    },
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation");
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting");
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 1, RegistryValueKind.DWord);
+                        }
+                    }
+                ),
+
+                [ConfidentialityToggle.FeedbackRequests] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", "1") || IsTaskEnabled(feedbackTasks);
+                    },
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod");
+                            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds");
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", 1, RegistryValueKind.DWord);
+                        }
+
+                        SetTaskState(state, feedbackTasks);
+                    }
+                ),
+
+                [ConfidentialityToggle.SpeechSynthesisUpdates] = (
+                    Check: () => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", "0") || IsTaskEnabled(speechTasks),
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", 0, RegistryValueKind.DWord);
+                        }
+
+                        SetTaskState(state, speechTasks);
+                    }
+                ),
+
+                [ConfidentialityToggle.HiddenSystemMonitoring] = (
+                    Check: () => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", "4"),
+                    Apply: (state) => RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", state ? 2 : 4, RegistryValueKind.DWord)
+                ),
+
+                [ConfidentialityToggle.SystemExperiments] = (
+                    Check: () => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", "0"),
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", 0, RegistryValueKind.DWord);
+                        }
+                    }
+                ),
+
+                [ConfidentialityToggle.CovertDataCollectionServices] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
+                        RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\dmwappushservice") ||
+                        RegistryHelp.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagsvc");
+                    },
+                    Apply: (state) =>
+                    {
+                        (string diagTrack, string dmwappushservice, string diagsvc) =
+                        (
+                            @"SYSTEM\CurrentControlSet\Services\DiagTrack",
+                            @"SYSTEM\CurrentControlSet\Services\dmwappushservice",
+                            @"SYSTEM\CurrentControlSet\Services\diagsvc"
+                        );
+
+                        if (state)
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DependOnService", new[] { "RpcSs" }, RegistryValueKind.MultiString);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Description", @"@%SystemRoot%\system32\diagtrack.dll,-3002", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DisplayName", @"@%SystemRoot%\system32\diagtrack.dll,-3001", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ErrorControl", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ImagePath", @"%SystemRoot%\System32\svchost.exe -k utcsvc -p", RegistryValueKind.ExpandString);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ObjectName", "LocalSystem", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "RequiredPrivileges", new[] { "SeChangeNotifyPrivilege", "SeCreateGlobalPrivilege", "SeAssignPrimaryTokenPrivilege", "SeImpersonatePrivilege", "SeSystemProfilePrivilege", "SeTcbPrivilege", "SeDebugPrivilege", "SeSecurityPrivilege" }, RegistryValueKind.MultiString);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ServiceSidType", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Start", 2, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Type", 16, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagTrack}\Parameters", "ServiceDll", @"%SystemRoot%\system32\diagtrack.dll", RegistryValueKind.ExpandString);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagTrack}\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagTrack}\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
+
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DelayedAutoStart", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DependOnService", new[] { "rpcss" }, RegistryValueKind.MultiString);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "Description", @"@%SystemRoot%\system32\dmwappushsvc.dll,-201", RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DisplayName", @"@%SystemRoot%\system32\dmwappushsvc.dll,-200", RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ErrorControl", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,04,00,00,00,14,00,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,00,00,00,00,10,27,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ImagePath", @"%SystemRoot%\system32\svchost.exe -k netsvcs -p", RegistryValueKind.ExpandString);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ObjectName", "LocalSystem", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ServiceSidType", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "Start", 3, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "Type", 20, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "StateFlags", 3, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "IdleTimeout(sec)", 120, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "ServiceDll", @"%SystemRoot%\system32\dmwappushsvc.dll", RegistryValueKind.ExpandString);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "Action", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "Data0", Array.ConvertAll("37,00,39,00,35,00,42,00,36,00,42,00,46,00,39,00,2d,00,39,00,37,00,42,00,36,00,2d,00,34,00,46,00,38,00,39,00,2d,00,42,00,44,00,38,00,44,00,2d,00,32,00,46,00,34,00,32,00,42,00,42,00,42,00,45,00,39,00,39,00,36,00,45,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "DataType0", 2, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "GUID", Array.ConvertAll("67,d1,90,bc,70,94,39,41,a9,ba,be,0b,bb,f5,b7,4d".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "Type", 6, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "Action", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "Data0", Array.ConvertAll("75,90,bc,a3,28,00,92,13".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "DataType0", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "GUID", Array.ConvertAll("16,28,7a,2d,5e,0c,fc,45,9c,e7,57,0e,5e,cd,e9,c9".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "Type", 7, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Security", "Security", Array.ConvertAll("01,00,04,80,b0,00,00,00,bc,00,00,00,00,00,00,00,14,00,00,00,02,00,9c,00,07,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,06,00,00,00,00,00,14,00,ff,01,0f,00,01,01,00,00,00,00,00,05,12,00,00,00,00,00,18,00,ff,01,0f,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00,00,00,18,00,14,00,00,00,01,02,00,00,00,00,00,0f,02,00,00,00,01,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,0b,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "DependOnService", new[] { "RpcSs" }, RegistryValueKind.MultiString);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Description", @"@%systemroot%\system32\DiagSvc.dll,-101", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "DisplayName", @"@%systemroot%\system32\DiagSvc.dll,-100", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ErrorControl", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ImagePath", @"%SystemRoot%\System32\svchost.exe -k diagnostics", RegistryValueKind.ExpandString);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ObjectName", "LocalSystem", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "RequiredPrivileges", new[] { "SeTcbPrivilege", "nSeTakeOwnershipPrivilege", "nSeDebugPrivilege", "nSeBackupPrivilege", "nSeImpersonatePrivilege", "nSeLoadDriverPrivilege", "nSeRestorePrivilege", "nSeManageVolumePrivilege" }, RegistryValueKind.MultiString);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ServiceSidType", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Start", 3, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Type", 32, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\Parameters", "ServiceDll", @"%systemroot%\system32\DiagSvc.dll", RegistryValueKind.ExpandString);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "Action", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "Data0", Array.ConvertAll("46,00,44,00,44,00,34,00,35,00,39,00,32,00,34,00,2d,00,37,00,38,00,34,00,41,00,2d,00,34,00,39,00,39,00,43,00,2d,00,41,00,45,00,45,00,39,00,2d,00,30,00,38,00,31,00,33,00,38,00,35,00,30,00,43,00,45,00,31,00,38,00,32,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "DataType0", 2, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "GUID", Array.ConvertAll("67,d1,90,bc,70,94,39,41,a9,ba,be,0b,bb,f5,b7,4d".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
+                            RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "Type", 6, RegistryValueKind.DWord);
+                        }
+                        else
+                        {
+                            foreach (string path in new[] { diagTrack, dmwappushservice, diagsvc })
+                            {
+                                RegistryHelp.DeleteFolderTree(Registry.LocalMachine, path);
+                            }
+                        }
+                    }
+                ),
+
+                [ConfidentialityToggle.WindowsEventLogging] = (
+                    Check: () => RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4"),
+                    Apply: (state) =>
+                    {
+                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(state ? "3" : "4")} /f");
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", state ? 3 : 4, RegistryValueKind.DWord, true);
+                    }
+                ),
+
+
+                [ConfidentialityToggle.NvidiaTelemetry] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks);
+                    },
+                    Apply: (state) =>
+                    {
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", state ? 2 : 4, RegistryValueKind.DWord);
+                        SetTaskState(state, nvidiaTasks);
+                    }
+                ),
+
+                [ConfidentialityToggle.UserBehaviorRecording] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", "1");
+                    },
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR");
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", 1, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", 1, RegistryValueKind.DWord);
+                        }
+                    }
+                ),
+
+                [ConfidentialityToggle.OfflineMapsUpdates] = (
+                    Check: () =>
+                    {
+                        return RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "MapUpdate", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "AutoUpdateEnabled", "0") ||
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", "0") || IsTaskEnabled(mapsTasks);
+                    },
+                    Apply: (state) =>
+                    {
+                        if (state)
+                        {
+                            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled");
+                            RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps");
+                        }
+                        else
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled", 0, RegistryValueKind.DWord);
+                            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", 0, RegistryValueKind.DWord);
+                        }
+
+                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "MapUpdate", state ? 1 : 0, RegistryValueKind.DWord);
+
+                        SetTaskState(state, mapsTasks);
+                    }
+                ),
+
+                [ConfidentialityToggle.IntelTelemetry] = (
+                    Check: () =>
+                    {
+                        return (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start") &&
+                        RegistryHelp.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start", "4")) || IsTaskEnabled(intelTask);
+                    },
+                    Apply: (state) =>
+                    {
+                        if (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start"))
+                        {
+                            RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Telemetry", "Start", state ? 2 : 4, RegistryValueKind.DWord);
+                        }
+
+                        SetTaskState(state, intelTask);
+                    }
+                ),
+            };
         }
 
-        internal bool IsDefaultHosts()
+        internal void CheckAll()
+        {
+            foreach (var tweak in _tglTweaks)
+            {
+                _сontrolWriter.ToggleButton[(int)tweak.Key] = tweak.Value.Check();
+            }
+        }
+
+        internal void Apply(string tweakName, bool state)
+        {
+            INIManager.TempWrite(INIManager.TempTweaksConf, tweakName, state);
+
+            if (tweakName.StartsWith("TglButton") && int.TryParse(tweakName.Substring(9), out int index))
+            {
+                ConfidentialityToggle tweakKey = (ConfidentialityToggle)index;
+
+                if (_tglTweaks.TryGetValue(tweakKey, out var action))
+                {
+                    action.Apply(state);
+                }
+            }
+        }
+
+        private bool IsDefaultHosts()
         {
             try
             {
@@ -131,350 +600,6 @@ namespace GTweak.Utilities.Tweaks
                 return !resourceEntries.IsSubsetOf(fileEntries);
             }
             catch { return true; }
-        }
-
-        internal void ApplyTweaks(string tweak, bool state)
-        {
-            INIManager.TempWrite(INIManager.TempTweaksConf, tweak, state);
-
-            switch (tweak)
-            {
-                case "TglButton1":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled");
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth", "AllowAdvertising", 0, RegistryValueKind.DWord);
-                    }
-                    break;
-                case "TglButton2":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled");
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled");
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled");
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled");
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled");
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\BrowserSettings", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Credentials", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Language", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Windows", "Enabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", 0, RegistryValueKind.DWord);
-                    }
-                    break;
-                case "TglButton3":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", state ? 1 : 0, RegistryValueKind.DWord);
-
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
-                    }
-                    SetTaskState(state, telemetryTasks);
-                    break;
-                case "TglButton4":
-                    SetTaskState(state, dataCollectTasks);
-                    break;
-                case "TglButton5":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", 1, RegistryValueKind.DWord);
-                    }
-                    SetTaskStateOwner(state, appExpInventoryTasks);
-                    break;
-                case "TglButton6":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", state ? 1 : 0, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "AITEnable", state ? 1 : 0, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Start_TrackProgs", state ? 1 : 0, RegistryValueKind.DWord);
-
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowDeviceNameInTelemetry", 0, RegistryValueKind.DWord);
-                    }
-                    SetTaskStateOwner(state, appExpUsageTasks);
-                    break;
-                case "TglButton7":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports", "PreventHandwritingErrorReports", state ? 0 : 1, RegistryValueKind.DWord);
-                    RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Input\TIPC", "Enabled", state ? 1 : 0, RegistryValueKind.DWord);
-
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", 1, RegistryValueKind.DWord);
-                    }
-                    break;
-                case "TglButton8":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", 0, RegistryValueKind.DWord);
-                    }
-                    SetTaskState(state, ceipTasks);
-                    break;
-                case "TglButton9":
-                    BlockSpyDomain(state);
-                    Task.Run(delegate
-                    {
-                        try
-                        {
-                            if (state)
-                            {
-                                File.Copy(PathLocator.Files.Hosts.Backup, PathLocator.Files.Hosts.Original, true);
-
-                                if (File.Exists(PathLocator.Files.Hosts.Backup))
-                                {
-                                    File.Delete(PathLocator.Files.Hosts.Backup);
-                                }
-                                else
-                                {
-                                    File.WriteAllText(PathLocator.Files.Hosts.Original, string.Empty);
-                                }
-                            }
-                            else
-                            {
-                                File.Copy(PathLocator.Files.Hosts.Original, PathLocator.Files.Hosts.Backup, true);
-
-                                string existingText = File.Exists(PathLocator.Files.Hosts.Original) ? File.ReadAllText(PathLocator.Files.Hosts.Original) : string.Empty;
-
-                                HashSet<string> existingEntries = new HashSet<string>(existingText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Select(line => line.Trim()), StringComparer.OrdinalIgnoreCase);
-
-                                StringBuilder blocklist = new StringBuilder();
-
-                                foreach (string line in Resources.Blocklist.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries))
-                                {
-                                    string trimmedLine = line.Trim();
-                                    if (!string.IsNullOrEmpty(trimmedLine) && existingEntries.Add(trimmedLine))
-                                    {
-                                        blocklist.AppendLine(trimmedLine);
-                                    }
-                                }
-
-                                if (blocklist.Length > 0)
-                                {
-                                    FileInfo fileInfo = new FileInfo(PathLocator.Files.Hosts.Original);
-
-                                    if (fileInfo.Exists && fileInfo.IsReadOnly)
-                                    {
-                                        fileInfo.IsReadOnly = false;
-                                    }
-
-                                    string prefix = string.Empty;
-                                    if (existingText.Length > 0)
-                                    {
-                                        string lastLine = existingText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()?.Trim() ?? string.Empty;
-                                        prefix = lastLine.StartsWith("0.0.0.0") ? existingText.EndsWith("\n") ? string.Empty : Environment.NewLine : existingText.EndsWith("\n") ? Environment.NewLine : Environment.NewLine + Environment.NewLine;
-                                    }
-
-                                    File.AppendAllText(PathLocator.Files.Hosts.Original, $"{prefix}{blocklist.ToString().TrimEnd()}");
-                                }
-                            }
-                        }
-                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
-                    });
-                    break;
-                case "TglButton10":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation");
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting");
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 1, RegistryValueKind.DWord);
-                    }
-                    break;
-                case "TglButton11":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod");
-                        RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds");
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Siuf\Rules", "PeriodInNanoSeconds", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", 1, RegistryValueKind.DWord);
-                    }
-                    SetTaskState(state, feedbackTasks);
-                    break;
-                case "TglButton12":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", 0, RegistryValueKind.DWord);
-                    }
-                    SetTaskState(state, speechTasks);
-                    break;
-                case "TglButton13":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", state ? 2 : 4, RegistryValueKind.DWord);
-                    break;
-                case "TglButton14":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", 0, RegistryValueKind.DWord);
-                    }
-                    break;
-                case "TglButton15":
-                    (string diagTrack, string dmwappushservice, string diagsvc) =
-                    (
-                        @"SYSTEM\CurrentControlSet\Services\DiagTrack",
-                        @"SYSTEM\CurrentControlSet\Services\dmwappushservice",
-                        @"SYSTEM\CurrentControlSet\Services\diagsvc"
-                    );
-
-                    if (state)
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DependOnService", new[] { "RpcSs" }, RegistryValueKind.MultiString);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Description", @"@%SystemRoot%\system32\diagtrack.dll,-3002", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "DisplayName", @"@%SystemRoot%\system32\diagtrack.dll,-3001", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ErrorControl", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ImagePath", @"%SystemRoot%\System32\svchost.exe -k utcsvc -p", RegistryValueKind.ExpandString);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ObjectName", "LocalSystem", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "RequiredPrivileges", new[] { "SeChangeNotifyPrivilege", "SeCreateGlobalPrivilege", "SeAssignPrimaryTokenPrivilege", "SeImpersonatePrivilege", "SeSystemProfilePrivilege", "SeTcbPrivilege", "SeDebugPrivilege", "SeSecurityPrivilege" }, RegistryValueKind.MultiString);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "ServiceSidType", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Start", 2, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, diagTrack, "Type", 16, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagTrack}\Parameters", "ServiceDll", @"%SystemRoot%\system32\diagtrack.dll", RegistryValueKind.ExpandString);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagTrack}\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagTrack}\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
-
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DelayedAutoStart", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DependOnService", new[] { "rpcss" }, RegistryValueKind.MultiString);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "Description", @"@%SystemRoot%\system32\dmwappushsvc.dll,-201", RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "DisplayName", @"@%SystemRoot%\system32\dmwappushsvc.dll,-200", RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ErrorControl", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,04,00,00,00,14,00,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,00,00,00,00,10,27,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ImagePath", @"%SystemRoot%\system32\svchost.exe -k netsvcs -p", RegistryValueKind.ExpandString);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ObjectName", "LocalSystem", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "ServiceSidType", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "Start", 3, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "Type", 20, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, dmwappushservice, "StateFlags", 3, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "IdleTimeout(sec)", 120, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "ServiceDll", @"%SystemRoot%\system32\dmwappushsvc.dll", RegistryValueKind.ExpandString);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "Action", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "Data0", Array.ConvertAll("37,00,39,00,35,00,42,00,36,00,42,00,46,00,39,00,2d,00,39,00,37,00,42,00,36,00,2d,00,34,00,46,00,38,00,39,00,2d,00,42,00,44,00,38,00,44,00,2d,00,32,00,46,00,34,00,32,00,42,00,42,00,42,00,45,00,39,00,39,00,36,00,45,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "DataType0", 2, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "GUID", Array.ConvertAll("67,d1,90,bc,70,94,39,41,a9,ba,be,0b,bb,f5,b7,4d".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\0", "Type", 6, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "Action", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "Data0", Array.ConvertAll("75,90,bc,a3,28,00,92,13".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "DataType0", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "GUID", Array.ConvertAll("16,28,7a,2d,5e,0c,fc,45,9c,e7,57,0e,5e,cd,e9,c9".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\TriggerInfo\1", "Type", 7, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{dmwappushservice}\Security", "Security", Array.ConvertAll("01,00,04,80,b0,00,00,00,bc,00,00,00,00,00,00,00,14,00,00,00,02,00,9c,00,07,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,8d,01,02,00,01,01,00,00,00,00,00,05,06,00,00,00,00,00,14,00,ff,01,0f,00,01,01,00,00,00,00,00,05,12,00,00,00,00,00,18,00,ff,01,0f,00,01,02,00,00,00,00,00,05,20,00,00,00,20,02,00,00,00,00,18,00,14,00,00,00,01,02,00,00,00,00,00,0f,02,00,00,00,01,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,04,00,00,00,00,00,14,00,14,00,00,00,01,01,00,00,00,00,00,05,0b,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "DependOnService", new[] { "RpcSs" }, RegistryValueKind.MultiString);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Description", @"@%systemroot%\system32\DiagSvc.dll,-101", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "DisplayName", @"@%systemroot%\system32\DiagSvc.dll,-100", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ErrorControl", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ImagePath", @"%SystemRoot%\System32\svchost.exe -k diagnostics", RegistryValueKind.ExpandString);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ObjectName", "LocalSystem", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "RequiredPrivileges", new[] { "SeTcbPrivilege", "nSeTakeOwnershipPrivilege", "nSeDebugPrivilege", "nSeBackupPrivilege", "nSeImpersonatePrivilege", "nSeLoadDriverPrivilege", "nSeRestorePrivilege", "nSeManageVolumePrivilege" }, RegistryValueKind.MultiString);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "ServiceSidType", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Start", 3, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, diagsvc, "Type", 32, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\Parameters", "ServiceDll", @"%systemroot%\system32\DiagSvc.dll", RegistryValueKind.ExpandString);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\Parameters", "ServiceDllUnloadOnStop", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\Parameters", "ServiceMain", "ServiceMain", RegistryValueKind.String);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "Action", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "Data0", Array.ConvertAll("46,00,44,00,44,00,34,00,35,00,39,00,32,00,34,00,2d,00,37,00,38,00,34,00,41,00,2d,00,34,00,39,00,39,00,43,00,2d,00,41,00,45,00,45,00,39,00,2d,00,30,00,38,00,31,00,33,00,38,00,35,00,30,00,43,00,45,00,31,00,38,00,32,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "DataType0", 2, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "GUID", Array.ConvertAll("67,d1,90,bc,70,94,39,41,a9,ba,be,0b,bb,f5,b7,4d".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
-                        RegistryHelp.Write(Registry.LocalMachine, $@"{diagsvc}\TriggerInfo\0", "Type", 6, RegistryValueKind.DWord);
-                    }
-                    else
-                    {
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagTrack);
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, dmwappushservice);
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, diagsvc);
-                    }
-                    break;
-                case "TglButton16":
-                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c reg add HKLM\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service /t REG_DWORD /v Start /d {(state ? "3" : "4")} /f");
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", state ? 3 : 4, RegistryValueKind.DWord, true);
-                    break;
-                case "TglButton17":
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", state ? 2 : 4, RegistryValueKind.DWord);
-                    SetTaskState(state, nvidiaTasks);
-                    break;
-                case "TglButton18":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR");
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", 1, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Personalization", "NoLockScreenCamera", 1, RegistryValueKind.DWord);
-                    }
-                    break;
-                case "TglButton19":
-                    if (state)
-                    {
-                        RegistryHelp.DeleteValue(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled");
-                        RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps");
-                    }
-                    else
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "AutoUpdateEnabled", 0, RegistryValueKind.DWord);
-                        RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\Maps", "AutoDownloadAndUpdateMapData", 0, RegistryValueKind.DWord);
-                    }
-                    RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\Maps", "MapUpdate", state ? 1 : 0, RegistryValueKind.DWord);
-                    SetTaskState(state, mapsTasks);
-                    break;
-                case "TglButton20":
-                    if (RegistryHelp.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start"))
-                    {
-                        RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Telemetry", "Start", state ? 2 : 4, RegistryValueKind.DWord);
-                    }
-                    SetTaskState(state, intelTask);
-                    break;
-                default:
-                    break;
-            }
         }
     }
 }

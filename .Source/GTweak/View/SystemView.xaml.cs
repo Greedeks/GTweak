@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Base;
+using GTweak.Utilities.Helpers;
 using GTweak.Utilities.Managers;
 using GTweak.Utilities.Tweaks;
 
@@ -46,7 +47,7 @@ namespace GTweak.View
             DescBlock.TargetState = null;
         }
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.ApplyTweaks(((Slider)sender).Name, (uint)((Slider)sender).Value);
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.Apply(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
@@ -56,16 +57,16 @@ namespace GTweak.View
 
             if (tglButton.Name != "TglButton3")
             {
-                _sysTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+                _sysTweaks.Apply(tglButton.Name, tglButton.State);
 
-                if (NotificationManager.SysActions.TryGetValue(tglButton.Name, out NotificationManager.NoticeAction action))
+                if (NotificationManager.SysActions.TryGetAction(tglButton.Name, out NotificationManager.NoticeAction action))
                 {
                     NotificationManager.Show().WithDelay(300).Perform(action);
                 }
             }
             else
             {
-                _sysTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+                _sysTweaks.Apply(tglButton.Name, tglButton.State);
             }
         }
     }

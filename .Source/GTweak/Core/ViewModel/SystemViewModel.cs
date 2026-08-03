@@ -15,6 +15,6 @@ namespace GTweak.Core.ViewModel
 
         protected override IReadOnlyDictionary<string, object> GetControlStates() => SystemTweaks.ControlStates;
 
-        protected override void Analyze(SystemTweaks tweaks) => tweaks?.AnalyzeAndUpdate();
+        protected override void Analyze(SystemTweaks tweaks) => tweaks?.CheckAll();
     }
 }

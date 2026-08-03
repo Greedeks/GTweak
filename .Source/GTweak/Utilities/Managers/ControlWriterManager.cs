@@ -7,7 +7,7 @@ namespace GTweak.Utilities.Managers
     {
         private readonly Dictionary<string, object> _controlStates;
 
-        internal GenericCollection<bool> Button { get; }
+        internal GenericCollection<bool> ToggleButton { get; }
         internal GenericCollection<bool> Checkbox { get; }
         internal GenericCollection<object> Slider { get; }
         internal GenericCollection<object> ColorPicker { get; }
@@ -16,7 +16,7 @@ namespace GTweak.Utilities.Managers
         {
             _controlStates = controlStates ?? new Dictionary<string, object>();
 
-            Button = new GenericCollection<bool>(_controlStates, "TglButton");
+            ToggleButton = new GenericCollection<bool>(_controlStates, "TglButton");
             Checkbox = new GenericCollection<bool>(_controlStates, "Checkbox");
             Slider = new GenericCollection<object>(_controlStates, "Slider");
             ColorPicker = new GenericCollection<object>(_controlStates, "ColorPicker");

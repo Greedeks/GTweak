@@ -80,11 +80,11 @@ namespace GTweak.Windows
         {
             INIManager iniManager = new INIManager(PathLocator.Files.Config);
 
-            var allSections = new (string Section, Action<string, bool> TweakAction, IEnumerable<KeyValuePair<string, NotificationManager.NoticeAction>> NoticeActions, IEnumerable<KeyValuePair<string, ExplorerManager.ExplorerAction>> ExplorerMapping)[]
+            var allSections = new (string Section, Action<string, bool> TweakAction, Dictionary<Enum, NotificationManager.NoticeAction> NoticeActions, Dictionary<Enum, ExplorerManager.ExplorerAction> ExplorerMapping)[]
             {
-                (INIManager.SectionConf, _confTweaks.ApplyTweaks, NotificationManager.ConfActions, null),
-                (INIManager.SectionIntf, _intfTweaks.ApplyTweaks, NotificationManager.IntfActions, ExplorerManager.IntfActions),
-                (INIManager.SectionSvc, _svcTweaks.ApplyTweaks, null, null),
+                (INIManager.SectionConf, _confTweaks.Apply, NotificationManager.ConfActions, null),
+                (INIManager.SectionIntf, _intfTweaks.Apply, NotificationManager.IntfActions, ExplorerManager.IntfActions),
+                (INIManager.SectionSvc, _svcTweaks.Apply, null, null),
                 (INIManager.SectionSys, null, NotificationManager.SysActions, null)
             };
 
@@ -121,11 +121,11 @@ namespace GTweak.Windows
                     {
                         if (tweak.StartsWith("TglButton") && tweak != "TglButton3")
                         {
-                            _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value));
+                            _sysTweaks.Apply(tweak, Convert.ToBoolean(value));
 
-                            foreach (var act in NotificationManager.SysActions.Where(a => a.Key == tweak))
+                            if (NotificationManager.SysActions.TryGetAction(tweak, out NotificationManager.NoticeAction sysAction))
                             {
-                                _notyActions.Add(act.Value);
+                                _notyActions.Add(sysAction);
                             }
                         }
                         else if (tweak == "TglButton3")
@@ -133,14 +133,14 @@ namespace GTweak.Windows
                             BackgroundQueue backgroundQueue = new BackgroundQueue();
                             await backgroundQueue.QueueTask(delegate
                             {
-                                _sysTweaks.ApplyTweaks(tweak, Convert.ToBoolean(value), false);
+                                _sysTweaks.Apply(tweak, Convert.ToBoolean(value), false);
                             });
 
                             _isWDNotyNeed = true;
                         }
                         else
                         {
-                            _sysTweaks.ApplyTweaks(tweak, Convert.ToUInt32(value));
+                            _sysTweaks.Apply(tweak, Convert.ToUInt32(value));
                         }
                     }
                     else
@@ -149,29 +149,23 @@ namespace GTweak.Windows
 
                         if (section == INIManager.SectionIntf && tweak.StartsWith("ColorPicker"))
                         {
-                            _intfTweaks.ApplyTweaks(tweak, value);
+                            _intfTweaks.Apply(tweak, value);
                         }
                         else
                         {
                             TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
                         }
 
-                        if (NoticeActions is Dictionary<string, NotificationManager.NoticeAction> dict)
+                        if (NoticeActions != null && NoticeActions.TryGetAction(tweak, out NotificationManager.NoticeAction noticeAction))
                         {
-                            if (dict.TryGetValue(tweak, out NotificationManager.NoticeAction action))
-                            {
-                                _notyActions.Add(action);
-                            }
+                            _notyActions.Add(noticeAction);
                         }
 
-                        if (ExplorerMapping is IDictionary<string, ExplorerManager.ExplorerAction> expDict)
+                        if (ExplorerMapping != null && ExplorerMapping.TryGetAction(tweak, out ExplorerManager.ExplorerAction expAction))
                         {
-                            if (expDict.TryGetValue(tweak, out ExplorerManager.ExplorerAction action))
+                            if (expAction > _expAction)
                             {
-                                if (action > _expAction)
-                                {
-                                    _expAction = action;
-                                }
+                                _expAction = expAction;
                             }
                         }
 

@@ -224,6 +224,7 @@
     <Compile Include="Utilities\Configuration\NetworkProvider.cs" />
     <Compile Include="Utilities\Configuration\StorageTypeIdentifier.cs" />
     <Compile Include="Utilities\Configuration\HardwareData.cs" />
+    <Compile Include="Utilities\Helpers\ControlDictionaryExtensions.cs" />
     <Compile Include="Utilities\Helpers\UnlockHandleHelper.cs" />
     <Compile Include="Utilities\Maintenance\ClearingMemory.cs" />
     <Compile Include="Utilities\Maintenance\RegistryExporter.cs" />

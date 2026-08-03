@@ -38,7 +38,7 @@ namespace GTweak.View
 
             DescBlock.TargetState = tglButton.State;
 
-            _svcTweaks.ApplyTweaks(tglButton.Name, tglButton.State);
+            _svcTweaks.Apply(tglButton.Name, tglButton.State);
 
             NotificationManager.Show().WithDelay(300).Restart();
         }
