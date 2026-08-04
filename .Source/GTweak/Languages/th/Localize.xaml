@@ -4,9 +4,9 @@
 
     <v:String x:Key="default_desc">เลื่อนเมาส์ไปวางเหนือการปรับแต่งใดๆ เพื่อดูคำอธิบาย</v:String>
     <v:String x:Key="default_app_desc">เลื่อนเมาส์ไปวางเหนือไอคอนของแอปพลิเคชันใดๆ เพื่อดูชื่อของแอปพลิเคชันนั้น</v:String>
-    <v:String x:Key="label_target_status">Parameter</v:String>
-    <v:String x:Key="status_active">ACTIVE</v:String>
-    <v:String x:Key="status_disabled">DISABLED</v:String>
+    <v:String x:Key="label_target_status">พารามิเตอร์</v:String>
+    <v:String x:Key="status_active">ทำงาน</v:String>
+    <v:String x:Key="status_disabled">ปิดใช้งาน</v:String>
 
     <v:String x:Key="btn_default">ค่าเริ่มต้น</v:String>
     <v:String x:Key="btn_change">เปลี่ยน</v:String>
@@ -405,8 +405,8 @@
     <v:String x:Key="tgl30_svc">บริการที่เกี่ยวข้องกับโหมดสาธิตของ Store</v:String>
     <v:String x:Key="tgl31_svc">บริการที่เกี่ยวข้องกับการอัปเดต Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">บริการ Multimedia Class Scheduler</v:String>
-    <v:String x:Key="tgl33_svc">Windows Geolocation Service</v:String>
-    
+    <v:String x:Key="tgl33_svc">บริการตำแหน่งที่ตั้งของ Windows</v:String>
+
     <v:String x:Key="tgl1_desc_svc">ปิดถ้าคุณไม่ได้ใช้ประวัติไฟล์และการจัดทำดัชนีเนื้อหา</v:String>
     <v:String x:Key="tgl2_desc_svc">ปิดถ้าคุณไม่ได้ใช้ Xbox และเกมแพดของ Microsoft</v:String>
     <v:String x:Key="tgl3_desc_svc">ปิดถ้าคุณไม่ได้วางแผนที่จะอัปเดต Windows นอกจากบริการแล้ว, การปรับแต่งจะเปลี่ยนไฟล์ที่รับผิดชอบการอัปเดต Windows ด้วยเหตุนี้, แม้ว่าบริการจะเปิดใช้งาน, ศูนย์อัปเดตจะไม่ทำงาน โปรดทราบว่าการปรับแต่งมีผลต่อการดาวน์โหลดและอัปเดตแอปจาก Windows Store</v:String>
@@ -439,7 +439,7 @@
     <v:String x:Key="tgl30_desc_svc">ปิดถ้าคุณไม่ได้ใช้อุปกรณ์ในร้านค้าเพื่อสาธิตคุณสมบัติของ Windows บริการ Store Demo จัดการการแสดงเนื้อหาสาธิตและคุณสมบัติเชิงโต้ตอบที่มีไว้สำหรับจอแสดงผลในร้านค้าและการทดสอบเท่านั้น บริการนี้ไม่จำเป็นสำหรับการใช้งานคอมพิวเตอร์ในชีวิตประจำวัน</v:String>
     <v:String x:Key="tgl31_desc_svc">ปิดถ้าคุณไม่ได้วางแผนที่จะอัปเดตหรือไม่ได้ใช้ Microsoft Edge การดำเนินการนี้ยังหยุดการอัปเดตอัตโนมัติสำหรับ WebView2 Runtime - ส่วนประกอบเหล่านี้ใช้กลไกการอัปเดตเดียวกันและพึ่งพากันอย่างใกล้ชิด</v:String>
     <v:String x:Key="tgl32_desc_svc">ปิดถ้าคุณเข้าใจผลกระทบที่อาจเกิดขึ้นและไม่ได้ใช้แอปพลิเคชันมัลติมีเดียที่ต้องการการประมวลผลเสียงและวิดีโอแบบมีลำดับความสำคัญ ในบางกรณีซึ่งพบไม่บ่อยอาจลดจำนวนเหตุการณ์ของระบบและภาระงาน (เช่น เมื่อใช้อะแดปเตอร์เครือข่ายกับ NetAdapterCX), อย่างไรก็ตาม, ผลกระทบขึ้นอยู่กับการกำหนดค่าระบบ อาจทำให้เสียงกระตุก, เสียง/วิดีโอไม่ประสานกัน, และปัญหาการเล่นอื่นๆ</v:String>
-    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in apps. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Third-party software depending on geolocation may also crash or fail to open. If you experience this, turn the service back on.</v:String>
+    <v:String x:Key="tgl33_desc_svc">ปิดใช้งานหากคุณไม่ใช้การระบุตำแหน่งในแอป บริการนี้จะกำหนดตำแหน่งของคุณผ่าน GPS, Wi-Fi และที่อยู่ IP เมื่อปิดใช้งาน ฟีเจอร์ที่ขึ้นอยู่กับตำแหน่งจะหยุดทำงาน เช่น สภาพอากาศ, แผนที่, เขตเวลาอัตโนมัติ ซอฟต์แวร์ของบุคคลที่สามที่ต้องใช้การระบุตำแหน่งอาจหยุดทำงานหรือเปิดไม่ขึ้น หากคุณพบปัญหานี้ ให้เปิดบริการกลับคืนมา</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->

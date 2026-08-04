@@ -4,9 +4,9 @@
 
     <v:String x:Key="default_desc">העבר את העכבר מעל טוויק כלשהו כדי לקבל את תיאורו</v:String>
     <v:String x:Key="default_app_desc">העבר את העכבר מעל הסמל של אפליקציה כלשהי כדי לראות את שמה</v:String>
-    <v:String x:Key="label_target_status">Parameter</v:String>
-    <v:String x:Key="status_active">ACTIVE</v:String>
-    <v:String x:Key="status_disabled">DISABLED</v:String>
+    <v:String x:Key="label_target_status">פרמטר</v:String>
+    <v:String x:Key="status_active">פעיל</v:String>
+    <v:String x:Key="status_disabled">מושבת</v:String>
 
     <v:String x:Key="btn_default">ברירת מחדל</v:String>
     <v:String x:Key="btn_change">שינוי</v:String>
@@ -405,8 +405,8 @@
     <v:String x:Key="tgl30_svc">שירותים הקשורים למצב הדגמה של Store</v:String>
     <v:String x:Key="tgl31_svc">שירותים הקשורים לעדכון Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">שירות מתזמן מחלקות מולטימדיה</v:String>
-    <v:String x:Key="tgl33_svc">Windows Geolocation Service</v:String>
-    
+    <v:String x:Key="tgl33_svc">שירות מיקום של Windows</v:String>
+
     <v:String x:Key="tgl1_desc_svc">השבת אם אינך משתמש בהיסטוריית קבצים ובאינדוקס תוכן.</v:String>
     <v:String x:Key="tgl2_desc_svc">השבת אם אינך משתמש ב-Xbox ובבקרי משחק של Microsoft.</v:String>
     <v:String x:Key="tgl3_desc_svc">השבת אם אינך מתכנן לעדכן את Windows. בנוסף לשירותים, הטוויק ישנה את הקבצים האחראים לעדכוני Windows. בשל כך, גם אם השירותים פועלים, Windows Update לא יעבוד. שים לב שהטוויק משפיע על הורדה ועדכון של יישומים מ-Windows Store.</v:String>
@@ -439,7 +439,7 @@
     <v:String x:Key="tgl30_desc_svc">השבת אם אינך משתמש במכשיר בחנות להדגמת תכונות Windows. שירות Store Demo מנהל את הצגת תוכן ההדגמה והתכונות האינטראקטיביות המיועדות רק לתצוגות חנות ולבדיקה. שירות זה אינו נחוץ לשימוש יומיומי במחשב.</v:String>
     <v:String x:Key="tgl31_desc_svc">השבת אם אינך מתכנן לעדכן או אינך משתמש ב-Microsoft Edge. פעולה זו גם עוצרת עדכונים אוטומטיים של WebView2 Runtime - רכיבים אלו משתמשים באותו מנגנון עדכון ותלויים זה בזה הדוקות.</v:String>
     <v:String x:Key="tgl32_desc_svc">השבת אם אתה מבין את ההשלכות האפשריות ואינך משתמש ביישומי מולטימדיה הדורשים עיבוד אודיו ווידאו עם עדיפות. במקרים נדירים זה עשוי להפחית מעט את מספר אירועי המערכת ואת העומס (לדוגמה, בשימוש במתאמי רשת עם NetAdapterCX); עם זאת, האפקט תלוי בתצורת המערכת. הדבר עלול לגרום לגמגום באודיו, חוסר סנכרון בין אודיו לווידאו ובעיות הפעלה אחרות.</v:String>
-    <v:String x:Key="tgl33_desc_svc">Disable if you do not use geolocation in apps. The service determines your location via GPS, Wi-Fi, and IP address. When disabled, location-dependent features will stop working: weather, maps, automatic time zone. Third-party software depending on geolocation may also crash or fail to open. If you experience this, turn the service back on.</v:String>
+    <v:String x:Key="tgl33_desc_svc">השבת אם אינך משתמש במיקום באפליקציות. השירות קובע את מיקומך דרך GPS, Wi-Fi וכתובת IP. כאשר הוא מושבת, תכונות התלויות במיקום יפסיקו לעבוד: מזג אוויר, מפות, אזור זמן אוטומטי. תוכנות צד שלישי התלויות במיקום עשויות גם לקרוס או לא להיפתח. אם אתה חווה זאת, הפעל את השירות בחזרה.</v:String>
     <!--#endregion-->
 
     <!--#region System Page -->
