@@ -8,91 +8,100 @@ namespace GTweak.Assets.UserControls
 {
     public partial class ToolsetCard : UserControl
     {
-        internal static readonly DependencyProperty AppIconProperty =
+        public static readonly DependencyProperty AppIconProperty =
             DependencyProperty.Register(nameof(AppIcon), typeof(ImageSource), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty AppNameProperty =
+        public static readonly DependencyProperty AppNameProperty =
             DependencyProperty.Register(nameof(AppName), typeof(string), typeof(ToolsetCard), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty AuthorIconProperty =
+        public static readonly DependencyProperty AuthorIconProperty =
             DependencyProperty.Register(nameof(AuthorIcon), typeof(ImageSource), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty AuthorNameProperty =
+        public static readonly DependencyProperty AuthorNameProperty =
             DependencyProperty.Register(nameof(AuthorName), typeof(string), typeof(ToolsetCard), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty SourceUrlProperty =
+        public static readonly DependencyProperty SourceUrlProperty =
             DependencyProperty.Register(nameof(SourceUrl), typeof(string), typeof(ToolsetCard), new PropertyMetadata(string.Empty));
 
-        internal static readonly DependencyProperty DownloadCommandProperty =
+        public static readonly DependencyProperty DownloadCommandProperty =
             DependencyProperty.Register(nameof(DownloadCommand), typeof(ICommand), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty CancelCommandProperty =
+        public static readonly DependencyProperty CancelCommandProperty =
             DependencyProperty.Register(nameof(CancelCommand), typeof(ICommand), typeof(ToolsetCard), new PropertyMetadata(null));
 
-        internal static readonly DependencyProperty IsDownloadingProperty =
+        public static readonly DependencyProperty IsDownloadingProperty =
             DependencyProperty.Register(nameof(IsDownloading), typeof(bool), typeof(ToolsetCard), new PropertyMetadata(false));
 
-        internal static readonly DependencyProperty ProgressProperty =
+        public static readonly DependencyProperty IsDownloadCompletedProperty =
+            DependencyProperty.Register(nameof(IsDownloadCompleted), typeof(bool), typeof(ToolsetCard), new PropertyMetadata(false));
+
+        public static readonly DependencyProperty ProgressProperty =
             DependencyProperty.Register(nameof(Progress), typeof(double), typeof(ToolsetCard), new PropertyMetadata(0.0));
 
-        internal static readonly DependencyProperty IsSquareIconProperty =
+        public static readonly DependencyProperty IsSquareIconProperty =
             DependencyProperty.Register(nameof(IsSquareIcon), typeof(bool), typeof(ToolsetCard), new PropertyMetadata(false));
 
-        internal ImageSource AppIcon
+        public ImageSource AppIcon
         {
             get => (ImageSource)GetValue(AppIconProperty);
             set => SetValue(AppIconProperty, value);
         }
 
-        internal string AppName
+        public string AppName
         {
             get => (string)GetValue(AppNameProperty);
             set => SetValue(AppNameProperty, value);
         }
 
-        internal ImageSource AuthorIcon
+        public ImageSource AuthorIcon
         {
             get => (ImageSource)GetValue(AuthorIconProperty);
             set => SetValue(AuthorIconProperty, value);
         }
 
-        internal string AuthorName
+        public string AuthorName
         {
             get => (string)GetValue(AuthorNameProperty);
             set => SetValue(AuthorNameProperty, value);
         }
 
-        internal string SourceUrl
+        public string SourceUrl
         {
             get => (string)GetValue(SourceUrlProperty);
             set => SetValue(SourceUrlProperty, value);
         }
 
-        internal ICommand DownloadCommand
+        public ICommand DownloadCommand
         {
             get => (ICommand)GetValue(DownloadCommandProperty);
             set => SetValue(DownloadCommandProperty, value);
         }
 
-        internal ICommand CancelCommand
+        public ICommand CancelCommand
         {
             get => (ICommand)GetValue(CancelCommandProperty);
             set => SetValue(CancelCommandProperty, value);
         }
 
-        internal bool IsDownloading
+        public bool IsDownloading
         {
             get => (bool)GetValue(IsDownloadingProperty);
             set => SetValue(IsDownloadingProperty, value);
         }
 
-        internal double Progress
+        public bool IsDownloadCompleted
+        {
+            get => (bool)GetValue(IsDownloadCompletedProperty);
+            set => SetValue(IsDownloadCompletedProperty, value);
+        }
+
+        public double Progress
         {
             get => (double)GetValue(ProgressProperty);
             set => SetValue(ProgressProperty, value);
         }
 
-        internal bool IsSquareIcon
+        public bool IsSquareIcon
         {
             get => (bool)GetValue(IsSquareIconProperty);
             set => SetValue(IsSquareIconProperty, value);

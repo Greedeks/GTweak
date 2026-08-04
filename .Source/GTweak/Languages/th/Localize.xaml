@@ -406,7 +406,7 @@
     <v:String x:Key="tgl31_svc">บริการที่เกี่ยวข้องกับการอัปเดต Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">บริการ Multimedia Class Scheduler</v:String>
     <v:String x:Key="tgl33_svc">บริการตำแหน่งที่ตั้งของ Windows</v:String>
-
+    
     <v:String x:Key="tgl1_desc_svc">ปิดถ้าคุณไม่ได้ใช้ประวัติไฟล์และการจัดทำดัชนีเนื้อหา</v:String>
     <v:String x:Key="tgl2_desc_svc">ปิดถ้าคุณไม่ได้ใช้ Xbox และเกมแพดของ Microsoft</v:String>
     <v:String x:Key="tgl3_desc_svc">ปิดถ้าคุณไม่ได้วางแผนที่จะอัปเดต Windows นอกจากบริการแล้ว, การปรับแต่งจะเปลี่ยนไฟล์ที่รับผิดชอบการอัปเดต Windows ด้วยเหตุนี้, แม้ว่าบริการจะเปิดใช้งาน, ศูนย์อัปเดตจะไม่ทำงาน โปรดทราบว่าการปรับแต่งมีผลต่อการดาวน์โหลดและอัปเดตแอปจาก Windows Store</v:String>
@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">บริการ:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">เวอร์ชัน</v:String>
-    <v:String x:Key="label_serial_sysinfo">หมายเลขซีเรียล</v:String>
+    <v:String x:Key="label_serial_sysinfo">หมายเลขซีเรียล</v:String> 
     <v:String x:Key="label_mode_sysinfo">โหมด</v:String>
     <v:String x:Key="label_motherbr_sysinfo">เมนบอร์ด</v:String>
     <v:String x:Key="label_name_sysinfo">ชื่อ</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">ดาวน์โหลด</v:String>
     <v:String x:Key="btn_cancel">ยกเลิก</v:String>
     <v:String x:Key="btn_open_dir">เปิดโฟลเดอร์</v:String>
+    <v:String x:Key="btn_done">เสร็จสิ้น</v:String>
     <v:String x:Key="text_ts">ค้นหาตามชื่อหรือผู้เขียน</v:String>
     <!--#endregion-->
 

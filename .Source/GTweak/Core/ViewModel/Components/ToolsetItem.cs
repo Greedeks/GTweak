@@ -28,6 +28,7 @@ namespace GTweak.Core.Item
         public bool IsSquareIcon { get => _isSquareIcon; set { _isSquareIcon = value; OnPropertyChanged(); } }
         public string SourceUrl => _model.SourceUrl;
         public bool IsDownloading => _downloadSession.IsDownloading;
+        public bool IsDownloadCompleted => _downloadSession.IsDownloadCompleted;
         public double Progress => _downloadSession.Progress;
         public ICommand DownloadCommand { get; }
         public ICommand CancelCommand { get; }
@@ -55,6 +56,10 @@ namespace GTweak.Core.Item
             else if (e.PropertyName == nameof(DownloadSession.Progress))
             {
                 OnPropertyChanged(nameof(Progress));
+            }
+            else if (e.PropertyName == nameof(DownloadSession.IsDownloadCompleted))
+            {
+                OnPropertyChanged(nameof(IsDownloadCompleted));
             }
         }
 

@@ -133,9 +133,30 @@
                                     <DataTrigger Binding="{Binding IsDownloading,ElementName=Root}" Value="True">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsDownloadCompleted,ElementName=Root}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
+                    </Button>
+
+                    <Button IsHitTestVisible="False">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource ButtonContent_Inverted}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="Background" Value="{StaticResource Brush_Accent}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsDownloadCompleted,ElementName=Root}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <ui:SymbolIcon Symbol="Checkmark24" FontSize="15" Margin="0,0,5,0"/>
+                            <TextBlock Text="{DynamicResource btn_done}" VerticalAlignment="Center"/>
+                        </StackPanel>
                     </Button>
 
                     <Grid>

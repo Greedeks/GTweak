@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">Скачать</v:String>
     <v:String x:Key="btn_cancel">Отмена</v:String>
     <v:String x:Key="btn_open_dir">Открыть папку</v:String>
+    <v:String x:Key="btn_done">Готово</v:String>
     <v:String x:Key="text_ts">Поиск по названию или автору</v:String>
     <!--#endregion-->
 

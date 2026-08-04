@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">서비스:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">버전</v:String>
-    <v:String x:Key="label_serial_sysinfo">일련번호</v:String>
+    <v:String x:Key="label_serial_sysinfo">일련번호</v:String> 
     <v:String x:Key="label_mode_sysinfo">모드</v:String>
     <v:String x:Key="label_motherbr_sysinfo">머더보드</v:String>
     <v:String x:Key="label_name_sysinfo">이름</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">다운로드</v:String>
     <v:String x:Key="btn_cancel">취소</v:String>
     <v:String x:Key="btn_open_dir">폴더 열기</v:String>
+    <v:String x:Key="btn_done">완료</v:String>
     <v:String x:Key="text_ts">이름 또는 작성자로 검색</v:String>
     <!--#endregion-->
 

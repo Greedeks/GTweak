@@ -16,7 +16,7 @@ namespace GTweak.Core.ViewModel.Components
     {
         private readonly ToolsetModel _model;
         private CancellationTokenSource _cts;
-        private bool _isDownloading;
+        private bool _isDownloading, _isDownloadCompleted;
         private double _progress;
 
         public bool IsDownloading
@@ -29,6 +29,19 @@ namespace GTweak.Core.ViewModel.Components
                     _isDownloading = value;
                     OnPropertyChanged();
                     CommandManager.InvalidateRequerySuggested();
+                }
+            }
+        }
+
+        public bool IsDownloadCompleted
+        {
+            get => _isDownloadCompleted;
+            private set
+            {
+                if (_isDownloadCompleted != value)
+                {
+                    _isDownloadCompleted = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -76,6 +89,8 @@ namespace GTweak.Core.ViewModel.Components
                 }
 
                 await ToolsetDownloadService.DownloadFile(finalUrl, destinationPath, _model.SourceUrl, new Progress<double>(v => Progress = v), _cts.Token);
+
+                IsDownloadCompleted = true;
             }
             catch (Exception ex)
             {
@@ -104,6 +119,12 @@ namespace GTweak.Core.ViewModel.Components
                 IsDownloading = false;
                 _cts?.Dispose();
                 _cts = null;
+            }
+
+            if (IsDownloadCompleted)
+            {
+                await Task.Delay(5000);
+                IsDownloadCompleted = false;
             }
         }
 

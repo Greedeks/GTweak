@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">служби:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">Версія</v:String>
-    <v:String x:Key="label_serial_sysinfo">Серійний номер</v:String>
+    <v:String x:Key="label_serial_sysinfo">Серійний номер</v:String> 
     <v:String x:Key="label_mode_sysinfo">Режим</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Материнська плата</v:String>
     <v:String x:Key="label_name_sysinfo">Назва</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">Завантажити</v:String>
     <v:String x:Key="btn_cancel">Скасувати</v:String>
     <v:String x:Key="btn_open_dir">Відкрити папку</v:String>
+    <v:String x:Key="btn_done">Готово</v:String>
     <v:String x:Key="text_ts">Пошук за назвою або автором</v:String>
     <!--#endregion-->
 

@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">services :</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">Version</v:String>
-    <v:String x:Key="label_serial_sysinfo">Numéro de série</v:String>
+    <v:String x:Key="label_serial_sysinfo">Numéro de série</v:String> 
     <v:String x:Key="label_mode_sysinfo">Mode</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Carte mère</v:String>
     <v:String x:Key="label_name_sysinfo">Nom</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">Télécharger</v:String>
     <v:String x:Key="btn_cancel">Annuler</v:String>
     <v:String x:Key="btn_open_dir">Ouvrir le dossier</v:String>
+    <v:String x:Key="btn_done">Terminé</v:String>
     <v:String x:Key="text_ts">Rechercher par nom ou auteur</v:String>
     <!--#endregion-->
 

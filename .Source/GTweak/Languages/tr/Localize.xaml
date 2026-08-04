@@ -406,7 +406,7 @@
     <v:String x:Key="tgl31_svc">Microsoft Edge güncellemesiyle ilgili hizmetler</v:String>
     <v:String x:Key="tgl32_svc">Multimedya Sınıfı Zamanlayıcı Hizmeti</v:String>
     <v:String x:Key="tgl33_svc">Windows Coğrafi Konum Hizmeti</v:String>
-
+    
     <v:String x:Key="tgl1_desc_svc">Dosya Geçmişi ve içerik dizinleme özelliklerini kullanmıyorsanız devre dışı bırakın.</v:String>
     <v:String x:Key="tgl2_desc_svc">Xbox ve Microsoft oyun kumandalarını (gamepad) kullanmıyorsanız devre dışı bırakın.</v:String>
     <v:String x:Key="tgl3_desc_svc">Windows'u güncellemeyecekseniz devre dışı bırakın. Bu ayar, hizmetlerin yanı sıra Windows güncellemelerinden sorumlu dosyaları da değiştirir; bu nedenle hizmetler etkinleştirilmiş olsa bile Güncelleştirme Merkezi çalışmaz. Ayarın Microsoft Store'dan uygulama indirme ve güncellemeyi de etkilediğini unutmayın.</v:String>
@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">hizmetler:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">Sürüm</v:String>
-    <v:String x:Key="label_serial_sysinfo">Seri numarası</v:String>
+    <v:String x:Key="label_serial_sysinfo">Seri numarası</v:String> 
     <v:String x:Key="label_mode_sysinfo">Mod</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Anakart</v:String>
     <v:String x:Key="label_name_sysinfo">Ad</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">İndir</v:String>
     <v:String x:Key="btn_cancel">İptal</v:String>
     <v:String x:Key="btn_open_dir">Klasörü aç</v:String>
+    <v:String x:Key="btn_done">Tamamlandı</v:String>
     <v:String x:Key="text_ts">Ada veya yazara göre ara</v:String>
     <!--#endregion-->
 

@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">服务：</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">版本</v:String>
-    <v:String x:Key="label_serial_sysinfo">序列号</v:String>
+    <v:String x:Key="label_serial_sysinfo">序列号</v:String> 
     <v:String x:Key="label_mode_sysinfo">模式</v:String>
     <v:String x:Key="label_motherbr_sysinfo">主板</v:String>
     <v:String x:Key="label_name_sysinfo">名称</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">下载</v:String>
     <v:String x:Key="btn_cancel">取消</v:String>
     <v:String x:Key="btn_open_dir">打开文件夹</v:String>
+    <v:String x:Key="btn_done">完成</v:String>
     <v:String x:Key="text_ts">按名称或作者搜索</v:String>
     <!--#endregion-->
 

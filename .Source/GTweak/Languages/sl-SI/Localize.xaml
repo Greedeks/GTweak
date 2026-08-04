@@ -406,7 +406,7 @@
     <v:String x:Key="tgl31_svc">Storitve, povezane s posodabljanjem Microsoft Edge</v:String>
     <v:String x:Key="tgl32_svc">Storitev načrtovanja razreda večpredstavnosti</v:String>
     <v:String x:Key="tgl33_svc">Storitev geolokacije Windows</v:String>
-
+    
     <v:String x:Key="tgl1_desc_svc">Onemogočite, če ne uporabljate zgodovine datotek in indeksiranja vsebine.</v:String>
     <v:String x:Key="tgl2_desc_svc">Onemogočite, če ne uporabljate Xbox in Microsoftovih igralnih ploščkov.</v:String>
     <v:String x:Key="tgl3_desc_svc">Onemogočite, če ne nameravate posodabljati Windows. Poleg storitev bo popravek spremenil datoteke, odgovorne za posodobitve Windows. Zaradi tega, tudi če so storitve omogočene, Središče za posodobitve ne bo delovalo. Upoštevajte, da popravek vpliva na prenos in posodabljanje aplikacij iz Trgovine Windows Store.</v:String>
@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">storitev:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">Različica</v:String>
-    <v:String x:Key="label_serial_sysinfo">Serijska številka</v:String>
+    <v:String x:Key="label_serial_sysinfo">Serijska številka</v:String> 
     <v:String x:Key="label_mode_sysinfo">Način</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Matična plošča</v:String>
     <v:String x:Key="label_name_sysinfo">Ime</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">Prenesi</v:String>
     <v:String x:Key="btn_cancel">Prekliči</v:String>
     <v:String x:Key="btn_open_dir">Odpri mapo</v:String>
+    <v:String x:Key="btn_done">Končano</v:String>
     <v:String x:Key="text_ts">Iskanje po imenu ali avtorju</v:String>
     <!--#endregion-->
 

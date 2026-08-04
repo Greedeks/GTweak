@@ -519,7 +519,7 @@
     <v:String x:Key="label_svc_sysinfo">szolgáltatás:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
     <v:String x:Key="label_verison_sysinfo">Verzió</v:String>
-    <v:String x:Key="label_serial_sysinfo">Sorozatszám</v:String>
+    <v:String x:Key="label_serial_sysinfo">Sorozatszám</v:String> 
     <v:String x:Key="label_mode_sysinfo">Üzemmód</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Alaplap</v:String>
     <v:String x:Key="label_name_sysinfo">Név</v:String>
@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">Letöltés</v:String>
     <v:String x:Key="btn_cancel">Mégse</v:String>
     <v:String x:Key="btn_open_dir">Mappa megnyitása</v:String>
+    <v:String x:Key="btn_done">Kész</v:String>
     <v:String x:Key="text_ts">Keresés név vagy szerző szerint</v:String>
     <!--#endregion-->
 

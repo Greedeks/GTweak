@@ -561,6 +561,7 @@
     <v:String x:Key="btn_download">Download</v:String>
     <v:String x:Key="btn_cancel">Сancel</v:String>
     <v:String x:Key="btn_open_dir">Open folder</v:String>
+    <v:String x:Key="btn_done">Done</v:String>
     <v:String x:Key="text_ts">Search by name or author</v:String>
     <!--#endregion-->
 
