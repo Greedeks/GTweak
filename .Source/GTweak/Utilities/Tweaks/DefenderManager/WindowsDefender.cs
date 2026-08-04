@@ -13,6 +13,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
 {
     internal class WindowsDefender : AclPermissionsBackup
     {
+        const string ServiceName = "GTweakWDManager";
+
         private static readonly Dictionary<string, string> services = new Dictionary<string, string>
         {
             { "WinDefend", "2" },
@@ -429,7 +431,9 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "FilterAdministratorToken", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", 0, RegistryValueKind.DWord);
 
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", $"explorer.exe, {PathLocator.Executable.DisablingWD} /unlock", RegistryValueKind.String, true);
+            CommandExecutor.RunCommand($"/c sc create {ServiceName} binPath= \"{PathLocator.Executable.DisablingWD} /unlock\" type= own start= auto obj= LocalSystem");
+
+            RegistryHelp.Write(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\{ServiceName}", "", "Service", RegistryValueKind.String);
 
             ProcessStartInfo psi = new ProcessStartInfo
             {
@@ -441,6 +445,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                 RedirectStandardError = true
             };
             Process.Start(psi)?.WaitForExit();
+
             CommandExecutor.RunCommand("/c shutdown /r /f /t 0");
         }
 
