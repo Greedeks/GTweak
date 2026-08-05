@@ -180,11 +180,6 @@ namespace GTweak.Assets.UserControls
                 double ah = availableSize.Height;
                 double finiteAw = (double.IsInfinity(aw) || double.IsNaN(aw) || aw <= 0) ? (double.IsInfinity(MaxWidth) ? 320.0 : MaxWidth) : aw;
 
-                double totalItemWidth = 0;
-                double maxItemHeight = 0;
-                double totalVerticalHeight = 0;
-                double maxItemWidth = 0;
-
                 if (ResponsiveMode)
                 {
                     Size infSize = new Size(finiteAw, double.PositiveInfinity);
@@ -204,39 +199,29 @@ namespace GTweak.Assets.UserControls
                     {
                         _visibleCache[0].Measure(infSize);
                     }
-                }
-                else
-                {
-                    Size constraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(finiteAw, double.PositiveInfinity);
-                    for (int i = 0; i < count; i++)
-                    {
-                        _visibleCache[i].Measure(constraint);
-                    }
-                }
 
-                for (int i = 0; i < count; i++)
-                {
-                    double cw = _visibleCache[i].DesiredSize.Width;
-                    double ch = _visibleCache[i].DesiredSize.Height;
-                    totalItemWidth += cw;
-                    totalVerticalHeight += ch;
-                    if (ch > maxItemHeight)
-                    {
-                        maxItemHeight = ch;
-                    }
-
-                    if (cw > maxItemWidth)
-                    {
-                        maxItemWidth = cw;
-                    }
-                }
-
-                if (ResponsiveMode)
-                {
                     if (_cachedLayout != null)
                     {
                         ReleaseGroups(_cachedLayout);
                         _cachedLayout = null;
+                    }
+
+                    double totalItemWidth = 0, maxItemHeight = 0, totalVerticalHeight = 0, maxItemWidth = 0;
+                    for (int i = 0; i < count; i++)
+                    {
+                        double cw = _visibleCache[i].DesiredSize.Width;
+                        double ch = _visibleCache[i].DesiredSize.Height;
+                        totalItemWidth += cw;
+                        totalVerticalHeight += ch;
+                        if (ch > maxItemHeight)
+                        {
+                            maxItemHeight = ch;
+                        }
+
+                        if (cw > maxItemWidth)
+                        {
+                            maxItemWidth = cw;
+                        }
                     }
 
                     double horizontalRequired = totalItemWidth + (count > 1 ? 30.0 : 0) + (count > 2 ? (count - 2) * HorizontalSpacing : 0);
@@ -244,19 +229,42 @@ namespace GTweak.Assets.UserControls
 
                     Size resultSize = (horizontalRequired <= aw || double.IsInfinity(aw)) ? new Size(double.IsInfinity(aw) ? horizontalRequired : aw, maxItemHeight) : new Size(double.IsInfinity(aw) ? maxItemWidth : aw, verticalRequired);
                     _cachedMeasureWidth = resultSize.Width;
+
                     return resultSize;
+                }
+
+                bool isStretch = ContentAlignment == HorizontalAlignment.Stretch && !EqualizeItemSize;
+
+                Size initialConstraint = EqualizeItemSize ? new Size(ItemWidth, double.PositiveInfinity) : new Size(finiteAw, double.PositiveInfinity);
+
+                for (int i = 0; i < count; i++)
+                {
+                    _visibleCache[i].Measure(initialConstraint);
                 }
 
                 if (_cachedLayout != null)
                 {
                     ReleaseGroups(_cachedLayout);
                 }
+
                 _cachedLayout = CreateOptimalColumns(aw, ah, _visibleCache);
+
+                if (isStretch && _cachedLayout != null && _cachedLayout.Count > 1)
+                {
+                    double equalWidth = (finiteAw - (_cachedLayout.Count - 1) * HorizontalSpacing) / _cachedLayout.Count;
+                    Size stretchConstraint = new Size(Math.Max(0, equalWidth), double.PositiveInfinity);
+                    for (int i = 0; i < count; i++)
+                    {
+                        _visibleCache[i].Measure(stretchConstraint);
+                    }
+
+                    ReleaseGroups(_cachedLayout);
+                    _cachedLayout = CreateOptimalColumns(aw, ah, _visibleCache);
+                }
 
                 double finalHeight = CalculateLayoutHeight(_cachedLayout);
                 double finalWidth = double.IsInfinity(aw) ? CalculateTotalWidth(_cachedLayout) : aw;
                 _cachedMeasureWidth = finalWidth;
-
                 return new Size(finalWidth, finalHeight);
             }
             catch (Exception) { return new Size(0, 0); }

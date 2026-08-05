@@ -168,8 +168,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <Grid Margin="0,2,0,2">
@@ -178,7 +178,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                         <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [BiosSerial].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                                     </Grid>
 
@@ -188,7 +188,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mode_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mode_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                         <Border Grid.Column="2" Padding="8,2" CornerRadius="5">
                                             <Border.Style>
                                                 <Style TargetType="Border">
@@ -233,8 +233,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Motherboard].Data}" IsEnabled="{Binding [Motherboard].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Motherboard].Data}" IsEnabled="{Binding [Motherboard].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <Grid Margin="0,2,0,2">
@@ -243,8 +243,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardVersion].Data}" IsEnabled="{Binding [MotherboardVersion].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardVersion].Data}" IsEnabled="{Binding [MotherboardVersion].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <Grid Margin="0,2,0,2">
@@ -253,8 +253,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardSerial].Data}" IsEnabled="{Binding [MotherboardSerial].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_serial_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardSerial].Data}" IsEnabled="{Binding [MotherboardSerial].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <Grid Margin="0,2,0,0">
@@ -263,8 +263,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_chipset_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Chipset].Data}" IsEnabled="{Binding [Chipset].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_chipset_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Chipset].Data}" IsEnabled="{Binding [Chipset].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
                                 </StackPanel>
                             </uc:InfoCard.CardContent>
@@ -284,8 +284,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Processor].Data}" IsEnabled="{Binding [Processor].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Processor].Data}" IsEnabled="{Binding [Processor].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <Grid Margin="0,2,0,2">
@@ -294,7 +294,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis">
+                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
                                             <Run Text="{DynamicResource label_cores_sysinfo}"/>
                                             <Run Text=" / "/>
                                             <Run Text="{DynamicResource label_threads_sysinfo}"/>
@@ -312,8 +312,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Frequency].Data}" IsEnabled="{Binding [Frequency].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Frequency].Data}" IsEnabled="{Binding [Frequency].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
                                 </StackPanel>
                             </uc:InfoCard.CardContent>
@@ -333,8 +333,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <ItemsControl ItemsSource="{Binding [Graphics].Items}">
@@ -359,7 +359,7 @@
                                                             <ColumnDefinition Width="20"/>
                                                             <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                                         <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[1]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                                                     </Grid>
                                                 </StackPanel>
@@ -400,9 +400,9 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto" SharedSizeGroup="RamCapacityColumn"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="4" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_freq_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="4" Text="{DynamicResource label_capacity_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <ItemsControl ItemsSource="{Binding [Memory].Items}">
@@ -429,9 +429,9 @@
                                                             <ColumnDefinition Width="20"/>
                                                             <ColumnDefinition Width="Auto" SharedSizeGroup="RamCapacityColumn"/>
                                                         </Grid.ColumnDefinitions>
-                                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
-                                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[1]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" HorizontalAlignment="Right"/>
-                                                        <TextBlock Grid.Column="4" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[2]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" HorizontalAlignment="Right"/>
+                                                        <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                                        <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[1]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" HorizontalAlignment="Right" TextWrapping="NoWrap"/>
+                                                        <TextBlock Grid.Column="4" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[2]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" HorizontalAlignment="Right" TextWrapping="NoWrap"/>
                                                     </Grid>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -446,7 +446,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mtype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_mtype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                         <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}" HorizontalAlignment="Left">
                                             <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding [Type].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand"/>
                                         </Border>
@@ -472,8 +472,8 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto" SharedSizeGroup="StorageTypeColumn"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
-                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_itype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_itype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <ItemsControl ItemsSource="{Binding [Storage].Items}">
@@ -504,8 +504,8 @@
                                                                 <ColumnDefinition Width="*"/>
                                                                 <ColumnDefinition Width="Auto"/>
                                                             </Grid.ColumnDefinitions>
-                                                            <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" Margin="0,0,2,0"/>
-                                                            <TextBlock Grid.Column="1" Foreground="{StaticResource Brush_Accent_B}" TextTrimming="CharacterEllipsis">
+                                                            <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="0,0,2,0"/>
+                                                            <TextBlock Grid.Column="1" Foreground="{StaticResource Brush_Accent_B}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
                                                                 <TextBlock.Style>
                                                                     <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
                                                                         <Setter Property="Text" Value="{Binding DataItems[1], StringFormat=' ({0})'}"/>
@@ -523,7 +523,7 @@
                                                             </TextBlock>
                                                         </Grid>
                                                         <Border Grid.Column="2" Padding="8,2" CornerRadius="5" Background="{StaticResource Brush_Background_Labels}" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding DataItems[2]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Accent}" Text="{Binding DataItems[2]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                                         </Border>
                                                     </Grid>
 
@@ -567,8 +567,8 @@
                                                                     </Style.Triggers>
                                                                 </Style>
                                                             </StackPanel.Style>
-                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{DynamicResource label_storage_used_sysinfo}" FontSize="13" TextTrimming="CharacterEllipsis"/>
-                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[5]}" Margin="4,0,0,0" FontSize="13" TextTrimming="CharacterEllipsis"/>
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" Text="{DynamicResource label_storage_used_sysinfo}" FontSize="13" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                                            <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[5]}" Margin="4,0,0,0" FontSize="13" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                                         </StackPanel>
 
                                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -620,8 +620,12 @@
                                                         </Style>
                                                     </Border.Style>
                                                 </Border>
-                                                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                                                    <Image Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,6,0">
+                                                <Grid Margin="0,2,0,2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Column="0" Width="14" Height="14" VerticalAlignment="Center" Margin="0,0,6,0">
                                                         <Image.Style>
                                                             <Style TargetType="Image">
                                                                 <Setter Property="Source" Value="{StaticResource Icon_Audio}"/>
@@ -637,8 +641,8 @@
                                                             </Style>
                                                         </Image.Style>
                                                     </Image>
-                                                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
-                                                </StackPanel>
+                                                    <TextBlock Grid.Column="1" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                                </Grid>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -669,8 +673,12 @@
                                                         </Style>
                                                     </Border.Style>
                                                 </Border>
-                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,2,0,2">
-                                                    <Ellipse Width="8" Height="8" Margin="0,0,8,0" VerticalAlignment="Center">
+                                                <Grid Margin="0,2,0,2" VerticalAlignment="Center">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Ellipse Grid.Column="0" Width="8" Height="8" Margin="0,0,8,0" VerticalAlignment="Center">
                                                         <Ellipse.Style>
                                                             <Style TargetType="Ellipse">
                                                                 <Setter Property="Fill" Value="{StaticResource Brush_Accent}"/>
@@ -686,8 +694,8 @@
                                                             </Style>
                                                         </Ellipse.Style>
                                                     </Ellipse>
-                                                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis"/>
-                                                </StackPanel>
+                                                    <TextBlock Grid.Column="1" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding DataItems[0]}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                                </Grid>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
