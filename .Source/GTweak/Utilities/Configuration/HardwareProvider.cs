@@ -234,37 +234,53 @@ namespace GTweak.Utilities.Configuration
             }
             Motherboard.Data = Motherboard.Data.TrimEnd('\n', '\r');
 
-            bool chipsetFound = false;
-            List<string> pciDevices = RegistryHelp.GetSubKeyNames<List<string>>(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Enum\PCI");
 
-            foreach (string deviceId in pciDevices)
+            foreach (string rootPath in new string[] { @"SYSTEM\CurrentControlSet\Enum\PCI", @"SYSTEM\CurrentControlSet\Enum\ACPI" })
             {
-                if (chipsetFound)
+                bool isPci = rootPath.IndexOf("PCI", StringComparison.OrdinalIgnoreCase) >= 0;
+
+                List<string> devices = RegistryHelp.GetSubKeyNames<List<string>>(Registry.LocalMachine, rootPath);
+                if (devices == null)
                 {
-                    break;
+                    continue;
                 }
 
-                List<string> deviceInstances = RegistryHelp.GetSubKeyNames<List<string>>(Registry.LocalMachine, $@"SYSTEM\CurrentControlSet\Enum\PCI\{deviceId}");
-
-                foreach (string instanceId in deviceInstances)
+                foreach (string deviceId in devices)
                 {
-                    string driverRef = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\PCI\{deviceId}\{instanceId}", "Driver", string.Empty);
-                    if (string.IsNullOrEmpty(driverRef))
+                    string devicePath = rootPath + @"\" + deviceId;
+                    List<string> instances = RegistryHelp.GetSubKeyNames<List<string>>(Registry.LocalMachine, devicePath);
+                    if (instances == null)
                     {
                         continue;
                     }
 
-                    string driverDesc = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{driverRef}", "DriverDesc", string.Empty);
-
-                    if (driverDesc.IndexOf("LPC", StringComparison.OrdinalIgnoreCase) >= 0 || driverDesc.IndexOf("eSPI", StringComparison.OrdinalIgnoreCase) >= 0)
+                    foreach (string instanceId in instances)
                     {
+                        string driverRef = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\{devicePath}\{instanceId}", "Driver", string.Empty);
+
+                        if (string.IsNullOrEmpty(driverRef))
+                        {
+                            continue;
+                        }
+
+                        string driverDesc = RegistryHelp.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{driverRef}", "DriverDesc", string.Empty);
+
+                        if (string.IsNullOrEmpty(driverDesc) || driverDesc.TrimStart().StartsWith("@", StringComparison.Ordinal))
+                        {
+                            continue;
+                        }
+
+                        if (isPci ? driverDesc.IndexOf("LPC", StringComparison.OrdinalIgnoreCase) < 0 && driverDesc.IndexOf("eSPI", StringComparison.OrdinalIgnoreCase) < 0 : driverDesc.IndexOf("Qualcomm", StringComparison.OrdinalIgnoreCase) < 0 && driverDesc.IndexOf("Snapdragon", StringComparison.OrdinalIgnoreCase) < 0)
+                        {
+                            continue;
+                        }
+
                         string chipset = ParseChipset(driverDesc) ?? string.Empty;
 
                         if (!string.IsNullOrWhiteSpace(chipset))
                         {
                             Motherboard.Chipset = chipset;
-                            chipsetFound = true;
-                            break;
+                            return;
                         }
                     }
                 }
