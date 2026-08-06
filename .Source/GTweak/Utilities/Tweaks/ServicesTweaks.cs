@@ -507,6 +507,7 @@ namespace GTweak.Utilities.Tweaks
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WdiSystemHost", "Start", state ? 3 : 4, RegistryValueKind.DWord, true);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\TroubleshootingSvc", "Start", state ? 3 : 4, RegistryValueKind.DWord, true);
                         RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DPS", "Start", state ? 2 : 4, RegistryValueKind.DWord, true);
+                        CommandExecutor.RunCommandAsTrustedInstaller($@"/c {string.Join(" & ", new[] { ("WdiServiceHost", "3"), ("WdiSystemHost", "3"), ("TroubleshootingSvc", "3"), ("DPS", "2") }.Select(s => $@"reg add HKLM\SYSTEM\CurrentControlSet\Services\{s.Item1} /v Start /t REG_DWORD /d {(state ? s.Item2 : "4")} /f"))}");
                     }
                 ),
 
