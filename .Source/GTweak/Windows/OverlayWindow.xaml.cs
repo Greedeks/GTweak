@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -24,13 +25,14 @@ namespace GTweak.Windows
             {
                 Closing -= Window_Closing;
                 e!.Cancel = true;
-                BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.15, () =>
+
+                if (disablingWinKeys.ptrHook != IntPtr.Zero)
                 {
-                    ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
-                    disablingWinKeys.objKeyboardProcess = new DisablingWinKeys.LowLevelKeyboardProc(disablingWinKeys.CaptureKey);
-                    disablingWinKeys.ptrHook = DisablingWinKeys.SetWindowsHookEx(13, disablingWinKeys.objKeyboardProcess, DisablingWinKeys.GetModuleHandle(objCurrentModule.ModuleName), 1);
-                    Close();
-                }));
+                    DisablingWinKeys.UnhookWindowsHookEx(disablingWinKeys.ptrHook);
+                    disablingWinKeys.ptrHook = IntPtr.Zero;
+                }
+
+                BeginAnimation(OpacityProperty, FactoryAnimation.CreateTo(0.15, () => { Close(); }));
             }
         }
 

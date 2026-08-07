@@ -149,7 +149,10 @@ namespace GTweak.Utilities.Tweaks
                     {
                         BlockWDefender(state);
                         ArchiveManager.Unarchive(PathLocator.Executable.NSudo, Properties.Resources.NSudoLC);
-                        ArchiveManager.Unarchive(PathLocator.Executable.DisablingWD, Properties.Resources.DisablingWD);
+                        if (state == false)
+                        {
+                            ArchiveManager.Unarchive(PathLocator.Executable.DisablingWD, Properties.Resources.DisablingWD);
+                        }
 
                         if (canShowWindow)
                         {

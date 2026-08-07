@@ -54,7 +54,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             Set-MpPreference -MAPSReporting 2
             Set-MpPreference -PUAProtection Enabled");
 
-            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c " +
+            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v LocalSettingOverrideDisableOnAccessProtection /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v LocalSettingOverrideRealtimeScanDirection /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v LocalSettingOverrideDisableIOAVProtection /f & " +
@@ -77,7 +77,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v DisablePrivacyMode /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"" /v DisableBlockAtFirstSeen /f");
 
-            CommandExecutor.RunCommandAsTrustedInstaller($"{PathLocator.Executable.NSudo} -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c " +
+            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c " +
             @"reg delete ""HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost"" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f & " +
             @"reg delete ""HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter"" /v EnabledV9 /f & " +
             @"reg add ""HKLM\SOFTWARE\Microsoft\Windows Defender"" /v PUAProtection /t REG_DWORD /d 2 /f & " +
@@ -91,7 +91,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             @"reg add ""HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-DeviceGuard/Verbose"" /v Enabled /t REG_DWORD /d 1 /f");
 
             RegistryHelp.CreateFolder(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer");
-            RegistryHelp.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "SmartScreenEnabled", "On", RegistryValueKind.String);
+            RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "SmartScreenEnabled");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\System", "EnableSmartScreen");
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender");
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Microsoft Antimalware");
@@ -104,7 +104,8 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\PrivateProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "DisableNotifications", 0, RegistryValueKind.DWord);
             RegistryHelp.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows Defender Security Center");
-            RegistryHelp.DeleteFolderTree(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge");
+            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge", "EnabledV9");
+            RegistryHelp.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge", "PreventOverride");
 
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger", "Start", 1, RegistryValueKind.DWord);
             RegistryHelp.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger", "Start", 1, RegistryValueKind.DWord);
@@ -145,7 +146,7 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows defender\Windows defender Exploit Guard\Controlled Folder Access", "EnableControlledFolderAccess");
             RegistryHelp.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection", "EnableNetworkProtection");
 
-            CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo}-U:T -P:E -CreatePath:S -ShowWindowMode:Hide cmd /c " +
+            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide cmd /c " +
             @"reg delete HKLM\SYSTEM\CurrentControlSet\Services\WinDefend /v AutorunsDisabled /f & " +
             @"reg add HKLM\SYSTEM\CurrentControlSet\Services\wscsvc /v DelayedAutoStart /t REG_DWORD /d 1 /f & " +
             @"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\WdFilter\Instances\WdFilter Instance"" /v Altitude /t REG_SZ /d 328010 /f & " +
@@ -404,17 +405,17 @@ namespace GTweak.Utilities.Tweaks.DefenderManager
                         continue;
                     }
 
-                    foreach (string filePath in Directory.EnumerateFiles(directory, "*", SearchOption.TopDirectoryOnly))
+                    foreach (string file in Directory.EnumerateFiles(directory, "*", SearchOption.TopDirectoryOnly))
                     {
-                        CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""takeown /f \""{filePath}\"" /r /d y && icacls \""{filePath}\"" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls \""{filePath}\"" /grant {Environment.UserName}:F /t && del /q \""{filePath}\""""");
+                        CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""{$@"takeown /f ""{file}"" /a & icacls ""{file}"" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 & icacls ""{file}"" /grant ""{Environment.UserName}"":F & del /f /q ""{file}"""}""");
 
-                        for (int i = 0; Directory.Exists(filePath) && i < 10; i++)
+                        for (int i = 0; File.Exists(file) && i < 10; i++)
                         {
-                            try { Directory.Delete(filePath, true); }
+                            try { File.Delete(file); }
                             catch (Exception ex) { ErrorLogging.LogDebug(ex); }
 
-                            TakingOwnership.GrantAdministratorsAccess(filePath, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
-                            CommandExecutor.RunCommandAsTrustedInstaller($@"{PathLocator.Executable.NSudo} -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""del /q ""{filePath}""""");
+                            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathLocator.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c ""del /f /q ""{file}""""");
+                            TakingOwnership.GrantAdministratorsAccess(file, TakingOwnership.SE_OBJECT_TYPE.SE_FILE_OBJECT);
 
                             Thread.Sleep(500);
                         }
