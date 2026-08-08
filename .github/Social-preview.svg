@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><svg id="_Слой_1" data-name="Слой_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 680 340"><defs><style>
+      .st0 {
+        mask: url(#mask-1);
+      }
+
+      .st1 {
+        fill: #fff;
+      }
+
+      .st2 {
+        mask: url(#mask);
+      }
+
+      .st3, .st4 {
+        fill: none;
+      }
+
+      .st5 {
+        opacity: .55;
+      }
+
+      .st6 {
+        fill: #0e1210;
+      }
+
+      .st4 {
+        opacity: .4;
+        stroke: #2ecc71;
+      }
+
+      .st4, .st7 {
+        isolation: isolate;
+      }
+
+      .st8 {
+        fill: url(#_Безымянный_градиент_2);
+      }
+
+      .st7 {
+        fill: #2e6a42;
+        font-family: CourierNewPSMT, 'Courier New';
+        font-size: 10px;
+      }
+
+      .st9 {
+        fill: url(#_Безымянный_градиент);
+      }
+
+      .st10 {
+        clip-path: url(#clippath);
+      }
+    </style><clipPath id="clippath"><rect class="st3" width="680" height="340" /></clipPath><radialGradient id="_Безымянный_градиент_2" data-name="Безымянный градиент 2" cx="-614.5" cy="714.43" fx="-614.5" fy="714.43" r=".7" gradientTransform="translate(418200 243076) scale(680 -340)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#252e2a" /><stop offset="1" stop-color="#0e1210" /></radialGradient><radialGradient id="_Безымянный_градиент" data-name="Безымянный градиент" cx="-614.5" cy="714.29" fx="-614.5" fy="714.29" r=".5" gradientTransform="translate(283010 214456) scale(460 -300)" gradientUnits="userSpaceOnUse"><stop offset=".3" stop-color="#000" /><stop offset="1" stop-color="#000" stop-opacity="0" /></radialGradient><mask id="mask" x="0" y="0" width="690.52" height="340" maskUnits="userSpaceOnUse"><g id="regmask"><rect class="st1" width="680" height="340" /><ellipse class="st9" cx="340" cy="170" rx="230" ry="150" /></g></mask><mask id="mask-1" x="0" y="0" width="690" height="350" maskUnits="userSpaceOnUse"><g id="imagine-text-gaps-qappll"><rect class="st1" width="690" height="350" /><rect x="4" y="12" width="296.05" height="15" rx="2" ry="2" /><rect x="4" y="28" width="320.06" height="15" rx="2" ry="2" /><rect x="4" y="44" width="363.06" height="15" rx="2" ry="2" /><rect x="4" y="60" width="284.05" height="15" rx="2" ry="2" /><rect x="4" y="76" width="140.03" height="15" rx="2" ry="2" /><rect x="4" y="92" width="164.03" height="15" rx="2" ry="2" /><rect x="4" y="108" width="314.06" height="15" rx="2" ry="2" /><rect x="4" y="124" width="206.05" height="15" rx="2" ry="2" /><rect x="4" y="140" width="242.05" height="15" rx="2" ry="2" /><rect x="4" y="156" width="122.03" height="15" rx="2" ry="2" /><rect x="4" y="172" width="303.05" height="15" rx="2" ry="2" /><rect x="4" y="188" width="194.03" height="15" rx="2" ry="2" /><rect x="4" y="204" width="350.06" height="15" rx="2" ry="2" /><rect x="4" y="220" width="206.05" height="15" rx="2" ry="2" /><rect x="4" y="236" width="416.08" height="15" rx="2" ry="2" /><rect x="4" y="252" width="200.03" height="15" rx="2" ry="2" /><rect x="4" y="268" width="387.06" height="15" rx="2" ry="2" /><rect x="4" y="284" width="194.03" height="15" rx="2" ry="2" /><rect x="4" y="300" width="326.06" height="15" rx="2" ry="2" /><rect x="4" y="316" width="170.03" height="15" rx="2" ry="2" /><rect x="231.66" y="12" width="285.04" height="15" rx="2" ry="2" /><rect x="231.66" y="28" width="254.05" height="15" rx="2" ry="2" /><rect x="231.66" y="44" width="332.06" height="15" rx="2" ry="2" /><rect x="231.66" y="60" width="218.05" height="15" rx="2" ry="2" /><rect x="231.66" y="76" width="387.06" height="15" rx="2" ry="2" /><rect x="231.66" y="92" width="393.06" height="15" rx="2" ry="2" /><rect x="231.66" y="108" width="152.03" height="15" rx="2" ry="2" /><rect x="231.66" y="124" width="410.08" height="15" rx="2" ry="2" /><rect x="231.66" y="140" width="290.05" height="15" rx="2" ry="2" /><rect x="231.66" y="156" width="230.05" height="15" rx="2" ry="2" /><rect x="231.66" y="172" width="104.02" height="15" rx="2" ry="2" /><rect x="231.66" y="188" width="134.03" height="15" rx="2" ry="2" /><rect x="231.66" y="204" width="452.08" height="15" rx="2" ry="2" /><rect x="231.66" y="220" width="230.05" height="15" rx="2" ry="2" /><rect x="231.66" y="236" width="297.05" height="15" rx="2" ry="2" /><rect x="231.66" y="252" width="200.03" height="15" rx="2" ry="2" /><rect x="231.66" y="268" width="362.06" height="15" rx="2" ry="2" /><rect x="231.66" y="284" width="140.03" height="15" rx="2" ry="2" /><rect x="231.66" y="300" width="218.05" height="15" rx="2" ry="2" /><rect x="231.66" y="316" width="116.03" height="15" rx="2" ry="2" /><rect x="245.27" y="188" width="191.88" height="73" rx="2" ry="2" /><rect x="218.46" y="263" width="243.08" height="23" rx="2" ry="2" /></g></mask></defs><rect class="st6" width="680" height="340" /><g class="st10"><g><rect class="st8" width="680" height="340" /><g class="st2"><g class="st5"><text class="st7" transform="translate(8 22)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT</tspan></text><text class="st7" transform="translate(8 38)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services</tspan></text><text class="st7" transform="translate(8 54)"><tspan x="0" y="0">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion</tspan></text><text class="st7" transform="translate(8 70)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft</tspan></text><text class="st7" transform="translate(8 86)"><tspan x="0" y="0">"Start"=dword:00000004</tspan></text><text class="st7" transform="translate(8 102)"><tspan x="0" y="0">"EnableLUA"=dword:00000000</tspan></text><text class="st7" transform="translate(8 118)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control</tspan></text><text class="st7" transform="translate(8 134)"><tspan x="0" y="0">"WaitToKillServiceTimeout"="1000"</tspan></text><text class="st7" transform="translate(8 150)"><tspan x="0" y="0">HKEY_CURRENT_USER\Control Panel\Desktop</tspan></text><text class="st7" transform="translate(8 166)"><tspan x="0" y="0">"MenuShowDelay"="0"</tspan></text><text class="st7" transform="translate(8 182)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm</tspan></text><text class="st7" transform="translate(8 198)"><tspan x="0" y="0">"EnableAeroPeek"=dword:00000000</tspan></text><text class="st7" transform="translate(8 214)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power</tspan></text><text class="st7" transform="translate(8 230)"><tspan x="0" y="0">"HibernateEnabled"=dword:00000000</tspan></text><text class="st7" transform="translate(8 246)"><tspan x="0" y="0">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer</tspan></text><text class="st7" transform="translate(8 262)"><tspan x="0" y="0">"ShowSuperHidden"=dword:00000001</tspan></text><text class="st7" transform="translate(8 278)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion</tspan></text><text class="st7" transform="translate(8 294)"><tspan x="0" y="0">"RegisteredOwner"="GTweak User"</tspan></text><text class="st7" transform="translate(8 310)"><tspan x="0" y="0">HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows</tspan></text><text class="st7" transform="translate(8 326)"><tspan x="0" y="0">"DisableCMD"=dword:00000000</tspan></text><text class="st7" transform="translate(307.28 22)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System</tspan></text><text class="st7" transform="translate(326.92 38)"><tspan x="0" y="0">"SystemBiosVersion"="BIOS Date: 01/01/24"</tspan></text><text class="st7" transform="translate(366.47 54)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender</tspan></text><text class="st7" transform="translate(235.66 70)"><tspan x="0" y="0">"DisableAntiSpyware"=dword:00000001</tspan></text><text class="st7" transform="translate(235.66 86)"><tspan x="0" y="0">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</tspan></text><text class="st7" transform="translate(235.66 102)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run</tspan></text><text class="st7" transform="translate(317.34 118)"><tspan x="0" y="0">"SecurityHealth"=hex:...</tspan></text><text class="st7" transform="translate(235.66 134)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager</tspan></text><text class="st7" transform="translate(235.66 150)"><tspan x="0" y="0">"BootExecute"=hex(7):61,75,74,6f,63,68,6b,00,00</tspan></text><text class="st7" transform="translate(235.66 166)"><tspan x="0" y="0">HKEY_CURRENT_USER\Control Panel\Mouse</tspan></text><text class="st7" transform="translate(235.66 182)"><tspan x="0" y="0">"MouseSpeed"="0"</tspan></text><text class="st7" transform="translate(235.66 198)"><tspan x="0" y="0">"MouseThreshold1"="0"</tspan></text><text class="st7" transform="translate(235.66 214)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia</tspan></text><text class="st7" transform="translate(235.66 230)"><tspan x="0" y="0">"SystemResponsiveness"=dword:00000000</tspan></text><text class="st7" transform="translate(235.66 246)"><tspan x="0" y="0">HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM</tspan></text><text class="st7" transform="translate(235.66 262)"><tspan x="0" y="0">"ColorPrevalence"=dword:00000001</tspan></text><text class="st7" transform="translate(235.66 278)"><tspan x="0" y="0">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Themes</tspan></text><text class="st7" transform="translate(235.66 294)"><tspan x="0" y="0">"Start"=dword:00000002</tspan></text><text class="st7" transform="translate(342.36 310)"><tspan x="0" y="0">HKEY_CURRENT_USER\AppEvents\Schemes</tspan></text><text class="st7" transform="translate(235.66 326)"><tspan x="0" y="0">".Default"=".None"</tspan></text></g></g><g class="st0"><line class="st4" x1="240" y1="256" x2="440" y2="256" /></g></g></g></svg>

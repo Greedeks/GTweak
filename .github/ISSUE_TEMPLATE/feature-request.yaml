@@ -1,8 +1,8 @@
 name: "✨ Feature Request"
 description: "Suggest a new idea or improvement"
-title: "[IDEA] "
+title: "[Feature] "
 labels: 
-  - enhancement
+  - feature
 assignees: 
   - Greedeks
 

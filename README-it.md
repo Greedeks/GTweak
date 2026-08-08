@@ -1,142 +1,149 @@
 <div align="center">
-<img src="https://github.com/user-attachments/assets/370e1249-4c40-420b-85b1-2978e47f0060"/><br/>
-<img src="https://github.com/Greedeks/GTweak/blob/main/.github/Preview.gif"/><br/><br/>
- 
-<div align="center" style="margin: 20px 0; text-align: center;">
- 
-[![Latest Release](https://shieldcn.dev/github/Greedeks/GTweak/release.svg?split=true&color=179962&labelColor=3d3d3d)](https://github.com/Greedeks/GTweak/releases/latest)
-![Downloads](https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?split=true&color=1982a5&labelColor=3d3d3d)
-![Stars](https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?split=true&color=179962&labelColor=3d3d3d)
-![Forks](https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?split=true&color=1982a5&labelColor=3d3d3d)
-[![BSD 3-Clause License](https://shieldcn.dev/github/Greedeks/GTweak/license.svg?split=true&color=179962&labelColor=3d3d3d)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/GTweak.png" width="220" height="220">
+
+# GTweak
+
+Portable tool for an ideal Windows setup and customization
+
+[![badge](https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/releases/latest)
+[![badge](https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/releases)
+[![badge](https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/stargazers)
+[![badge](https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/network/members)
+[![badge](https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+
+<a href="https://trendshift.io/repositories/23246?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/23246" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/daily?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/weekly?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/monthly?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+
+<img src="https://github.com/Greedeks/GTweak/blob/main/.github/Preview.gif" alt="GTweak Preview" width="850">
+<br/>
+<br/>
+
+[![EN](https://shieldcn.dev/badge/EN-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README.md)
+[![FR](https://shieldcn.dev/badge/FR-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md)
+[![HE](https://shieldcn.dev/badge/HE-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-he.md)
+[![HU](https://shieldcn.dev/badge/HU-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-hu.md)
+[![IT](https://shieldcn.dev/badge/IT-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-it.md)
+[![KO](https://shieldcn.dev/badge/KO-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md)
+[![PL](https://shieldcn.dev/badge/PL-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md)
+[![PT-BR](https://shieldcn.dev/badge/PT--BR-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md)
+[![RU](https://shieldcn.dev/badge/RU-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md)
+[![SL](https://shieldcn.dev/badge/SL-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-sl-si.md)
+[![TH](https://shieldcn.dev/badge/TH-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-th.md)
+[![TR](https://shieldcn.dev/badge/TR-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-tr.md)
+[![UK](https://shieldcn.dev/badge/UK-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md)
+![ZH-CN](https://shieldcn.dev/badge/ZH--CN-7BFFB5.svg?height=26&padX=7)
+![ZH-TW](https://shieldcn.dev/badge/ZH--TW-7BFFB5.svg?height=26&padX=7)
+
+<a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe">
+  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/button.png" width="260" alt="Download GTweak">
+</a>
+
+<br/>
+<br/>
+
 </div>
 
-<br/><a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe"><img src="https://github.com/Greedeks/GTweak/blob/main/.github/button.png" width="260" height="68" alt="Download the latest version"></a><br/><br/>
+## Cosa fa
 
-<!-- language --> 
-<div align="center">
-  <h1>🌍 Lingue Disponibili:</h1>
+GTweak offre un set completo di strumenti per darti il pieno controllo del tuo sistema operativo Windows. Invece di navigare in molteplici menu di sistema, puoi disabilitare in sicurezza i servizi in background non necessari, rimuovere il bloatware integrato e applicare configurazioni di sistema avanzate da un'unica interfaccia.
 
-[![EN](https://img.icons8.com/color/50/usa-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md) 
-[![FR](https://img.icons8.com/color/50/france-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md) 
-[![HE](https://img.icons8.com/color/50/israel-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-he.md) 
-[![HU](https://img.icons8.com/color/50/hungary-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-hu.md) 
-[![IT](https://img.icons8.com/color/50/italy-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-it.md) 
-[![KO](https://img.icons8.com/color/50/south-korea-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md) 
-[![PL](https://img.icons8.com/color/50/poland-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md) 
-[![PT-BR](https://img.icons8.com/color/50/brazil-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md) 
-[![RU](https://img.icons8.com/color/50/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md) 
-[![SI](https://img.icons8.com/color/50/slovenia-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-sl-si.md)
-[![TH](https://img.icons8.com/color/50/thailand-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-th.md)
-[![TR](https://img.icons8.com/color/50/turkey-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-tr.md)
-[![UK](https://img.icons8.com/color/50/ukraine-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md) 
-[![ZH-TW](https://img.icons8.com/color/50/china-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md)
+| Funzione | Dettagli |
+|---|---|
+| **Attivazione di Sistema** | Attivazione di Windows tramite i metodi HWID e KMS |
+| **Controllo Sicurezza** | Disattivazione di Windows Defender, SmartScreen, Antimalware, VBS e Controllo Account Utente (UAC) |
+| **Gestione Aggiornamenti** | Disattivazione e sospensione degli aggiornamenti di Windows; rimozione dei file temporanei degli aggiornamenti |
+| **Ottimizzazione di Sistema** | Disattivazione dei servizi di sistema inutilizzati, dei protocolli di rete non necessari (Teredo, ISATAP, IPv6), degli strumenti di diagnostica integrati e della deframmentazione dei dischi |
+| **Privacy e Telemetria** | Disattivazione di keylogger e telemetria per Windows, NVIDIA e Intel. Disattivazione dei servizi di raccolta dati, delle attività nell'Utilità di pianificazione, di annunci personalizzati, banner di sistema, SCOOBE, notifiche e suggerimenti. Blocco dei domini "ombra" di Microsoft tramite hosts e firewall |
+| **Pulizia e Debloat** | Disinstallazione di OneDrive e Microsoft Edge con pulizia di tutti i dati associati e WebView2. Rimozione delle applicazioni preinstallate standard (UWP) e degli assistenti AI: Cortana, Copilot e Recall |
+| **Personalizzazione Interfaccia** | Personalizzazione di temi, impostazioni delle finestre, layout della barra delle applicazioni e icone. Disattivazione di annunci personalizzati, banner e suggerimenti |
+| **Hardware e Periferiche** | Configurazione di tastiera e mouse: disattivazione del filtraggio dei tasti, tasti permanenti e accelerazione del cursore. Applicazione della combinazione "Prestazioni eccellenti". Regolazione dei driver Realtek High Definition Audio per correggere il ritardo del suono |
+| **Disco e Manutenzione** | Pulizia della memoria RAM, dei file temporanei, della cache delle icone e rimozione sicura della cartella `Windows.old`. Compressione e decompressione dei file tramite NTFS per risparmiare spazio |
+| **Controllo Avanzato** | Visualizzazione della configurazione hardware e monitoraggio dei componenti di sistema. Esecuzione di script personalizzati (`.ps1`, `.cmd`, `.bat`, `.reg`) con privilegi TrustedInstaller |
 
-</div>
+<br/>
 
-</div>
+## Requisiti di Sistema
 
----
-<h2> Una vasta gamma di funzioni, tra cui: 🔩</h2>
-
-```java
-- Attivazione di Windows tramite i metodi HWID e KMS;
-- Disattivazione di Windows Defender, SmartScreen, Antimalware, VBS e Controllo Account Utente (UAC);
-- Disattivazione e sospensione degli aggiornamenti di Windows, oltre alla rimozione dei file temporanei degli aggiornamenti;
-- Disattivazione dei servizi di sistema inutilizzati e superflui;
-- Disattivazione di keylogger e telemetria per Windows, NVIDIA e Intel;
-- Disattivazione dei servizi e degli eventi relativi alla raccolta dei dati diagnostici dell'utente;
-- Disattivazione delle attività di raccolta dati nell'Utilità di pianificazione di Windows;
-- Disattivazione dei protocolli di rete non necessari: Teredo, ISATAP e IPv6;
-- Disattivazione degli strumenti di diagnostica integrati di Windows e della deframmentazione dei dischi;
-- Disattivazione di annunci personalizzati e banner di sistema, incluso lo schermo SCOOBE;
-- Disattivazione delle notifiche di sistema, delle raccomandazioni e dei suggerimenti di Windows;
-- Blocco dei domini "ombra" di Microsoft che raccolgono dati tramite il file hosts e il firewall;
-- Disinstallazione di OneDrive e Microsoft Edge con pulizia di tutti i dati associati e del componente WebView2;
-- Rimozione delle applicazioni preinstallate standard (UWP) in Windows 10/11;
-- Rimozione e disattivazione degli assistenti AI: Cortana, Copilot e Recall;
-- Personalizzazione dell'interfaccia: cambio di temi, impostazioni delle finestre, layout della barra delle applicazioni e icone;
-- Configurazione di tastiera e mouse: disattivazione del filtraggio dei tasti, dei tasti permanenti e dell'accelerazione del cursore;
-- Ottimizzazione delle impostazioni di Windows e applicazione della combinazione per il risparmio energia "Prestazioni eccellenti";
-- Regolazione del risparmio energia dei driver Realtek High Definition Audio per correggere il ritardo del suono;
-- Visualizzazione della configurazione hardware e monitoraggio dei componenti di sistema;
-- Compressione e ripristino di file e cartelle tramite funzioni NTFS per risparmiare spazio;
-- Pulizia della memoria RAM, dei file temporanei, della cache e rimozione sicura della cartella Windows.old;
-- Esecuzione di script personalizzati (.ps1, .cmd, .bat, .reg) con privilegi TrustedInstaller.
-```
-
-<h2> Screenshot 📷</h2>
-<details>
-  <summary> Utilità </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Utils.png"/>
-</details>
-<details>
-  <summary> Riservatezza </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Confidentiality.png"/>
-</details>
-<details>
-  <summary> Interfaccia </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Interface.png"/>
-</details>
-<details>
-  <summary> Applicazioni </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Applications.png"/>
-</details>
-<details>
-  <summary> Servizi </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Services.png"/>
-</details>
-<details>
-  <summary> Sistema </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/System.png"/>
-</details>
-<details>
-  <summary> Estensioni </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Addons.png"/>
-</details>
-<details>
-  <summary> Set di strumenti </summary>
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/screenshots/it/Toolset.png"/>
-</details>
-
-<h2> Requisiti di Sistema</h2>
-
-> ⚠ L’utilità è progettata esclusivamente per immagini ufficiali di Windows scaricate da fonti affidabili. Se hai installato una versione ridotta/modificata di Windows, sei l’unico responsabile del suo funzionamento.
+> ⚠️ L’utilità è progettata esclusivamente per immagini ufficiali di Windows scaricate da fonti affidabili. Se hai installato una versione ridotta/modificata di Windows, sei l’unico responsabile del suo funzionamento.
 
 ```c++
 Supporto Windows: dalla versione 10 (build 18362.116)
 Piattaforma installata: .NET Framework 4.8
 ```
-</br>
 
 > [!WARNING]
-> È necessario disattivare l’antivirus prima di utilizzarlo
+> Esegui l'applicazione come Amministratore.
+> 
+> Prima di utilizzare il software, disattiva l'antivirus o aggiungi GTweak alle esclusioni di Windows Defender.
+
 </br>
 
-## Pacchetti NuGet
+## Dipendenze
 
+**Pacchetti NuGet**
 - [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
-- [Costura](https://github.com/Fody/Costura)
+- [Costura](https://www.nuget.org/packages/Costura.Fody)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 - [Ookii.Dialogs.Wpf](https://www.nuget.org/packages/Ookii.Dialogs.Wpf)
 - [WPF-UI](https://www.nuget.org/packages/wpf-ui/)
 
-## Riferimenti
-
+**Riferimenti di Sistema**
 - FirewallAPI
+- Windows.winmd
 
 </br>
 
-## Traduzioni ❤️
+## Traduzioni
 <p>
   <b>Un ringraziamento speciale</b> a queste persone straordinarie per il loro contributo alle traduzioni
 </p>
 
 <div align="left">
-  
+
 [![VenusGirl](https://wsrv.nl/?url=github.com/VenusGirl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/VenusGirl) [![Kasemcyber](https://wsrv.nl/?url=github.com/Kasemcyber.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kasemcyber)  [![Kopejkin](https://wsrv.nl/?url=github.com/Kopejkin.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Kopejkin) [![Zephyris](https://wsrv.nl/?url=github.com/Zephyris-Pro.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/Zephyris-Pro) [![Marcos](https://wsrv.nl/?url=github.com/marcolinojunior.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/marcolinojunior) [![John](https://wsrv.nl/?url=github.com/JohnFowler58.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/JohnFowler58) [![Seba](https://wsrv.nl/?url=github.com/seba99317.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/seba99317) [![Tenshi](https://wsrv.nl/?url=github.com/tenshikohaku0227.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/tenshikohaku0227) [![Andrew Poženel](https://wsrv.nl/?url=github.com/anderlli0053.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/anderlli0053) [![Ahmet Güzel](https://wsrv.nl/?url=github.com/ahmetgzl.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/ahmetgzl)[![Yosef Chai](https://wsrv.nl/?url=github.com/yosef-chai.png?w=64&h=64&mask=circle&fit=cover&maxage=1d)](https://github.com/yosef-chai)
 
 </div>
+
+</br>
+
+<details>
+<summary><b>Come tradurre GTweak</b></summary>
+ 
+**I. Invia una Pull Request**
+- Fai un fork della repository [qui](https://github.com/Greedeks/GTweak/fork).
+- Scarica il [file di base in inglese (Localize.xaml)](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/en/Localize.xaml) **o** sfoglia e copia dalle [traduzioni esistenti](https://github.com/Greedeks/GTweak/tree/main/.Source/GTweak/Languages) in altre lingue.
+- Traduci il file e salvalo in una cartella con il nome del tuo [codice lingua](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) (es., `ko` per il coreano, `it` per l'italiano).
+</br>Per le varianti regionali: lingua-regione (es., `pt-br` per il portoghese brasiliano, `zh-cn` per il cinese semplificato).
+- Posiziona la cartella in:
+<div>
+    <pre>
+📂 .Source
+└── 📁 GTweak
+    └── 📁 Languages
+        ├── 📁 en
+        ├── 📁 ru
+        └── 📁 [tuo-codice-lingua]
+    </pre>
+</div>
+
+- Aggiungi il nome della tua lingua (scritto nella tua lingua madre) a [LanguageCatalog](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml).  
+  ⚠️ Assicurati di seguire la [NOTA](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11) all'interno del file.
+- Invia una **Pull Request** con le tue modifiche. </br></br>
+
+**II. Richiesta tramite Issue**
+- Se non hai familiarità con Git, apri una [Issue Feature Request](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature]%20Add%20translation).
+  - Specifica il tuo [codice lingua](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) di destinazione.
+  - Fornisci il nome della tua lingua scritto nella tua lingua madre in base alla [NOTA](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11).
+  - Allega il tuo file `Localize.xaml` tradotto.
+</br>
+
+</details>
+
+> [!NOTE]  
+> La traduzione attuale potrebbe essere incompleta, poiché potrebbero essere state aggiunte nuove funzioni non ancora tradotte. In tal caso, quelle parti del programma verranno visualizzate in inglese per impostazione predefinita.
+
 
 </br>
 

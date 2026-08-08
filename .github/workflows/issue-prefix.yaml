@@ -18,6 +18,10 @@ jobs:
         if: contains(github.event.issue.labels.*.name, 'bug') && !startsWith(github.event.issue.title, '[BUG]')
         run: gh issue edit "$ISSUE_URL" --title "[BUG] $ISSUE_TITLE"
 
-      - name: Add [IDEA] prefix
-        if: contains(github.event.issue.labels.*.name, 'enhancement') && !startsWith(github.event.issue.title, '[IDEA]')
-        run: gh issue edit "$ISSUE_URL" --title "[IDEA] $ISSUE_TITLE"
+      - name: Add [Feature] prefix
+        if: contains(github.event.issue.labels.*.name, 'feature') && !startsWith(github.event.issue.title, '[Feature]')
+        run: gh issue edit "$ISSUE_URL" --title "[Feature] $ISSUE_TITLE"
+
+      - name: Add [Question] prefix
+        if: contains(github.event.issue.labels.*.name, 'question') && !startsWith(github.event.issue.title, '[Question]')
+        run: gh issue edit "$ISSUE_URL" --title "[Question] $ISSUE_TITLE"
