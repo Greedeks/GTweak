@@ -5,11 +5,36 @@
 
 Portable tool for an ideal Windows setup and customization
 
-[![badge](https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/releases/latest)
-[![badge](https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/releases)
-[![badge](https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/stargazers)
-[![badge](https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/network/members)
-[![badge](https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=7BFFB5&gradient=7BFFB5)](https://github.com/Greedeks/GTweak/blob/main/LICENSE)
+<a href="https://github.com/Greedeks/GTweak/releases/latest">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
+    <img alt="Release" src="https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
+  </picture>
+</a>
+<a href="https://github.com/Greedeks/GTweak/releases">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
+    <img alt="Downloads" src="https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
+  </picture>
+</a>
+<a href="https://github.com/Greedeks/GTweak/stargazers">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
+    <img alt="Stars" src="https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
+  </picture>
+</a>
+<a href="https://github.com/Greedeks/GTweak/network/members">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
+    <img alt="Forks" src="https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
+  </picture>
+</a>
+<a href="https://github.com/Greedeks/GTweak/blob/main/LICENSE">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
+    <img alt="License" src="https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
+  </picture>
+</a>
 
 <a href="https://trendshift.io/repositories/23246?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/23246" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
 <a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/daily?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
