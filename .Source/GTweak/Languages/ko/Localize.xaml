@@ -417,7 +417,7 @@
     <v:String x:Key="tgl8_desc_svc">프린터가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl9_desc_svc">스캐너가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl10_desc_svc">팩스기가 없는 경우 비활성화합니다.</v:String>
-    <v:String x:Key="tgl11_desc_svc">유선 컴퓨터, 노트북 또는 넷북을 사용하는 경우 비활성화합니다.</v:String>
+    <!--not translated--> <v:String x:Key="tgl11_desc_svc">데스크톱 컴퓨터, 노트북 또는 넷북을 사용하는 경우 비활성화합니다. By default, these services are set to "Manual" start and do not run constantly. However, disabling them will crash the "Power" page in Windows Settings, as the system fails to poll the sensors when opened. The classic Control Panel will continue to work normally. If you need the modern Power settings, turn the services back on.</v:String>
     <v:String x:Key="tgl12_desc_svc">모니터가 하나뿐이고 추가 모니터를 연결할 계획이 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl13_desc_svc">이 앱을 사용하지 않는 경우 비활성화합니다: «가상 데스크톱», «휴대폰», «야간 모드». 이 서비스는 사용자 데이터를 처리하여 Microsoft 서버와 동기화합니다. 시스템 작동에는 중요하지 않지만, Windows 10의 «나이트 라이트 »와 같은 일부 기능이 비활성화되면 완전히 또는 부분적으로 작동이 중단될 수 있습니다.</v:String>
     <v:String x:Key="tgl14_desc_svc">로컬 네트워크를 사용하지 않거나 사용할 계획이 없는 경우 비활성화합니다.</v:String>

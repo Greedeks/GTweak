@@ -417,7 +417,7 @@
     <v:String x:Key="tgl8_desc_svc">Tiltsa le, ha nincs nyomtatója.</v:String>
     <v:String x:Key="tgl9_desc_svc">Tiltsa le, ha nincs szkenner.</v:String>
     <v:String x:Key="tgl10_desc_svc">Tiltsa le, ha nincs faxkészüléke.</v:String>
-    <v:String x:Key="tgl11_desc_svc">Tiltsa le, ha vezetékes számítógépe, laptopja vagy netbookja van.</v:String>
+    <!--not translated--> <v:String x:Key="tgl11_desc_svc">Tiltsa le, ha asztali számítógépe, laptopja vagy netbookja van. By default, these services are set to "Manual" start and do not run constantly. However, disabling them will crash the "Power" page in Windows Settings, as the system fails to poll the sensors when opened. The classic Control Panel will continue to work normally. If you need the modern Power settings, turn the services back on.</v:String>
     <v:String x:Key="tgl12_desc_svc">Tiltsa le, ha csak egy monitora van, és nem tervezi további monitorok csatlakoztatását.</v:String>
     <v:String x:Key="tgl13_desc_svc">Ha nem használja ezeket az alkalmazásokat, tiltsa le: „Virtuális asztalok”, „Az Ön telefonja” és az „Éjszakai fény”. Ez a szolgáltatás feldolgozza a felhasználói adatokat, és szinkronizálja azokat a Microsoft szerverekkel. A rendszer működése szempontjából nem kritikus, azonban egyes funkciók, például a Windows 10 „Éjszakai fény” funkciója, teljesen vagy részben leállhat, ha ezt a szolgáltatást letiltja.</v:String>
     <v:String x:Key="tgl14_desc_svc">Tiltsa le, ha nem használ vagy nem tervez helyi hálózatot használni.</v:String>

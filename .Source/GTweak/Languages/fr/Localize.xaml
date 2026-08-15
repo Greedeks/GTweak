@@ -417,7 +417,7 @@
     <v:String x:Key="tgl8_desc_svc">Désactivez si vous n'avez pas d'imprimante.</v:String>
     <v:String x:Key="tgl9_desc_svc">Désactivez si vous n'avez pas de scanner.</v:String>
     <v:String x:Key="tgl10_desc_svc">Désactivez si vous n'avez pas de fax.</v:String>
-    <v:String x:Key="tgl11_desc_svc">Désactivez si vous utilisez un ordinateur fixe, portable ou netbook classique.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Désactivez si vous avez un ordinateur de bureau, un ordinateur portable ou un netbook. Par défaut, ces services sont réglés sur un démarrage « Manuel » et ne s'exécutent pas en permanence. Cependant, leur désactivation fera planter la page « Alimentation » dans les paramètres de Windows, car le système ne parvient pas à interroger les capteurs lors de son ouverture. Le Panneau de configuration classique continuera de fonctionner normalement. Si vous avez besoin des paramètres d'alimentation modernes, réactivez les services.</v:String>
     <v:String x:Key="tgl12_desc_svc">Désactivez si vous avez un seul moniteur et ne prévoyez pas d'en connecter d'autres.</v:String>
     <v:String x:Key="tgl13_desc_svc">Désactivez si vous n'utilisez pas ces applications : « Bureaux virtuels », « Votre téléphone » et « Éclairage nocturne ». Ce service traite les données utilisateur et les synchronise avec les serveurs de Microsoft. Il n'est pas critique pour le fonctionnement du système ; cependant, certaines fonctionnalités, comme l'« Éclairage nocturne » dans Windows 10, peuvent cesser de fonctionner totalement ou partiellement si désactivé.</v:String>
     <v:String x:Key="tgl14_desc_svc">Désactivez si vous n'utilisez pas ou ne prévoyez pas d'utiliser un réseau local.</v:String>

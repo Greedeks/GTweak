@@ -417,7 +417,7 @@
     <v:String x:Key="tgl8_desc_svc">Onemogočite, če nimate tiskalnika.</v:String>
     <v:String x:Key="tgl9_desc_svc">Onemogočite, če nimate optičnega bralnika.</v:String>
     <v:String x:Key="tgl10_desc_svc">Onemogočite, če nimate faks aparata.</v:String>
-    <v:String x:Key="tgl11_desc_svc">Onemogočite, če imate stacionarni računalnik, prenosnik ali netbook.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Onemogočite, če imate namizni računalnik, prenosnik ali netbook. Privzeto so te storitve nastavljene na »Ročni« zagon in ne delujejo stalno. Vendar pa bo njihovo onemogočanje povzročilo zrušitev strani »Napajanje« v nastavitvah sistema Windows, saj sistem ob odprtju ne more pridobiti podatkov senzorjev. Klasična nadzorna plošča bo še naprej delovala normalno. Če potrebujete sodobne nastavitve napajanja, znova vklopite storitve.</v:String>
     <v:String x:Key="tgl12_desc_svc">Onemogočite, če imate samo en monitor in ne nameravate priključiti dodatnih.</v:String>
     <v:String x:Key="tgl13_desc_svc">Onemogočite, če ne uporabljate teh aplikacij: "Navidezna namizja", "Vaš telefon" in "Nočna svetloba". Ta storitev obdeluje uporabniške podatke in jih sinhronizira s strežniki Microsoft. Za delovanje sistema ni kritična; vendar nekatere funkcije, kot je "Nočna svetloba" v Windows 10, lahko po onemogočanju prenehajo delovati v celoti ali delno.</v:String>
     <v:String x:Key="tgl14_desc_svc">Onemogočite, če ne uporabljate ali ne nameravate uporabljati lokalnega omrežja.</v:String>

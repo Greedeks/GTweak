@@ -417,7 +417,7 @@
     <v:String x:Key="tgl8_desc_svc">Disattiva se non hai una stampante.</v:String>
     <v:String x:Key="tgl9_desc_svc">Disattiva se non hai uno scanner.</v:String>
     <v:String x:Key="tgl10_desc_svc">Disattiva se non hai un fax.</v:String>
-    <v:String x:Key="tgl11_desc_svc">Disattiva se hai un computer fisso, un portatile o un netbook.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Disattiva se possiedi un computer desktop, un laptop o un netbook. Per impostazione predefinita, questi servizi sono impostati sull'avvio "Manuale" e non sono costantemente in esecuzione. Tuttavia, la loro disattivazione causerà l'arresto anomalo della pagina "Alimentazione" nelle Impostazioni di Windows, poiché il sistema non riesce a interrogare i sensori all'apertura. Il classico Pannello di controllo continuerà a funzionare normalmente. Se hai bisogno delle moderne impostazioni di alimentazione, riattiva i servizi.</v:String>
     <v:String x:Key="tgl12_desc_svc">Disattiva se hai un solo monitor e non prevedi di collegarne altri.</v:String>
     <v:String x:Key="tgl13_desc_svc">Disattiva se non utilizzi queste app: «Desktop virtuali», «Il tuo telefono» e «Luce notturna». Questo servizio elabora i dati dell'utente e li sincronizza con i server Microsoft. Non è critico per il funzionamento del sistema; tuttavia, alcune funzioni, come la «Luce notturna» in Windows 10, potrebbero smettere di funzionare totalmente o parzialmente se viene disabilitato.</v:String>
     <v:String x:Key="tgl14_desc_svc">Disattiva se non utilizzi o non prevedi di usare una rete locale.</v:String>

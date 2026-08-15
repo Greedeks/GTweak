@@ -417,7 +417,7 @@
     <v:String x:Key="tgl8_desc_svc">若无印表机请停用此功能。</v:String>
     <v:String x:Key="tgl9_desc_svc">若无扫描器请停用此功能。</v:String>
     <v:String x:Key="tgl10_desc_svc">若无传真机请停用此功能。</v:String>
-    <v:String x:Key="tgl11_desc_svc">若您使用的是家用电脑、笔记型电脑或迷你笔电，请停用此服务。</v:String>
+    <v:String x:Key="tgl11_desc_svc">如果您使用的是台式电脑、笔记本电脑或上网本，请禁用。默认情况下，这些服务设置为“手动”启动，并不会持续运行。但是，禁用它们会导致 Windows 设置中的“电源”页面崩溃，因为系统在打开该页面时无法轮询传感器。经典的控制面板将继续正常工作。如果您需要现代的电源设置，请重新开启这些服务。</v:String>
     <v:String x:Key="tgl12_desc_svc">若您仅有一台显示器且无意连接额外显示器，请停用此服务。</v:String>
     <v:String x:Key="tgl13_desc_svc">若未使用以下应用程序请停用："虚拟桌面"、"您的手机"及"夜间模式"。此服务会处理用户数据并与 Microsoft 服务器同步。此服务对系统运作非必要，但停用后部分功能（如 Windows 10 的"夜间模式"）可能完全或部分失效。</v:String>
     <v:String x:Key="tgl14_desc_svc">若未使用或无意使用区域网络，请停用此服务。</v:String>
