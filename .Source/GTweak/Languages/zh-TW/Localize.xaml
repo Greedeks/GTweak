@@ -219,6 +219,15 @@
     <v:String x:Key="chk_panel_intf">控制台</v:String>
     <v:String x:Key="chk_user_intf">使用者檔案</v:String>
 
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">系統按鈕標準尺寸</v:String>
     <v:String x:Key="tgl2_intf">標準游標閃爍頻率</v:String>
     <v:String x:Key="tgl3_intf">標準捲動列尺寸</v:String>
@@ -241,19 +250,18 @@
     <v:String x:Key="tgl20_intf">顯示個人化廣告</v:String>
     <v:String x:Key="tgl21_intf">登入時還原先前資料夾視窗</v:String>
     <v:String x:Key="tgl22_intf">顯示 Windows 提示與建議的通知</v:String>
-    <v:String x:Key="tgl23_intf">位於"本機"中的資料夾</v:String>
-    <v:String x:Key="tgl24_intf">檔案總管中的"3D 物件"</v:String>
-    <v:String x:Key="tgl25_intf">桌面壁紙格式 .JPEG 壓縮</v:String>
-    <v:String x:Key="tgl26_intf">桌面元素工具提示</v:String>
-    <v:String x:Key="tgl27_intf">開始功能表中整合"Bing"的搜尋查詢</v:String>
-    <v:String x:Key="tgl28_intf">開啟"快速存取"而非"本機"</v:String>
-    <v:String x:Key="tgl29_intf">亮度異常變化</v:String>
+    <v:String x:Key="tgl23_intf">桌面壁紙格式 .JPEG 壓縮</v:String>
+    <v:String x:Key="tgl24_intf">桌面元素工具提示</v:String>
+    <v:String x:Key="tgl25_intf">開始功能表中整合"Bing"的搜尋查詢</v:String>
+    <v:String x:Key="tgl26_intf">開啟"快速存取"而非"本機"</v:String>
+    <v:String x:Key="tgl27_intf">亮度異常變化</v:String>
 
     <v:String x:Key="color1_desc_intf">調整在系統中使用游標選取文字或物件時的背景顏色。</v:String>
     <v:String x:Key="color2_desc_intf">調整受支援應用程式中工具提示的顏色。</v:String>
     <v:String x:Key="exblock1_desc_intf">變更導覽窗格中內建系統項目的可見性，這些項目無法以一般方式解除釘選。</v:String>
     <v:String x:Key="exblock2_desc_intf">變更檔案總管中物件的顯示規則，包括隱藏項目、副檔名與磁碟機結構的可見性。注意：螢幕可能閃爍。</v:String>
     <v:String x:Key="exblock3_desc_intf">變更桌面上系統圖示的顯示 — 這些是內建的系統項目，而非一般捷徑。</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders and «3D Objects» within «This PC». Allows you to hide them so that only connected drives are shown in the list. For builds below 21H1, it additionally removes «3D Objects» from the navigation pane. Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl1_desc_intf">此調整會縮小最小化、最大化及關閉按鈕的尺寸，使其更為精簡。此設定將套用至所有視窗，包含檔案總管、相片、瀏覽器及其他常用程式。</v:String>
     <v:String x:Key="tgl2_desc_intf">此調整會提高文字游標的閃爍頻率。預設情況下，游標每 530 毫秒閃爍一次。</v:String>
     <v:String x:Key="tgl3_desc_intf">此調整功能可降低經典 Windows 應用程式（包含檔案總管、瀏覽器及其他舊版程式）中捲動列的粗細。但此設定不影響現代化介面，因其採用獨立於系統設定的專屬控制元件。</v:String>
@@ -276,13 +284,11 @@
     <v:String x:Key="tgl20_desc_intf">預設情況下，Windows 會利用收集到的資訊投放廣告，即顯示符合您興趣的廣告。而這些廣告實際上會出現在任何可用的顯示空間。若您不希望 Windows 在所有 Store 應用程式、檔案總管、設定選項及開始功能表中顯示個人化廣告，則可關閉此功能。</v:String>
     <v:String x:Key="tgl21_desc_intf">預設情況下，Windows 不會儲存視窗位置及關閉時的狀態。此調整功能可讓系統記憶開啟中的資料夾類型，以便在登出、重新啟動或關機後恢復其狀態。</v:String>
     <v:String x:Key="tgl22_desc_intf">此調整可停用所有視窗提示與通知（含設定中的線上提示），並為 Windows 11 使用者停用"二次開箱體驗"（SCOOBE）。SCOOBE 會突然彈出視窗，強迫使用者"立即完成裝置設定"並登入 Microsoft 帳戶。</v:String>
-    <v:String x:Key="tgl23_desc_intf">此調整將隱藏"本機"中的資料夾：桌面、影片、文件、下載、圖片、音樂。注意畫面可能閃爍。</v:String>
-    <v:String x:Key="tgl24_desc_intf">從左側選單清單（檔案總管清單樹狀結構）的檔案總管概覽中移除"3D 物件"項目。注意畫面可能閃爍。</v:String>
-    <v:String x:Key="tgl25_desc_intf">預設情況下，當您將 jpeg 圖片設為桌布時，Windows 會自動將其品質降低至 85%。此調整將把 jpeg 桌布品質設為 100%。</v:String>
-    <v:String x:Key="tgl26_desc_intf">此調整將停用滑鼠懸停於桌面元素時的工具提示功能。</v:String>
-    <v:String x:Key="tgl27_desc_intf">預設情況下，Windows 會將您在"開始"功能表中的所有搜尋內容傳送至其伺服器，以提供 Bing 搜尋結果。若您不需要"開始"功能表整合 Bing 功能，可透過調整設定停用網頁搜尋。請注意畫面可能閃爍。</v:String>
-    <v:String x:Key="tgl28_desc_intf">預設情況下，開啟檔案總管時，第一個標籤頁會顯示"快速存取"。若要開啟任何磁碟機，則需進行多餘的操作。此調整將使開啟檔案總管時預設顯示"本機"而非"快速存取"。</v:String>
-    <v:String x:Key="tgl29_desc_intf">部分裝置的螢幕亮度可能隨顯示內容自動變化。若關閉 HDR、動態亮度及電源設定仍無法解決問題（此狀況在電池供電的筆記型電腦上尤為常見），可嘗試此調整項——它將在系統層級強制停用自動亮度調節功能。手動亮度控制功能仍可正常使用。</v:String>
+    <v:String x:Key="tgl23_desc_intf">預設情況下，當您將 jpeg 圖片設為桌布時，Windows 會自動將其品質降低至 85%。此調整將把 jpeg 桌布品質設為 100%。</v:String>
+    <v:String x:Key="tgl24_desc_intf">此調整將停用滑鼠懸停於桌面元素時的工具提示功能。</v:String>
+    <v:String x:Key="tgl25_desc_intf">預設情況下，Windows 會將您在"開始"功能表中的所有搜尋內容傳送至其伺服器，以提供 Bing 搜尋結果。若您不需要"開始"功能表整合 Bing 功能，可透過調整設定停用網頁搜尋。請注意畫面可能閃爍。</v:String>
+    <v:String x:Key="tgl26_desc_intf">預設情況下，開啟檔案總管時，第一個標籤頁會顯示"快速存取"。若要開啟任何磁碟機，則需進行多餘的操作。此調整將使開啟檔案總管時預設顯示"本機"而非"快速存取"。</v:String>
+    <v:String x:Key="tgl27_desc_intf">部分裝置的螢幕亮度可能隨顯示內容自動變化。若關閉 HDR、動態亮度及電源設定仍無法解決問題（此狀況在電池供電的筆記型電腦上尤為常見），可嘗試此調整項——它將在系統層級強制停用自動亮度調節功能。手動亮度控制功能仍可正常使用。</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

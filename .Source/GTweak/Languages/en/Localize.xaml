@@ -219,6 +219,15 @@
     <v:String x:Key="chk_panel_intf">Control Panel</v:String>
     <v:String x:Key="chk_user_intf">User Files</v:String>
 
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">Standard size of the system buttons</v:String>
     <v:String x:Key="tgl2_intf">Standard cursor flicker frequency</v:String>
     <v:String x:Key="tgl3_intf">Standard scrollbar size</v:String>
@@ -241,48 +250,45 @@
     <v:String x:Key="tgl20_intf">Show personalized ads</v:String>
     <v:String x:Key="tgl21_intf">Restore previous folder windows when logging in</v:String>
     <v:String x:Key="tgl22_intf">Notifications with Windows tips and suggestions</v:String>
-    <v:String x:Key="tgl23_intf">Folders located in «This PC»</v:String>
-    <v:String x:Key="tgl24_intf">«3D Objects» in the explorer</v:String>
-    <v:String x:Key="tgl25_intf">Compression of wallpaper format .JPEG of the desktop</v:String>
-    <v:String x:Key="tgl26_intf">Tooltips for desktop elements</v:String>
-    <v:String x:Key="tgl27_intf">Search query with «Bing» integration in Start menu</v:String>
-    <v:String x:Key="tgl28_intf">Open «Quick Access» instead of «This PC»</v:String>
-    <v:String x:Key="tgl29_intf">Spontaneous brightness changes</v:String>
+    <v:String x:Key="tgl23_intf">Compression of wallpaper format .JPEG of the desktop</v:String>
+    <v:String x:Key="tgl24_intf">Tooltips for desktop elements</v:String>
+    <v:String x:Key="tgl25_intf">Search query with «Bing» integration in Start menu</v:String>
+    <v:String x:Key="tgl26_intf">Open «Quick Access» instead of «This PC»</v:String>
+    <v:String x:Key="tgl27_intf">Spontaneous brightness changes</v:String>
 
     <v:String x:Key="color1_desc_intf">Changes the background color when selecting text or objects with the cursor in the system.</v:String>
     <v:String x:Key="color2_desc_intf">Changes the color of tooltips in supported applications.</v:String>
     <v:String x:Key="exblock1_desc_intf">Changes the visibility of built-in system items in the navigation pane that cannot be unpinned by conventional means.</v:String>
-    <v:String x:Key="exblock2_desc_intf">Changes system rules for displaying items in File Explorer, including the visibility of hidden items, file extensions, and the structure of disk drives.  Attention the screen may blink.</v:String>
+    <v:String x:Key="exblock2_desc_intf">Changes system rules for displaying items in File Explorer, including the visibility of hidden items, file extensions, and the structure of disk drives. Note that the screen may flicker.</v:String>
     <v:String x:Key="exblock3_desc_intf">Changes the display of system icons on the desktop, which are built-in system objects rather than ordinary shortcuts.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders and «3D Objects» within «This PC». Allows you to hide them so that only connected drives are shown in the list. For builds below 21H1, it additionally removes «3D Objects» from the navigation pane. Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl1_desc_intf">A tweak reduces the size of the Minimize, Maximize, and Close buttons, making them less bulky. It adjusts the size for all windows, including File Explorer, Photos, browsers, and other familiar programs.</v:String>
     <v:String x:Key="tgl2_desc_intf">A tweak increases the frequency of the text cursor's blinking. By default, the cursor blinks every 530 milliseconds.</v:String>
     <v:String x:Key="tgl3_desc_intf">A tweak reduces the thickness of scrollbars in classic Windows applications, including File Explorer, browsers, and other legacy programs. However, it does not affect modern interfaces, as they utilize their own control elements independent of system settings.</v:String>
     <v:String x:Key="tgl4_desc_intf">Tweak will disable or enable the transparency effect. Translucent windows and surfaces.</v:String>
     <v:String x:Key="tgl5_desc_intf">Changes the taskbar theme to light or dark. Attention, the screen may blink.</v:String>
-    <v:String x:Key="tgl6_desc_intf">The tweak will change the explorer theme to light or dark, including browsers and other programs that support the device theme. Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl6_desc_intf">The tweak will change the explorer theme to light or dark, including browsers and other programs that support the device theme. Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl7_desc_intf">By default, additional context menu items appear with a delay of 400 milliseconds. If you want to go faster, you can reduce this delay.</v:String>
     <v:String x:Key="tgl8_desc_intf">By default, the Taskbar preview shows previews of running applications for too long. To make previews appear faster, apply this tweak.</v:String>
     <v:String x:Key="tgl9_desc_intf">Allows hiding shortcut arrows, cloud synchronization statuses (OneDrive, Dropbox), and file type badges, such as SVG graphics.</v:String>
     <v:String x:Key="tgl10_desc_intf">Removing the too intuitive prefix-postfix for labels.</v:String>
     <v:String x:Key="tgl11_desc_intf">Choose where you want the icons on the taskbar to be displayed, on the cent or on the left</v:String>
     <v:String x:Key="tgl12_desc_intf">Changes the Start menu layout by expanding the area for pinned apps. In addition, except in the Windows Home edition, the «Recommended» section will be removed from the Start menu.</v:String>
-    <v:String x:Key="tgl13_desc_intf">This tweak will return you to the usual classic context menu for the desktop and «Explorer». Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl13_desc_intf">This tweak will return you to the usual classic context menu for the desktop and «Explorer». Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl14_desc_intf">Windows 11 sometimes shows hints on how to use a particular feature, for example, the new «Start» menu or «Quick Settings». They are useful if you are seeing Windows 11 for the first time, as it is useless junk.</v:String>
     <v:String x:Key="tgl15_desc_intf">By default, Windows adds padding between items in Explorer. This is a new feature designed for touch screens. This tweak will restore the classic layout of the file explorer, removing the indentation between the elements and saving you from searching for settings.</v:String>
     <v:String x:Key="tgl16_desc_intf">The tweak disables and, where possible, hides Copilot icons on the taskbar, in the «Start Menu», in Edge, and in Notepad, blocking its functionality, and also disables Recall. At the same time, the core Copilot application itself is not affected, remains in the system, and can be used if needed. Copilot can only be fully removed along with Microsoft Edge. If these AI features are not present in your Windows initially, using the tweak is pointless.</v:String>
-    <v:String x:Key="tgl17_desc_intf">This tweak will allow you to add the «End task» option to the context menu when you right-click on the application on the taskbar. This speeds up the completion of processes without having to open the task Manager. Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl17_desc_intf">This tweak will allow you to add the «End task» option to the context menu when you right-click on the application on the taskbar. This speeds up the completion of processes without having to open the task Manager. Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl18_desc_intf">If you don’t need to see the snap layout suggestions when hovering over the «Maximize» button, you can disable this option.</v:String>
-    <v:String x:Key="tgl19_desc_intf">This tweak removes the «Search», «Task View», and «Chat» icons, and hides the «Learn about this picture» element. On older builds of Windows 11, it also removes the Copilot icon. For Windows 10 users, it additionally disables «News and Interests» and Cortana. Attention the screen may blink.</v:String>
+    <v:String x:Key="tgl19_desc_intf">This tweak removes the «Search», «Task View», and «Chat» icons, and hides the «Learn about this picture» element. On older builds of Windows 11, it also removes the Copilot icon. For Windows 10 users, it additionally disables «News and Interests» and Cortana. Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl20_desc_intf">By default, Windows uses the collected information to target ads, i.e. to display ads that match your interests. And literally, this advertisement is located wherever free space is available for display. If you don't want Windows to display personalized ads in all Store apps, Explorer, Options, and the Start menu, then you can disable this junk.</v:String>
     <v:String x:Key="tgl21_desc_intf">By default, Windows does not save the positions of windows, as well as their state when turned off. This tweak will allow you to remember the type of open folders in order to restore them after Logging out, Rebooting and Shutting down.</v:String>
     <v:String x:Key="tgl22_desc_intf">Tweak allows disabling all Windows tips and notifications, including online hints in settings, as well as disabling Second Chance Out of Box Experience (SCOOBE) for Windows 11 users. SCOOBE is suddenly appearing pop-up that aggressively prompts user to «complete device setup urgently» and sign in to Microsoft account.</v:String>
-    <v:String x:Key="tgl23_desc_intf">Tweak will hide folders from «This PC»: Desktop, Videos, Documents, Downloads, Images, Music. Attention the screen may blink.</v:String>
-    <v:String x:Key="tgl24_desc_intf">Removes the 3D Objects item from the Explorer Overview in the left menu list (from the Explorer list tree). Attention the screen may blink.</v:String>
-    <v:String x:Key="tgl25_desc_intf">By default, when you set a jpeg image as your desktop wallpaper, Windows automatically reduces its quality to 85%. This tweak will set the jpeg wallpaper quality to 100%.</v:String>
-    <v:String x:Key="tgl26_desc_intf">Tweak will disable tooltips for desktop elements when hovering the mouse cursor.</v:String>
-    <v:String x:Key="tgl27_desc_intf">By default, Windows sends everything you search for in the «Start» menu to its servers to provide you with Bing search results. If you don't need Bing integration in the «Start» menu, you can apply a tweak to disable web search. Attention the screen may blink.</v:String>
-    <v:String x:Key="tgl28_desc_intf">By default, when you open Explorer, the first tab will be «Quick Access». And to open any disk, you need to make unnecessary movements. This tweak will make «This PC» open when opened, rather than «Quick Access».</v:String>
-    <v:String x:Key="tgl29_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
+    <v:String x:Key="tgl23_desc_intf">By default, when you set a jpeg image as your desktop wallpaper, Windows automatically reduces its quality to 85%. This tweak will set the jpeg wallpaper quality to 100%.</v:String>
+    <v:String x:Key="tgl24_desc_intf">Tweak will disable tooltips for desktop elements when hovering the mouse cursor.</v:String>
+    <v:String x:Key="tgl25_desc_intf">By default, Windows sends everything you search for in the «Start» menu to its servers to provide you with Bing search results. If you don't need Bing integration in the «Start» menu, you can apply a tweak to disable web search. Note that the screen may flicker.</v:String>
+    <v:String x:Key="tgl26_desc_intf">By default, when you open Explorer, the first tab will be «Quick Access». And to open any disk, you need to make unnecessary movements. This tweak will make «This PC» open when opened, rather than «Quick Access».</v:String>
+    <v:String x:Key="tgl27_desc_intf">On some devices, the screen brightness may change spontaneously depending on the displayed content. If turning off HDR, dynamic brightness, and power settings doesn’t solve the issue (this problem is especially common on laptops running on battery), you can try this tweak - it forcibly disables automatic brightness adjustment at the system level. Manual brightness control remains available.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

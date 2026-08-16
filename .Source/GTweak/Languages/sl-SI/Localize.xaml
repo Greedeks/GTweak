@@ -219,6 +219,15 @@
     <v:String x:Key="chk_panel_intf">Nadzorna plošča</v:String>
     <v:String x:Key="chk_user_intf">Uporabniške datoteke</v:String>
 
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">Standardna velikost sistemskih gumbov</v:String>
     <v:String x:Key="tgl2_intf">Standardna frekvenca utripanja kazalca</v:String>
     <v:String x:Key="tgl3_intf">Standardna velikost drsnega traku</v:String>
@@ -241,19 +250,18 @@
     <v:String x:Key="tgl20_intf">Pokaži personalizirane oglase</v:String>
     <v:String x:Key="tgl21_intf">Obnovi prejšnja okna map ob prijavi</v:String>
     <v:String x:Key="tgl22_intf">Obvestila z namigi in predlogi Windows</v:String>
-    <v:String x:Key="tgl23_intf">Mape, ki se nahajajo v "Ta računalnik"</v:String>
-    <v:String x:Key="tgl24_intf">"3D Predmeti" v Raziskovalcu</v:String>
-    <v:String x:Key="tgl25_intf">Stiskanje ozadja namizja v formatu .JPEG</v:String>
-    <v:String x:Key="tgl26_intf">Namigi za elemente namizja</v:String>
-    <v:String x:Key="tgl27_intf">Iskalni poizvedbi z integracijo "Bing" v meniju Start</v:String>
-    <v:String x:Key="tgl28_intf">Odpri "Hitri dostop" namesto "Ta računalnik"</v:String>
-    <v:String x:Key="tgl29_intf">Spontane spremembe svetlosti</v:String>
+    <v:String x:Key="tgl23_intf">Stiskanje ozadja namizja v formatu .JPEG</v:String>
+    <v:String x:Key="tgl24_intf">Namigi za elemente namizja</v:String>
+    <v:String x:Key="tgl25_intf">Iskalni poizvedbi z integracijo "Bing" v meniju Start</v:String>
+    <v:String x:Key="tgl26_intf">Odpri "Hitri dostop" namesto "Ta računalnik"</v:String>
+    <v:String x:Key="tgl27_intf">Spontane spremembe svetlosti</v:String>
 
     <v:String x:Key="color1_desc_intf">Spremeni barvo ozadja pri izbiranju besedila ali predmetov s kazalcem v sistemu.</v:String>
     <v:String x:Key="color2_desc_intf">Spremeni barvo namigov v podprtih aplikacijah.</v:String>
     <v:String x:Key="exblock1_desc_intf">Spremeni vidnost vgrajenih sistemskih elementov v navigacijskem podoknu, ki jih ni mogoče odpeti z običajnimi sredstvi.</v:String>
     <v:String x:Key="exblock2_desc_intf">Spremeni sistemska pravila za prikazovanje elementov v Raziskovalcu datotek, vključno z vidnostjo skritih elementov, končnic datotek in strukturo diskovnih pogonov. Pozor: zaslon lahko utripne.</v:String>
     <v:String x:Key="exblock3_desc_intf">Spremeni prikaz sistemskih ikon na namizju, ki so vgrajeni sistemski predmeti in ne običajne bližnjice.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders and «3D Objects» within «This PC». Allows you to hide them so that only connected drives are shown in the list. For builds below 21H1, it additionally removes «3D Objects» from the navigation pane. Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl1_desc_intf">Popravek zmanjša velikost gumbov Za majhno okno, Povečaj in Zapri, zaradi česar so manj obsežni. Prilagodi velikost za vsa okna, vključno z Raziskovalcem datotek, Fotografijami, brskalniki in drugimi znanimi programi.</v:String>
     <v:String x:Key="tgl2_desc_intf">Popravek poveča frekvenco utripanja besedilnega kazalca. Privzeto kazalec utripne vsakih 530 milisekund.</v:String>
     <v:String x:Key="tgl3_desc_intf">Popravek zmanjša debelino drsnih trakov v klasičnih aplikacijah Windows, vključno z Raziskovalcem datotek, brskalniki in drugimi starejšimi programi. Vendar ne vpliva na sodobne vmesnike, saj ti uporabljajo lastne kontrolne elemente, neodvisne od sistemskih nastavitev.</v:String>
@@ -276,13 +284,11 @@
     <v:String x:Key="tgl20_desc_intf">Privzeto Windows uporablja zbrane informacije za ciljno oglaševanje, tj. za prikazovanje oglasov, ki ustrezajo vašim interesom. In dobesedno se ta reklama nahaja kjerkoli je prosti prostor za prikaz. Če ne želite, da Windows prikazuje personalizirane oglase v vseh aplikacijah Trgovine, Raziskovalcu, Možnostih in meniju Start, lahko to navlako onemogočite.</v:String>
     <v:String x:Key="tgl21_desc_intf">Privzeto Windows ne shrani položajev oken, kot tudi njihovega stanja ob izklopu. Ta popravek vam bo omogočil, da si zapomnite vrsto odprtih map, da jih obnovite po odjavi, ponovnem zagonu in izklopu.</v:String>
     <v:String x:Key="tgl22_desc_intf">Popravek omogoča onemogočanje vseh namigov in obvestil Windows, vključno s spletnimi namigi v nastavitvah, ter onemogočanje SCOOBE (Second Chance Out of Box Experience) za uporabnike Windows 11. SCOOBE je nenadoma pojavljajoče se pojavno okno, ki agresivno poziva uporabnika, naj "nujno dokonča nastavitev naprave" in se prijavi v Microsoftov račun.</v:String>
-    <v:String x:Key="tgl23_desc_intf">Popravek bo skril mape iz "Ta računalnik": Namizje, Videoposnetki, Dokumenti, Prenosi, Slike, Glasba. Pozor, zaslon lahko utripne.</v:String>
-    <v:String x:Key="tgl24_desc_intf">Odstrani element 3D Objects iz pogleda Raziskovalca na levem seznamu menija (iz drevesnega seznama Raziskovalca). Pozor, zaslon lahko utripne.</v:String>
-    <v:String x:Key="tgl25_desc_intf">Privzeto, ko nastavite sliko jpeg kot ozadje namizja, Windows samodejno zmanjša njeno kakovost na 85%. Ta popravek bo nastavil kakovost ozadja jpeg na 100%.</v:String>
-    <v:String x:Key="tgl26_desc_intf">Popravek bo onemogočil namige za elemente namizja, ko premaknete kazalec miške.</v:String>
-    <v:String x:Key="tgl27_desc_intf">Privzeto Windows pošlje vse, kar iščete v meniju "Start", svojim strežnikom, da vam zagotovi rezultate iskanja Bing. Če ne potrebujete integracije Bing v meniju "Start", lahko uporabite popravek za onemogočanje spletnega iskanja. Pozor, zaslon lahko utripne.</v:String>
-    <v:String x:Key="tgl28_desc_intf">Privzeto bo ob odpiranju Raziskovalca prvi zavihek "Hitri dostop". Če želite odpreti kateri koli disk, morate narediti nepotrebne premike. Ta popravek bo omogočil, da se ob odprtju odpre "Ta računalnik" namesto "Hitri dostop".</v:String>
-    <v:String x:Key="tgl29_desc_intf">Na nekaterih napravah se lahko svetlost zaslona spontano spremeni glede na prikazano vsebino. Če izklop HDR, dinamične svetlosti in nastavitev napajanja ne reši težave (ta težava je še posebej pogosta pri prenosnikih, ki delujejo na baterijo), lahko poskusite s tem popravkom - prisilno onemogoči samodejno prilagajanje svetlosti na sistemski ravni. Ročno upravljanje svetlosti ostane na voljo.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Privzeto, ko nastavite sliko jpeg kot ozadje namizja, Windows samodejno zmanjša njeno kakovost na 85%. Ta popravek bo nastavil kakovost ozadja jpeg na 100%.</v:String>
+    <v:String x:Key="tgl24_desc_intf">Popravek bo onemogočil namige za elemente namizja, ko premaknete kazalec miške.</v:String>
+    <v:String x:Key="tgl25_desc_intf">Privzeto Windows pošlje vse, kar iščete v meniju "Start", svojim strežnikom, da vam zagotovi rezultate iskanja Bing. Če ne potrebujete integracije Bing v meniju "Start", lahko uporabite popravek za onemogočanje spletnega iskanja. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Privzeto bo ob odpiranju Raziskovalca prvi zavihek "Hitri dostop". Če želite odpreti kateri koli disk, morate narediti nepotrebne premike. Ta popravek bo omogočil, da se ob odprtju odpre "Ta računalnik" namesto "Hitri dostop".</v:String>
+    <v:String x:Key="tgl27_desc_intf">Na nekaterih napravah se lahko svetlost zaslona spontano spremeni glede na prikazano vsebino. Če izklop HDR, dinamične svetlosti in nastavitev napajanja ne reši težave (ta težava je še posebej pogosta pri prenosnikih, ki delujejo na baterijo), lahko poskusite s tem popravkom - prisilno onemogoči samodejno prilagajanje svetlosti na sistemski ravni. Ročno upravljanje svetlosti ostane na voljo.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

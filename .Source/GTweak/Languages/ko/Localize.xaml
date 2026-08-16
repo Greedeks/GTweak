@@ -219,6 +219,16 @@
     <v:String x:Key="chk_panel_intf">제어판</v:String>
     <v:String x:Key="chk_user_intf">사용자 파일</v:String>
 
+    <!--not translated-->
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">시스템 버튼의 표준 크기</v:String>
     <v:String x:Key="tgl2_intf">표준 커서 깜박임 빈도</v:String>
     <v:String x:Key="tgl3_intf">표준 스크롤 막대 크기</v:String>
@@ -241,19 +251,18 @@
     <v:String x:Key="tgl20_intf">개인 맞춤형 광고 표시</v:String>
     <v:String x:Key="tgl21_intf">로그인 시 이전 폴더 창 복원</v:String>
     <v:String x:Key="tgl22_intf">Windows 팁 및 제안이 포함된 알림</v:String>
-    <v:String x:Key="tgl23_intf">«내 PC»에 위치한 폴더</v:String>
-    <v:String x:Key="tgl24_intf">탐색기의 «3D 개체»</v:String>
-    <v:String x:Key="tgl25_intf">바탕 화면의 배경 화면 형식 .JPEG 압축</v:String>
-    <v:String x:Key="tgl26_intf">데스크톱 요소의 도구 설명</v:String>
-    <v:String x:Key="tgl27_intf">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
-    <v:String x:Key="tgl28_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
-    <v:String x:Key="tgl29_intf">자발적인 밝기 변화</v:String>
+    <v:String x:Key="tgl23_intf">바탕 화면의 배경 화면 형식 .JPEG 압축</v:String>
+    <v:String x:Key="tgl24_intf">데스크톱 요소의 도구 설명</v:String>
+    <v:String x:Key="tgl25_intf">시작 메뉴에 'Bing'이 통합된 검색 쿼리</v:String>
+    <v:String x:Key="tgl26_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
+    <v:String x:Key="tgl27_intf">자발적인 밝기 변화</v:String>
 
     <v:String x:Key="color1_desc_intf">시스템에서 커서로 텍스트나 개체를 선택할 때의 배경 색상을 변경합니다.</v:String>
     <v:String x:Key="color2_desc_intf">지원되는 애플리케이션에서 도구 설명의 색상을 변경합니다.</v:String>
     <v:String x:Key="exblock1_desc_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다.</v:String>
     <v:String x:Key="exblock2_desc_intf">파일 탐색기에서 항목 표시 규칙을 변경합니다. 숨김 항목, 파일 확장자 및 드라이브 구조의 표시가 포함됩니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="exblock3_desc_intf">바탕 화면에 표시되는 시스템 아이콘을 변경합니다. 이들은 일반 바로가기와 달리 시스템에 내장된 항목입니다.</v:String>
+    <!--not translated--><v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">이 조정으로 축소, 확장, 닫기 버튼의 크기가 줄어들어 부피가 줄어듭니다. 탐색기, Windows 사진, 브라우저 및 기타 프로그램을 포함한 모든 창 크기를 조정합니다.</v:String>
     <v:String x:Key="tgl2_desc_intf">이 조정은 텍스트 커서의 깜박임 빈도를 가속화합니다. 기본적으로 530밀리초마다 깜박입니다.</v:String>
     <v:String x:Key="tgl3_desc_intf">이 조정으로 브라우저와 프로그램을 포함한 창에서 스크롤 막대의 두께가 더 얇아집니다.</v:String>
@@ -276,13 +285,11 @@
     <v:String x:Key="tgl20_desc_intf">기본적으로 Windows는 수집된 정보를 사용하여 광고를 타겟팅, 즉 사용자의 관심사와 일치하는 광고를 표시합니다. 그리고 말 그대로 이 광고는 표시할 수 있는 여유 공간이 있는 곳이면 어디든 배치됩니다. 모든 스토어 앱, 탐색기, 옵션 및 시작 메뉴에 개인 맞춤 광고를 표시하지 않으려면 이 정크를 비활성화하면 됩니다.</v:String>
     <v:String x:Key="tgl21_desc_intf">기본적으로 Windows는 창이 꺼져 있을 때의 위치와 상태를 저장하지 않습니다. 이 수정을 통해 로그아웃, 재부팅 및 종료 후에 열린 폴더 유형을 기억하여 복원할 수 있습니다.</v:String>
     <v:String x:Key="tgl22_desc_intf">이 조정은 설정의 온라인 힌트를 포함한 모든 Windows 팁과 알림을 비활성화할 수 있으며, Windows 11 사용자의 두 번째 기회, 즉석 경험 (SCOOBE)도 비활성화할 수 있습니다. SCOOBE는 사용자에게 "긴급하게 장치 설정을 완료"하고 Microsoft 계정에 로그인하도록 유도하는 팝업을 갑자기 표시합니다.</v:String>
-    <v:String x:Key="tgl23_desc_intf">조정을 통해 «내 PC»에서 폴더를 숨길 수 있습니다: 바탕 화면, 동영상, 문서, 다운로드, 이미지, 음악. 화면이 깜박일 수 있으니 주의하세요.</v:String>
-    <v:String x:Key="tgl24_desc_intf">왼쪽 메뉴 목록의 탐색기 요약에서 3D 개체 항목을 제거합니다 (탐색기 목록 트리에서). 화면이 깜박일 수 있으니 주의하세요.</v:String>
-    <v:String x:Key="tgl25_desc_intf">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
-    <v:String x:Key="tgl26_desc_intf">조정은 마우스 커서를 올려 놓으면 바탕 화면 요소의 도구 설명이 비활성화됩니다.</v:String>
-    <v:String x:Key="tgl27_desc_intf">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
-    <v:String x:Key="tgl28_desc_intf">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
-    <v:String x:Key="tgl29_desc_intf">일부 기기에서는 표시되는 콘텐츠에 따라 화면 밝기가 자연스럽게 변경될 수 있습니다. HDR, 동적 밝기 및 전원 설정을 끄더라도 문제가 해결되지 않는다면 (이 문제는 특히 배터리로 작동하는 노트북에서 흔히 발생합니다), 시스템 수준에서 자동 밝기 조정을 강제로 비활성화하는 이 조정을 시도해 볼 수 있습니다. 수동 밝기 제어 기능은 여전히 사용 가능합니다.</v:String>
+    <v:String x:Key="tgl23_desc_intf">기본적으로 jpeg 이미지를 바탕 화면 배경 화면으로 설정하면 Windows는 자동으로 품질을 85%로 낮춥니다. 이 조정은 jpeg 배경화면 품질을 100%로 설정합니다.</v:String>
+    <v:String x:Key="tgl24_desc_intf">조정은 마우스 커서를 올려 놓으면 바탕 화면 요소의 도구 설명이 비활성화됩니다.</v:String>
+    <v:String x:Key="tgl25_desc_intf">기본적으로 Windows는 «시작» 메뉴에서 검색하는 모든 내용을 서버로 전송하여 Bing 검색 결과를 제공합니다. «시작» 메뉴에서 Bing 통합이 필요하지 않은 경우 웹 검색을 비활성화하도록 조정할 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
+    <v:String x:Key="tgl26_desc_intf">기본적으로 탐색기를 열면 첫 번째 탭은 «빠른 액세스»입니다. 그리고 디스크를 열려면 불필요한 이동을 해야 합니다. 이 조정을 통해 디스크를 열면 '빠른 액세스'가 아닌 «내 PC»가 열리게 됩니다.</v:String>
+    <v:String x:Key="tgl27_desc_intf">일부 기기에서는 표시되는 콘텐츠에 따라 화면 밝기가 자연스럽게 변경될 수 있습니다. HDR, 동적 밝기 및 전원 설정을 끄더라도 문제가 해결되지 않는다면 (이 문제는 특히 배터리로 작동하는 노트북에서 흔히 발생합니다), 시스템 수준에서 자동 밝기 조정을 강제로 비활성화하는 이 조정을 시도해 볼 수 있습니다. 수동 밝기 제어 기능은 여전히 사용 가능합니다.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

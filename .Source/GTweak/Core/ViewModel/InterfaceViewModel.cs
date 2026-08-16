@@ -29,7 +29,15 @@ namespace GTweak.Core.ViewModel
                 { "Network", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.Network) },
                 { "Trash", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.Trash) },
                 { "Panel", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.Panel) },
-                { "UserFile", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.UserFile) }
+                { "UserFile", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.UserFile) },
+                { "OneDriveFile", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.OneDrive, 64) },
+                { "FolderObjects3D", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.FolderObjects3D, 40) },
+                { "FolderDesktop", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.FolderDesktop, 40) },
+                { "FolderDownloads", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.FolderDownloads, 40) },
+                { "FolderDocuments", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.FolderDocuments, 40) },
+                { "FolderPictures", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.FolderPictures, 40) },
+                { "FolderMusic", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.FolderMusic, 40) },
+                { "FolderVideo", IconExtractProvider.GetStockIcon(IconExtractProvider.StockIconType.FolderVideo, 40) }
             };
         }
     }

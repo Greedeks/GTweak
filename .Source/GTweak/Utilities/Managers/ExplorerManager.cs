@@ -29,6 +29,13 @@ namespace GTweak.Utilities.Managers
             [InterfaceCheckbox.ExplorerHome] = ExplorerAction.Restart,
             [InterfaceCheckbox.ExplorerGallery] = ExplorerAction.Restart,
             [InterfaceCheckbox.ExplorerOneDrive] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FolderObjects3D] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FolderDesktop] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FolderDownloads] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FolderDocuments] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FolderPictures] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FolderMusic] = ExplorerAction.Restart,
+            [InterfaceCheckbox.FolderVideo] = ExplorerAction.Restart,
             [InterfaceCheckbox.HiddenFiles] = ExplorerAction.Restart,
             [InterfaceCheckbox.SystemFiles] = ExplorerAction.Restart,
             [InterfaceCheckbox.FileExtensions] = ExplorerAction.Restart,
@@ -46,8 +53,6 @@ namespace GTweak.Utilities.Managers
             [InterfaceToggle.CompactContextMenu] = ExplorerAction.Restart,
             [InterfaceToggle.TaskbarEndTask] = ExplorerAction.Restart,
             [InterfaceToggle.TaskbarIconsButtons] = ExplorerAction.Restart,
-            [InterfaceToggle.ComputerFolders] = ExplorerAction.Restart,
-            [InterfaceToggle.Explorer3DObjects] = ExplorerAction.Restart,
             [InterfaceToggle.BingStartSearch] = ExplorerAction.Restart
         };
 

@@ -10,17 +10,34 @@ namespace GTweak.Utilities.Configuration
 {
     internal static class IconExtractProvider
     {
-        [DllImport("Shell32.dll", EntryPoint = "ExtractIconExW", CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        private static extern int ExtractIconEx(string sFile, int iIndex, out IntPtr piLargeVersion, out IntPtr piSmallVersion, int amountIcons);
+        internal enum StockIconType
+        {
+            Home,
+            Gallery,
+            OneDrive,
+            PC,
+            Network,
+            Trash,
+            Panel,
+            UserFile,
+            FolderObjects3D,
+            FolderDesktop,
+            FolderDownloads,
+            FolderDocuments,
+            FolderPictures,
+            FolderMusic,
+            FolderVideo
+        }
+
+        private static readonly ConcurrentDictionary<(string, int, int), ImageSource> _iconCache = new ConcurrentDictionary<(string, int, int), ImageSource>();
+
+        [DllImport("Shell32.dll", EntryPoint = "SHDefExtractIconW", CharSet = CharSet.Unicode, ExactSpelling = true)]
+        private static extern int SHDefExtractIcon(string pszIconFile, int iIndex, uint uFlags, out IntPtr phiconLarge, out IntPtr phiconSmall, uint nIconSize);
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool DestroyIcon(IntPtr hIcon);
 
-        private static readonly ConcurrentDictionary<(string, int, bool), ImageSource> _iconCache = new ConcurrentDictionary<(string, int, bool), ImageSource>();
-
-        internal enum StockIconType { Home, Gallery, OneDrive, PC, Network, Trash, Panel, UserFile }
-
-        internal static ImageSource GetStockIcon(StockIconType type)
+        internal static ImageSource GetStockIcon(StockIconType type, int size = 64)
         {
             (string file, int index) = type switch
             {
@@ -32,22 +49,29 @@ namespace GTweak.Utilities.Configuration
                 StockIconType.Trash => ("imageres.dll", -54),
                 StockIconType.Panel => ("imageres.dll", -27),
                 StockIconType.UserFile => ("imageres.dll", -123),
+                StockIconType.FolderObjects3D => ("imageres.dll", -198),
+                StockIconType.FolderDesktop => ("imageres.dll", -183),
+                StockIconType.FolderDownloads => ("imageres.dll", -184),
+                StockIconType.FolderDocuments => ("imageres.dll", -112),
+                StockIconType.FolderPictures => ("imageres.dll", -113),
+                StockIconType.FolderMusic => ("imageres.dll", -108),
+                StockIconType.FolderVideo => ("imageres.dll", -189),
                 _ => (null, 0)
             };
 
-            return file != null ? GetIcon(file, index) : null;
+            return file != null ? GetIcon(file, index, size) : null;
         }
 
-        internal static ImageSource GetIcon(string file, int index, bool large = true)
+        internal static ImageSource GetIcon(string file, int index, int size)
         {
-            (string, int index, bool large) key = (file.ToLowerInvariant(), index, large);
+            (string, int index, int size) key = (file.ToLowerInvariant(), index, size);
 
             if (_iconCache.TryGetValue(key, out ImageSource cached))
             {
                 return cached;
             }
 
-            ImageSource icon = ExtractIconInternal(file, index, large);
+            ImageSource icon = ExtractIconInternal(file, index, size);
             if (icon != null)
             {
                 _iconCache[key] = icon;
@@ -55,28 +79,23 @@ namespace GTweak.Utilities.Configuration
             return icon;
         }
 
-        private static ImageSource ExtractIconInternal(string file, int index, bool large)
+        private static ImageSource ExtractIconInternal(string file, int index, int size)
         {
             IntPtr hLargeIcon = IntPtr.Zero;
             IntPtr hSmallIcon = IntPtr.Zero;
 
             try
             {
-                int readIconCount = ExtractIconEx(file, index, out hLargeIcon, out hSmallIcon, 1);
+                uint nIconSize = (uint)((size << 16) | size);
 
-                if (readIconCount <= 0)
+                int result = SHDefExtractIcon(file, index, 0, out hLargeIcon, out hSmallIcon, nIconSize);
+
+                if (result != 0 || hLargeIcon == IntPtr.Zero)
                 {
                     return null;
                 }
 
-                IntPtr hIconToUse = large ? hLargeIcon : hSmallIcon;
-
-                if (hIconToUse == IntPtr.Zero)
-                {
-                    return null;
-                }
-
-                ImageSource imageSource = Imaging.CreateBitmapSourceFromHIcon(hIconToUse, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                ImageSource imageSource = Imaging.CreateBitmapSourceFromHIcon(hLargeIcon, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                 imageSource.Freeze();
 
                 return imageSource;

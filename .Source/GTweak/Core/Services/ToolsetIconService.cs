@@ -15,7 +15,7 @@ namespace GTweak.Core.Services
         private static readonly ConcurrentDictionary<string, ImageSource> _imageCache = new ConcurrentDictionary<string, ImageSource>();
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        internal static ImageSource GetPlaceholder(string group) => Application.Current.TryFindResource(group.ToLower() == "github" ? "Icon_Git" : "Icon_Website") as ImageSource;
+        internal static ImageSource GetPlaceholder(string group) => Application.Current.TryFindResource($"Icon_{(string.Equals(group, "github", StringComparison.OrdinalIgnoreCase) ? "Git" : "Website")}") as ImageSource;
 
         internal static async Task<(ImageSource Image, bool IsFallback)> GetAuthorIcon(string group, string iconSource)
         {

@@ -219,6 +219,15 @@
     <v:String x:Key="chk_panel_intf">Painel de Controle</v:String>
     <v:String x:Key="chk_user_intf">Arquivos do usuário</v:String>
 
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">Tamanho padrão dos botões do sistema</v:String>
     <v:String x:Key="tgl2_intf">Frequência de piscar padrão do cursor</v:String>
     <v:String x:Key="tgl3_intf">Tamanho padrão da barra de rolagem</v:String>
@@ -241,19 +250,18 @@
     <v:String x:Key="tgl20_intf">Mostrar anúncios personalizados</v:String>
     <v:String x:Key="tgl21_intf">Restaurar janelas de pastas anteriores ao fazer login</v:String>
     <v:String x:Key="tgl22_intf">Notificações com dicas e sugestões do Windows</v:String>
-    <v:String x:Key="tgl23_intf">Pastas localizadas em "Este Computador"</v:String>
-    <v:String x:Key="tgl24_intf">"Objetos 3D" no explorador</v:String>
-    <v:String x:Key="tgl25_intf">Compressão do papel de parede .JPEG da área de trabalho</v:String>
-    <v:String x:Key="tgl26_intf">Dicas de ferramentas para elementos da área de trabalho</v:String>
-    <v:String x:Key="tgl27_intf">Pesquisa com "Bing" integrada ao menu Iniciar</v:String>
-    <v:String x:Key="tgl28_intf">Abrir "Acesso rápido" em vez de "Este Computador"</v:String>
-    <v:String x:Key="tgl29_intf">Mudanças espontâneas de brilho</v:String>
+    <v:String x:Key="tgl23_intf">Compressão do papel de parede .JPEG da área de trabalho</v:String>
+    <v:String x:Key="tgl24_intf">Dicas de ferramentas para elementos da área de trabalho</v:String>
+    <v:String x:Key="tgl25_intf">Pesquisa com "Bing" integrada ao menu Iniciar</v:String>
+    <v:String x:Key="tgl26_intf">Abrir "Acesso rápido" em vez de "Este Computador"</v:String>
+    <v:String x:Key="tgl27_intf">Mudanças espontâneas de brilho</v:String>
 
     <v:String x:Key="color1_desc_intf">Altera a cor de fundo ao selecionar texto ou objetos com o cursor no sistema.</v:String>
     <v:String x:Key="color2_desc_intf">Altera a cor das dicas de ferramenta (tooltip) em aplicativos compatíveis.</v:String>
     <v:String x:Key="exblock1_desc_intf">Altera a visibilidade dos itens de sistema incorporados no painel de navegação que não podem ser desfixados por meios convencionais.</v:String>
     <v:String x:Key="exblock2_desc_intf">Altera as regras do sistema para exibição no Explorador de Arquivos, incluindo visibilidade de itens ocultos, extensões e a estrutura das unidades. Atenção, a tela pode piscar.</v:String>
     <v:String x:Key="exblock3_desc_intf">Altera quais ícones do sistema aparecem na área de trabalho — são objetos de sistema incorporados, e não atalhos comuns.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">Um ajuste reduz o tamanho dos botões Minimizar, Maximizar e Fechar, tornando-os menos volumosos. Ele ajusta o tamanho para todas as janelas, incluindo o Explorador de Arquivos, Fotos, navegadores e outros programas familiares.</v:String>
     <v:String x:Key="tgl2_desc_intf">Um ajuste aumenta a frequência de piscar do cursor de texto. Por padrão, o cursor pisca a cada 530 milissegundos.</v:String>
     <v:String x:Key="tgl3_desc_intf">Um ajuste reduz a espessura das barras de rolagem em aplicativos clássicos do Windows, incluindo o Explorador de Arquivos, navegadores e outros programas legados. No entanto, não afeta as interfaces modernas, pois elas utilizam seus próprios elementos de controle independentes das configurações do sistema.</v:String>
@@ -276,13 +284,11 @@
     <v:String x:Key="tgl20_desc_intf">Por padrão, o Windows usa as informações coletadas para direcionar anúncios, ou seja, para exibir anúncios que correspondem aos seus interesses. E, literalmente, essa propaganda está localizada onde quer que haja espaço livre disponível para exibição. Se você não quer que o Windows exiba anúncios personalizados em todos os aplicativos da Loja, Explorador, Opções e menu Iniciar, então você pode desativar este lixo.</v:String>
     <v:String x:Key="tgl21_desc_intf">Por padrão, o Windows não salva as posições das janelas, bem como seu estado quando desligado. Este ajuste permitirá que você lembre o tipo de pastas abertas para restaurá-las após Sair, Reiniciar e Desligar.</v:String>
     <v:String x:Key="tgl22_desc_intf">O ajuste permite desativar todas as dicas e notificações do Windows, incluindo dicas online nas configurações, bem como desativar a Second Chance Out of Box Experience (SCOOBE) para usuários do Windows 11. SCOOBE é um pop-up que aparece de repente e solicita agressivamente ao usuário que "conclua a configuração do dispositivo urgentemente" e faça login na conta da Microsoft.</v:String>
-    <v:String x:Key="tgl23_desc_intf">O ajuste ocultará as pastas de "Este Computador": Área de Trabalho, Vídeos, Documentos, Downloads, Imagens, Música. Atenção, a tela pode piscar.</v:String>
-    <v:String x:Key="tgl24_desc_intf">Remove o item Objetos 3D da Visão Geral do Explorador na lista do menu esquerdo (da árvore de lista do Explorador). Atenção, a tela pode piscar.</v:String>
-    <v:String x:Key="tgl25_desc_intf">Por padrão, quando você define uma imagem jpeg como papel de parede da área de trabalho, o Windows reduz automaticamente sua qualidade para 85%. Este ajuste definirá a qualidade do papel de parede jpeg para 100%.</v:String>
-    <v:String x:Key="tgl26_desc_intf">O ajuste desativará as dicas de ferramentas para elementos da área de trabalho ao passar o cursor do mouse.</v:String>
-    <v:String x:Key="tgl27_desc_intf">Por padrão, o Windows envia tudo o que você pesquisa no menu "Iniciar" para seus servidores para fornecer resultados de pesquisa do Bing. Se você não precisa da integração do Bing no menu "Iniciar", pode aplicar um ajuste para desativar a pesquisa na web. Atenção, a tela pode piscar.</v:String>
-    <v:String x:Key="tgl28_desc_intf">Por padrão, ao abrir o Explorador, a primeira guia será "Acesso rápido". E para abrir qualquer disco, você precisa fazer movimentos desnecessários. Este ajuste fará com que "Este Computador" seja aberto ao ser aberto, em vez de "Acesso rápido".</v:String>
-    <v:String x:Key="tgl29_desc_intf">Em alguns dispositivos, o brilho da tela pode mudar espontaneamente dependendo do conteúdo exibido. Se desligar o HDR, o brilho dinâmico e as configurações de energia não resolverem o problema (comum em laptops na bateria), você pode tentar este ajuste — ele desativa forçadamente o ajuste automático de brilho no nível do sistema. O controle de brilho manual permanece disponível.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Por padrão, quando você define uma imagem jpeg como papel de parede da área de trabalho, o Windows reduz automaticamente sua qualidade para 85%. Este ajuste definirá a qualidade do papel de parede jpeg para 100%.</v:String>
+    <v:String x:Key="tgl24_desc_intf">O ajuste desativará as dicas de ferramentas para elementos da área de trabalho ao passar o cursor do mouse.</v:String>
+    <v:String x:Key="tgl25_desc_intf">Por padrão, o Windows envia tudo o que você pesquisa no menu "Iniciar" para seus servidores para fornecer resultados de pesquisa do Bing. Se você não precisa da integração do Bing no menu "Iniciar", pode aplicar um ajuste para desativar a pesquisa na web. Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Por padrão, ao abrir o Explorador, a primeira guia será "Acesso rápido". E para abrir qualquer disco, você precisa fazer movimentos desnecessários. Este ajuste fará com que "Este Computador" seja aberto ao ser aberto, em vez de "Acesso rápido".</v:String>
+    <v:String x:Key="tgl27_desc_intf">Em alguns dispositivos, o brilho da tela pode mudar espontaneamente dependendo do conteúdo exibido. Se desligar o HDR, o brilho dinâmico e as configurações de energia não resolverem o problema (comum em laptops na bateria), você pode tentar este ajuste — ele desativa forçadamente o ajuste automático de brilho no nível do sistema. O controle de brilho manual permanece disponível.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

@@ -219,6 +219,15 @@
     <v:String x:Key="chk_panel_intf">לוח הבקרה</v:String>
     <v:String x:Key="chk_user_intf">קבצי משתמש</v:String>
 
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">גודל סטנדרטי של כפתורי המערכת</v:String>
     <v:String x:Key="tgl2_intf">תדירות מהבהוב סטנדרטית של הסמן</v:String>
     <v:String x:Key="tgl3_intf">גודל פס גלילה סטנדרטי</v:String>
@@ -241,19 +250,18 @@
     <v:String x:Key="tgl20_intf">הצג פרסומות מותאמות אישית</v:String>
     <v:String x:Key="tgl21_intf">שחזר חלונות תיקייה קודמים בעת התחברות</v:String>
     <v:String x:Key="tgl22_intf">התראות עם עצות והצעות של Windows</v:String>
-    <v:String x:Key="tgl23_intf">תיקיות הממוקמות ב«מחשב זה»</v:String>
-    <v:String x:Key="tgl24_intf">«אובייקטים תלת-ממדיים» בסייר הקבצים</v:String>
-    <v:String x:Key="tgl25_intf">דחיסת רקעים בפורמט .JPEG של שולחן העבודה</v:String>
-    <v:String x:Key="tgl26_intf">חלוניות עזרה לאלמנטים בשולחן העבודה</v:String>
-    <v:String x:Key="tgl27_intf">שאילתת חיפוש עם שילוב «Bing» בתפריט התחל</v:String>
-    <v:String x:Key="tgl28_intf">פתח את «גישה מהירה» במקום «מחשב זה»</v:String>
-    <v:String x:Key="tgl29_intf">שינויי בהירות ספונטניים</v:String>
+    <v:String x:Key="tgl23_intf">דחיסת רקעים בפורמט .JPEG של שולחן העבודה</v:String>
+    <v:String x:Key="tgl24_intf">חלוניות עזרה לאלמנטים בשולחן העבודה</v:String>
+    <v:String x:Key="tgl25_intf">שאילתת חיפוש עם שילוב «Bing» בתפריט התחל</v:String>
+    <v:String x:Key="tgl26_intf">פתח את «גישה מהירה» במקום «מחשב זה»</v:String>
+    <v:String x:Key="tgl27_intf">שינויי בהירות ספונטניים</v:String>
 
     <v:String x:Key="color1_desc_intf">משנה את צבע הרקע בעת בחירת טקסט או אובייקטים עם הסמן במערכת.</v:String>
     <v:String x:Key="color2_desc_intf">משנה את צבע חלוניות העזרה ביישומים נתמכים.</v:String>
     <v:String x:Key="exblock1_desc_intf">משנה את הנראות של פריטי המערכת המובנים בחלונית הניווט שאינם ניתנים לביטול הצמדה באמצעים רגילים.</v:String>
     <v:String x:Key="exblock2_desc_intf">משנה את חוקי המערכת להצגת פריטים בסייר הקבצים, כולל נראות פריטים מוסתרים, סיומות קבצים ומבנה כונני הדיסק. שים לב, המסך עלול להבהב.</v:String>
     <v:String x:Key="exblock3_desc_intf">משנה את התצוגה של סמלי מערכת בשולחן העבודה, שהם אובייקטי מערכת מובנים ולא קיצורי דרך רגילים.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">הטוויק מקטין את גודל כפתורי המזעור, ההגדלה והסגירה, ועושה אותם פחות מגושמים. הוא מתאים את הגודל לכל החלונות, כולל סייר הקבצים, התמונות, דפדפנים ותוכנות מוכרות נוספות.</v:String>
     <v:String x:Key="tgl2_desc_intf">הטוויק מגביר את תדירות המהבהוב של סמן הטקסט. כברירת מחדל, הסמן מהבהב כל 530 אלפיות שנייה.</v:String>
     <v:String x:Key="tgl3_desc_intf">הטוויק מקטין את עובי פסי הגלילה ביישומים קלאסיים של Windows, כולל סייר הקבצים, דפדפנים ותוכנות ישנות אחרות. עם זאת, הוא אינו משפיע על ממשקים מודרניים, מכיוון שהם משתמשים ברכיבי בקרה משלהם בלתי תלויים בהגדרות המערכת.</v:String>
@@ -276,13 +284,11 @@
     <v:String x:Key="tgl20_desc_intf">כברירת מחדל, Windows משתמש במידע שנאסף כדי למקד פרסומות, כלומר להציג פרסומות המתאימות לתחומי העניין שלך. ופשוט, פרסומת זו נמצאת בכל מקום שבו יש שטח פנוי לתצוגה. אם אינך רוצה ש-Windows יציג פרסומות מותאמות אישית בכל יישומי החנות, סייר הקבצים, האפשרויות ותפריט התחל, ניתן להשבית את הזבל הזה.</v:String>
     <v:String x:Key="tgl21_desc_intf">כברירת מחדל, Windows אינו שומר את מיקומי החלונות, וכן את מצבם בעת הכיבוי. טוויק זה יאפשר לך לזכור את סוג התיקיות הפתוחות כדי לשחזרן לאחר יציאה, אתחול וכיבוי.</v:String>
     <v:String x:Key="tgl22_desc_intf">הטוויק מאפשר להשבית את כל העצות וההתראות של Windows, כולל עצות מקוונות בהגדרות, ולהשבית את חוויית ההפעלה השנייה (SCOOBE) למשתמשי Windows 11. SCOOBE היא חלון קופץ שמופיע פתאום ומבקש בתוקפנות מהמשתמש «להשלים בדחיפות את הגדרת ההתקן» ולהיכנס לחשבון Microsoft.</v:String>
-    <v:String x:Key="tgl23_desc_intf">הטוויק יסתיר תיקיות מ«מחשב זה»: שולחן עבודה, סרטוני וידאו, מסמכים, הורדות, תמונות, מוזיקה. שים לב, המסך עלול להבהב.</v:String>
-    <v:String x:Key="tgl24_desc_intf">מסיר את הפריט «אובייקטים תלת-ממדיים» מתצוגת סייר הקבצים בתפריט השמאלי (מתוך עץ רשימת הסייר). שים לב, המסך עלול להבהב.</v:String>
-    <v:String x:Key="tgl25_desc_intf">כברירת מחדל, כאשר אתה מגדיר תמונת jpeg כרקע שולחן העבודה, Windows מקטין אוטומטית את איכותה ל-85%. טוויק זה יקבע את איכות רקע ה-jpeg ל-100%.</v:String>
-    <v:String x:Key="tgl26_desc_intf">הטוויק ישבית חלוניות עזרה עבור אלמנטים בשולחן העבודה בעת ריחוף עם סמן העכבר.</v:String>
-    <v:String x:Key="tgl27_desc_intf">כברירת מחדל, Windows שולח את כל מה שאתה מחפש בתפריט «התחל» לשרתיו כדי לספק לך תוצאות חיפוש של Bing. אם אינך זקוק לשילוב Bing בתפריט «התחל», ניתן להחיל טוויק להשבתת חיפוש האינטרנט. שים לב, המסך עלול להבהב.</v:String>
-    <v:String x:Key="tgl28_desc_intf">כברירת מחדל, כאשר אתה פותח את סייר הקבצים, הכרטיסייה הראשונה תהיה «גישה מהירה». וכדי לפתוח כונן כלשהו, עליך לבצע פעולות מיותרות. טוויק זה יגרום ל«מחשב זה» להיפתח בעת הפתיחה, במקום «גישה מהירה».</v:String>
-    <v:String x:Key="tgl29_desc_intf">בחלק מהמכשירים, בהירות המסך עלולה להשתנות ספונטנית בהתאם לתוכן המוצג. אם השבתת HDR, בהירות דינמית והגדרות חשמל אינן פותרות את הבעיה (הבעיה נפוצה במיוחד במחשבים ניידים הפועלים על סוללה), ניתן לנסות טוויק זה - הוא משבית בכוח את כוונון הבהירות האוטומטי ברמת המערכת. הבקרה הידנית של הבהירות נשארת זמינה.</v:String>
+    <v:String x:Key="tgl23_desc_intf">כברירת מחדל, כאשר אתה מגדיר תמונת jpeg כרקע שולחן העבודה, Windows מקטין אוטומטית את איכותה ל-85%. טוויק זה יקבע את איכות רקע ה-jpeg ל-100%.</v:String>
+    <v:String x:Key="tgl24_desc_intf">הטוויק ישבית חלוניות עזרה עבור אלמנטים בשולחן העבודה בעת ריחוף עם סמן העכבר.</v:String>
+    <v:String x:Key="tgl25_desc_intf">כברירת מחדל, Windows שולח את כל מה שאתה מחפש בתפריט «התחל» לשרתיו כדי לספק לך תוצאות חיפוש של Bing. אם אינך זקוק לשילוב Bing בתפריט «התחל», ניתן להחיל טוויק להשבתת חיפוש האינטרנט. שים לב, המסך עלול להבהב.</v:String>
+    <v:String x:Key="tgl26_desc_intf">כברירת מחדל, כאשר אתה פותח את סייר הקבצים, הכרטיסייה הראשונה תהיה «גישה מהירה». וכדי לפתוח כונן כלשהו, עליך לבצע פעולות מיותרות. טוויק זה יגרום ל«מחשב זה» להיפתח בעת הפתיחה, במקום «גישה מהירה».</v:String>
+    <v:String x:Key="tgl27_desc_intf">בחלק מהמכשירים, בהירות המסך עלולה להשתנות ספונטנית בהתאם לתוכן המוצג. אם השבתת HDR, בהירות דינמית והגדרות חשמל אינן פותרות את הבעיה (הבעיה נפוצה במיוחד במחשבים ניידים הפועלים על סוללה), ניתן לנסות טוויק זה - הוא משבית בכוח את כוונון הבהירות האוטומטי ברמת המערכת. הבקרה הידנית של הבהירות נשארת זמינה.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

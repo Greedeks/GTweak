@@ -219,6 +219,15 @@
     <v:String x:Key="chk_panel_intf">Pannello di controllo</v:String>
     <v:String x:Key="chk_user_intf">File dell'utente</v:String>
 
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">Dimensione standard dei pulsanti di sistema</v:String>
     <v:String x:Key="tgl2_intf">Frequenza standard del lampeggio del cursore</v:String>
     <v:String x:Key="tgl3_intf">Dimensione standard della barra di scorrimento</v:String>
@@ -241,19 +250,18 @@
     <v:String x:Key="tgl20_intf">Mostra pubblicità personalizzate</v:String>
     <v:String x:Key="tgl21_intf">Ripristina le finestre delle cartelle precedenti all'accesso</v:String>
     <v:String x:Key="tgl22_intf">Notifiche con suggerimenti e consigli di Windows</v:String>
-    <v:String x:Key="tgl23_intf">Cartelle visibili in «Questo PC»</v:String>
-    <v:String x:Key="tgl24_intf">«Oggetti 3D» nell’Esplora risorse</v:String>
-    <v:String x:Key="tgl25_intf">Compressione del formato .JPEG dello sfondo del desktop</v:String>
-    <v:String x:Key="tgl26_intf">Descrizioni comandi per gli elementi sul desktop</v:String>
-    <v:String x:Key="tgl27_intf">Query di ricerca con integrazione «Bing» nel menu Start</v:String>
-    <v:String x:Key="tgl28_intf">Apri «Accesso rapido» invece di «Questo PC»</v:String>
-    <v:String x:Key="tgl29_intf">Cambiamenti improvvisi di luminosità</v:String>
+    <v:String x:Key="tgl23_intf">Compressione del formato .JPEG dello sfondo del desktop</v:String>
+    <v:String x:Key="tgl24_intf">Descrizioni comandi per gli elementi sul desktop</v:String>
+    <v:String x:Key="tgl25_intf">Query di ricerca con integrazione «Bing» nel menu Start</v:String>
+    <v:String x:Key="tgl26_intf">Apri «Accesso rapido» invece di «Questo PC»</v:String>
+    <v:String x:Key="tgl27_intf">Cambiamenti improvvisi di luminosità</v:String>
 
     <v:String x:Key="color1_desc_intf">Modifica il colore di sfondo durante la selezione di testo o oggetti con il cursore nel sistema.</v:String>
     <v:String x:Key="color2_desc_intf">Modifica il colore dei suggerimenti nelle applicazioni supportate.</v:String>
     <v:String x:Key="exblock1_desc_intf">Modifica la visibilità degli elementi di sistema integrati nel riquadro di navigazione che non possono essere rimossi con i metodi convenzionali.</v:String>
     <v:String x:Key="exblock2_desc_intf">Modifica le regole di visualizzazione in Esplora file, inclusa la visibilità degli elementi nascosti, delle estensioni e della struttura delle unità. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
     <v:String x:Key="exblock3_desc_intf">Modifica quali icone di sistema vengono visualizzate sul desktop — sono oggetti di sistema integrati, non collegamenti normali.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">Riduce la dimensione dei pulsanti di Riduzione, Ingrandimento e Chiusura, rendendoli meno ingombranti. Si applica a tutte le finestre, incluso Esplora risorse, Foto, browser e altri programmi.</v:String>
     <v:String x:Key="tgl2_desc_intf">Aumenta la frequenza di lampeggio del cursore di testo. Per impostazione predefinita, lampeggia ogni 530 millisecondi.</v:String>
     <v:String x:Key="tgl3_desc_intf">Rende più sottile lo spessore delle barre di scorrimento in finestre, browser e programmi (escluse le app moderne).</v:String>
@@ -276,13 +284,11 @@
     <v:String x:Key="tgl20_desc_intf">Disattiva la pubblicità personalizzata che Windows mostra in varie aree come App Store, Esplora risorse e menu Start.</v:String>
     <v:String x:Key="tgl21_desc_intf">Abilita il ripristino delle cartelle aperte e del loro stato dopo disconnessione, riavvio o spegnimento.</v:String>
     <v:String x:Key="tgl22_desc_intf">Il tweak consente di disabilitare tutti i suggerimenti e le notifiche di Windows, inclusi i consigli online nelle impostazioni, e disabilita la Second Chance Out of Box Experience (SCOOBE) per gli utenti di Windows 11. La SCOOBE è un pop-up che appare improvvisamente e invita aggressivamente l'utente a «completare urgentemente la configurazione del dispositivo» e ad accedere a un account Microsoft.</v:String>
-    <v:String x:Key="tgl23_desc_intf">Nasconde le cartelle Desktop, Video, Documenti, Download, Immagini e Musica dalla sezione «Questo PC». Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="tgl24_desc_intf">Rimuove la voce «Oggetti 3D» dal pannello laterale di Esplora risorse. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="tgl25_desc_intf">Imposta la qualità dello sfondo in formato JPEG al 100%, evitando la compressione predefinita all’85%.</v:String>
-    <v:String x:Key="tgl26_desc_intf">Disattiva le descrizioni comandi (tooltip) per gli elementi sul desktop quando ci si passa sopra con il mouse.</v:String>
-    <v:String x:Key="tgl27_desc_intf">Disattiva l’invio delle ricerche effettuate nel menu Start ai server Microsoft per la ricerca Bing. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
-    <v:String x:Key="tgl28_desc_intf">Fa sì che Esplora risorse si apra su «Questo PC» anziché su «Accesso rapido».</v:String>
-    <v:String x:Key="tgl29_desc_intf">Su alcuni dispositivi, la luminosità dello schermo può cambiare spontaneamente a seconda del contenuto visualizzato. Se la disattivazione dell'HDR, della luminosità dinamica e delle impostazioni di risparmio energetico non risolve il problema (comune sui laptop alimentati a batteria), puoi provare questo tweak: forza la disattivazione della regolazione automatica della luminosità a livello di sistema. Il controllo manuale rimane disponibile.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Imposta la qualità dello sfondo in formato JPEG al 100%, evitando la compressione predefinita all’85%.</v:String>
+    <v:String x:Key="tgl24_desc_intf">Disattiva le descrizioni comandi (tooltip) per gli elementi sul desktop quando ci si passa sopra con il mouse.</v:String>
+    <v:String x:Key="tgl25_desc_intf">Disattiva l’invio delle ricerche effettuate nel menu Start ai server Microsoft per la ricerca Bing. Attenzione: lo schermo potrebbe lampeggiare.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Fa sì che Esplora risorse si apra su «Questo PC» anziché su «Accesso rapido».</v:String>
+    <v:String x:Key="tgl27_desc_intf">Su alcuni dispositivi, la luminosità dello schermo può cambiare spontaneamente a seconda del contenuto visualizzato. Se la disattivazione dell'HDR, della luminosità dinamica e delle impostazioni di risparmio energetico non risolve il problema (comune sui laptop alimentati a batteria), puoi provare questo tweak: forza la disattivazione della regolazione automatica della luminosità a livello di sistema. Il controllo manuale rimane disponibile.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->

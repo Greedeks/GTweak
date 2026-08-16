@@ -219,6 +219,15 @@
     <v:String x:Key="chk_panel_intf">Denetim Masası</v:String>
     <v:String x:Key="chk_user_intf">Kullanıcı Dosyaları</v:String>
 
+    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
+    <v:String x:Key="chk_folder_music_intf">Music</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    
     <v:String x:Key="tgl1_intf">Sistem düğmelerinin standart boyutu</v:String>
     <v:String x:Key="tgl2_intf">Standart imleç yanıp sönme hızı</v:String>
     <v:String x:Key="tgl3_intf">Standart kaydırma çubuğu boyutu</v:String>
@@ -241,19 +250,18 @@
     <v:String x:Key="tgl20_intf">Kişiselleştirilmiş reklamları göster</v:String>
     <v:String x:Key="tgl21_intf">Oturum açıldığında önceki klasör pencerelerini geri yükle</v:String>
     <v:String x:Key="tgl22_intf">Windows ipuçları ve öneri bildirimleri</v:String>
-    <v:String x:Key="tgl23_intf">"Bu Bilgisayar" içindeki klasörler</v:String>
-    <v:String x:Key="tgl24_intf">Dosya Gezgini'ndeki "3B Nesneler"</v:String>
-    <v:String x:Key="tgl25_intf">Masaüstü JPEG duvar kağıdı sıkıştırması</v:String>
-    <v:String x:Key="tgl26_intf">Masaüstü öğeleri için ipuçları</v:String>
-    <v:String x:Key="tgl27_intf">Başlat menüsünde Bing entegrasyonlu web araması</v:String>
-    <v:String x:Key="tgl28_intf">Dosya Gezgini'ni "Bu Bilgisayar" konumunda aç</v:String>
-    <v:String x:Key="tgl29_intf">Otomatik parlaklık değişimleri</v:String>
+    <v:String x:Key="tgl23_intf">Masaüstü JPEG duvar kağıdı sıkıştırması</v:String>
+    <v:String x:Key="tgl24_intf">Masaüstü öğeleri için ipuçları</v:String>
+    <v:String x:Key="tgl25_intf">Başlat menüsünde Bing entegrasyonlu web araması</v:String>
+    <v:String x:Key="tgl26_intf">Dosya Gezgini'ni "Bu Bilgisayar" konumunda aç</v:String>
+    <v:String x:Key="tgl27_intf">Otomatik parlaklık değişimleri</v:String>
 
     <v:String x:Key="color1_desc_intf">Sistemde metin veya nesne seçtiğinizde imleç seçim alanının arka plan rengini değiştirir.</v:String>
     <v:String x:Key="color2_desc_intf">Desteklenen uygulamalardaki bilgi baloncuklarının (ipuçlarının) rengini değiştirir.</v:String>
     <v:String x:Key="exblock1_desc_intf">Dosya Gezgini gezinti bölmesinde bulunan ve normal yollarla kaldırılamayan yerleşik sistem öğelerinin görünürlüğünü değiştirir.</v:String>
     <v:String x:Key="exblock2_desc_intf">Dosya Gezgini'nde gizli öğelerin görünürlüğü, dosya uzantıları ve disk sürücüsü yapısı dahil olmak üzere öğelerin görüntülenme kurallarını değiştirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
     <v:String x:Key="exblock3_desc_intf">Masaüstündeki sistem simgelerinin görünümünü değiştirir; bu simgeler sıradan kısayollar değil, yerleşik sistem nesneleridir.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders and «3D Objects» within «This PC». Allows you to hide them so that only connected drives are shown in the list. For builds below 21H1, it additionally removes «3D Objects» from the navigation pane. Note that the screen may flicker.</v:String>
     <v:String x:Key="tgl1_desc_intf">Bu ayar; Simge Durumuna Küçült, Ekranı Kapla ve Kapat düğmelerinin boyutunu küçülterek daha sade bir görünüm sağlar. Dosya Gezgini, Fotoğraflar, tarayıcılar ve diğer tanıdık programlar dahil tüm pencereleri etkiler.</v:String>
     <v:String x:Key="tgl2_desc_intf">Metin imlecinin yanıp sönme hızını artırır. Varsayılan olarak imleç her 530 milisaniyede bir yanıp söner.</v:String>
     <v:String x:Key="tgl3_desc_intf">Dosya Gezgini, tarayıcılar ve diğer klasik programlar dahil klasik Windows uygulamalarındaki kaydırma çubuklarının kalınlığını azaltır. Ancak kendi denetim öğelerini kullanan modern arayüzleri etkilemez.</v:String>
@@ -276,13 +284,11 @@
     <v:String x:Key="tgl20_desc_intf">Varsayılan olarak Windows, ilgi alanlarınıza uygun reklamlar göstermek için topladığı bilgileri kullanır. Bu reklamlar Mağaza uygulamalarında, Dosya Gezgini'nde, Ayarlar'da ve Başlat menüsünde karşınıza çıkabilir. Kişiselleştirilmiş reklamları görmek istemiyorsanız bu özelliği kapatabilirsiniz.</v:String>
     <v:String x:Key="tgl21_desc_intf">Varsayılan olarak Windows, kapatılırken pencere konumlarını kaydetmez. Bu ayar, açık klasörlerin durumunu hatırlayarak oturumu kapatma, yeniden başlatma veya sistemi kapatma işlemlerinden sonra onları geri yüklemenizi sağlar.</v:String>
     <v:String x:Key="tgl22_desc_intf">Ayarlardaki çevrimiçi ipuçları dahil tüm Windows ipuçlarını ve bildirimlerini devre dışı bırakır. Ayrıca kullanıcıyı "cihaz kurulumunu tamamlamaya" ve Microsoft hesabıyla oturum açmaya zorlayan agresif SCOOBE (İkinci Şans Kutu Deneyimi) ekranını da engeller.</v:String>
-    <v:String x:Key="tgl23_desc_intf">"Bu Bilgisayar" içindeki: Masaüstü, İndirilenler, Belgeler, Resimler, Müzikler, Videolar klasörlerini gizler. Dikkat, ekran anlık gidip gelebilir.</v:String>
-    <v:String x:Key="tgl24_desc_intf">Dosya Gezgini'nin sol tarafındaki gezinti bölmesinden "3B Nesneler" klasörünü kaldırır. Dikkat, ekran anlık gidip gelebilir.</v:String>
-    <v:String x:Key="tgl25_desc_intf">Varsayılan olarak Windows, bir JPEG görselini masaüstü duvar kağıdı olarak ayarladığınızda kalitesini otomatik olarak %85'e düşürür. Bu ayar, JPEG duvar kağıdı kalitesini %100 olarak sabitler.</v:String>
-    <v:String x:Key="tgl26_desc_intf">Fare imleci masaüstü öğelerinin üzerine geldiğinde görünen bilgi baloncuklarını (ipuçlarını) devre dışı bırakır.</v:String>
-    <v:String x:Key="tgl27_desc_intf">Varsayılan olarak Windows, Başlat menüsünde aradığınız her şeyi Bing arama sonuçları sunmak için kendi sunucularına gönderir. Başlat menüsünde web aramasına ihtiyaç duymuyorsanız bu ayarla Bing entegrasyonunu kapatabilirsiniz. Dikkat, ekran anlık gidip gelebilir.</v:String>
-    <v:String x:Key="tgl28_desc_intf">Varsayılan olarak Dosya Gezgini açıldığında ilk olarak "Hızlı Erişim" sekmesi gösterilir. Bu ayar, Dosya Gezgini'ni açtığınızda doğrudan disklerinizi görebileceğiniz "Bu Bilgisayar" konumunun açılmasını sağlar.</v:String>
-    <v:String x:Key="tgl29_desc_intf">Bazı cihazlarda ekran parlaklığı, ekrandaki içeriğe bağlı olarak kendiliğinden değişebilir. HDR, dinamik parlaklık ve güç ayarlarını kapatmak sorunu çözmezse (özellikle pilde çalışan dizüstü bilgisayarlarda) bu ayarı deneyebilirsiniz; sistem düzeyinde otomatik parlaklık ayarını zorla devre dışı bırakır. Manuel parlaklık kontrolü çalışmaya devam eder.</v:String>
+    <v:String x:Key="tgl23_desc_intf">Varsayılan olarak Windows, bir JPEG görselini masaüstü duvar kağıdı olarak ayarladığınızda kalitesini otomatik olarak %85'e düşürür. Bu ayar, JPEG duvar kağıdı kalitesini %100 olarak sabitler.</v:String>
+    <v:String x:Key="tgl24_desc_intf">Fare imleci masaüstü öğelerinin üzerine geldiğinde görünen bilgi baloncuklarını (ipuçlarını) devre dışı bırakır.</v:String>
+    <v:String x:Key="tgl25_desc_intf">Varsayılan olarak Windows, Başlat menüsünde aradığınız her şeyi Bing arama sonuçları sunmak için kendi sunucularına gönderir. Başlat menüsünde web aramasına ihtiyaç duymuyorsanız bu ayarla Bing entegrasyonunu kapatabilirsiniz. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="tgl26_desc_intf">Varsayılan olarak Dosya Gezgini açıldığında ilk olarak "Hızlı Erişim" sekmesi gösterilir. Bu ayar, Dosya Gezgini'ni açtığınızda doğrudan disklerinizi görebileceğiniz "Bu Bilgisayar" konumunun açılmasını sağlar.</v:String>
+    <v:String x:Key="tgl27_desc_intf">Bazı cihazlarda ekran parlaklığı, ekrandaki içeriğe bağlı olarak kendiliğinden değişebilir. HDR, dinamik parlaklık ve güç ayarlarını kapatmak sorunu çözmezse (özellikle pilde çalışan dizüstü bilgisayarlarda) bu ayarı deneyebilirsiniz; sistem düzeyinde otomatik parlaklık ayarını zorla devre dışı bırakır. Manuel parlaklık kontrolü çalışmaya devam eder.</v:String>
     <!--#endregion-->
 
     <!--#region Packages Page -->
