@@ -1,111 +1,103 @@
 <div align="center">
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/GTweak.png" width="220" height="220">
+  
+  # GTweak
+  **כלי נייד להגדרה והתאמה אישית אידיאלית של Windows**
 
-# GTweak
+  <p>
 
-Portable tool for an ideal Windows setup and customization
+  [![EN](https://img.icons8.com/color/48/usa-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README.md)&nbsp;
+  [![FR](https://img.icons8.com/color/48/france-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md)&nbsp;
+  [![HE](https://img.icons8.com/color/48/israel-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-he.md)&nbsp;
+  [![HU](https://img.icons8.com/color/48/hungary-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-hu.md)&nbsp;
+  [![IT](https://img.icons8.com/color/48/italy-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-it.md)&nbsp;
+  [![KO](https://img.icons8.com/color/48/south-korea-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md)&nbsp;
+  [![PL](https://img.icons8.com/color/48/poland-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md)&nbsp;
+  [![PT-BR](https://img.icons8.com/color/48/brazil-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md)&nbsp;
+  [![RU](https://img.icons8.com/color/48/russian-federation-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md)&nbsp;
+  [![SI](https://img.icons8.com/color/48/slovenia-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-sl-si.md)&nbsp;
+  [![TH](https://img.icons8.com/color/48/thailand-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-th.md)&nbsp;
+  [![TR](https://img.icons8.com/color/48/turkey-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-tr.md)&nbsp;
+  [![UK](https://img.icons8.com/color/48/ukraine-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md)&nbsp;
+  [![ZH](https://img.icons8.com/color/48/china-circular.png)](https://github.com/Greedeks/GTweak/blob/main/README-zh-cn.md)&nbsp;
+    
+  </p>
 
-<a href="https://github.com/Greedeks/GTweak/releases/latest">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
-    <img alt="Release" src="https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
-  </picture>
-</a>
-<a href="https://github.com/Greedeks/GTweak/releases">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
-    <img alt="Downloads" src="https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
-  </picture>
-</a>
-<a href="https://github.com/Greedeks/GTweak/stargazers">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
-    <img alt="Stars" src="https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
-  </picture>
-</a>
-<a href="https://github.com/Greedeks/GTweak/network/members">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
-    <img alt="Forks" src="https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
-  </picture>
-</a>
-<a href="https://github.com/Greedeks/GTweak/blob/main/LICENSE">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=dark">
-    <img alt="License" src="https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=7BFFB5&gradient=7BFFB5&mode=light">
-  </picture>
-</a>
+  <img src="https://raw.githubusercontent.com/Greedeks/GTweak/main/.github/Preview.gif" alt="GTweak Preview" width="850"><br>
 
-<a href="https://trendshift.io/repositories/23246?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/23246" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
-<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/daily?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
-<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/weekly?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
-<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/monthly?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+  <p>
+    <a href="https://github.com/Greedeks/GTweak/releases/latest"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=dark"><img alt="Release" src="https://shieldcn.dev/github/Greedeks/GTweak/release.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=light"></picture></a>
+    <a href="https://github.com/Greedeks/GTweak/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=dark"><img alt="Downloads" src="https://shieldcn.dev/github/Greedeks/GTweak/downloads.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=light"></picture></a>
+    <a href="https://github.com/Greedeks/GTweak/stargazers"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=dark"><img alt="Stars" src="https://shieldcn.dev/github/Greedeks/GTweak/stars.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=light"></picture></a>
+    <a href="https://github.com/Greedeks/GTweak/network/members"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=dark"><img alt="Forks" src="https://shieldcn.dev/github/Greedeks/GTweak/forks.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=light"></picture></a>
+    <a href="https://github.com/Greedeks/GTweak/blob/main/LICENSE"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=dark"><img alt="License" src="https://shieldcn.dev/github/Greedeks/GTweak/license.svg?variant=outline&color=e0c1a7&gradient=e0c1a7&mode=light"></picture></a>
+  </p>
 
-<img src="https://github.com/Greedeks/GTweak/blob/main/.github/Preview.gif" alt="GTweak Preview" width="850">
-<br/>
-<br/>
-
-[![EN](https://shieldcn.dev/badge/EN-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README.md)
-[![FR](https://shieldcn.dev/badge/FR-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-fr.md)
-[![HE](https://shieldcn.dev/badge/HE-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-he.md)
-[![HU](https://shieldcn.dev/badge/HU-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-hu.md)
-[![IT](https://shieldcn.dev/badge/IT-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-it.md)
-[![KO](https://shieldcn.dev/badge/KO-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-ko.md)
-[![PL](https://shieldcn.dev/badge/PL-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-pl.md)
-[![PT-BR](https://shieldcn.dev/badge/PT--BR-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-pt-br.md)
-[![RU](https://shieldcn.dev/badge/RU-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-ru.md)
-[![SL](https://shieldcn.dev/badge/SL-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-sl-si.md)
-[![TH](https://shieldcn.dev/badge/TH-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-th.md)
-[![TR](https://shieldcn.dev/badge/TR-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-tr.md)
-[![UK](https://shieldcn.dev/badge/UK-7BFFB5.svg?height=26&padX=7)](https://github.com/Greedeks/GTweak/blob/main/README-uk.md)
-![ZH-CN](https://shieldcn.dev/badge/ZH--CN-7BFFB5.svg?height=26&padX=7)
-![ZH-TW](https://shieldcn.dev/badge/ZH--TW-7BFFB5.svg?height=26&padX=7)
-
-<a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe">
-  <img src="https://github.com/Greedeks/GTweak/blob/main/.github/button.png" width="260" alt="Download GTweak">
-</a>
-
-<br/>
-<br/>
-
+  <p>
+    <a href="https://github.com/Greedeks/GTweak/releases/latest/download/gtweak.exe">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/DOWNLOAD%20NOW-e0c1a7.svg?variant=outline&amp;size=default&amp;font=geist&amp;logo=ri%3AFiDownload&amp;mode=dark">
+        <img alt="badge" src="https://shieldcn.dev/badge/DOWNLOAD%20NOW-e0c1a7.svg?variant=outline&amp;size=default&amp;font=geist&amp;logo=ri%3AFiDownload&amp;mode=light">
+      </picture>
+    </a>
+  </p>
 </div>
 
-## מה התוכנה עושה
+<br><br>
 
-GTweak מספקת סט כלים מקיף המעניק לך שליטה מלאה על מערכת ההפעלה Windows שלך. במקום לנווט בתפריטי מערכת מרובים, באפשרותך להשבית בבטחה שירותי רקע מיותרים, להסיר תוכנות מובנות ולהחיל תצורות מערכת מתקדמות מממשק אחד.
+## ✦ Tweak Anything
 
-| תכונה | פרטים |
-|---|---|
-| **אקטיבציה של המערכת** | אקטיבציה של Windows באמצעות שיטות HWID ו-KMS |
-| **בקרת אבטחה** | השבתת Windows Defender, SmartScreen, Antimalware, VBS ו-UAC |
-| **ניהול עדכונים** | השבתה והשהיה של עדכוני Windows והסרת קבצי עדכון זמניים |
-| **מיטוב המערכת** | השבתת שירותי מערכת לא נחוצים, פרוטוקולי רשת מיותרים (Teredo, ISATAP, IPv6), כלי אבחון מובנים ומיטוב הדיסק |
-| **פרטיות וטלמטריה** | השבתת מתעדי מקלדת וטלמטריה של Windows, NVIDIA ו-Intel. השבתת שירותי איסוף נתונים, משימות במתזמן, פרסומות מותאמות אישית, באנרים של המערכת, SCOOBE, התראות ועצות. חסימת דומיינים נסתרים של Microsoft באמצעות hosts וחומת אש |
-| **ניקוי והסרת תוכנות מיותרות** | הסרת ההתקנה של OneDrive ו-Microsoft Edge יחד עם ניקוי כל הנתונים הקשורים ו-WebView2. הסרת יישומי UWP מותקנים מראש סטנדרטיים ועוזרי AI: Cortana, Copilot ו-Recall |
-| **התאמת הממשק** | התאמת ערכות נושא, הגדרות חלונות, פריסת שורת המשימות וסמלים. השבתת פרסומות מותאמות אישית, באנרים ועצות |
-| **חומרה וציוד היקפי** | הגדרת מקלדת ועכבר: השבתת סינון מקשים, מקשים דביקים והאצת מצביע. הפעלת תוכנית צריכת החשמל לביצועים מקסימליים. כוונון הגדרות חשמל למנהלי ההתקן של Realtek High Definition Audio לתיקון השהיית קול |
-| **דיסק ותחזוקה** | ניקוי זיכרון RAM, קבצים זמניים, מטמון סמלים ומחיקה מאובטחת של תיקיית Windows.old. דחיסה ופריסה של קבצים באמצעות NTFS לחיסכון בשטח |
-| **בקרה מתקדמת** | צפייה בתצורת החומרה וניטור רכיבי המערכת. הרצת סקריפטים מותאמים אישית (.ps1, .cmd, .bat, .reg) עם הרשאות TrustedInstaller |
+**אקטיבציה ואבטחה**
+- אקטיבציה של Windows באמצעות שיטות HWID ו-KMS
+- השבתת Windows Defender, SmartScreen, Antimalware, VBS ו-UAC
 
-<br/>
+**עדכונים ושירותים**
+- השבתה והשהיה של עדכוני Windows; הסרת קבצי עדכון זמניים
+- השבתת שירותי מערכת לא בשימוש ומיותרים
 
-## דרישות מערכת
+**פרטיות וטלמטריה**
+- השבתת מתעדי מקלדת וטלמטריה עבור Windows, NVIDIA ו-Intel
+- השבתת שירותים, אירועים ומשימות מתזמן הקשורים לאיסוף נתוני משתמש
+- חסימת דומיינים נסתרים של Microsoft באמצעות קובץ hosts וחומת אש
 
-> ⚠️ הכלי מיועד באופן בלעדי לעותקי Windows רשמיים שהורדו ממקורות מהימנים. אם התקנת גרסה מקוצצת/מותאמת של Windows, האחריות על תפקודה מוטלת עליך בלבד.
+**רשת ואבחון**
+- השבתת פרוטוקולי רשת מיותרים: Teredo, ISATAP ו-IPv6
+- השבתת כלי אבחון מובנים של Windows ואיחוי דיסקים
 
+**תוכנות מיותרות ו-AI**
+- הסרת ההתקנה של OneDrive ו-Microsoft Edge יחד עם כל הנתונים הקשורים ו-WebView2
+- הסרת יישומי UWP סטנדרטיים המותקנים מראש ב-Windows 10/11
+- הסרה והשבתה של עוזרי AI: Cortana, Copilot ו-Recall
+
+**ממשק משתמש והתראות**
+- התאמת הממשק: שינוי ערכות נושא, הגדרות חלונות, פריסת שורת המשימות וסמלים
+- השבתת פרסומות מותאמות אישית, באנרים של המערכת, SCOOBE, התראות ועצות
+
+**חומרה וביצועים**
+- הגדרת מקלדת ועכבר: סינון מקשים, מקשים דביקים והאצת מצביע
+- החלת תוכנית צריכת החשמל «Ultimate Performance»
+- תיקון השהיית קול של Realtek High Definition Audio דרך הגדרות צריכת חשמל
+
+**תחזוקה ומתקדם**
+- ניקוי זיכרון RAM, קבצים זמניים ומטמוני סמלים
+- דחיסה ופריסה של קבצים באמצעות NTFS לחיסכון בשטח
+- צפייה בתצורת חומרה וניטור רכיבי מערכת
+- הרצת סקריפטים מותאמים אישית (`.ps1`, `.cmd`, `.bat`, `.reg`) עם הרשאות TrustedInstaller
+  
+<br>
+
+## ✦ דרישות מערכת
 ```c++
 תמיכת Windows: החל מ-10 (build 18362.116)
 פלטפורמה מותקנת: .NET Framework 4.8
+הפעל כמנהל: נדרש
+אנטי-וירוס: הוסף לחריגים או השבת
 ```
 
-> [!WARNING]
-> הפעל את היישום כמנהל מערכת.
-> 
-> לפני השימוש בתוכנה, השבת את האנטי-וירוס שלך או הוסף את GTweak לחריגים של Windows Defender.
+> ⚠️ הכלי מיועד באופן בלעדי לעותקי Windows רשמיים שהורדו ממקורות מהימנים. אם התקנת גרסה מקוצצת/מותאמת של Windows, האחריות על תפקודה מוטלת עליך בלבד.
 
-</br>
+<br>
 
-## תלויות
+## ✦ תלויות
 
 **חבילות NuGet**
 - [TaskScheduler](https://www.nuget.org/packages/TaskScheduler)
@@ -118,9 +110,9 @@ GTweak מספקת סט כלים מקיף המעניק לך שליטה מלאה �
 - FirewallAPI
 - Windows.winmd
 
-</br>
+<br>
 
-## תרגום 
+## ✦ לוקליזציה ותרגום 
 <p>
   <b>תודה מיוחדת</b> לאנשים המדהימים האלה על תרומתם לתרגום
 </p>
@@ -158,7 +150,7 @@ GTweak מספקת סט כלים מקיף המעניק לך שליטה מלאה �
 - שלח **Pull Request** עם השינויים שלך. </br></br>
 
 **ב. בקשה דרך Issue**
-- אם אינך מכיר את Git, פתח [Feature Request issue](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature]%20Add%20translation).
+- אם אינך מכיר את Git, פתח [Feature Request issue](https://github.com/Greedeks/GTweak/issues/new?template=%E2%9C%A8-feature-request-.yaml&title=[Feature%20Request]%20Add%20translation).
   - ציין את [קוד השפה](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/available-language-packs-for-windows?view=windows-11) המבוקש.
   - ספק את שם השפה שלך כתוב בשפתך המקורית בהתאם ל-[NOTE](https://github.com/Greedeks/GTweak/blob/main/.Source/GTweak/Languages/LanguageCatalog.xaml#L5-L11).
   - צרף את קובץ ה-`Localize.xaml` המתורגם שלך.
@@ -169,12 +161,17 @@ GTweak מספקת סט כלים מקיף המעניק לך שליטה מלאה �
 > [!NOTE]  
 > ייתכן שהתרגום הנוכחי אינו מלא, מכיוון שייתכן שנוספו תכונות חדשות שטרם תורגמו. במקרים כאלה, חלקים אלו של התוכנה יופיעו באנגלית כברירת מחדל.
 
-
 </br>
 
-## צור קשר
+## ✦ צור קשר
 <img src="https://avatars.githubusercontent.com/u/82948926?s=400&u=66ddd72b29af1ac8b262281b183da6d191c5a71d&v=4" width="100px;"/>
+<a href="https://github.com/Greedeks"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/Greedeks-e0c1a7.svg?logo=ri%3AFaGithub&variant=outline&font=geist&mode=dark"><img alt="GitHub" src="https://shieldcn.dev/badge/Greedeks-e0c1a7.svg?logo=ri%3AFaGithub&variant=outline&font=geist&mode=light"></picture></a>
+<a href="https://t.me/Greedeks"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/Telegram-e0c1a7.svg?logo=ri%3AFaTelegram&variant=outline&font=geist&mode=dark"><img alt="Telegram" src="https://shieldcn.dev/badge/Telegram-e0c1a7.svg?logo=ri%3AFaTelegram&variant=outline&font=geist&mode=light"></picture></a>
+<a href="https://steamcommunity.com/id/greedeks/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://shieldcn.dev/badge/Steam-e0c1a7.svg?logo=ri%3AFaSteam&variant=outline&font=geist&mode=dark"><img alt="Steam" src="https://shieldcn.dev/badge/Steam-e0c1a7.svg?logo=ri%3AFaSteam&variant=outline&font=geist&mode=light"></picture></a>
 
-[![github](https://shieldcn.dev/badge/github-gray.svg?logo=ri%3AFaGithub)](https://github.com/Greedeks)
-[![telegram](https://shieldcn.dev/badge/telegram-1DA1F2.svg?logo=ri%3AFaTelegram)](https://t.me/Greedeks)
-[![steam](https://shieldcn.dev/badge/steam-042430.svg?logo=ri%3AFaSteam)](https://steamcommunity.com/id/greedeks/)
+##
+
+<a href="https://trendshift.io/repositories/23246?utm_source=repository-badge&amp;utm_medium=badge&amp;utm_campaign=badge-repository-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/repositories/23246" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/daily?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/weekly?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
+<a href="https://trendshift.io/repositories/23246?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-23246" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/23246/monthly?language=C%23" alt="Greedeks%2FGTweak | Trendshift" width="220" height="48"/></a>
