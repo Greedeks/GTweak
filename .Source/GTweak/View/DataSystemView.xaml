@@ -473,7 +473,7 @@
                                             <ColumnDefinition Width="Auto" SharedSizeGroup="StorageTypeColumn"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Column="0" Text="{DynamicResource label_name_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
-                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_itype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="2" Text="{DynamicResource label_itype_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" HorizontalAlignment="Right" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
                                     <ItemsControl ItemsSource="{Binding [Storage].Items}">

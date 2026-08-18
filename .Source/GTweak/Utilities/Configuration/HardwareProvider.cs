@@ -698,8 +698,8 @@ namespace GTweak.Utilities.Configuration
                     return match.Groups["res"].Value;
                 }
 
-                string clean = Regex.Replace(rawCaption, @"\([RTMtm]+\)|(?i:\b(Intel|AMD|NVIDIA|VIA|Series|Chipset|Family|LPC|Controller|Interface|Bridge|Host|Standard)\b)", "");
-                clean = Regex.Replace(clean, @"[()\[\]\-\s]+", " ").Trim();
+                string clean = Regex.Replace(rawCaption, @"\([RTMtm]+\)|(?i:\b(Intel|AMD|NVIDIA|VIA|Series|Chipset|Family|LPC|eSPI|Controller|Interface|Bridge|Host|Standard)\b)", "");
+                clean = Regex.Replace(clean, @"[()\[\]\-\s/]+", " ").Trim();
 
                 return clean.Length > 2 ? clean : rawCaption;
             }
