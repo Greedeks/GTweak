@@ -120,15 +120,14 @@
       <HintPath>..\..\packages\WPF-UI.Abstractions.4.3.0\lib\net472\Wpf.Ui.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <AvailableWinMDs Include="$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\*\Windows.winmd" />
-  </ItemGroup>
   <PropertyGroup>
-    <LatestWinMDPath>%(AvailableWinMDs.Identity)</LatestWinMDPath>
+    <WindowsKitsRoot>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot10', null, RegistryView.Registry32))</WindowsKitsRoot>
+    <WinMDVersion>$([System.IO.Directory]::GetDirectories('$(WindowsKitsRoot)UnionMetadata')[0])</WinMDVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Windows">
-      <HintPath>$(LatestWinMDPath)</HintPath>
+      <HintPath>$(WinMDVersion)\Windows.winmd</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -568,7 +567,7 @@
   <Import Project="..\..\packages\Fody.6.9.3\build\Fody.targets" Condition="Exists('..\..\packages\Fody.6.9.3\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+      <ErrorText>This project references NuGet packages that are missing on this computer. Please restore the NuGet packages. The following file is missing: {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Costura.Fody.6.2.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Costura.Fody.6.2.0\build\Costura.Fody.props'))" />
     <Error Condition="!Exists('..\..\packages\Costura.Fody.6.2.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Costura.Fody.6.2.0\build\Costura.Fody.targets'))" />

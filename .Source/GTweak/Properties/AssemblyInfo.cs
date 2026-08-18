@@ -5,9 +5,9 @@ using System.Windows;
 [assembly: AssemblyTitle("GTweak")]
 [assembly: AssemblyDescription("Portable Tool for an Ideal Windows Setup")]
 [assembly: AssemblyProduct("GTweak")]
-[assembly: AssemblyCopyright("© 2024-2026 Greedeks")]
+[assembly: AssemblyCopyright("Â© 2024-2026 Greedeks")]
 [assembly: AssemblyTrademark("Greedeks")]
-[assembly: AssemblyInformationalVersion("Build: 5.5.3")]
+[assembly: AssemblyInformationalVersion("Build: 5.5.4")]
 [assembly: AssemblyVersion("5.5.56.281")]
 [assembly: AssemblyFileVersion("5.5.56.281")]
 
