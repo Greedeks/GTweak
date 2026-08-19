@@ -1,13 +1,13 @@
 using System;
 using System.ComponentModel;
 using System.Threading;
-using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Maintenance;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
+using GTweak.Animations;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
+using GTweak.Modules.Helpers;
+using GTweak.Modules.Maintenance;
+using GTweak.Modules.Managers;
+using GTweak.Modules.Tweaks;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -15,7 +15,7 @@ namespace GTweak.Windows
     public partial class LoadingWindow : FluentWindow
     {
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
-        private readonly UninstallingPakages _uninstallingPakages = new UninstallingPakages();
+        private readonly AppxPackageHandler _packageHandler = new AppxPackageHandler();
 
         public LoadingWindow()
         {
@@ -54,7 +54,7 @@ namespace GTweak.Windows
             static void ExecuteWithLogging(Action action, string member)
             {
                 try { action(); }
-                catch (Exception ex) { ErrorLogging.LogWritingFile(ex, false, member); }
+                catch (Exception ex) { ErrorLogger.LogWritingFile(ex, false, member); }
             }
 
             ReportStep(1, 15);
@@ -75,8 +75,8 @@ namespace GTweak.Windows
             ExecuteWithLogging(() => _hardwareProvider.GetPhysicalAvailableMemory().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetPhysicalAvailableMemory));
 
             ReportStep(4, 75, 300);
-            ExecuteWithLogging(_uninstallingPakages.GetInstalledPackages, nameof(_uninstallingPakages.GetInstalledPackages));
-            ExecuteWithLogging(UninstallingPakages.CheckingForLocalAccount, nameof(UninstallingPakages.CheckingForLocalAccount));
+            ExecuteWithLogging(_packageHandler.GetInstalledPackages, nameof(_packageHandler.GetInstalledPackages));
+            ExecuteWithLogging(AppxPackageHandler.CheckingForLocalAccount, nameof(AppxPackageHandler.CheckingForLocalAccount));
 
             ReportStep(5, 90);
             ExecuteWithLogging(() => _hardwareProvider.GetUserIpAddress().GetAwaiter().GetResult(), nameof(_hardwareProvider.GetUserIpAddress));

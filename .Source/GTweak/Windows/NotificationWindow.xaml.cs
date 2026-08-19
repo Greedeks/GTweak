@@ -3,10 +3,10 @@ using System.Media;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using GTweak.Utilities.Animation;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
+using GTweak.Animations;
+using GTweak.Modules.Common;
+using GTweak.Modules.Helpers;
+using GTweak.Modules.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -36,18 +36,18 @@ namespace GTweak.Windows
             Unloaded += delegate { _timer.Stop(); };
             Loaded += (s, e) =>
             {
-                if (SettingsEngine.IsPlayingSound)
+                if (GlobalOptions.IsPlayingSound)
                 {
                     using SoundPlayer notificationSound = new SoundPlayer(Properties.Resources.Sound);
                     notificationSound.Play();
                 }
 
-                BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.2));
-                BeginAnimation(LeftProperty, FactoryAnimation.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.35, () => { CacheMode = null; }, useCubicEase: true));
+                BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 1, 0.2));
+                BeginAnimation(LeftProperty, AnimationFactory.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.35, () => { CacheMode = null; }, useCubicEase: true));
 
                 _timer = new TimerControlManager(TimeSpan.FromSeconds(3), TimerControlManager.TimerMode.CountDown, null, () => { Close(); });
                 _timer.Start();
-                ProgressTimer.BeginAnimation(RangeBase.ValueProperty, FactoryAnimation.CreateIn(0, 100, 4.1));
+                ProgressTimer.BeginAnimation(RangeBase.ValueProperty, AnimationFactory.CreateIn(0, 100, 4.1));
             };
         }
 

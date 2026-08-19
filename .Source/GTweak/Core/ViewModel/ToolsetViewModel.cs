@@ -10,7 +10,7 @@ using GTweak.Core.Base;
 using GTweak.Core.Item;
 using GTweak.Core.Models;
 using GTweak.Core.Services;
-using GTweak.Utilities.Controls;
+using GTweak.Modules.Common;
 using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
@@ -72,7 +72,7 @@ namespace GTweak.Core.ViewModel
 
                 ToolsView?.Refresh();
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private bool FilterTools(object obj)
@@ -97,7 +97,7 @@ namespace GTweak.Core.ViewModel
                 VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog
                 {
                     UseDescriptionForTitle = true,
-                    SelectedPath = SettingsEngine.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+                    SelectedPath = GlobalOptions.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
                 };
 
                 if (folderDialog.ShowDialog() == true)
@@ -106,28 +106,28 @@ namespace GTweak.Core.ViewModel
 
                     if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
                     {
-                        SettingsEngine.DownloadPath = selectedPath;
+                        GlobalOptions.DownloadPath = selectedPath;
                     }
                 }
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private void OpenFolder()
         {
             try
             {
-                if (Directory.Exists(SettingsEngine.DownloadPath))
+                if (Directory.Exists(GlobalOptions.DownloadPath))
                 {
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = SettingsEngine.DownloadPath,
+                        FileName = GlobalOptions.DownloadPath,
                         UseShellExecute = true,
                         Verb = "open"
                     });
                 }
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
     }
 }

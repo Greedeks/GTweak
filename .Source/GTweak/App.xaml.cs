@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
+using GTweak.Modules.Managers;
 using GTweak.Windows;
 using Wpf.Ui.Appearance;
 
@@ -34,12 +34,12 @@ namespace GTweak
         {
             if (e.Args != null && e.Args.Any(arg => string.Equals(arg ?? string.Empty, "uninstall", StringComparison.OrdinalIgnoreCase)))
             {
-                SettingsEngine.SelfRemoval();
+                GlobalOptions.SelfRemoval();
                 return;
             }
 
-            SettingsEngine.СheckingParameters();
-            ApplicationThemeManager.Apply(string.Equals(SettingsEngine.Theme, SettingsEngine.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase) ? ApplicationTheme.Dark : ApplicationTheme.Light);
+            GlobalOptions.СheckingParameters();
+            ApplicationThemeManager.Apply(string.Equals(GlobalOptions.Theme, GlobalOptions.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase) ? ApplicationTheme.Dark : ApplicationTheme.Light);
 
             RunGuard.CheckingSingleInstance();
             await RunGuard.CheckingSystemRequirements();
@@ -54,7 +54,7 @@ namespace GTweak
         {
             if (e != null)
             {
-                ErrorLogging.LogWritingFile(e.Exception, true);
+                ErrorLogger.LogWritingFile(e.Exception, true);
                 e.Handled = true;
                 Environment.Exit(0);
             }
@@ -64,7 +64,7 @@ namespace GTweak
         {
             if (e?.ExceptionObject is Exception ex)
             {
-                ErrorLogging.LogWritingFile(ex, true);
+                ErrorLogger.LogWritingFile(ex, true);
             }
 
             Environment.Exit(0);
@@ -72,7 +72,7 @@ namespace GTweak
 
         private async void OnHandleDevicesEvents(MonitoringProvider.DeviceType deviceType)
         {
-            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
             await backgroundQueue.QueueTask(delegate { _hardwareProvider.RefreshDevicesData(deviceType); });
         }
 
@@ -91,8 +91,8 @@ namespace GTweak
                     Source = value switch
                     {
                         "be" => GetResourceUri("ru"),
-                        _ when SettingsEngine.AvailableLangs.Any(locale => string.Equals(locale, value, StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value),
-                        _ when value.Contains('-') && SettingsEngine.AvailableLangs.Any(locale => string.Equals(locale, value.Split('-')[0], StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value.Split('-')[0]),
+                        _ when GlobalOptions.AvailableLangs.Any(locale => string.Equals(locale, value, StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value),
+                        _ when value.Contains('-') && GlobalOptions.AvailableLangs.Any(locale => string.Equals(locale, value.Split('-')[0], StringComparison.OrdinalIgnoreCase)) => GetResourceUri(value.Split('-')[0]),
                         _ => GetResourceUri("en")
                     }
                 };
@@ -112,7 +112,7 @@ namespace GTweak
         {
             set
             {
-                value ??= SettingsEngine.AvailableThemes.First();
+                value ??= GlobalOptions.AvailableThemes.First();
 
                 ResourceDictionary dictionary = new ResourceDictionary
                 {

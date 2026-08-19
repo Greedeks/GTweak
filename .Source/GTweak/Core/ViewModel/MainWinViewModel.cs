@@ -7,8 +7,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Core.Base;
 using GTweak.Core.Model;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
 using GTweak.View;
 
 namespace GTweak.Core.ViewModel
@@ -30,30 +30,30 @@ namespace GTweak.Core.ViewModel
 
         public string DisplayProfileName => _hardwareProvider.GetProfileName();
 
-        public string DisplayTweakVersion => SettingsEngine.CurrentRelease.Full;
+        public string DisplayTweakVersion => GlobalOptions.CurrentRelease.Full;
 
-        public string CurrentVersion => SettingsEngine.CurrentRelease.Short;
+        public string CurrentVersion => GlobalOptions.CurrentRelease.Short;
 
         public string DownloadVersion => NetworkProvider.DownloadVersion;
 
         public bool StateButtonTheme
         {
-            get => !string.Equals(SettingsEngine.Theme, SettingsEngine.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase);
+            get => !string.Equals(GlobalOptions.Theme, GlobalOptions.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase);
             set
             {
-                App.Theme = SettingsEngine.Theme = value == false ? SettingsEngine.AvailableThemes.First() : SettingsEngine.AvailableThemes.Last();
+                App.Theme = GlobalOptions.Theme = value == false ? GlobalOptions.AvailableThemes.First() : GlobalOptions.AvailableThemes.Last();
                 OnPropertyChanged();
             }
         }
 
         public bool IsViewNotification
         {
-            get => SettingsEngine.IsViewNotification;
+            get => GlobalOptions.IsViewNotification;
             set
             {
-                if (SettingsEngine.IsViewNotification != value)
+                if (GlobalOptions.IsViewNotification != value)
                 {
-                    SettingsEngine.IsViewNotification = value;
+                    GlobalOptions.IsViewNotification = value;
                     OnPropertyChanged();
                 }
             }
@@ -61,12 +61,12 @@ namespace GTweak.Core.ViewModel
 
         public bool IsUpdateCheckRequired
         {
-            get => SettingsEngine.IsUpdateCheckRequired;
+            get => GlobalOptions.IsUpdateCheckRequired;
             set
             {
-                if (SettingsEngine.IsUpdateCheckRequired != value)
+                if (GlobalOptions.IsUpdateCheckRequired != value)
                 {
-                    SettingsEngine.IsUpdateCheckRequired = value;
+                    GlobalOptions.IsUpdateCheckRequired = value;
                     OnPropertyChanged();
                 }
             }
@@ -74,12 +74,12 @@ namespace GTweak.Core.ViewModel
 
         public bool IsTopMost
         {
-            get => SettingsEngine.IsTopMost;
+            get => GlobalOptions.IsTopMost;
             set
             {
-                if (SettingsEngine.IsTopMost != value)
+                if (GlobalOptions.IsTopMost != value)
                 {
-                    SettingsEngine.IsTopMost = value;
+                    GlobalOptions.IsTopMost = value;
                     OnPropertyChanged();
                 }
             }
@@ -87,12 +87,12 @@ namespace GTweak.Core.ViewModel
 
         public bool IsPlayingSound
         {
-            get => SettingsEngine.IsPlayingSound;
+            get => GlobalOptions.IsPlayingSound;
             set
             {
-                if (SettingsEngine.IsPlayingSound != value)
+                if (GlobalOptions.IsPlayingSound != value)
                 {
-                    SettingsEngine.IsPlayingSound = value;
+                    GlobalOptions.IsPlayingSound = value;
                     OnPropertyChanged();
                 }
             }
@@ -100,13 +100,13 @@ namespace GTweak.Core.ViewModel
 
         public int CurrentVolume
         {
-            get => SettingsEngine.Volume;
+            get => GlobalOptions.Volume;
             set
             {
-                if (SettingsEngine.Volume != value)
+                if (GlobalOptions.Volume != value)
                 {
-                    SettingsEngine.Volume = value;
-                    SettingsEngine.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * value) << 16));
+                    GlobalOptions.Volume = value;
+                    GlobalOptions.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * value) << 16));
                     OnPropertyChanged();
                 }
             }
@@ -121,7 +121,7 @@ namespace GTweak.Core.ViewModel
                 {
                     _model.SelectedLanguage = value;
                     OnPropertyChanged();
-                    SettingsEngine.Language = value;
+                    GlobalOptions.Language = value;
                     App.Language = value;
                 }
             }
@@ -177,12 +177,12 @@ namespace GTweak.Core.ViewModel
             Languages.Clear();
             ResourceDictionary dictionary = new ResourceDictionary { Source = new Uri($"Languages/LanguageCatalog.xaml", UriKind.Relative) };
 
-            foreach (string code in SettingsEngine.AvailableLangs)
+            foreach (string code in GlobalOptions.AvailableLangs)
             {
                 Languages.Add(new MainWinModel.LanguageItem { Code = code, Display = dictionary[$"{code.Replace("-", "_")}"] as string ?? code });
             }
 
-            SelectedLanguage = SettingsEngine.AvailableLangs.Contains(SettingsEngine.Language) ? SettingsEngine.Language : SettingsEngine.AvailableLangs.FirstOrDefault();
+            SelectedLanguage = GlobalOptions.AvailableLangs.Contains(GlobalOptions.Language) ? GlobalOptions.Language : GlobalOptions.AvailableLangs.FirstOrDefault();
         }
     }
 }

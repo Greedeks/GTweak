@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using GTweak.Utilities.Controls;
+using GTweak.Modules.Common;
 
 namespace GTweak.Assets.UserControls
 {
@@ -362,7 +362,7 @@ namespace GTweak.Assets.UserControls
             }
             catch (Exception ex)
             {
-                ErrorLogging.LogDebug(ex);
+                ErrorLogger.LogDebug(ex);
                 return finalSize;
             }
         }

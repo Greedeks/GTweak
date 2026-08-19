@@ -7,8 +7,8 @@ using System.Windows.Input;
 using GTweak.Core.Base;
 using GTweak.Core.Models;
 using GTweak.Core.Services;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Managers;
+using GTweak.Modules.Common;
+using GTweak.Modules.Managers;
 
 namespace GTweak.Core.ViewModel.Components
 {
@@ -80,7 +80,7 @@ namespace GTweak.Core.ViewModel.Components
                     return;
                 }
 
-                string destinationFolder = SettingsEngine.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                string destinationFolder = GlobalOptions.DownloadPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                 string destinationPath = Path.Combine(destinationFolder, GetFileNameFromUrl(finalUrl));
 
                 if (!File.Exists($"{destinationPath}.download"))
@@ -110,7 +110,7 @@ namespace GTweak.Core.ViewModel.Components
                         NotificationManager.Show("warn", "error_download_noty").Perform();
                         break;
                     default:
-                        ErrorLogging.LogDebug(ex);
+                        ErrorLogger.LogDebug(ex);
                         break;
                 }
             }

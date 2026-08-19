@@ -2,11 +2,10 @@ using System;
 using System.IO;
 using System.Windows.Controls;
 using GTweak.Core.Base;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Maintenance;
-using GTweak.Utilities.Managers;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
+using GTweak.Modules.Maintenance;
+using GTweak.Modules.Managers;
 using GTweak.Windows;
 using Ookii.Dialogs.Wpf;
 
@@ -50,7 +49,7 @@ namespace GTweak.View
             OverlayWindow overlayWindow = new OverlayWindow();
             overlayWindow.Show();
             NotificationManager.Show("info", "createpoint_noty").Perform();
-            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
 
             if (_systemRestore == null)
             {
@@ -60,7 +59,7 @@ namespace GTweak.View
             }
 
             try { await backgroundQueue.QueueTask(delegate { _systemRestore.CreateRestorePoint(); }); }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
             overlayWindow.Close();
         }
 
@@ -70,10 +69,10 @@ namespace GTweak.View
         {
             if (_systemRestore.IsPointCreationAllowed)
             {
-                BackgroundQueue backgroundQueue = new BackgroundQueue();
+                BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
                 await backgroundQueue.QueueTask(delegate
                 {
-                    try { _systemRestore.DisableRestorePoint(); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    try { _systemRestore.DisableRestorePoint(); } catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                 });
                 await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "disable_recovery_noty").WithDelay(300).Perform(); });
             }
@@ -87,10 +86,10 @@ namespace GTweak.View
         {
             if (!_systemRestore.IsPointCreationAllowed)
             {
-                BackgroundQueue backgroundQueue = new BackgroundQueue();
+                BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
                 await backgroundQueue.QueueTask(delegate
                 {
-                    try { _systemRestore.EnableRestorePoint(); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    try { _systemRestore.EnableRestorePoint(); } catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                 });
                 await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "enable_recovery_noty").WithDelay(300).Perform(); });
             }
@@ -114,7 +113,7 @@ namespace GTweak.View
             {
                 if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
                 {
-                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
                     await backgroundQueue.QueueTask(delegate
                     {
                         try { _ntfsCompressor.SetCompression(selectedPath, true); }
@@ -147,7 +146,7 @@ namespace GTweak.View
             {
                 if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
                 {
-                    BackgroundQueue backgroundQueue = new BackgroundQueue();
+                    BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
                     await backgroundQueue.QueueTask(delegate
                     {
                         try { _ntfsCompressor.SetCompression(selectedPath, false); }
@@ -169,7 +168,7 @@ namespace GTweak.View
 
         private async void BtnClear_ClickButton(object sender, EventArgs e)
         {
-            ClearingMemory clearingMemory = new ClearingMemory();
+            MemoryCleaner clearingMemory = new MemoryCleaner();
 
             if (clearingMemory.IsWinOldExists)
             {
@@ -181,7 +180,7 @@ namespace GTweak.View
                 }
             }
 
-            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
             await backgroundQueue.QueueTask(delegate { clearingMemory.StartMemoryCleanup((bool)_isWinOldRemoval); });
             await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "clear_ram_noty").WithDelay(500).Perform(); });
         }
@@ -203,7 +202,7 @@ namespace GTweak.View
             OverlayWindow overlayWindow = new OverlayWindow();
             overlayWindow.Show();
             RegistryExporter registryExporter = new RegistryExporter();
-            BackgroundQueue backgroundQueue = new BackgroundQueue();
+            BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
             await backgroundQueue.QueueTask(delegate { registryExporter.Export(vistaSaveFileDialog.FileName); });
             overlayWindow.Close();
         }

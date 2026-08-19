@@ -1,0 +1,181 @@
+using System.Collections.Generic;
+using System.Windows.Media;
+
+namespace GTweak.Modules.Configuration
+{
+    internal class HardwareData
+    {
+        internal sealed class OperatingSystemInfo
+        {
+            internal string Name { get; set; } = string.Empty;
+            internal string Version { get; set; } = string.Empty;
+            internal decimal Build { get; set; } = default;
+            internal bool IsWin10 => Name.Contains("10");
+            internal bool IsWin11 => Name.Contains("11");
+        }
+
+        internal sealed class BiosInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string Mode { get; set; } = string.Empty;
+            internal string SerialNumber { get; set; } = string.Empty;
+        }
+
+        internal sealed class MotherboardInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string Version { get; set; } = string.Empty;
+            internal string SerialNumber { get; set; } = string.Empty;
+            internal string Chipset { get; set; } = string.Empty;
+        }
+
+        internal sealed class ProcessorInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal int Usage { get; set; } = default;
+            internal string Cores { get; set; } = string.Empty;
+            internal string Threads { get; set; } = string.Empty;
+            internal string Frequency { get; set; } = string.Empty;
+        }
+
+        internal sealed class GraphicsInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string Memory { get; set; } = string.Empty;
+        }
+
+        internal sealed class MemoryInfo
+        {
+            internal int Usage { get; set; } = default;
+            internal string Type { get; set; } = string.Empty;
+            internal List<MemoryModuleInfo> Modules { get; set; } = new List<MemoryModuleInfo>();
+        }
+
+        internal sealed class MemoryModuleInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string Frequency { get; set; } = string.Empty;
+            internal string Capacity { get; set; } = string.Empty;
+        }
+
+        internal sealed class StorageInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal string Capacity { get; set; } = string.Empty;
+            internal string StorageType { get; set; } = string.Empty;
+            internal string UsedSpace { get; set; } = string.Empty;
+            internal string FreeSpace { get; set; } = string.Empty;
+            internal double UsedPercent { get; set; } = 0;
+            internal List<string> DriveLetters { get; set; } = new List<string>();
+        }
+
+        internal sealed class AudioDeviceInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal bool IsCapture { get; set; } = false;
+        }
+
+        internal sealed class NetworkAdapterInfo
+        {
+            internal string Data { get; set; } = string.Empty;
+            internal bool IsConnected { get; set; } = true;
+        }
+
+        internal enum ConnectionStatus { Available, Lose, Block, Limited, }
+
+        internal static OperatingSystemInfo OS { get; set; } = new OperatingSystemInfo();
+        internal static ImageSource Wallpaper { get; set; } = default;
+        internal static string RunningProcessesCount { get; set; } = string.Empty;
+        internal static string RunningServicesCount { get; set; } = string.Empty;
+        internal static BiosInfo Bios { get; set; } = new BiosInfo();
+        internal static ProcessorInfo Processor { get; set; } = new ProcessorInfo();
+        internal static MotherboardInfo Motherboard { get; set; } = new MotherboardInfo();
+        internal static List<GraphicsInfo> Graphics { get; set; } = new List<GraphicsInfo>();
+        internal static string MonitorRefreshRate { get; set; } = string.Empty;
+        internal static MemoryInfo Memory { get; set; } = new MemoryInfo();
+        internal static List<StorageInfo> Storage { get; set; } = new List<StorageInfo>();
+        internal static List<AudioDeviceInfo> AudioDevices { get; set; } = new List<AudioDeviceInfo>();
+        internal static List<NetworkAdapterInfo> NetworkAdapters { get; set; } = new List<NetworkAdapterInfo>();
+        internal static string UserIPAddress { get; set; } = string.Empty;
+        internal static string UserCountryCode { get; set; } = string.Empty;
+        internal static ConnectionStatus CurrentConnection = ConnectionStatus.Lose;
+
+        internal static class VendorDetection
+        {
+            internal static bool Nvidia { get; set; } = default;
+            internal static bool Realtek { get; set; } = default;
+        }
+
+        internal static class StorageTypeLabels
+        {
+            internal const string Unspecified = "(Unspecified)";
+            internal const string SCM = "(SCM)";
+            internal const string HDD = "(HDD)";
+            internal const string SSD = "(SSD)";
+            internal const string NVMe = "(NVMe SSD)";
+            internal const string SCSI = "(SCSI)";
+            internal const string USB = "(USB-Media)";
+            internal const string SD = "(SD-Card)";
+            internal const string CD = "(CD/DVD)";
+            internal const string VHD = "(VHD)";
+            internal const string VHDX = "(VHDX)";
+        }
+
+        internal static class HardwareMappings
+        {
+            internal static readonly (object[] Keys, string Type)[] MediaTypeMap = new (object[] Keys, string Type)[]
+            {
+                (new object[] { (ushort)3, "Removable Media" }, StorageTypeLabels.HDD),
+                (new object[] { (ushort)4, "Fixed hard disk media" }, StorageTypeLabels.SSD),
+                (new object[] { (ushort)5, "Unspecified" }, StorageTypeLabels.SCM)
+            };
+
+            internal static readonly (ushort BusType, string StorageType)[] BusTypeMap = new (ushort, string)[]
+            {
+                (7, StorageTypeLabels.USB),
+                (12, StorageTypeLabels.SD),
+                (17, StorageTypeLabels.NVMe)
+            };
+
+            internal static string GetMemoryType(uint smbiosMemoryType) => smbiosMemoryType switch
+            {
+                2 => "DRAM",
+                3 => "EDRAM",
+                4 => "VRAM",
+                5 => "SRAM",
+                6 => "RAM",
+                7 => "ROM",
+                8 => "Flash",
+                9 => "EEPROM",
+                10 => "FEPROM",
+                11 => "EPROM",
+                12 => "CDRAM",
+                13 => "3DRAM",
+                14 => "SDRAM",
+                15 => "SGRAM",
+                16 => "RDRAM",
+                17 => "DDR",
+                18 => "DDR2",
+                19 => "DDR2 FB-DIMM",
+                20 => "Reserved",
+                21 => "Reserved",
+                22 => "FBD2",
+                23 => "DDR3",
+                24 => "DDR3",
+                25 => "DDR4",
+                26 => "DDR4",
+                27 => "LPDDR",
+                28 => "LPDDR2",
+                29 => "LPDDR3",
+                30 => "LPDDR4",
+                31 => "LPDDR4X",
+                32 => "Logical Non-Volatile",
+                33 => "HBM",
+                34 => "DDR5",
+                35 => "LPDDR5",
+                36 => "LPDDR5X",
+                _ => string.Empty,
+            };
+        }
+    }
+}

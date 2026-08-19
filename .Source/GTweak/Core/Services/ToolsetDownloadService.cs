@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Core.Models;
 using GTweak.Core.ViewModel.Components;
-using GTweak.Utilities.Controls;
+using GTweak.Modules.Common;
 using Newtonsoft.Json.Linq;
 
 namespace GTweak.Core.Services
@@ -61,7 +61,7 @@ namespace GTweak.Core.Services
 
             if (model.Group.Equals("github", StringComparison.OrdinalIgnoreCase))
             {
-                string apiUrl = PathLocator.Links.DownloadSources.GitHubLatest(model.DownloadPath);
+                string apiUrl = PathTargets.Links.DownloadSources.GitHubLatest(model.DownloadPath);
                 using HttpResponseMessage response = await _httpClient.GetAsync(apiUrl, token);
 
                 if (!response.IsSuccessStatusCode)
@@ -103,7 +103,7 @@ namespace GTweak.Core.Services
                 Match match = Regex.Match(projectName, @"projects/([^/]+)");
                 projectName = match.Success ? match.Groups[1].Value : projectName.Trim('/');
 
-                string bestReleaseUrl = PathLocator.Links.DownloadSources.SourceForgeBest(projectName);
+                string bestReleaseUrl = PathTargets.Links.DownloadSources.SourceForgeBest(projectName);
                 try
                 {
                     using HttpResponseMessage response = await _httpClient.GetAsync(bestReleaseUrl, token);
@@ -117,24 +117,24 @@ namespace GTweak.Core.Services
                         {
                             if (string.IsNullOrEmpty(model.FilePattern) || Regex.IsMatch(filename, model.FilePattern, RegexOptions.IgnoreCase))
                             {
-                                return PathLocator.Links.DownloadSources.SourceForgeFile(projectName, filename.TrimStart('/'));
+                                return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, filename.TrimStart('/'));
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    ErrorLogging.LogDebug(ex);
+                    ErrorLogger.LogDebug(ex);
                 }
 
                 try
                 {
-                    string rssUrl = PathLocator.Links.DownloadSources.SourceForgeRss(projectName);
+                    string rssUrl = PathTargets.Links.DownloadSources.SourceForgeRss(projectName);
                     using HttpResponseMessage rssResponse = await _httpClient.GetAsync(rssUrl, token);
                     rssResponse.EnsureSuccessStatusCode();
                     string rssContent = await rssResponse.Content.ReadAsStringAsync();
 
-                    MatchCollection rssMatches = Regex.Matches(rssContent, PathLocator.Links.DownloadSources.SourceForgeRssRegex(projectName), RegexOptions.IgnoreCase);
+                    MatchCollection rssMatches = Regex.Matches(rssContent, PathTargets.Links.DownloadSources.SourceForgeRssRegex(projectName), RegexOptions.IgnoreCase);
 
                     if (rssMatches.Count > 0)
                     {
@@ -146,18 +146,18 @@ namespace GTweak.Core.Services
                                 if (Regex.IsMatch(filePath, model.FilePattern, RegexOptions.IgnoreCase))
                                 {
 
-                                    return PathLocator.Links.DownloadSources.SourceForgeFile(projectName, filePath.TrimStart('/'));
+                                    return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, filePath.TrimStart('/'));
                                 }
                             }
                         }
 
                         string firstFilePath = rssMatches[0].Groups[1].Value;
-                        return PathLocator.Links.DownloadSources.SourceForgeFile(projectName, firstFilePath.TrimStart('/'));
+                        return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, firstFilePath.TrimStart('/'));
                     }
                 }
                 catch (Exception ex)
                 {
-                    ErrorLogging.LogDebug(ex);
+                    ErrorLogger.LogDebug(ex);
                 }
 
                 throw new HttpRequestException();
@@ -322,7 +322,7 @@ namespace GTweak.Core.Services
             }
             catch (Exception ex)
             {
-                ErrorLogging.LogDebug(ex);
+                ErrorLogger.LogDebug(ex);
                 throw;
             }
         }

@@ -8,7 +8,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
-using GTweak.Utilities.Animation;
+using GTweak.Animations;
 
 namespace GTweak.Assets.UserControls
 {
@@ -97,8 +97,8 @@ namespace GTweak.Assets.UserControls
 
         private void Popup_Opened(object sender, EventArgs e)
         {
-            PopupTransform?.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-5, 0, 0.3, useCubicEase: true));
-            PopupBorder?.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.15));
+            PopupTransform?.BeginAnimation(TranslateTransform.YProperty, AnimationFactory.CreateIn(-5, 0, 0.3, useCubicEase: true));
+            PopupBorder?.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 1, 0.15));
             SubscribeToScrollParents();
         }
 

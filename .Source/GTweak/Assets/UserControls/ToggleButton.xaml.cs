@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using GTweak.Utilities.Animation;
+using GTweak.Animations;
 
 namespace GTweak.Assets.UserControls
 {
@@ -262,8 +262,8 @@ namespace GTweak.Assets.UserControls
         {
             if (IsEnabled && DotScale != null)
             {
-                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, useCubicEase: true));
-                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1, 1.1, 0.15, useCubicEase: true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, AnimationFactory.CreateIn(1, 1.1, 0.15, useCubicEase: true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateIn(1, 1.1, 0.15, useCubicEase: true));
             }
         }
 
@@ -271,8 +271,8 @@ namespace GTweak.Assets.UserControls
         {
             if (IsEnabled && DotScale != null)
             {
-                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, useCubicEase: true));
-                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, FactoryAnimation.CreateIn(1.1, 1, 0.15, useCubicEase: true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleXProperty, AnimationFactory.CreateIn(1.1, 1, 0.15, useCubicEase: true));
+                DotScale.BeginAnimation(ScaleTransform.ScaleYProperty, AnimationFactory.CreateIn(1.1, 1, 0.15, useCubicEase: true));
             }
         }
     }

@@ -2,10 +2,10 @@ using System;
 using System.Net;
 using System.Windows;
 using System.Windows.Input;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
+using GTweak.Modules.Helpers;
+using GTweak.Modules.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -42,9 +42,9 @@ namespace GTweak.Windows
                 };
                 webClient.DownloadFileCompleted += delegate
                 {
-                    CommandExecutor.RunCommand($"/c taskkill /f /im \"{SettingsEngine.CurrentName}\" && timeout /t 2 && del \"{SettingsEngine.CurrentLocation}\" && ren {tempFileName} \"{SettingsEngine.CurrentName}\" && \"{SettingsEngine.CurrentLocation}\"");
+                    CommandExecutor.RunCommand($"/c taskkill /f /im \"{GlobalOptions.CurrentName}\" && timeout /t 2 && del \"{GlobalOptions.CurrentLocation}\" && ren {tempFileName} \"{GlobalOptions.CurrentName}\" && \"{GlobalOptions.CurrentLocation}\"");
                 };
-                webClient.DownloadFileAsync(new Uri(PathLocator.Links.LatestUpdate.Resolved), tempFileName);
+                webClient.DownloadFileAsync(new Uri(PathTargets.Links.LatestUpdate.Resolved), tempFileName);
             }
             catch
             {

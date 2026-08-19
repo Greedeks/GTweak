@@ -2,7 +2,7 @@ using System;
 using System.Windows.Controls;
 using GTweak.Core.Base;
 using GTweak.Core.ViewModel;
-using GTweak.Utilities.Managers;
+using GTweak.Modules.Managers;
 
 namespace GTweak.View
 {

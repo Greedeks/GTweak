@@ -9,10 +9,10 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
-using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Managers;
+using GTweak.Animations;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
+using GTweak.Modules.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -124,11 +124,11 @@ namespace GTweak.Windows
                     SettingsPanel.CacheMode = new BitmapCache { RenderAtScale = 1 };
                     if (SettingsPanel.RenderTransform is TranslateTransform transform)
                     {
-                        transform.BeginAnimation(TranslateTransform.XProperty, FactoryAnimation.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, () => { SettingsPanel.CacheMode = null; }, useCubicEase: true));
+                        transform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, () => { SettingsPanel.CacheMode = null; }, useCubicEase: true));
                     }
                     break;
                 case nameof(TglButtonTheme):
-                    SettingsEngine.SelfReboot();
+                    GlobalOptions.SelfReboot();
                     Visibility = Visibility.Collapsed;
                     break;
                 default:
@@ -138,19 +138,19 @@ namespace GTweak.Windows
         #endregion
 
         #region Settings Panel
-        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.SaveFileConfig();
+        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => GlobalOptions.SaveFileConfig();
 
-        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.OpenFileConfig();
+        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => GlobalOptions.OpenFileConfig();
 
-        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => SettingsEngine.SelfRemoval();
+        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => GlobalOptions.SelfRemoval();
 
         private void BtnContacts_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Process.Start(new ProcessStartInfo(((System.Windows.Controls.Image)sender).Uid switch
             {
-                "git" => PathLocator.Links.GitHub,
-                "tg" => PathLocator.Links.Telegram,
-                _ => PathLocator.Links.Steam
+                "git" => PathTargets.Links.GitHub,
+                "tg" => PathTargets.Links.Telegram,
+                _ => PathTargets.Links.Steam
             })
             { UseShellExecute = true });
         }
@@ -203,7 +203,7 @@ namespace GTweak.Windows
                         if (targetOffset != viewTop)
                         {
                             SetCurrentVerticalOffset(NavScroll, viewTop);
-                            NavScroll.BeginAnimation(CurrentVerticalOffsetProperty, FactoryAnimation.CreateIn(viewTop, targetOffset, 0.5, useCubicEase: true));
+                            NavScroll.BeginAnimation(CurrentVerticalOffsetProperty, AnimationFactory.CreateIn(viewTop, targetOffset, 0.5, useCubicEase: true));
                         }
                     }
                 }), DispatcherPriority.Loaded);
@@ -213,7 +213,7 @@ namespace GTweak.Windows
 
         private void BtnUpdate_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            UpdateBanner.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(1, 0, 0.3, () => { UpdateBanner.Visibility = Visibility.Collapsed; }));
+            UpdateBanner.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(1, 0, 0.3, () => { UpdateBanner.Visibility = Visibility.Collapsed; }));
             Dispatcher.Invoke(() => new UpdateWindow().ShowDialog());
         }
 
@@ -229,15 +229,15 @@ namespace GTweak.Windows
         {
             TypewriterAnimation.Create(TitleName.Text, TitleName, TimeSpan.FromSeconds(0.4));
 
-            if (NetworkProvider.IsNeedUpdate && SettingsEngine.IsUpdateCheckRequired)
+            if (NetworkProvider.IsNeedUpdate && GlobalOptions.IsUpdateCheckRequired)
             {
                 await Task.Delay(500);
 
                 UpdateBanner.Visibility = Visibility.Visible;
-                UpdateBanner.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 1, 0.3));
+                UpdateBanner.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 1, 0.3));
                 if (UpdateBanner.RenderTransform is TranslateTransform transform)
                 {
-                    transform.BeginAnimation(TranslateTransform.YProperty, FactoryAnimation.CreateIn(-20, 0, 0.3, () => { UpdateBanner.CacheMode = null; }, useCubicEase: true));
+                    transform.BeginAnimation(TranslateTransform.YProperty, AnimationFactory.CreateIn(-20, 0, 0.3, () => { UpdateBanner.CacheMode = null; }, useCubicEase: true));
                 }
             }
         }

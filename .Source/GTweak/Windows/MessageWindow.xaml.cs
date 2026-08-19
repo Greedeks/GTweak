@@ -2,7 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using GTweak.Utilities.Managers;
+using GTweak.Modules.Managers;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows

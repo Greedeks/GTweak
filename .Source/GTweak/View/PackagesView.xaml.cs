@@ -5,19 +5,18 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
 using GTweak.Core.Base;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
+using GTweak.Modules.Common;
+using GTweak.Modules.Managers;
+using GTweak.Modules.Tweaks;
 
 namespace GTweak.View
 {
     public partial class PackagesView : UserControl, IViewPageBase
     {
         private TimerControlManager _timer = default;
-        private readonly BackgroundQueue _backgroundQueue = new BackgroundQueue();
+        private readonly BackgroundQueueManager _backgroundQueue = new BackgroundQueueManager();
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
-        private readonly UninstallingPakages _uninstalling = new UninstallingPakages();
+        private readonly AppxPackageHandler _packageHandler = new AppxPackageHandler();
         private bool? _isWebViewRemoval = false;
 
         public PackagesView()
@@ -26,8 +25,8 @@ namespace GTweak.View
 
             Loaded += delegate
             {
-                backgroundWorker.DoWork += delegate { _uninstalling.GetInstalledPackages(); };
-                backgroundWorker.RunWorkerCompleted += delegate { Dispatcher.Invoke(() => { UninstallingPakages.OnPackagesChanged(); }); };
+                backgroundWorker.DoWork += delegate { _packageHandler.GetInstalledPackages(); };
+                backgroundWorker.RunWorkerCompleted += delegate { Dispatcher.Invoke(() => { AppxPackageHandler.OnPackagesChanged(); }); };
 
                 _timer = new TimerControlManager(TimeSpan.Zero, TimerControlManager.TimerMode.CountUp, time =>
                 {
@@ -68,7 +67,7 @@ namespace GTweak.View
 
             if (toggleButton.IsChecked == false && packageName == "OneDrive")
             {
-                if (string.IsNullOrWhiteSpace(PathLocator.Executable.OneDriveSetup))
+                if (string.IsNullOrWhiteSpace(PathTargets.Executable.OneDriveSetup))
                 {
                     NotificationManager.Show("warn", "error_onedrive_noty").Perform();
                 }
@@ -78,10 +77,10 @@ namespace GTweak.View
 
                     await _backgroundQueue.QueueTask(async () =>
                     {
-                        await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); });
+                        await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
 
-                        try { await UninstallingPakages.RestoreOneDriveFolder(); }
-                        finally { await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, false); }); }
+                        try { await AppxPackageHandler.RestoreOneDriveFolder(); }
+                        finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
                     });
                 }
             }
@@ -104,10 +103,10 @@ namespace GTweak.View
 
                 await _backgroundQueue.QueueTask(async () =>
                 {
-                    await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, true); });
+                    await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
 
-                    try { await UninstallingPakages.RemoveAppxPackage(packageName, (bool)_isWebViewRemoval); }
-                    finally { await Dispatcher.InvokeAsync(() => { UninstallingPakages.HandleAvailabilityStatus(packageName, false); }); }
+                    try { await AppxPackageHandler.RemoveAppxPackage(packageName, (bool)_isWebViewRemoval); }
+                    finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
 
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {

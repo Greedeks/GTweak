@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using GTweak.Utilities.Controls;
+using GTweak.Modules.Common;
 
 namespace GTweak.Core.Services
 {
@@ -34,7 +34,7 @@ namespace GTweak.Core.Services
 
             if (isWebBased)
             {
-                urlToDownload = PathLocator.Links.Favicons.Google(iconSource);
+                urlToDownload = PathTargets.Links.Favicons.Google(iconSource);
             }
 
             try
@@ -54,7 +54,7 @@ namespace GTweak.Core.Services
                 {
                     try
                     {
-                        byte[] imageBytes = await _httpClient.GetByteArrayAsync(PathLocator.Links.Favicons.DuckDuckGo(iconSource));
+                        byte[] imageBytes = await _httpClient.GetByteArrayAsync(PathTargets.Links.Favicons.DuckDuckGo(iconSource));
                         ImageSource image = LoadImage(imageBytes);
 
                         if (image != null)
@@ -63,7 +63,7 @@ namespace GTweak.Core.Services
                             return (image, false);
                         }
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                 }
             }
 

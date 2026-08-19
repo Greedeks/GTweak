@@ -7,8 +7,8 @@ using System.Windows;
 using System.Windows.Threading;
 using GTweak.Core.Base;
 using GTweak.Core.Model;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Tweaks;
+using GTweak.Modules.Configuration;
+using GTweak.Modules.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {
@@ -27,7 +27,7 @@ namespace GTweak.Core.ViewModel
 
             BuildCollection();
 
-            UninstallingPakages.DataChanged += delegate
+            AppxPackageHandler.DataChanged += delegate
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
@@ -44,10 +44,10 @@ namespace GTweak.Core.ViewModel
         {
             DisplayState.Clear();
 
-            foreach (var kv in UninstallingPakages.PackagesDetails)
+            foreach (var kv in AppxPackageHandler.PackagesDetails)
             {
                 string name = kv.Key;
-                UninstallingPakages.PackagesInfo details = kv.Value;
+                AppxPackageHandler.PackagesInfo details = kv.Value;
 
                 PackagesModel pkg = new PackagesModel
                 {
@@ -62,17 +62,17 @@ namespace GTweak.Core.ViewModel
 
         private void UpdatePackageState(PackagesModel item)
         {
-            if (item != null && !string.IsNullOrWhiteSpace(item.Name) && UninstallingPakages.PackagesDetails?.TryGetValue(item?.Name, out var val) == true && val != null)
+            if (item != null && !string.IsNullOrWhiteSpace(item.Name) && AppxPackageHandler.PackagesDetails?.TryGetValue(item?.Name, out var val) == true && val != null)
             {
                 item.IsUnavailable = !val.IsUnavailable;
 
                 switch (item?.Name.ToLowerInvariant())
                 {
                     case "onedrive":
-                        item.Installed = UninstallingPakages.IsOneDriveInstalled;
+                        item.Installed = AppxPackageHandler.IsOneDriveInstalled;
                         return;
                     case "edge":
-                        item.Installed = UninstallingPakages.IsEdgeInstalled;
+                        item.Installed = AppxPackageHandler.IsEdgeInstalled;
                         return;
                     default:
                         break;
@@ -82,7 +82,7 @@ namespace GTweak.Core.ViewModel
 
                 if (scripts != null && scripts?.Count > 0)
                 {
-                    item.Installed = scripts.Any(pattern => UninstallingPakages.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
+                    item.Installed = scripts.Any(pattern => AppxPackageHandler.InstalledPackagesCache.Any(pkg => Regex.IsMatch(pkg, $"^{Regex.Escape(pattern)}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)));
                 }
                 else
                 {

@@ -8,7 +8,7 @@ using GTweak.Core.Base;
 using GTweak.Core.Models;
 using GTweak.Core.Services;
 using GTweak.Core.ViewModel.Components;
-using GTweak.Utilities.Controls;
+using GTweak.Modules.Common;
 
 namespace GTweak.Core.Item
 {
@@ -77,7 +77,7 @@ namespace GTweak.Core.Item
                 AuthorIconSource = Image;
                 IsSquareIcon = !string.Equals(_model.Group, "github", StringComparison.OrdinalIgnoreCase) && !IsFallback;
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
     }
 }

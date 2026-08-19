@@ -4,9 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Base;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
+using GTweak.Modules.Helpers;
+using GTweak.Modules.Managers;
+using GTweak.Modules.Tweaks;
 
 namespace GTweak.View
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using GTweak.Core.Base;
 using GTweak.Core.Model;
-using GTweak.Utilities.Tweaks;
+using GTweak.Modules.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {

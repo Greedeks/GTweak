@@ -6,8 +6,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using GTweak.Core.Base;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
 
 namespace GTweak.Core.ViewModel
 {
@@ -64,12 +64,12 @@ namespace GTweak.Core.ViewModel
 
         public bool IsIpHidden
         {
-            get => SettingsEngine.IsHiddenIpAddress;
+            get => GlobalOptions.IsHiddenIpAddress;
             set
             {
-                if (SettingsEngine.IsHiddenIpAddress != value)
+                if (GlobalOptions.IsHiddenIpAddress != value)
                 {
-                    SettingsEngine.IsHiddenIpAddress = value;
+                    GlobalOptions.IsHiddenIpAddress = value;
                     OnPropertyChanged();
                     RefreshStates();
                 }
@@ -127,7 +127,7 @@ namespace GTweak.Core.ViewModel
         {
             if (NetworkProvider.isIPAddressFormatValid || (_ipAddressModel?.Data?.Any(char.IsDigit) == true))
             {
-                IpBlurRadius = SettingsEngine.IsHiddenIpAddress ? 20 : 0;
+                IpBlurRadius = GlobalOptions.IsHiddenIpAddress ? 20 : 0;
                 IpSectionVisibility = Visibility.Visible;
                 _ipAddressModel.IsEnabled = true;
             }

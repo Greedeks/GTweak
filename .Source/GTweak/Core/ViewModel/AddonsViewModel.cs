@@ -9,8 +9,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Core.Base;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
+using GTweak.Modules.Common;
+using GTweak.Modules.Helpers;
 using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
@@ -39,7 +39,7 @@ namespace GTweak.Core.ViewModel
                 SelectFolderCommand = new RelayCommand(_ => SelectFolder());
                 UpdateCommand = new RelayCommand(_ => ScanFolder());
 
-                if (!string.IsNullOrWhiteSpace(SettingsEngine.UserAddonsPath) && Directory.Exists(SettingsEngine.UserAddonsPath))
+                if (!string.IsNullOrWhiteSpace(GlobalOptions.UserAddonsPath) && Directory.Exists(GlobalOptions.UserAddonsPath))
                 {
                     ScanFolder();
                 }
@@ -53,7 +53,7 @@ namespace GTweak.Core.ViewModel
                 VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog
                 {
                     UseDescriptionForTitle = true,
-                    SelectedPath = SettingsEngine.UserAddonsPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+                    SelectedPath = GlobalOptions.UserAddonsPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
                 };
 
                 bool? dialogResult = folderDialog.ShowDialog();
@@ -63,12 +63,12 @@ namespace GTweak.Core.ViewModel
                     string selectedPath = folderDialog.SelectedPath;
                     if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
                     {
-                        SettingsEngine.UserAddonsPath = selectedPath;
+                        GlobalOptions.UserAddonsPath = selectedPath;
                         ScanFolder();
                     }
                 }
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private void RunFile(AddonModel addon)
@@ -85,25 +85,25 @@ namespace GTweak.Core.ViewModel
                         break;
 
                     case ".ps1":
-                        fileName = PathLocator.Executable.PowerShell;
+                        fileName = PathTargets.Executable.PowerShell;
                         arguments = $"-ExecutionPolicy Bypass -File \"{addon.FilePath}\"";
                         break;
                     default:
-                        fileName = PathLocator.Executable.CommandShell;
+                        fileName = PathTargets.Executable.CommandShell;
                         arguments = $"/k \"{addon.FilePath}\"";
                         break;
                 }
 
                 Task.Run(() => { CommandExecutor.RunCommandShow(fileName, CommandExecutor.CleanCommand(arguments), addon.RequiresElevation); });
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private void ScanFolder()
         {
             try
             {
-                string path = SettingsEngine.UserAddonsPath;
+                string path = GlobalOptions.UserAddonsPath;
 
                 if (string.IsNullOrWhiteSpace(path) || !Directory.Exists(path))
                 {
@@ -163,7 +163,7 @@ namespace GTweak.Core.ViewModel
                             iconImage = Application.Current.Resources[iconRes] as ImageSource;
                         }
                     }
-                    catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                    catch (Exception ex) { ErrorLogger.LogDebug(ex); }
 
                     iconImage ??= Application.Current.Resources["Img_BatFile"] as ImageSource;
 
@@ -191,7 +191,7 @@ namespace GTweak.Core.ViewModel
                     }
                 }
             }
-            catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
     }
 }

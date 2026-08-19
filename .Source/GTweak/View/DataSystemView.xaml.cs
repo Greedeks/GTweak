@@ -7,20 +7,19 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using GTweak.Animations;
 using GTweak.Core.Base;
 using GTweak.Core.ViewModel;
-using GTweak.Utilities.Animation;
-using GTweak.Utilities.Configuration;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
+using GTweak.Modules.Common;
+using GTweak.Modules.Configuration;
+using GTweak.Modules.Managers;
 
 namespace GTweak.View
 {
     public partial class DataSystemView : UserControl, IViewPageBase
     {
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
-        private readonly BackgroundQueue backgroundQueue = new BackgroundQueue();
+        private readonly BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
         private TimerControlManager _timer = default;
 
         public DataSystemView()
@@ -113,8 +112,8 @@ namespace GTweak.View
                     if (!PopupCopy.IsOpen)
                     {
                         PopupCopy.IsOpen = true;
-                        CopyTextToastBody.BeginAnimation(OpacityProperty, FactoryAnimation.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
-                        PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, FactoryAnimation.CreateIn(-20, -50, 0.35, useCubicEase: true));
+                        CopyTextToastBody.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 0.9, 0.27, () => { PopupCopy.IsOpen = false; }, true));
+                        PopupCopy.BeginAnimation(Popup.VerticalOffsetProperty, AnimationFactory.CreateIn(-20, -50, 0.35, useCubicEase: true));
                     }
 
                     Thread thread = new Thread(() =>
@@ -124,7 +123,7 @@ namespace GTweak.View
                             Clipboard.Clear();
                             Clipboard.SetData(DataFormats.UnicodeText, selectedLine);
                         }
-                        catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                        catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                     });
 
                     thread.SetApartmentState(ApartmentState.STA);

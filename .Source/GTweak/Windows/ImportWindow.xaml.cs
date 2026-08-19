@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using GTweak.Utilities.Controls;
-using GTweak.Utilities.Helpers;
-using GTweak.Utilities.Managers;
-using GTweak.Utilities.Tweaks;
+using GTweak.Modules.Common;
+using GTweak.Modules.Helpers;
+using GTweak.Modules.Managers;
+using GTweak.Modules.Tweaks;
 using Wpf.Ui.Controls;
 
 namespace GTweak.Windows
@@ -40,7 +40,7 @@ namespace GTweak.Windows
         private async void Window_ContentRendered(object sender, EventArgs e)
         {
             Progress<byte> progress = new Progress<byte>(ReportProgress);
-            try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+            try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private void ReportProgress(byte valueProgress)
@@ -78,7 +78,7 @@ namespace GTweak.Windows
 
         private async Task ApplyTweaksWithProgress(CancellationToken token, IProgress<byte> progress)
         {
-            INIManager iniManager = new INIManager(PathLocator.Files.Config);
+            INIManager iniManager = new INIManager(PathTargets.Files.Config);
 
             var allSections = new (string Section, Action<string, bool> TweakAction, Dictionary<Enum, NotificationManager.NoticeAction> NoticeActions, Dictionary<Enum, ExplorerManager.ExplorerAction> ExplorerMapping)[]
             {
@@ -130,7 +130,7 @@ namespace GTweak.Windows
                         }
                         else if (tweak == "TglButton3")
                         {
-                            BackgroundQueue backgroundQueue = new BackgroundQueue();
+                            BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
                             await backgroundQueue.QueueTask(delegate
                             {
                                 _sysTweaks.Apply(tweak, Convert.ToBoolean(value), false);
@@ -175,7 +175,7 @@ namespace GTweak.Windows
                         }
                     }
                 }
-                catch (Exception ex) { ErrorLogging.LogDebug(ex); }
+                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
 
                 appliedTweaks++;
                 progress.Report((byte)((double)appliedTweaks / totalTweaks * 100));
