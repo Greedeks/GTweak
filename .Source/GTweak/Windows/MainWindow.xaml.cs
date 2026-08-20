@@ -1,17 +1,17 @@
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
 using GTweak.Animations;
+using GTweak.Behaviors;
 using GTweak.Modules.Common;
 using GTweak.Modules.Configuration;
+using GTweak.Modules.Helpers;
 using GTweak.Modules.Managers;
 using Wpf.Ui.Controls;
 
@@ -19,26 +19,6 @@ namespace GTweak.Windows
 {
     public partial class MainWindow : FluentWindow
     {
-        [DllImport("user32.dll")]
-        private static extern bool ReleaseCapture();
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-
-        internal static readonly DependencyProperty CurrentVerticalOffsetProperty =
-            DependencyProperty.RegisterAttached("CurrentVerticalOffset", typeof(double), typeof(MainWindow), new PropertyMetadata(0.0, OnCurrentVerticalOffsetChanged));
-
-        internal static void SetCurrentVerticalOffset(DependencyObject target, double value) => target.SetValue(CurrentVerticalOffsetProperty, value);
-
-        private static void OnCurrentVerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ScrollViewer scrollViewer)
-            {
-                scrollViewer.ScrollToVerticalOffset((double)e.NewValue);
-            }
-        }
-
-        private const int WM_NCLBUTTONDOWN = 0xA1, HTCAPTION = 0x2;
         private bool _ignoreMouseClick = false;
         private RadioButton _activeBtnCache;
 
@@ -98,61 +78,32 @@ namespace GTweak.Windows
                 }
                 else
                 {
-                    IntPtr hwnd = new WindowInteropHelper(this).Handle;
-                    ReleaseCapture();
-                    SendMessage(hwnd, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);
+                    this.Drag();
                 }
 
                 Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = false; TitleButtonsPanel.IsHitTestVisible = true; }));
             }
         }
 
-        private void TitleButton_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e) => Close();
+
+        private void ButtonMaximize_Click(object sender, RoutedEventArgs e) => HandleWindowState();
+
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e) => HandleWindowState(true);
+
+        private void TglButtonSettings_Click(object sender, RoutedEventArgs e)
         {
-            switch ((sender as FrameworkElement)?.Name)
+            SettingsPanel.CacheMode = new BitmapCache { RenderAtScale = 1 };
+            if (SettingsPanel.RenderTransform is TranslateTransform transform)
             {
-                case nameof(ButtonClose):
-                    Close();
-                    break;
-                case nameof(ButtonMaximize):
-                    HandleWindowState();
-                    break;
-                case nameof(ButtonMinimize):
-                    HandleWindowState(true);
-                    break;
-                case nameof(TglButtonSettings):
-                    SettingsPanel.CacheMode = new BitmapCache { RenderAtScale = 1 };
-                    if (SettingsPanel.RenderTransform is TranslateTransform transform)
-                    {
-                        transform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, () => { SettingsPanel.CacheMode = null; }, useCubicEase: true));
-                    }
-                    break;
-                case nameof(TglButtonTheme):
-                    GlobalOptions.SelfReboot();
-                    Visibility = Visibility.Collapsed;
-                    break;
-                default:
-                    break;
+                transform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, () => { SettingsPanel.CacheMode = null; }, useCubicEase: true));
             }
         }
-        #endregion
 
-        #region Settings Panel
-        private void BtnExport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => GlobalOptions.SaveFileConfig();
-
-        private void BtnImport_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => GlobalOptions.OpenFileConfig();
-
-        private void BtnDelete_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => GlobalOptions.SelfRemoval();
-
-        private void BtnContacts_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void TglButtonTheme_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(((System.Windows.Controls.Image)sender).Uid switch
-            {
-                "git" => PathTargets.Links.GitHub,
-                "tg" => PathTargets.Links.Telegram,
-                _ => PathTargets.Links.Steam
-            })
-            { UseShellExecute = true });
+            Visibility = Visibility.Collapsed;
+            GlobalOptions.SelfReboot();
         }
         #endregion
 
@@ -202,14 +153,25 @@ namespace GTweak.Windows
 
                         if (targetOffset != viewTop)
                         {
-                            SetCurrentVerticalOffset(NavScroll, viewTop);
-                            NavScroll.BeginAnimation(CurrentVerticalOffsetProperty, AnimationFactory.CreateIn(viewTop, targetOffset, 0.5, useCubicEase: true));
+                            ScrollViewerBehavior.SetVerticalOffset(NavScroll, viewTop);
+                            NavScroll.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, AnimationFactory.CreateIn(viewTop, targetOffset, 0.5, useCubicEase: true));
                         }
                     }
                 }), DispatcherPriority.Loaded);
             }
         }
         #endregion
+
+        private void BtnContacts_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(((System.Windows.Controls.Image)sender).Uid switch
+            {
+                "git" => PathTargets.Links.GitHub,
+                "tg" => PathTargets.Links.Telegram,
+                _ => PathTargets.Links.Steam
+            })
+            { UseShellExecute = true });
+        }
 
         private void BtnUpdate_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

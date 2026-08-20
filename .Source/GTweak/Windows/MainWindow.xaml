@@ -77,11 +77,11 @@
             </Grid>
 
             <StackPanel x:Name="TitleButtonsPanel" Grid.Column="2" Margin="0,0,0,2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <ToggleButton x:Name="TglButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}" Click="TitleButton_Click"/>
-                <ToggleButton x:Name="TglButtonSettings" IsChecked="False" Style="{StaticResource TglSettings}" Margin="0,0,10,0" Click="TitleButton_Click"/>
-                <Button x:Name="ButtonMinimize" Style="{StaticResource ButtonMinimize}" Click="TitleButton_Click"/>
-                <Button x:Name="ButtonMaximize" Style="{StaticResource ButtonMaximize}" Click="TitleButton_Click"/>
-                <Button x:Name="ButtonClose" Style="{StaticResource ButtonClose}" Margin="0,0,5,0" Click="TitleButton_Click"/>
+                <ToggleButton x:Name="TglButtonTheme" IsChecked="{Binding StateButtonTheme}" Style="{StaticResource TglThemeSwitch}" Click="TglButtonTheme_Click"/>
+                <ToggleButton x:Name="TglButtonSettings" IsChecked="False" Style="{StaticResource TglSettings}" Margin="0,0,10,0" Click="TglButtonSettings_Click"/>
+                <Button x:Name="ButtonMinimize" Style="{StaticResource ButtonMinimize}" Click="ButtonMinimize_Click"/>
+                <Button x:Name="ButtonMaximize" Style="{StaticResource ButtonMaximize}" Click="ButtonMaximize_Click"/>
+                <Button x:Name="ButtonClose" Style="{StaticResource ButtonClose}" Margin="0,0,5,0" Click="ButtonClose_Click"/>
             </StackPanel>
 
         </Grid>
@@ -162,7 +162,7 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Grid.Column="0" Style="{StaticResource ButtonContent}" Height="34" PreviewMouseLeftButtonUp="BtnExport_PreviewMouseLeftButtonUp">
+                                        <Button Grid.Column="0" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding ExportConfigCommand}">
                                             <StackPanel Orientation="Horizontal">
                                                 <Image>
                                                     <Image.Style>
@@ -175,7 +175,7 @@
                                             </StackPanel>
                                         </Button>
 
-                                        <Button Grid.Column="2" Style="{StaticResource ButtonContent}" Height="34" PreviewMouseLeftButtonUp="BtnImport_PreviewMouseLeftButtonUp">
+                                        <Button Grid.Column="2" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding ImportConfigCommand}">
                                             <StackPanel Orientation="Horizontal">
                                                 <Image>
                                                     <Image.Style>
@@ -189,7 +189,7 @@
                                         </Button>
                                     </Grid>
 
-                                    <Button Margin="0,8,0,0" Style="{StaticResource ButtonContent}" Height="34" PreviewMouseLeftButtonUp="BtnDelete_PreviewMouseLeftButtonUp">
+                                    <Button Margin="0,8,0,0" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding SelfRemovalCommand}">
                                         <StackPanel Orientation="Horizontal">
                                             <Image>
                                                 <Image.Style>

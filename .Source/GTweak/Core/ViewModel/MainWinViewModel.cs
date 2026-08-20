@@ -127,6 +127,10 @@ namespace GTweak.Core.ViewModel
             }
         }
 
+        public ICommand ExportConfigCommand { get; set; }
+        public ICommand ImportConfigCommand { get; set; }
+        public ICommand SelfRemovalCommand { get; set; }
+
         public ICommand NavigateToUtilsCommand { get; set; }
         public ICommand NavigateToConfidentialityCommand { get; set; }
         public ICommand NavigateToInterfaceCommand { get; set; }
@@ -155,6 +159,10 @@ namespace GTweak.Core.ViewModel
             };
 
             CurrentView = new UtilsView();
+
+            ExportConfigCommand = new RelayCommand(obj => GlobalOptions.SaveFileConfig());
+            ImportConfigCommand = new RelayCommand(obj => GlobalOptions.OpenFileConfig());
+            SelfRemovalCommand = new RelayCommand(obj => GlobalOptions.SelfRemoval());
 
             NavigateToUtilsCommand = new RelayCommand(NavigateToUtils);
             NavigateToConfidentialityCommand = new RelayCommand(NavigateToConfidentiality);

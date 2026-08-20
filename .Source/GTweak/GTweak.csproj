@@ -225,6 +225,7 @@
     <Compile Include="Modules\Configuration\HardwareData.cs" />
     <Compile Include="Modules\Helpers\ControlDictionaryExtensions.cs" />
     <Compile Include="Modules\Helpers\UnlockHandleHelper.cs" />
+    <Compile Include="Modules\Helpers\WindowExtensions.cs" />
     <Compile Include="Modules\Maintenance\MemoryCleaner.cs" />
     <Compile Include="Modules\Maintenance\RegistryExporter.cs" />
     <Compile Include="Modules\Managers\BluetoothManager.cs" />

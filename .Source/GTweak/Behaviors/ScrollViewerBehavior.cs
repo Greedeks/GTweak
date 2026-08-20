@@ -8,8 +8,8 @@ namespace GTweak.Behaviors
         internal static readonly DependencyProperty VerticalOffsetProperty =
             DependencyProperty.RegisterAttached("VerticalOffset", typeof(double), typeof(ScrollViewerBehavior), new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnVerticalOffsetChanged));
 
-        internal static double GetVerticalOffset(ScrollViewer viewer) => (double)(viewer?.GetValue(VerticalOffsetProperty) ?? 0.0);
-        internal static void SetVerticalOffset(ScrollViewer viewer, double value) => viewer?.SetValue(VerticalOffsetProperty, value);
+        internal static double GetVerticalOffset(DependencyObject d) => (double)(d?.GetValue(VerticalOffsetProperty) ?? 0.0);
+        internal static void SetVerticalOffset(DependencyObject d, double value) => d?.SetValue(VerticalOffsetProperty, value);
 
         private static void OnVerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
