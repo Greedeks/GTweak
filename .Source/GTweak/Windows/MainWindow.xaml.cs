@@ -19,6 +19,7 @@ namespace GTweak.Windows
 {
     public partial class MainWindow : FluentWindow
     {
+        private static readonly BitmapCache _bitmapCache = new BitmapCache { RenderAtScale = 1, EnableClearType = false };
         private bool _ignoreMouseClick = false;
         private RadioButton _activeBtnCache;
 
@@ -93,10 +94,14 @@ namespace GTweak.Windows
 
         private void TglButtonSettings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsPanel.CacheMode = new BitmapCache { RenderAtScale = 1 };
+            SettingsPanel.CacheMode = _bitmapCache;
+
             if (SettingsPanel.RenderTransform is TranslateTransform transform)
             {
-                transform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateIn(transform.X, TglButtonSettings.IsChecked.Value ? 0 : 400, 0.5, () => { SettingsPanel.CacheMode = null; }, useCubicEase: true));
+                Dispatcher.InvokeAsync(() =>
+                {
+                    transform.BeginAnimation(TranslateTransform.XProperty, AnimationFactory.CreateIn(transform.X, TglButtonSettings.IsChecked == true ? 0 : 400, 0.5, () => { SettingsPanel.CacheMode = null; }, useCubicEase: true));
+                }, DispatcherPriority.Render);
             }
         }
 
@@ -196,10 +201,10 @@ namespace GTweak.Windows
                 await Task.Delay(500);
 
                 UpdateBanner.Visibility = Visibility.Visible;
-                UpdateBanner.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 1, 0.3));
+                UpdateBanner.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 1, 0.2));
                 if (UpdateBanner.RenderTransform is TranslateTransform transform)
                 {
-                    transform.BeginAnimation(TranslateTransform.YProperty, AnimationFactory.CreateIn(-20, 0, 0.3, () => { UpdateBanner.CacheMode = null; }, useCubicEase: true));
+                    transform.BeginAnimation(TranslateTransform.YProperty, AnimationFactory.CreateIn(-20, 0, 0.3, useCubicEase: true));
                 }
             }
         }

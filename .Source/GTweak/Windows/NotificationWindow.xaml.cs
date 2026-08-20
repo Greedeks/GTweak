@@ -3,6 +3,8 @@ using System.Media;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
 using GTweak.Animations;
 using GTweak.Modules.Common;
 using GTweak.Modules.Helpers;
@@ -13,6 +15,7 @@ namespace GTweak.Windows
 {
     public partial class NotificationWindow : FluentWindow
     {
+        private static readonly BitmapCache _bitmapCache = new BitmapCache { RenderAtScale = 1, EnableClearType = false };
         private NotificationManager.NoticeAction _requiredAction = default;
         private TimerControlManager _timer = default;
         private Rect primaryMonitorArea = SystemParameters.WorkArea;
@@ -38,12 +41,17 @@ namespace GTweak.Windows
             {
                 if (GlobalOptions.IsPlayingSound)
                 {
-                    using SoundPlayer notificationSound = new SoundPlayer(Properties.Resources.Sound);
+                    var notificationSound = new SoundPlayer(Properties.Resources.Sound);
                     notificationSound.Play();
                 }
 
-                BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 1, 0.2));
-                BeginAnimation(LeftProperty, AnimationFactory.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.35, () => { CacheMode = null; }, useCubicEase: true));
+                CacheMode = _bitmapCache;
+
+                Dispatcher.InvokeAsync(() =>
+                {
+                    BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0, 1, 0.2));
+                    BeginAnimation(LeftProperty, AnimationFactory.CreateIn(primaryMonitorArea.Right + 10, primaryMonitorArea.Right - Width - 10, 0.35, () => { CacheMode = null; }, useCubicEase: true));
+                }, DispatcherPriority.Render);
 
                 _timer = new TimerControlManager(TimeSpan.FromSeconds(3), TimerControlManager.TimerMode.CountDown, null, () => { Close(); });
                 _timer.Start();

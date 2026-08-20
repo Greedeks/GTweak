@@ -92,158 +92,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border x:Name="SettingsPanel" Panel.ZIndex="10" Grid.Column="1" Width="400" HorizontalAlignment="Right" RenderTransformOrigin="1,0" Opacity="0.97" Background="{StaticResource Brush_Background}">
-                <Border.RenderTransform>
-                    <TranslateTransform X="400"/>
-                </Border.RenderTransform>
-                <Border.OpacityMask>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Color="Transparent" Offset="0.0"/>
-                        <GradientStop Color="Black" Offset="0.03"/>
-                        <GradientStop Color="Black" Offset="1.0"/>
-                    </LinearGradientBrush>
-                </Border.OpacityMask>
-
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <Grid Width="400" Margin="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0">
-                            <TextBlock FontFamily="{StaticResource Jura}" Text="{DynamicResource title_settings_main}" Foreground="{StaticResource Brush_Accent}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
-                                <TextBlock.Effect>
-                                    <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
-                                </TextBlock.Effect>
-                                <TextBlock.CacheMode>
-                                    <BitmapCache RenderAtScale="2" EnableClearType="True"/>
-                                </TextBlock.CacheMode>
-                            </TextBlock>
-                            <Border Background="{StaticResource Brush_Separator}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10" Margin="0,50,0,0"/>
-                        </Grid>
-                        
-                        <Grid Grid.Row="1">
-                            <StackPanel Orientation="Vertical">
-                                <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                    <uc:ToggleButton x:Name="BtnNotification" State="{Binding IsViewNotification}" TextResource="{DynamicResource btgl_noty_main}"/>
-                                </Viewbox>
-
-                                <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                    <uc:ToggleButton x:Name="BtnUpdate" State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource btgl_update_main}"/>
-                                </Viewbox>
-
-                                <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                    <uc:ToggleButton x:Name="BtnTopMost" State="{Binding IsTopMost}" TextResource="{DynamicResource btgl_toast_main}"/>
-                                </Viewbox>
-
-                                <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                                        <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource slider_volume_main}"/>
-                                        <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}"/>
-                                        <Slider x:Name="SliderVolume" Style="{StaticResource Percent_Slider}" Value="{Binding CurrentVolume}" IsSnapToTickEnabled="True" Minimum="1" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12"/>
-                                    </StackPanel>
-                                </Viewbox>
-
-                                <uc:FlowPanel ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="40,10,5,0">
-                                    <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource cmbox_lang_main}" Margin="0,5,0,0"/>
-                                    <ComboBox Style="{StaticResource CustomComboBoxStyle}" Height="32" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display"/>
-                                </uc:FlowPanel>
-
-                                <Border Background="{StaticResource Brush_Separator}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10" Margin="0,10,0,0"/>
-
-                                <StackPanel Orientation="Vertical" Margin="0,12,0,0" Width="330">
-
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="8"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Button Grid.Column="0" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding ExportConfigCommand}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image>
-                                                    <Image.Style>
-                                                        <Style TargetType="{x:Type Image}">
-                                                            <Setter Property="Source" Value="{StaticResource Icon_Export}"/>
-                                                        </Style>
-                                                    </Image.Style>
-                                                </Image>
-                                                <TextBlock Text="{DynamicResource btn_export}" Margin="7,0,0,0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Button>
-
-                                        <Button Grid.Column="2" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding ImportConfigCommand}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image>
-                                                    <Image.Style>
-                                                        <Style TargetType="{x:Type Image}">
-                                                            <Setter Property="Source" Value="{StaticResource Icon_Import}"/>
-                                                        </Style>
-                                                    </Image.Style>
-                                                </Image>
-                                                <TextBlock Text="{DynamicResource btn_import}" Margin="7,0,0,0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Button>
-                                    </Grid>
-
-                                    <Button Margin="0,8,0,0" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding SelfRemovalCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image>
-                                                <Image.Style>
-                                                    <Style TargetType="{x:Type Image}">
-                                                        <Setter Property="Source" Value="{StaticResource Icon_SelfRemoval}"/>
-                                                    </Style>
-                                                </Image.Style>
-                                            </Image>
-                                            <TextBlock Text="{DynamicResource btn_selfremove}" Margin="7,0,0,0" VerticalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Button>
-
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
-
-                        <Grid Grid.Row="2" VerticalAlignment="Bottom" Margin="0,50,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="20,0,0,10" HorizontalAlignment="Left">
-                                <Image x:Uid="git" Width="31" Height="auto" Cursor="Hand" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageHover}">
-                                            <Setter Property="Source" Value="{StaticResource Icon_Git}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <Image x:Uid="tg" Width="31" Height="auto" Cursor="Hand" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageHover}">
-                                            <Setter Property="Source" Value="{StaticResource Icon_Telegram}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <Image x:Uid="steam" Width="31" Height="auto" Cursor="Hand" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp">
-                                    <Image.Style>
-                                        <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageHover}">
-                                            <Setter Property="Source" Value="{StaticResource Icon_Steam}"/>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                            </StackPanel>
-
-                            <TextBlock Grid.Column="1" Style="{StaticResource TextInactivity}" FontFamily="{StaticResource Play}" FontSize="12" Foreground="{StaticResource Brush_Inactive}" Text="{Binding DisplayTweakVersion}" VerticalAlignment="Center" Margin="0,0,20,10" HorizontalAlignment="Right"/>
-                        </Grid>
-
-                    </Grid>
-
-                </ScrollViewer>
-            </Border>
-
             <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" CornerRadius="10" Margin="10,15,0,50" IsHitTestVisible="False">
                 <Border.RenderTransform>
                     <TranslateTransform X="2" Y="4" />
@@ -323,7 +171,159 @@
 
         </Grid>
 
-        <Grid x:Name="UpdateBanner" Grid.Row="2" Panel.ZIndex="200" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" Visibility="Collapsed" Opacity="0" CacheMode="BitmapCache" d:CacheMode="{x:Null}">
+        <Border x:Name="SettingsPanel" Panel.ZIndex="10" Grid.Row="1" Width="400" HorizontalAlignment="Right" RenderTransformOrigin="1,0" Opacity="0.97" Background="{StaticResource Brush_Background}">
+            <Border.RenderTransform>
+                <TranslateTransform X="400"/>
+            </Border.RenderTransform>
+            <Border.OpacityMask>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="Transparent" Offset="0.0"/>
+                    <GradientStop Color="Black" Offset="0.03"/>
+                    <GradientStop Color="Black" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Border.OpacityMask>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <Grid Width="400" Margin="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <TextBlock FontFamily="{StaticResource Jura}" Text="{DynamicResource title_settings_main}" Foreground="{StaticResource Brush_Accent}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="20" ShadowDepth="1" Direction="-90" Color="{StaticResource Color_Shadow}" />
+                            </TextBlock.Effect>
+                            <TextBlock.CacheMode>
+                                <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                            </TextBlock.CacheMode>
+                        </TextBlock>
+                        <Border Background="{StaticResource Brush_Separator}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10" Margin="0,50,0,0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Vertical">
+                            <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
+                                <uc:ToggleButton x:Name="BtnNotification" State="{Binding IsViewNotification}" TextResource="{DynamicResource btgl_noty_main}"/>
+                            </Viewbox>
+
+                            <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
+                                <uc:ToggleButton x:Name="BtnUpdate" State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource btgl_update_main}"/>
+                            </Viewbox>
+
+                            <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
+                                <uc:ToggleButton x:Name="BtnTopMost" State="{Binding IsTopMost}" TextResource="{DynamicResource btgl_toast_main}"/>
+                            </Viewbox>
+
+                            <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                    <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource slider_volume_main}"/>
+                                    <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}"/>
+                                    <Slider x:Name="SliderVolume" Style="{StaticResource Percent_Slider}" Value="{Binding CurrentVolume}" IsSnapToTickEnabled="True" Minimum="1" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12"/>
+                                </StackPanel>
+                            </Viewbox>
+
+                            <uc:FlowPanel ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="40,10,5,0">
+                                <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource cmbox_lang_main}" Margin="0,5,0,0"/>
+                                <ComboBox Style="{StaticResource CustomComboBoxStyle}" Height="32" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay}" SelectedValuePath="Code" DisplayMemberPath="Display"/>
+                            </uc:FlowPanel>
+
+                            <Border Background="{StaticResource Brush_Separator}" Height="1.2" Width="330" VerticalAlignment="Bottom"  CornerRadius="10" Margin="0,10,0,0"/>
+
+                            <StackPanel Orientation="Vertical" Margin="0,12,0,0" Width="330">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="0" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding ExportConfigCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image>
+                                                <Image.Style>
+                                                    <Style TargetType="{x:Type Image}">
+                                                        <Setter Property="Source" Value="{StaticResource Icon_Export}"/>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <TextBlock Text="{DynamicResource btn_export}" Margin="7,0,0,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Grid.Column="2" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding ImportConfigCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image>
+                                                <Image.Style>
+                                                    <Style TargetType="{x:Type Image}">
+                                                        <Setter Property="Source" Value="{StaticResource Icon_Import}"/>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                            <TextBlock Text="{DynamicResource btn_import}" Margin="7,0,0,0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                                <Button Margin="0,8,0,0" Style="{StaticResource ButtonContent}" Height="34" Command="{Binding SelfRemovalCommand}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image>
+                                            <Image.Style>
+                                                <Style TargetType="{x:Type Image}">
+                                                    <Setter Property="Source" Value="{StaticResource Icon_SelfRemoval}"/>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                        <TextBlock Text="{DynamicResource btn_selfremove}" Margin="7,0,0,0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2" VerticalAlignment="Bottom" Margin="0,50,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="20,0,0,10" HorizontalAlignment="Left">
+                            <Image x:Uid="git" Width="31" Height="auto" Cursor="Hand" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp">
+                                <Image.Style>
+                                    <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageHover}">
+                                        <Setter Property="Source" Value="{StaticResource Icon_Git}"/>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <Image x:Uid="tg" Width="31" Height="auto" Cursor="Hand" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp">
+                                <Image.Style>
+                                    <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageHover}">
+                                        <Setter Property="Source" Value="{StaticResource Icon_Telegram}"/>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <Image x:Uid="steam" Width="31" Height="auto" Cursor="Hand" PreviewMouseLeftButtonUp="BtnContacts_PreviewMouseLeftButtonUp">
+                                <Image.Style>
+                                    <Style TargetType="{x:Type Image}" BasedOn="{StaticResource ImageHover}">
+                                        <Setter Property="Source" Value="{StaticResource Icon_Steam}"/>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </StackPanel>
+
+                        <TextBlock Grid.Column="1" Style="{StaticResource TextInactivity}" FontFamily="{StaticResource Play}" FontSize="12" Foreground="{StaticResource Brush_Inactive}" Text="{Binding DisplayTweakVersion}" VerticalAlignment="Center" Margin="0,0,20,10" HorizontalAlignment="Right"/>
+                    </Grid>
+
+                </Grid>
+
+            </ScrollViewer>
+        </Border>
+
+        <Grid x:Name="UpdateBanner" Grid.Row="1" Panel.ZIndex="200" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" Visibility="Collapsed" Opacity="0" CacheMode="BitmapCache" d:CacheMode="{x:Null}">
             <Grid.RenderTransform>
                 <TranslateTransform Y="-20"/>
             </Grid.RenderTransform>
