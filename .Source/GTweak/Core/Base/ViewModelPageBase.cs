@@ -1,21 +1,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using GTweak.Core.Interfaces;
 
 namespace GTweak.Core.Base
 {
-    internal interface IBasePageItem
-    {
-        string Name { get; set; }
-        bool State { get; set; }
-    }
-
-    internal interface ITypedPageItem<T> : IBasePageItem
-    {
-        T Value { get; set; }
-    }
-
     internal abstract class ViewModelPageBase<TModel, TTweaksClass> : ViewModelBase
-        where TModel : IBasePageItem, new()
+        where TModel : IPageItem, new()
         where TTweaksClass : new()
     {
         private ObservableCollection<TModel> _toggles;

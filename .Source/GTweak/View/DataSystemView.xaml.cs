@@ -8,7 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Animations;
-using GTweak.Core.Base;
+using GTweak.Core.Interfaces;
 using GTweak.Core.ViewModel;
 using GTweak.Modules.Common;
 using GTweak.Modules.Configuration;
@@ -16,7 +16,7 @@ using GTweak.Modules.Managers;
 
 namespace GTweak.View
 {
-    public partial class DataSystemView : UserControl, IViewPageBase
+    public partial class DataSystemView : UserControl, IViewMarker
     {
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
         private readonly BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using GTweak.Animations;
 using GTweak.Behaviors;
@@ -32,6 +33,34 @@ namespace GTweak.Assets.UserControls
         {
             get => (bool?)GetValue(TargetStateProperty);
             set => SetValue(TargetStateProperty, value);
+        }
+
+        internal object ContentSource
+        {
+            set
+            {
+                TargetState = null;
+                string newText = DefaultText;
+
+                switch (value)
+                {
+                    case ToggleButton btn:
+                        TargetState = btn.State;
+                        newText = btn.Description?.ToString() ?? string.Empty;
+                        break;
+                    case System.Windows.Controls.Primitives.ToggleButton btn:
+                        newText = btn.ToolTip?.ToString() ?? string.Empty;
+                        break;
+                    case StackPanel panel:
+                        newText = panel.ToolTip?.ToString() ?? string.Empty;
+                        break;
+                }
+
+                if (_currentDefaultText != newText)
+                {
+                    Text = newText;
+                }
+            }
         }
 
         internal string Text

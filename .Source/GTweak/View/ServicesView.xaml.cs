@@ -2,13 +2,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
-using GTweak.Core.Base;
+using GTweak.Core.Interfaces;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
 
 namespace GTweak.View
 {
-    public partial class ServicesView : UserControl, IViewPageBase
+    public partial class ServicesView : UserControl, IViewMarker
     {
         private readonly ServicesTweaks _svcTweaks = new ServicesTweaks();
 
@@ -17,26 +17,14 @@ namespace GTweak.View
             InitializeComponent();
         }
 
-        private void Tweak_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (sender is ToggleButton tglButton && DescBlock.Text != tglButton.Description?.ToString())
-            {
-                DescBlock.Text = tglButton.Description?.ToString() ?? string.Empty;
-                DescBlock.TargetState = tglButton.State;
-            }
-        }
-
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
-        {
-            DescBlock.Text = DescBlock.DefaultText;
-            DescBlock.TargetState = null;
-        }
+        private void Tweak_MouseEnter(object sender, MouseEventArgs e) => DescBlock.ContentSource = sender;
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.ContentSource = null;
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton tglButton = (ToggleButton)sender;
 
-            DescBlock.TargetState = tglButton.State;
+            DescBlock.ContentSource = tglButton;
 
             _svcTweaks.Apply(tglButton.Name, tglButton.State);
 

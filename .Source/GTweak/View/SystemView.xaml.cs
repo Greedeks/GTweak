@@ -2,14 +2,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
-using GTweak.Core.Base;
+using GTweak.Core.Interfaces;
 using GTweak.Modules.Helpers;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
 
 namespace GTweak.View
 {
-    public partial class SystemView : UserControl, IViewPageBase
+    public partial class SystemView : UserControl, IViewMarker
     {
         private readonly SystemTweaks _sysTweaks = new SystemTweaks();
 
@@ -18,34 +18,8 @@ namespace GTweak.View
             InitializeComponent();
         }
 
-        private void Tweak_MouseEnter(object sender, MouseEventArgs e)
-        {
-            string description = string.Empty;
-            bool? state = null;
-
-            switch (sender)
-            {
-                case StackPanel panel:
-                    description = panel.ToolTip?.ToString() ?? string.Empty;
-                    break;
-                case ToggleButton tglButton:
-                    description = tglButton.Description?.ToString() ?? string.Empty;
-                    state = tglButton.State;
-                    break;
-            }
-
-            if (DescBlock.Text != description)
-            {
-                DescBlock.Text = description;
-                DescBlock.TargetState = state;
-            }
-        }
-
-        private void Tweak_MouseLeave(object sender, MouseEventArgs e)
-        {
-            DescBlock.Text = DescBlock.DefaultText;
-            DescBlock.TargetState = null;
-        }
+        private void Tweak_MouseEnter(object sender, MouseEventArgs e) => DescBlock.ContentSource = sender;
+        private void Tweak_MouseLeave(object sender, MouseEventArgs e) => DescBlock.ContentSource = null;
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => _sysTweaks.Apply(((Slider)sender).Name, (uint)((Slider)sender).Value);
 
@@ -53,7 +27,7 @@ namespace GTweak.View
         {
             ToggleButton tglButton = (ToggleButton)sender;
 
-            DescBlock.TargetState = tglButton.State;
+            DescBlock.ContentSource = tglButton;
 
             if (tglButton.Name != "TglButton3")
             {

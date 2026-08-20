@@ -1,8 +1,8 @@
 using System.ComponentModel;
 
-namespace GTweak.Core.Base
+namespace GTweak.Core.Interfaces
 {
     [ToolboxItem(false)]
     [DesignTimeVisible(false)]
-    internal interface IViewPageBase { }
+    internal interface IViewMarker { }
 }

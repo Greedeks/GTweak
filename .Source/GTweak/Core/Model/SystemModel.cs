@@ -1,4 +1,4 @@
-﻿using GTweak.Core.Base;
+using GTweak.Core.Interfaces;
 
 namespace GTweak.Core.Model
 {

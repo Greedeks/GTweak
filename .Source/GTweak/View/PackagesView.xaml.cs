@@ -4,14 +4,14 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
-using GTweak.Core.Base;
+using GTweak.Core.Interfaces;
 using GTweak.Modules.Common;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
 
 namespace GTweak.View
 {
-    public partial class PackagesView : UserControl, IViewPageBase
+    public partial class PackagesView : UserControl, IViewMarker
     {
         private TimerControlManager _timer = default;
         private readonly BackgroundQueueManager _backgroundQueue = new BackgroundQueueManager();
@@ -48,17 +48,8 @@ namespace GTweak.View
             };
         }
 
-        private void Package_MouseEnter(object sender, MouseEventArgs e)
-        {
-            string description = ((ToggleButton)sender).ToolTip?.ToString() ?? string.Empty;
-
-            if (DescBlock.Text != description)
-            {
-                DescBlock.Text = description;
-            }
-        }
-
-        private void Package_MouseLeave(object sender, MouseEventArgs e) => DescBlock.Text = DescBlock.DefaultText;
+        private void Package_MouseEnter(object sender, MouseEventArgs e) => DescBlock.ContentSource = sender;
+        private void Package_MouseLeave(object sender, MouseEventArgs e) => DescBlock.ContentSource = null;
 
         private async void ToggleButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

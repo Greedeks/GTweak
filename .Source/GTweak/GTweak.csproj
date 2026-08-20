@@ -188,7 +188,8 @@
       <DependentUpon>ToolsetCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\ShaderEffects\ColorWheelEffect.cs" />
-    <Compile Include="Core\Base\IViewPageBase.cs" />
+    <Compile Include="Core\Interfaces\IPageItem.cs" />
+    <Compile Include="Core\Interfaces\IViewMarker.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Converters\AngleToPercentConverter.cs" />
     <Compile Include="Converters\PercentToWidthConverter.cs" />

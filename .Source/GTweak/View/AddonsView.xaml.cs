@@ -1,12 +1,12 @@
 using System;
 using System.Windows.Controls;
-using GTweak.Core.Base;
+using GTweak.Core.Interfaces;
 using GTweak.Core.ViewModel;
 using GTweak.Modules.Managers;
 
 namespace GTweak.View
 {
-    public partial class AddonsView : UserControl, IViewPageBase
+    public partial class AddonsView : UserControl, IViewMarker
     {
         private TimerControlManager _timer = default;
         public AddonsView()
