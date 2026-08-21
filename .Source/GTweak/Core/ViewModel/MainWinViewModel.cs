@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -15,10 +16,11 @@ namespace GTweak.Core.ViewModel
 {
     internal class MainWinViewModel : ViewModelBase
     {
-        public ObservableCollection<MainWinModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWinModel.LanguageItem>();
-
         private readonly MainWinModel _model = new MainWinModel();
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
+        private readonly Dictionary<Type, object> _viewCache = new Dictionary<Type, object>();
+
+        public ObservableCollection<MainWinModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWinModel.LanguageItem>();
 
         public object CurrentView
         {
@@ -127,58 +129,50 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        public ICommand ExportConfigCommand { get; set; }
-        public ICommand ImportConfigCommand { get; set; }
-        public ICommand SelfRemovalCommand { get; set; }
+        public ICommand ExportConfigCommand { get; }
+        public ICommand ImportConfigCommand { get; }
+        public ICommand SelfRemovalCommand { get; }
 
-        public ICommand NavigateToUtilsCommand { get; set; }
-        public ICommand NavigateToConfidentialityCommand { get; set; }
-        public ICommand NavigateToInterfaceCommand { get; set; }
-        public ICommand NavigateToPackagesCommand { get; set; }
-        public ICommand NavigateToServicesCommand { get; set; }
-        public ICommand NavigateToSystemCommand { get; set; }
-        public ICommand NavigateToDataSystemCommand { get; set; }
-        public ICommand NavigateToAddonsCommand { get; set; }
-        public ICommand NavigateToToolsetCommand { get; set; }
-
-        private void NavigateToUtils(object obj) => CurrentView = new UtilsView();
-        private void NavigateToConfidentiality(object obj) => CurrentView = new ConfidentialityViewModel();
-        private void NavigateToInterface(object obj) => CurrentView = new InterfaceViewModel();
-        private void NavigateToPackages(object obj) => CurrentView = new PackagesViewModel();
-        private void NavigateToServices(object obj) => CurrentView = new ServicesViewModel();
-        private void NavigateToSystem(object obj) => CurrentView = new SystemViewModel();
-        private void NavigateToDataSystem(object obj) => CurrentView = new DataSystemViewModel();
-        private void NavigateToAddons(object obj) => CurrentView = new AddonsViewModel();
-        private void NavigateToToolset(object obj) => CurrentView = new ToolsetViewModel();
+        public ICommand NavigateToUtilsCommand { get; }
+        public ICommand NavigateToConfidentialityCommand { get; }
+        public ICommand NavigateToInterfaceCommand { get; }
+        public ICommand NavigateToPackagesCommand { get; }
+        public ICommand NavigateToServicesCommand { get; }
+        public ICommand NavigateToSystemCommand { get; }
+        public ICommand NavigateToDataSystemCommand { get; }
+        public ICommand NavigateToAddonsCommand { get; }
+        public ICommand NavigateToToolsetCommand { get; }
 
         public MainWinViewModel()
         {
             App.TweaksImported += delegate
             {
-                CurrentView = new UtilsView();
+                CurrentView = GetView<UtilsView>();
             };
 
-            CurrentView = new UtilsView();
+            CurrentView = GetView<UtilsView>();
 
             ExportConfigCommand = new RelayCommand(obj => GlobalOptions.SaveFileConfig());
             ImportConfigCommand = new RelayCommand(obj => GlobalOptions.OpenFileConfig());
             SelfRemovalCommand = new RelayCommand(obj => GlobalOptions.SelfRemoval());
 
-            NavigateToUtilsCommand = new RelayCommand(NavigateToUtils);
-            NavigateToConfidentialityCommand = new RelayCommand(NavigateToConfidentiality);
-            NavigateToInterfaceCommand = new RelayCommand(NavigateToInterface);
-            NavigateToPackagesCommand = new RelayCommand(NavigateToPackages);
-            NavigateToServicesCommand = new RelayCommand(NavigateToServices);
-            NavigateToSystemCommand = new RelayCommand(NavigateToSystem);
-            NavigateToDataSystemCommand = new RelayCommand(NavigateToDataSystem);
-            NavigateToAddonsCommand = new RelayCommand(NavigateToAddons);
-            NavigateToToolsetCommand = new RelayCommand(NavigateToToolset);
+            NavigateToUtilsCommand = new RelayCommand(_ => CurrentView = GetView<UtilsView>());
+            NavigateToConfidentialityCommand = new RelayCommand(_ => CurrentView = GetView<ConfidentialityViewModel>());
+            NavigateToInterfaceCommand = new RelayCommand(_ => CurrentView = GetView<InterfaceViewModel>());
+            NavigateToPackagesCommand = new RelayCommand(_ => CurrentView = GetView<PackagesViewModel>());
+            NavigateToServicesCommand = new RelayCommand(_ => CurrentView = GetView<ServicesViewModel>());
+            NavigateToSystemCommand = new RelayCommand(_ => CurrentView = GetView<SystemViewModel>());
+            NavigateToDataSystemCommand = new RelayCommand(_ => CurrentView = GetView<DataSystemViewModel>());
+            NavigateToAddonsCommand = new RelayCommand(_ => CurrentView = GetView<AddonsViewModel>());
+            NavigateToToolsetCommand = new RelayCommand(_ => CurrentView = GetView<ToolsetViewModel>());
 
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() => { FillLanguages(); }));
             }
         }
+
+        private T GetView<T>() where T : new() => (T)(_viewCache.TryGetValue(typeof(T), out var v) ? v : _viewCache[typeof(T)] = new T());
 
         private void FillLanguages()
         {

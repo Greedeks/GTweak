@@ -71,19 +71,10 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is ToggleButton tbtn)
-            {
-                tbtn.UpdateToggleState((bool)e.NewValue, !tbtn._isUserAction);
-            }
-        }
-
         private const double _leftPositionX = -12.0, _rightPositionX = 12.0;
         private bool _isUserAction = false;
 
-        private readonly SolidColorBrush brushOffColor = new SolidColorBrush(), brushOnColor = new SolidColorBrush(),
-            borderOffColor = new SolidColorBrush(), borderOnColor = new SolidColorBrush();
+        private readonly SolidColorBrush brushOffColor = new SolidColorBrush(), brushOnColor = new SolidColorBrush(), borderOffColor = new SolidColorBrush(), borderOnColor = new SolidColorBrush();
 
         private Color _dotColorOn = (Color)Application.Current.Resources["Color_ToggleDot_On"], _dotColorOff = (Color)Application.Current.Resources["Color_ToggleDot_Off"];
 
@@ -105,6 +96,14 @@ namespace GTweak.Assets.UserControls
             IsEnabledChanged += ToggleButton_IsEnabledChanged;
 
             UpdateToggleState(State, true);
+        }
+
+        private static void OnStateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ToggleButton tbtn)
+            {
+                tbtn.UpdateToggleState((bool)e.NewValue, !tbtn._isUserAction);
+            }
         }
 
         private void ApplyResource(object value, DependencyProperty dp, DependencyProperty textProperty = null, FrameworkElement target = null)
@@ -150,36 +149,6 @@ namespace GTweak.Assets.UserControls
                         }
                         break;
                 }
-            }
-        }
-
-        private void ToggleButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (Back != null && Dot != null && ToggleText != null)
-            {
-                if (e.NewValue is bool newBool && !newBool)
-                {
-                    Back.Opacity = 0.7;
-                    Dot.Opacity = 0.7;
-                    ToggleText.Opacity = 0.7;
-                }
-                else
-                {
-                    Back.Opacity = 1.0;
-                    Dot.Opacity = 1.0;
-                    ToggleText.Opacity = 1.0;
-                }
-            }
-        }
-
-        private void Toggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (IsEnabled)
-            {
-                _isUserAction = true;
-                State = !State;
-                _isUserAction = false;
-                RaiseEvent(new RoutedEventArgs(ChangedStateEvent));
             }
         }
 
@@ -261,6 +230,25 @@ namespace GTweak.Assets.UserControls
             if (ToggleText != null && TryFindResource(textStyle) is Style foundStyle)
             {
                 ToggleText.Style = foundStyle;
+            }
+        }
+
+        private void ToggleButton_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Back != null && Dot != null && ToggleText != null)
+            {
+                Back.Opacity = Dot.Opacity = ToggleText.Opacity = (double)(e.NewValue is bool newBool && !newBool ? 0.7 : 1.0);
+            }
+        }
+
+        private void Toggle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (IsEnabled)
+            {
+                _isUserAction = true;
+                State = !State;
+                _isUserAction = false;
+                RaiseEvent(new RoutedEventArgs(ChangedStateEvent));
             }
         }
 

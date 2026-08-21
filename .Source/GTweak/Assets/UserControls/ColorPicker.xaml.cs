@@ -43,6 +43,23 @@ namespace GTweak.Assets.UserControls
             set => SetValue(SelectedColorStringProperty, value);
         }
 
+        private const double WheelSize = 150.0, WheelRadius = WheelSize / 2.0;
+
+        private static readonly char[] ColorSeparators = { ' ', ',', ';' };
+        private static readonly Regex HexRegex = new Regex("[^0-9a-fA-F]", RegexOptions.Compiled);
+        private static readonly MethodInfo UpdatePositionMethod = typeof(Popup).GetMethod("UpdatePosition", BindingFlags.NonPublic | BindingFlags.Instance);
+
+        private bool _isWheelBeingDragged, _isValueBeingDragged, _isUpdatingFromProperty, _isUpdatingHexValue;
+        private double _selectedWheelX, _selectedWheelY, _currentHue, _currentSaturation, _currentValue = 1.0;
+        private Color _colorOnOpen;
+        private Window _parentWindow;
+        private readonly List<ScrollViewer> _subscribedScrollViewers = new List<ScrollViewer>();
+
+        public ColorPicker()
+        {
+            InitializeComponent();
+        }
+
         private static void OnSelectedColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ColorPicker picker && e.NewValue is Color newColor && !picker._isUpdatingFromProperty)
@@ -67,23 +84,6 @@ namespace GTweak.Assets.UserControls
                     picker._isUpdatingFromProperty = prevPropFlag;
                 }
             }
-        }
-
-        private const double WheelSize = 150.0, WheelRadius = WheelSize / 2.0;
-
-        private static readonly char[] ColorSeparators = { ' ', ',', ';' };
-        private static readonly Regex HexRegex = new Regex("[^0-9a-fA-F]", RegexOptions.Compiled);
-        private static readonly MethodInfo UpdatePositionMethod = typeof(Popup).GetMethod("UpdatePosition", BindingFlags.NonPublic | BindingFlags.Instance);
-
-        private bool _isWheelBeingDragged, _isValueBeingDragged, _isUpdatingFromProperty, _isUpdatingHexValue;
-        private double _selectedWheelX, _selectedWheelY, _currentHue, _currentSaturation, _currentValue = 1.0;
-        private Color _colorOnOpen;
-        private Window _parentWindow;
-        private readonly List<ScrollViewer> _subscribedScrollViewers = new List<ScrollViewer>();
-
-        public ColorPicker()
-        {
-            InitializeComponent();
         }
 
         private void UpdateColorFromWheel(Point mousePosition)
@@ -165,7 +165,9 @@ namespace GTweak.Assets.UserControls
                         rawHexInput = rawHexInput.PadRight(6, lastCharacter);
                     }
 
-                    if (byte.TryParse(rawHexInput.Substring(0, 2), NumberStyles.HexNumber, null, out byte r) && byte.TryParse(rawHexInput.Substring(2, 2), NumberStyles.HexNumber, null, out byte g) && byte.TryParse(rawHexInput.Substring(4, 2), NumberStyles.HexNumber, null, out byte b))
+                    if (byte.TryParse(rawHexInput.Substring(0, 2), NumberStyles.HexNumber, null, out byte r) &&
+                        byte.TryParse(rawHexInput.Substring(2, 2), NumberStyles.HexNumber, null, out byte g) &&
+                        byte.TryParse(rawHexInput.Substring(4, 2), NumberStyles.HexNumber, null, out byte b))
                     {
                         Color parsedColor = Color.FromRgb(r, g, b);
                         bool prevHexFlag = _isUpdatingHexValue;
@@ -251,6 +253,7 @@ namespace GTweak.Assets.UserControls
             {
                 sv.ScrollChanged -= ParentScrollViewer_ScrollChanged;
             }
+
             _subscribedScrollViewers.Clear();
         }
 
@@ -310,27 +313,27 @@ namespace GTweak.Assets.UserControls
             return Color.FromRgb((byte)(calcR * 255.0), (byte)(calcG * 255.0), (byte)(calcB * 255.0));
         }
 
-        private void UpdatePositionProxy(object s, EventArgs e) => UpdatePopupPosition();
-        private void ParentWindow_MovedOrResized(object sender, EventArgs e) => UpdatePopupPosition();
-        private void TglArrow_Checked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = true;
-        private void TglArrow_Unchecked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = false;
-        private void TglArrow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) => e.Handled = true;
+        private void OnParentWindowChanged(object sender, EventArgs e) => UpdatePopupPosition();
 
-        private void BtnDefault_Click(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            Color def = DefaultColor;
-            SelectedColor = def;
-            UpdateHsvFromColor(def);
-            NotifyColorChanged(def);
+            UpdateHsvFromColor(SelectedColor);
+            _parentWindow = Window.GetWindow(this);
+            if (_parentWindow != null)
+            {
+                _parentWindow.LocationChanged += OnParentWindowChanged;
+                _parentWindow.SizeChanged += OnParentWindowChanged;
+            }
         }
 
-        private void ColorPopup_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            if (_parentWindow != null)
             {
-                ColorPopup.IsOpen = false;
-                e.Handled = true;
+                _parentWindow.LocationChanged -= OnParentWindowChanged;
+                _parentWindow.SizeChanged -= OnParentWindowChanged;
             }
+            UnsubscribeFromScrollParents();
         }
 
         private void ColorPopup_Opened(object sender, EventArgs e)
@@ -356,12 +359,33 @@ namespace GTweak.Assets.UserControls
             }
         }
 
+        private void ColorPopup_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                ColorPopup.IsOpen = false;
+                e.Handled = true;
+            }
+        }
+
         private void ParentScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if ((e.VerticalChange != 0 || e.HorizontalChange != 0) && ColorPopup?.IsOpen == true)
             {
                 ColorPopup.IsOpen = false;
             }
+        }
+
+        private void TglArrow_Checked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = true;
+        private void TglArrow_Unchecked(object sender, RoutedEventArgs e) => ColorPopup.IsOpen = false;
+        private void TglArrow_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e) => e.Handled = true;
+
+        private void BtnDefault_Click(object sender, RoutedEventArgs e)
+        {
+            Color def = DefaultColor;
+            SelectedColor = def;
+            UpdateHsvFromColor(def);
+            NotifyColorChanged(def);
         }
 
         private void ColorWheel_MouseDown(object sender, MouseButtonEventArgs e)
@@ -406,17 +430,6 @@ namespace GTweak.Assets.UserControls
             PART_ValueCanvas?.ReleaseMouseCapture();
         }
 
-        private void HexBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e?.Key == Key.Enter)
-            {
-                ApplyHexColor();
-                HexBox?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-            }
-        }
-
-        private void HexBox_LostFocus(object sender, RoutedEventArgs e) => ApplyHexColor();
-
         private void HexBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (_isUpdatingHexValue)
@@ -442,25 +455,15 @@ namespace GTweak.Assets.UserControls
             }
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void HexBox_KeyDown(object sender, KeyEventArgs e)
         {
-            UpdateHsvFromColor(SelectedColor);
-            _parentWindow = Window.GetWindow(this);
-            if (_parentWindow != null)
+            if (e?.Key == Key.Enter)
             {
-                _parentWindow.LocationChanged += UpdatePositionProxy;
-                _parentWindow.SizeChanged += UpdatePositionProxy;
+                ApplyHexColor();
+                HexBox?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            if (_parentWindow != null)
-            {
-                _parentWindow.LocationChanged -= UpdatePositionProxy;
-                _parentWindow.SizeChanged -= UpdatePositionProxy;
-            }
-            UnsubscribeFromScrollParents();
-        }
+        private void HexBox_LostFocus(object sender, RoutedEventArgs e) => ApplyHexColor();
     }
 }

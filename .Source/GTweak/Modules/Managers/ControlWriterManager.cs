@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace GTweak.Modules.Managers
@@ -21,27 +20,28 @@ namespace GTweak.Modules.Managers
             Slider = new GenericCollection<object>(_controlStates, "Slider");
             ColorPicker = new GenericCollection<object>(_controlStates, "ColorPicker");
         }
+
         internal class GenericCollection<T>
         {
             private readonly string _prefix;
             private readonly Dictionary<string, object> _controlStates;
-            private readonly ConcurrentDictionary<int, string> _keyCache = new ConcurrentDictionary<int, string>();
+            private readonly string[] _keyCache;
 
-            internal GenericCollection(Dictionary<string, object> controlStates, string prefix)
+            internal GenericCollection(Dictionary<string, object> controlStates, string prefix, int capacity = 64)
             {
                 _controlStates = controlStates;
                 _prefix = prefix;
+                _keyCache = new string[capacity];
             }
 
             internal T this[int index]
             {
                 set
                 {
-                    string key = _keyCache.GetOrAdd(index, i => $"{_prefix}{i}");
-
-                    if (_controlStates != null)
+                    if ((uint)index < (uint)_keyCache.Length)
                     {
-                        _controlStates[key] = value;
+                        _keyCache[index] ??= $"{_prefix}{index}";
+                        _controlStates[_keyCache[index]] = value;
                     }
                 }
             }
