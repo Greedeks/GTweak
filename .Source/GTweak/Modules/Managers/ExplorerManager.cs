@@ -22,6 +22,9 @@ namespace GTweak.Modules.Managers
         const uint WM_SETTINGCHANGE = 0x001A;
         const uint SMTO_ABORTIFHUNG = 0x0002;
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
         internal enum ExplorerAction { None, Refresh, Restart }
 
         internal static readonly Dictionary<Enum, ExplorerAction> IntfActions = new Dictionary<Enum, ExplorerAction>()
@@ -84,7 +87,7 @@ namespace GTweak.Modules.Managers
                 {
                     try
                     {
-                        await Task.Delay(500, token);
+                        await Task.Delay(300, token);
                         await _semaphore.WaitAsync(token);
 
                         try
@@ -98,18 +101,52 @@ namespace GTweak.Modules.Managers
 
                             foreach (Process process in Process.GetProcessesByName("explorer"))
                             {
-                                try { process.Kill(); }
+                                try
+                                {
+                                    process.Kill();
+                                    process.WaitForExit(1000);
+                                }
                                 finally { process.Dispose(); }
+                            }
+
+                            DateTime deadline = DateTime.UtcNow.AddMilliseconds(500);
+                            while (FindWindow("Progman", null) != IntPtr.Zero && DateTime.UtcNow < deadline)
+                            {
+                                await Task.Delay(50, CancellationToken.None);
                             }
 
                             try { capturedActions?.Invoke(); }
                             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
 
-                            using Process launchExplorer = new Process();
-                            launchExplorer.StartInfo.FileName = PathTargets.Executable.Explorer;
-                            launchExplorer.StartInfo.Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}";
-                            launchExplorer.StartInfo.UseShellExecute = true;
-                            launchExplorer.Start();
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = PathTargets.Executable.Explorer,
+                                Arguments = "/factory,{EFD469A7-7E0A-4517-8B39-45873948DA31}",
+                                UseShellExecute = true
+                            });
+
+                            int waitShellAlive = 20;
+                            bool shellStarted = false;
+                            while (waitShellAlive-- > 0)
+                            {
+                                await Task.Delay(100, CancellationToken.None);
+                                if (FindWindow("Shell_TrayWnd", null) != IntPtr.Zero)
+                                {
+                                    shellStarted = true;
+                                    break;
+                                }
+                            }
+
+                            if (!shellStarted)
+                            {
+                                Process.Start(new ProcessStartInfo
+                                {
+                                    FileName = PathTargets.Executable.Explorer,
+                                    UseShellExecute = true
+                                });
+                            }
+
+                            await Task.Delay(500, CancellationToken.None);
                         }
                         finally { _semaphore.Release(); }
                     }
