@@ -52,7 +52,6 @@
     <v:String x:Key="error_onedrive_noty">A OneDrive telepítőfájlja hiányzik, a helyreállítás lehetetlen</v:String>
     <v:String x:Key="warn_wd_noty">Várja meg a folyamat befejezését, majd a rendszer újraindulását.</v:String>
     <v:String x:Key="info_wd_noty">Eltart egy ideig, kérlek, várj egy kicsit</v:String>
-    <v:String x:Key="warn_firewall_noty">A tűzfal le van tiltva, kapcsolja be, és alkalmazza újra a módosítást</v:String>
     <v:String x:Key="ready_activate_noty">Az operációs rendszert nem kell aktiválni</v:String>
     <v:String x:Key="win_activate_noty">A Windows aktiválási folyamata elindult, eltart egy ideig</v:String>
     <v:String x:Key="success_activate_noty">Az aktiválás sikeres volt, újraindítás javasolt</v:String>
@@ -218,8 +217,7 @@
     <v:String x:Key="chk_trash_intf">Lomtár</v:String>
     <v:String x:Key="chk_panel_intf">Vezérlőpult</v:String>
     <v:String x:Key="chk_user_intf">Felhasználói fájlok</v:String>
-    
-    <!--not translated-->
+
     <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
     <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
     <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
@@ -262,7 +260,7 @@
     <v:String x:Key="exblock1_desc_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>
     <v:String x:Key="exblock2_desc_intf">Módosítja a rendszer megjelenítési szabályait a Fájlkezelőben, beleértve a rejtett elemek, kiterjesztések és meghajtók láthatóságát. Figyelem, a képernyő villoghat.</v:String>
     <v:String x:Key="exblock3_desc_intf">Módosítja a rendszerikonok megjelenítését az asztalon — ezek beépített rendszerobjektumok, nem rendes parancsikonok.</v:String>
-    <!--not translated--> <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">Ez a módosítás csökkenti a Minimalizálás, a Maximalizálás és a Bezárás gombok méretét, így kevésbé terjedelmesek. Beállítja az összes ablak méretét, beleértve a Fájlkezelőt, a Fényképeket, a böngészőket és más ismerős programokat.</v:String>
     <v:String x:Key="tgl2_desc_intf">Ez a beállítás növeli a szövegkurzor villogásának gyakoriságát. Alapértelmezés szerint a kurzor 530 ezredmásodpercenként villog.</v:String>
     <v:String x:Key="tgl3_desc_intf">A módosítás csökkenti a görgetősávok vastagságát a klasszikus Windows-alkalmazásokban, beleértve a File Explorert, a böngészőket és más régi programokat. Ez azonban nem érinti a modern interfészeket, mivel azok a rendszerbeállításoktól független saját vezérlőelemeiket használják.</v:String>
@@ -424,7 +422,7 @@
     <v:String x:Key="tgl8_desc_svc">Tiltsa le, ha nincs nyomtatója.</v:String>
     <v:String x:Key="tgl9_desc_svc">Tiltsa le, ha nincs szkenner.</v:String>
     <v:String x:Key="tgl10_desc_svc">Tiltsa le, ha nincs faxkészüléke.</v:String>
-    <!--not translated--> <v:String x:Key="tgl11_desc_svc">Tiltsa le, ha asztali számítógépe, laptopja vagy netbookja van. By default, these services are set to "Manual" start and do not run constantly. However, disabling them will crash the "Power" page in Windows Settings, as the system fails to poll the sensors when opened. The classic Control Panel will continue to work normally. If you need the modern Power settings, turn the services back on.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Tiltsa le, ha asztali számítógépe, laptopja vagy netbookja van. By default, these services are set to "Manual" start and do not run constantly. However, disabling them will crash the "Power" page in Windows Settings, as the system fails to poll the sensors when opened. The classic Control Panel will continue to work normally. If you need the modern Power settings, turn the services back on.</v:String>
     <v:String x:Key="tgl12_desc_svc">Tiltsa le, ha csak egy monitora van, és nem tervezi további monitorok csatlakoztatását.</v:String>
     <v:String x:Key="tgl13_desc_svc">Ha nem használja ezeket az alkalmazásokat, tiltsa le: „Virtuális asztalok”, „Az Ön telefonja” és az „Éjszakai fény”. Ez a szolgáltatás feldolgozza a felhasználói adatokat, és szinkronizálja azokat a Microsoft szerverekkel. A rendszer működése szempontjából nem kritikus, azonban egyes funkciók, például a Windows 10 „Éjszakai fény” funkciója, teljesen vagy részben leállhat, ha ezt a szolgáltatást letiltja.</v:String>
     <v:String x:Key="tgl14_desc_svc">Tiltsa le, ha nem használ vagy nem tervez helyi hálózatot használni.</v:String>

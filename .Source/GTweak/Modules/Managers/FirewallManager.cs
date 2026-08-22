@@ -64,7 +64,7 @@ namespace GTweak.Modules.Managers
                     ChangeRules(state, path, ruleName, NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT);
                 });
             }
-            catch { NotificationManager.Show("warn", "warn_firewall_noty").Perform(); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
 
@@ -99,7 +99,7 @@ namespace GTweak.Modules.Managers
         protected static void BlockSpyDomain(in bool state)
         {
             try { RulesHosts(state); }
-            catch { NotificationManager.Show("warn", "warn_firewall_noty").Perform(); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private static void RulesHosts(in bool state)

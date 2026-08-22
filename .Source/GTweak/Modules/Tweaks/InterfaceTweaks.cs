@@ -920,7 +920,7 @@ namespace GTweak.Modules.Tweaks
             {
                 if (_colorTweaks.TryGetValue((InterfaceColor)index, out var action))
                 {
-                    action.Apply(value);
+                    Task.Run(() => action.Apply(value));
                 }
             }
         }
@@ -933,14 +933,14 @@ namespace GTweak.Modules.Tweaks
             {
                 if (_tglTweaks.TryGetValue((InterfaceToggle)tglIndex, out var action))
                 {
-                    action.Apply(state);
+                    Task.Run(() => action.Apply(state));
                 }
             }
             else if (controlName.StartsWith("Checkbox") && int.TryParse(controlName.Substring(8), out int cbIndex))
             {
                 if (_cbTweaks.TryGetValue((InterfaceCheckbox)cbIndex, out var action))
                 {
-                    action.Apply(state);
+                    Task.Run(() => action.Apply(state));
                 }
             }
         }

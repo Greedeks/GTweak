@@ -630,7 +630,7 @@ namespace GTweak.Modules.Tweaks
 
                 if (_tglTweaks.TryGetValue(tweakKey, out var action))
                 {
-                    action.Apply(state);
+                    Task.Run(() => action.Apply(state));
                 }
             }
         }

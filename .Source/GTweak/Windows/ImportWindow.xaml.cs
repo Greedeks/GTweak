@@ -136,7 +136,7 @@ namespace GTweak.Windows
                                 _sysTweaks.Apply(tweak, Convert.ToBoolean(value), false);
                             });
 
-                            _isWDNotyNeed = true;
+                            _isWDNotyNeed = !Convert.ToBoolean(value);
                         }
                         else
                         {

@@ -52,7 +52,6 @@
     <v:String x:Key="error_onedrive_noty">OneDrive 설정 파일이 누락되어 복구가 불가능합니다</v:String>
     <v:String x:Key="warn_wd_noty">프로세스 완료 후 시스템 재시작을 기다립니다</v:String>
     <v:String x:Key="info_wd_noty">이 과정은 다소 시간이 걸리므로 잠시 기다려주세요</v:String>
-    <v:String x:Key="warn_firewall_noty">방화벽이 비활성화되어 있으면 방화벽을 켜고 다시 조정을 적용하세요</v:String>
     <v:String x:Key="ready_activate_noty">운영 체제를 활성화할 필요가 없습니다</v:String>
     <v:String x:Key="win_activate_noty">Windows 정품 인증 프로세스가 시작되었으며 시간이 다소 소요됩니다.</v:String>
     <v:String x:Key="success_activate_noty">활성화에 성공했습니다. 재부팅을 권장합니다</v:String>
@@ -219,7 +218,6 @@
     <v:String x:Key="chk_panel_intf">제어판</v:String>
     <v:String x:Key="chk_user_intf">사용자 파일</v:String>
 
-    <!--not translated-->
     <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
     <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
     <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
@@ -262,7 +260,7 @@
     <v:String x:Key="exblock1_desc_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다.</v:String>
     <v:String x:Key="exblock2_desc_intf">파일 탐색기에서 항목 표시 규칙을 변경합니다. 숨김 항목, 파일 확장자 및 드라이브 구조의 표시가 포함됩니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="exblock3_desc_intf">바탕 화면에 표시되는 시스템 아이콘을 변경합니다. 이들은 일반 바로가기와 달리 시스템에 내장된 항목입니다.</v:String>
-    <!--not translated--><v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">이 조정으로 축소, 확장, 닫기 버튼의 크기가 줄어들어 부피가 줄어듭니다. 탐색기, Windows 사진, 브라우저 및 기타 프로그램을 포함한 모든 창 크기를 조정합니다.</v:String>
     <v:String x:Key="tgl2_desc_intf">이 조정은 텍스트 커서의 깜박임 빈도를 가속화합니다. 기본적으로 530밀리초마다 깜박입니다.</v:String>
     <v:String x:Key="tgl3_desc_intf">이 조정으로 브라우저와 프로그램을 포함한 창에서 스크롤 막대의 두께가 더 얇아집니다.</v:String>
@@ -424,7 +422,7 @@
     <v:String x:Key="tgl8_desc_svc">프린터가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl9_desc_svc">스캐너가 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl10_desc_svc">팩스기가 없는 경우 비활성화합니다.</v:String>
-    <!--not translated--> <v:String x:Key="tgl11_desc_svc">데스크톱 컴퓨터, 노트북 또는 넷북을 사용하는 경우 비활성화합니다. By default, these services are set to "Manual" start and do not run constantly. However, disabling them will crash the "Power" page in Windows Settings, as the system fails to poll the sensors when opened. The classic Control Panel will continue to work normally. If you need the modern Power settings, turn the services back on.</v:String>
+    <v:String x:Key="tgl11_desc_svc">데스크톱 컴퓨터, 노트북 또는 넷북을 사용하는 경우 비활성화합니다. By default, these services are set to "Manual" start and do not run constantly. However, disabling them will crash the "Power" page in Windows Settings, as the system fails to poll the sensors when opened. The classic Control Panel will continue to work normally. If you need the modern Power settings, turn the services back on.</v:String>
     <v:String x:Key="tgl12_desc_svc">모니터가 하나뿐이고 추가 모니터를 연결할 계획이 없는 경우 비활성화합니다.</v:String>
     <v:String x:Key="tgl13_desc_svc">이 앱을 사용하지 않는 경우 비활성화합니다: «가상 데스크톱», «휴대폰», «야간 모드». 이 서비스는 사용자 데이터를 처리하여 Microsoft 서버와 동기화합니다. 시스템 작동에는 중요하지 않지만, Windows 10의 «나이트 라이트 »와 같은 일부 기능이 비활성화되면 완전히 또는 부분적으로 작동이 중단될 수 있습니다.</v:String>
     <v:String x:Key="tgl14_desc_svc">로컬 네트워크를 사용하지 않거나 사용할 계획이 없는 경우 비활성화합니다.</v:String>

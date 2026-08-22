@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 
@@ -11,14 +12,26 @@ namespace GTweak.Modules.Helpers
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool CloseHandle(IntPtr hObject);
 
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetCurrentProcess();
+
         [DllImport("advapi32.dll", ExactSpelling = true, SetLastError = true)]
-        private static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall, ref TokPrivLuid newst, int len, IntPtr prev, IntPtr relen);
+        private static extern bool AdjustTokenPrivileges(IntPtr htok, bool disall, ref TOKEN_PRIVILEGES newst, int len, IntPtr prev, IntPtr relen);
+
+        [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool LookupPrivilegeValue(string lpSystemName, string lpName, out LUID lpLuid);
 
         [DllImport("advapi32.dll", SetLastError = true)]
         private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
 
         [DllImport("advapi32.dll", SetLastError = true)]
+        private static extern bool DuplicateTokenEx(IntPtr hExistingToken, uint dwDesiredAccess, IntPtr lpTokenAttributes, SECURITY_IMPERSONATION_LEVEL ImpersonationLevel, TOKEN_TYPE TokenType, out IntPtr phNewToken);
+
+        [DllImport("advapi32.dll", SetLastError = true)]
         private static extern bool ImpersonateLoggedOnUser(IntPtr hToken);
+
+        [DllImport("advapi32.dll", SetLastError = true)]
+        private static extern bool RevertToSelf();
 
         [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern IntPtr OpenSCManager(string lpMachineName, string lpDatabaseName, uint dwDesiredAccess);
@@ -35,7 +48,7 @@ namespace GTweak.Modules.Helpers
         [DllImport("advapi32.dll", SetLastError = true)]
         private static extern bool CloseServiceHandle(IntPtr hSCObject);
 
-        [DllImport("kernel32.dll")]
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CreateProcess(string lpApplicationName, string lpCommandLine, ref SECURITY_ATTRIBUTES lpProcessAttributes, ref SECURITY_ATTRIBUTES lpThreadAttributes, bool bInheritHandles, uint dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory, [In] ref STARTUPINFOEX lpStartupInfo, out PROCESS_INFORMATION lpProcessInformation);
 
@@ -53,7 +66,11 @@ namespace GTweak.Modules.Helpers
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern void DeleteProcThreadAttributeList(IntPtr lpAttributeList);
 
+        private const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
+        private const uint TOKEN_QUERY = 0x0008;
+        private const uint TOKEN_DUPLICATE = 0x0002;
         private const uint MAXIMUM_ALLOWED = 0x02000000;
+        private const int SE_PRIVILEGE_ENABLED = 0x00000002;
 
         private const uint SC_MANAGER_CONNECT = 0x0001;
         private const uint SC_MANAGER_ENUMERATE_SERVICE = 0x0004;
@@ -65,6 +82,41 @@ namespace GTweak.Modules.Helpers
 
         private const uint PROC_THREAD_ATTRIBUTE_PARENT_PROCESS = 0x00020000;
         private const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
+
+        private enum SECURITY_IMPERSONATION_LEVEL
+        {
+            SecurityAnonymous,
+            SecurityIdentification,
+            SecurityImpersonation,
+            SecurityDelegation
+        }
+
+        private enum TOKEN_TYPE
+        {
+            TokenPrimary = 1,
+            TokenImpersonation
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct LUID
+        {
+            public uint LowPart;
+            public int HighPart;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct LUID_AND_ATTRIBUTES
+        {
+            public LUID Luid;
+            public uint Attributes;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct TOKEN_PRIVILEGES
+        {
+            public uint PrivilegeCount;
+            public LUID_AND_ATTRIBUTES Privileges;
+        }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SECURITY_ATTRIBUTES
@@ -120,14 +172,6 @@ namespace GTweak.Modules.Helpers
             internal uint dwThreadId;
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct TokPrivLuid
-        {
-            internal int Count;
-            internal long Luid;
-            internal int Attr;
-        }
-
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         private struct STARTUPINFOEX
         {
@@ -138,29 +182,55 @@ namespace GTweak.Modules.Helpers
         [Flags]
         private enum ProcessAccessFlags : uint
         {
-            All = 0x001F0FFF,
-            Terminate = 0x00000001,
-            CreateThread = 0x00000002,
-            VirtualMemoryOperation = 0x00000008,
-            VirtualMemoryRead = 0x00000010,
-            VirtualMemoryWrite = 0x00000020,
-            DuplicateHandle = 0x00000040,
-            CreateProcess = 0x000000080,
-            SetQuota = 0x00000100,
-            SetInformation = 0x00000200,
-            QueryInformation = 0x00000400,
-            QueryLimitedInformation = 0x00001000,
-            Synchronize = 0x00100000
+            CreateProcess = 0x00000080,
+            QueryLimitedInformation = 0x00001000
+        }
+
+        private static bool EnablePrivilege(string privilegeName)
+        {
+            if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr tokenHandle))
+            {
+                return false;
+            }
+
+            try
+            {
+                if (!LookupPrivilegeValue(null, privilegeName, out LUID luid))
+                {
+                    return false;
+                }
+
+                TOKEN_PRIVILEGES tp = new TOKEN_PRIVILEGES
+                {
+                    PrivilegeCount = 1,
+                    Privileges = new LUID_AND_ATTRIBUTES
+                    {
+                        Luid = luid,
+                        Attributes = SE_PRIVILEGE_ENABLED
+                    }
+                };
+
+                return AdjustTokenPrivileges(tokenHandle, false, ref tp, Marshal.SizeOf(tp), IntPtr.Zero, IntPtr.Zero);
+            }
+            finally
+            {
+                CloseHandle(tokenHandle);
+            }
         }
 
         private static bool IsProcessRunning(int processId)
         {
+            if (processId <= 0)
+            {
+                return false;
+            }
+
             try
             {
                 using Process process = Process.GetProcessById(processId);
-                return !process.HasExited;
+                return !process.HasExited && string.Equals(process.ProcessName, "TrustedInstaller", StringComparison.OrdinalIgnoreCase);
             }
-            catch (ArgumentException)
+            catch
             {
                 return false;
             }
@@ -168,39 +238,60 @@ namespace GTweak.Modules.Helpers
 
         private static bool ImpersonateSystem()
         {
-            IntPtr tokenHandle = IntPtr.Zero;
-            Process[] winlogonList = null;
+            EnablePrivilege("SeDebugPrivilege");
+            EnablePrivilege("SeImpersonatePrivilege");
+
+            IntPtr primaryToken = IntPtr.Zero;
+            IntPtr duplicateToken = IntPtr.Zero;
+            IntPtr winlogonHandle = IntPtr.Zero;
 
             try
             {
-                winlogonList = Process.GetProcessesByName("winlogon");
-                if (winlogonList.Length == 0)
+                int currentSession = Process.GetCurrentProcess().SessionId;
+                Process[] winlogons = Process.GetProcessesByName("winlogon");
+
+                Process targetWinlogon = winlogons.FirstOrDefault(p => p.SessionId == currentSession) ?? winlogons.FirstOrDefault();
+
+                if (targetWinlogon == null)
                 {
                     return false;
                 }
 
-                Process winlogon = winlogonList[0];
-
-                if (!OpenProcessToken(winlogon.Handle, MAXIMUM_ALLOWED, out tokenHandle))
+                winlogonHandle = OpenProcess(ProcessAccessFlags.QueryLimitedInformation, false, targetWinlogon.Id);
+                if (winlogonHandle == IntPtr.Zero)
                 {
                     return false;
                 }
 
-                return ImpersonateLoggedOnUser(tokenHandle);
+                if (!OpenProcessToken(winlogonHandle, TOKEN_DUPLICATE | TOKEN_QUERY, out primaryToken))
+                {
+                    return false;
+                }
+
+                if (!DuplicateTokenEx(primaryToken, MAXIMUM_ALLOWED, IntPtr.Zero,
+                    SECURITY_IMPERSONATION_LEVEL.SecurityImpersonation,
+                    TOKEN_TYPE.TokenImpersonation, out duplicateToken))
+                {
+                    return false;
+                }
+
+                return ImpersonateLoggedOnUser(duplicateToken);
             }
             finally
             {
-                if (winlogonList != null)
+                if (primaryToken != IntPtr.Zero)
                 {
-                    foreach (Process p in winlogonList)
-                    {
-                        p.Dispose();
-                    }
+                    CloseHandle(primaryToken);
                 }
 
-                if (tokenHandle != IntPtr.Zero)
+                if (duplicateToken != IntPtr.Zero)
                 {
-                    CloseHandle(tokenHandle);
+                    CloseHandle(duplicateToken);
+                }
+
+                if (winlogonHandle != IntPtr.Zero)
+                {
+                    CloseHandle(winlogonHandle);
                 }
             }
         }
@@ -242,7 +333,19 @@ namespace GTweak.Modules.Helpers
                 {
                     CloseServiceHandle(hService);
                     CloseServiceHandle(hSCManager);
-                    CommandExecutor.PID = (int)statusBuffer.dwProcessId;
+
+                    int pid = (int)statusBuffer.dwProcessId;
+                    if (pid <= 0)
+                    {
+                        Process ti = Process.GetProcessesByName("TrustedInstaller").FirstOrDefault();
+                        if (ti != null)
+                        {
+                            pid = ti.Id;
+                            ti.Dispose();
+                        }
+                    }
+
+                    CommandExecutor.PID = pid;
                     return;
                 }
             }
@@ -272,6 +375,12 @@ namespace GTweak.Modules.Helpers
 
                 try
                 {
+                    if (!IsProcessRunning(parentProcessId))
+                    {
+                        StartTrustedInstallerService();
+                        parentProcessId = CommandExecutor.PID;
+                    }
+
                     if (!impersonated)
                     {
                         impersonated = ImpersonateSystem();
@@ -282,12 +391,6 @@ namespace GTweak.Modules.Helpers
                         throw new Win32Exception("Failed to impersonate SYSTEM identity");
                     }
 
-                    if (!IsProcessRunning(parentProcessId))
-                    {
-                        StartTrustedInstallerService();
-                        parentProcessId = CommandExecutor.PID;
-                    }
-
                     attributeList = Marshal.AllocHGlobal((IntPtr)(long)lpSize);
 
                     if (!InitializeProcThreadAttributeList(attributeList, 1, 0, ref lpSize))
@@ -295,8 +398,7 @@ namespace GTweak.Modules.Helpers
                         throw new Win32Exception(Marshal.GetLastWin32Error());
                     }
 
-                    parentHandle = OpenProcess(ProcessAccessFlags.CreateProcess | ProcessAccessFlags.DuplicateHandle | ProcessAccessFlags.Synchronize, false, parentProcessId);
-
+                    parentHandle = OpenProcess(ProcessAccessFlags.CreateProcess, false, parentProcessId);
                     if (parentHandle == IntPtr.Zero)
                     {
                         throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -319,7 +421,7 @@ namespace GTweak.Modules.Helpers
                     SECURITY_ATTRIBUTES ps = new SECURITY_ATTRIBUTES { nLength = Marshal.SizeOf(typeof(SECURITY_ATTRIBUTES)) };
                     SECURITY_ATTRIBUTES ts = new SECURITY_ATTRIBUTES { nLength = Marshal.SizeOf(typeof(SECURITY_ATTRIBUTES)) };
 
-                    if (!CreateProcess(null, binaryPath, ref ps, ref ts, true, EXTENDED_STARTUPINFO_PRESENT, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo))
+                    if (!CreateProcess(null, binaryPath, ref ps, ref ts, false, EXTENDED_STARTUPINFO_PRESENT, IntPtr.Zero, null, ref siEx, out PROCESS_INFORMATION pInfo))
                     {
                         throw new Win32Exception(Marshal.GetLastWin32Error());
                     }
@@ -331,6 +433,7 @@ namespace GTweak.Modules.Helpers
                 catch (Exception ex)
                 {
                     lastException = ex;
+                    parentProcessId = 0;
                 }
                 finally
                 {
@@ -348,6 +451,11 @@ namespace GTweak.Modules.Helpers
                     {
                         DeleteProcThreadAttributeList(attributeList);
                         Marshal.FreeHGlobal(attributeList);
+                    }
+                    if (impersonated)
+                    {
+                        RevertToSelf();
+                        impersonated = false;
                     }
                 }
             }

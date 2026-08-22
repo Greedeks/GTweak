@@ -53,7 +53,7 @@ namespace GTweak.Modules.Managers
             [SystemToggle.MultiPlaneOverlay] = NoticeAction.Restart
         };
 
-        private static int _isNotificationOpen;
+        private static volatile int _isNotificationOpen;
 
         internal static NotificationBuilder Show(string titleKey = "", string textKey = "")
         {

@@ -154,27 +154,30 @@ namespace GTweak.Modules.Tweaks
                             ArchiveManager.Unarchive(PathTargets.Executable.DisablingWD, Properties.Resources.DisablingWD);
                         }
 
-                        if (canShowWindow)
+                        try
                         {
-                            OverlayWindow overlayWindow = new OverlayWindow();
-                            overlayWindow.Show();
-
-                            BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
-                            await backgroundQueue.QueueTask(delegate { NotificationManager.Show(state ? "info" : "warn", state ? "info_wd_noty" : "warn_wd_noty").Perform(); });
-                            await backgroundQueue.QueueTask(delegate { DefenderTweaks.SetProtectionState(state); });
-
-                            if (state)
+                            if (canShowWindow)
                             {
-                                await backgroundQueue.QueueTask(delegate { NotificationManager.Show().WithDelay(300).Restart(); });
-                                CommandExecutor.RunCommand($"/c timeout /t 10 && del /f \"{PathTargets.Executable.NSudo}\"");
-                            }
+                                OverlayWindow overlayWindow = new OverlayWindow();
+                                overlayWindow.Show();
 
-                            overlayWindow.Close();
+                                BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
+                                await backgroundQueue.QueueTask(delegate { NotificationManager.Show(state ? "info" : "warn", state ? "info_wd_noty" : "warn_wd_noty").Perform(); });
+                                await backgroundQueue.QueueTask(delegate { DefenderTweaks.SetProtectionState(state); });
+
+                                if (state)
+                                {
+                                    await backgroundQueue.QueueTask(delegate { NotificationManager.Show().WithDelay(300).Restart(); });
+                                }
+
+                                overlayWindow.Close();
+                            }
+                            else
+                            {
+                                DefenderTweaks.SetProtectionState(state);
+                            }
                         }
-                        else
-                        {
-                            DefenderTweaks.SetProtectionState(state);
-                        }
+                        catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                     }
                 ),
 
@@ -728,7 +731,7 @@ namespace GTweak.Modules.Tweaks
             {
                 if (_sliderTweaks.TryGetValue((SystemSlider)index, out var action))
                 {
-                    action.Apply(value);
+                    Task.Run(() => action.Apply(value));
                 }
             }
         }
@@ -744,7 +747,14 @@ namespace GTweak.Modules.Tweaks
             {
                 if (_tglTweaks.TryGetValue((SystemToggle)index, out var action))
                 {
-                    action.Apply(state, canShowWindow);
+                    if (index == (int)SystemToggle.WindowsDefender)
+                    {
+                        action.Apply(state, canShowWindow);
+                    }
+                    else
+                    {
+                        Task.Run(() => action.Apply(state, canShowWindow));
+                    }
                 }
             }
         }

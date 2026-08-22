@@ -52,7 +52,6 @@
     <v:String x:Key="error_onedrive_noty">OneDrive kurulum dosyası bulunamadı, kurtarma işlemi yapılamıyor</v:String>
     <v:String x:Key="warn_wd_noty">İşlemin tamamlanmasını bekleyin ve ardından sistemi yeniden başlatın</v:String>
     <v:String x:Key="info_wd_noty">Bu işlem biraz zaman alabilir, lütfen bekleyin</v:String>
-    <v:String x:Key="warn_firewall_noty">Güvenlik duvarınız kapalı. Lütfen açıp ayarı tekrar uygulayın</v:String>
     <v:String x:Key="ready_activate_noty">İşletim sisteminizin etkinleştirilmeye ihtiyacı yok</v:String>
     <v:String x:Key="win_activate_noty">Windows etkinleştirme işlemi başladı, tamamlanması biraz zaman alabilir</v:String>
     <v:String x:Key="success_activate_noty">Etkinleştirme başarılı! Sistemi yeniden başlatmanız önerilir</v:String>

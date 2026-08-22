@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using GTweak.Modules.Common;
 using Microsoft.Win32;
 
@@ -8,91 +7,77 @@ namespace GTweak.Modules.Helpers
 {
     internal sealed class RegistryHelper : TakingOwnership
     {
-        private static string GeneralRegistry(RegistryKey registrykey)
+        private static string GeneralRegistry(RegistryKey registrykey) => registrykey.Name switch
         {
-            return registrykey.Name switch
-            {
-                "HKEY_LOCAL_MACHINE" => $@"MACHINE\",
-                "HKEY_CLASSES_ROOT" => $@"CLASSES_ROOT\",
-                "HKEY_CURRENT_USER" => $@"CURRENT_USER\",
-                "HKEY_USERS" => $@"USERS\",
-                _ => $@"CURRENT_CONFIG\",
-            };
-        }
+            "HKEY_LOCAL_MACHINE" => @"MACHINE\",
+            "HKEY_CLASSES_ROOT" => @"CLASSES_ROOT\",
+            "HKEY_CURRENT_USER" => @"CURRENT_USER\",
+            "HKEY_USERS" => @"USERS\",
+            _ => @"CURRENT_CONFIG\",
+        };
 
         internal static void DeleteValue(RegistryKey registrykey, string subkey, string value, bool isTakingOwner = false)
         {
-            Task.Run(delegate
+            try
             {
-                if (registrykey.OpenSubKey(subkey) == null || registrykey.OpenSubKey(subkey)?.GetValue(value, null) == null)
+                using RegistryKey key = registrykey.OpenSubKey(subkey, true);
+                if (key?.GetValue(value, null) == null)
                 {
                     return;
                 }
 
-                try
+                if (isTakingOwner)
                 {
-                    if (isTakingOwner)
-                    {
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-                    }
-
-                    registrykey.OpenSubKey(subkey, true)?.DeleteValue(value);
+                    GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                 }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-            }).GetAwaiter().GetResult();
+
+                key.DeleteValue(value);
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         internal static void Write<T>(RegistryKey registrykey, string subkey, string name, T data, RegistryValueKind kind, bool isTakingOwner = false)
         {
-            Task.Run(delegate
+            try
             {
-                try
+                if (isTakingOwner)
                 {
-                    if (isTakingOwner)
-                    {
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-                    }
-
-                    registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
+                    GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                 }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-            }).GetAwaiter().GetResult();
+
+                registrykey.CreateSubKey(subkey, true)?.SetValue(name, data, kind);
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         internal static void CreateFolder(RegistryKey registrykey, string subkey)
         {
-            Task.Run(delegate
-            {
-                try { registrykey.CreateSubKey(subkey); }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-            }).GetAwaiter().GetResult();
+            try { registrykey.CreateSubKey(subkey); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         internal static void DeleteFolderTree(RegistryKey registrykey, string subkey, bool isTakingOwner = false)
         {
-            Task.Run(delegate
+            try
             {
-                try
+                if (isTakingOwner)
                 {
-                    if (isTakingOwner)
-                    {
-                        GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
-                    }
-
-                    using RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
-
-                    if (registryFolder != null)
-                    {
-                        foreach (string value in registryFolder.GetValueNames())
-                        {
-                            try { registryFolder.DeleteValue(value); }
-                            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-                        }
-                    }
-                    registrykey.DeleteSubKeyTree(subkey, false);
+                    GrantAdministratorsAccess($"{GeneralRegistry(registrykey)}{subkey}", SE_OBJECT_TYPE.SE_REGISTRY_KEY);
                 }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-            }).GetAwaiter().GetResult();
+
+                using RegistryKey registryFolder = registrykey.OpenSubKey(subkey, true);
+                if (registryFolder != null)
+                {
+                    foreach (string value in registryFolder.GetValueNames())
+                    {
+                        try { registryFolder.DeleteValue(value); }
+                        catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+                    }
+                }
+
+                registrykey.DeleteSubKeyTree(subkey, false);
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         internal static bool KeyExists(RegistryKey registryKey, string subKey, bool invert = false)
@@ -117,12 +102,12 @@ namespace GTweak.Modules.Helpers
 
         internal static bool CheckValueBytes(string subkey, string valueName, string expectedValue)
         {
-            if (!(Registry.GetValue(subkey, valueName, null) is byte[]))
+            if (!(Registry.GetValue(subkey, valueName, null) is byte[] bytes))
             {
                 return true;
             }
 
-            return string.Concat(Registry.GetValue(subkey, valueName, null) as byte[] ?? Array.Empty<byte>()) != expectedValue;
+            return string.Concat(bytes) != expectedValue;
         }
 
         internal static T GetValue<T>(string subKey, string valueName, T defaultValue)
@@ -131,24 +116,18 @@ namespace GTweak.Modules.Helpers
             {
                 object value = Registry.GetValue(subKey, valueName, null);
 
-                switch (value)
+                if (value == null)
                 {
-                    case null:
-                        return defaultValue;
-                    case T t:
-                        return t;
-                    default:
-                        break;
+                    return defaultValue;
+                }
+
+                if (value is T t)
+                {
+                    return t;
                 }
 
                 Type targetType = typeof(T);
-
-                if (targetType.IsEnum)
-                {
-                    return (T)Enum.Parse(targetType, value.ToString());
-                }
-
-                return (T)Convert.ChangeType(value, targetType);
+                return targetType.IsEnum ? (T)Enum.Parse(targetType, value.ToString()) : (T)Convert.ChangeType(value, targetType);
             }
             catch { return defaultValue; }
         }
@@ -164,7 +143,7 @@ namespace GTweak.Modules.Helpers
                 }
 
                 T result = new T();
-                foreach (var name in key.GetSubKeyNames())
+                foreach (string name in key.GetSubKeyNames())
                 {
                     result.Add(name);
                 }

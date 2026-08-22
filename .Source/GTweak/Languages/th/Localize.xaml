@@ -52,7 +52,6 @@
     <v:String x:Key="error_onedrive_noty">ไม่พบไฟล์ติดตั้ง OneDrive, ไม่สามารถกู้คืนได้</v:String>
     <v:String x:Key="warn_wd_noty">โปรดรอจนกระทั่งกระบวนการเสร็จสิ้น จากนั้นระบบจะรีสตาร์ท</v:String>
     <v:String x:Key="info_wd_noty">อาจใช้เวลาสักครู่, โปรดรอสักครู่</v:String>
-    <v:String x:Key="warn_firewall_noty">ไฟร์วอลล์ของคุณถูกปิดใช้งาน, โปรดเปิดใช้งานและใช้การปรับแต่งอีกครั้ง</v:String>
     <v:String x:Key="ready_activate_noty">ระบบปฏิบัติการของคุณไม่จำเป็นต้องเปิดใช้งาน</v:String>
     <v:String x:Key="win_activate_noty">กระบวนการเปิดใช้งาน Windows ได้เริ่มต้นแล้ว, อาจใช้เวลาสักครู่</v:String>
     <v:String x:Key="success_activate_noty">การเปิดใช้งานสำเร็จ, แนะนำให้รีสตาร์ทระบบ</v:String>

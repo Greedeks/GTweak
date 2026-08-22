@@ -15,7 +15,7 @@ namespace GTweak.Modules.Tweaks
 {
     internal sealed class AppxPackageHandler : TaskSchedulerManager
     {
-        private static bool _isLocalAccount = false;
+        private static volatile bool _isLocalAccount = false;
 
         internal static event Action DataChanged;
         internal static void OnPackagesChanged() => DataChanged?.Invoke();
@@ -135,9 +135,9 @@ namespace GTweak.Modules.Tweaks
                 if (isUnavailable.HasValue)
                 {
                     details.IsUnavailable = isUnavailable.Value;
+                    OnPackagesChanged();
                 }
 
-                OnPackagesChanged();
                 return details.IsUnavailable;
             }
 

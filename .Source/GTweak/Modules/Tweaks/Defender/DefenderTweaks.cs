@@ -146,7 +146,7 @@ namespace GTweak.Modules.Tweaks.Defender
             RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows defender\Windows defender Exploit Guard\Controlled Folder Access", "EnableControlledFolderAccess");
             RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection", "EnableNetworkProtection");
 
-            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathTargets.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide cmd /c " +
+            CommandExecutor.RunCommandAsTrustedInstaller($@"""{PathTargets.Executable.NSudo}"" -U:T -P:E -CreatePath:S -ShowWindowMode:Hide -Wait cmd /c " +
             @"reg delete HKLM\SYSTEM\CurrentControlSet\Services\WinDefend /v AutorunsDisabled /f & " +
             @"reg add HKLM\SYSTEM\CurrentControlSet\Services\wscsvc /v DelayedAutoStart /t REG_DWORD /d 1 /f & " +
             @"reg add ""HKLM\SYSTEM\CurrentControlSet\Services\WdFilter\Instances\WdFilter Instance"" /v Altitude /t REG_SZ /d 328010 /f & " +
@@ -189,6 +189,8 @@ namespace GTweak.Modules.Tweaks.Defender
 
             InvokePowerShell("Get-AppxPackage Microsoft.SecHealthUI -AllUsers | Reset-AppxPackage");
             InvokePowerShell(@"Get-AppXpackage Microsoft.WindowsDefender | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register ""$($_.InstallLocation)\AppXManifest.xml""}");
+
+            CommandExecutor.RunCommand($"/c timeout /t 10 && del /f \"{PathTargets.Executable.NSudo}\"");
         }
 
         private static void Deactivate()

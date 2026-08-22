@@ -52,7 +52,6 @@
     <v:String x:Key="error_onedrive_noty">קובץ ההתקנה של OneDrive חסר, השחזור בלתי אפשרי</v:String>
     <v:String x:Key="warn_wd_noty">המתן לסיום התהליך ולאחריו לאתחול המערכת</v:String>
     <v:String x:Key="info_wd_noty">זה ייקח זמן מה, אנא המתן מעט</v:String>
-    <v:String x:Key="warn_firewall_noty">חומת האש שלך מושבתת, הפעל אותה והחל את הטוויק שוב</v:String>
     <v:String x:Key="ready_activate_noty">מערכת ההפעלה שלך אינה זקוקה לאקטיבציה</v:String>
     <v:String x:Key="win_activate_noty">תהליך האקטיבציה של Windows החל, פעולה זו תיקח זמן מה</v:String>
     <v:String x:Key="success_activate_noty">האקטיבציה הצליחה, מומלץ לאתחל את המחשב</v:String>
