@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Interfaces;
+using GTweak.Modules.Common;
 using GTweak.Modules.Extensions;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
@@ -13,7 +14,7 @@ namespace GTweak.View
     public partial class InterfaceView : UserControl, IViewMarker
     {
         private readonly InterfaceTweaks _intfTweaks = new InterfaceTweaks();
-        private ExplorerManager.ExplorerAction _explorerAction = ExplorerManager.ExplorerAction.None;
+        private ExplorerManager.ShellType _shellType = ExplorerManager.ShellType.None;
 
         public InterfaceView()
         {
@@ -27,53 +28,38 @@ namespace GTweak.View
         {
             ColorPicker colorPicker = (ColorPicker)sender;
             _intfTweaks.Apply(colorPicker.Name, colorPicker.SelectedColorString);
-            NotificationManager.Show().WithDelay(300).Logout();
+            NotificationManager.Default().WithDelay(300).Logout();
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
             _intfTweaks.Apply(checkBox.Uid, checkBox.IsChecked == false);
-
-            if (ExplorerManager.IntfActions.TryGetAction(checkBox.Uid, out ExplorerManager.ExplorerAction explorerAction))
-            {
-                _explorerAction = explorerAction;
-            }
+            _shellType = checkBox.Uid.GetPostAction(typeof(InterfaceCheckbox)).Shell;
         }
 
         private void ExpandableBox_Closed(object sender, EventArgs e)
         {
-            switch (_explorerAction)
-            {
-                case ExplorerManager.ExplorerAction.Restart:
-                    ExplorerManager.Restart();
-                    break;
-                case ExplorerManager.ExplorerAction.Refresh:
-                    ExplorerManager.RefreshDesktop();
-                    break;
-                default:
-                    break;
-            }
-
-            _explorerAction = ExplorerManager.ExplorerAction.None;
+            ExplorerManager.Handle(_shellType);
+            _shellType = ExplorerManager.ShellType.None;
         }
 
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton tglButton = (ToggleButton)sender;
-
             DescBlock.ContentSource = tglButton;
-
             _intfTweaks.Apply(tglButton.Name, tglButton.State);
 
-            if (ExplorerManager.IntfActions.TryGetAction(tglButton.Name, out ExplorerManager.ExplorerAction explorerAction) && explorerAction == ExplorerManager.ExplorerAction.Restart)
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(InterfaceToggle));
+
+            if (postAction.HasShell())
             {
-                ExplorerManager.Restart();
+                ExplorerManager.Handle(postAction.Shell);
             }
 
-            if (NotificationManager.IntfActions.TryGetAction(tglButton.Name, out NotificationManager.NoticeAction noticeAction))
+            if (postAction.HasAlert())
             {
-                NotificationManager.Show().WithDelay(300).Perform(noticeAction);
+                NotificationManager.Default().WithDelay(300).Perform(postAction.Alert);
             }
         }
     }

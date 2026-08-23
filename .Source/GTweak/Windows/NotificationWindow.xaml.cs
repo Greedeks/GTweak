@@ -16,13 +16,13 @@ namespace GTweak.Windows
     public partial class NotificationWindow : FluentWindow
     {
         private static readonly BitmapCache _bitmapCache = new BitmapCache { RenderAtScale = 1, EnableClearType = false };
-        private NotificationManager.NoticeAction _requiredAction = default;
+        private NotificationManager.AlertType _alertType = default;
         private TimerControlManager _timer = default;
         private Rect primaryMonitorArea = SystemParameters.WorkArea;
 
         internal string NoticeTitle { set => Header.Text = value; get => Header.Text; }
         internal string NoticeText { set => MessageBody.Text = value; get => MessageBody.Text; }
-        internal NotificationManager.NoticeAction RequiredAction { set => _requiredAction = value; get => _requiredAction; }
+        internal NotificationManager.AlertType AlertType { set => _alertType = value; get => _alertType; }
 
         public NotificationWindow()
         {
@@ -63,9 +63,9 @@ namespace GTweak.Windows
 
         private void Grid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (RequiredAction != NotificationManager.NoticeAction.None)
+            if (AlertType != NotificationManager.AlertType.None)
             {
-                CommandExecutor.RunCommand(RequiredAction == NotificationManager.NoticeAction.Logout ? @"/c logoff" : @"/c shutdown /r /t 0");
+                CommandExecutor.RunCommand(AlertType == NotificationManager.AlertType.Logout ? @"/c logoff" : @"/c shutdown /r /t 0");
             }
         }
     }

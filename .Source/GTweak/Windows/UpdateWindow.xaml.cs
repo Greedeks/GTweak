@@ -49,7 +49,7 @@ namespace GTweak.Windows
             catch
             {
                 Close();
-                NotificationManager.Show("warn", "warn_update_noty").Perform();
+                NotificationManager.Warn("warn_update_noty").Perform();
             }
         }
     }

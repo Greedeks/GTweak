@@ -219,11 +219,12 @@
     <Compile Include="Behaviors\ScrollFadeBehavior.cs" />
     <Compile Include="Behaviors\ScrollViewerBehavior.cs" />
     <Compile Include="Behaviors\TextBoxClearBehavior.cs" />
+    <Compile Include="Modules\Common\PostActionAttribute.cs" />
     <Compile Include="Modules\Configuration\IconProvider.cs" />
     <Compile Include="Modules\Configuration\NetworkProvider.cs" />
     <Compile Include="Modules\Configuration\StorageTypeIdentifier.cs" />
     <Compile Include="Modules\Configuration\HardwareData.cs" />
-    <Compile Include="Modules\Extensions\ControlDictionaryExtensions.cs" />
+    <Compile Include="Modules\Extensions\PostActionExtensions.cs" />
     <Compile Include="Modules\Helpers\UnlockHandleHelper.cs" />
     <Compile Include="Modules\Extensions\WindowExtensions.cs" />
     <Compile Include="Modules\Maintenance\MemoryCleaner.cs" />

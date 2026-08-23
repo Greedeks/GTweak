@@ -51,7 +51,7 @@ namespace GTweak.Modules.Maintenance
                 _inParams = _restorePoint.GetMethodParameters("CreateRestorePoint");
                 if (_inParams == null)
                 {
-                    NotificationManager.Show("warn", "error_point_noty").Perform();
+                    NotificationManager.Warn("error_point_noty").Perform();
                     return;
                 }
 
@@ -62,16 +62,16 @@ namespace GTweak.Modules.Maintenance
 
                 if (_outParams != null && _outParams["ReturnValue"] is uint retCode && retCode == 0)
                 {
-                    NotificationManager.Show("info", "success_point_noty").WithDelay(300).Perform();
+                    NotificationManager.Info("success_point_noty").WithDelay(300).Perform();
                 }
                 else
                 {
-                    NotificationManager.Show("warn", "error_point_noty").WithDelay(300).Perform();
+                    NotificationManager.Warn("error_point_noty").WithDelay(300).Perform();
                 }
 
                 RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore", "SystemRestorePointCreationFrequency");
             }
-            catch { NotificationManager.Show("warn", "error_point_noty").Perform(); }
+            catch { NotificationManager.Warn("error_point_noty").Perform(); }
         }
 
         internal void StartRecovery()
@@ -85,7 +85,7 @@ namespace GTweak.Modules.Maintenance
 
                 CommandExecutor.RunCommand("/c rstrui.exe");
             }
-            catch { NotificationManager.Show("warn", "error_recovery_noty").Perform(); }
+            catch { NotificationManager.Warn("error_recovery_noty").Perform(); }
         }
 
         internal void DisableRestorePoint()
@@ -124,7 +124,7 @@ namespace GTweak.Modules.Maintenance
 
                 if (inParams == null)
                 {
-                    NotificationManager.Show("warn", errorKey).Perform();
+                    NotificationManager.Warn(errorKey).Perform();
                     return false;
                 }
 
@@ -135,7 +135,7 @@ namespace GTweak.Modules.Maintenance
 
                 if (outParams == null || !(outParams["ReturnValue"] is uint retCode) || retCode != 0)
                 {
-                    NotificationManager.Show("warn", errorKey).Perform();
+                    NotificationManager.Warn(errorKey).Perform();
                     return false;
                 }
 
@@ -143,7 +143,7 @@ namespace GTweak.Modules.Maintenance
             }
             catch (Exception)
             {
-                NotificationManager.Show("warn", errorKey).Perform();
+                NotificationManager.Warn(errorKey).Perform();
                 return false;
             }
         }

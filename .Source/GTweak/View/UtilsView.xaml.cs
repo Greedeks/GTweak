@@ -29,7 +29,7 @@ namespace GTweak.View
         {
             if (WinLicenseHandler.IsWindowsActivated)
             {
-                NotificationManager.Show("info", "ready_activate_noty").Perform();
+                NotificationManager.Info("ready_activate_noty").Perform();
             }
             else
             {
@@ -39,7 +39,7 @@ namespace GTweak.View
                 }
                 else
                 {
-                    NotificationManager.Show("warn", "network_activate_noty").Perform();
+                    NotificationManager.Warn("network_activate_noty").Perform();
                 }
             }
         }
@@ -48,13 +48,13 @@ namespace GTweak.View
         {
             OverlayWindow overlayWindow = new OverlayWindow();
             overlayWindow.Show();
-            NotificationManager.Show("info", "createpoint_noty").Perform();
+            NotificationManager.Info("createpoint_noty").Perform();
             BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
 
             if (_systemRestore == null)
             {
                 overlayWindow.Close();
-                NotificationManager.Show("warn", "error_point_noty").WithDelay(300).Perform();
+                NotificationManager.Warn("error_point_noty").WithDelay(300).Perform();
                 return;
             }
 
@@ -74,11 +74,11 @@ namespace GTweak.View
                 {
                     try { _systemRestore.DisableRestorePoint(); } catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                 });
-                await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "disable_recovery_noty").WithDelay(300).Perform(); });
+                await backgroundQueue.QueueTask(delegate { NotificationManager.Info("disable_recovery_noty").WithDelay(300).Perform(); });
             }
             else
             {
-                NotificationManager.Show("info", "warn_recovery_noty").Perform();
+                NotificationManager.Info("warn_recovery_noty").Perform();
             }
         }
 
@@ -91,11 +91,11 @@ namespace GTweak.View
                 {
                     try { _systemRestore.EnableRestorePoint(); } catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                 });
-                await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "enable_recovery_noty").WithDelay(300).Perform(); });
+                await backgroundQueue.QueueTask(delegate { NotificationManager.Info("enable_recovery_noty").WithDelay(300).Perform(); });
             }
             else
             {
-                NotificationManager.Show("info", "warn_point_enabled_noty").Perform();
+                NotificationManager.Info("warn_point_enabled_noty").Perform();
             }
         }
 
@@ -117,18 +117,18 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(delegate
                     {
                         try { _ntfsCompressor.SetCompression(selectedPath, true); }
-                        catch { NotificationManager.Show("warn", "error_compression_noty").Perform(); }
+                        catch { NotificationManager.Warn("error_compression_noty").Perform(); }
                     });
-                    await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "success_compression_noty").WithDelay(500).Perform(); });
+                    await backgroundQueue.QueueTask(delegate { NotificationManager.Info("success_compression_noty").WithDelay(500).Perform(); });
                 }
                 else
                 {
-                    NotificationManager.Show("info", "ready_compression_noty").Perform();
+                    NotificationManager.Info("ready_compression_noty").Perform();
                 }
             }
             else
             {
-                NotificationManager.Show("warn", "notsupport_ntfs_noty").Perform();
+                NotificationManager.Warn("notsupport_ntfs_noty").Perform();
             }
         }
 
@@ -150,19 +150,19 @@ namespace GTweak.View
                     await backgroundQueue.QueueTask(delegate
                     {
                         try { _ntfsCompressor.SetCompression(selectedPath, false); }
-                        catch { NotificationManager.Show("warn", "error_compression_noty").Perform(); }
+                        catch { NotificationManager.Warn("error_compression_noty").Perform(); }
 
                     });
-                    await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "success_decompression_noty").WithDelay(500).Perform(); });
+                    await backgroundQueue.QueueTask(delegate { NotificationManager.Info("success_decompression_noty").WithDelay(500).Perform(); });
                 }
                 else
                 {
-                    NotificationManager.Show("info", "ready_decompression_noty").Perform();
+                    NotificationManager.Info("ready_decompression_noty").Perform();
                 }
             }
             else
             {
-                NotificationManager.Show("warn", "notsupport_ntfs_noty").Perform();
+                NotificationManager.Warn("notsupport_ntfs_noty").Perform();
             }
         }
 
@@ -182,7 +182,7 @@ namespace GTweak.View
 
             BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
             await backgroundQueue.QueueTask(delegate { clearingMemory.StartMemoryCleanup((bool)_isWinOldRemoval); });
-            await backgroundQueue.QueueTask(delegate { NotificationManager.Show("info", "clear_ram_noty").WithDelay(500).Perform(); });
+            await backgroundQueue.QueueTask(delegate { NotificationManager.Info("clear_ram_noty").WithDelay(500).Perform(); });
         }
 
         private async void BtnRegExport_ClickButton(object sender, EventArgs e)

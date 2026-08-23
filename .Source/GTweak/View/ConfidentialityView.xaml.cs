@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Interfaces;
+using GTweak.Modules.Common;
 using GTweak.Modules.Extensions;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
@@ -29,9 +30,11 @@ namespace GTweak.View
 
             _confTweaks.Apply(tglButton.Name, tglButton.State);
 
-            if (NotificationManager.ConfActions.TryGetAction(tglButton.Name, out NotificationManager.NoticeAction action))
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(ConfidentialityToggle));
+
+            if (postAction.HasAlert())
             {
-                NotificationManager.Show().WithDelay(300).Perform(action);
+                NotificationManager.Default().WithDelay(300).Perform(postAction.Alert);
             }
         }
     }

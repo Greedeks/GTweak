@@ -19,56 +19,139 @@ namespace GTweak.Modules.Tweaks
 
     internal enum InterfaceCheckbox
     {
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         ExplorerHome = 1,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         ExplorerGallery,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         ExplorerOneDrive,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         HiddenFiles,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         SystemFiles,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FileExtensions,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         EmptyDrives,
+
+        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
         IconComputer,
+
+        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
         IconNetwork,
+
+        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
         IconRecycleBin,
+
+        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
         IconControlPanel,
+
+        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
         IconUserFiles,
+
+        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
         IconOneDrive,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FolderObjects3D,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FolderDesktop,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FolderDownloads,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FolderDocuments,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FolderPictures,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FolderMusic,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         FolderVideo
     }
 
     internal enum InterfaceToggle
     {
+        [PostAction(NotificationManager.AlertType.Logout)]
         SystemButtonSize = 1,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
         CursorFlickerFrequency,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
         ScrollbarSize,
+
         TaskbarTransparency,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         TaskbarDarkTheme,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         AppDarkTheme,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
         ContextMenuDelay,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
         TaskbarPreviewDelay,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
         IconOverlayBadges,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
         ShortcutNameSuffix,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         TaskbarAlignment,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         StartMenuLayout,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         CompactContextMenu,
+
         TipsSuggestions,
+
         CompactExplorerMode,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         CopilotRecall,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         TaskbarEndTask,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
         SnapLayouts,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         TaskbarIconsButtons,
+
         PersonalizedAds,
+
         RestoreFolderWindows,
+
         TipsNotifications,
+
         JpegWallpaperCompression,
+
         DesktopTooltips,
+
+        [PostAction(shell: ExplorerManager.ShellType.Restart)]
         BingStartSearch,
+
         OpenQuickAccess,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         AdaptiveBrightness
     }
 

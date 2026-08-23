@@ -28,7 +28,7 @@ namespace GTweak.View
 
             _svcTweaks.Apply(tglButton.Name, tglButton.State);
 
-            NotificationManager.Show().WithDelay(300).Restart();
+            NotificationManager.Default().WithDelay(300).Restart();
         }
     }
 }

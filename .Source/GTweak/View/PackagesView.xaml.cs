@@ -7,6 +7,7 @@ using System.Windows.Threading;
 using GTweak.Core.Interfaces;
 using GTweak.Modules.Common;
 using GTweak.Modules.Managers;
+using GTweak.Modules.Storage;
 using GTweak.Modules.Tweaks;
 
 namespace GTweak.View
@@ -60,11 +61,11 @@ namespace GTweak.View
             {
                 if (string.IsNullOrWhiteSpace(PathTargets.Executable.OneDriveSetup))
                 {
-                    NotificationManager.Show("warn", "error_onedrive_noty").Perform();
+                    NotificationManager.Warn("error_onedrive_noty").Perform();
                 }
                 else
                 {
-                    NotificationManager.Show("info", "success_onedrive_noty").Perform();
+                    NotificationManager.Info("success_onedrive_noty").Perform();
 
                     await _backgroundQueue.QueueTask(async () =>
                     {
@@ -101,10 +102,7 @@ namespace GTweak.View
 
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        if (ExplorerManager.PackageActions.TryGetValue(packageName, out ExplorerManager.ExplorerAction explorerAction))
-                        {
-                            ExplorerManager.Restart();
-                        }
+                        ExplorerManager.Handle(PackageStorage.PackagesDetails[packageName].ShellType);
                     }), DispatcherPriority.ApplicationIdle);
                 });
             }

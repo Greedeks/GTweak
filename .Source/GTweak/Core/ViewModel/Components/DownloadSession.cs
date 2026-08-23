@@ -104,10 +104,10 @@ namespace GTweak.Core.ViewModel.Components
                 switch (ex)
                 {
                     case Exception e when e.Message == "GitHubRateLimit":
-                        NotificationManager.Show("warn", "error_git_limit_noty").Perform();
+                        NotificationManager.Warn("error_git_limit_noty").Perform();
                         break;
                     case HttpRequestException _:
-                        NotificationManager.Show("warn", "error_download_noty").Perform();
+                        NotificationManager.Warn("error_download_noty").Perform();
                         break;
                     default:
                         ErrorLogger.LogDebug(ex);

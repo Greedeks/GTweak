@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Interfaces;
+using GTweak.Modules.Common;
 using GTweak.Modules.Extensions;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
@@ -26,21 +27,15 @@ namespace GTweak.View
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton tglButton = (ToggleButton)sender;
-
             DescBlock.ContentSource = tglButton;
 
-            if (tglButton.Name != "TglButton3")
-            {
-                _sysTweaks.Apply(tglButton.Name, tglButton.State);
+            _sysTweaks.Apply(tglButton.Name, tglButton.State);
 
-                if (NotificationManager.SysActions.TryGetAction(tglButton.Name, out NotificationManager.NoticeAction action))
-                {
-                    NotificationManager.Show().WithDelay(300).Perform(action);
-                }
-            }
-            else
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(SystemToggle));
+
+            if (postAction.HasAlert())
             {
-                _sysTweaks.Apply(tglButton.Name, tglButton.State);
+                NotificationManager.Default().WithDelay(300).Perform(postAction.Alert);
             }
         }
     }

@@ -56,11 +56,11 @@ namespace GTweak.Modules.Maintenance
 
             if (string.IsNullOrEmpty(keyWinHWID) && string.IsNullOrEmpty(keyWinKMS))
             {
-                NotificationManager.Show("warn", "keynotfound_noty").WithDelay(300).Perform();
+                NotificationManager.Warn("keynotfound_noty").WithDelay(300).Perform();
                 return;
             }
 
-            NotificationManager.Show("warn", "win_activate_noty").Perform();
+            NotificationManager.Warn("win_activate_noty").Perform();
 
             OverlayWindow overlayWindow = new OverlayWindow();
             overlayWindow.Show();
@@ -102,7 +102,7 @@ namespace GTweak.Modules.Maintenance
                 if (IsWindowsActivated)
                 {
                     overlayWindow.Close();
-                    NotificationManager.Show("warn", "success_activate_noty").WithDelay(300).Restart();
+                    NotificationManager.Info("success_activate_noty").WithDelay(300).Restart();
                 }
                 else
                 {
@@ -116,13 +116,13 @@ namespace GTweak.Modules.Maintenance
 
                     overlayWindow.Close();
 
-                    NotificationManager.Show("warn", IsWindowsActivated ? "success_activate_noty" : "error_activate_noty").WithDelay(300).Perform(IsWindowsActivated ? NotificationManager.NoticeAction.Restart : default);
+                    NotificationManager.Info(IsWindowsActivated ? "success_activate_noty" : "error_activate_noty").WithDelay(300).Perform(IsWindowsActivated ? NotificationManager.AlertType.Restart : default);
                 }
             }
             catch
             {
                 overlayWindow.Close();
-                NotificationManager.Show("warn", "error_activate_noty").WithDelay(300).Perform();
+                NotificationManager.Warn("error_activate_noty").WithDelay(300).Perform();
             }
         }
     }

@@ -98,7 +98,7 @@ namespace GTweak.Modules.Common
         {
             if (INIManager.IsAllTempDictionaryEmpty)
             {
-                NotificationManager.Show("info", "export_warning_noty").Perform();
+                NotificationManager.Info("export_warning_noty").Perform();
             }
             else
             {
@@ -164,12 +164,12 @@ namespace GTweak.Modules.Common
                 }
                 else
                 {
-                    NotificationManager.Show("info", "empty_import_noty").Perform();
+                    NotificationManager.Info("empty_import_noty").Perform();
                 }
             }
             else
             {
-                NotificationManager.Show("info", "warn_import_noty").Perform();
+                NotificationManager.Warn("warn_import_noty").Perform();
             }
         }
 

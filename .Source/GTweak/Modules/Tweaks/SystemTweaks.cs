@@ -37,34 +37,77 @@ namespace GTweak.Modules.Tweaks
     internal enum SystemToggle
     {
         PointerPrecision = 1,
+
+        [PostAction(NotificationManager.AlertType.Logout)]
+
         StickyKeysFilter,
+
         WindowsDefender,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         UserAccountControl,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         SecurityNotifications,
+
         StoreAutoUpdate,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         RealtekAudioDelay,
+
         LockScreenTimeout,
+
         HibernationFastStartup,
+
         AutoEndTasks,
+
         ExeLaunchWarnings,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         MemoryDiagnostics,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         NetworkProtocols,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         FileSystemCache,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         StartupDelay,
+
         QuickAccessHistory,
+
         RemovableMediaAutoplay,
+
         PowerScheme,
+
         BluetoothFunction,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         WindowsFirewall,
+
         GameMode,
+
         GameBar,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         BackgroundApps,
+
         ReservedStorage,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         DynamicTickHpet,
+
         HealthCheck,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         InsiderTasks,
+
         SystemDriveDefrag,
+
         PauseWindowsUpdates,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         MultiPlaneOverlay
     }
 
@@ -162,12 +205,12 @@ namespace GTweak.Modules.Tweaks
                                 overlayWindow.Show();
 
                                 BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
-                                await backgroundQueue.QueueTask(delegate { NotificationManager.Show(state ? "info" : "warn", state ? "info_wd_noty" : "warn_wd_noty").Perform(); });
+                                await backgroundQueue.QueueTask(() => (state ? NotificationManager.Info("info_wd_noty") : NotificationManager.Warn("warn_wd_noty")).Perform());
                                 await backgroundQueue.QueueTask(delegate { DefenderTweaks.SetProtectionState(state); });
 
                                 if (state)
                                 {
-                                    await backgroundQueue.QueueTask(delegate { NotificationManager.Show().WithDelay(300).Restart(); });
+                                    await backgroundQueue.QueueTask(delegate { NotificationManager.Default().WithDelay(300).Restart(); });
                                 }
 
                                 overlayWindow.Close();

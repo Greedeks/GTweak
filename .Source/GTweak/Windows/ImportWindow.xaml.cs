@@ -19,9 +19,9 @@ namespace GTweak.Windows
         private readonly ServicesTweaks _svcTweaks = new ServicesTweaks();
         private readonly SystemTweaks _sysTweaks = new SystemTweaks();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private readonly HashSet<NotificationManager.NoticeAction> _notyActions = new HashSet<NotificationManager.NoticeAction>();
-        private ExplorerManager.ExplorerAction _expAction = ExplorerManager.ExplorerAction.None;
-        private bool _isWDNotyNeed = false;
+        private readonly HashSet<NotificationManager.AlertType> _pendingAlerts = new HashSet<NotificationManager.AlertType>();
+        private ExplorerManager.ShellType _shellType = ExplorerManager.ShellType.None;
+        private bool _defenderDisabled = false;
 
         public ImportWindow(in string importedFile)
         {
@@ -40,34 +40,25 @@ namespace GTweak.Windows
         private async void Window_ContentRendered(object sender, EventArgs e)
         {
             Progress<byte> progress = new Progress<byte>(ReportProgress);
-            try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); } catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+            try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private void ReportProgress(byte valueProgress)
         {
             if (valueProgress == 100)
             {
-                if (_isWDNotyNeed)
+                if (_defenderDisabled)
                 {
-                    NotificationManager.Show("warn", "warn_wd_noty").Perform();
+                    NotificationManager.Warn("warn_wd_noty").Perform();
                 }
                 else
                 {
-                    switch (_expAction)
-                    {
-                        case ExplorerManager.ExplorerAction.Restart:
-                            ExplorerManager.Restart();
-                            break;
-                        case ExplorerManager.ExplorerAction.Refresh:
-                            ExplorerManager.RefreshDesktop();
-                            break;
-                        default:
-                            break;
-                    }
+                    ExplorerManager.Handle(_shellType);
 
-                    if (_notyActions.Count != 0)
+                    if (_pendingAlerts.Count != 0)
                     {
-                        NotificationManager.Show().Perform(_notyActions.Max());
+                        NotificationManager.Default().Perform(_pendingAlerts.Max());
                     }
                 }
 
@@ -80,17 +71,17 @@ namespace GTweak.Windows
         {
             INIManager iniManager = new INIManager(PathTargets.Files.Config);
 
-            var allSections = new (string Section, Action<string, bool> TweakAction, Dictionary<Enum, NotificationManager.NoticeAction> NoticeActions, Dictionary<Enum, ExplorerManager.ExplorerAction> ExplorerMapping)[]
+            var allSections = new (string Section, Action<string, bool> TweakAction)[]
             {
-                (INIManager.SectionConf, _confTweaks.Apply, NotificationManager.ConfActions, null),
-                (INIManager.SectionIntf, _intfTweaks.Apply, NotificationManager.IntfActions, ExplorerManager.IntfActions),
-                (INIManager.SectionSvc, _svcTweaks.Apply, null, null),
-                (INIManager.SectionSys, null, NotificationManager.SysActions, null)
+                (INIManager.SectionConf, _confTweaks.Apply),
+                (INIManager.SectionIntf, _intfTweaks.Apply),
+                (INIManager.SectionSvc,  _svcTweaks.Apply),
+                (INIManager.SectionSys,  null)
             };
 
             List<(string section, string tweak, string value)> allTweaks = new List<(string section, string tweak, string value)>();
 
-            foreach (var (Section, _, _, _) in allSections.Where(s => iniManager.IsThereSection(s.Section)))
+            foreach (var (Section, _) in allSections.Where(s => iniManager.IsThereSection(s.Section)))
             {
                 List<string> keys = iniManager.GetKeysOrValue(Section);
                 List<string> values = iniManager.GetKeysOrValue(Section, false);
@@ -106,11 +97,9 @@ namespace GTweak.Windows
                 return;
             }
 
+            string defenderTweak = $"TglButton{(int)SystemToggle.WindowsDefender}";
             var sysTweaks = allTweaks.Where(t => t.section == INIManager.SectionSys).ToList();
-            var sysTweaksLast = sysTweaks.Where(t => t.tweak == "TglButton3").ToList();
-            var sysTweaksFirst = sysTweaks.Where(t => t.tweak != "TglButton3").ToList();
-
-            var tweaksToApply = allTweaks.Where(t => t.section != INIManager.SectionSys).Concat(sysTweaksFirst).Concat(sysTweaksLast).ToList();
+            var tweaksToApply = allTweaks.Where(t => t.section != INIManager.SectionSys).Concat(sysTweaks.Where(t => t.tweak != defenderTweak)).Concat(sysTweaks.Where(t => t.tweak == defenderTweak)).ToList();
 
             foreach (var (section, tweak, value) in tweaksToApply)
             {
@@ -119,60 +108,47 @@ namespace GTweak.Windows
                 {
                     if (section == INIManager.SectionSys)
                     {
-                        if (tweak.StartsWith("TglButton") && tweak != "TglButton3")
-                        {
-                            _sysTweaks.Apply(tweak, Convert.ToBoolean(value));
-
-                            if (NotificationManager.SysActions.TryGetAction(tweak, out NotificationManager.NoticeAction sysAction))
-                            {
-                                _notyActions.Add(sysAction);
-                            }
-                        }
-                        else if (tweak == "TglButton3")
+                        if (tweak == defenderTweak)
                         {
                             BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
                             await backgroundQueue.QueueTask(delegate
                             {
                                 _sysTweaks.Apply(tweak, Convert.ToBoolean(value), false);
                             });
-
-                            _isWDNotyNeed = !Convert.ToBoolean(value);
+                            _defenderDisabled = !Convert.ToBoolean(value);
+                        }
+                        else if (tweak.StartsWith("TglButton"))
+                        {
+                            _sysTweaks.Apply(tweak, Convert.ToBoolean(value));
+                            AddPostAction(tweak.GetPostAction(typeof(SystemToggle)));
                         }
                         else
                         {
                             _sysTweaks.Apply(tweak, Convert.ToUInt32(value));
                         }
                     }
-                    else
+                    else if (section == INIManager.SectionConf)
                     {
-                        var (Section, TweakAction, NoticeActions, ExplorerMapping) = allSections.First(s => s.Section == section);
-
-                        if (section == INIManager.SectionIntf && tweak.StartsWith("ColorPicker"))
+                        _confTweaks.Apply(tweak, Convert.ToBoolean(value));
+                        AddPostAction(tweak.GetPostAction(typeof(ConfidentialityToggle)));
+                    }
+                    else if (section == INIManager.SectionIntf)
+                    {
+                        if (tweak.StartsWith("ColorPicker"))
                         {
                             _intfTweaks.Apply(tweak, value);
                         }
                         else
                         {
-                            TweakAction?.Invoke(tweak, Convert.ToBoolean(value));
+                            _intfTweaks.Apply(tweak, Convert.ToBoolean(value));
+                            Type enumType = tweak.StartsWith("Checkbox") ? typeof(InterfaceCheckbox) : typeof(InterfaceToggle);
+                            AddPostAction(tweak.GetPostAction(enumType));
                         }
-
-                        if (NoticeActions != null && NoticeActions.TryGetAction(tweak, out NotificationManager.NoticeAction noticeAction))
-                        {
-                            _notyActions.Add(noticeAction);
-                        }
-
-                        if (ExplorerMapping != null && ExplorerMapping.TryGetAction(tweak, out ExplorerManager.ExplorerAction expAction))
-                        {
-                            if (expAction > _expAction)
-                            {
-                                _expAction = expAction;
-                            }
-                        }
-
-                        if (section == INIManager.SectionSvc)
-                        {
-                            _notyActions.Add(NotificationManager.NoticeAction.Restart);
-                        }
+                    }
+                    else if (section == INIManager.SectionSvc)
+                    {
+                        _svcTweaks.Apply(tweak, Convert.ToBoolean(value));
+                        _pendingAlerts.Add(NotificationManager.AlertType.Restart);
                     }
                 }
                 catch (Exception ex) { ErrorLogger.LogDebug(ex); }
@@ -180,6 +156,19 @@ namespace GTweak.Windows
                 appliedTweaks++;
                 progress.Report((byte)((double)appliedTweaks / totalTweaks * 100));
                 await Task.Delay(700, token);
+            }
+        }
+
+        private void AddPostAction(PostActionAttribute action)
+        {
+            if (action.HasAlert())
+            {
+                _pendingAlerts.Add(action.Alert);
+            }
+
+            if (action.Shell > _shellType)
+            {
+                _shellType = action.Shell;
             }
         }
 

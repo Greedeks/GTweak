@@ -96,7 +96,7 @@ namespace GTweak.Modules.Maintenance
                     writer.WriteLine(File.ReadAllText(file, Encoding.Unicode));
                 }
             }
-            catch { NotificationManager.Show("warn", "error_reg_exporter_noty").Perform(); }
+            catch { NotificationManager.Warn("error_reg_exporter_noty").Perform(); }
             finally
             {
                 foreach (string file in tempFiles)
@@ -112,7 +112,7 @@ namespace GTweak.Modules.Maintenance
                     Directory.Delete(tempDir);
                 }
 
-                NotificationManager.Show("info", "success_reg_exporter_noty").WithDelay(500).Perform();
+                NotificationManager.Info("success_reg_exporter_noty").WithDelay(500).Perform();
             }
         }
     }

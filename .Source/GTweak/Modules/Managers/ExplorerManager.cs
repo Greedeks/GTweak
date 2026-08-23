@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Modules.Common;
-using GTweak.Modules.Tweaks;
 
 namespace GTweak.Modules.Managers
 {
@@ -25,45 +23,7 @@ namespace GTweak.Modules.Managers
         [DllImport("user32.dll", SetLastError = true)]
         static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
-        internal enum ExplorerAction { None, Refresh, Restart }
-
-        internal static readonly Dictionary<Enum, ExplorerAction> IntfActions = new Dictionary<Enum, ExplorerAction>()
-        {
-            [InterfaceCheckbox.ExplorerHome] = ExplorerAction.Restart,
-            [InterfaceCheckbox.ExplorerGallery] = ExplorerAction.Restart,
-            [InterfaceCheckbox.ExplorerOneDrive] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FolderObjects3D] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FolderDesktop] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FolderDownloads] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FolderDocuments] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FolderPictures] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FolderMusic] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FolderVideo] = ExplorerAction.Restart,
-            [InterfaceCheckbox.HiddenFiles] = ExplorerAction.Restart,
-            [InterfaceCheckbox.SystemFiles] = ExplorerAction.Restart,
-            [InterfaceCheckbox.FileExtensions] = ExplorerAction.Restart,
-            [InterfaceCheckbox.EmptyDrives] = ExplorerAction.Restart,
-            [InterfaceCheckbox.IconComputer] = ExplorerAction.Refresh,
-            [InterfaceCheckbox.IconNetwork] = ExplorerAction.Refresh,
-            [InterfaceCheckbox.IconRecycleBin] = ExplorerAction.Refresh,
-            [InterfaceCheckbox.IconControlPanel] = ExplorerAction.Refresh,
-            [InterfaceCheckbox.IconUserFiles] = ExplorerAction.Refresh,
-            [InterfaceCheckbox.IconOneDrive] = ExplorerAction.Refresh,
-            [InterfaceToggle.TaskbarDarkTheme] = ExplorerAction.Restart,
-            [InterfaceToggle.AppDarkTheme] = ExplorerAction.Restart,
-            [InterfaceToggle.TaskbarAlignment] = ExplorerAction.Restart,
-            [InterfaceToggle.StartMenuLayout] = ExplorerAction.Restart,
-            [InterfaceToggle.CompactContextMenu] = ExplorerAction.Restart,
-            [InterfaceToggle.TaskbarEndTask] = ExplorerAction.Restart,
-            [InterfaceToggle.TaskbarIconsButtons] = ExplorerAction.Restart,
-            [InterfaceToggle.BingStartSearch] = ExplorerAction.Restart
-        };
-
-        internal static readonly Dictionary<string, ExplorerAction> PackageActions = new Dictionary<string, ExplorerAction>()
-        {
-            ["Widgets"] = ExplorerAction.Restart,
-            ["Edge"] = ExplorerAction.Restart
-        };
+        internal enum ShellType { None, Refresh, Restart }
 
         private static readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
         private static readonly object _lockObj = new object();
@@ -166,6 +126,18 @@ namespace GTweak.Modules.Managers
                 }
                 catch (Exception ex) { ErrorLogger.LogDebug(ex); }
             });
+        }
+
+        internal static void Handle(ShellType effect)
+        {
+            if (effect == ShellType.Restart)
+            {
+                Restart();
+            }
+            else if (effect == ShellType.Refresh)
+            {
+                RefreshDesktop();
+            }
         }
     }
 }

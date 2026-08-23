@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GTweak.Modules.Managers;
 
 namespace GTweak.Modules.Storage
 {
@@ -8,11 +9,13 @@ namespace GTweak.Modules.Storage
         internal string Alias { get; }
         internal bool IsUnavailable { get; set; }
         internal IReadOnlyList<string> Scripts { get; }
+        internal ExplorerManager.ShellType ShellType { get; }
 
-        internal PackagesInfo(string alias = null, IReadOnlyList<string> scripts = null)
+        internal PackagesInfo(string alias = null, IReadOnlyList<string> scripts = null, ExplorerManager.ShellType shellType = ExplorerManager.ShellType.None)
         {
             Alias = alias;
             Scripts = scripts;
+            ShellType = shellType;
         }
     }
 
@@ -36,7 +39,7 @@ namespace GTweak.Modules.Storage
             ["DevHome"] = new PackagesInfo(scripts: new[] { "Microsoft.Windows.DevHome" }),
             ["Disney"] = new PackagesInfo("Disney", new[] { "Disney.37853FC22B2CE" }),
             ["DolbyAccess"] = new PackagesInfo("DolbyAccess", new[] { "DolbyLaboratories.DolbyAccess" }),
-            ["Edge"] = new PackagesInfo("MicrosoftEdge", new[] { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdgeDevToolsClient", "Microsoft.Copilot" }),
+            ["Edge"] = new PackagesInfo("MicrosoftEdge", new[] { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdgeDevToolsClient", "Microsoft.Copilot" }, ExplorerManager.ShellType.Restart),
             ["Facebook"] = new PackagesInfo("Facebook", new[] { "Facebook.Facebook" }),
             ["FeedbackHub"] = new PackagesInfo("feedback", new[] { "Microsoft.WindowsFeedbackHub" }),
             ["GetHelp"] = new PackagesInfo(scripts: new[] { "Microsoft.GetHelp" }),
@@ -89,7 +92,7 @@ namespace GTweak.Modules.Storage
             ["WebMediaExtensions"] = new PackagesInfo(scripts: new[] { "Microsoft.WebMediaExtensions" }),
             ["WhatsApp"] = new PackagesInfo("WhatsAppDesktop", new[] { "5319275A.WhatsAppDesktop" }),
             ["WhiteBoard"] = new PackagesInfo(scripts: new[] { "Microsoft.Whiteboard" }),
-            ["Widgets"] = new PackagesInfo("Windows.Client.WebExperience", new[] { "MicrosoftWindows.Client.WebExperience", "Microsoft.WidgetsPlatformRuntime", "Microsoft.StartExperiencesApp" }),
+            ["Widgets"] = new PackagesInfo("Windows.Client.WebExperience", new[] { "MicrosoftWindows.Client.WebExperience", "Microsoft.WidgetsPlatformRuntime", "Microsoft.StartExperiencesApp" }, ExplorerManager.ShellType.Restart),
             ["WindowsTerminal"] = new PackagesInfo(scripts: new[] { "Microsoft.WindowsTerminal" }),
             ["Xbox"] = new PackagesInfo(scripts: new[] { "Microsoft.XboxApp", "Microsoft.GamingApp", "Microsoft.XboxGamingOverlay", "Microsoft.XboxGameOverlay", "Microsoft.XboxIdentityProvider", "Microsoft.Xbox.TCUI", "Microsoft.XboxSpeechToTextOverlay" }),
             ["YandexMusic"] = new PackagesInfo(scripts: new[] { "A025C540.Yandex.Music" }),

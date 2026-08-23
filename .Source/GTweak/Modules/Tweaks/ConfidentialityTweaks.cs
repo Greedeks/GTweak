@@ -15,24 +15,47 @@ namespace GTweak.Modules.Tweaks
     internal enum ConfidentialityToggle
     {
         TargetedAdvertising = 1,
+
         DataSynchronization,
+
         WindowsTelemetry,
+
         SchedulerDataCollection,
+
         InstalledAppsData,
+
         AppUsageStatistics,
+
         HandwritingData,
+
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         HardwareConfigurationData,
+
         HiddenMicrosoftDomains,
+
         UserLocationTracking,
+
         FeedbackRequests,
+
         SpeechSynthesisUpdates,
+
         HiddenSystemMonitoring,
+
         SystemExperiments,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         CovertDataCollectionServices,
+
         WindowsEventLogging,
+
         NvidiaTelemetry,
+
         UserBehaviorRecording,
+
         OfflineMapsUpdates,
+
+        [PostAction(NotificationManager.AlertType.Restart)]
         IntelTelemetry
     }
 
