@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GTweak.Modules.Helpers
+namespace GTweak.Modules.Extensions
 {
     internal static class ControlDictionaryExtensions
     {

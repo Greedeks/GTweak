@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GTweak.Assets.UserControls;
 using GTweak.Core.Interfaces;
-using GTweak.Modules.Helpers;
+using GTweak.Modules.Extensions;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
 

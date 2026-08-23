@@ -11,7 +11,7 @@ using GTweak.Animations;
 using GTweak.Behaviors;
 using GTweak.Modules.Common;
 using GTweak.Modules.Configuration;
-using GTweak.Modules.Helpers;
+using GTweak.Modules.Extensions;
 using GTweak.Modules.Managers;
 using Wpf.Ui.Controls;
 

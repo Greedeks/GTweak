@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 
-namespace GTweak.Modules.Helpers
+namespace GTweak.Modules.Extensions
 {
     internal static class WindowExtensions
     {

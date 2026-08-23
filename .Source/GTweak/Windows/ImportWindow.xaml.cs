@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GTweak.Modules.Common;
-using GTweak.Modules.Helpers;
+using GTweak.Modules.Extensions;
 using GTweak.Modules.Managers;
 using GTweak.Modules.Tweaks;
 using Wpf.Ui.Controls;

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using GTweak.Modules.Common;
 using GTweak.Modules.Helpers;
 using GTweak.Modules.Managers;
+using GTweak.Modules.Storage;
 using Microsoft.Win32;
 
 namespace GTweak.Modules.Tweaks
@@ -20,117 +21,48 @@ namespace GTweak.Modules.Tweaks
         internal static event Action DataChanged;
         internal static void OnPackagesChanged() => DataChanged?.Invoke();
 
-        internal sealed class PackagesInfo
-        {
-            internal string Alias { get; }
-            internal bool IsUnavailable { get; set; }
-            internal IReadOnlyList<string> Scripts { get; }
-
-            internal PackagesInfo(string alias = null, IReadOnlyList<string> scripts = null)
-            {
-                Alias = alias;
-                Scripts = scripts;
-            }
-        }
-
         internal static bool IsOneDriveInstalled => PathTargets.Executable.OneDrive.Any(File.Exists) || (Directory.Exists(PathTargets.Folders.OneDrive) &&
             Directory.EnumerateDirectories(PathTargets.Folders.OneDrive).Any(dir => File.Exists(Path.Combine(dir, "OneDrive.exe"))));
 
         internal static bool IsEdgeInstalled => Directory.Exists(PathTargets.Folders.Edge);
 
-        internal static readonly Dictionary<string, PackagesInfo> PackagesDetails = new Dictionary<string, PackagesInfo>(StringComparer.OrdinalIgnoreCase)
-        {
-            ["OneDrive"] = new PackagesInfo(),
-            ["Alarms"] = new PackagesInfo(scripts: new[] { "Microsoft.WindowsAlarms" }),
-            ["BingFinance"] = new PackagesInfo(scripts: new[] { "Microsoft.BingFinance" }),
-            ["BingNews"] = new PackagesInfo(scripts: new[] { "Microsoft.BingNews" }),
-            ["BingSearch"] = new PackagesInfo(scripts: new[] { "Microsoft.BingSearch" }),
-            ["BingSports"] = new PackagesInfo(scripts: new[] { "Microsoft.BingSports" }),
-            ["BingWeather"] = new PackagesInfo("MSWeather", new[] { "Microsoft.BingWeather" }),
-            ["Builder3D"] = new PackagesInfo("3D Builder", new[] { "Microsoft.3DBuilder" }),
-            ["Calculator"] = new PackagesInfo("Calculator", new[] { "Microsoft.WindowsCalculator" }),
-            ["Camera"] = new PackagesInfo(scripts: new[] { "Microsoft.WindowsCamera" }),
-            ["ClipChamp"] = new PackagesInfo("Clipchamp Video Editor", new[] { "Clipchamp.Clipchamp" }),
-            ["Copilot"] = new PackagesInfo("M365Copilot", new[] { "Microsoft.Copilot" }),
-            ["Cortana"] = new PackagesInfo(scripts: new[] { "Microsoft.549981C3F5F10" }),
-            ["DevHome"] = new PackagesInfo(scripts: new[] { "Microsoft.Windows.DevHome" }),
-            ["Disney"] = new PackagesInfo("Disney", new[] { "Disney.37853FC22B2CE" }),
-            ["DolbyAccess"] = new PackagesInfo("DolbyAccess", new[] { "DolbyLaboratories.DolbyAccess" }),
-            ["Edge"] = new PackagesInfo("MicrosoftEdge", new[] { "Microsoft.MicrosoftEdge.Stable", "Microsoft.MicrosoftEdgeDevToolsClient", "Microsoft.Copilot" }),
-            ["Facebook"] = new PackagesInfo("Facebook", new[] { "Facebook.Facebook" }),
-            ["FeedbackHub"] = new PackagesInfo("feedback", new[] { "Microsoft.WindowsFeedbackHub" }),
-            ["GetHelp"] = new PackagesInfo(scripts: new[] { "Microsoft.GetHelp" }),
-            ["GetStarted"] = new PackagesInfo(scripts: new[] { "Microsoft.Getstarted" }),
-            ["Hulu"] = new PackagesInfo("Hulu.Hulu", new[] { "HULULLC.HULUPLUS", "HuluLLC.HuluPlus" }),
-            ["iHeartRadio"] = new PackagesInfo("iHeart", new[] { "iHeartRadio" }),
-            ["Instagram"] = new PackagesInfo("Instagram", new[] { "Facebook.InstagramBeta" }),
-            ["LinkedIn"] = new PackagesInfo("LinkedInforWindows", new[] { "Microsoft.LinkedIn", "7EE7776C.LinkedInforWindows" }),
-            ["Mail"] = new PackagesInfo("communicationsapps", new[] { "microsoft.windowscommunicationsapps" }),
-            ["Maps"] = new PackagesInfo(scripts: new[] { "Microsoft.WindowsMaps" }),
-            ["Messaging"] = new PackagesInfo(scripts: new[] { "Microsoft.Messaging" }),
-            ["Microsoft3D"] = new PackagesInfo("3DViewer", new[] { "Microsoft.Microsoft3DViewer" }),
-            ["MicrosoftFamily"] = new PackagesInfo("FamilySafety", new[] { "MicrosoftCorporationII.MicrosoftFamily" }),
-            ["MicrosoftOfficeHub"] = new PackagesInfo("officehub", new[] { "Microsoft.MicrosoftOfficeHub" }),
-            ["MicrosoftSolitaireCollection"] = new PackagesInfo("solitaire", new[] { "Microsoft.MicrosoftSolitaireCollection" }),
-            ["MicrosoftStickyNotes"] = new PackagesInfo("MSStickyNotes", new[] { "Microsoft.MicrosoftStickyNotes" }),
-            ["MicrosoftStore"] = new PackagesInfo(scripts: new[] { "Microsoft.WindowsStore" }),
-            ["MicrosoftSway"] = new PackagesInfo("Sway", new[] { "Microsoft.Office.Sway" }),
-            ["MicrosoftTeams"] = new PackagesInfo("Teams", new[] { "MicrosoftTeams", "MSTeams" }),
-            ["MixedReality"] = new PackagesInfo("MixedRealityPortal", new[] { "Microsoft.MixedReality.Portal" }),
-            ["Music"] = new PackagesInfo("zunemusic", new[] { "Microsoft.ZuneMusic", "Microsoft.GrooveMusic" }),
-            ["Netflix"] = new PackagesInfo("Netflix", new[] { "4DF9E0F8.Netflix" }),
-            ["Notepad"] = new PackagesInfo("Notepad", new[] { "Microsoft.WindowsNotepad" }),
-            ["OneConnect"] = new PackagesInfo("MobilePlans", new[] { "Microsoft.OneConnect" }),
-            ["OneNote"] = new PackagesInfo("MSOneNote", new[] { "Microsoft.Office.OneNote", "Microsoft.OneNote" }),
-            ["Outlook"] = new PackagesInfo(scripts: new[] { "Microsoft.OutlookForWindows" }),
-            ["Paint"] = new PackagesInfo(scripts: new[] { "Microsoft.Paint" }),
-            ["Paint3D"] = new PackagesInfo(scripts: new[] { "Microsoft.MSPaint" }),
-            ["Pandora"] = new PackagesInfo("PandoraMediaInc", new[] { "PandoraMediaInc.29680B314EFC2" }),
-            ["People"] = new PackagesInfo(scripts: new[] { "Microsoft.People" }),
-            ["Phone"] = new PackagesInfo("PhoneLink", new[] { "Microsoft.YourPhone", "MicrosoftWindows.CrossDevice" }),
-            ["Photos"] = new PackagesInfo("MSPhotos", new[] { "Microsoft.Windows.Photos" }),
-            ["Picsart"] = new PackagesInfo(scripts: new[] { "PicsArt-PhotoStudio" }),
-            ["Plex"] = new PackagesInfo("Plex", new[] { "CAF9E577.Plex" }),
-            ["PowerAutomateDesktop"] = new PackagesInfo(scripts: new[] { "Microsoft.PowerAutomateDesktop" }),
-            ["PrimeVideo"] = new PackagesInfo("PrimeVideo", new[] { "AmazonVideo.PrimeVideo" }),
-            ["QuickAssist"] = new PackagesInfo(scripts: new[] { "MicrosoftCorporationII.QuickAssist" }),
-            ["ScreenSketch"] = new PackagesInfo(scripts: new[] { "Microsoft.ScreenSketch" }),
-            ["Shazam"] = new PackagesInfo("Shazam", new[] { "ShazamEntertainmentLtd.Shazam" }),
-            ["SkypeApp"] = new PackagesInfo("Skype", new[] { "Microsoft.SkypeApp" }),
-            ["SoundRecorder"] = new PackagesInfo(scripts: new[] { "Microsoft.WindowsSoundRecorder" }),
-            ["Spotify"] = new PackagesInfo("Spotify", new[] { "SpotifyAB.SpotifyMusic" }),
-            ["TikTok"] = new PackagesInfo("TikTok", new[] { "BytedancePte.Ltd.TikTok" }),
-            ["Todos"] = new PackagesInfo("TodoList", new[] { "Microsoft.Todos", "Microsoft.ToDo" }),
-            ["TuneInRadio"] = new PackagesInfo("TuneInRadio", new[] { "TuneIn.TuneInRadio" }),
-            ["Twitter"] = new PackagesInfo("Twitter", new[] { "9E2F88E3.Twitter" }),
-            ["Viber"] = new PackagesInfo(scripts: new[] { "Viber" }),
-            ["Video"] = new PackagesInfo("zunevideo", new[] { "Microsoft.ZuneVideo" }),
-            ["Wallet"] = new PackagesInfo("MSPay", new[] { "Microsoft.Wallet" }),
-            ["WebMediaExtensions"] = new PackagesInfo(scripts: new[] { "Microsoft.WebMediaExtensions" }),
-            ["WhatsApp"] = new PackagesInfo("WhatsAppDesktop", new[] { "5319275A.WhatsAppDesktop" }),
-            ["WhiteBoard"] = new PackagesInfo(scripts: new[] { "Microsoft.Whiteboard" }),
-            ["Widgets"] = new PackagesInfo("Windows.Client.WebExperience", new[] { "MicrosoftWindows.Client.WebExperience", "Microsoft.WidgetsPlatformRuntime", "Microsoft.StartExperiencesApp" }),
-            ["WindowsTerminal"] = new PackagesInfo(scripts: new[] { "Microsoft.WindowsTerminal" }),
-            ["Xbox"] = new PackagesInfo(scripts: new[] { "Microsoft.XboxApp", "Microsoft.GamingApp", "Microsoft.XboxGamingOverlay", "Microsoft.XboxGameOverlay", "Microsoft.XboxIdentityProvider", "Microsoft.Xbox.TCUI", "Microsoft.XboxSpeechToTextOverlay" }),
-            ["YandexMusic"] = new PackagesInfo(scripts: new[] { "A025C540.Yandex.Music" }),
-        };
-
         internal static HashSet<string> InstalledPackagesCache = new HashSet<string>();
 
         internal void GetInstalledPackages()
         {
-            try { InstalledPackagesCache = RegistryHelper.GetSubKeyNames<HashSet<string>>(Registry.CurrentUser, @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages") ?? new HashSet<string>(); }
+            try
+            {
+                HashSet<string> packages = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var (hive, path) in new[]
+                {
+                    (Registry.CurrentUser,  @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages"),
+                    (Registry.CurrentUser,  @"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Families"),
+                    (Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Packages"),
+                    (Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications"),
+                    (Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Staged"),
+                })
+                {
+                    HashSet<string> result = RegistryHelper.GetSubKeyNames<HashSet<string>>(hive, path);
+                    if (result != null)
+                    {
+                        packages.UnionWith(result);
+                    }
+                }
+
+                InstalledPackagesCache = packages;
+            }
             catch (Exception ex)
             {
                 ErrorLogger.LogDebug(ex);
-                InstalledPackagesCache = new HashSet<string>();
+                InstalledPackagesCache = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             }
             finally { OnPackagesChanged(); }
         }
 
         internal static bool HandleAvailabilityStatus(string key, bool? isUnavailable = null)
         {
-            if (PackagesDetails.TryGetValue(key, out var details))
+            if (PackageStorage.PackagesDetails.TryGetValue(key, out var details))
             {
                 if (isUnavailable.HasValue)
                 {
@@ -183,7 +115,7 @@ namespace GTweak.Modules.Tweaks
 
             try
             {
-                if (!PackagesDetails.TryGetValue(packageName, out PackagesInfo details))
+                if (!PackageStorage.PackagesDetails.TryGetValue(packageName, out PackagesInfo details))
                 {
                     ErrorLogger.LogDebug(new InvalidOperationException($"PackageDetails does not contain key '{packageName}'"));
                     return;
@@ -205,12 +137,38 @@ namespace GTweak.Modules.Tweaks
                 }
 
                 string psCommands = $@"$pattern = '{string.Join("|", packageNamesToRemove.Select(Regex.Escape))}'
-                    Get-AppxPackage -AllUsers | Where-Object {{ $_.Name -match $pattern }} | ForEach-Object {{ Remove-AppxPackage -AllUsers -Package $_.PackageFullName }}
-                    Get-AppxProvisionedPackage -Online | Where-Object {{ $_.PackageName -match $pattern }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName -AllUsers}}";
+                Get-AppxPackage -AllUsers -PackageTypeFilter Bundle, Resource, Main | Where-Object {{ $_.Name -match $pattern -or $_.PackageFullName -match $pattern }} | ForEach-Object {{ Remove-AppxPackage -AllUsers -Package $_.PackageFullName }}
+                Get-AppxProvisionedPackage -Online | Where-Object {{ $_.DisplayName -match $pattern -or $_.PackageName -match $pattern }} | ForEach-Object {{ Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName -AllUsers }}";
+
 
                 await CommandExecutor.InvokeRunCommand(psCommands, true).ConfigureAwait(false);
 
                 CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /d %i in ({string.Join(" ", packageNamesToRemove.Select(n => $@"""{Path.Combine(PathTargets.Folders.SystemDrive, "Program Files", "WindowsApps")}\*{n}*"""))}) do takeown /f ""%i"" /r /d y && icacls ""%i"" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 && icacls ""%i"" /grant {Environment.UserName}:F && rd /s /q ""%i""");
+
+                string[] allUserStorePaths =
+                {
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Staged",
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Packages",
+                    @"SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\InboxApplications"
+                };
+
+                foreach (string storePath in allUserStorePaths)
+                {
+                    using RegistryKey baseKey = Registry.LocalMachine.OpenSubKey(storePath, true);
+                    if (baseKey == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (string subKeyName in baseKey.GetSubKeyNames())
+                    {
+                        if (packageNamesToRemove.Any(name => subKeyName.StartsWith(name, StringComparison.OrdinalIgnoreCase)))
+                        {
+                            try { baseKey.DeleteSubKeyTree(subKeyName, false); }
+                            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+                        }
+                    }
+                }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
 
