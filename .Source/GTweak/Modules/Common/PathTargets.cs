@@ -75,9 +75,11 @@ namespace GTweak.Modules.Common
 
             internal static readonly string WallpaperCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Microsoft", "Windows", "Themes");
 
+            internal static readonly string OneDrive = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive");
+
             internal static readonly string Edge = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge");
 
-            internal static readonly string OneDrive = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive");
+            internal static readonly string[] EdgeComponents = Array.ConvertAll(new[] { "Edge", "EdgeCore", "EdgeUpdate", "Temp", "EdgeWebView" }, name => Path.Combine(Path.GetDirectoryName(Edge)!, name));
         }
 
         internal static class Executable
@@ -301,10 +303,36 @@ namespace GTweak.Modules.Common
 
             internal static readonly string OneDriveSetup = FindExecutablePath("onedrivesetup.exe");
 
-            internal static readonly string[] OneDrive = new[]
+            internal static string EdgeSetup
             {
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe"),
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "Update", "OneDrive.exe"),
+                get
+                {
+                    string root = Path.Combine(Folders.Edge, "Application");
+                    if (Directory.Exists(root))
+                    {
+                        try
+                        {
+                            foreach (string file in Directory.EnumerateFiles(root, "setup.exe", SearchOption.AllDirectories))
+                            {
+                                return file;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrorLogger.LogDebug(ex);
+                        }
+                    }
+
+                    return string.Empty;
+                }
+            }
+
+            internal static readonly string EdgeTempStub = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "SystemApps", "Microsoft.MicrosoftEdge_8wekyb3d8bbwe", "MicrosoftEdge.exe");
+
+            internal static readonly string[] OneDriveInstances = new[]
+            {
+                Path.Combine(Folders.OneDrive, "OneDrive.exe"),
+                Path.Combine(Folders.OneDrive, "Update", "OneDrive.exe"),
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft OneDrive", "OneDrive.exe"),
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft OneDrive", "OneDrive.exe"),
             };

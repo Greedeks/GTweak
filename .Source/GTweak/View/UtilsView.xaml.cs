@@ -16,7 +16,7 @@ namespace GTweak.View
         private readonly SystemRestoreService _systemRestore = new SystemRestoreService();
         private readonly NTFSCompressor _ntfsCompressor = new NTFSCompressor();
 
-        private bool? _isWinOldRemoval = false;
+        private bool? _windowsOldRemoval = false;
 
         public UtilsView()
         {
@@ -172,16 +172,16 @@ namespace GTweak.View
 
             if (clearingMemory.IsWinOldExists)
             {
-                _isWinOldRemoval = await OverlayDialogManager.Show("title_over_more", "text_over_more", "question_over_more", "btn_agree", "btn_decline");
+                _windowsOldRemoval = await OverlayDialogManager.Show("title_over_more", "text_over_more", "question_over_more", "btn_agree", "btn_decline");
 
-                if (_isWinOldRemoval == null)
+                if (_windowsOldRemoval == null)
                 {
                     return;
                 }
             }
 
             BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
-            await backgroundQueue.QueueTask(delegate { clearingMemory.StartMemoryCleanup((bool)_isWinOldRemoval); });
+            await backgroundQueue.QueueTask(delegate { clearingMemory.StartMemoryCleanup((bool)_windowsOldRemoval); });
             await backgroundQueue.QueueTask(delegate { NotificationManager.Info("clear_ram_noty").WithDelay(500).Perform(); });
         }
 

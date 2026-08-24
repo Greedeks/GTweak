@@ -18,7 +18,7 @@ namespace GTweak.View
         private readonly BackgroundQueueManager _backgroundQueue = new BackgroundQueueManager();
         private readonly BackgroundWorker backgroundWorker = new BackgroundWorker();
         private readonly AppxPackageHandler _packageHandler = new AppxPackageHandler();
-        private bool? _isWebViewRemoval = false;
+        private bool? _webViewRemoval = false;
 
         public PackagesView()
         {
@@ -85,9 +85,9 @@ namespace GTweak.View
             {
                 if (packageName.Equals("Edge"))
                 {
-                    _isWebViewRemoval = await OverlayDialogManager.Show("title_over_pkg", "text_over_pkg", "question_over_pkg", "btn_delete_all", "btn_keep_webview");
+                    _webViewRemoval = await OverlayDialogManager.Show("title_over_pkg", "text_over_pkg", "question_over_pkg", "btn_delete_all", "btn_keep_webview");
 
-                    if (_isWebViewRemoval == null)
+                    if (_webViewRemoval == null)
                     {
                         return;
                     }
@@ -97,7 +97,7 @@ namespace GTweak.View
                 {
                     await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
 
-                    try { await AppxPackageHandler.RemoveAppxPackage(packageName, (bool)_isWebViewRemoval); }
+                    try { await AppxPackageHandler.RemoveAppxPackage(packageName, (bool)_webViewRemoval); }
                     finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
 
                     await Dispatcher.BeginInvoke(new Action(() =>

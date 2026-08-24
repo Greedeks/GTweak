@@ -183,12 +183,12 @@ namespace GTweak.Modules.Maintenance
             return num != 0;
         }
 
-        internal void StartMemoryCleanup(bool shouldRemoveWinOld = false)
+        internal void StartMemoryCleanup(bool removeWindowsOld = false)
         {
             ClearFileSystemCache(true);
             EmptyWorkingSetFunction();
 
-            if (shouldRemoveWinOld)
+            if (removeWindowsOld)
             {
                 UnlockHandleHelper.UnlockDirectory(PathTargets.Folders.WindowsOld);
 
