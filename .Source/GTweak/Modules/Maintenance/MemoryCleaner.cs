@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Modules.Common;
 using GTweak.Modules.Helpers;
@@ -190,17 +189,7 @@ namespace GTweak.Modules.Maintenance
 
             if (removeWindowsOld)
             {
-                UnlockHandleHelper.UnlockDirectory(PathTargets.Folders.WindowsOld);
-
-                CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{PathTargets.Folders.WindowsOld}"" /r /d y && icacls ""{PathTargets.Folders.WindowsOld}"" /inheritance:r && icacls ""{PathTargets.Folders.WindowsOld}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{PathTargets.Folders.WindowsOld}"" /grant {Environment.UserName}:F /t && rd /s /q ""{PathTargets.Folders.WindowsOld}""");
-
-                for (int i = 0; IsWinOldExists && i < 10; i++)
-                {
-                    try { Directory.Delete(PathTargets.Folders.WindowsOld, true); Thread.Sleep(300); }
-                    catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-
-                    CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{PathTargets.Folders.WindowsOld}' -Recurse -Force", true);
-                }
+                FileDirectoryHelper.ForceDeleteDirectory(PathTargets.Folders.WindowsOld);
             }
 
             CommandExecutor.RunCommandAsTrustedInstaller(@$"/c rd /s /q {PathTargets.Folders.SystemDrive}Windows\Temp & " +

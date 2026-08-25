@@ -247,10 +247,9 @@ namespace GTweak.Modules.Tweaks
                             {
                                 if (state)
                                 {
-                                    File.Copy(PathTargets.Files.Hosts.Backup, PathTargets.Files.Hosts.Original, true);
-
                                     if (File.Exists(PathTargets.Files.Hosts.Backup))
                                     {
+                                        File.Copy(PathTargets.Files.Hosts.Backup, PathTargets.Files.Hosts.Original, true);
                                         File.Delete(PathTargets.Files.Hosts.Backup);
                                     }
                                     else
@@ -424,8 +423,8 @@ namespace GTweak.Modules.Tweaks
 
                             RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "DelayedAutoStart", 1, RegistryValueKind.DWord);
                             RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "DependOnService", new[] { "rpcss" }, RegistryValueKind.MultiString);
-                            RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "Description", @"@%SystemRoot%\system32\dmwappushsvc.dll,-201", RegistryValueKind.DWord);
-                            RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "DisplayName", @"@%SystemRoot%\system32\dmwappushsvc.dll,-200", RegistryValueKind.DWord);
+                            RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "Description", @"@%SystemRoot%\system32\dmwappushsvc.dll,-201", RegistryValueKind.String);
+                            RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "DisplayName", @"@%SystemRoot%\system32\dmwappushsvc.dll,-200", RegistryValueKind.String);
                             RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "ErrorControl", 1, RegistryValueKind.DWord);
                             RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,04,00,00,00,14,00,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,01,00,00,00,10,27,00,00,00,00,00,00,10,27,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
                             RegistryHelper.Write(Registry.LocalMachine, dmwappushservice, "ImagePath", @"%SystemRoot%\system32\svchost.exe -k netsvcs -p", RegistryValueKind.ExpandString);
@@ -457,7 +456,7 @@ namespace GTweak.Modules.Tweaks
                             RegistryHelper.Write(Registry.LocalMachine, diagsvc, "FailureActions", Array.ConvertAll("80,51,01,00,00,00,00,00,00,00,00,00,03,00,00,00,14,00,00,00,01,00,00,00,30,75,00,00,01,00,00,00,30,75,00,00,00,00,00,00,00,00,00,00".Split(','), s => Convert.ToByte(s, 16)), RegistryValueKind.Binary);
                             RegistryHelper.Write(Registry.LocalMachine, diagsvc, "ImagePath", @"%SystemRoot%\System32\svchost.exe -k diagnostics", RegistryValueKind.ExpandString);
                             RegistryHelper.Write(Registry.LocalMachine, diagsvc, "ObjectName", "LocalSystem", RegistryValueKind.String);
-                            RegistryHelper.Write(Registry.LocalMachine, diagsvc, "RequiredPrivileges", new[] { "SeTcbPrivilege", "nSeTakeOwnershipPrivilege", "nSeDebugPrivilege", "nSeBackupPrivilege", "nSeImpersonatePrivilege", "nSeLoadDriverPrivilege", "nSeRestorePrivilege", "nSeManageVolumePrivilege" }, RegistryValueKind.MultiString);
+                            RegistryHelper.Write(Registry.LocalMachine, diagsvc, "RequiredPrivileges", new[] { "SeTcbPrivilege", "SeTakeOwnershipPrivilege", "SeDebugPrivilege", "SeBackupPrivilege", "SeImpersonatePrivilege", "SeLoadDriverPrivilege", "SeRestorePrivilege", "SeManageVolumePrivilege" }, RegistryValueKind.MultiString);
                             RegistryHelper.Write(Registry.LocalMachine, diagsvc, "ServiceSidType", 1, RegistryValueKind.DWord);
                             RegistryHelper.Write(Registry.LocalMachine, diagsvc, "Start", 3, RegistryValueKind.DWord);
                             RegistryHelper.Write(Registry.LocalMachine, diagsvc, "Type", 32, RegistryValueKind.DWord);

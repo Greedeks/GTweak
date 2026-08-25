@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using GTweak.Modules.Common;
+using GTweak.Modules.Helpers;
 using GTweak.Modules.Managers;
 using Microsoft.Win32;
 
@@ -67,7 +68,8 @@ namespace GTweak.Modules.Maintenance
         internal void Export(string fileName)
         {
             string tempDir = PathTargets.Folders.Workspace;
-            Directory.CreateDirectory(tempDir);
+
+            FileDirectoryHelper.CreateDirectory(tempDir);
 
             List<string> tempFiles = new List<string>();
             try
@@ -99,18 +101,8 @@ namespace GTweak.Modules.Maintenance
             catch { NotificationManager.Warn("error_reg_exporter_noty").Perform(); }
             finally
             {
-                foreach (string file in tempFiles)
-                {
-                    if (File.Exists(file))
-                    {
-                        File.Delete(file);
-                    }
-                }
-
-                if (Directory.Exists(tempDir))
-                {
-                    Directory.Delete(tempDir);
-                }
+                FileDirectoryHelper.DeleteFile(tempFiles.ToArray());
+                FileDirectoryHelper.DeleteDirectory(tempDir);
 
                 NotificationManager.Info("success_reg_exporter_noty").WithDelay(500).Perform();
             }

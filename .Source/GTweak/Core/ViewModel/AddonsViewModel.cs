@@ -94,7 +94,7 @@ namespace GTweak.Core.ViewModel
                         break;
                 }
 
-                Task.Run(() => { CommandExecutor.RunCommandShow(fileName, CommandExecutor.CleanCommand(arguments), addon.RequiresElevation); });
+                Task.Run(() => { CommandExecutor.RunProcessVisible(fileName, CommandExecutor.CleanCommand(arguments), addon.RequiresElevation); });
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }

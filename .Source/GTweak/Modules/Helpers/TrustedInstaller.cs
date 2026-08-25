@@ -248,16 +248,27 @@ namespace GTweak.Modules.Helpers
             try
             {
                 int currentSession = Process.GetCurrentProcess().SessionId;
+                int targetWinlogonPid;
+
                 Process[] winlogons = Process.GetProcessesByName("winlogon");
-
-                Process targetWinlogon = winlogons.FirstOrDefault(p => p.SessionId == currentSession) ?? winlogons.FirstOrDefault();
-
-                if (targetWinlogon == null)
+                try
                 {
-                    return false;
+                    Process targetWinlogon = winlogons.FirstOrDefault(p => p.SessionId == currentSession) ?? winlogons.FirstOrDefault();
+                    if (targetWinlogon == null)
+                    {
+                        return false;
+                    }
+                    targetWinlogonPid = targetWinlogon.Id;
+                }
+                finally
+                {
+                    foreach (Process p in winlogons)
+                    {
+                        p.Dispose();
+                    }
                 }
 
-                winlogonHandle = OpenProcess(ProcessAccessFlags.QueryLimitedInformation, false, targetWinlogon.Id);
+                winlogonHandle = OpenProcess(ProcessAccessFlags.QueryLimitedInformation, false, targetWinlogonPid);
                 if (winlogonHandle == IntPtr.Zero)
                 {
                     return false;
@@ -313,8 +324,16 @@ namespace GTweak.Modules.Helpers
             }
 
             SERVICE_STATUS_PROCESS statusBuffer = new SERVICE_STATUS_PROCESS();
+            Stopwatch timeout = Stopwatch.StartNew();
+            const int maxWaitMs = 30000;
+
             while (QueryServiceStatusEx(hService, SC_STATUS_PROCESS_INFO, ref statusBuffer, (uint)Marshal.SizeOf(statusBuffer), out _))
             {
+                if (timeout.ElapsedMilliseconds > maxWaitMs)
+                {
+                    break;
+                }
+
                 if (statusBuffer.dwCurrentState == (uint)ServiceControllerStatus.Stopped)
                 {
                     if (!StartService(hService, 0, IntPtr.Zero))
@@ -326,7 +345,8 @@ namespace GTweak.Modules.Helpers
                 }
                 if (statusBuffer.dwCurrentState == (uint)ServiceControllerStatus.StartPending || statusBuffer.dwCurrentState == (uint)ServiceControllerStatus.StopPending)
                 {
-                    System.Threading.Thread.Sleep((int)statusBuffer.dwWaitHint);
+                    int waitTime = Math.Max(250, Math.Min((int)statusBuffer.dwWaitHint, 10000));
+                    System.Threading.Thread.Sleep(waitTime);
                     continue;
                 }
                 if (statusBuffer.dwCurrentState == (uint)ServiceControllerStatus.Running)
@@ -348,11 +368,13 @@ namespace GTweak.Modules.Helpers
                     CommandExecutor.PID = pid;
                     return;
                 }
+
+                System.Threading.Thread.Sleep(250);
             }
 
             CloseServiceHandle(hService);
             CloseServiceHandle(hSCManager);
-            throw new Win32Exception("QueryServiceStatusEx failed: " + Marshal.GetLastWin32Error());
+            throw new Win32Exception("TrustedInstaller service failed to start within timeout");
         }
 
         internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath, bool showWindow = false)

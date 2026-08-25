@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using GTweak.Modules.Common;
@@ -492,10 +491,7 @@ namespace GTweak.Modules.Tweaks
                             {
                                 if (state)
                                 {
-                                    if (File.Exists(PathTargets.Files.BlankIcon))
-                                    {
-                                        File.Delete(PathTargets.Files.BlankIcon);
-                                    }
+                                    FileDirectoryHelper.DeleteFile(PathTargets.Files.BlankIcon);
 
                                     RegistryHelper.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons");
                                 }

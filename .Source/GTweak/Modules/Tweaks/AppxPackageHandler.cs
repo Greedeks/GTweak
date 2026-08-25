@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Modules.Common;
 using GTweak.Modules.Helpers;
@@ -143,7 +142,7 @@ namespace GTweak.Modules.Tweaks
 
                 await CommandExecutor.InvokeRunCommand(psCommands, true).ConfigureAwait(false);
 
-                CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /d %i in ({string.Join(" ", packageNamesToRemove.Select(n => $@"""{Path.Combine(PathTargets.Folders.SystemDrive, "Program Files", "WindowsApps")}\*{n}*"""))}) do takeown /f ""%i"" /r /d y && icacls ""%i"" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 && icacls ""%i"" /grant {Environment.UserName}:F && rd /s /q ""%i""");
+                CommandExecutor.RunCommandAsTrustedInstaller($@"/c for /d %i in ({string.Join(" ", packageNamesToRemove.Select(n => $@"""{Path.Combine(PathTargets.Folders.SystemDrive, "Program Files", "WindowsApps")}\*{n}*"""))}) do takeown /f ""%i"" /r /d y && icacls ""%i"" /inheritance:r /remove S-1-5-32-544 S-1-5-11 S-1-5-32-545 S-1-5-18 && icacls ""%i"" /grant ""{Environment.UserName}"":F && rd /s /q ""%i""");
 
                 string[] allUserStorePaths =
                 {
@@ -264,12 +263,8 @@ namespace GTweak.Modules.Tweaks
             string setup = PathTargets.Executable.EdgeSetup;
             string stub = PathTargets.Executable.EdgeTempStub;
 
-            try
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(stub));
-                File.WriteAllBytes(stub, Array.Empty<byte>());
-            }
-            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+            FileDirectoryHelper.CreateDirectory(Path.GetDirectoryName(stub));
+            File.WriteAllBytes(stub, Array.Empty<byte>());
 
             if (!string.IsNullOrEmpty(setup))
             {
@@ -292,14 +287,7 @@ namespace GTweak.Modules.Tweaks
                 catch (Exception ex) { ErrorLogger.LogDebug(ex); }
             }
 
-            try
-            {
-                if (Directory.Exists(Path.GetDirectoryName(stub)))
-                {
-                    Directory.Delete(Path.GetDirectoryName(stub), true);
-                }
-            }
-            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+            FileDirectoryHelper.DeleteDirectory(Path.GetDirectoryName(stub));
 
             if (removeWebView)
             {
@@ -321,14 +309,7 @@ namespace GTweak.Modules.Tweaks
                 RegistryHelper.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects", true);
                 RegistryHelper.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\EdgeUpdate", true);
 
-                foreach (string dir in PathTargets.Folders.EdgeComponents)
-                {
-                    if (Directory.Exists(dir))
-                    {
-                        UnlockHandleHelper.UnlockDirectory(dir);
-                        RemoveDirectory(dir);
-                    }
-                }
+                FileDirectoryHelper.ForceDeleteDirectory(PathTargets.Folders.EdgeComponents);
             }
 
             try
@@ -338,7 +319,7 @@ namespace GTweak.Modules.Tweaks
                 {
                     using RegistryKey subKeyEntry = key.OpenSubKey(subKey);
                     string path = subKeyEntry?.GetValue("Path") as string;
-                    if (!string.IsNullOrEmpty(path) && path.Equals("Edge"))
+                    if (!string.IsNullOrEmpty(path) && path.Contains("Edge"))
                     {
                         if (!removeWebView && path.Contains("WebView"))
                         {
@@ -350,7 +331,7 @@ namespace GTweak.Modules.Tweaks
                             path = path.Replace(@"\AppxManifest.xml", "").Trim();
                         }
 
-                        RemoveDirectory(path);
+                        FileDirectoryHelper.ForceDeleteDirectory(path);
 
                         key.DeleteSubKey(subKey);
 
@@ -359,19 +340,6 @@ namespace GTweak.Modules.Tweaks
                 }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-        }
-
-        private static void RemoveDirectory(string path)
-        {
-            CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{path}"" /r /d y && icacls ""{path}"" /inheritance:r && icacls ""{path}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{path}"" /grant {Environment.UserName}:F /t && rd /s /q ""{path}""");
-
-            for (int i = 0; Directory.Exists(path) && i < 10; i++)
-            {
-                try { Directory.Delete(path, true); Thread.Sleep(300); }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-
-                CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{path}' -Recurse -Force", true);
-            }
         }
     }
 }

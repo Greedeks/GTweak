@@ -11,7 +11,7 @@ namespace GTweak.Modules.Helpers
 {
     internal static class CommandExecutor
     {
-        internal static int PID = 0;
+        internal static volatile int PID = 0;
 
         internal static async Task<string> GetCommandOutput(string command, bool isPowerShell = true)
         {
@@ -51,51 +51,44 @@ namespace GTweak.Modules.Helpers
                 ? $"\"{PathTargets.Executable.PowerShell}\" -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\""
                 : $"\"{PathTargets.Executable.CommandShell}\" {command}");
 
-        internal static async void RunCommand(string command, bool isPowerShell = false)
+        internal static void RunCommand(string command, bool isPowerShell = false)
         {
-            await Task.Run(() =>
+            ProcessStartInfo startInfo = new ProcessStartInfo()
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo()
-                {
-                    FileName = isPowerShell ? PathTargets.Executable.PowerShell : PathTargets.Executable.CommandShell,
-                    Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    UseShellExecute = true,
-                    Verb = "runas",
-                    CreateNoWindow = true
-                };
+                FileName = isPowerShell ? PathTargets.Executable.PowerShell : PathTargets.Executable.CommandShell,
+                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = true,
+                Verb = "runas",
+                CreateNoWindow = true
+            };
 
-                using Process process = new Process { StartInfo = startInfo };
-                try { process.Start(); }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-            }).ConfigureAwait(false);
+            using Process process = new Process { StartInfo = startInfo };
+            try { process.Start(); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
-        internal static async void RunCommandShow(string fileName, string arguments = "", bool isElevationRequired = false)
+        internal static async void RunProcessVisible(string fileName, string arguments = "", bool isElevationRequired = false)
         {
-            await Task.Run(() =>
+            if (isElevationRequired)
             {
-                if (isElevationRequired)
-                {
-                    TrustedInstaller.CreateProcessAsTrustedInstaller(PID, $"{fileName} {arguments}", true);
-                }
-                else
-                {
-                    ProcessStartInfo startInfo = new ProcessStartInfo()
-                    {
-                        FileName = fileName,
-                        Arguments = arguments,
-                        WindowStyle = ProcessWindowStyle.Normal,
-                        UseShellExecute = true,
-                        Verb = "runas",
-                        CreateNoWindow = false
-                    };
+                TrustedInstaller.CreateProcessAsTrustedInstaller(PID, $"{fileName} {arguments}", true);
+                return;
+            }
 
-                    using Process process = new Process() { StartInfo = startInfo };
-                    try { process.Start(); }
-                    catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-                }
-            }).ConfigureAwait(false);
+            ProcessStartInfo startInfo = new ProcessStartInfo()
+            {
+                FileName = fileName,
+                Arguments = arguments,
+                WindowStyle = ProcessWindowStyle.Normal,
+                UseShellExecute = true,
+                Verb = "runas",
+                CreateNoWindow = false
+            };
+
+            using Process process = new Process { StartInfo = startInfo };
+            try { process.Start(); }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         internal static async Task InvokeRunCommand(string command, bool isPowerShell = false)
@@ -116,6 +109,23 @@ namespace GTweak.Modules.Helpers
             {
                 process.Start();
                 await process.WaitForExitAsync().ConfigureAwait(false);
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+        }
+
+        internal static void RunEncodedPowerShell(string command)
+        {
+            try
+            {
+                Process comandoAEjecutar = new Process();
+                comandoAEjecutar.StartInfo.FileName = PathTargets.Executable.PowerShell;
+                comandoAEjecutar.StartInfo.Arguments = $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -EncodedCommand \"{Convert.ToBase64String(Encoding.Unicode.GetBytes(command))}\"";
+                comandoAEjecutar.StartInfo.UseShellExecute = false;
+                comandoAEjecutar.StartInfo.RedirectStandardOutput = true;
+                comandoAEjecutar.StartInfo.RedirectStandardError = true;
+                comandoAEjecutar.StartInfo.CreateNoWindow = true;
+                comandoAEjecutar.Start();
+                comandoAEjecutar.StandardOutput.ReadToEnd();
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }

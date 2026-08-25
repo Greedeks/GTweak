@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.AccessControl;
 using GTweak.Modules.Common;
+using GTweak.Modules.Helpers;
 using GTweak.Modules.Managers;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -97,7 +98,7 @@ namespace GTweak.Modules.Tweaks.Defender
         {
             try
             {
-                Directory.CreateDirectory(PathTargets.Folders.DefenderBackup);
+                FileDirectoryHelper.CreateDirectory(PathTargets.Folders.DefenderBackup);
 
                 Dictionary<string, Dictionary<string, RegistryValueBackup>> allValues = new Dictionary<string, Dictionary<string, RegistryValueBackup>>(StringComparer.OrdinalIgnoreCase);
                 Dictionary<string, string> aclDataDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);

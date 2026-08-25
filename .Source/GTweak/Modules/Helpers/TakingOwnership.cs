@@ -114,8 +114,7 @@ namespace GTweak.Modules.Helpers
         private const int SECURITY_BUILTIN_DOMAIN_RID = 0x00000020;
         private const int DOMAIN_ALIAS_RID_ADMINS = 0x00000220;
         private const int DOMAIN_ALIAS_RID_USERS = 0x00000221;
-        private const int DOMAIN_ALIAS_RID_TRUSTED_INSTALLER = 0x00000222;
-        private const int DOMAIN_ALIAS_RID_WD = 0x00000223;
+
         private const int TOKEN_QUERY = 8;
         private const int SE_PRIVILEGE_ENABLED = 2;
 
@@ -190,14 +189,12 @@ namespace GTweak.Modules.Helpers
             IntPtr sidAdmin = IntPtr.Zero;
             IntPtr sidUsers = IntPtr.Zero;
             IntPtr sidTrustedInstaller = IntPtr.Zero;
-            IntPtr sidWD = IntPtr.Zero;
 
             AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, ref sidAdmin);
             AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_USERS, 0, 0, 0, 0, 0, 0, ref sidUsers);
-            AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_TRUSTED_INSTALLER, 0, 0, 0, 0, 0, 0, ref sidTrustedInstaller);
-            AllocateAndInitializeSid(ref sidNTAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_WD, 0, 0, 0, 0, 0, 0, ref sidWD);
+            AllocateAndInitializeSid(ref sidNTAuthority, 6, 80, 956008885, 3418522649, 1831038044, 1853292631, 2271478464, 0, 0, ref sidTrustedInstaller);
 
-            EXPLICIT_ACCESS[] explicitAccesss = new EXPLICIT_ACCESS[4];
+            EXPLICIT_ACCESS[] explicitAccesss = new EXPLICIT_ACCESS[3];
 
             explicitAccesss[0].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
             explicitAccesss[0].grfAccessMode = ACCESS_MODE.SET_ACCESS;
@@ -220,29 +217,19 @@ namespace GTweak.Modules.Helpers
             explicitAccesss[2].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
             explicitAccesss[2].Trustee.ptstrName = sidTrustedInstaller;
 
-            explicitAccesss[3].grfAccessPermissions = ACCESS_MASK.GENERIC_ALL;
-            explicitAccesss[3].grfAccessMode = ACCESS_MODE.DENY_ACCESS;
-            explicitAccesss[3].grfInheritance = NO_INHERITANCE;
-            explicitAccesss[3].Trustee.TrusteeForm = TRUSTEE_FORM.TRUSTEE_IS_SID;
-            explicitAccesss[3].Trustee.TrusteeType = TRUSTEE_TYPE.TRUSTEE_IS_GROUP;
-            explicitAccesss[3].Trustee.ptstrName = sidWD;
-
             IntPtr acl = IntPtr.Zero;
-            SetEntriesInAcl(4, ref explicitAccesss[0], (IntPtr)0, ref acl);
+            SetEntriesInAcl(3, ref explicitAccesss[0], (IntPtr)0, ref acl);
 
             static void setPrivilege(string privilege, bool allow)
             {
                 TOKEN_PRIVILEGES tokenPrivileges = new TOKEN_PRIVILEGES();
                 OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr token);
 
-                if (allow)
-                {
-                    LookupPrivilegeValueA(null, privilege, out LUID luid);
-                    tokenPrivileges.PrivilegeCount = 1;
-                    tokenPrivileges.Privileges = new LUID_AND_ATTRIBUTES[1];
-                    tokenPrivileges.Privileges[0].Luid = luid;
-                    tokenPrivileges.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-                }
+                LookupPrivilegeValueA(null, privilege, out LUID luid);
+                tokenPrivileges.PrivilegeCount = 1;
+                tokenPrivileges.Privileges = new LUID_AND_ATTRIBUTES[1];
+                tokenPrivileges.Privileges[0].Luid = luid;
+                tokenPrivileges.Privileges[0].Attributes = (uint)(allow ? SE_PRIVILEGE_ENABLED : 0);
 
                 AdjustTokenPrivileges(token, false, ref tokenPrivileges, 0, IntPtr.Zero, IntPtr.Zero);
                 CloseHandle(token);
@@ -269,7 +256,6 @@ namespace GTweak.Modules.Helpers
             FreeSid(sidAdmin);
             FreeSid(sidUsers);
             FreeSid(sidTrustedInstaller);
-            FreeSid(sidWD);
             LocalFree(acl);
         }
     }

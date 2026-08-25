@@ -225,6 +225,7 @@
     <Compile Include="Modules\Configuration\StorageTypeIdentifier.cs" />
     <Compile Include="Modules\Configuration\HardwareData.cs" />
     <Compile Include="Modules\Extensions\PostActionExtensions.cs" />
+    <Compile Include="Modules\Helpers\FileDirectoryHelper.cs" />
     <Compile Include="Modules\Helpers\UnlockHandleHelper.cs" />
     <Compile Include="Modules\Extensions\WindowExtensions.cs" />
     <Compile Include="Modules\Maintenance\MemoryCleaner.cs" />

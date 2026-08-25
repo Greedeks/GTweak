@@ -75,23 +75,25 @@ namespace GTweak.Modules.Helpers
             {
                 try
                 {
-                    Process process = Process.GetProcessById(pid);
-                    if (process.HasExited)
+                    using (Process process = Process.GetProcessById(pid))
                     {
-                        continue;
-                    }
+                        if (process.HasExited)
+                        {
+                            continue;
+                        }
 
-                    try
-                    {
-                        process.CloseMainWindow();
-                        process.WaitForExit(1000);
-                    }
-                    catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+                        try
+                        {
+                            process.CloseMainWindow();
+                            process.WaitForExit(1000);
+                        }
+                        catch (Exception ex) { ErrorLogger.LogDebug(ex); }
 
-                    if (!process.HasExited)
-                    {
-                        process.Kill();
-                        process.WaitForExit(2000);
+                        if (!process.HasExited)
+                        {
+                            process.Kill();
+                            process.WaitForExit(2000);
+                        }
                     }
                 }
                 catch (Exception ex) { ErrorLogger.LogDebug(ex); }
@@ -112,7 +114,7 @@ namespace GTweak.Modules.Helpers
             {
                 try
                 {
-                    files = string.IsNullOrEmpty(directoryPath) ? new string[0] : Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories);
+                    files = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories);
 
                     if (files == null || files.Length == 0)
                     {
@@ -155,9 +157,9 @@ namespace GTweak.Modules.Helpers
                     return result;
                 }
 
-                foreach (var info in infos)
+                for (int i = 0; i < count; i++)
                 {
-                    result.Add(info.Process.dwProcessId);
+                    result.Add(infos[i].Process.dwProcessId);
                 }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }

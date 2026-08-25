@@ -622,7 +622,7 @@ namespace GTweak.Modules.Tweaks
 
         internal void Apply(string tweakName, bool state)
         {
-            INIManager.TempWrite(INIManager.TempTweaksConf, tweakName, state);
+            INIManager.TempWrite(INIManager.TempTweaksSvc, tweakName, state);
 
             if (tweakName.StartsWith("TglButton") && int.TryParse(tweakName.Substring(9), out int index))
             {
@@ -649,22 +649,10 @@ namespace GTweak.Modules.Tweaks
                     {
                         CommandExecutor.RunCommandAsTrustedInstaller($"/c net stop wuauserv & net stop bits & net stop cryptSvc & net stop RuntimeBroker & taskkill /f " + string.Join(" ", (new string[] { "usocoreworker", "msedge", "pwahelper", "edgeupdate", "edgeupdatem", "microsoftedgeupdate", "msedgewebviewhost", "msedgeuserbroker", "runtimebroker", "widgets" }).Select(p => $"/im {p}.exe")));
 
-                        foreach (string path in PathTargets.Targets.WindowsUpdate.CleanupFolders)
-                        {
-                            UnlockHandleHelper.UnlockDirectory(path);
-
-                            CommandExecutor.RunCommandAsTrustedInstaller($@"/c takeown /f ""{path}"" /r /d y && icacls ""{path}"" /inheritance:r && icacls ""{path}"" /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18 && icacls ""{path}"" /grant {Environment.UserName}:F /t && rd /s /q ""{path}""");
-
-                            for (int i = 0; Directory.Exists(path) && i < 5; i++)
-                            {
-                                try { Directory.Delete(path, true); }
-                                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-
-                                CommandExecutor.RunCommand($"Remove-Item -LiteralPath '{path}' -Recurse -Force", true);
-                            }
-                        }
+                        FileDirectoryHelper.ForceDeleteDirectory(PathTargets.Targets.WindowsUpdate.CleanupFolders);
 
                         SetTaskStateOwner(false, winUpdatesTasks);
+
                         CommandExecutor.RunCommandAsTrustedInstaller("/c net start bits & net start cryptSvc");
                     }
                 }
