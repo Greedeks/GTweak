@@ -3,14 +3,15 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Xml.Linq;
 using GTweak.Core.Base;
 using GTweak.Core.Item;
 using GTweak.Core.Models;
 using GTweak.Core.Services;
 using GTweak.Modules.Common;
+using Newtonsoft.Json.Linq;
 using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
@@ -57,15 +58,15 @@ namespace GTweak.Core.ViewModel
         {
             try
             {
-                string xmlContent = Properties.Resources.AppsCatalog;
+                string jsonContent = Properties.Resources.ToolsetStore;
 
-                if (!string.IsNullOrWhiteSpace(xmlContent))
+                if (!string.IsNullOrWhiteSpace(jsonContent))
                 {
-                    XDocument doc = XDocument.Parse(xmlContent);
+                    JArray apps = JArray.Parse(jsonContent);
 
-                    foreach (XElement appElement in doc.Descendants("App"))
+                    foreach (JObject appObject in apps.Cast<JObject>())
                     {
-                        ToolsetModel model = new ToolsetModel(appElement);
+                        ToolsetModel model = new ToolsetModel(appObject);
                         Tools.Add(new ToolsetItem(model));
                     }
                 }

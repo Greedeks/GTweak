@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Core.Base;
@@ -67,15 +66,16 @@ namespace GTweak.Core.Item
         {
             try
             {
-                IsSquareIcon = false;
+                AppIconSource = _model.AppIcon;
+                AuthorIconSource = _model.PlaceholderIcon;
 
-                AppIconSource = Application.Current.TryFindResource(_model.IconResourceName) as ImageSource;
-                AuthorIconSource = ToolsetIconService.GetPlaceholder(_model.Group);
+                ImageSource imageSource = await ToolsetIconService.GetAuthorIcon(_model.AuthorIconUrl, _model.AuthorIconInfo.IsDirectUrl);
 
-                (ImageSource Image, bool IsFallback) = await ToolsetIconService.GetAuthorIcon(_model.Group, _model.AuthorIconUrl);
-
-                AuthorIconSource = Image;
-                IsSquareIcon = !string.Equals(_model.Group, "github", StringComparison.OrdinalIgnoreCase) && !IsFallback;
+                if (imageSource != null)
+                {
+                    AuthorIconSource = imageSource;
+                    IsSquareIcon = _model.AuthorIconInfo.IsSquareIcon;
+                }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }

@@ -1,13 +1,16 @@
-using System.Xml.Linq;
+using System.Windows;
+using System.Windows.Media;
+using Newtonsoft.Json.Linq;
 
 namespace GTweak.Core.Models
 {
     internal class ToolsetModel
     {
+        public ImageSource AppIcon { get; }
         public string AppName { get; }
-        public string AuthorName { get; }
         public string Group { get; }
-        public string IconResourceName { get; }
+        public ImageSource PlaceholderIcon { get; }
+        public string AuthorName { get; }
         public string AuthorIconUrl { get; }
         public string SourceUrl { get; }
         public string DownloadPath { get; }
@@ -15,18 +18,31 @@ namespace GTweak.Core.Models
         public string UrlPattern { get; }
         public string FileName { get; }
 
-        public ToolsetModel(XElement appElement)
+        public (bool IsDirectUrl, bool IsSquareIcon) AuthorIconInfo
         {
-            AppName = appElement.Element("Name")?.Value ?? string.Empty;
-            AuthorName = appElement.Element("Author")?.Value ?? string.Empty;
-            Group = appElement.Element("Group")?.Value ?? string.Empty;
-            IconResourceName = appElement.Element("Icon")?.Value ?? string.Empty;
-            AuthorIconUrl = appElement.Element("AuthorIcon")?.Value ?? string.Empty;
-            SourceUrl = appElement.Element("Source")?.Value ?? string.Empty;
-            DownloadPath = appElement.Element("DownloadPath")?.Value ?? string.Empty;
-            FilePattern = appElement.Element("FilePattern")?.Value ?? string.Empty;
-            UrlPattern = appElement.Element("UrlPattern")?.Value ?? string.Empty;
-            FileName = appElement.Element("FileName")?.Value ?? string.Empty;
+            get
+            {
+                return Group?.ToLowerInvariant() switch
+                {
+                    "github" => (IsDirectUrl: true, IsSquareIcon: false),
+                    _ => (IsDirectUrl: false, IsSquareIcon: true)
+                };
+            }
+        }
+
+        public ToolsetModel(JObject appObject)
+        {
+            AppIcon = Application.Current?.TryFindResource(appObject["icon"]?.ToString() ?? string.Empty) as ImageSource;
+            AppName = appObject["name"]?.ToString() ?? string.Empty;
+            Group = appObject["group"]?.ToString() ?? string.Empty;
+            PlaceholderIcon = Application.Current?.TryFindResource(appObject["placeholderIcon"]?.ToString() ?? string.Empty) as ImageSource;
+            AuthorName = appObject["author"]?.ToString() ?? string.Empty;
+            AuthorIconUrl = appObject["authorIcon"]?.ToString() ?? string.Empty;
+            SourceUrl = appObject["source"]?.ToString() ?? string.Empty;
+            DownloadPath = appObject["downloadPath"]?.ToString() ?? string.Empty;
+            FilePattern = appObject["filePattern"]?.ToString() ?? string.Empty;
+            UrlPattern = appObject["urlPattern"]?.ToString() ?? string.Empty;
+            FileName = appObject["fileName"]?.ToString() ?? string.Empty;
         }
     }
 }

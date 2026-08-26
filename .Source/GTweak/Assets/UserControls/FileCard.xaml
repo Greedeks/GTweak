@@ -24,7 +24,7 @@
                 </Grid.RowDefinitions>
 
                 <Viewbox Grid.Row="0" Width="50" Height="50" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="{Binding IconSource,ElementName=Root,TargetNullValue={StaticResource Img_BatFile}}" Stretch="Uniform"/>
+                    <Image Source="{Binding IconSource,ElementName=Root,TargetNullValue={StaticResource Img_Bat}}" Stretch="Uniform"/>
                 </Viewbox>
 
                 <TextBlock Grid.Row="1" Margin="0,15,0,0" FontSize="13px" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding FileName,ElementName=Root}"

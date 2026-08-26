@@ -59,7 +59,7 @@
                                 </Style>
                             </Border.Style>
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding AuthorIcon,ElementName=Root}" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="{Binding AuthorIcon,ElementName=Root, TargetNullValue={StaticResource Icon_Website}}" Stretch="Uniform"/>
                             </Border.Background>
                         </Border>
 

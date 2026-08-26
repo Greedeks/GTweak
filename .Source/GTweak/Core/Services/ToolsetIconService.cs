@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using GTweak.Modules.Common;
@@ -15,59 +14,37 @@ namespace GTweak.Core.Services
         private static readonly ConcurrentDictionary<string, ImageSource> _imageCache = new ConcurrentDictionary<string, ImageSource>();
         private static readonly HttpClient _httpClient = new HttpClient();
 
-        internal static ImageSource GetPlaceholder(string group) => Application.Current.TryFindResource($"Icon_{(string.Equals(group, "github", StringComparison.OrdinalIgnoreCase) ? "Git" : "Website")}") as ImageSource;
-
-        internal static async Task<(ImageSource Image, bool IsFallback)> GetAuthorIcon(string group, string iconSource)
+        internal static async Task<ImageSource> GetAuthorIcon(string iconSource, bool isDirectUrl)
         {
             if (string.IsNullOrWhiteSpace(iconSource))
             {
-                return (GetPlaceholder(group), true);
+                return null;
             }
 
             if (_imageCache.TryGetValue(iconSource, out ImageSource cachedImage))
             {
-                return (cachedImage, false);
+                return cachedImage;
             }
 
-            string urlToDownload = iconSource;
-            bool isWebBased = !string.Equals(group, "github", StringComparison.OrdinalIgnoreCase);
+            string[] urlsToDownload = isDirectUrl ? new[] { iconSource } : new[] { PathTargets.Links.Favicons.Google(iconSource), PathTargets.Links.Favicons.DuckDuckGo(iconSource) };
 
-            if (isWebBased)
+            foreach (string url in urlsToDownload)
             {
-                urlToDownload = PathTargets.Links.Favicons.Google(iconSource);
-            }
-
-            try
-            {
-                byte[] imageBytes = await _httpClient.GetByteArrayAsync(urlToDownload);
-                ImageSource image = LoadImage(imageBytes);
-
-                if (image != null)
+                try
                 {
-                    _imageCache.TryAdd(iconSource, image);
-                    return (image, false);
-                }
-            }
-            catch
-            {
-                if (isWebBased)
-                {
-                    try
+                    byte[] imageBytes = await _httpClient.GetByteArrayAsync(url);
+                    ImageSource image = LoadImage(imageBytes);
+
+                    if (image != null)
                     {
-                        byte[] imageBytes = await _httpClient.GetByteArrayAsync(PathTargets.Links.Favicons.DuckDuckGo(iconSource));
-                        ImageSource image = LoadImage(imageBytes);
-
-                        if (image != null)
-                        {
-                            _imageCache.TryAdd(iconSource, image);
-                            return (image, false);
-                        }
+                        _imageCache.TryAdd(iconSource, image);
+                        return image;
                     }
-                    catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                 }
+                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
             }
 
-            return (GetPlaceholder(group), true);
+            return null;
         }
 
         private static ImageSource LoadImage(byte[] imageData)

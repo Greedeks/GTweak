@@ -148,11 +148,10 @@ namespace GTweak.Core.ViewModel
 
                     string iconRes = Path.GetExtension(file).ToLowerInvariant() switch
                     {
-                        ".ps1" => "Img_PowershellFile",
-                        ".reg" => "Img_RegistryFile",
-                        ".bat" => "Img_BatFile",
-                        ".cmd" => "Img_CmdFile",
-                        _ => "Img_BatFile"
+                        ".ps1" => "Img_PowerShell",
+                        ".reg" => "Img_Registry",
+                        ".cmd" => "Img_Cmd",
+                        _ => "Img_Bat"
                     };
 
                     ImageSource iconImage = null;

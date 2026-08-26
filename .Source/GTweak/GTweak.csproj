@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="Resources\AppsCatalog.xml" />
+    <None Include="Resources\ToolsetStore.json" />
     <None Include="Resources\*.gz" />
     <None Include="Resources\Blocklist.txt" />
     <None Include="Resources\Tickets.xml" />
@@ -525,6 +525,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

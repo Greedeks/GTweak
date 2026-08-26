@@ -1,29 +1,30 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--#region AddonsFiles -->
-    <BitmapImage x:Key="Img_BatFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/BatFile.png"/>
-    <BitmapImage x:Key="Img_CmdFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/CmdFile.png"/>
-    <BitmapImage x:Key="Img_PowershellFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/PowershellFile.png"/>
-    <BitmapImage x:Key="Img_RegistryFile" UriSource="/GTweak;component/Assets/Images/AddonsFiles/RegistryFile.png"/>
+    <!--#region AddonFiles -->
+    <BitmapImage x:Key="Img_Bat" UriSource="/GTweak;component/Assets/Images/AddonFiles/Bat.png"/>
+    <BitmapImage x:Key="Img_Cmd" UriSource="/GTweak;component/Assets/Images/AddonFiles/Cmd.png"/>
+    <BitmapImage x:Key="Img_PowerShell" UriSource="/GTweak;component/Assets/Images/AddonFiles/PowerShell.png"/>
+    <BitmapImage x:Key="Img_Registry" UriSource="/GTweak;component/Assets/Images/AddonFiles/Registry.png"/>
     <!--#endregion -->
 
-    <!--#region DownloadApps -->
-    <BitmapImage x:Key="Img_Amd" UriSource="/GTweak;component/Assets/Images/DownloadApps/Amd.png"/>
-    <BitmapImage x:Key="Img_Autoruns" UriSource="/GTweak;component/Assets/Images/DownloadApps/Autoruns.png"/>
-    <BitmapImage x:Key="Img_CPUz" UriSource="/GTweak;component/Assets/Images/DownloadApps/CPUz.png"/>
-    <BitmapImage x:Key="Img_DeviceTweaker" UriSource="/GTweak;component/Assets/Images/DownloadApps/DeviceTweaker.png"/>
-    <BitmapImage x:Key="Img_DiskInfo" UriSource="/GTweak;component/Assets/Images/DownloadApps/DiskInfo.png"/>
-    <BitmapImage x:Key="Img_DiskMark" UriSource="/GTweak;component/Assets/Images/DownloadApps/DiskMark.png"/>
-    <BitmapImage x:Key="Img_FirstEverTech" UriSource="/GTweak;component/Assets/Images/DownloadApps/FirstEverTech.png"/>
-    <BitmapImage x:Key="Img_GPUz" UriSource="/GTweak;component/Assets/Images/DownloadApps/GPUz.png"/>
-    <BitmapImage x:Key="Img_Nvidia" UriSource="/GTweak;component/Assets/Images/DownloadApps/Nvidia.png"/>
-    <BitmapImage x:Key="Img_NvidiaPI" UriSource="/GTweak;component/Assets/Images/DownloadApps/NvidiaPI.png"/>
-    <BitmapImage x:Key="Img_Occt" UriSource="/GTweak;component/Assets/Images/DownloadApps/Occt.png"/>
-    <BitmapImage x:Key="Img_PCIz" UriSource="/GTweak;component/Assets/Images/DownloadApps/PCIz.png"/>
-    <BitmapImage x:Key="Img_Rapr" UriSource="/GTweak;component/Assets/Images/DownloadApps/Rapr.png"/>
-    <BitmapImage x:Key="Img_Rufus" UriSource="/GTweak;component/Assets/Images/DownloadApps/Rufus.png"/>
-    <BitmapImage x:Key="Img_SystemInfo" UriSource="/GTweak;component/Assets/Images/DownloadApps/SystemInfo.png"/>
+    <!--#region DownloadToolset -->
+    <BitmapImage x:Key="Img_Amd" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Amd.png"/>
+    <BitmapImage x:Key="Img_Autoruns" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Autoruns.png"/>
+    <BitmapImage x:Key="Img_CPUz" UriSource="/GTweak;component/Assets/Images/DownloadToolset/CPUz.png"/>
+    <BitmapImage x:Key="Img_DeviceTweaker" UriSource="/GTweak;component/Assets/Images/DownloadToolset/DeviceTweaker.png"/>
+    <BitmapImage x:Key="Img_DiskInfo" UriSource="/GTweak;component/Assets/Images/DownloadToolset/DiskInfo.png"/>
+    <BitmapImage x:Key="Img_DiskMark" UriSource="/GTweak;component/Assets/Images/DownloadToolset/DiskMark.png"/>
+    <BitmapImage x:Key="Img_FirstEverTech" UriSource="/GTweak;component/Assets/Images/DownloadToolset/FirstEverTech.png"/>
+    <BitmapImage x:Key="Img_GPUz" UriSource="/GTweak;component/Assets/Images/DownloadToolset/GPUz.png"/>
+    <BitmapImage x:Key="Img_Nvidia" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Nvidia.png"/>
+    <BitmapImage x:Key="Img_NvidiaPI" UriSource="/GTweak;component/Assets/Images/DownloadToolset/NvidiaPI.png"/>
+    <BitmapImage x:Key="Img_Occt" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Occt.png"/>
+    <BitmapImage x:Key="Img_PCIz" UriSource="/GTweak;component/Assets/Images/DownloadToolset/PCIz.png"/>
+    <BitmapImage x:Key="Img_Rapr" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Rapr.png"/>
+    <BitmapImage x:Key="Img_Rufus" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Rufus.png"/>
+    <BitmapImage x:Key="Img_SystemInfo" UriSource="/GTweak;component/Assets/Images/DownloadToolset/SystemInfo.png"/>
+    <BitmapImage x:Key="Img_ThrottleStop" UriSource="/GTweak;component/Assets/Images/DownloadToolset/ThrottleStop.png"/>
     <!--#endregion -->
 
     <!--#region PreinstalledApps -->
