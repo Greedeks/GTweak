@@ -19,6 +19,7 @@ namespace GTweak.Core.Services
     internal static class ToolsetDownloadService
     {
         private static readonly HttpClient _httpClient;
+        private static readonly HashSet<string> _excludedAssetExtensions = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".sig", ".sha256", ".asc", ".txt" };
         private static readonly ConcurrentDictionary<string, DownloadSession> _sessions = new ConcurrentDictionary<string, DownloadSession>();
 
         static ToolsetDownloadService()
@@ -29,195 +30,20 @@ namespace GTweak.Core.Services
 
         internal static DownloadSession GetOrCreateSession(ToolsetModel model) => _sessions.GetOrAdd(!string.IsNullOrWhiteSpace(model.SourceUrl) ? model.SourceUrl : model.AppName, _ => new DownloadSession(model));
 
+        private static readonly Dictionary<string, Func<ToolsetModel, CancellationToken, Task<string>>> _resolvers = new Dictionary<string, Func<ToolsetModel, CancellationToken, Task<string>>>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["web"] = ResolveDirectUrl,
+            ["github"] = ResolveGitHubUrl,
+            ["sourceforge"] = ResolveSourceForgeUrl,
+            ["techpowerup"] = ResolveTechPowerUpUrl,
+            ["maxon"] = ResolveMaxonUrl,
+        };
+
         internal static async Task<string> GetResolvedDownloadUrl(ToolsetModel model, CancellationToken token = default)
         {
-            if (model.Group.Equals("web", StringComparison.OrdinalIgnoreCase))
+            if (_resolvers.TryGetValue(model.Group, out var resolver))
             {
-                if (string.IsNullOrEmpty(model.UrlPattern))
-                {
-                    return model.DownloadPath;
-                }
-
-                using HttpResponseMessage response = await _httpClient.GetAsync(model.DownloadPath, token);
-                response.EnsureSuccessStatusCode();
-                string htmlCode = await response.Content.ReadAsStringAsync();
-                Match match = Regex.Match(htmlCode, model.UrlPattern, RegexOptions.IgnoreCase);
-
-                if (match.Success)
-                {
-                    string url = match.Value;
-                    if (Uri.TryCreate(url, UriKind.Relative, out _))
-                    {
-                        if (Uri.TryCreate(new Uri(model.DownloadPath), url, out Uri absoluteUri))
-                        {
-                            return absoluteUri.ToString();
-                        }
-                    }
-                    return url;
-                }
-
-                throw new HttpRequestException();
-            }
-
-            if (model.Group.Equals("github", StringComparison.OrdinalIgnoreCase))
-            {
-                string apiUrl = PathTargets.Links.DownloadSources.GitHubLatest(model.DownloadPath);
-                using HttpResponseMessage response = await _httpClient.GetAsync(apiUrl, token);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    if (response.StatusCode == HttpStatusCode.Forbidden || (int)response.StatusCode == 429)
-                    {
-                        throw new Exception("GitHubRateLimit");
-                    }
-
-                    throw new HttpRequestException();
-                }
-
-                string content = await response.Content.ReadAsStringAsync();
-                JObject json = JObject.Parse(content);
-
-                if (json["assets"] is JArray assets && assets.Count > 0)
-                {
-                    List<string> urls = assets.Select(a => a["browser_download_url"]?.ToString()).Where(u => !string.IsNullOrEmpty(u)).ToList();
-
-                    if (!string.IsNullOrEmpty(model.FilePattern))
-                    {
-                        string matchedUrl = urls.FirstOrDefault(u => Regex.IsMatch(u, model.FilePattern, RegexOptions.IgnoreCase));
-                        if (matchedUrl != null)
-                        {
-                            return matchedUrl;
-                        }
-                    }
-
-                    string fallbackUrl = urls.FirstOrDefault(u => !u.EndsWith(".sig", StringComparison.OrdinalIgnoreCase) && !u.EndsWith(".sha256", StringComparison.OrdinalIgnoreCase) && !u.EndsWith(".asc", StringComparison.OrdinalIgnoreCase) && !u.EndsWith(".txt", StringComparison.OrdinalIgnoreCase));
-
-                    return fallbackUrl ?? urls.FirstOrDefault();
-                }
-                throw new HttpRequestException();
-            }
-
-            if (model.Group.Equals("sourceforge", StringComparison.OrdinalIgnoreCase))
-            {
-                string projectName = model.DownloadPath;
-                Match match = Regex.Match(projectName, @"projects/([^/]+)");
-                projectName = match.Success ? match.Groups[1].Value : projectName.Trim('/');
-
-                string bestReleaseUrl = PathTargets.Links.DownloadSources.SourceForgeBest(projectName);
-                try
-                {
-                    using HttpResponseMessage response = await _httpClient.GetAsync(bestReleaseUrl, token);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string content = await response.Content.ReadAsStringAsync();
-                        JObject json = JObject.Parse(content);
-                        string filename = json["release"]?["filename"]?.ToString();
-
-                        if (!string.IsNullOrEmpty(filename))
-                        {
-                            if (string.IsNullOrEmpty(model.FilePattern) || Regex.IsMatch(filename, model.FilePattern, RegexOptions.IgnoreCase))
-                            {
-                                return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, filename.TrimStart('/'));
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ErrorLogger.LogDebug(ex);
-                }
-
-                try
-                {
-                    string rssUrl = PathTargets.Links.DownloadSources.SourceForgeRss(projectName);
-                    using HttpResponseMessage rssResponse = await _httpClient.GetAsync(rssUrl, token);
-                    rssResponse.EnsureSuccessStatusCode();
-                    string rssContent = await rssResponse.Content.ReadAsStringAsync();
-
-                    MatchCollection rssMatches = Regex.Matches(rssContent, PathTargets.Links.DownloadSources.SourceForgeRssRegex(projectName), RegexOptions.IgnoreCase);
-
-                    if (rssMatches.Count > 0)
-                    {
-                        if (!string.IsNullOrEmpty(model.FilePattern))
-                        {
-                            foreach (Match rssMatch in rssMatches)
-                            {
-                                string filePath = rssMatch.Groups[1].Value;
-                                if (Regex.IsMatch(filePath, model.FilePattern, RegexOptions.IgnoreCase))
-                                {
-
-                                    return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, filePath.TrimStart('/'));
-                                }
-                            }
-                        }
-
-                        string firstFilePath = rssMatches[0].Groups[1].Value;
-                        return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, firstFilePath.TrimStart('/'));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ErrorLogger.LogDebug(ex);
-                }
-
-                throw new HttpRequestException();
-            }
-
-            if (model.Group.Equals("techpowerup", StringComparison.OrdinalIgnoreCase))
-            {
-                using HttpResponseMessage initialResponse = await _httpClient.GetAsync(model.DownloadPath, token);
-                initialResponse.EnsureSuccessStatusCode();
-                string initialHtml = await initialResponse.Content.ReadAsStringAsync();
-
-                Match idMatch = Regex.Match(initialHtml, @"name=""id""\s+value=""(?<id>\d+)""", RegexOptions.IgnoreCase);
-
-                if (!idMatch.Success)
-                {
-                    throw new HttpRequestException();
-                }
-
-                string fileId = idMatch.Groups["id"].Value;
-
-                FormUrlEncodedContent firstStepPayload = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("id", fileId) });
-
-                using HttpResponseMessage firstResponse = await _httpClient.PostAsync(model.DownloadPath, firstStepPayload, token);
-                string serverSelectionHtml = await firstResponse.Content.ReadAsStringAsync();
-
-                MatchCollection serverMatches = Regex.Matches(serverSelectionHtml, @"(?is)<button[^>]+?name=""server_id""[^>]+?value=""(?<sid>\d+)""[^>]*>(?<content>.*?)</button>");
-
-                string closestId = null, lowLoadId = null, firstId = null;
-
-                foreach (Match m in serverMatches)
-                {
-                    string sid = m.Groups["sid"].Value;
-                    string content = m.Groups["content"].Value;
-
-                    firstId ??= sid;
-
-                    if (content.IndexOf("closest", StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        closestId = sid;
-                        break;
-                    }
-
-                    if (lowLoadId == null && content.IndexOf("server-load low", StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        lowLoadId = sid;
-                    }
-                }
-
-                FormUrlEncodedContent finalPayload = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("id", fileId), new KeyValuePair<string, string>("server_id", closestId ?? lowLoadId ?? firstId ?? throw new HttpRequestException()) });
-
-                using HttpRequestMessage finalRequest = new HttpRequestMessage(HttpMethod.Post, model.DownloadPath)
-                {
-                    Content = finalPayload
-                };
-
-                finalRequest.Headers.Referrer = new Uri(model.DownloadPath);
-
-                using HttpResponseMessage finalResponse = await _httpClient.SendAsync(finalRequest, HttpCompletionOption.ResponseHeadersRead, token);
-
-                return finalResponse.RequestMessage.RequestUri.ToString();
+                return await resolver(model, token);
             }
 
             throw new HttpRequestException();
@@ -325,6 +151,247 @@ namespace GTweak.Core.Services
                 ErrorLogger.LogDebug(ex);
                 throw;
             }
+        }
+
+        private static async Task<string> ResolveDirectUrl(ToolsetModel model, CancellationToken token)
+        {
+            if (string.IsNullOrEmpty(model.UrlPattern))
+            {
+                return model.DownloadPath;
+            }
+
+            using HttpResponseMessage response = await _httpClient.GetAsync(model.DownloadPath, token);
+            response.EnsureSuccessStatusCode();
+            string htmlCode = await response.Content.ReadAsStringAsync();
+            Match match = Regex.Match(htmlCode, model.UrlPattern, RegexOptions.IgnoreCase);
+
+            if (match.Success)
+            {
+                string url = match.Value;
+                if (Uri.TryCreate(url, UriKind.Relative, out _))
+                {
+                    if (Uri.TryCreate(new Uri(model.DownloadPath), url, out Uri absoluteUri))
+                    {
+                        return absoluteUri.ToString();
+                    }
+                }
+                return url;
+            }
+
+            throw new HttpRequestException();
+        }
+
+        private static async Task<string> ResolveGitHubUrl(ToolsetModel model, CancellationToken token)
+        {
+            if (!string.IsNullOrEmpty(model.FilePattern) && model.FilePattern.StartsWith("raw:", StringComparison.OrdinalIgnoreCase))
+            {
+                return $"https://raw.githubusercontent.com/{model.DownloadPath}/master/{model.FilePattern.Substring(4)}";
+            }
+
+            string apiUrl = PathTargets.Links.DownloadSources.GitHubLatest(model.DownloadPath);
+            using HttpResponseMessage response = await _httpClient.GetAsync(apiUrl, token);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                if (response.StatusCode == HttpStatusCode.Forbidden || (int)response.StatusCode == 429)
+                {
+                    throw new Exception("GitHubRateLimit");
+                }
+
+                throw new HttpRequestException();
+            }
+
+            string content = await response.Content.ReadAsStringAsync();
+            JObject json = JObject.Parse(content);
+
+            if (json["assets"] is JArray assets && assets.Count > 0)
+            {
+                List<string> urls = assets.Select(a => a["browser_download_url"]?.ToString()).Where(u => !string.IsNullOrEmpty(u)).ToList();
+
+                if (!string.IsNullOrEmpty(model.FilePattern))
+                {
+                    string matchedUrl = urls.FirstOrDefault(u => Regex.IsMatch(u, model.FilePattern, RegexOptions.IgnoreCase));
+                    if (matchedUrl != null)
+                    {
+                        return matchedUrl;
+                    }
+                }
+
+                string fallbackUrl = urls.FirstOrDefault(u => !_excludedAssetExtensions.Contains(Path.GetExtension(u)));
+
+                return fallbackUrl ?? urls.FirstOrDefault();
+            }
+            throw new HttpRequestException();
+        }
+
+        private static async Task<string> ResolveSourceForgeUrl(ToolsetModel model, CancellationToken token)
+        {
+            string projectName = model.DownloadPath;
+            Match match = Regex.Match(projectName, @"projects/([^/]+)");
+            projectName = match.Success ? match.Groups[1].Value : projectName.Trim('/');
+
+            string bestReleaseUrl = PathTargets.Links.DownloadSources.SourceForgeBest(projectName);
+            try
+            {
+                using HttpResponseMessage response = await _httpClient.GetAsync(bestReleaseUrl, token);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(content);
+                    string filename = json["release"]?["filename"]?.ToString();
+
+                    if (!string.IsNullOrEmpty(filename))
+                    {
+                        if (string.IsNullOrEmpty(model.FilePattern) || Regex.IsMatch(filename, model.FilePattern, RegexOptions.IgnoreCase))
+                        {
+                            return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, filename.TrimStart('/'));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+
+            try
+            {
+                string rssUrl = PathTargets.Links.DownloadSources.SourceForgeRss(projectName);
+                using HttpResponseMessage rssResponse = await _httpClient.GetAsync(rssUrl, token);
+                rssResponse.EnsureSuccessStatusCode();
+                string rssContent = await rssResponse.Content.ReadAsStringAsync();
+
+                MatchCollection rssMatches = Regex.Matches(rssContent, PathTargets.Links.DownloadSources.SourceForgeRssRegex(projectName), RegexOptions.IgnoreCase);
+
+                if (rssMatches.Count > 0)
+                {
+                    if (!string.IsNullOrEmpty(model.FilePattern))
+                    {
+                        foreach (Match rssMatch in rssMatches)
+                        {
+                            string filePath = rssMatch.Groups[1].Value;
+                            if (Regex.IsMatch(filePath, model.FilePattern, RegexOptions.IgnoreCase))
+                            {
+                                return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, filePath.TrimStart('/'));
+                            }
+                        }
+                    }
+
+                    string firstFilePath = rssMatches[0].Groups[1].Value;
+                    return PathTargets.Links.DownloadSources.SourceForgeFile(projectName, firstFilePath.TrimStart('/'));
+                }
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+
+            throw new HttpRequestException();
+        }
+
+        private static async Task<string> ResolveTechPowerUpUrl(ToolsetModel model, CancellationToken token)
+        {
+            using HttpResponseMessage initialResponse = await _httpClient.GetAsync(model.DownloadPath, token);
+            initialResponse.EnsureSuccessStatusCode();
+            string initialHtml = await initialResponse.Content.ReadAsStringAsync();
+
+            string fileId = null;
+
+            MatchCollection fileMatches = Regex.Matches(initialHtml, @"(?is)<div class=""filename""[^>]*>\s*(?<filename>[^<]+?)\s*</div>.*?name=""id""\s+value=""(?<id>\d+)""");
+
+            if (fileMatches.Count == 0)
+            {
+                throw new HttpRequestException();
+            }
+
+            if (!string.IsNullOrEmpty(model.FilePattern))
+            {
+                foreach (Match m in fileMatches)
+                {
+                    string filename = m.Groups["filename"].Value.Trim();
+                    if (Regex.IsMatch(filename, model.FilePattern, RegexOptions.IgnoreCase))
+                    {
+                        fileId = m.Groups["id"].Value;
+                        break;
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(fileId))
+            {
+                fileId = fileMatches[0].Groups["id"].Value;
+            }
+
+            FormUrlEncodedContent firstStepPayload = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("id", fileId) });
+
+            using HttpResponseMessage firstResponse = await _httpClient.PostAsync(model.DownloadPath, firstStepPayload, token);
+            string serverSelectionHtml = await firstResponse.Content.ReadAsStringAsync();
+
+            MatchCollection serverMatches = Regex.Matches(serverSelectionHtml, @"(?is)<button[^>]+?name=""server_id""[^>]+?value=""(?<sid>\d+)""[^>]*>(?<content>.*?)</button>");
+
+            string closestId = null, lowLoadId = null, firstId = null;
+
+            foreach (Match m in serverMatches)
+            {
+                string sid = m.Groups["sid"].Value;
+                string content = m.Groups["content"].Value;
+
+                firstId ??= sid;
+
+                if (content.IndexOf("closest", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    closestId = sid;
+                    break;
+                }
+
+                if (lowLoadId == null && content.IndexOf("server-load low", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    lowLoadId = sid;
+                }
+            }
+
+            FormUrlEncodedContent finalPayload = new FormUrlEncodedContent(new[] { new KeyValuePair<string, string>("id", fileId), new KeyValuePair<string, string>("server_id", closestId ?? lowLoadId ?? firstId ?? throw new HttpRequestException()) });
+
+            using HttpRequestMessage finalRequest = new HttpRequestMessage(HttpMethod.Post, model.DownloadPath)
+            {
+                Content = finalPayload
+            };
+
+            finalRequest.Headers.Referrer = new Uri(model.DownloadPath);
+
+            using HttpResponseMessage finalResponse = await _httpClient.SendAsync(finalRequest, HttpCompletionOption.ResponseHeadersRead, token);
+
+            return finalResponse.RequestMessage.RequestUri.ToString();
+        }
+
+        private static async Task<string> ResolveMaxonUrl(ToolsetModel model, CancellationToken token)
+        {
+            using HttpResponseMessage response = await _httpClient.GetAsync(model.DownloadPath, token);
+            response.EnsureSuccessStatusCode();
+            string html = await response.Content.ReadAsStringAsync();
+
+            MatchCollection matches = Regex.Matches(html, @"href=""(?<url>https://[^""]+)""", RegexOptions.IgnoreCase);
+
+            if (matches.Count == 0)
+            {
+                throw new HttpRequestException();
+            }
+
+            string matchedUrl = null;
+
+            if (!string.IsNullOrEmpty(model.FilePattern))
+            {
+                foreach (Match m in matches)
+                {
+                    string url = m.Groups["url"].Value;
+                    if (Regex.IsMatch(url, model.FilePattern, RegexOptions.IgnoreCase))
+                    {
+                        matchedUrl = url;
+                        break;
+                    }
+                }
+            }
+
+            if (string.IsNullOrEmpty(matchedUrl))
+            {
+                matchedUrl = matches.Cast<Match>().FirstOrDefault(m => m.Groups["url"].Value.IndexOf("win_x86_64", StringComparison.OrdinalIgnoreCase) >= 0)?.Groups["url"].Value ?? matches[0].Groups["url"].Value;
+            }
+
+            return matchedUrl;
         }
     }
 }

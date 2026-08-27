@@ -1,182 +1,248 @@
 [
-  {
-    "icon": "Img_Nvidia",
-    "name": "NVIDIA App",
-    "group": "web",
-    "placeholderIcon": "Icon_Website",
-    "author": "(C) NVIDIA Corporation",
-    "authorIcon": "nvidia.com",
-    "source": "https://www.nvidia.com/en-eu/software/nvidia-app/",
-    "downloadPath": "https://www.nvidia.com/en-us/software/nvidia-app/",
-    "urlPattern": "https://.*?download\\.nvidia\\.com/nvapp/client/.*?/NVIDIA_app_.*?\\.exe"
-  },
-  {
-    "icon": "Img_Amd",
-    "name": "AMD Software: Adrenalin Edition™",
-    "group": "web",
-    "placeholderIcon": "Icon_Website",
-    "author": "Advanced Micro Devices, Inc",
-    "authorIcon": "amd.com",
-    "source": "https://www.amd.com/en/support/download/drivers.html",
-    "downloadPath": "https://www.amd.com/en/support/download/drivers.html",
-    "urlPattern": "https://drivers\\.amd\\.com/drivers/installer/.*?/whql/.*?minimalsetup.*?\\.exe"
-  },
-  {
-    "icon": "Img_FirstEverTech",
-    "name": "Universal Intel Chipset Device Updater",
-    "group": "github",
-    "placeholderIcon": "Icon_Git",
-    "author": "FirstEverTech",
-    "authorIcon": "https://github.com/FirstEverTech.png",
-    "source": "https://github.com/FirstEverTech/Universal-Intel-Chipset-Updater",
-    "downloadPath": "FirstEverTech/Universal-Intel-Chipset-Updater",
-    "filePattern": ".*\\.exe$"
-  },
-  {
-    "icon": "Img_FirstEverTech",
-    "name": "Universal Intel Wi-Fi and Bluetooth Drivers Updater",
-    "group": "github",
-    "placeholderIcon": "Icon_Git",
-    "author": "FirstEverTech",
-    "authorIcon": "https://github.com/FirstEverTech.png",
-    "source": "https://github.com/FirstEverTech/Universal-Intel-WiFi-BT-Updater",
-    "downloadPath": "FirstEverTech/Universal-Intel-WiFi-BT-Updater",
-    "filePattern": ".*\\.exe$"
-  },
-  {
-    "icon": "Img_Rapr",
-    "name": "Driver Store Explorer",
-    "group": "github",
-    "placeholderIcon": "Icon_Git",
-    "author": "lostindark",
-    "authorIcon": "https://github.com/lostindark.png",
-    "source": "https://github.com/lostindark/DriverStoreExplorer",
-    "downloadPath": "lostindark/DriverStoreExplorer",
-    "filePattern": "(?i)DriverStoreExplorer.*\\.zip$"
-  },
-  {
-    "icon": "Img_NvidiaPI",
-    "name": "NVIDIA Profile Inspector",
-    "group": "github",
-    "placeholderIcon": "Icon_Git",
-    "author": "Orbmu2k",
-    "authorIcon": "https://github.com/Orbmu2k.png",
-    "source": "https://github.com/Orbmu2k/nvidiaProfileInspector",
-    "downloadPath": "Orbmu2k/nvidiaProfileInspector",
-    "filePattern": "(?i)nvidiaProfileInspector.*\\.zip$"
-  },
-  {
-    "icon": "Img_DeviceTweaker",
-    "name": "DEVICE TWEAKER",
-    "group": "github",
-    "placeholderIcon": "Icon_Git",
-    "author": "arsenzaaa",
-    "authorIcon": "https://github.com/arsenzaaa.png",
-    "source": "https://github.com/arsenzaaa/DEVICE-TWEAKER",
-    "downloadPath": "arsenzaaa/DEVICE-TWEAKER",
-    "filePattern": "(?i)DEVICE.*NET.*FRAMEWORK.*\\.exe$"
-  },
-  {
-    "icon": "Img_Autoruns",
-    "name": "Autoruns",
-    "group": "web",
-    "placeholderIcon": "Icon_Website",
-    "author": "Mark Russinovich",
-    "authorIcon": "microsoft.com",
-    "source": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
-    "downloadPath": "https://download.sysinternals.com/files/Autoruns.zip"
-  },
-  {
-    "icon": "Img_Rufus",
-    "name": "Rufus",
-    "group": "github",
-    "placeholderIcon": "Icon_Git",
-    "author": "pbatard",
-    "authorIcon": "https://github.com/pbatard.png",
-    "source": "https://github.com/pbatard/rufus",
-    "downloadPath": "pbatard/rufus",
-    "filePattern": "(?i)rufus-.*?p\\.exe$"
-  },
-  {
-    "icon": "Img_SystemInfo",
-    "name": "SystemInformer",
-    "group": "github",
-    "placeholderIcon": "Icon_Git",
-    "author": "Winsider Seminars & Solutions, Inc",
-    "authorIcon": "https://github.com/winsiderss.png",
-    "source": "https://github.com/winsiderss/systeminformer",
-    "downloadPath": "winsiderss/systeminformer",
-    "filePattern": "(?i)systeminformer.*bin.*\\.zip"
-  },
-  {
-    "icon": "Img_CPUz",
-    "name": "CPU-Z",
-    "group": "sourceforge",
-    "placeholderIcon": "Icon_Website",
-    "author": "CPUID",
-    "authorIcon": "cpuid.com",
-    "source": "https://sourceforge.net/projects/cpu-z/",
-    "downloadPath": "https://sourceforge.net/projects/cpu-z/files/latest/download"
-  },
-  {
-    "icon": "Img_GPUz",
-    "name": "GPU-Z",
-    "group": "techpowerup",
-    "placeholderIcon": "Icon_Website",
-    "author": "TechPowerUp",
-    "authorIcon": "techpowerup.com",
-    "source": "https://www.techpowerup.com/download/techpowerup-gpu-z/",
-    "downloadPath": "https://www.techpowerup.com/download/techpowerup-gpu-z/"
-  },
-  {
-    "icon": "Img_PCIz",
-    "name": "PCI-Z",
-    "group": "web",
-    "placeholderIcon": "Icon_Website",
-    "author": "Bruno Banelli",
-    "authorIcon": "pci-z.com",
-    "source": "https://www.pci-z.com/#download",
-    "downloadPath": "https://www.pci-z.com/current/PCI-Z.zip"
-  },
-  {
-    "icon": "Img_DiskInfo",
-    "name": "Crystal Disk Info",
-    "group": "sourceforge",
-    "placeholderIcon": "Icon_Website",
-    "author": "hiyohiyo",
-    "authorIcon": "crystalmark.info",
-    "source": "https://sourceforge.net/projects/crystaldiskinfo/",
-    "downloadPath": "https://sourceforge.net/projects/crystaldiskinfo/files/latest/download"
-  },
-  {
-    "icon": "Img_DiskMark",
-    "name": "Crystal Disk Mark",
-    "group": "sourceforge",
-    "placeholderIcon": "Icon_Website",
-    "author": "hiyohiyo",
-    "authorIcon": "crystalmark.info",
-    "source": "https://sourceforge.net/projects/crystaldiskmark/",
-    "downloadPath": "https://sourceforge.net/projects/crystaldiskmark/files/latest/download"
-  },
-  {
-    "icon": "Img_ThrottleStop",
-    "name": "ThrottleStop",
-    "group": "techpowerup",
-    "placeholderIcon": "Icon_Website",
-    "author": "TechPowerUp",
-    "authorIcon": "techpowerup.com",
-    "source": "https://www.techpowerup.com/download/techpowerup-throttlestop/",
-    "downloadPath": "https://www.techpowerup.com/download/techpowerup-throttlestop/"
-  },
-  {
-    "icon": "Img_Occt",
-    "name": "OCCT",
-    "group": "web",
-    "placeholderIcon": "Icon_Website",
-    "author": "OCCT/OCBASE",
-    "authorIcon": "ocbase.com",
-    "source": "https://www.ocbase.com/download",
-    "downloadPath": "https://www.ocbase.com/download/edition:Personal/os:Windows",
-    "fileName": "OCCT.exe"
-  }
+    {
+        "icon": "Img_Nvidia",
+        "name": "NVIDIA App",
+        "group": "web",
+        "placeholderIcon": "Icon_Website",
+        "author": "NVIDIA Corporation",
+        "authorIcon": "nvidia.com",
+        "source": "https://www.nvidia.com/en-eu/software/nvidia-app/",
+        "downloadPath": "https://www.nvidia.com/en-us/software/nvidia-app/",
+        "urlPattern": "https://.*?download\\.nvidia\\.com/nvapp/client/.*?/NVIDIA_app_.*?\\.exe"
+    },
+    {
+        "icon": "Img_Amd",
+        "name": "AMD Software: Adrenalin Edition™",
+        "group": "web",
+        "placeholderIcon": "Icon_Website",
+        "author": "Advanced Micro Devices, Inc",
+        "authorIcon": "amd.com",
+        "source": "https://www.amd.com/en/support/download/drivers.html",
+        "downloadPath": "https://www.amd.com/en/support/download/drivers.html",
+        "urlPattern": "https://drivers\\.amd\\.com/drivers/installer/.*?/whql/.*?minimalsetup.*?\\.exe"
+    },
+    {
+        "icon": "Img_FirstEverTech",
+        "name": "Universal Intel Chipset Device Updater",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "FirstEverTech",
+        "authorIcon": "https://github.com/FirstEverTech.png",
+        "source": "https://github.com/FirstEverTech/Universal-Intel-Chipset-Updater",
+        "downloadPath": "FirstEverTech/Universal-Intel-Chipset-Updater",
+        "filePattern": ".*\\.exe$"
+    },
+    {
+        "icon": "Img_FirstEverTech",
+        "name": "Universal Intel Wi-Fi and Bluetooth Drivers Updater",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "FirstEverTech",
+        "authorIcon": "https://github.com/FirstEverTech.png",
+        "source": "https://github.com/FirstEverTech/Universal-Intel-WiFi-BT-Updater",
+        "downloadPath": "FirstEverTech/Universal-Intel-WiFi-BT-Updater",
+        "filePattern": ".*\\.exe$"
+    },
+    {
+        "icon": "Img_Hidusbf",
+        "name": "HIDUSBF",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "LordOfMice",
+        "authorIcon": "https://github.com/LordOfMice.png",
+        "source": "https://github.com/LordOfMice/hidusbf",
+        "downloadPath": "LordOfMice/hidusbf",
+        "filePattern": "raw:hidusbf.zip"
+    },
+    {
+        "icon": "Img_Rapr",
+        "name": "Driver Store Explorer",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "lostindark",
+        "authorIcon": "https://github.com/lostindark.png",
+        "source": "https://github.com/lostindark/DriverStoreExplorer",
+        "downloadPath": "lostindark/DriverStoreExplorer",
+        "filePattern": "(?i)DriverStoreExplorer.*\\.zip$"
+    },
+    {
+        "icon": "Img_NvidiaPI",
+        "name": "NVIDIA Profile Inspector",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "Orbmu2k",
+        "authorIcon": "https://github.com/Orbmu2k.png",
+        "source": "https://github.com/Orbmu2k/nvidiaProfileInspector",
+        "downloadPath": "Orbmu2k/nvidiaProfileInspector",
+        "filePattern": "(?i)nvidiaProfileInspector.*\\.zip$"
+    },
+    {
+        "icon": "Img_DeviceTweaker",
+        "name": "DEVICE TWEAKER",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "arsenzaaa",
+        "authorIcon": "https://github.com/arsenzaaa.png",
+        "source": "https://github.com/arsenzaaa/DEVICE-TWEAKER",
+        "downloadPath": "arsenzaaa/DEVICE-TWEAKER",
+        "filePattern": "(?i)DEVICE.*NET.*FRAMEWORK.*\\.exe$"
+    },
+    {
+        "icon": "Img_Autoruns",
+        "name": "Autoruns",
+        "group": "web",
+        "placeholderIcon": "Icon_Website",
+        "author": "Mark Russinovich",
+        "authorIcon": "microsoft.com",
+        "source": "https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns",
+        "downloadPath": "https://download.sysinternals.com/files/Autoruns.zip"
+    },
+    {
+        "icon": "Img_Rufus",
+        "name": "Rufus",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "pbatard",
+        "authorIcon": "https://github.com/pbatard.png",
+        "source": "https://github.com/pbatard/rufus",
+        "downloadPath": "pbatard/rufus",
+        "filePattern": "(?i)rufus-.*?p\\.exe$"
+    },
+    {
+        "icon": "Img_RawAccel",
+        "name": "RawAccel",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "a1xd",
+        "authorIcon": "https://github.com/a1xd.png",
+        "source": "https://github.com/a1xd/rawaccel",
+        "downloadPath": "a1xd/rawaccel",
+        "filePattern": "(?i)RawAccel_v[\\d\\.]+\\.zip$"
+    },
+    {
+        "icon": "Img_SystemInfo",
+        "name": "SystemInformer",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "Winsider Seminars & Solutions, Inc",
+        "authorIcon": "https://github.com/winsiderss.png",
+        "source": "https://github.com/winsiderss/systeminformer",
+        "downloadPath": "winsiderss/systeminformer",
+        "filePattern": "(?i)systeminformer.*bin.*\\.zip"
+    },
+    {
+        "icon": "Img_ThrottleStop",
+        "name": "ThrottleStop",
+        "group": "techpowerup",
+        "placeholderIcon": "Icon_Website",
+        "author": "TechPowerUp",
+        "authorIcon": "techpowerup.com",
+        "source": "https://www.techpowerup.com/download/techpowerup-throttlestop/",
+        "downloadPath": "https://www.techpowerup.com/download/techpowerup-throttlestop/"
+    },
+    {
+        "icon": "Img_CPUz",
+        "name": "CPU-Z",
+        "group": "sourceforge",
+        "placeholderIcon": "Icon_Website",
+        "author": "CPUID",
+        "authorIcon": "cpuid.com",
+        "source": "https://sourceforge.net/projects/cpu-z/",
+        "downloadPath": "https://sourceforge.net/projects/cpu-z/files/latest/download"
+    },
+    {
+        "icon": "Img_GPUz",
+        "name": "GPU-Z",
+        "group": "techpowerup",
+        "placeholderIcon": "Icon_Website",
+        "author": "TechPowerUp",
+        "authorIcon": "techpowerup.com",
+        "source": "https://www.techpowerup.com/download/techpowerup-gpu-z/",
+        "downloadPath": "https://www.techpowerup.com/download/techpowerup-gpu-z/"
+    },
+    {
+        "icon": "Img_PCIz",
+        "name": "PCI-Z",
+        "group": "web",
+        "placeholderIcon": "Icon_Website",
+        "author": "Bruno Banelli",
+        "authorIcon": "pci-z.com",
+        "source": "https://www.pci-z.com/#download",
+        "downloadPath": "https://www.pci-z.com/current/PCI-Z.zip"
+    },
+    {
+        "icon": "Img_ZenTimings",
+        "name": "ZenTimings",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "irusanov",
+        "authorIcon": "https://github.com/irusanov.png",
+        "source": "https://github.com/irusanov/ZenTimings",
+        "downloadPath": "irusanov/ZenTimings",
+        "filePattern": "(?i)ZenTimings_v[\\d\\.]+\\.zip$"
+    },
+    {
+        "icon": "Img_DiskInfo",
+        "name": "Crystal Disk Info",
+        "group": "sourceforge",
+        "placeholderIcon": "Icon_Website",
+        "author": "hiyohiyo",
+        "authorIcon": "crystalmark.info",
+        "source": "https://sourceforge.net/projects/crystaldiskinfo/",
+        "downloadPath": "https://sourceforge.net/projects/crystaldiskinfo/files/latest/download"
+    },
+    {
+        "icon": "Img_DiskMark",
+        "name": "Crystal Disk Mark",
+        "group": "sourceforge",
+        "placeholderIcon": "Icon_Website",
+        "author": "hiyohiyo",
+        "authorIcon": "crystalmark.info",
+        "source": "https://sourceforge.net/projects/crystaldiskmark/",
+        "downloadPath": "https://sourceforge.net/projects/crystaldiskmark/files/latest/download"
+    },
+    {
+        "icon": "Img_CapFrameX",
+        "name": "CapFrameX",
+        "group": "github",
+        "placeholderIcon": "Icon_Git",
+        "author": "CXWorld",
+        "authorIcon": "https://github.com/CXWorld.png",
+        "source": "https://github.com/CXWorld/CapFrameX",
+        "downloadPath": "CXWorld/CapFrameX",
+        "filePattern": "(?i)release_[\\d\\.]+_portable\\.zip$"
+    },
+    {
+        "icon": "Img_Cinebench",
+        "name": "Cinebench",
+        "group": "maxon",
+        "placeholderIcon": "Icon_Website",
+        "author": "Maxon Computer GmbH",
+        "authorIcon": "maxon.net",
+        "source": "https://www.maxon.net/en/downloads/cinebench-downloads",
+        "downloadPath": "https://www.maxon.net/en/downloads/cinebench-downloads",
+        "filePattern": "(?i)Cinebench.*win_x86_64"
+    },
+    {
+        "icon": "Img_Occt",
+        "name": "OCCT",
+        "group": "web",
+        "placeholderIcon": "Icon_Website",
+        "author": "OCCT/OCBASE",
+        "authorIcon": "ocbase.com",
+        "source": "https://www.ocbase.com/download",
+        "downloadPath": "https://www.ocbase.com/download/edition:Personal/os:Windows",
+        "fileName": "OCCT.exe"
+    },
+    {
+        "icon": "Img_FurMark",
+        "name": "FurMark 2",
+        "group": "techpowerup",
+        "placeholderIcon": "Icon_Website",
+        "author": "Geeks3D",
+        "authorIcon": "geeks3d.com",
+        "source": "https://www.techpowerup.com/download/furmark/",
+        "downloadPath": "https://www.techpowerup.com/download/furmark/",
+        "filePattern": "(?i)FurMark_.*\\.zip$"
+    }
 ]
