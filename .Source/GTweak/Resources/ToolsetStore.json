@@ -183,7 +183,7 @@
     },
     {
         "icon": "Img_DiskInfo",
-        "name": "Crystal Disk Info",
+        "name": "CrystalDiskInfo",
         "group": "sourceforge",
         "placeholderIcon": "Icon_Website",
         "author": "hiyohiyo",
@@ -193,13 +193,23 @@
     },
     {
         "icon": "Img_DiskMark",
-        "name": "Crystal Disk Mark",
+        "name": "CrystalDiskMark",
         "group": "sourceforge",
         "placeholderIcon": "Icon_Website",
         "author": "hiyohiyo",
         "authorIcon": "crystalmark.info",
         "source": "https://sourceforge.net/projects/crystaldiskmark/",
         "downloadPath": "https://sourceforge.net/projects/crystaldiskmark/files/latest/download"
+    },
+    {
+        "icon": "Img_BatteryInfo",
+        "name": "BatteryInfoView",
+        "group": "web",
+        "placeholderIcon": "Icon_Website",
+        "author": "Nir Sofer",
+        "authorIcon": "nirsoft.net",
+        "source": "https://www.nirsoft.net/utils/battery_information_view.html",
+        "downloadPath": "https://www.nirsoft.net/utils/batteryinfoview.zip"
     },
     {
         "icon": "Img_CapFrameX",

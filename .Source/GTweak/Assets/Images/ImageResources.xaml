@@ -11,6 +11,7 @@
     <!--#region DownloadToolset -->
     <BitmapImage x:Key="Img_Amd" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Amd.png"/>
     <BitmapImage x:Key="Img_Autoruns" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Autoruns.png"/>
+    <BitmapImage x:Key="Img_BatteryInfo" UriSource="/GTweak;component/Assets/Images/DownloadToolset/BatteryInfo.png"/>
     <BitmapImage x:Key="Img_CapFrameX" UriSource="/GTweak;component/Assets/Images/DownloadToolset/CapFrameX.png"/>
     <BitmapImage x:Key="Img_Cinebench" UriSource="/GTweak;component/Assets/Images/DownloadToolset/Cinebench.png"/>
     <BitmapImage x:Key="Img_CPUz" UriSource="/GTweak;component/Assets/Images/DownloadToolset/CPUz.png"/>
