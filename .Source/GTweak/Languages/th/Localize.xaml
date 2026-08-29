@@ -557,6 +557,8 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">เลือกโฟลเดอร์</v:String>
     <v:String x:Key="chk_run_ti_adds">เรียกใช้ในฐานะ TrustedInstaller</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">เลือกไดเรกทอรีหรือตรวจสอบให้แน่ใจว่าไม่ว่างเปล่า</v:String>
     <v:String x:Key="scripts_info_adds">หลังจากนั้น, คุณจะสามารถเรียกใช้สคริปต์ (.ps1, .cmd, .bat, .reg) บนหน้านี้ได้</v:String>
     <!--#endregion-->

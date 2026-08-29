@@ -17,6 +17,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <uc:FlowPanel Grid.Row="0" ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="10,5,10,0">
@@ -135,5 +136,30 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
+
+        <Border Grid.Row="3" Margin="10,5,10,5" Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="10,6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <ui:SymbolIcon Symbol="Folder20" FontSize="15" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" FontSize="13" TextTrimming="CharacterEllipsis">
+                        <Run Text="{DynamicResource label_directory_adds}"/><Run Text=": "/>
+                        <Run Text="{Binding DirectoryPath, Mode=OneWay}" Foreground="{StaticResource Brush_TextBlock_Inactivity}"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <ui:SymbolIcon Symbol="DocumentMultiple20" FontSize="15" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" FontSize="13" TextTrimming="CharacterEllipsis">
+                        <Run Text="{DynamicResource label_count_adds}"/><Run Text=": "/>
+                        <Run Text="{Binding Addons.Count, Mode=OneWay}" Foreground="{StaticResource Brush_TextBlock_Inactivity}"/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

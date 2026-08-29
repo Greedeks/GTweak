@@ -557,6 +557,8 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">选择文档夹</v:String>
     <v:String x:Key="chk_run_ti_adds">以 TrustedInstaller 身份运行</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">选择一个目录或确保该目录不为空。</v:String>
     <v:String x:Key="scripts_info_adds">之后，您就可以在此页面上运行脚本（.ps1、.cmd、.bat、.reg）了。</v:String>
     <!--#endregion-->

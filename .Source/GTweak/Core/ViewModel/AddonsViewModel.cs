@@ -26,6 +26,8 @@ namespace GTweak.Core.ViewModel
         private readonly object _locker = new object();
         private string _lastKnownFolderPath = string.Empty;
 
+        public string DirectoryPath => GlobalOptions.UserAddonsPath;
+
         public bool IsRunAsTrustedInstaller
         {
             get => _isRunAsTrustedInstaller;
@@ -56,16 +58,11 @@ namespace GTweak.Core.ViewModel
                     SelectedPath = GlobalOptions.UserAddonsPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
                 };
 
-                bool? dialogResult = folderDialog.ShowDialog();
-
-                if (dialogResult != null && dialogResult.Value)
+                if (folderDialog.ShowDialog() == true && Directory.Exists(folderDialog.SelectedPath))
                 {
-                    string selectedPath = folderDialog.SelectedPath;
-                    if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
-                    {
-                        GlobalOptions.UserAddonsPath = selectedPath;
-                        ScanFolder();
-                    }
+                    GlobalOptions.UserAddonsPath = folderDialog.SelectedPath;
+                    OnPropertyChanged(nameof(DirectoryPath));
+                    ScanFolder();
                 }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }

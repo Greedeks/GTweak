@@ -557,6 +557,8 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">בחר תיקייה</v:String>
     <v:String x:Key="chk_run_ti_adds">הרץ כ-TrustedInstaller</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">בחר תיקייה או ודא שאינה ריקה</v:String>
     <v:String x:Key="scripts_info_adds">לאחר מכן, תוכל להריץ סקריפטים (.ps1, .cmd, .bat, .reg) בדף זה</v:String>
     <!--#endregion-->

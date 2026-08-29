@@ -557,6 +557,8 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">Izberi mapo</v:String>
     <v:String x:Key="chk_run_ti_adds">Zaženi kot TrustedInstaller</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">Izberite mapo ali pa se prepričajte, da ni prazna</v:String>
     <v:String x:Key="scripts_info_adds">Nato boste lahko na tej strani izvajali skripte (.ps1, .cmd, .bat, .reg)</v:String>
     <!--#endregion-->

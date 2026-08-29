@@ -103,12 +103,7 @@ namespace GTweak.Core.ViewModel
 
                 if (folderDialog.ShowDialog() == true)
                 {
-                    string selectedPath = folderDialog.SelectedPath;
-
-                    if (!string.IsNullOrWhiteSpace(selectedPath) && Directory.Exists(selectedPath))
-                    {
-                        GlobalOptions.DownloadPath = selectedPath;
-                    }
+                    GlobalOptions.DownloadPath = folderDialog.SelectedPath;
                 }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }

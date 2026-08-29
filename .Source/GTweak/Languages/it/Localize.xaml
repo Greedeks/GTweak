@@ -557,6 +557,8 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">Seleziona cartella</v:String>
     <v:String x:Key="chk_run_ti_adds">Esegui come TrustedInstaller</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">Seleziona una directory o assicurati che non sia vuota</v:String>
     <v:String x:Key="scripts_info_adds">Dopodiché, potrai eseguire script (.ps1, .cmd, .bat, .reg) su questa pagina</v:String>
     <!--#endregion-->

@@ -95,16 +95,16 @@
                             </TextBlock>
 
                             <TextBlock Grid.Row="1" FontFamily="{StaticResource Jura}" FontSize="13" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Margin="0,3,0,0" TextWrapping="Wrap">
-                            <Run Text="{DynamicResource label_proc_sysinfo}"/>
-                                <InlineUIContainer>
-                                    <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="12.5"/>
-                                </InlineUIContainer>
-                            <Run Text=" • "/>
-                        <Run Text="{DynamicResource label_svc_sysinfo}"/>
-                        <InlineUIContainer>
-                            <TextBlock anim:NumberAnimation.Value="{Binding [Services].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="12.5"/>
-                        </InlineUIContainer>
-                    </TextBlock>
+                                <Run Text="{DynamicResource label_proc_sysinfo}"/>
+                                    <InlineUIContainer>
+                                        <TextBlock anim:NumberAnimation.Value="{Binding [Processes].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="12.5"/>
+                                    </InlineUIContainer>
+                                <Run Text=" • "/>
+                                <Run Text="{DynamicResource label_svc_sysinfo}"/>
+                                    <InlineUIContainer>
+                                        <TextBlock anim:NumberAnimation.Value="{Binding [Services].Data}" Text="0" Margin="0,0.5,0,0" FontFamily="{StaticResource Play}" Typography.NumeralAlignment="Tabular" Typography.NumeralStyle="Lining" FontSize="12.5"/>
+                                    </InlineUIContainer>
+                            </TextBlock>
                         </Grid>
                     </Grid>
 

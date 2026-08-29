@@ -557,6 +557,8 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">選擇資料夾</v:String>
     <v:String x:Key="chk_run_ti_adds">以 TrustedInstaller 的身份執行</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">選擇一個目錄或確保該目錄不為空</v:String>
     <v:String x:Key="scripts_info_adds">之後，您就可以在此頁面上執行腳本（.ps1、.cmd、.bat、.reg）了</v:String>
     <!--#endregion-->

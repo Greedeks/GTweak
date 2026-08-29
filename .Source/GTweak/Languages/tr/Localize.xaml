@@ -557,6 +557,8 @@
     <!--#region Addons Page -->
     <v:String x:Key="btn_select_dir">Klasör seç</v:String>
     <v:String x:Key="chk_run_ti_adds">TrustedInstaller olarak çalıştır</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">Bir klasör seçin veya klasörün boş olmadığından emin olun</v:String>
     <v:String x:Key="scripts_info_adds">Ardından bu sayfada komut dosyalarını (.ps1, .cmd, .bat, .reg) çalıştırabilirsiniz</v:String>
     <!--#endregion-->
