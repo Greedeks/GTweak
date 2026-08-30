@@ -556,21 +556,21 @@
 
     <!--#region Addons Page -->
     <v:String x:Key="chk_run_ti_adds">Zaženi kot TrustedInstaller</v:String>
-    <v:String x:Key="label_directory_adds">Directory</v:String>
-    <v:String x:Key="label_count_adds">Count</v:String>
+    <v:String x:Key="label_directory_adds">Imenik</v:String>
+    <v:String x:Key="label_count_adds">Število</v:String>
     <v:String x:Key="text_info_adds">Izberite mapo ali pa se prepričajte, da ni prazna</v:String>
     <v:String x:Key="scripts_info_adds">Nato boste lahko na tej strani izvajali skripte (.ps1, .cmd, .bat, .reg)</v:String>
     <!--#endregion-->
 
     <!--#region Toolset Page -->
     <v:String x:Key="text_ts">Iskanje po imenu ali avtorju</v:String>
-    <v:String x:Key="tag_all_ts">All</v:String>
-    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
-    <v:String x:Key="tag_tools_ts">Tools</v:String>
-    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
-    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
-    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
-    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
+    <v:String x:Key="tag_all_ts">Vse</v:String>
+    <v:String x:Key="tag_drivers_ts">Gonilniki</v:String>
+    <v:String x:Key="tag_tools_ts">Orodja</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostika</v:String>
+    <v:String x:Key="tag_benchmark_ts">Primerjava</v:String>
+    <v:String x:Key="tag_overclocking_ts">Navijanje</v:String>
+    <v:String x:Key="label_download_dir_ts">Imenik prenosov</v:String>
     <v:String x:Key="source_ts">Vir</v:String>
     <v:String x:Key="btn_download">Prenesi</v:String>
     <v:String x:Key="btn_cancel">Prekliči</v:String>
