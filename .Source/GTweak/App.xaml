@@ -23,13 +23,14 @@
                 <ResourceDictionary Source="Styles/Buttons/Buttons.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/RadioButtons.xaml" />
                 <ResourceDictionary Source="Styles/Buttons/ToggleButtons.xaml" />
-                <ResourceDictionary Source="Styles/Display/ScrollBar.xaml" />
-                <ResourceDictionary Source="Styles/Display/TextBlock.xaml" />
+                <ResourceDictionary Source="Styles/Display/ScrollBars.xaml" />
+                <ResourceDictionary Source="Styles/Display/TextBlocks.xaml" />
                 <ResourceDictionary Source="Styles/Display/Images.xaml" />
-                <ResourceDictionary Source="Styles/Inputs/ComboBox.xaml" />
-                <ResourceDictionary Source="Styles/Inputs/Slider.xaml" />
-                <ResourceDictionary Source="Styles/Inputs/TextBox.xaml" />
-                <ResourceDictionary Source="Styles/Inputs/CheckBox.xaml" />
+                <ResourceDictionary Source="Styles/Display/ToolTips.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/ComboBoxes.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/Sliders.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/TextBoxes.xaml" />
+                <ResourceDictionary Source="Styles/Inputs/CheckBoxes.xaml" />
                 <ResourceDictionary Source="Styles/Page.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
