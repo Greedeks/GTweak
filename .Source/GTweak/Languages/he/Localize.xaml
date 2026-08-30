@@ -555,7 +555,6 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_select_dir">בחר תיקייה</v:String>
     <v:String x:Key="chk_run_ti_adds">הרץ כ-TrustedInstaller</v:String>
     <v:String x:Key="label_directory_adds">Directory</v:String>
     <v:String x:Key="label_count_adds">Count</v:String>
@@ -564,12 +563,18 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
+    <v:String x:Key="text_ts">חפש לפי שם או מחבר</v:String>
+    <v:String x:Key="tag_all_ts">All</v:String>
+    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
+    <v:String x:Key="tag_tools_ts">Tools</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
+    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
+    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
+    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
     <v:String x:Key="source_ts">מקור</v:String>
     <v:String x:Key="btn_download">הורד</v:String>
     <v:String x:Key="btn_cancel">בטל</v:String>
-    <v:String x:Key="btn_open_dir">פתח תיקייה</v:String>
     <v:String x:Key="btn_done">בוצע</v:String>
-    <v:String x:Key="text_ts">חפש לפי שם או מחבר</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

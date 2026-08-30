@@ -12,8 +12,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="TextAlignment" Value="Left"/>
-        <Setter Property="Width" Value="350" />
-        <Setter Property="Height" Value="27" />
+        <Setter Property="Height" Value="30" />
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="CaretBrush" Value="{StaticResource Brush_Highlighted}"/>
@@ -26,30 +25,33 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-
-                        <Border Grid.ColumnSpan="2" x:Name="border" Background="{StaticResource Brush_Background_TextBox}" BorderBrush="{StaticResource Brush_Accent}" BorderThickness="0,0,0,1" CornerRadius="5"/>
+                        <Border Grid.ColumnSpan="2" CornerRadius="6" Opacity="0.4" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Border.RenderTransform>
+                                <TranslateTransform X="3" Y="6"/>
+                            </Border.RenderTransform>
+                        </Border>
+                        <Border Grid.ColumnSpan="2" x:Name="border" Background="{StaticResource Brush_Background_TextBox}"  BorderBrush="Transparent" BorderThickness="1" CornerRadius="6"/>
                         <ScrollViewer Grid.Column="0" x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
                         <Label Grid.Column="0" Margin="5,0,5,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center" Visibility="Collapsed" Foreground="{StaticResource Brush_Inactive}" FontFamily="{StaticResource Jura}"/>
-                        <Button Grid.Column="1" x:Name="PART_ClearButton" Style="{StaticResource ButtonClearTextBox}" Width="20" Height="20" Margin="0,0,5,0" Visibility="Collapsed"/>
+                        <Button Grid.Column="1" x:Name="PART_ClearButton" Style="{StaticResource ButtonClearTextBox}" Width="20" Height="20" Margin="0,0,8,0" Visibility="Collapsed"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Text" Value="">
                             <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
+                            <Setter Property="Foreground" Value="{StaticResource Brush_Inactive}"/>
                         </Trigger>
-                        <Trigger Property="IsFocused" Value="False">
-                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_Border_Description}" TargetName="border"/>
                         </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="False">
-                            <Setter Property="BorderBrush" Value="{StaticResource Brush_TextBox_Border}" TargetName="border"/>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="{StaticResource Brush_Separator}" TargetName="border"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

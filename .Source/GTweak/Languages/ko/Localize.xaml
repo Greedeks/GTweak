@@ -218,7 +218,6 @@
     <v:String x:Key="chk_panel_intf">제어판</v:String>
     <v:String x:Key="chk_user_intf">사용자 파일</v:String>
 
-    <!--not translated-->
     <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
     <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
     <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
@@ -261,7 +260,7 @@
     <v:String x:Key="exblock1_desc_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다.</v:String>
     <v:String x:Key="exblock2_desc_intf">파일 탐색기에서 항목 표시 규칙을 변경합니다. 숨김 항목, 파일 확장자 및 드라이브 구조의 표시가 포함됩니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="exblock3_desc_intf">바탕 화면에 표시되는 시스템 아이콘을 변경합니다. 이들은 일반 바로가기와 달리 시스템에 내장된 항목입니다.</v:String>
-    <!--not translated--><v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">이 조정으로 축소, 확장, 닫기 버튼의 크기가 줄어들어 부피가 줄어듭니다. 탐색기, Windows 사진, 브라우저 및 기타 프로그램을 포함한 모든 창 크기를 조정합니다.</v:String>
     <v:String x:Key="tgl2_desc_intf">이 조정은 텍스트 커서의 깜박임 빈도를 가속화합니다. 기본적으로 530밀리초마다 깜박입니다.</v:String>
     <v:String x:Key="tgl3_desc_intf">이 조정으로 브라우저와 프로그램을 포함한 창에서 스크롤 막대의 두께가 더 얇아집니다.</v:String>
@@ -556,21 +555,26 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_select_dir">폴더 선택</v:String>
     <v:String x:Key="chk_run_ti_adds">TrustedInstaller로 실행</v:String>
-    <!--not translated--><v:String x:Key="label_directory_adds">Directory</v:String>
-    <!--not translated--><v:String x:Key="label_count_adds">Count</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">디렉터리를 선택하거나 비어 있지 않은지 확인하세요</v:String>
     <v:String x:Key="scripts_info_adds">그 후, 이 페이지에서 스크립트 (.ps1, .cmd, .bat, .reg)를 실행할 수 있습니다</v:String>
     <!--#endregion-->
 
     <!--#region Toolset Page -->
+    <v:String x:Key="text_ts">이름 또는 작성자로 검색</v:String>
+    <v:String x:Key="tag_all_ts">All</v:String>
+    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
+    <v:String x:Key="tag_tools_ts">Tools</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
+    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
+    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
+    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
     <v:String x:Key="source_ts">출처</v:String>
     <v:String x:Key="btn_download">다운로드</v:String>
     <v:String x:Key="btn_cancel">취소</v:String>
-    <v:String x:Key="btn_open_dir">폴더 열기</v:String>
     <v:String x:Key="btn_done">완료</v:String>
-    <v:String x:Key="text_ts">이름 또는 작성자로 검색</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

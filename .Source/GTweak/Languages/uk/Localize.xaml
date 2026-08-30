@@ -555,7 +555,6 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_select_dir">Вибрати папку</v:String>
     <v:String x:Key="chk_run_ti_adds">Запуск від імені TrustedInstaller</v:String>
     <v:String x:Key="label_directory_adds">Directory</v:String>
     <v:String x:Key="label_count_adds">Count</v:String>
@@ -564,12 +563,18 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
+    <v:String x:Key="text_ts">Пошук за назвою або автором</v:String>
+    <v:String x:Key="tag_all_ts">All</v:String>
+    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
+    <v:String x:Key="tag_tools_ts">Tools</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
+    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
+    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
+    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
     <v:String x:Key="source_ts">Джерело</v:String>
     <v:String x:Key="btn_download">Завантажити</v:String>
     <v:String x:Key="btn_cancel">Скасувати</v:String>
-    <v:String x:Key="btn_open_dir">Відкрити папку</v:String>
     <v:String x:Key="btn_done">Готово</v:String>
-    <v:String x:Key="text_ts">Пошук за назвою або автором</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

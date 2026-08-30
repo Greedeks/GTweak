@@ -22,10 +22,14 @@ namespace GTweak.Core.ViewModel
         private readonly FuzzySearchService _fuzzyService = new FuzzySearchService();
 
         private string _searchText = string.Empty;
+        private FilterTag _selectedTag = FilterTag.All;
 
         public ICollectionView ToolsView { get; }
         public ICommand SelectFolderCommand { get; }
         public ICommand OpenFolderCommand { get; }
+        public ICommand FilterTagCommand { get; }
+
+        public string DirectoryPath => GlobalOptions.DownloadPath;
 
         public string SearchText
         {
@@ -47,6 +51,15 @@ namespace GTweak.Core.ViewModel
         {
             SelectFolderCommand = new RelayCommand(_ => SelectFolder());
             OpenFolderCommand = new RelayCommand(_ => OpenFolder());
+            FilterTagCommand = new RelayCommand(tag =>
+            {
+                if (tag is FilterTag t)
+                {
+                    _selectedTag = t;
+                }
+
+                ToolsView?.Refresh();
+            });
 
             ToolsView = CollectionViewSource.GetDefaultView(Tools);
             ToolsView.Filter = FilterTools;
@@ -80,6 +93,11 @@ namespace GTweak.Core.ViewModel
         {
             if (obj is ToolsetItem item)
             {
+                if (!(_selectedTag == FilterTag.All || item.Tags.Contains(_selectedTag)))
+                {
+                    return false;
+                }
+
                 if (string.IsNullOrWhiteSpace(_searchText))
                 {
                     return true;
@@ -104,6 +122,7 @@ namespace GTweak.Core.ViewModel
                 if (folderDialog.ShowDialog() == true)
                 {
                     GlobalOptions.DownloadPath = folderDialog.SelectedPath;
+                    OnPropertyChanged(nameof(DirectoryPath));
                 }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }

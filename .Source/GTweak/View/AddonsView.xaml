@@ -12,43 +12,47 @@
     <UserControl.DataContext>
         <vm:AddonsViewModel />
     </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <uc:FlowPanel Grid.Row="0" ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5" Margin="10,5,10,0">
-            <Button Command="{Binding SelectFolderCommand}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Right" Margin="0,0,0,0">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <ui:SymbolIcon Symbol="FolderOpen20" FontSize="15" Margin="0,0,5,0"/>
-                    <TextBlock VerticalAlignment="Center">
-                        <Run Text="{DynamicResource btn_select_dir}"/><Run Text="..."/>
-                    </TextBlock>
-                </StackPanel>
-            </Button>
+        <Grid Grid.Row="0" Margin="10,5,20,0">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="{StaticResource DataElement_Opacity}" IsHitTestVisible="False" CornerRadius="8">
+                <Border.RenderTransform>
+                    <TranslateTransform X="3" Y="4"/>
+                </Border.RenderTransform>
+            </Border>
 
-            <Button Command="{Binding UpdateCommand}" Style="{StaticResource ButtonContent_Inverted}" HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <ui:SymbolIcon Symbol="ArrowClockwise20" FontSize="15" Margin="0,0,5,0"/>
-                    <TextBlock Text="{DynamicResource btn_upd}" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Button>
+            <Border Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12,7">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-            <CheckBox VerticalAlignment="Top" IsChecked="{Binding IsRunAsTrustedInstaller}" Content="{DynamicResource chk_run_ti_adds}" Margin="0,6,0,0"/>
-        </uc:FlowPanel>
+                    <CheckBox Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding IsRunAsTrustedInstaller}" Content="{DynamicResource chk_run_ti_adds}"/>
 
-        <Border Grid.Row="1" Background="{StaticResource Brush_Separator}" Height="1.2" Margin="10,10,10,0" CornerRadius="10" HorizontalAlignment="Stretch"/>
+                    <Button Grid.Column="1" Command="{Binding UpdateCommand}" Style="{StaticResource ButtonContent_Inverted}" Padding="12,5" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <ui:SymbolIcon Symbol="ArrowClockwise20" FontSize="13" Margin="0,0,5,0"/>
+                            <TextBlock Text="{DynamicResource btn_upd}" VerticalAlignment="Center" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
 
-        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ScrollViewer b:ScrollFadeBehavior.EnableFade="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
                     <ItemsControl ItemsSource="{Binding Addons}" VirtualizingPanel.IsVirtualizing="True">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <uc:FlowPanel Margin="20,10,5,20" EqualizeItemSize="True" ItemWidth="200" UseMasonryLayout="True" HorizontalSpacing="5" VerticalSpacing="5" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                <uc:FlowPanel Margin="10,10,20,10" EqualizeItemSize="True" ItemWidth="200" UseMasonryLayout="True" HorizontalSpacing="5" VerticalSpacing="5" ContentAlignment="Stretch" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 
@@ -137,29 +141,68 @@
             </ScrollViewer>
         </Grid>
 
-        <Border Grid.Row="3" Margin="10,5,10,5" Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="10,6">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Margin="10,0,20,5">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="{StaticResource DataElement_Opacity}" IsHitTestVisible="False" CornerRadius="8">
+                <Border.RenderTransform>
+                    <TranslateTransform X="3" Y="4"/>
+                </Border.RenderTransform>
+            </Border>
 
-                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                    <ui:SymbolIcon Symbol="Folder20" FontSize="15" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" FontSize="13" TextTrimming="CharacterEllipsis">
-                        <Run Text="{DynamicResource label_directory_adds}"/><Run Text=": "/>
-                        <Run Text="{Binding DirectoryPath, Mode=OneWay}" Foreground="{StaticResource Brush_TextBlock_Inactivity}"/>
-                    </TextBlock>
-                </StackPanel>
+            <Border Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <ui:SymbolIcon Symbol="DocumentMultiple20" FontSize="15" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                    <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" FontSize="13" TextTrimming="CharacterEllipsis">
-                        <Run Text="{DynamicResource label_count_adds}"/><Run Text=": "/>
-                        <Run Text="{Binding Addons.Count, Mode=OneWay}" Foreground="{StaticResource Brush_TextBlock_Inactivity}"/>
-                    </TextBlock>
-                </StackPanel>
-            </Grid>
-        </Border>
+                    <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,15,0" HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Folder20" FontSize="15" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+
+                        <TextBlock Grid.Column="1" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" FontSize="13" VerticalAlignment="Center" Margin="0,0,4,0">
+                            <Run Text="{DynamicResource label_directory_adds}"/><Run Text=":" />
+                        </TextBlock>
+
+                        <TextBlock Grid.Column="2" Text="{Binding DirectoryPath, Mode=OneWay}" FontSize="13" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip="{Binding DirectoryPath}" Background="Transparent" Cursor="Hand">
+                            <TextBlock.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFolderCommand}" />
+                            </TextBlock.InputBindings>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
+                                    <Setter Property="Foreground" Value="{StaticResource Brush_TextBlock_Inactivity}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
+                                            <Setter Property="TextDecorations" Value="Underline"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <ui:SymbolIcon Symbol="DocumentMultiple20" FontSize="15" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                        <TextBlock Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" FontSize="13" VerticalAlignment="Center">
+                            <Run Text="{DynamicResource label_count_adds}"/><Run Text=": "/>
+                            <Run Text="{Binding Addons.Count, Mode=OneWay}" Foreground="{StaticResource Brush_TextBlock_Inactivity}"/>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Button Grid.Column="2" Command="{Binding SelectFolderCommand}" Style="{StaticResource ButtonContent}" Padding="12,5" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <ui:SymbolIcon Symbol="Edit20" FontSize="13" Margin="0,0,6,0"/>
+                            <TextBlock VerticalAlignment="Center" Text="{DynamicResource btn_change}" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

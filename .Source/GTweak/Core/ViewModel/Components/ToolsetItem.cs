@@ -22,6 +22,7 @@ namespace GTweak.Core.Item
 
         public ImageSource AppIconSource { get => _appIconSource; set { _appIconSource = value; OnPropertyChanged(); } }
         public string AppName => _model.AppName;
+        public FilterTag[] Tags => _model.Tags;
         public string AuthorName => _model.AuthorName;
         public ImageSource AuthorIconSource { get => _authorIconSource; set { _authorIconSource = value; OnPropertyChanged(); } }
         public bool IsSquareIcon { get => _isSquareIcon; set { _isSquareIcon = value; OnPropertyChanged(); } }

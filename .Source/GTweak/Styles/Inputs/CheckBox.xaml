@@ -20,15 +20,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <Border x:Name="Box" Width="18" Height="18" CornerRadius="4" Background="Transparent" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Grid>
+                        <Border Width="18" Height="18" CornerRadius="4" Opacity="0.4" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <Border.RenderTransform>
-                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                <TranslateTransform X="3" Y="6"/>
                             </Border.RenderTransform>
-                            <Path x:Name="CheckMark" Width="12" Height="12" Visibility="Collapsed" Stretch="None" Data="M1,6 L5,10 L11,2" Stroke="{StaticResource Brush_Highlighted_Inverted}" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeDashArray="30" StrokeDashOffset="30"/>
                         </Border>
-                        <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
-                    </StackPanel>
+                        <StackPanel x:Name="Root" Orientation="Horizontal" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <StackPanel.RenderTransform>
+                                <ScaleTransform x:Name="ContentScale" ScaleX="1" ScaleY="1"/>
+                            </StackPanel.RenderTransform>
+                            <Border x:Name="Box" Width="18" Height="18" CornerRadius="4" Background="Transparent" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <Path x:Name="CheckMark" Width="12" Height="12" Visibility="Collapsed" Stretch="None" Data="M1,6 L5,10 L11,2" Stroke="{StaticResource Brush_Highlighted_Inverted}" StrokeThickness="2" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeDashArray="30" StrokeDashOffset="30"/>
+                            </Border>
+                            <ContentPresenter Margin="8,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked"
                                  Value="True">

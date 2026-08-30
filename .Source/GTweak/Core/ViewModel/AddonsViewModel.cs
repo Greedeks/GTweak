@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace GTweak.Core.ViewModel
         public ObservableCollection<AddonModel> Addons { get; } = new ObservableCollection<AddonModel>();
 
         public ICommand SelectFolderCommand { get; }
+        public ICommand OpenFolderCommand { get; }
         public ICommand UpdateCommand { get; }
 
         private bool _isRunAsTrustedInstaller;
@@ -39,6 +41,7 @@ namespace GTweak.Core.ViewModel
             if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
                 SelectFolderCommand = new RelayCommand(_ => SelectFolder());
+                OpenFolderCommand = new RelayCommand(_ => OpenFolder());
                 UpdateCommand = new RelayCommand(_ => ScanFolder());
 
                 if (!string.IsNullOrWhiteSpace(GlobalOptions.UserAddonsPath) && Directory.Exists(GlobalOptions.UserAddonsPath))
@@ -63,6 +66,23 @@ namespace GTweak.Core.ViewModel
                     GlobalOptions.UserAddonsPath = folderDialog.SelectedPath;
                     OnPropertyChanged(nameof(DirectoryPath));
                     ScanFolder();
+                }
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+        }
+
+        private void OpenFolder()
+        {
+            try
+            {
+                if (Directory.Exists(GlobalOptions.UserAddonsPath))
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = GlobalOptions.UserAddonsPath,
+                        UseShellExecute = true,
+                        Verb = "open"
+                    });
                 }
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }

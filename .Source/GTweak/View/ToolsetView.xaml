@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:b="clr-namespace:GTweak.Behaviors"
              xmlns:vm="clr-namespace:GTweak.Core.ViewModel"
+             xmlns:mdl="clr-namespace:GTweak.Core.Models"
              xmlns:uc="clr-namespace:GTweak.Assets.UserControls"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:GTweak.View"
@@ -12,54 +13,57 @@
     <UserControl.DataContext>
         <vm:ToolsetViewModel />
     </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <uc:FlowPanel  Grid.Row="0" HorizontalAlignment="Left" Margin="10,5,10,0"  ContentAlignment="Left" Orientation="Horizontal" HorizontalSpacing="10" VerticalSpacing="5">
+        <Grid Grid.Row="0" Margin="10,5,20,0">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="{StaticResource DataElement_Opacity}" IsHitTestVisible="False" CornerRadius="8">
+                <Border.RenderTransform>
+                    <TranslateTransform X="3" Y="4"/>
+                </Border.RenderTransform>
+            </Border>
 
-            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" b:TextBoxClearBehavior.ClearButton="True" Width="300" MaxLength="55" HorizontalAlignment="Left" Height="29">
-                <TextBox.Tag>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <ui:SymbolIcon Symbol="Search20" FontSize="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                        <TextBlock VerticalAlignment="Center"><Run Text="{DynamicResource text_ts}"/><Run Text="..."/></TextBlock>
-                    </StackPanel>
-                </TextBox.Tag>
-            </TextBox>
+            <Border Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12,6">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding SelectFolderCommand}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Left" Margin="0,0,10,0">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <ui:SymbolIcon Symbol="FolderOpen20" FontSize="15" Margin="0,0,5,0"/>
-                        <TextBlock VerticalAlignment="Center">
-                        <Run Text="{DynamicResource btn_select_dir}"/><Run Text="..."/>
-                        </TextBlock>
-                    </StackPanel>
-                </Button>
+                    <uc:FlowPanel Grid.Column="0" Orientation="Horizontal" ContentAlignment="Left" HorizontalSpacing="0" VerticalSpacing="4">
+                        <RadioButton IsChecked="True" Style="{StaticResource RadioTag}" Content="{DynamicResource tag_all_ts}" GroupName="Filters" Command="{Binding FilterTagCommand}" CommandParameter="{x:Static mdl:FilterTag.All}" />
+                        <RadioButton Style="{StaticResource RadioTag}" Content="{DynamicResource tag_drivers_ts}" GroupName="Filters" Command="{Binding FilterTagCommand}" CommandParameter="{x:Static mdl:FilterTag.Driver}" />
+                        <RadioButton Style="{StaticResource RadioTag}" Content="{DynamicResource tag_tools_ts}" GroupName="Filters" Command="{Binding FilterTagCommand}" CommandParameter="{x:Static mdl:FilterTag.Tool}" />
+                        <RadioButton Style="{StaticResource RadioTag}" Content="{DynamicResource tag_diagnostics_ts}" GroupName="Filters" Command="{Binding FilterTagCommand}" CommandParameter="{x:Static mdl:FilterTag.Diagnostics}"  />
+                        <RadioButton Style="{StaticResource RadioTag}" Content="{DynamicResource tag_benchmark_ts}" GroupName="Filters" Command="{Binding FilterTagCommand}" CommandParameter="{x:Static mdl:FilterTag.Benchmark}"  />
+                        <RadioButton Style="{StaticResource RadioTag}" Content="{DynamicResource tag_overclocking_ts}" GroupName="Filters" Command="{Binding FilterTagCommand}" CommandParameter="{x:Static mdl:FilterTag.Overclock}"  />
+                    </uc:FlowPanel>
 
-                <Button Command="{Binding OpenFolderCommand}" Style="{StaticResource ButtonContent}" HorizontalAlignment="Right">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <ui:SymbolIcon Symbol="CloudArrowDown20" FontSize="15" Margin="0,0,5,0"/>
-                        <TextBlock VerticalAlignment="Center" Text="{DynamicResource btn_open_dir}"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+                    <TextBox Grid.Column="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" b:TextBoxClearBehavior.ClearButton="True" Width="280" MaxLength="55">
+                        <TextBox.Tag>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <ui:SymbolIcon Symbol="Search20" FontSize="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center"><Run Text="{DynamicResource text_ts}"/><Run Text="..."/></TextBlock>
+                            </StackPanel>
+                        </TextBox.Tag>
+                    </TextBox>
+                    
+                </Grid>
+            </Border>
+        </Grid>
 
-        </uc:FlowPanel>
-
-
-        <Border Grid.Row="1" Background="{StaticResource Brush_Separator}" Height="1.2" Margin="10,10,10,0" CornerRadius="10" HorizontalAlignment="Stretch"/>
-
-        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <ScrollViewer b:ScrollFadeBehavior.EnableFade="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <Grid>
                     <ItemsControl ItemsSource="{Binding ToolsView}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <uc:FlowPanel Margin="10,10,10,20" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                                <uc:FlowPanel Margin="10,10,20,10" HorizontalSpacing="5" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 
@@ -71,6 +75,61 @@
                     </ItemsControl>
                 </Grid>
             </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="10,0,20,5">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="{StaticResource DataElement_Opacity}" IsHitTestVisible="False" CornerRadius="8">
+                <Border.RenderTransform>
+                    <TranslateTransform X="3" Y="4"/>
+                </Border.RenderTransform>
+            </Border>
+
+            <Border Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" CornerRadius="8" Padding="12,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,15,0" HorizontalAlignment="Left">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ui:SymbolIcon Grid.Column="0" Symbol="Folder20" FontSize="15" Foreground="{StaticResource Brush_Inactive}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+
+                        <TextBlock Grid.Column="1" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" FontSize="13" VerticalAlignment="Center" Margin="0,0,4,0">
+                            <Run Text="{DynamicResource label_download_dir_ts}"/><Run Text=":" />
+                        </TextBlock>
+
+                        <TextBlock Grid.Column="2" Text="{Binding DirectoryPath, Mode=OneWay}" FontSize="13" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip="{Binding DirectoryPath}" Background="Transparent" Cursor="Hand">
+                            <TextBlock.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFolderCommand}" />
+                            </TextBlock.InputBindings>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource TextDefault}">
+                                    <Setter Property="Foreground" Value="{StaticResource Brush_TextBlock_Inactivity}"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="{StaticResource Brush_Highlighted}"/>
+                                            <Setter Property="TextDecorations" Value="Underline"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <Button Grid.Column="1" Command="{Binding SelectFolderCommand}" Style="{StaticResource ButtonContent}" Padding="12,5">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <ui:SymbolIcon Symbol="Edit20" FontSize="13" Margin="0,0,6,0"/>
+                            <TextBlock VerticalAlignment="Center" Text="{DynamicResource btn_change}" FontSize="13"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

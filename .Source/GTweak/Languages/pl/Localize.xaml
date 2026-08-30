@@ -218,7 +218,6 @@
     <v:String x:Key="chk_panel_intf">Panel sterowania</v:String>
     <v:String x:Key="chk_user_intf">Pliki użytkownika</v:String>
 
-    <!--not translated-->
     <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
     <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
     <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
@@ -261,7 +260,7 @@
     <v:String x:Key="exblock1_desc_intf">Zmienia widoczność wbudowanych elementów systemowych w panelu nawigacji, których nie można odpiąć zwykłymi metodami.</v:String>
     <v:String x:Key="exblock2_desc_intf">Zmienia systemowe reguły wyświetlania elementów w Eksploratorze plików, w tym widoczność ukrytych elementów, rozszerzeń plików i struktury dysków. Uwaga: ekran może migać.</v:String>
     <v:String x:Key="exblock3_desc_intf">Zmienia wyświetlanie ikon systemowych na pulpicie, które są wbudowanymi obiektami systemu, a nie zwykłymi skrótami.</v:String>
-    <!--not translated--><v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">Poprawka zmniejsza rozmiar przycisków Minimalizuj, Maksymalizuj i Zamknij, czyniąc je mniej masywnym. Dostosowuje rozmiar dla wszystkich okien, w tym Eksploratora plików, Zdjęć, przeglądarek i innych znanych programów.</v:String>
     <v:String x:Key="tgl2_desc_intf">Poprawka zwiększa częstotliwość migania kursora tekstowego. Domyślnie kursor miga co 530 milisekund.</v:String>
     <v:String x:Key="tgl3_desc_intf">Poprawka zmniejsza grubość pasków przewijania w klasycznych aplikacjach Windows, w tym w Eksploratorze plików, przeglądarkach i innych starszych programach. Nie dotyczy jednak nowoczesnych interfejsów, ponieważ korzystają one z własnych elementów sterujących niezależnych od ustawień systemowych.</v:String>
@@ -556,21 +555,26 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_select_dir">Wybierz folder</v:String>
     <v:String x:Key="chk_run_ti_adds">Uruchom jako TrustedInstaller</v:String>
-    <!--not translated--><v:String x:Key="label_directory_adds">Directory</v:String>
-    <!--not translated--><v:String x:Key="label_count_adds">Count</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">Wybierz katalog lub upewnij się, że nie jest pusty</v:String>
     <v:String x:Key="scripts_info_adds">Następnie będziesz mógł uruchamiać skrypty (.ps1, .cmd, .bat, .reg) na tej stronie</v:String>
     <!--#endregion-->
 
     <!--#region Toolset Page -->
+    <v:String x:Key="text_ts">Szukaj według nazwy lub autora</v:String>
+    <v:String x:Key="tag_all_ts">All</v:String>
+    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
+    <v:String x:Key="tag_tools_ts">Tools</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
+    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
+    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
+    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
     <v:String x:Key="source_ts">Źródło</v:String>
     <v:String x:Key="btn_download">Pobierz</v:String>
     <v:String x:Key="btn_cancel">Anuluj</v:String>
-    <v:String x:Key="btn_open_dir">Otwórz folder</v:String>
     <v:String x:Key="btn_done">Gotowe</v:String>
-    <v:String x:Key="text_ts">Szukaj według nazwy lub autora</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

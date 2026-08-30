@@ -103,40 +103,40 @@
                 <Border Margin="0,15,0,50" MinWidth="70" MaxWidth="320" HorizontalAlignment="Left" ClipToBounds="True">
                     <ScrollViewer x:Name="NavScroll" Padding="0,0,15,0" SizeChanged="NavigationScrollViewer_SizeChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" FlowDirection="RightToLeft">
                         <StackPanel x:Name="NavPanel" Orientation="Vertical" FlowDirection="LeftToRight" RadioButton.Checked="NavigationRtbn_Checked">
-                        
-                            <RadioButton Name="BtnUtils" Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_utils_main}" Command="{Binding NavigateToUtilsCommand}" IsChecked="True" >
+
+                            <RadioButton Name="BtnUtils" Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_utils_main}" Command="{Binding NavigateToUtilsCommand}" IsChecked="True" >
                                 <ui:SymbolIcon Symbol="Toolbox20" FontSize="20"/>
                             </RadioButton>
-                            
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_conf_main}" Command="{Binding NavigateToConfidentialityCommand}">
+
+                            <RadioButton Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_conf_main}" Command="{Binding NavigateToConfidentialityCommand}">
                                 <ui:SymbolIcon Symbol="PersonLock20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_int_main}" Command="{Binding NavigateToInterfaceCommand}">
+                            <RadioButton Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_int_main}" Command="{Binding NavigateToInterfaceCommand}">
                                 <ui:SymbolIcon Symbol="Color20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_app_main}" Command="{Binding NavigateToPackagesCommand}" Checked="NavigationRtbn_Checked">
+                            <RadioButton Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_app_main}" Command="{Binding NavigateToPackagesCommand}" Checked="NavigationRtbn_Checked">
                                 <ui:SymbolIcon Symbol="Apps20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_svc_main}" Command="{Binding NavigateToServicesCommand}">
+                            <RadioButton Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_svc_main}" Command="{Binding NavigateToServicesCommand}">
                                 <ui:SymbolIcon Symbol="TaskListSquareLtr20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{DynamicResource BtnNavigation}" Tag="{DynamicResource rbtn_sys_main}" Command="{Binding NavigateToSystemCommand}">
+                            <RadioButton Style="{DynamicResource RadioNavigation}" Tag="{DynamicResource rbtn_sys_main}" Command="{Binding NavigateToSystemCommand}">
                                 <ui:SymbolIcon Symbol="HardDrive20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_sysinfo_main}" Command="{Binding NavigateToDataSystemCommand}">
+                            <RadioButton Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_sysinfo_main}" Command="{Binding NavigateToDataSystemCommand}">
                                 <ui:SymbolIcon Symbol="Desktop20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_adds_main}" Command="{Binding NavigateToAddonsCommand}">
+                            <RadioButton Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_adds_main}" Command="{Binding NavigateToAddonsCommand}">
                                 <ui:SymbolIcon Symbol="PuzzlePieceShield20" FontSize="20"/>
                             </RadioButton>
 
-                            <RadioButton Style="{StaticResource BtnNavigation}" Tag="{DynamicResource rbtn_ts_main}" Command="{Binding NavigateToToolsetCommand}">
+                            <RadioButton Style="{StaticResource RadioNavigation}" Tag="{DynamicResource rbtn_ts_main}" Command="{Binding NavigateToToolsetCommand}">
                                 <ui:SymbolIcon Symbol="WindowApps20" FontSize="20"/>
                             </RadioButton>
                         </StackPanel>
@@ -328,7 +328,7 @@
                 <TranslateTransform Y="-20"/>
             </Grid.RenderTransform>
 
-            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" IsHitTestVisible="False" CornerRadius="7" Panel.ZIndex="0">
+            <Border Background="{StaticResource Brush_ShadowOverlay}" Opacity="{StaticResource IconNavigation_Opacity}" IsHitTestVisible="False" CornerRadius="7" Panel.ZIndex="0">
                 <Border.RenderTransform>
                     <TranslateTransform X="3" Y="4"/>
                 </Border.RenderTransform>

@@ -555,7 +555,6 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_select_dir">Select folder</v:String>
     <v:String x:Key="chk_run_ti_adds">Run as TrustedInstaller</v:String>
     <v:String x:Key="label_directory_adds">Directory</v:String>
     <v:String x:Key="label_count_adds">Count</v:String>
@@ -564,12 +563,18 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
+    <v:String x:Key="text_ts">Search by name or author</v:String>
+    <v:String x:Key="tag_all_ts">All</v:String>
+    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
+    <v:String x:Key="tag_tools_ts">Tools</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
+    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
+    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
+    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
     <v:String x:Key="source_ts">Source</v:String>
     <v:String x:Key="btn_download">Download</v:String>
     <v:String x:Key="btn_cancel">Сancel</v:String>
-    <v:String x:Key="btn_open_dir">Open folder</v:String>
     <v:String x:Key="btn_done">Done</v:String>
-    <v:String x:Key="text_ts">Search by name or author</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>

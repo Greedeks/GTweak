@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace GTweak.Behaviors
 {
@@ -53,7 +54,7 @@ namespace GTweak.Behaviors
             if (sender is Button clearButton && clearButton.TemplatedParent is TextBox textBox)
             {
                 textBox.Clear();
-                textBox.Focus();
+                Keyboard.ClearFocus();
             }
         }
 

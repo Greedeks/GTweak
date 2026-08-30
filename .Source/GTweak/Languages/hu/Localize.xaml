@@ -218,7 +218,6 @@
     <v:String x:Key="chk_panel_intf">Vezérlőpult</v:String>
     <v:String x:Key="chk_user_intf">Felhasználói fájlok</v:String>
 
-    <!--not translated-->
     <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
     <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
     <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
@@ -261,7 +260,7 @@
     <v:String x:Key="exblock1_desc_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>
     <v:String x:Key="exblock2_desc_intf">Módosítja a rendszer megjelenítési szabályait a Fájlkezelőben, beleértve a rejtett elemek, kiterjesztések és meghajtók láthatóságát. Figyelem, a képernyő villoghat.</v:String>
     <v:String x:Key="exblock3_desc_intf">Módosítja a rendszerikonok megjelenítését az asztalon — ezek beépített rendszerobjektumok, nem rendes parancsikonok.</v:String>
-    <!--not translated--><v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
     <v:String x:Key="tgl1_desc_intf">Ez a módosítás csökkenti a Minimalizálás, a Maximalizálás és a Bezárás gombok méretét, így kevésbé terjedelmesek. Beállítja az összes ablak méretét, beleértve a Fájlkezelőt, a Fényképeket, a böngészőket és más ismerős programokat.</v:String>
     <v:String x:Key="tgl2_desc_intf">Ez a beállítás növeli a szövegkurzor villogásának gyakoriságát. Alapértelmezés szerint a kurzor 530 ezredmásodpercenként villog.</v:String>
     <v:String x:Key="tgl3_desc_intf">A módosítás csökkenti a görgetősávok vastagságát a klasszikus Windows-alkalmazásokban, beleértve a File Explorert, a böngészőket és más régi programokat. Ez azonban nem érinti a modern interfészeket, mivel azok a rendszerbeállításoktól független saját vezérlőelemeiket használják.</v:String>
@@ -556,21 +555,26 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="btn_select_dir">Mappa kiválasztása</v:String>
     <v:String x:Key="chk_run_ti_adds">Futtassa TrustedInstallerként</v:String>
-    <!--not translated--><v:String x:Key="label_directory_adds">Directory</v:String>
-    <!--not translated--><v:String x:Key="label_count_adds">Count</v:String>
+    <v:String x:Key="label_directory_adds">Directory</v:String>
+    <v:String x:Key="label_count_adds">Count</v:String>
     <v:String x:Key="text_info_adds">Válasszon ki egy könyvtárat, vagy győződjön meg róla, hogy nem üres</v:String>
     <v:String x:Key="scripts_info_adds">Ezután képes lesz futtatni szkripteket (.ps1, .cmd, .bat, .reg) ezen az oldalon</v:String>
     <!--#endregion-->
 
     <!--#region Toolset Page -->
+    <v:String x:Key="text_ts">Keresés név vagy szerző szerint</v:String>
+    <v:String x:Key="tag_all_ts">All</v:String>
+    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
+    <v:String x:Key="tag_tools_ts">Tools</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
+    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
+    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
+    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
     <v:String x:Key="source_ts">Forrás</v:String>
     <v:String x:Key="btn_download">Letöltés</v:String>
     <v:String x:Key="btn_cancel">Mégse</v:String>
-    <v:String x:Key="btn_open_dir">Mappa megnyitása</v:String>
     <v:String x:Key="btn_done">Kész</v:String>
-    <v:String x:Key="text_ts">Keresés név vagy szerző szerint</v:String>
     <!--#endregion-->
 
 </ResourceDictionary>
