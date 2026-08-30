@@ -218,14 +218,14 @@
     <v:String x:Key="chk_panel_intf">Nadzorna plošča</v:String>
     <v:String x:Key="chk_user_intf">Uporabniške datoteke</v:String>
 
-    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
-    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
-    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
-    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
-    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
-    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
-    <v:String x:Key="chk_folder_music_intf">Music</v:String>
-    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    <v:String x:Key="exblock4_intf">Mape v »Ta računalnik«:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D Predmeti</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Namizje</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Prenosi</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Dokumenti</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Slike</v:String>
+    <v:String x:Key="chk_folder_music_intf">Glasba</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videoposnetki</v:String>
     
     <v:String x:Key="tgl1_intf">Standardna velikost sistemskih gumbov</v:String>
     <v:String x:Key="tgl2_intf">Standardna frekvenca utripanja kazalca</v:String>
