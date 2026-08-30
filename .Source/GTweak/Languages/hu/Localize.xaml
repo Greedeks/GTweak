@@ -218,14 +218,14 @@
     <v:String x:Key="chk_panel_intf">Vezérlőpult</v:String>
     <v:String x:Key="chk_user_intf">Felhasználói fájlok</v:String>
 
-    <v:String x:Key="exblock4_intf">Folders in «This PC»:</v:String>
-    <v:String x:Key="chk_folder_3d_intf">3D Objects</v:String>
-    <v:String x:Key="chk_folder_desktop_intf">Desktop</v:String>
-    <v:String x:Key="chk_folder_downloads_intf">Downloads</v:String>
-    <v:String x:Key="chk_folder_documents_intf">Documents</v:String>
-    <v:String x:Key="chk_folder_pictures_intf">Pictures</v:String>
-    <v:String x:Key="chk_folder_music_intf">Music</v:String>
-    <v:String x:Key="chk_folder_video_intf">Videos</v:String>
+    <v:String x:Key="exblock4_intf">Mappák az «Ez a gép» ablakban:</v:String>
+    <v:String x:Key="chk_folder_3d_intf">3D objektumok</v:String>
+    <v:String x:Key="chk_folder_desktop_intf">Asztal</v:String>
+    <v:String x:Key="chk_folder_downloads_intf">Letöltések</v:String>
+    <v:String x:Key="chk_folder_documents_intf">Dokumentumok</v:String>
+    <v:String x:Key="chk_folder_pictures_intf">Képek</v:String>
+    <v:String x:Key="chk_folder_music_intf">Zenék</v:String>
+    <v:String x:Key="chk_folder_video_intf">Videók</v:String>
     
     <v:String x:Key="tgl1_intf">A rendszergombok szabványos mérete</v:String>
     <v:String x:Key="tgl2_intf">A kurzor normál villogási frekvenciája</v:String>
@@ -260,7 +260,7 @@
     <v:String x:Key="exblock1_desc_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>
     <v:String x:Key="exblock2_desc_intf">Módosítja a rendszer megjelenítési szabályait a Fájlkezelőben, beleértve a rejtett elemek, kiterjesztések és meghajtók láthatóságát. Figyelem, a képernyő villoghat.</v:String>
     <v:String x:Key="exblock3_desc_intf">Módosítja a rendszerikonok megjelenítését az asztalon — ezek beépített rendszerobjektumok, nem rendes parancsikonok.</v:String>
-    <v:String x:Key="exblock4_desc_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
+    <v:String x:Key="exblock4_desc_intf">Módosítja a szabványos felhasználói mappák és a «3D objektumok» megjelenítését az «Ez a gép» ablakban. Lehetővé teszi az elrejtésüket, hogy a listában csak a csatlakoztatott meghajtók jelenjenek meg. A 21H1 alatti verzióknál a «3D objektumokat» a navigációs panelről is eltávolítja. Figyelem: a képernyő villoghat.</v:String>
     <v:String x:Key="tgl1_desc_intf">Ez a módosítás csökkenti a Minimalizálás, a Maximalizálás és a Bezárás gombok méretét, így kevésbé terjedelmesek. Beállítja az összes ablak méretét, beleértve a Fájlkezelőt, a Fényképeket, a böngészőket és más ismerős programokat.</v:String>
     <v:String x:Key="tgl2_desc_intf">Ez a beállítás növeli a szövegkurzor villogásának gyakoriságát. Alapértelmezés szerint a kurzor 530 ezredmásodpercenként villog.</v:String>
     <v:String x:Key="tgl3_desc_intf">A módosítás csökkenti a görgetősávok vastagságát a klasszikus Windows-alkalmazásokban, beleértve a File Explorert, a böngészőket és más régi programokat. Ez azonban nem érinti a modern interfészeket, mivel azok a rendszerbeállításoktól független saját vezérlőelemeiket használják.</v:String>
@@ -314,7 +314,7 @@
     <v:String x:Key="Mail_pkg">E-mail</v:String>
     <v:String x:Key="Widgets_pkg">Minialkalmazások</v:String>
     <v:String x:Key="Photos_pkg">Windows Fotók</v:String>
-    <v:String x:Key="ScreenSketch_pkg">Képernyő rögzítő</v:String>
+    <v:String x:Key="ScreenSketch_pkg">Képmetsző</v:String>
     <v:String x:Key="ClipChamp_pkg">Microsoft Clipchamp</v:String>
     <v:String x:Key="GetHelp_pkg">Segítség kérése</v:String>
     <v:String x:Key="GetStarted_pkg">Segítség az induláskor</v:String>
@@ -422,7 +422,7 @@
     <v:String x:Key="tgl8_desc_svc">Tiltsa le, ha nincs nyomtatója.</v:String>
     <v:String x:Key="tgl9_desc_svc">Tiltsa le, ha nincs szkenner.</v:String>
     <v:String x:Key="tgl10_desc_svc">Tiltsa le, ha nincs faxkészüléke.</v:String>
-    <!--not translated--><v:String x:Key="tgl11_desc_svc">Tiltsa le, ha asztali számítógépe, laptopja vagy netbookja van. By default, these services are set to "Manual" start and do not run constantly. However, disabling them will crash the "Power" page in Windows Settings, as the system fails to poll the sensors when opened. The classic Control Panel will continue to work normally. If you need the modern Power settings, turn the services back on.</v:String>
+    <v:String x:Key="tgl11_desc_svc">Tiltsa le, ha asztali számítógépe, laptopja vagy netbookja van. Alapértelmezés szerint ezek a szolgáltatások „Kézi” indításra vannak beállítva, és nem futnak folyamatosan. Ha azonban letiltjuk őket, a Windows Beállítások „Tápellátás” lapja összeomlik, mivel a rendszer a lap megnyitásakor nem tudja lekérdezni az érzékelőket. A klasszikus Vezérlőpult továbbra is normál módon fog működni. Ha szüksége van a modern energiaellátási beállításokra, kapcsold be újra a szolgáltatásokat.</v:String>
     <v:String x:Key="tgl12_desc_svc">Tiltsa le, ha csak egy monitora van, és nem tervezi további monitorok csatlakoztatását.</v:String>
     <v:String x:Key="tgl13_desc_svc">Ha nem használja ezeket az alkalmazásokat, tiltsa le: „Virtuális asztalok”, „Az Ön telefonja” és az „Éjszakai fény”. Ez a szolgáltatás feldolgozza a felhasználói adatokat, és szinkronizálja azokat a Microsoft szerverekkel. A rendszer működése szempontjából nem kritikus, azonban egyes funkciók, például a Windows 10 „Éjszakai fény” funkciója, teljesen vagy részben leállhat, ha ezt a szolgáltatást letiltja.</v:String>
     <v:String x:Key="tgl14_desc_svc">Tiltsa le, ha nem használ vagy nem tervez helyi hálózatot használni.</v:String>
@@ -556,21 +556,21 @@
 
     <!--#region Addons Page -->
     <v:String x:Key="chk_run_ti_adds">Futtassa TrustedInstallerként</v:String>
-    <v:String x:Key="label_directory_adds">Directory</v:String>
-    <v:String x:Key="label_count_adds">Count</v:String>
+    <v:String x:Key="label_directory_adds">Könyvtár</v:String>
+    <v:String x:Key="label_count_adds">Szám</v:String>
     <v:String x:Key="text_info_adds">Válasszon ki egy könyvtárat, vagy győződjön meg róla, hogy nem üres</v:String>
     <v:String x:Key="scripts_info_adds">Ezután képes lesz futtatni szkripteket (.ps1, .cmd, .bat, .reg) ezen az oldalon</v:String>
     <!--#endregion-->
 
     <!--#region Toolset Page -->
     <v:String x:Key="text_ts">Keresés név vagy szerző szerint</v:String>
-    <v:String x:Key="tag_all_ts">All</v:String>
-    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
-    <v:String x:Key="tag_tools_ts">Tools</v:String>
-    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
-    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
-    <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
-    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
+    <v:String x:Key="tag_all_ts">Mind</v:String>
+    <v:String x:Key="tag_drivers_ts">Illesztőprogramok</v:String>
+    <v:String x:Key="tag_tools_ts">Eszközök</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnosztika</v:String>
+    <v:String x:Key="tag_benchmark_ts">Referenciaérték</v:String>
+    <v:String x:Key="tag_overclocking_ts">Túlhajtás</v:String>
+    <v:String x:Key="label_download_dir_ts">Letöltési mappa</v:String>
     <v:String x:Key="source_ts">Forrás</v:String>
     <v:String x:Key="btn_download">Letöltés</v:String>
     <v:String x:Key="btn_cancel">Mégse</v:String>
