@@ -1,11 +1,18 @@
-﻿param(
+<# :
+@echo off
+set "SCRIPT_DIR=%~dp0"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-Expression (Get-Content -LiteralPath '%~f0' -Raw)"
+echo.
+pause
+exit /b
+#>
+param(
     [string]$RefFile = $null,
     [string]$BasePath = $null,
     [string]$Pattern = "Localize.xaml",
     [switch]$Placeholder,
     [switch]$DryRun,
-    [switch]$Backup,
-    [switch]$Wait
+    [switch]$Backup
 )
 
 function Info([string]$s) { Write-Host $s -ForegroundColor Cyan }
@@ -77,7 +84,7 @@ function Write-SyncReport {
     }
 }
 
-$scriptDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
+$scriptDir = if ($env:SCRIPT_DIR) { $env:SCRIPT_DIR } elseif ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
 
 # auto-detect BasePath
 if (-not $BasePath) {
@@ -104,8 +111,9 @@ $keyAttrRegex = 'x:Key\s*=\s*"([^"]+)"'
 $regionTagRegex = '<!--#region\s+(.+?)\s*-->'
 
 $refText = Get-Content -Raw -LiteralPath $RefFile
+
 $refMatches = [regex]::Matches($refText, $regionTagRegex)
-$refRegions = New-Object System.Collections.Generic.List[string]
+$refRegions = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 foreach ($match in $refMatches) {
     if ($match.Groups.Count -gt 1) {
         $val = $match.Groups[1].Value.Trim()
@@ -154,8 +162,7 @@ function Process-Catalog {
 Process-Catalog (Join-Path $BasePath "LanguageCatalog.xaml")
 
 # --- Process Target Files ---
-$targets = Get-ChildItem -Path $BasePath -Recurse -Filter $Pattern | 
-           Where-Object { $_.FullName -ne (Get-Item $RefFile).FullName }
+$targets = Get-ChildItem -Path $BasePath -Recurse -Filter $Pattern | Where-Object { $_.FullName -ne (Get-Item $RefFile).FullName }
 
 Info "Syncing $($targets.Count) target(s) against reference: $(Split-Path $RefFile -Leaf)"
 
@@ -171,7 +178,7 @@ foreach ($targetFile in $targets) {
     }
     
     $tMatches = [regex]::Matches($targetText, $regionTagRegex)
-    $targetRegions = New-Object System.Collections.Generic.List[string]
+    $targetRegions = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
     foreach ($tm in $tMatches) {
         if ($tm.Groups.Count -gt 1) {
             $val = $tm.Groups[1].Value.Trim()
@@ -191,12 +198,12 @@ foreach ($targetFile in $targets) {
 
     $addedR = @()
     foreach ($rr in $refRegions) {
-        if ($targetRegions -notcontains $rr) { $addedR += $rr }
+        if (-not $targetRegions.Contains($rr)) { $addedR += $rr }
     }
     
     $deletedR = @()
     foreach ($tr in $targetRegions) {
-        if ($refRegions -notcontains $tr) { $deletedR += $tr }
+        if (-not $refRegions.Contains($tr)) { $deletedR += $tr }
     }
 
     Write-SyncReport -LangCode $langCode `
@@ -209,18 +216,19 @@ foreach ($targetFile in $targets) {
         if ($DryRun) {
             Warn "DryRun: Skipping file write for $langCode"
         } else {
-            $updatedText = $refText
+            $sb = [System.Text.StringBuilder]::new($refText)
+            
             foreach ($re in $refElements) {
                 if ($targetKeys.ContainsKey($re.Key)) {
-                    $updatedText = $updatedText.Replace($re.Element, $targetKeys[$re.Key])
+                    [void]$sb.Replace($re.Element, $targetKeys[$re.Key])
                 } elseif ($Placeholder) {
                     $placeholderTag = "<v:String x:Key=""$($re.Key)""></v:String>"
-                    $updatedText = $updatedText.Replace($re.Element, $placeholderTag)
+                    [void]$sb.Replace($re.Element, $placeholderTag)
                 }
             }
 
             if ($Backup) { Copy-Item $targetPath ($targetPath + ".bak") -Force }
-            Set-Content -LiteralPath $targetPath -Value $updatedText -Force
+            Set-Content -LiteralPath $targetPath -Value $sb.ToString() -Force
         }
     }
 }
