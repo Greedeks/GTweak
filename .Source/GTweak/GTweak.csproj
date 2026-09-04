@@ -219,6 +219,7 @@
     <Compile Include="Behaviors\ScrollFadeBehavior.cs" />
     <Compile Include="Behaviors\ScrollViewerBehavior.cs" />
     <Compile Include="Behaviors\TextBoxClearBehavior.cs" />
+    <Compile Include="Modules\Common\GroupAttribute.cs" />
     <Compile Include="Modules\Common\PostActionAttribute.cs" />
     <Compile Include="Modules\Configuration\IconProvider.cs" />
     <Compile Include="Modules\Configuration\NetworkProvider.cs" />
@@ -268,6 +269,9 @@
     </Compile>
     <Compile Include="View\SystemView.xaml.cs">
       <DependentUpon>SystemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ExportWindow.xaml.cs">
+      <DependentUpon>ExportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
@@ -435,6 +439,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SystemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ExportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

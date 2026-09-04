@@ -31,7 +31,7 @@ namespace GTweak.View
 
             _sysTweaks.Apply(tglButton.Name, tglButton.State);
 
-            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(SystemToggle));
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(SystemTweaks.Toggle));
 
             if (postAction.HasAlert())
             {

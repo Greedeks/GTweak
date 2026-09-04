@@ -10,54 +10,54 @@ using Microsoft.Win32;
 
 namespace GTweak.Modules.Tweaks
 {
-    internal enum ServiceToggle
-    {
-        WindowsSearch = 1,
-        Xbox,
-        WindowsUpdate,
-        WindowsStore,
-        PerformanceCounters,
-        Biometrics,
-        Bluetooth,
-        Printers,
-        Scanner,
-        Fax,
-        TabletMobileMode,
-        SecondaryMonitors,
-        SystemComponents,
-        LocalNetwork,
-        UsbModemsRouters,
-        VpnClients,
-        WindowsMedia,
-        RemoteDesktop,
-        ErrorEventLogging,
-        WebDav,
-        SmartCards,
-        WindowsKiosk,
-        FileEncryption,
-        WindowsLocalization,
-        BackgroundSecurityCheck,
-        BackgroundDiagnostics,
-        CorporateTools,
-        HyperV,
-        PushNotifications,
-        RetailDemo,
-        EdgeUpdates,
-        MultimediaClassScheduler,
-        Geolocation
-    }
-
     internal sealed class ServicesTweaks : FirewallManager
     {
+        internal enum Toggle
+        {
+            WindowsSearch,
+            Xbox,
+            WindowsUpdate,
+            WindowsStore,
+            PerformanceCounters,
+            Biometrics,
+            Bluetooth,
+            Printers,
+            Scanner,
+            Fax,
+            TabletMobileMode,
+            SecondaryMonitors,
+            SystemComponents,
+            LocalNetwork,
+            UsbModemsRouters,
+            VpnClients,
+            WindowsMedia,
+            RemoteDesktop,
+            ErrorEventLogging,
+            WebDav,
+            SmartCards,
+            WindowsKiosk,
+            FileEncryption,
+            WindowsLocalization,
+            BackgroundSecurityCheck,
+            BackgroundDiagnostics,
+            CorporateTools,
+            HyperV,
+            PushNotifications,
+            RetailDemo,
+            EdgeUpdates,
+            MultimediaClassScheduler,
+            Geolocation
+        }
+
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
-        private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
-        private readonly Dictionary<ServiceToggle, (Func<bool> Check, Action<bool> Apply)> _tglTweaks;
+        private readonly ControlWriterManager _controlWriter = new ControlWriterManager(ControlStates);
+        private readonly Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)> _toggleMappings;
 
         public ServicesTweaks()
         {
-            _tglTweaks = new Dictionary<ServiceToggle, (Func<bool> Check, Action<bool> Apply)>
+            _toggleMappings = new Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)>
             {
-                [ServiceToggle.WindowsSearch] = (
+                [Toggle.WindowsSearch] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch", "Start", "4") ||
@@ -70,7 +70,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.Xbox] = (
+                [Toggle.Xbox] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxGipSvc", "Start", "4") ||
@@ -89,7 +89,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.WindowsUpdate] = (
+                [Toggle.WindowsUpdate] = (
                     Check: () => PathTargets.Targets.WindowsUpdate.Mappings.All(f => File.Exists(f.Normal)),
                     Apply: (state) =>
                     {
@@ -154,7 +154,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.WindowsStore] = (
+                [Toggle.WindowsStore] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WalletService", "Start", "4") ||
@@ -179,7 +179,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.PerformanceCounters] = (
+                [Toggle.PerformanceCounters] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wmiApSrv", "Start", "4") ||
@@ -194,7 +194,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.Biometrics] = (
+                [Toggle.Biometrics] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WbioSrvc", "Start", "4"),
                     Apply: (state) =>
                     {
@@ -203,7 +203,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.Bluetooth] = (
+                [Toggle.Bluetooth] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\bthserv", "Start", "4") ||
@@ -220,7 +220,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.Printers] = (
+                [Toggle.Printers] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler", "Start", "4") ||
@@ -278,12 +278,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.Scanner] = (
+                [Toggle.Scanner] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WiaRpc", "Start", "4"),
                     Apply: (state) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WiaRpc", "Start", state ? 3 : 4, RegistryValueKind.DWord)
                 ),
 
-                [ServiceToggle.Fax] = (
+                [Toggle.Fax] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TapiSrv", "Start", "4") ||
@@ -298,7 +298,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.TabletMobileMode] = (
+                [Toggle.TabletMobileMode] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SensrSvc", "Start", "4") ||
@@ -315,12 +315,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.SecondaryMonitors] = (
+                [Toggle.SecondaryMonitors] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WFDSConMgrSvc", "Start", "4"),
                     Apply: (state) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WFDSConMgrSvc", "Start", state ? 3 : 4, RegistryValueKind.DWord)
                 ),
 
-                [ServiceToggle.SystemComponents] = (
+                [Toggle.SystemComponents] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc", "Start", "4"),
                     Apply: (state) =>
                     {
@@ -329,7 +329,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.LocalNetwork] = (
+                [Toggle.LocalNetwork] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon", "Start", "4") ||
@@ -354,7 +354,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.UsbModemsRouters] = (
+                [Toggle.UsbModemsRouters] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WwanSvc", "Start", "4") ||
@@ -374,7 +374,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.VpnClients] = (
+                [Toggle.VpnClients] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent", "Start", "4") ||
@@ -389,7 +389,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.WindowsMedia] = (
+                [Toggle.WindowsMedia] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WPDBusEnum", "Start", "4") ||
@@ -402,7 +402,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.RemoteDesktop] = (
+                [Toggle.RemoteDesktop] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UmRdpService", "Start", "4") ||
@@ -421,7 +421,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.ErrorEventLogging] = (
+                [Toggle.ErrorEventLogging] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WerSvc", "Start", "4") ||
@@ -436,12 +436,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.WebDav] = (
+                [Toggle.WebDav] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WebClient", "Start", "4"),
                     Apply: (state) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WebClient", "Start", state ? 3 : 4, RegistryValueKind.DWord)
                 ),
 
-                [ServiceToggle.SmartCards] = (
+                [Toggle.SmartCards] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SCPolicySvc", "Start", "4") ||
@@ -457,7 +457,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.WindowsKiosk] = (
+                [Toggle.WindowsKiosk] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AssignedAccessManagerSvc", "Start", "4") ||
@@ -470,7 +470,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.FileEncryption] = (
+                [Toggle.FileEncryption] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BDESVC", "Start", "4") ||
@@ -483,17 +483,17 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.WindowsLocalization] = (
+                [Toggle.WindowsLocalization] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LxpSvc", "Start", "4"),
                     Apply: (state) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\LxpSvc", "Start", state ? 3 : 4, RegistryValueKind.DWord)
                 ),
 
-                [ServiceToggle.BackgroundSecurityCheck] = (
+                [Toggle.BackgroundSecurityCheck] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WarpJITSvc", "Start", "4"),
                     Apply: (state) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\WarpJITSvc", "Start", state ? 3 : 4, RegistryValueKind.DWord)
                 ),
 
-                [ServiceToggle.BackgroundDiagnostics] = (
+                [Toggle.BackgroundDiagnostics] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdiSystemHost", "Start", "4") ||
@@ -511,7 +511,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.CorporateTools] = (
+                [Toggle.CorporateTools] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\workfolderssvc", "Start", "4") ||
@@ -528,7 +528,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.HyperV] = (
+                [Toggle.HyperV] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\vmicvmsession", "Start", "4") ||
@@ -555,7 +555,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.PushNotifications] = (
+                [Toggle.PushNotifications] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PushToInstall", "Start", "4") ||
@@ -569,7 +569,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.RetailDemo] = (
+                [Toggle.RetailDemo] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RetailDemo", "Start", "4"),
                     Apply: (state) =>
                     {
@@ -578,7 +578,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.EdgeUpdates] = (
+                [Toggle.EdgeUpdates] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\edgeupdate", "Start", "4") ||
@@ -596,12 +596,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ServiceToggle.MultimediaClassScheduler] = (
+                [Toggle.MultimediaClassScheduler] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MMCSS", "Start", "4"),
                     Apply: (state) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\MMCSS", "Start", state ? 3 : 4, RegistryValueKind.DWord, true)
                 ),
 
-                [ServiceToggle.Geolocation] = (
+                [Toggle.Geolocation] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc", "Start", "4") || IsTaskEnabled(geoTasks),
                     Apply: (state) =>
                     {
@@ -614,9 +614,9 @@ namespace GTweak.Modules.Tweaks
 
         internal void CheckAll()
         {
-            foreach (var tweak in _tglTweaks)
+            foreach (var tweak in _toggleMappings)
             {
-                _сontrolWriter.ToggleButton[(int)tweak.Key] = tweak.Value.Check();
+                _controlWriter[tweak.Key] = tweak.Value.Check();
             }
         }
 
@@ -624,14 +624,9 @@ namespace GTweak.Modules.Tweaks
         {
             INIManager.TempWrite(INIManager.TempTweaksSvc, tweakName, state);
 
-            if (tweakName.StartsWith("TglButton") && int.TryParse(tweakName.Substring(9), out int index))
+            if (Enum.TryParse<Toggle>(tweakName, out var tweakKey) && _toggleMappings.TryGetValue(tweakKey, out var action))
             {
-                ServiceToggle tweakKey = (ServiceToggle)index;
-
-                if (_tglTweaks.TryGetValue(tweakKey, out var action))
-                {
-                    Task.Run(() => action.Apply(state));
-                }
+                Task.Run(() => action.Apply(state));
             }
         }
 

@@ -12,64 +12,64 @@ using Microsoft.Win32;
 
 namespace GTweak.Modules.Tweaks
 {
-    internal enum ConfidentialityToggle
-    {
-        TargetedAdvertising = 1,
-
-        DataSynchronization,
-
-        WindowsTelemetry,
-
-        SchedulerDataCollection,
-
-        InstalledAppsData,
-
-        AppUsageStatistics,
-
-        HandwritingData,
-
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        HardwareConfigurationData,
-
-        HiddenMicrosoftDomains,
-
-        UserLocationTracking,
-
-        FeedbackRequests,
-
-        SpeechSynthesisUpdates,
-
-        HiddenSystemMonitoring,
-
-        SystemExperiments,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        CovertDataCollectionServices,
-
-        WindowsEventLogging,
-
-        NvidiaTelemetry,
-
-        UserBehaviorRecording,
-
-        OfflineMapsUpdates,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        IntelTelemetry
-    }
-
     internal sealed class ConfidentialityTweaks : FirewallManager
     {
+        internal enum Toggle
+        {
+            TargetedAdvertising,
+
+            DataSynchronization,
+
+            WindowsTelemetry,
+
+            SchedulerDataCollection,
+
+            InstalledAppsData,
+
+            AppUsageStatistics,
+
+            HandwritingData,
+
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            HardwareConfigurationData,
+
+            HiddenMicrosoftDomains,
+
+            UserLocationTracking,
+
+            FeedbackRequests,
+
+            SpeechSynthesisUpdates,
+
+            HiddenSystemMonitoring,
+
+            SystemExperiments,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            CovertDataCollectionServices,
+
+            WindowsEventLogging,
+
+            NvidiaTelemetry,
+
+            UserBehaviorRecording,
+
+            OfflineMapsUpdates,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            IntelTelemetry
+        }
+
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
-        private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
-        private readonly Dictionary<ConfidentialityToggle, (Func<bool> Check, Action<bool> Apply)> _tglTweaks;
+        private readonly ControlWriterManager _controlWriter = new ControlWriterManager(ControlStates);
+        private readonly Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)> _toggleMappings;
 
         public ConfidentialityTweaks()
         {
-            _tglTweaks = new Dictionary<ConfidentialityToggle, (Func<bool> Check, Action<bool> Apply)>
+            _toggleMappings = new Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)>
             {
-                [ConfidentialityToggle.TargetedAdvertising] = (
+                [Toggle.TargetedAdvertising] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo", "Enabled", "0") ||
@@ -90,7 +90,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.DataSynchronization] = (
+                [Toggle.DataSynchronization] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Accessibility", "Enabled", "0") ||
@@ -123,7 +123,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.WindowsTelemetry] = (
+                [Toggle.WindowsTelemetry] = (
                    Check: () =>
                    {
                        return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
@@ -146,12 +146,12 @@ namespace GTweak.Modules.Tweaks
                    }
                 ),
 
-                [ConfidentialityToggle.SchedulerDataCollection] = (
+                [Toggle.SchedulerDataCollection] = (
                     Check: () => IsTaskEnabled(dataCollectTasks),
                     Apply: (state) => SetTaskState(state, dataCollectTasks)
                 ),
 
-                [ConfidentialityToggle.InstalledAppsData] = (
+                [Toggle.InstalledAppsData] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableInventory", "1") || IsTaskEnabled(appExpInventoryTasks),
                     Apply: (state) =>
                     {
@@ -168,7 +168,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.AppUsageStatistics] = (
+                [Toggle.AppUsageStatistics] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection", "AllowTelemetry", "0") ||
@@ -195,7 +195,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.HandwritingData] = (
+                [Toggle.HandwritingData] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC", "PreventHandwritingDataSharing", "1") ||
@@ -218,7 +218,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.HardwareConfigurationData] = (
+                [Toggle.HardwareConfigurationData] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SQMClient\Windows", "CEIPEnable", "0") || IsTaskEnabled(ceipTasks),
                     Apply: (state) =>
                     {
@@ -235,7 +235,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.HiddenMicrosoftDomains] = (
+                [Toggle.HiddenMicrosoftDomains] = (
                     Check: () => IsDefaultHosts(),
                     Apply: (state) =>
                     {
@@ -301,7 +301,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.UserLocationTracking] = (
+                [Toggle.UserLocationTracking] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "1") ||
@@ -325,7 +325,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.FeedbackRequests] = (
+                [Toggle.FeedbackRequests] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules", "NumberOfSIUFInPeriod", "0") ||
@@ -351,7 +351,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.SpeechSynthesisUpdates] = (
+                [Toggle.SpeechSynthesisUpdates] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Speech", "AllowSpeechModelUpdate", "0") || IsTaskEnabled(speechTasks),
                     Apply: (state) =>
                     {
@@ -368,12 +368,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.HiddenSystemMonitoring] = (
+                [Toggle.HiddenSystemMonitoring] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", "4"),
                     Apply: (state) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\CDPUserSvc", "Start", state ? 2 : 4, RegistryValueKind.DWord)
                 ),
 
-                [ConfidentialityToggle.SystemExperiments] = (
+                [Toggle.SystemExperiments] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\System", "AllowExperimentation", "0"),
                     Apply: (state) =>
                     {
@@ -388,7 +388,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.CovertDataCollectionServices] = (
+                [Toggle.CovertDataCollectionServices] = (
                     Check: () =>
                     {
                         return RegistryHelper.KeyExists(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\DiagTrack") ||
@@ -479,7 +479,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.WindowsEventLogging] = (
+                [Toggle.WindowsEventLogging] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service", "Start", "4"),
                     Apply: (state) =>
                     {
@@ -489,7 +489,7 @@ namespace GTweak.Modules.Tweaks
                 ),
 
 
-                [ConfidentialityToggle.NvidiaTelemetry] = (
+                [Toggle.NvidiaTelemetry] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer", "Start", "4") || IsTaskEnabled(nvidiaTasks);
@@ -501,7 +501,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.UserBehaviorRecording] = (
+                [Toggle.UserBehaviorRecording] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "DisableUAR", "1") ||
@@ -522,7 +522,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.OfflineMapsUpdates] = (
+                [Toggle.OfflineMapsUpdates] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\Maps", "MapUpdate", "0") ||
@@ -548,7 +548,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [ConfidentialityToggle.IntelTelemetry] = (
+                [Toggle.IntelTelemetry] = (
                     Check: () =>
                     {
                         return (RegistryHelper.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Telemetry", "Start") &&
@@ -569,9 +569,9 @@ namespace GTweak.Modules.Tweaks
 
         internal void CheckAll()
         {
-            foreach (var tweak in _tglTweaks)
+            foreach (var tweak in _toggleMappings)
             {
-                _сontrolWriter.ToggleButton[(int)tweak.Key] = tweak.Value.Check();
+                _controlWriter[tweak.Key] = tweak.Value.Check();
             }
         }
 
@@ -579,14 +579,9 @@ namespace GTweak.Modules.Tweaks
         {
             INIManager.TempWrite(INIManager.TempTweaksConf, tweakName, state);
 
-            if (tweakName.StartsWith("TglButton") && int.TryParse(tweakName.Substring(9), out int index))
+            if (Enum.TryParse<Toggle>(tweakName, out var tweakKey) && _toggleMappings.TryGetValue(tweakKey, out var action))
             {
-                ConfidentialityToggle tweakKey = (ConfidentialityToggle)index;
-
-                if (_tglTweaks.TryGetValue(tweakKey, out var action))
-                {
-                    Task.Run(() => action.Apply(state));
-                }
+                Task.Run(() => action.Apply(state));
             }
         }
 

@@ -10,163 +10,173 @@ using Microsoft.Win32;
 
 namespace GTweak.Modules.Tweaks
 {
-    internal enum InterfaceColor
-    {
-        CursorSelection = 1,
-        Tooltip
-    }
-
-    internal enum InterfaceCheckbox
-    {
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        ExplorerHome = 1,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        ExplorerGallery,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        ExplorerOneDrive,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        HiddenFiles,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        SystemFiles,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FileExtensions,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        EmptyDrives,
-
-        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
-        IconComputer,
-
-        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
-        IconNetwork,
-
-        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
-        IconRecycleBin,
-
-        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
-        IconControlPanel,
-
-        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
-        IconUserFiles,
-
-        [PostAction(shell: ExplorerManager.ShellType.Refresh)]
-        IconOneDrive,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FolderObjects3D,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FolderDesktop,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FolderDownloads,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FolderDocuments,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FolderPictures,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FolderMusic,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        FolderVideo
-    }
-
-    internal enum InterfaceToggle
-    {
-        [PostAction(NotificationManager.AlertType.Logout)]
-        SystemButtonSize = 1,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-        CursorFlickerFrequency,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-        ScrollbarSize,
-
-        TaskbarTransparency,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        TaskbarDarkTheme,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        AppDarkTheme,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-        ContextMenuDelay,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-        TaskbarPreviewDelay,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-        IconOverlayBadges,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-        ShortcutNameSuffix,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        TaskbarAlignment,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        StartMenuLayout,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        CompactContextMenu,
-
-        TipsSuggestions,
-
-        CompactExplorerMode,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        CopilotRecall,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        TaskbarEndTask,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-        SnapLayouts,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        TaskbarIconsButtons,
-
-        PersonalizedAds,
-
-        RestoreFolderWindows,
-
-        TipsNotifications,
-
-        JpegWallpaperCompression,
-
-        DesktopTooltips,
-
-        [PostAction(shell: ExplorerManager.ShellType.Restart)]
-        BingStartSearch,
-
-        OpenQuickAccess,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        AdaptiveBrightness
-    }
-
     internal sealed class InterfaceTweaks
     {
+        internal enum Color
+        {
+            CursorSelection,
+            Tooltip
+        }
+
+        internal enum Checkbox
+        {
+            [Group("NavigationItems")]
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            ExplorerHome,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            ExplorerGallery,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            ExplorerOneDrive,
+
+
+            [Group("FileExplorerDisplay")]
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            HiddenFiles,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            SystemFiles,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FileExtensions,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            EmptyDrives,
+
+
+            [Group("DesktopIcons")]
+
+            [PostAction(shell: ExplorerManager.ShellType.Refresh)]
+            IconComputer,
+
+            [PostAction(shell: ExplorerManager.ShellType.Refresh)]
+            IconNetwork,
+
+            [PostAction(shell: ExplorerManager.ShellType.Refresh)]
+            IconRecycleBin,
+
+            [PostAction(shell: ExplorerManager.ShellType.Refresh)]
+            IconControlPanel,
+
+            [PostAction(shell: ExplorerManager.ShellType.Refresh)]
+            IconUserFiles,
+
+            [PostAction(shell: ExplorerManager.ShellType.Refresh)]
+            IconOneDrive,
+
+
+            [Group("ThisPCFolders")]
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FolderObjects3D,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FolderDesktop,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FolderDownloads,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FolderDocuments,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FolderPictures,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FolderMusic,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            FolderVideo
+        }
+
+        internal enum Toggle
+        {
+            [PostAction(NotificationManager.AlertType.Logout)]
+            SystemButtonSize,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+            CursorFlickerFrequency,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+            ScrollbarSize,
+
+            TaskbarTransparency,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            TaskbarDarkTheme,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            AppDarkTheme,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+            ContextMenuDelay,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+            TaskbarPreviewDelay,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+            IconOverlayBadges,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+            ShortcutNameSuffix,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            TaskbarAlignment,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            StartMenuLayout,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            CompactContextMenu,
+
+            TipsSuggestions,
+
+            CompactExplorerMode,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            CopilotRecall,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            TaskbarEndTask,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+            SnapLayouts,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            TaskbarIconsButtons,
+
+            PersonalizedAds,
+
+            RestoreFolderWindows,
+
+            TipsNotifications,
+
+            JpegWallpaperCompression,
+
+            DesktopTooltips,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
+            BingStartSearch,
+
+            OpenQuickAccess,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            AdaptiveBrightness
+        }
+
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
-        private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
-        private readonly Dictionary<InterfaceColor, (Func<string> Check, Action<string> Apply)> _colorTweaks;
-        private readonly Dictionary<InterfaceCheckbox, (Func<bool> Check, Action<bool> Apply)> _cbTweaks;
-        private readonly Dictionary<InterfaceToggle, (Func<bool> Check, Action<bool> Apply)> _tglTweaks;
+        private readonly ControlWriterManager _controlWriter = new ControlWriterManager(ControlStates);
+        private readonly Dictionary<Color, (Func<string> Check, Action<string> Apply)> _colorMappings;
+        private readonly Dictionary<Checkbox, (Func<bool> Check, Action<bool> Apply)> _checkboxMappings;
+        private readonly Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)> _toggleMappings;
 
         public InterfaceTweaks()
         {
-            _colorTweaks = new Dictionary<InterfaceColor, (Func<string> Check, Action<string> Apply)>
+            _colorMappings = new Dictionary<Color, (Func<string> Check, Action<string> Apply)>
             {
-                [InterfaceColor.CursorSelection] = (
+                [Color.CursorSelection] = (
                     Check: () => RegistryHelper.GetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "Hilight", "0 120 215"),
                     Apply: (value) =>
                     {
@@ -175,7 +185,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceColor.Tooltip] = (
+                [Color.Tooltip] = (
                     Check: () => RegistryHelper.GetValue(@"HKEY_CURRENT_USER\Control Panel\Colors", "InfoWindow", "255 255 225"),
                     Apply: (value) =>
                     {
@@ -186,9 +196,9 @@ namespace GTweak.Modules.Tweaks
                 )
             };
 
-            _cbTweaks = new Dictionary<InterfaceCheckbox, (Func<bool> Check, Action<bool> Apply)>
+            _checkboxMappings = new Dictionary<Checkbox, (Func<bool> Check, Action<bool> Apply)>
             {
-                [InterfaceCheckbox.ExplorerHome] = (
+                [Checkbox.ExplorerHome] = (
                     Check: () =>
                     {
                         return HardwareData.OS.IsWin11 &&
@@ -218,7 +228,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.ExplorerGallery] = (
+                [Checkbox.ExplorerGallery] = (
                     Check: () =>
                     {
                         return HardwareData.OS.IsWin11 &&
@@ -240,7 +250,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.ExplorerOneDrive] = (
+                [Checkbox.ExplorerOneDrive] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0") ||
@@ -253,57 +263,57 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.HiddenFiles] = (
+                [Checkbox.HiddenFiles] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Hidden", "1", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "Hidden", state ? 0 : 1, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.SystemFiles] = (
+                [Checkbox.SystemFiles] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSuperHidden", "1", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowSuperHidden", state ? 0 : 1, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.FileExtensions] = (
+                [Checkbox.FileExtensions] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", "0", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideFileExt", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.EmptyDrives] = (
+                [Checkbox.EmptyDrives] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideDrivesWithNoMedia", "0", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "HideDrivesWithNoMedia", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.IconComputer] = (
+                [Checkbox.IconComputer] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", "0", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{20D04FE0-3AEA-1069-A2D8-08002B30309D}", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.IconNetwork] = (
+                [Checkbox.IconNetwork] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}", "0", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.IconRecycleBin] = (
+                [Checkbox.IconRecycleBin] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", "1", false),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{645FF040-5081-101B-9F08-00AA002F954E}", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.IconControlPanel] = (
+                [Checkbox.IconControlPanel] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}", "0", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{5399E694-6CE5-4D6C-8FCE-1D8870FDCBA0}", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.IconUserFiles] = (
+                [Checkbox.IconUserFiles] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{59031A47-3F72-44A7-89C5-5595FE6B30EE}", "0", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{59031A47-3F72-44A7-89C5-5595FE6B30EE}", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.IconOneDrive] = (
+                [Checkbox.IconOneDrive] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "0", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel", "{018D5C66-4533-4307-9B53-224DE2ED1FE6}", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceCheckbox.FolderObjects3D] = (
+                [Checkbox.FolderObjects3D] = (
                     Check: () =>
                     {
                         return RegistryHelper.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}") ||
@@ -326,7 +336,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.FolderDesktop] = (
+                [Checkbox.FolderDesktop] = (
                     Check: () => RegistryHelper.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}"),
                     Apply: (state) =>
                     {
@@ -341,7 +351,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.FolderDownloads] = (
+                [Checkbox.FolderDownloads] = (
                     Check: () => RegistryHelper.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}"),
                     Apply: (state) =>
                     {
@@ -356,7 +366,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.FolderDocuments] = (
+                [Checkbox.FolderDocuments] = (
                     Check: () => RegistryHelper.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}"),
                     Apply: (state) =>
                     {
@@ -371,7 +381,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.FolderPictures] = (
+                [Checkbox.FolderPictures] = (
                     Check: () => RegistryHelper.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}"),
                     Apply: (state) =>
                     {
@@ -386,7 +396,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.FolderMusic] = (
+                [Checkbox.FolderMusic] = (
                     Check: () => RegistryHelper.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}"),
                     Apply: (state) =>
                     {
@@ -401,7 +411,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceCheckbox.FolderVideo] = (
+                [Checkbox.FolderVideo] = (
                     Check: () => RegistryHelper.KeyExists(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}"),
                     Apply: (state) =>
                     {
@@ -417,9 +427,9 @@ namespace GTweak.Modules.Tweaks
                 )
             };
 
-            _tglTweaks = new Dictionary<InterfaceToggle, (Func<bool> Check, Action<bool> Apply)>
+            _toggleMappings = new Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)>
             {
-                [InterfaceToggle.SystemButtonSize] = (
+                [Toggle.SystemButtonSize] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "CaptionHeight", "-270") ||
@@ -432,12 +442,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.CursorFlickerFrequency] = (
+                [Toggle.CursorFlickerFrequency] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "CursorBlinkRate", "530", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Control Panel\Desktop", "CursorBlinkRate", state ? "530" : "200", RegistryValueKind.String)
                 ),
 
-                [InterfaceToggle.ScrollbarSize] = (
+                [Toggle.ScrollbarSize] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics", "ScrollHeight", "-210") ||
@@ -450,32 +460,32 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.TaskbarTransparency] = (
+                [Toggle.TaskbarTransparency] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", "0"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "EnableTransparency", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceToggle.TaskbarDarkTheme] = (
+                [Toggle.TaskbarDarkTheme] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", "1"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", state ? 0 : 1, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceToggle.AppDarkTheme] = (
+                [Toggle.AppDarkTheme] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", "1"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", state ? 0 : 1, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceToggle.ContextMenuDelay] = (
+                [Toggle.ContextMenuDelay] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "MenuShowDelay", "20"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Control Panel\Desktop", "MenuShowDelay", state ? "400" : "20", RegistryValueKind.String)
                 ),
 
-                [InterfaceToggle.TaskbarPreviewDelay] = (
+                [Toggle.TaskbarPreviewDelay] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseHoverTime", "20"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Control Panel\Mouse", "MouseHoverTime", state ? "400" : "20", RegistryValueKind.String)
                 ),
 
-                [InterfaceToggle.IconOverlayBadges] = (
+                [Toggle.IconOverlayBadges] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%systemroot%\\Blank.ico,0") ||
@@ -506,7 +516,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.ShortcutNameSuffix] = (
+                [Toggle.ShortcutNameSuffix] = (
                     Check: () => RegistryHelper.CheckValueBytes(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "link", "0000"),
                     Apply: (state) =>
                     {
@@ -521,12 +531,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.TaskbarAlignment] = (
+                [Toggle.TaskbarAlignment] = (
                     Check: () => HardwareData.OS.IsWin11 && RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", "0"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarAl", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceToggle.StartMenuLayout] = (
+                [Toggle.StartMenuLayout] = (
                     Check: () =>
                     {
                         return HardwareData.OS.IsWin11 &&
@@ -558,7 +568,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.CompactContextMenu] = (
+                [Toggle.CompactContextMenu] = (
                     Check: () => HardwareData.OS.IsWin11 && RegistryHelper.KeyExists(Registry.CurrentUser, @"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", true),
                     Apply: (state) =>
                     {
@@ -573,7 +583,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.TipsSuggestions] = (
+                [Toggle.TipsSuggestions] = (
                     Check: () =>
                     {
                         return HardwareData.OS.IsWin11 &&
@@ -587,12 +597,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.CompactExplorerMode] = (
+                [Toggle.CompactExplorerMode] = (
                     Check: () => HardwareData.OS.IsWin11 && RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", "1", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "UseCompactMode", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceToggle.CopilotRecall] = (
+                [Toggle.CopilotRecall] = (
                     Check: () =>
                     {
                         return HardwareData.OS.IsWin11 &&
@@ -714,18 +724,18 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.TaskbarEndTask] = (
+                [Toggle.TaskbarEndTask] = (
                     Check: () => HardwareData.OS.IsWin11 && RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", "1", true),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
 
-                [InterfaceToggle.SnapLayouts] = (
+                [Toggle.SnapLayouts] = (
                     Check: () => HardwareData.OS.IsWin11 && RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", "0"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "EnableSnapAssistFlyout", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceToggle.TaskbarIconsButtons] = (
+                [Toggle.TaskbarIconsButtons] = (
                     Check: () =>
                     {
                         return HardwareData.OS.IsWin11 &&
@@ -781,7 +791,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.PersonalizedAds] = (
+                [Toggle.PersonalizedAds] = (
                     Check: () =>
                     {
                         return HardwareData.OS.IsWin11 &&
@@ -834,7 +844,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.RestoreFolderWindows] = (
+                [Toggle.RestoreFolderWindows] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "PersistBrowsers", "0", true),
                     Apply: (state) =>
                     {
@@ -849,7 +859,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.TipsNotifications] = (
+                [Toggle.TipsNotifications] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications", "ToastEnabled", "0") ||
@@ -890,7 +900,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.JpegWallpaperCompression] = (
+                [Toggle.JpegWallpaperCompression] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "JPEGImportQuality", "100"),
                     Apply: (state) =>
                     {
@@ -905,12 +915,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.DesktopTooltips] = (
+                [Toggle.DesktopTooltips] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", "0"),
                     Apply: (state) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "ShowInfoTip", state ? 1 : 0, RegistryValueKind.DWord)
                 ),
 
-                [InterfaceToggle.BingStartSearch] = (
+                [Toggle.BingStartSearch] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", "1"),
                     Apply: (state) =>
                     {
@@ -925,7 +935,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.OpenQuickAccess] = (
+                [Toggle.OpenQuickAccess] = (
                     Check: () =>
                     {
                         return HardwareData.OS.Build >= 22621m ? RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", "HubMode", "1") :
@@ -944,7 +954,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [InterfaceToggle.AdaptiveBrightness] = (
+                [Toggle.AdaptiveBrightness] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "DisableCABC", "1") ||
@@ -975,19 +985,19 @@ namespace GTweak.Modules.Tweaks
 
         internal void CheckAll()
         {
-            foreach (var tweak in _colorTweaks)
+            foreach (var tweak in _colorMappings)
             {
-                _сontrolWriter.ColorPicker[(int)tweak.Key] = tweak.Value.Check();
+                _controlWriter[tweak.Key] = tweak.Value.Check();
             }
 
-            foreach (var tweak in _cbTweaks)
+            foreach (var tweak in _checkboxMappings)
             {
-                _сontrolWriter.Checkbox[(int)tweak.Key] = tweak.Value.Check();
+                _controlWriter[tweak.Key] = tweak.Value.Check();
             }
 
-            foreach (var tweak in _tglTweaks)
+            foreach (var tweak in _toggleMappings)
             {
-                _сontrolWriter.ToggleButton[(int)tweak.Key] = tweak.Value.Check();
+                _controlWriter[tweak.Key] = tweak.Value.Check();
             }
         }
 
@@ -995,12 +1005,10 @@ namespace GTweak.Modules.Tweaks
         {
             INIManager.TempWrite(INIManager.TempTweaksIntf, controlName, value);
 
-            if (controlName.StartsWith("ColorPicker") && int.TryParse(controlName.Substring(11), out int index))
+            if (Enum.TryParse<Color>(controlName, out var colorKey)
+                && _colorMappings.TryGetValue(colorKey, out var action))
             {
-                if (_colorTweaks.TryGetValue((InterfaceColor)index, out var action))
-                {
-                    Task.Run(() => action.Apply(value));
-                }
+                Task.Run(() => action.Apply(value));
             }
         }
 
@@ -1008,19 +1016,13 @@ namespace GTweak.Modules.Tweaks
         {
             INIManager.TempWrite(INIManager.TempTweaksIntf, controlName, state);
 
-            if (controlName.StartsWith("TglButton") && int.TryParse(controlName.Substring(9), out int tglIndex))
+            if (Enum.TryParse<Toggle>(controlName, out var tglKey) && _toggleMappings.TryGetValue(tglKey, out var tglAction))
             {
-                if (_tglTweaks.TryGetValue((InterfaceToggle)tglIndex, out var action))
-                {
-                    Task.Run(() => action.Apply(state));
-                }
+                Task.Run(() => tglAction.Apply(state));
             }
-            else if (controlName.StartsWith("Checkbox") && int.TryParse(controlName.Substring(8), out int cbIndex))
+            else if (Enum.TryParse<Checkbox>(controlName, out var cbKey) && _checkboxMappings.TryGetValue(cbKey, out var cbAction))
             {
-                if (_cbTweaks.TryGetValue((InterfaceCheckbox)cbIndex, out var action))
-                {
-                    Task.Run(() => action.Apply(state));
-                }
+                Task.Run(() => cbAction.Apply(state));
             }
         }
     }

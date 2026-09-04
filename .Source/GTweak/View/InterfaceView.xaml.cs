@@ -35,7 +35,7 @@ namespace GTweak.View
         {
             CheckBox checkBox = (CheckBox)sender;
             _intfTweaks.Apply(checkBox.Uid, checkBox.IsChecked == false);
-            _shellType = checkBox.Uid.GetPostAction(typeof(InterfaceCheckbox)).Shell;
+            _shellType = checkBox.Uid.GetPostAction(typeof(InterfaceTweaks.Checkbox)).Shell;
         }
 
         private void ExpandableBox_Closed(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace GTweak.View
             DescBlock.ContentSource = tglButton;
             _intfTweaks.Apply(tglButton.Name, tglButton.State);
 
-            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(InterfaceToggle));
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(InterfaceTweaks.Toggle));
 
             if (postAction.HasShell())
             {

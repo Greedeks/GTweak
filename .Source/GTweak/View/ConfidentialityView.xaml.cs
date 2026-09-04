@@ -30,7 +30,7 @@ namespace GTweak.View
 
             _confTweaks.Apply(tglButton.Name, tglButton.State);
 
-            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(ConfidentialityToggle));
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(ConfidentialityTweaks.Toggle));
 
             if (postAction.HasAlert())
             {

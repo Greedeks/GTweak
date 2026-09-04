@@ -27,107 +27,107 @@ namespace GTweak.Modules.Tweaks
         internal const uint SPI_SETMOUSE = 0x0004;
     };
 
-    internal enum SystemSlider
-    {
-        MouseSensitivity = 1,
-        KeyboardDelay,
-        KeyboardSpeed
-    }
-
-    internal enum SystemToggle
-    {
-        PointerPrecision = 1,
-
-        [PostAction(NotificationManager.AlertType.Logout)]
-
-        StickyKeysFilter,
-
-        WindowsDefender,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        UserAccountControl,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        SecurityNotifications,
-
-        StoreAutoUpdate,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        RealtekAudioDelay,
-
-        LockScreenTimeout,
-
-        HibernationFastStartup,
-
-        AutoEndTasks,
-
-        ExeLaunchWarnings,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        MemoryDiagnostics,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        NetworkProtocols,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        FileSystemCache,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        StartupDelay,
-
-        QuickAccessHistory,
-
-        RemovableMediaAutoplay,
-
-        PowerScheme,
-
-        BluetoothFunction,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        WindowsFirewall,
-
-        GameMode,
-
-        GameBar,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        BackgroundApps,
-
-        ReservedStorage,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        DynamicTickHpet,
-
-        HealthCheck,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        InsiderTasks,
-
-        SystemDriveDefrag,
-
-        PauseWindowsUpdates,
-
-        [PostAction(NotificationManager.AlertType.Restart)]
-        MultiPlaneOverlay
-    }
-
     internal sealed class SystemTweaks : FirewallManager
     {
+        internal enum Slider
+        {
+            MouseSensitivity,
+            KeyboardDelay,
+            KeyboardSpeed
+        }
+
+        internal enum Toggle
+        {
+            PointerPrecision,
+
+            [PostAction(NotificationManager.AlertType.Logout)]
+
+            StickyKeysFilter,
+
+            WindowsDefender,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            UserAccountControl,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            SecurityNotifications,
+
+            StoreAutoUpdate,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            RealtekAudioDelay,
+
+            LockScreenTimeout,
+
+            HibernationFastStartup,
+
+            AutoEndTasks,
+
+            ExeLaunchWarnings,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            MemoryDiagnostics,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            NetworkProtocols,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            FileSystemCache,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            StartupDelay,
+
+            QuickAccessHistory,
+
+            RemovableMediaAutoplay,
+
+            PowerScheme,
+
+            BluetoothFunction,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            WindowsFirewall,
+
+            GameMode,
+
+            GameBar,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            BackgroundApps,
+
+            ReservedStorage,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            DynamicTickHpet,
+
+            HealthCheck,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            InsiderTasks,
+
+            SystemDriveDefrag,
+
+            PauseWindowsUpdates,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            MultiPlaneOverlay
+        }
+
         private static bool _isNetshState = false, _isTickState = false;
         private static string _currentPowerGuid = string.Empty;
 
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
-        private readonly ControlWriterManager _сontrolWriter = new ControlWriterManager(ControlStates);
-        private readonly Dictionary<SystemSlider, (Func<double> Check, Action<uint> Apply)> _sliderTweaks;
-        private readonly Dictionary<SystemToggle, (Func<bool> Check, Action<bool, bool> Apply)> _tglTweaks;
+        private readonly ControlWriterManager _controlWriter = new ControlWriterManager(ControlStates);
+        private readonly Dictionary<Slider, (Func<double> Check, Action<uint> Apply)> _sliderMappings;
+        private readonly Dictionary<Toggle, (Func<bool> Check, Action<bool, bool> Apply)> _toggleMappings;
 
         public SystemTweaks()
         {
             _currentPowerGuid = RegistryHelper.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes", "ActivePowerScheme", string.Empty);
 
-            _sliderTweaks = new Dictionary<SystemSlider, (Func<double> Check, Action<uint> Apply)>
+            _sliderMappings = new Dictionary<Slider, (Func<double> Check, Action<uint> Apply)>
             {
-                [SystemSlider.MouseSensitivity] = (
+                [Slider.MouseSensitivity] = (
                     Check: () => RegistryHelper.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseSensitivity", 10),
                     Apply: (value) =>
                     {
@@ -136,7 +136,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemSlider.KeyboardDelay] = (
+                [Slider.KeyboardDelay] = (
                     Check: () => RegistryHelper.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Keyboard", "KeyboardDelay", 1),
                     Apply: (value) =>
                     {
@@ -145,7 +145,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemSlider.KeyboardSpeed] = (
+                [Slider.KeyboardSpeed] = (
                     Check: () => RegistryHelper.GetValue<double>(@"HKEY_CURRENT_USER\Control Panel\Keyboard", "KeyboardSpeed", 31),
                     Apply: (value) =>
                     {
@@ -155,9 +155,9 @@ namespace GTweak.Modules.Tweaks
                 ),
             };
 
-            _tglTweaks = new Dictionary<SystemToggle, (Func<bool> Check, Action<bool, bool> Apply)>
+            _toggleMappings = new Dictionary<Toggle, (Func<bool> Check, Action<bool, bool> Apply)>
             {
-                [SystemToggle.PointerPrecision] = (
+                [Toggle.PointerPrecision] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Mouse", "MouseSpeed", "0") ||
@@ -173,7 +173,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.StickyKeysFilter] = (
+                [Toggle.StickyKeysFilter] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys", "Flags", "26") ||
@@ -186,7 +186,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.WindowsDefender] = (
+                [Toggle.WindowsDefender] = (
                     Check: () => File.Exists(PathTargets.Targets.Defender.SmartScreen.Normal),
                     Apply: async (state, canShowWindow) =>
                     {
@@ -224,7 +224,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.UserAccountControl] = (
+                [Toggle.UserAccountControl] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", "0") ||
@@ -247,7 +247,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.SecurityNotifications] = (
+                [Toggle.SecurityNotifications] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance", "Enabled", "0") ||
@@ -270,7 +270,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.StoreAutoUpdate] = (
+                [Toggle.StoreAutoUpdate] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore", "AutoDownload", "2"),
                     Apply: (state, _) =>
                     {
@@ -285,7 +285,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.RealtekAudioDelay] = (
+                [Toggle.RealtekAudioDelay] = (
                     Check: () =>
                     {
                         try
@@ -350,12 +350,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.LockScreenTimeout] = (
+                [Toggle.LockScreenTimeout] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7", "Attributes", "2"),
                     Apply: (state, _) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Power\PowerSettings\7516b95f-f776-4464-8c53-06167f40cc99\8EC4B3A5-6868-48c2-BE75-4F3044BE88A7", "Attributes", state ? 1 : 2, RegistryValueKind.DWord)
                 ),
 
-                [SystemToggle.HibernationFastStartup] = (
+                [Toggle.HibernationFastStartup] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", "0") ||
@@ -371,7 +371,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.AutoEndTasks] = (
+                [Toggle.AutoEndTasks] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Control Panel\Desktop", "AutoEndTasks", "1"),
                     Apply: (state, _) =>
                     {
@@ -386,7 +386,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.ExeLaunchWarnings] = (
+                [Toggle.ExeLaunchWarnings] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\Security", "DisableSecuritySettingsCheck", "1") ||
@@ -407,12 +407,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.MemoryDiagnostics] = (
+                [Toggle.MemoryDiagnostics] = (
                     Check: () => IsTaskEnabled(memoryDiagTasks),
                     Apply: (state, _) => SetTaskState(state, memoryDiagTasks)
                 ),
 
-                [SystemToggle.NetworkProtocols] = (
+                [Toggle.NetworkProtocols] = (
                     Check: () => _isNetshState,
                     Apply: (state, _) =>
                     {
@@ -426,12 +426,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.FileSystemCache] = (
+                [Toggle.FileSystemCache] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", "1"),
                     Apply: (state, _) => RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", state ? 0 : 1, RegistryValueKind.DWord)
                 ),
 
-                [SystemToggle.StartupDelay] = (
+                [Toggle.StartupDelay] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize", "Startupdelayinmsec", "0"),
                     Apply: (state, _) =>
                     {
@@ -446,7 +446,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.QuickAccessHistory] = (
+                [Toggle.QuickAccessHistory] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer", "ShowFrequent", "0") ||
@@ -473,12 +473,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.RemovableMediaAutoplay] = (
+                [Toggle.RemovableMediaAutoplay] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", "1"),
                     Apply: (state, _) => RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers", "DisableAutoplay", state ? 0 : 1, RegistryValueKind.DWord)
                 ),
 
-                [SystemToggle.PowerScheme] = (
+                [Toggle.PowerScheme] = (
                     Check: () =>
                     {
                         return !RegistryHelper.GetValue($@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\{_currentPowerGuid}", "Description", string.Empty).Contains("-18") &&
@@ -487,12 +487,12 @@ namespace GTweak.Modules.Tweaks
                     Apply: (state, _) => SetPowercfg(state)
                 ),
 
-                [SystemToggle.BluetoothFunction] = (
+                [Toggle.BluetoothFunction] = (
                     Check: () => BluetoothManager.IsEnabled,
                     Apply: (state, _) => BluetoothManager.SetState(state)
                 ),
 
-                [SystemToggle.WindowsFirewall] = (
+                [Toggle.WindowsFirewall] = (
                     Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mpssvc", "Start", "4"),
                     Apply: (state, _) =>
                     {
@@ -505,7 +505,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.GameMode] = (
+                [Toggle.GameMode] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "AutoGameModeEnabled", "0") ||
@@ -518,7 +518,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.GameBar] = (
+                [Toggle.GameBar] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\GameBar", "UseNexusForGameBarEnabled", "0") ||
@@ -533,7 +533,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.BackgroundApps] = (
+                [Toggle.BackgroundApps] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications", "GlobalUserDisabled", "1") ||
@@ -558,7 +558,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.ReservedStorage] = (
+                [Toggle.ReservedStorage] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager", "MiscPolicyInfo", "2") ||
@@ -582,7 +582,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.DynamicTickHpet] = (
+                [Toggle.DynamicTickHpet] = (
                     Check: () => _isTickState,
                     Apply: (state, _) =>
                     {
@@ -592,7 +592,7 @@ namespace GTweak.Modules.Tweaks
                 ),
 
 
-                [SystemToggle.HealthCheck] = (
+                [Toggle.HealthCheck] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHC", "PreviousUninstall", "1", true) ||
@@ -613,12 +613,12 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.InsiderTasks] = (
+                [Toggle.InsiderTasks] = (
                     Check: () => IsTaskEnabled(winInsiderTasks),
                     Apply: (state, _) => SetTaskState(state, winInsiderTasks)
                 ),
 
-                [SystemToggle.SystemDriveDefrag] = (
+                [Toggle.SystemDriveDefrag] = (
                     Check: () =>
                     {
                         return !IsTaskEnabled(defragTask) || RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Dfrg\BootOptimizeFunction", "Enable", "N") ||
@@ -632,7 +632,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.PauseWindowsUpdates] = (
+                [Toggle.PauseWindowsUpdates] = (
                     Check: () =>
                     {
                         return DateTime.TryParse(RegistryHelper.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings", "PauseUpdatesStartTime", string.Empty), null, System.Globalization.DateTimeStyles.RoundtripKind, out var start) &&
@@ -699,7 +699,7 @@ namespace GTweak.Modules.Tweaks
                     }
                 ),
 
-                [SystemToggle.MultiPlaneOverlay] = (
+                [Toggle.MultiPlaneOverlay] = (
                     Check: () =>
                     {
                         return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm", "OverlayTestMode", "5") ||
@@ -752,14 +752,14 @@ namespace GTweak.Modules.Tweaks
 
         internal void CheckAll()
         {
-            foreach (var tweak in _sliderTweaks)
+            foreach (var tweak in _sliderMappings)
             {
-                _сontrolWriter.Slider[(int)tweak.Key] = tweak.Value.Check();
+                _controlWriter[tweak.Key] = tweak.Value.Check();
             }
 
-            foreach (var tweak in _tglTweaks)
+            foreach (var tweak in _toggleMappings)
             {
-                _сontrolWriter.ToggleButton[(int)tweak.Key] = tweak.Value.Check();
+                _controlWriter[tweak.Key] = tweak.Value.Check();
             }
         }
 
@@ -770,12 +770,9 @@ namespace GTweak.Modules.Tweaks
         {
             INIManager.TempWrite(INIManager.TempTweaksSys, controlName, value);
 
-            if (controlName.StartsWith("Slider") && int.TryParse(controlName.Substring(6), out int index))
+            if (Enum.TryParse<Slider>(controlName, out var sliderKey) && _sliderMappings.TryGetValue(sliderKey, out var sliderAction))
             {
-                if (_sliderTweaks.TryGetValue((SystemSlider)index, out var action))
-                {
-                    Task.Run(() => action.Apply(value));
-                }
+                Task.Run(() => sliderAction.Apply(value));
             }
         }
 
@@ -786,18 +783,15 @@ namespace GTweak.Modules.Tweaks
         {
             INIManager.TempWrite(INIManager.TempTweaksSys, controlName, state);
 
-            if (controlName.StartsWith("TglButton") && int.TryParse(controlName.Substring(9), out int index))
+            if (Enum.TryParse<Toggle>(controlName, out var tglKey) && _toggleMappings.TryGetValue(tglKey, out var tglAction))
             {
-                if (_tglTweaks.TryGetValue((SystemToggle)index, out var action))
+                if (tglKey == Toggle.WindowsDefender)
                 {
-                    if (index == (int)SystemToggle.WindowsDefender)
-                    {
-                        action.Apply(state, canShowWindow);
-                    }
-                    else
-                    {
-                        Task.Run(() => action.Apply(state, canShowWindow));
-                    }
+                    tglAction.Apply(state, canShowWindow);
+                }
+                else
+                {
+                    Task.Run(() => tglAction.Apply(state, canShowWindow));
                 }
             }
         }

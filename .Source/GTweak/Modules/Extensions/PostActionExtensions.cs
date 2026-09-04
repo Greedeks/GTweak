@@ -7,8 +7,6 @@ namespace GTweak.Modules.Extensions
 {
     internal static class PostActionExtensions
     {
-        private static readonly char[] Digits = "0123456789".ToCharArray();
-
         internal static bool HasAlert(this PostActionAttribute action) => action.Alert != NotificationManager.AlertType.None;
         internal static bool HasShell(this PostActionAttribute action) => action.Shell != ExplorerManager.ShellType.None;
 
@@ -17,21 +15,14 @@ namespace GTweak.Modules.Extensions
             return value.GetType().GetField(value.ToString())?.GetCustomAttribute<PostActionAttribute>() ?? new PostActionAttribute();
         }
 
-        internal static PostActionAttribute GetPostAction(this string controlName, Type enumType)
+        internal static PostActionAttribute GetPostAction(this string memberName, Type enumType)
         {
-            if (string.IsNullOrEmpty(controlName))
+            if (string.IsNullOrEmpty(memberName))
             {
                 return new PostActionAttribute();
             }
 
-            int digitIndex = controlName.IndexOfAny(Digits);
-
-            if (digitIndex >= 0 && int.TryParse(controlName.Substring(digitIndex), out int index))
-            {
-                return ((Enum)Enum.ToObject(enumType, index)).GetPostAction();
-            }
-
-            return new PostActionAttribute();
+            return enumType.GetField(memberName)?.GetCustomAttribute<PostActionAttribute>() ?? new PostActionAttribute();
         }
 
         internal static NotificationManager.AlertType GetAlert(this Enum value) => value.GetPostAction().Alert;
