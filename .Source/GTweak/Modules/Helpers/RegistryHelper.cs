@@ -87,27 +87,51 @@ namespace GTweak.Modules.Helpers
             return invert ? !result : result;
         }
 
-        internal static bool ValueExists(string subKey, string valueName, bool invert = false)
-        {
-            bool result = Registry.GetValue(subKey, valueName, null) != null;
-            return invert ? !result : result;
-        }
-
         internal static bool CheckValue(string subKey, string valueName, string expectedValue, bool invert = false)
         {
-            string value = Registry.GetValue(subKey, valueName, null)?.ToString();
-            bool result = !string.Equals(value, expectedValue, StringComparison.OrdinalIgnoreCase);
-            return invert ? !result : result;
+            try
+            {
+                string value = Registry.GetValue(subKey, valueName, null)?.ToString();
+                bool result = !string.Equals(value, expectedValue, StringComparison.OrdinalIgnoreCase);
+                return invert ? !result : result;
+            }
+            catch (Exception ex) 
+            { 
+                ErrorLogger.LogDebug(ex); 
+                return false; 
+            }
+        }
+
+        internal static bool ValueExists(string subKey, string valueName, bool invert = false)
+        {
+            try
+            {
+                bool result = Registry.GetValue(subKey, valueName, null) != null;
+                return invert ? !result : result;
+            }
+            catch (Exception ex) 
+            {
+                ErrorLogger.LogDebug(ex); 
+                return false; 
+            }
         }
 
         internal static bool CheckValueBytes(string subkey, string valueName, string expectedValue)
         {
-            if (!(Registry.GetValue(subkey, valueName, null) is byte[] bytes))
+            try
             {
-                return true;
-            }
+                if (!(Registry.GetValue(subkey, valueName, null) is byte[] bytes))
+                {
+                    return true;
+                }
 
-            return string.Concat(bytes) != expectedValue;
+                return string.Concat(bytes) != expectedValue;
+            }
+            catch (Exception ex) 
+            { 
+                ErrorLogger.LogDebug(ex); 
+                return true; 
+            }
         }
 
         internal static T GetValue<T>(string subKey, string valueName, T defaultValue)
