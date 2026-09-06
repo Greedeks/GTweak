@@ -1003,8 +1003,6 @@ namespace GTweak.Modules.Tweaks
 
         internal void Apply(string controlName, string value)
         {
-            INIManager.TempWrite(INIManager.TempTweaksIntf, controlName, value);
-
             if (Enum.TryParse<Color>(controlName, out var colorKey)
                 && _colorMappings.TryGetValue(colorKey, out var action))
             {
@@ -1014,8 +1012,6 @@ namespace GTweak.Modules.Tweaks
 
         internal void Apply(string controlName, bool state)
         {
-            INIManager.TempWrite(INIManager.TempTweaksIntf, controlName, state);
-
             if (Enum.TryParse<Toggle>(controlName, out var tglKey) && _toggleMappings.TryGetValue(tglKey, out var tglAction))
             {
                 Task.Run(() => tglAction.Apply(state));

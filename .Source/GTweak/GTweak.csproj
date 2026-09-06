@@ -151,6 +151,10 @@
     <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\UserControls\ExportItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\UserControls\InfoCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +172,10 @@
     <Compile Include="Assets\UserControls\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\UserControls\DataContracts\ExportCheckItem.cs" />
+    <Compile Include="Assets\UserControls\DataContracts\ExportChecklistValue.cs" />
+    <Compile Include="Assets\UserControls\DataContracts\ExportColorValue.cs" />
+    <Compile Include="Assets\UserControls\DataContracts\ExportToggleValue.cs" />
     <Compile Include="Assets\UserControls\ExpandableBox.xaml.cs">
       <DependentUpon>ExpandableBox.xaml</DependentUpon>
     </Compile>
@@ -177,6 +185,10 @@
     <Compile Include="Assets\UserControls\DescriptionBlock.xaml.cs">
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\UserControls\ExportItem.xaml.cs">
+      <DependentUpon>ExportItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\UserControls\DataContracts\ExportSliderValue.cs" />
     <Compile Include="Assets\UserControls\FlowPanel.cs" />
     <Compile Include="Assets\UserControls\FileCard.xaml.cs">
       <DependentUpon>FileCard.xaml</DependentUpon>
@@ -188,6 +200,7 @@
       <DependentUpon>ToolsetCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\ShaderEffects\ColorWheelEffect.cs" />
+    <Compile Include="Converters\RgbToBrushConverter.cs" />
     <Compile Include="Core\Interfaces\IPageItem.cs" />
     <Compile Include="Core\Interfaces\IViewMarker.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
@@ -232,6 +245,7 @@
     <Compile Include="Modules\Maintenance\MemoryCleaner.cs" />
     <Compile Include="Modules\Maintenance\RegistryExporter.cs" />
     <Compile Include="Modules\Managers\BluetoothManager.cs" />
+    <Compile Include="Modules\Managers\JsonConfigManager.cs" />
     <Compile Include="Modules\Storage\PackageStorage.cs" />
     <Compile Include="Modules\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Modules\Tweaks\Defender\AclPermissionsBackup.cs" />
@@ -461,7 +475,7 @@
     <Compile Include="Assets\UserControls\ToggleButton.xaml.cs">
       <DependentUpon>ToggleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\Model\MainWinModel.cs" />
+    <Compile Include="Core\Model\MainWindowModel.cs" />
     <Compile Include="Core\ViewModel\MainWinViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
@@ -491,7 +505,6 @@
     <Compile Include="Modules\Managers\ControlWriterManager.cs" />
     <Compile Include="Modules\Managers\ExplorerManager.cs" />
     <Compile Include="Modules\Managers\FirewallManager.cs" />
-    <Compile Include="Modules\Managers\INIManager.cs" />
     <Compile Include="Modules\Managers\NotificationManager.cs" />
     <Compile Include="Modules\Managers\OverlayDialogManager.cs" />
     <Compile Include="Modules\Managers\TaskSchedulerManager.cs" />

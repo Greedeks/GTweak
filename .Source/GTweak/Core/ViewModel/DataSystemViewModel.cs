@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using GTweak.Core.Base;
+using GTweak.Core.Model;
 using GTweak.Modules.Common;
 using GTweak.Modules.Configuration;
 

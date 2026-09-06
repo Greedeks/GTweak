@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GTweak.Core.Base;
-using GTweak.Core.Models;
+using GTweak.Core.Model;
 using GTweak.Core.Services;
 using GTweak.Modules.Common;
 using GTweak.Modules.Managers;

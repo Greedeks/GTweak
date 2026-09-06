@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using GTweak.Core.Models;
+using GTweak.Core.Model;
 using GTweak.Core.ViewModel.Components;
 using GTweak.Modules.Common;
 using Newtonsoft.Json.Linq;

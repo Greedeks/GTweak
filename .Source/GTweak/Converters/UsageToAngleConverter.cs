@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace GTweak.Converters
 {
-    internal class UsageToAngleConverter : IValueConverter
+    internal sealed class UsageToAngleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

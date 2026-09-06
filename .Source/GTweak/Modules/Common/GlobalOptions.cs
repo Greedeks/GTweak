@@ -94,57 +94,13 @@ namespace GTweak.Modules.Common
             App.Theme = (string)_cachedSettings["Theme"];
         }
 
-        internal static void SaveFileConfig()
-        {
-            if (INIManager.IsAllTempDictionaryEmpty)
-            {
-                NotificationManager.Info("export_warning_noty").Perform();
-            }
-            else
-            {
-                VistaSaveFileDialog vistaSaveFileDialog = new VistaSaveFileDialog
-                {
-                    FileName = "Config GTweak",
-                    Filter = "(*.INI)|*.INI",
-                    RestoreDirectory = true
-                };
-
-                if (vistaSaveFileDialog.ShowDialog() != true)
-                {
-                    return;
-                }
-
-                try
-                {
-                    PathTargets.Files.Config = vistaSaveFileDialog.FileName;
-
-                    if (Path.GetExtension(PathTargets.Files.Config)?.ToLower() != ".ini")
-                    {
-                        PathTargets.Files.Config = Path.ChangeExtension(PathTargets.Files.Config, ".ini");
-                    }
-
-                    if (File.Exists(PathTargets.Files.Config))
-                    {
-                        File.Delete(PathTargets.Files.Config);
-                    }
-
-                    INIManager iniManager = new INIManager(PathTargets.Files.Config);
-                    iniManager.Write("GTweak", "Author", "Greedeks");
-                    iniManager.Write("GTweak", "FormatVersion", "4");
-                    iniManager.WriteAll(INIManager.SectionConf, INIManager.TempTweaksConf);
-                    iniManager.WriteAll(INIManager.SectionIntf, INIManager.TempTweaksIntf);
-                    iniManager.WriteAll(INIManager.SectionSvc, INIManager.TempTweaksSvc);
-                    iniManager.WriteAll(INIManager.SectionSys, INIManager.TempTweaksSys);
-                }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-            }
-        }
+        internal static void SaveFileConfig() => new ExportWindow().ShowDialog();
 
         internal static void OpenFileConfig()
         {
             VistaOpenFileDialog vistaOpenFileDialog = new VistaOpenFileDialog
             {
-                Filter = "(*.INI)|*.INI",
+                Filter = "(*.JSON)|*.JSON",
                 RestoreDirectory = true,
             };
 
@@ -154,22 +110,19 @@ namespace GTweak.Modules.Common
             }
 
             PathTargets.Files.Config = vistaOpenFileDialog.FileName;
-            INIManager iniManager = new INIManager(PathTargets.Files.Config);
 
-            if (iniManager.GetKeysOrValue("GTweak", false).Contains("Greedeks") && iniManager.GetKeysOrValue("GTweak").Contains("FormatVersion") && iniManager.GetKeysOrValue("GTweak", false).Contains("4"))
+            switch (JsonConfigManager.Validate(PathTargets.Files.Config))
             {
-                if (File.ReadLines(PathTargets.Files.Config).Any(line => line.Contains("TglButton")) || File.ReadLines(PathTargets.Files.Config).Any(line => line.Contains("Slider")) || File.ReadLines(PathTargets.Files.Config).Any(line => line.Contains("ColorPicker")))
-                {
-                    new ImportWindow(Path.GetFileName(vistaOpenFileDialog.FileName)).ShowDialog();
-                }
-                else
-                {
+                case JsonConfigManager.ConfigStatus.Valid:
+                    new ImportWindow(Path.GetFileName(PathTargets.Files.Config)).ShowDialog();
+                    break;
+                case JsonConfigManager.ConfigStatus.Empty:
                     NotificationManager.Info("empty_import_noty").Perform();
-                }
-            }
-            else
-            {
-                NotificationManager.Warn("warn_import_noty").Perform();
+                    break;
+
+                case JsonConfigManager.ConfigStatus.Invalid:
+                    NotificationManager.Warn("warn_import_noty").Perform();
+                    break;
             }
         }
 

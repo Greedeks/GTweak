@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:uc="clr-namespace:GTweak.Assets.UserControls"         
         xmlns:local="clr-namespace:GTweak.Windows"
-        mc:Ignorable="d" Icon="/GTweak.ico"
+        mc:Ignorable="d" Icon="/GTweak.ico" Title="GTweak"
         Background="Transparent" WindowStyle="None" IsTabStop="False" SnapsToDevicePixels="True" UseLayoutRounding="True" ShowInTaskbar="False" KeyboardNavigation.TabNavigation="None"
-        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" SizeToContent="WidthAndHeight" MinWidth="100"
-        Title="GTweak">
+        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" MinWidth="100">
     <Grid Background="{StaticResource Brush_Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,7 +30,8 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            
+
+
         </Grid>
 
     </Grid>

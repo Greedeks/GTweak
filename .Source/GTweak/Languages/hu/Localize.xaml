@@ -100,6 +100,10 @@
     <v:String x:Key="btn_selfremove">Öneltávolítás</v:String>
     <!--#endregion-->
 
+    <!--#region Export Window -->
+    <v:String x:Key="title_export">Exporting tweaks</v:String>
+    <!--#endregion-->
+
     <!--#region Import Window -->
     <v:String x:Key="title_import">Módosítások importálása</v:String>
     <v:String x:Key="wait_import">Ez időbe telik</v:String>
@@ -219,7 +223,7 @@
     <v:String x:Key="chk_IconControlPanel_intf">Vezérlőpult</v:String>
     <v:String x:Key="chk_IconUserFiles_intf">Felhasználói fájlok</v:String>
     <v:String x:Key="chk_IconOneDrive_intf">OneDrive</v:String>
-    
+
     <v:String x:Key="exblock_ThisPCFolders_intf">Mappák az «Ez a gép» ablakban:</v:String>
     <v:String x:Key="chk_FolderObjects3D_intf">3D objektumok</v:String>
     <v:String x:Key="chk_FolderDesktop_intf">Asztal</v:String>
@@ -228,7 +232,7 @@
     <v:String x:Key="chk_FolderPictures_intf">Képek</v:String>
     <v:String x:Key="chk_FolderMusic_intf">Zenék</v:String>
     <v:String x:Key="chk_FolderVideo_intf">Videók</v:String>
-    
+
     <v:String x:Key="tgl_SystemButtonSize_intf">A rendszergombok szabványos mérete</v:String>
     <v:String x:Key="tgl_CursorFlickerFrequency_intf">A kurzor normál villogási frekvenciája</v:String>
     <v:String x:Key="tgl_ScrollbarSize_intf">Normál görgetősáv mérete</v:String>
@@ -296,7 +300,7 @@
     <v:String x:Key="warn_part1_pkg">Az alkalmazások törlésre kerülnek</v:String>
     <v:String x:Key="warn_part2_pkg">véglegesen,</v:String>
     <v:String x:Key="warn_part3_pkg">de az OneDrive visszaállítható az ikonjára kattintva</v:String>
-
+    
     <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
     <v:String x:Key="MicrosoftStore_pkg">Microsoft Áruház</v:String>
     <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>

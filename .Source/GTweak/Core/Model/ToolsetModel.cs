@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using Newtonsoft.Json.Linq;
 
-namespace GTweak.Core.Models
+namespace GTweak.Core.Model
 {
     internal enum FilterTag { All, Driver, Tool, Diagnostics, Benchmark, Overclock }
 

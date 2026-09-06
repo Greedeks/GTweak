@@ -577,8 +577,6 @@ namespace GTweak.Modules.Tweaks
 
         internal void Apply(string tweakName, bool state)
         {
-            INIManager.TempWrite(INIManager.TempTweaksConf, tweakName, state);
-
             if (Enum.TryParse<Toggle>(tweakName, out var tweakKey) && _toggleMappings.TryGetValue(tweakKey, out var action))
             {
                 Task.Run(() => action.Apply(state));

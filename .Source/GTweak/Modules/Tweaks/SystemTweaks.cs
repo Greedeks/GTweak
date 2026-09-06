@@ -768,8 +768,6 @@ namespace GTweak.Modules.Tweaks
 
         internal void Apply(string controlName, uint value)
         {
-            INIManager.TempWrite(INIManager.TempTweaksSys, controlName, value);
-
             if (Enum.TryParse<Slider>(controlName, out var sliderKey) && _sliderMappings.TryGetValue(sliderKey, out var sliderAction))
             {
                 Task.Run(() => sliderAction.Apply(value));
@@ -781,8 +779,6 @@ namespace GTweak.Modules.Tweaks
 
         internal void Apply(string controlName, bool state, bool canShowWindow = true)
         {
-            INIManager.TempWrite(INIManager.TempTweaksSys, controlName, state);
-
             if (Enum.TryParse<Toggle>(controlName, out var tglKey) && _toggleMappings.TryGetValue(tglKey, out var tglAction))
             {
                 if (tglKey == Toggle.WindowsDefender)

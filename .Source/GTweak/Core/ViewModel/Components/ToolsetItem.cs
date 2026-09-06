@@ -4,12 +4,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Core.Base;
-using GTweak.Core.Models;
+using GTweak.Core.Model;
 using GTweak.Core.Services;
-using GTweak.Core.ViewModel.Components;
 using GTweak.Modules.Common;
 
-namespace GTweak.Core.Item
+namespace GTweak.Core.ViewModel.Components
 {
     internal class ToolsetItem : ViewModelBase
     {
