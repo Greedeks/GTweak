@@ -1,9 +1,12 @@
-namespace GTweak.Assets.UserControls.DataContracts
+using System.Windows.Input;
+
+namespace GTweak.Core.DataContracts.Items
 {
     internal sealed class ExportCheckItem
     {
         public string Label { get; }
         public bool IsChecked { get; }
+        public ICommand RemoveCommand { get; set; }
 
         public ExportCheckItem(string label, bool isChecked)
         {

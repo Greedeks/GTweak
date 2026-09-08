@@ -172,10 +172,12 @@
     <Compile Include="Assets\UserControls\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControls\DataContracts\ExportCheckItem.cs" />
-    <Compile Include="Assets\UserControls\DataContracts\ExportChecklistValue.cs" />
-    <Compile Include="Assets\UserControls\DataContracts\ExportColorValue.cs" />
-    <Compile Include="Assets\UserControls\DataContracts\ExportToggleValue.cs" />
+    <Compile Include="Core\DataContracts\Items\ExportCheckItem.cs" />
+    <Compile Include="Core\DataContracts\ExportChecklistValue.cs" />
+    <Compile Include="Core\DataContracts\ExportColorValue.cs" />
+    <Compile Include="Core\DataContracts\Items\ExportPackageItem.cs" />
+    <Compile Include="Core\DataContracts\ExportPackagesValue.cs" />
+    <Compile Include="Core\DataContracts\ExportToggleValue.cs" />
     <Compile Include="Assets\UserControls\ExpandableBox.xaml.cs">
       <DependentUpon>ExpandableBox.xaml</DependentUpon>
     </Compile>
@@ -188,7 +190,7 @@
     <Compile Include="Assets\UserControls\ExportItem.xaml.cs">
       <DependentUpon>ExportItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Assets\UserControls\DataContracts\ExportSliderValue.cs" />
+    <Compile Include="Core\DataContracts\ExportSliderValue.cs" />
     <Compile Include="Assets\UserControls\FlowPanel.cs" />
     <Compile Include="Assets\UserControls\FileCard.xaml.cs">
       <DependentUpon>FileCard.xaml</DependentUpon>
@@ -373,6 +375,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Buttons\ToggleButtons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Display\ExportTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

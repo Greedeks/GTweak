@@ -1,4 +1,4 @@
-namespace GTweak.Assets.UserControls.DataContracts
+namespace GTweak.Core.DataContracts
 {
     internal sealed class ExportToggleValue
     {

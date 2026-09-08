@@ -133,6 +133,49 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ButtonRemoveItem" TargetType="{x:Type Button}">
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Border CornerRadius="4" Opacity="0.4" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False">
+                            <Border.RenderTransform>
+                                <TranslateTransform X="1" Y="2"/>
+                            </Border.RenderTransform>
+                        </Border>
+                        <Border x:Name="BtnBorder" Width="18" Height="18" CornerRadius="4" Background="{StaticResource Brush_Background_TextBox}" BorderBrush="{StaticResource Brush_Border_Description}" BorderThickness="1">
+                            <Border x:Name="IconMask" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Brush_Inactive}" Opacity="0.3">
+                                <Border.OpacityMask>
+                                    <ImageBrush ImageSource="{StaticResource Icon_Close}"/>
+                                </Border.OpacityMask>
+                            </Border>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="True">
+                            <Setter TargetName="IconMask" Property="Opacity" Value="0.8"/>
+                            <Setter TargetName="BtnBorder" Property="BorderBrush" Value="{StaticResource Brush_Separator}"/>
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BtnBorder" Property="Background" Value="{StaticResource Brush_Background_Labels_R}"/>
+                            <Setter TargetName="BtnBorder" Property="BorderBrush" Value="{StaticResource Brush_Border_Labels_R}"/>
+                            <Setter TargetName="IconMask" Property="Background" Value="{StaticResource Brush_Danger_Hover}"/>
+                            <Setter TargetName="IconMask" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="BaseButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="FontFamily" Value="{StaticResource Jura}"/>
         <Setter Property="FontWeight" Value="Normal"/>

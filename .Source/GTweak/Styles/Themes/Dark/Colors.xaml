@@ -52,7 +52,7 @@
     <SolidColorBrush x:Key="Brush_Background_Labels_Y" Color="#302B21" />
     <SolidColorBrush x:Key="Brush_Background_Labels_R" Color="{StaticResource Color_Shadow_Danger}" Opacity="0.14"/>
     <SolidColorBrush x:Key="Brush_Border_Labels_R" Color="{StaticResource Color_Shadow_Danger}" Opacity="0.30"/>
-    
+
     <SolidColorBrush x:Key="Brush_Background_Card" Color="#FF232323"/>
 
     <SolidColorBrush x:Key="Brush_Border_Description" Color="#2F3030"/>
