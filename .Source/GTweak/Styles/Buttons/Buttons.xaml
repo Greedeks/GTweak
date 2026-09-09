@@ -152,10 +152,18 @@
                             </Border.RenderTransform>
                         </Border>
                         <Border x:Name="BtnBorder" Width="18" Height="18" CornerRadius="4" Background="{StaticResource Brush_Background_TextBox}" BorderBrush="{StaticResource Brush_Border_Description}" BorderThickness="1">
-                            <Border x:Name="IconMask" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{StaticResource Brush_Inactive}" Opacity="0.3">
-                                <Border.OpacityMask>
-                                    <ImageBrush ImageSource="{StaticResource Icon_Close}"/>
-                                </Border.OpacityMask>
+                            <Border x:Name="IconMask" Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="{StaticResource Brush_Inactive}"/>
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                        <Setter Property="OpacityMask">
+                                            <Setter.Value>
+                                                <ImageBrush ImageSource="{StaticResource Icon_Close}"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Border.Style>
                             </Border>
                         </Border>
                     </Grid>

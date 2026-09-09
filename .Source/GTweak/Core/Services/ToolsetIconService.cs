@@ -9,7 +9,7 @@ using GTweak.Modules.Common;
 
 namespace GTweak.Core.Services
 {
-    internal class ToolsetIconService
+    internal sealed class ToolsetIconService
     {
         private static readonly ConcurrentDictionary<string, ImageSource> _imageCache = new ConcurrentDictionary<string, ImageSource>();
         private static readonly HttpClient _httpClient = new HttpClient();

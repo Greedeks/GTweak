@@ -172,10 +172,11 @@
     <Compile Include="Assets\UserControls\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\DataContracts\Items\ExportCheckItem.cs" />
+    <Compile Include="Core\Items\ExportCheckItem.cs" />
     <Compile Include="Core\DataContracts\ExportChecklistValue.cs" />
     <Compile Include="Core\DataContracts\ExportColorValue.cs" />
-    <Compile Include="Core\DataContracts\Items\ExportPackageItem.cs" />
+    <Compile Include="Core\Items\ExportEntryItem.cs" />
+    <Compile Include="Core\Items\ExportPackageItem.cs" />
     <Compile Include="Core\DataContracts\ExportPackagesValue.cs" />
     <Compile Include="Core\DataContracts\ExportToggleValue.cs" />
     <Compile Include="Assets\UserControls\ExpandableBox.xaml.cs">
@@ -209,9 +210,10 @@
     <Compile Include="Converters\AngleToPercentConverter.cs" />
     <Compile Include="Converters\PercentToWidthConverter.cs" />
     <Compile Include="Converters\UsageToAngleConverter.cs" />
+    <Compile Include="Core\Model\ExportSectionModel.cs" />
     <Compile Include="Core\Services\FuzzySearchService.cs" />
-    <Compile Include="Core\ViewModel\Components\DownloadSession.cs" />
-    <Compile Include="Core\ViewModel\Components\ToolsetItem.cs" />
+    <Compile Include="Core\Services\Components\DownloadSession.cs" />
+    <Compile Include="Core\Items\ToolsetItem.cs" />
     <Compile Include="Core\Model\AddonsModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\DataSystemModel.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Core\ViewModel\AddonsViewModel.cs" />
     <Compile Include="Core\ViewModel\ConfidentialityViewModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemViewModel.cs" />
+    <Compile Include="Core\ViewModel\ExportViewModel.cs" />
     <Compile Include="Core\ViewModel\InterfaceViewModel.cs" />
     <Compile Include="Core\ViewModel\PackagesViewModel.cs" />
     <Compile Include="Core\ViewModel\ServicesViewModel.cs" />
@@ -488,7 +491,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Base\ViewModelBase.cs" />
+    <Compile Include="Core\Base\PropertyChangedBase.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Animations\BlurAnimation.cs" />
     <Compile Include="Animations\BrushAnimation.cs" />

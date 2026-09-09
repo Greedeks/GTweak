@@ -6,11 +6,12 @@ using System.Windows.Media;
 using GTweak.Core.Base;
 using GTweak.Core.Model;
 using GTweak.Core.Services;
+using GTweak.Core.Services.Components;
 using GTweak.Modules.Common;
 
-namespace GTweak.Core.ViewModel.Components
+namespace GTweak.Core.Items
 {
-    internal class ToolsetItem : ViewModelBase
+    internal class ToolsetItem : PropertyChangedBase
     {
         private readonly ToolsetModel _model;
         private readonly DownloadSession _downloadSession;

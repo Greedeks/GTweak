@@ -4,7 +4,7 @@ using GTweak.Core.Interfaces;
 
 namespace GTweak.Core.Base
 {
-    internal abstract class ViewModelPageBase<TModel, TTweaksClass> : ViewModelBase
+    internal abstract class ViewModelPageBase<TModel, TTweaksClass> : PropertyChangedBase
         where TModel : IPageItem, new()
         where TTweaksClass : new()
     {

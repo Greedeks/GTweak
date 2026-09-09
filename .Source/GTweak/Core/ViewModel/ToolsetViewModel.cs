@@ -7,16 +7,16 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 using GTweak.Core.Base;
+using GTweak.Core.Items;
 using GTweak.Core.Model;
 using GTweak.Core.Services;
-using GTweak.Core.ViewModel.Components;
 using GTweak.Modules.Common;
 using Newtonsoft.Json.Linq;
 using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class ToolsetViewModel : ViewModelBase
+    internal sealed class ToolsetViewModel : PropertyChangedBase
     {
         public ObservableCollection<ToolsetItem> Tools { get; } = new ObservableCollection<ToolsetItem>();
         private readonly FuzzySearchService _fuzzyService = new FuzzySearchService();

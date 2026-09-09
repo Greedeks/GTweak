@@ -1,6 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
-using GTweak.Core.DataContracts.Items;
+using GTweak.Core.Items;
 
 namespace GTweak.Core.DataContracts
 {

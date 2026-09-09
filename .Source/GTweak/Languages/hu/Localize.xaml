@@ -47,7 +47,7 @@
     <v:String x:Key="warn_update_noty">Hiba történt a programfrissítés során, próbálkozzon újra később</v:String>
     <v:String x:Key="warn_import_noty">Ez a fájl nem alkalmas importálásra</v:String>
     <v:String x:Key="empty_import_noty">Ez a fájl üres, a módosítások alkalmazása nem lehetséges</v:String>
-    <v:String x:Key="export_warning_noty">Nincs értelme, először legalább egy módosítást alkalmazzon</v:String>
+    <v:String x:Key="export_success_noty">Your settings have been exported successfully</v:String>
     <v:String x:Key="success_onedrive_noty">A OneDrive helyreállítása már folyamatban van, és eltart egy ideig</v:String>
     <v:String x:Key="error_onedrive_noty">A OneDrive telepítőfájlja hiányzik, a helyreállítás lehetetlen</v:String>
     <v:String x:Key="warn_wd_noty">Várja meg a folyamat befejezését, majd a rendszer újraindulását.</v:String>
@@ -102,6 +102,9 @@
 
     <!--#region Export Window -->
     <v:String x:Key="title_export">Exporting tweaks</v:String>
+    <v:String x:Key="label_total_export">Total items:</v:String>
+    <v:String x:Key="title_empty_export">Nothing to export</v:String>
+    <v:String x:Key="desc_empty_export">Apply desired tweaks in the utility. All changes will be kept here until self-removal, and you can export them at any time</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->

@@ -62,19 +62,20 @@ namespace GTweak.View
                 if (string.IsNullOrWhiteSpace(PathTargets.Executable.OneDriveSetup))
                 {
                     NotificationManager.Warn("error_onedrive_noty").Perform();
+                    return;
                 }
-                else
+
+                NotificationManager.Info("success_onedrive_noty").Perform();
+
+                JsonConfigManager.Write(JsonConfigManager.Section.Packages, packageName, false);
+
+                await _backgroundQueue.QueueTask(async () =>
                 {
-                    NotificationManager.Info("success_onedrive_noty").Perform();
+                    await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
 
-                    await _backgroundQueue.QueueTask(async () =>
-                    {
-                        await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
-
-                        try { await AppxPackageHandler.RestoreOneDriveFolder(); }
-                        finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
-                    });
-                }
+                    try { await AppxPackageHandler.RestoreOneDriveFolder(); }
+                    finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
+                });
             }
             else if (toggleButton.IsChecked == false)
             {
@@ -91,7 +92,14 @@ namespace GTweak.View
                     {
                         return;
                     }
+
+                    if ((bool)_webViewRemoval)
+                    {
+                        JsonConfigManager.Write(JsonConfigManager.Section.Packages, "EdgeWebView", true);
+                    }
                 }
+
+                JsonConfigManager.Write(JsonConfigManager.Section.Packages, packageName, true);
 
                 await _backgroundQueue.QueueTask(async () =>
                 {

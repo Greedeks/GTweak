@@ -47,7 +47,7 @@
     <v:String x:Key="warn_update_noty">Во время обновления программы произошла ошибка, повторите попытку позже</v:String>
     <v:String x:Key="warn_import_noty">Данный файл не подходит для импорта</v:String>
     <v:String x:Key="empty_import_noty">Этот файл пуст, применение твиков невозможно</v:String>
-    <v:String x:Key="export_warning_noty">Это не имеет смысла, сначала примените хотя бы один твик</v:String>
+    <v:String x:Key="export_success_noty">Все текущие настройки были успешно сохранены в файл</v:String>
     <v:String x:Key="success_onedrive_noty">Начался процесс восстановления OneDrive, который займет некоторое время</v:String>
     <v:String x:Key="error_onedrive_noty">Отсутствует установочный файл OneDrive, восстановление невозможно</v:String>
     <v:String x:Key="warn_wd_noty">Ожидайте завершения процесса с последующим перезапуском системы</v:String>
@@ -102,6 +102,9 @@
 
     <!--#region Export Window -->
     <v:String x:Key="title_export">Экспорт твиков</v:String>
+    <v:String x:Key="label_total_export">Общее количество:</v:String>
+    <v:String x:Key="title_empty_export">Нечего экспортировать</v:String>
+    <v:String x:Key="desc_empty_export">Примените нужные твики в утилите. Все изменения будут сохранены здесь вплоть до самоудаления, и вы сможете экспортировать их в любой момент</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->

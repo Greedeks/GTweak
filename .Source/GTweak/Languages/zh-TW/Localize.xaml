@@ -47,7 +47,7 @@
     <v:String x:Key="warn_update_noty">程式更新過程中發生錯誤，請稍後再試</v:String>
     <v:String x:Key="warn_import_noty">此檔案不適用於匯入操作</v:String>
     <v:String x:Key="empty_import_noty">此檔案為空檔，無法套用調整設定</v:String>
-    <v:String x:Key="export_warning_noty">此操作無效，請先套用至少一項調整項目</v:String>
+    <v:String x:Key="export_success_noty">Your settings have been exported successfully</v:String>
     <v:String x:Key="success_onedrive_noty">OneDrive 復原程序已啟動，此過程將耗費數分鐘</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive 設定檔案遺失，無法執行復原程序</v:String>
     <v:String x:Key="warn_wd_noty">請等待程序完成後重新啟動系統</v:String>
@@ -102,6 +102,9 @@
 
     <!--#region Export Window -->
     <v:String x:Key="title_export">Exporting tweaks</v:String>
+    <v:String x:Key="label_total_export">Total items:</v:String>
+    <v:String x:Key="title_empty_export">Nothing to export</v:String>
+    <v:String x:Key="desc_empty_export">Apply desired tweaks in the utility. All changes will be kept here until self-removal, and you can export them at any time</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->

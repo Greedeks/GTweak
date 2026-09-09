@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace GTweak.Core.DataContracts.Items
+namespace GTweak.Core.Items
 {
     public sealed class ExportPackageItem
     {

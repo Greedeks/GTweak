@@ -17,7 +17,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class AddonsViewModel : ViewModelBase
+    internal sealed class AddonsViewModel : PropertyChangedBase
     {
         public ObservableCollection<AddonModel> Addons { get; } = new ObservableCollection<AddonModel>();
 

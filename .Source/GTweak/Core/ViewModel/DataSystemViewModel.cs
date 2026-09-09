@@ -12,7 +12,7 @@ using GTweak.Modules.Configuration;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class DataSystemViewModel : ViewModelBase
+    internal sealed class DataSystemViewModel : PropertyChangedBase
     {
         private static class FallbackKeys
         {

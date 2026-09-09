@@ -14,7 +14,7 @@ using GTweak.View;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class MainWinViewModel : ViewModelBase
+    internal sealed class MainWinViewModel : PropertyChangedBase
     {
         private readonly MainWindowModel _model = new MainWindowModel();
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using GTweak.Core.Model;
-using GTweak.Core.ViewModel.Components;
+using GTweak.Core.Services.Components;
 using GTweak.Modules.Common;
 using Newtonsoft.Json.Linq;
 

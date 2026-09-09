@@ -2,7 +2,7 @@ using GTweak.Core.Base;
 
 namespace GTweak.Core.Model
 {
-    internal sealed class PackagesModel : ViewModelBase
+    internal sealed class PackagesModel : PropertyChangedBase
     {
         private string _name;
         private bool _installed;

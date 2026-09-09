@@ -4,7 +4,7 @@ using GTweak.Core.Base;
 
 namespace GTweak.Core.Model
 {
-    internal sealed class DataSystemModel : ViewModelBase
+    internal sealed class DataSystemModel : PropertyChangedBase
     {
         private string _data;
         private string[] _dataItems;

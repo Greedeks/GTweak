@@ -67,9 +67,7 @@ namespace GTweak.Modules.Maintenance
 
         internal void Export(string fileName)
         {
-            string tempDir = PathTargets.Folders.Workspace;
-
-            FileDirectoryHelper.CreateDirectory(tempDir);
+            FileDirectoryHelper.CreateDirectory(PathTargets.Folders.Workspace);
 
             List<string> tempFiles = new List<string>();
             try
@@ -81,7 +79,7 @@ namespace GTweak.Modules.Maintenance
                         continue;
                     }
 
-                    string tempFile = Path.Combine(tempDir, Path.GetRandomFileName() + ".reg");
+                    string tempFile = Path.Combine(PathTargets.Folders.Workspace, Path.GetRandomFileName() + ".reg");
                     tempFiles.Add(tempFile);
 
                     using Process proc = Process.Start(new ProcessStartInfo("reg.exe", $"EXPORT \"{path}\" \"{tempFile}\" /y")
@@ -102,8 +100,6 @@ namespace GTweak.Modules.Maintenance
             finally
             {
                 FileDirectoryHelper.DeleteFile(tempFiles.ToArray());
-                FileDirectoryHelper.DeleteDirectory(tempDir);
-
                 NotificationManager.Info("success_reg_exporter_noty").WithDelay(500).Perform();
             }
         }

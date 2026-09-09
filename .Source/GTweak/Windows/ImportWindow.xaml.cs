@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GTweak.Modules.Common;
 using GTweak.Modules.Extensions;
@@ -39,9 +38,9 @@ namespace GTweak.Windows
 
         private async void Window_ContentRendered(object sender, EventArgs e)
         {
-            Progress<byte> progress = new Progress<byte>(ReportProgress);
-            try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); }
-            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+            //Progress<byte> progress = new Progress<byte>(ReportProgress);
+            //try { await ApplyTweaksWithProgress(_cancellationTokenSource.Token, progress); }
+            //catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
         private void ReportProgress(byte valueProgress)
@@ -67,97 +66,97 @@ namespace GTweak.Windows
             }
         }
 
-        private async Task ApplyTweaksWithProgress(CancellationToken token, IProgress<byte> progress)
-        {
-            INIManager iniManager = new INIManager(PathTargets.Files.Config);
+        //private async Task ApplyTweaksWithProgress(CancellationToken token, IProgress<byte> progress)
+        //{
+        //    INIManager iniManager = new INIManager(PathTargets.Files.Config);
 
-            var allSections = new (string Section, Action<string, bool> TweakAction)[]
-            {
-                (INIManager.SectionConf, _confTweaks.Apply),
-                (INIManager.SectionIntf, _intfTweaks.Apply),
-                (INIManager.SectionSvc,  _svcTweaks.Apply),
-                (INIManager.SectionSys,  null)
-            };
+        //    var allSections = new (string Section, Action<string, bool> TweakAction)[]
+        //    {
+        //        (INIManager.SectionConf, _confTweaks.Apply),
+        //        (INIManager.SectionIntf, _intfTweaks.Apply),
+        //        (INIManager.SectionSvc,  _svcTweaks.Apply),
+        //        (INIManager.SectionSys,  null)
+        //    };
 
-            List<(string section, string tweak, string value)> allTweaks = new List<(string section, string tweak, string value)>();
+        //    List<(string section, string tweak, string value)> allTweaks = new List<(string section, string tweak, string value)>();
 
-            foreach (var (Section, _) in allSections.Where(s => iniManager.IsThereSection(s.Section)))
-            {
-                List<string> keys = iniManager.GetKeysOrValue(Section);
-                List<string> values = iniManager.GetKeysOrValue(Section, false);
-                allTweaks.AddRange(keys.Zip(values, (t, v) => (Section, t, v)));
-            }
+        //    foreach (var (Section, _) in allSections.Where(s => iniManager.IsThereSection(s.Section)))
+        //    {
+        //        List<string> keys = iniManager.GetKeysOrValue(Section);
+        //        List<string> values = iniManager.GetKeysOrValue(Section, false);
+        //        allTweaks.AddRange(keys.Zip(values, (t, v) => (Section, t, v)));
+        //    }
 
-            int totalTweaks = allTweaks.Count;
-            int appliedTweaks = 0;
+        //    int totalTweaks = allTweaks.Count;
+        //    int appliedTweaks = 0;
 
-            if (totalTweaks == 0)
-            {
-                progress.Report(100);
-                return;
-            }
+        //    if (totalTweaks == 0)
+        //    {
+        //        progress.Report(100);
+        //        return;
+        //    }
 
-            string defenderTweak = $"TglButton{(int)SystemToggle.WindowsDefender}";
-            var sysTweaks = allTweaks.Where(t => t.section == INIManager.SectionSys).ToList();
-            var tweaksToApply = allTweaks.Where(t => t.section != INIManager.SectionSys).Concat(sysTweaks.Where(t => t.tweak != defenderTweak)).Concat(sysTweaks.Where(t => t.tweak == defenderTweak)).ToList();
+        //    string defenderTweak = $"TglButton{(int)SystemToggle.WindowsDefender}";
+        //    var sysTweaks = allTweaks.Where(t => t.section == INIManager.SectionSys).ToList();
+        //    var tweaksToApply = allTweaks.Where(t => t.section != INIManager.SectionSys).Concat(sysTweaks.Where(t => t.tweak != defenderTweak)).Concat(sysTweaks.Where(t => t.tweak == defenderTweak)).ToList();
 
-            foreach (var (section, tweak, value) in tweaksToApply)
-            {
-                token.ThrowIfCancellationRequested();
-                try
-                {
-                    if (section == INIManager.SectionSys)
-                    {
-                        if (tweak == defenderTweak)
-                        {
-                            BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
-                            await backgroundQueue.QueueTask(delegate
-                            {
-                                _sysTweaks.Apply(tweak, Convert.ToBoolean(value), false);
-                            });
-                            _defenderDisabled = !Convert.ToBoolean(value);
-                        }
-                        else if (tweak.StartsWith("TglButton"))
-                        {
-                            _sysTweaks.Apply(tweak, Convert.ToBoolean(value));
-                            AddPostAction(tweak.GetPostAction(typeof(SystemToggle)));
-                        }
-                        else
-                        {
-                            _sysTweaks.Apply(tweak, Convert.ToUInt32(value));
-                        }
-                    }
-                    else if (section == INIManager.SectionConf)
-                    {
-                        _confTweaks.Apply(tweak, Convert.ToBoolean(value));
-                        AddPostAction(tweak.GetPostAction(typeof(ConfidentialityToggle)));
-                    }
-                    else if (section == INIManager.SectionIntf)
-                    {
-                        if (tweak.StartsWith("ColorPicker"))
-                        {
-                            _intfTweaks.Apply(tweak, value);
-                        }
-                        else
-                        {
-                            _intfTweaks.Apply(tweak, Convert.ToBoolean(value));
-                            Type enumType = tweak.StartsWith("Checkbox") ? typeof(InterfaceCheckbox) : typeof(InterfaceToggle);
-                            AddPostAction(tweak.GetPostAction(enumType));
-                        }
-                    }
-                    else if (section == INIManager.SectionSvc)
-                    {
-                        _svcTweaks.Apply(tweak, Convert.ToBoolean(value));
-                        _pendingAlerts.Add(NotificationManager.AlertType.Restart);
-                    }
-                }
-                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+        //    foreach (var (section, tweak, value) in tweaksToApply)
+        //    {
+        //        token.ThrowIfCancellationRequested();
+        //        try
+        //        {
+        //            if (section == INIManager.SectionSys)
+        //            {
+        //                if (tweak == defenderTweak)
+        //                {
+        //                    BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
+        //                    await backgroundQueue.QueueTask(delegate
+        //                    {
+        //                        _sysTweaks.Apply(tweak, Convert.ToBoolean(value), false);
+        //                    });
+        //                    _defenderDisabled = !Convert.ToBoolean(value);
+        //                }
+        //                else if (tweak.StartsWith("TglButton"))
+        //                {
+        //                    _sysTweaks.Apply(tweak, Convert.ToBoolean(value));
+        //                    AddPostAction(tweak.GetPostAction(typeof(SystemToggle)));
+        //                }
+        //                else
+        //                {
+        //                    _sysTweaks.Apply(tweak, Convert.ToUInt32(value));
+        //                }
+        //            }
+        //            else if (section == INIManager.SectionConf)
+        //            {
+        //                _confTweaks.Apply(tweak, Convert.ToBoolean(value));
+        //                AddPostAction(tweak.GetPostAction(typeof(ConfidentialityToggle)));
+        //            }
+        //            else if (section == INIManager.SectionIntf)
+        //            {
+        //                if (tweak.StartsWith("ColorPicker"))
+        //                {
+        //                    _intfTweaks.Apply(tweak, value);
+        //                }
+        //                else
+        //                {
+        //                    _intfTweaks.Apply(tweak, Convert.ToBoolean(value));
+        //                    Type enumType = tweak.StartsWith("Checkbox") ? typeof(InterfaceCheckbox) : typeof(InterfaceToggle);
+        //                    AddPostAction(tweak.GetPostAction(enumType));
+        //                }
+        //            }
+        //            else if (section == INIManager.SectionSvc)
+        //            {
+        //                _svcTweaks.Apply(tweak, Convert.ToBoolean(value));
+        //                _pendingAlerts.Add(NotificationManager.AlertType.Restart);
+        //            }
+        //        }
+        //        catch (Exception ex) { ErrorLogger.LogDebug(ex); }
 
-                appliedTweaks++;
-                progress.Report((byte)((double)appliedTweaks / totalTweaks * 100));
-                await Task.Delay(700, token);
-            }
-        }
+        //        appliedTweaks++;
+        //        progress.Report((byte)((double)appliedTweaks / totalTweaks * 100));
+        //        await Task.Delay(700, token);
+        //    }
+        //}
 
         private void AddPostAction(PostActionAttribute action)
         {

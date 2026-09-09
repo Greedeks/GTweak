@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace GTweak.Core.DataContracts.Items
+namespace GTweak.Core.Items
 {
     internal sealed class ExportCheckItem
     {

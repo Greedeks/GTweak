@@ -209,4 +209,47 @@
         </ItemsControl>
     </DataTemplate>
 
+    <Style x:Key="ExportCard" TargetType="{x:Type HeaderedContentControl}">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                    <Grid VerticalAlignment="Top">
+                        <Border CornerRadius="8" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False" Opacity="0.7">
+                            <Border.RenderTransform>
+                                <TranslateTransform X="2" Y="3"/>
+                            </Border.RenderTransform>
+                        </Border>
+                        <Border Background="{StaticResource Brush_Background_NavPanel}" BorderBrush="{StaticResource Brush_Border_Description}" BorderThickness="1" CornerRadius="8">
+                            <StackPanel>
+                                <Border Background="{StaticResource Brush_Background_Card}" BorderBrush="{StaticResource Brush_Border_Description}" BorderThickness="0,0,0,1" CornerRadius="8,8,0,0" Padding="12,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Width="6" Height="6" CornerRadius="3" Background="{StaticResource Brush_Accent}" Margin="0,0,8,0" VerticalAlignment="Center">
+                                            <Border.CacheMode>
+                                                <BitmapCache RenderAtScale="2"/>
+                                            </Border.CacheMode>
+                                            <Border.Effect>
+                                                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}"/>
+                                            </Border.Effect>
+                                        </Border>
+                                        <TextBlock Grid.Column="1" Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" FontSize="13" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="0,0,8,0" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
+                                        <Border Grid.Column="2" CornerRadius="3" Background="{StaticResource Brush_Background}" BorderBrush="{StaticResource Brush_Separator}" BorderThickness="1" Padding="6,1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" FontFamily="{StaticResource Jura}" FontSize="11" Foreground="{StaticResource Brush_Accent}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <ContentPresenter Margin="8,4,8,8"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

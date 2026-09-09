@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" x:Name="Root" IsTabStop="False" Focusable="False"
              KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True"
-             MinHeight="30" Padding="10,2">
-
-    <Border x:Name="RowBackground" CornerRadius="5" Padding="4,2">
+             MinHeight="30">
+    <Border CornerRadius="5" Padding="4,2">
         <Border.Style>
             <Style TargetType="Border">
                 <Setter Property="Background" Value="Transparent"/>
