@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -66,21 +67,21 @@ namespace GTweak.View
                 }
 
                 NotificationManager.Info("success_onedrive_noty").Perform();
-
                 JsonConfigManager.Write(JsonConfigManager.Section.Packages, packageName, false);
 
-                await _backgroundQueue.QueueTask(async () =>
-                {
-                    await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, true);
 
-                    try { await AppxPackageHandler.RestoreOneDriveFolder(); }
-                    finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
+                Task restoreTask = _backgroundQueue.QueueTask(async () =>
+                {
+                    await AppxPackageHandler.RestoreOneDriveFolder();
                 });
+
+                await restoreTask;
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, false);
             }
             else if (toggleButton.IsChecked == false)
             {
                 e.Handled = true;
-                return;
             }
             else if (toggleButton.IsChecked == true)
             {
@@ -101,18 +102,20 @@ namespace GTweak.View
 
                 JsonConfigManager.Write(JsonConfigManager.Section.Packages, packageName, true);
 
-                await _backgroundQueue.QueueTask(async () =>
-                {
-                    await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, true);
 
-                    try { await AppxPackageHandler.RemoveAppxPackage(packageName, (bool)_webViewRemoval); }
-                    finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
+                Task removeTask = _backgroundQueue.QueueTask(async () =>
+                {
+                    await AppxPackageHandler.RemoveAppxPackage(packageName, (bool)_webViewRemoval);
 
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ExplorerManager.Handle(PackageStorage.PackagesDetails[packageName].ShellType);
                     }), DispatcherPriority.ApplicationIdle);
                 });
+
+                await removeTask;
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, false);
             }
         }
     }

@@ -44,7 +44,6 @@ namespace GTweak.Core.Model
         public ExportSectionModel(JsonConfigManager.Section section)
         {
             Section = section;
-            Items.CollectionChanged += (_, __) => RefreshState();
         }
 
         public void RefreshState()

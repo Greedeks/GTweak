@@ -90,10 +90,10 @@
     <v:String x:Key="rbtn_adds_main">附加元件</v:String>
     <v:String x:Key="rbtn_ts_main">工具組</v:String>
     <v:String x:Key="title_settings_main">設定</v:String>
-    <v:String x:Key="btgl_noty_main">顯示通知</v:String>
+    <v:String x:Key="tgl_noty_main">顯示通知</v:String>
     <v:String x:Key="slider_volume_main">音量：</v:String>
-    <v:String x:Key="btgl_toast_main">固定於所有視窗頂端</v:String>
-    <v:String x:Key="btgl_update_main">檢查更新中</v:String>
+    <v:String x:Key="tgl_toast_main">固定於所有視窗頂端</v:String>
+    <v:String x:Key="tgl_update_main">檢查更新中</v:String>
     <v:String x:Key="cmbox_lang_main">介面語言：</v:String>
     <v:String x:Key="btn_import">匯入</v:String>
     <v:String x:Key="btn_export">匯出</v:String>
@@ -103,6 +103,7 @@
     <!--#region Export Window -->
     <v:String x:Key="title_export">Exporting tweaks</v:String>
     <v:String x:Key="label_total_export">Total items:</v:String>
+    <v:String x:Key="title_loading_export">Reading configuration</v:String>
     <v:String x:Key="title_empty_export">Nothing to export</v:String>
     <v:String x:Key="desc_empty_export">Apply desired tweaks in the utility. All changes will be kept here until self-removal, and you can export them at any time</v:String>
     <!--#endregion-->

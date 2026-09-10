@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using GTweak.Core.Base;
 using GTweak.Core.DataContracts;
 using GTweak.Core.Items;
@@ -20,6 +21,7 @@ namespace GTweak.Core.ViewModel
     internal sealed class ExportViewModel : PropertyChangedBase
     {
         private readonly JObject _сonfig = JsonConfigManager.Load(PathTargets.Files.BackupConfig) ?? new JObject();
+        private bool _isLoading = true;
         private int _totalCount;
 
         private static readonly Dictionary<string, string> _checkboxGroups = new Dictionary<string, string>();
@@ -27,6 +29,7 @@ namespace GTweak.Core.ViewModel
         {
             [JsonConfigManager.Section.Confidentiality] = "conf",
             [JsonConfigManager.Section.Interface] = "intf",
+            [JsonConfigManager.Section.Packages] = "pkg",
             [JsonConfigManager.Section.Services] = "serv",
             [JsonConfigManager.Section.System] = "sys"
         };
@@ -36,6 +39,19 @@ namespace GTweak.Core.ViewModel
         public ExportSectionModel Packages { get; }
         public ExportSectionModel Services { get; }
         public ExportSectionModel System { get; }
+
+        public bool IsLoading
+        {
+            get => _isLoading;
+            private set
+            {
+                if (_isLoading != value)
+                {
+                    _isLoading = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public int TotalCount
         {
@@ -86,12 +102,18 @@ namespace GTweak.Core.ViewModel
 
             SaveCommand = new RelayCommand(param => SaveConfig(param as Window), _ => TotalCount > 0);
 
-            foreach (ExportSectionModel section in new[] { Confidentiality, Interface, Packages, Services, System })
+            Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                InitializeSection(section);
-            }
+                ExportSectionModel[] sections = { Confidentiality, Interface, Packages, Services, System };
+                for (int i = 0; i < sections.Length; i++)
+                {
+                    InitializeSection(sections[i]);
+                }
 
-            UpdateCounters();
+                UpdateCounters();
+                IsLoading = false;
+
+            }, DispatcherPriority.Loaded);
         }
 
         private void SaveConfig(Window window)
@@ -132,6 +154,11 @@ namespace GTweak.Core.ViewModel
         {
             if (section.Section == JsonConfigManager.Section.Packages)
             {
+                if (property.Name.Equals("EdgeWebView", StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
                 ExportEntryItem entryItem = section.Items.Count > 0 ? section.Items[0] : null;
 
                 if (entryItem == null)
@@ -144,8 +171,7 @@ namespace GTweak.Core.ViewModel
                 ExportPackagesValue list = (ExportPackagesValue)entryItem.Value;
                 bool canRemove = !(property.Value is JValue val) || val.Type != JTokenType.Boolean || (bool)val;
                 ImageSource icon = Application.Current.TryFindResource($"Img_{property.Name}") as ImageSource;
-
-                ExportPackageItem package = new ExportPackageItem(property.Name, icon, canRemove);
+                ExportPackageItem package = new ExportPackageItem(Application.Current.TryFindResource($"{property.Name}_{suffix}") as string ?? property.Name, icon, canRemove);
                 package.RemoveCommand = new RelayCommand(_ =>
                 {
                     if (_сonfig?[section.Section.ToString()] is JObject sec)
@@ -210,10 +236,7 @@ namespace GTweak.Core.ViewModel
                 }
 
                 ExportChecklistValue checklist = (ExportChecklistValue)entryItem.Value;
-                string label = ResolveTitle("chk", property.Name, suffix);
-                bool state = property.Value.ToObject<bool>();
-
-                var item = new ExportCheckItem(label, state);
+                ExportCheckItem item = new ExportCheckItem(ResolveTitle("chk", property.Name, suffix), property.Value.ToObject<bool>());
                 item.RemoveCommand = new RelayCommand(_ =>
                 {
                     if (_сonfig?[section.Section.ToString()] is JObject sec)

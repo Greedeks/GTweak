@@ -206,15 +206,15 @@
                     <Grid Grid.Row="1">
                         <StackPanel Orientation="Vertical">
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton x:Name="BtnNotification" State="{Binding IsViewNotification}" TextResource="{DynamicResource btgl_noty_main}"/>
+                                <uc:ToggleButton x:Name="BtnNotification" State="{Binding IsViewNotification}" TextResource="{DynamicResource tgl_noty_main}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton x:Name="BtnUpdate" State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource btgl_update_main}"/>
+                                <uc:ToggleButton x:Name="BtnUpdate" State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource tgl_update_main}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton x:Name="BtnTopMost" State="{Binding IsTopMost}" TextResource="{DynamicResource btgl_toast_main}"/>
+                                <uc:ToggleButton x:Name="BtnTopMost" State="{Binding IsTopMost}" TextResource="{DynamicResource tgl_toast_main}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">

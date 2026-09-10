@@ -90,10 +90,10 @@
     <v:String x:Key="rbtn_adds_main">ส่วนเสริม</v:String>
     <v:String x:Key="rbtn_ts_main">ชุดเครื่องมือ</v:String>
     <v:String x:Key="title_settings_main">การตั้งค่า</v:String>
-    <v:String x:Key="btgl_noty_main">แสดงการแจ้งเตือน</v:String>
+    <v:String x:Key="tgl_noty_main">แสดงการแจ้งเตือน</v:String>
     <v:String x:Key="slider_volume_main">ระดับเสียง:</v:String>
-    <v:String x:Key="btgl_toast_main">ปักหมุดไว้ด้านบนสุดของหน้าต่างทั้งหมด</v:String>
-    <v:String x:Key="btgl_update_main">ตรวจสอบอัปเดต</v:String>
+    <v:String x:Key="tgl_toast_main">ปักหมุดไว้ด้านบนสุดของหน้าต่างทั้งหมด</v:String>
+    <v:String x:Key="tgl_update_main">ตรวจสอบอัปเดต</v:String>
     <v:String x:Key="cmbox_lang_main">ภาษาของอินเทอร์เฟซ:</v:String>
     <v:String x:Key="btn_import">นำเข้า</v:String>
     <v:String x:Key="btn_export">ส่งออก</v:String>
@@ -103,6 +103,7 @@
     <!--#region Export Window -->
     <v:String x:Key="title_export">Exporting tweaks</v:String>
     <v:String x:Key="label_total_export">Total items:</v:String>
+    <v:String x:Key="title_loading_export">Reading configuration</v:String>
     <v:String x:Key="title_empty_export">Nothing to export</v:String>
     <v:String x:Key="desc_empty_export">Apply desired tweaks in the utility. All changes will be kept here until self-removal, and you can export them at any time</v:String>
     <!--#endregion-->

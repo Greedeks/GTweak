@@ -6,7 +6,7 @@ namespace GTweak.Modules.Managers
 {
     internal sealed class BackgroundQueueManager
     {
-        private Task _previousTask = Task.FromResult(true);
+        private Task _previousTask = Task.CompletedTask;
         private readonly object _key = new object();
 
         internal Task QueueTask(Action action)
@@ -28,14 +28,31 @@ namespace GTweak.Modules.Managers
             }
         }
 
-        internal Task QueueCompleted(Action action)
+        internal Task QueueTask(Func<Task> asyncAction)
         {
             lock (_key)
             {
-                _previousTask = _previousTask.ContinueWith(t => action(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default);
+                _previousTask = _previousTask.ContinueWith(t => asyncAction(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default).Unwrap();
+                return _previousTask;
+            }
+        }
+
+        internal Task<T> QueueTask<T>(Func<Task<T>> asyncFunc)
+        {
+            lock (_key)
+            {
+                var task = _previousTask.ContinueWith(t => asyncFunc(), CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.Default).Unwrap();
+                _previousTask = task;
+                return task;
+            }
+        }
+
+        internal Task WaitForCompletion()
+        {
+            lock (_key)
+            {
                 return _previousTask;
             }
         }
     }
 }
-
