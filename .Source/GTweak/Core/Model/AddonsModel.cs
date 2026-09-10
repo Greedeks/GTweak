@@ -1,9 +1,9 @@
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace GTweak.Core.ViewModel
+namespace GTweak.Core.Model
 {
-    public class AddonModel
+    internal sealed class AddonModel
     {
         public string FilePath { get; }
         public string FileName { get; }

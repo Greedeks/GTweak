@@ -14,13 +14,13 @@ using GTweak.View;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class MainWinViewModel : ViewModelBase
+    internal sealed class MainWinViewModel : PropertyChangedBase
     {
-        private readonly MainWinModel _model = new MainWinModel();
+        private readonly MainWindowModel _model = new MainWindowModel();
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
         private readonly Dictionary<Type, object> _viewCache = new Dictionary<Type, object>();
 
-        public ObservableCollection<MainWinModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWinModel.LanguageItem>();
+        public ObservableCollection<MainWindowModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWindowModel.LanguageItem>();
 
         public object CurrentView
         {
@@ -181,7 +181,7 @@ namespace GTweak.Core.ViewModel
 
             foreach (string code in GlobalOptions.AvailableLangs)
             {
-                Languages.Add(new MainWinModel.LanguageItem { Code = code, Display = dictionary[$"{code.Replace("-", "_")}"] as string ?? code });
+                Languages.Add(new MainWindowModel.LanguageItem { Code = code, Display = dictionary[$"{code.Replace("-", "_")}"] as string ?? code });
             }
 
             SelectedLanguage = GlobalOptions.AvailableLangs.Contains(GlobalOptions.Language) ? GlobalOptions.Language : GlobalOptions.AvailableLangs.FirstOrDefault();

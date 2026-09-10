@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
@@ -62,24 +63,25 @@ namespace GTweak.View
                 if (string.IsNullOrWhiteSpace(PathTargets.Executable.OneDriveSetup))
                 {
                     NotificationManager.Warn("error_onedrive_noty").Perform();
+                    return;
                 }
-                else
+
+                NotificationManager.Info("success_onedrive_noty").Perform();
+                JsonConfigManager.Write(JsonConfigManager.Section.Packages, packageName, false);
+
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, true);
+
+                Task restoreTask = _backgroundQueue.QueueTask(async () =>
                 {
-                    NotificationManager.Info("success_onedrive_noty").Perform();
+                    await AppxPackageHandler.RestoreOneDriveFolder();
+                });
 
-                    await _backgroundQueue.QueueTask(async () =>
-                    {
-                        await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
-
-                        try { await AppxPackageHandler.RestoreOneDriveFolder(); }
-                        finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
-                    });
-                }
+                await restoreTask;
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, false);
             }
             else if (toggleButton.IsChecked == false)
             {
                 e.Handled = true;
-                return;
             }
             else if (toggleButton.IsChecked == true)
             {
@@ -91,20 +93,29 @@ namespace GTweak.View
                     {
                         return;
                     }
+
+                    if ((bool)_webViewRemoval)
+                    {
+                        JsonConfigManager.Write(JsonConfigManager.Section.Packages, "EdgeWebView", true);
+                    }
                 }
 
-                await _backgroundQueue.QueueTask(async () =>
-                {
-                    await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, true); });
+                JsonConfigManager.Write(JsonConfigManager.Section.Packages, packageName, true);
 
-                    try { await AppxPackageHandler.RemoveAppxPackage(packageName, (bool)_webViewRemoval); }
-                    finally { await Dispatcher.InvokeAsync(() => { AppxPackageHandler.HandleAvailabilityStatus(packageName, false); }); }
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, true);
+
+                Task removeTask = _backgroundQueue.QueueTask(async () =>
+                {
+                    await AppxPackageHandler.RemoveAppxPackage(packageName, (bool)_webViewRemoval);
 
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {
                         ExplorerManager.Handle(PackageStorage.PackagesDetails[packageName].ShellType);
                     }), DispatcherPriority.ApplicationIdle);
                 });
+
+                await removeTask;
+                AppxPackageHandler.HandleAvailabilityStatus(packageName, false);
             }
         }
     }

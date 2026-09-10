@@ -5,7 +5,7 @@
     <Color x:Key="Color_Shadow">#007A40</Color>
     <Color x:Key="Color_Shadow_Danger">#C42040</Color>
     <Color x:Key="Color_Separator">#C8C8C8</Color>
-    
+
     <SolidColorBrush x:Key="Brush_Background" Color="#FFF3F3F3"/>
     <SolidColorBrush x:Key="Brush_Accent" Color="{StaticResource Color_Accent}"/>
     <SolidColorBrush x:Key="Brush_Accent_B" Color="#0066CC" />
@@ -50,7 +50,9 @@
     <SolidColorBrush x:Key="Brush_Background_Labels" Color="#C1E8D6"/>
     <SolidColorBrush x:Key="Brush_Background_Labels_B" Color="#D6E8FA" />
     <SolidColorBrush x:Key="Brush_Background_Labels_Y" Color="#F8EFCB" />
-    
+    <SolidColorBrush x:Key="Brush_Background_Labels_R" Color="{StaticResource Color_Shadow_Danger}" Opacity="0.14"/>
+    <SolidColorBrush x:Key="Brush_Border_Labels_R" Color="{StaticResource Color_Shadow_Danger}" Opacity="0.30"/>
+
     <SolidColorBrush x:Key="Brush_Background_Card" Color="#FFE8E8E8"/>
 
     <SolidColorBrush x:Key="Brush_Border_Description" Color="#CFCFCF"/>

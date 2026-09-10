@@ -5,14 +5,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GTweak.Core.Base;
-using GTweak.Core.Models;
-using GTweak.Core.Services;
+using GTweak.Core.Model;
 using GTweak.Modules.Common;
 using GTweak.Modules.Managers;
 
-namespace GTweak.Core.ViewModel.Components
+namespace GTweak.Core.Services.Components
 {
-    internal sealed class DownloadSession : ViewModelBase
+    internal sealed class DownloadSession : PropertyChangedBase
     {
         private readonly ToolsetModel _model;
         private CancellationTokenSource _cts;

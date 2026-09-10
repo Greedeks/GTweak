@@ -346,6 +346,8 @@ namespace GTweak.Modules.Common
         {
             internal static string Config = string.Empty;
 
+            internal static readonly string BackupConfig = Path.Combine(Folders.Workspace, "BackupConfig.json");
+
             internal static readonly (string Original, string Backup) Hosts =
             (
                 Path.Combine(Environment.SystemDirectory, "drivers", "etc", "hosts"),

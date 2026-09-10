@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Core.Base;
-using GTweak.Core.Models;
+using GTweak.Core.Model;
 using GTweak.Core.Services;
-using GTweak.Core.ViewModel.Components;
+using GTweak.Core.Services.Components;
 using GTweak.Modules.Common;
 
-namespace GTweak.Core.Item
+namespace GTweak.Core.Items
 {
-    internal class ToolsetItem : ViewModelBase
+    internal class ToolsetItem : PropertyChangedBase
     {
         private readonly ToolsetModel _model;
         private readonly DownloadSession _downloadSession;

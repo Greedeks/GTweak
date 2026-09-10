@@ -2,7 +2,7 @@ using System;
 
 namespace GTweak.Core.Services
 {
-    internal class FuzzySearchService
+    internal sealed class FuzzySearchService
     {
         private const string CyrillicLayoutMap = "йцукенгшщзхъфывапролджэячсмитьбюёієїўґђјљњћџѕ";
         private const string QwertyLayoutMap = "qwertyuiop[]asdfghjkl;'zxcvbnm,.`s]['\\][;'/s";

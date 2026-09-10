@@ -1,0 +1,73 @@
+<UserControl x:Class="GTweak.Assets.UserControls.ExportItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" x:Name="Root" IsTabStop="False" Focusable="False"
+             KeyboardNavigation.TabNavigation="None" SnapsToDevicePixels="True"
+             MinHeight="30">
+    <Border CornerRadius="5" Padding="4,2">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="Transparent"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=Root}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource Brush_Background_Card}"/>
+                    </DataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding IsMouseOver, ElementName=Root}" Value="True"/>
+                            <Condition Binding="{Binding Label, ElementName=Root}" Value="{x:Null}"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <Grid MinHeight="26" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Style="{StaticResource ButtonRemoveItem}" Command="{Binding RemoveCommand, ElementName=Root}" CommandParameter="{Binding RemoveCommandParameter, ElementName=Root}" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Button.Visibility>
+                    <Binding Path="Label" ElementName="Root">
+                        <Binding.TargetNullValue>Collapsed</Binding.TargetNullValue>
+                    </Binding>
+                </Button.Visibility>
+            </Button>
+
+            <TextBlock Grid.Column="1" Text="{Binding Label, ElementName=Root}" Style="{StaticResource TextDefault}" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
+                <TextBlock.Visibility>
+                    <Binding Path="Label" ElementName="Root">
+                        <Binding.TargetNullValue>Collapsed</Binding.TargetNullValue>
+                    </Binding>
+                </TextBlock.Visibility>
+            </TextBlock>
+
+            <ContentPresenter Grid.Column="2" Content="{Binding Value, ElementName=Root}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <ContentPresenter.Visibility>
+                    <Binding Path="Label" ElementName="Root">
+                        <Binding.TargetNullValue>Collapsed</Binding.TargetNullValue>
+                    </Binding>
+                </ContentPresenter.Visibility>
+            </ContentPresenter>
+
+            <ContentPresenter Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding Value, ElementName=Root}" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <ContentPresenter.Style>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Label, ElementName=Root}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentPresenter.Style>
+            </ContentPresenter>
+        </Grid>
+    </Border>
+</UserControl>

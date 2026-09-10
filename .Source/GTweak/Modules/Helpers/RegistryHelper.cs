@@ -95,10 +95,10 @@ namespace GTweak.Modules.Helpers
                 bool result = !string.Equals(value, expectedValue, StringComparison.OrdinalIgnoreCase);
                 return invert ? !result : result;
             }
-            catch (Exception ex) 
-            { 
-                ErrorLogger.LogDebug(ex); 
-                return false; 
+            catch (Exception ex)
+            {
+                ErrorLogger.LogDebug(ex);
+                return false;
             }
         }
 
@@ -109,10 +109,10 @@ namespace GTweak.Modules.Helpers
                 bool result = Registry.GetValue(subKey, valueName, null) != null;
                 return invert ? !result : result;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                ErrorLogger.LogDebug(ex); 
-                return false; 
+                ErrorLogger.LogDebug(ex);
+                return false;
             }
         }
 
@@ -127,10 +127,10 @@ namespace GTweak.Modules.Helpers
 
                 return string.Concat(bytes) != expectedValue;
             }
-            catch (Exception ex) 
-            { 
-                ErrorLogger.LogDebug(ex); 
-                return true; 
+            catch (Exception ex)
+            {
+                ErrorLogger.LogDebug(ex);
+                return true;
             }
         }
 

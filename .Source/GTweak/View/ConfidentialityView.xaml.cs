@@ -26,11 +26,13 @@ namespace GTweak.View
         {
             ToggleButton tglButton = (ToggleButton)sender;
 
+            JsonConfigManager.Write(JsonConfigManager.Section.Confidentiality, tglButton.Name, tglButton.State);
+
             DescBlock.ContentSource = tglButton;
 
             _confTweaks.Apply(tglButton.Name, tglButton.State);
 
-            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(ConfidentialityToggle));
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(ConfidentialityTweaks.Toggle));
 
             if (postAction.HasAlert())
             {

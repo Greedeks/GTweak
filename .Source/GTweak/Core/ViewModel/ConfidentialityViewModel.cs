@@ -5,7 +5,7 @@ using GTweak.Modules.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class ConfidentialityViewModel : ViewModelPageBase<ConfidentialityModel, ConfidentialityTweaks>
+    internal sealed class ConfidentialityViewModel : ViewModelPageBase<ConfidentialityModel, ConfidentialityTweaks>
     {
         protected override IReadOnlyDictionary<string, object> GetControlStates() => ConfidentialityTweaks.ControlStates;
 

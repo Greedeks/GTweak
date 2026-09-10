@@ -15,6 +15,7 @@ indent_style = space
 indent_size = 4
 tab_width = 4
 
+dotnet_diagnostic.IDE0130.severity = warning
 dotnet_hide_advanced_members = false
 dotnet_member_insertion_location = with_other_members_of_the_same_kind
 dotnet_property_generation_behavior = prefer_throwing_properties

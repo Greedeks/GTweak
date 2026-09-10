@@ -8,7 +8,7 @@ using GTweak.Modules.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class InterfaceViewModel : ViewModelPageBase<InterfaceModel, InterfaceTweaks>
+    internal sealed class InterfaceViewModel : ViewModelPageBase<InterfaceModel, InterfaceTweaks>
     {
         public IReadOnlyDictionary<string, ImageSource> Icons { get; }
         public Visibility Win11FeatureOnly => HardwareData.OS.IsWin11 ? Visibility.Visible : Visibility.Collapsed;

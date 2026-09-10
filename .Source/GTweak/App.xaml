@@ -27,6 +27,7 @@
                 <ResourceDictionary Source="Styles/Display/TextBlocks.xaml" />
                 <ResourceDictionary Source="Styles/Display/Images.xaml" />
                 <ResourceDictionary Source="Styles/Display/ToolTips.xaml" />
+                <ResourceDictionary Source="Styles/Display/ExportTemplates.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/ComboBoxes.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/Sliders.xaml" />
                 <ResourceDictionary Source="Styles/Inputs/TextBoxes.xaml" />

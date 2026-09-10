@@ -151,6 +151,10 @@
     <Resource Include="Assets\ShaderEffects\ColorWheelEffect.ps" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Assets\UserControls\ExportItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\UserControls\InfoCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,6 +172,13 @@
     <Compile Include="Assets\UserControls\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Items\ExportCheckItem.cs" />
+    <Compile Include="Core\DataContracts\ExportChecklistValue.cs" />
+    <Compile Include="Core\DataContracts\ExportColorValue.cs" />
+    <Compile Include="Core\Items\ExportEntryItem.cs" />
+    <Compile Include="Core\Items\ExportPackageItem.cs" />
+    <Compile Include="Core\DataContracts\ExportPackagesValue.cs" />
+    <Compile Include="Core\DataContracts\ExportToggleValue.cs" />
     <Compile Include="Assets\UserControls\ExpandableBox.xaml.cs">
       <DependentUpon>ExpandableBox.xaml</DependentUpon>
     </Compile>
@@ -177,6 +188,10 @@
     <Compile Include="Assets\UserControls\DescriptionBlock.xaml.cs">
       <DependentUpon>DescriptionBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Assets\UserControls\ExportItem.xaml.cs">
+      <DependentUpon>ExportItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\DataContracts\ExportSliderValue.cs" />
     <Compile Include="Assets\UserControls\FlowPanel.cs" />
     <Compile Include="Assets\UserControls\FileCard.xaml.cs">
       <DependentUpon>FileCard.xaml</DependentUpon>
@@ -188,15 +203,17 @@
       <DependentUpon>ToolsetCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Assets\ShaderEffects\ColorWheelEffect.cs" />
+    <Compile Include="Converters\RgbToBrushConverter.cs" />
     <Compile Include="Core\Interfaces\IPageItem.cs" />
     <Compile Include="Core\Interfaces\IViewMarker.cs" />
     <Compile Include="Core\Base\ViewModelPageBase.cs" />
     <Compile Include="Converters\AngleToPercentConverter.cs" />
     <Compile Include="Converters\PercentToWidthConverter.cs" />
     <Compile Include="Converters\UsageToAngleConverter.cs" />
+    <Compile Include="Core\Model\ExportSectionModel.cs" />
     <Compile Include="Core\Services\FuzzySearchService.cs" />
-    <Compile Include="Core\ViewModel\Components\DownloadSession.cs" />
-    <Compile Include="Core\ViewModel\Components\ToolsetItem.cs" />
+    <Compile Include="Core\Services\Components\DownloadSession.cs" />
+    <Compile Include="Core\Items\ToolsetItem.cs" />
     <Compile Include="Core\Model\AddonsModel.cs" />
     <Compile Include="Core\Model\ConfidentialityModel.cs" />
     <Compile Include="Core\Model\DataSystemModel.cs" />
@@ -210,6 +227,7 @@
     <Compile Include="Core\ViewModel\AddonsViewModel.cs" />
     <Compile Include="Core\ViewModel\ConfidentialityViewModel.cs" />
     <Compile Include="Core\ViewModel\DataSystemViewModel.cs" />
+    <Compile Include="Core\ViewModel\ExportViewModel.cs" />
     <Compile Include="Core\ViewModel\InterfaceViewModel.cs" />
     <Compile Include="Core\ViewModel\PackagesViewModel.cs" />
     <Compile Include="Core\ViewModel\ServicesViewModel.cs" />
@@ -219,6 +237,7 @@
     <Compile Include="Behaviors\ScrollFadeBehavior.cs" />
     <Compile Include="Behaviors\ScrollViewerBehavior.cs" />
     <Compile Include="Behaviors\TextBoxClearBehavior.cs" />
+    <Compile Include="Modules\Common\GroupAttribute.cs" />
     <Compile Include="Modules\Common\PostActionAttribute.cs" />
     <Compile Include="Modules\Configuration\IconProvider.cs" />
     <Compile Include="Modules\Configuration\NetworkProvider.cs" />
@@ -231,6 +250,7 @@
     <Compile Include="Modules\Maintenance\MemoryCleaner.cs" />
     <Compile Include="Modules\Maintenance\RegistryExporter.cs" />
     <Compile Include="Modules\Managers\BluetoothManager.cs" />
+    <Compile Include="Modules\Managers\JsonConfigManager.cs" />
     <Compile Include="Modules\Storage\PackageStorage.cs" />
     <Compile Include="Modules\Tweaks\ConfidentialityTweaks.cs" />
     <Compile Include="Modules\Tweaks\Defender\AclPermissionsBackup.cs" />
@@ -268,6 +288,9 @@
     </Compile>
     <Compile Include="View\SystemView.xaml.cs">
       <DependentUpon>SystemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ExportWindow.xaml.cs">
+      <DependentUpon>ExportWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
@@ -358,6 +381,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\Display\ExportTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Display\ToolTips.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -438,6 +465,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\ExportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ImportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -453,14 +484,14 @@
     <Compile Include="Assets\UserControls\ToggleButton.xaml.cs">
       <DependentUpon>ToggleButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\Model\MainWinModel.cs" />
+    <Compile Include="Core\Model\MainWindowModel.cs" />
     <Compile Include="Core\ViewModel\MainWinViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Core\Base\ViewModelBase.cs" />
+    <Compile Include="Core\Base\PropertyChangedBase.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="Animations\BlurAnimation.cs" />
     <Compile Include="Animations\BrushAnimation.cs" />
@@ -483,7 +514,6 @@
     <Compile Include="Modules\Managers\ControlWriterManager.cs" />
     <Compile Include="Modules\Managers\ExplorerManager.cs" />
     <Compile Include="Modules\Managers\FirewallManager.cs" />
-    <Compile Include="Modules\Managers\INIManager.cs" />
     <Compile Include="Modules\Managers\NotificationManager.cs" />
     <Compile Include="Modules\Managers\OverlayDialogManager.cs" />
     <Compile Include="Modules\Managers\TaskSchedulerManager.cs" />

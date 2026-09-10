@@ -27,15 +27,23 @@ namespace GTweak.View
         private void ColorPicker_ColorPicked(object sender, EventArgs e)
         {
             ColorPicker colorPicker = (ColorPicker)sender;
+
+            JsonConfigManager.Write(JsonConfigManager.Section.Interface, colorPicker.Name, colorPicker.SelectedColorString);
+
             _intfTweaks.Apply(colorPicker.Name, colorPicker.SelectedColorString);
+
             NotificationManager.Default().WithDelay(300).Logout();
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
+
+            JsonConfigManager.Write(JsonConfigManager.Section.Interface, checkBox.Uid, checkBox.IsChecked);
+
             _intfTweaks.Apply(checkBox.Uid, checkBox.IsChecked == false);
-            _shellType = checkBox.Uid.GetPostAction(typeof(InterfaceCheckbox)).Shell;
+
+            _shellType = checkBox.Uid.GetPostAction(typeof(InterfaceTweaks.Checkbox)).Shell;
         }
 
         private void ExpandableBox_Closed(object sender, EventArgs e)
@@ -47,10 +55,14 @@ namespace GTweak.View
         private void TglButton_ChangedState(object sender, RoutedEventArgs e)
         {
             ToggleButton tglButton = (ToggleButton)sender;
+
+            JsonConfigManager.Write(JsonConfigManager.Section.Interface, tglButton.Name, tglButton.State);
+
             DescBlock.ContentSource = tglButton;
+
             _intfTweaks.Apply(tglButton.Name, tglButton.State);
 
-            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(InterfaceToggle));
+            PostActionAttribute postAction = tglButton.Name.GetPostAction(typeof(InterfaceTweaks.Toggle));
 
             if (postAction.HasShell())
             {

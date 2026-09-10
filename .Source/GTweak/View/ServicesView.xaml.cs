@@ -24,6 +24,8 @@ namespace GTweak.View
         {
             ToggleButton tglButton = (ToggleButton)sender;
 
+            JsonConfigManager.Write(JsonConfigManager.Section.Services, tglButton.Name, tglButton.State);
+
             DescBlock.ContentSource = tglButton;
 
             _svcTweaks.Apply(tglButton.Name, tglButton.State);

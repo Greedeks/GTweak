@@ -55,35 +55,32 @@ namespace GTweak.Windows
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e?.ChangedButton == MouseButton.Left)
+            if (e?.OriginalSource is DependencyObject source)
             {
-                if (e?.OriginalSource is DependencyObject source)
+                DependencyObject current = source;
+                while (current != null)
                 {
-                    DependencyObject current = source;
-                    while (current != null)
+                    if (current is ButtonBase)
                     {
-                        if (current is ButtonBase)
-                        {
-                            return;
-                        }
-
-                        current = VisualTreeHelper.GetParent(current);
+                        return;
                     }
-                }
 
-                Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = true; TitleButtonsPanel.IsHitTestVisible = false; }));
-
-                if (e?.ClickCount == 2)
-                {
-                    HandleWindowState();
+                    current = VisualTreeHelper.GetParent(current);
                 }
-                else
-                {
-                    this.Drag();
-                }
-
-                Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = false; TitleButtonsPanel.IsHitTestVisible = true; }));
             }
+
+            Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = true; TitleButtonsPanel.IsHitTestVisible = false; }));
+
+            if (e?.ClickCount == 2)
+            {
+                HandleWindowState();
+            }
+            else
+            {
+                this.Drag();
+            }
+
+            Dispatcher.BeginInvoke((Action)(() => { _ignoreMouseClick = false; TitleButtonsPanel.IsHitTestVisible = true; }));
         }
 
         private void ButtonClose_Click(object sender, RoutedEventArgs e) => Close();

@@ -12,7 +12,7 @@ using GTweak.Modules.Tweaks;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class PackagesViewModel : ViewModelBase
+    internal sealed class PackagesViewModel : PropertyChangedBase
     {
         public ObservableCollection<PackagesModel> DisplayState { get; set; }
 

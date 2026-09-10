@@ -1,6 +1,6 @@
-﻿namespace GTweak.Core.Model
+namespace GTweak.Core.Model
 {
-    internal sealed class MainWinModel
+    internal sealed class MainWindowModel
     {
         public object CurrentView { get; set; }
         public string SelectedLanguage { get; set; }

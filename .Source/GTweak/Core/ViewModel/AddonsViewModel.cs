@@ -10,13 +10,14 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using GTweak.Core.Base;
+using GTweak.Core.Model;
 using GTweak.Modules.Common;
 using GTweak.Modules.Helpers;
 using Ookii.Dialogs.Wpf;
 
 namespace GTweak.Core.ViewModel
 {
-    internal class AddonsViewModel : ViewModelBase
+    internal sealed class AddonsViewModel : PropertyChangedBase
     {
         public ObservableCollection<AddonModel> Addons { get; } = new ObservableCollection<AddonModel>();
 
