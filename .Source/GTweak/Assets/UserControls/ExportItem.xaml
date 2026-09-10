@@ -14,17 +14,25 @@
                     <DataTrigger Binding="{Binding IsMouseOver, ElementName=Root}" Value="True">
                         <Setter Property="Background" Value="{StaticResource Brush_Background_Card}"/>
                     </DataTrigger>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding IsMouseOver, ElementName=Root}" Value="True"/>
+                            <Condition Binding="{Binding Label, ElementName=Root}" Value="{x:Null}"/>
+                        </MultiDataTrigger.Conditions>
+                        <Setter Property="Background" Value="Transparent"/>
+                    </MultiDataTrigger>
                 </Style.Triggers>
             </Style>
         </Border.Style>
 
         <Grid MinHeight="26" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" MinWidth="0"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Style="{StaticResource ButtonRemoveItem}" Command="{Binding RemoveCommand, ElementName=Root}" CommandParameter="{Binding RemoveCommandParameter, ElementName=Root}" Margin="2,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Panel.ZIndex="1">
+            <Button Grid.Column="0" Style="{StaticResource ButtonRemoveItem}" Command="{Binding RemoveCommand, ElementName=Root}" CommandParameter="{Binding RemoveCommandParameter, ElementName=Root}" Margin="0,0,8,0" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Button.Visibility>
                     <Binding Path="Label" ElementName="Root">
                         <Binding.TargetNullValue>Collapsed</Binding.TargetNullValue>
@@ -32,7 +40,7 @@
                 </Button.Visibility>
             </Button>
 
-            <TextBlock Grid.Column="0" Text="{Binding Label, ElementName=Root}" Style="{StaticResource TextDefault}" FontSize="13" VerticalAlignment="Center" Margin="32,0,12,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
+            <TextBlock Grid.Column="1" Text="{Binding Label, ElementName=Root}" Style="{StaticResource TextDefault}" FontSize="13" VerticalAlignment="Center" Margin="0,0,8,0" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
                 <TextBlock.Visibility>
                     <Binding Path="Label" ElementName="Root">
                         <Binding.TargetNullValue>Collapsed</Binding.TargetNullValue>
@@ -40,7 +48,7 @@
                 </TextBlock.Visibility>
             </TextBlock>
 
-            <ContentPresenter Grid.Column="1" Content="{Binding Value, ElementName=Root}" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <ContentPresenter Grid.Column="2" Content="{Binding Value, ElementName=Root}" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <ContentPresenter.Visibility>
                     <Binding Path="Label" ElementName="Root">
                         <Binding.TargetNullValue>Collapsed</Binding.TargetNullValue>
@@ -48,7 +56,7 @@
                 </ContentPresenter.Visibility>
             </ContentPresenter>
 
-            <ContentPresenter Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Value, ElementName=Root}" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <ContentPresenter Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding Value, ElementName=Root}" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <ContentPresenter.Style>
                     <Style TargetType="ContentPresenter">
                         <Setter Property="Visibility" Value="Collapsed"/>

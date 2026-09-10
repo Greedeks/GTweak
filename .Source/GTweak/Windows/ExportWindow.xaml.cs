@@ -45,7 +45,7 @@ namespace GTweak.Windows
         {
             if (e?.ClickCount == 2)
             {
-                WindowState = false ? WindowState.Minimized : WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+                HandleWindowState();
             }
             else
             {
@@ -53,6 +53,13 @@ namespace GTweak.Windows
             }
         }
 
-        private void ButtonClose_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Close();
+        private void ButtonClose_Click(object sender, RoutedEventArgs e) => Close();
+
+        private void ButtonMaximize_Click(object sender, RoutedEventArgs e) => HandleWindowState();
+
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e) => HandleWindowState(true);
+
+        private void HandleWindowState(bool isMinimized = false) => WindowState = isMinimized ? WindowState.Minimized : WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+
     }
 }

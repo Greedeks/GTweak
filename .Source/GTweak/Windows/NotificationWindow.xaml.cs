@@ -59,7 +59,7 @@ namespace GTweak.Windows
             };
         }
 
-        private void ButtonClose_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => Close();
+        private void ButtonClose_Click(object sender, RoutedEventArgs e) => Close();
 
         private void Grid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {

@@ -34,7 +34,11 @@
                 <ui:SymbolIcon Symbol="ArrowExportUp24" FontSize="16" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center"/>
                 <TextBlock Text="{DynamicResource title_export}" Style="{StaticResource TextDefault}" FontSize="14" Margin="8,0,0,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
             </DockPanel>
-            <Button x:Name="ButtonClose" Grid.Column="1" Style="{StaticResource ButtonClose}" Margin="0,0,5,2" VerticalAlignment="Center" PreviewMouseLeftButtonUp="ButtonClose_PreviewMouseLeftButtonUp"/>
+            <StackPanel x:Name="TitleButtonsPanel" Grid.Column="2" Margin="0,0,0,2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="ButtonMinimize" Style="{StaticResource ButtonMinimize}" Click="ButtonMinimize_Click"/>
+                <Button x:Name="ButtonMaximize" Style="{StaticResource ButtonMaximize}" Click="ButtonMaximize_Click"/>
+                <Button x:Name="ButtonClose" Style="{StaticResource ButtonClose}" Margin="0,0,5,0" Click="ButtonClose_Click"/>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -184,11 +188,11 @@
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="13" VerticalAlignment="Center">
+                <TextBlock Grid.Column="0" Style="{StaticResource TextDefault}"  Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontSize="13" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,10,0">
                     <Run Text="{DynamicResource label_total_export}"/>
                     <Run Text="{Binding TotalCount, Mode=OneWay}" Foreground="{StaticResource Brush_Accent}" FontFamily="{StaticResource Jura}"/>
                 </TextBlock>
