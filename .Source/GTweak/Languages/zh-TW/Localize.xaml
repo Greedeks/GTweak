@@ -110,9 +110,10 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_import">匯入調整項目</v:String>
-    <v:String x:Key="wait_import">需要一些時間</v:String>
-    <v:String x:Key="warn_import">無需強制關閉視窗</v:String>
     <v:String x:Key="file_import">檔案</v:String>
+    <v:String x:Key="warn_hint_import">Do not close the window until finished</v:String>
+    <v:String x:Key="done_import">Import completed</v:String>
+    <v:String x:Key="done_hint_import">The window will close automatically</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->

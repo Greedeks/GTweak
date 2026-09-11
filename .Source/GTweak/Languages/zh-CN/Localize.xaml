@@ -110,9 +110,10 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_import">正在导入配置</v:String>
-    <v:String x:Key="wait_import">这需要一些时间</v:String>
-    <v:String x:Key="warn_import">请勿强行关闭此窗口</v:String>
     <v:String x:Key="file_import">文件</v:String>
+    <v:String x:Key="warn_hint_import">Do not close the window until finished</v:String>
+    <v:String x:Key="done_import">Import completed</v:String>
+    <v:String x:Key="done_hint_import">The window will close automatically</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->

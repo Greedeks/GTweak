@@ -110,9 +110,10 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_import">Importowanie poprawek</v:String>
-    <v:String x:Key="wait_import">To zajmuje chwilę</v:String>
-    <v:String x:Key="warn_import">Nie ma potrzeby zamykać okna na siłę</v:String>
     <v:String x:Key="file_import">Plik</v:String>
+    <v:String x:Key="warn_hint_import">Do not close the window until finished</v:String>
+    <v:String x:Key="done_import">Import completed</v:String>
+    <v:String x:Key="done_hint_import">The window will close automatically</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->

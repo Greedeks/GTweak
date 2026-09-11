@@ -103,16 +103,17 @@
     <!--#region Export Window -->
     <v:String x:Key="title_export">Экспорт твиков</v:String>
     <v:String x:Key="label_total_export">Общее количество:</v:String>
-    <v:String x:Key="title_empty_export">Нечего экспортировать</v:String>
     <v:String x:Key="title_loading_export">Чтение конфигурации</v:String>
+    <v:String x:Key="title_empty_export">Нечего экспортировать</v:String>
     <v:String x:Key="desc_empty_export">Примените нужные твики в утилите. Все изменения будут сохранены здесь вплоть до самоудаления, и вы сможете экспортировать их в любой момент</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->
     <v:String x:Key="title_import">Импорт твиков</v:String>
-    <v:String x:Key="wait_import">Это занимает некоторое время</v:String>
-    <v:String x:Key="warn_import">Принудительно закрывать окно нет необходимости</v:String>
     <v:String x:Key="file_import">Файл</v:String>
+    <v:String x:Key="warn_hint_import">Не закрывайте окно до завершения</v:String>
+    <v:String x:Key="done_import">Импорт завершён</v:String>
+    <v:String x:Key="done_hint_import">Окно закроется автоматически</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->
@@ -227,7 +228,7 @@
     <v:String x:Key="chk_IconControlPanel_intf">Панель управления</v:String>
     <v:String x:Key="chk_IconUserFiles_intf">Файлы пользователя</v:String>
     <v:String x:Key="chk_IconOneDrive_intf">OneDrive</v:String>
-    
+
     <v:String x:Key="exblock_ThisPCFolders_intf">Отображение папок в «Этом компьютере»:</v:String>
     <v:String x:Key="chk_FolderObjects3D_intf">Объемные объекты</v:String>
     <v:String x:Key="chk_FolderDesktop_intf">Рабочий стол</v:String>
@@ -236,7 +237,7 @@
     <v:String x:Key="chk_FolderPictures_intf">Изображения</v:String>
     <v:String x:Key="chk_FolderMusic_intf">Музыка</v:String>
     <v:String x:Key="chk_FolderVideo_intf">Видео</v:String>
-    
+
     <v:String x:Key="tgl_SystemButtonSize_intf">Стандартный размер системных кнопок</v:String>
     <v:String x:Key="tgl_CursorFlickerFrequency_intf">Стандартная частота мерцания курсора</v:String>
     <v:String x:Key="tgl_ScrollbarSize_intf">Стандартный размер полосы прокрутки</v:String>
@@ -304,7 +305,7 @@
     <v:String x:Key="warn_part1_pkg">Приложения удаляются</v:String>
     <v:String x:Key="warn_part2_pkg">навсегда,</v:String>
     <v:String x:Key="warn_part3_pkg">но OneDrive можно восстановить, нажав на его иконку</v:String>
-
+    
     <v:String x:Key="OneDrive_pkg">OneDrive</v:String>
     <v:String x:Key="MicrosoftStore_pkg">Microsoft Store</v:String>
     <v:String x:Key="Xbox_pkg">Microsoft Xbox</v:String>

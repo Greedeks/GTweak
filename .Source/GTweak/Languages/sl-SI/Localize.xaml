@@ -110,9 +110,10 @@
 
     <!--#region Import Window -->
     <v:String x:Key="title_import">Uvažanje popravkov</v:String>
-    <v:String x:Key="wait_import">To traja nekaj časa</v:String>
-    <v:String x:Key="warn_import">Okna ni treba prisilno zapreti</v:String>
     <v:String x:Key="file_import">Datoteka</v:String>
+    <v:String x:Key="warn_hint_import">Do not close the window until finished</v:String>
+    <v:String x:Key="done_import">Import completed</v:String>
+    <v:String x:Key="done_hint_import">The window will close automatically</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->
