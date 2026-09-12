@@ -47,7 +47,7 @@
     <v:String x:Key="warn_update_noty">Une erreur est survenue lors de la mise à jour du programme, veuillez réessayer plus tard</v:String>
     <v:String x:Key="warn_import_noty">Ce fichier n’est pas adapté à l’importation</v:String>
     <v:String x:Key="empty_import_noty">Ce fichier est vide, l’application des réglages est impossible</v:String>
-    <v:String x:Key="export_success_noty">Your settings have been exported successfully</v:String>
+    <v:String x:Key="export_success_noty">Vos paramètres ont été exportés avec succès</v:String>
     <v:String x:Key="success_onedrive_noty">Le processus de récupération OneDrive a commencé, cela prendra un certain temps</v:String>
     <v:String x:Key="error_onedrive_noty">Fichier de configuration OneDrive manquant, récupération impossible</v:String>
     <v:String x:Key="warn_wd_noty">Attendez la fin du processus, puis redémarrez le système</v:String>
@@ -101,19 +101,19 @@
     <!--#endregion-->
 
     <!--#region Export Window -->
-    <v:String x:Key="title_export">Exporting tweaks</v:String>
-    <v:String x:Key="label_total_export">Total items:</v:String>
-    <v:String x:Key="title_loading_export">Reading configuration</v:String>
-    <v:String x:Key="title_empty_export">Nothing to export</v:String>
-    <v:String x:Key="desc_empty_export">Apply desired tweaks in the utility. All changes will be kept here until self-removal, and you can export them at any time</v:String>
+    <v:String x:Key="title_export">Exportation des optimisations</v:String>
+    <v:String x:Key="label_total_export">Éléments au total :</v:String>
+    <v:String x:Key="title_loading_export">Lecture de la configuration</v:String>
+    <v:String x:Key="title_empty_export">Rien à exporter</v:String>
+    <v:String x:Key="desc_empty_export">Appliquez les modifications souhaitées dans l'utilitaire. Vos paramètres seront conservés ici et vous pourrez les exporter à tout moment</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->
     <v:String x:Key="title_import">Importation des réglages</v:String>
     <v:String x:Key="file_import">Fichier</v:String>
-    <v:String x:Key="warn_hint_import">Do not close the window until finished</v:String>
-    <v:String x:Key="done_import">Import completed</v:String>
-    <v:String x:Key="done_hint_import">The window will close automatically</v:String>
+    <v:String x:Key="warn_hint_import">Ne fermez pas la fenêtre avant la fin de l'opération</v:String>
+    <v:String x:Key="done_import">Importation terminée</v:String>
+    <v:String x:Key="done_hint_import">La fenêtre se fermera automatiquement</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->
@@ -229,14 +229,14 @@
     <v:String x:Key="chk_IconUserFiles_intf">Fichiers de l’utilisateur</v:String>
     <v:String x:Key="chk_IconOneDrive_intf">OneDrive</v:String>
 
-    <v:String x:Key="exblock_ThisPCFolders_intf">Folders in «This PC»:</v:String>
-    <v:String x:Key="chk_FolderObjects3D_intf">3D Objects</v:String>
-    <v:String x:Key="chk_FolderDesktop_intf">Desktop</v:String>
-    <v:String x:Key="chk_FolderDownloads_intf">Downloads</v:String>
+    <v:String x:Key="exblock_ThisPCFolders_intf">Dossiers dans « Ce PC » :</v:String>
+    <v:String x:Key="chk_FolderObjects3D_intf">Objets 3D</v:String>
+    <v:String x:Key="chk_FolderDesktop_intf">Bureau</v:String>
+    <v:String x:Key="chk_FolderDownloads_intf">Téléchargements</v:String>
     <v:String x:Key="chk_FolderDocuments_intf">Documents</v:String>
-    <v:String x:Key="chk_FolderPictures_intf">Pictures</v:String>
-    <v:String x:Key="chk_FolderMusic_intf">Music</v:String>
-    <v:String x:Key="chk_FolderVideo_intf">Videos</v:String>
+    <v:String x:Key="chk_FolderPictures_intf">Images</v:String>
+    <v:String x:Key="chk_FolderMusic_intf">Musique</v:String>
+    <v:String x:Key="chk_FolderVideo_intf">Vidéos</v:String>
 
     <v:String x:Key="tgl_SystemButtonSize_intf">Taille standard des boutons système</v:String>
     <v:String x:Key="tgl_CursorFlickerFrequency_intf">Fréquence de clignotement standard du curseur</v:String>
@@ -271,7 +271,7 @@
     <v:String x:Key="desc_NavigationItems_intf">Modifie la visibilité des éléments système intégrés dans le volet de navigation, qui ne peuvent pas être détachés par les moyens habituels.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Modifie les règles système d'affichage dans l'Explorateur de fichiers, y compris la visibilité des éléments cachés, des extensions et de la structure des lecteurs. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Modifie l'affichage des icônes système sur le bureau — ce sont des objets système intégrés, pas de simples raccourcis.</v:String>
-    <v:String x:Key="desc_ThisPCFolders_intf">Changes the display of standard user folders within «This PC». Allows you to hide them so that only connected drives are shown in the list. Attention the screen may blink.</v:String>
+    <v:String x:Key="desc_ThisPCFolders_intf">Modifie l'affichage des dossiers utilisateur standard dans « Ce PC ». Permet de les masquer pour ne laisser apparaître que les lecteurs connectés. Attention, l’écran peut clignoter.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Réduit la taille des boutons Réduire, Agrandir et Fermer, les rendant moins volumineux. Redimensionne toutes les fenêtres, y compris l’Explorateur, Windows Photos, navigateurs et autres programmes connus.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Accélère la fréquence de clignotement du curseur texte. Par défaut, elle est de 530 millisecondes.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">Rend la largeur de la barre de défilement plus fine dans les fenêtres, y compris navigateurs et programmes. Sauf pour les interfaces modernes des applications.</v:String>
@@ -567,21 +567,21 @@
 
     <!--#region Addons Page -->
     <v:String x:Key="chk_run_ti_adds">Exécuter en tant que TrustedInstaller</v:String>
-    <v:String x:Key="label_directory_adds">Directory</v:String>
-    <v:String x:Key="label_count_adds">Count</v:String>
+    <v:String x:Key="label_directory_adds">Dossier</v:String>
+    <v:String x:Key="label_count_adds">Quantité</v:String>
     <v:String x:Key="text_info_adds">Sélectionnez un répertoire ou assurez-vous qu'il n'est pas vide</v:String>
     <v:String x:Key="scripts_info_adds">Après cela, vous pourrez exécuter des scripts (.ps1, .cmd, .bat, .reg) sur cette page</v:String>
     <!--#endregion-->
 
     <!--#region Toolset Page -->
     <v:String x:Key="text_ts">Rechercher par nom ou auteur</v:String>
-    <v:String x:Key="tag_all_ts">All</v:String>
-    <v:String x:Key="tag_drivers_ts">Drivers</v:String>
-    <v:String x:Key="tag_tools_ts">Tools</v:String>
-    <v:String x:Key="tag_diagnostics_ts">Diagnostics</v:String>
-    <v:String x:Key="tag_benchmark_ts">Benchmark</v:String>
+    <v:String x:Key="tag_all_ts">Tous</v:String>
+    <v:String x:Key="tag_drivers_ts">Pilotes</v:String>
+    <v:String x:Key="tag_tools_ts">Outils</v:String>
+    <v:String x:Key="tag_diagnostics_ts">Diagnostic</v:String>
+    <v:String x:Key="tag_benchmark_ts">Performances</v:String>
     <v:String x:Key="tag_overclocking_ts">Overclocking</v:String>
-    <v:String x:Key="label_download_dir_ts">Download directory</v:String>
+    <v:String x:Key="label_download_dir_ts">Dossier de téléchargement</v:String>
     <v:String x:Key="source_ts">Source</v:String>
     <v:String x:Key="btn_download">Télécharger</v:String>
     <v:String x:Key="btn_cancel">Annuler</v:String>

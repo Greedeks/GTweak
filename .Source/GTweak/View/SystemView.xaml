@@ -29,23 +29,22 @@
         <Grid Grid.Row="0">
             <ScrollViewer b:ScrollFadeBehavior.EnableFade="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <uc:FlowPanel VerticalSpacing="20" HorizontalSpacing="5" Margin="10">
-
                     <StackPanel Orientation="Vertical" Margin="0,-15,0,0">
                         <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource desc_MouseSensitivity_sys}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" Margin="0,2,0,0" Text="{DynamicResource slider_MouseSensitivity_sys}"/>
-                            <Slider x:Name="MouseSensitivity" Value="{Binding [MouseSensitivity].Value}" Style="{StaticResource Numeric_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="20" Margin="7,15,0,0"  Width="150" ValueChanged="Slider_ValueChanged"/>
+                            <Slider x:Name="MouseSensitivity" Value="{Binding [MouseSensitivity].Value}" Style="{StaticResource Numeric_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="20" Margin="7,15,0,0" Width="150" ValueChanged="Slider_ValueChanged"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource desc_KeyboardDelay_sys}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" Margin="0,2,0,0" Text="{DynamicResource slider_KeyboardDelay_sys}"/>
-                            <Slider x:Name="KeyboardDelay"  Value="{Binding [KeyboardDelay].Value}" Style="{StaticResource Numeric_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="3" Margin="7,15,0,0"  Width="150" ValueChanged="Slider_ValueChanged"/>
+                            <Slider x:Name="KeyboardDelay" Value="{Binding [KeyboardDelay].Value}" Style="{StaticResource Numeric_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="3" Margin="7,15,0,0" Width="150" ValueChanged="Slider_ValueChanged"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Height="45" VerticalAlignment="Top" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" ToolTip="{DynamicResource desc_KeyboardSpeed_sys}" ToolTipService.IsEnabled="False" Background="Transparent">
                             <TextBlock Style="{StaticResource TextDefault}" Margin="0,2,0,0" Text="{DynamicResource slider_KeyboardSpeed_sys}"/>
-                            <Slider x:Name="KeyboardSpeed"  Value="{Binding [KeyboardSpeed].Value}" Style="{StaticResource Numeric_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="31" Margin="7,15,0,0"  Width="170" ValueChanged="Slider_ValueChanged"/>
+                            <Slider x:Name="KeyboardSpeed" Value="{Binding [KeyboardSpeed].Value}" Style="{StaticResource Numeric_Slider}" IsSnapToTickEnabled="True" Minimum="0" Maximum="31" Margin="7,15,0,0" Width="170" ValueChanged="Slider_ValueChanged"/>
                         </StackPanel>
-                        
+
                         <TextBox Tag="{DynamicResource text_sys}" b:TextBoxClearBehavior.ClearButton="True" Margin="0,5,0,0" Width="450" MaxLength="50" HorizontalAlignment="Left"/>
 
                         <uc:ToggleButton x:Name="PointerPrecision" Style="{StaticResource ToggleStyle}" State="{Binding [PointerPrecision].State}" Margin="0,20,0,0" TextResource="{DynamicResource tgl_PointerPrecision_sys}" Description="{DynamicResource desc_PointerPrecision_sys}" />
@@ -53,33 +52,33 @@
                     </StackPanel>
 
                     <uc:ToggleButton x:Name="WindowsDefender" Style="{StaticResource ToggleStyle}" State="{Binding [WindowsDefender].State}" TextResource="{DynamicResource tgl_WindowsDefender_sys}" Description="{DynamicResource desc_WindowsDefender_sys}" />
+                    <uc:ToggleButton x:Name="WindowsFirewall" Style="{StaticResource ToggleStyle}" State="{Binding [WindowsFirewall].State}" TextResource="{DynamicResource tgl_WindowsFirewall_sys}" Description="{DynamicResource desc_WindowsFirewall_sys}" />
                     <uc:ToggleButton x:Name="UserAccountControl" Style="{StaticResource ToggleStyle}" State="{Binding [UserAccountControl].State}" TextResource="{DynamicResource tgl_UserAccountControl_sys}" Description="{DynamicResource desc_UserAccountControl_sys}" />
                     <uc:ToggleButton x:Name="SecurityNotifications" Style="{StaticResource ToggleStyle}" State="{Binding [SecurityNotifications].State}" TextResource="{DynamicResource tgl_SecurityNotifications_sys}" Description="{DynamicResource desc_SecurityNotifications_sys}" />
-                    <uc:ToggleButton x:Name="StoreAutoUpdate" Style="{StaticResource ToggleStyle}" State="{Binding [StoreAutoUpdate].State}" TextResource="{DynamicResource tgl_StoreAutoUpdate_sys}" Description="{DynamicResource desc_StoreAutoUpdate_sys}" />
-                    <uc:ToggleButton x:Name="RealtekAudioDelay" Visibility="{Binding RealtekSupport}" Style="{StaticResource ToggleStyle}" State="{Binding [RealtekAudioDelay].State}" TextResource="{DynamicResource tgl_RealtekAudioDelay_sys}" Description="{DynamicResource desc_RealtekAudioDelay_sys}" />
-                    <uc:ToggleButton x:Name="LockScreenTimeout" Style="{StaticResource ToggleStyle}" State="{Binding [LockScreenTimeout].State}" TextResource="{DynamicResource tgl_LockScreenTimeout_sys}" Description="{DynamicResource desc_LockScreenTimeout_sys}" />
-                    <uc:ToggleButton x:Name="HibernationFastStartup" Style="{StaticResource ToggleStyle}" State="{Binding [HibernationFastStartup].State}" TextResource="{DynamicResource tgl_HibernationFastStartup_sys}" Description="{DynamicResource desc_HibernationFastStartup_sys}" />
-                    <uc:ToggleButton x:Name="AutoEndTasks" Style="{StaticResource ToggleStyle}" State="{Binding [AutoEndTasks].State}" TextResource="{DynamicResource tgl_AutoEndTasks_sys}" Description="{DynamicResource desc_AutoEndTasks_sys}" />
-                    <uc:ToggleButton x:Name="ExeLaunchWarnings" Style="{StaticResource ToggleStyle}" State="{Binding [ExeLaunchWarnings].State}" TextResource="{DynamicResource tgl_ExeLaunchWarnings_sys}" Description="{DynamicResource desc_ExeLaunchWarnings_sys}" />
-                    <uc:ToggleButton x:Name="MemoryDiagnostics" Style="{StaticResource ToggleStyle}" State="{Binding [MemoryDiagnostics].State}" TextResource="{DynamicResource tgl_MemoryDiagnostics_sys}" Description="{DynamicResource desc_MemoryDiagnostics_sys}" />
                     <uc:ToggleButton x:Name="NetworkProtocols" Style="{StaticResource ToggleStyle}" State="{Binding [NetworkProtocols].State}" TextResource="{DynamicResource tgl_NetworkProtocols_sys}" Description="{DynamicResource desc_NetworkProtocols_sys}" />
+                    <uc:ToggleButton x:Name="MultiPlaneOverlay" Style="{StaticResource ToggleStyle}" State="{Binding [MultiPlaneOverlay].State}" TextResource="{DynamicResource tgl_MultiPlaneOverlay_sys}" Description="{DynamicResource desc_MultiPlaneOverlay_sys}" />
+                    <uc:ToggleButton x:Name="DynamicTickHpet" Style="{StaticResource ToggleStyle}" State="{Binding [DynamicTickHpet].State}" TextResource="{DynamicResource tgl_DynamicTickHpet_sys}" Description="{DynamicResource desc_DynamicTickHpet_sys}" />
+                    <uc:ToggleButton x:Name="HibernationFastStartup" Style="{StaticResource ToggleStyle}" State="{Binding [HibernationFastStartup].State}" TextResource="{DynamicResource tgl_HibernationFastStartup_sys}" Description="{DynamicResource desc_HibernationFastStartup_sys}" />
                     <uc:ToggleButton x:Name="FileSystemCache" Style="{StaticResource ToggleStyle}" State="{Binding [FileSystemCache].State}" TextResource="{DynamicResource tgl_FileSystemCache_sys}" Description="{DynamicResource desc_FileSystemCache_sys}" />
-                    <uc:ToggleButton x:Name="StartupDelay" Style="{StaticResource ToggleStyle}" State="{Binding [StartupDelay].State}" TextResource="{DynamicResource tgl_StartupDelay_sys}" Description="{DynamicResource desc_StartupDelay_sys}" />
-                    <uc:ToggleButton x:Name="QuickAccessHistory" Style="{StaticResource ToggleStyle}" State="{Binding [QuickAccessHistory].State}" TextResource="{DynamicResource tgl_QuickAccessHistory_sys}" Description="{DynamicResource desc_QuickAccessHistory_sys}" />
-                    <uc:ToggleButton x:Name="RemovableMediaAutoplay" Style="{StaticResource ToggleStyle}" State="{Binding [RemovableMediaAutoplay].State}" TextResource="{DynamicResource tgl_RemovableMediaAutoplay_sys}" Description="{DynamicResource desc_RemovableMediaAutoplay_sys}" />
-                    <uc:ToggleButton x:Name="PowerScheme" Style="{StaticResource ToggleStyle}" State="{Binding [PowerScheme].State}" TextResource="{DynamicResource tgl_PowerScheme_sys}" Description="{DynamicResource desc_PowerScheme_sys}" />
+                    <uc:ToggleButton x:Name="LockScreenTimeout" Style="{StaticResource ToggleStyle}" State="{Binding [LockScreenTimeout].State}" TextResource="{DynamicResource tgl_LockScreenTimeout_sys}" Description="{DynamicResource desc_LockScreenTimeout_sys}" />
+                    <uc:ToggleButton x:Name="ReservedStorage" Style="{StaticResource ToggleStyle}" State="{Binding [ReservedStorage].State}" TextResource="{DynamicResource tgl_ReservedStorage_sys}" Description="{DynamicResource desc_ReservedStorage_sys}" />
+                    <uc:ToggleButton x:Name="StoreAutoUpdate" Style="{StaticResource ToggleStyle}" State="{Binding [StoreAutoUpdate].State}" TextResource="{DynamicResource tgl_StoreAutoUpdate_sys}" Description="{DynamicResource desc_StoreAutoUpdate_sys}" />
+                    <uc:ToggleButton x:Name="AutoEndTasks" Style="{StaticResource ToggleStyle}" State="{Binding [AutoEndTasks].State}" TextResource="{DynamicResource tgl_AutoEndTasks_sys}" Description="{DynamicResource desc_AutoEndTasks_sys}" />
                     <uc:ToggleButton x:Name="BluetoothFunction" Visibility="{Binding BluetoothSupport}" Style="{StaticResource ToggleStyle}" State="{Binding [BluetoothFunction].State}" TextResource="{DynamicResource tgl_BluetoothFunction_sys}" Description="{DynamicResource desc_BluetoothFunction_sys}" />
-                    <uc:ToggleButton x:Name="WindowsFirewall" Style="{StaticResource ToggleStyle}" State="{Binding [WindowsFirewall].State}" TextResource="{DynamicResource tgl_WindowsFirewall_sys}" Description="{DynamicResource desc_WindowsFirewall_sys}" />
+                    <uc:ToggleButton x:Name="MemoryDiagnostics" Style="{StaticResource ToggleStyle}" State="{Binding [MemoryDiagnostics].State}" TextResource="{DynamicResource tgl_MemoryDiagnostics_sys}" Description="{DynamicResource desc_MemoryDiagnostics_sys}" />
+                    <uc:ToggleButton x:Name="RealtekAudioDelay" Visibility="{Binding RealtekSupport}" Style="{StaticResource ToggleStyle}" State="{Binding [RealtekAudioDelay].State}" TextResource="{DynamicResource tgl_RealtekAudioDelay_sys}" Description="{DynamicResource desc_RealtekAudioDelay_sys}" />
+                    <uc:ToggleButton x:Name="PauseWindowsUpdates" Style="{StaticResource ToggleStyle}" State="{Binding [PauseWindowsUpdates].State}" TextResource="{DynamicResource tgl_PauseWindowsUpdates_sys}" Description="{DynamicResource desc_PauseWindowsUpdates_sys}" />
+                    <uc:ToggleButton x:Name="StartupDelay" Style="{StaticResource ToggleStyle}" State="{Binding [StartupDelay].State}" TextResource="{DynamicResource tgl_StartupDelay_sys}" Description="{DynamicResource desc_StartupDelay_sys}" />
+                    <uc:ToggleButton x:Name="BackgroundApps" Style="{StaticResource ToggleStyle}" State="{Binding [BackgroundApps].State}" TextResource="{DynamicResource tgl_BackgroundApps_sys}" Description="{DynamicResource desc_BackgroundApps_sys}" />
+                    <uc:ToggleButton x:Name="ExeLaunchWarnings" Style="{StaticResource ToggleStyle}" State="{Binding [ExeLaunchWarnings].State}" TextResource="{DynamicResource tgl_ExeLaunchWarnings_sys}" Description="{DynamicResource desc_ExeLaunchWarnings_sys}" />
+                    <uc:ToggleButton x:Name="PowerScheme" Style="{StaticResource ToggleStyle}" State="{Binding [PowerScheme].State}" TextResource="{DynamicResource tgl_PowerScheme_sys}" Description="{DynamicResource desc_PowerScheme_sys}" />
+                    <uc:ToggleButton x:Name="RemovableMediaAutoplay" Style="{StaticResource ToggleStyle}" State="{Binding [RemovableMediaAutoplay].State}" TextResource="{DynamicResource tgl_RemovableMediaAutoplay_sys}" Description="{DynamicResource desc_RemovableMediaAutoplay_sys}" />
+                    <uc:ToggleButton x:Name="SystemDriveDefrag" Style="{StaticResource ToggleStyle}" State="{Binding [SystemDriveDefrag].State}" TextResource="{DynamicResource tgl_SystemDriveDefrag_sys}" Description="{DynamicResource desc_SystemDriveDefrag_sys}" />
+                    <uc:ToggleButton x:Name="QuickAccessHistory" Style="{StaticResource ToggleStyle}" State="{Binding [QuickAccessHistory].State}" TextResource="{DynamicResource tgl_QuickAccessHistory_sys}" Description="{DynamicResource desc_QuickAccessHistory_sys}" />
                     <uc:ToggleButton x:Name="GameMode" Style="{StaticResource ToggleStyle}" State="{Binding [GameMode].State}" TextResource="{DynamicResource tgl_GameMode_sys}" Description="{DynamicResource desc_GameMode_sys}" />
                     <uc:ToggleButton x:Name="GameBar" Style="{StaticResource ToggleStyle}" State="{Binding [GameBar].State}" TextResource="{DynamicResource tgl_GameBar_sys}" Description="{DynamicResource desc_GameBar_sys}" />
-                    <uc:ToggleButton x:Name="BackgroundApps" Style="{StaticResource ToggleStyle}" State="{Binding [BackgroundApps].State}" TextResource="{DynamicResource tgl_BackgroundApps_sys}" Description="{DynamicResource desc_BackgroundApps_sys}" />
-                    <uc:ToggleButton x:Name="ReservedStorage" Style="{StaticResource ToggleStyle}" State="{Binding [ReservedStorage].State}" TextResource="{DynamicResource tgl_ReservedStorage_sys}" Description="{DynamicResource desc_ReservedStorage_sys}" />
-                    <uc:ToggleButton x:Name="DynamicTickHpet" Style="{StaticResource ToggleStyle}" State="{Binding [DynamicTickHpet].State}" TextResource="{DynamicResource tgl_DynamicTickHpet_sys}" Description="{DynamicResource desc_DynamicTickHpet_sys}" />
-                    <uc:ToggleButton x:Name="HealthCheck" Style="{StaticResource ToggleStyle}" State="{Binding [HealthCheck].State}" TextResource="{DynamicResource tgl_HealthCheck_sys}" Description="{DynamicResource desc_HealthCheck_sys}" />
                     <uc:ToggleButton x:Name="InsiderTasks" Style="{StaticResource ToggleStyle}" State="{Binding [InsiderTasks].State}" TextResource="{DynamicResource tgl_InsiderTasks_sys}" Description="{DynamicResource desc_InsiderTasks_sys}" />
-                    <uc:ToggleButton x:Name="SystemDriveDefrag" Style="{StaticResource ToggleStyle}" State="{Binding [SystemDriveDefrag].State}" TextResource="{DynamicResource tgl_SystemDriveDefrag_sys}" Description="{DynamicResource desc_SystemDriveDefrag_sys}" />
-                    <uc:ToggleButton x:Name="PauseWindowsUpdates" Style="{StaticResource ToggleStyle}" State="{Binding [PauseWindowsUpdates].State}" TextResource="{DynamicResource tgl_PauseWindowsUpdates_sys}" Description="{DynamicResource desc_PauseWindowsUpdates_sys}" />
-                    <uc:ToggleButton x:Name="MultiPlaneOverlay" Style="{StaticResource ToggleStyle}" State="{Binding [MultiPlaneOverlay].State}" TextResource="{DynamicResource tgl_MultiPlaneOverlay_sys}" Description="{DynamicResource desc_MultiPlaneOverlay_sys}" />
+                    <uc:ToggleButton x:Name="HealthCheck" Visibility="{Binding Win10FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [HealthCheck].State}" TextResource="{DynamicResource tgl_HealthCheck_sys}" Description="{DynamicResource desc_HealthCheck_sys}" />
                 </uc:FlowPanel>
             </ScrollViewer>
         </Grid>
@@ -87,6 +86,5 @@
         <Grid Grid.Row="1">
             <uc:DescriptionBlock VerticalAlignment="Stretch" x:Name="DescBlock" DefaultText="{DynamicResource default_desc}"/>
         </Grid>
-
     </Grid>
 </UserControl>

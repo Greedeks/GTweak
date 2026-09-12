@@ -47,7 +47,7 @@
     <v:String x:Key="warn_update_noty">程序更新过程中发生错误，请稍后再试</v:String>
     <v:String x:Key="warn_import_noty">此文件不适用于导入</v:String>
     <v:String x:Key="empty_import_noty">此文件为空，无法应用配置</v:String>
-    <v:String x:Key="export_success_noty">Your settings have been exported successfully</v:String>
+    <v:String x:Key="export_success_noty">设置已成功导出</v:String>
     <v:String x:Key="success_onedrive_noty">OneDrive 恢复程序已启动，这需要一些时间</v:String>
     <v:String x:Key="error_onedrive_noty">OneDrive 安装文件丢失，无法执行恢复</v:String>
     <v:String x:Key="warn_wd_noty">请等待进程完成，随后系统将重新启动</v:String>
@@ -101,19 +101,19 @@
     <!--#endregion-->
 
     <!--#region Export Window -->
-    <v:String x:Key="title_export">Exporting tweaks</v:String>
-    <v:String x:Key="label_total_export">Total items:</v:String>
-    <v:String x:Key="title_loading_export">Reading configuration</v:String>
-    <v:String x:Key="title_empty_export">Nothing to export</v:String>
-    <v:String x:Key="desc_empty_export">Apply desired tweaks in the utility. All changes will be kept here until self-removal, and you can export them at any time</v:String>
+    <v:String x:Key="title_export">导出优化设置</v:String>
+    <v:String x:Key="label_total_export">项目总计：</v:String>
+    <v:String x:Key="title_loading_export">正在读取配置</v:String>
+    <v:String x:Key="title_empty_export">没有可导出的内容</v:String>
+    <v:String x:Key="desc_empty_export">在工具中应用所需的优化项。所有更改都会保存在此处，您可以随时导出它们</v:String>
     <!--#endregion-->
 
     <!--#region Import Window -->
     <v:String x:Key="title_import">正在导入配置</v:String>
     <v:String x:Key="file_import">文件</v:String>
-    <v:String x:Key="warn_hint_import">Do not close the window until finished</v:String>
-    <v:String x:Key="done_import">Import completed</v:String>
-    <v:String x:Key="done_hint_import">The window will close automatically</v:String>
+    <v:String x:Key="warn_hint_import">操作完成前请勿关闭窗口</v:String>
+    <v:String x:Key="done_import">导入完成</v:String>
+    <v:String x:Key="done_hint_import">窗口将自动关闭</v:String>
     <!--#endregion-->
 
     <!--#region Update Window -->

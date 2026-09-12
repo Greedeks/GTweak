@@ -595,7 +595,7 @@ namespace GTweak.Modules.Tweaks
                 [Toggle.HealthCheck] = (
                     Check: () =>
                     {
-                        return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHC", "PreviousUninstall", "1", true) ||
+                        return HardwareData.OS.IsWin10 && RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHC", "PreviousUninstall", "1", true) ||
                         RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHealthCheck", "installed", "1", true);
                     },
                     Apply: (state, _) =>

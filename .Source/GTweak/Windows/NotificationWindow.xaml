@@ -5,31 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:GTweak.Windows"
-        mc:Ignorable="d" Icon="/GTweak.ico"
-        Background="Transparent" WindowStyle="None" IsTabStop="False" Focusable="False" SnapsToDevicePixels="True" UseLayoutRounding="True" ShowInTaskbar="False"
-        ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="Manual" KeyboardNavigation.TabNavigation="None"
-        Title="{DynamicResource title_win_noty}" Topmost="True" MinHeight="125" MinWidth="375" MaxHeight="170" MaxWidth="375">
+        mc:Ignorable="d" Icon="/GTweak.ico" Background="Transparent" WindowStyle="None"
+        IsTabStop="False" Focusable="False" SnapsToDevicePixels="True" UseLayoutRounding="True"
+        ShowInTaskbar="False" ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica"
+        SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="Manual"
+        KeyboardNavigation.TabNavigation="None" Title="{DynamicResource title_win_noty}"
+        Topmost="True" MinHeight="125" MinWidth="375" MaxHeight="170" MaxWidth="375">
     <Grid Background="{StaticResource Brush_Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="ButtonClose" Style="{StaticResource ButtonClose}" Width="25" Height="25" Margin="0,4,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ButtonClose_Click"/>
-            </StackPanel>
-
-            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left" LastChildFill="True">
-                <TextBlock x:Name="TitleName" Text="GTweak" FontSize="15" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="15,0,0,0" TextTrimming="CharacterEllipsis" KeyboardNavigation.IsTabStop="False">
-                    <TextBlock.CacheMode>
-                        <BitmapCache RenderAtScale="2" EnableClearType="True"/>
-                    </TextBlock.CacheMode>
-                    <TextBlock.Effect>
-                        <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}" />
-                    </TextBlock.Effect>
-                </TextBlock>
-            </DockPanel>
+            <TextBlock x:Name="TitleName" Text="GTweak" FontSize="15" FontFamily="{StaticResource Jura}" Foreground="{StaticResource Brush_Accent}" VerticalAlignment="Center" Margin="15,0,0,0" TextTrimming="CharacterEllipsis" KeyboardNavigation.IsTabStop="False">
+                <TextBlock.CacheMode>
+                    <BitmapCache RenderAtScale="2" EnableClearType="True"/>
+                </TextBlock.CacheMode>
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="0" Opacity="0.7" Color="{StaticResource Color_Shadow}"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Button x:Name="ButtonClose" Style="{StaticResource ButtonClose}" Width="25" Height="25" Margin="0,4,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ButtonClose_Click"/>
         </Grid>
 
         <Grid Grid.Row="1" Background="Transparent" PreviewMouseLeftButtonUp="Grid_PreviewMouseLeftButtonUp">
@@ -38,38 +36,34 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
-                <Image Width="53" Height="53" Source="/GTweak.ico" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="20,0,0,15" />
-            </Grid>
+            <Image Grid.Column="0" Width="53" Height="53" Source="/GTweak.ico" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,10,10"/>
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" Margin="15,10,0,0" HorizontalAlignment="Left">
-                    <TextBlock Text="{Binding ElementName=Header, Path=Text}" Foreground="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" Height="auto" FontFamily="{StaticResource Jura}" FontSize="14" TextWrapping="Wrap" TextAlignment="Left" FontStretch="Medium">
+                <Grid Grid.Row="0" HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding ElementName=Header, Path=Text}" Foreground="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" FontFamily="{StaticResource Jura}" FontSize="15" TextWrapping="Wrap" TextAlignment="Left" FontStretch="Medium">
                         <TextBlock.RenderTransform>
                             <TranslateTransform X="3" Y="3"/>
                         </TextBlock.RenderTransform>
                     </TextBlock>
-                    
-                    <TextBlock x:Name="Header" Text="Title" Foreground="{StaticResource Brush_Highlighted}" Height="auto" FontFamily="{StaticResource Jura}" FontSize="15"  TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium"/>
+                    <TextBlock x:Name="Header" Text="Title" Foreground="{StaticResource Brush_Highlighted}" FontFamily="{StaticResource Jura}" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium"/>
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="15,0,0,3" HorizontalAlignment="Left">
-                    <TextBlock Text="{Binding ElementName=MessageBody, Path=Text}" Foreground="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" Height="auto" FontFamily="{StaticResource Jura}" FontSize="14" TextWrapping="Wrap" TextAlignment="Left" FontStretch="Medium">
+                <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="0,2,0,0">
+                    <TextBlock Text="{Binding ElementName=MessageBody, Path=Text}" Foreground="{StaticResource Brush_ShadowOverlay}" Opacity="0.7" FontFamily="{StaticResource Jura}" FontSize="14" TextWrapping="Wrap" TextAlignment="Left" FontStretch="Medium">
                         <TextBlock.RenderTransform>
                             <TranslateTransform X="3" Y="3"/>
                         </TextBlock.RenderTransform>
                     </TextBlock>
-
-                    <TextBlock x:Name="MessageBody" Margin="0,0,5,0" Text="Text" Foreground="{StaticResource Brush_TextBlock_Inactivity}" Height="auto" FontFamily="{StaticResource Jura}" FontSize="14"  TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium" MaxWidth="285"/>
+                    <TextBlock x:Name="MessageBody" Text="Text" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium" MaxWidth="265"/>
                 </Grid>
             </Grid>
-
-            <ProgressBar x:Name="ProgressTimer" Grid.ColumnSpan="2" Maximum="100" Value="0" Foreground="{StaticResource Brush_Accent}" Height="3" Width="375" HorizontalAlignment="Center" VerticalAlignment="Bottom" Panel.ZIndex="10"/>
         </Grid>
+
+        <ProgressBar x:Name="ProgressTimer" Grid.Row="2" Maximum="100" Value="0" Foreground="{StaticResource Brush_Accent}" Height="3" HorizontalAlignment="Stretch"/>
     </Grid>
 </ui:FluentWindow>

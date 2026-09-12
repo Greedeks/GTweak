@@ -12,6 +12,7 @@ namespace GTweak.Core.ViewModel
     {
         public Visibility RealtekSupport => HardwareData.VendorDetection.Realtek ? Visibility.Visible : Visibility.Collapsed;
         public Visibility BluetoothSupport => BluetoothManager.IsAvailable ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility Win10FeatureOnly => HardwareData.OS.IsWin10 ? Visibility.Visible : Visibility.Collapsed;
 
         protected override IReadOnlyDictionary<string, object> GetControlStates() => SystemTweaks.ControlStates;
 
