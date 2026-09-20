@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class ExportItem : UserControl
+    public sealed partial class ExportItem : UserControl
     {
         public static readonly DependencyProperty LabelProperty =
              DependencyProperty.Register(nameof(Label), typeof(string), typeof(ExportItem), new PropertyMetadata(null));

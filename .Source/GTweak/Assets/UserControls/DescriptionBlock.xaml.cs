@@ -12,7 +12,7 @@ using GTweak.Modules.Common;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class DescriptionBlock
+    public sealed partial class DescriptionBlock
     {
         private CancellationTokenSource _scrollCts;
         private string _currentDefaultText = string.Empty;
@@ -71,29 +71,31 @@ namespace GTweak.Assets.UserControls
                 string safeValue = value ?? string.Empty;
                 _currentDefaultText = safeValue;
 
-                _scrollCts?.Cancel();
+                CancellationTokenSource cts = new CancellationTokenSource();
+                Interlocked.Exchange(ref _scrollCts, cts)?.Cancel();
 
-                if (Scroller != null && FunctionDescription != null)
+                if (Scroller == null || FunctionDescription == null)
                 {
-                    UpdateFlowDirection();
-
-                    Scroller.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, null);
-                    Scroller.ScrollToVerticalOffset(0);
-                    Scroller.UpdateLayout();
-
-                    StatusPanel.BeginAnimation(OpacityProperty, null);
-                    StatusPanel.Opacity = 0;
-
-                    TimeSpan duration = safeValue.Length <= 50 ? TimeSpan.FromMilliseconds(200) : safeValue.Length <= 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
-
-                    Caret.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(1.0, 0.0, 0.3, reverse: true));
-
-                    FunctionDescription.Text = string.Empty;
-                    TypewriterAnimation.Create(safeValue, FunctionDescription, duration);
-
-                    _scrollCts = new CancellationTokenSource();
-                    _ = HandleStatusAndScrollAsync(safeValue, duration, _scrollCts.Token);
+                    return;
                 }
+
+                UpdateFlowDirection();
+
+                Scroller.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, null);
+                Scroller.ScrollToVerticalOffset(0);
+                Scroller.UpdateLayout();
+
+                StatusPanel.BeginAnimation(OpacityProperty, null);
+                StatusPanel.Opacity = 0;
+
+                TimeSpan duration = safeValue.Length <= 50 ? TimeSpan.FromMilliseconds(200) : safeValue.Length <= 200 ? TimeSpan.FromMilliseconds(400) : TimeSpan.FromMilliseconds(550);
+
+                Caret.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(1.0, 0.0, 0.3, reverse: true));
+
+                FunctionDescription.Text = string.Empty;
+                TypewriterAnimation.Create(safeValue, FunctionDescription, duration);
+
+                _ = HandleStatusAndScrollAsync(safeValue, duration, cts.Token);
             }
         }
 
@@ -103,6 +105,7 @@ namespace GTweak.Assets.UserControls
 
             Loaded += delegate
             {
+                App.LanguageChanged -= OnLanguageChanged;
                 App.LanguageChanged += OnLanguageChanged;
 
                 if (FunctionDescription != null)
@@ -116,93 +119,92 @@ namespace GTweak.Assets.UserControls
             Unloaded += delegate
             {
                 App.LanguageChanged -= OnLanguageChanged;
-                _scrollCts?.Cancel();
+                Interlocked.Exchange(ref _scrollCts, null)?.Cancel();
             };
         }
 
         private void OnLanguageChanged(object sender, EventArgs e)
         {
-            _scrollCts?.Cancel();
-            if (FunctionDescription != null)
+            Interlocked.Exchange(ref _scrollCts, null)?.Cancel();
+
+            if (FunctionDescription == null)
             {
-                UpdateFlowDirection();
-                _currentDefaultText = DefaultText;
-                FunctionDescription.Text = string.Empty;
-                TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.Zero);
+                return;
             }
+
+            UpdateFlowDirection();
+            _currentDefaultText = DefaultText;
+            FunctionDescription.Text = string.Empty;
+            TypewriterAnimation.Create(DefaultText, FunctionDescription, TimeSpan.Zero);
         }
 
         private void UpdateFlowDirection()
         {
             if (FunctionDescription != null && !DesignerProperties.GetIsInDesignMode(new DependencyObject()))
             {
-                try
-                {
-                    FunctionDescription.FlowDirection = CultureInfo.GetCultureInfo(GlobalOptions.Language).TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
-                }
+                try { FunctionDescription.FlowDirection = CultureInfo.GetCultureInfo(GlobalOptions.Language).TextInfo.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight; }
                 catch (CultureNotFoundException) { FunctionDescription.FlowDirection = FlowDirection.LeftToRight; }
             }
         }
 
         private async Task HandleStatusAndScrollAsync(string text, TimeSpan typewriterDuration, CancellationToken token)
         {
-            await Task.Delay(typewriterDuration, token);
-
-            if (!token.IsCancellationRequested)
+            try
             {
+                await Task.Delay(typewriterDuration, token);
+
                 await Dispatcher.InvokeAsync(() =>
                 {
-                    if (!token.IsCancellationRequested)
+                    if (token.IsCancellationRequested)
                     {
-                        Caret.BeginAnimation(OpacityProperty, null);
-                        Caret.Opacity = 1;
+                        return;
+                    }
 
-                        if (TargetState != null && text != DefaultText)
-                        {
-                            StatusPanel.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0.0, 1.0, 0.3));
-                        }
+                    Caret.BeginAnimation(OpacityProperty, null);
+                    Caret.Opacity = 1;
+
+                    if (TargetState != null && text != DefaultText)
+                    {
+                        StatusPanel.BeginAnimation(OpacityProperty, AnimationFactory.CreateIn(0.0, 1.0, 0.3));
                     }
                 });
 
                 await Task.Delay(1500, token);
 
-                if (text != DefaultText && !token.IsCancellationRequested)
+                if (text == DefaultText)
                 {
-                    await Dispatcher.InvokeAsync(() =>
-                    {
-                        if (FunctionDescription != null && Scroller != null)
-                        {
-                            FunctionDescription.UpdateLayout();
-                            Scroller.UpdateLayout();
-                        }
-                    });
-
-                    if (Scroller != null && !token.IsCancellationRequested)
-                    {
-                        double maxOffset = Scroller.ScrollableHeight;
-                        if (maxOffset > 0)
-                        {
-                            double durationSeconds = Math.Min(6.0, (maxOffset / 20.0) + 0.8);
-
-                            await Dispatcher.InvokeAsync(() =>
-                            {
-                                DoubleAnimation inertiaAnimation = new DoubleAnimation(0, maxOffset, TimeSpan.FromSeconds(durationSeconds))
-                                {
-                                    EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseOut }
-                                };
-
-                                Scroller?.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, inertiaAnimation);
-                            });
-
-                            try
-                            {
-                                await Task.Delay(TimeSpan.FromSeconds(durationSeconds), token);
-                            }
-                            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-                        }
-                    }
+                    return;
                 }
+
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    FunctionDescription?.UpdateLayout();
+                    Scroller?.UpdateLayout();
+                });
+
+                double maxOffset = 0;
+                await Dispatcher.InvokeAsync(() => maxOffset = Scroller?.ScrollableHeight ?? 0);
+
+                if (maxOffset <= 0)
+                {
+                    return;
+                }
+
+                double durationSeconds = Math.Min(6.0, maxOffset / 20.0 + 0.8);
+
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    if (token.IsCancellationRequested)
+                    {
+                        return;
+                    }
+
+                    Scroller.BeginAnimation(ScrollViewerBehavior.VerticalOffsetProperty, new DoubleAnimation(0, maxOffset, TimeSpan.FromSeconds(durationSeconds)) { EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseOut } });
+                });
+
+                await Task.Delay(TimeSpan.FromSeconds(durationSeconds), token);
             }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
     }
 }

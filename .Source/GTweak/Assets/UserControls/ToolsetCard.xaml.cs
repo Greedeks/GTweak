@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class ToolsetCard : UserControl
+    public sealed partial class ToolsetCard : UserControl
     {
         public static readonly DependencyProperty AppIconProperty =
             DependencyProperty.Register(nameof(AppIcon), typeof(ImageSource), typeof(ToolsetCard), new PropertyMetadata(null));

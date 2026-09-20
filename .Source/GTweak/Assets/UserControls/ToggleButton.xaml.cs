@@ -9,7 +9,7 @@ using GTweak.Animations;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class ToggleButton
+    public sealed partial class ToggleButton
     {
         /// <summary>
         /// Custom Event - Processing keypresses only for the button and not for the text

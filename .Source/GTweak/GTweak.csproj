@@ -159,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\UserControls\TaskbarPositionPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Languages\**\*.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -171,6 +175,9 @@
     </ApplicationDefinition>
     <Compile Include="Assets\UserControls\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\UserControls\TaskbarPositionPicker.xaml.cs">
+      <DependentUpon>TaskbarPositionPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Items\ExportCheckItem.cs" />
     <Compile Include="Core\DataContracts\ExportChecklistValue.cs" />

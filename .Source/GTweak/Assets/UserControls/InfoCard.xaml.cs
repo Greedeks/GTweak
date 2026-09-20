@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class InfoCard : UserControl
+    public sealed partial class InfoCard : UserControl
     {
         internal static readonly DependencyProperty IconStyleProperty =
             DependencyProperty.Register(nameof(IconStyle), typeof(Style), typeof(InfoCard), new PropertyMetadata(null, OnIconStyleChanged));

@@ -6,7 +6,7 @@ using GTweak.Modules.Common;
 
 namespace GTweak.Assets.UserControls
 {
-    internal sealed class FlowPanel : Panel
+    public sealed class FlowPanel : Panel
     {
         private sealed class FlowItemGroup
         {

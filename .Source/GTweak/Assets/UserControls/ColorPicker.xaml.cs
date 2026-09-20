@@ -12,7 +12,7 @@ using GTweak.Animations;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class ColorPicker
+    public sealed partial class ColorPicker
     {
         internal event EventHandler ColorPicked;
 

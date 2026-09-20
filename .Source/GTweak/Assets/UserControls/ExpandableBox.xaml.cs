@@ -13,7 +13,7 @@ using GTweak.Animations;
 namespace GTweak.Assets.UserControls
 {
     [ContentProperty("Items")]
-    public partial class ExpandableBox : UserControl
+    public sealed partial class ExpandableBox : UserControl
     {
         internal event EventHandler Closed;
 

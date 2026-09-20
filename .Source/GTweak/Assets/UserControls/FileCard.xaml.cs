@@ -6,7 +6,7 @@ using GTweak.Animations;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class FileCard
+    public sealed partial class FileCard
     {
         public static readonly DependencyProperty FileNameProperty =
             DependencyProperty.Register(nameof(FileName), typeof(string), typeof(FileCard), new PropertyMetadata(string.Empty));

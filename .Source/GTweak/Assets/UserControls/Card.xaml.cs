@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace GTweak.Assets.UserControls
 {
-    public partial class Card
+    public sealed partial class Card
     {
         internal event EventHandler ClickButton, ClickButtonSecondary;
 
