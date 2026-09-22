@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using GTweak.Modules.Helpers;
 
 namespace GTweak.Modules.Common
 {
@@ -11,6 +12,13 @@ namespace GTweak.Modules.Common
         {
             internal const string SubKey = @"Software\GTweak";
             internal static readonly string BaseKey = @$"HKEY_CURRENT_USER\{SubKey}";
+
+            internal static readonly (string Key, string Value)[] OneDriveSetupKeys =
+            {
+                (@"HKEY_CURRENT_USER\Software\Microsoft\OneDrive", "OneDriveTrigger"),
+                (@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe", "UninstallString"),
+                (@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe", "UninstallString"),
+            };
         }
 
         internal static class Links
@@ -53,7 +61,7 @@ namespace GTweak.Modules.Common
 
                 internal static string SourceForgeBest(string projectName) => $"https://sourceforge.net/projects/{projectName}/best_release.json";
 
-                internal static string SourceForgeRss(string projectName) => $"https://sourceforge.net/projects/{projectName}/rss?path=/";
+                internal static string SourceForgeRss(string projectName) => $"https://sourceforge.net/projects/{projectName}/rss?root=/";
 
                 internal static string SourceForgeFile(string projectName, string filePath) => $"https://downloads.sourceforge.net/project/{projectName}/{filePath}";
 
@@ -301,7 +309,47 @@ namespace GTweak.Modules.Common
 
             internal static readonly string Explorer = FindExecutablePath("explorer.exe");
 
-            internal static readonly string OneDriveSetup = FindExecutablePath("onedrivesetup.exe");
+            internal static string OneDriveSetup
+            {
+                get
+                {
+                    foreach (var (key, value) in Registry.OneDriveSetupKeys)
+                    {
+                        string path = RegistryHelper.GetValue<string>(key, value, null);
+                        if (string.IsNullOrEmpty(path))
+                        {
+                            continue;
+                        }
+
+                        path = value == "OneDriveTrigger" ? Path.Combine(Path.GetDirectoryName(path), "OneDriveSetup.exe") : path.Split(new[] { " /" }, StringSplitOptions.None)[0].Trim('"');
+
+                        if (File.Exists(path))
+                        {
+                            return path;
+                        }
+                    }
+
+                    foreach (string instance in OneDriveInstances)
+                    {
+                        string root = Path.GetDirectoryName(instance);
+                        if (!Directory.Exists(root))
+                        {
+                            continue;
+                        }
+
+                        foreach (string dir in Directory.GetDirectories(root))
+                        {
+                            string setup = Path.Combine(dir, "OneDriveSetup.exe");
+                            if (File.Exists(setup))
+                            {
+                                return setup;
+                            }
+                        }
+                    }
+
+                    return string.Empty;
+                }
+            }
 
             internal static string EdgeSetup
             {

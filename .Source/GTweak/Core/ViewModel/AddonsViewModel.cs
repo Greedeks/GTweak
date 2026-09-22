@@ -112,7 +112,7 @@ namespace GTweak.Core.ViewModel
                         break;
                 }
 
-                Task.Run(() => { CommandExecutor.RunProcessVisible(fileName, CommandExecutor.CleanCommand(arguments), addon.RequiresElevation); });
+                _ = Task.Run(() => CommandExecutor.InvokeRunVisibleProcess(fileName, CommandExecutor.CleanCommand(arguments), addon.RequiresElevation));
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }

@@ -68,7 +68,7 @@ namespace GTweak.Modules.Helpers
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
-        internal static async void RunProcessVisible(string fileName, string arguments = "", bool isElevationRequired = false)
+        internal static async Task InvokeRunVisibleProcess(string fileName, string arguments = "", bool isElevationRequired = false)
         {
             if (isElevationRequired)
             {
@@ -87,7 +87,11 @@ namespace GTweak.Modules.Helpers
             };
 
             using Process process = new Process { StartInfo = startInfo };
-            try { process.Start(); }
+            try
+            {
+                process.Start();
+                await process.WaitForExitAsync().ConfigureAwait(false);
+            }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 

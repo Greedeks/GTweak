@@ -87,7 +87,7 @@ namespace GTweak.Modules.Tweaks
 
         internal static async Task RestoreOneDriveFolder()
         {
-            await CommandExecutor.InvokeRunCommand($@"/c {PathTargets.Executable.OneDriveSetup}").ConfigureAwait(false);
+            await CommandExecutor.InvokeRunVisibleProcess(PathTargets.Executable.OneDriveSetup).ConfigureAwait(false);
 
             SetTaskState(true, oneDriveTask);
 
@@ -99,16 +99,10 @@ namespace GTweak.Modules.Tweaks
         {
             if (packageName == "OneDrive")
             {
-                await CommandExecutor.InvokeRunCommand($@"/c taskkill /f /im OneDrive.exe & {PathTargets.Executable.OneDriveSetup} /uninstall").ConfigureAwait(false);
-
-                RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-                RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
-
-                SetTaskState(false, oneDriveTask);
-
-                CommandExecutor.RunCommand($@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive & 
-                rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {PathTargets.Folders.SystemDrive}OneDriveTemp{(_isLocalAccount ? @" & rd /s /q %userprofile%\OneDrive" : "")}");
-
+                await CommandExecutor.InvokeRunCommand($@"/c taskkill /f /im OneDrive.exe & taskkill /f /im FileCoAuth.exe").ConfigureAwait(false);
+                await Task.Run(() => CommandExecutor.RunCommandAsTrustedInstaller($@"/c ""{PathTargets.Executable.OneDriveSetup}"" /uninstall /allusers")).ConfigureAwait(false);
+                await Task.Delay(3000).ConfigureAwait(false);
+                PostRemoveOneDrive();
                 return;
             }
 
@@ -183,6 +177,17 @@ namespace GTweak.Modules.Tweaks
                 default:
                     break;
             }
+        }
+
+        private static void PostRemoveOneDrive()
+        {
+            RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+            RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+
+            SetTaskState(false, oneDriveTask);
+
+            CommandExecutor.RunCommand($@"/c rd /s /q %userprofile%\AppData\Local\Microsoft\OneDrive & rd /s /q %userprofile%\AppData\Local\OneDrive & 
+            rd /s /q ""%allusersprofile%\Microsoft OneDrive"" & rd /s /q {PathTargets.Folders.SystemDrive}OneDriveTemp{(_isLocalAccount ? @" & rd /s /q %userprofile%\OneDrive" : "")}");
         }
 
         private static void PostRemoveWidgets() => RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
