@@ -1,10 +1,10 @@
 namespace GTweak.Core.DataContracts
 {
-    internal sealed class ExportSliderValue
+    internal sealed class ExportValueEntry
     {
         public uint Value { get; }
 
-        public ExportSliderValue(uint value)
+        public ExportValueEntry(uint value)
         {
             Value = value;
         }

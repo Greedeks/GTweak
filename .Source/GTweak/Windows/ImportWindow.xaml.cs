@@ -174,7 +174,7 @@ namespace GTweak.Windows
                     }
                     else if (section == JsonConfigManager.Section.Interface)
                     {
-                        if (Enum.TryParse<InterfaceTweaks.Color>(tweak, out _))
+                        if (Enum.TryParse<InterfaceTweaks.Picker>(tweak, out _))
                         {
                             _intfTweaks.Apply(tweak, value);
                         }

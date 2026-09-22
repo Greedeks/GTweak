@@ -44,7 +44,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type dc:ExportSliderValue}">
+    <DataTemplate DataType="{x:Type dc:ExportValueEntry}">
         <Grid VerticalAlignment="Center">
             <Border CornerRadius="5" Opacity="0.4" Background="{StaticResource Brush_ShadowOverlay}" IsHitTestVisible="False">
                 <Border.RenderTransform>

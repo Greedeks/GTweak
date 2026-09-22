@@ -24,14 +24,16 @@ namespace GTweak.Core.ViewModel
         private bool _isLoading = true;
         private int _totalCount;
 
+        private static readonly Dictionary<(JsonConfigManager.Section Section, string PropertyName), (string Suffix, string EnumName)> _propertyMeta = new Dictionary<(JsonConfigManager.Section, string), (string, string)>();
         private static readonly Dictionary<string, string> _checkboxGroups = new Dictionary<string, string>();
-        private static readonly Dictionary<JsonConfigManager.Section, string> _suffixes = new Dictionary<JsonConfigManager.Section, string>
+
+        private static readonly Dictionary<JsonConfigManager.Section, (Type TweaksType, string Suffix)> _sections = new Dictionary<JsonConfigManager.Section, (Type, string)>
         {
-            [JsonConfigManager.Section.Confidentiality] = "conf",
-            [JsonConfigManager.Section.Interface] = "intf",
-            [JsonConfigManager.Section.Packages] = "pkg",
-            [JsonConfigManager.Section.Services] = "svc",
-            [JsonConfigManager.Section.System] = "sys"
+            [JsonConfigManager.Section.Confidentiality] = (typeof(ConfidentialityTweaks), "conf"),
+            [JsonConfigManager.Section.Interface] = (typeof(InterfaceTweaks), "intf"),
+            [JsonConfigManager.Section.Services] = (typeof(ServicesTweaks), "svc"),
+            [JsonConfigManager.Section.System] = (typeof(SystemTweaks), "sys"),
+            [JsonConfigManager.Section.Packages] = (null, "pkg")
         };
 
         public ExportSectionModel Confidentiality { get; }
@@ -70,24 +72,44 @@ namespace GTweak.Core.ViewModel
 
         static ExportViewModel()
         {
-            string currentGroup = string.Empty;
-
-            FieldInfo[] fields = typeof(InterfaceTweaks.Checkbox).GetFields(BindingFlags.Public | BindingFlags.Static);
-            Array.Sort(fields, (a, b) => a.MetadataToken.CompareTo(b.MetadataToken));
-
-            for (int i = 0; i < fields.Length; i++)
+            foreach (var entry in _sections)
             {
-                FieldInfo field = fields[i];
-                GroupAttribute groupAttr = field.GetCustomAttribute<GroupAttribute>();
+                JsonConfigManager.Section section = entry.Key;
+                Type tweaksClass = entry.Value.TweaksType;
+                string suffix = entry.Value.Suffix;
 
-                if (groupAttr != null)
+                if (tweaksClass == null)
                 {
-                    currentGroup = groupAttr.Key;
+                    continue;
                 }
 
-                if (!string.IsNullOrEmpty(currentGroup))
+                Type[] nestedTypes = tweaksClass.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Public);
+
+                foreach (Type enumType in nestedTypes)
                 {
-                    _checkboxGroups[field.Name] = currentGroup;
+                    if (enumType.IsEnum)
+                    {
+                        FieldInfo[] fields = enumType.GetFields(BindingFlags.Public | BindingFlags.Static);
+                        Array.Sort(fields, (firstField, secondField) => firstField.MetadataToken.CompareTo(secondField.MetadataToken));
+
+                        string currentGroup = string.Empty;
+
+                        foreach (FieldInfo field in fields)
+                        {
+                            _propertyMeta[(section, field.Name)] = (suffix, enumType.Name);
+
+                            GroupAttribute groupAttr = field.GetCustomAttribute<GroupAttribute>();
+                            if (groupAttr != null)
+                            {
+                                currentGroup = groupAttr.Key;
+                            }
+
+                            if (!string.IsNullOrEmpty(currentGroup))
+                            {
+                                _checkboxGroups[field.Name] = currentGroup;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -142,15 +164,13 @@ namespace GTweak.Core.ViewModel
                 return;
             }
 
-            string suffix = _suffixes.TryGetValue(section.Section, out var s) ? s : string.Empty;
-
             foreach (JProperty property in sec.Properties())
             {
-                ParseProperty(section, property, suffix);
+                ParseProperty(section, property);
             }
         }
 
-        private void ParseProperty(ExportSectionModel section, JProperty property, string suffix)
+        private void ParseProperty(ExportSectionModel section, JProperty property)
         {
             if (section.Section == JsonConfigManager.Section.Packages)
             {
@@ -170,8 +190,7 @@ namespace GTweak.Core.ViewModel
 
                 ExportPackagesValue list = (ExportPackagesValue)entryItem.Value;
                 bool canRemove = !(property.Value is JValue val) || val.Type != JTokenType.Boolean || (bool)val;
-                ImageSource icon = Application.Current.TryFindResource($"Img_{property.Name}") as ImageSource;
-                ExportPackageItem package = new ExportPackageItem(Application.Current.TryFindResource($"{property.Name}_{suffix}") as string ?? property.Name, icon, canRemove);
+                ExportPackageItem package = new ExportPackageItem(ResolveTitle(property.Name, _sections[section.Section].Suffix), ResolveIcon(property.Name), canRemove);
                 package.RemoveCommand = new RelayCommand(_ =>
                 {
                     if (_сonfig?[section.Section.ToString()] is JObject sec)
@@ -195,6 +214,11 @@ namespace GTweak.Core.ViewModel
                 return;
             }
 
+            if (!_propertyMeta.TryGetValue((section.Section, property.Name), out var meta))
+            {
+                return;
+            }
+
             if (_checkboxGroups.TryGetValue(property.Name, out string groupKey))
             {
                 ExportEntryItem entryItem = null;
@@ -210,7 +234,7 @@ namespace GTweak.Core.ViewModel
 
                 if (entryItem == null)
                 {
-                    entryItem = new ExportEntryItem(groupKey, ResolveTitle("exblock", groupKey, suffix), new ExportChecklistValue(new ObservableCollection<ExportCheckItem>()))
+                    entryItem = new ExportEntryItem(groupKey, ResolveTitle(groupKey, meta.Suffix), new ExportChecklistValue(new ObservableCollection<ExportCheckItem>()))
                     {
                         RemoveCommand = new RelayCommand(_ =>
                         {
@@ -236,7 +260,7 @@ namespace GTweak.Core.ViewModel
                 }
 
                 ExportChecklistValue checklist = (ExportChecklistValue)entryItem.Value;
-                ExportCheckItem item = new ExportCheckItem(ResolveTitle("chk", property.Name, suffix), property.Value.ToObject<bool>());
+                ExportCheckItem item = new ExportCheckItem(ResolveTitle(property.Name, meta.Suffix), property.Value.ToObject<bool>());
                 item.RemoveCommand = new RelayCommand(_ =>
                 {
                     if (_сonfig?[section.Section.ToString()] is JObject sec)
@@ -259,29 +283,30 @@ namespace GTweak.Core.ViewModel
                 return;
             }
 
-            if (property.Value.Type == JTokenType.String && TryParseRgb(property.Value.ToString(), out byte r, out byte g, out byte b))
-            {
-                CreateItem(section, "color", suffix, property.Name, new ExportColorValue(r, g, b));
-                return;
-            }
+            object exportValue = CreateExportValue(meta.EnumName, property.Value);
 
-            if (property.Value.Type == JTokenType.Integer)
+            if (exportValue != null)
             {
-                CreateItem(section, "slider", suffix, property.Name, new ExportSliderValue(property.Value.ToObject<uint>()));
-                return;
-            }
-
-            if (property.Value.Type == JTokenType.Boolean)
-            {
-                CreateItem(section, "tgl", suffix, property.Name, new ExportToggleValue(property.Value.ToObject<bool>()));
-                return;
+                CreateItem(section, meta.Suffix, property.Name, exportValue);
             }
         }
 
-        private bool CreateItem(ExportSectionModel section, string prefix, string suffix, string key, object value)
+        private static object CreateExportValue(string enumName, JToken value)
+        {
+            return enumName switch
+            {
+                "Toggle" => new ExportToggleValue(value.ToObject<bool>()),
+                "Slider" => new ExportValueEntry(value.ToObject<uint>()),
+                "Picker" when value.Type == JTokenType.String && TryParseRgb(value.ToString(), out byte r, out byte g, out byte b) => new ExportColorValue(r, g, b),
+                "Picker" => new ExportValueEntry(value.ToObject<uint>()),
+                _ => null,
+            };
+        }
+
+        private bool CreateItem(ExportSectionModel section, string suffix, string key, object value)
         {
             ExportEntryItem item = null;
-            item = new ExportEntryItem(key, ResolveTitle(prefix, key, suffix), value)
+            item = new ExportEntryItem(key, ResolveTitle(key, suffix), value)
             {
                 RemoveCommand = new RelayCommand(_ =>
                 {
@@ -309,25 +334,22 @@ namespace GTweak.Core.ViewModel
 
         private int CalculateTotalCount() => Confidentiality.Count + Interface.Count + Packages.Count + Services.Count + System.Count;
 
-        private static string ResolveTitle(string prefix, string name, string suffix)
+        private static string ResolveTitle(string name, string suffix)
         {
-            if (!string.IsNullOrEmpty(suffix))
+            if (!string.IsNullOrEmpty(suffix) && Application.Current.TryFindResource($"{name}_{suffix}") is string localized)
             {
-                string keyWithSuffix = $"{prefix}_{name}_{suffix}";
-                if (Application.Current.TryFindResource(keyWithSuffix) is string localized)
-                {
-                    return localized;
-                }
+                return localized;
             }
 
-            string key = $"{prefix}_{name}";
-            if (Application.Current.TryFindResource(key) is string fallback)
+            if (Application.Current.TryFindResource(name) is string fallback)
             {
                 return fallback;
             }
 
             return name;
         }
+
+        private static ImageSource ResolveIcon(string name) => Application.Current.TryFindResource($"Img_{name}") as ImageSource;
 
         private static bool TryParseRgb(string raw, out byte r, out byte g, out byte b)
         {

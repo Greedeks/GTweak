@@ -198,7 +198,7 @@
     <Compile Include="Assets\UserControls\ExportItem.xaml.cs">
       <DependentUpon>ExportItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\DataContracts\ExportSliderValue.cs" />
+    <Compile Include="Core\DataContracts\ExportValueEntry.cs" />
     <Compile Include="Assets\UserControls\FlowPanel.cs" />
     <Compile Include="Assets\UserControls\FileCard.xaml.cs">
       <DependentUpon>FileCard.xaml</DependentUpon>
