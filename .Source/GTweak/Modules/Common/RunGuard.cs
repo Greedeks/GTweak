@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,8 +13,21 @@ namespace GTweak.Modules.Common
 {
     internal static class RunGuard
     {
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetCurrentProcess();
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool CloseHandle(IntPtr handle);
+
+        [DllImport("advapi32.dll", SetLastError = true)]
+        private static extern bool OpenProcessToken(IntPtr processHandle, uint desiredAccess, out IntPtr tokenHandle);
+
+        [DllImport("advapi32.dll", SetLastError = true)]
+        private static extern bool GetTokenInformation(IntPtr tokenHandle, int tokenInfoClass, ref int tokenInformation, int tokenInfoLength, out int returnLength);
+
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr handle, int cmdShow);
+
         [DllImport("user32.dll")]
         private static extern int SetForegroundWindow(IntPtr handle);
 
@@ -59,15 +71,29 @@ namespace GTweak.Modules.Common
 
         internal static void CheckingAdministratorPrivileges()
         {
-            using WindowsIdentity identity = WindowsIdentity.GetCurrent();
-
-            if (new WindowsPrincipal(identity).IsInRole(WindowsBuiltInRole.Administrator))
+            IntPtr token = IntPtr.Zero;
+            try
             {
-                return;
+                if (OpenProcessToken(GetCurrentProcess(), 0x0008, out token))
+                {
+                    int elevation = 0;
+                    if (GetTokenInformation(token, 20, ref elevation, sizeof(int), out _) && elevation != 0)
+                    {
+                        return;
+                    }
+                }
+            }
+            finally
+            {
+                if (token != IntPtr.Zero)
+                {
+                    CloseHandle(token);
+                }
             }
 
             new MessageWindow(MessageWindow.MessageWindowType.NotAdmin).ShowDialog();
         }
+
         internal static void CheckingDefenderExclusions() => CommandExecutor.RunCommandAsTrustedInstaller($@"$ErrorActionPreference = 'Stop'; $target = '{GlobalOptions.CurrentLocation}'; try {{ $mp = Get-MpPreference; if ($mp.ExclusionProcess -notcontains $target) {{ Add-MpPreference -ExclusionProcess $target }}; if ($mp.ExclusionPath -notcontains $target) {{ Add-MpPreference -ExclusionPath $target }} }} catch {{}}", true);
     }
 }

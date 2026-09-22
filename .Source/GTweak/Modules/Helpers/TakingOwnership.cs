@@ -106,8 +106,7 @@ namespace GTweak.Modules.Helpers
         }
 
         private const string SE_TAKE_OWNERSHIP_NAME = "SeTakeOwnershipPrivilege";
-        private static SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY =
-            new SID_IDENTIFIER_AUTHORITY() { Value = new byte[] { 0, 0, 0, 0, 0, 5 } };
+        private static SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY = new SID_IDENTIFIER_AUTHORITY() { Value = new byte[] { 0, 0, 0, 0, 0, 5 } };
 
         private const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
         private const int NO_INHERITANCE = 0x0;
@@ -156,31 +155,13 @@ namespace GTweak.Modules.Helpers
 
         [DllImport("advapi32.dll", EntryPoint = "AdjustTokenPrivileges")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool AdjustTokenPrivileges([In()] IntPtr TokenHandle, [MarshalAs(UnmanagedType.Bool)] bool DisableAllPrivileges,
-            [In()]
-            ref TOKEN_PRIVILEGES NewState,
-            uint BufferLength,
-            IntPtr PreviousState,
-            IntPtr ReturnLength);
+        private static extern bool AdjustTokenPrivileges([In()] IntPtr TokenHandle, [MarshalAs(UnmanagedType.Bool)] bool DisableAllPrivileges, [In()] ref TOKEN_PRIVILEGES NewState, uint BufferLength, IntPtr PreviousState, IntPtr ReturnLength);
 
         [DllImport("advapi32.dll", CharSet = CharSet.Auto)]
-        private static extern int SetNamedSecurityInfo(
-            string pObjectName,
-            SE_OBJECT_TYPE ObjectType,
-            SECURITY_INFORMATION SecurityInfo,
-            IntPtr psidOwner,
-            IntPtr psidGroup,
-            IntPtr pDacl,
-            IntPtr pSacl);
+        private static extern int SetNamedSecurityInfo(string pObjectName, SE_OBJECT_TYPE ObjectType, SECURITY_INFORMATION SecurityInfo, IntPtr psidOwner, IntPtr psidGroup, IntPtr pDacl, IntPtr pSacl);
 
-        [DllImport("advapi32.dll", EntryPoint = "SetEntriesInAclA",
-         CallingConvention = CallingConvention.Winapi,
-         SetLastError = true, CharSet = CharSet.Ansi)]
-        private static extern int SetEntriesInAcl(
-            int CountofExplicitEntries,
-            ref EXPLICIT_ACCESS ea,
-            IntPtr OldAcl,
-            ref IntPtr NewAcl);
+        [DllImport("advapi32.dll", EntryPoint = "SetEntriesInAclA", CallingConvention = CallingConvention.Winapi, SetLastError = true, CharSet = CharSet.Ansi)]
+        private static extern int SetEntriesInAcl(int CountofExplicitEntries, ref EXPLICIT_ACCESS ea, IntPtr OldAcl, ref IntPtr NewAcl);
 
         internal static void GrantAdministratorsAccess(string name, SE_OBJECT_TYPE type)
         {
