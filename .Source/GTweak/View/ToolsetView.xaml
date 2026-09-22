@@ -48,7 +48,7 @@
                         <TextBox.Tag>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <ui:SymbolIcon Symbol="Search20" FontSize="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                                <TextBlock VerticalAlignment="Center"><Run Text="{DynamicResource text_ts}"/><Run Text="..."/></TextBlock>
+                                <TextBlock VerticalAlignment="Center"><Run Text="{DynamicResource hint_search_ts}"/><Run Text="..."/></TextBlock>
                             </StackPanel>
                         </TextBox.Tag>
                     </TextBox>

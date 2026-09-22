@@ -34,7 +34,7 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding IsRunAsTrustedInstaller}" Content="{DynamicResource chk_run_ti_adds}"/>
+                    <CheckBox Grid.Column="0" VerticalAlignment="Center" IsChecked="{Binding IsRunAsTrustedInstaller}" Content="{DynamicResource settings_elevated_adds}"/>
 
                     <Button Grid.Column="1" Command="{Binding UpdateCommand}" Style="{StaticResource ButtonContent_Inverted}" Padding="12,5" HorizontalAlignment="Right">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
@@ -80,21 +80,21 @@
     <!--#endregion-->
 
     <!--#region Main Window -->
-    <v:String x:Key="rbtn_utils_main">Утиліти</v:String>
-    <v:String x:Key="rbtn_conf_main">Конфіденційність</v:String>
-    <v:String x:Key="rbtn_int_main">Інтерфейс</v:String>
-    <v:String x:Key="rbtn_app_main">Додатки</v:String>
-    <v:String x:Key="rbtn_svc_main">Служби</v:String>
-    <v:String x:Key="rbtn_sys_main">Система</v:String>
-    <v:String x:Key="rbtn_sysinfo_main">Системна інформація</v:String>
-    <v:String x:Key="rbtn_adds_main">Розширення</v:String>
-    <v:String x:Key="rbtn_ts_main">Набір інструментів</v:String>
-    <v:String x:Key="title_settings_main">Налаштування</v:String>
-    <v:String x:Key="tgl_noty_main">Показувати сповіщення</v:String>
-    <v:String x:Key="slider_volume_main">Гучність:</v:String>
-    <v:String x:Key="tgl_toast_main">Закріпити над усіма вікнами</v:String>
-    <v:String x:Key="tgl_update_main">Перевірка наявності оновлень</v:String>
-    <v:String x:Key="cmbox_lang_main">Мова інтерфейсу:</v:String>
+    <v:String x:Key="UtilitiesPage">Утиліти</v:String>
+    <v:String x:Key="ConfidentialityPage">Конфіденційність</v:String>
+    <v:String x:Key="InterfacePage">Інтерфейс</v:String>
+    <v:String x:Key="ApplicationsPage">Додатки</v:String>
+    <v:String x:Key="ServicesPage">Служби</v:String>
+    <v:String x:Key="SystemPage">Система</v:String>
+    <v:String x:Key="SystemInfoPage">Системна інформація</v:String>
+    <v:String x:Key="AddonsPage">Розширення</v:String>
+    <v:String x:Key="ToolsetPage">Набір інструментів</v:String>
+    <v:String x:Key="settings_title">Налаштування</v:String>
+    <v:String x:Key="settings_noty">Показувати сповіщення</v:String>
+    <v:String x:Key="settings_update">Перевірка наявності оновлень</v:String>
+    <v:String x:Key="settings_toast">Закріпити над усіма вікнами</v:String>
+    <v:String x:Key="settings_volume">Гучність:</v:String>
+    <v:String x:Key="settings_lang">Мова інтерфейсу:</v:String>
     <v:String x:Key="btn_import">Імпорт</v:String>
     <v:String x:Key="btn_export">Експорт</v:String>
     <v:String x:Key="btn_selfremove">Самовидалення</v:String>
@@ -462,7 +462,7 @@
     <v:String x:Key="MouseSensitivity_sys">Швидкість руху вказівника миші:</v:String>
     <v:String x:Key="KeyboardDelay_sys">Затримка повтору введення з клавіатури:</v:String>
     <v:String x:Key="KeyboardSpeed_sys">Швидкість повтору клавіатури:</v:String>
-    <v:String x:Key="text_sys">Введіть текст для перевірки параметрів клавіатури</v:String>
+    <v:String x:Key="hint_keyboard_sys">Введіть текст для перевірки параметрів клавіатури</v:String>
     <v:String x:Key="PointerPrecision_sys">Підвищена точність встановлення вказівника</v:String>
     <v:String x:Key="StickyKeysFilter_sys">Залипання клавіш та фільтрація введення</v:String>
     <v:String x:Key="WindowsDefender_sys">Захисник Windows, Antimalware, SmartScreen та VBS</v:String>
@@ -566,7 +566,7 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="chk_run_ti_adds">Запуск від імені TrustedInstaller</v:String>
+    <v:String x:Key="settings_elevated_adds">Запуск від імені TrustedInstaller</v:String>
     <v:String x:Key="label_directory_adds">Папка</v:String>
     <v:String x:Key="label_count_adds">Кількість</v:String>
     <v:String x:Key="text_info_adds">Виберіть каталог або переконайтеся, що він не порожній</v:String>
@@ -574,7 +574,7 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
-    <v:String x:Key="text_ts">Пошук за назвою або автором</v:String>
+    <v:String x:Key="hint_search_ts">Пошук за назвою або автором</v:String>
     <v:String x:Key="tag_all_ts">Усі</v:String>
     <v:String x:Key="tag_drivers_ts">Драйвери</v:String>
     <v:String x:Key="tag_tools_ts">Утиліти</v:String>

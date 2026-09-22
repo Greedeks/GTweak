@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
@@ -80,21 +80,21 @@
     <!--#endregion-->
 
     <!--#region Main Window -->
-    <v:String x:Key="rbtn_utils_main">Utilitários</v:String>
-    <v:String x:Key="rbtn_conf_main">Privacidade</v:String>
-    <v:String x:Key="rbtn_int_main">Interface</v:String>
-    <v:String x:Key="rbtn_app_main">Aplicativos</v:String>
-    <v:String x:Key="rbtn_svc_main">Serviços</v:String>
-    <v:String x:Key="rbtn_sys_main">Sistema</v:String>
-    <v:String x:Key="rbtn_sysinfo_main">Informações do sistema</v:String>
-    <v:String x:Key="rbtn_adds_main">Complementos</v:String>
-    <v:String x:Key="rbtn_ts_main">Conjunto de ferramentas</v:String>
-    <v:String x:Key="title_settings_main">Configurações</v:String>
-    <v:String x:Key="tgl_noty_main">Mostrar notificações</v:String>
-    <v:String x:Key="slider_volume_main">Volume:</v:String>
-    <v:String x:Key="tgl_toast_main">Fixar sobre todas as janelas</v:String>
-    <v:String x:Key="tgl_update_main">Verificar atualizações</v:String>
-    <v:String x:Key="cmbox_lang_main">Idioma da interface:</v:String>
+    <v:String x:Key="UtilitiesPage">Utilitários</v:String>
+    <v:String x:Key="ConfidentialityPage">Privacidade</v:String>
+    <v:String x:Key="InterfacePage">Interface</v:String>
+    <v:String x:Key="ApplicationsPage">Aplicativos</v:String>
+    <v:String x:Key="ServicesPage">Serviços</v:String>
+    <v:String x:Key="SystemPage">Sistema</v:String>
+    <v:String x:Key="SystemInfoPage">Informações do sistema</v:String>
+    <v:String x:Key="AddonsPage">Complementos</v:String>
+    <v:String x:Key="ToolsetPage">Conjunto de ferramentas</v:String>
+    <v:String x:Key="settings_title">Configurações</v:String>
+    <v:String x:Key="settings_noty">Mostrar notificações</v:String>
+    <v:String x:Key="settings_update">Verificar atualizações</v:String>
+    <v:String x:Key="settings_toast">Fixar sobre todas as janelas</v:String>
+    <v:String x:Key="settings_volume">Volume:</v:String>
+    <v:String x:Key="settings_lang">Idioma da interface:</v:String>
     <v:String x:Key="btn_import">Importar</v:String>
     <v:String x:Key="btn_export">Exportar</v:String>
     <v:String x:Key="btn_selfremove">Remoção</v:String>
@@ -462,7 +462,7 @@
     <v:String x:Key="MouseSensitivity_sys">Velocidade do ponteiro do mouse:</v:String>
     <v:String x:Key="KeyboardDelay_sys">Atraso de repetição do teclado:</v:String>
     <v:String x:Key="KeyboardSpeed_sys">Taxa de repetição do teclado:</v:String>
-    <v:String x:Key="text_sys">Digite aqui para testar as configurações do seu teclado</v:String>
+    <v:String x:Key="hint_keyboard_sys">Digite aqui para testar as configurações do seu teclado</v:String>
     <v:String x:Key="PointerPrecision_sys">Aprimorar precisão do ponteiro</v:String>
     <v:String x:Key="StickyKeysFilter_sys">Teclas de Aderência e Teclas de Filtragem</v:String>
     <v:String x:Key="WindowsDefender_sys">Windows Defender, Antimalware, SmartScreen e VBS</v:String>
@@ -566,7 +566,7 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="chk_run_ti_adds">Executar como TrustedInstaller</v:String>
+    <v:String x:Key="settings_elevated_adds">Executar como TrustedInstaller</v:String>
     <v:String x:Key="label_directory_adds">Pasta</v:String>
     <v:String x:Key="label_count_adds">Quantidade</v:String>
     <v:String x:Key="text_info_adds">Selecione um diretório ou certifique‑se de que não está vazio</v:String>
@@ -574,7 +574,7 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
-    <v:String x:Key="text_ts">Pesquisar por nome ou autor</v:String>
+    <v:String x:Key="hint_search_ts">Pesquisar por nome ou autor</v:String>
     <v:String x:Key="tag_all_ts">Todos</v:String>
     <v:String x:Key="tag_drivers_ts">Drivers</v:String>
     <v:String x:Key="tag_tools_ts">Ferramentas</v:String>

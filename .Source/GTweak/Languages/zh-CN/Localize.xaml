@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:v="clr-namespace:System;assembly=mscorlib">
 
@@ -80,21 +80,21 @@
     <!--#endregion-->
 
     <!--#region Main Window -->
-    <v:String x:Key="rbtn_utils_main">实用工具</v:String>
-    <v:String x:Key="rbtn_conf_main">隐私</v:String>
-    <v:String x:Key="rbtn_int_main">界面</v:String>
-    <v:String x:Key="rbtn_app_main">应用</v:String>
-    <v:String x:Key="rbtn_svc_main">系统服务</v:String>
-    <v:String x:Key="rbtn_sys_main">系统设置</v:String>
-    <v:String x:Key="rbtn_sysinfo_main">系统信息</v:String>
-    <v:String x:Key="rbtn_adds_main">扩展插件</v:String>
-    <v:String x:Key="rbtn_ts_main">工具箱</v:String>
-    <v:String x:Key="title_settings_main">设置</v:String>
-    <v:String x:Key="tgl_noty_main">显示通知提示</v:String>
-    <v:String x:Key="slider_volume_main">提示音量：</v:String>
-    <v:String x:Key="tgl_toast_main">窗口总在最前 (置顶)</v:String>
-    <v:String x:Key="tgl_update_main">自动检查更新</v:String>
-    <v:String x:Key="cmbox_lang_main">界面语言：</v:String>
+    <v:String x:Key="UtilitiesPage">实用工具</v:String>
+    <v:String x:Key="ConfidentialityPage">隐私</v:String>
+    <v:String x:Key="InterfacePage">界面</v:String>
+    <v:String x:Key="ApplicationsPage">应用</v:String>
+    <v:String x:Key="ServicesPage">系统服务</v:String>
+    <v:String x:Key="SystemPage">系统设置</v:String>
+    <v:String x:Key="SystemInfoPage">系统信息</v:String>
+    <v:String x:Key="AddonsPage">扩展插件</v:String>
+    <v:String x:Key="ToolsetPage">工具箱</v:String>
+    <v:String x:Key="settings_title">设置</v:String>
+    <v:String x:Key="settings_noty">显示通知提示</v:String>
+    <v:String x:Key="settings_update">自动检查更新</v:String>
+    <v:String x:Key="settings_toast">窗口总在最前 (置顶)</v:String>
+    <v:String x:Key="settings_volume">提示音量：</v:String>
+    <v:String x:Key="settings_lang">界面语言：</v:String>
     <v:String x:Key="btn_import">导入配置</v:String>
     <v:String x:Key="btn_export">导出配置</v:String>
     <v:String x:Key="btn_selfremove">卸载本工具</v:String>
@@ -462,7 +462,7 @@
     <v:String x:Key="MouseSensitivity_sys">鼠标指针移动速度：</v:String>
     <v:String x:Key="KeyboardDelay_sys">键盘重复延迟：</v:String>
     <v:String x:Key="KeyboardSpeed_sys">键盘重复速率：</v:String>
-    <v:String x:Key="text_sys">在此处输入字符以测试您的键盘设置</v:String>
+    <v:String x:Key="hint_keyboard_sys">在此处输入字符以测试您的键盘设置</v:String>
     <v:String x:Key="PointerPrecision_sys">提高指针精确度 (鼠标加速)</v:String>
     <v:String x:Key="StickyKeysFilter_sys">粘滞键与筛选键弹窗</v:String>
     <v:String x:Key="WindowsDefender_sys">Windows Defender、防病毒、SmartScreen 与 VBS</v:String>
@@ -566,7 +566,7 @@
     <!--#endregion-->
 
     <!--#region Addons Page -->
-    <v:String x:Key="chk_run_ti_adds">以 TrustedInstaller 权限运行</v:String>
+    <v:String x:Key="settings_elevated_adds">以 TrustedInstaller 权限运行</v:String>
     <v:String x:Key="label_directory_adds">目录</v:String>
     <v:String x:Key="label_count_adds">数量</v:String>
     <v:String x:Key="text_info_adds">请选择一个目录，并确保其不为空</v:String>
@@ -574,7 +574,7 @@
     <!--#endregion-->
 
     <!--#region Toolset Page -->
-    <v:String x:Key="text_ts">按名称或作者搜索</v:String>
+    <v:String x:Key="hint_search_ts">按名称或作者搜索</v:String>
     <v:String x:Key="tag_all_ts">全部</v:String>
     <v:String x:Key="tag_drivers_ts">驱动程序</v:String>
     <v:String x:Key="tag_tools_ts">系统工具</v:String>

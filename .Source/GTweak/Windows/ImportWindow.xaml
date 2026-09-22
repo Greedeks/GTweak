@@ -67,19 +67,19 @@
                             <Style TargetType="TextBlock">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding CurrentSection, RelativeSource={RelativeSource AncestorType=local:ImportWindow}}" Value="{x:Static manager:JsonConfigManager+Section.Confidentiality}">
-                                        <Setter Property="Text" Value="{DynamicResource rbtn_conf_main}"/>
+                                        <Setter Property="Text" Value="{DynamicResource ConfidentialityPage}"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding CurrentSection, RelativeSource={RelativeSource AncestorType=local:ImportWindow}}" Value="{x:Static manager:JsonConfigManager+Section.Interface}">
-                                        <Setter Property="Text" Value="{DynamicResource rbtn_int_main}"/>
+                                        <Setter Property="Text" Value="{DynamicResource InterfacePage}"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding CurrentSection, RelativeSource={RelativeSource AncestorType=local:ImportWindow}}" Value="{x:Static manager:JsonConfigManager+Section.Packages}">
-                                        <Setter Property="Text" Value="{DynamicResource rbtn_app_main}"/>
+                                        <Setter Property="Text" Value="{DynamicResource ApplicationsPage}"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding CurrentSection, RelativeSource={RelativeSource AncestorType=local:ImportWindow}}" Value="{x:Static manager:JsonConfigManager+Section.Services}">
-                                        <Setter Property="Text" Value="{DynamicResource rbtn_svc_main}"/>
+                                        <Setter Property="Text" Value="{DynamicResource ServicesPage}"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding CurrentSection, RelativeSource={RelativeSource AncestorType=local:ImportWindow}}" Value="{x:Static manager:JsonConfigManager+Section.System}">
-                                        <Setter Property="Text" Value="{DynamicResource rbtn_sys_main}"/>
+                                        <Setter Property="Text" Value="{DynamicResource SystemPage}"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
