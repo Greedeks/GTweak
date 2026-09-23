@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Збір та надсилання даних про рукописне введення</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Збір даних про конфігурацію обладнання</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Мережевий доступ до шпигунських доменів Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Визначення місця розташування користувача</v:String>
     <v:String x:Key="FeedbackRequests_conf">Перевірка звернень через Відгук</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Приховане фонове оновлення синтезу мовлення</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Прихований моніторинг системи</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Журналювання дій користувача</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Збір даних та фонове оновлення офлайн-карт</v:String>
     <v:String x:Key="IntelTelemetry_conf">Збір даних та моніторинг телеметрії Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Для кожного користувача система Windows створює унікальний рекламний ідентифікатор для відстеження його дій. Використовується розробниками програм та самої Windows для власних цілей, у тому числі для демонстрації конкретної реклами в додатках.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Навіть якщо ви використовуєте локальний обліковий запис, Windows завжди намагається синхронізувати з серверами Microsoft такі ваші дані, як теми, паролі, налаштування Windows, налаштування браузера, налаштування мовної панелі, налаштування спрощеного доступу, додаткові налаштування.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Це налаштування вимикає механізм збору даних, який Microsoft використовує для покращення технології рукописного введення. Незалежно від того, користуєтеся ви цією функцією чи ні, система відстежує вашу активність з метою підвищення точності розпізнавання. Зміни, що вносить це налаштування, запобігають такому збору інформації, забезпечуючи захист вашої конфіденційної інформації.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">Програма вдосконалення якості програмного забезпечення (CEIP) - це окрема функція, яка збирає інформацію про конфігурацію вашого обладнання та використання на ньому програмного забезпечення та служб. Також періодично вивантажує файл із інформацією про проблеми, які виникають у Windows. Програма є добровільною, і вам не обов'язково надсилати дані до Microsoft, порушуючи свою конфіденційність.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Це налаштування модифікує файл hosts шляхом додавання адреси 0.0.0.0 перед певними доменними іменами, що ефективно блокує їх. Додатково, змінюються налаштування брандмауера Windows і певні IP-адреси, пов’язані зі збором даних Microsoft, також блокуються.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Вимкнення служб геолокації значно знижує потенціальну можливість використання даних про розташування для рекламних цілей – доступ до цієї інформації обмежено не лише для служб Microsoft, але й для будь-яких сторонніх додатків та скриптів.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">Налаштування блокує збір відгуків та сповіщень у Windows, що запобігає надсиланню даних без вашої згоди. Навіть якщо ви не користуєтеся функцією «Відгук», Microsoft все одно фіксує, як часто ви звертаєтеся до офіційної підтримки.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows здатна розпізнавати голос за допомогою спеціального модуля розпізнавання та синтезу мовлення. Навіть якщо ви не користуєтеся функціями Cortana або «Легкий доступ», як усталено, ваша операційна система завжди перевіряє наявність оновлень своєї системи розпізнавання голосу.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Функція з доступом до будь-яких даних користувачів. Обмінюється якоюсь інформацію з серверами Microsoft і жодним чином не впливає на роботу операційної системи, додатків та не допомагає користувачеві, що робить її марною.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Налаштування вимикає функцію UAR (User Activity Recording) – систему, яка послідовно фіксує кожну вашу дію на комп’ютері: від створення скриншотів і набору тексту до запуску програм та надання доступу до вебкамери навіть у стані заблокованого екрану, а також багато іншого.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows періодично оновлює офлайн-карти та надсилає сповіщення про нові дані у фоновому режимі. Ці процеси можуть збирати інформацію про ваше місцезнаходження, маршрути та використання карт. Якщо ви не користуєтеся офлайн-картами, рекомендується вимкнути їх, щоб уникнути прихованих оновлень і передачі даних на сервери Microsoft без вашої прямої участі.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Модуль Intel, який працює у фоновому режимі для збору та передачі даних, позиціонується як інструмент для вдосконалення продуктів компанії. Однак для пересічного користувача він приносить мало практичної користі, а вимкнення цієї функції може зменшити фонову активність і запобігти непотрібній передачі даних.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

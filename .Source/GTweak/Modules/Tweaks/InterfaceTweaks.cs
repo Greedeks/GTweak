@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace GTweak.Modules.Tweaks
 {
-    internal sealed class InterfaceTweaks
+    internal sealed class InterfaceTweaks : TaskSchedulerManager
     {
         internal enum Picker
         {
@@ -613,7 +613,7 @@ namespace GTweak.Modules.Tweaks
                         RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", "1") ||
                         RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot", "TurnOffWindowsCopilot", "1") ||
                         RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", "1") ||
-                        RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", "1"));
+                        RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsAI", "DisableAIDataAnalysis", "1")) || IsTaskEnabled(recallTask);
                     },
                     Apply: (state) =>
                     {
@@ -722,6 +722,8 @@ namespace GTweak.Modules.Tweaks
                             RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Paint", "DisableRemoveBackground", 1, RegistryValueKind.DWord);
                             RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\WindowsNotepad", "DisableAIFeatures", 1, RegistryValueKind.DWord);
                         }
+
+                        SetTaskStateOwner(state, recallTask);
                     }
                 ),
 

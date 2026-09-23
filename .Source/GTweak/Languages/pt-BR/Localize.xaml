@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Coleta e envio de dados de caligrafia</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Coleta de dados de configuração de hardware</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Acesso à rede para espionar domínios da Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Determinação da localização do usuário</v:String>
     <v:String x:Key="FeedbackRequests_conf">Verificação de solicitações através do Feedback</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Atualizações ocultas em segundo plano da síntese de fala</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Monitoramento oculto do seu sistema</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Manter um registro do comportamento do usuário</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Coleta de dados e atualizações de mapas offline</v:String>
     <v:String x:Key="IntelTelemetry_conf">Coleta e monitoramento da telemetria da Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">O Windows cria um identificador de publicidade exclusivo para cada usuário rastrear suas ações. Que é usado por desenvolvedores de aplicativos e pelo próprio Windows para seus próprios fins, inclusive para oferecer anúncios específicos em aplicativos.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Mesmo usando uma conta local, o Windows sempre tenta sincronizar seus dados com os servidores da Microsoft. Em particular, o seguinte: temas, senhas, configurações do Windows, configurações do navegador, configurações da barra de idiomas, configurações de acesso simplificado, configurações adicionais.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Este ajuste desativa o mecanismo de coleta de dados que a Microsoft usa para melhorar sua tecnologia de reconhecimento de manuscrito. Independentemente de você usar esse recurso ou não, o sistema estava rastreando sua atividade para melhorar a precisão do reconhecimento. As alterações implementadas impedem essa coleta de dados, ajudando a preservar a privacidade.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">O Programa de Melhoria da Qualidade do Software (CEIP) é um recurso separado que coleta informações sobre a configuração do seu hardware e como você usa o software e os serviços. O programa também baixa periodicamente um arquivo para coletar informações sobre problemas que você pode ter com o Windows. O programa é voluntário e você não precisa enviar seus dados para a Microsoft, violando sua privacidade.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Este ajuste modifica o arquivo hosts adicionando o endereço 0.0.0.0 antes de nomes de domínio específicos, bloqueando-os efetivamente. Além disso, ajusta as configurações do firewall do Windows para bloquear conexões a vários endereços IP associados aos serviços de coleta de dados da Microsoft.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Desativar os serviços de geolocalização reduz significativamente o potencial de uso de dados de localização para fins publicitários - o acesso a essas informações é restrito não apenas para os serviços da Microsoft, mas também para quaisquer aplicativos e scripts de terceiros.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">O ajuste bloqueia a coleta de feedback e suas notificações no Windows, o que impede a transmissão de dados sem o seu consentimento. Enquanto isso, mesmo que você não use o recurso "Feedback", a Microsoft ainda registra com que frequência você entra em contato com o suporte oficial.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">O Windows é capaz de reconhecer a fala usando um módulo dedicado de reconhecimento e síntese de fala. Mesmo que você não use a Cortana ou o "Facilidade de Acesso", seu sistema operacional, por padrão, sempre verifica se há atualizações em seu mecanismo de reconhecimento de voz.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Uma função que tem acesso a quaisquer dados do usuário. Ele troca algumas informações com os servidores da Microsoft e não afeta a operação do sistema operacional ou aplicativos de forma alguma. Não ajuda o usuário de forma alguma, o que o torna inútil.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">O ajuste desativa o recurso UAR (User Activity Recording) - um sistema que registra sequencialmente todas as ações que você realiza no seu computador: desde tirar screenshots e digitar texto até iniciar programas e até mesmo fornecer acesso à webcam enquanto a tela está bloqueada, e muito mais.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">O Windows atualiza periodicamente os mapas offline e envia notificações sobre novos dados em segundo plano. Esses processos podem coletar informações sobre sua localização, rotas e uso de mapas. Se você não usa mapas offline, recomenda-se desativá‑los para evitar atualizações ocultas e transmissão de dados para os servidores da Microsoft sem seu envolvimento direto.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">O módulo Intel, que opera em segundo plano para coletar e transmitir dados, é posicionado como uma ferramenta para melhorar os produtos da empresa. No entanto, para o usuário médio, ele oferece pouco benefício prático, e desativar esse recurso pode reduzir a atividade em segundo plano e evitar a transmissão desnecessária de dados.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -237,7 +237,7 @@
     <v:String x:Key="FolderPictures_intf">Imagens</v:String>
     <v:String x:Key="FolderMusic_intf">Músicas</v:String>
     <v:String x:Key="FolderVideo_intf">Vídeos</v:String>
-    
+
     <v:String x:Key="SystemButtonSize_intf">Tamanho padrão dos botões do sistema</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Frequência de piscar padrão do cursor</v:String>
     <v:String x:Key="ScrollbarSize_intf">Tamanho padrão da barra de rolagem</v:String>

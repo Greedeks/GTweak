@@ -415,6 +415,8 @@ namespace GTweak.Modules.Common
         {
             private static (string Normal, string Block) CreatePath(string dir, string normalName, string blockName) => (Path.Combine(dir, normalName), Path.Combine(dir, blockName));
 
+            internal static (string Normal, string Block) CompatTelRunner => CreatePath(Environment.SystemDirectory, "CompatTelRunner.exe", "BlockCompatTelRunner.exe");
+
             internal static class WindowsUpdate
             {
                 private static (string Normal, string Block) FindWindowsUpdateExe(string normalName, string blockName)

@@ -13,6 +13,7 @@ namespace GTweak.Modules.Storage
         @"\Microsoft\Windows\Application Experience\StartupAppTask",
         @"\Microsoft\Windows\PI\Sqm-Tasks",
         @"\Microsoft\Windows\NetTrace\GatherNetworkInfo",
+        @"\Microsoft\Windows\UsageAndQualityInsights\UsageAndQualityInsights-MaintenanceTask",
         @"\Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
         @"\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask",
         @"\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip",
@@ -21,14 +22,8 @@ namespace GTweak.Modules.Storage
 
         protected static readonly string[] telemetryTasks = {
         @"\Microsoft\Windows\Application Experience\CompatibilityAssistant",
-        @"\Microsoft\Office\Office ClickToRun Service Monitor",
-        @"\Microsoft\Office\OfficeTelemetry\AgentFallBack2016",
-        @"\Microsoft\Office\OfficeTelemetry\OfficeTelemetryAgentLogOn2016",
-        @"\Microsoft\Office\OfficeTelemetryAgentFallBack2016",
-        @"\Microsoft\Office\OfficeTelemetryAgentLogOn2016",
-        @"\Microsoft\Office\OfficeTelemetryAgentFallBack",
-        @"\Microsoft\Office\OfficeTelemetryAgentLogOn",
-        @"\Microsoft\Office\Office 15 Subscription Heartbeat" };
+        @"\Microsoft\Windows\Windows Error Reporting\QueueReporting",
+        @"\Microsoft\Windows\Sustainability\SustainabilityTelemetry" };
 
         protected static readonly string[] appExpInventoryTasks = {
         @"\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser Exp",
@@ -38,6 +33,7 @@ namespace GTweak.Modules.Storage
         protected static readonly string appExpUsageTasks = @"\Microsoft\Windows\Application Experience\AitAgent";
 
         protected static readonly string[] ceipTasks = {
+        @"\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector",
         @"\Microsoft\Windows\Customer Experience Improvement Program\BthSQM",
         @"\Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask",
         @"\Microsoft\Windows\Customer Experience Improvement Program\Consolidator",
@@ -49,16 +45,31 @@ namespace GTweak.Modules.Storage
 
         protected static readonly string[] speechTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\Speech\");
 
-        protected static readonly string[] nvidiaTasks = {
-        @"\NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
-        @"\NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}",
-        @"\NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}" };
+        protected static readonly string[] nvidiaTasks = new[] {
+        TaskSchedulerManager.GetTaskFullPath("NvTmRepOnLogon"),
+        TaskSchedulerManager.GetTaskFullPath("NvTmRep"),
+        TaskSchedulerManager.GetTaskFullPath("NvTmMon")};
 
         protected static readonly string[] mapsTasks = {
         @"\Microsoft\Windows\Maps\MapsToastTask",
         @"\Microsoft\Windows\Maps\MapsUpdateTask" };
 
         protected static readonly string intelTask = @"\Intel\Intel Telemetry 2 (x86)";
+
+        protected static readonly string[] OfficeTasks = {
+        @"\Microsoft\Office\Office ClickToRun Service Monitor",
+        @"\Microsoft\Office\Office Performance Monitor",
+        @"\Microsoft\Office\OfficeTelemetry\AgentFallBack2016",
+        @"\Microsoft\Office\OfficeTelemetry\OfficeTelemetryAgentLogOn2016",
+        @"\Microsoft\Office\OfficeTelemetryAgentFallBack2016",
+        @"\Microsoft\Office\OfficeTelemetryAgentLogOn2016",
+        @"\Microsoft\Office\OfficeTelemetryAgentFallBack",
+        @"\Microsoft\Office\OfficeTelemetryAgentLogOn",
+        @"\Microsoft\Office\Office 15 Subscription Heartbeat" };
+
+        protected static readonly string[] recallTask = {
+        @"\Microsoft\Windows\WindowsAI\Recall\InitialConfiguration",
+        @"\Microsoft\Windows\WindowsAI\Recall\PolicyConfiguration" };
 
         protected static readonly string[] winUpdatesTasks = new[] {
         @"\Microsoft\Windows\UpdateOrchestrator\Report policies",
@@ -89,7 +100,7 @@ namespace GTweak.Modules.Storage
         @"\Microsoft\Windows\Printing\PrinterCleanupTask",
         @"\Microsoft\Windows\Printing\PrintJobCleanupTask" };
 
-        protected static readonly string[] geoTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\Speech\");
+        protected static readonly string[] geoTasks = TaskSchedulerManager.GetAllTasksInPaths(@"\Microsoft\Windows\Location\");
 
         protected static readonly string bluetoothTask = @"\Microsoft\Windows\Bluetooth\UninstallDeviceTask";
 

@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Collecting and sending handwriting data</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Collecting hardware configuration data</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Network access to spy Microsoft domains</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Determining the user's location</v:String>
     <v:String x:Key="FeedbackRequests_conf">Checking requests through Feedback</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Hidden background updates of speech synthesis</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Hidden monitoring of your system</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">User Activity Recording Feature</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Collecting data and background updates of Offline maps</v:String>
     <v:String x:Key="IntelTelemetry_conf">Collection and monitoring of Intel telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows creates a unique advertising identifier for each user to track your actions. Which is used by application developers and Windows itself for their own purposes, including to offer you specific ads in applications.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Even using a local account, Windows always tries to synchronize your data with Microsoft servers. In particular, the following: themes, passwords, Windows settings, browser settings, language bar settings, simplified access settings, additional settings.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Windows collects handwriting input samples under the premise of improving text recognition. This background process remains active even if you do not use a stylus or touchscreen. Disabling this function blocks sending your input data to Microsoft, keeping your text strictly on your device.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">The Software Quality Improvement Program (CEIP) is a separate feature that collects information about the configuration of your hardware and how you use the software and services. The program also periodically downloads a file to collect information about problems that you may have with Windows. The program is voluntary and you do not have to send your data to Microsoft, violating your privacy.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Windows continuously connects to dozens of background servers to transmit diagnostics and telemetry reports. Blocking these addresses through the system hosts file and Windows Firewall rules completely cuts off outbound background data to Microsoft at the network level.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Disabling geolocation services significantly reduces the potential for using location data for advertising purposes – access to this information is restricted not only for Microsoft services but also for any third-party applications and scripts.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">Even if you never use the built-in Feedback Hub, Microsoft still logs background metrics and tracks how often you contact official support. Blocking feedback requests eliminates these notifications and prevents data from being transmitted without your consent.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows is capable of recognizing speech using a dedicated speech recognition and synthesis module. Even if you do not use Cortana or «Ease of Access», your operating system by default always checks for updates to its voice recognition engine.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">A function that has access to any user data. It exchanges some information with Microsoft servers and does not affect the operation of the operating system or applications in any way. It does not help the user in any way, which makes it useless.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">The built-in User Activity Recording feature sequentially logs user actions across the system, including taking background screenshots, logging keystrokes, tracking app launches, and accessing the webcam even while the screen is locked. Disabling this feature completely halts covert activity tracking and stops generating detailed behavioral reports.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows periodically updates Offline maps and sends notifications about new data in the background. These processes may collect information about your location, routes, and map usage. If you do not use Offline maps, it is recommended to disable them to avoid hidden updates and data transmission to Microsoft servers without your direct involvement.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">The Intel module, which operates in the background to collect and transmit data, is positioned as a tool for improving the company’s products. However, for the average user it provides little practical benefit, and disabling this feature can reduce background activity and prevent unnecessary data transmission.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

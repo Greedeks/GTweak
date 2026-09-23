@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Raccolta e invio dei dati della scrittura a mano</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Raccolta dei dati della configurazione hardware</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Accesso di rete ai domini spia di Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Determinazione della posizione dell'utente</v:String>
     <v:String x:Key="FeedbackRequests_conf">Controllo delle richieste tramite Feedback</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Aggiornamenti nascosti in background della sintesi vocale</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Monitoraggio nascosto del sistema</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Registrazione del comportamento dell'utente</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Raccolta dati e aggiornamenti in background delle mappe offline</v:String>
     <v:String x:Key="IntelTelemetry_conf">Raccolta e monitoraggio della telemetria Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows crea un identificatore pubblicitario univoco per ogni utente per tracciare le sue azioni. Questo viene utilizzato dagli sviluppatori di applicazioni e da Windows stesso per scopi propri, incluso offrire pubblicità mirate nelle applicazioni.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Anche utilizzando un account locale, Windows cerca sempre di sincronizzare i tuoi dati con i server Microsoft. In particolare: temi, password, impostazioni di Windows, impostazioni del browser, barra della lingua, accessibilità semplificata e altre impostazioni.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Questo tweak disabilita la raccolta dei dati per il miglioramento del riconoscimento della scrittura a mano. Anche se non usi questa funzione, il sistema tracciava comunque la tua attività. Ora non più.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">Il Programma CEIP raccoglie informazioni sull’hardware e su come utilizzi i servizi. Anche se teoricamente volontario, raccoglie comunque dati e scarica file automaticamente, violando la tua privacy.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Questo tweak modifica il file hosts per bloccare determinati domini e imposta il firewall di Windows per impedire connessioni a indirizzi IP associati alla raccolta dati di Microsoft.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Disattivare i servizi di geolocalizzazione limita notevolmente l’uso dei dati sulla posizione sia da parte di Microsoft che di app e script di terze parti.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">Il tweak blocca la raccolta dei feedback e le relative notifiche, impedendo l'invio automatico dei dati. Anche se non utilizzi il «Feedback», Windows monitora comunque l'interazione con il supporto.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows controlla periodicamente gli aggiornamenti per il modulo di sintesi vocale, anche se non usi Cortana o le opzioni di accessibilità. Questo tweak disabilita tale comportamento.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Una funzione nascosta con accesso ai tuoi dati, che scambia informazioni con i server Microsoft senza apportare alcun beneficio. Meglio disattivarla.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Il tweak disabilita la funzione UAR (User Activity Recording), che registra ogni azione sul PC: screenshot, testo digitato, programmi aperti e persino l'accesso alla webcam con lo schermo bloccato.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows aggiorna periodicamente le mappe offline e invia notifiche sui nuovi dati in background. Questi processi possono raccogliere informazioni sulla tua posizione, i percorsi e l'uso delle mappe. Se non utilizzi le mappe offline, si consiglia di disabilitarle per evitare aggiornamenti nascosti e la trasmissione di dati ai server Microsoft senza il tuo coinvolgimento diretto.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Il modulo Intel, che opera in background per raccogliere e trasmettere dati, è presentato come uno strumento per migliorare i prodotti dell'azienda. Tuttavia, per l'utente medio offre pochi vantaggi pratici; disabilitare questa funzione può ridurre l'attività in background e prevenire trasmissioni di dati non necessarie.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

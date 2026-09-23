@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">การรวบรวมและส่งข้อมูลลายมือ</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">การรวบรวมข้อมูลการกำหนดค่าฮาร์ดแวร์</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">การเข้าถึงเครือข่ายไปยังโดเมนสอดแนมของ Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">การระบุตำแหน่งของผู้ใช้</v:String>
     <v:String x:Key="FeedbackRequests_conf">การตรวจสอบคำขอผ่านทาง Feedback</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">การอัปเดตพื้นหลังที่ซ่อนอยู่ของการสังเคราะห์เสียง</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">การตรวจสอบระบบที่ซ่อนอยู่</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">การบันทึกพฤติกรรมของผู้ใช้</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">การรวบรวมข้อมูลและการอัปเดตพื้นหลังของแผนที่ออฟไลน์</v:String>
     <v:String x:Key="IntelTelemetry_conf">การรวบรวมและตรวจสอบข้อมูลเทเลเมทรีของ Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows สร้างรหัสโฆษณาเฉพาะสำหรับผู้ใช้แต่ละคนเพื่อติดตามการกระทำของคุณ ซึ่งถูกใช้โดยนักพัฒนาแอปพลิเคชันและ Windows เองเพื่อวัตถุประสงค์ของตนเอง, รวมถึงเพื่อเสนอโฆษณาที่เฉพาะเจาะจงในแอปพลิเคชัน</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">แม้จะใช้บัญชีภายในเครื่อง, Windows ก็พยายามซิงค์ข้อมูลของคุณกับเซิร์ฟเวอร์ของ Microsoft อยู่เสมอ โดยเฉพาะอย่างยิ่ง: ชุดตกแต่ง, รหัสผ่าน, การตั้งค่า Windows, การตั้งค่าเบราว์เซอร์, การตั้งค่าแถบภาษา, การตั้งค่าการช่วยเหลือพิเศษ, การตั้งค่าเพิ่มเติม</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">การปรับแต่งนี้จะปิดกลไกการรวบรวมข้อมูลที่ Microsoft ใช้เพื่อปรับปรุงเทคโนโลยีการรู้จำลายมือของตน ไม่ว่าคุณจะใช้คุณสมบัตินี้หรือไม่, ระบบก็กำลังติดตามกิจกรรมของคุณเพื่อปรับปรุงความแม่นยำในการรู้จำ การเปลี่ยนแปลงที่นำไปใช้จะป้องกันการรวบรวมข้อมูลดังกล่าว, ช่วยรักษาความเป็นส่วนตัว</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">โปรแกรมปรับปรุงคุณภาพซอฟต์แวร์ (CEIP) เป็นคุณสมบัติแยกต่างหากที่รวบรวมข้อมูลเกี่ยวกับการกำหนดค่าฮาร์ดแวร์ของคุณและวิธีที่คุณใช้ซอฟต์แวร์และบริการ โปรแกรมยังดาวน์โหลดไฟล์เป็นระยะเพื่อรวบรวมข้อมูลเกี่ยวกับปัญหาที่คุณอาจมีกับ Windows โปรแกรมเป็นไปโดยสมัครใจและคุณไม่จำเป็นต้องส่งข้อมูลของคุณไปยัง Microsoft, ซึ่งละเมิดความเป็นส่วนตัวของคุณ</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">การปรับแต่งนี้จะแก้ไขไฟล์ hosts โดยเพิ่มที่อยู่ 0.0.0.0 หน้าชื่อโดเมนที่ระบุ, เพื่อปิดกั้นโดเมนเหล่านั้นอย่างมีประสิทธิภาพ นอกจากนี้ยังปรับการตั้งค่าไฟร์วอลล์ของ Windows เพื่อปิดกั้นการเชื่อมต่อไปยังที่อยู่ IP หลายแห่งที่เกี่ยวข้องกับบริการรวบรวมข้อมูลของ Microsoft</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">การปิดบริการระบุตำแหน่งทางภูมิศาสตร์ช่วยลดศักยภาพในการใช้ข้อมูลตำแหน่งเพื่อวัตถุประสงค์ในการโฆษณาได้อย่างมาก – การเข้าถึงข้อมูลนี้ถูกจำกัดไม่เพียงสำหรับบริการของ Microsoft แต่ยังรวมถึงแอปพลิเคชันและสคริปต์ของบุคคลที่สามด้วย</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">การปรับแต่งนี้จะปิดกั้นการรวบรวมข้อเสนอแนะและการแจ้งเตือนใน Windows, ซึ่งป้องกันการส่งข้อมูลโดยไม่ได้รับความยินยอมจากคุณ ในขณะเดียวกัน, แม้ว่าคุณจะไม่ได้ใช้คุณสมบัติ «ข้อเสนอแนะ», Microsoft ก็ยังคงบันทึกความถี่ที่คุณติดต่อฝ่ายสนับสนุนอย่างเป็นทางการ</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows สามารถรู้จำเสียงพูดได้โดยใช้โมดูลรู้จำและสังเคราะห์เสียงโดยเฉพาะ แม้ว่าคุณจะไม่ได้ใช้ Cortana หรือ «การช่วยเหลือพิเศษ», ระบบปฏิบัติการของคุณจะตรวจสอบการอัปเดตสำหรับเอ็นจินรู้จำเสียงของตนโดยค่าเริ่มต้นเสมอ</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">ฟังก์ชันที่สามารถเข้าถึงข้อมูลผู้ใช้ใดๆ มันแลกเปลี่ยนข้อมูลบางอย่างกับเซิร์ฟเวอร์ของ Microsoft และไม่ส่งผลกระทบต่อการทำงานของระบบปฏิบัติการหรือแอปพลิเคชันแต่อย่างใด มันไม่ได้ช่วยผู้ใช้ในทางใดทางหนึ่ง, ทำให้มันไร้ประโยชน์</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">การปรับแต่งนี้จะปิดคุณสมบัติ UAR (User Activity Recording) – ระบบที่บันทึกทุกการกระทำที่คุณทำบนคอมพิวเตอร์ตามลำดับ: ตั้งแต่การจับภาพหน้าจอและการพิมพ์ข้อความ ไปจนถึงการเปิดโปรแกรมและแม้กระทั่งการเข้าถึงกล้องเว็บเมื่อหน้าจอล็อกอยู่ และอื่นๆ อีกมากมาย</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows อัปเดตแผนที่ออฟไลน์เป็นระยะและส่งการแจ้งเตือนเกี่ยวกับข้อมูลใหม่ในพื้นหลัง กระบวนการเหล่านี้อาจรวบรวมข้อมูลเกี่ยวกับตำแหน่งของคุณ, เส้นทาง, และการใช้งานแผนที่ หากคุณไม่ได้ใช้แผนที่ออฟไลน์, แนะนำให้ปิดเพื่อหลีกเลี่ยงการอัปเดตที่ซ่อนอยู่และการส่งข้อมูลไปยังเซิร์ฟเวอร์ของ Microsoft โดยที่คุณไม่ได้เกี่ยวข้องโดยตรง</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">โมดูล Intel ที่ทำงานในพื้นหลังเพื่อรวบรวมและส่งข้อมูล ถูกวางตำแหน่งเป็นเครื่องมือสำหรับปรับปรุงผลิตภัณฑ์ของบริษัท อย่างไรก็ตาม, สำหรับผู้ใช้ทั่วไปมันให้ประโยชน์เชิงปฏิบัติน้อย, และการปิดคุณสมบัตินี้สามารถลดกิจกรรมพื้นหลังและป้องกันการส่งข้อมูลที่ไม่จำเป็น</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

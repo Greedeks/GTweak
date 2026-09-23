@@ -602,10 +602,30 @@ namespace GTweak.Modules.Tweaks
                 ),
 
                 [Toggle.Geolocation] = (
-                    Check: () => RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc", "Start", "4") || IsTaskEnabled(geoTasks),
+                    Check: () =>
+                    {
+                        return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc", "Start", "4") || IsTaskEnabled(geoTasks) ||
+                        RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "1") ||
+                        RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", "1") ||
+                        RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", "1");
+                    },
                     Apply: (state) =>
                     {
                         RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Services\lfsvc", "Start", state ? 3 : 4, RegistryValueKind.DWord);
+
+                        if (state)
+                        {
+                            RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation");
+                            RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting");
+                            RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider");
+                        }
+                        else
+                        {
+                            RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 1, RegistryValueKind.DWord);
+                            RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 1, RegistryValueKind.DWord);
+                            RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 1, RegistryValueKind.DWord);
+                        }
+
                         SetTaskState(state, geoTasks);
                     }
                 ),

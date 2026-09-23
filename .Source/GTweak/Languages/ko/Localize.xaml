@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">필기 데이터 수집 및 전송</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">하드웨어 구성 데이터 수집</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Microsoft의 스파이 도메인에 대한 네트워크 액세스</v:String>
-    <v:String x:Key="UserLocationTracking_conf">사용자 위치 확인</v:String>
     <v:String x:Key="FeedbackRequests_conf">피드백을 통한 요청 확인</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">음성 합성의 숨겨진 백그라운드 업데이트</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">시스템에 대한 숨겨진 모니터링</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">사용자 행동 기록 유지</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">오프라인 지도의 데이터 수집 및 백그라운드 업데이트</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel 텔레메트리 수집 및 모니터링</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows는 사용자의 작업을 추적하기 위해 각 사용자에 대해 고유한 광고 식별자를 만듭니다. 이 식별자는 응용 프로그램 개발자와 Windows 자체에서 응용 프로그램에서 특정 광고를 제공하는 등 자체 목적을 위해 사용됩니다.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">로컬 계정을 사용하더라도 Windows는 항상 데이터를 Microsoft 서버와 동기화하려고 시도합니다. 특히 테마, 비밀번호, Windows 설정, 브라우저 설정, 입력 도구 모음 설정, 간소화된 액세스 설정, 추가 설정 등이 이에 해당합니다.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">이 조정은 Microsoft가 필기 인식 기술을 향상시키기 위해 사용하는 데이터 수집 메커니즘을 비활성화합니다. 이 기능을 사용하든 사용하지 않든 관계없이, 시스템은 인식 정확도를 높이기 위해 사용자 활동을 추적했습니다. 적용된 변경 사항은 이러한 정보 수집을 방지하여 개인정보 보호에 기여합니다.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">소프트웨어 품질 개선 프로그램 (CEIP)은 하드웨어 구성과 소프트웨어 및 서비스 사용 방법에 대한 정보를 수집하는 별도의 기능입니다. 또한 이 프로그램은 주기적으로 파일을 다운로드하여 Windows에서 발생할 수 있는 문제에 대한 정보를 수집합니다. 이 프로그램은 자발적으로 참여하며 개인 정보를 침해하는 데이터를 Microsoft에 전송할 필요가 없습니다.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">이 조정은 hosts 파일에서 특정 도메인 이름 앞에 0.0.0.0 주소를 추가하여 해당 도메인들을 효과적으로 차단합니다. 또한 Microsoft 데이터 수집 서비스와 관련된 여러 IP 주소로의 연결을 차단하도록 Windows 방화벽 설정을 변경합니다.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">위치 기반 서비스를 비활성화하면 광고 목적으로 위치 정보를 활용할 가능성이 크게 줄어듭니다 – 이 정보에 대한 접근은 Microsoft 서비스뿐만 아니라 모든 서드파티 응용 프로그램과 스크립트에 대해서도 제한됩니다.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">이 조정은 Windows에서 피드백 및 관련 알림의 수집을 차단하여 귀하의 동의 없이 데이터가 전송되는 것을 방지합니다. 또한, «피드백» 기능을 사용하지 않더라도 Microsoft는 공식 지원에 연락하는 빈도를 기록합니다.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows는 전용 음성 인식 및 합성 모듈을 통해 음성을 인식할 수 있습니다. Cortana 또는 «접근성»을 사용하지 않더라도, 운영 체제는 기본적으로 음성 인식 엔진 업데이트를 항상 확인합니다.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">모든 사용자 데이터에 액세스할 수 있는 기능입니다. Microsoft 서버와 일부 정보를 교환하며 운영 체제 또는 응용 프로그램의 작동에 어떤 영향도 미치지 않습니다. 어떤 식으로든 사용자에게 도움이 되지 않으므로 쓸모가 없습니다.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">이 조정은 UAR (사용자 활동 기록) 기능을 비활성화합니다 – 스크린샷 촬영, 텍스트 입력, 프로그램 실행, 화면이 잠긴 상태에서도 웹캠 접근 제공 등 컴퓨터에서 발생하는 모든 행동을 순차적으로 기록하는 시스템입니다.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows는 주기적으로 오프라인 지도를 업데이트하고 백그라운드에서 새 데이터에 대한 알림을 보냅니다. 이 과정에서 사용자의 위치, 경로 및 지도 사용 정보가 수집될 수 있습니다. 오프라인 지도를 사용하지 않는 경우, 사용자의 직접적인 관여 없이 진행되는 숨겨진 업데이트와 Microsoft 서버로의 데이터 전송을 방지하기 위해 이 기능을 비활성화하는 것이 좋습니다.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">백그라운드에서 데이터를 수집하고 전송하는 Intel 모듈은 제품 개선을 위한 도구로 홍보되지만, 일반 사용자에게는 실질적인 이득이 거의 없습니다. 이 기능을 비활성화하면 백그라운드 활동을 줄이고 불필요한 데이터 전송을 방지할 수 있습니다.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

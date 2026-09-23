@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">收集並傳送手寫資料</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">收集硬體配置資料</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">網路存取以監控 Microsoft 網域</v:String>
-    <v:String x:Key="UserLocationTracking_conf">判定使用者位置</v:String>
     <v:String x:Key="FeedbackRequests_conf">透過"意見回饋"檢查請求</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">隱藏式語音合成背景更新</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">隱藏監控您的系統</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">記錄使用者行為</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">離線地圖的資料收集與背景更新</v:String>
     <v:String x:Key="IntelTelemetry_conf">收集與監控 Intel 遙測數據</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows 會為每位使用者建立唯一的廣告識別碼以追蹤您的操作。此識別碼由應用程式開發者及 Windows 系統本身用於各自目的，包括在應用程式中向您提供特定廣告。</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">即使使用本地帳戶，Windows 仍會持續嘗試將您的資料與 Microsoft 伺服器同步。具體同步項目包含：主題、密碼、Windows 設定、瀏覽器設定、語言工具列設定、簡易存取設定及其他附加設定。</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">此調整將停用微軟用於提升手寫辨識技術的資料收集機制。無論您是否啟用此功能，系統皆會追蹤您的操作以增進辨識精準度。本次變更將阻止此類資料收集，有助維護隱私權。</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">軟體品質改善計畫 (CEIP) 是一項獨立功能，用於收集您的硬體配置資訊以及您使用軟體和服務的方式。該計畫還會定期下載檔案，以收集您在使用 Windows 時可能遇到的問題資訊。此計畫屬自願性質，您無需將資料傳送至 Microsoft，因此不會侵犯您的隱私權。</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">此調整會修改 hosts 檔案，在特定網域名稱前添加地址 0.0.0.0 以有效封鎖其連線。此外，它還會調整 Windows 防火牆設定，阻擋與微軟資料收集服務相關的多個 IP 位址之連線。</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">停用地理位置服務可大幅降低位置資料遭用於廣告之風險——此類資訊不僅對微軟服務受限，亦禁止任何第三方應用程式與腳本存取。</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">此調整功能可阻止 Windows 收集使用者回饋及其相關通知，避免在未經您同意的情況下傳輸資料。同時，即使您未使用"回饋"功能，微軟仍會記錄您聯繫官方支援的頻率。</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows 具備透過專用語音辨識與合成模組識別語音的能力。即使您未使用 Cortana 或"無障礙功能"，作業系統預設仍會持續檢查語音辨識引擎的更新。</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">此功能可存取任何使用者資料，會與微軟伺服器交換部分資訊，但完全不影響作業系統或應用程式的運作。由於對使用者毫無助益，故屬無用功能。</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">此調整項將停用 UAR（使用者活動記錄）功能——該系統會逐一記錄您在電腦上的所有操作：從擷取螢幕截圖、輸入文字、啟動程式，甚至在螢幕鎖定時提供網路攝影機存取權限等諸多行為。</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows 會定期更新離線地圖並在背景傳送有關新資料的通知。這些過程可能會收集有關您的位置、路線和地圖使用情況的資訊。如果您不使用離線地圖，建議將其停用，以避免在沒有您直接參與的情況下進行隱藏更新及向 Microsoft 伺服器傳輸資料集。</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">在背景運行以收集和傳輸資料的 Intel 模組被定位為改進公司產品的工具。然而，對於一般使用者而言，它幾乎沒有實際效益，停用此功能可以減少背景活動並防止不必要的資料傳輸。</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

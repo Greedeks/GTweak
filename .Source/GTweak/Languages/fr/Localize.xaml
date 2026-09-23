@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Collecte et envoi de données manuscrites</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Collecte de données sur la configuration matérielle</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Accès réseau aux domaines espions de Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Détermination de la position de l’utilisateur</v:String>
     <v:String x:Key="FeedbackRequests_conf">Vérification des requêtes via Feedback</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Mises à jour cachées de la synthèse vocale</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Surveillance cachée de votre système</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Enregistrement du comportement de l’utilisateur</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Collecte de données et mises à jour des cartes hors ligne</v:String>
     <v:String x:Key="IntelTelemetry_conf">Collecte et surveillance de la télémétrie Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows crée un identifiant publicitaire unique pour chaque utilisateur afin de suivre vos actions. Cet identifiant est utilisé par les développeurs d’applications et par Windows lui-même, notamment pour vous proposer des publicités ciblées dans les applications.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Même en utilisant un compte local, Windows tente toujours de synchroniser vos données avec les serveurs de Microsoft. Cela inclut notamment : les thèmes, les mots de passe, les paramètres Windows, les paramètres du navigateur, la barre de langue, l’accessibilité simplifiée, et d’autres paramètres.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Ce paramètre désactive la collecte de données utilisées par Microsoft pour améliorer la reconnaissance de l’écriture manuscrite. Même si vous n’utilisez pas cette fonction, le système suivait votre activité. Ce réglage empêche désormais cette collecte.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">Le programme d’amélioration de la qualité logicielle (CEIP) collecte des informations sur la configuration matérielle et l’usage des logiciels. Il peut aussi télécharger des fichiers pour diagnostiquer des problèmes. Ce programme est volontaire, et vous n’êtes pas obligé d’y participer.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Ce réglage modifie le fichier hosts pour bloquer certains domaines Microsoft (en les redirigeant vers 0.0.0.0) et configure également le pare-feu Windows pour bloquer plusieurs adresses IP associées à la collecte de données.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Désactiver les services de géolocalisation limite considérablement l’utilisation de vos données de localisation, aussi bien par Microsoft que par des applications tierces.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">Ce paramètre bloque la collecte et les notifications de commentaires dans Windows, empêchant ainsi la transmission de données sans votre consentement, même si vous n’utilisez pas la fonction « Commentaires ».</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows dispose d’un moteur de reconnaissance vocale qui peut se mettre à jour automatiquement, même si vous n’utilisez pas Cortana ou les fonctions d’accessibilité. Ce réglage empêche ces mises à jour silencieuses.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Une fonction qui a accès à toutes vos données et échange certaines informations avec Microsoft, sans utilité directe pour l’utilisateur. Elle peut être désactivée sans incidence sur le système.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Ce paramètre désactive l’enregistrement de l’activité utilisateur (UAR), qui peut suivre toutes vos actions, captures d’écran, saisies, lancements de programmes, et même l’accès à la webcam, y compris lorsque l’écran est verrouillé.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows met régulièrement à jour les cartes hors ligne et envoie des notifications sur les nouvelles données en arrière-plan. Ces processus peuvent collecter des informations sur votre position, vos itinéraires et votre utilisation des cartes. Si vous n'utilisez pas les cartes hors ligne, il est recommandé de les désactiver pour éviter les mises à jour cachées et la transmission de données aux serveurs de Microsoft sans votre intervention directe.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Le module Intel, qui fonctionne en arrière-plan pour collecter et transmettre des données, est présenté comme un outil d'amélioration des produits de l'entreprise. Cependant, pour l'utilisateur moyen, il offre peu d'avantages pratiques, et la désactivation de cette fonction peut réduire l'activité en arrière-plan et empêcher la transmission inutile de données.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

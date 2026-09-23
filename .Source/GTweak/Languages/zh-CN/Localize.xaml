@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">收集并发送键盘输入及手写数据</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">收集硬件配置数据 (CEIP)</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">屏蔽微软间谍域名的网络连接</v:String>
-    <v:String x:Key="UserLocationTracking_conf">获取用户的地理位置信息</v:String>
     <v:String x:Key="FeedbackRequests_conf">通过“反馈”收集请求数据</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">语音合成引擎的后台静默更新</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">系统后台的隐藏监控活动</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">记录用户行为 (UAR)</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">离线地图的数据收集与后台更新</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel 遥测数据的收集与监控</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows 会为每个用户创建一个唯一的广告 ID 以追踪您的操作。应用开发者及 Windows 本身会利用它在应用内向您推送个性化广告。</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">即使使用本地账户，Windows 也会不断尝试将您的数据（如主题、密码、Windows 设置、浏览器设置、输入法设置等）同步到微软服务器。</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">此优化禁用了微软用于改进其手写识别技术的数据收集机制。无论您是否使用该功能，系统默认都在追踪您的活动。禁用后有助于保护隐私。</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">客户体验改善计划 (CEIP) 是一项独立功能，用于收集您的硬件配置以及软件服务的使用情况。该计划完全自愿，您无需牺牲隐私向微软发送数据。</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">此优化通过在 hosts 文件中将特定域名指向 0.0.0.0 来屏蔽它们，并修改 Windows 防火墙设置，阻止系统连接与微软数据收集服务相关的 IP 地址。</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">禁用定位服务可大幅降低位置数据被用于广告的风险，不仅微软服务无法获取，任何第三方应用和脚本也将被限制访问该信息。</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">此优化可屏蔽 Windows 的反馈收集及其通知，防止数据在未经许可的情况下被传输。即使您不用“反馈”功能，微软也会记录您联系官方支持的频率。</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows 具备专属的语音识别与合成模块。即使您不使用 Cortana 或“轻松使用”，系统默认也会在后台定期检查语音引擎的更新。</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">该组件可访问任何用户数据并与微软服务器交换部分信息，但对系统和应用的运行毫无影响，对用户也毫无帮助，纯属多余。</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">此优化禁用了 UAR（用户活动记录）功能——该系统会按顺序记录您在电脑上的每一个动作：从截图、打字到启动程序，甚至在锁屏时调用网络摄像头。</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows 会在后台定期更新离线地图并发送通知，此过程可能会收集您的位置和出行路线。如果不使用离线地图，建议禁用以避免数据泄露。</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Intel 模块在后台收集并传输数据，号称用于改进产品，但对普通用户毫无实际益处。禁用它可减少后台活动并防止数据外泄。</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Kézírási adatok gyűjtése és küldése</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Hardverkonfigurációs adatok gyűjtése</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Hálózati hozzáférés a kém Microsoft domainekhez</v:String>
-    <v:String x:Key="UserLocationTracking_conf">A felhasználó helyének meghatározása</v:String>
     <v:String x:Key="FeedbackRequests_conf">Kérések ellenőrzése visszajelzésen keresztül</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">A beszédszintézis rejtett háttérfrissítései</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">A rendszer rejtett felügyelete</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">A felhasználói viselkedés nyilvántartása</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Adatok gyűjtése és offline térképek háttérfrissítései</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel telemetria gyűjtése és monitorozása</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">A Windows minden felhasználó számára egyedi hirdetési azonosítót hoz létre a műveletek nyomon követéséhez. Amelyet az alkalmazásfejlesztők és maga a Windows használnak saját céljaikra, beleértve az alkalmazások konkrét hirdetéseinek megjelenítését is.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">A Windows még helyi fiók használatával is mindig megpróbálja szinkronizálni az adatokat a Microsoft szervereivel. Különösen a következők: témák, jelszavak, Windows-beállítások, böngészőbeállítások, nyelvi sáv beállításai, egyszerűsített hozzáférési beállítások, további beállítások.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Ez a módosítás letiltja azt az adatgyűjtési mechanizmust, amelyet a Microsoft a kézírás-felismerő technológia fejlesztésére használ. Függetlenül attól, hogy használja-e ezt a funkciót vagy sem, a rendszer nyomon követte tevékenységét a felismerés pontosságának javítása érdekében. A végrehajtott változtatások megakadályozzák az ilyen adatgyűjtést, segítve a magánélet megőrzését.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">A Szoftverminőség-javítási program (CEIP) egy különálló szolgáltatás, amely információkat gyűjt a hardver konfigurációjáról, valamint a szoftverek és szolgáltatások használatáról. A program rendszeres időközönként letölt egy fájlt, amely információkat gyűjt a Windows rendszerrel kapcsolatos problémákról. A program önkéntes, és nem kell elküldenie adatait a Microsoftnak, ami sérti a magánéletét.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Ez a módosítás módosítja a hosts fájlt úgy, hogy a 0.0.0.0 címet hozzáadja bizonyos domain nevek elé, hatékonyan blokkolva azokat. Ezenkívül módosítja a Windows tűzfal beállításait, hogy blokkolja a Microsoft adatgyűjtési szolgáltatásaihoz társított több IP-címhez való csatlakozást.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">A földrajzi helymeghatározási szolgáltatások letiltása jelentősen csökkenti a helyadatok hirdetési célokra való felhasználásának lehetőségét – az ezekhez az információkhoz való hozzáférés nem csak a Microsoft-szolgáltatások, hanem a harmadik féltől származó alkalmazások és parancsfájlok esetében is korlátozott.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">A beállítás blokkolja a visszajelzések gyűjtését és értesítéseit a Windows rendszerben, ami megakadályozza az adatok továbbítását az Ön beleegyezése nélkül. Eközben, még ha nem is használja a "Visszajelzés" funkciót, a Microsoft továbbra is naplózza, hogy milyen gyakran lép kapcsolatba a hivatalos ügyfélszolgálattal.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">A Windows képes felismerni a beszédet egy dedikált beszédfelismerő és szintézis modul segítségével. Még akkor is, ha nem használja a Cortanát vagy a «Könnyű hozzáférést», az operációs rendszer alapértelmezés szerint mindig ellenőrzi a hangfelismerő motor frissítéseit.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Olyan funkció, amely bármilyen felhasználói adathoz hozzáfér. Bizonyos információkat cserél a Microsoft szervereivel, és semmilyen módon nem befolyásolja az operációs rendszer vagy az alkalmazások működését. Semmilyen módon nem segíti a felhasználót, ami haszontalanná teszi.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">A beállítás letiltja az UAR (User Activity Recording) funkciót - egy olyan rendszert, amely szekvenciálisan naplózza a számítógépen végrehajtott összes műveletet: a képernyőképek készítésétől és a szöveg beírásától a programok indításáig, sőt a webkamerához való hozzáférés biztosításáig, miközben a képernyő zárolva van, és még sok más.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">A Windows rendszeresen frissíti az offline térképeket, és háttérben értesítéseket küld az új adatokról. Ezek a folyamatok információkat gyűjthetnek a felhasználó tartózkodási helyéről, útvonalairól és a térkép használatáról. Ha nem használja az offline térképeket, javasoljuk azok letiltását, hogy elkerülje a rejtett frissítéseket és az adatok Microsoft szerverekre történő továbbítását a felhasználó közvetlen beavatkozása nélkül.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Az Intel modul, amely a háttérben működik az adatok gyűjtése és továbbítása céljából, a vállalat termékeinek fejlesztését szolgáló eszközként van pozícionálva. Az átlagos felhasználó számára azonban ez a funkció kevés gyakorlati hasznot jelent, és letiltásával csökkenthető a háttértevékenység és megelőzhető a felesleges adatátvitel.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

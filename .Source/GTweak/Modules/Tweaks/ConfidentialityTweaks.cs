@@ -20,8 +20,10 @@ namespace GTweak.Modules.Tweaks
 
             DataSynchronization,
 
+            [PostAction(NotificationManager.AlertType.Restart)]
             WindowsTelemetry,
 
+            [PostAction(NotificationManager.AlertType.Restart)]
             SchedulerDataCollection,
 
             InstalledAppsData,
@@ -30,13 +32,10 @@ namespace GTweak.Modules.Tweaks
 
             HandwritingData,
 
-
             [PostAction(NotificationManager.AlertType.Restart)]
             HardwareConfigurationData,
 
             HiddenMicrosoftDomains,
-
-            UserLocationTracking,
 
             FeedbackRequests,
 
@@ -58,7 +57,11 @@ namespace GTweak.Modules.Tweaks
             OfflineMapsUpdates,
 
             [PostAction(NotificationManager.AlertType.Restart)]
-            IntelTelemetry
+            IntelTelemetry,
+
+            [PostAction(NotificationManager.AlertType.Restart)]
+            OfficeTelemetry
+
         }
 
         internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
@@ -122,33 +125,69 @@ namespace GTweak.Modules.Tweaks
                         }
                     }
                 ),
-
                 [Toggle.WindowsTelemetry] = (
-                   Check: () =>
-                   {
-                       return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
-                       RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1") || IsTaskEnabled(telemetryTasks);
-                   },
-                   Apply: (state) =>
-                   {
-                       RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", state ? 1 : 0, RegistryValueKind.DWord);
+                    Check: () =>
+                    {
+                        return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", "0") ||
+                        RegistryHelper.CheckValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", "1") ||
+                        File.Exists(PathTargets.Targets.CompatTelRunner.Normal) || IsTaskEnabled(telemetryTasks);
+                    },
+                    Apply: (state) =>
+                    {
+                        RegistryHelper.Write(Registry.LocalMachine, @"SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener", "Start", state ? 1 : 0, RegistryValueKind.DWord);
 
-                       if (state)
-                       {
-                           RegistryHelper.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
-                       }
-                       else
-                       {
-                           RegistryHelper.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
-                       }
+                        if (state)
+                        {
+                            RegistryHelper.DeleteValue(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation");
+                        }
+                        else
+                        {
+                            RegistryHelper.Write(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments", "SaveZoneInformation", 1, RegistryValueKind.DWord);
+                        }
 
-                       SetTaskState(state, telemetryTasks);
-                   }
+                        string currentFilePath = state ? PathTargets.Targets.CompatTelRunner.Block : PathTargets.Targets.CompatTelRunner.Normal;
+                        string targetFilePath = state ? PathTargets.Targets.CompatTelRunner.Normal : PathTargets.Targets.CompatTelRunner.Block;
+
+                        try
+                        {
+                            if (File.Exists(currentFilePath))
+                            {
+                                if (state)
+                                {
+                                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                    $@"(if exist ""{targetFilePath}"" (takeown /f ""{targetFilePath}"" /a && del /f /q /a ""{targetFilePath}"") else (cd .))",
+                                    $@"takeown /f ""{currentFilePath}"" /a",
+                                    $@"rename ""{currentFilePath}"" ""{Path.GetFileName(targetFilePath)}""",
+                                    $@"icacls ""{targetFilePath}"" /setowner *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464",
+                                    $@"icacls ""{targetFilePath}"" /inheritance:r",
+                                    $@"icacls ""{targetFilePath}"" /grant *S-1-5-32-544:F",
+                                    $@"icacls ""{targetFilePath}"" /grant *S-1-5-32-545:R",
+                                    $@"icacls ""{targetFilePath}"" /grant *S-1-5-18:F",
+                                    $@"icacls ""{targetFilePath}"" /grant *S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464:F",
+                                    $@"icacls ""{targetFilePath}"" /grant *S-1-15-2-1:R",
+                                    $@"icacls ""{targetFilePath}"" /grant *S-1-15-2-2:R",
+                                    $@"icacls ""{targetFilePath}"" /remove ""{Environment.UserName}"""}))}""");
+                                }
+                                else
+                                {
+                                    CommandExecutor.RunCommandAsTrustedInstaller($@"/c ""{CommandExecutor.CleanCommand(string.Join(" && ", new[] {
+                                    $@"takeown /f ""{currentFilePath}"" /a",
+                                    $@"icacls ""{currentFilePath}"" /inheritance:r /remove *S-1-5-32-544 *S-1-5-11 *S-1-5-32-545 *S-1-5-18",
+                                    $@"icacls ""{currentFilePath}"" /grant ""{Environment.UserName}"":F",
+                                    $@"(if exist ""{targetFilePath}"" (takeown /f ""{targetFilePath}"" /a && del /f /q /a ""{targetFilePath}"") else (cd .))",
+                                    $@"rename ""{currentFilePath}"" ""{Path.GetFileName(targetFilePath)}"""}))}""");
+                                }
+                            }
+                        }
+                        catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+
+                        SetTaskStateOwner(state, telemetryTasks);
+                    }
                 ),
 
                 [Toggle.SchedulerDataCollection] = (
                     Check: () => IsTaskEnabled(dataCollectTasks),
-                    Apply: (state) => SetTaskState(state, dataCollectTasks)
+                    Apply: (state) => SetTaskStateOwner(state, dataCollectTasks)
                 ),
 
                 [Toggle.InstalledAppsData] = (
@@ -298,30 +337,6 @@ namespace GTweak.Modules.Tweaks
                             }
                             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
                         });
-                    }
-                ),
-
-                [Toggle.UserLocationTracking] = (
-                    Check: () =>
-                    {
-                        return RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "1") ||
-                        RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", "1") ||
-                        RegistryHelper.CheckValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", "1");
-                    },
-                    Apply: (state) =>
-                    {
-                        if (state)
-                        {
-                            RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation");
-                            RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting");
-                            RegistryHelper.DeleteValue(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider");
-                        }
-                        else
-                        {
-                            RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", 1, RegistryValueKind.DWord);
-                            RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", 1, RegistryValueKind.DWord);
-                            RegistryHelper.Write(Registry.LocalMachine, @"SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", 1, RegistryValueKind.DWord);
-                        }
                     }
                 ),
 
@@ -563,6 +578,11 @@ namespace GTweak.Modules.Tweaks
 
                         SetTaskState(state, intelTask);
                     }
+                ),
+
+                [Toggle.OfficeTelemetry] = (
+                    Check: () => IsTaskEnabled(OfficeTasks),
+                    Apply: (state) => SetTaskStateOwner(state, OfficeTasks)
                 ),
             };
         }

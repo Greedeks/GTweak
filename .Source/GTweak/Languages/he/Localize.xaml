@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">איסוף ושליחה של נתוני כתב יד</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">איסוף נתוני תצורת חומרה</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">גישת רשת לדומיינים מרגלים של Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">קביעת מיקום המשתמש</v:String>
     <v:String x:Key="FeedbackRequests_conf">בדיקת בקשות דרך Feedback</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">עדכוני רקע נסתרים של סינתזת דיבור</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">ניטור נסתר של המערכת שלך</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">שמירת תיעוד של התנהגות המשתמש</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">איסוף נתונים ועדכוני רקע של מפות לא מקוונות</v:String>
     <v:String x:Key="IntelTelemetry_conf">איסוף ומעקב של טלמטריית Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows יוצר מזהה פרסום ייחודי לכל משתמש כדי לעקוב אחר הפעולות שלך. מזהה זה משמש מפתחי יישומים ואת Windows עצמה למטרותיהם, כולל הצגת פרסומות ספציפיות ביישומים.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">גם בשימוש בחשבון מקומי, Windows תמיד מנסה לסנכרן את הנתונים שלך עם שרתי Microsoft. בפרט: ערכות נושא, סיסמאות, הגדרות Windows, הגדרות דפדפן, הגדרות שורת השפה, הגדרות נגישות והגדרות נוספות.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">טוויק זה משבית את מנגנון איסוף הנתונים ש-Microsoft משתמשת בו לשיפור טכנולוגיית זיהוי כתב היד שלה. ללא קשר לשימוש בתכונה זו, המערכת עקבה אחר הפעילות שלך כדי לשפר את דיוק הזיהוי. השינויים שיופעלו מונעים איסוף נתונים כזה ועוזרים לשמור על הפרטיות.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">תוכנית שיפור איכות התוכנה (CEIP) היא תכונה נפרדת האוספת מידע על תצורת החומרה ועל אופן השימוש שלך בתוכנה ובשירותים. התוכנית גם מורידה מעת לעת קובץ לאיסוף מידע על בעיות שאתה עלול לחוות עם Windows. התוכנית היא וולונטרית, ואינך חייב לשלוח את הנתונים שלך ל-Microsoft ולפגוע בפרטיות שלך.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">טוויק זה משנה את קובץ hosts על ידי הוספת הכתובת 0.0.0.0 לפני שמות דומיינים מסוימים, וחוסם אותם למעשה. בנוסף, הוא משנה את הגדרות חומת האש של Windows כדי לחסום חיבורים לכמה כתובות IP הקשורות לשירותי איסוף הנתונים של Microsoft.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">השבתת שירותי המיקום מצמצמת משמעותית את הפוטנציאל לשימוש בנתוני מיקום למטרות פרסום – הגישה למידע זה מוגבלת לא רק עבור שירותי Microsoft אלא גם עבור יישומים וסקריפטים של צד שלישי.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">הטוויק חוסם את איסוף המשוב וההתראות שלו ב-Windows, מה שמונע שידור נתונים ללא הסכמתך. בנוסף, גם אם אינך משתמש בתכונת «Feedback», Microsoft עדיין מתעדת באיזו תדירות אתה פונה לתמיכה הרשמית.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows מסוגלת לזהות דיבור באמצעות מודול ייעודי לזיהוי וסינתזת דיבור. גם אם אינך משתמש ב-Cortana או ב«אפשרויות נגישות», מערכת ההפעלה שלך תמיד בודקת כברירת מחדל אם יש עדכונים למנוע זיהוי הדיבור.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">פונקציה שיש לה גישה לכל נתוני המשתמש. היא מחליפה מידע עם שרתי Microsoft ואינה משפיעה על פעולת המערכת או היישומים. היא אינה עוזרת למשתמש בשום צורה, מה שהופך אותה לחסרת תועלת.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">הטוויק משבית את התכונה UAR (User Activity Recording) – מערכת המתעדת ברצף כל פעולה שאתה מבצע במחשב שלך: מצילומי מסך והקלדת טקסט ועד הפעלת תוכנות ואפילו מתן גישה למצלמת האינטרנט כשהמסך נעול, ועוד.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows מעדכן מעת לעת מפות לא מקוונות ושולח התראות על נתונים חדשים ברקע. תהליכים אלו עשויים לאסוף מידע על מיקומך, מסלוליך ושימושך במפות. אם אינך משתמש במפות לא מקוונות, מומלץ להשביתן כדי להימנע מעדכונים נסתרים ומשידור נתונים לשרתי Microsoft ללא מעורבותך הישירה.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">מודול ה-Intel הפועל ברקע לאיסוף ושידור נתונים מוצג ככלי לשיפור מוצרי החברה. עם זאת, עבור המשתמש הממוצע הוא מעניק תועלת מעשית מועטה, והשבתת תכונה זו עשויה לצמצם פעילות רקע ולמנוע שידור נתונים מיותר.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

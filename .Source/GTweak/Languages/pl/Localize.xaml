@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Zbieranie i wysyłanie danych pisma ręcznego</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Zbieranie danych o konfiguracji sprzętu</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Dostęp sieciowy do domen szpiegowskich Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Określanie lokalizacji użytkownika</v:String>
     <v:String x:Key="FeedbackRequests_conf">Sprawdzanie żądań przez Centrum opinii</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Ukryte aktualizacje syntezy mowy w tle</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Ukryte monitorowanie systemu</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Prowadzenie rejestru zachowania użytkownika</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Zbieranie danych i aktualizacje w tle map offline</v:String>
     <v:String x:Key="IntelTelemetry_conf">Zbieranie i monitorowanie telemetrii Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">System Windows tworzy unikalny identyfikator reklamowy dla każdego użytkownika w celu śledzenia jego działań. Jest on używany przez deweloperów aplikacji i sam Windows do własnych celów, w tym do wyświetlania spersonalizowanych reklam w aplikacjach.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Nawet korzystając z konta lokalnego, system Windows stale próbuje synchronizować dane z serwerami Microsoft. Dotyczy to m.in.: motywów, haseł, ustawień systemu Windows, ustawień przeglądarki, ustawień paska języka, ustawień ułatwień dostępu i innych ustawień dodatkowych.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Ta poprawka wyłącza mechanizm zbierania danych, którego Microsoft używa do ulepszania technologii rozpoznawania pisma ręcznego. Niezależnie od tego, czy korzystasz z tej funkcji, system śledził Twoją aktywność w celu poprawy dokładności rozpoznawania. Wprowadzone zmiany uniemożliwiają takie zbieranie danych, pomagając zachować prywatność.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">Program poprawy jakości oprogramowania (CEIP) to oddzielna funkcja, która zbiera informacje o konfiguracji sprzętu i sposobie korzystania z oprogramowania oraz usług. Program okresowo pobiera również plik w celu zebrania informacji o problemach, które możesz napotkać w systemie Windows. Program jest dobrowolny i nie musisz wysyłać swoich danych do Microsoft, naruszając Twoją prywatność.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Ta poprawka modyfikuje plik hosts, dodając adres 0.0.0.0 przed określonymi nazwami domen, skutecznie je blokując. Dodatkowo dostosowuje ustawienia zapory systemu Windows, aby zablokować połączenia z kilkoma adresami IP powiązanymi z usługami zbierania danych Microsoft.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Wyłączenie usług geolokalizacji znacząco ogranicza możliwość wykorzystania danych lokalizacyjnych do celów reklamowych — dostęp do tych informacji jest ograniczony nie tylko dla usług Microsoft, ale również dla wszelkich aplikacji i skryptów firm trzecich.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">Poprawka blokuje zbieranie opinii i powiązanych powiadomień w systemie Windows, co zapobiega przesyłaniu danych bez Twojej zgody. Tymczasem nawet jeśli nie korzystasz z funkcji «Centrum opinii», Microsoft nadal rejestruje, jak często kontaktujesz się z oficjalną pomocą techniczną.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">System Windows rozpoznaje mowę przy użyciu dedykowanego modułu rozpoznawania i syntezy mowy. Nawet jeśli nie korzystasz z Cortany ani «Ułatwień dostępu», Twój system operacyjny domyślnie zawsze sprawdza dostępność aktualizacji silnika rozpoznawania głosu.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Funkcja mająca dostęp do wszelkich danych użytkownika. Wymienia pewne informacje z serwerami Microsoft i w żaden sposób nie wpływa na działanie systemu operacyjnego ani aplikacji. Nie przynosi użytkownikowi żadnych korzyści, co czyni ją bezużyteczną.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Poprawka wyłącza funkcję UAR (User Activity Recording) — system, który sekwencyjnie rejestruje każdą czynność wykonywaną na komputerze: od robienia zrzutów ekranu i wpisywania tekstu po uruchamianie programów, a nawet dostęp do kamery internetowej przy zablokowanym ekranie i wiele więcej.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">System Windows okresowo aktualizuje Mapy offline i wysyła powiadomienia o nowych danych w tle. Procesy te mogą gromadzić informacje o Twojej lokalizacji, trasach i sposobie korzystania z map. Jeśli nie używasz Map offline, zaleca się ich wyłączenie, aby uniknąć ukrytych aktualizacji i przesyłania danych do serwerów Microsoft bez Twojego bezpośredniego udziału.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Moduł Intel działający w tle w celu zbierania i przesyłania danych jest pozycjonowany jako narzędzie do ulepszania produktów firmy. Jednak dla przeciętnego użytkownika przynosi niewiele praktycznych korzyści, a wyłączenie tej funkcji może zmniejszyć aktywność w tle i zapobiec niepotrzebnemu przesyłaniu danych.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

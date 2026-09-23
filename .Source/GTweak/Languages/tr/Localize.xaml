@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">El yazısı verilerinin toplanması ve gönderilmesi</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Donanım yapılandırma verilerinin toplanması</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Microsoft casus sunucularına ağ erişimi</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Kullanıcı konumunun belirlenmesi</v:String>
     <v:String x:Key="FeedbackRequests_conf">Geri Bildirim aracılığıyla isteklerin izlenmesi</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Konuşma sentezinin arka planda gizlice güncellenmesi</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Sisteminizin gizlice izlenmesi</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Kullanıcı davranışlarının kayıt altına alınması</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Çevrimdışı haritaların veri toplaması ve arka plan güncellemeleri</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel telemetri verilerinin toplanması ve izlenmesi</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows, her kullanıcı için benzersiz bir reklam kimliği oluşturarak eylemlerinizi izler. Bu kimlik, uygulama geliştiricileri ve bizzat Windows tarafından özellikle size kişiselleştirilmiş reklamlar sunmak gibi kendi amaçları doğrultusunda kullanılır.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Yerel bir hesap kullansanız bile Windows, verilerinizi Microsoft sunucularıyla sürekli senkronize etmeye çalışır. Senkronize edilen veriler arasında temalar, parolalar, Windows ayarları, tarayıcı ayarları, dil çubuğu ayarları, Erişim Kolaylığı ayarları ve diğer ek ayarlar yer alır.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Bu ayar, Microsoft'un el yazısı tanıma teknolojisini geliştirmek için kullandığı veri toplama mekanizmasını devre dışı bırakır. Bu özelliği kullanıp kullanmadığınızdan bağımsız olarak sistem, tanıma doğruluğunu artırmak amacıyla etkinliklerinizi izliyordu. Bu ayar, veri toplanmasını önleyerek gizliliğinizi korur.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">Müşteri Deneyimi Geliştirme Programı (CEIP), donanım yapılandırmanız ile yazılım ve hizmetleri nasıl kullandığınıza dair bilgileri toplayan ayrı bir özelliktir. Program ayrıca Windows'ta karşılaşabileceğiniz sorunlara ilişkin bilgi toplamak için periyodik olarak dosya indirir. Katılım isteğe bağlıdır; verilerinizi gizliliğinizi ihlal edecek biçimde Microsoft'a göndermek zorunda değilsiniz.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Bu ayar, Windows hosts dosyasına belirli alan adlarının önüne 0.0.0.0 adresi ekleyerek casus sunucuları engeller. Ayrıca Windows güvenlik duvarı ayarlarını, Microsoft'un veri toplama hizmetleriyle ilişkili çeşitli IP adreslerine yapılan bağlantıları engelleyecek şekilde yapılandırır.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Konum hizmetlerinin devre dışı bırakılması, konum verilerinin reklam amacıyla kullanılma potansiyelini önemli ölçüde azaltır. Bu bilgilere yalnızca Microsoft hizmetleri değil, üçüncü taraf uygulamalar ve komut dosyaları (script) da erişemez.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">Bu ayar, Windows'taki geri bildirim toplanmasını ve buna ait bildirimleri engelleyerek verilerinizin izniniz olmadan iletilmesini önler. Ayrıca, Geri Bildirim özelliğini kullanmasanız bile Microsoft, resmi destekle ne sıklıkta iletişime geçtiğinizi kayıt altına almaktadır.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows, özel bir konuşma tanıma ve sentezleme modülü aracılığıyla sesi tanıyabilir. Cortana veya Erişim Kolaylığı özelliklerini kullanmasanız bile işletim sisteminiz, varsayılan olarak ses tanıma motoru güncellemelerini sürekli denetler.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Herhangi bir kullanıcı verisine erişebilen ve Microsoft sunucularıyla bazı bilgileri paylaşan bir işlevdir. İşletim sisteminin veya uygulamaların çalışmasını hiçbir şekilde etkilemez ve kullanıcıya hiçbir faydası yoktur, bu da onu tamamen gereksiz kılar.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Bu ayar, UAR (Kullanıcı Etkinliği Kaydı) özelliğini devre dışı bırakır. Bu sistem; ekran görüntüsü almaktan metin yazmaya, program başlatmaktan ekran kilitliyken web kamerasına erişime kadar bilgisayarınızda gerçekleştirdiğiniz her eylemi sırayla kaydeder.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows periyodik olarak Çevrimdışı Haritaları günceller ve arka planda yeni veriler hakkında bildirim gönderir. Bu süreçler konumunuz, rotalarınız ve harita kullanımınız hakkında bilgi toplayabilir. Çevrimdışı Haritaları kullanmıyorsanız, gizli güncellemeleri ve sizden habersiz Microsoft sunucularına veri iletimini önlemek için bunları devre dışı bırakmanız önerilir.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Veri toplamak ve iletmek için arka planda çalışan bu Intel modülü, şirketin ürünlerini geliştirmesi için bir araç olarak konumlandırılmıştır. Ancak ortalama bir kullanıcı için pratik hiçbir fayda sağlamaz. Bu özelliği devre dışı bırakmak arka plan etkinliğini azaltır ve gereksiz veri aktarımını önler.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->

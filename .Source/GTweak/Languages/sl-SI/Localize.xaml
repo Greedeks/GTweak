@@ -172,7 +172,6 @@
     <v:String x:Key="HandwritingData_conf">Zbiranje in pošiljanje podatkov o rokopisu</v:String>
     <v:String x:Key="HardwareConfigurationData_conf">Zbiranje podatkov o strojni konfiguraciji</v:String>
     <v:String x:Key="HiddenMicrosoftDomains_conf">Omrežni dostop do vohunskih domen Microsoft</v:String>
-    <v:String x:Key="UserLocationTracking_conf">Določanje lokacije uporabnika</v:String>
     <v:String x:Key="FeedbackRequests_conf">Preverjanje zahtevkov prek povratnih informacij</v:String>
     <v:String x:Key="SpeechSynthesisUpdates_conf">Skrite posodobitve sinteze govora v ozadju</v:String>
     <v:String x:Key="HiddenSystemMonitoring_conf">Skrito spremljanje vašega sistema</v:String>
@@ -183,6 +182,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Vodenje evidence vedenja uporabnika</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Zbiranje podatkov in posodobitve izklopnih zemljevidov v ozadju</v:String>
     <v:String x:Key="IntelTelemetry_conf">Zbiranje in spremljanje telemetrije Intel</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows ustvari edinstven identifikator oglaševanja za vsakega uporabnika za sledenje vašim dejanjem. Uporabljajo ga razvijalci aplikacij in sam Windows za svoje namene, vključno s prikazovanjem specifičnih oglasov v aplikacijah.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Tudi pri uporabi lokalnega računa Windows vedno poskuša sinhronizirati vaše podatke s strežniki Microsoft. Zlasti: teme, gesla, nastavitve sistema Windows, nastavitve brskalnika, nastavitve jezikovne vrstice, nastavitve poenostavljenega dostopa, dodatne nastavitve.</v:String>
@@ -193,7 +193,6 @@
     <v:String x:Key="desc_HandwritingData_conf">Ta popravek onemogoči mehanizem zbiranja podatkov, ki ga Microsoft uporablja za izboljšanje svoje tehnologije prepoznavanja rokopisa. Ne glede na to, ali uporabljate to funkcijo ali ne, je sistem sledil vaši dejavnosti za izboljšanje natančnosti prepoznavanja. Uvedene spremembe preprečujejo takšno zbiranje podatkov in pomagajo ohranjati zasebnost.</v:String>
     <v:String x:Key="desc_HardwareConfigurationData_conf">Program za izboljšanje kakovosti programske opreme (CEIP) je ločena funkcija, ki zbira informacije o konfiguraciji vaše strojne opreme in o tem, kako uporabljate programsko opremo in storitve. Program občasno prenese tudi datoteko za zbiranje informacij o težavah, ki jih imate z Windows. Program je prostovoljen in vam ni treba pošiljati svojih podatkov Microsoftu, kar krši vašo zasebnost.</v:String>
     <v:String x:Key="desc_HiddenMicrosoftDomains_conf">Ta popravek spremeni datoteko hosts tako, da doda naslov 0.0.0.0 pred specifična imena domen, s čimer jih dejansko blokira. Poleg tega prilagodi nastavitve požarnega zidu Windows za blokiranje povezav z več naslovi IP, povezanimi s storitvami zbiranja podatkov Microsoft.</v:String>
-    <v:String x:Key="desc_UserLocationTracking_conf">Onemogočanje geolokacijskih storitev znatno zmanjša možnost uporabe podatkov o lokaciji za namene oglaševanja – dostop do teh informacij je omejen ne samo za Microsoftove storitve, ampak tudi za vse aplikacije in skripte tretjih oseb.</v:String>
     <v:String x:Key="desc_FeedbackRequests_conf">Popravek blokira zbiranje povratnih informacij in njihovih obvestil v Windows, kar preprečuje prenos podatkov brez vašega soglasja. Medtem, tudi če ne uporabljate funkcije "Povratne informacije", Microsoft še vedno beleži, kako pogosto stopite v stik z uradno podporo.</v:String>
     <v:String x:Key="desc_SpeechSynthesisUpdates_conf">Windows lahko prepozna govor z uporabo namenskega modula za prepoznavanje in sintezo govora. Tudi če ne uporabljate Cortane ali "Enostavnega dostopa", vaš operacijski sistem privzeto vedno preverja posodobitve za svoj motor za prepoznavanje govora.</v:String>
     <v:String x:Key="desc_HiddenSystemMonitoring_conf">Funkcija, ki ima dostop do vseh uporabniških podatkov. Izmenjuje nekaj informacij s strežniki Microsoft in nikakor ne vpliva na delovanje operacijskega sistema ali aplikacij. Uporabniku nikakor ne pomaga, zaradi česar je neuporabna.</v:String>
@@ -204,6 +203,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Popravek onemogoči funkcijo UAR (User Activity Recording) – sistem, ki zaporedno beleži vsako vaše dejanje na računalniku: od zajemanja zaslonskih slik in tipkanja besedila do zaganjanja programov in celo omogočanja dostopa do spletne kamere, ko je zaslon zaklenjen, in veliko več.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows občasno posodablja izklopne zemljevide in v ozadju pošilja obvestila o novih podatkih. Ti procesi lahko zbirajo informacije o vaši lokaciji, poteh in uporabi zemljevidov. Če ne uporabljate izklopnih zemljevidov, jih priporočamo, da jih onemogočite, da se izognete skritim posodobitvam in prenosu podatkov na Microsoftove strežnike brez vaše neposredne vpletenosti.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Modul Intel, ki deluje v ozadju za zbiranje in prenos podatkov, je predstavljen kot orodje za izboljšanje izdelkov podjetja. Vendar za povprečnega uporabnika nima veliko praktične koristi, onemogočanje te funkcije pa lahko zmanjša aktivnost v ozadju in prepreči nepotreben prenos podatkov.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
