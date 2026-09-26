@@ -183,6 +183,7 @@ namespace GTweak.Modules.Tweaks
         {
             RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
             RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, @"Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
+            RegistryHelper.DeleteFolderTree(Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe");
 
             SetTaskState(false, oneDriveTask);
 

@@ -16,6 +16,7 @@ namespace GTweak.Modules.Common
             internal static readonly (string Key, string Value)[] OneDriveSetupKeys =
             {
                 (@"HKEY_CURRENT_USER\Software\Microsoft\OneDrive", "OneDriveTrigger"),
+                (@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe", "UninstallString"),
                 (@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe", "UninstallString"),
                 (@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\OneDriveSetup.exe", "UninstallString"),
             };
@@ -299,6 +300,28 @@ namespace GTweak.Modules.Common
                 return string.Empty;
             }
 
+            private static string ExtractExecutablePath(string raw)
+            {
+                raw = raw.Trim();
+
+                if (raw.StartsWith("\""))
+                {
+                    int nextQuote = raw.IndexOf('"', 1);
+                    if (nextQuote > 0)
+                    {
+                        return raw.Substring(1, nextQuote - 1);
+                    }
+                }
+
+                int exeIndex = raw.IndexOf(".exe", StringComparison.OrdinalIgnoreCase);
+                if (exeIndex >= 0)
+                {
+                    return raw.Substring(0, exeIndex + 4).Trim('"');
+                }
+
+                return null;
+            }
+
             internal static readonly string CommandShell = FindExecutablePath("cmd.exe");
 
             internal static readonly string PowerShell = FindExecutablePath("pwsh.exe", "powershell.exe");
@@ -315,13 +338,27 @@ namespace GTweak.Modules.Common
                 {
                     foreach (var (key, value) in Registry.OneDriveSetupKeys)
                     {
-                        string path = RegistryHelper.GetValue<string>(key, value, null);
+                        string rawValue = RegistryHelper.GetValue<string>(key, value, null);
+                        if (string.IsNullOrWhiteSpace(rawValue))
+                        {
+                            continue;
+                        }
+
+                        string path = ExtractExecutablePath(rawValue);
                         if (string.IsNullOrEmpty(path))
                         {
                             continue;
                         }
 
-                        path = value == "OneDriveTrigger" ? Path.Combine(Path.GetDirectoryName(path), "OneDriveSetup.exe") : path.Split(new[] { " /" }, StringSplitOptions.None)[0].Trim('"');
+                        if (value == "OneDriveTrigger")
+                        {
+                            string dir = Path.GetDirectoryName(path);
+                            if (string.IsNullOrEmpty(dir))
+                            {
+                                continue;
+                            }
+                            path = Path.Combine(dir, "OneDriveSetup.exe");
+                        }
 
                         if (File.Exists(path))
                         {
@@ -383,6 +420,7 @@ namespace GTweak.Modules.Common
                 Path.Combine(Folders.OneDrive, "Update", "OneDrive.exe"),
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft OneDrive", "OneDrive.exe"),
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft OneDrive", "OneDrive.exe"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Microsoft", "OneDrive", "OneDrive.exe"),
             };
 
             internal static readonly string DisablingWD = Path.Combine(Folders.DefenderBackup, "DisablingWD.exe");
