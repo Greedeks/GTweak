@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">Glasba</v:String>
     <v:String x:Key="FolderVideo_intf">Videoposnetki</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">Standardna velikost sistemskih gumbov</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Standardna frekvenca utripanja kazalca</v:String>
     <v:String x:Key="ScrollbarSize_intf">Standardna velikost drsnega traku</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">Odpri "Hitri dostop" namesto "Ta računalnik"</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Spontane spremembe svetlosti</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Spremeni barvo ozadja pri izbiranju besedila ali predmetov s kazalcem v sistemu.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Spremeni barvo namigov v podprtih aplikacijah.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Spremeni vidnost vgrajenih sistemskih elementov v navigacijskem podoknu, ki jih ni mogoče odpeti z običajnimi sredstvi.</v:String>

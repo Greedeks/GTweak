@@ -12,7 +12,8 @@ namespace GTweak.Core.ViewModel
     {
         public IReadOnlyDictionary<string, ImageSource> Icons { get; }
         public Visibility Win11FeatureOnly => HardwareData.OS.IsWin11 ? Visibility.Visible : Visibility.Collapsed;
-        public Visibility Win11FeatureAvailable => HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(22621.2361m) >= 0 ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility TaskbarEndTaskAvailable => HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(22621.2361m) >= 0 ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility TaskbarPositionAvailable => HardwareData.OS.IsWin10 || (HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(26200.9550m) >= 0) ? Visibility.Visible : Visibility.Collapsed;
         public Visibility OneDriveAvailable => AppxPackageHandler.IsOneDriveInstalled ? Visibility.Visible : Visibility.Collapsed;
 
         protected override void Analyze(InterfaceTweaks tweaks) => tweaks?.CheckAll();

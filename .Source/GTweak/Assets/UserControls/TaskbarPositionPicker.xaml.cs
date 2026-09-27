@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,6 +10,8 @@ namespace GTweak.Assets.UserControls
 {
     public partial class TaskbarPositionPicker : UserControl
     {
+        public event EventHandler PositionPicked;
+
         private static readonly DoubleAnimation _doubleAnim = AnimationFactory.CreateIn(0.4, 1.0, 0.2, useCubicEase: true);
 
         internal static readonly DependencyProperty PositionProperty =
@@ -38,14 +41,12 @@ namespace GTweak.Assets.UserControls
 
         private void Sector_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is FrameworkElement elem && elem.Tag is string tag)
+            if (sender is FrameworkElement elem && elem.Tag is string tag && int.TryParse(tag, out var pos))
             {
-                switch (tag)
+                if (Position != pos)
                 {
-                    case "0": Position = 0; break;
-                    case "1": Position = 1; break;
-                    case "2": Position = 2; break;
-                    case "3": Position = 3; break;
+                    Position = pos;
+                    PositionPicked?.Invoke(this, EventArgs.Empty);
                 }
             }
         }

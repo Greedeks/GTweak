@@ -16,6 +16,8 @@ namespace GTweak.Modules.Tweaks
         {
             CursorSelection,
             Tooltip,
+
+            [PostAction(shell: ExplorerManager.ShellType.Restart)]
             TaskbarPosition
         }
 
@@ -193,6 +195,43 @@ namespace GTweak.Modules.Tweaks
                         RegistryHelper.Write(Registry.Users, @".DEFAULT\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
                         RegistryHelper.Write(Registry.Users, @"S-1-5-19\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
                         RegistryHelper.Write(Registry.Users, @"S-1-5-20\Control Panel\Colors", "InfoWindow", value, RegistryValueKind.String);
+                    }
+                ),
+
+                [Picker.TaskbarPosition] = (
+                    Check: () =>
+                    {
+                        if (HardwareData.OS.IsWin11)
+                        {
+                            return RegistryHelper.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarLocation", "3");
+                        }
+
+                        using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3");
+                        if (key?.GetValue("Settings") is byte[] settings && settings.Length > 12)
+                        {
+                            return settings[12].ToString();
+                        }
+
+                        return "3";
+                    },
+
+                    Apply: (value) =>
+                    {
+                        int pos = int.Parse(value);
+
+                        if (HardwareData.OS.IsWin11)
+                        {
+                            RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarLocation", pos, RegistryValueKind.DWord);
+                        }
+                        else
+                        {
+                            using RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3", true);
+                            if (key?.GetValue("Settings") is byte[] settings && settings.Length > 12)
+                            {
+                                settings[12] = (byte)pos;
+                                RegistryHelper.Write(Registry.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Explorer\StuckRects3", "Settings", settings, RegistryValueKind.Binary);
+                            }
+                        }
                     }
                 )
             };
@@ -1006,9 +1045,9 @@ namespace GTweak.Modules.Tweaks
 
         internal void Apply(string controlName, string value)
         {
-            if (Enum.TryParse<Picker>(controlName, out var colorKey) && _pickerMappings.TryGetValue(colorKey, out var action))
+            if (Enum.TryParse<Picker>(controlName, out var pickerKey) && _pickerMappings.TryGetValue(pickerKey, out var pickerAction))
             {
-                Task.Run(() => action.Apply(value));
+                Task.Run(() => pickerAction.Apply(value));
             }
         }
 

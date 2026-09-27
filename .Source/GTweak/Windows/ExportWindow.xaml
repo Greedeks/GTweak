@@ -56,7 +56,7 @@
 
                 <uc:FlowPanel Margin="10" HorizontalSpacing="10" VerticalSpacing="10" ContentAlignment="Stretch" HorizontalAlignment="Stretch" UseMasonryLayout="False" VerticalAlignment="Top">
 
-                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource rbtn_conf_main}" Tag="{Binding Confidentiality.Count}" Visibility="{Binding Confidentiality.IsVisible, Converter={StaticResource BoolToVisConverter}}">
+                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource ConfidentialityPage}" Tag="{Binding Confidentiality.Count}" Visibility="{Binding Confidentiality.IsVisible, Converter={StaticResource BoolToVisConverter}}">
                         <ItemsControl ItemsSource="{Binding Confidentiality.Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -66,7 +66,7 @@
                         </ItemsControl>
                     </HeaderedContentControl>
 
-                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource rbtn_int_main}" Tag="{Binding Interface.Count}" Visibility="{Binding Interface.IsVisible, Converter={StaticResource BoolToVisConverter}}">
+                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource InterfacePage}" Tag="{Binding Interface.Count}" Visibility="{Binding Interface.IsVisible, Converter={StaticResource BoolToVisConverter}}">
                         <ItemsControl ItemsSource="{Binding Interface.Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -76,7 +76,7 @@
                         </ItemsControl>
                     </HeaderedContentControl>
 
-                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource rbtn_app_main}" Tag="{Binding Packages.Count}" Visibility="{Binding Packages.IsVisible, Converter={StaticResource BoolToVisConverter}}">
+                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource ApplicationsPage}" Tag="{Binding Packages.Count}" Visibility="{Binding Packages.IsVisible, Converter={StaticResource BoolToVisConverter}}">
                         <ItemsControl ItemsSource="{Binding Packages.Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -86,7 +86,7 @@
                         </ItemsControl>
                     </HeaderedContentControl>
 
-                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource rbtn_svc_main}" Tag="{Binding Services.Count}" Visibility="{Binding Services.IsVisible, Converter={StaticResource BoolToVisConverter}}">
+                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource ServicesPage}" Tag="{Binding Services.Count}" Visibility="{Binding Services.IsVisible, Converter={StaticResource BoolToVisConverter}}">
                         <ItemsControl ItemsSource="{Binding Services.Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -96,7 +96,7 @@
                         </ItemsControl>
                     </HeaderedContentControl>
 
-                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource rbtn_sys_main}" Tag="{Binding System.Count}" Visibility="{Binding System.IsVisible, Converter={StaticResource BoolToVisConverter}}">
+                    <HeaderedContentControl Style="{StaticResource ExportCard}" Header="{DynamicResource SystemPage}" Tag="{Binding System.Count}" Visibility="{Binding System.IsVisible, Converter={StaticResource BoolToVisConverter}}">
                         <ItemsControl ItemsSource="{Binding System.Items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>

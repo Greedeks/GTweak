@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">Musica</v:String>
     <v:String x:Key="FolderVideo_intf">Video</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">Dimensione standard dei pulsanti di sistema</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Frequenza standard del lampeggio del cursore</v:String>
     <v:String x:Key="ScrollbarSize_intf">Dimensione standard della barra di scorrimento</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">Apri «Accesso rapido» invece di «Questo PC»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Cambiamenti improvvisi di luminosità</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Modifica il colore di sfondo durante la selezione di testo o oggetti con il cursore nel sistema.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Modifica il colore dei suggerimenti nelle applicazioni supportate.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Modifica la visibilità degli elementi di sistema integrati nel riquadro di navigazione che non possono essere rimossi con i metodi convenzionali.</v:String>

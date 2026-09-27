@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">音樂</v:String>
     <v:String x:Key="FolderVideo_intf">影片</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">系統按鈕標準尺寸</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">標準游標閃爍頻率</v:String>
     <v:String x:Key="ScrollbarSize_intf">標準捲動列尺寸</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">開啟"快速存取"而非"本機"</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">亮度異常變化</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">調整在系統中使用游標選取文字或物件時的背景顏色。</v:String>
     <v:String x:Key="desc_Tooltip_intf">調整受支援應用程式中工具提示的顏色。</v:String>
     <v:String x:Key="desc_NavigationItems_intf">變更導覽窗格中內建系統項目的可見性，這些項目無法以一般方式解除釘選。</v:String>

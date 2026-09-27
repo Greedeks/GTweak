@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">Музыка</v:String>
     <v:String x:Key="FolderVideo_intf">Видео</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Расположение панели задач:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Снизу</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Сверху</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Слева</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Справа</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">Стандартный размер системных кнопок</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Стандартная частота мерцания курсора</v:String>
     <v:String x:Key="ScrollbarSize_intf">Стандартный размер полосы прокрутки</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">Открывать «Быстрый доступ» вместо «Этот компьютер»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Самопроизвольное изменение яркости</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Изменяет расположение панели задач на экране, позволяя закрепить её у нижнего, верхнего, левого или правого края. Обратите внимание, что экран может мигать.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Изменяет цвет фона при выделении текста или объектов курсором в системе.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Изменяет цвет всплывающих подсказок в поддерживаемых приложениях.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Изменяет отображение встроенных системных элементов в области навигации, которые нельзя открепить обычным способом.</v:String>

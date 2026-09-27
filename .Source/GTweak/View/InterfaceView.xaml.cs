@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -34,6 +35,24 @@ namespace GTweak.View
 
             NotificationManager.Default().WithDelay(300).Logout();
         }
+
+        private async void TaskbarPosition_PositionPicked(object sender, EventArgs e)
+        {
+            TaskbarPositionPicker picker = (TaskbarPositionPicker)sender;
+            string pickerName = picker.Name;
+            string positionValue = picker.Position.ToString();
+
+            JsonConfigManager.Write(JsonConfigManager.Section.Interface, pickerName, positionValue);
+
+            await Task.Delay(250);
+
+            ExplorerManager.Restart(async () =>
+            {
+                _intfTweaks.Apply(pickerName, positionValue);
+                await Task.Delay(200);
+            });
+        }
+
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {

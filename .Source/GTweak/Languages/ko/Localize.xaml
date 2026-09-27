@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">음악</v:String>
     <v:String x:Key="FolderVideo_intf">동영상</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">시스템 버튼의 표준 크기</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">표준 커서 깜박임 빈도</v:String>
     <v:String x:Key="ScrollbarSize_intf">표준 스크롤 막대 크기</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">자발적인 밝기 변화</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">시스템에서 커서로 텍스트나 개체를 선택할 때의 배경 색상을 변경합니다.</v:String>
     <v:String x:Key="desc_Tooltip_intf">지원되는 애플리케이션에서 도구 설명의 색상을 변경합니다.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다.</v:String>

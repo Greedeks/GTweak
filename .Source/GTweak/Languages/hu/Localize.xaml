@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">Zenék</v:String>
     <v:String x:Key="FolderVideo_intf">Videók</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">A rendszergombok szabványos mérete</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">A kurzor normál villogási frekvenciája</v:String>
     <v:String x:Key="ScrollbarSize_intf">Normál görgetősáv mérete</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">Nyissa meg a «Gyors hozzáférés»-t «Ez a gép» helyett</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Spontán fényerőváltozások</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Módosítja a háttérszínt a szövegek vagy objektumok kurzorral történő kijelölésekor a rendszerben.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Módosítja a buboréksúgók színét a támogatott alkalmazásokban.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>

@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">Müzik</v:String>
     <v:String x:Key="FolderVideo_intf">Videolar</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">Sistem düğmelerinin standart boyutu</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Standart imleç yanıp sönme hızı</v:String>
     <v:String x:Key="ScrollbarSize_intf">Standart kaydırma çubuğu boyutu</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">Dosya Gezgini'ni "Bu Bilgisayar" konumunda aç</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Otomatik parlaklık değişimleri</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Sistemde metin veya nesne seçtiğinizde imleç seçim alanının arka plan rengini değiştirir.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Desteklenen uygulamalardaki bilgi baloncuklarının (ipuçlarının) rengini değiştirir.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Dosya Gezgini gezinti bölmesinde bulunan ve normal yollarla kaldırılamayan yerleşik sistem öğelerinin görünürlüğünü değiştirir.</v:String>

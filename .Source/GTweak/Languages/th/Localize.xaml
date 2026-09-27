@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">เพลง</v:String>
     <v:String x:Key="FolderVideo_intf">วิดีโอ</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">ขนาดมาตรฐานของปุ่มระบบ</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">ความถี่การกระพริบของเคอร์เซอร์มาตรฐาน</v:String>
     <v:String x:Key="ScrollbarSize_intf">ขนาดแถบเลื่อนมาตรฐาน</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">เปิด «การเข้าถึงด่วน» แทน «เครื่องนี้»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">การเปลี่ยนแปลงความสว่างที่เกิดขึ้นเอง</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">เปลี่ยนสีพื้นหลังเมื่อเลือกข้อความหรือวัตถุด้วยเคอร์เซอร์ในระบบ</v:String>
     <v:String x:Key="desc_Tooltip_intf">เปลี่ยนสีของคำแนะนำเครื่องมือในแอปพลิเคชันที่รองรับ</v:String>
     <v:String x:Key="desc_NavigationItems_intf">เปลี่ยนการมองเห็นของรายการระบบในตัวในบานหน้าต่างนำทางที่ไม่สามารถเลิกปักหมุดได้ด้วยวิธีปกติ</v:String>

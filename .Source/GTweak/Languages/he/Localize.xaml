@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">מוסיקה</v:String>
     <v:String x:Key="FolderVideo_intf">סרטוני וידאו</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">גודל סטנדרטי של כפתורי המערכת</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">תדירות מהבהוב סטנדרטית של הסמן</v:String>
     <v:String x:Key="ScrollbarSize_intf">גודל פס גלילה סטנדרטי</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">פתח את «גישה מהירה» במקום «מחשב זה»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">שינויי בהירות ספונטניים</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">משנה את צבע הרקע בעת בחירת טקסט או אובייקטים עם הסמן במערכת.</v:String>
     <v:String x:Key="desc_Tooltip_intf">משנה את צבע חלוניות העזרה ביישומים נתמכים.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">משנה את הנראות של פריטי המערכת המובנים בחלונית הניווט שאינם ניתנים לביטול הצמדה באמצעים רגילים.</v:String>

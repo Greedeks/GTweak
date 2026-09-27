@@ -3,7 +3,6 @@ using System.IO;
 using System.Windows.Controls;
 using GTweak.Core.Interfaces;
 using GTweak.Modules.Common;
-using GTweak.Modules.Configuration;
 using GTweak.Modules.Maintenance;
 using GTweak.Modules.Managers;
 using GTweak.Windows;
@@ -33,14 +32,7 @@ namespace GTweak.View
             }
             else
             {
-                if (await new NetworkProvider().IsNetworkAvailable())
-                {
-                    await WinLicenseHandler.StartActivation();
-                }
-                else
-                {
-                    NotificationManager.Warn("network_activate_noty").Perform();
-                }
+                await WinLicenseHandler.StartActivation();
             }
         }
 

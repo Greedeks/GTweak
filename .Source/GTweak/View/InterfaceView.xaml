@@ -64,6 +64,11 @@
                                 </CheckBox>
                             </uc:ExpandableBox>
                         </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Height="45" MouseEnter="Tweak_MouseEnter" MouseLeave="Tweak_MouseLeave" Visibility="{Binding TaskbarPositionAvailable}" ToolTip="{DynamicResource desc_TaskbarPosition_intf}" ToolTipService.IsEnabled="False" Background="Transparent">
+                            <TextBlock Style="{StaticResource TextDefault}" VerticalAlignment="Center" Text="{DynamicResource TaskbarPosition_intf}"/>
+                            <uc:TaskbarPositionPicker x:Name="TaskbarPosition" Position="{Binding [TaskbarPosition].Value}" Margin="7,5,5,0" PositionPicked="TaskbarPosition_PositionPicked"/>
+                        </StackPanel>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0,-10,0,-10">
@@ -184,11 +189,11 @@
                     <uc:ToggleButton x:Name="TipsSuggestions" Style="{StaticResource ToggleStyle}" State="{Binding [TipsSuggestions].State}" TextResource="{DynamicResource TipsSuggestions_intf}" Description="{DynamicResource desc_TipsSuggestions_intf}" />
                     <uc:ToggleButton x:Name="CompactExplorerMode" Visibility="{Binding Win11FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [CompactExplorerMode].State}" TextResource="{DynamicResource CompactExplorerMode_intf}" Description="{DynamicResource desc_CompactExplorerMode_intf}" />
                     <uc:ToggleButton x:Name="CopilotRecall" Visibility="{Binding Win11FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [CopilotRecall].State}" TextResource="{DynamicResource CopilotRecall_intf}" Description="{DynamicResource desc_CopilotRecall_intf}" />
-                    <uc:ToggleButton x:Name="TaskbarEndTask" Visibility="{Binding Win11FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [TaskbarEndTask].State}" TextResource="{DynamicResource TaskbarEndTask_intf}" Description="{DynamicResource desc_TaskbarEndTask_intf}" />
+                    <uc:ToggleButton x:Name="TaskbarEndTask" Visibility="{Binding TaskbarEndTaskAvailable}" Style="{StaticResource ToggleStyle}" State="{Binding [TaskbarEndTask].State}" TextResource="{DynamicResource TaskbarEndTask_intf}" Description="{DynamicResource desc_TaskbarEndTask_intf}" />
                     <uc:ToggleButton x:Name="SnapLayouts" Visibility="{Binding Win11FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [SnapLayouts].State}" TextResource="{DynamicResource SnapLayouts_intf}" Description="{DynamicResource desc_SnapLayouts_intf}" />
                     <uc:ToggleButton x:Name="TaskbarIconsButtons" Visibility="{Binding Win11FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [TaskbarIconsButtons].State}" TextResource="{DynamicResource TaskbarIconsButtons_intf}" Description="{DynamicResource desc_TaskbarIconsButtons_intf}" />
                     <uc:ToggleButton x:Name="PersonalizedAds" Visibility="{Binding Win11FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [PersonalizedAds].State}" TextResource="{DynamicResource PersonalizedAds_intf}" Description="{DynamicResource desc_PersonalizedAds_intf}" />
-                    <uc:ToggleButton x:Name="RestoreFolderWindows" Visibility="{Binding Win11FeatureAvailable}" Style="{StaticResource ToggleStyle}" State="{Binding [RestoreFolderWindows].State}" TextResource="{DynamicResource RestoreFolderWindows_intf}" Description="{DynamicResource desc_RestoreFolderWindows_intf}" />
+                    <uc:ToggleButton x:Name="RestoreFolderWindows" Style="{StaticResource ToggleStyle}" State="{Binding [RestoreFolderWindows].State}" TextResource="{DynamicResource RestoreFolderWindows_intf}" Description="{DynamicResource desc_RestoreFolderWindows_intf}" />
                     <uc:ToggleButton x:Name="TipsNotifications" Visibility="{Binding Win11FeatureOnly}" Style="{StaticResource ToggleStyle}" State="{Binding [TipsNotifications].State}" TextResource="{DynamicResource TipsNotifications_intf}" Description="{DynamicResource desc_TipsNotifications_intf}" />
                     <uc:ToggleButton x:Name="JpegWallpaperCompression" Style="{StaticResource ToggleStyle}" State="{Binding [JpegWallpaperCompression].State}" TextResource="{DynamicResource JpegWallpaperCompression_intf}" Description="{DynamicResource desc_JpegWallpaperCompression_intf}" />
                     <uc:ToggleButton x:Name="DesktopTooltips" Style="{StaticResource ToggleStyle}" State="{Binding [DesktopTooltips].State}" TextResource="{DynamicResource DesktopTooltips_intf}" Description="{DynamicResource desc_DesktopTooltips_intf}" />

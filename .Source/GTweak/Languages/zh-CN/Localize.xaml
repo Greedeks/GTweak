@@ -238,6 +238,12 @@
     <v:String x:Key="FolderMusic_intf">音乐</v:String>
     <v:String x:Key="FolderVideo_intf">视频</v:String>
 
+    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    
     <v:String x:Key="SystemButtonSize_intf">系统窗口控制按钮标准尺寸</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">加快文本光标闪烁频率</v:String>
     <v:String x:Key="ScrollbarSize_intf">缩小传统滚动条的尺寸</v:String>
@@ -266,6 +272,7 @@
     <v:String x:Key="OpenQuickAccess_intf">资源管理器默认打开“此电脑”</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">屏幕亮度自动调节 (CABC)</v:String>
 
+    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">更改在系统中用光标选中文本或对象时的背景高亮颜色。</v:String>
     <v:String x:Key="desc_Tooltip_intf">更改支持的应用程序中悬停提示框（Tooltip）的颜色。</v:String>
     <v:String x:Key="desc_NavigationItems_intf">更改资源管理器导航窗格中内置系统项的显示状态——这些项目无法通过常规设置取消固定。</v:String>

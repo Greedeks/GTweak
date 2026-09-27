@@ -21,7 +21,7 @@ namespace GTweak.Modules.Maintenance
     {
         internal static bool IsWindowsActivated = false;
 
-        private static bool IsKeyExists(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(HardwareData.OS.Name).Count == words;
+        private static bool IsKeyExists(string pattern, byte words) => new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled).Matches(RegistryHelper.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName", string.Empty)).Count == words;
 
         internal static async void LicenseStatus()
         {
@@ -69,12 +69,16 @@ namespace GTweak.Modules.Maintenance
             {
                 if (HardwareData.OS.IsWin10)
                 {
-                    await CommandExecutor.InvokeRunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[] { "assoc .vbs=VBSFile", "ftype VBSFile=\"%SystemRoot%\\System32\\WScript.exe\" \"%1\" %*" })));
+                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c reg add ""HKLM\SOFTWARE\Classes\.vbs"" /ve /d ""VBSFile"" /f");
+                    CommandExecutor.RunCommandAsTrustedInstaller(@"/c reg add ""HKLM\SOFTWARE\Classes\VBSFile\Shell\Open\Command"" /ve /d ""%SystemRoot%\System32\WScript.exe ""%1"" %*"" /f");
+
+                    await Task.Delay(1000);
                 }
 
                 await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keyWinHWID}");
 
                 CommandExecutor.RunCommand($@"/c del /f /q {PathTargets.Folders.SystemDrive}ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\*.xml & del /f /q {PathTargets.Folders.SystemDrive}ProgramData\Microsoft\Windows\ClipSVC\Install\Migration\*.xml");
+
                 string originalGeo = RegistryHelper.GetValue(@"HKEY_CURRENT_USER\Control Panel\International\Geo", "Name", CultureInfo.InstalledUICulture.Name.Split('-')[1].ToUpperInvariant());
                 RegistryHelper.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", "US", RegistryValueKind.String);
 
@@ -86,8 +90,11 @@ namespace GTweak.Modules.Maintenance
                 XDocument xmlDoc = XDocument.Parse(Properties.Resources.Tickets);
                 XElement foundTicket = xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value.IndexOf(RegistryHelper.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ProductOptions", "OSProductPfn", string.Empty), StringComparison.OrdinalIgnoreCase) >= 0);
                 foundTicket ??= xmlDoc.Descendants("Ticket").FirstOrDefault(t => t.Element("product") != null && t.Element("product").Value == "KMS");
+
                 XDocument genuineXml = XDocument.Parse(foundTicket.Element("content")?.Value.Trim());
-                genuineXml.Save(Path.Combine(PathTargets.Folders.SystemDrive, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml"));
+                string ticketPath = Path.Combine(PathTargets.Folders.SystemDrive, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml");
+                genuineXml.Save(ticketPath);
+
                 await Task.Delay(3000);
 
                 await CommandExecutor.InvokeRunCommand("clipup -v -o", true);
@@ -96,7 +103,6 @@ namespace GTweak.Modules.Maintenance
                 RegistryHelper.Write(Registry.CurrentUser, @"Control Panel\International\Geo", "Name", originalGeo, RegistryValueKind.String);
 
                 LicenseStatus();
-
                 await Task.Delay(2000);
 
                 if (IsWindowsActivated)
@@ -106,16 +112,14 @@ namespace GTweak.Modules.Maintenance
                 }
                 else
                 {
-                    await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keysKMS}");
+                    await CommandExecutor.InvokeRunCommand($"/c slmgr.vbs //b /ipk {keyWinKMS}");
                     await CommandExecutor.InvokeRunCommand("/c slmgr.vbs //b /skms kms.digiboy.ir");
                     await CommandExecutor.InvokeRunCommand("/c slmgr.vbs //b /ato");
 
                     LicenseStatus();
-
                     await Task.Delay(2000);
 
                     overlayWindow.Close();
-
                     NotificationManager.Info(IsWindowsActivated ? "success_activate_noty" : "error_activate_noty").WithDelay(300).Perform(IsWindowsActivated ? NotificationManager.AlertType.Restart : default);
                 }
             }
