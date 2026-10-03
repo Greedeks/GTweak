@@ -582,7 +582,17 @@ namespace GTweak.Modules.Tweaks
 
                 [Toggle.OfficeTelemetry] = (
                     Check: () => IsTaskEnabled(OfficeTasks),
-                    Apply: (state) => SetTaskStateOwner(state, OfficeTasks)
+                    Apply: (state) =>
+                    {
+                        string task = @"\Microsoft\Office\Office ClickToRun Service Monitor";
+
+                        SetTaskStateOwner(state, Array.FindAll(OfficeTasks, t => t != task));
+
+                        if (RegistryHelper.ValueExists(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClickToRunSvc", "Start"))
+                        {
+                            CommandExecutor.RunCommandAsTrustedInstaller(state ? $@"/c icacls ""C:\Windows\System32\Tasks{task}"" /remove:d SYSTEM & schtasks /change /enable /tn ""{task}""" : $@"/c schtasks /change /disable /tn ""{task}"" & icacls ""C:\Windows\System32\Tasks{task}"" /deny SYSTEM:(W,D)");
+                        }
+                    }
                 ),
             };
         }
