@@ -12,6 +12,9 @@ namespace GTweak.Modules.Managers
 {
     internal class TaskSchedulerManager : TaskStorage
     {
+        private static string GetTaskFilePath(string taskName) => Path.Combine(PathTargets.Folders.Tasks, taskName.TrimStart('\\', '/').Replace('/', '\\'));
+        private static string GetAclCommand(string taskName, bool unlock) => $"icacls \"{GetTaskFilePath(taskName)}\" {(unlock ? "/remove:d SYSTEM" : "/deny SYSTEM:(W,D)")}";
+
         internal static bool IsTaskEnabled(params string[] tasklist)
         {
             if (tasklist != null && tasklist.Length != 0)
@@ -44,15 +47,29 @@ namespace GTweak.Modules.Managers
 
                 if (existingTasks.Length != 0)
                 {
-                    using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
-                    foreach (string taskname in existingTasks)
+                    if (state)
                     {
-                        using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
-                        if (task != null && task.Enabled != state)
+                        CommandExecutor.RunCommandAsTrustedInstaller("/c " + CommandExecutor.CleanCommand(string.Join(" & ", existingTasks.Select(task => GetAclCommand(task, true)))));
+                    }
+
+                    try
+                    {
+                        using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                        foreach (string taskname in existingTasks)
                         {
-                            task.Definition.Settings.Enabled = state;
-                            task.RegisterChanges();
+                            using Microsoft.Win32.TaskScheduler.Task task = taskService.GetTask(taskname);
+                            if (task != null && task.Enabled != state)
+                            {
+                                task.Definition.Settings.Enabled = state;
+                                task.RegisterChanges();
+                            }
                         }
+                    }
+                    catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+
+                    if (!state)
+                    {
+                        CommandExecutor.RunCommandAsTrustedInstaller("/c " + CommandExecutor.CleanCommand(string.Join(" & ", existingTasks.Select(task => GetAclCommand(task, false)))));
                     }
                 }
             });
@@ -66,7 +83,7 @@ namespace GTweak.Modules.Managers
 
                 if (existingTasks.Length != 0)
                 {
-                    CommandExecutor.RunCommandAsTrustedInstaller("/c " + CommandExecutor.CleanCommand(string.Join(" & ", existingTasks.Select(task => $"schtasks /change {(state ? "/enable" : "/disable")} /tn \"{task}\""))));
+                    CommandExecutor.RunCommandAsTrustedInstaller("/c " + CommandExecutor.CleanCommand(string.Join(" & ", existingTasks.Select(task => state ? $"{GetAclCommand(task, true)} & schtasks /change /enable /tn \"{task}\"" : $"schtasks /change /disable /tn \"{task}\" & {GetAclCommand(task, false)}"))));
                 }
             });
         }
@@ -107,7 +124,7 @@ namespace GTweak.Modules.Managers
 
             foreach (var basePath in basePaths)
             {
-                string fullBasePath = Path.Combine(PathTargets.Folders.Tasks, basePath.TrimStart('\\'));
+                string fullBasePath = GetTaskFilePath(basePath);
 
                 if (Directory.Exists(fullBasePath))
                 {
@@ -131,7 +148,7 @@ namespace GTweak.Modules.Managers
 
             foreach (string path in tasklist)
             {
-                if (File.Exists(Path.Combine(PathTargets.Folders.Tasks, path.TrimStart('\\', '/').Replace('/', '\\'))))
+                if (File.Exists(GetTaskFilePath(path)))
                 {
                     foundExisting.Add(path);
                 }
