@@ -30,7 +30,7 @@
             <Button x:Name="ButtonClose" Style="{StaticResource ButtonClose}" Width="25" Height="25" Margin="0,4,4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ButtonClose_Click"/>
         </Grid>
 
-        <Grid Grid.Row="1" Background="Transparent" PreviewMouseLeftButtonUp="Grid_PreviewMouseLeftButtonUp">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -38,7 +38,7 @@
 
             <Image Grid.Column="0" Width="53" Height="53" Source="/GTweak.ico" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,0,10,10"/>
 
-            <Grid Grid.Column="1" Margin="10">
+            <Grid Grid.Column="1" x:Name="ActionArea" Margin="10" Background="Transparent" PreviewMouseLeftButtonUp="Grid_PreviewMouseLeftButtonUp">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -50,7 +50,7 @@
                             <TranslateTransform X="3" Y="3"/>
                         </TextBlock.RenderTransform>
                     </TextBlock>
-                    <TextBlock x:Name="Header" Text="Title" Foreground="{StaticResource Brush_Highlighted}" FontFamily="{StaticResource Jura}" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium"/>
+                    <TextBlock x:Name="Headline" Text="Title" Foreground="{StaticResource Brush_Highlighted}" FontFamily="{StaticResource Jura}" FontSize="15" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium"/>
                 </Grid>
 
                 <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="0,2,0,0">
@@ -59,7 +59,7 @@
                             <TranslateTransform X="3" Y="3"/>
                         </TextBlock.RenderTransform>
                     </TextBlock>
-                    <TextBlock x:Name="MessageBody" Text="Text" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium" MaxWidth="265"/>
+                    <TextBlock x:Name="Subtitle" Text="Text" Foreground="{StaticResource Brush_TextBlock_Inactivity}" FontFamily="{StaticResource Jura}" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Left" TextAlignment="Left" FontStretch="Medium" MaxWidth="265"/>
                 </Grid>
             </Grid>
         </Grid>

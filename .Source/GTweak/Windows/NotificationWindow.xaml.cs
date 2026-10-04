@@ -20,9 +20,20 @@ namespace GTweak.Windows
         private TimerControlManager _timer = default;
         private Rect primaryMonitorArea = SystemParameters.WorkArea;
 
-        internal string NoticeTitle { set => Header.Text = value; get => Header.Text; }
-        internal string NoticeText { set => MessageBody.Text = value; get => MessageBody.Text; }
-        internal NotificationManager.AlertType AlertType { set => _alertType = value; get => _alertType; }
+        internal string Caption { set => Headline.Text = value; get => Headline.Text; }
+        internal string Description { set => Subtitle.Text = value; get => Subtitle.Text; }
+        internal NotificationManager.AlertType AlertType
+        {
+            set
+            {
+                _alertType = value;
+                if (ActionArea != null)
+                {
+                    ActionArea.Cursor = (value != NotificationManager.AlertType.None) ? Cursors.Hand : Cursors.Arrow;
+                }
+            }
+            get => _alertType;
+        }
 
         public NotificationWindow()
         {

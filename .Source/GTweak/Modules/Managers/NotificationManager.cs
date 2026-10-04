@@ -61,15 +61,15 @@ namespace GTweak.Modules.Managers
                     {
                         NotificationWindow window = new NotificationWindow
                         {
-                            NoticeTitle = _title,
-                            NoticeText = _text,
+                            Caption = _title,
+                            Description = _text,
                             AlertType = type
                         };
 
-                        if (string.IsNullOrWhiteSpace(window.NoticeTitle) && string.IsNullOrWhiteSpace(window.NoticeText))
+                        if (string.IsNullOrWhiteSpace(window.Caption) && string.IsNullOrWhiteSpace(window.Description))
                         {
-                            window.NoticeTitle = (Application.Current?.Resources)?["title_warn_noty"] as string ?? string.Empty;
-                            window.NoticeText = (Application.Current?.Resources)?[type == AlertType.Logout ? "logout_noty" : "restart_noty"] as string ?? string.Empty;
+                            window.Caption = (Application.Current?.Resources)?["title_warn_noty"] as string ?? string.Empty;
+                            window.Description = (Application.Current?.Resources)?[type == AlertType.Logout ? "logout_noty" : "restart_noty"] as string ?? string.Empty;
                         }
 
                         window.Closed += delegate { Interlocked.Exchange(ref _isNotificationOpen, 0); };
