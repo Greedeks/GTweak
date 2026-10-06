@@ -303,7 +303,7 @@ namespace GTweak.Modules.Tweaks
                                     using RegistryKey subKey = regKey.OpenSubKey(subKeyName);
                                     if (subKey != null)
                                     {
-                                        if (subKey.GetValue("DriverDesc") is string driverDesc && driverDesc.Equals("Realtek High Definition Audio", StringComparison.OrdinalIgnoreCase))
+                                        if (subKey.GetValue("MatchingDeviceId") is string matchingId && matchingId.IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) >= 0)
                                         {
                                             using RegistryKey powerSettingsKey = subKey.OpenSubKey("PowerSettings");
                                             if (powerSettingsKey != null)
@@ -321,7 +321,6 @@ namespace GTweak.Modules.Tweaks
                             }
                         }
                         catch (Exception ex) { ErrorLogger.LogDebug(ex); }
-
                         return false;
                     },
                     Apply: (state, _) =>
@@ -336,7 +335,7 @@ namespace GTweak.Modules.Tweaks
                                     using RegistryKey subKey = regKey.OpenSubKey(subKeyName);
                                     if (subKey != null)
                                     {
-                                        if (subKey.GetValue("DriverDesc") is string driverDesc && driverDesc.Equals("Realtek High Definition Audio", StringComparison.OrdinalIgnoreCase))
+                                        if (subKey.GetValue("MatchingDeviceId") is string matchingId && matchingId.IndexOf("VEN_10EC", StringComparison.OrdinalIgnoreCase) >= 0)
                                         {
                                             RegistryHelper.Write(Registry.LocalMachine, $@"{@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}"}\{subKeyName}\PowerSettings", "ConservationIdleTime", state ? new byte[] { 0x0a, 0x00, 0x00, 0x00 } : new byte[] { 0xFF, 0xFF, 0xFF, 0xFF }, RegistryValueKind.Binary);
                                             RegistryHelper.Write(Registry.LocalMachine, $@"{@"SYSTEM\CurrentControlSet\Control\Class\{4d36e96c-e325-11ce-bfc1-08002be10318}"}\{subKeyName}\PowerSettings", "IdlePowerState", state ? new byte[] { 0x03, 0x00, 0x00, 0x00 } : Encoding.Unicode.GetBytes("\0\0"), RegistryValueKind.Binary);
