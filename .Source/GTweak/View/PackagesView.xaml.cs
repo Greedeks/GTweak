@@ -114,7 +114,17 @@ namespace GTweak.View
                     }), DispatcherPriority.ApplicationIdle);
                 });
 
-                await removeTask;
+                try { await removeTask; }
+                catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+                finally
+                {
+                    AppxPackageHandler.HandleAvailabilityStatus(packageName, false);
+
+                    if (_backgroundQueue.WaitForCompletion() == removeTask)
+                    {
+                        await _backgroundQueue.QueueTask(() => AppxPackageHandler.RemoveBrokenAssociations());
+                    }
+                }
                 AppxPackageHandler.HandleAvailabilityStatus(packageName, false);
             }
         }

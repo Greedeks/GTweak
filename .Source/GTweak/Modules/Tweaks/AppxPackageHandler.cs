@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security;
+using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using GTweak.Modules.Common;
@@ -179,6 +181,88 @@ namespace GTweak.Modules.Tweaks
             }
         }
 
+        internal static void RemoveBrokenAssociations()
+        {
+            try
+            {
+                string sid = WindowsIdentity.GetCurrent().User?.Value;
+                if (string.IsNullOrEmpty(sid))
+                {
+                    return;
+                }
+
+                Dictionary<string, bool> cache = new Dictionary<string, bool>(StringComparer.OrdinalIgnoreCase);
+                List<string> commands = new List<string>();
+
+                string QuoteArg(string value) => value.Replace("'", "''");
+
+                bool IsBrokenAppxProgId(string progId)
+                {
+                    if (string.IsNullOrEmpty(progId) || !progId.StartsWith("AppX", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return false;
+                    }
+
+                    if (!cache.TryGetValue(progId, out bool exists))
+                    {
+                        cache[progId] = exists = RegistryHelper.KeyExists(Registry.ClassesRoot, progId);
+                    }
+
+                    return !exists;
+                }
+
+                foreach (string root in new[] { @"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts", @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations" })
+                {
+                    foreach (string name in RegistryHelper.GetSubKeyNames<List<string>>(Registry.CurrentUser, root))
+                    {
+                        try
+                        {
+                            foreach (var (keyName, valuePath) in new[] { ("UserChoice", "UserChoice"), ("UserChoiceLatest", @"UserChoiceLatest\ProgId") })
+                            {
+                                string progId = RegistryHelper.GetValue<string>($@"HKEY_CURRENT_USER\{root}\{name}\{valuePath}", "ProgId", null);
+                                if (IsBrokenAppxProgId(progId))
+                                {
+                                    string keyPath = QuoteArg($@"Registry::HKEY_USERS\{sid}\{root}\{name}\{keyName}");
+                                    commands.Add($"Remove-Item -LiteralPath '{keyPath}' -Recurse -Force -ErrorAction SilentlyContinue");
+                                }
+                            }
+
+                            if (root == @"Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts")
+                            {
+                                using RegistryKey openWith = Registry.CurrentUser.OpenSubKey($@"{root}\{name}\OpenWithProgids", true);
+
+                                foreach (string val in openWith?.GetValueNames() ?? Array.Empty<string>())
+                                {
+                                    if (!IsBrokenAppxProgId(val))
+                                    {
+                                        continue;
+                                    }
+
+                                    try { openWith.DeleteValue(val, false); }
+                                    catch (Exception ex) when (ex is UnauthorizedAccessException || ex is SecurityException)
+                                    {
+                                        commands.Add($"Remove-ItemProperty -LiteralPath '{QuoteArg($@"Registry::HKEY_USERS\{sid}\{root}\{name}\OpenWithProgids")}' -Name '{QuoteArg(val)}' -Force -ErrorAction SilentlyContinue");
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+                    }
+                }
+
+                if (cache.ContainsValue(false))
+                {
+                    if (commands.Count > 0)
+                    {
+                        CommandExecutor.RunCommandAsTrustedInstaller(string.Join("; ", commands), true);
+                    }
+
+                    ExplorerManager.RefreshDesktop();
+                }
+            }
+            catch (Exception ex) { ErrorLogger.LogDebug(ex); }
+        }
+
         private static void PostRemoveOneDrive()
         {
             RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, @"CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}");
@@ -234,6 +318,7 @@ namespace GTweak.Modules.Tweaks
             try
             {
                 using RegistryKey baseKey = Registry.ClassesRoot.OpenSubKey("SystemFileAssociations", true);
+
                 if (baseKey != null)
                 {
                     foreach (string subkey in baseKey.GetSubKeyNames())
@@ -241,14 +326,14 @@ namespace GTweak.Modules.Tweaks
                         try
                         {
                             using RegistryKey assocKey = baseKey.OpenSubKey(subkey, true);
-                            if (assocKey != null)
+                            using RegistryKey shellKey = assocKey?.OpenSubKey("Shell", true);
+                            if (shellKey != null)
                             {
-                                using RegistryKey shellKey = assocKey.OpenSubKey("Shell", true);
-                                if (shellKey != null)
+                                foreach (string target in new string[] { "3D Edit", "3D Print" })
                                 {
-                                    if (shellKey.GetSubKeyNames().Any(k => k.Equals("3D Print", StringComparison.OrdinalIgnoreCase)))
+                                    if (shellKey.GetSubKeyNames().Any(k => k.Equals(target, StringComparison.OrdinalIgnoreCase)))
                                     {
-                                        RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\3D Print");
+                                        RegistryHelper.DeleteFolderTree(Registry.ClassesRoot, $@"SystemFileAssociations\{subkey}\shell\{target}");
                                     }
                                 }
                             }

@@ -227,6 +227,11 @@ namespace GTweak.Windows
                             }
                         }
 
+                        if (i == tweaksToApply.Count - 1 || tweaksToApply[i + 1].Section != section)
+                        {
+                            await Task.Run(() => AppxPackageHandler.RemoveBrokenAssociations(), token);
+                        }
+
                         ReportStep();
                     }
                     else if (section == JsonConfigManager.Section.Services)
