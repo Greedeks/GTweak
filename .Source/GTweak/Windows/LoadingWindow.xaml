@@ -23,15 +23,48 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
-            <Image Source="{Binding DisplayProfileAvatar, TargetNullValue={StaticResource Icon_ProfileAvatar}}" Stretch="UniformToFill">
-                <Image.OpacityMask>
+            <Image Source="{Binding DisplayProfileAvatar, TargetNullValue={StaticResource Icon_ProfileAvatar}}" Stretch="UniformToFill"/>
+
+            <Rectangle Fill="{StaticResource Brush_Background}">
+                <Rectangle.OpacityMask>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                        <GradientStop Offset="0" Color="#FFFFFFFF"/>
-                        <GradientStop Offset="0.5" Color="#88FFFFFF"/>
-                        <GradientStop Offset="1" Color="#00FFFFFF"/>
+                        <GradientStop Offset="0" Color="#00FFFFFF"/>
+                        <GradientStop Offset="0.55" Color="#22FFFFFF"/>
+                        <GradientStop Offset="0.8" Color="#99FFFFFF"/>
+                        <GradientStop Offset="1" Color="#FFFFFFFF"/>
                     </LinearGradientBrush>
-                </Image.OpacityMask>
-            </Image>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+
+            <Rectangle Fill="{StaticResource Brush_Background}">
+                <Rectangle.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#00FFFFFF"/>
+                        <GradientStop Offset="0.8" Color="#44FFFFFF"/>
+                        <GradientStop Offset="1" Color="#DDFFFFFF"/>
+                    </LinearGradientBrush>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+
+            <Rectangle Fill="{StaticResource Brush_Background}">
+                <Rectangle.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#CCFFFFFF"/>
+                        <GradientStop Offset="0.2" Color="#33FFFFFF"/>
+                        <GradientStop Offset="0.4" Color="#00FFFFFF"/>
+                    </LinearGradientBrush>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+
+            <Rectangle Fill="{StaticResource Brush_Background}">
+                <Rectangle.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#BBFFFFFF"/>
+                        <GradientStop Offset="0.15" Color="#22FFFFFF"/>
+                        <GradientStop Offset="0.35" Color="#00FFFFFF"/>
+                    </LinearGradientBrush>
+                </Rectangle.OpacityMask>
+            </Rectangle>
         </Grid>
 
         <Grid Grid.Column="1">
