@@ -124,7 +124,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Accent}"/>
+                            <Setter TargetName="Icon" Property="Background" Value="{StaticResource Brush_Danger_Hover}"/>
                             <Setter TargetName="BackgroundBorder" Property="Background" Value="{StaticResource Brush_TitleBtnBG_Pressed}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

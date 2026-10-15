@@ -134,12 +134,11 @@ namespace GTweak.Modules.Common
                 RegistryHelper.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASAPI32");
                 RegistryHelper.DeleteFolderTree(Registry.LocalMachine, @"SOFTWARE\Microsoft\Tracing\GTweak_RASMANCS");
 
-                CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[] { $@"taskkill /f /im ""{CurrentName}""", "choice /c y /valueInt /d y /t 3", $@"del ""{CurrentLocation}""",
-                    $@"rd /s /q ""{PathTargets.Folders.Workspace}""", $@"rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""" })));
+                CommandExecutor.RunCommand("/c " + CommandExecutor.CleanCommand(string.Join(" & ", new[] { $@"taskkill /f /im ""{CurrentName}""", "timeout /t 3", $@"del ""{CurrentLocation}""", $@"rd /s /q ""{PathTargets.Folders.Workspace}""", $@"rd /s /q ""{Environment.SystemDirectory}\config\systemprofile\AppData\Local\GTweak""" })));
             }
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
-        internal static void SelfReboot() => CommandExecutor.RunCommand($"/c taskkill /f /im \"{CurrentName}\" & choice /c y /valueInt /d y /t 1 & start \"\" \"{CurrentLocation}\"");
+        internal static void SelfReboot() => CommandExecutor.RunCommand($@"/c taskkill /f /im ""{CurrentName}"" & timeout /t 1 & start """" ""{CurrentLocation}""");
     }
 }
