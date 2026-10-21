@@ -3,25 +3,32 @@ name: Auto Prefix Issues
 on:
   issues:
     types: [opened, edited, labeled]
+  workflow_dispatch:
 
 jobs:
   add-prefix:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+    if: >-
+      !startsWith(github.event.issue.title, '[BUG]') &&
+      !startsWith(github.event.issue.title, '[Feature]') &&
+      !startsWith(github.event.issue.title, '[Question]') &&
+      (github.event.action != 'edited' || github.event.changes.title != null) &&
+      (github.event.action != 'labeled' || contains(fromJSON('["bug", "feature", "question"]'), github.event.label.name))
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       ISSUE_URL: ${{ github.event.issue.html_url }}
       ISSUE_TITLE: ${{ github.event.issue.title }}
     steps:
       - name: Add [BUG] prefix
-        if: contains(github.event.issue.labels.*.name, 'bug') && !startsWith(github.event.issue.title, '[BUG]')
+        if: contains(github.event.issue.labels.*.name, 'bug')
         run: gh issue edit "$ISSUE_URL" --title "[BUG] $ISSUE_TITLE"
 
       - name: Add [Feature] prefix
-        if: contains(github.event.issue.labels.*.name, 'feature') && !startsWith(github.event.issue.title, '[Feature]')
+        if: "!contains(github.event.issue.labels.*.name, 'bug') && contains(github.event.issue.labels.*.name, 'feature')"
         run: gh issue edit "$ISSUE_URL" --title "[Feature] $ISSUE_TITLE"
 
       - name: Add [Question] prefix
-        if: contains(github.event.issue.labels.*.name, 'question') && !startsWith(github.event.issue.title, '[Question]')
+        if: "!contains(github.event.issue.labels.*.name, 'bug') && !contains(github.event.issue.labels.*.name, 'feature') && contains(github.event.issue.labels.*.name, 'question')"
         run: gh issue edit "$ISSUE_URL" --title "[Question] $ISSUE_TITLE"
