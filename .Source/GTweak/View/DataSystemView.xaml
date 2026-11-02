@@ -168,7 +168,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_version_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                         <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
@@ -243,7 +243,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_version_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                         <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardVersion].Data}" IsEnabled="{Binding [MotherboardVersion].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 

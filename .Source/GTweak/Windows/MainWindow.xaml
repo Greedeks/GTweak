@@ -40,6 +40,43 @@
             </DockPanel>
 
             <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RenderTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Grid.RenderTransform>
+
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Resources>
+                            <Storyboard x:Key="PopInAnimation" Timeline.DesiredFrameRate="120">
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5">
+                                    <DoubleAnimation.EasingFunction>
+                                        <QuadraticEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" From="0.97" To="1" Duration="0:0:0.3">
+                                    <DoubleAnimation.EasingFunction>
+                                        <QuadraticEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" From="0.97" To="1" Duration="0:0:0.3">
+                                    <DoubleAnimation.EasingFunction>
+                                        <QuadraticEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsViewProfileHeader}" Value="False">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource PopInAnimation}"/>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard Storyboard="{StaticResource PopInAnimation}"/>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -206,21 +243,25 @@
                     <Grid Grid.Row="1">
                         <StackPanel Orientation="Vertical">
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton x:Name="BtnNotification" State="{Binding IsViewNotification}" TextResource="{DynamicResource settings_noty}"/>
+                                <uc:ToggleButton State="{Binding IsViewNotification}" TextResource="{DynamicResource settings_noty}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton x:Name="BtnUpdate" State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource settings_update}"/>
+                                <uc:ToggleButton  State="{Binding IsViewProfileHeader}" TextResource="{DynamicResource settings_profile}"/>
+                            </Viewbox>
+                            
+                            <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
+                                <uc:ToggleButton State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource settings_update}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton x:Name="BtnTopMost" State="{Binding IsTopMost}" TextResource="{DynamicResource settings_toast}"/>
+                                <uc:ToggleButton  State="{Binding IsTopMost}" TextResource="{DynamicResource settings_toast}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                     <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource settings_volume}"/>
-                                    <ToggleButton x:Name="BtnVolume" IsChecked="{Binding IsPlayingSound}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}"/>
+                                    <ToggleButton IsChecked="{Binding IsPlayingSound}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}"/>
                                     <Slider x:Name="SliderVolume" Style="{StaticResource Percent_Slider}" Value="{Binding CurrentVolume}" IsSnapToTickEnabled="True" Minimum="1" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12"/>
                                 </StackPanel>
                             </Viewbox>

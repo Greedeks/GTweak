@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Набір інструментів</v:String>
     <v:String x:Key="settings_title">Налаштування</v:String>
     <v:String x:Key="settings_noty">Показувати сповіщення</v:String>
+    <v:String x:Key="settings_profile">Показувати ім'я та аватар</v:String>
     <v:String x:Key="settings_update">Перевірка наявності оновлень</v:String>
     <v:String x:Key="settings_toast">Закріпити над усіма вікнами</v:String>
     <v:String x:Key="settings_volume">Гучність:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Журналювання дій користувача</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Збір даних та фонове оновлення офлайн-карт</v:String>
     <v:String x:Key="IntelTelemetry_conf">Збір даних та моніторинг телеметрії Intel</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Збір і моніторинг телеметрії Microsoft Office</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Для кожного користувача система Windows створює унікальний рекламний ідентифікатор для відстеження його дій. Використовується розробниками програм та самої Windows для власних цілей, у тому числі для демонстрації конкретної реклами в додатках.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Навіть якщо ви використовуєте локальний обліковий запис, Windows завжди намагається синхронізувати з серверами Microsoft такі ваші дані, як теми, паролі, налаштування Windows, налаштування браузера, налаштування мовної панелі, налаштування спрощеного доступу, додаткові налаштування.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Налаштування вимикає функцію UAR (User Activity Recording) – систему, яка послідовно фіксує кожну вашу дію на комп’ютері: від створення скриншотів і набору тексту до запуску програм та надання доступу до вебкамери навіть у стані заблокованого екрану, а також багато іншого.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows періодично оновлює офлайн-карти та надсилає сповіщення про нові дані у фоновому режимі. Ці процеси можуть збирати інформацію про ваше місцезнаходження, маршрути та використання карт. Якщо ви не користуєтеся офлайн-картами, рекомендується вимкнути їх, щоб уникнути прихованих оновлень і передачі даних на сервери Microsoft без вашої прямої участі.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Модуль Intel, який працює у фоновому режимі для збору та передачі даних, позиціонується як інструмент для вдосконалення продуктів компанії. Однак для пересічного користувача він приносить мало практичної користі, а вимкнення цієї функції може зменшити фонову активність і запобігти непотрібній передачі даних.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office безперервно відстежує вашу роботу з документами, фіксуючи швидкість запуску програм, системні збої та частоту використання інструментів, після чого надсилає звіти на сервери Microsoft. Вимкнення цієї функції зупиняє прихований збір статистики та вимикає зайві фонові процеси моніторингу, ніяк не впливаючи на повноцінну роботу Word, Excel та інших офісних програм.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">Музика</v:String>
     <v:String x:Key="FolderVideo_intf">Відео</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">Розташування панелі завдань:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Знизу</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Зверху</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Зліва</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Справа</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">Стандартний розмір системних кнопок</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Стандартна частота мерехтіння курсору</v:String>
@@ -272,38 +273,38 @@
     <v:String x:Key="OpenQuickAccess_intf">Відкривати «Швидкий доступ» замість «Цей ПК»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Спонтанна зміна яскравості</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Змінює розташування панелі завдань на екрані, дозволяючи закріпити її біля нижнього, верхнього, лівого або правого краю. Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Зміна кольору фону при виділенні тексту або об'єктів курсором у системі.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Зміна кольору спливаючих підказок у підтримуваних додатках.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Змінює відображення вбудованих системних пунктів у панелі навігації, які не можна від’єднати звичайними способами.</v:String>
-    <v:String x:Key="desc_FileExplorerDisplay_intf">Змінює системні правила відображення об'єктів у Провіднику, включаючи видимість прихованих елементів, розширень і структуру дисків. Увага, екран може мерехтіти.</v:String>
+    <v:String x:Key="desc_FileExplorerDisplay_intf">Змінює системні правила відображення об'єктів у Провіднику, включаючи видимість прихованих елементів, розширень і структуру дисків.  Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Змінює відображення системних значків на робочому столі — це вбудовані системні об'єкти, а не звичайні ярлики.</v:String>
-    <v:String x:Key="desc_ThisPCFolders_intf">Змінює відображення стандартних папок користувача в розділі «Цей ПК». Дозволяє приховати їх, щоб у списку показувалися лише підключені диски. Увага, екран може мерехтіти..</v:String>
+    <v:String x:Key="desc_ThisPCFolders_intf">Змінює відображення стандартних папок користувача в розділі «Цей ПК». Дозволяє приховати їх, щоб у списку показувалися лише підключені диски.  Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Це налаштування зменшить розмір стандартних кнопок вікна Згорнути, Розгорнути, Закрити. Змінюється розмір для всіх вікон, таких як провідник, фотографії, браузери та інші відомі програми.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Це налаштування прискорить швидкість мерехтіння текстового курсору. Усталене значення - 530 мілісекунд.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">Це налаштування зменшить товщину смуги прокручування (scrollbar) у вікнах браузерів та додатків. Не впливає на сучасні інтерфейси додатків.</v:String>
     <v:String x:Key="desc_TaskbarTransparency_intf">Це налаштування вимикає або вмикає ефект прозорості. Напівпрозорі вікна та поверхні.</v:String>
-    <v:String x:Key="desc_TaskbarDarkTheme_intf">Це налаштування змінює тему панелі завдань на світлу або темну. Увага, екран може мерехтіти.</v:String>
-    <v:String x:Key="desc_AppDarkTheme_intf">Це налаштування змінює тему провідника на світлу або темну. Це також застосовується до вікон браузерів та інших додатків, що підтримують зміну теми. Увага, екран може мерехтіти.</v:String>
+    <v:String x:Key="desc_TaskbarDarkTheme_intf">Це налаштування змінює тему панелі завдань на світлу або темну. Зверніть увагу, що екран може мерехтіти.</v:String>
+    <v:String x:Key="desc_AppDarkTheme_intf">Це налаштування змінює тему провідника на світлу або темну. Це також застосовується до вікон браузерів та інших додатків, що підтримують зміну теми.  Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_ContextMenuDelay_intf">Як усталено, додаткові команди контекстного меню з’являються із затримкою 400 мілісекунд. Якщо хочете швидше, цю затримку можна зменшити.</v:String>
     <v:String x:Key="desc_TaskbarPreviewDelay_intf">Якщо вам здається, що тривалість появи мініатюр запущених додатків та відкритих вікон над Панеллю завдань надто велика, увімкніть це налаштування, щоб прискорити появу мініатюр.</v:String>
     <v:String x:Key="desc_IconOverlayBadges_intf">Дозволяє приховати стрілки ярликів, статуси хмарної синхронізації (OneDrive, Dropbox) та мітки типів файлів, як-от SVG-графіка.</v:String>
     <v:String x:Key="desc_ShortcutNameSuffix_intf">Видалення надто інтуїтивного префікса-суфікса для ярликів.</v:String>
     <v:String x:Key="desc_TaskbarAlignment_intf">Виберіть потрібне місце відображення піктограм на панелі завдань - в середині або зліва</v:String>
     <v:String x:Key="desc_StartMenuLayout_intf">Змінює макет меню «Пуск» шляхом розширення області для закріплених програм. Крім того, за винятком редакції Windows Home, із меню «Пуск» буде видалено розділ «Рекомендоване».</v:String>
-    <v:String x:Key="desc_CompactContextMenu_intf">Це налаштування поверне звичне класичне контекстне меню для робочого столу та «Провідника». Увага, екран може мерехтіти.</v:String>
+    <v:String x:Key="desc_CompactContextMenu_intf">Це налаштування поверне звичне класичне контекстне меню для робочого столу та «Провідника».  Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_TipsSuggestions_intf">Іноді Windows 11 показує поради щодо використання тої чи іншої функції, наприклад, нового меню «Пуск» або «Швидкі налаштування». Це корисно під час першого знайомства з Windows 11, потім лише відволікає.</v:String>
     <v:String x:Key="desc_CompactExplorerMode_intf">Як усталено, Windows додає відступи між елементами в провіднику. Нову функцію розроблено для сенсорних екранів. Це налаштування відновлює класичний макет файлового провідника шляхом видалення відступів між елементами та позбавляє необхідності пошуку налаштувань.</v:String>
     <v:String x:Key="desc_CopilotRecall_intf">Це налаштування вимикає і, де це можливо, приховує значки Copilot на панелі завдань, у меню «Пуск», в Edge та Блокноті, блокує його функціональність, а також вимикає Recall. У той же час, це налаштування на Copilot не впливає і програма залишається в системі і може бути використана за потреби. Copilot можна повністю видалити лише разом разом з Microsoft Edge. Якщо цих функцій ШІ у вашій Windows немає, використання цього налаштування не має сенсу.</v:String>
-    <v:String x:Key="desc_TaskbarEndTask_intf">Це налаштування дозволить додати команду «Завершити завдання» в контекстне меню, яке відкривається після натискання правою кнопкою миші на додатку на панелі завдань. Це пришвидшує завершення процесів без необхідності відкривати диспетчер завдань. Увага, екран може мерехтіти.</v:String>
+    <v:String x:Key="desc_TaskbarEndTask_intf">Це налаштування дозволить додати команду «Завершити завдання» в контекстне меню, яке відкривається після натискання правою кнопкою миші на додатку на панелі завдань. Це пришвидшує завершення процесів без необхідності відкривати диспетчер завдань. Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_SnapLayouts_intf">Можна вимкнути, якщо не хочете, щоб під час наведення курсору на кнопку «Розгорнути» відображалися макети прив’язки вікон.</v:String>
-    <v:String x:Key="desc_TaskbarIconsButtons_intf">Це тонке налаштування видаляє піктограми «Пошук», «Подання завдань», «Чат» і ярлик «Додаткова інформація про це зображення». У старіших збірках Windows 11 також видаляє піктограму «Copilot». Для користувачів Windows 10 додатково видалятимуться «Новини та інтереси» та «Cortana». Увага, екран може миготіти.</v:String>
+    <v:String x:Key="desc_TaskbarIconsButtons_intf">Це тонке налаштування видаляє піктограми «Пошук», «Подання завдань», «Чат» і ярлик «Додаткова інформація про це зображення». У старіших збірках Windows 11 також видаляє піктограму «Copilot». Для користувачів Windows 10 додатково видалятимуться «Новини та інтереси» та «Cortana». Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_PersonalizedAds_intf">Як усталено, Windows використовує зібрану інформацію для цільової реклами - реклами, що відповідає вашим інтересам. Практично ця реклама розміщуватиметься там, де є вільне місце для відображення. Якщо ви не хочете, щоб Windows відображала персоналізовану рекламу у всіх додатках Магазину, в Провіднику, в Налаштуваннях та меню «Пуск», можете вимкнути це сміття.</v:String>
     <v:String x:Key="desc_RestoreFolderWindows_intf">Як усталено, Windows не зберігає позиції вікон та їх стан після вимкнення комп'ютера. Це налаштування дозволить запам'ятати вигляд відкритих папок, щоб відновлювати його виходу з системи, перезавантаження та вимкнення комп'ютера.</v:String>
     <v:String x:Key="desc_TipsNotifications_intf">Це налаштування вимкнути всі порадами у сповіщеннях Windows разом із онлайн-підказками в налаштуваннях, а також вимкнути Second Chance Out of Box Experience (SCOOBE) для користувачів Windows 11. SCOOBE - це вікно, що виникає раптово, надокучливо пропонує користувачу «терміново завершити налаштування пристрою та увійти в обліковий запис Microsoft.</v:String>
     <v:String x:Key="desc_JpegWallpaperCompression_intf">Як усталено, Windows знижує якість зображень шпалер робочого столу в форматі JPEG до 85%. Це налаштування встановлює для шпалер в форматі JPEG якість 100%.</v:String>
     <v:String x:Key="desc_DesktopTooltips_intf">Це налаштування вимикає спливні підказки для елементів Робочого столу під час наведення на них вказівника миші.</v:String>
-    <v:String x:Key="desc_BingStartSearch_intf">Як усталено, Windows надсилає все, що ви шукаєте у меню «Пуск», на свої сервери, щоб надавати вам результати пошуку в Bing. Якщо вам не потрібна інтеграція з Bing у меню «Пуск», застосуйте це налаштування, щоб вимкнути пошук у веб. Увага, екран може мерехтіти.</v:String>
+    <v:String x:Key="desc_BingStartSearch_intf">Як усталено, Windows надсилає все, що ви шукаєте у меню «Пуск», на свої сервери, щоб надавати вам результати пошуку в Bing. Якщо вам не потрібна інтеграція з Bing у меню «Пуск», застосуйте це налаштування, щоб вимкнути пошук у веб. Зверніть увагу, що екран може мерехтіти.</v:String>
     <v:String x:Key="desc_OpenQuickAccess_intf">Як усталено, файловий провідник відкривається на вкладці «Швидкий доступ». Щоб відкрити будь-який диск, потрібно виконати додаткові дії. Якщо це налаштування вимкнено, файловий провідник відкриває вкладку «Цей ПК», а не «Швидкий доступ».</v:String>
     <v:String x:Key="desc_AdaptiveBrightness_intf">На деяких пристроях яскравість екрана може спонтанно змінюватися залежно від вмісту, що відображається. Якщо вимкнення HDR, динамічної яскравості та налаштувань живлення не допомагає (проблема особливо поширена на ноутбуках, які працюють від акумулятора), можна спробувати це тонке налаштування - воно примусово вимикає автоматичне регулювання яскравості на системному рівні. Проте ручна зміна яскравості залишається доступною.</v:String>
     <!--#endregion-->
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Запущені процеси:</v:String>
     <v:String x:Key="label_svc_sysinfo">служби:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Версія</v:String>
+    <v:String x:Key="label_version_sysinfo">Версія</v:String>
     <v:String x:Key="label_serial_sysinfo">Серійний номер</v:String> 
     <v:String x:Key="label_mode_sysinfo">Режим</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Материнська плата</v:String>

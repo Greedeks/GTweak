@@ -19,6 +19,7 @@ namespace GTweak.Core.ViewModel
         private readonly MainWindowModel _model = new MainWindowModel();
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
         private readonly Dictionary<Type, object> _viewCache = new Dictionary<Type, object>();
+        private static readonly bool _isDesignMode = DesignerProperties.GetIsInDesignMode(new DependencyObject());
 
         public ObservableCollection<MainWindowModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWindowModel.LanguageItem>();
 
@@ -28,9 +29,9 @@ namespace GTweak.Core.ViewModel
             set { _model.CurrentView = value; OnPropertyChanged(); }
         }
 
-        public ImageSource DisplayProfileAvatar => _hardwareProvider.GetProfileImage();
+        public ImageSource DisplayProfileAvatar => (_isDesignMode || IsViewProfileHeader) ? _hardwareProvider.GetProfileImage() : default;
 
-        public string DisplayProfileName => _hardwareProvider.GetProfileName();
+        public string DisplayProfileName => (_isDesignMode || IsViewProfileHeader) ? _hardwareProvider.GetProfileName() : new string('•', _hardwareProvider.GetProfileName().Length);
 
         public string DisplayTweakVersion => GlobalOptions.CurrentRelease.Full;
 
@@ -57,6 +58,21 @@ namespace GTweak.Core.ViewModel
                 {
                     GlobalOptions.IsViewNotification = value;
                     OnPropertyChanged();
+                }
+            }
+        }
+
+        public bool IsViewProfileHeader
+        {
+            get => GlobalOptions.IsViewProfileHeader;
+            set
+            {
+                if (GlobalOptions.IsViewProfileHeader != value)
+                {
+                    GlobalOptions.IsViewProfileHeader = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DisplayProfileName));
+                    OnPropertyChanged(nameof(DisplayProfileAvatar));
                 }
             }
         }
@@ -166,7 +182,7 @@ namespace GTweak.Core.ViewModel
             NavigateToAddonsCommand = new RelayCommand(_ => CurrentView = GetView<AddonsViewModel>());
             NavigateToToolsetCommand = new RelayCommand(_ => CurrentView = GetView<ToolsetViewModel>());
 
-            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            if (_isDesignMode == false)
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() => { FillLanguages(); }));
             }

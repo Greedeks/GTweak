@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Conjunto de ferramentas</v:String>
     <v:String x:Key="settings_title">Configurações</v:String>
     <v:String x:Key="settings_noty">Mostrar notificações</v:String>
+    <v:String x:Key="settings_profile">Mostrar nome e avatar</v:String>
     <v:String x:Key="settings_update">Verificar atualizações</v:String>
     <v:String x:Key="settings_toast">Fixar sobre todas as janelas</v:String>
     <v:String x:Key="settings_volume">Volume:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Manter um registro do comportamento do usuário</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Coleta de dados e atualizações de mapas offline</v:String>
     <v:String x:Key="IntelTelemetry_conf">Coleta e monitoramento da telemetria da Intel</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Coleta e monitoramento da telemetria do Microsoft Office</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">O Windows cria um identificador de publicidade exclusivo para cada usuário rastrear suas ações. Que é usado por desenvolvedores de aplicativos e pelo próprio Windows para seus próprios fins, inclusive para oferecer anúncios específicos em aplicativos.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Mesmo usando uma conta local, o Windows sempre tenta sincronizar seus dados com os servidores da Microsoft. Em particular, o seguinte: temas, senhas, configurações do Windows, configurações do navegador, configurações da barra de idiomas, configurações de acesso simplificado, configurações adicionais.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">O ajuste desativa o recurso UAR (User Activity Recording) - um sistema que registra sequencialmente todas as ações que você realiza no seu computador: desde tirar screenshots e digitar texto até iniciar programas e até mesmo fornecer acesso à webcam enquanto a tela está bloqueada, e muito mais.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">O Windows atualiza periodicamente os mapas offline e envia notificações sobre novos dados em segundo plano. Esses processos podem coletar informações sobre sua localização, rotas e uso de mapas. Se você não usa mapas offline, recomenda-se desativá‑los para evitar atualizações ocultas e transmissão de dados para os servidores da Microsoft sem seu envolvimento direto.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">O módulo Intel, que opera em segundo plano para coletar e transmitir dados, é posicionado como uma ferramenta para melhorar os produtos da empresa. No entanto, para o usuário médio, ele oferece pouco benefício prático, e desativar esse recurso pode reduzir a atividade em segundo plano e evitar a transmissão desnecessária de dados.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">O Microsoft Office rastreia continuamente o seu trabalho com documentos, registrando a velocidade de inicialização dos aplicativos, travamentos do sistema e a frequência de uso das ferramentas, enviando relatórios para os servidores da Microsoft. A desativação deste recurso encerra a coleta oculta de estatísticas e encerra processos de monitoramento desnecessários, sem afetar o pleno funcionamento do Word, Excel e de outros programas do Office.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">Músicas</v:String>
     <v:String x:Key="FolderVideo_intf">Vídeos</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">Posição da barra de tarefas:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Inferior</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Superior</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Esquerda</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Direita</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">Tamanho padrão dos botões do sistema</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Frequência de piscar padrão do cursor</v:String>
@@ -272,38 +273,38 @@
     <v:String x:Key="OpenQuickAccess_intf">Abrir "Acesso rápido" em vez de "Este Computador"</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Mudanças espontâneas de brilho</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Altera o posicionamento da barra de tarefas na tela, permitindo fixá-la na parte inferior, superior, esquerda ou direita. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Altera a cor de fundo ao selecionar texto ou objetos com o cursor no sistema.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Altera a cor das dicas de ferramenta (tooltip) em aplicativos compatíveis.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Altera a visibilidade dos itens de sistema incorporados no painel de navegação que não podem ser desfixados por meios convencionais.</v:String>
-    <v:String x:Key="desc_FileExplorerDisplay_intf">Altera as regras do sistema para exibição no Explorador de Arquivos, incluindo visibilidade de itens ocultos, extensões e a estrutura das unidades. Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="desc_FileExplorerDisplay_intf">Altera as regras do sistema para exibição no Explorador de Arquivos, incluindo visibilidade de itens ocultos, extensões e a estrutura das unidades. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Altera quais ícones do sistema aparecem na área de trabalho — são objetos de sistema incorporados, e não atalhos comuns.</v:String>
-    <v:String x:Key="desc_ThisPCFolders_intf">Altera a exibição das pastas padrão de usuário em «Este Computador». Permite ocultá-las para que apenas as unidades conectadas apareçam na lista. Atenção: a tela pode piscar.</v:String>
+    <v:String x:Key="desc_ThisPCFolders_intf">Altera a exibição das pastas padrão de usuário em «Este Computador». Permite ocultá-las para que apenas as unidades conectadas apareçam na lista. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Um ajuste reduz o tamanho dos botões Minimizar, Maximizar e Fechar, tornando-os menos volumosos. Ele ajusta o tamanho para todas as janelas, incluindo o Explorador de Arquivos, Fotos, navegadores e outros programas familiares.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Um ajuste aumenta a frequência de piscar do cursor de texto. Por padrão, o cursor pisca a cada 530 milissegundos.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">Um ajuste reduz a espessura das barras de rolagem em aplicativos clássicos do Windows, incluindo o Explorador de Arquivos, navegadores e outros programas legados. No entanto, não afeta as interfaces modernas, pois elas utilizam seus próprios elementos de controle independentes das configurações do sistema.</v:String>
     <v:String x:Key="desc_TaskbarTransparency_intf">O ajuste ativará ou desativará o efeito de transparência. Janelas e superfícies translúcidas.</v:String>
-    <v:String x:Key="desc_TaskbarDarkTheme_intf">Muda o tema da barra de tarefas para claro ou escuro. Atenção, a tela pode piscar.</v:String>
-    <v:String x:Key="desc_AppDarkTheme_intf">O ajuste mudará o tema do explorador para claro ou escuro, incluindo navegadores e outros programas que suportam o tema do dispositivo. Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="desc_TaskbarDarkTheme_intf">Muda o tema da barra de tarefas para claro ou escuro. Observe que a tela poderá piscar.</v:String>
+    <v:String x:Key="desc_AppDarkTheme_intf">O ajuste mudará o tema do explorador para claro ou escuro, incluindo navegadores e outros programas que suportam o tema do dispositivo. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_ContextMenuDelay_intf">Por padrão, itens adicionais do menu de contexto aparecem com um atraso de 400 milissegundos. Se você quiser ir mais rápido, pode reduzir esse atraso.</v:String>
     <v:String x:Key="desc_TaskbarPreviewDelay_intf">Por padrão, a visualização da barra de tarefas mostra visualizações de aplicativos em execução por muito tempo. Para fazer as visualizações aparecerem mais rápido, aplique este ajuste.</v:String>
     <v:String x:Key="desc_IconOverlayBadges_intf">Permite ocultar setas de atalho, status de sincronização em nuvem (OneDrive, Dropbox) e etiquetas de tipos de arquivo, como gráficos SVG.</v:String>
     <v:String x:Key="desc_ShortcutNameSuffix_intf">Removendo o prefixo-pós-fixo muito intuitivo para rótulos.</v:String>
     <v:String x:Key="desc_TaskbarAlignment_intf">Escolha onde você quer que os ícones na barra de tarefas sejam exibidos, no centro ou à esquerda</v:String>
     <v:String x:Key="desc_StartMenuLayout_intf">Altera o layout do menu Iniciar, expandindo a área para aplicativos fixados. Além disso, exceto na edição Windows Home, a seção "Recomendado" será removida do menu Iniciar.</v:String>
-    <v:String x:Key="desc_CompactContextMenu_intf">Este ajuste irá retorná-lo ao menu de contexto clássico usual para a área de trabalho e "Explorador". Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="desc_CompactContextMenu_intf">Este ajuste irá retorná-lo ao menu de contexto clássico usual para a área de trabalho e "Explorador". Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_TipsSuggestions_intf">O Windows 11 às vezes mostra dicas sobre como usar um recurso específico, por exemplo, o novo menu "Iniciar" ou "Configurações rápidas". Eles são úteis se você estiver vendo o Windows 11 pela primeira vez, caso contrário, é lixo inútil.</v:String>
     <v:String x:Key="desc_CompactExplorerMode_intf">Por padrão, o Windows adiciona preenchimento entre os itens no Explorer. Este é um novo recurso projetado para telas sensíveis ao toque. Este ajuste irá restaurar o layout clássico do explorador de arquivos, removendo o recuo entre os elementos e poupando-o de procurar configurações.</v:String>
     <v:String x:Key="desc_CopilotRecall_intf">O ajuste desativa e, onde possível, oculta os ícones do Copilot na barra de tarefas, no "Menu Iniciar", no Edge e no Bloco de Notas, bloqueando sua funcionalidade, e também desativa o Recall. Ao mesmo tempo, o aplicativo principal do Copilot não é afetado, permanece no sistema e pode ser usado se necessário. O Copilot só pode ser totalmente removido junto com o Microsoft Edge. Se esses recursos de IA não estiverem presentes no seu Windows inicialmente, o uso do ajuste é inútil.</v:String>
-    <v:String x:Key="desc_TaskbarEndTask_intf">Este ajuste permitirá que você adicione a opção "Finalizar tarefa" ao menu de contexto quando você clicar com o botão direito no aplicativo na barra de tarefas. Isso acelera a conclusão dos processos sem ter que abrir o Gerenciador de Tarefas. Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="desc_TaskbarEndTask_intf">Este ajuste permitirá que você adicione a opção "Finalizar tarefa" ao menu de contexto quando você clicar com o botão direito no aplicativo na barra de tarefas. Isso acelera a conclusão dos processos sem ter que abrir o Gerenciador de Tarefas. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_SnapLayouts_intf">Se você não precisa ver as sugestões de layout de ajuste ao passar o mouse sobre o botão "Maximizar", você pode desativar esta opção.</v:String>
-    <v:String x:Key="desc_TaskbarIconsButtons_intf">Este ajuste remove os ícones "Pesquisar", "Visão de Tarefas" e "Chat", e oculta o elemento "Saiba mais sobre esta imagem". Em compilações mais antigas do Windows 11, ele também remove o ícone do Copilot. Para usuários do Windows 10, ele desativa adicionalmente "Notícias e Interesses" e Cortana. Atenção: a tela pode piscar.</v:String>
+    <v:String x:Key="desc_TaskbarIconsButtons_intf">Este ajuste remove os ícones "Pesquisar", "Visão de Tarefas" e "Chat", e oculta o elemento "Saiba mais sobre esta imagem". Em compilações mais antigas do Windows 11, ele também remove o ícone do Copilot. Para usuários do Windows 10, ele desativa adicionalmente "Notícias e Interesses" e Cortana. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_PersonalizedAds_intf">Por padrão, o Windows usa as informações coletadas para direcionar anúncios, ou seja, para exibir anúncios que correspondem aos seus interesses. E, literalmente, essa propaganda está localizada onde quer que haja espaço livre disponível para exibição. Se você não quer que o Windows exiba anúncios personalizados em todos os aplicativos da Loja, Explorador, Opções e menu Iniciar, então você pode desativar este lixo.</v:String>
     <v:String x:Key="desc_RestoreFolderWindows_intf">Por padrão, o Windows não salva as posições das janelas, bem como seu estado quando desligado. Este ajuste permitirá que você lembre o tipo de pastas abertas para restaurá-las após Sair, Reiniciar e Desligar.</v:String>
     <v:String x:Key="desc_TipsNotifications_intf">O ajuste permite desativar todas as dicas e notificações do Windows, incluindo dicas online nas configurações, bem como desativar a Second Chance Out of Box Experience (SCOOBE) para usuários do Windows 11. SCOOBE é um pop-up que aparece de repente e solicita agressivamente ao usuário que "conclua a configuração do dispositivo urgentemente" e faça login na conta da Microsoft.</v:String>
     <v:String x:Key="desc_JpegWallpaperCompression_intf">Por padrão, quando você define uma imagem jpeg como papel de parede da área de trabalho, o Windows reduz automaticamente sua qualidade para 85%. Este ajuste definirá a qualidade do papel de parede jpeg para 100%.</v:String>
     <v:String x:Key="desc_DesktopTooltips_intf">O ajuste desativará as dicas de ferramentas para elementos da área de trabalho ao passar o cursor do mouse.</v:String>
-    <v:String x:Key="desc_BingStartSearch_intf">Por padrão, o Windows envia tudo o que você pesquisa no menu "Iniciar" para seus servidores para fornecer resultados de pesquisa do Bing. Se você não precisa da integração do Bing no menu "Iniciar", pode aplicar um ajuste para desativar a pesquisa na web. Atenção, a tela pode piscar.</v:String>
+    <v:String x:Key="desc_BingStartSearch_intf">Por padrão, o Windows envia tudo o que você pesquisa no menu "Iniciar" para seus servidores para fornecer resultados de pesquisa do Bing. Se você não precisa da integração do Bing no menu "Iniciar", pode aplicar um ajuste para desativar a pesquisa na web. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_OpenQuickAccess_intf">Por padrão, ao abrir o Explorador, a primeira guia será "Acesso rápido". E para abrir qualquer disco, você precisa fazer movimentos desnecessários. Este ajuste fará com que "Este Computador" seja aberto ao ser aberto, em vez de "Acesso rápido".</v:String>
     <v:String x:Key="desc_AdaptiveBrightness_intf">Em alguns dispositivos, o brilho da tela pode mudar espontaneamente dependendo do conteúdo exibido. Se desligar o HDR, o brilho dinâmico e as configurações de energia não resolverem o problema (comum em laptops na bateria), você pode tentar este ajuste — ele desativa forçadamente o ajuste automático de brilho no nível do sistema. O controle de brilho manual permanece disponível.</v:String>
     <!--#endregion-->
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Processos em execução:</v:String>
     <v:String x:Key="label_svc_sysinfo">serviços:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Versão</v:String>
+    <v:String x:Key="label_version_sysinfo">Versão</v:String>
     <v:String x:Key="label_serial_sysinfo">Número de série</v:String> 
     <v:String x:Key="label_mode_sysinfo">Modo</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Placa-mãe</v:String>

@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">ชุดเครื่องมือ</v:String>
     <v:String x:Key="settings_title">การตั้งค่า</v:String>
     <v:String x:Key="settings_noty">แสดงการแจ้งเตือน</v:String>
+    <v:String x:Key="settings_profile">แสดงชื่อผู้ใช้และรูปโปรไฟล์</v:String>
     <v:String x:Key="settings_update">ตรวจสอบอัปเดต</v:String>
     <v:String x:Key="settings_toast">ปักหมุดไว้ด้านบนสุดของหน้าต่างทั้งหมด</v:String>
     <v:String x:Key="settings_volume">ระดับเสียง:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">การบันทึกพฤติกรรมของผู้ใช้</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">การรวบรวมข้อมูลและการอัปเดตพื้นหลังของแผนที่ออฟไลน์</v:String>
     <v:String x:Key="IntelTelemetry_conf">การรวบรวมและตรวจสอบข้อมูลเทเลเมทรีของ Intel</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">การรวบรวมและตรวจสอบข้อมูลการวัดและส่งข้อมูลทางไกลของ Microsoft Office</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows สร้างรหัสโฆษณาเฉพาะสำหรับผู้ใช้แต่ละคนเพื่อติดตามการกระทำของคุณ ซึ่งถูกใช้โดยนักพัฒนาแอปพลิเคชันและ Windows เองเพื่อวัตถุประสงค์ของตนเอง, รวมถึงเพื่อเสนอโฆษณาที่เฉพาะเจาะจงในแอปพลิเคชัน</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">แม้จะใช้บัญชีภายในเครื่อง, Windows ก็พยายามซิงค์ข้อมูลของคุณกับเซิร์ฟเวอร์ของ Microsoft อยู่เสมอ โดยเฉพาะอย่างยิ่ง: ชุดตกแต่ง, รหัสผ่าน, การตั้งค่า Windows, การตั้งค่าเบราว์เซอร์, การตั้งค่าแถบภาษา, การตั้งค่าการช่วยเหลือพิเศษ, การตั้งค่าเพิ่มเติม</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">การปรับแต่งนี้จะปิดคุณสมบัติ UAR (User Activity Recording) – ระบบที่บันทึกทุกการกระทำที่คุณทำบนคอมพิวเตอร์ตามลำดับ: ตั้งแต่การจับภาพหน้าจอและการพิมพ์ข้อความ ไปจนถึงการเปิดโปรแกรมและแม้กระทั่งการเข้าถึงกล้องเว็บเมื่อหน้าจอล็อกอยู่ และอื่นๆ อีกมากมาย</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows อัปเดตแผนที่ออฟไลน์เป็นระยะและส่งการแจ้งเตือนเกี่ยวกับข้อมูลใหม่ในพื้นหลัง กระบวนการเหล่านี้อาจรวบรวมข้อมูลเกี่ยวกับตำแหน่งของคุณ, เส้นทาง, และการใช้งานแผนที่ หากคุณไม่ได้ใช้แผนที่ออฟไลน์, แนะนำให้ปิดเพื่อหลีกเลี่ยงการอัปเดตที่ซ่อนอยู่และการส่งข้อมูลไปยังเซิร์ฟเวอร์ของ Microsoft โดยที่คุณไม่ได้เกี่ยวข้องโดยตรง</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">โมดูล Intel ที่ทำงานในพื้นหลังเพื่อรวบรวมและส่งข้อมูล ถูกวางตำแหน่งเป็นเครื่องมือสำหรับปรับปรุงผลิตภัณฑ์ของบริษัท อย่างไรก็ตาม, สำหรับผู้ใช้ทั่วไปมันให้ประโยชน์เชิงปฏิบัติน้อย, และการปิดคุณสมบัตินี้สามารถลดกิจกรรมพื้นหลังและป้องกันการส่งข้อมูลที่ไม่จำเป็น</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office จะติดตามการทำงานกับเอกสารของคุณอย่างต่อเนื่อง โดยบันทึกความเร็วในการเปิดแอปพลิเคชัน ปัญหาการขัดข้องของระบบ และความถี่ในการใช้เครื่องมือ จากนั้นจะส่งรายงานไปยังเซิร์ฟเวอร์ของ Microsoft การปิดใช้งานคุณสมบัตินี้จะหยุดการรวบรวมสถิติที่ซ่อนอยู่และปิดกระบวนการตรวจสอบที่ไม่จำเป็น โดยไม่มีผลกระทบต่อการทำงานของ Word, Excel และแอปพลิเคชัน Office อื่นๆ</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">เพลง</v:String>
     <v:String x:Key="FolderVideo_intf">วิดีโอ</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">ตำแหน่งของแถบงาน:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">ด้านล่าง</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">ด้านบน</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">ด้านซ้าย</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">ด้านขวา</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">ขนาดมาตรฐานของปุ่มระบบ</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">ความถี่การกระพริบของเคอร์เซอร์มาตรฐาน</v:String>
@@ -272,7 +273,7 @@
     <v:String x:Key="OpenQuickAccess_intf">เปิด «การเข้าถึงด่วน» แทน «เครื่องนี้»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">การเปลี่ยนแปลงความสว่างที่เกิดขึ้นเอง</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">เปลี่ยนตำแหน่งของแถบงานบนหน้าจอ โดยคุณสามารถวางไว้ที่ขอบด้านล่าง ด้านบน ด้านซ้าย หรือด้านขวา โปรดทราบว่าหน้าจออาจกะพริบ</v:String>
     <v:String x:Key="desc_CursorSelection_intf">เปลี่ยนสีพื้นหลังเมื่อเลือกข้อความหรือวัตถุด้วยเคอร์เซอร์ในระบบ</v:String>
     <v:String x:Key="desc_Tooltip_intf">เปลี่ยนสีของคำแนะนำเครื่องมือในแอปพลิเคชันที่รองรับ</v:String>
     <v:String x:Key="desc_NavigationItems_intf">เปลี่ยนการมองเห็นของรายการระบบในตัวในบานหน้าต่างนำทางที่ไม่สามารถเลิกปักหมุดได้ด้วยวิธีปกติ</v:String>
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">กระบวนการที่ทำงานอยู่:</v:String>
     <v:String x:Key="label_svc_sysinfo">บริการ:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">เวอร์ชัน</v:String>
+    <v:String x:Key="label_version_sysinfo">เวอร์ชัน</v:String>
     <v:String x:Key="label_serial_sysinfo">หมายเลขซีเรียล</v:String> 
     <v:String x:Key="label_mode_sysinfo">โหมด</v:String>
     <v:String x:Key="label_motherbr_sysinfo">เมนบอร์ด</v:String>

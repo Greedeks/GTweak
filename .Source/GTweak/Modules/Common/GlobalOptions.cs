@@ -29,6 +29,7 @@ namespace GTweak.Modules.Common
         private static readonly Dictionary<string, object> _defaultSettings = new Dictionary<string, object>
         {
             ["EnableNotifications"] = true,
+            ["EnableProfileHeader"] = true,
             ["EnableAutoUpdate"] = true,
             ["EnableTopMost"] = false,
             ["EnableIpBlur"] = true,
@@ -43,6 +44,7 @@ namespace GTweak.Modules.Common
         private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);
 
         internal static bool IsViewNotification { get => (bool)_cachedSettings["EnableNotifications"]; set => ChangingParameters("EnableNotifications", value); }
+        internal static bool IsViewProfileHeader { get => (bool)_cachedSettings["EnableProfileHeader"]; set => ChangingParameters("EnableProfileHeader", value); }
         internal static bool IsUpdateCheckRequired { get => (bool)_cachedSettings["EnableAutoUpdate"]; set => ChangingParameters("EnableAutoUpdate", value); }
         internal static bool IsTopMost { get => (bool)_cachedSettings["EnableTopMost"]; set => ChangingParameters("EnableTopMost", value); }
         internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["EnableIpBlur"]; set => ChangingParameters("EnableIpBlur", value); }

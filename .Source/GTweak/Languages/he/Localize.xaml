@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">ארגז כלים</v:String>
     <v:String x:Key="settings_title">הגדרות</v:String>
     <v:String x:Key="settings_noty">הצג התראות</v:String>
+    <v:String x:Key="settings_profile">הצגת שם המשתמש והתמונה</v:String>
     <v:String x:Key="settings_update">בדיקת עדכונים</v:String>
     <v:String x:Key="settings_toast">הצמד מעל כל החלונות</v:String>
     <v:String x:Key="settings_volume">עוצמת קול:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">שמירת תיעוד של התנהגות המשתמש</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">איסוף נתונים ועדכוני רקע של מפות לא מקוונות</v:String>
     <v:String x:Key="IntelTelemetry_conf">איסוף ומעקב של טלמטריית Intel</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">איסוף וניטור טלמטריה של Microsoft Office</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows יוצר מזהה פרסום ייחודי לכל משתמש כדי לעקוב אחר הפעולות שלך. מזהה זה משמש מפתחי יישומים ואת Windows עצמה למטרותיהם, כולל הצגת פרסומות ספציפיות ביישומים.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">גם בשימוש בחשבון מקומי, Windows תמיד מנסה לסנכרן את הנתונים שלך עם שרתי Microsoft. בפרט: ערכות נושא, סיסמאות, הגדרות Windows, הגדרות דפדפן, הגדרות שורת השפה, הגדרות נגישות והגדרות נוספות.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">הטוויק משבית את התכונה UAR (User Activity Recording) – מערכת המתעדת ברצף כל פעולה שאתה מבצע במחשב שלך: מצילומי מסך והקלדת טקסט ועד הפעלת תוכנות ואפילו מתן גישה למצלמת האינטרנט כשהמסך נעול, ועוד.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows מעדכן מעת לעת מפות לא מקוונות ושולח התראות על נתונים חדשים ברקע. תהליכים אלו עשויים לאסוף מידע על מיקומך, מסלוליך ושימושך במפות. אם אינך משתמש במפות לא מקוונות, מומלץ להשביתן כדי להימנע מעדכונים נסתרים ומשידור נתונים לשרתי Microsoft ללא מעורבותך הישירה.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">מודול ה-Intel הפועל ברקע לאיסוף ושידור נתונים מוצג ככלי לשיפור מוצרי החברה. עם זאת, עבור המשתמש הממוצע הוא מעניק תועלת מעשית מועטה, והשבתת תכונה זו עשויה לצמצם פעילות רקע ולמנוע שידור נתונים מיותר.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office עוקב באופן רציף אחר עבודתך עם מסמכים, מתעד את מהירות הפעלת היישומים, קריסות מערכת ותדירות השימוש בכלים, ושולח דוחות לשרתי Microsoft. השבתת תכונה זו עוצרת את איסוף הנתונים הנסתר ומפסיקה תהליכי ניטור מיותרים ברקע, מבלי להשפיע על התפקוד המלא של Word, Excel ויישומי Office נוספים.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">מוסיקה</v:String>
     <v:String x:Key="FolderVideo_intf">סרטוני וידאו</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">מיקום שורת המשימות:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">למטה</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">למעלה</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">משמאל</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">מימין</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">גודל סטנדרטי של כפתורי המערכת</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">תדירות מהבהוב סטנדרטית של הסמן</v:String>
@@ -272,7 +273,7 @@
     <v:String x:Key="OpenQuickAccess_intf">פתח את «גישה מהירה» במקום «מחשב זה»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">שינויי בהירות ספונטניים</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">משנה את מיקום שורת המשימות במסך ומאפשר להציב אותה בחלק התחתון, העליון, השמאלי או הימני. שים לב כי המסך עשוי להבהב.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">משנה את צבע הרקע בעת בחירת טקסט או אובייקטים עם הסמן במערכת.</v:String>
     <v:String x:Key="desc_Tooltip_intf">משנה את צבע חלוניות העזרה ביישומים נתמכים.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">משנה את הנראות של פריטי המערכת המובנים בחלונית הניווט שאינם ניתנים לביטול הצמדה באמצעים רגילים.</v:String>
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">תהליכים פעילים:</v:String>
     <v:String x:Key="label_svc_sysinfo">שירותים:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">גרסה</v:String>
+    <v:String x:Key="label_version_sysinfo">גרסה</v:String>
     <v:String x:Key="label_serial_sysinfo">מספר סידורי</v:String> 
     <v:String x:Key="label_mode_sysinfo">מצב</v:String>
     <v:String x:Key="label_motherbr_sysinfo">לוח אם</v:String>

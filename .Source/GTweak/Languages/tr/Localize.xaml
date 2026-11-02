@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Araç seti</v:String>
     <v:String x:Key="settings_title">Ayarlar</v:String>
     <v:String x:Key="settings_noty">Bildirimleri göster</v:String>
+    <v:String x:Key="settings_profile">Kullanıcı adını ve avatarı göster</v:String>
     <v:String x:Key="settings_update">Güncellemeleri kontrol et</v:String>
     <v:String x:Key="settings_toast">Diğer pencerelerin üstünde tut</v:String>
     <v:String x:Key="settings_volume">Ses seviyesi:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Kullanıcı davranışlarının kayıt altına alınması</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Çevrimdışı haritaların veri toplaması ve arka plan güncellemeleri</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel telemetri verilerinin toplanması ve izlenmesi</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Microsoft Office telemetrisini toplama ve izleme</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows, her kullanıcı için benzersiz bir reklam kimliği oluşturarak eylemlerinizi izler. Bu kimlik, uygulama geliştiricileri ve bizzat Windows tarafından özellikle size kişiselleştirilmiş reklamlar sunmak gibi kendi amaçları doğrultusunda kullanılır.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Yerel bir hesap kullansanız bile Windows, verilerinizi Microsoft sunucularıyla sürekli senkronize etmeye çalışır. Senkronize edilen veriler arasında temalar, parolalar, Windows ayarları, tarayıcı ayarları, dil çubuğu ayarları, Erişim Kolaylığı ayarları ve diğer ek ayarlar yer alır.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Bu ayar, UAR (Kullanıcı Etkinliği Kaydı) özelliğini devre dışı bırakır. Bu sistem; ekran görüntüsü almaktan metin yazmaya, program başlatmaktan ekran kilitliyken web kamerasına erişime kadar bilgisayarınızda gerçekleştirdiğiniz her eylemi sırayla kaydeder.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows periyodik olarak Çevrimdışı Haritaları günceller ve arka planda yeni veriler hakkında bildirim gönderir. Bu süreçler konumunuz, rotalarınız ve harita kullanımınız hakkında bilgi toplayabilir. Çevrimdışı Haritaları kullanmıyorsanız, gizli güncellemeleri ve sizden habersiz Microsoft sunucularına veri iletimini önlemek için bunları devre dışı bırakmanız önerilir.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Veri toplamak ve iletmek için arka planda çalışan bu Intel modülü, şirketin ürünlerini geliştirmesi için bir araç olarak konumlandırılmıştır. Ancak ortalama bir kullanıcı için pratik hiçbir fayda sağlamaz. Bu özelliği devre dışı bırakmak arka plan etkinliğini azaltır ve gereksiz veri aktarımını önler.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office, belgeler üzerindeki çalışmalarınızı sürekli takip ederek uygulama başlatma hızını, sistem çökmelerini ve araç kullanım sıklığını kaydeder ve bu raporları Microsoft sunucularına gönderir. Bu özelliğin kapatılması, gizli istatistiklerin toplanmasını ve gereksiz izleme işlemlerini durdurur; Word, Excel ve diğer Office uygulamalarının tam işlevselliğini hiçbir şekilde etkilemez.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">Müzik</v:String>
     <v:String x:Key="FolderVideo_intf">Videolar</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">Görev çubuğu konumu:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Alt</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Üst</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Sol</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Sağ</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">Sistem düğmelerinin standart boyutu</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Standart imleç yanıp sönme hızı</v:String>
@@ -272,38 +273,38 @@
     <v:String x:Key="OpenQuickAccess_intf">Dosya Gezgini'ni "Bu Bilgisayar" konumunda aç</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Otomatik parlaklık değişimleri</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Görev çubuğunun ekrandaki konumunu alt, üst, sol veya sağ kenara yerleştirmenize olanak tanır.E kranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Sistemde metin veya nesne seçtiğinizde imleç seçim alanının arka plan rengini değiştirir.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Desteklenen uygulamalardaki bilgi baloncuklarının (ipuçlarının) rengini değiştirir.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Dosya Gezgini gezinti bölmesinde bulunan ve normal yollarla kaldırılamayan yerleşik sistem öğelerinin görünürlüğünü değiştirir.</v:String>
-    <v:String x:Key="desc_FileExplorerDisplay_intf">Dosya Gezgini'nde gizli öğelerin görünürlüğü, dosya uzantıları ve disk sürücüsü yapısı dahil olmak üzere öğelerin görüntülenme kurallarını değiştirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="desc_FileExplorerDisplay_intf">Dosya Gezgini'nde gizli öğelerin görünürlüğü, dosya uzantıları ve disk sürücüsü yapısı dahil olmak üzere öğelerin görüntülenme kurallarını değiştirir. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Masaüstündeki sistem simgelerinin görünümünü değiştirir; bu simgeler sıradan kısayollar değil, yerleşik sistem nesneleridir.</v:String>
-    <v:String x:Key="desc_ThisPCFolders_intf">"Bu Bilgisayar" altındaki standart kullanıcı klasörlerinin görünümünü değiştirir. Listede yalnızca bağlı sürücülerin görünmesi için bu klasörleri gizlemenizi sağlar. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="desc_ThisPCFolders_intf">"Bu Bilgisayar" altındaki standart kullanıcı klasörlerinin görünümünü değiştirir. Listede yalnızca bağlı sürücülerin görünmesi için bu klasörleri gizlemenizi sağlar. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Bu ayar; Simge Durumuna Küçült, Ekranı Kapla ve Kapat düğmelerinin boyutunu küçülterek daha sade bir görünüm sağlar. Dosya Gezgini, Fotoğraflar, tarayıcılar ve diğer tanıdık programlar dahil tüm pencereleri etkiler.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Metin imlecinin yanıp sönme hızını artırır. Varsayılan olarak imleç her 530 milisaniyede bir yanıp söner.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">Dosya Gezgini, tarayıcılar ve diğer klasik programlar dahil klasik Windows uygulamalarındaki kaydırma çubuklarının kalınlığını azaltır. Ancak kendi denetim öğelerini kullanan modern arayüzleri etkilemez.</v:String>
     <v:String x:Key="desc_TaskbarTransparency_intf">Pencereleri ve yüzeyleri yarı saydam yapan saydamlık efektini etkinleştirir veya devre dışı bırakır.</v:String>
-    <v:String x:Key="desc_TaskbarDarkTheme_intf">Görev çubuğu temasını açık veya koyu olarak değiştirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
-    <v:String x:Key="desc_AppDarkTheme_intf">Dosya Gezgini temasını, cihaz temasını destekleyen tarayıcılar ve diğer programlar dahil açık veya koyu olarak değiştirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="desc_TaskbarDarkTheme_intf">Görev çubuğu temasını açık veya koyu olarak değiştirir. Ekranın yanıp sönebileceğini unutmayın.</v:String>
+    <v:String x:Key="desc_AppDarkTheme_intf">Dosya Gezgini temasını, cihaz temasını destekleyen tarayıcılar ve diğer programlar dahil açık veya koyu olarak değiştirir. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_ContextMenuDelay_intf">Varsayılan olarak ek bağlam (sağ tık) menüsü öğeleri 400 milisaniyelik bir gecikmeyle görünür. Menünün daha hızlı açılmasını istiyorsanız bu gecikmeyi azaltabilirsiniz.</v:String>
     <v:String x:Key="desc_TaskbarPreviewDelay_intf">Varsayılan olarak görev çubuğu önizlemeleri uygulamaların üzerine gelindiğinde çok geç görünür. Önizlemelerin daha hızlı belirmesi için bu ayarı uygulayabilirsiniz.</v:String>
     <v:String x:Key="desc_IconOverlayBadges_intf">Kısayol oklarını, bulut senkronizasyon durumlarını (OneDrive, Dropbox) ve SVG grafikleri gibi dosya türü rozetlerini gizlemeye olanak tanır.</v:String>
     <v:String x:Key="desc_ShortcutNameSuffix_intf">Yeni bir kısayol oluşturduğunuzda ismin sonuna otomatik olarak eklenen gereksiz "- Kısayol" uzantısını kaldırır.</v:String>
     <v:String x:Key="desc_TaskbarAlignment_intf">Görev çubuğundaki simgelerin ortada mı yoksa solda mı hizalanacağını seçmenizi sağlar.</v:String>
     <v:String x:Key="desc_StartMenuLayout_intf">Sabitlenmiş uygulamalar için ayrılan alanı genişleterek Başlat menüsü düzenini değiştirir. Ayrıca (Windows Home sürümü hariç) "Önerilenler" bölümünü Başlat menüsünden kaldırır.</v:String>
-    <v:String x:Key="desc_CompactContextMenu_intf">Masaüstü ve Dosya Gezgini için alıştığınız klasik sağ tık (bağlam) menüsünü geri getirir. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="desc_CompactContextMenu_intf">Masaüstü ve Dosya Gezgini için alıştığınız klasik sağ tık (bağlam) menüsünü geri getirir. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_TipsSuggestions_intf">Windows 11 zaman zaman yeni Başlat menüsü veya Hızlı Ayarlar gibi özelliklerin nasıl kullanılacağına dair ipuçları gösterir. Windows 11'i ilk kez kullananlar için faydalı olsa da zamanla gereksiz bir kalabalığa dönüşür.</v:String>
     <v:String x:Key="desc_CompactExplorerMode_intf">Varsayılan olarak Windows, dokunmatik ekranlar için Dosya Gezgini'ndeki öğeler arasına boşluk (dolgu) ekler. Bu ayar, öğeler arasındaki boşluğu kaldırarak klasik Dosya Gezgini görünümünü geri getirir.</v:String>
     <v:String x:Key="desc_CopilotRecall_intf">Görev çubuğundaki, Başlat Menüsündeki, Edge ve Not Defteri'ndeki Copilot simgelerini devre dışı bırakıp gizler, işlevselliğini engeller ve Recall özelliğini de devre dışı bırakır. Copilot uygulamasının kendisi sistemde kalır. Bu yapay zeka özellikleri sisteminizde zaten yoksa bu ayarı uygulamak anlamsızdır.</v:String>
-    <v:String x:Key="desc_TaskbarEndTask_intf">Görev çubuğundaki bir uygulamaya sağ tıkladığınızda menüye "Görevi sonlandır" seçeneğini ekler. Böylece Görev Yöneticisi'ni açmaya gerek kalmadan işlemleri hızlıca sonlandırabilirsiniz. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="desc_TaskbarEndTask_intf">Görev çubuğundaki bir uygulamaya sağ tıkladığınızda menüye "Görevi sonlandır" seçeneğini ekler. Böylece Görev Yöneticisi'ni açmaya gerek kalmadan işlemleri hızlıca sonlandırabilirsiniz. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_SnapLayouts_intf">"Ekranı Kapla" düğmesinin üzerine geldiğinizde beliren pencere tutturma düzeni (Snap Layouts) önerilerini devre dışı bırakır.</v:String>
-    <v:String x:Key="desc_TaskbarIconsButtons_intf">Arama, Görev Görünümü ve Sohbet simgelerini görev çubuğundan kaldırır. Windows 11'in eski derlemelerinde Copilot simgesini de gizler. Windows 10 kullanıcıları için ayrıca Haberler ve İlgi Alanları ile Cortana'yı devre dışı bırakır. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="desc_TaskbarIconsButtons_intf">Arama, Görev Görünümü ve Sohbet simgelerini görev çubuğundan kaldırır. Windows 11'in eski derlemelerinde Copilot simgesini de gizler. Windows 10 kullanıcıları için ayrıca Haberler ve İlgi Alanları ile Cortana'yı devre dışı bırakır. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_PersonalizedAds_intf">Varsayılan olarak Windows, ilgi alanlarınıza uygun reklamlar göstermek için topladığı bilgileri kullanır. Bu reklamlar Mağaza uygulamalarında, Dosya Gezgini'nde, Ayarlar'da ve Başlat menüsünde karşınıza çıkabilir. Kişiselleştirilmiş reklamları görmek istemiyorsanız bu özelliği kapatabilirsiniz.</v:String>
     <v:String x:Key="desc_RestoreFolderWindows_intf">Varsayılan olarak Windows, kapatılırken pencere konumlarını kaydetmez. Bu ayar, açık klasörlerin durumunu hatırlayarak oturumu kapatma, yeniden başlatma veya sistemi kapatma işlemlerinden sonra onları geri yüklemenizi sağlar.</v:String>
     <v:String x:Key="desc_TipsNotifications_intf">Ayarlardaki çevrimiçi ipuçları dahil tüm Windows ipuçlarını ve bildirimlerini devre dışı bırakır. Ayrıca kullanıcıyı "cihaz kurulumunu tamamlamaya" ve Microsoft hesabıyla oturum açmaya zorlayan agresif SCOOBE (İkinci Şans Kutu Deneyimi) ekranını da engeller.</v:String>
     <v:String x:Key="desc_JpegWallpaperCompression_intf">Varsayılan olarak Windows, bir JPEG görselini masaüstü duvar kağıdı olarak ayarladığınızda kalitesini otomatik olarak %85'e düşürür. Bu ayar, JPEG duvar kağıdı kalitesini %100 olarak sabitler.</v:String>
     <v:String x:Key="desc_DesktopTooltips_intf">Fare imleci masaüstü öğelerinin üzerine geldiğinde görünen bilgi baloncuklarını (ipuçlarını) devre dışı bırakır.</v:String>
-    <v:String x:Key="desc_BingStartSearch_intf">Varsayılan olarak Windows, Başlat menüsünde aradığınız her şeyi Bing arama sonuçları sunmak için kendi sunucularına gönderir. Başlat menüsünde web aramasına ihtiyaç duymuyorsanız bu ayarla Bing entegrasyonunu kapatabilirsiniz. Dikkat, ekran anlık gidip gelebilir.</v:String>
+    <v:String x:Key="desc_BingStartSearch_intf">Varsayılan olarak Windows, Başlat menüsünde aradığınız her şeyi Bing arama sonuçları sunmak için kendi sunucularına gönderir. Başlat menüsünde web aramasına ihtiyaç duymuyorsanız bu ayarla Bing entegrasyonunu kapatabilirsiniz. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_OpenQuickAccess_intf">Varsayılan olarak Dosya Gezgini açıldığında ilk olarak "Hızlı Erişim" sekmesi gösterilir. Bu ayar, Dosya Gezgini'ni açtığınızda doğrudan disklerinizi görebileceğiniz "Bu Bilgisayar" konumunun açılmasını sağlar.</v:String>
     <v:String x:Key="desc_AdaptiveBrightness_intf">Bazı cihazlarda ekran parlaklığı, ekrandaki içeriğe bağlı olarak kendiliğinden değişebilir. HDR, dinamik parlaklık ve güç ayarlarını kapatmak sorunu çözmezse (özellikle pilde çalışan dizüstü bilgisayarlarda) bu ayarı deneyebilirsiniz; sistem düzeyinde otomatik parlaklık ayarını zorla devre dışı bırakır. Manuel parlaklık kontrolü çalışmaya devam eder.</v:String>
     <!--#endregion-->
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Çalışan işlemler:</v:String>
     <v:String x:Key="label_svc_sysinfo">hizmetler:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Sürüm</v:String>
+    <v:String x:Key="label_version_sysinfo">Sürüm</v:String>
     <v:String x:Key="label_serial_sysinfo">Seri numarası</v:String> 
     <v:String x:Key="label_mode_sysinfo">Mod</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Anakart</v:String>

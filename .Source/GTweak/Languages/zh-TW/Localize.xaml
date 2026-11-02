@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">工具組</v:String>
     <v:String x:Key="settings_title">設定</v:String>
     <v:String x:Key="settings_noty">顯示通知</v:String>
+    <v:String x:Key="settings_profile">顯示使用者名稱與頭像</v:String>
     <v:String x:Key="settings_update">檢查更新中</v:String>
     <v:String x:Key="settings_toast">固定於所有視窗頂端</v:String>
     <v:String x:Key="settings_volume">音量：</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">記錄使用者行為</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">離線地圖的資料收集與背景更新</v:String>
     <v:String x:Key="IntelTelemetry_conf">收集與監控 Intel 遙測數據</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">收集與監視 Microsoft Office 遙測資料</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows 會為每位使用者建立唯一的廣告識別碼以追蹤您的操作。此識別碼由應用程式開發者及 Windows 系統本身用於各自目的，包括在應用程式中向您提供特定廣告。</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">即使使用本地帳戶，Windows 仍會持續嘗試將您的資料與 Microsoft 伺服器同步。具體同步項目包含：主題、密碼、Windows 設定、瀏覽器設定、語言工具列設定、簡易存取設定及其他附加設定。</v:String>
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">音樂</v:String>
     <v:String x:Key="FolderVideo_intf">影片</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">工作列位置：</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">底部</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">頂部</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">靠左</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">靠右</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">系統按鈕標準尺寸</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">標準游標閃爍頻率</v:String>
@@ -272,7 +273,7 @@
     <v:String x:Key="OpenQuickAccess_intf">開啟"快速存取"而非"本機"</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">亮度異常變化</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">變更工作列在螢幕上的位置，可將其放置於底部、頂部、左側或右側邊緣。請注意，套用時螢幕可能會閃爍。</v:String>
     <v:String x:Key="desc_CursorSelection_intf">調整在系統中使用游標選取文字或物件時的背景顏色。</v:String>
     <v:String x:Key="desc_Tooltip_intf">調整受支援應用程式中工具提示的顏色。</v:String>
     <v:String x:Key="desc_NavigationItems_intf">變更導覽窗格中內建系統項目的可見性，這些項目無法以一般方式解除釘選。</v:String>
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">執行中的程序：</v:String>
     <v:String x:Key="label_svc_sysinfo">服務：</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">版本</v:String>
+    <v:String x:Key="label_version_sysinfo">版本</v:String>
     <v:String x:Key="label_serial_sysinfo">序號</v:String> 
     <v:String x:Key="label_mode_sysinfo">模式</v:String>
     <v:String x:Key="label_motherbr_sysinfo">主機板</v:String>

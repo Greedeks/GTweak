@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Boîte à outils</v:String>
     <v:String x:Key="settings_title">Paramètres</v:String>
     <v:String x:Key="settings_noty">Afficher les notifications</v:String>
+    <v:String x:Key="settings_profile">Afficher le nom et l'avatar</v:String>
     <v:String x:Key="settings_update">Vérification des mises à jour</v:String>
     <v:String x:Key="settings_toast">Épingler au-dessus des fenêtres</v:String>
     <v:String x:Key="settings_volume">Volume :</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Enregistrement du comportement de l’utilisateur</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Collecte de données et mises à jour des cartes hors ligne</v:String>
     <v:String x:Key="IntelTelemetry_conf">Collecte et surveillance de la télémétrie Intel</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Collecte et surveillance de la télémétrie de Microsoft Office</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows crée un identifiant publicitaire unique pour chaque utilisateur afin de suivre vos actions. Cet identifiant est utilisé par les développeurs d’applications et par Windows lui-même, notamment pour vous proposer des publicités ciblées dans les applications.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Même en utilisant un compte local, Windows tente toujours de synchroniser vos données avec les serveurs de Microsoft. Cela inclut notamment : les thèmes, les mots de passe, les paramètres Windows, les paramètres du navigateur, la barre de langue, l’accessibilité simplifiée, et d’autres paramètres.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Ce paramètre désactive l’enregistrement de l’activité utilisateur (UAR), qui peut suivre toutes vos actions, captures d’écran, saisies, lancements de programmes, et même l’accès à la webcam, y compris lorsque l’écran est verrouillé.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows met régulièrement à jour les cartes hors ligne et envoie des notifications sur les nouvelles données en arrière-plan. Ces processus peuvent collecter des informations sur votre position, vos itinéraires et votre utilisation des cartes. Si vous n'utilisez pas les cartes hors ligne, il est recommandé de les désactiver pour éviter les mises à jour cachées et la transmission de données aux serveurs de Microsoft sans votre intervention directe.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Le module Intel, qui fonctionne en arrière-plan pour collecter et transmettre des données, est présenté comme un outil d'amélioration des produits de l'entreprise. Cependant, pour l'utilisateur moyen, il offre peu d'avantages pratiques, et la désactivation de cette fonction peut réduire l'activité en arrière-plan et empêcher la transmission inutile de données.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office suit en permanence votre travail sur les documents, enregistrant la vitesse de démarrage des applications, les pannes système et la fréquence d'utilisation des outils, puis envoie des rapports aux serveurs de Microsoft. La désactivation de cette fonctionnalité interrompt la collecte masquée de statistiques et suspend les processus de surveillance superflus, sans impacter le bon fonctionnement de Word, Excel et des autres logiciels Office.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">Musique</v:String>
     <v:String x:Key="FolderVideo_intf">Vidéos</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">Emplacement de la barre des tâches :</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">En bas</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">En haut</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">À gauche</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">À droite</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">Taille standard des boutons système</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Fréquence de clignotement standard du curseur</v:String>
@@ -272,38 +273,38 @@
     <v:String x:Key="OpenQuickAccess_intf">Ouvrir « Accès rapide » au lieu de « Ce PC »</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Changements de luminosité spontanés</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Modifie l'emplacement de la barre des tâches à l'écran, vous permettant de la placer en bas, en haut, à gauche ou à droite. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Modifie la couleur d'arrière-plan lors de la sélection de texte ou d'objets avec le curseur dans le système.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Modifie la couleur des infobulles dans les applications prises en charge.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Modifie la visibilité des éléments système intégrés dans le volet de navigation, qui ne peuvent pas être détachés par les moyens habituels.</v:String>
-    <v:String x:Key="desc_FileExplorerDisplay_intf">Modifie les règles système d'affichage dans l'Explorateur de fichiers, y compris la visibilité des éléments cachés, des extensions et de la structure des lecteurs. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="desc_FileExplorerDisplay_intf">Modifie les règles système d'affichage dans l'Explorateur de fichiers, y compris la visibilité des éléments cachés, des extensions et de la structure des lecteurs. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Modifie l'affichage des icônes système sur le bureau — ce sont des objets système intégrés, pas de simples raccourcis.</v:String>
-    <v:String x:Key="desc_ThisPCFolders_intf">Modifie l'affichage des dossiers utilisateur standard dans « Ce PC ». Permet de les masquer pour ne laisser apparaître que les lecteurs connectés. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="desc_ThisPCFolders_intf">Modifie l'affichage des dossiers utilisateur standard dans « Ce PC ». Permet de les masquer pour ne laisser apparaître que les lecteurs connectés. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Réduit la taille des boutons Réduire, Agrandir et Fermer, les rendant moins volumineux. Redimensionne toutes les fenêtres, y compris l’Explorateur, Windows Photos, navigateurs et autres programmes connus.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Accélère la fréquence de clignotement du curseur texte. Par défaut, elle est de 530 millisecondes.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">Rend la largeur de la barre de défilement plus fine dans les fenêtres, y compris navigateurs et programmes. Sauf pour les interfaces modernes des applications.</v:String>
     <v:String x:Key="desc_TaskbarTransparency_intf">Active ou désactive l’effet de transparence. Fenêtres et surfaces translucides.</v:String>
-    <v:String x:Key="desc_TaskbarDarkTheme_intf">Change le thème de la barre des tâches en clair ou sombre. Attention, l’écran peut clignoter.</v:String>
-    <v:String x:Key="desc_AppDarkTheme_intf">Change le thème de l’explorateur en clair ou sombre, y compris navigateurs et autres programmes qui supportent le thème du système. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="desc_TaskbarDarkTheme_intf">Change le thème de la barre des tâches en clair ou sombre. Veuillez noter que l'écran peut clignoter.</v:String>
+    <v:String x:Key="desc_AppDarkTheme_intf">Change le thème de l’explorateur en clair ou sombre, y compris navigateurs et autres programmes qui supportent le thème du système. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_ContextMenuDelay_intf">Par défaut, les éléments supplémentaires du menu contextuel apparaissent avec un délai de 400 millisecondes. Pour aller plus vite, vous pouvez réduire ce délai.</v:String>
     <v:String x:Key="desc_TaskbarPreviewDelay_intf">Par défaut, la prévisualisation dans la barre des tâches reste affichée trop longtemps. Ce tweak accélère l’apparition des aperçus.</v:String>
     <v:String x:Key="desc_IconOverlayBadges_intf">Permet de masquer les flèches de raccourci, les statuts de synchronisation cloud (OneDrive, Dropbox) et les badges de types de fichiers, comme les graphiques SVG.</v:String>
     <v:String x:Key="desc_ShortcutNameSuffix_intf">Supprime le préfixe et suffixe trop intuitifs pour les étiquettes.</v:String>
     <v:String x:Key="desc_TaskbarAlignment_intf">Choisissez l’alignement des icônes dans la barre des tâches, centré ou à gauche.</v:String>
     <v:String x:Key="desc_StartMenuLayout_intf">Modifie la disposition du menu Démarrer en agrandissant la zone des applications épinglées. De plus, sauf pour l’édition Windows Home, la section « Recommandé » est supprimée.</v:String>
-    <v:String x:Key="desc_CompactContextMenu_intf">Reviens au menu contextuel classique pour le bureau et l’explorateur. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="desc_CompactContextMenu_intf">Reviens au menu contextuel classique pour le bureau et l’explorateur. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_TipsSuggestions_intf">Windows 11 affiche parfois des astuces sur l’utilisation de fonctionnalités, par exemple le nouveau menu Démarrer ou les Paramètres rapides. Utile pour les nouveaux utilisateurs, mais souvent inutile.</v:String>
     <v:String x:Key="desc_CompactExplorerMode_intf">Windows ajoute par défaut un espacement entre les éléments dans l’explorateur pour les écrans tactiles. Ce tweak restaure la disposition classique sans indentation.</v:String>
     <v:String x:Key="desc_CopilotRecall_intf">Le tweak désactive et, si possible, masque les icônes Copilot sur la barre des tâches, dans le menu « Démarrer », dans Edge et dans le Bloc-notes, bloquant ses fonctionnalités, et désactive également Recall. Dans le même temps, l'application Copilot elle-même n'est pas affectée, reste dans le système et peut être utilisée si nécessaire. Copilot ne peut être complètement supprimé qu'avec Microsoft Edge. Si ces fonctionnalités d'IA ne sont pas initialement présentes dans votre Windows, l'utilisation du tweak est inutile.</v:String>
-    <v:String x:Key="desc_TaskbarEndTask_intf">Ajoute l’option « Terminer la tâche » dans le menu contextuel du clic droit sur une application dans la barre des tâches. Accélère la fermeture des processus. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="desc_TaskbarEndTask_intf">Ajoute l’option « Terminer la tâche » dans le menu contextuel du clic droit sur une application dans la barre des tâches. Accélère la fermeture des processus. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_SnapLayouts_intf">Si vous n'avez pas besoin de voir les suggestions de disposition d'ancrage lors du survol du bouton « Agrandir », vous pouvez désactiver cette option.</v:String>
-    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ce tweak supprime les icônes « Rechercher », « Affichage des tâches » et « Chat », et masque l'élément « En savoir plus sur cette image ». Sur les versions plus anciennes de Windows 11, il supprime également l'icône Copilot. Pour les utilisateurs de Windows 10, il désactive en plus « Actualités et champs d'intérêt » et Cortana. Attention, l'écran peut clignoter.</v:String>
+    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ce tweak supprime les icônes « Rechercher », « Affichage des tâches » et « Chat », et masque l'élément « En savoir plus sur cette image ». Sur les versions plus anciennes de Windows 11, il supprime également l'icône Copilot. Pour les utilisateurs de Windows 10, il désactive en plus « Actualités et champs d'intérêt » et Cortana. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_PersonalizedAds_intf">Windows utilise par défaut les infos collectées pour cibler les publicités, affichées partout où il y a de la place. Désactive cette publicité personnalisée dans les applications Store, Explorateur, Options et menu Démarrer.</v:String>
     <v:String x:Key="desc_RestoreFolderWindows_intf">Windows ne sauvegarde pas par défaut la position et l’état des fenêtres à l’arrêt. Ce tweak permet de restaurer les dossiers ouverts après déconnexion, redémarrage et extinction.</v:String>
     <v:String x:Key="desc_TipsNotifications_intf">Le tweak permet de désactiver tous les conseils et notifications de Windows, y compris les astuces en ligne dans les paramètres, ainsi que de désactiver l'expérience de deuxième chance après le déballage (SCOOBE) pour les utilisateurs de Windows 11. SCOOBE est une fenêtre contextuelle qui apparaît soudainement et incite agressivement l'utilisateur à « terminer la configuration de l'appareil de toute urgence » et à se connecter à un compte Microsoft.</v:String>
     <v:String x:Key="desc_JpegWallpaperCompression_intf">Par défaut, Windows réduit la qualité des fonds d’écran JPEG à 85 %. Ce tweak fixe la qualité à 100 %.</v:String>
     <v:String x:Key="desc_DesktopTooltips_intf">Désactive les infobulles pour les éléments du bureau au survol du curseur.</v:String>
-    <v:String x:Key="desc_BingStartSearch_intf">Windows envoie par défaut toutes vos recherches dans le menu Démarrer à ses serveurs pour Bing. Ce tweak désactive la recherche web. Attention, l’écran peut clignoter.</v:String>
+    <v:String x:Key="desc_BingStartSearch_intf">Windows envoie par défaut toutes vos recherches dans le menu Démarrer à ses serveurs pour Bing. Ce tweak désactive la recherche web. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_OpenQuickAccess_intf">Par défaut, l’Explorateur s’ouvre sur « Accès rapide ». Ce tweak l’ouvre sur « Ce PC » à la place.</v:String>
     <v:String x:Key="desc_AdaptiveBrightness_intf">Sur certains appareils, la luminosité de l'écran peut changer spontanément en fonction du contenu affiché. Si la désactivation du HDR, de la luminosité dynamique et des paramètres d'alimentation ne résот pas le problème, vous pouvez essayer ce tweak — il désactive de force le réglage automatique de la luminosité au niveau du système. Le contrôle manuel reste disponible.</v:String>
     <!--#endregion-->
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Processus en cours d’exécution :</v:String>
     <v:String x:Key="label_svc_sysinfo">services :</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Version</v:String>
+    <v:String x:Key="label_version_sysinfo">Version</v:String>
     <v:String x:Key="label_serial_sysinfo">Numéro de série</v:String> 
     <v:String x:Key="label_mode_sysinfo">Mode</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Carte mère</v:String>

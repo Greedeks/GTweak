@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Toolset</v:String>
     <v:String x:Key="settings_title">Settings</v:String>
     <v:String x:Key="settings_noty">Show notifications</v:String>
+    <v:String x:Key="settings_profile">Show username and avatar</v:String>
     <v:String x:Key="settings_update">Checking for updates</v:String>
     <v:String x:Key="settings_toast">Pin on top of all windows</v:String>
     <v:String x:Key="settings_volume">Volume:</v:String>
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Running processes:</v:String>
     <v:String x:Key="label_svc_sysinfo">services:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Version</v:String>
+    <v:String x:Key="label_version_sysinfo">Version</v:String>
     <v:String x:Key="label_serial_sysinfo">Serial number</v:String> 
     <v:String x:Key="label_mode_sysinfo">Mode</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Motherboard</v:String>

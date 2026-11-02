@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Eszközkészlet</v:String>
     <v:String x:Key="settings_title">Beállítások</v:String>
     <v:String x:Key="settings_noty">Értesítések megjelenítése</v:String>
+    <v:String x:Key="settings_profile">Név és profilkép megjelenítése</v:String>
     <v:String x:Key="settings_update">Frissítések keresése</v:String>
     <v:String x:Key="settings_toast">Rögzítse az összes ablak tetejére</v:String>
     <v:String x:Key="settings_volume">Hangerő:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">A felhasználói viselkedés nyilvántartása</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Adatok gyűjtése és offline térképek háttérfrissítései</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel telemetria gyűjtése és monitorozása</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Microsoft Office telemetria gyűjtése és monitorozása</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">A Windows minden felhasználó számára egyedi hirdetési azonosítót hoz létre a műveletek nyomon követéséhez. Amelyet az alkalmazásfejlesztők és maga a Windows használnak saját céljaikra, beleértve az alkalmazások konkrét hirdetéseinek megjelenítését is.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">A Windows még helyi fiók használatával is mindig megpróbálja szinkronizálni az adatokat a Microsoft szervereivel. Különösen a következők: témák, jelszavak, Windows-beállítások, böngészőbeállítások, nyelvi sáv beállításai, egyszerűsített hozzáférési beállítások, további beállítások.</v:String>
@@ -272,38 +273,38 @@
     <v:String x:Key="OpenQuickAccess_intf">Nyissa meg a «Gyors hozzáférés»-t «Ez a gép» helyett</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Spontán fényerőváltozások</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Módosítja a tálca helyét a képernyőn, lehetővé téve annak alsó, felső, bal vagy jobb szélre rögzítését. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Módosítja a háttérszínt a szövegek vagy objektumok kurzorral történő kijelölésekor a rendszerben.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Módosítja a buboréksúgók színét a támogatott alkalmazásokban.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>
-    <v:String x:Key="desc_FileExplorerDisplay_intf">Módosítja a rendszer megjelenítési szabályait a Fájlkezelőben, beleértve a rejtett elemek, kiterjesztések és meghajtók láthatóságát. Figyelem, a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_FileExplorerDisplay_intf">Módosítja a rendszer megjelenítési szabályait a Fájlkezelőben, beleértve a rejtett elemek, kiterjesztések és meghajtók láthatóságát. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Módosítja a rendszerikonok megjelenítését az asztalon — ezek beépített rendszerobjektumok, nem rendes parancsikonok.</v:String>
-    <v:String x:Key="desc_ThisPCFolders_intf">Módosítja a szabványos felhasználói mappák és a «3D objektumok» megjelenítését az «Ez a gép» ablakban. Lehetővé teszi az elrejtésüket, hogy a listában csak a csatlakoztatott meghajtók jelenjenek meg. A 21H1 alatti verzióknál a «3D objektumokat» a navigációs panelről is eltávolítja. Figyelem: a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_ThisPCFolders_intf">Módosítja a szabványos felhasználói mappák és a «3D objektumok» megjelenítését az «Ez a gép» ablakban. Lehetővé teszi az elrejtésüket, hogy a listában csak a csatlakoztatott meghajtók jelenjenek meg. A 21H1 alatti verzióknál a «3D objektumokat» a navigációs panelről is eltávolítja. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Ez a módosítás csökkenti a Minimalizálás, a Maximalizálás és a Bezárás gombok méretét, így kevésbé terjedelmesek. Beállítja az összes ablak méretét, beleértve a Fájlkezelőt, a Fényképeket, a böngészőket és más ismerős programokat.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Ez a beállítás növeli a szövegkurzor villogásának gyakoriságát. Alapértelmezés szerint a kurzor 530 ezredmásodpercenként villog.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">A módosítás csökkenti a görgetősávok vastagságát a klasszikus Windows-alkalmazásokban, beleértve a File Explorert, a böngészőket és más régi programokat. Ez azonban nem érinti a modern interfészeket, mivel azok a rendszerbeállításoktól független saját vezérlőelemeiket használják.</v:String>
     <v:String x:Key="desc_TaskbarTransparency_intf">A módosítás letiltja vagy engedélyezi az átlátszósági effektust. Áttetsző ablakok és felületek.</v:String>
-    <v:String x:Key="desc_TaskbarDarkTheme_intf">A tálca témáját világosra vagy sötétre változtatja. Figyelem, a képernyő villoghat.</v:String>
-    <v:String x:Key="desc_AppDarkTheme_intf">A beállítás világosra vagy sötétre változtatja a Fájlkezelő témáját, beleértve a böngészőket és az eszköz témáját támogató egyéb programokat is. Figyelem, a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_TaskbarDarkTheme_intf">A tálca témáját világosra vagy sötétre változtatja. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_AppDarkTheme_intf">A beállítás világosra vagy sötétre változtatja a Fájlkezelő témáját, beleértve a böngészőket és az eszköz témáját támogató egyéb programokat is. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_ContextMenuDelay_intf">Alapértelmezés szerint további helyi menüelemek jelennek meg 400 ezredmásodperces késleltetéssel. Ha gyorsabban szeretne haladni, csökkentheti ezt a késleltetést.</v:String>
     <v:String x:Key="desc_TaskbarPreviewDelay_intf">Alapértelmezés szerint a tálca előnézete túl sokáig jeleníti meg a futó alkalmazások előnézetét. Az előnézetek gyorsabb megjelenéséhez alkalmazza ezt a módosítást.</v:String>
     <v:String x:Key="desc_IconOverlayBadges_intf">Lehetővé teszi a gyorsbillentyű-nyilak, a felhőalapú szinkronizálás állapotjelzőinek (OneDrive, Dropbox) és a fájltípus-jelölők (pl. SVG-grafikák) elrejtését.</v:String>
     <v:String x:Key="desc_ShortcutNameSuffix_intf">A címkék túl intuitív előtag-utótagjának eltávolítása.</v:String>
     <v:String x:Key="desc_TaskbarAlignment_intf">Válassza ki, hogy hol szeretné megjeleníteni az ikonokat a tálcán, a centen vagy a bal oldalon</v:String>
     <v:String x:Key="desc_StartMenuLayout_intf">Módosítja a Start menü elrendezését a rögzített alkalmazások területének kibővítésével. Ezenkívül a Windows Home kiadás kivételével az «Ajánlott» szakasz eltávolításra kerül a Start menüből.</v:String>
-    <v:String x:Key="desc_CompactContextMenu_intf">Ezzel a módosítással visszatér az asztal és az «Intéző» szokásos klasszikus helyi menüjéhez. Figyelem, a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_CompactContextMenu_intf">Ezzel a módosítással visszatér az asztal és az «Intéző» szokásos klasszikus helyi menüjéhez. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_TipsSuggestions_intf">A Windows 11 néha tippeket jelenít meg egy adott funkció használatához, például az új «Start» menüt vagy a «Gyorsbeállítások» funkciót. Hasznosak, ha először látja a Windows 11-et, egyébként haszontalan szemét.</v:String>
     <v:String x:Key="desc_CompactExplorerMode_intf">Alapértelmezés szerint a Windows kitöltést ad az Intéző elemei közé. Ez egy új funkció, amelyet érintőképernyőkhöz terveztek. Ez a módosítás visszaállítja a fájlkezelő klasszikus elrendezését, eltávolítja az elemek közötti behúzást, és megkíméli Önt a beállítások keresésétől.</v:String>
     <v:String x:Key="desc_CopilotRecall_intf">A beállítás letiltja és ahol lehetséges, elrejti a Copilot ikonokat a tálcán, a «Start menüben», az Edge-ben és a Jegyzettömbben, blokkolva annak működését, és letiltja a Visszahívást is. Ugyanakkor magát a Copilot alapalkalmazást ez nem érinti, a rendszerben marad, és szükség esetén használható. A Copilot csak a Microsoft Edge-vel együtt távolítható el teljesen. Ha ezek az AI-funkciók kezdetben nem találhatók meg a Windows rendszerben, a beállítás használata értelmetlen.</v:String>
-    <v:String x:Key="desc_TaskbarEndTask_intf">Ez a módosítás lehetővé teszi a "Feladat befejezése" opció hozzáadását a helyi menühöz, amikor jobb gombbal kattint az alkalmazásra a tálcán. Ez felgyorsítja a folyamatok befejezését anélkül, hogy meg kellene nyitnia a feladatkezelőt. Figyelem, a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_TaskbarEndTask_intf">Ez a módosítás lehetővé teszi a "Feladat befejezése" opció hozzáadását a helyi menühöz, amikor jobb gombbal kattint az alkalmazásra a tálcán. Ez felgyorsítja a folyamatok befejezését anélkül, hogy meg kellene nyitnia a feladatkezelőt. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_SnapLayouts_intf">Ha nem szeretnéd látni a rögzítési elrendezési javaslatokat, amikor a «Maximalizálás» gomb fölé viszed az egeret, kikapcsolhatod ezt a lehetőséget.</v:String>
-    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ez a beállítás eltávolítja a «Keresés», «Feladatnézet» és «Csevegés» ikonokat, valamint elrejti a «Tudjon meg többet erről a képről» elemet. A Windows 11 régebbi verzióiban a Copilot ikont is eltávolítja. Windows 10 felhasználók esetében emellett kikapcsolja a «Hírek és érdekességek» funkciót és a Cortanát. Figyelem: a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ez a beállítás eltávolítja a «Keresés», «Feladatnézet» és «Csevegés» ikonokat, valamint elrejti a «Tudjon meg többet erről a képről» elemet. A Windows 11 régebbi verzióiban a Copilot ikont is eltávolítja. Windows 10 felhasználók esetében emellett kikapcsolja a «Hírek és érdekességek» funkciót és a Cortanát. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_PersonalizedAds_intf">Alapértelmezés szerint a Windows az összegyűjtött információkat hirdetések célzására, azaz az Ön érdeklődési körének megfelelő hirdetések megjelenítésére használja. És szó szerint ez a hirdetés ott található, ahol szabad hely áll rendelkezésre a megjelenítéshez. Ha nem szeretné, hogy a Windows személyre szabott hirdetéseket jelenítsen meg az összes Áruházbeli alkalmazásban, az Intézőben, a Beállításokban és a Start menüben, akkor letilthatja ezt a levélszemétet.</v:String>
     <v:String x:Key="desc_RestoreFolderWindows_intf">Alapértelmezés szerint a Windows nem menti el az ablakok helyzetét, valamint azok állapotát, amikor ki van kapcsolva. Ez a módosítás lehetővé teszi, hogy megjegyezze a megnyitott mappák típusát, hogy visszaállítsa azokat a kijelentkezés, újraindítás és leállítás után.</v:String>
     <v:String x:Key="desc_TipsNotifications_intf">A beállítás lehetővé teszi az összes Windows-tipp és értesítés letiltását, beleértve a beállításokban található online tippeket, valamint a Second Chance Out of Box Experience (SCOOBE) letiltását a Windows 11 felhasználók számára. A SCOOBE hirtelen megjelenik egy felugró ablak, amely agresszíven felszólítja a felhasználót, hogy "sürgősen fejezze be az eszköz beállítását", és jelentkezzen be a Microsoft-fiókba.</v:String>
     <v:String x:Key="desc_JpegWallpaperCompression_intf">Alapértelmezés szerint, ha jpeg képet állít be asztali háttérképként, a Windows automatikusan 85%-ra csökkenti a minőségét. Ez a módosítás 100%-ra állítja a jpeg háttérkép minőségét.</v:String>
     <v:String x:Key="desc_DesktopTooltips_intf">A beállítás letiltja az asztali elemek eszköztippjeit, amikor az egérkurzort mozgatja.</v:String>
-    <v:String x:Key="desc_BingStartSearch_intf">Alapértelmezés szerint a Windows mindent elküld, amit a «Start» menüben keres, a szervereinek, hogy a Bing keresési eredményeit biztosítsa. Ha nincs szüksége Bing integrációra a «Start» menüben, alkalmazhat egy módosítást a webes keresés letiltásához. Figyelem, a képernyő villoghat.</v:String>
+    <v:String x:Key="desc_BingStartSearch_intf">Alapértelmezés szerint a Windows mindent elküld, amit a «Start» menüben keres, a szervereinek, hogy a Bing keresési eredményeit biztosítsa. Ha nincs szüksége Bing integrációra a «Start» menüben, alkalmazhat egy módosítást a webes keresés letiltásához. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_OpenQuickAccess_intf">Alapértelmezés szerint az Intéző megnyitásakor az első lap a «Gyors hozzáférés» lesz. És bármely lemez megnyitásához felesleges mozdulatokat kell végrehajtania. Ez a módosítás megnyitja a "Ez a számítógép" megnyitáskor a "Gyors hozzáférés" helyett.</v:String>
     <v:String x:Key="desc_AdaptiveBrightness_intf">Néhány eszközön a képernyő fényessége spontán módon változhat a megjelenített tartalomtól függően. Ha a HDR, a dinamikus fényerő és a teljesítménybeállítások kikapcsolása nem oldja meg a problémát (ez különösen akkumulátoros laptopokon gyakori), akkor kipróbálhatod ezt a beállítást – ez erőszakkal kapcsolja ki az automatikus fényerőállítást a rendszer szintjén. A kézi fényerőszabályozás továbbra is elérhető.</v:String>
     <!--#endregion-->
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Futó folyamatok:</v:String>
     <v:String x:Key="label_svc_sysinfo">szolgáltatás:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Verzió</v:String>
+    <v:String x:Key="label_version_sysinfo">Verzió</v:String>
     <v:String x:Key="label_serial_sysinfo">Sorozatszám</v:String> 
     <v:String x:Key="label_mode_sysinfo">Üzemmód</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Alaplap</v:String>

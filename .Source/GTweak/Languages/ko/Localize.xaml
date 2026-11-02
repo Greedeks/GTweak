@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">도구 모음</v:String>
     <v:String x:Key="settings_title">설정</v:String>
     <v:String x:Key="settings_noty">알림 표시</v:String>
+    <v:String x:Key="settings_profile">이름 및 아바타 표시</v:String>
     <v:String x:Key="settings_update">업데이트 확인</v:String>
     <v:String x:Key="settings_toast">모든 창 위에 고정</v:String>
     <v:String x:Key="settings_volume">볼륨:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">사용자 행동 기록 유지</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">오프라인 지도의 데이터 수집 및 백그라운드 업데이트</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel 텔레메트리 수집 및 모니터링</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Microsoft Office 원격 분석 수집 및 모니터링</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows는 사용자의 작업을 추적하기 위해 각 사용자에 대해 고유한 광고 식별자를 만듭니다. 이 식별자는 응용 프로그램 개발자와 Windows 자체에서 응용 프로그램에서 특정 광고를 제공하는 등 자체 목적을 위해 사용됩니다.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">로컬 계정을 사용하더라도 Windows는 항상 데이터를 Microsoft 서버와 동기화하려고 시도합니다. 특히 테마, 비밀번호, Windows 설정, 브라우저 설정, 입력 도구 모음 설정, 간소화된 액세스 설정, 추가 설정 등이 이에 해당합니다.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">이 조정은 UAR (사용자 활동 기록) 기능을 비활성화합니다 – 스크린샷 촬영, 텍스트 입력, 프로그램 실행, 화면이 잠긴 상태에서도 웹캠 접근 제공 등 컴퓨터에서 발생하는 모든 행동을 순차적으로 기록하는 시스템입니다.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows는 주기적으로 오프라인 지도를 업데이트하고 백그라운드에서 새 데이터에 대한 알림을 보냅니다. 이 과정에서 사용자의 위치, 경로 및 지도 사용 정보가 수집될 수 있습니다. 오프라인 지도를 사용하지 않는 경우, 사용자의 직접적인 관여 없이 진행되는 숨겨진 업데이트와 Microsoft 서버로의 데이터 전송을 방지하기 위해 이 기능을 비활성화하는 것이 좋습니다.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">백그라운드에서 데이터를 수집하고 전송하는 Intel 모듈은 제품 개선을 위한 도구로 홍보되지만, 일반 사용자에게는 실질적인 이득이 거의 없습니다. 이 기능을 비활성화하면 백그라운드 활동을 줄이고 불필요한 데이터 전송을 방지할 수 있습니다.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office는 문서 작업 시 애플리케이션 시작 속도, 시스템 오류, 도구 사용 빈도를 지속적으로 기록하여 Microsoft 서버로 보고서를 전송합니다. 이 기능을 비활성화하면 숨겨진 통계 수집과 불필요한 백그라운드 모니터링 프로세스를 중지하며, Word, Excel 및 기타 Office 애플리케이션의 정상적인 작동에는 영향을 주지 않습니다.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">음악</v:String>
     <v:String x:Key="FolderVideo_intf">동영상</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">작업 표시줄 위치:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">아래쪽</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">위쪽</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">왼쪽</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">오른쪽</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">시스템 버튼의 표준 크기</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">표준 커서 깜박임 빈도</v:String>
@@ -272,7 +273,7 @@
     <v:String x:Key="OpenQuickAccess_intf">«내 PC» 대신 «빠른 액세스» 열기</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">자발적인 밝기 변화</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">화면에서 작업 표시줄의 위치를 아래쪽, 위쪽, 왼쪽, 오른쪽 가장자리로 변경합니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">시스템에서 커서로 텍스트나 개체를 선택할 때의 배경 색상을 변경합니다.</v:String>
     <v:String x:Key="desc_Tooltip_intf">지원되는 애플리케이션에서 도구 설명의 색상을 변경합니다.</v:String>
     <v:String x:Key="desc_NavigationItems_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다.</v:String>
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">실행 중인 프로세스:</v:String>
     <v:String x:Key="label_svc_sysinfo">서비스:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">버전</v:String>
+    <v:String x:Key="label_version_sysinfo">버전</v:String>
     <v:String x:Key="label_serial_sysinfo">일련번호</v:String> 
     <v:String x:Key="label_mode_sysinfo">모드</v:String>
     <v:String x:Key="label_motherbr_sysinfo">머더보드</v:String>
