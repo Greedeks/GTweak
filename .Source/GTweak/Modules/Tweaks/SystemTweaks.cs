@@ -115,9 +115,6 @@ namespace GTweak.Modules.Tweaks
 
         private static bool _isNetshState = false, _isTickState = false;
         private static string _currentPowerGuid = string.Empty;
-
-        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
-        private readonly ControlWriterManager _controlWriter = new ControlWriterManager(ControlStates);
         private readonly Dictionary<Slider, (Func<double> Check, Action<uint> Apply)> _sliderMappings;
         private readonly Dictionary<Toggle, (Func<bool> Check, Action<bool, bool> Apply)> _toggleMappings;
 
@@ -749,17 +746,19 @@ namespace GTweak.Modules.Tweaks
             catch { _isTickState = false; }
         }
 
-        internal void CheckAll()
+        internal Dictionary<string, object> CheckAll()
         {
+            Dictionary<string, object> states = new Dictionary<string, object>(_sliderMappings.Count + _toggleMappings.Count);
             foreach (var tweak in _sliderMappings)
             {
-                _controlWriter[tweak.Key] = tweak.Value.Check();
+                states[tweak.Key.ToString()] = tweak.Value.Check();
             }
 
             foreach (var tweak in _toggleMappings)
             {
-                _controlWriter[tweak.Key] = tweak.Value.Check();
+                states[tweak.Key.ToString()] = tweak.Value.Check();
             }
+            return states;
         }
 
         [DllImport("user32.dll")]

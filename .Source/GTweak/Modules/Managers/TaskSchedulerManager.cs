@@ -15,13 +15,15 @@ namespace GTweak.Modules.Managers
         private static string GetTaskFilePath(string taskName) => Path.Combine(PathTargets.Folders.Tasks, taskName.TrimStart('\\', '/').Replace('/', '\\'));
         private static string GetAclCommand(string taskName, bool unlock) => $"icacls \"{GetTaskFilePath(taskName)}\" {(unlock ? "/remove:d SYSTEM" : "/deny SYSTEM:(W,D)")}";
 
+        private static readonly Lazy<Microsoft.Win32.TaskScheduler.TaskService> _taskService = new Lazy<Microsoft.Win32.TaskScheduler.TaskService>(() => new Microsoft.Win32.TaskScheduler.TaskService());
+
         internal static bool IsTaskEnabled(params string[] tasklist)
         {
             if (tasklist != null && tasklist.Length != 0)
             {
                 try
                 {
-                    using Microsoft.Win32.TaskScheduler.TaskService taskService = new Microsoft.Win32.TaskScheduler.TaskService();
+                    Microsoft.Win32.TaskScheduler.TaskService taskService = _taskService.Value;
                     foreach (string taskName in tasklist)
                     {
                         Microsoft.Win32.TaskScheduler.Task scheduledTask = taskService.GetTask(taskName);
@@ -38,6 +40,7 @@ namespace GTweak.Modules.Managers
 
             return false;
         }
+
 
         internal static void SetTaskState(bool state, params string[] tasklist)
         {

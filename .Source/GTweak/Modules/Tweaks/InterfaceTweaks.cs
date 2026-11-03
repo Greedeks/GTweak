@@ -169,8 +169,6 @@ namespace GTweak.Modules.Tweaks
             AdaptiveBrightness
         }
 
-        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
-        private readonly ControlWriterManager _controlWriter = new ControlWriterManager(ControlStates);
         private readonly Dictionary<Picker, (Func<string> Check, Action<string> Apply)> _pickerMappings;
         private readonly Dictionary<Checkbox, (Func<bool> Check, Action<bool> Apply)> _checkboxMappings;
         private readonly Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)> _toggleMappings;
@@ -1025,22 +1023,24 @@ namespace GTweak.Modules.Tweaks
             };
         }
 
-        internal void CheckAll()
+        internal Dictionary<string, object> CheckAll()
         {
+            Dictionary<string, object> states = new Dictionary<string, object>(_pickerMappings.Count + _checkboxMappings.Count + _toggleMappings.Count);
             foreach (var tweak in _pickerMappings)
             {
-                _controlWriter[tweak.Key] = tweak.Value.Check();
+                states[tweak.Key.ToString()] = tweak.Value.Check();
             }
 
             foreach (var tweak in _checkboxMappings)
             {
-                _controlWriter[tweak.Key] = tweak.Value.Check();
+                states[tweak.Key.ToString()] = tweak.Value.Check();
             }
 
             foreach (var tweak in _toggleMappings)
             {
-                _controlWriter[tweak.Key] = tweak.Value.Check();
+                states[tweak.Key.ToString()] = tweak.Value.Check();
             }
+            return states;
         }
 
         internal void Apply(string controlName, string value)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -97,12 +98,15 @@ namespace GTweak
                     }
                 };
 
-                foreach (ResourceDictionary oldDictionary in Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Languages/")).ToList())
+
+                List<ResourceDictionary> oldDictionaries = Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Languages/")).ToList();
+
+                Current.Resources.MergedDictionaries.Add(dictionary);
+
+                foreach (ResourceDictionary oldDictionary in oldDictionaries)
                 {
                     Current.Resources.MergedDictionaries.Remove(oldDictionary);
                 }
-
-                Current.Resources.MergedDictionaries.Add(dictionary);
 
                 LanguageChanged?.Invoke(default, EventArgs.Empty);
             }
@@ -119,12 +123,14 @@ namespace GTweak
                     Source = GetResourceUri(char.ToUpper(value[0], CultureInfo.InvariantCulture) + value.Substring(1).ToLower(CultureInfo.InvariantCulture), true)
                 };
 
-                foreach (ResourceDictionary oldDictionary in Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Styles/Themes/")).ToList())
+                List<ResourceDictionary> oldDictionaries = Current.Resources.MergedDictionaries.Where(d => d.Source != null && d.Source.OriginalString.StartsWith("Styles/Themes/")).ToList();
+
+                Current.Resources.MergedDictionaries.Add(dictionary);
+
+                foreach (ResourceDictionary oldDictionary in oldDictionaries)
                 {
                     Current.Resources.MergedDictionaries.Remove(oldDictionary);
                 }
-
-                Current.Resources.MergedDictionaries.Add(dictionary);
 
                 ThemeChanged?.Invoke(default, EventArgs.Empty);
             }

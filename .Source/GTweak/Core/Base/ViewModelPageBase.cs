@@ -10,8 +10,7 @@ namespace GTweak.Core.Base
     {
         private ObservableCollection<TModel> _toggles;
 
-        protected abstract IReadOnlyDictionary<string, object> GetControlStates();
-        protected abstract void Analyze(TTweaksClass tweaks);
+        protected abstract IReadOnlyDictionary<string, object> Analyze(TTweaksClass tweaks);
 
         public TModel this[string name]
         {
@@ -50,9 +49,7 @@ namespace GTweak.Core.Base
         private void InitializeData()
         {
             TTweaksClass tweaks = new TTweaksClass();
-            Analyze(tweaks);
-
-            IReadOnlyDictionary<string, object> states = GetControlStates();
+            IReadOnlyDictionary<string, object> states = Analyze(tweaks);
             List<TModel> modelsList = new List<TModel>(states.Count);
 
             foreach (var kvp in states)

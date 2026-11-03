@@ -14,8 +14,6 @@ namespace GTweak.Core.ViewModel
         public Visibility BluetoothSupport => BluetoothManager.IsAvailable ? Visibility.Visible : Visibility.Collapsed;
         public Visibility Win10FeatureOnly => HardwareData.OS.IsWin10 ? Visibility.Visible : Visibility.Collapsed;
 
-        protected override IReadOnlyDictionary<string, object> GetControlStates() => SystemTweaks.ControlStates;
-
-        protected override void Analyze(SystemTweaks tweaks) => tweaks?.CheckAll();
+        protected override IReadOnlyDictionary<string, object> Analyze(SystemTweaks tweaks) => tweaks.CheckAll();
     }
 }

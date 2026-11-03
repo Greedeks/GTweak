@@ -518,7 +518,6 @@
     <Compile Include="Modules\Helpers\TakingOwnership.cs" />
     <Compile Include="Modules\Helpers\TrustedInstaller.cs" />
     <Compile Include="Modules\Managers\ArchiveManager.cs" />
-    <Compile Include="Modules\Managers\ControlWriterManager.cs" />
     <Compile Include="Modules\Managers\ExplorerManager.cs" />
     <Compile Include="Modules\Managers\FirewallManager.cs" />
     <Compile Include="Modules\Managers\NotificationManager.cs" />
