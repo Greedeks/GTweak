@@ -48,7 +48,7 @@ namespace GTweak.Modules.Managers
 
             private async void ShowNotification(AlertType type)
             {
-                if (GlobalOptions.IsViewNotification && Interlocked.CompareExchange(ref _isNotificationOpen, 1, 0) == 0)
+                if (GlobalOptions.EnableNotifications && Interlocked.CompareExchange(ref _isNotificationOpen, 1, 0) == 0)
                 {
                     Dispatcher dispatcher = Application.Current?.Dispatcher;
                     if (dispatcher == null)

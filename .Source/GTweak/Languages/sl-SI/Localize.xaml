@@ -273,10 +273,10 @@
     <v:String x:Key="OpenQuickAccess_intf">Odpri "Hitri dostop" namesto "Ta računalnik"</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Spontane spremembe svetlosti</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Spremeni položaj opravilne vrstice na zaslonu ter omogoča postavitev na spodnji, zgornji, levi ali desni rob. Upoštevajte, da lahko zaslon utripa..</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Spremeni položaj opravilne vrstice na zaslonu ter omogoča postavitev na spodnji, zgornji, levi ali desni rob. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Spremeni barvo ozadja pri izbiranju besedila ali predmetov s kazalcem v sistemu.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Spremeni barvo namigov v podprtih aplikacijah.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Spremeni vidnost vgrajenih sistemskih elementov v navigacijskem podoknu, ki jih ni mogoče odpeti z običajnimi sredstvi.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Spremeni vidnost vgrajenih sistemskih elementov v navigacijskem podoknu, ki jih ni mogoče odpeti z običajnimi sredstvi. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Spremeni sistemska pravila za prikazovanje elementov v Raziskovalcu datotek, vključno z vidnostjo skritih elementov, končnic datotek in strukturo diskovnih pogonov. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Spremeni prikaz sistemskih ikon na namizju, ki so vgrajeni sistemski predmeti in ne običajne bližnjice.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">Spremeni prikaz standardnih uporabniških map in "3D-predmetov" znotraj "Ta računalnik". Omogoča vam, da jih skrijete, tako da so na seznamu prikazani samo priključeni pogoni. Pri različicah pod 21H1 dodatno odstrani "3D-predmete" iz navigacijske plošče. Upoštevajte, da lahko zaslon utripa.</v:String>

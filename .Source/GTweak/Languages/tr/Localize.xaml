@@ -273,10 +273,10 @@
     <v:String x:Key="OpenQuickAccess_intf">Dosya Gezgini'ni "Bu Bilgisayar" konumunda aç</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Otomatik parlaklık değişimleri</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Görev çubuğunun ekrandaki konumunu alt, üst, sol veya sağ kenara yerleştirmenize olanak tanır.E kranın yanıp sönebileceğini unutmayın.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Görev çubuğunun ekrandaki konumunu alt, üst, sol veya sağ kenara yerleştirmenize olanak tanır. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Sistemde metin veya nesne seçtiğinizde imleç seçim alanının arka plan rengini değiştirir.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Desteklenen uygulamalardaki bilgi baloncuklarının (ipuçlarının) rengini değiştirir.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Dosya Gezgini gezinti bölmesinde bulunan ve normal yollarla kaldırılamayan yerleşik sistem öğelerinin görünürlüğünü değiştirir.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Dosya Gezgini gezinti bölmesinde bulunan ve normal yollarla kaldırılamayan yerleşik sistem öğelerinin görünürlüğünü değiştirir. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Dosya Gezgini'nde gizli öğelerin görünürlüğü, dosya uzantıları ve disk sürücüsü yapısı dahil olmak üzere öğelerin görüntülenme kurallarını değiştirir. Ekranın yanıp sönebileceğini unutmayın.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Masaüstündeki sistem simgelerinin görünümünü değiştirir; bu simgeler sıradan kısayollar değil, yerleşik sistem nesneleridir.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">"Bu Bilgisayar" altındaki standart kullanıcı klasörlerinin görünümünü değiştirir. Listede yalnızca bağlı sürücülerin görünmesi için bu klasörleri gizlemenizi sağlar. Ekranın yanıp sönebileceğini unutmayın.</v:String>

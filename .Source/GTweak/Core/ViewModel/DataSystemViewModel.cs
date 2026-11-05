@@ -63,14 +63,14 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        public bool IsIpHidden
+        public bool EnableIpBlur
         {
-            get => GlobalOptions.IsHiddenIpAddress;
+            get => GlobalOptions.EnableIpBlur;
             set
             {
-                if (GlobalOptions.IsHiddenIpAddress != value)
+                if (GlobalOptions.EnableIpBlur != value)
                 {
-                    GlobalOptions.IsHiddenIpAddress = value;
+                    GlobalOptions.EnableIpBlur = value;
                     OnPropertyChanged();
                     RefreshStates();
                 }
@@ -128,7 +128,7 @@ namespace GTweak.Core.ViewModel
         {
             if (NetworkProvider.isIPAddressFormatValid || (_ipAddressModel?.Data?.Any(char.IsDigit) == true))
             {
-                IpBlurRadius = GlobalOptions.IsHiddenIpAddress ? 20 : 0;
+                IpBlurRadius = GlobalOptions.EnableIpBlur ? 20 : 0;
                 IpSectionVisibility = Visibility.Visible;
                 _ipAddressModel.IsEnabled = true;
             }

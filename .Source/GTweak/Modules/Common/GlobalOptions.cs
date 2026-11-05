@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,9 +15,6 @@ namespace GTweak.Modules.Common
 {
     internal sealed class GlobalOptions
     {
-        [DllImport("winmm.dll")]
-        internal static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
-
         internal static readonly string[] AvailableLangs = new ResourceDictionary { Source = new Uri("Languages/LanguageCatalog.xaml", UriKind.Relative) }.Keys.Cast<string>().Select(key => key.Replace("_", "-")).OrderBy(locale => locale, StringComparer.OrdinalIgnoreCase).ToArray();
         internal static readonly string[] AvailableThemes = { "Dark", "Light" };
 
@@ -26,74 +22,36 @@ namespace GTweak.Modules.Common
         internal static string CurrentName => AppDomain.CurrentDomain.FriendlyName;
         internal static string CurrentLocation => Assembly.GetExecutingAssembly().Location;
 
-        private static readonly Dictionary<string, object> _defaultSettings = new Dictionary<string, object>
+        internal static bool EnableNotifications { get => AppOptions.Get(true); set => AppOptions.Set(value); }
+        internal static bool EnableProfileHeader { get => AppOptions.Get(true); set => AppOptions.Set(value); }
+        internal static bool EnableUpdateCheck { get => AppOptions.Get(true); set => AppOptions.Set(value); }
+        internal static bool EnableTopMost { get => AppOptions.Get(false); set => AppOptions.Set(value); }
+        internal static bool EnableIpBlur { get => AppOptions.Get(true); set => AppOptions.Set(value); }
+        internal static bool EnableSound { get => AppOptions.Get(true); set => AppOptions.Set(value); }
+        internal static int VolumeLevel { get => AppOptions.Get(50); set => AppOptions.Set(value); }
+        internal static string Language { get => AppOptions.Get(HardwareProvider.GetCurrentSystemLang().Code); set => AppOptions.Set(value); }
+        internal static string Theme { get => AppOptions.Get(AvailableThemes[0]); set => AppOptions.Set(value); }
+        internal static string AddonsPath { get => AppOptions.Get(PathTargets.Folders.Desktop); set => AppOptions.Set(value); }
+        internal static string DownloadPath { get => AppOptions.Get(PathTargets.Folders.Desktop); set => AppOptions.Set(value); }
+
+        internal static void ConfigureApp()
         {
-            ["EnableNotifications"] = true,
-            ["EnableProfileHeader"] = true,
-            ["EnableAutoUpdate"] = true,
-            ["EnableTopMost"] = false,
-            ["EnableIpBlur"] = true,
-            ["EnableSound"] = true,
-            ["VolumeLevel"] = 50,
-            ["Language"] = HardwareProvider.GetCurrentSystemLang().Code,
-            ["Theme"] = AvailableThemes.First(),
-            ["AddonsPath"] = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
-            ["DownloadPath"] = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
-        };
-
-        private static readonly Dictionary<string, object> _cachedSettings = new Dictionary<string, object>(_defaultSettings);
-
-        internal static bool IsViewNotification { get => (bool)_cachedSettings["EnableNotifications"]; set => ChangingParameters("EnableNotifications", value); }
-        internal static bool IsViewProfileHeader { get => (bool)_cachedSettings["EnableProfileHeader"]; set => ChangingParameters("EnableProfileHeader", value); }
-        internal static bool IsUpdateCheckRequired { get => (bool)_cachedSettings["EnableAutoUpdate"]; set => ChangingParameters("EnableAutoUpdate", value); }
-        internal static bool IsTopMost { get => (bool)_cachedSettings["EnableTopMost"]; set => ChangingParameters("EnableTopMost", value); }
-        internal static bool IsHiddenIpAddress { get => (bool)_cachedSettings["EnableIpBlur"]; set => ChangingParameters("EnableIpBlur", value); }
-        internal static bool IsPlayingSound { get => (bool)_cachedSettings["EnableSound"]; set => ChangingParameters("EnableSound", value); }
-        internal static int Volume { get => (int)_cachedSettings["VolumeLevel"]; set => ChangingParameters("VolumeLevel", value); }
-        internal static string Language { get => (string)_cachedSettings["Language"]; set => ChangingParameters("Language", value); }
-        internal static string Theme { get => (string)_cachedSettings["Theme"]; set => ChangingParameters("Theme", value); }
-        internal static string UserAddonsPath { get => (string)_cachedSettings["AddonsPath"]; set => ChangingParameters("AddonsPath", value); }
-        internal static string DownloadPath { get => (string)_cachedSettings["DownloadPath"]; set => ChangingParameters("DownloadPath", value); }
-
-        private static void ChangingParameters(string key, object value)
-        {
-            var (regValue, kind) = value switch
+            if (!AvailableThemes.Contains(Theme, StringComparer.OrdinalIgnoreCase))
             {
-                bool valueBool => (valueBool ? 1 : 0, RegistryValueKind.DWord),
-                int valueInt => (valueInt, RegistryValueKind.DWord),
-                _ => ((object)value?.ToString(), RegistryValueKind.String)
-            };
+                Theme = AvailableThemes[0];
+            }
 
-            _cachedSettings[key] = value;
-            RegistryHelper.Write(Registry.CurrentUser, PathTargets.Registry.SubKey, key, regValue, kind);
+            App.Language = Language;
+            App.Theme = Theme;
+            SyncVolume();
         }
 
-        internal static void СheckingParameters()
+        [DllImport("winmm.dll")]
+        private static extern int waveOutSetVolume(IntPtr hwo, uint dwVolume);
+        internal static void SyncVolume()
         {
-            foreach (var kv in _defaultSettings)
-            {
-                if (RegistryHelper.ValueExists(PathTargets.Registry.BaseKey, kv.Key) == false)
-                {
-                    ChangingParameters(kv.Key, kv.Value);
-                }
-                else
-                {
-                    _cachedSettings[kv.Key] = kv.Value switch
-                    {
-                        bool valueBool => RegistryHelper.GetValue(PathTargets.Registry.BaseKey, kv.Key, valueBool ? 1 : 0) is int i ? i != 0 : valueBool,
-                        int valueInt => RegistryHelper.GetValue(PathTargets.Registry.BaseKey, kv.Key, valueInt),
-                        _ => RegistryHelper.GetValue(PathTargets.Registry.BaseKey, kv.Key, kv.Value?.ToString())
-                    };
-                }
-            }
-
-            if (!AvailableThemes.Contains((string)_cachedSettings["Theme"], StringComparer.OrdinalIgnoreCase))
-            {
-                ChangingParameters("Theme", _defaultSettings["Theme"]);
-            }
-
-            App.Language = (string)_cachedSettings["Language"];
-            App.Theme = (string)_cachedSettings["Theme"];
+            uint level = (uint)(VolumeLevel * ushort.MaxValue / 100);
+            waveOutSetVolume(IntPtr.Zero, level | (level << 16));
         }
 
         internal static void SaveFileConfig() => new ExportWindow().ShowDialog();
@@ -121,7 +79,6 @@ namespace GTweak.Modules.Common
                 case JsonConfigManager.ConfigStatus.Empty:
                     NotificationManager.Info("empty_import_noty").Perform();
                     break;
-
                 case JsonConfigManager.ConfigStatus.Invalid:
                     NotificationManager.Warn("warn_import_noty").Perform();
                     break;

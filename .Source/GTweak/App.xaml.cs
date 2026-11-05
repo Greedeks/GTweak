@@ -39,7 +39,7 @@ namespace GTweak
                 return;
             }
 
-            GlobalOptions.СheckingParameters();
+            GlobalOptions.ConfigureApp();
             ApplicationThemeManager.Apply(string.Equals(GlobalOptions.Theme, GlobalOptions.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase) ? ApplicationTheme.Dark : ApplicationTheme.Light);
 
             RunGuard.CheckingSingleInstance();

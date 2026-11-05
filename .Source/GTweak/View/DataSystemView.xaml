@@ -732,7 +732,7 @@
                                         <TextBlock Style="{StaticResource TextDefault}" FontSize="14" Foreground="{StaticResource Brush_Accent}" Text="{Binding [CountryCode].Data}"/>
                                     </Border>
 
-                                    <ToggleButton Grid.Column="4" Width="24" Height="24" Visibility="{Binding IpSectionVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding IsIpHidden, Mode=TwoWay}"/>
+                                    <ToggleButton Grid.Column="4" Width="24" Height="24" Visibility="{Binding IpSectionVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding EnableIpBlur, Mode=TwoWay}"/>
                                 </Grid>
                             </uc:InfoCard.CardContent>
                         </uc:InfoCard>

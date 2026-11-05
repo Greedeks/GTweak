@@ -276,7 +276,7 @@
     <v:String x:Key="desc_TaskbarPosition_intf">Altera o posicionamento da barra de tarefas na tela, permitindo fixá-la na parte inferior, superior, esquerda ou direita. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Altera a cor de fundo ao selecionar texto ou objetos com o cursor no sistema.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Altera a cor das dicas de ferramenta (tooltip) em aplicativos compatíveis.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Altera a visibilidade dos itens de sistema incorporados no painel de navegação que não podem ser desfixados por meios convencionais.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Altera a visibilidade dos itens de sistema incorporados no painel de navegação que não podem ser desfixados por meios convencionais. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Altera as regras do sistema para exibição no Explorador de Arquivos, incluindo visibilidade de itens ocultos, extensões e a estrutura das unidades. Observe que a tela poderá piscar.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Altera quais ícones do sistema aparecem na área de trabalho — são objetos de sistema incorporados, e não atalhos comuns.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">Altera a exibição das pastas padrão de usuário em «Este Computador». Permite ocultá-las para que apenas as unidades conectadas apareçam na lista. Observe que a tela poderá piscar.</v:String>

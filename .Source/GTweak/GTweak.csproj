@@ -244,6 +244,7 @@
     <Compile Include="Behaviors\ScrollFadeBehavior.cs" />
     <Compile Include="Behaviors\ScrollViewerBehavior.cs" />
     <Compile Include="Behaviors\TextBoxClearBehavior.cs" />
+    <Compile Include="Modules\Common\AppOptions.cs" />
     <Compile Include="Modules\Common\GroupAttribute.cs" />
     <Compile Include="Modules\Common\PostActionAttribute.cs" />
     <Compile Include="Modules\Configuration\IconProvider.cs" />

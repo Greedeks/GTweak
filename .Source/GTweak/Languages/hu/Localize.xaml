@@ -276,7 +276,7 @@
     <v:String x:Key="desc_TaskbarPosition_intf">Módosítja a tálca helyét a képernyőn, lehetővé téve annak alsó, felső, bal vagy jobb szélre rögzítését. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Módosítja a háttérszínt a szövegek vagy objektumok kurzorral történő kijelölésekor a rendszerben.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Módosítja a buboréksúgók színét a támogatott alkalmazásokban.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Módosítja a beépített rendszer-elemek megjelenését a Fájlkezelő navigációs paneljén, amelyeket nem lehet a szokásos módon eltávolítani. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Módosítja a rendszer megjelenítési szabályait a Fájlkezelőben, beleértve a rejtett elemek, kiterjesztések és meghajtók láthatóságát. Vegye figyelembe, hogy a képernyő villoghat.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Módosítja a rendszerikonok megjelenítését az asztalon — ezek beépített rendszerobjektumok, nem rendes parancsikonok.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">Módosítja a szabványos felhasználói mappák és a «3D objektumok» megjelenítését az «Ez a gép» ablakban. Lehetővé teszi az elrejtésüket, hogy a listában csak a csatlakoztatott meghajtók jelenjenek meg. A 21H1 alatti verzióknál a «3D objektumokat» a navigációs panelről is eltávolítja. Vegye figyelembe, hogy a képernyő villoghat.</v:String>

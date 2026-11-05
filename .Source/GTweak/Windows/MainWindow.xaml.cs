@@ -193,7 +193,7 @@ namespace GTweak.Windows
         {
             TypewriterAnimation.Create(TitleName.Text, TitleName, TimeSpan.FromSeconds(0.4));
 
-            if (NetworkProvider.IsNeedUpdate && GlobalOptions.IsUpdateCheckRequired)
+            if (NetworkProvider.IsNeedUpdate && GlobalOptions.EnableUpdateCheck)
             {
                 await Task.Delay(500);
 

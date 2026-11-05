@@ -276,7 +276,7 @@
     <v:String x:Key="desc_TaskbarPosition_intf">Modifie l'emplacement de la barre des tâches à l'écran, vous permettant de la placer en bas, en haut, à gauche ou à droite. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Modifie la couleur d'arrière-plan lors de la sélection de texte ou d'objets avec le curseur dans le système.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Modifie la couleur des infobulles dans les applications prises en charge.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Modifie la visibilité des éléments système intégrés dans le volet de navigation, qui ne peuvent pas être détachés par les moyens habituels.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Modifie la visibilité des éléments système intégrés dans le volet de navigation, qui ne peuvent pas être détachés par les moyens habituels. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Modifie les règles système d'affichage dans l'Explorateur de fichiers, y compris la visibilité des éléments cachés, des extensions et de la structure des lecteurs. Veuillez noter que l'écran peut clignoter.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Modifie l'affichage des icônes système sur le bureau — ce sont des objets système intégrés, pas de simples raccourcis.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">Modifie l'affichage des dossiers utilisateur standard dans « Ce PC ». Permet de les masquer pour ne laisser apparaître que les lecteurs connectés. Veuillez noter que l'écran peut clignoter.</v:String>

@@ -276,7 +276,7 @@
     <v:String x:Key="desc_TaskbarPosition_intf">Zmienia położenie paska zadań na ekranie, umożliwiając umieszczenie go przy dolnej, górnej, lewej lub prawej krawędzi. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Zmienia kolor tła podczas zaznaczania tekstu lub obiektów kursorem w systemie.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Zmienia kolor podpowiedzi w obsługiwanych aplikacjach.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Zmienia widoczność wbudowanych elementów systemowych w panelu nawigacji, których nie można odpiąć zwykłymi metodami.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Zmienia widoczność wbudowanych elementów systemowych w panelu nawigacji, których nie można odpiąć zwykłymi metodami. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Zmienia systemowe reguły wyświetlania elementów w Eksploratorze plików, w tym widoczność ukrytych elementów, rozszerzeń plików i struktury dysków. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Zmienia wyświetlanie ikon systemowych na pulpicie, które są wbudowanymi obiektami systemu, a nie zwykłymi skrótami.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">Zmienia wyświetlanie standardowych folderów użytkownika w sekcji „Ten komputer”. Pozwala je ukryć, aby na liście widoczne były tylko podłączone dyski. Ekran może na chwilę mignąć.</v:String>

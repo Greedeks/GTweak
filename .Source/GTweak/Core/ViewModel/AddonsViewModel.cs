@@ -29,7 +29,7 @@ namespace GTweak.Core.ViewModel
         private readonly object _locker = new object();
         private string _lastKnownFolderPath = string.Empty;
 
-        public string DirectoryPath => GlobalOptions.UserAddonsPath;
+        public string DirectoryPath => GlobalOptions.AddonsPath;
 
         public bool IsRunAsTrustedInstaller
         {
@@ -45,7 +45,7 @@ namespace GTweak.Core.ViewModel
                 OpenFolderCommand = new RelayCommand(_ => OpenFolder());
                 UpdateCommand = new RelayCommand(_ => ScanFolder());
 
-                if (!string.IsNullOrWhiteSpace(GlobalOptions.UserAddonsPath) && Directory.Exists(GlobalOptions.UserAddonsPath))
+                if (!string.IsNullOrWhiteSpace(GlobalOptions.AddonsPath) && Directory.Exists(GlobalOptions.AddonsPath))
                 {
                     ScanFolder();
                 }
@@ -59,12 +59,12 @@ namespace GTweak.Core.ViewModel
                 VistaFolderBrowserDialog folderDialog = new VistaFolderBrowserDialog
                 {
                     UseDescriptionForTitle = true,
-                    SelectedPath = GlobalOptions.UserAddonsPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
+                    SelectedPath = GlobalOptions.AddonsPath ?? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)
                 };
 
                 if (folderDialog.ShowDialog() == true && Directory.Exists(folderDialog.SelectedPath))
                 {
-                    GlobalOptions.UserAddonsPath = folderDialog.SelectedPath;
+                    GlobalOptions.AddonsPath = folderDialog.SelectedPath;
                     OnPropertyChanged(nameof(DirectoryPath));
                     ScanFolder();
                 }
@@ -76,11 +76,11 @@ namespace GTweak.Core.ViewModel
         {
             try
             {
-                if (Directory.Exists(GlobalOptions.UserAddonsPath))
+                if (Directory.Exists(GlobalOptions.AddonsPath))
                 {
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = GlobalOptions.UserAddonsPath,
+                        FileName = GlobalOptions.AddonsPath,
                         UseShellExecute = true,
                         Verb = "open"
                     });
@@ -121,7 +121,7 @@ namespace GTweak.Core.ViewModel
         {
             try
             {
-                string path = GlobalOptions.UserAddonsPath;
+                string path = GlobalOptions.AddonsPath;
 
                 if (string.IsNullOrWhiteSpace(path) || !Directory.Exists(path))
                 {

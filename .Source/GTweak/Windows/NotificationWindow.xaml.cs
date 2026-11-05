@@ -50,7 +50,7 @@ namespace GTweak.Windows
             Unloaded += delegate { _timer.Stop(); };
             Loaded += (s, e) =>
             {
-                if (GlobalOptions.IsPlayingSound)
+                if (GlobalOptions.EnableSound)
                 {
                     var notificationSound = new SoundPlayer(Properties.Resources.Sound);
                     notificationSound.Play();

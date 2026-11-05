@@ -10,7 +10,7 @@
         mc:Ignorable="d" Icon="/GTweak.ico"
         Background="Transparent" WindowStyle="None" IsTabStop="False" KeyboardNavigation.TabNavigation="None" FocusVisualStyle="{x:Null}" SnapsToDevicePixels="True" UseLayoutRounding="True"
         ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" MinWidth="700" MinHeight="400"
-        Title="GTweak" d:Height="650" d:Width="1094" Loaded="Window_Loaded" Topmost="{Binding IsTopMost}">
+        Title="GTweak" d:Height="650" d:Width="1094" Loaded="Window_Loaded" Topmost="{Binding EnableTopMost}">
     <ui:FluentWindow.DataContext>
         <vm:MainWinViewModel/>
     </ui:FluentWindow.DataContext>
@@ -66,7 +66,7 @@
                             </Storyboard>
                         </Style.Resources>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsViewProfileHeader}" Value="False">
+                            <DataTrigger Binding="{Binding ShowProfileHeader}" Value="False">
                                 <DataTrigger.EnterActions>
                                     <BeginStoryboard Storyboard="{StaticResource PopInAnimation}"/>
                                 </DataTrigger.EnterActions>
@@ -243,26 +243,26 @@
                     <Grid Grid.Row="1">
                         <StackPanel Orientation="Vertical">
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton State="{Binding IsViewNotification}" TextResource="{DynamicResource settings_noty}"/>
+                                <uc:ToggleButton State="{Binding EnableNotifications}" TextResource="{DynamicResource settings_noty}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton  State="{Binding IsViewProfileHeader}" TextResource="{DynamicResource settings_profile}"/>
+                                <uc:ToggleButton  State="{Binding ShowProfileHeader}" TextResource="{DynamicResource settings_profile}"/>
                             </Viewbox>
                             
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton State="{Binding IsUpdateCheckRequired}" TextResource="{DynamicResource settings_update}"/>
+                                <uc:ToggleButton State="{Binding EnableUpdateCheck}" TextResource="{DynamicResource settings_update}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="23" Margin="40,15,10,0">
-                                <uc:ToggleButton  State="{Binding IsTopMost}" TextResource="{DynamicResource settings_toast}"/>
+                                <uc:ToggleButton  State="{Binding EnableTopMost}" TextResource="{DynamicResource settings_toast}"/>
                             </Viewbox>
 
                             <Viewbox HorizontalAlignment="Left" Stretch="Uniform" StretchDirection="DownOnly" Height="45" Margin="40,10,10,0">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                                     <TextBlock Style="{StaticResource TextDefault}" Text="{DynamicResource settings_volume}"/>
-                                    <ToggleButton IsChecked="{Binding IsPlayingSound}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}"/>
-                                    <Slider x:Name="SliderVolume" Style="{StaticResource Percent_Slider}" Value="{Binding CurrentVolume}" IsSnapToTickEnabled="True" Minimum="1" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12"/>
+                                    <ToggleButton IsChecked="{Binding EnableSound}" Width="20" Height="20" Margin="10,4,0,0" Style="{StaticResource TglVolume}"/>
+                                    <Slider x:Name="SliderVolume" Style="{StaticResource Percent_Slider}" Value="{Binding VolumeLevel}" IsSnapToTickEnabled="True" Minimum="1" Maximum="100" Margin="10,5,0,0"  Width="187" Height="12"/>
                                 </StackPanel>
                             </Viewbox>
 

@@ -276,7 +276,7 @@
     <v:String x:Key="desc_TaskbarPosition_intf">화면에서 작업 표시줄의 위치를 아래쪽, 위쪽, 왼쪽, 오른쪽 가장자리로 변경합니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">시스템에서 커서로 텍스트나 개체를 선택할 때의 배경 색상을 변경합니다.</v:String>
     <v:String x:Key="desc_Tooltip_intf">지원되는 애플리케이션에서 도구 설명의 색상을 변경합니다.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">일반적인 방법으로 고정 해제할 수 없는 내장 시스템 항목의 탐색 창 표시 여부를 변경합니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">파일 탐색기에서 항목 표시 규칙을 변경합니다. 숨김 항목, 파일 확장자 및 드라이브 구조의 표시가 포함됩니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">바탕 화면에 표시되는 시스템 아이콘을 변경합니다. 이들은 일반 바로가기와 달리 시스템에 내장된 항목입니다.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">«내 PC»에 표시되는 표준 사용자 폴더의 표시 여부를 변경합니다. 목록에 연결된 드라이브만 표시되도록 폴더를 숨길 수 있습니다. 화면이 깜박일 수 있으니 주의하세요.</v:String>
