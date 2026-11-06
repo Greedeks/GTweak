@@ -204,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">A beállítás letiltja az UAR (User Activity Recording) funkciót - egy olyan rendszert, amely szekvenciálisan naplózza a számítógépen végrehajtott összes műveletet: a képernyőképek készítésétől és a szöveg beírásától a programok indításáig, sőt a webkamerához való hozzáférés biztosításáig, miközben a képernyő zárolva van, és még sok más.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">A Windows rendszeresen frissíti az offline térképeket, és háttérben értesítéseket küld az új adatokról. Ezek a folyamatok információkat gyűjthetnek a felhasználó tartózkodási helyéről, útvonalairól és a térkép használatáról. Ha nem használja az offline térképeket, javasoljuk azok letiltását, hogy elkerülje a rejtett frissítéseket és az adatok Microsoft szerverekre történő továbbítását a felhasználó közvetlen beavatkozása nélkül.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Az Intel modul, amely a háttérben működik az adatok gyűjtése és továbbítása céljából, a vállalat termékeinek fejlesztését szolgáló eszközként van pozícionálva. Az átlagos felhasználó számára azonban ez a funkció kevés gyakorlati hasznot jelent, és letiltásával csökkenthető a háttértevékenység és megelőzhető a felesleges adatátvitel.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">A Microsoft Office folyamatosan nyomon követi a dokumentumokkal végzett munkáját: rögzíti az alkalmazások indítási sebességét, a rendszerleállásokat és az eszközök használatának gyakoriságát, majd jelentéseket küld a Microsoft szervereire. A funkció letiltásával leállítható a rejtett statisztikai adatgyűjtés és a felesleges háttérfigyelési folyamatok, anélkül, hogy ez befolyásolná a Word, az Excel és más Office-alkalmazások teljes funkcionalitását.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -239,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">Zenék</v:String>
     <v:String x:Key="FolderVideo_intf">Videók</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">Tálca helye:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Lent</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Fent</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Balra</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Jobra</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">A rendszergombok szabványos mérete</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">A kurzor normál villogási frekvenciája</v:String>
