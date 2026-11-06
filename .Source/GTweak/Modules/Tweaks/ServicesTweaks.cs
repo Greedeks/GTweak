@@ -49,8 +49,6 @@ namespace GTweak.Modules.Tweaks
             Geolocation
         }
 
-        internal readonly static Dictionary<string, object> ControlStates = new Dictionary<string, object>();
-        private readonly ControlWriterManager _controlWriter = new ControlWriterManager(ControlStates);
         private readonly Dictionary<Toggle, (Func<bool> Check, Action<bool> Apply)> _toggleMappings;
 
         public ServicesTweaks()
@@ -632,12 +630,14 @@ namespace GTweak.Modules.Tweaks
             };
         }
 
-        internal void CheckAll()
+        internal Dictionary<string, object> CheckAll()
         {
+            Dictionary<string, object> states = new Dictionary<string, object>(_toggleMappings.Count);
             foreach (var tweak in _toggleMappings)
             {
-                _controlWriter[tweak.Key] = tweak.Value.Check();
+                states[tweak.Key.ToString()] = tweak.Value.Check();
             }
+            return states;
         }
 
         internal void Apply(string tweakName, bool state)

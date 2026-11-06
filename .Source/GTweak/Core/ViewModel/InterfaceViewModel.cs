@@ -16,8 +16,7 @@ namespace GTweak.Core.ViewModel
         public Visibility TaskbarPositionAvailable => HardwareData.OS.IsWin10 || (HardwareData.OS.IsWin11 && HardwareData.OS.Build.CompareTo(26200.9550m) >= 0) ? Visibility.Visible : Visibility.Collapsed;
         public Visibility OneDriveAvailable => AppxPackageHandler.IsOneDriveInstalled ? Visibility.Visible : Visibility.Collapsed;
 
-        protected override void Analyze(InterfaceTweaks tweaks) => tweaks?.CheckAll();
-        protected override IReadOnlyDictionary<string, object> GetControlStates() => InterfaceTweaks.ControlStates;
+        protected override IReadOnlyDictionary<string, object> Analyze(InterfaceTweaks tweaks) => tweaks.CheckAll();
 
         public InterfaceViewModel()
         {

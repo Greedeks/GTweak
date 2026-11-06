@@ -178,7 +178,7 @@ namespace GTweak.Modules.Configuration
 
         internal async Task ValidateVersionUpdates()
         {
-            if (GlobalOptions.IsUpdateCheckRequired && await IsNetworkAvailable())
+            if (GlobalOptions.EnableUpdateCheck && await IsNetworkAvailable())
             {
                 foreach (string api in PathTargets.Links.ReleaseApi)
                 {

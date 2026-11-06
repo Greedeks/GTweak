@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Toolset</v:String>
     <v:String x:Key="settings_title">Settings</v:String>
     <v:String x:Key="settings_noty">Show notifications</v:String>
+    <v:String x:Key="settings_profile">Show username and avatar</v:String>
     <v:String x:Key="settings_update">Checking for updates</v:String>
     <v:String x:Key="settings_toast">Pin on top of all windows</v:String>
     <v:String x:Key="settings_volume">Volume:</v:String>
@@ -275,7 +276,7 @@
     <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Changes the background color when selecting text or objects with the cursor in the system.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Changes the color of tooltips in supported applications.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Changes the visibility of built-in system items in the navigation pane that cannot be unpinned by conventional means.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Changes the visibility of built-in system items in the navigation pane that cannot be unpinned by conventional means. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_FileExplorerDisplay_intf">Changes system rules for displaying items in File Explorer, including the visibility of hidden items, file extensions, and the structure of disk drives. Note that the screen may flicker.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Changes the display of system icons on the desktop, which are built-in system objects rather than ordinary shortcuts.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">Changes the display of standard user folders and «3D Objects» within «This PC». Allows you to hide them so that only connected drives are shown in the list. For builds below 21H1, it additionally removes «3D Objects» from the navigation pane. Note that the screen may flicker.</v:String>
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Running processes:</v:String>
     <v:String x:Key="label_svc_sysinfo">services:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Version</v:String>
+    <v:String x:Key="label_version_sysinfo">Version</v:String>
     <v:String x:Key="label_serial_sysinfo">Serial number</v:String> 
     <v:String x:Key="label_mode_sysinfo">Mode</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Motherboard</v:String>

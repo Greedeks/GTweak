@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">工具箱</v:String>
     <v:String x:Key="settings_title">设置</v:String>
     <v:String x:Key="settings_noty">显示通知提示</v:String>
+    <v:String x:Key="settings_profile">显示用户名和头像</v:String>
     <v:String x:Key="settings_update">自动检查更新</v:String>
     <v:String x:Key="settings_toast">窗口总在最前 (置顶)</v:String>
     <v:String x:Key="settings_volume">提示音量：</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">记录用户行为 (UAR)</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">离线地图的数据收集与后台更新</v:String>
     <v:String x:Key="IntelTelemetry_conf">Intel 遥测数据的收集与监控</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">收集和监控 Microsoft Office 遥测数据</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows 会为每个用户创建一个唯一的广告 ID 以追踪您的操作。应用开发者及 Windows 本身会利用它在应用内向您推送个性化广告。</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">即使使用本地账户，Windows 也会不断尝试将您的数据（如主题、密码、Windows 设置、浏览器设置、输入法设置等）同步到微软服务器。</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">此优化禁用了 UAR（用户活动记录）功能——该系统会按顺序记录您在电脑上的每一个动作：从截图、打字到启动程序，甚至在锁屏时调用网络摄像头。</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows 会在后台定期更新离线地图并发送通知，此过程可能会收集您的位置和出行路线。如果不使用离线地图，建议禁用以避免数据泄露。</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Intel 模块在后台收集并传输数据，号称用于改进产品，但对普通用户毫无实际益处。禁用它可减少后台活动并防止数据外泄。</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office 会持续跟踪您的文档操作，记录应用程序启动速度、系统崩溃和工具使用频率，并向 Microsoft 服务器发送报告。禁用此功能将停止隐式统计数据收集并结束不必要的后台监视进程，同时不会影响 Word、Excel 及其他 Office 应用程序的完整功能。</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">音乐</v:String>
     <v:String x:Key="FolderVideo_intf">视频</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">任务栏位置：</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">底部</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">顶部</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">靠左</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">靠右</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">系统窗口控制按钮标准尺寸</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">加快文本光标闪烁频率</v:String>
@@ -272,7 +273,7 @@
     <v:String x:Key="OpenQuickAccess_intf">资源管理器默认打开“此电脑”</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">屏幕亮度自动调节 (CABC)</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">更改任务栏在屏幕上的位置，可将其固定在底端、顶端、左侧或右侧边缘。请注意，应用时屏幕可能会闪烁。</v:String>
     <v:String x:Key="desc_CursorSelection_intf">更改在系统中用光标选中文本或对象时的背景高亮颜色。</v:String>
     <v:String x:Key="desc_Tooltip_intf">更改支持的应用程序中悬停提示框（Tooltip）的颜色。</v:String>
     <v:String x:Key="desc_NavigationItems_intf">更改资源管理器导航窗格中内置系统项的显示状态——这些项目无法通过常规设置取消固定。</v:String>
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">运行中的进程数：</v:String>
     <v:String x:Key="label_svc_sysinfo">后台服务数：</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">版本</v:String>
+    <v:String x:Key="label_version_sysinfo">版本</v:String>
     <v:String x:Key="label_serial_sysinfo">序列号</v:String> 
     <v:String x:Key="label_mode_sysinfo">模式</v:String>
     <v:String x:Key="label_motherbr_sysinfo">主板</v:String>

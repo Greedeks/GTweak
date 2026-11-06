@@ -19,6 +19,7 @@ namespace GTweak.Core.ViewModel
         private readonly MainWindowModel _model = new MainWindowModel();
         private readonly HardwareProvider _hardwareProvider = new HardwareProvider();
         private readonly Dictionary<Type, object> _viewCache = new Dictionary<Type, object>();
+        private static readonly bool _isDesignMode = DesignerProperties.GetIsInDesignMode(new DependencyObject());
 
         public ObservableCollection<MainWindowModel.LanguageItem> Languages { get; } = new ObservableCollection<MainWindowModel.LanguageItem>();
 
@@ -28,9 +29,9 @@ namespace GTweak.Core.ViewModel
             set { _model.CurrentView = value; OnPropertyChanged(); }
         }
 
-        public ImageSource DisplayProfileAvatar => _hardwareProvider.GetProfileImage();
+        public ImageSource DisplayProfileAvatar => (_isDesignMode || ShowProfileHeader) ? _hardwareProvider.GetProfileImage() : default;
 
-        public string DisplayProfileName => _hardwareProvider.GetProfileName();
+        public string DisplayProfileName => (_isDesignMode || ShowProfileHeader) ? _hardwareProvider.GetProfileName() : new string('•', _hardwareProvider.GetProfileName().Length);
 
         public string DisplayTweakVersion => GlobalOptions.CurrentRelease.Full;
 
@@ -38,7 +39,7 @@ namespace GTweak.Core.ViewModel
 
         public string DownloadVersion => NetworkProvider.DownloadVersion;
 
-        public bool StateButtonTheme
+        public bool ThemeState
         {
             get => !string.Equals(GlobalOptions.Theme, GlobalOptions.AvailableThemes.First(), StringComparison.OrdinalIgnoreCase);
             set
@@ -48,67 +49,82 @@ namespace GTweak.Core.ViewModel
             }
         }
 
-        public bool IsViewNotification
+        public bool EnableNotifications
         {
-            get => GlobalOptions.IsViewNotification;
+            get => GlobalOptions.EnableNotifications;
             set
             {
-                if (GlobalOptions.IsViewNotification != value)
+                if (GlobalOptions.EnableNotifications != value)
                 {
-                    GlobalOptions.IsViewNotification = value;
+                    GlobalOptions.EnableNotifications = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public bool IsUpdateCheckRequired
+        public bool ShowProfileHeader
         {
-            get => GlobalOptions.IsUpdateCheckRequired;
+            get => GlobalOptions.EnableProfileHeader;
             set
             {
-                if (GlobalOptions.IsUpdateCheckRequired != value)
+                if (GlobalOptions.EnableProfileHeader != value)
                 {
-                    GlobalOptions.IsUpdateCheckRequired = value;
+                    GlobalOptions.EnableProfileHeader = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(DisplayProfileName));
+                    OnPropertyChanged(nameof(DisplayProfileAvatar));
+                }
+            }
+        }
+
+        public bool EnableUpdateCheck
+        {
+            get => GlobalOptions.EnableUpdateCheck;
+            set
+            {
+                if (GlobalOptions.EnableUpdateCheck != value)
+                {
+                    GlobalOptions.EnableUpdateCheck = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public bool IsTopMost
+        public bool EnableTopMost
         {
-            get => GlobalOptions.IsTopMost;
+            get => GlobalOptions.EnableTopMost;
             set
             {
-                if (GlobalOptions.IsTopMost != value)
+                if (GlobalOptions.EnableTopMost != value)
                 {
-                    GlobalOptions.IsTopMost = value;
+                    GlobalOptions.EnableTopMost = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public bool IsPlayingSound
+        public bool EnableSound
         {
-            get => GlobalOptions.IsPlayingSound;
+            get => GlobalOptions.EnableSound;
             set
             {
-                if (GlobalOptions.IsPlayingSound != value)
+                if (GlobalOptions.EnableSound != value)
                 {
-                    GlobalOptions.IsPlayingSound = value;
+                    GlobalOptions.EnableSound = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public int CurrentVolume
+        public int VolumeLevel
         {
-            get => GlobalOptions.Volume;
+            get => GlobalOptions.VolumeLevel;
             set
             {
-                if (GlobalOptions.Volume != value)
+                if (GlobalOptions.VolumeLevel != value)
                 {
-                    GlobalOptions.Volume = value;
-                    GlobalOptions.waveOutSetVolume(IntPtr.Zero, ((uint)(double)(ushort.MaxValue / 100 * value) & 0x0000ffff) | ((uint)(double)(ushort.MaxValue / 100 * value) << 16));
+                    GlobalOptions.VolumeLevel = value;
+                    GlobalOptions.SyncVolume();
                     OnPropertyChanged();
                 }
             }
@@ -166,7 +182,7 @@ namespace GTweak.Core.ViewModel
             NavigateToAddonsCommand = new RelayCommand(_ => CurrentView = GetView<AddonsViewModel>());
             NavigateToToolsetCommand = new RelayCommand(_ => CurrentView = GetView<ToolsetViewModel>());
 
-            if (!DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+            if (_isDesignMode == false)
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() => { FillLanguages(); }));
             }

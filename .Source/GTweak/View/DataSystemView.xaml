@@ -168,7 +168,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_version_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                         <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [Bios].Data}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
@@ -243,7 +243,7 @@
                                             <ColumnDefinition Width="20"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_verison_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                                        <TextBlock Grid.Column="0" Text="{DynamicResource label_version_sysinfo}" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Inactive}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                         <TextBlock Grid.Column="2" Style="{StaticResource TextDefault}" Foreground="{StaticResource Brush_Highlighted}" Text="{Binding [MotherboardVersion].Data}" IsEnabled="{Binding [MotherboardVersion].IsEnabled}" PreviewMouseDown="HandleCopyingData_PreviewMouseDown" Cursor="Hand" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                                     </Grid>
 
@@ -732,7 +732,7 @@
                                         <TextBlock Style="{StaticResource TextDefault}" FontSize="14" Foreground="{StaticResource Brush_Accent}" Text="{Binding [CountryCode].Data}"/>
                                     </Border>
 
-                                    <ToggleButton Grid.Column="4" Width="24" Height="24" Visibility="{Binding IpSectionVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding IsIpHidden, Mode=TwoWay}"/>
+                                    <ToggleButton Grid.Column="4" Width="24" Height="24" Visibility="{Binding IpSectionVisibility}" VerticalAlignment="Center" Style="{StaticResource TglVision}" IsChecked="{Binding EnableIpBlur, Mode=TwoWay}"/>
                                 </Grid>
                             </uc:InfoCard.CardContent>
                         </uc:InfoCard>

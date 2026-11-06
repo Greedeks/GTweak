@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Zestaw narzędzi</v:String>
     <v:String x:Key="settings_title">Ustawienia</v:String>
     <v:String x:Key="settings_noty">Pokazuj powiadomienia</v:String>
+    <v:String x:Key="settings_profile">Pokazuj nazwę użytkownika i awatar</v:String>
     <v:String x:Key="settings_update">Sprawdzanie aktualizacji</v:String>
     <v:String x:Key="settings_toast">Przypnij nad wszystkimi oknami</v:String>
     <v:String x:Key="settings_volume">Głośność:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Prowadzenie rejestru zachowania użytkownika</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Zbieranie danych i aktualizacje w tle map offline</v:String>
     <v:String x:Key="IntelTelemetry_conf">Zbieranie i monitorowanie telemetrii Intel</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Zbieranie i monitorowanie telemetrii Microsoft Office</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">System Windows tworzy unikalny identyfikator reklamowy dla każdego użytkownika w celu śledzenia jego działań. Jest on używany przez deweloperów aplikacji i sam Windows do własnych celów, w tym do wyświetlania spersonalizowanych reklam w aplikacjach.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Nawet korzystając z konta lokalnego, system Windows stale próbuje synchronizować dane z serwerami Microsoft. Dotyczy to m.in.: motywów, haseł, ustawień systemu Windows, ustawień przeglądarki, ustawień paska języka, ustawień ułatwień dostępu i innych ustawień dodatkowych.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Poprawka wyłącza funkcję UAR (User Activity Recording) — system, który sekwencyjnie rejestruje każdą czynność wykonywaną na komputerze: od robienia zrzutów ekranu i wpisywania tekstu po uruchamianie programów, a nawet dostęp do kamery internetowej przy zablokowanym ekranie i wiele więcej.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">System Windows okresowo aktualizuje Mapy offline i wysyła powiadomienia o nowych danych w tle. Procesy te mogą gromadzić informacje o Twojej lokalizacji, trasach i sposobie korzystania z map. Jeśli nie używasz Map offline, zaleca się ich wyłączenie, aby uniknąć ukrytych aktualizacji i przesyłania danych do serwerów Microsoft bez Twojego bezpośredniego udziału.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Moduł Intel działający w tle w celu zbierania i przesyłania danych jest pozycjonowany jako narzędzie do ulepszania produktów firmy. Jednak dla przeciętnego użytkownika przynosi niewiele praktycznych korzyści, a wyłączenie tej funkcji może zmniejszyć aktywność w tle i zapobiec niepotrzebnemu przesyłaniu danych.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office stale śledzi Twoją pracę z dokumentami, rejestrując czas uruchamiania aplikacji, błędy systemowe oraz częstotliwość korzystania z poszczególnych narzędzi, przesyłając te raporty na serwery firmy Microsoft. Wyłączenie tej funkcji zatrzymuje ukryte zbieranie statystyk i wygasza zbędne procesy w tle, nie wpływając na funkcjonalność programów Word, Excel oraz innych aplikacji pakietu Office.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">Muzyka</v:String>
     <v:String x:Key="FolderVideo_intf">Wideo</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">Położenie paska zadań:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Na dole</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Na górze</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Po lewej</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Po prawej</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">Standardowy rozmiar przycisków systemowych</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Standardowa częstotliwość migania kursora</v:String>
@@ -272,38 +273,38 @@
     <v:String x:Key="OpenQuickAccess_intf">Otwieraj «Szybki dostęp» zamiast «Ten komputer»</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Samoczynne zmiany jasności</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Zmienia położenie paska zadań na ekranie, umożliwiając umieszczenie go przy dolnej, górnej, lewej lub prawej krawędzi. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Zmienia kolor tła podczas zaznaczania tekstu lub obiektów kursorem w systemie.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Zmienia kolor podpowiedzi w obsługiwanych aplikacjach.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Zmienia widoczność wbudowanych elementów systemowych w panelu nawigacji, których nie można odpiąć zwykłymi metodami.</v:String>
-    <v:String x:Key="desc_FileExplorerDisplay_intf">Zmienia systemowe reguły wyświetlania elementów w Eksploratorze plików, w tym widoczność ukrytych elementów, rozszerzeń plików i struktury dysków. Uwaga: ekran może migać.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Zmienia widoczność wbudowanych elementów systemowych w panelu nawigacji, których nie można odpiąć zwykłymi metodami. Ekran może na chwilę mignąć.</v:String>
+    <v:String x:Key="desc_FileExplorerDisplay_intf">Zmienia systemowe reguły wyświetlania elementów w Eksploratorze plików, w tym widoczność ukrytych elementów, rozszerzeń plików i struktury dysków. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Zmienia wyświetlanie ikon systemowych na pulpicie, które są wbudowanymi obiektami systemu, a nie zwykłymi skrótami.</v:String>
-    <v:String x:Key="desc_ThisPCFolders_intf">Zmienia wyświetlanie standardowych folderów użytkownika w sekcji „Ten komputer”. Pozwala je ukryć, aby na liście widoczne były tylko podłączone dyski. Uwaga: ekran może migać.</v:String>
+    <v:String x:Key="desc_ThisPCFolders_intf">Zmienia wyświetlanie standardowych folderów użytkownika w sekcji „Ten komputer”. Pozwala je ukryć, aby na liście widoczne były tylko podłączone dyski. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Poprawka zmniejsza rozmiar przycisków Minimalizuj, Maksymalizuj i Zamknij, czyniąc je mniej masywnym. Dostosowuje rozmiar dla wszystkich okien, w tym Eksploratora plików, Zdjęć, przeglądarek i innych znanych programów.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Poprawka zwiększa częstotliwość migania kursora tekstowego. Domyślnie kursor miga co 530 milisekund.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">Poprawka zmniejsza grubość pasków przewijania w klasycznych aplikacjach Windows, w tym w Eksploratorze plików, przeglądarkach i innych starszych programach. Nie dotyczy jednak nowoczesnych interfejsów, ponieważ korzystają one z własnych elementów sterujących niezależnych od ustawień systemowych.</v:String>
     <v:String x:Key="desc_TaskbarTransparency_intf">Poprawka wyłącza lub włącza efekt przezroczystości. Przezroczyste okna i powierzchnie.</v:String>
-    <v:String x:Key="desc_TaskbarDarkTheme_intf">Zmienia motyw paska zadań na jasny lub ciemny. Uwaga: ekran może migać.</v:String>
-    <v:String x:Key="desc_AppDarkTheme_intf">Poprawka zmieni motyw eksploratora na jasny lub ciemny, w tym przeglądarek i innych programów obsługujących motyw urządzenia. Uwaga: ekran może migać.</v:String>
+    <v:String x:Key="desc_TaskbarDarkTheme_intf">Zmienia motyw paska zadań na jasny lub ciemny. Ekran może na chwilę mignąć.</v:String>
+    <v:String x:Key="desc_AppDarkTheme_intf">Poprawka zmieni motyw eksploratora na jasny lub ciemny, w tym przeglądarek i innych programów obsługujących motyw urządzenia. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_ContextMenuDelay_intf">Domyślnie dodatkowe elementy menu kontekstowego pojawiają się z opóźnieniem 400 milisekund. Jeśli chcesz działać szybciej, możesz to opóźnienie zmniejszyć.</v:String>
     <v:String x:Key="desc_TaskbarPreviewDelay_intf">Domyślnie podgląd na pasku zadań pokazuje miniatury uruchomionych aplikacji zbyt długo. Aby podglądy pojawiały się szybciej, zastosuj tę poprawkę.</v:String>
     <v:String x:Key="desc_IconOverlayBadges_intf">Pozwala ukryć strzałki skrótów, statusy synchronizacji z chmurą (OneDrive, Dropbox) i nakładki typów plików, takie jak grafika SVG.</v:String>
     <v:String x:Key="desc_ShortcutNameSuffix_intf">Usunięcie zbyt nachalnego przedrostka-przyrostka dla etykiet.</v:String>
     <v:String x:Key="desc_TaskbarAlignment_intf">Wybierz, gdzie chcesz wyświetlać ikony na pasku zadań — na środku lub po lewej stronie.</v:String>
     <v:String x:Key="desc_StartMenuLayout_intf">Zmienia układ menu Start, rozszerzając obszar dla przypiętych aplikacji. Dodatkowo, z wyjątkiem edycji Windows Home, sekcja «Polecane» zostanie usunięta z menu Start.</v:String>
-    <v:String x:Key="desc_CompactContextMenu_intf">Ta poprawka przywróci zwykłe klasyczne menu kontekstowe dla pulpitu i «Eksploratora». Uwaga: ekran może migać.</v:String>
+    <v:String x:Key="desc_CompactContextMenu_intf">Ta poprawka przywróci zwykłe klasyczne menu kontekstowe dla pulpitu i «Eksploratora». Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_TipsSuggestions_intf">System Windows 11 czasami pokazuje wskazówki dotyczące korzystania z danej funkcji, na przykład nowego menu «Start» lub «Szybkich ustawień». Są przydatne, jeśli widzisz Windows 11 po raz pierwszy, w przeciwnym razie to bezużyteczny śmieć.</v:String>
     <v:String x:Key="desc_CompactExplorerMode_intf">Domyślnie system Windows dodaje odstępy między elementami w Eksploratorze. To nowa funkcja zaprojektowana dla ekranów dotykowych. Ta poprawka przywróci klasyczny układ eksploratora plików, usuwając wcięcia między elementami i oszczędzając Ci szukania ustawień.</v:String>
     <v:String x:Key="desc_CopilotRecall_intf">Poprawka wyłącza i tam gdzie to możliwe ukrywa ikony Copilot na pasku zadań, w «Menu Start», w Edge i Notatniku, blokując jego funkcjonalność, a także wyłącza Recall. Jednocześnie sama podstawowa aplikacja Copilot nie jest dotknięta, pozostaje w systemie i może być używana w razie potrzeby. Copilot można całkowicie usunąć tylko razem z Microsoft Edge. Jeśli te funkcje AI nie są początkowo obecne w Twoim systemie Windows, używanie poprawki jest bezcelowe.</v:String>
-    <v:String x:Key="desc_TaskbarEndTask_intf">Ta poprawka pozwoli dodać opcję «Zakończ zadanie» do menu kontekstowego po kliknięciu prawym przyciskiem myszy na aplikację na pasku zadań. Przyspiesza to kończenie procesów bez konieczności otwierania Menedżera zadań. Uwaga: ekran może migać.</v:String>
+    <v:String x:Key="desc_TaskbarEndTask_intf">Ta poprawka pozwoli dodać opcję «Zakończ zadanie» do menu kontekstowego po kliknięciu prawym przyciskiem myszy na aplikację na pasku zadań. Przyspiesza to kończenie procesów bez konieczności otwierania Menedżera zadań. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_SnapLayouts_intf">Jeśli nie chcesz widzieć sugestii układu przyciągania po najechaniu na przycisk «Maksymalizuj», możesz wyłączyć tę opcję.</v:String>
-    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ta poprawka usuwa ikony «Wyszukiwania», «Widoku zadań» i «Czatu» oraz ukrywa element «Dowiedz się więcej o tym zdjęciu». W starszych kompilacjach Windows 11 usuwa również ikonę Copilot. Dla użytkowników Windows 10 dodatkowo wyłącza «Wiadomości i zainteresowania» oraz Cortanę. Uwaga: ekran może migać.</v:String>
+    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ta poprawka usuwa ikony «Wyszukiwania», «Widoku zadań» i «Czatu» oraz ukrywa element «Dowiedz się więcej o tym zdjęciu». W starszych kompilacjach Windows 11 usuwa również ikonę Copilot. Dla użytkowników Windows 10 dodatkowo wyłącza «Wiadomości i zainteresowania» oraz Cortanę. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_PersonalizedAds_intf">Domyślnie system Windows wykorzystuje zebrane informacje do kierowania reklam, czyli wyświetlania reklam dopasowanych do Twoich zainteresowań. Jeśli nie chcesz, aby system Windows wyświetlał spersonalizowane reklamy we wszystkich aplikacjach Sklepu, Eksploratorze, Opcjach i menu Start, możesz wyłączyć ten śmieć.</v:String>
     <v:String x:Key="desc_RestoreFolderWindows_intf">Domyślnie system Windows nie zapisuje pozycji okien ani ich stanu przy wyłączaniu. Ta poprawka pozwoli zapamiętać typ otwartych folderów, aby przywrócić je po wylogowaniu, ponownym uruchomieniu i zamknięciu systemu.</v:String>
     <v:String x:Key="desc_TipsNotifications_intf">Poprawka pozwala wyłączyć wszystkie porady i powiadomienia systemu Windows, w tym wskazówki online w ustawieniach, a także wyłączyć SCOOBE dla użytkowników Windows 11. SCOOBE to nagle pojawiające się okienko, które agresywnie nakłania do «pilnego ukończenia konfiguracji urządzenia» i zalogowania się na konto Microsoft.</v:String>
     <v:String x:Key="desc_JpegWallpaperCompression_intf">Domyślnie, gdy ustawisz obraz JPEG jako tapetę pulpitu, system Windows automatycznie obniża jego jakość do 85%. Ta poprawka ustawi jakość tapety JPEG na 100%.</v:String>
     <v:String x:Key="desc_DesktopTooltips_intf">Poprawka wyłączy podpowiedzi dla elementów pulpitu po najechaniu kursorem myszy.</v:String>
-    <v:String x:Key="desc_BingStartSearch_intf">Domyślnie system Windows wysyła wszystko, czego szukasz w menu «Start», na swoje serwery, aby dostarczyć Ci wyniki wyszukiwania Bing. Jeśli nie potrzebujesz integracji Bing w menu «Start», możesz zastosować tę poprawkę. Uwaga: ekran może migać.</v:String>
+    <v:String x:Key="desc_BingStartSearch_intf">Domyślnie system Windows wysyła wszystko, czego szukasz w menu «Start», na swoje serwery, aby dostarczyć Ci wyniki wyszukiwania Bing. Jeśli nie potrzebujesz integracji Bing w menu «Start», możesz zastosować tę poprawkę. Ekran może na chwilę mignąć.</v:String>
     <v:String x:Key="desc_OpenQuickAccess_intf">Domyślnie po otwarciu Eksploratora pierwszą kartą jest «Szybki dostęp». Ta poprawka sprawi, że po otwarciu będzie wyświetlany «Ten komputer», a nie «Szybki dostęp».</v:String>
     <v:String x:Key="desc_AdaptiveBrightness_intf">Na niektórych urządzeniach jasność ekranu może zmieniać się samoczynnie. Jeśli wyłączenie HDR, dynamicznej jasności i ustawień zasilania nie rozwiązuje problemu, możesz spróbować tej poprawki — wyłącza ona automatyczne dostosowywanie jasności na poziomie systemowym. Ręczna kontrola jasności pozostaje dostępna.</v:String>
     <!--#endregion-->
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Uruchomione procesy:</v:String>
     <v:String x:Key="label_svc_sysinfo">usługi:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Wersja</v:String>
+    <v:String x:Key="label_version_sysinfo">Wersja</v:String>
     <v:String x:Key="label_serial_sysinfo">Numer seryjny</v:String> 
     <v:String x:Key="label_mode_sysinfo">Tryb</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Płyta główna</v:String>

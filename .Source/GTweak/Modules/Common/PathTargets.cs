@@ -75,6 +75,7 @@ namespace GTweak.Modules.Common
             internal static readonly string Workspace = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "GTweak");
 
             internal static readonly string SystemDrive = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
+            internal static readonly string Desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
             internal static readonly string DefenderBackup = Path.Combine(Environment.SystemDirectory, "Config", "WDBackup_GTweak");
 

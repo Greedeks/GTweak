@@ -244,6 +244,7 @@
     <Compile Include="Behaviors\ScrollFadeBehavior.cs" />
     <Compile Include="Behaviors\ScrollViewerBehavior.cs" />
     <Compile Include="Behaviors\TextBoxClearBehavior.cs" />
+    <Compile Include="Modules\Common\AppOptions.cs" />
     <Compile Include="Modules\Common\GroupAttribute.cs" />
     <Compile Include="Modules\Common\PostActionAttribute.cs" />
     <Compile Include="Modules\Configuration\IconProvider.cs" />
@@ -518,7 +519,6 @@
     <Compile Include="Modules\Helpers\TakingOwnership.cs" />
     <Compile Include="Modules\Helpers\TrustedInstaller.cs" />
     <Compile Include="Modules\Managers\ArchiveManager.cs" />
-    <Compile Include="Modules\Managers\ControlWriterManager.cs" />
     <Compile Include="Modules\Managers\ExplorerManager.cs" />
     <Compile Include="Modules\Managers\FirewallManager.cs" />
     <Compile Include="Modules\Managers\NotificationManager.cs" />

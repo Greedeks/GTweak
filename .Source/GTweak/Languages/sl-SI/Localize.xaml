@@ -91,6 +91,7 @@
     <v:String x:Key="ToolsetPage">Nabor orodij</v:String>
     <v:String x:Key="settings_title">Nastavitve</v:String>
     <v:String x:Key="settings_noty">Pokaži obvestila</v:String>
+    <v:String x:Key="settings_profile">Pokaži ime in profilno sliko</v:String>
     <v:String x:Key="settings_update">Preverjanje posodobitev</v:String>
     <v:String x:Key="settings_toast">Pripni na vrh vseh oken</v:String>
     <v:String x:Key="settings_volume">Glasnost:</v:String>
@@ -182,7 +183,7 @@
     <v:String x:Key="UserBehaviorRecording_conf">Vodenje evidence vedenja uporabnika</v:String>
     <v:String x:Key="OfflineMapsUpdates_conf">Zbiranje podatkov in posodobitve izklopnih zemljevidov v ozadju</v:String>
     <v:String x:Key="IntelTelemetry_conf">Zbiranje in spremljanje telemetrije Intel</v:String>
-    <v:String x:Key="OfficeTelemetry_conf">Collection and monitoring of Microsoft Office telemetry</v:String>
+    <v:String x:Key="OfficeTelemetry_conf">Zbiranje in spremljanje telemetrije paketa Microsoft Office</v:String>
     
     <v:String x:Key="desc_TargetedAdvertising_conf">Windows ustvari edinstven identifikator oglaševanja za vsakega uporabnika za sledenje vašim dejanjem. Uporabljajo ga razvijalci aplikacij in sam Windows za svoje namene, vključno s prikazovanjem specifičnih oglasov v aplikacijah.</v:String>
     <v:String x:Key="desc_DataSynchronization_conf">Tudi pri uporabi lokalnega računa Windows vedno poskuša sinhronizirati vaše podatke s strežniki Microsoft. Zlasti: teme, gesla, nastavitve sistema Windows, nastavitve brskalnika, nastavitve jezikovne vrstice, nastavitve poenostavljenega dostopa, dodatne nastavitve.</v:String>
@@ -203,7 +204,7 @@
     <v:String x:Key="desc_UserBehaviorRecording_conf">Popravek onemogoči funkcijo UAR (User Activity Recording) – sistem, ki zaporedno beleži vsako vaše dejanje na računalniku: od zajemanja zaslonskih slik in tipkanja besedila do zaganjanja programov in celo omogočanja dostopa do spletne kamere, ko je zaslon zaklenjen, in veliko več.</v:String>
     <v:String x:Key="desc_OfflineMapsUpdates_conf">Windows občasno posodablja izklopne zemljevide in v ozadju pošilja obvestila o novih podatkih. Ti procesi lahko zbirajo informacije o vaši lokaciji, poteh in uporabi zemljevidov. Če ne uporabljate izklopnih zemljevidov, jih priporočamo, da jih onemogočite, da se izognete skritim posodobitvam in prenosu podatkov na Microsoftove strežnike brez vaše neposredne vpletenosti.</v:String>
     <v:String x:Key="desc_IntelTelemetry_conf">Modul Intel, ki deluje v ozadju za zbiranje in prenos podatkov, je predstavljen kot orodje za izboljšanje izdelkov podjetja. Vendar za povprečnega uporabnika nima veliko praktične koristi, onemogočanje te funkcije pa lahko zmanjša aktivnost v ozadju in prepreči nepotreben prenos podatkov.</v:String>
-    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office continuously tracks your work with documents, logging application startup speed, system crashes, and tool usage frequency, subsequently sending reports to Microsoft servers. Disabling this feature stops hidden statistics collection and halts unnecessary background monitoring processes without affecting the full functionality of Word, Excel, and other Office applications.</v:String>
+    <v:String x:Key="desc_OfficeTelemetry_conf">Microsoft Office neprekinjeno spremlja vaše delo z dokumenti, beleži hitrost zagona programov, sistemske napake in pogostost uporabe orodij ter pošilja poročila na Microsoftove strežnike. Onemogočanje te funkcije ustavi prikrito zbiranje statistike in nepotrebne procese v ozadju, pri tem pa ne vpliva na polno delovanje programov Word, Excel in ostalih orodij Office.</v:String>
     <!--#endregion-->
 
     <!--#region Interface Page -->
@@ -238,11 +239,11 @@
     <v:String x:Key="FolderMusic_intf">Glasba</v:String>
     <v:String x:Key="FolderVideo_intf">Videoposnetki</v:String>
 
-    <v:String x:Key="TaskbarPosition_intf">Taskbar location:</v:String>
-    <v:String x:Key="TaskbarPos_Bottom_intf">Bottom</v:String>
-    <v:String x:Key="TaskbarPos_Top_intf">Top</v:String>
-    <v:String x:Key="TaskbarPos_Left_intf">Left</v:String>
-    <v:String x:Key="TaskbarPos_Right_intf">Right</v:String>
+    <v:String x:Key="TaskbarPosition_intf">Položaj opravilne vrstice:</v:String>
+    <v:String x:Key="TaskbarPos_Bottom_intf">Spodaj</v:String>
+    <v:String x:Key="TaskbarPos_Top_intf">Zgoraj</v:String>
+    <v:String x:Key="TaskbarPos_Left_intf">Levo</v:String>
+    <v:String x:Key="TaskbarPos_Right_intf">Desno</v:String>
     
     <v:String x:Key="SystemButtonSize_intf">Standardna velikost sistemskih gumbov</v:String>
     <v:String x:Key="CursorFlickerFrequency_intf">Standardna frekvenca utripanja kazalca</v:String>
@@ -272,38 +273,38 @@
     <v:String x:Key="OpenQuickAccess_intf">Odpri "Hitri dostop" namesto "Ta računalnik"</v:String>
     <v:String x:Key="AdaptiveBrightness_intf">Spontane spremembe svetlosti</v:String>
 
-    <v:String x:Key="desc_TaskbarPosition_intf">Changes the taskbar location on the screen, allowing you to place it at the bottom, top, left, or right edge. Note that the screen may flicker.</v:String>
+    <v:String x:Key="desc_TaskbarPosition_intf">Spremeni položaj opravilne vrstice na zaslonu ter omogoča postavitev na spodnji, zgornji, levi ali desni rob. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_CursorSelection_intf">Spremeni barvo ozadja pri izbiranju besedila ali predmetov s kazalcem v sistemu.</v:String>
     <v:String x:Key="desc_Tooltip_intf">Spremeni barvo namigov v podprtih aplikacijah.</v:String>
-    <v:String x:Key="desc_NavigationItems_intf">Spremeni vidnost vgrajenih sistemskih elementov v navigacijskem podoknu, ki jih ni mogoče odpeti z običajnimi sredstvi.</v:String>
-    <v:String x:Key="desc_FileExplorerDisplay_intf">Spremeni sistemska pravila za prikazovanje elementov v Raziskovalcu datotek, vključno z vidnostjo skritih elementov, končnic datotek in strukturo diskovnih pogonov. Pozor: zaslon lahko utripne.</v:String>
+    <v:String x:Key="desc_NavigationItems_intf">Spremeni vidnost vgrajenih sistemskih elementov v navigacijskem podoknu, ki jih ni mogoče odpeti z običajnimi sredstvi. Upoštevajte, da lahko zaslon utripa.</v:String>
+    <v:String x:Key="desc_FileExplorerDisplay_intf">Spremeni sistemska pravila za prikazovanje elementov v Raziskovalcu datotek, vključno z vidnostjo skritih elementov, končnic datotek in strukturo diskovnih pogonov. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_DesktopIcons_intf">Spremeni prikaz sistemskih ikon na namizju, ki so vgrajeni sistemski predmeti in ne običajne bližnjice.</v:String>
     <v:String x:Key="desc_ThisPCFolders_intf">Spremeni prikaz standardnih uporabniških map in "3D-predmetov" znotraj "Ta računalnik". Omogoča vam, da jih skrijete, tako da so na seznamu prikazani samo priključeni pogoni. Pri različicah pod 21H1 dodatno odstrani "3D-predmete" iz navigacijske plošče. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_SystemButtonSize_intf">Popravek zmanjša velikost gumbov Za majhno okno, Povečaj in Zapri, zaradi česar so manj obsežni. Prilagodi velikost za vsa okna, vključno z Raziskovalcem datotek, Fotografijami, brskalniki in drugimi znanimi programi.</v:String>
     <v:String x:Key="desc_CursorFlickerFrequency_intf">Popravek poveča frekvenco utripanja besedilnega kazalca. Privzeto kazalec utripne vsakih 530 milisekund.</v:String>
     <v:String x:Key="desc_ScrollbarSize_intf">Popravek zmanjša debelino drsnih trakov v klasičnih aplikacijah Windows, vključno z Raziskovalcem datotek, brskalniki in drugimi starejšimi programi. Vendar ne vpliva na sodobne vmesnike, saj ti uporabljajo lastne kontrolne elemente, neodvisne od sistemskih nastavitev.</v:String>
     <v:String x:Key="desc_TaskbarTransparency_intf">Popravek bo onemogočil ali omogočil učinek prosojnosti. Prosojna okna in površine.</v:String>
-    <v:String x:Key="desc_TaskbarDarkTheme_intf">Spremeni temo opravilne vrstice na svetlo ali temno. Pozor, zaslon lahko utripne.</v:String>
-    <v:String x:Key="desc_AppDarkTheme_intf">Popravek bo spremenil temo Raziskovalca na svetlo ali temno, vključno z brskalniki in drugimi programi, ki podpirajo temo naprave. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="desc_TaskbarDarkTheme_intf">Spremeni temo opravilne vrstice na svetlo ali temno. Upoštevajte, da lahko zaslon utripa.</v:String>
+    <v:String x:Key="desc_AppDarkTheme_intf">Popravek bo spremenil temo Raziskovalca na svetlo ali temno, vključno z brskalniki in drugimi programi, ki podpirajo temo naprave. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_ContextMenuDelay_intf">Privzeto se dodatne postavke kontekstnega menija prikažejo z zamikom 400 milisekund. Če želite hitreje, lahko ta zamik zmanjšate.</v:String>
     <v:String x:Key="desc_TaskbarPreviewDelay_intf">Privzeto predogled opravilne vrstice predolgo prikazuje predoglede tekočih aplikacij. Če želite, da se predogledi prikažejo hitreje, uporabite ta popravek.</v:String>
     <v:String x:Key="desc_IconOverlayBadges_intf">Omogoča skrivanje puščic bližnjic, stanj sinhronizacije v oblaku (OneDrive, Dropbox) in značk vrste datotek, kot je grafika SVG.</v:String>
     <v:String x:Key="desc_ShortcutNameSuffix_intf">Odstranitev preveč intuitivne predpone-pripone za oznake.</v:String>
     <v:String x:Key="desc_TaskbarAlignment_intf">Izberite, kje naj bodo ikone prikazane v opravilni vrstici, na sredini ali na levi.</v:String>
     <v:String x:Key="desc_StartMenuLayout_intf">Spremeni postavitev menija Start z razširitvijo območja za pripete aplikacije. Poleg tega, razen v izdaji Windows Home, bo oddelek "Priporočeno" odstranjen iz menija Start.</v:String>
-    <v:String x:Key="desc_CompactContextMenu_intf">Ta popravek vam bo vrnil običajni klasični kontekstni meni za namizje in "Raziskovalca". Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="desc_CompactContextMenu_intf">Ta popravek vam bo vrnil običajni klasični kontekstni meni za namizje in "Raziskovalca". Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_TipsSuggestions_intf">Windows 11 včasih prikaže namige o uporabi določene funkcije, na primer novega menija "Start" ali "Hitrih nastavitev". Uporabni so, če prvič vidite Windows 11, sicer so neuporabna navlaka.</v:String>
     <v:String x:Key="desc_CompactExplorerMode_intf">Privzeto Windows doda odmike med elementi v Raziskovalcu. To je nova funkcija, namenjena zaslonom na dotik. Ta popravek bo obnovil klasično postavitev Raziskovalca datotek, odstranil odmike med elementi in vas rešil iskanja nastavitev.</v:String>
     <v:String x:Key="desc_CopilotRecall_intf">Popravek onemogoči in, kjer je mogoče, skrije ikone Copilot v opravilni vrstici, meniju "Start", Edge in Beležnici, blokira njegovo funkcionalnost ter onemogoči Recall. Hkrati na jedro aplikacije Copilot ne vpliva, ostane v sistemu in se lahko uporablja, če je potrebno. Copilot je mogoče popolnoma odstraniti le skupaj z Microsoft Edge. Če te funkcije umetne inteligence niso prisotne v vašem sistemu Windows, je uporaba popravka nesmiselna.</v:String>
-    <v:String x:Key="desc_TaskbarEndTask_intf">Ta popravek vam bo omogočil dodajanje možnosti "Končaj opravilo" v kontekstni meni, ko z desno miškino tipko kliknete aplikacijo v opravilni vrstici. To pospeši zaključevanje procesov brez odpiranja upravitelja opravil. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="desc_TaskbarEndTask_intf">Ta popravek vam bo omogočil dodajanje možnosti "Končaj opravilo" v kontekstni meni, ko z desno miškino tipko kliknete aplikacijo v opravilni vrstici. To pospeši zaključevanje procesov brez odpiranja upravitelja opravil. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_SnapLayouts_intf">Če ne želite videti predlogov za pritrditev, ko premaknete kazalec nad gumb "Povečaj", lahko to možnost onemogočite.</v:String>
-    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ta popravek odstrani ikone "Iskanje", "Pogled opravil" in "Klepet" ter skrije element "Več o tej sliki". Na starejših zgradbah Windows 11 odstrani tudi ikono Copilot. Za uporabnike Windows 10 dodatno onemogoči "Novice in interesi" ter Cortano. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="desc_TaskbarIconsButtons_intf">Ta popravek odstrani ikone "Iskanje", "Pogled opravil" in "Klepet" ter skrije element "Več o tej sliki". Na starejših zgradbah Windows 11 odstrani tudi ikono Copilot. Za uporabnike Windows 10 dodatno onemogoči "Novice in interesi" ter Cortano. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_PersonalizedAds_intf">Privzeto Windows uporablja zbrane informacije za ciljno oglaševanje, tj. za prikazovanje oglasov, ki ustrezajo vašim interesom. In dobesedno se ta reklama nahaja kjerkoli je prosti prostor za prikaz. Če ne želite, da Windows prikazuje personalizirane oglase v vseh aplikacijah Trgovine, Raziskovalcu, Možnostih in meniju Start, lahko to navlako onemogočite.</v:String>
     <v:String x:Key="desc_RestoreFolderWindows_intf">Privzeto Windows ne shrani položajev oken, kot tudi njihovega stanja ob izklopu. Ta popravek vam bo omogočil, da si zapomnite vrsto odprtih map, da jih obnovite po odjavi, ponovnem zagonu in izklopu.</v:String>
     <v:String x:Key="desc_TipsNotifications_intf">Popravek omogoča onemogočanje vseh namigov in obvestil Windows, vključno s spletnimi namigi v nastavitvah, ter onemogočanje SCOOBE (Second Chance Out of Box Experience) za uporabnike Windows 11. SCOOBE je nenadoma pojavljajoče se pojavno okno, ki agresivno poziva uporabnika, naj "nujno dokonča nastavitev naprave" in se prijavi v Microsoftov račun.</v:String>
     <v:String x:Key="desc_JpegWallpaperCompression_intf">Privzeto, ko nastavite sliko jpeg kot ozadje namizja, Windows samodejno zmanjša njeno kakovost na 85%. Ta popravek bo nastavil kakovost ozadja jpeg na 100%.</v:String>
     <v:String x:Key="desc_DesktopTooltips_intf">Popravek bo onemogočil namige za elemente namizja, ko premaknete kazalec miške.</v:String>
-    <v:String x:Key="desc_BingStartSearch_intf">Privzeto Windows pošlje vse, kar iščete v meniju "Start", svojim strežnikom, da vam zagotovi rezultate iskanja Bing. Če ne potrebujete integracije Bing v meniju "Start", lahko uporabite popravek za onemogočanje spletnega iskanja. Pozor, zaslon lahko utripne.</v:String>
+    <v:String x:Key="desc_BingStartSearch_intf">Privzeto Windows pošlje vse, kar iščete v meniju "Start", svojim strežnikom, da vam zagotovi rezultate iskanja Bing. Če ne potrebujete integracije Bing v meniju "Start", lahko uporabite popravek za onemogočanje spletnega iskanja. Upoštevajte, da lahko zaslon utripa.</v:String>
     <v:String x:Key="desc_OpenQuickAccess_intf">Privzeto bo ob odpiranju Raziskovalca prvi zavihek "Hitri dostop". Če želite odpreti kateri koli disk, morate narediti nepotrebne premike. Ta popravek bo omogočil, da se ob odprtju odpre "Ta računalnik" namesto "Hitri dostop".</v:String>
     <v:String x:Key="desc_AdaptiveBrightness_intf">Na nekaterih napravah se lahko svetlost zaslona spontano spremeni glede na prikazano vsebino. Če izklop HDR, dinamične svetlosti in nastavitev napajanja ne reši težave (ta težava je še posebej pogosta pri prenosnikih, ki delujejo na baterijo), lahko poskusite s tem popravkom - prisilno onemogoči samodejno prilagajanje svetlosti na sistemski ravni. Ročno upravljanje svetlosti ostane na voljo.</v:String>
     <!--#endregion-->
@@ -541,7 +542,7 @@
     <v:String x:Key="label_proc_sysinfo">Procesov v izvajanju:</v:String>
     <v:String x:Key="label_svc_sysinfo">storitev:</v:String>
     <v:String x:Key="label_bios_sysinfo">BIOS</v:String>
-    <v:String x:Key="label_verison_sysinfo">Različica</v:String>
+    <v:String x:Key="label_version_sysinfo">Različica</v:String>
     <v:String x:Key="label_serial_sysinfo">Serijska številka</v:String> 
     <v:String x:Key="label_mode_sysinfo">Način</v:String>
     <v:String x:Key="label_motherbr_sysinfo">Matična plošča</v:String>

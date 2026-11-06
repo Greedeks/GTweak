@@ -10,8 +10,6 @@ namespace GTweak.Core.ViewModel
     {
         public Visibility EdgeAvailable => AppxPackageHandler.IsEdgeInstalled ? Visibility.Visible : Visibility.Collapsed;
 
-        protected override IReadOnlyDictionary<string, object> GetControlStates() => ServicesTweaks.ControlStates;
-
-        protected override void Analyze(ServicesTweaks tweaks) => tweaks?.CheckAll();
+        protected override IReadOnlyDictionary<string, object> Analyze(ServicesTweaks tweaks) => tweaks.CheckAll();
     }
 }
