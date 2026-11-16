@@ -91,6 +91,8 @@
         <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
         <Setter Property="VirtualizingPanel.CacheLengthUnit" Value="Item"/>
         <Setter Property="VirtualizingPanel.VirtualizationMode" Value="Recycling"/>
+        <Setter Property="PanningMode" Value="VerticalOnly"/>
+        <Setter Property="PanningDeceleration" Value="0.001"/>
         <Setter Property="CanContentScroll" Value="False"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
