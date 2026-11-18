@@ -58,9 +58,9 @@ namespace GTweak.Windows
             }
 
             ReportStep(1, 15);
-            ExecuteWithLogging(WinLicenseHandler.LicenseStatus, nameof(WinLicenseHandler.LicenseStatus));
             ExecuteWithLogging(TrustedInstaller.StartTrustedInstallerService, nameof(TrustedInstaller.StartTrustedInstallerService));
             ExecuteWithLogging(RunGuard.CheckingDefenderExclusions, nameof(RunGuard.CheckingDefenderExclusions));
+            ExecuteWithLogging(() => WinLicenseHandler.VerifyActivation().GetAwaiter().GetResult(), nameof(WinLicenseHandler.VerifyActivation));
 
             ReportStep(2, 35);
             ExecuteWithLogging(SystemTweaks.ViewConfigTick, nameof(SystemTweaks.ViewConfigTick));

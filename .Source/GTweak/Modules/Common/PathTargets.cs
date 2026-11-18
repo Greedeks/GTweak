@@ -435,6 +435,8 @@ namespace GTweak.Modules.Common
 
             internal static readonly string BackupConfig = Path.Combine(Folders.Workspace, "BackupConfig.json");
 
+            internal static string GenuineTicket = Path.Combine(Folders.SystemDrive, "ProgramData", "Microsoft", "Windows", "ClipSVC", "GenuineTicket", "GenuineTicket.xml");
+
             internal static readonly (string Original, string Backup) Hosts =
             (
                 Path.Combine(Environment.SystemDirectory, "drivers", "etc", "hosts"),

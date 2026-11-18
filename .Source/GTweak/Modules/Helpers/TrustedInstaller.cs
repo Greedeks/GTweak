@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Threading.Tasks;
 
 namespace GTweak.Modules.Helpers
 {
@@ -66,6 +67,13 @@ namespace GTweak.Modules.Helpers
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern void DeleteProcThreadAttributeList(IntPtr lpAttributeList);
 
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern uint WaitForSingleObject(IntPtr hHandle, uint dwMilliseconds);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool GetExitCodeProcess(IntPtr hProcess, out uint lpExitCode);
+
+        private const uint WAIT_TIMEOUT = 0x00000102;
         private const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
         private const uint TOKEN_QUERY = 0x0008;
         private const uint TOKEN_DUPLICATE = 0x0002;
@@ -377,7 +385,7 @@ namespace GTweak.Modules.Helpers
             throw new Win32Exception("TrustedInstaller service failed to start within timeout");
         }
 
-        internal static void CreateProcessAsTrustedInstaller(int parentProcessId, string binaryPath, bool showWindow = false)
+        private static IntPtr StartTrustedInstallerProcess(int parentProcessId, string binaryPath, bool showWindow)
         {
             Exception lastException = null;
             bool impersonated = false;
@@ -448,9 +456,8 @@ namespace GTweak.Modules.Helpers
                         throw new Win32Exception(Marshal.GetLastWin32Error());
                     }
 
-                    CloseHandle(pInfo.hProcess);
                     CloseHandle(pInfo.hThread);
-                    return;
+                    return pInfo.hProcess;
                 }
                 catch (Exception ex)
                 {
@@ -484,5 +491,31 @@ namespace GTweak.Modules.Helpers
 
             throw lastException ?? new Win32Exception("CreateProcessAsTrustedInstaller failed after 3 attempts");
         }
+
+        internal static void CreateProcessTrustedInstaller(int parentProcessId, string binaryPath, bool showWindow = false)
+        {
+            IntPtr hProcess = StartTrustedInstallerProcess(parentProcessId, binaryPath, showWindow);
+            CloseHandle(hProcess);
+        }
+
+        internal static Task<uint> CreateWaitProcessTrustedInstaller(int parentProcessId, string binaryPath, bool showWindow = false, uint timeoutMs = 60000)
+        {
+            IntPtr hProcess = StartTrustedInstallerProcess(parentProcessId, binaryPath, showWindow);
+
+            return Task.Run(() =>
+            {
+                try
+                {
+                    if (WaitForSingleObject(hProcess, timeoutMs) == WAIT_TIMEOUT)
+                    {
+                        return WAIT_TIMEOUT;
+                    }
+
+                    return GetExitCodeProcess(hProcess, out uint exitCode) ? exitCode : uint.MaxValue;
+                }
+                finally { CloseHandle(hProcess); }
+            });
+        }
+
     }
 }

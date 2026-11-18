@@ -18,7 +18,7 @@ namespace GTweak.Modules.Helpers
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = isPowerShell ? PathTargets.Executable.PowerShell : PathTargets.Executable.CommandShell,
-                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
+                Arguments = isPowerShell ? PowerShellCommand(command) : command,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -46,17 +46,12 @@ namespace GTweak.Modules.Helpers
             return string.Empty;
         }
 
-        internal static void RunCommandAsTrustedInstaller(string command, bool isPowerShell = false) =>
-            TrustedInstaller.CreateProcessAsTrustedInstaller(PID, isPowerShell
-                ? $"\"{PathTargets.Executable.PowerShell}\" -NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\""
-                : $"\"{PathTargets.Executable.CommandShell}\" {command}");
-
         internal static void RunCommand(string command, bool isPowerShell = false)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo()
             {
                 FileName = isPowerShell ? PathTargets.Executable.PowerShell : PathTargets.Executable.CommandShell,
-                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
+                Arguments = isPowerShell ? PowerShellCommand(command) : command,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 UseShellExecute = true,
                 Verb = "runas",
@@ -68,11 +63,15 @@ namespace GTweak.Modules.Helpers
             catch (Exception ex) { ErrorLogger.LogDebug(ex); }
         }
 
+        internal static void RunCommandAsTrustedInstaller(string command, bool isPowerShell = false) => TrustedInstaller.CreateProcessTrustedInstaller(PID, isPowerShell ? $"\"{PathTargets.Executable.PowerShell}\" {PowerShellCommand(command)}" : $"\"{PathTargets.Executable.CommandShell}\" {command}");
+
+        internal static Task<uint> InvokeRunCommandAsTrustedInstaller(string command, bool isPowerShell = false) => TrustedInstaller.CreateWaitProcessTrustedInstaller(PID, isPowerShell ? $"\"{PathTargets.Executable.PowerShell}\" {PowerShellCommand(command)}" : $"\"{PathTargets.Executable.CommandShell}\" {command}");
+
         internal static async Task InvokeRunVisibleProcess(string fileName, string arguments = "", bool isElevationRequired = false)
         {
             if (isElevationRequired)
             {
-                TrustedInstaller.CreateProcessAsTrustedInstaller(PID, $"{fileName} {arguments}", true);
+                await TrustedInstaller.CreateWaitProcessTrustedInstaller(PID, string.IsNullOrWhiteSpace(arguments) ? $"\"{fileName}\"" : $"\"{fileName}\" {arguments}", true).ConfigureAwait(false);
                 return;
             }
 
@@ -100,7 +99,7 @@ namespace GTweak.Modules.Helpers
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 FileName = isPowerShell ? PathTargets.Executable.PowerShell : PathTargets.Executable.CommandShell,
-                Arguments = isPowerShell ? $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command}\"" : command,
+                Arguments = isPowerShell ? PowerShellCommand(command) : command,
                 WindowStyle = ProcessWindowStyle.Hidden,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -181,5 +180,7 @@ namespace GTweak.Modules.Helpers
 
             return string.Join(separator, lines);
         }
+
+        private static string PowerShellCommand(string command) => $"-NoLogo -NonInteractive -NoProfile -ExecutionPolicy Bypass -Command \"{command.Replace("\"", "`\"")}\"";
     }
 }
