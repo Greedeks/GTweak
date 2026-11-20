@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Windows.Controls;
 using GTweak.Core.Interfaces;
 using GTweak.Modules.Common;
@@ -109,21 +108,23 @@ namespace GTweak.View
             }
 
             string selectedPath = folderDialog.SelectedPath;
+
             if (await _ntfsCompressor.IsSupportNtfs(selectedPath))
             {
-                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) != FileAttributes.Compressed)
+                bool isCompressed = _ntfsCompressor.IsCompressed(selectedPath);
+
+                if (isCompressed)
                 {
-                    BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
-                    await backgroundQueue.QueueTask(delegate
-                    {
-                        try { _ntfsCompressor.SetCompression(selectedPath, true); }
-                        catch { NotificationManager.Warn("error_compression_noty").Perform(); }
-                    });
-                    await backgroundQueue.QueueTask(delegate { NotificationManager.Info("success_compression_noty").WithDelay(500).Perform(); });
+                    NotificationManager.Info("ready_compression_noty").Perform();
                 }
                 else
                 {
-                    NotificationManager.Info("ready_compression_noty").Perform();
+                    try
+                    {
+                        await _ntfsCompressor.ManageCompression(selectedPath, true);
+                        NotificationManager.Info("success_compression_noty").WithDelay(500).Perform();
+                    }
+                    catch { NotificationManager.Warn("error_compression_noty").Perform(); }
                 }
             }
             else
@@ -131,6 +132,7 @@ namespace GTweak.View
                 NotificationManager.Warn("notsupport_ntfs_noty").Perform();
             }
         }
+
 
         private async void BtnDecompression_ClickButton(object sender, EventArgs e)
         {
@@ -142,18 +144,19 @@ namespace GTweak.View
             }
 
             string selectedPath = folderDialog.SelectedPath;
+
             if (await _ntfsCompressor.IsSupportNtfs(selectedPath))
             {
-                if ((new DirectoryInfo(selectedPath).Attributes & FileAttributes.Compressed) == FileAttributes.Compressed)
-                {
-                    BackgroundQueueManager backgroundQueue = new BackgroundQueueManager();
-                    await backgroundQueue.QueueTask(delegate
-                    {
-                        try { _ntfsCompressor.SetCompression(selectedPath, false); }
-                        catch { NotificationManager.Warn("error_compression_noty").Perform(); }
+                bool isCompressed = _ntfsCompressor.IsCompressed(selectedPath);
 
-                    });
-                    await backgroundQueue.QueueTask(delegate { NotificationManager.Info("success_decompression_noty").WithDelay(500).Perform(); });
+                if (isCompressed)
+                {
+                    try
+                    {
+                        await _ntfsCompressor.ManageCompression(selectedPath, false);
+                        NotificationManager.Info("success_decompression_noty").WithDelay(500).Perform();
+                    }
+                    catch { NotificationManager.Warn("error_compression_noty").Perform(); }
                 }
                 else
                 {
